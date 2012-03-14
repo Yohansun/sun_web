@@ -19,6 +19,8 @@ group :development do
   gem 'capistrano-unicorn'
 end
 
+gem 'unicorn'
+
 gem "magic_admin", :git => "git@github.com:nioteam/magic_admin.git"
 gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
 
