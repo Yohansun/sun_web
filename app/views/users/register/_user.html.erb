@@ -1,0 +1,83 @@
+<div class="reg_list reg_bd_top reg_width fl">
+  <label for="uesername"><span>*</span>是否有推荐人：</label>
+  <input type="radio" name="user[recommended]" class="radio_btn fl" checked="checked" value="1"/>
+  <span class="recommand fl fb">是</span>
+  <input type="radio" name="user[recommended]" class="radio_btn fl" value="0" />
+  <span class="recommand fl fb">否</span>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="recommander"><span>*</span>推荐人用户名：</label>
+  <input type="text" class="password fl" name="user[recommended_name]" />
+  <span class="reg_tip3 fl">注：如您正确注册成功，推荐人账号相应获得奖励积分</span>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="recommander"><span>*</span>Email：</label>
+  <input type="text" class="username fl"  name="user[email]"/>
+  <span class="reg_tip3 fl">请填写真实邮箱，以便通知获奖信息</span>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="uesername">真实姓名：</label>
+  <input type="text" class="password fl" name="user[name]"/>
+</div><!--reg_list ends-->
+<div class="reg_list reg_bd_top reg_width fl">
+  <label for="uesername">性别：</label>
+  <input type="radio" name="user[sex]" value="1" class="radio_btn fl" checked="checked" />
+  <span class="recommand fl fb">男</span>
+  <input type="radio" name="user[sex]" value="0" class="radio_btn fl" />
+  <span class="recommand fl fb">女</span>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="uesername"><span>*</span>出生日期：</label>
+  <div class="fl">
+    <% year  = resource.date_of_birth.year rescue nil %>
+    <% month = resource.date_of_birth.month rescue nil %>
+    <% day   = resource.date_of_birth.day rescue nil %>
+    <%= select_tag 'user[date_of_birth(1i)]', options_for_select((1900..(Date.today.year)).to_a, year), :class => "fl", :prompt => "请选择" %>
+    <span class="fl">年</span>
+    <%= select_tag 'user[date_of_birth(2i)]', options_for_select((1..12).to_a, month), :class => "fl", :prompt => "请选择" %>
+    <span class="fl">月</span>
+    <%= select_tag 'user[date_of_birth(3i)]', options_for_select((1..31).to_a, day), :class => "fl", :prompt => "请选择" %>
+    <span class="fl">日</span>
+  </div>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="uesername"><span>*</span>所在地：</label>
+  <div class="fl">
+    <select id="province" class="level_1 fl" name="user[state]"></select>
+    <select id="city" class="level_2 fl" name = user[city]></select>
+    <select id="county" class="level_3 fl" name = user[district]></select>
+    <span class="reg_tip3 fl">注：如果系统辩识有误，请手动选择</span>
+  </div>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="uesername"><span>*</span>收件地址：</label>
+  <input type="text" class="company fl" name="user[recipient_address]" />
+  <span class="reg_tip3 fl">请填写真实地址以便发送奖品</span>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="uesername">邮编：</label>
+  <input type="text" class="postcode fl" maxlength="6" name="user[zip_code]"/>
+  <span class="reg_tip3 fl">注：邮编必须为数字且只能6位</span>
+</div><!--reg_list ends-->
+<div class="reg_list reg_width fl">
+  <label for="uesername"><span>*</span>联系电话：</label>
+  <input type="text" class="username fl" name="user[phone]"/>
+  <span class="reg_tip3 fl">请填写您常用电话以便通知获奖信息</span>
+</div><!--reg_list ends-->
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  var options = {
+    data  : data
+  }
+
+  var sel = new LinkageSelect(options);
+  sel.bind('.level_1');
+  sel.bind('.level_2');
+  sel.bind('.level_3');
+
+  $("#captcha input").focus(function(){
+    $('#captcha').removeClass('onerror');
+  });
+
+});
+</script>
