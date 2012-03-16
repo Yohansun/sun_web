@@ -30,6 +30,10 @@ class Users::RegisterController < Devise::RegistrationsController
       'application'
     end
   end
+
+  def after_sign_up_path_for(resource)
+    users_suc_regist_path
+  end
 end
 
 #def search_area(state_id,city_id,district_id)
