@@ -3,7 +3,7 @@ Icolor::Application.routes.draw do
   devise_for :users,  :controllers => {:registrations => "users/register", :sessions => "users/sessions"}
   devise_scope :user do
     match "/users/register/roles" => "users/register#roles"
-    match "/users/suc_designer" => "users/register#suc_designer"
+    match "/users/suc_regist" => "users/register#suc_regist"
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }

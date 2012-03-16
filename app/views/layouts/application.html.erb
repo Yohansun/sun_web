@@ -30,7 +30,7 @@
             <a href="#">立邦网上商城</a> | <a href="#">订阅电子期刊</a> | <a href="#">分享</a>
           </div><!--navLabel ends-->
           <a href="#" class="login fl"></a>
-          <a href="#" class="reg fl"></a>
+          <a href="/users/register/roles" class="reg fl"></a>
           <a href="#" class="nippon fl"></a>
         </div><!--navTop ends-->
         <ul class="navBot fr cw fb ft14">
@@ -46,7 +46,7 @@
       </div><!--nav ends-->
       <div class="loginBg pa none">
         <div class="loginCon ft12 clear">
-          <%= form_for(resource, :as => resource_name, :url => "/users/sign_in", :remote => true) do |f| %>
+          <%= form_for(resource, :as => resource_name, :url => "/users/sign_in") do |f| %>
             <div>
               <label for="username" class="username ft14 fl">帐号：</label>
               <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
