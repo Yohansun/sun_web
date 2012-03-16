@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120314061369) do
+ActiveRecord::Schema.define(:version => 20120315060704) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -201,6 +201,12 @@ ActiveRecord::Schema.define(:version => 20120314061369) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "role"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false
     t.text     "value"
@@ -248,6 +254,41 @@ ActiveRecord::Schema.define(:version => 20120314061369) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
+    t.integer  "role_id"
+    t.string   "username"
+    t.boolean  "des_status",             :default => true
+    t.string   "inauguration_company"
+    t.string   "inauguration_address"
+    t.boolean  "recommended",            :default => true
+    t.integer  "recommended_id"
+    t.string   "name"
+    t.string   "name_of_company"
+    t.string   "sex"
+    t.date     "date_of_birth"
+    t.date     "founded_of_company"
+    t.string   "location"
+    t.string   "recipient_address"
+    t.string   "company_address"
+    t.string   "zip_code"
+    t.string   "phone"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
     t.string   "title"
