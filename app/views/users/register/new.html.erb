@@ -1,12 +1,14 @@
 <div class="main">
   <div class="reg_bg2 pr"></div>
   <div class="wrapper">
-    <%= form_for(resource, :as => resource_name, :url => "/users" ) do |f| %>
+    <span id='warn' style='color:red; font-size:10px; text-align:center;'></span>
+    <%= form_for(resource, :as => resource_name, :url => "/users", :remote => true ) do |f| %>
     <div class="reg_content ft14">
       <div class="reg_list fl">
         <label for="uesername"><span>*</span>用户名：</label>
-        <input type="text" class="username fl" name="user[username]"/>
-        <a href="javascript:void(0)" class="reg_chk fl"></a>
+
+        <input type="text" class="username fl" name="user[username]" id="user_name"/>
+        <a href="javascript:void(0)" class="reg_chk fl" onclick="username_check()"></a>
       </div>
       <!--reg_list ends-->
       <div class="upload fr tc">
@@ -85,3 +87,13 @@
   <!--wrapper ends-->
 </div><!--main ends-->
 
+<script type="text/javascript">
+function username_check(){
+  var username = $("#user_name").val()
+  $.post(" /users/username_check", {username:username}, function(data){
+    if (data != "") {
+      alert(data);
+    }
+  });
+}
+</script>
