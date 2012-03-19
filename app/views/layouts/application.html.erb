@@ -4,8 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>iColor</title>
     <%= csrf_meta_tag %>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag  "application"  %>
+    <%= javascript_include_tag  "application"  %>
+    <%- set_style[:css].each do |c| %>
+        <%= stylesheet_link_tag "#{c}" %>
+    <%- end %>
+    <%- if set_style[:js] %>
+        <%- set_style[:js].each do |j| %>
+            <%= javascript_include_tag "#{j}" %>
+        <%- end %>
+    <%- end %>
+    <%= yield  :head %>
     <!--[if IE 6]>
     <script src="/png.js"></script>
     <script>
@@ -13,7 +22,7 @@
     </script>
     <![endif]-->
   </head>
-  <body>
+  <body style="<%= 'height:100%;' if controller_name =~ /master_hall|design_appreciation/%>">
     <div class="header">
       <div class="nav pa">
         <a href="#" class="logo fl"></a>
@@ -46,7 +55,7 @@
       </div><!--nav ends-->
       <div class="loginBg pa none">
         <div class="loginCon ft12 clear">
-          <%= form_for(resource, :as => resource_name, :url => "/users/sign_in") do |f| %>
+          <form>
             <div>
               <label for="username" class="username ft14 fl">帐号：</label>
               <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
@@ -60,7 +69,7 @@
             <div class="checkbox fl">
               <input type="checkbox" /><span>下次自动登录</span>
             </div>
-          <%- end %>
+          </form>
         </div><!--loginCon ends-->
         <div class="loginCon ft12 border clear">
           <ul class="clear">
@@ -81,7 +90,7 @@
 
     <%= yield %>
 
-    <div class='footer'>
+    <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
       <div class='links'>
         <div class='w_995'>
           <a href='http://www.nipponpaint.com.cn/'><img src='/assets/link1.jpg' alt="" /></a>
@@ -147,5 +156,8 @@
         </div><!--w_995 ends-->
       </div><!--copyright ends-->
     </div><!--footer ends-->
+
+    <%= yield  :foot %>
+
   </body>
 </html>

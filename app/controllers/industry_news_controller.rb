@@ -1,0 +1,2 @@
+class IndustryNewsController < ApplicationController
+end

@@ -1,0 +1,45 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    span.arrow_1 {
+      right: 178px;
+    }
+
+    span.arrow_2 {
+      right: 110px;
+    }
+  </style>
+<%- end %>
+<div class="main mar-bot45">
+  <div class='sub_title tr'>
+    <img src='<%= set_style[:pic_path] %>' />
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="index.html">首页</a><span class="arrow_1"></span><a href="access.html">业主通道</a><span class="arrow_2"></span><a class="fb" href="service.html">在线配色服务</a>
+  </div><!--sub_nav ends-->
+  <div class='wrapper'>
+    <div class="service_top">
+      <img src="/assets/news/service.jpg" />
+    </div>
+    <div class="owner_bar wauto ft12 clear">
+      <div class="faq_ask fb tc ft14 fl">我的需求：</div><p>上传您的图片或设计稿并提出您的需求，我们会在7个工作日内为您提供个性化的配色建议<span>（已有123人咨询）</span></p>
+    </div><!--owner_bar ends-->
+    <div class="faqs_ask ft12 clear">
+      <form action="" method="post">
+        <div>
+          <label for="content" class="fl">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容：</label>
+          <textarea class="fl"></textarea>
+          <span class="fl">您还可以输入<span id="service_span">500</span>字</span>
+        </div>
+        <div>
+          <label for="upload" class="fl">图片上传：</label>
+          <input type="file" class="fl" />
+        </div>
+        <div>
+          <label class="fl"></label>
+          <input type="image" src="/assets/news/faq_submit.jpg" class="fl faq_submit" />
+          <input type="reset" class="fl faq_reset" value="重置" />
+        </div>
+      </form>
+    </div><!--faqs_ask ends-->
+  </div><!--wrapper ends-->
+</div><!--main ends-->

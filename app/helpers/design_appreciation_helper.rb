@@ -1,0 +1,2 @@
+module DesignAppreciationHelper
+end

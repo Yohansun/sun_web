@@ -2,7 +2,7 @@
   <div class="reg_bg2 pr"></div>
   <div class="wrapper">
     <span id='warn' style='color:red; font-size:10px; text-align:center;'></span>
-    <%= form_for(resource, :as => resource_name, :url => "/users", :remote => true ) do |f| %>
+   <form >
     <div class="reg_content ft14">
       <div class="reg_list fl">
         <label for="uesername"><span>*</span>用户名：</label>
@@ -79,7 +79,7 @@
       </p>
     </div>
     <!--reg_content ends-->
-    <%- end %>
+    </form>
     <div class="ads">
       <a href="#"><img src="/assets/news/reg_ad.jpg"/></a>
     </div>
@@ -90,7 +90,7 @@
 <script type="text/javascript">
 function username_check(){
   var username = $("#user_name").val()
-  $.post(" /users/username_check", {username:username}, function(data){
+  $.post(" /users/username_check", {user:{username:username,flag:0}}, function(data){
     if (data != "") {
       alert(data);
     }
