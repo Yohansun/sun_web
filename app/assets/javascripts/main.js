@@ -12,7 +12,68 @@ $(function(){
 		$(this).val(this.defaultValue);
 		});
 });
-
+/*jiathis*/
+$(function(){
+	$('.jiathis_btn').hover(function(){
+		$('.jiathis_area').show();
+	},function(){
+		$('.jiathis_area').hide();
+	});
+	$('.jiathis_area').hover(function(){
+		$(this).toggle();
+	});
+});
+/*server*/
+$(function(){
+	$('.server').click(function(){
+		$('.server_input').show().find('textarea').val('');
+	});
+	$('.server_input a.submits').click(function(){
+		var info = $('.server_check').text();
+		var txt = $('.server_input textarea').val();
+		if(txt == ''){alert(info);}
+		else
+		{
+			$('.server_input').hide().siblings().show();
+		}
+	});
+	$('.server_input').mouseleave(function(){
+		var txt = $(this).find('textarea').val();
+		if (txt == '')
+		$(this).hide();
+	});
+	$('.server_suc a.submits').click(function(){
+		$('.server_suc').hide();
+	});
+});
+/*subs*/
+$(function(){
+	$('.subscribe').click(function(){
+		$('.subs_input').show().find(':input').val('');
+	});
+	$('.close_btn').click(function(){
+		$(this).parents('.abs_center').hide();
+	});
+	$('.subs_input a.submits').click(function(){
+		var err = $('.subs_err').text();
+		var txt = $('.subs_input :input').val();
+		if(isEmail(txt))
+		{
+			$('.subs_input').hide().siblings('.subs_suc').show();
+		}
+		else
+		{
+			alert(err);
+		}
+	});
+	function isEmail(str){
+       var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+       return reg.test(str);
+	}
+	$('.subs_suc a.submits').click(function(){
+		$('.subs_suc').hide();
+	});
+});
 /*kv slides*/
 $(function(){
 	var $bin = $('.slides');
@@ -205,9 +266,12 @@ $(function(){
 	var id1 = '#input_span';
 	var id2 = '#textarea_span';
 	var id3 = '#service_span';
+	var id4 = '#ins_span';
+	
 	$('.faq_text').keyup(function(){myfun(30,id1,$(this))});
-	$('.faqs_ask textarea').keyup(function(){tip(200,id2,$(this))})
-	$('.faqs_ask textarea').keyup(function(){tip(500,id3,$(this))})
+	$('.faqs_ask textarea').keyup(function(){tip(200,id2,$(this))});
+	$('.faqs_ask textarea').keyup(function(){tip(500,id3,$(this))});
+	$('textarea.works_details').keyup(function(){tip(400,id4,$(this))});
 	function tip(total,ids,element){
 		var len = element.val().length;
 		var rest = total-len;
@@ -233,6 +297,75 @@ $(function(){
 		$(this).attr('href',$input.attr('alt'));
 		});
 });
+
+/*pass_check*/
+$(function(){
+	$('.pass_check').keyup(function(){
+		var short = $('#short').text();
+		var medium = $('#medium').text();
+		var strong = $('#strong').text();
+		var pass = $(this).val();
+		var num = getstren(pass);
+		var w = num*100/32;
+		if(w<40)
+		{
+			$('#ps_tip').text(short).css('color','#f00');
+			$('#ps_status').css('background','#f00');
+		}
+		else if(w<80)
+		{
+			$('#ps_tip').text(medium).css('color','#F9A60D');
+			$('#ps_status').css('background','#F9A60D');
+		}
+		else
+		{
+			$('#ps_tip').text(strong).css('color','#008200');
+			$('#ps_status').css('background','#008200');
+		}
+		$('#ps_status').css('width',w+'%');
+	});
+});
+
+function getstren(passwd) {
+	intScore = 0;
+ 	if (passwd.match(/[a-z]/)) // [verified] at least one lower case letter
+ 	{
+ 		intScore = (intScore+1)
+ 	}
+	if (passwd.match(/[A-Z]/)) // [verified] at least one upper case letter
+ 	{
+		intScore = (intScore+5)
+	}
+ 	if (passwd.match(/\d+/)) // [verified] at least one number
+ 	{
+ 		intScore = (intScore+5)
+ 	}
+	if (passwd.match(/(\d.*\d.*\d)/)) // [verified] at least three numbers
+ 	{
+ 		intScore = (intScore+5)
+ 	}
+ 	if (passwd.match(/[!,@#$%^&*?_~]/)) // [verified] at least one special character
+ 	{
+ 		intScore = (intScore+5)
+ 	}
+	if (passwd.match(/([!,@#$%^&*?_~].*[!,@#$%^&*?_~])/)) // [verified] at least two special characters
+ 	{
+ 		intScore = (intScore+5)
+ 	}
+ 	if (passwd.match(/[a-z]/) && passwd.match(/[A-Z]/)) // [verified] both upper and lower case
+ 	{
+ 		intScore = (intScore+2)
+ 	}
+	if (passwd.match(/\d/) && passwd.match(/\D/)) // [verified] both letters and numbers
+ 	{
+ 		intScore = (intScore+2)
+ 	}
+ 	if (passwd.match(/[a-z]/) && passwd.match(/[A-Z]/) && passwd.match(/\d/) && passwd.match(/[!,@#$%^&*?_~]/))
+ 	{
+ 		intScore = (intScore+2)
+ 	}
+ return intScore;
+}
 /*system table*/
 $(function(){
 	$('.sys_content td img').click(function(){delete_row($(this))});
@@ -241,5 +374,46 @@ function delete_row(element)
 {
 	element.parents('tr').fadeOut();
 }
+/*upload tag*/
+$(function(){
+	$('div.tags a').click(function(){
+		var txt = $(this).text();
+		add_tag(txt)
+		});
+	$('input.add_tag_on').click(function(){
+		var txt = $('input.add_tag').val();
+		if(txt!='')
+		add_tag(txt)
+		});
+});
+function del_tag(){
+	$('a.labels img').click(function(){
+		$(this).parents('a.labels').remove();
+		});
+	}
+del_tag();
+function add_tag(text){
+	var $list = $('div.tag_list');
+	var $a = $('div.tag_list a');
+	var arr = new Array();
+	$a.each(function(i){
+		arr.push($a.eq(i).text());
+		});
+	if(arr.indexOf(text)<0)
+	{
+		var $app = '<a href="javascript:void(0)" class="labels fl cr">'+text+'<img src="images/news/labels.png" /></a>';
+		$list.append($app);
+		del_tag();
+	}
+}
+/*reg2*/
 
 
+$(function(){
+	var $status = $('input.status');
+	$('.user_details').eq(1).hide();
+	$status.click(function(){
+		var num = $status.index(this);
+		$('.user_details').eq(num).show().siblings('.user_details').hide();
+	});
+});

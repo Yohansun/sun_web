@@ -1,0 +1,60 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    span.arrow_1 {
+      right: 281px;
+    }
+
+    span.arrow_2 {
+      right: 210px;
+    }
+
+    span.arrow_3 {
+      right: 136px;
+    }
+  </style>
+<%- end %>
+<div class="main">
+  <div class='sub_title tr'>
+    <img src='<%= set_style[:pic_path] %>' />
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="index.html">首页</a>
+    <span class="arrow_1"></span>
+    <a href="#">实用工具</a>
+    <span class="arrow_2"></span>
+    <a href="#">配色工具</a>
+    <span class="arrow_3"></span>
+    <a class="fb" href="#">爱彩电脑配色软件</a>
+  </div><!--sub_nav ends-->
+  <div class='wrapper clear'>
+    <div class="app_bg fl ft12">
+      <div class="app_top clear">
+        <h1 class="fl fb">快捷测量工具</h1>
+        <span class="fl">发布时间：2012年3月28日</span>
+        <ul class="fr">
+          <li class="trans fl"><a href="#">转发(11)</a></li>
+          <li class="commt fl"><a href="#">评论(12)</a></li>
+        </ul>
+      </div><!--app_top ends-->
+      <p>想要为你家居的室内外做色彩搭配吗？立邦公司开发的配色工具将令你的色彩搭配变得简单而直观。马上试用一下吧。</p>
+      <div class="app fl pr">
+        <div class="app_slides pr">
+          <div class="app_container pr">
+            <a href="#"><img src="/assets/news/app_img.jpg" /></a>
+            <a href="#"><img src="/assets/news/app_img.jpg" /></a>
+            <a href="#"><img src="/assets/news/app_img.jpg" /></a>
+            <a href="#"><img src="/assets/news/app_img.jpg" /></a>
+          </div><!--app_container ends-->
+        </div><!--app_slides ends-->
+        <a href="javascript:void(0)" class="app_prev pa"></a>
+        <a href="javascript:void(0)" class="app_next pa"></a>
+      </div><!--app ends-->
+      <div class="app_right fl">
+        <div class="apps tc">快速测量工具</div>
+        <a href="#" class="app_down db">(126)</a>
+        <p class="tc">大小：32.4MB<br />支持系统：Win7/WinXP</p>
+      </div><!--app_right ends-->
+    </div><!--app_bg ends-->
+  </div><!--wrapper ends-->
+  <div class='sub_bot pr'></div><!--sub_bot ends-->
+</div><!--main ends-->

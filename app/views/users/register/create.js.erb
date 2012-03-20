@@ -1,0 +1,5 @@
+<% unless @messages.blank? %>
+alert("<%= raw @messages %>");
+<%- else -%>
+	window.location.reload();
+<%- end -%>

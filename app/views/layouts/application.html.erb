@@ -4,8 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>iColor</title>
     <%= csrf_meta_tag %>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag  "application"  %>
+    <%= javascript_include_tag  "application"  %>
+    <%- set_style[:css].each do |c| %>
+        <%= stylesheet_link_tag "#{c}" %>
+    <%- end %>
+    <%- if set_style[:js] %>
+        <%- set_style[:js].each do |j| %>
+            <%= javascript_include_tag "#{j}" %>
+        <%- end %>
+    <%- end %>
+    <%= yield  :head %>
     <!--[if IE 6]>
     <script src="/png.js"></script>
     <script>
@@ -13,7 +22,7 @@
     </script>
     <![endif]-->
   </head>
-  <body>
+  <body style="<%= 'height:100%;' if controller_name =~ /master_hall|design_appreciation/%>">
     <div class="header">
       <div class="nav pa">
         <a href="#" class="logo fl"></a>
@@ -46,7 +55,7 @@
       </div><!--nav ends-->
       <div class="loginBg pa none">
         <div class="loginCon ft12 clear">
-          <%= form_for(resource, :as => resource_name, :url => "/users/sign_in") do |f| %>
+          <form>
             <div>
               <label for="username" class="username ft14 fl">帐号：</label>
               <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
@@ -60,7 +69,7 @@
             <div class="checkbox fl">
               <input type="checkbox" /><span>下次自动登录</span>
             </div>
-          <%- end %>
+          </form>
         </div><!--loginCon ends-->
         <div class="loginCon ft12 border clear">
           <ul class="clear">
@@ -81,7 +90,7 @@
 
     <%= yield %>
 
-    <div class='footer'>
+    <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
       <div class='links'>
         <div class='w_995'>
           <a href='http://www.nipponpaint.com.cn/'><img src='/assets/link1.jpg' alt="" /></a>
@@ -95,40 +104,40 @@
       <div class='bot_map w_995 ft12 clear'>
         <ul>
           <li><a href="#" class='fb'>大师殿堂</a></li>
-          <li><a href="#">大师访谈</a></li>
-          <li><a href="#">热点话题</a></li>
-          <li><a href="#">大师作品</a></li>
+          <li><a href="/master_hall/list">大师访谈</a></li>
+          <li><a href="/master_hall/topics">热点话题</a></li>
+          <li><a href="/master_hall/works_list">大师作品</a></li>
         </ul>
         <ul>
           <li><a href="#" class='fb'>设计鉴赏</a></li>
           <li><a href="#">每周之星</a></li>
-          <li><a href="#">推荐作品</a></li>
-          <li><a href="#">灵感秀</a></li>
+          <li><a href="/design_appreciation/design">推荐作品</a></li>
+          <li><a href="/design_appreciation/inspiration">灵感秀</a></li>
         </ul>
         <ul>
           <li><a href="#" class='fb'>行业资讯</a></li>
-          <li><a href="#">装修资讯</a></li>
+          <li><a href="/industry_news/news">装修资讯</a></li>
           <li><a href="#">色彩资讯</a></li>
           <li><a href="#">微博资讯</a></li>
         </ul>
         <ul>
           <li><a href="#" class='fb'>精彩活动</a></li>
           <li><a href="#">年度色彩趋势活动</a></li>
-          <li><a href="#">设计师活动</a></li>
+          <li><a href="/activities/event">设计师活动</a></li>
           <li><a href="#">其他精彩活动</a></li>
         </ul>
         <ul>
           <li><a href="#" class='fb'>实用工具</a></li>
-          <li><a href="#">配色工具</a></li>
-          <li><a href="#">设计师APP</a></li>
+          <li><a href="">配色工具</a></li>
+          <li><a href="/utility/app">设计师APP</a></li>
         </ul>
         <ul>
           <li>
           <a href="#" class='fb'>业主通道</a>
           </li>
-          <li><a href="#">片区快查</a></li>
-          <li><a href="#">装修问答</a></li>
-          <li><a href="#">在线配色服务</a></li>
+          <li><a href="/channel/access">片区快查</a></li>
+          <li><a href="/channel/faq">装修问答</a></li>
+          <li><a href="/channel/service">在线配色服务</a></li>
         </ul>
         <ul class="ul_last">
           <li><a href="#" class='fb'>漆光艺彩</a></li>
@@ -147,5 +156,8 @@
         </div><!--w_995 ends-->
       </div><!--copyright ends-->
     </div><!--footer ends-->
+
+    <%= yield  :foot %>
+
   </body>
 </html>

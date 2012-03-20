@@ -1,0 +1,259 @@
+<%- content_for :head do %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.fancybox').fancybox({
+            openEffect  : 'none',
+            closeEffect : 'none',
+
+            prevEffect : 'none',
+            nextEffect : 'none',
+
+            closeBtn  : false,
+
+            helpers : {
+                title : {
+                    type : 'inside'
+                },
+                buttons    : {}
+            },
+
+            loop: false,
+
+            title: 'okokok!!',
+
+            afterLoad : function() {
+                //this.title = '(' + (this.index + 1) + ' / ' + this.group.length + ')' + (this.title ? ' - ' + this.title : '');
+                this.title = (this.title ? this.title : '') + '(' + (this.index + 1) + ' / ' + this.group.length + ')';
+            }
+        });
+    });
+</script>
+<%- end %>
+<div class="main">
+    <div class='sub_title tr pt25'>
+        <img src='<%= set_style[:pic_path] %>' />
+    </div>
+    <div class='sub_nav ft12 pr tr'>
+        <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">推荐作品</a>
+    </div><!--sub_nav ends-->
+    <div class='wrapper pb60 group'>
+        <div class="design_tit group">
+            <ul class="design_filter group">
+                <li class="li_current">
+                    <a href="#">最新</a>
+                </li>
+                <li>
+                    <a href="#">最热</a>
+                </li>
+                <li class="arrow_filter">
+                    <a href="#">风格</a>
+                    <ul class="sub_filter">
+                        <li>
+                            <a href="#">现代简约</a>
+                        </li>
+                        <li>
+                            <a href="#">中式新古典</a>
+                        </li>
+                        <li>
+                            <a href="#">欧式复古</a>
+                        </li>
+                        <li>
+                            <a href="#">田园地中海</a>
+                        </li>
+                        <li>
+                            <a href="#">其他</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="arrow_filter">
+                    <a href="#">户型</a>
+                </li>
+                <li class="arrow_filter">
+                    <a href="#">城市</a>
+                </li>
+            </ul>
+            <div class="upload_btn">
+                <a href="/design_appreciation/upload">我要上传</a>
+            </div>
+        </div>
+        <div class="design_result">
+            <ul class="d_works group">
+                <li><a id="fancybox-manual-c" class="fancybox" data-fancybox-group="button" href="/assets/design/d_result1_b.jpg"><img src="/assets/design/d_result1.jpg" title="华丽的外表 朴素的内涵" alt="" /></a>
+                    <h3>华丽的外表 朴素的内涵</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+                <li><a class="fancybox" data-fancybox-group="button" href="/assets/design/d_result1_b.jpg"><img src="/assets/design/d_result2.jpg" title="现代简约 白色 卧室" alt="" /></a>
+                    <h3>现代简约 白色 卧室</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+                <li><a class="fancybox" data-fancybox-group="button" href="/assets/design/d_result1_b.jpg"><img src="/assets/design/d_result3.jpg" title="现代简约 白色 卧室" alt="" /></a>
+                    <h3>现代简约 白色 卧室</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+            </ul><!--result one ends-->
+            <ul class="d_works group">
+                <li><a href="#"><img src="/assets/design/d_result4.jpg" alt="" /></a>
+                    <h3>华丽的外表 朴素的内涵</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+                <li><a href="#"><img src="/assets/design/d_result5.jpg" alt="" /></a>
+                    <h3>现代简约 白色 卧室</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+                <li><a href="#"><img src="/assets/design/d_result6.jpg" alt="" /></a>
+                    <h3>现代简约 白色 卧室</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+            </ul><!--result two ends-->
+            <ul class="d_works group">
+                <li><a href="#"><img src="/assets/design/d_result7.jpg" alt="" /></a>
+                    <h3>华丽的外表 朴素的内涵</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+                <li><a href="#"><img src="/assets/design/d_result8.jpg" alt="" /></a>
+                    <h3>现代简约 白色 卧室</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+                <li><a href="#"><img src="/assets/design/d_result9.jpg" alt="" /></a>
+                    <h3>现代简约 白色 卧室</h3>
+                    <p class="p1 group">
+                        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="/assets/design/d_vote_btn.png" alt="" /></a>
+                    </p>
+                    <p class="p2 group">
+                        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                    </p>
+                    <p>
+                        公司：原筑设计
+                        <br />
+                        设计师：Charles
+                        <br />
+                        风格：田园
+                    </p>
+                </li>
+            </ul><!--result three ends-->
+        </div><!--design_result ends-->
+    </div><!--wrapper ends-->
+    <div class='sub_bot pr'>
+        <div class="pager ft12">
+            <a class="prev" href="#"><span></span>上一页</a>
+            <a href="#">1</a>
+            <a href="#" class="current">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">...</a>
+            <a href="#">20</a>
+            <a class="next" href="#">下一页<span></span></a>
+        </div><!--pager ends-->
+    </div><!--sub_bot ends-->
+</div><!--main ends-->
+<%- content_for :foot do %>
+<div class="full_screen_popup">
+    <div class="overlay"></div>
+    <div class="popup">
+        <h3>您已浏览完所有图片</h3>
+        <p><a href="#"><img src="/assets/design/replay_btn.png" alt="" /></a></p>
+        <p class="pb_noline">来自<a href="#">王勤俭</a>的下一套作品</p>
+        <div class="popup_s"><img src="/assets/design/popup_s1.jpg" alt="" /><img src="/assets/design/popup_s2.jpg" alt="" /><img src="/assets/design/popup_s3.jpg" alt="" /><img src="/assets/design/popup_s4.jpg" alt="" /><img class="nomr" src="/assets/design/popup_s5.jpg" alt="" /></div>
+    </div>
+</div><!--full_screenbox ends-->
+<%- end %>
