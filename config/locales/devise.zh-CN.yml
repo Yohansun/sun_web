@@ -36,6 +36,10 @@ zh-CN:
       send_paranoid_instructions: '如果您的邮箱存在于我们的数据库中，您将收到一封确认账号的邮件.'
     register:
       user:
+        username_blank: '用户名不能为空！'
+        username: '用户名不能为空，只能用数字、字母、下划线和汉字组成，不能包含空格，并且不能以下划线和数字开头！'
+        username_used: '用户名已经被占用，请重新输入新的用户名！'
+        username_suc: '该用户名未被注册可以使用！'
         inauguration_company_blank: '就职公司不能为空.'
         recipient_address_blank: '收件地址不能为空，请输入正确的收件地址！'
         recommended_name_blank: '推荐人不能为空！'

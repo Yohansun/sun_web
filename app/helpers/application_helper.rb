@@ -21,6 +21,8 @@ module ApplicationHelper
 
   def set_style
     case controller_name
+      when "home"
+        return { :css => ["index"] }
       when "register"
         return { :css => ["reg"] }
       when /master_hall|contact/
