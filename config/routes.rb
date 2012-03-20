@@ -1,10 +1,12 @@
 Icolor::Application.routes.draw do
 
+  root :to => 'home#index'
+
   devise_for :users, :controllers => { :registrations => "users/register", :sessions => "users/sessions" }
   devise_scope :user do
     match "/users/register/roles" => "users/register#roles"
     match "/users/suc_regist" => "users/register#suc_regist"
-    match "/users/username_check" => "users/register#username_check"
+    match "/users/data_valid" => "users/register#data_valid"
   end
 
   match "/master_hall/list" => "master_hall#list"

@@ -2,7 +2,7 @@
   <div class="reg_bg2 pr"></div>
   <div class="wrapper">
     <span id='warn' style='color:red; font-size:10px; text-align:center;'></span>
-   <form >
+    <%= form_for(resource, :as => resource_name, :url => "/users", :remote => true ) do |f| %>
     <div class="reg_content ft14">
       <div class="reg_list fl">
         <label for="uesername"><span>*</span>用户名：</label>
@@ -70,8 +70,8 @@
       <p class="reg_bot ft12 tc">注：您的注册信息仅用于icolor官网，我们不会对外公开您的信息，请放心</p>
 
       <p class="reg_bot ft12 tc">
-      <input type="checkbox" checked="checked"/>
-      接受会员注册协议（<a href="#">阅读</a>）
+      <input type="checkbox"  name="is_read"/>
+        接受会员注册协议（<a href="#">阅读</a>）
       </p>
       <p class="tc">
       <a href="/users/register/roles"><img src="/assets/news/reg_up.jpg"/></a>&nbsp;
@@ -79,7 +79,7 @@
       </p>
     </div>
     <!--reg_content ends-->
-    </form>
+    <%- end %>
     <div class="ads">
       <a href="#"><img src="/assets/news/reg_ad.jpg"/></a>
     </div>
@@ -90,9 +90,9 @@
 <script type="text/javascript">
 function username_check(){
   var username = $("#user_name").val()
-  $.post(" /users/username_check", {user:{username:username,flag:0}}, function(data){
-    if (data != "") {
-      alert(data);
+  $.post(" /users/data_valid", {user:{username:username,flag:0}}, function(message){
+    if (message != "") {
+      alert(message);
     }
   });
 }
