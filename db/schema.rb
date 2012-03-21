@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120315060704) do
+ActiveRecord::Schema.define(:version => 20120320101305) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -152,6 +152,12 @@ ActiveRecord::Schema.define(:version => 20120315060704) do
     t.integer  "subject_id"
   end
 
+  create_table "maillists", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.string   "slug"
@@ -217,6 +223,12 @@ ActiveRecord::Schema.define(:version => 20120315060704) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
+
+  create_table "site_messages", :force => true do |t|
+    t.text     "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "subjects", :force => true do |t|
     t.string   "name"
