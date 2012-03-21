@@ -24,7 +24,7 @@ module ApplicationHelper
       when "home"
         return { :css => ["index"] }
       when "register"
-        return { :css => ["reg"] }
+        return { :css => ["reg"], :js => ["location.js","LinkageSelect.js"] }
       when /master_hall|contact/
         return { :css => ["style"], :pic_path => "/assets/master/title_master.png" }
       when "channel"
