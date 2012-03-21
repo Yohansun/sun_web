@@ -30,7 +30,7 @@ module ApplicationHelper
       when "channel"
         return { :css => ["news"], :pic_path => "/assets/news/title_owner.png" }
       when "utility"
-        return { :css => ["news"], :pic_path => "/assets/news/title_tools.png" }
+        return { :css => ["news"], :js => ["myfocus"],:pic_path => "/assets/news/title_tools.png" }
       when "design_appreciation"
         if action_name == "design"
           return { :css => ["style", "/fancybox/jquery.fancybox.css", "/fancybox/helpers/jquery.fancybox-buttons.css"], :js => ["jquery.fancybox.js", "/fancybox/helpers/jquery.fancybox-buttons.js", "jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }

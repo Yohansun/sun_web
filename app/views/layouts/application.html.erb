@@ -27,17 +27,14 @@
       <div class="nav pa">
         <a href="#" class="logo fl"></a>
         <a href="#" class="icolor fl"></a>
-
         <div class="navTop fr">
           <a href="#" class="weibo fl"></a>
-
           <div class="search fl">
             <form action="#" method="get">
-              <input type="text" class="fl" value="Search"/>
-              <input type="image" src="/assets/search-icon.jpg"/>
+              <input type="text" class="fl" value="Search" />
+              <input type="image" src="/assets/search-icon.jpg" />
             </form>
-          </div>
-          <!--search ends-->
+          </div><!--search ends-->
           <div class="navLabel fl ft12">
             <a href="#">立邦网上商城</a> |
             <a href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
@@ -54,26 +51,28 @@
             </div>
             <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
             <!-- JiaThis Button END -->
-          </div>
-          <!--navLabel ends-->
+          </div><!--navLabel ends-->
           <a href="#" class="login fl"></a>
           <a href="/users/register/roles" class="reg fl"></a>
           <a href="#" class="nippon fl"></a>
-        </div>
-        <!--navTop ends-->
+        </div><!--navTop ends-->
         <ul class="navBot fr cw fb ft14">
           <li><a href="index.html">首页</a></li>
-          <li><a href="master.html">大师殿堂</a></li>
+          <li class="pr"><a href="master.html">大师殿堂</a>
+          <ul>
+            <li><a href="#">大师访谈</a></li>
+            <li><a  href="#">热点话题</a></li>
+            <li class="noborder"><a href="#">大师作品</a></li>
+          </ul>
+          </li>
           <li><a href="design.html">设计鉴赏</a></li>
           <li><a href="news.html">行业资讯</a></li>
           <li><a href="event.html">精彩活动</a></li>
           <li><a href="tools.html">实用工具</a></li>
           <li><a href="access.html">业主通道</a></li>
           <li class="noborder"><a href="arts.html">漆光艺彩</a></li>
-        </ul>
-        <!--navBot ends-->
-      </div>
-      <!--nav ends-->
+        </ul><!--navBot ends-->
+      </div><!--nav ends-->
       <div class="loginBg pa none">
         <div class="loginCon ft12 clear">
           <form>
@@ -103,54 +102,63 @@
         </div><!--loginCon ends-->
         <div class="tc ft14">
           还没加入iColor?<br />
-          <a href=" /users/register/roles"></a>
+          <a href="/users/register/roles"></a>
         </div><!--tc ends-->
       </div><!--loginBg ends-->
-
     </div>
     <!--header ends-->
 
     <div class="server_area">
-      <a href="javascript:void(0)" class="server db"></a>
+      <a href="javascript:void(0)" class="server fr"></a>
       <div class="server_input none">
         <div class="server_content ft14 tc">
           亲爱的会员您好！请问您有什么需要咨询？<br />我们将在3个工作日内对您的留言给予答复，请留意系统消息。
           <textarea></textarea>
           <span class="server_check none">请输入您要咨询的内容。</span>
         </div><!--server_content ends-->
-        <a href="javascript:void(0)" class="submits db"></a>
+        <p class="subs_submit tc">
+        <input type="image" src="/assets/submit_btn.jpg" id="server_submit" />
+        </p>
       </div><!--server_input ends-->
       <div class="server_suc none">
         <div class="server_content ft14 tc">
           <img src="/assets/server_suc.jpg" />
           <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
         </div><!--server_content ends-->
-        <a href="javascript:void(0)" class="submits db"></a>
-      </div><!--server_input ends-->
+        <p class="subs_submit tc">
+        <input type="image" src="/assets/submit_btn.jpg" id="server_close" />
+        </p>
+      </div><!--server_suc ends-->
     </div><!--server_area ends-->
     <div class="subs_input abs_center none">
       <div class="subs_title ft18">
-        提示
+        <span class="fl">提示</span>
         <a href="javascript:void(0)" class="close_btn fr"></a>
       </div><!--subs_title ends-->
-      <div class="subs_content tc">
-        <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
-        <input type="text" />
-        <span class="subs_err none">抱歉，您输入的邮箱地址不正确。</span>
-      </div><!--subs_content ends-->
-      <a href="javascript:void(0)" class="submits db"></a>
+      <form action="" method="post" id="subs_form">
+        <div class="subs_content tc">
+          <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
+          <input type="text" />
+          <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
+        </div><!--subs_content ends-->
+        <p class="subs_submit tc">
+        <input type="image" src="/assets/submit_btn.jpg" />
+        </p>
+      </form>
     </div><!--subs_input ends-->
     <div class="subs_suc abs_center none">
       <div class="subs_title ft18">
-        提示
+        <span class="fl">提示</span>
         <a href="javascript:void(0)" class="close_btn fr"></a>
       </div><!--subs_title ends-->
       <div class="subs_content tc">
         <img src="/assets/subs_suc.jpg" />
         <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
       </div><!--subs_content ends-->
-      <a href="javascript:void(0)" class="submits db"></a>
-    </div><!--subs_input ends-->
+      <p class="subs_submit tc">
+      <input type="image" src="/assets/submit_btn.jpg" />
+      </p>
+    </div><!--subs_suc ends-->
 
     <%= yield %>
 
