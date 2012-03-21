@@ -17,9 +17,11 @@
 .interview p.interview_icon{background:url(/assets/master/interview_icon.png) no-repeat left 5px;}
 p.indent_24{text-indent:24px;}
 .works_slide{position: relative;margin:0 13px; padding:1px 0;}
-.works_slide .img_box{width:819px;margin: 17px auto 20px auto;text-align:center;}
-.works_slide .works_next{position: absolute;left: 0px; top:75px;}
-.works_slide .works_pre{position: absolute;right: 0px; top:75px;}
+.works_slide .img_box{position:relative;overflow:hidden; width:788px;margin: 17px auto 20px auto;}
+.works_slide .img_list{position:relative;height:189px; width:3000px;text-align:left;}
+.works_slide .img_list img{float:left; margin-right:5px;}
+.works_slide .works_pre{position: absolute;left: 0px; top:75px;}
+.works_slide .works_next{position: absolute;right: 0px;_right: 15px; top:75px;}
 p.master_msg{color:#373737;line-height:30px;margin: 6px 16px 5px;font-family: "Microsoft Yahei"; padding-bottom: 15px;}
 p.master_icon_bg{background: url(/assets/master/msg_bg.png) no-repeat right bottom; padding-bottom: 50px;}
 /*hot topics*/
@@ -68,9 +70,11 @@ p.master_icon_bg{background: url(/assets/master/msg_bg.png) no-repeat right bott
 .master_works_list .works_detail h4 span{color:#000000;}
 .master_works_list .works_detail p{font:12px "arial simsun";color:#3f3f3f; line-height:18px;}
 .works_list_slide{ position:relative;padding:1px 0;}
-.works_list_slide .img_works_box{width:355px; margin:15px auto;text-align:center;}
-.works_list_slide .works_next{position: absolute;left: 0px; top:45px;}
-.works_list_slide .works_pre{position: absolute;right: 0px; top:45px;}
+.works_list_slide .img_works_box{position:relative;width:329px;overflow:hidden;margin:15px auto;}
+.works_list_slide .img_works_list{position:relative;width:2000px;}
+.works_list_slide .img_works_list img{float:left;margin-right:5px;}
+.works_list_slide .works_pre{position: absolute;left: 0px; top:45px;}
+.works_list_slide .works_next{position: absolute;right: 0px; top:45px;}
 /*master works detail*/
 .works_detail_tit{overflow:hidden; padding-bottom:5px;}
 .works_detail_tit h3{ float:left; margin-top:10px; width:600px;  font:bold 18px "Microsoft Yahei";color:#e71d36;}
@@ -190,13 +194,10 @@ p.master_icon_bg{background: url(/assets/master/msg_bg.png) no-repeat right bott
 ul.design_filter {float:left;margin-top:8px;width:600px;}
 ul.design_filter li{float:left;background:#dfded8; margin-right:5px;}
 ul.design_filter li a{display:block;padding:3px 8px 3px 13px;font: 12px "Microsoft Yahei";color:#898989; margin-right:5px;}
-ul.design_filter li.li_current{background:#7a786b;}
-ul.design_filter li.li_current a{color:#ffffff;}
-ul.design_filter li.arrow_filter{width:85px;position:relative;}
-ul.design_filter li.arrow_filter a{background:url(/assets/design/arrow_filter.png) no-repeat right 9px;/**/}
-ul.sub_filter{position:absolute;display:block; border:1px solid #cbcbcb;width:83px;}
-ul.sub_filter li{float:none; border-top:1px solid #e7e7e4; margin-right:0px;}
-ul.sub_filter li a{background:#fff!important; margin-right:0px;}
+ul.design_filter li select.arrow_filter{background:#dfded8;border:none;font: 12px "Microsoft Yahei";color:#898989;padding:2px 0 1px 5px;}
+ul.design_filter li select.arrow_filter option{border-bottom:1px solid #ccc; outline:none;background:#ffffff;padding:0px 5px 0px 5px;}
+ul.design_filter .li_current{background:#7a786b;}
+ul.design_filter .li_current a{color:#ffffff;}
 
 .upload_btn{float:right;text-align:right;}
 .upload_btn a{display:block; width:112px;background:url(/assets/design/upload_btn.png) no-repeat right center; padding:8px; color:#000;font:16px "SimHei";}
@@ -298,7 +299,7 @@ p.act_ads_more a{color:#5c5a5b;font:12px/24px "Microsoft Yahei";_margin-right:15
 .host_con{ float:left; width:685px;}
 .host_con .section{ padding:0 20px 20px;}
 .host_self{ overflow:hidden;padding:18px 0;background:url(/assets/personal/hot_topics_line.png) repeat-x right bottom;}
-.host_self img.box_shadow{float:left; padding:2px;border:1px solid #cccccc; margin-right: 25px; box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
+.host_self img.box_shadow{float:left; padding:2px;border:1px solid #cccccc; margin-right: 25px;}
 .host_self .host_status{float:left; width:460px;}
 .host_self .host_status h2 {overflow:hidden;font:18px "Microsoft Yahei";margin:10px 0;_height:24px;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(/assets/personal/gold_icon.png) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
@@ -354,10 +355,10 @@ h2.article{height:100px;background:url(/assets/index_related_tit.png) no-repeat 
 .search_box .section{ padding:0 20px 15px;}
 .search_box .section h2{border-bottom:4px solid #f5f5f5;height:22px;line-height:22px;padding:10px 0;font:18px "Microsoft Yahei";color:#000; letter-spacing:2px;}
 .search_box .results{padding:25px 30px 13px;margin-bottom:10px;}
-.search_box .results h3{color:#095cce;font:16px "Microsoft Yahei";line-height:24px;}
+.search_box .results h3 a{color:#095cce;font:16px "Microsoft Yahei";line-height:24px;}
 .search_box .results h3 strong{color:#e71d36;margin-right:5px;}
 .search_box .results p{color:#666666;font:12px "arial simsun";line-height:18px;margin:4px 0;}
-.search_box .results a{color:#66803a;font:12px/36px "Arial, Helvetica, sans-serif";}
+.search_box .results a{color:#66803a;font:12px/20px "Arial, Helvetica, sans-serif";}
 .search_box .section .pager{float:right;width:auto;}
 .search_box .section .pager a,.host .pager a{margin:0 5px;}
 .search_box .section .pager a.prev span,.host .pager a.prev span{_left:10px;_top:5px;}
