@@ -9,6 +9,9 @@ Icolor::Application.routes.draw do
     match "/users/data_valid" => "users/register#data_valid"
   end
 
+  resources :maillists
+  resources :site_messages
+
   match "/master_hall/list" => "master_hall#list"
   match "/master_hall/master" => "master_hall#master"
   match "/master_hall/topics" => "master_hall#topics"

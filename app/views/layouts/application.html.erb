@@ -108,57 +108,62 @@
     </div>
     <!--header ends-->
 
-    <div class="server_area">
-      <a href="javascript:void(0)" class="server fr"></a>
-      <div class="server_input none">
-        <div class="server_content ft14 tc">
-          亲爱的会员您好！请问您有什么需要咨询？<br />我们将在3个工作日内对您的留言给予答复，请留意系统消息。
-          <textarea></textarea>
-          <span class="server_check none">请输入您要咨询的内容。</span>
+<div class="server_area">
+    <a href="javascript:void(0)" class="server fr"></a>
+    <%= form_tag site_messages_path, :remote => true do %>
+    <div class="server_input none">
+    	<div class="server_content ft14 tc">
+            亲爱的会员您好！请问您有什么需要咨询？<br />我们将在3个工作日内对您的留言给予答复，请留意系统消息。
+            <textarea name="site_message[desc]"></textarea>
+            <span class="server_check none">请输入您要咨询的内容。</span>
         </div><!--server_content ends-->
         <p class="subs_submit tc">
-        <input type="image" src="/assets/submit_btn.jpg" id="server_submit" />
-        </p>
-      </div><!--server_input ends-->
-      <div class="server_suc none">
-        <div class="server_content ft14 tc">
-          <img src="/assets/server_suc.jpg" />
-          <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
+    		<input type="image" src="/assets/submit_btn.jpg" id="server_submit" />
+    	</p>
+    </div><!--server_input ends-->
+    <%- end %>
+    <div class="server_suc none">
+    	<div class="server_content ft14 tc">
+        	<img src="/assets/server_suc.jpg" />
+            <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
         </div><!--server_content ends-->
         <p class="subs_submit tc">
-        <input type="image" src="/assets/submit_btn.jpg" id="server_close" />
-        </p>
-      </div><!--server_suc ends-->
-    </div><!--server_area ends-->
-    <div class="subs_input abs_center none">
-      <div class="subs_title ft18">
-        <span class="fl">提示</span>
+    		<input type="image" src="/assets/submit_btn.jpg" id="server_close" />
+    	</p>
+    </div><!--server_suc ends-->
+</div><!--server_area ends-->
+
+<div class="subs_input abs_center none">
+	<div class="subs_title ft18">
+    	<span class="fl">提示</span>
         <a href="javascript:void(0)" class="close_btn fr"></a>
-      </div><!--subs_title ends-->
-      <form action="" method="post" id="subs_form">
-        <div class="subs_content tc">
-          <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
-          <input type="text" />
-          <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
-        </div><!--subs_content ends-->
-        <p class="subs_submit tc">
-        <input type="image" src="/assets/submit_btn.jpg" />
-        </p>
-      </form>
-    </div><!--subs_input ends-->
-    <div class="subs_suc abs_center none">
-      <div class="subs_title ft18">
-        <span class="fl">提示</span>
+    </div><!--subs_title ends-->
+  <%= form_tag maillists_path, :remote => true do %>
+    <div class="subs_content tc">
+    	<div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
+          <input type="text" name="maillist[email]"/>
+        <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
+    </div><!--subs_content ends-->
+    <p class="subs_submit tc">
+    	<input type="image" src="/assets/submit_btn.jpg" />
+    </p>
+  <%- end %>
+</div><!--subs_input ends-->
+
+<div class="subs_suc abs_center none">
+	<div class="subs_title ft18">
+    	<span class="fl">提示</span>
         <a href="javascript:void(0)" class="close_btn fr"></a>
-      </div><!--subs_title ends-->
-      <div class="subs_content tc">
-        <img src="/assets/subs_suc.jpg" />
-        <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
-      </div><!--subs_content ends-->
-      <p class="subs_submit tc">
-      <input type="image" src="/assets/submit_btn.jpg" />
-      </p>
-    </div><!--subs_suc ends-->
+    </div><!--subs_title ends-->
+    <div class="subs_content tc">
+    	<img src="/assets/subs_suc.jpg" />
+    	<p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
+    </div><!--subs_content ends-->
+    <p class="subs_submit tc">
+    	<input type="image" src="/assets/submit_btn.jpg" />
+    </p>
+</div><!--subs_suc ends-->
+
 
     <%= yield %>
 
