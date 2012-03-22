@@ -11,7 +11,7 @@
 			waiting:20,
 			delay:100,
 			css:true,
-			path:'/pattern/',
+			path:'js/pattern/',
 			autoZoom:false
 		},
 		pattern:{},
@@ -108,7 +108,7 @@
 			};
 			if(DOMReady){ready();return;}//立即执行
 			if(window.attachEvent){(function(){try{ready()}catch(e){setTimeout(arguments.callee,0)}})();}
-	        else{F.addEvent(document,'DOMContentLoaded',ready);}
+	　　		else{F.addEvent(document,'DOMContentLoaded',ready);}
 		},
 		initCSS:function(p){
 			var css=[],w=p.width,h=p.height,oStyle=document.createElement('style');oStyle.type='text/css';

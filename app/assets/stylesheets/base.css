@@ -11,7 +11,7 @@ body{background:url(/assets/bg.jpg) no-repeat center top;/*overflow-x:hidden;*/*
 .navLabel a{color:#8f8f8f;}
 .login{background:url(/assets/login.png) center 13px no-repeat;width:40px;height:21px;margin:0 6px;padding:23px 2px 0 2px;border-width:0 1px;border-style:solid;border-color:#fff;}
 a.login:hover,.logHover{border-color:#d9d9d9;}
-.loginBg{background:url(/assets/loginBg.png) no-repeat;width:315px;height:313px;left:50%;top:44px;z-index:6;margin-left:83px;}
+.loginBg{background:url(/assets/loginBg.png) no-repeat;width:315px;height:313px;left:50%;top:44px;z-index:106;margin-left:83px;}
 .loginCon{width:260px;margin:23px auto;}
 label.username{padding-top:5px;}
 label.password{padding-top:12px;}
@@ -85,7 +85,8 @@ span.arrow_2{right:87px;_right:92px;}
 .section{background:#fff;margin:-3px 0 0 -3px;border:1px solid #e5e5e5;}
 .shadow{background:#e5e5e5;border:1px solid #e5e5e5;padding:0 2px 2px 0;}
 
-.pager{width:385px;margin:0 auto; padding:3px 0;_padding:4px 0;}
+.sub_bot .pager{margin-top:28px;}
+.pager{width:388px;margin:0 auto; padding:3px 0;_padding:4px 0;}
 .pager a{background:#fff;color:#7f7f7f;padding:0.2em 0.5em;border:1px solid #d1d1d1;}
 .pager a:hover,.pager a.current{color:#bb0e0e;}
 
@@ -100,9 +101,9 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 * html body{height:100%;overflow:auto;}
 
 .server{background:url(/assets/server.png) no-repeat;width:41px;height:127px;margin-top:55px;}
-.server_input,.server_suc{width:447px;height:214px;background:#fff;border:5px solid #666;float:left;padding:20px 18px 0;color:#666;line-height:20px;}
+.server_input,.server_suc{width:447px;height:214px;background:#fff;border:5px solid #666;float:left;padding:20px 18px 1px;color:#666;line-height:20px;}
 .server_content{border-bottom:1px dotted #bababa;height:160px;}
-.server_content textarea{width:400px;height:86px;font-weight:bold;margin:10px 0;padding:5px;}
+.server_content textarea{border:1px solid #9E9D9D;width:400px;height:86px;font-weight:bold;margin:10px 0;padding:5px;}
 .server_content a{text-decoration:underline;}
 
 .subs_input,.subs_suc{background:#fff;border:5px solid #666;width:483px;height:214px;margin-left:-246px;margin-top:-112px;}
@@ -115,3 +116,5 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .subs_content p{color:#666;line-height:20px;}
 .subs_content p.subs_err{line-height:30px;color:#760000;}
 .subs_submit input{margin-top:12px;}
+
+#overlay{background:url(/assets/overlay.png);position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:none;}

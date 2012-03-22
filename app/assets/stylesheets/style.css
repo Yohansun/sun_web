@@ -83,9 +83,11 @@ p.master_icon_bg{background: url(/assets/master/msg_bg.png) no-repeat right bott
 .full_play{float:right;text-align:right; margin-top:20px;}
 .full_play a{display:block; width:112px;background:url(/assets/master/full_play_btn.png) no-repeat right center; padding:8px; color:#000;font:16px "SimHei";}
 
-.kv_loop{height:420px; background:url(/assets/master/works_detail_bg.png) no-repeat top center;}
+.kv_loop{ background:url(/assets/master/works_detail_bg.png) no-repeat top center; padding:35px 30px 10px;}
 
 .colors_box{}
+.colors_box .color-picker{margin:5px 0 20px;padding:0px 12px 10px;}
+.colors_box .color-picker .color .palette .desc{ z-index:10;}
 .colors_main{ position:relative; height:69px; padding-right:15px;_padding-bottom:10px;}
 .colors_main h5{ padding:12px 10px 0;}
 .colors{float:left;width:72px; height:36px; margin-top:18px; margin-right:6px;}
@@ -299,7 +301,7 @@ p.act_ads_more a{color:#5c5a5b;font:12px/24px "Microsoft Yahei";_margin-right:15
 .host_con{ float:left; width:685px;}
 .host_con .section{ padding:0 20px 20px;}
 .host_self{ overflow:hidden;padding:18px 0;background:url(/assets/personal/hot_topics_line.png) repeat-x right bottom;}
-.host_self img.box_shadow{float:left; padding:2px;border:1px solid #cccccc; margin-right: 25px;}
+.host_self img.box_shadow{float:left; padding:2px;border:1px solid #cccccc; margin-right: 25px; box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
 .host_self .host_status{float:left; width:460px;}
 .host_self .host_status h2 {overflow:hidden;font:18px "Microsoft Yahei";margin:10px 0;_height:24px;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(/assets/personal/gold_icon.png) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
