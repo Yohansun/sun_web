@@ -24,6 +24,13 @@ $(function(){
 	});
 });
 /*server & subs*/
+function o_in(){
+	$('#overlay').fadeIn('fast');
+	}
+function o_out(){
+	$('#overlay').fadeOut();
+	}
+
 $(function(){
 	$('a.server').click(function(){
 		if(!$('.server_suc').is(':visible'))
@@ -34,16 +41,43 @@ $(function(){
 		if(txt=='')
 		$(this).hide();
 	});
+	$('#server_submit').click(function(){
+		var $area = $(this).parents('.server_input').find('textarea')
+		var txt = $area.val();
+		if(txt!='')
+		{
+			$('.server_input').hide().next().show();
+		}
+		else{
+			$area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
+        	$area.animate({opacity:0.5},200);
+			$area.animate({opacity:1},200);
+			$area.animate({opacity:0.5},200,function(){
+			$area.css({background:"none",opacity:1});
+				});
+			}
+	});
 
 	$('#server_close').click(function(){
 		$(this).parents('.server_suc').hide();
 	});
 	$('a.close_btn').click(shut_center=function(){
 		$(this).parents('.abs_center').hide();
+		o_out();
 	});
-
+	$('body').keydown(function(e){
+		if(e.which == 27)shut_center();
+		});
+	$('#overlay').click(function(){
+		shut_center();
+		});
+	$('#overlay').children().click(function(e){
+		e.stopPropagation();
+		});
+	
 	$('a.subscribe').click(function(){
 		if($('.subs_suc').is(':visible'))return false;
+		o_in();
 		$('.subs_input').show().find('input[type=text]').val('');
 		$('.subs_err').hide();
 	});
@@ -61,7 +95,7 @@ $(function(){
 		return false;
 	});
 	$('.subs_suc :input').click(shut_center);
-
+	
 	function isEmail(str){
        var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
        return reg.test(str);
@@ -298,23 +332,23 @@ $(function(){
 		}
 		$(this).attr('href',$input.attr('alt'));
 		});
+
 /*reg_suc*/
-    var urls = $('.reg_suc a').attr('href');
-    if(urls){
-        var timer_num =5;
-        function timer(){
-            if(timer_num == 0){
-                window.location=urls;
-                return false;
-                }
-            timer_num--;
-            $('.reg_suc span.cr').text(timer_num);
-            }
-        setInterval(timer,1000);
-    }
+	var urls = $('.reg_suc a').attr('href');
+	if(urls){
+		var timer_num =5;
+		function timer(){
+			if(timer_num == 0){
+				window.location=urls;
+				return false;
+				}
+			timer_num--;
+			$('.reg_suc span.cr').text(timer_num);
+			}
+		setInterval(timer,1000);
+	}
 });
 /*pass_check*/
-
 $(function(){
 	$('.pass_check').keyup(function(){
 		var short = $('#short').text();
