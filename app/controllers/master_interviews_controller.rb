@@ -1,0 +1,2 @@
+class MasterInterviewsController < ApplicationController
+end

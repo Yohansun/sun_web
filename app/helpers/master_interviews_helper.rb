@@ -1,0 +1,2 @@
+module MasterInterviewsHelper
+end

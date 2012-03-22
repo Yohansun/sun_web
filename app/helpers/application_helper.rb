@@ -25,21 +25,19 @@ module ApplicationHelper
         return { :css => ["index"] }
       when "register"
         return { :css => ["reg"], :js => ["location.js","LinkageSelect.js"] }
-      when /master_hall|contact/
+      when /^master|contact/
         return { :css => ["style"], :pic_path => "/assets/master/title_master.png" }
       when "channel"
         return { :css => ["news"], :pic_path => "/assets/news/title_owner.png" }
-      when "utility"
+      when "faqs"
+        return { :css => ["news"], :pic_path => "/assets/news/title_owner.png" }
+      when "softwares"
         return { :css => ["news"], :js => ["myfocus"],:pic_path => "/assets/news/title_tools.png" }
-      when "design_appreciation"
-        if action_name == "design"
-          return { :css => ["style", "/fancybox/jquery.fancybox.css", "/fancybox/helpers/jquery.fancybox-buttons.css"], :js => ["jquery.fancybox.js", "/fancybox/helpers/jquery.fancybox-buttons.js", "jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
-        elsif action_name == "upload_ins1"
-          return { :css => ["reg"] }
-        else
-          return { :css => ["style"], :js => ["jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
-        end
-      when "activities"
+      when "designs"
+        return { :css => ["style", "/fancybox/jquery.fancybox.css", "/fancybox/helpers/jquery.fancybox-buttons.css"], :js => ["jquery.fancybox.js", "/fancybox/helpers/jquery.fancybox-buttons.js", "jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
+      when "inspirations"
+        return { :css => ["style"], :js => ["jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
+      when "events"
         return { :css => ["news"], :pic_path => "/assets/news/title_event.png" }
       when "function"
         return { :css => ["reg"] }

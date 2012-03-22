@@ -120,7 +120,7 @@
 		}
 	},
 	Method={
-		isIE:!(+[1]),
+		isIE:!(+[1,]),
 		switchMF:function(fn1,fn2,isless,dir,wrap){
 			return "var _F=this,_ld=_F.$c('loading',box),less="+isless+",_tn,first=true,_dir="+dir+"||'left',_dis=_dir=='left'||_dir=='right'?par.width:par.height,_wp=less&&("+wrap+"||pics),index=par.index,_t=par.time*1000;if(less){_wp.style[_dir]=-_dis*n+'px';index+=n;}if(_ld)box.removeChild(_ld);var run=function(idx){("+fn1+")();var prev=index;if(less&&index==2*n-1&&_tn!=1){_wp.style[_dir]=-(n-1)*_dis+'px';index=n-1}if(less&&index==0&&_tn!=2){_wp.style[_dir]=-n*_dis+'px';index=n}if(!less&&index==n-1&&idx==undefined)index=-1;if(less&&idx!==undefined&&index>n-1&&!_tn&&!first) idx+=n;var next=idx!==undefined?idx:index+1;if("+fn2+")("+fn2+")();index=next;_tn=first=null;};run(index);if(_t&&par.auto)var auto=setInterval(function(){run()},_t);_F.addEvent(box,'mouseover',function(){if(auto)clearInterval(auto)});_F.addEvent(box,'mouseout',function(){if(auto)auto=setInterval(function(){run()},_t)});for(var i=0,_lk=_F.$$('a',box),_ln=_lk.length;i<_ln;i++) _lk[i].onfocus=function(){this.blur();}"
 		},

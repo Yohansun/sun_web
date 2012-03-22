@@ -13,6 +13,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.boolean :des_status, :default => true  #设计师注册页面‘目前状态’
       t.string :inauguration_company           #设计师注册页面‘就职公司’
       t.string :inauguration_address           #设计师注册页面‘就职地址’
+      t.string :current_school                 #设计师注册页面‘在读学校’
+      t.string :school_address                 #设计师注册页面‘学校地址’
 
       t.boolean :recommended, :default => true #设计师和公司用户‘是否有推荐人’
       t.integer :recommended_id                #推荐人用户名

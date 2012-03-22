@@ -9,31 +9,41 @@ Icolor::Application.routes.draw do
     match "/users/data_valid" => "users/register#data_valid"
   end
 
+  #订阅电子期刊和在线客服
   post "/maillists" => "maillists#create"
   post "/site_messages" => "site_messages#create"
 
-  match "/master_hall/list" => "master_hall#list"
-  match "/master_hall/master" => "master_hall#master"
-  match "/master_hall/topics" => "master_hall#topics"
-  match "/master_hall/topic" => "master_hall#topic"
-  match "/master_hall/works_list" => "master_hall#works_list"
-  match "/master_hall/works_detail" => "master_hall#works_detail"
+  #大师殿堂
+  match "/master_interviews" => "master_interviews#index"
+  match "/master_interviews/:id" => "master_interviews#show"
+  match "/master_topics" => "master_topics#index"
+  match "/master_topics/:id" => "master_topics#show"
+  match "/master_designs" => "master_designs#index"
+  match "/master_designs/:id" => "master_designs#show"
 
+  #叶主通道
+  match "/faqs" => "faqs#index"
+  match "/faqs/:id" => "faqs#show"
   match "/channel/access" => "channel#access"
-  match "/channel/faq" => "channel#faq"
   match "/channel/service" => "channel#service"
 
-  match "/utility/app" => "utility#app"
-  match "/utility/case" => "utility#case"
-  match "/utility/tools" => "utility#tools"
+  #实用工具
+  match "/softwares/app" => "softwares#app"
+  match "/softwares/case" => "softwares#case"
+  match "/softwares/tools" => "softwares#tools"
 
   match "/contact" => "contact#index"
 
-  match "/design_appreciation/design" => "design_appreciation#design"
-  match "/design_appreciation/inspiration" => "design_appreciation#inspiration"
-  match "/design_appreciation/upload" => "design_appreciation#upload_ins1"
+  #设计鉴赏
+  match "/designs" => "designs#index"
+  match "/designs/:id" => "designs#show"
+  match "/inspirations" => "inspirations#index"
+  match "/inspirations/:id" => "inspirations#show"
+  match "/inspiration/:id/fullscreen" => "inspirations#fullscreen"
 
-  match "/activities/event" => "activities#event"
+  #精彩活动
+  match "/events" => "events#index"
+  match "/events/:id" => "events#show"
 
   match "/info_list" => "function#infolist"
   match "/info" => "function#info"

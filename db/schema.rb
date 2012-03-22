@@ -275,6 +275,8 @@ ActiveRecord::Schema.define(:version => 20120320101305) do
     t.boolean  "des_status",             :default => true
     t.string   "inauguration_company"
     t.string   "inauguration_address"
+    t.string   "current_school"
+    t.string   "school_address"
     t.boolean  "recommended",            :default => true
     t.integer  "recommended_id"
     t.string   "name"

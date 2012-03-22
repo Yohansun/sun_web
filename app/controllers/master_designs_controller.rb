@@ -1,0 +1,2 @@
+class MasterDesignsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class WeeklyStarsController < ApplicationController
+end

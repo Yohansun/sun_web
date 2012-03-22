@@ -15,10 +15,13 @@
       <%- end %>
     <%- end %>
     <%= yield  :head %>
+    <!--[if IE]>
+    <link href="/ie.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
     <!--[if IE 6]>
     <script src="/png.js"></script>
     <script>
-      PNG.fix('img,div,a,ul,li,h2,strong,span,p');
+    PNG.fix('img,div,a,ul,li,h2,strong,span,p');
     </script>
     <![endif]-->
   </head>
@@ -58,18 +61,18 @@
         </div><!--navTop ends-->
         <ul class="navBot fr cw fb ft14">
           <li><a href="index.html">首页</a></li>
-          <li class="pr"><a href="master.html">大师殿堂</a>
+          <li class="pr"><a href="/master_interviews">大师殿堂</a>
           <ul>
-            <li><a href="#">大师访谈</a></li>
-            <li><a  href="#">热点话题</a></li>
-            <li class="noborder"><a href="#">大师作品</a></li>
+            <li><a href="/master_interviews">大师访谈</a></li>
+            <li><a  href="/master_topics">热点话题</a></li>
+            <li class="/master_designs"><a href="/master_designs">大师作品</a></li>
           </ul>
           </li>
-          <li><a href="design.html">设计鉴赏</a></li>
+          <li><a href="/designs">设计鉴赏</a></li>
           <li><a href="news.html">行业资讯</a></li>
-          <li><a href="event.html">精彩活动</a></li>
+          <li><a href="/events">精彩活动</a></li>
           <li><a href="tools.html">实用工具</a></li>
-          <li><a href="access.html">业主通道</a></li>
+          <li><a href="/faqs">业主通道</a></li>
           <li class="noborder"><a href="arts.html">漆光艺彩</a></li>
         </ul><!--navBot ends-->
       </div><!--nav ends-->
@@ -180,16 +183,16 @@
       </div><!--links ends-->
       <div class='bot_map w_995 ft12 clear'>
         <ul>
-          <li><a href="#" class='fb'>大师殿堂</a></li>
-          <li><a href="/master_hall/list">大师访谈</a></li>
-          <li><a href="/master_hall/topics">热点话题</a></li>
-          <li><a href="/master_hall/works_list">大师作品</a></li>
+          <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
+          <li><a href="/master_interviews">大师访谈</a></li>
+          <li><a href="/master_topics">热点话题</a></li>
+          <li><a href="/master_designs">大师作品</a></li>
         </ul>
         <ul>
-          <li><a href="#" class='fb'>设计鉴赏</a></li>
+          <li><a href="/designs" class='fb'>设计鉴赏</a></li>
           <li><a href="#">每周之星</a></li>
-          <li><a href="/design_appreciation/design">推荐作品</a></li>
-          <li><a href="/design_appreciation/inspiration">灵感秀</a></li>
+          <li><a href="/designs">推荐作品</a></li>
+          <li><a href="/inspirations">灵感秀</a></li>
         </ul>
         <ul>
           <li><a href="#" class='fb'>行业资讯</a></li>
@@ -200,20 +203,20 @@
         <ul>
           <li><a href="#" class='fb'>精彩活动</a></li>
           <li><a href="#">年度色彩趋势活动</a></li>
-          <li><a href="/activities/event">设计师活动</a></li>
+          <li><a href="/events">设计师活动</a></li>
           <li><a href="#">其他精彩活动</a></li>
         </ul>
         <ul>
-          <li><a href="#" class='fb'>实用工具</a></li>
-          <li><a href="">配色工具</a></li>
-          <li><a href="/utility/app">设计师APP</a></li>
+          <li><a href="/softwares/case" class='fb'>实用工具</a></li>
+          <li><a href="/softwares/tools">配色工具</a></li>
+          <li><a href="/softwares/app">设计师APP</a></li>
         </ul>
         <ul>
           <li>
           <a href="#" class='fb'>业主通道</a>
           </li>
           <li><a href="/channel/access">片区快查</a></li>
-          <li><a href="/channel/faq">装修问答</a></li>
+          <li><a href="/faqs">装修问答</a></li>
           <li><a href="/channel/service">在线配色服务</a></li>
         </ul>
         <ul class="ul_last">
