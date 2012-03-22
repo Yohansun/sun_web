@@ -4,14 +4,15 @@ class Users::RegisterController < Devise::RegistrationsController
 
   def create
     @messages = ""
+    valid_result = data_valid
     rebuild_params
 
-    if data_valid.size > 0
-      data_valid.each do |key, value|
+    if valid_result.size > 0
+      valid_result.each do |key, value|
         @messages << "*" + value + '\n'
       end
       return @messages
-    elsif data_valid.length == 0 && params[:is_read].nil?
+    elsif valid_result.length == 0 && params[:is_read].nil?
       @messages << "*您还没有接受会员注册协议！" + '\n'
       return @messages
     end
@@ -91,9 +92,9 @@ class Users::RegisterController < Devise::RegistrationsController
 
     #设计师注册页面‘就职公司’，‘就职地址’，‘在读学校’，‘学校地址’
     if params[:user][:des_status] == "1"
-      set_flash_message :inauguration_company, :inauguration_company_blank if params[:user][:inauguration_company].blank?
+      set_flash_message(:inauguration_company, :inauguration_company_blank) if params[:user][:inauguration_company].blank?
     else
-      set_flash_message :current_school, :current_school_blank if params[:user][:current_school].blank?
+      set_flash_message(:current_school, :current_school_blank) if params[:user][:current_school].blank?
     end
 
     # 推荐人验证
@@ -101,7 +102,7 @@ class Users::RegisterController < Devise::RegistrationsController
       if params[:user][:recommended_name].blank?
         set_flash_message :recommended_name, :recommended_name_blank
       else
-        set_flash_message :recommended_name, :recommended_name if !User.exists?(:username => params[:user][:recommended_name])
+        set_flash_message(:recommended_name, :recommended_name) if !User.exists?(:username => params[:user][:recommended_name])
       end
     end
 
