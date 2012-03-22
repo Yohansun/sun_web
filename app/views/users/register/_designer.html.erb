@@ -1,14 +1,20 @@
 <div class="reg_list reg_bd_top reg_width fl">
   <label for="uesername"><span>*</span>目前状态：</label>
-  <input type="radio" class="radio_btn fl" checked="checked" name="user[des_status]" value="1" />
+  <input type="radio" class="status radio_btn fl" checked="checked" name="user[des_status]" value="1" />
   <span class="recommand fl" >在职</span>
-  <input type="radio" name="user[des_status]" value="0" class="radio_btn fl" name="user[des_status]" value="0"/>
+  <input type="radio" value="0" class="status radio_btn fl" name="user[des_status]" value="0"/>
   <span class="recommand fl" >在读</span>
   <div class="user_details">
     <label for="uesername"><span>*</span>就职公司：</label>
     <input type="text" class="company fl" name="user[inauguration_company]" />
     <label for="uesername">就职地址：</label>
     <input type="text" class="company fl" name="user[inauguration_address]"/>
+  </div><!--user_details ends-->
+  <div class="user_details none">
+    <label for="uesername"><span>*</span>在读学校：</label>
+    <input type="text" class="company fl" name="user[current_school]"/>
+    <label for="uesername">学校地址：</label>
+    <input type="text" class="company fl" name="user[school_address]"/>
   </div><!--user_details ends-->
 </div><!--reg_list ends-->
 <div class="reg_list reg_width fl">
@@ -45,7 +51,7 @@
     <% year  = resource.date_of_birth.year rescue nil %>
     <% month = resource.date_of_birth.month rescue nil %>
     <% day   = resource.date_of_birth.day rescue nil %>
-    <%= select_tag 'user[date_of_birth(1i)]', options_for_select((1900..(Date.today.year)).to_a, year), :class => "fl", :prompt => "请选择" %>
+    <%= select_tag 'user[date_of_birth(1i)]', options_for_select((1900..(Date.today.year)).to_a.reverse, year), :class => "fl", :prompt => "请选择" %>
     <span class="fl">年</span>
     <%= select_tag 'user[date_of_birth(2i)]', options_for_select((1..12).to_a, month), :class => "fl", :prompt => "请选择" %>
     <span class="fl">月</span>
@@ -77,20 +83,3 @@
   <input type="text" class="username fl" name="user[phone]"/>
   <span class="reg_tip3 fl">请填写您常用电话以便通知获奖信息</span>
 </div><!--reg_list ends-->
-<script type="text/javascript" charset="utf-8">
-$(function(){
-  var options = {
-    data  : data
-  }
-
-  var sel = new LinkageSelect(options);
-  sel.bind('.level_1');
-  sel.bind('.level_2');
-  sel.bind('.level_3');
-
-  $("#captcha input").focus(function(){
-    $('#captcha').removeClass('onerror');
-  });
-
-});
-</script>

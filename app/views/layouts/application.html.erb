@@ -15,10 +15,13 @@
       <%- end %>
     <%- end %>
     <%= yield  :head %>
+    <!--[if IE]>
+    <link href="/ie.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
     <!--[if IE 6]>
     <script src="/png.js"></script>
     <script>
-      PNG.fix('img,div,a,ul,li,h2,strong,span,p');
+    PNG.fix('img,div,a,ul,li,h2,strong,span,p');
     </script>
     <![endif]-->
   </head>

@@ -47,7 +47,7 @@ Icolor::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
    config.assets.precompile += ['jquery.fancybox.js','LinkageSelect.js','location.js','main.js',
-                                'base.css','ie.css','news.css','reg.css','reset.css','style.css','index.css','jquery.masonry.js','myfocus.js'
+                                'base.css','news.css','reg.css','reset.css','style.css','index.css','jquery.masonry.js','myfocus.js'
                                 ]
 
   # Disable delivery errors, bad email addresses will be ignored

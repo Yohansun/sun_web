@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
                   :recipient_address, :zip_code, :phone, :sex, :recommended_name,
                   :des_status, :date_of_birth, :recommended, :state, :city, :district,
                   :role_id, :founded_of_company, :company_address, :name_of_company,
-                  :recipient_address
+                  :recipient_address,:current_school,:school_address
 
   attr_accessor :login, :recommended_name, :state, :city, :district
 
