@@ -1,2 +1,0 @@
-class MasterHallController < ApplicationController
-end

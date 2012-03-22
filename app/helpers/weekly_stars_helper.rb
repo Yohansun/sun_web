@@ -1,0 +1,2 @@
+module WeeklyStarsHelper
+end

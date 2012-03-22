@@ -1,0 +1,2 @@
+class MasterTopicsController < ApplicationController
+end

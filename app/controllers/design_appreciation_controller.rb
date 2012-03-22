@@ -1,2 +1,0 @@
-class DesignAppreciationController < ApplicationController
-end
