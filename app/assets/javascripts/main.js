@@ -34,23 +34,7 @@ $(function(){
 		if(txt=='')
 		$(this).hide();
 	});
-	$('#server_submit').click(function(){
-		var $area = $(this).parents('.server_input').find('textarea')
-		var txt = $area.val();
-		if(txt!='')
-		{
-			$('.server_input').hide();
-            $('.server_suc').show();
-		}
-		else{
-			$area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
-            $area.animate({opacity:0.5},200);
-            $area.animate({opacity:1},200);
-            $area.animate({opacity:0.5},200,function(){
-            $area.css({background:"none",opacity:1});
-            });
-		}
-	});
+
 	$('#server_close').click(function(){
 		$(this).parents('.server_suc').hide();
 	});
