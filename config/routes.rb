@@ -21,9 +21,14 @@ Icolor::Application.routes.draw do
   match "/master_designs" => "master_designs#index"
   match "/master_designs/:id" => "master_designs#show"
 
-  #叶主通道
+  #业主通道
   match "/faqs" => "faqs#index"
   match "/faqs/:id" => "faqs#show"
+
+  #装修资讯
+  match "/articles" => "articles#index"
+  match "/articles/:id" => "articles#show"
+
   match "/channel/access" => "channel#access"
   match "/channel/service" => "channel#service"
 

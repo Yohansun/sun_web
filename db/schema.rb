@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120320101305) do
+ActiveRecord::Schema.define(:version => 20120322125128) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -188,9 +188,13 @@ ActiveRecord::Schema.define(:version => 20120320101305) do
     t.text     "body"
     t.integer  "admin_id"
     t.integer  "subject_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
     t.datetime "published_at"
+    t.string   "preview_img_file_name"
+    t.string   "preview_img_content_type"
+    t.integer  "preview_img_file_size"
+    t.datetime "preview_img_updated_at"
   end
 
   create_table "products", :force => true do |t|

@@ -25,3 +25,4 @@ gem "magic_admin", :git => "git@github.com:nioteam/magic_admin.git"
 gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
 
 gem "devise"
+gem 'kaminari'
