@@ -1,0 +1,47 @@
+<div class="main industry_news">
+	<div class='sub_title tr'>
+		<img src="/assets/design/title_news.png" />
+	</div>
+	<div class='sub_nav ft12 pr tr'>
+		<a href="#">首页</a><span class="arrow_1"></span><a href="#">行业资讯</a><span class="arrow_2"></span><a class="fb" href="#">装修资讯</a>
+	</div><!--sub_nav ends-->
+	<div class="wrapper group news_detail">
+		<div class="news_top clear ft12">
+			<a href="#" class="active">全部</a>
+			<a href="#">设计相关</a>
+			<a href="#">产品相关</a>
+		</div>
+		<div class="shadow news_detail_main">
+			<div class="section">
+				<div class="title">
+					<h1><%= @article.title %></h1>
+					<div class="info">
+						<div class="from">来源：中华室内设计网</div>
+						<div class="time">时间：<%= @article.published_at %></div>
+                        <%= render :partial => 'jiathis_button' %>
+					</div>
+				</div>
+				<div class="news_content">
+                  <%= raw @article.body %>
+				</div>
+				<%= render :partial => 'news_footer' %>
+		    </div>
+		<%= render :partial => 'news_detail_side' %>
+	</div>
+	<div class='sub_bot pr'>
+		<div class="pager ft12">
+					<a class="prev" href="#"><span></span>上一页</a>
+					<a href="#">1</a>
+					<a href="#" class="current">2</a>
+					<a href="#">3</a>
+					<a href="#">4</a>
+					<a href="#">5</a>
+					<a href="#">6</a>
+					<a href="#">7</a>
+					<a href="#">8</a>
+					<a href="#">...</a>
+					<a href="#">20</a>
+					<a class="next" href="#">下一页<span></span></a>
+				</div>
+	</div><!--sub_bot ends-->
+</div>

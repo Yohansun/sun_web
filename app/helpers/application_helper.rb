@@ -41,6 +41,8 @@ module ApplicationHelper
         return { :css => ["reg"] }
       when "industry_news"
         return { :css => ["news"], :pic_path => "/assets/news/title_news.png" }
+      when "articles"
+        return { :css => ["news","industry_news"], :pic_path => "/assets/news/title_news.png" }
     end
   end
 end
