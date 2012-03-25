@@ -1,0 +1,16 @@
+<div class="content">
+	<div class="title"><h5>大师档案</h5>
+		<div class="num">
+			<%= link_to '返回', subject_master_profiles_path(parent), :class => "redNum" %>
+			<%= link_to '编辑', edit_subject_master_profile_path(parent, resource), :class => "redNum" %>
+		</div>
+	</div>
+	<%- unless resource.intro.blank? -%>
+	<blockquote><%= raw resource.intro %></blockquote>
+	<%- end -%>
+	<div class="widget first">
+		<div class="head"><h5 class="iCreate"><%= resource.title %></h5></div>
+		<div class="body"><%= raw resource.body %></div>
+	</div>
+</div>
+</div>
