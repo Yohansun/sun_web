@@ -1,0 +1,2 @@
+class DesignerEventsController < ApplicationController
+end

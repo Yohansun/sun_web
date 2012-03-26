@@ -11,8 +11,8 @@ body{background:url(/assets/bg.jpg) no-repeat center top;/*overflow-x:hidden;*/*
 .navLabel a{color:#8f8f8f;}
 .login{background:url(/assets/login.png) center 13px no-repeat;width:40px;height:21px;margin:0 6px;padding:23px 2px 0 2px;border-width:0 1px;border-style:solid;border-color:#fff;}
 a.login:hover,.logHover{border-color:#d9d9d9;}
-.loginBg{background:url(/assets/loginBg.png) no-repeat;width:315px;height:313px;left:50%;top:44px;z-index:106;margin-left:83px;}
-.loginCon{width:260px;margin:23px auto;}
+.loginBg{background:url(/assets/loginBg.png) no-repeat;width:315px;height:313px;left:50%;top:44px;z-index:106;margin-left:83px;padding-top:23px;}
+.loginCon{width:260px;margin:0 auto;}
 label.username{padding-top:5px;}
 label.password{padding-top:12px;}
 input#username{width:208px;color:#aeaeae;}
@@ -23,13 +23,14 @@ span.tips a:hover{text-decoration:underline;}
 input#login{margin-left:42px;float:left;display:inline;}
 .checkbox{margin:10px;color:#aeaeae;}
 .checkbox input{float:left;display:inline;margin-right:5px;}
-.border{border:dotted #999;border-width:1px 0;padding:10px 0;margin-bottom:9px;}
-.border ul li{float:left;display:inline;margin:6px;}
-.border ul img{ float:left;margin:-2px 2px 0 0;}
+.border{border-top:1px dotted #999;padding:10px 0;}
+ul.border li{float:left;display:inline;padding:0 5px;border-right:1px solid #dbdbdb;}
+ul.border img{ float:left;margin:-2px 2px 0 0;}
 .border a{color:#0058a2;}
-.border a.more{margin:5px auto;display:block;width:37px;}
-.loginBg div.tc{width:137px;margin:0 auto;color:#202020;}
-.loginBg div.tc a{background:url(/assets/register.jpg) no-repeat;width:137px;height:32px;margin-top:12px;display:block;}
+.reg_now{background:url(/assets/register.jpg) no-repeat;width:137px;height:32px;}
+.loginCon p.fl{margin:9px;color:#000;}
+.err_tips{background:#fffde4 url(/assets/news/labels.png) 10px center no-repeat;width:200px;height:26px;line-height:26px;text-indent:2em;border:1px solid #e7e4d9;top:0;right:34px;}
+.err_tips span.fr{color:#303030;margin:-7px 5px;}
 
 .reg{background:url(/assets/reg.png) no-repeat;width:64px;height:21px;margin-top:13px;}
 .nippon{background:url(/assets/nippon.png) no-repeat;width:90px;height:38px;margin:5px;}
@@ -86,7 +87,7 @@ span.arrow_2{right:87px;_right:92px;}
 .shadow{background:#e5e5e5;border:1px solid #e5e5e5;padding:0 2px 2px 0;}
 
 .sub_bot .pager{margin-top:28px;}
-.pager{width:388px;margin:0 auto; padding:3px 0;_padding:4px 0;}
+.pager{/*width:388px;*/text-align:center;margin:0 auto; padding:3px 0;_padding:4px 0;}
 .pager a{background:#fff;color:#7f7f7f;padding:0.2em 0.5em;border:1px solid #d1d1d1;}
 .pager a:hover,.pager a.current{color:#bb0e0e;}
 
@@ -106,7 +107,7 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .server_content textarea{border:1px solid #9E9D9D;width:400px;height:86px;font-weight:bold;margin:10px 0;padding:5px;}
 .server_content a{text-decoration:underline;}
 
-.subs_input,.subs_suc{background:#fff;border:5px solid #666;width:483px;height:214px;margin-left:-246px;margin-top:-112px;}
+.subs_input,.subs_suc,.smile,.guest_subs{background:#fff;border:5px solid #666;width:483px;height:214px;margin-left:-246px;margin-top:-112px;}
 .abs_center{position:absolute;left:50%;top:50%;z-index:999;}
 .subs_title{height:22px;background:#f5f5f5;border-bottom:1px solid #e6e6e6;padding:8px;color:#959494;}
 .close_btn{background:url(/assets/close_btn.jpg) no-repeat;width:21px;height:21px;}
@@ -116,5 +117,17 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .subs_content p{color:#666;line-height:20px;}
 .subs_content p.subs_err{line-height:30px;color:#760000;}
 .subs_submit input{margin-top:12px;}
+
+.smile img{margin:25px 20px 0 60px;float:left;display:inline;}
+.smile p.fl{width:286px;}
+.smile p.ft22{font-size:22px;color:#c27c02;clear:right;margin:35px 0 8px;}
+.guest_subs{height:228px;}
+.guest_subs .subs_content{height:131px;}
+.guest_subs p.ft12{line-height:33px;}
+.guest_subs a{color:#960808;text-decoration:underline;}
+
+.unlogin{background:#fff;border:5px solid #666;width:304px;height:339px;margin-left:-152px;margin-top:-170px;}
+.unlogin .subs_title{margin-bottom:20px;}
+.unlogin .err_tips{top:30px;}
 
 #overlay{background:url(/assets/overlay.png);position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:none;}

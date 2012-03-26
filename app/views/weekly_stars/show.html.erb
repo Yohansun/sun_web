@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>幻灯片</title>
+    <meta charset="utf-8" />
+    <%= stylesheet_link_tag  "reset","galleryc"  %>
+    <%= javascript_include_tag  "jquery","galleryC"  %>
+  </head>
+  <body>
+    <div class="galleryC_wrap">
+      <div class="title"><h1>深圳颐林雅苑时间简约家<span>(1/18)</span></h1></div>
+      <div class="galleryC">
+        <div class="toolbar">
+          <div class="toolbar_wrap">
+            <div class="time"><span>10秒</span></div>
+            <div class="prev"></div>
+            <div class="pause"></div>
+            <div class="next"></div>
+            <div class="exit"><a href="#">退出全屏</a></div>
+          </div>
+        </div>
+        <div class="big_image"></div>
+        <div class="moveleft"></div>
+        <div class="moveright"></div>
+      </div>
+    </div>
+    <div class="gallery_over_wrap">
+      <div class="gallery_over">
+        <h5 class="legend">您已浏览完所有图片</h5>
+        <div class="button"><span class="replay"><a href="#">重新播放</a></span></div>
+        <div class="more">
+          <p>观看<a href="#">2012.5.3</a>往期作品</p>
+          <ul><li><a href="#"><img src="/assets/design/pe1.jpg"></a></li>
+            <li><a href="#"><img src="/assets/design/pe1.jpg"></a></li>
+            <li><a href="#"><img src="/assets/design/pe1.jpg"></a></li>
+            <li><a href="#"><img src="/assets/design/pe1.jpg"></a></li>
+            <li><a href="#"><img src="/assets/design/pe1.jpg"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="gallery_over_mask"></div>
+    <script type="text/javascript">
+      $(function(){
+          var obj = galleryC({ 'images' : ['/assets/design/pd1.jpg', '/assets/design/pd2.jpg', '/assets/design/pd3.jpg']});
+          $('div.gallery_over span.replay a').click(function(e){
+            $('div.gallery_over_wrap').hide();
+            $('div.gallery_over_mask').hide();
+            obj.showImage(0);
+            e.preventDefault();
+            });
+          });
+    </script>
+    </body>
+</html>

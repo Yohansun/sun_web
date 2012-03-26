@@ -27,7 +27,7 @@
     </script>
     <![endif]-->
   </head>
-  <body style="<%= 'height:100%;' if controller_name =~ /master_hall|design_appreciation/%>">
+  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>">
     <div class="header">
       <div class="nav pa">
         <a href="#" class="logo fl"></a>
@@ -72,7 +72,7 @@
           </li>
           <li class="pr"><a href="javascript:void(0)">设计鉴赏</a>
           <ul>
-            <li><a href="">每周之星</a></li>
+            <li><a href="/weekly_stars">每周之星</a></li>
             <li><a  href="/designs">推荐作品</a></li>
             <li><a  href="/inspirations">灵感秀</a></li>
             <li class="noborder"><a href="#">色彩搭配</a></li>
@@ -80,16 +80,16 @@
           </li>
           <li class="pr"><a href="javascript:void(0)">行业资讯</a>
           <ul>
-            <li><a href="#">色彩资讯</a></li>
+            <li><a href="/color_articles">色彩资讯</a></li>
             <li><a  href="/articles">装修资讯</a></li>
             <li class="noborder"><a href="#">微博资讯</a></li>
           </ul>
           </li>
           <li class="pr"><a href="javascript:void(0)">精彩活动</a>
           <ul>
-            <li><a href="#">年度色彩趋势活动</a></li>
+            <li><a href="/designer_events">年度色彩趋势活动</a></li>
             <li><a  href="/events">设计师活动</a></li>
-            <li class="noborder"><a href="#">其他精彩活动</a></li>
+            <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
           </ul>
           </li>
           <li class="pr"><a href="javascript:void(0)">实用工具</a>

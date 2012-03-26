@@ -1,24 +1,24 @@
 <%- content_for :head do %>
-  <script type="text/javascript">
-    $(function() {
-        $('#inspiration').masonry();
+    <script type="text/javascript">
+        $(function() {
+            $('#inspiration').masonry();
         });
-</script>
-<style type="text/css">
-  span.arrow_1 {
-    right: 144px;
-    _right: 151px;
-  }
+    </script>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 144px;
+            _right: 151px;
+        }
 
-  span.arrow_2 {
-    right: 77px;
-    _right: 82px;
-  }
-</style>
+        span.arrow_2 {
+            right: 77px;
+            _right: 82px;
+        }
+    </style>
 <%- end %>
 <div class="main">
   <div class='sub_title tr pt25'>
-    <img src='<%= set_style[:pic_path] %>' />
+    <img src='/assets/design/title_design.png' />
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">灵感秀</a>
@@ -39,7 +39,7 @@
     </div>
     <div class="inspiration_result">
       <div id="inspiration" class="row group">
-        <div><img src="/assets/design/inspiration_show1.1.jpg" alt="" />
+        <div><a href="/inspirations/1"><img src="/assets/design/inspiration_show1.1.jpg" alt="" /></a>
           <h3>wherewhatwho 万花筒衬衫</h3>
           <p class="p0 group"><span class="nopl">Charles</span><span class="result_time nopl">2012-2-14</span></p>
           <p class="p1 group">

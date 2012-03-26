@@ -46,13 +46,7 @@ Icolor::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-
-  #******************************************请按照JS 和 CSS 分开类写以便于检查***************************************
-   config.assets.precompile += ['jquery.fancybox.js','LinkageSelect.js','location.js','main.js','jquery.masonry.js',
-                                'myfocus.js','galleryM.js','index.js',
-                                'base.css','news.css','reg.css','reset.css','style.css','index.css'
-                                ]
-  #******************************************请按照JS 和 CSS 分开来写以便于检查***************************************
+  config.assets.precompile += ['*.js','*.css']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
