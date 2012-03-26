@@ -22,7 +22,7 @@ module ApplicationHelper
   def set_style
     case controller_name
       when /designer_events|other_events/
-        return { :css => ["index","exciting_activities"] }
+        return { :css => ["index", "exciting_activities"] }
       when "color_articles"
         return { :css => ["index", "industry_news"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
       when "weekly_stars"
@@ -34,7 +34,7 @@ module ApplicationHelper
       when "channel"
         return { :css => ["news"], :pic_path => "/assets/news/title_owner.png" }
       when "faqs"
-        return { :css => ["news","owners_channel"], :pic_path => "/assets/news/title_owner.png" }
+        return { :css => ["news", "owners_channel"], :pic_path => "/assets/news/title_owner.png" }
       when "softwares"
         return { :css => ["news"], :js => ["myfocus"], :pic_path => "/assets/news/title_tools.png" }
       when "designs"
@@ -53,7 +53,22 @@ module ApplicationHelper
       when "industry_news"
         return { :css => ["news"], :pic_path => "/assets/news/title_news.png" }
       when "articles"
-        return { :css => ["news","industry_news"], :pic_path => "/assets/news/title_news.png" }
+        return { :css => ["news", "industry_news"], :pic_path => "/assets/news/title_news.png" }
     end
   end
+
+  #Display a custom sign_in form anywhere in your app
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
 end

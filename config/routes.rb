@@ -61,6 +61,13 @@ Icolor::Application.routes.draw do
 
   match "/industry_news/news" => "industry_news#news"
 
+  #扩充magic_contetn
+  scope "/admin/content", :module => "magic_content" do
+    resources :subjects do
+      resources :master_profiles
+    end
+  end
+
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
   mount MagicContent::Engine => '/admin/content', :as => 'magic_content'
   mount MagicAdmin::Engine => '/admin', :as => 'magic_admin'

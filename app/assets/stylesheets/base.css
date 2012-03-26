@@ -1,10 +1,11 @@
 @charset "utf-8";
 body{background:url(/assets/bg.jpg) no-repeat center top;/*overflow-x:hidden;*/*position:relative;}
 .nav{background:url(/assets/nav.png) no-repeat;width:1002px;height:97px;top:0;left:50%;margin-left:-501px;z-index:2;}
-.logo{background:url(/assets/logo.png) no-repeat;width:47px;height:57px;margin:14px 0 0 18px;}
+.logo{ float:left; padding:5px 0 5px 10px;}
+/*.logo{background:url(/assets/logo.png) no-repeat;width:47px;height:57px;margin:14px 0 0 18px;}
 .icolor{background:url(/assets/icolor.png) no-repeat;width:99px;height:66px;margin:11px 0 0 20px;}
 .icolor2{background:url(/assets/icolor2.png) no-repeat;width:124px;height:66px;margin:11px 0 0 20px;}
-.weibo{background:url(/assets/weibo.png) no-repeat;width:140px;height:26px;margin-top:9px;}
+*/.weibo{background:url(/assets/weibo.png) no-repeat;width:140px;height:26px;margin-top:9px;}
 .search{background:url(/assets/search.jpg) no-repeat;width:118px;height:25px;padding:4px 0 0 5px;margin:10px 0 0 5px;}
 .search input.fl{width:80px;height:15px;font-size:12px;margin-right:5px;border:0;color:#8F8F8F;}
 .navLabel{height:25px;line-height:25px;margin-top:10px;color:#8F8F8F;position:relative;}
@@ -73,8 +74,9 @@ span.arrow_2{right:87px;_right:92px;}
 .wrapper{background:#fff;width:905px;margin:0 auto;padding: 0 45px;}
 .sub_bot{background:url(/assets/sub_bot.png) no-repeat;width:1043px;height:95px;padding:1px;bottom:12px;}
 .links{background:#fff;padding:15px 0;height:40px;}
+.links .w_995{overflow:hidden;}
 .w_995{width:995px;margin:0 auto;}
-.links a{margin-right:20px;}
+.links a{margin-right:75px; float:left; display:block;}
 .bot_map {margin:28px auto;}
 .bot_map ul{float:left;display:inline;margin-right:90px;*margin-right:70px;}
 .bot_map ul.ul_last{margin-right:0;}
