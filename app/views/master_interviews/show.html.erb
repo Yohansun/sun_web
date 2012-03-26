@@ -15,10 +15,10 @@
   <div class='wrapper pb60'>
     <div class="profile group">
       <div class="video">
-        <img src="/assets/master/video.jpg" alt="" />
+        <img src="/assets/master/video1.jpg" alt="" />
       </div><!--video ends-->
-      <div class="shadow profile_info">
-        <div class="section">
+      <div class="shadow profile_info" style="height:313px;">
+        <div class="section" style="height:313px;">
           <div class="tit_bg"><h2>大师简介MASTER PROFILE</h2></div>
           <p class="profile_name">史迪威</p>
           <p class="line_b_dot"><span>国籍：中国台湾</span><span>领域：建筑景观、室内设计</span></p>
@@ -80,16 +80,24 @@
           <a class="works_next" href="javascript:void(0)"><img src="/assets/master/works_right.png" alt="" /></a>
           <div class="img_box">
             <div class="img_list">
-              <img class="list1" src="/assets/master/works1.jpg" alt="" />
-              <img class="list1" src="/assets/master/works2.jpg" alt="" />
-              <img class="list1" src="/assets/master/works3.jpg" alt="" />
-              <img class="list1" src="/assets/master/works4.jpg" alt="" />
-              <img class="list1" src="/assets/master/works5.jpg" alt="" />
-              <img class="list1" src="/assets/master/works1.jpg" alt="" />
-              <img class="list2" src="/assets/master/works2.jpg" alt="" />
-              <img class="list2" src="/assets/master/works3.jpg" alt="" />
-              <img class="list2" src="/assets/master/works4.jpg" alt="" />
-              <img class="list2" src="/assets/master/works5.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works1.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works2.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works3.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works4.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works5.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works6.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works7.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works8.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works9.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works10.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works11.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works12.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works13.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works14.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works15.jpg" alt="" />
+              <img class="list1" src="/assets/master/works/master1_works16.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works17.jpg" alt="" />
+              <img class="list2" src="/assets/master/works/master1_works18.jpg" alt="" />
             </div>
           </div>
         </div><!--works_slide ends-->
@@ -118,30 +126,30 @@
               }
               })
 
-          $('a.works_pre').click(function(){
-            var $parent = $(this).parent('.works_slide');
-            var $v_list = $parent.find('div.img_list');
-            var $v_box = $parent.children('.img_box');
+$('a.works_pre').click(function(){
+    var $parent = $(this).parent('.works_slide');
+    var $v_list = $parent.find('div.img_list');
+    var $v_box = $parent.children('.img_box');
 
-            var v_width = $v_box.width();
-            var len = $v_list.find('img').length;
-            var page_count = Math.ceil(len/i);
+    var v_width = $v_box.width();
+    var len = $v_list.find('img').length;
+    var page_count = Math.ceil(len/i);
 
-            if(!$v_list.is(':animated')){
-            if(page == 1){
-            $v_list.animate({left:'-='+v_width*(page_count-1)});
-            page = page_count;
+    if(!$v_list.is(':animated')){
+    if(page == 1){
+    $v_list.animate({left:'-='+v_width*(page_count-1)});
+    page = page_count;
 
-            }else{
-            $v_list.animate({left:'+='+v_width});
-            page--;
-            }
-            }
+    }else{
+    $v_list.animate({left:'+='+v_width});
+    page--;
+    }
+    }
 
-            })
+    })
 
 
-  </script>
+</script>
 </div>
 </div>
 <div class="shadow">

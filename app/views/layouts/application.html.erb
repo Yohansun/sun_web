@@ -30,8 +30,10 @@
   <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>">
     <div class="header">
       <div class="nav pa">
-        <a href="#" class="logo fl"></a>
-        <a href="#" class="icolor fl"></a>
+        <div class="logo">
+          <a href="#"><img src="/assets/logo.png" /></a>
+          <a href="#"><img src="/assets/logo2.png" /></a>
+        </div>
         <div class="navTop fr">
           <a href="#" class="weibo fl"></a>
           <div class="search fl">
@@ -86,27 +88,28 @@
           </ul>
           </li>
           <li class="pr"><a href="javascript:void(0)">精彩活动</a>
-          <ul>
+          <ul style="width:140px;">
             <li><a href="/designer_events">年度色彩趋势活动</a></li>
             <li><a  href="/events">设计师活动</a></li>
             <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
           </ul>
           </li>
           <li class="pr"><a href="javascript:void(0)">实用工具</a>
-          <ul>
+          <ul style="width:100px;">
             <li><a href="/softwares/tools">配色工具</a></li>
             <li class="noborder"><a href="/softwares/app">设计师APP</a></li>
           </ul>
           </li>
           <li class="pr"><a href="javascript:void(0)">业主通道</a>
-          <ul>
+          <ul style="width:112px;">
             <li><a href="/channel/access">片区快查</a></li>
             <li><a  href="/faqs">装修问答</a></li>
             <li class="noborder"><a href="/channel/service">在线配色服务</a></li>
           </ul>
           </li>
           <li class="noborder pr"><a href="arts.html">漆光艺彩</a>
-          <ul>
+          <ul style="width:112px;left:-18px;">
+            <li><a href="4-1.html">墙面艺术效果</a></li>
             <li><a href="#">墙面艺术效果</a></li>
             <li class="noborder"><a href="#">木纹风尚生活</a></li>
           </ul>
@@ -117,36 +120,40 @@
       <%= yield  :index %><!--仅仅首页的-->
 
       <div class="loginBg pa none">
+        <div class="err_tips cr ft12 none pa">
+          用户名密码错误
+          <span class="fr cp">x</span>
+        </div><!--err_tips-->
         <div class="loginCon ft12 clear">
-          <form>
+          <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true, :id => "sign_form") do |f| %>
             <div>
               <label for="username" class="username ft14 fl">帐号：</label>
-              <input id="username" type="text" class="fl" value="用户名/邮箱/手机" />
+              <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
             </div>
             <div>
               <label for="password" class="password ft14 fl">密码：</label>
-              <input id="password" type="password" class="fl" />
+              <input id="password" type="password" class="fl" name="user[password]"/>
               <span class="tips tc fr"><a href="#">忘记密码？</a></span>
             </div>
             <input id="login" type="image" src="/assets/login.jpg" />
             <div class="checkbox fl">
               <input type="checkbox" /><span>下次自动登录</span>
             </div>
-          </form>
+          <%- end %>
         </div><!--loginCon ends-->
+        <ul class="loginCon ft12 border clear">
+          <li><a href="#"><img src="/assets/sina.jpg" />新浪微博</a></li>
+          <li><a href="#"><img src="/assets/qq.jpg" />QQ</a></li>
+          <li><a href="#"><img src="/assets/rr.jpg" />人人网</a></li>
+          <li class="noborder"><a href="#"><img src="/assets/kx.jpg" />开心网</a></li>
+        </ul>
         <div class="loginCon ft12 border clear">
-          <ul class="clear">
-            <li><a href="#"><img src="/assets/sina.jpg" />新浪微博</a></li>
-            <li><a href="#"><img src="/assets/qq.jpg" />QQ</a></li>
-            <li><a href="#"><img src="/assets/rr.jpg" />人人网</a></li>
-            <li><a href="#"><img src="/assets/kx.jpg" />开心网</a></li>
-          </ul>
-          <a href="#" class="more">更多》</a>
+          <p class="fl">还没加入iColor?</p>
+          <a href="/users/register/roles" class="reg_now fl"></a>
         </div><!--loginCon ends-->
-        <div class="tc ft14">
-          还没加入iColor?<br />
-          <a href="/users/register/roles"></a>
-        </div><!--tc ends-->
+        <div class="loginCon border">
+          <a href="/users/register/roles"><img src="/assets/reg_ads.jpg" alt="ads" /></a>
+        </div>
       </div><!--loginBg ends-->
     </div>
     <!--header ends-->
@@ -212,13 +219,13 @@
 
     <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
       <div class='links'>
-        <div class='w_995'>
+        <div class='w_995 group'>
           <a href='http://www.nipponpaint.com.cn/'><img src='/assets/link1.jpg' alt="" /></a>
           <a href='http://shop.nipponpaint.com.cn/'><img src='/assets/link2.jpg' alt="" /></a>
           <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src='/assets/link3.jpg' alt="" /></a>
           <a href='http://www.e-jjj.com/'><img src='/assets/link4.jpg' alt="" /></a>
           <a href='http://www.80018.cn/'><img src='/assets/link5.jpg' alt="" /></a>
-          <a href='http://www.pchouse.com.cn/'><img src='/assets/link6.jpg' alt="" /></a>
+          <a class="nomr" href='http://www.pchouse.com.cn/'><img src='/assets/link6.jpg' alt="" /></a>
         </div><!--w_995 ends-->
       </div><!--links ends-->
       <div class='bot_map w_995 ft12 clear'>
