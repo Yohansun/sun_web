@@ -18,7 +18,8 @@
 .owners_form.formB .title h5{width:91px;background-image:url(/assets/design/hon.gif)}
 .owners_form.formB .f_input{width:600px;border:1px solid #a7a7a7}
 .owners_form.formB .f_select_wrap{float:left;padding:2px 16px 2px 2px;border:1px solid #a7a7a7;background:url(/assets/design/arr_bottom.gif) no-repeat right center}
-.owners_form.formB .f_select_wrap div{height:16px;+height:18px;overflow:hidden}
+.owners_form.formB .f_select_wrap div{height:16px;overflow:hidden}
+*+html .owners_form.formB .f_select_wrap div{height:18px;}
 .owners_form.formB .f_select_wrap span{display:block;margin:-1px -17px -1px -1px}
 * html .owners_form.formB .f_select_wrap div{float:left}
 

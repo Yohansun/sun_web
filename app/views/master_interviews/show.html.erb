@@ -76,26 +76,80 @@
       <div class="section">
         <div class="tit_bg"><h2>作品欣赏WORKS</h2></div>
         <div class="works_slide">
-          <a class="works_next" href="javascript:void(0)"><img src="/assets/master/works_left.png" alt="" /></a>
-          <a class="works_pre" href="javascript:void(0)"><img src="/assets/master/works_right.png" alt="" /></a>
-          <div class="img_box" style="overflow:hidden; width:789px;">
-            <div class="img_list" style=" position:relative;height:189px; width:2000px; text-align:left;">
-              <img src="/assets/master/works1.jpg" alt="" />
-              <img src="/assets/master/works2.jpg" alt="" />
-              <img src="/assets/master/works3.jpg" alt="" />
-              <img src="/assets/master/works4.jpg" alt="" />
-              <img src="/assets/master/works5.jpg" alt="" />
+          <a class="works_pre" href="javascript:void(0)"><img src="/assets/master/works_left.png" alt="" /></a>
+          <a class="works_next" href="javascript:void(0)"><img src="/assets/master/works_right.png" alt="" /></a>
+          <div class="img_box">
+            <div class="img_list">
+              <img class="list1" src="/assets/master/works1.jpg" alt="" />
+              <img class="list1" src="/assets/master/works2.jpg" alt="" />
+              <img class="list1" src="/assets/master/works3.jpg" alt="" />
+              <img class="list1" src="/assets/master/works4.jpg" alt="" />
+              <img class="list1" src="/assets/master/works5.jpg" alt="" />
+              <img class="list1" src="/assets/master/works1.jpg" alt="" />
+              <img class="list2" src="/assets/master/works2.jpg" alt="" />
+              <img class="list2" src="/assets/master/works3.jpg" alt="" />
+              <img class="list2" src="/assets/master/works4.jpg" alt="" />
+              <img class="list2" src="/assets/master/works5.jpg" alt="" />
             </div>
           </div>
         </div><!--works_slide ends-->
-      </div>
-    </div>
-    <div class="shadow">
-      <div class="section">
-        <div class="tit_bg"><h2>大师寄语MASTER MESSAGE</h2></div>
-        <p class="master_msg master_icon_bg ft14">中国的设计大多还是非常注重形式上的丰富性，努力营造出奢华、华丽的感觉，但这种表现形式很表面，缺乏从内在散发出气质的部分。就像一个人，要让人觉得他很有内涵，不是仅仅对他进行“美容化妆”就可以，而是要有能够从内发自而外的气质。</p>
-      </div>
-    </div>
-  </div><!--wrapper ends-->
-  <div class='sub_bot pr'></div><!--sub_bot ends-->
+
+        <script type="text/javascript">
+          var page = 1;
+          var i = 5;
+          $('a.works_next').click(function(){
+              var $parent = $(this).parent('.works_slide');
+              var $v_list = $parent.find('div.img_list');
+              var $v_box = $parent.children('.img_box');
+
+              var v_width = $v_box.width();
+              var len = $v_list.find('img').length;
+              var page_count = Math.ceil(len/i);
+
+              if(!$v_list.is(':animated')){
+              if(page == page_count){
+              $v_list.animate({left:'0px'});
+              page = 1;
+
+              }else{
+              $v_list.animate({left:'-='+v_width});
+              page++;
+              }
+              }
+              })
+
+          $('a.works_pre').click(function(){
+            var $parent = $(this).parent('.works_slide');
+            var $v_list = $parent.find('div.img_list');
+            var $v_box = $parent.children('.img_box');
+
+            var v_width = $v_box.width();
+            var len = $v_list.find('img').length;
+            var page_count = Math.ceil(len/i);
+
+            if(!$v_list.is(':animated')){
+            if(page == 1){
+            $v_list.animate({left:'-='+v_width*(page_count-1)});
+            page = page_count;
+
+            }else{
+            $v_list.animate({left:'+='+v_width});
+            page--;
+            }
+            }
+
+            })
+
+
+  </script>
+</div>
+</div>
+<div class="shadow">
+  <div class="section">
+    <div class="tit_bg"><h2>大师寄语MASTER MESSAGE</h2></div>
+    <p class="master_msg master_icon_bg ft14">中国的设计大多还是非常注重形式上的丰富性，努力营造出奢华、华丽的感觉，但这种表现形式很表面，缺乏从内在散发出气质的部分。就像一个人，要让人觉得他很有内涵，不是仅仅对他进行“美容化妆”就可以，而是要有能够从内发自而外的气质。</p>
+  </div>
+</div>
+</div><!--wrapper ends-->
+<div class='sub_bot pr'></div><!--sub_bot ends-->
 </div><!--main ends-->

@@ -20,15 +20,16 @@ Icolor::Application.routes.draw do
   match "/master_topics/:id" => "master_topics#show"
   match "/master_designs" => "master_designs#index"
   match "/master_designs/:id" => "master_designs#show"
+  match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
+
+  #行业资讯
+  match "/color_articles" => "color_articles#index"
+  match "/articles" => "articles#index"
+  match "/articles/:id" => "articles#show"
 
   #业主通道
   match "/faqs" => "faqs#index"
   match "/faqs/:id" => "faqs#show"
-
-  #装修资讯
-  match "/articles" => "articles#index"
-  match "/articles/:id" => "articles#show"
-
   match "/channel/access" => "channel#access"
   match "/channel/service" => "channel#service"
 
@@ -40,6 +41,8 @@ Icolor::Application.routes.draw do
   match "/contact" => "contact#index"
 
   #设计鉴赏
+  match "/weekly_stars" => "weekly_stars#index"
+  match "/weekly_stars/:id" => "weekly_stars#show"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
   match "/inspirations" => "inspirations#index"
@@ -49,6 +52,9 @@ Icolor::Application.routes.draw do
   #精彩活动
   match "/events" => "events#index"
   match "/events/:id" => "events#show"
+  match "/designer_events" => "designer_events#index"
+  match "/designer_events/:id" => "designer_events#show"
+  match "/other_events" => "other_events#index"
 
   match "/info_list" => "function#infolist"
   match "/info" => "function#info"

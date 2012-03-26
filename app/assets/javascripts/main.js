@@ -66,7 +66,11 @@ $(function(){
 		o_out();
 	});
 	$('body').keydown(function(e){
-		if(e.which == 27)shut_center();
+		if(e.which == 27)
+		{
+			shut_center();
+			$('.abs_center').hide();
+		}
 		});
 	$('#overlay').click(function(){
 		shut_center();
@@ -173,6 +177,20 @@ $(function(){
 	}).mouseout(function(){
 		$(this).hide();
 		$('a.login').removeClass('logHover');
+		});
+   var errs_out;
+   function err_in(){
+   $('.err_tips').fadeIn(600,function(){
+		errs_out = setTimeout(err_out,3000);
+		});
+	}
+	function err_out(){
+	   $('.err_tips').fadeOut();
+	}
+	$('span.tips a').click(err_in);
+	$('.err_tips').click(function(){
+		if(errs_out==true)clearTimeout(errs_out);
+		err_out();
 		});
 });
 /*historys*/

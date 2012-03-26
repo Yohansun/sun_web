@@ -15,9 +15,12 @@
 .news_detail_main .section{padding:10px}
 .news_detail_main .title{padding:5px 0 10px;border-bottom:1px solid #dfdfdf;text-align:center}
 .news_detail_main .title h1{font-size:18px;font-weight:bold}
-.news_detail_main .title .info{margin:10px 0 0;+width:420px;height:20px;color:#868686;font-size:12px}
-.news_detail_main .title .info .share{display:inline-block;vertical-align:middle;+flaot:left}
-.news_detail_main .title .info div{display:inline-block;margin:0 5px;+float:left}
+.news_detail_main .title .info{margin:10px 0 0;height:20px;color:#868686;font-size:12px}
+*+html .news_detail_main .title .info{width:420px;}
+.news_detail_main .title .info .share{display:inline-block;vertical-align:middle;}
+*+html .news_detail_main .title .info .share{flaot:left;}
+.news_detail_main .title .info div{display:inline-block;margin:0 5px;}
+*+html .news_detail_main .title .info div{float:left;}
 .news_content{margin:10px 5px;color:#666;line-height:1.8;font-size:14px}
 .news_content img{display:block;margin:20px auto}
 .news_footer{padding:20px 0;height:10px;border-top:1px dotted #7a786b;color:#5a5a5a}
@@ -34,7 +37,7 @@
 .historys a{display:block;background:#fff;color:#7f7f7f;padding:0.2em 0.5em;border:1px solid #d1d1d1;}
 .sub_bot .pager{margin-top:28px;}
 a.next{margin-right:40px!important;padding-right:15px!important;}
-.pag_container a.prev{margin-right:0px!important;padding-left:15px!important;}
+a.prev{margin-right:10px!important;padding-left:15px!important;}
 a.history{width:130px;}
 a.history span{display:block;position:absolute;top:6px;border-color:#737373 transparent;_line-height:0;font-size: 0px;right:8px;border-width:5px;border-style:none solid solid solid;height:0px;;}
 
@@ -43,7 +46,6 @@ a.history span{display:block;position:absolute;top:6px;border-color:#737373 tran
 .galleryF .inner:after{content:'';display:block;clear:both}
 .galleryF dl{float:left}
 .galleryF dt{margin:0 -36px -113px 0;width:36px;height:113px;overflow:hidden;position:relative;top:-5px;background:url(/assets/design/label.gif)}
-
 .galleryF dl dd{overflow:hidden;border-right:5px solid #fff;}
 .galleryF dl.contract dd{width:31px}
 .galleryF dt a{display:block;font-size:18px;margin:15px 0 0 6px;width:1em;color:#333}
@@ -52,12 +54,7 @@ a.history span{display:block;position:absolute;top:6px;border-color:#737373 tran
 .galleryG li{position:absolute;z-index:10}
 .galleryG li img{width:100%;height:100%}
 .galleryG span{display:block;width:20px;height:34px;position:absolute;right:45px;bottom:20px;z-index:12;cursor:pointer;background:url(/assets/design/galleryG.png)}
-
 .galleryG span.moveright{right:15px;background-position:0 100%}
 .galleryG span.disabled{opacity:0.5;filter:alpha(opacity=50);cursor:default}
 
 .color-trend .galleryF{margin:15px 0}
-
-.news_content img{float:none;}
-.shadow.news_detail_main{margin-top:0;}
-

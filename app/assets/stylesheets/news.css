@@ -61,7 +61,7 @@ li.trans a,li.commt a{color:#5c5c5c;line-height:17px;}
 li.trans{background:url(/assets/news/tools_trans.png) no-repeat;}
 li.commt{background:url(/assets/news/tools_commt.png) no-repeat;}
 .tools_right{width:365px;}
-.tools_right h1{font-size:24px;font-weight:bold;color:#c0051c;text-shadow:rgba(0 0 0 0.5);text-align:center;}
+.tools_right h1{font-size:24px;font-weight:bold;color:#c0051c;text-shadow:2px 2px rgba(0,0,0,0.5);text-align:center;}
 .tools_right p{font-weight:bold;text-indent:2em;color:#404040;font-size:14px;line-height:1.5em;margin:20px 0 45px 0;}
 .tools_service,.tools_guide{background:url(/assets/news/tools_btn.jpg) no-repeat;width:208px;height:49px;margin:0 auto 10px auto;}
 .tools_guide{background-position:0 -49px;}
@@ -139,8 +139,7 @@ input.owner_search{width:164px;height:13px;border:1px solid #e5e5e5;margin:4px 4
 .tips_bullet.show{background-position:0 -32px;}
 .faqs_content{border:1px solid #dddfe2;padding:10px 11px;}
 .faq a{background:#fff;color:#7f7f7f;padding:0.4em 0.5em;border:1px solid #d1d1d1;margin:-10px 1px 0 0;}
-.pag_container a.next{padding-right:15px!important;}
-.pag_container .pager div {text-align: center}
+a.next{padding-right:15px!important;}
 a.prev{padding-left:15px!important;}
 a.history{width:130px;}
 a.history span{display:block;position:absolute;top:6px;border-color:#737373 transparent;_line-height:0;font-size: 0px;right:8px;border-width:5px;border-style:none solid solid solid;height:0px;;_border-color:#737373 #fff;_filter:chroma(color=#ffffff);}
