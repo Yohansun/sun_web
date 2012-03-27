@@ -30,12 +30,11 @@
       <div class="section">
         <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
         <%- t = @article.interview_content.split("\r\n\r\n") %>
-        <%- (t.size)/2.times do |i| %>
+        <%- (t.size/2).times do |i| %>
           <div class="interview_box">
-            <%- i += 1 if i.odd?  %>
             <div class="interview">
-              <h3><%= t[i] %></h3>
-              <p class="interview_icon"><%= t[i+1] %></p>
+              <h3><%= t[2*i] %></h3>
+              <p class="interview_icon"><%= t[2*i+1] %></p>
             </div>
           </div>
         <%- end %>
