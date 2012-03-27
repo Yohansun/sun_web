@@ -3,14 +3,15 @@
     <img src='/assets/news/title_news.png'/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="/">首页</a><span class="arrow_1"></span><a href="news.html">行业资讯</a><span class="arrow_2"></span><a class="fb" href="/articles">装修资讯</a>
+    <a href="/">首页</a><span class="arrow_1"></span><a href="#">行业资讯</a><span class="arrow_2"></span><a class="fb" href="/articles">装修资讯</a>
   </div>
   <!--sub_nav ends-->
   <div class='wrapper'>
     <div class='news_top clear ft12'>
-      <a href="javascript:void(0)" class="active">全部</a>
-      <a href="javascript:void(0)">设计相关</a>
-      <a href="javascript:void(0)">产品相关</a>
+      <%=link_to "全部","/articles"%>
+      <% @tags.each do |tag| %>
+        <%= link_to tag.name,  "/articles?tags=#{URI.escape(tag.name)}", :class => "#{'active' if tag.name == params[:tags] }"%>
+      <% end %>
     </div>
     <!--news_top ends-->
     <%- if @articles %>
@@ -20,8 +21,7 @@
                 <%= image_tag article.preview_img.url(:thumb) if article.preview_img %>
                 <div class="article fl ft14">
                   <h1><a href='#'><%= link_to article.title, "/articles/#{article.id}" %></a></h1>
-                  <span>来源：中华室内设计网 </span> <span>时间：<%= article.published_at %></span>
-
+                  <span>来源： <%= article.content_source %></span> <span>时间：<%= article.published_at.to_formatted_s(:db) %></span>
                   <p><%= raw article.intro %>...<%= link_to "[详细]", "/articles/#{article.id}" %></p>
                 </div>
                 <!--article ends-->
