@@ -7,7 +7,7 @@
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>
-    <img src='<%= set_style[:pic_path] %>' alt="" />
+    <img src='/assets/master/title_master.png' alt="" />
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师访谈</a>
@@ -15,61 +15,30 @@
   <div class='wrapper pb60'>
     <div class="profile group">
       <div class="video">
-        <img src="/assets/master/video1.jpg" alt="" />
+        <%= image_tag @article.preview_img_in.url(:original) %>
       </div><!--video ends-->
-      <div class="shadow profile_info" style="height:313px;">
-        <div class="section" style="height:313px;">
+      <div class="shadow profile_info">
+        <div class="section">
           <div class="tit_bg"><h2>大师简介MASTER PROFILE</h2></div>
-          <p class="profile_name">史迪威</p>
-          <p class="line_b_dot"><span>国籍：中国台湾</span><span>领域：建筑景观、室内设计</span></p>
-          <p>现任:<br />
-          上海元柏建筑设计事务所 负责人 2010年至今<br />
-          上海交通大学 客座教授 2009年至今<br />
-          曾任:<br />
-          美国JUNG/BARNNEN ASSOC.INC. 项目设计师 1987-1993<br />
-          美国麻省理工学院 助理讲师 1993<br />
-          高能国际工程顾问公司 共同主持人 1994-1997<br />
-          中国文化大学 景观系讲师 1994 <br />
-          华梵学院 建筑系讲师 1994 <br />
-          <!--东海大学 建筑系讲师 1995-1999 <br />
-          中原大学 建筑系讲师 1996-2000 <br />
-          森海国际工程顾问公司/沈祖海建筑师事务所 副总经理 1997-2004<br />
-          高迪设计工程有限公司 总经理 2004-2009 <br />
-          上海伦达建筑设计工程有限公司 副总经理 2009-2011<br />
-          佳木斯建筑设计研究院上海分院 副总经理 2009-2011-->
-          </p>
+          <p class="profile_name"><%= @article.name %></p>
+          <p class="line_b_dot"><span>国籍：<%= @article.country %></span><span>领域：<%= @article.master_field %></span></p>
+          <p><%= raw @article.position %></p>
         </div>
       </div><!--profile_info ends-->
     </div><!--profile ends-->
     <div class="shadow mb25">
       <div class="section">
         <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
-        <div class="interview_box">
-          <div class="interview">
-            <h3>中国的建筑装饰行业用三十年的时间，走完了欧洲国家历时数百年的历程。这中间也不可避免地出现了很多问题，那么在您看来，中西方设计业目前最大的差距体现在哪些方面？</h3>
-            <p class="interview_icon">这次艾特奖的住宅类别，刚好有一些欧洲的建筑师来投递参赛作品，我们可以感觉到他们的设计，很重视观念性和抽象性的思考，这使得他们设计出来的结果保持了空间上的完整性和纯粹性，让人感觉很好，很有设计感。其实从东西方的设计训练来看，西方很重视从原创出发之后，他的抽象思考慢慢转化到实际设计里的过程。从他们的设计作品里，我们能看出他们的思考过程，以及他们在设计原则下，推演出来的设计结果，脉络非常清晰。</p>
-            <p class="indent_24">中国的设计大多还是非常注重形式上的丰富性，努力营造出奢华、华丽的感觉，但这种表现形式很表面，缺乏从内在散发出气质的部分。就像一个人，要让人觉得他很有内涵，不是仅仅对他进行“美容化妆”就可以，而是要有能够从内发自而外的气质。所以中国的设计师应该加强对于设计本质的思考，以及对于空间的观察，和关注设计到最后所需要呈现的结果。当然在这里，我不否定中国丰富的多样性表现形式，也给人一种很愉悦的感觉，但我认为中西方还是可以互相截长补短，相互结合会更好。</p>
+        <%- t = @article.interview_content.split("\r\n\r\n") %>
+        <%- (t.size)/2.times do |i| %>
+          <div class="interview_box">
+            <%- i += 1 if i.odd?  %>
+            <div class="interview">
+              <h3><%= t[i] %></h3>
+              <p class="interview_icon"><%= t[i+1] %></p>
+            </div>
           </div>
-          <div class="interview">
-            <h3>所以做设计还是要慢下来，设计师要留出给自己思考的时间，慢慢沉淀和积累，才能有源源不断的创造力。</h3>
-            <p class="interview_icon">欧美很多国家都在提倡慢哲学，因为今天世界上很多国家，发展的速度太快，让人都忘记了基本的思考节奏。在一个设计师的成长过程中，做小而精而美，比做大而放而浮的设计更有意义。今天中国有那么的人口，那么多的设计师，如果每一个人都能发挥他设计中的小坚持，我相信这样所产生的能量，最终会在每一个人之间的激荡，产生丰富的设计交流，从而引导世界。</p>
-          </div>
-          <div class="interview">
-            <h3>一系列的全球盛事极大地推动了中国城市化和国际化的进程，在中国各大城市都出现了很多国际大师的作品，比如扎哈•哈迪德的广州歌剧院，雷姆•库哈斯的中央电视台等，这些设计一出，均引发了行业的广泛讨论，在您看来，这是中国设计未来的发展方向吗？</h3>
-            <p class="interview_icon">国外的建筑师或专业建筑事务所，他们其实也分为两种：一种是对传统建筑的延伸；像KPF、SOM这些大型的专业事务所，他们的设计就是从传统建筑的结构基点，整合到建筑的美感里去完成。但是也有另外一批很成功的建筑事务所，他们是从概念、从设计的原点出发，去思考设计的挑战。他们想创造一个跟过去不一样的时代精神，比如扎哈·哈迪德、UNstudio、雷姆·库哈斯，他们以理论为基础，挑战当今现代建筑所做不到的部分，去发展出一个新的结果。</p>
-            <p class="indent_24">从大环境来看，这两种都没有任何的错，在于事务所的定位，以及设计师本身的定位。你是要创造前沿？还是要把每一次的设计过程，从设计到细节、材料、颜色都搭配得很好，做一个非常本分，但却也非常扎实的设计？又或者是挑战你设计想象的空间，创造和开发出一个很多人没有想到的领域。毕竟中国有那么多的机会，任何人都不必局限于任何形式。</p>
-          </div>
-          <div class="interview">
-            <h3>最近两年无论是官方还是民间组织的国际交流活动越来越频繁，个人获得国际奖项的明显增加，出国考察游学的也越来越多，针对中国设计业正逐步走向国际化的现象您怎么看？</h3>
-            <p class="interview_icon">以中国市场的机会和条件来看，中国有很多比如大型酒店类的项目委托给国外设计师做方案，再由国内的团队接手做后期的深化和施工图，在这样的大环境下，就创造了很多跟国际团队接轨和学习的机会。我们仔细观察会发现，很多国外设计师的前期方案做得很不错，是来自于他们独特的设计方法论，他们在前期方案的讨论部分，会花很多的思考。而我们国内的设计团队常常接手后面的深化工作，往往就跳过了那个阶段，让你的创意不常被磨练。</p>
-            <p class="indent_24">所以我说今天的学校教育，必须要重新发挥这样的功能，把这部分强化起来。毕竟学校是从设计的起步开始，让学生在专业的训练里，获得解决问题的方法，以及学会如何把设计做到更深入。这对国内设计界非常重要，因为中国有这么的机会，但是中国目前的设计教育，感觉还不够扎实，没有把前面设计的基本训练，方向和方法，让学生们累积起来。</p>
-          </div>
-          <!--<div class="interview">
-            <h3>最近两年无论是官方还是民间组织的国际交流活动越来越频繁，个人获得国际奖项的明显增加，出国考察游学的也越来越多，针对中国设计业正逐步走向国际化的现象您怎么看？</h3>
-            <p class="interview_icon">以中国市场的机会和条件来看，中国有很多比如大型酒店类的项目委托给国外设计师做方案，再由国内的团队接手做后期的深化和施工图，在这样的大环境下，就创造了很多跟国际团队接轨和学习的机会。我们仔细观察会发现，很多国外设计师的前期方案做得很不错，是来自于他们独特的设计方法论，他们在前期方案的讨论部分，会花很多的思考。而我们国内的设计团队常常接手后面的深化工作，往往就跳过了那个阶段，让你的创意不常被磨练。</p>
-            <p class="indent_24">所以我说今天的学校教育，必须要重新发挥这样的功能，把这部分强化起来。毕竟学校是从设计的起步开始，让学生在专业的训练里，获得解决问题的方法，以及学会如何把设计做到更深入。这对国内设计界非常重要，因为中国有这么的机会，但是中国目前的设计教育，感觉还不够扎实，没有把前面设计的基本训练，方向和方法，让学生们累积起来。</p>
-          </div>-->
-        </div>
+        <%- end %>
       </div>
     </div>
     <div class="shadow mb25">
@@ -103,61 +72,60 @@
         </div><!--works_slide ends-->
 
         <script type="text/javascript">
-          var page = 1;
-          var i = 5;
-          $('a.works_next').click(function(){
-              var $parent = $(this).parent('.works_slide');
-              var $v_list = $parent.find('div.img_list');
-              var $v_box = $parent.children('.img_box');
+            var page = 1;
+            var i = 5;
+            $('a.works_next').click(function() {
+                var $parent = $(this).parent('.works_slide');
+                var $v_list = $parent.find('div.img_list');
+                var $v_box = $parent.children('.img_box');
 
-              var v_width = $v_box.width();
-              var len = $v_list.find('img').length;
-              var page_count = Math.ceil(len/i);
+                var v_width = $v_box.width();
+                var len = $v_list.find('img').length;
+                var page_count = Math.ceil(len / i);
 
-              if(!$v_list.is(':animated')){
-              if(page == page_count){
-              $v_list.animate({left:'0px'});
-              page = 1;
+                if (!$v_list.is(':animated')) {
+                    if (page == page_count) {
+                        $v_list.animate({left:'0px'});
+                        page = 1;
 
-              }else{
-              $v_list.animate({left:'-='+v_width});
-              page++;
-              }
-              }
-              })
+                    } else {
+                        $v_list.animate({left:'-=' + v_width});
+                        page++;
+                    }
+                }
+            })
 
-$('a.works_pre').click(function(){
-    var $parent = $(this).parent('.works_slide');
-    var $v_list = $parent.find('div.img_list');
-    var $v_box = $parent.children('.img_box');
+            $('a.works_pre').click(function() {
+                var $parent = $(this).parent('.works_slide');
+                var $v_list = $parent.find('div.img_list');
+                var $v_box = $parent.children('.img_box');
 
-    var v_width = $v_box.width();
-    var len = $v_list.find('img').length;
-    var page_count = Math.ceil(len/i);
+                var v_width = $v_box.width();
+                var len = $v_list.find('img').length;
+                var page_count = Math.ceil(len / i);
 
-    if(!$v_list.is(':animated')){
-    if(page == 1){
-    $v_list.animate({left:'-='+v_width*(page_count-1)});
-    page = page_count;
+                if (!$v_list.is(':animated')) {
+                    if (page == 1) {
+                        $v_list.animate({left:'-=' + v_width * (page_count - 1)});
+                        page = page_count;
 
-    }else{
-    $v_list.animate({left:'+='+v_width});
-    page--;
-    }
-    }
-
-    })
-
-
-</script>
-</div>
-</div>
-<div class="shadow">
-  <div class="section">
-    <div class="tit_bg"><h2>大师寄语MASTER MESSAGE</h2></div>
-    <p class="master_msg master_icon_bg ft14">中国的设计大多还是非常注重形式上的丰富性，努力营造出奢华、华丽的感觉，但这种表现形式很表面，缺乏从内在散发出气质的部分。就像一个人，要让人觉得他很有内涵，不是仅仅对他进行“美容化妆”就可以，而是要有能够从内发自而外的气质。</p>
+                    } else {
+                        $v_list.animate({left:'+=' + v_width});
+                        page--;
+                    }
+                }
+            })
+        </script>
+      </div>
+    </div>
+    <div class="shadow">
+      <div class="section">
+        <div class="tit_bg"><h2>大师寄语MASTER MESSAGE</h2></div>
+        <p class="master_msg master_icon_bg ft14">永远保持激情，沿着你的热情一直往前进，在你追寻这个热情的过程中，会出现更多属于你的机会。</p>
+      </div>
+    </div>
   </div>
-</div>
-</div><!--wrapper ends-->
-<div class='sub_bot pr'></div><!--sub_bot ends-->
+  <!--wrapper ends-->
+  <div class='sub_bot pr'></div>
+  <!--sub_bot ends-->
 </div><!--main ends-->

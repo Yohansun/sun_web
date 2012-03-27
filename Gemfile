@@ -26,6 +26,7 @@ gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
 
 gem "devise"
 gem 'kaminari'
+gem "country_select"
 
 # gem "magic_admin", :path => "/Users/hui/code/rails/magic_admin"
 # gem "magic_content", :path => "/Users/hui/code/rails/magic_content"
