@@ -4,7 +4,8 @@
 /*master page*/
 .profile {padding: 27px 0 23px; overflow:hidden;}
 .profile .video{float:left;width:470px;height:317px;}
-.profile_info{float:right;width:413px;}
+.profile_info{float:right;width:413px;height:313px;}
+.profile_info .section{height:313px;}
 .tit_bg {background:#ffffff;border-bottom: 1px solid #e6e6e6;}
 .tit_bg h2{background:#f5f5f5;margin-bottom:1px;padding-left: 11px;color:#9b9a9a;font:24px/47px "Microsoft Yahei";height:47px;/*line-height:47px;*/}
 .profile_info p{margin: 6px 16px 5px;padding-bottom:8px;font:12px/20px "arial simsun";color:#474747;}
@@ -305,7 +306,7 @@ p.act_ads_more a{color:#5c5a5b;font:12px/24px "Microsoft Yahei";_margin-right:15
 .host_self .host_status{float:left; width:460px;}
 .host_self .host_status h2 {overflow:hidden;font:18px "Microsoft Yahei";margin:10px 0;_height:24px;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(/assets/personal/gold_icon.png) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
-.host_self .host_status h2 strong{float:left; margin-right:25px;line-height:24px;}
+.host_self .host_status h2 strong{float:left; margin-right:25px;line-height:24px;} 
 .host_self .host_status p{position:relative;left:-8px;color:#8b8d8c;font:12px/24px "arial simsun"; height:24px; background:url(/assets/personal/host_bg1.jpg) no-repeat left center;padding:5px 15px;margin:5px 0 10px;}
 .host_sort{border-bottom:4px solid #f3f3f3; margin-bottom:5px;}
 
@@ -351,7 +352,7 @@ h2.article{height:100px;background:url(/assets/index_related_tit.png) no-repeat 
 .rules_con .row4{width:90px;}
 .rules_con .row5{width:170px;}
 /*contact*/
-.contactus{text-align:center; margin-bottom:150px;}
+.contactus{ margin-bottom:150px; background:url(/assets/contact.png) no-repeat 90px center; padding:120px 0 120px 440px; color:#7f7f7f; font:14px/30px "Microsoft Yahei";}
 /*results*/
 .search_box {padding-bottom:40px;}
 .search_box .section{ padding:0 20px 15px;}
@@ -428,13 +429,13 @@ h2.article{height:100px;background:url(/assets/index_related_tit.png) no-repeat 
 .magazine_bottom .ins_works{ width:335px; background:url(/assets/emagezine/shadow_r.png) no-repeat right 10px;}
 .magazine_bottom .ins_works h2{margin-left: 15px;margin-right: 15px;}
 .magazine_bottom .ins_works ul{ overflow:hidden;}
-.magazine_bottom .ins_works ul li{ float:left; display:block; width:137px; padding:5px 15px;}
+.magazine_bottom .ins_works ul li{ float:left; display:block; width:147px; padding:5px 10px;}
 .magazine_bottom .ins_works ul li img{ padding:1px; border:1px solid #ccc; margin:0 auto;}
 .magazine_bottom .ins_works ul li h3{ font:12px "arial simsun"; line-height:24px; color:#666;}
-.ins_works p strong,.ins_works p span{float:left;color:#5c5c5c; padding-left:15px; margin-right:0px;display:block; line-height:18px; font-size:12px; font-weight: normal;}
+.ins_works p strong,.ins_works p span{float:left;color:#5c5c5c; padding-left:16px; margin-right:0px; margin-top:5px;display:block;height:17px; font:12px/17px "arial simsun"; font-weight: normal;}
 .ins_works .p1 strong{ background:url(/assets/design/d_icon.png) no-repeat left 2px;}
-.ins_works p.p2 span.zf{ background:url(/assets/design/d_icon.png) no-repeat left -35px;}
-.ins_works p.p2 span.pl{ background:url(/assets/design/d_icon.png) no-repeat left -16px;}
+.ins_works p.p2 span.zf{ background:url(/assets/design/d_icon.png) no-repeat left -36px;}
+.ins_works p.p2 span.pl{ background:url(/assets/design/d_icon.png) no-repeat left -17px;}
 
 .e_works { width:260px;}
 .e_works img { margin:1px;}

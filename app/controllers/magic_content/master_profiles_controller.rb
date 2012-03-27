@@ -4,10 +4,10 @@ module MagicContent
     belongs_to :subject
 
     def create
-      @banner = Banner.new(rebuild_params(params[:master_profile]))
+      @banner = MasterProfile.new(rebuild_params(params[:master_profile]))
       create! do |success, failure|
         failure.html { render :action => 'new' }
-        success.html { redirect_to  resource }
+        success.html { redirect_to  subject_master_profiles_path }
       end
     end
 
@@ -15,7 +15,7 @@ module MagicContent
       params[:master_profile] = rebuild_params(params[:master_profile])
       update! do |success, failure|
         failure.html { render :action => 'edit' }
-        success.html { redirect_to  resource }
+        success.html { redirect_to  subject_master_profiles_path }
       end
     end
   end

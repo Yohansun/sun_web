@@ -14,7 +14,15 @@
   <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
     <fieldset>
       <div class="widget border">
-
+        <%= f.input :title, :input_html => { :class=> "validate[required]" }, :label => "标题:" %>
+        <%= f.input :intro, :input_html => { :rows => 15, :class=>"x" }, :label => "简介:" %>
+        <%= f.input :name, :input_html => { :class=> "validate[required]" }, :label => "姓名:" %>
+        <%= f.input :country, :input_html => { :class=> "validate[required]" }, :label => "国籍:" %>
+        <%= f.input :master_field, :label => "领域:" %>
+        <%= f.input :position, :input_html => { :rows => 15, :class=>"x" }, :label => "职位:" %>
+        <%= f.input :interview_content, :label => "访谈内容:", :hint => "请在输入标题或者内容后换行！" %>
+        <%= f.input :preview_img_out, :label => "上传列表页图片:" %>
+        <%= f.input :preview_img_in, :label => "上传内页图片:" %>
         <div class="rowElem">
           <label>发布时间:</label>
           <div class="formRight www1">
@@ -23,7 +31,6 @@
           </div>
           <div class="fix"></div>
         </div>
-
         <%= f.input :tag_list, :hint => "Tips: 多个标签之间用“，”隔开", :label => "标签:" %>
 
         <div class="rowElem">

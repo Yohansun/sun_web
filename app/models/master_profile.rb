@@ -3,4 +3,7 @@ class MasterProfile < ActiveRecord::Base
   belongs_to :subject
   attr_accessor :time
   default_scope order("published_at DESC")
+
+  has_attached_file :preview_img_in, :styles => { :thumb => "80x80#", :original => "477x317#" }
+  has_attached_file :preview_img_out, :styles => { :thumb => "80x80#", :original => "278x282#" }
 end
