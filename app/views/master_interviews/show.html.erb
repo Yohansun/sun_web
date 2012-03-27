@@ -21,7 +21,7 @@
         <div class="section">
           <div class="tit_bg"><h2>大师简介MASTER PROFILE</h2></div>
           <p class="profile_name"><%= @article.name %></p>
-          <p class="line_b_dot"><span>国籍：<%= @article.country %></span><span>领域：<%= @article.master_field %></span></p>
+          <p class="line_b_dot"><span>国籍：<%= @article.nationality %></span><span>领域：<%= @article.master_field %></span></p>
           <p><%= raw @article.position %></p>
         </div>
       </div><!--profile_info ends-->
@@ -29,6 +29,7 @@
     <div class="shadow mb25">
       <div class="section">
         <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
+        <%- unless @article.nil? %>
         <%- t = @article.interview_content.split("\r\n\r\n") %>
         <%- (t.size/2).times do |i| %>
           <div class="interview_box">
@@ -37,6 +38,7 @@
               <p class="interview_icon"><%= t[2*i+1] %></p>
             </div>
           </div>
+        <%- end %>
         <%- end %>
       </div>
     </div>

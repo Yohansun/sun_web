@@ -8,17 +8,17 @@
   <div class='wrapper pb60'>
     <div class="design_tit group pb10 line_b_dot">
       <ul class="design_filter group">
-        <li class="li_current">
-        <a href="#">全部</a>
+        <li class="<%= 'li_current' if params[:filter].nil? || params[:filter] == '全部' %> ">
+        <a href="/master_interviews">全部</a>
         </li>
-        <li>
-        <a href="#">海外</a>
+        <li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+        <a href="/master_interviews?filter=<%= URI.escape("海外") %>">海外</a>
         </li>
-        <li>
-        <a href="#">港澳台</a>
+        <li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+        <a href="/master_interviews?filter=<%= URI.escape("港澳台") %>">港澳台</a>
         </li>
-        <li>
-        <a href="#">中国大陆</a>
+        <li class="<%= 'li_current' if params[:filter] == '中国大陆'%> ">
+        <a href="/master_interviews?filter=<%= URI.escape("中国大陆") %>">中国大陆</a>
         </li>
       </ul>
     </div><!--design_tit ends-->
@@ -27,6 +27,7 @@
       <a href="#"><img src="/assets/master/space_master_btn.png" /></a>
     </div><!--list_btn ends-->
     <div class="list_box">
+      <%- unless @articles.nil? %>
       <%- @articles.each do |article| %>
         <div class="list_main mt25 group">
           <div class="img_name"><%= image_tag article.preview_img_out.url(:original) %>
@@ -39,6 +40,7 @@
             <p class="pt25"><a href="/master_interviews/<%= article.id %>"><img src="/assets/master/look_detail_btn.png" alt="" /></a></p>
           </div><!--list_detail ends-->
         </div>
+      <%- end %>
       <%- end %>
     </div><!--list_box ends-->
   </div><!--wrapper ends-->
