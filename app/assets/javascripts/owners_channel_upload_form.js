@@ -1,5 +1,5 @@
 $(function(){
-	var maxCharacter = 100;
+	var maxCharacter = 500;
 	var $characters = $('#characters');
 	var $textarea = $('#upload_form textarea');
 	$textarea.keydown(function(e){

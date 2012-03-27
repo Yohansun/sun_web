@@ -369,7 +369,7 @@ $(function(){
 /*pass_check*/
 $(function(){
 	$('.pass_check').keyup(function(){
-		var short = $('#short').text();
+		var shorts = $('#short').text();
 		var medium = $('#medium').text();
 		var strong = $('#strong').text();
 		var pass = $(this).val();
@@ -377,7 +377,7 @@ $(function(){
 		var w = num*100/32;
 		if(w<40)
 		{
-			$('#ps_tip').text(short).css('color','#f00');
+			$('#ps_tip').text(shorts).css('color','#f00');
 			$('#ps_status').css('background','#f00');
 		}
 		else if(w<80)

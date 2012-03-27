@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327014537) do
+ActiveRecord::Schema.define(:version => 20120327092637) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(:version => 20120327014537) do
 
   create_table "master_profiles", :force => true do |t|
     t.string   "name"
-    t.string   "country"
+    t.string   "nationality"
     t.string   "master_field"
     t.text     "position"
     t.text     "interview_content"
