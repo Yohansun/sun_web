@@ -21,6 +21,8 @@ end
 
 gem 'unicorn'
 
+gem "paperclip", "<3.0"
+
 gem "magic_admin", :git => "git@github.com:nioteam/magic_admin.git"
 gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
 
@@ -28,5 +30,5 @@ gem "devise"
 gem 'kaminari'
 gem "country_select"
 
-# gem "magic_admin", :path => "/Users/hui/code/rails/magic_admin"
-# gem "magic_content", :path => "/Users/hui/code/rails/magic_content"
+#gem "magic_admin", :path => "/home/mos/code/magic_admin"
+#gem "magic_content", :path => "/home/mos/code/magic_content"
