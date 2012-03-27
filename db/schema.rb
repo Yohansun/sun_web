@@ -147,9 +147,10 @@ ActiveRecord::Schema.define(:version => 20120327092637) do
     t.datetime "stop_time"
     t.string   "email"
     t.text     "descript"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "subject_id"
+    t.string   "work_experience"
   end
 
   create_table "maillists", :force => true do |t|
@@ -218,6 +219,7 @@ ActiveRecord::Schema.define(:version => 20120327092637) do
     t.string   "preview_img_content_type"
     t.integer  "preview_img_file_size"
     t.datetime "preview_img_updated_at"
+    t.string   "content_source"
   end
 
   create_table "products", :force => true do |t|

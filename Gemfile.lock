@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:nioteam/magic_content.git
-  revision: 848a72f825c277afc8fd6beedfc642a3b2166452
+  revision: 5b6793125761340c0842da298e4906e5644a7980
   specs:
     magic_content (0.0.1)
       acts-as-taggable-on
@@ -76,7 +76,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    country_select (0.0.2)
     devise (2.0.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -189,7 +188,6 @@ DEPENDENCIES
   capistrano
   capistrano-unicorn
   coffee-rails (~> 3.2.1)
-  country_select
   devise
   jquery-rails
   json
