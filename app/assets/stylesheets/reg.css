@@ -156,6 +156,7 @@ input.email{width:183px;height:28px;}
 input.code{width:92px;height:28px;}
 .codes{margin-left:10px;}
 .forget a.fl{margin-top:23px;}
+.forget .pa{top:-50px;left:125px;}
 
 .token_left{margin:33px 0 0 115px;}
 .token_cam{margin-right:25px;}

@@ -23,7 +23,10 @@
 .weekstart_titleC h1 p{margin-top:3px;color:#787878;font-family:tahoma;font-size:16px}
 .weekstart_titleC .fullscreen_btn{margin-top:22px}
 
-.weekstart_detail .gallery{padding-top:34px;background:url(/assets/design/weekstar-galleryA-bg.gif) no-repeat}
+.weekstart_detail .gallery{position:relative;padding-top:34px;height:362px;background:url(/assets/design/weekstar-galleryA-bg.gif) no-repeat}
+.weekstart_detail .gallery span{display:block;position:absolute;top:175px;z-index:20;width:43px;height:65px;cursor:pointer;background:url(/assets/design/galleryK.png)}
+.weekstart_detail .gallery .moveleft{left:140px}
+.weekstart_detail .gallery .moveright{right:140px;background-position:0 100%}
 .weekstart_detail .galleryA{height:365px;position:relative}
 .weekstart_detail .galleryA img{position:absolute}
 
@@ -85,6 +88,8 @@
 .design_listA li img{vertical-align:top}
 
 .propertyA a{color:#a66f36;text-decoration:underline}
+.propertyA th,.propertyA td{vertical-align:top;line-height:1.8}
+.propertyA th{white-space:nowrap;text-align:left;}
 
 .reviewform{border-top:1px solid #dbdad8}
 .reviewform .bar{padding:0 10px;height:32px;line-height:32px;color:#8a8987;font-size:14px;background:#f0fbfd}

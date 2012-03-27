@@ -21,6 +21,8 @@ module ApplicationHelper
 
   def set_style
     case controller_name
+      when "home"
+        return { :css => ["style"] }
       when /designer_events|other_events/
         return { :css => ["index", "exciting_activities"] }
       when "color_articles"

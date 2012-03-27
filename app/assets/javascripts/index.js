@@ -1,3 +1,4 @@
+/*
 function _scrollTo(y,time,step) {
 	if( typeof y != 'number' ) return;
 	if( typeof y != 'number' || time < 10 ) {
@@ -29,6 +30,44 @@ function _scrollTo(y,time,step) {
 		}
 	}, time);
 }
+*/
+function _scrollTo(y,time,times) {
+	var _this = arguments.callee;
+	_this.crolling = true;
+	var current = document.documentElement.scrollTop || document.body.scrollTop;
+	if( y == current ) {
+		_this.crolling = false;
+		return;
+	}
+	var p = y - current;
+	if( times > Math.abs( p ) ) {
+		times = Math.abs( p );
+	}
+	var pc = parseInt(p/times);
+	/*var timer = setInterval(function(){
+		var current = document.documentElement.scrollTop || document.body.scrollTop;
+		if( Math.abs(y - current) <= Math.abs(pc) ) {
+			window.scrollTo(0,y);
+			_this.scrolling = false;
+			clearInterval(timer);
+		} else {
+			window.scrollBy(0,pc);
+		}
+	}, time);*/
+	var timer = setTimeout(function(){
+		var _this = arguments.callee;
+		var current = document.documentElement.scrollTop || document.body.scrollTop;
+		if( Math.abs(y - current) <= Math.abs(pc) ) {
+			window.scrollTo(0,y);
+			_this.scrolling = false;
+			clearTimeout(timer);
+		} else {
+			window.scrollBy(0,pc);
+			timer = setTimeout(_this,time);
+		}
+	},time);
+}
+
 
 $(window).ready(function(){
 	/*$('#design_appreciation .titlebar').fadeTo(800, 0, function(){
@@ -50,7 +89,7 @@ $(window).ready(function(){
 		var $infor = $('#information li');
 		var il = $infor.size();
 		if( il ) {
-			_scrollTo(500,30,7);
+			_scrollTo(500,50,40);
 			var current = il-1;
 			function infor_fade(){
 				$infor.eq(current).fadeTo(300,0,function(){
@@ -74,7 +113,7 @@ $(window).ready(function(){
 			infor_fade();
 		}
 	};
-	setTimeout(step1, 1000);
+	//setTimeout(step1, 500);
 
 	var $topb2 = $('#topb2');
 
@@ -149,7 +188,7 @@ $(window).ready(function(){
 		$mpr.find('img').css('opacity','0').fadeTo(300,1);
 		$('#hot_topic').fadeIn(300);
 		setTimeout(function(){
-			_scrollTo(1250,30,10);
+			_scrollTo(1250,60,40);
 	
 			var $wsbt = $weekly_star.find('div.box_title').css('opacity',0);
 			var $wsbc = $weekly_star.find('div.boxb_content').css('opacity',0);
@@ -205,7 +244,7 @@ $(window).ready(function(){
 		$home_improvement_news.hide().slideDown(4000,function(){
 			step5();
 		});
-		_scrollTo(2050,30,10);
+		_scrollTo(2050,50,50);
 	};
 
 	var step5 = function(){

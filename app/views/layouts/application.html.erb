@@ -35,258 +35,262 @@
           <a href="#"><img src="/assets/logo2.png" /></a>
         </div>
         <div class="navTop fr">
-          <a href="#" class="weibo fl"></a>
-          <div class="search fl">
-            <form action="#" method="get">
-              <input type="text" class="fl" value="Search" />
-              <input type="image" src="/assets/search-icon.jpg" />
-            </form>
-          </div><!--search ends-->
-          <div class="navLabel fl ft12">
-            <a href="#">立邦网上商城</a> |
-            <a href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
-            <a href="javascript:void(0)" class="jiathis_btn">分享</a>
-            <!-- JiaThis Button BEGIN -->
-            <div id="ckepop" class="jiathis_area none">
-              <span class="jiathis_txt">一键分享：</span>
-              <a class="jiathis_button_tsina"></a>
-              <a class="jiathis_button_kaixin001"></a>
-              <a class="jiathis_button_renren"></a>
-              <a class="jiathis_button_qzone"></a>
-              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-              <a class="jiathis_counter_style"></a>
-            </div>
-            <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-            <!-- JiaThis Button END -->
-          </div><!--navLabel ends-->
-          <a href="#" class="login fl"></a>
-          <a href="/users/register/roles" class="reg fl"></a>
-          <a href="#" class="nippon fl"></a>
-        </div><!--navTop ends-->
-        <ul class="navBot fr cw fb ft14">
-          <li><a href="/">首页</a></li>
-          <li class="pr"><a href="javascript:void(0)">大师殿堂</a>
-          <ul>
-            <li><a href="/master_interviews">大师访谈</a></li>
-            <li><a  href="/master_topics">热点话题</a></li>
-            <li class="noborder"><a href="/master_designs">大师作品</a></li>
-          </ul>
-          </li>
-          <li class="pr"><a href="javascript:void(0)">设计鉴赏</a>
-          <ul>
-            <li><a href="/weekly_stars">每周之星</a></li>
-            <li><a  href="/designs">推荐作品</a></li>
-            <li><a  href="/inspirations">灵感秀</a></li>
-            <li class="noborder"><a href="#">色彩搭配</a></li>
-          </ul>
-          </li>
-          <li class="pr"><a href="javascript:void(0)">行业资讯</a>
-          <ul>
-            <li><a href="/color_articles">色彩资讯</a></li>
-            <li><a  href="/articles">装修资讯</a></li>
-            <li class="noborder"><a href="#">微博资讯</a></li>
-          </ul>
-          </li>
-          <li class="pr"><a href="javascript:void(0)">精彩活动</a>
-          <ul style="width:140px;">
-            <li><a href="/designer_events">年度色彩趋势活动</a></li>
-            <li><a  href="/events">设计师活动</a></li>
-            <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
-          </ul>
-          </li>
-          <li class="pr"><a href="javascript:void(0)">实用工具</a>
-          <ul style="width:100px;">
-            <li><a href="/softwares/tools">配色工具</a></li>
-            <li class="noborder"><a href="/softwares/app">设计师APP</a></li>
-          </ul>
-          </li>
-          <li class="pr"><a href="javascript:void(0)">业主通道</a>
-          <ul style="width:112px;">
-            <li><a href="/channel/access">片区快查</a></li>
-            <li><a  href="/faqs">装修问答</a></li>
-            <li class="noborder"><a href="/channel/service">在线配色服务</a></li>
-          </ul>
-          </li>
-          <li class="noborder pr"><a href="arts.html">漆光艺彩</a>
-          <ul style="width:112px;left:-18px;">
-            <li><a href="4-1.html">墙面艺术效果</a></li>
-            <li><a href="#">墙面艺术效果</a></li>
-            <li class="noborder"><a href="#">木纹风尚生活</a></li>
-          </ul>
-          </li>
-        </ul><!--navBot ends-->
-      </div><!--nav ends-->
-
-      <%= yield  :index %><!--仅仅首页的-->
-
-      <div class="loginBg pa none">
-        <div class="err_tips cr ft12 none pa">
-          用户名密码错误
-          <span class="fr cp">x</span>
-        </div><!--err_tips-->
-        <div class="loginCon ft12 clear">
-          <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true, :id => "sign_form") do |f| %>
-            <div>
-              <label for="username" class="username ft14 fl">帐号：</label>
-              <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
-            </div>
-            <div>
-              <label for="password" class="password ft14 fl">密码：</label>
-              <input id="password" type="password" class="fl" name="user[password]"/>
-              <span class="tips tc fr"><a href="#">忘记密码？</a></span>
-            </div>
-            <input id="login" type="image" src="/assets/login.jpg" />
-            <div class="checkbox fl">
-              <input type="checkbox" /><span>下次自动登录</span>
-            </div>
-          <%- end %>
-        </div><!--loginCon ends-->
-        <ul class="loginCon ft12 border clear">
-          <li><a href="#"><img src="/assets/sina.jpg" />新浪微博</a></li>
-          <li><a href="#"><img src="/assets/qq.jpg" />QQ</a></li>
-          <li><a href="#"><img src="/assets/rr.jpg" />人人网</a></li>
-          <li class="noborder"><a href="#"><img src="/assets/kx.jpg" />开心网</a></li>
+          <a href="#" class="user_info fl"></a>
+          <!--<strong>NEO</strong></a><a href="#" class="user_info fl">我的主页</a><a href="#" class="user_info out fl">退出</a><a href="#" class="weibo fl"></a>-->
+        <div class="search fl">
+          <form action="#" method="get">
+            <input type="text" class="fl" value="Search" />
+            <input type="image" src="/assets/search-icon.jpg" />
+          </form>
+        </div><!--search ends-->
+        <div class="navLabel fl ft12">
+          <a href="#">立邦网上商城</a> |
+          <a href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
+          <a href="javascript:void(0)" class="jiathis_btn">分享</a>
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop" class="jiathis_area none">
+            <span class="jiathis_txt">一键分享：</span>
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_kaixin001"></a>
+            <a class="jiathis_button_renren"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+            <a class="jiathis_counter_style"></a>
+          </div>
+          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+          <!-- JiaThis Button END -->
+        </div><!--navLabel ends-->
+        <a href="#" class="login fl"></a>
+        <a href="/users/register/roles" class="reg fl"></a>
+        <a href="#" class="nippon fl"></a>
+      </div><!--navTop ends-->
+      <ul class="navBot fr cw fb ft14">
+        <li><a href="/">首页</a></li>
+        <li class="pr"><a href="javascript:void(0)">大师殿堂</a>
+        <ul>
+          <li><a href="/master_interviews">大师访谈</a></li>
+          <li><a  href="/master_topics">热点话题</a></li>
+          <li class="noborder"><a href="/master_designs">大师作品</a></li>
         </ul>
-        <div class="loginCon ft12 border clear">
-          <p class="fl">还没加入iColor?</p>
-          <a href="/users/register/roles" class="reg_now fl"></a>
-        </div><!--loginCon ends-->
-        <div class="loginCon border">
-          <a href="/users/register/roles"><img src="/assets/reg_ads.jpg" alt="ads" /></a>
-        </div>
-      </div><!--loginBg ends-->
-    </div>
-    <!--header ends-->
+        </li>
+        <li class="pr"><a href="javascript:void(0)">设计鉴赏</a>
+        <ul>
+          <li><a href="/weekly_stars">每周之星</a></li>
+          <li><a  href="/designs">推荐作品</a></li>
+          <li><a  href="/inspirations">灵感秀</a></li>
+          <li class="noborder"><a href="#">色彩搭配</a></li>
+        </ul>
+        </li>
+        <li class="pr"><a href="javascript:void(0)">行业资讯</a>
+        <ul>
+          <li><a href="/color_articles">色彩资讯</a></li>
+          <li><a  href="/articles">装修资讯</a></li>
+          <li class="noborder"><a href="#">微博资讯</a></li>
+        </ul>
+        </li>
+        <li class="pr"><a href="javascript:void(0)">精彩活动</a>
+        <ul class="w_nav1">
+          <li><a href="/designer_events">年度色彩趋势活动</a></li>
+          <li><a  href="/events">设计师活动</a></li>
+          <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
+        </ul>
+        </li>
+        <li class="pr"><a href="javascript:void(0)">实用工具</a>
+        <ul class="w_nav2">
+          <li><a href="/softwares/tools">配色工具</a></li>
+          <li class="noborder"><a href="/softwares/app">设计师APP</a></li>
+        </ul>
+        </li>
+        <li class="pr"><a href="javascript:void(0)">业主通道</a>
+        <ul class="w_nav3">
+          <li><a href="/channel/access">片区快查</a></li>
+          <li><a  href="/faqs">装修问答</a></li>
+          <li class="noborder"><a href="/channel/service">在线配色服务</a></li>
+        </ul>
+        </li>
+        <li class="noborder pr"><a href="arts.html">漆光艺彩</a>
+        <ul class="w_nav4">
+          <li><a href="4-1.html">墙面艺术效果</a></li>
+          <li><a href="#">墙面艺术效果</a></li>
+          <li class="noborder"><a href="#">木纹风尚生活</a></li>
+        </ul>
+        </li>
+      </ul><!--navBot ends-->
+    </div><!--nav ends-->
 
-    <div class="server_area">
-      <a href="javascript:void(0)" class="server fr"></a>
-      <%= form_tag site_messages_path, :remote => true do %>
-        <div class="server_input none">
-          <div class="server_content ft14 tc">
-            亲爱的会员您好！请问您有什么需要咨询？<br />我们将在3个工作日内对您的留言给予答复，请留意系统消息。
-            <textarea name="site_message[desc]"></textarea>
-            <span class="server_check none">请输入您要咨询的内容。</span>
-          </div><!--server_content ends-->
-          <p class="subs_submit tc">
-          <input type="image" src="/assets/submit_btn.jpg" id="server_submit" />
-          </p>
-        </div><!--server_input ends-->
-      <%- end %>
-      <div class="server_suc none">
-        <div class="server_content ft14 tc">
-          <img src="/assets/server_suc.jpg" />
-          <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
+    <%= yield  :index %><!--仅仅首页的-->
+
+    <div class="loginBg pa none">
+      <div class="err_tips cr ft12 none pa">
+        用户名密码错误
+        <span class="fr cp">x</span>
+      </div><!--err_tips-->
+      <div class="loginCon ft12 clear">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true, :id => "sign_form") do |f| %>
+          <div>
+            <label for="username" class="username ft14 fl">帐号：</label>
+            <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
+          </div>
+          <div>
+            <label for="password" class="password ft14 fl">密码：</label>
+            <input id="password" type="password" class="fl" name="user[password]"/>
+            <span class="tips tc fr"><a href="#">忘记密码？</a></span>
+          </div>
+          <input id="login" type="image" src="/assets/login.jpg" />
+          <div class="checkbox fl">
+            <input type="checkbox" /><span>下次自动登录</span>
+          </div>
+        <%- end %>
+      </div><!--loginCon ends-->
+      <ul class="loginCon ft12 border clear">
+        <li><a href="#"><img src="/assets/sina.jpg" />新浪微博</a></li>
+        <li><a href="#"><img src="/assets/qq.jpg" />QQ</a></li>
+        <li><a href="#"><img src="/assets/rr.jpg" />人人网</a></li>
+        <li class="noborder"><a href="#"><img src="/assets/kx.jpg" />开心网</a></li>
+      </ul>
+      <div class="loginCon ft12 border clear">
+        <p class="fl">还没加入iColor?</p>
+        <a href="/users/register/roles" class="reg_now fl"></a>
+      </div><!--loginCon ends-->
+      <div class="loginCon border">
+        <a href="/users/register/roles"><img src="/assets/reg_ads.jpg" alt="ads" /></a>
+      </div>
+    </div><!--loginBg ends-->
+  </div>
+  <!--header ends-->
+
+  <div class="server_area">
+    <a href="javascript:void(0)" class="server fr"></a>
+      <div class="server_input none">
+    <%= form_tag site_messages_path, :remote => true do %>
+        <div class="server_content ft14 tc fb">
+          亲爱的会员您好！请问您有什么需要咨询？<br />
+          <span class="ft12">您可以给我们留言，我们会通过系统消息对您的留言给予答复；<br />
+          您也可以发送邮件至icolor@nipponpaint.com.cn，<br />
+          我们也将尽快回复给您！</span>
+          <textarea name="site_message[desc]"></textarea>
+          <span class="server_check none">请输入您要咨询的内容。</span>
         </div><!--server_content ends-->
         <p class="subs_submit tc">
-        <input type="image" src="/assets/submit_btn.jpg" id="server_close" />
+        <input type="image" src="/assets/submit_btn.jpg" id="server_submit" />
         </p>
-      </div><!--server_suc ends-->
-    </div><!--server_area ends-->
-    <div id="overlay">
-      <div class="subs_input abs_center none">
-        <div class="subs_title ft18">
-          <span class="fl">提示</span>
-          <a href="javascript:void(0)" class="close_btn fr"></a>
-        </div><!--subs_title ends-->
-        <%= form_tag maillists_path, :remote => true do %>
-          <div class="subs_content tc">
-            <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
-            <input type="text" name="maillist[email]"/>
-            <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
-          </div><!--subs_content ends-->
-          <p class="subs_submit tc">
-          <input type="image" src="/assets/submit_btn.jpg" />
-          </p>
-        <%- end %>
-      </div><!--subs_input ends-->
-      <div class="subs_suc abs_center none">
-        <div class="subs_title ft18">
-          <span class="fl">提示</span>
-          <a href="javascript:void(0)" class="close_btn fr"></a>
-        </div><!--subs_title ends-->
+    <%- end %>
+      </div><!--server_input ends-->
+    <div class="server_suc none">
+      <div class="server_content ft14 tc">
+        <img src="/assets/server_suc.jpg" />
+        <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
+      </div><!--server_content ends-->
+      <p class="subs_submit tc">
+      <input type="image" src="/assets/submit_btn.jpg" id="server_close" />
+      </p>
+    </div><!--server_suc ends-->
+  </div><!--server_area ends-->
+  <div id="overlay">
+    <div class="subs_input abs_center none">
+      <div class="subs_title ft18">
+        <span class="fl">提示</span>
+        <a href="javascript:void(0)" class="close_btn fr"></a>
+      </div><!--subs_title ends-->
+      <%= form_tag maillists_path, :remote => true do %>
         <div class="subs_content tc">
-          <img src="/assets/subs_suc.jpg" />
-          <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
+          <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
+          <input type="text" name="maillist[email]"/>
+          <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
         </div><!--subs_content ends-->
         <p class="subs_submit tc">
         <input type="image" src="/assets/submit_btn.jpg" />
         </p>
-      </div><!--subs_suc ends-->
-    </div><!--overlay ends-->
+      <%- end %>
+    </div><!--subs_input ends-->
+    <div class="subs_suc abs_center none">
+      <div class="subs_title ft18">
+        <span class="fl">提示</span>
+        <a href="javascript:void(0)" class="close_btn fr"></a>
+      </div><!--subs_title ends-->
+      <div class="subs_content tc">
+        <img src="/assets/subs_suc.jpg" />
+        <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
+      </div><!--subs_content ends-->
+      <p class="subs_submit tc">
+      <input type="image" src="/assets/submit_btn.jpg" />
+      </p>
+    </div><!--subs_suc ends-->
+  </div><!--overlay ends-->
 
 
-    <%= yield %>
+  <%= yield %>
 
-    <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
-      <div class='links'>
-        <div class='w_995 group'>
-          <a href='http://www.nipponpaint.com.cn/'><img src='/assets/link1.jpg' alt="" /></a>
-          <a href='http://shop.nipponpaint.com.cn/'><img src='/assets/link2.jpg' alt="" /></a>
-          <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src='/assets/link3.jpg' alt="" /></a>
-          <a href='http://www.e-jjj.com/'><img src='/assets/link4.jpg' alt="" /></a>
-          <a href='http://www.80018.cn/'><img src='/assets/link5.jpg' alt="" /></a>
-          <a class="nomr" href='http://www.pchouse.com.cn/'><img src='/assets/link6.jpg' alt="" /></a>
-        </div><!--w_995 ends-->
-      </div><!--links ends-->
-      <div class='bot_map w_995 ft12 clear'>
-        <div class="inner">
-          <ul>
-            <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
-            <li><a href="/master_interviews">大师访谈</a></li>
-            <li><a href="/master_topics">热点话题</a></li>
-            <li><a href="/master_designs">大师作品</a></li>
-          </ul>
-          <ul>
-            <li><a href="/designs" class='fb'>设计鉴赏</a></li>
-            <li><a href="#">每周之星</a></li>
-            <li><a href="/designs">推荐作品</a></li>
-            <li><a href="/inspirations">灵感秀</a></li>
-          </ul>
-          <ul>
-            <li><a href="#" class='fb'>行业资讯</a></li>
-            <li><a href="/articles">装修资讯</a></li>
-            <li><a href="#">色彩资讯</a></li>
-            <li><a href="#">微博资讯</a></li>
-          </ul>
-          <ul>
-            <li><a href="#" class='fb'>精彩活动</a></li>
-            <li><a href="#">年度色彩趋势活动</a></li>
-            <li><a href="/events">设计师活动</a></li>
-            <li><a href="#">其他精彩活动</a></li>
-          </ul>
-          <ul>
-            <li><a href="/softwares/case" class='fb'>实用工具</a></li>
-            <li><a href="/softwares/tools">配色工具</a></li>
-            <li><a href="/softwares/app">设计师APP</a></li>
-          </ul>
-          <ul>
-            <li>
-            <a href="#" class='fb'>业主通道</a>
-            </li>
-            <li><a href="/channel/access">片区快查</a></li>
-            <li><a href="/faqs">装修问答</a></li>
-            <li><a href="/channel/service">在线配色服务</a></li>
-          </ul>
-          <ul class="ul_last">
-            <li><a href="#" class='fb'>漆光艺彩</a></li>
-            <li><a href="#">墙面艺术效果</a></li>
-            <li><a href="#">木纹风尚生活</a></li>
-          </ul>
-        </div>
-      </div><!--bot_map ends-->
-      <div class='copyright ft12'>
-        <div class='w_995'>
-          <a href='#'>立邦官网</a> |
-          <a href='#'>联系我们</a> |
-          <a href='#'>会员机制</a> |
-          <a href='#'>网上商城</a> |
-          <a href='#'>网站声明</a>
-          <p>Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
-        </div><!--w_995 ends-->
-      </div><!--copyright ends-->
-    </div><!--footer ends-->
+  <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
+    <div class='links'>
+      <div class='w_995 group'>
+        <a href='http://www.nipponpaint.com.cn/'><img src='/assets/link1.jpg' alt="" /></a>
+        <a href='http://shop.nipponpaint.com.cn/'><img src='/assets/link2.jpg' alt="" /></a>
+        <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src='/assets/link3.jpg' alt="" /></a>
+        <a href='http://www.e-jjj.com/'><img src='/assets/link4.jpg' alt="" /></a>
+        <a href='http://www.80018.cn/'><img src='/assets/link5.jpg' alt="" /></a>
+        <a class="nomr" href='http://www.pchouse.com.cn/'><img src='/assets/link6.jpg' alt="" /></a>
+      </div><!--w_995 ends-->
+    </div><!--links ends-->
+    <div class='bot_map w_995 ft12 clear'>
+      <div class="inner">
+        <ul>
+          <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
+          <li><a href="/master_interviews">大师访谈</a></li>
+          <li><a href="/master_topics">热点话题</a></li>
+          <li><a href="/master_designs">大师作品</a></li>
+        </ul>
+        <ul>
+          <li><a href="/designs" class='fb'>设计鉴赏</a></li>
+          <li><a href="#">每周之星</a></li>
+          <li><a href="/designs">推荐作品</a></li>
+          <li><a href="/inspirations">灵感秀</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" class='fb'>行业资讯</a></li>
+          <li><a href="/articles">装修资讯</a></li>
+          <li><a href="#">色彩资讯</a></li>
+          <li><a href="#">微博资讯</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" class='fb'>精彩活动</a></li>
+          <li><a href="#">年度色彩趋势活动</a></li>
+          <li><a href="/events">设计师活动</a></li>
+          <li><a href="#">其他精彩活动</a></li>
+        </ul>
+        <ul>
+          <li><a href="/softwares/case" class='fb'>实用工具</a></li>
+          <li><a href="/softwares/tools">配色工具</a></li>
+          <li><a href="/softwares/app">设计师APP</a></li>
+        </ul>
+        <ul>
+          <li>
+          <a href="#" class='fb'>业主通道</a>
+          </li>
+          <li><a href="/channel/access">片区快查</a></li>
+          <li><a href="/faqs">装修问答</a></li>
+          <li><a href="/channel/service">在线配色服务</a></li>
+        </ul>
+        <ul class="ul_last">
+          <li><a href="#" class='fb'>漆光艺彩</a></li>
+          <li><a href="#">墙面艺术效果</a></li>
+          <li><a href="#">木纹风尚生活</a></li>
+        </ul>
+      </div>
+    </div><!--bot_map ends-->
+    <div class='copyright ft12'>
+      <div class='w_995'>
+        <a href='#'>立邦官网</a> |
+        <a href='#'>联系我们</a> |
+        <a href='#'>会员机制</a> |
+        <a href='#'>网上商城</a> |
+        <a href='#'>网站声明</a>
+        <p>Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
+      </div><!--w_995 ends-->
+    </div><!--copyright ends-->
+  </div><!--footer ends-->
 
-    <%= yield  :foot %>
+  <%= yield  :foot %>
 
-  </body>
+</body>
 </html>

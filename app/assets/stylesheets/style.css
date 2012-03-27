@@ -26,17 +26,30 @@ p.indent_24{text-indent:24px;}
 p.master_msg{color:#373737;line-height:30px;margin: 6px 16px 5px;font-family: "Microsoft Yahei"; padding-bottom: 15px;}
 p.master_icon_bg{background: url(/assets/master/msg_bg.png) no-repeat right bottom; padding-bottom: 50px;}
 /*hot topics*/
-.hot_topics_box{padding:9px 18px 9px 9px; overflow:hidden;}
-.hot_topics_box img{float:left;}
-.hot_topics_con{float:right;width:625px;}
-.hot_topics_con h3{font:18px "Microsoft Yahei";font-weight:bold;color:#313131;}
-.hot_topics_con p{margin-top:12px;font:14px "Microsoft Yahei";line-height:24px;color:#5a5a5a;}
+.hot_topics_box{padding:9px; overflow:hidden;}
+
+.hot_topics_box img{float:left; margin-right:10px;}
+.hot_topic_main{ overflow:hidden; margin-top:10px; _width:680px;}
+.hot_topics_con{float:left;width:477px;}
+.hot_topics_box h3{font:18px "Microsoft Yahei";font-weight:bold;color:#313131; _width:680px;}
+.hot_topics_con p{font:14px "Microsoft Yahei";line-height:24px;color:#5a5a5a;}
 .hot_topics_con a{color:#b90000;}
-.h3_sub{padding-bottom: 8px;background:url(/assets/master/hot_topics_line.png) no-repeat right bottom;margin-top:2px;}
-.h3_sub span{font:12px "arial simsun";color:#868686;}
+.h3_sub{overflow:hidden;padding-bottom: 8px;background:url(/assets/personal/hot_topics_line.png) no-repeat right bottom;margin-top:10px;*width:665px!important;}
+.h3_sub span{ float:left;font:12px "arial simsun";color:#868686; margin-right:10px;}
+.h3_sub span.zf,.h3_sub span.pl{ padding-left:20px; line-height:17px;}
+.h3_sub span.zf{ background:url(/assets/design/d_icon.png) no-repeat left -35px;}
+.h3_sub span.pl{ background:url(/assets/design/d_icon.png) no-repeat left -16px;}
+
+.hot_topics_con p.pl40{ margin-top:34px;}
 .hot_topics_con p.pl40,.new_act .new_news p.pl40{background:url(/assets/master/tag_icon.png) no-repeat left center;font:13px "arial simsun";color:#e9700f;}
 .hot_topics_con p.pl40 span{margin-right:5px;}
 .sub_bot .pager{margin-top:28px;}
+
+.new_comm{ width:200px; height:234px; border:1px solid #dfdfdf; color:#2f2f2f;}
+.new_comm h4{ background:#f7f7f7 url(/assets/master/new_comm.png) no-repeat 6px center; padding:6px 6px 6px 26px;font:14px/26px "Microsoft Yahei";}
+.new_comm ul{padding:5px;font:12px "arial simsun";}
+.new_comm ul li{ padding:5px 5px 5px 15px; background:url(/assets/master/li_doct.jpg) no-repeat 3px center; border-bottom:1px dotted #e5e5e5; height:16px; line-height:16px;}
+
 /*hot topic*/
 .hot_topic{}
 .topic_box{border-top:3px solid #e71d36; padding:17px 20px 85px;}
@@ -384,8 +397,8 @@ h2.article{height:100px;background:url(/assets/index_related_tit.png) no-repeat 
 .progress_num{ position:absolute;right:-48px;top:17px;background:url(/assets/arrow_t.png) no-repeat center 3px;width:100px;text-align:center;padding-top:15px;}
 /*emagazine*/
 .top_bar{width:360px; text-align:right;font-size:12px;color:#898989;}
-.user_info{ height:12px;padding:17px 0;color:#898989;margin:0 3px;}
-.user_info strong{color:#e71d36;font-weight:bold;text-decoration:underline;}
+.user_info{ height:12px;padding:15px 0;color:#898989;margin:0 3px;font:12px "arial simsun"}
+.user_info strong{color:#e71d36;font-weight:bold;text-decoration:underline; line-height:16px;}
 .user_info.out{color:#646363;}
 .emagazine{ background:url(/assets/emagezine/emagazine_bg1.png) no-repeat top center; padding-top:10px;}
 .emagazine .e_new{ overflow:hidden; background:#fff;width:771px; margin:0 auto; padding:30px 15px 15px;}
