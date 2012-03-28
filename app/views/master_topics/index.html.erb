@@ -30,7 +30,7 @@
                         <p><%= raw topic.intro %>...<%= link_to "[详细]", "/master_topics/#{topic.id}" %></p>
                       <p class="pl40">
                         <%- @tags.each do |tag| %>
-                        <span><%= link_to tag.name,  "/topics?tags=#{URI.escape(tag.name)}"%></span>
+                        <span><%= link_to tag.name,  "/master_topics?tags=#{URI.escape(tag.name)}"%></span>
                         <%- end %>
                       </p>
                       </div>
