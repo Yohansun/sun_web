@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Post.find(params[:id])
+    @prev_article = Subject.content("articles").order("published_at DESC").where("published_at < ?",@article.published_at).first
+    @next_article = Subject.content("articles").order("published_at DESC").where("published_at > ?",@article.published_at).last
   end
 
   def get_articles_with_tags
