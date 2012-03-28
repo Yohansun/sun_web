@@ -34,13 +34,10 @@
         </div>
       </div>
       <!--sys_bar ends-->
-      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post } ) do |f| %>
         <div class="sys_bar ft14">
           <div class="reg_list fb">使用电子邮箱找回</div>
           <div class="forget">
-            <span><%= f.error_notification %></span>
-            <label class="fl fb tr" for="email">电子邮箱地址：</label>
-            <input type="text" class="email fl fb" name="user[email]" id="email"/>
+            <label>几分钟后，您将收到重置密码的电子邮件.</label>
           </div>
           <!--forget ends-->
           <div class="forget pr">
@@ -53,12 +50,6 @@
           <!--forget ends-->
         </div>
         <!--sys_bar ends-->
-        <div class="reset_commit fl">
-          <input type="image" src="/assets/news/submit.jpg" class="fl">
-          <input type="reset" value="重置" class="reset_reset fb ft14 fl">
-        </div>
-        <!--reg_content ends-->
-      <%- end %>
     </div>
     <!--section ends-->
   </div>

@@ -26,10 +26,12 @@ zh-CN:
       signed_in: '登录成功.'
       signed_out: '退出成功.'
     passwords:
-      send_instructions: '几分钟后，您将收到重置密码的电子邮件.'
-      updated: '您的密码已修改成功，您现在已登录.'
-      updated_not_active: '您的密码已修改成功.'
-      send_paranoid_instructions: '如果您的邮箱存在于我们的数据库中，您将收到一封找回密码的邮件.'
+      user:
+        send_instructions: '几分钟后，您将收到重置密码的电子邮件.'
+        send_instructions_fail: '*邮件发送失败(邮箱不存在或者错误)，请检查您输入的email地址！*'
+        updated: '您的密码已修改成功，您现在已登录.'
+        updated_not_active: '您的密码已修改成功.'
+        send_paranoid_instructions: '如果您的邮箱存在于我们的数据库中，您将收到一封找回密码的邮件.'
     confirmations:
       send_instructions: '几分钟后，您将收到确认帐号的电子邮件.'
       confirmed: '您的帐号已经确认，您现在已登录.'

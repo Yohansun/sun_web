@@ -44,8 +44,9 @@
         <div class="navTop fr">
           <a href="#" class="user_info fl">
           <%- if user_signed_in? %>
-             <strong><%= current_user.username %></strong></a><a href="#" class="user_info fl">我的主页</a><%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %><a href="#" class="weibo fl"></a>
+             <strong><%= current_user.username %></strong></a><a href="#" class="user_info fl">我的主页</a><%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
           <%- end %>
+          <a href="#" class="weibo fl"></a>
           </a>
         <div class="search fl">
           <form action="#" method="get">
@@ -146,7 +147,7 @@
           <div>
             <label for="password" class="password ft14 fl">密码：</label>
             <input id="password" type="password" class="fl" name="user[password]"/>
-            <span class="tips tc fr"><a href="#">忘记密码？</a></span>
+            <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
           </div>
           <input id="login" type="image" src="/assets/login.jpg" />
           <div class="checkbox fl">

@@ -2,11 +2,12 @@ Icolor::Application.routes.draw do
 
   root :to => 'home#index'
 
-  devise_for :users, :controllers => { :registrations => "users/register", :sessions => "users/sessions" }
+  devise_for :users, :controllers => { :registrations => "users/register", :sessions => "users/sessions", :passwords => "users/passwords" }
   devise_scope :user do
     match "/users/register/roles" => "users/register#roles"
     match "/users/suc_regist" => "users/register#suc_regist"
     match "/users/data_valid" => "users/register#data_valid"
+    match "/users/passwords/send_suc" => "users/passwords#send_suc"
   end
 
   #订阅电子期刊和在线客服
