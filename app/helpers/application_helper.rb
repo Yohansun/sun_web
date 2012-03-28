@@ -29,7 +29,7 @@ module ApplicationHelper
         return { :css => ["index", "industry_news"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
       when "weekly_stars"
         return { :css => ["index", "weekstar"], :js => ["location.js", "LinkageSelect.js"], :pic_path => "/assets/design/title_design.png" }
-      when "register"
+      when /register|passwords/
         return { :css => ["reg"], :js => ["location.js", "LinkageSelect.js"] }
       when /^master|contact/
         return { :css => ["style", "weekstar"], :pic_path => "/assets/master/title_master.png" }
