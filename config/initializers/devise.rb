@@ -210,7 +210,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :weibo, '977841144', '4e79f6cc7ea4f3467413faa048648c08'
+  config.omniauth :qq_connect, '100255284', '4ba3d90d37bf44585e4fd6c29f00ae1b'
+  config.omniauth :renren, '382eab67b82948c9b9d9ef23762ee6a0', '9fd3b3435051414db2162f56025aeb03'
+  config.omniauth :kaixin, '117776322358cc65172cd04298f00709', 'e961cb1566b803fac0e46861e9126230'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -220,5 +223,29 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+
+  class Hash
+    def recursive_find_by_key(key)
+      # Create a stack of hashes to search through for the needle which
+      # is initially this hash
+      stack = [ self ]
+
+      # So long as there are more haystacks to search...
+      while (to_search = stack.pop)
+        # ...keep searching for this particular key...
+        to_search.each do |k, v|
+          # ...and return the corresponding value if it is found.
+          return v if (k == key)
+
+          # If this value can be recursively searched...
+          if (v.respond_to?(:recursive_find_by_key))
+            # ...push that on to the list of places to search.
+            stack << v
+          end
+        end
+      end
+    end
+  end
 end
 Devise.router_name = :main_app
