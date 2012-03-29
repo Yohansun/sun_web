@@ -2,7 +2,9 @@ Icolor::Application.routes.draw do
 
   root :to => 'home#index'
 
-  devise_for :users, :controllers => { :registrations => "users/register", :sessions => "users/sessions", :passwords => "users/passwords" }
+  devise_for :users, :controllers => { :registrations => "users/register",
+    :sessions => "users/sessions", :passwords => "users/passwords",
+    :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
     match "/users/register/roles" => "users/register#roles"
     match "/users/suc_regist" => "users/register#suc_regist"

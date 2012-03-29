@@ -29,5 +29,11 @@ gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
 gem "devise"
 gem 'kaminari'
 
+gem "omniauth"
+gem "omniauth-weibo"
+gem "omniauth-renren"
+gem "omniauth-kaixin"
+gem "omniauth-qq-connect"
+
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"
