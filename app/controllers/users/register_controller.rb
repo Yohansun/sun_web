@@ -4,20 +4,14 @@ class Users::RegisterController < Devise::RegistrationsController
 
   def create
     @messages = ""
-    valid_result = data_valid
-    rebuild_params
+    session_role
 
-    if valid_result.size > 0
-      valid_result.each do |key, value|
-        @messages << "*" + value + '\n'
-      end
-      return @messages
-    elsif valid_result.length == 0 && params[:is_read].nil?
-      @messages << "*您还没有接受会员注册协议！" + '\n'
-      return @messages
+    if session[:role]
+      params[resource_name][:role_id] = Role.find_by_role(session[:role]).id
     end
 
     build_resource
+    valid_result = resource.errors.messages
 
     if resource.save
       if resource.active_for_authentication?
@@ -28,15 +22,18 @@ class Users::RegisterController < Devise::RegistrationsController
         respond_with resource
       end
     else
-      clean_up_passwords resource
-      respond_with resource
+      if valid_result.size > 0
+        valid_result.each do |key, value|
+          @messages << "*" + value[0] + '\n'
+        end
+        return @messages
+      end
     end
   end
 
-  def rebuild_params
-    if session[:role]
-      params[resource_name][:role_id] = Role.find_by_role(session[:role]).id
-    end
+  def update
+    self.resource = current_user if current_user
+    valid_result  = resource.errors.messages
 
     if params[resource_name][:sex]
       case params[resource_name][:sex]
@@ -47,70 +44,38 @@ class Users::RegisterController < Devise::RegistrationsController
       end
     end
 
-    #没有推荐人的时候，将recommended_name设置为空
-    params[:user][:recommended_name] = '' if params[:user][:recommended] != "1"
+    resource.update_attributes(params[resource_name])
 
-    #设计师注册页面‘就职公司’，‘就职地址’，‘在读学校’，‘学校地址’ 字段重置
-    if params[:user][:recommended] == "1"
-      params[:user][:current_school] = ''
-      params[:user][:school_address] = ''
-    else
-      params[:user][:inauguration_company] = ''
-      params[:user][:recipient_address]    = ''
+    @messages = ""
+    if valid_result.size != 0
+      valid_result.each do |key, value|
+        @messages << "*" + value[0] + '\n'
+      end
+      return @messages
     end
   end
 
-  def data_valid
-    regexEnum = { :username => "(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]", #username
-                  :password => "^\\d{6,}$", #password
-                  :email    => "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$", #email
-                  :phone    => "^(13|15|18)[0-9]{9}$",
-                  :name     => "^[\u4e00-\u9fa5]{2,4}$", #真实姓名 2-4个中文
-                  :zip_code => "^\\d{6}$" #邮政编码
-    }
-
-    params[:user].each do |key, value|
-      #必填选项
-      if key =~ /username|password|recipient_address|email|phone|name_of_company|company_address/
-        if  value.blank?
-          set_flash_message key.to_sym, "#{key}_blank".to_sym
-        else
-          if !regexEnum[key.to_sym].nil? && value !~ Regexp.new(regexEnum[key.to_sym])
-            set_flash_message key.to_sym, "#{key}".to_sym
-          end
-          if key == 'username' && User.exists?(key.to_sym => value)
-            set_flash_message key.to_sym, :username_used
-          end
-        end
-      end
-
-      #真实姓名和邮政编码不为空值时的验证
-      if key =~ /name|zip_code/ && !value.blank? && !regexEnum[key.to_sym].nil? && value !~ Regexp.new(regexEnum[key.to_sym])
-        set_flash_message key.to_sym, "#{key}".to_sym
-      end
-    end
-
-    #设计师注册页面‘就职公司’，‘就职地址’，‘在读学校’，‘学校地址’
-    if params[:user][:des_status] == "1"
-      set_flash_message(:inauguration_company, :inauguration_company_blank) if params[:user][:inauguration_company].blank?
-    else
-      set_flash_message(:current_school, :current_school_blank) if params[:user][:current_school].blank?
-    end
-
-    # 推荐人验证
-    if params[:user][:recommended] == "1"
-      if params[:user][:recommended_name].blank?
-        set_flash_message :recommended_name, :recommended_name_blank
+  def username_check
+    check = Regexp.new('(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]')
+    if params[:user][:username] =~ check
+      if User.exists?(:username => params[:user][:username])
+        render :text => "该用户名已经被注册，请输入新的用户名！"
       else
-        set_flash_message(:recommended_name, :recommended_name) if !User.exists?(:username => params[:user][:recommended_name])
+        render :text => "恭喜您，该用户名尚未被注册！"
+      end
+    else
+      render :text => "用户名不能为空，只能用数字、字母、下划线和汉字组成，不能包含空格，并且不能以下划线和数字开头！"
+    end
+  end
+
+  def session_role
+    unless params[:user][:role].blank?
+      r = params[:user][:role].split("_")
+      session[:role] = r[0]
+      if r.size == 2
+        session[:designer] = r[1]
       end
     end
-
-    if params[:user][:flag]
-      render :text => "#{flash.to_hash[:username]}"
-    end
-
-    return flash.to_hash
   end
 
   protected

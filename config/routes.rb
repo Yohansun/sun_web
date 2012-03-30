@@ -6,9 +6,10 @@ Icolor::Application.routes.draw do
     :sessions => "users/sessions", :passwords => "users/passwords",
     :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
-    match "/users/register/roles" => "users/register#roles"
+    match "/users/complete" => "users/register#complete"
+    match "/user/update" => "users/register#update"
     match "/users/suc_regist" => "users/register#suc_regist"
-    match "/users/data_valid" => "users/register#data_valid"
+    match "/users/username_check" => "users/register#username_check"
     match "/users/passwords/send_suc" => "users/passwords#send_suc"
   end
 

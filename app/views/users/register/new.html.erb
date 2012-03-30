@@ -1,19 +1,14 @@
 <div class="main">
-  <div class="reg_bg2 pr"></div>
+  <div class="reg_bg1 pr"></div>
   <div class="wrapper">
     <%= form_for(resource, :as => resource_name, :url => "/users", :remote => true ) do |f| %>
       <div class="reg_content ft14">
         <div class="reg_list fl">
           <label for="uesername"><span>*</span>用户名：</label>
-          <input type="text" class="username fl" name="user[username]" id="user_name" />
+          <input type="text" class="username fl" name="user[username]" id="user_name"/>
           <a href="javascript:void(0)" class="reg_chk fl" onclick="username_check()"></a>
+          <img src="<%= asset_path "news/correct.jpg" %>" class="correct fl" />
         </div><!--reg_list ends-->
-        <div class="upload fr tc">
-          <div class="upload_area">
-            <img src="<%= asset_path "news/regimg_bg.jpg" %>" />
-          </div>
-          <input type="image" src="<%= asset_path "news/reg_upload.jpg" %>" />
-        </div><!--upload ends-->
         <div class="reg_list fl">
           <label for="uesername"><span>*</span>密&nbsp;&nbsp;&nbsp;码：</label>
           <input type="password" class="password pass_check fl" name="user[password]"/>
@@ -34,19 +29,39 @@
           <input type="password" class="password fl" name="user[password_confirmation]"/>
           <span class="reg_tip2 fl">请重新输入，确认密码</span>
         </div><!--reg_list ends-->
-
-        <%= reg_partial %>
-
+        <div class="reg_list reg_width fl">
+          <label for="uesername">我的身份：</label>
+          <div class="fl">
+            <select class="fl" name="user[role]">
+              <option value=""> ----请选择---- </option>
+              <option value="designer_0">设计师（在职）</option>
+              <option value="designer_1">设计师（在读）</option>
+              <option value="company">家装公司</option>
+              <option value="user">普通用户</option>
+            </select>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="uesername">所在地：</label>
+          <div class="fl">
+            <select id="province" class="level_1 fl" name="user[state]"></select>
+            <select id="city" class="level_2 fl" name = user[city]></select>
+            <select id="county" class="level_3 fl" name = user[district]></select>
+            <span class="reg_tip3 fl">注：如果系统辩识有误，请手动选择</span>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="recommander"><span>*</span>Email：</label>
+          <input type="text" class="username fl" name="user[email]"/>
+          <span class="reg_tip3 fl">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
+        </div><!--reg_list ends-->
         <br style="float:left;display:inline;clear:both;" />
+        <p class="reg_bot ft12 tc">注：您的注册信息仅用于icolor官网，我们不会对外公开您的信息，请放心</p>
         <p class="reg_bot ft12 tc">
-        注：您的注册信息仅用于icolor官网，我们不会对外公开您的信息，请放心
-        </p>
-        <p class="reg_bot ft12 tc">
-        <input type="checkbox" name="is_read"/>
+        <input type="checkbox" name="user[is_read]"/>
         接受会员注册协议（<a href="#">阅读</a>）
         </p>
         <p class="tc">
-        <a href="reg.html"><img src="<%= asset_path "news/reg_up.jpg" %>" /></a>&nbsp;
         <input type="image" style="_margin-top:-20px;" src="<%= asset_path "news/reg_next.jpg" %>" />
         </p>
       </div><!--reg_content ends-->
@@ -57,32 +72,29 @@
   </div><!--wrapper ends-->
 </div><!--main ends-->
 <script type="text/javascript">
-  function username_check(){
-    var username = $("#user_name").val()
-      $.post(" /users/data_valid", {user:{username:username,flag:0}}, function(message){
-          if (message != "") {
-            alert(message);
-          }else{
-            alert("恭喜您，您的用户名可以使用！");
-          }
-          });
-  }
+    function username_check() {
+        var username = $("#user_name").val()
+        $.post(" /users/username_check", {user:{username:username,flag:0}}, function(message) {
+            if (message != "") {
+                alert(message);
+            }
+        });
+    }
 </script>
 <script type="text/javascript" charset="utf-8">
-$(function(){
-  var options = {
-    data  : data
-  }
+    $(function() {
+        var options = {
+            data  : data
+        }
 
-  var sel = new LinkageSelect(options);
-  sel.bind('.level_1');
-  sel.bind('.level_2');
-  sel.bind('.level_3');
+        var sel = new LinkageSelect(options);
+        sel.bind('.level_1');
+        sel.bind('.level_2');
+        sel.bind('.level_3');
 
-  $("#captcha input").focus(function(){
-    $('#captcha').removeClass('onerror');
-  });
+        $("#captcha input").focus(function() {
+            $('#captcha').removeClass('onerror');
+        });
 
-});
+    });
 </script>
-

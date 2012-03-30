@@ -1,0 +1,5 @@
+<% if !@messages.blank? %>
+alert("<%= raw @messages %>");
+<%- else -%>
+  window.location.replace("/users/suc_regist");
+<%- end -%>
