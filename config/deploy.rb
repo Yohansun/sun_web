@@ -41,11 +41,6 @@ namespace :deploy do
     unicorn.reload
   end
 
-  desc "Compile assets"
-  task :assets do
-    run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
-  end
-
   desc "Symlink shared resources on each release"
   task :symlink_shared, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
@@ -54,6 +49,5 @@ namespace :deploy do
 end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
-after "deploy:symlink_shared", "deploy:assets"
 
 require 'capistrano-unicorn'
