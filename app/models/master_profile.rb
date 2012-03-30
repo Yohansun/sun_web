@@ -5,6 +5,16 @@ class MasterProfile < ActiveRecord::Base
   attr_accessor :time
   default_scope order("published_at DESC")
 
-  has_attached_file :preview_img_in, :styles => { :thumb => "80x80#", :original => "477x317#" }
-  has_attached_file :preview_img_out, :styles => { :thumb => "80x80#", :original => "278x282#" }
+  has_attached_file :preview_img_in,
+    :styles => { :thumb => "80x80#", :original => "477x317#" },
+    :whiny_thumbnails => true,
+    :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
+    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
+  has_attached_file :preview_img_out,
+    :styles => { :thumb => "80x80#", :original => "278x282#" },
+    :whiny_thumbnails => true,
+    :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
+    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
 end

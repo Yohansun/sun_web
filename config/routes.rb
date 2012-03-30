@@ -72,6 +72,7 @@ Icolor::Application.routes.draw do
       resources :weekly_tips
       resources :master_designs
     end
+    resources :master_design_uploads
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
