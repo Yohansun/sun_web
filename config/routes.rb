@@ -65,10 +65,12 @@ Icolor::Application.routes.draw do
 
   match "/industry_news/news" => "industry_news#news"
 
-  #扩充magic_contetn
+  #扩充magic_content
   scope "/admin/content", :module => "magic_content" do
     resources :subjects do
       resources :master_profiles
+      resources :weekly_tips
+      resources :master_designs
     end
   end
 

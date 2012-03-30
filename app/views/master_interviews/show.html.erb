@@ -29,7 +29,6 @@
     <div class="shadow mb25">
       <div class="section">
         <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
-        <%- unless @article.nil? %>
         <%- t = @article.interview_content.split("\r\n\r\n") %>
         <%- (t.size/2).times do |i| %>
           <div class="interview_box">
@@ -38,7 +37,6 @@
               <p class="interview_icon"><%= t[2*i+1] %></p>
             </div>
           </div>
-        <%- end %>
         <%- end %>
       </div>
     </div>

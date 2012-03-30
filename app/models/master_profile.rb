@@ -1,6 +1,7 @@
 class MasterProfile < ActiveRecord::Base
   acts_as_taggable
   belongs_to :subject
+  has_many :master_designs
   attr_accessor :time
   default_scope order("published_at DESC")
 

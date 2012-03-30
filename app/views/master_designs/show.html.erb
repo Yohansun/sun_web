@@ -10,13 +10,13 @@
     <img src='<%= set_style[:pic_path] %>' />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="#">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
+    <a href="/">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
   </div><!--sub_nav ends-->
   <div class='wrapper pb60 group pt25'>
     <div class="works_detail_tit line_b_dot group">
-      <h3>深圳颐林雅苑时尚简约家<strong>Michael Young</strong></h3>
+      <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) %></strong></h3>
       <div class="full_play">
-        <a href="/master_designs/1/fullscreen">全屏观看</a>
+        <a href="/master_designs/<%= @master_design.id %>/fullscreen">全屏观看</a>
       </div>
     </div>
 
@@ -308,7 +308,7 @@
     <div class="shadow mt25">
       <div class="section">
         <div class="tit_bg"><h2>作品简介SYNOPSIS</h2></div>
-        <p class="master_msg ft14">别墅的设计风格正如题记之中所描述的那样，圆了人们一个关于栖息的理想梦境，从古罗马的辉煌到桃源仙境，从东方到西方，从古时到现代，这个梦被以各种方式诠释着，关于优雅，关于品味，关于享受方式，关于舒适，更重要的是，关于思考的境界。</p>
+        <p class="master_msg ft14"><%= @master_design.design_intro %></p>
       </div>
     </div>
 

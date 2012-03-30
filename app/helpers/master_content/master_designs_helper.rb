@@ -1,0 +1,2 @@
+module MasterContent::MasterDesignsHelper
+end
