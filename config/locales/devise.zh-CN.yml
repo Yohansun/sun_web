@@ -3,15 +3,34 @@
 # forked from https://gist.github.com/1319590
 
 zh-CN:
-  errors:
-    messages:
-      expired: "您已过期，请重新申请"
-      not_found: "没有找到"
-      already_confirmed: "已经确认，请重新登录."
-      not_locked: "未锁定"
-      not_saved:
-        one: "因为1个错误导致此%{resource}保存失败:"
-        other: "因为%{count}个错误导致此%{resource}保存失败:"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              blank: "用户名不能为空！"
+              invalid: "用户名不能为空，只能用数字、字母、下划线和汉字组成，不能包含空格，并且不能以下划线和数字开头！"
+              taken: "用户名已经被占用，请重新输入新的用户名！"
+            password:
+              blank: "密码不能为空！"
+              too_short: "密码长度不得少于6位数！"
+              confirmation: "输入确认密码您不正确，请重新输入！"
+            email:
+              blank: "邮箱不能为空!"
+              invalid: "您输入的邮箱格式不正确，请重新输入！"
+              taken: "您的邮箱已经注册过，请重新输入！"
+            recommended_name:
+              blank: "推荐人不能为空！"
+            phone:
+              invalid: "您输入的电话格式不正确！"
+              taken: "您的电话已经被注册过，请重新输入！"
+            name:
+              invalid: "真实姓名为2-4个中文!"
+            zip_code:
+              invalid: "邮编必须为数字且只能6位!"
+            is_read:
+              blank: "您还没有接受会员注册协议！"
   devise:
     failure:
       already_authenticated: '您已经登录.'
@@ -53,6 +72,7 @@ zh-CN:
         recommended_name: '您输入的推荐人用户名不存在,请再次输入！'
         email_blank: '邮箱不能为空!'
         email: '您输入的邮箱格式不正确，请重新输入！'
+        email_used: '您的邮箱已经注册过，请重新输入！'
         phone_blank: '联系电话不能为空！'
         phone: '您输入的电话格式不正确！'
         name_of_company_blank: '公司名称不能为空!'

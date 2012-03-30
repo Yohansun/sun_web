@@ -1,21 +1,8 @@
 # -*- Encoding: UTF-8 -*-
 module ApplicationHelper
-  def reg_partial
-    session[:role] = params[:role] if params[:role]
-
-    if params[:role]
-      render :partial => "#{params[:role]}"
-    end
-  end
-
-  def suc_designer
-    case session[:role]
-      when 'designer'
-        render :text => '进入设计师主页'
-      when 'company'
-        render :text => '进入家装公司主页'
-      when 'user'
-        render :text => '进入主页'
+  def complete_partial
+    if session[:role]
+      render :partial => "#{session[:role]}"
     end
   end
 
@@ -29,8 +16,10 @@ module ApplicationHelper
         return { :css => ["index", "industry_news"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
       when "weekly_stars"
         return { :css => ["index", "weekstar"], :js => ["location.js", "LinkageSelect.js"], :pic_path => "/assets/design/title_design.png" }
-      when /register|passwords/
+      when "register"
         return { :css => ["reg"], :js => ["location.js", "LinkageSelect.js"] }
+      when "passwords"
+        return { :css => ["reg"] }
       when /^master|contact/
         return { :css => ["style", "weekstar"], :pic_path => "/assets/master/title_master.png" }
       when "channel"
