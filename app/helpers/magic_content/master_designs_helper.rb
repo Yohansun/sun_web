@@ -1,0 +1,2 @@
+module MagicContent::MasterDesignsHelper
+end

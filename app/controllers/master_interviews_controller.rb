@@ -1,6 +1,6 @@
 class MasterInterviewsController < ApplicationController
   def index
-    @articles = Subject.content("MasterProfile").order("published_at DESC").page(params[:page]).per(5) if Subject.content("MasterProfile")
+    @articles = Subject.content("master_profile").page(params[:page]).per(5)
     if params[:filter]
       @articles = @articles.tagged_with(params[:filter])
     end

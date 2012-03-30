@@ -1,0 +1,39 @@
+<div class="content">
+  <div class="title">
+    <h5><%= form_title %></h5>
+    <div class="num"><%= link_to '返回', subject_master_profiles_path(parent), :class => "redNum" %></div>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :design_name, :input_html => { :class=> "validate[required]" }, :label => "作品名称:" %>
+        <%= f.input :master_profile_id, :collection => MasterProfile.all.collect { |i| [i.name,i.id] },
+                    :prompt => '--请选择--', :label => "作者:", :include_blank => "无" %>
+        <%= f.input :main_preview_img, :label => "上传图片:" %>
+        <%= f.input :design_name, :label => "作品简介:", :hint => "请在输入标题或者内容后换行！" %>
+        <div class="rowElem">
+          <label>发布时间:</label>
+          <div class="formRight www1">
+            <%= text_field_tag "post[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
+            <%= text_field_tag "post[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <%= f.input :tag_list, :hint => "Tips: 多个标签之间用“，”隔开", :label => "标签:" %>
+        <div class="rowElem">
+          <%= f.button :submit, :value => "#{button_value}" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

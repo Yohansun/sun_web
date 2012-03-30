@@ -27,7 +27,6 @@
       <a href="#"><img src="<%= asset_path "master/space_master_btn.png" %>" /></a>
     </div><!--list_btn ends-->
     <div class="list_box">
-      <%- unless @articles.nil? %>
       <%- @articles.each do |article| %>
         <div class="list_main mt25 group">
           <div class="img_name"><%= image_tag article.preview_img_out.url(:original) %>
@@ -40,7 +39,6 @@
             <p class="pt25"><a href="/master_interviews/<%= article.id %>"><img src="<%= asset_path "master/look_detail_btn.png" %>" alt="" /></a></p>
           </div><!--list_detail ends-->
         </div>
-      <%- end %>
     </div><!--list_box ends-->
   </div><!--wrapper ends-->
   <div class='sub_bot pr'>

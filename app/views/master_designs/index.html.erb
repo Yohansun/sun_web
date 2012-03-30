@@ -10,44 +10,36 @@
     <img src='<%= set_style[:pic_path] %>' alt="" />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="#">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
+    <a href="/">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
   </div>
   <!--sub_nav ends-->
   <div class='wrapper pb60'>
     <div class="design_tit group pb10 line_b_dot">
       <ul class="design_filter group">
-        <li class="li_current">
-        <a href="#">全部</a>
-        </li>
-        <li>
-        <a href="#">海外</a>
-        </li>
-        <li>
-        <a href="#">港澳台</a>
-        </li>
-        <li>
-        <a href="#">中国大陆</a>
-        </li>
+        <% @tags.each do |tag| %>
+            <li><%= link_to tag.name,  "/articles?tags=#{URI.escape(tag.name)}", :class => "#{'li_current' if tag.name == params[:tags] }"%></li>
+        <% end %>
       </ul>
     </div>
     <!--design_tit ends-->
     <div class="list_btn line_b_dot">
-      <a href="#"><img src="<%= asset_path "master/color_master_btn.png" /></a><a href="#"><img src="/assets/master/space_master_btn.png" %>" /></a>
+      <%= link_to image_tag("/assets/master/color_master_btn.png") ,"#"%><%= link_to image_tag("/assets/master/space_master_btn.png") ,"#"%>
     </div>
     <!--list_btn ends-->
+    <%- @master_designs.each do |design| %>
     <div class="shadow mt25">
       <div class="section master_works_list">
-        <a class="works_b" href="/master_designs/1"><img src="<%= asset_path "master/master_works1.jpg" %>" alt="" /></a>
+        <%= link_to image_tag("/assets/master/master_works1.jpg") ,"/master_designs/#{design.id}",:class => "works_b"%>
         <div class="works_detail">
-          <h4>作者：<strong>Michael Young</strong></h4>
-          <h4>国籍：<span>中国台湾</span></h4>
-          <h4>作品名称：<span>深圳颐林雅苑时间简约家</span></h4>
+          <h4>作者：<strong><%= design.master_profile.try(:name) %></strong></h4>
+          <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
+          <h4>作品名称：<span><%= design.design_name %></span></h4>
           <h4>作品简介：</h4>
           <p class="indent_24">
-          享有“建筑鬼才”之美誉的里卡多•波菲(Ricardo Bofill)，在设计界中是一位充满传奇色彩的人物。他长期活跃在国际建筑舞台，他所领导的波菲建筑有限公司（RBTA）项目范围已扩张到世界各地。
+          <%= design.design_intro %>
           </p>
           <div class="works_list_slide">
-            <a class="works_pre" href="javascript:void(0)"><img src="<%= asset_path "master/works_list_left.png" alt="" /></a><a class="works_next" href="javascript:void(0)"><img src="/assets/master/works_list_right.png" %>" alt="" /></a>
+            <%= link_to image_tag("/assets/master/works_list_left.png") ,"javascript:void(0)",:class => "works_pre"%><%= link_to image_tag("/assets/master/works_list_right.png") ,"javascript:void(0)",:class => "works_next"%>
             <div class="img_works_box">
               <div class="img_works_list">
                 <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
@@ -67,67 +59,13 @@
                 <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
                 <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--master_works_list ends-->
-    <div class="shadow mt25">
-      <div class="section master_works_list">
-        <a class="works_b" href="#"><img class="works_b" src="<%= asset_path "master/master_works2.jpg" %>" alt="" /></a>
-        <div class="works_detail">
-          <h4>作者：<strong>Michael Young</strong></h4>
-          <h4>国籍：<span>中国台湾</span></h4>
-          <h4>作品名称：<span>深圳颐林雅苑时间简约家</span></h4>
-          <h4>作品简介：</h4>
-          <p class="indent_24">
-          享有“建筑鬼才”之美誉的里卡多•波菲(Ricardo Bofill)，在设计界中是一位充满传奇色彩的人物。他长期活跃在国际建筑舞台，他所领导的波菲建筑有限公司（RBTA）项目范围已扩张到世界各地。
-          </p>
-          <div class="works_list_slide">
-            <a class="works_pre" href="javascript:void(0)"><img src="<%= asset_path "master/works_list_left.png" alt="" /></a><a class="works_next" href="javascript:void(0)"><img src="/assets/master/works_list_right.png" %>" alt="" /></a>
-            <div class="img_works_box">
-              <div class="img_works_list">
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s12.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--master_works_list ends-->
-    <div class="shadow mt25">
-      <div class="section master_works_list">
-        <a class="works_b" href="#"><img class="works_b" src="<%= asset_path "master/master_works3.jpg" %>" alt="" /></a>
-        <div class="works_detail">
-          <h4>作者：<strong>Michael Young</strong></h4>
-          <h4>国籍：<span>中国台湾</span></h4>
-          <h4>作品名称：<span>深圳颐林雅苑时间简约家</span></h4>
-          <h4>作品简介：</h4>
-          <p class="indent_24">
-          享有“建筑鬼才”之美誉的里卡多•波菲(Ricardo Bofill)，在设计界中是一位充满传奇色彩的人物。他长期活跃在国际建筑舞台，他所领导的波菲建筑有限公司（RBTA）项目范围已扩张到世界各地。
-          </p>
-          <div class="works_list_slide">
-            <a class="works_pre" href="javascript:void(0)"><img src="<%= asset_path "master/works_list_left.png" alt="" /></a><a class="works_next" href="javascript:void(0)"><img src="/assets/master/works_list_right.png" %>" alt="" /></a>
-            <div class="img_works_box">
-              <div class="img_works_list">
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s12.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--master_works_list ends-->
+    </div><!--master_works_list ends-->
+    <%- end %>
   </div>
 
   <script type="text/javascript">
@@ -191,19 +129,7 @@ $('a.works_pre').click(function(){
 <!--wrapper ends-->
 <div class='sub_bot pr'>
   <div class="pager ft12">
-    <a href="#" class="prev"><span></span>上一页</a>
-    <a href="#">1</a>
-    <a href="#" class="current">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a>
-    <a href="#">8</a>
-    <a href="#">...</a>
-    <a href="#">20</a>
-    <a href="#" class="next">下一页<span></span></a>
+    <%= paginate @master_designs %>
   </div><!--pager ends-->
-</div>
-<!--sub_bot ends-->
-    </div><!--main ends-->
+</div><!--sub_bot ends-->
+</div><!--main ends-->
