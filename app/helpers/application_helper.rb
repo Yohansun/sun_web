@@ -9,13 +9,13 @@ module ApplicationHelper
   def set_style
     case controller_name
       when "home"
-        return { :css => ["style"] }
+        return { :css => ["style", "index"] }
       when /designer_events|other_events/
-        return { :css => ["index", "exciting_activities"] }
+        return { :css => ["exciting_activities","style"] }
       when "color_articles"
-        return { :css => ["index", "industry_news"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
+        return { :css => ["industry_news","style"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
       when "weekly_stars"
-        return { :css => ["index", "weekstar"], :js => ["location.js", "LinkageSelect.js"], :pic_path => "/assets/design/title_design.png" }
+        return { :css => ["weekstar","style"], :js => ["location.js", "LinkageSelect.js"], :pic_path => "/assets/design/title_design.png" }
       when "register"
         return { :css => ["reg"], :js => ["location.js", "LinkageSelect.js"] }
       when "passwords"
@@ -29,11 +29,18 @@ module ApplicationHelper
       when "softwares"
         return { :css => ["news"], :js => ["myfocus"], :pic_path => "/assets/news/title_tools.png" }
       when "designs"
-        return { :css => ["style", "/fancybox/jquery.fancybox.css", "/fancybox/helpers/jquery.fancybox-buttons.css"], :js => ["jquery.fancybox.js", "/fancybox/helpers/jquery.fancybox-buttons.js", "jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
+        case action_name
+          when "index"
+            return { :css => ["style", "/fancybox/jquery.fancybox.css", "/fancybox/helpers/jquery.fancybox-buttons.css"], :js => ["jquery.fancybox.js", "/fancybox/helpers/jquery.fancybox-buttons.js", "jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
+          else
+            return { :css => ["reg"] }
+        end
       when "inspirations"
         case action_name
           when "show"
-            return { :css => ["index", "weekstar"], :pic_path => "/assets/design/title_design.png" }
+            return { :css => ["weekstar"], :pic_path => "/assets/design/title_design.png" }
+          when "upload"
+            return { :css => ["reg"] }
           else
             return { :css => ["style"], :js => ["jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
         end
