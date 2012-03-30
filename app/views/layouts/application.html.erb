@@ -38,8 +38,8 @@
     <div class="header">
       <div class="nav pa">
         <div class="logo">
-          <a href="#"><img src="/assets/logo.png" /></a>
-          <a href="#"><img src="/assets/logo2.png" /></a>
+          <a href="#"><%= image_tag "logo.png" %></a>
+          <a href="#"><%= image_tag "logo2.png" %></a>
         </div>
         <div class="navTop fr">
           <a href="#" class="user_info fl">
@@ -51,7 +51,7 @@
         <div class="search fl">
           <form action="#" method="get">
             <input type="text" class="fl" value="Search" />
-            <input type="image" src="/assets/search-icon.jpg" />
+            <input type="image" src="<%= asset_path("search-icon.jpg") %>" />
           </form>
         </div><!--search ends-->
         <div class="navLabel fl ft12">
@@ -149,24 +149,24 @@
             <input id="password" type="password" class="fl" name="user[password]"/>
             <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
           </div>
-          <input id="login" type="image" src="/assets/login.jpg" />
+          <input id="login" type="image" src="<%= asset_path "login.jpg" %>" />
           <div class="checkbox fl">
             <input type="checkbox" /><span>下次自动登录</span>
           </div>
         <%- end %>
       </div><!--loginCon ends-->
       <ul class="loginCon ft12 border clear">
-        <li><a href="/users/auth/weibo"><img src="/assets/sina.jpg" />新浪微博</a></li>
-        <li><a href="/users/auth/qq_connect"><img src="/assets/qq.jpg" />QQ</a></li>
-        <li><a href="/users/auth/renren"><img src="/assets/rr.jpg" />人人网</a></li>
-        <li class="noborder"><a href="/users/auth/kaixin"><img src="/assets/kx.jpg" />开心网</a></li>
+        <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>" />新浪微博</a></li>
+        <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>" />QQ</a></li>
+        <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>" />人人网</a></li>
+        <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>" />开心网</a></li>
       </ul>
       <div class="loginCon ft12 border clear">
         <p class="fl">还没加入iColor?</p>
         <a href="/users/register/roles" class="reg_now fl"></a>
       </div><!--loginCon ends-->
       <div class="loginCon border">
-        <a href="/users/register/roles"><img src="/assets/reg_ads.jpg" alt="ads" /></a>
+        <a href="/users/register/roles"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads" /></a>
       </div>
     </div><!--loginBg ends-->
   </div>
@@ -185,17 +185,17 @@
           <span class="server_check none">请输入您要咨询的内容。</span>
         </div><!--server_content ends-->
         <p class="subs_submit tc">
-        <input type="image" src="/assets/submit_btn.jpg" id="server_submit" />
+        <input type="image" src="<%= asset_path "submit_btn.jpg" %>" id="server_submit" />
         </p>
     <%- end %>
       </div><!--server_input ends-->
     <div class="server_suc none">
       <div class="server_content ft14 tc">
-        <img src="/assets/server_suc.jpg" />
+        <img src="<%= asset_path "server_suc.jpg" %>" />
         <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
       </div><!--server_content ends-->
       <p class="subs_submit tc">
-      <input type="image" src="/assets/submit_btn.jpg" id="server_close" />
+      <input type="image" src="<%= asset_path "submit_btn.jpg" %>" id="server_close" />
       </p>
     </div><!--server_suc ends-->
   </div><!--server_area ends-->
@@ -212,7 +212,7 @@
           <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
         </div><!--subs_content ends-->
         <p class="subs_submit tc">
-        <input type="image" src="/assets/submit_btn.jpg" />
+        <input type="image" src="<%= asset_path "submit_btn.jpg" %>" />
         </p>
       <%- end %>
     </div><!--subs_input ends-->
@@ -222,11 +222,11 @@
         <a href="javascript:void(0)" class="close_btn fr"></a>
       </div><!--subs_title ends-->
       <div class="subs_content tc">
-        <img src="/assets/subs_suc.jpg" />
+        <img src="<%= asset_path "subs_suc.jpg" %>" />
         <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
       </div><!--subs_content ends-->
       <p class="subs_submit tc">
-      <input type="image" src="/assets/submit_btn.jpg" />
+      <input type="image" src="<%= asset_path "submit_btn.jpg" %>" />
       </p>
     </div><!--subs_suc ends-->
   </div><!--overlay ends-->
@@ -237,12 +237,12 @@
   <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
     <div class='links'>
       <div class='w_995 group'>
-        <a href='http://www.nipponpaint.com.cn/'><img src='/assets/link1.jpg' alt="" /></a>
-        <a href='http://shop.nipponpaint.com.cn/'><img src='/assets/link2.jpg' alt="" /></a>
-        <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src='/assets/link3.jpg' alt="" /></a>
-        <a href='http://www.e-jjj.com/'><img src='/assets/link4.jpg' alt="" /></a>
-        <a href='http://www.80018.cn/'><img src='/assets/link5.jpg' alt="" /></a>
-        <a class="nomr" href='http://www.pchouse.com.cn/'><img src='/assets/link6.jpg' alt="" /></a>
+        <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.jpg" %>" alt="" /></a>
+        <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.jpg" %>" alt="" /></a>
+        <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.jpg" %>" alt="" /></a>
+        <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.jpg" %>" alt="" /></a>
+        <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.jpg" %>" alt="" /></a>
+        <a class="nomr" href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.jpg" %>" alt="" /></a>
       </div><!--w_995 ends-->
     </div><!--links ends-->
     <div class='bot_map w_995 ft12 clear'>

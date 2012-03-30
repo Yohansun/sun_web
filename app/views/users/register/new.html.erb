@@ -10,9 +10,9 @@
         </div><!--reg_list ends-->
         <div class="upload fr tc">
           <div class="upload_area">
-            <img src="/assets/news/regimg_bg.jpg" />
+            <img src="<%= asset_path "news/regimg_bg.jpg" %>" />
           </div>
-          <input type="image" src="/assets/news/reg_upload.jpg" />
+          <input type="image" src="<%= asset_path "news/reg_upload.jpg" %>" />
         </div><!--upload ends-->
         <div class="reg_list fl">
           <label for="uesername"><span>*</span>密&nbsp;&nbsp;&nbsp;码：</label>
@@ -46,13 +46,13 @@
         接受会员注册协议（<a href="#">阅读</a>）
         </p>
         <p class="tc">
-        <a href="reg.html"><img src="/assets/news/reg_up.jpg" /></a>&nbsp;
-        <input type="image" style="_margin-top:-20px;" src="/assets/news/reg_next.jpg" />
+        <a href="reg.html"><img src="<%= asset_path "news/reg_up.jpg" %>" /></a>&nbsp;
+        <input type="image" style="_margin-top:-20px;" src="<%= asset_path "news/reg_next.jpg" %>" />
         </p>
       </div><!--reg_content ends-->
     <%- end %>
     <div class="ads">
-      <a href="#"><img src="/assets/news/reg_ad.jpg" /></a>
+      <a href="#"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>
     </div>
   </div><!--wrapper ends-->
 </div><!--main ends-->
