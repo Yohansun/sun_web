@@ -42,7 +42,7 @@ function ImageFlow ()
 		animationSpeed:     50,             /* Animation speed in ms */
 		aspectRatio:        2.5,          /* Aspect ratio of the ImageFlow container (width divided by height) */
 		buttons:            false,          /* Toggle navigation buttons */
-		captions:           0,           /* 标题 */
+		captions:           false,           /* 标题 */
 		circular:           false,          /* 连续播放 */
 		imageCursor:        'default',      /* Cursor type for all images - default is 'default' */
 		ImageFlowID:        'imageflow',    /* Default id of the ImageFlow container */

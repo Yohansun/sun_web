@@ -6,4 +6,5 @@ tmp
 .idea
 .DS_Store
 public/system/
+public/dev-assets/
 .DS_Store

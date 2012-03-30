@@ -220,7 +220,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 .upload_btn a{display:block; width:112px;background:url(<%= asset_path "design/upload_btn.png" %>) no-repeat right center; padding:8px; color:#000;font:16px "SimHei";}
 
 .design_result  ul.d_works{ overflow:hidden; padding:17px 0 0 4px;border-top:1px dotted #a09f9d;margin-top:8px;}
-.design_result  ul.d_works li{ float:left; width:291px;margin:0 4px;}
+.design_result  ul.d_works li{ float:left; width:291px;margin:0 4px; _display:inline;}
 .design_result h3{border-bottom:1px dotted #a09f9d; font:14px "Microsoft Yahei"; color:#313131; font-weight:bold;margin-top:10px; padding-bottom:7px;}
 .design_result p,.inspiration_result .row p{overflow:hidden; margin-top:5px; font-size:12px; color:#666; line-height:20px;}
 .design_result p strong,.design_result p span,.inspiration_result p strong,.inspiration_result .row p span{ float:left;color:#5c5c5c; padding-left:20px;display:block; margin-right:10px; line-height:18px;}
@@ -229,17 +229,6 @@ ul.design_filter .li_current a{color:#ffffff;}
 .design_result p.p2 span.pl,.inspiration_result p.p2 span.pl{ background:url(<%= asset_path "design/d_icon.png" %>) no-repeat left -16px;}
 .design_result p.p2,.inspiration_result p.p2,.inspiration_result p.p1,.inspiration_result p.p0{border-bottom:1px dotted #a09f9d; padding-bottom:2px;}
 .design_result p a{ float:left;}
-/*full screen*/
-.full_screen_popup{display:none;/**/z-index:1100;}
-.overlay{ background:url(<%= asset_path "design/overlay.png" %>) repeat; min-height:9999px; min-width:9999px; position:absolute; top:0; left:0; bottom:0; right:0; z-index:1102; overflow:hidden;}/**/
-.popup{width:532px;height:278px;background:#000;position:absolute;top:50%;left:50%;margin-left:-266px;margin-top:-139px;border:1px solid #2c2c2c; padding:15px; z-index:1103;}
-.popup p,.popup h3{ text-align:center;color:#bababa;}
-.popup h3{font-size:18px; font-weight:bold;margin-top:15px;}
-.popup p{margin-top:15px;padding-bottom:25px;border-bottom:1px dotted #575757;}
-.popup p.pb_noline{ border:none;font-size:14px;}
-.popup p.pb_noline a{color:#e40707;padding:0 3px;text-decoration:underline;}
-.popup_s{text-align:center;}
-.popup_s img{margin-right:5px;}
 /*inspiration*/
 .inspiration_result{ overflow:hidden;border-top:1px dotted #a09f9d; padding-top:15px; margin-top:10px;}
 .inspiration_result .row{ display:block;overflow:hidden;}
@@ -248,99 +237,88 @@ ul.design_filter .li_current a{color:#ffffff;}
 .inspiration_result .result_time{ color:#a1a1a1; font-size:12px;}
 .inspiration_result p.p3 strong{ background:url(<%= asset_path "design/d_icon.png" %>) no-repeat left -53px; color:#010101;}
 
-/*firm home*/
-.container{width:963px; margin:0 auto; overflow:hidden;}
-.sidebar{float:left;width:200px; background:#ffffff; padding:10px 8px;}
-.content{float:right;width:741px;}
-.banner{ position:relative;}
-.banner .describe_img{ position:absolute; top:0; left:0; width:270px; height:244px; background:url(<%= asset_path "personal/black_tm.png" %>);}
-.banner .describe_img p{ padding:23px 20px 5px;color:#fff;font:12px/24px "arial simsun";}
-.describe_img p a{color:#e71d36; font:italic 14px "Microsoft Yahei";}
-.banner h2.banner_tit{ position:absolute;right:17px;top:4px;font:30px "Microsoft Yahei"; color:#fff;}
-.banner h2.banner_tit strong{font-weight:bold;}
-.banner_ads{ margin:10px 0;}
+.inspiration_result .host_ins div img.host_ins_img,.inspiration_result .host_ins div{ width:188px;}
 
-.column{}
-.identity{ height:30px; background:#000; margin-top:5px;padding-left:1px; color:#fff; font:bold 18px/30px "Microsoft Yahei";}
-.identity span{color:#efd754;font:12px/18px "Microsoft Yahei"; margin-top:5px; padding:0 10px 0 17px; background:url(<%= asset_path "personal/gold_icon.png" %>) no-repeat left 2px; height:18px;}
-.user_atten{ overflow:hidden; display:block; margin-top:10px; padding-bottom:7px;}
-.user_atten li{display:block; width:80px;border-right:1px solid #ccc;/**/ padding-right:13px;}
-.user_atten span{ color:#666666;font:12px "arial simsun";}
-.user_atten strong{ display:block;color:#3188d2;font:16px "Arial, Helvetica, sans-serif";}
-.contact{margin-top:10px;}
-.contact img{ margin-left:10px;}
-.column p{color:#3b3b3b; font:12px/20px "Microsoft Yahei";padding:0 6px;}
-.column p span{ font-weight:bold;}
-
-.column h6{ height:24px; font:bold 14px/24px "Microsoft Yahei"; color:#fff; margin-bottom:5px;padding:0 10px;}
-.column h6.tit_666{ background:#666666; }
-.column h6.tit_red{background:#e71d36;}
-.column h6.tit_red span{ float:right;display:inline;}
-.upload_info p {font:12px "Microsoft Yahei"; color:#3b3b3b;padding:0 10px;}
-.upload_info p strong{float:right;display:inline;color:#838383;margin-top:3px;}
-.chek_map{ display:block; margin:0 48px 0 68px; color:#000; font:bold 12px/20px "Microsoft Yahei"; text-decoration:underline;}
-.sidebar .p_line p{ padding-bottom:5px;border-bottom: 1px dotted #949494; _line-height:20px;_padding:5px 0;}
-
-p.act_ads_more{ padding-right:15px; background:url(<%= asset_path "personal/act_ads_more.png" %>) no-repeat right 6px;_background-position:right 10px;}
-p.act_ads_more a{color:#5c5a5b;font:12px/24px "Microsoft Yahei";_margin-right:15px;}
-.visitors ul{overflow:hidden; width:200px; margin-top:15px; padding-bottom:20px;}
-.visitors li{float:left; margin-right:2px;}
-
-.works_sort{ height:37px; background:#fff;}
-.sort_show { position:relative; bottom:-6px; padding-left:15px;}
-.sort_show li{ float:left; height:31px;background:#dfded8; margin:0 10px; display:inline;}
-.sort_show li a{display:block;font: 14px "Microsoft Yahei";color:#898989; text-align:center; padding:5px 13px;*padding:6px 13px;_padding-top:7px;padding-top:6px\0;}
-.sort_show li.sort_current{ height:37px; background:url(<%= asset_path "personal/sort_cur_bg.png" %>) no-repeat center center;}
-.sort_show li.sort_current a{color:#fff; font-size:16px;}
-
-.content .works_show{ margin-top:6px; background:#fff; padding:5px 8px 10px;}
-.content .works_show  ul.d_works{ overflow:hidden;padding-bottom:30px;}
-.content .works_show  ul.d_works li{ float:left; width:171px; margin:20px 3px 0; padding:0 2px; display:inline; _height:260px;}
-.content .works_show h3{border-bottom:1px dotted #a09f9d; font:14px "Microsoft Yahei"; color:#313131; font-weight:bold;margin-top:10px; padding-bottom:7px;}
-.content .works_show p{overflow:hidden; margin-top:5px; font-size:12px; color:#666; line-height:20px; _height:20px;}
-.content .works_show p strong,.works_show p span{ float:left;color:#5c5c5c; padding-left:20px;display:block; margin-right:10px; _margin-right:5px; line-height:18px;}
-.content .works_show p.p1 strong{ background:url(<%= asset_path "design/d_icon.png" %>) no-repeat left 2px;}
-.content .works_show p.p2 span.zf{ background:url(<%= asset_path "design/d_icon.png" %>) no-repeat left -35px;}
-.content .works_show p.p2 span.pl{ background:url(<%= asset_path "design/d_icon.png" %>) no-repeat left -16px;}
-.content .works_show p.p2{border-bottom:1px dotted #a09f9d; padding-bottom:2px;}
-.content .works_show p a{ float:left;}
-.pagebar { overflow:hidden;padding:10px 0;}
-.pagebar div{ float:right; width:445px;}
-.pagebar a,.pagebar span,.pagebar input{ float:left;}
-.pagebar span{ margin:0 10px;}
-.pagebar a{ margin:0 20px;}
-.pagebar input{ width:50px; text-align:center;}
-/*host*/
-.host,.law{width:923px!important;background:#fff!important; padding:5px 20px; overflow:hidden; margin-top: 110px;}
-.host_con{ float:left; width:685px;}
-.host_con .section{ padding:0 20px 20px;}
-.host_self{ overflow:hidden;padding:18px 0;background:url(<%= asset_path "personal/hot_topics_line.png" %>) repeat-x right bottom;}
-.host_self img.box_shadow{float:left; padding:2px;border:1px solid #cccccc; margin-right: 25px; box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
-.host_self .host_status{float:left; width:460px;}
-.host_self .host_status h2 {overflow:hidden;font:18px "Microsoft Yahei";margin:10px 0;_height:24px;}
+/*host in common*/
+.signup{width:904px;background:#fff; padding:25px 30px; margin-top: 110px;}
+.signup_box .section{ padding:0 0px 20px; zoom:1;}
+.host_self{ overflow:hidden;padding:18px 20px 0;/*background:url(<%= asset_path "personal/hot_topics_line.png" %>) repeat-x right bottom;*/}
+.signup_img_box {float:left;}
+.host_self img.box_shadow{ padding:2px;border:1px solid #cccccc;box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
+.signup_img_box p{ text-align:center; margin:10px 0;}
+.signup_img_box p a{font:14px "Microsoft Yahei";color:#666666; text-decoration:underline;}
+.host_self .host_status{float:right; position:relative; width:620px;}
+.host_self .host_status h2 {overflow:hidden;font:18px "Microsoft Yahei"; color:#000;margin:5px 0;padding-left:7px;zoom:1;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(<%= asset_path "personal/gold_icon.png" %>) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
-.host_self .host_status h2 strong{float:left; margin-right:25px;line-height:24px;}
-.host_self .host_status p{position:relative;left:-8px;color:#8b8d8c;font:12px/24px "arial simsun"; height:24px; background:url(<%= asset_path "personal/host_bg1.jpg" %>) no-repeat left center;padding:5px 15px;margin:5px 0 10px;}
-.host_sort{border-bottom:4px solid #f3f3f3; margin-bottom:5px;}
+.host_self .host_status h2 strong{float:left; margin-right:25px;line-height:26px;}
+.host_self .host_status p{ background:url(<%= asset_path "personal/signup_icon.png" %>) no-repeat;font:14px "Microsoft Yahei"; padding:3px 40px;color:#666666;}
+.host_self .host_status p.icon_email{ background-position:7px 7px;}
+.host_self .host_status p.icon_qq{ background-position:7px -16px;}
+.host_self .host_status p.icon_msn{ background-position:7px -44px;}
+.host_self .host_status p.icon_fetion{ background-position:7px -69px;}
+.host_self .host_status .signup_text{ background:url(<%= asset_path "personal/host_ly_bg_l.jpg" %>) no-repeat left center; height:30px;padding:5px 1px 5px 6px;margin:5px 0 10px;}
+.host_self .host_status .signup_text p{color:#909196;font:12px/30px "arial simsun";background:url(<%= asset_path "personal/host_ly_bg_r.jpg" %>) no-repeat right center; height:30px; padding:0 5px;}
 
-.fans_info{background:none; padding-left:5px;}
-.fans_info span{font:12px "Microsoft Yahei";}
-.fans_info .host_status {width:530px;}
-.fans_info .host_status p{ background:url(<%= asset_path "personal/host_bg2.jpg" %>) no-repeat left center;}
-.fans_info .host_status h2{ margin:0 0 15px;}
-.add_atten_btn{margin-top:4px;}
-.host_sort .sort_show{padding-left:0;}
-.cancel_atten_btn {font:12px/30px "arial simsun";}
-.cancel_atten_btn a{color:#3188d2;}
+a.back_perhome,a.launch_act{position:absolute;display:block; height:34px; width:82px;}
+a.back_perhome{background:url(<%= asset_path "personal/home_btn.png" %>) no-repeat left center; padding-left:30px;top:0px;right:1px; font:12px/28px "Microsoft Yahei"; color:#999999;}
+a.launch_act{background: url(<%= asset_path "personal/launch_act.png" %>) no-repeat left center;padding:3px 5px 0 35px;top:-4px; right:20px; font:16px/32px "SimHei";color:#5c6572; text-align:center;}
 
-.host .pager{margin:30px 0 0px; width:100%; text-align:right;}
+.signup_box ul.system_info{ overflow:hidden; border:1px solid #e4e4e4; height:32px;padding:8px 30px;margin:20px;}
+.signup_box ul.system_info li{ float:left; padding:5px 24px 5px 20px; margin-right:24px; height:23px; border-right:1px solid #f1f1f1; background:url(<%= asset_path "personal/signup_icon.png" %>) no-repeat;}
+.signup_box ul.system_info li.icon_info{ background-position:0 -103px;}
+.signup_box ul.system_info li.icon_qustion{ background-position:0 -131px;}
+.signup_box ul.system_info li.icon_active{ background-position:0 -164px;}
+.signup_box ul.system_info li.icon_point{ background-position:0 -194px;}
 
-.host_sidebar{ float:right; width:205px;}
-.host_sidebar .section{padding:5px;}
-.host_sidebar .user_atten li{width:50px;}
-.host_sidebar .user_atten{ padding-bottom:20px;}
-.host_sidebar .p_line p{border-bottom:1px dotted #949494;padding:5px 10px;}
-.user_atten_red{color:#e71d36!important;}
+.signup_box ul.system_info li a{font:14px "Microsoft Yahei"; color:#666666;}
+.signup_box ul.system_info li a.host_cur{color:#e71d36; text-decoration:underline;}
+/*d_host in common*/
+.host_self .host_status p.d_hostaddr{ background:none;font:16px "Microsoft Yahei"; padding:3px 7px;color:#666666;}
+/*host tit*/
+.host_sort{border-bottom:4px solid #f3f3f3; margin:0 20px 5px;}
+.host_sort ul.show_tit_ul { position:relative; overflow:hidden; bottom:-8px; padding-left:10px;}
+.host_sort ul.show_tit_ul li.sort_show_tit{ float:left;background:url(<%= asset_path "personal/sort_tit_bg.png" %>) no-repeat center top; text-align:center; padding:5px 10px 10px;}
+.host_sort ul.show_tit_ul li.sort_show_tit a{font:16px/25px "Microsoft Yahei";color:#fff;}
+
+.sort_box{padding:0 20px;*z-index:2!important;}
+.sort_box ul.sort_show_ul{ position:relative; z-index:2; height:31px; width:600px;}
+.sort_box ul.sort_show_ul li{ float:left; background:#dfded9; text-align:center; margin-right:13px; height:31px; width:91px;}
+.sort_box ul.sort_show_ul li a{font:14px/31px "Microsoft Yahei";color:#7a786b;}
+.sort_box ul.sort_show_ul li.sort_show{position:relative; top:-3px;*top:-4px!important;background:url(<%= asset_path "personal/sort_cur_bg.png" %>) no-repeat center top; text-align:center; padding:5px 15px 10px; width:64px; height:25px;}
+.sort_box ul.sort_show_ul li.sort_show a{font:16px/25px "Microsoft Yahei";color:#fff;}
+/*d in notice*/
+.host_main{ background:url(<%= asset_path "personal/host_bg_t.png" %>) no-repeat top center; padding:25px 20px; position:relative;top:-8px;*top:1px!important;_top:-8px; z-index:1;}
+.host_main .host_main_list{margin:0 0 30px 0;}
+.host_main .host_main_list span{width:75px; margin-left:30px;}
+.host_main .host_main_list span a{ color:#666666; padding:0 5px;}
+.host_main .host_main_list span a:hover{ color:#e71d36;}
+.p_hover{background:#f2f2f2;}
+/*in sigup*/
+.host_main_list{ margin:0px 20px 30px 35px; padding-top:10px;}
+.host_main_list h3{ overflow:hidden;border-bottom:4px solid #f3f3f3; padding:5px 3px 5px 3px;padding-right:16px\9;_padding-right:10px;font:12px "Microsoft Yahei"; color:#666;}
+.host_main_list h3 strong{font-size:14px; font-weight:bold; color:#000;}
+.host_main_list span{ float:right;font:12px "Microsoft Yahei"; display:block; text-align:center;}
+.host_main_list h3 span{color:#7a786b; /*letter-spacing:3px;*/ margin-left:50px; /*margin-left:60px\9;*/}
+.host_main_list p span{color:#565656; width:60px;width:70px\9; margin-left:20px;}
+.host_main_list p{ border-bottom:1px dotted #000; padding:10px 5px 10px;font:14px "Microsoft Yahei";}
+.host_main_list p span.replay_new{ padding:0 35px; background:url(<%= asset_path "personal/icon_new.png" %>) no-repeat right center; width:25px;}
+.host_main_list p span.replay_new_time{ margin-left:6px;}
+
+.host_pager a{ margin:0 5px;}
+.host_pager a.current{ background:#f1f1f1;}
+/*in-info*/
+.host_ts{ top:14px; right:0; color:#666666;}
+.info_main h1{ overflow:hidden;}
+.info_main .sys_bar{ overflow:hidden;}
+/*out/in works*/
+.host_works_img{ width:207px; height:224px;}
+.host_main .design_result  ul.d_works{ padding:0;}
+.host_main .design_result  ul.d_works li{ position:relative;width:207px; *margin:0px 6px 0 0!important;}
+.host_works_edit{ position:absolute; right:0px; top:204px; /*display:none;*/}
+.host_works_edit a{ float:right; margin-left:10px;}
+.host_main .design_result ul.d_works{ border-bottom:1px dotted #A09F9D; border-top:none; padding-bottom:15px;}
+
+
 /*law*/
 .law{width:923px!important;background:#fff!important; padding:5px 20px; overflow:hidden; margin-top: 110px;font:12px "NSimSun";color:3666666;}
 .law_site{position:relative;color:#666666;font:12px "NSimSun";line-height:16px;margin:0 15px 10px;}
@@ -389,17 +367,20 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png" %>
 .point_sort .sort_show li a.rules_sort{background:#ffa800;}
 .mypoint .rules_con{margin-top:20px;}
 .mypoint .rules_msg{margin-bottom:0;}
-.progress_bar{padding:20px 0 20px 40px;}
-.progress_status span{margin-right:20px;}
+
+.progress_bar{padding:50px 0 20px 40px; min-height:400px;}
+.progress_status {padding:10px 0;}
+.progress_status span{font:18px "Microsoft Yahei"; color:#000;}
+.progress_status strong{ padding:3px 15px 3px 0;font:18px "Microsoft Yahei"; color:#ff0000;}
+.progress_status a{font:12px "arial simsun"; color:#000; text-decoration:underline;}
+.progress_status.host_point_tit2 span{font:12px "arial simsun"; padding-left:23px;}
+
+
 .progress_bg{ height:17px; width:781px; background:url(<%= asset_path "progress_bg.png" %>) no-repeat left center; margin:20px auto;padding:0 3px 0 0;}
 .progress_over_l{background:url(<%= asset_path "progress_over_l.png" %>) no-repeat left center;padding-left:8px;}
 .progress_over_r{ position:relative;background:url(<%= asset_path "progress_over.png" %>) no-repeat right center;height:17px;width:435px; max-width:775px;}
 .progress_num{ position:absolute;right:-48px;top:17px;background:url(<%= asset_path "arrow_t.png" %>) no-repeat center 3px;width:100px;text-align:center;padding-top:15px;}
 /*emagazine*/
-.top_bar{width:360px; text-align:right;font-size:12px;color:#898989;}
-.user_info{ height:12px;padding:15px 0;color:#898989;margin:0 3px;font:12px "arial simsun"}
-.user_info strong{color:#e71d36;font-weight:bold;text-decoration:underline; line-height:16px;}
-.user_info.out{color:#646363;}
 .emagazine{ background:url(<%= asset_path "emagezine/emagazine_bg1.png" %>) no-repeat top center; padding-top:10px;}
 .emagazine .e_new{ overflow:hidden; background:#fff;width:771px; margin:0 auto; padding:30px 15px 15px;}
 .new_act_box,.new_news_box{width:381px;}
@@ -489,3 +470,24 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png" %>
 *:first-child+html .group {/* IE7 */
 	min-height:1px;
 }
+
+.return{background:url(<%= asset_path "personal/return.jpg" %>) no-repeat;width:111px;height:32px;}
+.sort_box ul.sort_show_ul li.modify{background:#eb4b01;width:96px;}
+.modify img.pa{bottom:-6px;left:50%;margin-left:-3px;}
+.modifys{padding:40px 90px;}
+.modifys label{width:80px;float:left;clear:left;margin-top:4px;color:#7a7a7a;}
+.upload_img{width:133px;height:132px;padding:1px;border:1px solid #c8c8c8;margin:5px;}
+.uploads{width:400px;color:#858585;margin-left:5px;}
+.uploads h2{margin:10px 0;}
+.upload_cancel{background:url(<%= asset_path "personal/upload_cancel.jpg" %>) no-repeat;width:88px;height:26px;}
+.modifys textarea{width:584px;height:72px;border:1px solid #e2e2e2;margin-top:5px;color:#858585;}
+.modifys input{border:1px solid #e2e2e2;height:20px;color:#858585;}
+.modifys input.event_title{width:406px;}
+.modifys input.upload_file{height:auto;margin:30px 0 10px;}
+.modifys input.cl{height:auto;border:none;margin-right:10px;}
+.modifys select{width:125px;height:24px;border:1px solid #e2e2e2;color:#858585;}
+.modify_list{margin:15px 0;}
+.modifys input.temptime{width:125px;}
+.modifys .reset_commit{width:166px;margin:20px 0 0 321px;}
+.modifys .reset_commit input{height:auto;}
+.reset_reset{border:1px solid #e2e2e2;padding:0.5em 1em;margin-left:10px;}

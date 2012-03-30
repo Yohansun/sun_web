@@ -4,23 +4,17 @@
         $('.fancybox').fancybox({
             openEffect  : 'none',
             closeEffect : 'none',
-
             prevEffect : 'none',
             nextEffect : 'none',
-
             closeBtn  : false,
-
             helpers : {
                 title : {
                     type : 'inside'
                 },
                 buttons    : {}
             },
-
             loop: false,
-
             title: 'okokok!!',
-
             afterLoad : function() {
                 //this.title = '(' + (this.index + 1) + ' / ' + this.group.length + ')' + (this.title ? ' - ' + this.title : '');
                 this.title = (this.title ? this.title : '') + '(' + (this.index + 1) + ' / ' + this.group.length + ')';
@@ -38,42 +32,57 @@
     </div><!--sub_nav ends-->
     <div class='wrapper pb60 group'>
         <div class="design_tit group">
-            <ul class="design_filter group">
-                <li class="li_current">
-                    <a href="#">最新</a>
-                </li>
-                <li>
-                    <a href="#">最热</a>
-                </li>
-                <li class="arrow_filter">
-                    <a href="#">风格</a>
-                    <ul class="sub_filter">
-                        <li>
-                            <a href="#">现代简约</a>
-                        </li>
-                        <li>
-                            <a href="#">中式新古典</a>
-                        </li>
-                        <li>
-                            <a href="#">欧式复古</a>
-                        </li>
-                        <li>
-                            <a href="#">田园地中海</a>
-                        </li>
-                        <li>
-                            <a href="#">其他</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="arrow_filter">
-                    <a href="#">户型</a>
-                </li>
-                <li class="arrow_filter">
-                    <a href="#">城市</a>
-                </li>
-            </ul>
+          <ul class="design_filter group">
+            <li class="li_current">
+              <a href="#">最新</a>
+            </li>
+            <li>
+              <a href="#">最热</a>
+            </li>
+            <li>
+              <!--<a href="#">风格</a>-->
+              <select class="arrow_filter li_current">
+                <option>现代简约</option>
+                <option>中式新古典</option>
+                <option>欧式复古</option>
+                <option>田园地中海</option>
+                <option>其他</option>
+              </select>
+
+              <!--<ul class="sub_filter">
+                                   <li>
+                                       <a href="#">现代简约</a>
+                                   </li>
+                                   <li>
+                                       <a href="#">中式新古典</a>
+                                   </li>
+                                   <li>
+                                       <a href="#">欧式复古</a>
+                                   </li>
+                                   <li>
+                                       <a href="#">田园地中海</a>
+                                   </li>
+                                   <li>
+                                       <a href="#">其他</a>
+                                   </li>
+                               </ul>-->
+            </li>
+            <li>
+              <!--<a href="#">户型</a>-->
+              <select class="arrow_filter">
+                <option>户型</option>
+              </select>
+            </li>
+            <li>
+              <!--<a href="#">城市</a>-->
+              <select class="arrow_filter">
+                <option>城市</option>
+              </select>
+
+            </li>
+          </ul>
             <div class="upload_btn">
-                <a href="/design_appreciation/upload">我要上传</a>
+                <a href="/designs_upload">我要上传</a>
             </div>
         </div>
         <div class="design_result">
@@ -253,7 +262,7 @@
         <h3>您已浏览完所有图片</h3>
         <p><a href="#"><img src="<%= asset_path "design/replay_btn.png" %>" alt="" /></a></p>
         <p class="pb_noline">来自<a href="#">王勤俭</a>的下一套作品</p>
-        <div class="popup_s"><img src="<%= asset_path "design/popup_s1.jpg" alt="" /><img src="/assets/design/popup_s2.jpg" alt="" /><img src="/assets/design/popup_s3.jpg" alt="" /><img src="/assets/design/popup_s4.jpg" alt="" /><img class="nomr" src="/assets/design/popup_s5.jpg" %>" alt="" /></div>
+        <div class="popup_s"><img src="<%= asset_path "design/popup_s1.jpg"%>" alt="" /><img src="<%= asset_path "design/popup_s2.jpg"%>" alt="" /><img src="<%= asset_path "design/popup_s3.jpg"%>" alt="" /><img src="<%= asset_path "design/popup_s4.jpg"%>" alt="" /><img class="nomr" src="<%= asset_path "design/popup_s5.jpg"%>" %>" alt="" /></div>
     </div>
 </div><!--full_screenbox ends-->
 <%- end %>

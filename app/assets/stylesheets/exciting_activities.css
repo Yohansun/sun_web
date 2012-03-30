@@ -1,6 +1,6 @@
 .wrapper{overflow:hidden}
 .event_desc{margin:30px 0 15px}
-.event_desc .section{padding:10px}
+.event_desc .section{padding:10px;text-align:center}
 .event_desc .image{float:left;margin-right:10px;width:416px;height:278px;overflow:hidden}
 .event_desc .image img{width:100%;height:100%}
 .event_desc .text{float:right;width:455px}
