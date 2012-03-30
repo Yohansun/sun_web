@@ -2,7 +2,7 @@
 .owners_channel .banner{margin:35px 0 70px;padding:1px;border:1px solid #d7d7d7}
 .owners_form{margin:70px 0}
 .owners_form .title{height:32px;border-bottom:4px solid #e3e3e3}
-.owners_form .title h5,.owners_answer_form .title h5{float:left;margin-right:10px;width:92px;height:100%;text-indent:-1000em;background:#ffa800 url(/assets/design/our_needs.gif)}
+.owners_form .title h5,.owners_answer_form .title h5{float:left;margin-right:10px;width:92px;height:100%;text-indent:-1000em;background:#ffa800 url(<%= asset_path "design/our_needs.gif" %>)}
 .owners_form .title p{line-height:28px;font-size:12px;color:#999}
 .owners_form .title p b{color:#000}
 .owners_form form{margin:20px }
@@ -13,18 +13,18 @@
 .owners_form table .f_content td{vertical-align:top}
 .owners_form textarea{width:600px;height:100px}
 .owners_form .f_submit input{vertical-align:top}
-.owners_form .reset{padding:0;border:none;width:61px;height:31px;text-indent:-1000em;background:url(/assets/design/resetB.gif)}
+.owners_form .reset{padding:0;border:none;width:61px;height:31px;text-indent:-1000em;background:url(<%= asset_path "design/resetB.gif" %>)}
 
-.owners_form.formB .title h5{width:91px;background-image:url(/assets/design/hon.gif)}
+.owners_form.formB .title h5{width:91px;background-image:url(<%= asset_path "design/hon.gif" %>)}
 .owners_form.formB .f_input{width:600px;border:1px solid #a7a7a7}
-.owners_form.formB .f_select_wrap{float:left;padding:2px 16px 2px 2px;border:1px solid #a7a7a7;background:url(/assets/design/arr_bottom.gif) no-repeat right center}
+.owners_form.formB .f_select_wrap{float:left;padding:2px 16px 2px 2px;border:1px solid #a7a7a7;background:url(<%= asset_path "design/arr_bottom.gif" %>) no-repeat right center}
 .owners_form.formB .f_select_wrap div{height:16px;overflow:hidden}
 *+html .owners_form.formB .f_select_wrap div{height:18px;}
 .owners_form.formB .f_select_wrap span{display:block;margin:-1px -17px -1px -1px}
 * html .owners_form.formB .f_select_wrap div{float:left}
 
 .dec_answer_form .owners_form{margin:20px 0}
-.dec_answer_form .owners_form .title h5{width:91px;background-image:url(/assets/design/answer.gif)}
+.dec_answer_form .owners_form .title h5{width:91px;background-image:url(<%= asset_path "design/answer.gif" %>)}
 .dec_answer_form .owners_form form{margin:0;width:600px;font-size:12px;color:#666}
 .dec_answer_form .owners_form form p{margin:10px 0;zoom:1}
 .dec_answer_form .owners_form form p:after{content:'';display:block;clear:both}
@@ -44,7 +44,7 @@
 .answer_list .item .bar .user a{color:#999}
 .answer_list .item .bar .time{float:right;color:#8c909c;font-size:12px}
 .answer_list .item .texts{margin:0 0 0 80px;color:#666;line-height:1.5;font-size:13px}
-.answer_list .item .like{float:right;width:75px;height:29px;background:#dadada url(/assets/design/like_btn.gif)}
+.answer_list .item .like{float:right;width:75px;height:29px;background:#dadada url(<%= asset_path "design/like_btn.gif" %>)}
 .answer_list .item .like a{display:block;height:100%;line-height:29px;font-size:12px;color:#333;text-align:center}
 
 .popupA,.popupA_mask{position:fixed;left:0;top:0;z-index:10;width:100%;height:100%;display:none}
@@ -53,17 +53,17 @@
 .popupA{z-index:11}
 .popupA_content{margin:150px auto 0;border:6px solid #666;background:#fff}
 .popupA_content.popupA_middle{width:490px}
-.popupA .popupA_title{height:37px;overflow:hidden;border-bottom:1px solid #e6e6e6;background:#f0f0f0 url(/assets/design/popupA.gif) 0 -21px}
+.popupA .popupA_title{height:37px;overflow:hidden;border-bottom:1px solid #e6e6e6;background:#f0f0f0 url(<%= asset_path "design/popupA.gif" %>) 0 -21px}
 .popupA .popupA_title h4{float:left;padding:0 10px;font-weight:bold;font-size:18px;line-height:37px;color:#959595}
-.popupA .popupA_title .close{float:right;margin:8px 10px;width:21px;height:21px;cursor:pointer;background:#9d2c00 url(/assets/design/popupA.gif)}
+.popupA .popupA_title .close{float:right;margin:8px 10px;width:21px;height:21px;cursor:pointer;background:#9d2c00 url(<%= asset_path "design/popupA.gif" %>)}
 .popupA .popupA_body{padding:20px;text-align:center}
-.popupA .success{display:inline-block;padding:5px 5px 5px 40px;font-size:22px;color:#c27c02;background:url(/assets/design/successA.gif) no-repeat 0 center}
+.popupA .success{display:inline-block;padding:5px 5px 5px 40px;font-size:22px;color:#c27c02;background:url(<%= asset_path "design/successA.gif" %>) no-repeat 0 center}
 *+html .popupA .success{width:1%;white-space:nowrap}
 * html .popupA .success{width:1%;white-space:nowrap}
 .popupA .desc{margin:5px 0;color:#666;font-size:14px}
 .popupA .desc a{text-decoration:underline;color:#666}
 .popupA .button{margin-top:15px;padding-top:12px;border-top:1px dotted #bababa}
-.popupA .button .okA{width:78px;height:31px;border:none;color:#712323;font-size:14px;font-weight:bold;background:#f5b201 url(/assets/design/buttonA.gif)}
+.popupA .button .okA{width:78px;height:31px;border:none;color:#712323;font-size:14px;font-weight:bold;background:#f5b201 url(<%= asset_path "design/buttonA.gif" %>)}
 
 
 .listA{width:100%;font-size:14px}
@@ -76,10 +76,10 @@
 
 .accordionA{}
 .accordionA dl{margin-bottom:10px;border:1px solid #d6d6d6}
-.accordionA dt{height:32px;border-bottom:1px solid #ccc;cursor:pointer;background:#fdfdff url(/assets/design/accordionA.gif)}
-.accordionA dt strong{float:left;margin-left:10px;padding-left:20px;font-size:14px;font-weight:bold;line-height:32px;color:#b80000;background:url(/assets/design/accordionA.gif) no-repeat 0 -100px}
-.accordionA dt span{float:right;width:44px;height:31px;border-left:2px solid #e8e9eb;border-right:1px solid #fff;border-bottom:1px solid #fff;background:#e9eaec url(/assets/design/accordionA.gif) repeat-x -14px -30px}
-.accordionA dd{padding:10px 10px 10px 30px;color:#696969;background:#f7f7f7 url(/assets/design/accordionA.gif) no-repeat 10px -123px}
+.accordionA dt{height:32px;border-bottom:1px solid #ccc;cursor:pointer;background:#fdfdff url(<%= asset_path "design/accordionA.gif" %>)}
+.accordionA dt strong{float:left;margin-left:10px;padding-left:20px;font-size:14px;font-weight:bold;line-height:32px;color:#b80000;background:url(<%= asset_path "design/accordionA.gif" %>) no-repeat 0 -100px}
+.accordionA dt span{float:right;width:44px;height:31px;border-left:2px solid #e8e9eb;border-right:1px solid #fff;border-bottom:1px solid #fff;background:#e9eaec url(<%= asset_path "design/accordionA.gif" %>) repeat-x -14px -30px}
+.accordionA dd{padding:10px 10px 10px 30px;color:#696969;background:#f7f7f7 url(<%= asset_path "design/accordionA.gif" %>) no-repeat 10px -123px}
 .accordionA dd,.accordionA dd p{line-height:1.8}
 .accordionA dl.back{height:32px;overflow:hidden}
 .accordionA dl.back span{background-position:-14px -65px}
@@ -90,7 +90,7 @@
 
 .listA_wrap{margin:30px 0 20px}
 .pag_container{margin:18px 0 13px 0;padding:22px 0;border:1px solid #E0E0E0;background:#F2F2F2}
-.weekly_tips{background:url(/assets/news/weekly_tips.jpg) no-repeat left top;padding:100px 50px 0px 38px;}
+.weekly_tips{background:url(<%= asset_path "news/weekly_tips.jpg" %>) no-repeat left top;padding:100px 50px 0px 38px;}
 
 .oc_pager{position:relative;zoom:1}
 .oc_pager:after{content:"";display:block;clear:both}
@@ -109,7 +109,7 @@ a.history span{display:block;position:absolute;top:6px;border-color:#737373 tran
 .dec_qc .dec_question{margin:15px 0;padding:10px;border:1px solid #d6d6d6}
 
 .dec_question .titlebar{margin:5px 0;height:18px;}
-.dec_question .legend{float:left;padding-left:20px;height:18px;font-size:14px;font-weight:bold;background:url(/assets/design/question.gif) no-repeat left center}
+.dec_question .legend{float:left;padding-left:20px;height:18px;font-size:14px;font-weight:bold;background:url(<%= asset_path "design/question.gif" %>) no-repeat left center}
 .dec_question .legend a{color:#999;font-weight:bold}
 .dec_question .titlebar .time{float:right;margin-right:10px;font-size:12px;color:#8c909b}
 .dec_question_content{margin:15px 0;font-size:12px}

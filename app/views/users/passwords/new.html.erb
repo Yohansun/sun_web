@@ -46,7 +46,7 @@
           <div class="forget pr">
             <!--<label class="fl fb tr" for="code">图形验证码：</label>-->
             <!--<input type="text" class="code fl fb" name="code" id="code"/>-->
-            <!--<img src="/assets/codes.jpg" class="codes fl"/>-->
+            <!--<img src="<%= asset_path "codes.jpg" %>" class="codes fl"/>-->
             <!--<a href="javascript:void(0)" class="fl ft12">换一换</a>-->
             <p class="pa cr none ft14">*您输入的电子邮箱不正确！*</p>
           </div>
@@ -54,7 +54,7 @@
         </div>
         <!--sys_bar ends-->
         <div class="reset_commit fl">
-          <input type="image" src="/assets/news/submit.jpg" class="fl">
+          <input type="image" src="<%= asset_path "news/submit.jpg" %>" class="fl">
           <input type="reset" value="重置" class="reset_reset fb ft14 fl">
         </div>
         <!--reg_content ends-->
