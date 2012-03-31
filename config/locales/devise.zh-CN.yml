@@ -31,6 +31,8 @@ zh-CN:
               invalid: "邮编必须为数字且只能6位!"
             is_read:
               blank: "您还没有接受会员注册协议！"
+            qq:
+              invalid: "您输入的QQ号码格式错误，请重新输入！"
   devise:
     failure:
       already_authenticated: '您已经登录.'

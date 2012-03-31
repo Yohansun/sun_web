@@ -4,9 +4,9 @@
 </div><!--reg_list ends-->
 <div class="reg_list fl">
   <label for="uesername">性别：</label>
-  <input type="radio" class="radio_btn fl" checked="checked" name="user[sex]" value="1"/>
+  <input type="radio" name="user[sex]" class="radio_btn fl" checked="checked" value="1"/>
   <span class="recommand fl fb">男</span>
-  <input type="radio" class="radio_btn fl" name="user[sex]" value="0"/>
+  <input type="radio" name="user[sex]" class="radio_btn fl" value="0"/>
   <span class="recommand fl fb">女</span>
 </div><!--reg_list ends-->
 <div class="reg_list fl">
@@ -23,16 +23,7 @@
     <span class="fl">日</span>
   </div>
 </div><!--reg_list ends-->
-<div class="reg_list reg_width fl">
-  <%- if current_user.des_status == false %>
-  <label for="uesername">公司名称：</label>
-  <input type="text" class="company fl" name="user[inauguration_company]"/>
-  <%- else %>
-  <label for="uesername">学校名称：</label>
-  <input type="text" class="company fl" name="user[current_school]"/>
-  <%- end %>
-</div><!--reg_list ends-->
-<div class="reg_list reg_width fl">
+<div class="reg_list fl">
   <label for="uesername">收件地址：</label>
   <input type="text" class="company fl" name="user[recipient_address]"/>
   <span class="reg_tip3 fl">请填写真实地址以便发送奖品</span>

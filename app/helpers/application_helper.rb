@@ -1,12 +1,6 @@
 # -*- Encoding: UTF-8 -*-
 module ApplicationHelper
 
-  def complete_partial
-    if session[:role]
-      render :partial => "#{session[:role]}"
-    end
-  end
-
   def set_style
     case controller_name
       when "home"
@@ -17,7 +11,7 @@ module ApplicationHelper
         return { :css => ["industry_news","style"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
       when "weekly_stars"
         return { :css => ["weekstar","style"], :js => ["location.js", "LinkageSelect.js"], :pic_path => "/assets/design/title_design.png" }
-      when "register"
+      when /register|users/
         return { :css => ["reg"], :js => ["location.js", "LinkageSelect.js"] }
       when "passwords"
         return { :css => ["reg"] }

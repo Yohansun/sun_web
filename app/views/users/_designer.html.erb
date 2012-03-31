@@ -1,6 +1,6 @@
 <div class="reg_list fl">
   <label for="uesername">真实姓名：</label>
-  <input type="text" class="password fl" name="user[name]"/>
+  <%= f.text_field :name, :class => "password fl" %>
 </div><!--reg_list ends-->
 <div class="reg_list fl">
   <label for="uesername">性别：</label>
@@ -23,17 +23,17 @@
     <span class="fl">日</span>
   </div>
 </div><!--reg_list ends-->
-<div class="reg_list reg_width fl">
-  <%- if current_user.des_status == false %>
-  <label for="uesername">公司名称：</label>
-  <input type="text" class="company fl" name="user[inauguration_company]"/>
+<div class="reg_list fl">
+  <%- if current_user && current_user.des_status == false %>
+  <label for="inauguration_company">公司名称：</label>
+  <%= f.text_field :inauguration_company, :class => "company fl" %>
   <%- else %>
   <label for="uesername">学校名称：</label>
-  <input type="text" class="company fl" name="user[current_school]"/>
+  <%= f.text_field :current_school, :class => "company fl" %>
   <%- end %>
 </div><!--reg_list ends-->
-<div class="reg_list reg_width fl">
+<div class="reg_list fl">
   <label for="uesername">收件地址：</label>
-  <input type="text" class="company fl" name="user[recipient_address]"/>
+  <%= f.text_field :recipient_address, :class => "company fl" %>
   <span class="reg_tip3 fl">请填写真实地址以便发送奖品</span>
 </div><!--reg_list ends-->

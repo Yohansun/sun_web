@@ -1,55 +1,41 @@
 <div class="main">
-  <div class="reg_bg2 pr"></div>
+  <div class="reset_bg2 pr"></div>
   <div class="wrapper">
-    <%= form_for :user, :url => "/user/update", :remote => true  do |f| %>
+    <%= form_for current_user, :url => user_path, :remote => true  do |f| %>
     <div class="reg_content ft14">
-      <div class="reg_list reg_bd_top fl">
-        <label for="uesername">是否有推荐人：</label>
-        <input type="radio" name="user[recommended]" checked="checked" class="radio_btn fl" value="1"/>
-        <span class="recommand fl fb">是</span>
-        <input type="radio" name="user[recommended]" class="radio_btn fl" value="0"/>
-        <span class="recommand fl fb">否</span>
-      </div><!--reg_list ends-->
       <div class="upload fr tc">
         <div class="upload_area">
           <img src="<%= asset_path "news/regimg_bg.jpg" %>" />
         </div>
         <input type="image" src="<%= asset_path "news/reg_upload.jpg" %>" />
       </div><!--upload ends-->
-      <div class="reg_list fl">
-        <label for="recommander">推荐人用户名：</label>
-        <input type="text" class="password fl" name="user[recommended_name]"/>
-        <span class="reg_tip3 fl">注：如您正确注册成功，推荐人账号相应获得奖励积分</span>
-      </div><!--reg_list ends-->
 
-      <%- if current_user %>
-        <%= render :partial => "#{current_user.role.role}" %>
-      <%- end %>
+      <%= render :partial => "#{current_user.role.role}" ,:locals => { :f => f } %>
 
       <div class="reg_list fl">
         <label for="uesername">邮编：</label>
-        <input type="text" class="postcode fl" maxlength="6" name="user[zip_code]"/>
+        <%= f.text_field :zip_code, :class => "postcode fl" ,:maxlength => "6" %>
         <span class="reg_tip3 fl">注：邮编必须为数字且只能6位</span>
       </div><!--reg_list ends-->
       <div class="reg_list fl">
         <label for="uesername">联系电话：</label>
-        <input type="text" class="username fl" name="user[phone]"/>
+        <%= f.text_field :phone, :class => "username fl" %>
         <span class="reg_tip3 fl">请填写您常用电话以便通知获奖信息</span>
       </div><!--reg_list ends-->
       <div class="reg_list fl">
         <label for="uesername">在线联系方式：</label>
         <img src="<%= asset_path "news/qq_icon.jpg" %>" class="icon fl" />
-        <input type="text" class="password fl" value="" name="user[qq]"/>
+        <%= f.text_field :qq, :class => "password fl" %>
         <img src="<%= asset_path "news/feixin.jpg" %>" class="icon fl" />
-        <input type="text" class="password fl" value="" name="user[fetion]"/>
+        <%= f.text_field :fetion, :class => "password fl" %>
         <img src="<%= asset_path "news/msn.jpg" %>" class="icon fl" />
-        <input type="text" class="password fl"  value="" name="user[msn]"/>
+        <%= f.text_field :msn, :class => "password fl" %>
       </div><!--reg_list ends-->
       <div class="border_bottom tc ft12">
         <span class="fb">注：</span>完成此步骤可获得更多积分哦！
       </div>
       <p class="tc">
-      <input type="image" src="<%= asset_path "news/submit.jpg" %>" />&nbsp;
+      <input type="image" src="<%= asset_path "news/reset_save.jpg" %>" />&nbsp;
       <a href="/users/suc_regist"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
       <%- end %>
       </p>

@@ -380,4 +380,13 @@ ActiveRecord::Schema.define(:version => 20120330090427) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "weekly_tips", :force => true do |t|
+    t.text     "body"
+    t.string   "week"
+    t.datetime "published_at"
+    t.integer  "subject_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
 end

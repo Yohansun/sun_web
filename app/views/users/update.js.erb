@@ -1,0 +1,5 @@
+<% if !@messages.blank? %>
+alert("<%= raw @messages %>");
+<%- else -%>
+  window.location.replace("/users/<%= current_user.id %>/update_suc");
+<%- end -%>

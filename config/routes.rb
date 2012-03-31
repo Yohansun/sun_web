@@ -72,6 +72,8 @@ Icolor::Application.routes.draw do
 
   #个人主页
   resources :users do
+    match "update_suc" => "users#update_suc"
+    #用户对内和对外的相关页面
     resources :events
     resources :faqs
     resources :inspirations

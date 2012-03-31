@@ -6,8 +6,9 @@ class Users::RegisterController < Devise::RegistrationsController
     @messages = ""
     session_role
 
-    if session[:role]
-      params[resource_name][:role_id] = Role.find_by_role(session[:role]).id
+    if session[:user_role]
+      params[resource_name][:role_id]    = Role.find_by_role(session[:user_role]).id
+      params[resource_name][:des_status] = session[:des_status]
     end
 
     build_resource
@@ -33,7 +34,7 @@ class Users::RegisterController < Devise::RegistrationsController
 
   def update
     self.resource = current_user if current_user
-    valid_result  = resource.errors.messages
+    valid_result = resource.errors.messages
 
     if params[resource_name][:sex]
       case params[resource_name][:sex]
@@ -42,6 +43,12 @@ class Users::RegisterController < Devise::RegistrationsController
         when '0'
           params[resource_name][:sex] = '女'
       end
+    end
+
+    if params[resource_name][:recommended] == "1" && !params[resource_name][:recommended_name].blank?
+      id = User.find_by_username(params[resource_name][:recommended_name])
+      user = User.find_by_username(params[resource_name][:recommended_name])
+      params[resource_name][:recommended_id] = user.id unless user.nil?
     end
 
     resource.update_attributes(params[resource_name])
@@ -69,11 +76,15 @@ class Users::RegisterController < Devise::RegistrationsController
   end
 
   def session_role
-    unless params[:user][:role].blank?
-      r = params[:user][:role].split("_")
-      session[:role] = r[0]
+    unless params[:user][:user_role].blank?
+      r                   = params[:user][:user_role].split("_")
+      session[:user_role] = r[0]
       if r.size == 2
-        session[:designer] = r[1]
+        if r[1] == "1"
+          session[:des_status] = true
+        else
+          session[:des_status] = false
+        end
       end
     end
   end
