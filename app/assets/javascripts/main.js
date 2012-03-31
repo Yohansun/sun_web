@@ -178,7 +178,13 @@ $(function(){
 		$(this).hide();
 		$('a.login').removeClass('logHover');
 		});
-   var errs_out;
+	$('span.tips a').click(err_in);
+	$('.err_tips').click(function(){
+		if(errs_out==true)clearTimeout(errs_out);
+		err_out();
+		});
+});
+var errs_out;
    function err_in(){
    $('.err_tips').fadeIn(600,function(){
 		errs_out = setTimeout(err_out,3000);
@@ -187,12 +193,6 @@ $(function(){
 	function err_out(){
 	   $('.err_tips').fadeOut();
 	}
-	$('span.tips a').click(err_in);
-	$('.err_tips').click(function(){
-		if(errs_out==true)clearTimeout(errs_out);
-		err_out();
-		});
-});
 /*historys*/
 $(function(){
 	$('.history').mouseover(function(){

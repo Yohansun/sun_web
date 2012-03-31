@@ -46,13 +46,26 @@ module ApplicationHelper
             return { :css => ["style"], :js => ["jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }
         end
       when "events"
-        return { :css => ["news"], :pic_path => "/assets/news/title_event.png" }
+        case action_name
+          when "index"
+            return { :css => ["news"], :pic_path => "/assets/news/title_event.png" }
+          when /new|edit/
+            return { :css => ["jDatepicker"], :js => ["datepicker_lang_US.js","jquery.datepicker.js"] }
+        end
       when "function"
         return { :css => ["reg"] }
       when "industry_news"
         return { :css => ["news"], :pic_path => "/assets/news/title_news.png" }
       when "articles"
         return { :css => ["news", "industry_news"], :pic_path => "/assets/news/title_news.png" }
+      when "user"
+        return { :css => ["style"], :js => ["jquery.masonry.js"] }
+      when "messages"
+        return { :css => ["style"], :js => ["jquery.masonry.js"] }
+      when "site_messages"
+        return { :css => ["reg"], :js => ["jquery.masonry.js"] }
+      when "designs"
+        return { :js => ["jquery.masonry.js"] }
     end
   end
 

@@ -2,9 +2,9 @@ Icolor::Application.routes.draw do
 
   root :to => 'home#index'
 
-  devise_for :users, :controllers => { :registrations => "users/register",
-    :sessions => "users/sessions", :passwords => "users/passwords",
-    :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :registrations      => "users/register",
+                                       :sessions           => "users/sessions", :passwords => "users/passwords",
+                                       :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
     match "/users/complete" => "users/register#complete"
     match "/user/update" => "users/register#update"
@@ -64,10 +64,22 @@ Icolor::Application.routes.draw do
   match "/designer_events/:id" => "designer_events#show"
   match "/other_events" => "other_events#index"
 
+  #客服信息
   match "/info_list" => "function#infolist"
   match "/info" => "function#info"
 
   match "/industry_news/news" => "industry_news#news"
+
+  #个人主页
+  resources :users do
+    resources :events
+    resources :faqs
+    resources :inspirations
+    resources :messages
+    resources :site_messages
+    resources :rank
+    resources :designs
+  end
 
   #扩充magic_content
   scope "/admin/content", :module => "magic_content" do

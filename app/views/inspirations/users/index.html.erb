@@ -1,0 +1,145 @@
+<%- content_for :head do %>
+
+  <script type="text/javascript">
+    $(function() {
+        $('#inspiration').masonry();
+        });
+</script>
+<%- end %>
+<div class="main signup group">
+  <div class="shadow signup_box">
+    <div class="section">
+      <div class="host_self group">
+        <div class="signup_img_box"> <img class="box_shadow" src="<%= asset_path "personal/d_host_img.jpg " %>" alt="" />
+          <%- if params[:user_id] == current_user.id %>
+          <p><a href="#">修改账户信息</a></p>
+          <%- end %>
+        </div>
+        <div class="host_status">
+          <!--<h2><strong>杨明洁</strong><em>金牌会员</em></h2>-->
+          <!--<a class="back_perhome" href="#">返回个人主页</a>-->
+          <!--<div class="signup_text">
+            <p>
+            从业5年，擅长简约及田园风格室内装修设计
+            </p>
+          </div>-->
+          <p class="d_hostaddr">上海罗磊室内设计有限公司</p>
+          <div class="signup_text">
+            <p> 从业5年，擅长简约及田园风格室内装修设计 </p>
+          </div>
+          <p class="icon_email">Email：  designer@163.com</p>
+          <p class="icon_qq">Q   Q：  1204333759</p>
+          <p class="icon_msn">MSN：  designer@hotmail.com</p>
+          <p class="icon_fetion">飞  信：  395005</p>
+        </div>
+        <!--host_status ends-->
+      </div>
+      <!--host_self ends-->
+       <%- if params[:user_id] == current_user.id %>
+      <ul class="system_info group">
+        <li class="icon_point"><a href="f_in_point.html">我的积分</a></li>
+        <li class="icon_info"><a href="f_in_infolist.html">系统消息(2)</a></li>
+        <li class="icon_qustion"><a href="f_in_question.html">我的提问(新回复1)</a></li>
+        <li class="icon_active"><a href="f_in_signup.html">我报名的活动</a></li>
+      </ul>
+      <%- end %>
+      <!--system_info ends-->
+
+      <div class="sort_box pr mt25 group">
+        <ul class="sort_show_ul group">
+          <li> <a class="sort_show_a" href="f_in_works.html">作&nbsp;&nbsp;品</a> </li>
+          <li class="sort_show"> <a class="sort_show_a" href="f_in_ins.html">灵感秀</a> </li>
+          <li> <a class="sort_show_a" href="f_in_msgboard.html">留言板</a> </li>
+          <li> <a class="sort_show_a" href="f_in_notice.html">活动公告</a> </li>
+        </ul>
+         <%- if params[:user_id] == current_user.id %>
+        <a class="launch_act" href="#">我要上传</a>
+        <%- end %>
+      </div>
+      <!--sort_box ends-->
+
+      <div class="host_main">
+        <div class="inspiration_result">
+          <div id="inspiration" class="row host_ins pb30 line_b_dot group">
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show1.1.jpg " %>" alt="" /></a>
+              <h3>wherewhatwho 万花筒衬衫</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show1.2.jpg " %>" alt="" /></a>
+              <h3>tsubomi</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show1.3.jpg " %>" alt="" /></a>
+              <h3>假领子</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show1.4.jpg " %>" alt="" /></a>
+              <h3>情人节礼物</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show1.5.jpg " %>" alt="" /></a>
+              <h3>娜娜可</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show2.1.jpg " %>" alt="" /></a>
+              <h3>iphone case</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show2.2.jpg " %>" alt="" /></a>
+              <h3>iphone case</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show2.3.jpg " %>" alt="" /></a>
+              <h3>一些小玩意</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show2.4.jpg " %>" alt="" /></a>
+              <h3>小彩虹LOMO</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show2.5.jpg " %>" alt="" /></a>
+              <h3>iphone case</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show3.1.jpg " %>" alt="" /></a>
+              <h3>my new shoes</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show3.2.jpg " %>" alt="" /></a>
+              <h3>异开设计</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show3.3.jpg " %>" alt="" /></a>
+              <h3>mrFAQ</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+            <div><a href="2-3-1.html"><img class="host_ins_img" src="<%= asset_path "design/inspiration_show3.4.jpg " %>" alt="" /></a>
+              <h3>皮小丘</h3>
+              <p class="p1 group"> <strong class="ft14 fb">286</strong> </p>
+              <p class="p2 group"> <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
+            </div>
+          </div>
+          <!--row ends-->
+        </div>
+        <!--design_result ends-->
+      </div>
+      <div class="pager host_pager ft12"> <a class="prev" href="#"><span></span>上一页</a><a href="#">1</a><a href="#" class="current">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a class="next" href="#">下一页<span></span></a> </div>
+      <!--pager ends-->
+    </div>
+  </div>
+  <!--shadow ends-->
+</div>
+<!--main ends-->
