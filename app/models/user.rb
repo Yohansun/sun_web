@@ -1,16 +1,16 @@
 class User < ActiveRecord::Base
 
-  validates_presence_of :username, :email, :password, :is_read, :on => :create
-  validates_format_of :username, :with => /(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]/, :on => :create
-  validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/, :on => :create
-  validates_uniqueness_of :username, :email, :allow_blank => false, :on => :create
-  validates_length_of :password, :within => 6..128, :allow_blank => false, :on => :create
-
+  validates_presence_of :username, :email, :password, :is_read, :on => :create, :if => :email_required?
+  validates_format_of :username, :with => /(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]/, :on => :create, :if => :email_required?
+  validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/, :on => :create, :if => :email_required?
+  validates_uniqueness_of :username, :email, :allow_blank => false, :on => :create, :if => :email_required?
+  validates_length_of :password, :within => 6..128, :allow_blank => false, :on => :create, :if => :email_required?
+  
   #用户注册完成后improve更新数据页面验证
   #validates_presence_of :recommended_name, :if => :recommended_requird?
   validates_format_of   :phone, :with => /^(13|15|18)[0-9]{9}$/, :allow_blank => true
   validates_uniqueness_of :phone, :allow_blank => true
-  validates_format_of   :name, :with => /^[\u4e00-\u9fa5]{2,4}$/, :allow_blank => true
+  # validates_format_of   :name, :with => /^[\u4e00-\u9fa5]{2,4}$/, :allow_blank => true
   validates_format_of   :zip_code, :with => /^\\d{6}$/, :allow_blank => true
 
   devise :database_authenticatable, :registerable,
