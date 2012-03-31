@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330090427) do
+ActiveRecord::Schema.define(:version => 20120331110146) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -80,6 +80,14 @@ ActiveRecord::Schema.define(:version => 20120330090427) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "inspiration_id"
+    t.string   "content"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "downloads", :force => true do |t|
     t.string   "title"
     t.integer  "subject_id"
@@ -134,6 +142,21 @@ ActiveRecord::Schema.define(:version => 20120330090427) do
     t.integer  "function_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "inspirations", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "votes_count",      :default => 0
+    t.integer  "shares_count",     :default => 0
+    t.integer  "comments_count",   :default => 0
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "jobs", :force => true do |t|
@@ -364,8 +387,6 @@ ActiveRecord::Schema.define(:version => 20120330090427) do
     t.string   "msn"
     t.string   "fetion"
   end
-
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
     t.string   "title"

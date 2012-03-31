@@ -7,14 +7,15 @@
   </div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleB">
-      <h1>华帝公馆样板房</h1>
+      <h1><%= @inspiration.title %></h1>
       <div class="subtitle">
         <div class="votes">
-          当前票数：<span>286</span><a href="#"><img src="<%= asset_path "design/d_vote_btn.png" %>" /></a>
+          当前票数：<span><%= @inspiration.votes_count %></span> 
+          <a href="#"><img src="<%= asset_path "design/d_vote_btn.png" %>" /></a>
         </div>
         <div class="operate">
-          <span class="forward">转发 (124)</span>
-          <span class="review">评论 (86)</span>
+          <span class="forward">转发 (<%= @inspiration.shares_count %>)</span>
+          <span class="review">评论 (<%= @inspiration.comments_count %>)</span>
         </div>
       </div>
       <div class="fullscreen_btn">
@@ -22,31 +23,17 @@
       </div>
     </div>
     <div class="weekstart_detail">
-      <div class="big_image"><img src="<%= asset_path "design/pc1.jpg" %>" />
+      <div class="big_image">
+        <%= image_tag "design/pc1.jpg" %>
       </div>
       <div class="galleryB">
         <span class="moveleft"></span>
         <span class="moveright"></span>
         <div class="list">
-          <ul>
-            <li>
-            <a href="#"><img src="<%= asset_path "design/pb7.jpg" %>" /></a>
-            </li>
-            <li>
-            <a href="#"><img src="<%= asset_path "design/pb7.jpg" %>" /></a>
-            </li>
-            <li>
-            <a href="#"><img src="<%= asset_path "design/pb7.jpg" %>" /></a>
-            </li>
-            <li>
-            <a href="#"><img src="<%= asset_path "design/pb7.jpg" %>" /></a>
-            </li>
-            <li>
-            <a href="#"><img src="<%= asset_path "design/pb7.jpg" %>" /></a>
-            </li>
-            <li>
-            <a href="#"><img src="<%= asset_path "design/pb7.jpg" %>" /></a>
-            </li>
+          <ul>          
+            <% Inspiration.limit(4).each do |i| %>
+            <li><%= link_to (image_tag i.img.url), inspiration_path(i) %></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -55,11 +42,11 @@
         <table class="propertyA">
           <tr>
             <th>上传者：</th>
-            <td>王勤俭</td>
+            <td><%= @inspiration.user.name %></td>
           </tr>
           <tr>
             <th>上传时间：</th>
-            <td>2012.5.12</td>
+            <td><%= @inspiration.created_at.to_date %></td>
           </tr>
           <tr>
             <th>设计风格：</th>
@@ -67,127 +54,51 @@
           </tr>
           <tr>
             <th>灵感启发：</th>
-            <td>别墅的设计风格正如题记之中所描述的那样，圆了人们一个关于栖息的理想梦境，从古罗马的辉煌到桃源仙境，从东方到西方，从古时到现代，这个梦被以各种方式诠释着，关于优雅，关于品味，关于享受方式，关于舒适，更重要的是，关于思考的境界。</td>
+            <td><%= @inspiration.content %></td>
           </tr>
         </table>
       </div>
       <div class="review_wrap">
         <div class="reviewform">
           <div class="bar">
-            <h4><span>评论</span>(86)</h4><span class="r">0/140</span>
+            <h4><span>评论</span>(<%= @inspiration.comments_count %>)</h4><span class="r">0/140</span>
           </div>
           <div class="form-content">
-            <form>
+            <%= form_for(Comment.new) do |f| %>
+              <%= f.hidden_field :inspiration_id, value: params[:id] %>
               <p class="input">
-              <textarea></textarea>
+                <%= f.text_area :content %>
               </p>
               <p class="button">
-              <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" />
+                <!-- <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" /> -->
+                <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
               </p>
-            </form>
+            <% end %>
           </div>
         </div>
         <div class="pager ft12">
-          <a class="prev" href="#"><span></span>上一页</a>
-          <a href="#">1</a>
-          <a href="#" class="current">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">7</a>
-          <a href="#">8</a>
-          <a href="#">...</a>
-          <a href="#">20</a>
-          <a class="next" href="#">下一页<span></span></a>
+          <%= paginate @comments %>
         </div>
         <div class="review_list">
           <ul class="review_listA">
+            <% @comments.each do |c| %>
             <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
+              <div class="bar">
+                <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
+              </div>
+              <div class="reply">
+                <a href="#">回复</a>
+              </div>
+              <div class="content">
+                <%= c.content %>
+              </div>
             </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
+            <% end %>
           </ul>
         </div>
       </div>
     </div>
   </div>
   <div class='sub_bot pr'>
-    <div class="pager ft12">
-      <a class="prev" href="#"><span></span>上一页</a>
-      <a href="#">1</a>
-      <a href="#" class="current">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">7</a>
-      <a href="#">8</a>
-      <a href="#">...</a>
-      <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a>
-    </div><!--pager ends-->
-  </div><!--sub_bot ends-->
+  </div>
 </div>
