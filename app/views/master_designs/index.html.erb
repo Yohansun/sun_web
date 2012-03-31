@@ -66,6 +66,12 @@
     </div>
     </div><!--master_works_list ends-->
     <%- end %>
+  <!--wrapper ends-->
+  <div class='sub_bot pr'>
+    <div class="pager ft12">
+    <%= paginate @master_designs %>
+    </div><!--pager ends-->
+  </div><!--sub_bot ends-->
   </div>
 
   <script type="text/javascript">
@@ -125,11 +131,4 @@ $('a.works_pre').click(function(){
 })
 
 </script>
-
-<!--wrapper ends-->
-<div class='sub_bot pr'>
-  <div class="pager ft12">
-    <%= paginate @master_designs %>
-  </div><!--pager ends-->
-</div><!--sub_bot ends-->
 </div><!--main ends-->

@@ -26,8 +26,8 @@
         <div class="rowElem">
           <label>发布时间:</label>
           <div class="formRight www1">
-            <%= text_field_tag "post[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
-            <%= text_field_tag "post[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
+            <%= text_field_tag "master_profile[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
+            <%= text_field_tag "master_profile[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
           </div>
           <div class="fix"></div>
         </div>

@@ -8,112 +8,50 @@
   <!--sub_nav ends-->
   <div class='wrapper'>
     <div class='news_top clear ft12'>
-      <%=link_to "全部","/articles"%>
+
+      <%= link_to "全部", "/articles" %>
       <% @tags.each do |tag| %>
-        <%= link_to tag.name,  "/articles?tags=#{URI.escape(tag.name)}", :class => "#{'active' if tag.name == params[:tags] }"%>
+          <%= link_to tag.name, "/articles?tags=#{URI.escape(tag.name)}", :class => "#{'active' if tag.name == params[:tags] }" %>
       <% end %>
     </div>
     <!--news_top ends-->
-    <%- if @articles %>
-        <%- @articles.each do |article| %>
-            <div class="shadow">
-              <div class="section clear">
-                <%= image_tag article.preview_img.url(:original) if article.preview_img %>
-                <div class="article fl ft14">
-                  <h1><a href='#'><%= link_to article.title, "/articles/#{article.id}" %></a></h1>
-                  <span>来源： <%= article.content_source %></span> <span>时间：<%= article.published_at.to_formatted_s(:db) %></span>
-                  <p><%= raw article.intro %>...<%= link_to "[详细]", "/articles/#{article.id}" %></p>
-                </div>
-                <!--article ends-->
-              </div>
-              <!--section ends-->
+    <%- @articles.each do |article| %>
+        <div class="shadow">
+          <div class="section clear">
+            <%= image_tag article.preview_img.url(:original) if article.preview_img %>
+            <div class="article fl ft14">
+              <h1><a href='#'><%= link_to article.title, "/articles/#{article.id}" %></a></h1>
+              <span>来源： <%= article.content_source %></span>
+              <span>时间：<%= article.published_at.to_formatted_s(:db) %></span>
+              <p><%= raw article.intro %>...<%= link_to "[详细]", "/articles/#{article.id}" %></p>
             </div>
-            <!--shadow ends-->
-        <%- end %>
-        <div class="pag_container">
-          <div class="pager ft12">
-            <%= paginate @articles %>
-          </div>
-          <!--pager ends-->
-        </div>
+            <!--article ends-->
+          </div><!--section ends-->
+        </div><!--shadow ends-->
     <%- end %>
+    <div class="pag_container">
+      <div class="pager ft12">
+        <%= paginate @articles %>
+      </div>
+      <!--pager ends-->
+    </div>
     <!--pag_container ends-->
-    <div class="weekly_tips ft12">
-      <div class="faqs clear">
-        <span class="ask fl"></span>
-
-        <p class="fl fb ft14">如何选购布艺沙发？</p>
-        <span class="answer fl"></span>
-
-        <div class="fl">
-          <p>选购布艺沙发是一件非常重要的事情，如何选购布艺沙发呢？我们买布艺沙发不仅要牌子，也应该学会自我判断布艺沙发的好坏。判断布艺沙发的好坏，主要注意一下几点：<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1．看沙发骨架是否结实，这关系到沙发的使用寿命和质量保证。具体方法是抬起三人沙发的一头，注意当抬起部分离地10cm时，另一头的腿是否离地，只有另一边也离地，检查才算通过。<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            2．看沙发的填充材料的质量。具体方法是用手去按沙发的扶手及靠背，如果能明显地感觉到木架的存在，则证明此套沙发的填充密度不高，弹性也不够好。轻易被按到的沙发木架也会加速沙发布套的磨损，降低沙发的使用寿命。<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            3．检验沙发的回弹力。具体方法是让身体呈自由落体式坐在沙发上，身体至少被沙发坐垫弹起2次以上，才能确保此套沙发弹性良好，并且使用寿命会更长。<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            4．注意沙发细节处理。打开配套抱枕的拉链，观察并用手触摸里面的衬布和填充物；抬起沙发看底部处理是否细致，沙发腿是否平直，表面处理是否光滑，腿底部是否有防滑垫，等等细节部分。好的沙发在细节部分品质也同样保持精致。<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            5．用手感觉沙发表面，是否有刺激皮肤的现象，观察沙发的整体各部分面料颜色是否均匀，各接缝部分是否结实平整，做工是否精细。
-          </p>
-        </div>
-        <!--fl ends-->
-      </div>
-      <!--faqs ends-->
-      <div class="faqs clear">
-        <span class="ask fl"></span>
-
-        <p class="fl fb ft14">详细咨询下，客厅地板搭配有咱子技巧嘛，纠结得很</p>
-        <span class="answer fl"></span>
-
-        <div class="fl">
-          <p>色彩方面？<br/>
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。<br/>
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。<br/>
-            地板与家具的搭配也十分重要。地面颜色要以能衬托家具的颜色为佳。在选择的时候最好以沉稳柔和为主调，因为地面装修属于永久性装修，一般情况下不会经常更换，选择比较中性调的颜色会相对安全，比如原木色、米色等。从色调上说，浅色家具的可塑性更大，可与各种颜色的地板组合；但深色家具与深色地板的搭配要格外小心，它们容易让人有压抑的感觉。
-          </p>
-        </div>
-        <!--fl ends-->
-      </div>
-      <!--faqs ends-->
-      <div class="faqs clear">
-        <span class="ask fl"></span>
-
-        <p class="fl fb ft14">白色的墙壁白色的地砖，搭配什么颜色的沙发</p>
-        <span class="answer fl"></span>
-
-        <div class="fl">
-          <p>您好！那要看你需要什么样的效果了，温馨的、清淡的？<br/>
-            您可以将您的需求提出来，来我们软件做公益设计：<a href="http://www.72xuan.com/bbs/forum-45-1.html/">http://www.72xuan.com/bbs/forum-45-1.html/</a>
-          </p>
-        </div>
-        <!--fl ends-->
-      </div>
-      <!--faqs ends-->
+    <div class="weekly_tips ft12" id="weekly_tip_body">
+      <%= render :partial => "weekly_tips" %>
     </div>
     <!--weekly_tips ends-->
-  </div>
-  <!--wrapper ends-->
-  <div class='sub_bot ft12 pr'>
-    <a href="javascript:void(0)" class="history fr pr">查看往期<span></span></a>
-    <a href="#" class="next fr">下一期<span></span></a>
-    <a href="#" class="prev fr"><span></span>上一期</a>
-
-    <div class="historys none ft12 pa">
-      <a href="#">2012年3月第一周</a>
-      <a href="#">2012年3月第二周</a>
-      <a href="#">2012年2月第四周</a>
-      <a href="#">2012年2月第三周</a>
-      <a href="#">2012年2月第二周</a>
-      <a href="#">2012年2月第一周</a>
-      <a href="#">2012年1月第四周</a>
-      <a href="#">2012年1月第三周</a>
-      <a href="#">2012年1月第二周</a>
-      <a href="#">2012年1月第一周</a>
     </div>
-    <!--historys ends-->
+    <!--wrapper ends-->
+    <div class='sub_bot ft12 pr' id="weekly_tip_nav">
+      <%= render :partial => "weekly_tips_nav" %>
+    </div>
+    <!--sub_bot ends-->
   </div>
-  <!--sub_bot ends-->
-</div><!--main ends-->
+  <!--main ends-->
+  <script type="text/javascript">
+      function WeeklyTip(id) {
+          $.get("/articles/get_weekly_tips", {id:id}, function(data) {
+          });
+      }
+  </script>
+
