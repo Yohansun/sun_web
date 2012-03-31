@@ -35,5 +35,8 @@ gem "omniauth-renren"
 gem "omniauth-kaixin"
 gem "omniauth-qq-connect"
 
+gem 'exception_notification'
+gem 'newrelic_rpm'
+
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"
