@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:nioteam/magic_admin.git
-  revision: 63f564785f820957ed739c9df20e0861c62de15a
+  revision: 5056cb279b599b1e92bcd734dd7a47342058d4f2
   specs:
     magic_admin (0.0.1)
       cancan (= 1.6.7)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:nioteam/magic_content.git
-  revision: ee9918da6396ab8acd24802d1279986ae62cbc37
+  revision: 0ce9e6d02dfd6e13fdadaf3c91ac4dd5c1f82524
   specs:
     magic_content (0.0.1)
       acts-as-taggable-on
