@@ -1,3 +1,40 @@
+<%- content_for :tail do %>
+<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+
+<script type="text/javascript" charset="utf-8">
+<%- session_key = Rails.application.config.session_options[:key] -%>
+$(function() {
+
+  $('#upload_photo').click(function(event){
+    event.preventDefault();
+  });
+
+  $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    multi : true,
+    auto : true,
+    checkExisting : false,
+    buttonImage : null,
+    uploader : '/admin/content/master_design_uploads',
+    buttonText : '选择文件',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      $.getScript(dat.upload);
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    }
+  });
+
+});
+</script>
+<%- end -%>
+
 <div class="content">
   <div class="title">
     <h5><%= form_title %></h5>
@@ -18,12 +55,29 @@
         <%= f.input :master_profile_id, :collection => MasterProfile.all.collect { |i| [i.name,i.id] },
                     :prompt => '--请选择--', :label => "作者:", :include_blank => "无" %>
         <%= f.input :main_preview_img, :label => "上传图片:" %>
-        <%= f.input :design_name, :label => "作品简介:", :hint => "请在输入标题或者内容后换行！" %>
+
         <div class="rowElem">
-          <label>发布时间:</label>
+          <div>
+            <label class="string">作品相册:</label>
+          </div>
           <div class="formRight www1">
-            <%= text_field_tag "post[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
-            <%= text_field_tag "post[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
+            <%= button_tag "上传图片", :id => 'upload_photo' %>
+
+            <div id="uploads">
+              <%= render :partial => "magic_content/master_design_uploads/upload", :collection => resource.master_design_uploads %>
+            </div>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <%= f.input :design_intro, :label => "作品简介:", :hint => "请在输入标题或者内容后换行！" %>
+        <div class="rowElem">
+          <div>
+            <label class="string">发布时间:</label>
+          </div>
+          <div class="formRight www1">
+            <%= text_field_tag "master_design[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
+            <%= text_field_tag "master_design[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
           </div>
           <div class="fix"></div>
         </div>
