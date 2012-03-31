@@ -1,5 +1,6 @@
 # -*- Encoding: UTF-8 -*-
 module ApplicationHelper
+
   def complete_partial
     if session[:role]
       render :partial => "#{session[:role]}"

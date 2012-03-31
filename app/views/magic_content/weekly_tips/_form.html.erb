@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="title">
+    <h5><%= form_title %></h5>
+    <div class="num"><%= link_to '返回', subject_weekly_tips_path(parent), :class => "redNum" %></div>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :week, :input_html => { :class=> "validate[required]" }, :label => "期次" %>
+        <%= f.input :body, :input_html => { :rows => 30, :hint => "请在输入标题或者内容后换行！" }, :label => "内容" %>
+
+        <div class="rowElem">
+          <label>发布时间:</label>
+          <div class="formRight www1">
+            <%= text_field_tag "weekly_tip[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <div class="rowElem">
+          <%= f.button :submit, :value => "#{button_value}" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

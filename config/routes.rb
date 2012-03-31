@@ -29,10 +29,12 @@ Icolor::Application.routes.draw do
   #行业资讯
   match "/color_articles" => "color_articles#index"
   match "/articles" => "articles#index"
+  match "/articles/get_weekly_tips" => "articles#get_weekly_tips"
   match "/articles/:id" => "articles#show"
 
   #业主通道
   match "/faqs" => "faqs#index"
+  match "/faqs/get_weekly_tips" => "faqs#get_weekly_tips"
   match "/faqs/:id" => "faqs#show"
   match "/channel/access" => "channel#access"
   match "/channel/service" => "channel#service"

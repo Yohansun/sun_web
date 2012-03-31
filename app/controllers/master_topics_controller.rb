@@ -1,8 +1,8 @@
 class MasterTopicsController < ApplicationController
-  before_filter :get_topics_with_tags
+  before_filter :get_topics
 
   def show
-    @topic = MasterTopic.find(params[:id])
+    @topic = Post.find(params[:id])
     @prev_topic = get_topics.where("published_at < ?",@topic.published_at).first
     @next_topic = get_topics.where("published_at > ?",@topic.published_at).last
   end

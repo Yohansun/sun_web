@@ -1,0 +1,15 @@
+<%- body = current_weekly_tip.body.split("\r\n\r\n") %>
+<%- (body.size/2).times do |i| %>
+    <div class="faqs clear" id="tips_faqs">
+      <span class="ask fl"></span>
+
+      <p class="fl fb ft14"><%= body[2*i] %></p>
+      <span class="answer fl"></span>
+
+      <div class="fl">
+        <p> <%= body[2*i+1] %> </p>
+      </div>
+      <!--fl ends-->
+    </div>
+    <!--faqs ends-->
+<%- end %>
