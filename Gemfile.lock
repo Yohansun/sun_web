@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:nioteam/magic_admin.git
-  revision: f87818e6f7a0e4def77e1f0d4d480ce916be5186
+  remote: git@github.com:nioteam/magic_admin.gi
+  revision: fdd4f1981f52e6b66eba50b640b5b6caff8a0246
   specs:
     magic_admin (0.0.1)
       cancan (= 1.6.7)
