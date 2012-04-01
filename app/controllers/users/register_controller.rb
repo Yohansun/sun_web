@@ -24,7 +24,7 @@ class Users::RegisterController < Devise::RegistrationsController
       end
     else
       if valid_result.size > 0
-        valid_result.each do |key, value|
+        valid_result.each do |_, value|
           @messages << "*" + value[0] + '\n'
         end
         return @messages

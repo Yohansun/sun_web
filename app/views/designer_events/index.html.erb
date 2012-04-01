@@ -1,58 +1,231 @@
 <%- content_for :head do %>
     <style type="text/css">
         span.arrow_1 {
-            right: 180px;
+            right: 169px;
         }
 
         span.arrow_2 {
-            right: 111px;
+            right: 100px;
         }
     </style>
 <%- end %>
-<div class="main page_weekstar">
+<div class="main">
   <div class='sub_title tr'>
-    <img src="<%= asset_path "design/title_event.png" %>" />
+    <img src='<%= asset_path "news/title_event.png "%>'/>
   </div>
+  <!--sub_title ends-->
   <div class='sub_nav ft12 pr tr'>
-    <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">年度色彩趋势</a>
-  </div><!--sub_nav ends-->
-  <div class="wrapper group">
-    <div class="shadow event the_activity designer_activity">
-      <div class="section clear">
-        <div class="banner"><a href="#"><img src="<%= asset_path "news/event_big2.jpg" %>"></a></div>
-        <div class="legend">立邦为您刷新生活，引领2012色彩潮流<span class="status">正在进行</span></div>
-        <div class="properties">
-          <table>
-            <tr><th>活动时间：</th>
-              <td>2012年4月5日～2012年6月5日</td>
-            </tr>
-            <tr><th>活动时间：</th>
-              <td>2012年4月5日～2012年6月5日</td>
-            </tr>
-            <tr><th>活动详情：</th>
-              <td>听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师
-                领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势
-
-                听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势
-                听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="shadow activity_listA_wrap">
-      <div class="section">
-        <div class="tit_bg"><h2>往期回顾</h2></div>
-        <ul class="activity_listA">
-          <li><a href="#"><img src="<%= asset_path "design/pi1.jpg" %>" /></a></li>
-        </ul>
-      </div>
-    </div>
+    <a href="index.html">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">设计师活动</a>
   </div>
-  <div class='sub_bot pr'>
+  <!--sub_nav ends-->
+  <div class='wrapper clear'>
+    <div class='news_top clear ft12'>
+      <a href="javascript:void(0)" class="active">最新</a>
+      <a href="javascript:void(0)">最热</a>
+      <a href="javascript:void(0)" class="event_history pr">往期活动<span></span></a>
+    </div>
+    <!--news_top ends-->
+    <div class="shadow event">
+      <div class="section clear">
+        <a href="#"><img src="<%= asset_path "news/event_big.jpg "%>" class="event_big_img"/></a>
+
+        <h1><a href="#" class="fb ft18">听设计师领袖的色彩故事 了解2012最新色彩趋势</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_big_mode fr">
+          <a href="#" class="event_status fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--shadow ends-->
+    <div class="shadow event blocks fl">
+      <div class="section clear">
+        <a href="/designer_events/1"><img src="<%= asset_path "news/event1.jpg "%>"/></a>
+
+        <h1><a href="/designer_events/1" class="fb ft18">说出你的装修故事—做装修人气王</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_mode">
+          <a href="#" class="event_status fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--blocks ends-->
+    <div class="shadow event blocks fr">
+      <div class="section clear">
+        <a href="#"><img src="<%= asset_path "news/event2.jpg "%>"/></a>
+
+        <h1><a href="#" class="fb ft18">秀照片 炫灵感—立邦为您免费装修</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_mode">
+          <a href="#" class="event_status fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--blocks ends-->
+    <div class="shadow event blocks fl">
+      <div class="section clear">
+        <a href="#"><img src="<%= asset_path "news/event3.jpg "%>"/></a>
+
+        <h1><a href="#" class="fb ft18">说出你的装修故事—做装修人气王</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_mode">
+          <a href="#" class="event_status over fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--blocks ends-->
+    <div class="shadow event blocks fr">
+      <div class="section clear">
+        <a href="#"><img src="<%= asset_path "news/event4.jpg "%>"/></a>
+
+        <h1><a href="#" class="fb ft18">秀照片 炫灵感—立邦为您免费装修</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_mode">
+          <a href="#" class="event_status over fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--blocks ends-->
+    <div class="shadow event blocks fl">
+      <div class="section clear">
+        <a href="#"><img src="<%= asset_path "news/event3.jpg "%>"/></a>
+
+        <h1><a href="#" class="fb ft18">说出你的装修故事—做装修人气王</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_mode">
+          <a href="#" class="event_status over fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--blocks ends-->
+    <div class="shadow event blocks fr">
+      <div class="section clear">
+        <a href="#"><img src="<%= asset_path "news/event4.jpg "%>"/></a>
+
+        <h1><a href="#" class="fb ft18">秀照片 炫灵感—立邦为您免费装修</a></h1>
+
+        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
+
+        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
+
+        <div class="event_mode">
+          <a href="#" class="event_status over fr"></a>
+
+          <div class="ft14 clear">
+            <em class="fb fl">喜爱度</em>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span class="rank"></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!--ft14 ends-->
+        </div>
+        <!--event_big_mode ends-->
+      </div>
+      <!--section ends-->
+    </div>
+    <!--blocks ends-->
+  </div>
+  <!--wrapper ends-->
+  <div class='sub_bot ft12 pr'>
     <div class="pager ft12">
-      <a class="prev" href="#"><span></span>上一页</a>
+      <a href="#" class="prev"><span></span>上一页</a>
       <a href="#">1</a>
       <a href="#" class="current">2</a>
       <a href="#">3</a>
@@ -63,7 +236,9 @@
       <a href="#">8</a>
       <a href="#">...</a>
       <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a>
+      <a href="#" class="next">下一页<span></span></a>
     </div>
-  </div><!--sub_bot ends-->
-</div>
+    <!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
+</div><!--main ends-->

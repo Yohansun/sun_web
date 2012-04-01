@@ -49,6 +49,7 @@ Icolor::Application.routes.draw do
   #设计鉴赏
   match "/weekly_stars" => "weekly_stars#index"
   match "/weekly_stars/:id" => "weekly_stars#show"
+  match "/weekly_stars/:id/fullscreen" => "weekly_stars#fullscreen"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
   match "/designs_upload" => "designs#upload"

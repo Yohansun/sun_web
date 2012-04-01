@@ -1,5 +1,5 @@
 class WeeklyStarsController < ApplicationController
-  def show
+  def fullscreen
     render :layout => nil
   end
 end

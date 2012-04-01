@@ -6,11 +6,11 @@ module ApplicationHelper
       when "home"
         return { :css => ["style", "index"] }
       when /designer_events|other_events/
-        return { :css => ["exciting_activities","style"] }
+        return { :css => ["exciting_activities","style","news"] }
       when "color_articles"
         return { :css => ["industry_news","style"], :js => ["galleryF"], :pic_path => "/assets/news/title_news.png" }
       when "weekly_stars"
-        return { :css => ["weekstar","style"], :js => ["location.js", "LinkageSelect.js"], :pic_path => "/assets/design/title_design.png" }
+        return { :css => ["weekstar","style"]}
       when /register|users/
         return { :css => ["reg"], :js => ["location.js", "LinkageSelect.js"] }
       when "passwords"
@@ -42,7 +42,9 @@ module ApplicationHelper
       when "events"
         case action_name
           when "index"
-            return { :css => ["news"], :pic_path => "/assets/news/title_event.png" }
+            return { :css => ["exciting_activities","index","style"]}
+          when "show"
+            return { :css => ["exciting_activities","style"]}
           when /new|edit/
             return { :css => ["jDatepicker"], :js => ["datepicker_lang_US.js","jquery.datepicker.js"] }
         end

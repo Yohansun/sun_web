@@ -1,153 +1,117 @@
-<div class="main">
+<%- content_for :head do %>
+    <style type="text/css">
+        span.arrow_1{right:203px;}
+        span.arrow_2{right:135px;}
+    </style>
+<%- end %>
+<div class="main page_weekstar">
   <div class='sub_title tr'>
-    <img src='<%= set_style[:pic_path] %>' />
-  </div><!--sub_title ends-->
+    <img src="<%= asset_path "design/title_event.png "%>" />
+  </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="index.html">首页</a><span class="arrow_1"></span><a href="#">行业资讯</a><span class="arrow_2"></span><a class="fb" href="#">装修资讯</a>
+    <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">年度色彩趋势活动</a>
   </div><!--sub_nav ends-->
-  <div class='wrapper clear'>
-    <div class='news_top clear ft12'>
-      <a href="javascript:void(0)" class="active">最新</a>
-      <a href="javascript:void(0)">最热</a>
-      <a href="javascript:void(0)">往期活动</a>
-    </div><!--news_top ends-->
-    <div class="shadow event">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event_big.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">听设计师领袖的色彩故事 了解2012最新色彩趋势</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_big_mode fr">
-          <a href="#" class="event_status fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--shadow ends-->
-    <div class="shadow event blocks fl">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event1.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">说出你的装修故事—做装修人气王</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_mode">
-          <a href="#" class="event_status fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--blocks ends-->
-    <div class="shadow event blocks fr">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event2.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">秀照片 炫灵感—立邦为您免费装修</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_mode">
-          <a href="#" class="event_status fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--blocks ends-->
-    <div class="shadow event blocks fl">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event3.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">说出你的装修故事—做装修人气王</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_mode">
-          <a href="#" class="event_status over fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span></span>
-            <span></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--blocks ends-->
-    <div class="shadow event blocks fr">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event4.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">秀照片 炫灵感—立邦为您免费装修</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_mode">
-          <a href="#" class="event_status over fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span></span>
-            <span></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--blocks ends-->
-    <div class="shadow event blocks fl">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event3.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">说出你的装修故事—做装修人气王</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_mode">
-          <a href="#" class="event_status over fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span></span>
-            <span></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--blocks ends-->
-    <div class="shadow event blocks fr">
-      <div class="section clear">
-        <a href="#"><img src="<%= asset_path "news/event4.jpg" %>" /></a>
-        <h1><a href="#" class="fb ft18">秀照片 炫灵感—立邦为您免费装修</a></h1>
-        <h2>活动时间：2012年4月5日～2012年6月5日</h2>
-        <h2>活动主办方：上海原筑建筑装饰有限公司</h2>
-        <div class="event_mode">
-          <a href="#" class="event_status over fr"></a>
-          <div class="ft14 clear">
-            <em class="fb fl">喜爱度</em>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span class="rank"></span>
-            <span></span>
-            <span></span>
-          </div><!--ft14 ends-->
-        </div><!--event_big_mode ends-->
-      </div><!--section ends-->
-    </div><!--blocks ends-->
-  </div><!--wrapper ends-->
-  <div class='sub_bot ft12 pr'>
+  <div class="wrapper group color-trend">
+    <div class="shadow">
+      <div class="section">
+        <div class="banner">
+          <img src="<%= asset_path "design/2012-color-trend.jpg "%>" />
+          <a href="#" class="report">活动报道</a>
+          <a href="#" class="play">&nbsp;</a>
+        </div>
+        <div class="galleryE_wrap">
+          <div class="share">
+            <!-- JiaThis Button BEGIN -->
+            <div id="jiathis_style_32x32">
+              <a class="jiathis_button_qzone"></a>
+              <a class="jiathis_button_tsina"></a>
+              <a class="jiathis_button_tqq"></a>
+              <a class="jiathis_button_renren"></a>
+              <a class="jiathis_button_kaixin001"></a>
+              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+              <a class="jiathis_counter_style"></a>
+            </div>
+            <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+            <!-- JiaThis Button END -->
+            <span class="t">分享视频</span>
+          </div>
+          <div class="galleryE">
+            <span class="moveleft"></span>
+            <span class="moveright"></span>
+            <div class="list">
+              <ul><li><a href="/events/1"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg "%>" /></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="review_wrap">
+          <div class="reviewform">
+            <div class="bar"><h4><span>评论</span>(86)</h4><span class="r">0/140</span></div>
+            <div class="form-content">
+              <form>
+                <p class="input"><textarea></textarea></p>
+                <p class="button"><input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交" /></p>
+              </form>
+            </div>
+          </div>
+          <div class="pager ft12">
+            <a class="prev" href="#"><span></span>上一页</a>
+            <a href="#">1</a>
+            <a href="#" class="current">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">...</a>
+            <a href="#">20</a>
+            <a class="next" href="#">下一页<span></span></a>
+          </div>
+          <div class="review_list">
+            <ul class="review_listA">
+              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+                <div class="reply"><a href="#">回复</a></div>
+                <div class="content">很好！非常好的工具！赞一个...</div>
+              </li>
+              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+                <div class="reply"><a href="#">回复</a></div>
+                <div class="content">很好！非常好的工具！赞一个...</div>
+              </li>
+              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+                <div class="reply"><a href="#">回复</a></div>
+                <div class="content">很好！非常好的工具！赞一个...</div>
+              </li>
+              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+                <div class="reply"><a href="#">回复</a></div>
+                <div class="content">很好！非常好的工具！赞一个...</div>
+              </li>
+              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+                <div class="reply"><a href="#">回复</a></div>
+                <div class="content">很好！非常好的工具！赞一个...</div>
+              </li>
+              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+                <div class="reply"><a href="#">回复</a></div>
+                <div class="content">很好！非常好的工具！赞一个...</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='sub_bot pr'>
     <div class="pager ft12">
-      <a href="#" class="prev"><span></span>上一页</a>
+      <a class="prev" href="#"><span></span>上一页</a>
       <a href="#">1</a>
       <a href="#" class="current">2</a>
       <a href="#">3</a>
@@ -158,7 +122,7 @@
       <a href="#">8</a>
       <a href="#">...</a>
       <a href="#">20</a>
-      <a href="#" class="next">下一页<span></span></a>
-    </div><!--pager ends-->
+      <a class="next" href="#">下一页<span></span></a>
+    </div>
   </div><!--sub_bot ends-->
-</div><!--main ends-->
+</div>

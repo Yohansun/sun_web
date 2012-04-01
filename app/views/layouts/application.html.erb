@@ -39,7 +39,7 @@
         });
     </script>
   </head>
-  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>">
+  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>"> <%= controller_name %> | <%= action_name %>
     <div class="header">
       <div class="nav pa">
         <div class="logo">
@@ -84,14 +84,14 @@
       </div><!--navTop ends-->
       <ul class="navBot fr cw fb ft14">
         <li><a href="/">首页</a></li>
-        <li class="pr"><a href="javascript:void(0)">大师殿堂</a>
+        <li class="pr"><a href="/master_interviews">大师殿堂</a>
         <ul>
           <li><a href="/master_interviews">大师访谈</a></li>
           <li><a  href="/master_topics">热点话题</a></li>
           <li class="noborder"><a href="/master_designs">大师作品</a></li>
         </ul>
         </li>
-        <li class="pr"><a href="javascript:void(0)">设计鉴赏</a>
+        <li class="pr"><a href="/weekly_stars">设计鉴赏</a>
         <ul>
           <li><a href="/weekly_stars">每周之星</a></li>
           <li><a  href="/designs">推荐作品</a></li>
@@ -99,27 +99,27 @@
           <li class="noborder"><a href="#">色彩搭配</a></li>
         </ul>
         </li>
-        <li class="pr"><a href="javascript:void(0)">行业资讯</a>
+        <li class="pr"><a href="/color_articles">行业资讯</a>
         <ul>
           <li><a href="/color_articles">色彩资讯</a></li>
           <li><a  href="/articles">装修资讯</a></li>
           <li class="noborder"><a href="#">微博资讯</a></li>
         </ul>
         </li>
-        <li class="pr"><a href="javascript:void(0)">精彩活动</a>
+        <li class="pr"><a href="/events">精彩活动</a>
         <ul class="w_nav1">
-          <li><a href="/designer_events">年度色彩趋势活动</a></li>
-          <li><a  href="/events">设计师活动</a></li>
+          <li><a href="/events">年度色彩趋势活动</a></li>
+          <li><a  href="/designer_events">设计师活动</a></li>
           <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
         </ul>
         </li>
-        <li class="pr"><a href="javascript:void(0)">实用工具</a>
+        <li class="pr"><a href="/softwares/tools">实用工具</a>
         <ul class="w_nav2">
           <li><a href="/softwares/tools">配色工具</a></li>
           <li class="noborder"><a href="/softwares/app">设计师APP</a></li>
         </ul>
         </li>
-        <li class="pr"><a href="javascript:void(0)">业主通道</a>
+        <li class="pr"><a href="/channel/access">业主通道</a>
         <ul class="w_nav3">
           <li><a href="/channel/access">片区快查</a></li>
           <li><a  href="/faqs">装修问答</a></li>
