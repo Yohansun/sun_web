@@ -11,20 +11,37 @@
         <li class="<%= 'li_current' if params[:filter].nil? || params[:filter] == '全部' %> ">
         <a href="/master_interviews">全部</a>
         </li>
-        <li class="<%= 'li_current' if params[:filter] == '海外' %> ">
-        <a href="/master_interviews?filter=<%= URI.escape("海外") %>">海外</a>
-        </li>
-        <li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
-        <a href="/master_interviews?filter=<%= URI.escape("港澳台") %>">港澳台</a>
-        </li>
-        <li class="<%= 'li_current' if params[:filter] == '中国大陆'%> ">
-        <a href="/master_interviews?filter=<%= URI.escape("中国大陆") %>">中国大陆</a>
-        </li>
+        <%- if params[:master_kind].nil? %>
+            <li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+            <a href="/master_interviews?filter=<%= URI.escape("海外") %>">海外</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+            <a href="/master_interviews?filter=<%= URI.escape("港澳台") %>">港澳台</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '中国大陆'%> ">
+            <a href="/master_interviews?filter=<%= URI.escape("中国大陆") %>">中国大陆</a>
+            </li>
+        <%- else %>
+            <li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+            <a href="/master_interviews?filter=<%= URI.escape("海外") %>&master_kind=<%=params[:master_kind]%>">海外</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+            <a href="/master_interviews?filter=<%= URI.escape("港澳台") %>&master_kind=<%=params[:master_kind]%>">港澳台</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '中国大陆'%> ">
+            <a href="/master_interviews?filter=<%= URI.escape("中国大陆") %>&master_kind=<%=params[:master_kind]%>">中国大陆</a>
+            </li>
+        <%- end %>
       </ul>
     </div><!--design_tit ends-->
     <div class="list_btn line_b_dot">
-      <a href="#"><img src="<%= asset_path "master/color_master_btn.png" %>" /></a>
-      <a href="#"><img src="<%= asset_path "master/space_master_btn.png" %>" /></a>
+    <%- if params[:filter].nil? || params[:filter] == '全部' %>
+       <a href="/master_interviews?master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path "master/color_master_btn.png" %>" /></a>
+       <a href="/master_interviews?master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path "master/space_master_btn.png" %>" /></a>
+    <%- else %>
+       <a href="/master_interviews?filter=<%=params[:filter]%>&master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path "master/color_master_btn.png" %>" /></a>
+       <a href="/master_interviews?filter=<%=params[:filter]%>&master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path "master/space_master_btn.png" %>" /></a>
+    <%- end %>
     </div><!--list_btn ends-->
     <div class="list_box">
       <%- @articles.each do |article| %>
