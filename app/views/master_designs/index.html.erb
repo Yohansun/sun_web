@@ -1,13 +1,13 @@
 <%- content_for :head do %>
-  <style type="text/css">
-    .shadow {
-      zoom: 1;
-    }
-  </style>
+    <style type="text/css">
+        .shadow {
+            zoom: 1;
+        }
+    </style>
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>
-    <img src='<%= set_style[:pic_path] %>' alt="" />
+    <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="/">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
@@ -15,70 +15,88 @@
   <!--sub_nav ends-->
   <div class='wrapper pb60'>
     <div class="design_tit group pb10 line_b_dot">
+
       <ul class="design_filter group">
-        <% @tags.each do |tag| %>
-            <li><%= link_to tag.name,  "/articles?tags=#{URI.escape(tag.name)}", :class => "#{'li_current' if tag.name == params[:tags] }"%></li>
-        <% end %>
+        <li class="<%= 'li_current' if params[:filter].nil? || params[:filter] == '全部' %> ">
+          <a href="/master_designs">全部</a>
+        </li>
+        <%- if params[:master_kind].nil? %>
+            <li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+              <a href="/master_designs?filter=<%= URI.escape("海外") %>">海外</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+              <a href="/master_designs?filter=<%= URI.escape("港澳台") %>">港澳台</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '中国大陆' %> ">
+              <a href="/master_designs?filter=<%= URI.escape("中国大陆") %>">中国大陆</a>
+            </li>
+        <%- else %>
+            <li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+              <a href="/master_designs?filter=<%= URI.escape("海外") %>&master_kind=<%= params[:master_kind] %>">海外</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+              <a href="/master_designs?filter=<%= URI.escape("港澳台") %>&master_kind=<%= params[:master_kind] %>">港澳台</a>
+            </li>
+            <li class="<%= 'li_current' if params[:filter] == '中国大陆' %> ">
+              <a href="/master_designs?filter=<%= URI.escape("中国大陆") %>&master_kind=<%= params[:master_kind] %>">中国大陆</a>
+            </li>
+        <%- end %>
       </ul>
     </div>
+
     <!--design_tit ends-->
     <div class="list_btn line_b_dot">
-      <%= link_to image_tag("/assets/master/color_master_btn.png") ,"#"%><%= link_to image_tag("/assets/master/space_master_btn.png") ,"#"%>
+      <%- if params[:filter].nil? || params[:filter] == '全部' %>
+          <a href="/master_designs?master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path "master/color_master_btn.png" %>"/></a>
+          <a href="/master_designs?master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path "master/space_master_btn.png" %>"/></a>
+      <%- else %>
+          <a href="/master_designs?filter=<%= params[:filter] %>&master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path "master/color_master_btn.png" %>"/></a>
+          <a href="/master_designs?filter=<%= params[:filter] %>&master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path "master/space_master_btn.png" %>"/></a>
+      <%- end %>
     </div>
     <!--list_btn ends-->
+
     <%- @master_designs.each do |design| %>
-    <div class="shadow mt25">
-      <div class="section master_works_list">
-        <%= link_to image_tag("/assets/master/master_works1.jpg") ,"/master_designs/#{design.id}",:class => "works_b"%>
-        <div class="works_detail">
-          <h4>作者：<strong><%= design.master_profile.try(:name) %></strong></h4>
-          <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
-          <h4>作品名称：<span><%= design.design_name %></span></h4>
-          <h4>作品简介：</h4>
-          <p class="indent_24">
-          <%= design.design_intro %>
-          </p>
-          <div class="works_list_slide">
-            <%= link_to image_tag("/assets/master/works_list_left.png") ,"javascript:void(0)",:class => "works_pre"%><%= link_to image_tag("/assets/master/works_list_right.png") ,"javascript:void(0)",:class => "works_next"%>
-            <div class="img_works_box">
-              <div class="img_works_list">
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s12.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s12.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s12.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s12.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s13.jpg" %>" alt="" />
-                <img src="<%= asset_path "master/master_works_s11.jpg" %>" alt="" />
+        <div class="shadow mt25">
+          <div class="section master_works_list">
+            <%= link_to image_tag(design.main_preview_img.url), "/master_designs/#{design.id}", :class => "works_b" %>
+            <div class="works_detail">
+              <h4>作者：<strong><%= design.master_profile.try(:name) %></strong></h4>
+              <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
+              <h4>作品名称：<span><%= design.design_name %></span></h4>
+
+              <div class="works_list_slide" style="margin-top: 82px;">
+                <%= link_to image_tag("/assets/master/works_list_left.png"), "javascript:void(0)", :class => "works_pre" %><%= link_to image_tag("/assets/master/works_list_right.png"), "javascript:void(0)", :class => "works_next" %>
+                <div class="img_works_box">
+                  <div class="img_works_list">
+                    <%- design.master_design_uploads.each do |i| %>
+                        <%= image_tag(i.file.url(:thumb)) unless i.file.nil? %>
+                    <%- end %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    </div><!--master_works_list ends-->
+        <!--master_works_list ends-->
     <%- end %>
+  </div>
   <!--wrapper ends-->
+
   <div class='sub_bot pr'>
     <div class="pager ft12">
-    <%= paginate @master_designs %>
-    </div><!--pager ends-->
-  </div><!--sub_bot ends-->
+      <%= paginate @master_designs %>
+    </div>
+    <!--pager ends-->
   </div>
+  <!--sub_bot ends-->
+</div>
 
-  <script type="text/javascript">
+<script type="text/javascript">
     var page = 1;
     var i = 3;
 
-    $('a.works_next').click(function(){
+    $('a.works_next').click(function() {
 
         //alert('next')
         var $parent = $(this).parent('div.works_list_slide');
@@ -88,47 +106,47 @@
         var v_width = $v_box.width();
         //alert(v_width)
         var len = $v_list.find('img').length;
-        var page_count = Math.ceil(len/i);
+        var page_count = Math.ceil(len / i);
         //alert(page_count)
 
 
-        if(!$v_list.is(':animated')){
-        if(page == page_count){
-        $v_list.animate({'left':'0px'});
-        page = 1;
+        if (!$v_list.is(':animated')) {
+            if (page == page_count) {
+                $v_list.animate({'left':'0px'});
+                page = 1;
 
-        }else{
-        $v_list.animate({'left':'-='+v_width});
-        page++;
-        }
+            } else {
+                $v_list.animate({'left':'-=' + v_width});
+                page++;
+            }
         }
 
     })
 
-$('a.works_pre').click(function(){
+    $('a.works_pre').click(function() {
 
-    //alert('pre')
-    var $parent = $(this).parent('div.works_list_slide');
-    var $v_list = $parent.find('div.img_works_list');
-    var $v_box = $parent.children('div.img_works_box');
+        //alert('pre')
+        var $parent = $(this).parent('div.works_list_slide');
+        var $v_list = $parent.find('div.img_works_list');
+        var $v_box = $parent.children('div.img_works_box');
 
-    var v_width = $v_box.width();
-    var len = $v_list.find('img').length;
-    var page_count = Math.ceil(len/i);
+        var v_width = $v_box.width();
+        var len = $v_list.find('img').length;
+        var page_count = Math.ceil(len / i);
 
 
-    if(!$v_list.is(':animated')){
-    if(page == 1){
-    $v_list.animate({left:'-='+v_width*(page_count-1)});
-    page = page_count;
+        if (!$v_list.is(':animated')) {
+            if (page == 1) {
+                $v_list.animate({left:'-=' + v_width * (page_count - 1)});
+                page = page_count;
 
-    }else{
-    $v_list.animate({left:'+='+v_width});
-    page--;
-    }
-    }
+            } else {
+                $v_list.animate({left:'+=' + v_width});
+                page--;
+            }
+        }
 
-})
+    })
 
 </script>
 </div><!--main ends-->
