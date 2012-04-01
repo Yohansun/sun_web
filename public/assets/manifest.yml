@@ -14,6 +14,9 @@ close_btn.jpg: close_btn-99397490b82f508fad1c5d79a44a7bc0.jpg
 codes.jpg: codes-a03bd61079871f7a9d9f69dbb6db1381.jpg
 contact.png: contact-06e8213b6377edfaf7016d55f4a146b7.png
 design/2012-color-trend.jpg: design/2012-color-trend-bcb645303760a388c5bbc2952a579802.jpg
+design/2012-color-trend_n.jpg: design/2012-color-trend_n-7d0bea430795a65dbfb953b9b1af0d1c.jpg
+design/4.1.1_03.png: design/4.1.1_03-e1827eb0d192a105ce4d7cd53e6e5764.png
+design/4.1.1_n.jpg: design/4.1.1_n-abe86a78393b299d4eb2964d047b6a1c.jpg
 design/accordionA.gif: design/accordionA-26b75c0f4f6d0645e3c214285ffed08d.gif
 design/activities.gif: design/activities-c6c3ba51c619f43f897a1f1ead904cd9.gif
 design/adv_register.gif: design/adv_register-daff3818da0b570dccc3e8fb8b8fa224.gif
@@ -83,6 +86,7 @@ design/inspiration_show4.5.jpg: design/inspiration_show4.5-e6d520b18a3f4c9791d82
 design/label.gif: design/label-fd4bc6de614206427549e1f10c0c8e63.gif
 design/like_btn.gif: design/like_btn-8b794b5233dd3b5f1de59a4fd154b84a.gif
 design/loading.gif: design/loading-a57630767e43b63790deda45ffeb88be.gif
+design/master_story_img.jpg: design/master_story_img-835a682fcd24b8e4e7a4d5d5527b7b73.jpg
 design/michael_young.jpg: design/michael_young-ac8c11bcc0a8dc6fcf0e5664be0ac13f.jpg
 design/our_needs.gif: design/our_needs-6b73d51adc57c054017e141d01c3b8de.gif
 design/overlay.png: design/overlay-cb3e416ce22018c34a5e4c58c8c74846.png
@@ -177,12 +181,14 @@ index_related_tit.png: index_related_tit-bfd7d8ff08224f3e2f73aa801a8040a0.png
 jiathis.jpg: jiathis-95cc51128f9b31a34413bd15c4d823c3.jpg
 kv.jpg: kv-377dc63d4d6672f01aaaafa127893d3b.jpg
 kx.jpg: kx-e29b41cb01a8ee21bb8c26cabd12ca83.jpg
-link1.jpg: link1-a4fcc5f9908517082a9d06dcb22da929.jpg
-link2.jpg: link2-f4d37d58f19c45f2215caf05690fa94c.jpg
-link3.jpg: link3-11d57ff10146987568040f269e6a9da6.jpg
-link4.jpg: link4-e01a9dccf8ba2216cdfefaf7bac80f0c.jpg
-link5.jpg: link5-5072275a85fd70cab3249c4294c7207b.jpg
-link6.jpg: link6-62b2f6d95ac69d28ec8d60b09e78e506.jpg
+link1.png: link1-bd80435baa4afa6201bbc174b007f531.png
+link2.png: link2-8f76563f7e13eb157061d287a0af90ec.png
+link3.png: link3-2c1138784dd350a4cfc3cc7a3d8d85fd.png
+link4.png: link4-bd21155943e361cc1c8fa388db4d5a6d.png
+link5.png: link5-b6f993960334b01dbd8bf3f331d0cdd8.png
+link6.png: link6-0cf8b52f09bdfc8cb9266e81a31518ef.png
+link7.png: link7-8c79164267ccfa02f41a59f7ed85cced.png
+link8.png: link8-fe0bbc391637555e3ffe4c20b4504d12.png
 login.jpg: login-988c57d9f068207eabec454bfc7eba79.jpg
 login.png: login-cf78e4ccd10c7164e1528b5377348892.png
 loginBg.png: loginBg-50f3d7c1d133f6d252da192f5f52120e.png
@@ -426,7 +432,7 @@ personal/leave_msg_btn.png: personal/leave_msg_btn-d0d4683520ccb93897e4b649239b7
 personal/msn_icon.png: personal/msn_icon-924b69133812fc90dec042773b5597dd.png
 personal/qq_icon.png: personal/qq_icon-c9b4dcc2963c8c3b2ad21311a2833260.png
 personal/return.jpg: personal/return-8cf297ac4bcc697699bc61b4089198c2.jpg
-personal/signup_icon.png: personal/signup_icon-fb00f212b8076287d8a945716ad54dff.png
+personal/signup_icon.png: personal/signup_icon-ddc7bd88385d2d04fafa237f5a45120a.png
 personal/sort1_1.jpg: personal/sort1_1-cd7a1d860e27fe629fd4ab4b7b905330.jpg
 personal/sort1_2.jpg: personal/sort1_2-395a2dfc5ce9200d9d6f83d4fe76706c.jpg
 personal/sort1_3.jpg: personal/sort1_3-431d0bddfd735d1168b47ef1aa804dae.jpg
@@ -557,7 +563,7 @@ reg.css: reg-e5fa2561db811c220ddb0a2dc7e589e6.css
 reset.css: reset-6c4f6dbc40676cedfd7a1a05faea7e93.css
 site_messages.css: site_messages-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 softwares.css: softwares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-style.css: style-4917036ce4ab4cac61346f92c2fe92ed.css
+style.css: style-00bce4a74811d34292980a97fee2e47c.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
 user.css: user-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 users.css: users-95bd4fe1de99c1cd91ec8e6f348a44bd.css
