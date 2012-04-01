@@ -53,11 +53,14 @@ Icolor::Application.routes.draw do
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
   match "/designs_upload" => "designs#upload"
-  match "/inspirations" => "inspirations#index"
-  match "/inspirations/:id" => "inspirations#show"
-  match "/inspiration/:id/fullscreen" => "inspirations#fullscreen"
+  # get "/inspirations", :to => "inspirations#index"
+  # match "/inspirations/:id", :to => "inspirations#show"
+  # get "/inspirations/:id/fullscreen" => "inspirations#fullscreen" 
+  # match "/inspirations/new", :to => "inspirations#new"
+  # post "/inspirations", :to => "inspirations#create"
+  resources :inspirations
   match "/inspirations_upload" => "inspirations#upload"
-
+  resources :comments
   #精彩活动
   match "/events" => "events#index"
   match "/events/:id" => "events#show"

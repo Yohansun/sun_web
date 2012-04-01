@@ -34,7 +34,7 @@ module ApplicationHelper
         case action_name
           when "show"
             return { :css => ["weekstar"], :pic_path => "/assets/design/title_design.png" }
-          when "upload"
+          when /upload|new/
             return { :css => ["reg"] }
           else
             return { :css => ["style"], :js => ["jquery.masonry.js"], :pic_path => "/assets/design/title_design.png" }

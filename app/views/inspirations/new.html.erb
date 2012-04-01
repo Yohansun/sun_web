@@ -1,0 +1,30 @@
+<%= form_for(@inspiration) do |f| %>
+<%= hidden_field_tag "user_id", params[:user_id] %>
+<div class="main syslist ">
+  <div class="shadow">
+    <div class="section pr">
+      <div class="sys_bar clear ft12">
+        <span class="fl ft18">上传灵感秀</span>
+      </div><!--sys_bar ends-->
+      <div class="reg_content ft14">
+        <div class="reg_list reg_width fl">
+          <%= f.label :title, "标题：" %>
+          <%= f.text_field :title, class: "works fl" -%>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <%= f.label :content, "灵感启发：" %>
+          <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
+          <div class="fl tc ins_tips ft12">
+          	还可输入<span id="ins_span">400</span>字<br />
+            <%= image_submit_tag "news/upload_save.jpg", class: "add_tag_on" -%>
+          </div>
+        </div><!--reg_list ends-->
+        <!-- <a href="upload_ins2.html" class="add_img fl">
+          <img src="<%= asset_path "news/add_img.jpg" %>" />
+        </a> -->
+        <%= f.file_field :img %>
+      </div><!--reg_content ends-->
+    </div><!--section ends-->
+  </div><!--shadow ends-->
+</div><!--main ends-->
+<% end %>
