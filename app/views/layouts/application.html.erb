@@ -239,7 +239,7 @@
 
   <%= yield %>
 
-  <div class='footer <%= 'mt50' if controller_name == 'contact' %>'>
+  <div class='footer <%= 'mt50' if controller_name =~ /contact|function/ %>'>
     <div class='links'>
       <div class='w_995 group'>
         <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.jpg" %>" alt="" /></a>

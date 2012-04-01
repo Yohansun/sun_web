@@ -68,6 +68,14 @@ Icolor::Application.routes.draw do
   match "/info_list" => "function#infolist"
   match "/info" => "function#info"
 
+  match "/emagazine" => "function#emagazine" #电子杂志订阅
+  match "/results" => "function#results" #导航栏搜索结果页面
+  match "/rules" => "function#rules" #会员机制页面
+  match "/state" => "function#state" #网站声明
+  match "/suc_ins" => "function#suc_ins" #发布成功页面
+  match "/suc_works" => "function#suc_works" #发布成功页面
+  match "/token" => "function#token" #头像修改页面
+
   match "/industry_news/news" => "industry_news#news"
 
   #个人主页

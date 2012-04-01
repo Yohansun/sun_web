@@ -47,7 +47,12 @@ module ApplicationHelper
             return { :css => ["jDatepicker"], :js => ["datepicker_lang_US.js","jquery.datepicker.js"] }
         end
       when "function"
-        return { :css => ["reg"] }
+        case action_name
+          when /results|rules|state/
+            return { :css => ["style"] }
+          else
+            return { :css => ["reg"] }
+        end
       when "industry_news"
         return { :css => ["news"], :pic_path => "/assets/news/title_news.png" }
       when "articles"
