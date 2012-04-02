@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20120331110146) do
-
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -390,6 +388,8 @@ ActiveRecord::Schema.define(:version => 20120331110146) do
     t.string   "msn"
     t.string   "fetion"
   end
+
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
     t.string   "title"
