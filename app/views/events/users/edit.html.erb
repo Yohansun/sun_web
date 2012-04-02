@@ -1,4 +1,6 @@
 <%- content_for :head do %>
+  <%= stylesheet_link_tag 'jDatepicker' %>
+  <%= javascript_include_tag "datepicker_lang_US.js","jquery.datepicker.js" %>
     <script type="text/javascript">
         $(function() {
             $(".temptime").datepicker({ picker: "<img class='picker' align='middle' src='<%= asset_path "img/cal.gif" %>' alt=''/>" });

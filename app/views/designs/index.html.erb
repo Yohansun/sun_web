@@ -1,27 +1,28 @@
 <%- content_for :head do %>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.fancybox').fancybox({
-                openEffect  : 'none',
-                closeEffect : 'none',
-                prevEffect : 'none',
-                nextEffect : 'none',
-                closeBtn  : false,
-                helpers : {
-                    title : {
-                        type : 'inside'
-                    },
-                    buttons    : {}
-                },
-                loop: false,
-                title: 'okokok!!',
-                afterLoad : function() {
-//this.title = '(' + (this.index + 1) + ' / ' + this.group.length + ')' + (this.title ? ' - ' + this.title : '');
-                    this.title = (this.title ? this.title : '') + '(' + (this.index + 1) + ' / ' + this.group.length + ')';
-                }
-            });
-        });
-    </script>
+  <%= stylesheet_link_tag "style", "/fancybox/jquery.fancybox.css", "/fancybox/helpers/jquery.fancybox-buttons.css" %>
+  <%= javascript_include_tag "jquery.fancybox.js", "/fancybox/helpers/jquery.fancybox-buttons.js", "jquery.masonry.js" %>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('.fancybox').fancybox({
+      openEffect  : 'none',
+      closeEffect : 'none',
+      prevEffect : 'none',
+      nextEffect : 'none',
+      closeBtn  : false,
+      helpers : {
+        title : {
+          type : 'inside'
+        },
+        buttons    : {}
+      },
+      loop: false,
+      title: 'okokok!!',
+      afterLoad : function() {
+        this.title = (this.title ? this.title : '') + '(' + (this.index + 1) + ' / ' + this.group.length + ')';
+      }
+    });
+  });
+  </script>
 <%- end %>
 <div class="main">
 <div class='sub_title tr pt25'>

@@ -1,3 +1,7 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'style' %>
+  <%= javascript_include_tag 'jquery.masonry.js' %>
+<% end -%>
 <div class="main page_weekstar page_weekstar_detail">
   <div class='sub_title tr pt25'>
     <img src="<%= asset_path "design/title_design.png" %>" />
@@ -10,7 +14,7 @@
       <h1><%= @inspiration.title %></h1>
       <div class="subtitle">
         <div class="votes">
-          当前票数：<span><%= @inspiration.votes_count %></span> 
+          当前票数：<span><%= @inspiration.votes_count %></span>
           <a href="#"><img src="<%= asset_path "design/d_vote_btn.png" %>" /></a>
         </div>
         <div class="operate">
@@ -30,7 +34,7 @@
         <span class="moveleft"></span>
         <span class="moveright"></span>
         <div class="list">
-          <ul>          
+          <ul>
             <% Inspiration.limit(4).each do |i| %>
             <li><%= link_to (image_tag i.img.url), inspiration_path(i) %></li>
             <% end %>

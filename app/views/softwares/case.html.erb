@@ -1,29 +1,31 @@
 <%- content_for :head do %>
-    <style type="text/css">
-        span.arrow_1 {
-            right: 257px;
-        }
+  <%= stylesheet_link_tag "news" %>
+  <%= javascript_include_tag 'myfocus' %>
+  <style type="text/css">
+  span.arrow_1 {
+    right: 257px;
+  }
 
-        span.arrow_2 {
-            right: 185px;
-        }
+  span.arrow_2 {
+    right: 185px;
+  }
 
-        span.arrow_3 {
-            right: 111px;
-        }
-    </style>
-    <script type="text/javascript">
-        myFocus.set({
-            id:'boxID',
-            pattern:'mF_fscreen_tb',
-            time:3,
-            wrap:false,
-            trigger:'mouseover',
-            width:808,
-            height:280,
-            txtHeight:'0'
-        });
-    </script>
+  span.arrow_3 {
+    right: 111px;
+  }
+  </style>
+  <script type="text/javascript">
+  myFocus.set({
+    id:'boxID',
+    pattern:'mF_fscreen_tb',
+    time:3,
+    wrap:false,
+    trigger:'mouseover',
+    width:808,
+    height:280,
+    txtHeight:'0'
+  });
+  </script>
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>

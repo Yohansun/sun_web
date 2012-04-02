@@ -53,7 +53,7 @@
         </ul>
         <%- if params[:user_id].to_i == current_user.id %>
         <!-- <a class="launch_act" href="#">我要上传</a> -->
-        <%=link_to "我要上传", new_inspiration_path(:user_id => params[:user_id]), class: "launch_act" %>
+        <%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
         <%- end %>
       </div>
       <!--sort_box ends-->

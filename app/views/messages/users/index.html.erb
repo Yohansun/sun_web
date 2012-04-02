@@ -1,4 +1,6 @@
 <%- content_for :head do %>
+  <%= stylesheet_link_tag 'style' %>
+  <%= javascript_include_tag 'jquery.masonry.js' %>
     <script type="text/javascript">
         $(function() {
             $('#inspiration').masonry();

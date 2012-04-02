@@ -1,9 +1,11 @@
 <%- content_for :head do %>
-    <script type="text/javascript">
-        $(function() {
-            $('#inspiration').masonry();
-        });
-    </script>
+  <%= stylesheet_link_tag 'reg' %>
+  <%= javascript_include_tag 'jquery.masonry.js' %>
+  <script type="text/javascript">
+    $(function() {
+      $('#inspiration').masonry();
+    });
+  </script>
 <%- end %>
 <div class="main signup group">
   <div class="shadow signup_box">

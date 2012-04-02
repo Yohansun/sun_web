@@ -1,3 +1,7 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'style', 'index' %>
+<% end -%>
+
 <%- content_for :index do %>
   <div class="slides pr">
     <div class="slidesContainer">
@@ -40,6 +44,7 @@
     </div><!--bullets ends-->
   </div><!--slides ends-->
 <%- end %>
+
 <div class="center pr">
   <div class="centerBg indexmain">
     <div class="top1content">
@@ -477,13 +482,3 @@
     <%= javascript_include_tag  "index3"  %>
   </div><!--centerBg ends-->
 </div><!--center ends-->
-
-
-
-
-
-
-
-
-
-

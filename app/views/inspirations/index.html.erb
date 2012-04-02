@@ -1,20 +1,21 @@
 <%- content_for :head do %>
-    <script type="text/javascript">
-        $(window).load(function () {
-            $('#inspiration').masonry();
-        });
-    </script>
-    <style type="text/css">
-        span.arrow_1 {
-            right: 144px;
-            _right: 151px;
-        }
+  <%= stylesheet_link_tag 'weekstar' %>
+  <script type="text/javascript">
+  $(window).load(function () {
+    $('#inspiration').masonry();
+  });
+  </script>
+  <style type="text/css">
+  span.arrow_1 {
+    right: 144px;
+    _right: 151px;
+  }
 
-        span.arrow_2 {
-            right: 77px;
-            _right: 82px;
-        }
-    </style>
+  span.arrow_2 {
+    right: 77px;
+    _right: 82px;
+  }
+  </style>
 <%- end %>
 <div class="main">
   <div class='sub_title tr pt25'>

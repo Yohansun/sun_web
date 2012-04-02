@@ -1,28 +1,29 @@
 <%- content_for :head do %>
-    <script type="text/javascript">
-        $(function() {
-            $('#email').blur(function() {
-                var email = $(this).val();
-                if (!isEmail(email)) {
-                    $('.forget .pa').show();
-                    $('#email').focus();
-                }
-                else {
-                    $('.forget .pa').hide();
-                }
-            });
-            $('.reset_commit :input[type=image]').click(function() {
-                var pa = $('.forget .pa');
-                if (pa.is(':visible')) {
-                    return false;
-                }
-            })
-            function isEmail(str) {
-                var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-                return reg.test(str);
-            }
-        })
-    </script>
+  <%= stylesheet_link_tag 'reg' %>
+  <script type="text/javascript">
+  $(function() {
+    $('#email').blur(function() {
+      var email = $(this).val();
+      if (!isEmail(email)) {
+        $('.forget .pa').show();
+        $('#email').focus();
+      }
+      else {
+        $('.forget .pa').hide();
+      }
+    });
+    $('.reset_commit :input[type=image]').click(function() {
+      var pa = $('.forget .pa');
+      if (pa.is(':visible')) {
+        return false;
+      }
+    })
+    function isEmail(str) {
+      var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+      return reg.test(str);
+    }
+  })
+  </script>
 <%- end %>
 <div class="main syslist">
   <div class="shadow">

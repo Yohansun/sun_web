@@ -7,19 +7,6 @@
     <%= stylesheet_link_tag  "application"  %>
     <%= javascript_include_tag  "application"  %>
 
-    <!--用户未登录加载的页面样式 -->
-    <%- if set_style %>
-      <%- if !set_style[:css].nil? %>
-        <%- set_style[:css].each do |c| %>
-          <%= stylesheet_link_tag "#{c}" %>
-        <%- end %>
-      <%- end %>
-      <%- if !set_style[:js].nil? %>
-        <%- set_style[:js].each do |j| %>
-          <%= javascript_include_tag "#{j}" %>
-        <%- end %>
-      <%- end %>
-    <%- end %>
     <!--所有的个人主页都加载style.css -->
     <%- if params[:user_id] %>
       <%= stylesheet_link_tag  "style"  %>
@@ -39,7 +26,7 @@
         });
     </script>
   </head>
-  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>"> <%= controller_name %> | <%= action_name %>
+  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>">
     <div class="header">
       <div class="nav pa">
         <div class="logo">

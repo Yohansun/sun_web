@@ -1,5 +1,8 @@
-<%= form_for(@inspiration) do |f| %>
-<%= hidden_field_tag "user_id", params[:user_id] %>
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'reg' %>
+<% end -%>
+<%= form_for([current_user, @inspiration]) do |f| %>
+<%= hidden_field_tag "user_id", current_user.id %>
 <div class="main syslist ">
   <div class="shadow">
     <div class="section pr">
@@ -16,13 +19,10 @@
           <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
           <div class="fl tc ins_tips ft12">
           	还可输入<span id="ins_span">400</span>字<br />
-            <%= image_submit_tag "news/upload_save.jpg", class: "add_tag_on" -%>
+            <!-- <%= image_submit_tag "news/upload_save.jpg", class: "add_tag_on" -%> -->
           </div>
         </div><!--reg_list ends-->
-        <!-- <a href="upload_ins2.html" class="add_img fl">
-          <img src="<%= asset_path "news/add_img.jpg" %>" />
-        </a> -->
-        <%= f.file_field :img %>
+        <%= image_submit_tag "news/add_img.jpg", :class => 'add_img fl' %>
       </div><!--reg_content ends-->
     </div><!--section ends-->
   </div><!--shadow ends-->
