@@ -80,8 +80,6 @@ Icolor::Application.routes.draw do
   match "/suc_works" => "function#suc_works" #发布成功页面
   match "/token" => "function#token" #头像修改页面
 
-  match "/industry_news/news" => "industry_news#news"
-
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
@@ -99,6 +97,9 @@ Icolor::Application.routes.draw do
     resources :designs
     resources :design_images
   end
+
+  #修改个人签名
+  post "/users/:id/update_user_signature" => "users#update_user_signature"
 
   #扩充magic_content
   scope "/admin/content", :module => "magic_content" do

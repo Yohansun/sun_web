@@ -17,4 +17,14 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def update_user_signature
+    if params[:id]
+      user = User.find(params[:id])
+      user.signature = params[:value]
+      if user.save
+        render :text => user.signature
+      end
+    end
+  end
 end
