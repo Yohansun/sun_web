@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403133135) do
+ActiveRecord::Schema.define(:version => 20120404035537) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -243,6 +243,14 @@ ActiveRecord::Schema.define(:version => 20120403133135) do
     t.string   "master_kind"
   end
 
+  create_table "messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "from_user_id"
+    t.text     "content"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.string   "slug"
@@ -400,6 +408,7 @@ ActiveRecord::Schema.define(:version => 20120403133135) do
     t.string   "qq"
     t.string   "msn"
     t.string   "fetion"
+    t.string   "signature"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

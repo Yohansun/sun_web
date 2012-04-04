@@ -52,95 +52,40 @@
       <!--sort_box ends-->
 
       <div class="host_main">
-        <form class="host_msgboard line_b_dot">
+        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot"} do |f| %>
           <fieldset>
-            <textarea>你有神马对TA说的呢？</textarea>
+            <textarea name="message[content]">你有神马对TA说的呢？</textarea>
             <p>0/140</p>
           </fieldset>
           <fieldset>
             <input class="host_submit noborder" type="submit" value="" />
             <input class="host_reset noborder" type="reset" value="" />
           </fieldset>
-        </form>
+        <%- end %>
         <div class="msgboard_list mt25">
+         <%- unless @messages.blank? %>
+         <%- @messages.each do |m| %>
           <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
-            <h2 class="visitor_info"><strong class="fl">王风波</strong><span class="fl">02月4日&nbsp;&nbsp;16:38</span></h2>
-            <div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>
+            <h2 class="visitor_info"><strong class="fl"><%= m.from_user.display_name %></strong><span class="fl"><%= m.created_at.to_s(:db)[5..6] %>月<%= m.created_at.to_s(:db)[8..9] %>日&nbsp;&nbsp;<%= m.created_at.to_s(:time) %></span></h2>
+            <!--<div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>-->
             <div class="msg_list_box">
               <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
+                <p><%= m.content %></p>
               </div>
             </div>
           </div>
           <!--msgboad_item ends-->
-
-          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
-            <h2 class="visitor_info"><strong class="fl">王风波</strong><span class="fl">02月4日&nbsp;&nbsp;16:38</span></h2>
-            <div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>
-            <div class="msg_list_box">
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-            </div>
-          </div>
-          <!--msgboad_item ends-->
-
-          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
-            <h2 class="visitor_info"><strong class="fl">王风波</strong><span class="fl">02月4日&nbsp;&nbsp;16:38</span></h2>
-            <div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>
-            <div class="msg_list_box">
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-            </div>
-          </div>
-          <!--msgboad_item ends-->
-
-          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
-            <h2 class="visitor_info"><strong class="fl">王风波</strong><span class="fl">02月4日&nbsp;&nbsp;16:38</span></h2>
-            <div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>
-            <div class="msg_list_box">
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-            </div>
-          </div>
-          <!--msgboad_item ends-->
-
-          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
-            <h2 class="visitor_info"><strong class="fl">王风波</strong><span class="fl">02月4日&nbsp;&nbsp;16:38</span></h2>
-            <div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>
-            <div class="msg_list_box">
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-            </div>
-          </div>
-          <!--msgboad_item ends-->
-
-          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
-            <h2 class="visitor_info"><strong class="fl">王风波</strong><span class="fl">02月4日&nbsp;&nbsp;16:38</span></h2>
-            <div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>
-            <div class="msg_list_box">
-              <div class="signup_text">
-                <p>喜欢装修的小女孩</p>
-              </div>
-            </div>
-          </div>
-          <!--msgboad_item ends-->
-
+          <%- end %><%- else %>
+             您没有留言信息！
+          <%- end %>
         </div>
         <!--msgboard_list ends-->
       </div>
       <!--host_main ends-->
 
-      <div class="pager host_pager ft12"> <a class="prev" href="#"><span></span>上一页</a><a href="#">1</a><a href="#" class="current">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a class="next" href="#">下一页<span></span></a> </div>
+      <div class="pager host_pager ft12">
+        <%= paginate @messages %>
+      </div>
       <!--pager ends-->
     </div>
   </div>

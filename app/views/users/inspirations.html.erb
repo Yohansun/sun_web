@@ -1,9 +1,10 @@
-<%- content_for :head do %>
+<%- content_for :tail do %>
 <%= stylesheet_link_tag 'weekstar' %>
+<%= javascript_include_tag 'jquery.masonry' %>
 <script type="text/javascript">
-  $(window).load(function() {
-    $('#inspiration').masonry();
-  }));
+    $(window).load(function() {
+        $('#inspiration').masonry();
+    });
 </script>
 <%- end %>
 <div class="main signup group">
