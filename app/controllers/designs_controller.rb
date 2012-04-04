@@ -7,7 +7,7 @@ class DesignsController < ApplicationController
       @designs = @user.designs.page params[:page]
       render :template => "users/designs"
     else
-      @designs = Design.page params[:page]
+      @designs = Design.page params[:page], :per_page => 9
     end
   end
 
@@ -41,7 +41,7 @@ class DesignsController < ApplicationController
         image.is_cover = true
         image.save
       end
-      redirect_to :action => "show"
+      redirect_to action: 'index'
     else
       render :action => 'edit'
     end

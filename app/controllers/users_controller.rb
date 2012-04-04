@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   def show
-    redirect_to user_inspirations_path(params[:id])
+    user = User.find(params[:id])
+    if user.role_name == "user"
+      redirect_to user_inspirations_path(params[:id])
+    else
+      redirect_to user_designs_path(params[:id])
+    end
   end
 
   def update

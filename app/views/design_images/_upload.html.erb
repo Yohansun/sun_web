@@ -2,7 +2,7 @@
     <div class="work_title fl">
       <%= image_tag upload.file.url(:thumb), :class => "fl" %>
       <p class="file_name"><%= upload.file.original_filename %></p>
-      <%= hidden_field_tag 'inspiration[design_image_ids][]', upload.id %>
+      <%= hidden_field_tag "#{params[:for]}[design_image_ids][]", upload.id %>
   </div><!--work_title ends-->
   <div class="work_size tc fl"><%= number_to_human_size upload.file.size %></div>
   <div class="set_cover tc fl">

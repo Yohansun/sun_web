@@ -15,154 +15,31 @@
 
       <div class="host_main">
         <div class="design_result">
+          <% @designs.in_groups_of(4, false).each do |group| -%>
           <ul class="d_works group">
+            <% group.each do |design| -%>
             <li>
-              <a href="2-2-1.html"><img class="host_works_img" src="<%= asset_path "design/d_result1.jpg " %>" title="华丽的外表 朴素的内涵" alt=""/></a> <!--id="fancybox-manual-c" class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"-->
-              <h3>华丽的外表 朴素的内涵</h3>
-
+              <%= link_to image_tag(design.cover_img.file.url(:list), class: 'host_works_img'),
+                user_design_path(@user, design) if design.cover_img %>
+              <h3><%= design.title %></h3>
               <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
+                <strong class="ft14 fb">当前票数：<%= design.votes_count %></strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
               </p>
-
               <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+                <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
               </p>
-
-              <p>
-                风格：田园
-              </p>
+              <p>风格：<%= design.style %></p>
             </li>
-            <li>
-              <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img class="host_works_img" src="<%= asset_path "design/d_result2.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-              <h3>现代简约 白色 卧室</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
-            <li>
-              <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img class="host_works_img" src="<%= asset_path "design/d_result3.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-              <h3>现代简约 白色 卧室</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
-            <li>
-              <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img class="host_works_img" src="<%= asset_path "design/d_result3.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-              <h3>现代简约 白色 卧室</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
+            <% end -%>
           </ul>
           <!--result one ends-->
-
-
-          <ul class="d_works group">
-            <li>
-              <a href="2-2-1.html"><img class="host_works_img" src="<%= asset_path "design/d_result1.jpg " %>" title="华丽的外表 朴素的内涵" alt=""/></a> <!--id="fancybox-manual-c" class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"-->
-              <h3>华丽的外表 朴素的内涵</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
-            <li>
-              <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img class="host_works_img" src="<%= asset_path "design/d_result2.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-              <h3>现代简约 白色 卧室</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
-            <li>
-              <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img class="host_works_img" src="<%= asset_path "design/d_result3.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-              <h3>现代简约 白色 卧室</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
-            <li>
-              <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img class="host_works_img" src="<%= asset_path "design/d_result3.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-              <h3>现代简约 白色 卧室</h3>
-
-              <p class="p1 group">
-                <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
-              </p>
-
-              <p class="p2 group">
-                <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-              </p>
-
-              <p>
-                风格：田园
-              </p>
-            </li>
-          </ul>
-          <!--result one ends-->
+          <% end -%>
         </div>
         <!--design_result ends-->
       </div>
 
       <div class="pager host_pager ft12">
-        <a class="prev" href="#"><span></span>上一页</a><a href="#">1</a><a href="#" class="current">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a class="next" href="#">下一页<span></span></a>
+        <%= paginate @designs %>
       </div>
       <!--pager ends-->
     </div>

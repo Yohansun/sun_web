@@ -11,27 +11,25 @@
       </div><!--sys_bar ends-->
       <div class="reg_content ft14">
         <div class="reg_list reg_width fl">
-          <label for="uesername">作品名称：</label>
-          <input type="text" class="works fl" />
+          <%= f.label :title, "作品名称：" %>
+          <%= f.text_field :title, class: "works fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <label for="details">作品描述：</label>
-          <textarea class="works_details fb ft14 fl"></textarea>
+          <%= f.label :content, "作品描述：" %>
+          <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <label for="styles">风格：</label>
+          <%= f.label :style, "风格：" %>
           <div class="fl">
-            <select class="fl">
-              <option>请选择</option>
-            </select>
+            <%= f.select :style, ["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"],
+              class: "fl" %>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <label for="house">户型：</label>
+          <%= f.label :room_type, "户型：" %>
           <div class="fl">
-            <select class="fl">
-              <option>请选择</option>
-            </select>
+            <%= f.select :room_type, ["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"],
+              class: "fl" %>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
@@ -71,7 +69,7 @@
             <a href="javascript:void(0)" class="tag fl ft14 cw bg11">灰色调</a>
             <a href="javascript:void(0)" class="tag fl ft14 cw bg9">中式古典风格</a>
             <input type="text" class="add_tag fl" />
-            <input type="image" src="<%= asset_path "news/add_tag.jpg" %>" class="add_tag_on fl" />
+            <input type="image" src="<%= asset_path "news/add_tag.jpg" %>" class="add_tag_on fl" onclick="return false;" />
           </div>
         </div><!--reg_list ends-->
         <input type="image" src="<%= asset_path "news/add_img.jpg" %>" class="add_img fl" />

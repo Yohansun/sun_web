@@ -87,169 +87,34 @@
   </div>
 </div>
 <div class="design_result">
+  <% @designs.in_groups_of(3, false).each do |group| -%>
   <ul class="d_works group">
+    <% group.each do |design| -%>
     <li>
-      <a href="2-2-1.html"><img src="<%= asset_path "design/d_result1.jpg " %>" title="华丽的外表 朴素的内涵" alt=""/></a> <!--id="fancybox-manual-c" class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"-->
-      <h3>华丽的外表 朴素的内涵</h3>
+      <%= link_to image_tag(design.cover_img.file.url(:index)),
+        user_design_path(design.user_id, design) if design.cover_img %>
+      <h3><%= design.title %></h3>
 
       <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
+        <strong class="ft14 fb">当前票数：<%= design.votes_count %></strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
       </p>
 
       <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+        <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
       </p>
 
       <p>
-        公司：原筑设计
+        公司：<%= design.user.name_of_company %>
         <br/>
-        设计师：Charles
+        设计师：<%= design.user.display_name %>
         <br/>
-        风格：田园
+        风格：<%= design.style %>
       </p>
     </li>
-    <li>
-      <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img src="<%= asset_path "design/d_result2.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-
-      <h3>现代简约 白色 卧室</h3>
-
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-    <li>
-      <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg " %>"><img src="<%= asset_path "design/d_result3.jpg " %>" title="现代简约 白色 卧室" alt=""/></a>
-      <h3>现代简约 白色 卧室</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
+    <% end -%>
   </ul>
+  <% end -%>
   <!--result one ends-->
-  <ul class="d_works group">
-    <li><a href="#"><img src="<%= asset_path "design/d_result4.jpg " %>" alt=""/></a>
-      <h3>华丽的外表 朴素的内涵</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-    <li><a href="#"><img src="<%= asset_path "design/d_result5.jpg " %>" alt=""/></a>
-      <h3>现代简约 白色 卧室</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-    <li><a href="#"><img src="<%= asset_path "design/d_result6.jpg " %>" alt=""/></a>
-      <h3>现代简约 白色 卧室</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-  </ul>
-  <!--result two ends-->
-  <ul class="d_works group">
-    <li><a href="#"><img src="<%= asset_path "design/d_result7.jpg " %>" alt=""/></a>
-      <h3>华丽的外表 朴素的内涵</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-    <li><a href="#"><img src="<%= asset_path "design/d_result8.jpg " %>" alt=""/></a>
-      <h3>现代简约 白色 卧室</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-    <li><a href="#"><img src="<%= asset_path "design/d_result9.jpg " %>" alt=""/></a>
-      <h3>现代简约 白色 卧室</h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：286</strong><a class="vote_btn" href="#"><img src="<%= asset_path "design/d_vote_btn.png " %>" alt=""/></a>
-      </p>
-      <p class="p2 group">
-        <span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-      </p>
-      <p>
-        公司：原筑设计
-        <br/>
-        设计师：Charles
-        <br/>
-        风格：田园
-      </p>
-    </li>
-  </ul>
-  <!--result three ends-->
 </div>
 <!--design_result ends-->
 </div>
