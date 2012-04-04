@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404035537) do
+ActiveRecord::Schema.define(:version => 20120404152325) do
+
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
     t.string   "name"
@@ -81,10 +82,11 @@ ActiveRecord::Schema.define(:version => 20120404035537) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "inspiration_id"
     t.string   "content"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
   end
 
   create_table "design_images", :force => true do |t|
@@ -106,12 +108,11 @@ ActiveRecord::Schema.define(:version => 20120404035537) do
     t.integer  "user_id"
     t.integer  "votes_count"
     t.integer  "shares_count"
-    t.integer  "comments_count"
     t.string   "style"
     t.string   "room_type"
     t.string   "city"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "downloads", :force => true do |t|
@@ -176,7 +177,6 @@ ActiveRecord::Schema.define(:version => 20120404035537) do
     t.integer  "user_id"
     t.integer  "votes_count",      :default => 0
     t.integer  "shares_count",     :default => 0
-    t.integer  "comments_count",   :default => 0
     t.string   "img_file_name"
     t.string   "img_content_type"
     t.integer  "img_file_size"

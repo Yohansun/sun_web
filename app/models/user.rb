@@ -83,6 +83,10 @@ class User < ActiveRecord::Base
     self.name.blank? ? self.username : self.name
   end
 
+  def role_name
+    self.role ? self.role.role : 'user'
+  end
+
   protected
   def recommended_requird?
     recommended == true

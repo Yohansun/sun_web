@@ -3,6 +3,12 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(params[:comment])
 		@comment.user_id = 1 #current_user.id
 		@comment.save
-		redirect_to inspiration_path(@comment.inspiration_id)
+        case @comment.commentable_type
+        when 'Design'
+          redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
+        else
+          redirect_to user_inspiration_path(@comment.commentable.user_id, @comment.commentable.id)
+        end
+
 	end
 end

@@ -33,7 +33,7 @@ $(function() {
     //buttonText : '选择文件',
     onUploadSuccess : function(file, data, response) {
       var dat = eval('(' + data + ')');
-      $.getScript(dat.upload);
+      $.getScript(dat.upload + "?for=inspiration");
     },
     postData : {
         '_http_accept': 'application/javascript',
