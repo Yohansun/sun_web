@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :user_tokens
   has_many :inspirations
+  has_many :design_images
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

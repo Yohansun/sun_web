@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'weekstar' %>
+  <%= stylesheet_link_tag 'style', 'weekstar' %>
   <script type="text/javascript">
   $(window).load(function () {
     $('#inspiration').masonry();
@@ -42,7 +42,7 @@
       <div id="inspiration" class="row group">
         <%- @inspirations.each do |i| -%>
         <div>
-          <%= link_to (image_tag i.img.url(:outside)), inspiration_path(i) %>
+          <%= link_to (image_tag i.cover_img.file.url(:outside)), inspiration_path(i) %>
           <h3><%= i.title %></h3>
           <p class="p0 group">
             <span class="nopl"><%= i.user.name %></span><span class="result_time nopl"><%= i.created_at.to_date%></span>

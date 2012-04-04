@@ -8,8 +8,8 @@
 
 Role.create([{ :role => 'designer' }, { :role => 'company' }, { :role => 'user' }])
 
-Subject.create(:slug => "weekly_tips", :content_type => "WeeklyTip")
-Subject.create(:slug => "articles", :content_type => "Post")
-Subject.create(:slug => "master_designs", :content_type => "MasterDesign")
-Subject.create(:slug => "master_profile", :content_type => "MasterProfile")
-Subject.create(:slug => "master_topics", :content_type => "Post")
+Subject.create(:name => "一周贴士", :slug => "weekly_tips", :content_type => "WeeklyTip")
+Subject.create(:name => "装修资讯", :slug => "articles", :content_type => "Post")
+Subject.create(:name => "大师设计作品", :slug => "master_designs", :content_type => "MasterDesign")
+Subject.create(:name => "大师档案", :slug => "master_profile", :content_type => "MasterProfile")
+Subject.create(:name => "大师热点话题", :slug => "master_topics", :content_type => "Post")

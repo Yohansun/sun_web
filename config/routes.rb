@@ -55,7 +55,7 @@ Icolor::Application.routes.draw do
   match "/designs_upload" => "designs#upload"
   # get "/inspirations", :to => "inspirations#index"
   # match "/inspirations/:id", :to => "inspirations#show"
-  # get "/inspirations/:id/fullscreen" => "inspirations#fullscreen" 
+  # get "/inspirations/:id/fullscreen" => "inspirations#fullscreen"
   # match "/inspirations/new", :to => "inspirations#new"
   # post "/inspirations", :to => "inspirations#create"
   resources :inspirations
@@ -88,11 +88,16 @@ Icolor::Application.routes.draw do
     #用户对内和对外的相关页面
     resources :events
     resources :faqs
-    resources :inspirations
+    resources :inspirations do
+      member do
+        get :upload
+      end
+    end
     resources :messages
     resources :site_messages
     resources :rank
     resources :designs
+    resources :design_images
   end
 
   #扩充magic_content

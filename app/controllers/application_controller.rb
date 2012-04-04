@@ -31,4 +31,8 @@ class ApplicationController < ActionController::Base
     weeks
   end
 
+  def find_user
+    @user = User.find(params[:user_id]) if params[:user_id]
+  end
+
 end

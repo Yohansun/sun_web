@@ -1,4 +1,5 @@
 <%- content_for :head do %>
+<%= stylesheet_link_tag 'weekstar' %>
 <script type="text/javascript">
   $(window).load(function() {
     $('#inspiration').masonry();
@@ -63,7 +64,9 @@
           <div id="inspiration" class="row host_ins pb30 line_b_dot group">
             <%- @inspirations.each do |i| -%>
             <div>
-              <%= link_to (image_tag i.img.url(:inside), class: "host_ins_img"), inspiration_path(i) %>
+              <% if i.cover_img -%>
+                <%= link_to (image_tag i.cover_img.file.url(:inside), class: "host_ins_img"), inspiration_path(i) %>
+              <% end -%>
               <h3><%= i.title %></h3>
               <p class="p1 group"> <strong class="ft14 fb"><%= i.votes_count %></strong> </p>
               <p class="p2 group"> <span class="zf ft12">转发 (<%= i.shares_count %>)</span><span class="pl ft12">评论 (<%= i.comments_count %>)</span> </p>
