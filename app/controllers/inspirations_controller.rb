@@ -1,7 +1,9 @@
 class InspirationsController < ApplicationController
-  def index 	
-  	if params[:user_id]
-  		@user = User.find(params[:user_id])
+  before_filter :find_user
+  before_filter :find_inspiration, :only => [:upload, :edit]
+
+  def index
+  	if @user
       @inspirations = @user.inspirations.page params[:page]
     	render :template => "#{controller_name}/users/#{action_name}"
     else
@@ -12,28 +14,41 @@ class InspirationsController < ApplicationController
   def fullscreen
     render :layout => nil
   end
-	
+
   def show
   	@inspiration = Inspiration.find(params[:id])
     @comments = @inspiration.comments.page params[:page]
   end
 
   def new
-  	@inspiration = Inspiration.new
+  	@inspiration = current_user.inspirations.new
   end
 
   def create
-  	@inspiration = Inspiration.new(params[:inspiration])
-  	@inspiration.user_id = current_user.id
+  	@inspiration = current_user.inspirations.build(params[:inspiration])
   	if @inspiration.save
-  		if params[:user_id]
-        Rails.logger.info params[:user_id]
-  			redirect_to "/users/#{params[:user_id]}/inspirations"
-  		else
-  			redirect_to inspirations_path
-  		end
+  		redirect_to upload_user_inspiration_path(current_user, @inspiration)
   	else
-  		redirect_to new_inspiration_path
+  		render :action => 'new'
   	end
+  end
+
+  def update
+    @inspiration = current_user.inspirations.find(params[:id])
+    if @inspiration.update_attributes(params[:inspiration])
+      if params[:cover_image]
+        image = @inspiration.design_images.find(params[:cover_image])
+        image.is_cover = true
+        image.save
+      end
+      redirect_to :action => "show"
+    else
+      render :action => 'edit'
+    end
+  end
+
+  private
+  def find_inspiration
+    @inspiration = current_user.inspirations.find(params[:id])
   end
 end

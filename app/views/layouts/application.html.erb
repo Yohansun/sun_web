@@ -60,7 +60,6 @@
             <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
             <a class="jiathis_counter_style"></a>
           </div>
-          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
           <!-- JiaThis Button END -->
         </div><!--navLabel ends-->
         <%- unless user_signed_in? %>
@@ -229,12 +228,12 @@
   <div class='footer <%= 'mt50' if controller_name =~ /contact|function/ %>'>
     <div class='links'>
       <div class='w_995 group'>
-        <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.jpg" %>" alt="" /></a>
-        <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.jpg" %>" alt="" /></a>
-        <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.jpg" %>" alt="" /></a>
-        <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.jpg" %>" alt="" /></a>
-        <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.jpg" %>" alt="" /></a>
-        <a class="nomr" href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.jpg" %>" alt="" /></a>
+        <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" alt="" /></a>
+        <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.png" %>" alt="" /></a>
+        <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.png" %>" alt="" /></a>
+        <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.png" %>" alt="" /></a>
+        <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.png" %>" alt="" /></a>
+        <a class="nomr" href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" alt="" /></a>
       </div><!--w_995 ends-->
     </div><!--links ends-->
     <div class='bot_map w_995 ft12 clear'>
@@ -295,7 +294,7 @@
     </div><!--copyright ends-->
   </div><!--footer ends-->
 
-  <%= yield  :foot %>
-
+  <%= yield :tail %>
+  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 </body>
 </html>

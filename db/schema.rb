@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120331110146) do
+ActiveRecord::Schema.define(:version => 20120403133135) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -86,6 +86,19 @@ ActiveRecord::Schema.define(:version => 20120331110146) do
     t.string   "content"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "design_images", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.boolean  "is_cover"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "downloads", :force => true do |t|

@@ -1,6 +1,7 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'style' %>
+  <%= stylesheet_link_tag 'weekstar' %>
   <%= javascript_include_tag 'jquery.masonry.js' %>
+  <%= javascript_include_tag 'galleryB.js' %>
 <% end -%>
 <div class="main page_weekstar page_weekstar_detail">
   <div class='sub_title tr pt25'>
@@ -28,20 +29,23 @@
     </div>
     <div class="weekstart_detail">
       <div class="big_image">
-        <%= image_tag "design/pc1.jpg" %>
+        <% if @inspiration.cover_img -%>
+          <%= image_tag @inspiration.cover_img.file.url(:slide) %>
+        <% end -%>
       </div>
       <div class="galleryB">
         <span class="moveleft"></span>
         <span class="moveright"></span>
         <div class="list">
           <ul>
-            <% Inspiration.limit(4).each do |i| %>
-            <li><%= link_to (image_tag i.img.url), inspiration_path(i) %></li>
-            <% end %>
+            <% @inspiration.design_images.each do |i| -%>
+              <li><%= link_to (image_tag i.file.url(:slide_thumb),
+                :alt => @inspiration.title), i.file.url(:slide),
+                :title => @inspiration.title %></li>
+            <% end -%>
           </ul>
         </div>
       </div>
-      <script type="text/javascript" src="js/galleryB.js"></script>
       <div class="properties">
         <table class="propertyA">
           <tr>
@@ -51,10 +55,6 @@
           <tr>
             <th>上传时间：</th>
             <td><%= @inspiration.created_at.to_date %></td>
-          </tr>
-          <tr>
-            <th>设计风格：</th>
-            <td>田园</td>
           </tr>
           <tr>
             <th>灵感启发：</th>
@@ -69,14 +69,14 @@
           </div>
           <div class="form-content">
             <%= form_for(Comment.new) do |f| %>
-              <%= f.hidden_field :inspiration_id, value: params[:id] %>
-              <p class="input">
-                <%= f.text_area :content %>
-              </p>
-              <p class="button">
-                <!-- <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" /> -->
-                <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
-              </p>
+            <%= f.hidden_field :inspiration_id, value: params[:id] %>
+            <p class="input">
+              <%= f.text_area :content %>
+            </p>
+            <p class="button">
+              <!-- <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" /> -->
+              <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
+            </p>
             <% end %>
           </div>
         </div>
