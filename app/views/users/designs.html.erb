@@ -10,50 +10,8 @@
 <div class="main signup group">
   <div class="shadow signup_box">
     <div class="section">
-      <div class="host_self group">
-        <div class="signup_img_box">
-          <img class="box_shadow" src="<%= asset_path "personal/d_host_img.jpg " %>" alt=""/>
-        </div>
-        <div class="host_status">
-          <h2><strong>杨明洁</strong><em>金牌会员</em></h2>
-          <!--<a class="back_perhome" href="#">返回个人主页</a>-->
-          <div class="signup_text">
-            <p>
-              从业5年，擅长简约及田园风格室内装修设计
-            </p>
-          </div>
-          <p class="d_hostaddr">上海罗磊室内设计有限公司</p>
 
-          <p class="icon_email">Email： designer@163.com</p>
-
-          <p class="icon_qq">Q Q： 1204333759</p>
-
-          <p class="icon_msn">MSN： designer@hotmail.com</p>
-
-          <p class="icon_fetion">飞 信： 395005</p>
-        </div>
-        <!--host_status ends-->
-      </div>
-      <!--host_self ends-->
-
-      <div class="sort_box pr mt25 group">
-        <ul class="sort_show_ul group">
-          <li class="sort_show">
-            <a class="sort_show_a" href="d_out_works.html">作&nbsp;&nbsp;品</a>
-          </li>
-          <li>
-            <a class="sort_show_a" href="d_out_ins.html">灵感秀</a>
-          </li>
-          <li>
-            <a class="sort_show_a" href="d_out_msgboard.html">留言板</a>
-          </li>
-          <li>
-            <a class="sort_show_a" href="d_out_notice.html">活动公告</a>
-          </li>
-        </ul>
-
-      </div>
-      <!--sort_box ends-->
+      <%= render :partial => "users/profile_box" %>
 
       <div class="host_main">
         <div class="design_result">

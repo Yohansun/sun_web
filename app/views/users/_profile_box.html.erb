@@ -1,0 +1,51 @@
+<div class="host_self group">
+  <div class="signup_img_box"> <img class="box_shadow" src="<%= asset_path "personal/d_host_img.jpg " %>" alt="" />
+    <%- if current_user && current_user == @user %>
+      <p><%= link_to "修改账户信息", edit_user_path(current_user) %></p>
+    <%- end %>
+  </div>
+  <div class="host_status">
+    <!--<h2><strong>杨明洁</strong><em>金牌会员</em></h2>
+    <a class="back_perhome" href="#">返回个人主页</a>
+          <div class="signup_text">
+            <p>
+            从业5年，擅长简约及田园风格室内装修设计
+            </p>
+          </div>-->
+    <p class="d_hostaddr">上海罗磊室内设计有限公司</p>
+    <div class="signup_text">
+      <p>从业5年，擅长简约及田园风格室内装修设计 </p>
+    </div>
+    <p class="icon_email">Email: <%= @user.email %></p>
+    <p class="icon_qq">QQ: <%= @user.qq %></p>
+    <p class="icon_msn">MSN: <%= @user.msn %></p>
+    <p class="icon_fetion">飞信: <%= @user.fetion %></p>
+  </div>
+  <!--host_status ends-->
+</div>
+
+<!--host_self ends-->
+<%- if current_user && current_user == @user %>
+<ul class="system_info group">
+  <li class="icon_point"><a href="f_in_point.html">我的积分</a></li>
+  <li class="icon_info"><a href="f_in_infolist.html">系统消息(2)</a></li>
+  <li class="icon_qustion"><a href="f_in_question.html">我的提问(新回复1)</a></li>
+  <li class="icon_active"><a href="f_in_signup.html">我报名的活动</a></li>
+</ul>
+<%- end %>
+<!--system_info ends-->
+
+<div class="sort_box pr mt25 group">
+  <ul class="sort_show_ul group">
+    <li class="<%= "sort_show" if controller_name == 'designs' %>"><a class="sort_show_a" href="f_in_works.html">作&nbsp;&nbsp;品</a> </li>
+    <li class="<%= "sort_show" if controller_name == 'inspirations' %>"><%= link_to "灵感秀", user_inspirations_path(@user), :class => 'sort_show_a' %></li>
+    <li class="<%= "sort_show" if controller_name == 'messages' %>"><a class="sort_show_a" href="f_in_msgboard.html">留言板</a> </li>
+    <li class="<%= "sort_show" if controller_name == 'events' %>"><a class="sort_show_a" href="f_in_notice.html">活动公告</a> </li>
+  </ul>
+
+  <%- if current_user && current_user == @user %>
+    <%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
+  <%- end %>
+
+</div>
+<!--sort_box ends-->

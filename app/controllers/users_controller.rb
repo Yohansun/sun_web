@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def show
+    redirect_to user_inspirations_path(params[:id])
+  end
+
   def update
     if current_user
       valid_result = current_user.errors.messages

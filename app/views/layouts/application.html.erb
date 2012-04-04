@@ -30,16 +30,16 @@
     <div class="header">
       <div class="nav pa">
         <div class="logo">
-          <a href="#"><%= image_tag "logo.png" %></a>
-          <a href="#"><%= image_tag "logo2.png" %></a>
+          <a href="/"><%= image_tag "logo.png" %></a>
+          <a href="/"><%= image_tag "logo2.png" %></a>
         </div>
         <div class="navTop fr">
-          <a href="#" class="user_info fl">
           <%- if user_signed_in? %>
-             <strong><%= current_user.username || current_user.name %></strong></a><a href="/users/<%=current_user.id%>/inspirations" class="user_info fl">我的主页</a><%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
+            <a href="<%= user_path(current_user) %>" class="user_info fl">
+             <strong><%= current_user.display_name %></strong> 我的主页<%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
+             </a>
           <%- end %>
           <a href="#" class="weibo fl"></a>
-          </a>
         <div class="search fl">
           <form action="#" method="get">
             <input type="text" class="fl" value="Search" />
@@ -47,7 +47,7 @@
           </form>
         </div><!--search ends-->
         <div class="navLabel fl ft12">
-          <a href="#">立邦网上商城</a> |
+          <a href="http://shop.nipponpaint.com.cn/" target="_blank">立邦网上商城</a> |
           <a href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
           <a href="javascript:void(0)" class="jiathis_btn">分享</a>
           <!-- JiaThis Button BEGIN -->
@@ -66,7 +66,7 @@
           <a href="#" class="login fl"></a>
           <a href="/users/sign_up" class="reg fl"></a>
         <%- end %>
-        <a href="#" class="nippon fl"></a>
+        <a href="/" class="nippon fl"></a>
       </div><!--navTop ends-->
       <ul class="navBot fr cw fb ft14">
         <li><a href="/">首页</a></li>
