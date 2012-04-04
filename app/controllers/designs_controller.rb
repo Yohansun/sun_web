@@ -1,5 +1,5 @@
 class DesignsController < ApplicationController
   def index
-    render :template => "#{controller_name}/users/#{action_name}" if params[:user_id]
+    render :template => "users/designs" if params[:user_id]
   end
 end

@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
     (user_tokens.empty? || !email.blank?) && super
   end
 
+  def display_name
+    self.name.blank? ? self.username : self.name
+  end
+
   protected
   def recommended_requird?
     recommended == true

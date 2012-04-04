@@ -14,7 +14,7 @@
         <input type="image" src="<%= asset_path "news/reg_upload.jpg" %>" />
       </div><!--upload ends-->
 
-      <%= render :partial => "#{current_user.role.role}" ,:locals => { :f => f } %>
+      <%= render :partial => "#{current_user.role.role rescue 'user'}" ,:locals => { :f => f } %>
 
       <div class="reg_list fl">
         <label for="uesername">邮编：</label>
@@ -39,9 +39,9 @@
         <span class="fb">注：</span>完成此步骤可获得更多积分哦！
       </div>
       <p class="tc">
-      <input type="image" src="<%= asset_path "news/reset_save.jpg" %>" />&nbsp;
-      <a href="/users/suc_regist"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
-      <%- end %>
+        <input type="image" src="<%= asset_path "news/reset_save.jpg" %>" />&nbsp;
+        <a href="/users/suc_regist"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
+        <%- end %>
       </p>
     </div><!--reg_content ends-->
     <div class="ads">

@@ -5,7 +5,7 @@ class InspirationsController < ApplicationController
   def index
   	if @user
       @inspirations = @user.inspirations.page params[:page]
-    	render :template => "#{controller_name}/users/#{action_name}"
+    	render :template => "users/inspirations"
     else
       @inspirations = Inspiration.page params[:page]
     end
