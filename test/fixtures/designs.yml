@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  content: MyText
+  user_id: 1
+  votes_count: 1
+  shares_count: 1
+  comments_count: 1
+  style: MyString
+  room_type: MyString
+  city: MyString
+
+two:
+  title: MyString
+  content: MyText
+  user_id: 1
+  votes_count: 1
+  shares_count: 1
+  comments_count: 1
+  style: MyString
+  room_type: MyString
+  city: MyString

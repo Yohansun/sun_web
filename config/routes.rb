@@ -91,11 +91,15 @@ Icolor::Application.routes.draw do
         get :upload
       end
     end
+    resources :designs do
+      member do
+        get :upload
+      end
+    end
+    resources :design_images
     resources :messages
     resources :site_messages
     resources :rank
-    resources :designs
-    resources :design_images
   end
 
   #修改个人签名

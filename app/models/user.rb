@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :user_tokens
   has_many :inspirations
+  has_many :designs
   has_many :design_images
   has_many :messages
 
