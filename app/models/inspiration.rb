@@ -9,9 +9,13 @@ class Inspiration < ActiveRecord::Base
 
 	paginates_per 8
 
-    default_scope :order => "created_at DESC"
+	default_scope :order => "created_at DESC"
 
 	def cover_img
 		self.design_images.order("is_cover DESC").first
 	end
+
+	def comments_count
+    self.comments.size
+  end
 end
