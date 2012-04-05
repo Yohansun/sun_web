@@ -99,11 +99,13 @@ Icolor::Application.routes.draw do
     resources :inspirations do
       member do
         get :upload
+        get :fullscreen
       end
     end
     resources :designs do
       member do
         get :upload
+        get :fullscreen
       end
     end
     resources :design_images

@@ -1,7 +1,14 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'weekstar' %>
-  <%= javascript_include_tag 'jquery.masonry.js' %>
+<% end -%>
+<% content_for :tail do -%>
   <%= javascript_include_tag 'galleryB.js' %>
+  <script type="text/javascript">
+    $(".slide_thumb").click(function(event) {
+      event.preventDefault();
+      $(".big_image img").attr("src", $(event.target).parent().attr("href"));
+    });
+  </script>
 <% end -%>
 <div class="main page_weekstar page_weekstar_detail">
   <div class='sub_title tr pt25'>
@@ -24,7 +31,7 @@
         </div>
       </div>
       <div class="fullscreen_btn">
-        <a href="/inspiration/1/fullscreen">全屏观看</a>
+        <%= link_to "全屏观看", fullscreen_user_design_path(@design.user_id, @design) %>
       </div>
     </div>
     <div class="weekstart_detail">
@@ -41,7 +48,7 @@
             <% @design.design_images.each do |i| -%>
               <li><%= link_to (image_tag i.file.url(:slide_thumb),
                 :alt => @design.title), i.file.url(:slide),
-                :title => @design.title %></li>
+                :title => @design.title, :class => "slide_thumb" %></li>
             <% end -%>
           </ul>
         </div>

@@ -12,6 +12,7 @@ class InspirationsController < ApplicationController
   end
 
   def fullscreen
+    @inspiration = @user.inspirations.find(params[:id])
     render :layout => nil
   end
 

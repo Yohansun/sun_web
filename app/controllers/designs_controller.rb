@@ -12,6 +12,7 @@ class DesignsController < ApplicationController
   end
 
   def fullscreen
+    @design = @user.designs.find(params[:id])
     render :layout => nil
   end
 

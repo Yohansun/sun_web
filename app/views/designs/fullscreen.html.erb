@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="galleryC_wrap">
-      <div class="title"><h1><%= @inspiration.title %><span>(1/<%= @inspiration.design_images.size %>)</span></h1></div>
+      <div class="title"><h1><%= @design.title %><span>(1/<%= @design.design_images.size %>)</span></h1></div>
       <div class="galleryC">
         <div class="toolbar">
           <div class="toolbar_wrap">
@@ -16,7 +16,7 @@
             <div class="prev"></div>
             <div class="pause"></div>
             <div class="next"></div>
-            <div class="exit"><%= link_to "退出全屏", user_inspiration_path(@inspiration.user_id, @inspiration) %></div>
+            <div class="exit"><%= link_to "退出全屏", user_design_path(@design.user_id, @design) %></div>
           </div>
         </div>
         <div class="big_image"></div>
@@ -29,11 +29,11 @@
         <h5 class="legend">您已浏览完所有图片</h5>
         <div class="button"><span class="replay"><a href="#">重新播放</a></span></div>
         <div class="more">
-          <p>观看 <%= link_to @inspiration.user.display_name, user_inspirations_path(@inspiration.user_id) %> 往期作品</p>
+          <p>观看 <%= link_to @design.user.display_name, user_designs_path(@design.user_id) %> 往期作品</p>
           <ul>
-            <% @inspiration.user.inspirations.limit(5).each do |inspiration| -%>
+            <% @design.user.designs.limit(5).each do |design| -%>
             <li>
-              <%= link_to image_tag(inspiration.cover_img.file.url(:fullscreen_thumb)), user_inspiration_path(@inspiration.user_id, inspiration) %>
+              <%= link_to image_tag(design.cover_img.file.url(:fullscreen_thumb)), user_design_path(@design.user_id, design) %>
             </li>
             <% end -%>
           </ul>
@@ -43,7 +43,7 @@
     <div class="gallery_over_mask"></div>
     <script type="text/javascript">
       $(function(){
-          var obj = galleryC({ 'images' : [<%= @inspiration.design_images.map{ |design| "'#{design.file.url(:fullscreen)}'" }.join(",") %>]});
+          var obj = galleryC({ 'images' : [<%= @design.design_images.map{ |design| "'#{design.file.url(:fullscreen)}'" }.join(",") %>]});
           $('div.gallery_over span.replay a').click(function(e){
             $('div.gallery_over_wrap').hide();
             $('div.gallery_over_mask').hide();
