@@ -20,7 +20,12 @@
 </script>
 <%- end %>
 <div class="host_self group">
-  <div class="signup_img_box"> <img class="box_shadow" src="<%= asset_path "personal/d_host_img.jpg" %>" alt="" />
+  <div class="signup_img_box">
+    <% if @user.avatar -%>
+      <%= image_tag @user.avatar.file(:profile), :class => 'box_shadow' %>
+    <% else -%>
+      <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
+    <% end -%>
     <%- if current_user && current_user == @user %>
       <p><%= link_to "修改账户信息", edit_user_path(current_user) %></p>
     <%- end %>

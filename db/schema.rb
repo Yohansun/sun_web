@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405062251) do
+ActiveRecord::Schema.define(:version => 20120405073316) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(:version => 20120405062251) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "avatars", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
   create_table "banners", :force => true do |t|
     t.string   "position"
     t.string   "desc"
@@ -106,13 +116,13 @@ ActiveRecord::Schema.define(:version => 20120405062251) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "votes_count",  :default => 0
-    t.integer  "shares_count", :default => 0
+    t.integer  "votes_count"
+    t.integer  "shares_count"
     t.string   "style"
     t.string   "room_type"
     t.string   "city"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "downloads", :force => true do |t|
