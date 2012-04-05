@@ -2,6 +2,8 @@ Icolor::Application.routes.draw do
 
   root :to => 'home#index'
 
+  resources :votes
+
   devise_for :users, :controllers => { :registrations      => "users/register",
                                        :sessions           => "users/sessions", :passwords => "users/passwords",
                                        :omniauth_callbacks => "users/omniauth_callbacks" }
