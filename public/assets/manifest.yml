@@ -209,7 +209,8 @@ master/color_master2.jpg: master/color_master2-b31a455573b73815a6455760a9af760e.
 master/color_master3.jpg: master/color_master3-24f16701818bf8dd7f547db97efe82d7.jpg
 master/color_master4.jpg: master/color_master4-8e39f2b2789885aaf3179f28ddc887bd.jpg
 master/color_master5.jpg: master/color_master5-acc435d8c2729203c75afb665bc26438.jpg
-master/color_master_btn.png: master/color_master_btn-6619cee4ab75576afd5e16b4314e4495.png
+master/color_master_btn.png: master/color_master_btn-66dcff64b77c48456f2a85bb4a0cacbd.png
+master/color_master_hover.png: master/color_master_hover-b6aaa0e6c4620a11e1e154f95e25da91.png
 master/colors_icon_tit.png: master/colors_icon_tit-1237304fc4d771828018a6bb50b7236b.png
 master/colors_over_bg_l.png: master/colors_over_bg_l-44b971ed6024a63e5585cdeda33a7076.png
 master/colors_over_bg_r.png: master/colors_over_bg_r-6af092752fdfae1f6ad481009732a1d8.png
@@ -234,7 +235,8 @@ master/msg_bg.png: master/msg_bg-55bbb81eaeaf4fb7817280d9695751a4.png
 master/new_comm.png: master/new_comm-fc8cc81b214cb5e935d62067f9d45236.png
 master/question_mark_icon.png: master/question_mark_icon-9854a5ffad601e85f895099612bd575b.png
 master/shadow_b_line.png: master/shadow_b_line-6e92de3286e96ffc87155ebfeb165316.png
-master/space_master_btn.png: master/space_master_btn-bef86e8b30609a94933a59141c48f8bb.png
+master/space_master_btn.png: master/space_master_btn-21b9682e23bc2add659ecf3ac8fa53d0.png
+master/space_master_hover.png: master/space_master_hover-446feb58457c64c2fafdbda1cf69963a.png
 master/tag_icon.png: master/tag_icon-3a6b89895a30d2d2a92f581e8e81b702.png
 master/title_master.png: master/title_master-8cbd819e97a870145d687c4410756ee6.png
 master/topic_1.jpg: master/topic_1-bfa3568101195fa1e7fc7048feb8ab33.jpg
@@ -575,6 +577,7 @@ swfobject.js: swfobject-340f898f06f423b055636e87b5a1f7c0.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-0659d326da6909651494561aabe80f0d.js
 user.js: user-80148e5c7e5b7899f916a93118e72fbd.js
 users.js: users-80148e5c7e5b7899f916a93118e72fbd.js
+votes.js: votes-80148e5c7e5b7899f916a93118e72fbd.js
 weekly_stars.js: weekly_stars-80148e5c7e5b7899f916a93118e72fbd.js
 application.css: application-7391c83f8855383b427c6ab81e2139d7.css
 articles.css: articles-95bd4fe1de99c1cd91ec8e6f348a44bd.css
@@ -616,6 +619,7 @@ style.css: style-733ceb5d473ae40364a6105ba30af988.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
 user.css: user-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 users.css: users-95bd4fe1de99c1cd91ec8e6f348a44bd.css
+votes.css: votes-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 weekly_stars.css: weekly_stars-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 weekstar.css: weekstar-25f260413c917f92ace04e8f8fa6137b.css
 magic_content/application.css: magic_content/application-95bd4fe1de99c1cd91ec8e6f348a44bd.css
