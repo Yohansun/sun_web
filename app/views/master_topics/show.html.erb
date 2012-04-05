@@ -42,8 +42,7 @@
           <div class="topic_tit">
             <h2>家居色彩与主人气质</h2>
 
-            <h3><span>来源：<%= @topic.content_source %>
-              时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：128次</span></h3>
+            <h3>时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：128次</span></h3>
           </div>
           <!--topic_tit ends-->
           <div class="topic_con">
@@ -164,10 +163,10 @@
   <div class="sub_bot pr">
     <div class="pager topic_pager ft12">
       <%- unless @prev_topic.nil? %>
-          <a href="/magic_topics/<%= @prev_topic.id %>" class="prev"><span></span>上一篇</a>
+          <a href="/master_topics/<%= @prev_topic.id %>" class="prev"><span></span>上一篇</a>
       <%- end %>
       <%- unless @next_topic.nil? %>
-          <a href="/magic_topics/<%= @next_topic.id %>" class="next"><span></span>下一篇</a>
+          <a href="/master_topics/<%= @next_topic.id %>" class="next"><span></span>下一篇</a>
       <%- end %>
     </div>
     <!--pager ends-->

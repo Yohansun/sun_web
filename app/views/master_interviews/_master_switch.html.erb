@@ -1,0 +1,40 @@
+<div class="design_tit group pb10 line_b_dot">
+  <ul class="design_filter group">
+	<li class="<%= 'li_current' if params[:filter].nil? || params[:filter] == '全部' %> ">
+	  <a href="/master_interviews">全部</a>
+	</li>
+	<%- if params[:master_kind].nil? %>
+		<li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+		  <a href="/master_interviews?filter=<%= URI.escape("海外") %>">海外</a>
+		</li>
+		<li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+		  <a href="/master_interviews?filter=<%= URI.escape("港澳台") %>">港澳台</a>
+		</li>
+		<li class="<%= 'li_current' if params[:filter] == '中国大陆' %> ">
+		  <a href="/master_interviews?filter=<%= URI.escape("中国大陆") %>">中国大陆</a>
+		</li>
+	<%- else %>
+		<li class="<%= 'li_current' if params[:filter] == '海外' %> ">
+		  <a href="/master_interviews?filter=<%= URI.escape("海外") %>&master_kind=<%= params[:master_kind] %>">海外</a>
+		</li>
+		<li class="<%= 'li_current' if params[:filter] == '港澳台' %> ">
+		  <a href="/master_interviews?filter=<%= URI.escape("港澳台") %>&master_kind=<%= params[:master_kind] %>">港澳台</a>
+		</li>
+		<li class="<%= 'li_current' if params[:filter] == '中国大陆' %> ">
+		  <a href="/master_interviews?filter=<%= URI.escape("中国大陆") %>&master_kind=<%= params[:master_kind] %>">中国大陆</a>
+		</li>
+	<%- end %>
+  </ul>
+</div>
+
+<!--design_tit ends-->
+<div class="list_btn line_b_dot">
+  <%- if params[:filter].nil? || params[:filter] == '全部' %>
+	  <a href="/master_interviews?master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path color_master_image %>"/></a>
+	  <a href="/master_interviews?master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
+  <%- else %>
+	  <a href="/master_interviews?filter=<%= params[:filter] %>&master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path color_master_image %>"/></a>
+	  <a href="/master_interviews?filter=<%= params[:filter] %>&master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
+  <%- end %>
+</div>
+<!--list_btn ends-->

@@ -24,7 +24,6 @@
             <%= image_tag article.preview_img.url(:original) if article.preview_img %>
             <div class="article fl ft14">
               <h1><a href='#'><%= link_to article.title, "/articles/#{article.id}" %></a></h1>
-              <span>来源： <%= article.content_source %></span>
               <span>时间：<%= article.published_at.to_formatted_s(:db) %></span>
               <p><%= raw article.intro %>...<%= link_to "[详细]", "/articles/#{article.id}" %></p>
             </div>

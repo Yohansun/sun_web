@@ -10,13 +10,15 @@ class InspirationsController < ApplicationController
     	render :template => "users/inspirations"
     else
       @inspirations = Inspiration.page params[:page]
-    end   
-    
-    if params[:order] == "最热"
-	    @inspirations = @inspirations.order("votes_count desc")
-    else
-	    @inspirations = @inspirations.order("created_at desc")
-	  end  
+    end
+
+    unless @inspirations.nil?
+      if params[:order] == "最热"
+	      @inspirations = @inspirations.order("votes_count desc")
+      else
+	      @inspirations = @inspirations.order("created_at desc")
+      end
+    end
   end
 
   def fullscreen
