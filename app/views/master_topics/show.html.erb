@@ -1,42 +1,176 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'style', 'weekstar' %>
-  <style type="text/css">
-    .shadow {
-      zoom: 1;
-    }
-  </style>
+    <%= stylesheet_link_tag 'style', 'weekstar' %>
+    <style type="text/css">
+        .shadow {
+            zoom: 1;
+        }
+
+        body {
+            background-repeat: repeat-y;
+        }
+
+        .master_topic_review .review_wrap {
+            padding: 0 30px;
+        }
+
+        .master_topic_review .reviewform textarea {
+            width: 830px;
+        }
+
+        .master_topic_review .review_listA .content {
+            width: 730px;
+        }
+
+        .master_topic_review .review_wrap .pager {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+    </style>
 <%- end %>
-<div class="main">
+<div class="main master_topic_review">
   <div class='sub_title tr'>
-    <img src='<%= set_style[:pic_path] %>' alt="" />
+    <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="/">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="/master_topics">热点话题</a>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class='wrapper hot_topic pt25 pb30'>
     <div class="shadow mt25 mb15">
       <div class="section">
         <div class="topic_box">
           <div class="topic_tit">
             <h2>家居色彩与主人气质</h2>
-            <h3><span>来源：<%= @topic.content_source %> 时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：128次</span></h3>
-          </div><!--topic_tit ends-->
+
+            <h3><span>来源：<%= @topic.content_source %>
+              时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：128次</span></h3>
+          </div>
+          <!--topic_tit ends-->
           <div class="topic_con">
             <%= raw @topic.body %>
-          </div><!--topic_con ends-->
-        </div><!--topic_box ends-->
+          </div>
+          <!--topic_con ends-->
+        </div>
+        <!--topic_box ends-->
+
         <%= render :partial => "topic_footer" %>
+
+        <div class="review_wrap">
+          <div class="reviewform">
+            <div class="bar">
+              <h4><span>评论</span>(86)</h4><span class="r">0/140</span>
+            </div>
+            <div class="form-content">
+              <form>
+                <p class="input">
+                  <textarea></textarea>
+                </p>
+                <p class="button">
+                  <input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交"/>
+                </p>
+              </form>
+            </div>
+          </div>
+          <div class="pager ft12">
+            <a class="prev" href="#"><span></span>上一页</a>
+            <a href="#">1</a>
+            <a href="#" class="current">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">...</a>
+            <a href="#">20</a>
+            <a class="next" href="#">下一页<span></span></a>
+          </div>
+          <div class="review_list">
+            <ul class="review_listA">
+              <li>
+                <div class="bar">
+                  <span class="user">NEO</span><span class="time">2012-2-12</span>
+                </div>
+                <div class="reply">
+                  <a href="#">回复</a>
+                </div>
+                <div class="content">
+                  很好！非常好的工具！赞一个...
+                </div>
+              </li>
+              <li>
+                <div class="bar">
+                  <span class="user">NEO</span><span class="time">2012-2-12</span>
+                </div>
+                <div class="reply">
+                  <a href="#">回复</a>
+                </div>
+                <div class="content">
+                  很好！非常好的工具！赞一个...
+                </div>
+              </li>
+              <li>
+                <div class="bar">
+                  <span class="user">NEO</span><span class="time">2012-2-12</span>
+                </div>
+                <div class="reply">
+                  <a href="#">回复</a>
+                </div>
+                <div class="content">
+                  很好！非常好的工具！赞一个...
+                </div>
+              </li>
+              <li>
+                <div class="bar">
+                  <span class="user">NEO</span><span class="time">2012-2-12</span>
+                </div>
+                <div class="reply">
+                  <a href="#">回复</a>
+                </div>
+                <div class="content">
+                  很好！非常好的工具！赞一个...
+                </div>
+              </li>
+              <li>
+                <div class="bar">
+                  <span class="user">NEO</span><span class="time">2012-2-12</span>
+                </div>
+                <div class="reply">
+                  <a href="#">回复</a>
+                </div>
+                <div class="content">
+                  很好！非常好的工具！赞一个...
+                </div>
+              </li>
+              <li>
+                <div class="bar">
+                  <span class="user">NEO</span><span class="time">2012-2-12</span>
+                </div>
+                <div class="reply">
+                  <a href="#">回复</a>
+                </div>
+                <div class="content">
+                  很好！非常好的工具！赞一个...
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div><!--shadow ends-->
-  </div><!--wrapper ends-->
- <div class="sub_bot pr">
-	<div class="pager topic_pager ft12">
-    <%- unless @prev_topic.nil? %>
-	    <a href="/magic_topics/<%= @prev_topic.id %>" class="prev"><span></span>上一篇</a>
-    <%- end %>
-	<%- unless @next_topic.nil? %>
-	    <a href="/magic_topics/<%= @next_topic.id %>" class="next"><span></span>下一篇</a>
-    <%- end %>
-	</div><!--pager ends-->
-	</div><!--sub_bot ends-->
+    </div>
+    <!--shadow ends-->
+  </div>
+  <!--wrapper ends-->
+  <div class="sub_bot pr">
+    <div class="pager topic_pager ft12">
+      <%- unless @prev_topic.nil? %>
+          <a href="/magic_topics/<%= @prev_topic.id %>" class="prev"><span></span>上一篇</a>
+      <%- end %>
+      <%- unless @next_topic.nil? %>
+          <a href="/magic_topics/<%= @next_topic.id %>" class="next"><span></span>下一篇</a>
+      <%- end %>
+    </div>
+    <!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
 </div><!--main ends-->

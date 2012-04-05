@@ -1,0 +1,33 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "style" %>
+<%- end %>
+<div class="main color_signup_box">
+  <h2><img src="<%= asset_path "design/mb/design_signup.png"%>"/></h2>
+
+  <div class="wrapper">
+    <p class="line_b_dot">请提交您的报名资料</p>
+
+    <div class="shadow">
+      <div class="section ">
+        <form>
+          <div class="color_signup"><label>*姓名：</label><input class="color_username" type="text"/></div>
+          <div class="color_signup"><label>*证件类型：</label>
+            <select class="fl">
+              <option>身份证</option>
+              <option>身份证</option>
+              <option>身份证</option>
+            </select>
+          </div>
+          <div class="color_signup"><label>*证件号码：</label><input type="text"/></div>
+          <div class="color_signup"><label>*联系方式：</label><input type="text"/></div>
+          <div class="color_signup"><label>*电子邮件：</label><input type="text"/></div>
+          <div class="color_signup"><label>*邮寄地址：</label><input type="text"/></div>
+          <div class="color_input_image_box tc">
+            <input class="color_input_image" type="image" src="<%= asset_path "design/submitB.gif"%>"/></div>
+        </form>
+      </div>
+      <!--section ends-->
+    </div>
+    <!--shadow ends-->
+  </div>
+</div><!--main ends-->

@@ -1,8 +1,12 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'style', 'weekstar' %>
+    <%= stylesheet_link_tag 'style', 'weekstar' %>
     <style type="text/css">
         .shadow {
             zoom: 1;
+        }
+
+        .works_list_slide {
+            margin-top: 82px;
         }
     </style>
 <%- end %>
@@ -66,7 +70,7 @@
               <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
               <h4>作品名称：<span><%= design.design_name %></span></h4>
 
-              <div class="works_list_slide" style="margin-top: 82px;">
+              <div class="works_list_slide">
                 <%= link_to image_tag("/assets/master/works_list_left.png"), "javascript:void(0)", :class => "works_pre" %><%= link_to image_tag("/assets/master/works_list_right.png"), "javascript:void(0)", :class => "works_next" %>
                 <div class="img_works_box">
                   <div class="img_works_list">

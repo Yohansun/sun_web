@@ -33,12 +33,12 @@
             从业5年，擅长简约及田园风格室内装修设计
             </p>
           </div>-->
-    <p class="d_hostaddr">上海罗磊室内设计有限公司</p>
+    <p class="d_hostaddr"><%= @user.display_name.blank? ? "您当前为公司用户，公司名称未输入，请完善公司信息！" : @user.display_name %></p>
     <div class="signup_text" id='<%= params[:user_id] %>'>
       <p id="signature"><%= raw @user.signature %></p>
     </div>
     <p class="icon_email">Email: <%= @user.email %></p>
-    <p class="icon_qq">QQ: <%= @user.qq %></p>
+    <p class="icon_qq">QQ:<%= @user.qq %></p>
     <p class="icon_msn">MSN: <%= @user.msn %></p>
     <p class="icon_fetion">飞信: <%= @user.fetion %></p>
   </div>
