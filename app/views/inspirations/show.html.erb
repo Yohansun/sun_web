@@ -1,7 +1,14 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'weekstar' %>
-  <%= javascript_include_tag 'jquery.masonry.js' %>
+<% end -%>
+<% content_for :tail do -%>
   <%= javascript_include_tag 'galleryB.js' %>
+  <script type="text/javascript">
+    $(".slide_thumb").click(function(event) {
+      event.preventDefault();
+      $(".big_image img").attr("src", $(event.target).parent().attr("href"));
+    });
+  </script>
 <% end -%>
 <div class="main page_weekstar page_weekstar_detail">
   <div class='sub_title tr pt25'>
@@ -15,8 +22,8 @@
       <h1><%= @inspiration.title %></h1>
       <div class="subtitle">
         <div class="votes">
-          当前票数：<span><%= @inspiration.votes_count %></span>
-          <a href="#"><img src="<%= asset_path "design/d_vote_btn.png" %>" /></a>
+          当前票数：<span id="votes_count"><%= @inspiration.votes_count %></span>
+          <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @inspiration.id, :voteable_type => "Inspiration"), :remote => true, :method => 'post' %>
         </div>
         <div class="operate">
           <span class="forward">转发 (<%= @inspiration.shares_count %>)</span>
@@ -24,7 +31,7 @@
         </div>
       </div>
       <div class="fullscreen_btn">
-        <a href="/inspiration/1/fullscreen">全屏观看</a>
+        <%= link_to "全屏观看", fullscreen_user_inspiration_path(@inspiration.user_id, @inspiration) %>
       </div>
     </div>
     <div class="weekstart_detail">
@@ -41,7 +48,7 @@
             <% @inspiration.design_images.each do |i| -%>
               <li><%= link_to (image_tag i.file.url(:slide_thumb),
                 :alt => @inspiration.title), i.file.url(:slide),
-                :title => @inspiration.title %></li>
+                :title => @inspiration.title, :class => 'slide_thumb' %></li>
             <% end -%>
           </ul>
         </div>

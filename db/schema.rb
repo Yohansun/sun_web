@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404152325) do
+ActiveRecord::Schema.define(:version => 20120405062251) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -437,6 +437,15 @@ ActiveRecord::Schema.define(:version => 20120404152325) do
     t.datetime "published_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
+    t.integer  "user_id"
+    t.string   "ip"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "weekly_tips", :force => true do |t|
