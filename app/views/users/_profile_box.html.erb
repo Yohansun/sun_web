@@ -72,8 +72,15 @@
   </ul>
 
   <%- if current_user && current_user == @user %>
-    <% new_link = controller_name == 'designs' ? new_user_design_path(current_user) : new_user_inspiration_path(current_user) -%>
-    <%=link_to "我要上传", new_link, class: "launch_act" %>
+	<% case controller_name %>
+	<% when "designs" %>
+		<%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
+	<% when "events" %>
+		<%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
+	<% else %>
+		<%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
+	<%- end -%>	
+    <%# new_link = controller_name == 'designs' ? new_user_design_path(current_user) :  -%>
   <%- end %>
 
 </div>

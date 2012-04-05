@@ -1,0 +1,75 @@
+<%- content_for :tail do %>
+    <script type="text/javascript">
+        $(function() {
+            $(".temptime").datepicker({ picker: "<img class='picker' align='middle' src='<%= asset_path "img/cal.gif" %>' alt=''/>" });
+        })
+    </script>
+<%- end %>
+<div class="main signup group">
+  <div class="shadow signup_box">
+    <div class="section">
+		<%= render :partial => "users/profile_box" %>
+      <!--system_info ends-->
+      <div class="sort_box pr group">
+        <ul class="sort_show_ul group">
+          <li class="sort_show modify pr">
+            <a class="sort_show_a fb" href="#">发起新活动</a>
+            <img src="<%= asset_path "design/arr_bottom.gif  " %>" class="pa"/>
+          </li>
+        </ul>
+      </div>
+      <!--sort_box ends-->
+      <div class="host_main modifys ft14 clear">
+	<%= form_for([current_user, @event]) do |f| %>
+	<%= hidden_field_tag "user_id", current_user.id %>
+		<div class="modify_list">
+			<label for="event_title">活动标题：</label>
+			<%= f.text_field :title, :class => "event_title" %>
+		</div>
+		<div class="modify_list">
+			<label for="event_date">活动时间：</label>
+			<select>
+				<option>当天结束</option>
+			</select>
+			<%= f.text_field :begin_at, :class => "temptime" %>
+			<%= select_hour Time.now, :field_name => 'begin_time' %>			
+			至
+			<%= select_hour Time.now + 6.hour, :field_name => 'end_time' %>			
+		</div>
+		<div class="modify_list">
+			<label for="upload_img">上传图片：</label>
+			<!-- FIXME  img_url -->
+			<% unless @event.event_img.url.eql? "/event_imgs/original/missing.png" %>
+			<div class="upload_img fl">
+				<img src="<%= asset_path @event.event_img %>"/>
+			</div>
+			<%- end -%>
+			<div class="uploads fl">
+				<h2 class="fl ft16">从电脑中选择你喜欢的照片</h2>
+
+				<p class="fl ft12">你可以上传JPG、JPEG、gif "%>、PNG或BMP文件</p>
+				<%= file_field_tag "event[event_img]", :class => "upload_file fl" %>
+				<!--
+				<input type="image" src="<%#= asset_path "personal/upload_img.jpg" %>" class="fl cl"/>
+				<a href="#" class="upload_cancel fl"></a>
+				-->
+			</div>
+			<!--uploads ends-->
+		</div>
+		<div class="modify_list">
+			<label for="instructions">活动介绍：</label>
+			<%= f.text_area :description, :class => "fl" %>
+		</div>
+		<div class="reset_commit fl">
+			<input type="image" src="<%= asset_path "news/submit.jpg  " %>" class="fl"/>
+			<input type="reset" value="重置" class="reset_reset fb ft14 fl"/>
+		</div>
+		<%- end -%>
+		<!--reset_commit ends-->
+      </div>
+      <!--host_main ends-->
+    </div>
+    <!--section ends-->
+  </div>
+  <!--shadow ends-->
+</div><!--main ends-->

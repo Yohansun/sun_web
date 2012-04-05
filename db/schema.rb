@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405073316) do
+ActiveRecord::Schema.define(:version => 20120405063108) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -143,6 +143,22 @@ ActiveRecord::Schema.define(:version => 20120405073316) do
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
     t.datetime "published_at"
+  end
+
+  create_table "events", :force => true do |t|
+    t.text     "title"
+    t.string   "event_img_file_name"
+    t.string   "event_img_content_type"
+    t.integer  "event_img_file_size"
+    t.datetime "event_img_updated_at"
+    t.date     "begin_at"
+    t.date     "end_at"
+    t.string   "begin_time"
+    t.string   "end_time"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "function_categories", :force => true do |t|

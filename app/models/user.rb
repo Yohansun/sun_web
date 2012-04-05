@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :designs
   has_many :design_images
   has_many :messages
+  has_many :events, :class_name => "Event", :foreign_key => "user_id"
 
   has_one :avatar
 
