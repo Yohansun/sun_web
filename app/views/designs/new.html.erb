@@ -1,6 +1,66 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'reg' %>
 <% end -%>
+<% content_for :tail do -%>
+<%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+<script type="text/javascript">
+$(function(){
+  var options = {
+    data  : data
+  }
+
+  var sel = new LinkageSelect(options);
+  sel.bind('.level_1');
+  sel.bind('.level_2');
+
+  $('div.tags a').click(function(){
+    var txt = $(this).text();
+    add_tag(txt)
+  });
+  $('input.add_tag_on').click(function(){
+    var txt = $('input.add_tag').val();
+    if(txt!='')
+      add_tag(txt)
+  });
+  del_tag();
+});
+
+function del_tag(){
+  $('a.labels img').click(function(){
+    var tag = $(this).parents('a.labels').text();
+    var tags = $("#design_tag_list").val().split(",");
+    var idx = tags.indexOf(tag);
+
+    if(idx!=-1) tags.splice(idx, 1);
+    $("#design_tag_list").val(tags.join(","));
+
+    $(this).parents('a.labels').remove();
+  });
+}
+
+function add_tag(text){
+  var $list = $('div.tag_list');
+  var $a = $('div.tag_list a');
+  var arr = new Array();
+  $a.each(function(i){
+    arr.push($a.eq(i).text());
+  });
+  if(arr.indexOf(text)<0)
+  {
+    var $app = '<a href="javascript:void(0)" class="labels fl cr">'+text+'<img src="/assets/news/labels.png" /></a>';
+    $list.append($app);
+
+    var tags = $("#design_tag_list").val().split(",");
+    tags.push(text);
+    $("#design_tag_list").val(tags.join(","));
+
+    del_tag();
+  }
+}
+/*reg2*/
+</script>
+<% end -%>
+
 <%= form_for([current_user, @design]) do |f| %>
 <%= hidden_field_tag "user_id", current_user.id %>
 <div class="main syslist uploads">
@@ -35,41 +95,27 @@
         <div class="reg_list reg_width fl">
           <label for="city">作品建筑所属城市：</label>
           <div class="fl">
-            <select class="fl">
-              <option>请选择</option>
-            </select>
+            <select id="province" class="level_1 fl"></select>
+            <select id="city" class="level_2 fl" name = design[area_id]></select>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <label for="labels">标签：</label>
           <div class="tag_list fl">
-            <a href="javascript:void(0)" class="labels fl cr">客厅设计<%= image_tag "news/labels.png" %></a>
-            <a href="javascript:void(0)" class="labels fl cr">田园风格<%= image_tag "news/labels.png" %></a>
-            <a href="javascript:void(0)" class="labels fl cr">小清新<%= image_tag "news/labels.png" %></a>
-            <a href="javascript:void(0)" class="labels fl cr">绿色系<%= image_tag "news/labels.png" %></a>
+
           </div>
+          <%= f.hidden_field :tag_list %>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <label></label>
           <div class="fl tags">
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg1">客厅设计</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg2">田园风格</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg3">欧式奢华风</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg4">斯堪的纳维亚半岛风格</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg5">小清新</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg6">黄色系</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg7">结构美学设计</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg8">宜家简约设计风格</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg9">中式古典风格</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg10">低调的奢华</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg11">北欧</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg11">灰色调</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg11">北欧</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg10">低调的奢华</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg11">灰色调</a>
-            <a href="javascript:void(0)" class="tag fl ft14 cw bg9">中式古典风格</a>
-            <input type="text" class="add_tag fl" />
-            <input type="image" src="<%= asset_path "news/add_tag.jpg" %>" class="add_tag_on fl" onclick="return false;" />
+            <% ["客厅设计", "田园风格", "欧式奢华风", "斯堪的纳维亚半岛风格", "小清新",
+              "黄色系", "结构美学设计", "宜家简约设计风格", "中式古典风格", "低调的奢华", "北欧", "灰色调"].each do |tag| -%>
+              <a href="javascript:void(0)" class="tag fl ft14 cw bg<%= rand(20) + 1 %>"><%= tag %></a>
+            <% end -%>
+            <br/>
+            <input type="text" class="add_tag fl" id="new_tag" />
+            <input type="image" src="<%= asset_path "news/add_tag.jpg" %>" class="add_tag_on fl" onclick="add_tag($('#new_tag').val());$('#new_tag').val("");return false;" />
           </div>
         </div><!--reg_list ends-->
         <input type="image" src="<%= asset_path "news/add_img.jpg" %>" class="add_img fl" />

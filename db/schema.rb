@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405063108) do
+ActiveRecord::Schema.define(:version => 20120405111606) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(:version => 20120405063108) do
     t.integer  "group_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "areas", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.boolean  "active",         :default => true
+    t.string   "pinyin"
+    t.integer  "children_count", :default => 0
+    t.integer  "lft",            :default => 0
+    t.integer  "rgt",            :default => 0
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "avatars", :force => true do |t|
@@ -123,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20120405063108) do
     t.string   "city"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "area_id"
   end
 
   create_table "downloads", :force => true do |t|
@@ -448,6 +461,7 @@ ActiveRecord::Schema.define(:version => 20120405063108) do
     t.string   "msn"
     t.string   "fetion"
     t.string   "signature"
+    t.integer  "area_id"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

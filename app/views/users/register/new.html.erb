@@ -1,6 +1,6 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'reg' %>
-  <%= javascript_include_tag "location.js", "LinkageSelect.js" %>
+  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
 <% end -%>
 <div class="main">
   <div class="reg_bg1 pr"></div>
@@ -50,7 +50,7 @@
           <div class="fl">
             <select id="province" class="level_1 fl" name="user[state]"></select>
             <select id="city" class="level_2 fl" name = user[city]></select>
-            <select id="county" class="level_3 fl" name = user[district]></select>
+            <select id="county" class="level_3 fl" name = user[area_id]></select>
             <span class="reg_tip3 fl">注：如果系统辩识有误，请手动选择</span>
           </div>
         </div><!--reg_list ends-->
