@@ -65,7 +65,7 @@
         <div class="msgboard_list mt25">
          <%- unless @messages.blank? %>
          <%- @messages.each do |m| %>
-          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg " %>" alt="" />
+          <div class="msgboad_item"> <img class="box_shadow" src="<%= asset_path "personal/visitor_fans1.jpg" %>" alt="" />
             <h2 class="visitor_info"><strong class="fl"><%= m.from_user.display_name %></strong><span class="fl"><%= m.created_at.to_s(:db)[5..6] %>月<%= m.created_at.to_s(:db)[8..9] %>日&nbsp;&nbsp;<%= m.created_at.to_s(:time) %></span></h2>
             <!--<div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>-->
             <div class="msg_list_box">
