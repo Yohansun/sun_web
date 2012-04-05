@@ -106,13 +106,13 @@ ActiveRecord::Schema.define(:version => 20120404152325) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "votes_count"
-    t.integer  "shares_count"
+    t.integer  "votes_count",  :default => 0
+    t.integer  "shares_count", :default => 0
     t.string   "style"
     t.string   "room_type"
     t.string   "city"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "downloads", :force => true do |t|
