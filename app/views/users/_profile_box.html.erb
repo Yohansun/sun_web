@@ -33,7 +33,9 @@
             从业5年，擅长简约及田园风格室内装修设计
             </p>
           </div>-->
-    <p class="d_hostaddr"><%= @user.display_name.blank? ? "您当前为公司用户，公司名称未输入，请完善公司信息！" : @user.display_name %></p>
+    <p class="d_hostaddr">
+      <%= @user.display_name %>
+    </p>
     <div class="signup_text" id='<%= params[:user_id] %>'>
       <p id="signature"><%= raw @user.signature %></p>
     </div>

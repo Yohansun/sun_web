@@ -80,11 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    case self.role.role
+    case role_name
       when /designer|user/
         self.name.blank? ? self.username : self.name
       when "company"
-        self.name_of_company
+        self.name_of_company.blank? ? self.username : self.name_of_company
     end
   end
 
