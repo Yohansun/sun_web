@@ -528,7 +528,7 @@ t_r_title.png: t_r_title-4ce5919b98f8dededc20ed8490d97a99.png
 tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-cfd5911bcacc9b93996d6b694c00f034.js
+application.js: application-0570fc4b48a22d74776859a29c4ca140.js
 articles.js: articles-80148e5c7e5b7899f916a93118e72fbd.js
 channel.js: channel-80148e5c7e5b7899f916a93118e72fbd.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
@@ -558,10 +558,9 @@ jquery.datepicker.js: jquery.datepicker-a53110ff547379235c4334a90056aef4.js
 jquery.jeditable.js: jquery.jeditable-de130d9617e149c45cd758d199e271ec.js
 jquery.masonry.js: jquery.masonry-2be4272eaed7adec5e86331a7a0507aa.js
 jquery.uploadify.js: jquery.uploadify-df3c7f6b1b581ef851ddafc9baf0f51a.js
-location.js: location-e73cc81d1fdf7aa9b89473cb9b8d06d1.js
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 maillists.js: maillists-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-92952a338e27635a42ad33503817658d.js
+main.js: main-1a12f4ebac2c98bc59c11677763a1d9c.js
 master_designs.js: master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 master_interviews.js: master_interviews-80148e5c7e5b7899f916a93118e72fbd.js
 master_topics.js: master_topics-80148e5c7e5b7899f916a93118e72fbd.js
@@ -611,11 +610,11 @@ news.css: news-8b48c602accfdf35843d64b2ccae8f14.css
 other_events.css: other_events-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 owners_channel.css: owners_channel-d9836aa1adb331dccad35850d281ff42.css
 rank.css: rank-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-reg.css: reg-2e94fbcb34cd54f2aaf5170c1620967d.css
+reg.css: reg-f1cde06e83f58c184e11cac87496137c.css
 reset.css: reset-2f3393ec1a28bd55fcaef58e0a28e4c7.css
 site_messages.css: site_messages-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 softwares.css: softwares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-style.css: style-733ceb5d473ae40364a6105ba30af988.css
+style.css: style-3a9f191725a279c6241fa47a9f8e5426.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
 user.css: user-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 users.css: users-95bd4fe1de99c1cd91ec8e6f348a44bd.css
