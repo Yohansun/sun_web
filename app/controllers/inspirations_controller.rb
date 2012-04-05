@@ -1,14 +1,22 @@
+# -*- encoding : utf-8 -*-
 class InspirationsController < ApplicationController
   before_filter :find_user
   before_filter :find_inspiration, :only => [:upload, :edit]
 
-  def index
+  def index	  
+	  
   	if @user
       @inspirations = @user.inspirations.page params[:page]
     	render :template => "users/inspirations"
     else
       @inspirations = Inspiration.page params[:page]
-    end
+    end   
+    
+    if params[:order] == "最热"
+	    @inspirations = @inspirations.order("votes_count desc")
+    else
+	    @inspirations = @inspirations.order("created_at desc")
+	  end  
   end
 
   def fullscreen

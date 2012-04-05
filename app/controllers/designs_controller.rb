@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DesignsController < ApplicationController
   before_filter :find_user
   before_filter :find_design, :only => [:upload, :edit]
@@ -9,6 +10,15 @@ class DesignsController < ApplicationController
     else
       @designs = Design.page params[:page], :per_page => 9
     end
+    
+    unless @designs.nil?
+      if params[:order] == "最热"
+        @designs = @designs.order("votes_count desc")
+      else
+        @designs = @designs.order("created_at desc")
+      end 
+    end
+        
   end
 
   def fullscreen

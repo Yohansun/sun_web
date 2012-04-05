@@ -23,7 +23,7 @@
       <div class="subtitle">
         <div class="votes">
           当前票数：<span><%= @design.votes_count %></span>
-          <a href="#"><img src="<%= asset_path "design/d_vote_btn.png" %>" /></a>
+          <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => 'post' %>
         </div>
         <div class="operate">
           <span class="forward">转发 (<%= @design.shares_count %>)</span>
