@@ -189,38 +189,6 @@
       </p>
     </div><!--server_suc ends-->
   </div><!--server_area ends-->
-  <div id="overlay">
-    <div class="subs_input abs_center none">
-      <div class="subs_title ft18">
-        <span class="fl">提示</span>
-        <a href="javascript:void(0)" class="close_btn fr"></a>
-      </div><!--subs_title ends-->
-      <%= form_tag maillists_path, :remote => true do %>
-        <div class="subs_content tc">
-          <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
-          <input type="text" name="maillist[email]"/>
-          <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
-        </div><!--subs_content ends-->
-        <p class="subs_submit tc">
-        <input type="image" src="<%= asset_path "submit_btn.jpg" %>" />
-        </p>
-      <%- end %>
-    </div><!--subs_input ends-->
-    <div class="subs_suc abs_center none">
-      <div class="subs_title ft18">
-        <span class="fl">提示</span>
-        <a href="javascript:void(0)" class="close_btn fr"></a>
-      </div><!--subs_title ends-->
-      <div class="subs_content tc">
-        <img src="<%= asset_path "subs_suc.jpg" %>" />
-        <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
-      </div><!--subs_content ends-->
-      <p class="subs_submit tc">
-      <input type="image" src="<%= asset_path "submit_btn.jpg" %>" />
-      </p>
-    </div><!--subs_suc ends-->
-  </div><!--overlay ends-->
-
 
   <%= yield %>
 
@@ -294,6 +262,8 @@
       </div><!--w_995 ends-->
     </div><!--copyright ends-->
   </div><!--footer ends-->
+
+  <%= render :partial => "layouts/overlay" %>
 
   <%= yield :tail %>
   <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>

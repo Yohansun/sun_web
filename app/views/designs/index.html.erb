@@ -43,7 +43,11 @@
     </li>
   </ul>
   <div class="upload_btn">
-    <%=link_to "我要上传", new_user_design_path(current_user) %>
+    <% if current_user -%>
+      <%= link_to "我要上传", new_user_design_path(current_user) %>
+    <% else -%>
+      <%= link_to_function "我要上传", "show_login()" %>
+    <% end -%>
   </div>
 </div>
 <div class="design_result">

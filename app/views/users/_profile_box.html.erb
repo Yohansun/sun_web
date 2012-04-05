@@ -1,43 +1,36 @@
 <%- content_for :tail do %>
 <%= javascript_include_tag "jquery.jeditable" %>
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-        $("#signature").editable('/users/<%= @user.id %>/update_user_signature', {
-            indicator : "<img src='<%= asset_path "indicator.gif" %>'>",
-            type : 'text',
-            tooltip : '点击修改...',
-            placeholder : '请点击输入个人签名',
-            submitdata: { _method: "post" },
-            select : true,
-            submit : '修改',
-            cancel : '取消',
-            cssclass : "editable",
-            tooltip : '点击修改',
-            id : 'id',
-            style : 'display: inline;'
-        });
-    });
+$(document).ready(function() {
+  $("#signature").editable('/users/<%= @user.id %>/update_user_signature', {
+    indicator : "<img src='<%= asset_path "indicator.gif" %>'>",
+    type : 'text',
+    tooltip : '点击修改...',
+    placeholder : '请点击输入个人签名',
+    submitdata: { _method: "post" },
+    select : true,
+    submit : '修改',
+    cancel : '取消',
+    cssclass : "editable",
+    tooltip : '点击修改',
+    id : 'id',
+    style : 'display: inline;'
+  });
+});
 </script>
 <%- end %>
 <div class="host_self group">
   <div class="signup_img_box">
     <% if @user.avatar -%>
-      <%= image_tag @user.avatar.file(:profile), :class => 'box_shadow' %>
+    <%= image_tag @user.avatar.file(:profile), :class => 'box_shadow' %>
     <% else -%>
-      <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
+    <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
     <% end -%>
     <%- if current_user && current_user == @user %>
-      <p><%= link_to "修改账户信息", edit_user_path(current_user) %></p>
+    <p><%= link_to "修改账户信息", edit_user_path(current_user) %></p>
     <%- end %>
   </div>
   <div class="host_status">
-    <!--<h2><strong>杨明洁</strong><em>金牌会员</em></h2>
-    <a class="back_perhome" href="#">返回个人主页</a>
-          <div class="signup_text">
-            <p>
-            从业5年，擅长简约及田园风格室内装修设计
-            </p>
-          </div>-->
     <p class="d_hostaddr">
       <%= @user.display_name %>
     </p>
@@ -73,17 +66,15 @@
   </ul>
 
   <%- if current_user && current_user == @user %>
-	<% case controller_name %>
-	<% when "designs" %>
-		<%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
-	<% when "events" %>
-		<%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
-	<% else %>
-		<%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
-	<%- end -%>	
-    <%# new_link = controller_name == 'designs' ? new_user_design_path(current_user) :  -%>
+    <% case controller_name %>
+    <% when "designs" %>
+      <%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
+    <% when "events" %>
+      <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
+    <% else %>
+      <%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
+    <%- end -%>
   <%- end %>
-
 </div>
 <!--sort_box ends-->
 <%- end %>
