@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :design_images
   has_many :messages
 
+  has_one :avatar
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

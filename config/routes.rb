@@ -114,6 +114,7 @@ Icolor::Application.routes.draw do
     resources :messages
     resources :site_messages
     resources :rank
+    resource :avatar
   end
 
   #修改个人签名
