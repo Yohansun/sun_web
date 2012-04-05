@@ -10,74 +10,20 @@
   </div><!--sub_nav ends-->
   <div class='wrapper'>
     <div class="faq_bar clear ft14">
-      <p class="faq_title fl fb">标题<span>(共136条)</span></p>
+      <p class="faq_title fl fb">标题<span>(共<%= @faqs.size %>条)</span></p>
       <p class="faq_num fl tc">回答数</p>
       <p class="faq_date tr fr">提问时间</p>
     </div><!--faq_bar ends-->
+    <%- @faqs.each do |f| %>
     <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="/faqs/1">家里装修快半年了，装修气味还在,用什么才能除味呢</a></p>
-      <p class="faq_num fl tc">8</p>
-      <p class="faq_date tr fr">2012-2-22</p>
+      <p class="faq_title fl"><a href="/faqs/<%= f.try(:id) %>"><%= f.try(:title) %></a></p>
+      <p class="faq_num fl tc"><%= f.comments_count %></p>
+      <p class="faq_date tr fr"><%= f.created_at.to_s(:db)[0..9] %></p>
     </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">卫生间要是做防水涂料 瓷砖的话，防水要做整个</a></p>
-      <p class="faq_num fl tc">28</p>
-      <p class="faq_date tr fr">2012-2-20</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">墙面翻新需要注意些什么呢？ </a></p>
-      <p class="faq_num fl tc">42</p>
-      <p class="faq_date tr fr">2012-2-20</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">装修涂料用什么牌子好？性价比比较高的</a></p>
-      <p class="faq_num fl tc">224</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">墙面翻新需要注意些什么呢？ </a></p>
-      <p class="faq_num fl tc">12</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">请推荐下上海的高端别墅设计公司？</a></p>
-      <p class="faq_num fl tc">3</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">儿童家具选购需要注意的问题</a></p>
-      <p class="faq_num fl tc">45</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">透明的有机玻璃 板材易腐蚀吗</a></p>
-      <p class="faq_num fl tc">117</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">墙面翻新需要注意些什么呢？ </a></p>
-      <p class="faq_num fl tc">65</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="#">墙面翻新需要注意些什么呢？ </a></p>
-      <p class="faq_num fl tc">323</p>
-      <p class="faq_date tr fr">2012-2-22</p>
-    </div><!--news_top ends-->
+    <%- end %>
     <div class="pag_container">
       <div class="pager ft12">
-        <a href="#" class="prev"><span></span>上一页</a>
-        <a href="#">1</a>
-        <a href="#" class="current">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">7</a>
-        <a href="#">8</a>
-        <a href="#">...</a>
-        <a href="#">20</a>
-        <a href="#" class="next">下一页<span></span></a>
+        <%= paginate @faqs %>
       </div><!--pager ends-->
     </div><!--pag_container ends-->
     <div class="weekly_tips ft12" id="weekly_tip_body">
@@ -90,40 +36,34 @@
       <div class="faq_ask fb tc ft14">我要提问：</div>
     </div><!--owner_bar ends-->
     <div class="faqs_ask ft12 clear">
-      <form action="" method="post">
-        <div>
-          <label for="categories" class="fl">选择分类：</label>
-          <select class="fl">
-            <option></option>
-          </select>
-        </div>
+      <%= form_for :faq, :url => faqs_path, :html => {:multipart => true} do %>
         <div>
           <label for="title" class="fl ask_title">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</label>
-          <input type="text" class="fl faq_text ft14" maxlength="30">
+          <input type="text" class="fl faq_text ft14" maxlength="30" name="faq[title]">
           <span class="fl">您还可以输入<span id="input_span">30</span>字</span>
         </div>
         <div>
           <label for="upload" class="fl">上传图片：</label>
-          <input type="file" class="fl" />
+          <%= file_field(:faq, :img, :class => "fl") %>
         </div>
         <div>
           <label for="content" class="fl">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容：</label>
-          <textarea class="fl ft14"></textarea>
+          <textarea class="fl ft14" name="faq[content]"></textarea>
           <span class="fl">您还可以输入<span id="textarea_span">200</span>字</span>
         </div>
         <div>
           <label class="fl"></label>
-          <input type="image" src="<%= asset_path "news/faq_submit.jpg" %>" class="fl faq_submit" />
+          <input type="image" src="<%= asset_path "news/submit.jpg" %>" class="fl faq_submit" />
           <input type="reset" class="fl faq_reset" value="重置" />
         </div>
-      </form>
+      <%- end %>
     </div><!--faqs_ask ends-->
   </div><!--wrapper ends-->
 </div><!--main ends-->
 <script type="text/javascript">
-      function WeeklyTip(id) {
-          $.get("/faqs/get_weekly_tips", {id:id}, function(data) {
-          });
-      }
+  function WeeklyTip(id) {
+    $.get("/faqs/get_weekly_tips", {id:id}, function(data) {
+      });
+  }
 </script>
 

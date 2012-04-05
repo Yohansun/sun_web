@@ -128,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20120405111606) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "votes_count"
-    t.integer  "shares_count"
+    t.integer  "votes_count",  :default => 0
+    t.integer  "shares_count", :default => 0
     t.string   "style"
     t.string   "room_type"
     t.string   "city"
@@ -172,6 +172,18 @@ ActiveRecord::Schema.define(:version => 20120405111606) do
     t.integer  "user_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+  end
+
+  create_table "faqs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   create_table "function_categories", :force => true do |t|

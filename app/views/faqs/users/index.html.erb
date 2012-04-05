@@ -1,35 +1,8 @@
 <div class="main signup group">
   <div class="shadow signup_box">
     <div class="section">
-      <div class="host_self group">
-        <div class="signup_img_box">
-          <img class="box_shadow" src="<%= asset_path "personal/d_host_img.jpg" %>" alt="" />
-          <p><a href="#">修改账户信息</a></p>
-        </div>
-        <div class="host_status">
-          <h2><strong>杨明洁</strong><em>金牌会员</em></h2>
-          <a class="back_perhome" href="d_in_works.html">返回个人主页</a>
-          <div class="signup_text">
-            <p>
-            从业5年，擅长简约及田园风格室内装修设计
-            </p>
-          </div>
-          <p class="d_hostaddr">上海罗磊室内设计有限公司</p>
-          <p class="icon_email">Email：  designer@163.com</p>
-          <p class="icon_qq">Q   Q：  1204333759</p>
-          <p class="icon_msn">MSN：  designer@hotmail.com</p>
-          <p class="icon_fetion">飞  信：  395005</p>
-        </div>
-        <!--host_status ends-->
-      </div>
-      <!--host_self ends-->
 
-      <ul class="system_info group">
-        <li class="icon_point"><a href="#">我的积分</a></li>
-        <li class="icon_info"><a href="#">系统消息(2)</a></li>
-        <li class="icon_qustion"><a class="host_cur" href="#">我的提问(新回复1)</a></li>
-        <li class="icon_active"><a href="#">我报名的活动</a></li>
-      </ul><!--system_info ends-->
+      <%= render :partial => "users/profile_box" %>
 
       <div class="host_sort group">
         <ul class="show_tit_ul group">
@@ -40,15 +13,21 @@
       </div><!--host_sort ends-->
 
       <div class="host_main_list">
-        <h3><span class="ft14">提问时间</span><span class="ft14">回答数</span><strong>标题</strong>（共555条）</h3>
-        <p><span class="replay_new_time">2012-12-16</span><span class="replay_new">8</span>春季设计交流会</p>
-        <p><span>2012-2-16</span><span>25</span>春季设计交流会</p>
-        <p><span>2012-2-16</span><span>25</span>春季设计交流会</p>
-        <p><span>2012-2-16</span><span>25</span>春季设计交流会</p>
+        <h3><span class="ft14">提问时间</span><span class="ft14">回答数</span><strong>标题</strong>（共<%= @faqs.size %>条）</h3>
+        <%- unless @faqs.blank? %>
+        <%- @faqs.each do |f| %>
+        <p>
+          <span class="<%= "replay_new_time" if @faqs.first == f %>"><%= f.created_at.to_s(:db)[0..9] %></span>
+          <span class="<%= "replay_new" if @faqs.first == f %>"><%= f.comments_count %></span>
+          <a href="/faqs/<%= f.try(:id) %>"><%= f.try(:title) %></a>
+        </p>
+        <%- end %><%- else %>
+        <p>您还没有提问！</p>
+        <%- end %>
       </div>
 
       <div class="pager host_pager ft12">
-        <a class="prev" href="#"><span></span>上一页</a><a href="#">1</a><a href="#" class="current">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a class="next" href="#">下一页<span></span></a>
+        <%= paginate @faqs %>
       </div><!--pager ends-->
     </div>
   </div>

@@ -17,6 +17,6 @@ class Inspiration < ActiveRecord::Base
 	end
 
 	def comments_count
-    self.comments.size
+    self.comments.length
   end
 end

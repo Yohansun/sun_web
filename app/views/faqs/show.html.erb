@@ -13,14 +13,17 @@
       <div class="title">装修问答</div>
       <div class="dec_question">
         <div class="titlebar">
-          <div class="legend"><a href="#">我为房狂：</a>好的乳胶漆经擦洗后不会有变化</div>
-          <div class="time">2012-4-12</div>
+          <div class="legend"><a href="#"><%= @faq.user.display_name %>：</a><%= @faq.title %></div>
+          <div class="time"><%= @faq.created_at.to_s(:db)[0..9] %></div>
         </div>
         <div class="dec_question_content">
           <strong>装修咨询：</strong>
           <div class="text">
-            最近打算装修，但听一些装修过的朋友说，厨房、卫生间墙面和顶棚都很容易出现涂层裂口脱皮的现象？是真的吗？貌似现在装修的都用乳胶漆， 前正在计划装修，也想选款性价比高的乳胶漆，但又听说有的乳胶漆会起皮、掉皮，主要是质量问题吗，还是有其他原因？能不能帮忙解答一下？最近打算装修，但听一些装修过的朋友说，厨房、卫生间墙面和顶棚都很容易出现涂层裂口脱皮的现象？是真的吗？貌似现在装修的都用乳胶漆，</div>
-          <div class="image"><img src="<%= asset_path "design/pf1.jpg" %>" /></div>
+            <%= @faq.content %>
+          </div>
+          <%- unless @faq.img_file_name.blank? %>
+            <div class="image"><%= image_tag @faq.img.url(:thumb) %></div>
+          <%- end %>
         </div>
       </div>
     </div>
@@ -29,126 +32,69 @@
         <div class="title">
           <h5>我来解答：</h5>
         </div>
-        <form>
-          <p><textarea></textarea></p>
+        <%= form_for(Comment.new) do |f| %>
+        <%= f.hidden_field :commentable_id, value: params[:id] %>
+        <%= f.hidden_field :commentable_type, value: 'Faq' %>
+          <p><%= f.text_area :content %></p>
           <p><span class="input">参考资料：<input type="input" class="quote" name="from" value="" hintvalue="如果您的回答问题为引用，请注明出处" /></span>
           <span class="submit">
             <input type="image" src="<%= asset_path "design/submitB.gif" %>" alt="提交" value="提交" />
             <input type="reset" class="reset" value="重置" />
           </span>
           </p>
-        </form>
+        <%- end %>
         <script type="text/javascript">
-          $(function(){
-              var $input = $('input.quote');
-              var dv = $input.attr('hintvalue');
-              $input.focus(function(){
-                if( $input.hasClass('hint') ) {
-                $input.attr('value', '').removeClass('hint');
-                }
-                }).blur(function(){
-                  if( !$input.attr('value') ) {
-                  $input.attr('value', dv).addClass('hint');
-                  }
-                  }).each(function(){
-                    if( !$input.attr('value') || $input.attr('value') == dv ) {
-                    $input.attr('value', dv).addClass('hint');
-                    }
-                    }).parents('form').submit(function(e){
-                      if( $input.hasClass('hint') && $input.attr('value') == dv ) {
-                      $input.attr('value', '');
-                      }
-                      });
-              });
+            $(function() {
+                var $input = $('input.quote');
+                var dv = $input.attr('hintvalue');
+                $input.focus(
+                        function() {
+                            if ($input.hasClass('hint')) {
+                                $input.attr('value', '').removeClass('hint');
+                            }
+                        }).blur(
+                        function() {
+                            if (!$input.attr('value')) {
+                                $input.attr('value', dv).addClass('hint');
+                            }
+                        }).each(
+                        function() {
+                            if (!$input.attr('value') || $input.attr('value') == dv) {
+                                $input.attr('value', dv).addClass('hint');
+                            }
+                        }).parents('form').submit(function(e) {
+                            if ($input.hasClass('hint') && $input.attr('value') == dv) {
+                                $input.attr('value', '');
+                            }
+                        });
+            });
           </script>
       </div>
     </div>
     <div class="answer_list_wrap">
       <div class="legend">其他回答</div>
       <div class="answer_list">
+        <%- unless @comments.blank? %>
+        <%- @comments.each do |c| %>
         <div class="item">
           <div class="bar">
-            <div class="user"><a href="#">feiyiban</a></div>
-            <div class="time">2012-4-17 15:33</div>
+            <div class="user"><a href="#"><%= c.user.display_name %></a></div>
+            <div class="time"><%= c.created_at.to_s(:db) %></div>
           </div>
           <div class="texts">
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。
+            <%= c.content %>
           </div>
           <div class="like"><a href="#">顶(23)</a></div>
         </div>
-        <div class="item">
-          <div class="bar">
-            <div class="user"><a href="#">feiyiban</a></div>
-            <div class="time">2012-4-17 15:33</div>
-          </div>
-          <div class="texts">
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。
-          </div>
-          <div class="like"><a href="#">顶(23)</a></div>
-        </div>
-        <div class="item">
-          <div class="bar">
-            <div class="user"><a href="#">feiyiban</a></div>
-            <div class="time">2012-4-17 15:33</div>
-          </div>
-          <div class="texts">
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。
-          </div>
-          <div class="like"><a href="#">顶(23)</a></div>
-        </div>
-        <div class="item">
-          <div class="bar">
-            <div class="user"><a href="#">feiyiban</a></div>
-            <div class="time">2012-4-17 15:33</div>
-          </div>
-          <div class="texts">
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。
-          </div>
-          <div class="like"><a href="#">顶(23)</a></div>
-        </div>
-        <div class="item">
-          <div class="bar">
-            <div class="user"><a href="#">feiyiban</a></div>
-            <div class="time">2012-4-17 15:33</div>
-          </div>
-          <div class="texts">
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。
-          </div>
-          <div class="like"><a href="#">顶(23)</a></div>
-        </div>
-        <div class="item">
-          <div class="bar">
-            <div class="user"><a href="#">feiyiban</a></div>
-            <div class="time">2012-4-17 15:33</div>
-          </div>
-          <div class="texts">
-            家庭的整体装修风格是确定地板颜色的首要因素。深色调地板风格鲜明强烈，而浅色调地板大多给人简约、典雅的感受。而瓷砖在近年也回归到地板装修的主流，有水果色彩的马赛克成为大热之选，具有自然纹理的竹地板相较木地板耐磨性更好，也是不错的选择。
-            居室的采光条件对地板颜色的选择也有影响。采光良好的居室选择的范围相对宽松；而楼层较低、采光不充分的居室则要注意选择亮度较高、颜色适宜的地面材料，尽可能避免使用颜色较暗的材料。
-          </div>
-          <div class="like"><a href="#">顶(23)</a></div>
-        </div>
+        <%- end %><%- else %>
+          暂时没有评论！
+        <%- end %>
       </div>
     </div>
   </div>
   <div class='sub_bot pr'>
     <div class="pager ft12">
-      <a class="prev" href="#"><span></span>上一页</a>
-      <a href="#">1</a>
-      <a href="#" class="current">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">7</a>
-      <a href="#">8</a>
-      <a href="#">...</a>
-      <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a>
+      <%= paginate @comments %>
     </div>
   </div><!--sub_bot ends-->
 </div>

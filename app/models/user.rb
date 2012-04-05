@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
   has_many :design_images
   has_many :messages
   has_many :events, :class_name => "Event", :foreign_key => "user_id"
-
   has_one :avatar
+  has_many :faqs
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

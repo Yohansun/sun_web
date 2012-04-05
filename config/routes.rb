@@ -35,9 +35,8 @@ Icolor::Application.routes.draw do
   match "/articles/:id" => "articles#show"
 
   #业主通道
-  match "/faqs" => "faqs#index"
+  resources :faqs
   match "/faqs/get_weekly_tips" => "faqs#get_weekly_tips"
-  match "/faqs/:id" => "faqs#show"
   match "/channel/access" => "channel#access"
   match "/channel/service" => "channel#service"
 
