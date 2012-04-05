@@ -61,6 +61,9 @@ Icolor::Application.routes.draw do
   resources :inspirations
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
+  match "/color_designs" => "color_designs#index"
+  match "/color_designs/:id" => "color_designs#show"
+
   #精彩活动
   match "/events" => "events#index"
   match "/events/:id" => "events#show"
@@ -79,6 +82,13 @@ Icolor::Application.routes.draw do
   match "/suc_ins" => "function#suc_ins" #发布成功页面
   match "/suc_works" => "function#suc_works" #发布成功页面
   match "/token" => "function#token" #头像修改页面
+
+  #漆光异彩
+  match "/7-2" => "function#7-2"
+  match "/7-3" => "function#7-3"
+  match "/color_signup" => "function#color_signup"
+  match "/gift" => "function#gift"
+  match "/design_signup" => "function#design_signup"
 
   #个人主页
   resources :users do

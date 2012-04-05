@@ -1,9 +1,9 @@
 <div class="reg_list fl">
   <label for="uesername">公司名称：</label>
-  <input type="text" class="company fl" name="user[name_of_company]"/>
+  <%= f.text_field :name_of_company, :class => "company fl" %>
 </div><!--reg_list ends-->
 <div class="reg_list fl">
   <label for="uesername">公司地址：</label>
-  <input type="text" class="company fl" name="user[company_address]"/>
+  <%= f.text_field :company_address, :class => "company fl" %>
   <span class="reg_tip3 fl">请填写真实地址以便发送奖品</span>
 </div><!--reg_list ends-->

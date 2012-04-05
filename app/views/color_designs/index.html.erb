@@ -1,0 +1,201 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "style", "dd" %>
+    <%= javascript_include_tag "uncompressed.jquery.dd" %>
+<%- end %>
+<%- content_for :tail do %>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            try {
+                //$("body select").msDropDown();
+                oHandler = $("#color_select,#color_select_style,#color_select_fct").msDropDown({useSprite:'sprite'}).data("dd");
+                $("#ver").html($.msDropDown.version);
+            } catch(e) {
+                alert("Error: " + e.message);
+            }
+
+            /*try {
+             //$("body select").msDropDown();
+             oHandler = $("#color_select_style").msDropDown({useSprite:'sprite'}).data("dd");
+             $("#ver").html($.msDropDown.version);
+             } catch(e) {
+             alert("Error: "+e.message);
+             }
+
+             try {
+             //$("body select").msDropDown();
+             oHandler = $("#color_select_fct").msDropDown({useSprite:'sprite'}).data("dd");
+             $("#ver").html($.msDropDown.version);
+             } catch(e) {
+             alert("Error: "+e.message);
+             }
+             */
+        })
+    </script>
+<%- end %>
+<div class="main">
+  <div class='sub_title tr pt25'>
+    <img src='<%= asset_path "design/title_design.png "%>'/>
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">色彩搭配</a>
+  </div>
+  <!--sub_nav ends-->
+  <div class='wrapper pb60 group'>
+    <div class="design_tit group">
+      <ul class="design_filter group">
+        <li class="li_current">
+          <a href="#">最新</a>
+        </li>
+        <li>
+          <a href="#">最热</a>
+        </li>
+        <li>
+          <!--<a href="#">风格</a>-->
+          <select id="color_select_style" class="arrow_filter li_current" style="width:100px;">
+            <option class="nobg">现代简约</option>
+            <option class="nobg">中式新古典</option>
+            <option class="nobg">欧式复古</option>
+            <option class="nobg">田园地中海</option>
+            <option class="nobg">其他</option>
+          </select>
+        </li>
+        <li>
+          <!--<a href="#">户型</a>-->
+          <select id="color_select_fct" class="arrow_filter" style="width:77px;">
+            <option class="nobg">功能区</option>
+            <option class="nobg">卧室</option>
+            <option class="nobg">客厅</option>
+            <option class="nobg">书房</option>
+            <option class="nobg">门厅</option>
+            <option class="nobg">卫生间</option>
+            <option class="nobg">厨房</option>
+            <option class="nobg">其他</option>
+          </select>
+        </li>
+        <li>
+          <!--<a href="#">城市</a>-->
+          <select id="color_select" class="arrow_filter" style="width:108px;">
+            <option class="nobg">色系</option>
+            <option class="color_write">浅白色系</option>
+            <option class="color_red">红色系</option>
+            <option class="color_org">橙色系</option>
+            <option class="color_org1">黄色系</option>
+            <option class="color_gr">绿色系</option>
+            <option class="color_blue">蓝色系</option>
+            <option class="color_zs">紫色系</option>
+            <option class="color_mid">中性色系</option>
+          </select>
+
+        </li>
+      </ul>
+      <div class="upload_btn">
+        <a href="upload_works1.html">我要上传</a>
+      </div>
+    </div>
+    <div class="design_result color_design">
+      <ul class="d_works group">
+        <li>
+          <a href="/color_designs/1"><img src="<%= asset_path "design/d_result1.jpg "%>" title="华丽的外表 朴素的内涵" alt=""/></a> <!--id="fancybox-manual-c" class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg "%>"-->
+          <h3>华丽的外表 朴素的内涵</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+        <li>
+          <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg "%>"><img src="<%= asset_path "design/d_result2.jpg "%>" title="现代简约 白色 卧室" alt=""/></a>
+
+          <h3>现代简约 白色 卧室</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+        <li>
+          <a class="fancybox" data-fancybox-group="button" href="<%= asset_path "design/d_result1_b.jpg "%>"><img src="<%= asset_path "design/d_result3.jpg "%>" title="现代简约 白色 卧室" alt=""/></a>
+
+          <h3>现代简约 白色 卧室</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+      </ul>
+      <!--result one ends-->
+      <ul class="d_works group">
+        <li><a href="#"><img src="<%= asset_path "design/d_result4.jpg "%>" alt=""/></a>
+
+          <h3>华丽的外表 朴素的内涵</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+        <li><a href="#"><img src="<%= asset_path "design/d_result5.jpg "%>" alt=""/></a>
+
+          <h3>现代简约 白色 卧室</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+        <li><a href="#"><img src="<%= asset_path "design/d_result6.jpg "%>" alt=""/></a>
+
+          <h3>现代简约 白色 卧室</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+      </ul>
+      <!--result two ends-->
+      <ul class="d_works group">
+        <li><a href="#"><img src="<%= asset_path "design/d_result7.jpg "%>" alt=""/></a>
+
+          <h3>华丽的外表 朴素的内涵</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+        <li><a href="#"><img src="<%= asset_path "design/d_result8.jpg "%>" alt=""/></a>
+
+          <h3>现代简约 白色 卧室</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+        <li><a href="#"><img src="<%= asset_path "design/d_result9.jpg "%>" alt=""/></a>
+
+          <h3>现代简约 白色 卧室</h3>
+
+          <p class="p2 group">
+            <span class="gzh ft12">404</span><span class="zf ft12">转发 (124)</span><span class="pl ft12">评论 (86)</span>
+          </p>
+        </li>
+      </ul>
+      <!--result three ends-->
+    </div>
+    <!--design_result ends-->
+  </div>
+  <!--wrapper ends-->
+  <div class='sub_bot pr'>
+    <div class="pager ft12">
+      <a class="prev" href="#"><span></span>上一页</a>
+      <a href="#">1</a>
+      <a href="#" class="current">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">7</a>
+      <a href="#">8</a>
+      <a href="#">...</a>
+      <a href="#">20</a>
+      <a class="next" href="#">下一页<span></span></a>
+    </div>
+    <!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
+</div><!--main ends-->

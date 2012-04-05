@@ -26,7 +26,7 @@
         });
     </script>
   </head>
-  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation/%>">
+  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/%>">
     <div class="header">
       <div class="nav pa">
         <div class="logo">
@@ -112,10 +112,9 @@
           <li class="noborder"><a href="/channel/service">在线配色服务</a></li>
         </ul>
         </li>
-        <li class="noborder pr"><a href="arts.html">漆光艺彩</a>
+        <li class="noborder pr"><a href="/7-2">漆光艺彩</a>
         <ul class="w_nav4">
-          <li><a href="4-1.html">墙面艺术效果</a></li>
-          <li><a href="#">墙面艺术效果</a></li>
+          <li><a href="/7-2">墙面艺术效果</a></li>
           <li class="noborder"><a href="#">木纹风尚生活</a></li>
         </ul>
         </li>
@@ -227,13 +226,15 @@
 
   <div class='footer <%= 'mt50' if controller_name =~ /contact|function/ %>'>
     <div class='links'>
-      <div class='w_995 group'>
+      <div class='w_995'>
         <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" alt="" /></a>
         <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.png" %>" alt="" /></a>
         <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.png" %>" alt="" /></a>
         <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.png" %>" alt="" /></a>
         <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.png" %>" alt="" /></a>
-        <a class="nomr" href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" alt="" /></a>
+        <a href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" alt="" /></a>
+        <a href='#'><img src='<%= asset_path "link7.png" %>' alt="" /></a>
+	    <a href='#'><img src='<%= asset_path "link8.png" %>' alt="" /></a>
       </div><!--w_995 ends-->
     </div><!--links ends-->
     <div class='bot_map w_995 ft12 clear'>

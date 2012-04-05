@@ -1,11 +1,11 @@
 ﻿var i18n = $.extend({}, i18n || {}, {
     datepicker: {
         dateformat: {
-            "fulldayvalue": "M/d/yyyy",
+            "fulldayvalue": "yyyy/M/d",
             "separator": "/",
-            "year_index": 2,
-            "month_index": 0,
-            "day_index": 1,
+            "year_index": 0,
+            "month_index": 1,
+            "day_index": 2,
             "sun": "日",
             "mon": "一",
             "tue": "二",

@@ -1,0 +1,20 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "style" %>
+<%- end %>
+<div class="main">
+  <div class='sub_title tr'>
+    <img src="<%= asset_path "paint_art/title_paint_art.png"%>" alt=""/>
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="#">首页</a><span class="arrow_1"></span><a href="#">漆光异彩</a><span class="arrow_2"></span><a class="fb" href="#">缤纷迷你涂料</a>
+  </div>
+  <!--sub_nav ends-->
+  <div class='wrapper paint_art_mini'>
+    <h2>墙面创意涂刷手册</h2>
+
+    <div class="art_mini_fla">
+      <img src="<%= asset_path "paint_art/art_fla_img.jpg"%>"/>
+    </div>
+  </div>
+  <!--wrapper ends-->
+</div><!--main ends-->

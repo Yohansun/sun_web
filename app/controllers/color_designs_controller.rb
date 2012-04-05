@@ -1,0 +1,2 @@
+class ColorDesignsController < ApplicationController
+end

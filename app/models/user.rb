@@ -80,7 +80,12 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    self.name.blank? ? self.username : self.name
+    case self.role.role
+      when /designer|user/
+        self.name.blank? ? self.username : self.name
+      when "company"
+        self.name_of_company
+    end
   end
 
   def role_name
