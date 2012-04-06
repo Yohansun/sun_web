@@ -1,274 +1,207 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>电子期刊</title>
-  <%= stylesheet_link_tag "reset", "base", "style" %>
-  <%= javascript_include_tag "jquery", "main" %>
-  <!--[if IE 6]>
-  <script src="/png.js"></script>
-  <script>
-      PNG.fix('img,div,a,ul,li,p,span,strong,h2');
-  </script>
-  <![endif]-->
-  <style type="text/css">
-      .shadow {
-          zoom: 1;
-      }
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>电子期刊</title>
+<!--<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />-->
+<!--[if IE 6]>
+		<script src="/png"%>.js"></script>
+		<script>
+		png"%>.fix('img,div,a,ul,li,p,span,strong,h2');
+		</script>
+		<![endif]-->
+<style type="text/css">
+/* =====  CSS reset  ===== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+/* remember to define focus styles! */
+:focus { outline: 0; }
+/* remember to highlight inserts somehow! padding: 9px 17px 9px 17px; */
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+/* tables still need 'cellspacing="0"' in the markup */
+table { border-collapse: collapse; }
+*, * focus { outline: none; margin: 0; padding: 0; }
+textarea { overflow: auto; }
+textarea, input[type=text], input[type=password] { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
+button, input[type=submit] { font-family: Arial, Helvetica, sans-serif; }
+img { border: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+p { margin: 0; padding: 0; }
+:focus { outline: 0; }
+a { text-decoration: none; color: #2b6893; }
+.normal { font-style: normal; }
+.normalFont { font-style: normal; font-weight: normal; }
+.nomargin { margin: 0!important; }
+input::-moz-focus-inner /*Remove button padding in FF*/ { border: 0; padding: 0;}
+ button::-moz-focus-inner { padding: 0; border: 0}
+ a.button::-moz-focus-inner /*Remove button padding in FF*/ { border: 0; padding: 0;}
+/**/
+body { background:url(<%= asset_path "bg.jpg"%>) no-repeat top center; }
+.shadow { zoom: 1; }
 
-  </style>
+/*edm_header*/
+.edm_header { text-align:center; }
+
+
+/*emagazine*/
+.emagazine{ background:url(<%= asset_path "emagezine/emagazine_bg1.png"%>) no-repeat top center; padding-top:10px;}
+.emagazine .e_new{ overflow:hidden; background:#fff;width:771px; margin:0 auto; padding:30px 15px 15px;}
+.new_act_box,.new_news_box{width:381px;}
+.emagazine h2{ padding:5px 0px; margin-bottom:5px; }
+.act_img{ background:#e71d35; padding:6px 6px 10px; margin-top:17px;}
+.act_img p{ font:14px/24px "Microsoft Yahei";}
+.e_act_btn{ margin:16px 5px 0 0;}
+.new_news{ overflow:hidden; padding:12px;}
+.new_news div.fr{ width:260px;}
+.new_news div.fr h3 a{color:#710514; font:14px "Microsoft Yahei";}
+.new_news div.fr p{font:12px/20px "Microsoft Yahei";color:#606060;}
+.new_news div.fr p a{color:#920015;}
+.new_news_box .new_news p.pl40{background:url(<%= asset_path "master/tag_icon.png"%>) no-repeat left center;font:13px "arial simsun";color:#e9700f;margin-top:3px; padding-left:40px;}
+
+.emagazine .week_info{ background: url(<%= asset_path "emagezine/emagazine_bg2.png"%>) no-repeat top center;padding-top:31px;width:801px; margin:0 auto;}
+.emagazine .week_info .bg_fff{overflow:hidden; background:#fff;width:722px; margin:0 auto; padding:5px 5px 5px 20px;}
+.emagazine .week_info .star_img{ position:relative; background: url(<%= asset_path "emagezine/week_star_bg.png"%>) no-repeat left 0; width:240px; height:224px; padding:4px 4px 50px 20px; z-index:9999;}
+.emagazine .week_info .star_img a{ display:block;}
+.emagazine .week_info .star_img img{ float:none;}
+.emagazine .week_info .week_star p{color:#fff; font:14px "Microsoft Yahei";}
+.emagazine .week_info .week_star p.xin_bg{ padding-left:20px; background:url(<%= asset_path "emagezine/xin_bg.png"%>) no-repeat 1px center;}
+.week_star_icon{ position:absolute;width:53px; height:53px; top:0px; right:1px;}
+
+.emagazine .master_talk{ margin-left:25px; position:relative; z-index:9999;}
+.master_talk .list_main{ padding:5px 0 0;width:411px; height:267px; background:url(<%= asset_path "emagezine/talk_bg2.png"%>) no-repeat center 0; border:none;}
+.master_talk .list_main .img_name{ height:221px;margin:0 5px;}
+.master_talk .list_main .img_name h2{width:211px!important; height:40px; padding:5px 0 5px 5px; margin:0; bottom:50px; line-height:18px; font-size:12px; font-weight:normal; text-align:left;}
+.master_talk .list_main h3{ color:#fff; font:40px "Myriad Pro,Microsoft Yahei";}
+.master_talk .list_main p{ color:#fff; font:12px "Microsoft Yahei";}
+.master_talk .list_main p a{ color:#fff; font:12px "Microsoft Yahei";}
+/* magazine_bottom*/
+.magazine_bottom{ position:relative; top:-20px;}
+.magazine_bottom img{ display:block; margin:0 auto;}
+.magazine_bottom .bg_fff{ background:#fff; width:873px; margin:0 auto; padding:10px; overflow:hidden;}
+.magazine_bottom .magazine_tips{ width:260px; background:url(<%= asset_path "emagezine/shadow_r.png"%>) no-repeat right 10px; padding:0px 10px 10px 0;}
+.magazine_bottom .magazine_tips .interview{ margin:0; padding:0px; border:none;}
+.magazine_bottom .magazine_tips .interview h3{ margin-bottom:5px; overflow:hidden; color:#666666;font:12px/21px "arial simsun";}
+.magazine_bottom .magazine_tips .interview  span{ float:right;}
+
+.magazine_bottom .ins_works{ width:335px; background:url(<%= asset_path "emagezine/shadow_r.png"%>) no-repeat right 10px;}
+.magazine_bottom .ins_works h2{margin-left: 15px;margin-right: 15px;}
+.magazine_bottom .ins_works ul{ overflow:hidden;}
+.magazine_bottom .ins_works ul li{ float:left; display:block; width:147px; padding:5px 10px;}
+.magazine_bottom .ins_works ul li img{ padding:1px; border:1px solid #ccc; margin:0 auto;}
+.magazine_bottom .ins_works ul li h3{ font:12px "arial simsun"; line-height:24px; color:#666;}
+
+
+.ins_works p strong,.ins_works p span{float:left;color:#5c5c5c; padding-left:16px; margin-right:0px; margin-top:5px;display:block;height:17px; font:12px/17px "arial simsun"; font-weight: normal;}
+.ins_works .p1 strong{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left 2px;}
+.ins_works p.p2 span.zf{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -36px;}
+.ins_works p.p2 span.pl{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -17px;}
+
+
+.e_works { width:260px;}
+.e_works img { margin:1px;}
+.e_works ul{ overflow:hidden; width:260px;}
+.e_works li { float:left;}
+.e_btn{ text-align:center; width:389px; height:50px; margin:25px auto; border:1px solid #ccc;background:#f4f4f4; padding:10px;}
+.e_btn a{ display:block; border:10px solid; border-color:#cbcbcb #d7d7d7; height:30px;font:16px/30px "Microsoft Yahei"; color:#000;}
+.e_copyright{width:885px; height:36px; margin:0 auto; padding:15px 10px; background:#000;}
+.e_copyright,.e_copyright a,.e_copyright p{ color:#909090; font:12px "Microsoft Yahei";}
+
+.list_btn{text-align:center;}
+.list_btn a img{margin:25px 15px;}
+.list_main{ overflow:hidden; padding-bottom:10px; border-bottom:5px solid #e9e9e9;}
+.list_main .img_name{float:left; height:300px; overflow:hidden;}
+.list_main .img_name h2{position:relative; bottom:50px;height:50px; width:278px; background:url(<%= asset_path "master/meng1.png"%>) repeat-x 0 0; text-align:center; line-height:50px; color:#fff; font-size:20px;font-weight:bold; font-family:"Microsoft Yahei";}
+.list_detail{ float:right; width:610px;}
+.list_detail h3 a{color:#212121;font:bold 20px "Microsoft Yahei";}
+.list_detail p{color:#3f3f3f;font:14px/28px "Microsoft Yahei";}
+.list_detail p.h3_sub{ background:none; line-height:16px;}
+.list_detail p.h3_sub{ padding:4px 2px 10px; border-bottom:1px solid #ececec;}
+
+.interview_box{overflow:auto;max-height:948px;}
+.interview {margin:24px;border-bottom:1px solid #e0e0e0;padding-bottom:20px;}
+.interview h3{padding-left:20px;background:url(<%= asset_path "master/question_mark_icon.png"%>) no-repeat left 4px;font:14px "Microsoft Yahei";color:#ba0000;margin-bottom:20px;}
+
+
+/**/
+.fl { float:left; display:inline; }
+.fr { float:right; display:inline; }
+.line_b_dot{border-bottom: 1px dotted #949494;}
+
+</style>
 </head>
 <body>
-<div class="header">
-  <div class="nav pa">
-    <div class="logo">
-      <a href="#"><img src="<%= asset_path "logo.png" %>"/></a>
-      <a href="#"><img src="<%= asset_path "logo2.png" %>"/></a>
-    </div>
-    <div class="top_bar fr">
-      <a href="#" class="user_info fl"><strong>NEO</strong></a><a href="#" class="user_info fl">普通会员</a><a href="#" class="user_info out fl">退出</a><a href="#" class="weibo fl"></a><a href="#" class="nippon fl"></a>
-    </div>
-    <!--navTop ends-->
-    <ul class="navBot fr cw fb ft14">
-      <li class="pr">
-        <a href="home.html">首页</a>
-      </li>
-      <li class="pr">
-        <a href="javascript:void(0)">大师殿堂</a>
-        <ul>
-          <li>
-            <a href="master_list.html">大师访谈</a>
-          </li>
-          <li>
-            <a href="master_topics.html">热点话题</a>
-          </li>
-          <li class="noborder">
-            <a href="master_works_list.html">大师作品</a>
-          </li>
-        </ul>
-      </li>
-      <li class="pr">
-        <a href="javascript:void(0)">设计鉴赏</a>
-        <ul>
-          <li>
-            <a href="2-1.html">每周之星</a>
-          </li>
-          <li>
-            <a href="design.html">推荐作品</a>
-          </li>
-          <li>
-            <a href="inspiration.html">灵感秀</a>
-          </li>
-          <li class="noborder">
-            <a href="#">色彩搭配</a>
-          </li>
-        </ul>
-      </li>
-      <li class="pr">
-        <a href="javascript:void(0)">行业资讯</a>
-        <ul>
-          <li>
-            <a href="3-3.html">色彩资讯</a>
-          </li>
-          <li>
-            <a href="news.html">装修资讯</a>
-          </li>
-          <li class="noborder">
-            <a href="#">微博资讯</a>
-          </li>
-        </ul>
-      </li>
-      <li class="pr"><a href="javascript:void(0)">精彩活动</a>
-        <ul class="w_nav1">
-          <li><a href="4-1.html">年度色彩趋势活动</a></li>
-          <li><a href="event.html">设计师活动</a></li>
-          <li class="noborder"><a href="4-3.html">其他精彩活动</a></li>
-        </ul>
-      </li>
-      <li class="pr"><a href="javascript:void(0)">实用工具</a>
-        <ul class="w_nav2">
-          <li><a href="tools.html">配色工具</a></li>
-          <li class="noborder"><a href="app.html">设计师APP</a></li>
-        </ul>
-      </li>
-      <li class="pr"><a href="javascript:void(0)">业主通道</a>
-        <ul class="w_nav3">
-          <li><a href="access.html">片区快查</a></li>
-          <li><a href="faq.html">装修问答</a></li>
-          <li class="noborder"><a href="6-3.html">在线配色服务</a></li>
-        </ul>
-      </li>
-      <li class="noborder pr"><a href="javascript:void(0)">漆光艺彩</a>
-        <ul class="w_nav4">
-          <li><a href="4-1.html">墙面艺术效果</a></li>
-          <li class="noborder"><a href="4-3.html">木纹风尚生活</a></li>
-        </ul>
-      </li>
-    </ul>
-    <!--navBot ends-->
-  </div>
-  <!--nav ends-->
-  <div class="loginBg pa none">
-    <div class="loginCon ft12 clear">
-      <form>
-        <div>
-          <label for="username" class="username ft14 fl">帐号：</label>
-          <input id="username" type="text" class="fl" value="用户名/邮箱/手机"/>
-        </div>
-        <div>
-          <label for="password" class="password ft14 fl">密码：</label>
-          <input id="password" type="password" class="fl"/>
-          <span class="tips tc fr"><a href="#">忘记密码？</a></span>
-        </div>
-        <input id="login" type="image" src="<%= asset_path "login.jpg" %>"/>
-
-        <div class="checkbox fl">
-          <input type="checkbox"/>
-          <span>下次自动登录</span>
-        </div>
-      </form>
-    </div>
-    <!--loginCon ends-->
-    <div class="loginCon ft12 border clear">
-      <ul class="clear">
-        <li>
-          <a href="#"><img src="<%= asset_path "sina.jpg" %>" alt=""/>新浪微博</a>
-        </li>
-        <li>
-          <a href="#"><img src="<%= asset_path "qq.jpg" %>" alt=""/>QQ</a>
-        </li>
-        <li>
-          <a href="#"><img src="<%= asset_path "rr.jpg" %>" alt=""/>人人网</a>
-        </li>
-        <li>
-          <a href="#"><img src="<%= asset_path "kx.jpg" %>" alt=""/>开心网</a>
-        </li>
-      </ul>
-      <a href="#" class="more">更多》</a>
-    </div>
-    <!--loginCon ends-->
-    <div class="tc ft14">
-      还没加入iColor?
-      <br/>
-      <a href="#"></a>
-    </div>
-    <!--tc ends-->
-  </div>
-  <!--loginBg ends-->
-</div>
+<div class="edm_header"> <img src="<%= asset_path "big_bg/edm_top.jpg"%>" /> </div>
 <!--header ends-->
 <div class="main emagazine">
   <div class="e_new group">
     <div class="new_act_box fl">
       <h2 class="line_b_dot">最新活动</h2>
-
-      <div class="act_img">
-        <a href="#"><img src="<%= asset_path "emagezine/e_act1.jpg" %>" alt=""/></a><a href="#" class="e_act_btn fr"><img src="<%= asset_path "emagezine/e_act_btn.png" %>"/></a>
-
-        <p>
-          立邦为你刷新生活，引领2012色彩潮流
-          <br/>
-          活动时间：2011年12月-2012年4月
-        </p>
+      <div class="act_img"> <a href="#"><img src="<%= asset_path "emagezine/e_act1.jpg"%>" alt="" /></a><a href="#" class="e_act_btn fr"><img src="<%= asset_path "emagezine/e_act_btn.png"%>" /></a>
+        <p> 立邦为你刷新生活，引领2012色彩潮流 <br />
+          活动时间：2011年12月-2012年4月 </p>
       </div>
     </div>
     <!--new_act ends-->
     <div class="new_news_box fr">
       <h2 class="line_b_dot">最新新闻</h2>
-
-      <div class="new_news line_b_dot group">
-        <a href="#" class="fl"><img src="<%= asset_path "emagezine/news1.jpg" %>" alt=""/></a>
-
+      <div class="new_news line_b_dot group"> <a href="#" class="fl"><img src="<%= asset_path "emagezine/news1.jpg"%>" alt="" /></a>
         <div class="fr">
           <h3><a href="#">半包4万5打造90平时尚新居</a></h3>
-
-          <p>
-            80平两居室两厅的小居，以简约风格打造，温暖而丰富的色彩使用让这套案例充满了浓浓...<a href="#">[查看详情]</a>
-          </p>
-
-          <p class="pl40">
-            <span>装修diy</span><span>单身公寓</span><span>简约风格</span>
-          </p>
+          <p> 80平两居室两厅的小居，以简约风格打造，温暖而丰富的色彩使用让这套案例充满了浓浓...<a href="#">[查看详情]</a> </p>
+          <p class="pl40"> <span>装修diy</span><span>单身公寓</span><span>简约风格</span> </p>
         </div>
       </div>
       <!--new_news ends-->
-      <div class="new_news line_b_dot group">
-        <a href="#" class="fl"><img src="<%= asset_path "emagezine/news1.jpg" %>" alt=""/></a>
-
+      <div class="new_news line_b_dot group"> <a href="#" class="fl"><img src="<%= asset_path "emagezine/news1.jpg"%>" alt="" /></a>
         <div class="fr">
           <h3><a href="#">半包4万5打造90平时尚新居</a></h3>
-
-          <p>
-            80平两居室两厅的小居，以简约风格打造，温暖而丰富的色彩使用让这套案例充满了浓浓...<a href="#">[查看详情]</a>
-          </p>
-
-          <p class="pl40">
-            <span>装修diy</span><span>单身公寓</span><span>简约风格</span>
-          </p>
+          <p> 80平两居室两厅的小居，以简约风格打造，温暖而丰富的色彩使用让这套案例充满了浓浓...<a href="#">[查看详情]</a> </p>
+          <p class="pl40"> <span>装修diy</span><span>单身公寓</span><span>简约风格</span> </p>
         </div>
       </div>
-      <!--new_news ends-->
+      <!--new_news ends--> 
     </div>
-    <!--new_news_box ends-->
+    <!--new_news_box ends--> 
   </div>
   <!--e_new ends-->
   <div class="week_info">
     <div class="bg_fff line_b_dot group">
       <div class="week_star fl">
         <h2 class="line_b_dot">每周之星</h2>
-
-        <div class="star_img"><img src="<%= asset_path "emagezine/week_star.jpg" %>"/>
-
-          <p>
-            设计师：王勤俭(上海)
-          </p>
-
-          <p class="xin_bg">
-            286<a href="#"></a>
-          </p>
-
-          <div class="week_star_icon"><img src="<%= asset_path "emagezine/week_star_icon.png" %>" alt=""/>
-          </div>
+        <div class="star_img"><img src="<%= asset_path "emagezine/week_star.jpg"%>" />
+          <p> 设计师：王勤俭(上海) </p>
+          <p class="xin_bg"> 286<a href="#"></a> </p>
+          <div class="week_star_icon"><img src="<%= asset_path "emagezine/week_star_icon.png"%>" alt="" /> </div>
         </div>
       </div>
       <div class="master_talk fl">
         <h2 class="line_b_dot">大师访谈</h2>
-
         <div class="list_main group">
-          <div class="img_name"><img src="<%= asset_path "emagezine/color_master1.jpg" %>" alt=""/>
-
-            <h2>立邦专访当代世界设计界最有
-              <br/>
+          <div class="img_name"><img src="<%= asset_path "emagezine/color_master1.jpg"%>" alt="" />
+            <h2>立邦专访当代世界设计界最有 <br />
               影响力的设计师之一Michaea Young</h2>
           </div>
           <h3>MICHAEL YOUNG</h3>
-
-          <p>
-            1966年出生于英格兰东北部的桑德兰，毕业于金顿大学家具和产品设计专业。在Tom Dixon设计工作，Smarty等两个作品在巴黎。香港和东京等巡回展与东京著名品牌E&amp;Y建立长久合作。1922年在伦敦建立M.Y工作室........<a href="#">查看详情》</a>
-          </p>
+          <p> 1966年出生于英格兰东北部的桑德兰，毕业于金顿大学家具和产品设计专业。在Tom Dixon设计工作，Smarty等两个作品在巴黎。香港和东京等巡回展与东京著名品牌E&amp;Y建立长久合作。1922年在伦敦建立M.Y工作室........<a href="#">查看详情》</a> </p>
         </div>
       </div>
     </div>
   </div>
-  <div class="magazine_bottom">
-    <img src="<%= asset_path "emagezine/emagazine_bg3.png" %>"/>
-
+  <div class="magazine_bottom"> <img src="<%= asset_path "emagezine/emagazine_bg3.png"%>" />
     <div class="bg_fff line_b_dot">
       <div class="magazine_tips fl">
         <h2 class="line_b_dot">一周装修小贴士</h2>
-
         <div class="interview_box">
           <div class="interview">
             <h3><span>03-01</span>如何选购布艺沙发？</h3>
-
             <h3><span>03-01</span>将环保进行到底 将健康带回家？</h3>
-
             <h3><span>03-01</span>春日自然风 享受木质家装？</h3>
-
             <h3><span>03-01</span>清新自然的春之家？</h3>
-
             <h3><span>03-01</span>欢度元宵需注意？</h3>
-
             <h3><span>03-01</span>浪漫生活 从卧室开始？</h3>
           </div>
         </div>
@@ -277,31 +210,15 @@
       <div class="ins_works fl">
         <h2 class="line_b_dot">灵感秀推荐</h2>
         <ul>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/ins_works1.jpg" %>"/></a>
-
+          <li> <a  href="#"><img src="<%= asset_path "emagezine/ins_works1.jpg"%>" /></a>
             <h3>美式黄色餐厅三居效果图</h3>
-
-            <p class="p1 group">
-              <strong>当前票数：286</strong>
-            </p>
-
-            <p class="p2 group">
-              <span class="zf">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-            </p>
+            <p class="p1 group"> <strong>当前票数：286</strong> </p>
+            <p class="p2 group"> <span class="zf">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
           </li>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/ins_works1.jpg" %>"/></a>
-
+          <li> <a  href="#"><img src="<%= asset_path "emagezine/ins_works1.jpg"%>" /></a>
             <h3>美式黄色餐厅三居效果图</h3>
-
-            <p class="p1 group">
-              <strong>当前票数：286</strong>
-            </p>
-
-            <p class="p2 group">
-              <span class="zf">转发 (124)</span><span class="pl ft12">评论 (86)</span>
-            </p>
+            <p class="p1 group"> <strong>当前票数：286</strong> </p>
+            <p class="p2 group"> <span class="zf">转发 (124)</span><span class="pl ft12">评论 (86)</span> </p>
           </li>
         </ul>
       </div>
@@ -309,45 +226,26 @@
       <div class=" e_works fr">
         <h2 class="line_b_dot">大师作品</h2>
         <ul>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg" %>"/></a>
-          </li>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg" %>"/></a>
-          </li>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg" %>"/></a>
-          </li>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg" %>"/></a>
-          </li>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg" %>"/></a>
-          </li>
-          <li>
-            <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg" %>"/></a>
-          </li>
+          <li> <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg"%>" /></a> </li>
+          <li> <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg"%>" /></a> </li>
+          <li> <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg"%>" /></a> </li>
+          <li> <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg"%>" /></a> </li>
+          <li> <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg"%>" /></a> </li>
+          <li> <a href="#"><img src="<%= asset_path "emagezine/e_works1.jpg"%>" /></a> </li>
         </ul>
       </div>
     </div>
     <div class="bg_fff">
-      <div class="e_btn">
-        <a href="#">点击进入icolor官网，浏览更多资讯</a>
-      </div>
+      <div class="e_btn"> <a href="#">点击进入icolor官网，浏览更多资讯</a> </div>
     </div>
   </div>
 </div>
 <!--main ends-->
-<div class='footer'>
-  <div class='copyright e_copyright ft12'>
-    <a href='#'>立邦官网</a> | <a href='contact.html'>联系我们</a> | <a href='rules.html'>会员机制</a> | <a href='#'>网上商城</a> |
-    <a href='state.html'>网站声明</a>
-
-    <p>
-      Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved
-    </p>
+<div class='e_footer'>
+  <div class='e_copyright'> <a href='#'>立邦官网</a> | <a href='contact.html'>联系我们</a> | <a href='rules.html'>会员机制</a> | <a href='#'>网上商城</a> | <a href='state.html'>网站声明</a>
+    <p> Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved </p>
   </div>
-  <!--copyright ends-->
+  <!--copyright ends--> 
 </div>
 <!--footer ends-->
 </body>

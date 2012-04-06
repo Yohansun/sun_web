@@ -1,19 +1,30 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'news' %>
+    <%= stylesheet_link_tag 'news' %>
 <% end -%>
 <div class="main">
   <div class='sub_title tr'>
-    <img src='<%= set_style[:pic_path] %>' />
+    <img src='<%= asset_path "news/title_owner.png"%>'/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">业主通道</a><span class="arrow_2"></span><a class="fb" href="#">片区快查</a>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class='wrapper'>
-    <div class="owner_map">
-      <img src="<%= asset_path "news/owner_map.jpg" %>" />
-    </div><!--owner_map ends-->
+    <div class="owner_map clear">
+      <!--img src="<%= asset_path "news/owner_map.jpg"%>" /-->
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map1.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map2.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map3.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map4.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map5.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map6.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map7.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map8.jpg"%>"/></a>
+      <a href="#"><img src="<%= asset_path "news/maps/owner_map9.jpg"%>"/></a>
+    </div>
+    <!--owner_map ends-->
     <div class="owner_bar ft12 clear">
-      <img src="<%= asset_path "news/hot_search.png" %>" class="fl" />
+      <img src="<%= asset_path "news/hot_search.png"%>" class="fl"/>
       <select>
         <option>请选择省--不限</option>
       </select>
@@ -26,88 +37,120 @@
       <select>
         <option>请选类型--不限</option>
       </select>
-      <input type="text" value="请输入关键字" class="owner_search fl" />
-      <input type="image" src="<%= asset_path "news/search_btn.jpg" %>" class="owner_sub fl" />
-    </div><!--owner_bar ends-->
+      <input type="text" value="请输入关键字" class="owner_search fl"/>
+      <input type="image" src="<%= asset_path "news/search_btn.jpg"%>" class="owner_sub fl"/>
+    </div>
+    <!--owner_bar ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg" %>" class="fl" />
+      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
+
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14">郭绍万</span>
         <span class="owner_city fl">(上海)</span>
         <a href="#" class="fl">进入主页</a>
+
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
-        </div><!--owner_info ends-->
-      </div><!--owner_center ends-->
+        </div>
+        <!--owner_info ends-->
+      </div>
+      <!--owner_center ends-->
       <a href="#" class="owner_ask tc ft14 fr fb">我要咨询</a>
-    </div><!--owner ends-->
+    </div>
+    <!--owner ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg" %>" class="fl" />
+      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
+
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14">郭绍万</span>
         <span class="owner_city fl">(上海)</span>
         <a href="#" class="fl">进入主页</a>
+
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
-        </div><!--owner_info ends-->
-      </div><!--owner_center ends-->
+        </div>
+        <!--owner_info ends-->
+      </div>
+      <!--owner_center ends-->
       <a href="#" class="owner_ask tc ft14 fr fb">我要咨询</a>
-    </div><!--owner ends-->
+    </div>
+    <!--owner ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg" %>" class="fl" />
+      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
+
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14">郭绍万</span>
         <span class="owner_city fl">(上海)</span>
         <a href="#" class="fl">进入主页</a>
+
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
-        </div><!--owner_info ends-->
-      </div><!--owner_center ends-->
+        </div>
+        <!--owner_info ends-->
+      </div>
+      <!--owner_center ends-->
       <a href="#" class="owner_ask tc ft14 fr fb">我要咨询</a>
-    </div><!--owner ends-->
+    </div>
+    <!--owner ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg" %>" class="fl" />
+      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
+
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14">郭绍万</span>
         <span class="owner_city fl">(上海)</span>
         <a href="#" class="fl">进入主页</a>
+
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
-        </div><!--owner_info ends-->
-      </div><!--owner_center ends-->
+        </div>
+        <!--owner_info ends-->
+      </div>
+      <!--owner_center ends-->
       <a href="#" class="owner_ask tc ft14 fr fb">我要咨询</a>
-    </div><!--owner ends-->
+    </div>
+    <!--owner ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg" %>" class="fl" />
+      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
+
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14">郭绍万</span>
         <span class="owner_city fl">(上海)</span>
         <a href="#" class="fl">进入主页</a>
+
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
-        </div><!--owner_info ends-->
-      </div><!--owner_center ends-->
+        </div>
+        <!--owner_info ends-->
+      </div>
+      <!--owner_center ends-->
       <a href="#" class="owner_ask tc ft14 fr fb">我要咨询</a>
-    </div><!--owner ends-->
+    </div>
+    <!--owner ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg" %>" class="fl" />
+      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
+
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14">郭绍万</span>
         <span class="owner_city fl">(上海)</span>
         <a href="#" class="fl">进入主页</a>
+
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
-        </div><!--owner_info ends-->
-      </div><!--owner_center ends-->
+        </div>
+        <!--owner_info ends-->
+      </div>
+      <!--owner_center ends-->
       <a href="#" class="owner_ask tc ft14 fr fb">我要咨询</a>
-    </div><!--owner ends-->
-  </div><!--wrapper ends-->
+    </div>
+    <!--owner ends-->
+  </div>
+  <!--wrapper ends-->
   <div class='sub_bot ft12 pr'>
     <div class="pager ft12">
       <a href="#" class="prev"><span></span>上一页</a>
@@ -122,6 +165,8 @@
       <a href="#">...</a>
       <a href="#">20</a>
       <a href="#" class="next">下一页<span></span></a>
-    </div><!--pager ends-->
-  </div><!--sub_bot ends-->
+    </div>
+    <!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
 </div><!--main ends-->

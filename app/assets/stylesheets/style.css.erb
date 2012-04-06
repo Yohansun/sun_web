@@ -315,11 +315,10 @@ a.launch_act{background: url(<%= asset_path "personal/launch_act.png"%>) no-repe
 .host_main_list h3 strong{font-size:14px; font-weight:bold; color:#000;}
 .host_main_list span{ float:right;font:12px "Microsoft Yahei"; display:block; text-align:center;}
 .host_main_list h3 span{color:#7a786b; /*letter-spacing:3px;*/ margin-left:50px; /*margin-left:60px\9;*/}
-.host_main_list p span{color:#565656; width:60px;width:70px; margin-left:20px;}
+.host_main_list p span{color:#565656; width:60px;width:70px\9; margin-left:20px;}
 .host_main_list p{ overflow:hidden; border-bottom:1px dotted #000; padding:10px 5px 10px;font:14px "Microsoft Yahei";}
 .host_main_list p span.replay_new{ padding:0 35px; background:url(<%= asset_path "personal/icon_new.png"%>) no-repeat right center; width:25px;}
 .host_main_list p span.replay_new_time{ margin-left:6px;}
-.host_main_list p a{color:#565656;}
 
 
 .host_pager.tr{ text-align:right;}
@@ -423,7 +422,7 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .progress_over_r{ position:relative;background:url(<%= asset_path "progress_over.png"%>) no-repeat right center;height:17px;width:435px; max-width:775px;}
 .progress_num{ position:absolute;right:-48px;top:17px;background:url(<%= asset_path "arrow_t.png"%>) no-repeat center 3px;width:100px;text-align:center;padding-top:15px;}
 /*emagazine*/
-.emagazine{ background:url(<%= asset_path "emagezine/emagazine_bg1.png"%>) no-repeat top center; padding-top:10px;}
+/*.emagazine{ background:url(<%= asset_path "emagezine/emagazine_bg1.png"%>) no-repeat top center; padding-top:10px;}
 .emagazine .e_new{ overflow:hidden; background:#fff;width:771px; margin:0 auto; padding:30px 15px 15px;}
 .new_act_box,.new_news_box{width:381px;}
 .emagazine h2{ padding:5px 0px; margin-bottom:5px; }
@@ -452,9 +451,9 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .master_talk .list_main .img_name h2{width:211px!important; height:40px; padding:5px 0 5px 5px; margin:0; bottom:50px; line-height:18px; font-size:12px; font-weight:normal; text-align:left;}
 .master_talk .list_main h3{ color:#fff; font:40px "Myriad Pro,Microsoft Yahei";}
 .master_talk .list_main p{ color:#fff; font:12px "Microsoft Yahei";}
-.master_talk .list_main p a{ color:#fff; font:12px "Microsoft Yahei";}
+.master_talk .list_main p a{ color:#fff; font:12px "Microsoft Yahei";}*/
 /* magazine_bottom*/
-.magazine_bottom{ position:relative; top:-20px;}
+/*.magazine_bottom{ position:relative; top:-20px;}
 .magazine_bottom img{ display:block; margin:0 auto;}
 .magazine_bottom .bg_fff{ background:#fff; width:873px; margin:0 auto; padding:10px; overflow:hidden;}
 .magazine_bottom .magazine_tips{ width:260px; background:url(<%= asset_path "emagezine/shadow_r.png"%>) no-repeat right 10px; padding:0px 10px 10px 0;}
@@ -467,19 +466,19 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .magazine_bottom .ins_works ul{ overflow:hidden;}
 .magazine_bottom .ins_works ul li{ float:left; display:block; width:147px; padding:5px 10px;}
 .magazine_bottom .ins_works ul li img{ padding:1px; border:1px solid #ccc; margin:0 auto;}
-.magazine_bottom .ins_works ul li h3{ font:12px "arial simsun"; line-height:24px; color:#666;}
+.magazine_bottom .ins_works ul li h3{ font:12px "arial simsun"; line-height:24px; color:#666;}*/
 .ins_works p strong,.ins_works p span{float:left;color:#5c5c5c; padding-left:16px; margin-right:0px; margin-top:5px;display:block;height:17px; font:12px/17px "arial simsun"; font-weight: normal;}
 .ins_works .p1 strong{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left 2px;}
 .ins_works p.p2 span.zf{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -36px;}
 .ins_works p.p2 span.pl{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -17px;}
 
-.e_works { width:260px;}
+/*.e_works { width:260px;}
 .e_works img { margin:1px;}
 .e_works ul{ overflow:hidden; width:260px;}
 .e_works li { float:left;}
 .e_btn{ text-align:center; width:389px; height:50px; margin:25px auto; border:1px solid #ccc;background:#f4f4f4; padding:10px;}
 .e_btn a{ display:block; border:10px solid; border-color:#cbcbcb #d7d7d7; height:30px;font:16px/30px "Microsoft Yahei"; color:#000;}
-.e_copyright{ position:relative; top:-20px; width:885px; height:40px; margin:0 auto; padding-left:10px;}
+.e_copyright{ position:relative; top:-20px; width:885px; height:40px; margin:0 auto; padding-left:10px;}*/
 /*shanghai_station*/
 .wrapper.shanghai_station{ padding:35px 45px 45px 43px;}
 .shanghai_station .shanghai_bg { width:913px; height:1238px; background:url(<%= asset_path "shanghai/shanghai_bg.png"%>) no-repeat center top}
@@ -563,6 +562,7 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .art_option_slide a.art_next{ top:5px;*top:19px!important; right:0px;}
 .art_option_box{ overflow:hidden; margin:15px auto; width:635px;}
 .art_option_box .art_option_list{overflow:hidden; height:55px; width:9999px; }
+.art_option_list img,.art_option_list_none img{cursor:pointer;}
 .art_option_box .art_option_list_none{ height:55px; text-align:center;}
 
 .paint_art hr{ width:762px; margin:20px auto; height:0px; line-height:0px; border:1px solid #c6c6c6;}
@@ -594,6 +594,11 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .main.color_signup_box .wrapper form input.color_username{ width:130px;}
 .main.color_signup_box .wrapper form select{padding:5px; height:32px; width:130px;font:14px "Microsoft Yahei";color:#424242;}
 .main.color_signup_box .wrapper form select option{padding:3px 5px;}
+/*signup zige*/
+.main.color_signup_box h2{font:bold 14px "Microsoft Yahei";color:#171717; height:auto; width:auto; display:block;}
+.main.color_signup_box .wrapper .signup_con_box p{font:normal 12px/30px "Microsoft Yahei";color:#171717; margin:0 0 10px;}
+.main.color_signup_box .wrapper .signup_con_box p.design_zg_tips{ position:absolute; right:0; bottom:-30px;*bottom:-20px;font:normal 12px/18px "Microsoft Yahei";color:#967f56; background:#fffdf4; width:365px; padding:10px 15px; border:1px solid #dedede; border-radius:7px 7px 7px 7px;}
+
 /**/
 .line_r{ border-right:1px dotted #dcdcdc;}
 .line_b_dot{border-bottom: 1px dotted #949494;}

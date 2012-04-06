@@ -1,484 +1,979 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'style', 'index' %>
+    <%= stylesheet_link_tag 'style', 'index' %>
 <% end -%>
 
 <%- content_for :index do %>
-  <div class="slides pr">
-    <div class="slidesContainer">
-      <div class="slider pr fl">
-        <img src="<%= asset_path "kv.jpg" %>" />
-        <a href="#" class="check pa"></a>
-        <div class="man pa"></div>
-      </div><!--slider ends-->
-      <div class="slider pr fl">
-        <img src="<%= asset_path "kv.jpg" %>" />
-        <a href="#" class="check pa"></a>
-        <div class="man pa"></div>
-      </div><!--slider ends-->
-      <div class="slider pr fl">
-        <img src="<%= asset_path "kv.jpg" %>" />
-        <a href="#" class="check pa"></a>
-        <div class="man pa"></div>
-      </div><!--slider ends-->
-      <div class="slider pr fl">
-        <img src="<%= asset_path "kv.jpg" %>" />
-        <a href="#" class="check pa"></a>
-        <div class="man pa"></div>
-      </div><!--slider ends-->
-      <div class="slider pr fl">
-        <img src="<%= asset_path "kv.jpg" %>" />
-        <a href="#" class="check pa"></a>
-        <div class="man pa"></div>
-      </div><!--slider ends-->
-    </div><!--slidesContainer ends-->
-    <div class="bullets pa">
-      <div class="bullet cp current"></div>
-      <div></div>
-      <div class="bullet cp"></div>
-      <div></div>
-      <div class="bullet cp"></div>
-      <div></div>
-      <div class="bullet cp"></div>
-      <div></div>
-      <div class="bullet cp"></div>
-    </div><!--bullets ends-->
-  </div><!--slides ends-->
+    <div class="slides pr">
+      <div class="slidesContainer">
+        <div class="slider pr fl">
+          <img src="<%= asset_path "kv.jpg" %>"/>
+          <a href="#" class="check pa"></a>
+
+          <div class="man pa"></div>
+        </div>
+        <!--slider ends-->
+        <div class="slider pr fl">
+          <img src="<%= asset_path "kv.jpg" %>"/>
+          <a href="#" class="check pa"></a>
+
+          <div class="man pa"></div>
+        </div>
+        <!--slider ends-->
+        <div class="slider pr fl">
+          <img src="<%= asset_path "kv.jpg" %>"/>
+          <a href="#" class="check pa"></a>
+
+          <div class="man pa"></div>
+        </div>
+        <!--slider ends-->
+        <div class="slider pr fl">
+          <img src="<%= asset_path "kv.jpg" %>"/>
+          <a href="#" class="check pa"></a>
+
+          <div class="man pa"></div>
+        </div>
+        <!--slider ends-->
+        <div class="slider pr fl">
+          <img src="<%= asset_path "kv.jpg" %>"/>
+          <a href="#" class="check pa"></a>
+
+          <div class="man pa"></div>
+        </div>
+        <!--slider ends-->
+      </div>
+      <!--slidesContainer ends-->
+      <div class="bullets pa">
+        <div class="bullet cp current"></div>
+        <div></div>
+        <div class="bullet cp"></div>
+        <div></div>
+        <div class="bullet cp"></div>
+        <div></div>
+        <div class="bullet cp"></div>
+        <div></div>
+        <div class="bullet cp"></div>
+      </div>
+      <!--bullets ends-->
+    </div><!--slides ends-->
 <%- end %>
 
 <div class="center pr">
-  <div class="centerBg indexmain">
-    <div class="top1content">
-      <div class="boxA" id="master_palace">
-        <div class="titlebar">
-          <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>" /></div>
-          <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>" /></div>
-          <div class="title">
-            <span class="cn">大师殿堂</span>
-            <span class="en">Master Place</span>
-          </div>
-        </div>
-        <div class="box_content">
-          <div class="master_palace_content">
-            <div class="original">
-              <div class="image"><a href="#"><img src="<%= asset_path "design/michael_young.jpg" %>"></a></div>
-              <div class="t"><a href="#">设计，随生活方式的演进而创新</a></div>
-              <div class="c"><div class="text">Claudio Nardi最初被世人熟识，是在上世纪八十年代，那时他为Gianfranco Ferre，Valentino，Dolce&Gabbana等奢侈品牌设计督建,那时他为Gianfranco Ferre，Valentino，Dolce&</div></div>
-              <div class="plus">+</div>
-            </div>
-            <div class="replace boxB">
-              <div class="box_title"><h3>大师访谈</h3></div>
-              <div class="boxb_content"><img src="<%= asset_path "design/pl2.jpg" %>"></div>
+<div class="centerBg indexmain">
+<div class="top1content">
+  <div class="boxA" id="master_palace">
+    <div class="titlebar">
+      <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
+      <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
+      <div class="title">
+        <span class="cn">大师殿堂</span>
+        <span class="en">Master Place</span>
+      </div>
+    </div>
+    <div class="box_content">
+      <div class="master_palace_content">
+        <div class="original">
+          <div class="image"><a href="#"><img src="<%= asset_path "design/michael_young.jpg" %>"></a></div>
+          <div class="t"><a href="#">设计，随生活方式的演进而创新</a></div>
+          <div class="c">
+            <div class="text">Claudio Nardi最初被世人熟识，是在上世纪八十年代，那时他为Gianfranco
+              Ferre，Valentino，Dolce&Gabbana等奢侈品牌设计督建,那时他为Gianfranco Ferre，Valentino，Dolce&
             </div>
           </div>
+          <div class="plus">+</div>
         </div>
-      </div>
-
-      <div id="design_appreciation">
-        <div class="inner">
-          <div class="titlebar">
-            <span class="cn">设计鉴赏</span>
-            <span class="en">Desgin Appreciation</span>
-          </div>
-          <div class="box_content"><div class="inner"><div class="inner_inner">
-                <div class="image"><a href="#"><img src="<%= asset_path "design/desgin_appreciation.gif" %>"></a></div>
-                <div class="t">
-                  <p>设计师：王庆建(上海)</p>
-                  <p>所属公司：圆柱设计</p>
-                </div>
-                <div class="s">
-                  <p class="like">286</p>
-                  <p class="review">评论86</p>
-                </div>
-          </div></div></div>
-        </div>
-      </div>
-
-      <div class="boxA" id="information">
-        <div class="titlebar">
-          <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>" /></div>
-          <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>" /></div>
-          <div class="title">
-            <span class="cn">家装资讯</span>
-            <span class="en">Information</span>
-          </div>
-        </div>
-        <div class="box_content"><div class="inner">
-            <ul>
-              <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
-              <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
-              <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
-              <li class="desc">
-              <p class="c">宜家发布的2011最新家居设计之三，这款我比较中意</p>
-              <p class="u">来自<br>amber花花</p>
-              </li>
-            </ul>
-        </div></div>
-      </div>
-
-      <div class="boxA" id="hot_topic">
-        <div class="titlebar">
-          <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>" /></div>
-          <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>" /></div>
-          <div class="title"></div>
-        </div>
-        <div class="box_content boxB shadow" style="padding:15px 20px">
-          <div class="box_title"><h3>大师热点话题</h3></div>
-          <div class="boxb_content"><img src="<%= asset_path "design/pl3.jpg" %>"></div>
-        </div>
-      </div>
-
-      <div class="boxB" id="masters_guidance">
-        <div class="box_title"><h3>大师电波</h3></div>
-        <div class="boxb_content qa">
-          <dl>
-            <dt>室内设计的根本是什么？</dt>
-            <dd>用艺术的角度，把室内设计的功能性，实用性和美观性展现出来，这是室内设计的根本，把每一次的设计都当成自己的家一样去做，这是设计师的指责</dd>
-          </dl>
-          <dl>
-            <dt>室内设计的根本是什么？</dt>
-            <dd>用艺术的角度，把室内设计的功能性，实用性和美观性展现出来，这是室内设计的根本，把每一次的设计都当成自己的家一样去做，这是设计师的指责</dd>
-          </dl>
-          <dl>
-            <dt>室内设计的根本是什么？</dt>
-            <dd>用艺术的角度，把室内设计的功能性，实用性和美观性展现出来，这是室内设计的根本，把每一次的设计都当成自己的家一样去做，这是设计师的指责</dd>
-          </dl>
+        <div class="replace boxB">
+          <div class="box_title"><h3>大师访谈</h3></div>
+          <div class="boxb_content"><img src="<%= asset_path "design/pl2.jpg" %>"></div>
         </div>
       </div>
     </div>
-    <div class="top1mask"></div>
-    <div class="boxA" id="top2">
+  </div>
+
+  <div id="design_appreciation">
+    <div class="inner">
       <div class="titlebar">
-        <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>" /></div>
-        <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>" /></div>
-        <div class="title"></div>
+        <span class="cn">设计鉴赏</span>
+        <span class="en">Desgin Appreciation</span>
       </div>
       <div class="box_content">
-        <div class="inner"><div class="inner-inner">
-            <div class="boxB" id="weekly_star">
-              <div class="box_title"><h3>每周之星</h3></div>
-              <div class="boxb_content">
-                <a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a>
-                <div></div>
-              </div>
-            </div>
+        <div class="inner">
+          <div class="inner_inner">
+            <div class="image"><a href="#"><img src="<%= asset_path "design/desgin_appreciation.gif" %>"></a></div>
+            <div class="t">
+              <p>设计师：王庆建(上海)</p>
 
-            <div class="boxB" id="afflatus_showcase">
-              <div class="box_title"><h3>灵感秀</h3></div>
-              <div class="boxb_content">
-                <a href="#"><img src="<%= asset_path "design/pl5.jpg" %>"></a>
-              </div>
+              <p>所属公司：圆柱设计</p>
+            </div>
+            <div class="s">
+              <p class="like">286</p>
+
+              <p class="review">评论86</p>
             </div>
           </div>
-
-          <div id="recommended_works">
-            <div class="box_title"><img src="<%= asset_path "design/recommended_works.gif" %>"></div>
-            <div class="box_content">
-              <div class="galleryM">
-                <span class="moveleft"></span>
-                <span class="moveright"></span>
-                <div class="list">
-                  <ul>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                    <li><div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                    <div class="s">
-                      <p class="like">286</p>
-                      <p class="forward">转发</p>
-                      <p class="review">评论</p>
-                    </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <%= javascript_include_tag  "galleryM"  %>
-      </div></div>
+        </div>
+      </div>
     </div>
+  </div>
 
-
-
-    <div id="home_improvement_news">
-      <div class="titlebar">
+  <div class="boxA" id="information">
+    <div class="titlebar">
+      <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
+      <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
+      <div class="title">
         <span class="cn">家装资讯</span>
         <span class="en">Information</span>
       </div>
-      <div class="box_content">
-        <div class="left">
-          <div class="industry_news shadow">
-            <div class="boxB">
-              <div class="box_title"><h3>行业资讯</h3></div>
-              <div class="boxb_content">
-                <div class="major">
-                  <div class="legend"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
-                  <div class="desc">
-                    80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常钟情于宜家，软装方面很...<a href="#">[查看详细]</a>
-                  </div>
-                </div>
-                <div class="list">
-                  <ul>
-                    <li><div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
-                    <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
-                    <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
-                    <div class="tags">
-                      <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
-                    </div>
-                    </li>
-                    <li><div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
-                    <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
-                    <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
-                    <div class="tags">
-                      <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
-                    </div>
-                    </li>
-                    <li><div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
-                    <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
-                    <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
-                    <div class="tags">
-                      <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
-                    </div>
-                    </li>
-                    <li><div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
-                    <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
-                    <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
-                    <div class="tags">
-                      <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
-                    </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+    </div>
+    <div class="box_content">
+      <div class="inner">
+        <ul>
+          <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
+          <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
+          <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
+          <li class="desc">
+            <p class="c">宜家发布的2011最新家居设计之三，这款我比较中意</p>
+
+            <p class="u">来自<br>amber花花</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="boxA" id="hot_topic">
+    <div class="titlebar">
+      <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
+      <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
+      <div class="title"></div>
+    </div>
+    <div class="box_content boxB shadow" style="padding:15px 20px">
+      <div class="box_title"><h3>大师热点话题</h3></div>
+      <div class="boxb_content"><img src="<%= asset_path "design/pl3.jpg" %>"></div>
+    </div>
+  </div>
+
+  <div class="boxB" id="masters_guidance">
+    <div class="box_title"><h3>大师作品</h3>
+
+      <div class="more"><a href="#">+查看更多</a></div>
+    </div>
+    <div class="boxb_content qa">
+      <div class="gallery galleryN">
+        <span class="moveleft"></span>
+        <span class="moveright"></span>
+
+        <div class="list">
+          <ul>
+            <li><a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a></li>
+            <li><a href="#"><img src="<%= asset_path "design/p2.jpg" %>"></a></li>
+            <li><a href="#"><img src="<%= asset_path "design/p3.jpg" %>"></a></li>
+            <li><a href="#"><img src="<%= asset_path "design/p4.jpg" %>"></a></li>
+          </ul>
+        </div>
+      </div>
+      <%= javascript_include_tag "galleryN" %>
+      <div class="intro">
+        <h3>作者：Michael Young</h3>
+
+        <p>国籍：英国</p>
+
+        <p>作品名称：别墅</p>
+        <h4>作品简介</h4>
+
+        <div class="content">
+          这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，自然环境珍稀罕有。这套样板房设计主要围绕海边庭院风格的休闲生活展开及进行空间的组合。整个室内空间采用朴实自然的浅米色色调...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="top1mask"></div>
+<div class="boxA" id="top2">
+<div class="titlebar">
+  <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
+  <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
+  <div class="title"></div>
+</div>
+<div class="box_content">
+<div class="titlebar">
+  <div class="title">
+    <span class="cn">设计鉴赏</span>
+    <span class="en">Design Appreciation</span>
+  </div>
+</div>
+<div class="inner">
+<div class="inner-inner">
+  <div class="boxB" id="weekly_star">
+    <div class="box_title"><h3>每周之星</h3></div>
+    <div class="boxb_content">
+      <a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a>
+
+      <div></div>
+    </div>
+  </div>
+
+  <div class="boxB" id="afflatus_showcase">
+    <div class="box_title"><h3>灵感秀</h3></div>
+    <div class="boxb_content">
+      <a href="#"><img src="<%= asset_path "design/pl5.jpg" %>"></a>
+    </div>
+  </div>
+</div>
+
+<div id="recommended_works">
+<div class="box_title"><img src="<%= asset_path "design/recommended_works.gif" %>"></div>
+<div class="box_content">
+<div class="galleryM">
+<span class="moveleft"></span>
+<span class="moveright"></span>
+
+<div class="list">
+<ul>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+</ul>
+<ul>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+  <li>
+    <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+    <div class="s">
+      <p class="like">286</p>
+
+      <p class="forward">转发</p>
+
+      <p class="review">评论</p>
+    </div>
+  </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<%= javascript_include_tag "galleryM" %>
+</div>
+</div>
+</div>
+
+
+<div id="home_improvement_news">
+<div class="titlebar">
+  <span class="cn">家装资讯</span>
+  <span class="en">Information</span>
+</div>
+<div class="box_content">
+<div class="left">
+  <div class="industry_news shadow">
+    <div class="boxB">
+      <div class="box_title"><h3>行业资讯</h3></div>
+      <div class="boxb_content">
+        <div class="major">
+          <div class="legend"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
+          <div class="desc">
+            80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常钟情于宜家，软装方面很...<a href="#">[查看详细]</a>
           </div>
         </div>
-        <div class="right">
-          <div class="inner shadow">
-            <div class="tweibo boxB">
-              <div class="box_title"><h3>立邦官微资讯</h3></div>
-              <div class="boxb_content">
-                <img src="<%= asset_path "design/weibo.gif" %>">
+        <div class="list">
+          <ul>
+            <li>
+              <div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
+              <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
+              <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
+              <div class="tags">
+                <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
               </div>
+            </li>
+            <li>
+              <div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
+              <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
+              <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
+              <div class="tags">
+                <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
+              </div>
+            </li>
+            <li>
+              <div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
+              <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
+              <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
+              <div class="tags">
+                <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
+              </div>
+            </li>
+            <li>
+              <div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
+              <div class="t"><a href="#">80平米温馨小居 宜家简约风两室两厅</a></div>
+              <div class="c">80平米温馨小居,以简约风打造，温馨丰富的色彩使用让这套案例充满了浓浓的温馨之感，业主非常...<a href="#">[查看详细]</a></div>
+              <div class="tags">
+                <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right">
+<div class="inner shadow">
+  <div class="tweibo boxB">
+    <div class="box_title"><h3>立邦官微资讯</h3></div>
+    <div class="boxb_content">
+      <img src="<%= asset_path "design/weibo.gif" %>">
+    </div>
+  </div>
+</div>
+<div class="tweets boxB">
+<div class="box_title"><h3>行业红人微博资讯</h3></div>
+<div class="boxb_content">
+<ul>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
             </div>
-          </div>
-          <div class="tweets boxB">
-            <div class="box_title"><h3>行业红人微博资讯</h3></div>
-            <div class="boxb_content">
-              <ul><li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></li>
-              </ul>
-            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
           </div>
         </div>
       </div>
     </div>
-
-    <div id="topb2">
-      <div class="box_content">
-        <div id="latest_technology">
-          <div class="titlebar">
-            <span class="cn">最新工艺</span>
-            <span class="en">Latest Technology</span>
-          </div>
-          <div class="boxb_content">
-            <a href="#"><img src="<%= asset_path "design/personalized_brushing.gif" %>"></a>
-          </div>
-        </div>
-
-        <div id="activities">
-          <div class="titlebar">
-            <span class="cn">精彩活动</span>
-            <span class="en">Activities</span>
-          </div>
-          <div class="boxb_content">
-            <a href="#"><img src="<%= asset_path "design/activities.gif" %>"></a>
-          </div>
-        </div>
-
-        <div id="utility">
-          <div class="inner">
-            <div class="titlebar">
-              <span class="cn">实用工具</span>
-              <span class="en">Utility</span>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
             </div>
-            <div class="boxb_content">
-              <img src="<%= asset_path "design/utility.gif" %>">
-            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
           </div>
         </div>
       </div>
-      <div class="base">
-        <div class="c shadow"></div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <div class="simg"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
+  <div class="bimg">
+    <div class="popupB">
+      <div class="popupinner">
+        <div class="content">
+          <div class="t">
+            <div class="face"><a href="#"><img src="<%= asset_path "design/ub1.jpg" %>"></a></div>
+            <div class="tcontent">
+              <a href="#" class="user">雪菲儿C：</a>这是深圳益田集团开发的半岛城邦项目的一套现代休闲风格的样板房，半岛城邦位于深圳蛇口一线海景地区，
+              <img src="<%= asset_path "design/pe1.jpg" %>">
+            </div>
+            <div class="time"><a href="#">今天15:09</a> <span class="from">来自 <a href="#">新浪微博</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+</ul>
+<!--[if IE 6]>
+<script type="text/javascript">
+    if ($.browser.msie && $.browser.version < 7) {
+        $(function() {
+            $('div.tweets li').hover(function() {
+                //$(this).find('div.bimg').css('right','-135px');
+                $(this).addClass('hover');
+            }, function() {
+                //$(this).find('div.bimg').css('right','-1350px');
+                $(this).addClass('hover');
+            });
+        })
+    }
+</script>
+<![endif]-->
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="topb2">
+  <div class="box_content">
+    <div id="gift">
+      <div class="titlebar">
+        <span class="cn">礼从天降</span>
+        <span class="en">Gfit</span>
+      </div>
+      <div class="boxb_content">
+        <a href="#"><img src="<%= asset_path "design/activitiesB.gif" %>"></a>
       </div>
     </div>
 
-    <%= javascript_include_tag  "index3"  %>
-  </div><!--centerBg ends-->
+    <div id="utility">
+      <div class="inner">
+        <div class="titlebar">
+          <span class="cn">实用工具</span>
+          <span class="en">Utility</span>
+        </div>
+        <div class="boxb_content">
+          <img src="<%= asset_path "design/utility.jpg" %>" usemap="#utility_map"/>
+          <map name="utility_map" id="utility_map">
+            <area shape="rect" coords="0,0,140,120" href="#"/>
+            <area shape="rect" coords="161,0,313,120" href="#"/>
+          </map>
+        </div>
+      </div>
+    </div>
+    <div id="paint_art">
+      <div class="inner">
+        <div class="titlebar">
+          <span class="cn">漆光艺彩</span>
+          <span class="en">Paint art</span>
+        </div>
+        <div class="boxb_content">
+          <div class="boxleft"><img src="<%= asset_path "design/paintart.jpg" %>"></div>
+          <div class="boxright">
+            <div class="galleryO">
+              <div class="buttons">
+                <div class="moveleft"></div>
+                <div class="moveright"></div>
+                <div class="n"><span class="current">1</span>/<span class="total">4</span></div>
+              </div>
+              <div class="list">
+                <ul>
+                  <li><a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a></li>
+                  <li><a href="#"><img src="<%= asset_path "design/p2.jpg" %>"></a></li>
+                  <li><a href="#"><img src="<%= asset_path "design/p3.jpg" %>"></a></li>
+                  <li><a href="#"><img src="<%= asset_path "design/p4.jpg" %>"></a></li>
+                </ul>
+              </div>
+            </div>
+            <%= javascript_include_tag "galleryO" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="base">
+    <div class="c shadow"></div>
+  </div>
+</div>
+
+<%= javascript_include_tag "index3" %>
+</div>
+<!--centerBg ends-->
 </div><!--center ends-->
+<div class="footer_adv">
+  <div class="inner">
+    <a href="#"><img src="<%= asset_path "design/banner_design.jpg" %>"></a>
+  </div>
+</div>

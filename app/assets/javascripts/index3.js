@@ -168,7 +168,7 @@ $window.ready(function(){
 	var step4 = function(){
 		_scrollTo(1260,50,20);
 		$wrap.css({ 'height' : '1835px' });
-		$topb2.css({ 'top' : '1560px' });
+		$topb2.css({ 'top' : '1570px' });
 
 		var $wsbt = $weekly_star.find('div.box_title').css('opacity',0);
 		var $wsbc = $weekly_star.find('div.boxb_content').css('opacity',0);
@@ -222,7 +222,7 @@ $window.ready(function(){
 	var step5 = function(){
 		_scrollTo(2120,50,50);
 		$wrap.css({ 'height' : '2505px' });
-		$topb2.css({ 'top' : '2230px' });
+		$topb2.css({ 'top' : '2240px' });
 		$home_improvement_news.hide().slideDown(2000,step6);
 
 		var $hin_list = $home_improvement_news.find('div.list').css('opacity',0);
@@ -250,7 +250,7 @@ $window.ready(function(){
 
 	var step6 = function(){
 		$topb2.animate({ 'top' : '2130px' },500,function(){
-			$topb2.animate({ 'top' : '2230px' },500);
+			$topb2.animate({ 'top' : '2240px' },500);
 		});
 	};
 /*

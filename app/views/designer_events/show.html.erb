@@ -8,15 +8,31 @@
             right: 100px;
         }
     </style>
-    <%= stylesheet_link_tag "exciting_activities", "news", "style" %>
+    <%= stylesheet_link_tag "exciting_activities", "style", "jquery.rating" %>
+    <%= javascript_include_tag "jquery.rating" %>
 <%- end %>
-
+<%- content_for :tail do %>
+    <script type="text/javascript">
+        $(function() { // wait for document to load
+            $('input.star_rat').rating({starWidth: 47,half:false,required:true});
+        });
+    </script>
+<%- end %>
 <div class="main page_weekstar">
   <div class='sub_title tr'>
     <img src="<%= asset_path "design/title_event.png"%>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">设计师活动</a>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 172px
+        }
+
+        span.arrow_2 {
+            right: 102px
+        }
+    </style>
   </div>
   <!--sub_nav ends-->
   <div class="wrapper group">
@@ -84,24 +100,73 @@
                 <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
                 <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
                 <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
               </ul>
             </div>
           </div>
+          <script type="text/javascript">
+              $(function() {
+                  var $item = $('div.galleryD div.list ul');
+                  var count = $item.find('li').size();
+                  var colsize = 12;
+                  var pwidth = $item.find('li').eq(0).width();
+                  var sp = 3;
+                  var wwidth = count * ( pwidth + sp ) - sp;
+                  var movewidth = pwidth + sp;
+                  var disabledClassName = "disabled";
+                  if (count > colsize) {
+                      var $left = $('div.galleryD span.moveleft');
+                      var $right = $('div.galleryD span.moveright');
+
+                      function s(left) {
+                          if (typeof left != 'number') {
+                              left = parseInt($item.css('left')) || 0;
+                          }
+                          $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
+                          $right[ ( -1 * left ) >= wwidth - ( colsize * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
+                      }
+
+                      s();
+                      $left.click(function() {
+                          if ($(this).hasClass(disabledClassName)) {
+                              return;
+                          }
+                          s((parseInt($item.css('left')) || 0) + movewidth);
+                          $item.animate({
+                              "left" : "+=" + movewidth + 'px'
+                          }, 'fast');
+                      });
+                      $right.click(function() {
+                          if ($(this).hasClass(disabledClassName)) {
+                              return;
+                          }
+                          s((parseInt($item.css('left')) || 0) - movewidth);
+                          $item.animate({
+                              "left" : "-=" + movewidth + 'px'
+                          }, 'fast');
+                      });
+                  }
+              });
+          </script>
           <div class="apply">
             <p class="button"><a href="#">我要报名</a></p>
 
             <p class="count">(已有4566人参与)</p>
           </div>
         </div>
-        <div class="rate_wrap">
+        <div class="rate_wrap" style="height:65px;">
           <p>喜爱这个活动？请为活动进行评价（喜爱度打分）</p>
-          <ul class="stars_big">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li class="not_selected"></li>
-          </ul>
+          <!--<ul class="stars_big"><li></li><li></li><li></li><li></li><li class="not_selected"></li></ul>-->
+          <div style="margin-top:10px;">
+            <input name="adv2" type="radio" title="1" class="star_rat"/>
+            <input name="adv2" type="radio" title="2" class="star_rat"/>
+            <input name="adv2" type="radio" title="3" class="star_rat" checked="checked"/>
+            <input name="adv2" type="radio" title="4" class="star_rat"/>
+            <input name="adv2" type="radio" title="5" class="star_rat"/>
+          </div>
         </div>
         <div class="review_wrap">
           <div class="reviewform">
@@ -116,6 +181,7 @@
             </div>
           </div>
           <div class="pager ft12">
+            第1-123条 , 共123条
             <a class="prev" href="#"><span></span>上一页</a>
             <a href="#">1</a>
             <a href="#" class="current">2</a>
@@ -169,19 +235,8 @@
   </div>
   <div class='sub_bot pr'>
     <div class="pager ft12">
-      <a class="prev" href="#"><span></span>上一页</a>
-      <a href="#">1</a>
-      <a href="#" class="current">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">7</a>
-      <a href="#">8</a>
-      <a href="#">...</a>
-      <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a>
     </div>
+    <!--pager ends-->
   </div>
   <!--sub_bot ends-->
 </div>

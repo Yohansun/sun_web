@@ -1,22 +1,37 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "exciting_activities", "index", "style" %>
-  <style type="text/css">
-    span.arrow_1{right:203px;}
-    span.arrow_2{right:135px;}
-  </style>
+    <%= stylesheet_link_tag "exciting_activities", "index", "style" %>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 203px;
+        }
+
+        span.arrow_2 {
+            right: 135px;
+        }
+    </style>
 <%- end %>
 <div class="main page_weekstar">
   <div class='sub_title tr'>
-    <img src="<%= asset_path "design/title_event.png"%>" />
+    <img src="<%= asset_path "design/title_event.png"%>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">年度色彩趋势活动</a>
-  </div><!--sub_nav ends-->
+    <style type="text/css">
+        span.arrow_1 {
+            right: 208px
+        }
+
+        span.arrow_2 {
+            right: 142px
+        }
+    </style>
+  </div>
+  <!--sub_nav ends-->
   <div class="wrapper group color-trend">
     <div class="shadow">
       <div class="section">
         <div class="banner">
-          <img src="<%= asset_path "design/2012-color-trend.jpg"%>" />
+          <img src="<%= asset_path "design/2012-color-trend.jpg"%>"/>
           <a href="#" class="report">活动报道</a>
           <a href="#" class="play">&nbsp;</a>
         </div>
@@ -39,20 +54,66 @@
           <div class="galleryE">
             <span class="moveleft"></span>
             <span class="moveright"></span>
+
             <div class="list">
-              <ul><li><a href="/events/1"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>" /></a></li>
+              <ul>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
               </ul>
             </div>
           </div>
+          <script type="text/javascript">
+              $(function() {
+                  var $item = $('div.galleryE div.list ul');
+                  var count = $item.find('li').size();
+                  var colsize = 8;
+                  var pwidth = $item.find('li').eq(0).width();
+                  var sp = 17;
+                  var wwidth = count * ( pwidth + sp ) - sp;
+                  var movewidth = pwidth + sp;
+                  var disabledClassName = "disabled";
+                  if (count > colsize) {
+                      var $left = $('div.galleryE span.moveleft');
+                      var $right = $('div.galleryE span.moveright');
+
+                      function s(left) {
+                          if (typeof left != 'number') {
+                              left = parseInt($item.css('left')) || 0;
+                          }
+                          $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
+                          $right[ ( -1 * left ) >= wwidth - ( colsize * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
+                      }
+
+                      s();
+                      $left.click(function() {
+                          if ($(this).hasClass(disabledClassName)) {
+                              return;
+                          }
+                          s((parseInt($item.css('left')) || 0) + movewidth);
+                          $item.animate({
+                              "left" : "+=" + movewidth + 'px'
+                          }, 'fast');
+                      });
+                      $right.click(function() {
+                          if ($(this).hasClass(disabledClassName)) {
+                              return;
+                          }
+                          s((parseInt($item.css('left')) || 0) - movewidth);
+                          $item.animate({
+                              "left" : "-=" + movewidth + 'px'
+                          }, 'fast');
+                      });
+                  }
+              });
+          </script>
         </div>
         <div class="review_wrap">
           <div class="reviewform">
@@ -60,7 +121,9 @@
             <div class="form-content">
               <form>
                 <p class="input"><textarea></textarea></p>
-                <p class="button"><input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交" /></p>
+
+                <p class="button">
+                  <input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交"/></p>
               </form>
             </div>
           </div>
@@ -80,27 +143,33 @@
           </div>
           <div class="review_list">
             <ul class="review_listA">
-              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+              <li>
+                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
                 <div class="reply"><a href="#">回复</a></div>
                 <div class="content">很好！非常好的工具！赞一个...</div>
               </li>
-              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+              <li>
+                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
                 <div class="reply"><a href="#">回复</a></div>
                 <div class="content">很好！非常好的工具！赞一个...</div>
               </li>
-              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+              <li>
+                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
                 <div class="reply"><a href="#">回复</a></div>
                 <div class="content">很好！非常好的工具！赞一个...</div>
               </li>
-              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+              <li>
+                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
                 <div class="reply"><a href="#">回复</a></div>
                 <div class="content">很好！非常好的工具！赞一个...</div>
               </li>
-              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+              <li>
+                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
                 <div class="reply"><a href="#">回复</a></div>
                 <div class="content">很好！非常好的工具！赞一个...</div>
               </li>
-              <li><div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
+              <li>
+                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
                 <div class="reply"><a href="#">回复</a></div>
                 <div class="content">很好！非常好的工具！赞一个...</div>
               </li>
@@ -112,18 +181,8 @@
   </div>
   <div class='sub_bot pr'>
     <div class="pager ft12">
-      <a class="prev" href="#"><span></span>上一页</a>
-      <a href="#">1</a>
-      <a href="#" class="current">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">7</a>
-      <a href="#">8</a>
-      <a href="#">...</a>
-      <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a>
     </div>
-  </div><!--sub_bot ends-->
+    <!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
 </div>

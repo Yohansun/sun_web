@@ -30,6 +30,10 @@ function o_in(){
 function o_out(){
 	$('#overlay').fadeOut();
 	}
+function show_login(){
+	o_in();
+	$('.unlogin').show();
+	}
 
 $(function(){
 	$('a.server').click(function(){
@@ -457,13 +461,12 @@ $(function(){
 		$('.user_details').eq(num).show().siblings('.user_details').hide();
 	});
 
-});
-
-
 			qin_slide('#qin_slide1 ');
 			qin_slide('#qin_slide2 ');
 			qin_slide('#qin_slide3 ');
 			//qin_slide('#slide3 ');
+});
+
 			function qin_slide(ID){
 
 				var page = 1;
