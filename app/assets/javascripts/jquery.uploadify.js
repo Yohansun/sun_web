@@ -181,7 +181,7 @@ if(jQuery)(
 						uploadSize         : 0, // The size in bytes of the upload queue
 						queueBytesUploaded : 0, // The size in bytes that have been uploaded for the current upload queue
 						uploadQueue        : [], // The files currently to be uploaded
-						errorMsg           : 'Some files were not added to the queue:'
+						errorMsg           : '部分文件无法上传:'
 					};
 
 					// Create the button
@@ -219,7 +219,7 @@ if(jQuery)(
 
 					function onDialogOpen() {
 						// Reset some queue info
-						swfuploadify.queue.errorMsg       = 'Some files were not added to the queue:';
+						swfuploadify.queue.errorMsg       = '部分文件无法上传:';
 						swfuploadify.queue.filesReplaced  = 0;
 						swfuploadify.queue.filesCancelled = 0;
 						if (swfuploadify.settings.onDialogOpen) swfuploadify.settings.onDialogOpen();
@@ -288,9 +288,9 @@ if(jQuery)(
 							switch(errorCode) {
 								case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
 									if (swfuploadify.settings.queueSizeLimit > errorMsg) {
-										swfuploadify.queue.errorMsg += '\nThe number of files selected exceeds the remaining upload limit (' + errorMsg + ').';
+										swfuploadify.queue.errorMsg += '\n您选择的文件超过了上限 (' + errorMsg + ').';
 									} else {
-										swfuploadify.queue.errorMsg += '\nThe number of files selected exceeds the queue size limit (' + swfuploadify.settings.queueSizeLimit + ').';
+										swfuploadify.queue.errorMsg += '\n您选择的文件超过了上限 (' + swfuploadify.settings.queueSizeLimit + ').';
 									}
 									break;
 								case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:

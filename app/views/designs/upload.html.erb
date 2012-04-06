@@ -22,6 +22,7 @@ $(function() {
     cancelImage : '/uploadify/uploadify-cancel.png',
     skipDefault : ['onSelect'],
     buttonText : "选择文件",
+    uploadLimit : 60,
     width : 112,
     height : 31,
     multi : true,
@@ -33,7 +34,9 @@ $(function() {
     //buttonText : '选择文件',
     onUploadSuccess : function(file, data, response) {
       var dat = eval('(' + data + ')');
-      $.getScript(dat.upload + "?for=design");
+      if (dat.result == 'success') {
+        $.getScript(dat.upload + "?for=design");
+      };
     },
     postData : {
         '_http_accept': 'application/javascript',

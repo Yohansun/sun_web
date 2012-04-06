@@ -20,6 +20,7 @@ $(function() {
   $('#upload_photo').uploadify({
     swf : '/uploadify/uploadify.swf',
     cancelImage : '/uploadify/uploadify-cancel.png',
+    uploadLimit : 60,
     skipDefault : ['onSelect'],
     buttonText : "选择文件",
     width : 112,
@@ -33,7 +34,9 @@ $(function() {
     //buttonText : '选择文件',
     onUploadSuccess : function(file, data, response) {
       var dat = eval('(' + data + ')');
-      $.getScript(dat.upload + "?for=inspiration");
+      if (dat.result == 'success') {
+        $.getScript(dat.upload + "?for=inspiration");
+      };
     },
     postData : {
         '_http_accept': 'application/javascript',
@@ -66,7 +69,7 @@ function uploads_size () {
       <div class="suc_content ft14 clear">
         <div class="reg_list reg_width fb">上传到灵感秀：<%= @inspiration.title %></div>
         <div class="work_area clear">
-          <p class="fl">您已经添加了<span><%= @inspiration.design_images.size %></span>张图片（还可以添加<span><%= 60 - @inspiration.design_images.size %></span>张）</p>
+          <p class="fl">您已经添加了<span id="inspiration_images_size"><%= @inspiration.design_images.size %></span>张图片（还可以添加<span><%= 60 - @inspiration.design_images.size %></span>张）</p>
           <a href="#" class="re_add fr" id="upload_photo"></a>
           <div class="upload_bin fl">
             <div class="load_bar clear">
