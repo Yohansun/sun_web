@@ -1,0 +1,127 @@
+<%- content_for :head do -%>
+<%= stylesheet_link_tag 'uploadify' %>
+<%- end -%>
+<%- content_for :tail do %>
+<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+
+<script type="text/javascript" charset="utf-8">
+<%- session_key = Rails.application.config.session_options[:key] -%>
+$(function() {
+
+  $('#upload_photo').click(function(event){
+    event.preventDefault();
+  });
+
+  $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    multi : true,
+    auto : true,
+    checkExisting : false,
+    buttonImage : null,
+    uploader : '/admin/content/color_design_uploads',
+    buttonText : '选择文件',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      $.getScript(dat.upload);
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    }
+  });
+
+});
+</script>
+<%- end -%>
+
+<div class="content">
+  <div class="title">
+    <h5><%= form_title %></h5>
+    <div class="num"><%= link_to '返回', subject_color_designs_path(parent), :class => "redNum" %></div>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :design_name, :input_html => { :class=> "validate[required]" }, :label => "作品名称:" %>
+        <%= f.input :main_preview_img, :label => "上传图片:" %>
+
+        <div class="rowElem">
+          <div>
+            <label class="string">作品相册:</label>
+          </div>
+          <div class="formRight www1">
+            <%= button_tag "上传图片", :id => 'upload_photo' %>
+            <div id="uploads">
+              <%= render :partial => "magic_content/color_design_uploads/upload", :collection => resource.color_design_uploads %>
+            </div>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <%= f.input :author, :label => "设计师:" %>
+        <%= f.input :author_url, :label => "设计师主页:" %>
+        <%= f.input :company_name, :label => "公司名称:" %>
+        <%= f.input :company_url, :label => "公司主页:" %>
+        <%= f.input :company_address, :label => "公司地址:" %>
+        <%= f.input :project_name, :label => "项目名称:" %>
+
+        <div class="rowElem">
+          <label>&nbsp;&nbsp;&nbsp;风格:</label>
+          <div class="formRight www1">
+            <%= f.select :design_style, ColorDesign.style_select, :class => "validate[required]" ,:prompt => '--请选择--'  %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <div class="rowElem">
+          <label>&nbsp;&nbsp;&nbsp;色系:</label>
+          <div class="formRight www1">
+            <%= f.select :design_color, ColorDesign.color_select, :class => "validate[required]" ,:prompt => '--请选择--'  %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <div class="rowElem">
+          <label>&nbsp;&nbsp;&nbsp;功能区:</label>
+          <div class="formRight www1">
+            <%= f.select :design_usage, ColorDesign.usage_select, :class => "validate[required]" ,:prompt => '--请选择--' %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <%= f.input :design_intro, :label => "设计说明:" %>
+        <%= f.input :design_material, :label => "主要材料:" %>
+        <%= f.input :recommend_reason, :label => "推荐理由:" %>
+
+        <div class="rowElem">
+          <div>
+            <label class="string">发布时间:</label>
+          </div>
+          <div class="formRight www1">
+            <%= text_field_tag "color_design[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
+            <%= text_field_tag "color_design[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <%= f.input :tag_list, :hint => "Tips: 多个标签之间用“，”隔开", :label => "标签:" %>
+        <div class="rowElem">
+          <%= f.button :submit, :value => "#{button_value}" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120406121027) do
+ActiveRecord::Schema.define(:version => 20120406140158) do
+
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -108,6 +109,40 @@ ActiveRecord::Schema.define(:version => 20120406121027) do
     t.string   "rgb"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+
+  create_table "color_design_uploads", :force => true do |t|
+    t.integer  "color_design_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "color_designs", :force => true do |t|
+    t.string   "design_name"
+    t.string   "author"
+    t.string   "author_url"
+    t.string   "company_name"
+    t.string   "company_url"
+    t.string   "company_address"
+    t.string   "project_name"
+    t.string   "design_style"
+    t.string   "design_color"
+    t.string   "design_usage"
+    t.text     "design_intro"
+    t.text     "design_material"
+    t.text     "recommend_reason"
+    t.integer  "subject_id"
+    t.datetime "published_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "main_preview_img_file_name"
+    t.string   "main_preview_img_content_type"
+    t.integer  "main_preview_img_file_size"
+    t.datetime "main_preview_img_updated_at"
+
   end
 
   create_table "comments", :force => true do |t|

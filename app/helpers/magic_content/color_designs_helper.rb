@@ -1,0 +1,2 @@
+module MagicContent::ColorDesignsHelper
+end
