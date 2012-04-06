@@ -1,3 +1,4 @@
+<% if current_weekly_tip -%>
 <%- body = current_weekly_tip.body.split("\r\n\r\n") %>
 <%- (body.size/2).times do |i| %>
 
@@ -21,5 +22,5 @@
       </div>
       <!--faqs_content ends-->
     </div><!--faqs ends-->
-
+<%- end %>
 <%- end %>

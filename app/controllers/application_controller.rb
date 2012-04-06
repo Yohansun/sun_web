@@ -8,17 +8,15 @@ class ApplicationController < ActionController::Base
   end
 
   def current_weekly_tip
-    current_weekly_tip = params[:id].nil? ? weekly_tips.first : WeeklyTip.find(params[:id])
-    raise ActiveRecord::RecordNotFound if current_weekly_tip.nil?
-    current_weekly_tip
+    @current_weekly_tip ||= params[:id].nil? ? weekly_tips.first : WeeklyTip.find(params[:id])
   end
 
   def prev_weekly_tip
-    prev_weekly_tip = weekly_tips.where("published_at < ?", current_weekly_tip.published_at).first
+    @prev_weekly_tip ||= weekly_tips.where("published_at < ?", current_weekly_tip.published_at).first if current_weekly_tip
   end
 
   def next_weekly_tip
-    prev_weekly_tip = weekly_tips.where("published_at > ?", current_weekly_tip.published_at).last
+    @next_weekly_tip ||= weekly_tips.where("published_at > ?", current_weekly_tip.published_at).last if current_weekly_tip
   end
 
   def weeks_of_weekly_tips
