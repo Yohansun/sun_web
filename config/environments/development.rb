@@ -50,5 +50,5 @@ Icolor::Application.configure do
   config.assets.debug                                    = true
 
   config.assets.prefix = "/dev-assets"
-  
+
 end

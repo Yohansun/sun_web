@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   has_many :events, :class_name => "Event", :foreign_key => "user_id"
   has_one :avatar
   has_many :faqs
-
+  belongs_to :area
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login      = conditions.delete(:login)
@@ -92,6 +92,10 @@ class User < ActiveRecord::Base
 
   def role_name
     self.role ? self.role.role : 'user'
+  end
+
+  def city
+    user_city = self.area.parent if self.area
   end
 
   protected

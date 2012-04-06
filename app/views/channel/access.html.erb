@@ -31,7 +31,7 @@
       <select>
         <option>请选择市--不限</option>
       </select>
-      <select>
+      <select id="country" class="level_3" name="area_id">
         <option>请选择区--不限</option>
       </select>
       <select>
@@ -42,13 +42,11 @@
     </div>
     <!--owner_bar ends-->
     <div class="owner clear">
-      <img src="<%= asset_path "news/owners.jpg"%>" class="fl"/>
-
+      <img src="<%= user.avatar.file.url %>" class="fl" />
       <div class="owner_center fl ft12">
-        <span class="owner_name fl fb ft14">郭绍万</span>
-        <span class="owner_city fl">(上海)</span>
-        <a href="#" class="fl">进入主页</a>
-
+        <span class="owner_name fl fb ft14"><%= user.display_name %></span>
+        <span class="owner_city fl">(<%= user.city.name %>)</span>
+		    <%= link_to "进入主页", user_path(user), :class => "fl" %>
         <div class="owner_info fl pr">
           <span></span>
           高级建筑室内设计师，上海萧视设计装饰有限公司董事长、设计总监，毕业于四川美术学院。
