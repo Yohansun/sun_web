@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   def index
     if @user
       @messages = @user.messages.page params[:page]
-      render :template => "#{controller_name}/users/#{action_name}"
+      render :template => "users/messages"
     end
   end
 

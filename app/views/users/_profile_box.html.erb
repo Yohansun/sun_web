@@ -56,7 +56,7 @@ $(document).ready(function() {
 <%- end %>
 <!--system_info ends-->
 
-<%- if controller_name =~ /inspirations|designs/ %>
+<%- if controller_name =~ /inspirations|designs|messages/ %>
 <div class="sort_box pr mt25 group">
   <ul class="sort_show_ul group">
     <li class="<%= "sort_show" if controller_name == 'designs' %>"><%= link_to raw("作&nbsp;&nbsp;品"), user_designs_path(@user), :class => 'sort_show_a' %></li>
@@ -67,12 +67,10 @@ $(document).ready(function() {
 
   <%- if current_user && current_user == @user %>
     <% case controller_name %>
-    <% when "designs" %>
+    <% when /inspirations|designs/ %>
       <%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
     <% when "events" %>
       <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
-    <% else %>
-      <%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
     <%- end -%>
   <%- end %>
 </div>

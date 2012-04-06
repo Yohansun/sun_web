@@ -97,12 +97,3 @@ class Users::RegisterController < Devise::RegistrationsController
     end
   end
 end
-
-#def search_area(state_id,city_id,district_id)
-#  area = []
-#  File.open("#{Rails.root}/lib/data/areas.json", 'r') do |file|
-#      content = file.readlines.to_s.delete('\\').delete('n')
-#      hash = JSON.parse(content)
-#  end
-#
-#end
