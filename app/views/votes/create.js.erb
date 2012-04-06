@@ -1,2 +1,2 @@
-$("#votes_count").html(parseInt($("#votes_count").html()) + 1);
+$("#votes_count<%= params[:voteable_id]%>").html(parseInt($("#votes_count<%= params[:voteable_id] %>").html()) + 1);
 alert("投票成功!");
