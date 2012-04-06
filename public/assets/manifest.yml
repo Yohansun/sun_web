@@ -220,7 +220,7 @@ master/color_master2.jpg: master/color_master2-b31a455573b73815a6455760a9af760e.
 master/color_master3.jpg: master/color_master3-24f16701818bf8dd7f547db97efe82d7.jpg
 master/color_master4.jpg: master/color_master4-8e39f2b2789885aaf3179f28ddc887bd.jpg
 master/color_master5.jpg: master/color_master5-acc435d8c2729203c75afb665bc26438.jpg
-master/color_master_btn.png: master/color_master_btn-6619cee4ab75576afd5e16b4314e4495.png
+master/color_master_btn.png: master/color_master_btn-66dcff64b77c48456f2a85bb4a0cacbd.png
 master/color_master_hover.png: master/color_master_hover-b6aaa0e6c4620a11e1e154f95e25da91.png
 master/colors_icon_tit.png: master/colors_icon_tit-1237304fc4d771828018a6bb50b7236b.png
 master/colors_over_bg_l.png: master/colors_over_bg_l-44b971ed6024a63e5585cdeda33a7076.png
@@ -246,8 +246,8 @@ master/msg_bg.png: master/msg_bg-55bbb81eaeaf4fb7817280d9695751a4.png
 master/new_comm.png: master/new_comm-fc8cc81b214cb5e935d62067f9d45236.png
 master/question_mark_icon.png: master/question_mark_icon-9854a5ffad601e85f895099612bd575b.png
 master/shadow_b_line.png: master/shadow_b_line-6e92de3286e96ffc87155ebfeb165316.png
-master/space_master_btn.png: master/space_master_btn-bef86e8b30609a94933a59141c48f8bb.png
-master/space_master_hover.png: master/space_master_hover-446feb58457c64c2fafdbda1cf69963a.png
+master/space_master_btn.png: master/space_master_btn-446feb58457c64c2fafdbda1cf69963a.png
+master/space_master_hover.png: master/space_master_hover-21b9682e23bc2add659ecf3ac8fa53d0.png
 master/tag_icon.png: master/tag_icon-3a6b89895a30d2d2a92f581e8e81b702.png
 master/title_master.png: master/title_master-8cbd819e97a870145d687c4410756ee6.png
 master/topic_1.jpg: master/topic_1-bfa3568101195fa1e7fc7048feb8ab33.jpg
@@ -554,7 +554,7 @@ t_r_title.png: t_r_title-4ce5919b98f8dededc20ed8490d97a99.png
 tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-975952f17281e3a2b11085ce3af2ebc9.js
+application.js: application-e836612a2ec3432b59d350d59288f5c5.js
 articles.js: articles-80148e5c7e5b7899f916a93118e72fbd.js
 channel.js: channel-80148e5c7e5b7899f916a93118e72fbd.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
@@ -587,9 +587,10 @@ jquery.jeditable.js: jquery.jeditable-de130d9617e149c45cd758d199e271ec.js
 jquery.masonry.js: jquery.masonry-2be4272eaed7adec5e86331a7a0507aa.js
 jquery.rating.js: jquery.rating-72aa83e8fc3d15dc538e5bc378d6cb9f.js
 jquery.uploadify.js: jquery.uploadify-5776e4be420e977ad6b511e6cc9b781b.js
+magic_content/color_designs.js: magic_content/color_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 maillists.js: maillists-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-acc883b6668d97c239e52044994e185e.js
+main.js: main-2b39887a0e28dc2992f2d93c2c39b333.js
 master_designs.js: master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 master_interviews.js: master_interviews-80148e5c7e5b7899f916a93118e72fbd.js
 master_topics.js: master_topics-80148e5c7e5b7899f916a93118e72fbd.js
@@ -630,6 +631,7 @@ industry_news.css: industry_news-dab9b8e74db103d1d481a5e547058848.css
 inspirations.css: inspirations-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 jDatepicker.css: jDatepicker-2df7dba092a481ac73a2f6afbaf3c6e3.css
 jquery.rating.css: jquery.rating-923d0702dc605a2ab80b82a3885ed4e0.css
+magic_content/color_designs.css: magic_content/color_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/master_designs.css: magic_content/master_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 maillists.css: maillists-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 master_designs.css: master_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
