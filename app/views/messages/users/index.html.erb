@@ -52,7 +52,7 @@
       <!--sort_box ends-->
 
       <div class="host_main">
-        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot"} do |f| %>
+        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot", :id => 'new_message'} do |f| %>
           <fieldset>
             <textarea name="message[content]">你有神马对TA说的呢？</textarea>
             <p>0/140</p>

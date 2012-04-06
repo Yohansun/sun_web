@@ -36,7 +36,7 @@
       <div class="faq_ask fb tc ft14">我要提问：</div>
     </div><!--owner_bar ends-->
     <div class="faqs_ask ft12 clear">
-      <%= form_for :faq, :url => faqs_path, :html => {:multipart => true} do %>
+      <%= form_for :faq, :url => faqs_path, :html => {:multipart => true, :id => 'new_faq'} do %>
         <div>
           <label for="title" class="fl ask_title">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</label>
           <input type="text" class="fl faq_text ft14" maxlength="30" name="faq[title]">

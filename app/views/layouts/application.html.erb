@@ -266,6 +266,43 @@
   <%= render :partial => "layouts/overlay" %>
 
   <%= yield :tail %>
+
+  <script type="text/javascript">
+
+  // show login window for un-login user
+  $(function(){
+    if ($("#new_comment")) {
+      $("#new_comment").submit(function(event) {
+        <% if current_user -%>
+          return true;
+        <% else -%>
+          show_login();
+          return false;
+        <% end -%>
+      });
+    };
+    if ($("#new_faq")) {
+      $("#new_faq").submit(function(event) {
+        <% if current_user -%>
+          return true;
+        <% else -%>
+          show_login();
+          return false;
+        <% end -%>
+      });
+    };
+    if ($("#new_message")) {
+      $("#new_message").submit(function(event) {
+        <% if current_user -%>
+          return true;
+        <% else -%>
+          show_login();
+          return false;
+        <% end -%>
+      });
+    };
+  });
+  </script>
   <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 </body>
 </html>
