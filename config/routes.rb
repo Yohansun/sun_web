@@ -84,6 +84,7 @@ Icolor::Application.routes.draw do
   match "/suc_works" => "function#suc_works" #发布成功页面
   match "/token" => "function#token" #头像修改页面
   match "/design_zg" => "function#design_zg" #室内设计师从业资格权威认证考试安排
+  match "/design_zg2" => "function#design_zg2"
   match "/edm_week" => "function#edm_week" #一周未来提醒EDM
 
   #漆光异彩

@@ -13,6 +13,10 @@
             sel.bind('.level_1');
             sel.bind('.level_2');
         });
+        $(".slide_thumb").click(function(event) {
+         event.preventDefault();
+        $(".big_image img").attr("src", $(event.target).parent().attr("href"));
+        });
     </script>
 <%- end %>
 <div class="main page_weekstar page_weekstar_detail">
@@ -29,7 +33,13 @@
       <a href="#" class="fr upload_img_btn"></a>
     </div>
     <div class="weekstart_detail">
-      <div class="big_image"><img src="<%= asset_path "design/pc1.jpg"%>"/>
+      <div class="big_image">
+        <% if @design.cover_img -%>
+          <%= image_tag @design.cover_img.file.url(:slide) %>
+        <% end -%>
+        <a href="javascript:void(0)" class="pa db none">
+           <img src="<%= asset_path "personal/works_edit_del.jpg" %>" />
+        </a>
       </div>
       <div class="galleryB">
         <span class="moveleft"></span>
@@ -37,24 +47,11 @@
 
         <div class="list">
           <ul>
-            <li>
-              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
-            </li>
-            <li>
-              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
-            </li>
-            <li>
-              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
-            </li>
-            <li>
-              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
-            </li>
-            <li>
-              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
-            </li>
-            <li>
-              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
-            </li>
+            <% @design.design_images.each do |i| -%>
+              <li><%= link_to (image_tag i.file.url(:slide_thumb),
+                :alt => @design.title), i.file.url(:slide),
+                :title => @design.title, :class => "slide_thumb" %></li>
+            <% end -%>
           </ul>
         </div>
       </div>

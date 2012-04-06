@@ -1,51 +1,54 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag "industry_news","style" %>
-  <%= javascript_include_tag "galleryF" %>
+    <%= stylesheet_link_tag "industry_news", "style" %>
+    <%= javascript_include_tag "galleryF", "/Scripts/swfobject_modified.js" %>
 <% end -%>
-
 <div class="main industry_news">
   <div class='sub_title tr'>
-    <img src="<%= asset_path "design/title_news.png" %>" />
+    <img src="<%= asset_path "design/title_news.png"%>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">行业资讯</a><span class="arrow_2"></span><a class="fb" href="#">色彩趋势</a>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class="wrapper group color-trend">
     <div class="shadow">
       <div class="section">
         <div class="tit_bg"><h2>色彩趋势2012</h2><a href="#">下载手册</a></div>
         <div class="galleryF_wrap">
-          <div class="galleryF">
-            <div class="inner">
-              <dl><dt><a href="#">轻舞飞扬</a></dt>
-                <dd><img src="<%= asset_path "design/pj1.jpg" %>"/></dd>
-              </dl>
-              <dl class="contract"><dt><a href="#">芬芳土地</a></dt>
-                <dd><img src="<%= asset_path "design/pj2.jpg" %>"/></dd>
-              </dl>
-              <dl class="contract"><dt><a href="#">桃源水境</a></dt>
-                <dd><img src="<%= asset_path "design/pj3.jpg" %>"/></dd>
-              </dl>
-            </div>
-          </div>
+          <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="875" height="550">
+            <param name="movie" value="/flash/icolor_trend_1.swf"/>
+            <param name="quality" value="high"/>
+            <param name="wmode" value="opaque"/>
+            <param name="swfversion" value="6.0.65.0"/>
+            <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+            <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+            <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+            <!--[if !IE]>-->
+            <object type="application/x-shockwave-flash" data="/flash/icolor_trend_1.swf" width="875" height="550">
+              <!--<![endif]-->
+              <param name="quality" value="high"/>
+              <param name="wmode" value="opaque"/>
+              <param name="swfversion" value="6.0.65.0"/>
+              <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+              <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+              <div>
+                <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+                <p>
+                  <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33"/></a>
+                </p>
+              </div>
+              <!--[if !IE]>-->
+            </object>
+            <!--<![endif]-->
+          </object>
         </div>
       </div>
     </div>
   </div>
   <div class='sub_bot pr'>
     <div class="pager ft12">
-      <a class="prev" href="#"><span></span>上一页</a>
-      <a href="#">1</a>
-      <a href="#" class="current">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">7</a>
-      <a href="#">8</a>
-      <a href="#">...</a>
-      <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a>
     </div>
-  </div><!--sub_bot ends-->
+    <!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
 </div>

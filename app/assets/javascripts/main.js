@@ -145,7 +145,7 @@ $(function(){
 		else{}
 		$dot.eq(num).addClass('current').siblings().removeClass('current');
 	}
-//	var sliding=setInterval(RunSlide,speed);
+	var sliding=setInterval(RunSlide,speed);
 	$dot.click(function(){
 		var one = $dot.index(this);
 		if(one == 0)
@@ -318,24 +318,43 @@ $(function(){
 	},function(){
 		$(this).find('ul').hide();
 		});
-});
-/*faq_ask*/
-$(function(){
-	var id1 = '#input_span';
-	var id2 = '#textarea_span';
-	var id3 = '#service_span';
-	var id4 = '#ins_span';
 
-	$('.faq_text').keyup(function(){myfun(30,id1,$(this))});
-	$('.faqs_ask textarea').keyup(function(){tip(200,id2,$(this))});
-	$('.faqs_ask textarea').keyup(function(){tip(500,id3,$(this))});
-	$('textarea.works_details').keyup(function(){tip(400,id4,$(this))});
-	function tip(total,ids,element){
-		var len = element.val().length;
-		var rest = total-len;
-		$(ids).text(rest);
-	}
+/*faq_ask*/
+
+	makeTips('#textarea1',200,'#textarea_span','#textarea_overflow');
+	makeTips('.faq_text',30,'#input_span');
+	makeTips('#f_input',500,'#span6_2','#overflow6_2');
+	makeTips('#textarea6_3',500,'#span6_3','#overflow6_3');
+	makeTips('#textarea2',400,'#ins_span','#overflow_ins');
 });
+
+	function makeTips(str,sum,string1,string2)
+	{
+		$(str).keydown(function(){
+			tips($(this),sum,string1,string2);
+		}).keyup(function(){
+			tips($(this),sum,string1,string2);
+		});
+	}
+	function tips(element,total,span1,span2)
+	{
+		var len = element.val().length;
+		var $span1 = $(span1);
+		var $span2 = $(span2);
+		var rest = total - len;
+		if(rest<0)
+		{
+			$span1.hide();
+			rest = Math.abs(rest);
+			$span2.show().find('span').text(rest);
+		}
+		else
+		{
+			$span1.show().find('span').text(rest);
+			$span2.hide();
+		}
+	}
+
 /*regs*/
 /*
 $(function(){
@@ -451,6 +470,39 @@ function delete_row(element)
 	element.parents('tr').fadeOut();
 }
 /*upload tag*/
+$(function(){
+	$('div.tags a').click(function(){
+		var txt = $(this).text();
+		add_tag(txt)
+		});
+	$('input.add_tag_on').click(function(){
+		var txt = $('input.add_tag').val();
+		if(txt!='')
+		add_tag(txt)
+		});
+	del_tag();
+});
+function del_tag(){
+	$('a.labels img').click(function(){
+		$(this).parents('a.labels').remove();
+		});
+	}
+
+function add_tag(text){
+	var $list = $('div.tag_list');
+	var $a = $('div.tag_list a');
+	var arr = new Array();
+	$a.each(function(i){
+		arr.push($a.eq(i).text());
+		});
+	if(arr.indexOf(text)<0)
+	{
+		var $app = '<a href="javascript:void(0)" class="labels fl cr">'+text+'<img src="images/news/labels.png" /></a>';
+		$list.append($app);
+		del_tag();
+	}
+}
+/*reg2*/
 
 
 $(function(){
@@ -460,6 +512,11 @@ $(function(){
 		var num = $status.index(this);
 		$('.user_details').eq(num).show().siblings('.user_details').hide();
 	});
+
+/*big_img*/
+	$('.big_image').hover(function(){
+		$(this).children('.pa').toggle();
+	})
 
 			qin_slide('#qin_slide1 ');
 			qin_slide('#qin_slide2 ');

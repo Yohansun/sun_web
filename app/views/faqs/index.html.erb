@@ -1,69 +1,104 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag "news", "owners_channel" %>
+    <%= stylesheet_link_tag "news", "owners_channel" %>
 <% end -%>
+<%- content_for :tail do %>
+    <%= javascript_include_tag 'popupA' %>
+<%- end %>
 <div class="main">
   <div class='sub_title tr'>
-    <img src='<%= set_style[:pic_path] %>' />
+    <img src='<%= set_style[:pic_path] %>'/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="index.html">首页</a><span class="arrow_1"></span><a href="access.html">业主通道</a><span class="arrow_2"></span><a class="fb" href="#">装修问答</a>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class='wrapper'>
     <div class="faq_bar clear ft14">
       <p class="faq_title fl fb">标题<span>(共<%= @faqs.size %>条)</span></p>
       <p class="faq_num fl tc">回答数</p>
       <p class="faq_date tr fr">提问时间</p>
-    </div><!--faq_bar ends-->
+    </div>
+    <!--faq_bar ends-->
     <%- @faqs.each do |f| %>
-    <div class='faq_list clear ft14'>
-      <p class="faq_title fl"><a href="/faqs/<%= f.try(:id) %>"><%= f.try(:title) %></a></p>
-      <p class="faq_num fl tc"><%= f.comments_count %></p>
-      <p class="faq_date tr fr"><%= f.created_at.to_s(:db)[0..9] %></p>
-    </div><!--news_top ends-->
+        <div class='faq_list clear ft14'>
+          <p class="faq_title fl"><a href="/faqs/<%= f.try(:id) %>"><%= f.try(:title) %></a></p>
+          <p class="faq_num fl tc"><%= f.comments_count %></p>
+          <p class="faq_date tr fr"><%= f.created_at.to_s(:db)[0..9] %></p>
+        </div>
+        <!--news_top ends-->
     <%- end %>
     <div class="pag_container">
       <div class="pager ft12">
         <%= paginate @faqs %>
-      </div><!--pager ends-->
-    </div><!--pag_container ends-->
+      </div>
+      <!--pager ends-->
+    </div>
+    <!--pag_container ends-->
     <div class="weekly_tips ft12" id="weekly_tip_body">
       <%= render :partial => "weekly_tips" %>
-    </div><!--weekly_tips ends-->
+    </div>
+    <!--weekly_tips ends-->
     <div class="pag_container faq ft12 pr" id="weekly_tip_nav">
       <%= render :partial => "weekly_tips_nav" %>
-    </div><!--pag_container ends-->
-    <div class="owner_bar wauto">
-      <div class="faq_ask fb tc ft14">我要提问：</div>
-    </div><!--owner_bar ends-->
-    <div class="faqs_ask ft12 clear">
-      <%= form_for :faq, :url => faqs_path, :html => {:multipart => true, :id => 'new_faq'} do %>
-        <div>
-          <label for="title" class="fl ask_title">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</label>
-          <input type="text" class="fl faq_text ft14" maxlength="30" name="faq[title]">
-          <span class="fl">您还可以输入<span id="input_span">30</span>字</span>
-        </div>
-        <div>
-          <label for="upload" class="fl">上传图片：</label>
-          <%= file_field(:faq, :img, :class => "fl") %>
-        </div>
-        <div>
-          <label for="content" class="fl">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容：</label>
-          <textarea class="fl ft14" name="faq[content]"></textarea>
-          <span class="fl">您还可以输入<span id="textarea_span">200</span>字</span>
-        </div>
-        <div>
-          <label class="fl"></label>
-          <input type="image" src="<%= asset_path "news/submit.jpg" %>" class="fl faq_submit" />
-          <input type="reset" class="fl faq_reset" value="重置" />
-        </div>
+    </div>
+    <!--pag_container ends-->
+    <div class="owners_form formB">
+      <div class="title">
+        <h5>我要提问：</h5>
+      </div>
+      <div class="form_target">
+        <iframe id="upload_target" name="upload_target"></iframe>
+      </div>
+
+      <%= form_for :faq, :url => faqs_path, :html => { :multipart => true, :id => 'new_faq' } do %>
+          <table>
+            <tr class="f_title">
+              <th>标　　题：</th>
+              <td><input type="text" class="f_input" name="faq[title]"></td>
+            </tr>
+
+            <tr class="f_image">
+              <th>上传图片：</th>
+              <td> <%= file_field(:faq, :img, :class => "fl") %>
+              </td>
+            </tr>
+
+            <tr class="f_content">
+              <th>内　　容：</th>
+              <td><textarea class="f_input" id="f_input" name="faq[content]"></textarea>
+                <span id="span6_2">您还可以输入<span>500</span>字</span>
+                <span class="none" id="overflow6_2">您已经超出<span class="cr"></span>字</span>
+              </td>
+            </tr>
+
+            <tr class="f_submit">
+              <th>&nbsp;</th>
+              <td><input type="image" src="<%= asset_path "design/submitB.gif" %>" alt="提交" value="提交"/>
+                <input type="reset" class="reset" value="重置"/>
+              </td>
+            </tr>
+          </table>
       <%- end %>
-    </div><!--faqs_ask ends-->
-  </div><!--wrapper ends-->
+    </div>
+  </div>
+  <!--wrapper ends-->
+  <div class="popupA">
+    <div class="popupA_content popupA_middle">
+      <div class="popupA_title"><h4>提示</h4><span class="close"></span></div>
+      <div class="popupA_body">
+        <div class="success">提交成功！</div>
+        <div class="desc">我们将在3个工作日内对您的色彩需求给予答复，请留意系统消息。<br/>具体规则流程请查看 <a href="#">服务与介绍流程</a></div>
+        <div class="button"><input type="button" class="ok okA" value="确定"/></div>
+      </div>
+    </div>
+  </div>
+  <div class="popupA_mask"></div>
+</div>
 </div><!--main ends-->
 <script type="text/javascript">
-  function WeeklyTip(id) {
-    $.get("/faqs/get_weekly_tips", {id:id}, function(data) {
-      });
-  }
+    function WeeklyTip(id) {
+        $.get("/faqs/get_weekly_tips", {id:id}, function(data) {
+        });
+    }
 </script>
 
