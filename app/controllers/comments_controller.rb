@@ -8,6 +8,8 @@ class CommentsController < ApplicationController
       redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
     when 'Faq'
       redirect_to faq_path(@comment.commentable.id)
+    when 'Post'
+      redirect_to "/master_topics/#{@comment.commentable.id}"
     else
       redirect_to user_inspiration_path(@comment.commentable.user_id, @comment.commentable.id)
     end

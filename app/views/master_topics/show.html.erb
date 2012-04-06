@@ -42,7 +42,7 @@
           <div class="topic_tit">
             <h2>家居色彩与主人气质</h2>
 
-            <h3>时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：128次</span></h3>
+            <h3>时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：0次</span></h3>
           </div>
           <!--topic_tit ends-->
           <div class="topic_con">
@@ -57,101 +57,40 @@
         <div class="review_wrap">
           <div class="reviewform">
             <div class="bar">
-              <h4><span>评论</span>(86)</h4><span class="r">0/140</span>
+              <h4><span>评论</span>(<%= @topic.comments.size %>)</h4><span class="r">0/140</span>
             </div>
             <div class="form-content">
-              <form>
-                <p class="input">
-                  <textarea></textarea>
-                </p>
-                <p class="button">
-                  <input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交"/>
-                </p>
-              </form>
+              <%= form_for(Comment.new) do |f| %>
+                  <%= f.hidden_field :commentable_id, value: params[:id] %>
+                  <%= f.hidden_field :commentable_type, value: 'Post' %>
+                  <p class="input">
+                    <%= f.text_area :content %>
+                  </p>
+                  <p class="button">
+                    <!-- <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" /> -->
+                    <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
+                  </p>
+              <% end %>
             </div>
           </div>
           <div class="pager ft12">
-            <a class="prev" href="#"><span></span>上一页</a>
-            <a href="#">1</a>
-            <a href="#" class="current">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">...</a>
-            <a href="#">20</a>
-            <a class="next" href="#">下一页<span></span></a>
+            <%= paginate @comments %>
           </div>
           <div class="review_list">
             <ul class="review_listA">
-              <li>
-                <div class="bar">
-                  <span class="user">NEO</span><span class="time">2012-2-12</span>
-                </div>
-                <div class="reply">
-                  <a href="#">回复</a>
-                </div>
-                <div class="content">
-                  很好！非常好的工具！赞一个...
-                </div>
-              </li>
-              <li>
-                <div class="bar">
-                  <span class="user">NEO</span><span class="time">2012-2-12</span>
-                </div>
-                <div class="reply">
-                  <a href="#">回复</a>
-                </div>
-                <div class="content">
-                  很好！非常好的工具！赞一个...
-                </div>
-              </li>
-              <li>
-                <div class="bar">
-                  <span class="user">NEO</span><span class="time">2012-2-12</span>
-                </div>
-                <div class="reply">
-                  <a href="#">回复</a>
-                </div>
-                <div class="content">
-                  很好！非常好的工具！赞一个...
-                </div>
-              </li>
-              <li>
-                <div class="bar">
-                  <span class="user">NEO</span><span class="time">2012-2-12</span>
-                </div>
-                <div class="reply">
-                  <a href="#">回复</a>
-                </div>
-                <div class="content">
-                  很好！非常好的工具！赞一个...
-                </div>
-              </li>
-              <li>
-                <div class="bar">
-                  <span class="user">NEO</span><span class="time">2012-2-12</span>
-                </div>
-                <div class="reply">
-                  <a href="#">回复</a>
-                </div>
-                <div class="content">
-                  很好！非常好的工具！赞一个...
-                </div>
-              </li>
-              <li>
-                <div class="bar">
-                  <span class="user">NEO</span><span class="time">2012-2-12</span>
-                </div>
-                <div class="reply">
-                  <a href="#">回复</a>
-                </div>
-                <div class="content">
-                  很好！非常好的工具！赞一个...
-                </div>
-              </li>
+              <% @comments.each do |c| %>
+                  <li>
+                    <div class="bar">
+                      <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
+                    </div>
+                    <div class="reply">
+                      <a href="#">回复</a>
+                    </div>
+                    <div class="content">
+                      <%= c.content %>
+                    </div>
+                  </li>
+              <% end %>
             </ul>
           </div>
         </div>

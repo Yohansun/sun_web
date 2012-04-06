@@ -5,6 +5,7 @@ class MasterTopicsController < ApplicationController
     @topic = Post.find(params[:id])
     @prev_topic = get_topics.where("published_at < ?",@topic.published_at).first
     @next_topic = get_topics.where("published_at > ?",@topic.published_at).last
+    @comments = @topic.comments.page params[:page]
   end
 
   def get_topics
