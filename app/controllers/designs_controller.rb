@@ -10,15 +10,15 @@ class DesignsController < ApplicationController
     else
       @designs = Design.page params[:page], :per_page => 9
     end
-    
+
     unless @designs.nil?
       if params[:order] == "最热"
         @designs = @designs.order("votes_count desc")
       else
         @designs = @designs.order("created_at desc")
-      end 
+      end
     end
-        
+
   end
 
   def fullscreen
@@ -56,6 +56,20 @@ class DesignsController < ApplicationController
     else
       render :action => 'edit'
     end
+  end
+
+  def destroy
+    flash[:design] = params[:id]
+    current_user.designs.find(params[:id]).destroy
+    redirect_to :action => 'index'
+  end
+
+  def design_update
+    @design = current_user.designs.find(params[:id])
+    if params[:design] && @design.update_attributes(params[:design])
+      redirect_to :action => 'index' and return
+    end
+    render :template => "users/design_update"
   end
 
   private

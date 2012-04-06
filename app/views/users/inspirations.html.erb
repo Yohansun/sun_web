@@ -1,11 +1,15 @@
 <%- content_for :tail do %>
-<%= stylesheet_link_tag 'weekstar' %>
-<%= javascript_include_tag 'jquery.masonry' %>
-<script type="text/javascript">
-    $(window).load(function() {
-        $('#inspiration').masonry();
-    });
-</script>
+    <%= javascript_include_tag 'jquery.masonry' %>
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#inspiration').masonry();
+        });
+        $(function() {
+            $('.ins_box').hover(function() {
+                $(this).children('.host_ins_edit').toggle();
+            })
+        })
+    </script>
 <%- end %>
 <div class="main signup group">
   <div class="shadow signup_box">
@@ -18,9 +22,17 @@
           <div id="inspiration" class="row host_ins pb30 line_b_dot group">
             <%- @inspirations.each do |i| -%>
             <div>
+              <p class="ins_box">
+                <%- if current_user && current_user == @user %>
+                <span class="host_ins_edit">
+                  <%= link_to "编辑", inspiration_update_user_inspiration_path(current_user, i), class: "ins_img_edit" %>
+                  <%= link_to "删除", user_inspiration_path(current_user, i), :method => :delete, class: "ins_img_del" %>
+                </span>
+                <%- end %>
               <% if i.cover_img -%>
                 <%= link_to (image_tag i.cover_img.file.url(:inside), class: "host_ins_img"), inspiration_path(i) %>
               <% end -%>
+              </p>
               <h3><%= i.title %></h3>
               <p class="p1 group"> <strong class="ft14 fb"><%= i.votes_count %></strong> </p>
               <p class="p2 group"> <span class="zf ft12">转发 (<%= i.shares_count %>)</span><span class="pl ft12">评论 (<%= i.comments_count %>)</span> </p>

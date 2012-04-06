@@ -104,12 +104,14 @@ Icolor::Application.routes.draw do
       member do
         get :upload
         get :fullscreen
+        match :inspiration_update
       end
     end
     resources :designs do
       member do
         get :upload
         get :fullscreen
+        match :design_update
       end
     end
     resources :design_images

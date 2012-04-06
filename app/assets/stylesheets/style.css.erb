@@ -220,7 +220,10 @@ ul.design_filter .li_current a{color:#ffffff;}
 .upload_btn a{display:block; width:112px;background:url(<%= asset_path "design/upload_btn.png"%>) no-repeat right center; padding:8px; color:#000;font:16px "SimHei";}
 
 .design_result  ul.d_works{ overflow:hidden; padding:17px 0 0 4px;border-top:1px dotted #a09f9d;margin-top:8px;}
-.design_result  ul.d_works li{ float:left; width:291px;margin:0 4px; _display:inline;}
+.host_main .design_result  ul.d_works li{ position:relative;width:207px; *margin:0px 6px 0 0!important;}
+
+.design_result  ul.d_works li{ float:left; position:relative; width:291px;margin:0 4px; _display:inline;}
+
 .design_result h3{border-bottom:1px dotted #a09f9d; font:14px "Microsoft Yahei"; color:#313131; font-weight:bold;margin-top:10px; padding-bottom:7px;}
 .design_result p,.inspiration_result .row p{overflow:hidden; margin-top:5px; font-size:12px; color:#666; line-height:20px;}
 .design_result p strong,.design_result p span,.inspiration_result p strong,.inspiration_result .row p span{ float:left;color:#5c5c5c; padding-left:20px;display:block; margin-right:10px; line-height:18px;}
@@ -234,6 +237,14 @@ ul.design_filter .li_current a{color:#ffffff;}
 .color_design.design_result p.p2{ border:none;}
 .color_design.design_result p.p2 span.gzh{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -74px;width:auto;}
 
+/*popup zf*/
+.popup_zf{width:160px; position:absolute; left:15px; bottom:40px; background:#fff; padding:0!important; border:1px solid #f1f1f1;}
+.popup_zf span{float:left;font-size:12px; padding:5px!important;}
+.popup_zf a{ float:left; display:inline; width:16px; height:16px; background:url(<%= asset_path "master/icon_zf.png" %>) no-repeat; margin:5px 3px;}
+.popup_zf a.pupot_zf_qq{ background-position:left 0;}
+.popup_zf a.popup_zf_sina{ background-position:left -16px;}
+.popup_zf a.popup_zf_rr{ background-position:left -32px;}
+.popup_zf a.popup_zf_kaixin{ background-position:left -48px;}
 
 /*inspiration*/
 .inspiration_result{ overflow:hidden;border-top:1px dotted #a09f9d; padding-top:15px; margin-top:10px;}
@@ -597,7 +608,8 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 /*signup zige*/
 .main.color_signup_box h2{font:bold 14px "Microsoft Yahei";color:#171717; height:auto; width:auto; display:block;}
 .main.color_signup_box .wrapper .signup_con_box p{font:normal 12px/30px "Microsoft Yahei";color:#171717; margin:0 0 10px;}
-.main.color_signup_box .wrapper .signup_con_box p.design_zg_tips{ position:absolute; right:0; bottom:-30px;*bottom:-20px;font:normal 12px/18px "Microsoft Yahei";color:#967f56; background:#fffdf4; width:365px; padding:10px 15px; border:1px solid #dedede; border-radius:7px 7px 7px 7px;}
+.main.color_signup_box .wrapper .signup_con_box p.design_zg_tips{ position:absolute; right:0; bottom:-30px;*bottom:-20px;font:normal 12px/18px "Microsoft Yahei";color:#967f56; background:#fffdf4; min-width:365px; padding:10px 15px; border:1px solid #dedede; border-radius:7px 7px 7px 7px;}
+.design_zg_tips a{color:#967f56;}
 
 /**/
 .line_r{ border-right:1px dotted #dcdcdc;}
@@ -669,3 +681,8 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .master_story_l a{ width:100px;font:24px "Microsoft Yahei";color:#555557; margin-top:108px;}
 master_story_l_box{ width:230px;}
 .master_story_l2{ width:230px;border-top: 1px dotted #949494; padding-top:10px; margin-top:10px;font:16px/20px "Microsoft Yahei";color:#4c4d4f;}
+
+.lh32{line-height:32px;}
+.lh32 a{text-decoration:underline;color:#358ef2;font-weight:700;}
+
+#signature form.editable button{padding:0 5px}

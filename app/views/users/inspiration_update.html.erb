@@ -1,0 +1,82 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "weekstar" %>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 143px;
+        }
+
+        span.arrow_2 {
+            right: 77px;
+        }
+
+        .works_modify label {
+            width: 72px;
+        }
+    </style>
+<%- end %>
+<%- content_for :tail do %>
+   <script type="text/javascript">
+    $(".slide_thumb").click(function(event) {
+      event.preventDefault();
+      $(".big_image img").attr("src", $(event.target).parent().attr("href"));
+    });
+  </script>
+<%- end %>
+<div class="main page_weekstar page_weekstar_detail">
+  <div class='sub_title tr pt25'>
+    <img src="<%= asset_path "design/title_design.png"%>"/>
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">灵感秀</a>
+  </div>
+  <!--sub_nav ends-->
+  <div class="wrapper group">
+    <div class="weekstart_titleB works_modify_h2">
+      <h2 class="fl ft18 fb">编辑灵感秀</h2>
+      <a href="#" class="fr upload_img_btn"></a>
+    </div>
+    <div class="weekstart_detail">
+      <div class="big_image">
+       <% if @inspiration.cover_img -%>
+          <%= image_tag @inspiration.cover_img.file.url(:slide) %>
+        <% end -%>
+      </div>
+      <div class="galleryB">
+        <span class="moveleft"></span>
+        <span class="moveright"></span>
+
+        <div class="list">
+          <ul>
+            <% @inspiration.design_images.each do |i| -%>
+              <li><%= link_to (image_tag i.file.url(:slide_thumb),
+                :alt => @inspiration.title), i.file.url(:slide),
+                :title => @inspiration.title, :class => 'slide_thumb' %></li>
+            <% end -%>
+          </ul>
+        </div>
+      </div>
+      <%= javascript_include_tag  "galleryB"  %>
+      <%= form_for @inspiration, :url => inspiration_update_user_inspiration_path(current_user, @inspiration) do |f| %>
+      <div class="border_bottom works_modify">
+        <div class="clear">
+          <label for="works_name">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</label>
+          <%= f.text_field :title %>
+        </div>
+        <div class="clear">
+          <label for="works_info">灵感启发：</label>
+           <%= f.text_area :content %>
+        </div>
+        <p class="tc">
+          <input type="image" src="<%= asset_path "personal/works_save.jpg"%>"/>
+          <a href="#"><img src="<%= asset_path "personal/works_cancel.jpg"%>"/></a>
+        </p>
+      </div>
+      <%- end %>
+      <!--border_bottom ends-->
+    </div>
+    <!--weekstart_detail ends-->
+  </div>
+  <!--wrapper ends-->
+  <div class='sub_bot pr'></div>
+  <!--sub_bot ends-->
+</div><!--main ends-->

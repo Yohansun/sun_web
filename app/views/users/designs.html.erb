@@ -1,11 +1,18 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'reg' %>
-  <%= javascript_include_tag 'jquery.masonry.js' %>
-  <script type="text/javascript">
-    $(function() {
-      $('#inspiration').masonry();
-    });
-  </script>
+    <%= stylesheet_link_tag 'reg' %>
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag 'jquery.masonry.js' %>
+    <script type="text/javascript">
+        $(function() {
+            $('#inspiration').masonry();
+        });
+        $(function() {
+            $('.works_box').hover(function() {
+                $(this).children('.host_works_edit').toggle();
+            })
+        })
+    </script>
 <%- end %>
 <div class="main signup group">
   <div class="shadow signup_box">
@@ -18,9 +25,14 @@
           <% @designs.in_groups_of(4, false).each do |group| -%>
           <ul class="d_works group">
             <% group.each do |design| -%>
-            <li>
+            <li id="<%= design.id%>">
+              <div class="works_box">
+              <%- if current_user && current_user == @user %>
+                <div class="host_works_edit none"><%= link_to "编辑", design_update_user_design_path(current_user, design), class: "works_img_edit" %><%= link_to "删除", user_design_path(current_user, design), :method => :delete, class: "works_img_del" %></div>
+              <%- end %>
               <%= link_to image_tag(design.cover_img.file.url(:list), class: 'host_works_img'),
                 user_design_path(@user, design) if design.cover_img %>
+              </div>
               <h3><%= design.title %></h3>
               <p class="p1 group">
                 <strong class="ft14 fb">当前票数：<%= design.votes_count %></strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>

@@ -1,0 +1,103 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "weekstar" %>
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+    <script type="text/javascript">
+        $(function() {
+            var options = {
+                data  : data
+            }
+
+            var sel = new LinkageSelect(options);
+            sel.bind('.level_1');
+            sel.bind('.level_2');
+        });
+    </script>
+<%- end %>
+<div class="main page_weekstar page_weekstar_detail">
+  <div class='sub_title tr pt25'>
+    <img src="<%= asset_path "design/title_design.png"%>"/>
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">每周之星</a>
+  </div>
+  <!--sub_nav ends-->
+  <div class="wrapper group">
+    <div class="weekstart_titleB works_modify_h2">
+      <h2 class="fl ft18 fb">编辑作品</h2>
+      <a href="#" class="fr upload_img_btn"></a>
+    </div>
+    <div class="weekstart_detail">
+      <div class="big_image"><img src="<%= asset_path "design/pc1.jpg"%>"/>
+      </div>
+      <div class="galleryB">
+        <span class="moveleft"></span>
+        <span class="moveright"></span>
+
+        <div class="list">
+          <ul>
+            <li>
+              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
+            </li>
+            <li>
+              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
+            </li>
+            <li>
+              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
+            </li>
+            <li>
+              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
+            </li>
+            <li>
+              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
+            </li>
+            <li>
+              <a href="#"><img src="<%= asset_path "design/pb7.jpg"%>"/></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <%= javascript_include_tag  "galleryB"  %>
+      <%= form_for @design, :url => design_update_user_design_path(current_user, @design) do |f| %>
+      <div class="border_bottom works_modify">
+        <div class="clear">
+          <label for="labels" id="label">标签</label>
+          <input type="text" value="装修,环保,简约"/>
+          <span class="ft12">请输入标签，多个请用逗号或空格分开</span>
+        </div>
+        <div class="clear">
+          <label for="works_name">作品名称：</label>
+          <%= f.text_field :title %>
+        </div>
+        <div class="clear">
+          <label for="works_style">风格：</label>
+          <%= f.select :style, options_for_select(["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"],@design.style) %>
+        </div>
+        <div class="clear">
+          <label for="works_model">户型：</label>
+          <%= f.select :room_type, options_for_select(["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"],@design.room_type) %>
+        </div>
+        <div class="clear">
+          <label for="works_city">作品建筑所属城市：</label>
+          <select id="province" class="level_1 arrow_filter"></select>
+          <select id="city" class="level_2 arrow_filter" name="area_id" onchange="filter()"></select>
+        </div>
+        <div class="clear">
+          <label for="works_info">作品描述：</label>
+          <%= f.text_area :content %>
+        </div>
+        <p class="tc">
+          <input type="image" src="<%= asset_path "personal/works_save.jpg"%>"/>
+          <a href="#"><img src="<%= asset_path "personal/works_cancel.jpg"%>"/></a>
+        </p>
+      </div>
+      <%- end %>
+      <!--border_bottom ends-->
+     </div>
+    <!--weekstart_detail ends-->
+  </div>
+  <!--wrapper ends-->
+  <div class='sub_bot pr'></div>
+  <!--sub_bot ends-->
+</div><!--main ends-->

@@ -1,5 +1,6 @@
 <%- content_for :tail do %>
 <%= javascript_include_tag "jquery.jeditable" %>
+
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
   $("#signature").editable('/users/<%= @user.id %>/update_user_signature', {
@@ -11,6 +12,7 @@ $(document).ready(function() {
     select : true,
     submit : '修改',
     cancel : '取消',
+    height : '23px',
     cssclass : "editable",
     tooltip : '点击修改',
     id : 'id',

@@ -3,20 +3,20 @@ class InspirationsController < ApplicationController
   before_filter :find_user
   before_filter :find_inspiration, :only => [:upload, :edit]
 
-  def index	  
-	  
-  	if @user
+  def index
+
+    if @user
       @inspirations = @user.inspirations.page params[:page]
-    	render :template => "users/inspirations"
+      render :template => "users/inspirations"
     else
       @inspirations = Inspiration.page params[:page]
     end
 
     unless @inspirations.nil?
       if params[:order] == "最热"
-	      @inspirations = @inspirations.order("votes_count desc")
+        @inspirations = @inspirations.order("votes_count desc")
       else
-	      @inspirations = @inspirations.order("created_at desc")
+        @inspirations = @inspirations.order("created_at desc")
       end
     end
   end
@@ -27,28 +27,28 @@ class InspirationsController < ApplicationController
   end
 
   def show
-  	@inspiration = Inspiration.find(params[:id])
-    @comments = @inspiration.comments.page params[:page]
+    @inspiration = Inspiration.find(params[:id])
+    @comments    = @inspiration.comments.page params[:page]
   end
 
   def new
-  	@inspiration = current_user.inspirations.new
+    @inspiration = current_user.inspirations.new
   end
 
   def create
-  	@inspiration = current_user.inspirations.build(params[:inspiration])
-  	if @inspiration.save
-  		redirect_to upload_user_inspiration_path(current_user, @inspiration)
-  	else
-  		render :action => 'new'
-  	end
+    @inspiration = current_user.inspirations.build(params[:inspiration])
+    if @inspiration.save
+      redirect_to upload_user_inspiration_path(current_user, @inspiration)
+    else
+      render :action => 'new'
+    end
   end
 
   def update
     @inspiration = current_user.inspirations.find(params[:id])
     if @inspiration.update_attributes(params[:inspiration])
       if params[:cover_image]
-        image = @inspiration.design_images.find(params[:cover_image])
+        image          = @inspiration.design_images.find(params[:cover_image])
         image.is_cover = true
         image.save
       end
@@ -56,6 +56,20 @@ class InspirationsController < ApplicationController
     else
       render :action => 'edit'
     end
+  end
+
+  def destroy
+    flash[:inspiration] = params[:id]
+    current_user.inspirations.find(params[:id]).destroy
+    redirect_to :action => 'index'
+  end
+
+  def inspiration_update
+    @inspiration = current_user.inspirations.find(params[:id])
+    if params[:inspiration] && @inspiration.update_attributes(params[:inspiration])
+      redirect_to :action => 'index' and return
+    end
+    render :template => "users/inspiration_update"
   end
 
   private

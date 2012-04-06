@@ -1,5 +1,41 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "style" %>
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+    <script type="text/javascript">
+        $(function() {
+            var options = {
+                data  : data
+            }
+
+            var sel = new LinkageSelect(options);
+            sel.bind('.level_1');
+            sel.bind('.level_2');
+        });
+
+        function filter() {
+        var style = $("#style").val()
+        var room_type = $("#room_type").val()
+        var city = $("#city").val()
+        $.post(" /users/username_check", {style:style,room_type:room_type,city:city}, function(message) {
+            if (message != "") {
+                alert(message);
+            }
+        });
+    }
+    </script>
+
+    <script type="text/javascript">
+	$(function(){
+		$('span.zf').hover(function(){
+			$(this).parent('.p2').siblings('span.popup_zf').toggle();
+		})
+		$('span.popup_zf').hover(function(){
+			$(this).toggle();
+		})
+	})
+    </script>
 <%- end %>
 <div class="main">
 <div class='sub_title tr pt25'>
@@ -19,27 +55,14 @@
     <a href="/designs?order=<%= URI.escape('最热')%>">最热</a>
     </li>
     <li>
-      <!--<a href="#">风格</a>-->
-      <select class="arrow_filter li_current">
-        <option>现代简约</option>
-        <option>中式新古典</option>
-        <option>欧式复古</option>
-        <option>田园地中海</option>
-        <option>其他</option>
-      </select>
+      <%= select_tag "style",options_for_select(["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"]), class: "arrow_filter li_current", :onchange => "filter()" %>
     </li>
     <li>
-      <!--<a href="#">户型</a>-->
-      <select class="arrow_filter">
-        <option>户型</option>
-      </select>
+      <%= select_tag "room_type",options_for_select(["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"]), class: "arrow_filter", :onchange => "filter()" %>
     </li>
     <li>
-      <!--<a href="#">城市</a>-->
-      <select class="arrow_filter">
-        <option>城市</option>
-      </select>
-
+      <select id="province" class="level_1 arrow_filter"></select>
+      <select id="city" class="level_2 arrow_filter" name="area_id" onchange="filter()"></select>
     </li>
   </ul>
   <div class="upload_btn">
@@ -63,9 +86,10 @@
         <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => design.id, :voteable_type => "Design"), :remote => true, :method => 'post' %>
       </p>
 
-      <p class="p2 group">
+      <p class="p2 p2_popup_zf group">
         <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
       </p>
+      <span class="popup_zf group none"><span>一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></span>
 
       <p>
         公司：<%= design.user.name_of_company %>
