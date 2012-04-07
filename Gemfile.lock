@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:nioteam/magic_content.git
-  revision: f2e3d31e35b9ffd64d4fc85425a693f5dd9956d6
+  revision: 7d2670f4c838ec337016cb1eec5863d59dfef7d7
   specs:
     magic_content (0.0.1)
       acts-as-taggable-on

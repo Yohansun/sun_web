@@ -11,16 +11,12 @@
   <!--sub_nav ends-->
   <div class='wrapper'>
     <div class="owner_map clear">
-      <!--img src="<%= asset_path "news/owner_map.jpg"%>" /-->
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map1.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map2.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map3.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map4.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map5.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map6.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map7.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map8.jpg"%>"/></a>
-      <a href="#"><img src="<%= asset_path "news/maps/owner_map9.jpg"%>"/></a>
+      <% if MagicSetting.promote_designers -%>
+      <% MagicSetting.promote_designers.split(",").each do |user_id| -%>
+        <% user = User.find(user_id.to_i) rescue nil -%>
+        <%= link_to image_tag(user.avatar.file.url(:access_wall)), user_path(user) if user %>
+      <% end -%>
+      <% end -%>
     </div>
     <!--owner_map ends-->
     <div class="owner_bar ft12 clear">
