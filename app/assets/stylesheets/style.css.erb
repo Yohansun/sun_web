@@ -236,11 +236,20 @@ ul.design_filter .li_current a{color:#ffffff;}
 .color_design.design_result li{ padding-bottom:15px;}
 .color_design.design_result p.p2{ border:none;}
 .color_design.design_result p.p2 span.gzh{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -74px;width:auto;}
+/*design act list*/
+.d_act_list .section{ padding-bottom:20px;}
+.d_act_list .event_desc h2.tl{font:bold 18px/24px "Microsoft Yahei";color:#c00404; padding:10px 0;}
+.d_act_list .event_desc span{font:normal 14px/24px "Microsoft Yahei";color:#6d6d6d;}
+.d_act_list .dec_list{ overflow:hidden; padding-bottom:20px;}
+.d_act_list .dec_list h3,.d_act_list .dec_list p{ width:560px;}
+.d_act_list .dec_list p{font:normal 12px/18px "Microsoft Yahei";color:#6c6c6c; height:86px;}
+.d_act_list .dec_list h3{font:bold 18px/24px "Microsoft Yahei";color:#c00404; padding-bottom:5px;}
+.d_act_list .dec_list a{ margin-left:25px;}
 
 /*popup zf*/
-.popup_zf{width:160px; position:absolute; left:15px; bottom:40px; background:#fff; padding:0!important; border:1px solid #f1f1f1;}
-.popup_zf span{float:left;font-size:12px; padding:5px!important;}
-.popup_zf a{ float:left; display:inline; width:16px; height:16px; background:url(<%= asset_path "master/icon_zf.png" %>) no-repeat; margin:5px 3px;}
+.popup_zf{width:160px; position:absolute; left:15px; bottom:40px;*bottom:45px!important; _bottom:50px; background:#fff; padding:5px 0!important; border:1px solid #f1f1f1;}
+.popup_zf span{float:left;font-size:12px; padding:3px 5px!important;}
+.popup_zf a{ float:left; display:inline; width:16px; height:16px; background:url(<%= asset_path "master/icon_zf.png" %>) no-repeat; margin:0px 3px;}
 .popup_zf a.pupot_zf_qq{ background-position:left 0;}
 .popup_zf a.popup_zf_sina{ background-position:left -16px;}
 .popup_zf a.popup_zf_rr{ background-position:left -32px;}
@@ -501,6 +510,28 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .shanghai_station .shanghai_bg .shanghai_p5{ padding:40px 295px 20px 65px;}
 .shanghai_station .shanghai_bg .shanghai_p6{ padding:66px 50px 10px 360px;}
 .shanghai_station .shanghai_bg .shanghai_p7{ padding:1px 50px 20px 360px;}
+/*beijing_station*/
+.act_beijing .section{ background:#fefaef;}
+.act_beijing p{ padding:10px 40px; text-indent:30px;font:14px/20px "Microsoft Yahei"; color:#666666;}
+.act_beijing p.line_b_dot { padding:20px 0; margin:0 45px 20px; text-align:left; text-indent:0; text-align:center;}
+.act_beijing p.line_b_dot img,.beijing_b img,.chengdu_b img{padding:3px; margin:0 4px; border:1px solid #ccc; background:#fff;}
+.act_beijing div.beijing_question{ padding:10px 0;margin:10px 45px; border:1px solid #dedbd1; border-radius:10px;box-shadow:0px 0px 10px -4px rgba(72,72,72,1); background:#fff;}
+.act_beijing div.beijing_question h2{ padding:10px 20px;font:16px "Microsoft Yahei"; color:#000;}
+.act_beijing div.beijing_question h3{ padding:10px 40px 0;font:14px "Microsoft Yahei"; color:#bb0b0b; background:url(<%= asset_path "master/question_mark_icon.png"%>) no-repeat 20px 12px;}
+.act_beijing div.beijing_question p{ text-indent:0; background:url(<%= asset_path "master/interview_icon.png"%>) no-repeat 20px 12px; border-bottom:1px dotted #ccc;}
+
+.beijing_b{ overflow:hidden; padding:10px 45px 10px 0;}
+.beijing_b p{ float:left; width:580px; padding:5px 0 5px 40px;}
+.beijing_b img{ margin-top:10px;}
+/*chengdu_station*/
+.chengdu_con,.chengdu_con2{ margin:0 45px; padding:20px 0;}
+.chengdu_con h3{font:18px "Microsoft Yahei"; color:#000; width:570px;}
+.chengdu_con p,.chengdu_con2 p{padding:10px 0 0px; font:14px "Microsoft Yahei"; color:#666666;}
+.beijing_b.chengdu_con p{width:570px;padding:10px 0 0px;}
+.chengdu_con img,.chengdu_con2 img{ margin:0;}
+.beijing_b.chengdu_con2 img{float:left; margin:0;}
+.beijing_b.chengdu_con2 h3,.beijing_b.chengdu_con2 p{float:right; width:545px; padding:0;}
+.beijing_b.chengdu_con2 p{ padding:5px 0;}
 /*big_kv_n(d_act)*/
 .wrapper.big_kv_n{ padding:35px 45px 45px 43px;}
 .big_kv_n .big_kv_bg { width:905px; height:1428px; background:url(<%= asset_path "big_bg/4.2_bg.png"%>) no-repeat center top}
