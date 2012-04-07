@@ -153,5 +153,5 @@ Icolor::Application.routes.draw do
   resources :mix_colors
   
   #认证考试
-  resources :approve
+  resources :approves
 end
