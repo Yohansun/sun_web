@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120406140158) do
+ActiveRecord::Schema.define(:version => 20120407073130) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -136,12 +136,15 @@ ActiveRecord::Schema.define(:version => 20120406140158) do
     t.text     "recommend_reason"
     t.integer  "subject_id"
     t.datetime "published_at"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "main_preview_img_file_name"
     t.string   "main_preview_img_content_type"
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
+    t.integer  "votes_count",                   :default => 0
+    t.integer  "shares_count",                  :default => 0
+    t.integer  "comments_count",                :default => 0
   end
 
   create_table "comments", :force => true do |t|
@@ -355,6 +358,17 @@ ActiveRecord::Schema.define(:version => 20120406140158) do
     t.text     "content"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "mix_colors", :force => true do |t|
+    t.text     "description"
+    t.string   "mix_color_img_file_name"
+    t.string   "mix_color_img_content_type"
+    t.integer  "mix_color_img_file_size"
+    t.datetime "mix_color_img_updated_at"
+    t.integer  "user_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "pages", :force => true do |t|

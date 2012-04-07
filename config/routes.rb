@@ -149,4 +149,9 @@ Icolor::Application.routes.draw do
   mount MagicContent::Engine => '/admin/content', :as => 'magic_content'
   mount MagicAdmin::Engine => '/admin', :as => 'magic_admin'
 
+  #在线配色
+  resources :mix_colors
+  
+  #认证考试
+  resources :approve
 end
