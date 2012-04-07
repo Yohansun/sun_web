@@ -134,7 +134,7 @@ $window.ready(function(){
 	};
 	
 	var $top2 = $('#top2');
-	var $weekly_star = $('#weekly_star');
+	var $weekly_star = $('#weekly_stars');
 	var $afflatus_showcase = $('#afflatus_showcase');
 	var $recommended_works = $('#recommended_works');
 	

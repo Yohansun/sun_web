@@ -12,6 +12,8 @@ class CommentsController < ApplicationController
       redirect_to "/master_topics/#{@comment.commentable.id}"
     when 'ColorDesign'
       redirect_to "/color_designs/#{@comment.commentable.id}"
+    when 'WeeklyStar'
+     redirect_to "/weekly_stars/#{@comment.commentable.id}"
     when 'Inspiration'
       redirect_to user_inspiration_path(@comment.commentable.user_id, @comment.commentable.id)
     else

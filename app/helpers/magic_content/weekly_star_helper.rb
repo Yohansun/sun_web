@@ -1,0 +1,2 @@
+module MagicContent::WeeklyStarHelper
+end

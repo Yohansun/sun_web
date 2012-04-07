@@ -15,3 +15,4 @@ Subject.create(:name => "大师设计作品", :slug => "master_designs", :conten
 Subject.create(:name => "大师访谈", :slug => "master_profile", :content_type => "MasterProfile")
 Subject.create(:name => "大师热点话题", :slug => "master_topics", :content_type => "Post")
 Subject.create(:name => "色彩搭配", :slug => "color_designs", :content_type => "ColorDesign")
+Subject.create(:name => "每周之星", :slug => "weekly_stars", :content_type => "WeeklyStar")

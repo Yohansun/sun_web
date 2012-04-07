@@ -64,6 +64,7 @@ Icolor::Application.routes.draw do
   resources :comments
   match "/color_designs" => "color_designs#index"
   match "/color_designs/:id" => "color_designs#show"
+  match "/color_designs/:id/fullscreen" => "color_designs#fullscreen"
 
   #精彩活动
   match "/events" => "events#index"
@@ -118,11 +119,6 @@ Icolor::Application.routes.draw do
         match :design_update
       end
     end
-    resources :color_designs do
-      member do
-        get :fullscreen
-      end
-    end
     resources :design_images
     resources :messages
     resources :site_messages
@@ -140,9 +136,11 @@ Icolor::Application.routes.draw do
       resources :weekly_tips
       resources :master_designs
       resources :color_designs
+      resources :weekly_stars
     end
     resources :master_design_uploads
     resources :color_design_uploads
+    resources :weekly_star_uploads
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }

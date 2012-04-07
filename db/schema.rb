@@ -10,8 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-
-ActiveRecord::Schema.define(:version => 20120407100916) do
+ActiveRecord::Schema.define(:version => 20120407093714) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -565,6 +564,43 @@ ActiveRecord::Schema.define(:version => 20120407100916) do
     t.string   "ip"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "weekly_star_uploads", :force => true do |t|
+    t.integer  "weekly_star_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "weekly_stars", :force => true do |t|
+    t.string   "design_name"
+    t.string   "author"
+    t.string   "author_url"
+    t.string   "company_name"
+    t.string   "company_url"
+    t.string   "company_address"
+    t.string   "project_name"
+    t.text     "design_intro"
+    t.text     "design_material"
+    t.text     "recommend_reason"
+    t.string   "design_style"
+    t.string   "design_color"
+    t.string   "design_usage"
+    t.integer  "votes_count",                   :default => 0
+    t.integer  "comments_count",                :default => 0
+    t.integer  "shares_count",                  :default => 0
+    t.integer  "subject_id"
+    t.datetime "published_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.string   "main_preview_img_file_name"
+    t.string   "main_preview_img_content_type"
+    t.integer  "main_preview_img_file_size"
+    t.datetime "main_preview_img_updated_at"
   end
 
   create_table "weekly_tips", :force => true do |t|

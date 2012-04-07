@@ -1,0 +1,6 @@
+<div class="upload" id="weekly_star_upload_<%= upload.id %>">
+    <%= image_tag upload.file.url(:thumb) %>
+    <%= hidden_field_tag 'weekly_stars[weekly_star_upload_ids][]', upload.id %>
+
+    <%= link_to_function "移除", "$('#weekly_star_upload_#{upload.id}').remove();" %>
+</div>
