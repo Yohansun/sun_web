@@ -583,6 +583,7 @@ tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
 application.js: application-f33933b286c31ca3dec108aadafd676e.js
+approves.js: approves-80148e5c7e5b7899f916a93118e72fbd.js
 articles.js: articles-80148e5c7e5b7899f916a93118e72fbd.js
 channel.js: channel-80148e5c7e5b7899f916a93118e72fbd.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
@@ -606,8 +607,8 @@ galleryM.js: galleryM-6ce9bb0e65ee15680728c1038614d86b.js
 galleryN.js: galleryN-ae9bf4dc14a00a6bfa746404b7a3cf0a.js
 galleryO.js: galleryO-7f9894b21781b6c2e42c5f74c608fb76.js
 home.js: home-80148e5c7e5b7899f916a93118e72fbd.js
-index.js: index-8540b9f2af4475132bf5207aa2adbf58.js
-index3.js: index3-c3b199894379540c2ee9673b57ae382b.js
+index.js: index-d3a99a6705b02105c18589f8df701f4c.js
+index3.js: index3-ae2ce4ea292e42a6af62d211d1862f53.js
 industry_news.js: industry_news-80148e5c7e5b7899f916a93118e72fbd.js
 inspirations.js: inspirations-80148e5c7e5b7899f916a93118e72fbd.js
 jquery.datepicker.js: jquery.datepicker-a53110ff547379235c4334a90056aef4.js
@@ -617,12 +618,15 @@ jquery.rating.js: jquery.rating-72aa83e8fc3d15dc538e5bc378d6cb9f.js
 jquery.uploadify.js: jquery.uploadify-5776e4be420e977ad6b511e6cc9b781b.js
 magic_content/color_designs.js: magic_content/color_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
+magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
+magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
 maillists.js: maillists-80148e5c7e5b7899f916a93118e72fbd.js
 main.js: main-22c333e6bc09605350c3307e01b2a352.js
 master_designs.js: master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 master_interviews.js: master_interviews-80148e5c7e5b7899f916a93118e72fbd.js
 master_topics.js: master_topics-80148e5c7e5b7899f916a93118e72fbd.js
 messages.js: messages-80148e5c7e5b7899f916a93118e72fbd.js
+mix_colors.js: mix_colors-80148e5c7e5b7899f916a93118e72fbd.js
 myfocus.js: myfocus-ec5eef3789cdfc31040c82377a68d078.js
 other_events.js: other_events-80148e5c7e5b7899f916a93118e72fbd.js
 owners_channel_upload_form.js: owners_channel_upload_form-669da4cc1c4c046605fa916615ca622b.js
@@ -637,6 +641,7 @@ users.js: users-80148e5c7e5b7899f916a93118e72fbd.js
 votes.js: votes-80148e5c7e5b7899f916a93118e72fbd.js
 weekly_stars.js: weekly_stars-80148e5c7e5b7899f916a93118e72fbd.js
 application.css: application-acb16f1a479f29a897d5563821d7582c.css
+approves.css: approves-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 articles.css: articles-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 base.css: base-a017e7c43cdade802188a51a6a5c375c.css
 channel.css: channel-95bd4fe1de99c1cd91ec8e6f348a44bd.css
@@ -661,11 +666,14 @@ jDatepicker.css: jDatepicker-2df7dba092a481ac73a2f6afbaf3c6e3.css
 jquery.rating.css: jquery.rating-923d0702dc605a2ab80b82a3885ed4e0.css
 magic_content/color_designs.css: magic_content/color_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/master_designs.css: magic_content/master_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
+magic_content/weekly_star.css: magic_content/weekly_star-95bd4fe1de99c1cd91ec8e6f348a44bd.css
+magic_content/weekly_star_uploads.css: magic_content/weekly_star_uploads-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 maillists.css: maillists-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 master_designs.css: master_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 master_interviews.css: master_interviews-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 master_topics.css: master_topics-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 messages.css: messages-95bd4fe1de99c1cd91ec8e6f348a44bd.css
+mix_colors.css: mix_colors-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 news.css: news-88e57b33bb6e67ffd9a74bd2be4b1c70.css
 other_events.css: other_events-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
