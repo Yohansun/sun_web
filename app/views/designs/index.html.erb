@@ -4,37 +4,24 @@
 <%- content_for :tail do %>
     <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
     <script type="text/javascript">
-        $(function() {
-            var options = {
-                data  : data
-            }
+    $(function() {
+      var options = {
+        data  : data
+      }
 
-            var sel = new LinkageSelect(options);
-            sel.bind('.level_1');
-            sel.bind('.level_2');
-        });
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1');
+      sel.bind('.level_2');
 
-        function filter() {
-        var style = $("#style").val()
-        var room_type = $("#room_type").val()
-        var city = $("#city").val()
-        $.post(" /users/username_check", {style:style,room_type:room_type,city:city}, function(message) {
-            if (message != "") {
-                alert(message);
-            }
-        });
-    }
-    </script>
+      $('span.zf').hover(function(){
+        $(this).parent('.p2').siblings('span.popup_zf').toggle();
+      });
 
-    <script type="text/javascript">
-	$(function(){
-		$('span.zf').hover(function(){
-			$(this).parent('.p2').siblings('span.popup_zf').toggle();
-		})
-		$('span.popup_zf').hover(function(){
-			$(this).toggle();
-		})
-	})
+      $('span.popup_zf').hover(function(){
+        $(this).toggle();
+      });
+
+    });
     </script>
 <%- end %>
 <div class="main">
@@ -48,6 +35,7 @@
 <div class='wrapper pb60 group'>
 <div class="design_tit group">
   <ul class="design_filter group">
+    <form method="get" id="filter_form">
     <li class=<%="#{'li_current' if params[:order] == '最新' }" %> >
     <a href="/designs?order=<%= URI.escape('最新')%>">最新</a>
     </li>
@@ -55,15 +43,16 @@
     <a href="/designs?order=<%= URI.escape('最热')%>">最热</a>
     </li>
     <li>
-      <%= select_tag "style",options_for_select(["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"]), class: "arrow_filter li_current", :onchange => "filter()" %>
+      <%= select_tag "style",options_for_select(["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"]), class: "arrow_filter li_current", :onchange => "$('#filter_form').submit()", :include_blank => true %>
     </li>
     <li>
-      <%= select_tag "room_type",options_for_select(["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"]), class: "arrow_filter", :onchange => "filter()" %>
+      <%= select_tag "room_type",options_for_select(["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"]), class: "arrow_filter", :onchange => "$('#filter_form').submit()", :include_blank => true %>
     </li>
     <li>
       <select id="province" class="level_1 arrow_filter"></select>
-      <select id="city" class="level_2 arrow_filter" name="area_id" onchange="filter()"></select>
+      <select id="city" class="level_2 arrow_filter" name="area_id" onchange="$('#filter_form').submit()"></select>
     </li>
+    </form>
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
