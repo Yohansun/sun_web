@@ -43,10 +43,10 @@
     <!--owner_bar ends-->
     <div class="owner clear">
       <% @design_users.each do |user| %>
-      <img src="<%= user.avatar.try(:file).try(:url) %>" class="fl" />
+      <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl" />
       <div class="owner_center fl ft12">
         <span class="owner_name fl fb ft14"><%= user.display_name %></span>
-        <span class="owner_city fl">(<%= user.city.name %>)</span>
+        <span class="owner_city fl">(<%= user.city.try(:name) %>)</span>
 		    <%= link_to "进入主页", user_path(user), :class => "fl" %>
         <div class="owner_info fl pr">
           <span></span>
