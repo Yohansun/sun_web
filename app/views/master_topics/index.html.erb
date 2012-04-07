@@ -23,7 +23,7 @@
                   <div class="fl">
                     <h3><a href="/master_topics/<%= topic.id %>" >小户型空间细节设计全案</a></h3>
                     <div class="h3_sub group">
-                      <span>时间：<%= topic.published_at.to_formatted_s(:db) %></span><span class="zf">转发(0)</span><span class="pl">评论(<%= topic.comments.size%>)</span>
+                      <span>时间：<%= topic.published_at.to_formatted_s(:db) %></span><span class="zf">转发(0)</span><span class="pl">评论(<%= topic.comments.legnth%>)</span>
                     </div>
                     <div class="hot_topic_main group">
                       <%= image_tag topic.preview_img.url(:original) if topic.preview_img %>

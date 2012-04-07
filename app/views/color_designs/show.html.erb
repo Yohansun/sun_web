@@ -1,425 +1,137 @@
-<%- content_for :head do %>
-  <%= stylesheet_link_tag "style", "weekstar" %>
-  <%= javascript_include_tag "uncompressed.jquery.dd" %>
-<%- end %>
+<% content_for :head do -%>
+    <%= stylesheet_link_tag 'weekstar' %>
+<% end -%>
+<% content_for :tail do -%>
+    <%= javascript_include_tag 'galleryB.js' %>
+    <script type="text/javascript">
+        $(".slide_thumb").click(function(event) {
+            event.preventDefault();
+            $(".big_image img").attr("src", $(event.target).parent().attr("href"));
+        });
+    </script>
+<% end -%>
 <div class="main page_weekstar page_weekstar_detail">
   <div class='sub_title tr pt25'>
-    <img src="<%= asset_path "design/title_design.png"%>" />
+    <img src="<%= asset_path "design/title_design.png" %>" />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">色彩搭配</a>
+    <a href="/">首页</a><span class="arrow_1"></span><a href="/color_designs">色彩搭配</a>
   </div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleB">
-      <h1>现代简约白色卧室</h1>
+      <h1><%= @design.design_name %></h1>
       <div class="subtitle">
+        <div class="votes">
+          所获票数：<span id="votes_count<%= @design.id%>"><%= @design.votes_count %></span>
+          <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
+        </div>
         <div class="operate">
-          <span class="like">286</span>
-          <span class="forward">转发 (124)</span>
-          <span class="review">评论 (86)</span>
+          <span class="forward">转发 (0)</span>
+          <span class="review">评论 (<%= @design.comments.length %>)</span>
         </div>
       </div>
       <div class="fullscreen_btn">
-        <a href="#">全屏观看</a>
+        <%= link_to "全屏观看", fullscreen_user_color_design_path(@design) %>
       </div>
     </div>
     <div class="weekstart_detail">
       <div class="big_image">
-        <img src="<%= asset_path "design/pc1.jpg"%>" />
+        <% if @design.main_preview_img -%>
+            <%= image_tag @design.main_preview_img.url(:slide) %>
+        <% end -%>
       </div>
-      <div class="color-picker" style="padding-top:0px;">
-        <div class="color">
-          <div class="palettes">
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-          </div>
-          <!--[if IE 6]>
-          <script type="text/javascript">
-              if ($.browser.msie && $.browser.version < 7) {
-                  $(function() {
-                      $('div.palette').hover(function() {
-                          $(this).find('div.desc').show();
-                      }, function() {
-                          $(this).find('div.desc').hide();
-                      });
-                  })
-              }
-          </script>
-          <![endif]-->
-<div class="gotaobao"><a href="#">访立邦淘宝商城，点选更多产品颜色</a></div>
+      <div class="galleryB">
+        <span class="moveleft"></span>
+        <span class="moveright"></span>
+        <div class="list">
+          <ul>
+            <% @design.color_design_uploads.each do |i| -%>
+                <li><%= link_to (image_tag i.file.url(:slide_thumb),
+                                           :alt => @design.design_name), i.file.url(:slide),
+                                :title => @design.design_name, :class => "slide_thumb" %></li>
+            <%- end -%>
+          </ul>
         </div>
       </div>
       <div class="properties">
-        <table class="propertyA th_bold">
-          <tr>
-            <th>风格：</th>
-            <td>田园</td>
+        <div class="tags">
+          <h5>标签</h5>
+          <ul>
+            <% @tags.each do |tag| %>
+                <li><%= link_to tag.name, "/articles?tags=#{URI.escape(tag.name)}" %></li>
+            <% end %>
+          </ul>
+        </div>
+        <table class="propertyA">
+          <tr><th>公司名称：</th>
+            <td><%= @design.company_name %><a href="<%=@design.company_url%>">[进入公司主页]</a></td>
           </tr>
-          <tr>
-            <th>功能区：</th>
-            <td>卧室</td>
+          <tr><th>公司地址：</th>
+            <td><%= @design.company_address %></td>
           </tr>
-          <tr>
-            <th>色系：</th>
-            <td>红色系</td>
+          <tr><th>设计师：</th>
+            <td><%=  @design.author %><a href="<%= @design.author_url %>">[进入个人主页]</a></td>
           </tr>
-          <tr>
-            <th>推荐色：</th>
-            <td>激情岁月8740-2</td>
+          <tr><th>项目名称：</th>
+            <td><%= @design.project_name %></td>
           </tr>
-          <tr>
-            <th>配搭理念：</th>
-            <td>书房是心灵的港湾，营造清雅宁静的读书环境是设计师们首要的目标，利用轻柔的绿色系，给人舒缓放松的环境，仿佛置身于自然环境之中，思绪如潮。</td>
+          <tr><th>设计风格：</th>
+            <td><%= @design.design_style %></td>
+          </tr>
+          <tr><th>设计说明：</th>
+            <td><%= @design.design_intro %></td>
+          </tr>
+          <tr><th>主要材料：</th>
+            <td><%= @design.design_material %></td>
+          </tr>
+          <tr><th>推荐理由：</th>
+            <td><%= @design.recommend_reason %></td>
           </tr>
         </table>
       </div>
       <div class="review_wrap">
         <div class="reviewform">
           <div class="bar">
-            <h4><span>评论</span>(86)</h4><span class="r">0/140</span>
+            <h4><span>评论</span>(<%= @design.comments.length%>)</h4><span class="r">0/140</span>
           </div>
           <div class="form-content">
-            <form>
-              <p class="input">
-              <textarea></textarea>
-              </p><p class="button">
-              <input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交" />
-              </p>
-            </form>
+            <%= form_for(Comment.new) do |f| %>
+                <%= f.hidden_field :commentable_id, value: params[:id] %>
+                <%= f.hidden_field :commentable_type, value: 'ColorDesign' %>
+                <p class="input">
+                  <%= f.text_area :content %>
+                </p>
+                <p class="button">
+                  <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
+                </p>
+            <% end %>
           </div>
         </div>
         <div class="pager ft12">
-          <a class="prev" href="#"><span></span>上一页</a>
-          <a href="#">1</a>
-          <a href="#" class="current">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">7</a>
-          <a href="#">8</a>
-          <a href="#">...</a>
-          <a href="#">20</a>
-          <a class="next" href="#">下一页<span></span></a>
+          <%- unless @comments.nil? %>
+            <%= paginate @comments %>
+          <%- end %>
         </div>
         <div class="review_list">
           <ul class="review_listA">
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
-            <li>
-            <div class="bar">
-              <span class="user">NEO</span><span class="time">2012-2-12</span>
-            </div>
-            <div class="reply">
-              <a href="#">回复</a>
-            </div>
-            <div class="content">
-              很好！非常好的工具！赞一个...
-            </div>
-            </li>
+            <% @comments.each do |c| %>
+                <li>
+                  <div class="bar">
+                    <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
+                  </div>
+                  <div class="reply">
+                    <a href="#">回复</a>
+                  </div>
+                  <div class="content">
+                    <%= c.content %>
+                  </div>
+                </li>
+            <% end %>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class='sub_bot pr'></div><!--sub_bot ends-->
+  <div class='sub_bot pr'>
+  </div>
 </div>

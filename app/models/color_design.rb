@@ -8,7 +8,7 @@ class ColorDesign < ActiveRecord::Base
   has_many :votes, :as => :voteable
 
   attr_accessor :time
-  has_attached_file :main_preview_img, :styles => { :thumb => "80x80#", :slide => "550x365#"},
+  has_attached_file :main_preview_img, :styles => { :thumb => "80x80#", :slide => "888x590>", :index => "291x315#"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
@@ -21,4 +21,5 @@ class ColorDesign < ActiveRecord::Base
   def self.usage_select
     ['客厅','餐厅','厨房','卫生间','书房','儿童房','阳台','门厅','储物间','其他']
   end
+
 end

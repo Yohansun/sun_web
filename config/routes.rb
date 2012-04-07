@@ -64,7 +64,6 @@ Icolor::Application.routes.draw do
   resources :comments
   match "/color_designs" => "color_designs#index"
   match "/color_designs/:id" => "color_designs#show"
-  match "/color_designs/:id/fullscreen" => "color_designs#fullscreen"
 
   #精彩活动
   match "/events" => "events#index"
@@ -112,6 +111,11 @@ Icolor::Application.routes.draw do
         get :upload
         get :fullscreen
         match :design_update
+      end
+    end
+    resources :color_designs do
+      member do
+        get :fullscreen
       end
     end
     resources :design_images

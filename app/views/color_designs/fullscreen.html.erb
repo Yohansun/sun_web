@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>幻灯片</title>
+    <meta charset="utf-8" />
+    <%= stylesheet_link_tag  "reset", "galleryc"  %>
+    <%= javascript_include_tag  "jquery","galleryC"  %>
+  </head>
+  <body>
+    <div class="galleryC_wrap">
+      <div class="title"><h1><%= @design.design_name %><span>(1/<%= @design.color_design_uploads.size %>)</span></h1></div>
+      <div class="galleryC">
+        <div class="toolbar">
+          <div class="toolbar_wrap">
+            <div class="time"><span>10秒</span></div>
+            <div class="prev"></div>
+            <div class="pause"></div>
+            <div class="next"></div>
+            <div class="exit"><%= link_to "退出全屏", user_color_design_path(@design) %></div>
+          </div>
+        </div>
+        <div class="big_image"></div>
+        <div class="moveleft"></div>
+        <div class="moveright"></div>
+      </div>
+    </div>
+    <div class="gallery_over_wrap">
+      <div class="gallery_over">
+        <h5 class="legend">您已浏览完所有图片</h5>
+        <div class="button"><span class="replay"><a href="#">重新播放</a></span></div>
+      </div>
+    </div>
+    <div class="gallery_over_mask"></div>
+    <script type="text/javascript">
+      $(function(){
+          var obj = galleryC({ 'images' : [<%= @design.color_design_uploads.map{ |design| "'#{design.file.url(:fullscreen)}'" }.join(",") %>]});
+          $('div.gallery_over span.replay a').click(function(e){
+            $('div.gallery_over_wrap').hide();
+            $('div.gallery_over_mask').hide();
+            obj.showImage(0);
+            e.preventDefault();
+            });
+          });
+    </script>
+    </body>
+</html>
