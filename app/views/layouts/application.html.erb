@@ -1,151 +1,157 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>iColor</title>
-    <%= csrf_meta_tag %>
-    <%= stylesheet_link_tag  "application"  %>
-    <%= javascript_include_tag  "application"  %>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>iColor</title>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
 
-    <!--所有的个人主页都加载style.css -->
-    <%- if params[:user_id] %>
-      <%= stylesheet_link_tag  "style"  %>
-    <%- end %>
-    <%= yield  :head %>
-    <!--[if IE 6]>
-    <script src="/png.js"></script>
-    <script>
+  <!--所有的个人主页都加载style.css -->
+  <%- if params[:user_id] %>
+      <%= stylesheet_link_tag "style" %>
+  <%- end %>
+  <%= yield :head %>
+  <!--[if IE 6]>
+  <script src="/png.js"></script>
+  <script>
       PNG.fix('img,div,a,ul,li,h2,strong,span,p');
-    </script>
-    <![endif]-->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#new_user').bind('ajax:error', function(xhr, status, error) {
+  </script>
+  <![endif]-->
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $('#new_user').bind('ajax:error', function (xhr, status, error) {
               err_in();
-            });
-        });
-    </script>
-    <script type="text/javascript" charset="utf-8">
-  		var jiathis_config = {
-  		    boldNum:4,
-  		    siteNum:4,
-  		    showClose:false,
-  		    sm:"kaixin001,renren,tsina,tqq",
-  		    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-  		    imageWidth:26,
-  		    marginTop:150,
-  		    url:"http://www.icolor.com.cn",
-  		    title:"#icolor#",
-  		    summary:"一个你不容错过的网站，更多精彩装修案例、灵感家装图片，尽在---立邦iColor网，还有好礼相送哦！",
-    		  data_track_clickback: true
-  		}
-    </script>
-  </head>
-  <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/%>">
-    <div class="header">
-      <div class="nav pa">
-        <div class="logo">
-          <a href="/"><%= image_tag "logo.png" %></a>
-          <a href="/"><%= image_tag "logo2.png" %></a>
-        </div>
-        <div class="navTop fr">
-          <%- if user_signed_in? %>
-            <a href="<%= user_path(current_user) %>" class="user_info fl">
-             <strong><%= current_user.display_name %></strong> 我的主页<%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
-             </a>
-          <%- end %>
-          <a href="#" class="weibo fl"></a>
-        <!-- <div class="search fl">
+          });
+      });
+  </script>
+  <script type="text/javascript" charset="utf-8">
+      var jiathis_config = {
+          boldNum:4,
+          siteNum:4,
+          showClose:false,
+          sm:"kaixin001,renren,tsina,tqq",
+          imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+          imageWidth:26,
+          marginTop:150,
+          url:"http://www.icolor.com.cn",
+          title:"#icolor#",
+          summary:"一个你不容错过的网站，更多精彩装修案例、灵感家装图片，尽在---立邦iColor网，还有好礼相送哦！",
+          data_track_clickback:true
+      }
+  </script>
+</head>
+<body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/ %>">
+<div class="header">
+  <div class="nav pa">
+    <div class="logo">
+      <a href="/"><%= image_tag "logo.png" %></a>
+      <a href="/"><%= image_tag "logo2.png" %></a>
+    </div>
+    <div class="navTop fr">
+      <%- if user_signed_in? %>
+          <a href="<%= user_path(current_user) %>" class="user_info fl">
+            <strong><%= current_user.display_name %></strong>
+            我的主页<%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
+          </a>
+      <%- end %>
+      <a href="#" class="weibo fl"></a>
+      <!-- <div class="search fl">
           <form action="#" method="get">
             <input type="text" class="fl" value="Search" />
             <input type="image" src="<%= asset_path("search-icon.jpg") %>" />
           </form>
         </div> -->
-        <!--search ends-->
-        <div class="navLabel fl ft12">
-          <a href="http://shop.nipponpaint.com.cn/" target="_blank">立邦网上商城</a> |
-          <a href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
-          <a href="javascript:void(0)" class="jiathis_btn">分享</a>
-          <!-- JiaThis Button BEGIN -->
-          <div id="ckepop" class="jiathis_area none">
-            <span class="jiathis_txt">一键分享：</span>
-            <a class="jiathis_button_tsina"></a>
-            <a class="jiathis_button_kaixin001"></a>
-            <a class="jiathis_button_renren"></a>
-            <a class="jiathis_button_qzone"></a>
-            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-            <a class="jiathis_counter_style"></a>
-          </div>
-          <!-- JiaThis Button END -->
-        </div><!--navLabel ends-->
-        <%- unless user_signed_in? %>
+      <!--search ends-->
+      <div class="navLabel fl ft12">
+        <a href="http://shop.nipponpaint.com.cn/" target="_blank">立邦网上商城</a> |
+        <a href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
+        <a href="javascript:void(0)" class="jiathis_btn">分享</a>
+        <!-- JiaThis Button BEGIN -->
+        <div id="ckepop" class="jiathis_area none">
+          <span class="jiathis_txt">一键分享：</span>
+          <a class="jiathis_button_tsina"></a>
+          <a class="jiathis_button_kaixin001"></a>
+          <a class="jiathis_button_renren"></a>
+          <a class="jiathis_button_qzone"></a>
+          <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+          <a class="jiathis_counter_style"></a>
+        </div>
+        <!-- JiaThis Button END -->
+      </div>
+      <!--navLabel ends-->
+      <%- unless user_signed_in? %>
           <a href="#" class="login fl"></a>
           <a href="/users/sign_up" class="reg fl"></a>
-        <%- end %>
-        <a href="/" class="nippon fl"></a>
-      </div><!--navTop ends-->
-      <ul class="navBot fr cw fb ft14">
-        <li><a href="/">首页</a></li>
-        <li class="pr"><a href="/master_interviews">大师殿堂</a>
+      <%- end %>
+      <a href="/" class="nippon fl"></a>
+    </div>
+    <!--navTop ends-->
+    <ul class="navBot fr cw fb ft14">
+      <li><a href="/">首页</a></li>
+      <li class="pr"><a href="/master_interviews">大师殿堂</a>
         <ul>
           <li><a href="/master_interviews">大师访谈</a></li>
-          <li><a  href="/master_topics">热点话题</a></li>
+          <li><a href="/master_topics">热点话题</a></li>
           <li class="noborder"><a href="/master_designs">大师作品</a></li>
         </ul>
-        </li>
-        <li class="pr"><a href="/weekly_stars">设计鉴赏</a>
+      </li>
+      <li class="pr"><a href="/weekly_stars">设计鉴赏</a>
         <ul>
           <li><a href="/weekly_stars">每周之星</a></li>
-          <li><a  href="/designs">推荐作品</a></li>
-          <li><a  href="/inspirations">灵感秀</a></li>
+          <li><a href="/designs">推荐作品</a></li>
+          <li><a href="/inspirations">灵感秀</a></li>
           <li class="noborder"><a href="/color_designs">色彩搭配</a></li>
         </ul>
-        </li>
-        <li class="pr"><a href="/color_articles">行业资讯</a>
+      </li>
+      <li class="pr"><a href="/color_articles">行业资讯</a>
         <ul>
           <li><a href="/color_articles">色彩资讯</a></li>
-          <li><a  href="/articles">装修资讯</a></li>
+          <li><a href="/articles">装修资讯</a></li>
           <li class="noborder"><a href="http://weibo.com/npicolor">微博资讯</a></li>
         </ul>
-        </li>
-        <li class="pr"><a href="/events">精彩活动</a>
+      </li>
+      <li class="pr"><a href="/events">精彩活动</a>
         <ul class="w_nav1">
           <li><a href="/events">年度色彩趋势活动</a></li>
-          <li><a  href="/designer_events">设计师活动</a></li>
+          <li><a href="/designer_events">设计师活动</a></li>
           <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
         </ul>
-        </li>
-        <li class="pr"><a href="/softwares/tools">实用工具</a>
+      </li>
+      <li class="pr"><a href="/softwares/tools">实用工具</a>
         <ul class="w_nav2">
           <li><a href="/softwares/tools">配色工具</a></li>
           <li class="noborder"><a href="/softwares/app">设计师APP</a></li>
         </ul>
-        </li>
-        <li class="pr"><a href="/channel/access">业主通道</a>
+      </li>
+      <li class="pr"><a href="/channel/access">业主通道</a>
         <ul class="w_nav3">
           <li><a href="/channel/access">片区快查</a></li>
-          <li><a  href="/faqs">装修问答</a></li>
+          <li><a href="/faqs">装修问答</a></li>
           <li class="noborder"><a href="/channel/service">在线配色服务</a></li>
         </ul>
-        </li>
-        <li class="noborder pr"><a href="/7-2">漆光艺彩</a>
+      </li>
+      <li class="noborder pr"><a href="/7-2">漆光艺彩</a>
         <ul class="w_nav4">
           <li><a href="/7-2">墙面艺术效果</a></li>
           <li class="noborder"><a href="#">木纹风尚生活</a></li>
         </ul>
-        </li>
-      </ul><!--navBot ends-->
-    </div><!--nav ends-->
+      </li>
+    </ul>
+    <!--navBot ends-->
+  </div>
+  <!--nav ends-->
 
-    <%= yield  :index %><!--仅仅首页的-->
+  <%= yield :index %><!--仅仅首页的-->
 
-    <div class="loginBg pa none">
-      <div class="err_tips cr ft12 none pa">
-        用户名或密码错误
-        <span class="fr cp">x</span>
-      </div><!--err_tips-->
-      <div class="loginCon ft12 clear">
-        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
+  <div class="loginBg pa none">
+    <div class="err_tips cr ft12 none pa">
+      用户名或密码错误
+      <span class="fr cp">x</span>
+    </div>
+    <!--err_tips-->
+    <div class="loginCon ft12 clear">
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
           <div>
             <label for="username" class="username ft14 fl">帐号：</label>
             <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
@@ -155,171 +161,247 @@
             <input id="password" type="password" class="fl" name="user[password]"/>
             <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
           </div>
-          <input id="login" type="image" src="<%= asset_path "login.jpg" %>" />
-          <div class="checkbox fl">
-            <input type="checkbox" /><span>下次自动登录</span>
-          </div>
-        <%- end %>
-      </div><!--loginCon ends-->
-      <ul class="loginCon ft12 border clear">
-        <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>" />新浪微博</a></li>
-        <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>" />QQ</a></li>
-        <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>" />人人网</a></li>
-        <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>" />开心网</a></li>
-      </ul>
-      <div class="loginCon ft12 border clear">
-        <p class="fl">还没加入iColor?</p>
-        <a href="/users/sign_up" class="reg_now fl"></a>
-      </div><!--loginCon ends-->
-      <div class="loginCon border">
-        <a href="/users/sign_up"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads" /></a>
-      </div>
-    </div><!--loginBg ends-->
-  </div>
-  <!--header ends-->
+          <input id="login" type="image" src="<%= asset_path "login.jpg" %>"/>
 
-  <div class="server_area">
-    <a href="javascript:void(0)" class="server fr"></a>
-      <div class="server_input none">
-    <%= form_tag site_messages_path, :remote => true do %>
+          <div class="checkbox fl">
+            <input type="checkbox"/><span>下次自动登录</span>
+          </div>
+      <%- end %>
+    </div>
+    <!--loginCon ends-->
+    <ul class="loginCon ft12 border clear">
+      <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>"/>新浪微博</a></li>
+      <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>"/>QQ</a></li>
+      <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>"/>人人网</a></li>
+      <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>"/>开心网</a></li>
+    </ul>
+    <div class="loginCon ft12 border clear">
+      <p class="fl">还没加入iColor?</p>
+      <a href="/users/sign_up" class="reg_now fl"></a>
+    </div>
+    <!--loginCon ends-->
+    <div class="loginCon border">
+      <a href="/users/sign_up"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
+    </div>
+  </div>
+  <!--loginBg ends-->
+</div>
+<!--header ends-->
+
+<div class="server_area">
+  <a href="javascript:void(0)" class="server fr"></a>
+
+  <div class="server_input none">
+    <%= form_tag site_messages_path, :id => "new_site_message", :remote => true do %>
         <div class="server_content ft14 tc fb">
-          亲爱的会员您好！请问您有什么需要咨询？<br />
-          <span class="ft12">您可以给我们留言，我们会通过系统消息对您的留言给予答复；<br />
-          您也可以发送邮件至icolor@nipponpaint.com.cn，<br />
+          亲爱的会员您好！请问您有什么需要咨询？<br/>
+          <span class="ft12">您可以给我们留言，我们会通过系统消息对您的留言给予答复；<br/>
+          您也可以发送邮件至icolor@nipponpaint.com.cn，<br/>
           我们也将尽快回复给您！</span>
           <textarea name="site_message[desc]"></textarea>
           <span class="server_check none">请输入您要咨询的内容。</span>
-        </div><!--server_content ends-->
+        </div>
+        <!--server_content ends-->
         <p class="subs_submit tc">
-        <input type="image" src="<%= asset_path "submit_btn.jpg" %>" id="server_submit" />
+          <input type="image" src="<%= asset_path "submit_btn.jpg" %>" id="server_submit"/>
         </p>
     <%- end %>
-      </div><!--server_input ends-->
-    <div class="server_suc none">
-      <div class="server_content ft14 tc">
-        <img src="<%= asset_path "server_suc.jpg" %>" />
-        <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
-      </div><!--server_content ends-->
-      <p class="subs_submit tc">
-      <input type="image" src="<%= asset_path "submit_btn.jpg" %>" id="server_close" />
-      </p>
-    </div><!--server_suc ends-->
-  </div><!--server_area ends-->
+  </div>
+  <!--server_input ends-->
+  <div class="server_suc none">
+    <div class="server_content ft14 tc">
+      <img src="<%= asset_path "server_suc.jpg" %>"/>
 
-  <%= yield %>
+      <p>我们将在3个工作日内对您的留言给予答复，请留意<a href="#" class="fb cr">系统消息</a>。</p>
+    </div>
+    <!--server_content ends-->
+    <p class="subs_submit tc">
+      <input type="image" src="<%= asset_path "submit_btn.jpg" %>" id="server_close"/>
+    </p>
+  </div>
+  <!--server_suc ends-->
+</div>
+<!--server_area ends-->
 
-  <div class='footer <%= 'mt50' if controller_name =~ /contact|function|designer_events|other_events/ %>'>
-    <div class='links'>
-      <div class='w_995'>
-        <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" alt="" /></a>
-        <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.png" %>" alt="" /></a>
-        <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.png" %>" alt="" /></a>
-        <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.png" %>" alt="" /></a>
-        <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.png" %>" alt="" /></a>
-        <a href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" alt="" /></a>
-        <a href='#'><img src='<%= asset_path "link7.png" %>' alt="" /></a>
-	    <a href='#'><img src='<%= asset_path "link8.png" %>' alt="" /></a>
-      </div><!--w_995 ends-->
-    </div><!--links ends-->
-    <div class='bot_map w_995 ft12 clear'>
-      <div class="inner">
-        <ul>
-          <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
-          <li><a href="/master_interviews">大师访谈</a></li>
-          <li><a href="/master_topics">热点话题</a></li>
-          <li><a href="/master_designs">大师作品</a></li>
-        </ul>
-        <ul>
-          <li><a href="/designs" class='fb'>设计鉴赏</a></li>
-          <li><a href="/weekly_stars">每周之星</a></li>
-          <li><a href="/designs">推荐作品</a></li>
-          <li><a href="/inspirations">灵感秀</a></li>
-          <li><a href="/color_designs">色彩搭配</a></li>
-        </ul>
-        <ul>
-          <li><a href="#" class='fb'>行业资讯</a></li>
-          <li><a href="/articles">装修资讯</a></li>
-          <li><a href="#">色彩资讯</a></li>
-          <li><a href="#">微博资讯</a></li>
-        </ul>
-        <ul>
-          <li><a href="#" class='fb'>精彩活动</a></li>
-          <li><a href="#">年度色彩趋势活动</a></li>
-          <li><a href="/events">设计师活动</a></li>
-          <li><a href="#">其他精彩活动</a></li>
-        </ul>
-        <ul>
-          <li><a href="/softwares/case" class='fb'>实用工具</a></li>
-          <li><a href="/softwares/tools">配色工具</a></li>
-          <li><a href="/softwares/app">设计师APP</a></li>
-        </ul>
-        <ul>
-          <li>
+<%= yield %>
+
+<div class='footer <%= 'mt50' if controller_name =~ /contact|function|designer_events|other_events/ %>'>
+  <div class='links'>
+    <div class='w_995'>
+      <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" alt=""/></a>
+      <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.png" %>" alt=""/></a>
+      <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.png" %>" alt=""/></a>
+      <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.png" %>" alt=""/></a>
+      <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.png" %>" alt=""/></a>
+      <a href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" alt=""/></a>
+      <a href='#'><img src='<%= asset_path "link7.png" %>' alt=""/></a>
+      <a href='#'><img src='<%= asset_path "link8.png" %>' alt=""/></a>
+    </div>
+    <!--w_995 ends-->
+  </div>
+  <!--links ends-->
+  <div class='bot_map w_995 ft12 clear'>
+    <div class="inner">
+      <ul>
+        <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
+        <li><a href="/master_interviews">大师访谈</a></li>
+        <li><a href="/master_topics">热点话题</a></li>
+        <li><a href="/master_designs">大师作品</a></li>
+      </ul>
+      <ul>
+        <li><a href="/designs" class='fb'>设计鉴赏</a></li>
+        <li><a href="/weekly_stars">每周之星</a></li>
+        <li><a href="/designs">推荐作品</a></li>
+        <li><a href="/inspirations">灵感秀</a></li>
+        <li><a href="/color_designs">色彩搭配</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" class='fb'>行业资讯</a></li>
+        <li><a href="/articles">装修资讯</a></li>
+        <li><a href="#">色彩资讯</a></li>
+        <li><a href="#">微博资讯</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" class='fb'>精彩活动</a></li>
+        <li><a href="#">年度色彩趋势活动</a></li>
+        <li><a href="/events">设计师活动</a></li>
+        <li><a href="#">其他精彩活动</a></li>
+      </ul>
+      <ul>
+        <li><a href="/softwares/case" class='fb'>实用工具</a></li>
+        <li><a href="/softwares/tools">配色工具</a></li>
+        <li><a href="/softwares/app">设计师APP</a></li>
+      </ul>
+      <ul>
+        <li>
           <a href="#" class='fb'>业主通道</a>
-          </li>
-          <li><a href="/channel/access">片区快查</a></li>
-          <li><a href="/faqs">装修问答</a></li>
-          <li><a href="/channel/service">在线配色服务</a></li>
-        </ul>
-        <ul class="ul_last">
-          <li><a href="#" class='fb'>漆光艺彩</a></li>
-          <li><a href="#">墙面艺术效果</a></li>
-          <li><a href="#">木纹风尚生活</a></li>
-        </ul>
-      </div>
-    </div><!--bot_map ends-->
-    <div class='copyright ft12'>
-      <div class='w_995'>
-        <a href='http://shop.nipponpaint.com.cn/'>立邦官网</a> |
-        <a href='#'>联系我们</a> |
-        <a href='#'>会员机制</a> |
-        <a href='#'>网上商城</a> |
-        <a href='#'>网站声明</a>
-        <p>Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
-      </div><!--w_995 ends-->
-    </div><!--copyright ends-->
-  </div><!--footer ends-->
+        </li>
+        <li><a href="/channel/access">片区快查</a></li>
+        <li><a href="/faqs">装修问答</a></li>
+        <li><a href="/channel/service">在线配色服务</a></li>
+      </ul>
+      <ul class="ul_last">
+        <li><a href="#" class='fb'>漆光艺彩</a></li>
+        <li><a href="#">墙面艺术效果</a></li>
+        <li><a href="#">木纹风尚生活</a></li>
+      </ul>
+    </div>
+  </div>
+  <!--bot_map ends-->
+  <div class='copyright ft12'>
+    <div class='w_995'>
+      <a href='http://shop.nipponpaint.com.cn/'>立邦官网</a> |
+      <a href='#'>联系我们</a> |
+      <a href='#'>会员机制</a> |
+      <a href='#'>网上商城</a> |
+      <a href='#'>网站声明</a>
 
-  <%= render :partial => "layouts/overlay" %>
+      <p>Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
+    </div>
+    <!--w_995 ends-->
+  </div>
+  <!--copyright ends-->
+</div>
+<!--footer ends-->
 
-  <%= yield :tail %>
+<%= render :partial => "layouts/overlay" %>
 
-  <script type="text/javascript">
+<%= yield :tail %>
 
-  // show login window for un-login user
-  $(function(){
-    if ($("#new_comment")) {
-      $("#new_comment").submit(function(event) {
-        <% if current_user -%>
-          return true;
-        <% else -%>
-          show_login();
-          return false;
-        <% end -%>
-      });
-    };
-    if ($("#new_faq")) {
-      $("#new_faq").submit(function(event) {
-        <% if current_user -%>
-          return true;
-        <% else -%>
-          show_login();
-          return false;
-        <% end -%>
-      });
-    };
-    if ($("#new_message")) {
-      $("#new_message").submit(function(event) {
-        <% if current_user -%>
-          return true;
-        <% else -%>
-          show_login();
-          return false;
-        <% end -%>
-      });
-    };
-  });
-  </script>
-  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    // show login window for un-login user
+    $(function () {
+        if ($("#new_comment")) {
+            $("#new_comment").submit(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($("#new_faq")) {
+            $("#new_faq").submit(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($("#new_site_message")) {
+            $("#new_site_message").submit(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($("#channel_service")) {
+            $("#channel_service").submit(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($("#channel_access")) {
+            $("#channel_access").click(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($(".designer_events")) {
+            $(".designer_events").click(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($(".one_key_forward")) {
+            $(".one_key_forward").click(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+        if ($(".one_key_share")) {
+            $(".one_key_share").click(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+    });
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 </body>
 </html>
