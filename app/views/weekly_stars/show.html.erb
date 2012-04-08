@@ -10,11 +10,19 @@
 </div>
 <!--sub_nav ends-->
 <div class="wrapper group">
+<%- if @design == WeeklyStar.last %>
+    <div class="weekstart_titleC">
+      <a href="/weekly_stars/<%= @design.id %>"><h1>本周<b>之星</b><p>STAR OF THIS WEEK</p></h1></a>
+      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %>全屏观看</div>
+    </div>
+<%- else %>
 <div class="weekstart_titleA">
   <div class="subtitle"><%= @design.try(:published_at).try(:to_date) %> 往期作品</div>
-  <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %>全屏观看</a></div>
+  <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show" %>全屏观看</a></div>
   <h1><%= @design.design_name  %></h1>
 </div>
+<%- end %>
+
 <div class="weekstart_detail">
 <div class="gallery">
   <span class="moveleft"></span>

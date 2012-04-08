@@ -16,7 +16,7 @@
         <div class="prev"></div>
         <div class="pause"></div>
         <div class="next"></div>
-        <%- if action_name == "show" %>
+        <%- if params[:action_from] == "action_show" %>
             <div class="exit"><%= link_to "退出全屏", "/weekly_stars/#{@design.id}" %></div>
         <%- else %>
             <div class="exit"><%= link_to "退出全屏", "/weekly_stars" %></div>

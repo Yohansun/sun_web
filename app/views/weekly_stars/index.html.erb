@@ -10,19 +10,19 @@
   </div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleC">
-      <h1>本周<b>之星</b><p>STAR OF THIS WEEK</p></h1>
-      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %>全屏观看</div>
+      <%- unless @design.id.nil? %>
+        <a href="/weekly_stars/<%= @design.id %>"><h1>本周<b>之星</b><p>STAR OF THIS WEEK</p></h1></a>
+        <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %>全屏观看</div>
+      <%- end %>
     </div>
     <div class="weekstart_detail">
       <div class="gallery">
         <span class="moveleft"></span>
         <span class="moveright"></span>
         <div class="galleryK" id="gallery">
-        <%- unless @design.nil? %>
           <%- @design.weekly_star_uploads.each do |i| %>
               <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :alt => "") unless i.file.nil? %>
           <%- end %>
-        <%- end %>
         </div>
       </div>
     <%= javascript_include_tag "galleryK" %>
@@ -30,7 +30,9 @@
         <div class="overview">
           <div class="votes">
             所获票数：<span id="votes_count<%= @design.id %>"><%= @design.try(:votes_count) %></span>
+            <%- unless @design.id.nil? %>
               <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "WeeklyStar"), :remote => true, :method => 'post' %>
+            <%- end %>
           </div>
           <div class="operate">
             <span class="forward">转发 (0)</span>
@@ -386,8 +388,7 @@
   <div class="section">
     <div class="tit_bg"><h2>往期之星</h2></div>
     <div class="interview_box design_listA">
-      <%- unless @designs.nil? %>
-          <% @designs.in_groups_of(4, false).each do |group| -%>
+          <% @elder_designs.in_groups_of(4, false).each do |group| -%>
               <ul>
                 <% group.each do |design| -%>
                     <li>
@@ -403,7 +404,6 @@
                 <% end -%>
               </ul>
           <% end -%>
-      <%- end %>
     </div>
   </div>
 </div>

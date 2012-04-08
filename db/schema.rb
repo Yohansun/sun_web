@@ -10,7 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-ActiveRecord::Schema.define(:version => 20120407093714) do
+
+ActiveRecord::Schema.define(:version => 20120407100916) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
