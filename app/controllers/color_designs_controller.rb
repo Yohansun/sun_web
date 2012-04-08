@@ -21,7 +21,7 @@ class ColorDesignsController < ApplicationController
   def get_color_designs
     designs = Subject.content("color_designs")
     @tags = designs.tag_counts_on(:tags) || [Tag.new]
-    @designs = designs.page(params[:page]).per(5)
+    @designs = designs.page(params[:page]).per(9)
     @designs = @designs.tagged_with(params[:tags]) if params[:tags]
   end
 

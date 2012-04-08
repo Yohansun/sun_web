@@ -3,7 +3,7 @@ class WeeklyStarsController < ApplicationController
 
   def index
     @design = WeeklyStar.last || WeeklyStar.new
-    @elder_designs = WeeklyStar.order("published_at desc").offset(1)
+    @elder_designs = WeeklyStar.order("published_at desc").offset(1).page(params[:page]).per(8)
   end
 
   def show
