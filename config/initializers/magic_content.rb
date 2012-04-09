@@ -7,6 +7,8 @@ MagicContent.extra_settings = [
     {:tag => 'text_field_tag', :key => 'promote_designers', :label => '片区快查推荐设计师'},
 ]
 
-Post.class_eval do
-  has_many :comments, :as => :commentable
+Rails.application.config.to_prepare do
+  Post.class_eval do
+    has_many :comments, :as => :commentable
+  end
 end
