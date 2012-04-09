@@ -52,13 +52,14 @@
       <% @designs.in_groups_of(3, false).each do |group| -%>
           <ul class="d_works group">
             <% group.each do |design| -%>
-                <li>
+                <li class="pr">
                   <a href="/color_designs/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt=""/></a>
                   <h3><%= design.design_name %></h3>
 
                   <p class="p2 group">
                     <span class="gzh ft12">0</span><span class="zf ft12">转发 (0)</span><span class="pl ft12">评论 (<%=design.comments.length %>)</span>
                   </p>
+                  <span class="popup_zf group none" style="bottom:35px;left:68px;"><span>一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></span>
                 </li>
             <% end -%>
           </ul>

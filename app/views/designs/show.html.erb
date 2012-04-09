@@ -25,9 +25,16 @@
           当前票数：<span id="votes_count<%= @design.id%>"><%= @design.votes_count %></span>
           <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => 'post' %>
         </div>
-        <div class="operate">
+        <div class="operate pr">
           <span class="forward">转发 (<%= @design.shares_count %>)</span>
           <span class="review">评论 (<%= @design.comments_count %>)</span>
+          <div class="popup_zf group none" style="bottom:-35px; left:25px;">
+          <span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span>
+          <a class="popup_zf_qq" href="#"></a>
+          <a  class="popup_zf_sina" href="#"></a>
+          <a class="popup_zf_rr" href="#"></a>
+          <a class="popup_zf_kaixin" href="#"></a>
+         </div>
         </div>
       </div>
       <div class="fullscreen_btn">
