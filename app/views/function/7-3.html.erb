@@ -1,6 +1,9 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "style" %>
 <%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/Scripts/swfobject_modified.js" %>
+<%- end %>
 <div class="main">
   <div class='sub_title tr'>
     <img src="<%= asset_path "paint_art/title_paint_art.png"%>" alt=""/>
@@ -13,7 +16,34 @@
     <h2>墙面创意涂刷手册</h2>
 
     <div class="art_mini_fla">
-      <img src="<%= asset_path "paint_art/art_fla_img.jpg"%>"/>
+      <!--img src="images/paint_art/art_fla_img.jpg" /-->
+      <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="918" height="649">
+        <param name="movie" value="/flash/april_7.3.0406.swf"/>
+        <param name="quality" value="high"/>
+        <param name="wmode" value="opaque"/>
+        <param name="swfversion" value="6.0.65.0"/>
+        <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+        <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+        <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="/flash/april_7.3.0406.swf" width="918" height="649">
+          <!--<![endif]-->
+          <param name="quality" value="high"/>
+          <param name="wmode" value="opaque"/>
+          <param name="swfversion" value="6.0.65.0"/>
+          <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+          <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+          <div>
+            <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+
+            <p>
+              <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33"/></a>
+            </p>
+          </div>
+          <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+      </object>
     </div>
   </div>
   <!--wrapper ends-->
