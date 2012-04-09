@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MasterProfile < ActiveRecord::Base
   acts_as_taggable
   belongs_to :subject
@@ -16,5 +17,13 @@ class MasterProfile < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
+  def self.tag_list
+    array = ['海外','港澳台','中国大陆']
+    array.each do |i|
+      i = URI.escape(i)
+    end
+    array
+  end
 
 end

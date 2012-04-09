@@ -38,7 +38,6 @@ Icolor::Application.routes.draw do
   resources :faqs
   match "/faqs/get_weekly_tips" => "faqs#get_weekly_tips"
   match "/channel/access" => "channel#access"
-  match "/channel/service" => "channel#service"
 
   #实用工具
   match "/softwares/app" => "softwares#app"
