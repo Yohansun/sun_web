@@ -40,3 +40,5 @@ gem 'newrelic_rpm'
 
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"
+
+gem 'debugger'

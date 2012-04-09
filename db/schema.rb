@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407100916) do
+ActiveRecord::Schema.define(:version => 20120409155253) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -165,6 +165,16 @@ ActiveRecord::Schema.define(:version => 20120407100916) do
     t.datetime "updated_at",       :null => false
     t.integer  "commentable_id"
     t.string   "commentable_type"
+  end
+
+  create_table "customer_replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.integer  "question_type"
+    t.text     "reply_content"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "subject_id"
   end
 
   create_table "design_images", :force => true do |t|
@@ -457,6 +467,9 @@ ActiveRecord::Schema.define(:version => 20120407100916) do
     t.text     "desc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "title"
+    t.integer  "subject_id"
   end
 
   create_table "subjects", :force => true do |t|
@@ -611,6 +624,19 @@ ActiveRecord::Schema.define(:version => 20120407100916) do
     t.integer  "subject_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "weibo_data", :force => true do |t|
+    t.string   "q"
+    t.string   "weibo_username"
+    t.string   "weibo_content"
+    t.datetime "weibo_time"
+    t.datetime "get_at"
+    t.integer  "status"
+    t.string   "keywords"
+    t.string   "img_url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
