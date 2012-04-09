@@ -27,7 +27,7 @@
                       <div class="popup_zf group none" style="bottom:-25px; left:116px;"><span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></div>
                     </div>
                     <div class="hot_topic_main group">
-                      <%= image_tag topic.preview_img.url(:original) if topic.preview_img %>
+                      <%= image_tag topic.preview_img.url(:icolor_master_topics) if topic.preview_img %>
                       <div class="hot_topics_con">
                         <p><%= raw topic.intro %>...<%= link_to "[详细]", "/master_topics/#{topic.id}" %></p>
                       <p class="pl40">

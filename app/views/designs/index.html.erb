@@ -8,11 +8,15 @@
       var options = {
         data  : data
       }
-
       var sel = new LinkageSelect(options);
-      sel.bind('.level_1');
-      sel.bind('.level_2');
-
+      <%- if params[:area_id] -%>
+        <% area = Area.find(params[:area_id])%>
+        sel.bind('.level_1',<%= area.parent.id unless area.parent.nil?%>);
+        sel.bind('.level_2',<%= area.id%>);
+      <%- else -%>
+        sel.bind('.level_1');
+        sel.bind('.level_2');
+      <%- end -%>
       $('span.zf').hover(function(){
         $(this).parent('.p2').siblings('span.popup_zf').toggle();
       });
@@ -36,17 +40,16 @@
 <div class="design_tit group">
   <ul class="design_filter group">
     <form method="get" id="filter_form">
-    <li class=<%="#{'li_current' if params[:order] == '最新' }" %> >
-    <a href="/designs?order=<%= URI.escape('最新')%>">最新</a>
-    </li>
-    <li class=<%="#{'li_current' if params[:order] == '最热' }" %> >
-    <a href="/designs?order=<%= URI.escape('最热')%>">最热</a>
+      <li>
+        <%= select_tag "order", options_for_select(ColorDesign.order_select, params[:order]), class: "arrow_filter li_current",
+                :onchange => "$('#filter_form').submit()", :prompt => "排序" ,:style =>"width:108px;" %>
+      <li>
+    <li>
+       <%= select_tag "style", options_for_select(Design.style_select, params[:style]), class: "arrow_filter li_current",
+                :onchange => "$('#filter_form').submit()", :prompt => "风格" ,:style =>"width:108px;" %>
     </li>
     <li>
-      <%= select_tag "style",options_for_select(["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"]), class: "arrow_filter li_current", :onchange => "$('#filter_form').submit()", :include_blank => true %>
-    </li>
-    <li>
-      <%= select_tag "room_type",options_for_select(["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"]), class: "arrow_filter", :onchange => "$('#filter_form').submit()", :include_blank => true %>
+      <%= select_tag "room_type",options_for_select(Design.room_type_select, params[:room_type]), class: "arrow_filter", :prompt => "户型" ,:onchange => "$('#filter_form').submit()" %>
     </li>
     <li>
       <select id="province" class="level_1 arrow_filter"></select>

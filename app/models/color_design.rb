@@ -13,13 +13,19 @@ class ColorDesign < ActiveRecord::Base
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
   def self.color_select
-    ['浅白色系','红色系','橙色系','黄色系','绿色系','蓝色系','紫色系','中性色系']
+    ['所有','浅白色系','红色系','橙色系','黄色系','绿色系','蓝色系','紫色系','中性色系']
   end
   def self.style_select
-    ['美式','欧式','中式','日式','地中海','田园','东南亚','现代简约','后现代','新古典','混搭','其他']
+    ['所有','美式','欧式','中式','日式','地中海','田园','东南亚','现代简约','后现代','新古典','混搭','其他']
+
   end
   def self.usage_select
-    ['客厅','餐厅','厨房','卫生间','书房','儿童房','阳台','门厅','储物间','其他']
+    ['所有','客厅','餐厅','厨房','卫生间','书房','儿童房','阳台','门厅','储物间','其他']
   end
+
+  def self.order_select
+    ['最新','最热']
+  end
+
 
 end
