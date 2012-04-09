@@ -10,6 +10,8 @@ class SiteMessagesController < ApplicationController
   end
 
   def create
+    @site_message = SiteMessage.new(params[:site_message])
+    @site_message.user_id = current_user.id
     create! do |succ, fail|
       succ.js { render 'success' }
       fail.js { render 'fail' }

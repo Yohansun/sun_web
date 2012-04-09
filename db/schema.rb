@@ -453,6 +453,8 @@ ActiveRecord::Schema.define(:version => 20120411071156) do
     t.text     "desc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "title"
   end
 
   create_table "subjects", :force => true do |t|
