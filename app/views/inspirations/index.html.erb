@@ -1,21 +1,28 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'style', 'weekstar' %>
-  <script type="text/javascript">
-  $(window).load(function () {
-    $('#inspiration').masonry();
-  });
-  </script>
-  <style type="text/css">
-  span.arrow_1 {
-    right: 144px;
-    _right: 151px;
-  }
+    <%= stylesheet_link_tag 'style' %>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#inspiration').masonry();
+        });
+    </script>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 144px;
+            _right: 151px;
+        }
 
-  span.arrow_2 {
-    right: 77px;
-    _right: 82px;
-  }
-  </style>
+        span.arrow_2 {
+            right: 77px;
+            _right: 82px;
+        }
+
+        .popup_zf {
+            bottom: 0;
+        }
+    </style>
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "jquery.masonry.js" %>
 <%- end %>
 <div class="main">
   <div class='sub_title tr pt25'>
@@ -68,6 +75,7 @@
             <span class="zf ft12">转发 (<%= i.shares_count %>)</span>
             <span class="pl ft12">评论 (<%= i.comments_count %>)</span>
           </p>
+          <span class="popup_zf group none"><span>一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></span>
         </div>
         <%- end -%>
       </div><!--row ends-->

@@ -569,3 +569,18 @@ $(function(){
 				})
 
 				}
+//转发
+$(function(){
+    $('span.zf').hover(function(){
+        $(this).parent('.p2').siblings('span.popup_zf').toggle();
+        $(this).siblings('div.popup_zf').toggle();
+
+    })
+
+    $('.forward').hover(function(){
+        $(this).siblings('div.popup_zf').toggle();
+    })
+    $('.popup_zf').hover(function(){
+        $(this).toggle();
+    })
+})

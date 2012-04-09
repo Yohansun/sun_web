@@ -1,6 +1,3 @@
-<%- content_for :head do %>
-    <%= stylesheet_link_tag 'reg' %>
-<%- end %>
 <%- content_for :tail do %>
     <%= javascript_include_tag 'jquery.masonry.js' %>
     <script type="text/javascript">
@@ -40,6 +37,7 @@
               <p class="p2 group">
                 <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
               </p>
+              <span class="popup_zf group none"><span>一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></span>
               <p>风格：<%= design.style %></p>
             </li>
             <% end -%>

@@ -13,12 +13,12 @@
 <%- if @design == WeeklyStar.last %>
     <div class="weekstart_titleC">
       <a href="/weekly_stars/<%= @design.id %>"><h1>本周<b>之星</b><p>STAR OF THIS WEEK</p></h1></a>
-      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %>全屏观看</div>
+      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
     </div>
 <%- else %>
 <div class="weekstart_titleA">
   <div class="subtitle"><%= @design.try(:published_at).try(:to_date) %> 往期作品</div>
-  <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show" %>全屏观看</a></div>
+  <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show" %></div>
   <h1><%= @design.design_name  %></h1>
 </div>
 <%- end %>
@@ -43,9 +43,16 @@
     <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "WeeklyStar"), :remote => true, :method => 'post' %>
   </div>
 
-  <div class="operate">
+  <div class="operate pr">
     <span class="forward">转发 (0)</span>
     <span class="review">评论 (<%= @design.try(:comments).length %>)</span>
+    <div class="popup_zf group none" style="bottom:-35px; left:25px;">
+      <span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span>
+      <a class="popup_zf_qq" href="#"></a>
+      <a  class="popup_zf_sina" href="#"></a>
+      <a class="popup_zf_rr" href="#"></a>
+      <a class="popup_zf_kaixin" href="#"></a>
+    </div>
   </div>
 </div>
 <div class="color">

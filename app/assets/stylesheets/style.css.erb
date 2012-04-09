@@ -386,7 +386,7 @@ form.host_msgboard input.host_submit{ background: url(<%= asset_path "design/sub
 .law_site strong{font-weight:bold; padding-left:20px;}
 .law_site span{position:absolute;}
 span.arrow_black{display:block;position: absolute;top:3px;right:59px;right:56px;top:2px;*top:0px!important;_right:93px;border-width:5px;border-style: solid none solid solid;height:0px;border-color:transparent #737373;_line-height:0;font-size: 0px;_border-color:#000 #737373;_filter:chroma(color=#000000);/**/}
-h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>) no-repeat center top; text-align:center; padding-top:15px;font:bold 26px "HeitiCSEG Medium GB, NSimSun";color:#5e6376;margin-bottom:20px;}
+h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>) no-repeat center top; text-align:center; padding-top:15px;font:bold 26px "Microsoft Yahei";color:#5e6376;margin-bottom:20px;}
 .law .law_con{margin:0 55px;padding-bottom:130px;}
 .law .law_con h3{margin:5px 0 10px;}
 .law .law_con p{line-height:24px;text-indent:30px;margin:5px 0;}
@@ -510,6 +510,19 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .shanghai_station .shanghai_bg .shanghai_p5{ padding:40px 295px 20px 65px;}
 .shanghai_station .shanghai_bg .shanghai_p6{ padding:66px 50px 10px 360px;}
 .shanghai_station .shanghai_bg .shanghai_p7{ padding:1px 50px 20px 360px;}
+/*guangzhou*/
+.shanghai_station .shanghai_bg.guangzhou_bg {background:url(<%= asset_path "big_bg/guangzhou_bg.jpg"%>) no-repeat center top;}
+.shanghai_station .shanghai_bg.guangzhou_bg p{ line-height:normal;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p1{padding:280px 55px 10px 402px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p2{padding:10px 55px 75px 402px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p3{padding:30px 349px 10px 50px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p4{padding:1px 55px 10px 50px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p5{padding:1px 55px 10px 50px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p6{padding:1px 349px 10px 50px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p7{padding:1px 55px 30px 50px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p8{padding:8px 55px 10px 300px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p9{padding:1px 55px 10px 300px;}
+.shanghai_station .shanghai_bg.guangzhou_bg .shanghai_p10{padding:1px 55px 10px 300px;}
 /*beijing_station*/
 .act_beijing .section{ background:#fefaef;}
 .act_beijing p{ padding:10px 40px; text-indent:30px;font:14px/20px "Microsoft Yahei"; color:#666666;}
@@ -520,7 +533,7 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .act_beijing div.beijing_question h3{ padding:10px 40px 0;font:14px "Microsoft Yahei"; color:#bb0b0b; background:url(<%= asset_path "master/question_mark_icon.png"%>) no-repeat 20px 12px;}
 .act_beijing div.beijing_question p{ text-indent:0; background:url(<%= asset_path "master/interview_icon.png"%>) no-repeat 20px 12px; border-bottom:1px dotted #ccc;}
 
-.beijing_b{ overflow:hidden; padding:10px 45px 10px 0;}
+.beijing_b{ overflow:hidden; padding:0px 45px 10px 0;}
 .beijing_b p{ float:left; width:580px; padding:5px 0 5px 40px;}
 .beijing_b img{ margin-top:10px;}
 /*chengdu_station*/
@@ -696,7 +709,7 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .reset_reset{border:1px solid #e2e2e2;padding:0.5em 1em;margin-left:10px;}
 .upload_img_btn{background:url(<%= asset_path "personal/upload_img_btn.jpg"%>) no-repeat;width:112px;height:31px;}
 .works_modify_h2{height:25px!important;}
-.works_modify_h2 h2{color:#808080;margin:10px;}
+.works_modify_h2 h2{color:#808080;margin:10px;line-height:25px;}
 .works_modify div{clear:both;margin:10px 0;}
 .works_modify label{float:left;clear:left;font-weight:bold;font-size:14px;margin:5px;}
 .works_modify input,.works_modify select,.works_modify textarea{border:1px solid #dedede;height:21px;width:156px;color:#9b9b9b;font-size:12px;float:left;}
@@ -704,7 +717,7 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .works_modify textarea{width:817px;height:85px;}
 #label{background:url(<%= asset_path "personal/label.jpg"%>) no-repeat left center;padding-left:1.5em;font-size:12px;}
 .works_modify span{padding:3px 5px;float:left;color:#9b9b9b;}
-.works_modify p input{height:auto;width:auto;float:none;border:none;margin-right:10px;}
+.works_modify p input{height:26px;width:88px;float:none;border:none;margin-right:10px;}
 
 .color-trend .banner_n{background: url(<%= asset_path "design/2012-color-trend_n.jpg"%>) no-repeat center top; padding:380px 10px 0 30px; }
 .master_story{ overflow:hidden; height:343px;}
@@ -717,3 +730,8 @@ master_story_l_box{ width:230px;}
 .lh32 a{text-decoration:underline;color:#358ef2;font-weight:700;}
 
 #signature form.editable button{padding:0 5px}
+
+.law_title{color:#666;}
+.law_title h1{font-size:15px;color:#666;font-weight:bold;margin-bottom:30px;}
+.law_title h2{font-weight:bold;margin-bottom:15px;}
+.law .law_title p{text-indent:0;}

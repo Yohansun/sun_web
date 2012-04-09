@@ -13,6 +13,7 @@ Icolor::Application.routes.draw do
     match "/users/suc_regist" => "users/register#suc_regist"
     match "/users/username_check" => "users/register#username_check"
     match "/users/passwords/send_suc" => "users/passwords#send_suc"
+    match "/users/policy" => "users/register#policy"
   end
 
   #订阅电子期刊和在线客服

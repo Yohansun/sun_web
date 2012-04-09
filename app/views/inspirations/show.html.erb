@@ -1,5 +1,5 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'weekstar' %>
+  <%= stylesheet_link_tag 'weekstar','style' %>
 <% end -%>
 <% content_for :tail do -%>
   <%= javascript_include_tag 'galleryB.js' %>
@@ -25,9 +25,10 @@
           当前票数：<span id="votes_count<%= @inspiration.id%>"><%= @inspiration.votes_count %></span>
           <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @inspiration.id, :voteable_type => "Inspiration"), :remote => true, :method => 'post' %>
         </div>
-        <div class="operate">
+        <div class="operate pr">
           <span class="forward">转发 (<%= @inspiration.shares_count %>)</span>
           <span class="review">评论 (<%= @inspiration.comments_count %>)</span>
+          <div class="popup_zf group none" style="bottom:0; left:193px;"><span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></div>
         </div>
       </div>
       <div class="fullscreen_btn">
