@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Design < ActiveRecord::Base
   acts_as_taggable
 
@@ -21,4 +22,13 @@ class Design < ActiveRecord::Base
   def comments_count
     self.comments.size
   end
+
+  def self.room_type_select
+     ["所有", "一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"]
+  end
+
+  def self.style_select
+    ["所有", "现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"]
+  end
+
 end

@@ -12,39 +12,24 @@
   <div class='wrapper pb60 group'>
     <div class="design_tit group">
       <ul class="design_filter group">
-        <li class=<%="#{'li_current' if params[:order] == '最新' }" %> >
-          <a href="/color_designs?order=<%= URI.escape('最新')%>">最新</a>
+        <form method="get" id="filter_form">
+        <li>
+            <%= select_tag "order", options_for_select(ColorDesign.order_select, params[:order]), class: "arrow_filter li_current",
+                    :onchange => "$('#filter_form').submit()", :prompt => "排序" ,:style =>"width:108px;" %>
+        <li>
+          <%= select_tag "design_style", options_for_select(ColorDesign.style_select, params[:design_style]), class: "arrow_filter li_current",
+                         :onchange => "$('#filter_form').submit()", :prompt => "风格" ,:style =>"width:108px;" %>
         </li>
-        <li class=<%="#{'li_current' if params[:order] == '最热' }" %> >
-          <a href="/color_designs?order=<%= URI.escape('最热')%>">最热</a>
+          <li>
+          <%= select_tag "design_usage", options_for_select(ColorDesign.usage_select, params[:design_usage]), class: "arrow_filter",
+                         :onchange => "$('#filter_form').submit()", :prompt => "功能" ,:style =>"width:108px;" %>
         </li>
         <li>
-          <!--<a href="#">风格</a>-->
-          <select id="color_select_style" class="arrow_filter li_current" style="width:100px;">
-            <%- ColorDesign.style_select.each do |style| %>
-                <option class="nobg">风格</option>
-                <option class="nobg"><%= style %></option>
-            <%- end %>
-          </select>
+          <%= select_tag "design_color", options_for_select(ColorDesign.color_select, params[:design_color]), class: "arrow_filter",
+                         :onchange => "$('#filter_form').submit()", :prompt => "色系" ,:style =>"width:108px;" %>
         </li>
-        <li>
-          <!--<a href="#">户型</a>-->
-          <select id="color_select_fct" class="arrow_filter" style="width:77px;">
-            <%- ColorDesign.usage_select.each do |usage| %>
-                <option class="nobg">功能区</option>
-                <option class="nobg"><%= usage %></option>
-            <%- end %>
-          </select>
-        </li>
-        <li>
-          <!--<a href="#">城市</a>-->
-          <select id="color_select" class="arrow_filter" style="width:108px;">
-            <%- ColorDesign.color_select.each do |color| %>
-                <option class="nobg">色系</option>
-                <option class="nobg"><%= color %></option>
-            <%- end %>
-          </select>
-        </li>
+        </form>
+
       </ul>
     </div>
     <div class="design_result color_design">

@@ -3,12 +3,17 @@ class ColorDesignsController < ApplicationController
   before_filter :get_color_designs
 
   def index
-    unless @color_designs.nil?
+    unless @designs.nil?
       if params[:order] == "最热"
         @designs = @designs.order("votes_count desc")
       else
         @designs = @designs.order("created_at desc")
       end
+
+      @designs = @designs.where(:design_color => params[:design_color]) if params[:design_color] && params[:design_color] !='所有'
+      @designs = @designs.where(:design_style => params[:design_style]) if params[:design_style] && params[:design_style] !='所有'
+      @designs = @designs.where(:design_usage => params[:design_usage]) if params[:design_usage] && params[:design_usage] !='所有'
+
     end
   end
   

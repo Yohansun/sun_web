@@ -17,6 +17,11 @@ class DesignsController < ApplicationController
       else
         @designs = @designs.order("created_at desc")
       end
+
+      @designs = @designs.where(:style => params[:style])  if params[:design_style] && params[:style] !='所有'
+      @designs = @designs.where(:room_type => params[:room_type]) if params[:design_style] && params[:room_type] !='所有'
+      @designs = @designs.where(:area_id => params[:area_id]) if params[:area_id]
+
     end
 
   end

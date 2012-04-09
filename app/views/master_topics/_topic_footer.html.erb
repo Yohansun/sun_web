@@ -18,10 +18,10 @@
 		    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
 		    imageWidth:26,
 		    marginTop:150,
-		    url:"http://www.icolor.com.cn",
+		    url:"<%= request.url%>",
 		    title:"#icolor#",
 		    summary:"分享一篇精彩家装热点话题---<%= @topic.title %>，更多家装资讯，尽在---立邦iColor网",
-        pic:"<%= @topic.preview_img_file_name unless @topic.preview_img_file_name.blank? %>",
+        pic:"<%= (request.base_url + @topic.preview_img.url(:thumb)) unless @topic.preview_img.nil? %>",
         data_track_clickback: true
 		}
   </script>
