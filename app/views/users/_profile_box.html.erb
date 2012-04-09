@@ -69,7 +69,9 @@ $(document).ready(function() {
 
   <%- if current_user && current_user == @user %>
     <% case controller_name %>
-    <% when /inspirations|designs/ %>
+    <% when "inspirations" %>
+      <%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act" %>
+    <%- when "designs" %>
       <%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
     <% when "events" %>
       <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
