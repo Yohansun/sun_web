@@ -21,7 +21,7 @@
 		    url:"<%= request.url%>",
 		    title:"#icolor#",
 		    summary:"分享一篇精彩家装热点话题---<%= @topic.title %>，更多家装资讯，尽在---立邦iColor网",
-        pic:"<%= (request.base_url + @topic.preview_img.url(:thumb)) unless @topic.preview_img.nil? %>",
+        pic:"<%= (request.base_url + @topic.preview_img.url(:icolor_master_topics)) unless @topic.preview_img.nil? %>",
         data_track_clickback: true
 		}
   </script>

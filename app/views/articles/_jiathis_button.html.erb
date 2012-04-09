@@ -20,7 +20,7 @@
 		    url:"<%= request.url%>",
 		    title:"#icolor#",
 		    summary:"分享精彩家装资讯---<%= @article.title %>，更多咨询内容，尽在---立邦iColor网",
-        pic:"<%= (request.base_url + @article.preview_img.url(:thumb)) unless @article.preview_img.nil? %>",
+        pic:"<%= (request.base_url + @article.preview_img.url(:icolor_articles)) unless @article.preview_img.nil? %>",
         data_track_clickback: true
 		}
   </script>
