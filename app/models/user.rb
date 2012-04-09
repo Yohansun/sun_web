@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
   validates_presence_of :username, :email, :if => :email_required?
@@ -41,6 +42,8 @@ class User < ActiveRecord::Base
   has_one :avatar
   has_many :faqs
   belongs_to :area
+  
+  USER_TYPE = {0 => "设计师（在职）", 1 => "设计师（在读）"}
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login      = conditions.delete(:login)
