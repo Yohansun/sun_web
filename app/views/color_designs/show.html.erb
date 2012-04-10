@@ -1,5 +1,10 @@
 <% content_for :head do -%>
     <%= stylesheet_link_tag 'weekstar' %>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 87px;
+        }
+    </style>
 <% end -%>
 <% content_for :tail do -%>
     <%= javascript_include_tag 'galleryB.js' %>
@@ -12,17 +17,19 @@
 <% end -%>
 <div class="main page_weekstar page_weekstar_detail">
   <div class='sub_title tr pt25'>
-    <img src="<%= asset_path "design/title_design.png" %>" />
+    <img src="<%= asset_path "design/title_design.png" %>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="/">首页</a><span class="arrow_1"></span><a href="/color_designs">色彩搭配</a>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleB">
       <h1><%= @design.design_name %></h1>
+
       <div class="subtitle">
         <div class="votes">
-          所获票数：<span id="votes_count<%= @design.id%>"><%= @design.votes_count %></span>
+          所获票数：<span id="votes_count<%= @design.id %>"><%= @design.votes_count %></span>
           <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
         </div>
         <div class="operate">
@@ -330,15 +337,17 @@
       <div class="review_wrap">
         <div class="reviewform">
           <div class="bar">
-            <h4><span>评论</span>(<%= @design.comments.length%>)</h4><span class="r">0/140</span>
+            <h4><span>评论</span>(<%= @design.comments.length %>)</h4>
+            <span class="r"><span class="words_tip">0</span>/140</span>
           </div>
           <div class="form-content">
             <%= form_for(Comment.new) do |f| %>
                 <%= f.hidden_field :commentable_id, value: params[:id] %>
                 <%= f.hidden_field :commentable_type, value: 'ColorDesign' %>
                 <p class="input">
-                  <%= f.text_area :content %>
+                  <%= f.text_area :content, :class => "area_text" %>
                 </p>
+
                 <p class="button">
                   <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
                 </p>
@@ -347,7 +356,7 @@
         </div>
         <div class="pager ft12">
           <%- unless @comments.nil? %>
-            <%= paginate @comments %>
+              <%= paginate @comments %>
           <%- end %>
         </div>
         <div class="review_list">
@@ -370,6 +379,5 @@
       </div>
     </div>
   </div>
-  <div class='sub_bot pr'>
-  </div>
+ <div class='sub_bot pr'></div>
 </div>

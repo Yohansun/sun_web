@@ -37,6 +37,7 @@ $(document).ready(function() {
       <%= @user.display_name %>
     </p>
     <div class="signup_text" id='<%= params[:user_id] %>'>
+      <span></span>
       <p id="signature"><%= raw @user.signature %></p>
     </div>
     <p class="icon_email">Email: <%= @user.email %></p>

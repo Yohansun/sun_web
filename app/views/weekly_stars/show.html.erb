@@ -11,9 +11,10 @@
 <!--sub_nav ends-->
 <div class="wrapper group">
 <%- if @design == WeeklyStar.last %>
-    <div class="weekstart_titleC">
-      <a href="/weekly_stars/<%= @design.id %>"><h1>本周<b>之星</b><p>STAR OF THIS WEEK</p></h1></a>
+    <div class="weekstart_titleA">
+      <div class="subtitle">2012.5.12 往期作品</div>
       <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
+      <h1>华帝公馆样板房</h1>
     </div>
 <%- else %>
 <div class="weekstart_titleA">
@@ -468,14 +469,14 @@
 <div class="review_wrap">
   <div class="reviewform">
     <div class="bar">
-      <h4><span>评论</span>(<%= @design.comments.length %>)</h4><span class="r">0/140</span>
+      <h4><span>评论</span>(<%= @design.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
     </div>
     <div class="form-content">
       <%= form_for(Comment.new) do |f| %>
           <%= f.hidden_field :commentable_id, value: params[:id] %>
           <%= f.hidden_field :commentable_type, value: 'WeeklyStar' %>
           <p class="input">
-            <%= f.text_area :content %>
+            <%= f.text_area :content, :class => "area_text" %>
           </p>
           <p class="button">
             <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
@@ -493,7 +494,7 @@
       <% @comments.each do |c| %>
           <li>
             <div class="bar">
-              <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
+              <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_date %></span>
             </div>
             <div class="reply">
               <a href="#">回复</a>

@@ -1,43 +1,63 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'style', 'weekstar' %>
-  <style type="text/css">
-    .shadow {
-      zoom: 1;
-    }
-  </style>
+    <%= stylesheet_link_tag 'style', 'weekstar' %>
+    <style type="text/css">
+        .shadow {
+            zoom: 1;
+        }
+    </style>
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>
-    <img src="<%= asset_path "master/title_master.png" %>" alt="" />
+    <img src="<%= asset_path "master/title_master.png" %>" alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师访谈</a>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class='wrapper pb60'>
     <div class="profile group">
       <div class="video">
         <%= image_tag @article.preview_img_in.url(:original) %>
-      </div><!--video ends-->
+      </div>
+      <!--video ends-->
       <div class="shadow profile_info">
         <div class="section">
           <div class="tit_bg"><h2>大师简介MASTER PROFILE</h2></div>
           <p class="profile_name"><%= @article.name %></p>
-          <p class="line_b_dot"><span>国籍：<%= @article.nationality %></span><span>领域：<%= @article.master_field %></span></p>
+
+          <p class="line_b_dot"><span>国籍：<%= @article.nationality %></span><span>领域：<%= @article.master_field %></span>
+          </p>
+
           <p><%= raw @article.position %></p>
         </div>
-      </div><!--profile_info ends-->
-    </div><!--profile ends-->
+      </div>
+      <!--profile_info ends-->
+    </div>
+    <!--profile ends-->
     <div class="shadow mb25">
       <div class="section">
         <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
-        <%- t = @article.interview_content.split("\r\n\r\n") %>
-        <%- (t.size/2).times do |i| %>
-          <div class="interview_box">
-            <div class="interview">
-              <h3><%= t[2*i] %></h3>
-              <p class="interview_icon"><%= t[2*i+1] %></p>
-            </div>
-          </div>
+        <%- if !@article.interview_content_type.blank? %>
+            <%- if @article.interview_content_type == "问答类型访谈" %>
+                <%- t = @article.interview_content.split("\r\n\r\n") %>
+                <%- (t.size/2).times do |i| %>
+                    <div class="interview_box">
+                      <div class="interview">
+                        <h3><%= t[2*i] %></h3>
+
+                        <p class="interview_icon"><%= t[2*i+1] %></p>
+                      </div>
+                    </div>
+                <%- end %>
+            <%- else %>
+                <div class="interview_box text ft12">
+                  <%- t = @article.interview_content.split(%r(\r\n)) %>
+                  <%- t.each do |a| %>
+                    <p><%= a %></p>
+                  <%- end %>
+                </div>
+                <!--interview_box ends-->
+            <%- end %>
         <%- end %>
       </div>
     </div>
@@ -45,31 +65,33 @@
       <div class="section">
         <div class="tit_bg"><h2>作品欣赏WORKS</h2></div>
         <div class="works_slide">
-          <a class="works_pre" href="javascript:void(0)"><img src="<%= asset_path "master/works_left.png" %>" alt="" /></a>
-          <a class="works_next" href="javascript:void(0)"><img src="<%= asset_path "master/works_right.png" %>" alt="" /></a>
+          <a class="works_pre" href="javascript:void(0)"><img src="<%= asset_path "master/works_left.png" %>" alt=""/></a>
+          <a class="works_next" href="javascript:void(0)"><img src="<%= asset_path "master/works_right.png" %>" alt=""/></a>
+
           <div class="img_box">
             <div class="img_list">
-              <img class="list1" src="<%= asset_path "master/works/master1_works1.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works2.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works3.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works4.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works5.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works6.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works7.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works8.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works9.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works10.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works11.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works12.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works13.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works14.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works15.jpg" %>" alt="" />
-              <img class="list1" src="<%= asset_path "master/works/master1_works16.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works17.jpg" %>" alt="" />
-              <img class="list2" src="<%= asset_path "master/works/master1_works18.jpg" %>" alt="" />
+              <img class="list1" src="<%= asset_path "master/works/master1_works1.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works2.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works3.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works4.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works5.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works6.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works7.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works8.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works9.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works10.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works11.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works12.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works13.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works14.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works15.jpg" %>" alt=""/>
+              <img class="list1" src="<%= asset_path "master/works/master1_works16.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works17.jpg" %>" alt=""/>
+              <img class="list2" src="<%= asset_path "master/works/master1_works18.jpg" %>" alt=""/>
             </div>
           </div>
-        </div><!--works_slide ends-->
+        </div>
+        <!--works_slide ends-->
 
         <script type="text/javascript">
             var page = 1;
