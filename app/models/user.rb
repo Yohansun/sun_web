@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   has_many :events, :class_name => "Event", :foreign_key => "user_id"
   has_one :avatar
   has_many :faqs
+  has_many :events
   belongs_to :area
   
   USER_TYPE = {0 => "设计师（在职）", 1 => "设计师（在读）"}
