@@ -1,8 +1,0 @@
-class ColorDesignUpload < ActiveRecord::Base
-  belongs_to :color_design
-  has_attached_file :file, :styles => {:thumb => "105x97#", :slide => "888x590>", :slide_thumb => "205x138#",
-                                       :fullscreen => "980x655>", :fullscreen_thumb => "100x120#"},
-                    :whiny_thumbnails => true,
-                    :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
-                    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
-end
