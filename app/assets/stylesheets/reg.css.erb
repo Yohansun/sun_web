@@ -1,8 +1,8 @@
 @charset "utf-8";
 .main{width:961px;margin:115px auto 53px auto;background:#fff;padding-bottom:47px;border:1px solid #fff;}
-.reg_bg1,.reg_bg2,.reg_bg3{background:url(<%= asset_path "news/reg_bg1.png"%>) no-repeat;width:934px;height:240px;margin:0 auto;top:35px;}
-.reg_bg2{background-image:url(<%= asset_path "news/reg_bg2.png"%>);}
-.reg_bg3{background-image:url(<%= asset_path "news/reg_bg3.png"%>);}
+.reg_bg1,.reg_bg2,.reg_bg3{background:url(<%= asset_path "news/reg_bg1.gif"%>) no-repeat;width:934px;height:240px;margin:0 auto;top:35px;}
+.reg_bg2{background-image:url(<%= asset_path "news/reg_bg2.gif"%>);}
+.reg_bg3{background-image:url(<%= asset_path "news/reg_bg3.gif"%>);}
 .wrapper{padding:45px 0;border:1px solid #c3c3c3;border-top:none;border-radius:5px;width:903px;}
 ul.regs{margin:0px auto;width:805px;}
 ul.regs li{float:left;display:inline;width:166px;height:229px;border-left:1px dotted #787878;padding:4px 50px;}
@@ -40,7 +40,7 @@ ul.regs li input{float:left;display:inline;margin:23px 75px;}
 .reg_list span.recommand{margin:6px 10px 0 0;}
 .reg_list select{margin:0 5px;font-size:12px;height:26px;color:#666;}
 p.reg_bot{clear:left;color:#666;margin:30px 0;}
-p.reg_bot a{color:#666;}
+p.reg_bot a{color:#666;border:1px dotted #000;padding:1px 3px;}
 .user_details{border:1px dotted #7a786b;width:560px;height:68px;background:#fefef4;clear:left;margin:13px 50px;float:left;display:inline;}
 .user_details label{width:107px;margin-right:15px;clear:left;font-weight:normal;}
 .user_details input.company{width:410px;height:10px;margin-top:5px;}
@@ -169,7 +169,8 @@ input.code{width:92px;height:28px;}
 .forget .pa{top:-50px;left:125px;}
 
 .token_left{margin:33px 0 0 115px;}
-.token_cam{margin-right:25px;}
+.token_cam,.token_local{background:url(<%= asset_path "news/token_cam.jpg"%>) no-repeat;margin-right:25px;width:112px;height:31px;color:#5c6572;text-indent:2.5em;line-height:31px;}
+.token_local{background-position:0 -31px;}
 .token_tips{color:#df3e1e!important;padding:10px 0;}
 .token_bg{margin:30px 0 0;}
 .token_bg div{border:1px solid #c3c3c2;}

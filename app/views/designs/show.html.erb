@@ -1,8 +1,11 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'weekstar' %>
+  <%= stylesheet_link_tag 'weekstar','style' %>
+  <style type="text/css">
+  	span.arrow_1{right:87px;}
+  </style>
 <% end -%>
 <% content_for :tail do -%>
-  <%= javascript_include_tag 'galleryB.js' %>
+  <%= javascript_include_tag 'galleryB.js','main' %>
   <script type="text/javascript">
     $(".slide_thumb").click(function(event) {
       event.preventDefault();
@@ -28,13 +31,7 @@
         <div class="operate pr">
           <span class="forward">转发 (<%= @design.shares_count %>)</span>
           <span class="review">评论 (<%= @design.comments_count %>)</span>
-          <div class="popup_zf group none" style="bottom:-35px; left:25px;">
-          <span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span>
-          <a class="popup_zf_qq" href="#"></a>
-          <a  class="popup_zf_sina" href="#"></a>
-          <a class="popup_zf_rr" href="#"></a>
-          <a class="popup_zf_kaixin" href="#"></a>
-         </div>
+          <div class="popup_zf group none" style="bottom:0px; left:175px;"><span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></div>
         </div>
       </div>
       <div class="fullscreen_btn">
@@ -61,32 +58,61 @@
         </div>
       </div>
       <div class="properties">
+        <div class="tags">
+          <h5>标签</h5>
+          <ul>
+            <li><a href="#">装修</a></li>
+            <li><a href="#">环保</a></li>
+            <li><a href="#">简约</a></li>
+          </ul>
+        </div>
         <table class="propertyA">
           <tr>
-            <th>上传者：</th>
-            <td><%= @design.user.display_name %></td>
+            <th>公司名称：</th>
+            <td>深圳星客环境艺术有限公司 <a href="#">[进入公司主页]</a></td>
           </tr>
           <tr>
-            <th>上传时间：</th>
-            <td><%= @design.created_at.to_date %></td>
+            <th>公司地址：</th>
+            <td>深圳市华侨城创意园A4栋303</td>
           </tr>
           <tr>
-            <th>灵感启发：</th>
-            <td><%= @design.content %></td>
+            <th>设计师：</th>
+            <td>王勤俭 <a href="#">[进入个人主页]</a></td>
+          </tr>
+          <tr>
+            <th>项目名称：</th>
+            <td>华地公馆A1-1样板房</td>
+          </tr>
+          <tr>
+            <th>设计风格：</th>
+            <td>田园</td>
+          </tr>
+          <tr>
+            <th>设计说明：</th>
+            <td>别墅的设计风格正如题记之中所描述的那样，圆了人们一个关于栖息的理想梦境，从古罗马的辉煌到桃源仙境，从东方到西方，从古时到现代，这个梦被以各种方式诠释着，关于优雅，关于品味，关于享受方式，关于舒适，更重要的是，关于思考的境界。</td>
+          </tr>
+          <tr>
+            <th>主要材料：</th>
+            <td>黑金花大理石、橙皮红大理石、金柠檬黄大理石、道格拉斯进口瓷砖、雅金箔、米白洞石、球纹桃花芯木饰面、艺术拼花马赛克、 红檀香实木地板、进口墙纸、水晶灯、银镜</td>
+          </tr>
+          <tr>
+            <th>推荐理由：</th>
+            <td>新千年的第一个十年，是中国室内设计行业发展最为蓬勃的十年。</td>
           </tr>
         </table>
       </div>
       <div class="review_wrap">
         <div class="reviewform">
           <div class="bar">
-            <h4><span>评论</span>(<%= @design.comments_count %>)</h4><span class="r">0/140</span>
-          </div>
+            <h4><span>评论</span>(<%= @design.comments_count %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
+		  </div>
+          
           <div class="form-content">
             <%= form_for(Comment.new) do |f| %>
             <%= f.hidden_field :commentable_id, value: params[:id] %>
             <%= f.hidden_field :commentable_type, value: 'Design' %>
             <p class="input">
-              <%= f.text_area :content %>
+              <%= f.text_area :content, :class => "area_text" %>
             </p>
             <p class="button">
               <!-- <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" /> -->

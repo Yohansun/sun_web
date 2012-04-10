@@ -326,13 +326,12 @@ $(function(){
 	makeTips('#f_input',500,'#span6_2','#overflow6_2');
 	makeTips('#textarea6_3',500,'#span6_3','#overflow6_3');
 	makeTips('#textarea2',400,'#ins_span','#overflow_ins');
+	SecondTip('.area_text','.words_tip');
 });
 
 	function makeTips(str,sum,string1,string2)
 	{
-		$(str).keydown(function(){
-			tips($(this),sum,string1,string2);
-		}).keyup(function(){
+		$(str).bind('keyup keydown hover mouseover mouseout mousemove',function(){
 			tips($(this),sum,string1,string2);
 		});
 	}
@@ -353,6 +352,17 @@ $(function(){
 			$span1.show().find('span').text(rest);
 			$span2.hide();
 		}
+	}
+	function SecondTip(element,node){
+		$(element).bind('keyup keydown hover mouseover mouseout mousemove',function(){
+			changeTips($(this),node);
+		});
+	}
+	function changeTips(element,node){
+		var num = element.val().length;
+		if(num>140){$(node).css('color','#f00');}
+		else{$(node).css('color','#8A8987');}
+		$(node).text(num);
 	}
 
 /*regs*/
@@ -518,6 +528,12 @@ $(function(){
 		$(this).children('.pa').toggle();
 	})
 
+/*float_ads*/
+	$('.shut_float').click(function(){
+		$(this).parent().hide();
+	})
+
+/*qin_slide*/
 			qin_slide('#qin_slide1 ');
 			qin_slide('#qin_slide2 ');
 			qin_slide('#qin_slide3 ');
@@ -569,18 +585,19 @@ $(function(){
 				})
 
 				}
+
 //转发
-$(function(){
-    $('span.zf').hover(function(){
-        $(this).parent('.p2').siblings('span.popup_zf').toggle();
-        $(this).siblings('div.popup_zf').toggle();
+	$(function(){
+		$('span.zf').hover(function(){
+			$(this).parent('.p2').siblings('span.popup_zf').toggle();
+			$(this).siblings('div.popup_zf').toggle();
 
-    })
+		})
 
-    $('.forward').hover(function(){
-        $(this).siblings('div.popup_zf').toggle();
-    })
-    $('.popup_zf').hover(function(){
-        $(this).toggle();
-    })
-})
+		$('.forward,.trans a').hover(function(){
+			$(this).siblings('div.popup_zf').toggle();
+		})
+		$('.popup_zf').hover(function(){
+			$(this).toggle();
+		})
+	})
