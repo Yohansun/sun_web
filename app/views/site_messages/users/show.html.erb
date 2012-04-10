@@ -30,10 +30,10 @@
       <!--host_self ends-->
 
       <ul class="system_info group">
-        <li class="icon_point"><a href="#">我的积分</a></li>
-        <li class="icon_info"><a class="host_cur" href="#">系统消息</a></li>
-        <li class="icon_qustion"><a href="#">我的提问</a></li>
-        <li class="icon_active"><a href="#">我报名的活动</a></li>
+        <li class="icon_point"><%= link_to "我的积分", user_rank_index_path %></li>
+        <li class="icon_info"><%= link_to "系统消息", user_site_messages_path %></li>
+        <li class="icon_qustion"><%= link_to "我的提问", user_faqs_path %></li>
+        <li class="icon_active"><%= link_to "我报名的活动", user_events_path %></li>
       </ul><!--system_info ends-->
 
       <div class="info_main">
