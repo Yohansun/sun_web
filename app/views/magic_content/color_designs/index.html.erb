@@ -12,9 +12,12 @@
       <thead>
         <tr>
           <th width="5%">ID</th>
-          <th>作品名称</th>
-          <th width="12.5%">设计师</th>
-          <th width="100px">缩略图</th>
+          <th>名称</th>
+          <th width="12.5%">风格</th>
+          <th width="12.5%">功能区</th>
+          <th width="12.5%">色系</th>
+          <th width="100px">列表页图片</th>
+          <th width="100px">内页图片图片</th>
           <th width="12.5%">发布时间</th>
           <th width="100px">操作</th>
         </tr>
@@ -24,8 +27,11 @@
           <tr class="gradeA">
             <td><%= c.id %></td>
             <td><%= c.design_name %></td>
-            <td><%= c.author %></td>
+            <td><%= c.design_style %></td>
+            <td><%= c.design_usage %></td>
+            <td><%= c.design_color %></td>
             <td><%= image_tag c.main_preview_img.url(:thumb) %></td>
+            <td><%= image_tag c.show_preview_img.url(:thumb) %></td>
             <% if c.published_at.nil? %>
               <td><%= format_time c.created_at %></td>
             <% else %>

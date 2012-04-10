@@ -1,6 +1,0 @@
-<div class="upload" id="color_design_upload_<%= upload.id %>">
-    <%= image_tag upload.file.url(:thumb) %>
-    <%= hidden_field_tag 'color_design[color_design_upload_ids][]', upload.id %>
-
-    <%= link_to_function "移除", "$('#color_design_upload_#{upload.id}').remove();" %>
-</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409155253) do
+ActiveRecord::Schema.define(:version => 20120410065333) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -121,30 +121,11 @@ ActiveRecord::Schema.define(:version => 20120409155253) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "color_design_uploads", :force => true do |t|
-    t.integer  "color_design_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-  end
-
   create_table "color_designs", :force => true do |t|
     t.string   "design_name"
-    t.string   "author"
-    t.string   "author_url"
-    t.string   "company_name"
-    t.string   "company_url"
-    t.string   "company_address"
-    t.string   "project_name"
     t.string   "design_style"
     t.string   "design_color"
     t.string   "design_usage"
-    t.text     "design_intro"
-    t.text     "design_material"
-    t.text     "recommend_reason"
     t.integer  "subject_id"
     t.datetime "published_at"
     t.datetime "created_at",                                   :null => false
@@ -156,6 +137,12 @@ ActiveRecord::Schema.define(:version => 20120409155253) do
     t.integer  "votes_count",                   :default => 0
     t.integer  "shares_count",                  :default => 0
     t.integer  "comments_count",                :default => 0
+    t.string   "show_preview_img_file_name"
+    t.string   "show_preview_img_content_type"
+    t.integer  "show_preview_img_file_size"
+    t.datetime "show_preview_img_updated_at"
+    t.string   "recommend_color"
+    t.text     "design_thought"
   end
 
   create_table "comments", :force => true do |t|
