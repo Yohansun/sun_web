@@ -9,7 +9,7 @@
         data  : data
       }
       var sel = new LinkageSelect(options);
-      <%- if params[:area_id] -%>
+      <%- if params[:area_id] && !params[:area_id].blank? -%>
         <% area = Area.find(params[:area_id])%>
         sel.bind('.level_1',<%= area.parent.id unless area.parent.nil?%>);
         sel.bind('.level_2',<%= area.id%>);
