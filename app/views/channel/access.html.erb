@@ -52,7 +52,7 @@
               <%= user.signature %>
             </div><!--owner_info ends-->
         </div><!--owner_center ends-->
-        <a href="#" class="owner_ask tc ft14 fr fb" id="channel_access">我要咨询</a>
+        <%= link_to "我要咨询", user_messages_path(user), :class => "owner_ask tc ft14 fr fb", :id => "channel_access" %>
     </div>
     <%- end -%>
   </div>

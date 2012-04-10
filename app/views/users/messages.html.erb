@@ -23,8 +23,8 @@
          <%- @messages.each do |m| %>
           <div class="msgboad_item">
             <%= link_to user_path(m.from_user.id) do %>
-                <% if @user.avatar -%>
-                    <%= image_tag @user.avatar.file(:thumb), :class => 'box_shadow' %>
+                <% if m.from_user.avatar -%>
+                    <%= image_tag m.from_user.avatar.file(:thumb), :class => 'box_shadow' %>
                 <% else -%>
                     <%= image_tag "news/regimg_bg.jpg", :width => "78", :height => "70", :class => 'box_shadow' %>
                 <% end -%>
