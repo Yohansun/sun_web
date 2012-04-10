@@ -167,16 +167,6 @@ ActiveRecord::Schema.define(:version => 20120409155253) do
     t.string   "commentable_type"
   end
 
-  create_table "customer_replies", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.integer  "question_type"
-    t.text     "reply_content"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "subject_id"
-  end
-
   create_table "design_images", :force => true do |t|
     t.integer  "user_id"
     t.integer  "imageable_id"
@@ -467,9 +457,6 @@ ActiveRecord::Schema.define(:version => 20120409155253) do
     t.text     "desc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-    t.string   "title"
-    t.integer  "subject_id"
   end
 
   create_table "subjects", :force => true do |t|
@@ -628,15 +615,24 @@ ActiveRecord::Schema.define(:version => 20120409155253) do
 
   create_table "weibo_data", :force => true do |t|
     t.string   "q"
-    t.string   "weibo_username"
-    t.string   "weibo_content"
-    t.datetime "weibo_time"
-    t.datetime "get_at"
+    t.string   "idstr"
+    t.string   "text"
+    t.string   "source"
+    t.string   "thumbnail_pic"
+    t.string   "bmiddle_pic"
+    t.string   "original_pic"
+    t.string   "user_id"
+    t.string   "user_screen_name"
+    t.string   "user_name"
+    t.string   "user_profile_image_url"
+    t.string   "user_profile_url"
+    t.string   "user_gender"
+    t.string   "user_location"
+    t.string   "user_description"
+    t.datetime "created_time"
     t.integer  "status"
-    t.string   "keywords"
-    t.string   "img_url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
 end

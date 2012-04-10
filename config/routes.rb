@@ -149,9 +149,7 @@ Icolor::Application.routes.draw do
 
   #在线配色
   resources :mix_colors
-  
+
   #认证考试
   resources :approves
-  
-  get "home/access_token" => "home#access_token"
 end
