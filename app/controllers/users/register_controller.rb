@@ -4,15 +4,18 @@ class Users::RegisterController < Devise::RegistrationsController
 
   def create
     @messages = ""
-    session_role
 
-    if session[:user_role]
-      params[resource_name][:role_id]    = Role.find_by_role(session[:user_role]).id
-      params[resource_name][:des_status] = session[:des_status]
+    if params[:user][:user_role] =~ /designer/
+      params[:user][:role_id] = Role.find_by_role("designer").id
+      params[:user][:des_status] = params[:user][:user_role] == "designer_1"
+    else
+      if params[:user][:user_role].blank?
+        params[:user][:user_role] = 'user'
+      end
+      params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id
     end
 
     build_resource
-    valid_result = resource.errors.messages
 
     if resource.save
       if resource.active_for_authentication?
@@ -23,11 +26,11 @@ class Users::RegisterController < Devise::RegistrationsController
         respond_with resource
       end
     else
+      valid_result = resource.errors.messages
       if valid_result.size > 0
         valid_result.each do |_, value|
           @messages << "*" + value[0] + '\n'
         end
-        return @messages
       end
     end
   end
@@ -72,20 +75,6 @@ class Users::RegisterController < Devise::RegistrationsController
       end
     else
       render :text => "用户名不能为空，只能用数字、字母、下划线和汉字组成，不能包含空格，并且不能以下划线和数字开头！"
-    end
-  end
-
-  def session_role
-    unless params[:user][:user_role].blank?
-      r                   = params[:user][:user_role].split("_")
-      session[:user_role] = r[0]
-      if r.size == 2
-        if r[1] == "1"
-          session[:des_status] = true
-        else
-          session[:des_status] = false
-        end
-      end
     end
   end
 
