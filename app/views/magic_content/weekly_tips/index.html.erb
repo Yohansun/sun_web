@@ -11,10 +11,10 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
         <tr>
-          <th width="12.5%">ID</th>
-          <th width="55%">期次</th>
+          <th width="5%">ID</th>
+          <th>期次</th>
           <th width="20%">发布时间</th>
-          <th width="12.5%%">操作</th>
+          <th width="100px">操作</th>
         </tr>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@
             <td><%= c.id %></td>
             <td><%= c.week %></td>
             <td><%= c.published_at.to_date %></td>
-            <td>
+            <td nowrap="nowrap">
               <%= link_to '编辑', edit_subject_weekly_tip_path(parent, c), :class => 'button basicBtn' %>
               <%= link_to '删除', [parent, c], :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
             </td>

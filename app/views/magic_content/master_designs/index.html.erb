@@ -11,12 +11,12 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
         <tr>
-          <th width="10%">ID</th>
-          <th width="12.5%">作品名称</th>
+          <th width="5%">ID</th>
+          <th>作品名称</th>
           <th width="12.5%">作者</th>
-          <th width="37.5%">缩略图</th>
+          <th width="80px">缩略图</th>
           <th width="12.5%">发布时间</th>
-          <th width="15%%">操作</th>
+          <th width="100px">操作</th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +31,7 @@
             <% else %>
               <td><%= c.published_at.strftime("%Y-%m-%d %H:%M") %></td>
             <%- end %>
-            <td>
+            <td nowrap="nowrap">
               <%= link_to '编辑', edit_subject_master_design_path(parent, c), :class => 'button basicBtn' %>
               <%= link_to '删除', [parent, c], :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
             </td>
