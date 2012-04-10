@@ -93,6 +93,7 @@ Icolor::Application.routes.draw do
   match "/edm_week" => "function#edm_week" #一周未来提醒EDM
 
   #漆光异彩
+  match "/7-1" => "function#7-1"
   match "/7-2" => "function#7-2"
   match "/7-3" => "function#7-3"
   match "/color_signup" => "function#color_signup"

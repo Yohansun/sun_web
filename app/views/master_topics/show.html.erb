@@ -57,14 +57,14 @@
         <div class="review_wrap">
           <div class="reviewform">
             <div class="bar">
-              <h4><span>评论</span>(<%= @topic.comments.length %>)</h4><span class="r">0/140</span>
+              <h4><span>评论</span>(<%= @topic.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
             </div>
             <div class="form-content">
               <%= form_for(Comment.new) do |f| %>
                   <%= f.hidden_field :commentable_id, value: params[:id] %>
                   <%= f.hidden_field :commentable_type, value: 'Post' %>
                   <p class="input">
-                    <%= f.text_area :content %>
+                    <%= f.text_area :content, :class => "area_text" %>
                   </p>
                   <p class="button">
                     <!-- <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交" /> -->

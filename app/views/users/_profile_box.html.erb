@@ -37,6 +37,7 @@ $(document).ready(function() {
       <%= @user.display_name %>
     </p>
     <div class="signup_text" id='<%= params[:user_id] %>'>
+      <span></span>
       <p id="signature"><%= raw @user.signature %></p>
     </div>
     <p class="icon_email">Email: <%= @user.email %></p>
@@ -50,10 +51,10 @@ $(document).ready(function() {
 <!--host_self ends-->
 <%- if current_user && current_user == @user %>
 <ul class="system_info group">
-  <li class="icon_point"><a href="f_in_point.html">我的积分</a></li>
-  <li class="icon_info"><a href="f_in_infolist.html">系统消息</a></li>
+  <li class="icon_point"><%= link_to "我的积分", user_rank_index_path %></li>
+  <li class="icon_info"><%= link_to "系统消息", user_site_messages_path %></li>
   <li class="icon_qustion"><%= link_to "我的提问", user_faqs_path %></li>
-  <li class="icon_active"><a href="f_in_signup.html">我报名的活动</a></li>
+  <li class="icon_active"><%= link_to "我报名的活动", user_events_path %></li>
 </ul>
 <%- end %>
 <!--system_info ends-->

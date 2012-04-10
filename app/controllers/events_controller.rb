@@ -1,13 +1,15 @@
 # -*- encoding : utf-8 -*-
 class EventsController < ApplicationController
   before_filter :find_user
-  
+
   def index
     if @user
       @events = @user.events.page params[:page]
       render :template => "users/events"
     else
-      @events = Event.page params[:page], :per_page => 9
+      comments ||= Comment.where(:commentable_type => "FakeEvent")
+      @comments ||= comments.page(params[:page]).per(6)
+      @size ||= comments.length
     end
   end
 
@@ -38,5 +40,4 @@ class EventsController < ApplicationController
   def show
 
   end
-
 end

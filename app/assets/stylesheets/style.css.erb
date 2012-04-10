@@ -12,6 +12,8 @@
 .profile_info p.profile_name{color: #c90000;font:14px "Microsoft Yahei";}
 .profile_info p span{margin-right:20px;}
 .interview_box{overflow:auto;max-height:948px;}
+.text p{text-indent:2em;color:#696969;line-height:2em;}
+.text{padding:1em;}
 .interview {margin:24px;border-bottom:1px solid #e0e0e0;padding-bottom:20px;}
 .interview h3{padding-left:20px;background:url(<%= asset_path "master/question_mark_icon.png"%>) no-repeat left 4px;font:14px "Microsoft Yahei";color:#ba0000;margin-bottom:20px;}
 .interview p{padding-left:20px;font:12px/24px "arial simsun";}
@@ -292,8 +294,10 @@ ul.design_filter .li_current a{color:#ffffff;}
 .host_self .host_status p.icon_qq{ background-position:7px -16px;}
 .host_self .host_status p.icon_msn{ background-position:7px -44px;}
 .host_self .host_status p.icon_fetion{ background-position:7px -69px;}
-.host_self .host_status .signup_text,.msgboard_list .signup_text{ background:url(<%= asset_path "personal/host_ly_bg_l.jpg"%>) no-repeat left center; height:30px;padding:5px 1px 5px 6px;margin:5px 0 10px;}
-.host_self .host_status .signup_text p,.msgboard_list .signup_text p{color:#909196;font:12px/30px "arial simsun";background:url(<%= asset_path "personal/host_ly_bg_r.jpg"%>) no-repeat right center; height:30px; padding:0 5px;}
+.host_self .host_status .signup_text,.msgboard_list .signup_text{/*background:url(../images/personal/host_ly_bg_l.jpg) no-repeat left center; height:30px;*/padding:5px 1px 5px 6px;margin:5px 0 10px;}
+.host_self .host_status .signup_text p,.msgboard_list .signup_text p{color:#909196;font:12px/18px "arial simsun";/*background:url(../images/personal/host_ly_bg_r.jpg) no-repeat right center; height:30px;*/ padding:5px; border:1px solid #E3E3E3;background:none;}
+.signup_text{ position:relative;}
+.signup_text span{ position:absolute; display:block; left:1px; top:5px; height:12px; width:6px; background:url(<%= asset_path "news/owner_info_btn.png"%>) no-repeat;}
 
 a.back_perhome,a.launch_act{position:absolute;display:block; height:34px; width:82px;}
 a.back_perhome{background:url(<%= asset_path "personal/home_btn.png"%>) no-repeat left center; padding-left:30px;top:0px;right:1px; font:12px/28px "Microsoft Yahei"; color:#999999;}
@@ -545,6 +549,25 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .beijing_b.chengdu_con2 img{float:left; margin:0;}
 .beijing_b.chengdu_con2 h3,.beijing_b.chengdu_con2 p{float:right; width:545px; padding:0;}
 .beijing_b.chengdu_con2 p{ padding:5px 0;}
+/*haikou_station*/
+p.haikou_bg1{ background:url(<%= asset_path "big_bg/haikou_bg1.jpg"%>) no-repeat center top; height:145px; padding:50px 580px 0 45px; text-indent:0;}
+p.haikou_bg2{ background:url(<%= asset_path "big_bg/haikou_bg2.jpg"%>) no-repeat center top; height:145px; padding:50px 45px 27px 440px; text-indent:0;}
+p.haikou_bg3{ background:url(<%= asset_path "big_bg/haikou_bg3.jpg"%>) no-repeat center top; height:129px; padding:50px 45px 5px 45px; text-indent:0;}
+p.haikou_bg4{ background:url(<%= asset_path "big_bg/haikou_bg4.jpg"%>) no-repeat center top; height:109px; padding:50px 45px 5px 330px; text-indent:0;}
+p.haikou_bg5{ background:url(<%= asset_path "big_bg/haikou_bg5.jpg"%>) no-repeat center top; height:109px; padding:50px 450px 5px 45px; text-indent:0;}
+p.haikou_bg6{ background:url(<%= asset_path "big_bg/haikou_bg6.jpg"%>) no-repeat center top; height:300px; padding:35px 45px 5px 45px; text-indent:0;}
+p.haikou_bg7{ background:url(<%= asset_path "big_bg/haikou_bg7.jpg"%>) no-repeat center top; height:315px; padding:35px 45px 5px 45px; text-indent:0;}
+p.haikou_bg8{ background:url(<%= asset_path "big_bg/haikou_bg8.jpg"%>) no-repeat center top; height:180px; padding:50px 450px 5px 45px; text-indent:0;}
+/*xian_station*/
+.xian_box p{ padding:0 45px;text-indent:0;}
+p.xian_bg1{ background:url(<%= asset_path "big_bg/xian_bg1.jpg"%>) no-repeat center top; height:389px;}
+p.xian_bg2{ background:url(<%= asset_path "big_bg/xian_bg2.jpg"%>) no-repeat center top; height:286px;}
+p.xian_bg3{ background:url(<%= asset_path "big_bg/xian_bg3.jpg"%>) no-repeat center top; height:329px;}
+p.xian_bg4{ background:url(<%= asset_path "big_bg/xian_bg4.jpg"%>) no-repeat center top; height:358px;}
+p.xian_bg5{ background:url(<%= asset_path "big_bg/xian_bg5.jpg"%>) no-repeat center top; height:330px;}
+p.xian_bg6{ background:url(<%= asset_path "big_bg/xian_bg6.jpg"%>) no-repeat center top; height:330px;}
+p.xian_bg7{ background:url(<%= asset_path "big_bg/xian_bg7.jpg"%>) no-repeat center top; height:300px;}
+p.xian_bg8{ background:url(<%= asset_path "big_bg/xian_bg8.jpg"%>) no-repeat center top; height:400px;}
 /*big_kv_n(d_act)*/
 .wrapper.big_kv_n{ padding:35px 45px 45px 43px;}
 .big_kv_n .big_kv_bg { width:905px; height:1428px; background:url(<%= asset_path "big_bg/4.2_bg.png"%>) no-repeat center top}
@@ -625,6 +648,34 @@ h2.article{height:100px;background:url(<%= asset_path "index_related_tit.png"%>)
 .paint_art_mini{ height:793px; width:993px; padding:0; background:url(<%= asset_path "paint_art/art_mini_bg.jpg"%>) no-repeat top left; padding-top:30px;}
 .paint_art_mini h2{font:18px "Microsoft Yahei";color:#fff; text-align:center; background:url(<%= asset_path "paint_art/art_mini_tit.png"%>) no-repeat center top; padding-top:45px;margin-bottom:20px;}
 .art_mini_fla{text-align:center;}
+/*7.1*/
+.wrapper.paint_art_bg{ background:#fff url(<%= asset_path "paint_art/7.1_tit.jpg"%>) no-repeat top center; padding-top:110px; margin-top:-5px;}
+.paint_art h2.art_tit_fs{ background:url(.<%= asset_path "paint_art/art_tit_fs.png"%>) no-repeat center top;}
+.paint_art h2.art_tit_green{ background:url(<%= asset_path "paint_art/art_tit_green.png"%>) no-repeat center top;}
+.paint_art_conbox_bg{ background:url(<%= asset_path "paint_art/art_7.1bg1.png"%>) no-repeat right 20px; padding:50px 0 40px 0;}
+.paint_art_conbox_bg2{ background:url(<%= asset_path "paint_art/art_7.1bg2.png"%>) no-repeat right 20px; padding:50px 0 40px 0;}
+.paint_art_bg .section{ padding-right:10px;}
+.paint_art_conbox_bg p,.paint_art_conbox_bg2 p{ font:14px/20px "Microsoft Yahei"; padding:15px 0 5px 5px;}
+ul.color_square{ overflow:hidden; padding:50px 40px 20px; width:730px;}
+.color_square li{ float:left; margin:5px 20px 40px; display:inline;}
+.color_square li span{display:block; text-align:right;font:12px "Microsoft Yahei";}
+.color_square li div{ width:140px; height:100px; }
+.color_square li div.color_6840_2{background:#095d99;}
+.color_square li div.color_6620_3{background:#62a9c7;}
+.color_square li div.color_6751_4{background:#aed8e4;}
+.color_square li div.color_6851_4{background:#c0ddef;}
+.color_square li div.color_5900_1{background:#01534f;}
+.color_square li div.color_5500_1{background:#006b4b;}
+.color_square li div.color_5340_2{background:#16a24c;}
+.color_square li div.color_4340_2{background:#6dba4a;}
+.color_square li div.color_0400_1{background:#902328;}
+.color_square li div.color_0640_2{background:#d4504e;}
+.color_square li div.color_0420_3{background:#db7f94;}
+.color_square li div.color_0501_4{background:#f0d6c9;}
+.color_square li div.color_2800_1{background:#b67b03;}
+.color_square li div.color_2840_2{background:#f5b52d;}
+.color_square li div.color_3370_3{background:#d4c06a;}
+.color_square li div.color_2910_4{background:#fee998;}
 /*gift*/
 .main.gift{ width:963px; margin-top:120px; padding-top:45px; background:#fff;}
 .wrapper.gift_box{ padding:0px 0 105px; margin:0; width:963px; background:#f5f3da url(<%= asset_path "paint_art/gift_bottombg.png"%>) no-repeat center bottom; }
