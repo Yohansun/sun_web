@@ -17,6 +17,7 @@ gem 'jquery-rails'
 group :development do
   gem "capistrano"
   gem 'capistrano-unicorn'
+  gem 'debugger'
 end
 
 gem 'unicorn'

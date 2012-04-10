@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407100916) do
+ActiveRecord::Schema.define(:version => 20120409155253) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -611,6 +611,28 @@ ActiveRecord::Schema.define(:version => 20120407100916) do
     t.integer  "subject_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "weibo_data", :force => true do |t|
+    t.string   "q"
+    t.string   "idstr"
+    t.string   "text"
+    t.string   "source"
+    t.string   "thumbnail_pic"
+    t.string   "bmiddle_pic"
+    t.string   "original_pic"
+    t.string   "user_id"
+    t.string   "user_screen_name"
+    t.string   "user_name"
+    t.string   "user_profile_image_url"
+    t.string   "user_profile_url"
+    t.string   "user_gender"
+    t.string   "user_location"
+    t.string   "user_description"
+    t.datetime "created_time"
+    t.integer  "status"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
 end
