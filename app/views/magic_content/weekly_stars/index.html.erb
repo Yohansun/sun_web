@@ -31,7 +31,7 @@
             <% else %>
               <td><%= c.published_at.strftime("%Y-%m-%d %H:%M") %></td>
             <%- end %>
-            <td nowrap="nowrap">
+            <td nowrap="nowrap" align="center">
               <%= link_to '编辑', edit_subject_weekly_star_path(parent, c), :class => 'button basicBtn' %>
               <%= link_to '删除', [parent, c], :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
             </td>
