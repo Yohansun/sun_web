@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410093610) do
+ActiveRecord::Schema.define(:version => 20120410122928) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(:version => 20120410093610) do
     t.integer  "show_preview_img_file_size"
     t.datetime "show_preview_img_updated_at"
     t.string   "recommend_color"
-    t.string   "desigin_thought"
+    t.text     "design_thought"
   end
 
   create_table "comments", :force => true do |t|
