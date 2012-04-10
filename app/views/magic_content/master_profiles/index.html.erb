@@ -35,7 +35,7 @@
             <% end %>
             <td><%= image_tag c.preview_img_out.url(:thumb) %></td>
             <td><%= image_tag c.preview_img_in.url(:thumb) %></td>
-            <td nowrap="nowrap">
+            <td nowrap="nowrap" align="center">
               <%= link_to '编辑', edit_subject_master_profile_path(parent, c), :class => 'button basicBtn' %>
               <%= link_to '删除', [parent, c], :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
             </td>
