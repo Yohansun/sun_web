@@ -1,9 +1,9 @@
 <div class="design_tit group pb10 line_b_dot">
-  <ul class="design_tags group">
-	<li class="<%= 'li_current' if params[:tags].nil? || params[:tags] == '全部' %> ">
-	  <a href="/master_designs">全部</a>
-	</li>
+  <ul class="design_filter group">
 	<%- if params[:master_kind].nil? %>
+        <li class="<%= 'li_current' if params[:tags] == '全部' || !params[:tags] %> ">
+          <a href="/master_designs?tags=<%= URI.escape("全部") %>">全部</a>
+        </li>
 		<li class="<%= 'li_current' if params[:tags] == '海外' %> ">
 		  <a href="/master_designs?tags=<%= URI.escape("海外") %>">海外</a>
 		</li>
@@ -14,6 +14,9 @@
 		  <a href="/master_designs?tags=<%= URI.escape("中国大陆") %>">中国大陆</a>
 		</li>
 	<%- else %>
+        <li class="<%= 'li_current' if params[:tags] == '全部' || !params[:tags] %> ">
+          <a href="/master_designs?tags=<%= URI.escape("全部") %>&master_kind=<%= params[:master_kind] %>">全部</a>
+        </li>
 		<li class="<%= 'li_current' if params[:tags] == '海外' %> ">
 		  <a href="/master_designs?tags=<%= URI.escape("海外") %>&master_kind=<%= params[:master_kind] %>">海外</a>
 		</li>

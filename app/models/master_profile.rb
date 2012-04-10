@@ -19,11 +19,6 @@ class MasterProfile < ActiveRecord::Base
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
   def self.tag_list
-    array = ['海外','港澳台','中国大陆']
-    array.each do |i|
-      i = URI.escape(i)
-    end
-    array
+    ['海外','港澳台','中国大陆']
   end
-
 end
