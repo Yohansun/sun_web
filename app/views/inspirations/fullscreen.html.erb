@@ -33,7 +33,9 @@
           <ul>
             <% @inspiration.user.inspirations.limit(5).each do |inspiration| -%>
             <li>
-              <%= link_to image_tag(inspiration.cover_img.file.url(:fullscreen_thumb)), user_inspiration_path(@inspiration.user_id, inspiration) %>
+              <%- if inspiration.cover_img && inspiration.cover_img.file %>
+                <%= link_to image_tag(inspiration.cover_img.file.url(:fullscreen_thumb)), user_inspiration_path(@inspiration.user_id, inspiration) %>
+              <%- end %>
             </li>
             <% end -%>
           </ul>
