@@ -7,9 +7,10 @@ class EventsController < ApplicationController
       @events = @user.events.page params[:page]
       render :template => "users/events"
     else
-      comments ||= Comment.where(:commentable_type => "FakeEvent")
+      comments  ||= Comment.where(:commentable_type => "FakeEvent")
       @comments ||= comments.page(params[:page]).per(6)
-      @size ||= comments.length
+      @designers ||= MasterVideo.all
+      @size     ||= comments.length
     end
   end
 
@@ -35,6 +36,8 @@ class EventsController < ApplicationController
   end
 
   def show
-
+    @designers ||= MasterVideo.all
+    @designer ||= MasterVideo.find(params[:id])
+    @comments ||= Comment.where("commentable_id = ? and commentable_type = ?", params[:id], "MasterVideo").page(params[:page]).per(6)
   end
 end

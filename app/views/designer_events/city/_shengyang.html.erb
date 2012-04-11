@@ -1,0 +1,91 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "style" %>
+    <style type="text/css">
+        span.arrow_1 {
+            right: 168px
+        }
+
+        span.arrow_2 {
+            right: 100px
+        }
+
+        .section {
+            zoom: 1;
+        }
+    </style>
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/Scripts/swfobject_modified.js" %>
+    <script type="text/javascript">
+        <!--
+        swfobject.registerObject("FLVPlayer");
+        //-->
+    </script>
+<%- end %>
+<div class='wrapper act_beijing pt25 pb30'>
+  <div class="shadow">
+    <div class="section">
+      <img src="<%= asset_path "big_bg/shenyang1.jpg"%>"/>
+
+      <div class="shenyang2">
+        <p>1. 东北三省的知名家装公司总经理和设计总监齐聚一堂，共同探讨家装界色彩的运用和趋势。东北，可真是藏龙卧虎噢-</p>
+      </div>
+      <!--shenyang2 ends-->
+      <div class="shenyang3">
+        <p>2. 会场靓点好多啊：立邦产品展示区和体验区，向每一位亲临的嘉宾与设计师，展示了2012年的色彩趋势系列以及最新艺术漆产品效果。</p>
+      </div>
+      <!--shenyang3 ends-->
+      <div class="shenyang4">
+        <p>3. 我们要做“好色之徒”!哈尔滨“城市人家”王总的发言可谓一语点醒梦中人，色彩，设计中不可或缺啊。好色有理!</p>
+      </div>
+      <!--shenyang4 ends-->
+      <div class="shenyang5">
+        <p>4. 现场体验立邦面向设计师的icolor网站(www.icolor.com.cn)，众多设计前沿资讯和色彩风尚，设计师们兴趣很浓厚，纷纷填写注册资料准备成为icolor会员呢!</p>
+      </div>
+      <!--shenyang5 ends-->
+      <div class="shenyang6">
+        <p>5. 东北人才济济，五色美酒，连调酒师大帅哥为大家助兴的节目都和色彩息息相关哦！</p>
+
+        <div class="shenyang_video">
+          <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="444" height="286" id="FLVPlayer">
+            <param name="movie" value="/flash/FLVPlayer_Progressive.swf"/>
+            <param name="quality" value="high"/>
+            <param name="wmode" value="opaque"/>
+            <param name="scale" value="noscale"/>
+            <param name="salign" value="lt"/>
+            <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/shenyang&amp;autoPlay=false&amp;autoRewind=false"/>
+            <param name="swfversion" value="8,0,0,0"/>
+            <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+            <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+            <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+            <!--[if !IE]>-->
+            <object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="444" height="286">
+              <!--<![endif]-->
+              <param name="quality" value="high"/>
+              <param name="wmode" value="opaque"/>
+              <param name="scale" value="noscale"/>
+              <param name="salign" value="lt"/>
+              <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/shenyang&amp;autoPlay=false&amp;autoRewind=false"/>
+              <param name="swfversion" value="8,0,0,0"/>
+              <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+              <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+              <div>
+                <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+
+                <p>
+                  <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player"/></a>
+                </p>
+              </div>
+              <!--[if !IE]>-->
+            </object>
+            <!--<![endif]-->
+          </object>
+        </div>
+        <!--shenyang_video ends-->
+      </div>
+      <!--shenyang6 ends-->
+    </div>
+    <!--section ends-->
+  </div>
+  <!--shadow ends-->
+</div><!--wrapper ends-->

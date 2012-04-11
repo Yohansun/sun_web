@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410122928) do
+ActiveRecord::Schema.define(:version => 20120411071156) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -349,6 +349,14 @@ ActiveRecord::Schema.define(:version => 20120410122928) do
     t.datetime "preview_img_in_updated_at"
     t.string   "master_kind"
     t.string   "interview_content_type"
+  end
+
+  create_table "master_videos", :force => true do |t|
+    t.string   "py"
+    t.string   "name"
+    t.text     "intro"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "messages", :force => true do |t|

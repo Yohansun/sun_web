@@ -1,0 +1,3 @@
+class MasterVideo < ActiveRecord::Base
+  has_many :comments, :as => :commentable
+end

@@ -18,6 +18,8 @@ class CommentsController < ApplicationController
         redirect_to user_inspiration_path(@comment.commentable.user_id, @comment.commentable.id)
       when 'FakeEvent'
         redirect_to "/events"
+      when 'MasterVideo'
+        redirect_to "/events/#{@comment.commentable.id}"
       else
     end
   end
