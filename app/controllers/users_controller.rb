@@ -32,4 +32,19 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def update_user_role
+    if current_user
+      current_user.attributes = params[:user]
+      if current_user.update_attributes(params[:user])#save(false)
+        redirect_to(root_path)
+      else
+        render omniauth_user_path
+      end
+    end
+  end
+  
+  def omniauth_user
+    
+  end
 end
