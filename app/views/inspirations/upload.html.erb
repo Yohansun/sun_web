@@ -43,7 +43,13 @@ $(function() {
         '_method': 'post',
         '<%= session_key %>' : '<%= cookies[session_key] %>',
         'authenticity_token': '<%= form_authenticity_token %>'
-    }
+    },
+    onUploadStart : function(){
+      $("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      $("#upload_going").hide();
+    }    
   });
 
 });
@@ -70,6 +76,7 @@ function uploads_size () {
         <div class="work_area clear">
           <p class="fl">您已经添加了<span id="inspiration_images_size"><%= @inspiration.design_images.size %></span>张图片（还可以添加<span><%= 60 - @inspiration.design_images.size %></span>张）</p>
           <a href="#" class="re_add fr" id="upload_photo"></a>
+          <div><img src="<%= asset_path "indicator.gif" %>" style="display:none;" id="upload_going"></div>
           <div class="upload_bin fl">
             <div class="load_bar clear">
               <div class="work_title fb fl">文件</div>
