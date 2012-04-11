@@ -81,14 +81,14 @@ function add_tag(text){
         <div class="reg_list reg_width fl">
           <%= f.label :style, "风格：" %>
           <div class="fl">
-            <%= f.select :style, ["现代简约", "中式新古典", "欧式复古", "田园地中海", "其他"],
+            <%= f.select :style, style_option,
               class: "fl" %>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <%= f.label :room_type, "户型：" %>
           <div class="fl">
-            <%= f.select :room_type, ["一室一厅", "二室一厅", "二室二厅", "三室二厅", "其他"],
+            <%= f.select :room_type, room_type_option,
               class: "fl" %>
           </div>
         </div><!--reg_list ends-->
