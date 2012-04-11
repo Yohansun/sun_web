@@ -21,7 +21,7 @@
         <div class="rowElem">
           <label>&nbsp;&nbsp;&nbsp;风格:</label>
           <div class="formRight www1">
-            <%= f.select :design_style, ColorDesign.style_select, :class => "validate[required]" ,:prompt => '--请选择--'  %>
+            <%= f.select :design_style, style_option, :class => "validate[required]" ,:prompt => '--请选择--'  %>
           </div>
           <div class="fix"></div>
         </div>
@@ -29,7 +29,7 @@
         <div class="rowElem">
           <label>&nbsp;&nbsp;&nbsp;功能区:</label>
           <div class="formRight www1">
-            <%= f.select :design_usage, ColorDesign.usage_select, :class => "validate[required]" ,:prompt => '--请选择--' %>
+            <%= f.select :design_usage, usage_option, :class => "validate[required]" ,:prompt => '--请选择--' %>
           </div>
           <div class="fix"></div>
         </div>
@@ -37,7 +37,7 @@
         <div class="rowElem">
           <label>&nbsp;&nbsp;&nbsp;色系:</label>
           <div class="formRight www1">
-            <%= f.select :design_color, ColorDesign.color_select, :class => "validate[required]" ,:prompt => '--请选择--'  %>
+            <%= f.select :design_color, color_option, :class => "validate[required]" ,:prompt => '--请选择--'  %>
           </div>
           <div class="fix"></div>
         </div>
