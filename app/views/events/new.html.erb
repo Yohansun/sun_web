@@ -1,4 +1,6 @@
 <%- content_for :tail do %>
+<%= stylesheet_link_tag 'jDatepicker' %>
+<%= javascript_include_tag "datepicker_lang_US.js","jquery.datepicker.js" %>
     <script type="text/javascript">
         $(function() {
             $(".temptime").datepicker({ picker: "<img class='picker' align='middle' src='<%= asset_path "img/cal.gif" %>' alt=''/>" });
@@ -28,13 +30,10 @@
 		</div>
 		<div class="modify_list">
 			<label for="event_date">活动时间：</label>
-			<select>
-				<option>当天结束</option>
-			</select>
 			<%= f.text_field :begin_at, :class => "temptime" %>
-			<%= select_hour Time.now, :field_name => 'begin_time' %>			
+      <%= f.select :begin_time, Event::TIME_PERIOD %>
 			至
-			<%= select_hour Time.now + 6.hour, :field_name => 'end_time' %>			
+			<%= f.select :end_time, Event::TIME_PERIOD %>
 		</div>
 		<div class="modify_list">
 			<label for="upload_img">上传图片：</label>
