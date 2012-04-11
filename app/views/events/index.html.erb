@@ -1,21 +1,5 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "exciting_activities", "style" %>
-    <style type="text/css">
-        span.arrow_1 {
-            right: 203px;
-        }
-
-        span.arrow_2 {
-            right: 135px;
-        }
-    </style>
-<%- end %>
-<div class="main page_weekstar">
-  <div class='sub_title tr'>
-    <img src="<%= asset_path "design/title_event.png"%>"/>
-  </div>
-  <div class='sub_nav ft12 pr tr'>
-    <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">年度色彩趋势活动</a>
+    <%= stylesheet_link_tag "style","exciting_activities" %>
     <style type="text/css">
         span.arrow_1 {
             right: 208px
@@ -25,15 +9,76 @@
             right: 142px
         }
     </style>
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/Scripts/swfobject_modified.js" %>
+    <script type="text/javascript">
+        <!--
+        swfobject.registerObject("FLVPlayer");
+        //-->
+    </script>
+<%- end %>
+<div class="main page_weekstar">
+  <div class='sub_title tr'>
+    <img src="<%= asset_path "design/title_event.png"%>"/>
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">年度色彩趋势活动</a>
   </div>
   <!--sub_nav ends-->
   <div class="wrapper group color-trend">
     <div class="shadow">
       <div class="section">
-        <div class="banner">
-          <img src="<%= asset_path "design/2012-color-trend.jpg"%>"/>
-          <a href="#" class="play">&nbsp;</a>
+        <img src="<%= asset_path "design/trend/trend_head.jpg"%>"/>
+        <!--<a href="#" class="report">活动报道</a>- ->
+                  <!--<a href="#" class="play">&nbsp;</a>-->
+        <div class="trend">
+          <p class="tc"><img src="<%= asset_path "design/trend/trend_title.png"%>"/></p>
+
+          <p>每个人的生活都是不同的颜色，萧爱彬、宋微建等众多室内设计领袖的生活是什么颜色？他们对立邦2012的色彩趋势有着怎样的看法？他们对室内设计又有着怎样的感悟呢？一起来听听设计领袖们讲述关于他们的色彩故事。</p>
+
+          <div class="fl">
+            <img src="<%= asset_path "design/trend/trend_left.png"%>"/>
+
+            <p>在2012色彩潮流趋势即将发布之际，25位室内设计领袖和5位跨界艺术家一起为你带来精彩的视频大片，为你讲述他们自己的色彩故事，让您抢先了解今年的色彩趋势。</p>
+          </div>
+          <div class="fr">
+             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="610" height="340" id="FLVPlayer">
+              <param name="movie" value="/flash/FLVPlayer_Progressive.swf"/>
+              <param name="quality" value="high"/>
+              <param name="wmode" value="opaque"/>
+              <param name="scale" value="noscale"/>
+              <param name="salign" value="lt"/>
+              <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/main&amp;autoPlay=false&amp;autoRewind=false"/>
+              <param name="swfversion" value="8,0,0,0"/>
+              <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+              <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+              <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+              <!--[if !IE]>-->
+              <object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="610" height="340">
+                <!--<![endif]-->
+                <param name="quality" value="high"/>
+                <param name="wmode" value="opaque"/>
+                <param name="scale" value="noscale"/>
+                <param name="salign" value="lt"/>
+                <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/main&amp;autoPlay=false&amp;autoRewind=false"/>
+                <param name="swfversion" value="8,0,0,0"/>
+                <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+                <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+                <div>
+                  <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+
+                  <p>
+                    <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player"/></a>
+                  </p>
+                </div>
+                <!--[if !IE]>-->
+              </object>
+              <!--<![endif]-->
+            </object>
+          </div>
         </div>
+        <!--trend ends-->
         <div class="galleryE_wrap">
           <div class="share">
             <!-- JiaThis Button BEGIN -->
@@ -46,97 +91,36 @@
               <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
               <a class="jiathis_counter_style"></a>
             </div>
-            <script type="text/javascript" charset="utf-8">
-          		var jiathis_config = {
-          		    boldNum:4,
-          		    siteNum:4,
-          		    showClose:false,
-          		    sm:"kaixin001,renren,tsina,tqq",
-          		    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-          		    imageWidth:26,
-          		    marginTop:150,
-          		    url:"http://www.icolor.com.cn",
-          		    title:"#icolor#",
-          		    summary:"想知道2012最新的色彩趋势吗？一起来聆听设计领袖讲述他们的色彩故事吧。更多详情，请点击立邦iColor网",
-                  data_track_clickback: true
-          		}
-            </script>
             <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
             <!-- JiaThis Button END -->
             <span class="t">分享视频</span>
           </div>
           <div class="galleryE">
-            <span class="moveleft"></span>
-            <span class="moveright"></span>
-
+            <%- unless @designers.blank? %>
+              <span class="moveleft"></span>
+              <span class="moveright"></span>
+            <%- end %>
             <div class="list">
               <ul>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                <%- @designers.each do |d| %>
+                   <li><a href="/events/<%= d.try(:id) %>"><img src="<%= asset_path "design/trend/#{d.try(:py)}_s.jpg"%>"/></a></li>
+                <%- end %>
               </ul>
             </div>
           </div>
           <script type="text/javascript">
-              $(function() {
-                  var $item = $('div.galleryE div.list ul');
-                  var count = $item.find('li').size();
-                  var colsize = 8;
-                  var pwidth = $item.find('li').eq(0).width();
-                  var sp = 17;
-                  var wwidth = count * ( pwidth + sp ) - sp;
-                  var movewidth = pwidth + sp;
-                  var disabledClassName = "disabled";
-                  if (count > colsize) {
-                      var $left = $('div.galleryE span.moveleft');
-                      var $right = $('div.galleryE span.moveright');
 
-                      function s(left) {
-                          if (typeof left != 'number') {
-                              left = parseInt($item.css('left')) || 0;
-                          }
-                          $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
-                          $right[ ( -1 * left ) >= wwidth - ( colsize * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
-                      }
-
-                      s();
-                      $left.click(function() {
-                          if ($(this).hasClass(disabledClassName)) {
-                              return;
-                          }
-                          s((parseInt($item.css('left')) || 0) + movewidth);
-                          $item.animate({
-                              "left" : "+=" + movewidth + 'px'
-                          }, 'fast');
-                      });
-                      $right.click(function() {
-                          if ($(this).hasClass(disabledClassName)) {
-                              return;
-                          }
-                          s((parseInt($item.css('left')) || 0) - movewidth);
-                          $item.animate({
-                              "left" : "-=" + movewidth + 'px'
-                          }, 'fast');
-                      });
-                  }
-              });
           </script>
         </div>
         <div class="review_wrap">
           <div class="reviewform">
-            <div class="bar"><h4><span>评论</span>(<%= @comments.blank? ? "0" : @size%>)</h4><span class="r"><span class="words_tip">0</span>/140</span></div>
+            <div class="bar"><h4><span>评论</span>(<%= @comments.blank? ? "0" : @size %>)</h4>
+              <span class="r"><span class="words_tip">0</span>/140</span></div>
             <div class="form-content">
               <%= form_for(Comment.new) do |f| %>
                   <%= f.hidden_field :commentable_id, value: "1" %>
                   <%= f.hidden_field :commentable_type, value: 'FakeEvent' %>
-                  <p class="input"><%= f.text_area :content, :class => "area_text"%></p>
+                  <p class="input"><%= f.text_area :content, :class => "area_text" %></p>
 
                   <p class="button">
                     <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交"/>
@@ -145,17 +129,19 @@
             </div>
           </div>
           <div class="pager ft12">
-             <!--"第1-#{}条 , 共#{@comments.length}条" unless @comments.blank?-->
+            <!--"第1-#{}条 , 共#{@comments.length}条" unless @comments.blank?-->
             <%= paginate @comments %>
           </div>
           <div class="review_list">
             <ul class="review_listA">
               <%- @comments.each do |c| %>
-              <li>
-                <div class="bar"><span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_s(:db) %></span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content"> <%= c.content %></div>
-              </li>
+                  <li>
+                    <div class="bar">
+                      <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_s(:db) %></span>
+                    </div>
+                    <div class="reply"><a href="#">回复</a></div>
+                    <div class="content"> <%= c.content %></div>
+                  </li>
               <%- end %>
             </ul>
           </div>

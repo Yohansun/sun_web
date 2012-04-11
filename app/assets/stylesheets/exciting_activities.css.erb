@@ -5,7 +5,7 @@
 .event_desc .image img{width:100%;height:100%}
 .event_desc .text{float:right;width:455px}
 .event_desc h1, .the_activity .legend{padding:0 10px;height:45px;border-bottom:1px solid #e1e1e1;font-size:20px;line-height:45px;font-weight:bold;color:#c00404}
-span.status{margin-left:10px;padding:13px 44px;height:0;display:inline-block;overflow:hidden;vertical-align:middle;font-size:0;color:#fff1a8;font-size:0;background: url(/assets/news/event_status.jpg) no-repeat}
+span.status{margin-left:10px;padding:13px 44px;height:0;display:inline-block;overflow:hidden;vertical-align:middle;font-size:0;color:#fff1a8;font-size:0;background: url(<%= asset_path "news/event_status.jpg"%>) no-repeat}
 span.closed{background-position:0 -26px}
 .event_desc .properties{margin:5px 10px 0;font-size:14px;color:#6d6d6d}
 .event_desc .properties th, .event_desc .properties td{vertical-align:top;line-height:2}
@@ -26,10 +26,10 @@ span.closed{background-position:0 -26px}
 .the_activity .section{padding:12px}
 
 .operate{height:32px;border-bottom:1px solid #e1e1e1;font-size:12px;line-height:32px;text-align:right}
-.operate span{display:inline-block;margin-left:10px;padding-left:20px;color:#5C5C5C;line-height:18px;background:url(/assets/design/d_icon.png) no-repeat left -35px}
+.operate span{display:inline-block;margin-left:10px;padding-left:20px;color:#5C5C5C;line-height:18px;background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -35px}
 
 .stars{display:inline-block;width:70px;vertical-align:middle}
-.stars li{float:left;margin:2px 1px;width:12px;height:12px;cursor:pointer;background:url(/assets/news/star.png) no-repeat 100% 0}
+.stars li{float:left;margin:2px 1px;width:12px;height:12px;cursor:pointer;background:url(<%= asset_path "news/star.png"%>) no-repeat 100% 0}
 .stars li.not_selected{background-position:0 0}
 
 .the_activity .legend{padding-left:60px;border-bottom-width:4px;font-size:18px}
@@ -43,7 +43,7 @@ span.closed{background-position:0 -26px}
 .the_activity .properties th{white-space:nowrap}
 
 .galleryD{position:relative;width:664px;height:48px}
-.galleryD span{position:absolute;top:8px;display:block;width:22px;height:33px;cursor:pointer;background:url(/assets/design/galleryD.gif)}
+.galleryD span{position:absolute;top:8px;display:block;width:22px;height:33px;cursor:pointer;background:url(<%= asset_path "design/galleryD.gif"%>)}
 .galleryD .moveleft{left:0}
 .galleryD .moveright{right:0;background-position:0 100%}
 .galleryD .list{position:absolute;left:27px;top:0;width:609px;height:48px;overflow:hidden}
@@ -52,17 +52,17 @@ span.closed{background-position:0 -26px}
 .galleryD .list li img{width:48px;height:48px}
 
 .stars_big{width:235px;height:44px}
-.stars_big li{float:left;width:47px;height:100%;cursor:pointer;background:url(/assets/design/big_stars.gif)}
+.stars_big li{float:left;width:47px;height:100%;cursor:pointer;background:url(<%= asset_path "design/big_stars.gif"%>)}
 .stars_big li.not_selected{background-position:0 100%}
 
 .galleryD_wrap{padding:15px;border-top:1px dotted #737373;border-bottom:1px dotted #737373}
 .galleryD_wrap .galleryD{float:left;margin-top:5px;margin-left:5px}
 .galleryD_wrap .apply{float:right;text-align:center}
-.galleryD_wrap .apply .button a{display:inline-block;width:78px;height:31px;border:none;color:#712323;font-size:14px;font-weight:bold;text-align:center;line-height:31px;background:#f5b201 url(/assets/design/buttonA.gif)}
+.galleryD_wrap .apply .button a{display:inline-block;width:78px;height:31px;border:none;color:#712323;font-size:14px;font-weight:bold;text-align:center;line-height:31px;background:#f5b201 url(<%= asset_path "design/buttonA.gif"%>)}
 .galleryD_wrap .apply .count{margin-top:5px;text-align:center;line-height:1.5;color:#666}
 
 .galleryE{position:relative;margin:20px auto 0;width:833px;height:88px}
-.galleryE span{position:absolute;top:22px;display:block;width:12px;height:43px;cursor:pointer;background:url(/assets/design/galleryE.gif)}
+.galleryE span{position:absolute;top:22px;display:block;width:12px;height:43px;cursor:pointer;background:url(<%= asset_path "design/galleryE.gif"%>)}
 .galleryE .moveleft{left:0}
 .galleryE .moveright{right:0;background-position:0 100%}
 .galleryE .list{position:absolute;left:27px;top:0;width:781px;height:100%;overflow:hidden}
@@ -90,7 +90,7 @@ span.closed{background-position:0 -26px}
 .review_listA .bar .time{float:right;color:#909090}
 .review_listA .content{float:left;width:700px;padding:25px 0 25px 18px;font-size:14px}
 .review_listA .reply{float:right;display:inline}
-.review_listA .reply a{display:block;margin:25px 18px;padding-left:24px;padding-bottom:10px;height:20px;color:#565656;font-size:14px;background:url(/assets/design/reply.gif) no-repeat 0 2px}
+.review_listA .reply a{display:block;margin:25px 18px;padding-left:24px;padding-bottom:10px;height:20px;color:#565656;font-size:14px;background:url(<%= asset_path "design/reply.gif"%>) no-repeat 0 2px}
 * html .review_listA .reply a{width:1%;white-space:nowrap}
 
 .review_wrap{margin:25px 30px;padding-bottom:30px}
@@ -106,19 +106,25 @@ span.closed{background-position:0 -26px}
 
 .color-trend .shadow{margin-bottom:40px;width:899px}
 .color-trend .section{width:900px}
-.color-trend .banner{height:706px;position:relative}
-.color-trend .banner img{position:absolute}
+.trend{background:url(<%= asset_path "design/trend/trend_bg.jpg"%>) no-repeat;width:900px;height:614px;margin-bottom:-57px;}
+.trend p{text-indent:2em;line-height:2em;width:836px;margin:0 auto;color:#525252;}
+.trend div.fl{width:229px;margin:45px 0 0 30px;}
+.trend div.fl p{width:229px;}
+.trend div.fr{margin:30px 0 0;}
+/*
+.color-trend .banner{height:706px;}
+.color-trend .banner img{position:absolute}	
 .color-trend .banner .report{position:absolute;right:30px;top:178px;z-index:10;display:block;width:153px;height:42px;font-size:0;color:#f9f9f9;line-height:20px}
 .color-trend .banner .play{position:absolute;right:11px;top:363px;z-index:10;display:block;width:612px;height:343px}
 *+html .color-trend .banner .report{background:#fff;filter:alpha(opacity=0)}
 *+html .color-trend .banner .play{background:#fff;filter:alpha(opacity=0)}
 * html .color-trend .banner .report{background:#fff;filter:alpha(opacity=0)}
 * html .color-trend .banner .play{background:#fff;filter:alpha(opacity=0)}
+*/
 
-.galleryE_wrap{height:165px;background:url(/assets/design/color_trend_bg.gif)}
+.galleryE_wrap{height:165px;background:url(<%= asset_path "design/color_trend_bg.gif"%>)}
 .galleryE_wrap .share{margin-top:5px;height:32px}
 .galleryE_wrap .share .t{float:right;margin-right:10px;font-size:16px;line-height:32px}
 .galleryE_wrap .share div{float:right;width:288px;overflow:hidden}
 
 .color-trend .reviewform textarea{width:828px}
-

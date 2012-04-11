@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "exciting_activities", "style" %>
+    <%= stylesheet_link_tag "exciting_activities", "style" %>
     <style type="text/css">
         span.arrow_1 {
             right: 203px;
@@ -10,8 +10,16 @@
         }
     </style>
 <%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/Scripts/swfobject_modified.js" %>
+    <script type="text/javascript">
+        <!--
+        swfobject.registerObject("FLVPlayer");
+        //-->
+    </script>
+<%- end %>
 <div class="main page_weekstar">
-  <div class='sub_title tr'><img src="<%= asset_path "design/title_event.png"%>"/></div>
+  <div class='sub_title tr'><img src="<%= asset_path "design/title_event.png" %>"/></div>
   <div class='sub_nav ft12 pr tr'>
     <a href="#">首页</a><span class="arrow_1"></span><a href="#">精彩活动</a><span class="arrow_2"></span><a class="fb" href="#">年度色彩趋势活动</a>
   </div>
@@ -22,11 +30,46 @@
         <div class="banner_n">
           <div class="master_story group">
             <div class="master_story_l fl">
-              <img class="fr" src="<%= asset_path "design/master_story_img.jpg"%>" alt=""/><a class="fl" href="#">沈立东</a>
+              <img class="fr" src="<%= asset_path "design/trend/#{@designer.try(:py)}_b.jpg" %>" alt=""/><a class="fl" href="#"><%= @designer.try(:name) %></a>
 
-              <p class="master_story_l2 fl">工商管理博士，高级室内建筑师，国家一级注册建筑师，上海现代建筑装饰环境设计研究院有限公司董事长。获“2006年中国设计业十大杰出青年经济人物”、“2006年度上海十大青年经济人物”、“全国自身室内建筑师”、“中国室内设计成就奖”。</p>
+              <p class="master_story_l2 fl"><%= @designer.try(:intro) %></p>
             </div>
-            <img class="fr" src="<%= asset_path "design/4.1.1_n.jpg"%>"/></div>
+            <div class="fr">
+              <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="610" height="340" id="FLVPlayer">
+                <param name="movie" value="/flash/FLVPlayer_Progressive.swf"/>
+                <param name="quality" value="high"/>
+                <param name="wmode" value="opaque"/>
+                <param name="scale" value="noscale"/>
+                <param name="salign" value="lt"/>
+                <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/<%= @designer.try(:py) %>&amp;autoPlay=false&amp;autoRewind=false"/>
+                <param name="swfversion" value="8,0,0,0"/>
+                <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+                <param name="expressinstall" value="Scripts/expressInstall.swf"/>
+                <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="610" height="340">
+                  <!--<![endif]-->
+                  <param name="quality" value="high"/>
+                  <param name="wmode" value="opaque"/>
+                  <param name="scale" value="noscale"/>
+                  <param name="salign" value="lt"/>
+                  <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/<%= @designer.try(:py) %>&amp;autoPlay=false&amp;autoRewind=false"/>
+                  <param name="swfversion" value="8,0,0,0"/>
+                  <param name="expressinstall" value="/flash/Scripts/expressInstall.swf"/>
+                  <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+                  <div>
+                    <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+
+                    <p>
+                      <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player"/></a>
+                    </p>
+                  </div>
+                  <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+              </object>
+            </div>
+          </div>
           <div class="galleryE_wrap">
             <div class="share">
               <!-- JiaThis Button BEGIN -->
@@ -42,16 +85,11 @@
 
               <div class="list">
                 <ul>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
-                  <li><a href="#"><img src="<%= asset_path "design/ub1.jpg"%>"/></a></li>
+                  <%- @designers.each do |d| %>
+                      <li>
+                        <a href="/events/<%= d.try(:id) %>"><img src="<%= asset_path "design/trend/#{d.try(:py)}_s.jpg" %>"/></a>
+                      </li>
+                  <%- end %>
                 </ul>
               </div>
             </div>
@@ -61,56 +99,34 @@
           <div class="reviewform">
             <div class="bar">
               <h4><span>评论</span>(86)</h4>
-              <span class="r"><span class="words_tip">0</span>/140</span>
-            </div>
+              <span class="r"><span class="words_tip">0</span>/140</span></div>
             <div class="form-content">
-              <form>
-                <p class="input">
-                  <textarea class="area_text"></textarea>
-                </p>
+              <%= form_for(Comment.new) do |f| %>
+                  <%= f.hidden_field :commentable_id, value: "#{@designer.try(:id)}" %>
+                  <%= f.hidden_field :commentable_type, value: 'MasterVideo' %>
+                  <p class="input"><%= f.text_area :content, :class => "area_text" %></p>
 
-                <p class="button">
-                  <input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交"/>
-                </p>
-              </form>
+                  <p class="button">
+                    <input type="image" name="submit" src="<%= asset_path "design/submitA.gif" %>" alt="提交" value="提交"/>
+                  </p>
+              <%- end %>
             </div>
           </div>
-          <div class="pager ft12"><a class="prev" href="#"><span></span>上一页</a> <a href="#">1</a>
-            <a href="#" class="current">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
-            <a href="#">7</a> <a href="#">8</a> <a href="#">...</a> <a href="#">20</a>
-            <a class="next" href="#">下一页<span></span></a></div>
+          <div class="pager ft12">
+            <!--"第1-#{}条 , 共#{@comments.length}条" unless @comments.blank?-->
+            <%= paginate @comments %>
+          </div>
           <div class="review_list">
             <ul class="review_listA">
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
+              <%- @comments.each do |c| %>
+                  <li>
+                    <div class="bar">
+                      <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_s(:db) %></span>
+                    </div>
+                    <div class="reply"><a href="#">回复</a></div>
+                    <div class="content"> <%= c.content %></div>
+                  </li>
+              <%- end %>
             </ul>
           </div>
         </div>
@@ -118,10 +134,8 @@
     </div>
   </div>
   <div class='sub_bot pr'>
-    <div class="pager ft12"><a class="prev" href="#"><span></span>上一页</a> <a href="#">1</a>
-      <a href="#" class="current">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
-      <a href="#">7</a> <a href="#">8</a> <a href="#">...</a> <a href="#">20</a>
-      <a class="next" href="#">下一页<span></span></a></div>
+    <div class="pager ft12">
+    </div>
   </div>
   <!--sub_bot ends-->
 </div>
