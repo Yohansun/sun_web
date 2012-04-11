@@ -20,10 +20,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.end_at = params[:event][:begin_at]
-    @event.begin_time = params[:date][:begin_time]
-    @event.end_time = params[:date][:end_time]
     @event.user_id = current_user.id if current_user
-    #TODO where is session[:user_role]???
     if current_user #&& (current_user.role.role.eql? session[:user_role])
       if @event.save
         redirect_to user_events_path
