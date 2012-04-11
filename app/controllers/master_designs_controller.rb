@@ -12,6 +12,7 @@ class MasterDesignsController < ApplicationController
   end
 
   def fullscreen
+    @master_design = MasterDesign.find(params[:id])
     render :layout => nil
   end
 end

@@ -90,39 +90,40 @@ function galleryC(config){
 		$this.parent().hide();
 	});
 	setIntervalTime(2);
-	function showImage(index, lastHandle, firstHandle) {
-		index = parseInt(index);
-		if( isNaN(index) ) return false;
-		if( index > config.images.length-1 ) {
-			if( $.isFunction(lastHandle) ) {
-				lastHandle();
-			}
-		} else if( index < 0 ) {
-			if( $.isFunction(firstHandle) ) {
-				firstHandle();
-			}
-		} else {
-			clearTimeout(timer);
-			$imagePlayer.html('<img src="'+config.images[index]+'"/>');
-			currentImage = index;
-			if( $play.hasClass(config.pauseClass) ) {
-				timer = setTimeout(function(){
-					showImage( currentImage + 1 );
-				}, config.interval*1000);
-			}
-		}
-	}
-	obj.showImage = showImage;
-	//currentImage = 0;
-	showImage(0);
-	$moveRight.click(function(){ showImage( currentImage + 1, lastHandle ) });
-	$next.click(function(){ showImage( currentImage + 1, lastHandle ) });
-	$moveLeft.click(function(){ showImage( currentImage - 1, lastHandle ) });
-	$prev.click(function(){ showImage( currentImage - 1, lastHandle ) });
+    function showImage(index, lastHandle) {
+        index = parseInt(index);
+        if(index<0){return false;}
+        else if(index+1>config.images.length){}
+        else $('.qin_span').text('('+(index+1)+'/'+config.images.length+')');
+        if( isNaN(index) ) return false;
+        if( index > config.images.length-1 ) {
+            $('.gallery_over_mask').show();
+            $('.gallery_over_wrap').fadeIn('fast');
+        } else {
+            clearTimeout(timer);
+            $imagePlayer.html('<img src="'+config.images[index]+'"/>');
+            currentImage = index;
+            if( $play.hasClass(config.pauseClass) ) {
 
-	function lastHandle() {
-		$('.gallery_over_mask').show();
-		$('.gallery_over_wrap').fadeIn('fast');
-	}
-	return obj;
+                timer = setTimeout(function(){
+                    showImage( currentImage + 1 );
+                }, config.interval*1000);
+            }
+        }
+    }
+    obj.showImage = showImage;
+    //currentImage = 0;
+    showImage(0);
+    $moveRight.click(function(){ showImage( currentImage + 1, lastHandle ) });
+    $next.click(function(){ showImage( currentImage + 1, lastHandle ) });
+    $moveLeft.click(function(){ showImage( currentImage - 1, lastHandle ) });
+    $prev.click(function(){ showImage( currentImage - 1, lastHandle ) });
+    $play.click(function(){ showImage( currentImage, lastHandle ) });
+
+    function lastHandle() {
+        $('.gallery_over_mask').show();
+        $('.gallery_over_wrap').fadeIn('fast');
+    }
+
+    return obj;
 }

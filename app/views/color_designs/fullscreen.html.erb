@@ -8,14 +8,14 @@
   </head>
   <body>
     <div class="galleryC_wrap">
-      <div class="title"><h1><%= @design.design_name %><span>(1/<%= @design.color_design_uploads.length %>)</span></h1></div>
+      <div class="title"><h1><%= @design.design_name %><span class="qin_span"></span></h1></div>
       <div class="galleryC">
         <div class="toolbar">
           <div class="toolbar_wrap">
-            <div class="time"><span>10秒</span></div>
-            <div class="prev"></div>
-            <div class="pause"></div>
-            <div class="next"></div>
+            <!--<div class="time"><span>10秒</span></div>-->
+            <!--<div class="prev"></div>-->
+            <!--<div class="pause"></div>-->
+            <!--<div class="next"></div>-->
             <div class="exit"><%= link_to "退出全屏", "/color_designs/#{@design.id}" %></div>
           </div>
         </div>
@@ -33,7 +33,7 @@
     <div class="gallery_over_mask"></div>
     <script type="text/javascript">
       $(function(){
-          var obj = galleryC({ 'images' : [<%= @design.color_design_uploads.map{ |design| "'#{design.file.url(:fullscreen)}'" }.join(",") %>]});
+          var obj = galleryC({ 'images' : ['<%= @design.show_preview_img.url(:slide) %>']});
           $('div.gallery_over span.replay a').click(function(e){
             $('div.gallery_over_wrap').hide();
             $('div.gallery_over_mask').hide();
