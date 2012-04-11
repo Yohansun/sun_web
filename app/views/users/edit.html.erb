@@ -35,7 +35,13 @@ $(function() {
         '_method': 'post',
         '<%= session_key %>' : '<%= cookies[session_key] %>',
         'authenticity_token': '<%= form_authenticity_token %>'
-    }
+    },
+    onUploadStart : function(){
+      $("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      $("#upload_going").hide();
+    }    
   });
 });
 </script>
@@ -54,6 +60,7 @@ $(function() {
           <% end -%>
         </div>
         <a href="#" id="upload_photo"><%= image_tag "news/reg_upload.jpg" %></a>
+        <div><img src="<%= asset_path "indicator.gif" %>" style="display:none;" id="upload_going"></div>
       </div><!--upload ends-->
 
       <%= render :partial => "#{current_user.role.role rescue 'user'}" ,:locals => { :f => f } %>
