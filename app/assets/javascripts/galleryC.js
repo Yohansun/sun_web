@@ -45,7 +45,6 @@ function galleryC(config){
 	$play.click(function(){
 		this.className = this.className == config.playClass ? config.pauseClass : config.playClass;
 	});
-
 	if( config.intervals.length < 1 ) {
 		$timeSelector.append( '<ul><li>' + config.interval + '秒</li></ul>' );
 	} else if( config.interval == 1 ) {
@@ -90,40 +89,40 @@ function galleryC(config){
 		$this.parent().hide();
 	});
 	setIntervalTime(2);
-    function showImage(index, lastHandle) {
-        index = parseInt(index);
-        if(index<0){return false;}
-        else if(index+1>config.images.length){}
-        else $('.qin_span').text('('+(index+1)+'/'+config.images.length+')');
-        if( isNaN(index) ) return false;
-        if( index > config.images.length-1 ) {
-            $('.gallery_over_mask').show();
-            $('.gallery_over_wrap').fadeIn('fast');
-        } else {
-            clearTimeout(timer);
-            $imagePlayer.html('<img src="'+config.images[index]+'"/>');
-            currentImage = index;
-            if( $play.hasClass(config.pauseClass) ) {
-
-                timer = setTimeout(function(){
-                    showImage( currentImage + 1 );
-                }, config.interval*1000);
-            }
-        }
-    }
-    obj.showImage = showImage;
-    //currentImage = 0;
-    showImage(0);
-    $moveRight.click(function(){ showImage( currentImage + 1, lastHandle ) });
-    $next.click(function(){ showImage( currentImage + 1, lastHandle ) });
-    $moveLeft.click(function(){ showImage( currentImage - 1, lastHandle ) });
-    $prev.click(function(){ showImage( currentImage - 1, lastHandle ) });
-    $play.click(function(){ showImage( currentImage, lastHandle ) });
-
-    function lastHandle() {
-        $('.gallery_over_mask').show();
-        $('.gallery_over_wrap').fadeIn('fast');
-    }
-
-    return obj;
+	function showImage(index, lastHandle) {
+		index = parseInt(index);
+		if(index<0){return false;}
+		else if(index+1>config.images.length){}
+		else $('.qin_span').text(index+1+'/'+config.images.length);
+		if( isNaN(index) ) return false;
+		if( index > config.images.length-1 ) {
+			$('.gallery_over_mask').show();
+			$('.gallery_over_wrap').fadeIn('fast');
+		} else {
+			clearTimeout(timer);
+			$imagePlayer.html('<img src="'+config.images[index]+'"/>');
+			currentImage = index;
+			if( $play.hasClass(config.pauseClass) ) {
+				
+				timer = setTimeout(function(){
+					showImage( currentImage + 1 );
+				}, config.interval*1000);
+			}
+		}
+	}
+	obj.showImage = showImage;
+	//currentImage = 0;
+	showImage(0);
+	$moveRight.click(function(){ showImage( currentImage + 1, lastHandle ) });
+	$next.click(function(){ showImage( currentImage + 1, lastHandle ) });
+	$moveLeft.click(function(){ showImage( currentImage - 1, lastHandle ) });
+	$prev.click(function(){ showImage( currentImage - 1, lastHandle ) });
+	$play.click(function(){ showImage( currentImage, lastHandle ) });
+	
+	function lastHandle() {
+		$('.gallery_over_mask').show();
+		$('.gallery_over_wrap').fadeIn('fast');
+	}
+	
+	return obj;
 }
