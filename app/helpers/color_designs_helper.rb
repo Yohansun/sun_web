@@ -6,7 +6,7 @@ module ColorDesignsHelper
      ['紫色系',{:class => 'color_zs'}],['中性色系',{:class => 'color_mid'}]]
   end
   def usage_option
-    ['功能区','客厅','餐厅','厨房','卫生间','书房','儿童房','阳台','门厅','储物间','其他']
+    ['功能区','客厅','卧室','餐厅','厨房','卫生间','书房','儿童房','阳台','门厅','储物间','其他']
   end
 
   def style_option

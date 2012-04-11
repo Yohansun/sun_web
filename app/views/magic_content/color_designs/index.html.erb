@@ -1,13 +1,13 @@
 <div class="content">
-  <div class="title"><h5><%= parent.name %> >色彩搭配</h5>
-    <div class="num"><%= link_to '新增色彩搭配', new_subject_color_design_path(parent), :class => "redNum" %></div>
+  <div class="title"><h5><%= parent.name %> >色彩配搭</h5>
+    <div class="num"><%= link_to '新增色彩配搭', new_subject_color_design_path(parent), :class => "redNum" %></div>
     <%- if can?(:manage, Subject) && parent -%>
       <div class="num"><%= link_to '结构管理', subjects_path(:parent_id => parent), :class => "redNum" %></div>
     <%- end -%>
   </div>
   <!-- Dynamic table -->
   <div class="table">
-    <div class="head"><h5 class="iFrames">色彩搭配列表</h5></div>
+    <div class="head"><h5 class="iFrames">色彩配搭列表</h5></div>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
         <tr>
