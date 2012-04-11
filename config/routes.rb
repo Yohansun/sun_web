@@ -125,7 +125,12 @@ Icolor::Application.routes.draw do
     resources :site_messages
     resources :rank
     resource :avatar
+    member do 
+      get :omniauth_user
+      post :update_user_role
+    end
   end
+
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
