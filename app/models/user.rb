@@ -101,7 +101,27 @@ class User < ActiveRecord::Base
   def city
     user_city = self.area.parent if self.area
   end
+  
+  def not_role?
+    self.role_id.blank?
+  end
 
+  def job_designer?
+    self.des_status && self.role_id == 0 
+  end
+
+  def reading_designer?
+    self.des_status == false && self.role_id == 1
+  end
+  
+  def company?
+    self.role_id == 2
+  end
+  
+  def common_user?
+    self.role_id == 3
+  end
+  
   protected
   def recommended_requird?
     recommended == true
