@@ -33,10 +33,10 @@
 <!--design_tit ends-->
 <div class="list_btn line_b_dot">
   <%- if params[:tags].nil? || params[:tags] == '全部' %>
-      <a href="/master_interviews?master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
-	  <a href="/master_interviews?master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path color_master_image %>"/></a>
+	  <a href="/master_interviews?master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
+      <a href="/master_interviews?master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path color_master_image %>"/></a>
   <%- else %>
-      <a href="/master_interviews?tags=<%= params[:tags] %>&master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
+	  <a href="/master_interviews?tags=<%= params[:tags] %>&master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
       <a href="/master_interviews?tags=<%= params[:tags] %>&master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path color_master_image %>"/></a>
   <%- end %>
 </div>
