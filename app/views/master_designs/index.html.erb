@@ -29,16 +29,21 @@
               <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
               <h4>作品名称：<span><%= design.design_name %></span></h4>
 
+              <%- if design.master_design_uploads && design.master_design_uploads.size > 0  %>
               <div class="works_list_slide" id="qin_slide1">
                 <%= link_to image_tag("/assets/master/works_list_left.png"), "javascript:void(0)", :class => "works_pre" %><%= link_to image_tag("/assets/master/works_list_right.png"), "javascript:void(0)", :class => "works_next" %>
                 <div class="img_works_box">
                   <div class="img_works_list">
                     <%- design.master_design_uploads.each do |i| %>
-                        <%= image_tag(i.file.url(:thumb)) unless i.file.nil? %>
+                        <%- unless i.file.nil? %>
+                            <%= link_to image_tag(i.file.url(:thumb)), "/master_designs/#{design.id}"%>
+                        <%- end %>
                     <%- end %>
                   </div>
                 </div>
               </div>
+              <%- end -%>
+
             </div>
           </div>
         </div>
