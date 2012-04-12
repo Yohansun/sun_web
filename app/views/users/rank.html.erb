@@ -1,0 +1,44 @@
+<div class="main signup pb60 group">
+  <div class="shadow signup_box">
+    <div class="section">
+
+     <%= render :partial => "users/profile_box" %>
+
+      <div class="host_sort group">
+        <ul class="show_tit_ul group">
+          <li class="sort_show_tit">
+            <%= link_to "积分进度", user_rank_index_path, :class => "sort_show_a" %>
+          </li>
+        </ul>
+      </div><!--host_sort ends-->
+
+      <div class="progress_bar">
+        <div class="progress_status"><span>我的积分：</span><strong>120</strong><a href="/rules">查看会员机制》</a></div>
+        <div class="progress_status host_point_tit2"><span>目前等级：金牌会员</span><span>下级进阶：******</span></div>
+        <div class="progress_bg">
+          <div class="progress_over_l"><div class="progress_over_r"></div></div>
+        </div>
+      </div><!--progress_bar ends-->
+      <script type="text/javascript">
+          $(function() {
+              var m = 300;
+              var n = 120;
+
+              if (n > m) {
+                  n = m
+              }
+              var $width = $('.progress_over_l').width();
+              $('.progress_over_r').css('width', n / m * 773 + 'px');
+              $('.progress_over_r').append('<div class="progress_num">' + n + "/" + m + '</div>')
+
+              if (n <= 0) {
+                  $('.progress_over_l').css({'padding-left':'4px','width':'4px','background-image':'none'})
+              }
+          })
+      </script>
+
+    </div>
+  </div>
+  <!--shadow ends-->
+</div>
+<!--main ends-->

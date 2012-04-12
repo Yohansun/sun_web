@@ -1,37 +1,12 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'reg' %>
+  <%= stylesheet_link_tag 'reg','style' %>
   <%= javascript_include_tag 'jquery.masonry.js' %>
 <% end -%>
 <div class="main signup group">
   <div class="shadow signup_box">
     <div class="section">
-      <div class="host_self group">
-        <div class="signup_img_box"> <img class="box_shadow" src="<%= asset_path "personal/d_host_img.jpg"%>" alt="" />
-          <p><a href="#">修改账户信息</a></p>
-        </div>
-        <div class="host_status">
-          <p class="d_hostaddr">上海罗磊室内设计有限公司</p>
-          <a class="back_perhome" href="f_in_works.html">返回个人主页</a>
-          <div class="signup_text">
-            <span></span>
-            <p> 从业5年，擅长简约及田园风格室内装修设计 </p>
-          </div>
-          <p class="icon_email">Email：  designer@163.com</p>
-          <p class="icon_qq">Q   Q：  1204333759</p>
-          <p class="icon_msn">MSN：  designer@hotmail.com</p>
-          <p class="icon_fetion">飞  信：  395005</p>
-        </div>
-        <!--host_status ends-->
-      </div>
-      <!--host_self ends-->
 
-      <ul class="system_info group">
-        <li class="icon_point"><%= link_to "我的积分", user_rank_index_path %></li>
-        <li class="icon_info"><%= link_to "系统消息", user_site_messages_path, :class => "host_cur" %></li>
-        <li class="icon_qustion"><%= link_to "我的提问", user_faqs_path %></li>
-        <li class="icon_active"><%= link_to "我报名的活动", user_events_path %></li>
-      </ul>
-      <!--system_info ends-->
+      <%= render :partial => "users/profile_box" %>
 
       <div class="host_sort pr group">
         <ul class="show_tit_ul group">
