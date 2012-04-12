@@ -6,7 +6,8 @@ class SiteMessagesController < ApplicationController
   end
 
   def show
-    render :template => "#{controller_name}/users/#{action_name}" if params[:user_id]
+    @site_messages = SiteMessage.find(params[:id]) || SiteMessage.new
+    @comments = @site_messages.comments.page params[:page]
   end
 
   def create
@@ -17,4 +18,5 @@ class SiteMessagesController < ApplicationController
       fail.js { render 'fail' }
     end
   end
+
 end

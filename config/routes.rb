@@ -132,6 +132,7 @@ Icolor::Application.routes.draw do
       get :omniauth_user
       post :update_user_role
     end
+    resources :sys_msgs
   end
 
 

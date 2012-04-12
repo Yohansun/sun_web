@@ -483,14 +483,6 @@ function getstren(passwd) {
  	}
  return intScore;
 }
-/*system table*/
-$(function(){
-	$('.sys_content td img').click(function(){delete_row($(this))});
-})
-function delete_row(element)
-{
-	element.parents('tr').fadeOut();
-}
 /*upload tag*/
 $(function(){
 	toggleItem();

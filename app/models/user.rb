@@ -41,7 +41,10 @@ class User < ActiveRecord::Base
   has_many :events, :class_name => "Event", :foreign_key => "user_id"
   has_one :avatar
   has_many :faqs
+  has_many :site_messages
+  has_many :sys_msgs
   has_many :events
+  has_many :mix_colors
   belongs_to :area
   
   USER_TYPE = {0 => "设计师（在职）", 1 => "设计师（在读）", 2 => "家装公司"}   #TODO 修改channerl.controller中的查询

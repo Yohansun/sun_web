@@ -154,7 +154,7 @@
     </div>
     <!--err_tips-->
     <div class="loginCon ft12 clear">
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
+      <%= form_for(:user, :url => user_session_path, :remote => true) do |f| %>
           <div>
             <label for="username" class="username ft14 fl">帐号：</label>
             <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
