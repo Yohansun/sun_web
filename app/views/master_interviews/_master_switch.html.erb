@@ -4,6 +4,9 @@
         <li class="<%= 'li_current' if params[:tags] == '全部' || !params[:tags] %> ">
           <a href="/master_designs?tags=<%= URI.escape("全部") %>">全部</a>
         </li>
+        <li class="<%= 'li_current' if params[:tags] == '海外' %> ">
+		  <a href="/master_interviews?tags=<%= URI.escape("海外") %>">海外</a>
+		</li>
 		<li class="<%= 'li_current' if params[:tags] == '港澳台' %> ">
 		  <a href="/master_interviews?tags=<%= URI.escape("港澳台") %>">港澳台</a>
 		</li>
