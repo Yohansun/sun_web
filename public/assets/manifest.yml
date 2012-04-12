@@ -727,13 +727,13 @@ galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
 galleryC.js: galleryC-9ddd16ab9c847f260caae2d288857a0a.js
 galleryF.js: galleryF-9ca157f0f07941461f0e182a5462360f.js
 galleryG.js: galleryG-0ea9dd8e0b3e27db839401848ac774c2.js
-galleryK.js: galleryK-df2ab51e0709c838eee6e9d61466d95d.js
+galleryK.js: galleryK-fd9eb4c21840e95b49cc9bc36cbda768.js
 galleryM.js: galleryM-6ce9bb0e65ee15680728c1038614d86b.js
 galleryN.js: galleryN-ae9bf4dc14a00a6bfa746404b7a3cf0a.js
 galleryO.js: galleryO-7f9894b21781b6c2e42c5f74c608fb76.js
 home.js: home-80148e5c7e5b7899f916a93118e72fbd.js
 index.js: index-d3a99a6705b02105c18589f8df701f4c.js
-index3.js: index3-ae2ce4ea292e42a6af62d211d1862f53.js
+index3.js: index3-b915a9e1681a634f9fb951cbc44e8c16.js
 industry_news.js: industry_news-80148e5c7e5b7899f916a93118e72fbd.js
 inspirations.js: inspirations-80148e5c7e5b7899f916a93118e72fbd.js
 jquery.datepicker.js: jquery.datepicker-a53110ff547379235c4334a90056aef4.js
@@ -745,6 +745,7 @@ magic_content/color_designs.js: magic_content/color_designs-80148e5c7e5b7899f916
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
+magic_content/weibo_datas.js: magic_content/weibo_datas-80148e5c7e5b7899f916a93118e72fbd.js
 maillists.js: maillists-80148e5c7e5b7899f916a93118e72fbd.js
 main.js: main-741d3920b4567cdcb66dfb39721be816.js
 master_designs.js: master_designs-80148e5c7e5b7899f916a93118e72fbd.js
