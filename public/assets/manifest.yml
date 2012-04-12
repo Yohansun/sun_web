@@ -299,7 +299,7 @@ design/ua1.jpg: design/ua1-494fa694bc80d5c6119615c399424b3a.jpg
 design/ub1.jpg: design/ub1-e664b274caeaa4913dc4f3243d655a18.jpg
 design/upload_btn.png: design/upload_btn-3eac070e0a392f6e92de43bddb4a92d8.png
 design/utility.gif: design/utility-5a7b0907ddfebeedd34c523cafa783c7.gif
-design/utility.jpg: design/utility-8003b6d8b4c168ed0a9c6fdeb5bba994.jpg
+design/utility.jpg: design/utility-ab320f155f507082a8a255ded3d6c375.jpg
 design/utility_bg.gif: design/utility_bg-17067255c714ed04fc8c959dcdae9d74.gif
 design/utility_bgB.gif: design/utility_bgB-8bca9fc438ad9be0177427b8569fdee0.gif
 design/weekstar-galleryA-bg.gif: design/weekstar-galleryA-bg-5c111c3a0ff919307df01c493c76028a.gif
@@ -704,6 +704,7 @@ t_r_img1.jpg: t_r_img1-06bb672cb0458fb5dc412bac7563c132.jpg
 t_r_img2.jpg: t_r_img2-a7911c134da3c3632829a2f8583b93e6.jpg
 t_r_img3.jpg: t_r_img3-16a233ab713e319439002a9c9f36826b.jpg
 t_r_title.png: t_r_title-4ce5919b98f8dededc20ed8490d97a99.png
+tick.png: tick-ece43e5b2adf7dbb8a20cfb00d4a4071.png
 tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
@@ -733,7 +734,7 @@ galleryN.js: galleryN-ae9bf4dc14a00a6bfa746404b7a3cf0a.js
 galleryO.js: galleryO-7f9894b21781b6c2e42c5f74c608fb76.js
 home.js: home-80148e5c7e5b7899f916a93118e72fbd.js
 index.js: index-d3a99a6705b02105c18589f8df701f4c.js
-index3.js: index3-b915a9e1681a634f9fb951cbc44e8c16.js
+index3.js: index3-d65050093553ef332e1c2e2d4a261fed.js
 industry_news.js: industry_news-80148e5c7e5b7899f916a93118e72fbd.js
 inspirations.js: inspirations-80148e5c7e5b7899f916a93118e72fbd.js
 jquery.datepicker.js: jquery.datepicker-a53110ff547379235c4334a90056aef4.js
@@ -745,7 +746,6 @@ magic_content/color_designs.js: magic_content/color_designs-80148e5c7e5b7899f916
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
-magic_content/weibo_datas.js: magic_content/weibo_datas-80148e5c7e5b7899f916a93118e72fbd.js
 maillists.js: maillists-80148e5c7e5b7899f916a93118e72fbd.js
 main.js: main-741d3920b4567cdcb66dfb39721be816.js
 master_designs.js: master_designs-80148e5c7e5b7899f916a93118e72fbd.js
@@ -766,10 +766,10 @@ user.js: user-80148e5c7e5b7899f916a93118e72fbd.js
 users.js: users-80148e5c7e5b7899f916a93118e72fbd.js
 votes.js: votes-80148e5c7e5b7899f916a93118e72fbd.js
 weekly_stars.js: weekly_stars-80148e5c7e5b7899f916a93118e72fbd.js
-application.css: application-757ccb01f9e8b9117f252c35f3de571a.css
+application.css: application-1f44b25cd38f90914a386e6b075a8ccd.css
 approves.css: approves-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 articles.css: articles-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-base.css: base-cb121cd9f9bf1ce04a0cc3a860989d95.css
+base.css: base-8eb08e3bb6c71958277a9865fe885184.css
 channel.css: channel-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 color_articles.css: color_articles-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 color_designs.css: color_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
@@ -786,7 +786,7 @@ function.css: function-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 galleryc.css: galleryc-1330ea91c2cd1ce5c40f64b6983556f8.css
 home.css: home-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 index.css: index-334e4f8d0cf5a0755cef0f9612075b69.css
-industry_news.css: industry_news-dab9b8e74db103d1d481a5e547058848.css
+industry_news.css: industry_news-191ae10fe948aa30134bee9832ce0dbc.css
 inspirations.css: inspirations-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 jDatepicker.css: jDatepicker-2df7dba092a481ac73a2f6afbaf3c6e3.css
 jquery.rating.css: jquery.rating-923d0702dc605a2ab80b82a3885ed4e0.css
@@ -800,7 +800,7 @@ master_interviews.css: master_interviews-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 master_topics.css: master_topics-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 messages.css: messages-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 mix_colors.css: mix_colors-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-news.css: news-88e57b33bb6e67ffd9a74bd2be4b1c70.css
+news.css: news-e3d308965e69b6e04253a5aa488776aa.css
 other_events.css: other_events-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 rank.css: rank-95bd4fe1de99c1cd91ec8e6f348a44bd.css
@@ -814,7 +814,7 @@ user.css: user-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 users.css: users-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 votes.css: votes-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 weekly_stars.css: weekly_stars-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-weekstar.css: weekstar-69fb8bca1f1804ed92cef7060eb650ec.css
+weekstar.css: weekstar-35c8b23e64dc1dfec5f511b94248bd89.css
 magic_content/application.css: magic_content/application-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/banners.css: magic_content/banners-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/downloads.css: magic_content/downloads-95bd4fe1de99c1cd91ec8e6f348a44bd.css
