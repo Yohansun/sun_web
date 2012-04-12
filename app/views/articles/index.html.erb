@@ -29,7 +29,7 @@
             <%= image_tag article.preview_img.url(:icolor_articles) if article.preview_img %>
             <div class="article fl ft14">
               <h1><a href='#'><%= link_to article.title, "/articles/#{article.id}" %></a></h1>
-              <span>时间：<%= article.published_at.to_formatted_s(:db) %></span>
+              <span>时间：<%= article.published_at.to_date %></span>
               <%= raw article.intro %>...<%= link_to "[详细]", "/articles/#{article.id}" %>
             </div>
             <!--article ends-->
