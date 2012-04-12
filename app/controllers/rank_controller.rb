@@ -1,5 +1,7 @@
 class RankController < ApplicationController
+  before_filter :find_user
+
   def index
-    render :template => "#{controller_name}/users/#{action_name}" if params[:user_id]
+    render :template => "users/rank" if @user
   end
 end

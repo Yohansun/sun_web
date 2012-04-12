@@ -100,6 +100,9 @@ Icolor::Application.routes.draw do
   match "/gift" => "function#gift"
   match "/design_signup" => "function#design_signup"
 
+  #我的报名活动
+  match "/users/:user_id/events/my_event" => "events#my_event"
+
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"

@@ -1,0 +1,27 @@
+<%- content_for :head do %>
+<%= stylesheet_link_tag 'reg','style' %>
+<%- end %>
+<div class="main signup group">
+	<div class="shadow signup_box">
+		<div class="section">
+			<%= render :partial => "users/profile_box" %>
+			<div class="host_sort group">
+				<ul class="show_tit_ul group">
+					<li class="sort_show_tit">
+                      <%= link_to "我报名的活动", user_events_path, :class => "sort_show_a" %>
+					</li>
+				</ul>
+			</div><!--host_sort ends-->
+			<div class="host_main_list">
+				<h3><span class="ft14">发起时间</span><strong>标题</strong>（共<%= @events.size %>条）</h3>
+				<% @events.each do |event| %>
+				<p><span><%= event.created_at.strftime("%Y-%m-%d") %></span><%= event.title %></p>
+				<%- end -%>
+			</div>
+			<div class="pager host_pager ft12">
+				<%= paginate @events %>
+			</div><!--pager ends-->
+		</div>
+	</div>
+	<!--shadow ends-->
+</div>

@@ -108,8 +108,8 @@
       </li>
       <li class="pr"><a href="/color_articles">行业资讯</a>
         <ul>
-          <li><a href="/color_articles">色彩资讯</a></li>
           <li><a href="/articles">装修资讯</a></li>
+          <li><a href="/color_articles">色彩资讯</a></li>
           <li class="noborder"><a href="http://weibo.com/npicolor">微博资讯</a></li>
         </ul>
       </li>
@@ -134,11 +134,11 @@
         </ul>
       </li>
       <li class="noborder pr"><a href="/7-1">漆光艺彩</a>
-        <ul class="w_nav4">
-          <li><a href="/7-1">木纹风尚生活</a></li>
-          <li><a href="/7-2">墙面艺术效果</a></li>
-          <li class="noborder"><a href="/7-3">缤纷迷你涂料</a></li>
-        </ul>
+        <!--<ul class="w_nav4">-->
+          <!--<li><a href="/7-1">木纹风尚生活</a></li>-->
+          <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
+          <!--<li class="noborder"><a href="/7-3">缤纷迷你涂料</a></li>-->
+        <!--</ul>-->
       </li>
     </ul>
     <!--navBot ends-->
@@ -228,7 +228,7 @@
 
 <%= yield %>
 
-<div class='footer <%= 'mt50' if controller_name =~ /contact|function|designer_events|other_events|register/ %>'>
+<div class='footer <%= 'mt50' if controller_name =~ /contact|function|designer_events|other_events|register|rank|designs/ %>'>
   <div class='links'>
     <div class='w_995'>
       <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" target="_blank" alt="" /></a>
@@ -260,8 +260,8 @@
       </ul>
       <ul>
         <li><a href="#" class='fb'>行业资讯</a></li>
-        <li><a href="/articles">装修资讯</a></li>
         <li><a href="#">色彩资讯</a></li>
+        <li><a href="/articles">装修资讯</a></li>
         <li><a href="#">微博资讯</a></li>
       </ul>
       <ul>
