@@ -52,16 +52,16 @@ module ApplicationHelper
 
   def color_master_image
     if params[:master_kind] == "色彩大师"
-      url = "master/color_master_hover.png" 
+      url = "master/color_master_hover.png"
     else
-      url = "master/color_master_btn.png" 
+      url = "master/color_master_btn.png"
     end
     url
   end
   
   def space_master_image
     if params[:master_kind] == "室内空间大师"
-      url = "master/space_master_hover.png" 
+      url = "master/space_master_hover.png"
     else
       url = "master/space_master_btn.png"
     end

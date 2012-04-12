@@ -45,7 +45,7 @@ $(function() {
   <div class="wrapper">
     <%= form_for :user, :url => "/user/update", :remote => true  do |f| %>
     <div class="reg_content ft14">
-      <div class="reg_list reg_bd_top fl">
+      <div class="reg_list reg_bd_top fl referr_input">
         <label for="uesername">是否有推荐人：</label>
         <input type="radio" name="user[recommended]" checked="checked" class="radio_btn fl" value="1"/>
         <span class="recommand fl fb">是</span>
@@ -62,7 +62,7 @@ $(function() {
         </div>
         <a href="#" id="upload_photo"><%= image_tag "news/reg_upload.jpg" %></a>
       </div><!--upload ends-->
-      <div class="reg_list fl">
+      <div class="reg_list fl" id="referr">
         <label for="recommander">推荐人用户名：</label>
         <input type="text" class="password fl" name="user[recommended_name]"/>
         <span class="reg_tip3 fl">注：如您正确注册成功，推荐人账号相应获得奖励积分</span>

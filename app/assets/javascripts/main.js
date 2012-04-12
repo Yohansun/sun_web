@@ -389,6 +389,18 @@ $(function(){
 /*reg_suc*/
 
 $(function(){
+	$('.referr_input .radio_btn').click(function(){
+		var num = $('.radio_btn').index(this);
+		if(num==0)
+		{
+			$('#referr').fadeIn();
+			}
+		if(num ==1)
+		{
+			$('#referr').fadeOut()
+		}
+	})
+
 	var urls = $('.reg_suc a').attr('href');
 	if(urls){
 		var timer_num =5;
@@ -481,17 +493,19 @@ function delete_row(element)
 }
 /*upload tag*/
 $(function(){
+	toggleItem();
 	$('div.tags a').click(function(){
 		var txt = $(this).text();
-		add_tag(txt)
+		add_tag(txt);
 		});
 	$('input.add_tag_on').click(function(){
 		var txt = $('input.add_tag').val();
 		if(txt!='')
-		add_tag(txt)
+		add_tag(txt);
 		});
 	del_tag();
 });
+
 function del_tag(){
 	$('a.labels img').click(function(){
 		$(this).parents('a.labels').remove();
@@ -505,15 +519,24 @@ function add_tag(text){
 	$a.each(function(i){
 		arr.push($a.eq(i).text());
 		});
-	if(arr.indexOf(text)<0)
+	if($.inArray(text,arr)<0)
 	{
-		var $app = '<a href="javascript:void(0)" class="labels fl cr">'+text+'<img src="images/news/labels.png" /></a>';
+		var $app = '<a href="javascript:void(0)" class="labels fl cr pr">'+text+'<img src="/assets/news/labels.png" /></a>';
 		$list.append($app);
+		toggleItem();
 		del_tag();
 	}
 }
-/*reg2*/
 
+function toggleItem(){
+	$('.tag_list a').hover(
+	function(){
+		$(this).children('img').css('visibility','visible');
+	},function(){
+		$(this).children('img').css('visibility','hidden');
+	});
+}
+/*reg2*/
 
 $(function(){
 	var $status = $('input.status');

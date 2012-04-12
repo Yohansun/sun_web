@@ -485,6 +485,7 @@ news/go_back.jpg: news/go_back-8bf43d52564e86eb40bfc84bc2e902d8.jpg
 news/hot_icon.gif: news/hot_icon-952bddde6e9349eb93a29f33710721f3.gif
 news/hot_search.png: news/hot_search-6208a4efae68d8585629815d4c2b9db4.png
 news/kaixin.jpg: news/kaixin-3a3f3821c3360cf02a205241b7be5265.jpg
+news/labels.jpg: news/labels-7d7c8982754723c4d6cf8a41a096c2ec.jpg
 news/labels.png: news/labels-4fdd8823446e6ee2be9e8784c1a266b9.png
 news/load_files.jpg: news/load_files-0bd4b363b106004a46a3917239a0f75f.jpg
 news/maps/owner_map1.jpg: news/maps/owner_map1-0ce82747c9f5825d402c918315465457.jpg
@@ -704,11 +705,10 @@ t_r_img1.jpg: t_r_img1-06bb672cb0458fb5dc412bac7563c132.jpg
 t_r_img2.jpg: t_r_img2-a7911c134da3c3632829a2f8583b93e6.jpg
 t_r_img3.jpg: t_r_img3-16a233ab713e319439002a9c9f36826b.jpg
 t_r_title.png: t_r_title-4ce5919b98f8dededc20ed8490d97a99.png
-tick.png: tick-ece43e5b2adf7dbb8a20cfb00d4a4071.png
 tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-780f6da8cb21d49ac73f6a39aba61843.js
+application.js: application-dda8dae03fca25dc2dbbfcf1caa1172d.js
 approves.js: approves-80148e5c7e5b7899f916a93118e72fbd.js
 articles.js: articles-80148e5c7e5b7899f916a93118e72fbd.js
 channel.js: channel-80148e5c7e5b7899f916a93118e72fbd.js
@@ -747,7 +747,7 @@ magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f9
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
 maillists.js: maillists-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-741d3920b4567cdcb66dfb39721be816.js
+main.js: main-77b9977da56a86c1b13d2e877aa59589.js
 master_designs.js: master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 master_interviews.js: master_interviews-80148e5c7e5b7899f916a93118e72fbd.js
 master_topics.js: master_topics-80148e5c7e5b7899f916a93118e72fbd.js
@@ -804,7 +804,7 @@ news.css: news-e3d308965e69b6e04253a5aa488776aa.css
 other_events.css: other_events-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 rank.css: rank-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-reg.css: reg-fd5cb2b1bd222b4d06a802c8958db0dd.css
+reg.css: reg-e4b3ae9019b0dc8d80780fe32ed05f2c.css
 reset.css: reset-2f3393ec1a28bd55fcaef58e0a28e4c7.css
 site_messages.css: site_messages-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 softwares.css: softwares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
