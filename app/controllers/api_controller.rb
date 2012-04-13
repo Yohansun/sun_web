@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def create_user
     user = User.new
     user.username = params[:username]
