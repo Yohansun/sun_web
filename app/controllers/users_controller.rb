@@ -32,19 +32,29 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def update_user_role
     if current_user
+      if params[:user][:user_role] =~ /designer/
+        params[:user][:role_id] = Role.find_by_role("designer").id
+        params[:user][:des_status] = params[:user][:user_role] == "designer_1"
+      else
+        if params[:user][:user_role].blank?
+          params[:user][:user_role] = 'user'
+        end
+        params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id
+      end
+      debugger
       current_user.attributes = params[:user]
-      if current_user.update_attributes(params[:user])#save(false)
+      if current_user.save(:validate => false)
         redirect_to(root_path)
       else
-        render omniauth_user_path
+        render :action => "omniauth_user"
       end
     end
   end
-  
+
   def omniauth_user
-    
+
   end
 end
