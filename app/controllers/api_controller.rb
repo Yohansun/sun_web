@@ -5,6 +5,7 @@ class ApiController < ApplicationController
     user.username = params[:username]
     user.password = user.password_confirmation = params[:password]
     user.email = params[:email]
+    user.is_read = true
     user.role_id = Role.find_by_role(params[:role]).id
     if user.save
       render :text => '<results suc="true" msg=""/>'
@@ -16,7 +17,7 @@ class ApiController < ApplicationController
           messages << value[0] + ','
         end
       end
-      render :text => "<results suc='true' msg='#{messages}'/>"
+      render :text => "<results suc='false' msg='#{messages}'/>"
     end
   end
 
