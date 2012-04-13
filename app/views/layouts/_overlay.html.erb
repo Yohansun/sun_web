@@ -61,7 +61,7 @@
 
   <div class="unlogin abs_center none" id="login_win">
 
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
+    <%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
     <div class="subs_title ft18">
       <span class="fl">请先登录</span>
       <a href="javascript:void(0)" class="close_btn fr"></a>

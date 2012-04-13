@@ -1,4 +1,4 @@
-class SiteMessagesController < ApplicationController
+class SiteMessagesController < InheritedResources::Base
   before_filter :find_user
 
   def index
@@ -6,13 +6,17 @@ class SiteMessagesController < ApplicationController
   end
 
   def show
-    render :template => "#{controller_name}/users/#{action_name}" if params[:user_id]
+    @site_messages = SiteMessage.find(params[:id]) || SiteMessage.new
+    @comments = @site_messages.comments.page params[:page]
   end
 
   def create
+    @site_message = SiteMessage.new(params[:site_message])
+    @site_message.user_id = current_user.id
     create! do |succ, fail|
       succ.js { render 'success' }
       fail.js { render 'fail' }
     end
   end
+
 end

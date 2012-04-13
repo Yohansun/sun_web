@@ -5,14 +5,12 @@
 <div class="main signup group">
   <div class="shadow signup_box">
     <div class="section">
-
       <%= render :partial => "users/profile_box" %>
-
       <div class="host_sort pr group">
         <ul class="show_tit_ul group">
           <li class="sort_show_tit"><%= link_to "系统消息", user_site_messages_path, :class => "sort_show_a" %></li>
         </ul>
-        <span class="host_ts pa">(总共5条)</span> </div>
+        <span class="host_ts pa">(共<%= @site_messages.size%>条)</span> </div>
       <!--host_sort ends-->
 
       <table class="sys_content ft14 tc">
@@ -22,39 +20,18 @@
           <th class="th_3">时间</th>
           <th class="th_4">删除</th>
         </tr>
+        <% @site_messages.each do |site_message|%>
         <tr class="sys_row">
           <td>icolor客服</td>
           <td class="sys_topics"><a href="info.html">台湾著名设计师史迪威：设计要从加法回到减法</a></td>
           <td class="sys_time">2012-11-10 10:42</td>
           <td><a href="javascript:void(0)"><img src="<%= asset_path "close_btn.jpg"%>" /></a></td>
         </tr>
-        <tr class="sys_row">
-          <td>icolor客服</td>
-          <td class="sys_topics"><a href="#">台湾著名设计师史迪威：设计要从加法回到减法<br />
-              台湾著名设计师史迪威：设计要从加法回到减法</a></td>
-          <td class="sys_time">2012-11-10 10:42</td>
-          <td><a href="javascript:void(0)"><img src="<%= asset_path "close_btn.jpg"%>" /></a></td>
-        </tr>
-        <tr class="sys_row">
-          <td>icolor客服</td>
-          <td class="sys_topics"><a href="#">台湾著名设计师史迪威：设计要从加法回到减法</a></td>
-          <td class="sys_time">2012-11-10 10:42</td>
-          <td><a href="javascript:void(0)"><img src="<%= asset_path "close_btn.jpg"%>" /></a></td>
-        </tr>
-        <tr class="sys_row">
-          <td>icolor客服</td>
-          <td class="sys_topics"><a href="#">台湾著名设计师史迪威：设计要从加法回到减法</a></td>
-          <td class="sys_time">2012-11-10 10:42</td>
-          <td><a href="javascript:void(0)"><img src="<%= asset_path "close_btn.jpg"%>" /></a></td>
-        </tr>
-        <tr class="sys_row">
-          <td>icolor客服</td>
-          <td class="sys_topics"><a href="#">台湾著名设计师史迪威：设计要从加法回到减法</a></td>
-          <td class="sys_time">2012-11-10 10:42</td>
-          <td><a href="javascript:void(0)"><img src="<%= asset_path "close_btn.jpg"%>" /></a></td>
-        </tr>
+        <%- end -%>
       </table>
-      <div class="pager host_pager ft12"> <a class="prev" href="#"><span></span>上一页</a><a href="#">1</a><a href="#" class="current">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a class="next" href="#">下一页<span></span></a> </div>
+      <div class="pager host_pager ft12"> 
+        <%= paginate @site_messages %>
+      </div>
       <!--pager ends-->
     </div>
   </div>

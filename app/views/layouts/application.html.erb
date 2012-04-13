@@ -154,7 +154,7 @@
     </div>
     <!--err_tips-->
     <div class="loginCon ft12 clear">
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
+      <%= form_for(:user, :url => user_session_path, :remote => true) do |f| %>
           <div>
             <label for="username" class="username ft14 fl">帐号：</label>
             <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
@@ -201,7 +201,7 @@
           <span class="ft12">您可以给我们留言，我们会通过系统消息对您的留言给予答复；<br/>
           您也可以发送邮件至icolor@nipponpaint.com.cn，<br/>
           我们也将尽快回复给您！</span>
-          <textarea name="site_message[desc]"></textarea>
+          <%= text_area_tag "site_message[desc]" %>
           <span class="server_check none">请输入您要咨询的内容。</span>
         </div>
         <!--server_content ends-->
@@ -344,6 +344,8 @@
                 return true;
                 <% else -%>
                 show_login();
+                $('.server_input').hide();
+                $('.server_suc').hide();
                 return false;
                 <% end -%>
             });
