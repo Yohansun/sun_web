@@ -1,0 +1,6 @@
+<%- if item.status.nil? %>
+<%= link_to "显示在首页", main_app.weibo_item_path(item.id), method: :put, remote: true, class: "button basicBtn" -%>
+<%- else %>
+<%= image_tag(asset_path 'tick.png') unless item.status.nil? %>
+<%= link_to "隐藏", main_app.weibo_item_path(item.id), method: :put, remote: true, class: "button basicBtn" -%>
+<%- end %>

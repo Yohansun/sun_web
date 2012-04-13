@@ -1,7 +1,0 @@
-<%- if WeiboItem.find(params[:id]).status.nil? %>
-$("#tick<%=params[:id]%>").html("");
-$("weibo_check<%=params[:id]%> a")[0].text.html("显示");
-<%- else %>
-$("#tick<%=params[:id]%>").html("<%= image_tag(asset_path 'tick.png') %>");
-$("weibo_check<%=params[:id]%> a")[0].text.html("屏蔽");
-<%- end %>

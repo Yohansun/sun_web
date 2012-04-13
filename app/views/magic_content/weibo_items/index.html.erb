@@ -10,7 +10,6 @@
           <th width="5%">ID</th>
           <th>内容</th>
           <th width="100px">图片</th>
-          <th width="5%">状态</th>
           <th width="100px">操作</th>
         </tr>
       </thead>
@@ -20,13 +19,8 @@
             <td><%= c.id %></td>
             <td><%= c.text %></td>
             <td><%= image_tag c.thumbnail_pic %></td>
-            <td id="tick<%=c.id%>"><%= image_tag(asset_path 'tick.png') unless c.status.nil? %></td>
-            <td nowrap="nowrap" align="center" id='weibo_check<%=c.id%>'>
-              <%- if c.status.nil? %>
-                <a href="javascript:void(0)" onclick="weiboCheck(<%= c.id %>)" class="button basicBtn">显示</a>
-              <%- else %>
-                <a href="javascript:void(0)" onclick="weiboCheck(<%= c.id %>)" class="button basicBtn">屏蔽</a>
-              <%- end %>
+            <td nowrap="nowrap" align="center" id='weibo_item<%=c.id%>'>
+              <%= render :partial => "item", :locals => {item: c} %>
             </td>
           </tr>
         <%- end %>

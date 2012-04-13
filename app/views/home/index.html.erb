@@ -116,6 +116,7 @@
         </div>
         <div class="box_content">
           <div class="master_palace_content">
+            <% if @master_interview -%>
             <div class="original">
               <div class="image"><a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_in.url %></a></div>
               <div class="t"><a href="/master_interviews/<%= @master_interview.id %>"><%= @master_interview.title %></a></div>
@@ -133,6 +134,7 @@
                 <h4><%= @master_interview.name %></h4>
               </div>
             </div>
+            <% end -%>
           </div>
         </div>
       </div>
@@ -209,6 +211,7 @@
         <div class="box_title"><h3>大师作品</h3>
           <div class="more"><a href="/master_designs">+查看更多</a></div>
         </div>
+        <% if @master_design -%>
         <div class="boxb_content qa">
           <div class="gallery galleryN">
             <span class="moveleft"></span>
@@ -230,6 +233,7 @@
             <p>作品名称：<%= @master_design.design_name %></p>
           </div>
         </div>
+        <% end -%>
       </div>
     </div>
     <div class="top1mask"></div>
