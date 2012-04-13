@@ -610,7 +610,7 @@ paint_art/art_tit3.png: paint_art/art_tit3-3ee6545ad6548000c6135e7437354398.png
 paint_art/art_tit4.png: paint_art/art_tit4-42f1950a6608803f761b80e9dd033508.png
 paint_art/art_tit_fs.png: paint_art/art_tit_fs-5951d49d9621e4b42401c69375da884e.png
 paint_art/art_tit_green.png: paint_art/art_tit_green-6471ffd26e9e2cd70dcb623883c829cb.png
-paint_art/gift_banner.png: paint_art/gift_banner-b8d1d28ecfa2b9ec22aacac62e6457ad.png
+paint_art/gift_banner.png: paint_art/gift_banner-34ba20a2e812db6b553a6f12f2f395b2.png
 paint_art/gift_bottombg.png: paint_art/gift_bottombg-980ddd5436fb0456e6aec7ff6eb01bb4.png
 paint_art/gift_step1.png: paint_art/gift_step1-7b715a102b76fb19c24a9061868b4f61.png
 paint_art/gift_step2.png: paint_art/gift_step2-9a47d491c95a118f80711a75b214bdc0.png
@@ -754,7 +754,7 @@ magic_content/weekly_star.css: magic_content/weekly_star-95bd4fe1de99c1cd91ec8e6
 magic_content/weekly_star_uploads.css: magic_content/weekly_star_uploads-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 news.css: news-1de4946d6486db0417db5311a776e11a.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
-reg.css: reg-e4b3ae9019b0dc8d80780fe32ed05f2c.css
+reg.css: reg-f4268c08f01ed0b0438e5cd9b6fef18c.css
 reset.css: reset-2f3393ec1a28bd55fcaef58e0a28e4c7.css
 style.css: style-e88d787e8488c548e98e39e820fbdb82.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
