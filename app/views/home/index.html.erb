@@ -271,7 +271,7 @@
                     <% @designs.each do |design|  %>
                     <li>
                       <div class="img">
-                        <a href="/designs/<%= design.id %>"><%= image_tag design.design_images.first.try(:file).try(:url, :thumb) %></a>
+                        <a href="/designs/<%= design.id %>"><%= image_tag design.cover_img.file.url(:thumb) if design.cover_img %></a>
                       </div>
                       <div class="s">
                         <p class="like"><%= design.shares_count %></p>
