@@ -1,0 +1,1 @@
+$('#weibo_item<%= @item.id %>').html("<%= escape_javascript(render(:partial => 'item', :locals => {:item => @item})) %>");

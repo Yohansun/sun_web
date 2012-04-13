@@ -2,18 +2,14 @@
 module MagicContent
   class WeiboItemsController < BaseController
 
-    def create
-      item = WeiboItem.find(params[:id])
-      if item.status.nil?
-        item.status = 1
+    def update
+      @item = WeiboItem.find(params[:id])
+      if @item.status.nil?
+        @item.status = 1
       else
-        item.status = nil
+        @item.status = nil
       end
-      item.save
-      create! do |success, failure|
-        success.js { render 'create'}
-        failure.js { render 'create'}
-      end
+      @item.save
     end
 
     def destroy

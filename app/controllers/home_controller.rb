@@ -2,7 +2,7 @@
 class HomeController < ApplicationController
   def index
 
-    @weibo_data = WeiboItem.where(:q => "放飞色彩心愿清单").where("thumbnail_pic IS NOT NULL").order("created_time DESC").limit(18).all
+    @weibo_data = WeiboItem.where(:q => "放飞色彩心愿清单").where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18).all
 
     #每周之星
     @week_star = WeeklyStar.first
