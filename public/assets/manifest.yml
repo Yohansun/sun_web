@@ -150,6 +150,8 @@ design/galleryD.gif: design/galleryD-f7c96e0f24aa6bdc44545d41cac58d8e.gif
 design/galleryE.gif: design/galleryE-5d22ac33b41b017ba79f18c066c64f36.gif
 design/galleryG.png: design/galleryG-131057286252f9ea7e5053e37f1e0312.png
 design/galleryL.gif: design/galleryL-2661267cd4465513a724f0fc2685a1f5.gif
+design/galleryN.png: design/galleryN-d5faa258e6c7f8117432d3f076ea0588.png
+design/galleryO.gif: design/galleryO-bf7b85b16ff33328f29cf8d15a12ac86.gif
 design/handbook_download.gif: design/handbook_download-beaa47c7d68a5bf1ee2f0574fd940934.gif
 design/hon.gif: design/hon-b4b166f5700f802124d01aa90d4b2854.gif
 design/iconsB.gif: design/iconsB-f85d769781eee96eeaaf9a8f4b3f1417.gif
@@ -742,7 +744,7 @@ base.css: base-8eb08e3bb6c71958277a9865fe885184.css
 dd.css: dd-4f917d580bfb1cc4d6c65ea1ef18f4c7.css
 exciting_activities.css: exciting_activities-1e94566d9708481735f3134478eb17ef.css
 galleryc.css: galleryc-1330ea91c2cd1ce5c40f64b6983556f8.css
-index.css: index-334e4f8d0cf5a0755cef0f9612075b69.css
+index.css: index-c92e6631f165552b0ed1ca609139e2a0.css
 industry_news.css: industry_news-191ae10fe948aa30134bee9832ce0dbc.css
 jDatepicker.css: jDatepicker-2df7dba092a481ac73a2f6afbaf3c6e3.css
 jquery.rating.css: jquery.rating-923d0702dc605a2ab80b82a3885ed4e0.css

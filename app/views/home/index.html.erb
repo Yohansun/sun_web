@@ -55,7 +55,13 @@
   color: #fff;
 }
 
-.boxb_box h4 {
+.boxb_box h4{
+  font-size:50px;
+  color:#fff;
+  font-weight:bold;
+  text-align:center;
+  height:104px;
+  line-height:104px;
 }
 </style>
 <% end -%>
@@ -111,8 +117,8 @@
         <div class="box_content">
           <div class="master_palace_content">
             <div class="original">
-              <div class="image"><a href="#"><%= image_tag @master_interview.preview_img_in.url(:original) %></a></div>
-              <div class="t"><a href="#"><%= @master_interview.title %></a></div>
+              <div class="image"><a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_in.url %></a></div>
+              <div class="t"><a href="/master_interviews/<%= @master_interview.id %>"><%= @master_interview.title %></a></div>
               <div class="c">
                 <div class="text"><%= raw truncate(@master_interview.intro, :length => 80) %></div>
               </div>
@@ -124,7 +130,7 @@
                 <%= image_tag @master_interview.preview_img_out.url(:original) %>
                 <div class="boxb_text2"><%= @master_interview.title %></div>
                 <p><%= raw truncate(@master_interview.intro, :length => 160) %></p>
-                <h4><!--<img src="<%#= asset_path "design/pl_name.jpg"%>"/>--><%= @master_interview.name %></h4>
+                <h4><%= @master_interview.name %></h4>
               </div>
             </div>
           </div>
@@ -143,12 +149,10 @@
                 <div class="image"><a href="#"><img src="<%= asset_path "design/desgin_appreciation.gif" %>"></a></div>
                 <div class="t">
                   <p>设计师：王庆建(上海)</p>
-
                   <p>所属公司：圆柱设计</p>
                 </div>
                 <div class="s">
                   <p class="like">286</p>
-
                   <p class="review">评论86</p>
                 </div>
               </div>
@@ -169,12 +173,11 @@
         <div class="box_content">
           <div class="inner">
             <ul>
-              <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
-              <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
-              <li><a href="#"><img src="<%= asset_path "design/ph1.jpg" %>"></a></li>
+              <% @home_infos.each do |info| %>
+              <li><a href="#"><%= image_tag(info.preview_img.url) %></a></li>
+              <%- end -%>
               <li class="desc">
-                <p class="c">宜家发布的2011最新家居设计之三，这款我比较中意</p>
-
+                <p class="c"><%= @home_infos.first.title %></p>
                 <p class="u">来自<br>amber花花</p>
               </li>
             </ul>
@@ -190,7 +193,7 @@
         </div>
         <div class="box_content boxB shadow" style="padding:15px 20px">
           <div class="box_title"><h3>大师热点话题</h3></div>
-          <div class="boxb_content">
+          <div class="boxb_content" style="width:602px;height:236px;">
             <%= image_tag @hot_topic.preview_img.url %>
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
@@ -202,7 +205,6 @@
 
       <div class="boxB" id="masters_guidance">
         <div class="box_title"><h3>大师作品</h3>
-
           <div class="more"><a href="/master_designs">+查看更多</a></div>
         </div>
         <div class="boxb_content qa">
@@ -222,9 +224,7 @@
           <%= javascript_include_tag "galleryN" %>
           <div class="intro">
             <h3>作者：<%= @master_design.master_profile.name %></h3>
-
             <p>国籍：<%= @master_design.master_profile.nationality %></p>
-
             <p>作品名称：<%= @master_design.design_name %></p>
           </div>
         </div>
@@ -250,11 +250,9 @@
               <div class="box_title"><h3>每周之星</h3></div>
               <div class="boxb_content" style=" position: static; top: 0;">
                 <a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a>
-
                 <div></div>
               </div>
             </div>
-
             <div class="boxB" id="afflatus_showcase">
               <div class="box_title"><h3>灵感秀</h3></div>
               <div class="boxb_content">
@@ -262,20 +260,18 @@
               </div>
             </div>
           </div>
-
           <div id="recommended_works">
             <div class="box_title"><img src="<%= asset_path "design/recommended_works.gif" %>"></div>
             <div class="box_content">
               <div class="galleryM">
                 <span class="moveleft"></span>
                 <span class="moveright"></span>
-
                 <div class="list">
                   <ul>
                     <% @designs.each do |design|  %>
                     <li>
                       <div class="img">
-                        <a href="#"><%= image_tag design.design_images.first.try(:file).try(:url, :thumb) %></a>
+                        <a href="/designs/<%= design.id %>"><%= image_tag design.design_images.first.try(:file).try(:url, :thumb) %></a>
                       </div>
                       <div class="s">
                         <p class="like"><%= design.shares_count %></p>
@@ -308,7 +304,6 @@
       </div>
     </div>
 
-
     <div id="home_improvement_news">
       <div class="titlebar">
         <span class="cn">家装资讯</span>
@@ -321,7 +316,7 @@
               <div class="box_title"><h3>行业资讯</h3></div>
               <div class="boxb_content">
                 <div class="major">
-                  <div class="legend"><a href="#"><%= @articles.first.title %></a></div>
+                  <div class="legend"><a href="/articles/<%= @articles.first.id %>"><%= @articles.first.title %></a></div>
                   <div class="desc">
                     <%= raw truncate(@articles.first.body, :length => 42) %><a href="/articles/<%= @articles.first.id %>">[查看详细]</a>
                   </div>
@@ -331,8 +326,8 @@
                     <% @articles.each do |article| %>
                     <li>
                       <div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
-                      <div class="t"><a href="#"><%= article.title %></a></div>
-                      <div class="c"><%= raw truncate(article.first.body, :length => 30) %><a href="#">[查看详细]</a></div>
+                      <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
+                      <div class="c"><%= raw truncate(article.body, :length => 30) %><a href="#">[查看详细]</a></div>
                       <div class="tags">
                         <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
                       </div>

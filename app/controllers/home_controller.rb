@@ -7,12 +7,12 @@ class HomeController < ApplicationController
     @week_star = WeeklyStar.first
 
     #家装资讯
-    #@article = Subject.content("articles").first
+    @home_infos = Subject.content("articles").limit(3)
     #大师访谈
     @master_interview = MasterProfile.first
 
     #热点话题
-    @hot_topic = Post.first
+    @hot_topic = Subject.content("master_topics").first
 
     #大师作品
     @master_design = MasterDesign.first
