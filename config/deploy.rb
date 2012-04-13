@@ -14,6 +14,8 @@ set :deploy_via, :remote_cache
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
+set :keep_releases, 3
+
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
 
