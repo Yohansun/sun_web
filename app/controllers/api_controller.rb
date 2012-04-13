@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
   def create_user
     user = User.new
