@@ -1,13 +1,1 @@
-<a href="javascript:void(0)" class="history fr pr">查看往期<span></span></a>
-<%- unless next_weekly_tip.nil? %>
-    <a href="javascript:void(0);" class="next fr" id="next_week" onclick="WeeklyTip(<%= next_weekly_tip.id %>)"><span></span>下一期</a>
-<%- end %>
-<%- unless prev_weekly_tip.nil? %>
-    <a href="javascript:void(0);" class="prev fr" id="prev_week" onclick="WeeklyTip(<%= prev_weekly_tip.id %>)"><span></span>上一期</a>
-<%- end %>
-<div class="historys none ft12 pa">
-  <%- weeks_of_weekly_tips.each do |i| %>
-      <a href="javascript:void(0);" onclick="WeeklyTip(<%= i.id %>)"><%= i.week %></a>
-  <%- end %>
-</div>
-<!--historys ends-->
+<%= paginate weekly_tips %>
