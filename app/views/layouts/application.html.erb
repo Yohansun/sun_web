@@ -59,7 +59,7 @@
       <!--<a href="#" class="weibo fl"></a>-->
       <iframe style="float:left;display:inline;margin:11px;" width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=2032078483&style=1&btn=red&dpc=1"></iframe>
       <div class="search fl">
-        <%= form_tag("/search", :method => "put") %>
+        <%= form_tag("/search", :method => "get") %>
           <input type="text" class="fl" value="Search" name="search_word"/>
           <input type="image" src="<%= asset_path("search-icon.jpg") %>"/>
       </div>

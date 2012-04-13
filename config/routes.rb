@@ -166,5 +166,5 @@ Icolor::Application.routes.draw do
   #认证考试
   resources :approves
 
-  put "search" => "home#search"
+  get "search" => "home#search"
 end
