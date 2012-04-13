@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SysMsgsController < ApplicationController
   before_filter :find_user
   def index
@@ -15,8 +16,7 @@ class SysMsgsController < ApplicationController
 
 
   def destroy
-    @sys_msg = SysMsg.where(params[:id])
-    if SysMsg.destroy(@sys_msg)
+    if SysMsg.destroy(params[:id])
       render :text => "ok"
     else
       render :json => "fail"

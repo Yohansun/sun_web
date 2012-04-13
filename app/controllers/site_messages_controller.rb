@@ -1,4 +1,4 @@
-class SiteMessagesController < ApplicationController
+class SiteMessagesController < InheritedResources::Base
   before_filter :find_user
 
   def index

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SysMsg < ActiveRecord::Base
   Status = { 0=> "new", 1 => "read" }
   belongs_to :user
