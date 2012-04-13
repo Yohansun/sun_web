@@ -3,7 +3,7 @@ class Design < ActiveRecord::Base
   acts_as_taggable
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
-    :tag_list, :area_id
+    :tag_list, :area_id, :reason
   validates_presence_of :title, :content
 
   belongs_to :user

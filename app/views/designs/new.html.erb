@@ -75,8 +75,12 @@ function add_tag(text){
           <%= f.text_field :title, class: "works fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <%= f.label :content, "作品描述：" %>
+          <%= f.label :content, "设计理念：" %>
           <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <%= f.label :content, "推荐理由：" %>
+          <%= f.text_area :reason, class: "works_details fb ft14 fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <%= f.label :style, "风格：" %>
