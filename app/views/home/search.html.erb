@@ -1,0 +1,22 @@
+<%= content_for :head do %>
+  <%= stylesheet_link_tag "style" %>
+<%- end -%>
+<div class="main pt25 law search_box">
+  <div class="shadow">
+    <div class="section group">
+      <h2>含“<strong><%= params[:search_word] %></strong>”搜索结果</h2>
+      <% @results.each do |res| %>
+      <div class="results line_b_dot">
+        <h3><a href="http://www.icolor.com.cn/articles<%= res.id %>"><%= res.title %></a></h3>
+        <p><%= res.body %></p>
+        <a href="http://www.icolor.com.cn/articles/<%= res.id %>">http://www.icolor.com.cn/articles/<%= res.id %></a>
+      </div><!--results ends-->
+      <%- end -%>
+      <div class="pager ft12 tc mt25">
+        <%= paginate @results %>
+      </div>
+      <!--pager ends-->
+    </div>
+  </div><!--shadow ends-->
+
+</div>

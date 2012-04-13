@@ -197,7 +197,7 @@
             <%= image_tag @hot_topic.preview_img.url %>
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
-              <p><%= @hot_topic.body %></p>
+              <p><%= raw @hot_topic.body %></p>
             </div>
           </div>
         </div>
@@ -318,14 +318,16 @@
                 <div class="major">
                   <div class="legend"><a href="/articles/<%= @articles.first.id %>"><%= @articles.first.title %></a></div>
                   <div class="desc">
-                    <%= raw truncate(@articles.first.body, :length => 42) %><a href="/articles/<%= @articles.first.id %>">[查看详细]</a>
+                    <%= raw truncate(@articles.first.body, :length => 42) %>
+                    <a href="/articles/<%= @articles.first.id %>">[查看详细]</a>
                   </div>
                 </div>
                 <div class="list">
                   <ul>
+                    <% @articles.shift %>
                     <% @articles.each do |article| %>
                     <li>
-                      <div class="img"><img src="<%= asset_path "design/pb7.jpg" %>"></div>
+                      <div class="img"><%= image_tag(article.preview_img.url()) %></div>
                       <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
                       <div class="c"><%= raw truncate(article.body, :length => 30) %><a href="#">[查看详细]</a></div>
                       <div class="tags">
