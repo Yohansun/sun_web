@@ -16,6 +16,9 @@ Icolor::Application.routes.draw do
     match "/users/policy" => "users/register#policy"
   end
 
+  post "/api/login" => "api#login"
+  post "/api/create_user" => "api#create_user"
+
   #订阅电子期刊和在线客服
   post "/maillists" => "maillists#create"
   post "/site_messages" => "site_messages#create"
@@ -128,7 +131,7 @@ Icolor::Application.routes.draw do
     resources :site_messages
     resources :rank
     resource :avatar
-    member do 
+    member do
       get :omniauth_user
       post :update_user_role
     end
