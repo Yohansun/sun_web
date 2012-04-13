@@ -1,0 +1,43 @@
+<div class="content">
+  <div class="title"><h5>微博审核</h5></div>
+  <div class="num"></div>
+  <!-- Dynamic table -->
+  <div class="table">
+    <div class="head"><h5 class="iFrames">微博列表</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="5%">ID</th>
+          <th>内容</th>
+          <th width="100px">图片</th>
+          <th width="5%">状态</th>
+          <th width="100px">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- collection.find_each do |c| %>
+          <tr class="gradeA">
+            <td><%= c.id %></td>
+            <td><%= c.text %></td>
+            <td><%= image_tag c.thumbnail_pic %></td>
+            <td id="tick<%=c.id%>"><%= image_tag(asset_path 'tick.png') unless c.status.nil? %></td>
+            <td nowrap="nowrap" align="center" id='weibo_check<%=c.id%>'>
+              <%- if c.status.nil? %>
+                <a href="javascript:void(0)" onclick="weiboCheck(<%= c.id %>)" class="button basicBtn">显示</a>
+              <%- else %>
+                <a href="javascript:void(0)" onclick="weiboCheck(<%= c.id %>)" class="button basicBtn">屏蔽</a>
+              <%- end %>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+    function weiboCheck(id) {
+        $.post("/admin/content/weibo_items", {id:id}, {
+        });
+
+    }
+</script>

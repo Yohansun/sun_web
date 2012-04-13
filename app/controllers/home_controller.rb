@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
   def index
-    @weibo_data = WeiboData.where(:q => "放飞色彩心愿清单").where("thumbnail_pic IS NOT NULL").order("created_time DESC").limit(18).all
+
+    @weibo_data = WeiboItem.where(:q => "放飞色彩心愿清单").where("thumbnail_pic IS NOT NULL").order("created_time DESC").limit(18).all
 
     #每周之星
     @week_star = WeeklyStar.first
@@ -28,6 +29,7 @@ class HomeController < ApplicationController
 
     #行业资讯
     @articles = Subject.content("articles").limit(5)
+
   end
 
   def search

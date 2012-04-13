@@ -67,5 +67,13 @@ module ApplicationHelper
     end
     url 
   end
-  
+
+  def weekly_tips
+    @weekly_tips = WeeklyTip.page(params[:page]).per(1)
+  end
+
+  def current_weekly_tip
+    @current_weekly_tip ||= params[:page].nil? ? WeeklyTip.first : WeeklyTip.find(params[:page])
+  end
+
 end

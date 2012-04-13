@@ -144,13 +144,7 @@ Icolor::Application.routes.draw do
 
   #扩充magic_content
   scope "/admin/content", :module => "magic_content" do
-    resources :subjects do
-      resources :master_profiles
-      resources :weekly_tips
-      resources :master_designs
-      resources :color_designs
-      resources :weekly_stars
-    end
+    resources :weibo_items
     resources :master_design_uploads
     resources :color_design_uploads
     resources :weekly_star_uploads

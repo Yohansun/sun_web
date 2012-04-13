@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413041938) do
+ActiveRecord::Schema.define(:version => 20120413082558) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -143,6 +143,9 @@ ActiveRecord::Schema.define(:version => 20120413041938) do
     t.datetime "show_preview_img_updated_at"
     t.string   "recommend_color"
     t.text     "design_thought"
+    t.string   "recommend_color1"
+    t.string   "recommend_color2"
+    t.string   "recommend_color3"
   end
 
   create_table "comments", :force => true do |t|
@@ -325,6 +328,9 @@ ActiveRecord::Schema.define(:version => 20120413041938) do
     t.string   "main_preview_img_content_type"
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
+    t.string   "recommend_color1"
+    t.string   "recommend_color2"
+    t.string   "recommend_color3"
   end
 
   create_table "master_profiles", :force => true do |t|
@@ -612,6 +618,9 @@ ActiveRecord::Schema.define(:version => 20120413041938) do
     t.string   "main_preview_img_content_type"
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
+    t.string   "recommend_color1"
+    t.string   "recommend_color2"
+    t.string   "recommend_color3"
   end
 
   create_table "weekly_tips", :force => true do |t|
@@ -623,7 +632,7 @@ ActiveRecord::Schema.define(:version => 20120413041938) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "weibo_data", :force => true do |t|
+  create_table "weibo_items", :force => true do |t|
     t.string   "q"
     t.string   "idstr"
     t.string   "text"
