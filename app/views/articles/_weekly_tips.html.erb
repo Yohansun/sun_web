@@ -1,17 +1,34 @@
 <% if current_weekly_tip -%>
-<%- body = current_weekly_tip.body.split("\r\n\r\n") %>
-<%- (body.size/2).times do |i| %>
-    <div class="faqs clear" id="tips_faqs">
-      <span class="ask fl"></span>
+    <%- body = current_weekly_tip.body.split("\r\n\r\n") %>
+    <%- if (body.size)/2 > 5 %>
+        <%- 5.times do |i| %>
+            <div class="faqs clear" id="tips_faqs">
+              <span class="ask fl"></span>
 
-      <p class="fl fb ft14"><%= body[2*i] %></p>
-      <span class="answer fl"></span>
+              <p class="fl fb ft14"><%= body[2*i] %></p>
+              <span class="answer fl"></span>
 
-      <div class="fl">
-        <p> <%= body[2*i+1] %> </p>
-      </div>
-      <!--fl ends-->
-    </div>
-    <!--faqs ends-->
-<%- end %>
+              <div class="fl">
+                <p> <%= body[2*i+1] %> </p>
+              </div>
+              <!--fl ends-->
+            </div>
+            <!--faqs ends-->
+        <%- end -%>
+    <%- else %>
+        <%- (body.size)/2.times do |i| %>
+            <div class="faqs clear" id="tips_faqs">
+              <span class="ask fl"></span>
+
+              <p class="fl fb ft14"><%= body[2*i] %></p>
+              <span class="answer fl"></span>
+
+              <div class="fl">
+                <p> <%= body[2*i+1] %> </p>
+              </div>
+              <!--fl ends-->
+            </div>
+            <!--faqs ends-->
+        <%- end %>
+    <%- end %>
 <% end -%>
