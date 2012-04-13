@@ -24,8 +24,8 @@ class ApiController < ApplicationController
   end
 
   def login
-    user = User.find_for_authentication(:login => params[:username])
-    if user.valid_password?(params[:password])
+    user = User.find_for_database_authentication(:login => params[:username])
+    if user && user.valid_password?(params[:password])
       render :text => '<results suc="true" msg=""/>'
     else
       render :text => '<results suc="false" msg="用户名或密码错误"/>'
