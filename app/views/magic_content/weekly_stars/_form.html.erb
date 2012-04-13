@@ -1,5 +1,8 @@
 <%- content_for :head do -%>
 <%= stylesheet_link_tag 'uploadify' %>
+<style type="text/css">
+  .recommend_color .jqTransformSelectWrapper{margin-right: 15px;}
+</style>
 <%- end -%>
 <%- content_for :tail do %>
 <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
@@ -84,6 +87,17 @@ $(function() {
           </div>
           <div class="fix"></div>
         </div>
+
+        <div class="rowElem">
+          <label>&nbsp;&nbsp;推荐色:</label>
+          <div class="formRight www1 recommend_color">
+            <%= f.select :recommend_color1, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色1--'  %>
+            <%= f.select :recommend_color2, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色2--'  %>
+            <%= f.select :recommend_color3, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色3--'  %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
 
         <%= f.input :design_intro, :label => "设计说明:" %>
         <%= f.input :design_material, :label => "主要材料:" %>

@@ -1,4 +1,9 @@
 <%- content_for :head do -%>
+    <style type="text/css">
+        .recommend_color .jqTransformSelectWrapper{margin-right: 15px;}
+    </style>
+<%- end -%>
+<%- content_for :head do -%>
 <%= stylesheet_link_tag 'uploadify' %>
 <%- end -%>
 <%- content_for :tail do %>
@@ -73,6 +78,17 @@ $(function() {
         </div>
 
         <%= f.input :design_intro, :label => "作品简介:", :hint => "请在输入标题或者内容后换行！" %>
+
+        <div class="rowElem">
+          <label>&nbsp;&nbsp;推荐色:</label>
+          <div class="formRight www1 recommend_color">
+            <%= f.select :recommend_color1, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色1--'  %>
+            <%= f.select :recommend_color2, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色2--'  %>
+            <%= f.select :recommend_color3, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色3--'  %>
+          </div>
+          <div class="fix"></div>
+        </div>
+
         <div class="rowElem">
           <div>
             <label class="string">发布时间:</label>
