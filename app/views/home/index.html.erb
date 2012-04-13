@@ -120,7 +120,7 @@
               <div class="image"><a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_in.url %></a></div>
               <div class="t"><a href="/master_interviews/<%= @master_interview.id %>"><%= @master_interview.title %></a></div>
               <div class="c">
-                <div class="text"><%=  strip_tags(truncate(@master_interview.intro, :length => 80)) %></div>
+                <div class="text"><%=  gsub_body_string(@master_interview.intro, 80) %></div>
               </div>
               <div class="plus">+</div>
             </div>
@@ -129,7 +129,7 @@
               <div class="boxb_content boxb_box">
                 <%= image_tag @master_interview.preview_img_out.url(:original) %>
                 <div class="boxb_text2"><%= @master_interview.title %></div>
-                <p><%= strip_tags(truncate(@master_interview.intro, :length => 160)) %></p>
+                <p><%= gsub_body_string(@master_interview.intro, 160) %></p>
                 <h4><%= @master_interview.name %></h4>
               </div>
             </div>
@@ -197,7 +197,9 @@
             <%= image_tag @hot_topic.preview_img.url %>
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
-              <p><%= strip_tags(truncate(@hot_topic.body, :length => 570)) %></p>
+              <p>
+                <%= gsub_body_string(@hot_topic.body, 200) %>
+              </p>
             </div>
           </div>
         </div>
@@ -318,7 +320,7 @@
                 <div class="major">
                   <div class="legend"><a href="/articles/<%= @articles.first.id %>"><%= @articles.first.title %></a></div>
                   <div class="desc">
-                    <%= strip_tags(truncate(@articles.first.body, :length => 42)) %>
+                    <%= gsub_body_string(@articles.first.body, 42) %>
                     <a href="/articles/<%= @articles.first.id %>">[查看详细]</a>
                   </div>
                 </div>
@@ -329,7 +331,7 @@
                     <li>
                       <div class="img"><%= image_tag(article.preview_img.url()) %></div>
                       <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
-                      <div class="c"><%= strip_tags(truncate(article.body, :length => 30)) %><a href="#">[查看详细]</a></div>
+                      <div class="c"><%= gsub_body_string(article.body, 30) %><a href="#">[查看详细]</a></div>
                       <div class="tags">
                         <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
                       </div>
