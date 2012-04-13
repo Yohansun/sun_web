@@ -29,4 +29,8 @@ class HomeController < ApplicationController
     #行业资讯
     @articles = Subject.content("articles").limit(5)
   end
+
+  def search
+    @results = Post.where("title like ?", "%" + params[:search_word] + "%").page params[:page]
+  end
 end
