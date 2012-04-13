@@ -10,7 +10,6 @@ class MasterTopicsController < ApplicationController
 
   def get_topics
     if topics = Subject.content("master_topics")
-      @tags = topics.tag_counts_on(:tags)
       @topics = topics.page(params[:page]).per(5)
       @topics = @topics.tagged_with(params[:tags]) if params[:tags]
     end
