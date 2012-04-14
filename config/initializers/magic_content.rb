@@ -14,17 +14,5 @@ MagicContent.extra_menu_items = [
 Rails.application.config.to_prepare do
   Post.class_eval do
     has_many :comments, :as => :commentable
-    #Subject.content('Post').each do |s|
-    #  if s.slug == "master_topics"
-    #    after_save :send_sys_msg
-    #    def send_sys_msg
-    #      user_display_name = self.user.display_name
-    #      user_id           = self.user.id
-    #      SysMsg.create(:content    => "亲爱的#{user_display_name}用户，您的评论已成功！",
-    #                    :reply_type => "master_topics", :status => SysMsg::Status[0], :reply_name => "icolor客服",
-    #                    :user_id    => user_id)
-    #    end
-    #  end
-    #end
   end
 end

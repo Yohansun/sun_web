@@ -7,10 +7,10 @@ class MixColorsController < InheritedResources::Base
   
   def create
     @mix_color = MixColor.new(params[:mix_color])
-    @mix_color.user_id = current_user.id
-    create! do |succ, fail|
-      succ.js { render 'succ' }
-      fail.js { render 'fail' }
+    @mix_color.user_id = current_user.id if current_user
+    if @mix_color.save
+      flash[:mix_color] = true
+      redirect_to "/mix_colors/new"
     end
   end
 end
