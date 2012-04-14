@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20120415123010) do
 
   create_table "admin_profiles", :force => true do |t|
@@ -234,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.integer  "subject_id"
   end
 
   create_table "function_categories", :force => true do |t|
@@ -386,6 +388,8 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.integer  "user_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "status"
+    t.integer  "subject_id"
   end
 
   create_table "old_articles", :force => true do |t|

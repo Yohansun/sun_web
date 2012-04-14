@@ -1,0 +1,2 @@
+module MagicContent::CustomerRepliesHelper
+end

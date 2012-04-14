@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="title">
+    <h5>
+      回复在线配色
+    </h5>
+    <div class="num"><%= link_to '返回', "/admin/content/mix_colors", :class => "redNum" %></div>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for(@customer_reply, :url => "/admin/content/mix_colors/#{resource.id}",:html => { :class => "mainForm", :id => "valid", :method => "put" }) do |f| %>
+    <div>
+      咨询问题：
+      <%= resource.description %>
+    </div>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :reply_content, :input_html => { :rows => 30, :hint => "请在输入标题或者内容后换行！" }, :label => "回复内容" %>
+
+        <div class="rowElem">
+          <%= f.button :submit, :value => "回复" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>
