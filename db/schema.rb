@@ -157,6 +157,16 @@ ActiveRecord::Schema.define(:version => 20120413082558) do
     t.string   "commentable_type"
   end
 
+  create_table "customer_replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.integer  "question_type"
+    t.text     "reply_content"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "subject_id"
+  end
+
   create_table "design_images", :force => true do |t|
     t.integer  "user_id"
     t.integer  "imageable_id"
@@ -462,6 +472,7 @@ ActiveRecord::Schema.define(:version => 20120413082558) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.string   "title"
+    t.integer  "subject_id"
   end
 
   create_table "subjects", :force => true do |t|
@@ -639,7 +650,9 @@ ActiveRecord::Schema.define(:version => 20120413082558) do
     t.string   "source"
     t.string   "thumbnail_pic"
     t.string   "bmiddle_pic"
-    t.string   "original_pic"
+    t.integer  "original_pic"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "user_id"
     t.string   "user_screen_name"
     t.string   "user_name"
@@ -650,8 +663,6 @@ ActiveRecord::Schema.define(:version => 20120413082558) do
     t.string   "user_description"
     t.datetime "created_time"
     t.integer  "status"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
   end
 
 end
