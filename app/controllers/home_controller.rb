@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     @master_interview = MasterProfile.first
 
     #热点话题
-    @hot_topic = Subject.content("master_topics").first
+    @hot_topic = Subject.content("master_topics").first  || Post.new
 
     #大师作品
     @master_design = MasterDesign.first
