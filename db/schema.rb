@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413084942) do
+ActiveRecord::Schema.define(:version => 20120414075249) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -155,16 +155,6 @@ ActiveRecord::Schema.define(:version => 20120413084942) do
     t.datetime "updated_at",       :null => false
     t.integer  "commentable_id"
     t.string   "commentable_type"
-  end
-
-  create_table "customer_replies", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.integer  "question_type"
-    t.text     "reply_content"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "subject_id"
   end
 
   create_table "design_images", :force => true do |t|
@@ -482,7 +472,6 @@ ActiveRecord::Schema.define(:version => 20120413084942) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.string   "title"
-    t.integer  "subject_id"
   end
 
   create_table "subjects", :force => true do |t|
@@ -546,7 +535,7 @@ ActiveRecord::Schema.define(:version => 20120413084942) do
     t.string   "encrypted_password",     :default => "",   :null => false
     t.integer  "role_id"
     t.string   "username"
-    t.boolean  "des_status",             :default => true
+    t.boolean  "des_status"
     t.string   "inauguration_company"
     t.string   "inauguration_address"
     t.string   "current_school"
@@ -660,9 +649,7 @@ ActiveRecord::Schema.define(:version => 20120413084942) do
     t.string   "source"
     t.string   "thumbnail_pic"
     t.string   "bmiddle_pic"
-    t.integer  "original_pic"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.string   "original_pic"
     t.string   "user_id"
     t.string   "user_screen_name"
     t.string   "user_name"
@@ -673,6 +660,8 @@ ActiveRecord::Schema.define(:version => 20120413084942) do
     t.string   "user_description"
     t.datetime "created_time"
     t.integer  "status"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
 end
