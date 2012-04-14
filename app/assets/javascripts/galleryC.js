@@ -14,8 +14,8 @@ function galleryC(config){
 		'moveLeftClass'		: 'moveleft',
 		'moveRightClass'	: 'moveright',
 		'images'			: [],
-		'intervals'			: [2,5,10,15,20],
-		'interval'			: '10'
+		'intervals'			: [5,10,15,20],
+		'interval'			: '5'
 	};
 	$.extend(defConfig, config);
 	config = defConfig;
@@ -88,7 +88,7 @@ function galleryC(config){
 		setIntervalTime($this.text());
 		$this.parent().hide();
 	});
-	setIntervalTime(2);
+	setIntervalTime(5);
 	function showImage(index, lastHandle) {
 		index = parseInt(index);
 		if(index<0){return false;}
@@ -103,7 +103,7 @@ function galleryC(config){
 			$imagePlayer.html('<img src="'+config.images[index]+'"/>');
 			currentImage = index;
 			if( $play.hasClass(config.pauseClass) ) {
-				
+
 				timer = setTimeout(function(){
 					showImage( currentImage + 1 );
 				}, config.interval*1000);
@@ -118,11 +118,11 @@ function galleryC(config){
 	$moveLeft.click(function(){ showImage( currentImage - 1, lastHandle ) });
 	$prev.click(function(){ showImage( currentImage - 1, lastHandle ) });
 	$play.click(function(){ showImage( currentImage, lastHandle ) });
-	
+
 	function lastHandle() {
 		$('.gallery_over_mask').show();
 		$('.gallery_over_wrap').fadeIn('fast');
 	}
-	
+
 	return obj;
 }
