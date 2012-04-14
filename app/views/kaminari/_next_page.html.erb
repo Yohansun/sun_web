@@ -7,5 +7,5 @@
     remote:        data-remote
 -%>
 <%-unless current_page.last?  %>
-<a href="<%= url %>" class="next" remote="remote"><span></span>下一页</a>
+<%= link_to '下一页', url, opts = {:remote => remote, :class => "next"} %>
 <%- end %>

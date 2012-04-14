@@ -7,5 +7,5 @@
     remote:        data-remote
 -%>
 <%-unless current_page.first?  %>
-<a href="<%= url %>" class="prev" remote="remote"><span></span>上一页</a>
+<%= link_to '上一页', url, opts = {:remote => remote, :class => "prev"} %>
 <%- end %>

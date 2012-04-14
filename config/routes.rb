@@ -35,12 +35,10 @@ Icolor::Application.routes.draw do
   #行业资讯
   match "/color_articles" => "color_articles#index"
   match "/articles" => "articles#index"
-  match "/articles/get_weekly_tips" => "articles#get_weekly_tips"
   match "/articles/:id" => "articles#show"
 
   #业主通道
   resources :faqs
-  match "/faqs/get_weekly_tips" => "faqs#get_weekly_tips"
   match "/channel/access" => "channel#access"
 
   #实用工具
@@ -105,6 +103,8 @@ Icolor::Application.routes.draw do
 
   #我的报名活动
   match "/users/:user_id/events/my_event" => "events#my_event"
+
+  resources :weekly_tips, only: :index
 
   #个人主页
   resources :users do
