@@ -70,5 +70,5 @@ Icolor::Application.configure do
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[ICOLOR ERROR] ",
     :sender_address => %{"errors" <errors@networking.io>},
-    :exception_recipients => %w{errors@networking.io}
+    :exception_recipients => %w{nio-errors@googlegroups.com}
 end
