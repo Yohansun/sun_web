@@ -8,7 +8,7 @@
       <% @results.each do |res| %>
       <div class="results line_b_dot">
         <h3><a href="/articles<%= res.id %>"><%= res.title %></a></h3>
-        <p><%= res.body %></p>
+        <p><%= gsub_body_string(res.body, 300) %></p>
         <a href="/articles/<%= res.id %>">http://www.icolor.com.cn/articles/<%= res.id %></a>
       </div><!--results ends-->
       <%- end -%>
