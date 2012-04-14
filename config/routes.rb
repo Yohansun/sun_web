@@ -63,6 +63,7 @@ Icolor::Application.routes.draw do
   resources :inspirations
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
+  resources :reply_msgs
   match "/color_designs" => "color_designs#index"
   match "/color_designs/:id" => "color_designs#show"
   match "/color_designs/:id/fullscreen" => "color_designs#fullscreen"

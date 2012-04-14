@@ -5,7 +5,7 @@
   </style>  
 <% end -%>
 <% content_for :tail do -%>
-  <%= javascript_include_tag 'galleryB.js' %>
+  <%= javascript_include_tag 'galleryB.js','main' %>
   <script type="text/javascript">
     $(".slide_thumb").click(function(event) {
       event.preventDefault();
@@ -104,11 +104,23 @@
                   <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_date %></span>
                 </div>
                 <div class="reply">
-                  <a href="#">回复</a>
+                  <a href="javascript:void(0)">回复</a>
                 </div>
                 <div class="content">
                   <%= c.content %>
                 </div>
+                <div class="reply_input none cl pr clear">
+                  <%= form_for(ReplyMsg.new) do |f| %>
+                      <%= f.hidden_field :show_id, value: @inspiration.id %>
+                      <%= f.hidden_field :comment_id, value: c.id %>
+                      <%= f.hidden_field :reply_type, value: "inspirations" %>
+                      <%= f.text_area :content, :rows => 5 %>
+                      <em class="pa">◆</em>
+                      <span class="pa">◆</span>
+                      <input type="image" src="<%= asset_path "btn.jpg" %>">
+                  <%- end %>
+                </div>
+                <!--reply_input ends-->
               </li>
           <% end %>
         </ul>

@@ -656,4 +656,11 @@ $(function(){
 			}, 'fast');
 		});
 	}
+/*reply*/
+    $('.reply a').click(function(){
+        var reply = $(this).text();
+        var user = $(this).parents('li').find('.user').text();
+        $(this).parents('li').children('.reply_input').toggle()
+        .find('textarea').text(reply+user+':');
+    });
 });

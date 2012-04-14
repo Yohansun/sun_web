@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :mix_colors
   belongs_to :area
+  has_many :reply_msg
   
   USER_TYPE = {0 => "设计师（在职）", 1 => "设计师（在读）", 2 => "家装公司"}   #TODO 修改channerl.controller中的查询
   def self.find_for_database_authentication(warden_conditions)

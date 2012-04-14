@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413082558) do
+ActiveRecord::Schema.define(:version => 20120413084942) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -449,6 +449,16 @@ ActiveRecord::Schema.define(:version => 20120413082558) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "reply_msgs", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.string   "reply_type"
+    t.integer  "source_reply_id"
+    t.string   "content"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "role"
     t.datetime "created_at", :null => false
@@ -489,12 +499,12 @@ ActiveRecord::Schema.define(:version => 20120413082558) do
   create_table "sys_msgs", :force => true do |t|
     t.string   "reply_name"
     t.text     "content"
-    t.integer  "reply_type"
     t.integer  "reply_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "status"
     t.integer  "user_id"
+    t.string   "reply_type"
   end
 
   create_table "taggings", :force => true do |t|
