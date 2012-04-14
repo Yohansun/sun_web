@@ -15,7 +15,8 @@ module MagicContent
       @reply = CustomerReply.create( :reply_content => msg,
                             :reply_id => current_user.id,
                             :question_id => params[:id],
-                            :question_type => controller_name
+                            :question_type => controller_name,
+                            :user_id => @mix.to_a[0].user_id
                           )
       if @reply
         MixColor.update(params[:id], :status => 1)

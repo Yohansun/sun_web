@@ -36,7 +36,7 @@ $(document).ready(function() {
     <p class="d_hostaddr">
       <%= @user.display_name %>
     </p>
-    <%- if controller_name =~ /rank|site_messages|faqs|events/ %>
+    <%- if controller_name =~ /rank|sys_msgs|faqs|events/ %>
       <a class="back_perhome" href="<%= user_path(current_user) %>">返回个人主页</a>
     <%- end %>
     <div class="signup_text" id='<%= params[:user_id] %>'>
