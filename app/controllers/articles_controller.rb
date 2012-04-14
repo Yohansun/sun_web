@@ -1,6 +1,10 @@
 class ArticlesController < ApplicationController
   before_filter :get_articles
 
+  def index
+    @weekly_tips = WeeklyTip.page(1)
+  end
+
   def show
     @article = Post.find(params[:id])
     @prev_article = get_articles.where("published_at < ?", @article.published_at).first

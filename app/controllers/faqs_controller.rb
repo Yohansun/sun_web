@@ -7,6 +7,7 @@ class FaqsController < ApplicationController
       render :template => "#{controller_name}/users/#{action_name}"
     else
       @faqs = Faq.page(params[:page]) || Faq.new
+      @weekly_tips = WeeklyTip.page(1)
     end
   end
 

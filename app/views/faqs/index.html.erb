@@ -43,13 +43,13 @@
       <!--pager ends-->
     </div>
     <!--pag_container ends-->
-    <div class="weekly_tips ft12" id="weekly_tip_body" style="border-bottom: none;padding-bottom: 0px;margin-bottom: 0px;">
-      <%= render :partial => "weekly_tips" %>
+    <div class="weekly_tips ft12" id="weekly_tips" style="border-bottom: none;padding-bottom: 0px;margin-bottom: 0px;">
+      <%= render :partial => "weekly_tips/index" %>
     </div>
     <!--weekly_tips ends-->
     <div class="pag_container">
-     <div class="pager ft12">
-        <%= render :partial => "weekly_tips_nav" %>
+     <div class="pager ft12" id="weekly_tips_nav">
+        <%= render :partial => "weekly_tips/nav" %>
      </div>
       <!--pager ends-->
     </div>
@@ -107,10 +107,3 @@
   <div class="popupA_mask"></div>
 </div>
 </div><!--main ends-->
-<script type="text/javascript">
-    function WeeklyTip(id) {
-        $.get("/faqs/get_weekly_tips", {id:id}, function(data) {
-        });
-    }
-</script>
-

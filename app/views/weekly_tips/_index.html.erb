@@ -1,6 +1,6 @@
 <div class="faqs clear" id="tips_faqs">
-  <% if current_weekly_tip -%>
-      <%- body = current_weekly_tip.body.split("\r\n\r\n") %>
+  <% if @weekly_tips -%>
+      <%- body = @weekly_tips.first.body.split("\r\n\r\n") %>
       <%- if (body.size)/2 > 5 %>
           <%- 5.times do |i| %>
               <div class="faqs_title clear">
