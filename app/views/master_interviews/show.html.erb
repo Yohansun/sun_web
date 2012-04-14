@@ -70,24 +70,11 @@
 
           <div class="img_box">
             <div class="img_list">
-              <img class="list1" src="<%= asset_path "master/works/master1_works1.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works2.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works3.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works4.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works5.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works6.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works7.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works8.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works9.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works10.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works11.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works12.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works13.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works14.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works15.jpg" %>" alt=""/>
-              <img class="list1" src="<%= asset_path "master/works/master1_works16.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works17.jpg" %>" alt=""/>
-              <img class="list2" src="<%= asset_path "master/works/master1_works18.jpg" %>" alt=""/>
+              <% @article.master_designs.each do |design| -%>
+                <% design.master_design_uploads.each do |upload| -%>
+                  <img class="list1" src="<%= upload.file.url(:interview) %>" alt=""/>
+                <% end -%>
+              <% end -%>
             </div>
           </div>
         </div>
