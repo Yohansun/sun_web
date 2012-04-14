@@ -128,9 +128,9 @@
             <div class="replace boxB">
               <div class="box_title"><h3>大师访谈</h3></div>
               <div class="boxb_content boxb_box">
-                <%= image_tag @master_interview.preview_img_out.url(:original) %>
+                <%= image_tag @master_interview.preview_img_out.url(:home_page) %>
                 <div class="boxb_text2"><%= @master_interview.title %></div>
-                <p><%= gsub_body_string(@master_interview.intro, 160) %></p>
+                <p><%= gsub_body_string(@master_interview.intro, 140) %></p>
                 <h4><%= @master_interview.name %></h4>
               </div>
             </div>
@@ -220,7 +220,7 @@
               <ul>
                 <%- @master_design.master_design_uploads.each do |i| %>
                 <%- unless i.file.nil? %>
-                <li><%= image_tag(i.file.url(:thumb))%></li>
+                <li><%= image_tag(i.file.url(:home_page))%></li>
                 <%- end %>
                 <%- end %>
               </ul>
