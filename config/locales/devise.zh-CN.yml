@@ -33,6 +33,8 @@ zh-CN:
               blank: "您还没有接受会员注册协议！"
             qq:
               invalid: "您输入的QQ号码格式错误，请重新输入！"
+    sys_msg:
+      reply_content: "亲爱的%{user_of_comment}用户您好！您在“%{reply_module}”的评论收到了新的回复，请注意查看！"
   devise:
     failure:
       already_authenticated: '您已经登录.'

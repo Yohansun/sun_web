@@ -47,7 +47,7 @@
                         <%- topic.comments[0..5].each do |comment| %>
                             <li><%= comment.content.first(12)+"..." %></li>
                         <%- end %>
-                            <li class="noborder"><%= topic.comments[6].last.content.first(12) %></li>
+                            <li class="noborder"><%= topic.comments[6].content.first(12) %></li>
                       <%- else %>
                           <%- topic.comments[0...topic.comments.size-1].each do |comment| %>
                               <li><%= comment.content.first(12)+"..." %></li>

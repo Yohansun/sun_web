@@ -27,6 +27,9 @@
         }
     </style>
 <%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "main" %>
+<%- end %>
 <div class="main master_topic_review">
   <div class='sub_title tr'>
     <img src='<%= set_style[:pic_path] %>' alt=""/>
@@ -84,11 +87,23 @@
                       <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
                     </div>
                     <div class="reply">
-                      <a href="#">回复</a>
+                      <a href="javascript:void(0)">回复</a>
                     </div>
                     <div class="content">
                       <%= c.content %>
                     </div>
+                    <div class="reply_input none cl pr clear">
+                      <%= form_for(ReplyMsg.new) do |f| %>
+                        <%= f.hidden_field :show_id, value: @topic.id %>
+                        <%= f.hidden_field :comment_id, value: c.id %>
+                        <%= f.hidden_field :reply_type, value: "master_topics" %>
+                        <%= f.text_area :content, :rows => 5 %>
+                        <em class="pa">◆</em>
+                        <span class="pa">◆</span>
+                        <input type="image" src="<%= asset_path "btn.jpg" %>">
+                      <%- end %>
+                    </div>
+                    <!--reply_input ends-->
                   </li>
               <% end %>
             </ul>

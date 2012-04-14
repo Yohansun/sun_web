@@ -21,23 +21,26 @@
     </div>
     <!--owner_map ends-->
     <div class="owner_bar ft12 clear">
-      <%= form_tag("/channel/access", :method => "put") %>
+      <%= form_tag("/channel/access", :method => "put") do%>
       <img src="<%= asset_path "news/hot_search.png"%>" class="fl"/>
-      <select id="province" class="level_1" name="province">
+      <select id="province" class="level_1">
         <option>请选择省--不限</option>
       </select>
-      <select id="city" class="level_2" name="city">
+      <select id="city" class="level_2">
         <option>请选择市--不限</option>
       </select>
       <select id="country" class="level_3" name="area_id">
         <option>请选择区--不限</option>
       </select>
-      <select name="des_status">
-        <%= options_for_select(User::USER_TYPE.collect{|k,v| [v,k]}) %>
+      <select name="user_role">
+        <option value="">----请选择----</option>
+        <option value="designer_0">设计师（在职）</option>
+        <option value="designer_1">设计师（在读）</option>
+        <option value="company">家装公司</option>
       </select>
       <input type="text" value="请输入关键字" class="owner_search fl" name="keywords"/>
       <input type="image" src="<%= asset_path "news/search_btn.jpg"%>" class="owner_sub fl"/>
-
+      <%- end %>
     </div>
     <!--owner_bar ends-->
     <% @design_users.each do |user| %>

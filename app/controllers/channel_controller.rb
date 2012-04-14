@@ -1,10 +1,26 @@
+# -*- encoding : utf-8 -*-
 class ChannelController < ApplicationController
   #片区快查
-  def access  
-    @design_users = User.where("name like ? or username like ?", "%" + params[:keywords].to_s + "%", "%" + params[:keywords].to_s + "%")
-    @design_users = @design_users.where(:area_id => params[:area_id]) unless params[:area_id].blank?
-    @design_users = @design_users.where(:des_status => params[:des_status]) unless params[:des_status].blank?
+  def access
+
+    @design_users = User
+
+    unless params[:keywords] == "请输入关键字"
+      @design_users = @design_users.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
+    end
+
+    unless params[:area_id].blank?
+       @design_users = @design_users.where(:area_id => params[:area_id])
+    end
+
+    case params[:user_role]
+      when /designer/
+        des_status = params[:user_role] == "designer_1"
+        @design_users = @design_users.where(:des_status => des_status )
+      when "company"
+        @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
+    end
+
     @design_users = @design_users.page(params[:page])
   end
-
 end
