@@ -7,6 +7,10 @@ MagicContent.extra_settings = [
     {:tag => 'text_field_tag', :key => 'promote_designers', :label => '片区快查推荐设计师'},
 ]
 
+MagicContent.extra_menu_items = [
+    {name: '微博抓取管理', url: :weibo_items_path },
+]
+
 Rails.application.config.to_prepare do
   Post.class_eval do
     has_many :comments, :as => :commentable
