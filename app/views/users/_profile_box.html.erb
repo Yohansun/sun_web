@@ -71,12 +71,12 @@ $(document).ready(function() {
 <%- unless action_name =~ /new|edit|my_event/  %>
 <div class="sort_box pr mt25 group">
   <ul class="sort_show_ul group">
-    <%- unless current_user.role_name == "user" %>
+    <%- unless @user.role_name == "user" %>
       <li class="<%= "sort_show" if controller_name == 'designs' %>"><%= link_to raw("作&nbsp;&nbsp;品"), user_designs_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
     <li class="<%= "sort_show" if controller_name == 'inspirations' %>"><%= link_to "灵感秀", user_inspirations_path(@user), :class => 'sort_show_a' %></li>
     <li class="<%= "sort_show" if controller_name == 'messages' %>"><%= link_to "留言板", user_messages_path(@user), :class => 'sort_show_a' %></li>
-    <%- unless current_user.role_name == "user" %>
+    <%- unless @user.role_name == "user" %>
       <li class="<%= "sort_show" if controller_name == 'events' %>"><%= link_to "活动公告", user_events_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
   </ul>
