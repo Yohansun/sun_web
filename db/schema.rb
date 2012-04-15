@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415062638) do
+ActiveRecord::Schema.define(:version => 20120415104543) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -388,14 +388,12 @@ ActiveRecord::Schema.define(:version => 20120415062638) do
 
   create_table "old_articles", :force => true do |t|
     t.integer  "class_id"
-    t.string   "title"
+    t.string   "title",      :limit => 200
     t.string   "image"
     t.text     "content"
-    t.datetime "publish_at"
-    t.integer  "view_count"
+    t.datetime "publish_at",                               :null => false
+    t.integer  "view_count", :limit => 8,   :default => 0
     t.string   "thumb"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "pages", :force => true do |t|
@@ -581,6 +579,7 @@ ActiveRecord::Schema.define(:version => 20120415062638) do
     t.string   "fetion"
     t.string   "signature"
     t.integer  "area_id"
+    t.integer  "old_id"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
