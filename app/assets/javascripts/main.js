@@ -35,6 +35,16 @@ function show_login(){
 	$('.unlogin').show();
 	}
 
+function inputBlank(area){
+	area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
+    area.animate({opacity:0.5},200);
+	area.animate({opacity:1},200);
+	area.animate({opacity:0.5},200,function(){
+	area.css({background:"#fff",opacity:1});
+		});
+	return false;
+	}
+
 $(function(){
 	$('a.server').click(function(){
 		if(!$('.server_suc').is(':visible'))
@@ -53,12 +63,7 @@ $(function(){
 			$('.server_input').hide().next().show();
 		}
 		else{
-			$area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
-        	$area.animate({opacity:0.5},200);
-			$area.animate({opacity:1},200);
-			$area.animate({opacity:0.5},200,function(){
-			$area.css({background:"none",opacity:1});
-				});
+			inputBlank($area);
 			}
 	});
 
@@ -108,6 +113,18 @@ $(function(){
        var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
        return reg.test(str);
 	}
+
+/*form.check_valid*/
+    $('form.check_valid').submit(function(){
+        var $area = $(this).find('textarea');
+        var txt = $area.val();
+        if(txt=='')
+        {
+            inputBlank($area);
+            return false;
+        }
+    });
+
 });
 
 /*kv slides*/

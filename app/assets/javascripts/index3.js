@@ -42,6 +42,83 @@ function _scrollTo(y,time,times) {
 	},time);
 }
 
+var adjust = function() {
+
+	var $wrap	= $('#afflatus_showcase .galleryP');
+	var $list	= $wrap.find('li');
+	var pw		= $list.get(0).offsetWidth; //-------------------- 每列宽度
+	var piw		= $list.eq(0).width(); //------------------------- 每列内部宽度
+	var ww		= 624; //------------------------------- 容器宽度
+	var ps		= 5; //-------------------- 间隔
+
+	//var colslen = Math.floor(ww/(pw+ps)); //---------------------- 列数
+	var colslen = 7;
+	var cols = new Array(colslen); //----------------------------- 所有列的高度
+
+	var _self = arguments.callee;
+	if( typeof _self.ww != 'undefined' && ww == _self.ww ) { //--- 容器宽度没有变化，则不用进行调整
+		return;
+	}
+	_self.ww = ww;
+
+	//var bd = Math.ceil((ww-(colslen*(ps+pw)-ps))/2); //----------- 两边留白
+	var bd = 0;
+
+	var getMinHeightColIndex = function(){ //--------------------- 获取最矮的一个列
+		var index = 0;
+		var height = 1000000;
+		for( var i=0; i<colslen; i++ ) {
+			if( typeof cols[i] == 'undefined' ) {
+				cols[i] = 0;
+			}
+			if( cols[i] < height ) {
+				index = i;
+				height = cols[i];
+			}
+		}
+		return index;
+	};
+	var getMaxHeightColIndex = function(){
+		var index = 0;
+		var height = 0;
+		for( var i=0; i<colslen; i++ ) {
+			if( typeof cols[i] == 'undefined' ) {
+				cols[i] = 0;
+			}
+			if( cols[i] > height ) {
+				index = i;
+				height = cols[i];
+			}
+		}
+		return index;
+	};
+
+	$list.each(function( index ){
+		var col = getMinHeightColIndex();
+		var $image = $(this).css({
+			'left'	: col*(pw+ps)+bd+'px',
+			'top'	: (cols[col] ? cols[col] + ps : 0) + 'px'
+		}).find('img');
+		if( $image.size() ) { //--------------------------------- 预设图片外部容器的高度，以便图片加载前计算框框的总体高度
+			var width = ( $image.attr('width') > piw ? piw : $image.attr('width') );
+			var height = parseInt( $image.attr('height') / $image.attr('width') * width );
+			$image.css({
+				'width'	: width+'px',
+				'height': height+'px'
+			});
+			$image.parent().css({
+				'width'	: width+'px',
+				'height': height+'px'
+			});
+		}
+		cols[col] = (cols[col] ? cols[col] + ps : 0) + this.offsetHeight;
+	});
+	//$wrap.css('height', cols[getMaxHeightColIndex()]+'px'); // 重设容器高度
+};
+
+
+$('#afflatus_showcase .galleryP').addClass('galleryReady');
+
 var $window = $(window);
 
 $window.ready(function(){
@@ -212,6 +289,7 @@ $window.ready(function(){
 								});
 							},300);
 						});
+                        adjust();
 					});
 				},300);
 		});

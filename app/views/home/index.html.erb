@@ -179,7 +179,7 @@
               <li><a href="#"><%= image_tag(info.preview_img.url) %></a></li>
               <%- end -%>
               <li class="desc">
-                <p class="c"><%= @home_infos.first.title %></p>
+                <p class="c"><%= @home_infos.first.try(:title) %></p>
                 <p class="u">来自<br>amber花花</p>
               </li>
             </ul>
@@ -256,13 +256,45 @@
               <div class="box_title"><h3>每周之星</h3></div>
               <div class="boxb_content" style=" position: static; top: 0;">
                 <a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a>
-                <div></div>
+                <div class="cor"></div>
+                <div class="designer">设计师：王庆建</div>
+                <div class="notes">286</div>
               </div>
             </div>
             <div class="boxB" id="afflatus_showcase">
               <div class="box_title"><h3>灵感秀</h3></div>
               <div class="boxb_content">
-                <a href="#"><img src="<%= asset_path "design/pl5.jpg" %>"></a>
+                <div class="galleryP">
+                  <ul>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p2.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pf1.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pj1.jpg"%>" width="90" height="76"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p3.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pj2.jpg"%>" width="90" height="76"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p4.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pj1.jpg"%>" width="90" height="76"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pj2.jpg"%>" width="90" height="76"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/paintart.jpg"%>" width="90" height="114"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/ph1.jpg"%>" width="90" height="68"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pl2.jpg"%>" width="90" height="153"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pe2.jpg"%>" width="90" height="108"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p4.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pl2.jpg"%>" width="90" height="153"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pe2.jpg"%>" width="90" height="108"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p1.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/paintart.jpg"%>" width="90" height="114"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/ph1.jpg"%>" width="90" height="68"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pe1.jpg"%>" width="90" height="108"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p5.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pg1.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pe1.jpg"%>" width="90" height="108"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p5.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pg1.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p3.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/p1.jpg"%>" width="90" height="60"/></li>
+                    <li><a href="#"></a><img src="<%= asset_path "design/pj3.jpg"%>" width="90" height="76"/></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -322,10 +354,10 @@
               <div class="box_title"><h3>行业资讯</h3></div>
               <div class="boxb_content">
                 <div class="major">
-                  <div class="legend"><a href="/articles/<%= @articles.first.id %>"><%= @articles.first.title %></a></div>
+                  <div class="legend"><a href="/articles/<%= @articles.first.try(:id) %>"><%= @articles.first.try(:title) %></a></div>
                   <div class="desc">
-                    <%= gsub_body_string(@articles.first.body, 42) %>
-                    <a href="/articles/<%= @articles.first.id %>">[查看详细]</a>
+                    <%= gsub_body_string(@articles.first.try(:body), 42) %>
+                    <a href="/articles/<%= @articles.first.try(:id) %>">[查看详细]</a>
                   </div>
                 </div>
                 <div class="list">
@@ -444,9 +476,9 @@
             <span class="en">Paint Art</span>
           </div>
           <div class="boxb_content">
-            <div class="boxleft"><img src="<%= asset_path "design/paintart.jpg" %>"></div>
+            <!--<div class="boxleft"><img src="images/design/paintart.jpg"></div>-->
             <div class="boxright">
-              <div class="galleryO">
+              <div class="galleryO" style="width:320px;">
                 <div class="buttons">
                   <div class="moveleft"></div>
                   <div class="moveright"></div>
@@ -454,10 +486,14 @@
                 </div>
                 <div class="list">
                   <ul>
-                    <li><a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/p2.jpg" %>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/p3.jpg" %>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/p4.jpg" %>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/m1.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/m2.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/m3.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/mw1.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/mw2.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/mw3.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/sm.png"%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path "design/lm.png"%>"></a></li>
                   </ul>
                 </div>
               </div>
