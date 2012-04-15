@@ -87,6 +87,7 @@ big_bg/xian_bg6.jpg: big_bg/xian_bg6-2da62eb127129cb9643a0f27161ee480.jpg
 big_bg/xian_bg7.jpg: big_bg/xian_bg7-0928a0441fec9593f40cb6497112c890.jpg
 big_bg/xian_bg8.jpg: big_bg/xian_bg8-e6af91ed1d0b44125af25298b66c9048.jpg
 big_bg/xian_tit.jpg: big_bg/xian_tit-249968f7a48047b254ebfb80877229bf.jpg
+btn.jpg: btn-4deba7736e76521fdee6e660fdf5ced2.jpg
 bullets.png: bullets-8beded455d087fb00355e47408d247a1.png
 c_t_center.png: c_t_center-802c6b6453fa776b2c396c5373d22c82.png
 c_t_left.png: c_t_left-da655c4089f2aaa27d59c094e22b6e8c.png
@@ -711,7 +712,7 @@ tick.png: tick-ece43e5b2adf7dbb8a20cfb00d4a4071.png
 tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-462a4734e96765b19aeadd5bac81a177.js
+application.js: application-3a1873ef23a2fc8bd8e05f0e1d76ed7b.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
 datepicker_lang_US.js: datepicker_lang_US-fdb4f1511b1330fbad82acec540df464.js
 galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
@@ -733,15 +734,15 @@ magic_content/color_designs.js: magic_content/color_designs-80148e5c7e5b7899f916
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-a1c6d8ad68b69f72df9c74a7e7e5a052.js
+main.js: main-06291bcf5541f339d30052dfa6ffc721.js
 myfocus.js: myfocus-ec5eef3789cdfc31040c82377a68d078.js
 owners_channel_upload_form.js: owners_channel_upload_form-669da4cc1c4c046605fa916615ca622b.js
 popupA.js: popupA-1d3ae610737d90ed0adf2b29f11e9ebc.js
 swfobject.js: swfobject-340f898f06f423b055636e87b5a1f7c0.js
 sys_msgs.js: sys_msgs-80148e5c7e5b7899f916a93118e72fbd.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-0659d326da6909651494561aabe80f0d.js
-application.css: application-1f44b25cd38f90914a386e6b075a8ccd.css
-base.css: base-8eb08e3bb6c71958277a9865fe885184.css
+application.css: application-82e679ba2579c47f3569984f25f5579a.css
+base.css: base-3d7ecf9c3e233e38b334dec30a99df94.css
 dd.css: dd-4f917d580bfb1cc4d6c65ea1ef18f4c7.css
 exciting_activities.css: exciting_activities-1e94566d9708481735f3134478eb17ef.css
 galleryc.css: galleryc-1330ea91c2cd1ce5c40f64b6983556f8.css
@@ -756,7 +757,7 @@ magic_content/weekly_star_uploads.css: magic_content/weekly_star_uploads-95bd4fe
 news.css: news-1de4946d6486db0417db5311a776e11a.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 reg.css: reg-f4268c08f01ed0b0438e5cd9b6fef18c.css
-reset.css: reset-2f3393ec1a28bd55fcaef58e0a28e4c7.css
+reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
 style.css: style-e88d787e8488c548e98e39e820fbdb82.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
@@ -778,4 +779,4 @@ jquery-ui.min.js: jquery-ui.min-2724014c9ff86fd8b6596121b546bdac.js
 jquery.js: jquery-0e85171cab6cf0dfe85e210d97e06bab.js
 jquery.min.js: jquery.min-793b2f783dfbdf329210d6165c898357.js
 jquery_ujs.js: jquery_ujs-a09f1d50f9e64f2e0a23a07e25ee568b.js
-coffee-script.js: coffee-script-be650adfc500e06097c9f7de1557f711.js
+coffee-script.js: coffee-script-1344ed2b658160946fc393159852f9f0.js
