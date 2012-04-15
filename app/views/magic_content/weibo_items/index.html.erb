@@ -18,7 +18,7 @@
           <tr class="gradeA">
             <td><%= c.id %></td>
             <td><%= c.text %></td>
-            <td><%= image_tag c.thumbnail_pic %></td>
+            <td><%= image_tag c.thumbnail_pic if c.thumbnail_pic %></td>
             <td nowrap="nowrap" align="center" id='weibo_item<%=c.id%>'>
               <%= render :partial => "item", :locals => {item: c} %>
             </td>
