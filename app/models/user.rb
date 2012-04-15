@@ -124,6 +124,10 @@ class User < ActiveRecord::Base
   def common_user?
     self.role_id == 3
   end
+
+  def recommended_name
+    self.recommended_name = User.find(self.recommended_id).username unless self.recommended_id.blank?
+  end
   
   protected
   def recommended_requird?

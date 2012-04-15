@@ -1,3 +1,15 @@
+<div class="reg_list fl referr_input">
+  <label for="uesername">是否有推荐人：</label>
+  <input type="radio" name="user[recommended]" class="radio_btn fl" value="1" <%= "checked" if current_user.recommended == true %>/>
+  <span class="recommand fl fb">是</span>
+  <input type="radio" name="user[recommended]" class="radio_btn fl" value="0" <%= "checked" if current_user.recommended == false %>/>
+  <span class="recommand fl fb">否</span>
+</div><!--reg_list ends-->
+<div class="reg_list fl" id="referr">
+  <label for="recommander">推荐人用户名：</label>
+  <%= f.text_field :recommended_name, :class => "password fl" %>
+  <span class="reg_tip3 fl">注：如您正确注册成功，推荐人账号相应获得奖励积分</span>
+</div><!--reg_list ends-->
 <div class="reg_list fl">
   <label for="uesername">公司名称：</label>
   <%= f.text_field :name_of_company, :class => "company fl" %>
