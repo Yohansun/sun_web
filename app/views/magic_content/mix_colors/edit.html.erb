@@ -13,14 +13,13 @@
   <%- end -%>
 
   <!-- Form with validation -->
-  <%= simple_form_for(@customer_reply, :url => "/admin/content/mix_colors/#{resource.id}",:html => { :class => "mainForm", :id => "valid", :method => "put" }) do |f| %>
+  <%= simple_form_for(:customer_reply, :url => main_app.mix_color_path(resource),:html => { :class => "mainForm", :id => "valid", :method => "put" }) do |f| %>
     <div>
-      咨询问题：
-      <%= resource.description %>
+      <blockquote><%= resource.description %></blockquote>
     </div>
     <fieldset>
       <div class="widget border">
-        <%= f.input :reply_content, :input_html => { :rows => 30, :hint => "请在输入标题或者内容后换行！" }, :label => "回复内容" %>
+        <%= f.input :reply_content, :as => "text", :input_html => { :rows => 7, :hint => "请在输入标题或者内容后换行！", :value => "亲爱的#{resource.user.display_name}您好！我们根据您提出的问题，设计了与您的家居与软装设计最适合的搭配风格供您参考，希望能给到您帮助！针对您问题里的“#{resource.description}”，我们建议：" }, :label => "回复内容" %>
 
         <div class="rowElem">
           <%= f.button :submit, :value => "回复" %>
