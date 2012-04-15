@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415104543) do
+ActiveRecord::Schema.define(:version => 20120415123010) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -184,6 +184,8 @@ ActiveRecord::Schema.define(:version => 20120415104543) do
     t.datetime "updated_at",                  :null => false
     t.integer  "area_id"
     t.text     "reason"
+    t.integer  "view_count",   :default => 0
+    t.boolean  "recommended"
   end
 
   create_table "downloads", :force => true do |t|
@@ -395,6 +397,35 @@ ActiveRecord::Schema.define(:version => 20120415104543) do
     t.integer  "view_count", :limit => 8,   :default => 0
     t.string   "thumb"
   end
+
+  create_table "old_design_files", :force => true do |t|
+    t.string   "title",         :limit => 256
+    t.string   "src",           :limit => 256
+    t.integer  "index"
+    t.integer  "old_design_id"
+    t.datetime "create_date",                  :null => false
+    t.integer  "photo_type",    :limit => 1
+    t.binary   "is_cover",      :limit => 1
+    t.string   "space",         :limit => 20
+  end
+
+  add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
+
+  create_table "old_designs", :force => true do |t|
+    t.string   "title",       :limit => 256
+    t.string   "tags",        :limit => 256
+    t.integer  "user_id"
+    t.datetime "create_date",                               :null => false
+    t.integer  "view_count",  :limit => 8
+    t.binary   "recommended", :limit => 1
+    t.string   "style",       :limit => 20
+    t.binary   "month_star",  :limit => 1
+    t.integer  "month",       :limit => 1
+    t.integer  "year"
+    t.integer  "top_n",                      :default => 0, :null => false
+  end
+
+  add_index "old_designs", ["user_id"], :name => "NewIndex1"
 
   create_table "pages", :force => true do |t|
     t.string   "title"

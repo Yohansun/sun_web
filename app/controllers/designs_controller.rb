@@ -8,7 +8,7 @@ class DesignsController < ApplicationController
       @designs = @user.designs.page params[:page]
       render :template => "users/designs"
     else
-      @designs = Design.page params[:page], :per_page => 9
+      @designs = Design.page(params[:page]).per(9)
     end
 
     unless @designs.nil?
