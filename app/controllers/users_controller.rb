@@ -9,6 +9,14 @@ class UsersController < ApplicationController
   end
 
   def update
+    if params[:user][:recommended] == "1" && !params[:user][:recommended_name].blank?
+      id = User.find_by_username(params[:user][:recommended_name])
+      user = User.find_by_username(params[:user][:recommended_name])
+      params[:user][:recommended_id] = user.id unless user.blank?
+    else
+       params[:user][:recommended_id] = ""
+    end
+
     if current_user
       valid_result = current_user.errors.messages
       current_user.update_attributes(params[:user])

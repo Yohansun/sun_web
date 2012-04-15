@@ -1,5 +1,12 @@
 <%= content_for :tail do %>
     <%= stylesheet_link_tag "owners_channel" %>
+    <script type="text/javascript">
+        $(document).ready(function() {
+         <%- if flash[:mix_color] %>
+            $(".popupA").show();
+         <%- end %>
+        })
+    </script>
 <%- end -%>
 <div class="main page_weekstar">
   <div class="sub_title tr">
@@ -35,7 +42,7 @@
       <div class="form_target">
         <iframe id="upload_target" name="upload_target"></iframe>
       </div>
-      <%= form_for(@mix_color, :remote => true, :html => { :id => "upload_form" }) do |f| %>
+      <%= form_for(@mix_color, :html => { :id => "upload_form", :multipart => true }) do |f| %>
           <table>
             <tbody>
             <tr class="f_content">

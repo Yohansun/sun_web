@@ -417,6 +417,17 @@
             });
         }
         ;
+        if ($(".new_mix_color")) {
+            $(".new_mix_color").click(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
     });
 </script>
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>

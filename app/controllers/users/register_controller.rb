@@ -39,15 +39,6 @@ class Users::RegisterController < Devise::RegistrationsController
     self.resource = current_user if current_user
     valid_result = resource.errors.messages
 
-    if params[resource_name][:sex]
-      case params[resource_name][:sex]
-        when '1'
-          params[resource_name][:sex] = '男'
-        when '0'
-          params[resource_name][:sex] = '女'
-      end
-    end
-
     if params[resource_name][:recommended] == "1" && !params[resource_name][:recommended_name].blank?
       id = User.find_by_username(params[resource_name][:recommended_name])
       user = User.find_by_username(params[resource_name][:recommended_name])

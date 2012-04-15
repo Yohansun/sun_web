@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :mix_colors
   belongs_to :area
-  has_many :reply_msg
+  has_many :reply_msgs
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -123,6 +123,10 @@ class User < ActiveRecord::Base
   
   def common_user?
     self.role_id == 3
+  end
+
+  def recommended_name
+    self.recommended_name = User.find(self.recommended_id).username unless self.recommended_id.blank?
   end
   
   protected
