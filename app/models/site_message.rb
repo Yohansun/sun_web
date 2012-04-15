@@ -15,8 +15,8 @@ class SiteMessage < ActiveRecord::Base
   def send_sys_msg
     user_display_name = self.user.display_name
     user_id = self.user.id
-    SysMsg.create(:content => "亲爱的#{user_display_name}您好！您的问题我们已经收到，我们会尽快给你答复，届时请注意查看系统消息，谢谢！", 
-                  :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "icolor客服", 
+    SysMsg.create(:content => "亲爱的#{user_display_name}您好！您的问题我们已经收到，我们会尽快给你答复，届时请注意查看系统消息，谢谢！",
+                  :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "iColor客服",
                   :user_id => user_id)
   end
 end

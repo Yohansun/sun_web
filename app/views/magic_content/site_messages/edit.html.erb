@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="title">
+    <h5>回复</h5>
+    <div class="num"><%= link_to '返回', main_app.site_messages_path, :class => "redNum" %></div>
+  </div>
+
+  <blockquote><%= resource.desc %></blockquote>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for(:sys_msg, :url => main_app.site_message_path(resource), :method => 'put', :html => { :class => "mainForm", :id => "valid"}) do |f| %>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :content, :as => 'text', :input_html => {:value => "亲爱的 #{resource.user.display_name} 您好！对于您的提问，我们给予您以下建议：", :class=> "validate[required]", :rows => 3 },
+          :label => "回复内容:" %>
+        <div class="rowElem">
+          <%= f.button :submit, :value => "回复" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

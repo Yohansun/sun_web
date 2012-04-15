@@ -21,7 +21,7 @@ Icolor::Application.routes.draw do
 
   #订阅电子期刊和在线客服
   post "/maillists" => "maillists#create"
-  post "/site_messages" => "site_messages#create"
+  match "/site_messages" => "site_messages#create", via: :post, as: 'online_qa'
 
   #大师殿堂
   match "/master_interviews" => "master_interviews#index"
@@ -146,6 +146,7 @@ Icolor::Application.routes.draw do
   #扩充magic_content
   scope "/admin/content", :module => "magic_content" do
     resources :weibo_items
+    resources :site_messages
     resources :master_design_uploads
     resources :color_design_uploads
     resources :weekly_star_uploads
