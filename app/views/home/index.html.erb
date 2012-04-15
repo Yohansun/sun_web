@@ -200,7 +200,7 @@
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
               <p>
-                <%= raw truncate(@hot_topic.body, :length => 130) %>
+                <%= gsub_body_string(@hot_topic.body, 130) %>
               </p>
             </div>
           </div>
