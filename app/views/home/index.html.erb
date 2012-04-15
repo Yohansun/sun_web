@@ -200,7 +200,7 @@
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
               <p>
-                <%= gsub_body_string(@hot_topic.body, 200) %>
+                <%= raw truncate(@hot_topic.body, :length => 130) %>
               </p>
             </div>
           </div>
@@ -517,7 +517,7 @@
     <a href="#"><img src="<%= asset_path "design/banner_design.jpg"%>" border="0" usemap="#Map"/>
       <map name="Map" id="Map">
         <area shape="rect" coords="27,167,122,196" href="/design_zg"/>
-        <area shape="rect" coords="618,152,717,183" href="#"/>
+        <area shape="rect" coords="618,152,717,183" href="/design_zg2"/>
       </map>
     </a>
   </div>

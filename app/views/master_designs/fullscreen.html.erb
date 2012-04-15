@@ -30,7 +30,7 @@
         <div class="button"><span class="replay"><a href="#">重新播放</a></span></div>
         <div class="more">
         <%- if @master_design.master_profile && @master_design.master_profile.name %>
-          <p>观看 <%= link_to @master_design.master_profile.name, "/master_interviews/#{@master_design.master_profile.id}" %> 往期作品</p>
+          <p>观看 <%= link_to @master_design.master_profile.name, "/master_designs/#{@master_design.id}" %> 往期作品</p>
           <ul>
             <% @master_design.master_profile.master_designs.limit(5).each do |design| -%>
                 <li>
