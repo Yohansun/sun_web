@@ -1,0 +1,2 @@
+module MagicContent::MixColorsHelper
+end

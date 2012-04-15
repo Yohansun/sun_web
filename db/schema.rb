@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415123010) do
+ActiveRecord::Schema.define(:version => 20120415134251) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -158,6 +158,16 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.integer  "votes_count",      :default => 0
   end
 
+  create_table "customer_replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.string   "question_type"
+    t.text     "reply_content"
+    t.integer  "reply_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "design_images", :force => true do |t|
     t.integer  "user_id"
     t.integer  "imageable_id"
@@ -234,6 +244,7 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.integer  "subject_id"
   end
 
   create_table "function_categories", :force => true do |t|
@@ -342,7 +353,6 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.string   "master_field"
     t.text     "position"
     t.text     "interview_content"
-    t.text     "message"
     t.string   "title"
     t.text     "intro"
     t.integer  "subject_id"
@@ -359,6 +369,7 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.datetime "preview_img_in_updated_at"
     t.string   "master_kind"
     t.string   "interview_content_type"
+    t.text     "message"
   end
 
   create_table "master_videos", :force => true do |t|
@@ -386,46 +397,50 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.integer  "user_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "subject_id"
+    t.integer  "status"
   end
 
   create_table "old_articles", :force => true do |t|
     t.integer  "class_id"
-    t.string   "title",      :limit => 200
+    t.string   "title"
     t.string   "image"
     t.text     "content"
-    t.datetime "publish_at",                               :null => false
-    t.integer  "view_count", :limit => 8,   :default => 0
+    t.datetime "publish_at"
+    t.integer  "view_count"
     t.string   "thumb"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "old_design_files", :force => true do |t|
-    t.string   "title",         :limit => 256
-    t.string   "src",           :limit => 256
-    t.integer  "index"
     t.integer  "old_design_id"
-    t.datetime "create_date",                  :null => false
-    t.integer  "photo_type",    :limit => 1
-    t.binary   "is_cover",      :limit => 1
-    t.string   "space",         :limit => 20
+    t.string   "title"
+    t.string   "src"
+    t.integer  "index"
+    t.datetime "create_date"
+    t.integer  "photo_type"
+    t.boolean  "is_cover"
+    t.string   "space"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
-
-  add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
 
   create_table "old_designs", :force => true do |t|
-    t.string   "title",       :limit => 256
-    t.string   "tags",        :limit => 256
+    t.string   "title"
     t.integer  "user_id"
-    t.datetime "create_date",                               :null => false
-    t.integer  "view_count",  :limit => 8
-    t.binary   "recommended", :limit => 1
-    t.string   "style",       :limit => 20
-    t.binary   "month_star",  :limit => 1
-    t.integer  "month",       :limit => 1
+    t.integer  "month"
     t.integer  "year"
-    t.integer  "top_n",                      :default => 0, :null => false
+    t.integer  "top_n"
+    t.string   "tags"
+    t.datetime "create_date"
+    t.integer  "view_count"
+    t.boolean  "recommended"
+    t.boolean  "month_star"
+    t.string   "style"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
-
-  add_index "old_designs", ["user_id"], :name => "NewIndex1"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -514,6 +529,7 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.string   "title"
+    t.integer  "subject_id"
     t.integer  "sys_msg_id"
   end
 
@@ -693,7 +709,9 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.string   "source"
     t.string   "thumbnail_pic"
     t.string   "bmiddle_pic"
-    t.string   "original_pic"
+    t.integer  "original_pic"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "user_id"
     t.string   "user_screen_name"
     t.string   "user_name"
@@ -704,8 +722,6 @@ ActiveRecord::Schema.define(:version => 20120415123010) do
     t.string   "user_description"
     t.datetime "created_time"
     t.integer  "status"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
   end
 
 end

@@ -4,6 +4,7 @@ class FaqsController < ApplicationController
   def index
     if @user
       @faqs = @user.faqs.page(params[:page]).per(5)
+      #@faqs = @user.customer_replies.page(params[:page]).per(5)
       render :template => "#{controller_name}/users/#{action_name}"
     else
       @faqs = Faq.page(params[:page]) || Faq.new

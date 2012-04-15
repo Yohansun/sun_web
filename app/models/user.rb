@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   has_many :sys_msgs
   has_many :events
   has_many :mix_colors
+  has_many :customer_replies
   belongs_to :area
   has_many :reply_msgs
 
@@ -124,6 +125,7 @@ class User < ActiveRecord::Base
   def common_user?
     self.role_id == 3
   end
+
 
   def recommended_name
     self.recommended_name = User.find(self.recommended_id).username unless self.recommended_id.blank?
