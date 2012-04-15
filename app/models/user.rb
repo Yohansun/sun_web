@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
                   :des_status, :date_of_birth, :recommended, :state, :city, :district,
                   :role_id, :founded_of_company, :company_address, :name_of_company,
                   :recipient_address, :current_school, :school_address, :login, :user_role, :qq,
-                  :msn, :fetion, :is_read, :recommended_id, :area_id, :created_at, :location, :signature
+                  :msn, :fetion, :is_read, :recommended_id, :area_id, :created_at, :location, :signature, :old_id
 
   attr_accessor :login, :recommended_name, :state, :city, :district, :user_role, :is_read
 
@@ -104,23 +104,23 @@ class User < ActiveRecord::Base
   def city
     user_city = self.area.parent if self.area
   end
-  
+
   def not_role?
     self.role_id.blank?
   end
 
   def job_designer?
-    self.des_status && self.role_id == 0 
+    self.des_status && self.role_id == 0
   end
 
   def reading_designer?
     self.des_status == false && self.role_id == 1
   end
-  
+
   def company?
     self.role_id == 2
   end
-  
+
   def common_user?
     self.role_id == 3
   end
@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
   def recommended_name
     self.recommended_name = User.find(self.recommended_id).username unless self.recommended_id.blank?
   end
-  
+
   protected
   def recommended_requird?
     recommended == true

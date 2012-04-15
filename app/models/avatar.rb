@@ -17,6 +17,7 @@ class Avatar < ActiveRecord::Base
     lines = open("#{Rails.root}/lib/data/icolor_users.csv").readlines
     lines.each do |line|
       row = line.strip.split(",")
+      old_id = row[0].strip.to_i
       username = row[1].strip.gsub('"', '')
       email = row[2].strip.gsub('"', '')
       password = row[3].strip.gsub('"', '')
@@ -35,7 +36,7 @@ class Avatar < ActiveRecord::Base
 
         case user_type
           when '1'
-            designer = User.new(:name => username, :username => username, :password => password, :email => email, :created_at => created_at, :phone => phone,
+            designer = User.new(:old_id => old_id, :name => username, :username => username, :password => password, :email => email, :created_at => created_at, :phone => phone,
                                 :date_of_birth => birth, :location => city, :signature => signature, :role_id => '1',
                                 :des_status => '0', :recipient_address => location, :is_read => 'true')
             designer.save(:validate => false)
@@ -50,7 +51,7 @@ class Avatar < ActiveRecord::Base
               designer_avatar.save
             end
           when '2'
-            student = User.new(:name => username, :username => username, :password => password, :email => email, :created_at => created_at, :phone => phone,
+            student = User.new(:old_id => old_id, :name => username, :username => username, :password => password, :email => email, :created_at => created_at, :phone => phone,
                                :date_of_birth => birth, :location => city, :signature => signature, :role_id => '1',
                                :des_status => '1', :recipient_address => location, :is_read => 'true')
             student.save(:validate => false)
@@ -65,7 +66,7 @@ class Avatar < ActiveRecord::Base
               student_avatar.save
             end
           when '3'
-            person = User.new(:name => username, :username => username, :password => password, :email => email, :created_at => created_at, :phone => phone,
+            person = User.new(:old_id => old_id, :name => username, :username => username, :password => password, :email => email, :created_at => created_at, :phone => phone,
                               :date_of_birth => birth, :location => city, :signature => signature, :role_id => '3',
                               :recipient_address => location, :is_read => 'true')
             person.save(:validate => false)
