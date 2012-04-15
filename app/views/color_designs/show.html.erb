@@ -268,7 +268,7 @@
             <% @comments.each do |c| %>
                 <li>
                   <div class="bar">
-                    <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
+                    <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_date %></span>
                   </div>
                   <div class="reply">
                     <a href="javascript:void(0)">回复</a>
