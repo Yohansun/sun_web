@@ -119,10 +119,13 @@ body{}
 #weekly_star .box_title{margin-left:25px}
 #weekly_star .boxb_content{width:343px;height:349px;background:url(<%= asset_path "design/frameA.png"%>)}
 #weekly_star .boxb_content img{margin:6px 0 0 29px;width:306px;height:237px}
-#weekly_star .boxb_content div{position:absolute;right:0;top:41px;width:70px;height:70px;background:url(<%= asset_path "design/frameA.png"%>) 100% -349px}
+#weekly_star .boxb_content .cor{position:absolute;right:0;top:41px;width:70px;height:70px;background:url(<%= asset_path "design/frameA.png"%>) 100% -349px}
+#weekly_star .boxb_content .designer,
+#weekly_star .boxb_content .notes{margin-left:40px;margin-top:3px;font-size:14px;font-weight:bold;line-height:1.2;color:#fff}
+#weekly_star .boxb_content .notes{padding-left:20px;background:url(<%= asset_path "design/iconsC.gif"%>) no-repeat 0 -58px}
 
 #afflatus_showcase{position:absolute;right:110px;top:66px;width:624px;overflow:hidden}
-#afflatus_showcase .boxb_content{padding-bottom:51px;width:100%;height:298px;overflow:hidden;background:url(<%= asset_path "design/frameB.png"%>) no-repeat 0 100%}
+#afflatus_showcase .boxb_content{padding-bottom:51px;width:100%;height:291px;overflow:hidden;background:url(<%= asset_path "design/frameB.png"%>) no-repeat 0 100%}
 
 #recommended_works{position:absolute;left:68px;top:430px;width:1040px;height:350px}
 #recommended_works .box_title{height:53px;overflow:hidden;text-align:right}
@@ -151,13 +154,23 @@ body{}
 .galleryN .list li{float:left;width:367px;height:100%;position:relative}
 .galleryN .list li img{width:100%;height:100%;overflow:hidden}
 
-.galleryO,.galleryO .list{width:187px;height:162px;position:relative}
+.galleryO,.galleryO .list{width:320px;height:170px;position:relative}
 .galleryO .list li{position:absolute;z-index:10}
-.galleryO .list img{width:187px;height:162px}
+.galleryO .list img{width:320px}
 .galleryO .buttons{position:absolute;right:3px;top:3px;z-index:15;float:right;width:36px;height:14px}
 .galleryO .buttons .moveleft,.galleryO .buttons .moveright{float:left;width:8px;height:100%;cursor:pointer;background:url(<%= asset_path "design/galleryO.gif"%>) no-repeat}
 .galleryO .buttons .moveright{float:right;background-position:0 -14px}
 .galleryO .buttons .n{float:left;width:20px;height:100%;overflow:hidden;font-size:8px;line-height:14px;text-align:center;color:#fff;background:#000}
+
+.galleryP{height:291px;overflow:hidden;background:#111}
+.galleryP.galleryReady{position:relative}
+.galleryP ul{width:120%}
+.galleryP li{float:left;width:90px}
+.galleryP li img{display:block}
+.galleryP li a{position:absolute;left:0;top:0;z-index:10;display:block;width:100%;height:100%;vertical-align:middle;background:#fff;opacity:0;filter:alpha(opacity=0)}
+.galleryP li a:hover{background:#910000;opacity:0.6;filter:alpha(opacity=60)}
+
+.galleryP.galleryReady li{position:absolute}
 
 #topb2{width:1175px;height:260px;position:absolute;top:340px;left:-104px;}
 #topb2 .base{padding-top:30px;background:url(<%= asset_path "design/topb2bg.gif"%>) no-repeat}
@@ -182,9 +195,7 @@ body{}
 #utility .titlebar{margin-bottom:15px}
 
 #paint_art{position:absolute;left:730px;top:10px;width:320px}
-#paint_art .boxleft{float:left;margin-top:21px;}
-*+html #paint_art .boxleft{margin-top:18px}
-#paint_art .boxright{float:right;margin-top:10px;width:187px;height:162px}
+#paint_art .titlebar{margin-bottom:10px}
 
 #home_improvement_news{position:absolute;left:-26px;top:1570px;width:1015px;display:none}
 #home_improvement_news .box_title{height:30px}

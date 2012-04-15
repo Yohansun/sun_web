@@ -158,16 +158,6 @@ ActiveRecord::Schema.define(:version => 20120415041147) do
     t.integer  "votes_count",      :default => 0
   end
 
-  create_table "customer_replies", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.string   "question_type"
-    t.text     "reply_content"
-    t.integer  "reply_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
   create_table "design_images", :force => true do |t|
     t.integer  "user_id"
     t.integer  "imageable_id"

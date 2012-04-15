@@ -33,7 +33,12 @@
               <strong class="fl"><%= m.from_user.display_name %></strong>
               <span class="fl"><%= m.created_at.to_s(:db)[5..6] %>月<%= m.created_at.to_s(:db)[8..9] %>日&nbsp;&nbsp;<%= m.created_at.to_s(:time) %></span>
             </h2>
-            <!--<div class="msgboard_btn"><a href="#">删除</a><a href="#">回复</a></div>-->
+            <div class="msgboard_btn">
+              <%- if current_user && current_user == @user %>
+                <%= link_to "删除",user_message_path(current_user.id,m.id), :method => "delete" %>
+              <%- end %>
+              <a href="#">回复</a>
+            </div>
             <div class="msg_list_box">
               <div class="signup_text">
                 <span></span>
