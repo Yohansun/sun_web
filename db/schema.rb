@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415035430) do
+ActiveRecord::Schema.define(:version => 20120415041147) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -151,10 +151,11 @@ ActiveRecord::Schema.define(:version => 20120415035430) do
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.integer  "votes_count",      :default => 0
   end
 
   create_table "customer_replies", :force => true do |t|
