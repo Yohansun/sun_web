@@ -29,8 +29,9 @@ class Design < ActiveRecord::Base
     OldDesign.all.each do |old|
       user = User.find_by_old_id(old.user_id)
       next unless user
+      tags = old.tags.gsub('，', ',') if old.tags
       design = Design.create(user_id: user.id, title: old.title, content: old.title, view_count: old.view_count,
-        style: old.style, recommended: old.recommended, tag_list: old.tags.gsub('，', ','))
+        style: old.style, recommended: old.recommended, tag_list: tags)
       p design
       OldDesignFile.where(:old_design_id => old.id).all.each do |file|
         image = DesignImage.new
