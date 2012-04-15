@@ -41,7 +41,8 @@ class Avatar < ActiveRecord::Base
             designer.save(:validate => false)
             if avatar && avatar.scan('register').size < 1
               designer_avatar = Avatar.new(:user_id => designer.id)
-              file = open(avatar)
+              file = open(avatar) rescue nil
+              next unless file
               file.class.class_eval { attr_accessor :original_filename, :content_type }
               file.original_filename = avatar.split("/").last
               file.content_type = MIME::Types.type_for(file.original_filename).to_s
@@ -55,7 +56,8 @@ class Avatar < ActiveRecord::Base
             student.save(:validate => false)
             if avatar && avatar.scan('register').size < 1
               student_avatar = Avatar.new(:user_id => student.id)
-              file = open(avatar)
+              file = open(avatar) rescue nil
+              next unless file
               file.class.class_eval { attr_accessor :original_filename, :content_type }
               file.original_filename = avatar.split("/").last
               file.content_type = MIME::Types.type_for(file.original_filename).to_s
@@ -69,7 +71,8 @@ class Avatar < ActiveRecord::Base
             person.save(:validate => false)
             if avatar && avatar.scan('register').size < 1
               person_avatar = Avatar.new(:user_id => person.id)
-              file = open(avatar)
+              file = open(avatar) rescue nil
+              next unless file
               file.class.class_eval { attr_accessor :original_filename, :content_type }
               file.original_filename = avatar.split("/").last
               file.content_type = MIME::Types.type_for(file.original_filename).to_s
