@@ -3,6 +3,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
   has_many :reply_msgs
+  has_many :votes, :as => :voteable
   default_scope :order => "created_at DESC"
   paginates_per 10
   after_save :send_sys_msg

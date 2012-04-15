@@ -21,9 +21,7 @@ class DesignsController < ApplicationController
       @designs = @designs.where(:style => params[:style]) if params[:style] && !params[:style].blank? && params[:style] !='风格'
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       @designs = @designs.where(:area_id => params[:area_id]) if params[:area_id] && !params[:area_id].blank?
-
     end
-
   end
 
   def fullscreen
