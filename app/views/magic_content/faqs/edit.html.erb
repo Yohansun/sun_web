@@ -1,0 +1,31 @@
+<div class="content">
+  <div class="title">
+    <h5>
+      回复家装咨询
+    </h5>
+    <div class="num"><%= link_to '返回', "/admin/content/mix_colors", :class => "redNum" %></div>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for(:customer_reply, :url => main_app.faq_path(resource),:html => { :class => "mainForm", :id => "valid", :method => "put" }) do |f| %>
+    <div>
+      <blockquote><%= resource.description %></blockquote>
+    </div>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :reply_content, :as => "text", :input_html => { :rows => 7, :hint => "请在输入标题或者内容后换行！", :value => "亲爱的#{resource.user.display_name}您好！我们对您咨询的“#{resource.title}”进行了探讨总结，以下是给予您的答复，如有其它疑问，欢迎继续咨询：" }, :label => "回复内容" %>
+
+        <div class="rowElem">
+          <%= f.button :submit, :value => "回复" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

@@ -151,6 +151,7 @@ Icolor::Application.routes.draw do
     resources :color_design_uploads
     resources :weekly_star_uploads
     resources :mix_colors
+    resources :faqs
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
