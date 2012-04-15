@@ -1,15 +1,16 @@
 <div class="content">
-  <div class="title"><h5>微博审核</h5></div>
+  <div class="title"><h5>在线客服咨询回复</h5></div>
   <div class="num"></div>
   <!-- Dynamic table -->
   <div class="table">
-    <div class="head"><h5 class="iFrames">微博列表</h5></div>
+    <div class="head"><h5 class="iFrames">咨询列表</h5></div>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
         <tr>
           <th width="5%">ID</th>
+          <th>标题</th>
           <th>内容</th>
-          <th width="100px">图片</th>
+          <th width="100px">提问用户</th>
           <th width="100px">操作</th>
         </tr>
       </thead>
@@ -17,10 +18,12 @@
         <%- collection.find_each do |c| %>
           <tr class="gradeA">
             <td><%= c.id %></td>
-            <td><%= c.text %></td>
-            <td><%= image_tag c.thumbnail_pic %></td>
-            <td nowrap="nowrap" align="center" id='weibo_item<%=c.id%>'>
-              <%= render :partial => "item", :locals => {item: c} %>
+            <td><%= c.title %></td>
+            <td><%= c.desc %></td>
+            <td><%= c.user.display_name %></td>
+            <td nowrap="nowrap" align="center">
+              <%= "已回复" if c.sys_msg_id %>
+              <%= link_to "回复", main_app.edit_site_message_path(c), class: 'button basicBtn' %>
             </td>
           </tr>
         <%- end %>

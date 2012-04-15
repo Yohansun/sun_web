@@ -9,6 +9,7 @@ MagicContent.extra_settings = [
 
 MagicContent.extra_menu_items = [
     {name: '微博抓取管理', url: :weibo_items_path },
+    {name: '在线客服咨询回复', url: :site_messages_path },
 ]
 
 Rails.application.config.to_prepare do
