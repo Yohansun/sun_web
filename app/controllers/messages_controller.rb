@@ -16,4 +16,8 @@ class MessagesController < ApplicationController
     redirect_to user_messages_path
   end
 
+  def destroy
+    @user.messages.find(params[:id]).destroy
+    redirect_to user_messages_path(@user)
+  end
 end
