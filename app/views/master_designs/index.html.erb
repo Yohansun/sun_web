@@ -15,9 +15,10 @@
     <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="/">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
-  </div>
-  <!--sub_nav ends-->
+    <em><a class="fb" href="/master_designs">大师作品</a></em>
+    <em><a href="#">大师殿堂</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
+  </div><!--sub_nav ends-->
   <div class='wrapper pb60'>
     <%= render :partial => "master_switch" %>
     <%- @master_designs.each do |design| %>

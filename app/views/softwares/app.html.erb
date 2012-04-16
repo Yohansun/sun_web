@@ -1,32 +1,16 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "news" %>
   <%= javascript_include_tag 'myfocus' %>
-  <style type="text/css">
-  span.arrow_1 {
-    right: 262px;
-  }
-
-  span.arrow_2 {
-    right: 192px;
-  }
-
-  span.arrow_3 {
-    right: 119px;
-  }
-  </style>
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>
     <img src='<%= set_style[:pic_path] %>' />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="index.html">首页</a>
-    <span class="arrow_1"></span>
-    <a href="#">实用工具</a>
-    <span class="arrow_2"></span>
-    <a href="#">配色工具</a>
-    <span class="arrow_3"></span>
-    <a class="fb" href="#">设计应用软件</a>
+    <em><a class="fb" href="/softwares/app">设计应用软件</a></em>
+    <em><a href="/softwares/tools">配色工具</a><span></span></em>
+    <em><a href="/softwares/tools">实用工具</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper clear'>
     <div class="app_bg fl ft12">

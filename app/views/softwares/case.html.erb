@@ -1,19 +1,6 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "news" %>
   <%= javascript_include_tag 'myfocus' %>
-  <style type="text/css">
-  span.arrow_1 {
-    right: 257px;
-  }
-
-  span.arrow_2 {
-    right: 185px;
-  }
-
-  span.arrow_3 {
-    right: 111px;
-  }
-  </style>
   <script type="text/javascript">
   myFocus.set({
     id:'boxID',
@@ -32,13 +19,10 @@
     <img src='<%= set_style[:pic_path] %>' />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="index.html">首页</a>
-    <span class="arrow_1"></span>
-    <a href="#">实用工具</a>
-    <span class="arrow_2"></span>
-    <a href="#">配色工具</a>
-    <span class="arrow_3"></span>
-    <a class="fb" href="case.html">色彩搭配案例</a>
+    <em><a class="fb" href="/softwares/case">设计应用软件</a></em>
+    <em><a href="/softwares/tools">配色工具</a><span></span></em>
+    <em><a href="/softwares/tools">实用工具</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper case'>
     <div class="news_top">
