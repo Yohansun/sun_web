@@ -1,14 +1,14 @@
 # -*- encoding : utf-8 -*-
 module DesignsHelper
-  def room_type_option
-    ['一居室','两居室','三居室','四居室','复式','跃层','别墅','其他']
+  def design_room_type_option
+    ['户型','一居室','两居室','三居室','四居室','复式','跃层','别墅','其他']
   end
 
-  def style_option
-    ['现代简约','中式新古典','欧式复古','田园地中海','其他']
+  def design_style_option
+    ['风格','美式','欧式','中式','日式','地中海','田园','东南亚','现代简约','后现代','新古典','混搭','其他']
   end
 
-  def order_option
+  def design_order_option
     ['排序','最新','最热']
   end
 
