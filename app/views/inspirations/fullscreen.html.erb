@@ -26,8 +26,9 @@
     </div>
     <div class="gallery_over_wrap">
       <div class="gallery_over">
+        <a class="fr cr" href="<%= user_inspiration_path(@inspiration.user_id, @inspiration) %>">X</a>
         <h5 class="legend">您已浏览完所有图片</h5>
-        <div class="button"><span class="replay"><a href="#">重新播放</a></span></div>
+        <div class="button"><span class="replay"><a href="<%= fullscreen_user_inspiration_path(@inspiration.user_id, @inspiration) %>">重新播放</a></span></div>
         <div class="more">
           <p>观看 <%= link_to @inspiration.user.display_name, user_inspirations_path(@inspiration.user_id) %> 往期作品</p>
           <ul>

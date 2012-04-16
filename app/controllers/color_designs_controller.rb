@@ -18,9 +18,12 @@ class ColorDesignsController < ApplicationController
   end
   
   def show
-    @design = ColorDesign.find(params[:id])
+    @design = ColorDesign.find(params[:id]) || Design.new
     @tags = ColorDesign.tag_counts_on(:tags)
     @comments = @design.comments.page params[:page]
+    @color1 = ColorCode.find_by_code(@design.recommend_color1)
+    @color2 = ColorCode.find_by_code(@design.recommend_color2)
+    @color3 = ColorCode.find_by_code(@design.recommend_color3)
   end
 
   def get_color_designs

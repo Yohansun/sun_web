@@ -30,8 +30,13 @@
 </div>
 <div class="gallery_over_wrap">
   <div class="gallery_over">
+    <%- if params[:action_from] == "action_show" %>
+        <a class="fr cr" href="/weekly_stars/<%=@design.id%>">X</a>
+    <%- else %>
+        <a class="fr cr" href="/weekly_stars">X</a>
+    <%- end %>
     <h5 class="legend">您已浏览完所有图片</h5>
-    <div class="button"><span class="replay"><a href="#">重新播放</a></span></div>
+    <div class="button"><span class="replay"><a href="/weekly_stars/#{@design.id}/fullscreen">重新播放</a></span></div>
   </div>
 </div>
 <div class="gallery_over_mask"></div>

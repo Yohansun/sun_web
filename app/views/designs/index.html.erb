@@ -42,15 +42,15 @@
   <ul class="design_filter group">
     <form method="get" id="filter_form">
       <li>
-        <%= select_tag "order", options_for_select(order_option, params[:order]), class: "arrow_filter li_current",
+        <%= select_tag "order", options_for_select(design_order_option, params[:order]), class: "arrow_filter li_current",
                 :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
       <li>
     <li>
-       <%= select_tag "style", options_for_select(style_option, params[:style]), class: "arrow_filter li_current",
+       <%= select_tag "style", options_for_select(design_style_option, params[:style]), class: "arrow_filter li_current",
                 :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
     </li>
     <li>
-      <%= select_tag "room_type",options_for_select(room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
+      <%= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
     </li>
     <li>
       <select id="province" class="level_1 arrow_filter"></select>
