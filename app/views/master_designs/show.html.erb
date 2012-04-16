@@ -11,7 +11,9 @@
     <img src='<%= set_style[:pic_path] %>' />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="/">首页</a><span class="arrow_1"></span><a href="#">大师殿堂</a><span class="arrow_2"></span><a class="fb" href="#">大师作品</a>
+    <em><a class="fb" href="/master_designs">大师作品</a></em>
+    <em><a href="#">大师殿堂</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper pb60 group pt25'>
     <div class="works_detail_tit line_b_dot group">
@@ -36,161 +38,33 @@
       <div class="color-picker">
         <div class="color">
           <div class="palettes">
+            <%- 8.times do %>
             <div class="palette">
               <div class="desc">
                 <div class="title"></div>
                 <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
+                  <%if @color1  %>
+                      <li><div class="colorblock" style="background-color:rgb(<%= @color1.rgb %>)"></div>
+                        <h5><%= @color1.name %></h5>
+                        <p><%= @color1.code %></p>
+                      </li>
+                  <%- end %>
+                  <%if @color2  %>
+                      <li><div class="colorblock" style="background-color:rgb(<%= @color2.rgb %>)"></div>
+                        <h5><%= @color2.name %></h5>
+                        <p><%= @color2.code %></p>
+                      </li>
+                  <%- end %>
+                  <%if @color3  %>
+                      <li><div class="colorblock" style="background-color:rgb(<%= @color3.rgb %>)"></div>
+                        <h5><%= @color3.name %></h5>
+                        <p><%= @color3.code %></p>
+                      </li>
+                  <%- end %>
                 </ul></div>
               </div>
             </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                    <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                    <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <li><div class="colorblock" style="background-color:red"></div>
-                    <h5>室内墙面漆</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:#006eb9"></div>
-                    <h5>蓝色妖姬</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                  <li><div class="colorblock" style="background-color:yellow"></div>
-                    <h5>喜气洋洋</h5>
-                    <p>激情岁月8740-2</p>
-                  </li>
-                    </li>
-                </ul></div>
-              </div>
-            </div>
+            <%- end %>
           </div>
           <!--[if IE 6]>
           <script type="text/javascript">

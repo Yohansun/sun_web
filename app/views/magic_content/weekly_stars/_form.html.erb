@@ -1,12 +1,17 @@
 <%- content_for :head do -%>
 <%= stylesheet_link_tag 'uploadify' %>
 <style type="text/css">
-  .recommend_color .jqTransformSelectWrapper{margin-right: 15px;}
+    .recommend_color input{width: 80px !important;margin-right: 15px;}
+    .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
 </style>
 <%- end -%>
 <%- content_for :tail do %>
-<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
-
+<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js","jquery.autocomplete.js" %>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+     $(".recommend_color input").autocomplete("/admin/content/color_codes/autocomplete_recommend_color");
+  });
+</script>
 <script type="text/javascript" charset="utf-8">
 <%- session_key = Rails.application.config.session_options[:key] -%>
 $(function() {
@@ -89,11 +94,11 @@ $(function() {
         </div>
 
         <div class="rowElem">
-          <label>&nbsp;&nbsp;推荐色:</label>
+          <label>&nbsp;&nbsp;推荐色(请输入颜色编码):</label>
           <div class="formRight www1 recommend_color">
-            <%= f.select :recommend_color1, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色1--'  %>
-            <%= f.select :recommend_color2, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色2--'  %>
-            <%= f.select :recommend_color3, options_for_select(ColorCode.all.collect {|i| [i.name+' '+i.code, i.id]}), :class => "validate[required]" ,:prompt => '--请选择推荐色3--'  %>
+            <%= text_field_tag "weekly_star[recommend_color1]", '', :label => '推荐色1:'  %>
+            <%= text_field_tag "weekly_star[recommend_color2]", '', :lable => '推荐色2:'  %>
+            <%= text_field_tag "weekly_star[recommend_color3]", '', :label => '推荐色3:'  %>
           </div>
           <div class="fix"></div>
         </div>

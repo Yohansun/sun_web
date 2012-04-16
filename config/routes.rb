@@ -152,6 +152,7 @@ Icolor::Application.routes.draw do
     resources :weekly_star_uploads
     resources :mix_colors
     resources :faqs
+    match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
