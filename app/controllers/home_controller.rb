@@ -25,7 +25,7 @@ class HomeController < ApplicationController
 #    @design_groups = Design.select([:id, :shares_count]).group_by{|a| index = a.id%2==0}
 #    @designs_odd = @design_groups[false]
 #    @designs_even = @design_groups[true]
-    @designs = Design.all
+    @designs = Design.limit(36).all
 
     #行业资讯
     @articles = Subject.content("articles").limit(5)
