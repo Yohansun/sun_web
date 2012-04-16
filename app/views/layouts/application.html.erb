@@ -384,17 +384,6 @@
             });
         }
         ;
-        if ($(".designer_events")) {
-            $(".designer_events").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
         if ($(".one_key_forward")) {
             $(".one_key_forward").click(function (event) {
                 <% if current_user -%>
