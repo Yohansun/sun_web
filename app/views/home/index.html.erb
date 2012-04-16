@@ -64,6 +64,8 @@
   height:104px;
   line-height:104px;
 }
+#home_improvement_news .list .t{height:auto!important;text-align:left;}
+#home_improvement_news .list .t a{white-space:normal;}
 </style>
 <% end -%>
 <%- content_for :index do %>
@@ -333,7 +335,7 @@
                     <li>
                       <div class="img"><%= image_tag(article.preview_img.url()) %></div>
                       <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
-                      <div class="c"><%= gsub_body_string(article.body, 100) %><a href="/articles/<%= article.id %>">[查看详细]</a></div>
+                      <div class="c"><%= gsub_body_string(article.body, 70) %><a href="/articles/<%= article.id %>">[查看详细]</a></div>
                     </li>
                     <%- end -%>
                   </ul>
