@@ -3,21 +3,23 @@
 
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
-  $("#signature").editable('/users/<%= @user.id %>/update_user_signature', {
-    indicator : "<img src='<%= asset_path "indicator.gif" %>'>",
-    type : 'text',
-    tooltip : '点击修改...',
-    placeholder : '请点击输入个人签名',
-    submitdata: { _method: "post" },
-    select : true,
-    submit : '修改',
-    cancel : '取消',
-    height : '23px',
-    cssclass : "editable",
-    tooltip : '点击修改',
-    id : 'id',
-    style : 'display: inline;'
-  });
+  <% if current_user && current_user.id == @user.id %>
+    $("#signature").editable('/users/<%= @user.id %>/update_user_signature', {
+      indicator : "<img src='<%= asset_path "indicator.gif" %>'>",
+      type : 'text',
+      tooltip : '点击修改...',
+      placeholder : '请点击输入个人签名',
+      submitdata: { _method: "post" },
+      select : true,
+      submit : '修改',
+      cancel : '取消',
+      height : '23px',
+      cssclass : "editable",
+      tooltip : '点击修改',
+      id : 'id',
+      style : 'display: inline;'
+    });
+  <%- end -%>
 });
 </script>
 <%- end %>
