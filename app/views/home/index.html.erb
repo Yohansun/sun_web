@@ -129,7 +129,7 @@
             <div class="replace boxB">
               <div class="box_title"><h3>大师访谈</h3></div>
               <div class="boxb_content boxb_box">
-                <%= image_tag @master_interview.preview_img_out.url(:home_page) %>
+                <%= image_tag @master_interview.preview_img_out.url(:home_page), :class=> "master_img" %>
                 <div class="boxb_text2"><%= @master_interview.title %></div>
                 <p><%= gsub_body_string(@master_interview.intro, 140) %></p>
                 <h4><%= @master_interview.name %></h4>
@@ -181,7 +181,6 @@
               <%- end -%>
               <li class="desc">
                 <p class="c"><%= @home_infos.first.try(:title) %></p>
-                <p class="u">来自<br>amber花花</p>
               </li>
             </ul>
           </div>
@@ -196,7 +195,7 @@
         </div>
         <div class="box_content boxB shadow" style="padding:15px 20px">
           <div class="box_title"><h3>大师热点话题</h3></div>
-          <div class="boxb_content" style="width:602px;height:236px;">
+          <div class="boxb_content" style="width:600px;height:236px;overflow:hidden;  ">
             <%= image_tag @hot_topic.preview_img.url %>
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
@@ -290,7 +289,7 @@
                     <% @designs.each do |design|  %>
                     <li>
                       <div class="img">
-                        <a href="/designs/<%= design.id %>"><%= image_tag design.cover_img.file.url(:thumb) if design.cover_img %></a>
+                        <a href="/designs/<%= design.id %>"><%= image_tag design.cover_img.file.url(:slide_thumb) if design.cover_img %></a>
                       </div>
                       <div class="s">
                         <p class="like"><%= design.shares_count %></p>
@@ -323,7 +322,7 @@
                 <div class="major">
                   <div class="legend"><a href="/articles/<%= @articles.first.try(:id) %>"><%= @articles.first.try(:title) %></a></div>
                   <div class="desc">
-                    <%= gsub_body_string(@articles.first.try(:body), 42) %>
+                    <%= gsub_body_string(@articles.first.try(:body), 125) %>
                     <a href="/articles/<%= @articles.first.try(:id) %>">[查看详细]</a>
                   </div>
                 </div>
@@ -334,10 +333,7 @@
                     <li>
                       <div class="img"><%= image_tag(article.preview_img.url()) %></div>
                       <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
-                      <div class="c"><%= gsub_body_string(article.body, 30) %><a href="/articles/<%= article.id %>">[查看详细]</a></div>
-                      <div class="tags">
-                        <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
-                      </div>
+                      <div class="c"><%= gsub_body_string(article.body, 100) %><a href="/articles/<%= article.id %>">[查看详细]</a></div>
                     </li>
                     <%- end -%>
                   </ul>
