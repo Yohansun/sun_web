@@ -5,7 +5,7 @@ class DesignImage < ActiveRecord::Base
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
-        :inside => "188>", :outside => "202>",
+        :inside => "188>", :outside => "202>", :home_page => "90>",
         :slide => "888x590>", :slide_thumb => "205x138#",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#"},
     :whiny_thumbnails => true,

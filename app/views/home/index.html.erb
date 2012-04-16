@@ -1,5 +1,6 @@
 <% content_for :head do -%>
 <%= stylesheet_link_tag 'index' %>
+<%= javascript_include_tag 'index3' %>
 <style type="text/css">
 .boxb_content {
   position: relative;
@@ -266,33 +267,13 @@
               <div class="boxb_content">
                 <div class="galleryP">
                   <ul>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p2.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pf1.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pj1.jpg"%>" width="90" height="76"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p3.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pj2.jpg"%>" width="90" height="76"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p4.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pj1.jpg"%>" width="90" height="76"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pj2.jpg"%>" width="90" height="76"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/paintart.jpg"%>" width="90" height="114"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/ph1.jpg"%>" width="90" height="68"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pl2.jpg"%>" width="90" height="153"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pe2.jpg"%>" width="90" height="108"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p4.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pl2.jpg"%>" width="90" height="153"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pe2.jpg"%>" width="90" height="108"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p1.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/paintart.jpg"%>" width="90" height="114"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/ph1.jpg"%>" width="90" height="68"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pe1.jpg"%>" width="90" height="108"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p5.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pg1.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pe1.jpg"%>" width="90" height="108"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p5.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pg1.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p3.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/p1.jpg"%>" width="90" height="60"/></li>
-                    <li><a href="#"></a><img src="<%= asset_path "design/pj3.jpg"%>" width="90" height="76"/></li>
+                    <% @inspirations.each do |insp| %>
+                    <li>
+                      <%- unless insp.cover_img.nil? -%>
+                        <a href="/inspirations/<%= insp.id %>"></a><%= image_tag insp.cover_img.try(:file).url(:home_page) %>
+                      <%- end -%>
+                    </li>
+                    <%- end -%>
                   </ul>
                 </div>
               </div>
@@ -319,20 +300,6 @@
                     </li>
                     <%- end -%>
                   </ul>
-                  <!--
-                  <ul>
-                    <%# @designs_even.each do |design| %>
-                    <li>
-                      <div class="img"><a href="#"><img src="<%= asset_path "design/pb7.jpg" %>"></a></div>
-                      <div class="s">
-                        <p class="like">286</p>
-                        <p class="forward">转发</p>
-                        <p class="review">评论</p>
-                      </div>
-                    </li>
-                    <%#- end -%>
-                  </ul>
-                  -->
                 </div>
               </div>
             </div>
@@ -367,7 +334,7 @@
                     <li>
                       <div class="img"><%= image_tag(article.preview_img.url()) %></div>
                       <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
-                      <div class="c"><%= gsub_body_string(article.body, 30) %><a href="#">[查看详细]</a></div>
+                      <div class="c"><%= gsub_body_string(article.body, 30) %><a href="/articles/<%= article.id %>">[查看详细]</a></div>
                       <div class="tags">
                         <a href="#">装修diy</a><a href="#">单身公寓</a><a href="#">简约风格</a>
                       </div>
