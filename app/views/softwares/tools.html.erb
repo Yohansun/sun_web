@@ -2,18 +2,6 @@
     <%= stylesheet_link_tag "news" %>
     <%= javascript_include_tag 'myfocus' %>
     <style type="text/css">
-        span.arrow_1 {
-            right: 257px;
-        }
-
-        span.arrow_2 {
-            right: 185px;
-        }
-
-        span.arrow_3 {
-            right: 111px;
-        }
-
         .popup_zf {
             width: 180px;
             position: absolute;
@@ -63,15 +51,11 @@
     <img src='<%= asset_path "news/title_tools.png" %>'/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <a href="index.html">首页</a>
-    <span class="arrow_1"></span>
-    <a href="#">实用工具</a>
-    <span class="arrow_2"></span>
-    <a href="#">配色工具</a>
-    <span class="arrow_3"></span>
-    <a class="fb" href="#">在线配色软件</a>
-  </div>
-  <!--sub_nav ends-->
+    <em><a class="fb" href="/softwares/tools">色彩搭配案例</a></em>
+    <em><a href="/softwares/tools">配色工具</a><span></span></em>
+    <em><a href="/softwares/tools">实用工具</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
+  </div><!--sub_nav ends-->
   <div class='wrapper'>
     <div class="news_top">
       <div class="tools_select clear">

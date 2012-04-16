@@ -1,9 +1,5 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'weekstar','style' %>
-  <style type="text/css">
-  	span.arrow_1{right:144px;}
-    span.arrow_2{right:76px;}
-  </style>  
 <% end -%>
 <% content_for :tail do -%>
   <%= javascript_include_tag 'galleryB.js','main' %>
@@ -18,9 +14,11 @@
   <div class='sub_title tr pt25'>
     <img src="<%= asset_path "design/title_design.png" %>" />
   </div>
-  <div class='sub_nav ft12 pr tr'>
-    <a href="#">首页</a><span class="arrow_1"></span><a href="#">设计鉴赏</a><span class="arrow_2"></span><a class="fb" href="#">灵感秀</a>
-  </div><!--sub_nav ends-->
+  div class='sub_nav ft12 pr tr'>
+  <em><a class="fb" href="/inspirations">灵感秀</a></em>
+  <em><a href="#">设计鉴赏</a><span></span></em>
+  <em><a href="/">首页</a><span></span></em>
+</div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleB">
       <h1><%= @inspiration.title %></h1>

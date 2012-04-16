@@ -20,6 +20,7 @@ function _scrollTo(y,time,times) {
 	}
 	var current = document.documentElement.scrollTop || document.body.scrollTop;
 	if( current == y ) {
+		clearTimeout( _this.timer );
 		return;
 	}
 	var p = _this.y - current;
@@ -41,6 +42,9 @@ function _scrollTo(y,time,times) {
 		}
 	},time);
 }
+
+
+
 
 var adjust = function() {
 
@@ -90,7 +94,7 @@ var adjust = function() {
 				height = cols[i];
 			}
 		}
-		return index;
+		return index;	
 	};
 
 	$list.each(function( index ){
@@ -119,6 +123,8 @@ var adjust = function() {
 
 $('#afflatus_showcase .galleryP').addClass('galleryReady');
 
+
+
 var $window = $(window);
 
 $window.ready(function(){
@@ -128,7 +134,33 @@ $window.ready(function(){
 	var $top1mask = $('div.top1mask');
 	var $design_appreciation = $('#design_appreciation');
 	var $master_palace = $('#master_palace');
+	var $home_improvement_news = $('#home_improvement_news');
+	
+	var $top2 = $('#top2');
+	var $weekly_star = $('#weekly_star');
+	var $afflatus_showcase = $('#afflatus_showcase');
+	var $recommended_works = $('#recommended_works');
+	
 
+	// 触发大师殿堂-----------------------------------------------------------------------------------------------------
+	$top1content.find('div.master_palace_content .original').hover(function(){
+		if( this.waiting || this.finished ) {
+			return;
+		}
+		this.waiting = 1;
+		var _self = this;
+		this.timer = setTimeout( function(){
+			step1();
+			_self.finished = 1;
+		}, 1000 );
+		this.running = 1;
+	},function(){
+		if( this.waiting && !this.finished ) {
+			this.waiting = 0;
+			clearTimeout( this.timer );
+		}
+	});
+	
 	// 第一步 家装资讯
 	var step1 = function(){
 		//window.scrollTo(0,0);
@@ -159,15 +191,14 @@ $window.ready(function(){
 			infor_fade();
 		}
 	};
-	
 	var $topb2 = $('#topb2');
 
 	// 第二步
 	var step2 = function(){
-		$topb2.animate({
-			'top'	: '+=300px'
-		},500);
-		$wrap.css({ 'height' : '915px' });
+		$topb2.css('top','2240px');
+		$top2.css('top', '650px').fadeIn(); adjust();
+		$home_improvement_news.show();
+		$wrap.css({ 'height' : '2505px' });
 		$design_appreciation.find('div.box_content div.inner_inner').fadeTo(800,0,function(){
 			$design_appreciation.find('div.box_content div.inner').animate({
 				'marginTop'	: 0,
@@ -209,12 +240,7 @@ $window.ready(function(){
 			});
 		});
 	};
-	
-	var $top2 = $('#top2');
-	var $weekly_star = $('#weekly_star');
-	var $afflatus_showcase = $('#afflatus_showcase');
-	var $recommended_works = $('#recommended_works');
-	
+
 	var step3 = function() {
 		var $mpr = $master_palace.find('div.replace').show();
 		$mpr.find('h3').css({
@@ -242,17 +268,60 @@ $window.ready(function(){
 		},150);
 	};
 
-	var step4 = function(){
-		_scrollTo(1260,50,20);
-		$wrap.css({ 'height' : '1835px' });
-		$topb2.css({ 'top' : '1570px' });
-
+	// 触发设计鉴赏-----------------------------------------------------------------------------------------------------
+	$design_appreciation.find('div.box_content').hover(function(){
+		if( this.waiting || this.finished ) {
+			return;
+		}
+		this.waiting = 1;
+		var _self = this;
+		this.timer = setTimeout( function(){
+			stepb1();
+			_self.finished = 1;
+		}, 1000 );
+		this.running = 1;
+	},function(){
+		if( this.waiting && !this.finished ) {
+			this.waiting = 0;
+			clearTimeout( this.timer );
+		}
+	});
+	
+	var transtop1 = function() {
+		$design_appreciation.hide();
+		$('#information').hide();
+		$('#hot_topic, #masters_guidance').show();
+		$master_palace.css('width', '360px');
+		$master_palace.find('div.original').hide();
+		$master_palace.find('div.replace').show();
+		$master_palace.find('div.title span').css({
+			'position' : 'relative',
+			'left'	: '20px',
+			'top'	: '-12px'
+		});
+		$master_palace.find('div.box_content').addClass('shadow').css({
+			width: '318px',
+			padding: '15px 20px'
+		});
+		$master_palace.find('div.master_palace_content').css({
+			height:'584px',
+			background:'none',
+			boxShadow:'none'
+		});
+		$top1mask.hide();
+	};
+	var stepb1 = function() {
+		transtop1();
+		$topb2.css('top','2240px');
+		$home_improvement_news.show();
+		$wrap.css({ 'height' : '2505px' });
+		
 		var $wsbt = $weekly_star.find('div.box_title').css('opacity',0);
 		var $wsbc = $weekly_star.find('div.boxb_content').css('opacity',0);
 		var $asbt = $afflatus_showcase.find('div.box_title').css('opacity',0);
 		var $asbc = $afflatus_showcase.find('div.boxb_content').css('opacity',0);
-		$recommended_works.css('opacity',0);
-
+		
+		_scrollTo(1260,100,20);
 		$top2.show().css({ 'top' : '650px', 'opacity' : 0 }).fadeTo(200,1).hide().slideDown(1800,function(){
 				$wsbc.css({
 					'position'	: 'relative',
@@ -283,25 +352,46 @@ $window.ready(function(){
 										var top = document.documentElement.scrollTop || document.body.scrollTop;
 										if( top >= 1500 ) {
 											$window.unbind('scroll',arguments.callee);
-											step5();
+											//step5();
 										}
 									});
 								});
 							},300);
 						});
-                        adjust();
+						adjust();
 					});
 				},300);
 		});
 	};
-
-	var $home_improvement_news = $('#home_improvement_news');
-
-	var step5 = function(){
-		_scrollTo(2120,50,50);
+	
+	// 触发家装资讯-----------------------------------------------------------------------------------------------------
+	$('#information div.box_content').hover(function(){
+		if( this.waiting || this.finished ) {
+			return;
+		}
+		this.waiting = 1;
+		var _self = this;
+		this.timer = setTimeout( function(){
+			stepc1();
+			_self.finished = 1;
+		}, 1000 );
+		this.running = 1;
+	},function(){
+		if( this.waiting && !this.finished ) {
+			this.waiting = 0;
+			clearTimeout( this.timer );
+		}
+	});
+	
+	var stepc1 = function(){
+		transtop1();
+		$topb2.css('top','2240px');
+		$top2.css('top', '650px').fadeIn(); adjust();
 		$wrap.css({ 'height' : '2505px' });
-		$topb2.css({ 'top' : '2240px' });
-		$home_improvement_news.hide().slideDown(2000,step6);
+		
+		_scrollTo(2120,50,10);
+		
+		$home_improvement_news.hide().slideDown(2000,stepc2);
 
 		var $hin_list = $home_improvement_news.find('div.list').css('opacity',0);
 		setTimeout(function(){
@@ -325,34 +415,11 @@ $window.ready(function(){
 			$hin_tweets.fadeTo(1000,1);
 		},2000);
 	};
-
-	var step6 = function(){
+	var stepc2 = function(){
 		$topb2.animate({ 'top' : '2130px' },500,function(){
 			$topb2.animate({ 'top' : '2240px' },500);
 		});
-	};
-/*
-document.ondblclick = function(){
-	document.title = document.documentElement.scrollTop || document.body.scrollTop;
-};
-*/
 
-	$top1content.hover(function(){
-		if( this.waiting || this.finished ) {
-			return;
-		}
-		this.waiting = 1;
-		var _self = this;
-		this.timer = setTimeout( function(){
-			step1();
-			_self.finished = 1;
-		}, 1000 );
-		this.running = 1;
-	},function(){
-		if( this.waiting && !this.finished ) {
-			this.waiting = 0;
-			clearTimeout( this.timer );
-		}
-	});
+	};
 
 });

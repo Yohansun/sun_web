@@ -1,8 +1,8 @@
 <div class="design_tit group pb10 line_b_dot">
   <ul class="design_filter group">
-	<%- if params[:master_kind].nil? %>
-        <li class="<%= 'li_current' if params[:tags].blank? %> ">
-          <a href="/master_interviews">全部</a>
+	<%- if !params[:master_kind] %>
+        <li class="<%= 'li_current' if params[:tags] == '全部' %> ">
+          <a href="/master_interviews?tags=<%= URI.escape("全部") %>">全部</a>
         </li>
         <li class="<%= 'li_current' if params[:tags] == '海外' %> ">
 		  <a href="/master_interviews?tags=<%= URI.escape("海外") %>">海外</a>
@@ -32,7 +32,7 @@
 
 <!--design_tit ends-->
 <div class="list_btn line_b_dot">
-  <%- if params[:tags].nil? || params[:tags] == '全部' %>
+  <%- if !params[:tags] %>
 	  <a href="/master_interviews?master_kind=<%= URI.escape("室内空间大师") %>"><img src="<%= asset_path space_master_image %>"/></a>
       <a href="/master_interviews?master_kind=<%= URI.escape("色彩大师") %>"><img src="<%= asset_path color_master_image %>"/></a>
   <%- else %>
