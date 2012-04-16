@@ -230,9 +230,9 @@
           </div>
           <%= javascript_include_tag "galleryN" %>
           <div class="intro">
-            <h3>作者：<%= @master_design.master_profile.name %></h3>
-            <p>国籍：<%= @master_design.master_profile.nationality %></p>
-            <p>作品名称：<%= @master_design.design_name %></p>
+            <h3>作者：<%= @master_design.try(:master_profile).try(:name) %></h3>
+            <p>国籍：<%= @master_design.try(:master_profile).try(:nationality) %></p>
+            <p>作品名称：<%= @master_design.try(:design_name) %></p>
           </div>
         </div>
         <% end -%>
