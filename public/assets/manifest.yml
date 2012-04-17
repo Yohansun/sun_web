@@ -269,8 +269,8 @@ design/submitB.gif: design/submitB-e192065c131ff0a947430984c1560b59.gif
 design/successA.gif: design/successA-f106dd2e6799215dd794efec8d8ad24e.gif
 design/tagA.gif: design/tagA-320e5cde1823db031db3f0fe00022044.gif
 design/tagB.gif: design/tagB-e31b9c8c59e525ae94a8abcbc82ddace.gif
-design/title_design.png: design/title_design-524ddf6ebfceb9ff39bc059fcefbba1d.png
-design/title_event.png: design/title_event-00628fc00cf2404355f73f800d9d86b9.png
+design/title_design.png: design/title_design-cbb2302c0aa5ced4fb9050030aca4193.png
+design/title_event.png: design/title_event-4b661e381d1955e74e0582cd3cdb322b.png
 design/title_news.png: design/title_news-c15e4452a1b8663d1c9c2a87c72b6e89.png
 design/title_owner.png: design/title_owner-e022686de9bb1a6a517819efa98a5d61.png
 design/title_slash.gif: design/title_slash-2c12dcd651e4bd5c7b0362d9c573d108.gif
@@ -405,7 +405,7 @@ master/shadow_b_line.png: master/shadow_b_line-6e92de3286e96ffc87155ebfeb165316.
 master/space_master_btn.png: master/space_master_btn-446feb58457c64c2fafdbda1cf69963a.png
 master/space_master_hover.png: master/space_master_hover-21b9682e23bc2add659ecf3ac8fa53d0.png
 master/tag_icon.png: master/tag_icon-3a6b89895a30d2d2a92f581e8e81b702.png
-master/title_master.png: master/title_master-8cbd819e97a870145d687c4410756ee6.png
+master/title_master.png: master/title_master-b631c47a2c3bbefa2b0bb458b3e42ac4.png
 master/topic_1.jpg: master/topic_1-bfa3568101195fa1e7fc7048feb8ab33.jpg
 master/topic_2.jpg: master/topic_2-ef1f613261a20646d55277122fdfdb8b.jpg
 master/topic_3.jpg: master/topic_3-ad83558a3dceab5c3c4dbde424894202.jpg
@@ -567,9 +567,9 @@ news/suc_img1.jpg: news/suc_img1-a0cc512e73b4e9332d2df4be85e87cbd.jpg
 news/suc_img2.jpg: news/suc_img2-2989c3845d982aabb552da46e0f5ac80.jpg
 news/tips_bullet.jpg: news/tips_bullet-80cd9c77110ccd00dddb29259b26079b.jpg
 news/title_event.png: news/title_event-00628fc00cf2404355f73f800d9d86b9.png
-news/title_news.png: news/title_news-c15e4452a1b8663d1c9c2a87c72b6e89.png
-news/title_owner.png: news/title_owner-e022686de9bb1a6a517819efa98a5d61.png
-news/title_tools.png: news/title_tools-f809e9853105dea0642da6a8388bbebf.png
+news/title_news.png: news/title_news-d21d570b82ef4ba17ab00c67d4f78159.png
+news/title_owner.png: news/title_owner-8d0df28df55c527d391c93aa4dfdcba1.png
+news/title_tools.png: news/title_tools-456652860b46b0b3253b10713122b11a.png
 news/token.jpg: news/token-f5d135cdd59ef76005b7f09a1fc93ba1.jpg
 news/token_bg.jpg: news/token_bg-17615b62a2df7450cc1ad8e78c5a0a4b.jpg
 news/token_big.jpg: news/token_big-5f96107f6c425070167cafc12d389323.jpg
