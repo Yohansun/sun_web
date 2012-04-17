@@ -17,14 +17,13 @@ $(function() {
     swf : '/uploadify/uploadify.swf',
     cancelImage : '/uploadify/uploadify-cancel.png',
     skipDefault : ['onSelect'],
-    buttonText : "选择文件",
+    buttonText : "上传",
     multi : false,
     auto : true,
     checkExisting : false,
     transparent : true,
-    buttonImage : '<%= asset_path "news/reg_upload.jpg" %>',
+    //buttonImage : '<%#= asset_path "news/reg_upload.jpg" %>',
     uploader : '<%= user_avatar_path(current_user) %>',
-    //buttonText : '选择文件',
     onUploadSuccess : function(file, data, response) {
       var dat = eval('(' + data + ')');
       $.getScript(dat.upload);
