@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @weibo_data = WeiboItem.where(:q => "放飞色彩心愿清单").where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18).all
 
     #每周之星
-    @week_star = WeeklyStar.first
+    @weekly_star = WeeklyStar.last
 
     #家装资讯
     @home_infos = Subject.content("articles").limit(3)
