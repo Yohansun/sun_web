@@ -74,6 +74,7 @@ Icolor::Application.routes.draw do
   match "/designer_events" => "designer_events#index"
   match "/designer_events/index_2" => "designer_events#index_2" #第二页的显示 5个站点
   match "/designer_events/kv" => "designer_events#kv" #第一列表也KV点击后的页面
+  match "/designer_events/weibo" => "designer_events#weibo"
   match "/designer_events/:id" => "designer_events#show"
   match "/designer_events/city/:city" => "designer_events#city"
   match "/other_events" => "other_events#index"
@@ -93,6 +94,7 @@ Icolor::Application.routes.draw do
   match "/design_zg" => "function#design_zg" #室内设计师从业资格权威认证考试安排
   match "/design_zg2" => "function#design_zg2"
   match "/edm_week" => "function#edm_week" #一周未来提醒EDM
+
 
   #漆光艺彩
   match "/7-1" => "function#7-1"
