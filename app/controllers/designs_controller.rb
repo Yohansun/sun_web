@@ -17,8 +17,8 @@ class DesignsController < ApplicationController
       else
         @designs = @designs.order("created_at desc")
       end
-
-      @designs = @designs.where(:style => params[:style]) if params[:style] && !params[:style].blank? && params[:style] !='风格'
+      style = "%#{params[:style]}%"
+      @designs = @designs.where("style like ?", style) if params[:style] && !params[:style].blank? && params[:style] !='风格'
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       @designs = @designs.where(:area_id => params[:area_id]) if params[:area_id] && !params[:area_id].blank?
     end

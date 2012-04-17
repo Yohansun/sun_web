@@ -1,7 +1,7 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'weekstar','style' %>
   <style type="text/css">
-  	span.arrow_1{right:87px;}
+    span.arrow_1{right:87px;}
   </style>
 <% end -%>
 <% content_for :tail do -%>
@@ -109,10 +109,10 @@
         <div class="reviewform">
           <div class="bar">
             <h4><span>评论</span>(<%= @design.comments_count %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
-		  </div>
-          
+      </div>
+
           <div class="form-content">
-            <%= form_for(Comment.new) do |f| %>
+            <%= form_for(Comment.new, :html => {:class => "check_valid"}) do |f| %>
             <%= f.hidden_field :commentable_id, value: params[:id] %>
             <%= f.hidden_field :commentable_type, value: 'Design' %>
             <p class="input">
@@ -133,7 +133,7 @@
             <% @comments.each do |c| %>
             <li>
               <div class="bar">
-                <span class="user"><%= c.user.name %></span><span class="time"><%= c.created_at.to_date %></span>
+                <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_date %></span>
               </div>
               <div class="reply">
                 <a href="javascript:void(0)">回复</a>
@@ -163,3 +163,14 @@
   <div class='sub_bot pr'>
   </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    /*reply*/
+        $('.reply a').click(function(){
+            var reply = $(this).text();
+            var user = $(this).parents('li').find('.user').text();
+            $(this).parents('li').children('.reply_input').toggle()
+            .find('textarea').text(reply+user+':');
+        });
+  })
+</script>

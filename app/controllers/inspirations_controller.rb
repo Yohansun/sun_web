@@ -4,7 +4,6 @@ class InspirationsController < ApplicationController
   before_filter :find_inspiration, :only => [:upload, :edit]
 
   def index
-
     if @user
       @inspirations = @user.inspirations.page params[:page]
       render :template => "users/inspirations"
