@@ -125,30 +125,52 @@
 
 <div class="properties">
   <table class="propertyA">
-    <tr><th>公司名称：</th>
-      <td><%= @design.try(:company_name) %><a href="<%=@design.try(:company_url)%>">[进入公司主页]</a></td>
-    </tr>
-    <tr><th>公司地址：</th>
-      <td><%= @design.try(:company_address) %></td>
-    </tr>
-    <tr><th>设计师：</th>
-      <td><%=  @design.try(:author) %><a href="<%= @design.try(:author_url) %>">[进入个人主页]</a></td>
-    </tr>
-    <tr><th>项目名称：</th>
-      <td><%= @design.try(:project_name) %></td>
-    </tr>
-    <tr><th>设计风格：</th>
-      <td><%= @design.try(:design_style) %></td>
-    </tr>
-    <tr><th>设计说明：</th>
-      <td><%= @design.try(:design_intro) %></td>
-    </tr>
-    <tr><th>主要材料：</th>
-      <td><%= @design.try(:design_material) %></td>
-    </tr>
-    <tr><th>推荐理由：</th>
-      <td><%= @design.try(:recommend_reason) %></td>
-    </tr>
+    <%- unless @design.company_name.blank? %>
+        <tr><th>公司名称：</th>
+          <td><%= @design.company_name %>
+            <%- unless @design.company_url.blank? %>
+                <a href="<%=@design.company_url%>">[进入公司主页]</a></td>
+            <%- end %>
+            </tr>
+    <%- end %>
+    <%- unless @design.company_address.blank? %>
+        <tr><th>公司地址：</th>
+          <td><%= @design.company_address %></td>
+        </tr>
+    <%- end %>
+    <%- unless @design.author.blank? %>
+        <tr><th>设计师：</th>
+          <td><%=  @design.author %>
+            <%- unless @design.author_url.blank? %>
+                <a href="<%= @design.author_url %>">[进入个人主页]</a></td>
+            <%- end %>
+            </tr>
+    <%- end %>
+    <%- unless @design.project_name.blank? %>
+        <tr><th>项目名称：</th>
+          <td><%= @design.project_name %></td>
+        </tr>
+    <%- end %>
+    <%- unless @design.design_style.blank? %>
+        <tr><th>设计风格：</th>
+          <td><%= @design.design_style %></td>
+        </tr>
+    <%- end %>
+    <%- unless @design.design_intro.blank? %>
+        <tr><th>设计说明：</th>
+          <td><%= @design.design_intro %></td>
+        </tr>
+    <%- end %>
+    <%- unless @design.design_material.blank? %>
+        <tr><th>主要材料：</th>
+          <td><%= @design.design_material %></td>
+        </tr>
+    <%- end %>
+    <%- unless @design.recommend_reason.blank? %>
+        <tr><th>推荐理由：</th>
+          <td><%= @design.recommend_reason %></td>
+        </tr>
+    <%- end %>
   </table>
 </div>
 <div class="review_wrap">
