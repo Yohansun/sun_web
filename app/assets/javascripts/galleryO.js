@@ -34,5 +34,7 @@ $(function(){
 	$moveright.click(function(){
 		show(current+1);
 	});
-	show(0);
+        setInterval(function(){
+            show(current+1);
+        },3000);
 })

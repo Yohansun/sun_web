@@ -26,7 +26,7 @@
           <div class="section master_works_list">
             <%= link_to image_tag(design.main_preview_img.url(:index)), "/master_designs/#{design.id}", :class => "works_b" %>
             <div class="works_detail">
-              <h4>作者：<strong><%= design.master_profile.try(:name) %></strong></h4>
+              <h4>作者：<strong><%= design.master_profile.try(:name) || design.master_name %></strong></h4>
               <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
               <h4>作品名称：<span><%= design.design_name %></span></h4>
 

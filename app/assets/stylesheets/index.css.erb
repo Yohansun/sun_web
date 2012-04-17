@@ -34,7 +34,7 @@ body{}
 .boxA .title{margin:0 auto;width:91%;height:28px;zoom:1;position:relative;background:url(<%= asset_path "design/boxA_title.gif"%>) repeat-x left bottom}
 * html .boxA .title{height:26px;overflow:hidden}
 .boxA .title:after{content:"";display:block;clear:both}
-.boxA .title span{height:22px;vertical-align:bottom;line-height:1;text-shadow:5px -1px 2px #999}
+.boxA .title span{height:22px;vertical-align:bottom;line-height:1.2;}
 *+html .boxA .title span{line-height:1.2;}
 .boxA .title .cn{padding:0 22px 0 5px;font-size:20px;font-weight:bold;;background:url(<%= asset_path "design/title_slash2.gif"%>) no-repeat 100% 4px}
 .boxA .title .en{font-size:18px;font-family:georgia;color:#df1c1c}
@@ -140,7 +140,7 @@ body{}
 .galleryM .list li{float:left;margin:0 7px 5px 0;width:156px;height:147px;position:relative}
 .galleryM .list li .img,.galleryM .list li img{width:100%;height:100%;overflow:hidden}
 .galleryM .list .s{width:100%;height:50px;position:absolute;left:0;bottom:0;color:#fff;font-size:12px;background:#000;opacity:0.6;filter:alpha(opacity=60)}
-.galleryM .list .s p{margin:8px;height:12px;padding-left:15px;background:url(<%= asset_path "design/iconsC.gif"%>) no-repeat}
+.galleryM .list .s p{margin:8px;height:12px;padding-left:15px;background:url(<%= asset_path "design/iconsC.gif"%>) no-repeat 0 -60px;}
 .galleryM .list .s .like{margin-bottom:0}
 .galleryM .list .s .forward{float:left;margin-right:15px;padding-right:15px;border-right:1px solid #fff;background-position:0 -20px}
 .galleryM .list .s .review{float:left;background-position:0 -40px}
@@ -156,7 +156,7 @@ body{}
 
 .galleryO,.galleryO .list{width:320px;height:170px;position:relative}
 .galleryO .list li{position:absolute;z-index:10}
-.galleryO .list img{width:320px}
+.galleryO .list img{/*width:320px*/}
 .galleryO .buttons{position:absolute;right:3px;top:3px;z-index:15;float:right;width:36px;height:14px}
 .galleryO .buttons .moveleft,.galleryO .buttons .moveright{float:left;width:8px;height:100%;cursor:pointer;background:url(<%= asset_path "design/galleryO.gif"%>) no-repeat}
 .galleryO .buttons .moveright{float:right;background-position:0 -14px}
@@ -237,7 +237,7 @@ body{}
 #home_improvement_news .right .tweets .boxb_content{margin-top:10px;}
 #home_improvement_news .right .tweets li{float:left;width:90px;height:90px;margin-bottom:3px;position:relative}
 #home_improvement_news .right .tweets li .simg img{width:90px;height:90px}
-#home_improvement_news .right .tweets li .bimg{position:absolute;right:-1350px;bottom:60px;z-index:50;width:566px}
+#home_improvement_news .right .tweets li .bimg{position:absolute;right:5350px;bottom:60px;z-index:50;width:566px}
 #home_improvement_news .right .tweets li:hover .bimg,
 #home_improvement_news .right .tweets li.hover .bimg{right:-135px}
 

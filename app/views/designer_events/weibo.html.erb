@@ -1,0 +1,22 @@
+<%- content_for :head do %>
+    <style type="text/css">
+        iframe.wbframe{width:1000px;height:1030px;}
+        .wb{width:1000px;padding:0;}
+        .weibo_head{margin:0 14px;}
+    </style>
+<%- end %>
+<div class="main">
+  <div class='sub_title tr'>
+    <img src='/assets/news/title_event.png' />
+  </div><!--sub_title ends-->
+  <div class='sub_nav ft12 pr tr'>
+    <em><a class="fb" href="#">设计师活动</a></em>
+    <em><a href="#">精彩活动</a><span></span></em>
+    <em><a href="#">首页</a><span></span></em>
+  </div><!--sub_nav ends-->
+  <div class='wrapper wb clear'>
+    <img src="<%= asset_path "news/weibo_head.gif" %>" class="weibo_head" />
+    <iframe src="http://weibo.com/npicolor/" frameborder="0" class="wbframe" ></iframe>
+  </div><!--wrapper ends-->
+  <div class='sub_bot ft12 pr'></div><!--sub_bot ends-->
+</div><!--main ends-->

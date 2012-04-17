@@ -566,10 +566,24 @@ $(function(){
 	})
 
 /*qin_slide*/
-			qin_slide('#qin_slide1 ');
-			qin_slide('#qin_slide2 ');
-			qin_slide('#qin_slide3 ');
-			//qin_slide('#slide3 ');
+	qin_slide('#qin_slide1 ');
+	qin_slide('#qin_slide2 ');
+	qin_slide('#qin_slide3 ');
+	//qin_slide('#slide3 ');
+/*over_text*/
+        var $over = $('.over_text');
+        var $p = $over.children('p').last();
+        if($p.outerHeight()>100)
+            {
+                $over.after($("<a href='javascript:void(0)' class='fr ft12'>more>></a>"));
+        }
+        $('.profile_info a.fr').click(function(){
+            $(this).hide();
+            $over.addClass('text_hover');
+        });
+    $over.mouseleave(function(){
+            $(this).removeClass('text_hover').next('a').show();
+        });
 });
 
 			function qin_slide(ID){
