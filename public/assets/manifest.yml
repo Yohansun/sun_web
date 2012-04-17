@@ -225,7 +225,8 @@ design/pe2.jpg: design/pe2-66c884dbfccf1f431390e51af5cf3953.jpg
 design/personalized_brushing.gif: design/personalized_brushing-57aaa782299dd08513befd310928790a.gif
 design/pf1.jpg: design/pf1-29bb800a23a010458e103863303ff21e.jpg
 design/pg1.jpg: design/pg1-757e6b9c4627cd6143705ca71201cca9.jpg
-design/ph1.jpg: design/ph1-650b4194d5a9890aa3dffe9276d92524.jpg
+design/ph1.jpg: design/ph1-801404463fbdda53599ef608d2dec6cf.jpg
+design/ph2.jpg: design/ph2-a6f171a80bfbcf27928c8c79785d8ad4.jpg
 design/pi1.jpg: design/pi1-91ea990eed045e7840a04a4a80017710.jpg
 design/pj1.jpg: design/pj1-f156ab4b079f5c0f1b6c5d65a0ae2c3c.jpg
 design/pj2.jpg: design/pj2-ed42eede1afe44a1280fc7d0d919625d.jpg
@@ -243,6 +244,9 @@ design/pm2.jpg: design/pm2-3d5a417b9b9f64ba1c6081aaa3ad2a66.jpg
 design/popupA.gif: design/popupA-cfcba38d10f889de1e370a8c6d9512b3.gif
 design/popupB.png: design/popupB-75a4f9f28c66f2e484fe2a992ebe4d18.png
 design/popup_box.gif: design/popup_box-cd0f84574d24417794a5d048f97be414.gif
+design/popup_box1.gif: design/popup_box1-bbef1e0ee8e74a111febe94c23b55562.gif
+design/popup_box2.gif: design/popup_box2-ef5a62e99b01f7194ea41d8fe7ef9ff6.gif
+design/popup_box3.gif: design/popup_box3-720b6222cae332c2fb9e4c1209e44eff.gif
 design/popup_s1.jpg: design/popup_s1-2daeb4f07e7d4560db2087ec3ce7bc3c.jpg
 design/popup_s2.jpg: design/popup_s2-34930d60661a42000b2808c096fb201a.jpg
 design/popup_s3.jpg: design/popup_s3-d8c8d7fb6b234e4835e6e137cfdf5b2e.jpg
@@ -299,7 +303,7 @@ design/trend/swj_b.jpg: design/trend/swj_b-493db2c1fade4c5134155f1533d1701a.jpg
 design/trend/swj_s.jpg: design/trend/swj_s-0b3eecc2cb487f7aeb50c4ad82499d22.jpg
 design/trend/trend_bg.jpg: design/trend/trend_bg-f4aeee02ef3ae2a4861502e6cba62bf4.jpg
 design/trend/trend_head.jpg: design/trend/trend_head-9a29e4a4f6efd550641fd9210d77260c.jpg
-design/trend/trend_left.png: design/trend/trend_left-cc7c59bcb42916fe49cee5b5a16a49a8.png
+design/trend/trend_left.png: design/trend/trend_left-c104626e2d2d038a2caf4e4f744914ae.png
 design/trend/trend_title.png: design/trend/trend_title-ed93b0bee6d8c91722393bf85b230902.png
 design/trend/trend_video.jpg: design/trend/trend_video-5b857bfcbff1dd2601c53bcf0628e388.jpg
 design/trend/wfb_b.jpg: design/trend/wfb_b-cf73a73cdad2db76297681456c48b0d9.jpg
@@ -742,6 +746,7 @@ galleryN.js: galleryN-ae9bf4dc14a00a6bfa746404b7a3cf0a.js
 galleryO.js: galleryO-7f9894b21781b6c2e42c5f74c608fb76.js
 index.js: index-d3a99a6705b02105c18589f8df701f4c.js
 index3.js: index3-61eed2fcd6a441924f1c2d2e4a7252ab.js
+jquery.autocomplete.js: jquery.autocomplete-90f6737fa0cacd080a3803c211a1369d.js
 jquery.datepicker.js: jquery.datepicker-a53110ff547379235c4334a90056aef4.js
 jquery.jeditable.js: jquery.jeditable-de130d9617e149c45cd758d199e271ec.js
 jquery.masonry.js: jquery.masonry-2be4272eaed7adec5e86331a7a0507aa.js
@@ -784,7 +789,7 @@ reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
 style.css: style-d7ec575ee7801adfe2857c70aeaaf178.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
-weekstar.css: weekstar-35c8b23e64dc1dfec5f511b94248bd89.css
+weekstar.css: weekstar-fc6972b5f2d9c323d1df04a54cf3d2e6.css
 magic_content/application.css: magic_content/application-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/banners.css: magic_content/banners-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/downloads.css: magic_content/downloads-95bd4fe1de99c1cd91ec8e6f348a44bd.css

@@ -16,6 +16,7 @@
 .weekstart_titleB .votes img{vertical-align:top}
 .weekstart_titleB .operate{font-size:12px}
 .weekstart_titleB .operate span{float:left;margin-left:10px;padding-left:20px;color:#5C5C5C;line-height:18px;background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -35px}
+.weekstart_titleB .votes.xin_red{ background: url(<%= asset_path "design/d_icon.png"%>) no-repeat left -73px;}
 .weekstart_titleB .operate .review{background-position:0 -16px}
 
 .weekstart_titleC{height:48px}
@@ -43,13 +44,18 @@
 .color-picker .color{margin-top:12px;height:46px;background:url(<%= asset_path "design/colors.gif"%>) no-repeat}
 .color-picker .color .palettes{padding:6px 0 0 59px}
 .color-picker .color .palette{float:left;margin-right:7px;width:71px;height:35px;position:relative}
-.color-picker .color .palette .desc{display:none;position:absolute;left:-46px;bottom:20px;width:500px;padding-bottom:30px;background:url(<%= asset_path "design/popup_box.gif"%>) no-repeat right bottom}
-.color-picker .color .palette:hover .desc{display:block}
-.color-picker .color .palette .desc .title{height:7px;overflow:hidden;background:url(<%= asset_path "design/popup_box.gif"%>) no-repeat 0 0}
-.color-picker .color .palette .desc .list{width:498px;overflow:hidden;border-left:1px solid #c6cbcf;border-right:1px solid #c6cbcf;background:#fefefe}
+.color-picker .color .palette .desc{/**/display:none;position:absolute;left:-46px;bottom:10px;*bottom:20px!important;/*width:500px;*/padding-bottom: 40px;}
+.color-picker .color .palette .desc1{ width:165px; background:url(<%= asset_path "design/popup_box1.gif"%>) no-repeat left top;}
+.color-picker .color .palette .desc2{ width:327px; background:url(<%= asset_path "design/popup_box2.gif"%>) no-repeat left top;}
+.color-picker .color .palette .desc3{ width:497px; background:url(<%= asset_path "design/popup_box3.gif"%>) no-repeat left top;}.color-picker .color .palette:hover .desc{display:block}
+.color-picker .color .palette .desc .title{height:7px;overflow:hidden;}
+.color-picker .color .palette .desc .list{/*width:498px;*/overflow:hidden;/**/border-left:1px solid #c6cbcf;border-right:1px solid #c6cbcf;background:#fefefe;}
+.color-picker .color .palette .desc1 .list{ width:163px;}
+.color-picker .color .palette .desc2 .list{ width:325px;}
+.color-picker .color .palette .desc3 .list{ width:495px;}
 .color-picker .color .palette .desc .list ul{margin:10px 0 -10px 10px;width:110%;zoom:1}
 .color-picker .color .palette .desc .list ul:after{content:'';display:block;clear:left;font-size:0}
-.color-picker .color .palette .desc .list li{float:left;margin:0 20px 0 0;padding:0 20px 5px 2px;width:130px;height:33px;border-right:1px dotted #dcdcdc;font-size:12px}
+.color-picker .color .palette .desc .list li{float:left;margin:0 13px 0 0;padding:0 20px 5px 2px;width:132px;height:43px;border-right:1px dotted #dcdcdc;font-size:12px}
 .color-picker .color .palette .desc .list li .colorblock{float:left;margin:0 5px 0 0;width:30px;height:30px}
 .color-picker .color .palette .desc .list li h5{color:#6d1718}
 .color-picker .color .palette .desc .list li p{margin-top:5px;padding-bottom:5px;border-bottom:1px solid #ccc}
