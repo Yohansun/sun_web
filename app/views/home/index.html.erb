@@ -151,10 +151,16 @@
           <div class="box_content">
             <div class="inner">
               <div class="inner_inner">
-                <div class="image"><a href="#"><img src="<%= asset_path "design/desgin_appreciation.gif" %>"></a></div>
+                <div class="image">
+                  <a href="#">
+                    <% if @weekly_star %>
+                    <%= image_tag(@weekly_star.try(:file).url(:slide), :class => "cloudcarousel", :alt => "") %>
+                    <%- end -%>
+                  </a>
+                </div>
                 <div class="t">
-                  <p>设计师：王庆建(上海)</p>
-                  <p>所属公司：圆柱设计</p>
+                  <p>设计师：<%= @weekly_star.try(:author) %>(<%= "上海"%>)</p>
+                  <p>所属公司：<%= @weekly_star.try(:company_name) %></p>
                 </div>
                 <div class="s">
                   <p class="like">286</p>
