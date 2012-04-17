@@ -16,6 +16,8 @@ Icolor::Application.routes.draw do
     match "/users/policy" => "users/register#policy"
   end
 
+  get '/shares' => 'shares#index'
+
   post "/api/login" => "api#login"
   post "/api/create_user" => "api#create_user"
 
@@ -94,7 +96,6 @@ Icolor::Application.routes.draw do
   match "/design_zg" => "function#design_zg" #室内设计师从业资格权威认证考试安排
   match "/design_zg2" => "function#design_zg2"
   match "/edm_week" => "function#edm_week" #一周未来提醒EDM
-
 
   #漆光艺彩
   match "/7-1" => "function#7-1"
