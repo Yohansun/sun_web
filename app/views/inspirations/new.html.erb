@@ -18,7 +18,7 @@
           <%= f.label :content, "灵感启发：" %>
           <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
           <div class="fl tc ins_tips ft12">
-          	还可输入<span id="ins_span">400</span>字<br />
+            还可输入<span id="ins_span">400</span>字<br />
             <!-- <%= image_submit_tag "news/upload_save.jpg", class: "add_tag_on" -%> -->
           </div>
         </div><!--reg_list ends-->
@@ -27,4 +27,19 @@
     </div><!--section ends-->
   </div><!--shadow ends-->
 </div><!--main ends-->
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $("#new_inspiration").submit(function(){
+      if($("#inspiration_title").val() == ""){
+        alert("标题不能为空！");
+        return false;
+      }
+      if($("#inspiration_content").val() == ""){
+        alert("灵感启发不能为空！");
+        return false;
+      }
+    })
+  })
+
+</script>
 <% end %>
