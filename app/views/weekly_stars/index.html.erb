@@ -37,7 +37,7 @@
             所获票数：<span id="votes_count<%= @design.id %>"><%= @design.try(:votes_count) %></span>&nbsp;&nbsp;
           </div>
           <div class="operate pr">
-            <span class="forward">转发 (0)</span>
+            <span class="forward zf">转发 (0)</span>
             <span class="review">评论 (<%= @design.try(:comments).try(:length) %>)</span>
             <div class="popup_zf group none" style="bottom:-35px; left:25px;"><span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></div>
           </div>

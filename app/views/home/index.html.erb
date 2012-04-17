@@ -1,6 +1,5 @@
 <% content_for :head do -%>
 <%= stylesheet_link_tag 'index' %>
-<%= javascript_include_tag 'index3' %>
 <style type="text/css">
 .boxb_content {
   position: relative;
@@ -234,7 +233,7 @@
               </ul>
             </div>
           </div>
-          <%= javascript_include_tag "galleryN" %>
+
           <div class="intro">
             <h3>作者：<%= @master_design.try(:master_profile).try(:name) %></h3>
             <p>国籍：<%= @master_design.try(:master_profile).try(:nationality) %></p>
@@ -311,7 +310,7 @@
               </div>
             </div>
           </div>
-          <%= javascript_include_tag "galleryM" %>
+
         </div>
       </div>
     </div>
@@ -471,7 +470,7 @@
                   </ul>
                 </div>
               </div>
-              <%= javascript_include_tag "galleryO" %>
+
             </div>
           </div>
         </div>
@@ -481,8 +480,6 @@
       <div class="c shadow"></div>
     </div>
   </div>
-
-  <%= javascript_include_tag "index3" %>
 </div>
 <!--centerBg ends-->
 </div><!--center ends-->
@@ -496,3 +493,15 @@
     </a>
   </div>
 </div>
+<%- content_for :tail do %>
+<%= javascript_include_tag "galleryN" %>
+<%= javascript_include_tag "galleryM" %>
+<%= javascript_include_tag "galleryO" %>
+<%= javascript_include_tag "index3" %>
+
+<script type="text/javascript">
+  $(function() {
+      $("#home_improvement_news").hide();
+  });
+</script>
+<% end -%>

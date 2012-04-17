@@ -1,3 +1,20 @@
+// forward
+
+$(function(){
+	if ($("span.zf")) {
+		$(".popup_zf_qq, .popup_zf_sina, .popup_zf_rr, .popup_zf_kaixin").click(function(e){
+			var parent_node = $(this).parent();
+			var url = $(parent_node).attr("data-url");
+			var title = $(parent_node).attr("data-title");
+			var pic = $(parent_node).attr("data-pic");
+
+			var webid = $(this).attr("data-webid");
+
+			window.open("http://www.jiathis.com/send/?webid="+webid+"&url="+url+"&title="+title+"&pic="+pic);
+		});
+	};
+});
+
 /*search input*/
 $(function(){
 	var $input = $('.search input.fl,#username,.owner_search,#host_main');
