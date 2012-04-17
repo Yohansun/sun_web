@@ -51,35 +51,49 @@
       </div>
       <div class="color-picker" style="padding-top:0px;">
       <div class="color">
-      <div class="palettes">
-        <%- 8.times do %>
-            <div class="palette">
-              <div class="desc">
-                <div class="title"></div>
-                <div class="list"><ul>
-                  <%if @color1  %>
-                      <li><div class="colorblock" style="background-color:rgb(<%= @color1.rgb %>)"></div>
-                        <h5><%= @color1.name %></h5>
-                        <p><%= @color1.code %></p>
-                      </li>
-                  <%- end %>
-                  <%if @color2  %>
-                      <li><div class="colorblock" style="background-color:rgb(<%= @color2.rgb %>)"></div>
-                        <h5><%= @color2.name %></h5>
-                        <p><%= @color2.code %></p>
-                      </li>
-                  <%- end %>
-                  <%if @color3  %>
-                      <li><div class="colorblock" style="background-color:rgb(<%= @color3.rgb %>)"></div>
-                        <h5><%= @color3.name %></h5>
-                        <p><%= @color3.code %></p>
-                      </li>
-                  <%- end %>
-                </ul></div>
-              </div>
-            </div>
-        <%- end %>
-      </div>
+        <div class="palettes">
+          <%- color_count = 0  -%>
+          <%- color_count += 1 if @color1-%>
+          <%- color_count += 1 if @color2-%>
+          <%- color_count += 1 if @color3 -%>
+          <%- if color_count > 0 -%>
+              <%- 8.times do %>
+                  <div class="palette">
+                    <%- if color_count == 1 %>
+                        <div class="desc desc1">
+                    <%- end %>
+                    <%- if color_count == 2 %>
+                        <div class="desc desc2">
+                    <%- end %>
+                    <%- if color_count == 3 %>
+                        <div class="desc desc3">
+                    <%- end %>
+                    <div class="title"></div>
+                    <div class="list"><ul>
+                      <%if @color1  %>
+                          <li><div class="colorblock" style="background-color:rgb(<%= @color1.rgb %>)"></div>
+                            <h5><%= @color1.name %></h5>
+                            <p><%= @color1.code %></p>
+                          </li>
+                      <%- end %>
+                      <%if @color2  %>
+                          <li><div class="colorblock" style="background-color:rgb(<%= @color2.rgb %>)"></div>
+                            <h5><%= @color2.name %></h5>
+                            <p><%= @color2.code %></p>
+                          </li>
+                      <%- end %>
+                      <%if @color3  %>
+                          <li><div class="colorblock" style="background-color:rgb(<%= @color3.rgb %>)"></div>
+                            <h5><%= @color3.name %></h5>
+                            <p><%= @color3.code %></p>
+                          </li>
+                      <%- end %>
+                    </ul></div>
+                    </div>
+                    </div>
+              <%- end %>
+          <%- end %>
+          </div>
       <!--[if IE 6]>
       <script type="text/javascript">
           if( $.browser.msie && $.browser.version < 7 ) {
