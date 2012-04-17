@@ -7,14 +7,23 @@
     <p class="line_b_dot">请提交您的报名资料</p>
     <div class="shadow">
       <div class="section ">
-        <form>
-          <div class="color_signup"><label>*姓名：</label><input class="color_username" type="text"/></div>
-          <div class="color_signup"><label>*联系方式：</label><input type="text"/></div>
-          <div class="color_signup"><label>*电子邮件：</label><input type="text"/></div>
-          <div class="color_signup"><label>*邮寄地址：</label><input type="text"/></div>
+        <%= form_for @approve do |f| %>
+          <div class="color_signup"><label>*姓名：</label>
+            <%= f.text_field :name %>
+          </div>
+          <div class="color_signup"><label>*联系方式：</label>
+            <%= f.text_field :telphone %>
+          </div>
+          <div class="color_signup"><label>*电子邮件：</label>
+            <%= f.text_field :email %>
+          </div>
+          <div class="color_signup"><label>*邮寄地址：</label>
+            <%= f.text_field :address %>
+            <%= hidden_field_tag "approve[approve_type]", 1 %>
+          </div>
           <div class="color_input_image_box tc">
             <input class="color_input_image" type="image" src="<%= asset_path "design/submitB.gif"%>"/></div>
-        </form>
+        <%- end -%>
       </div>
       <!--section ends-->
     </div>

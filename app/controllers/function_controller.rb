@@ -5,4 +5,8 @@ class FunctionController < ApplicationController
   def edm_week
     render :layout => nil
   end
+
+  def color_signup
+  	@approve = Approve.new
+  end
 end
