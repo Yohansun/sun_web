@@ -17,7 +17,7 @@
   </div><!--sub_nav ends-->
   <div class='wrapper pb60 group pt25'>
     <div class="works_detail_tit line_b_dot group">
-      <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) %></strong></h3>
+      <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) || @master_design.master_name %></strong></h3>
       <div class="full_play">
         <a href="/master_designs/<%= @master_design.id %>/fullscreen">全屏观看</a>
       </div>

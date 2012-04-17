@@ -51,7 +51,7 @@
                 <div class="interview_box text ft12">
                   <%- t = @article.interview_content.split(%r(\r\n)) %>
                   <%- t.each do |a| %>
-                    <p><%= a %></p>
+                    <p><%= raw a %></p>
                   <%- end %>
                 </div>
                 <!--interview_box ends-->
