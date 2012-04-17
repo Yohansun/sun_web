@@ -20,4 +20,8 @@ class MessagesController < ApplicationController
     @user.messages.find(params[:id]).destroy
     redirect_to user_messages_path(@user)
   end
+
+  def reply
+    #@message = Message.new(params[:message])
+  end
 end

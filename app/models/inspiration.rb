@@ -8,7 +8,7 @@ class Inspiration < ActiveRecord::Base
 	has_many :votes, :as => :voteable
 	has_many :design_images, :as => :imageable
 
-	paginates_per 8
+	paginates_per 20
 
 	def cover_img
 		self.design_images.order("is_cover DESC").first
