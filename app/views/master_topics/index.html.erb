@@ -10,10 +10,11 @@
   <div class='sub_title tr'>
     <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
-  <em><a class="fb" href="/master_topics">热点话题</a></em>
-  <em><a href="#">大师殿堂</a><span></span></em>
-  <em><a href="/">首页</a><span></span></em>
-</div><!--sub_nav ends-->
+  <div class="sub_nav ft12 pr tr">
+    <em><a class="fb" href="/master_topics">热点话题</a></em>
+    <em><a href="#">大师殿堂</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
+  </div><!--sub_nav ends-->
   <div class='wrapper pt25 pb30'>
     <%- if @topics %>
         <%- @topics.each do |topic| %>
