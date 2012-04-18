@@ -152,18 +152,17 @@
               <div class="inner_inner">
                 <div class="image">
                   <a href="#">
-                    <% if @weekly_star %>
-                    <%#= image_tag(@weekly_star.try(:file).url(:slide), :class => "cloudcarousel", :alt => "") %>
+                    <% unless @weekly_star.main_preview_img.nil? %>
+                      <%= image_tag(@weekly_star.main_preview_img.url(:index)) %>
                     <%- end -%>
                   </a>
                 </div>
                 <div class="t">
-                  <p>设计师：<%#= @weekly_star.try(:author) %>(<%= "上海"%>)</p>
-                  <p>所属公司：<%#= @weekly_star.try(:company_name) %></p>
+                  <p>设计师：<%= @weekly_star.try(:author) %></p>
                 </div>
                 <div class="s">
-                  <p class="like">286</p>
-                  <p class="review">评论86</p>
+                  <p class="like"><%= @weekly_star.try(:shares_count) %></p>
+                  <p class="review">评论<%= @weekly_star.try(:comments_count) %></p>
                 </div>
               </div>
             </div>
@@ -262,10 +261,14 @@
             <div class="boxB" id="weekly_star">
               <div class="box_title"><h3>每周之星</h3></div>
               <div class="boxb_content" style=" position: static; top: 0;">
-                <a href="#"><img src="<%= asset_path "design/p1.jpg" %>"></a>
+                <a href="#">
+                    <% unless @weekly_star.main_preview_img.nil? %>
+                      <%= image_tag(@weekly_star.main_preview_img.url(:index)) %>
+                    <%- end -%>
+                </a>
                 <div class="cor"></div>
-                <div class="designer">设计师：王庆建</div>
-                <div class="notes">286</div>
+                <div class="designer">设计师：<%= @weekly_star.try(:author) %></div>
+                <div class="notes"><%= @weekly_star.try(:shares_count) %></div>
               </div>
             </div>
             <div class="boxB" id="afflatus_showcase">
@@ -465,8 +468,6 @@
                     <li><a href="#"><img src="<%= asset_path "design/paintart4.png"%>"></a></li>
                     <li><a href="#"><img src="<%= asset_path "design/paintart5.png"%>"></a></li>
                     <li><a href="#"><img src="<%= asset_path "design/paintart6.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/sm.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/lm.png"%>"></a></li>
                   </ul>
                 </div>
               </div>
