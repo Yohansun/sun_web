@@ -10,7 +10,7 @@
 </div>
   <div class='sub_nav ft12 pr tr'>
     <em><a class="fb" href="/weekly_stars">每周之星</a></em>
-    <em><a href="#">设计鉴赏</a><span></span></em>
+    <em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
     <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
 <div class="wrapper group">
@@ -18,13 +18,13 @@
     <div class="weekstart_titleA">
       <div class="subtitle">2012.5.12 往期作品</div>
       <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
-      <h1>华帝公馆样板房</h1>
+      <h1><%= @design.design_name %></h1>
     </div>
 <%- else %>
 <div class="weekstart_titleA">
   <div class="subtitle"><%= @design.try(:published_at).try(:to_date) %> 往期作品</div>
   <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show" %></div>
-  <h1><%= @design.design_name  %></h1>
+  <h1><%= @design.design_name %></h1>
 </div>
 <%- end %>
 
