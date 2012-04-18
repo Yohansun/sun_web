@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20120418073513) do
 
   create_table "admin_profiles", :force => true do |t|
@@ -246,7 +245,6 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
-    t.integer  "subject_id"
   end
 
   create_table "function_categories", :force => true do |t|
@@ -363,6 +361,7 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "master_field"
     t.text     "position"
     t.text     "interview_content"
+    t.text     "message"
     t.string   "title"
     t.text     "intro"
     t.integer  "subject_id"
@@ -379,7 +378,6 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.datetime "preview_img_in_updated_at"
     t.string   "master_kind"
     t.string   "interview_content_type"
-    t.text     "message"
   end
 
   create_table "master_videos", :force => true do |t|
@@ -407,7 +405,6 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.integer  "user_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-    t.integer  "subject_id"
     t.integer  "status"
   end
 
@@ -540,7 +537,6 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.string   "title"
-    t.integer  "subject_id"
     t.integer  "sys_msg_id"
   end
 
@@ -720,9 +716,7 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "source"
     t.string   "thumbnail_pic"
     t.string   "bmiddle_pic"
-    t.integer  "original_pic"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.string   "original_pic"
     t.string   "user_id"
     t.string   "user_screen_name"
     t.string   "user_name"
@@ -733,6 +727,8 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "user_description"
     t.datetime "created_time"
     t.integer  "status"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
 end

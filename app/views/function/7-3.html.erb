@@ -30,7 +30,11 @@
   <!--sub_nav ends-->
   <div class='wrapper paint_art_mini'>
     <div class="art_banner">
-      <%= link_to image_tag(asset_path "paint_art/art_banner.jpg"), "http://detail.tmall.com/item.htm?id=12407851519&", :target => "_blank" %>
+      <img src="<%= asset_path "paint_art/art_banner.jpg" %>" border="0" usemap="#Map" />
+      <map name="Map" id="Map">
+        <area shape="rect" coords="791,141,966,171" href="/system/videos/tssc.pdf"/>
+        <area shape="rect" coords="793,174,962,211" href="http://detail.tmall.com/item.htm?id=12407851519&" target="_blank"/>
+      </map>
     </div>
     <div class="art_conbox">
       <div class="art_con group">
@@ -48,7 +52,7 @@
           </div>
         </div>
         <div class="art_con2_bg">
-          <h2><img src="<%= asset_path "paint_art/art_tit1.png" %>"/></h2>
+          <h2><img src="<%= asset_path "paint_art/art_tit2.png" %>"/></h2>
 
           <div class="art_con2">
             <div class="art_mini_fla">
@@ -94,10 +98,9 @@
         <div class="kv_loop mt25" style="background:none;">
           <div class="gallery">
             <div class="galleryK" id="gallery">
-              <img class="cloudcarousel" alt="art_kv1.png" src="<%= asset_path "paint_art/art_kv/art_kv1.jpg"%>"/>
-              <img class="cloudcarousel" alt="art_kv2.png" src="<%= asset_path "paint_art/art_kv/art_kv2.jpg"%>"/>
-              <img class="cloudcarousel" alt="art_kv3.png" src="<%= asset_path "paint_art/art_kv/art_kv3.jpg"%>"/>
-              <img class="cloudcarousel" alt="art_kv4.png" src="<%= asset_path "paint_art/art_kv/art_kv4.jpg"%>"/>
+              <%- 30.times do |i| %>
+                <img class="cloudcarousel" alt="art_kv<%= i+1 %>.png" src="<%= asset_path "paint_art/art_kv/art_kv#{i+1}.jpg"%>"/>
+              <%- end %>
             </div>
           </div>
         </div>
