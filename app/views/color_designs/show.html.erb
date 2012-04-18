@@ -7,7 +7,7 @@
     </style>
 <% end -%>
 <% content_for :tail do -%>
-    <%= javascript_include_tag 'galleryB.js','main' %>
+    <%= javascript_include_tag 'galleryB.js','reply' %>
     <script type="text/javascript">
         $(".slide_thumb").click(function(event) {
             event.preventDefault();
@@ -167,6 +167,18 @@
                   <div class="content">
                     <%= c.content %>
                   </div>
+                  <%- c.reply_msgs.order("created_at DESC").each do |r| %>
+                      <div class='reply_list cl pr clear ft14'>
+                        <em class='pa'>◆</em>
+                        <span class='pa'>◆</span>
+                        <p class="reply_tabs fl">
+                          <%= r.user.display_name %><%= r.content %>
+                        </p>
+                        <p class="fr">
+                          <%= r.created_at.to_date %>
+                        </p>
+                      </div>
+                  <%- end %>
                   <div class="reply_input none cl pr clear">
                   <%= form_for(ReplyMsg.new) do |f| %>
                       <%= f.hidden_field :show_id, value: @design.id %>
