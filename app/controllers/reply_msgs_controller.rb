@@ -14,7 +14,6 @@ class ReplyMsgsController < ApplicationController
       user_of_comment = Comment.find(params[:reply_msg][:comment_id]).user.display_name
     end
 
-
     SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment, :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
                    :reply_type => @reply_msg.reply_type,
                    :status => SysMsg::Status[0],
