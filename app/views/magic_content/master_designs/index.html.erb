@@ -24,7 +24,7 @@
           <tr class="gradeA">
             <td><%= c.id %></td>
             <td><%= c.design_name %></td>
-            <td><%= c.master_profile.try(:name) %></td>
+            <td><%= c.master_profile.try(:name)|| c.master_name%></td>
             <td><%= image_tag c.main_preview_img.url(:thumb) %></td>
             <% if c.published_at.nil? %>
               <td><%= format_time c.created_at %></td>
