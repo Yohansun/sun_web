@@ -50,7 +50,7 @@ function ImageFlow ()
 		imageFocusMax:      2,              /* 每边允许的图片数 */
 		imagePath:          '',             /* Path to the images relative to the reflect_.php script */
 		imageScaling:       true,           /* Toggle image scaling */ 
-		imagesHeight:       0.6,           /* Height of the images div container in percent */
+		imagesHeight:       0.67,           /* Height of the images div container in percent */
 		imagesM:            0.5,            /* Multiplicator for all images in percent */
 		onClick:            function() { /*document.location = this.url; */},   /* Onclick behaviour */
 		opacity:            false,          /* Toggle image opacity */
@@ -73,7 +73,7 @@ function ImageFlow ()
 		startID:            1,              /* Image ID to begin with */
 		glideToStartID:     true,           /* Toggle glide animation to start ID */
 		startAnimation:     false,          /* Animate images moving in from the right on startup */
-		xStep:              50             /* Step width on the x-axis in px */
+		xStep:              80             /* Step width on the x-axis in px */
 	};
 
 
@@ -697,6 +697,7 @@ function ImageFlow ()
 			caption = '&nbsp;';
 		}
 		my.captionDiv.innerHTML = caption;
+        $('.art_kv_info').children('img').attr('src','/assets/paint_art/art_kv/' + caption)
 
 		/* Set scrollbar slider to new position */
 		if (my.MouseDrag.busy === false)

@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "style", "weekstar" %>
     <style type="text/css">
         span.arrow_1 {
             right: 179px;
@@ -9,51 +9,111 @@
             right: 111px;
         }
     </style>
+    <style type="text/css">
+        .galleryK .caption {
+            position: static;
+        }
+    </style>
 <%- end %>
 <%- content_for :tail do %>
-    <%= javascript_include_tag "/Scripts/swfobject_modified.js" %>
+    <%= javascript_include_tag "/Scripts/swfobject_modified.js", "galleryK" %>
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>
-    <img src="<%= asset_path "paint_art/title_paint_art.png"%>" alt=""/>
+    <img src="<%= asset_path "paint_art/title_paint_art.png" %>" alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="#">缤纷迷你涂料</a></em>
-    <em><a href="#">漆光溢彩</a><span></span></em>
+    <em><a class="fb" href="/7-3">刷新灵感我绘我家</a></em>
+    <em><a href="/7-3">漆光艺彩</a><span></span></em>
     <em><a href="/">首页</a><span></span></em>
-  </div><!--sub_nav ends-->
+  </div>
+  <!--sub_nav ends-->
   <div class='wrapper paint_art_mini'>
-    <h2>墙面创意涂刷手册</h2>
+    <div class="art_banner">
+      <%= link_to image_tag(asset_path "paint_art/art_banner.jpg"), "http://detail.tmall.com/item.htm?id=12407851519&", :target => "_blank" %>
+    </div>
+    <div class="art_conbox">
+      <div class="art_con group">
+        <div class="art_con1_bg">
+          <h2><img src="<%= asset_path "paint_art/art_tit1.png" %>"/></h2>
 
-    <div class="art_mini_fla">
-      <!--img src="images/paint_art/art_fla_img.jpg" /-->
-      <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="918" height="649">
-        <param name="movie" value="/system/flash/april_7.3.0406.swf"/>
-        <param name="quality" value="high"/>
-        <param name="wmode" value="opaque"/>
-        <param name="swfversion" value="6.0.65.0"/>
-        <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-        <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
-        <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-        <!--[if !IE]>-->
-        <object type="application/x-shockwave-flash" data="/system/flash/april_7.3.0406.swf" width="918" height="649">
-          <!--<![endif]-->
-          <param name="quality" value="high"/>
-          <param name="wmode" value="opaque"/>
-          <param name="swfversion" value="6.0.65.0"/>
-          <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
-          <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-          <div>
-            <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-
-            <p>
-              <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33"/></a>
-            </p>
+          <div class="art_con1">
+            <ul>
+              <li><h3><img src="<%= asset_path "paint_art/art_con1_1tit.png" %>"/></h3>
+                <img src="<%= asset_path "paint_art/art_con1_1.jpg" %>"/>
+              </li>
+              <li class="nomr"><h3><img src="<%= asset_path "paint_art/art_con1_2tit.png" %>"/></h3>
+                <img src="<%= asset_path "paint_art/art_con1_2.jpg" %>"/></li>
+            </ul>
           </div>
-          <!--[if !IE]>-->
-        </object>
-        <!--<![endif]-->
-      </object>
+        </div>
+        <div class="art_con2_bg">
+          <h2><img src="<%= asset_path "paint_art/art_tit1.png" %>"/></h2>
+
+          <div class="art_con2">
+            <div class="art_mini_fla">
+              <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="418" height="266" id="FLVPlayer">
+                <param name="movie" value="/flash/FLVPlayer_Progressive.swf"/>
+                <param name="quality" value="high"/>
+                <param name="wmode" value="opaque"/>
+                <param name="scale" value="noscale"/>
+                <param name="salign" value="lt"/>
+                <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/kv&amp;autoPlay=false&amp;autoRewind=false"/>
+                <param name="swfversion" value="8,0,0,0"/>
+                <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+                <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+                <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="418" height="266">
+                  <!--<![endif]-->
+                  <param name="quality" value="high"/>
+                  <param name="wmode" value="opaque"/>
+                  <param name="scale" value="noscale"/>
+                  <param name="salign" value="lt"/>
+                  <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/kv&amp;autoPlay=false&amp;autoRewind=false"/>
+                  <param name="swfversion" value="8,0,0,0"/>
+                  <param name="expressinstall" value="/Scripts/expressInstall.swf"/>
+                  <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+                  <div>
+                    <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+
+                    <p>
+                      <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player"/></a>
+                    </p>
+                  </div>
+                  <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+              </object>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="art_con" style="margin-top:10px;_margin-top:0px;">
+        <div class="kv_loop mt25" style="background:none;">
+          <div class="gallery">
+            <div class="galleryK" id="gallery">
+              <img class="cloudcarousel" alt="art_kv1.png" src="<%= asset_path "paint_art/art_kv/art_kv1.jpg"%>"/>
+              <img class="cloudcarousel" alt="art_kv2.png" src="<%= asset_path "paint_art/art_kv/art_kv2.jpg"%>"/>
+              <img class="cloudcarousel" alt="art_kv3.png" src="<%= asset_path "paint_art/art_kv/art_kv3.jpg"%>"/>
+              <img class="cloudcarousel" alt="art_kv4.png" src="<%= asset_path "paint_art/art_kv/art_kv4.jpg"%>"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="art_kv_info">
+          <img src="<%= asset_path "paint_art/art_kv/art_kv1.png" %>"/>
+          <!--<img src="images/paint_art/art_kv/art_kv2.png" />
+        <img src="images/paint_art/art_kv/art_kv3.png" />
+        <img src="images/paint_art/art_kv/art_kv4.png" />-->
+        </div>
+        <!--<script>
+                          var $src_imgname = $('#gallery').children('.navigation').find('.caption').text()
+                          $('.art_kv_info').children('img').attr('src','images/paint_art/art_kv/' + $src_imgname)
+                          </script>-->
+
+      </div>
     </div>
   </div>
   <!--wrapper ends-->
