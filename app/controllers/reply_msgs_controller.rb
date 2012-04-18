@@ -7,7 +7,12 @@ class ReplyMsgsController < ApplicationController
 
     user_display_name = current_user.display_name
     user_id           = current_user.id
-    user_of_comment   = Comment.find(params[:reply_msg][:comment_id]).user.display_name
+
+    if params[:reply_msg][:reply_type] == "messages"
+      user_of_comment = Message.find(params[:reply_msg][:message_id]).user.display_name
+    else
+      user_of_comment = Comment.find(params[:reply_msg][:comment_id]).user.display_name
+    end
 
     SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment, :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
                    :reply_type => @reply_msg.reply_type,
@@ -29,6 +34,8 @@ class ReplyMsgsController < ApplicationController
         redirect_to "/color_designs/#{params[:reply_msg][:show_id]}"
       when 'events'
         redirect_to "/events"
+      when 'messages'
+        redirect_to user_messages_path(params[:reply_msg][:show_id])
     end
   end
 end

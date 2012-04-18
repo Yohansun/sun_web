@@ -1,6 +1,9 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag 'style' %>
 <%- end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "reply" %>
+<%- end %>
 <div class="main signup group">
   <div class="shadow signup_box">
     <div class="section">
@@ -8,7 +11,7 @@
       <%= render :partial => "users/profile_box" %>
 
       <div class="host_main">
-        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot", :id => 'new_message'} do |f| %>
+        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot check_valid", :id => 'new_message'} do |f| %>
           <fieldset>
             <textarea name="message[content]" id="host_main" class="area_text">你有神马对TA说的呢？</textarea>
             <p><span class="words_tip">0</span>/140</p>
@@ -37,13 +40,37 @@
               <%- if current_user && current_user == @user %>
                 <%= link_to "删除",user_message_path(current_user.id,m.id), :method => "delete" %>
               <%- end %>
-              <a href="#">回复</a>
+              <a href="javascript:void(0)">回复</a>
             </div>
             <div class="msg_list_box">
               <div class="signup_text">
                 <span></span>
                 <p><%= m.content %></p>
               </div>
+              <%- m.reply_msgs.order("created_at DESC").each do |r| %>
+                  <div class='reply_list cl pr clear ft14'>
+                    <em class='pa'>◆</em>
+                    <span class='pa'>◆</span>
+                    <p class="reply_tabs fl">
+                      <%= r.user.display_name %><%= r.content %>
+                    </p>
+                    <p class="fr">
+                      <%= r.created_at.to_date %>
+                    </p>
+                  </div>
+              <%- end %>
+              <div class="reply_input none cl pr clear">
+                <%= form_for(ReplyMsg.new) do |f| %>
+                    <%= f.hidden_field :show_id, value: @user.id %>
+                    <%= f.hidden_field :message_id, value: m.id %>
+                    <%= f.hidden_field :reply_type, value: "messages" %>
+                    <%= f.text_area :content, :rows => 5 %>
+                    <em class="pa">◆</em>
+                    <span class="pa">◆</span>
+                    <input type="image" src="<%= asset_path "btn.jpg" %>">
+                <%- end %>
+              </div>
+              <!--reply_input ends-->
             </div>
           </div>
           <!--msgboad_item ends-->

@@ -149,12 +149,17 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .user_info strong{color:#e71d36;font-weight:bold;text-decoration:underline; line-height:16px;}
 .user_info.out{color:#646363;}
 
-.reply_input{border:1px solid #E6E6E6;background:#F3F3F3;width:806px;padding:10px;margin:10px auto;border-radius:3px;color:#777;}
+.reply_input,.reply_list{border:1px solid #E6E6E6;background:#F3F3F3;width:806px;padding:10px;margin:15px auto;border-radius:3px;color:#777;}
 .reply_input textarea{width:786px;border:1px solid #C6C6C6;word-wrap:break-word;}
-.reply_input span,.reply_input em{font-size:40px;top:-20px;right:13px;color:#f3f3f3;}
-.reply_input em{color:#e6e6e6;top:-21px;}
+.reply_input span,.reply_input em,.reply_list span,.reply_list em{font-size:30px;top:-20px;right:13px;color:#f3f3f3;}
+.reply_input em,.reply_list em{color:#e6e6e6;top:-21px;}
+.reply_list em,.reply_list span{left:13px;right:auto;}
 .reply_input input{float:left;margin:5px 0px -5px;}
+.reply_tabs{width:730px;word-break:break-word;}
 
 .over_text{background:#fff;border:1px solid #fff;border-radius:5px;height:225px;overflow:hidden;z-index:90;}
 .text_hover{border-color:#666;height:auto;box-shadow:5px 5px rgba(0,0,0,0.5);}
 .profile_info a.fr{color:#474747;margin:10px;}
+
+.msg_list_box .reply_input{width:640px;}
+.msg_list_box .reply_input textarea{width:634px;}

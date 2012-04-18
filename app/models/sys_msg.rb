@@ -7,7 +7,8 @@ class SysMsg < ActiveRecord::Base
             :designs       => "推荐作品",
             :inspirations  => "灵感秀",
             :color_designs => "色彩搭配",
-            :events        => "年度色彩趋势活动"
+            :events        => "年度色彩趋势活动",
+            :messages      => "留言板"
             }
 
   belongs_to :user
