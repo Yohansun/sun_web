@@ -96,6 +96,7 @@ Icolor::Application.routes.draw do
   match "/design_zg" => "function#design_zg" #室内设计师从业资格权威认证考试安排
   match "/design_zg2" => "function#design_zg2"
   match "/edm_week" => "function#edm_week" #一周未来提醒EDM
+  match "/weibo_wall" => "function#weibo_wall" #首页微博资讯
 
   #漆光艺彩
   match "/7-1" => "function#7-1"
