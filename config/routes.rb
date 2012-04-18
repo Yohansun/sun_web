@@ -170,4 +170,6 @@ Icolor::Application.routes.draw do
   resources :approves
 
   get "search" => "home#search"
+
+  get "landing" => "lands#landing"
 end
