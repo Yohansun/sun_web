@@ -7,8 +7,8 @@ class WeeklyStar < ActiveRecord::Base
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
 
-  attr_accessor :time
-  has_attached_file :main_preview_img, :styles => {:thumb => "80x80#", :index=>"250x138#"},
+  attr_accessor :time#230x181
+  has_attached_file :main_preview_img, :styles => {:thumb => "80x80#", :index=>"250x138#", :home => "306x237>"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
