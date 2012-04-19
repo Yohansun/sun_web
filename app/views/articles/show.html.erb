@@ -1,6 +1,12 @@
 <% content_for :head do -%>
     <%= stylesheet_link_tag "industry_news" %>
 <% end -%>
+<%- content_for :tail do %>
+     <div class="float_ads tr">
+      <a href="/gift"><img src="<%= asset_path "float_ads.gif"%>"/></a><br/>
+      <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
+    </div>
+<%- end %>
 <div class="main industry_news">
   <div class='sub_title tr'>
     <img src="<%= asset_path "design/title_news.png" %>"/>

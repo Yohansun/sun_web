@@ -1,7 +1,13 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'reg' %>
-  <%= javascript_include_tag 'jquery.masonry.js' %>
+    <%= stylesheet_link_tag 'reg' %>
+    <%= javascript_include_tag 'jquery.masonry.js' %>
 <% end -%>
+<%- content_for :tail do %>
+    <div class="float_ads tr">
+      <a href="/gift"><img src="<%= asset_path "float_ads.gif" %>"/></a><br/>
+      <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
+    </div>
+<%- end %>
 <div class="main signup group">
   <div class="shadow signup_box">
     <div class="section">

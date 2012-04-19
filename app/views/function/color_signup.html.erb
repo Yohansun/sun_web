@@ -4,7 +4,9 @@
 <div class="main color_signup_box">
   <h2><img src="<%= asset_path "design/mb/color_signup.png"%>"/></h2>
   <div class="wrapper">
-    <p class="line_b_dot">请提交您的报名资料</p>
+    <p class="line_b_dot clear"><span class="fl">请提交您的报名资料</span>
+      <a href="/" class="fr"><img src="<%= asset_path "design/go_home.gif"%>" /></a>
+    </p>
     <div class="shadow">
       <div class="section ">
         <%= form_for @approve do |f| %>
