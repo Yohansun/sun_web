@@ -1,151 +1,178 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style" %>
-    <style type="text/css">
-        span.arrow_1 {
-            right: 180px;
-        }
+<%= stylesheet_link_tag "style" %>
+<style type="text/css">
+span.arrow_1 {
+  right: 180px;
+}
 
-        span.arrow_2 {
-            right: 110px;
-        }
-    </style>
+span.arrow_2 {
+  right: 110px;
+}
+</style>
 <%- end %>
 <div class="main">
-  <div class='sub_title tr'>
-    <img src="<%= asset_path "paint_art/title_paint_art.png"%>" alt=""/>
+  <div class="sub_title tr">
+    <img src="<%= asset_path "paint_art/title_paint_art.png" %>" alt="">
   </div>
-  <div class='sub_nav ft12 pr tr'>
+  <div class="sub_nav ft12 pr tr">
     <em><a class="fb" href="#">木纹风尚生活</a></em>
-    <em><a href="#">漆光溢彩</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><a href="#">漆光艺彩</a><span></span></em>
+    <em><a href="#">首页</a><span></span></em>
   </div><!--sub_nav ends-->
-  <div class='wrapper paint_art paint_art_bg pb30'>
+  <div class="wrapper paint_art paint_art_topbg pb30">
     <div class="shadow">
       <div class="section">
         <h2 class="art_tit_fs"></h2>
-
-        <div class="paint_art_conbox_bg">
-          <h3><img src="<%= asset_path "paint_art/art_tit3.png"%>"/></h3>
-
-          <p>不论是烂漫樱花的粉，温润翡翠的绿；<br/>还是希腊纯粹的蓝，被夕阳染尽的红。<br/>美好生活总是需要用多姿多彩来点缀。</p>
+        <div class="art_area1">
+          <h3><img src="<%= asset_path "paint_art/art_tit3.png" %>"></h3>
+          <p>
+            不论是烂漫樱花的粉，温润翡翠的绿；
+            <br>
+            还是希腊纯粹的蓝，被夕阳染尽的红。
+            <br>
+            美好生活总是需要用多姿多彩来点缀。
+          </p>
         </div>
-        <ul class="color_square line_b_dot">
-          <li>
-            <div class="color_6840_2"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_6620_3"></div>
-            <span>6620-3</span></li>
-          <li>
-            <div class="color_6751_4"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_6851_4"></div>
-            <span>6620-3</span></li>
-          <li>
-            <div class="color_5900_1"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_5500_1"></div>
-            <span>6620-3</span></li>
-          <li>
-            <div class="color_5340_2"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_4340_2"></div>
-            <span>6620-3</span></li>
-          <li>
-            <div class="color_0400_1"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_0640_2"></div>
-            <span>6620-3</span></li>
-          <li>
-            <div class="color_0420_3"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_0501_4"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_2800_1"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_2840_2"></div>
-            <span>6620-3</span></li>
-          <li>
-            <div class="color_3370_3"></div>
-            <span>6840-2</span></li>
-          <li>
-            <div class="color_2910_4"></div>
-            <span>6840-2</span></li>
-        </ul>
-        <div class="tr mt25 ft12">本色卡采用了先进的工艺，更接近原色，但与实际涂料还是有一点差距，请与实际涂料颜色为准。</div>
-      </div>
-    </div>
-
-    <div class="shadow mt25">
-      <div class="section">
-        <h2 class="art_tit_green"></h2>
-
-        <div class="paint_art_conbox_bg2">
-          <h3><img src="<%= asset_path "paint_art/art_tit4.png"%>"/></h3>
-
-          <p>用木纹的深浅，洞悉生命的深度。<br/>沿着木纹的不变路线。<br/>透露纹理的千姿百态，演绎生活的靓丽万千。</p>
+        <div class="color_square">
+          <ul>
+            <li>
+              <div class="color_6840_2"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_6620_3"></div><span>6620-3</span>
+            </li>
+            <li>
+              <div class="color_6751_4"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_6851_4"></div><span>6620-3</span>
+            </li>
+            <li>
+              <div class="color_5900_1"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_5500_1"></div><span>6620-3</span>
+            </li>
+            <li>
+              <div class="color_5340_2"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_4340_2"></div><span>6620-3</span>
+            </li>
+            <li>
+              <div class="color_0400_1"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_0640_2"></div><span>6620-3</span>
+            </li>
+            <li>
+              <div class="color_0420_3"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_0501_4"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_2800_1"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_2840_2"></div><span>6620-3</span>
+            </li>
+            <li>
+              <div class="color_3370_3"></div><span>6840-2</span>
+            </li>
+            <li>
+              <div class="color_2910_4"></div><span>6840-2</span>
+            </li>
+          </ul>
+          <p>
+            <a class="fr" href="http://nipponpaint.tmall.com/shop/view_shop.htm?queryType=cat&checkedRange=true&prc=1&search=y&scname=xL7G98bh&scid=337337467">
+              <img src="<%= asset_path "paint_art/cart_btn.png" %>">
+            </a>立邦专卖店提供免费调色打板服务，为你呈现更多木器漆多彩效果</p>
+          </div>
         </div>
-        <ul class="color_square line_b_dot">
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm611.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm612.jpg"%>"/></div>
-            <span>6620-3</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_fm618.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm631.jpg"%>"/></div>
-            <span>6620-3</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_fm654.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm661.jpg"%>"/></div>
-            <span>6620-3</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm641.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm642.jpg"%>"/></div>
-            <span>6620-3</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_fm628.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm651.jpg"%>"/></div>
-            <span>6620-3</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm652.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_fm653.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm682.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm683.jpg"%>"/></div>
-            <span>6620-3</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_wm662.jpg"%>"/></div>
-            <span>6840-2</span></li>
-          <li>
-            <div><img src="<%= asset_path "paint_art/muwen/color_fm619.jpg"%>"/></div>
-            <span>6840-2</span></li>
-        </ul>
-        <div class="tr mt25 ft12">本色卡采用了先进的工艺，更接近原色，但与实际涂料还是有一点差距，请与实际涂料颜色为准。</div>
-
       </div>
-    </div>
+      <div class="shadow mt25">
+        <div class="section">
+          <h2 class="art_tit_green"></h2>
+          <div class="art_area2">
+            <h3><img src="<%= asset_path "paint_art/art_tit4.png" %>"></h3>
+            <p>
+              用木纹的深浅，洞悉生命的深度。
+              <br>
+              沿着木纹的不变路线。
+              <br>
+              透露纹理的千姿百态，演绎生活的靓丽万千。
+            </p>
+          </div>
+          <div class="color_square">
+            <ul>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm631.jpg"%> "></div><span>wm631</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm611.jpg"%> ">
+                </div><span>wm611</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm612.jpg"%> ">
+                </div><span>wm612</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm652.jpg"%> ">
+                </div><span>wm652</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm641.jpg"%> ">
+                </div><span>wm641</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm642.jpg"%> ">
+                </div><span>wm642</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm651.jpg"%> ">
+                </div><span>wm651</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm661.jpg"%> ">
+                </div><span>wm661</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm662.jpg"%> ">
+                </div><span>wm662</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm683.jpg"%> ">
+                </div><span>wm683</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/wm682.jpg"%> ">
+                </div><span>wm682</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/fm628.jpg"%> ">
+                </div><span>fm628</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/fm653.jpg"%> ">
+                </div><span>fm653</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/fm654.jpg"%> ">
+                </div><span>fm654</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/fm618.jpg"%> ">
+                </div><span>fm618</span>
+              </li>
+              <li>
+                <div><img src="<%= asset_path "paint_art/muwen/fm619.jpg" %> ">
+                </div><span>fm619</span>
+              </li>
+            </ul>
+            <p><a class="fr" href="http://nipponpaint.tmall.com/shop/view_shop.htm?queryType=cat&checkedRange=true&prc=1&search=y&scname=xL7G98bh&scid=337337467"><img src="<%= asset_path "paint_art/cart_btn.png" %>"></a> ">立邦专卖店提供免费调色打板服务，为你呈现更多木器漆多彩效果</p>
+          </div>
+        </div>
+      </div>
+    </div><!--wrapper ends-->
   </div>
-  <!--wrapper ends-->
-</div><!--main ends-->

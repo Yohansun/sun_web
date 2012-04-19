@@ -649,21 +649,23 @@ $(function(){
 
 				}
 
-//转发
-	$(function(){
-		$('span.zf').hover(function(){
-			$(this).parent('.p2').siblings('span.popup_zf').toggle();
-			$(this).siblings('div.popup_zf').toggle();
+//转发    
+ $(function(){
+  $('span.zf').hover(function(){
+   $(this).parent('.p2').siblings('span.popup_zf').toggle();
+   $(this).siblings('span.popup_zf').toggle();
+   //$(this).siblings('div.popup_zf').toggle();
+   
+  })
 
-		})
-
-		$('.forward,.trans a').hover(function(){
-			$(this).siblings('div.popup_zf').toggle();
-		})
-		$('.popup_zf').hover(function(){
-			$(this).toggle();
-		})
-	})
+  $('.forward,.trans a').hover(function(){
+   //$(this).siblings('div.popup_zf').toggle();
+   $(this).siblings('span.popup_zf').toggle();
+  })
+  $('.popup_zf').hover(function(){
+   $(this).toggle();
+  })
+ })
 /*color_trend 4-1-1*/
 $(function(){
 	var $item = $('div.galleryE div.list ul');
