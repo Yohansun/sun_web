@@ -25,6 +25,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         current_user.user_tokens.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
         flash[:notice] = "Authentication successful"
         redirect_to edit_user_registration_path
+        return
       else
 
         authentication = UserToken.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
@@ -32,6 +33,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         if authentication
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
           sign_in_and_redirect(:user, authentication.user)
+          return
         else
           #create a new user
           unless omniauth.recursive_find_by_key("email").blank?
@@ -44,11 +46,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
           if user.save
             flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
-            stored_location_for(user)
-            #sign_in_and_redirect(:user, user)
+            sign_in(:user, user)
+            redirect_to stored_location_for(user)
+            return
           else
             session[:omniauth] = omniauth.except('extra')
             redirect_to new_user_registration_url
+            return
           end
         end
       end

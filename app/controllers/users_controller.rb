@@ -52,7 +52,6 @@ class UsersController < ApplicationController
         end
         params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id
       end
-      debugger
       current_user.attributes = params[:user]
       if current_user.save(:validate => false)
         redirect_to(root_path)
