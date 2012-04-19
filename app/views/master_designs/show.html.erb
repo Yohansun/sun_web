@@ -58,20 +58,20 @@
                       <div class="list"><ul>
                         <%if @color1  %>
                             <li><div class="colorblock" style="background-color:rgb(<%= @color1.rgb %>)"></div>
-                              <h5><%= @color1.name %></h5>
-                              <p><%= '立邦'+@color1.code %></p>
+                              <h5>墙面推荐色</h5>
+                              <p><%= '立邦' + "(" + @color1.code + ")" + @color1.name %></p>
                             </li>
                         <%- end %>
                         <%if @color2  %>
                             <li><div class="colorblock" style="background-color:rgb(<%= @color2.rgb %>)"></div>
-                              <h5><%= @color2.name %></h5>
-                              <p><%= '立邦'+@color2.code %></p>
+                              <h5>墙面推荐色</h5>
+                              <p><%= '立邦' + "(" + (@color2.code) + ")" + @color2.name %></p>
                             </li>
                         <%- end %>
                         <%if @color3  %>
                             <li><div class="colorblock" style="background-color:rgb(<%= @color3.rgb %>)"></div>
-                              <h5><%= @color3.name %></h5>
-                              <p><%= '立邦'+@color3.code %></p>
+                              <h5>墙面推荐色</h5>
+                              <p><%= '立邦' + "(" + (@color3.code) + ")" + @color3.name %></p>
                             </li>
                         <%- end %>
                       </ul></div>

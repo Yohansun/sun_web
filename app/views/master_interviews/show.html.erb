@@ -78,7 +78,7 @@
             <div class="img_list">
               <% @article.master_designs.each do |design| -%>
                   <% design.master_design_uploads.each do |upload| -%>
-                      <img class="list1" src="<%= upload.file.url(:interview) %>" alt=""/>
+                      <a href="/master_designs/<%= design.id %>"><img class="list1" src="<%= upload.file.url(:interview) %>" alt=""/></a>
                   <% end -%>
               <% end -%>
             </div>
