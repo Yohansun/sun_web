@@ -641,6 +641,7 @@ paint_art/art_arrow.png: paint_art/art_arrow-e0fc5bfc4fe793f1d43143327c069815.pn
 paint_art/art_banner.jpg: paint_art/art_banner-76b472845a07424212e751d68b2ce41f.jpg
 paint_art/art_banner1_71.jpg: paint_art/art_banner1_71-518d08d2323c7c81162de819be9ced66.jpg
 paint_art/art_banner2_71.jpg: paint_art/art_banner2_71-57543f21502ee654f7b42a1f5f54f07f.jpg
+paint_art/art_con1.png: paint_art/art_con1-ca7d940457bf0f5f29d70be0d7508372.png
 paint_art/art_con1_1.jpg: paint_art/art_con1_1-1de4e7fad2792ed1b09dd27f826d28e5.jpg
 paint_art/art_con1_1tit.png: paint_art/art_con1_1tit-fdd558cde2b0d8de2d44dce894486f9b.png
 paint_art/art_con1_2.jpg: paint_art/art_con1_2-0b787d4ee61317d4079f45c1612fd81d.jpg
@@ -708,7 +709,7 @@ paint_art/art_kv/art_kv8.jpg: paint_art/art_kv/art_kv8-9344c80e72413dcb4fafca152
 paint_art/art_kv/art_kv8.png: paint_art/art_kv/art_kv8-b4d5f827fbc0d2a4b7f5e60e69c9e00a.png
 paint_art/art_kv/art_kv9.jpg: paint_art/art_kv/art_kv9-d1cd86003a3df682c57b979f12ad9dad.jpg
 paint_art/art_kv/art_kv9.png: paint_art/art_kv/art_kv9-e57eae2c961cb95434504d004699579e.png
-paint_art/art_mini_bg.jpg: paint_art/art_mini_bg-94ef7b8c81fc4f1424c6879a4f3d35d3.jpg
+paint_art/art_mini_bg.jpg: paint_art/art_mini_bg-290f446cf8963f40b95b8ed76099bf97.jpg
 paint_art/art_mini_tit.png: paint_art/art_mini_tit-d5e380aa3184c5161f245e0f17b62f4e.png
 paint_art/art_step1_conbg.png: paint_art/art_step1_conbg-c42d55e6b9ce6afb6ec281de2a22c67e.png
 paint_art/art_step2_conbg.png: paint_art/art_step2_conbg-3171f900c3fa0da5376107635eed620c.png
@@ -835,7 +836,7 @@ galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
 galleryC.js: galleryC-38e13def670c94186a7cb8dbbd6f8b45.js
 galleryF.js: galleryF-9ca157f0f07941461f0e182a5462360f.js
 galleryG.js: galleryG-0ea9dd8e0b3e27db839401848ac774c2.js
-galleryK.js: galleryK-c49e69bc62ce573dbbb710a4527fdb8c.js
+galleryK.js: galleryK-01a5290d701e8021888fd6078c4291a1.js
 galleryM.js: galleryM-6ce9bb0e65ee15680728c1038614d86b.js
 galleryN.js: galleryN-ae9bf4dc14a00a6bfa746404b7a3cf0a.js
 galleryO.js: galleryO-3194aafe480a4b26830016f3ca951f30.js
@@ -888,7 +889,7 @@ owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 reg.css: reg-f4268c08f01ed0b0438e5cd9b6fef18c.css
 reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
 shares.css: shares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-style.css: style-c9e81f3d26b2fa83630babbfaf8ac780.css
+style.css: style-0fe5b8c097d5043ba36736b119932089.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
 weekstar.css: weekstar-0e82941fcb460a053890c56c1b09306e.css

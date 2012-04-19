@@ -117,7 +117,9 @@ if(imageID===(my.max-my.imageFocusMax))
 {clonedImageID=my.imageFocusMax-1;jumpTarget=-clonedImageID*my.xStep;imageID=clonedImageID+1;}}
 var x=-imageID*my.xStep;this.target=x;this.memTarget=x;this.imageID=imageID;var caption=my.imagesDiv.childNodes[imageID].getAttribute('alt');if(caption===''||my.captions===false)
 {caption='&nbsp;';}
-my.captionDiv.innerHTML=caption;if(my.MouseDrag.busy===false)
+my.captionDiv.innerHTML=caption;
+$('.art_kv_info').children('img').attr('src','/assets/paint_art/art_kv/' + caption);
+if(my.MouseDrag.busy===false)
 {if(my.circular)
 {this.newSliderX=((imageID-my.imageFocusMax)*my.scrollbarWidth)/(my.max-(my.imageFocusMax*2)-1)-my.MouseDrag.newX;}
 else
