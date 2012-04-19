@@ -22,7 +22,7 @@
         <%= f.input :master_kind, :collection => ["色彩大师", "室内空间大师"],:prompt => '--请选择--', :label => "大师分类:" %>
         <%= f.input :position, :input_html => { :rows => 15, :class=>"x" }, :label => "职位:" %>
         <div id="my_type">
-        <%= f.input :interview_content_type, :collection => ["问答类型访谈", "文章类型访谈"],:prompt => '--请选择--', :label => "访谈类型分类:" %>
+        <%= f.input :interview_content_type, :collection => ["问答类型访谈", "文章类型访谈"],:prompt => resource.interview_content_type, :label => "访谈类型分类:" %>
         </div>
         <%= f.input :interview_content, :input_html => { :rows => 15, :class=>"x" }, :label => "访谈内容:", :hint => "请在输入标题或者内容后换行！" %>
         <%= f.input :message, :label => "大师寄语:", :input_html => {:rows => 5} %>
@@ -59,7 +59,10 @@ $(function(){
   var current_text = $("#my_type div.jqTransformSelectWrapper span").text();
   if(current_text == "文章类型访谈"){
     $("#master_profile_interview_content").xheditor();
+  }else{
+    $("#master_profile_interview_content").xheditor(false);    
   }
+
   $("#my_type div.jqTransformSelectWrapper ul li a").click(function(){
       var value = $("#my_type div.jqTransformSelectWrapper span").text();
       if(value == "问答类型访谈"){

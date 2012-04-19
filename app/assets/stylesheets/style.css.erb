@@ -658,17 +658,23 @@ p.xian_bg8{ background:url(<%= asset_path "big_bg/xian_bg8.jpg"%>) no-repeat cen
 .art_mini_fla{text-align:center; margin-top:20px; border:3px solid #774503;/* width:418px;height:265px;*/}
 .art_kv_info{ text-align:center; height:72px; width:893px; overflow:hidden; padding-top:20px;}
 /*7.1*/
-.wrapper.paint_art_bg{ background:#fff url(<%= asset_path "paint_art/7.1_tit.jpg"%>) no-repeat top center; padding-top:110px; margin-top:-5px;}
-.paint_art h2.art_tit_fs{ background:url(.<%= asset_path "paint_art/art_tit_fs.png"%>) no-repeat center top;}
+.wrapper.paint_art_topbg{ background:#fff url(<%= asset_path "paint_art/7.1_tit.jpg"%>) no-repeat top center; padding-top:110px; margin-top:-5px;}
+.paint_art h2.art_tit_fs{ background:url(<%= asset_path "paint_art/art_tit_fs.png"%>) no-repeat center top;}
 .paint_art h2.art_tit_green{ background:url(<%= asset_path "paint_art/art_tit_green.png"%>) no-repeat center top;}
-.paint_art_conbox_bg{ background:url(<%= asset_path "paint_art/art_7.1bg1.png"%>) no-repeat right 20px; padding:50px 0 40px 0;}
-.paint_art_conbox_bg2{ background:url(<%= asset_path "paint_art/art_7.1bg2.png"%>) no-repeat right 20px; padding:50px 0 40px 0;}
-.paint_art_bg .section{ padding-right:10px;}
-.paint_art_conbox_bg p,.paint_art_conbox_bg2 p{ font:14px/20px "Microsoft Yahei"; padding:15px 0 5px 5px;}
-ul.color_square{ overflow:hidden; padding:50px 40px 20px; width:730px;}
-.color_square li{ float:left; margin:5px 20px 40px; display:inline;}
-.color_square li span{display:block; text-align:right;font:12px "Microsoft Yahei";}
-.color_square li div{ width:140px; height:100px; }
+.wrapper.paint_art_topbg .section{ padding:0;}
+.wrapper.paint_art_topbg .art_area1{background:url(<%= asset_path "paint_art/art_banner1_71.jpg"%>) no-repeat center 30px; height:414px; width:790px;  padding:75px 30px 0;}
+.wrapper.paint_art_topbg .art_area2{background:url(<%= asset_path "paint_art/art_banner2_71.jpg"%>) no-repeat center 30px; height:486px; width:790px;  padding:75px 30px 0;}
+.wrapper.paint_art_topbg .art_area1 p,.wrapper.paint_art_topbg .art_area2 p{font:bold 14px/20px "Microsoft Yahei"; padding:15px 0 5px 5px;}
+.wrapper.paint_art_topbg .art_area1 p{ color:#fff;}
+.wrapper.paint_art_topbg .art_area2 p{ color:#000;}
+
+div.color_square{background:url(<%= asset_path "paint_art/art_conbg.jpg"%>) no-repeat top center;}
+div.color_square p{ overflow:hidden;_height:1%; padding:10px 35px;font:12px/20px "Microsoft Yahei"; color:#c0c0c0;}
+div.color_square ul{ overflow:hidden;padding:50px 10px 20px; margin:0 auto/*35px*/; width:760px; border-bottom:1px dotted #c0c0c0;border-top:1px dotted #c0c0c0;}
+div.color_square ul li{ float:left; margin:5px 5px 40px; display:inline;}
+.color_square ul li span{display:block; text-align:right;font:12px "Microsoft Yahei"; color:#fff; padding:5px 0; text-transform:uppercase;}
+.color_square ul li div{ width:85px; height:85px;}
+.color_square ul li div img{ -webkit-box-shadow:0 0 10px #000; -moz-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000;}
 .color_square li div.color_6840_2{background:#095d99;}
 .color_square li div.color_6620_3{background:#62a9c7;}
 .color_square li div.color_6751_4{background:#aed8e4;}

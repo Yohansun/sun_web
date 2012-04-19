@@ -52,11 +52,7 @@
     <span class="forward">转发 (0)</span>
     <span class="review">评论 (<%= @design.try(:comments).length %>)</span>
     <div class="popup_zf group none" style="bottom:-35px; left:25px;">
-      <span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span>
-      <a class="popup_zf_qq" href="#"></a>
-      <a  class="popup_zf_sina" href="#"></a>
-      <a class="popup_zf_rr" href="#"></a>
-      <a class="popup_zf_kaixin" href="#"></a>
+      <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author}），更多精彩装修作品，尽在---立邦iColor网","", @design.main_preview_img.url) %>
     </div>
   </div>
 </div>
