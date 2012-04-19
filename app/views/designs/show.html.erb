@@ -33,9 +33,7 @@
         <div class="operate pr">
           <span class="forward">转发 (<%= @design.shares_count %>)</span>
           <span class="review">评论 (<%= @design.comments_count %>)</span>
-          <div class="popup_zf group none" style="bottom:0px; left:175px;">
             <%= forward_links("分享一套优秀家装作品----#{@design.title}，更多实用装修案例，尽在---立邦iColor网 #{user_design_url(@design.user_id, @design)}", user_design_url(@design.user_id, @design), @design.cover_img.file.url(:slide)) %>
-          </div>
         </div>
       </div>
       <div class="fullscreen_btn">
