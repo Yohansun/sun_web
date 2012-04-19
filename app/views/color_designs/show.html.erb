@@ -123,7 +123,7 @@
           </tr>
           <tr><th>推荐色：</th>
             <%- color_var = [(@color1 if @color1),(@color2 if @color2),(@color3 if @color3)].first %>
-            <td><%= (color_var.code+color_var.name) if color_var %></td>
+            <td><%= ('立邦'+ color_var.code + color_var.name) if color_var %></td>
           </tr>
           <tr><th>搭配理念：</th>
             <td><%= @design.design_thought %></td>
