@@ -126,6 +126,9 @@ class User < ActiveRecord::Base
     self.role_id == 3
   end
 
+  def unread_msgs
+    self.sys_msgs.where(["status = ?", 0]).order("created_at")
+  end
 
   def recommended_name
     self.recommended_name = User.find(self.recommended_id).username unless self.recommended_id.blank?

@@ -62,7 +62,7 @@ $(document).ready(function() {
   <%- unless current_user.role_name == "user" %>
     <li class="icon_point"><%= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank" }"  %></li>
   <%- end %>
-  <li class="icon_info"><%= link_to "系统消息", user_sys_msgs_path, :class => "#{'host_cur' if controller_name == "site_messages" }" %></li>
+  <li class="icon_info"><%= link_to "系统消息#{"("+@user.sys_msgs.size.to_s+")" if @user.sys_msgs.size >0}", user_sys_msgs_path, :class => "#{'host_cur' if controller_name == "site_messages" }" %></li>
   <li class="icon_qustion"><%= link_to "我的提问", user_faqs_path, :class => "#{'host_cur' if controller_name == "faqs" }"  %></li>
   <li class="icon_active"><%= link_to "我报名的活动", "/users/#{@user.id}/events/my_event", :class => "#{'host_cur' if action_name == "my_event" }"  %></li>
 </ul>
