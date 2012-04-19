@@ -11,10 +11,11 @@
     <img src="<%= asset_path "master/title_master.png" %>" alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-  <em><a class="fb" href="/master_interviews">大师访谈</a></em>
-  <em><a href="/master_interviews">大师殿堂</a><span></span></em>
-  <em><a href="/">首页</a><span></span></em>
-</div><!--sub_nav ends-->
+    <em><a class="fb" href="/master_interviews">大师访谈</a></em>
+    <em><a href="/master_interviews">大师殿堂</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
+  </div>
+  <!--sub_nav ends-->
   <div class='wrapper pb60'>
     <div class="profile group">
       <div class="video">
@@ -22,11 +23,18 @@
       </div>
       <!--video ends-->
       <div class="shadow profile_info">
+        <div class="section">
           <div class="tit_bg"><h2>大师简介MASTER PROFILE</h2></div>
           <div class="over_text pr">
-          <p class="profile_name"><%= @article.name %></p>
-          <p class="line_b_dot"><span>国籍：<%= @article.nationality %></span><span>领域：<%= @article.master_field %></span></p>
-          <p><%= raw @article.position %></p>
+            <div>
+              <p class="profile_name"><%= @article.name %></p>
+
+              <p class="line_b_dot">
+                <span>国籍：<%= @article.nationality %></span><span>领域：<%= @article.master_field %></span></p>
+
+              <p><%= raw @article.position %></p>
+            </div>
+          </div>
         </div>
       </div>
       <!--profile_info ends-->
@@ -51,7 +59,7 @@
                 <div class="interview_box text ft12">
                   <%- t = @article.interview_content.split(%r(\r\n)) %>
                   <%- t.each do |a| %>
-                    <p><%= raw a %></p>
+                      <p><%= raw a %></p>
                   <%- end %>
                 </div>
                 <!--interview_box ends-->
@@ -69,9 +77,9 @@
           <div class="img_box">
             <div class="img_list">
               <% @article.master_designs.each do |design| -%>
-                <% design.master_design_uploads.each do |upload| -%>
-                  <img class="list1" src="<%= upload.file.url(:interview) %>" alt=""/>
-                <% end -%>
+                  <% design.master_design_uploads.each do |upload| -%>
+                      <img class="list1" src="<%= upload.file.url(:interview) %>" alt=""/>
+                  <% end -%>
               <% end -%>
             </div>
           </div>
@@ -79,48 +87,71 @@
         <!--works_slide ends-->
 
         <script type="text/javascript">
-            var page = 1;
-            var i = 5;
-            $('a.works_next').click(function() {
-                var $parent = $(this).parent('.works_slide');
-                var $v_list = $parent.find('div.img_list');
-                var $v_box = $parent.children('.img_box');
+            $(function() {
+                var page = 1;
+                var i = 5;
+                $('a.works_next').click(function() {
+                    var $parent = $(this).parent('.works_slide');
+                    var $v_list = $parent.find('div.img_list');
+                    var $v_box = $parent.children('.img_box');
 
-                var v_width = $v_box.width();
-                var len = $v_list.find('img').length;
-                var page_count = Math.ceil(len / i);
+                    var v_width = $v_box.width();
+                    var len = $v_list.find('img').length;
+                    var page_count = Math.ceil(len / i);
 
-                if (!$v_list.is(':animated')) {
-                    if (page == page_count) {
-                        $v_list.animate({left:'0px'});
-                        page = 1;
+                    if (!$v_list.is(':animated')) {
+                        if (page == page_count) {
+                            $v_list.animate({left:'0px'});
+                            page = 1;
 
-                    } else {
-                        $v_list.animate({left:'-=' + v_width});
-                        page++;
+                        } else {
+                            $v_list.animate({left:'-=' + v_width});
+                            page++;
+                        }
                     }
-                }
-            })
+                })
 
-            $('a.works_pre').click(function() {
-                var $parent = $(this).parent('.works_slide');
-                var $v_list = $parent.find('div.img_list');
-                var $v_box = $parent.children('.img_box');
+                $('a.works_pre').click(function() {
+                    var $parent = $(this).parent('.works_slide');
+                    var $v_list = $parent.find('div.img_list');
+                    var $v_box = $parent.children('.img_box');
 
-                var v_width = $v_box.width();
-                var len = $v_list.find('img').length;
-                var page_count = Math.ceil(len / i);
+                    var v_width = $v_box.width();
+                    var len = $v_list.find('img').length;
+                    var page_count = Math.ceil(len / i);
 
-                if (!$v_list.is(':animated')) {
-                    if (page == 1) {
-                        $v_list.animate({left:'-=' + v_width * (page_count - 1)});
-                        page = page_count;
+                    if (!$v_list.is(':animated')) {
+                        if (page == 1) {
+                            $v_list.animate({left:'-=' + v_width * (page_count - 1)});
+                            page = page_count;
 
-                    } else {
-                        $v_list.animate({left:'+=' + v_width});
-                        page--;
+                        } else {
+                            $v_list.animate({left:'+=' + v_width});
+                            page--;
+                        }
                     }
+                })
+
+                var $over = $('.over_text');
+                var hh = $over.children('div').outerHeight();
+                var h = $over.outerHeight();
+                if (hh > h) {
+                    $over.after($("<a href='javascript:void(0)' class='fr ft12'>more>></a>"));
                 }
+                var msie6 = $.browser.msie && $.browser.version == 6.0;
+                $('.profile_info a.fr').click(function() {
+                    $(this).hide();
+                    $over.addClass('text_hover');
+                    if (msie6) {
+                        $(this).parents('.profile').next().css('margin-top', '-' + (h - 137) + 'px');
+                    }
+                });
+                $over.mouseleave(function() {
+                    $(this).removeClass('text_hover').next('a').show();
+                    if (msie6) {
+                        $(this).parents('.profile').next().css('margin-top', '0');
+                    }
+                });
             })
         </script>
       </div>

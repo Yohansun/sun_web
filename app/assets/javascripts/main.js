@@ -65,12 +65,18 @@ function inputBlank(area){
 $(function(){
 	$('a.server').click(function(){
 		if(!$('.server_suc').is(':visible'))
-		$('div.server_input').show().find('textarea').val('');
+		{
+            $('.server_area').css('width','590px');
+            $('div.server_input').show().find('textarea').val('');
+        }
 	});
 	$('div.server_input').mouseleave(function(){
 		var txt = $(this).find('textarea').val();
 		if(txt=='')
-		$(this).hide();
+        {
+            $(this).hide();
+            $('.server_area').css('width','41px');
+        }
 	});
 	$('#server_submit').click(function(){
 		var $area = $(this).parents('.server_input').find('textarea')
@@ -81,11 +87,13 @@ $(function(){
 		}
 		else{
 			inputBlank($area);
+            return false;
 			}
 	});
 
 	$('#server_close').click(function(){
 		$(this).parents('.server_suc').hide();
+        $('.server_area').css('width','41px');
 	});
 	$('a.close_btn').click(shut_center=function(){
 		$(this).parents('.abs_center').hide();
@@ -588,19 +596,29 @@ $(function(){
 	qin_slide('#qin_slide3 ');
 	//qin_slide('#slide3 ');
 /*over_text*/
-        var $over = $('.over_text');
-        var $p = $over.children('p').last();
-        if($p.outerHeight()>100)
-            {
-                $over.after($("<a href='javascript:void(0)' class='fr ft12'>more>></a>"));
-        }
-        $('.profile_info a.fr').click(function(){
-            $(this).hide();
-            $over.addClass('text_hover');
-        });
-    $over.mouseleave(function(){
-            $(this).removeClass('text_hover').next('a').show();
-        });
+//	var $over = $('.over_text');
+//	var hh = $over.children('div').outerHeight();
+//	var h = $over.outerHeight();
+//	if(hh>h)
+//	{
+//		$over.after($("<a href='javascript:void(0)' class='fr ft12'>more>></a>"));
+//	}
+//	var msie6 = $.browser.msie && $.browser.version == 6.0;
+//	$('.profile_info a.fr').click(function(){
+//		$(this).hide();
+//		$over.addClass('text_hover');
+//		if(msie6)
+// 		{
+//			$(this).parents('.profile').next().css('margin-top','-'+(h-137)+'px');
+//		}
+//	});
+//	$over.mouseleave(function(){
+//		$(this).removeClass('text_hover').next('a').show();
+//		if(msie6)
+// 		{
+//			$(this).parents('.profile').next().css('margin-top','0');
+//		}
+//	});
 });
 
 			function qin_slide(ID){

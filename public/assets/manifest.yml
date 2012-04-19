@@ -109,14 +109,14 @@ design/4.1.1_03.png: design/4.1.1_03-e1827eb0d192a105ce4d7cd53e6e5764.png
 design/4.1.1_n.jpg: design/4.1.1_n-abe86a78393b299d4eb2964d047b6a1c.jpg
 design/accordionA.gif: design/accordionA-26b75c0f4f6d0645e3c214285ffed08d.gif
 design/activities.gif: design/activities-c6c3ba51c619f43f897a1f1ead904cd9.gif
-design/activitiesB.gif: design/activitiesB-1cc82da82e458590730ef99b5beebf5a.gif
+design/activitiesB.gif: design/activitiesB-6b296064136ed90d8f7043b2491df381.gif
 design/adv_register.gif: design/adv_register-daff3818da0b570dccc3e8fb8b8fa224.gif
 design/adv_register_login.jpg: design/adv_register_login-fe4fc76885417965fa20d133dd5d8021.jpg
 design/answer.gif: design/answer-b76624b8e364cf930cd22169d846bb1e.gif
 design/arr_bottom.gif: design/arr_bottom-873c56f4c997ed5bdad0f32304efedf5.gif
 design/arrow_filter.png: design/arrow_filter-5e2a14b8dd3a6435995be5d48ae10a0e.png
 design/arts.jpg: design/arts-54bcbba07a754d2ed22933abf1234fa2.jpg
-design/banner_design.jpg: design/banner_design-0697b208327630ea17c8f95f6984cff0.jpg
+design/banner_design.jpg: design/banner_design-7f5e5f7c998a50340e2049c55d710279.jpg
 design/best.gif: design/best-63dac77eecf80efad0db7ca585383aa8.gif
 design/big_stars.gif: design/big_stars-c56252c0c74a72382d1e0501c7ce5312.gif
 design/boxA_title.gif: design/boxA_title-583db54d998bfdcb5e14afd55fa8b33e.gif
@@ -169,6 +169,7 @@ design/galleryG.png: design/galleryG-131057286252f9ea7e5053e37f1e0312.png
 design/galleryL.gif: design/galleryL-2661267cd4465513a724f0fc2685a1f5.gif
 design/galleryN.png: design/galleryN-d5faa258e6c7f8117432d3f076ea0588.png
 design/galleryO.gif: design/galleryO-bf7b85b16ff33328f29cf8d15a12ac86.gif
+design/go_home.gif: design/go_home-a91d4e5d4237ccb14739455c40827ade.gif
 design/handbook_download.gif: design/handbook_download-beaa47c7d68a5bf1ee2f0574fd940934.gif
 design/hon.gif: design/hon-b4b166f5700f802124d01aa90d4b2854.gif
 design/iconsB.gif: design/iconsB-f85d769781eee96eeaaf9a8f4b3f1417.gif
@@ -363,6 +364,7 @@ emagezine/week_star.jpg: emagezine/week_star-5549b9d00e6731461e530a934d0905a4.jp
 emagezine/week_star_bg.png: emagezine/week_star_bg-ca29eb921da72473f9fea4e729af5716.png
 emagezine/week_star_icon.png: emagezine/week_star_icon-7e897ce5a4a4d91d04305eedb8f48349.png
 emagezine/xin_bg.png: emagezine/xin_bg-2c2568af9c6ee5cf15d0c7f8d2dd5ff0.png
+float_ads.gif: float_ads-4cf9b7a4e3f458e5badf7c504caef966.gif
 index/p1.jpg: index/p1-004187ab37a62a97a58f8f7d412f57e8.jpg
 index_related_tit.png: index_related_tit-bfd7d8ff08224f3e2f73aa801a8040a0.png
 indicator.gif: indicator-26ae32e3dae22769190377dbd8bd60a5.gif
@@ -551,8 +553,9 @@ news/pdf_down.png: news/pdf_down-11911223074e0a7323a3c6feb407c7af.png
 news/qq.jpg: news/qq-b2007f140a59214b001bb656c4bf3a25.jpg
 news/qq_icon.jpg: news/qq_icon-b191a76fa71204acabb49e5d9ef2de00.jpg
 news/re_add.jpg: news/re_add-548e4e29d579020d20d386ffa94d5839.jpg
-news/reg_ad.jpg: news/reg_ad-e16f3ed153f031365cdf18119021c577.jpg
+news/reg_ad.jpg: news/reg_ad-a1da5f76c0a073ebbd800cb700dc5dbe.jpg
 news/reg_ad1.jpg: news/reg_ad1-9b193faebd3c0a7a1edd9fbc473f768e.jpg
+news/reg_ads.jpg: news/reg_ads-1b621723b7dd0e3c7bb5d4b64fed18b0.jpg
 news/reg_bg1.gif: news/reg_bg1-d4b18aa16cf40eb1d0a0e83a3b7b078d.gif
 news/reg_bg2.gif: news/reg_bg2-7482dfd0770e6988d19d2c2a2f8ab574.gif
 news/reg_bg3.gif: news/reg_bg3-b84008ac4126ae8bb423140eac0bbb93.gif
@@ -719,6 +722,7 @@ paint_art/art_tit4.png: paint_art/art_tit4-812a9b05f4c30839c1a4fe906dfd6ca0.png
 paint_art/art_tit_fs.png: paint_art/art_tit_fs-5951d49d9621e4b42401c69375da884e.png
 paint_art/art_tit_green.png: paint_art/art_tit_green-6471ffd26e9e2cd70dcb623883c829cb.png
 paint_art/cart_btn.png: paint_art/cart_btn-f1e5061d52d4950eafe7b2f05c259956.png
+paint_art/gift_banner.jpg: paint_art/gift_banner-e02697d8d625d8f6e21585d8e57f9ac0.jpg
 paint_art/gift_banner.png: paint_art/gift_banner-34ba20a2e812db6b553a6f12f2f395b2.png
 paint_art/gift_bottombg.png: paint_art/gift_bottombg-980ddd5436fb0456e6aec7ff6eb01bb4.png
 paint_art/gift_step1.png: paint_art/gift_step1-7b715a102b76fb19c24a9061868b4f61.png
@@ -792,6 +796,7 @@ progress_over.png: progress_over-d8a3461a03f692d15bc2756b64eff681.png
 progress_over_l.png: progress_over_l-23fc36c1f5e453b79b9def6fa3bc989d.png
 qq.jpg: qq-81802fbd754c92a7363aa52b8e0b35cd.jpg
 reg.png: reg-d8572144b0757f09fb1fdf2a0133b249.png
+reg_ad.jpg: reg_ad-a1da5f76c0a073ebbd800cb700dc5dbe.jpg
 reg_ads.jpg: reg_ads-ba7ced2cb72d32c31b77ee7908067c63.jpg
 register.jpg: register-41edf1037164e60477be5de105f36e06.jpg
 rr.jpg: rr-240800b02957136a445f457d19a04315.jpg
@@ -823,7 +828,7 @@ tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 weibo_bg.jpg: weibo_bg-1ac44d96e99c79756295ea74bb190170.jpg
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-40fca1383fdf1cf8d73d635e45446cc2.js
+application.js: application-1cb95d4762486c4cb4da05e46d23f66e.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
 datepicker_lang_US.js: datepicker_lang_US-fdb4f1511b1330fbad82acec540df464.js
 galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
@@ -850,7 +855,7 @@ magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f9
 magic_content/mix_colors.js: magic_content/mix_colors-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-48d596f5c089bea92e13bc71373fc186.js
+main.js: main-f2857cb3dd423ab717b35b5ef3620c0d.js
 myfocus.js: myfocus-29d104cd28d5ae137e5571f5443e22ae.js
 owners_channel_upload_form.js: owners_channel_upload_form-669da4cc1c4c046605fa916615ca622b.js
 pattern/mF_fscreen_tb.css: pattern/mF_fscreen_tb-c55d363555af485d81f822bffc6a69b7.css
@@ -861,12 +866,12 @@ shares.js: shares-80148e5c7e5b7899f916a93118e72fbd.js
 swfobject.js: swfobject-340f898f06f423b055636e87b5a1f7c0.js
 sys_msgs.js: sys_msgs-80148e5c7e5b7899f916a93118e72fbd.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-0659d326da6909651494561aabe80f0d.js
-application.css: application-26fb5a62bd39d89150fd9fd0e9d7226b.css
-base.css: base-e8cc032983119c4436c4733b95b0897a.css
+application.css: application-493098d6d23dfa11d935cf781f9aea5a.css
+base.css: base-4739540e00595906444988277db3ff94.css
 dd.css: dd-4f917d580bfb1cc4d6c65ea1ef18f4c7.css
 exciting_activities.css: exciting_activities-1e94566d9708481735f3134478eb17ef.css
 galleryc.css: galleryc-7dee9a1a5aa73d65169b643b6a4155bf.css
-index.css: index-16db52e7205d3c8d774fa1a0e411b14d.css
+index.css: index-f69a2f56cce227801bdbf923001bc8f6.css
 industry_news.css: industry_news-191ae10fe948aa30134bee9832ce0dbc.css
 jDatepicker.css: jDatepicker-2df7dba092a481ac73a2f6afbaf3c6e3.css
 jquery.rating.css: jquery.rating-923d0702dc605a2ab80b82a3885ed4e0.css
@@ -883,10 +888,10 @@ owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 reg.css: reg-f4268c08f01ed0b0438e5cd9b6fef18c.css
 reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
 shares.css: shares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-style.css: style-92871344f059bfda58c71e6acd8f672e.css
+style.css: style-c9e81f3d26b2fa83630babbfaf8ac780.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
-weekstar.css: weekstar-b8b75efe4ef68ea182038b98d19135c0.css
+weekstar.css: weekstar-0e82941fcb460a053890c56c1b09306e.css
 magic_content/application.css: magic_content/application-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/banners.css: magic_content/banners-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/downloads.css: magic_content/downloads-95bd4fe1de99c1cd91ec8e6f348a44bd.css
