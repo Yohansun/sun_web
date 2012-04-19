@@ -37,11 +37,9 @@
             所获票数：<span id="votes_count<%= @design.id %>"><%= @design.try(:votes_count) %></span>&nbsp;&nbsp;
           </div>
           <div class="operate pr">
-            <span class="forward zf">转发 (0)</span>
+            <span class="forward">转发 (0)</span>
             <span class="review">评论 (<%= @design.try(:comments).try(:length) %>)</span>
-            <div class="popup_zf group none" style="bottom:-35px; left:25px;">
-              <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author}），更多精彩装修作品，尽在---立邦iColor网","", @design.main_preview_img.url) %>
-            </div>
+              <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author},#{@design.design_name}），更多精彩装修作品，尽在---立邦iColor网","", @design.main_preview_img.url) %>
           </div>
         </div>
         <div class="color">
@@ -208,6 +206,7 @@
   <div class="section">
     <div class="tit_bg"><h2>往期之星</h2></div>
     <div class="interview_box design_listA">
+          <% if @elder_designs %>
           <% @elder_designs.in_groups_of(4, false).each do |group| -%>
               <ul>
                 <% group.each do |design| -%>
@@ -220,6 +219,7 @@
                       <p class="p2 group">
                         <span class="zf ft12">转发 (0)</span><span class="pl ft12">评论 (<%=design.comments.length %>)</span>
                       </p>
+                      <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author}, #{@design.design_name}），更多精彩装修作品，尽在---立邦iColor网","", @design.main_preview_img.url) %>
                     </li>
                 <% end -%>
               </ul>
@@ -233,6 +233,7 @@
   <div class='sub_bot pr'>
     <div class="pager ft12">
       <%= paginate @elder_designs %>
+      <%- end -%>
     </div>
     <!--pager ends-->
   </div>
