@@ -13,13 +13,13 @@
   </div><!--sub_nav ends-->
   <div class='wrapper'>
     <div class="owner_map clear">
-      <%#if MagicSetting.promote_designers -%>
-      <%# MagicSetting.promote_designers.split(",").each do |user_id| -%>
-        <%#user = User.find(user_id.to_i) rescue nil -%>
-        <%# link_to image_tag(user.avatar.file.url(:access_wall)), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
-      <%#end -%>
-      <%# end -%>
-      <img src='<%= asset_path "news/kv.jpg" %>'/>
+      <% if MagicSetting.promote_designers -%>
+          <% MagicSetting.promote_designers.split(",").each do |user_id| -%>
+              <% user = User.find(user_id.to_i) rescue nil -%>
+              <% link_to image_tag(user.avatar.file.url(:access_wall)), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
+          <% end -%>
+      <% end -%>
+      <!--<img src='<%#= asset_path "news/kv.jpg" %>'/>-->
     </div>
     <!--owner_map ends-->
     <div class="owner_bar ft12 clear">
