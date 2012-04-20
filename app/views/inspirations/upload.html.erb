@@ -98,9 +98,25 @@ function uploads_size () {
           </p><!--load_info ends-->
         </div><!--work_area-->
         <div class="reg_list reg_width clear"></div>
-        <a href="javascript:$('.edit_inspiration').submit();" class="load_submit db"></a>
-      </div><!--suc_content ends-->
+<!--         <a href="javascript:$('.edit_inspiration').submit();" class="load_submit db"></a>
+ -->
+          <a href="javascript:void(0)" class="load_submit db" ></a>
+       </div><!--suc_content ends-->
     </div><!--section ends-->
   </div><!--shadow ends-->
 </div><!--main ends-->
 <% end -%>
+
+<script type="text/javascript">
+  $(function(){
+    $(".load_submit").click(function(){
+      var imgCount = $("#inspiration_images_size").text();
+      if(parseInt(imgCount) == 0){
+        alert("不能一张图片都没有哦");
+        return false;
+      }else{
+        $(".edit_inspiration").submit();
+      }
+    })
+  })
+</script>

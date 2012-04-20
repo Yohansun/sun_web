@@ -3,7 +3,7 @@ class WeeklyStarsController < ApplicationController
 
   def index
     @design = WeeklyStar.last || WeeklyStar.new
-    @elder_designs = WeeklyStar.order("published_at desc").offset(1).page(params[:page]).per(8)
+    @elder_designs = WeeklyStar.offset(1).page(params[:page]).per(8).padding(1)
     @color1 = ColorCode.find_by_code(@design.recommend_color1)
     @color2 = ColorCode.find_by_code(@design.recommend_color2)
     @color3 = ColorCode.find_by_code(@design.recommend_color3)
