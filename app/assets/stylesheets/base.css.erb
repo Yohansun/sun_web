@@ -14,7 +14,6 @@ body{background:url(<%= asset_path 'bg.jpg' %>) center top;/*overflow-x:hidden;*
 a.login:hover,.logHover{border-color:#d9d9d9;}
 .loginBg{background:url(<%= asset_path "loginBg.png" %>) no-repeat;width:315px;height:313px;left:50%;top:43px;z-index:106;margin-left:83px;padding-top:23px;}
 .loginCon{width:260px;margin:0 auto;}
-label.username{padding-top:5px;}
 label.password{padding-top:12px;}
 input#username{width:208px;color:#aeaeae;}
 input#password{width:108px;margin:9px 0;color:#aeaeae;}
@@ -40,7 +39,7 @@ ul.border img{ float:left;margin:-2px 2px 0 0;}
 .navBot li{float:left;display:inline;padding:1px 8px;border-right: 2px solid #fff;}
 .navBot li ul{background:#e71d36;left:0;top:18px;width:88px;display:none;padding-top:1em;border-radius:0 0 5px 5px;*top:19px;position:absolute;}
 .navBot li li{float:none;display:block;border-right:none;padding:0;border-bottom:1px solid #ab0003;}
-.navBot li li a{display:block;padding:0.7em 1em; height:1%;}
+.navBot li li a{display:block;padding:0.7em 1em; _height:1%;}
 .navBot li:hover ul{display:block;}
 .navBot li li a:hover{background:#9b1611;}
 .navBot li li:last-child a:hover{border-radius:0 0 5px 5px;}
@@ -153,17 +152,21 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .float_ads img{margin-bottom:5px;}
 .shut_float{color:#666;padding:0 0.2em;background:#fff;border:1px solid #c3c3c3;}
 
-.reply_input,.reply_list{border:1px solid #E6E6E6;background:#F3F3F3;width:806px;padding:10px;margin:15px auto;border-radius:3px;color:#777;}
-.reply_input textarea{width:786px;border:1px solid #C6C6C6;word-wrap:break-word;}
-.reply_input span,.reply_input em,.reply_list span,.reply_list em{font-size:30px;top:-20px;right:13px;color:#f3f3f3;}
-.reply_input em,.reply_list em{color:#e6e6e6;top:-21px;}
-.reply_list em,.reply_list span{left:13px;right:auto;}
-.reply_input input{float:left;margin:5px 0px -5px;}
-.reply_tabs{width:730px;word-break:break-word;}
+.reply_area,.reply_list{margin:10px auto;width:841px;padding:10px 0 0;}
+.reply_input,.reply_con{border:1px solid #E6E6E6;background:#F3F3F3;width:807px;padding:10px 16px;border-radius:3px;color:#777;color:#909090;box-shadow:2px 2px 5px rgba(0,0,0,0.5);}
+.reply_input textarea{width:804px;border:1px solid #C6C6C6;word-wrap:break-word;}
+.reply_input input{float:left;margin:5px 0px -5px;box-shadow:1px 1px 2px rgba(0,0,0,0.5);}
+.reply_area em,.reply_area span,.reply_list em,.reply_list span{right:20px;top:-10px;font-size:40px;color:#f3f3f3;height:22px;display:block;overflow:hidden;}
+.reply_area em,.reply_list em{color:#e6e6e6;top:-11.5px;}
+.reply_list em,.reply_list span{right:auto;left:10px;}
+.reply_tabs{width:730px;line-height:18px;word-wrap:break-word;overflow:hidden;}
+.reply_line{width:100%;margin:10px auto;border-bottom:1px dotted #666;clear:both;padding-bottom:10px;}
+
+.msg_list_box .reply_area,.msg_list_box .reply_list{width:671px;}
+.msg_list_box .reply_input,.msg_list_box textarea,.msg_list_box .reply_con{width:636px;}
+.msg_list_box .reply_area span,.msg_list_box .reply_list span{top:-16px;height:27px;}
+.msg_list_box .reply_tabs{width:530px;}
 
 .over_text{background:#fff;border:1px solid #fff;border-radius:5px;height:225px;overflow:hidden;z-index:90;}
 .text_hover{border-color:#666;height:auto;box-shadow:5px 5px rgba(0,0,0,0.5);}
 .profile_info a.fr{color:#474747;margin:10px;}
-
-.msg_list_box .reply_input{width:640px;}
-.msg_list_box .reply_input textarea{width:634px;}

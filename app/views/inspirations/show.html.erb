@@ -111,30 +111,46 @@
                 <div class="content">
                   <%= c.content %>
                 </div>
-                <%- c.reply_msgs.order("created_at DESC").each do |r| %>
-                    <div class='reply_list cl pr clear ft14'>
-                      <em class='pa'>◆</em>
-                      <span class='pa'>◆</span>
-                      <p class="reply_tabs fl">
-                        <%= r.user.display_name %><%= r.content %>
-                      </p>
-                      <p class="fr">
-                        <%= r.created_at.to_date %>
-                      </p>
-                    </div>
-                <%- end %>
-                <div class="reply_input none cl pr clear">
-                  <%= form_for(ReplyMsg.new) do |f| %>
-                      <%= f.hidden_field :show_id, value: @inspiration.id %>
-                      <%= f.hidden_field :comment_id, value: c.id %>
-                      <%= f.hidden_field :reply_type, value: "inspirations" %>
-                      <%= f.text_area :content, :rows => 5 %>
-                      <em class="pa">◆</em>
-                      <span class="pa">◆</span>
-                      <input type="image" src="<%= asset_path "btn.jpg" %>">
-                  <%- end %>
+
+                <div class="reply_area none cl pr">
+                  <em class="pa">◆</em>
+                  <span class="pa">◆</span>
+
+                  <div class="reply_input clear">
+                    <%= form_for(ReplyMsg.new) do |f| %>
+                        <%= f.hidden_field :show_id, value: @inspiration.id %>
+                        <%= f.hidden_field :comment_id, value: c.id %>
+                        <%= f.hidden_field :reply_type, value: "inspirations" %>
+                        <%= f.text_area :content, :rows => 2 %>
+                        <input type="image" src="<%= asset_path "btn.jpg" %>">
+                    <%- end %>
+                  </div>
+                  <!--reply_input ends-->
                 </div>
-                <!--reply_input ends-->
+                <!--reply_area ends-->
+
+                <div class="reply_list none cl pr">
+                  <em class="pa">◆</em>
+                  <span class="pa">◆</span>
+
+                  <div class="reply_con ft14 clear">
+                    <div class="clear">
+                      <%- c.reply_msgs.order("created_at DESC").each do |r| %>
+                          <div class="clear  <%= "reply_line" if r != c.reply_msgs.first %> ">
+                            <p class="reply_tabs fl">
+                              <%= r.user.display_name %>回复:<%= r.content %>
+                            </p>
+
+                            <p class="fr">
+                              <%= r.created_at.to_date %>
+                            </p>
+                          </div>
+                      <%- end %>
+                    </div>
+                  </div>
+                  <!--reply_con ends-->
+                </div>
+                <!--reply_list ends-->
               </li>
           <% end %>
         </ul>

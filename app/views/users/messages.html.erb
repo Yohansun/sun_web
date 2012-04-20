@@ -44,37 +44,51 @@
               <%- if current_user && current_user == @user %>
                 <%= link_to "删除",user_message_path(current_user.id,m.id), :method => "delete" %>
               <%- end %>
-              <a href="javascript:void(0)">回复</a>
+              <a href="javascript:void(0)" class="answer">回复</a>
             </div>
             <div class="msg_list_box">
               <div class="signup_text">
                 <span></span>
                 <p><%= m.content %></p>
               </div>
-              <%- m.reply_msgs.order("created_at DESC").each do |r| %>
-                  <div class='reply_list cl pr clear ft14'>
-                    <em class='pa'>◆</em>
-                    <span class='pa'>◆</span>
-                    <p class="reply_tabs fl">
-                      <%= r.user.display_name %><%= r.content %>
-                    </p>
-                    <p class="fr">
-                      <%= r.created_at.to_date %>
-                    </p>
-                  </div>
-              <%- end %>
-              <div class="reply_input none cl pr clear">
-                <%= form_for(ReplyMsg.new) do |f| %>
-                    <%= f.hidden_field :show_id, value: @user.id %>
-                    <%= f.hidden_field :message_id, value: m.id %>
-                    <%= f.hidden_field :reply_type, value: "messages" %>
-                    <%= f.text_area :content, :rows => 5 %>
-                    <em class="pa">◆</em>
-                    <span class="pa">◆</span>
-                    <input type="image" src="<%= asset_path "btn.jpg" %>">
-                <%- end %>
+
+              <div class="reply_area none cl pr">
+                <em class="pa">◆</em>
+                <span class="pa">◆</span>
+                <div class="reply_input clear">
+                  <%= form_for(ReplyMsg.new) do |f| %>
+                      <%= f.hidden_field :show_id, value: @user.id %>
+                      <%= f.hidden_field :message_id, value: m.id %>
+                      <%= f.hidden_field :reply_type, value: "messages" %>
+                      <%= f.text_area :content, :rows => 2 %>
+                      <input type="image" src="<%= asset_path "btn.jpg" %>">
+                  <%- end %>
+                </div>
+                <!--reply_input ends-->
               </div>
-              <!--reply_input ends-->
+              <!--reply_area ends-->
+
+
+              <div class="reply_list none cl pr">
+                <em class="pa">◆</em>
+                <span class="pa">◆</span>
+                <div class="reply_con ft14 clear">
+                  <div class="clear">
+                    <%- m.reply_msgs.order("created_at DESC").each do |r| %>
+                        <div class="clear  <%= "reply_line" if r != m.reply_msgs.first %> ">
+                          <p class="reply_tabs fl">
+                            <%= r.user.display_name %>回复:<%= r.content %>
+                          </p>
+                          <p class="fr">
+                            <%= r.created_at.to_date %>
+                          </p>
+                        </div>
+                    <%- end %>
+                  </div>
+                </div>
+                <!--reply_con ends-->
+              </div>
+              <!--reply_list ends-->
             </div>
           </div>
           <!--msgboad_item ends-->
