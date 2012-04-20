@@ -139,16 +139,16 @@ $(function(){
        return reg.test(str);
 	}
 
-/*form.check_valid*/
-    $('form.check_valid').submit(function(){
-        var $area = $(this).find('textarea');
-        var txt = $area.val();
-        if(txt=='')
-        {
-            inputBlank($area);
-            return false;
-        }
-    });
+///*form.check_valid*/
+//    $('form.check_valid').submit(function(){
+//        var $area = $(this).find('textarea');
+//        var txt = $area.val();
+//        if(txt=='')
+//        {
+//            inputBlank($area);
+//            return false;
+//        }
+//    });
 
 });
 

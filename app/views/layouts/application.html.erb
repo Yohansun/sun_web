@@ -319,7 +319,12 @@
         if ($("#new_comment")) {
             $("#new_comment").submit(function (event) {
                 <% if current_user -%>
-                return true;
+                var $area = $('#comment_content')
+                var txt = $area.val();
+                if (txt == '') {
+                    inputBlank($area);
+                    return false;
+                }
                 <% else -%>
                 show_login();
                 return false;
@@ -330,7 +335,12 @@
         if ($("#new_reply_msg")) {
             $("#new_reply_msg").submit(function (event) {
                 <% if current_user -%>
-                return true;
+                var $area = $('#reply_msg_content')
+                var txt = $area.val();
+                if (txt == '') {
+                    inputBlank($area);
+                    return false;
+                }
                 <% else -%>
                 show_login();
                 return false;
