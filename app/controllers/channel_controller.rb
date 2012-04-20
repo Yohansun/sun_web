@@ -21,6 +21,10 @@ class ChannelController < ApplicationController
         @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
     end
 
-    @design_users = @design_users.page(params[:page])
+    if MagicSetting.recommend_designers && !params.keys.include?("keywords" || "area_id" || "user_role")
+      @design_users = @design_users.where("id not in (?)", MagicSetting.recommend_designers.split(",") )
+    end
+
+    @design_users = @design_users.page(params[:page]).per(10)
   end
 end

@@ -45,13 +45,39 @@
       <%- end %>
     </div>
     <!--owner_bar ends-->
-    <% @design_users.each do |user| %>
-        <% if user.avatar -%>
+    <%- unless params.keys.include?("page") %>
+        <%- if MagicSetting.recommend_designers %>
+            <% MagicSetting.recommend_designers.split(",").each do |user_id| -%>
+                <% user = User.find(user_id.to_i) rescue nil -%>
+                <div class="owner clear">
+                  <%= link_to image_tag(user.avatar.file.url(:access_icon), :class => "fl"), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
+
+                  <div class="owner_center fl ft12">
+                    <span class="owner_name fl fb ft14"><%= user.display_name %></span>
+                    <span class="owner_city fl">(<%= user.city.try(:name) %>)</span>
+                    <%= link_to "进入主页", user_path(user), :class => "fl" %>
+                    <div class="owner_info fl pr">
+                      <span></span>
+                      <%= user.signature %>
+                    </div>
+                    <!--owner_info ends-->
+                  </div>
+                  <!--owner_center ends-->
+                  <%= link_to "我要咨询", user_messages_path(user), :class => "owner_ask tc ft14 fr fb", :id => "channel_access" %>
+                </div>
+            <% end -%>
+        <%- end %>
+    <%- end %>
+
+    <%- if params.keys.include?("page") %>
+        <% @design_users.each do |user| %>
             <div class="owner clear">
               <%= link_to user_path(user) do %>
-                  <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl">
-                  <%# else -%>
-                  <%#= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fl' %>
+                  <%- if user.avatar %>
+                      <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl">
+                  <%- else %>
+                      <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fl' %>
+                  <%- end %>
               <% end -%>
 
               <div class="owner_center fl ft12">
@@ -67,8 +93,8 @@
               <!--owner_center ends-->
               <%= link_to "我要咨询", user_messages_path(user), :class => "owner_ask tc ft14 fr fb", :id => "channel_access" %>
             </div>
-        <%- end %>
-    <%- end -%>
+        <%- end -%>
+    <%- end %>
   </div>
   <!--wrapper ends-->
   <div class='sub_bot ft12 pr'>
