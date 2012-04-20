@@ -504,12 +504,12 @@ news/app_down.png: news/app_down-2c94598f58bf746300a2cff02c0156d2.png
 news/app_img.jpg: news/app_img-b06942326acc5836186a331fc9d458bb.jpg
 news/app_pointer.png: news/app_pointer-c56c36adb8be5bce13dd64ec5e655308.png
 news/apps.png: news/apps-ebe50973c0b40a4fa13511998f1c5751.png
-news/case1.jpg: news/case1-8467b4e09df0dc6eb79b984f89af174d.jpg
-news/case2.jpg: news/case2-85681181ef8a9dbca6bf9d742997a8fe.jpg
-news/case3.jpg: news/case3-47c643e2731e1974a9e138820be5a5c4.jpg
-news/case4.jpg: news/case4-15afedf2f644971d4db358e5ced02391.jpg
-news/case5.jpg: news/case5-6260f34450a416df0665acee88e6e25a.jpg
-news/case6.jpg: news/case6-9a569f7d4226781ef5935c1b5297a040.jpg
+news/case1.jpg: news/case1-fa433d6bd4430282737b6160295c6bcb.jpg
+news/case2.jpg: news/case2-587387bfd6f1a58cfb0834bd47f8a69e.jpg
+news/case3.jpg: news/case3-075667a26a260920ffb6944f930ed23a.jpg
+news/case4.jpg: news/case4-8cee6305f04994b4c416c0212633f09c.jpg
+news/case5.jpg: news/case5-60d1dbfe7549b7bdc89dcfd762dbd546.jpg
+news/case6.jpg: news/case6-7633e690c6e78330309255596e2d2a6d.jpg
 news/case_sub.png: news/case_sub-85500def6201a6a5ea77f766db6d09fa.png
 news/cases1.jpg: news/cases1-67e9149aca3143eeb3a2b7d27cd778de.jpg
 news/cases2.jpg: news/cases2-f9b61d5fbb8089dcd072bce92f146713.jpg
@@ -836,7 +836,7 @@ galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
 galleryC.js: galleryC-38e13def670c94186a7cb8dbbd6f8b45.js
 galleryF.js: galleryF-9ca157f0f07941461f0e182a5462360f.js
 galleryG.js: galleryG-0ea9dd8e0b3e27db839401848ac774c2.js
-galleryK.js: galleryK-01a5290d701e8021888fd6078c4291a1.js
+galleryK.js: galleryK-2356ee4f9489f9a6b5ebc718ec06c372.js
 galleryM.js: galleryM-6ce9bb0e65ee15680728c1038614d86b.js
 galleryN.js: galleryN-ae9bf4dc14a00a6bfa746404b7a3cf0a.js
 galleryO.js: galleryO-3194aafe480a4b26830016f3ca951f30.js
@@ -884,7 +884,7 @@ magic_content/master_designs.css: magic_content/master_designs-95bd4fe1de99c1cd9
 magic_content/mix_colors.css: magic_content/mix_colors-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/weekly_star.css: magic_content/weekly_star-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/weekly_star_uploads.css: magic_content/weekly_star_uploads-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-news.css: news-5c872c8083822642fda7b602d0518685.css
+news.css: news-27b27a994e330a67bb3e23440811c5c7.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 reg.css: reg-f4268c08f01ed0b0438e5cd9b6fef18c.css
 reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
