@@ -261,7 +261,7 @@
             <div class="boxB" id="weekly_star">
               <div class="box_title"><h3>每周之星</h3></div>
               <div class="boxb_content" style=" position: static; top: 0;">
-                <a href="#">
+                <a href="/weekly_stars/<%= @weekly_star.id%>">
                     <% unless @weekly_star.main_preview_img.nil? %>
                       <%= image_tag(@weekly_star.main_preview_img.url(:index)) %>
                     <%- end -%>
