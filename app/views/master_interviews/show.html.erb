@@ -28,11 +28,9 @@
           <div class="over_text pr">
             <div>
               <p class="profile_name"><%= @article.name %></p>
-
               <p class="line_b_dot">
                 <span>国籍：<%= @article.nationality %></span><span>领域：<%= @article.master_field %></span></p>
-
-              <p><%= raw @article.position %></p>
+              <%= raw @article.position %>
             </div>
           </div>
         </div>
