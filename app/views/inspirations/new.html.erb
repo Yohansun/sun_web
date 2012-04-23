@@ -27,6 +27,7 @@
     </div><!--section ends-->
   </div><!--shadow ends-->
 </div><!--main ends-->
+<% content_for :tail do %>
 <script type="text/javascript" charset="utf-8">
   $(function(){
     $("#new_inspiration").submit(function(){
@@ -42,4 +43,5 @@
   })
 
 </script>
+<%- end -%>
 <% end %>

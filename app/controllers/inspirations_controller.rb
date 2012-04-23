@@ -5,10 +5,10 @@ class InspirationsController < ApplicationController
 
   def index
     if @user
-      @inspirations = @user.inspirations.joins(:design_images).where("design_images.imageable_id = inspirations.id").page params[:page]
+      @inspirations = @user.inspirations.joins(:design_images).group("inspirations.id").where("design_images.imageable_id = inspirations.id").page params[:page]
       render :template => "users/inspirations"
     else
-      @inspirations = Inspiration.joins(:design_images).where("design_images.imageable_id = inspirations.id").page params[:page]
+      @inspirations = Inspiration.joins(:design_images).group("inspirations.id").where("design_images.imageable_id = inspirations.id").page params[:page]
     end
 
     unless @inspirations.nil?

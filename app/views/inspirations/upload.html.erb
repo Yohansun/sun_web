@@ -63,6 +63,20 @@ function uploads_size () {
   }
 }
 </script>
+
+<script type="text/javascript">
+  $(function(){
+    $(".load_submit").click(function(){
+      var imgCount = $("#inspiration_images_size").text();
+      if(parseInt(imgCount) == 0){
+        alert("不能一张图片都没有哦");
+        return false;
+      }else{
+        $(".edit_inspiration").submit();
+      }
+    })
+  })
+</script>
 <%- end -%>
 <%= form_for([current_user, @inspiration]) do |f| %>
 <div class="main syslist">
@@ -107,16 +121,3 @@ function uploads_size () {
 </div><!--main ends-->
 <% end -%>
 
-<script type="text/javascript">
-  $(function(){
-    $(".load_submit").click(function(){
-      var imgCount = $("#inspiration_images_size").text();
-      if(parseInt(imgCount) == 0){
-        alert("不能一张图片都没有哦");
-        return false;
-      }else{
-        $(".edit_inspiration").submit();
-      }
-    })
-  })
-</script>
