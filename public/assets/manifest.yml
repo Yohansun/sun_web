@@ -11,6 +11,8 @@ big_bg/EDM_dragon.jpg: big_bg/EDM_dragon-e2ac8c0cde9bfc289d6c0adefc2cc035.jpg
 big_bg/EDM_spring.jpg: big_bg/EDM_spring-a401526fa9be8f9ad8fdc9287381f91b.jpg
 big_bg/EDM_week.png: big_bg/EDM_week-224251d36bb0d6cae3a1a79f7252eb8c.png
 big_bg/act_tj.jpg: big_bg/act_tj-3c2f80aec9bf024cb77b1f6ed7418989.jpg
+big_bg/act_tj2.jpg: big_bg/act_tj2-67327a049ec92a72d5166c970e13f8e1.jpg
+big_bg/act_tj3.jpg: big_bg/act_tj3-ff5cdff48f978d397a2efccd33b81def.jpg
 big_bg/beijing1.jpg: big_bg/beijing1-79e8dff5392e8662ff5d7e0c1cd4c680.jpg
 big_bg/beijing2.jpg: big_bg/beijing2-463f13e2e1672c0bd038afd1b22158f9.jpg
 big_bg/beijing2012_1.jpg: big_bg/beijing2012_1-8061587df7c2eea70290444296a550f0.jpg
@@ -829,7 +831,7 @@ tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 weibo_bg.jpg: weibo_bg-1ac44d96e99c79756295ea74bb190170.jpg
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-059cf25eb638c2def4c41a429c61a868.js
+application.js: application-25b78262a31ccf450d3ef174cce1411e.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
 datepicker_lang_US.js: datepicker_lang_US-fdb4f1511b1330fbad82acec540df464.js
 galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
@@ -856,11 +858,9 @@ magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f9
 magic_content/mix_colors.js: magic_content/mix_colors-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-00991d54e60b434ad402e06228a56e38.js
-myfocus.js: myfocus-29d104cd28d5ae137e5571f5443e22ae.js
+main.js: main-1283d81d660a657f6cdcaf1132c13699.js
+myfocus.js: myfocus-ec5eef3789cdfc31040c82377a68d078.js
 owners_channel_upload_form.js: owners_channel_upload_form-669da4cc1c4c046605fa916615ca622b.js
-pattern/mF_fscreen_tb.css: pattern/mF_fscreen_tb-c55d363555af485d81f822bffc6a69b7.css
-pattern/mF_fscreen_tb.js: pattern/mF_fscreen_tb-9b554e5b2868fb48cd12217cd6262b00.js
 popupA.js: popupA-1d3ae610737d90ed0adf2b29f11e9ebc.js
 reply.js: reply-37ee955374223de70984bb5f23ce9d20.js
 shares.js: shares-80148e5c7e5b7899f916a93118e72fbd.js
@@ -889,7 +889,7 @@ owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 reg.css: reg-f4268c08f01ed0b0438e5cd9b6fef18c.css
 reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
 shares.css: shares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-style.css: style-66cdab22fce6bb56996bbcd00bf48c4b.css
+style.css: style-9ae819a8887fcedac787c2f93df55393.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 uploadify.css: uploadify-ff631130c7be3f4289484631b9789208.css
 weekstar.css: weekstar-de4f8dd9286464a532a40f3d0418fb22.css
