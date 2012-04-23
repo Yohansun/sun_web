@@ -48,6 +48,7 @@ $(document).ready(function() {
     <%- if @user.role.try(:role) =~ /designer/ %>
       <p class="d_hostaddr"><%= @user.try(:inauguration_company) || @user.try(:current_school)%></p>
     <%- end %>
+    <div class="clear"></div>
     <p class="icon_email">Email: <%= @user.email %></p>
     <p class="icon_qq">Q   Q:<%= @user.qq %></p>
     <p class="icon_msn">MSN: <%= @user.msn %></p>
