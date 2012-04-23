@@ -18,6 +18,11 @@ group :development do
   gem "capistrano"
   gem 'capistrano-unicorn'
   gem 'debugger'
+  gem 'bond'
+  gem 'wirble'
+  gem "awesome_print"
+  gem "map_by_method"
+  gem "hirb"
 end
 
 gem 'unicorn'
