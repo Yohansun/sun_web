@@ -7,7 +7,7 @@
       <h2>含“<strong><%= params[:search_word] %></strong>”搜索结果</h2>
       <% @results.each do |res| %>
       <div class="results line_b_dot">
-        <h3><a href="/articles<%= res.id %>"><%= res.title %></a></h3>
+        <h3><a href="/articles/<%= res.id %>"><%= res.title %></a></h3>
         <p><%= gsub_body_string(res.body, 300) %></p>
         <a href="/articles/<%= res.id %>">http://www.icolor.com.cn/articles/<%= res.id %></a>
       </div><!--results ends-->
