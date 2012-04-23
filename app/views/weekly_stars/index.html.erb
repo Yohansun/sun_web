@@ -213,7 +213,7 @@
                 <% group.each do |design| -%>
                     <li>
                       <a href="/weekly_stars/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt=""/></a>
-                      <h3><%= design.design_name %></h3>
+                      <h3 title="<%= design.design_name %>"><%= truncate(design.design_name, :length => 16) %></h3>
                       <p class="p1 group">
                         <strong class="ft14 fb">所获票数：<%= design.votes_count %></strong>
                       </p>

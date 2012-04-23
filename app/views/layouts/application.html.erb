@@ -5,6 +5,7 @@
   <title>iColor</title>
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
 
   <!--所有的个人主页都加载style.css -->
   <%- if params[:user_id] %>
@@ -17,13 +18,7 @@
       PNG.fix('img,div,a,ul,li,h2,strong,span,p');
   </script>
   <![endif]-->
-  <script type="text/javascript">
-      $(document).ready(function () {
-          $('#new_user').bind('ajax:error', function (xhr, status, error) {
-              err_in();
-          });
-      });
-  </script>
+
   <script type="text/javascript" charset="utf-8">
       var jiathis_config = {
           boldNum:4,
@@ -308,10 +303,16 @@
 <!--footer ends-->
 
 <%= render :partial => "layouts/overlay" %>
-<%= javascript_include_tag "application" %>
 
 <%= yield :tail %>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#new_user').bind('ajax:error', function (xhr, status, error) {
+            err_in();
+        });
+    });
+</script>
 <script type="text/javascript">
 
     // show login window for un-login user
