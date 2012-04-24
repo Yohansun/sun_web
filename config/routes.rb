@@ -156,6 +156,7 @@ Icolor::Application.routes.draw do
     resources :weekly_star_uploads
     resources :mix_colors
     resources :faqs
+    match '/lands' => "lands#index"
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
   end
 
