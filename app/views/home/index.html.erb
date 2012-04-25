@@ -161,7 +161,7 @@
                   <p>设计师：<%= @weekly_star.try(:author) %></p>
                 </div>
                 <div class="s">
-                  <p class="like"><%= @weekly_star.try(:shares_count) %></p>
+                  <p class="like"><%= @weekly_star.try(:votes_count) %></p>
                   <p class="review">评论<%= @weekly_star.try(:comments_count) %></p>
                 </div>
               </div>
@@ -268,7 +268,7 @@
                 </a>
                 <div class="cor"></div>
                 <div class="designer">设计师：<%= @weekly_star.try(:author) %></div>
-                <div class="notes"><%= @weekly_star.try(:shares_count) %></div>
+                <div class="notes"><%= @weekly_star.try(:votes_count) %></div>
               </div>
             </div>
             <div class="boxB" id="afflatus_showcase">

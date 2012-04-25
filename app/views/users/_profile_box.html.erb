@@ -41,6 +41,7 @@ $(document).ready(function() {
     <%- if controller_name =~ /rank|sys_msgs|faqs|events/ %>
       <a class="back_perhome" href="<%= user_path(current_user) %>">返回个人主页</a>
     <%- end %>
+    <div style="overflow: hidden;">
     <div class="signup_text" id='<%= params[:user_id] %>'>
       <span></span>
       <p id="signature"><%= raw @user.signature %></p>
@@ -48,7 +49,7 @@ $(document).ready(function() {
     <%- if @user.role.try(:role) =~ /designer/ %>
       <p class="d_hostaddr"><%= @user.try(:inauguration_company) || @user.try(:current_school)%></p>
     <%- end %>
-    <div class="clear"></div>
+    </div>
     <p class="icon_email">Email: <%= @user.email %></p>
     <p class="icon_qq">Q   Q:<%= @user.qq %></p>
     <p class="icon_msn">MSN: <%= @user.msn %></p>

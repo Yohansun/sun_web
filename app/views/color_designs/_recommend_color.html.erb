@@ -1,0 +1,38 @@
+<script type="text/javascript ">
+    $(function() {
+
+        var color_codes = {
+            <%- color1, color2, color3 = search_color_code(@design.recommend_color1), search_color_code(@design.recommend_color2), search_color_code(@design.recommend_color3) %>
+
+            '<%= @design.id %>': {
+                '1': { 'rgb': '<%= color1.try(:rgb) %>', 'code': '<%= color1.try(:code) %>', 'name': '<%= color1.try(:name) %>','category': '<%= @design.try(:recommend_color_category1) %>' },
+                '2': { 'rgb': '<%= color2.try(:rgb) %>', 'code': '<%= color2.try(:code) %>', 'name': '<%= color2.try(:name) %>','category': '<%= @design.try(:recommend_color_category2) %>' },
+                '3': { 'rgb': '<%= color3.try(:rgb) %>', 'code': '<%= color3.try(:code) %>', 'name': '<%= color3.try(:name) %>','category': '<%= @design.try(:recommend_color_category3) %>' }
+            },
+        };
+
+        $('.palette').mouseover(
+                function() {
+
+                    var id = $("#gallery_caption").text() * 1;
+                    if (id == 0) {
+                        id = <%= @design.try(:id) %>;
+                    }
+
+                    code = color_codes[id];
+                    var $ul = $(this).find('ul');
+                    var tmp = '';
+                    for (i = 1; i <= 3; i++) {
+                        if (new RegExp("^FM|^WM").test(code[i].code)) {
+                            tmp += '<li><div class="colorblock" style="background:url(/dev-assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
+                        } else {
+                            tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
+                        }
+                    };
+                    $ul.html(tmp);
+                }).mouseout(function() {
+                    var $ul = $(this).find('ul');
+                    $ul.html('');
+                });
+    });
+</script>

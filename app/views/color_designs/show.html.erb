@@ -8,6 +8,7 @@
 <% end -%>
 <% content_for :tail do -%>
     <%= javascript_include_tag 'galleryB.js','reply' %>
+    <%= render :partial => "recommend_color" %>
     <script type="text/javascript">
         $(".slide_thumb").click(function(event) {
             event.preventDefault();
@@ -52,48 +53,18 @@
       <div class="color-picker" style="padding-top:0px;">
       <div class="color">
         <div class="palettes">
-          <%- color_count = 0  -%>
-          <%- color_count += 1 if @color1-%>
-          <%- color_count += 1 if @color2-%>
-          <%- color_count += 1 if @color3 -%>
-          <%- if color_count > 0 -%>
-              <%- 8.times do %>
-                  <div class="palette">
-                    <%- if color_count == 1 %>
-                        <div class="desc desc1">
-                    <%- end %>
-                    <%- if color_count == 2 %>
-                        <div class="desc desc2">
-                    <%- end %>
-                    <%- if color_count == 3 %>
-                        <div class="desc desc3">
-                    <%- end %>
-                    <div class="title"></div>
-                    <div class="list"><ul>
-                      <%if @color1  %>
-                          <li><div class="colorblock" style="background-color:rgb(<%= @color1.rgb %>)"></div>
-                            <h5>墙面推荐色</h5>
-                            <p><%= '立邦' + "(" + @color1.code + ")" + @color1.name %></p>
-                          </li>
-                      <%- end %>
-                      <%if @color2  %>
-                          <li><div class="colorblock" style="background-color:rgb(<%= @color2.rgb %>)"></div>
-                            <h5>墙面推荐色</h5>
-                            <p><%= '立邦' + "(" + (@color2.code) + ")" + @color2.name %></p>
-                          </li>
-                      <%- end %>
-                      <%if @color3  %>
-                          <li><div class="colorblock" style="background-color:rgb(<%= @color3.rgb %>)"></div>
-                            <h5>墙面推荐色</h5>
-                            <p><%= '立邦' + "(" + (@color3.code) + ")" + @color3.name %></p>
-                          </li>
-                      <%- end %>
-                    </ul></div>
-                    </div>
-                    </div>
-              <%- end %>
+          <%- 8.times do %>
+              <div class="palette">
+                <div class="desc desc3">
+                  <div class="title"></div>
+                  <div class="list">
+                    <ul>
+                    </ul>
+                  </div>
+                </div>
+              </div>
           <%- end %>
-          </div>
+        </div>
       <!--[if IE 6]>
       <script type="text/javascript">
           if( $.browser.msie && $.browser.version < 7 ) {
