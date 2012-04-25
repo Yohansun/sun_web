@@ -4,9 +4,6 @@ class MasterDesignsController < ApplicationController
 
   def show
     @master_design = MasterDesign.find(params[:id]) || MasterDesign.new
-    @color1 = ColorCode.find_by_code(@master_design.recommend_color1)
-    @color2 = ColorCode.find_by_code(@master_design.recommend_color2)
-    @color3 = ColorCode.find_by_code(@master_design.recommend_color3)
   end
 
   def get_master_designs

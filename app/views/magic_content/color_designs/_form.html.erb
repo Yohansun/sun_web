@@ -59,9 +59,15 @@
         <div class="rowElem">
           <label>&nbsp;&nbsp;推荐色(请输入颜色编码):</label>
           <div class="formRight www1 recommend_color">
-            <%= text_field_tag "color_design[recommend_color1]", '', :label => '推荐色1:'  %>
-            <%= text_field_tag "color_design[recommend_color2]", '', :lable => '推荐色2:'  %>
-            <%= text_field_tag "color_design[recommend_color3]", '', :label => '推荐色3:'  %>
+          <%- 3.times do |i| %>
+            <%= text_field_tag "color_design[recommend_color#{i+1}]", '', :label => '推荐色:'  %>
+          <%- end %>
+          </div>
+          <label>&nbsp;&nbsp;推荐色(请输入颜色类型):</label>
+          <div class="formRight www1 recommend_color">
+          <%- 3.times do |i| %>
+            <%= text_field_tag "color_design[recommend_color_category#{i+1}]", '', :label => '推荐色类型:'  %>
+          <%- end %>
           </div>
           <div class="fix"></div>
         </div>

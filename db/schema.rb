@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418073513) do
+ActiveRecord::Schema.define(:version => 20120425073214) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -147,6 +147,9 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "recommend_color1"
     t.string   "recommend_color2"
     t.string   "recommend_color3"
+    t.string   "recommend_color_category1"
+    t.string   "recommend_color_category2"
+    t.string   "recommend_color_category3"
   end
 
   create_table "comments", :force => true do |t|
@@ -330,12 +333,18 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
 
   create_table "master_design_uploads", :force => true do |t|
     t.integer  "master_design_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "recommend_color1"
+    t.string   "recommend_color2"
+    t.string   "recommend_color3"
+    t.string   "recommend_color_category1"
+    t.string   "recommend_color_category2"
+    t.string   "recommend_color_category3"
   end
 
   create_table "master_designs", :force => true do |t|
@@ -350,9 +359,6 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "main_preview_img_content_type"
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
-    t.string   "recommend_color1"
-    t.string   "recommend_color2"
-    t.string   "recommend_color3"
     t.string   "master_name"
   end
 
@@ -665,12 +671,18 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
 
   create_table "weekly_star_uploads", :force => true do |t|
     t.integer  "weekly_star_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "recommend_color1"
+    t.string   "recommend_color2"
+    t.string   "recommend_color3"
+    t.string   "recommend_color_category1"
+    t.string   "recommend_color_category2"
+    t.string   "recommend_color_category3"
   end
 
   create_table "weekly_stars", :force => true do |t|
@@ -698,9 +710,6 @@ ActiveRecord::Schema.define(:version => 20120418073513) do
     t.string   "main_preview_img_content_type"
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
-    t.string   "recommend_color1"
-    t.string   "recommend_color2"
-    t.string   "recommend_color3"
   end
 
   create_table "weekly_tips", :force => true do |t|

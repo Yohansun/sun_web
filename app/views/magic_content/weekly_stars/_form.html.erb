@@ -8,9 +8,12 @@
 <%- content_for :tail do %>
 <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js","jquery.autocomplete.js" %>
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
-     $(".recommend_color input").autocomplete("/admin/content/color_codes/autocomplete_recommend_color");
-  });
+    $(document).ready(function() {
+        autocom();
+    });
+    function autocom() {
+        $(".recommend_color > input").autocomplete("/admin/content/color_codes/autocomplete_recommend_color");
+    }
 </script>
 <script type="text/javascript" charset="utf-8">
 <%- session_key = Rails.application.config.session_options[:key] -%>
@@ -92,17 +95,6 @@ $(function() {
           </div>
           <div class="fix"></div>
         </div>
-
-        <div class="rowElem">
-          <label>&nbsp;&nbsp;推荐色(请输入颜色编码):</label>
-          <div class="formRight www1 recommend_color">
-            <%= text_field_tag "weekly_star[recommend_color1]", '', :label => '推荐色1:'  %>
-            <%= text_field_tag "weekly_star[recommend_color2]", '', :lable => '推荐色2:'  %>
-            <%= text_field_tag "weekly_star[recommend_color3]", '', :label => '推荐色3:'  %>
-          </div>
-          <div class="fix"></div>
-        </div>
-
 
         <%= f.input :design_intro, :label => "设计说明:" %>
         <%= f.input :design_material, :label => "主要材料:" %>
