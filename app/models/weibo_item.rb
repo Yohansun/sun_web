@@ -7,7 +7,7 @@ class WeiboItem < ActiveRecord::Base
   validates_uniqueness_of :idstr
 
   def self.fetch(page = 1)
-    q = '放飞色彩心愿清单'
+    q = MagicSetting.weibo_keywords || '放飞色彩心愿清单'
     data = open("http://api.weibo.com/2/search/topics.json?source=337220139&q=#{CGI.escape(q)}&count=50&page=#{page}").read
     lines = JSON.parse(data.force_encoding("UTF-8"))
     lines['statuses'].each do |status|

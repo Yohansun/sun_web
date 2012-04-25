@@ -158,6 +158,7 @@ Icolor::Application.routes.draw do
     resources :faqs
     match '/lands' => "lands#index"
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
+    match '/stat' => 'stat#index', :as => 'stat'
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
