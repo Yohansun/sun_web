@@ -26,7 +26,7 @@
                     var tmp = '';
                     for (i = 1; i < 4; i++) {
                         if (new RegExp("^FM|^WM").test(code[i].code)) {
-                            tmp += '<li><div class="colorblock" style="background:url(/dev-assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
+                            tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
                         } else {
                             tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
                         }
