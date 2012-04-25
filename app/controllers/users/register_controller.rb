@@ -19,6 +19,7 @@ class Users::RegisterController < Devise::RegistrationsController
 
     if resource.save
       if resource.active_for_authentication?
+        resource.create_score(resource.id, 101, 1, 100)
         sign_in(resource_name, resource)
         respond_with resource
       else

@@ -24,6 +24,7 @@ class EventsController < ApplicationController
     @event.user_id = current_user.id if current_user
     if current_user #&& (current_user.role.role.eql? session[:user_role])
       if @event.save
+        current_user.create_score(current_user.id, 1300, 1, 50)
         redirect_to user_events_path
       else
         render :action => "new"

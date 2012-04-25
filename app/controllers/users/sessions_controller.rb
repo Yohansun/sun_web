@@ -5,6 +5,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
+    resource.first_login_today(resource)
     respond_with resource
   end
 

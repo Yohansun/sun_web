@@ -174,4 +174,7 @@ Icolor::Application.routes.draw do
   get "search" => "home#search"
 
   get "landing" => "lands#landing"
+
+  #分享后积分添加
+  post "scores/share_score" => "scores#share_score"
 end

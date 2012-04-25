@@ -37,6 +37,7 @@ class InspirationsController < ApplicationController
   def create
     @inspiration = current_user.inspirations.build(params[:inspiration])
     if @inspiration.save
+      current_user.create_score(current_user.id, 602 , 1 , 30)
       redirect_to upload_user_inspiration_path(current_user, @inspiration)
     else
       render :action => 'new'

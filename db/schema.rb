@@ -526,6 +526,16 @@ ActiveRecord::Schema.define(:version => 20120426081048) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "scores", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "score_type"
+    t.integer  "status"
+    t.string   "remark"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "amount"
+  end
+
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false
     t.text     "value"

@@ -7,9 +7,12 @@ $(function(){
 			var url = $(parent_node).attr("data-url");
 			var title = $(parent_node).attr("data-title");
 			var pic = $(parent_node).attr("data-pic");
-
 			var webid = $(this).attr("data-webid");
-
+			$.post("/scores/share_score",
+			{share_id : webid},
+			function(data){
+				
+			});
 			window.open("http://www.jiathis.com/send/?webid="+webid+"&url="+url+"&title="+title+"&pic="+pic);
 		});
 	};
