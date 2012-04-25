@@ -1,0 +1,52 @@
+<div class="content">
+  <div class="title"><h5>数据统计</h5></div>
+  <!-- Dynamic table -->
+  <div class="widget">
+    <div class="head"><h5 class="iFrames">按时间筛选</h5></div>
+    <form class="mainForm" method="get">
+      <fieldset>
+      <div class="rowElem noborder">
+        <label>开始日期:</label>
+        <div class="formRight">
+          <input type="text" class="datepicker" id="start_date" name="start_date" value="<%= params[:start_date] %>">
+        </div>
+        <div class="fix"></div>
+      </div>
+      <div class="rowElem noborder">
+        <label>结束日期:</label>
+        <div class="formRight">
+          <input type="text" class="datepicker" id="end_date" name="end_date" value="<%= params[:end_date] %>">
+        </div>
+        <div class="fix"></div>
+      </div>
+
+      <div class="rowElem">
+          <%= submit_tag "查询", class: 'greyishBtn submitForm' %>
+          <div class="fix"></div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+
+  <div class="table">
+    <div class="head"><h5 class="iFrames">查询结果</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="20%">项目</th>
+          <th width="20%">设计师（在职）</th>
+          <th width="20%">设计师（在读）</th>
+          <th width="20%">家装公司</th>
+          <th width="20%">普通用户</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA"><td>用户注册数</td><td><%= @reg_count1 %></td><td><%= @reg_count2 %></td><td><%= @reg_count3 %></td><td><%= @reg_count4 %></td></tr>
+        <tr class="gradeA"><td>发表作品数</td><td><%= @design_count1 %></td><td><%= @design_count2 %></td><td><%= @design_count3 %></td><td><%= @design_count4 %></td></tr>
+        <tr class="gradeA"><td>注册后登陆用户</td><td><%= @reg_and_login_count1 %></td><td><%= @reg_and_login_count2 %></td><td><%= @reg_and_login_count3 %></td><td><%= @reg_and_login_count4 %></td></tr>
+        <tr class="gradeA"><td>注册后未登陆用户</td><td><%= @reg_not_login_count1 %></td><td><%= @reg_not_login_count2 %></td><td><%= @reg_not_login_count3 %></td><td><%= @reg_not_login_count4 %></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
