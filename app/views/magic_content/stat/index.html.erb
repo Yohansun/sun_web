@@ -49,4 +49,24 @@
       </tbody>
     </table>
   </div>
+
+  <div class="table">
+    <div class="head"><h5 class="iFrames">统计数据结果</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="70%">数据来源</th>
+          <th width="30%">数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lands.each do |land| %>
+        <tr class="gradeA">
+          <td><%= land.source %></td>
+          <td><%= land.count %></td>
+        </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
 </div>
