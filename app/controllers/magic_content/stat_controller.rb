@@ -37,8 +37,6 @@ module MagicContent
       @reg_not_login_count3 = User.where(:created_at => start_date..end_date).where("role_id = 2").where("sign_in_count = 0").count
       @reg_not_login_count4 = User.where(:created_at => start_date..end_date).where("role_id = 3").where("sign_in_count = 0").count
 
-      begin_at  = params[:start_date] || (Time.now).strftime("%Y-%m-%d") 
-      end_at    = params[:end_date] || (Time.now + 1.day).strftime("%Y-%m-%d")
       @lands = Land.select("source, count(*) as count").where(:created_at => start_date..end_date).group(:source)
     end
   end
