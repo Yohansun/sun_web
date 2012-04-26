@@ -1,7 +1,9 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'reg' %>
-  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+    <%= stylesheet_link_tag 'reg' %>
 <% end -%>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+<%- end %>
 <div class="main">
   <div class="reg_bg1 pr"></div>
   <div class="wrapper">
@@ -36,7 +38,7 @@
         <div class="reg_list reg_width fl">
           <label for="uesername">我的身份：</label>
           <div class="fl">
-            <select class="fl" name="user[user_role]">
+            <select class="fl" name="user[user_role]" id="user_type">
               <option value=""> ----请选择---- </option>
               <option value="designer_0">设计师（在职）</option>
               <option value="designer_1">设计师（在读）</option>
@@ -52,12 +54,21 @@
             <select id="city" class="level_2 fl" name = user[city]></select>
             <select id="county" class="level_3 fl" name = user[area_id]></select>
           </div>
-        </div><!--reg_list ends-->
+        </div><!--reg_list ends-->      
         <div class="reg_list reg_width fl">
           <label for="recommander"><span>*</span>Email：</label>
           <input type="text" class="username fl" name="user[email]"/>
           <span class="reg_tip3 fl">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
         </div><!--reg_list ends-->
+        <div class="reg_list fl none" id="user_email">
+          <label></label>
+          <span class="reg_tip4 fl">是否公开我的Email:</span>
+          <input type="radio" name="user[is_show_email]" class="fl radio_btn" value="1"/>
+          <span class="recommand fl">是</span>
+          <input type="radio" name="user[is_show_email]" class="fl radio_btn" value="0"/>
+          <span class="recommand fl">否</span>
+        </div>
+        <!--reg_list ends-->
         <br style="float:left;display:inline;clear:both;" />
         <p class="reg_bot ft12 tc">注：您的注册信息仅用于icolor官网，我们不会对外公开您的信息，请放心</p>
         <p class="reg_bot ft12 tc">

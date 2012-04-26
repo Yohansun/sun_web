@@ -11,6 +11,8 @@ class WeeklyStarsController < ApplicationController
     @tags = WeeklyStar.tag_counts_on(:tags)
     @comments = @design.comments.page params[:page]
 
+    @prev_star = WeeklyStar.where("id < ?", @design.id).last
+    @next_star = WeeklyStar.where("id > ?", @design.id).first
   end
 
   def fullscreen

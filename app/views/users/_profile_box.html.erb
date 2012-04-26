@@ -49,8 +49,8 @@ $(document).ready(function() {
     <%- if @user.role.try(:role) =~ /designer/ %>
       <p class="d_hostaddr"><%= @user.try(:inauguration_company) || @user.try(:current_school)%></p>
     <%- end %>
-    </div>
-    <p class="icon_email">Email: <%= @user.email %></p>
+    </div>    
+    <p class="icon_email">Email: <%= @user.email unless @user.is_show_email? == false && @user != current_user %></p>       
     <p class="icon_qq">Q   Q:<%= @user.qq %></p>
     <p class="icon_msn">MSN: <%= @user.msn %></p>
     <p class="icon_fetion">飞信: <%= @user.fetion %></p>

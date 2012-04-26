@@ -11,7 +11,7 @@
         <div class="reg_list reg_width fl">
           <label for="uesername">我的身份：</label>
           <div class="fl">
-            <select class="fl" name="user[user_role]">
+            <select class="fl" name="user[user_role]" id="user_type">
               <option value=""> ----请选择---- </option>
               <option value="designer_0">设计师（在职）</option>
               <option value="designer_1">设计师（在读）</option>
@@ -20,6 +20,14 @@
             </select>
           </div>
         </div><!--reg_list ends-->
+        <div class="reg_list fl none" id="user_email">
+          <label></label>
+          <span class="reg_tip4 fl">是否公开我的Email:</span>
+          <input type="radio" name="user[is_show_email]" class="fl radio_btn" value="1"/>
+          <span class="recommand fl">是</span>
+          <input type="radio" name="user[is_show_email]" class="fl radio_btn" value="0"/>
+          <span class="recommand fl">否</span>
+        </div>
         <div class="reg_list reg_width fl">
           <label for="uesername">所在地：</label>
           <div class="fl">
