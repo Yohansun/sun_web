@@ -724,5 +724,13 @@ $(function(){
 			}, 'fast');
 		});
 	}
+    /*user_email*/
+    $('#user_type').change(function() {
+        var $email = $('#user_email');
+        if ($(this).val() == 'user') {
+            $email.show();
+        }
+        else $email.hide();
+    });
 
 });

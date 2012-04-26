@@ -28,7 +28,8 @@ class User < ActiveRecord::Base
                   :des_status, :date_of_birth, :recommended, :state, :city, :district,
                   :role_id, :founded_of_company, :company_address, :name_of_company,
                   :recipient_address, :current_school, :school_address, :login, :user_role, :qq,
-                  :msn, :fetion, :is_read, :recommended_id, :area_id, :created_at, :location, :signature, :old_id
+                  :msn, :fetion, :is_read, :recommended_id, :area_id, :created_at, :location, :signature, :old_id,
+                  :is_show_email
 
   attr_accessor :login, :recommended_name, :state, :city, :district, :user_role, :is_read
 
