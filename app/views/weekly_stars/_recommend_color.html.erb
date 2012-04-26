@@ -1,14 +1,28 @@
 <script type="text/javascript ">
     $(function() {
 
+        Object.size = function(obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;
+        };
+
         var color_codes = {
             <%- @design.weekly_star_uploads.each do |i| %>
             <%- color1, color2, color3 = search_color_code(i.recommend_color1), search_color_code(i.recommend_color2), search_color_code(i.recommend_color3) %>
 
             '<%= i.id %>': {
-                '1': { 'rgb': '<%= color1.try(:rgb) %>', 'code': '<%= color1.try(:code) %>', 'name': '<%= color1.try(:name) %>','category': '<%= i.try(:recommend_color_category1) %>' },
-                '2': { 'rgb': '<%= color2.try(:rgb) %>', 'code': '<%= color2.try(:code) %>', 'name': '<%= color2.try(:name) %>','category': '<%= i.try(:recommend_color_category2) %>' },
-                '3': { 'rgb': '<%= color3.try(:rgb) %>', 'code': '<%= color3.try(:code) %>', 'name': '<%= color3.try(:name) %>','category': '<%= i.try(:recommend_color_category3) %>' }
+                <%-
+                codes = []
+                [color1, color2, color3].each_with_index do |color, index|
+                    unless color.blank?
+                        codes << "'#{index+1}': { 'rgb': '#{color.rgb}', 'code': '#{color.code}', 'name': '#{color.name}', 'category': '#{i.send("recommend_color_category#{index+1}")}'}"
+                    end
+                end
+                %>
+                <%= codes.join(",") %>
             },
             <%- end %>
         };
@@ -18,13 +32,16 @@
 
                     var id = $("#gallery_caption").text() * 1;
                     if (id == 0) {
-                        id = <%= @design.weekly_star_uploads.first.try(:id) %>;
-                    }
+                        id = <%= @design.weekly_star_uploads.first.try(:id) %>
+                    };
 
                     code = color_codes[id];
+
+                    // Get the size of an object
+                    var size = Object.size(code);
                     var $ul = $(this).find('ul');
                     var tmp = '';
-                    for (i = 1; i <= 3; i++) {
+                    for (i = 1; i <= size; i++) {
                         if (new RegExp("^FM|^WM").test(code[i].code)) {
                             tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
                         } else {
@@ -32,6 +49,7 @@
                         }
                     };
                     $ul.html(tmp);
+                    $('.desc').removeClass().addClass('desc desc' + size);
                 }).mouseout(function() {
                     var $ul = $(this).find('ul');
                     $ul.html('');

@@ -9,13 +9,13 @@
     <div class="formRight www1 recommend_color" style="width: 75%">
       <label>&nbsp;&nbsp;推荐色(请输入颜色编码):</label>
       <%- 3.times do |i| %>
-          <%= text_field_tag "recommend_color[#{upload.id}][recommend_color#{i+1}]", '', :label => '推荐色:' %>
+          <%= text_field_tag "recommend_color[#{upload.id}][recommend_color#{i+1}]", '', :label => '推荐色:', :value => "#{WeeklyStarUpload.find(upload.id).send("recommend_color#{i+1}")}" %>
       <%- end %>
     </div>
     <div class="formRight www1 recommend_color" style="width: 75%">
-      <label>&nbsp;&nbsp;推荐色(请输入颜色类别):</label>
+      <label>&nbsp;&nbsp;推荐色(请输入颜色种类):</label>
       <%- 3.times do |i| %>
-          <%= text_field_tag "recommend_color[#{upload.id}][recommend_color_category#{i+1}]", '', :label => '推荐色类别:' %>
+          <%= text_field_tag "recommend_color[#{upload.id}][recommend_color_category#{i+1}]", '', :label => '推荐色种类:', :value => "#{WeeklyStarUpload.find(upload.id).send("recommend_color_category#{i+1}")}" %>
       <%- end %>
     </div>
     <div class="fix"></div>

@@ -60,13 +60,13 @@
           <label>&nbsp;&nbsp;推荐色(请输入颜色编码):</label>
           <div class="formRight www1 recommend_color">
           <%- 3.times do |i| %>
-            <%= text_field_tag "color_design[recommend_color#{i+1}]", '', :label => '推荐色:'  %>
+            <%= text_field_tag "color_design[recommend_color#{i+1}]", '', :value => "#{ColorDesign.find(resource.id).send("recommend_color#{i+1}")}" %>
           <%- end %>
           </div>
           <label>&nbsp;&nbsp;推荐色(请输入颜色类型):</label>
           <div class="formRight www1 recommend_color">
           <%- 3.times do |i| %>
-            <%= text_field_tag "color_design[recommend_color_category#{i+1}]", '', :label => '推荐色类型:'  %>
+            <%= text_field_tag "color_design[recommend_color_category#{i+1}]", '', :value => "#{ColorDesign.find(resource.id).send("recommend_color_category#{i+1}")}" %>
           <%- end %>
           </div>
           <div class="fix"></div>

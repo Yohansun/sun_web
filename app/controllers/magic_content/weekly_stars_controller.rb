@@ -27,10 +27,8 @@ module MagicContent
       arg1[:weekly_star_upload_ids].each do |u|
         m = WeeklyStarUpload.find(u.to_i)
         3.times do |i|
-          unless arg2[u.to_sym]["recommend_color" + (i+1).to_s].blank?
-            m.attributes = ({ ("recommend_color" + (i+1).to_s).to_sym => arg2[u.to_s]["recommend_color" + (i+1).to_s],
-                              ("recommend_color_category" + (i+1).to_s).to_sym => arg2[u.to_s]["recommend_color_category" + (i+1).to_s] })
-          end
+          m.attributes = ({ ("recommend_color" + (i+1).to_s).to_sym          => arg2[u.to_s]["recommend_color" + (i+1).to_s],
+                            ("recommend_color_category" + (i+1).to_s).to_sym => arg2[u.to_s]["recommend_color_category" + (i+1).to_s] })
         end
         m.save
       end
