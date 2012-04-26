@@ -41,17 +41,49 @@ module MagicContent
       @lands = Land.select("source, count(*) as count").where(:created_at => start_date..end_date).group(:source)
 
 
-      arr_huadong = Area.where(:id => [2, 44, 184, 432, 1142, 2881, 3198]).map{|a| a.leaves.map{|b| b.id}}
-      arr_huanan = Area.where(:id => [2985, 3932, 3452]).map{|a| a.leaves.map{|b| b.id}}
-      arr_huazhong = Area.where(:id => [297,801,2730]).map{|a| a.leaves.map{|b| b.id}}
-      arr_huabei = Area.where(:id => [581, 602, 999, 25]).map{|a| a.leaves.map{|b| b.id}}
-      arr_xibei = Area.where(:id => [1658,1740,2334,2482,2515,3324]).map{|a| a.leaves.map{|b| b.id}}
-      arr_xinan = Area.where(:id => [1616, 1855, 1994, 2102, 2394]).map{|a| a.leaves.map{|b| b.id}}
-      arr_dongbei = Area.where(:id => [1322, 1457, 2647, 3324]).map{|a| a.leaves.map{|b| b.id}}
-      puts arr_huadong 
-      puts arr_huadong.class
-      debugger
+      arr_huadong = []
+      arr_huanan = []
+      arr_huazhong = []
+      arr_huabei = []
+      arr_xibei = []
+      arr_xinan = []
+      arr_dongbei = []
 
+      Area.where(:id => [2, 44, 184, 432, 1142, 2881, 3198]).each do |area|
+        area.leaves.each do |les|
+          arr_huadong << les.id
+        end
+      end
+      Area.where(:id => [2985, 3932, 3452]).each do |area|
+        area.leaves.each do |les|
+          arr_huanan << les.id
+        end
+      end
+      Area.where(:id => [297,801,2730]).each do |area|
+        area.leaves.each do |les|
+          arr_huazhong << les.id
+        end
+      end
+      Area.where(:id => [581, 602, 999, 25]).each do |area|
+        area.leaves.each do |les|
+          arr_huabei << les.id
+        end
+      end
+      Area.where(:id => [1658,1740,2334,2482,2515,3324]).each do |area|
+        area.leaves.each do |les|
+          arr_xibei << les.id
+        end
+      end
+      Area.where(:id => [1616, 1855, 1994, 2102, 2394]).each do |area|
+        area.leaves.each do |les|
+          arr_xinan << les.id
+        end
+      end
+      Area.where(:id => []).each do |area|
+        area.leaves.each do |les|
+          arr_dongbei << les.id
+        end
+      end
       #片区活跃度 华东地区（山东，江苏，安徽，江西，浙江，福建，上海）
       @reg_huadong1 = count_reg_user_data(arr_huadong, start_date, end_date, 1, 0)
       @reg_huadong2 = count_reg_user_data(arr_huadong, start_date, end_date, 1, 1)
@@ -183,7 +215,7 @@ module MagicContent
     end
 
     #统计注册数
-    def count_reg_user_data(area, start_date, end_date, role_id, des_status = "")
+    def count_reg_user_data(area, start_date, end_date, role_id, des_status="")
       if des_status == ""
         User.where(:created_at => start_date..end_date).where("role_id = ?", role_id).where("users.area_id in (?)", area).count
       else
@@ -192,7 +224,7 @@ module MagicContent
     end
 
     #统计登录数
-    def count_login_user_data(area, start_date, end_date, role_id, des_status = "")
+    def count_login_user_data(area, start_date, end_date, role_id, des_status="")
       if des_status == ""
         User.where(:created_at => start_date..end_date).where("role_id = ? ",role_id).where("users.area_id in (?)", area).where("sign_in_count > 0").count
       else
@@ -201,7 +233,7 @@ module MagicContent
     end
 
     #统计上传数
-    def count_desgin_data(area, start_date, end_date, role_id, des_status = "")
+    def count_desgin_data(area, start_date, end_date, role_id, des_status="")
       if des_status == ""
         Design.includes(:user).where("designs.created_at" => start_date..end_date).where("users.area_id in (?)", area).where("users.role_id = ?", role_id).count
       else
