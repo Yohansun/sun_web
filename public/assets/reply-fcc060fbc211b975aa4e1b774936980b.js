@@ -1,1 +1,0 @@
-$(function(){$(".reply a").click(function(){var a=$(this).text(),b=$(this).parents("li").find(".user").text();$(this).parents("li").children(".reply_input").toggle().find("textarea").text(a+":")}),$(".msgboard_btn a").click(function(){var a=$(this).text(),b=$(this).parents(".msgboad_item"),c=b.find("strong").text();b.find(".reply_input").toggle().find("textarea").text(a+":")})});

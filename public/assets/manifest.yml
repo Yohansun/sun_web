@@ -847,7 +847,7 @@ tips.jpg: tips-993060bca9794c0a167372804c24987b.jpg
 weibo.png: weibo-f2f85052d4985df8762d94390911da56.png
 weibo_bg.jpg: weibo_bg-1ac44d96e99c79756295ea74bb190170.jpg
 LinkageSelect.js: LinkageSelect-4583f1854c560e1d502a7bf82e895d79.js
-application.js: application-25b78262a31ccf450d3ef174cce1411e.js
+application.js: application-6985766bd757b3805036b884efcdc874.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
 datepicker_lang_US.js: datepicker_lang_US-fdb4f1511b1330fbad82acec540df464.js
 galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
@@ -870,16 +870,16 @@ lands.js: lands-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/color_designs.js: magic_content/color_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/customer_replies.js: magic_content/customer_replies-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/faqs.js: magic_content/faqs-80148e5c7e5b7899f916a93118e72fbd.js
-magic_content/lands.js: magic_content/lands-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/master_designs.js: magic_content/master_designs-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/mix_colors.js: magic_content/mix_colors-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star.js: magic_content/weekly_star-80148e5c7e5b7899f916a93118e72fbd.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-80148e5c7e5b7899f916a93118e72fbd.js
-main.js: main-1283d81d660a657f6cdcaf1132c13699.js
+main.js: main-8828c6f8b163d87d2d10934ab0a450a4.js
 myfocus.js: myfocus-ec5eef3789cdfc31040c82377a68d078.js
 owners_channel_upload_form.js: owners_channel_upload_form-669da4cc1c4c046605fa916615ca622b.js
 popupA.js: popupA-1d3ae610737d90ed0adf2b29f11e9ebc.js
 reply.js: reply-37ee955374223de70984bb5f23ce9d20.js
+scores.js: scores-80148e5c7e5b7899f916a93118e72fbd.js
 shares.js: shares-80148e5c7e5b7899f916a93118e72fbd.js
 swfobject.js: swfobject-340f898f06f423b055636e87b5a1f7c0.js
 sys_msgs.js: sys_msgs-80148e5c7e5b7899f916a93118e72fbd.js
@@ -897,7 +897,6 @@ lands.css: lands-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/color_designs.css: magic_content/color_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/customer_replies.css: magic_content/customer_replies-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/faqs.css: magic_content/faqs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
-magic_content/lands.css: magic_content/lands-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/master_designs.css: magic_content/master_designs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/mix_colors.css: magic_content/mix_colors-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 magic_content/weekly_star.css: magic_content/weekly_star-95bd4fe1de99c1cd91ec8e6f348a44bd.css
@@ -906,6 +905,7 @@ news.css: news-27b27a994e330a67bb3e23440811c5c7.css
 owners_channel.css: owners_channel-66f2f36d051380977097cd3e091d5fbd.css
 reg.css: reg-a96317a63aa752cf96d090e059aef9a0.css
 reset.css: reset-ff8122e35514ac2a3ecb2bab11ca3ff7.css
+scores.css: scores-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 shares.css: shares-95bd4fe1de99c1cd91ec8e6f348a44bd.css
 style.css: style-c65ba4e681a0bbe8aafff94c006e0084.css
 sys_msgs.css: sys_msgs-95bd4fe1de99c1cd91ec8e6f348a44bd.css
