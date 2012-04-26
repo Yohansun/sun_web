@@ -1,2 +1,0 @@
-module MagicContent::LandsHelper
-end

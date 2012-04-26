@@ -49,4 +49,275 @@
       </tbody>
     </table>
   </div>
+
+  <div class="table">
+    <div class="head"><h5 class="iFrames">统计数据结果</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="70%">数据来源</th>
+          <th width="30%">数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lands.each do |land| %>
+        <tr class="gradeA">
+          <td><%= land.source %></td>
+          <td><%= land.count %></td>
+        </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+  <div class="table">
+    <div class="head"><h5 class="iFrames">片区活跃度</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="" rowspan="2">角色</th>
+          <td colspan="3">华东地区（山东，江苏，安徽，江西，浙江，福建，上海）</td>
+          <td colspan="3">华南地区（广东，广西，海南）</td>
+          <td colspan="3">华中地区（湖北，湖南，河南）</td>
+          <td colspan="3">华北地区（北京，天津，河北，山西，内蒙古）</td>
+          <td colspan="3">西北地区（宁夏，新疆，青海，陕西，甘肃，内蒙古）</td>
+          <td colspan="3">西南地区（四川，云南，贵州，西藏，重庆）</td>
+          <td colspan="3">东北地区（辽宁，吉林，黑龙江，内蒙古）</td>
+        </tr>
+        <tr>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+          <td>注册数</td>
+          <td>登录数</td>
+          <td>上传作品数</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA">
+          <td>设计师（在职）</td>
+          <td><%= @reg_huadong1 %></td>
+          <td><%= @login_huadong1 %></td>
+          <td><%= @design_huadong1 %></td>
+          <td><%= @reg_huanan1 %></td>
+          <td><%= @login_huanan1 %></td>
+          <td><%= @design_huanan1 %></td>
+          <td><%= @reg_huazhong1 %></td>
+          <td><%= @login_huazhong1 %></td>
+          <td><%= @design_huazhong1 %></td>
+          <td><%= @reg_huabei1 %></td>
+          <td><%= @login_huabei1 %></td>
+          <td><%= @design_huabei1 %></td>
+          <td><%= @reg_xibei1 %></td>
+          <td><%= @login_xibei1 %></td>
+          <td><%= @design_xibei1 %></td>
+          <td><%= @reg_xinan1 %></td>
+          <td><%= @login_xinan1 %></td>
+          <td><%= @design_xinan1 %></td>
+          <td><%= @reg_dongbei1 %></td>
+          <td><%= @login_dongbei1 %></td>
+          <td><%= @design_dongbei1 %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>设计师（在读）</td>
+          <td><%= @reg_huadong2 %></td>
+          <td><%= @login_huadong2 %></td>
+          <td><%= @design_huadong2 %></td>
+          <td><%= @reg_huanan2 %></td>
+          <td><%= @login_huanan2 %></td>
+          <td><%= @design_huanan2 %></td>
+          <td><%= @reg_huazhong2 %></td>
+          <td><%= @login_huazhong2 %></td>
+          <td><%= @design_huazhong2 %></td>
+          <td><%= @reg_huabei2 %></td>
+          <td><%= @login_huabei2 %></td>
+          <td><%= @design_huabei2 %></td>
+          <td><%= @reg_xibei2 %></td>
+          <td><%= @login_xibei2 %></td>
+          <td><%= @design_xibei2 %></td>
+          <td><%= @reg_xinan2 %></td>
+          <td><%= @login_xinan2 %></td>
+          <td><%= @design_xinan2 %></td>
+          <td><%= @reg_dongbei2 %></td>
+          <td><%= @login_dongbei2 %></td>
+          <td><%= @design_dongbei2 %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>家装公司</td>
+          <td><%= @reg_huadong3 %></td>
+          <td><%= @login_huadong3 %></td>
+          <td><%= @design_huadong3 %></td>
+          <td><%= @reg_huanan3 %></td>
+          <td><%= @login_huanan3 %></td>
+          <td><%= @design_huanan3 %></td>
+          <td><%= @reg_huazhong3 %></td>
+          <td><%= @login_huazhong3 %></td>
+          <td><%= @design_huazhong3 %></td>
+          <td><%= @reg_huabei3 %></td>
+          <td><%= @login_huabei3 %></td>
+          <td><%= @design_huabei3 %></td>
+          <td><%= @reg_xibei3 %></td>
+          <td><%= @login_xibei3 %></td>
+          <td><%= @design_xibei3 %></td>
+          <td><%= @reg_xinan3 %></td>
+          <td><%= @login_xinan3 %></td>
+          <td><%= @design_xinan3 %></td>
+          <td><%= @reg_dongbei3 %></td>
+          <td><%= @login_dongbei3 %></td>
+          <td><%= @design_dongbei3 %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>普通用户</td>
+          <td><%= @reg_huadong4 %></td>
+          <td><%= @login_huadong4 %></td>
+          <td><%= @design_huadong4 %></td>
+          <td><%= @reg_huanan4 %></td>
+          <td><%= @login_huanan4 %></td>
+          <td><%= @design_huanan4 %></td>
+          <td><%= @reg_huazhong4 %></td>
+          <td><%= @login_huazhong4 %></td>
+          <td><%= @design_huazhong4 %></td>
+          <td><%= @reg_huabei4 %></td>
+          <td><%= @login_huabei4 %></td>
+          <td><%= @design_huabei4 %></td>
+          <td><%= @reg_xibei4 %></td>
+          <td><%= @login_xibei4 %></td>
+          <td><%= @design_xibei4 %></td>
+          <td><%= @reg_xinan4 %></td>
+          <td><%= @login_xinan4 %></td>
+          <td><%= @design_xinan4 %></td>
+          <td><%= @reg_dongbei4 %></td>
+          <td><%= @login_dongbei4 %></td>
+          <td><%= @design_dongbei4 %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table">
+    <div class="head"><h5 class="iFrames">城市活跃度</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="" rowspan="2">注册数</th>
+          <% @areas.each do |area| %>
+            <td><%= area.name %></td>
+          <%- end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA">
+          <td>设计师（在职）</td>
+          <% @areas.each do |area| %>
+            <td><%= @city_reg1[area.id]%></td>
+          <%end %>
+        </tr>
+        <tr>
+          <td>设计师（在读）</td>          
+          <% @areas.each do |area| %>
+            <td><%= @city_reg2[area.id]%></td>
+          <%end %>
+        </tr>
+        <tr>
+          <td>家装公司</td>          
+          <% @areas.each do |area| %>
+            <td><%= @city_reg3[area.id]%></td>
+          <%end %>
+        </tr>
+        <tr>          
+          <td>普通用户</td>
+          <% @areas.each do |area| %>
+            <td><%= @city_reg4[area.id]%></td>
+          <%end %>
+        </tr>
+      </tbody>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="" rowspan="2">登录数</th>
+          <% @areas.each do |area| %>
+            <td><%= area.name %></td>
+          <%- end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA">
+          <td>设计师（在职）</td>
+          <% @areas.each do |area| %>
+            <td><%= @city_login1[area.id] %> </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>设计师（在读）</td>          
+          <% @areas.each do |area| %>
+            <td><%= @city_login2[area.id] %> </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>家装公司</td>          
+          <% @areas.each do |area| %>
+            <td><%= @city_login3[area.id] %> </td>
+          <% end %>
+        </tr>
+        <tr>          
+          <td>普通用户</td>
+          <% @areas.each do |area| %>
+            <td><%= @city_login4[area.id] %> </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="" rowspan="2">上传作品数</th>
+          <% @areas.each do |area| %>
+            <td><%= area.name %></td>
+          <%- end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA">
+          <td>设计师（在职）</td>
+          <% @areas.each do |area| %>
+            <td><%= @city_design1[area.id] %> </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>设计师（在读）</td>          
+          <% @areas.each do |area| %>
+            <td><%= @city_design2[area.id] %> </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>家装公司</td>          
+          <% @areas.each do |area| %>
+            <td><%= @city_design3[area.id] %> </td>
+          <% end %>
+        </tr>
+        <tr>          
+          <td>普通用户</td>
+          <% @areas.each do |area| %>
+            <td><%= @city_design4[area.id] %> </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
 </div>

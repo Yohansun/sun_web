@@ -20,6 +20,7 @@ class FaqsController < ApplicationController
   def create
     @faq = current_user.faqs.create(params[:faq])
     if @faq.save
+      current_user.create_score(current_user.id, 1001, 1, 10)
       redirect_to faqs_path
     end
   end

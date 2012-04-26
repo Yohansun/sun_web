@@ -8,6 +8,7 @@ class VotesController < ApplicationController
       vote.user_id = current_user.id
     end
     if vote.save
+      current_user.vote_score(current_user, params[:voteable_type], params[:voteable_id])
       render :action => 'create'
     else
       render :action => 'fail'

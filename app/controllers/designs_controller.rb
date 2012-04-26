@@ -41,6 +41,7 @@ class DesignsController < ApplicationController
   def create
     @design = current_user.designs.build(params[:design])
     if @design.save
+      current_user.create_score(current_user.id, 601 , 1 , 50)
       redirect_to upload_user_design_path(current_user, @design)
     else
       render :action => 'new'
