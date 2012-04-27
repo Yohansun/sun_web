@@ -76,7 +76,7 @@
         <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
       </p>
       <% cover_img = design.cover_img.file.url if design.cover_img -%>
-      <%= forward_links("分享一套优秀家装作品----#{design.title}，更多实用装修案例，尽在---立邦iColor网 #{user_design_url(design.user_id, design)}", user_design_url(design.user_id, design), cover_img) %>
+      <%= forward_links("分享一套优秀家装作品----#{design.title}，更多实用装修案例，尽在---立邦iColor网 #{user_design_url(design.user_id, design)}", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
       <p>
         公司：<%= design.user.name_of_company %>
         <br/>
