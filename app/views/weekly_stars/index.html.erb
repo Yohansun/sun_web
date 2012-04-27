@@ -52,7 +52,7 @@
           </div>
           <div class="operate pr">
             <span class="forward">转发 (0)</span>
-            <span class="review">评论 (<%= @design.try(:comments).try(:length) %>)</span>
+            <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @design.try(:comments).try(:length) %>)</span></a>
               <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author},#{@design.design_name}），更多精彩装修作品，尽在---立邦iColor网","#{request.host_with_port}", @design.main_preview_img.url) %>
           </div>
         </div>
@@ -201,7 +201,10 @@
                         <strong class="ft14 fb">所获票数：<%= design.votes_count %></strong>
                       </p>
                       <p class="p2 group">
-                        <span class="zf ft12">转发 (0)</span><span class="pl ft12">评论 (<%=design.comments.length %>)</span>
+                        <span class="zf ft12">转发 (0)</span>
+                        <a href="<%= design.try(:design_link) %>" target="_blank">
+                         <span class="pl ft12">评论 (<%=design.comments.length %>)</span>
+                        </a>
                       </p>
                       <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author}, #{@design.design_name}），更多精彩装修作品，尽在---立邦iColor网","#{request.host_with_port}", @design.main_preview_img.url) %>
                     </li>

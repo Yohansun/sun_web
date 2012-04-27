@@ -65,7 +65,7 @@
 
   <div class="operate pr">
     <span class="forward">转发 (0)</span>
-    <span class="review">评论 (<%= @design.try(:comments).length %>)</span>
+    <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @design.try(:comments).length %>)</span></a>
     <div class="popup_zf group none" style="bottom:-35px; left:25px;">
       <%= forward_links("分享每周之星精彩设计作品----#{@design.project_name}（#{@design.author}），更多精彩装修作品，尽在---立邦iColor网","", @design.main_preview_img.url) %>
     </div>

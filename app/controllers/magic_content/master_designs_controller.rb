@@ -24,13 +24,15 @@ module MagicContent
     end
 
     def build_recommend_color(arg1, arg2)
-      arg1[:master_design_upload_ids].each do |u|
-        m = MasterDesignUpload.find(u.to_i)
-        3.times do |i|
-          m.attributes = ({ ("recommend_color" + (i+1).to_s).to_sym          => arg2[u.to_s]["recommend_color" + (i+1).to_s],
-                            ("recommend_color_category" + (i+1).to_s).to_sym => arg2[u.to_s]["recommend_color_category" + (i+1).to_s] })
+      if arg1.include?("master_design_upload_ids")
+        arg1[:master_design_upload_ids].each do |u|
+          m = MasterDesignUpload.find(u.to_i)
+          3.times do |i|
+            m.attributes = ({ ("recommend_color" + (i+1).to_s).to_sym          => arg2[u.to_s]["recommend_color" + (i+1).to_s],
+                              ("recommend_color_category" + (i+1).to_s).to_sym => arg2[u.to_s]["recommend_color_category" + (i+1).to_s] })
+          end
+          m.save
         end
-        m.save
       end
     end
   end
