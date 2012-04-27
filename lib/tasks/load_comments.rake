@@ -38,7 +38,7 @@ task :load_comments_data => :environment  do
     	ctype = "4"
     end
     		
-    Comment.create( :user_id => user_id, :content => "", :created_at => row[9], 
+    Comment.create( :user_id => user_id, :content => row[1], :created_at => row[9], 
     								:updated_at => row[9], :commentable_id => row[4], 
                     :commentable_type => ctype,
     								:votes_count => 0
