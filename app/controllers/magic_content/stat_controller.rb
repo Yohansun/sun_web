@@ -79,7 +79,7 @@ module MagicContent
           arr_xinan << les.id
         end
       end
-      Area.where(:id => []).each do |area|
+      Area.where(:id => [1322, 1457, 2647, 3324]).each do |area|
         area.leaves.each do |les|
           arr_dongbei << les.id
         end
@@ -97,6 +97,7 @@ module MagicContent
       @design_huadong2 = count_desgin_data(arr_huadong, start_date, end_date, 1, 1)
       @design_huadong3 = count_desgin_data(arr_huadong, start_date, end_date, 2)
       @design_huadong4 = count_desgin_data(arr_huadong, start_date, end_date, 3)
+      debugger
 
       #华南地区（广东，广西，海南）
       @reg_huanan1 = count_reg_user_data(arr_huanan, start_date, end_date, 1, 0)
