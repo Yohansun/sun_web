@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426081048) do
+ActiveRecord::Schema.define(:version => 20120427023234) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -718,6 +718,7 @@ ActiveRecord::Schema.define(:version => 20120426081048) do
     t.string   "main_preview_img_content_type"
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
+    t.string   "design_link"
   end
 
   create_table "weekly_tips", :force => true do |t|
