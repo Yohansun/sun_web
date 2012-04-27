@@ -6,8 +6,6 @@ task :load_comments_data => :environment  do
     line = line.strip
     row = line.split(",")
     puts line
-    #puts row
-
     #:id => :integer,
     #:user_id => :integer,
     #:content => :string,
@@ -25,24 +23,25 @@ task :load_comments_data => :environment  do
     #row[5]	msg_type ??? {1=> design, 2=> , 3 => , 4 => }
     #row[6] parent_msg_id
     #row[9]	created_at
-    user_id = User.where(:old_id => row[3])
+    user_id = User.where(:old_id => row[3]).first.try(:id)
     ctype = ""
     case row[5]
-    when 0
+    when "0"
     	ctype = "Design"
-    when 1
+    when "1"
     	ctype = "1"
-    when 2
+    when "2"
     	ctype = "2"
-    when 3
+    when "3"
     	ctype = "3"
-    when 4
+    when "4"
     	ctype = "4"
     end
     		
-    Comment.create(	:user_id => user_id, :content => "", :created_at => row[9], 
+    Comment.create( :user_id => user_id, :content => "", :created_at => row[9], 
     								:updated_at => row[9], :commentable_id => row[4], 
-                                    :commentable_type => ctype,
-    								:votes_count => 0)
+                    :commentable_type => ctype,
+    								:votes_count => 0
+                  )
   end
 end
