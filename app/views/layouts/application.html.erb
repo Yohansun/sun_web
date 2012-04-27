@@ -438,6 +438,9 @@ document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/ja
 </script><script type="text/javascript">
 try {
 var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+<% if current_user && current_user.role_id -%>
+piwikTracker.setCustomVariable(1, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "visit");
+<% end -%>
 piwikTracker.trackPageView();
 piwikTracker.enableLinkTracking();
 } catch( err ) {}
