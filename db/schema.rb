@@ -185,6 +185,12 @@ ActiveRecord::Schema.define(:version => 20120427023234) do
     t.datetime "file_updated_at"
   end
 
+  add_index "design_images", ["created_at"], :name => "NewIndex5"
+  add_index "design_images", ["imageable_id"], :name => "NewIndex2"
+  add_index "design_images", ["imageable_type"], :name => "NewIndex3"
+  add_index "design_images", ["is_cover"], :name => "NewIndex4"
+  add_index "design_images", ["user_id"], :name => "NewIndex1"
+
   create_table "designs", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -201,6 +207,17 @@ ActiveRecord::Schema.define(:version => 20120427023234) do
     t.integer  "view_count",   :default => 0
     t.boolean  "recommended"
   end
+
+  add_index "designs", ["area_id"], :name => "NewIndex8"
+  add_index "designs", ["city"], :name => "NewIndex7"
+  add_index "designs", ["created_at"], :name => "NewIndex3"
+  add_index "designs", ["recommended"], :name => "NewIndex10"
+  add_index "designs", ["room_type"], :name => "NewIndex6"
+  add_index "designs", ["shares_count"], :name => "NewIndex4"
+  add_index "designs", ["style"], :name => "NewIndex5"
+  add_index "designs", ["user_id"], :name => "NewIndex1"
+  add_index "designs", ["view_count"], :name => "NewIndex9"
+  add_index "designs", ["votes_count"], :name => "NewIndex2"
 
   create_table "downloads", :force => true do |t|
     t.string   "title"
@@ -367,7 +384,6 @@ ActiveRecord::Schema.define(:version => 20120427023234) do
     t.string   "master_field"
     t.text     "position"
     t.text     "interview_content"
-    t.text     "message"
     t.string   "title"
     t.text     "intro"
     t.integer  "subject_id"
@@ -384,6 +400,7 @@ ActiveRecord::Schema.define(:version => 20120427023234) do
     t.datetime "preview_img_in_updated_at"
     t.string   "master_kind"
     t.string   "interview_content_type"
+    t.text     "message"
   end
 
   create_table "master_videos", :force => true do |t|
@@ -416,44 +433,42 @@ ActiveRecord::Schema.define(:version => 20120427023234) do
 
   create_table "old_articles", :force => true do |t|
     t.integer  "class_id"
-    t.string   "title"
+    t.string   "title",      :limit => 200
     t.string   "image"
     t.text     "content"
-    t.datetime "publish_at"
-    t.integer  "view_count"
+    t.datetime "publish_at",                               :null => false
+    t.integer  "view_count", :limit => 8,   :default => 0
     t.string   "thumb"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "old_design_files", :force => true do |t|
-    t.integer  "old_design_id"
-    t.string   "title"
-    t.string   "src"
+    t.string   "title",         :limit => 256
+    t.string   "src",           :limit => 256
     t.integer  "index"
-    t.datetime "create_date"
-    t.integer  "photo_type"
-    t.boolean  "is_cover"
-    t.string   "space"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "old_design_id"
+    t.datetime "create_date",                  :null => false
+    t.integer  "photo_type",    :limit => 1
+    t.binary   "is_cover",      :limit => 1
+    t.string   "space",         :limit => 20
   end
 
+  add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
+
   create_table "old_designs", :force => true do |t|
-    t.string   "title"
+    t.string   "title",       :limit => 256
+    t.string   "tags",        :limit => 256
     t.integer  "user_id"
-    t.integer  "month"
+    t.datetime "create_date",                               :null => false
+    t.integer  "view_count",  :limit => 8
+    t.binary   "recommended", :limit => 1
+    t.string   "style",       :limit => 20
+    t.binary   "month_star",  :limit => 1
+    t.integer  "month",       :limit => 1
     t.integer  "year"
-    t.integer  "top_n"
-    t.string   "tags"
-    t.datetime "create_date"
-    t.integer  "view_count"
-    t.boolean  "recommended"
-    t.boolean  "month_star"
-    t.string   "style"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "top_n",                      :default => 0, :null => false
   end
+
+  add_index "old_designs", ["user_id"], :name => "NewIndex1"
 
   create_table "pages", :force => true do |t|
     t.string   "title"

@@ -8,8 +8,14 @@ $(function(){
 			var title = $(parent_node).attr("data-title");
 			var pic = $(parent_node).attr("data-pic");
 			var webid = $(this).attr("data-webid");
+			var dataId = $(parent_node).attr("data-id");
+			var dataType = $(parent_node).attr("data-type");
 			$.post("/scores/share_score",
-			{share_id : webid},
+			{
+				share_id : webid,
+				data_id : dataId,
+				data_type : dataType
+			},
 			function(data){
 				
 			});
