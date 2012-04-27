@@ -14,14 +14,11 @@ class ScoresController < ApplicationController
 			end
 			case params[:data_type]
 			when "Design"
-				ds = Design.find params[:data_id]
-				ds.update_attributes(:shares_count => ds.shares_count + 1)
+				Design.increment_counter(:shares_count, params[:data_id])
 			when "WeeklyStar"
-				ws = WeeklyStar.find params[:data_id]
-				ws.update_attributes(:shares_count => ws.shares_count + 1)
+				WeeklyStar.increment_counter(:shares_count, params[:data_id])
 			when "Inspiration"
-				insp = Inspiration.find params[:data_id]
-				insp.update_attributes(:shares_count => insp.shares_count + 1)
+				Inspiration.increment_counter(:shares_count, params[:data_id])
 			end				
 			current_user.share_score(current_user, score_type)
 			render :text => "ok"
