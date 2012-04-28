@@ -2,7 +2,7 @@
 module MagicContent
   class ColorCodesController < BaseController
     def autocomplete_recommend_color
-      colors = ColorCode.select(:code).where("code LIKE ?", "%#{params[:q]}%").limit(100).all.map {
+      colors = ColorCode.select(:code).where("code LIKE ?", "%#{params[:q]}%").all.map {
           |e| e.code }
       render :text => colors.join("\n")
     end
