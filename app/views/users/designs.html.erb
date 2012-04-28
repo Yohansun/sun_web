@@ -41,7 +41,8 @@
               <p class="p2 group">
                 <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
               </p>
-              <span class="popup_zf group none"><span>一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></span>
+              <% cover_img = design.cover_img.file.url if design.cover_img -%>
+              <%= forward_links("分享一套优秀家装作品----#{design.title}，更多实用装修案例，尽在---立邦iColor网 #{user_design_url(design.user_id, design)}", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
               <p>风格：<%= design.style %></p>
             </li>
             <% end -%>
