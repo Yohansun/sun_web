@@ -93,8 +93,13 @@
             <td><%=  @design.design_color %></td>
           </tr>
           <tr><th>推荐色：</th>
-            <%- color_var = [(@color1 if @color1),(@color2 if @color2),(@color3 if @color3)].first %>
+            <%- color1, color2, color3 = search_color_code(@design.recommend_color1), search_color_code(@design.recommend_color2), search_color_code(@design.recommend_color3) %>
+            <%- color_var = [(color1 if color1),(color2 if color2),(color3 if color3)].first %>
+            <%- if color_var.code =~ /^FM|^WM/ %>
+            <td><%= ('立邦木器漆'+ color_var.code ) if color_var %></td>
+            <%- else %>
             <td><%= ('立邦'+ color_var.code + color_var.name) if color_var %></td>
+            <%- end %>  
           </tr>
           <tr><th>搭配理念：</th>
             <td><%= @design.design_thought %></td>
