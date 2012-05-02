@@ -18,9 +18,9 @@
     <img src="<%= asset_path "design/title_design.png" %>" />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/designs">推荐作品</a></em>
-    <em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><a class="fb" href="/designs">推荐设计作品</a></em>
+    <em><a href="/weekly_stars">装修设计欣赏</a><span></span></em>
+    <em><a href="/">iColor首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleB">
@@ -43,7 +43,7 @@
     <div class="weekstart_detail">
       <div class="big_image">
         <% if @design.cover_img -%>
-          <%= image_tag @design.cover_img.file.url(:slide) %>
+          <%= image_tag @design.cover_img.file.url(:slide), :title => "装修设计欣赏-#{@design.title}", :alt => "装修设计欣赏-#{@design.title}" %>
         <% end -%>
       </div>
       <div class="galleryB">
@@ -53,8 +53,8 @@
           <ul>
             <% @design.design_images.each do |i| -%>
               <li><%= link_to (image_tag i.file.url(:slide_thumb),
-                :alt => @design.title), i.file.url(:slide),
-                :title => @design.title, :class => "slide_thumb" %></li>
+                :alt => "装修设计欣赏-#{@design.title}"), i.file.url(:slide),
+                :title => "装修设计欣赏-#{@design.title}", :class => "slide_thumb" %></li>
             <% end -%>
           </ul>
         </div>

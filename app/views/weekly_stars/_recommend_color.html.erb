@@ -10,7 +10,7 @@
         };
 
         var color_codes = {
-            <%- @design.weekly_star_uploads.each do |i| %>
+            <%- @design.weekly_star_uploads.each_with_index do |i, index_u| %>
             <%- color1, color2, color3 = search_color_code(i.recommend_color1), search_color_code(i.recommend_color2), search_color_code(i.recommend_color3) %>
 
             '<%= i.id %>': {
@@ -23,14 +23,13 @@
                 end
                 %>
                 <%= codes.join(",") %>
-            },
+            }<%= ","  unless (index_u+1) == @design.weekly_star_uploads.size %>
             <%- end %>
         };
 
         $('.palette').mouseover(
                 function() {
-
-                    var id = $("#gallery_caption").text() * 1;
+                    var id = $($(instanceOne.imagesDiv).find("img")[instanceOne.imageID]).attr("data-id");
                     if (id == 0) {
                         id = <%= @design.weekly_star_uploads.first.try(:id) %>
                     };

@@ -31,7 +31,7 @@
           <div class="msgboad_item">
             <%= link_to user_path(m.from_user.id) do %>
                 <% if m.from_user.avatar -%>
-                    <%= image_tag m.from_user.avatar.file(:thumb), :class => 'box_shadow' %>
+                    <%= image_tag m.from_user.avatar.file(:thumb), :class => 'box_shadow', :title => "装修设计师-#{m.from_user.display_name}", :alt => "装修设计师-#{m.from_user.display_name}" %>
                 <% else -%>
                     <%= image_tag "news/regimg_bg.jpg", :width => "78", :height => "70", :class => 'box_shadow' %>
                 <% end -%>

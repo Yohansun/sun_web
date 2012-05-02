@@ -26,7 +26,7 @@ $(document).ready(function() {
 <div class="host_self group">
   <div class="signup_img_box">
     <% if @user.avatar -%>
-    <%= image_tag @user.avatar.file(:profile), :class => 'box_shadow' %>
+    <%= image_tag @user.avatar.file(:profile), :class => 'box_shadow', :title => "装修设计师-#{@user.display_name}", :alt => "装修设计师-#{@user.display_name}" %>
     <% else -%>
     <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
     <% end -%>
