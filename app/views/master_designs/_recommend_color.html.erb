@@ -30,7 +30,7 @@
         $('.palette').mouseover(
                 function() {
 
-                    var id = $("#gallery_caption").text() * 1;
+                    var id = $($(instanceOne.imagesDiv).find("img")[instanceOne.imageID]).attr("data-id");
                     if (id == 0) {
                         id = <%= @master_design.master_design_uploads.first.id %>
                     };
