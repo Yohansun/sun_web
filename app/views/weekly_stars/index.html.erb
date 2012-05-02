@@ -23,9 +23,9 @@
     <img src="<%= asset_path "design/title_design.png" %>" />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/weekly_stars">每周之星</a></em>
-    <em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><a class="fb" href="/weekly_stars">每周装修设计之星</a></em>
+    <em><a href="/weekly_stars">装修设计欣赏</a><span></span></em>
+    <em><a href="/">iColor首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleC">
@@ -40,7 +40,7 @@
         <span class="moveright"></span>
         <div class="galleryK" id="gallery">
           <%- @design.weekly_star_uploads.each do |i| %>
-              <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :alt => i.id) unless i.file.nil? %>
+              <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
           <%- end %>
         </div>
       </div>
@@ -195,7 +195,7 @@
               <ul>
                 <% group.each do |design| -%>
                     <li>
-                      <a href="/weekly_stars/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt=""/></a>
+                      <a href="/weekly_stars/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/></a>
                       <h3 title="<%= design.design_name %>"><%= truncate(design.design_name, :length => 16) %></h3>
                       <p class="p1 group">
                         <strong class="ft14 fb">所获票数：<%= design.votes_count %></strong>

@@ -10,7 +10,7 @@
         };
 
         var color_codes = {
-            <%- @master_design.master_design_uploads.each do |i| %>
+            <%- @master_design.master_design_uploads.each_with_index do |i, index_u| %>
             <%- color1, color2, color3 = search_color_code(i.recommend_color1), search_color_code(i.recommend_color2), search_color_code(i.recommend_color3) %>
 
             '<%= i.id %>': {
@@ -23,7 +23,7 @@
                 end
                 %>
                 <%= codes.join(",") %>
-            },
+            }<%= ","  unless (index_u+1) == @master_design.master_design_uploads.size %>
             <%- end %>
         };
 

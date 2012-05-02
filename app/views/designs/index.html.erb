@@ -26,9 +26,9 @@
   <img src='<%= asset_path "design/title_design.png" %>'/>
 </div>
 <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/designs">推荐作品</a></em>
-    <em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><a class="fb" href="/designs">推荐设计作品</a></em>
+    <em><a href="/weekly_stars">装修设计欣赏</a><span></span></em>
+    <em><a href="/">iColor首页</a><span></span></em>
 </div><!--sub_nav ends-->
 <div class='wrapper pb60 group'>
 <div class="design_tit group">
@@ -64,7 +64,7 @@
   <ul class="d_works group">
     <% group.each do |design| -%>
     <li>
-      <%= link_to image_tag(design.cover_img.file.url(:index)),
+      <%= link_to image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}"),
         user_design_path(design.user_id, design) if design.cover_img %>
       <h3><%= design.title %></h3>
       <p class="p1 group">

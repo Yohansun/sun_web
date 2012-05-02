@@ -11,15 +11,15 @@
     <img src="<%= asset_path "master/title_master.png" %>" alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/master_interviews">大师访谈</a></em>
-    <em><a href="/master_interviews">大师殿堂</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><a class="fb" href="/master_interviews">设计大师访谈</a></em>
+    <em><a href="/master_interviews">设计大师殿堂</a><span></span></em>
+    <em><a href="/">iColor首页</a><span></span></em>
   </div>
   <!--sub_nav ends-->
   <div class='wrapper pb60'>
     <div class="profile group">
       <div class="video">
-        <%= image_tag @article.preview_img_in.url(:original) %>
+        <%= image_tag @article.preview_img_in.url(:original), :title => "装修设计师-#{@article.name}", :alt => "装修设计师-#{@article.name}" %>
       </div>
       <!--video ends-->
       <div class="shadow profile_info">
@@ -76,7 +76,7 @@
             <div class="img_list">
               <% @article.master_designs.each do |design| -%>
                   <% design.master_design_uploads.each do |upload| -%>
-                      <a href="/master_designs/<%= design.id %>"><img class="list1" src="<%= upload.file.url(:interview) %>" alt=""/></a>
+                      <a href="/master_designs/<%= design.id %>"><img class="list1" src="<%= upload.file.url(:interview) %>" title="<%= "装修设计欣赏-#{design.design_name}"%>" alt="<%= "装修设计欣赏-#{design.design_name}"%>"/></a>
                   <% end -%>
               <% end -%>
             </div>

@@ -34,7 +34,7 @@
                 </span>
                 <%- end %>
               <% if i.cover_img -%>
-                <%= link_to (image_tag i.cover_img.file.url(:inside), class: "host_ins_img"), inspiration_path(i) %>
+                <%= link_to (image_tag i.cover_img.file.url(:inside), class:"host_ins_img", title:"装修设计欣赏-#{i.title}", alt:"装修设计欣赏-#{i.title}"), inspiration_path(i) %>
               <% end -%>
               </p>
               <h3><%= i.title %></h3>

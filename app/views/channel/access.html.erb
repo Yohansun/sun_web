@@ -9,14 +9,14 @@
   <div class='sub_nav ft12 pr tr'>
     <em><a class="fb" href="/channel/access">片区快查</a></em>
     <em><a href="/channel">业主通道</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><a href="/">iColor首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper'>
     <div class="owner_map clear">
       <% if MagicSetting.promote_designers -%>
           <% MagicSetting.promote_designers.split(",").each do |user_id| -%>
               <% user = User.find(user_id.to_i) rescue nil -%>
-              <%= link_to image_tag(user.avatar.file.url(:access_wall)), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
+              <%= link_to image_tag(user.avatar.file.url(:access_wall), :title => "装修设计师-#{user.display_name}", :alt => "装修设计师-#{user.display_name}"), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
           <% end -%>
       <% end -%>
       <!--<img src='<%#= asset_path "news/kv.jpg" %>'/>-->
@@ -50,7 +50,7 @@
             <% MagicSetting.recommend_designers.split(",").each do |user_id| -%>
                 <% user = User.find(user_id.to_i) rescue nil -%>
                 <div class="owner clear">
-                  <%= link_to image_tag(user.avatar.file.url(:access_icon), :class => "fl"), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
+                  <%= link_to image_tag(user.avatar.file.url(:access_icon), :class => "fl", :title => "装修设计师-#{user.display_name}", :alt => "装修设计师-#{user.display_name}"), user_path(user) if !user.avatar.nil? && !user.avatar.file.nil? %>
 
                   <div class="owner_center fl ft12">
                     <span class="owner_name fl fb ft14"><%= user.display_name %></span>
@@ -74,7 +74,7 @@
             <div class="owner clear">
               <%= link_to user_path(user) do %>
                   <%- if user.avatar %>
-                      <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl">
+                      <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
                   <%- else %>
                       <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fl' %>
                   <%- end %>

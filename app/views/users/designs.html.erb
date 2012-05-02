@@ -31,7 +31,7 @@
               <%- if current_user && current_user == @user %>
                 <div class="host_works_edit none"><%= link_to "编辑", design_update_user_design_path(current_user, design), class: "works_img_edit" %><%= link_to "删除", user_design_path(current_user, design), :method => :delete, class: "works_img_del" %></div>
               <%- end %>
-              <%= link_to image_tag(design.cover_img.file.url(:list), class: 'host_works_img'),
+              <%= link_to image_tag(design.cover_img.file.url(:list), class: 'host_works_img', title:"装修设计欣赏-#{design.title}" , alt:"装修设计欣赏-#{design.title}"),
                 user_design_path(@user, design) if design.cover_img %>
               </div>
               <h3><%= design.title %></h3>
