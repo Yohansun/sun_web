@@ -15,16 +15,16 @@
     <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/master_designs">装修设计作品</a></em>
-    <em><a href="/master_interviews">设计大师殿堂</a><span></span></em>
-    <em><a href="/">iColor首页</a><span></span></em>
+    <em><a class="fb" href="/master_designs">大师作品</a></em>
+    <em><a href="/master_interviews">大师殿堂</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper pb60'>
     <%= render :partial => "master_switch" %>
     <%- @master_designs.each do |design| %>
         <div class="shadow mt25">
           <div class="section master_works_list">
-            <%= link_to image_tag(design.main_preview_img.url(:index), :title => "装修设计欣赏-#{design.design_name}", :alt => "装修设计欣赏-#{design.design_name}"), "/master_designs/#{design.id}", :class => "works_b" %>
+            <%= link_to image_tag(design.main_preview_img.url(:index), :title => "设计鉴赏-#{design.design_name}", :alt => "设计鉴赏-#{design.design_name}"), "/master_designs/#{design.id}", :class => "works_b" %>
             <div class="works_detail">
               <h4>作者：<strong><%= design.master_profile.try(:name) || design.master_name %></strong></h4>
               <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>

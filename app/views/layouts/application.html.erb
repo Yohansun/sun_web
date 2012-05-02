@@ -46,7 +46,7 @@
 <div class="header">
   <div class="nav pa">
     <div class="logo">
-      <a href="<%= request.base_url %>/"><%= image_tag "logo1.png" %></a>
+      <a href="/"><%= image_tag "logo1.png" %></a>
     </div>
     <div class="navTop fr">
       <%- if user_signed_in? %>
@@ -89,54 +89,54 @@
     </div>
     <!--navTop ends-->
     <ul class="navBot fr cw fb ft14">
-      <li><a href="<%= request.base_url %>/">iColor首页</a></li>
-      <li class="pr"><a href="<%= request.base_url %>/master_interviews">设计大师殿堂</a>
-        <ul class="w_nav3">
-          <li><a href="<%= request.base_url %>/master_interviews">设计大师访谈</a></li>
-          <li><a href="<%= request.base_url %>/master_topics">热点装修话题</a></li>
-          <li class="noborder"><a href="<%= request.base_url %>/master_designs">装修设计作品</a></li>
-        </ul>
-      </li>
-      <li class="pr"><a href="<%= request.base_url %>/weekly_stars">装修设计欣赏</a>
-        <ul class="w_nav1">
-          <li><a href="<%= request.base_url %>/weekly_stars">每周装修设计之星</a></li>
-          <li><a href="<%= request.base_url %>/designs">推荐设计作品</a></li>
-          <li><a href="<%= request.base_url %>/inspirations">装修灵感秀</a></li>
-          <li class="noborder"><a href="<%= request.base_url %>/color_designs">居室色彩配搭</a></li>
-        </ul>
-      </li>
-      <li class="pr"><a href="<%= request.base_url %>/articles">行业资讯</a>
+      <li><a href="/">首页</a></li>
+      <li class="pr"><a href="/master_interviews">大师殿堂</a>
         <ul>
-          <li><a href="<%= request.base_url %>/articles">装修资讯</a></li>
-          <li><a href="<%= request.base_url %>/color_articles">色彩资讯</a></li>
-          <li class="noborder"><a href="<%= request.base_url %>/weibo_wall">微博资讯</a></li>
+          <li><a href="/master_interviews">大师访谈</a></li>
+          <li><a href="/master_topics">热点话题</a></li>
+          <li class="noborder"><a href="/master_designs">大师作品</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="<%= request.base_url %>/events">精彩活动</a>
+      <li class="pr"><a href="/weekly_stars">设计鉴赏</a>
+        <ul>
+          <li><a href="/weekly_stars">每周之星</a></li>
+          <li><a href="/designs">推荐作品</a></li>
+          <li><a href="/inspirations">灵感秀</a></li>
+          <li class="noborder"><a href="/color_designs">色彩配搭</a></li>
+        </ul>
+      </li>
+      <li class="pr"><a href="/articles">行业资讯</a>
+        <ul>
+          <li><a href="/articles">装修资讯</a></li>
+          <li><a href="/color_articles">色彩资讯</a></li>
+          <li class="noborder"><a href="/weibo_wall">微博资讯</a></li>
+        </ul>
+      </li>
+      <li class="pr"><a href="/events">精彩活动</a>
         <ul class="w_nav1">
-          <li><a href="<%= request.base_url %>/events">年度色彩趋势活动</a></li>
-          <li><a href="<%= request.base_url %>/designer_events">设计师活动</a></li>
-          <li class="noborder"><a href="<%= request.base_url %>/other_events">其他精彩活动</a></li>
+          <li><a href="/events">年度色彩趋势活动</a></li>
+          <li><a href="/designer_events">设计师活动</a></li>
+          <li class="noborder"><a href="/other_events">其他精彩活动</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="<%= request.base_url %>/softwares/tools">装修工具</a>
+      <li class="pr"><a href="/softwares/tools">实用工具</a>
         <ul class="w_nav2">
-          <li><a href="<%= request.base_url %>/softwares/tools">配色工具</a></li>
-          <li class="noborder"><a href="<%= request.base_url %>/softwares/app">设计师APP</a></li>
+          <li><a href="/softwares/tools">配色工具</a></li>
+          <li class="noborder"><a href="/softwares/app">设计应用软件</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="<%= request.base_url %>/channel/access">业主通道</a>
+      <li class="pr"><a href="/channel/access">业主通道</a>
         <ul class="w_nav3">
-          <li><a href="<%= request.base_url %>/channel/access">片区快查</a></li>
-          <li><a href="<%= request.base_url %>/faqs">家装设计咨询</a></li>
-          <li class="noborder"><a href="<%= request.base_url %>/mix_colors/new">在线配色服务</a></li>
+          <li><a href="/channel/access">片区快查</a></li>
+          <li><a href="/faqs">家装设计咨询</a></li>
+          <li class="noborder"><a href="/mix_colors/new">在线配色服务</a></li>
         </ul>
       </li>
-      <li class="noborder pr"><a href="<%= request.base_url %>/7-1">漆光艺彩</a>
+      <li class="noborder pr"><a href="/7-1">漆光艺彩</a>
         <ul class="w_nav4">
-          <li><a href="<%= request.base_url %>/7-1">木纹风尚生活</a></li>
+          <li><a href="/7-1">木纹风尚生活</a></li>
           <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
-          <li class="noborder"><a href="<%= request.base_url %>/7-3">刷新灵感我绘我家</a></li>
+          <li class="noborder"><a href="/7-3">刷新灵感我绘我家</a></li>
         </ul>
       </li>
     </ul>
@@ -172,18 +172,18 @@
     </div>
     <!--loginCon ends-->
     <ul class="loginCon ft12 border clear">
-      <li><a href="<%= request.base_url %>/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>"/>新浪微博</a></li>
-      <li><a href="<%= request.base_url %>/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>"/>QQ</a></li>
-      <li><a href="<%= request.base_url %>/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>"/>人人网</a></li>
-      <li class="noborder"><a href="<%= request.base_url %>/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>"/>开心网</a></li>
+      <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>"/>新浪微博</a></li>
+      <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>"/>QQ</a></li>
+      <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>"/>人人网</a></li>
+      <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>"/>开心网</a></li>
     </ul>
     <div class="loginCon ft12 border clear">
       <p class="fl">还没加入iColor?</p>
-      <a href="<%= request.base_url %>/users/sign_up" class="reg_now fl"></a>
+      <a href="/users/sign_up" class="reg_now fl"></a>
     </div>
     <!--loginCon ends-->
     <div class="loginCon border">
-      <a href="<%= request.base_url %>/gift"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
+      <a href="/gift"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
     </div>
   </div>
   <!--loginBg ends-->
@@ -245,48 +245,48 @@
   <div class='bot_map w_995 ft12 clear'>
     <div class="inner">
       <ul>
-        <li><a href="<%= request.base_url %>/master_interviews" class='fb'>设计大师殿堂</a></li>
-        <li><a href="<%= request.base_url %>/master_interviews">设计大师访谈</a></li>
-        <li><a href="<%= request.base_url %>/master_topics">热点装修话题</a></li>
-        <li><a href="<%= request.base_url %>/master_designs">装修设计作品</a></li>
+        <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
+        <li><a href="/master_interviews">大师访谈</a></li>
+        <li><a href="/master_topics">热点话题</a></li>
+        <li><a href="/master_designs">大师作品</a></li>
       </ul>
       <ul>
-        <li><a href="<%= request.base_url %>/designs" class='fb'>装修设计欣赏</a></li>
-        <li><a href="<%= request.base_url %>/weekly_stars">每周装修设计之星</a></li>
-        <li><a href="<%= request.base_url %>/designs">推荐设计作品</a></li>
-        <li><a href="<%= request.base_url %>/inspirations">装修灵感秀</a></li>
-        <li><a href="<%= request.base_url %>/color_designs">居室色彩配搭</a></li>
+        <li><a href="/designs" class='fb'>设计鉴赏</a></li>
+        <li><a href="/weekly_stars">每周之星</a></li>
+        <li><a href="/designs">推荐作品</a></li>
+        <li><a href="/inspirations">灵感秀</a></li>
+        <li><a href="/color_designs">色彩配搭</a></li>
       </ul>
       <ul>
-        <li><a href="<%= request.base_url %>/articles" class='fb'>行业资讯</a></li>
-        <li><a href="<%= request.base_url %>/color_articles">色彩资讯</a></li>
-        <li><a href="<%= request.base_url %>/articles">装修资讯</a></li>
-        <li><a href="<%= request.base_url %>/weibo_wall">微博资讯</a></li>
+        <li><a href="#" class='fb'>行业资讯</a></li>
+        <li><a href="#">色彩资讯</a></li>
+        <li><a href="/articles">装修资讯</a></li>
+        <li><a href="#">微博资讯</a></li>
       </ul>
       <ul>
-        <li><a href="<%= request.base_url %>/events" class='fb'>精彩活动</a></li>
-        <li><a href="<%= request.base_url %>/events">年度色彩趋势活动</a></li>
-        <li><a href="<%= request.base_url %>/designer_events">设计师活动</a></li>
-        <li><a href="<%= request.base_url %>/other_events">其他精彩活动</a></li>
+        <li><a href="#" class='fb'>精彩活动</a></li>
+        <li><a href="#">年度色彩趋势活动</a></li>
+        <li><a href="/events">设计师活动</a></li>
+        <li><a href="#">其他精彩活动</a></li>
       </ul>
       <ul>
-        <li><a href="<%= request.base_url %>/softwares/case" class='fb'>装修工具</a></li>
-        <li><a href="<%= request.base_url %>/softwares/tools">配色工具</a></li>
-        <li><a href="<%= request.base_url %>/softwares/app">设计师APP</a></li>
+        <li><a href="/softwares/case" class='fb'>实用工具</a></li>
+        <li><a href="/softwares/tools">配色工具</a></li>
+        <li><a href="/softwares/app">设计应用软件</a></li>
       </ul>
       <ul>
         <li>
-          <a href="<%= request.base_url %>/channel/access" class='fb'>业主通道</a>
+          <a href="#" class='fb'>业主通道</a>
         </li>
-        <li><a href="<%= request.base_url %>/channel/access">片区快查</a></li>
-        <li><a href="<%= request.base_url %>/faqs">家装设计咨询</a></li>
-        <li><a href="<%= request.base_url %>/mix_colors/new">在线配色服务</a></li>
+        <li><a href="/channel/access">片区快查</a></li>
+        <li><a href="/faqs">家装设计咨询</a></li>
+        <li><a href="/mix_colors/new">在线配色服务</a></li>
       </ul>
       <ul class="ul_last">
-        <li><a href="<%= request.base_url %>/7-3" class='fb'>漆光艺彩</a></li>
-        <li><a href="<%= request.base_url %>/7-1">木纹风尚生活</a></li>
+        <li><a href="/7-3" class='fb'>漆光艺彩</a></li>
+        <li><a href="#">木纹风尚生活</a></li>
         <li><a href="#">墙面艺术效果</a></li>
-        <li><a href="<%= request.base_url %>/7-3">刷新灵感我绘我家</a></li>
+        <li><a href="/7-3">刷新灵感我绘我家</a></li>
       </ul>
     </div>
   </div>
@@ -294,10 +294,10 @@
   <div class='copyright ft12'>
     <div class='w_995'>
       <a href='http://www.nipponpaint.com.cn/' target="_blank">立邦官网</a> |
-      <a href='<%= request.base_url %>/contact' target="_blank">联系我们</a> |
-      <a href='<%= request.base_url %>/rules' target="_blank">会员机制</a> |
+      <a href='/contact' target="_blank">联系我们</a> |
+      <a href='/rules' target="_blank">会员机制</a> |
       <a href='http://shop.nipponpaint.com.cn/' target="_blank">网上商城</a> |
-      <a href='<%= request.base_url %>/state' target="_blank">网站声明</a>
+      <a href='/state' target="_blank">网站声明</a>
 
       <p>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
     </div>
