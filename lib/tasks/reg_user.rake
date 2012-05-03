@@ -12,16 +12,17 @@ task :reg_user_count => :environment  do
 		end
 	end 
 
-	start_time = Time.local(2012, 04, 01)
-	end_time 	 = start_time.at_end_of_month
+	start_time = Time.local(2012, 04, 21)
+	end_time = Time.local(2012,04,29, 23, 59, 59)
+	#end_time 	 = start_time.at_end_of_month
 	users = User.where("created_at" => start_time..end_time)
-	csv_string = CSV.open("#{Rails.root}/lib/data/reg_user.csv", "wb") do |csv|
+	csv_string = CSV.open("#{Rails.root}/lib/data/reg_user_#{start_time.strftime("%Y-%m-%d")}_#{end_time.strftime("%Y-%m-%d")}.csv", "wb") do |csv|
 		csv
 		csv << [convert('用户名'), convert('用户性质'), convert('用户主页url'), convert("省"), convert("市"), convert("区")]
 		users.each do |user|
 			puts "staring..."
 			puts "No...... %s" % user.id
-			csv << [convert(user.display_name), convert(user.role_chn_name), convert("http://icolor.com.cn/#{user.id}"), convert(user.city.try(:parent).try(:name)), convert(user.try(:city).try(:name)), convert(user.try(:area).try(:name))]
+			csv << [convert(user.display_name), convert(user.role_chn_name), convert("http://www.icolor.com.cn/users/#{user.id}"), convert(user.city.try(:parent).try(:name)), convert(user.try(:city).try(:name)), convert(user.try(:area).try(:name))]
 			puts "Enddddddddddd"
 		end
 	end

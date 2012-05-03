@@ -23,7 +23,7 @@ task :user_design_count => :environment  do
 			puts "No...... %s" % user.id
 			unless user.designs.blank?
 				user.designs.each do |design|
-					csv << [convert(user.display_name), convert(user.role_chn_name), convert("http://icolor.com.cn/#{user.id}/designs/#{design.id}"), convert("http://icolor.com.cn/#{user.id}"), convert(user.city.try(:parent).try(:name)), convert(user.try(:city).try(:name)), convert(user.try(:area).try(:name))]
+					csv << [convert(user.display_name), convert(user.role_chn_name), convert("http://www.icolor.com.cn/users/#{user.id}/designs/#{design.id}"), convert("http://www.icolor.com.cn/#{user.id}"), convert(user.city.try(:parent).try(:name)), convert(user.try(:city).try(:name)), convert(user.try(:area).try(:name))]
 				end
 			end
 		end

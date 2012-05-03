@@ -19,7 +19,7 @@ task :votes_count => :environment  do
 		users.each do |user|
 			puts "staring..."
 			puts "No...... %s" % user.id
-			csv << [convert(user.display_name), convert(user.role_chn_name), convert("http://icolor.com.cn/#{user.id}"), convert(user.city.try(:parent).try(:name)), convert(user.try(:city).try(:name)), convert(user.try(:area).try(:name))]
+			csv << [convert(user.display_name), convert(user.role_chn_name), convert("http://www.icolor.com.cn/users/#{user.id}"), convert(user.city.try(:parent).try(:name)), convert(user.try(:city).try(:name)), convert(user.try(:area).try(:name))]
 			puts "Enddddddddddd"
 		end
 	end
