@@ -113,11 +113,11 @@ class User < ActiveRecord::Base
   end
 
   def job_designer?
-    self.des_status && self.role_id == 1
+    self.des_status == false && self.role_id == 1
   end
 
   def reading_designer?
-    self.des_status == false && self.role_id == 1
+    self.des_status && self.role_id == 1
   end
 
   def designer?
@@ -264,9 +264,9 @@ class User < ActiveRecord::Base
   end
 
   def role_chn_name
-    if self.des_status && self.role_id == 1
+    if self.des_status == false && self.role_id == 1
       return "在职设计师"
-    elsif self.des_status == false && self.role_id == 1
+    elsif self.des_status && self.role_id == 1
       return "在读设计师"
     elsif self.role_id == 2
       return "公司"
