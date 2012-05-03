@@ -1,9 +1,11 @@
 # -*- encoding : utf-8 -*-
 class ChannelController < ApplicationController
+  helper_method :show_search_result?
+
   #片区快查
   def access
 
-    @design_users = User
+    @design_users = User.order("recommend_designer_status desc")
 
     unless params[:keywords] == "请输入关键字"
       @design_users = @design_users.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
@@ -21,10 +23,6 @@ class ChannelController < ApplicationController
         @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
     end
 
-    if MagicSetting.recommend_designers && !params.keys.include?("keywords" || "area_id" || "user_role")
-      @design_users = @design_users.where("id not in (?)", MagicSetting.recommend_designers.split(",") )
-    end
-
-    @design_users = @design_users.page(params[:page]).per(10)
+    @design_users = @design_users.page(params[:page]).per(9)
   end
 end
