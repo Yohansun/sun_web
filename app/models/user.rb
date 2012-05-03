@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
   end
 
   def job_designer?
-    self.des_status && self.role_id == 0
+    self.des_status && self.role_id == 1
   end
 
   def reading_designer?
@@ -260,6 +260,18 @@ class User < ActiveRecord::Base
       if comment['commentable_type'] == "Faq"
         self.create_score(user.id, 1002, 1, 20, comment['commentable_id'])
       end
+    end
+  end
+
+  def role_chn_name
+    if self.des_status && self.role_id == 1
+      return "在职设计师"
+    elsif self.des_status == false && self.role_id == 1
+      return "在读设计师"
+    elsif self.role_id == 2
+      return "公司"
+    elsif self.role_id == 3
+      return "普通用户"
     end
   end
 
