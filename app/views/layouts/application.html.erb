@@ -322,6 +322,18 @@
 
     // show login window for un-login user
     $(function () {
+
+      if ($("#new_message")) {
+            $("#new_message").submit(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
         if ($("#new_comment")) {
             $("#new_comment").submit(function (event) {
                 <% if current_user -%>
