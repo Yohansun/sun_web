@@ -8,6 +8,7 @@ class ApiController < ApplicationController
     user.password = user.password_confirmation = params[:password]
     user.email = params[:email]
     user.is_read = true
+    user.is_from_minisite = true
     user.role_id = Role.find_by_role(params[:role]).id
     if user.save
       render :text => '<results suc="true" msg=""/>'
