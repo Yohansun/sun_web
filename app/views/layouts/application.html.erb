@@ -435,7 +435,6 @@
         ;
     });
 </script>
-
 <!-- Piwik -->
 <script type="text/javascript">
 var pkBaseURL = (("https:" == document.location.protocol) ? "https://203.156.231.36:8000/piwik/" : "http://203.156.231.36:8000/piwik/");
@@ -445,13 +444,16 @@ try {
 var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
 <% if current_user && current_user.role_id -%>
 piwikTracker.setCustomVariable(1, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "visit");
+piwikTracker.setCustomVariable(2, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "page");
+<% else -%>
+piwikTracker.setCustomVariable(1, "Role", "guest", "visit");
+piwikTracker.setCustomVariable(2, "Role", "guest", "page");
 <% end -%>
 piwikTracker.trackPageView();
 piwikTracker.enableLinkTracking();
 } catch( err ) {}
 </script><noscript><p><img src="http://203.156.231.36:8000/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
 <!-- End Piwik Tracking Code -->
-
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
