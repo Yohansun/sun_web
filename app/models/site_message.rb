@@ -6,11 +6,11 @@ class SiteMessage < ActiveRecord::Base
   has_many :comments, :as => :commentable
 
   default_scope :order => "created_at DESC"
+  after_create :deliver
 
   def comments_count
     self.comments.length
   end
-
 
   def send_sys_msg
     user_display_name = self.user.display_name
@@ -19,4 +19,8 @@ class SiteMessage < ActiveRecord::Base
                   :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "iColor客服",
                   :user_id => user_id)
   end
+
+  def deliver
+    Notifier.inform(self.user,self.desc).deliver
+  end  
 end

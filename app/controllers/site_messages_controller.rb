@@ -18,5 +18,4 @@ class SiteMessagesController < InheritedResources::Base
       fail.js { render 'fail' }
     end
   end
-
 end
