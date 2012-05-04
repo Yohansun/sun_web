@@ -22,6 +22,7 @@ class InspirationsController < ApplicationController
 
   def fullscreen
     @inspiration = @user.inspirations.find(params[:id])
+    @inspiration_next = Inspiration.where("id > ?", params[:id]).first
     render :layout => nil
   end
 

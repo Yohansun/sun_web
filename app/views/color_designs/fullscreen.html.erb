@@ -29,6 +29,9 @@
         <a class="fr cr" href="/color_designs/<%= @design.id%>">X</a>
         <h5 class="legend">您已浏览完所有图片</h5>
         <div class="button"><span class="replay"><a href="/color_designs/<%= @design.id %>/fullscreen">重新播放</a></span></div>
+        <%- unless  @design_next.blank? %>
+          <p><a id="timers" href="/color_designs/<%= @design_next.id %>/fullscreen">5</a>秒后跳转到下一套作品</p>
+        <%- end %>  
       </div>
     </div>
     <div class="gallery_over_mask"></div>

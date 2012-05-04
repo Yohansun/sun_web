@@ -32,6 +32,7 @@ class ColorDesignsController < ApplicationController
 
   def fullscreen
     @design = ColorDesign.find(params[:id])
+    @design_next = ColorDesign.where("id > ?", params[:id]).first
     render :layout => nil
   end
 
