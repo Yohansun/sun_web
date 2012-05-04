@@ -97,7 +97,24 @@ function galleryC(config){
 		if( isNaN(index) ) return false;
 		if( index > config.images.length-1 ) {
 			$('.gallery_over_mask').show();
-			$('.gallery_over_wrap').fadeIn('fast');
+			$('.gallery_over_wrap').fadeIn('fast',function(){
+
+			var timer = 5;
+			var $a = $('#timers');
+			var href = $a.attr('href');
+			if(href == undefined) return false;
+  		var setTimer = setInterval(mytimer,1000);
+			function mytimer(){
+				timer --;
+				if(timer == 0){
+					clearInterval(setTimer);
+					window.location = href;
+					return;
+					}
+				else{}
+				$a.text(timer);
+				}
+			});
 		} else {
 			clearTimeout(timer);
 			$imagePlayer.html('<img src="'+config.images[index]+'"/>');
