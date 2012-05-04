@@ -14,8 +14,8 @@ function galleryC(config){
 		'moveLeftClass'		: 'moveleft',
 		'moveRightClass'	: 'moveright',
 		'images'			: [],
-		'intervals'			: [5,10,15,20],
-		'interval'			: '5'
+		'intervals'			: [2,5,10,15,20],
+		'interval'			: '10'
 	};
 	$.extend(defConfig, config);
 	config = defConfig;
@@ -33,6 +33,8 @@ function galleryC(config){
 	}
 	if( config.images.length == 1 ) {
 		$imagePlayer.html('<img src="'+config.images[0]+'">');
+		$moveRight.click(showEvent);
+		$next.click(showEvent);
 		return true;
 	}
 	var intervalTime = parseInt( config.interval );
@@ -88,7 +90,7 @@ function galleryC(config){
 		setIntervalTime($this.text());
 		$this.parent().hide();
 	});
-	setIntervalTime(5);
+	setIntervalTime(2);
 	function showImage(index, lastHandle) {
 		index = parseInt(index);
 		if(index<0){return false;}
@@ -96,31 +98,14 @@ function galleryC(config){
 		else $('.qin_span').text(index+1+'/'+config.images.length);
 		if( isNaN(index) ) return false;
 		if( index > config.images.length-1 ) {
-			$('.gallery_over_mask').show();
-			$('.gallery_over_wrap').fadeIn('fast',function(){
-
-			var timer = 5;
-			var $a = $('#timers');
-			var href = $a.attr('href');
-			if(href == undefined) return false;
-  		var setTimer = setInterval(mytimer,1000);
-			function mytimer(){
-				timer --;
-				if(timer == 0){
-					clearInterval(setTimer);
-					window.location = href;
-					return;
-					}
-				else{}
-				$a.text(timer);
-				}
-			});
-		} else {
+			showEvent();
+		}
+		else {
 			clearTimeout(timer);
 			$imagePlayer.html('<img src="'+config.images[index]+'"/>');
 			currentImage = index;
 			if( $play.hasClass(config.pauseClass) ) {
-
+				
 				timer = setTimeout(function(){
 					showImage( currentImage + 1 );
 				}, config.interval*1000);
@@ -135,11 +120,31 @@ function galleryC(config){
 	$moveLeft.click(function(){ showImage( currentImage - 1, lastHandle ) });
 	$prev.click(function(){ showImage( currentImage - 1, lastHandle ) });
 	$play.click(function(){ showImage( currentImage, lastHandle ) });
-
+	
 	function lastHandle() {
 		$('.gallery_over_mask').show();
 		$('.gallery_over_wrap').fadeIn('fast');
 	}
-
+	function showEvent(){
+		$('.gallery_over_mask').show();
+			$('.gallery_over_wrap').fadeIn('fast',function(){
+				var timer = 5;
+				var $a = $('#timers');
+				var href = $a.attr('href');
+				if(href == undefined) return false;
+  				var setTimer = setInterval(mytimer,1000);
+				function mytimer(){
+					timer --;
+					if(timer == 0){
+						clearInterval(setTimer);
+						window.location = href;
+						return;
+					}
+					else{}
+					$a.text(timer);
+					}
+				});
+	}
+	
 	return obj;
 }

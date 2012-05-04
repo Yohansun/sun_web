@@ -40,6 +40,9 @@
             </li>
             <% end -%>
           </ul>
+          <%- unless  @inspiration_next.blank? %>
+            <p><a id="timers" href="/users/<%= @inspiration_next.user.id %>/inspirations/<%= @inspiration_next.id %>/fullscreen">5</a>秒后跳转到下一套作品</p>
+          <%- end %>
         </div>
       </div>
     </div>
