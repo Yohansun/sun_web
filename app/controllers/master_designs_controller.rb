@@ -14,6 +14,7 @@ class MasterDesignsController < ApplicationController
 
   def fullscreen
     @master_design = MasterDesign.find(params[:id])
+    @master_design_next = MasterDesign.where("published_at > ?", @master_design.published_at).last
     render :layout => nil
   end
 end

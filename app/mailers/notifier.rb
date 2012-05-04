@@ -16,8 +16,7 @@ class Notifier < ActionMailer::Base
       @role = "普通用户"
     end
     
-    base_url = "www.icolor.com.cn"
-    @path = base_url + user_path(user)
+    @path = user_url(user)
        
   	mail(:to => emails,
          :subject => "#{user.display_name}发来的在线咨询",

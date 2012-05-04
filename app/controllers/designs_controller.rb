@@ -26,6 +26,7 @@ class DesignsController < ApplicationController
 
   def fullscreen
     @design = @user.designs.find(params[:id])
+    @design_next = Design.where("id > ?", params[:id]).first
     render :layout => nil
   end
 

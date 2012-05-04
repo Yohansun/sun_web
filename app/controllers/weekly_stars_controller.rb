@@ -17,6 +17,7 @@ class WeeklyStarsController < ApplicationController
 
   def fullscreen
     @design = WeeklyStar.find(params[:id])
+    @design_next = WeeklyStar.where("id > ?",params[:id]).first
     render :layout => nil
   end
 end
