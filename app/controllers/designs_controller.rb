@@ -5,7 +5,7 @@ class DesignsController < ApplicationController
 
   def index
     if @user
-      @designs = @user.designs.page params[:page]
+      @designs = @user.designs.order("created_at desc").page params[:page]
       render :template => "users/designs"
     else
       @designs = Design.page(params[:page]).per(9)
