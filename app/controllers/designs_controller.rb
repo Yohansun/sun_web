@@ -5,10 +5,10 @@ class DesignsController < ApplicationController
 
   def index
     if @user
-      @designs = @user.designs.order("created_at desc").page params[:page]
+      @designs = @user.designs.order("created_at desc").page(params[:page]).joins(:design_images).group("imageable_id")
       render :template => "users/designs"
     else
-      @designs = Design.page(params[:page]).per(9)
+      @designs = Design.page(params[:page]).per(9).joins(:design_images).group("imageable_id")
     end
 
     unless @designs.nil?
