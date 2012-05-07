@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507092245) do
+ActiveRecord::Schema.define(:version => 20120507100159) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -668,7 +668,7 @@ ActiveRecord::Schema.define(:version => 20120507092245) do
     t.boolean  "is_show_email",             :default => true
     t.boolean  "is_from_minisite",          :default => false
     t.integer  "recommend_designer_status", :default => 0
-    t.integer  "design_count"
+    t.integer  "designs_count"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
