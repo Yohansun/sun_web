@@ -33,9 +33,11 @@
           <p>观看 <%= link_to @design.user.display_name, user_designs_path(@design.user_id) %> 往期作品</p>
           <ul>
             <% @design.user.designs.limit(5).each do |design| -%>
-            <li>
-              <%= link_to image_tag(design.cover_img.file.url(:fullscreen_thumb)), user_design_path(@design.user_id, design) %>
-            </li>
+              <%- unless design.blank? %>
+                <li>
+                  <%= link_to image_tag(design.cover_img.file.url(:fullscreen_thumb)), user_design_path(@design.user_id, design) %>
+                </li>
+              <%- end %>  
             <% end -%>
           </ul>
           <%- unless  @design_next.blank? %>
