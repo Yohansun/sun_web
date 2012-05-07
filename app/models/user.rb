@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
   end
 
   def score_level
-    @score_level = ""
+    @score_level = "普通会员"
     Score::ScoreLevel.each_with_index do |sl, index|
       if self.total_score > sl && self.total_score < Score::ScoreLevel[index+1]
         @score_level = Score::LevelName[index]
@@ -156,8 +156,9 @@ class User < ActiveRecord::Base
   end
 
   def next_level
-    return Score::LevelName.rindex("#{self.score_level}").next 
+    return Score::LevelName.rindex("#{self.score_level}").try(:next) || 0
   end
+
   #基础加分方法
   def create_score(user_id, type, status, amount, remark = "") 
     Score.create(:user_id => user_id, 
