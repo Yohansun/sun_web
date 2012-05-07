@@ -14,8 +14,8 @@
         sel.bind('.level_1',<%= area.parent.id unless area.parent.nil?%>);
         sel.bind('.level_2',<%= area.id%>);
       <%- else -%>
-        sel.bind('.level_1');
-        sel.bind('.level_2');
+        sel.bind('.level_1', null, '请选择省会');
+        sel.bind('.level_2', null, '请选择市');
       <%- end -%>
 
     });
