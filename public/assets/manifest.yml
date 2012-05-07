@@ -705,7 +705,7 @@ paint_art/art_kv/art_kv15.png: paint_art/art_kv/art_kv15-c20d39742bf616604352fb1
 paint_art/art_kv/art_kv16.jpg: paint_art/art_kv/art_kv16-e26eb4a13ae666409da5a449afdf673b.jpg
 paint_art/art_kv/art_kv16.png: paint_art/art_kv/art_kv16-511437bd75b1200a42c026da54804028.png
 paint_art/art_kv/art_kv17.jpg: paint_art/art_kv/art_kv17-c1f112a2c4246a2b6213c6841652597c.jpg
-paint_art/art_kv/art_kv17.png: paint_art/art_kv/art_kv17-8577876894eae23adc0a7a2311b22446.png
+paint_art/art_kv/art_kv17.png: paint_art/art_kv/art_kv17-7d19b2b8205d16e38854a0f83b986b48.png
 paint_art/art_kv/art_kv18.jpg: paint_art/art_kv/art_kv18-e36a7c892539c56aac6a1a88fd891f9f.jpg
 paint_art/art_kv/art_kv18.png: paint_art/art_kv/art_kv18-48dd6041cb80edb2ca321e4a7b1ee56c.png
 paint_art/art_kv/art_kv19.jpg: paint_art/art_kv/art_kv19-392102f66b2f7da8fb82e407bb71d94d.jpg
@@ -725,7 +725,7 @@ paint_art/art_kv/art_kv24.png: paint_art/art_kv/art_kv24-9c0dbd5da11275fad2e4612
 paint_art/art_kv/art_kv25.jpg: paint_art/art_kv/art_kv25-a3033d26e7385d4e965d0210786e1ac2.jpg
 paint_art/art_kv/art_kv25.png: paint_art/art_kv/art_kv25-0be6a440acb4456621a1083f68f094bb.png
 paint_art/art_kv/art_kv26.jpg: paint_art/art_kv/art_kv26-360072cdcb1d83fd524e09613dc247d0.jpg
-paint_art/art_kv/art_kv26.png: paint_art/art_kv/art_kv26-7d19b2b8205d16e38854a0f83b986b48.png
+paint_art/art_kv/art_kv26.png: paint_art/art_kv/art_kv26-8577876894eae23adc0a7a2311b22446.png
 paint_art/art_kv/art_kv27.jpg: paint_art/art_kv/art_kv27-4fcb5dd4dbb1c13664503cca838ac4fd.jpg
 paint_art/art_kv/art_kv27.png: paint_art/art_kv/art_kv27-c01b0e09b7198421db83966b2e610778.png
 paint_art/art_kv/art_kv28.jpg: paint_art/art_kv/art_kv28-d607a9e2111a010427fc87bfc727e27c.jpg
@@ -873,7 +873,7 @@ application.js: application-a468ad3c2dc4ee8db042238999966851.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-2b9b10d588bc87e867e7de88612050b3.js
 datepicker_lang_US.js: datepicker_lang_US-fdb4f1511b1330fbad82acec540df464.js
 galleryB.js: galleryB-436757e9159eed52a94f711bf3a1042d.js
-galleryC.js: galleryC-82b4943e52441d9b7ee2aa20d97e5985.js
+galleryC.js: galleryC-908f01dc68e397ac5e11439a0536d9f0.js
 galleryF.js: galleryF-9ca157f0f07941461f0e182a5462360f.js
 galleryG.js: galleryG-0ea9dd8e0b3e27db839401848ac774c2.js
 galleryK.js: galleryK-22eb733e19037c88f44ddc1119c28b5c.js

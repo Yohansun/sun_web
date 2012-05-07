@@ -14,7 +14,7 @@ function galleryC(config){
 		'moveLeftClass'		: 'moveleft',
 		'moveRightClass'	: 'moveright',
 		'images'			: [],
-		'intervals'			: [2,5,10,15,20],
+		'intervals'			: [5,10,15,20],
 		'interval'			: '10'
 	};
 	$.extend(defConfig, config);

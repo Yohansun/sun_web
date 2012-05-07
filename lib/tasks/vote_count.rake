@@ -13,7 +13,7 @@ task :votes_count => :environment  do
 	end 
 
 	users = User.find_by_sql("SELECT votes.id, votes.created_at,users.name, users.username, users.role_id, users.name_of_company, users.des_status, users.id, users.area_id FROM votes left outer join users on users.id = votes.user_id WHERE (votes.created_at BETWEEN '2012-04-01 00:00:00' AND '2012-04-30 23:59:59')")
-	csv_string = CSV.open("#{Rails.root}/lib/data/votes_count.csv", "wb") do |csv|
+	csv_string = CSV.open("#{Rails.root}/lib/data/export_data/votes_count.csv", "wb") do |csv|
 		csv
 		csv << [convert('用户名'), convert('用户性质'), convert('用户主页url'), convert("省"), convert("市"), convert("区")]
 		users.each do |user|

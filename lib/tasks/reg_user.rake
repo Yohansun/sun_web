@@ -16,7 +16,7 @@ task :reg_user_count => :environment  do
 	end_time = Time.local(2012, 05, 06, 23, 59, 59)
 	#end_time 	 = start_time.at_end_of_month
 	users = User.where("created_at" => start_time..end_time)
-	csv_string = CSV.open("#{Rails.root}/lib/data/reg_user_#{start_time.strftime("%Y-%m-%d")}_#{end_time.strftime("%Y-%m-%d")}.csv", "wb") do |csv|
+	csv_string = CSV.open("#{Rails.root}/lib/data/export_data/reg_user_#{start_time.strftime("%Y-%m-%d")}_#{end_time.strftime("%Y-%m-%d")}.csv", "wb") do |csv|
 		csv
 		csv << [convert('用户名'), convert('用户性质'), convert('用户主页url'), convert("省"), convert("市"), convert("区")]
 		users.each do |user|
