@@ -4,8 +4,8 @@ MagicContent.extra_content_options = {'大师殿堂' => 'MasterProfile', '一周
                                       '色彩搭配' => 'ColorDesign',  '每周之星' => 'WeeklyStar'}
 
 MagicContent.extra_settings = [
-    {:tag => 'text_field_tag', :key => 'promote_designers', :label => '片区快查推荐设计师(KV)'},
-    {:tag => 'text_field_tag', :key => 'recommend_designers', :label => '片区快查推荐设计师(列表)'},
+    {:tag => 'text_field_tag', :key => 'promote_designers', :label => '片区快查推荐设计师或家装公司(KV)'},
+    {:tag => 'text_field_tag', :key => 'recommend_designers', :label => '片区快查推荐设计师或家装公司(列表)'},
     {:tag => 'text_field_tag', :key => 'weibo_keywords', :label => '微博关键字'},
 ]
 
