@@ -11,22 +11,27 @@ class VotesController < ApplicationController
       if vote.save!
         current_user.vote_score(current_user, params[:voteable_type], params[:voteable_id])
         render :action => 'create'
-      else
-        render :action => 'fail'
       end
-    else
-      render :action => "fail"
+    elsif !current_user.blank?
+      if !check_voted(current_user, params)
+        render :action => "voted"
+      end
+    elsif current_user.blank?
+      render :action => 'fail'
     end
   end
 
   private
 
-  def check_voted(user, vote)
-    vote = Vote.where(:voteable_type => vote[:voteable_type], :voteable_id => vote[:voteable_id], :user_id => user.id)
-    if vote 
-      return false
-    else
+  def check_voted(user, params)
+    vote = Vote.find(
+                    :first, 
+                    :conditions => ["voteable_type = ? and voteable_id = ? and user_id = ?", params[:voteable_type], params[:voteable_id], user.id]
+                    )
+    if vote.blank?
       return true
+    else
+      return false
     end
   end
 end
