@@ -4,8 +4,8 @@ class ChannelController < ApplicationController
 
   #片区快查
   def access
-
-    @design_users = User.order("recommend_designer_status desc")
+    #TODO 推荐作品上传完成后回来做根据色号排序
+    @design_users = User.order("recommend_designer_status desc").order("design_count desc")
 
     unless params[:keywords] == "请输入关键字"
       @design_users = @design_users.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
