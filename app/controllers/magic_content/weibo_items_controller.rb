@@ -4,8 +4,8 @@ module MagicContent
 
     load_and_authorize_resource
     def index
-      #@items=WeiboItem.order('created_time desc')
-      @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL").order("created_time DESC").all
+      @weibo_items = WeiboItem.where("thumbnail_pic IS NOT NULL").order("created_time DESC")
+      index!
     end
 
     def update
