@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     @master_design = MasterDesign.first
 
     #TODO灵感秀
-    @inspirations = Inspiration.limit(27).order(:created_at)
+    @inspirations = Inspiration.limit(27).order("created_at desc")
 
     #推荐作品  TODO group_by 不知道数据多了以后翻页效果如何，待测试
 #    @design_groups = Design.select([:id, :shares_count]).group_by{|a| index = a.id%2==0}
