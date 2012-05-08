@@ -6,9 +6,7 @@ class VotesController < ApplicationController
     vote.ip = request.remote_ip
     vote.voteable_id = params[:voteable_id]
     vote.voteable_type = params[:voteable_type]
-    debugger
     if !current_user.blank? && check_voted(current_user, params)
-      debugger
       vote.user_id = current_user.id
       if vote.save!
         current_user.vote_score(current_user, params[:voteable_type], params[:voteable_id])
