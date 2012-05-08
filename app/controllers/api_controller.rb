@@ -15,7 +15,7 @@ class ApiController < ApplicationController
       user.role_id = 1
       user.des_status = 1
     when "designer0"
-      user.role_id = 0
+      user.role_id = 1
       user.des_status = 0
     when "company"
       user.role_id = 2
