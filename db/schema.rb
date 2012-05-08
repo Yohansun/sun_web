@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(:version => 20120507100159) do
     t.string   "master_field"
     t.text     "position"
     t.text     "interview_content"
+    t.text     "message"
     t.string   "title"
     t.text     "intro"
     t.integer  "subject_id"
@@ -400,7 +401,6 @@ ActiveRecord::Schema.define(:version => 20120507100159) do
     t.datetime "preview_img_in_updated_at"
     t.string   "master_kind"
     t.string   "interview_content_type"
-    t.text     "message"
   end
 
   create_table "master_videos", :force => true do |t|

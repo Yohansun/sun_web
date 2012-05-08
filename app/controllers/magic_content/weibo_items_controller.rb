@@ -2,6 +2,12 @@
 module MagicContent
   class WeiboItemsController < BaseController
 
+    load_and_authorize_resource
+    def index
+      @weibo_items = WeiboItem.where("thumbnail_pic IS NOT NULL").order("created_time DESC")
+      index!
+    end
+
     def update
       @item = WeiboItem.find(params[:id])
       if @item.status.nil?
