@@ -1,1 +1,5 @@
-alert("请先登录后才可投票!不要太贪心哦!");
+<% unless current_user  %>
+	alert("请先登录后才可投票!");
+<% else %>
+	alert("不要太贪心哦!");
+<% end %>
