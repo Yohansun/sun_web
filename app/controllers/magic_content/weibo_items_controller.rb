@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 module MagicContent
   class WeiboItemsController < BaseController
-
+    load_and_authorize_resource
     def update
       @item = WeiboItem.find(params[:id])
       if @item.status.nil?
