@@ -9,7 +9,20 @@ class ApiController < ApplicationController
     user.email = params[:email]
     user.is_read = true
     user.is_from_minisite = true
-    user.role_id = Role.find_by_role(params[:role]).id
+    #user.role_id = Role.find_by_role(params[:role]).id
+    case params[:role]
+    when "designer1"
+      user.role_id = 1
+      user.des_status = 1
+    when "designer0"
+      user.role_id = 1
+      user.des_status = 0
+    when "company"
+      user.role_id = 2
+    when "user"
+      user.role_id = 3
+    end
+      
     if user.save
       render :text => '<results suc="true" msg=""/>'
     else

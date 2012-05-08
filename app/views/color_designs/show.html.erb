@@ -5,6 +5,7 @@
             right: 87px;
         }
     </style>
+    <%= stylesheet_link_tag 'style' %>
 <% end -%>
 <% content_for :tail do -%>
     <%= javascript_include_tag 'galleryB.js','reply' %>
@@ -37,7 +38,7 @@
         <div class="operate pr">
           <span class="forward">转发 (0)</span>
           <span class="review">评论 (<%= @design.comments.length %>)</span>
-          <div class="popup_zf group none" style="bottom:-35px; left:25px;"><span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></div>
+          <%= forward_links("分享一套优秀家装作品----#{@design.design_name}", "http://www.icolor.com.cn", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
         </div>
       </div>
       <div class="fullscreen_btn">
