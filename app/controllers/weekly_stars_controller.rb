@@ -2,7 +2,7 @@
 class WeeklyStarsController < ApplicationController
 
   def index
-    @design = WeeklyStar.last || WeeklyStar.new
+    @design = WeeklyStar.order("published_at desc").first || WeeklyStar.new
     @elder_designs = WeeklyStar.order("published_at desc").offset(1).page(params[:page]).per(8).padding(1)
   end
 
