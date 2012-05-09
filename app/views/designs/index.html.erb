@@ -53,7 +53,9 @@
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
-      <%= link_to "我要上传", new_user_design_path(current_user) %>
+      <% unless current_user.common_user? %>
+        <%= link_to "我要上传", new_user_design_path(current_user) %>
+      <% end -%>
     <% else -%>
       <%= link_to_function "我要上传", "show_login()" %>
     <% end -%>
