@@ -5,10 +5,11 @@ class HomeController < ApplicationController
     @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18).all
 
     #每周之星
-    @weekly_star = WeeklyStar.last
+    @weekly_star = WeeklyStar.order("published_at desc").last
 
     #家装资讯
     @home_infos = Subject.content("articles").limit(3)
+
     #大师访谈
     @master_interview = MasterProfile.first
 
