@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:nioteam/magic_content.git
-  revision: dd82c28909d6fd303e48149f54c1861b682a425b
+  revision: 83f68d5e13f399c9d4ac1a8d20b37462b60c6fe6
   specs:
     magic_content (0.0.1)
       acts-as-taggable-on
@@ -101,7 +101,7 @@ GEM
     fastercsv (1.5.4)
     has_scope (0.5.1)
     hashie (1.2.0)
-    highline (1.6.11)
+    highline (1.6.12)
     hike (1.2.1)
     hirb (0.6.2)
     httpauth (0.1)
