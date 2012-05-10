@@ -2,7 +2,7 @@
 module MagicContent
   class MixColorsController < BaseController
     def index
-
+      @mix_colors = MixColor.order('updated_at DESC').all
     end
 
     def edit

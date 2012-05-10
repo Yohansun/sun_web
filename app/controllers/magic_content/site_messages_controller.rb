@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 module MagicContent
   class SiteMessagesController < BaseController
+    def index 
+       @site_messages = SiteMessage.order('updated_at DESC').all
+    end
+
     def update
       sys_msg = SysMsg.create(:content => params[:sys_msg]['content'], :reply_type => "site_message",
         :status => SysMsg::Status[0], :reply_name => "iColor客服",
