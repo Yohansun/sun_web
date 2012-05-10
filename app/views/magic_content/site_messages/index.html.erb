@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <%- collection.find_each do |c| %>
+        <%- @site_messages.each do |c| %>
           <tr class="gradeA">
             <td><%= c.id %></td>
             <td><%= c.title %></td>

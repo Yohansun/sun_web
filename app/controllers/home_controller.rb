@@ -34,6 +34,13 @@ class HomeController < ApplicationController
   end
 
   def search
-    @results = Post.where("title like ?", "%" + params[:search_word] + "%").page params[:page]
+    case params[:qt]
+    when "0", "1"
+      @results = Post.where("title like ?", "%#{params[:search_word]}%").page params[:page]
+    when "2"
+      @results = Design.where("title like ?", "%#{params[:search_word]}%").page params[:page]
+    when "3"
+      @results = User.where("username like ? or name like ?", "%#{params[:search_word]}%", "%#{params[:search_word]}%").where("role_id = 1 or role_id = 2").page params[:page]
+    end
   end
 end

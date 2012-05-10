@@ -211,7 +211,7 @@
         <div class="box_content boxB shadow" style="padding:15px 20px">
           <div class="box_title"><h3>大师热点话题</h3></div>
           <div class="boxb_content" style="width:600px;height:236px;overflow:hidden;  ">
-            <%= image_tag @hot_topic.preview_img.url %>
+            <%= image_tag @hot_topic.preview_img.url(:icolor_master_topic) %>
             <div class="boxb_text">
               <h3><%= @hot_topic.title %></h3>
               <p>
