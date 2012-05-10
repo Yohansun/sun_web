@@ -5,7 +5,6 @@ class SiteMessage < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :as => :commentable
 
-  default_scope :order => "created_at DESC"
   after_create :deliver
 
   def comments_count
