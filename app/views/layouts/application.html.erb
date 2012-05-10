@@ -59,8 +59,16 @@
       <iframe style="float:left;display:inline;margin:11px;" width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=2032078483&style=1&btn=red&dpc=1"></iframe>
       <div class="search fl">
         <%= form_tag("/search", :method => "get") do %>
-          <input type="text" class="fl" value="Search" name="search_word"/>
+        <div class="fl">
+          <input type="text" class="fl" value="<%= params["search_word"] || 'Search' %>" name="search_word"/>
           <input type="image" src="<%= asset_path("search-icon.jpg") %>"/>
+        </div>
+        <select class="fr ft12" name="qt">
+          <option value="0">选择分类</option>
+          <option value="1">文章</option>
+          <option value="2">作品</option>
+          <option value="3">设计师/家装公司</option>
+        </select>
         <%- end %>
       </div>
       <!--search ends-->
