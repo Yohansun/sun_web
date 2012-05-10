@@ -36,7 +36,7 @@
 <%- else %>
 <div class="weekstart_titleA">
   <div class="subtitle clear">
-    <%- unless @design == WeeklyStar.first %>
+    <%- unless @design == WeeklyStar.order("published_at desc").last %>
       <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
     <%- end %>
       <span class="fl"><%= @design.try(:published_at).try(:to_date) %>往期作品</span>
