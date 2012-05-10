@@ -22,9 +22,9 @@ task :export_user_contact_information => :environment  do
 				name = u.username.blank? ? u.name : u.username	
 				id = u.id	
 
-				if u.phone =~ /^13[3..9]|^147|^15[0,1,2,3,7,8,9]|^18[0,2,3,7,8,9]/
+				if u.phone =~ /^13[3,4,5,6,7,8,9]|^147|^15[0,1,2,3,7,8,9]|^18[0,2,3,7,8,9]/
 					phone1 = u.phone
-				elsif u.phone =~ /^13[0..2]|^15[5,6]|^186/
+				elsif u.phone =~ /^13[0,1,2]|^15[5,6]|^186/
 					phone2 = u.phone
 				end	
 				csv << [id,name,phone1,phone2]		

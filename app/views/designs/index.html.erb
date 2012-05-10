@@ -42,6 +42,10 @@
        <%= select_tag "style", options_for_select(design_style_option, params[:style]), class: "arrow_filter li_current",
                 :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
     </li>
+    <li>
+       <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), class: "arrow_filter li_current",
+                :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
+    </li>
     <!-- <li> -->
       <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
     <!-- </li> -->

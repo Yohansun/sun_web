@@ -82,10 +82,28 @@
             <th>设计师：</th>
             <td><%= @design.user.display_name %><a href="<%= user_path(@design.user) %>">[进入个人主页]</a></td>
           </tr>
+          <%- unless @design.try(:style) == "风格" %>
           <tr>
             <th>设计风格：</th>
             <td><%= @design.try(:style) %></td>
           </tr>
+          <%- end %>
+          <%- unless @design.try(:design_color) == "色系" %>
+          <tr>
+            <th>色系：</th>
+            <td><%= @design.try(:design_color) %></td>
+          </tr>
+          <%- end %>
+          <%- unless @design.try(:recommend_color_category1).blank?  %>
+          <tr>
+            <th>推荐色：</th>
+            <td>
+              <%- color = search_color_code(@design.recommend_color_category1) %>
+              <%= color.code.match(/^[F,W]M/) ? "立邦木器漆" : "立邦" %>
+              (<%= color.code %>)<%= color.name %>
+            </td>
+          </tr>
+          <%- end %>
           <%- unless @design.area_id.blank? %>
           <tr>
             <th>作品所在城市：</th>
