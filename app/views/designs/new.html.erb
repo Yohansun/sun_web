@@ -1,8 +1,13 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'reg' %>
+  <style type="text/css">
+    .recommend_color_category1 input{width: 90px !important;margin-right: 15px;}
+    .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+  </style>
 <% end -%>
 <% content_for :tail do -%>
 <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+<%= javascript_include_tag "jquery.autocomplete.js" %>
 <script type="text/javascript">
 $(function(){
   var options = {
@@ -59,6 +64,11 @@ function add_tag(text){
 }
 /*reg2*/
 </script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $(".recommend_color_category1 input").autocomplete("<%= user_designs_autocomplete_recommend_color_path(current_user)%>");
+    });
+</script>
 <% end -%>
 
 <%= form_for([current_user, @design]) do |f| %>
@@ -85,16 +95,18 @@ function add_tag(text){
         <div class="reg_list reg_width fl">
           <%= f.label :style, "风格：" %>
           <div class="fl">
-            <%= f.select :style, design_style_option,
-              class: "fl" %>
+            <%= f.select :style, design_style_option, class: "fl" %>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <%= f.label :room_type, "户型：" %>
+          <%= f.label :design_color, "色系：" %>
           <div class="fl">
-            <%= f.select :room_type, design_room_type_option,
-              class: "fl" %>
+            <%= f.select :design_color, color_design_color_option, class: "fl" %>
           </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl recommend_color_category1">
+          <%= f.label :recommend_color_category1, "推荐作品色号：" %>
+          <%= f.text_field :recommend_color_category1, class: "add_tag fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <label for="city">作品建筑所属城市：</label>

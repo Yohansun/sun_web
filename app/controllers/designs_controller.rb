@@ -18,7 +18,9 @@ class DesignsController < ApplicationController
         @designs = @designs.order("created_at desc")
       end
       style = "%#{params[:style]}%"
+      design_color = "%#{params[:design_color]}%"
       @designs = @designs.where("style like ?", style) if params[:style] && !params[:style].blank? && params[:style] !='风格'
+      @designs = @designs.where("design_color like ?", design_color) if params[:design_color] && !params[:design_color].blank? && params[:design_color] !='色系'
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       @designs = @designs.where(:area_id => params[:area_id]) if params[:area_id] && !params[:area_id].blank?
     end
@@ -75,6 +77,12 @@ class DesignsController < ApplicationController
       redirect_to :action => 'index' and return
     end
     render :template => "users/design_update"
+  end
+
+  def autocomplete_recommend_color
+    colors = ColorCode.select(:code).where("code LIKE ?", "%#{params[:q]}%").all.map {
+        |e| e.code }
+    render :text => colors.join("\n")
   end
 
   private

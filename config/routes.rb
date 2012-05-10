@@ -114,6 +114,7 @@ Icolor::Application.routes.draw do
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
+    match '/designs/autocomplete_recommend_color' => 'designs#autocomplete_recommend_color'
     #用户对内和对外的相关页面
     resources :events
     resources :faqs
