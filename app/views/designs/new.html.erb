@@ -1,14 +1,33 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'reg' %>
+  <%= stylesheet_link_tag 'reg','dd' %>
   <style type="text/css">
     .recommend_color_category1 input{width: 90px !important;margin-right: 15px;}
     .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+    #color_select{}
+    .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
+    .dd .ddChild a.nobg,
+    .dd .ddChild a.nobg:visited { background-image:none; padding-left:10px; }    
+    .work_number .dd{ margin-right:15px;}
+    #design_style, #design_design_color{width:108px;}
+    #design_recommend_color_category1, #province, #city{background:white;border:1px solid #ccc;width:108px}
   </style>
 <% end -%>
 <% content_for :tail do -%>
 <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
-<%= javascript_include_tag "jquery.autocomplete.js" %>
+<%= javascript_include_tag "jquery.autocomplete.js", "uncompressed.jquery.dd.js" %>
 <script type="text/javascript">
+$(function(){
+  try {
+          //$("body select").msDropDown();
+          oHandler = $("#design_design_color, #design_style").msDropDown({
+            useSprite : 'sprite'
+          }).data("dd");
+          $("#ver").html($.msDropDown.version);
+        } catch(e) {
+          alert("Error: " + e.message);
+        }
+});
+
 $(function(){
   var options = {
     data  : data
@@ -75,7 +94,7 @@ function add_tag(text){
 <%= hidden_field_tag "user_id", current_user.id %>
 <div class="main syslist uploads">
   <div class="shadow">
-    <div class="section pr">
+    <div class="section">
       <div class="sys_bar clear ft12">
         <span class="fl ft18">上传作品</span>
       </div><!--sys_bar ends-->
@@ -93,15 +112,15 @@ function add_tag(text){
           <%= f.text_area :reason, class: "works_details fb ft14 fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <%= f.label :style, "风格：" %>
+          <%= f.label :style, "风格："  %>
           <div class="fl">
-            <%= f.select :style, design_style_option, class: "fl" %>
+            <%= f.select :style, design_style_option, class: "f111l", html: { class: "111"} %>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <%= f.label :design_color, "色系：" %>
           <div class="fl">
-            <%= f.select :design_color, color_design_color_option, class: "fl" %>
+            <%= f.select :design_color, color_design_color_option %>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl recommend_color_category1">
@@ -111,8 +130,8 @@ function add_tag(text){
         <div class="reg_list reg_width fl">
           <label for="city">作品建筑所属城市：</label>
           <div class="fl">
-            <select id="province" class="level_1 fl"></select>
-            <select id="city" class="level_2 fl" name = design[area_id]></select>
+            <select id="province" class="level_1 fl" ></select>
+            <select id="city" class="level_2 fl" name="design[area_id]"></select>
           </div>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
