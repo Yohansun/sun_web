@@ -1,11 +1,16 @@
 # -*- encoding : utf-8 -*-
 class ChannelController < ApplicationController
-  helper_method :show_search_result?
 
   #片区快查
   def access
-    #TODO 推荐作品上传完成后回来做根据色号排序
-    @design_users = User.order("recommend_designer_status desc").order("designs_count desc")
+    #排序规则：先每周之星，次作品有色号，后上传作品数
+    user_url = WeeklyStar.order("published_at desc").first.author_url
+    s = user_url.match(%r(http://www.icolor.com.cn/users/(\d{1,4})?)).to_a[1]
+    cons = []
+    cons << "id = (#{s}) desc" unless s.blank?
+    cons << "recommend_designer_status desc"
+    cons << "designs_count desc"
+    @design_users = User.order(cons.join(","))
 
     unless params[:keywords] == "请输入关键字"
       @design_users = @design_users.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
