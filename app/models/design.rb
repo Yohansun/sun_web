@@ -15,6 +15,15 @@ class Design < ActiveRecord::Base
 
   paginates_per 8
 
+  after_create :update_user_design_code_count
+
+  #更新用户上传作品数色号（权重）。片区快查用
+  def update_user_design_code_count
+    unless self.recommend_color_category1.blank?
+      self.user.increment!(:recommend_designer_status)
+    end
+  end
+
   def cover_img
     self.design_images.order("is_cover DESC").first
   end

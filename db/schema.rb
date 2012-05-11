@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507100159) do
+ActiveRecord::Schema.define(:version => 20120510035849) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -195,17 +195,19 @@ ActiveRecord::Schema.define(:version => 20120507100159) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "votes_count",  :default => 0
-    t.integer  "shares_count", :default => 0
+    t.integer  "votes_count",               :default => 0
+    t.integer  "shares_count",              :default => 0
     t.string   "style"
     t.string   "room_type"
     t.string   "city"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "area_id"
     t.text     "reason"
-    t.integer  "view_count",   :default => 0
+    t.integer  "view_count",                :default => 0
     t.boolean  "recommended"
+    t.string   "design_color"
+    t.string   "recommend_color_category1"
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
@@ -384,7 +386,6 @@ ActiveRecord::Schema.define(:version => 20120507100159) do
     t.string   "master_field"
     t.text     "position"
     t.text     "interview_content"
-    t.text     "message"
     t.string   "title"
     t.text     "intro"
     t.integer  "subject_id"
@@ -401,6 +402,7 @@ ActiveRecord::Schema.define(:version => 20120507100159) do
     t.datetime "preview_img_in_updated_at"
     t.string   "master_kind"
     t.string   "interview_content_type"
+    t.text     "message"
   end
 
   create_table "master_videos", :force => true do |t|
