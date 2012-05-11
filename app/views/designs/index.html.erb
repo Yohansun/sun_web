@@ -1,8 +1,20 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "style", "dd" %>
+    <style type="text/css">
+    .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+    #color_select{}
+    .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
+    .dd .ddChild a.nobg,
+    .dd .ddChild a.nobg:visited {background:none;padding-left:10px; }    
+    #style_child a{background:none!important;padding-left:10px;}
+    .work_number .dd{ margin-right:15px;}
+    #design_style, #design_design_color{width:108px;}
+    #province, #city{background:white;border:1px solid #ccc;width:108px;height:23px;}
+  </style>
 <%- end %>
 <%- content_for :tail do %>
     <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+    <%= javascript_include_tag "uncompressed.jquery.dd.js" %>
     <script type="text/javascript">
     $(function() {
       var options = {
@@ -17,8 +29,25 @@
         sel.bind('.level_1', null, '请选择省会');
         sel.bind('.level_2', null, '请选择市');
       <%- end -%>
-
     });
+    $(function(){
+      try {
+          //$("body select").msDropDown();
+          oHandler = $("#order,#style,#design_color").msDropDown({
+            useSprite : 'sprite'
+          }).data("dd");
+          $("#ver").html($.msDropDown.version);
+        } catch(e) {
+          alert("Error: " + e.message);
+        }
+      });
+
+    $(function(){
+      $('.sprite, .level_2').click(function(){
+           $('#filter_form').submit()
+        })
+    });
+
     </script>
 <%- end %>
 <div class="main">
@@ -35,23 +64,20 @@
   <ul class="design_filter group">
     <form method="get" id="filter_form">
       <li>
-        <%= select_tag "order", options_for_select(design_order_option, params[:order]), class: "arrow_filter li_current",
-                :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
+        <%= select_tag "order", options_for_select(design_order_option, params[:order]) %>
       <li>
     <li>
-       <%= select_tag "style", options_for_select(design_style_option, params[:style]), class: "arrow_filter li_current",
-                :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
+       <%= select_tag "style", options_for_select(design_style_option, params[:style]) %>
     </li>
     <li>
-       <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), class: "arrow_filter li_current",
-                :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
+       <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]) %>
     </li>
     <!-- <li> -->
       <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
     <!-- </li> -->
     <li>
       <select id="province" class="level_1 arrow_filter"></select>
-      <select id="city" class="level_2 arrow_filter" name="area_id" onchange="$('#filter_form').submit()"></select>
+      <select id="city" class="level_2 arrow_filter" name="area_id"></select>
     </li>
     </form>
   </ul>
