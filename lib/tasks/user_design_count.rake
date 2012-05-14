@@ -11,12 +11,14 @@ task :user_design_count => :environment  do
 			str
 		end
 	end 
-
-	start_time = Time.local(2012, 04, 30)
-	end_time 	 = Time.local(2012, 05, 06, 23, 59, 59)
-	#users = User.where("created_at" => start_time..end_time)
+	puts ENV["start"]
+	puts ENV["end"]
+	# start_time = Time.local(2012, 04, 30)
+	# end_time 	 = Time.local(2012, 05, 06, 23, 59, 59)
+	start_time = ENV["start"]
+	end_time = ENV["end"]
 	ds = Design.where("created_at" => start_time..end_time)
-	csv_string = CSV.open("#{Rails.root}/lib/data/export_data/user_design_count_#{start_time.strftime("%Y-%m-%d")}_#{end_time.strftime("%Y-%m-%d")}.csv", "wb") do |csv|
+	csv_string = CSV.open("#{Rails.root}/lib/data/export_data/user_design_count_#{start_time}_#{end_time}.csv", "wb") do |csv|
 		csv
 		csv << [convert('用户名'), convert('用户性质'), convert('用户作品url'), convert('用户主页url'), convert("省"), convert("市"), convert("区")]
 		ds.each do |design|
