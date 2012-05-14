@@ -14,7 +14,6 @@ Icolor::Application.configure do
   config.action_controller.perform_caching   = false
 
   # Don't care if the mailer can't send
-
   config.action_mailer.delivery_method       = :smtp
   config.action_mailer.perform_deliveries    = true
   config.action_mailer.raise_delivery_errors = true
@@ -25,8 +24,8 @@ Icolor::Application.configure do
       :address              => "smtp.gmail.com",
       :port                 => 587,
       :domain               => 'baci.lindsaar.net',
-      :user_name            => '<username>',
-      :password             => '<password>',
+      :user_name            => 'changhong@networking.io',
+      :password             => 'YCH198875',
       :authentication       => 'plain',
       :enable_starttls_auto => true }
 
