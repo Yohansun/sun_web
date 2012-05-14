@@ -22,5 +22,45 @@ class Notifier < ActionMailer::Base
          :subject => "#{user.display_name}发来的在线咨询",
          :reply_to => 'icolor@nipponpaint.com.cn'
          )
-  end 	
+  end
+
+  def this_week(email)
+    #email = user.email
+    mail(:to => email,
+         :subject => "Icolor本周之星",
+         :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
+
+  def rebuild(user)
+    email = user.email
+    @name = user.username
+    if email && email != ''
+      mail(:to => email,
+           :subject => "iColor网站全新改版",
+           :reply_to => 'icolor@nipponpaint.com.cn'
+          )
+    end
+  end
+
+  def week(email)
+    mail(:to => email,
+         :subject => "iColor网站全新改版",
+         :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
+
+  def email(email)
+    mail(:to => email,
+         :subject => "iColor网站全新改版",
+         :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
+
+  def notice(email)
+    mail(:to => email,
+         :subject => "iColor网站全新改版",
+         :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
 end
