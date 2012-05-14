@@ -88,7 +88,7 @@
             <td><%= @design.try(:style) %></td>
           </tr>
           <%- end %>
-          <%- unless @design.try(:design_color) == "色系" %>
+          <%- if @design.try(:design_color) != "色系" && !@design.design_color.blank? %>
           <tr>
             <th>色系：</th>
             <td><%= @design.try(:design_color) %></td>
