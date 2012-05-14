@@ -33,6 +33,10 @@ zh-CN:
               blank: "您还没有接受会员注册协议！"
             qq:
               invalid: "您输入的QQ号码格式错误，请重新输入！"
+            area_id:
+              blank: "所在地不能为空！"
+            role_id:
+              blank: "身份不能为空！"
     sys_msg:
       reply_content: "亲爱的%{user_of_comment}用户您好！您在“%{reply_module}”的评论收到了新的回复，请注意查看！"
   devise:
@@ -89,6 +93,8 @@ zh-CN:
         signed_up_but_unconfirmed: '带有确认链接的信息已经发送到你的邮箱。请打开此链接来激活你的帐号'
         signed_up_but_inactive: '虽然您已经注册成功，但因为你的帐号还未激活，所以你暂时无法登录'
         signed_up_but_locked: '虽然您已经注册成功，但因为你的帐号已被锁定，所以你暂时无法登录'
+        role_id_blank: '身份不能为空！'
+        area_id_blank: '所在地不能为空！'
     unlocks:
       send_instructions: '几分钟后，您将收到一封解锁帐号的邮件.'
       unlocked: '您的帐号已成功解锁，您现在已登录.'

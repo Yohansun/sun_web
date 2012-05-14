@@ -8,11 +8,11 @@ class Users::RegisterController < Devise::RegistrationsController
     if params[:user][:user_role] =~ /designer/
       params[:user][:role_id] = Role.find_by_role("designer").id
       params[:user][:des_status] = params[:user][:user_role] == "designer_1"
-    else
-      if params[:user][:user_role].blank?
-        params[:user][:user_role] = 'user'
-      end
-      params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id
+    # else
+    #   if params[:user][:user_role].blank?
+    #     params[:user][:user_role] = 'user'
+    #   end
+    #   params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id
     end
 
     build_resource
