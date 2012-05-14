@@ -77,7 +77,7 @@
                   <p class="p2 group">
                     <span class="gzh ft12">0</span><span class="zf ft12">转发 (<%=design.shares_count %>)</span><span class="pl ft12">评论 (<%=design.comments.length %>)</span>
                   </p>
-                  <%= forward_links("分享一套优秀家装作品----#{design.design_name}，更多实用装修案例，尽在---立邦iColor网 http://#{request.host_with_port}/color_designs/#{design.id}", "http://#{request.host_with_port}/color_designs/#{design.id}", design.main_preview_img.url, design.id.to_s, "Design") %>
+                  <%= forward_links("#iColor#分享一套优秀家装作品----#{design.design_name}，更多实用装修案例，尽在iColor http://#{request.host_with_port}/color_designs/#{design.id}", "http://#{request.host_with_port}/color_designs/#{design.id}", design.main_preview_img.url, design.id.to_s, "Design") %>
                 </li>
             <% end -%>
           </ul>
