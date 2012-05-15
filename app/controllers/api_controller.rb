@@ -20,7 +20,7 @@ class ApiController < ApplicationController
       user.role_id = 1
       user.des_status = 0
     when "company"
-      user.role_id = 2
+      user.role_id = 2 
     when "user"
       user.role_id = 3
     end
@@ -32,7 +32,7 @@ class ApiController < ApplicationController
       valid_result = user.errors.messages
       if valid_result.size > 0
         valid_result.each do |_, value|
-          messages << value[0] + ','
+          messages << value[0]
         end
       end
       render :text => "<results suc='false' msg='#{messages}'/>"
