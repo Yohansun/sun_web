@@ -7,11 +7,11 @@ class ChannelController < ApplicationController
     user_url = WeeklyStar.order("published_at desc").select("author_url")
     ws = []
     user_url.each do |ul|
-      s = ul.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,4})?)).to_a[1]
+      s = ul.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,5})?)).to_a[1]
       ws << s unless s.blank?
     end
     cons = []
-    week_now = user_url.first.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,4})?)).to_a[1]
+    week_now = user_url.first.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,5})?)).to_a[1]
     cons << "id = (#{week_now}) desc"
     cons << "id in (#{ws.join(",")}) desc"
     cons << "recommend_designer_status desc"

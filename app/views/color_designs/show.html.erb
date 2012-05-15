@@ -37,7 +37,7 @@
           <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
         </div>
         <div class="operate pr">
-          <span class="forward">转发 (0)</span>
+          <span class="forward">转发 (<%= @design.shares_count %>)</span>
           <span class="review">评论 (<%= @design.comments.length %>)</span>
           <%= forward_links("分享一套优秀家装作品----#{@design.design_name}", "http://www.icolor.com.cn", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
         </div>
@@ -111,7 +111,7 @@
       <div class="review_wrap">
         <div class="reviewform">
           <div class="bar">
-            <h4><span>评论</span>(<%= @design.comments.length %>)</h4>
+            <h4><span id="review_focus">评论</span>(<%= @design.comments.length %>)</h4>
             <span class="r"><span class="words_tip">0</span>/140</span>
           </div>
           <div class="form-content">
