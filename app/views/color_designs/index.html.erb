@@ -75,7 +75,8 @@
                   <h3><%= design.design_name %></h3>
 
                   <p class="p2 group">
-                    <a href="/color_designs/<%= design.id %>"><span class="gzh ft12"><%= design.votes_count %></span></a><span class="zf ft12">转发 (<%=design.shares_count %>)</span><span class="pl ft12"><a href="/color_designs/<%= design.id %>#review_focus">评论</a> (<%=design.comments.length %>)</span>
+                    <a href="/color_designs/<%= design.id %>"><span class="gzh ft12"><%= design.votes_count %></span></a><span class="zf ft12">转发 (<%=design.shares_count %>)</span>
+                    <a href="/color_designs/<%= design.id %>#review_focus"><span class="pl ft12">评论 (<%=design.comments.length %>)</span></a>
                   </p>
                   <%= forward_links("#iColor#分享一套优秀家装作品----#{design.design_name}，更多实用装修案例，尽在iColor http://#{request.host_with_port}/color_designs/#{design.id}", "http://#{request.host_with_port}/color_designs/#{design.id}", design.main_preview_img.url, design.id.to_s, "Design") %>
                 </li>
