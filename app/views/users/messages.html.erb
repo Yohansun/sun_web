@@ -37,7 +37,7 @@
                 <% end -%>
             <%- end %>
             <h2 class="visitor_info">
-              <strong class="fl"><%= m.from_user.display_name %></strong>
+              <strong class="fl"><a href="/users/<%= m.from_user.id %>"><%= m.from_user.display_name %></a></strong>
               <span class="fl"><%= m.created_at.to_s(:db)[5..6] %>月<%= m.created_at.to_s(:db)[8..9] %>日&nbsp;&nbsp;<%= m.created_at.to_s(:time) %></span>
             </h2>
             <div class="msgboard_btn">
@@ -77,7 +77,7 @@
                     <%- m.reply_msgs.order("created_at DESC").each do |r| %>
                         <div class="clear  <%= "reply_line" if r != m.reply_msgs.first %> ">
                           <p class="reply_tabs fl">
-                            <%= r.user.display_name %>回复:<%= r.content %>
+                            <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
                           </p>
                           <p class="fr">
                             <%= r.created_at.to_date %>
