@@ -4,14 +4,19 @@ class ChannelController < ApplicationController
   #片区快查
   def access
     #排序规则：先每周之星，次作品有色号，后上传作品数
-    user_url = WeeklyStar.order("published_at desc").first.author_url
-    s = user_url.match(%r(http://www.icolor.com.cn/users/(\d{1,4})?)).to_a[1]
+    user_url = WeeklyStar.order("published_at desc").select("author_url")
+    ws = []
+    user_url.each do |ul|
+      s = ul.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,4})?)).to_a[1]
+      ws << s unless s.blank?
+    end
     cons = []
-    cons << "id = (#{s}) desc" unless s.blank?
+    week_now = user_url.first.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,4})?)).to_a[1]
+    cons << "id = (#{week_now}) desc"
+    cons << "id in (#{ws.join(",")}) desc"
     cons << "recommend_designer_status desc"
     cons << "designs_count desc"
     @design_users = User.order(cons.join(","))
-
     unless params[:keywords] == "请输入关键字"
       @design_users = @design_users.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
     end
