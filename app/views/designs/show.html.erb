@@ -34,7 +34,7 @@
         <div class="operate pr">
           <span class="forward">转发 (<%= @design.shares_count %>)</span>
           <span class="review">评论 (<%= @design.comments_count %>)</span>
-            <%= forward_links("#iColor#分享一套优秀家装作品----#{@design.title}，更多实用装修案例，尽在iColor #{user_design_url(@design.user_id, @design)}", user_design_url(@design.user_id, @design), @design.cover_img.file.url(:slide), @design.id.to_s, "Design") %>
+            <%= forward_links("#iColor分享#分享一套优秀家装作品----【#{@design.title}】，更多实用装修案例，尽在iColor，", user_design_url(@design.user_id, @design), @design.cover_img.file.url(:slide), @design.id.to_s, "Design") %>
         </div>
       </div>
       <div class="fullscreen_btn">

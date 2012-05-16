@@ -59,10 +59,11 @@ module ApplicationHelper
   end
 
   def forward_links(title, url = '', pic = '', id, type)
+    uri_title = URI.encode(title)
     unless pic.nil?
-      raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" class="popup_zf group none" style="background:white;"><span style="background:white;padding:0; margin:0; line-height:14px;">一键转发：</span><a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a><a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a><a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a><a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a></span>'
+      raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" class="popup_zf group none" style="background:white;"><span style="background:white;padding:0; margin:0; line-height:14px;">一键转发：</span><a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a><a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a><a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a><a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a></span>'
     else
-      raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+title+'" data-url="'+url+'" class="popup_zf group none" style="background:white;"><span style="background:white; padding:0; margin:0; line-height:14px;">一键转发：</span><a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a><a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a><a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a><a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a></span>'
+      raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" class="popup_zf group none" style="background:white;"><span style="background:white; padding:0; margin:0; line-height:14px;">一键转发：</span><a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a><a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a><a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a><a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a></span>'
     end
   end
 
