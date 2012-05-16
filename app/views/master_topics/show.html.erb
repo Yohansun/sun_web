@@ -45,8 +45,17 @@
         <div class="topic_box">
           <div class="topic_tit">
             <h2><%= @topic.title %></h2>
-
-            <h3>时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：0次</span></h3>
+            <h3 class="clear" style="padding:0 210px;">时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：0次</span>
+              <div id="ckepop" class="fr">
+                <span class="jiathis_txt">一键分享：</span>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_kaixin001"></a>
+                <a class="jiathis_button_renren"></a>
+                <a class="jiathis_button_qzone"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                <a class="jiathis_counter_style"></a>
+              </div>
+            </h3>
           </div>
           <!--topic_tit ends-->
           <div class="topic_con">
