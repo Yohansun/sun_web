@@ -28,8 +28,7 @@ Icolor::Application.routes.draw do
   #大师殿堂
   match "/master_interviews" => "master_interviews#index"
   match "/master_interviews/:id" => "master_interviews#show"
-  match "/master_topics" => "master_topics#index"
-  match "/master_topics/:id" => "master_topics#show"
+  resources :master_topics, :only => [:index, :show]
   match "/master_designs" => "master_designs#index"
   match "/master_designs/:id" => "master_designs#show"
   match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
@@ -51,8 +50,7 @@ Icolor::Application.routes.draw do
   match "/contact" => "contact#index"
 
   #设计鉴赏
-  match "/weekly_stars" => "weekly_stars#index"
-  match "/weekly_stars/:id" => "weekly_stars#show"
+  resources :weekly_stars, :only => [:index, :show]
   match "/weekly_stars/:id/fullscreen" => "weekly_stars#fullscreen"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"

@@ -4,13 +4,13 @@ class DesignsController < ApplicationController
   before_filter :find_design, :only => [:upload, :edit]
 
   def index
+    sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("created_at desc").page(params[:page]).joins(:design_images).group("imageable_id")
+      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("created_at desc").page(params[:page]).joins(:design_images).group("imageable_id")
       render :template => "users/designs"
     else
-      @designs = Design.page(params[:page]).per(9).joins(:design_images).group("imageable_id")
+      @designs = Design.order("designs.id in (#{sort_input}) desc").page(params[:page]).per(9).joins(:design_images).group("imageable_id")
     end
-
     unless @designs.nil?
       if params[:order] == "最热"
         @designs = @designs.order("votes_count desc")
@@ -24,6 +24,7 @@ class DesignsController < ApplicationController
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       @designs = @designs.where(:area_id => params[:area_id]) if params[:area_id] && !params[:area_id].blank?
     end
+
   end
 
   def fullscreen
