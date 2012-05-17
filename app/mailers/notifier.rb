@@ -25,41 +25,39 @@ class Notifier < ActionMailer::Base
   end
 
   def this_week(email)
-    #email = user.email
     mail(:to => email,
-         :subject => "Icolor本周之星",
+         :subject => "iColor本周设计之星出炉啦！",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end
 
   def rebuild(user)
-    email = user.email
-    @name = user.username
-    if email && email != ''
-      mail(:to => email,
-           :subject => "iColor网站全新改版",
-           :reply_to => 'icolor@nipponpaint.com.cn'
-          )
-    end
-  end
-
-  def week(email)
-    mail(:to => email,
-         :subject => "iColor网站全新改版",
+    @user = user
+    mail(:to => @user.email,
+         :subject => "iColor全新改版，最新精彩内容抢先看哦~",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end
 
-  def email(email)
-    mail(:to => email,
-         :subject => "iColor网站全新改版",
+  def week(user)
+    @user = user
+    mail(:to => @user.email,
+         :subject => "您有一周没来iColor了，快来看看吧~",
+         :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
+
+  def email(user)
+    @user = user
+    mail(:to => @user.email,
+         :subject => "iColor邀您登陆啦！",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end
 
   def notice(email)
     mail(:to => email,
-         :subject => "iColor网站全新改版",
+         :subject => "恭喜您！您的作品【普罗旺斯的浪漫】被评选为本周设计之星啦！",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end

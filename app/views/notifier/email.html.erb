@@ -49,12 +49,12 @@
 				<img src="http://www.icolor.com.cn/images/email_suc.jpg" />
 			</div>
 			<div class="email_content">
-				亲爱的<span>张小姐</span>，您好！
+				亲爱的<span><%= @user.display_name %></span>，您好！
 			</div>
 			<div class="email_content">
 				很高兴告知您，我们已经为您注册了icolor网站的个人帐号，请点击如下链接修改密码并完善您的账户信息：
 				<br />
-				<a href="http://www.icolor.com.cn/Customer/SetNewPassword.aspx?token=22a8eea21cd24748ad696bfcb28c7f3a"> http://www.icolor.com.cn/Customer/SetNewPassword.aspx?token=22a8eea21cd24748ad696bfcb28c7f3a </a>
+				<a href="http://www.icolor.com.cn/users/<%= @user.id %>/designs"> http://www.icolor.com.cn/users/<%= @user.id %>/designs </a>
 			</div>
 			<div class="email_content">
 				您现在就可立即浏览icolor网站任何您感兴趣的内容并上传您的得意之作，开启你的色彩之旅吧！
@@ -64,7 +64,7 @@
 				立邦icolor网站 http://www.icolor.com.cn
 			</div>
 			<p class="tr">
-				2010.03.27
+				2010.05.13
 			</p>
 			<div class="email_footer tc">
 				<a href='http://www.nipponpaint.com.cn/web/index.jsp'>立邦官网</a> | 
