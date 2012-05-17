@@ -1,0 +1,11 @@
+<div class="content">
+	<div class="title"><h5>回复</h5>
+		<div class="num">
+		</div>
+	</div>
+	<blockquote><%= raw resource.desc %><br><span>提问于：<%= resource.created_at.to_s(:db) %></span></blockquote>
+	<div class="widget first">
+		<div class="body"><%= @sys_msg.content %><br><span>回复于：<%= @sys_msg.created_at.to_s(:db) %></span></div>
+	</div>
+</div>
+</div>

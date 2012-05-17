@@ -175,4 +175,6 @@ Icolor::Application.routes.draw do
 
   #分享后积分添加
   post "scores/share_score" => "scores#share_score"
+
+  get "areas" => "areas#index"
 end

@@ -18,7 +18,7 @@
 		    imageWidth:26,
 		    marginTop:150,
 		    url:"<%= request.url%>",
-		    title:"#iColor分享#分享精彩家装资讯---【<%= @article.title %>】，更多咨询内容尽在iColor，@刷新生活iColor，",
+		    title:"#iColor分享#精彩家装资讯---【<%= @article.title %>】，更多咨询内容尽在iColor，@刷新生活iColor，",
         pic:"<%= (request.base_url + @article.preview_img.url(:icolor_articles)) unless @article.preview_img.nil? %>",
         data_track_clickback: true
 		}

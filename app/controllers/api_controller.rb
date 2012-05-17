@@ -10,8 +10,6 @@ class ApiController < ApplicationController
     user.is_read = true
     user.is_from_minisite = true
     #user.role_id = Role.find_by_role(params[:role]).id
-    ####TODO 等待接口完成，改回来
-    user.area_id = 0
     case params[:role]
     when "designer1"
       user.role_id = 1
