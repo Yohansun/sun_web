@@ -1,30 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
 html,body,div,p,h1,a{margin:0;padding:0;font-weight:normal;font-size:18px;font-family:Microsoft Yahei,Arial,Simsun;}
-.pr{position:relative;}
-.pa{position:absolute;}
-.rebuild1,.rebuild2,.rebuild3,.rebuild4{width:895px;margin:0 auto;}
-.rebuild1{background:url(http://www.icolor.com.cn/images/edm_rebuild1.jpg) no-repeat;height:192px;}
-.rebuild2{background:url(http://www.icolor.com.cn/images/edm_rebuild2.jpg) no-repeat;height:114px;padding:31px  52px;width:791px;}
-.rebuild2 p{border-bottom:1px dashed #000;padding:0.2em 0;}
-.rebuild3{background:url(http://www.icolor.com.cn/images/edm_rebuild3.jpg) no-repeat;height:213px;}
-.rebuild4{background:url(http://www.icolor.com.cn/images/edm_rebuild4.jpg) no-repeat;height:162px;}
-.rebuild{background:url(http://www.icolor.com.cn/images/edm_rebuild.gif) no-repeat;width:208px;height:56px;left:50%;margin-left:-104px;top:63px;}
-.rebuild2 h1{color:#ff3333;}
+table,tr,td{margin:0;border:none;}
 </style>
 </head>
 <body>
-<div class="rebuild1"></div>
-<div class="rebuild2">
-	<h1>Hi,<span><%= @name %></span>:</h1>
-  <p>iColor网站全新改版，海量资讯平台，同行互动比拼，快来体验吧！</p>
-</div>
-<div class="rebuild3"></div>
-<div class="rebuild4 pr">
-	<a href="http://www.icolor.com.cn" class="rebuild pa"></a>
-</div>
+<table cellspacing="0" cellpadding="0" style="height:743px;width:895px;margin:0 auto;">
+	<tr>
+		<td height="192" width="895" background="http://www.icolor.com.cn/images/edm_rebuild1.jpg"></td>
+	</tr>
+	<tr>
+		<td height="176" width="895" style="padding-left:134px;" background="http://www.icolor.com.cn/images/edm_rebuild2.jpg">
+			<font color="#f33" size="4"><p align="left">Hi,<%= @user.display_name %>:</p></font>
+			<font  size="4" color="#222"><p align="left">iColor网站全新改版，海量资讯平台，同行互动比拼，快来体验吧！</p></font>
+		</td>
+	</tr>
+	<tr>
+		<td height="213" width="895" background="http://www.icolor.com.cn/images/edm_rebuild3.jpg">
+			<a style="display:block;width:100%;height:100%;" href="http://www.icolor.com.cn/"></a>
+		</td>
+	</tr>
+	<tr>
+		<td height="136" width="895" style="padding-top:24px" background="http://www.icolor.com.cn/images/edm_rebuild4.jpg" align="center">
+			<a href="http://www.icolor.com.cn/" class="rebuild pa"><img src="http://www.icolor.com.cn/images/edm_rebuild.gif" border="0" /></a>
+		</td>
+	</tr>
+</table>
 </body>
 </html>
