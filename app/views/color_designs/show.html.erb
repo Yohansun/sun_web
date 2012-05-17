@@ -39,7 +39,7 @@
         <div class="operate pr">
           <span class="forward">转发 (<%= @design.shares_count %>)</span>
           <span class="review">评论 (<%= @design.comments.length %>)</span>
-          <%= forward_links("分享一套优秀家装作品----#{@design.design_name}", "http://www.icolor.com.cn", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
+          <%= forward_links("#iColor分享#一套优秀家装作品----【#{@design.design_name}】", "http://www.icolor.com.cn", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
         </div>
       </div>
       <div class="fullscreen_btn">

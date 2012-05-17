@@ -13,5 +13,10 @@ module MagicContent
       resource.save
       redirect_to main_app.site_messages_path
     end
+
+    def show
+      @site_message = SiteMessage.find(params[:id])
+      @sys_msg = SysMsg.find(@site_message.sys_msg_id)
+    end
   end
 end

@@ -19,7 +19,7 @@
 		    imageWidth:26,
 		    marginTop:150,
 		    url:"<%= request.url%>",
-		    title:"#iColor分享#分享一篇精彩家装热点话题--【<%= @topic.title %>】，更多家装资讯，尽在iColor，@刷新生活iColor，",
+		    title:"#iColor分享#一篇精彩家装热点话题--【<%= @topic.title %>】，更多家装资讯，尽在iColor，@刷新生活iColor，",
         pic:"<%= (request.base_url + @topic.preview_img.url(:icolor_master_topics)) unless @topic.preview_img.nil? %>",
         data_track_clickback: true
 		}
