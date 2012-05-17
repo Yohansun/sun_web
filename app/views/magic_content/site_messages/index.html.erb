@@ -24,6 +24,7 @@
             <td nowrap="nowrap" align="center">
               <%= "已回复" if c.sys_msg_id %>
               <%= link_to "回复", main_app.edit_site_message_path(c), class: 'button basicBtn' %>
+              <%= link_to "查看回复", main_app.site_message_path(c), class: 'button basicBtn' unless c.sys_msg_id.blank? %>
             </td>
           </tr>
         <%- end %>
