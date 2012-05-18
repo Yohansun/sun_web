@@ -1,192 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<style type="text/css">
-			/* =====  CSS reset  ===== */
-			html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-				margin: 0;
-				padding: 0;
-				border: 0;
-				outline: 0;
-				font-size: 100%;
-				vertical-align: baseline;
-				background: transparent;
-			}
-			ol, ul {
-				list-style: none;
-			}
-			blockquote, q {
-				quotes: none;
-			}
-			blockquote:before, blockquote:after, q:before, q:after {
-				content: '';
-				content: none;
-			}
-			/* remember to define focus styles! */
-			:focus {
-				outline: 0;
-			}
-			/* remember to highlight inserts somehow! padding: 9px 17px 9px 17px; */
-			ins {
-				text-decoration: none;
-			}
-			del {
-				text-decoration: line-through;
-			}
-			/* tables still need 'cellspacing="0"' in the markup */
-			table {
-				border-collapse: collapse;
-			}
-			*, * focus {
-				outline: none;
-				margin: 0;
-				padding: 0;
-			}
-			textarea {
-				overflow: auto;
-			}
-			textarea, input[type=text], input[type=password] {
-				font-family: Arial, Helvetica, sans-serif;
-				font-size: 11px;
-			}
-			button, input[type=submit] {
-				font-family: Arial, Helvetica, sans-serif;
-			}
-			img {
-				border: 0;
-			}
-			ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-			}
-			p {
-				margin: 0;
-				padding: 0;
-			}
-			:focus {
-				outline: 0;
-			}
-			a {
-				text-decoration: none;
-				color: #2b6893;
-			}
-			.normal {
-				font-style: normal;
-			}
-			.normalFont {
-				font-style: normal;
-				font-weight: normal;
-			}
-			.nomargin {
-				margin: 0 !important;
-			}
-			input::-moz-focus-inner/*Remove button padding in FF*/ {
-				border: 0;
-				padding: 0;
-			}
-			button::-moz-focus-inner {
-				padding: 0;
-				border: 0
-			}
-			a.button::-moz-focus-inner/*Remove button padding in FF*/ {
-				border: 0;
-				padding: 0;
-			}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一周未来提醒EDM</title>
+<style type="text/css">
+</style>
+</head>
+<body>
 
-			.edm_wrap {
-				width: 1000px;
-				height: 600px;
-				margin: 0 auto;
-				background: #fff url(http://www.icolor.com.cn/images/EDM_week.png) no-repeat top center;
-			}
-			.edm_wrap h1 {
-				padding: 13px 153px;
-			}
-			.edm_wrap h2 {
-				padding: 60px 286px 10px 286px;
-				font: 14px /20px "Microsoft Yahei";
-				color: #666666;
-			}
-			.edm_wrap h2 em {
-				font: 18px "Microsoft Yahei";
-				padding: 0 10px;
-			}
-			.edm_wrap h2 a {
-				font: 18px "Microsoft Yahei";
-				color: #ff0000;
-				text-decoration: underline;
-			}
-			.edm_wrap p {
-				padding: 0px 286px 0px 286px;
-				font: 14px /46px "Microsoft Yahei";
-				color: #000;
-			}
-			.edm_wrap p em, .edm_wrap p span {
-				color: #ff0000;
-				padding: 0 3px;
-				font-style: normal;
-			}
-			.edm_wrap p a {
-				color: #000;
-				text-decoration: underline;
-				padding: 0 5px;
-			}
-			.edm_wrap p.icolor_gw {
-				padding: 60px 0;
-				font: 24px "Microsoft Yahei";
-			}
-			.edm_wrap p.icolor_gw a {
-				color: #d42011;
-			}
-			.edm_wrap .copyright {
-				text-align: center;
-				margin-top: 35px;
-			}
-			.edm_wrap .copyright p, .edm_wrap .copyright a {
-				font: 12px /24px "Microsoft Yahei";
-				color: #666666;
-			}
-			.edm_wrap .copyright p {
-				padding-top: 10px;
-			}
-			.tc {
-				text-align: center;
-			}
-			.edm_newact {
-				border: 1px solid #d7d7d7;
-			}
 
-		</style>
-	</head>
-	<body>
-		<div class="edm_wrap">
-			<h1><img src="http://www.icolor.com.cn/images/logo2.png" /></a></h1>
-			<h2>留言：<em>Hi,</em><a href="http://www.icolor.com.cn/users/<%= @user.id %>/designs"><%= @user.display_name %></a></h2>
-			<p>
-				您已经一星期没来<a href="www.icolor.com.cn">iColor官网</a>了，您有<em>6</em> 条留言未查看
-				<br />
-				<span>2012</span>年第<span>5</span> 期每周之星新鲜出炉！快登录iColor网站去看看吧！”
-			</p>
-			<p class="tc">
-				icolor管理团队2012.5.13
-			</p>
-			<p class="tc icolor_gw">
-				<a href="www.icolor.com.cn">点击进入iColor官网&gt;&gt;</a>
-			</p>
-			<div class="copyright">
-				<a href='http://www.nipponpaint.com.cn/web/index.jsp'>立邦官网</a> | 
-				<a href='http://www.icolor.com.cn/contact'>联系我们</a> | 
-				<a href='http://www.icolor.com.cn/rules'>会员机制</a> | 
-				<a href='http://shop.nipponpaint.com.cn/'>网上商城</a> | 
-				<a href='http://www.icolor.com.cn/state'>网站声明</a>
-				<p>
-					Copyright 2011 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved
-				</p>
-			</div>
-			<!--copyright ends-->
-		</div>
-		<!--main ends-->
-	</body>
+<table border="0" cellspacing="0" cellpadding="0" align="center" background="http://www.icolor.com.cn/images/EDM_week.png">
+ <tr>
+   <td width="1000" height="150" colspan="3" valign="top"><img style="display:block; position:relative; top:20px; left:150px;" src="http://www.icolor.com.cn/images/logo2.png"></td>
+ </tr>
+ <tr>
+   <td width="1000" height="33" valign="bottom" align='center'>
+    <table border="0" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#666666;">留言：&nbsp;&nbsp;&nbsp;<strong style="font-size:18px; font-family:Microsoft Yahei;color:#000000;">Hi,</strong>&nbsp;&nbsp;&nbsp;<font style="font-size:18px; font-family:Microsoft Yahei;" color="#FF0000"><a style="color:#ff0000;" href="#">EDN</a></font></td>
+           </tr>
+       </table>
+   </td>
+ </tr>
+ <tr>
+   <td width="1000" height="45" valign="bottom" align='center'>
+    <table border="0" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#000;"><font>您已经一星期没来 <a style="font-size:14px; font-family:Microsoft Yahei;color:#000;" href="#">iColor官网</a> 了，您有</font><font color="#FF0000"> 6 </font><font size="2">条留言未查看</font></td>
+           </tr>
+       </table>
+   </td>
+ </tr>
+ <tr>
+   <td width="1000" height="48" valign="bottom" align='center'>
+    <table border="0" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#000;"><font color="#FF0000">2012</font><font>年第</font><font color="#FF0000">5</font><font> 期每周之星新鲜出炉！快登录iColor网站去看看吧！”</font></td>
+           </tr>
+       </table>
+   </td>
+ </tr>
+ <tr>
+   <td width="1000" height="51" valign="bottom" align="center"><font style="font-family:Microsoft Yahei;color:#000;" size="2">icolor管理团队2012.12.25</font></td>
+ </tr>
+ <tr>
+   <td width="1000" height="105" valign="bottom" align="center"><font style="font-family:Microsoft Yahei;" color="#FF0000" size="5"><a style="color:#ff0000;" href="#">点击进入iColor官网>></a></font></td>
+ </tr>
+ <tr>
+   <td width="1000" height="98" valign="bottom" align="center"><font style="text-align:center;font-family:Microsoft Yahei;font-size:12px; color:#666;" color="#666666"><a style="color:#666;font-size:12px;" href="#">立邦官网</a>  |  <a style="color:#666;font-size:12px;"  href="#">联系我们</a>  |  <a style="color:#666;font-size:12px;"  href="#">会员机制</a>  |  <a style="color:#666;font-size:12px;"  href="#">网上商城</a>  |  <a style="color:#666;font-size:12px;"  href="#">网站声明</a></font></td>
+ </tr>
+ <tr>
+   <td width="1000" height="50" align="center" valign="middle"><font style="font-size:12px; font-family:Microsoft Yahei;color:#666;">Copyright 2011 NIPPON PAINT (CHINA) Co.,Ltd All Rights Reserved</font></td>
+ </tr>
+</table>
+
+</body>
 </html>
