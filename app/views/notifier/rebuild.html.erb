@@ -1,32 +1,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-html,body,div,p,h1,a{margin:0;padding:0;font-weight:normal;font-size:18px;font-family:Microsoft Yahei,Arial,Simsun;}
-table,tr,td{margin:0;border:none;}
-</style>
 </head>
 <body>
-<table cellspacing="0" cellpadding="0" style="height:743px;width:895px;margin:0 auto;">
-	<tr>
-		<td height="192" width="895" background="http://www.icolor.com.cn/images/edm_rebuild1.jpg"></td>
-	</tr>
-	<tr>
-		<td height="176" width="895" style="padding-left:134px;" background="http://www.icolor.com.cn/images/edm_rebuild2.jpg">
-			<font color="#f33" size="4"><p align="left">Hi,<%= @user.display_name %>:</p></font>
-			<font  size="4" color="#222"><p align="left">iColor网站全新改版，海量资讯平台，同行互动比拼，快来体验吧！</p></font>
-		</td>
-	</tr>
-	<tr>
-		<td height="213" width="895" background="http://www.icolor.com.cn/images/edm_rebuild3.jpg">
-			<a style="display:block;width:100%;height:100%;" href="http://www.icolor.com.cn/"></a>
-		</td>
-	</tr>
-	<tr>
-		<td height="136" width="895" style="padding-top:24px" background="http://www.icolor.com.cn/images/edm_rebuild4.jpg" align="center">
-			<a href="http://www.icolor.com.cn/" class="rebuild pa"><img src="http://www.icolor.com.cn/images/edm_rebuild.gif" border="0" /></a>
-		</td>
-	</tr>
-</table>
+	<table cellpadding="0" cellspacing="0" align="center">
+	  <tr>
+	    <td width="895" height="192"><img src="http://www.icolor.com.cn/images/edm_rebuild1.jpg" /></td>
+	  </tr>
+	  <tr>
+	    <td width="895" height="176" background="http://www.icolor.com.cn/images/edm_rebuild2.jpg">
+	      <table cellpadding="0" cellspacing="0" align="center" style="position:relative; top:-20px;">
+	        <tr>
+	          <td width="600" height="30"><font color="#f33" face="Microsoft Yahei">Hi,<a style="color:#f33; text-decoration:underline;" href="http://www.icolor.com.cn/"><%= @user.display_name %></a>:</font></td>
+	        </tr>
+	        <tr>
+	          <td width="600" height="30"><font face="Microsoft Yahei" size="3">iColor网站全新改版，海量资讯平台，同行互动比拼，快来体验吧！</font></td>
+	        </tr>
+	      </table>    
+	    </td>
+	  </tr>
+	  <tr>
+	    <td width="895" height="213"><img src="http://www.icolor.com.cn/images/edm_rebuild3.jpg" /></td>
+	  </tr>
+	  <tr>
+	    <td width="895" height="162" background="http://www.icolor.com.cn/images/edm_rebuild4.jpg">
+	      <table cellpadding="0" cellspacing="0" align="center">
+	        <tr>
+	          <td width="208" height="56"><a href="http://www.icolor.com.cn"><img border="0" src="http://www.icolor.com.cn/images/edm_rebuild.gif" /></a></td>
+	        </tr>
+	      </table>    
+	    </td>
+	  </tr>
+	</table>
 </body>
 </html>

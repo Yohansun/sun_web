@@ -1,57 +1,83 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>一周未来提醒EDM</title>
-<style type="text/css">
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-
-
-<table border="0" cellspacing="0" cellpadding="0" align="center" background="http://www.icolor.com.cn/images/EDM_week.png">
- <tr>
-   <td width="1000" height="150" colspan="3" valign="top"><img style="display:block; position:relative; top:20px; left:150px;" src="http://www.icolor.com.cn/images/logo2.png"></td>
- </tr>
- <tr>
-   <td width="1000" height="33" valign="bottom" align='center'>
-    <table border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#666666;">留言：&nbsp;&nbsp;&nbsp;<strong style="font-size:18px; font-family:Microsoft Yahei;color:#000000;">Hi,</strong>&nbsp;&nbsp;&nbsp;<font style="font-size:18px; font-family:Microsoft Yahei;" color="#FF0000"><a style="color:#ff0000;" href="#">EDN</a></font></td>
-           </tr>
-       </table>
-   </td>
- </tr>
- <tr>
-   <td width="1000" height="45" valign="bottom" align='center'>
-    <table border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#000;"><font>您已经一星期没来 <a style="font-size:14px; font-family:Microsoft Yahei;color:#000;" href="#">iColor官网</a> 了，您有</font><font color="#FF0000"> 6 </font><font size="2">条留言未查看</font></td>
-           </tr>
-       </table>
-   </td>
- </tr>
- <tr>
-   <td width="1000" height="48" valign="bottom" align='center'>
-    <table border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#000;"><font color="#FF0000">2012</font><font>年第</font><font color="#FF0000">5</font><font> 期每周之星新鲜出炉！快登录iColor网站去看看吧！”</font></td>
-           </tr>
-       </table>
-   </td>
- </tr>
- <tr>
-   <td width="1000" height="51" valign="bottom" align="center"><font style="font-family:Microsoft Yahei;color:#000;" size="2">icolor管理团队2012.12.25</font></td>
- </tr>
- <tr>
-   <td width="1000" height="105" valign="bottom" align="center"><font style="font-family:Microsoft Yahei;" color="#FF0000" size="5"><a style="color:#ff0000;" href="#">点击进入iColor官网>></a></font></td>
- </tr>
- <tr>
-   <td width="1000" height="98" valign="bottom" align="center"><font style="text-align:center;font-family:Microsoft Yahei;font-size:12px; color:#666;" color="#666666"><a style="color:#666;font-size:12px;" href="#">立邦官网</a>  |  <a style="color:#666;font-size:12px;"  href="#">联系我们</a>  |  <a style="color:#666;font-size:12px;"  href="#">会员机制</a>  |  <a style="color:#666;font-size:12px;"  href="#">网上商城</a>  |  <a style="color:#666;font-size:12px;"  href="#">网站声明</a></font></td>
- </tr>
- <tr>
-   <td width="1000" height="50" align="center" valign="middle"><font style="font-size:12px; font-family:Microsoft Yahei;color:#666;">Copyright 2011 NIPPON PAINT (CHINA) Co.,Ltd All Rights Reserved</font></td>
- </tr>
-</table>
-
+  <table border="0" cellspacing="0" cellpadding="0" align="center" background="http://www.icolor.com.cn/images/EDM_week.png">
+    <tr>
+      <td width="1000" height="150" colspan="3" valign="top">
+        <img style="display:block; position:relative; top:20px; left:150px;" src="http://www.icolor.com.cn/images/logo2.png">
+      </td>
+    </tr>
+    <tr>
+      <td width="1000" height="33" valign="bottom" align='center'>
+        <table border="0" cellspacing="0" cellpadding="0" align="center">
+          <tr>
+            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#666666;">
+              留言：&nbsp;&nbsp;&nbsp;
+              <strong style="font-size:18px; font-family:Microsoft Yahei;color:#000000;">Hi,</strong>
+              &nbsp;&nbsp;&nbsp;
+              <font style="font-size:18px; font-family:Microsoft Yahei;" color="#FF0000">
+                <a style="color:#ff0000;" href="http://www.icolor.com.cn/users/<%= @user.id %>"><%= @user.display_name %></a>
+              </font>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="1000" height="45" valign="bottom" align='center'>
+        <table border="0" cellspacing="0" cellpadding="0" align="center">
+          <tr>
+            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#000;">
+              <font>您已经一星期没来 <a style="font-size:14px; font-family:Microsoft Yahei;color:#000;" href="http://www.icolor.com.cn/">iColor官网</a> 了，您有</font>
+              <font color="#FF0000"> 2 </font>
+              <font size="2">条留言未查看</font>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="1000" height="48" valign="bottom" align='center'>
+        <table border="0" cellspacing="0" cellpadding="0" align="center">
+          <tr>
+            <td width="421" style="font-size:14px; font-family:Microsoft Yahei;color:#000;">
+              <font color="#FF0000">2012</font>
+              <font>年第</font>
+              <font color="#FF0000">5</font>
+              <font> 期每周之星新鲜出炉！快登录iColor网站去看看吧！”</font>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+     <td width="1000" height="51" valign="bottom" align="center"><font style="font-family:Microsoft Yahei;color:#000;" size="2">icolor管理团队2012.5.20</font></td>
+    </tr>
+    <tr>
+      <td width="1000" height="105" valign="bottom" align="center">
+        <font style="font-family:Microsoft Yahei;" color="#FF0000" size="5">
+          <a style="color:#ff0000;" href="http://www.icolor.com.cn/">点击进入iColor官网>></a>
+        </font>
+      </td>
+    </tr>
+    <tr>
+      <td width="1000" height="98" valign="bottom" align="center">
+        <font style="text-align:center;font-family:Microsoft Yahei;font-size:12px; color:#666;" color="#666666">
+          <a style="color:#666;font-size:12px;" href="http://www.nipponpaint.com.cn/web/index.jsp">立邦官网</a>  |  
+          <a style="color:#666;font-size:12px;"  href="http://www.icolor.com.cn/contact">联系我们</a>  |  
+          <a style="color:#666;font-size:12px;"  href="http://www.icolor.com.cn/rules">会员机制</a>  |  
+          <a style="color:#666;font-size:12px;"  href="http://shop.nipponpaint.com.cn/">网上商城</a>  |  
+          <a style="color:#666;font-size:12px;"  href="http://www.icolor.com.cn/state">网站声明</a>
+        </font>
+      </td>
+    </tr>
+    <tr>
+      <td width="1000" height="50" align="center" valign="middle">
+        <font style="font-size:12px; font-family:Microsoft Yahei;color:#666;">Copyright 2011 NIPPON PAINT (CHINA) Co.,Ltd All Rights Reserved</font>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
