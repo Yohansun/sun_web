@@ -21,6 +21,7 @@ class ColorDesignsController < ApplicationController
     @design = ColorDesign.find(params[:id]) || Design.new
     @tags = ColorDesign.tag_counts_on(:tags)
     @comments = @design.comments.page params[:page]
+    @code = ColorCode.find_by_code(@design.recommend_color1)
   end
 
   def get_color_designs

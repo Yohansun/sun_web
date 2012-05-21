@@ -78,7 +78,7 @@ function uploads_size () {
   })
 </script>
 <%- end -%>
-<%= form_for([current_user, @design]) do |f| %>
+<%= form_for([current_user, @design], :remote => true) do |f| %>
 <div class="main syslist">
   <div class="shadow">
     <div class="section pr">
