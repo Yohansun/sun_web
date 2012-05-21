@@ -119,13 +119,46 @@ function add_tag(text){
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <%= f.label :design_color, "色系：" %>
-          <div class="fl">
-            <%= f.select :design_color, color_design_color_option %>
-          </div>
+            <ul id="color_styles" class="clear">
+              <li>
+                <span>浅白色系</span>
+                <%= check_box_tag "design[design_color][]", "浅白色系" %>
+              </li>
+              <li class="color_second">
+                <span>红色系</span>
+                <%= check_box_tag "design[design_color][]", "红色系" %>
+              </li>
+              <li class="color_third">
+                <span>橙色系</span>
+                <%= check_box_tag "design[design_color][]", "橙色系" %>
+              </li>
+              <li class="color_forth">
+                <span>黄色系</span>
+                <%= check_box_tag "design[design_color][]", "黄色系" %>
+              </li>
+              <li class="color_fifth">
+                <span>绿色系</span>
+                <%= check_box_tag "design[design_color][]", "绿色系" %>
+              </li>
+              <li class="color_sixth">
+                <span>蓝色系</span>
+                <%= check_box_tag "design[design_color][]", "蓝色系" %>
+              </li>
+              <li class="color_seventh">
+                <span>紫色系</span>
+                <%= check_box_tag "design[design_color][]", "紫色系" %>
+              </li>
+              <li class="color_eighth">
+                <span>中性色系</span>
+                <%= check_box_tag "design[design_color][]", "中性色系" %>
+              </li>
+            </ul>
         </div><!--reg_list ends-->
-        <div class="reg_list reg_width fl recommend_color_category1">
-          <%= f.label :recommend_color_category1, "推荐作品色号：" %>
-          <%= f.text_field :recommend_color_category1, class: "add_tag fl" -%>
+        <div class="reg_list reg_width fl">
+          <label for="house">选择色号：</label>
+          <span>请填写推荐立邦产品色号</span>
+          <%= f.text_field :recommend_color_category1, class: "add_tag" -%>
+          <span>（凡填写色号的用户iColor均有精美礼品赠送哦）</span>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
           <label for="city">作品建筑所属城市：</label>

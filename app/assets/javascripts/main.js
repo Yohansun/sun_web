@@ -52,18 +52,26 @@ $(function(){
 /*server & subs*/
 function o_in(){
 	$('#overlay').fadeIn('fast');
-	}
+}
+
 function o_out(){
 	$('#overlay').fadeOut();
-	}
+}
+
 function show_login(){
 	o_in();
 	$('.unlogin').show();
-	}
+		$("#design_message").hide();
+}
+
+function colors(){
+	o_in();
+	$("#design_message").show();
+}    
 
 function inputBlank(area){
 	area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
-    area.animate({opacity:0.5},200);
+  area.animate({opacity:0.5},200);
 	area.animate({opacity:1},200);
 	area.animate({opacity:0.5},200,function(){
 	area.css({background:"#fff",opacity:1});

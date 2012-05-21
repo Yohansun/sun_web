@@ -32,7 +32,6 @@ class ChannelController < ApplicationController
       when "company"
         @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
     end
-
     @design_users = @design_users.page(params[:page]).per(9)
   end
 end
