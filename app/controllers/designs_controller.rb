@@ -44,6 +44,7 @@ class DesignsController < ApplicationController
 
   def create
     @design = current_user.designs.build(params[:design])
+    @design.design_color = params[:design][:design_color].join(",")
     if @design.save
       current_user.create_score(current_user.id, 601 , 1 , 50)
       redirect_to upload_user_design_path(current_user, @design)
@@ -60,7 +61,8 @@ class DesignsController < ApplicationController
         image.is_cover = true
         image.save
       end
-      redirect_to action: 'index'
+      #redirect_to action: 'index'
+      render :js => "colors();"
     else
       render :action => 'edit'
     end
