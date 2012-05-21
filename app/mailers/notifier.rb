@@ -57,7 +57,7 @@ class Notifier < ActionMailer::Base
 
   def notice(email)
     mail(:to => email,
-         :subject => "恭喜您！您的作品【普罗旺斯的浪漫】被评选为本周设计之星啦！",
+         :subject => "恭喜您！您的作品【春色满屋】被评选为本周设计之星啦！",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end
