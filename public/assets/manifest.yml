@@ -199,6 +199,8 @@ design/frameA.gif: design/frameA-52788a12eb076dfceb3d4946648ae72b.gif
 design/frameA.png: design/frameA-c1a8d8a6f8a0e818a6660bd68490f972.png
 design/frameB.png: design/frameB-e13713d5ca39b0c12fb05d978b03cfd7.png
 design/full-screen-btn.gif: design/full-screen-btn-9488a38fa295dd25138507c4412c30a8.gif
+design/fullfill_btn.jpg: design/fullfill_btn-7b5d3fed582db1e5f8bf254c9ea7fc48.jpg
+design/fullfill_img.jpg: design/fullfill_img-869fdd1bf4ccd9342bc3c121874bb50e.jpg
 design/galleryB.gif: design/galleryB-8a9e31b253de84431cd36f6cbd14dc48.gif
 design/galleryC.gif: design/galleryC-ae861ee59111f5031819a85809313e85.gif
 design/galleryD.gif: design/galleryD-06642b93f6138ffeb8c4aa1786f23280.gif
@@ -410,7 +412,7 @@ jiathis.jpg: jiathis-682325688f5ceb8e1b46f1eef237b3e2.jpg
 kv.jpg: kv-c3cada3b4177c033c41d426855f4514f.jpg
 kv1.jpg: kv1-e80eb6c347083e1d6276afb47728e8d4.jpg
 kv2.jpg: kv2-83547c473ab56cbd00efc2cac8dfd35d.jpg
-kv3.jpg: kv3-62e110df278f1c532ce53b4ab071ff62.jpg
+kv3.jpg: kv3-41d51d33919a0ecb75a3d0e5fae5825f.jpg
 kv4.jpg: kv4-d134cc256be233f106632079c9941188.jpg
 kx.jpg: kx-7684f22d4f9a8918600fffcb188a5220.jpg
 link1.png: link1-fe17e60aab0b4f21cb0c6fad4344d501.png
@@ -869,7 +871,8 @@ tips.jpg: tips-84caec4603ca7cab9a71c57af8dc6686.jpg
 weibo.png: weibo-e46f188b5a50487e33513168c2c4970f.png
 weibo_bg.jpg: weibo_bg-9dde145cf9490bc2081f789da57df47b.jpg
 LinkageSelect.js: LinkageSelect-4947a5a2b66b378eb38623ddb4aa35a4.js
-application.js: application-a2d86b9bd72dc32ebae419457539e9df.js
+application.js: application-9110645852a0b315a3ca5c9e87599904.js
+areas.js: areas-3af39f1da6f167c2cbf453ed74daff3d.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-620d43cb2597208020321dc63903ae03.js
 datepicker_lang_US.js: datepicker_lang_US-da20c1f8e01457664eafa561f22b99af.js
 galleryB.js: galleryB-19506b4b5f1da6c7138222397dc962d3.js
@@ -896,7 +899,7 @@ magic_content/master_designs.js: magic_content/master_designs-3af39f1da6f167c2cb
 magic_content/mix_colors.js: magic_content/mix_colors-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star.js: magic_content/weekly_star-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-3af39f1da6f167c2cbf453ed74daff3d.js
-main.js: main-1523a625229c7b1087b5d3a11feda9f2.js
+main.js: main-1a4ad617bdb221217d26c6112dc8eb91.js
 myfocus.js: myfocus-e63c0ae8c1fc09de2ab098788e97d092.js
 owners_channel_upload_form.js: owners_channel_upload_form-74f99c9cc3b8399cba1e59b655869b7a.js
 popupA.js: popupA-595aebd5f41ce9eebce0443355c41e14.js
@@ -907,6 +910,7 @@ swfobject.js: swfobject-d5e7ff8c48dca9eccf15d61553b26ed3.js
 sys_msgs.js: sys_msgs-3af39f1da6f167c2cbf453ed74daff3d.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-61e4b0ac948b41a18405f5442d0b4c0e.js
 application.css: application-16d9ce950612f2c95be08296b3477096.css
+areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
 base.css: base-f768c792782cf93a07575446d89ba7ae.css
 dd.css: dd-404c3f4285a8910d974be4048193c4a2.css
 exciting_activities.css: exciting_activities-29c54026339f272defab7752d9731342.css
@@ -925,7 +929,7 @@ magic_content/weekly_star.css: magic_content/weekly_star-7270767b2a9e9fff880aa5d
 magic_content/weekly_star_uploads.css: magic_content/weekly_star_uploads-7270767b2a9e9fff880aa5de378ca791.css
 news.css: news-25fbcf49d8deb5f7e52e5a2454945cda.css
 owners_channel.css: owners_channel-29536f353f5da0f62f290b1187980717.css
-reg.css: reg-f3895ead5298855d9dedfe573bf20f15.css
+reg.css: reg-c55253fecb20086475032c0046a7bdde.css
 reset.css: reset-ad3b1a1d4417ce93791b4673319740a7.css
 scores.css: scores-7270767b2a9e9fff880aa5de378ca791.css
 shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
