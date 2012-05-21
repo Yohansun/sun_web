@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 desc "Send edm email to this week star"
 task :notice_edm => :environment  do
-	u= User.find(3698)
+	u = User.find_by_username('叶国治')
 	email = u.email
 	if email && email != ''
 		Notifier.notice(email).deliver
