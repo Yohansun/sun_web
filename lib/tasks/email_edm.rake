@@ -54,5 +54,5 @@ def send_email(username)
 	else
 		puts 'Fail'
 	end
-	puts "user:#{username}======>>> %s" % (u.id || 0)
+	puts "user:#{username}======>>> %s" % (user.id || 0)
 end
