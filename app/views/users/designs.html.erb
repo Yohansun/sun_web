@@ -36,7 +36,8 @@
               </div>
               <h3><%= design.title %></h3>
               <p class="p1 group">
-                <strong class="ft14 fb">当前票数：<%= design.votes_count %></strong><a class="vote_btn" href="#"><img src="<%= asset_path "personal/d_host_vote_btn.png" %>" alt=""/></a>
+                <strong class="ft14 fb">当前票数：<em id ="votes_count<%= design.id%>"><%= design.votes_count %></em></strong>
+                <%= link_to image_tag("personal/d_host_vote_btn.png"), votes_path(:voteable_id => design.id, :voteable_type => "Design"), :remote => true, :method => 'post' %>
               </p>
               <p class="p2 group">
                 <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
