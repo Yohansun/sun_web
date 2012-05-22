@@ -29,10 +29,10 @@
     <div class="owner_bar ft12 clear">
       <%= form_tag("/channel/access", :method => "put") do%>
       <img src="<%= asset_path "news/hot_search.png"%>" class="fl"/>
-      <select id="province" class="level_1">
+      <select id="province" class="level_1" name="province_id">
         <option>请选择省--不限</option>
       </select>
-      <select id="city" class="level_2">
+      <select id="city" class="level_2" name="city_id">
         <option>请选择市--不限</option>
       </select>
       <select id="country" class="level_3" name="area_id">
