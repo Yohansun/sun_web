@@ -94,7 +94,14 @@
               <% @comments.each do |c| %>
                   <li>
                     <div class="bar">
-                      <span class="user"><a href="/users/<%= c.user.id %>"><%= c.user.display_name %></a></span><span class="time"><%= c.created_at.to_date %></span>
+                      <span class="user">
+                        <% if c.user %>
+                        <a href="/users/<%= c.user.id %>"><%= c.user.display_name %></a>
+                        <% else %>
+                        <a href="#">匿名</a>
+                        <% end %>
+                      </span>
+                      <span class="time"><%= c.created_at.to_date %></span>
                     </div>
                     <div class="reply">
                       <a href="javascript:void(0)">回复</a>

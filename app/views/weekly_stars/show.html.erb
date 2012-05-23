@@ -63,13 +63,13 @@
 <%= javascript_include_tag "galleryK" %>
 <div class="color-picker">
 <div class="overview">
-  <div class="votes">所获票数：<span id="votes_count<%= @design.id %>"><%= @design.try(:votes_count) %></span>
+  <div class="votes">所获票数：<span id="votes_count<%= @design.id %>"><%= @link_design.try(:votes_count) %></span>
     <%#=# link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "WeeklyStar"), :remote => true, :method => 'post' %>
   </div>
 
   <div class="operate pr">
-    <span class="forward">转发 (<%=@design.shares_count %>)</span>
-    <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @design.try(:comments).length %>)</span></a>
+    <span class="forward">转发 (<%=@link_design.shares_count %>)</span>
+    <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).length %>)</span></a>
       <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_star_url(@design), @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
   </div>
 </div>
@@ -184,7 +184,14 @@
       <% @comments.each do |c| %>
           <li>
             <div class="bar">
-              <span class="user"><a href="/users/<%= c.user.id %>"><%= c.user.display_name %></a></span><span class="time"><%= c.created_at.to_date %></span>
+              <span class="user">
+                <% if c.user %>
+                <a href="/users/<%= c.user.id %>"><%= c.user.display_name %></a>
+                <% else %>
+                <a href="#">匿名</a>
+                <% end %>
+              </span>
+              <span class="time"><%= c.created_at.to_date %></span>
             </div>
             <div class="reply">
               <a href="javascript:void(0)">回复</a>

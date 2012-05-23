@@ -3,13 +3,17 @@ class WeeklyStarsController < ApplicationController
 
   def index
     @design = WeeklyStar.order("published_at desc").first || WeeklyStar.new
+    design_id = @design.design_link.split("/").last
+    @link_design = Design.find(design_id)
     @elder_designs = WeeklyStar.order("published_at desc").offset(1).page(params[:page]).per(8).padding(1)
   end
 
   def show
     @design = WeeklyStar.find(params[:id])
+    design_id = @design.design_link.split("/").last
+    @link_design = Design.find design_id
     @tags = WeeklyStar.tag_counts_on(:tags)
-    @comments = @design.comments.page params[:page]
+    @comments = @link_design.comments.page params[:page]
 
     @prev_star = WeeklyStar.where("published_at < ?", @design.published_at).order("published_at desc").first
     @next_star = WeeklyStar.where("published_at > ?", @design.published_at).order("published_at desc").last

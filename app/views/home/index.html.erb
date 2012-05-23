@@ -78,6 +78,13 @@
     </div>
     <!--slider ends-->
     <div class="slider pr fl">
+      <img src="<%= asset_path "kv3.jpg"%>" usemap="#Map3"/>
+      <map id="Map3" name="Map3">
+        <area shape="rect" coords="359,304,621,342" href="/weekly_stars" />
+      </map>
+    </div>
+    <!--slider ends-->
+    <div class="slider pr fl">
       <img src="<%= asset_path "kv4.jpg"%>" usemap="#Map4"/>
       <map id="Map4" name="Map4">
         <area shape="rect" coords="968,356,1247,387" href="http://www.icolor.com.cn/guizao/index.html?from=home" target="_blank"/>
@@ -88,13 +95,6 @@
       <img src="<%= asset_path "kv2.jpg"%>" usemap="#Map2"/>
       <map id="Map2" name="Map2">
         <area shape="rect" coords="930,157,1335,309" href="#"/>
-      </map>
-    </div>
-    <!--slider ends-->
-    <div class="slider pr fl">
-      <img src="<%= asset_path "kv3.jpg"%>" usemap="#Map3"/>
-      <map id="Map3" name="Map3">
-        <area shape="rect" coords="359,304,621,342" href="/weekly_stars" />
       </map>
     </div>
     <!--slider ends-->
@@ -381,22 +381,21 @@
 
               <% @weibo_data.each do |weibo| -%>
               <li>
-                <div class="simg"><a href="http://weibo.com<%= weibo.user_profile_url %>"><img src="<%= weibo.thumbnail_pic %>"></a></div>
+                <div class="simg"><a href="http://weibo.com/<%= weibo.user_profile_url %>" target="_blank"><img src="<%= weibo.thumbnail_pic %>"></a></div>
                 <div class="bimg">
                   <div class="popupB">
                     <div class="popupinner">
                       <div class="content">
                         <div class="t">
-                          <div class="face"><a href="http://weibo.com<%= weibo.user_profile_url %>"><img src="<%= weibo.user_profile_image_url %>"></a></div>
+                          <div class="face"><a href="http://weibo.com/<%= weibo.user_profile_url %>" target="_blank"><img src="<%= weibo.user_profile_image_url %>"></a></div>
                           <div class="tcontent">
-                            <a href="http://weibo.com<%= weibo.user_profile_url %>" class="user"><%= weibo.user_name %>：</a>
+                            <a href="http://weibo.com/<%= weibo.user_profile_url %>" class="user" target="_blank"><%= weibo.user_name %>：</a>
                             <%= weibo.text %>
-
                             <br/>
                             <br/>
                             <img src="<%= weibo.bmiddle_pic %>" height="200">
                           </div>
-                          <div class="time"><a href="http://weibo.com<%= weibo.user_profile_url %>"><%= weibo.created_time.to_formatted_s(:db) %></a> <span class="from">来自 <a href="http://weibo.com<%= weibo.user_profile_url %>">新浪微博</a></span></div>
+                          <div class="time"><a href="http://weibo.com/<%= weibo.user_profile_url %>"  target="_blank"><%= weibo.created_time.to_formatted_s(:db) %></a> <span class="from">来自 <a href="http://weibo.com/<%= weibo.user_profile_url %>">新浪微博</a></span></div>
                         </div>
                       </div>
                     </div>

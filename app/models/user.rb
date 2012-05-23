@@ -207,7 +207,8 @@ class User < ActiveRecord::Base
   end
 
   #投票&被投票加分
-  def vote_score(user, source_type, source_id)
+  def vote_score(user = "", source_type, source_id)
+    return "" if user.blank?
     design_score = self.scores.where("score_type =701 and to_days(created_at) = to_days(now())").sum(:amount)
     be_design_scoure = Design.find(source_id).user.scores.where("score_type =701 and to_days(created_at) = to_days(now())").sum(:amount) if source_type == "Design"
     insp_score   = self.scores.where("score_type =702 and to_days(created_at) = to_days(now())").sum(:amount)
@@ -230,7 +231,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def comment_score(user, comment)
+  def comment_score(user = "", comment)
+    return "" if user.blank?
     if self.scores.where("score_type in (801,802,803,804)").sum(:amount) < 300
       #作品
       if comment['commentable_type'] == "Design" && self.scores.where("remark=? and to_days(created_at) = to_days(now())", comment['commentable_id']).blank?
