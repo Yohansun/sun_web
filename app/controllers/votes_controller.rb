@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_filter :find_user
+  #before_filter :find_user
 
   def create
     vote = Vote.new
@@ -17,7 +17,8 @@ class VotesController < ApplicationController
         render :action => "voted"
       end
     elsif current_user.blank?
-      render :action => 'fail'
+      vote.save!
+      render :action => 'create'
     end
   end
 

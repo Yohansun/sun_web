@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   def create
     @comment         = Comment.new(params[:comment])
-    @comment.user_id = current_user.id
+    @comment.user_id = current_user.id if current_user
     @comment.save
-    current_user.comment_score(current_user, params[:comment])
+    current_user.comment_score(current_user, params[:comment]) if current_user
     case @comment.commentable_type
       when 'Design'
         redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
