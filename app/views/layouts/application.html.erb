@@ -160,7 +160,7 @@
     </div>
     <!--err_tips-->
     <div class="loginCon ft12 clear">
-      <%= form_for(:user, :url => user_session_path, :remote => true) do |f| %>
+      <%= form_for(:user, :url => user_session_path, :remote => true, :html => {:id => "new_user"}) do |f| %>
           <div class="clear">
             <label for="username" class="username ft14 fl">帐号：</label>
             <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
@@ -341,22 +341,22 @@
             });
         }
         ;
-        if ($("#new_comment")) {
-            $("#new_comment").submit(function (event) {
-                <% if current_user -%>
-                var $area = $('#comment_content')
-                var txt = $area.val();
-                if (txt == '') {
-                    inputBlank($area);
-                    return false;
-                }
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
+        // if ($("#new_comment")) {
+        //     $("#new_comment").submit(function (event) {
+        //         <% if current_user -%>
+        //         var $area = $('#comment_content')
+        //         var txt = $area.val();
+        //         if (txt == '') {
+        //             inputBlank($area);
+        //             return false;
+        //         }
+        //         <% else -%>
+        //         show_login();
+        //         return false;
+        //         <% end -%>
+        //     });
+        // }
+        // ;
         if ($("#new_reply_msg")) {
             $("#new_reply_msg").submit(function (event) {
                 <% if current_user -%>
