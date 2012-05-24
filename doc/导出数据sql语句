@@ -1,0 +1,7 @@
+导出数据sql语句
+
+在读设计师
+select username,name,phone from users where role_id=1 and des_status = 1
+
+上传作品数
+select designs.id,users.id,users.name,users.username,users.email,users.designs_count from users left join designs on designs.user_id = users.id where designs.created_at BETWEEN "2012-04-20 00:00:00" AND "2012-05-20 23:59:59" and users.designs_count != 0 
