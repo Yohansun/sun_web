@@ -19,7 +19,9 @@ class ScoresController < ApplicationController
 				WeeklyStar.increment_counter(:shares_count, params[:data_id])
 			when "Inspiration"
 				Inspiration.increment_counter(:shares_count, params[:data_id])
-			end				
+			when "ColorDesign"
+				ColorDesign.increment_counter(:shares_count, params[:data_id])
+			end
 			current_user.share_score(current_user, score_type)
 			render :text => "ok"
 		else

@@ -4,7 +4,4 @@
 select username,name,phone from users where role_id=1 and des_status = 1
 
 上传作品数
-select id,name,username,email,designs_count from users where created_at BETWEEN "2012-04-20 00:00:00" AND "2012-05-20 23:59:59"
-
-投票，转发，评论统计
-select u.id,u.name,u.username,u.email,u.role_id,u.des_status,sum(vo.id),sum(comments.id) from users as u left outer join votes as vo on vo.user_id = u.id  left outer join comments on comments.user_id = u.id where u.created_at BETWEEN "2012-04-20 00:00:00" and "2012-05-20 23:59:59" group by u.id
+select designs.id,users.id,users.name,users.username,users.email,users.designs_count from users left join designs on designs.user_id = users.id where designs.created_at BETWEEN "2012-04-20 00:00:00" AND "2012-05-20 23:59:59" and users.designs_count != 0 
