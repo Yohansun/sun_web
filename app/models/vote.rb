@@ -1,6 +1,7 @@
 class Vote < ActiveRecord::Base
   attr_accessible :voteable_id, :voteable_type
   belongs_to :voteable, :polymorphic => true
+  belongs_to :user
 
   after_save :update_voteable_counter
 
