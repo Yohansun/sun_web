@@ -66,6 +66,7 @@
           </p>
           <p class="p2 group">
             <span class="zf ft12">转发 (<%= i.shares_count %>)</span>
+            
             <a href="/inspirations/<%= i.id %>"><span class="pl ft12">评论 (<%= i.comments_count %>)</span></a>
           </p>
           <% cover_img = i.cover_img.file.url if i.cover_img -%>
