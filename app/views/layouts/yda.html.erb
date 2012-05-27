@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>NPYDA立邦亚洲青年设计师大赛中国区官网</title>
+<%= stylesheet_link_tag "reset" %>
+<%= stylesheet_link_tag "yda" %>
+<!--[if IE 6]>
+<script src="js/png.js"></script>
+<script>
+PNG.fix('img,div,a,ul,li');
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="main">
+	<div class="wrapper pr">
+    	
+
+        <%= yield %>
+        
+        <a href="#" class="yda_bot1 pa"><img src="<%= asset_path "yda/yda_bot1.png"%>" alt="" /></a>
+        <a href="#" class="yda_bot2 pa"><img src="<%= asset_path "yda/yda_bot2.png"%>" alt="" /></a>
+        <a href="#" class="yda_bot3 pa"><img src="<%= asset_path "yda/yda_bot3.jpg"%>" alt="" /></a>
+    </div><!--wrapper ends-->
+</div><!--main ends-->
+<div class="yda_footer">
+	<div class="wrapper ft12 cw">
+    	<a href="#">返回iColor</a> |
+        <a href="#">立邦官网</a> |
+        <a href="#">联系我们</a> |
+        <a href="#">会员机制</a> |
+        <a href="#">网上商城</a> |
+        <a href="#">网站声明</a><br />
+        Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved
+    </div><!--wrapper-->
+</div><!--yda_footer ends-->
+</body>
+</html>
+
+
+
+
+
