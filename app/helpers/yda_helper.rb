@@ -1,0 +1,2 @@
+module YdaHelper
+end
