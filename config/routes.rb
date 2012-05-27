@@ -106,9 +106,17 @@ Icolor::Application.routes.draw do
 
   #我的报名活动
   match "/users/:user_id/events/my_event" => "events#my_event"
+  # yda
+  match '/yda' => 'yda#index'
+  match '/yda/act' => 'yda#act'
+  match '/yda/agenda' => 'yda#agenda'
+  match '/yda/info' => 'yda#info'
+  match '/yda/prize' => 'yda#prize'
+  match '/yda/theme' => 'yda#theme'
 
+  
   resources :weekly_tips, only: :index
-
+  
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
