@@ -9,16 +9,18 @@ class ReplyMsgsController < ApplicationController
     user_id           = current_user.id
 
     if params[:reply_msg][:reply_type] == "messages"
-      user_of_comment = Message.find(params[:reply_msg][:message_id]).user.display_name
+      user_of_comment = Message.find(params[:reply_msg][:message_id])
     else
-      user_of_comment = Comment.find(params[:reply_msg][:comment_id]).user.display_name
+      user_of_comment = Comment.find(params[:reply_msg][:comment_id])
     end
 
-    SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment, :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
+    SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment.user.display_name, :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
                    :reply_type => @reply_msg.reply_type,
                    :status => SysMsg::Status[0],
                    :reply_name => user_display_name,
-                   :user_id => user_id
+                   :reply_id => user_id,
+                   :user_id => user_of_comment.user.id,
+                   :re_url => "/" + user_of_comment.try(:commentable_type).try(:tableize) + "/" + user_of_comment.try(:commentable_id).to_s
                 )
 
     case @reply_msg.reply_type

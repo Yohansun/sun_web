@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510035849) do
+ActiveRecord::Schema.define(:version => 20120529044458) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -593,6 +593,7 @@ ActiveRecord::Schema.define(:version => 20120510035849) do
     t.integer  "status"
     t.integer  "user_id"
     t.string   "reply_type"
+    t.string   "re_url"
   end
 
   create_table "taggings", :force => true do |t|

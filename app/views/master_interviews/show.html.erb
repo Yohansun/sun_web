@@ -23,7 +23,7 @@
       </div>
       <!--video ends-->
       <div class="shadow profile_info">
-        <div class="section">
+        <div class="section pr">
           <div class="tit_bg"><h2>大师简介MASTER PROFILE</h2></div>
           <div class="over_text pr">
             <div>
@@ -33,6 +33,31 @@
               <%= raw @article.position %>
             </div>
           </div>
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop" class="pa" style="top:285px;right:66px;">
+            <span class="jiathis_txt">一键分享：</span>
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_kaixin001"></a>
+            <a class="jiathis_button_renren"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+          </div>
+          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+          <!-- JiaThis Button END -->
+          <script type="text/javascript" charset="utf-8">
+          var jiathis_config = {
+            boldNum:4,
+            siteNum:4,
+            showClose:false,
+            sm:"kaixin001,renren,tsina,tqq",
+            imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+            imageWidth:26,
+            marginTop:150,
+            url:"http://www.icolor.com.cn/master_interviews/<%= @article.id %>",
+            title:"#iColor分享#设计大师：<%= @article.name %>【<%= @article.title %>】与你分享行业经验，畅谈更设计心得，尽在iColor！@刷新生活iColor，",
+            data_track_clickback:true
+          }
+          </script>
         </div>
       </div>
       <!--profile_info ends-->

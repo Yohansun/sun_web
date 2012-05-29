@@ -465,6 +465,7 @@ master/msg_bg.png: master/msg_bg-f362a8f3758b872b2a425053bb50cec7.png
 master/new_comm.png: master/new_comm-f8e20badaa696fe90c92f93f52dc75ba.png
 master/question_mark_icon.png: master/question_mark_icon-2f660b13711e372b51f61f95737529eb.png
 master/shadow_b_line.png: master/shadow_b_line-e8912d7d3369c84a29ac62ecad1f1773.png
+master/shops.jpg: master/shops-dc4ca40d9e1be5b724134788102a84b4.jpg
 master/space_master_btn.png: master/space_master_btn-2c72bd9d8938c79607c55f021a31ac6a.png
 master/space_master_hover.png: master/space_master_hover-5e37c9fd1cfa115a4f8c51a773cfda50.png
 master/tag_icon.png: master/tag_icon-6b51127c3ac04240f76f6d3f52975074.png
@@ -886,11 +887,13 @@ yda/yda_bot2.png: yda/yda_bot2-dae38e2bccb0428ade9d16aac8c9b258.png
 yda/yda_bot3.jpg: yda/yda_bot3-df19c7974a8b3151f1e3f84afe83d3c4.jpg
 yda/yda_detail.png: yda/yda_detail-1b7ad0348b5b1f7c30fb00fbd9ad5112.png
 yda/yda_down.png: yda/yda_down-d3dbcb21ca2b3c7e23c0de65c5ed113d.png
+yda/yda_email.jpg: yda/yda_email-341f2d9736d463777b3ba24648c7588c.jpg
 yda/yda_history.png: yda/yda_history-eb3e98bc5cefc0814e7df2949c128613.png
 yda/yda_home.png: yda/yda_home-d479da0d6aac85c453454e47a8e0399d.png
 yda/yda_info.png: yda/yda_info-9e1f1fcbf28621c4a9565aa449130c02.png
 yda/yda_ins.png: yda/yda_ins-971daaedcfb26784d37abbeb67639459.png
-yda/yda_logo.png: yda/yda_logo-f0d49cb38579fed1712e26899e016500.png
+yda/yda_logo.png: yda/yda_logo-7fc276789dc325fad594c5969eaba97e.png
+yda/yda_logo1.png: yda/yda_logo1-f0d49cb38579fed1712e26899e016500.png
 yda/yda_prize.png: yda/yda_prize-5cdeadbd87e52e8ecf87fb9fb7d950d0.png
 yda/yda_step1.png: yda/yda_step1-1102052af2460d0f7a98740505813119.png
 yda/yda_step2.png: yda/yda_step2-34a5555495ffc51db6ca6c4ffbd2272b.png
@@ -965,7 +968,7 @@ style.css: style-70135c5dc4d442f973ed03bb0cad245b.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-2e0e24e0e71f84ae76c8a2afa6d6d2f2.css
-yda.css: yda-50b86be733b6180f6003e2e25bbc9387.css
+yda.css: yda-b14ccc901576dac4aa1aa7f2a36f223e.css
 magic_content/application.css: magic_content/application-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/banners.css: magic_content/banners-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/downloads.css: magic_content/downloads-7270767b2a9e9fff880aa5de378ca791.css
