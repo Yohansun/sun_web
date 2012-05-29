@@ -23,8 +23,29 @@
     <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper pb60 group pt25'>
-    <div class="works_detail_tit line_b_dot group">
-      <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) || @master_design.master_name %></strong></h3>
+    <div class="works_detail_tit line_b_dot group pr">
+          <div id="ckepop" class="pa" style="top:30px;right:80px;">
+      <span class="jiathis_txt">一键分享：</span>
+      <a class="jiathis_button_tsina"></a>
+      <a class="jiathis_button_kaixin001"></a>
+      <a class="jiathis_button_renren"></a>
+      <a class="jiathis_button_qzone"></a>
+      <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+<!--       <a class="jiathis_counter_style"></a>
+ -->    </div>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+      boldNum:4,
+      siteNum:4,
+      showClose:false,
+      sm:"kaixin001,renren,tsina,tqq",
+      pic: <%= @master_design.master_design_uploads.first.file.url(:slide) %>,
+      url:"http://www.icolor.com.cn/master_designs/<%= @master_design.id %>",
+      title:"#iColor分享#设计大师：<%= @master_design.master_profile.try(:name) %> 与你分享作品，想要学习业界顶级设计理念，尽在iColor！@刷新生活iColor，"
+    }
+    </script>
+    <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) || @master_design.master_name %></strong></h3>
       <div class="full_play">
         <a href="/master_designs/<%= @master_design.id %>/fullscreen">全屏观看</a>
       </div>
