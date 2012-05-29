@@ -29,7 +29,7 @@
         <% @sys_msgs.each do |sys_msg|%>
         <tr class="sys_row">
           <td><%= sys_msg.reply_name %></td>
-          <td class="sys_topics"><a href="#"><%= sys_msg.content %></a></td>
+          <td class="sys_topics"><a href="<%= sys_msg.re_url? ? sys_msg.re_url : '#' %>"><%= sys_msg.content %></a></td>
           <td class="sys_time"><%= sys_msg.created_at.to_s(:db) %></td>
           <td>
             <%= link_to(image_tag(asset_path "close_btn.jpg"), "javascript:void(0)", :confirm => "确认删除吗？", :onclick => "del_msg(#{current_user.id}, #{sys_msg.id})", :id => sys_msg.id)   %>

@@ -74,8 +74,8 @@
       <!-- <a href="/"> -->
         <img src="<%= asset_path 'kv7.jpg' %>"  usemap="#Map1" />
         <map id="Map1" name="Map1">
-          <area shape="rect" coords="359,250,627,327" href="#" />
-          <area shape="rect" coords="1224,316,1349,425" href="#" />
+          <area shape="rect" coords="359,250,627,327" href="javascript:void(0)" onClick="kvCheckUser();" />
+          <area shape="rect" coords="1224,316,1349,425" href="/gift.html" />
         </map>
       <!-- </a> -->
     </div><!--slider ends-->
@@ -504,6 +504,25 @@
     </a>
   </div>
 </div>
+<script type="text/javascript">
+  function kvCheckUser(){
+    <% if current_user %>
+      var userId = <%= current_user.id %>;
+      var roleName = "<%= current_user.role_chn_name %>";
+    if(userId != ""){
+      if(roleName == "普通用户"){
+        alert("抱歉！普通用户身份是无法上传作品的哦！");
+      }
+      else{
+      window.location.href="/users/"+ userId+"/designs/new";
+      }
+    }
+    <% else %>
+      show_login();
+      return false;
+    <% end %>
+  };
+</script>
 <%- content_for :tail do %>
 <%= javascript_include_tag "galleryN" %>
 <%= javascript_include_tag "galleryM" %>
