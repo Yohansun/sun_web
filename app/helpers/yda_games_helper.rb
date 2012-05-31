@@ -1,0 +1,2 @@
+module YdaGamesHelper
+end

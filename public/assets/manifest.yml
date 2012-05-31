@@ -93,6 +93,14 @@ big_bg/xian_bg6.jpg: big_bg/xian_bg6-698cd204a31d440020f97d2092173b7c.jpg
 big_bg/xian_bg7.jpg: big_bg/xian_bg7-79a7865313353ff061068b30f6b54c5e.jpg
 big_bg/xian_bg8.jpg: big_bg/xian_bg8-d6ae0a6877309486b0158fe4e0aa758a.jpg
 big_bg/xian_tit.jpg: big_bg/xian_tit-ab69b1ba5d589073d54a67df32347c7e.jpg
+box/box_confirm.jpg: box/box_confirm-6b7dce33146872d5a717bd1ab2146d61.jpg
+box/box_info.jpg: box/box_info-162d0946aa9d48d7032153fed6113aa7.jpg
+box/box_logo.jpg: box/box_logo-d578f58137d3f561d9c406e7c1eee7a5.jpg
+box/box_reset.jpg: box/box_reset-88f1c6e0a8c3e8adeb920fc9078c5b30.jpg
+box/box_submit.jpg: box/box_submit-957dc89d666bc5879c6b5e24083e3792.jpg
+box/box_title.jpg: box/box_title-759fd0441fe006847b062c85517965d7.jpg
+box/close_btn.png: box/close_btn-8872d7719b34304a8f9cbd6e845f6bb1.png
+box/overlay.png: box/overlay-16154149bde3212b93ce07163b017409.png
 btn.jpg: btn-578ea78749726898a422ee530679459c.jpg
 bullets.png: bullets-c43101f796aeba1f33cdacf522b7206f.png
 c_t_center.png: c_t_center-4c2dbb1f03ecdabc3574f5639983a3e1.png
@@ -940,6 +948,7 @@ swfobject.js: swfobject-d5e7ff8c48dca9eccf15d61553b26ed3.js
 sys_msgs.js: sys_msgs-3af39f1da6f167c2cbf453ed74daff3d.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-61e4b0ac948b41a18405f5442d0b4c0e.js
 yda.js: yda-3af39f1da6f167c2cbf453ed74daff3d.js
+yda_games.js: yda_games-3af39f1da6f167c2cbf453ed74daff3d.js
 application.css: application-16d9ce950612f2c95be08296b3477096.css
 areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
 base.css: base-f768c792782cf93a07575446d89ba7ae.css
@@ -969,6 +978,7 @@ sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-2e0e24e0e71f84ae76c8a2afa6d6d2f2.css
 yda.css: yda-b14ccc901576dac4aa1aa7f2a36f223e.css
+yda_games.css: yda_games-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/application.css: magic_content/application-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/banners.css: magic_content/banners-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/downloads.css: magic_content/downloads-7270767b2a9e9fff880aa5de378ca791.css

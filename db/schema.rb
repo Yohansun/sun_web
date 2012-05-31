@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529044458) do
+ActiveRecord::Schema.define(:version => 20120531052836) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -771,6 +771,24 @@ ActiveRecord::Schema.define(:version => 20120529044458) do
     t.integer  "status"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+  end
+
+  create_table "yda_games", :force => true do |t|
+    t.string   "name"
+    t.string   "school"
+    t.string   "specialty"
+    t.string   "grade"
+    t.integer  "paperwork_type"
+    t.string   "paperwork_no"
+    t.string   "mobile"
+    t.string   "address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "postcode"
+    t.string   "email"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "user_id"
   end
 
 end
