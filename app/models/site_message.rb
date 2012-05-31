@@ -5,6 +5,8 @@ class SiteMessage < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :as => :commentable
 
+  has_many :sys_msgs
+
   after_create :deliver
 
   def comments_count

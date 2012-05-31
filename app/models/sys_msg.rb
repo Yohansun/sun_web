@@ -13,6 +13,8 @@ class SysMsg < ActiveRecord::Base
 
   belongs_to :user
 
+  belongs_to :site_message
+
   ##TODO 怎么排序
   default_scope :order => "created_at DESC"
 

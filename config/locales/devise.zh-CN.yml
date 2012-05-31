@@ -27,6 +27,8 @@ zh-CN:
               taken: "您的电话已经被注册过，请重新输入！"
             name:
               invalid: "真实姓名为2-4个中文!"
+            phone:
+              invalid: "联系电话不能为空！"
             zip_code:
               invalid: "邮编必须为数字且只能6位!"
             is_read:
@@ -66,6 +68,7 @@ zh-CN:
     register:
       user:
         username_blank: '用户名不能为空！'
+        phone_blank: "联系电话不能为空！"
         username: '用户名不能为空，只能用数字、字母、下划线和汉字组成，不能包含空格，并且不能以下划线和数字开头！'
         username_used: '用户名已经被占用，请重新输入新的用户名！'
         username_suc: '该用户名未被注册可以使用！'
