@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   has_many :scores
   has_many :votes
   has_many :comments
+  has_one :yda_game
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -280,6 +281,10 @@ class User < ActiveRecord::Base
     elsif self.role_id == 3
       return "普通用户"
     end
+  end
+
+  def ydaed?
+    self.yda_game ? true : false
   end
 
   protected

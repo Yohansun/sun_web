@@ -4,6 +4,8 @@ Icolor::Application.routes.draw do
 
   resources :votes
 
+  resources :yda_games, :only => [:create]
+
   devise_for :users, :controllers => { :registrations      => "users/register",
                                        :sessions           => "users/sessions", :passwords => "users/passwords",
                                        :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -113,7 +115,7 @@ Icolor::Application.routes.draw do
   match '/yda/info' => 'yda#info'
   match '/yda/prize' => 'yda#prize'
   match '/yda/theme' => 'yda#theme'
-
+  match '/yda/down_yda' => 'yda#down_yda'
   
   resources :weekly_tips, only: :index
   

@@ -192,3 +192,7 @@ function add_tag(text){
   </div><!--shadow ends-->
 </div><!--main ends-->
 <% end %>
+
+<% if current_user && current_user.reading_designer? && !current_user.ydaed? %>
+  <%= render :partial => "/yda_games/new" %>
+<% end %>
