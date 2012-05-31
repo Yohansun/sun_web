@@ -18,4 +18,9 @@ class YdaController < ApplicationController
 
 	def theme
 	end
+
+	def down_yda
+		send_file "#{Rails.root}/public/system/game_detail.pdf"
+	end
+
 end

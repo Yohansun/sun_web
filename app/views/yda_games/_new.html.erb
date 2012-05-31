@@ -1,0 +1,141 @@
+<%= content_for :tail do %>
+<%= stylesheet_link_tag "reset" %>
+<style type="text/css">
+	#box_layer{background:url(<%= asset_path "box/overlay.png" %>);position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:none;}
+	.abs_center{position:absolute;left:50%;top:50%;z-index:10000;border:7px solid #444;}
+	.box_bin{background:#1baa6e;width:646px;height:476px;margin-left:-368px;margin-top:-253px;padding:15px 45px;}
+	.box_confirm{background:#fff;width:422px;height:240px;margin-left:-211px;margin-top:-120px;}
+	.box_confirm h1{background:#f5f5f5;padding:10px;color:#838282;border-bottom:1px solid #e6e6e6;}
+	.box_confirm p{background:url(<%= asset_path "box/box_info.jpg" %>) left center no-repeat;padding:30px 0;padding-left:2.5em;width:265px;margin:0 auto;}
+	.box_confirm form{border-top:1px dotted #8e8e8e;text-align:center;padding:10px 0;width:400px;margin:0 auto;font-size:14px;}
+	.box_submits{margin:20px 0;}
+	.radio{margin:0 5px 0 20px;}
+
+	.box_close{background:url(<%= asset_path "box/close_btn.png" %>) no-repeat;width:21px;height:21px;top:10px;right:10px;display:block;}
+	form{clear:both;}
+	.box_submit,.box_reset{width:106px;height:29px;border:0;margin-top:10px;}
+	.box_submit{background:url(<%= asset_path "box/box_submit.jpg" %>) no-repeat;margin-right:32px;-webkit-appearance:button;}
+	.box_reset{background:url(<%= asset_path "box/box_reset.jpg" %>) no-repeat;}
+	.box_bin p{padding:5px 0;border-top:1px dotted #fff;margin:29px 0;}
+	.box_bin p input{margin-right:5px;}
+	.box_bin p a{color:#e00;text-decoration:underline;font-style:italic;}
+	.box_bin label{color:#fff;font-size:14px;}
+	.width_full{width:570px;_width:568px;}
+	.width_half{width:162px;_width:160px;}
+	.width_third{width:207px;_width:204px;}
+	.box_bin input{padding:3px 0;font-weight:bold;}
+	.labels{width:70px;text-align:left;float:left;padding:5px 0;_padding-top:10px;}
+	.box_bin div{margin:0 0 15px;}
+	.box_bin select{width:75px;padding:3px 0;}
+	#alert_title,#alerts{display:none;}
+</style>
+<script type="text/javascript">
+$(function(){
+	var $box_confirm= $('.box_confirm');
+
+	lay_in();
+	$box_confirm.fadeIn();
+
+	$('html,body').keydown(function(event){
+		if($('#box_layer').is(':visible')){
+			if(event.which == 27){
+				box_out();
+			}
+		}
+	});
+	$('#confirm_form').submit(function(){
+		if($('#do_in').attr('checked') == 'checked'){
+			<% @yda_game = YdaGame.new %>
+			$box_confirm.hide().siblings().show();
+			return false;
+		}else{
+			$('#box_layer').fadeOut();
+			return false;
+		}
+	})
+
+	$('.box_close').click(box_out);
+})/*$*/
+
+
+function lay_in(){
+	$('#box_layer').fadeIn();
+}
+function lay_out(){
+	$('#box_layer').fadeOut();
+}
+function box_out(){
+	$('.abs_center').fadeOut();
+	lay_out();
+}
+</script>
+<% end %>
+
+<div id="box_layer">
+	<div class="box_confirm abs_center none">
+		<h1>
+			<a href="javascript:void(0)" class="box_close fr"></a>提示
+		</h1>
+		<p>您上传的作品是否参加NPYDA大赛？</p>
+		<form action="" method="" id="confirm_form">
+			<input type="radio" name="yda_join" class="radio" checked="true" id="do_in" />我要参赛
+			<input type="radio" name="yda_join" class="radio" />我不参赛<br />
+			<input type="image" src="<%= asset_path "box/box_confirm.jpg" %>" class="box_submits" />
+		</form>
+	</div><!--box_confirm ends-->
+	<div class="box_bin abs_center none">
+		<a href="javascript:void(0)" class="box_close pa"></a>
+		<img src="<%= asset_path "box/box_logo.jpg" %>" class="fr" />
+		<img src="<%= asset_path "box/box_title.jpg" %>" />
+		<%= form_for @yda_game, :remote => true do |f| %>
+		<div>
+			<label for="" class="labels">学生姓名</label>
+			<%= f.text_field "name", :class => "width_full" %>
+			<%= f.hidden_field "user_id", :value => current_user.id %>	
+		</div>
+		<div>
+			<label for="" class="labels">院校</label>
+			<%= f.text_field "school", :class => "width_half" %>
+			<label for="">专业</label>
+			<%= f.text_field "specialty", :class => "width_half" %>
+			<label for="">年级</label>
+			<%= f.text_field "grade", :class => "width_half" %>
+		</div>
+		<div>
+			<label for="" class="labels">有效证件</label>
+			<select name="yda_game[paperwork_type]" id="yda_game_paperwork_type">
+				<option value="1">身份证</option>
+				<option value="2">护照</option>
+			</select>
+			<label for="">号码</label>
+			<%= f.text_field "paperwork_no", :class => "width_third", :maxlength => "18" %>
+			<label for="">手机</label>
+			<%= f.text_field "mobile", :class => "width_third", :maxlength => "11" %>				
+		</div>
+		<div>
+			<label for="" class="labels">地址</label>
+			<%= f.text_field "address", :class => "width_full" %>
+		</div>
+		<div>
+			<label for="" class="labels">城市</label>
+			<%= f.text_field "city", :class => "width_half" %>
+
+			<label for="">国家</label>
+			<%= f.text_field "country", :class => "width_half" %>
+			<label for="">邮编</label>
+			<%= f.text_field "postcode", :class => "width_half", :maxlength => "6" %>
+		</div>
+		<div>
+			<label for="" class="labels">E-mail</label>
+			<%= f.text_field "email", :class => "width_full" %>
+
+		</div>
+		<p class="tc">
+			<input type="checkbox" checked="checked" id="read_all" name="read_all" />我已仔细阅读，尊重并同意大赛的<a href="/yda/down_yda" target="_blank">赛事细则</a><br />
+			<span id="alerts">请先阅读大赛的赛事细则！</span>
+			<input type="submit" class="box_submit" value="" />
+			<input type="reset" class="box_reset" value="" />
+		</p>
+		<% end %>
+	</div><!--box_bin ends-->
+</div><!--box_layer ends-->
