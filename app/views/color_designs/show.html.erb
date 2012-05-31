@@ -37,9 +37,35 @@
           <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
         </div>
         <div class="operate pr">
-          <span class="forward">转发 (<%= @design.shares_count %>)</span>
+          <!-- <span class="forward">转发 (<%= @design.shares_count %>)</span> -->
           <span class="review">评论 (<%= @design.comments.length %>)</span>
-          <%= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{@design.design_name}】，推荐色：立邦#{@design.recommend_color1} #{@code.name}，让色彩融入生活，尽在iColor@刷新生活iColor", "http://#{request.host_with_port}/color_designs/#{@design.id}", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
+          <span class="forward" style="height:18px"></span>
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop">
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a class="jiathis_button_kaixin001"></a>
+            <a class="jiathis_button_renren"></a>
+          </div>
+          <!-- JiaThis Button END -->
+          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+          <!-- JiaThis Button END -->
+          <script type="text/javascript" charset="utf-8">
+          var jiathis_config = {
+            boldNum:4,
+            siteNum:4,
+            showClose:false,
+            sm:"kaixin001,renren,tsina,tqq",
+            imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+            imageWidth:26,
+            marginTop:150,
+            pic: "http://www.icolor.com.cn/<%= @design.show_preview_img.url(:slide) %>",
+            url:"http://<%=request.host_with_port%>/color_designs/<%=@design.id%>",
+            title:"#iColor分享#一幅精美的室内色彩搭配案例----【<%=@design.design_name %>】，推荐色：立邦<%=@design.recommend_color1%> <%=@code.name%>，让色彩融入生活，尽在iColor@刷新生活iColor，",
+            data_track_clickback:true
+          }
+          </script>
+          <%#= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{@design.design_name}】，推荐色：立邦#{@design.recommend_color1} #{@code.name}，让色彩融入生活，尽在iColor@刷新生活iColor", "http://#{request.host_with_port}/color_designs/#{@design.id}", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
         </div>
       </div>
       <div class="fullscreen_btn">
