@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :email, :if => :email_required?
   validates_presence_of :password, :if => :email_required?, :on => :create
   validates_presence_of :is_read, :if => :email_required?, :on => :create
-  validates_presence_of :phone, :on => :create, :message => "联系电话不能为空！"
+  validates_presence_of :phone, :on => :create, :message => "联系电话不能为空！", :if => :not_from_minisite?
   validates_presence_of :role_id
   validates_presence_of :area_id, :on => :create
   validates_format_of :username, :with => /(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]/, :if => :email_required?
@@ -166,9 +166,9 @@ class User < ActiveRecord::Base
   end
 
   #基础加分方法
-  def create_score(user_id, type, status, amount, remark = "") 
-    Score.create(:user_id => user_id, 
-                :score_type => type, 
+  def create_score(user_id, type, status, amount, remark = "")
+    Score.create(:user_id => user_id,
+                :score_type => type,
                 :status => status || 1,
                 :amount => amount,
                 :remark => remark
@@ -185,7 +185,7 @@ class User < ActiveRecord::Base
       end
     end
     had_score = self.scores.where("score_type = ?", 101).sum(:amount)
-    real_score = (had_score + need_score) >= 90 ? (90 - had_score) : need_score 
+    real_score = (had_score + need_score) >= 90 ? (90 - had_score) : need_score
     #公司 && 上限90
     if self.company? &&  had_score + need_score < 90
       self.create_score(self.id, 101, 1, real_score)
@@ -207,7 +207,7 @@ class User < ActiveRecord::Base
   def share_score(user, score_type)
     if self.scores.where("score_type in (500,501,502,503) and to_days(created_at) = to_days(now())").blank?
       self.create_score(user.id, score_type, 1, 20)
-    end      
+    end
   end
 
   #投票&被投票加分
@@ -256,12 +256,12 @@ class User < ActiveRecord::Base
         if be_insp_scoure < 500
           self.create_score(be_uid, 813, 1, 50, comment['commentable_id'])
         end
-      end 
+      end
       #每周之星
       if comment['commentable_type'] == "WeeklyStar"
         return false
       end
-      #实用工具   
+      #实用工具
       if comment['commentable_type'] == ""
         return false
       end
@@ -291,6 +291,10 @@ class User < ActiveRecord::Base
   protected
   def recommended_requird?
     recommended == true
+  end
+
+  def not_from_minisite?
+    self.is_from_minisite != true
   end
 
 end
