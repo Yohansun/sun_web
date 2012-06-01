@@ -33,7 +33,7 @@
 <!--           <span class="forward">转发 (<%#= @inspiration.shares_count %>)</span> -->
           <span class="review">评论 (<%= @inspiration.comments_count %>)</span>
           <% cover_img = @inspiration.cover_img.file.url if @inspiration.cover_img -%>
-          <span class="forward" style="height:18px"></span>
+          <span class="forward" style="height:18px">一键转发：</span>
           <!-- JiaThis Button BEGIN -->
           <div id="ckepop">
             <a class="jiathis_button_tsina"></a>
