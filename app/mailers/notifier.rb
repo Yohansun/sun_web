@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+# -*- encoding: utf-8 -*-
 class Notifier < ActionMailer::Base
   default from: "icolor@nipponpaint.com.cn"
 
@@ -47,10 +48,11 @@ class Notifier < ActionMailer::Base
         )
   end
 
-  def email(user)
-    @user = user
-    mail(:to => @user.email,
-         :subject => "iColor邀您登陆啦！",
+  def email(email,name)
+    @email = email
+    @name = name
+    mail(:to => @email,
+         :subject => "iColor注册登录通知",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end
