@@ -23,6 +23,9 @@ Icolor::Application.routes.draw do
   post "/api/login" => "api#login"
   post "/api/create_user" => "api#create_user"
 
+  #在线配色
+  resources :mix_colors, :as => :pre_mix_colors
+
   #订阅电子期刊和在线客服
   post "/maillists" => "maillists#create"
   match "/site_messages" => "site_messages#create", via: :post, as: 'online_qa'
@@ -152,7 +155,6 @@ Icolor::Application.routes.draw do
     resources :sys_msgs
   end
 
-
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
 
@@ -172,10 +174,7 @@ Icolor::Application.routes.draw do
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
   mount MagicContent::Engine => '/admin/content', :as => 'magic_content'
   mount MagicAdmin::Engine => '/admin', :as => 'magic_admin'
-
-  #在线配色
-  resources :mix_colors
-
+  
   #认证考试
   resources :approves
 

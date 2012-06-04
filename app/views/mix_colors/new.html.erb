@@ -44,7 +44,7 @@
       <div class="form_target">
         <iframe id="upload_target" name="upload_target"></iframe>
       </div>
-      <%= form_for(@mix_color, :html => { :id => "upload_form", :multipart => true }) do |f| %>
+      <%= form_for(@mix_color, :url => pre_mix_colors_path, :html => { :id => "upload_form", :multipart => true }) do |f| %>
           <table>
             <tbody>
             <tr class="f_content">
