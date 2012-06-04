@@ -27,7 +27,7 @@
             <%- end %>
         };
 
-        $('.palette').mouseover(
+         $('#colors_con').hover(
                 function() {
 
                     var id = $($(instanceOne.imagesDiv).find("img")[instanceOne.imageID]).attr("data-id");
@@ -49,10 +49,9 @@
                         }
                     };
                     $ul.html(tmp);
-                    $('.desc').removeClass().addClass('desc desc' + size);
-                }).mouseout(function() {
-                    var $ul = $(this).find('ul');
-                    $ul.html('');
+                    $(this).children('img').fadeToggle('fast');
+                    $(this).children('div.desc').fadeToggle('fast');
+                    $(".list ul li:last").addClass("noborder"); 
                 });
     });
 </script>
