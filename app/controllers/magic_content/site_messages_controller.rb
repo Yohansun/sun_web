@@ -9,7 +9,7 @@ module MagicContent
       sys_msg = SysMsg.create(:content => params[:sys_msg]['content'], :reply_type => "site_message",
         :status => SysMsg::Status[0], :reply_name => "iColor客服",
         :user_id => resource.user.id, :site_message_id => resource.id)
-      resource.save
+      resource.update_attribute :sys_msg_id, sys_msg.id
       redirect_to main_app.site_messages_path
     end
 

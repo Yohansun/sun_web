@@ -73,36 +73,27 @@
       <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_star_url(@design), @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
   </div>
 </div>
-<div class="color">
-  <div class="palettes">
-    <%- 8.times do %>
-        <div class="palette">
-          <div class="desc">
-            <div class="title"></div>
-            <div class="list">
-              <ul>
-              </ul>
-            </div>
+<div class="colors_box b_shadow">
+  <div class="colorsbox " style="padding:10px 0; overflow:hidden;">
+    <div class="color-picker group">
+      <div class="colors_tit" style="float:left; margin:20px 15px 0 0;">
+        <img src="<%= asset_path "master/colors_icon_tit.png" %>" />
+      </div>
+      <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
+        <img src="<%= asset_path "design/colors2.gif" %>" />
+        <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
+          <div class="list" style="height:35px;">
+            <ul class="group" style="overflow:hidden;">
+            </ul>
           </div>
         </div>
-    <%- end %>
+      </div>
+      <div class="mall_link">
+        <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
+        <a href="http://www.nipponpaint.com.cn/web/index.jsp" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
+      </div>
+    </div>  
   </div>
-<!--[if IE 6]>
-<script type="text/javascript">
-    if ($.browser.msie && $.browser.version < 7) {
-        $(function () {
-            $('div.palette').hover(function () {
-                $(this).find('div.desc').show();
-            }, function () {
-                $(this).find('div.desc').hide();
-            });
-        })
-    }
-</script>
-<![endif]-->
-<div class="gotaobao">
-  <a href="http://nipponpaint.tmall.com/shop/viewShop.htm" target="_blank">访立邦淘宝商城，点选更多产品颜色</a>
-</div>
 </div>
 </div>
 

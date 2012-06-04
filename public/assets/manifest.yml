@@ -172,6 +172,7 @@ design/buttonA.gif: design/buttonA-3a7d6f5889e4d12df8d8994901f721d7.gif
 design/color_design.png: design/color_design-2dcc2aa0e8fa1421f594b77a3089cbef.png
 design/color_trend_bg.gif: design/color_trend_bg-3db85e9e0ff12c8b95c7704a0650eba5.gif
 design/colors.gif: design/colors-402a2ee8a20a0cd7992ebd66bb4532c8.gif
+design/colors2.gif: design/colors2-746efae139170464bdf0693a1eaad43f.gif
 design/d_act_list/2012beijing.jpg: design/d_act_list/2012beijing-c6c4987e06b5d9b2198ca8f5609f64ee.jpg
 design/d_act_list/2012haikou.jpg: design/d_act_list/2012haikou-dfb102a5613524f56845ec468c057a2c.jpg
 design/d_act_list/2012shanghai.jpg: design/d_act_list/2012shanghai-97c8740a0791cbde255ca30fd38008d8.jpg
@@ -424,7 +425,7 @@ kv3.jpg: kv3-1d96ecab8ab4d946b1340a5ec66783c2.jpg
 kv4.jpg: kv4-d134cc256be233f106632079c9941188.jpg
 kv6.jpg: kv6-f4c5cb8aa35afb501478fa8211a82c41.jpg
 kv7.jpg: kv7-60a673f986ed06c79a465edbebe5e010.jpg
-kv8.jpg: kv8-1758647b1e178c2e8bd64729e3ab8725.jpg
+kv8.jpg: kv8-e51a3710eaf5a05332ad9253b99211f4.jpg
 kx.jpg: kx-7684f22d4f9a8918600fffcb188a5220.jpg
 link1.png: link1-fe17e60aab0b4f21cb0c6fad4344d501.png
 link2.png: link2-0bc8d8c3f0d100483021ef3c9b5c3161.png
@@ -452,6 +453,7 @@ master/colors_icon_tit.png: master/colors_icon_tit-792797a62ea63a43f74824ae6b4ea
 master/colors_over_bg_l.png: master/colors_over_bg_l-3dbcb68837964cf0fc6a2eb6f3bb2511.png
 master/colors_over_bg_r.png: master/colors_over_bg_r-baedcf88373a16129f2d468c3824fe7f.png
 master/full_play_btn.png: master/full_play_btn-9633bdd5128d070d175af0cdc4b7fe60.png
+master/go_shops.jpg: master/go_shops-2876c2e040d699b7c20df6f433281b68.jpg
 master/hot_topics1.jpg: master/hot_topics1-16fc956d88c78baaca53716fe2ba5497.jpg
 master/hot_topics2.jpg: master/hot_topics2-ae27b196487edf472ad9a2266584beaf.jpg
 master/hot_topics3.jpg: master/hot_topics3-8cb2dd9cf1470d15171c5d441dd73f52.jpg
@@ -973,7 +975,7 @@ reg.css: reg-c55253fecb20086475032c0046a7bdde.css
 reset.css: reset-ad3b1a1d4417ce93791b4673319740a7.css
 scores.css: scores-7270767b2a9e9fff880aa5de378ca791.css
 shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
-style.css: style-01552c14d2b34a44ef9e59453c1c8fb8.css
+style.css: style-dea555e1b32e121baa98b8879d8eda93.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-b095a8563428ccb571f0c5d4d5fcf8ce.css
