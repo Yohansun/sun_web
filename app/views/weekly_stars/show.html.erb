@@ -68,7 +68,6 @@
   </div>
 
   <div class="operate pr">
-    <span class="forward">转发 (<%=@link_design.shares_count %>)</span>
     <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).length %>)</span></a>
       <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_star_url(@design), @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
   </div>

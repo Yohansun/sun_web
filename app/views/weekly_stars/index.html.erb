@@ -52,9 +52,8 @@
             所获票数：<span id="votes_count<%= @design.id %>"><%= @link_design.try(:votes_count) %></span>&nbsp;&nbsp;
           </div>
           <div class="operate pr">
-            <span class="forward">转发 (<%= @link_design.try(:shares_count) %>)</span>
-            <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).try(:length) %>)</span></a>
-              <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author},#{@design.design_name}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_stars_url, @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
+            <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author},#{@design.design_name}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_stars_url, @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
+            <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).try(:length) %>)</span></a>   
           </div>
         </div>
         <div class="colors_box b_shadow">
