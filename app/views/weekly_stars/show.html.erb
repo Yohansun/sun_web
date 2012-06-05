@@ -150,12 +150,13 @@
 <div class="review_wrap">
   <div class="reviewform">
     <div class="bar">
-      <h4><span>评论</span>(<%= @design.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
+      <h4><span>评论</span>(<%= @link_design.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
     </div>
     <div class="form-content">
       <%= form_for(Comment.new) do |f| %>
-          <%= f.hidden_field :commentable_id, value: params[:id] %>
-          <%= f.hidden_field :commentable_type, value: 'WeeklyStar' %>
+          <%- design_link_id = @design.design_link.split("/").last unless @design.design_link.blank? %>
+          <%= f.hidden_field :commentable_id, value: design_link_id %>
+          <%= f.hidden_field :commentable_type, value: 'Design' %>
           <p class="input">
             <%= f.text_area :content, :class => "area_text" %>
           </p>
