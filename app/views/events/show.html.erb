@@ -122,7 +122,7 @@
               <%- @comments.each do |c| %>
                   <li>
                     <div class="bar">
-                      <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.to_s(:db) %></span>
+                      <span class="user"><%= c.user.display_name %></span><span class="time"><%= c.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
                     </div>
                     <div class="reply"><a href="javascript:void(0)">回复</a></div>
                     <div class="content"> <%= c.content %></div>

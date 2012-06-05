@@ -38,7 +38,7 @@
             <%- end %>
             <h2 class="visitor_info">
               <strong class="fl"><a href="/users/<%= m.from_user.id %>"><%= m.from_user.display_name %></a></strong>
-              <span class="fl"><%= m.created_at.to_s(:db)[5..6] %>月<%= m.created_at.to_s(:db)[8..9] %>日&nbsp;&nbsp;<%= m.created_at.to_s(:time) %></span>
+              <span class="fl"><%= m.created_at.strftime("%Y-%m-%d")[5..6] %>月<%= m.created_at.strftime("%Y-%m-%d")[8..9] %>日&nbsp;&nbsp;<%= m.created_at.strftime("%H:%M") %></span>
             </h2>
             <div class="msgboard_btn">
               <%- if current_user && current_user == @user %>
