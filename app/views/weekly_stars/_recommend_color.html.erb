@@ -27,7 +27,7 @@
             <%- end %>
         };
 
-        $('#colors_con').hover(
+        $('#colors_con').mouseenter(
                 function() {
                     var id = $($(instanceOne.imagesDiv).find("img")[instanceOne.imageID]).attr("data-id");
                     if (id == 0) {
@@ -47,11 +47,14 @@
                             tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
                         }
                     };
-                   
+
                     $ul.html(tmp);
-                    $(this).children('img').fadeToggle('fast');
-                    $(this).children('div.desc').fadeToggle('fast');
-                    $(".list ul li:last").addClass("noborder");    
+                    $(this).children('img').hide();
+                    $(this).children('div.desc').show();
+                    $(".list ul li:last").addClass("noborder");            
+                }).mouseleave(function(){
+                    {$(this).children('img').show();
+                    $(this).children('div.desc').hide();}
                 });
     });
 </script>
