@@ -61,9 +61,49 @@ module ApplicationHelper
   def forward_links(title, url = '', pic = '', id, type)
     uri_title = URI.encode(title)
     unless pic.nil?
-      raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" class="popup_zf group none" style="background:white;"><span style="background:white;padding:0; margin:0; line-height:14px;">一键转发：</span><a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a><a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a><a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a><a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a></span>'
+      if type == 'WeeklyStar'
+        raw '<span style="height:18px;position:absolute; left:-178px; background-color:none;">
+              一键转发：
+              <span class="popup_zf2 group" style="background:#fff;bottom:-4px;*bottom:-5px!important; left:70px;width:90px;border:0;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" >
+                <a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a>
+                <a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a>
+                <a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a>
+                <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
+              </span>
+            </span>'
+      else  
+        raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" class="popup_zf group none" style="background:white;">
+              <span style="background:white;padding:0; margin:0; line-height:14px;">
+                一键转发：
+              </span>
+              <a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a>
+              <a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a>
+              <a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a>
+              <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
+            </span>'
+      end
     else
-      raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" class="popup_zf group none" style="background:white;"><span style="background:white; padding:0; margin:0; line-height:14px;">一键转发：</span><a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a><a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a><a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a><a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a></span>'
+      if type == 'WeeklyStar'
+        raw '<span style="height:18px;position:absolute; left:-178px; background-color:none;">
+                一键转发：
+                <span class="popup_zf2 group" style="background:#fff;bottom:-4px;*bottom:-5px!important; left:70px;width:90px;border:0;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" >
+                  <a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a>
+                  <a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a>
+                  <a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a>
+                  <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
+                </span>
+              </span>'
+      else
+        raw '<span data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" class="popup_zf group none" style="background:white;">
+              <span style="background:white; padding:0; margin:0; line-height:14px;">
+              一键转发：
+              </span>
+              <a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a>
+              <a data-webid="tsina" class="popup_zf_sina" href="javascript:void();"></a>
+              <a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a>
+              <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
+            </span>'
+      end       
     end
   end
 

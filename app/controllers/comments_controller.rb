@@ -4,9 +4,14 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id if current_user
     @comment.save
     current_user.comment_score(current_user, params[:comment]) if current_user
+
     case @comment.commentable_type
       when 'Design'
-        redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
+        if request.headers['referer'].match %r(weekly_stars)
+          redirect_to request.headers['referer']
+        else
+          redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
+        end
       when 'Faq'
         redirect_to faq_path(@comment.commentable.id)
       when 'Post'

@@ -3,10 +3,10 @@
 		<div class="num">
 		</div>
 	</div>
-	<blockquote><%= raw resource.desc %><br><span>提问于：<%= resource.created_at.to_s(:db) %></span></blockquote>
+	<blockquote><%= raw resource.desc %><br><span>提问于：<%= resource.created_at.strftime("%Y-%m-%d %H:%M:%S")  %></span></blockquote>
 	<% @sys_msgs.each do |sys_msg| %>
 	<div class="widget first">
-		<div class="body"><%= sys_msg.content %><br><span>回复于：<%= sys_msg.created_at.to_s(:db) %></span></div>
+		<div class="body"><%= sys_msg.content %><br><span>回复于：<%= sys_msg.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span></div>
 	</div>
 	<% end %>
 </div>

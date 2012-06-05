@@ -23,7 +23,7 @@
         <%- unless @faqs.blank? %>
         <%- @faqs.each do |f| %>
         <p>
-          <span class="<%= "replay_new_time" if @faqs.first == f %>"><%= f.created_at.to_s(:db)[0..9] %></span>
+          <span class="<%= "replay_new_time" if @faqs.first == f %>"><%= f.created_at.strftime("%Y-%m-%d %H:%M:%S")[0..9] %></span>
           <span class="<%= "replay_new" if @faqs.first == f %>"><%= f.comments_count %></span>
           <a href="/faqs/<%= f.try(:id) %>"><%= f.try(:title) %></a>
         </p>
