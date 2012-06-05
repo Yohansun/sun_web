@@ -21,13 +21,19 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     referer = request.headers['referer']
 
-    if referer =~ %r(#{request.base_url}/users/\d{1,}/(designs|inspirations)?)
-      referer_link = request.base_url + "/" + $1
-      return referer_link
-    elsif referer =~ %r(#{request.base_url}/users)
-      return "/" 
-    else  
-      referer.blank? ? "/" : referer  
+    unless request.base_url.blank?
+      if referer =~ %r(#{request.base_url}/users(/\d{1,}/(designs|inspirations)?)?)
+        if $1.blank? || $2.blank?
+          return "/"
+        else          
+          referer_link = request.base_url + "/" + $2
+          return referer_link
+        end
+      else  
+        return referer  
+      end  
+    else
+      return "/"
     end  
   end
 end
