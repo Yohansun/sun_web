@@ -15,7 +15,12 @@
   <!-- Form with validation -->
   <%= simple_form_for(:customer_reply, :url => main_app.mix_color_path(resource),:html => { :class => "mainForm", :id => "valid", :method => "put" }) do |f| %>
     <div>
-      <blockquote><%= resource.description %></blockquote>
+      <blockquote>
+        <%= resource.description %>
+        <%- unless resource.mix_color_img_file_name.blank? %>
+          ”<br>“<%= image_tag resource.mix_color_img.url(:thumb) %>
+        <% end %>
+      </blockquote>
     </div>
     <fieldset>
       <div class="widget border">
