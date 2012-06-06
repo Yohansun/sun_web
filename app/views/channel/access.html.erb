@@ -61,7 +61,7 @@
 
           <div class="owner_center fl ft12">
             <span class="owner_name fl fb ft14"><%= user.display_name %></span>
-            <span class="owner_city fl">(<%= user.city.try(:name) %>)</span>
+            <span class="owner_city fl">(<%= user.user_location %>)</span>
             <%= link_to "进入主页", user_path(user), :class => "fl" %>
             <div class="owner_info fl pr">
               <span></span>

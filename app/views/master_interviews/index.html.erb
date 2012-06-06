@@ -20,7 +20,12 @@
           </div>
           <div class="list_detail">
             <h3><a href="/master_interviews/<%= article.id %>"><%= article.title %></a></h3>
-            <p class="h3_sub"><span><%= article.created_at.to_formatted_s(:db) %></span></p>
+            <p class="h3_sub">
+              <span><%= article.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+              <span class="pr" style="left:200px;">
+                <%= forward_links("#iColor分享#设计大师：#{article.name}【#{article.title}】与你分享行业经验，畅谈更设计心得，尽在iColor！@刷新生活iColor，", master_interviews_url, article.preview_img_out.url(:original), article.id.to_s, "MasterInterview") %>
+              </span>
+            </p>
             <p><%= raw truncate(article.intro, :length => 250) %></p>
             <p class="pt25"><a href="/master_interviews/<%= article.id %>"><img src="<%= asset_path "master/look_detail_btn.png" %>" alt="" /></a></p>
           </div><!--list_detail ends-->
