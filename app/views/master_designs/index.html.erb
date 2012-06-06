@@ -29,6 +29,11 @@
               <h4>作者：<strong><%= design.master_profile.try(:name) || design.master_name %></strong></h4>
               <h4>国籍：<span><%= design.master_profile.try(:nationality) %></span></h4>
               <h4>作品名称：<span><%= design.design_name %></span></h4>
+              <p>
+                <span class="pr" style="left:179px;">
+                  <%= forward_links("#iColor分享#设计大师：#{design.master_profile.try(:name) || design.master_name}与你分享作品，想要学习业界顶级设计理念，尽在iColor！@刷新生活iColor，", master_designs_url, design.main_preview_img.url(:index), design.id.to_s, "MasterDesign") %>
+                </span>
+              </p>
 
               <%- if design.master_design_uploads && design.master_design_uploads.size > 0  %>
               <div class="works_list_slide" id="qin_slide1">
