@@ -165,6 +165,14 @@ class User < ActiveRecord::Base
     return Score::LevelName.rindex("#{self.score_level}").try(:next) || 0
   end
 
+  def user_location
+    if self.city.blank?
+      (self.location == "NULL") ? "" : self.location
+    else
+      self.city.try(:name)
+    end
+  end
+
   #基础加分方法
   def create_score(user_id, type, status, amount, remark = "")
     Score.create(:user_id => user_id,

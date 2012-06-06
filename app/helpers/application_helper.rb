@@ -61,7 +61,7 @@ module ApplicationHelper
   def forward_links(title, url = '', pic = '', id, type)
     uri_title = URI.encode(title)
     unless pic.nil?
-      if type == 'WeeklyStar' || type == 'MasterInterview' || type == 'MasterDesign'
+      if type =~ %r(WeeklyStar|MasterInterview|MasterDesign)
         raw '<span style="height:18px;position:absolute; left:-178px; background-color:none;">
               一键转发：
               <span class="popup_zf2 group" style="background:#fff;bottom:-4px;*bottom:-5px!important; left:70px;width:90px;border:0;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" >
@@ -83,7 +83,7 @@ module ApplicationHelper
             </span>'
       end
     else
-      if type == 'WeeklyStar' || type == 'MasterInterview' || type == 'MasterDesign'
+      if type =~ %r(WeeklyStar|MasterInterview|MasterDesign)
         raw '<span style="height:18px;position:absolute; left:-178px; background-color:none;">
                 一键转发：
                 <span class="popup_zf2 group" style="background:#fff;bottom:-4px;*bottom:-5px!important; left:70px;width:90px;border:0;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" >
