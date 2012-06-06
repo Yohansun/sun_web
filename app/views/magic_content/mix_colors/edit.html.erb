@@ -18,7 +18,7 @@
       <blockquote>
         <%= resource.description %>
         <%- unless resource.mix_color_img_file_name.blank? %>
-          ”<br>“<%= image_tag resource.mix_color_img.url(:thumb) %>
+          ”<br>“<%= image_tag resource.mix_color_img.url(:original) %>
         <% end %>
       </blockquote>
     </div>
