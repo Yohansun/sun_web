@@ -16,6 +16,16 @@
 <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
 <%= javascript_include_tag "jquery.autocomplete.js", "uncompressed.jquery.dd.js" %>
 <script type="text/javascript">
+  <%- unless flash[:design_errors].blank? %>
+  <%-
+      errors = ""
+      flash[:design_errors].each do |e|
+        errors << "*" + e + '\n'
+      end
+  %>
+    alert("<%= errors %>");
+  <%- end %>
+
 $(function(){
   try {
           //$("body select").msDropDown();
@@ -108,7 +118,7 @@ function add_tag(text){
           <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
-          <%= f.label :content, "推荐理由：" %>
+          <%= f.label :reason, "推荐理由：" %>
           <%= f.text_area :reason, class: "works_details fb ft14 fl" -%>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
