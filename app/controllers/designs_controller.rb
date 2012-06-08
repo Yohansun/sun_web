@@ -44,11 +44,28 @@ class DesignsController < ApplicationController
 
   def create
     @design = current_user.designs.build(params[:design])
-    @design.design_color = params[:design][:design_color].join(",")
+
     if @design.save
       current_user.create_score(current_user.id, 601 , 1 , 50)
       redirect_to upload_user_design_path(current_user, @design)
     else
+      flash[:design_errors] = []
+      @design.errors.messages.each do |key,value|
+        case key.to_s
+          when "title"
+            flash[:design_errors] << "作品名称不能为空！"
+          when "content"
+            flash[:design_errors] << "设计理念不能为空！"
+          when "content"
+            flash[:design_errors] << "设计理念不能为空！"
+          when "reason"
+            flash[:design_errors] << "推荐理由不能为空！"
+          when "design_color"
+            flash[:design_errors] << "色系不能为空！"
+          when "area_id"
+            flash[:design_errors] << "作品所属城市不能为空！"
+        end
+      end
       render :action => 'new'
     end
   end
