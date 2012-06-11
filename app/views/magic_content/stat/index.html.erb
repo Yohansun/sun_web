@@ -51,6 +51,25 @@
   </div>
 
   <div class="table">
+    <div class="head"><h5 class="iFrames">统计数据结果</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="70%">数据来源</th>
+          <th width="30%">数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lands.each do |land| %>
+        <tr class="gradeA">
+          <td><%= land.source %></td>
+          <td><%= land.count %></td>
+        </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+  <div class="table">
     <div class="head"><h5 class="iFrames">片区活跃度</h5></div>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
@@ -207,18 +226,18 @@
           <%end %>
         </tr>
         <tr>
-          <td>设计师（在读）</td>
+          <td>设计师（在读）</td>          
           <% @areas.each do |area| %>
             <td><%= @city_reg2[area.id]%></td>
           <%end %>
         </tr>
         <tr>
-          <td>家装公司</td>
+          <td>家装公司</td>          
           <% @areas.each do |area| %>
             <td><%= @city_reg3[area.id]%></td>
           <%end %>
         </tr>
-        <tr>
+        <tr>          
           <td>普通用户</td>
           <% @areas.each do |area| %>
             <td><%= @city_reg4[area.id]%></td>
@@ -243,18 +262,18 @@
           <% end %>
         </tr>
         <tr>
-          <td>设计师（在读）</td>
+          <td>设计师（在读）</td>          
           <% @areas.each do |area| %>
             <td><%= @city_login2[area.id] %> </td>
           <% end %>
         </tr>
         <tr>
-          <td>家装公司</td>
+          <td>家装公司</td>          
           <% @areas.each do |area| %>
             <td><%= @city_login3[area.id] %> </td>
           <% end %>
         </tr>
-        <tr>
+        <tr>          
           <td>普通用户</td>
           <% @areas.each do |area| %>
             <td><%= @city_login4[area.id] %> </td>
@@ -279,18 +298,18 @@
           <% end %>
         </tr>
         <tr>
-          <td>设计师（在读）</td>
+          <td>设计师（在读）</td>          
           <% @areas.each do |area| %>
             <td><%= @city_design2[area.id] %> </td>
           <% end %>
         </tr>
         <tr>
-          <td>家装公司</td>
+          <td>家装公司</td>          
           <% @areas.each do |area| %>
             <td><%= @city_design3[area.id] %> </td>
           <% end %>
         </tr>
-        <tr>
+        <tr>          
           <td>普通用户</td>
           <% @areas.each do |area| %>
             <td><%= @city_design4[area.id] %> </td>
