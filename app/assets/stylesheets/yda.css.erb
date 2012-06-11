@@ -15,7 +15,7 @@ ul.nav li a{width:120px;height:58px;display:block;text-align:center;line-height:
 .yda_agenda{background:url(<%= asset_path "yda/yda_agenda.png" %>) no-repeat;}
 .yda_prize{background:url(<%= asset_path "yda/yda_prize.png" %>) no-repeat;}
 
-.yda{padding:0 36px;*padding-top:20px;}
+.yda{padding:0 36px;*padding-top:20px;width:888px;}
 .yda_ins,.yda_detail{margin-top:20px;}
 .yda_detail{background:url(<%= asset_path "yda/yda_detail.png" %>) no-repeat;width:152px;height:49px;text-indent:-999em;}
 
@@ -53,3 +53,59 @@ span.triagle{float:left;display:inline;margin:2px 10px 0 0;border-color:transpar
 .yda_email{right:0;top:0;background:url(<%= asset_path "yda/yda_email.jpg" %>) left center no-repeat;padding-left:2em;color:#23328A;}
 .yda_email a{color:#EF4136;text-decoration:underline;font-weight:bold;}
 .yda_tip{font-style:italic;color:#23328A;margin:10px 0 -16px;}
+
+.mt10{margin-top:10px!important;}
+.yad_title{background:none;text-indent:0;color:#ef4136;line-height:81px;}
+.congrats{background:#ef4136;padding:0.2em 0.5em;margin:15px 0;}
+.yda h2{clear:both;font-size:14px;font-weight:bold;}
+.yda_table{width:395px;border:1px solid #d5d6d2;margin:20px 0;}
+.yda_table td{border:1px solid #d5d6d2;height:50px;text-align:center;font-weight:bold;}
+.yda_table td a{font-weight:bold;font-size:14px;color: #000;display:block;height:50px;line-height:50px;}
+.yda_table td a:hover{background:#ffe4e2;}
+.yda p.cr{margin:0;width:auto;margin-right:30px;}
+#yda_name{font-size:18px;font-weight:bold;}
+#yda_school{font-size:12px;border-bottom:1px solid #ef4136;padding:15px 0;margin-bottom:10px;}
+#yda_ul{margin:15px 0;}
+#yda_ul li{float:left;display:inline;margin-right:5px;}
+#yda_ul li img{width:91px;height:61px;border:1px solid #707070;cursor:pointer;opacity:0.5;filter:alpha(opacity=50);}
+#yda_ul li.curr img{opacity:1;filter:alpha(opacity=100);}
+.nomargin{margin:0!important;}
+
+#layer{
+	position:fixed;_position:absolute;
+	width:100%;height:100%;left:0;top:0;
+	background:#000;
+	cursor:pointer;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter:alpha(opacity=50);
+	z-index:2000;
+	display:none;
+}
+.abs_center{
+	position:fixed;
+	_position:absolute;
+	top:-50%;
+	left:50%;
+	z-index:2001;
+	cursor:auto;
+}
+
+.content{
+	width:488px;height:520px;				/*customize the size*/
+		margin-left:-289px;margin-top:-305px;	/*adjustify the margins*/
+		padding:45px;
+		font-size:12px;
+		background:#fff;
+		border-radius:10px;
+		box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+		display:none;
+	}
+	#lay_close{
+		background:url(<%= asset_path "yda/lay_close.png" %>) no-repeat;
+		_background-image:url(<%= asset_path "yda/lay_close.gif" %>);
+		width:32px;height:32px;
+		position:absolute;
+		right:-16px;
+		top:-14px;
+	}

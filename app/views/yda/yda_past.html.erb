@@ -1,0 +1,87 @@
+ 
+ <div class="header clear">
+  <a href="/yda" class="fl"><img src="<%= asset_path "yda/yda_logo.png"%>" alt="" /></a>
+    <ul class="nav fl">
+      <li><a href="/yda">首页</a></li>
+        <li><a href="/yda/info" class="yda_info">赛事简介</a></li>
+        <li><a href="/yda/theme">赛事主题</a></li>
+        <li><a href="/yda/act">如何参加</a></li>
+        <li><a href="/yda/agenda">赛事日程</a></li>
+        <li><a href="/yda/prize">赛事奖项</a></li>
+    </ul><!--nav ends-->
+</div><!--header ends-->
+ <div class="yda fl ft12">
+  <div class="yda_top pr">
+   <span class="pa tr">赛事简介</span>
+ </div><!--yda_top ends-->
+ <div class="yda_title_info yad_title fb ft18">培养设计精英</div>
+ <p>2011年立邦亚洲青年设计师大赛<br />
+  立邦亚洲青年设计师大赛（NPYDA）由立邦组织并为了表彰年轻有才的设计新秀。<br />
+  2011年大赛的目标是鼓励亚洲青年设计师及建筑师采用创新绿色设计理念，通过成本、环境、社会与人之间的优化平衡来实现更美好的生活。<br />
+  2011年的立邦亚洲青年设计大赛仍是区域性大赛！金奖获得者与来自亚洲各国的选手同场竞技争夺区域冠军。区域冠军获得了现金奖金及2011年立邦亚洲青年设计师大奖的荣誉。</p>
+  <p class="fb italic mt10">2011年中国大陆地区的选手表现优异，成绩斐然。特别是在空间组和墙画组，展现出这一地区设计精英的激情活力与不凡实力。</p>
+  <div class="congrats fl cw ft14 fb">再次祝贺所有2011年的大陆地区获奖者！</div>
+  <h2>空间组</h2>
+  <table class="yda_table">
+    <tr>
+      <td>第一名</td>
+      <td width="150">
+        <a href="javascript:" user="<%= asset_path "yda/yda_img1.jpg"%>" class="names" school="西安美术学院">吕婵君</a>
+      </td>
+      <td><a href="javascript:" f="<%= asset_path "yda/yda_imgs1.jpg"%>" s="<%= asset_path "yda/yda_imgs2.jpg"%>" user="吕婵君">西安美术学院</a></td>
+    </tr>
+    <tr>
+      <td>第二名</td>
+      <td>
+        <a href="javascript:" user="<%= asset_path "yda/yda_img2.jpg"%>" class="names" school="四川音乐学院">张楠楠  曾 超</a>
+      </td>
+      <td><a href="javascript:" f="<%= asset_path "yda/yda_imgs3.jpg"%>" s="<%= asset_path "yda/yda_imgs4.jpg"%>" user="张楠楠  曾 超">四川音乐学院</a></td>
+    </tr>
+    <tr>
+      <td>第三名</td>
+      <td>
+        <a href="javascript:" user="<%= asset_path "yda/yda_img3.jpg"%>" class="names" school="四川音乐学院">张 灿</a>
+      </td>
+      <td><a href="javascript:" f="<%= asset_path "yda/yda_imgs5.jpg"%>" s="<%= asset_path "yda/yda_imgs6.jpg"%>" user="张 灿">四川音乐学院</a></td>
+    </tr>
+  </table>
+  <h2>墙画组</h2>
+  <table class="yda_table">
+    <tr>
+      <td>第一名</td>
+      <td width="150">
+        <a href="javascript:" user="<%= asset_path "yda/yda_img4.jpg"%>" class="names" school="四川音乐学院">陈岳曦</a>
+      </td>
+      <td><a href="javascript:" f="<%= asset_path "yda/yda_imgs7.jpg"%>" s="<%= asset_path "yda/yda_imgs8.jpg"%>" user="陈岳曦">四川音乐学院</a></td>
+    </tr>
+    <tr>
+      <td>第二名</td>
+      <td>
+        <a href="javascript:" user="<%= asset_path "yda/yda_img5.jpg"%>" class="names" school="四川音乐学院">补冬梅</a>
+      </td>
+      <td><a href="javascript:" f="<%= asset_path "yda/yda_imgs9.jpg"%>" s="<%= asset_path "yda/yda_imgs10.jpg"%>" user="补冬梅">四川音乐学院</a></td>
+    </tr>
+  </table>
+  <p class="fl cr">点击获奖者姓名查看领奖者！</p>
+  <p class="fl cr">点击获奖者院校查看颁奖现场！</p>
+</div><!--yda ends-->
+<a href="http://www.nipponpaint.com.my/" class="yda_bot1 pa"><img src="<%= asset_path "yda/yda_bot1.png"%>" alt="" /></a>
+<a href="#" class="yda_bot2 pa"><img src="<%= asset_path "yda/yda_bot2.png"%>" /></a>
+<a href="#" class="yda_bot3 pa"><img src="<%= asset_path "yda/yda_bot3.jpg"%>" /></a>
+<div id="layer"></div>
+<div class="content abs_center">
+    <a href="javascript:" id="lay_close"></a>
+    <h1 id="yda_name"></h1>
+    <h4 id="yda_school"></h4>
+    <img src="" id="yda_img" />
+    <ul id="yda_ul">
+        <li class="curr"><img src="" id="ul_f" /></li>
+        <li><img src="" id="ul_s" /></li>
+    </ul>
+    <!--[if IE 6]>
+    <br clear="all" /><br clear="all" />
+    <p>提示：如果看不到图片，请在图片区域单击右键后，选择“显示图片”即可。</p>
+    <![endif]-->
+</div>
+
+ <%= javascript_include_tag "jquery.layer" %>
