@@ -181,7 +181,7 @@ $(function(){
 	var pager = 1;
 	var $dot = $('.bullet');
 	var num = 0;
-	var speed = 10000;
+	var speed = 5000;
 	var _speed = 1500;
 	function RunSlide(){
 		if(!$slider.is(':animated'))
