@@ -42,7 +42,7 @@ class ChannelController < ApplicationController
     end
     cons = []
     week_now = user_url.first.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,5})?)).to_a[1]
-    if @design_users.where("id = (#{week_now}) desc")
+    unless @design_users.where("id = (#{week_now})").blank?
       cons << "id = (#{week_now}) desc"
     else
       cons << "id in (#{ws.join(",")}) desc"

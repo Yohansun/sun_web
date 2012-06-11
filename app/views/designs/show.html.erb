@@ -55,7 +55,7 @@
             marginTop:150,
             pic: "http://www.icolor.com.cn/<%= @design.cover_img.file.url(:slide) %>",
             url:"<%= user_design_url(@design.user_id, @design) %>",
-            title:"#iColor分享#一套优秀家装作品----【#{@design.title}】，更多实用装修案例，尽在iColor，",
+            title:"#iColor分享#一套优秀家装作品----【<%= @design.title %>】，更多实用装修案例，尽在iColor，",
             data_track_clickback:true
           }
           </script>
