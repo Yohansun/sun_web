@@ -38,7 +38,7 @@ module MagicContent
       @reg_not_login_count4 = User.where(:created_at => start_date..end_date).where("role_id = 3").where("sign_in_count = 0").count
 
       #第三方连接进入icolor
-      @lands = Land.select("source, count(*) as count").where(:created_at => start_date..end_date).group(:source)
+      # @lands = Land.select("source, count(*) as count").where(:created_at => start_date..end_date).group(:source)
 
 
       arr_huadong = []
