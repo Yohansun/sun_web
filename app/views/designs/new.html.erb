@@ -95,7 +95,7 @@ function add_tag(text){
 </script>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function(){
-        $(".recommend_color_category1 input").autocomplete("<%= user_designs_autocomplete_recommend_color_path(current_user)%>");
+        $("#design_recommend_color_category1").autocomplete("<%= user_designs_autocomplete_recommend_color_path(current_user)%>");
     });
 </script>
 <% end -%>
