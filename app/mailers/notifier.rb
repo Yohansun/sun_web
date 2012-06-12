@@ -52,7 +52,7 @@ class Notifier < ActionMailer::Base
     @email = email
     @name = name
     mail(:to => @email,
-         :subject => "iColor注册登录通知",
+         :subject => "iColor月月有礼，名利双收",
          :reply_to => 'icolor@nipponpaint.com.cn'
         )
   end
