@@ -8,7 +8,7 @@ task :email_edm => :environment  do
 
 		if email =~ /^[a-zA-Z0-9_\.]+@[a-zA-Z0-9-]+[\.a-zA-Z]+$/
   		puts "send to #{name} -- #{email}"
+  		Notifier.email(email, name).deliver
   	end
-  	Notifier.email(email, name).deliver
   end
 end
