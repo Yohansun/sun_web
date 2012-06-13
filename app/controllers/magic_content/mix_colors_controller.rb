@@ -5,6 +5,11 @@ module MagicContent
       @mix_colors = MixColor.order('updated_at DESC').all
     end
 
+    def show
+      @mix_color = MixColor.find(params[:id])
+      @customer_replies = CustomerReply.where(:question_id => @mix_color)
+    end
+
     def edit
       @customer_reply = CustomerReply.new
     end
