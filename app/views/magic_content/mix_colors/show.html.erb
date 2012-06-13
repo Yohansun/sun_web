@@ -1,0 +1,16 @@
+<div class="content">
+	<div class="title"><h5>回复</h5>
+		<div class="num"></div>
+	</div>
+	<blockquote>		
+		<span><%= @mix_color.description %> 提问于：<%= @mix_color.created_at.strftime("%Y-%m-%d %H:%M:%S")  %></span>
+	</blockquote>
+	<% @customer_replies.each do |customer_reply| %>
+		<div class="widget first">
+			<div class="body">
+				<%= customer_reply.reply_content %><br>
+				<span>回复于：<%= customer_reply.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span><br>
+			</div>
+		</div>
+	<% end %>
+</div>
