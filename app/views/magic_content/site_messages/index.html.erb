@@ -11,6 +11,7 @@
           <th>标题</th>
           <th>内容</th>
           <th width="100px">提问用户</th>
+          <th width="100px">发布时间</th>
           <th width="100px">操作</th>
         </tr>
       </thead>
@@ -21,6 +22,7 @@
             <td><%= c.title %></td>
             <td><%= c.desc %></td>
             <td><%= c.user.display_name %></td>
+            <td><%= c.created_at.to_date %></td>
             <td nowrap="nowrap" align="center">
               <%= "已回复" if c.sys_msg_id %>
               <%= link_to "回复", main_app.edit_site_message_path(c), class: 'button basicBtn' %>
