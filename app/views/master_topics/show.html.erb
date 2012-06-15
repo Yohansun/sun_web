@@ -45,7 +45,7 @@
         <div class="topic_box">
           <div class="topic_tit">
             <h2><%= @topic.title %></h2>
-            <h3 class="clear" style="padding:0 210px;">时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：0次</span>
+            <h3 class="clear" style="padding:0 210px;">时间：<%= @topic.published_at.to_formatted_s(:db) %></span><span>浏览：<%= @topic.browsing_count %>次</span>
               <div id="ckepop" class="fr">
                 <span class="jiathis_txt">一键分享：</span>
                 <a class="jiathis_button_tsina"></a>
