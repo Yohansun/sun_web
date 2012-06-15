@@ -4,6 +4,9 @@
 	</div>
 	<blockquote>		
 		<span><%= @mix_color.description %> 提问于：<%= @mix_color.created_at.strftime("%Y-%m-%d %H:%M:%S")  %></span>
+		<%- unless @mix_color.mix_color_img_file_name.blank? %>
+			”<br>“<%= image_tag @mix_color.mix_color_img.url(:original) %>
+		<% end %>
 	</blockquote>
 	<% @customer_replies.each do |customer_reply| %>
 		<div class="widget first">
