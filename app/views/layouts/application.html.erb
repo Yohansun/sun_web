@@ -346,6 +346,21 @@
     // show login window for un-login user
     $(function () {
 
+      //礼从天降登陆身份验证
+      if ($("#gift_login")) {
+            $("#gift_login").click(function (event) {
+                <% if current_user && !(current_user.common_user?) -%>
+                return true;
+                <% elsif current_user && current_user.common_user? -%>
+                alert("抱歉！普通用户身份是无法上传作品的哦！");
+                return false;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
       if ($("#new_message")) {
             $("#new_message").submit(function (event) {
                 <% if current_user -%>

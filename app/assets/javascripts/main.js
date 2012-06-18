@@ -458,21 +458,26 @@ $(function(){
 			$('#referr').fadeOut()
 		}
 	})
-
+	
 	var urls = $('.reg_suc a').attr('href');
+	var timer_num =5;
+
 	if(urls){
-		var timer_num =5;
-		function timer(){
-			if(timer_num == 0){
-				window.location=urls;
-				return false;
-				}
-			timer_num--;
-			$('.reg_suc span.cr').text(timer_num);
-			}
-		setInterval(timer,1000);
+		 setTimeout(timer,1000);
+	}
+	function timer(){
+		 if(timer_num == 0){
+			  window.location.href=urls;
+			  return;
+		 }
+		 else{
+			  timer_num--;
+			  $('.reg_suc span.cr').text(timer_num);
+			  setTimeout(timer,1000);
+		 }
 	}
 });
+
 /*pass_check*/
 $(function(){
 	$('.pass_check').keyup(function(){
