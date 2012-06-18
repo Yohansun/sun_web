@@ -20,7 +20,7 @@
 望勤劳千万别把疲倦引来，身体不是一个可供我们随意驱使的器物，而是需要随时爱惜呵护的朋友。
 iColor为你所想，精心为广大设计师准备了不华丽却很贴心的按摩披肩，18种按摩模式足以让你优雅的
 活动每一处关节。放松身心，创作出更多的佳作，在iColor舞台上尽显您的设计魅力吧！
-      <a href="<%= new_user_design_path(current_user) if current_user && current_user.designer? %>"><img src="<%= asset_path "big_bg/gift_btn1.jpg"%>" id="gift_login"/></a></pre>
+      <a href="<%= new_user_design_path(current_user) if current_user && !(current_user.common_user?) %>"><img src="<%= asset_path "big_bg/gift_btn1.jpg"%>" id="gift_login"/></a></pre>
       <div class="gift_step1_conbg"><img src="<%= asset_path "paint_art/gift_img1.png"%>" /></div>
     </div>
 
@@ -29,7 +29,7 @@ iColor为你所想，精心为广大设计师准备了不华丽却很贴心的�
      <pre style="height:200px;background-position:0 -250px;">
 “礼从天降”，注册有奖。每周新注册会员中，随机抽取2位幸运者，赠送立邦1881色卡各一本；
 随机抽取3位幸运者，赠送立邦七彩纸砖各一份。
-      <a href="/users/sign_up"><img src="<%= asset_path "big_bg/gift_btn2.jpg"%>" /></a></pre>
+      <a href="<%= "/users/sign_up" unless current_user %>"><img src="<%= asset_path "big_bg/gift_btn2.jpg"%>" id="gift_sign_up"/></a></pre>
       <div class="gift_step2_conbg"><img src="<%= asset_path "paint_art/gift_img2.png"%>" /></div>
     </div>
 
