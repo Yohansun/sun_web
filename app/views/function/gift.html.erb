@@ -1,28 +1,46 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "style" %>
 <%- end %>
 <div class="main gift">
   <div class='wrapper gift_box'>
-    <img src="<%= asset_path "paint_art/gift_banner.jpg"%>"/>
-    <div class="art_step1">
-      <h2><img src="<%= asset_path "paint_art/gift_step1.png"%>"/></h2>
-      <p>“礼从天降”，注册有奖。每周新注册会员中，随机抽取2位幸运者，赠送立邦1881色卡各一本；随机抽取3位幸运者，赠送立邦七彩纸砖各一份。</p>
-      <div class="gift_step1_conbg"><img src="<%= asset_path "paint_art/art_step1_conbg.png"%>"/></div>
+    <img src="<%= asset_path "paint_art/gift_banner2.png"%>"/>
+   <div class="art_step1">
+    <h2><img src="<%= asset_path "paint_art/gift_step2_1.png"%>" /></h2>
+     <h3>每月iColor会从所有上传作品的设计师中，评选出<em>空间设计</em><strong>明星</strong>和<em>色彩搭配</em><strong>明星</strong>各一名，同时，凡上传<br>作品的设计师均可参与月度抽奖赢取ipad！</h3>
+     <pre><img src="<%= asset_path "paint_art/gift_tit2_1.png"%>" />
+1）新浪微博、BBS论坛、人人、开心等社区网站倾力推送。
+2）太平洋家居网、装修点评网专业版块月月宣传。
+3)《美好家园》《家饰》杂志跨页包装宣传。
+4）iColor首页首屏天天展示。
+5）iColor片区查询位列HOT名单置顶展示。
+6）我型我秀频道iColor热点推荐。
+      <img src="<%= asset_path "paint_art/gift_tit2_2.png"%>" />
+我们痴迷于结构、沉醉于色彩。喜悦、迷茫、沉淀、激扬，只为创造一个又一个五彩的梦想。我们是夜
+行动物，电脑和椅背是我们最好的伙伴，办公桌上的小仙人球，面对电脑辐射也渴望逃离。爱自己？希
+望勤劳千万别把疲倦引来，身体不是一个可供我们随意驱使的器物，而是需要随时爱惜呵护的朋友。
+iColor为你所想，精心为广大设计师准备了不华丽却很贴心的按摩披肩，18种按摩模式足以让你优雅的
+活动每一处关节。放松身心，创作出更多的佳作，在iColor舞台上尽显您的设计魅力吧！
+      <a href="<%= new_user_design_path(current_user) if current_user && current_user.designer? %>"><img src="<%= asset_path "big_bg/gift_btn1.jpg"%>" id="gift_login"/></a></pre>
+      <div class="gift_step1_conbg"><img src="<%= asset_path "paint_art/gift_img1.png"%>" /></div>
     </div>
+
     <div class="art_step2">
-      <h2><img src="<%= asset_path "paint_art/gift_step2.png"%>"/></h2>
-      <p> 每月上传作品数最多的设计师，您将有机会获得由立邦准备的德国Lamy钢笔套装一份。你会是那个幸运星吗？赶快行动吧！</p>
-      <div class="gift_step2_conbg"><img src="<%= asset_path "paint_art/art_step2_conbg.png"%>"/></div>
+    <h2><img src="<%= asset_path "paint_art/gift_step2_2.png"%>" /></h2>
+     <pre style="height:200px;background-position:0 -250px;">
+“礼从天降”，注册有奖。每周新注册会员中，随机抽取2位幸运者，赠送立邦1881色卡各一本；
+随机抽取3位幸运者，赠送立邦七彩纸砖各一份。
+      <a href="/users/sign_up"><img src="<%= asset_path "big_bg/gift_btn2.jpg"%>" /></a></pre>
+      <div class="gift_step2_conbg"><img src="<%= asset_path "paint_art/gift_img2.png"%>" /></div>
     </div>
+
     <div class="art_step3">
-      <h2><img src="<%= asset_path "paint_art/gift_step3.png"%>"/></h2>
-      <p>每周我们会从上传作品的设计师中，评选出一位案例之星，立邦将会为您提供更直接的对外宣传作品的机会。
-        方式如下：<br/>
-        1．新浪微博、BBS论坛、人人、开心等社区网站<br/>
-        2．iColor首页展示焦点图<br/>
-        3．icolor片区查询中hot名单展示</p>
-      <div class="gift_step3_conbg"><img src="<%= asset_path "paint_art/art_step3_conbg.png"%>"/></div>
+    <h2><img src="<%= asset_path "paint_art/gift_step2_3.png"%>" /></h2>
+    <pre style="height:300px;"><img src="<%= asset_path "paint_art/gift_tit2_3.png"%>" />
+<em>特等奖1名</em>: iPhone4 16G / iPad2 32G或总计7天设计师培训课程
+<em>一等奖2名</em>: 光合盆栽 / 花瓶加湿器 / 卡通u盘
+<em>二等奖3名</em>: 立邦缤纷净味12色套装一份
+      <a href="/designs?from=top"><img src="<%= asset_path "big_bg/gift_btn3.jpg"%>" /></a></pre>
+      <div class="gift_step3_conbg"><img src="<%= asset_path "paint_art/gift_img3.png"%>" /></div>
     </div>
-  </div>
-  <!--wrapper ends-->
+  </div><!--wrapper ends-->
 </div><!--main ends-->
