@@ -24,7 +24,7 @@
         <div id="my_type">
         <%= f.input :interview_content_type, :collection => ["问答类型访谈", "文章类型访谈"],:prompt => resource.interview_content_type, :label => "访谈类型分类:" %>
         </div>
-        <%= f.input :interview_content, :input_html => { :rows => 15, :class=>"x" }, :label => "访谈内容:", :hint => "请在输入标题或者内容后换行！" %>
+        <%= f.input :interview_content, :label => "访谈内容:", :hint => "请在输入标题或者内容后换行！" %>
         <%= f.input :message, :label => "大师寄语:", :input_html => {:rows => 5} %>
         <%= f.input :preview_img_out, :label => "上传列表页图片:" %>
         <%= f.input :preview_img_in, :label => "上传内页图片:" %>
