@@ -127,6 +127,11 @@ Icolor::Application.routes.draw do
   resources :users do
     match "update_suc" => "users#update_suc"
     match '/designs/autocomplete_recommend_color' => 'designs#autocomplete_recommend_color'
+
+    #社区绑定
+    match "community" => "users#community"
+    match "/community/binding_cancel" => "users#binding_cancel"
+
     #用户对内和对外的相关页面
     resources :events
     resources :faqs
