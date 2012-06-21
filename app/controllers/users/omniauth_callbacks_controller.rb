@@ -24,7 +24,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if current_user
         current_user.user_tokens.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
         flash[:notice] = "Authentication successful"
-        redirect_to edit_user_registration_path
+
+        if request.env['omniauth.origin'].match %r(community)
+          current_user.user_tokens.find_by_provider(provider).update_attribute :is_binding, true #更新社区绑定状态
+          redirect_to request.env['omniauth.origin'] #设置社区绑定授权后的返回页面
+        else
+          redirect_to omniauth_user_user_path(current_user)
+        end
         return
       else
 

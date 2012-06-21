@@ -64,4 +64,16 @@ class UsersController < ApplicationController
   def omniauth_user
 
   end
+
+  def community
+    @user = User.find(params[:user_id]) if params[:user_id]
+    @providers = @user.user_tokens.map {|u| u.provider if u.is_binding?}
+  end
+
+  def binding_cancel
+    if params[:community]
+      current_user.user_tokens.find_by_provider(params[:community]).update_attribute :is_binding, false
+      redirect_to user_community_path(current_user)
+    end
+  end
 end

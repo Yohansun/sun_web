@@ -102,6 +102,8 @@ Icolor::Application.routes.draw do
   match "/weibo_wall" => "function#weibo_wall" #首页微博资讯
 
   #漆光艺彩
+  match "/art" => "function#art"
+  match "/art/down_art_pdf" => "function#down_art_pdf"
   match "/7-1" => "function#7-1"
   match "/7-2" => "function#7-2"
   match "/7-3" => "function#7-3"
@@ -127,6 +129,11 @@ Icolor::Application.routes.draw do
   resources :users do
     match "update_suc" => "users#update_suc"
     match '/designs/autocomplete_recommend_color' => 'designs#autocomplete_recommend_color'
+
+    #社区绑定
+    match "community" => "users#community"
+    match "/community/binding_cancel" => "users#binding_cancel"
+
     #用户对内和对外的相关页面
     resources :events
     resources :faqs

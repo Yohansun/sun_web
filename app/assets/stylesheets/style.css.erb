@@ -308,11 +308,12 @@ a.back_perhome{background:url(<%= asset_path "personal/home_btn.png"%>) no-repea
 a.launch_act{background: url(<%= asset_path "personal/launch_act.png"%>) no-repeat left center;padding:3px 5px 0 35px;top:-4px; right:20px; font:16px/32px "SimHei";color:#5c6572; text-align:center;}
 
 .signup_box ul.system_info{ overflow:hidden; border:1px solid #e4e4e4; height:32px;padding:8px 30px;margin:20px;}
-.signup_box ul.system_info li{ float:left; padding:5px 24px 5px 20px; margin-right:24px; height:23px; border-right:1px solid #f1f1f1; background:url(<%= asset_path "personal/signup_icon.png"%>) no-repeat;}
+.signup_box ul.system_info li{ float:left; padding:5px 24px 5px 25px; margin-right:24px; height:23px; border-right:1px solid #f1f1f1; background:url(<%= asset_path "personal/signup_icon.png"%>) no-repeat;}
 .signup_box ul.system_info li.icon_info{ background-position:0 -103px;}
 .signup_box ul.system_info li.icon_qustion{ background-position:0 -131px;}
 .signup_box ul.system_info li.icon_active{ background-position:0 -164px;}
 .signup_box ul.system_info li.icon_point{ background-position:0 -194px;}
+.signup_box ul.system_info li.icon_community{ background-position:0 -273px;}
 
 .signup_box ul.system_info li a{font:14px "Microsoft Yahei"; color:#666666;}
 .signup_box ul.system_info li a.host_cur{color:#e71d36; text-decoration:underline;}
@@ -385,7 +386,16 @@ form.host_msgboard input.host_submit{ background: url(<%= asset_path "design/sub
 .msgboard_list .msg_list_box{ float:left; width:670px;}
 .msgboard_list .signup_text p{color:#7a786b;font-family:"Microsoft Yahei";word-wrap:break-word;}
 
-
+/*host community*/
+.host_community{position:relative;min-height:475px;background:url(<%= asset_path "personal/community_conbg.jpg"%>);}
+.host_community button{width:90px;height:25px;background:url(<%= asset_path "personal/community_btn.png"%>);margin-top:10px;color:#780c00;}
+.host_community button a{color:#780c00;}
+.host_community .community_sina,.host_community .community_qq,.host_community .community_renren,.host_community .community_kaixin{padding:0px 0px 0px 90px;background:url(<%= asset_path "personal/community_icon.png"%>) no-repeat;width:280px;min-height:70px;position: absolute;font:14px "Microsoft Yahei";color:#2c2c2c;}
+.host_community .community_sina h5,.host_community .community_qq h5,.host_community .community_renren h5,.host_community .community_kaixin h5{font-size:24px;color:#ea5902;padding: 0px 0px 10px;}
+.host_community .community_sina{background-position: 0 12px;top:10px;left:20px;}
+.host_community .community_qq{background-position: 0 -92px;top:10px;left:536px;}
+.host_community .community_renren{background-position: 0 -216px;top:320px;left:20px;}
+.host_community .community_kaixin{background-position: 0 -318px;top:320px;left:536px;}
 
 
 /*law*/
