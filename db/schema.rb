@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531080746) do
+ActiveRecord::Schema.define(:version => 20120625143356) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -343,6 +343,9 @@ ActiveRecord::Schema.define(:version => 20120531080746) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "lands", ["created_at"], :name => "created_at"
+  add_index "lands", ["source"], :name => "source"
+
   create_table "maillists", :force => true do |t|
     t.string   "email"
     t.datetime "created_at", :null => false
@@ -502,14 +505,15 @@ ActiveRecord::Schema.define(:version => 20120531080746) do
     t.text     "body"
     t.integer  "admin_id"
     t.integer  "subject_id"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.datetime "published_at"
     t.string   "preview_img_file_name"
     t.string   "preview_img_content_type"
     t.integer  "preview_img_file_size"
     t.datetime "preview_img_updated_at"
     t.string   "content_source"
+    t.integer  "browsing_count",           :default => 0
   end
 
   create_table "products", :force => true do |t|
@@ -627,8 +631,11 @@ ActiveRecord::Schema.define(:version => 20120531080746) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "token"
+    t.string   "secret"
+    t.boolean  "is_binding", :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -673,6 +680,7 @@ ActiveRecord::Schema.define(:version => 20120531080746) do
     t.boolean  "is_from_minisite",          :default => false
     t.integer  "recommend_designer_status", :default => 0
     t.integer  "designs_count"
+    t.boolean  "is_imported",               :default => false
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
