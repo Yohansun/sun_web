@@ -295,6 +295,23 @@ class User < ActiveRecord::Base
   def ydaed?
     self.yda_game ? true : false
   end
+  
+  def self.search(params)
+
+    t1=Time.new(params[:search]['time_range_first(1i)'], params[:search]['time_range_first(2i)'], params[:search]['time_range_first(3i)'])
+    t2=Time.new(params[:search]['time_range_last(1i)'], params[:search]['time_range_last(2i)'], params[:search]['time_range_last(3i)'])
+    
+    case params[:search]['user_behave']
+    when '1'
+      User.page(params[:page]).per(20)
+    when '2'
+      user_ids = Design.where('designs.created_at >= ? AND designs.created_at <= ?', t1, t2).map {|u| u.user_id}
+      User.where("id NOT IN (?) OR (?) IS NULL", user_ids, user_ids).page(params[:page]).per(20)
+    when '3'
+      User.where("sign_in_count = 0 OR current_sign_in_at <= ?", t1).page(params[:page]).per(20)
+    end   
+  end
+
 
   protected
   def recommended_requird?
