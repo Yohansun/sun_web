@@ -172,6 +172,11 @@ Icolor::Application.routes.draw do
     match '/stat' => 'stat#index', :as => 'stat'
   end
 
+  #扩充magic_admin
+  scope "/admin", :module =>"magic_admin" do
+  match '/users' => 'users#index'
+  end
+
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
   mount MagicContent::Engine => '/admin/content', :as => 'magic_content'
   mount MagicAdmin::Engine => '/admin', :as => 'magic_admin'
