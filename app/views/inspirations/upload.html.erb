@@ -36,6 +36,8 @@ $(function() {
       if (dat.result == 'success') {
         $.getScript(dat.upload + "?for=inspiration");
       };
+      if (dat.result == 'failed')
+        {alert("图片宽度不能小于202像素！")};
     },
     postData : {
         '_http_accept': 'application/javascript',
