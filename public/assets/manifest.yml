@@ -7,7 +7,7 @@ art/art_nav1.jpg: art/art_nav1-2ed42f7fef1072145ca100771d42bb36.jpg
 art/art_nav2.jpg: art/art_nav2-4d10fc09d5b94b06dccfa96431aec273.jpg
 art/art_nav3.jpg: art/art_nav3-ef5a1eb334c75b32a044157c4b2fd6df.jpg
 art/art_nav4.jpg: art/art_nav4-840c2367816970348f4a342070b423a1.jpg
-art/art_top.jpg: art/art_top-5e5161a5a6a910b7a3cfd32d0964931b.jpg
+art/art_top.jpg: art/art_top-207aefbb82bbce55d79d0c0ad9110357.jpg
 art/arts.jpg: art/arts-e39c06ae6128c6653631c3b50d651ddc.jpg
 art/arts1.jpg: art/arts1-a28dde7743319fcffecad85a2049e5ec.jpg
 art/arts10.jpg: art/arts10-1a1b7ff471167f630695c7e2be67b0e0.jpg
@@ -23,7 +23,7 @@ art/arts8.jpg: art/arts8-7aadc6f29a601e4989143e1a0a86b91c.jpg
 art/arts9.jpg: art/arts9-92a4b0bcec6f428e2121c941bc26f1fb.jpg
 art/e-art.pdf: art/e-art-7270767b2a9e9fff880aa5de378ca791.pdf
 art/info.png: art/info-61e6c05f665a3defeaf9cc28fbccb011.png
-art/ipad1.png: art/ipad1-5f2c3693d99735741ec6bfe16d0a883e.png
+art/ipad1.png: art/ipad1-7e8defa26b8cd53c34b210ca3c9985eb.png
 art/ipad1_.jpg: art/ipad1_-03d733b97d4b919a729908a83633ca2f.jpg
 art/ipad1_btn.jpg: art/ipad1_btn-a29400a113645951010ac5a92a15ea43.jpg
 art/ipad1_img.jpg: art/ipad1_img-03d733b97d4b919a729908a83633ca2f.jpg
@@ -493,7 +493,7 @@ kv3.jpg: kv3-1d96ecab8ab4d946b1340a5ec66783c2.jpg
 kv4.jpg: kv4-d134cc256be233f106632079c9941188.jpg
 kv6.jpg: kv6-f4c5cb8aa35afb501478fa8211a82c41.jpg
 kv7.jpg: kv7-60a673f986ed06c79a465edbebe5e010.jpg
-kv8.jpg: kv8-406ae35ffa8388eecb8279ea5d08ff88.jpg
+kv8.jpg: kv8-c8bd31d502d328607040ff9b880afddf.jpg
 kv9.jpg: kv9-b19eea90ec5c7cc7d9660f35cfde7793.jpg
 kx.jpg: kx-7684f22d4f9a8918600fffcb188a5220.jpg
 link1.png: link1-fe17e60aab0b4f21cb0c6fad4344d501.png
@@ -1060,7 +1060,7 @@ yda.js: yda-2b57183c7722c2882f54a4b59ed7aeba.js
 yda_games.js: yda_games-3af39f1da6f167c2cbf453ed74daff3d.js
 application.css: application-16d9ce950612f2c95be08296b3477096.css
 areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
-art.css: art-d13d24870d5b5b523b8017c9c3c83358.css
+art.css: art-6ab5b70defe07d12b0e43f8dc38ac34c.css
 base.css: base-f768c792782cf93a07575446d89ba7ae.css
 dd.css: dd-404c3f4285a8910d974be4048193c4a2.css
 exciting_activities.css: exciting_activities-29c54026339f272defab7752d9731342.css
