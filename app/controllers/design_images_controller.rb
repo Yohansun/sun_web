@@ -9,9 +9,12 @@ class DesignImagesController < ApplicationController
           :upload => user_design_image_path(current_user, @upload.id) } }
       end
     else
-      render :action => 'new'
+       respond_to do |format|
+        format.json {render :json => { :result => 'failed',
+          :action => 'new' } }
     end
   end
+end
 
   def show
     @upload = DesignImage.find(params[:id])
