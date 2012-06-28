@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
                   :role_id, :founded_of_company, :company_address, :name_of_company,
                   :recipient_address, :current_school, :school_address, :login, :user_role, :qq,
                   :msn, :fetion, :is_read, :recommended_id, :area_id, :created_at, :location, :signature, :old_id,
-                  :is_show_email, :recommend_designer_status
+                  :is_show_email, :recommend_designer_status, :is_imported
 
   attr_accessor :login, :recommended_name, :state, :city, :district, :user_role, :is_read
 
@@ -97,14 +97,22 @@ class User < ActiveRecord::Base
     (user_tokens.empty? || !email.blank?) && super
   end
 
-  def display_name
+  def display_name   #a little fix in when company company_name;name;username
     case role_name
       when /designer|user/
         self.name.blank? ? self.username : self.name
       when "company"
-        self.name_of_company.blank? ? self.username : self.name_of_company
-    end
-  end
+        if self.name_of_company.blank? 
+           if self.name.blank?
+              return self.username
+           else
+              return self.name
+           end   
+        else
+           return self.name_of_company
+        end
+      end
+  end   
 
   def role_name
     self.role ? self.role.role : 'user'
