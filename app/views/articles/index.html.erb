@@ -25,18 +25,36 @@
       <% end %>
     </div>
     <!--news_top ends-->
+    <%- if request.url.include? 'tags'
+     tag = request.url.split("=")[1] 
+     -%>
     <%- @articles.each do |article| %>
         <div class="shadow">
           <div class="section clear">
             <%= image_tag article.preview_img.url(:icolor_articles) if article.preview_img %>
             <div class="article fl ft14">
-              <h1><a href='#'><%= link_to article.title, "/articles/#{article.id}" %></a></h1>
+              <h1><%= link_to article.title, "/articles/#{article.id}?tags=#{tag}" %></h1>
+              <span>时间：<%= article.published_at.to_date %></span>
+              <p><%= raw article.intro %>...<br/><%= link_to "[详细]", "/articles/#{article.id}?tags=#{tag}" %></p>
+            </div>
+            <!--article ends-->
+          </div><!--section ends-->
+        </div><!--shadow ends-->
+    <%- end %>     
+    <%- else -%>
+       <%- @articles.each do |article| %>
+        <div class="shadow">
+          <div class="section clear">
+            <%= image_tag article.preview_img.url(:icolor_articles) if article.preview_img %>
+            <div class="article fl ft14">
+              <h1><%= link_to article.title, "/articles/#{article.id}" %></h1>
               <span>时间：<%= article.published_at.to_date %></span>
               <p><%= raw article.intro %>...<br/><%= link_to "[详细]", "/articles/#{article.id}" %></p>
             </div>
             <!--article ends-->
           </div><!--section ends-->
         </div><!--shadow ends-->
+    <%- end %>    
     <%- end %>
     <div class="pag_container">
       <div class="pager ft12">
