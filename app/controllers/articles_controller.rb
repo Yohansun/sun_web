@@ -7,8 +7,14 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Post.find(params[:id])
+    tags=@article.tag_counts_on(:tags)
+    if tags.present?
+     @prev_article = get_articles.tagged_with(tags).where("published_at < ?", @article.published_at).first
+     @next_article = get_articles.tagged_with(tags).where("published_at > ?", @article.published_at).last
+     else
     @prev_article = get_articles.where("published_at < ?", @article.published_at).first
-    @next_article = get_articles.where("published_at > ?", @article.published_at).last
+    @next_article = get_articles.where("published_at > ?", @article.published_at).last  
+     end  
   end
 
   def get_articles
