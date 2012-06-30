@@ -1,0 +1,101 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .ac_results ul {background: #D5D5D5;width:447px;}
+  </style>
+<%- end %>
+<div class="content">
+  <div class="widgets">
+    <%= form_for [main_app,resource] ,:html => {:id => "valid", :class => "mainForm"} do |f| %>
+    <!-- Left -->
+    <div class="left">
+      <!-- Up -->
+      <fieldset>
+        <div class="widget">
+          <div class="head">
+            <h5 class="iMoney">信息</h5>
+            <!--<div class="num"><a href="#" class="blueNum">更多</a></div>-->
+          </div>
+          <div class="rowElem noborder">
+            <label>登录名：</label>
+            <div class="formRight">
+              <%= f.text_field :username, :class => "validate[required]", :id => "req" %>
+            </div>
+            <div class="fix"></div>
+          </div>
+          <div class="rowElem">
+            <label>Email 地址：</label>
+            <div class="formRight">
+              <%= f.text_field :email, :class => "validate[required,custom[email]]", :id => "emailValid1" %>
+            </div>
+            <div class="fix"></div>
+          </div>
+          <div class="rowElem">
+            <label>手机：</label>
+            <div class="formRight">
+              <%= f.text_field :mobile %>
+            </div>
+            <div class="fix"></div>
+          </div>
+          <div class="rowElem">
+            <label>座机：</label>
+            <div class="formRight">
+              <%= f.text_field :phone %>
+            </div>
+            <div class="fix"></div>
+          </div>
+          <div class="rowElem">
+            <label>关联区域：</label>
+            <div class="formRight">
+              <%= f.text_field :area_name, :class => "validate[required]", :id => "area_id", :value => (resource.area_id.eql?("0") ? "" : Area.find(resource.area_id).name + ":" + resource.area_id)%>
+              "请在自动补全下拉框弹出后选择"
+            </div>
+            <div class="fix"></div>
+          </div>          
+        </div>
+      </fieldset><!-- Up -->
+
+      <div class="fix"></div>
+
+      <!-- Down -->
+      <fieldset>
+        <div class="widget">
+          <div class="head">
+            <h5 class="iMoney">安全</h5>
+            <!--<div class="num"><a href="#" class="blueNum">更多</a></div>-->
+          </div>
+          <div class="rowElem noborder">
+            <label>密码:</label>
+            <div class="formRight">
+              <%= f.text_field :password, :id => "password1",:class => "validate[required]", :value => resource.psd %>
+              "输入的密码至少6位！"
+            </div>
+            <div class="fix"></div>
+          </div>
+          <div class="rowElem">
+            <label>确认密码:</label>
+            <div class="formRight">
+              <%= f.text_field :password_confirmation, :class => "validate[equals[password1]] validate[required]" ,:id => "password2" %>
+            </div>
+            <div class="fix"></div>
+          </div>
+        </div>
+      </fieldset><!-- Down -->
+
+      <div class="fix" style="height:40px;"></div>
+      <input type="submit" value="添加" class="greyishBtn submitForm" />
+    </div><!-- Left -->
+    <%- end -%>
+  </div><!-- widgets -->
+</div>
+
+<%- content_for :tail do %>
+  <%= javascript_include_tag "jquery.autocomplete.js" %>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      autocom();
+    });
+    function autocom() {
+      $("#area_id").autocomplete("/admin/autocomplete_area");
+    }
+  </script>
+<%- end %>  

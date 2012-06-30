@@ -1,0 +1,24 @@
+<div id="sms_table">
+  <table style="margin:0 0 28px 150px;*width:740px;">
+    <tr>
+      <th class="w144" width="144">家装公司</th>
+      <th class="w144" width="137">最近发送时间</th>
+      <th class="w176" width="176">发送内容</th>
+      <th class="w144" width="147">发送状态</th>
+      <th class="noborder" width="130">选择用户</th>
+    </tr>
+    <%- @companies.each do |c| %>
+      <tr>
+        <%- sms_log = c.sms_logs.order("created_at desc").first %>
+        <td><%= c.display_name %></td>
+        <td><%= sms_log.blank? ? "无" : sms_log.created_at.strftime("%Y-%m-%d %H:%M:%S")%></td>
+        <td><p title="<%= sms_log.try(:content) %>"><%= sms_log.blank? ? "无" : truncate(sms_log.content, :length => 13)%></p></td>
+        <td class="cr"><%= sms_log.try(:description) %></td>         
+        <td><input class="data_info_input" type="checkbox" id="sms_data_<%= c.id %>" rel="<%= c.id%>"/>选择</td>
+      </tr>
+    <%- end %> 
+  </table>
+  <div class="pager ft12 cl">
+    <%= paginate @companies, :remote => true %>
+  </div>
+</div>

@@ -9,6 +9,20 @@ Icolor::Application.routes.draw do
   devise_for :users, :controllers => { :registrations      => "users/register",
                                        :sessions           => "users/sessions", :passwords => "users/passwords",
                                        :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  devise_for :seller_users, :controllers => { :sessions => "sellers/sessions"}
+
+  devise_scope :seller_user do
+    match "/jxs" => "sellers/sessions#new"
+    match "/seller_user/seller_data" => "sellers/seller_data#index"
+    match "/seller_user/seller_sms" => "sellers/seller_sms#index"
+    match "/seller_user/sms" => "sellers/seller_sms#sms"
+    match "/seller_user/seller_tool" => "sellers/seller_tool#index"
+    match "/seller_user/update_seller_data" => "sellers/seller_data#update_seller_data"
+    match "/seller_user/set_top" => "sellers/seller_data#set_top"
+    match "/seller_user/apply_for_tools" => "sellers/seller_tool#apply_for_tools"
+  end
+
   devise_scope :user do
     match "/users/complete" => "users/register#complete"
     match "/user/update" => "users/register#update"
@@ -60,11 +74,7 @@ Icolor::Application.routes.draw do
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
   match "/designs_upload" => "designs#upload"
-  # get "/inspirations", :to => "inspirations#index"
-  # match "/inspirations/:id", :to => "inspirations#show"
-  # get "/inspirations/:id/fullscreen" => "inspirations#fullscreen"
-  # match "/inspirations/new", :to => "inspirations#new"
-  # post "/inspirations", :to => "inspirations#create"
+
   resources :inspirations
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
@@ -175,13 +185,16 @@ Icolor::Application.routes.draw do
     resources :weekly_star_uploads
     resources :mix_colors
     resources :faqs
+    resources :tools
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
   end
 
   #扩充magic_admin
   scope "/admin", :module =>"magic_admin" do
-  match '/users' => 'users#index'
+    match '/users' => 'users#index'
+    resources :seller_users
+    match "/autocomplete_area" => 'seller_users#autocomplete_area'
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }

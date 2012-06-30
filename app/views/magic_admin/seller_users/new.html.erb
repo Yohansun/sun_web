@@ -1,0 +1,24 @@
+<!-- Content -->
+<div class="content">
+  <div class="title"><h5>新增经销商</h5></div>
+  <!-- Tabs -->
+	<div class="widget">
+		<ul class="tabs">
+    	<li><a href="#tab1">一般信息</a></li>
+  	</ul>
+  	<div class="tab_container">
+    	<div id="tab1" class="tab_content"> 
+      	<%= render "profile" %>
+    	</div>
+  	</div>
+  	<div class="fix"></div>
+	</div><!-- Tabs -->
+</div><!-- Content -->
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      build_tabs();
+      init_form();        // form init
+    });
+  </script>
+<%- end %>

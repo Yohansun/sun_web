@@ -1,0 +1,8 @@
+$('#input_pop').hide();
+$('#sale_amount').hide();
+
+<%- if @products && !@products.blank?%>
+	$("#<%= params[:user_id] %>").find(".product_name").html("<%= raw @products %>");
+<%- elsif @sales  %>
+	$("#<%= params[:user_id] %>").find(".sale_amount").html("<p><%= @sales %></p>");
+<%- end %>

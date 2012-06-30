@@ -11,15 +11,11 @@ class ChannelController < ApplicationController
     end
 
     unless params[:province_id].blank?
-      areas = []
-      Area.find(params[:province_id]).leaves.map{|a| areas << a.id}
-      @design_users = @design_users.where("area_id in (#{areas.join(",")})")
+      @design_users = @design_users.where("area_id in (?)", Area.find(params[:province_id]).leaves.map{|a| a.id}.join(","))
     end
 
     unless params[:city_id].blank?
-      areas = []
-      Area.find(params[:city_id]).children.map{|a| areas << a.id}
-      @design_users = @design_users.where("area_id in (#{areas.join(",")})")
+      @design_users = @design_users.where("area_id in (?)",Area.find(params[:city_id]).children.map{|a| a.id}.join(","))
     end
 
     unless params[:area_id].blank?
@@ -49,9 +45,11 @@ class ChannelController < ApplicationController
       cons << "id in (#{ws.join(",")}) desc"
     elsif params[:user_role] == "company"
       #根据后台基础设置中推荐家装公司的ID进行排序
-      unless MagicSetting.recommend_designers.blank?
-       cons << "id in (#{MagicSetting.recommend_designers}) desc"
-      end
+      # unless MagicSetting.recommend_designers.blank?
+      #  cons << "id in (#{MagicSetting.recommend_designers}) desc"
+      # end
+      #根据iColor经销商平台中的置顶排序
+      cons << "is_top desc"
     end
     #输入立邦色号的数量
     cons << "recommend_designer_status desc"
