@@ -166,9 +166,9 @@ module MagicContent
     #统计上传数
     def count_design(area_ids=nil, des_status=nil, role_id, begin_t, end_t)
       if area_ids
-        chain =  Design.includes(:user).where("designs.created_at" => begin_t..end_t, "users.area_id" => area_ids, "users.role_id" => role_id)
+        chain =  Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t, "users.area_id" => area_ids, "users.role_id" => role_id)
       else
-        chain =  Design.includes(:user).where("designs.created_at" => begin_t..end_t).where("users.role_id" => role_id)
+        chain =  Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t).where("users.role_id" => role_id)
       end
       des_status ? chain.where("users.des_status" => des_status).count : chain.count
     end
