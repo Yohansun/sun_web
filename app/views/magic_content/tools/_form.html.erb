@@ -1,0 +1,31 @@
+<div class="content">
+
+  <div class="title">
+    <h5><%= form_title %></h5>
+    <div class="num"><%= link_to '返回', main_app.tools_path, :class => "redNum" %></div>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for([main_app, resource], :html => { :id => "valid", :multipart => true }) do |f| %>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :name, :input_html => { :class=> "validate[required]" }, :label => "产品名称:" %>
+        <%= f.input :total, :label => "工具数量:", :hint => "单位:(套)" %>
+        <%= f.input :has_applied, :label => "已申请数量:", :hint => "单位:(套)" %>
+        <%= f.input :img, :label => "工具图片:" %>
+        <%= f.input :tag_list, :hint => "Tips: 多个标签之间用“，”隔开", :label => "标签:" %>
+
+        <div class="rowElem">
+          <%= f.button :submit, :value => "#{button_value}" %>
+          <div class="fix"></div>
+        </div>
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

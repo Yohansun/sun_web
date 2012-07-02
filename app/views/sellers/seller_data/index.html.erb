@@ -1,0 +1,115 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .count .pager {width:410px;}
+  </style>
+<%- end %>
+<div class="count clear">
+  <h1>icolor经销商后台</h1>
+  <ul class="count_left fl ft15">
+    <li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
+    <li><a href="#">iColor报告下载</a></li>
+    <li><a href="<%= seller_user_seller_sms_url %>">icolor短信通知</a></li>
+    <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+  </ul><!--count_left ends-->
+  <div class="count_right fr">
+    <div class="count_sum fl">
+      <%- @companies_top.each do |c| %>
+        <div>
+          <%= c.avatar.blank? ? image_tag(asset_path("news/regimg_bg.jpg"), size: "91x97") : link_to(image_tag(c.avatar.file.url(:access_wall), size: "91x97"),user_path(c)) %>
+          <h3><%= c.display_name %></h3>
+        </div>
+      <%- end%>
+    </div><!--count_sum ends-->
+  </div><!--count_right ends-->
+  <table class="data_user">
+    <tr>
+      <th width="95">公司名称</th>
+      <th width="90">联系电话</th>
+      <th width="80">邮箱地址</th>
+      <th width="88">总上线次数</th>
+      <th width="77">作品数量</th>
+      <th width="75">被投票数</th>
+      <th width="65">被评论</th>
+      <th width="70">上月销量</th>
+      <th width="110">本月销额</th>
+      <th width="110">Top3 产品名字</th>
+      <th class="noborder" width="71">是否置顶</th>
+    </tr>
+    <%- @companies.each do |cc|%>
+      <%- 
+        current_month = cc.seller_datas.current_month.first 
+
+        if current_month
+          array = []
+          array << ("<p>" + current_month.product_top1 + "</p>") unless current_month.product_top1.blank?
+          array << ("<p>" + current_month.product_top2 + "</p>") unless current_month.product_top2.blank?
+          array << ("<p>" + current_month.product_top3 + "</p>") unless current_month.product_top3.blank?
+        end  
+      %>
+      <tr id="<%= cc.id %>">
+      <td><%= cc.display_name %></td>
+      <td><%= cc.try(:phone) %></td>
+      <td class="overflow"><%= cc.try(:email) %></td>
+      <td><%= cc.try(:sign_in_count) %></td>
+      <td><%= cc.designs.blank? ? 0 : cc.designs.count %></td>
+      <td class="cr"><%= cc.designs.blank? ? 0 : cc.designs.sum(:votes_count) %></td>
+      <td><%= cc.designs.blank? ? 0 : cc.designs.map {|d| d.comments.count }.sum  %></td>
+
+      <td class="cr"><%= cc.seller_datas.last_month.blank? ? 0 : cc.seller_datas.last_month.first.sales %></td>
+      <td class="sale_amount">
+        <%- if current_month && !current_month.sales.blank? %>
+          <p><%= current_month.sales %></p>
+        <%- else %>
+          <button>请输入本月销额</button>
+        <%- end %>        
+      </td>
+      <td class="product_name">
+        <%- unless array.blank? %>
+          <%= raw array.join(" ") unless array.blank? %>
+        <%- else %>
+          <button>请输入产品名字</button>
+        <%- end %>        
+      </td>
+      <td><a class="data_pop" href="javascript:" data-order="<%= cc.try(:top_reason) %>">置顶</a></td>
+    </tr>
+    <%- end %>    
+    
+  </table>
+  <div class="pager ft12 cl">
+    <%= paginate @companies %>
+  </div>
+</div><!--count ends-->
+
+<%- content_for :tail do %>
+  <%= javascript_include_tag "count" %>
+  <div id="layer"></div>
+  <div class="layer_content abs_center ft14">
+    <a href="javascript:" id="lay_close"></a>
+
+    <!-- 置顶提交表单 -->
+    <%= form_tag(seller_user_set_top_path, remote: true) do %>
+      <div>
+        请输入置顶原因：
+        <input type="hidden" id="data_order" name="user_id"/>
+        <input type="text" name="user_data[top_reason]" />
+      </div>
+      <input class="abs_center_submit" type="submit" value="确定" />
+    <%- end %>
+  </div>
+
+  <!-- Top3产品提交表单 -->
+  <%= form_tag(seller_user_update_seller_data_path, id: "input_pop", remote: true) do %>
+    <input type="hidden" id="user_id" name="user_id" />
+    <input type="text" class="input_text" name="seller_data[product_top1]"/>
+    <input type="text" class="input_text" name="seller_data[product_top2]"/>
+    <input type="text" class="input_text" name="seller_data[product_top3]"/>
+    <input type="submit" value="确定" class="input_submit" />
+  <%- end %><!--data_pop ends-->
+
+  <!-- 本月销额提交表单 -->
+  <%= form_tag(seller_user_update_seller_data_path, id: "sale_amount", remote: true) do %>
+    <input type="hidden" id="sale_amount_hidden"  name="user_id"/>
+    <input type="text" class="input_text" name="seller_data[sales]"/>
+    <input type="submit" value="确定" class="input_submit" />
+  <%- end %>
+<%- end %>  

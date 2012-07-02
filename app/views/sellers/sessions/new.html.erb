@@ -1,0 +1,21 @@
+<div class="main">
+  <div class="wrapper bd">
+    <div class="data_login_bg">
+      <div class="data_login_content">
+        <%= form_for(:seller_user, :url => seller_user_session_path)  do |f| %>
+          <div>
+            <label for="usernames"><span>*</span>用户名：</label>
+            <input type="text" name="seller_user[login]" id="seller_user_name"/>
+          </div>
+          <div>
+            <label for="passwords"><span>*</span>密码：</label>
+            <input type="password" name="seller_user[password]"/>
+          </div>
+          <p class="tc">
+            <input type="image" src="<%= asset_path "count/data_login_submit.jpg"%>" />
+          </p>
+        <%- end %>
+     </div><!--data_login_content ends-->
+    </div><!--data_login_bg ends-->
+  </div><!--wrapper ends-->
+</div><!--main ends-->

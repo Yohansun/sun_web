@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120625143356) do
+ActiveRecord::Schema.define(:version => 20120630062029) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20120625143356) do
     t.integer  "is_locked"
     t.datetime "last_logout_at"
     t.string   "username"
+    t.integer  "area_id",                :default => 0
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -557,6 +558,42 @@ ActiveRecord::Schema.define(:version => 20120625143356) do
     t.integer  "amount"
   end
 
+  create_table "seller_data", :force => true do |t|
+    t.integer  "sales"
+    t.string   "product_top1"
+    t.string   "product_top2"
+    t.string   "product_top3"
+    t.boolean  "apply_for_tools", :default => false
+    t.string   "tool_ids"
+    t.integer  "user_id"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "seller_user_id"
+  end
+
+  create_table "seller_users", :force => true do |t|
+    t.string   "email",                  :default => "",  :null => false
+    t.string   "username",               :default => "",  :null => false
+    t.string   "area_id",                :default => "0", :null => false
+    t.string   "encrypted_password",     :default => "",  :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.string   "mobile"
+    t.string   "phone"
+    t.string   "psd"
+  end
+
+  add_index "seller_users", ["email"], :name => "index_seller_users_on_email", :unique => true
+  add_index "seller_users", ["reset_password_token"], :name => "index_seller_users_on_reset_password_token", :unique => true
+
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false
     t.text     "value"
@@ -575,6 +612,18 @@ ActiveRecord::Schema.define(:version => 20120625143356) do
     t.integer  "user_id"
     t.string   "title"
     t.integer  "sys_msg_id"
+  end
+
+  create_table "sms_logs", :force => true do |t|
+    t.integer  "seller_user_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.string   "response"
+    t.string   "send_id"
+    t.string   "result"
+    t.string   "description"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "subjects", :force => true do |t|
@@ -618,6 +667,19 @@ ActiveRecord::Schema.define(:version => 20120625143356) do
     t.string "name"
   end
 
+  create_table "tools", :force => true do |t|
+    t.string   "name"
+    t.integer  "total",            :default => 0
+    t.integer  "has_applied",      :default => 0
+    t.integer  "subject_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+  end
+
   create_table "upload_files", :force => true do |t|
     t.string   "filedata_file_name"
     t.string   "filedata_content_type"
@@ -631,11 +693,10 @@ ActiveRecord::Schema.define(:version => 20120625143356) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.string   "token"
-    t.string   "secret"
-    t.boolean  "is_binding", :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_binding",   :default => false
+    t.string   "access_token"
   end
 
   create_table "users", :force => true do |t|
@@ -681,6 +742,8 @@ ActiveRecord::Schema.define(:version => 20120625143356) do
     t.integer  "recommend_designer_status", :default => 0
     t.integer  "designs_count"
     t.boolean  "is_imported",               :default => false
+    t.boolean  "is_top",                    :default => false
+    t.string   "top_reason"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

@@ -1,0 +1,49 @@
+<div class="count clear">
+  <h1>icolor经销商后台</h1>
+  <ul class="count_left fl ft15">
+    <li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
+    <li><a href="#">iColor报告下载</a></li>
+    <li><a href="<%= seller_user_seller_sms_url %>">icolor短信通知</a></li>
+    <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+  </ul><!--count_left ends-->
+  <div class="count_right fr">
+    <div class="count_sum data_tool fl">
+      <h2>iColor工具申请</h2>
+      <p>每个月按时提交销售额，每季度选择置顶公司即可获得免费四种色彩工具中任意两种的机会。</p>
+    </div><!--count_sum ends-->
+  </div><!--count_right ends-->
+  <ul class="data_tools clear fl cl">
+    <%- @tools.each do |t| %>
+      <li>
+        <%= t.img_file_name.blank? ? image_tag(asset_path "count/tools1.jpg") : image_tag(t.img.file.url(:thumb))%>
+        <%- unless t.tag_counts_on(:tags).blank? %>
+          <h3><%= t.tag_counts_on(:tags).map {|tag| tag.name}.join(",") %></h3>
+        <%- end %>  
+        <p>
+          <%= t.try(:name) %><br/>
+          每季度<%= t.try(:total) %>套<br/>
+        </p>
+        <a href="javascript:void(0)" onclick="apply_for_tools(<%= t.id %>)"><img src="<%= asset_path "count/tools_apply.jpg"%>"/></a>
+      </li>
+    <%- end %>
+  </ul><!--data_tools ends-->
+  <div class="pager ft12 cl">
+    <%= paginate @tools %>
+  </div>
+</div><!--count ends-->
+
+<%- content_for :tail do %>
+  <script type="text/javascript">
+      $(function(){
+        $('.data_tools li:even').css('clear','left')
+      });
+      
+      function apply_for_tools(id) {
+          $.post("/seller_user/apply_for_tools", {seller_user:{tool_ids:id, apply_for_tools:true}}, function(message) {
+              if (message != "") {
+                  alert(message);
+              }
+          });
+      }
+  </script>
+<%- end %>
