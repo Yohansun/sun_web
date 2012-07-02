@@ -22,6 +22,11 @@ class SellerUser < ActiveRecord::Base
   end
 
   def area_name=(value)
-    self.area_id = value.split(":").last
-  end  
+    array = value.split(":")
+    if array.size.eql? 1
+      self.area_id = Area.where("name like ?", "%#{value}%").first.id
+    else
+      self.area_id = value.split(":").last
+    end
+  end
 end
