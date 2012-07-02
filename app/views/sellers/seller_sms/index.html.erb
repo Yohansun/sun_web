@@ -1,0 +1,54 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .count .pager {width:430px;}
+  </style>
+<%- end %>
+<div class="count clear">
+  <h1>icolor经销商后台</h1>
+  <ul class="count_left fl ft15">
+    <li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
+    <li><a href="#">iColor报告下载</a></li>
+    <li><a href="<%= seller_user_seller_sms_url %>">iColor短信通知</a></li>
+    <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+  </ul><!--count_left ends-->
+  <div class="count_right fr">
+    <div class="count_sum info_ul fl">
+      <h2>iColor通知功能介绍</h2>
+    </div><!--count_sum ends-->
+  </div><!--count_right ends-->
+  <div class="data_info_form cl">
+    <h2>通知内容：</h2>
+    <textarea id="sms_data_content"></textarea>
+    <h2>选择发送用户：</h2>
+    
+    <%= render :partial => 'table' %>
+    
+    <p class="tc cl">
+      <input type="image" src="<%= asset_path "count/info_submit.jpg"%>" class="info_submit" href="javascript:void(0)" onclick="sendSms()"/>
+    </p>  
+  </div>  
+</div><!--count ends-->
+
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    function sendSms(){
+      var num = $('.data_info_input:checkbox:checked').size();
+      var obj = $('.data_info_input:checkbox:checked');
+      var content = $('#sms_data_content').val();
+      var ids_to_send = new Array();
+      for(var i=0;i<num;i++){
+        ids_to_send.push(obj.eq(i).attr("rel"));
+      }
+      if (ids_to_send.length == 0){
+        alert("亲，您还未选择发送对象！")
+
+      }else{
+        $.post("/seller_user/sms", {sms_data:{ids:ids_to_send, content:content}}, function(message) {
+          if (message != "") {
+            alert(message);
+          }
+        });
+      }; 
+    }
+  </script>
+<%- end %>  

@@ -44,5 +44,9 @@ gem "omniauth-qq-connect"
 gem 'exception_notification'
 gem 'newrelic_rpm'
 
+#发送短信
+gem 'savon'
+gem 'collections'
+
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"

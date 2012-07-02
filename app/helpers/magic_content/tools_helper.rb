@@ -1,0 +1,2 @@
+module MagicContent::ToolsHelper
+end

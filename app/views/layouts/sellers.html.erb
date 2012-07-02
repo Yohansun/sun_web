@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<%= stylesheet_link_tag "application","count" %>
+		<%= javascript_include_tag "application" %>
+
+		<%= csrf_meta_tag %>
+		<!--[if IE 6]>
+		<script src="/png.js"></script>
+		<script>
+		PNG.fix('img,div,a,ul,li,h2,h3');
+		</script>
+		<![endif]-->
+</head>
+	<body>  
+		<div class="header">
+			<div class="nav pa">
+				<div class="logo">
+					<a href="/"><img src="<%= asset_path "logo2.png"%>" /></a>
+				</div>
+				<%- if current_seller_user %>
+					<div class="data_nav cw fl ft14">
+						<p class="fl">欢迎您：<%= current_seller_user.try(:username) %></p>
+						<p class="fr"><%= link_to('退出', destroy_seller_user_session_path, :method => :delete) %></p>
+						<p class="fr">最后登陆：<%= current_seller_user.last_sign_in_at.strftime("%Y-%m-%d %H:%M") %></p>
+					</div><!--data_nav ends-->
+				<%- end %>	
+			</div><!--nav ends-->
+		</div><!--header ends-->
+		
+		<%= yield :head %>
+		<%= yield %>
+		<%= yield :tail %>
+
+		<div class='footer mt50'>
+		<div class='links'>
+    <div class='w_995'>
+      <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" target="_blank" alt="" /></a>
+      <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.png" %>" target="_blank" alt="" /></a>
+      <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.spta.gov.cn/index.html'><img src='<%= asset_path "link7.png" %>' target="_blank" alt="" /></a>
+      <a href='http://www.colorcoordinator.cn/'><img src='<%= asset_path "link8.png" %>' target="_blank" alt="" /></a>
+    </div>
+    <!--w_995 ends-->
+  </div>
+  <!--links ends-->
+  <div class='bot_map w_995 ft12 clear'>
+    <div class="inner">
+      <ul>
+        <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
+        <li><a href="/master_interviews">大师访谈</a></li>
+        <li><a href="/master_topics">热点话题</a></li>
+        <li><a href="/master_designs">大师作品</a></li>
+      </ul>
+      <ul>
+        <li><a href="/designs" class='fb'>设计鉴赏</a></li>
+        <li><a href="/weekly_stars">每周之星</a></li>
+        <li><a href="/designs">推荐作品</a></li>
+        <li><a href="/inspirations">灵感秀</a></li>
+        <li><a href="/color_designs">色彩配搭</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" class='fb'>行业资讯</a></li>
+        <li><a href="#">色彩资讯</a></li>
+        <li><a href="/articles">装修资讯</a></li>
+        <li><a href="#">微博资讯</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" class='fb'>精彩活动</a></li>
+        <li><a href="#">年度色彩趋势活动</a></li>
+        <li><a href="/events">设计师活动</a></li>
+        <li><a href="#">其他精彩活动</a></li>
+      </ul>
+      <ul>
+        <li><a href="/softwares/case" class='fb'>实用工具</a></li>
+        <li><a href="/softwares/tools">配色工具</a></li>
+        <li><a href="/softwares/app">设计应用软件</a></li>
+      </ul>
+      <ul>
+        <li>
+          <a href="#" class='fb'>业主通道</a>
+        </li>
+        <li><a href="/channel/access">片区快查</a></li>
+        <li><a href="/faqs">家装设计咨询</a></li>
+        <li><a href="/mix_colors/new">在线配色服务</a></li>
+      </ul>
+      <ul class="ul_last">
+        <li><a href="/7-3" class='fb'>漆光艺彩</a></li>
+        <li><a href="#">木纹风尚生活</a></li>
+        <li><a href="#">墙面艺术效果</a></li>
+        <li><a href="/7-3">刷新灵感我绘我家</a></li>
+      </ul>
+    </div>
+  </div>
+  <!--bot_map ends-->
+  <div class='copyright ft12'>
+    <div class='w_995'>
+      <a href='http://www.nipponpaint.com.cn/' target="_blank">立邦官网</a> |
+      <a href='/contact' target="_blank">联系我们</a> |
+      <a href='/rules' target="_blank">会员机制</a> |
+      <a href='http://shop.nipponpaint.com.cn/' target="_blank">网上商城</a> |
+      <a href='/state' target="_blank">网站声明</a>
+
+      <p>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
+    </div>
+    <!--w_995 ends-->
+  </div>
+  <!--copyright ends-->
+	</div><!--footer ends-->
+	</body>
+</html>

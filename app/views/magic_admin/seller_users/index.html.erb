@@ -1,0 +1,40 @@
+<!-- Content -->
+<div class="content">
+  <div class="title">
+    <h5>iColor经销商账号管理</h5>
+    <div class="num"><%= link_to "新增", main_app.new_seller_user_path, :class => "redNum" -%></div>
+  </div>
+
+  <!-- Statistics -->
+
+  <div class="table">
+    <div class="head"><h5 class="iFrames">用户列表</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="25%">用户名</th>
+          <th >邮件地址</th>
+          <th >日志</th>
+          <th width="150px">操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% collection.each do |c| %>
+          <tr class="gradeA">
+            <td><%= c.username-%></td>
+            <td><%= c.email -%></td>
+            <td>
+              登录: <%= c.sign_in_count -%><br />
+              最后登陆: <%= c.last_sign_in_at.strftime("%Y-%m-%d %H:%M:%S") if c.last_sign_in_at -%>
+            </td>
+            <td>
+              <%= link_to "编辑", main_app.edit_seller_user_path(c), :class => 'button basicBtn' -%>
+              <%= link_to "删除", main_app.seller_user_path(c), :method => "delete", :confirm => "确定删除?", :class => 'button basicBtn' -%>
+            </td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div><!-- Content -->

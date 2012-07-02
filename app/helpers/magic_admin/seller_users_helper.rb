@@ -1,0 +1,2 @@
+module MagicAdmin::SellerUsersHelper
+end
