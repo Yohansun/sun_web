@@ -2,10 +2,7 @@
 	<%= stylesheet_link_tag "art", "style" %>
 <%- end %>
 <%- content_for :tail do %>
-  <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js" %>
-  <script type="text/javascript">
-    swfobject.registerObject("FLVPlayer");
-  </script>
+  <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js","flowplayer-3.2.11.min.js" %>
 <%- end %>	
 
 <div class="main">
@@ -112,94 +109,106 @@
                     <img src="<%= asset_path "art/arts2.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color4 art_pos1 pa" title="NN7508-4深邃太空"></div>
-                    <div class="art_color5 art_pos2 pa" title="OW002-4 烟紫"></div>
-                    <div class="art_color6 art_pos3 pa" title="VC7060-4人约黄昏"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color4 art_pos1 pa" data-title="NN7508-4深邃太空"></div>
+                        <div class="art_color5 art_pos2 pa" data-title="OW002-4 烟紫"></div>
+                        <div class="art_color6 art_pos3 pa" data-title="VC7060-4人约黄昏"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts10.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color24 art_pos3 pa" title="YN3007-4 虔诚"></div>
+                    <p class="p_pos2 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color24 art_pos3 pa" data-title="YN3007-4 虔诚"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts5.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color13 art_pos3 pa" title="OW054-4青山淡彩"></div>
+                    <p class="p_pos2 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color13 art_pos3 pa" data-title="OW054-4青山淡彩"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts1.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color1 art_pos1 pa" title="NN2570-3 布莱垦棕"></div>
-                    <div class="art_color2 art_pos2 pa" title="NN3401-4 荷兰乳酪"></div>
-                    <div class="art_color3 art_pos3 pa" title="NN3990-2 牡蛎"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color1 art_pos1 pa" data-title="NN2570-3 布莱垦棕"></div>
+                        <div class="art_color2 art_pos2 pa" data-title="NN3401-4 荷兰乳酪"></div>
+                        <div class="art_color3 art_pos3 pa" data-title="NN3990-2 牡蛎"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts7.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color15 art_pos1 pa" title="NN0032-2 乌金"></div>
-                    <div class="art_color16 art_pos2 pa" title="NN3401-4 荷兰乳酪"></div>
-                    <div class="art_color17 art_pos3 pa" title="OA1200-1 哈瓦那雪茄"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color15 art_pos1 pa" data-title="NN0032-2 乌金"></div>
+                        <div class="art_color16 art_pos2 pa" data-title="NN3401-4 荷兰乳酪"></div>
+                        <div class="art_color17 art_pos3 pa" data-title="OA1200-1 哈瓦那雪茄"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts12.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color26 art_pos3 pa" title="OW038-4象牙白"></div>
+                     <p class="p_pos2 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color26 art_pos3 pa" data-title="OW038-4象牙白"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts4.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color10 art_pos1 pa" title="NN2520-3细沙海岸"></div>
-                    <div class="art_color11 art_pos2 pa" title="ON0058-4春雨"></div>
-                    <div class="art_color12 art_pos3 pa" title="VC7770-3花样年华"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color10 art_pos1 pa" data-title="NN2520-3细沙海岸"></div>
+                        <div class="art_color11 art_pos2 pa" data-title="ON0058-4春雨"></div>
+                        <div class="art_color12 art_pos3 pa" data-title="VC7770-3花样年华"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts11.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color25 art_pos3 pa" title="OW060-4 雪蓝"></div>
+                     <p class="p_pos2 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color25 art_pos3 pa" data-title="OW060-4 雪蓝"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts9.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color21 art_pos1 pa" title="NN1330-2乌云"></div>
-                    <div class="art_color22 art_pos2 pa" title="NN3401-4 荷兰乳酪"></div>
-                    <div class="art_color23 art_pos3 pa" title="YN4951-4石上清泉"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color21 art_pos1 pa" data-title="NN1330-2乌云"></div>
+                        <div class="art_color22 art_pos2 pa" data-title="NN3401-4 荷兰乳酪"></div>
+                        <div class="art_color23 art_pos3 pa" data-title="YN4951-4石上清泉"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts6.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color14 art_pos3 pa" title="NN1330-2乌云"></div>
+                    <p class="p_pos2 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color14 art_pos3 pa" data-title="NN1330-2乌云"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts3.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color7 art_pos1 pa" title="NN4760-4锡兰象牙"></div>
-                    <div class="art_color8 art_pos2 pa" title="ON0058-4春雨"></div>
-                    <div class="art_color9 art_pos3 pa" title="OW076-4柔粉"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color7 art_pos1 pa" data-title="NN4760-4锡兰象牙"></div>
+                        <div class="art_color8 art_pos2 pa" data-title="ON0058-4春雨"></div>
+                        <div class="art_color9 art_pos3 pa" data-title="OW076-4柔粉"></div>
                 </div><!--art_box ends-->
                 <div class="art_box none pr">
                     <img src="<%= asset_path "art/arts8.jpg"%>" />
                     <a href="javascript:" id="light_on"></a>
                     <a href="javascript:" id="light_off"></a>
-                    <div class="art_color18 art_pos1 pa" title="BN7707-4青烟飘渺"></div>
-                    <div class="art_color19 art_pos2 pa" title="NN7851-4银币"></div>
-                    <div class="art_color20 art_pos3 pa" title="OW034-4贝卡黄"></div>
+                    <p class="p_pos1 pa fb ft14">墙面搭配色</p>
+                        <div class="art_color18 art_pos1 pa" data-title="BN7707-4青烟飘渺"></div>
+                        <div class="art_color19 art_pos2 pa" data-title="NN7851-4银币"></div>
+                        <div class="art_color20 art_pos3 pa" data-title="OW034-4贝卡黄"></div>
                 </div><!--art_box ends-->
             </div><!--art_box_bin ends-->
             <ul class="art_nav clear">
-             	<li class="art_nav1 selected fl"></li>
-                <li class="art_nav2 fl"></li>
-                <li class="art_nav3 fl"></li>
-                <li class="art_nav4 fl"></li>
+             	<li class="art_nav1 selected fl">媒体报道</li>
+                    <li class="art_nav2 fl">刷新服务</li>
+                    <li class="art_nav3 fl">艺术漆效果图册</li>
+                    <li class="art_nav4 fl">艺术漆微电影</li>
             </ul>
             <div id="art_container">
              	<div class="ipad1 pr">
@@ -211,42 +220,21 @@
                             <li><img src="<%= asset_path "art/ipad1_img4.jpg"%>" alt=""></li>
                         </ul>
                     </div>
-                    <a href="javascript:" class="ipad1_zoom pa"></a>
-                    <a href="javascript:;" class="ipad1_prev draggablecarousel-prev pa"></a>
-                    <a href="javascript:;" class="ipad1_next draggablecarousel-next pa"></a>
+                    <a href="javascript:;" class="ipad1_zoom pa">全屏观看</a>
+                        <a href="javascript:;" class="ipad1_prev draggablecarousel-prev pa">prev</a>
+                        <a href="javascript:;" class="ipad1_next draggablecarousel-next pa">next</a>
                 </div>
                 <div class="ipad1 pr none">
                     <div class="ipad1_img2">
-                        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="847" height="465" id="FLVPlayer">
-                            <param name="movie" value="/flash/FLVPlayer_Progressive.swf" />
-                            <param name="quality" value="high" />
-                            <param name="wmode" value="opaque" />
-                            <param name="scale" value="noscale" />
-                            <param name="salign" value="lt" />
-                            <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/flash/refresh-3-mins&amp;autoPlay=false&amp;autoRewind=false" />
-                            <param name="swfversion" value="8,0,0,0" />
-                            <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-                            <param name="expressinstall" value="/Scripts/expressInstall.swf" />
-                            <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-                            <!--[if !IE]>-->
-                            <object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="847" height="465">
-                            <!--<![endif]-->
-                                <param name="quality" value="high" />
-                                <param name="wmode" value="opaque" />
-                                <param name="scale" value="noscale" />
-                                <param name="salign" value="lt" />
-                                <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/flash/refresh-3-mins&amp;autoPlay=false&amp;autoRewind=false" />
-                                <param name="swfversion" value="8,0,0,0" />
-                                <param name="expressinstall" value="/Scripts/expressInstall.swf" />
-                                <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-                                <div>
-                        	       <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-                        	       <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
-                                </div><!--[if !IE]>-->
-                            </object><!--<![endif]-->
-                        </object>
-                    <!--<img src="images/art/ipad1_img2.jpg" alt="" />-->
+                         <a href="/flash/refresh-3-mins.flv" style="display:block;width:847px;height:465px" id="player"></a>
+                            <script>
+                                flowplayer("player", "flash/flowplayer-3.2.12.swf");
+                            </script>
                     </div><!--ipad1_img2 ends-->
+                     <div class="video_words pa">
+                            艺术漆首批上市地区：上海 
+                            相关产品与服务信息请拨打：800-810-1687
+                        </div>
                     <img src="<%= asset_path "art/ipad2_img.jpg"%>" alt="" class="ipad1_img3 pa" />
                 <!-- JiaThis Button BEGIN -->
                     <div id="ckepop" class="cw pa" style="right:142px;bottom:66px;">
@@ -260,7 +248,8 @@
                 </div>
                 <div class="ipad2 pr none">
                     <!--div class="ipad2_layer pa"></div-->
-                    <a href= "/art/down_art_pdf" class="ipad2_down pa"></a>
+                    <a href= "/art/down_art_pdf" class="ipad2_down pa">一键下载</a>
+                    <!--a href="images/art/e-art.pdf" class="ipad2_down pa">一键下载</a-->
                     <div id="pdf_container">
                         <ul>
                             <!--li><img src="<%= asset_path "art/pdf1.jpg"%>" alt=""></li-->
@@ -273,11 +262,11 @@
                             <li><img src="<%= asset_path "art/pdf8.jpg"%>" alt=""></li>
                         </ul>
                     </div>
-                    <a href="javascript:;" class="ipad1_prev draggablecarousel-prev pa"></a>
-                    <a href="javascript:;" class="ipad1_next draggablecarousel-next pa"></a>
+                    <a href="javascript:;" class="ipad1_prev draggablecarousel-prev pa">prev</a>
+                    <a href="javascript:;" class="ipad1_next draggablecarousel-next pa">next</a>
                 </div>
                 <div class="ipad2 pr none">
-                    <img src="/assets/art/ipad3.jpg" />
+                    <img src="/assets/art/ipad3.jpg" alt="coming soon" title="coming soon" />
                 </div>
             </div>
         </div><!--art_bot ends-->

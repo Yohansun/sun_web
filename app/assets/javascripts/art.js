@@ -28,4 +28,18 @@ $(function(){
 		'keyControls' : true,
 		'transitionDuration' : 1000
 	});
-})
+
+	var $pa = $('.art_box div.pa');
+	$pa.each(function(){
+		var $this = $(this);
+		var html = '<div class="info2 pa">' + $this.data('title') + '</div>';
+		$this.html(html);
+		var bottom = parseInt($this.css('bottom'));
+		$this.hover(function(){
+			$this.stop(true).animate({'bottom':bottom + 10},'normal').children().fadeIn();
+		},function(){
+			$this.children().hide();
+			$this.stop().animate({'bottom':bottom},'normal');
+		});
+	});
+});
