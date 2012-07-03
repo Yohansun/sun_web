@@ -15,7 +15,7 @@
   <ul class="data_tools clear fl cl">
     <%- @tools.each do |t| %>
       <li>
-        <%= t.img_file_name.blank? ? image_tag(asset_path "count/tools1.jpg") : image_tag(t.img.file.url(:thumb))%>
+        <%= t.img_file_name.blank? ? image_tag(asset_path "count/tools1.jpg") : image_tag(t.img.url(:thumb))%>
         <%- unless t.tag_counts_on(:tags).blank? %>
           <h3><%= t.tag_counts_on(:tags).map {|tag| tag.name}.join(",") %></h3>
         <%- end %>  
