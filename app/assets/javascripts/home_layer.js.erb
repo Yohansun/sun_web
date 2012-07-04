@@ -1,0 +1,106 @@
+/*
+ *	jQuery layer plugin v1.1
+ *	author : luck chang
+ *	email : chunhang@networking.io
+ *	date : 2012.06.11 15:11:26
+ */
+
+;(function($){
+	$.fn.extend({
+		'layer' : function(configs){
+
+			var html_lay = '<div id="layer"></div>';
+			var html_con = '<div class="layer_content abs_center"><a href="javascript:;" id="lay_close"></a></div>'
+			$('body').append(html_lay + html_con);
+
+			configs = $.extend({
+
+				animation : false,
+				speed : 400,
+				styles : 'shake',
+				onscroll : false
+
+			},configs);
+
+			var my = {};
+			my.center = $('.abs_center');
+			my.that = this;
+			my.shut = $('#lay_close');
+			my.div = $('.layer_content');
+			my.lay = $('#layer');
+			my.ie6 = $.browser.msie && $.browser.version == 6;
+
+			if(configs.onscroll){
+				my.div.css('position','absolute');
+			}
+
+			my.that.click(function(event){
+				$('#march_lay').show();
+				event.preventDefault();
+				if(my.lay.is(':visible')) return;
+				if(configs.animation){
+					if(configs.styles == 'shake'){
+						my.div.show()
+						.animate({'top':'60%'},configs.speed)
+						.animate({'top':'40%'},configs.speed)
+						.animate({'top':'55%'},configs.speed)
+						.animate({'top':'45%'},configs.speed)
+						.animate({'top':'50%'},configs.speed);
+					}						
+					else if(configs.styles == 'slide'){
+						my.div.show()
+						.animate({'top':'50%'},configs.speed);
+					}
+				}
+				else{
+					my.div.css('top','50%').fadeIn();
+				}
+				layin();
+			}).click();
+
+			$(document).keydown(function(event){
+				if(my.lay.is(':visible')){
+					if(event.which == 27){
+						close_all();
+					}
+				}
+			});
+
+			my.shut.click(close_all);
+			/*my.lay.click(close_all);*/
+
+			function close_all(){
+				if(configs.animation){
+					my.center.stop(true).animate({'top':'-50%'},'normal',function(){
+						$(this).hide();
+					})
+				}
+				else{
+					my.center.fadeOut();
+				}
+				layout();
+			}
+			function layin(){
+				if(my.ie6){
+					var h = document.documentElement.scrollHeight;
+					my.lay.css('height', h + 'px');
+				}
+				my.lay.show().animate({'opacity':'0.9'},'normal');
+			}
+			function layout(){
+				my.lay.animate({'opacity':'0'},'normal').hide();
+			}
+		}
+	});
+})(jQuery);
+
+$(function(){
+	$('title').layer({
+		animation : false,
+		speed : 300,
+		onscroll : false
+	});
+	$('.slider_bin').slider({
+		styles : 'slide'
+	});
+});
