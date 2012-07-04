@@ -1,5 +1,6 @@
 <% content_for :head do -%>
 <%= stylesheet_link_tag 'index' %>
+<%= stylesheet_link_tag "layer", "jquery.slider.css" %>
 <style type="text/css">
 .boxb_content {
   position: relative;
@@ -67,6 +68,19 @@
 #home_improvement_news .list .t a{white-space:normal;}
 </style>
 <% end -%>
+
+<!-- /*首页浮层*/ -->
+<%- if current_user.nil? || current_user.is_show_layer? %>
+  <%= javascript_include_tag "home_layer.js", "jquery.slider.v2.js" %>
+
+  <div id="march_lay" class="slider_bin abs_center none" data-next="下一步" data-shut="关闭">
+    <img src="<%= asset_path "layer/kv1.png"%>" alt="" />
+    <img src="<%= asset_path "layer/kv2.png"%>" alt="" />
+    <img src="<%= asset_path "layer/kv3.png"%>" alt="" />
+    <img src="<%= asset_path "layer/kv4.png"%>" alt="" />
+  </div>
+<%- end %>
+
 <%- content_for :index do %>
 <div class="slides pr">
   <div class="slidesContainer">
