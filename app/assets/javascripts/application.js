@@ -13,4 +13,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require main
-//= require flowplayer-3.2.11.min
