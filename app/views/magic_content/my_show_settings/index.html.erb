@@ -1,0 +1,51 @@
+<div class="content">
+  <div class="title">
+    <h5>我型我秀设置</h5>
+    <div class="num"><%= link_to '返回', subjects_path, :class => "redNum" %></div>
+  </div>
+
+  <%= form_tag main_app.my_show_settings_path, { :class => "mainForm", :id => "valid", :multipart => true } %>
+      <fieldset>
+        <div class="widget border">
+
+          <div class="rowElem">
+            <label>小头像列表:</label>
+            <div class="formRight ">
+              <%= text_field_tag 'mys_show_kv_list', MyShowSetting.mys_show_kv_list, :class => "validate[required]" %>
+            </div>
+            <div class="fix"></div>
+          </div>
+
+          <div class="rowElem">
+            <label>热门推荐:</label>
+            <div class="formRight ">
+              <%= text_field_tag 'top_recommended', MyShowSetting.top_recommended %>
+            </div>
+            <div class="fix"></div>
+          </div>
+
+          <div class="rowElem">
+            <label>影响力排行:</label>
+            <div class="formRight ">
+              <%= text_field_tag 'impact_force_ranking', MyShowSetting.impact_force_ranking %>
+            </div>
+            <div class="fix"></div>
+          </div>
+
+          <div class="rowElem">
+            <label>设计师活动PIC:</label>
+            <div class="formRight ">
+              <%= file_field_tag 'img', :class => "file optional"%>
+            </div>
+            <div class="fix"></div>
+          </div>        
+
+          <div class="rowElem">
+            <%= button_tag "确定", :class => "greyishBtn submitForm" %>
+            <div class="fix"></div>
+          </div>
+
+        </div>
+      </fieldset>
+
+</div>
