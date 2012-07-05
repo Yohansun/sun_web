@@ -29,4 +29,14 @@ class SellerUser < ActiveRecord::Base
       self.area_id = value.split(":").last
     end
   end
+
+  def top_remain
+    top_log = self.top_log
+    
+    if top_log.present? && Time.now.all_quarter.cover?(top_log.split("/")[1].to_datetime)
+      10 - self.top_log.split("/")[0].to_i
+    else
+      10
+    end  
+  end  
 end

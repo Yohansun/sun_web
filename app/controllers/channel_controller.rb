@@ -65,6 +65,7 @@ class ChannelController < ApplicationController
       # end
       #根据iColor经销商平台中的置顶排序
       cons << "is_top desc"
+      cons << "top_order asc"
     end
     #输入立邦色号的数量
     cons << "recommend_designer_status desc"
