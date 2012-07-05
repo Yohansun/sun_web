@@ -1,0 +1,196 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "style" %>
+	<%= javascript_include_tag "jquery.masonry.js","jquery.autocomplete.js" %>
+	<style type="text/css">
+		.ac_results ul {background: white;width:145px;}
+		.ac_results li {font-size:12px;display:block;padding:3px;}
+		li.show_face_small img{float: left;}
+		li.show_face_small{overflow: hidden;}
+	</style>
+<%- end %>
+
+<div class="main">
+	<div class='sub_title tr pt25'>
+		<img src='<%= asset_path "design/title_design.png"%>' />
+	</div>
+	<div class='sub_nav ft12 pr tr'>
+		<em><a class="fb" href="/my_show">我型我秀</a></em>
+		<em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
+		<em><a href="/">首页</a><span></span></em>
+	</div><!--sub_nav ends-->
+	<div class="wrapper show_page group">
+		<div class="con_left">
+			<%= form_tag("/channel/access", :method => "put") do%>
+				<div class="show_search_area">
+					<input id ="search_area" name ="search" class="input_text" type="text" value="设计师/家装公司名称">
+					<input class="input_submit" type="submit" value="">
+				</div>
+			<%- end %>
+
+			<div class="show_search_bg">
+				<a href="#"><img src="<%= asset_path "show/show_btn2.png"%>" alt="" /></a>
+				<ul>
+					<li><a href="/channel/access?role=designer&des_status=0">设计师在职</a></li>
+					<li><a href="/channel/access?role=designer&des_status=1">设计师在读</a></li>
+					<li><a href="/channel/access?role=company">家装公司</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="con_right">
+			<div class="show_faces">
+				<ul id="show_img" class="show_face_img">
+					<li class="show_face_big">
+						<%= show_avatar(@top_recommended[0],"icon","138x138") if @top_recommended[0].present? %>
+					</li>
+
+					<%- @mys_show_kv_list[0,27].in_groups_of(3, false).each do |group| %>
+						<li class="show_face_small">
+							<%- group.each do |u| %>
+								<%= show_avatar(u,"icon","46x46") %>
+							<%- end %>
+						</li>
+					<%- end %>
+
+					<li class="show_face_big">
+						<%= show_avatar(@top_recommended[1],"icon","138x138") if @top_recommended[1].present? %>
+					</li>
+
+					<%- @mys_show_kv_list[27,3].in_groups_of(3, false).each do |group| %>
+						<li class="show_face_small">
+							<%- group.each do |u| %>
+								<%= show_avatar(u,"icon","46x46") %>
+							<%- end %>
+						</li>
+					<%- end %>
+
+					<li class="show_face_big">
+						<%= show_avatar(@impact_force_ranking[0],"icon","138x138") if @impact_force_ranking[0].present? %>
+					</li>
+
+					<%- @mys_show_kv_list[30,18].in_groups_of(3, false).each do |group| %>
+						<li class="show_face_small">
+							<%- group.each do |u| %>
+								<%= show_avatar(u,"icon","46x46") %>
+							<%- end %>
+						</li>
+					<%- end %>
+
+				</ul>
+			</div>
+
+			<ul class="show_con1 group">
+				<li class="right_l">
+					<h4><img src="<%= asset_path "show/show_tit1.png"%>"></h4>
+					<%- if @show_ads && @show_ads.img.exists?(:thumb) %>
+						<%= image_tag @show_ads.img.url(:thumb) %>
+					<%- end %>
+				</li>
+				<li class="right_r">
+					<ul class="show_view_tabs">
+						<li class="show_view_tab1 act">热门推荐</li>
+						<li class="show_view_tab2">影响力排名</li>
+					</ul>
+
+					<div class="show_info_list" id="show_info_list1">
+						<ul>
+							<%- if @top_recommended.present? %>
+								<%- @top_recommended.each_with_index do |u,index| %>
+									<li>
+										<span class="<%= 'list_icon' if [0,1,2].include? index %>"><%= index + 1 %></span>
+										<%= show_avatar(u,"icon","48x48") %>
+										<em><%= u.display_name %></em>
+									</li>
+								<%- end %>
+								<li class="noborder"><a class="show_more_btn" href="/channel/access?area=1323">更多</a></li>
+							<%- end %>
+						</ul>
+					</div>
+
+					<div class="show_info_list none" id="show_info_list2">
+						<ul>
+							<%- if @impact_force_ranking.present? %>
+								<%- @impact_force_ranking.each_with_index do |u,index| %>
+									<li>
+										<span class="<%= 'list_icon' if [0,1,2].include? index %>"><%= index + 1 %></span>
+										<%= show_avatar(u,"icon","48x48") %>
+										<em><%= u.display_name %></em>
+									</li>
+								<%- end %>
+								<li class="noborder"><a class="show_more_btn" href="/weekly_stars?from=top">更多</a></li>
+							<%- end %>
+						</ul>
+					</div>
+				</li>
+				<li class="clear"></li>
+			</ul>
+
+			<div class="show_con2 group">
+				<h4><img src="<%= asset_path "show/show_tit2.png"%>"></h4>
+
+				<ul>
+					<li>
+						<h5><a href="/channel/access?role=designer&des_status=1">更多>></a>设计师在读</h5>
+						<ul class="group">
+							<%- latest_login_user(1,1).each do |u| %>
+								<li title="<%= u.display_name %>">
+									<%= show_avatar(u,"icon","48x48") %>
+									<span title="<%= u.display_name %>"><%= u.display_name[0,3]%></span>
+								</li>
+							<%- end %>
+						</ul>
+					</li>
+					<li>
+						<h5><a href="/channel/access?role=designer&des_status=0">更多>></a>设计师在职</h5>
+						<ul class="group">
+							<%- latest_login_user(1,0).each do |u| %>
+								<li title="<%= u.display_name %>">
+									<%= show_avatar(u,"icon","48x48") %>
+									<span title="<%= u.display_name %>"><%= u.display_name[0,3]%></span>
+								</li>
+							<%- end %>
+						</ul>
+					</li>
+					<li class="nomr">
+						<h5><a href="/channel/access?role=company">更多>></a>家装公司</h5>
+						<ul class="group">
+							<%- latest_login_user(2).each do |u| %>
+								<li title="<%= u.display_name %>">
+									<%= show_avatar(u,"icon","48x48") %>
+									<span title="<%= u.display_name %>"><%= u.display_name[0,3]%></span>
+								</li>
+							<%- end %>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!--wrapper ends-->
+</div><!--main ends-->
+
+<%- content_for :tail do %>
+	<script type="text/javascript">
+	$(window).load(function(){
+		$('#show_img').masonry();
+		autocom();
+	});
+
+	$(function(){
+
+		$('.show_view_tab1').click(function(){
+			$('#show_info_list1').show();
+			$(this).addClass('act').siblings('li').removeClass('act')
+			$('#show_info_list2').hide();
+		})
+		$('.show_view_tab2').click(function(){
+			$('#show_info_list2').show();
+			$(this).addClass('act').siblings('li').removeClass('act')
+			$('#show_info_list1').hide();
+		})
+	});
+
+	function autocom() {
+      $("#search_area").autocomplete("/my_show/autocomplete_username");
+    }
+	</script>
+<%- end %>

@@ -75,6 +75,10 @@ Icolor::Application.routes.draw do
   match "/designs/:id" => "designs#show"
   match "/designs_upload" => "designs#upload"
 
+  #我型我秀
+  match "/my_show" => "my_show#index"
+  match "/my_show/autocomplete_username" => "my_show#autocomplete_username"
+
   resources :inspirations
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
@@ -188,6 +192,7 @@ Icolor::Application.routes.draw do
     resources :tools
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
+    resources :my_show_settings
   end
 
   #扩充magic_admin

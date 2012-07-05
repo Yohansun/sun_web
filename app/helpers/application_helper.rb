@@ -174,4 +174,13 @@ module ApplicationHelper
     end
     url
   end
+
+  def show_avatar(*args)
+    user, type, size = args[0], args[1], args[2]
+    if user.avatar.present?
+      link_to image_tag("#{user.avatar.file.url(type.blank? ? :original : type.to_sym)}", size: "#{size if size.present?}"), user_path(user)
+    else
+      image_tag asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}"
+    end
+  end
 end

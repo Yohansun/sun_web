@@ -26,7 +26,7 @@ $(function(){
 
 /*search input*/
 $(function(){
-	var $input = $('.search input.fl,#username,.owner_search,#host_main');
+	var $input = $('.search input.fl,#username,.owner_search,#host_main,.input_text');
 	$input.focus(function(){
 		var txt = $(this).val();
 		if(txt == this.defaultValue)
