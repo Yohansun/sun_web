@@ -1,3 +1,16 @@
-$("#<%= params[:user_id] %>").find(".data_pop").attr('data-order',"<%= @top_reason %>");
-$('.abs_center').fadeOut();
-$('#layer').fadeOut();
+<%- if @message %>
+	alert("<%= @message %>")
+<%- else %>
+	<%- if @user.nil? %>
+		alert("置顶序号或置顶原因不能为空!")
+	<%- else %>
+		$("#<%= params[:user_id] %>").find(".data_pop").attr({'data-order':"<%= @user.try(:top_order) %>",
+																													'data-reason':"<%= @user.try(:top_reason) %>"																													
+		});
+
+		$(".data_pop").attr({'data-remain':"<%= current_seller_user.top_remain %>"});
+
+		$('.abs_center').fadeOut();
+		$('#layer').fadeOut();
+	<%- end %>	
+<%- end %>

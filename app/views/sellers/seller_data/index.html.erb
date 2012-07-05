@@ -70,7 +70,7 @@
           <button>请输入产品名字</button>
         <%- end %>        
       </td>
-      <td><a class="data_pop" href="javascript:" data-order="<%= cc.try(:top_reason) %>">置顶</a></td>
+      <td><a class="data_pop" href="javascript:" data-order="<%= cc.try(:top_order) %>" data-reason="<%= cc.try(:top_reason) %>" data-remain= "<%= current_seller_user.top_remain %>">置顶</a></td>
     </tr>
     <%- end %>    
     
@@ -88,12 +88,23 @@
 
     <!-- 置顶提交表单 -->
     <%= form_tag(seller_user_set_top_path, remote: true) do %>
-      <div>
-        请输入置顶原因：
-        <input type="hidden" id="data_order" name="user_id"/>
-        <input type="text" name="user_data[top_reason]" />
-      </div>
-      <input class="abs_center_submit" type="submit" value="确定" />
+      <ul>
+        <li>
+          一个季度能置顶10次，您还有 <span class="cr" id="top_remain">3</span> 次置顶机会
+        </li>
+        <li>
+          请输入置顶顺序：
+          <input type="hidden" id="data_order" name="user_id"/>
+          <input type="text" id="top_order" name="user_data[top_order]" />
+        </li>
+        <li>
+          请输入置顶原因：<br />
+          <textarea id="top_reason" name="user_data[top_reason]"></textarea>
+        </li>
+      </ul>
+      <p class="tc">
+        <input class="abs_center_submit" type="submit" value="确定" />
+      </p>
     <%- end %>
   </div>
 

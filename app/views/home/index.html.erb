@@ -70,20 +70,29 @@
 <% end -%>
 
 <!-- /*首页浮层*/ -->
-<%- if current_user.nil? || current_user.is_show_layer? %>
-  <%= javascript_include_tag "home_layer.js", "jquery.slider.v2.js" %>
 
-  <div id="march_lay" class="slider_bin abs_center none" data-next="下一步" data-shut="关闭">
+<%#- unless cookies[:homepage_guide_layer_showed].eql? "false" %>
+  <%#= javascript_include_tag "home_layer.js", "jquery.slider.v2.js" %>
+
+  <!-- <div id="march_lay" class="slider_bin abs_center none" data-next="下一步" data-shut="关闭">
     <img src="<%= asset_path "layer/kv1.png"%>" alt="" />
     <img src="<%= asset_path "layer/kv2.png"%>" alt="" />
     <img src="<%= asset_path "layer/kv3.png"%>" alt="" />
     <img src="<%= asset_path "layer/kv4.png"%>" alt="" />
-  </div>
-<%- end %>
+  </div> -->
+<%#- end %>
 
 <%- content_for :index do %>
 <div class="slides pr">
   <div class="slidesContainer">
+
+    <div class="slider pr fl">
+      <img src="<%= asset_path 'kv4.jpg' %>"  usemap="#Map4" />
+      <map id="Map4" name="Map4">
+        <area shape="rect" coords="0,0,1680,550" href="http://detail.tmall.com/item.htm?id=14881165859&" target="_blank"/>
+      </map>
+    </div><!--slider ends-->
+
     <div class="slider pr fl">
       <!-- <a href="/"> -->
         <img src="<%= asset_path 'kv7.jpg' %>"  usemap="#Map1" />
@@ -93,30 +102,27 @@
         </map>
       <!-- </a> -->
     </div><!--slider ends-->
+
     <div class="slider pr fl">
       <img src="<%= asset_path 'kv9.jpg' %>" usemap="#Map2" />
       <map id="Map2" name="Map2">
         <area shape="rect" coords="0,0,1680,550" href="/gift" />
       </map>
     </div><!--slider ends-->
+
     <div class="slider pr fl">
       <img src="<%= asset_path 'kv6.jpg' %>" usemap="#Map5" />
       <map id="Map5" name="Map5">
         <area shape="rect" coords="419,416,510,442" href="/yda" />
       </map>
     </div><!--slider ends-->
+
     <div class="slider pr fl">
       <img src="/kv/kv8.jpg"  usemap="#Map3" />
       <map id="Map3" name="Map3">
         <area shape="rect" coords="358,362,619,400" href="/weekly_stars" />
       </map>
-    </div><!--slider ends-->
-    <div class="slider pr fl">
-      <img src="<%= asset_path 'kv4.jpg' %>"  usemap="#Map4" />
-      <map id="Map4" name="Map4">
-        <area shape="rect" coords="968,357,1245,386" href="#" />
-      </map>
-    </div><!--slider ends-->
+    </div><!--slider ends-->    
   </div>
   <!--slidesContainer ends-->
   <div class="bullets pa">

@@ -36,7 +36,10 @@
 			my.that.click(function(event){
 				var $this = $(this);
 				my.dat = $this.attr('data-order');
+				my.reason = $this.attr('data-reason');
+				my.remain = $this.attr('data-remain');
 				$('#data_order').val($this.parents('tr').attr('id'));
+
 				event.preventDefault();
 				if(my.lay.is(':visible')) return;
 				if(configs.animation){
@@ -56,7 +59,10 @@
 				else{
 					my.div.css('top','50%').fadeIn();
 				}
-				my.div.find(':input[type=text]').val(my.dat);
+
+				my.div.find('#top_order').val(my.dat);
+				my.div.find('#top_reason').val(my.reason);
+				my.div.find('#top_remain').text(my.remain);
 				layin();
 			});
 	
