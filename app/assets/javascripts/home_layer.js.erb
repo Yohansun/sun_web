@@ -57,7 +57,7 @@
 				}
 				layin();
 			}).click();
-
+	
 			$(document).keydown(function(event){
 				if(my.lay.is(':visible')){
 					if(event.which == 27){
@@ -97,10 +97,12 @@
 $(function(){
 	$('title').layer({
 		animation : false,
-		speed : 300,
-		onscroll : false
+		speed     : 300,
+		onscroll  : false
 	});
 	$('.slider_bin').slider({
-		styles : 'slide'
+		styles  : 'slide',
+		autoplay: false,
+		easing  : 'easeOutExpo'
 	});
 });

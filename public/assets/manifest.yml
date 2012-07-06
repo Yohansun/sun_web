@@ -521,10 +521,10 @@ kv8.jpg: kv8-c8bd31d502d328607040ff9b880afddf.jpg
 kv9.jpg: kv9-b19eea90ec5c7cc7d9660f35cfde7793.jpg
 kx.jpg: kx-7684f22d4f9a8918600fffcb188a5220.jpg
 layer/dots.png: layer/dots-484376636c4f0169361d414bb9d56e44.png
-layer/kv1.png: layer/kv1-8311ef347f58312eed82830012a9a960.png
-layer/kv2.png: layer/kv2-e2d3c711a46c00d3ba671c6d23d0c387.png
-layer/kv3.png: layer/kv3-2ae791a412848c5eb9fdddd176fe16c1.png
-layer/kv4.png: layer/kv4-200970acec6f909523789f61e965c82f.png
+layer/kv1.png: layer/kv1-3450a5426385f158c766fb6f40b7f2bc.png
+layer/kv2.png: layer/kv2-2ba32c9fcda183b68945203f2b87596c.png
+layer/kv3.png: layer/kv3-88ff44ea2520757e1e5774b133489959.png
+layer/kv4.png: layer/kv4-5931c4539dc7d9812b6aa581b07f0549.png
 layer/lay_close.png: layer/lay_close-f43b70778a39a3063f6bb4279723b194.png
 layer/next_icon.png: layer/next_icon-712cc29bad308b88ba1e8b28145d57ef.png
 layer/pager_bg.png: layer/pager_bg-47be866ff07df5b91f16f84ecb38f32a.png
@@ -1084,7 +1084,7 @@ galleryK.js: galleryK-9b20d0acfaee18c640cb66f5f78512d8.js
 galleryM.js: galleryM-23c26c8bda534611771f34474aa5a5e0.js
 galleryN.js: galleryN-b18dbe58d47f5cc6d76701f29d544ed8.js
 galleryO.js: galleryO-af65f325051edbdad2278ce5079b11f3.js
-home_layer.js: home_layer-3e6bdc326349607aa99031b2fc751a30.js
+home_layer.js: home_layer-4d7b68d122f4f62105b9c19071d49a2c.js
 index.js: index-ef5cc0196bdcf424fabc99ba332b1a9e.js
 index3.js: index3-6b9da7484a8d3828cb4ba8dbce25f2bd.js
 jquery-ui.min.js: jquery-ui.min-cd3c6f05aae2d06fea9bc7841861f23a.js
@@ -1095,7 +1095,7 @@ jquery.jeditable.js: jquery.jeditable-e74654f7392cbcbcd6e2b3cd773e9734.js
 jquery.layer.js: jquery.layer-da9c92681b4a64126fa4540d2af821de.js
 jquery.masonry.js: jquery.masonry-b5f8899744e1811e1fa6ebe6e5b6e32c.js
 jquery.rating.js: jquery.rating-fbc9311edb3983aa0414a6afa0d91b20.js
-jquery.slider.v2.js: jquery.slider.v2-d13d05479b188b9365617d231659a0c3.js
+jquery.slider.v2.js: jquery.slider.v2-a4d52a1c5ad12ddfbc9d2850048909d4.js
 jquery.uploadify.js: jquery.uploadify-9d36c6c2ff4acb608c751ff0a7bcaa6b.js
 lands.js: lands-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_admin/seller_users.js: magic_admin/seller_users-3af39f1da6f167c2cbf453ed74daff3d.js
@@ -1122,10 +1122,10 @@ sys_msgs.js: sys_msgs-3af39f1da6f167c2cbf453ed74daff3d.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-61e4b0ac948b41a18405f5442d0b4c0e.js
 yda.js: yda-2b57183c7722c2882f54a4b59ed7aeba.js
 yda_games.js: yda_games-3af39f1da6f167c2cbf453ed74daff3d.js
-application.css: application-7b1223dcee5e3c1dd7cd535aaf9b0f31.css
+application.css: application-aca9126dd7eaafdcf422e590f424056c.css
 areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
 art.css: art-6c77a683c4962f037700a91ce47c0c6d.css
-base.css: base-f44020932cb9b3627a8d2b3c2b040945.css
+base.css: base-847781162df5247f15e42f893b630758.css
 count.css: count-88da7a26b516136d2d699a27cf8b5644.css
 dd.css: dd-404c3f4285a8910d974be4048193c4a2.css
 exciting_activities.css: exciting_activities-29c54026339f272defab7752d9731342.css
@@ -1134,9 +1134,9 @@ index.css: index-66f1df2f61103cafd8868721d46b3ee6.css
 industry_news.css: industry_news-6b51f6a8db511057307b14fbd9d26b84.css
 jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
-jquery.slider.css: jquery.slider-c110bf410f01de782a53c0a518798755.css
+jquery.slider.css: jquery.slider-62ffa9b0d9419bbcf48f4476419d032e.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
-layer.css: layer-d49bad44e554d4dd428eb62e902bc3ca.css
+layer.css: layer-eaf4870bf096b738614b5e645185a8d2.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/color_designs.css: magic_content/color_designs-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/customer_replies.css: magic_content/customer_replies-7270767b2a9e9fff880aa5de378ca791.css
