@@ -31,12 +31,12 @@ class SellerUser < ActiveRecord::Base
   end
 
   def top_remain
-    top_log = self.top_log
+    top_record = self.top_record
     
-    if top_log.present? && Time.now.all_quarter.cover?(top_log.split("/")[1].to_datetime)
-      10 - self.top_log.split("/")[0].to_i
+    if top_record.present? && Time.now.all_quarter.cover?(top_record.split("/")[1].to_datetime)
+      10 - self.top_record.split("/")[0].to_i
     else
       10
     end  
-  end  
+  end
 end

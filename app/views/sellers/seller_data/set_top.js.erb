@@ -1,16 +1,15 @@
-<%- if @message %>
-	alert("<%= @message %>")
+<%- if @changed == false %>
+	$('.abs_center').fadeOut();
+	$('#layer').fadeOut();
+<%- elsif @messages.present? %>
+	alert("<%= @messages %>");
 <%- else %>
-	<%- if @user.nil? %>
-		alert("置顶序号或置顶原因不能为空!")
-	<%- else %>
-		$("#<%= params[:user_id] %>").find(".data_pop").attr({'data-order':"<%= @user.try(:top_order) %>",
-																													'data-reason':"<%= @user.try(:top_reason) %>"																													
-		});
+	$("#<%= params[:user_id] %>").find(".data_pop").attr({'data-order':"<%= @user.try(:top_order) %>",
+		'data-reason':"<%= @user.try(:top_reason) %>"
+	});
 
-		$(".data_pop").attr({'data-remain':"<%= current_seller_user.top_remain %>"});
+	$(".data_pop").attr({'data-remain':"<%= current_seller_user.top_remain %>"});
 
-		$('.abs_center').fadeOut();
-		$('#layer').fadeOut();
-	<%- end %>	
+	$('.abs_center').fadeOut();
+	$('#layer').fadeOut();
 <%- end %>
