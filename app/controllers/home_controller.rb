@@ -3,9 +3,9 @@ class HomeController < ApplicationController
   def index
 
     #在cookies中添加首页layer显示
-    # if cookies[:homepage_guide_layer_showed].blank?
-    #   cookies.permanent[:homepage_guide_layer_showed] = false
-    # end
+    if cookies[:homepage_guide_layer_showed].blank?
+      cookies.permanent[:homepage_guide_layer_showed] = false
+    end
 
     @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18).all
 

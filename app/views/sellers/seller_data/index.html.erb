@@ -14,9 +14,9 @@
   <div class="count_right fr">
     <div class="count_sum fl">
       <%- @companies_top.each do |c| %>
-        <div>
-          <%= c.avatar.blank? ? image_tag(asset_path("news/regimg_bg.jpg"), size: "91x97") : link_to(image_tag(c.avatar.file.url(:access_wall), size: "91x97"),user_path(c)) %>
-          <h3><%= c.display_name %></h3>
+        <div title="<%= c.display_name %>">
+          <%= show_avatar(c,"access_wall","91x97") %>
+          <h3><%= truncate(c.display_name, length: 8) %></h3>
         </div>
       <%- end%>
     </div><!--count_sum ends-->
