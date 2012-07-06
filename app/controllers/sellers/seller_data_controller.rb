@@ -9,35 +9,43 @@ class Sellers::SellerDataController < ApplicationController
 			@companies = companies.page(params[:page]).per(12)	
 			@companies_top = companies.limit 12	
 		else
-			redirect_to new_seller_user_session_path	
+			redirect_to new_seller_user_session_path
 		end	
 	end	
 
-	#set_top
+	#更新置顶信息,如果置顶的记录未发生修改就不提交
 	def set_top
+		top_reason = params[:user_data][:top_reason]
+		top_order  = params[:user_data][:top_order]
+		top_record    = current_seller_user.top_record
+
+		if top_record.present?
+			t, d = top_record.split("/")[0].to_i, top_record.split("/")[1].to_datetime
+		end
+
 		user = User.find params[:user_id]
-		user.is_top, user.top_reason, user.top_order = true, params[:user_data][:top_reason], params[:user_data][:top_order]
+		user.is_top, user.top_reason, user.top_order = true, top_reason, top_order
 
-		if params[:user_data][:top_reason].blank? || params[:user_data][:top_order].blank?
-			return
-		else
-			user.save :validate => false
-
-			top_log = current_seller_user.top_log
-
-			if top_log.blank? || (top_log.present? && !Time.now.all_quarter.cover?(top_log.split("/")[1].to_datetime))
-				current_seller_user.update_attribute :top_log, "1/#{Time.now}"
+		if user.changed?
+			if top_reason.blank? || top_order.blank?
+				return @messages = '置顶序号或置顶原因不能为空!'
 			else
-				t, d = top_log.split("/")[0].to_i, top_log.split("/")[1]
+				user.save :validate => false #保存置顶原因和置顶序号
 
-				if Time.now.all_quarter.cover?(d.to_datetime) && t.eql?(10)
-					return @message = "您本季度已经使用了10次置顶机会!"
+				if top_record.blank? || (top_record.present? && !Time.now.all_quarter.cover?(d))
+					current_seller_user.update_attribute :top_record, "1/#{Time.now}"
 				else
-					current_seller_user.update_attribute :top_log, "#{t+1}/#{Time.now}"
+					if Time.now.all_quarter.cover?(d) && t.eql?(10)
+						return @messages = "您本季度已经使用了10次置顶机会!"
+					else
+						current_seller_user.update_attribute :top_record, "#{t+1}/#{Time.now}"
+					end
 				end
-			end
 
-			return @user = user
+				return @user = user
+			end
+		else
+			return @changed = false
 		end
 	end
 
