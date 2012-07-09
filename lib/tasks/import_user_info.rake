@@ -3,35 +3,30 @@
 desc "导入用户"
 task :source_user_infom => :environment  do
 	tmp = []                                              
-	CSV.open("designer_imported_20120703.csv", 'wb') do |csv|
-		CSV.foreach("#{Rails.root}/lib/data/2012_icolor_user/20120703_designers.csv") do |row|
+	CSV.open("shenyang_imported_20120709.csv", 'wb') do |csv|
+		CSV.foreach("#{Rails.root}/lib/data/2012_icolor_user/20120709_shenyang.csv") do |row|
 			puts "starting................"
 
 			area_name = row[0] ? row[0].force_encoding("UTF-8") : nil
             username = row[1] ? row[1].force_encoding("UTF-8") : nil
-			#company = row[3] ? row[3].force_encoding("UTF-8") : nil
+			company = row[2] ? row[2].force_encoding("UTF-8") : nil
 			phone = row[3] ? row[3].force_encoding("UTF-8") : nil
 			email = row[4] ? row[4].force_encoding("UTF-8") : nil
-			#qq = row[6] ? row[6].force_encoding("UTF-8") : nil
-			#company_address = row[7] ? row[7].force_encoding("UTF-8") : nil
+			qq = row[5] ? row[5].force_encoding("UTF-8") : nil
+			company_address = row[6] ? row[6].force_encoding("UTF-8") : nil
 
 			user = User.where("email like '%#{email}%' OR phone like '%#{phone}%'").first
 			user_clarify = User.where("username like '%#{username}%'").first
 			p username
 			if user_clarify
 				username = username + email.delete("@.")
-			end	
-			# if user && user.role_id != 2
-			# 	user.role_id = 2
-			# 	p "role_id adjusted"
-			# end	
-
+			end		
 			unless user
 				area = Area.find_by_name(area_name)
 				u = User.new(	
 					:username => username,					
-					#:name_of_company => company,
-					:role_id => 1,
+					:name_of_company => company,
+					:role_id => 2,
 					:phone => phone,
 					:email => email,
 					:password => "123456",
@@ -39,9 +34,8 @@ task :source_user_infom => :environment  do
 					:area_id => area.id,
 					:is_read => true,
 					:is_imported => true,
-					#:company_address => company_address,   #new add features
-                    #:qq => qq,
-                    :des_status => 0
+					:company_address => company_address,   #new add features
+                    :qq => qq
 				)				
 		    	
 			    unless u.save
@@ -54,12 +48,19 @@ task :source_user_infom => :environment  do
 				    csv << [u.email, u.username, u.reset_password_token]
 			    end
 			else
+				if user && user.role_id != 2
+			 	user.role_id = 2
+                user.save
+			 	p "role_id adjusted"
+			 	tmp << "#{row[1]} -- #{row[3]} -- #{row[4]} -- role id adjusted"
+			    else
 			  	tmp << "#{row[1]} -- #{row[3]} -- #{row[4]}"
+			    end
 			end
 		end
 	end
 
-	CSV.open("designerfailedtasks_20120703.csv", 'wb') do |csv|
+	CSV.open("shenyangfailedtasks_20120709.csv", 'wb') do |csv|
 		tmp.each {|f| csv << [f]}
 	end
 
