@@ -12,6 +12,7 @@ class Design < ActiveRecord::Base
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
   has_many :design_images, :as => :imageable
+  has_many :color_codes
 
   paginates_per 8
 
