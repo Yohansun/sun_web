@@ -255,7 +255,7 @@
 
 <%= yield %>
 
-<div class='footer <%= 'mt50' if controller_name =~ /contact|function|designer_events|other_events|register|rank|designs/ || action_name =~ /community/ %>'>
+<div class='footer <%= 'mt50' if controller_name =~ /contact|function|designer_events|other_events|register|rank|designs|moods/ || action_name =~ /community/ %>'>
   <div class='links'>
     <div class='w_995'>
       <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" target="_blank" alt="" /></a>
@@ -367,6 +367,19 @@
             });
         }
         ;
+
+      if ($("#per_form")) {
+            $("#per_form").submit(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        ;
+
       if ($("#new_message")) {
             $("#new_message").submit(function (event) {
                 <% if current_user -%>

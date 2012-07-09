@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
   has_one :yda_game
   has_many :seller_datas
   has_many :sms_logs
+  has_many :moods
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -80,11 +81,9 @@ class User < ActiveRecord::Base
     self.location = omniauth['location'] if location.blank?
 
     unless omniauth['credentials'].blank?
-      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      #user_tokens.build(:provider => omniauth['provider'],
-      #                  :uid => omniauth['uid'],
-      #                  :token => omniauth['credentials']['token'],
-      #                  :secret => omniauth['credentials']['secret'])
+      user_tokens.build(:provider => omniauth['provider'],
+                        :uid => omniauth['uid'],
+                        :access_token => omniauth['credentials']['token'])
     else
       user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
     end
