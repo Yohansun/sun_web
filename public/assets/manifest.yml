@@ -38,6 +38,10 @@ art/ipad1_img3.jpg: art/ipad1_img3-99bfa51b4a3c0be64f711c802b76e04e.jpg
 art/ipad1_img3_big.jpg: art/ipad1_img3_big-a51400638c4d6bf44ceab83d1f693d7c.jpg
 art/ipad1_img4.jpg: art/ipad1_img4-cab922463c8dcd8a5d729016dc0acfd9.jpg
 art/ipad1_img4_big.jpg: art/ipad1_img4_big-8d1255958e3d61532f19aad1e3967d01.jpg
+art/ipad1_img5.jpg: art/ipad1_img5-320d9e408351672d1761f294b753ccdb.jpg
+art/ipad1_img5_big.jpg: art/ipad1_img5_big-f7b6afbc39a42fe068c80b752d7b3d98.jpg
+art/ipad1_img6.jpg: art/ipad1_img6-e48710e0896c5dcecb0b875c0985034d.jpg
+art/ipad1_img6_big.jpg: art/ipad1_img6_big-305d8d5fbe84f06eaf3c64f7cd41d72e.jpg
 art/ipad1_video.jpg: art/ipad1_video-2d3400fa88188f23cff8665ada727eef.jpg
 art/ipad1_zoom.jpg: art/ipad1_zoom-20697c859fac4a0af0791b4b41b874aa.jpg
 art/ipad2.png: art/ipad2-645daae5c54cf20ca77d34b0b9c69c47.png
@@ -1068,7 +1072,7 @@ yda/yda_step3.png: yda/yda_step3-493613aa12f2f19e9fbc3077a62a854c.png
 yda/yda_step4.png: yda/yda_step4-c2c4c9f95f19bcf055a974b6efa0b76d.png
 yda/yda_theme.png: yda/yda_theme-7a433921cedfb385bac4bb3d10b76638.png
 LinkageSelect.js: LinkageSelect-4947a5a2b66b378eb38623ddb4aa35a4.js
-application.js: application-67196cdc472dd29f61214a97654d0393.js
+application.js: application-10556af9d92b08a15e837adef452b448.js
 areas.js: areas-3af39f1da6f167c2cbf453ed74daff3d.js
 art.js: art-ccd26a77fa448a768cce5eee4b6fde87.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-620d43cb2597208020321dc63903ae03.js
@@ -1107,7 +1111,7 @@ magic_content/mix_colors.js: magic_content/mix_colors-3af39f1da6f167c2cbf453ed74
 magic_content/tools.js: magic_content/tools-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star.js: magic_content/weekly_star-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-3af39f1da6f167c2cbf453ed74daff3d.js
-main.js: main-fa239fd47d9bb7ecf70f57336e90d127.js
+main.js: main-e7cc10b69a2f4e7bc8fd68d14108808f.js
 myfocus.js: myfocus-e63c0ae8c1fc09de2ab098788e97d092.js
 owners_channel_upload_form.js: owners_channel_upload_form-74f99c9cc3b8399cba1e59b655869b7a.js
 popupA.js: popupA-595aebd5f41ce9eebce0443355c41e14.js
@@ -1122,10 +1126,10 @@ sys_msgs.js: sys_msgs-3af39f1da6f167c2cbf453ed74daff3d.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-61e4b0ac948b41a18405f5442d0b4c0e.js
 yda.js: yda-2b57183c7722c2882f54a4b59ed7aeba.js
 yda_games.js: yda_games-3af39f1da6f167c2cbf453ed74daff3d.js
-application.css: application-aca9126dd7eaafdcf422e590f424056c.css
+application.css: application-2f9422849a8cd729e7dfc51fd0314eb2.css
 areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
 art.css: art-6c77a683c4962f037700a91ce47c0c6d.css
-base.css: base-847781162df5247f15e42f893b630758.css
+base.css: base-c0a91b58006b80fd82d015dace6d168d.css
 count.css: count-88da7a26b516136d2d699a27cf8b5644.css
 dd.css: dd-404c3f4285a8910d974be4048193c4a2.css
 exciting_activities.css: exciting_activities-29c54026339f272defab7752d9731342.css
@@ -1134,7 +1138,7 @@ index.css: index-66f1df2f61103cafd8868721d46b3ee6.css
 industry_news.css: industry_news-6b51f6a8db511057307b14fbd9d26b84.css
 jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
-jquery.slider.css: jquery.slider-62ffa9b0d9419bbcf48f4476419d032e.css
+jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
 layer.css: layer-eaf4870bf096b738614b5e645185a8d2.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
