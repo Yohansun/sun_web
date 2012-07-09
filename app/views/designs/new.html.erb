@@ -167,7 +167,7 @@ function add_tag(text){
         <div class="reg_list reg_width fl">
           <label for="house">选择色号：</label>
           <span>请填写推荐立邦产品色号</span>
-          <%= f.text_field :recommend_color_category1, class: "add_tag" -%>
+           <%= f.select :recommend_color_category1, ColorCode.all.collect {|c| [ c.name.to_s + " " + c.code.to_s, c.code ]},  :prompt => "请选择", class: "add_tag" -%>
           <span>（凡填写色号的用户iColor均有精美礼品赠送哦）</span>
         </div><!--reg_list ends-->
         <div class="reg_list reg_width fl">
