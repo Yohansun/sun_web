@@ -80,6 +80,7 @@ function inputBlank(area){
 	}
 
 $(function(){
+	$('a.login').click(show_login);
 	$('a.server').click(function(){
 		if(!$('.server_suc').is(':visible'))
 		{
@@ -227,7 +228,7 @@ $(function(){
 		});
 });
 
-/*loginBg*/
+/*loginBg*//*
 $(function(){
 	$('a.login').mouseover(function(){
 		$('.loginBg').show();
