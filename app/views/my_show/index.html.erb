@@ -41,7 +41,7 @@
 			<div class="show_faces">
 				<ul id="show_img" class="show_face_img">
 					<li class="show_face_big">
-						<%= show_avatar(@top_recommended[0],"icon","138x138") if @top_recommended[0].present? %>
+						<%= show_avatar(@top_recommended[0],"original","138x138") if @top_recommended[0].present? %>
 					</li>
 
 					<%- @mys_show_kv_list[0,27].in_groups_of(3, false).each do |group| %>
@@ -53,7 +53,7 @@
 					<%- end %>
 
 					<li class="show_face_big">
-						<%= show_avatar(@top_recommended[1],"icon","138x138") if @top_recommended[1].present? %>
+						<%= show_avatar(@top_recommended[1],"original","138x138") if @top_recommended[1].present? %>
 					</li>
 
 					<%- @mys_show_kv_list[27,3].in_groups_of(3, false).each do |group| %>
@@ -65,7 +65,7 @@
 					<%- end %>
 
 					<li class="show_face_big">
-						<%= show_avatar(@impact_force_ranking[0],"icon","138x138") if @impact_force_ranking[0].present? %>
+						<%= show_avatar(@impact_force_ranking[0],"original","138x138") if @impact_force_ranking[0].present? %>
 					</li>
 
 					<%- @mys_show_kv_list[30,18].in_groups_of(3, false).each do |group| %>
