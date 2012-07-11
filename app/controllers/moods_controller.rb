@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MoodsController < ApplicationController
 	before_filter :find_user
 
@@ -18,6 +19,7 @@ class MoodsController < ApplicationController
 		if @mood.save
 			current_user.user_tokens.each do |token|
 				if token.is_binding?
+					content = (content + "&nbsp;&nbsp;&nbsp;&nbsp;今天我的心情是#{@mood.color_name}，就如立邦的#{ColorCode.find_by_code(@mood.color_code).name}（颜色色号名称),那你的呢？ 来自http://www.icolor.com.cn的色彩心情") if @mood.color_name.present? 
 					Mood.send_weibo(token.access_token,content) if @mood.is_privacy? && token.provider.eql?('weibo')
 				end
 			end

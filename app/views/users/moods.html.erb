@@ -65,7 +65,9 @@
 									<p><%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %></p>									
 									<p>
 										<span><%= m.user.display_name %>发表:</span>
-										<p style="color:#<%= m.font_color %>;"><%= m.content %></p>
+										<p style="color:#<%= m.font_color %>;">
+											<%= m.content %>
+										</p>
 									</p>	
 									<%- if img %>
 										<%= image_tag m.img.url(:thumb) %>
@@ -73,7 +75,7 @@
 									<p class="p2">
 										<span class="zf" href="#">转发(<%= m.shares_count %>)</span>
 									</p>									
-									<%= forward_links("#{m.content} #{"今天我的心情是#{m.color_name}，就如立邦的#{ColorCode.find_by_code(m.color_code).name}（颜色色号名称),那你的呢？ 来自http://www.icolor.com.cn的色彩心情" if m.color_name.present? }", user_moods_url, m.img.url, m.id.to_s, "Mood") %>
+									<%= forward_links("#{m.content}", user_moods_url, m.img.url, m.id.to_s, "Mood") %>
 								</div>
 							<%- end %>
 						<%- end %>
