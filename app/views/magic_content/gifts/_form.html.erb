@@ -1,0 +1,50 @@
+<div class="content">
+  <div class="title">
+    <h5><%= form_title %></h5>
+  </div>
+
+  <%- if resource.errors.size > 0 -%>
+    <div class="nNote nFailure hideit">
+      <p><strong>出错啦: </strong><%= resource.errors.full_messages.join(", ") %></p>
+    </div>
+  <%- end -%>
+
+  <!-- Form with validation -->
+  <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
+    <fieldset>
+      <div class="widget border">
+        <%= f.input :gift_type, :input_html => { :class=> "validate[required]" }, :prompt => '--请选择--',:collection => [ "iColor点评王奖", "月度最佳色彩及设计奖", "注册幸运奖", "投票有礼奖"], :label => "获奖名:" %>
+        <%= f.input :gift_sub_type, :label => "获奖类型:" %>
+        <%= f.input :winner, :input_html => { :class=> "validate[required]" }, :label => "获奖人:" %>
+        <%= f.input :gift_name, :input_html => { :class=> "validate[required]" }, :label => "奖品:" %>
+
+
+        <div class="rowElem">
+          <label>礼物发送时间:</label>
+          <div class="formRight www1">
+            <%= text_field_tag "gift[give_time]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>          
+          </div>
+          <div class="fix"></div>
+        </div>
+
+
+         <div class="rowElem">
+          <label>发布时间:</label>
+          <div class="formRight www1">
+           <%= text_field_tag "gift[published_at]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>
+            <%= text_field_tag "gift[time]", nil, :class=> "timepicker validate[required]", :value => "#{set_date(resource)["time"]}" %>
+          </div>          
+          <div class="fix"></div>
+        </div>
+
+
+        <div class="rowElem">
+          <%= f.button :submit, :value => "#{button_value}" %>
+          <div class="fix"></div>
+        </div>
+
+
+      </div>
+    </fieldset>
+  <%- end %>
+</div>

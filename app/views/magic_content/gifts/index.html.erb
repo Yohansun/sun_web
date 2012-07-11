@@ -1,0 +1,39 @@
+<div class="content">
+  <div class="title"><h5><%= parent.name %> > 礼从天降</h5>
+    <div class="num"><%= link_to '新增获奖者', new_subject_gift_path(parent), :class => "redNum" %></div>
+    <%- if can?(:manage, Subject) && parent -%>
+      <div class="num"><%= link_to '结构管理', subjects_path(:parent_id => parent), :class => "redNum" %></div>
+    <%- end -%>
+  </div>
+  <!-- Dynamic table -->
+  <div class="table">
+    <div class="head"><h5 class="iFrames">获奖者列表</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <th width="5%">ID</th>
+          <th width="40%">获奖名称</th>
+          <th width="12.5%">获奖者</th> 
+          <th width="12.5%">获奖时间</th>         
+          <th width="12.5%">发布时间</th>
+          <th width="100px">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- collection.each do |c| %>
+          <tr class="gradeA">
+            <td><%= c.id %></td>
+            <td><%= c.gift_type %></td>
+            <td><%= c.winner %></td>
+            <td><%= c.give_time.strftime("%Y-%m-%d") %></td>                    
+            <td><%= c.published_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td nowrap="nowrap" align="center">
+              <%= link_to '编辑', edit_subject_gift_path(parent, c), :class => 'button basicBtn' %>
+              <%= link_to '删除', [parent, c], :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>

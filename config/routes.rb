@@ -1,5 +1,8 @@
 Icolor::Application.routes.draw do
 
+  resources :gifts, :only => [:index]
+  match "/gifts/index" => "gifts#index"
+
   root :to => 'home#index'
 
   resources :votes
@@ -190,6 +193,7 @@ Icolor::Application.routes.draw do
     resources :mix_colors
     resources :faqs
     resources :tools
+    resources :gifts
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
     resources :my_show_settings
