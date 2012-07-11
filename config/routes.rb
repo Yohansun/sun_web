@@ -1,7 +1,7 @@
 Icolor::Application.routes.draw do
 
   resources :gifts, :only => [:index]
-  match "/gifts/index" => "gifts#index"
+  match "/gift_list" => "gifts#index"
 
   root :to => 'home#index'
 
