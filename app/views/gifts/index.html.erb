@@ -1,0 +1,164 @@
+ <%- content_for :head do %>
+ <%= stylesheet_link_tag "style" %>
+ <% end -%>
+
+ <div class="main gift">
+        <div class='wrapper gift_box'>
+            <img src="<%= asset_path "paint_art/gift_banner3.png"%>"/>
+            <div class="art_step1 art_step">
+                <h2><img src=" <%= asset_path "paint_art/gift_step3_1.png"%>"/></h2>
+               <% unless @gift1.first.blank? %>
+                <div class="awards_list" id="awards_slide1">
+                    <h3><%= @gift1.first.give_time.strftime("%Y-%m-%d") %> - <%= (@gift1.first.give_time + 7.days).strftime("%Y-%m-%d") %></h3>
+                    <div class="awards_list_container">
+                        <div class="awards_list_slides group pr">
+                            <%@gift1.in_groups_of(5, false).each do |group|%>
+                                <ul>
+                                <%- group.each do |g| %>
+                                   <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
+                                <%- end -%>   
+                                </ul>  
+                            <%- end -%> 
+                        </div>
+                    </div>
+                    <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@gift1.size < 6 ? '' : 'n'}.png"%>"/></a>
+                    <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@gift1.size < 6 ? '' : 'n'}.png"%>"/></a>
+
+                </div>
+                <%- end -%>
+            </div>
+
+
+
+            <div class="art_step2 art_step">
+                <h2><img src="<%= asset_path "paint_art/gift_step3_2.png"%>"/></h2>
+                <% unless @gift2.first.blank? %>
+                <div class="awards_list" id="awards_slide2">
+                    <h3><%= @gift2.first.give_time.strftime("%Y-%m") %></h3>
+                    <div class="awards_list_container">
+                        <div class="awards_list_slides group pr">
+                            <%@gift2.in_groups_of(5, false).each do |group|%>
+                                <ul>
+                                <%- group.each do |g| %>
+                                   <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
+                                <%- end -%>   
+                                </ul>  
+                            <%- end -%> 
+                            
+                        </div>
+                    </div>
+                    <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@gift2.size < 6 ? '' : 'n'}.png"%>"/></a>
+                    <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@gift2.size < 6 ? '' : 'n'}.png"%>"/></a>
+
+
+                </div>
+                <%- end -%>
+            </div>
+
+
+
+            <div class="art_step3 art_step">
+                <h2><img src="<%= asset_path "paint_art/gift_step3_3.png"%>"/></h2>
+                <% unless @gift3.first.blank? %>
+                <div class="awards_list" id="awards_slide3">
+                    <h3><%= @gift3.first.give_time.strftime("%Y-%m-%d") %> - <%= (@gift3.first.give_time + 7.days).strftime("%Y-%m-%d") %></h3>
+                    <div class="awards_list_container">
+                        <div class="awards_list_slides group pr">
+                            <%@gift3.in_groups_of(5, false).each do |group|%>
+                                <ul>
+                                <%- group.each do |g| %>
+                                   <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
+                                <%- end -%>   
+                                </ul>  
+                            <%- end -%> 
+                            
+                        </div>
+                    </div>
+                   <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@gift3.size < 6 ? '' : 'n'}.png"%>"/></a>
+                    <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@gift3.size < 6 ? '' : 'n'}.png"%>"/></a>
+
+                </div>
+                <%- end -%>
+            </div>
+
+
+
+            <div class="art_step4 art_step">
+                <h2><img src="<%= asset_path "paint_art/gift_step3_4.png"%>"></h2>
+                <% unless @gift4.first.blank? %>
+                <div class="awards_list" id="awards_slide4">
+                    <h3><%= @gift4.first.give_time.strftime("%Y-%m") %></h3>
+                   <div class="awards_list_container">
+                        <div class="awards_list_slides group pr">
+                            <%@gift4.in_groups_of(5, false).each do |group|%>
+                                <ul>
+                                <%- group.each do |g| %>
+                                   <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
+                                <%- end -%>   
+                                </ul>  
+                            <%- end -%>                            
+                        </div>
+                   </div>
+                    <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@gift4.size < 6 ? '' : 'n'}.png"%>"/></a>
+                    <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@gift4.size < 6 ? '' : 'n'}.png"%>"/></a>
+
+                <%- end -%>
+            </div>
+
+
+        </div><!--wrapper ends-->
+    </div><!--main ends-->
+
+    <script type="text/javascript">
+function awards_slide(ID){
+
+    var page = 1;
+    var i = 1;
+    $(ID+'a.awards_btn_next').click(function(){
+        var $parent = $(this).parent('div.awards_list');
+        var $v_list = $parent.find('div.awards_list_slides');
+        var $v_container = $parent.children('div.awards_list_container');
+
+        var v_width = $v_container.width();
+        var len = $v_list.find('ul').length;
+        var page_count = Math.ceil(len/i);
+
+        if(!$v_list.is(':animated')){
+            if(page == page_count){
+                $v_list.animate({'left':'0px'});
+                page = 1;
+
+            }else{
+                $v_list.animate({'left':'-='+v_width});
+                page++;
+            }
+        }   
+    })
+    $(ID+'a.awards_btn_per').click(function(){
+        var $parent = $(this).parent('div.awards_list');
+        var $v_list = $parent.find('div.awards_list_slides');
+        var $v_container = $parent.children('div.awards_list_container');
+
+        var v_width = $v_container.width();
+        var len = $v_list.find('ul').length;
+        var page_count = Math.ceil(len/i);
+
+        if(!$v_list.is(':animated')){
+            if(page == 1){
+                $v_list.animate({left:'-='+v_width*(page_count-1)});
+                page = page_count;
+
+            }else{
+                $v_list.animate({left:'+='+v_width});
+                page--;
+            }
+        }
+    }) 
+}
+awards_slide('#awards_slide1 ');
+awards_slide('#awards_slide2 ');
+awards_slide('#awards_slide3 ');
+awards_slide('#awards_slide4 ');
+</script>
+
+
