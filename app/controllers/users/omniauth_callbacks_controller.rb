@@ -10,19 +10,30 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         omniauth['name'] = omniauth["extra"]["raw_info"]['name']
         omniauth['location'] = omniauth["extra"]["raw_info"]['location']
         omniauth['sex'] = omniauth["extra"]["raw_info"]['gender'] == 'm' ? 1 : 0
+        omniauth['access_token'] = omniauth["credentials"]["token"]
       when "qq_connect"
         omniauth['name'] = omniauth["info"]["nickname"]
         omniauth['sex'] = omniauth["info"]["gender"] == '男' ? 1 : 0
+        omniauth['access_token'] = omniauth["credentials"]["token"]
       when "renren"
         omniauth['name'] = omniauth["info"]["name"]
         omniauth['sex'] = omniauth["info"]["gender"] == 'Male' ? 1 : 0
       when "kaixin"
         omniauth['name'] = omniauth["info"]["name"]
         omniauth['sex'] = omniauth["info"]["gender"] == 'Male' ? 1 : 0
+        omniauth['access_token'] = omniauth["credentials"]["token"]
       end
 
       if current_user
-        current_user.user_tokens.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+
+        user_token = current_user.user_tokens.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+        user_token.access_token = omniauth['access_token']
+
+        #社区绑定时更新用户的access_token
+        if user_token.changed? || user_token.access_token.blank?
+          user_token.update_attribute :access_token, omniauth['access_token']
+        end
+
         flash[:notice] = "Authentication successful"
 
         if request.env['omniauth.origin'].match %r(community)
@@ -33,11 +44,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
         return
       else
-
         authentication = UserToken.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
 
         if authentication
+
+          authentication.access_token = omniauth['access_token']
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
+
+          #如果access_token为空或者过期更新access_token
+          if authentication.changed? || authentication.access_token.blank?
+            authentication.update_attribute :access_token, omniauth['access_token']
+          end
+
           sign_in_and_redirect(:user, authentication.user)
           return
         else
@@ -50,7 +68,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
           user.apply_omniauth(omniauth)
 
-          if user.save
+          if user.save(:validate => false)
             flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
             sign_in(:user, user)
             redirect_to stored_location_for(user)

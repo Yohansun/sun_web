@@ -175,6 +175,7 @@ Icolor::Application.routes.draw do
       post :update_user_role
     end
     resources :sys_msgs
+    resources :moods
   end
 
   #修改个人签名

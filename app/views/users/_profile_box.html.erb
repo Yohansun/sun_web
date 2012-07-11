@@ -82,10 +82,13 @@ $(document).ready(function() {
 <%- end %>
 <!--system_info ends-->
 
-<%- if controller_name =~ /inspirations|designs|^messages|events/ %>
+<%- if controller_name =~ /inspirations|designs|^messages|events|moods/ %>
 <%- unless action_name =~ /new|edit|my_event/  %>
 <div class="sort_box pr mt25 group">
   <ul class="sort_show_ul group">
+    <li class="<%= "sort_show" if controller_name == 'moods' %>">
+      <%= link_to "iColor心情", user_moods_path(@user), :class => 'sort_show_a' %>
+    </li>
     <%- unless @user.role_name == "user" %>
       <li class="<%= "sort_show" if controller_name == 'designs' %>"><%= link_to raw("作&nbsp;&nbsp;品"), user_designs_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>

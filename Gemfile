@@ -35,11 +35,11 @@ gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
 gem "devise"
 gem 'kaminari'
 
-gem "omniauth"
-gem "omniauth-weibo"
+gem 'omniauth-weibo-oauth2'
 gem "omniauth-renren"
 gem "omniauth-kaixin"
 gem "omniauth-qq-connect"
+gem 'httmultiparty'
 
 gem 'exception_notification'
 gem 'newrelic_rpm'

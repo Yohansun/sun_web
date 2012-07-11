@@ -755,5 +755,54 @@ $(function(){
         }
         else $email.hide();
     });
-
 });
+
+$(function(){
+	//公开&私密
+	$('.per_btn_area li ul').css('display','none');
+	$(".per_btn_area li")
+	.mouseover(function(){
+		$(this).children('ul').show().end();
+	})
+	.mouseout(function(){
+		$(this).children("ul").hide().end()
+	});
+
+
+	$('.per_public a').click(function(){
+		var $txt_per_p = $(this).text();
+		var $is_privacy = $(this).attr('data');
+		var $click_class = $(this).parent().attr('class');
+		/*var $cur_class = $(this).parents('.per_public').attr('class')
+		alert($cur_class)*/
+		$("#is_privacy").val($is_privacy);
+		$(this).parents('.per_public').children('span').text($txt_per_p);
+		$(this).parents('.per_public').attr('class','per_public ' + $click_class)
+
+		$('.per_btn_area li ul').css('display','none');
+
+	});
+});
+
+
+  //心情颜色
+  $(function(){
+    $('.per_mood_options li a').click(function(){
+      var font_color = $(this).attr('data');
+      var font_color_code = $(this).attr('data-code');
+      var font_color_name = $(this).attr('data-name');
+
+      $(this).parents('form').children('textarea').css('color','#' + font_color);
+      $("#font_color").val(font_color);
+      $("#color_code").val(font_color_code);
+      $("#color_name").val(font_color_name);
+    });
+  });
+
+  //添加表情
+  $(function(){
+    $('.per_faces img').click(function(){
+      var $face_tit = $(this).attr('title');
+      $(this).parents('form').children('textarea').append('[' + $face_tit + ']')
+    });
+  });
