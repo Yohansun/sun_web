@@ -529,7 +529,7 @@ layer/kv1.png: layer/kv1-3450a5426385f158c766fb6f40b7f2bc.png
 layer/kv2.png: layer/kv2-2ba32c9fcda183b68945203f2b87596c.png
 layer/kv3.png: layer/kv3-88ff44ea2520757e1e5774b133489959.png
 layer/kv4.png: layer/kv4-5931c4539dc7d9812b6aa581b07f0549.png
-layer/lay_close.png: layer/lay_close-f43b70778a39a3063f6bb4279723b194.png
+layer/lay_close.png: layer/lay_close-cf0d5acc3ac4663aabfaab26b62f1730.png
 layer/next_icon.png: layer/next_icon-712cc29bad308b88ba1e8b28145d57ef.png
 layer/pager_bg.png: layer/pager_bg-47be866ff07df5b91f16f84ecb38f32a.png
 link1.png: link1-fe17e60aab0b4f21cb0c6fad4344d501.png
@@ -729,7 +729,7 @@ news/reg_suc.png: news/reg_suc-a42d940b1a2682a698941ca35abe0f82.png
 news/reg_up.jpg: news/reg_up-2a04c36fd8d97799534dd87c056b3ccf.jpg
 news/reg_upload.jpg: news/reg_upload-39a60abb490849ace7187d7161350e56.jpg
 news/reg_user.gif: news/reg_user-1ea3bfc081b7d57d9bcd272f7f9fb4da.gif
-news/regimg_bg.jpg: news/regimg_bg-e780c9a8d3cba2bbdbb3a8e2549f4580.jpg
+news/regimg_bg.jpg: news/regimg_bg-731ede3cb0667dc03165768109cd990a.jpg
 news/renren.jpg: news/renren-472deb362b593073b3ce750a65716c1f.jpg
 news/reset_bg1.png: news/reset_bg1-1afec14c61f17e099cbef64d31d862dd.png
 news/reset_bg2.png: news/reset_bg2-d5f66d471fc878569c78ea8cc4701cc2.png
@@ -1185,7 +1185,7 @@ jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
 jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
-layer.css: layer-eaf4870bf096b738614b5e645185a8d2.css
+layer.css: layer-a781187beff61ac82b15537dcf03d5da.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/color_designs.css: magic_content/color_designs-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/customer_replies.css: magic_content/customer_replies-7270767b2a9e9fff880aa5de378ca791.css
