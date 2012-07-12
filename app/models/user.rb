@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   #用户注册完成后complete更新数据页面验证
   #validates_presence_of :recommended_name, :if => :recommended_requird?, :on => :update
   #validates_uniqueness_of :recommended_id, :scope => :id,:if => :recommended_requird? , :on => :update
-  validates_format_of :phone, :with => /^(13|15|18)[0-9]{9}$/, :allow_blank => true, :on => :update
+  #可以添加座机号码
+  #validates_format_of :phone, :with => /^(13|15|18)[0-9]{9}$/, :allow_blank => true, :on => :update
   validates_uniqueness_of :phone, :allow_blank => true, :on => :update
   validates_format_of :name, :with => /^[\u4e00-\u9fa5]{2,4}$/, :allow_blank => true, :on => :update
   #validates_format_of :zip_code, :with => /^\\d{6}$/, :allow_blank => true, :on => :update

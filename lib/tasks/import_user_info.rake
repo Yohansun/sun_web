@@ -3,19 +3,20 @@
 desc "导入用户"
 task :source_user_infom => :environment  do
 	tmp = []                                              
-	CSV.open("shenyang_imported_20120709.csv", 'wb') do |csv|
-		CSV.foreach("#{Rails.root}/lib/data/2012_icolor_user/20120709_shenyang.csv") do |row|
+	CSV.open("shenyang_imported_201207012.csv", 'wb') do |csv|
+		CSV.foreach("#{Rails.root}/lib/data/2012_icolor_user/201207012_shenyang.csv") do |row|
 			puts "starting................"
 
 			area_name = row[0] ? row[0].force_encoding("UTF-8") : nil
             username = row[1] ? row[1].force_encoding("UTF-8") : nil
-			company = row[2] ? row[2].force_encoding("UTF-8") : nil
-			phone = row[3] ? row[3].force_encoding("UTF-8") : nil
-			email = row[4] ? row[4].force_encoding("UTF-8") : nil
-			qq = row[5] ? row[5].force_encoding("UTF-8") : nil
-			company_address = row[6] ? row[6].force_encoding("UTF-8") : nil
+			company = row[1] ? row[1].force_encoding("UTF-8") : nil
+			name = row[2] ? row[2].force_encoding("UTF-8") : nil
+			email = row[3] ? row[3].force_encoding("UTF-8") : nil
+			phone = row[4] ? row[4].force_encoding("UTF-8") : nil
+			#qq = row[5] ? row[5].force_encoding("UTF-8") : nil
+			company_address = row[5] ? row[5].force_encoding("UTF-8") : nil
 
-			user = User.where("email like '%#{email}%' OR phone like '%#{phone}%'").first
+			user = User.where("email like '%#{email}%' AND phone like '%#{phone}%'").first
 			user_clarify = User.where("username like '%#{username}%'").first
 			p username
 			if user_clarify
@@ -26,6 +27,7 @@ task :source_user_infom => :environment  do
 				u = User.new(	
 					:username => username,					
 					:name_of_company => company,
+					:name => name,
 					:role_id => 2,
 					:phone => phone,
 					:email => email,
@@ -35,7 +37,7 @@ task :source_user_infom => :environment  do
 					:is_read => true,
 					:is_imported => true,
 					:company_address => company_address,   #new add features
-                    :qq => qq
+                   # :qq => qq
 				)				
 		    	
 			    unless u.save
@@ -60,7 +62,7 @@ task :source_user_infom => :environment  do
 		end
 	end
 
-	CSV.open("shenyangfailedtasks_20120709.csv", 'wb') do |csv|
+	CSV.open("shenyangfailedtasks_201207012.csv", 'wb') do |csv|
 		tmp.each {|f| csv << [f]}
 	end
 

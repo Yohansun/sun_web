@@ -20,9 +20,10 @@
 
 
         <div class="rowElem">
-          <label>礼物发送时间:</label>
+          <label>礼物发送时间段:</label>
           <div class="formRight www1">
-            <%= text_field_tag "gift[give_time]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>          
+            从 <%= text_field_tag "gift[give_time]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %> 至 
+            <%= text_field_tag "gift[end_time]", nil, :class=> "datepicker validate[required]", :value => "#{set_date(resource)["date"]}" %>          
           </div>
           <div class="fix"></div>
         </div>
