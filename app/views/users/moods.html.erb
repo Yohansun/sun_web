@@ -13,7 +13,7 @@
 			<div class="host_main" style="padding-left:0;padding-right:0;">
 				<div class="per_main">
 					<div class="per_con_l">
-						<%= form_for :mood, url: { :action => "create" }, html: {id: "per_form"} do |f| %>
+						<%= form_for :mood, url: { :action => "create" }, html: {id: "per_form", multipart: true} do |f| %>
 							<h4 class="txt_tit">书写iColor心情</h4>
 							<textarea name="mood[content]"></textarea>
 							<ul class="per_btn_area">
