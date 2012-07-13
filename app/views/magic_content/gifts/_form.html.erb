@@ -13,10 +13,14 @@
   <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
     <fieldset>
       <div class="widget border">
-        <%= f.input :gift_type, :input_html => { :class=> "validate[required]" }, :prompt => '--请选择--',:collection => [ "iColor点评王奖", "月度最佳色彩及设计奖", "注册幸运奖", "投票有礼奖"], :label => "获奖名:" %>
-        <%= f.input :gift_sub_type, :label => "获奖类型:" %>
-        <%= f.input :winner, :input_html => { :class=> "validate[required]" }, :label => "获奖人:" %>
-        <%= f.input :gift_name, :input_html => { :class=> "validate[required]" }, :label => "奖品:" %>
+        <div id="my_type">
+          <%= f.input :gift_type, :prompt => resource.gift_type, :collection => [ "iColor点评王奖", "月度最佳色彩及设计奖", "注册幸运奖", "投票有礼奖"], :input_html => { :class=> "validate[required]" }, :label => "获奖名:" %>
+        </div>
+        <div id="gift_sub" >
+          <%= f.input :gift_sub_type, :input_html => { :class=> "validate[required]" }, :label => "获奖类型:" %>
+        </div>
+          <%= f.input :winner, :input_html => { :class=> "validate[required]" }, :label => "获奖人:" %>
+          <%= f.input :gift_name, :input_html => { :class=> "validate[required]" }, :label => "奖品:" %>
 
 
         <div class="rowElem">
@@ -49,3 +53,29 @@
     </fieldset>
   <%- end %>
 </div>
+
+
+
+<%- content_for :tail do -%>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  var current_text = $("#my_type div.jqTransformSelectWrapper span").text();
+  if(current_text == "iColor点评王奖" || current_text == "注册幸运奖" ){
+    $("#gift_sub").hide();
+  }else{
+    $("#gift_sub").show();    
+  }
+
+
+  $("#my_type div.jqTransformSelectWrapper ul li a").click(function(){
+      var value = $("#my_type div.jqTransformSelectWrapper span").text();
+      if(value == "月度最佳色彩及设计奖" || value == "投票有礼奖"){
+        $("#gift_sub").show();
+      }else{
+        $("#gift_sub").hide();
+      }
+      return false; //prevent default browser action
+  });
+})
+</script>
+<%- end -%>
