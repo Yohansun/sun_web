@@ -16,7 +16,7 @@
       <%- @companies_top.each do |c| %>
         <div title="<%= c.display_name %>">
           <%= show_avatar(c,"access_wall","91x97") %>
-          <h3><%= truncate(c.display_name, length: 8) %></h3>
+          <h3><%= truncate(c.display_name, length: 7) %></h3>
         </div>
       <%- end%>
     </div><!--count_sum ends-->
