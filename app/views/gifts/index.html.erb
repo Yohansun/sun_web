@@ -14,17 +14,11 @@
                     <div class="awards_list_container">
                       <div class="awards_list_slides group pr">
                         <%- @dates_arr1.each do |d|%>
-                            <%- give_time = d.split(',')[0] %>
-                            <%- give_year = give_time.split('/')[0] %>
-                            <%- give_month = give_time.split('/')[1] %>
-                            <%- give_day = give_time.split('/')[2] %>
-                            <%- end_time = d.split(',')[1] %>
-                            <%- end_year = end_time.split('/')[0] %>
-                            <%- end_month = end_time.split('/')[1] %>
-                            <%- end_day = end_time.split('/')[2] %>
-                            <%- gift = @gift1.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_year,give_month,(give_day.to_i - 1).to_s,end_year,end_month,(end_day.to_i - 1).to_s) %>    
+                            <%- give_time = d[0] %>
+                            <%- end_time = d[1] %>
+                            <%- gift = @gift1.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
                                 <ul class="awards_slides_ul">
-                                    <li><h3><%= give_time %> - <%= end_time %></h3></li>
+                                    <li><h3><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></h3></li>
                                     <%- gift.each do |g| %>                                                       <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
                                     <%- end -%>   
                                 </ul>  
@@ -46,10 +40,9 @@
                     <div class="awards_list_container">
                         <div class="awards_list_slides marl155 group">
                             <%- @dates_arr2.each do |d|%>
-                            <%- end_time = d.split(',')[1] %>
-                            <%- end_year = end_time.split('/')[0] %>
-                            <%- end_month = end_time.split('/')[1] %>
-                            <%- gift = @gift2.where("YEAR(give_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>    
+                            <%- end_year = d.split('/')[0] %>
+                            <%- end_month = d.split('/')[1] %>
+                            <%- gift = @gift2.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>    
                                 <ul class="awards_slides_ul">
                                     <li><h3><%= end_year + "/" + end_month %></h3></li>
                                     <%- gift.each do |g| %>                                                 
@@ -73,22 +66,16 @@
                 <div class="awards_list" id="awards_slide3">
                     <div class="awards_list_container">
                         <div class="awards_list_slides group pr">
-                              <%- @dates_arr3.each do |d|%>
-                            <%- give_time = d.split(',')[0] %>
-                            <%- give_year = give_time.split('/')[0] %>
-                            <%- give_month = give_time.split('/')[1] %>
-                            <%- give_day = give_time.split('/')[2] %>
-                            <%- end_time = d.split(',')[1] %>
-                            <%- end_year = end_time.split('/')[0] %>
-                            <%- end_month = end_time.split('/')[1] %>
-                            <%- end_day = end_time.split('/')[2] %>
-                            <%- gift = @gift3.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_year,give_month,(give_day.to_i - 1).to_s,end_year,end_month,(end_day.to_i - 1).to_s) %>    
+                            <%- @dates_arr3.each do |d|%>
+                            <%- give_time = d[0] %>
+                            <%- end_time = d[1] %>
+                            <%- gift = @gift3.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
                                 <ul class="awards_slides_ul">
-                                    <li><h3><%= give_time %> - <%= end_time %></h3></li>
+                                    <li><h3><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></h3></li>
                                     <%- gift.each do |g| %>                                                       <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
                                     <%- end -%>   
                                 </ul>  
-                            <%- end -%>  
+                        <%- end %>    
                         </div>
                     </div>
                         <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
@@ -105,14 +92,14 @@
                 <div class="awards_list" id="awards_slide4">
                    <div class="awards_list_container">
                         <div class="awards_list_slides marl155 group">
-                            <%- @dates_arr4.each do |d|%>
-                            <%- end_time = d.split(',')[1] %>
-                            <%- end_year = end_time.split('/')[0] %>
-                            <%- end_month = end_time.split('/')[1] %>
-                            <%- gift = @gift4.where("YEAR(end_time)= ? AND MONTH(end_time) = ? ", end_year,end_month) %>    
+                             <%- @dates_arr4.each do |d|%>
+                            <%- end_year = d.split('/')[0] %>
+                            <%- end_month = d.split('/')[1] %>
+                            <%- gift = @gift4.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>    
                                 <ul class="awards_slides_ul">
                                     <li><h3><%= end_year + "/" + end_month %></h3></li>
-                                    <%- gift.each do |g| %>                                                       <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
+                                    <%- gift.each do |g| %>                                                 
+                                    <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
                                     <%- end -%>   
                                 </ul>  
                             <%- end %>                          
