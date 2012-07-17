@@ -72,7 +72,8 @@
                             <%- gift = @gift3.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
                                 <ul class="awards_slides_ul">
                                     <li><h3><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></h3></li>
-                                    <%- gift.each do |g| %>                                                       <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
+                                    <%- gift.each do |g| %> 
+                                    <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
                                     <%- end -%>   
                                 </ul>  
                         <%- end %>    
@@ -120,7 +121,7 @@ function awards_slide(ID){
 
     var page = 1;
     var i = 1;
-    $(ID+'a.awards_btn_next').click(function(){
+    $(ID+'a.awards_btn_per').click(function(){
         var $parent = $(this).parent('div.awards_list');
         var $v_list = $parent.find('div.awards_list_slides');
         var $v_container = $parent.children('div.awards_list_container');
@@ -140,7 +141,7 @@ function awards_slide(ID){
             }
         }   
     })
-    $(ID+'a.awards_btn_per').click(function(){
+    $(ID+'a.awards_btn_next').click(function(){
         var $parent = $(this).parent('div.awards_list');
         var $v_list = $parent.find('div.awards_list_slides');
         var $v_container = $parent.children('div.awards_list_container');
