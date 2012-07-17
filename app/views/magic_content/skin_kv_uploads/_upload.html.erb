@@ -1,0 +1,19 @@
+<div class="upload" id="skin_kv_upload_<%= upload.id %>">
+  <div class="widgets" style="padding-bottom: 15px;">
+    <div class="left" style="width: 15%">
+      <%= image_tag upload.kv_thumb.url(:thumb) %>
+      <%= hidden_field_tag 'skin[skin_kv_upload_ids][]', upload.id %>
+
+      <%= link_to_function "移除", "$('#skin_kv_upload_#{upload.id}').remove();" %>
+    </div>
+    <div class="formRight www1 recommend_color" style="width: 75%">
+      <label>&nbsp;&nbsp;请输入kv链接:</label>      
+        <%= text_field_tag "skin_kv_upload[#{upload.id}][kv_link]", '', :label => 'kv链接:', :value => "#{SkinKvUpload.find(upload.id).kv_link}" %>
+    </div>
+    <div class="formRight www1 recommend_color" style="width: 75%">
+      <label>&nbsp;&nbsp;请输入map值:</label>      
+        <%= text_field_tag "skin_kv_upload[#{upload.id}][link_coords]", '', :label => 'kv链接map值:', :value => "#{SkinKvUpload.find(upload.id).link_coords}" %>
+    </div>
+    <div class="fix"></div>
+  </div>
+</div>

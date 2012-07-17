@@ -4,8 +4,9 @@ class MessagesController < ApplicationController
   def index
     if @user
       @messages = @user.messages.page params[:page]
-      render :template => "users/messages"
     end
+
+    load_skin
   end
 
   def create

@@ -28,14 +28,15 @@
             <div>
               <p class="ins_box">
                 <%- if current_user && current_user == @user %>
-                <span class="host_ins_edit">
-                  <%= link_to "编辑", inspiration_update_user_inspiration_path(current_user, i), class: "ins_img_edit" %>
-                  <%= link_to "删除", user_inspiration_path(current_user, i), :method => :delete, class: "ins_img_del" %>
-                </span>
+                  <span class="host_ins_edit">
+                    <%= link_to "编辑", inspiration_update_user_inspiration_path(current_user, i), class: "ins_img_edit" %>
+                    <%= link_to "删除", user_inspiration_path(current_user, i), :method => :delete, class: "ins_img_del" %>
+                  </span>
                 <%- end %>
-              <% if i.cover_img -%>
-                <%= link_to (image_tag i.cover_img.file.url(:inside), class:"host_ins_img", title:"装修设计欣赏-#{i.title}", alt:"装修设计欣赏-#{i.title}"), inspiration_path(i) %>
-              <% end -%>
+                
+                <% if i.cover_img -%>
+                  <%= link_to (image_tag i.cover_img.file.url(:inside), class:"host_ins_img", title:"装修设计欣赏-#{i.title}", alt:"装修设计欣赏-#{i.title}"), inspiration_path(i) %>
+                <% end -%>
               </p>
               <h3><%= i.title %></h3>
               <p class="p1 group"> <strong class="ft14 fb"><%= i.votes_count %></strong> </p>

@@ -757,6 +757,31 @@ $(function(){
     });
 });
 
+$(function() {
+	/*作品和灵感秀页面中-----编辑和删除*/
+	$('.host_ins_edit,.host_works_edit').css('display','none')
+	$('.ins_box').hover(function() {
+		var img_h = $(this).children('a').children('img').innerHeight();
+		var padding_top = $(this).parent().css('padding-top');
+		var padding_right = $(this).parent().css('padding-right');
+		//alert(parseFloat(padding_right))
+		//alert(parseFloat(padding_top))
+		$(this).children('.host_ins_edit').toggle();
+		$(this).children('.host_ins_edit').css('top',img_h - 4 - parseFloat(padding_top) + "px")
+		$(this).children('.host_ins_edit').css('right',padding_right)
+	});
+
+	$('.works_box').hover(function() {
+		var img_h = $(this).children('a').children('img').innerHeight();
+		var padding_top = $(this).children('a').children('img').css('padding-top');
+		var padding_right = $(this).children('a').children('img').css('padding-right');
+		//alert(padding_right)
+		$(this).children('.host_works_edit').toggle();
+		$(this).children('.host_works_edit').css('top',img_h - 20 - parseFloat(padding_top) + "px")
+		$(this).children('.host_works_edit').css('right',padding_right)
+	});
+});
+
 $(function(){
 	//公开&私密
 	$('.per_btn_area li ul').css('display','none');
@@ -773,8 +798,7 @@ $(function(){
 		var $txt_per_p = $(this).text();
 		var $is_privacy = $(this).attr('data');
 		var $click_class = $(this).parent().attr('class');
-		/*var $cur_class = $(this).parents('.per_public').attr('class')
-		alert($cur_class)*/
+
 		$("#is_privacy").val($is_privacy);
 		$(this).parents('.per_public').children('span').text($txt_per_p);
 		$(this).parents('.per_public').attr('class','per_public ' + $click_class)
@@ -792,17 +816,9 @@ $(function(){
       var font_color_code = $(this).attr('data-code');
       var font_color_name = $(this).attr('data-name');
 
-      $(this).parents('form').children('textarea').css('color','#' + font_color);
+      $(this).parents('form').find('textarea').css('color','#' + font_color);
       $("#font_color").val(font_color);
       $("#color_code").val(font_color_code);
       $("#color_name").val(font_color_name);
-    });
-  });
-
-  //添加表情
-  $(function(){
-    $('.per_faces img').click(function(){
-      var $face_tit = $(this).attr('title');
-      $(this).parents('form').children('textarea').append('[' + $face_tit + ']')
     });
   });

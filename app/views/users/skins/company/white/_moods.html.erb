@@ -1,0 +1,26 @@
+<%- @moods.each do |m| %>
+  <%- if m.present? %>
+    <%- img = m.img.url if m.img.exists?(:original) -%>
+
+    <div class="per_con pr">
+      <p><%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %></p>                 
+      <p>
+        <span><%= m.user.display_name %>发表:</span>
+        <p style="color:#<%= m.font_color %>;" class="J_resulte">
+          <%= m.content %>
+        </p>
+      </p>  
+      <%- if img %>
+        <%= image_tag m.img.url(:thumb) %>
+      <%- end %>
+      <p class="p2">
+        <span class="zf" href="#">转发(<%= m.shares_count %>)</span>
+      </p>                  
+      <%= forward_links("#{m.content}", user_moods_url, m.img.url, m.id.to_s, "Mood") %>
+    </div>
+  <%- end %>
+<%- end %>
+
+<div class="pager host_pager" style="position:relative;bottom:-36px;left:0;">
+  <%= paginate @moods %>
+</div><!--pager ends-->

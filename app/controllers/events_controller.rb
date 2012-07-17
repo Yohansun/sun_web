@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   def index
     if @user
       @events = @user.events.page params[:page]
-      render :template => "users/events"
+      
+      load_skin
     else
       comments  ||= Comment.where(:commentable_type => "FakeEvent")
       @comments ||= comments.page(params[:page]).per(6)

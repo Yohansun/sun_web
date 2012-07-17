@@ -13,10 +13,11 @@ class ChannelController < ApplicationController
         params[:user_role] = params["role"]
       elsif params.has_key? "search"
         params[:keywords] = params[:search]
-      elsif params.has_key? "area"
-        params[:area_id] = params[:area]
-      end
+      end  
     end
+
+    #家装公司个人主页和我型我秀页面传递过来的params[:area]
+    params[:area_id] = params[:area] if params.has_key? "area"
 
     #排序规则：本周之星 -> 往期之星 -> 作品有色号 -> 上传作品数
     unless params[:keywords] == "请输入关键字"

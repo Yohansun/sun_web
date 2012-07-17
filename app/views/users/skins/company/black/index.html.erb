@@ -1,0 +1,246 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "weekstar", "/resources/js/plugins/exp/css/style.css" %>
+	<style type="text/css">
+		/**/
+		.tagCloud .tagClass a { color: #fff; font-family: "Microsoft Yahei"; font-weight: normal; padding: 3px; text-align: center; text-decoration: none; vertical-align: middle; }
+		.tagCloud .tagClass a:hover { color: #ff9c00; text-decoration: none; }
+		#afflatus_showcase { top:110px; left:50%; margin-left:-460px; width:920px; }
+		#afflatus_showcase .boxb_content { position:relative; background:url(<%= asset_path "personal/per_info_bg2.png"%>) no-repeat center bottom;padding:0 4px 63px 4px;height:375px;width:auto;}
+		.galleryP {height:340px;background:none;margin:31px 5px 0 0;overflow: hidden;position: relative;}
+		
+	</style>
+<%- end %>
+
+<div class="personalized_main per_firm">
+	<div class="per_firm_kv">
+		<div class="gallery">
+			<div class="galleryK" id="gallery">
+				<%- get_designs.each do |design| %>
+					<%= image_tag(design.file.url(:index), class: "cloudcarousel") if design.file.exists?(:index)  %>
+				<%- end %>
+			</div>
+		</div>
+	</div><!-- per_firm_kv -->
+
+	<div class="per_firm_main group">
+		<div class="per_firm_l">
+			<h3>新闻中心</h3>
+			<%- get_articles[0,3].each do |article| %>
+				<div class="per_firm_con1 border_dot_t group">
+					<%= image_tag(article.preview_img.url(:icolor_articles)) if article.preview_img %>
+					<div class="per_firm_newinfo">
+						<h4 class="pr">
+							<i class="icon_i_date"><%= article.created_at.day %></i>
+							<%= link_to article.title, "/articles/#{article.id}" %>
+							<span><%= article.created_at.strftime("%Y年%m月%d日 %H:%M") %></span>
+						</h4>
+						<p>
+							<%= raw truncate(article.intro, length: 80) %>
+						</p>
+					</div>
+				</div>
+			<%- end %>			
+			<div class="tr ft12">
+				<%= link_to "更多...", articles_path, class: "cw" %>
+			</div>
+
+			<%= form_tag(user_moods_path, id: "per_form", multipart: true) do %>
+				<h4 class="txt_tit"><img class="fr" src="<%= asset_path "personal/per_txt_tit.png"%>" />写心情</h4>
+				<div class="exp-holder">
+					<textarea id="J_t" style="height:87px;" name="mood[content]"></textarea>
+					<ul class="per_btn_area pr">
+						<li><input type="submit" value="发布"></li>
+						<li class="per_public"><span>公开</span>
+							<input type="hidden" id="is_privacy" name="mood[is_privacy]" value="true"/>
+							<ul>
+								<li class="per_p"><a href="javascript:void(0)" data="true">公开</a></li>
+								<li class="per_s"><a href="javascript:void(0)" data="false">私密</a></li>
+							</ul>
+						</li>
+						<li class="per_pictures"><span>图片</span><%= file_field_tag 'mood[img]'%></li>
+						<li class="per_faces exp-block-trigger" id="J_sbt">表情</li>
+
+						<input type="hidden" id="color_code" name="mood[color_code]"/>
+						<input type="hidden" id="color_name" name="mood[color_name]"/>
+						<input type="hidden" id="font_color" name="mood[font_color]"/>
+
+						<li class="per_mood">色彩心情
+							<ul class="per_mood_options">
+								<li><a class="mood_1" data="0e8752"  data-name="墨绿色" data-code="GA5000-1" href="javascript:void(0)"></a></li>
+								<li><a class="mood_2" data="8e8e8e"  data-name="灰色"   data-code="NN7860-4" href="javascript:void(0)"></a></li>
+								<li><a class="mood_3" data="a49fff"  data-name="紫色"   data-code="BN0006-2" href="javascript:void(0)"></a></li>
+								<li><a class="mood_4" data="ffad85"  data-name="白色"   data-code="OW038-4" href="javascript:void(0)"></a></li>
+								<li><a class="mood_5" data="dde830"  data-name="黄色"   data-code="YA8600-1" href="javascript:void(0)"></a></li>
+								<li><a class="mood_6" data="f660ff"  data-name="粉色"   data-code="RC0011-4" href="javascript:void(0)"></a></li>
+								<li><a class="mood_7" data="fb0dcb"  data-name="紫色" data-code="VA8900-1" href="javascript:void(0)"></a></li>
+								<li><a class="mood_8" data="da9316"  data-name="黄色"	data-code="NN3440-2" href="javascript:void(0)"></a></li>
+								<li><a class="mood_9" data="fe604b"  data-name="橙色"	data-code="RC8130-2" href="javascript:void(0)"></a></li>
+								<li><a class="mood_10" data="2e5beb" data-name="蓝色"	data-code="BC6740-2" href="javascript:void(0)"></a></li>
+								<li><a class="mood_11" data="29dcbc" data-name="蓝色"	data-code="GA4500-1" href="javascript:void(0)"></a></li>
+								<li><a class="mood_12" data="5be71d" data-name="绿色"	data-code="GA4000-1" href="javascript:void(0)"></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			<%- end %>		
+
+			<div class="per_ads_kv">
+				<div class="slides pr">
+					<div class="slidesContainer">
+						<%- if get_skin_kvs.present? %>
+							<%- get_skin_kvs.each_with_index do |kv,index| %>
+								<div class="slider pr fl">
+									<img src="<%= kv.kv_thumb.url(:kv_thumb) %>" usemap="#Map<%= index+1%>" />
+									<map id="Map<%= index+1%>" name="Map<%= index+1%>">
+										<area shape="rect" coords="<%= kv.link_coords %>" href="<%= kv.kv_link %>" />
+									</map>
+								</div><!--slider ends-->
+							<%- end %>
+						<%- end %>
+					</div><!--slidesContainer ends-->
+					<div class="bullets pa">
+						<%- if get_skin_kvs.present? && get_skin_kvs.size > 1 %>
+							<%- get_skin_kvs.size.times do |i| %>
+							<div class="bullet cp <%= 'current' if i == 0 %>"></div>
+								<%- if i != get_skin_kvs.size - 1 %>
+									<div></div>
+								<%- end %>
+							<%- end %>
+						<%- end %>
+					</div><!--bullets ends-->
+				</div><!--slides ends-->
+			</div>
+		</div>
+
+		<div class="per_firm_r">
+			<div class="per_firm_info">
+			<%= show_avatar(@user,"original","233x233") %>
+			<div class="per_firm_colorbar"><img src="<%= asset_path "personal/per_firm_colorbar.png"%>"></div>
+				<p><span><i class="icon_golden"></i>金牌会员</span><%= @user.display_name %>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			</div>
+
+			<div class="per_firm_cloud">
+				<div id="tagCloud1"></div>
+				<p class="per_firm_contact">
+					<i class="icon_f_email"></i>Email:<%= @user.email unless @user.is_show_email? == false && @user != current_user %>
+				</p>
+				<p class="per_firm_contact">
+					<i class="icon_f_weibo"></i><%= @user.name %>
+				</p>
+				<p class="per_firm_contact">
+					<i class="icon_f_addr"></i><%= @user.company_address %>
+				</p>
+				<p class="per_firm_contact">
+					<i class="icon_f_tel"></i><%= @user.phone %>
+				</p>
+			</div>
+			<div class="per_recommend">
+				<h4>公司推荐设计师</h4>
+				<ul>
+  				<%- if get_recommended_designer.present? %>
+    				<%- get_recommended_designer.each do |designer| %>
+	    				<li>
+	    					<%= show_avatar(designer,"icon","53x50") %>
+	    					<p><span><%= designer.display_name %></span></p>
+	    					<p class="nomar"><a href="<%= user_path(designer) %>">进入个人主页</a></p>
+	    				</li>
+    				<%- end %>
+    			<%- end %>
+    		</ul>
+				<p class="per_more">
+					<%= link_to("更多...", "/channel/access?area=#{ @user.area_id }") if get_recommended_designer.present? %>
+				</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<div class="per_works">
+		<%- if current_user && current_user == @user %>
+			<ul class="system_info group">
+				<li class="icon_point">
+					<%= link_to "我的积分", user_rank_index_path %>
+				</li>
+				<li class="icon_info">
+					<%= link_to "系统消息#{"("+@user.sys_msgs.size.to_s+")" if @user.sys_msgs.size >0}", user_sys_msgs_path %>
+				</li>
+				<li class="icon_qustion">
+					<%= link_to "我的提问", user_faqs_path %>
+				</li>
+				<li class="icon_active noborder">
+					<%= link_to "我报名的活动", "/users/#{@user.id}/events/my_event" %>
+				</li>
+			</ul><!--system_info ends-->
+		<%- end %>
+
+		<div class="per_firm_works">
+			<div class="sort_box pr group">
+				<ul class="sort_show_ul group">
+					<li class="<%= 'sort_show' if controller_name.eql? "moods" %>">
+						<%= link_to "iColor心情", user_moods_path(@user), class: "sort_show_a" %>
+					</li>
+					<li class="<%= 'sort_show' if controller_name.eql? "designs" %>">
+						<%= link_to raw("作&nbsp;&nbsp;品"), user_designs_path(@user) %>
+					</li>
+					<li class="<%= 'sort_show' if controller_name.eql? "inspirations" %>">
+						<%= link_to "灵感秀", user_inspirations_path(@user)  %>
+					</li>
+					<li class="<%= 'sort_show' if controller_name.eql? "messages" %>">
+						<%= link_to "留言板", user_messages_path(@user) %>
+					</li>
+					<li class="<%= 'sort_show' if controller_name.eql? "events" %>">
+						<%= link_to "活动公告", user_events_path(@user) %>
+					</li>
+					
+					<%- if current_user && current_user == @user %>
+						<li class="<%= 'sort_show' if action_name.eql? "community" %>">
+							<%= link_to "社区绑定", user_community_path %>
+						</li>
+					<%- end %>
+				</ul>
+
+				<%- if current_user && current_user == @user %>
+					<% case controller_name %>
+						<%- when "inspirations" %>
+							<%=link_to "我要上传", new_user_inspiration_path(current_user), class: "launch_act_per" %>
+						<%- when "designs" %>
+							<%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act_per" %>
+						<%- when "events" %>
+							<%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act_per" %>
+					<%- end -%>
+				<%- end %>
+			</div><!--sort_box ends-->
+
+			<%- if current_page? :controller => "users", :action => "community" %>
+				<%= render partial: "users/skins/company/black/#{action_name}" %>
+			<%- else %>
+				<%= render partial: "users/skins/company/black/#{controller_name}" %>
+			<%- end %>
+		</div>		
+	</div>
+</div>
+
+<%- content_for :tail do %>
+	<%= javascript_include_tag "tagcloud/js-cumulus.js", "/resources/js/plugins/exp/exp.js", "jquery.masonry.js", "galleryK" %>
+	<%= javascript_tag do -%>
+		var tagCloud1;
+		var tags = [
+		new Tag("欧美流行派", 30, "http://www.icolor.com.cn"),
+		new Tag("清新田园风", "http://www.icolor.com.cn",25),
+		new Tag("15年从业经验",18),
+		new Tag("国际IRIDA注册室内设计",15),
+		new Tag("现代简约派", 80, "http://www.icolor.com.cn"),
+		new Tag("设计总监", 100),
+		new Tag("多年设计经验",4),
+		new Tag("欧美流行系", 3),
+		new Tag("designer",1)
+		];
+		tagCloud1 = new TagCloud(tags, 258, 200);
+		tagCloud1.Distribute(document.getElementById("tagCloud1")).Animate();
+
+		$(window).load(function(){
+			$('#inspiration').masonry();
+			$('#per_info').masonry();
+		});
+	<% end -%>
+<%- end %>

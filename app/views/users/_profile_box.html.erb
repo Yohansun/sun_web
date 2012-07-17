@@ -67,7 +67,7 @@ $(document).ready(function() {
     </li>
   <%- end %>
   <li class="icon_info">
-    <%= link_to "系统消息#{"("+@user.sys_msgs.size.to_s+")" if @user.sys_msgs.size >0}", user_sys_msgs_path, :class => "#{'host_cur' if controller_name == "site_messages"}" %>
+    <%= link_to "系统消息#{"("+@user.sys_msgs.size.to_s+")" if @user.sys_msgs.size >0}", user_sys_msgs_path, :class => "#{'host_cur' if controller_name == "sys_msgs"}" %>
   </li>
   <li class="icon_qustion">
     <%= link_to "我的提问", user_faqs_path, :class => "#{'host_cur' if controller_name == "faqs"}" %>

@@ -1,0 +1,24 @@
+<ul class="firm_works">
+  <%- @designs.each do |design| %>
+    <li>    	
+    	<div class="works_box pr">
+        <%- if current_user && current_user == @user %>
+	    		<div class="host_works_edit">
+		    		<%= link_to "编辑", design_update_user_design_path(current_user, design), class: "works_img_edit" %>
+		    		<%= link_to "删除", user_design_path(current_user, design), :method => :delete, class: "works_img_del" %>
+	    		</div>
+        <%- end %>   
+        
+    		<%= link_to image_tag(design.cover_img.file.url(:list), title:"装修设计欣赏-#{design.title}" , alt:"装修设计欣赏-#{design.title}", size: "198x180"), user_design_path(@user, design) if design.cover_img %>
+    	</div>
+    	   
+      <h4>
+        <a class="full_btn" href="<%= fullscreen_user_design_path(design.user_id, design) %>"></a><%= design.title %>
+      </h4>
+    </li>
+  <%- end %>
+</ul>
+
+<div class="pager host_pager" style="position:relative;bottom:-60px;left:0;">
+  <%= paginate @designs %>
+</div><!--pager ends-->

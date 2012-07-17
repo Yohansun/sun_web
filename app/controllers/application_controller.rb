@@ -36,4 +36,19 @@ class ApplicationController < ActionController::Base
       return "/"
     end  
   end
+
+  def load_skin
+    user_ids = Skin.find_by_role_id(@user.role_id).try(:user_ids)
+
+    case @user.role_id
+      when 2
+        if user_ids.present? && user_ids.include?(@user.id.to_s)
+          render :template => "users/skins/company/#{@user.designs.blank? ? 'white' : 'white'}/index"
+        else
+          render :template => "users/#{controller_name}"
+        end
+      else
+        render :template => "users/#{controller_name}"
+    end
+  end
 end

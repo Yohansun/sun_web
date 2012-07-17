@@ -14,13 +14,17 @@ class ReplyMsgsController < ApplicationController
       user_of_comment = Comment.find(params[:reply_msg][:comment_id])
     end
 
+    if user_of_comment.respond_to? :commentable_type
+      re_url = "/" + user_of_comment.commentable_type.try(:tableize) + "/" + user_of_comment.try(:commentable_id).to_s
+    end  
+
     SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment.user.display_name, :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
                    :reply_type => @reply_msg.reply_type,
                    :status => SysMsg::Status[0],
                    :reply_name => user_display_name,
                    :reply_id => user_id,
                    :user_id => user_of_comment.user.id,
-                   :re_url => "/" + user_of_comment.try(:commentable_type).try(:tableize) + "/" + user_of_comment.try(:commentable_id).to_s
+                   :re_url => re_url
                 )
 
     case @reply_msg.reply_type
