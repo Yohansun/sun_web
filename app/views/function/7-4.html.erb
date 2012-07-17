@@ -1,0 +1,219 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "style", "weekstar","wood" %>
+
+    <style type="text/css">
+        span.arrow_1 {
+            right: 179px;
+        }
+
+        span.arrow_2 {
+            right: 111px;
+        }
+    </style>
+
+
+    <style type="text/css">
+        .galleryK .caption {
+            display: none;
+        }
+    </style>
+ 
+
+    <script type="text/javascript">
+    domReady(function()
+    {
+        var instanceOne = new ImageFlow();
+        instanceOne.init({
+            ImageFlowID: 'gallery',
+            buttons: true
+        });
+    });
+    $(function(){
+       $('.wood_bot ul div').each(function(){
+            var $this = $(this);
+            $this.attr('title',$this.next().text().toUpperCase());
+       });
+    });
+    </script>
+    <!--[if IE 6]>
+    <script src="js/png.js"></script>
+    <script>
+    PNG.fix('img,div,a,ul,li');
+    </script>
+    <![endif]-->
+<%- end %>
+
+<div class="main">
+    <div class='sub_title tr'>
+        <img src='images/paint_art/title_paint_art.png' />
+    </div>
+    <div class='sub_nav ft12 pr tr'>
+        <em><a class="fb" href="#">木纹风尚生活</a></em>
+        <em><a href="#">漆光艺彩</a><span></span></em>
+        <em><a href="#">首页</a><span></span></em>
+    </div><!--sub_nav ends-->
+    <div class='wrapper'>
+        <div class="wood_top">
+            <h1>漆彩木世界 风尚新生活</h1>
+            <div class="galleryK" id="gallery">
+                <img src="images/paint_art/art_kv/art_kv1.jpg" />
+                <img src="images/paint_art/art_kv/art_kv2.jpg" />
+                <img src="images/paint_art/art_kv/art_kv3.jpg" />
+                <img src="images/paint_art/art_kv/art_kv4.jpg" />
+            </div>
+            <div class="wood_center">
+                <a href="" class="wood_shop fr">查询离您最近的专卖店</a>
+                <a href="" class="wood_tao fr">一键购买</a>
+                <a href="" class="wood_more ft14 fb fr">更多产品与服务信息，详情点击</a>
+                <img src="images/paint_art/new/1.png" />
+            </div><!--wood_center ends-->
+        </div><!--wood_top ends-->
+        <div class="wood_bot cw ft12">
+            <div class="wood_left fl">
+                <h2>满庭缤彩</h2>
+                <p>不论是烂漫樱花的粉，温润翡翠的绿；<br />
+                还是希腊纯粹的蓝，被夕阳染尽的红。<br />
+                美好生活总是需要用多姿多彩来点缀。</p>
+                <ul>
+                    <li>
+                        <div class="color1"></div>
+                        <p>6840-2</p>
+                    </li>
+                    <li>
+                        <div class="color2"></div>
+                        <p>6620-3</p>
+                    </li>
+                    <li>
+                        <div class="color3"></div>
+                        <p>6751-4</p>
+                    </li>
+                    <li>
+                        <div class="color4"></div>
+                        <p>6851-4</p>
+                    </li>
+                    <li>
+                        <div class="color5"></div>
+                        <p>5900-1</p>
+                    </li>
+                    <li>
+                        <div class="color6"></div>
+                        <p>5500-1</p>
+                    </li>
+                    <li>
+                        <div class="color7"></div>
+                        <p>5340-2</p>
+                    </li>
+                    <li>
+                        <div class="color8"></div>
+                        <p>4340-2</p>
+                    </li>
+                    <li>
+                        <div class="color9"></div>
+                        <p>0400-1</p>
+                    </li>
+                    <li>
+                        <div class="color10"></div>
+                        <p>0640-2</p>
+                    </li>
+                    <li>
+                        <div class="color11"></div>
+                        <p>0420-3</p>
+                    </li>
+                    <li>
+                        <div class="color12"></div>
+                        <p>0501-4</p>
+                    </li>
+                    <li>
+                        <div class="color13"></div>
+                        <p>2800-1</p>
+                    </li>
+                    <li>
+                        <div class="color14"></div>
+                        <p>2840-2</p>
+                    </li>
+                    <li>
+                        <div class="color15"></div>
+                        <p>3370-3</p>
+                    </li>
+                    <li>
+                        <div class="color16"></div>
+                        <p>2910-4</p>
+                    </li>
+                </ul>
+            </div><!--wood_left ends-->
+            <div class="wood_right fr">
+                <h2>满庭缤彩</h2>
+                <p>用木纹的深浅，洞悉生命的深度。<br />
+                沿着木纹的不变路线。<br />
+                透露纹理的千姿百态，演绎生活的靓丽万千。</p>
+                <ul>
+                    <li>
+                        <div class="color17"></div>
+                        <p>wm631</p>
+                    </li>
+                    <li>
+                        <div class="color18"></div>
+                        <p>wm611</p>
+                    </li>
+                    <li>
+                        <div class="color19"></div>
+                        <p>wm612</p>
+                    </li>
+                    <li>
+                        <div class="color20"></div>
+                        <p>wm652</p>
+                    </li>
+                    <li>
+                        <div class="color21"></div>
+                        <p>wm641</p>
+                    </li>
+                    <li>
+                        <div class="color22"></div>
+                        <p>wm642</p>
+                    </li>
+                    <li>
+                        <div class="color23"></div>
+                        <p>wm651</p>
+                    </li>
+                    <li>
+                        <div class="color24"></div>
+                        <p>wm661</p>
+                    </li>
+                    <li>
+                        <div class="color25"></div>
+                        <p>wm662</p>
+                    </li>
+                    <li>
+                        <div class="color26"></div>
+                        <p>wm683</p>
+                    </li>
+                    <li>
+                        <div class="color27"></div>
+                        <p>wm682</p>
+                    </li>
+                    <li>
+                        <div class="color28"></div>
+                        <p>wm628</p>
+                    </li>
+                    <li>
+                        <div class="color29"></div>
+                        <p>wm653</p>
+                    </li>
+                    <li>
+                        <div class="color30"></div>
+                        <p>wm654</p>
+                    </li>
+                    <li>
+                        <div class="color31"></div>
+                        <p>wm618</p>
+                    </li>
+                    <li>
+                        <div class="color32"></div>
+                        <p>wm619</p>
+                    </li>
+                </ul>
+            </div><!--wood_left ends-->
+            <p class="fr ft14">立邦专卖店提供免费调色打板服务，为你呈现更多木器漆多彩效果</p>
+        </div><!--wood_bot ends-->
+    </div><!--wrapper ends-->
+</div><!--main ends-->

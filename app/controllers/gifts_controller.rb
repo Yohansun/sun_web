@@ -13,7 +13,8 @@ class GiftsController < ApplicationController
 		@gift4 = Gift.where(" gift_type like ?", "投票有礼奖").order("give_time DESC")
     end
        
-
+#由于数据库本身时间参数问题，时差8小时需要通过将北京时间减一天补回来，此时日期与数据库内存储日期（不考虑时间）一致,
+#在页面中显示参数时需增加一天
 	def get_dates_1
          @dates_arr1 = []              
          @gift1 = Gift.where(" gift_type like ?", "iColor点评王奖").order("give_time DESC")
