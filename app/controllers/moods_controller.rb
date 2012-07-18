@@ -9,7 +9,7 @@ class MoodsController < ApplicationController
 
 		@weekly_stars = WeeklyStar.order("published_at desc").limit 5
 		
-		render :template => "users/moods"
+		load_skin
 	end
 
 	def create
@@ -22,9 +22,9 @@ class MoodsController < ApplicationController
 					content = (content + "   今天我的心情是#{@mood.color_name}，就如立邦的#{ColorCode.find_by_code(@mood.color_code).name}（颜色色号名称),那你的呢？ 来自http://www.icolor.com.cn的色彩心情") if @mood.color_name.present? 
 					Mood.send_weibo(token.access_token,content) if @mood.is_privacy? && token.provider.eql?('weibo')
 				end
-			end
-
-			redirect_to user_moods_path(@user)
+			end			
 		end
+
+		redirect_to user_moods_path(@user)
 	end	
 end

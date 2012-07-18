@@ -7,7 +7,8 @@ class DesignsController < ApplicationController
     sort_input = MagicSetting.recommend_designs
     if @user
       @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("created_at desc").page(params[:page]).joins(:design_images).group("imageable_id")
-      render :template => "users/designs"
+
+      load_skin
     else
       @designs = Design.order("designs.id in (#{sort_input}) desc").page(params[:page]).per(9).joins(:design_images).group("imageable_id")
     end

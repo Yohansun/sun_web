@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="title"><h5>iColor个人主页皮肤管理</h5>
+    <div class="num"><%= link_to '新增数据', main_app.new_skin_path, :class => "redNum" %></div>
+  </div>   
+  <!-- Dynamic table -->
+  <div class="table">
+    <div class="head"><h5 class="iFrames">数据列表</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+      <tr>
+        <th>皮肤类型</th>
+        <th>使用者ID</th>
+        <th width="100px">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%- collection.each do |c| %>
+        <tr class="gradeA">
+          <td><%= c.skin_type %></td>
+          <td><%= c.user_ids %></td>
+          <td nowrap="nowrap" align="center">
+		        <%= link_to '编辑', main_app.edit_skin_path(c), :class => 'button basicBtn' %>
+	          <%= link_to '删除', main_app.skin_path(c), :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
+		      </td>
+        </tr>
+      <%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>

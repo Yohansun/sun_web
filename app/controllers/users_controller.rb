@@ -68,6 +68,8 @@ class UsersController < ApplicationController
   def community
     @user = User.find(params[:user_id]) if params[:user_id]
     @providers = @user.user_tokens.map {|u| u.provider if u.is_binding?}
+
+    load_skin 
   end
 
   def binding_cancel

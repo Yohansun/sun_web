@@ -6,7 +6,8 @@ class InspirationsController < ApplicationController
   def index
     if @user
       @inspirations = @user.inspirations.joins(:design_images).group("inspirations.id").where("design_images.imageable_id = inspirations.id").page params[:page]
-      render :template => "users/inspirations"
+
+      load_skin
     else
       @inspirations = Inspiration.joins(:design_images).group("inspirations.id").where("design_images.imageable_id = inspirations.id").page params[:page]
     end

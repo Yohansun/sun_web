@@ -1,0 +1,98 @@
+<%- content_for :head do %>
+  <style type="text/css">
+  .per_firm_w .signup_text,
+  .msg_list_box .reply_area, .msg_list_box .reply_list{width: 100%;}
+  .msg_list_box .reply_tabs{width:290px;}
+  .msg_list_box .reply_input, .msg_list_box textarea, .msg_list_box .reply_con{width:93%;}
+  .reply_area em,.reply_area span,.reply_list em,.reply_list span{font-size:29px;}
+  .msg_list_box .reply_area span,.msg_list_box .reply_list span{top:-10px;}
+  </style>
+<%- end %>
+<%= javascript_include_tag "reply" %>
+<div class="host_main">
+  <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot check_valid", :id => 'new_message'} do |f| %>
+    <fieldset>
+      <textarea name="message[content]" id="host_main" class="area_text">你有神马对TA说的呢？</textarea>
+      <p><span class="words_tip">0</span>/140</p>
+    </fieldset>
+    <fieldset>
+      <input class="host_submit noborder" type="submit" value="" />
+      <input class="host_reset noborder" type="reset" value="" />
+    </fieldset>
+  <%- end %>
+
+  <div class="msgboard_list mt25">
+   <%- unless @messages.blank? %>
+   <%- @messages.each do |m| %>
+    <div class="msgboad_item">
+
+      <%= link_to user_path(m.from_user.id) do %>
+        <% if m.from_user.avatar -%>
+            <%= image_tag m.from_user.avatar.file(:thumb), :class => 'box_shadow', :title => "装修设计师-#{m.from_user.display_name}", :alt => "装修设计师-#{m.from_user.display_name}" %>
+        <% else -%>
+            <%= image_tag "news/regimg_bg.jpg", :width => "78", :height => "70", :class => 'box_shadow' %>
+        <% end -%>
+      <%- end %>
+
+      <h2 class="visitor_info">
+        <strong class="fl"><a href="/users/<%= m.from_user.id %>"><%= m.from_user.display_name %></a></strong>
+        <span class="fl"><%= m.created_at.strftime("%Y-%m-%d")[5..6] %>月<%= m.created_at.strftime("%Y-%m-%d")[8..9] %>日&nbsp;&nbsp;<%= m.created_at.strftime("%H:%M") %></span>
+      </h2>
+
+      <div class="msgboard_btn">
+        <%- if current_user && current_user == @user %>
+          <%= link_to "删除",user_message_path(current_user.id,m.id), :method => "delete" %>
+        <%- end %>
+        <a href="javascript:void(0)" class="answer">回复</a>
+      </div>
+
+      <div class="msg_list_box">
+        <div class="signup_text">
+          <span></span>
+          <p><%= m.content %></p>
+        </div>
+
+        <div class="reply_area none cl pr">
+          <em class="pa">◆</em>
+          <span class="pa">◆</span>
+          <div class="reply_input clear">
+            <%= form_for(ReplyMsg.new) do |f| %>
+                <%= f.hidden_field :show_id, value: @user.id %>
+                <%= f.hidden_field :message_id, value: m.id %>
+                <%= f.hidden_field :reply_type, value: "messages" %>
+                <%= f.text_area :content, :rows => 2 %>
+                <input type="image" src="<%= asset_path "btn.jpg" %>">
+            <%- end %>
+          </div>
+        </div>
+
+        <div class="reply_list none cl pr">
+          <em class="pa">◆</em>
+          <span class="pa">◆</span>
+          <div class="reply_con ft14 clear">
+            <div class="clear">
+              <%- m.reply_msgs.order("created_at DESC").each do |r| %>
+                <div class="clear  <%= "reply_line" if r != m.reply_msgs.first %> ">
+                  <p class="reply_tabs fl">
+                    <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
+                  </p>
+                  <p class="fr">
+                    <%= r.created_at.to_date %>
+                  </p>
+                </div>
+              <%- end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- end %><%- else %>
+       您没有留言信息！
+    <%- end %>
+  </div>
+</div>
+
+<div class="pager host_pager" style="position:relative;bottom:-36px;left:0;">
+  <%= paginate @messages %>
+</div><!--pager ends-->

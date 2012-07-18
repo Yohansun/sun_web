@@ -195,6 +195,8 @@ Icolor::Application.routes.draw do
     resources :faqs
     resources :tools
     resources :gifts
+    resources :skins
+    resources :skin_kv_uploads
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
     resources :my_show_settings

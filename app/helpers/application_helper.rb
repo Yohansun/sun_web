@@ -199,4 +199,26 @@ module ApplicationHelper
       image_tag asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}"
     end
   end
+
+  #家装公司个性主页helper
+  #获取最新的行业资讯
+  def get_articles
+    Subject.content("articles")
+  end  
+
+  #获取公司推荐设计师
+  def get_recommended_designer
+    User.select("id,username,name,role_id,inauguration_company").where(:role_id => 1, :inauguration_company => @user.display_name).limit 4
+  end
+
+  def get_designs
+    @user.designs.map {|design| design.design_images}.flatten!
+  end  
+
+  def get_skin_kvs
+    if (skin = Skin.find_by_role_id(@user.role_id)).present?
+      skin.skin_kv_uploads
+    end  
+  end  
+
 end
