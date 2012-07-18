@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     case @user.role_id
       when 2
         if user_ids.present? && user_ids.include?(@user.id.to_s)
-          render :template => "users/skins/company/#{@user.designs.blank? ? 'white' : 'white'}/index"
+          render :template => "users/skins/company/#{@user.designs.blank? ? 'white' : 'black'}/index"
         else
           render :template => "users/#{controller_name}"
         end
