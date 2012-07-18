@@ -5,7 +5,7 @@ class Sellers::SellerDataController < ApplicationController
 	def index
 		if current_seller_user
 			areas = Area.find(current_seller_user.area_id).self_and_descendants
-			companies = User.where("area_id in (?) and role_id = ?", areas, 2).order("is_top desc","top_order asc") 
+			companies = User.where("area_id in (?) and role_id = ?", areas, 2).order("is_top desc","top_order asc","is_imported desc")
 			@companies = companies.page(params[:page]).per(12)	
 			@companies_top = companies.limit 12	
 		else
