@@ -47,7 +47,7 @@
 			<%= form_tag(user_moods_path, id: "per_form", multipart: true) do %>
 				<h4 class="txt_tit"><img class="fr" src="<%= asset_path "personal/per_txt_tit.png"%>" />写心情</h4>
 				<div class="exp-holder">
-					<textarea id="J_t" style="height:87px;" name="mood[content]"></textarea>
+					<textarea id="J_t" style="height:87px;color:white;" name="mood[content]"></textarea>
 					<ul class="per_btn_area pr">
 						<li><input type="submit" value="发布"></li>
 						<li class="per_public"><span>公开</span>
@@ -242,5 +242,18 @@
 			$('#inspiration').masonry();
 			$('#per_info').masonry();
 		});
+
+		domReady(function(){
+		       var instanceOne=new ImageFlow();
+		       instanceOne.init({ImageFlowID:'gallery'});
+		       var $gallery=$('#gallery');
+		       $gallery.parent().find('span.moveleft').click(function(){
+		         instanceOne.MouseWheel.handle(1);
+	       });
+	       $gallery.parent().find('span.moveright').click(function(){
+	         instanceOne.MouseWheel.handle(-1);
+       });
+       my.MouseWheel.handle;
+     });
 	<% end -%>
 <%- end %>
