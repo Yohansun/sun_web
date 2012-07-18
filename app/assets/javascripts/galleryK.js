@@ -296,4 +296,4 @@ else if(typeof window.onload==="function")
 {domReadyEvent.run();oldonload();};}
 else
 {window.onload=run;}}};var domReady=function(handler){domReadyEvent.add(handler);};domReadyEvent.init();
-//my.MouseWheel.handle
+domReady(function(){var instanceOne=new ImageFlow();instanceOne.init({ImageFlowID:'gallery'});var $gallery=$('#gallery');$gallery.parent().find('span.moveleft').click(function(){instanceOne.MouseWheel.handle(1);});$gallery.parent().find('span.moveright').click(function(){instanceOne.MouseWheel.handle(-1);});my.MouseWheel.handle;});
