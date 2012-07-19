@@ -38,20 +38,19 @@ class ApplicationController < ActionController::Base
   end
 
   def load_skin
-    Skin.find_each do |skin|
-      user_ids = skin.user_ids
-      if user_ids.present? && (user_ids.split(",").include? @user.id.to_s)
-        session[:skin_type] = skin.skin_type_id
+    skin = Skin.where("user_ids like ?", "%#{@user.id}%").first
 
-        case skin.skin_type_id
-          when 2
-            render :template => "users/skins/company/#{@user.designs.blank? ? 'white' : 'black'}/index" 
-          when 4  
-            render :template => "users/skins/weekly_star/index" 
-        end 
-      elsif !(user_ids.split(",").include? @user.id.to_s)
-        render :template => "users/#{controller_name}"   
-      end        
+    if skin.present?
+      session[:skin_type] = skin.skin_type_id
+
+      case skin.skin_type_id
+        when 2
+          render :template => "users/skins/company/#{@user.designs.blank? ? 'white' : 'black'}/index"
+        when 4
+          render :template => "users/skins/weekly_star/index"
+      end
+    else
+      render :template => "users/#{controller_name}"
     end
   end
 end
