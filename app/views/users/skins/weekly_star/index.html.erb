@@ -20,7 +20,7 @@
           <ul id="per_info">
             <%- get_designs.each do |design| %>
               <li>
-                <%= link_to design.file.url(:home_page), "/designs/#{design.id}" %>
+                <%= link_to image_tag(design.file.url(:home_page)), "/designs/#{design.id}" %>
               </li>
             <%- end %>
           </ul>
