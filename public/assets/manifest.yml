@@ -1037,8 +1037,9 @@ personal/per_firm_pho1.jpg: personal/per_firm_pho1-9fa3ac582a9fc90f8c5dbb1a9ae23
 personal/per_firm_w1.jpg: personal/per_firm_w1-f53de16dee2ebc3489a98aa7cc4923d0.jpg
 personal/per_firm_work1.jpg: personal/per_firm_work1-54daf6f25afcdeef64f1eb9c724b2297.jpg
 personal/per_img1.jpg: personal/per_img1-36b09ddc9db52a9a6206a5135e7c52f4.jpg
-personal/per_info_bg.png: personal/per_info_bg-3d62bc8d0834cb2436a21db24111486a.png
+personal/per_info_bg.png: personal/per_info_bg-a2f72586522426bb081d8be0dae816f9.png
 personal/per_info_bg2.png: personal/per_info_bg2-1ed40ddb4fa22140f6dde7fc11e6b622.png
+personal/per_info_bg3.png: personal/per_info_bg3-b487ce20c93e8c33e926bda48755f867.png
 personal/per_mood1.jpg: personal/per_mood1-0b0b283ea3c411a32195db7563b7841a.jpg
 personal/per_mood_bg.png: personal/per_mood_bg-17a81ba9eb4b4e9f4d208559095538ea.png
 personal/per_pic1.jpg: personal/per_pic1-1298483f28722223d4328c8f4a00df35.jpg
@@ -1199,7 +1200,7 @@ galleryB.js: galleryB-19506b4b5f1da6c7138222397dc962d3.js
 galleryC.js: galleryC-7f79597492abb458cd960cfd203a5393.js
 galleryF.js: galleryF-fcb62e0904359867a33169227aadc758.js
 galleryG.js: galleryG-9b812a458e988dcd81d5b54b1388090b.js
-galleryK.js: galleryK-c5ebcb1d6e04e07e314613a456ddc1ee.js
+galleryK.js: galleryK-9b20d0acfaee18c640cb66f5f78512d8.js
 galleryM.js: galleryM-23c26c8bda534611771f34474aa5a5e0.js
 galleryN.js: galleryN-b18dbe58d47f5cc6d76701f29d544ed8.js
 galleryO.js: galleryO-af65f325051edbdad2278ce5079b11f3.js
@@ -1277,7 +1278,7 @@ sellers/seller_data.css: sellers/seller_data-7270767b2a9e9fff880aa5de378ca791.cs
 sellers/seller_sms.css: sellers/seller_sms-7270767b2a9e9fff880aa5de378ca791.css
 sellers/seller_tool.css: sellers/seller_tool-7270767b2a9e9fff880aa5de378ca791.css
 shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
-style.css: style-5744b1d140db294eb8c02ad4e66330b6.css
+style.css: style-75487459f20ae3b3a06922f4685712f3.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-b095a8563428ccb571f0c5d4d5fcf8ce.css
