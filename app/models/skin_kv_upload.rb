@@ -3,7 +3,7 @@ class SkinKvUpload < ActiveRecord::Base
 	belongs_to :skins
 
 	has_attached_file :kv_thumb,
-										:styles => {:thumb => "105x97#", :kv_thumb=>"670x300#"},
+										:styles => {:thumb => "105x97#", :kv_thumb => "670x300#", :kv_weekly_star => "255x235#" },
 										:whiny_thumbnails => true,
 										:url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
 										:path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

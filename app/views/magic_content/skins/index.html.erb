@@ -17,7 +17,7 @@
       <%- collection.each do |c| %>
         <tr class="gradeA">
           <td><%= c.skin_type %></td>
-          <td><%= c.user_ids %></td>
+          <td><%= truncate(c.user_ids, length: 100) %></td>
           <td nowrap="nowrap" align="center">
 		        <%= link_to '编辑', main_app.edit_skin_path(c), :class => 'button basicBtn' %>
 	          <%= link_to '删除', main_app.skin_path(c), :confirm => '确定删除?', :method => :delete, :class => 'button basicBtn' %>
