@@ -15,7 +15,7 @@
   <%= simple_form_for([main_app, resource], :html => { :id => "valid", :multipart => true }) do |f| %>
     <fieldset>
       <div class="widget border">
-        <%= f.input :role_id, :input_html => { :class=> "validate[required]" }, :prompt => '--请选择--',:collection => {"设计师" => 1, "家装公司" => 2, "普通用户" => 3}, :label => "皮肤类型:" %>
+        <%= f.input :skin_type_id, :input_html => { :class=> "validate[required]" }, :prompt => '--请选择--',:collection => {"设计师" => 1, "家装公司" => 2, "普通用户" => 3, "每周之星" => 4}, :label => "皮肤类型:" %>
         <%= f.input :user_ids, :label => "使用者ID:", :hint => "*请以逗号间隔" %>
 
         <div class="rowElem">

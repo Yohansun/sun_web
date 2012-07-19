@@ -1,0 +1,50 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .per_main{width:974px;border:1px solid #2e2e2e;background:#292929;margin:5px 0;font:12px "simsun";color:#fff;}
+  </style>
+<%- end %>
+<div class="per_con_l">
+
+  <%- @moods.each do |m| %>
+    <%- if m.present? %>
+      <%- img = m.img.url if m.img.exists?(:original) -%>
+      <div class="per_con <%= 'noborder' if m.eql? @moods.last %>">
+        <p>
+          <%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %>
+        </p>
+        <p>
+          <span><%= m.user.display_name %>发表:</span>
+          <p style="color:#<%= m.font_color %>;" class="J_resulte">
+            <%= m.content %>
+          </p>
+        </p>  
+        <%- if img %>
+          <%= image_tag m.img.url(:thumb) %>
+        <%- end %>        
+        <p class="p2">
+          <span class="zf" href="#">转发(<%= m.shares_count %>)</span>
+        </p>                  
+        <%= forward_links("#{m.content}", user_moods_url, m.img.url, m.id.to_s, "Mood") %>
+      </div>
+    <%- end %>
+  <%- end %>
+
+  <div class="pager host_pager">
+    <%= paginate @moods %>
+  </div><!--pager ends-->
+  <div class="clear"></div>
+</div>
+
+<div class="per_con_r">
+  <h3>可能感兴趣的人</h3>
+  <ul>
+    <%- get_weekly_stars.each do |user| %>
+    <li>
+      <%= show_avatar(user,"access_icon","53x50") %>
+      <p><span><%= user.display_name %></span></p>
+      <p><a href="<%= user_path(user) %>">进入个人主页&gt;</a></p>
+    </li>
+    <%- end %>
+  </ul>
+  <p class="per_more"><a href="/weekly_stars?from=top">更多...</a></p>
+</div>
