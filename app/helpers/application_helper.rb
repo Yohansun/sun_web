@@ -212,13 +212,23 @@ module ApplicationHelper
   end
 
   def get_designs
-    @user.designs.map {|design| design.design_images}.flatten!
+    @user.designs.map {|design| design.design_images}.flatten! || []
   end  
 
   def get_skin_kvs
-    if (skin = Skin.find_by_role_id(@user.role_id)).present?
+    if (skin = Skin.find_by_skin_type_id(session[:skin_type])).present?
       skin.skin_kv_uploads
     end  
+  end  
+
+  def get_weekly_stars
+    user_urls = WeeklyStar.order("published_at desc").select("author_url").limit 5
+    ws = []
+    user_urls.each do |ul|
+      s = ul.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,})?)).to_a[1]
+      ws << User.select("id,username,name").find(s) unless s.blank?
+    end
+    ws
   end  
 
 end

@@ -1,0 +1,48 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .personalized_main .host_main .design_result ul.d_works li {margin: 0px 5px 21px}
+  </style>
+<%- end %>
+
+<div class="host_main pb60">
+  <div class="design_result" style="padding-left:25px;">
+    <ul class="d_works noborder group">      
+
+      <%- @designs.each do |design| %>
+        <li>      
+          <div class="works_box">
+            <%- if current_user && current_user == @user %>
+              <div class="host_works_edit none">
+                <%= link_to "编辑", design_update_user_design_path(current_user, design), class: "works_img_edit" %>
+                <%= link_to "删除", user_design_path(current_user, design), :method => :delete, class: "works_img_del" %>
+              </div>
+            <%- end %>
+
+            <%= link_to image_tag(design.cover_img.file.url(:list), title:"装修设计欣赏-#{design.title}" , alt:"装修设计欣赏-#{design.title}", size: "213x230", class: "host_works_img"), user_design_path(@user, design) if design.cover_img %>
+          </div>
+
+          <h3>
+            <%= design.title %>
+          </h3>
+
+          <p class="p1 group">
+            <strong class="ft14 fb">当前票数：<em id ="votes_count<%= design.id%>"><%= design.votes_count %></em></strong>
+            <%= link_to image_tag("personal/d_host_vote_btn.png"), votes_path(:voteable_id => design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: "vote_btn" %>
+          </p>
+
+          <p class="p2 group">
+            <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
+          </p>
+          <% cover_img = design.cover_img.file.url if design.cover_img -%>
+          <%= forward_links("#iColor#分享一套优秀家装作品----#{design.title}，更多实用装修案例，尽在iColor #{user_design_url(design.user_id, design)}", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
+          <p>风格：<%= design.style %>
+          </li>
+        <%- end %>
+
+    </ul><!--result one ends-->
+  </div><!--design_result ends-->
+
+  <div class="pager host_pager" style="position:relative;bottom:-36px;left:0;">
+    <%= paginate @designs %>
+  </div><!--pager ends-->
+</div>
