@@ -38,7 +38,10 @@ class ApplicationController < ActionController::Base
   end
 
   def load_skin
-    skin = Skin.where("user_ids like ?", "%#{@user.id}%").first
+    skin = nil
+    Skin.find_each do |s|
+      skin = s.user_ids.split(",").include?(@user.id.to_s) ? s : nil
+    end    
 
     if skin.present?
       session[:skin_type] = skin.skin_type_id
