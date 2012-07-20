@@ -36,6 +36,7 @@ $(function() {
       if (dat.result == 'success') {
         $.getScript(dat.upload + "?for=design");
       };
+      alert("图片上传成功");
     },
     postData : {
         '_http_accept': 'application/javascript',
@@ -44,13 +45,14 @@ $(function() {
         '<%= session_key %>' : '<%= cookies[session_key] %>',
         'authenticity_token': '<%= form_authenticity_token %>'
     },
+    onUploadError : function(file, errorCode, errorMsg, errorString) {
+      alert('文件:' + file.name + '上传失败: ' + errorString);
+    },
     onUploadStart : function(){
       $("#upload_going").show();
     },
     onUploadComplete : function(){
       $("#upload_going").hide();
-      alert("图片上传成功");
-
     }
   });
 

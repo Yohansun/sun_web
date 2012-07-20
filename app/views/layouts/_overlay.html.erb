@@ -123,7 +123,7 @@
         o_in();
         $('#login_win').show();
         $("#design_message").hide();
-        $('#overlay_new_user').bind('ajax:error', function (xhr, status, error) {
+        $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
             err_in();
         });
     }
@@ -132,4 +132,14 @@
       o_in();
       $("#design_message").show();
     }
+
+    var errs_out;
+    function err_in(){
+     $('.err_tips').fadeIn(600,function(){
+      errs_out = setTimeout(err_out,3000);
+    });
+   }
+   function err_out(){
+     $('.err_tips').fadeOut();
+   }
 </script>
