@@ -1140,6 +1140,11 @@ t_r_img3.jpg: t_r_img3-889d2d99dafdfae792091502b6597618.jpg
 t_r_title.png: t_r_title-0635994f1c2e8288aea6d1f54fdede5e.png
 tick.png: tick-0e0812395ca6fcb99751fbe64ef5fb60.png
 tips.jpg: tips-84caec4603ca7cab9a71c57af8dc6686.jpg
+weekstar/color_star.png: weekstar/color_star-5ea4b4bbd821ac9ae726893715b891e4.png
+weekstar/design_star.png: weekstar/design_star-e580b915a1068281dcf023ad1d72d29f.png
+weekstar/slider.png: weekstar/slider-b6c43c0cae44e0fc1151a6d7989ff806.png
+weekstar/this_week_btn.png: weekstar/this_week_btn-48ce3e71fb6e2b0d8bdc1bfd6e569e87.png
+weekstar/this_week_btnhover.png: weekstar/this_week_btnhover-2fead36b36bb1042d424bf37db0ee0c6.png
 weibo.png: weibo-e46f188b5a50487e33513168c2c4970f.png
 weibo_bg.jpg: weibo_bg-9dde145cf9490bc2081f789da57df47b.jpg
 yda/lay_close.gif: yda/lay_close-f286f570d1ad4466451662c4eddf89e3.gif
@@ -1281,7 +1286,7 @@ shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
 style.css: style-cb589c40c46ad738b9981a0de6efba51.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
-weekstar.css: weekstar-b095a8563428ccb571f0c5d4d5fcf8ce.css
+weekstar.css: weekstar-a558f57636491d79b348bbbdcf3f7ef5.css
 wood.css: wood-80327677c7dcf07d8fbda29e30cccfa6.css
 yda.css: yda-de7af972b55ac14fc9c88fea9e7b6843.css
 yda_games.css: yda_games-7270767b2a9e9fff880aa5de378ca791.css

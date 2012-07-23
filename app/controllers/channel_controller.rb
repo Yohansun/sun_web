@@ -27,11 +27,11 @@ class ChannelController < ApplicationController
     end
 
     unless params[:province_id].blank?
-      @design_users = @design_users.where("area_id in (?)", Area.find(params[:province_id]).leaves.map{|a| a.id}.join(","))
+      @design_users = @design_users.where("area_id in (?)", Area.find(params[:province_id]).self_and_descendants)
     end
 
     unless params[:city_id].blank?
-      @design_users = @design_users.where("area_id in (?)",Area.find(params[:city_id]).children.map{|a| a.id}.join(","))
+      @design_users = @design_users.where("area_id in (?)",Area.find(params[:city_id]).self_and_descendants)
     end
 
     unless params[:area_id].blank?
