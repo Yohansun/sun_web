@@ -12,6 +12,7 @@
       <thead>
         <tr>
           <th width="5%">ID</th>
+          <th width="15%">类型</th>
           <th>作品名称</th>
           <th width="15%">设计师</th>
           <th width="80px">缩略图</th>
@@ -23,6 +24,7 @@
         <%- collection.each do |c| %>
           <tr class="gradeA">
             <td><%= c.id %></td>
+            <td><%= c.try(:star_type) %></td>
             <td><%= c.design_name %></td>
             <td><%= c.author %></td>
             <td><%= image_tag c.main_preview_img.url(:thumb) %></td>

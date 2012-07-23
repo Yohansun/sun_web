@@ -1,11 +1,22 @@
 # -*- encoding : utf-8 -*-
 class WeeklyStarsController < ApplicationController
 
+  helper_method :star_blank?
+
   def index
-    @design = WeeklyStar.order("published_at desc").first || WeeklyStar.new
+    designs = WeeklyStar.order("published_at desc") || WeeklyStar.new
+    star_type_id = WeeklyStar.get_star_type_id params[:star_type]
+
+    @design = designs.where(star_type_id: star_type_id).first    
     design_id = @design.design_link.split("/").last
     @link_design = Design.find(design_id)
-    @elder_designs = WeeklyStar.order("published_at desc").offset(1).page(params[:page]).per(8).padding(1)
+
+    star_ids = []
+    3.times do |t|
+      star = WeeklyStar.where(star_type_id: t+1).order("published_at desc").first
+      star_ids << star.id if star.present?
+    end  
+    @elder_designs = WeeklyStar.where("id not in (?)", star_ids).order("published_at desc").page(params[:page]).per(8)
   end
 
   def show
@@ -24,4 +35,9 @@ class WeeklyStarsController < ApplicationController
     @design_next = WeeklyStar.where("id > ?",params[:id]).first
     render :layout => nil
   end
+
+  def star_blank?(star_type)
+    star_type_id = WeeklyStar.get_star_type_id star_type
+    WeeklyStar.where(star_type_id: star_type_id).blank?
+  end  
 end

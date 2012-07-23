@@ -12,4 +12,18 @@ class WeeklyStar < ActiveRecord::Base
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
+  STAR_TYPE = {
+    1 => "每周之星",
+    2 => "月度色彩之星",
+    3 => "月度设计之星"
+  }
+
+  def star_type
+    STAR_TYPE[star_type_id]
+  end 
+
+  def self.get_star_type_id(arg)
+    STAR_TYPE.key(arg)
+  end                  
 end
