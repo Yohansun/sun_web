@@ -12,9 +12,9 @@ art/art_top2.png: art/art_top2-5587ebe3d07d6dee366ec9ba4409b0dd.png
 art/arts.jpg: art/arts-e39c06ae6128c6653631c3b50d651ddc.jpg
 art/arts1.jpg: art/arts1-a28dde7743319fcffecad85a2049e5ec.jpg
 art/arts10.jpg: art/arts10-1a1b7ff471167f630695c7e2be67b0e0.jpg
-art/arts10_0.jpg: art/arts10_0-d7359f1b38aaf6ccd2173a5e7a8775b1.jpg
-art/arts10_1.jpg: art/arts10_1-ee58a827e7c999a9a848d8b43a0e4dfc.jpg
-art/arts10_2.jpg: art/arts10_2-4d603979453c7a17aa183755765a21b3.jpg
+art/arts10_0.jpg: art/arts10_0-117896d1a07c0b89274aeaaa5b62632b.jpg
+art/arts10_1.jpg: art/arts10_1-f7b5ebe6116adf0aa8dec5095795e286.jpg
+art/arts10_2.jpg: art/arts10_2-866358beeeef3d959500eb013b1150e1.jpg
 art/arts11.jpg: art/arts11-cc256aeb09e73df6a6a0396205aa2677.jpg
 art/arts11_0.jpg: art/arts11_0-760d6e6a7fcba662a1602b5cf83e075e.jpg
 art/arts11_1.jpg: art/arts11_1-30f6a6a355c6d5c1a826a3fd54dc019b.jpg
@@ -578,7 +578,7 @@ layer/lay_close.png: layer/lay_close-cf0d5acc3ac4663aabfaab26b62f1730.png
 layer/next_icon.png: layer/next_icon-712cc29bad308b88ba1e8b28145d57ef.png
 layer/pager_bg.png: layer/pager_bg-47be866ff07df5b91f16f84ecb38f32a.png
 link1.png: link1-fe17e60aab0b4f21cb0c6fad4344d501.png
-link2.png: link2-0bc8d8c3f0d100483021ef3c9b5c3161.png
+link2.png: link2-27bd281ee79f28bf9aa2191557c9626f.png
 link3.png: link3-f1ba03fd18b22a095297945f52be4d84.png
 link4.png: link4-35b9bac843ea5e3cb07b24fe92872fa4.png
 link5.png: link5-e454dd504c6c4451e7533258436d4c1c.png
