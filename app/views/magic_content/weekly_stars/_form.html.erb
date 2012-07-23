@@ -65,6 +65,7 @@ $(function() {
   <%= simple_form_for([parent, resource], :html => { :class => "mainForm", :id => "valid", :multipart => true }) do |f| %>
     <fieldset>
       <div class="widget border">
+        <%= f.input :star_type_id, :input_html => { :class=> "validate[required]" }, :prompt => '--请选择--',:collection => {"每周之星" => 1, "月度色彩之星" => 2, "月度设计之星" => 3}, :label => "类型:" %>
         <%= f.input :design_name, :input_html => { :class=> "validate[required]" }, :label => "作品名称:" %>
         <%= f.input :main_preview_img, :label => "上传图片:" %>
 

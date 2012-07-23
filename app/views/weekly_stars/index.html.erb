@@ -13,6 +13,7 @@
         #gallery_caption {
             display: none;
         }
+        .design_listA li {overflow:visible;}
     </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -23,29 +24,52 @@
     <img src="<%= asset_path "design/title_design.png" %>" />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/weekly_stars">每周之星</a></em>
+    <em><a class="fb" href="/weekly_stars"><%= params[:star_type] %></a></em>
     <em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
     <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group">
     <div class="weekstart_titleC">
       <%- unless @design.id.nil? %>
-        <a href="/weekly_stars/<%= @design.id %>"><h1>本周<b>之星</b><p>STAR OF THIS WEEK</p></h1></a>
-        <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
-      <%- end %>
-      <h3 class="this_week_tit"><%= @design.design_name %></h3>
+      <a href="/weekly_stars/<%= @design.id %>">
+        <h1>
+          <%= params[:star_type][0,2] %><b><%= params[:star_type][2..-1] %></b>
+          <p>STAR OF THIS <%= params[:star_type].include?("月度") ? 'MONTH' : 'WEEK' %></p>
+        </h1>
+      </a>
+      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
+      <%- end %>      
     </div>
     <div class="weekstart_detail">
-      <div class="gallery">
-        <span class="moveleft"></span>
-        <span class="moveright"></span>
-        <div class="galleryK" id="gallery">
-          <%- @design.weekly_star_uploads.each do |i| %>
-              <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
-          <%- end %>
-        </div>
+      <div class="group mt50">
+        <h3 class="this_week_tit"><%= @design.design_name %></h3>
+        <ul class="this_week_tab group">
+          <%- 
+            ["每周之星","月度色彩之星","月度设计之星"].each do |type|
+            unless star_blank?(type) 
+          %>
+            <li class="<%= 'this_week_btnhover' if params[:star_type] == type %>">
+              <a href="/weekly_stars?star_type=<%= URI.escape(type) %>"><%= type %></a>
+            </li>  
+          <%- 
+            end 
+          end
+          %>  
+        </ul>
       </div>
-    <%= javascript_include_tag "galleryK" %>
+
+      <div class="week_tab_content">
+        <div class="gallery">
+          <span class="moveleft"></span>
+          <span class="moveright"></span>
+          <div class="galleryK" id="gallery">
+            <%- @design.weekly_star_uploads.each do |i| %>
+            <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
+            <%- end %>
+          </div>
+        </div>
+      </div>  
+      <%= javascript_include_tag "galleryK" %>
       <div class="color-picker">
         <div class="overview">
           <div class="votes">
@@ -79,56 +103,6 @@
           </div>
         </div>        
       </div>
-      <!--<div class="galleryB">-->
-        <!--<span class="moveleft"></span>-->
-        <!--<span class="moveright"></span>-->
-        <!--<div class="list">-->
-
-          <!--</ul>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<script type="text/javascript">
-//        $(function(){
-//            var $item = $('div.galleryB div.list ul');
-//            var count = $item.find('li').size();
-//            var colsize = 4;
-//            var pwidth = $item.find('li').eq(0).width();
-//            var sp = 10;
-//            var wwidth = count * ( pwidth + sp ) - sp;
-//            var movewidth = pwidth + sp;
-//            var disabledClassName = "disabled";
-//            if( count > colsize ) {
-//            var $left	= $('div.galleryB span.moveleft');
-//            var $right	= $('div.galleryB span.moveright');
-//            function s(left) {
-//            if( typeof left != 'number' ) {
-//            left = parseInt($item.css('left')) || 0;
-//            }
-//            $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
-//            $right[ ( -1 * left ) >= wwidth - ( 4 * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
-//            }
-//            s();
-//            $left.click(function(){
-//              if( $(this).hasClass(disabledClassName) ) {
-//              return;
-//              }
-//              s( (parseInt($item.css('left')) || 0) + movewidth );
-//              $item.animate({
-//                "left" : "+="+movewidth+'px'
-//                }, 'fast');
-//              });
-//            $right.click(function(){
-//                if( $(this).hasClass(disabledClassName) ) {
-//                return;
-//                }
-//                s( (parseInt($item.css('left')) || 0) - movewidth );
-//                $item.animate({
-//                  "left" : "-="+movewidth+'px'
-//                  }, 'fast');
-//                });
-//            }
-//        });
-</script>-->
 <div class="properties">
   <table class="propertyA">
     <%- unless @design.company_name.blank? %>
@@ -188,7 +162,15 @@
               <ul>
                 <% group.each do |design| -%>
                 <% link_design = Design.find(design.design_link.split("/").last) unless design.design_link.blank? %>
-                    <li>
+                    <li class="pr group">
+                      <%= 
+                        case design.star_type_id 
+                          when 2 
+                            content_tag(:div, image_tag(asset_path "weekstar/color_star.png"), class: "color_star")
+                          when 3
+                            content_tag(:div, image_tag(asset_path "weekstar/design_star.png"), class: "design_star") 
+                        end
+                      %>   
                       <a href="/weekly_stars/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/></a>
                       <h3 title="<%= design.design_name %>"><%= truncate(design.design_name, :length => 16) %></h3>
                       <p class="p1 group">

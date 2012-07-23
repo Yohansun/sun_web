@@ -40,8 +40,16 @@ module ApplicationHelper
     begin
       title = @user.nil? ? PAGE_TITLE : INNER_PAGE_TITLE
 
-      unless title[controller_name.to_s][action_name.to_s].blank?
+      if title[controller_name.to_s][action_name.to_s].present?
         title[controller_name.to_s][action_name.to_s] + "-" + BASE_TITLE
+      elsif controller_name.eql? "weekly_stars"
+        if params[:star_type].include?("色彩")
+          return "色彩之星" + "-" + BASE_TITLE
+        elsif params[:star_type].include?("设计")
+          return "设计之星" + "-" + BASE_TITLE
+        else
+          return "每周之星" + "-" + BASE_TITLE 
+        end            
       else
         title[controller_name.to_s] + "-" + BASE_TITLE
       end
@@ -61,7 +69,7 @@ module ApplicationHelper
   def forward_links(title, url = '', pic = '', id, type)
     uri_title = URI.encode(title)
     unless pic.nil?
-      if type =~ %r(WeeklyStar|MasterInterview|MasterDesign)
+      if type =~ %r(MasterInterview|MasterDesign)
         raw '<span style="height:18px;position:absolute; left:-178px; background-color:none;">
               一键转发：
               <span class="popup_zf2 group" style="background:#fff;bottom:-4px;*bottom:-5px!important; left:70px;width:90px;border:0;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'" >
@@ -71,7 +79,7 @@ module ApplicationHelper
                 <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
               </span>
             </span>'
-      elsif type =~ %r(Mood)
+      elsif type =~ %r(Mood|WeeklyStar)
         raw '<span class="popup_zf group none" style="bottom:-6px;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" data-pic="http://'+request.host_with_port + pic+'">
               <span style="color:#000;padding:0 5px!important;">一键转发：</span>
               <a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a>
@@ -91,7 +99,7 @@ module ApplicationHelper
             </span>'
       end
     else
-      if type =~ %r(WeeklyStar|MasterInterview|MasterDesign)
+      if type =~ %r(MasterInterview|MasterDesign)
         raw '<span style="height:18px;position:absolute; left:-178px; background-color:none;">
                 一键转发：
                 <span class="popup_zf2 group" style="background:#fff;bottom:-4px;*bottom:-5px!important; left:70px;width:90px;border:0;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'" >
@@ -101,7 +109,7 @@ module ApplicationHelper
                   <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
                 </span>
               </span>'
-      elsif type =~ %r(Mood)
+      elsif type =~ %r(Mood|WeeklyStar)
         raw '<span class="popup_zf group none" style="bottom:-6px;" data-type="'+type+'" data-id="'+id+'" data-title="'+uri_title+'" data-url="'+url+'">
               <span style="color:#000;padding:0 5px!important;">一键转发：</span>
               <a data-webid="qzone" class="popup_zf_qq" href="javascript:void();"></a>
