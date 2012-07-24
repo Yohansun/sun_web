@@ -111,7 +111,7 @@
         </ul>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
-      <li class="pr"><a href="/weekly_stars?from=top">设计鉴赏</a>
+      <li class="pr"><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计鉴赏</a>
         <ul>
           <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
           <li><a href="/designs?from=top">推荐作品</a></li>
@@ -280,7 +280,7 @@
         <li><a href="/master_designs">大师作品</a></li>
       </ul>
       <ul>
-        <li><a href="/designs" class='fb'>设计鉴赏</a></li>
+        <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class='fb'>设计鉴赏</a></li>
         <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
         <li><a href="/designs">推荐作品</a></li>
         <li><a href="/inspirations">灵感秀</a></li>
