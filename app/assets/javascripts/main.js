@@ -449,7 +449,7 @@ $(function(){
 
 $(function(){
 	$('.referr_input .radio_btn').click(function(){
-		var num = $('.radio_btn').index(this);
+		var num = $('.referr_input .radio_btn').index(this);
 		if(num==0)
 		{
 			$('#referr').fadeIn();
@@ -457,6 +457,18 @@ $(function(){
 		if(num ==1)
 		{
 			$('#referr').fadeOut()
+		}
+	})
+
+	$('.update_password .radio_btn').click(function(){
+		var num = $('.update_password .radio_btn').index(this);
+		if(num==0)
+		{
+			$('#password_update').fadeIn();
+			}
+		if(num ==1)
+		{
+			$('#password_update').fadeOut()
 		}
 	})
 	
