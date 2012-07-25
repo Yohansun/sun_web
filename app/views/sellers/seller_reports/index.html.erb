@@ -1,4 +1,4 @@
-<div class="count clear">
+<div class="count clear" style="height:auto;padding-bottom:30px;">
 	<h1>icolor经销商后台</h1>
 	<ul class="count_left fl ft15">
 		<li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
@@ -17,6 +17,8 @@
 			</ul>
 		</div><!--count_sum ends-->
 	</div><!--count_right ends-->
+
+	<%- day = MagicSetting.statistical_time.blank? ? 06 : MagicSetting.statistical_time.to_i %>
 	<table>
 		<tr>
 			<th class="tl" width="185">报告名称</th>
@@ -24,38 +26,28 @@
 			<th width="145">生成时间</th>
 			<th class="noborder" width="145">下载</th>
 		</tr>
-		<tr>
-			<td class="tl">iColor2012年4月报告</td>
-			<td>2010-3-5</td>
-			<td>2010-1-1</td>
-			<td><a href="#">下载</a></td>
-		</tr>
-		<tr>
-			<td class="tl">iColor2012年4月报告</td>
-			<td>2010-3-5</td>
-			<td>2010-1-1</td>
-			<td><a href="#">下载</a></td>
-		</tr>
-		<tr>
-			<td class="tl">iColor2012年4月报告</td>
-			<td>2010-3-5</td>
-			<td>2010-1-1</td>
-			<td><a href="#">下载</a></td>
-		</tr>
-		<tr>
-			<td class="tl">iColor2012年4月报告</td>
-			<td>2010-3-5</td>
-			<td>2010-1-1</td>
-			<td><a href="#">下载</a></td>
-		</tr>
+
+		<%- (2012..Time.now.year).each do |year| %>
+			<%- month_begin = year.eql?(2012) ? 7 : 1 %>
+			<%- (month_begin..12).each do |month| %>
+				<%- if Time.now.year.eql?(year) && Time.now.month >= month %>
+					<tr>
+						<td class="tl">iColor<%= year %>年<%= month %>月报告</td>
+						<td><%= month.eql?(12) ? year+1 : year %>-<%= month.eql?(12) ? 1 : month+1 %>-<%= day %></td>
+						<%- report = SellerReport.where("file_name like ?", "%#{year}年#{month}月%").first %>
+						<td><%= report.created_time.strftime("%Y-%m-%d %H:%M:%S") if report %></td>
+						<td><%= link_to "下载", seller_user_reports_export_path(statistical_time: "#{year}-#{month}-#{day}", file_name: "iColor#{year}年#{month}月报告") %></td>
+					</tr>
+				<%- elsif Time.now.year > year %>	
+					<tr>
+						<td class="tl">iColor<%= year %>年<%= month %>月报告</td>
+						<td><%= month.eql?(12) ? year+1 : year %>-<%= month.eql?(12) ? 1 : month+1 %>-<%= day %></td>
+						<%- report = SellerReport.where("file_name like ?", "%#{year}年#{month}月%").first %>
+						<td><%= report.created_time.strftime("%Y-%m-%d %H:%M:%S") if report %></td>
+						<td><%= link_to "下载", seller_user_reports_export_path(statistical_time: "#{year}-#{month}-#{day}", file_name: "iColor#{year}年#{month}月报告") %></td>
+					</tr>
+				<%- end %>	
+			<%- end %>
+		<%- end %>
 	</table>
-	<div class="pager ft12 cl">
-		<a href="#">&lt;</a>
-		<a href="#" class="current">1</a>
-		<a href="#">2</a>
-		<a href="#">3</a>
-		<a href="#">4</a>
-		<a href="#">5</a>
-		<a href="#">&gt;</a>
-	</div>
 </div><!--count ends-->

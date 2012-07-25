@@ -17,17 +17,28 @@ class UsersController < ApplicationController
        params[:user][:recommended_id] = ""
     end
 
+    if params[:is_upadte_psd].eql? "0"
+      params[:user].delete_if {|key,value| key =~ /password/}
+    end
+
     if current_user
       valid_result = current_user.errors.messages
       params[:user].delete("recommended")
       current_user.update_detail(params[:user])
+
+      @user = current_user
       @messages = ""
+
       if valid_result.size != 0
         valid_result.each do |key, value|
           @messages << "*" + value[0] + '\n'
         end
-        return @messages
+      else
+        # Sign in the user by passing validation in case his password changed
+        sign_in(@user, :bypass => true) if params[:is_upadte_psd].eql? "1"
       end
+
+      return @messages
     end
   end
 
@@ -52,6 +63,7 @@ class UsersController < ApplicationController
         end
         params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id
       end
+
       current_user.attributes = params[:user]
       if current_user.save(:validate => false)
         redirect_to(root_path)

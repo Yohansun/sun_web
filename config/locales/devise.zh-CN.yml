@@ -15,7 +15,7 @@ zh-CN:
             password:
               blank: "密码不能为空！"
               too_short: "密码长度不得少于6位数！"
-              confirmation: "输入确认密码您不正确，请重新输入！"
+              confirmation: "您输入的确认密码不正确，请重新输入！"
             email:
               blank: "邮箱不能为空!"
               invalid: "您输入的邮箱格式不正确，请重新输入！"
