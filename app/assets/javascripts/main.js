@@ -367,7 +367,7 @@ $(function(){
 */
 /*tips*/
 $(function(){
-	$('.faqs_title').click(function(){
+	$('.faqs_title').live('click',function(){
 		$(this).children('.tips_bullet').toggleClass('show').end();
 		$(this).next().toggle();
 		});
