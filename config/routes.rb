@@ -25,6 +25,7 @@ Icolor::Application.routes.draw do
     match "/seller_user/set_top" => "sellers/seller_data#set_top"
     match "/seller_user/apply_for_tools" => "sellers/seller_tool#apply_for_tools"
     match "/seller_user/reports" => "sellers/seller_reports#index"
+    match "/seller_user/reports/export" => "sellers/seller_reports#export"
   end
 
   devise_scope :user do

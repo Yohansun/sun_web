@@ -43,6 +43,7 @@ gem 'httmultiparty'
 
 gem 'exception_notification'
 gem 'newrelic_rpm'
+gem 'ekuseru'
 
 #发送短信
 gem 'savon'
