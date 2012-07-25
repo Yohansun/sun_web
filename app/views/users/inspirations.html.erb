@@ -1,19 +1,10 @@
 <%- content_for :tail do %>
-    <%= javascript_include_tag 'jquery.masonry' %>
-    <script type="text/javascript">
-        $(window).load(function() {
-            $('#inspiration').masonry();
-        });
-        $(function() {
-            $('.ins_box').hover(function() {
-                $(this).children('.host_ins_edit').toggle();
-            })
-        })
-    </script>
-    <!-- <div class="float_ads tr">
-      <a href="/gift"><img src="<%#= asset_path "float_ads.gif" %>"/></a><br/>
-      <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
-    </div> -->
+  <%= javascript_include_tag 'jquery.masonry' %>
+  <script type="text/javascript">
+      $(window).load(function() {
+          $('#inspiration').masonry();
+      });
+  </script>
 <%- end %>
 <div class="main signup group">
   <div class="shadow signup_box">
