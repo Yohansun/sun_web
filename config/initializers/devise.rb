@@ -249,3 +249,35 @@ Devise.setup do |config|
   end
 end
 Devise.router_name = :main_app
+
+module Devise
+  module Controllers
+    module Helpers
+      def sign_in(resource_or_scope, *args)
+
+        options  = args.extract_options!
+        scope    = Devise::Mapping.find_scope!(resource_or_scope)
+        resource = args.last || resource_or_scope
+
+        expire_session_data_after_sign_in!
+
+        if options[:bypass]
+          warden.session_serializer.store(resource, scope)
+        elsif warden.user(scope) == resource && !options.delete(:force)
+          # Do nothing. User already signed in and we are not forcing it.
+          true
+        else
+          warden.set_user(resource, options.merge!(:scope => scope))
+        end
+
+        LoginLog.create!( user_id: resource.id,
+                          current_sign_in_at: resource.current_sign_in_at,
+                          last_sign_in_at: resource.last_sign_in_at,
+                          current_sign_in_ip: resource.current_sign_in_ip,
+                          last_sign_in_ip: resource.last_sign_in_ip
+         )
+
+      end
+    end
+  end
+end
