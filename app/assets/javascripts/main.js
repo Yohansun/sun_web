@@ -386,6 +386,7 @@ $(function(){
 	makeTips('#textarea6_3',500,'#span6_3','#overflow6_3');
 	makeTips('#textarea2',400,'#ins_span','#overflow_ins');
 	SecondTip('.area_text','.words_tip');
+	makeTips('#inspiration_content',400,'#july_26','#overflow6_4')
 });
 
 	function makeTips(str,sum,string1,string2)

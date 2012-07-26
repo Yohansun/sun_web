@@ -1,47 +1,52 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'reg' %>
+  <style type="text/css">
+    .reg_list div.ins_tips {margin:134px 0 0 10px}
+  </style>
 <% end -%>
-<%= form_for([current_user, @inspiration]) do |f| %>
-<%= hidden_field_tag "user_id", current_user.id %>
-<div class="main syslist ">
-  <div class="shadow">
-    <div class="section pr">
-      <div class="sys_bar clear ft12">
-        <span class="fl ft18">上传灵感秀</span>
-      </div><!--sys_bar ends-->
-      <div class="reg_content ft14">
-        <div class="reg_list reg_width fl">
-          <%= f.label :title, "标题：" %>
-          <%= f.text_field :title, class: "works fl" -%>
-        </div><!--reg_list ends-->
-        <div class="reg_list reg_width fl">
-          <%= f.label :content, "灵感启发：" %>
-          <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
-          <div class="fl tc ins_tips ft12">
-            还可输入<span id="ins_span">400</span>字<br />
-            <!-- <%= image_submit_tag "news/upload_save.jpg", class: "add_tag_on" -%> -->
-          </div>
-        </div><!--reg_list ends-->
-        <%= image_submit_tag "news/add_img.jpg", :class => 'add_img fl' %>
-      </div><!--reg_content ends-->
-    </div><!--section ends-->
-  </div><!--shadow ends-->
-</div><!--main ends-->
-<% content_for :tail do %>
-<script type="text/javascript" charset="utf-8">
-  $(function(){
-    $("#new_inspiration").submit(function(){
-      if($("#inspiration_title").val() == ""){
-        alert("标题不能为空！");
-        return false;
-      }
-      if($("#inspiration_content").val() == ""){
-        alert("灵感启发不能为空！");
-        return false;
-      }
-    })
-  })
 
-</script>
-<%- end -%>
+<%= form_for([current_user, @inspiration]) do |f| %>
+  <%= hidden_field_tag "user_id", current_user.id %>
+  <div class="main syslist ">
+    <div class="shadow">
+      <div class="section pr">
+        <div class="sys_bar clear ft12">
+          <span class="fl ft18">上传灵感秀</span>
+        </div>
+        <div class="reg_content ft14">
+          <div class="reg_list reg_width fl">
+            <%= f.label :title, "标题：" %>
+            <%= f.text_field :title, class: "works fl" -%>
+          </div>
+          <div class="reg_list reg_width fl">
+            <%= f.label :content, "灵感启发：" %>
+            <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
+            <div class="fl tc ins_tips ft12">
+              <span id="july_26">还可输入<span>400</span>字</span>
+              <span class="none" id="overflow6_4">您已经超出<span class="cr"></span>字</span>
+              <br />   
+            </div>        
+          </div>
+          <%= image_submit_tag "news/add_img.jpg", :class => 'add_img fl' %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
+
+<% content_for :tail do %>
+  <script type="text/javascript" charset="utf-8">
+    $(function(){
+      $("#new_inspiration").submit(function(){
+        if($("#inspiration_title").val() == ""){
+          alert("标题不能为空！");
+          return false;
+        }
+        if($("#inspiration_content").val() == ""){
+          alert("灵感启发不能为空！");
+          return false;
+        }
+      })
+    });
+  </script>
+<%- end -%>
