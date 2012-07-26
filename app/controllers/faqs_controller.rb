@@ -22,17 +22,8 @@ class FaqsController < ApplicationController
     @faq = current_user.faqs.create(params[:faq])
     if @faq.save
       current_user.create_score(current_user.id, 1001, 1, 10)
-    else
-      errors = ""
-      @faq.errors.messages.each do |key, value|
-        key = key.eql?(:title) ? "标题:" : "内容:"
 
-        errors << "*" + key + value[0] + '\n'
-      end 
-
-      flash[:errors] = errors
-    end
-
-    redirect_to faqs_path
+      redirect_to faqs_path
+    end      
   end
 end

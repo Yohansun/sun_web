@@ -15,7 +15,7 @@
       <%= render :partial => "users/profile_box" %>
 
       <div class="host_main">
-        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot check_valid", :id => 'new_message'} do |f| %>
+        <%= form_for :message, :url => user_messages_path, :html => {:class => "host_msgboard line_b_dot check_valid", :id => 'new_message', :onsubmit => 'return check()'} do |f| %>
           <fieldset>
             <textarea name="message[content]" id="host_main" class="area_text">你有神马对TA说的呢？</textarea>
             <p><span class="words_tip">0</span>/140</p>
@@ -109,3 +109,14 @@
   <!--shadow ends-->
 </div>
 <!--main ends-->
+
+<% content_for :tail do %>
+  <script type="text/javascript" charset="utf-8">
+    function check () {
+      if($("#host_main").val() == "你有神马对TA说的呢？"){
+          alert("您留言的内容不能为空!");
+          return false;
+        }
+    };
+  </script>
+<%- end -%>

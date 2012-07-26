@@ -12,11 +12,6 @@
 <% end -%>
 <%- content_for :tail do %>
     <%= javascript_include_tag 'popupA' %>
-    <%= javascript_tag do -%>
-      <%- if flash[:errors].present? %>
-        alert('<%= raw flash[:errors] %>');
-      <%- end %>
-    <%- end %>
 <%- end %>
 <div class="main mar-bot45">
   <div class='sub_title tr'>
@@ -68,11 +63,11 @@
         <iframe id="upload_target" name="upload_target"></iframe>
       </div>
 
-      <%= form_for :faq, :url => faqs_path, :html => { :multipart => true, :id => 'new_faq' } do %>
+      <%= form_for :faq, :url => faqs_path, :html => { :multipart => true, :id => 'new_faq', :onsubmit => 'return check()' } do %>
           <table>
             <tr class="f_title">
               <th>标　　题：</th>
-              <td><input type="text" class="f_input" name="faq[title]"></td>
+              <td><input type="text" class="f_input" name="faq[title]" id="faq_title"></td>
             </tr>
 
             <tr class="f_image">
@@ -113,3 +108,19 @@
   <div class="popupA_mask"></div>
 </div>
 </div><!--main ends-->
+
+<% content_for :tail do %>
+  <script type="text/javascript" charset="utf-8">
+    function check () {
+      if($("#faq_title").val() == ""){
+          alert("提问标题不能为空!");
+          return false;
+        };
+      if($("#f_input").val() == ""){
+          alert("提问内容不能为空!");
+          return false;
+        }  
+    };
+  </script>
+<%- end -%>
+
