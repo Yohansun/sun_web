@@ -16,7 +16,7 @@ class MixColor < ActiveRecord::Base
     user_display_name = self.user.display_name
     user_id = self.user.id
     SysMsg.create(:content => "亲爱的#{user_display_name}您好！我们已经收到了您的配色需求，我们会在7个工作日内为您提供个性化配色建议，届时请注意查看系统消息，谢谢！",
-                  :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "icolor客服",
+                  :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "iColor客服",
                   :user_id => user_id)
   end
 

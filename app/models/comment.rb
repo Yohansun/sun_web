@@ -12,7 +12,7 @@ class Comment < ActiveRecord::Base
       user_display_name = self.user.display_name 
       user_id = self.user.id
       SysMsg.create(:content => "亲爱的#{user_display_name}用户，您的评论已成功！", 
-        :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "icolor客服", 
+        :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "iColor客服", 
         :user_id => user_id, :re_url => "/" + self.commentable_type.tableize + "/" + self.commentable_id.to_s)
 
       case self.commentable_type
@@ -23,7 +23,7 @@ class Comment < ActiveRecord::Base
       end
       if @design
         SysMsg.create(:content => "亲爱的#{@design.user.display_name}用户，您的作品“#{@design.title}”收到了新的回复，请注意查看！",
-          :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "icolor客服",
+          :reply_type => "site_message", :status => SysMsg::Status[0], :reply_name => "iColor客服",
           :user_id => @design.user.id, :re_url => "/" + self.commentable_type.tableize + "/" + self.commentable_id.to_s)
       end
     end
