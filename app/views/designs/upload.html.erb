@@ -59,7 +59,7 @@ $(function() {
 });
 
 function uploads_size () {
-  $('#design_images_size').html($(".upload_item").size());
+  $('.design_images_size').html($(".upload_item").size());
   if ($(".upload_item").size() >= 60) {
     $("#upload_photo").hide();
   } else {
@@ -71,7 +71,7 @@ function uploads_size () {
 <script type="text/javascript">
   $(function(){
     $(".load_submit").click(function(){
-      var imgCount = $("#design_images_size").text();
+      var imgCount = $(".design_images_size").text();
       if(parseInt(imgCount) == 0){
         alert("不能一张图片都没有哦");
         return false;
@@ -92,7 +92,7 @@ function uploads_size () {
       <div class="suc_content ft14 clear">
         <div class="reg_list reg_width fb">上传到作品：<%= @design.title %></div>
         <div class="work_area clear">
-          <p class="fl">您已经添加了<span id="design_images_size"><%= @design.design_images.size %></span>张图片（还可以添加<span><%= 60 - @design.design_images.size %></span>张）</p>
+          <p class="fl">您已经添加了<span class="design_images_size"><%= @design.design_images.size %></span>张图片（还可以添加<span><%= 60 - @design.design_images.size %></span>张）</p>
           <a href="#" class="re_add fr" id="upload_photo"></a>
           <div><img src="<%= asset_path "indicator.gif" %>" style="display:none;" id="upload_going"></div>
           <div class="upload_bin fl">
@@ -106,7 +106,7 @@ function uploads_size () {
               <%= render :partial => "design_images/upload", :collection => @design.design_images -%>
             </div><!--load_content ends-->
             <p class="load_footer ft12 fl">
-              共有<span id="design_images_size"><%= @design.design_images.size %></span>个文件 |
+              共有<span class="design_images_size"><%= @design.design_images.size %></span>个文件 |
               <a href="javascript:$('.upload_item').remove();uploads_size();" class="clear_all">清空列表</a>
             </p><!--load_footer ends-->
             <!-- <p class="load_total ft12 fr">总计：<span>432</span>KB</p> -->

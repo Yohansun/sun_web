@@ -93,7 +93,6 @@ class Sellers::SellerReportsController < ApplicationController
    	end 	
 
    	book.write file
-
-    send_data open(file).read, :filename => "#{title}.xls"
+    send_file file
 	end
 end

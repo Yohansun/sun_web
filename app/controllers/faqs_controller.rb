@@ -1,10 +1,11 @@
+# -*- encoding : utf-8 -*-
 class FaqsController < ApplicationController
   before_filter :find_user
 
   def index
     if @user
       @faqs = @user.faqs.page(params[:page]).per(5)
-      #@faqs = @user.customer_replies.page(params[:page]).per(5)
+
       render :template => "#{controller_name}/users/#{action_name}"
     else
       @faqs = Faq.page(params[:page]) || Faq.new
@@ -21,7 +22,8 @@ class FaqsController < ApplicationController
     @faq = current_user.faqs.create(params[:faq])
     if @faq.save
       current_user.create_score(current_user.id, 1001, 1, 10)
+
       redirect_to faqs_path
-    end
+    end      
   end
 end

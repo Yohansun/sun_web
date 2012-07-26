@@ -45,7 +45,7 @@ class HomeController < ApplicationController
     when "2"
       @results = Design.where("title like ?", "%#{params[:search_word]}%").page params[:page]
     when "3"
-      @results = User.where("username like ? or name like ?", "%#{params[:search_word]}%", "%#{params[:search_word]}%").where("role_id = 1 or role_id = 2").page params[:page]
+      @results = User.where("username like ? or name like ? or name_of_company like ?", "%#{params[:search_word]}%", "%#{params[:search_word]}%", "%#{params[:search_word]}%").where("role_id = 1 or role_id = 2").page params[:page]
     end
   end
 end

@@ -24,7 +24,7 @@ module MagicContent
                           )
 
       SysMsg.create(:content => "#{CustomerReply.where(:question_id => params[:id]).order("updated_at desc").first.try(:reply_content)}",
-                    :reply_type => "mix_color", :status => SysMsg::Status[0], :reply_name => "icolor客服",
+                    :reply_type => "mix_color", :status => SysMsg::Status[0], :reply_name => "iColor客服",
                     :user_id => resource.user.id)
       if @reply
         MixColor.update(params[:id], :status => 1)
