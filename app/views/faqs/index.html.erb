@@ -12,6 +12,11 @@
 <% end -%>
 <%- content_for :tail do %>
     <%= javascript_include_tag 'popupA' %>
+    <%= javascript_tag do -%>
+      <%- if flash[:errors].present? %>
+        alert('<%= raw flash[:errors] %>');
+      <%- end %>
+    <%- end %>
 <%- end %>
 <div class="main mar-bot45">
   <div class='sub_title tr'>
