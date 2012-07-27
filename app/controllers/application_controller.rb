@@ -53,7 +53,11 @@ class ApplicationController < ActionController::Base
           render :template => "users/skins/weekly_star/index"
       end
     else
-      render :template => "users/#{controller_name}"
+      if params[:action].eql? "community"
+        render :template => "users/community"
+      else
+        render :template => "users/#{controller_name}"
+      end
     end
   end
 end
