@@ -113,9 +113,9 @@
 .review_listA li{zoom:1;vertical-align:top}
 .review_listA li:after{content:'';display:block;clear:both}
 .review_listA .bar{padding:0 18px;height:22px;border-top:1px solid #dcdcdc;line-height:22px;font-size:14px;background:#f3f3f3}
-.review_listA .bar .user{float:left;font-weight:bold;color:#333}
+.review_listA .bar .user{float:left;font-weight:bold;color:#333;line-height:22px;}
 .review_listA .bar .time{float:right;color:#909090}
-.review_listA .content{float:left;width:750px;padding:25px 0 25px 18px;font-size:14px;word-break:break-word;}
+.review_listA .content{float:left;width:750px;padding:25px 0 25px 18px;font-size:14px;white-space: normal;word-wrap: break-word;line-height:20px;}
 
 .review_listA .reply{float:right;display:inline}
 .review_listA .reply a{display:block;margin:25px 18px;padding-left:24px;padding-bottom:10px;height:20px;color:#565656;font-size:14px;background:url(<%= asset_path "design/reply.gif"%>) no-repeat 0 2px}
@@ -234,3 +234,4 @@
 .this_week_tab li.this_week_btnhover a{color:#a94305;}
 .color_star{position: absolute;width:79px;height:76px;right:-8px;top:-8px;}
 .design_star{position: absolute;width:82px;height:74px;right:-10px;top:-9px;}
+

@@ -192,7 +192,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 
 /*hsot ins edit*/
 .host_ins_edit{ position:absolute; /*right:8px!important;*/width:150px;display: none;}
-.host_works_edit{ position:absolute;/* right:9px;bottom:104px;*/ width:150px;display: none;}
+.host_works_edit{ position:absolute;/* right:9px;bottom:104px;*/ min-width:150px;_width:150px;display: none;}
 
 .host_ins_edit a,.host_works_edit a{ float:right; margin-left:10px; padding:3px 5px 3px 20px; background:#4c4c4c url(<%= asset_path "personal/signup_icon.png"%>) no-repeat 5px -249px; font:12px "arial simsun"; color:#fff;}
 .host_ins_edit a.ins_img_edit,.host_works_edit a.works_img_edit{ background-position:5px -233px;}
@@ -210,6 +210,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 .host_self img.box_shadow{ padding:2px;border:1px solid #cccccc;box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
 .signup_img_box p{ text-align:center; margin:10px 0;}
 .signup_img_box p a{font:14px "Microsoft Yahei";color:#666666; text-decoration:underline;}
+.signup_img_box p a.ft_red{color:red;}
 .host_self .host_status{float:right; position:relative; width:620px;}
 .host_self .host_status h2 {height:30px;overflow:hidden;font:18px "Microsoft Yahei"; color:#000;margin:5px 0;padding-left:7px;zoom:1;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(<%= asset_path "personal/gold_icon.png"%>) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
@@ -470,6 +471,7 @@ a.per_works_pagebtn.per_works_next{background-position:0 0;left:944px;}
 .per_ads_kv .bullets{width:120px;top:278px;left:535px;}
 .per_firm_r{float: right;width:297px;}
 .per_firm_r .per_firm_info{position: relative;margin:0 30px;}
+.per_firm_w .per_firm_r .per_firm_info{position: relative;margin:0 25px;}
 .per_firm_r .per_firm_info img{border:2px solid #483d46;}
 .per_firm_r .per_firm_info p{font-size:14px;color:#fff;height:30px;line-height:30px;}
 .per_firm_r .per_firm_info p span{font-size:12px;color:#ff9435;float: right;}
@@ -522,7 +524,6 @@ span.popup_zf span{color:#222!important;padding:0 3px!important;}
 .icon_f_weibo{background-position:0 -35px;}
 .icon_f_addr{background-position:0 -59px;}
 .icon_f_tel{background-position:0 -86px;}
-
 /*personalized page------write*/
 .write_main{width:953px;margin:0 auto;background:#fff;padding:140px 20px 0;}
 .write_main .per_firm_l{width:646px;background:#fff;}
@@ -938,27 +939,21 @@ ul.color_square{ overflow:hidden; padding:50px 40px 20px; width:730px;}
 .gift_step2_conbg{ position:absolute; top:85px; right:60px;}
 .gift_step3_conbg{ position:absolute; top:150px; right:70px;}
 /*gift3*/
-.art_step .awards_list{position:relative;border:1px solid #d7d7d7;background:#ffffff;margin:10px 0;}
-.art_step .awards_list h3{height:30px;line-height:30px;padding:0;/*text-align:center;*/}
+.art_step .awards_list{position:relative;border:1px solid #d7d7d7;margin:10px 0;background:#fff url(<%= asset_path "soild_line.png"%>) repeat-x 0 35px;}
+.art_step .awards_list h3{height:30px;line-height:30px;padding:0;/*text-align:center;*/font-style:normal;}
 .art_step .awards_list div.awards_list_container{margin:0 0 0 225px;width:520px;overflow:hidden;}
 .art_step .awards_list div.awards_list_container.marl155{margin-left:155px;}
 .art_step .awards_list div.awards_list_container.marl155 .awards_date{padding-left:70px;}
-.art_step .awards_list{position:relative;border:1px solid #d7d7d7;margin:10px 0;background:#fff url(/assets/soild_line.png) repeat-x 0 35px;}
-.art_step .awards_list h3{height:30px;line-height:30px;padding:0;font-style:normal;}
-.art_step .awards_list div.awards_list_container{margin:0 auto;width:520px;overflow:hidden;}
 .art_step .awards_list div div.awards_list_slides{width:50000px;}
 .art_step .awards_list div div.awards_list_slides td{vertical-align:top;min-width:75px;}
 .art_step .awards_list ul{width:520px;float:left;padding:0 0 20px;}
 .art_step .awards_list ul li{overflow:hidden;padding:5px 0;}
-.art_step .awards_list ul span,.art_step .awards_list ul strong,.art_step .awards_list ul em{line-height:20px;display: block;}
-.art_step .awards_list ul span{float:left;color:#666666;font-size:15px;}
-.art_step .awards_list ul strong{float:left;color:#459f1c;font-size:18px;width:200px;}
-.art_step .awards_list ul em{float:left;color:#666666;font-size:18px;font-style:normal;font-weight:normal;}
 .art_step .awards_list ul span,.art_step .awards_list ul strong,.art_step .awards_list ul em{float:left;line-height:20px;display: block;overflow: hidden;}
 .art_step .awards_list ul span{width:250px;color:#666666;font-size:15px;}
 .art_step .awards_list ul strong{color:#459f1c;font-size:16px;width:200px;}
 .art_step .awards_list ul em{width:70px;color:#666666;font-size:18px;font-style:normal;font-weight:normal;}
 .art_step .awards_list ul ul{float: left;width:auto;padding:0;}
+.art_step .awards_list ul ul li{padding:0 0 10px;line-height:20px;}
 .art_step .awards_list a{position: absolute;width:33px;height:59px;top:50%;left:50px;margin-top:-16px;}
 .art_step .awards_list a.awards_per{left:810px;}
 
@@ -1145,4 +1140,4 @@ span.list_icon{background:url(<%= asset_path "show/list_icon.png"%>) no-repeat!i
 .act_beijing .beijing2012_1 p{margin-top:50px;}
 .beijing_video{width:553px;height:296px;}
 
-.per_firm_w{background:#050505 url(/assets/personal/firm_write_bg.jpg) fixed no-repeat center top;color:#fff;}
+.per_firm_w{background:#050505 url(<%= asset_path "personal/firm_write_bg.jpg"%>) fixed no-repeat center top;color:#fff;}

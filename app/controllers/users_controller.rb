@@ -17,10 +17,6 @@ class UsersController < ApplicationController
        params[:user][:recommended_id] = ""
     end
 
-    if params[:is_upadte_psd].eql? "0"
-      params[:user].delete_if {|key,value| key =~ /password/}
-    end
-
     if current_user
       valid_result = current_user.errors.messages
       params[:user].delete("recommended")
@@ -33,12 +29,9 @@ class UsersController < ApplicationController
         valid_result.each do |key, value|
           @messages << "*" + value[0] + '\n'
         end
-      else
-        # Sign in the user by passing validation in case his password changed
-        sign_in(@user, :bypass => true) if params[:is_upadte_psd].eql? "1"
-      end
 
-      return @messages
+        return @messages
+      end      
     end
   end
 
@@ -74,7 +67,25 @@ class UsersController < ApplicationController
   end
 
   def omniauth_user
+  end
 
+  def reset_password
+    if params[:reset_psd]
+      @user = current_user
+      current_user.update_attributes params[:user]
+
+      if current_user.errors.messages.present?
+        errors = ""
+        current_user.errors.messages[:password].each do |error|
+          errors << "*" + error + '\n'
+        end
+        flash[:errors] = errors
+        redirect_to :back
+      else
+        sign_in(@user, :bypass => true)
+        redirect_to user_path(@user)
+      end
+    end
   end
 
   def community
