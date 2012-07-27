@@ -113,7 +113,16 @@
 		</ul>
 
 		<div class="per_firm_info">
-			<%= show_avatar(@user,"original","233x233") %>
+			<div class="works_box pr">
+				<div class="host_works_edit">
+					<%- if current_user && current_user == @user %>							
+						<%= link_to "密码修改", users_passwords_reset_path, class: "works_img_edit" %>
+						<%= link_to "修改账户信息", edit_user_path(current_user), class: "works_img_edit" %>
+					<%- end %>		
+				</div>
+				<%= show_avatar(@user,"original","233x233") %>
+			</div>
+
 			<div class="per_firm_colorbar"><img src="<%= asset_path "personal/per_firm_colorbar.png"%>"></div>
 			<p><span><i class="icon_golden"></i>金牌会员</span><%= @user.display_name %>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 		</div>

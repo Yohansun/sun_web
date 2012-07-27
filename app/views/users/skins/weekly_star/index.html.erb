@@ -34,13 +34,14 @@
     <div class="per_intr_l">
       <div class="works_box pr">
         <div class="host_works_edit">
-          <%- if current_user && current_user == @user %>
-            <%= link_to "修改账户信息", edit_user_path(current_user), class: "works_img_edit" %>
-          <%- end %>
+          <%- if current_user && current_user == @user %>             
+          <%= link_to "密码修改", users_passwords_reset_path, class: "works_img_edit" %>
+          <%= link_to "修改账户信息", edit_user_path(current_user), class: "works_img_edit" %>
+          <%- end %>    
         </div>
-        <a><%= show_avatar(@user,"original","252x251") %></a>
+        <%= show_avatar(@user,"original","233x233") %>
       </div>
-      
+
       <div>
         <em><%= @user.display_name %></em><span>金牌会员</span>
       </div>

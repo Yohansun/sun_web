@@ -10,7 +10,8 @@ Icolor::Application.routes.draw do
   resources :yda_games, :only => [:create]
 
   devise_for :users, :controllers => { :registrations      => "users/register",
-                                       :sessions           => "users/sessions", :passwords => "users/passwords",
+                                       :sessions           => "users/sessions", 
+                                       :passwords          => "users/passwords",
                                        :omniauth_callbacks => "users/omniauth_callbacks" }
 
   devise_for :seller_users, :controllers => { :sessions => "sellers/sessions"}
@@ -34,6 +35,7 @@ Icolor::Application.routes.draw do
     match "/users/suc_regist" => "users/register#suc_regist"
     match "/users/username_check" => "users/register#username_check"
     match "/users/passwords/send_suc" => "users/passwords#send_suc"
+    match "/users/passwords/reset" => "users#reset_password"
     match "/users/policy" => "users/register#policy"
   end
 

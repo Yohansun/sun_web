@@ -31,7 +31,7 @@ $(document).ready(function() {
     <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
     <% end -%>
     <%- if current_user && current_user == @user %>
-    <p><%= link_to "修改账户信息", edit_user_path(current_user) %></p>
+      <p><%= link_to "修改账户信息", edit_user_path(current_user) %> / <%= link_to "密码修改", users_passwords_reset_path, class: "ft_red" %></p>      
     <%- end %>
   </div>
   <div class="host_status">

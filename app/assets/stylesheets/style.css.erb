@@ -192,7 +192,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 
 /*hsot ins edit*/
 .host_ins_edit{ position:absolute; /*right:8px!important;*/width:150px;display: none;}
-.host_works_edit{ position:absolute;/* right:9px;bottom:104px;*/ width:150px;display: none;}
+.host_works_edit{ position:absolute;/* right:9px;bottom:104px;*/ min-width:150px;_width:150px;display: none;}
 
 .host_ins_edit a,.host_works_edit a{ float:right; margin-left:10px; padding:3px 5px 3px 20px; background:#4c4c4c url(<%= asset_path "personal/signup_icon.png"%>) no-repeat 5px -249px; font:12px "arial simsun"; color:#fff;}
 .host_ins_edit a.ins_img_edit,.host_works_edit a.works_img_edit{ background-position:5px -233px;}
@@ -210,6 +210,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 .host_self img.box_shadow{ padding:2px;border:1px solid #cccccc;box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
 .signup_img_box p{ text-align:center; margin:10px 0;}
 .signup_img_box p a{font:14px "Microsoft Yahei";color:#666666; text-decoration:underline;}
+.signup_img_box p a.ft_red{color:red;}
 .host_self .host_status{float:right; position:relative; width:620px;}
 .host_self .host_status h2 {height:30px;overflow:hidden;font:18px "Microsoft Yahei"; color:#000;margin:5px 0;padding-left:7px;zoom:1;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(<%= asset_path "personal/gold_icon.png"%>) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
@@ -470,6 +471,7 @@ a.per_works_pagebtn.per_works_next{background-position:0 0;left:944px;}
 .per_ads_kv .bullets{width:120px;top:278px;left:535px;}
 .per_firm_r{float: right;width:297px;}
 .per_firm_r .per_firm_info{position: relative;margin:0 30px;}
+.per_firm_w .per_firm_r .per_firm_info{position: relative;margin:0 25px;}
 .per_firm_r .per_firm_info img{border:2px solid #483d46;}
 .per_firm_r .per_firm_info p{font-size:14px;color:#fff;height:30px;line-height:30px;}
 .per_firm_r .per_firm_info p span{font-size:12px;color:#ff9435;float: right;}
