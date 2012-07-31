@@ -11,12 +11,15 @@ class WeeklyStarsController < ApplicationController
     design_id = @design.design_link.split("/").last
     @link_design = Design.find(design_id)
 
-    star_ids = []
-    3.times do |t|
-      star = WeeklyStar.where(star_type_id: t+1).order("published_at desc").first
-      star_ids << star.id if star.present?
-    end  
-    @elder_designs = WeeklyStar.where("id not in (?)", star_ids).order("published_at desc").page(params[:page]).per(8)
+    #每周之星
+    weekly_star = designs.where(star_type_id: 1).first
+
+    # star_ids = []
+    # 3.times do |t|
+    #   star = WeeklyStar.where(star_type_id: t+1).order("published_at desc").first
+    #   star_ids << star.id if star.present?
+    # end  
+    @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(8)
   end
 
   def show
