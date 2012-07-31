@@ -41,7 +41,7 @@ $(function(){
 	var $box_confirm= $('.box_confirm');
 
 	lay_in();
-	$box_confirm.fadeIn();
+	$box_confirm.show();
 
 	$('html,body').keydown(function(event){
 		if($('#box_layer').is(':visible')){
@@ -52,8 +52,14 @@ $(function(){
 	});
 	$('#confirm_form').submit(function(){
 		if($('#do_in').attr('checked') == 'checked'){
-			<% @yda_game = YdaGame.new %>
-			$box_confirm.hide().next('.box_bin').show();
+			<%-	@yda_game = YdaGame.new %>
+			$('#design_is_yda').val(1);
+			<%- if current_user.yda_game %>
+				$box_confirm.hide();
+				$('#box_layer').fadeOut();
+			<%- else %>
+				$box_confirm.hide().next('.box_bin').show();
+			<%- end %>
 			return false;
 		}else{
 			$('#box_layer').fadeOut();
@@ -75,7 +81,7 @@ $(function(){
 
 
 function lay_in(){
-	$('#box_layer').fadeIn();
+	$('#box_layer').show();
 }
 function lay_out(){
 	$('#box_layer').fadeOut();

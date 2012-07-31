@@ -5,7 +5,8 @@ class Design < ActiveRecord::Base
   acts_as_taggable
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
-    :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color, :recommend_color_category1
+    :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color, 
+    :recommend_color_category1, :is_yda
   validates_presence_of :title, :content, :reason, :design_color, :area_id
 
   belongs_to :user
