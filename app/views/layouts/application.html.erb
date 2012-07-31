@@ -353,6 +353,20 @@
     // show login window for un-login user
     $(function () {
 
+      //订阅电子期刊
+      if ($(".subscribe")) {
+            $(".subscribe").click(function (event) {
+                <% if current_user -%>
+                  o_in();
+                  $('#july_last').show().find('input[type=text]').val('');
+                  $('.subs_err').hide();
+                <% else -%>
+                  show_login();
+                  return false;
+                <% end -%>
+            });
+        };
+
       //礼从天降登陆身份验证
       if ($("#gift_login")) {
             $("#gift_login").click(function (event) {
@@ -366,8 +380,7 @@
                 return false;
                 <% end -%>
             });
-        }
-        ;
+        };
 
       if ($("#per_form")) {
             $("#per_form").submit(function (event) {
