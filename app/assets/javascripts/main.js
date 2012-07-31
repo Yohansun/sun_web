@@ -61,13 +61,18 @@ function o_out(){
 function show_login(){
 	o_in();
 	$('.unlogin').show();
-		$("#design_message").hide();
+	$("#design_message").hide();
 }
 
 function colors(){
 	o_in();
 	$("#design_message").show();
-}    
+} 
+
+function close_all(){
+    $('.abs_center').hide();
+    o_out();
+}   
 
 function inputBlank(area){
 	area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
@@ -113,36 +118,27 @@ $(function(){
 		$(this).parents('.server_suc').hide();
         $('.server_area').css('width','41px');
 	});
-	$('a.close_btn').click(shut_center=function(){
-		$(this).parents('.abs_center').hide();
-		o_out();
-	});
+  $('a.close_btn').click(close_all);
+  $('#overlay').click(close_all);
+
 	$('body').keydown(function(e){
-		if(e.which == 27)
-		{
-			shut_center();
-			$('.abs_center').hide();
+		if(e.which == 27){
+      close_all();
 		}
 		});
-	$('#overlay').click(function(){
-		shut_center();
-		});
-	$('#overlay').children().click(function(e){
-		e.stopPropagation();
-		});
 
-	$('a.subscribe').click(function(){
+/*	$('a.subscribe').click(function(){
 		if($('.subs_suc').is(':visible'))return false;
 		o_in();
-		$('.subs_input').show().find('input[type=text]').val('');
+		$('#july_last').show().find('input[type=text]').val('');
 		$('.subs_err').hide();
-	});
+	});*/
 	$('form#subs_form').submit(function(){
 		var subs = $('#subs_form :input[type=text]').val();
 		if(isEmail(subs))
 		{
 			$('.subs_err').hide();
-			$('.subs_input').hide();
+			$('#july_last').hide();
 			$('.subs_suc').show();
 		}
 		else{
@@ -150,24 +146,12 @@ $(function(){
 		}
 		return false;
 	});
-	$('.subs_suc :input').click(shut_center);
+	$('.subs_suc :input').click(close_all);
 
 	function isEmail(str){
        var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
        return reg.test(str);
 	}
-
-///*form.check_valid*/
-//    $('form.check_valid').submit(function(){
-//        var $area = $(this).find('textarea');
-//        var txt = $area.val();
-//        if(txt=='')
-//        {
-//            inputBlank($area);
-//            return false;
-//        }
-//    });
-
 });
 
 /*kv slides*/

@@ -79,8 +79,10 @@ class DesignsController < ApplicationController
         image.is_cover = true
         image.save
       end
-      #redirect_to action: 'index'
-      render :js => "colors();"
+
+      if @design.is_yda?
+        render :js => "colors();"
+      end          
     else
       render :action => 'edit'
     end
