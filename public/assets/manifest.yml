@@ -560,7 +560,7 @@ indicator.gif: indicator-100a4b5167714ce60651967a44653653.gif
 jiathis.jpg: jiathis-682325688f5ceb8e1b46f1eef237b3e2.jpg
 kv.jpg: kv-c3cada3b4177c033c41d426855f4514f.jpg
 kv1.jpg: kv1-e80eb6c347083e1d6276afb47728e8d4.jpg
-kv10.jpg: kv10-cede462c905c6be82d3a1bd2d16f63ac.jpg
+kv10.jpeg: kv10-64ce4b7a698ae3927262a68ed2dbe963.jpeg
 kv2.jpg: kv2-83547c473ab56cbd00efc2cac8dfd35d.jpg
 kv3.jpg: kv3-1d96ecab8ab4d946b1340a5ec66783c2.jpg
 kv4-1.jpg: kv4-1-d134cc256be233f106632079c9941188.jpg
@@ -1193,7 +1193,7 @@ yda/yda_step4.png: yda/yda_step4-c2c4c9f95f19bcf055a974b6efa0b76d.png
 yda/yda_theme.png: yda/yda_theme-7a433921cedfb385bac4bb3d10b76638.png
 Imageflow.js: Imageflow-0ac0d083981167f254c7c2e1d4d46d4a.js
 LinkageSelect.js: LinkageSelect-4947a5a2b66b378eb38623ddb4aa35a4.js
-application.js: application-111d797be04331a2a7c5f46957f37a00.js
+application.js: application-fd9c01633c1da7befeccd887b787527f.js
 areas.js: areas-3af39f1da6f167c2cbf453ed74daff3d.js
 art.js: art-2a05290ff1904197457ffcea88188ff1.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-620d43cb2597208020321dc63903ae03.js
@@ -1233,7 +1233,7 @@ magic_content/mix_colors.js: magic_content/mix_colors-3af39f1da6f167c2cbf453ed74
 magic_content/tools.js: magic_content/tools-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star.js: magic_content/weekly_star-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-3af39f1da6f167c2cbf453ed74daff3d.js
-main.js: main-22f28b0a0027e7e8655372d6abbc307a.js
+main.js: main-a3123f25633f9fbdee58e049af75495d.js
 myfocus.js: myfocus-e63c0ae8c1fc09de2ab098788e97d092.js
 owners_channel_upload_form.js: owners_channel_upload_form-74f99c9cc3b8399cba1e59b655869b7a.js
 popupA.js: popupA-595aebd5f41ce9eebce0443355c41e14.js
@@ -1249,10 +1249,10 @@ tagcloud/js-cumulus.js: tagcloud/js-cumulus-cc46d091628b1f8d6e1786b7e30665fe.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-61e4b0ac948b41a18405f5442d0b4c0e.js
 yda.js: yda-2b57183c7722c2882f54a4b59ed7aeba.js
 yda_games.js: yda_games-3af39f1da6f167c2cbf453ed74daff3d.js
-application.css: application-2dbc4e64c617c735ab71ae795abb4a95.css
+application.css: application-7cf6ff5ad32b9dffcb95bf9498fa29a8.css
 areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
 art.css: art-d79a97f41349d37a01e69cacb18716da.css
-base.css: base-8870476ce5b8a7a465abb83dcdf6277c.css
+base.css: base-cda70609cd251cdb91b046c29c0e367a.css
 count.css: count-88da7a26b516136d2d699a27cf8b5644.css
 dd.css: dd-404c3f4285a8910d974be4048193c4a2.css
 exciting_activities.css: exciting_activities-be011a8fcb242e7cb4f1cc89a8b89a00.css
