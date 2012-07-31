@@ -11,7 +11,11 @@
     #design_style, #design_design_color{width:108px;}
     #design_recommend_color_category1, #province, #city{background:white;border:1px solid #ccc;width:108px}
   </style>
+  <% if current_user && current_user.reading_designer? %>
+    <%= render :partial => "/yda_games/new" %>
+  <% end %>
 <% end -%>
+
 <% content_for :tail do -%>
 <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
 <%= javascript_include_tag "jquery.autocomplete.js", "uncompressed.jquery.dd.js" %>
@@ -102,6 +106,7 @@ function add_tag(text){
 
 <%= form_for([current_user, @design]) do |f| %>
 <%= hidden_field_tag "user_id", current_user.id %>
+<%= hidden_field_tag "design[is_yda]", 0 %>
 <div class="main syslist uploads">
   <div class="shadow">
     <div class="section">
@@ -201,8 +206,4 @@ function add_tag(text){
     </div><!--section ends-->
   </div><!--shadow ends-->
 </div><!--main ends-->
-<% end %>
-
-<% if current_user && current_user.reading_designer? && !current_user.ydaed? %>
-  <%= render :partial => "/yda_games/new" %>
 <% end %>
