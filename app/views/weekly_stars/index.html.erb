@@ -171,7 +171,7 @@
                             content_tag(:div, image_tag(asset_path "weekstar/design_star.png"), class: "design_star") 
                         end
                       %>   
-                      <a href="/weekly_stars/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/></a>
+                      <a href="/weekly_stars/<%= design.id %>" style="display: block;overflow: hidden;"><img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/></a>
                       <h3 title="<%= design.design_name %>"><%= truncate(design.design_name, :length => 16) %></h3>
                       <p class="p1 group">
                         <strong class="ft14 fb">所获票数：<%= link_design.try(:votes_count) || 0 %></strong>
