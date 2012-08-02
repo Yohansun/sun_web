@@ -211,9 +211,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :weibo, '977841144', '4e79f6cc7ea4f3467413faa048648c08'
-  config.omniauth :qq_connect, '100255284', '4ba3d90d37bf44585e4fd6c29f00ae1b'
-  config.omniauth :renren, '382eab67b82948c9b9d9ef23762ee6a0', '9fd3b3435051414db2162f56025aeb03'
-  config.omniauth :kaixin, '117776322358cc65172cd04298f00709', 'e961cb1566b803fac0e46861e9126230'
+  config.omniauth :qq_connect, '100255284', '4ba3d90d37bf44585e4fd6c29f00ae1b', {:scope => 'get_user_info,add_t'}
+  config.omniauth :renren, '382eab67b82948c9b9d9ef23762ee6a0', '9fd3b3435051414db2162f56025aeb03', {:scope => 'publish_feed'}
+  config.omniauth :kaixin, '117776322358cc65172cd04298f00709', 'e961cb1566b803fac0e46861e9126230', {:scope => 'create_records'}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
