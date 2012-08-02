@@ -18,6 +18,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       when "renren"
         omniauth['name'] = omniauth["info"]["name"]
         omniauth['sex'] = omniauth["info"]["gender"] == 'Male' ? 1 : 0
+        omniauth['access_token'] = omniauth["credentials"]["token"]
       when "kaixin"
         omniauth['name'] = omniauth["info"]["name"]
         omniauth['sex'] = omniauth["info"]["gender"] == 'Male' ? 1 : 0
