@@ -8,7 +8,8 @@ MagicContent.extra_settings = [
    # {:tag => 'text_field_tag', :key => 'recommend_designers', :label => '片区快查推荐设计师或家装公司(列表)'},
     {:tag => 'text_field_tag', :key => 'weibo_keywords', :label => '微博关键字'},
     {:tag => 'text_field_tag', :key => 'recommend_designs', :label => '推荐作品'},
-    {:tag => 'text_field_tag', :key => 'statistical_time', :label => "iColor经销商报表统计截至日期(单位:日)"}
+    {:tag => 'text_field_tag', :key => 'statistical_time', :label => "iColor经销商报表统计截至日期(单位:日)"},
+    {:tag => 'text_area_tag', :key => 'kv_of_home_index', :label => "首页KV自定义代码"}
 ]
 
 MagicContent.extra_menu_items = [
