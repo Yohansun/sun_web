@@ -54,7 +54,7 @@ class Mood < ActiveRecord::Base
 
   protected
 
-  def build_params(args)
+  def self.build_params(args)
     secret_key = "9fd3b3435051414db2162f56025aeb03"
     params = {}
     params[:v] = '1.0'
@@ -62,7 +62,7 @@ class Mood < ActiveRecord::Base
     params[:name] = 'iColor彩色心情'
     params[:description] = args[:content]
     params[:access_token] = args[:access_token]
-    params[:url] = 'http://www.icolor.com.cn'
+    params[:url] = 'www.icolor.com.cn'
     params[:sig] = Digest::MD5.hexdigest(params.map{|k,v| "#{k}=#{v}"}.sort.join + secret_key)
     params
   end
