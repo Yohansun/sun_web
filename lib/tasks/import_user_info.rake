@@ -3,18 +3,28 @@
 desc "导入用户"
 task :source_user_infom => :environment  do
 	tmp = []                                              
-	CSV.open("shenyang_imported_201207012.csv", 'wb') do |csv|
-		CSV.foreach("#{Rails.root}/lib/data/2012_icolor_user/201207012_shenyang.csv") do |row|
+	CSV.open("mix_imported_20120803.csv", 'wb') do |csv|
+		CSV.foreach("#{Rails.root}/lib/data/2012_icolor_user/20120803_mix.csv") do |row|
 			puts "starting................"
 
-			area_name = row[0] ? row[0].force_encoding("UTF-8") : nil
-            username = row[1] ? row[1].force_encoding("UTF-8") : nil
-			company = row[1] ? row[1].force_encoding("UTF-8") : nil
-			name = row[2] ? row[2].force_encoding("UTF-8") : nil
-			email = row[3] ? row[3].force_encoding("UTF-8") : nil
-			phone = row[4] ? row[4].force_encoding("UTF-8") : nil
-			#qq = row[5] ? row[5].force_encoding("UTF-8") : nil
-			company_address = row[5] ? row[5].force_encoding("UTF-8") : nil
+            role = row[0] ? row[0].force_encoding("UTF-8") : nil
+            if role == "家装公司"
+				role_id = 2  				
+			else
+				role_id = 1
+				des_status = 0
+			end
+
+			p row[0]
+
+			area_name = row[1] ? row[1].force_encoding("UTF-8") : nil
+            username = row[2] ? row[2].force_encoding("UTF-8") : nil
+            name = row[3] ? row[3].force_encoding("UTF-8") : nil
+			company = row[4] ? row[4].force_encoding("UTF-8") : nil			
+			email = row[5] ? row[5].force_encoding("UTF-8") : nil
+			phone = row[6] ? row[6].force_encoding("UTF-8") : nil
+			qq = row[7] ? row[7].force_encoding("UTF-8") : nil
+			company_address = row[8] ? row[8].force_encoding("UTF-8") : nil
 
 			user = User.where("email like '%#{email}%' AND phone like '%#{phone}%'").first
 			user_clarify = User.where("username like '%#{username}%'").first
@@ -28,7 +38,7 @@ task :source_user_infom => :environment  do
 					:username => username,					
 					:name_of_company => company,
 					:name => name,
-					:role_id => 2,
+					:role_id => role_id,
 					:phone => phone,
 					:email => email,
 					:password => "123456",
@@ -36,8 +46,9 @@ task :source_user_infom => :environment  do
 					:area_id => area.id,
 					:is_read => true,
 					:is_imported => true,
+					:des_status => des_status,
 					:company_address => company_address,   #new add features
-                   # :qq => qq
+                    :qq => qq
 				)				
 		    	
 			    unless u.save
@@ -50,19 +61,13 @@ task :source_user_infom => :environment  do
 				    csv << [u.email, u.username, u.reset_password_token]
 			    end
 			else
-				if user && user.role_id != 2
-			 	user.role_id = 2
-                user.save
-			 	p "role_id adjusted"
-			 	tmp << "#{row[1]} -- #{row[3]} -- #{row[4]} -- role id adjusted"
-			    else
-			  	tmp << "#{row[1]} -- #{row[3]} -- #{row[4]}"
-			    end
+			    p "user already exist"				
+			  	tmp << "#{row[1]},#{row[3]},#{row[4]}"
 			end
-		end
+	    end
 	end
 
-	CSV.open("shenyangfailedtasks_201207012.csv", 'wb') do |csv|
+	CSV.open("mixfailedtasks_20120803.csv", 'wb') do |csv|
 		tmp.each {|f| csv << [f]}
 	end
 
