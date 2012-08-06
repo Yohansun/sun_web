@@ -4,6 +4,8 @@ class WeeklyStarsController < ApplicationController
   helper_method :star_blank?
 
   def index
+    params[:star_type] ||= "每周之星"
+
     designs = WeeklyStar.order("published_at desc") || WeeklyStar.new
     star_type_id = WeeklyStar.get_star_type_id params[:star_type]
 
