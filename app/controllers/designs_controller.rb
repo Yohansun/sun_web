@@ -30,7 +30,7 @@ class DesignsController < ApplicationController
 
   def fullscreen
     @design = @user.designs.find(params[:id])
-    @design_next = Design.where("id > ?", params[:id]).first
+    @design_next = Design.includes(:design_images).where("designs.id > ? and design_images.file_file_size > ?", params[:id], 0).first
     render :layout => nil
   end
 
