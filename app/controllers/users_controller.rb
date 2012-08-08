@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       user = User.find_by_username(params[:user][:recommended_name])
       params[:user][:recommended_id] = user.id unless user.blank?
     else
-       params[:user][:recommended_id] = ""
+      params[:user][:recommended_id] = ""
     end
 
     if current_user
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       @messages = ""
 
       if valid_result.size != 0
-        valid_result.each do |key, value|
+        valid_result.each_pair do |_, value|
           @messages << "*" + value[0] + '\n'
         end
 
@@ -58,10 +58,20 @@ class UsersController < ApplicationController
       end
 
       current_user.attributes = params[:user]
-      if current_user.save(:validate => false)
+      if current_user.save
         redirect_to(root_path)
       else
-        render :action => "omniauth_user"
+        valid_result = current_user.errors.messages
+
+        if valid_result.size != 0
+          errors = ""
+          valid_result.each_pair do |_, value|
+            errors << "*" + value[0] + '\n'
+          end
+
+          flash[:errors] = errors
+          render :action => "omniauth_user"
+        end
       end
     end
   end

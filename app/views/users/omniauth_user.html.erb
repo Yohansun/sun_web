@@ -29,7 +29,7 @@
           <span class="recommand fl">否</span>
         </div>
         <div class="reg_list reg_width fl">
-          <label for="uesername">所在地：</label>
+          <label for="uesername"><span>*</span>所在地：</label>
           <div class="fl">
             <select id="province" class="level_1 fl" name="user[state]"></select>
             <select id="city" class="level_2 fl" name = user[city]></select>
@@ -37,6 +37,19 @@
             <span class="reg_tip3 fl">注：如果系统辩识有误，请手动选择</span>
           </div>
         </div><!--reg_list ends-->
+
+         <div class="reg_list reg_width fl">
+          <label for="uesername"><span>*</span>联系电话：</label>
+          <input type="text" class="username fl" name="user[phone]" id="user_phone"/>
+          <span class="reg_tip3 fl">请填写您常用电话以便通知获奖信息</span>
+        </div><!--reg_list ends-->
+
+        <div class="reg_list reg_width fl">
+          <label for="recommander"><span>*</span>Email：</label>
+          <input type="text" class="username fl" name="user[email]" id="email"/>
+          <span class="reg_tip3 fl">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
+        </div><!--reg_list ends-->
+
         <br style="float:left;display:inline;clear:both;" />
         <p class="tc">
         <input type="image" style="_margin-top:-20px;" src="<%= asset_path "news/reg_next.jpg" %>" />
@@ -61,3 +74,10 @@
 
     });
 </script>
+<%- content_for :tail do %>
+  <%= javascript_tag do -%>
+    <%- if flash[:errors] %>
+      alert('<%= raw flash[:errors] %>');
+    <%- end %>
+  <%- end %>
+<%- end %>  
