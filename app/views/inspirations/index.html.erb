@@ -2,7 +2,7 @@
     <%= stylesheet_link_tag 'style' %>
     <style type="text/css">
      .popup_zf {
-            bottom: 3px;
+            bottom: 6px;
         }
      .inspiration_result p.p1 strong{background-position: 0 -75px;}
     </style>
@@ -65,7 +65,7 @@
             <strong>灵感启发：</strong><%= i.content %>
           </p>
           <p class="p2 group">
-            <span class="zf ft12">转发 (<%= i.shares_count %>)</span>
+            <span class="zf ft12">转发 (<em><%= i.shares_count %></em>)</span>
             
             <a href="/inspirations/<%= i.id %>"><span class="pl ft12">评论 (<%= i.comments_count %>)</span></a>
           </p>

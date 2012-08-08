@@ -17,6 +17,11 @@ $(function(){
 				data_type : dataType
 			},
 			function(data){
+				var $zf_text = parent_node.prev().children('span');
+				if(new RegExp("转发").test($zf_text.text())){
+					var $zf_num = $zf_text.children('em');
+					$zf_num.text($zf_num.text()*1+1);
+				};
 				
 			});
 			window.open("http://www.jiathis.com/send/?webid="+webid+"&url="+url+"&title="+title+"&pic="+pic);
