@@ -46,9 +46,8 @@ task :export_20120809 => :environment  do
 			tmp << [row[1],row[2],row[3]]
 		end 			
 	end
-end
 
-CSV.open("#{Rails.root}/public/failedtasks_20120809.csv", 'wb') do |csv|
-	tmp.each {|f| csv << f}
-end
+	CSV.open("#{Rails.root}/public/failedtasks_20120809.csv", 'wb') do |csv|
+		tmp.each {|f| csv << f}
+	end
 end	
