@@ -161,7 +161,7 @@ $(function(){
 
 /*kv slides*/
 $(function(){
-	var $bin = $('.slides');
+	var $bin = $('.slides'),sliding;
 	var w = $bin.width();
 	var $con = $('.slidesContainer');
 	$con.append($con.html());
@@ -194,7 +194,11 @@ $(function(){
 		else{}
 		$dot.eq(num).addClass('current').siblings().removeClass('current');
 	}
-	var sliding=setInterval(RunSlide,speed);
+	$bin.hover(function(){
+        clearInterval(sliding);
+    },function(){
+        sliding = setInterval(RunSlide,speed);
+    }).trigger('mouseleave');
 	$dot.click(function(){
 		var one = $dot.index(this);
 		if(one == 0)
@@ -209,10 +213,8 @@ $(function(){
 			}
 		}
 		$slider.stop(true);
-		clearInterval(sliding);
 		$dot.eq(one).addClass('current').siblings().removeClass('current');
 		$slider.animate({'left':'-'+one*w},_speed);
-		sliding=setInterval(RunSlide,speed);
 		pager = one+1;
 		});
 });
