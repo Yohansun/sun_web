@@ -11,6 +11,8 @@ class SiteMessagesController < InheritedResources::Base
   end
 
   def create
+    return unless current_user
+
     @site_message = SiteMessage.new(params[:site_message])
     @site_message.user_id = current_user.id
     create! do |succ, fail|
