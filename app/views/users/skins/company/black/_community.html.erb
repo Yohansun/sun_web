@@ -11,46 +11,38 @@
 <div class="host_community">
   <div class="community_sina">
     <h5>绑定微博账号</h5>
-    <p>绑定新浪微博，挂上新浪微博勋章！<br>把自己的微博和新浪微博连起来</p>
-    <button>
-      <%- if @providers.include?("weibo") %>
-      <a href="<%= user_community_binding_cancel_path(:community => "weibo") %>">取消绑定</a>
-      <%- else %> 
-      <a href="/users/auth/weibo" id="weibo">立即绑定</a>
-      <%- end %>            
-    </button>
+    <p>绑定新浪微博，挂上新浪微博勋章！<br>把自己的微博和新浪微博连起来</p>    
+    <%- if @providers.include?("weibo") %>
+      <a href="<%= user_community_binding_cancel_path(:community => "weibo") %>"><button>取消绑定</button></a>
+    <%- else %> 
+      <a href="/users/auth/weibo" id="weibo"><button>立即绑定</button></a>
+    <%- end %>   
   </div>
   <div class="community_qq">
     <h5>绑定QQ账号</h5>
     <p>绑定QQ微博，和好友边聊边博！<br>绑定后，可以实时获得QQ好友动态。</p>
-    <button>
-      <%- if @providers.include?("qq_connect") %>
-      <a href="<%= user_community_binding_cancel_path(:community => "qq_connect") %>">取消绑定</a>
-      <%- else %> 
-      <a href="/users/auth/qq_connect" id="qq_connect">立即绑定</a>
-      <%- end %>
-    </button>
+    <%- if @providers.include?("qq_connect") %>
+      <a href="<%= user_community_binding_cancel_path(:community => "qq_connect") %>"><button>取消绑定</button></a>
+    <%- else %> 
+      <a href="/users/auth/qq_connect" id="qq_connect"><button>立即绑定</button></a>
+    <%- end %>
   </div>
   <div class="community_renren">
     <h5>绑定人人网账号</h5>
     <p>绑定人人社交网络，联络你和你周围的朋友！<br>马上绑定人人网，还等什么？</p>
-    <button>
-      <%- if @providers.include?("renren") %>
-      <a href="<%= user_community_binding_cancel_path(:community => "renren") %>">取消绑定</a>
-      <%- else %>
-      <a href="/users/auth/renren" id="renren">立即绑定</a>
-      <%- end %>
-    </button>
+    <%- if @providers.include?("renren") %>
+      <a href="<%= user_community_binding_cancel_path(:community => "renren") %>"><button>取消绑定</button></a>
+    <%- else %>
+      <a href="/users/auth/renren" id="renren"><button>立即绑定</button></a>
+    <%- end %>
   </div>
   <div class="community_kaixin">
     <h5>绑定开心网</h5>
     <p>绑定开心网，点亮开心图标！<br>把自己的微博和开心连起来</p>
-    <button>
-      <%- if @providers.include?("kaixin") %>
-      <a href="<%= user_community_binding_cancel_path(:community => "kaixin") %>">取消绑定</a>
-      <%- else %> 
-      <a href="/users/auth/kaixin" id="kaixin">立即绑定</a>
-      <%- end %>
-    </button>
+    <%- if @providers.include?("kaixin") %>
+      <a href="<%= user_community_binding_cancel_path(:community => "kaixin") %>"><button>取消绑定</button></a>
+    <%- else %> 
+      <a href="/users/auth/kaixin" id="kaixin"><button>立即绑定</button></a>
+    <%- end %>
   </div>
 </div>
