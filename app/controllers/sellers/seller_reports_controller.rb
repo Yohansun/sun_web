@@ -33,7 +33,8 @@ class Sellers::SellerReportsController < ApplicationController
 			is_weekly_start = ""
 			is_month_start  = ""
 			current_month   = user.seller_datas.where(created_at: statistical_time..statistical_time.months_since(1), apply_for_tools: false).first 
-			current_designs = user.designs.where("DATE_FORMAT(created_at, '%Y%m') = ?" , statistical_time.strftime("%Y%m"))
+			all_designs     = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("users.id" => user.id)
+			current_designs = all_designs.where("DATE_FORMAT(designs.created_at, '%Y%m') = ?" , statistical_time.strftime("%Y%m"))
 
 			WeeklyStar.find_each do |w|
 				if w.author_url.match %r(user.id)
@@ -57,13 +58,13 @@ class Sellers::SellerReportsController < ApplicationController
 
 												user.try(:sign_in_count),
 												current_designs.count,
-												user.designs.count,
+												all_designs.count,
 
 												current_designs.sum(:votes_count),
-												user.designs.sum(:votes_count),
+												all_designs.sum(:votes_count),
 
 												current_designs.map {|d| d.comments.count }.sum,
-												user.designs.map {|d| d.comments.count }.sum,
+												all_designs.map {|d| d.comments.count }.sum,
 
 												user.try(:top_order),
 												is_weekly_start,
