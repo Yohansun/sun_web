@@ -337,7 +337,8 @@
 </div>
 <!--footer ends-->
 
-<%= render :partial => "layouts/overlay" %>
+<%= render "layouts/overlay" %>
+<%= render "layouts/static" %>
 
 <%= yield :tail %>
 
@@ -520,25 +521,27 @@
 </script>
 <!-- Piwik -->
 <script type="text/javascript">
-var pkBaseURL = (("https:" == document.location.protocol) ? "https://203.156.231.36:8000/piwik/" : "http://203.156.231.36:8000/piwik/");
-document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-</script><script type="text/javascript">
-try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
-<% if current_user && current_user.role_id -%>
-piwikTracker.setCustomVariable(1, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "visit");
-piwikTracker.setCustomVariable(2, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "page");
-<% else -%>
-piwikTracker.setCustomVariable(1, "Role", "guest", "visit");
-piwikTracker.setCustomVariable(2, "Role", "guest", "page");
-<% end -%>
-piwikTracker.trackPageView();
-piwikTracker.enableLinkTracking();
-} catch( err ) {}
-</script><noscript><p><img src="http://203.156.231.36:8000/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+  var pkBaseURL = (("https:" == document.location.protocol) ? "https://203.156.231.36:8000/piwik/" : "http://203.156.231.36:8000/piwik/");
+  document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+  </script><script type="text/javascript">
+  try {
+  var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+  <% if current_user && current_user.role_id -%>
+  piwikTracker.setCustomVariable(1, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "visit");
+  piwikTracker.setCustomVariable(2, "Role", "<%= current_user.role_name %>_<%= current_user.des_status %>", "page");
+  <% else -%>
+  piwikTracker.setCustomVariable(1, "Role", "guest", "visit");
+  piwikTracker.setCustomVariable(2, "Role", "guest", "page");
+  <% end -%>
+  piwikTracker.trackPageView();
+  piwikTracker.enableLinkTracking();
+  } catch( err ) {}
+</script>
+<noscript>
+  <p><img src="http://203.156.231.36:8000/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p>
+</noscript>
 <!-- End Piwik Tracking Code -->
 <script type="text/javascript">
-
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-27414296-4']);
   _gaq.push(['_trackPageview']);
@@ -552,7 +555,6 @@ piwikTracker.enableLinkTracking();
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
 </script>
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 </body>
