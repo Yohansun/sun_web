@@ -203,6 +203,7 @@ Icolor::Application.routes.draw do
     resources :skin_kv_uploads
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
+    match '/report_export' => 'report_export#index'
     resources :my_show_settings
   end
 

@@ -1,0 +1,128 @@
+<div class="content">
+	<div class="title">
+		<h5>报表统计</h5>
+	</div>
+
+	<div class="widget">
+		<div class="head">
+			<h5 class="iFrames">筛选条件</h5>
+		</div>
+		<form class="mainForm" method="get">
+			<fieldset>
+				<div class="rowElem noborder" style="padding:0 14px;" id="start_date">
+					<label for="start_date">开始日期:</label>
+					<div class="formRight" style="z-index:20;">
+						<input type="text" class="datepicker" id="start_date" name="start_date" value="<%= params[:start_date] %>"/>
+					</div>
+					<div class="fix"></div>
+				</div>
+
+				<div class="rowElem noborder" style="padding:0 14px;" id="end_date">
+					<label for="end_date">结束日期:</label>
+					<div class="formRight" style="z-index:20;">
+						<input type="text" class="datepicker" id="end_date" name="end_date" value="<%= params[:end_date] %>"/>
+					</div>
+					<div class="fix"></div>
+				</div>
+
+				<div class="rowElem noborder" style="padding:0 14px;" id="search_for">
+					<label>查询内容:</label>
+					<div class="formRight">
+						<select name="search" class="width_120">
+							<option value="">--请选择--</option>
+							<option value="user">用户注册数据</option>
+							<option value="design">作品上传数据</option>
+							<option value="seller">经销商平台数据</option>
+						</select>
+					</div>
+					<div class="fix"></div>
+				</div>
+
+				<div class="rowElem noborder" style="padding:0 14px; display:none;" id="area">
+					<label>查询区域:</label>
+					<div class="formRight">
+						<input name="area_name" type="text" style="width:112px;"/>
+					</div>
+					<div class="fix"></div>
+				</div>
+
+				<div class="rowElem noborder" style="padding:0 14px;" id="role">
+					<label>用户身份:</label>
+					<div class="formRight">
+						<select name="role" class="width_120">
+							<option value="">--请选择--</option>
+							<option value="zz">设计师在职</option>
+							<option value="zd">设计师在读</option>
+							<option value="gs">家装公司</option>
+							<option value="pt">普通用户</option>
+							<option value="zm">招募设计师</option>
+						</select>
+					</div>
+					<div class="fix"></div>
+				</div>
+
+				<div class="rowElem noborder" style="padding:0 14px;" id="properties">
+					<label>用户性质:</label>
+					<div class="formRight">
+						<select name="properties" class="width_120" >
+							<option value="">--请选择--</option>
+							<option value="new">新用户</option>
+							<option value="old">旧icolor网站用户</option>
+						</select>
+					</div>
+					<div class="fix"></div>
+				</div>
+
+				<div class="fix"></div>
+				<div class="rowElem">
+					<%= submit_tag "查询", class: 'greyishBtn submitForm' %>
+					<div class="fix"></div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="table">
+    <div class="head"><h5 class="iFrames">查询结果</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+        	<% if @results.present? %>
+	          <%- @results[:columns].each do |column| %>
+	          	<%= content_tag(:th, column)%>
+	          <%- end %>
+	        <%- end %>  
+        </tr>
+      </thead>
+      <tbody>      	
+      	<% if @results.present? %>
+	      	<%- @results[:data].each do |data| %>
+		      	<tr class="gradeA">
+		      		<%- if data.present? %>
+			      		<%- data.each do |d| %>
+			      			<%= content_tag(:td, d)%>
+			      		<%- end %>
+		      		<%- end %>
+		      	</tr>
+	      	<%- end %>
+      	<%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- content_for :tail do %>
+  <script type="text/javascript" charset="utf-8">
+	  $(function(){
+	  	$("#search_for div.jqTransformSelectWrapper ul li a").click(function(){
+	  		var value = $("#search_for div.jqTransformSelectWrapper span").text();
+	  		if(value == "经销商平台数据"){
+	  			$('#role,#properties,#start_date,#end_date').hide();
+	  			$('#area').show();
+	  		}else{
+	  			$('#role,#properties,#start_date,#end_date').show();
+	  			$('#area').hide();
+	  		}
+	  	});
+	  })
+  </script>
+<%- end %>
