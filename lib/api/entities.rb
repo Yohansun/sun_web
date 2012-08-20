@@ -6,7 +6,7 @@ module Icolor
     class User < Grape::Entity
       expose :username, :email
       expose :phone, :as => :mobile
-      expose :gender, :as => :sex
+      expose :sex, :as => :gender
       expose (:role){|user,options| user.role_chn_name }
     end
 
