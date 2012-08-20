@@ -1,4 +1,5 @@
 Icolor::Application.routes.draw do
+  require 'api'
 
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"
@@ -187,6 +188,9 @@ Icolor::Application.routes.draw do
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
+
+  #API
+  mount ::Icolor::API => "/"
 
   #扩充magic_content
   scope "/admin/content", :module => "magic_content" do

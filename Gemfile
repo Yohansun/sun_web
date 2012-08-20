@@ -49,5 +49,9 @@ gem 'ekuseru'
 gem 'savon'
 gem 'collections'
 
+# API
+gem 'grape', :github => 'intridea/grape'
+gem 'uuidtools'
+
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"
