@@ -6,21 +6,19 @@ module MagicContent
 
   	def index
   		#初始化查询时间
-      if params['start_date'].blank?
-        params['start_date'] = Time.now.beginning_of_week.to_s
+      if params[:start_date].blank?
+        params[:start_date] = Time.now.beginning_of_week.to_formatted_s(:db).to_s
       end
 
-      if params['end_date'].blank?
-        params['end_date'] = Time.now.end_of_week.to_s
+      if params[:end_date].blank?
+        params[:end_date] = Time.now.end_of_week.to_formatted_s(:db).to_s
       end
 
-      if params['start_date'] == params['end_date']
-        params['start_date'] += " 00:00:00"
-        params['end_date']   += " 23:59:59"
-      end
+      params[:start_date] += " 00:00:00"
+      params[:end_date]   += " 23:59:59"
 
-  		begin_t = params['start_date'].to_time.utc.to_formatted_s(:db)
-      end_t   = params['end_date'].to_time.utc.to_formatted_s(:db)
+      begin_t = params[:start_date].to_time.utc
+      end_t   = params[:end_date].to_time.utc
 
       case params['role']
      	  when 'zz' then role = {role_id: 1, des_status: false}
