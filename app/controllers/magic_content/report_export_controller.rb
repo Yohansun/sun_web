@@ -17,8 +17,8 @@ module MagicContent
       params[:start_date] += " 00:00:00"
       params[:end_date]   += " 23:59:59"
 
-      begin_t = params[:start_date].to_time.utc
-      end_t   = params[:end_date].to_time.utc
+      begin_t = params[:start_date].to_time(:local)
+      end_t   = params[:end_date].to_time(:local)
 
       case params['role']
      	  when 'zz' then role = {role_id: 1, des_status: false}
