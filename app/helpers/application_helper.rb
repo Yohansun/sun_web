@@ -238,15 +238,4 @@ module ApplicationHelper
     end
     ws
   end
-
-  #just for emall
-  def get_emall_link
-    if current_user
-      key = Digest::MD5.hexdigest("username=#{current_user.try(:username)}date=#{Time.now.strftime("%Y/%m/%d")}")
-      url = URI::escape("http://shop.nipponpaint.com.cn/users/autologin?username=#{current_user.try(:username)}&key=#{key}&user_source=icolor")
-    else
-      url = "http://shop.nipponpaint.com.cn/users/autologin?username="
-    end
-    url
-  end
 end

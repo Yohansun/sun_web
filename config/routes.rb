@@ -111,6 +111,7 @@ Icolor::Application.routes.draw do
   match "/info_list" => "function#infolist"
   match "/info" => "function#info"
 
+  match "/emall" => "function#emall" #emall接口链接
   match "/emagazine" => "function#emagazine" #电子杂志订阅
   match "/results" => "function#results" #导航栏搜索结果页面
   match "/rules" => "function#rules" #会员机制页面
