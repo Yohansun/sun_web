@@ -50,7 +50,7 @@ gem 'savon'
 gem 'collections'
 
 # API
-gem 'grape', :github => 'intridea/grape'
+gem 'grape'
 gem 'uuidtools'
 
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
