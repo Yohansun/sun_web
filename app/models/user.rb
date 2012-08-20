@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   #可以添加座机号码
   #validates_format_of :phone, :with => /^(13|15|18)[0-9]{9}$/, :allow_blank => true, :on => :update
   validates_uniqueness_of :phone, :allow_blank => true, :on => :create
-  validates_format_of :name, :with => /^[\u4e00-\u9fa5]{2,4}$/, :allow_blank => true, :on => :update
+  validates_format_of :name, :with => /^[\u4e00-\u9fa5]{2,4}$/, :allow_blank => true, :unless => :login_with_omniauth? ,:on => :update
   #validates_format_of :zip_code, :with => /^\\d{6}$/, :allow_blank => true, :on => :update
 
   devise :database_authenticatable, :registerable,
@@ -101,6 +101,10 @@ class User < ActiveRecord::Base
   def email_required?
     (user_tokens.empty? || !email.blank?) && super
   end
+
+  def login_with_omniauth?
+    user_tokens.present?
+  end  
 
   def display_name   #a little fix in when company company_name;name;username
     case role_name
