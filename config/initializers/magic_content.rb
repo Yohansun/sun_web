@@ -18,6 +18,7 @@ MagicContent.extra_menu_items = [
     {name: '在线配色咨询回复', url: :mix_colors_path},
     {name: '家装咨询回复', url: :faqs_path},
     {name: '数据统计', url: :stat_path},
+    {name: '报表下载', url: :report_export_path},
     {name: 'iColor工具管理', url: :tools_path},
     {name: 'iColor个人主页皮肤管理', url: :skins_path},
     {name: 'iColor我型我秀', url: :my_show_settings_path}
