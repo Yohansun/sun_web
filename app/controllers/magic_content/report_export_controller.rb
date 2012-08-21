@@ -7,11 +7,11 @@ module MagicContent
   	def index
   		#初始化查询时间
       if params[:start_date].blank?
-        params[:start_date] = Time.now.beginning_of_week.to_formatted_s(:db).to_s
+        params[:start_date] = Time.now.beginning_of_week.to_date.to_s
       end
 
       if params[:end_date].blank?
-        params[:end_date] = Time.now.end_of_week.to_formatted_s(:db).to_s
+        params[:end_date] = Time.now.end_of_week.to_date.to_s
       end
 
       params[:start_date] += " 00:00:00"
