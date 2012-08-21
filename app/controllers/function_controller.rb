@@ -17,9 +17,9 @@ class FunctionController < ApplicationController
   def emall
     if current_user
       key = Digest::MD5.hexdigest("username=#{current_user.try(:username)}date=#{Time.now.strftime("%Y/%m/%d")}")
-      url = URI::escape("http://shop.nipponpaint.com.cn/users/autologin?username=#{current_user.try(:username)}&key=#{key}&user_source=icolor")
+      url = URI::escape("http://shop.nipponpaint.com.cn/api/autologin?username=#{current_user.try(:username)}&key=#{key}&user_source=icolor")
     else
-      url = "http://shop.nipponpaint.com.cn/users/autologin?username="
+      url = "http://shop.nipponpaint.com.cn/api/autologin?username="
     end
     redirect_to url
   end

@@ -12,10 +12,10 @@ module Icolor
 
     resource :users do      
 
-      get ":user" do
+      get do
         # 获取用户基本信息
         # 方法: GET
-        # URL: /api/users/xxxx.json
+        # URL: /api/users.json&user=
         # 接收参数: provider : EMALL用户的登录类型 ”autologin, login“
         #         key      : 用户名和当前日期的MD5值
         #         password : 当为login时传递的参数
