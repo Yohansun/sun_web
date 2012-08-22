@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :if => :email_required?, :on => :create
   validates_presence_of :is_read, :if => :email_required?, :on => :create
   validates_presence_of :phone, :message => "联系电话不能为空！", :if => :not_from_minisite?
-  validates_presence_of :role_id
-  validates_presence_of :area_id
+  validates_presence_of :role_id, :if => :not_from_minisite?
+  validates_presence_of :area_id, :if => :not_from_minisite?
   validates_format_of :username, :with => /(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]/, :if => :email_required?, :on => :create
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/, :if => :email_required?
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/, :on => :update
