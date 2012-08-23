@@ -1,6 +1,7 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'reg' %>
   <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+  <%= javascript_tag("alert(#{flash[:errors]})") if flash[:errors] %>
 <% end -%>
 
 <div class="main">
@@ -13,10 +14,10 @@
           <div class="fl">
             <select class="fl" name="user[user_role]" id="user_type">
               <option value=""> ----请选择---- </option>
-              <option value="designer_0">设计师（在职）</option>
-              <option value="designer_1">设计师（在读）</option>
-              <option value="company">家装公司</option>
-              <option value="user">普通用户</option>
+              <option value="designer_0" <%= 'selected' if current_user.job_designer? %>>设计师（在职）</option>
+              <option value="designer_1" <%= 'selected' if current_user.reading_designer? %>>设计师（在读）</option>
+              <option value="company" <%= 'selected' if current_user.company? %>>家装公司</option>
+              <option value="user" <%= 'selected' if current_user.common_user? %>>普通用户</option>
             </select>
           </div>
         </div><!--reg_list ends-->
@@ -40,13 +41,13 @@
 
          <div class="reg_list reg_width fl">
           <label for="uesername"><span>*</span>联系电话：</label>
-          <input type="text" class="username fl" name="user[phone]" id="user_phone"/>
+          <input type="text" class="username fl" name="user[phone]" id="user_phone" value="<%= current_user.try(:phone) %>">
           <span class="reg_tip3 fl">请填写您常用电话以便通知获奖信息</span>
         </div><!--reg_list ends-->
 
         <div class="reg_list reg_width fl">
           <label for="recommander"><span>*</span>Email：</label>
-          <input type="text" class="username fl" name="user[email]" id="email"/>
+          <input type="text" class="username fl" name="user[email]" id="email" value="<%= current_user.try(:email) %>"/>
           <span class="reg_tip3 fl">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
         </div><!--reg_list ends-->
 
@@ -63,17 +64,26 @@
 </div><!--main ends-->
 <script type="text/javascript" charset="utf-8">
     $(function() {
-        var options = {
-            data  : data
-        }
-
-        var sel = new LinkageSelect(options);
-        sel.bind('.level_1');
-        sel.bind('.level_2');
-        sel.bind('.level_3');
-
+      var options = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options);
+      <%- if current_user.try(:area_id) -%>
+      <%-
+        provice_id = current_user.city.try(:parent).try(:id)
+        city_id = current_user.try(:city).try(:id)
+        area_id = current_user.try(:area).try(:id)
+      %>
+        sel.bind('.level_1','<%= provice_id %>');
+        sel.bind('.level_2','<%= city_id %>');
+        sel.bind('.level_3','<%= area_id %>');
+      <%- else -%>
+        sel.bind('.level_1', null, '请选择');
+        sel.bind('.level_2', null, '请选择');
+        sel.bind('.level_3', null, '请选择');
+      <%- end -%>
     });
-</script>
+  </script>
 <%- content_for :tail do %>
   <%= javascript_tag do -%>
     <%- if flash[:errors] %>
