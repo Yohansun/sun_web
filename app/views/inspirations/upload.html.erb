@@ -84,7 +84,7 @@ function uploads_size () {
   })
 </script>
 <%- end -%>
-<%= form_for([current_user, @inspiration]) do |f| %>
+<%= form_for([current_user, @inspiration], :html => {:multipart => true}) do |f| %>
 <div class="main syslist">
   <div class="shadow">
     <div class="section pr">
