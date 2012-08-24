@@ -57,6 +57,8 @@ class DesignsController < ApplicationController
             flash[:design_errors] << "作品名称不能为空！"
           when "content"
             flash[:design_errors] << "设计理念不能为空！"
+          when "content"
+            flash[:design_errors] << "设计理念不能为空！"
           when "reason"
             flash[:design_errors] << "推荐理由不能为空！"
           when "design_color"
