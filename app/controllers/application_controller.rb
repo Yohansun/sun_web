@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :search_color_code
@@ -57,6 +58,25 @@ class ApplicationController < ActionController::Base
         render :template => "users/community"
       else
         render :template => "users/#{controller_name}"
+      end
+    end
+  end
+
+  #验证第三方的用户信息完整性,否则强制跳转到信息填写页面
+  before_filter do
+    if current_user && current_user.username.blank? && current_user.user_tokens.present?
+      errors = [].tap do |e|
+        e << "我的身份" if current_user.role_id.blank?
+        e << "联系电话" if current_user.phone.blank?
+        e << "Email"   if current_user.email.blank?
+      end
+
+      if errors.present?
+        skip_filter_actions = [['users','omniauth_user'],['sessions','destroy'],['users','update_user_role']]
+        unless skip_filter_actions.include? [controller_name,action_name]
+          flash[:errors] = "亲,请您完善" + errors.join(',') + "后再浏览iColor的精彩内容!"
+          redirect_to omniauth_user_user_path(current_user)
+        end
       end
     end
   end
