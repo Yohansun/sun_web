@@ -327,6 +327,6 @@ class User < ActiveRecord::Base
   end
 
   def need_valid?
-    self.created_at > Time.local(2012,'08','08',00,00,00)
+    (self.created_at > Time.local(2012,'08','08',00,00,00)) if self.created_at
   end
 end
