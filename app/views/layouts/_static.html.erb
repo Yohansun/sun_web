@@ -26,8 +26,8 @@
 
 <%- if ((controller_name =~ /articles|color_articles|events|designer_events|other_events|gifts|softwares|channel|faqs|mix_colors/ || action_name =~ /weibo_wall/) && params[:from].present?) || action_name =~ /city/%>
 	<div class="static static3">
-		<a href="/master_interviews?from=top" class="static_a" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'MASTER_INTERVIEWS']);">大师殿堂</a>
-		<a href="/weekly_stars?from=top&star_type=每周之星" class="static_b" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'WEEKLY_STARS']);">设计鉴赏</a>
-		<a href="/art?from=top" class="static_c" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'ART']);">漆光异彩</a>
+		<a href="/master_interviews?from=top" class="static_a" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'MASTER_INTERVIEWS']);">大师殿堂</a>
+		<a href="/weekly_stars?from=top&star_type=每周之星" class="static_b" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'WEEKLY_STARS']);">设计鉴赏</a>
+		<a href="/art?from=top" class="static_c" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'ART']);">漆光异彩</a>
 	</div>
 <%- end %>
