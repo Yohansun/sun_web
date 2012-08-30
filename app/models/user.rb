@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
   has_many :sms_logs
   has_many :moods
   has_many :login_logs
+  has_one :phone_expense
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -316,6 +317,15 @@ class User < ActiveRecord::Base
     areas[2] ||= ''
     areas
   end
+
+  #获取用户话费信息
+  def phone_expense_register;    self.phone_expense ? self.phone_expense.register : 0.0    end
+  def phone_expense_design;      self.phone_expense ? self.phone_expense.design : 0.0      end
+  def phone_expense_vote;        self.phone_expense ? self.phone_expense.vote : 0.0        end
+  def phone_expense_comment;     self.phone_expense ? self.phone_expense.comment : 0.0     end
+  def phone_expense_share;       self.phone_expense ? self.phone_expense.share : 0.0       end
+  def phone_expense_inspiration; self.phone_expense ? self.phone_expense.inspiration : 0.0 end
+  def phone_expense_total;       self.phone_expense ? self.phone_expense.total : 0.0       end
 
   protected
   def recommended_requird?

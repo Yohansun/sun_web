@@ -31,8 +31,49 @@ $(document).ready(function() {
     <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
     <% end -%>
     <%- if current_user && current_user == @user %>
-      <p><%= link_to "修改账户信息", edit_user_path(current_user) %> / <%= link_to "密码修改", users_passwords_reset_path, class: "ft_red" %></p>      
+      <p><%= link_to "修改账户信息", edit_user_path(current_user) %> / <%= link_to "密码修改", users_passwords_reset_path, class: "ft_red" %></p>          
     <%- end %>
+    <div class="tel_rate_point pa group" style="height:35px;left:120px;bottom:0;">
+        <a href="#">话费积分</a>
+        <table width="220" border="1">
+          <tr>
+            <th>参与项目</th>
+            <th>积分话费（元）</th>
+          </tr>
+          <tr>
+            <td>注册</td>
+            <td><%= @user.phone_expense_register %></td>
+          </tr>
+          <tr>
+            <td>投票</td>
+            <td><%= @user.phone_expense_vote %></td>
+          </tr>
+          <tr>
+            <td>评论</td>
+            <td><%= @user.phone_expense_comment %></td>
+          </tr>
+          <tr>
+            <td>转发</td>
+            <td><%= @user.phone_expense_share %></td>
+          </tr>
+          <tr>
+            <td>灵感秀</td>
+            <td><%= @user.phone_expense_inspiration %></td>
+          </tr>
+          <tr>
+            <td>上传作品（套）</td>
+            <td><%= @user.phone_expense_design %></td>
+          </tr>
+          <tr>
+            <td>本周总计</td>
+            <td><%= @user.phone_expense_total %></td>
+          </tr>
+          <tr>
+            <td>可兑换数额</td>
+            <td></td>
+          </tr>
+        </table>  
+      </div>
   </div>
   <div class="host_status">
     <p class="d_hostaddr">
