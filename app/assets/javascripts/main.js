@@ -827,6 +827,23 @@ $(function(){
     });
   });
 
+  //话费积分
+  $(function(){
+  	var $width_a = $('.tel_rate_point a').outerWidth();
+  	var $height_table = $('.tel_rate_point table').outerHeight();
+  //var $pl_table = parseInt($('.tel_rate_point').css('padding-left'));
+//alert($pl_table)
+  //alert($width_a)
+  //alert($height_table)
+  $('.tel_rate_point table').css({'display':'none'});
+  $('.tel_rate_point').hover(function(){
+    //$(this).css('border-color','#969696');
+    $(this).children('a').toggleClass('a_hover')
+    $(this).children('table').css({'left':$width_a-1, 'top':-$height_table/9*3});
+    $(this).children('table').fadeToggle('fast')
+  })
+})
+
 jQuery.easing['jswing'] = jQuery.easing['swing'];
 
 jQuery.extend( jQuery.easing,

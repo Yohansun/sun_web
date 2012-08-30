@@ -205,7 +205,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 /*host in common*/
 .signup{width:904px;background:#fff; padding:25px 30px;/* margin-top: 110px;*/}
 .signup_box .section{ padding:0 0px 20px; zoom:1;}
-.host_self{ overflow:hidden;padding:18px 20px 0;/*background:url(<%= asset_path "personal/hot_topics_line.png"%>) repeat-x right bottom;*/}
+.host_self{ /*overflow:hidden;*/padding:18px 20px 0;/*background:url(../images/personal/hot_topics_line.png) repeat-x right bottom;*/}
 .signup_img_box {float:left;}
 .host_self img.box_shadow{ padding:2px;border:1px solid #cccccc;box-shadow:1px 1px 7px -4px rgba(72,72,72,1);}
 .signup_img_box p{ text-align:center; margin:10px 0;}
@@ -470,8 +470,8 @@ a.per_works_pagebtn.per_works_next{background-position:0 0;left:944px;}
 .per_ads_kv .slidesContainer{height:300px;}
 .per_ads_kv .bullets{width:120px;top:278px;left:535px;}
 .per_firm_r{float: right;width:297px;}
-.per_firm_r .per_firm_info{position: relative;margin:0 30px;}
-.per_firm_w .per_firm_r .per_firm_info{position: relative;margin:0 25px;}
+.per_firm_r .per_firm_info{position: relative;margin:0 30px;*z-index: 99999}
+.per_firm_w .per_firm_r .per_firm_info{position: relative;margin:0 25px;z-index: 9999;}
 .per_firm_r .per_firm_info img{border:2px solid #483d46;}
 .per_firm_r .per_firm_info p{font-size:14px;color:#fff;height:30px;line-height:30px;}
 .per_firm_r .per_firm_info p span{font-size:12px;color:#ff9435;float: right;}
@@ -1144,12 +1144,22 @@ span.list_icon{background:url(<%= asset_path "show/list_icon.png"%>) no-repeat!i
 
 /*zhengzhou*/
 .section.zhengzhoubg{background:#f5fcff url(<%= asset_path "big_bg/zhengzhou2012_tit.jpg"%>) no-repeat;padding: 286px 20px 15px;}
-.section.zhengzhoubg .items{border-bottom: 1px dashed #ccc;padding:15px 0;}
-.section.zhengzhoubg .items p{font: 14px/28px "Microsoft Yahei";color:#666666;text-indent: 30px;}
-.section.zhengzhoubg .items p.pt50{padding-top: 50px;}
-.section.zhengzhoubg .items p.ft18{font: 18px/30px "Microsoft Yahei";}
+.section.zhengzhoubg .items,.section.hangzhou .items{border-bottom: 1px dashed #ccc;padding:15px 0;}
+.section.zhengzhoubg .items p,.section.hangzhou .items p{font: 14px/28px "Microsoft Yahei";color:#666666;text-indent: 30px;}
+.section.zhengzhoubg .items p.pt50,.section.hangzhou .items p.pt50{padding-top: 50px;}
+.section.zhengzhoubg .items p.ft18,.section.hangzhou .items p.ft18{font: 18px/30px "Microsoft Yahei";}
 
-.section.zhengzhoubg .items h3{font-size: 24px;color:#666666;margin-bottom: 20px;}
-.section.zhengzhoubg .items h4{font:bold 14px "Microsoft Yahei";color:#666666;margin-bottom: 10px;}
-.section.zhengzhoubg .items img.fl{margin-right:20px;}
-.section.zhengzhoubg .items img.fr{margin-left:20px;}
+.section.zhengzhoubg .items h3,.section.hangzhou .items h3{font-size: 24px;color:#666666;margin-bottom: 20px;}
+.section.zhengzhoubg .items h4,.section.hangzhou .items h4{font:bold 14px "Microsoft Yahei";color:#666666;margin-bottom: 10px;}
+.section.zhengzhoubg .items img.fl,.section.hangzhou .items img.fl{margin-right:20px;}
+.section.zhengzhoubg .items img.fr,.section.hangzhou .items img.fr{margin-left:20px;}
+/*hangzhou*/
+.section.hangzhou{background:#f5fcff url(<%= asset_path "big_bg/hangzhou2012_tit.jpg"%>) no-repeat;padding: 286px 20px 15px;}
+
+/*tel_rate_point*/
+.tel_rate_point{position: relative;height:30px;}
+.tel_rate_point a{font-size:12px;position: absolute;height:26px;color:#FF9F30;padding-right:14px;line-height: 26px;z-index: 99999;border:solid transparent;border-width: 1px 0 1px 1px;display: block;*width: 50px;}
+.tel_rate_point a.a_hover{border-color: #969696;color:#000;background:#b3b5b4;padding:0 7px;}
+.tel_rate_point table{color:#000;background:#b3b5b4;position: absolute;z-index: 99998;display: none;}
+.tel_rate_point table th{font-weight: bold;}
+.tel_rate_point table td,.tel_rate_point table th{font-size:12px;height:26px;line-height:26px;text-align: left;border:1px solid #969696;padding:0px 10px;font-size: 14px "Microsoft Yahei";}

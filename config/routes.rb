@@ -100,6 +100,7 @@ Icolor::Application.routes.draw do
   match "/events/:id" => "events#show"
   match "/designer_events" => "designer_events#index"
   match "/designer_events/index_2" => "designer_events#index_2" #第二页的显示 5个站点
+   match "/designer_events/index_3" => "designer_events#index_3"
   match "/designer_events/kv" => "designer_events#kv" #第一列表也KV点击后的页面
   match "/designer_events/weibo" => "designer_events#weibo"
   match "/designer_events/:id" => "designer_events#show"

@@ -126,6 +126,47 @@
 			
 			<div class="per_firm_colorbar"><img src="<%= asset_path "personal/per_firm_colorbar.png"%>"></div>
 				<p><span><i class="icon_golden"></i>金牌会员</span><%= @user.display_name %>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				<div class="tel_rate_point group">
+					<a href="#">话费积分</a>
+					<table width="220" border="1">
+						<tr>
+							<th>参与项目</th>
+							<th>积分话费（元）</th>
+						</tr>
+						<tr>
+							<td>注册</td>
+							<td><%= @user.phone_expense_register %></td>
+						</tr>
+						<tr>
+							<td>投票</td>
+							<td><%= @user.phone_expense_vote %></td>
+						</tr>
+						<tr>
+							<td>评论</td>
+							<td><%= @user.phone_expense_comment %></td>
+						</tr>
+						<tr>
+							<td>转发</td>
+							<td><%= @user.phone_expense_share %></td>
+						</tr>
+						<tr>
+							<td>灵感秀</td>
+							<td><%= @user.phone_expense_inspiration %></td>
+						</tr>
+						<tr>
+							<td>上传作品（套）</td>
+							<td><%= @user.phone_expense_design %></td>
+						</tr>
+						<tr>
+							<td>本周总计</td>
+							<td><%= @user.phone_expense_total %></td>
+						</tr>
+						<tr>
+							<td>可兑换数额</td>
+							<td><%=  %></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 
 			<div class="per_firm_cloud">
