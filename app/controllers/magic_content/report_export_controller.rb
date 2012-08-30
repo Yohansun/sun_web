@@ -94,7 +94,7 @@ module MagicContent
   		end
 
   		{}.tap do |results|
-  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','公司名称','招募用户','分享次数','投票数']
+  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数']
   			results[:data] = [].tap do |cell|
   				designs.find_each do |design|
   					cell << [design.id,
@@ -104,6 +104,8 @@ module MagicContent
   									 design.user.id,
   									 design.user.display_name,
   									 design.user.role_chn_name,
+                     design.user.phone,
+                     design.user.email,
   									 design.user.try(:name_of_company),
   									 design.user.is_imported?,
   									 design.shares_count,
