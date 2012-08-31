@@ -2,7 +2,7 @@
 	<div class="static">
 		<% if current_user -%>
 			<% unless current_user.common_user? %>
-				<a href="<%= new_user_design_path(current_user) %>" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'DESIGNS']);"><img src="<%= asset_path "static1.png" %>"/></a>
+				<a href="<%= new_user_design_path(user_id: current_user, utm_source: 'static_banner', utm_medium: 'banner', utm_content: 'master_interviews', utm_campaign: 'static_banner') %>" target="_blank"><img src="<%= asset_path "static1.png" %>"/></a>
 			<% end -%>
 		<% else -%>
 			<%= link_to_function image_tag("#{asset_path "static1.png"}"), "show_login()", target: "_blank" %>
@@ -15,7 +15,7 @@
 	<div class="static">
 		<% if current_user -%>
 			<% unless current_user.common_user? %>
-				<a href="<%= new_user_inspiration_path(current_user) %>" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'INSPIRATIONS']);"><img src="<%= asset_path "static2.png" %>"/></a>
+				<a href="<%= new_user_inspiration_path(user_id: current_user, utm_source: 'static_banner', utm_medium: 'banner', utm_content: 'inspirations', utm_campaign: 'static_banner') %>" target="_blank" ><img src="<%= asset_path "static2.png" %>"/></a>
 			<% end -%>
 		<% else -%>
 			<%= link_to_function image_tag("#{asset_path "static2.png"}"), "show_login()", target: "_blank" %>
@@ -26,8 +26,8 @@
 
 <%- if ((controller_name =~ /articles|color_articles|events|designer_events|other_events|gifts|softwares|channel|faqs|mix_colors/ || action_name =~ /weibo_wall/) && params[:from].present?) || action_name =~ /city/%>
 	<div class="static static3">
-		<a href="/master_interviews?from=top" class="static_a" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'MASTER_INTERVIEWS']);">大师殿堂</a>
-		<a href="/weekly_stars?from=top&star_type=每周之星" class="static_b" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'WEEKLY_STARS']);">设计鉴赏</a>
-		<a href="/art?from=top" class="static_c" target="_blank" onClick="_gaq.push(['_trackEvent', 'STATIC_BANNER', 'JUMP', 'ART']);">漆光异彩</a>
+		<a href="/master_interviews?from=top&utm_source=static_banner&utm_medium=banner&utm_content=master_interviews&utm_campaign=static_banner" class="static_a" target="_blank" >大师殿堂</a>
+		<a href="/weekly_stars?from=top&star_type=每周之星&utm_source=static_banner&utm_medium=banner&utm_content=weekly_stars&utm_campaign=static_banner" class="static_b" target="_blank" >设计鉴赏</a>
+		<a href="/art?from=top&utm_source=static_banner&utm_medium=banner&utm_content=art&utm_campaign=static_banner" class="static_c" target="_blank">漆光异彩</a>
 	</div>
 <%- end %>
