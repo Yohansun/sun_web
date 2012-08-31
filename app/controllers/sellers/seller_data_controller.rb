@@ -4,7 +4,6 @@ class Sellers::SellerDataController < ApplicationController
 
 	def index
 		if current_seller_user
-
 			areas = Area.find(current_seller_user.area_id).self_and_descendants
 			@jxs_total = User.where("area_id in (?) and role_id = ?", areas, 2).order("is_top desc","top_order asc","is_imported desc")
 			@sign_total = @jxs_total.map {|m| m.try(:sign_in_count)}.sum
@@ -14,13 +13,6 @@ class Sellers::SellerDataController < ApplicationController
 			@seller_data_total = @jxs_total.map {|m| (m.try(:seller_datas).try(:first).try(:sales).blank?) ? 0 : m.seller_datas.first.sales}.sum
 
 			@current_month_total = @jxs_total.map {|m| (m.try(:seller_datas).current_month.try(:first).try(:sales).blank?) ? 0 : m.seller_datas.current_month.first.sales}.sum
-
-			
-
-
-		
-			
-			
 			@companies = @jxs_total.page(params[:page]).per(12)	
 			@companies_top = @jxs_total.limit 12	
 		else
