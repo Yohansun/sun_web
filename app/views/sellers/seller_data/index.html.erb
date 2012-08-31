@@ -21,6 +21,7 @@
       <%- end%>
     </div><!--count_sum ends-->
   </div><!--count_right ends-->
+
   <table class="data_user">
     <tr>
       <th width="95">公司名称</th>
@@ -72,8 +73,25 @@
       </td>
       <td><a class="data_pop" href="javascript:" data-order="<%= cc.try(:top_order) %>" data-reason="<%= cc.try(:top_reason) %>" data-remain= "<%= current_seller_user.top_remain %>">置顶</a></td>
     </tr>
-    <%- end %>    
+    <%- end %>
+
+    <%- if @jxs_total.last ==  @companies.last %>
     
+    <tr>
+      <td>Total:</td>
+      <td></td>
+      <td></td>
+      <td><%= @sign_total %></td>
+      <td><%= @designs_count_total %></td>
+      <td class="cr"><%= @votes_count_total %></td>
+      <td><%= @comments_count_total %></td>
+      <td class="cr"><%= @seller_data_total %></td>
+      <td class="sale_amount"><%= @current_month_total %></td>
+      <td></td>
+      <td></td>
+   
+    </tr>
+    <%- end %>
   </table>
   <div class="pager ft12 cl">
     <%= paginate @companies %>
