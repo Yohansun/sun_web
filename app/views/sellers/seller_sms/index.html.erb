@@ -22,7 +22,7 @@
     <h2>选择发送用户：</h2>
     
     <%= render :partial => 'table' %>
-    
+
     <p class="tc cl">
       <input type="image" src="<%= asset_path "count/info_submit.jpg"%>" class="info_submit" href="javascript:void(0)" onclick="sendSms()"/>
     </p>  
@@ -50,5 +50,12 @@
         });
       }; 
     }
+
+    $(function(){
+      var all_check = $('.data_info_form');
+      all_check.on('click','.data_info_inputs',function(){
+        $('.data_info_input').attr('checked',!!$('.data_info_inputs').attr('checked'))
+      })
+    });
   </script>
 <%- end %>  
