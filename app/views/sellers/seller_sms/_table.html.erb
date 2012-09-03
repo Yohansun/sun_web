@@ -1,11 +1,13 @@
 <div id="sms_table">
-  <table style="margin:0 0 28px 150px;*width:740px;">
+  <table style="margin:0 0 28px 150px;*width:740px;" id="all_user">
     <tr>
       <th class="w144" width="144">家装公司</th>
       <th class="w144" width="137">最近发送时间</th>
       <th class="w176" width="176">发送内容</th>
       <th class="w144" width="147">发送状态</th>
-      <th class="noborder" width="130">选择用户</th>
+      <th class="noborder" width="130">选择用户(全选
+        <input class="data_info_inputs" type="checkbox" style="top:1px;left:-4px;" />)
+      </th>
     </tr>
     <%- @companies.each do |c| %>
       <tr>
