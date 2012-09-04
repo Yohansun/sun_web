@@ -14,36 +14,99 @@
         .properties .intro{ width:630px;}
     </style>
   </div><!--sub_nav ends-->
-  <div class="wrapper group">
-    <div class="shadow event event_desc">
-      <div class="section clear">
-         <a href="/designs" target="_blank"><img src="<%= asset_path "design/pm3.jpg"%>"></a>
-      </div>
-    </div>
+  <div class="wrapper group color-trend">
+        <div class="shadow">
+          <div class="section">
+            <%= image_tag 'design/trend/trend_head2.jpg'%>
+            <!--<a href="#" class="report">活动报道</a>- ->
+            <!--<a href="#" class="play">&nbsp;</a>-->
+            <div class="trend group">
+              <p class="tc"><%= image_tag 'design/trend/trend_title2.png'%>
+              </p>
+              <div class="group">
+                <div class="fl">
+                  <%= image_tag 'design/trend/trend_left2.png'%>
+                  <p>
+                    想知道立邦在此次史上最长地铁墙画做了多少努力？快来探探《刷新地铁》背后的“绝对机密”。墙画从无到有，无不凝聚所有工作人员的努力。现在立邦仍在持续刷新地铁中，快去北京国贸站亲眼见证！
+                  </p>
+                </div>
+                <div class="fr" style="margin-bottom:30px;">
+                  <!-- <img src="/assets/design/trend/trend_video2.jpg" /> -->
+                  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="604" height="334" id="FLVPlayer">
+                    <param name="movie" value="/flash/movie_60s.flv" />
+                    <param name="quality" value="high" />
+                    <param name="wmode" value="opaque" />
+                    <param name="scale" value="noscale" />
+                    <param name="salign" value="lt" />
+                    <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/flash/movie_60s&amp;autoPlay=false&amp;autoRewind=false" />
+                    <param name="swfversion" value="8,0,0,0" />
+                    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+                    <param name="expressinstall" value="/Scripts/expressInstall.swf" />
+                    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+                    <!--[if !IE]>-->
+                    <object type="application/x-shockwave-flash" data="/flash/movie_60s.flv" width="604" height="334">
+                      <!--<![endif]-->
+                      <param name="quality" value="high" />
+                      <param name="wmode" value="opaque" />
+                      <param name="scale" value="noscale" />
+                      <param name="salign" value="lt" />
+                      <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/flash/movie_60s&amp;autoPlay=false&amp;autoRewind=false" />
+                      <param name="swfversion" value="8,0,0,0" />
+                      <param name="expressinstall" value="/Scripts/expressInstall.swf" />
+                      <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+                      <div>
+                        <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+                        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com//assets/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
+                      </div>
+                      <!--[if !IE]>-->
+                    </object>
+                    <!--<![endif]-->
+                  </object>
+                </div>
+              </div>
+              <div class="share" style="float:right;">
+                <!-- JiaThis Button BEGIN -->
+                <div id="jiathis_style_32x32">
+                  <span class="fl" style="margin:5px 10px 0 0;">分享视频</span>
+                  <a class="jiathis_button_qzone"></a>
+                  <a class="jiathis_button_tsina"></a>
+                  <a class="jiathis_button_tqq"></a>
+                  <a class="jiathis_button_renren"></a>
+                  <a class="jiathis_button_kaixin001"></a>
+                  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
+              </div>
+            </div><!--trend ends-->
 
-     <div class="shadow mb25">
-         <div class="section">
-           <div class="tit_bg">
-             <h2>近期活动</h2>
-           </div>
-           <div class="interview_box dec_list">
-             <ul>
-               <li>
-                 <div class="img"><%= link_to image_tag('design/ph3.jpg'),"/gift?from=top" %></div>
-                 <div class="properties">
-                   <div class="title">
-                     <strong>活动名称：</strong><a href="#">iColor搭台你唱戏</a><!--<span class="status">正在进行中</span>-->
-                   </div>
-                   <div class="time">
-                     <strong>活动时间：</strong>2012
-                   </div>
-                   <div class="intro">
-                     每月iColor会从所有上传作品的设计师中，评选出空间设计明星和色彩搭配明星各一名，同时，凡上传作品的设计师均可参与月度抽奖赢取ipad!
-                   </div>
-                 </div>
-               </li>
-             </ul>
-           </div>
+          </div>
+        </div>
+
+        <div class="shadow mb25">
+          <div class="section">
+            <div class="tit_bg">
+              <h2>近期活动</h2>
+            </div>
+            <div class="interview_box dec_list">
+              <ul>
+                <li>
+                  <div class="img"><%= link_to image_tag('design/trend/act1.jpg'),"other_events/Proposal" %></div>
+                  <div class="properties">
+                    <div class="title">
+                      <strong>活动名称：</strong><a href="4.1_2.html">以爱之名，刷新生活</a><!--<span class="status">正在进行中</span>-->
+                    </div>
+                    <div class="time">
+                      <strong>活动时间：</strong>2012
+                    </div>
+                    <div class="intro">
+                      近日，立邦公司以“以爱之名，刷新生活”为主题，在北京国贸地铁站刷新了整条60米通道，一改往日沉闷的地铁气息，让人耳目一新。
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
