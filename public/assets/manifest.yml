@@ -509,6 +509,9 @@ design/title_slash2.gif: design/title_slash2-db4bbb35a77080e093deed00adbf6d69.gi
 design/tools.jpg: design/tools-4ec4196a6325ee53c64f0cea2d5ff5a4.jpg
 design/top2bg.gif: design/top2bg-78a63f0b2e71d956c7016495fd18f663.gif
 design/topb2bg.gif: design/topb2bg-2827cd0ef3034f98b479573a2a916d91.gif
+design/trend/act1.jpg: design/trend/act1-c5000a9e72ce85f39bf6ca1b406d80ee.jpg
+design/trend/act2.jpg: design/trend/act2-34c28ce1197b7c450499b733bd28ed54.jpg
+design/trend/act3.jpg: design/trend/act3-f5f7f003c05c8b0b660755a1e3c01c1a.jpg
 design/trend/cdr_b.jpg: design/trend/cdr_b-e350e682ec26108fc0778ebd66360618.jpg
 design/trend/cdr_s.jpg: design/trend/cdr_s-aac4c728a564b6fb8082b80644a23ba8.jpg
 design/trend/dgj_b.jpg: design/trend/dgj_b-d0a51265149c193bd15cd19a57b89498.jpg
@@ -534,10 +537,18 @@ design/trend/sld_s.jpg: design/trend/sld_s-753af267397018345ddd1a599a156ae2.jpg
 design/trend/swj_b.jpg: design/trend/swj_b-9470beefb6997274c039e46db9bb8a09.jpg
 design/trend/swj_s.jpg: design/trend/swj_s-baa70f0d53196c2417afad2ddfe91431.jpg
 design/trend/trend_bg.jpg: design/trend/trend_bg-5c176451a4b59ce37bbea8a723f66e86.jpg
+design/trend/trend_bg2.jpg: design/trend/trend_bg2-79822b0c994032acddb0fdec95101e58.jpg
 design/trend/trend_head.jpg: design/trend/trend_head-82dc48cbfa214dfc0f89f4e232e406a5.jpg
+design/trend/trend_head2.jpg: design/trend/trend_head2-c8a8fd43899f44d1dfb867328fa0a5f9.jpg
+design/trend/trend_head3.jpg: design/trend/trend_head3-f426ed74c36c8546e1d14bbf4b070756.jpg
 design/trend/trend_left.png: design/trend/trend_left-b1b9bf098ed68b34b3387f68f292ba41.png
+design/trend/trend_left2.png: design/trend/trend_left2-060b315e44670f4c2bf7c9ac7613ae32.png
+design/trend/trend_left3.png: design/trend/trend_left3-c5721c84b36c5a84169fff1414b5aa1c.png
 design/trend/trend_title.png: design/trend/trend_title-7de360760af705aa4ed870b40dd4cf25.png
+design/trend/trend_title2.png: design/trend/trend_title2-df0ee4f6f4a3e71cfa22af1f41d385e7.png
+design/trend/trend_title3.png: design/trend/trend_title3-457ea5e888069f8d70598d8ce60131ba.png
 design/trend/trend_video.jpg: design/trend/trend_video-a83b64021142f7d6e8f26cca33918a75.jpg
+design/trend/trend_video2.jpg: design/trend/trend_video2-a0d5ec5268819882ea22019c9335bfc7.jpg
 design/trend/wfb_b.jpg: design/trend/wfb_b-688f508322b85d0ed6e5bf21dbea941b.jpg
 design/trend/wfb_s.jpg: design/trend/wfb_s-c9e7ea4919787d30c8ef961c83d6c6f0.jpg
 design/trend/wm_b.jpg: design/trend/wm_b-6065ab638de2a4eafbdfcbad50b816ce.jpg
@@ -1316,7 +1327,7 @@ art.css: art-d79a97f41349d37a01e69cacb18716da.css
 base.css: base-5c13c6ee26b0533158fb17fef31a51ff.css
 count.css: count-88da7a26b516136d2d699a27cf8b5644.css
 dd.css: dd-404c3f4285a8910d974be4048193c4a2.css
-exciting_activities.css: exciting_activities-be011a8fcb242e7cb4f1cc89a8b89a00.css
+exciting_activities.css: exciting_activities-e8a822d03afce124b5bc6f61ea8048f4.css
 galleryc.css: galleryc-ba7bc3996d179932ab2cf5fd7910a2ee.css
 gifts.css: gifts-7270767b2a9e9fff880aa5de378ca791.css
 index.css: index-66f1df2f61103cafd8868721d46b3ee6.css
