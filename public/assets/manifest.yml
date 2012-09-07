@@ -195,6 +195,16 @@ big_bg/hangzhou2_3.png: big_bg/hangzhou2_3-c83273d6c7cee0257e719607556e26fc.png
 big_bg/hangzhou3_1.png: big_bg/hangzhou3_1-4d9c7ab570ebe380a5641dfbbfcc26ea.png
 big_bg/hangzhou3_2.png: big_bg/hangzhou3_2-4df4f9bdbb8a17dd3edae92436349320.png
 big_bg/hangzhou3_3.png: big_bg/hangzhou3_3-9e1fee394836d9bcc7e444e0487fb26c.png
+big_bg/jinan1_1.png: big_bg/jinan1_1-25e9f5f27aab883f4c20e75924c20672.png
+big_bg/jinan1_2.png: big_bg/jinan1_2-236dc1c10b06c704a13a539c585d0af7.png
+big_bg/jinan1_3.png: big_bg/jinan1_3-c11b83286f33b39846f47de9bcbc0a37.png
+big_bg/jinan2012_tit.jpg: big_bg/jinan2012_tit-3ee464fefbfb8d25d9a0b0ec4f667cbc.jpg
+big_bg/jinan2_1.png: big_bg/jinan2_1-5d5c0f67aa02e81e99a9e3b2dc9c6558.png
+big_bg/jinan2_2.png: big_bg/jinan2_2-1fcb8fc1a077f1b3c68c24570b1fc4da.png
+big_bg/jinan2_3.png: big_bg/jinan2_3-ac4b6f0115bd934402295b2a8868cdc8.png
+big_bg/jinan3_1.png: big_bg/jinan3_1-0443f99197c0d4a9ac28b8d2210bc6e6.png
+big_bg/jinan3_2.png: big_bg/jinan3_2-7150447d906356dd431d9e52ded57d01.png
+big_bg/jinan3_3.png: big_bg/jinan3_3-d84793dfeb3975551a7be41573fac878.png
 big_bg/ohter_act_bg2.png: big_bg/ohter_act_bg2-487d3c1229f81fa368f12384312f0aa0.png
 big_bg/other_act_btn.png: big_bg/other_act_btn-c3d800e81f532caa6a7cb224309a892f.png
 big_bg/other_act_listicon.png: big_bg/other_act_listicon-5232984183ee0a98e91a5eb1f54031ca.png
@@ -355,6 +365,7 @@ design/d_act_list/d_act_list5.jpg: design/d_act_list/d_act_list5-59d195ca753c6c8
 design/d_act_list/d_act_list_banner.jpg: design/d_act_list/d_act_list_banner-1c10505e1d4526fdd4e0f9d7ef2c1296.jpg
 design/d_act_list/guangzhou2011.jpg: design/d_act_list/guangzhou2011-91aee19c69d9c3796e611a32d23b2454.jpg
 design/d_act_list/hangzhou0830.jpg: design/d_act_list/hangzhou0830-3a904c3c47145a61951ec8a2ebaf2650.jpg
+design/d_act_list/jinan0904.jpg: design/d_act_list/jinan0904-ddc2ee733c96503868dfe341feab3258.jpg
 design/d_act_list/nanjing0817.jpg: design/d_act_list/nanjing0817-4cd1f5cd1f4c0446052472906ebf1bcf.jpg
 design/d_act_list/qingdao0831.jpg: design/d_act_list/qingdao0831-6e4925f1fe26fbfb81e3e01b3cc6de81.jpg
 design/d_act_list/shanghai2011.jpg: design/d_act_list/shanghai2011-20ba367feba924c7c5ff9646d0f38aa8.jpg
@@ -1366,7 +1377,7 @@ sellers/seller_data.css: sellers/seller_data-7270767b2a9e9fff880aa5de378ca791.cs
 sellers/seller_sms.css: sellers/seller_sms-7270767b2a9e9fff880aa5de378ca791.css
 sellers/seller_tool.css: sellers/seller_tool-7270767b2a9e9fff880aa5de378ca791.css
 shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
-style.css: style-444ba2d8d5cdf662b0082a0eaf2106b6.css
+style.css: style-f6f233622508c49a7c4899a66a9dda57.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-ec2973b3a8ac53563f1e30357a8ea13b.css
