@@ -34,7 +34,7 @@
       <% unless @gift2.first.blank? %>
       <div class="awards_list" id="awards_slide2">
         <div class="awards_list_container marl155 group">
-          <div class="awards_list_slides marl155 group">
+          <div class="awards_list_slides marl155 group pr">
             <%- @dates_arr2.each do |d|%>
             <%- end_year = d.split('/')[0] %>
             <%- end_month = d.split('/')[1] %>
@@ -84,7 +84,7 @@
       <% unless @gift4.first.blank? %>
         <div class="awards_list" id="awards_slide4">
           <div class="awards_list_container marl155 group">
-            <div class="awards_list_slides marl155 group">
+            <div class="awards_list_slides marl155 group pr">
               <%- @dates_arr4.each do |d|%>
                 <%- end_year = d.split('/')[0] %>
                 <%- end_month = d.split('/')[1] %>
