@@ -7,7 +7,7 @@ class Sellers::SellerDataController < ApplicationController
 			areas = Area.find(current_seller_user.area_id).self_and_descendants
 			@jxs_total = User.where("area_id in (?) and role_id = ?", areas, 2).order("is_top desc","top_order asc","is_imported desc")
 			@sign_total = @jxs_total.map {|m| m.try(:sign_in_count)}.sum
-			@designs_count_total = @jxs_total.map {|m| m.designs.count}.sum
+			@designs_count_total = @jxs_total.map {|m| m.designs.includes(:design_images).where('design_images.file_file_size > 0').count}.sum
 			@votes_count_total = @jxs_total.map {|m| m.designs.sum(:votes_count)}.sum
 			@comments_count_total = @jxs_total.map {|m| m.designs.map {|d| d.comments.count }.sum}.sum
 			@seller_data_total = @jxs_total.map {|m| (m.try(:seller_datas).try(:first).try(:sales).blank?) ? 0 : m.seller_datas.first.sales}.sum
