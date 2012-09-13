@@ -43,7 +43,7 @@
       </div>
 
       <div>
-        <em><%= @user.display_name %></em><span>金牌会员</span>
+        <em><%= truncate(@user.display_name, length: 10) %></em><span>金牌会员</span>
       </div>
     </div>
 

@@ -124,7 +124,7 @@
 			</div>
 
 			<div class="per_firm_colorbar"><img src="<%= asset_path "personal/per_firm_colorbar.png"%>"></div>
-			<p><span><i class="icon_golden"></i>金牌会员</span><%= @user.display_name %>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			<p><span><i class="icon_golden"></i>金牌会员</span><%= truncate(@user.display_name, length: 10) %>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 			<div class="tel_rate_point group">
 				<a href="#">话费积分</a>
 				<table width="220" border="1">
