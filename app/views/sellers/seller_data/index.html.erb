@@ -27,14 +27,16 @@
       <th width="95">公司名称</th>
       <th width="90">联系电话</th>
       <th width="80">邮箱地址</th>
-      <th width="88">总上线次数</th>
-      <th width="77">作品数量</th>
-      <th width="75">被投票数</th>
-      <th width="65">被评论</th>
-      <th width="70">上月销量</th>
-      <th width="110">本月销额</th>
-      <th width="110">Top3 产品名字</th>
-      <th class="noborder" width="71">是否置顶</th>
+      <th width="40">总上线数</th>
+      <th width="40">作品数量</th>
+      <th width="40">被投票数</th>
+      <th width="55">被评论</th>
+      <th width="60">上月销量</th>
+      <th width="70">本月销额</th>
+      <th width="110">畅销前3种产品及桶数</th>
+      <th width="71">是否置顶</th>
+      <th width="110">上月艺术漆销量</th>
+      <th width="100" class="noborder">备注</th>
     </tr>
     <%- @companies.each do |cc|%>
       <%- 
@@ -42,9 +44,9 @@
 
         if current_month
           array = []
-          array << ("<p>" + current_month.product_top1 + "</p>") unless current_month.product_top1.blank?
-          array << ("<p>" + current_month.product_top2 + "</p>") unless current_month.product_top2.blank?
-          array << ("<p>" + current_month.product_top3 + "</p>") unless current_month.product_top3.blank?
+          array << ("<p>" + current_month.product_top1 + ":" + current_month.product_top1_quantity.to_s + "</p>") unless current_month.product_top1.blank?
+          array << ("<p>" + current_month.product_top2 + ":" + current_month.product_top2_quantity.to_s  + "</p>") unless current_month.product_top2.blank?
+          array << ("<p>" + current_month.product_top3 + ":" + current_month.product_top3_quantity.to_s  + "</p>") unless current_month.product_top3.blank?
         end  
       %>
       <tr id="<%= cc.id %>">
@@ -52,7 +54,7 @@
       <td><%= cc.try(:phone) %></td>
       <td class="overflow"><%= cc.try(:email) %></td>
       <td><%= cc.try(:sign_in_count) %></td>
-      <td><%= cc.designs.blank? ? 0 : cc.designs.count %></td>
+      <td><%= cc.designs.blank? ? 0 : cc.designs.includes(:design_images).where('design_images.file_file_size > 0').count %></td>
       <td class="cr"><%= cc.designs.blank? ? 0 : cc.designs.sum(:votes_count) %></td>
       <td><%= cc.designs.blank? ? 0 : cc.designs.map {|d| d.comments.count }.sum  %></td>
 
@@ -61,7 +63,7 @@
         <%- if current_month && !current_month.sales.blank? %>
           <p><%= current_month.sales %></p>
         <%- else %>
-          <button>请输入本月销额</button>
+          <button>请输入</button>
         <%- end %>        
       </td>
       <td class="product_name">
@@ -69,9 +71,24 @@
           <%= raw array.join(" ") unless array.blank? %>
         <%- else %>
           <button>请输入产品名字</button>
-        <%- end %>        
+        <%- end %>
       </td>
-      <td><a class="data_pop" href="javascript:" data-order="<%= cc.try(:top_order) %>" data-reason="<%= cc.try(:top_reason) %>" data-remain= "<%= current_seller_user.top_remain %>">置顶</a></td>
+      <td>
+        <a class="data_pop" href="javascript:" data-order="<%= cc.try(:top_order) %>" data-reason="<%= cc.try(:top_reason) %>" data-remain= "<%= current_seller_user.top_remain %>">置顶</a></td>
+      <td class="art_paint_num">
+        <%- if current_month && !current_month.art_paint_quantity.blank? %>
+          <p><%= current_month.art_paint_quantity %></p>
+        <%- else %>
+          <button>请输入销量</button>
+        <%- end %>
+      </td>
+      <td class="comments">
+        <%- if current_month && !current_month.remarks.blank? %>
+          <p><%= current_month.remarks %></p>
+        <%- else %>
+          <button>请输入备注</button>
+        <%- end %>
+      </td>
     </tr>
     <%- end %>
 
@@ -128,16 +145,26 @@
   <!-- Top3产品提交表单 -->
   <%= form_tag(seller_user_update_seller_data_path, id: "input_pop", remote: true) do %>
     <input type="hidden" id="user_id" name="user_id" />
-    <input type="text" class="input_text" name="seller_data[product_top1]"/>
-    <input type="text" class="input_text" name="seller_data[product_top2]"/>
-    <input type="text" class="input_text" name="seller_data[product_top3]"/>
+    <p>
+      <input id="rank1_name" type="text" class="input_text even" name="seller_data[product_top1]"/>
+      <input id="rank1_num" type="text" class="input_text" name="seller_data[product_top1_quantity]"/>桶
+    </p>
+    <p>
+      <input id="rank2_name" type="text" class="input_text even" name="seller_data[product_top2]"/>
+      <input id="rank2_num" type="text" class="input_text" name="seller_data[product_top2_quantity]"/>桶
+    </p>
+    <p>
+      <input id="rank3_name" type="text" class="input_text even" name="seller_data[product_top3]"/>
+      <input id="rank3_num" type="text" class="input_text" name="seller_data[product_top3_quantity]"/>桶
+    </p>
     <input type="submit" value="确定" class="input_submit" />
   <%- end %><!--data_pop ends-->
 
   <!-- 本月销额提交表单 -->
   <%= form_tag(seller_user_update_seller_data_path, id: "sale_amount", remote: true) do %>
     <input type="hidden" id="sale_amount_hidden"  name="user_id"/>
-    <input type="text" class="input_text" name="seller_data[sales]"/>
+    <input type="hidden" id="flag" />
+    <input type="text"   id="form2_input" class="input_text" name="seller_data[sales]"/>
     <input type="submit" value="确定" class="input_submit" />
   <%- end %>
 <%- end %>  

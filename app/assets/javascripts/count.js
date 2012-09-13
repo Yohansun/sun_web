@@ -110,42 +110,52 @@ $(function(){
 		onscroll : false
 	});
 
-	var $td = $('.product_name'),
-	$form = $('#input_pop'),
-	$input = $form.find('[type=text]'),
-	$td2 = $('.sale_amount'),
-	$form2 = $('#sale_amount'),
-	$input2 = $form2.find('[type=text]');
+  var $td = $('.product_name'),            //products
+  $form = $('#input_pop'),                //3 inputs
+  $input = $form.find('[type=text]'),        //3 inputs
+  $td2 = $('.sale_amount'),                //sale amount
+  $form2 = $('#sale_amount'),                //1 input
+  $input2 = $form2.find('[type=text]'),    //1 input
+
+  $td3 = $('.art_paint_num'),
+  $td4 = $('.comments'),
+  $flag = $('#flag'),
+  $form2_input = $('#form2_input');
 
 	$td.click(function(){
 		var $this = $(this),
 		arr = [];
 		var $p = $this.children('p');
 		$p.each(function(){
-			arr.push($(this).text());
+			arr.push($(this).text().split(':'));
 		});
 
 		showDiv($this,$form,arr);
 		$("#user_id").val($this.parents("tr").attr('id'));
 		$form2.hide();
 	});
-	$td2.click(function(){
+  $td2.click(td2_td4);
+  $td3.click(td2_td4);
+  $td4.click(td2_td4);
+   
+  function td2_td4(){
 		var $this = $(this),
-		p;
 		p = $this.children('p').text();
 
 		showDiv($this,$form2,p);
 		$("#sale_amount_hidden").val($this.parents("tr").attr('id'));
 		$form.hide();
-	});
+	}
 
 	function showDiv(obj,form,arr){
-		var left = obj.position().left - 8;
-		var top = obj.position().top + obj.outerHeight();
+    var left = obj.position().left;/* - 20;*/
+    var top = obj.position().top;/* + obj.outerHeight();*/
 		form.css({'left':left,'top':top}).show();
+
 		if($.isArray(arr)){
 			var $inputs = form.find(':input[type=text]');
 			$inputs[0].focus();
+			arr = [].concat.apply([], arr);
 			$inputs.each(function(index){
 				$inputs.eq(index).val(arr[index]);
 			});
@@ -153,34 +163,20 @@ $(function(){
 		else{
 			form.find(':input[type=text]').focus().val(arr);
 		}
+		var clsName = obj[0].className;
+		var tmp = "";
+		$flag.val(clsName);
+
+		switch (clsName) {
+			case "art_paint_num":
+				tmp = "art_paint_quantity";
+				break;
+			case "sale_amount":
+				tmp = "sales";
+				break;
+			case "comments":
+				tmp = "remarks";		
+		}
+		$form2_input.attr('name','seller_data[' + tmp + ']' );
 	}
-	// $form.submit(function(){
-	// 	submits($form,$input,'#seller_id','.product_name');
-	// 	return false;
-	// });
-	// $form2.submit(function(){
-	// 	submits($form2,$input2,'#sale_amount_hidden','.sale_amount');
-	// 	return false;
-	// });
-
-	// function submits(form,input,id,name){
-	// 	var arr = [],
-	// 	html ='';
-
-	// 	input.each(function(){
-	// 		arr.push($(this).val());
-	// 	});
-
-	// 	var txt = arr.join('');
-	// 	txt = $.trim(txt);
-	// 	if(txt != '') {
-	// 		for(var i = 0; i < arr.length; i ++){
-	// 			if(arr[i] != '')
-	// 			html += '<p>' + arr[i] + '</p>';
-	// 		}
-	// 		$('#' + $(id).val()).find(name).html(html);
-	// 		input.val('');
-	// 	}
-	// 	form.hide();
-	// }
 });
