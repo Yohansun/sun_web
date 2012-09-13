@@ -51,7 +51,7 @@ $(function() {
       $("#upload_going").show();
     },
     onUploadError : function(file, errorCode, errorMsg, errorString) {
-      alert('文件:' + file.name + '上传失败: ' + errorString);
+      alert('您的网络不给力，请稍后尝试');
     },
     onUploadComplete : function(){
       $("#upload_going").hide();
