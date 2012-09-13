@@ -68,11 +68,15 @@ class Sellers::SellerDataController < ApplicationController
 
 		if params[:seller_data][:sales]
 			return @sales = seller_data.sales
+		elsif params[:seller_data][:art_paint_quantity]
+			return @art_paint_quantity = seller_data.art_paint_quantity
+		elsif params[:seller_data][:remarks]
+			return @remarks = seller_data.remarks	
 		else
 			array = []
-			array	<< ("<p>" + seller_data.product_top1 + "</p>") unless seller_data.product_top1.blank?
-			array	<< ("<p>" + seller_data.product_top2 + "</p>") unless seller_data.product_top2.blank?
-			array	<< ("<p>" + seller_data.product_top3 + "</p>") unless seller_data.product_top3.blank?
+			array	<< ("<p>" + seller_data.product_top1 + ":" + seller_data.product_top1_quantity.to_s + "</p>") unless seller_data.product_top1.blank?
+			array	<< ("<p>" + seller_data.product_top2 + ":" + seller_data.product_top2_quantity.to_s + "</p>") unless seller_data.product_top2.blank?
+			array	<< ("<p>" + seller_data.product_top3 + ":" + seller_data.product_top3_quantity.to_s + "</p>") unless seller_data.product_top3.blank?
 			
 			return @products = array.join(" ")
 		end	

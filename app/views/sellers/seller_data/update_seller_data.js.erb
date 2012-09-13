@@ -5,4 +5,8 @@ $('#sale_amount').hide();
 	$("#<%= params[:user_id] %>").find(".product_name").html("<%= raw @products %>");
 <%- elsif @sales  %>
 	$("#<%= params[:user_id] %>").find(".sale_amount").html("<p><%= @sales %></p>");
+<%- elsif @art_paint_quantity  %>
+	$("#<%= params[:user_id] %>").find(".art_paint_num").html("<p><%= @art_paint_quantity %></p>");
+<%- elsif @remarks  %>
+	$("#<%= params[:user_id] %>").find(".comments").html("<p><%= @remarks %></p>");	
 <%- end %>
