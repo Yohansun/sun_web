@@ -55,6 +55,7 @@ class ChannelController < ApplicationController
       cons << "id = #{ws.first} desc"
       ws.delete(ws.first)
       cons << "id in (#{ws.join(",")}) desc"
+      cons = cons[0..4]
     elsif params[:user_role] == "company"
       #根据后台基础设置中推荐家装公司的ID进行排序
       # unless MagicSetting.recommend_designers.blank?
@@ -63,11 +64,15 @@ class ChannelController < ApplicationController
       #根据iColor经销商平台中的置顶排序
       cons << "is_top desc"
       cons << "top_order asc"
+      cons = cons[0..9]
     end
+
     #输入立邦色号的数量
-    cons << "recommend_designer_status desc"
+    #cons << "recommend_designer_status desc"
     #上传作品数量
-    cons << "designs_count desc"
+    #cons << "designs_count desc"
+
+    cons << "last_sign_in_at desc"
 
     @design_users = @design_users.order(cons.join(","))
     @design_users = @design_users.page(params[:page]).per(9)
