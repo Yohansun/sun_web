@@ -1,0 +1,31 @@
+Spreadsheet.client_encoding = 'UTF-8'
+__filename = "iColor数据统计.xls"
+
+sheet1 = xls.create_worksheet
+
+sheet1[0, 0] = "#{@results[:search]}"
+sheet1.row(1).concat @results[:columns]
+
+#设置列名的颜色
+format = Spreadsheet::Format.new :color => "black", :pattern_fg_color => "white", :size => 12
+row_number = 2
+
+@results[:data].each do |data|
+  if data.present?
+    sheet1.update_row row_number, *data
+    sheet1.row(row_number).default_format = format
+    sheet1.row(row_number).height = 20
+    row_number += 1      
+  end  
+end
+
+#设置第一行的颜色
+title_format = Spreadsheet::Format.new :pattern_bg_color => "red", :color => "white", :pattern_fg_color => "red", :pattern => 1, :size => 20, :weight => :bold
+sheet1.row(0).default_format = title_format
+
+bold = Spreadsheet::Format.new :pattern_bg_color => "gray", :color => "black", :pattern_fg_color => "gray", :pattern => 1, :size => 12
+sheet1.row(1).default_format = bold
+
+(0..@results[:columns].size).each do |number|
+	sheet1.column(number).width = 28 
+end

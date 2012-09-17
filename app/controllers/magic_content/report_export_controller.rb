@@ -4,6 +4,8 @@ module MagicContent
   	layout 'magic_admin/application'
   	skip_load_and_authorize_resource
 
+    respond_to :html, :xls
+
   	def index
   		#初始化查询时间
       if params[:start_date].blank?
@@ -40,10 +42,14 @@ module MagicContent
      	end
 
       case params['search']
-        when 'user'   then @results = search_for_users(date: begin_t..end_t, role: role, old_id: old_id)
-        when 'design' then @results = search_for_designs(date: begin_t..end_t, role: role, old_id: old_id)
-        when 'seller' then @results = search_for_seller_datas(area_id: area_id)
+        when 'user'         then @results = search_for_users(date: begin_t..end_t, role: role, old_id: old_id, area_id: area_id)
+        when 'design'       then @results = search_for_designs(date: begin_t..end_t, role: role, old_id: old_id, area_id: area_id)
+        when 'inspiration'  then @results = search_for_inspirations(date: begin_t..end_t, role: role, old_id: old_id, area_id: area_id)
+        when 'seller'       then @results = search_for_seller_datas(area_id: area_id)
+        when 'login_user'   then @results = search_for_login_logs(date: begin_t..end_t)
       end
+
+      respond_with @results
   	end
 
     protected
@@ -56,11 +62,16 @@ module MagicContent
   				users = users.where("#{key} = ?", value)
   			end
   		end
-  		if args[:old_id]
-  			users = users.where("old_id is #{args[:old_id]}")
-  		end
+
+  		users = users.where("old_id is #{args[:old_id]}") if args[:old_id]
+
+      if args[:area_id]
+        areas = Area.find(args[:area_id]).self_and_descendants
+        users = users.where("area_id in (?)", areas)
+      end    
 
   		{}.tap do |results|
+        results[:search] = "用户注册数据统计"
   			results[:columns] = ['用户ID','用户名','用户性质','邮件地址','联系电话','省','市','区','注册时间','登录次数','招募用户']
   			results[:data] = [].tap do |cell|
   				users.find_each do |user|
@@ -89,12 +100,17 @@ module MagicContent
   				designs = designs.where("users.#{key} = ?", value)
   			end
   		end
-  		if args[:old_id]
-  			designs = designs.where("users.old_id is #{args[:old_id]}")
-  		end
+  		
+  		designs = designs.where("users.old_id is #{args[:old_id]}") if args[:old_id]
+
+      if args[:area_id]
+        areas = Area.find(args[:area_id]).self_and_descendants
+        designs = designs.where("users.area_id in (?)", areas)
+      end  
 
   		{}.tap do |results|
-  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数']
+        results[:search] = "作品上传数据统计"
+  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','区域']
   			results[:data] = [].tap do |cell|
   				designs.find_each do |design|
   					cell << [design.id,
@@ -109,11 +125,53 @@ module MagicContent
   									 design.user.try(:name_of_company),
   									 design.user.is_imported?,
   									 design.shares_count,
-  									 design.votes_count]
+  									 design.votes_count,
+                     design.comments.count,
+                     design.user.try(:area).try(:name)]
   				end
   			end
   		end
   	end
+
+    def search_for_inspirations(args)
+      inspirations = Inspiration.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("inspirations.created_at" => args[:date])
+
+      if args[:role]
+        args[:role].each_pair do |key,value|
+          inspirations = inspirations.where("users.#{key} = ?", value)
+        end
+      end
+      
+      inspirations = inspirations.where("users.old_id is #{args[:old_id]}") if args[:old_id]
+
+      if args[:area_id]
+        areas = Area.find(args[:area_id]).self_and_descendants
+        inspirations = inspirations.where("users.area_id in (?)", areas)
+      end
+
+      {}.tap do |results|
+        results[:search] = "灵感秀上传数据统计"
+        results[:columns] = ['作品ID','上传时间','作品名','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','区域']
+        results[:data] = [].tap do |cell|
+          inspirations.find_each do |inspiration|
+            cell << [inspiration.id,
+                     inspiration.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                     inspiration.title,
+                     inspiration.user.id,
+                     inspiration.user.display_name,
+                     inspiration.user.role_chn_name,
+                     inspiration.user.phone,
+                     inspiration.user.email,
+                     inspiration.user.try(:name_of_company),
+                     inspiration.user.is_imported?,
+                     inspiration.shares_count,
+                     inspiration.votes_count,
+                     inspiration.comments.count,
+                     inspiration.user.try(:area).try(:name)]
+          end
+        end
+      end
+    end 
 
   	def search_for_seller_datas(args)
   		area = Area.find_by_id args[:area_id]
@@ -121,6 +179,7 @@ module MagicContent
   		companies = User.where("area_id in (?) and role_id = ?", area_ids, 2).order("is_top desc","top_order asc") 
   	
   		{}.tap do |results|
+        results[:search] = "经销商平台数据统计"
   			results[:columns] =  ['公司名称','开户时间','公司电话','公司邮箱','累计上线数','累计销售额','累计作品数','累计被投票数','累计被评论数','是否置顶','入选每周之星']
   			results[:data] = [].tap do |cell|
   				companies.find_each do |user|
@@ -154,6 +213,30 @@ module MagicContent
   				end
   			end
   		end
-  	end	
+  	end
+
+    def search_for_login_logs(args)
+      logs = LoginLog.where(current_sign_in_at: args[:date]).group(:user_id).size
+
+      {}.tap do |results|
+        results[:search] = "登录用户数据统计"
+        results[:columns] = ['用户ID','用户名','用户性质','邮件地址','联系电话','省','市','区','登录次数','招募用户']
+        results[:data] = [].tap do |cell|
+          logs.each do |key,value|
+            user = User.find_by_id key
+            cell << [user.id,
+                     user.display_name,
+                     user.role_chn_name,
+                     user.try(:email),
+                     user.try(:phone),
+                     user.city.try(:parent).try(:name),
+                     user.try(:city).try(:name), 
+                     user.try(:area).try(:name),
+                     value,
+                     user.is_imported?]
+          end
+        end
+      end
+    end
   end
 end

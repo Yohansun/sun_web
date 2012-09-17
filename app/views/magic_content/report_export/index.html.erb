@@ -32,16 +32,10 @@
 							<option value="">--请选择--</option>
 							<option value="user">用户注册数据</option>
 							<option value="design">作品上传数据</option>
+							<option value="inspiration">灵感秀上传数据</option>
 							<option value="seller">经销商平台数据</option>
+							<option value="login_user">登录用户统计</option>
 						</select>
-					</div>
-					<div class="fix"></div>
-				</div>
-
-				<div class="rowElem noborder" style="padding:0 14px; display:none;" id="area">
-					<label>查询区域:</label>
-					<div class="formRight">
-						<input name="area_name" type="text" style="width:112px;"/>
 					</div>
 					<div class="fix"></div>
 				</div>
@@ -73,13 +67,27 @@
 					<div class="fix"></div>
 				</div>
 
+				<div class="rowElem noborder" style="padding:0 14px;" id="area">
+					<label>查询区域:</label>
+					<div class="formRight">
+						<input name="area_name" type="text" style="width:112px;"/>
+					</div>
+					<div class="fix"></div>
+				</div>
+
 				<div class="fix"></div>
 				<div class="rowElem">
 					<%= submit_tag "查询", class: 'greyishBtn submitForm' %>
 					<div class="fix"></div>
 				</div>
 			</fieldset>
-		</form>
+		</form>		
+	</div>
+
+	<div class="widget nobg noborder">
+		<a href="<%= main_app.report_export_path(format: :xls, params: params) if params[:search].present? %>">
+			<input type="button" class="greyishBtn mr30" value="Download as Excel" />
+		</a>
 	</div>
 
 	<div class="table">
@@ -117,10 +125,8 @@
 	  		var value = $("#search_for div.jqTransformSelectWrapper span").text();
 	  		if(value == "经销商平台数据"){
 	  			$('#role,#properties,#start_date,#end_date').hide();
-	  			$('#area').show();
 	  		}else{
 	  			$('#role,#properties,#start_date,#end_date').show();
-	  			$('#area').hide();
 	  		}
 	  	});
 	  })
