@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :on => :update
   validates_presence_of :password, :if => :email_required?, :on => :create
   validates_presence_of :is_read, :if => :email_required?, :on => :create
-  validates_presence_of :phone, :message => "联系电话不能为空！", :if => :not_from_minisite?
+  validates_presence_of :phone, :message => "联系电话不能为空！", :if => :phone_required?
   validates_presence_of :role_id, :if => :need_valid?
   validates_presence_of :area_id, :if => :need_valid?
   validates_format_of :username, :with => /(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]/, :if => :email_required?, :on => :create
@@ -103,12 +103,16 @@ class User < ActiveRecord::Base
     (user_tokens.empty? || !email.blank?) && super
   end
 
+  def phone_required?
+    is_from_minisite? ? false : (not_from_minisite? || phone.blank?)
+  end
+
   def display_name   #a little fix in when company company_name;name;username
     case role_name
       when /designer|user/
         self.name.blank? ? self.username : self.name
       when "company"
-        if self.name_of_company.blank? 
+        if self.name_of_company.blank?
            if self.name.blank?
               return self.username
            else
