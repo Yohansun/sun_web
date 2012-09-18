@@ -15,7 +15,6 @@ class ChannelController < ApplicationController
       params[:area_id] = params[:area]
     end
 
-    #排序规则：本周之星 -> 往期之星 -> 作品有色号 -> 上传作品数
     unless params[:keywords] == "请输入关键字"
       @design_users = User.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
     else
@@ -42,39 +41,27 @@ class ChannelController < ApplicationController
         @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
     end
 
-    user_url = WeeklyStar.order("published_at desc").select("author_url")
-    ws = []
-    user_url.each do |ul|
-      s = ul.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,})?)).to_a[1]
-      ws << s unless s.blank?
+    ws = [].tap do |w|
+      WeeklyStar.order("published_at desc").limit(5).map(&:author_url).each do |ul|
+        s = ul.match(%r(http://www.icolor.com.cn/users/(\d{1,})?)).to_a[1]
+        w << s unless s.blank?
+      end
     end
 
-    cons = []
-    #本周之星 -> 往期之星
-    if !ws.blank? && params[:user_role] != "company"
-      cons << "id = #{ws.first} desc"
-      ws.delete(ws.first)
-      cons << "id in (#{ws.join(",")}) desc"
-      cons = cons[0..4]
-    elsif params[:user_role] == "company"
-      #根据后台基础设置中推荐家装公司的ID进行排序
-      # unless MagicSetting.recommend_designers.blank?
-      #  cons << "id in (#{MagicSetting.recommend_designers}) desc"
-      # end
-      #根据iColor经销商平台中的置顶排序
-      cons << "is_top desc"
-      cons << "top_order asc"
-      cons = cons[0..9]
+    if params[:user_role].blank?
+      @design_users = @design_users.order("find_in_set(id,'#{ws.reverse.join(",")}') desc").order("last_sign_in_at desc")
+    elsif params[:user_role].match /designer/
+      @design_users = @design_users.order("last_sign_in_at desc")
+    elsif params[:user_role].match /company/
+      sellers = @design_users.where("top_order != 0").order("top_order desc").limit(10).map(&:id)
+
+      unless sellers.blank?
+        @design_users = @design_users.order("find_in_set(id,'#{seller_ids.reverse.join(",")}') desc").order("last_sign_in_at desc")
+      else
+        @design_users = @design_users.order("last_sign_in_at desc")
+      end
     end
 
-    #输入立邦色号的数量
-    #cons << "recommend_designer_status desc"
-    #上传作品数量
-    #cons << "designs_count desc"
-
-    cons << "last_sign_in_at desc"
-
-    @design_users = @design_users.order(cons.join(","))
     @design_users = @design_users.page(params[:page]).per(9)
   end
 end
