@@ -107,8 +107,12 @@
       <p class="p2 p2_popup_zf group">
         <span class="zf ft12">转发 (<em><%= design.shares_count %></em>)</span><a href="/designs/<%= design.id %>"><span class="pl ft12">评论 (<%= design.comments_count %>)</span></a>
       </p>
-      <% cover_img = design.cover_img.file.url if design.cover_img -%>
-      <%= forward_links("#iColor分享#一套优秀家装作品----【#{design.title}】，更多实用装修案例，尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
+      <%
+        cover_img = design.cover_img.file.url if design.cover_img
+        text = "#{design.user.city.try(:parent).try(:name)}的" if design.user.area_id.present?
+        role = "#{design.user.role_id.eql?(2) ? '设计师' : '家装公司'}:" if design.user.role_id != 3
+      -%>
+      <%= forward_links("#iColor分享#来自#{text}#{role}#{design.user.display_name}的作品【#{design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
       <p>
         公司：<%= design.user.name_of_company %>
         <br/>
