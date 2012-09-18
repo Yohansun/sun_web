@@ -46,7 +46,7 @@ module MagicContent
         when 'design'       then @results = search_for_designs(date: begin_t..end_t, role: role, old_id: old_id, area_id: area_id)
         when 'inspiration'  then @results = search_for_inspirations(date: begin_t..end_t, role: role, old_id: old_id, area_id: area_id)
         when 'seller'       then @results = search_for_seller_datas(area_id: area_id)
-        when 'login_user'   then @results = search_for_login_logs(date: begin_t..end_t)
+        when 'login_user'   then @results = search_for_login_logs(date: begin_t..end_t, area_id: area_id)
       end
 
       respond_with @results
@@ -110,7 +110,7 @@ module MagicContent
 
   		{}.tap do |results|
         results[:search] = "作品上传数据统计"
-  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','区域']
+  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','省','市','区']
   			results[:data] = [].tap do |cell|
   				designs.find_each do |design|
   					cell << [design.id,
@@ -127,6 +127,8 @@ module MagicContent
   									 design.shares_count,
   									 design.votes_count,
                      design.comments.count,
+                     design.user.city.try(:parent).try(:name),
+                     design.user.try(:city).try(:name), 
                      design.user.try(:area).try(:name)]
   				end
   			end
@@ -151,7 +153,7 @@ module MagicContent
 
       {}.tap do |results|
         results[:search] = "灵感秀上传数据统计"
-        results[:columns] = ['作品ID','上传时间','作品名','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','区域']
+        results[:columns] = ['作品ID','上传时间','作品名','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','省','市','区']
         results[:data] = [].tap do |cell|
           inspirations.find_each do |inspiration|
             cell << [inspiration.id,
@@ -167,6 +169,8 @@ module MagicContent
                      inspiration.shares_count,
                      inspiration.votes_count,
                      inspiration.comments.count,
+                     inspiration.user.city.try(:parent).try(:name),
+                     inspiration.user.try(:city).try(:name), 
                      inspiration.user.try(:area).try(:name)]
           end
         end
@@ -216,7 +220,12 @@ module MagicContent
   	end
 
     def search_for_login_logs(args)
-      logs = LoginLog.where(current_sign_in_at: args[:date]).group(:user_id).size
+      if args[:area_id]
+        areas = Area.find(args[:area_id]).self_and_descendants 
+        logs = LoginLog.includes(:user).where("login_logs.current_sign_in_at" => args[:date]).where("users.area_id in (?)",areas).group(:user_id).size
+      else
+        logs = LoginLog.where(current_sign_in_at: args[:date]).group(:user_id).size
+      end      
 
       {}.tap do |results|
         results[:search] = "登录用户数据统计"
