@@ -49,16 +49,16 @@ class ChannelController < ApplicationController
     end
 
     if params[:user_role].blank?
-      @design_users = @design_users.order("find_in_set(id,'#{ws.reverse.join(",")}') desc").order("last_sign_in_at desc")
+      @design_users = @design_users.order("find_in_set(id,'#{ws.reverse.join(",")}') desc").order("current_sign_in_at desc")
     elsif params[:user_role].match /designer/
-      @design_users = @design_users.order("last_sign_in_at desc")
+      @design_users = @design_users.order("current_sign_in_at desc")
     elsif params[:user_role].match /company/
       sellers = @design_users.where("top_order != 0").order("top_order desc").limit(10).map(&:id)
 
       unless sellers.blank?
-        @design_users = @design_users.order("find_in_set(id,'#{seller_ids.reverse.join(",")}') desc").order("last_sign_in_at desc")
+        @design_users = @design_users.order("find_in_set(id,'#{seller_ids.reverse.join(",")}') desc").order("current_sign_in_at desc")
       else
-        @design_users = @design_users.order("last_sign_in_at desc")
+        @design_users = @design_users.order("current_sign_in_at desc")
       end
     end
 
