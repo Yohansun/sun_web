@@ -5,6 +5,7 @@ log/*.exe
 log/production.*
 public/*.xls
 public/*.csv
+public/seller_user_reports
 tmp
 *.swp
 .idea
