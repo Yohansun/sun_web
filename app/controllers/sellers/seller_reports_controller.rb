@@ -87,7 +87,8 @@ class Sellers::SellerReportsController < ApplicationController
     	sheet1.column(number).width = 28 
     end	
 
-    file = "#{Rails.root}/public/seller_user_reports/#{title}.xls"    
+    file = "#{Rails.root}/public/seller_user_reports/#{title}.xls"
+    FileUtils.mkdir 'public/seller_user_reports' unless File.directory?("public/seller_user_reports")
 
     unless File.exists? file
     	SellerReport.create!(file_name: title, statistical_time: statistical_time, created_time: Time.now)
