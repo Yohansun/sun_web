@@ -109,7 +109,7 @@
       </p>
       <%
         cover_img = design.cover_img.file.url if design.cover_img
-        text = "#{design.user.city.try(:parent).try(:name)}的" if design.user.area_id.present?
+        text = "#{design.user.area.try(:parent).try(:name)}的" if design.user.area_id.present?
         role = "#{design.user.role_id.eql?(2) ? '设计师' : '家装公司'}:" if design.user.role_id != 3
       -%>
       <%= forward_links("#iColor分享#来自#{text}#{role}#{design.user.display_name}的作品【#{design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
