@@ -184,7 +184,23 @@
                          <span class="pl ft12">评论 (<%= link_design.try(:comments).try(:length) || 0 %>)</span>
                         </a>
                       </p>
-                      <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.project_name}（#{@design.author}】, #{@design.design_name}），更多精彩装修作品，尽在iColor，", weekly_stars_url, design.main_preview_img.url, design.id.to_s, "WeeklyStar") %>
+
+                      <%
+                        role = "#{link_design.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if link_design.user.role_id != 3
+                        text = if link_design.user.area_id.present?
+                          province = link_design.user.city.try(:parent).try(:name)
+                          city = link_design.user.try(:city).try(:name)
+
+                          if city
+                            if province == city
+                              "#{link_design.user.area.try(:parent).try(:name)}的"
+                            else
+                              "#{province + city}的"
+                            end
+                          end
+                        end
+                      -%>
+                      <%= forward_links("#iColor分享#来自#{text}#{role}#{link_design.user.display_name}的作品【#{link_design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, design.main_preview_img.url, design.id.to_s, "WeeklyStar") %>
                     </li>
                 <% end -%>
               </ul>

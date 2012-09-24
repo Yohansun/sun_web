@@ -33,8 +33,23 @@
           <p class="p2 group">
             <span class="zf ft12">转发 (<%= design.shares_count %>)</span><span class="pl ft12">评论 (<%= design.comments_count %>)</span>
           </p>
-          <% cover_img = design.cover_img.file.url if design.cover_img -%>
-          <%= forward_links("#iColor#分享一套优秀家装作品----#{design.title}，更多实用装修案例，尽在iColor #{user_design_url(design.user_id, design)}", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
+          <%
+            cover_img = design.cover_img.file.url if design.cover_img
+            role = "#{design.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if design.user.role_id != 3
+            text = if design.user.area_id.present?
+              province = design.user.city.try(:parent).try(:name)
+              city = design.user.try(:city).try(:name)
+
+              if city
+                if province == city
+                  "#{design.user.area.try(:parent).try(:name)}的"
+                else
+                  "#{province + city}的"
+                end
+              end
+            end
+          -%>
+          <%= forward_links("#iColor分享#来自#{text}#{role}#{design.user.display_name}的作品【#{design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
           <p>风格：<%= design.style %>
           </li>
         <%- end %>

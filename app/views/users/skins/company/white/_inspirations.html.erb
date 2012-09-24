@@ -44,8 +44,23 @@
 
           <a href="/inspirations/<%= i.id %>"><span class="pl ft12">评论 (<%= i.comments_count %>)</span></a>
         </p>
-        <% cover_img = i.cover_img.file.url if i.cover_img -%>
-        <%= forward_links("#iColor分享#一套灵感图片，装修灵感从点滴积累开始，让我们一起行动吧！更多灵感创意，尽在iColor，@刷新生活iColor，", inspiration_url(i), cover_img, i.id.to_s, "Inspiration") %>
+        <%
+          cover_img = i.cover_img.file.url if i.cover_img
+          role = "#{i.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if i.user.role_id != 3
+          text = if i.user.area_id.present?
+            province = i.user.city.try(:parent).try(:name)
+            city = i.user.try(:city).try(:name)
+
+            if city
+              if province == city
+                "#{i.user.area.try(:parent).try(:name)}的"
+              else
+                "#{province + city}的"
+              end
+            end
+          end
+        -%>
+        <%= forward_links("#iColor分享#来自#{text}#{role}#{i.user.display_name}的一套灵感图片，装修灵感从点滴积累开始，让我们一起行动吧！更多灵感创意，尽在iColor，@刷新生活iColor，", inspiration_url(i), cover_img, i.id.to_s, "Inspiration") %>
       </div>
     <%- end -%>
 
