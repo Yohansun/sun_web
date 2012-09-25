@@ -47,6 +47,7 @@ module MagicContent
         when 'inspiration'  then @results = search_for_inspirations(date: begin_t..end_t, role: role, old_id: old_id, area_id: area_id)
         when 'seller'       then @results = search_for_seller_datas(area_id: area_id)
         when 'login_user'   then @results = search_for_login_logs(date: begin_t..end_t, area_id: area_id)
+        when 'vote'         then @results = search_for_vote_data(date: begin_t..end_t, area_id: area_id)
       end
 
       respond_with @results
@@ -247,5 +248,34 @@ module MagicContent
         end
       end
     end
+
+    def search_for_vote_data(args)
+      if args[:area_id]
+        areas = Area.find(args[:area_id]).self_and_descendants 
+        votes = Vote.includes(:user).where("votes.created_at" => args[:date]).where("users.area_id in (?)",areas).group(:user_id).size
+      else
+        votes = Vote.where(created_at: args[:date]).group(:user_id).size
+      end
+
+      {}.tap do |results|
+        results[:search] = "用户投票数据统计"
+        results[:columns] = ['用户ID','用户名','用户性质','邮件地址','联系电话','省','市','区','招募用户','投票数']
+        results[:data] = [].tap do |cell|
+          votes.each do |key,value|
+            user = User.find_by_id key
+            cell << [user.id,
+                     user.display_name,
+                     user.role_chn_name,
+                     user.try(:email),
+                     user.try(:phone),
+                     user.city.try(:parent).try(:name),
+                     user.try(:city).try(:name), 
+                     user.try(:area).try(:name),                     
+                     user.is_imported?,
+                     value] if user
+          end
+        end
+      end  
+    end  
   end
 end
