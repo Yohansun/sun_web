@@ -38,12 +38,10 @@
               province = i.user.city.try(:parent).try(:name)
               city = i.user.try(:city).try(:name)
 
-              if city
-                if province == city
-                  "#{i.user.area.try(:parent).try(:name)}的"
-                else
-                  "#{province + city}的"
-                end
+              if province && city
+                province == city ? "#{city}的" : "#{province + city}的"
+              else
+                "#{city}的" if city
               end
             end
           -%>
