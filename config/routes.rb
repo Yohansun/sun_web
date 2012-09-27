@@ -238,4 +238,7 @@ Icolor::Application.routes.draw do
   post "scores/share_score" => "scores#share_score"
 
   get "areas" => "areas#index"
+  
+  #国庆节活动页面
+  get "national_day" => "function#national_day"
 end
