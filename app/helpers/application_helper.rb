@@ -241,13 +241,13 @@ module ApplicationHelper
 
   #/national_day 活动一：火眼金睛寻宝图（10.1开始每天10.01分更新图片）
   def get_pic
-    pic_urls = %w(http://www.icolor.com.cn/users/65668/designs/2605
-                  http://www.icolor.com.cn/users/63178/designs/1822
-                  http://www.icolor.com.cn/inspirations/1088
-                  http://www.icolor.com.cn/color_designs/467
-                  http://www.icolor.com.cn/users/64528/designs/1906
-                  http://www.icolor.com.cn/users/65637/designs/2250
-                  http://www.icolor.com.cn/users/66071/designs/2473)
+    # pic_urls = %w(http://www.icolor.com.cn/users/65668/designs/2605
+    #               http://www.icolor.com.cn/users/63178/designs/1822
+    #               http://www.icolor.com.cn/inspirations/1088
+    #               http://www.icolor.com.cn/color_designs/467
+    #               http://www.icolor.com.cn/users/64528/designs/1906
+    #               http://www.icolor.com.cn/users/65637/designs/2250
+    #               http://www.icolor.com.cn/users/66071/designs/2473)
 
     month,day,time,hour = Time.now.month, Time.now.day, Time.now, Time.now.hour
 
@@ -255,9 +255,9 @@ module ApplicationHelper
       return image_tag(asset_path("october/october_img.jpg"))
     elsif month == 10 && (1..7).include?(day)
       if hour >= 10
-        link_to image_tag(asset_path("october/#{day}.jpg")), pic_urls[day-1]
+        image_tag(asset_path("october/#{day}.jpg")) #, pic_urls[day-1]
       else
-        link_to image_tag(asset_path("october/#{day-1}.jpg")), pic_urls[day-2]
+        image_tag(asset_path("october/#{day-1}.jpg")) #, pic_urls[day-2]
       end
     end
   end
