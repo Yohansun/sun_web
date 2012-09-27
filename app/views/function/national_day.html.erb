@@ -12,7 +12,7 @@
       <p>
         <strong>活动奖品：</strong>前5位获得小龙u盘，后5位获得30元话费。
       </p>
-      <a href="<%= current_user ? "/" : "/users/sign_up" %>" class="october_find" title="我要寻图">我要寻图</a>
+      <a href="<%= root_path if current_user %>" class="october_find" title="我要寻图">我要寻图</a>
       <h2>活动二：迎中秋 传作品 赢话费 送亲情</h2>
       <p>
         <strong>活动内容：</strong>上传作品， iColor为你送你话费，给你长假期间和亲朋好友电话联系买单。活动期间，只要成为iColor网站设计师/家装公司会员,并且在推荐作品频道点击我要上传，上传作品（一套作品需多于3张），多传多得！
@@ -20,7 +20,7 @@
       <p>
         <strong>活动奖品：</strong>一套得30元话费，二套得50元话费，三套得100元话费。
       </p>
-      <a href="<%= current_user ? (current_user.common_user? ? new_user_inspiration_path(current_user) : new_user_design_path(current_user)) : "/users/sign_up" %>" class="october_upload" title="我要上传">我要上传</a>
+      <a href="<%= (current_user.common_user? ? new_user_inspiration_path(current_user) : new_user_design_path(current_user)) if current_user %>" class="october_upload" title="我要上传">我要上传</a>
     </div><!--fl ends-->
     <div class="fr pr">
       <div class="pa">寻宝图</div>
@@ -31,3 +31,29 @@
     </p>
   </div><!--october ends-->
 </div><!--main ends-->
+
+<script type="text/javascript">
+    $(function () {
+      if ($(".october_find")) {
+        $(".october_find").click(function (event) {
+              <% if current_user -%>
+              return true;
+              <% else -%>
+              show_login();
+              return false;
+              <% end -%>
+          });
+      };
+
+      if ($(".october_upload")) {
+        $(".october_upload").click(function (event) {
+              <% if current_user -%>
+              return true;
+              <% else -%>
+              show_login();
+              return false;
+              <% end -%>
+          });
+      };
+    });
+</script>
