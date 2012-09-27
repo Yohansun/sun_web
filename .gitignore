@@ -15,3 +15,4 @@ public/dev-assets/
 public/flash/april_7.3.0406.swf
 .DS_Store
 lib/data/export_data
+Gemfile.lock
