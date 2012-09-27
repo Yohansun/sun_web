@@ -913,6 +913,10 @@ news/upload_save.jpg: news/upload_save-c8906c8d5a87097e3230ab8165a34941.jpg
 news/weekly_tips.jpg: news/weekly_tips-c35628b460ff4b0447e091ec8f22beb5.jpg
 news/weibo_head.gif: news/weibo_head-b603a7bb1538d04beb6a718f366263cf.gif
 nippon.png: nippon-5e9a8062d80ed6dbf874b37c9d82770f.png
+october/october_bg.jpg: october/october_bg-95a27b4400c853ebcf052ededc0e73ba.jpg
+october/october_img.jpg: october/october_img-e3fdcff0204e450ffc17e725f55f9f69.jpg
+october/october_items.jpg: october/october_items-e98f12ca73c29741de2d9a691d819335.jpg
+october/october_png.png: october/october_png-30d227445102543d6992f6a26600662b.png
 overlay.png: overlay-52d536b0a5238b1ac860f47401d22aa3.png
 paint_art/7.1_tit.jpg: paint_art/7.1_tit-9b26fafee86594cf7c1e6ad842298ba4.jpg
 paint_art/art0_2_after.jpg: paint_art/art0_2_after-7c46a11f5935710b7497063f4155fb04.jpg
@@ -1377,6 +1381,7 @@ magic_content/tools.css: magic_content/tools-7270767b2a9e9fff880aa5de378ca791.cs
 magic_content/weekly_star.css: magic_content/weekly_star-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/weekly_star_uploads.css: magic_content/weekly_star_uploads-7270767b2a9e9fff880aa5de378ca791.css
 news.css: news-25fbcf49d8deb5f7e52e5a2454945cda.css
+october.css: october-659a6d68fe27d2cf8a10062175bb4f3d.css
 owners_channel.css: owners_channel-29536f353f5da0f62f290b1187980717.css
 reg.css: reg-c55253fecb20086475032c0046a7bdde.css
 reset.css: reset-5ca575c535496c0098a1bd1f0729734f.css
