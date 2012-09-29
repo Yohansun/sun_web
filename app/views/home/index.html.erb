@@ -508,7 +508,11 @@
 
 <script type="text/javascript">
   $(function() {
-      $("#home_improvement_news").hide();
+    $("#home_improvement_news").hide();
+
+    <%- if Time.now > Time.local(2012,10,3,00,00,00) %>
+      $('#Map3').prev().attr("src", "/images/kvs/kvstar1003.jpeg");
+    <%- end %>
   });
 </script>
 <% end -%>
