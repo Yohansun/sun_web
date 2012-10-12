@@ -1295,6 +1295,9 @@ yda/yda_imgs8.jpg: yda/yda_imgs8-82983bd0d917974af9c1de9693346b92.jpg
 yda/yda_imgs9.jpg: yda/yda_imgs9-2867030b042e4003b77cda61f302283f.jpg
 yda/yda_info.png: yda/yda_info-9e1f1fcbf28621c4a9565aa449130c02.png
 yda/yda_ins.png: yda/yda_ins-971daaedcfb26784d37abbeb67639459.png
+yda/yda_list.png: yda/yda_list-27aabff0f304664772f3bafc826f36d2.png
+yda/yda_list_bg.png: yda/yda_list_bg-26762b1ad20079af38397efa8688cb7e.png
+yda/yda_lists.png: yda/yda_lists-13f7e09935bebbe1ce099663ff2f51fc.png
 yda/yda_logo.png: yda/yda_logo-0ed360ff415a764eef8b3162aaf5735a.png
 yda/yda_logo1.png: yda/yda_logo1-f0d49cb38579fed1712e26899e016500.png
 yda/yda_prize.png: yda/yda_prize-5cdeadbd87e52e8ecf87fb9fb7d950d0.png
@@ -1361,7 +1364,7 @@ tagcloud/js-cumulus.js: tagcloud/js-cumulus-cc46d091628b1f8d6e1786b7e30665fe.js
 uncompressed.jquery.dd.js: uncompressed.jquery.dd-61e4b0ac948b41a18405f5442d0b4c0e.js
 yda.js: yda-2b57183c7722c2882f54a4b59ed7aeba.js
 yda_games.js: yda_games-3af39f1da6f167c2cbf453ed74daff3d.js
-application.css: application-b56a936e58950bafc019dea2fc627f0b.css
+application.css: application-b5b658495be789d6520e4d8f6d717ccc.css
 areas.css: areas-7270767b2a9e9fff880aa5de378ca791.css
 art.css: art-d79a97f41349d37a01e69cacb18716da.css
 base.css: base-5c13c6ee26b0533158fb17fef31a51ff.css
@@ -1391,7 +1394,7 @@ news.css: news-25fbcf49d8deb5f7e52e5a2454945cda.css
 october.css: october-faee17a51ab4f99d6245db8b7ba8dcd7.css
 owners_channel.css: owners_channel-29536f353f5da0f62f290b1187980717.css
 reg.css: reg-c55253fecb20086475032c0046a7bdde.css
-reset.css: reset-5ca575c535496c0098a1bd1f0729734f.css
+reset.css: reset-0a23aec4f3a7c55a3b785f5b2aa24eab.css
 rules2.css: rules2-623921c278d081e11d1784b5ff964e2a.css
 scores.css: scores-7270767b2a9e9fff880aa5de378ca791.css
 sellers/seller_data.css: sellers/seller_data-7270767b2a9e9fff880aa5de378ca791.css
@@ -1403,7 +1406,7 @@ sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-ec2973b3a8ac53563f1e30357a8ea13b.css
 wood.css: wood-80327677c7dcf07d8fbda29e30cccfa6.css
-yda.css: yda-de7af972b55ac14fc9c88fea9e7b6843.css
+yda.css: yda-a1fd6b3d811c4f9e29c7cbb96f60018c.css
 yda_games.css: yda_games-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/application.css: magic_content/application-7270767b2a9e9fff880aa5de378ca791.css
 magic_content/banners.css: magic_content/banners-7270767b2a9e9fff880aa5de378ca791.css
