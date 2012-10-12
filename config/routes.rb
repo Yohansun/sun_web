@@ -149,6 +149,7 @@ Icolor::Application.routes.draw do
   match '/yda/theme' => 'yda#theme'
   match '/yda/down_yda' => 'yda#down_yda'
   match '/yda/yda_past' => 'yda#yda_past'
+  match '/yda/yda_list' => 'yda#yda_list'
   
   resources :weekly_tips, only: :index
   
