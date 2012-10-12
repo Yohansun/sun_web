@@ -22,6 +22,6 @@ class SiteMessage < ActiveRecord::Base
   end
 
   def deliver
-    Notifier.inform(self.user,self.desc).deliver
-  end  
+    Notifier.inform(self.user,self.desc).deliver unless self.desc =~ /上传失败|上传不了|上传报错|不能上传|上传不上|没法上传|传不上去/
+  end
 end
