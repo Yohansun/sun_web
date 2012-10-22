@@ -91,7 +91,6 @@
       </td>
     </tr>
     <%- end %>
-
     <%- if @jxs_total.last ==  @companies.last %>
     <tr>
       <td>Total:</td>
@@ -103,7 +102,9 @@
       <td><%= @comments_count_total %></td>
       <td class="cr"><%= @seller_data_total %></td>
       <td class="sale_amount"><%= @current_month_total %></td>
+      <td><%= @array_total %>桶</td>
       <td></td>
+      <td><%= @art_paint_total %></td>
       <td></td>
     </tr>
     <%- end %>
