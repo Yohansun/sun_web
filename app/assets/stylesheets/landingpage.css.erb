@@ -1,16 +1,22 @@
+/*
+ *= require_self
+ *= require reset
+ *= require base
+*/
+
 @charset "utf-8";
 *{margin:0;padding:0;}
 ul{list-style:none;}
 a{text-decoration:none;}
 a img{border:none;}
-body{height:1102px;background:url(<%= asset_path "landingpage/landingpage_bg.jpg"%>) no-repeat left top;}
+body{height:1102px;}
 #wrapper{width:990px;margin:0 auto;height:1102px;}
 .header{border-bottom:1px solid #929292;padding-bottom:5px;margin-bottom:70px;}
 .header h1 a{display:block;margin-right:50px;}
-.header h1,.header .nav,.header .nav li,.header .nav li a{float:left;}
-.header .nav{margin-top:30px;}
-.header .nav li a{height:47px;width:102px;color:#ff255b;font:14px/47px "Microsoft Yahei";text-align:center;}
-.header .nav li a.li_cur{background:url(<%= asset_path "landingpage/landingpage_navhover.png"%>) no-repeat;color:#fff;}
+.header h1,.header .landing_nav,.header .landing_nav li,.header .landing_nav li a{float:left;}
+.header .landing_nav{margin-top:30px;}
+.header .landing_nav li a{height:47px;width:102px;color:#ff255b;font:14px/47px "Microsoft Yahei";text-align:center;}
+.header .landing_nav li a.li_cur{background:url(<%= asset_path "landingpage/landingpage_navhover.png"%>) no-repeat;color:#fff;}
 /******************************************/
 /*index*/
 .landing_index{padding-top:50px;text-align:center;}
@@ -43,7 +49,12 @@ i[class^="icon-"]{display:inline-block;vertical-align:middle;}
 .jury p span{position:absolute;right:-130px;top:0;}
 .jury p span strong{display:block;font-weight:bold;color:#ff255b;}
 
-#footer{background:#0f213a;max-width:1900px;}
+/*pop*/
+.content.pop_rule{width:950px;height:700px;position:absolute;top:50%;margin-top:-400px;left:50%;margin-left:-605px;z-index:99999;background:#eafff8;padding:50px 130px 30px;box-shadow:2px 2px 5px #ccc;}
+.content.pop_rule.jury p{min-height:24px;margin:10px 0;}
+.landing_overlay{background:url(<%= asset_path "landingpage/landing_overlay.png"%>);position:absolute;top:0;left:0;width:100%;height:100%;z-index:99998;}
+
+#footer{background:#0f213a;/*max-width:1900px;*/}
 #footer .main{width:990px;margin:0 auto;padding:35px 0;}
 #footer .main ,#footer .main a,#footer .main span{color:#fff;font-size:12px;}
 #footer .main span{margin-top:5px;display:block;}

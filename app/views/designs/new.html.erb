@@ -11,8 +11,8 @@
     #design_style, #design_design_color{width:108px;}
     #design_recommend_color_category1, #province, #city{background:white;border:1px solid #ccc;width:108px}
   </style>
-  <% if current_user && current_user.reading_designer? %>
-    <%= render :partial => "/yda_games/new" %>
+  <% if current_user && !current_user.common_user? %>
+    <%= render :partial => "/refresh/new" %>
   <% end %>
 <% end -%>
 
@@ -107,6 +107,7 @@ function add_tag(text){
 <%= form_for([current_user, @design]) do |f| %>
 <%= hidden_field_tag "user_id", current_user.id %>
 <%= hidden_field_tag "design[is_yda]", 0 %>
+<%= hidden_field_tag "design[is_refresh]", 0 %>
 <div class="main syslist uploads">
   <div class="shadow">
     <div class="section">
