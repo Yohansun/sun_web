@@ -242,4 +242,14 @@ Icolor::Application.routes.draw do
   
   #国庆节活动页面
   get "national_day" => "function#national_day"
+
+  #refresh活动页面
+  resource :refresh, only: [:index] do
+    get "home" => "refresh#home"
+    get "subject" => "refresh#subject"
+    get "process" => "refresh#process"
+    get "calendar" => "refresh#calendar"
+    get "reward" => "refresh#reward"
+    get "judge" => "refresh#judge"
+  end
 end
