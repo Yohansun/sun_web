@@ -1,5 +1,20 @@
 <div class="landing_index">
-	<a href="#">
+	<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
 		<img src="<%= asset_path "landingpage/landingpage_index.png" %>">
 	</a>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		if ($("#design_upload")) {
+			$("#design_upload").click(function () {
+				<% if current_user -%>
+					return true;
+				<% else -%>
+					show_login();
+					return false;
+				<% end -%>
+			});
+		};
+	});
+</script>

@@ -93,11 +93,17 @@
 </div>
 <div class="design_result">
   <% @designs.in_groups_of(3, false).each do |group| -%>
-  <ul class="d_works group">
+  <ul class="d_works add_icon group">
     <% group.each do |design| -%>
     <li>
-      <%= link_to image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}"),
-        user_design_path(design.user_id, design) if design.cover_img %>
+      <%- if design.cover_img %>
+        <%= link_to user_design_path(design.user_id, design) do %>
+          <%= image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}") %>
+          <%- if design.is_refresh? %>
+            <span class="design_icon"><img src="<%= asset_path "design/icon_landing.png"%>"></span>
+          <%- end %>
+        <%- end %>
+      <%- end %>
       <h3><%= design.title %></h3>
       <p class="p1 group">
         <strong class="ft14 fb">当前票数：<em id ="votes_count<%= design.id%>"><%= design.votes_count %></em></strong>
