@@ -413,6 +413,7 @@ design/galleryO.gif: design/galleryO-389f684b99f42bb5cf4e562c61d3eeb9.gif
 design/go_home.gif: design/go_home-3a144ccc9cab8d9001ac319d6cc7f153.gif
 design/handbook_download.gif: design/handbook_download-eae4d302298739cc7a79b0a46d6c91b5.gif
 design/hon.gif: design/hon-b6958ef0be00e4bc7fe9b540707f85c6.gif
+design/icon_landing.png: design/icon_landing-41be6fc893025c02efb28439d112f15f.png
 design/iconsB.gif: design/iconsB-337b905fe782560bf627a05f552e7868.gif
 design/iconsC.gif: design/iconsC-3a3d342b52f6306c0114ee36bf3c1faf.gif
 design/infor_title_bg.gif: design/infor_title_bg-192fa77d8a632a01a718dbdc8a427033.gif
@@ -637,15 +638,20 @@ kv6.jpg: kv6-f4c5cb8aa35afb501478fa8211a82c41.jpg
 kv7.jpg: kv7-60a673f986ed06c79a465edbebe5e010.jpg
 kv9.jpg: kv9-b19eea90ec5c7cc7d9660f35cfde7793.jpg
 kx.jpg: kx-7684f22d4f9a8918600fffcb188a5220.jpg
+landingpage/jury_img1.jpg: landingpage/jury_img1-b2ebba844c474bc3d13607491d0ae2c2.jpg
+landingpage/jury_img2.jpg: landingpage/jury_img2-be049be24aca2ac114edf2e7d17b8574.jpg
+landingpage/jury_img3.jpg: landingpage/jury_img3-067cf2cb37626021a136f886c3960169.jpg
 landingpage/landing_icon_flow.png: landingpage/landing_icon_flow-763430cdc25f788621f34df3f924feb6.png
 landingpage/landing_img1.png: landingpage/landing_img1-b5d7049fd8188f3fdf9f903ec62106d6.png
 landingpage/landing_img2.png: landingpage/landing_img2-9308cc5a9e063778e16affa3f0b073b6.png
 landingpage/landing_img3.png: landingpage/landing_img3-7ce247e58419f2f076e9b3ec04ee68b5.png
 landingpage/landing_img4.png: landingpage/landing_img4-ccedfdb22a27dff2795a1166116f5421.png
+landingpage/landing_overlay.png: landingpage/landing_overlay-5225b9392ab3f0e182c12c507a9d5f51.png
 landingpage/landingpage_bg.jpg: landingpage/landingpage_bg-bf8bf8d5f8d7f8ff0c871342bd57a8ba.jpg
 landingpage/landingpage_index.png: landingpage/landingpage_index-843deb738d3705898e3abdaa8a735840.png
 landingpage/landingpage_logo.png: landingpage/landingpage_logo-a408b83062b165d000f0afc5300fb41a.png
 landingpage/landingpage_navhover.png: landingpage/landingpage_navhover-997109a4747a2d59a2be1edfa31de511.png
+landingpage/list_icon.png: landingpage/list_icon-56fe2959b7b74fc064c71877a77ad0c6.png
 layer/dots.png: layer/dots-484376636c4f0169361d414bb9d56e44.png
 layer/kv1.png: layer/kv1-3450a5426385f158c766fb6f40b7f2bc.png
 layer/kv2.png: layer/kv2-2ba32c9fcda183b68945203f2b87596c.png
@@ -1388,7 +1394,7 @@ jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
 jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 july_event.css: july_event-bb0cb67427398e37b266b8f18c2eb7c6.css
-landingpage.css: landingpage-3c66698d7181449b8912e6a667d29d15.css
+landingpage.css: landingpage-b5b01bc39d3ce5183338b55ef3306a3c.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
 layer.css: layer-a781187beff61ac82b15537dcf03d5da.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
@@ -1411,7 +1417,7 @@ sellers/seller_data.css: sellers/seller_data-7270767b2a9e9fff880aa5de378ca791.cs
 sellers/seller_sms.css: sellers/seller_sms-7270767b2a9e9fff880aa5de378ca791.css
 sellers/seller_tool.css: sellers/seller_tool-7270767b2a9e9fff880aa5de378ca791.css
 shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
-style.css: style-d5e35289bdcc2ba802f9e7c6e25c87a1.css
+style.css: style-85564c7996eb8e087f13ad09481629a4.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-ec2973b3a8ac53563f1e30357a8ea13b.css
