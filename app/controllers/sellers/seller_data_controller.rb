@@ -12,9 +12,9 @@ class Sellers::SellerDataController < ApplicationController
 			@comments_count_total = @jxs_total.map {|m| m.designs.map {|d| d.comments.count }.sum}.sum
 			@seller_data_total = @jxs_total.map {|m| (m.try(:seller_datas).try(:first).try(:sales).blank?) ? 0 : m.seller_datas.first.sales}.sum
 
-			product_top1_total = @jxs_total.map {|m| m.seller_datas.map{|d| d.product_top1_quantity }.sum }.sum
-			product_top2_total = @jxs_total.map {|m| m.seller_datas.map{|d| d.product_top2_quantity }.sum }.sum
-			product_top3_total = @jxs_total.map {|m| m.seller_datas.map{|d| d.product_top3_quantity }.sum }.sum
+			product_top1_total = @jxs_total.map {|m| (m.try(:seller_datas).map{|d| d.try(:product_top1_quantity) }.sum.blank?) ? 0 : m.seller_datas.map{|d| d.product_top1_quantity }.sum }.sum
+			product_top2_total = @jxs_total.map {|m| (m.try(:seller_datas).map{|d| d.try(:product_top2_quantity) }.sum.blank?) ? 0 : m.seller_datas.map{|d| d.product_top2_quantity }.sum }.sum
+			product_top3_total = @jxs_total.map {|m| (m.try(:seller_datas).map{|d| d.try(:product_top3_quantity) }.sum.blank?) ? 0 : m.seller_datas.map{|d| d.product_top3_quantity }.sum }.sum
 			@array_total = product_top1_total + product_top2_total + product_top3_total
 
 			@art_paint_total = @jxs_total.map {|m| (m.try(:seller_datas).current_month.try(:first).try(:art_paint_quantity).blank?) ? 0 : m.seller_datas.current_month.first.art_paint_quantity}.sum
