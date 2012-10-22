@@ -26,11 +26,6 @@ body{height:1102px;background:url(<%= asset_path "landingpage/landingpage_bg.jpg
 .content .flow p{vertical-align:middle;}
 .content .flow h3 a{text-decoration:underline;color:#2e679c;}
 .content .flow p a{color:#ef4136;}
-.content .flow ul{margin-bottom:30px;}
-.content .flow ul li{float:left;width:45%;margin-right:5%;color:#2c2d2d;font:12px/24px "Microsoft Yahei";}
-.content .flow ul li strong{display:block;}
-.content .flow ul li img{float:right;}
-
 
 i[class^="icon-"]{display:inline-block;vertical-align:middle;}
 .icon-step1,.icon-step2,.icon-step3,.icon-step4{width:49px;height:67px;background:url(<%= asset_path "landingpage/landing_icon_flow.png"%>) no-repeat;margin-right:20px;_display:inline-block;_vertical-align:middle;}
@@ -38,8 +33,15 @@ i[class^="icon-"]{display:inline-block;vertical-align:middle;}
 .icon-step2{background-position:0 -91px;}
 .icon-step3{background-position:0 -185px;}
 .icon-step4{background-position:0 -287px;}
-
-
+/*award*/
+.content .award ul{margin-bottom:30px;}
+.content .award ul li{float:left;width:45%;margin-right:5%;color:#2c2d2d;font:12px/24px "Microsoft Yahei";}
+.content .award ul li strong{display:block;}
+.content .award ul li img{float:right;}
+/*jury*/
+.jury p{position:relative;padding-left:15px;background:url(<%= asset_path "landingpage/list_icon.png"%>) no-repeat 0 5px;margin-left:-15px;min-height:160px;_height:160px;}
+.jury p span{position:absolute;right:-130px;top:0;}
+.jury p span strong{display:block;font-weight:bold;color:#ff255b;}
 
 #footer{background:#0f213a;max-width:1900px;}
 #footer .main{width:990px;margin:0 auto;padding:35px 0;}
