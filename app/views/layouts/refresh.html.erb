@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>icolor爱刷新</title>
+	<%= stylesheet_link_tag "landingpage" %>
+	<!--[if IE 6]>
+		<script src="/png.js"></script>
+		<script>
+		PNG.fix('img,div,a,ul,li,i');
+		</script>
+		<![endif]-->
+</head>
+
+<body>
+	<div id="wrapper">
+		<div class="header group">
+			<h1><a href="#"><img src="<%= asset_path "landingpage/landingpage_logo.png"%>"></a></h1>
+			<ul class="nav">
+				<li><a class="<%= 'li_cur' if action_name == "home" %>" href="<%= home_refresh_path %>">首页</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "subject" %>" href="<%= subject_refresh_path %>">主题简介</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "process" %>" href="<%= process_refresh_path %>">流程规则</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "calendar" %>" href="<%= calendar_refresh_path %>">活动日程</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "reward" %>" href="<%= reward_refresh_path %>">活动奖励</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "judge" %>" href="<%= judge_refresh_path %>">评委介绍</a></li>
+			</ul>
+		</div><!-- header -->
+
+		<%= yield %>
+	</div>
+
+	<div id="footer">
+		<div class="main">
+			<a href="/">返回icolor</a> | 
+			<a href='http://www.nipponpaint.com.cn/' target="_blank">立邦官网</a> |
+      <a href='/contact' target="_blank">联系我们</a> |
+      <a href='/rules' target="_blank">会员机制</a> |
+      <a href='http://shop.nipponpaint.com.cn/' target="_blank">网上商城</a> |
+      <a href='/state' target="_blank">网站声明</a> |
+      <a href='/about' target="_blank">关于我们</a>
+			<span>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</span>
+		</div>
+	</div>
+</body>
+</html>
