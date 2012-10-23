@@ -482,17 +482,6 @@
                 <% end -%>
             });
         };
-
-        if ($("#Map1")) {
-            $("#Map1").click(function () {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        };
     });
 </script>
 <!-- Piwik -->
