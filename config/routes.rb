@@ -251,6 +251,5 @@ Icolor::Application.routes.draw do
     get "calendar" => "refresh#calendar"
     get "reward" => "refresh#reward"
     get "judge" => "refresh#judge"
-    match "design_upload" => "refresh#design_upload"
   end
 end
