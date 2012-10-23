@@ -1,5 +1,5 @@
 <div class="content">
-	<div class="w_640 flow">
+	<div class="w_750 flow">
 		<h2>流程规则</h2>
 		<h3>活动流程</h3>
 		<p><i class="icon-step1"></i>注册成为<a href="#">iColor网站</a>的会员。</p>
@@ -14,6 +14,7 @@
 
 <div class="landing_overlay"></div>
 <div class="content pop_rule jury">
+	<a href="#" class="landing_popclose"><img src="<%= asset_path "landingpage/landing_popclose.png"%>"></a>
 	<h3>活动流程</h3>
 	<p>设计师：海内外从事设计行业的室内设计师均可</p>
 	<p>海内外室内设计爱好者均可参加</p>
@@ -42,8 +43,8 @@
 		$('.pop_btn').click(function(){
 			$('.landing_overlay,.pop_rule').show();
 		})
-		$('.landing_overlay').click(function(){
-			$(this).hide();
+		$('.landing_overlay,.landing_popclose').click(function(){
+	  $('.landing_overlay').hide();
 			$('.pop_rule').hide();
 		})
 	})

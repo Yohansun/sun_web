@@ -28,6 +28,7 @@
 				<li><a class="<%= 'li_cur' if action_name == "reward" %>" href="<%= reward_refresh_path %>">活动奖励</a></li>
 				<li><a class="<%= 'li_cur' if action_name == "judge" %>" href="<%= judge_refresh_path %>">评委介绍</a></li>
 			</ul>
+			<a class="back_icolor" href="/"><img src="<%= asset_path "landingpage/back_icolor.png"%>"></a>
 		</div><!-- header -->
 
 		<%= yield %>
