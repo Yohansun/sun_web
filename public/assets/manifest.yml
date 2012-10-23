@@ -370,6 +370,7 @@ design/d_act_list/d_act_list2.jpg: design/d_act_list/d_act_list2-0ae3ffb688fc919
 design/d_act_list/d_act_list3.jpg: design/d_act_list/d_act_list3-0b54078d60d9dd298206af004fcea066.jpg
 design/d_act_list/d_act_list4.jpg: design/d_act_list/d_act_list4-041ff1fc56fab1c7ae2b5b33996a8f33.jpg
 design/d_act_list/d_act_list5.jpg: design/d_act_list/d_act_list5-59d195ca753c6c8908fb8eace3b9fcfa.jpg
+design/d_act_list/d_act_list_banner.jpeg: design/d_act_list/d_act_list_banner-6bb9b8dfe27304763b2860a26dba7e6e.jpeg
 design/d_act_list/d_act_list_banner.jpg: design/d_act_list/d_act_list_banner-1c10505e1d4526fdd4e0f9d7ef2c1296.jpg
 design/d_act_list/guangzhou2011.jpg: design/d_act_list/guangzhou2011-91aee19c69d9c3796e611a32d23b2454.jpg
 design/d_act_list/hangzhou0830.jpg: design/d_act_list/hangzhou0830-3a904c3c47145a61951ec8a2ebaf2650.jpg
@@ -638,6 +639,7 @@ kv6.jpg: kv6-f4c5cb8aa35afb501478fa8211a82c41.jpg
 kv7.jpg: kv7-60a673f986ed06c79a465edbebe5e010.jpg
 kv9.jpg: kv9-b19eea90ec5c7cc7d9660f35cfde7793.jpg
 kx.jpg: kx-7684f22d4f9a8918600fffcb188a5220.jpg
+landingpage/back_icolor.png: landingpage/back_icolor-45b3d803545ffa1a19971d198260a0bb.png
 landingpage/jury_img1.jpg: landingpage/jury_img1-b2ebba844c474bc3d13607491d0ae2c2.jpg
 landingpage/jury_img2.jpg: landingpage/jury_img2-be049be24aca2ac114edf2e7d17b8574.jpg
 landingpage/jury_img3.jpg: landingpage/jury_img3-067cf2cb37626021a136f886c3960169.jpg
@@ -647,6 +649,7 @@ landingpage/landing_img2.png: landingpage/landing_img2-9308cc5a9e063778e16affa3f
 landingpage/landing_img3.png: landingpage/landing_img3-7ce247e58419f2f076e9b3ec04ee68b5.png
 landingpage/landing_img4.png: landingpage/landing_img4-ccedfdb22a27dff2795a1166116f5421.png
 landingpage/landing_overlay.png: landingpage/landing_overlay-5225b9392ab3f0e182c12c507a9d5f51.png
+landingpage/landing_popclose.png: landingpage/landing_popclose-7daadeafae790a212211952a5a240f82.png
 landingpage/landingpage_bg.jpg: landingpage/landingpage_bg-bf8bf8d5f8d7f8ff0c871342bd57a8ba.jpg
 landingpage/landingpage_index.png: landingpage/landingpage_index-843deb738d3705898e3abdaa8a735840.png
 landingpage/landingpage_logo.png: landingpage/landingpage_logo-a408b83062b165d000f0afc5300fb41a.png
@@ -1323,7 +1326,7 @@ yda/yda_step4.png: yda/yda_step4-c2c4c9f95f19bcf055a974b6efa0b76d.png
 yda/yda_theme.png: yda/yda_theme-7a433921cedfb385bac4bb3d10b76638.png
 Imageflow.js: Imageflow-0ac0d083981167f254c7c2e1d4d46d4a.js
 LinkageSelect.js: LinkageSelect-4947a5a2b66b378eb38623ddb4aa35a4.js
-application.js: application-1edf4967854e4b26f9bccd570b9ec0dc.js
+application.js: application-8a883ee5ead1070e2b1d238bc9a12427.js
 areas.js: areas-3af39f1da6f167c2cbf453ed74daff3d.js
 art.js: art-2a05290ff1904197457ffcea88188ff1.js
 cloud-carousel.1.0.5.min.js: cloud-carousel.1.0.5.min-620d43cb2597208020321dc63903ae03.js
@@ -1363,7 +1366,7 @@ magic_content/mix_colors.js: magic_content/mix_colors-3af39f1da6f167c2cbf453ed74
 magic_content/tools.js: magic_content/tools-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star.js: magic_content/weekly_star-3af39f1da6f167c2cbf453ed74daff3d.js
 magic_content/weekly_star_uploads.js: magic_content/weekly_star_uploads-3af39f1da6f167c2cbf453ed74daff3d.js
-main.js: main-db124245eb975372df42d3ede674716b.js
+main.js: main-eddbbab8ec376385b8e2fa31d810e177.js
 myfocus.js: myfocus-e63c0ae8c1fc09de2ab098788e97d092.js
 owners_channel_upload_form.js: owners_channel_upload_form-74f99c9cc3b8399cba1e59b655869b7a.js
 popupA.js: popupA-595aebd5f41ce9eebce0443355c41e14.js
@@ -1394,7 +1397,7 @@ jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
 jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 july_event.css: july_event-bb0cb67427398e37b266b8f18c2eb7c6.css
-landingpage.css: landingpage-b5b01bc39d3ce5183338b55ef3306a3c.css
+landingpage.css: landingpage-fc9e523f46c1f7a9dc0cfcb974bf9602.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
 layer.css: layer-a781187beff61ac82b15537dcf03d5da.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
