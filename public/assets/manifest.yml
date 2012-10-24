@@ -648,7 +648,7 @@ landingpage/landing_img1.png: landingpage/landing_img1-b5d7049fd8188f3fdf9f903ec
 landingpage/landing_img2.png: landingpage/landing_img2-9308cc5a9e063778e16affa3f0b073b6.png
 landingpage/landing_img3.png: landingpage/landing_img3-7ce247e58419f2f076e9b3ec04ee68b5.png
 landingpage/landing_img4.png: landingpage/landing_img4-ccedfdb22a27dff2795a1166116f5421.png
-landingpage/landing_overlay.png: landingpage/landing_overlay-5225b9392ab3f0e182c12c507a9d5f51.png
+landingpage/landing_overlay.png: landingpage/landing_overlay-cd6ec719ab6f7e85fbf9025a921b68e4.png
 landingpage/landing_popclose.png: landingpage/landing_popclose-7daadeafae790a212211952a5a240f82.png
 landingpage/landingpage_bg.jpg: landingpage/landingpage_bg-bf8bf8d5f8d7f8ff0c871342bd57a8ba.jpg
 landingpage/landingpage_index.png: landingpage/landingpage_index-75168aaeba475df75dd8ba40f2d2bb9c.png
@@ -1399,7 +1399,7 @@ jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
 jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 july_event.css: july_event-bb0cb67427398e37b266b8f18c2eb7c6.css
-landingpage.css: landingpage-11744cab23b1c48c072d6f5b089d2d7f.css
+landingpage.css: landingpage-2fd3a6ec7363133efa17ae56b6ba3c26.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
 layer.css: layer-a781187beff61ac82b15537dcf03d5da.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
