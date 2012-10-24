@@ -71,7 +71,7 @@
     </li>
     <li>
        <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]) %>
-    </li>
+    </li>    
     <!-- <li> -->
       <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
     <!-- </li> -->
@@ -80,6 +80,12 @@
       <select id="city" class="level_2 arrow_filter" name="area_id"></select>
     </li>
     </form>
+
+    <%- if request.headers['referer'] =~ /refresh/%>
+      <li>
+        <a href="/designs?order=超越刷新" style="margin:0;padding:0;"><img src="<%= asset_path "landingpage/refresh_btn.jpg"%>"/></a>
+      </li>
+    <%- end %>
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
