@@ -1,6 +1,10 @@
 <div class="content">
 	<div class="w_750 award">
-		<h2>活动奖励</h2>
+		<h2>活动奖励
+			<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
+				<img src="<%= asset_path "landingpage/uploading.png"%>">
+			</a>
+		</h2>
 		<h3>活动奖励</h3>
 		<p>认证：iColor平台与业内专家级媒体A963共同颁发的优秀证书<br>专业：参赛者自动成为iColor金牌会员<br>推广：iColor平台推广以及其他网络媒体黄金广告资源宣传<br>展示：除了iColor自身综合平台长期展示以外，作品还将入选立邦iColor设计年刊，并在立邦全国线下活动中展示和推广<br>实物：iColor提供的精美礼物</p>
 		<h3>奖项名称</h3>
@@ -13,10 +17,10 @@
 		</ul>
 		<h3>奖品设置</h3>
 		<ul class="group">
-			<li><img src="<%= asset_path "landingpage/landing_img1.png"%>"><strong>设计为王—年度风云人物</strong>JBL ON BEAT 基座音箱 黑色</li>
-      <li><img src="<%= asset_path "landingpage/landing_img2.png"%>"><strong>刷新生活--优异睿智奖</strong>三星显示屏(23.6英寸宽屏LED显示器)</li>
-      <li><img src="<%= asset_path "landingpage/landing_img3.png"%>"><strong>漆光异彩-视觉表现奖</strong>半导体电子冰箱 红酒柜33L 黑色</li>
-      <li><img src="<%= asset_path "landingpage/landing_img4.png"%>"><strong>秀色可居--最佳创意奖</strong>意大利德龙(DeLonghi)蒸汽式咖啡机</li>
+			<li><img src="<%= asset_path "landingpage/landing_img1.png"%>">设计为王—年度风云人物<strong>JBL ON BEAT 基座音箱 黑色</strong></li>
+      <li><img src="<%= asset_path "landingpage/landing_img2.png"%>">刷新生活--优异睿智奖<strong>三星显示屏(23.6英寸宽屏LED显示器)</strong></li>
+      <li><img src="<%= asset_path "landingpage/landing_img3.png"%>">漆光异彩-视觉表现奖<strong>半导体电子冰箱 红酒柜33L 黑色</strong></li>
+      <li><img src="<%= asset_path "landingpage/landing_img4.png"%>">秀色可居--最佳创意奖<strong>意大利德龙(DeLonghi)蒸汽式咖啡机</strong></li>
 		</ul>
 	</div>
 </div>

@@ -1,6 +1,10 @@
 <div class="content">
 	<div class="w_750 flow">
-		<h2>流程规则</h2>
+		<h2>流程规则
+			<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
+				<img src="<%= asset_path "landingpage/uploading.png"%>">
+			</a>
+		</h2>
 		<h3>活动流程</h3>
 		<p><i class="icon-step1"></i>注册成为<a href="#">iColor网站</a>的会员。</p>
 		<p><i class="icon-step2"></i>仔细阅读参赛细则，设计并上传你的参赛作品。</p>

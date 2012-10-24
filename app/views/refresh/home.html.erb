@@ -1,20 +1,9 @@
 <div class="landing_index">
-	<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
-		<img src="<%= asset_path "landingpage/landingpage_index.png" %>">
+	<a href="#">
+		<img src="<%= asset_path "landingpage/landingpage_index.png"%>" border="0" usemap="#Map">
+		<map name="Map" id="Map">
+			<area shape="rect" coords="563,254,706,336" href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload"/>
+			<area shape="rect" coords="716,252,851,337" href="/designs" />
+		</map>
 	</a>
 </div>
-
-<script type="text/javascript">
-	$(function(){
-		if ($("#design_upload")) {
-			$("#design_upload").click(function () {
-				<% if current_user -%>
-					return true;
-				<% else -%>
-					show_login();
-					return false;
-				<% end -%>
-			});
-		};
-	});
-</script>

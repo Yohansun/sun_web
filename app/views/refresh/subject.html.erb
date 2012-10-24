@@ -1,6 +1,10 @@
 <div class="content">
 	<div class="w_750">
-		<h2>主题介绍</h2>
+		<h2>主题介绍
+			<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
+				<img src="<%= asset_path "landingpage/uploading.png"%>">
+			</a>
+		</h2>
 		<h3>超越·刷新 中国室内设计师作品征集活动</h3>
 		<h4>iColor携手A963共创设计之未来</h4>
 		<p>作为活动主办方的立邦，是世界著名的涂料制造商，旗下 iColor网站，创立于2011年3月，专注于装修及色彩领域，用户解决室内空间设计与软硬装的配色问题，为家装设计师、家装公司及有潜在需求的业主提供展示交流的平台。</p>
