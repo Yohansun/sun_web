@@ -651,10 +651,11 @@ landingpage/landing_img4.png: landingpage/landing_img4-ccedfdb22a27dff2795a11661
 landingpage/landing_overlay.png: landingpage/landing_overlay-5225b9392ab3f0e182c12c507a9d5f51.png
 landingpage/landing_popclose.png: landingpage/landing_popclose-7daadeafae790a212211952a5a240f82.png
 landingpage/landingpage_bg.jpg: landingpage/landingpage_bg-bf8bf8d5f8d7f8ff0c871342bd57a8ba.jpg
-landingpage/landingpage_index.png: landingpage/landingpage_index-843deb738d3705898e3abdaa8a735840.png
-landingpage/landingpage_logo.png: landingpage/landingpage_logo-a408b83062b165d000f0afc5300fb41a.png
+landingpage/landingpage_index.png: landingpage/landingpage_index-96983b62d54f3ded84bdb189c3ba36be.png
+landingpage/landingpage_logo.png: landingpage/landingpage_logo-ccba5486701a91012e9436194fe23dc1.png
 landingpage/landingpage_navhover.png: landingpage/landingpage_navhover-997109a4747a2d59a2be1edfa31de511.png
 landingpage/list_icon.png: landingpage/list_icon-56fe2959b7b74fc064c71877a77ad0c6.png
+landingpage/uploading.png: landingpage/uploading-cd141364b5095193c31b8d836561f698.png
 layer/dots.png: layer/dots-484376636c4f0169361d414bb9d56e44.png
 layer/kv1.png: layer/kv1-3450a5426385f158c766fb6f40b7f2bc.png
 layer/kv2.png: layer/kv2-2ba32c9fcda183b68945203f2b87596c.png
@@ -1397,7 +1398,7 @@ jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
 jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 july_event.css: july_event-bb0cb67427398e37b266b8f18c2eb7c6.css
-landingpage.css: landingpage-fc9e523f46c1f7a9dc0cfcb974bf9602.css
+landingpage.css: landingpage-11744cab23b1c48c072d6f5b089d2d7f.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
 layer.css: layer-a781187beff61ac82b15537dcf03d5da.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
