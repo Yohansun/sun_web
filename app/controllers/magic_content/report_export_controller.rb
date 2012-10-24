@@ -111,7 +111,7 @@ module MagicContent
 
   		{}.tap do |results|
         results[:search] = "作品上传数据统计"
-  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','省','市','区']
+  			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','省','市','区','超越刷新作品']
   			results[:data] = [].tap do |cell|
   				designs.find_each do |design|
   					cell << [design.id,
@@ -130,7 +130,8 @@ module MagicContent
                      design.comments.count,
                      design.user.city.try(:parent).try(:name),
                      design.user.try(:city).try(:name), 
-                     design.user.try(:area).try(:name)]
+                     design.user.try(:area).try(:name),
+                     design.is_refresh]
   				end
   			end
   		end
