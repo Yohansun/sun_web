@@ -18,7 +18,7 @@ class DesignsController < ApplicationController
       elsif params[:order] == "超越刷新"
         @designs = @designs.order("is_refresh desc")
       elsif params[:q] == "超越刷新"
-        @designs = @designs.where(is_refresh: true).order("is_refresh desc")
+        @designs = @designs.where(is_refresh: true).order("created_at desc")
       else
         @designs = @designs.order("created_at desc")
       end
