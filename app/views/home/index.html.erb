@@ -82,6 +82,7 @@
 <%#- end %>-->
 
 <%- content_for :index do %>
+<div style="background:url(<%= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div>
 <div class="slides pr">
   <%- if MagicSetting.kv_of_home_index.present? %>
     <%= raw MagicSetting.kv_of_home_index %>
