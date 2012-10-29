@@ -12,7 +12,7 @@ class LandsController < ApplicationController
 						"a963shouyejiaodian1",
 						"a963shouyedidiyiping1", "a963shouyeredian1",
 						"a963shouyemingrenzhuanfang1", "a963shejishitongdao1",
-						"a963zixunzhongxinjiaodianxinwen1", 
+						"a963zixunzhongxinjiaodianxinwen1", "taipingyangjiajuyixingguanggaowei1",
 						"a963edmhuiyuanyoujian1"]
 
 			if urls.include? params[:source]
