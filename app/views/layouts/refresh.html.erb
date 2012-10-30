@@ -14,7 +14,54 @@
 		PNG.fix('img,div,a,ul,li,i');
 		</script>
 		<![endif]-->
-		<script type="text/javascript">
+</head>
+
+<body>
+	<div id="wrapper">
+		<div class="landing_header group">
+			<h1><a href="#"><img src="<%= asset_path "landingpage/landingpage_logo.png"%>"></a></h1>
+			<ul class="landing_nav">
+				<li><a class="<%= 'li_cur' if action_name == "home" %>" href="<%= home_refresh_path %>">首页</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "subject" %>" href="<%= subject_refresh_path %>">主题简介</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "process" %>" href="<%= process_refresh_path %>">流程规则</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "calendar" %>" href="<%= calendar_refresh_path %>">活动日程</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "reward" %>" href="<%= reward_refresh_path %>">活动奖励</a></li>
+				<li><a class="<%= 'li_cur' if action_name == "judge" %>" href="<%= judge_refresh_path %>">评委介绍</a></li>
+			</ul>
+			<a class="back_icolor" href="/"><img src="<%= asset_path "landingpage/back_icolor.png"%>"></a>
+		</div><!-- header -->
+
+		<%= yield %>
+		<%= render "layouts/overlay" %>
+	</div>
+
+	<div id="footer">
+		<div class="main">
+			<a href="/">返回icolor</a> | 
+			<a href='http://www.nipponpaint.com.cn/' target="_blank">立邦官网</a> |
+      <a href='/contact' target="_blank">联系我们</a> |
+      <a href='/rules' target="_blank">会员机制</a> |
+      <a href='http://shop.nipponpaint.com.cn/' target="_blank">网上商城</a> |
+      <a href='/state' target="_blank">网站声明</a> |
+      <a href='/about' target="_blank">关于我们</a>
+			<span>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</span>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			if ($("#design_upload")) {
+				$("#design_upload").click(function () {
+					<% if current_user -%>
+					return true;
+					<% else -%>
+					show_login();
+					return false;
+					<% end -%>
+				});
+			};
+		});
+	</script>
+	<script type="text/javascript">
 		  var pkBaseURL = (("https:" == document.location.protocol) ? "https://203.156.231.36:8000/piwik/" : "http://203.156.231.36:8000/piwik/");
 		  document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
 		  </script><script type="text/javascript">
@@ -50,53 +97,5 @@
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 		</script>
-</head>
-
-<body>
-	<div id="wrapper">
-		<div class="landing_header group">
-			<h1><a href="#"><img src="<%= asset_path "landingpage/landingpage_logo.png"%>"></a></h1>
-			<ul class="landing_nav">
-				<li><a class="<%= 'li_cur' if action_name == "home" %>" href="<%= home_refresh_path %>">首页</a></li>
-				<li><a class="<%= 'li_cur' if action_name == "subject" %>" href="<%= subject_refresh_path %>">主题简介</a></li>
-				<li><a class="<%= 'li_cur' if action_name == "process" %>" href="<%= process_refresh_path %>">流程规则</a></li>
-				<li><a class="<%= 'li_cur' if action_name == "calendar" %>" href="<%= calendar_refresh_path %>">活动日程</a></li>
-				<li><a class="<%= 'li_cur' if action_name == "reward" %>" href="<%= reward_refresh_path %>">活动奖励</a></li>
-				<li><a class="<%= 'li_cur' if action_name == "judge" %>" href="<%= judge_refresh_path %>">评委介绍</a></li>
-			</ul>
-			<a class="back_icolor" href="/"><img src="<%= asset_path "landingpage/back_icolor.png"%>"></a>
-		</div><!-- header -->
-
-		<%= yield %>
-		<%= render "layouts/overlay" %>
-	</div>
-
-	<div id="footer">
-		<div class="main">
-			<a href="/">返回icolor</a> | 
-			<a href='http://www.nipponpaint.com.cn/' target="_blank">立邦官网</a> |
-      <a href='/contact' target="_blank">联系我们</a> |
-      <a href='/rules' target="_blank">会员机制</a> |
-      <a href='http://shop.nipponpaint.com.cn/' target="_blank">网上商城</a> |
-      <a href='/state' target="_blank">网站声明</a> |
-      <a href='/about' target="_blank">关于我们</a>
-			<span>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</span>
-		</div>
-	</div>
-
-	<script type="text/javascript">
-		$(function(){
-			if ($("#design_upload")) {
-				$("#design_upload").click(function () {
-					<% if current_user -%>
-					return true;
-					<% else -%>
-					show_login();
-					return false;
-					<% end -%>
-				});
-			};
-		});
-	</script>
 </body>
 </html>
