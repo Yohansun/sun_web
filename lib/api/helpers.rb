@@ -27,6 +27,8 @@ module Icolor
         auth = true if valid_key.eql?(request_key) && user
       elsif provider.eql? 'login'
         auth = true if user && user.valid_password?(password)
+      elsif provider.eql? 'minisite'
+        auth = true if user && user.valid_password?(params[:password])
       end
 
       auth ? user : nil
