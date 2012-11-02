@@ -21,12 +21,14 @@
         data  : data
       }
       var sel = new LinkageSelect(options);
-      <%- if params[:area_id] && !params[:area_id].blank? -%>
-        <% area = Area.find(params[:area_id])%>
-        sel.bind('.level_1',<%= area.parent.id unless area.parent.nil?%>);
-        sel.bind('.level_2',<%= area.id%>);
+      <%- if params[:area_head] && !params[:area_head].blank? -%>
+        sel.bind('.level_1',<%= params[:area_head] %>);
       <%- else -%>
         sel.bind('.level_1', null, '请选择省会');
+      <%- end -%>
+      <%- if params[:area_id] && !params[:area_id].blank? -%>
+        sel.bind('.level_2',<%= params[:area_id] %>);
+      <%- else -%>
         sel.bind('.level_2', null, '请选择市');
       <%- end -%>
     });
@@ -41,12 +43,6 @@
           alert("Error: " + e.message);
         }
       });
-
-    $(function(){
-      $('.sprite, .level_2').change(function(){
-           $('#filter_form').submit()
-        })
-    });
 
     </script>
 <%- end %>
@@ -76,9 +72,12 @@
       <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
     <!-- </li> -->
     <li>
-      <select id="province" class="level_1 arrow_filter"></select>
-      <select id="city" class="level_2 arrow_filter" name="area_id"></select>
+      <select id="province" class="level_1 arrow_filter" name="area_head">
+      </select>
+      <select id="city" class="level_2 arrow_filter" name="area_id">
+      </select>
     </li>
+    <li style="background:none;"><button><img src="<%= asset_path "design_search.png" %>" /></button></li>
     </form>
 
     <li>
