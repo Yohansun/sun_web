@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709034654) do
+ActiveRecord::Schema.define(:version => 20121022085927) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -201,14 +201,16 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.string   "style"
     t.string   "room_type"
     t.string   "city"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.integer  "area_id"
     t.text     "reason"
     t.integer  "view_count",                :default => 0
     t.boolean  "recommended"
     t.string   "design_color"
     t.string   "recommend_color_category1"
+    t.boolean  "is_yda",                    :default => false
+    t.boolean  "is_refresh",                :default => false
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
@@ -291,6 +293,19 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "gifts", :force => true do |t|
+    t.string   "gift_type"
+    t.string   "gift_sub_type"
+    t.string   "winner"
+    t.string   "gift_name"
+    t.datetime "give_time"
+    t.datetime "published_at"
+    t.integer  "subject_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.datetime "end_time"
+  end
+
   create_table "groups", :force => true do |t|
     t.integer  "admin_id"
     t.string   "name"
@@ -345,7 +360,17 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
   end
 
   add_index "lands", ["created_at"], :name => "created_at"
+  add_index "lands", ["created_at"], :name => "index_lands_on_created_at"
+  add_index "lands", ["source"], :name => "index_lands_on_source"
   add_index "lands", ["source"], :name => "source"
+
+  create_table "login_logs", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+  end
 
   create_table "maillists", :force => true do |t|
     t.string   "email"
@@ -440,8 +465,13 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
   create_table "moods", :force => true do |t|
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.boolean  "is_privacy",       :default => false
+    t.string   "color_code"
+    t.integer  "shares_count",     :default => 0
+    t.string   "color_name"
+    t.string   "font_color"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "img_file_name"
     t.string   "img_content_type"
     t.integer  "img_file_size"
@@ -521,6 +551,19 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.integer  "function_id"
   end
 
+  create_table "phone_expenses", :force => true do |t|
+    t.float    "user_id",     :default => 0.0
+    t.float    "register",    :default => 0.0
+    t.float    "design",      :default => 0.0
+    t.float    "vote",        :default => 0.0
+    t.float    "comment",     :default => 0.0
+    t.float    "share",       :default => 0.0
+    t.float    "inspiration", :default => 0.0
+    t.float    "total",       :default => 0.0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "slug"
@@ -585,12 +628,25 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.string   "product_top1"
     t.string   "product_top2"
     t.string   "product_top3"
-    t.boolean  "apply_for_tools", :default => false
+    t.boolean  "apply_for_tools",       :default => false
     t.string   "tool_ids"
     t.integer  "user_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "seller_user_id"
+    t.integer  "product_top1_quantity", :default => 0
+    t.integer  "product_top2_quantity", :default => 0
+    t.integer  "product_top3_quantity", :default => 0
+    t.integer  "art_paint_quantity",    :default => 0
+    t.text     "remarks"
+  end
+
+  create_table "seller_reports", :force => true do |t|
+    t.string   "file_name"
+    t.datetime "statistical_time"
+    t.datetime "created_time"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "seller_users", :force => true do |t|
@@ -635,6 +691,25 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.integer  "user_id"
     t.string   "title"
     t.integer  "sys_msg_id"
+  end
+
+  create_table "skin_kv_uploads", :force => true do |t|
+    t.string   "kv_link"
+    t.string   "link_coords"
+    t.integer  "skin_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "kv_thumb_file_name"
+    t.string   "kv_thumb_content_type"
+    t.integer  "kv_thumb_file_size"
+    t.datetime "kv_thumb_updated_at"
+  end
+
+  create_table "skins", :force => true do |t|
+    t.integer  "skin_type_id"
+    t.string   "user_ids"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "sms_logs", :force => true do |t|
@@ -716,9 +791,10 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "is_binding", :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_binding",   :default => false
+    t.string   "access_token"
   end
 
   create_table "users", :force => true do |t|
@@ -767,9 +843,12 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.boolean  "is_top",                    :default => false
     t.string   "top_reason"
     t.integer  "top_order",                 :default => 0
+    t.integer  "minisite_id"
   end
 
+  add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["role_id"], :name => "index_users_on_role_id"
 
   create_table "videos", :force => true do |t|
     t.string   "title"
@@ -835,6 +914,7 @@ ActiveRecord::Schema.define(:version => 20120709034654) do
     t.integer  "main_preview_img_file_size"
     t.datetime "main_preview_img_updated_at"
     t.string   "design_link"
+    t.integer  "star_type_id"
   end
 
   create_table "weekly_tips", :force => true do |t|
