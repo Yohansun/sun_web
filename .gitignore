@@ -1,8 +1,7 @@
 .bundle
 config/database.yml
-log/*.log
-log/*.exe
-log/production.*
+log/
+doc/
 public/*.xls
 public/*.csv
 public/seller_user_reports
