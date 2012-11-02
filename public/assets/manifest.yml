@@ -176,6 +176,7 @@ big_bg/gift_btn1.jpg: big_bg/gift_btn1-06c38cb84c1598e5d408eb196b727fa1.jpg
 big_bg/gift_btn2.jpg: big_bg/gift_btn2-2fde78b3c332cd18b1ba5adf86728060.jpg
 big_bg/gift_btn3.jpg: big_bg/gift_btn3-46a1f65be4d4cda7699a3f0a94a64d3f.jpg
 big_bg/guangzhou_bg.jpg: big_bg/guangzhou_bg-d9f34107a35078eac2c1594230f5bc3b.jpg
+big_bg/haikou2012_tit.jpg: big_bg/haikou2012_tit-1b743d16b74050b995e324818563480f.jpg
 big_bg/haikou_bg1.jpg: big_bg/haikou_bg1-097219e364a58bd7594e1bae39053358.jpg
 big_bg/haikou_bg2.jpg: big_bg/haikou_bg2-cf0deb8fd0bb5fed1d50f31d7cf14245.jpg
 big_bg/haikou_bg3.jpg: big_bg/haikou_bg3-fdd970506a588ecfc9dbf97f68662a72.jpg
@@ -373,7 +374,12 @@ design/d_act_list/d_act_list5.jpg: design/d_act_list/d_act_list5-59d195ca753c6c8
 design/d_act_list/d_act_list_banner.jpeg: design/d_act_list/d_act_list_banner-6bb9b8dfe27304763b2860a26dba7e6e.jpeg
 design/d_act_list/d_act_list_banner.jpg: design/d_act_list/d_act_list_banner-1c10505e1d4526fdd4e0f9d7ef2c1296.jpg
 design/d_act_list/guangzhou2011.jpg: design/d_act_list/guangzhou2011-91aee19c69d9c3796e611a32d23b2454.jpg
+design/d_act_list/haikou1_1.png: design/d_act_list/haikou1_1-f69f9fd03850da99964fa9de6aa72d25.png
+design/d_act_list/haikou1_2.png: design/d_act_list/haikou1_2-c3f4a34ff8f1f00a6bdb841c4e08bba7.png
+design/d_act_list/haikou2_1.png: design/d_act_list/haikou2_1-84d2cddfcc98456ff5ceb422500df014.png
+design/d_act_list/haikou2_2.png: design/d_act_list/haikou2_2-d11bdd69268a8dc8e0f882fdbfd924cf.png
 design/d_act_list/hangzhou0830.jpg: design/d_act_list/hangzhou0830-3a904c3c47145a61951ec8a2ebaf2650.jpg
+design/d_act_list/hzk1102.jpg: design/d_act_list/hzk1102-9da5db1f73a95d0d768d41e6bb8b73a7.jpg
 design/d_act_list/jinan0904.jpg: design/d_act_list/jinan0904-ddc2ee733c96503868dfe341feab3258.jpg
 design/d_act_list/nanjing0817.jpg: design/d_act_list/nanjing0817-4cd1f5cd1f4c0446052472906ebf1bcf.jpg
 design/d_act_list/qingdao0831.jpg: design/d_act_list/qingdao0831-6e4925f1fe26fbfb81e3e01b3cc6de81.jpg
@@ -605,6 +611,7 @@ design/utility_bg.gif: design/utility_bg-8a9e0d7dbd2eec4054c5ad1b43166a9b.gif
 design/utility_bgB.gif: design/utility_bgB-7584f157e71ad2cca9fc364f8e3dac41.gif
 design/weekstar-galleryA-bg.gif: design/weekstar-galleryA-bg-8048cb3775eda9a8aa29ec5f64b44f80.gif
 design/weibo.gif: design/weibo-adbf889431085b06dc07aa17441adf63.gif
+design_search.png: design_search-d3c1f9f500fce434d16c27e345d3e173.png
 emagezine/color_master1.jpg: emagezine/color_master1-091e9fd01714d875d770d8c6021f31e4.jpg
 emagezine/e_act1.jpg: emagezine/e_act1-0f91af13690de13f24203ccfb8a19d70.jpg
 emagezine/e_act_btn.png: emagezine/e_act_btn-318dcd5a9410b3f2cda2afff9535404b.png
@@ -1423,7 +1430,7 @@ sellers/seller_data.css: sellers/seller_data-7270767b2a9e9fff880aa5de378ca791.cs
 sellers/seller_sms.css: sellers/seller_sms-7270767b2a9e9fff880aa5de378ca791.css
 sellers/seller_tool.css: sellers/seller_tool-7270767b2a9e9fff880aa5de378ca791.css
 shares.css: shares-7270767b2a9e9fff880aa5de378ca791.css
-style.css: style-85564c7996eb8e087f13ad09481629a4.css
+style.css: style-45468cb5f8e39feea0a33ef26c5d960d.css
 sys_msgs.css: sys_msgs-7270767b2a9e9fff880aa5de378ca791.css
 uploadify.css: uploadify-fd6ea47512a0059650dd256989c7111a.css
 weekstar.css: weekstar-ec2973b3a8ac53563f1e30357a8ea13b.css
