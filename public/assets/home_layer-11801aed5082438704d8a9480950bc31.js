@@ -1,7 +1,0 @@
-/*
- *	jQuery layer plugin v1.1
- *	author : luck chang
- *	email : chunhang@networking.io
- *	date : 2012.06.11 15:11:26
- */
-(function(e){e.fn.extend({layer:function(t){function s(){t.animation?i.center.stop(!0).animate({top:"-50%"},"normal",function(){e(this).hide()}):i.center.fadeOut(),u()}function o(){if(i.ie6){var e=document.documentElement.scrollHeight;i.lay.css("height",e+"px")}i.lay.show().animate({opacity:"0.9"},"normal")}function u(){i.lay.animate({opacity:"0"},"normal").hide()}var n='<div id="layer"></div>',r='<div class="layer_content abs_center"><a href="javascript:;" id="lay_close"></a></div>';e("body").append(n+r),t=e.extend({animation:!1,speed:400,styles:"shake",onscroll:!1},t);var i={};i.center=e(".abs_center"),i.that=this,i.shut=e("#lay_close"),i.div=e(".layer_content"),i.lay=e("#layer"),i.ie6=e.browser.msie&&e.browser.version==6,t.onscroll&&i.div.css("position","absolute"),i.that.click(function(n){e("#march_lay").show(),n.preventDefault();if(i.lay.is(":visible"))return;t.animation?t.styles=="shake"?i.div.show().animate({top:"60%"},t.speed).animate({top:"40%"},t.speed).animate({top:"55%"},t.speed).animate({top:"45%"},t.speed).animate({top:"50%"},t.speed):t.styles=="slide"&&i.div.show().animate({top:"50%"},t.speed):i.div.css("top","50%").fadeIn(),o()}).click(),e(document).keydown(function(e){i.lay.is(":visible")&&e.which==27&&s()}),i.shut.click(s)}})})(jQuery),$(function(){$("title").layer({animation:!1,speed:300,onscroll:!1}),$(".slider_bin").slider({styles:"slide",easing:"easeOutExpo"})});
