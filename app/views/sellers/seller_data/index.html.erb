@@ -3,6 +3,15 @@
     .count .pager {width:500px;}
   </style>
 <%- end %>
+<% content_for :tail do %>
+  <script type="text/javascript">
+    $(function() {
+      $('#month').change(function() {
+        $('#filter_form').submit();
+      });
+    })
+  </script>
+<% end %>
 <div class="count clear" style="height:auto;padding-bottom:30px;">
   <h1>icolor经销商后台</h1>
   <ul class="count_left fl ft15">
@@ -31,7 +40,25 @@
       <th width="40">作品数量</th>
       <th width="40">被投票数</th>
       <th width="55">被评论</th>
-      <th width="60">上月销量</th>
+      <th width="60">
+        <%= form_tag '',:method => 'get', :id => 'filter_form', :class => "pr" do %>
+          <% if params[:year].present? %>
+            <%=select_tag :year, options_for_select(year, params[:year])%>
+          <% else %>
+            <%=select_tag :year, options_for_select(year), :prompt => "选择年"%>
+          <% end %>
+          <% if params[:month].present? %>
+            <%=select_tag :month, options_for_select(month, params[:month])%>
+          <% else %>
+            <%=select_tag :month, options_for_select(month), :prompt => "选择月"%>
+          <% end %>
+        <% end %>
+        <% if params[:year].present? && params[:month].present? %>
+          销量
+        <% else %>
+          上月销量
+        <% end %>
+      </th>
       <th width="70">本月销额</th>
       <th width="110">畅销前3种产品及桶数</th>
       <th width="71">是否置顶</th>
@@ -57,8 +84,13 @@
       <td><%= cc.designs.blank? ? 0 : cc.designs.includes(:design_images).where('design_images.file_file_size > 0').count %></td>
       <td class="cr"><%= cc.designs.blank? ? 0 : cc.designs.sum(:votes_count) %></td>
       <td><%= cc.designs.blank? ? 0 : cc.designs.map {|d| d.comments.count }.sum  %></td>
-
-      <td class="cr"><%= cc.seller_datas.last_month.blank? ? 0 : cc.seller_datas.last_month.first.sales %></td>
+      <td class="cr">
+        <% if params[:year].present? && params[:month].present? %>
+          <%= cc.seller_datas.current_data(params[:year] + params[:month]).blank? ? 0 : cc.seller_datas.current_data(params[:year] + params[:month]).first.sales %>
+        <%  else %>
+          <%= cc.seller_datas.last_month.blank? ? 0 : cc.seller_datas.last_month.first.sales %>
+        <% end %>
+      </td>
       <td class="sale_amount">
         <%- if current_month && !current_month.sales.blank? %>
           <p><%= current_month.sales %></p>

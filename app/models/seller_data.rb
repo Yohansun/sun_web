@@ -21,4 +21,8 @@ class SellerData < ActiveRecord::Base
   def product_top3_quantity
     super.blank? ? 0 : super
   end
+
+  def self.current_data(data)
+    self.where("DATE_FORMAT(created_at, '%Y%m') = ? and apply_for_tools = ?", data, false)
+  end
 end
