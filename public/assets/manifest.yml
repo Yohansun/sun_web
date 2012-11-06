@@ -651,6 +651,7 @@ landingpage/back_icolor.png: landingpage/back_icolor-45b3d803545ffa1a19971d19826
 landingpage/jury_img1.jpg: landingpage/jury_img1-b2ebba844c474bc3d13607491d0ae2c2.jpg
 landingpage/jury_img2.jpg: landingpage/jury_img2-be049be24aca2ac114edf2e7d17b8574.jpg
 landingpage/jury_img3.jpg: landingpage/jury_img3-067cf2cb37626021a136f886c3960169.jpg
+landingpage/landing_5_bottom.png: landingpage/landing_5_bottom-6b2aa41d90a6e47ae107aa52dfbe253d.png
 landingpage/landing_icon_flow.png: landingpage/landing_icon_flow-763430cdc25f788621f34df3f924feb6.png
 landingpage/landing_img1.png: landingpage/landing_img1-b5d7049fd8188f3fdf9f903ec62106d6.png
 landingpage/landing_img2.png: landingpage/landing_img2-9308cc5a9e063778e16affa3f0b073b6.png
@@ -659,7 +660,7 @@ landingpage/landing_img4.png: landingpage/landing_img4-ccedfdb22a27dff2795a11661
 landingpage/landing_overlay.png: landingpage/landing_overlay-cd6ec719ab6f7e85fbf9025a921b68e4.png
 landingpage/landing_popclose.png: landingpage/landing_popclose-7daadeafae790a212211952a5a240f82.png
 landingpage/landingpage_bg.jpg: landingpage/landingpage_bg-bf8bf8d5f8d7f8ff0c871342bd57a8ba.jpg
-landingpage/landingpage_index.png: landingpage/landingpage_index-75168aaeba475df75dd8ba40f2d2bb9c.png
+landingpage/landingpage_index.png: landingpage/landingpage_index-443abb157e284f76a78410c8b4ee4e97.png
 landingpage/landingpage_logo.png: landingpage/landingpage_logo-ccba5486701a91012e9436194fe23dc1.png
 landingpage/landingpage_navhover.png: landingpage/landingpage_navhover-997109a4747a2d59a2be1edfa31de511.png
 landingpage/list_icon.png: landingpage/list_icon-56fe2959b7b74fc064c71877a77ad0c6.png
@@ -1407,7 +1408,7 @@ jDatepicker.css: jDatepicker-c21913734b6a03aa50061e74d6da52c8.css
 jquery.rating.css: jquery.rating-45b7b9c39cced49adbd709184a2255ae.css
 jquery.slider.css: jquery.slider-59f160da0845d12d4a7574ce2b8bae5b.css
 july_event.css: july_event-bb0cb67427398e37b266b8f18c2eb7c6.css
-landingpage.css: landingpage-69b0bfd1416290d5e0614ead1bed9450.css
+landingpage.css: landingpage-e52dcbd3a468829a89251cb80bdc31e4.css
 lands.css: lands-7270767b2a9e9fff880aa5de378ca791.css
 layer.css: layer-a781187beff61ac82b15537dcf03d5da.css
 magic_admin/seller_users.css: magic_admin/seller_users-7270767b2a9e9fff880aa5de378ca791.css
