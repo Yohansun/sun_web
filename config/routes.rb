@@ -108,6 +108,7 @@ Icolor::Application.routes.draw do
   match "/other_events" => "other_events#index"
   match "/other_events/kv" => "other_events#kv"
   match "/other_events/Proposal" => "other_events#Proposal"
+  match "/other_events/review" => "other_events#review"
 
   #客服信息
   match "/info_list" => "function#infolist"
