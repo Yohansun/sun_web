@@ -15,8 +15,25 @@ class LandsController < ApplicationController
 						"a963zixunzhongxinjiaodianxinwen1", "taipingyangjiajuyixingguanggaowei1",
 						"a963edmhuiyuanyoujian1"]
 
+			urls2 =["80018shouyetupian2",
+							"80018ketingpingdao2",
+							"80018woshipingdao2",
+							"80018secaidapei2",
+							"a963shouyedingbu2",
+							"a963shouyejiaodian2",
+							"a963shouyedidiyiping2",
+							"a963shouyeredian2",
+							"a963shouyemingrenzhuanfang2",
+							"a963shejishitongdao2",
+							"a963zixunzhongxinjiaodianxinwen2",
+							"a963edmhuiyuanyoujian2",
+							"pchousebankuaidingzhi2",
+							"pchousebankuaidingzhi-2"]
+
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
+			elsif urls2.include? params[:source]
+				redirect_to other_events_review_path			
 			else	
 				redirect_to root_path
 			end

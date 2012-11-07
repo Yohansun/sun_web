@@ -549,6 +549,7 @@ design/topb2bg.gif: design/topb2bg-2827cd0ef3034f98b479573a2a916d91.gif
 design/trend/act1.jpg: design/trend/act1-c5000a9e72ce85f39bf6ca1b406d80ee.jpg
 design/trend/act2.jpg: design/trend/act2-34c28ce1197b7c450499b733bd28ed54.jpg
 design/trend/act3.jpg: design/trend/act3-f5f7f003c05c8b0b660755a1e3c01c1a.jpg
+design/trend/act4.jpg: design/trend/act4-bb376323ebc8c67694532e174d33f073.jpg
 design/trend/cdr_b.jpg: design/trend/cdr_b-e350e682ec26108fc0778ebd66360618.jpg
 design/trend/cdr_s.jpg: design/trend/cdr_s-aac4c728a564b6fb8082b80644a23ba8.jpg
 design/trend/dgj_b.jpg: design/trend/dgj_b-d0a51265149c193bd15cd19a57b89498.jpg
@@ -569,6 +570,9 @@ design/trend/lxh_b.jpg: design/trend/lxh_b-038504c0bc036c9a27fc52ae01001ebc.jpg
 design/trend/lxh_s.jpg: design/trend/lxh_s-d941a2fa68e2735dda5776ea2e387b1e.jpg
 design/trend/lyn_b.jpg: design/trend/lyn_b-cc7c33feb2098f1d6b5da165ca8f4a4c.jpg
 design/trend/lyn_s.jpg: design/trend/lyn_s-1d7a45d9b35734bb7fdad9106c2f6e42.jpg
+design/trend/review_conbg.jpg: design/trend/review_conbg-0a083d457c1a79471ee59e8529bae9f8.jpg
+design/trend/review_net.jpg: design/trend/review_net-5bd9faae26f682508a7d694416fe866a.jpg
+design/trend/review_tit_bg.png: design/trend/review_tit_bg-f00e6e680fd264c87a2889724a743fbf.png
 design/trend/sld_b.jpg: design/trend/sld_b-f141cf9e2c17bda28399b256b5b42f57.jpg
 design/trend/sld_s.jpg: design/trend/sld_s-753af267397018345ddd1a599a156ae2.jpg
 design/trend/swj_b.jpg: design/trend/swj_b-9470beefb6997274c039e46db9bb8a09.jpg
@@ -660,7 +664,7 @@ landingpage/landing_img4.png: landingpage/landing_img4-ccedfdb22a27dff2795a11661
 landingpage/landing_overlay.png: landingpage/landing_overlay-cd6ec719ab6f7e85fbf9025a921b68e4.png
 landingpage/landing_popclose.png: landingpage/landing_popclose-7daadeafae790a212211952a5a240f82.png
 landingpage/landingpage_bg.jpg: landingpage/landingpage_bg-bf8bf8d5f8d7f8ff0c871342bd57a8ba.jpg
-landingpage/landingpage_index.png: landingpage/landingpage_index-443abb157e284f76a78410c8b4ee4e97.png
+landingpage/landingpage_index.png: landingpage/landingpage_index-70b7509b03c7b2898c186055c2f1e715.png
 landingpage/landingpage_logo.png: landingpage/landingpage_logo-ccba5486701a91012e9436194fe23dc1.png
 landingpage/landingpage_navhover.png: landingpage/landingpage_navhover-997109a4747a2d59a2be1edfa31de511.png
 landingpage/list_icon.png: landingpage/list_icon-56fe2959b7b74fc064c71877a77ad0c6.png
@@ -1425,6 +1429,7 @@ october.css: october-faee17a51ab4f99d6245db8b7ba8dcd7.css
 owners_channel.css: owners_channel-29536f353f5da0f62f290b1187980717.css
 reg.css: reg-c55253fecb20086475032c0046a7bdde.css
 reset.css: reset-0a23aec4f3a7c55a3b785f5b2aa24eab.css
+review_net.css: review_net-30389780b084e708bcbd979beba9d5db.css
 rules2.css: rules2-623921c278d081e11d1784b5ff964e2a.css
 scores.css: scores-7270767b2a9e9fff880aa5de378ca791.css
 sellers/seller_data.css: sellers/seller_data-7270767b2a9e9fff880aa5de378ca791.css
