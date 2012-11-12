@@ -40,19 +40,21 @@ module Icolor
         #         auth    : 用户绑定社区数据 "类型: Array 
         #                                  参数: provider: 第三方绑定的类型, uid: 第三方用户的UID, is_binding: Boolean类型, access_token: 第三方返回的access_token
         #                                  例子: auth => [{"provider" => "weibo","is_binding" => true,"uid" => "","access_token"=>""},{"provider" => "qq_connect","is_binding" => true,"uid" => "","access_token"=>""},{"provider" => "renren","is_binding" => true,"uid" => "","access_token"=>""}]
-        # 
+        # 已经对auth参数转换,                类型: Hash
+        #  例子: auth = {"provider" => "weibo","is_binding" => true,"uid" => "","access_token"=>""}
+
 
         if (user = current_user) && (user_token = get_user_tokens('weibo', params['uid']))
 
           user.update_attribute :minisite_id, params['id']
 
           if params['auth'].present?
-            params['auth'].each do |a|
-              unless get_user_tokens(a['provider'], a['uid'])
-                new_token = user.user_tokens.new(provider: a['provider'], uid: a['uid'], is_binding: a['is_binding'], access_token: a['access_token'])
+            a = params['auth']
+              unless get_user_tokens(a[:provider], a[:uid])
+                new_token = user.user_tokens.new(provider: a[:provider], uid: a[:uid], is_binding: a[:is_binding], access_token: a[:access_token])
                 new_token.save!
                 #TODO error handling
-              end
+              
             end
             present user, with: APIEntities::DetailUser
           end
@@ -77,11 +79,11 @@ module Icolor
 
           if user.save
             if params['auth'].present?
-                params['auth'].each do |a|
-                  new_token = user.user_tokens.new(provider: a['provider'], uid: a['uid'], is_binding: a['is_binding'], access_token: a['access_token'])
+                a = params['auth']
+                  new_token = user.user_tokens.new(provider: a[:provider], uid: a[:uid], is_binding: a[:is_binding], access_token: a[:access_token])
                   new_token.save!
                   #TODO error handling
-              end
+              
             end
           else
             error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 406)
