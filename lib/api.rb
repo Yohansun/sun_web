@@ -86,7 +86,7 @@ module Icolor
               
             end
           else
-            error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 406)
+            error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 200)
           end         
         end   
       end 
