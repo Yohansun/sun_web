@@ -48,11 +48,11 @@
     </div>
     <div class="sub_bot pr">
       <div class="pager topic_pager ft12">
-        <%- unless @prev_article.nil? %>
-            <a href="/articles/<%= @prev_article.id %>" class="prev"><span></span>上一篇</a>
-        <%- end %>
         <%- unless @next_article.nil? %>
-            <a href="/articles/<%= @next_article.id %>" class="next"><span></span>下一篇</a>
+            <a href="/articles/<%= @next_article.id %>" class="prev"><span></span>上一篇</a>
+        <%- end %>
+        <%- unless @prev_article.nil? %>
+            <a href="/articles/<%= @prev_article.id %>" class="next"><span></span>下一篇</a>
         <%- end %>
       </div>
       <!--pager ends-->
