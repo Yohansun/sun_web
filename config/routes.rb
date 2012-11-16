@@ -223,6 +223,8 @@ Icolor::Application.routes.draw do
     match '/users' => 'users#index'
     resources :seller_users
     match "/autocomplete_area" => 'seller_users#autocomplete_area'
+    get "/seller_add_user", :to => 'seller_users#seller_add_user'
+    post  "/create_seller_user_id", :to => 'seller_users#create_seller_user_id'
   end
 
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
