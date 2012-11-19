@@ -14,7 +14,6 @@ class LandsController < ApplicationController
 						"a963shouyemingrenzhuanfang1", "a963shejishitongdao1",
 						"a963zixunzhongxinjiaodianxinwen1", "taipingyangjiajuyixingguanggaowei1",
 						"a963edmhuiyuanyoujian1",
-						"80018shouyetupian2",
 						"a963shouyedingbu2",
 						"a963shouyejiaodian2",
 						"a963shouyedidiyiping2",
@@ -26,6 +25,7 @@ class LandsController < ApplicationController
 						"pchousebankuaidingzhi-2"]
 
 			urls2 =["80018ketingpingdao2",
+							"80018shouyetupian2",
 							"80018woshipingdao2",
 							"80018secaidapei2",
 							"pchousebankuaidingzhi2"]
