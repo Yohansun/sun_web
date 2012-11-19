@@ -35,11 +35,11 @@ module Icolor
     end
 
     def authenticate_emall!
-      error!({ "error" => "401 Unauthorized", :suc => 'fail'}, 401) unless emall_user
+      error!({ "error" => "200 Unauthorized", :suc => 'fail'}, 200) unless emall_user
     end  
 
     def authenticate!
-      error!({ "error" => "401 Unauthorized"}, 401) unless current_user
+      error!({ "error" => "200 Unauthorized"}, 200) unless current_user
     end
 
     def random_password

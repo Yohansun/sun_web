@@ -128,7 +128,7 @@ module Icolor
         end
 
         unless mood.save
-          error!({ "error" => "UpdateMoodError", "detail" => mood.errors.messages }, 406)
+          error!({ "error" => "UpdateMoodError", "detail" => mood.errors.messages }, 200)
         end
       end
     end
@@ -178,14 +178,14 @@ module Icolor
                 design_image.file = file
                 design_image.imageable = design
 
-                error!({ "error" => "UpdateDesignImageError", "detail" => design.errors.messages }, 406) unless design_image.save
+                error!({ "error" => "UpdateDesignImageError", "detail" => design.errors.messages }, 200) unless design_image.save
               end
             end
           else
-            error!({ "error" => "UpdateDesignImageError", "detail" => "参数images不能为空!" }, 406)
+            error!({ "error" => "UpdateDesignImageError", "detail" => "参数images不能为空!" }, 200)
           end  
         else
-          error!({ "error" => "UpdateDesignError", "detail" => design.errors.messages }, 406)
+          error!({ "error" => "UpdateDesignError", "detail" => design.errors.messages }, 200)
         end
       end  
     end
@@ -223,14 +223,14 @@ module Icolor
                 design_image.file = file
                 inspiration_image.imageable = inspiration
 
-                error!({ "error" => "UpdateInspirationImageError", "detail" => inspiration.errors.messages }, 406) unless inspiration_image.save
+                error!({ "error" => "UpdateInspirationImageError", "detail" => inspiration.errors.messages }, 200) unless inspiration_image.save
               end
             end
           else
-            error!({ "error" => "UpdateInspirationImageError", "detail" => "参数images不能为空!" }, 406)
+            error!({ "error" => "UpdateInspirationImageError", "detail" => "参数images不能为空!" }, 200)
           end
         else
-          error!({ "error" => "UpdateInspirationError", "detail" => inspiration.errors.messages }, 406)
+          error!({ "error" => "UpdateInspirationError", "detail" => inspiration.errors.messages }, 200)
         end
       end
     end
