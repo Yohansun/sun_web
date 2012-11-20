@@ -4,8 +4,8 @@ class Sellers::SellerDataController < ApplicationController
 
 	def index
 		if current_seller_user
-			areas = Area.find(current_seller_user.area_id).self_and_descendants
-			@jxs_total = User.where("area_id in (?) and role_id = ?", areas, 2).order("is_top desc","top_order asc","is_imported desc")
+			user_ids = current_seller_user.user_ids.present? ? current_seller_user.user_ids.split(',') : []
+			@jxs_total = User.where("id in (?) and role_id = ?", user_ids, 2).order("is_top desc","top_order asc","is_imported desc")
 
 			@sign_total = @jxs_total.map {|m| m.try(:sign_in_count)}.sum
 			@designs_count_total = @jxs_total.map {|m| m.designs.includes(:design_images).where('design_images.file_file_size > 0').count}.sum

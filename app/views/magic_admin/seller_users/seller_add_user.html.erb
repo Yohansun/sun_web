@@ -1,0 +1,45 @@
+<!-- Content -->
+<div class="content">
+  <div class="title"><h5>管理家装公司</h5></div>
+  <!-- Tabs -->
+	<div class="widget">
+		<ul class="tabs">
+    	<li><a href="#tab1">一般信息</a></li>
+  	</ul>
+  	<div class="tab_container">
+    	<div id="tab1" class="tab_content"> 
+        <div class="content">
+          <div class="widgets">
+            <%= form_tag main_app.create_seller_user_id_path do |f| %>
+              <div class="clearfix">
+                <% u_id = 0 %>
+                <% @user.each do |user| %>
+                  <div style="width:20%;float:left;">
+                    <% @user_ids.each do |user_id| %>
+                      <% if user_id.to_i == user.id.to_i%>
+                        <%= check_box_tag "user_ids[]", user.id,  checked = true%>
+                        <% u_id = user.id.to_i %>
+                        <% break %>
+                      <% else %>
+                        <% u_id = 0 %>
+                      <% end %>
+                    <% end %>
+                    <% if u_id == 0 %>
+                      <%= check_box_tag "user_ids[]", user.id,  checked = false%>
+                    <% end %>
+                    <%=user.username%>
+                  </div>
+                <% end %>
+                <div class="fix"></div>
+                <div class="fix" style="height:40px;"></div>
+                <%=hidden_field_tag "seller_user_id", params[:seller_id]%>
+                <input type="submit" value="添加" class="greyishBtn submitForm" />
+              </div>
+            <%- end -%>
+          </div><!-- widgets -->
+        </div>
+    	</div>
+  	</div>
+  	<div class="fix"></div>
+	</div><!-- Tabs -->
+</div><!-- Content -->
