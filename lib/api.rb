@@ -138,7 +138,7 @@ module Icolor
                 }
             })
           else
-            error!({"error"=> 0,"data"=> { "result"=> 0 } })
+            error!({ "error" => "UpdateUserError", "detail" => "该用户不存在" }, 200)
           end
         end   
       end 
