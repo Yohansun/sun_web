@@ -43,26 +43,12 @@ module Icolor
         # 已经对auth参数转换,                类型: Hash
         #  例子: auth = {"provider" => "weibo","is_binding" => true,"uid" => "","access_token"=>""}
 
-
-        if (user = current_user) && (user_token = get_user_tokens('weibo', params['uid']))
-
-          user.update_attribute :minisite_id, params['id']
-
-          if params['auth'].present?
-            a = params['auth']
-              unless get_user_tokens(a[:provider], a[:uid])
-                new_token = user.user_tokens.new(provider: a[:provider], uid: a[:uid], is_binding: a[:is_binding], access_token: a[:access_token])
-                new_token.save!
-                #TODO error handling
-              
-            end
-            present user, with: APIEntities::DetailUser
-          end
-        else
+        #1. flash传weibo uid和access token 过来，我们验证uid和access token是否存在，并返回对应数据。
+        if params[:id].present? && params['email'].present? && params['password'].present?
           user = User.new
           user.minisite_id = params['id']
           user.username    = user.name = params['user']
-          user.password    = user.password_confirmation = random_password
+          user.password    =  user.password_confirmation = params['password']
           user.email       = params['email']
           user.phone       = params['phone']          
           user.sex         = params['sex']
@@ -85,9 +71,75 @@ module Icolor
                   #TODO error handling
               
             end
+            error!({
+                "error" => 0,
+                "data"=> {
+                    "result"=> 1,
+                    "userinfo"=> {
+                        "icolorid"=> user.id,
+                        "username"=> user.username,
+                        "email"=> user.email,
+                        "local"=> user.location,
+                        "role"=> user.try(:role).role,
+                        "tel"=> user.phone,
+                        "sex"=> user.sex,
+                        "auth"=> [
+                            {
+                                "type"=> user.user_tokens.provider,
+                                "uid"=> user.user_tokens.uid,
+                                "start_Time"=> user.user_tokens.updated_at,
+                                "access_token"=> user.user_tokens.access_token
+                            }
+                        ]
+                    }
+                }
+            })
           else
             error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 200)
-          end         
+          end 
+          
+        else
+          
+          if (user = current_user) && (user_token = get_user_tokens(params['uid'],params['access_token']))
+
+            user.update_attribute :minisite_id, params['id'] if params['id']
+
+            if params['auth'].present?
+              a = params['auth']
+              unless get_user_tokens(params['uid'],params['access_token'])
+                new_token = user.user_tokens.new(provider: a[:provider], uid: a[:uid], is_binding: a[:is_binding], access_token: a[:access_token])
+                new_token.save!
+                #TODO error handling
+                
+              end
+            end
+
+            error!({
+                "error" => 0,
+                "data"=> {
+                    "result"=> 1,
+                    "userinfo"=> {
+                        "icolorid"=> user.id,
+                        "username"=> user.username,
+                        "email"=> user.email,
+                        "local"=> user.location,
+                        "role"=> user.try(:role).role,
+                        "tel"=> user.phone,
+                        "sex"=> user.sex,
+                        "auth"=> [
+                            {
+                                "type"=> user.user_tokens.provider,
+                                "uid"=> user.user_tokens.uid,
+                                "start_Time"=> user.user_tokens.updated_at,
+                                "access_token"=> user.user_tokens.access_token
+                            }
+                        ]
+                    }
+                }
+            })
+          else
+            error!({"error"=> 0,"data"=> { "result"=> 0 } })
+          end
         end   
       end 
     end
