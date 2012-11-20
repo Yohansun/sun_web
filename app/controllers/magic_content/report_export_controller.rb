@@ -244,7 +244,7 @@ module MagicContent
                      user.try(:city).try(:name), 
                      user.try(:area).try(:name),
                      value,
-                     user.is_imported?]
+                     user.is_imported?] if user
           end
         end
       end
