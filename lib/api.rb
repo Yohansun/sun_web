@@ -71,29 +71,7 @@ module Icolor
                   #TODO error handling
               
             end
-            error!({
-                "error" => 0,
-                "data"=> {
-                    "result"=> 1,
-                    "userinfo"=> {
-                        "icolorid"=> user.id,
-                        "username"=> user.username,
-                        "email"=> user.email,
-                        "local"=> user.location,
-                        "role"=> user.try(:role).role,
-                        "tel"=> user.phone,
-                        "sex"=> user.sex,
-                        "auth"=> [
-                            {
-                                "type"=> user.user_tokens.provider,
-                                "uid"=> user.user_tokens.uid,
-                                "start_Time"=> user.user_tokens.updated_at,
-                                "access_token"=> user.user_tokens.access_token
-                            }
-                        ]
-                    }
-                }
-            })
+            error!({ "error" => "UpdateUserError", "detail" => "修改成功"，"result"  => "1" }, 200)
           else
             error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 200)
           end 
@@ -114,29 +92,7 @@ module Icolor
               end
             end
 
-            error!({
-                "error" => 0,
-                "data"=> {
-                    "result"=> 1,
-                    "userinfo"=> {
-                        "icolorid"=> user.id,
-                        "username"=> user.username,
-                        "email"=> user.email,
-                        "local"=> user.location,
-                        "role"=> user.try(:role).role,
-                        "tel"=> user.phone,
-                        "sex"=> user.sex,
-                        "auth"=> [
-                            {
-                                "type"=> user.user_tokens.provider,
-                                "uid"=> user.user_tokens.uid,
-                                "start_Time"=> user.user_tokens.updated_at,
-                                "access_token"=> user.user_tokens.access_token
-                            }
-                        ]
-                    }
-                }
-            })
+            error!({ "error" => "UpdateUserError", "detail" => "修改成功"，"result"  => "1" }, 200)
           else
             error!({ "error" => "UpdateUserError", "detail" => "该用户不存在" }, 200)
           end
