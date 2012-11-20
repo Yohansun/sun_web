@@ -86,7 +86,7 @@ module MagicContent
   									 user.try(:area).try(:name),
   									 user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
   									 user.sign_in_count,
-  									 user.is_imported?]
+  									 user.is_imported?] if user
 
   				end
   			end
@@ -131,7 +131,7 @@ module MagicContent
                      design.user.city.try(:parent).try(:name),
                      design.user.try(:city).try(:name), 
                      design.user.try(:area).try(:name),
-                     design.is_refresh]
+                     design.is_refresh] if design && design.user
   				end
   			end
   		end
@@ -173,7 +173,7 @@ module MagicContent
                      inspiration.comments.count,
                      inspiration.user.city.try(:parent).try(:name),
                      inspiration.user.try(:city).try(:name), 
-                     inspiration.user.try(:area).try(:name)]
+                     inspiration.user.try(:area).try(:name)] if inspiration && inspiration.user
           end
         end
       end

@@ -44,10 +44,10 @@ module MagicContent
       all_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t)
 
       designs = {}
-      designs['zz'] = all_designs.select{|design| design.user.role_id.eql?(1) && design.user.des_status.eql?(false)}
-      designs['zd'] = all_designs.select{|design| design.user.role_id.eql?(1) && design.user.des_status.eql?(true)}
-      designs['gs'] = all_designs.select{|design| design.user.role_id.eql?(2)}
-      designs['pt'] = all_designs.select{|design| design.user.role_id.eql?(3)}
+      designs['zz'] = all_designs.select{|design| design.user.try(:role_id).eql?(1) && design.user.des_status.eql?(false)}
+      designs['zd'] = all_designs.select{|design| design.user.try(:role_id).eql?(1) && design.user.des_status.eql?(true)}
+      designs['gs'] = all_designs.select{|design| design.user.try(:role_id).eql?(2)}
+      designs['pt'] = all_designs.select{|design| design.user.try(:role_id).eql?(3)}
 
       ##第三方连接进入icolor
       land_sql_conditions = "SELECT source, count(source) as count
