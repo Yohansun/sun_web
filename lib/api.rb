@@ -103,7 +103,6 @@ module Icolor
               error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
             end
           else
-            puts 'goes here'
             error!({ "error" => "UpdateUserError", "detail" => "该用户不存在?" }, 200)
           end
         end   
