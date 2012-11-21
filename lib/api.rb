@@ -65,13 +65,17 @@ module Icolor
 
           if user.save
             if params['auth'].present?
-                a = params['auth']
-                  new_token = user.user_tokens.new(provider: a[:provider], uid: a[:uid], is_binding: a[:is_binding], access_token: a[:access_token])
-                  new_token.save!
-                  #TODO error handling
-              
+              new_token = user.user_tokens.new(provider: params['auth']['provider'], uid: params['auth']['uid'], is_binding: params['auth']['is_binding'], access_token: params['auth']['access_token'])
+              if new_token.save!
+                error!({ "error" => "UpdateUserError", "detail" => "绑定成功" }, 200)
+              else
+                error!({ "error" => "UpdateUserError", "detail" => "绑定失败:#{new_token.errors.messages}" }, 200)
+              end
+              #TODO error handling
+            else
+              error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
             end
-            error!({ "error" => "UpdateUserError", "detail" => "修改成功","result"  => "1" }, 200)
+            error!({ "error" => "UpdateUserError", "detail" => "注册成功" }, 200)
           else
             error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 200)
           end 
@@ -83,16 +87,20 @@ module Icolor
             user.update_attribute :minisite_id, params['id'] if params['id']
 
             if params['auth'].present?
-              a = params['auth']
-              unless get_user_tokens(params['uid'],params['access_token'])
-                new_token = user.user_tokens.new(provider: a[:provider], uid: a[:uid], is_binding: a[:is_binding], access_token: a[:access_token])
-                new_token.save!
+              unless get_user_tokens(params['auth']['uid'],params['auth']['access_token'])
+                new_token = user.user_tokens.new(provider: params['auth']['provider'], uid: params['auth']['uid'], is_binding: params['auth']['is_binding'], access_token: params['auth']['access_token'])
+                if new_token.save!
+                  error!({ "error" => "UpdateUserError", "detail" => "绑定成功" }, 200)
+                else
+                  error!({ "error" => "UpdateUserError", "detail" => "绑定失败:#{new_token.errors.messages}" }, 200)
+                end
                 #TODO error handling
-                
+              else
+                error!({ "error" => "UpdateUserError", "detail" => "该用户已存在" }, 200)
               end
+            else
+              error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
             end
-
-            error!({ "error" => "UpdateUserError", "detail" => "修改成功","result"  => "1" }, 200)
           else
             error!({ "error" => "UpdateUserError", "detail" => "该用户不存在" }, 200)
           end
