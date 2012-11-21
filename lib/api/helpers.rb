@@ -46,8 +46,9 @@ module Icolor
     	UUIDTools::UUID.random_create.hexdigest[0,10].upcase
    	end 
 
-   	def get_user_tokens(uid,access_token)   	
-      current_user.user_tokens.where(uid: uid,access_token: access_token).first if current_user
+   	def get_user_tokens(uid)   	
+      current_user.user_tokens.where(uid: uid).first if current_user
    	end
+
   end
 end

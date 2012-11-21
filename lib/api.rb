@@ -10,6 +10,20 @@ module Icolor
 
     helpers APIHelpers
 
+    resource :user_tokens do 
+        # 验证微薄是否登陆
+        # 方法: POST
+        # URL: /api/user_tokens.json&uid=
+        # 接收参数: uid
+      post do
+        if  UserToken.where(uid: params['uid']).present?
+          error!({ "error" => "UpdateUserError", "detail" => "开始刷新" }, 200)
+        else
+          error!({ "error" => "UpdateUserError", "detail" => "这个微薄还没有绑定" }, 200)
+        end
+      end
+    end
+
     resource :users do      
 
       get do
@@ -44,7 +58,6 @@ module Icolor
         # 已经对auth参数转换,                类型: Hash
         #  例子: auth = {"provider" => "weibo","is_binding" => true,"uid" => "","access_token"=>""}
 
-        #1. flash传weibo uid和access token 过来，我们验证uid和access token是否存在，并返回对应数据。
         if params[:id].present? && params['email'].present? && params['password'].present? && params[:user].present?
           user = User.where(name: params[:user]).first
           if !user.present?
@@ -77,7 +90,7 @@ module Icolor
               end
               #TODO error handling
             else
-              error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
+              error!({ "error" => "UpdateUserError", "detail" => "绑定失败:缺少auth对象" }, 200)
             end
           else
             error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 200)
@@ -88,7 +101,7 @@ module Icolor
             user.update_attribute :minisite_id, params['id'] if params['id']
 
             if params['auth'].present?
-              unless get_user_tokens(params['auth']['uid'],params['auth']['access_token'])
+              unless get_user_tokens(params['auth']['uid'])
                 new_token = user.user_tokens.new(provider: params['auth']['provider'], uid: params['auth']['uid'], is_binding: params['auth']['is_binding'], access_token: params['auth']['access_token'])
                 if new_token.save!
                   error!({ "error" => "UpdateUserError", "detail" => "绑定成功" }, 200)
@@ -97,15 +110,16 @@ module Icolor
                 end
                 #TODO error handling
               else
-                error!({ "error" => "UpdateUserError", "detail" => "UID和access_token已被用户绑定" }, 200)
+                error!({ "error" => "UpdateUserError", "detail" => "UID已被用户绑定" }, 200)
               end
             else
-              error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
+              error!({ "error" => "UpdateUserError", "detail" => "绑定失败:缺少auth对象" }, 200)
             end
           else
-            error!({ "error" => "UpdateUserError", "detail" => "该用户不存在?" }, 200)
+            error!({ "error" => "UpdateUserError", "detail" => "没有这个icolor用户" }, 200)
           end
         end   
+
       end 
     end
 
