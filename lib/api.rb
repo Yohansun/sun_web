@@ -26,6 +26,7 @@ module Icolor
       end
 
       post do
+        
         # 同步用户数据,21_MINISITE活动
         # 方法: POST
         # URL: /api/users.json
@@ -44,8 +45,11 @@ module Icolor
         #  例子: auth = {"provider" => "weibo","is_binding" => true,"uid" => "","access_token"=>""}
 
         #1. flash传weibo uid和access token 过来，我们验证uid和access token是否存在，并返回对应数据。
-        if params[:id].present? && params['email'].present? && params['password'].present?
-          user = User.new
+        if params[:id].present? && params['email'].present? && params['password'].present? && params[:user].present?
+          user = User.where(name: params[:user]).first
+          if !user.present?
+            user = User.new
+          end
           user.minisite_id = params['id']
           user.username    = user.name = params['user']
           user.password    =  user.password_confirmation = params['password']
@@ -67,7 +71,7 @@ module Icolor
             if params['auth'].present?
               new_token = user.user_tokens.new(provider: params['auth']['provider'], uid: params['auth']['uid'], is_binding: params['auth']['is_binding'], access_token: params['auth']['access_token'])
               if new_token.save!
-                error!({ "error" => "UpdateUserError", "detail" => "绑定成功" }, 200)
+                error!({ "error" => "UpdateUserError", "detail" => "注册并绑定成功" }, 200)
               else
                 error!({ "error" => "UpdateUserError", "detail" => "绑定失败:#{new_token.errors.messages}" }, 200)
               end
@@ -75,15 +79,12 @@ module Icolor
             else
               error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
             end
-            error!({ "error" => "UpdateUserError", "detail" => "注册成功" }, 200)
           else
             error!({ "error" => "UpdateUserError", "detail" => user.errors.messages }, 200)
           end 
           
         else
-          
-          if (user = current_user) && (user_token = get_user_tokens(params['uid'],params['access_token']))
-
+          if (user = current_user)
             user.update_attribute :minisite_id, params['id'] if params['id']
 
             if params['auth'].present?
@@ -96,13 +97,14 @@ module Icolor
                 end
                 #TODO error handling
               else
-                error!({ "error" => "UpdateUserError", "detail" => "该用户已存在" }, 200)
+                error!({ "error" => "UpdateUserError", "detail" => "UID和access_token已被用户绑定" }, 200)
               end
             else
               error!({ "error" => "UpdateUserError", "detail" => "绑定失败：缺少auth对象" }, 200)
             end
           else
-            error!({ "error" => "UpdateUserError", "detail" => "该用户不存在" }, 200)
+            puts 'goes here'
+            error!({ "error" => "UpdateUserError", "detail" => "该用户不存在?" }, 200)
           end
         end   
       end 
