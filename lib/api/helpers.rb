@@ -6,7 +6,7 @@ module Icolor
     # user helpers
 
     def current_user
-    	User.where("name = :user", user: params[:user]).first
+    	User.where("username = :user or name = :user", user: params[:user]).first
     end
 
     def emall_user
