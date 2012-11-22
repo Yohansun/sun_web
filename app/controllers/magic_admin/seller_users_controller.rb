@@ -22,7 +22,8 @@ module MagicAdmin
     end 
 
     def seller_add_user
-      @user = User.where(area_id: params[:area_id], role_id: 2)
+      area_id = Area.where(parent_id: params[:area_id]).map &:id
+      @user = User.where("role_id = ? and area_id in (?)",2,area_id)
       seller_user = SellerUser.find params[:seller_id]
       @user_ids = []
       if seller_user.user_ids.present?
