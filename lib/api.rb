@@ -69,7 +69,7 @@ module Icolor
           user.email       = params['email']
           user.phone       = params['phone']          
           user.sex         = params['sex']
-          user.area_id     = Area.find_by_name(params['location']).try(:id)
+          user.area_id     = Area.find_by_name(CGI::unescape(params['location'])).try(:id)
           user.is_read     = true
           user.is_from_minisite = true
 
