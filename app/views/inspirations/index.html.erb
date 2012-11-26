@@ -33,6 +33,9 @@
         <li class=<%="#{'li_current' if params[:order] == '最热' }" %> >
         <a href="/inspirations?order=<%= URI.escape('最热')%>">最热</a>
         </li>
+        <li class="refresh_21">
+            <a href="/inspirations?order=<%= URI.escape('最热')%>"><img src="<%= asset_path "icon_03.jpg"%>" /></a>
+        </li>
       </ul>
       <div class="upload_btn">
         <% if current_user -%>
