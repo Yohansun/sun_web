@@ -237,6 +237,7 @@ module Icolor
         inspiration         = current_user.inspirations.new
         inspiration.title   = params['title']
         inspiration.content = params['content']
+        inspiration.is_minisite = true
 
         if inspiration.save
           if params["images"].present?
