@@ -15,6 +15,8 @@ class InspirationsController < ApplicationController
     unless @inspirations.nil?
       if params[:order] == "最热"
         @inspirations = @inspirations.order("votes_count desc")
+      elsif params[:order] == "minisite"
+        @inspirations = Inspiration.where(is_minisite: true).order("created_at desc").page params[:page]
       else
         @inspirations = @inspirations.order("created_at desc")
       end

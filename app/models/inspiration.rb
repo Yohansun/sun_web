@@ -1,5 +1,5 @@
 class Inspiration < ActiveRecord::Base
-	attr_accessible :title, :content, :design_image_ids
+	attr_accessible :title, :content, :design_image_ids, :is_minisite
 
 	validates_presence_of :title, :content
 
