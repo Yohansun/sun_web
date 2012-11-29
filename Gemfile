@@ -16,16 +16,13 @@ gem 'jquery-rails'
 
 group :development do
   gem "capistrano"
-  gem 'capistrano-unicorn'
-  gem 'debugger'
+  gem "rvm-capistrano"
   gem 'bond'
   gem 'wirble'
   gem "awesome_print"
   gem "map_by_method"
   gem "hirb"
 end
-
-gem 'unicorn'
 
 gem "paperclip", "<3.0"
 

@@ -19,28 +19,20 @@ set :keep_releases, 3
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
 
-role :web, "58.215.177.238" # Your HTTP server, Apache/etc
-role :app, "58.215.177.238" # This may be the same as your `Web` server
-role :db, "58.215.177.238", :primary => true # This is where Rails migrations will run
+role :web, "203.156.231.37" # Your HTTP server, Apache/etc
+role :app, "203.156.231.37" # This may be the same as your `Web` server
+role :db, "203.156.231.37", :primary => true # This is where Rails migrations will run
 
 set :user, "root"
 set :repository, "git@github.com:nioteam/icolor.git"
-set :branch, "master"
-set :deploy_to, "/var/rails/icolor"
+set :branch, "production"
+set :deploy_to, "/data/rails/icolor"
 
 # tasks
 namespace :deploy do
-  task :start, :roles => :app do
-    unicorn.start
-  end
-
-  task :stop, :roles => :app do
-    unicorn.stop
-  end
-
-  desc "Restart Application"
-  task :restart, :roles => :app do
-    unicorn.reload
+  desc "Restart web server"
+  task :restart, roles: :app, except: {no_release: true} do
+    run "touch #{deploy_to}/current/tmp/restart.txt"
   end
 
   desc "Symlink shared resources on each release"
@@ -51,5 +43,3 @@ namespace :deploy do
 end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
-
-require 'capistrano-unicorn'
