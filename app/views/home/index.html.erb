@@ -1,7 +1,6 @@
 <% content_for :head do -%>
 <%= stylesheet_link_tag 'index' %>
-<%= stylesheet_link_tag "layer", "jquery.slider.css", "nov_notification" %>
-<%= javascript_include_tag "layer" %>
+<%= stylesheet_link_tag "layer", "jquery.slider.css" %>
 <style type="text/css">
 .boxb_content {
   position: relative;
@@ -81,13 +80,6 @@
     <img src="<%= asset_path "layer/kv4.png"%>" alt="" />
   </div>
 <%#- end %>-->
-
-<div id="nov_notification"></div>
-<div class="nov_notification none">
-  <p>尊敬的iColor用户：</p>
-      <p class="indent">为了给您提供更好的服务，iColor网站将于<span>2012年11月30日0:00 - 2012年11月30日06:00</span>对网站进行系统维护。在此期间所有用户将无法正常使用。</p>
-      <p class="indent">对此给您带来的不便敬请谅解。同时也感谢您对iColor网站的支持与理解。</p>
-</div>
 
 <%- content_for :index do %>
 <div style="background:url(<%= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div>

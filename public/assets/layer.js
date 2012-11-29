@@ -1,7 +1,0 @@
-/*
- * jQuery layer plugin
- * Author : Luck Chang
- * Email  : chunhang@networking.io
- * Date   : 2012.11.29 10:00
- */
-(function(a,b){function g(a){var b={btn:null,box:null,callback:function(){}};for(var c in a)a.hasOwnProperty(c)&&(b[c]=a[c]);this.btn=b.btn,this.box=b.box,this.init()}var c=a.browser.msie&&a.browser.version==6,d=b.document,e=d.documentElement,f=function(a){return d.getElementById(a)};g.prototype={constructor:g,init:function(){this.layer=f("nov_notification"),this.addEvents()},css:function(a,b){for(var c in b)b.hasOwnProperty(c)&&(a.style[c]=b[c])},layout:function(){this.box.hide(),this.css(this.layer,{display:"none"})},layin:function(){this.fix(),this.box.show(),this.css(this.layer,{display:"block"})},proxy:function(a,b){return function(){return a.call(b,arguments)}},fix:function(){if(!c)return;var a=e.scrollHeight,b=e.clientWidth;this.css(this.layer,{height:a+"px",width:b+"px"})},addEvents:function(){var e=this;this.btn?this.btn.click(this.proxy(this.layin,this)):this.layin(),a(this.layer).click(this.proxy(this.layout,this)),a(this.box).click(this.proxy(this.layout,this)),a(d).keydown(function(a){a.which===27&&e.box.is(":visible")&&e.layout()}),c&&a(b).resize(this.proxy(this.fix,this))}},b.Layer=g})(jQuery,window),$(function(){var a=new Layer({box:$(".nov_notification")})});
