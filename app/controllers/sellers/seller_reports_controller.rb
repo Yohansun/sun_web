@@ -60,8 +60,8 @@ class Sellers::SellerReportsController < ApplicationController
 												current_designs.count,
 												all_designs.count,
 
-												current_designs.sum(:votes_count),
-												all_designs.sum(:votes_count),
+												current_designs.map {|d| d.votes_count }.sum,
+												all_designs.map {|d| d.votes_count }.sum,
 
 												current_designs.map {|d| d.comments.count }.sum,
 												all_designs.map {|d| d.comments.count }.sum,
