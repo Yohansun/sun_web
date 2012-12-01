@@ -83,7 +83,7 @@ Icolor::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.middleware.use ExceptionNotifier,
-    :email_prefix => "[ICOLOR ERROR] ",
+    :email_prefix => "[ICOLOR] ",
     :sender_address => %{"errors" <errors@networking.io>},
-    :exception_recipients => %w{nio-errors@googlegroups.com}
+    :exception_recipients => %w{errors@networking.io}
 end
