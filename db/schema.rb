@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022085927) do
+ActiveRecord::Schema.define(:version => 20121130081358) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -86,6 +86,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "updated_at",                       :null => false
   end
 
+  add_index "areas", ["name"], :name => "index_areas_on_name"
+  add_index "areas", ["parent_id"], :name => "index_areas_on_parent_id"
+
   create_table "avatars", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at",        :null => false
@@ -122,6 +125,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "color_codes", ["code"], :name => "index_color_codes_on_code"
 
   create_table "color_designs", :force => true do |t|
     t.string   "design_name"
@@ -163,6 +168,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.integer  "votes_count",      :default => 0
   end
 
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+
   create_table "customer_replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -172,6 +180,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "customer_replies", ["question_id"], :name => "index_customer_replies_on_question_id"
+  add_index "customer_replies", ["updated_at"], :name => "index_customer_replies_on_updated_at"
 
   create_table "design_images", :force => true do |t|
     t.integer  "user_id"
@@ -187,9 +198,12 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
+  add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
   add_index "design_images", ["imageable_id"], :name => "NewIndex2"
+  add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
   add_index "design_images", ["imageable_type"], :name => "NewIndex3"
   add_index "design_images", ["is_cover"], :name => "NewIndex4"
+  add_index "design_images", ["is_cover"], :name => "index_design_images_on_is_cover"
   add_index "design_images", ["user_id"], :name => "NewIndex1"
 
   create_table "designs", :force => true do |t|
@@ -214,12 +228,19 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
+  add_index "designs", ["area_id"], :name => "index_designs_on_area_id"
   add_index "designs", ["city"], :name => "NewIndex7"
   add_index "designs", ["created_at"], :name => "NewIndex3"
+  add_index "designs", ["created_at"], :name => "index_designs_on_created_at"
+  add_index "designs", ["design_color"], :name => "index_designs_on_design_color"
+  add_index "designs", ["is_refresh"], :name => "index_designs_on_is_refresh"
   add_index "designs", ["recommended"], :name => "NewIndex10"
   add_index "designs", ["room_type"], :name => "NewIndex6"
+  add_index "designs", ["room_type"], :name => "index_designs_on_room_type"
   add_index "designs", ["shares_count"], :name => "NewIndex4"
   add_index "designs", ["style"], :name => "NewIndex5"
+  add_index "designs", ["style"], :name => "index_designs_on_style"
+  add_index "designs", ["title"], :name => "index_designs_on_title"
   add_index "designs", ["user_id"], :name => "NewIndex1"
   add_index "designs", ["view_count"], :name => "NewIndex9"
   add_index "designs", ["votes_count"], :name => "NewIndex2"
@@ -306,6 +327,10 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "end_time"
   end
 
+  add_index "gifts", ["end_time"], :name => "index_gifts_on_end_time"
+  add_index "gifts", ["gift_type"], :name => "index_gifts_on_gift_type"
+  add_index "gifts", ["give_time"], :name => "index_gifts_on_give_time"
+
   create_table "groups", :force => true do |t|
     t.integer  "admin_id"
     t.string   "name"
@@ -331,9 +356,14 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "is_minisite",      :default => false
   end
+
+  add_index "inspirations", ["created_at"], :name => "index_inspirations_on_created_at"
+  add_index "inspirations", ["is_minisite"], :name => "index_inspirations_on_is_minisite"
+  add_index "inspirations", ["votes_count"], :name => "index_inspirations_on_votes_count"
 
   create_table "jobs", :force => true do |t|
     t.string   "job"
@@ -352,18 +382,6 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "work_experience"
   end
 
-  create_table "lands", :force => true do |t|
-    t.string   "source"
-    t.string   "source_ip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "lands", ["created_at"], :name => "created_at"
-  add_index "lands", ["created_at"], :name => "index_lands_on_created_at"
-  add_index "lands", ["source"], :name => "index_lands_on_source"
-  add_index "lands", ["source"], :name => "source"
-
   create_table "login_logs", :force => true do |t|
     t.integer  "user_id"
     t.datetime "current_sign_in_at"
@@ -371,6 +389,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
   end
+
+  add_index "login_logs", ["current_sign_in_at"], :name => "index_login_logs_on_current_sign_in_at"
+  add_index "login_logs", ["user_id"], :name => "index_login_logs_on_user_id"
 
   create_table "maillists", :force => true do |t|
     t.string   "email"
@@ -408,6 +429,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "main_preview_img_updated_at"
     t.string   "master_name"
   end
+
+  add_index "master_designs", ["published_at"], :name => "index_master_designs_on_published_at"
 
   create_table "master_profiles", :force => true do |t|
     t.string   "name"
@@ -462,6 +485,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.integer  "status"
   end
 
+  add_index "mix_colors", ["updated_at"], :name => "index_mix_colors_on_updated_at"
+
   create_table "moods", :force => true do |t|
     t.integer  "user_id"
     t.text     "content"
@@ -478,6 +503,7 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "img_updated_at"
   end
 
+  add_index "moods", ["created_at"], :name => "index_moods_on_created_at"
   add_index "moods", ["user_id"], :name => "index_moods_on_user_id"
 
   create_table "my_show_img_uploads", :force => true do |t|
@@ -488,6 +514,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
   end
+
+  add_index "my_show_img_uploads", ["created_at"], :name => "index_my_show_img_uploads_on_created_at"
 
   create_table "old_articles", :force => true do |t|
     t.integer  "class_id"
@@ -511,6 +539,7 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
   end
 
   add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
+  add_index "old_design_files", ["old_design_id"], :name => "index_old_design_files_on_old_design_id"
 
   create_table "old_designs", :force => true do |t|
     t.string   "title",       :limit => 256
@@ -607,6 +636,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.integer  "message_id"
   end
 
+  add_index "reply_msgs", ["created_at"], :name => "index_reply_msgs_on_created_at"
+
   create_table "roles", :force => true do |t|
     t.string   "role"
     t.datetime "created_at", :null => false
@@ -622,6 +653,10 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "updated_at", :null => false
     t.integer  "amount"
   end
+
+  add_index "scores", ["created_at"], :name => "index_scores_on_created_at"
+  add_index "scores", ["remark"], :name => "index_scores_on_remark"
+  add_index "scores", ["score_type"], :name => "index_scores_on_score_type"
 
   create_table "seller_data", :force => true do |t|
     t.integer  "sales"
@@ -641,6 +676,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.text     "remarks"
   end
 
+  add_index "seller_data", ["apply_for_tools"], :name => "index_seller_data_on_apply_for_tools"
+  add_index "seller_data", ["created_at"], :name => "index_seller_data_on_created_at"
+
   create_table "seller_reports", :force => true do |t|
     t.string   "file_name"
     t.datetime "statistical_time"
@@ -648,6 +686,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  add_index "seller_reports", ["file_name"], :name => "index_seller_reports_on_file_name"
 
   create_table "seller_users", :force => true do |t|
     t.string   "email",                  :default => "",  :null => false
@@ -668,10 +708,12 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "phone"
     t.string   "psd"
     t.string   "top_record"
+    t.text     "user_ids"
   end
 
   add_index "seller_users", ["email"], :name => "index_seller_users_on_email", :unique => true
   add_index "seller_users", ["reset_password_token"], :name => "index_seller_users_on_reset_password_token", :unique => true
+  add_index "seller_users", ["username"], :name => "index_seller_users_on_username"
 
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false
@@ -724,6 +766,8 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "updated_at",     :null => false
   end
 
+  add_index "sms_logs", ["created_at"], :name => "index_sms_logs_on_created_at"
+
   create_table "subjects", :force => true do |t|
     t.string   "name"
     t.string   "slug"
@@ -747,6 +791,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "re_url"
     t.integer  "site_message_id"
   end
+
+  add_index "sys_msgs", ["created_at"], :name => "index_sys_msgs_on_created_at"
+  add_index "sys_msgs", ["status"], :name => "index_sys_msgs_on_status"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -797,6 +844,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "access_token"
   end
 
+  add_index "user_tokens", ["is_binding"], :name => "index_user_tokens_on_is_binding"
+  add_index "user_tokens", ["uid"], :name => "index_user_tokens_on_uid"
+
   create_table "users", :force => true do |t|
     t.string   "email",                     :default => "",    :null => false
     t.string   "encrypted_password",        :default => "",    :null => false
@@ -846,9 +896,23 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.integer  "minisite_id"
   end
 
+  add_index "users", ["area_id"], :name => "index_users_on_area_id"
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
+  add_index "users", ["current_sign_in_at"], :name => "index_users_on_current_sign_in_at"
+  add_index "users", ["des_status"], :name => "index_users_on_des_status"
+  add_index "users", ["inauguration_company"], :name => "index_users_on_inauguration_company"
+  add_index "users", ["is_imported"], :name => "index_users_on_is_imported"
+  add_index "users", ["is_top"], :name => "index_users_on_is_top"
+  add_index "users", ["last_sign_in_at"], :name => "index_users_on_last_sign_in_at"
+  add_index "users", ["name"], :name => "index_users_on_name"
+  add_index "users", ["name_of_company"], :name => "index_users_on_name_of_company"
+  add_index "users", ["old_id"], :name => "index_users_on_old_id"
+  add_index "users", ["phone"], :name => "index_users_on_phone"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["role_id"], :name => "index_users_on_role_id"
+  add_index "users", ["sign_in_count"], :name => "index_users_on_sign_in_count"
+  add_index "users", ["top_order"], :name => "index_users_on_top_order"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "videos", :force => true do |t|
     t.string   "title"
@@ -871,6 +935,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "votes", ["created_at"], :name => "index_votes_on_created_at"
+  add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
 
   create_table "weekly_star_uploads", :force => true do |t|
     t.integer  "weekly_star_id"
@@ -916,6 +983,9 @@ ActiveRecord::Schema.define(:version => 20121022085927) do
     t.string   "design_link"
     t.integer  "star_type_id"
   end
+
+  add_index "weekly_stars", ["published_at"], :name => "index_weekly_stars_on_published_at"
+  add_index "weekly_stars", ["star_type_id"], :name => "index_weekly_stars_on_star_type_id"
 
   create_table "weekly_tips", :force => true do |t|
     t.text     "body"
