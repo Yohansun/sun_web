@@ -21,6 +21,7 @@ $(function() {
     swf : '/uploadify/uploadify.swf',
     cancelImage : '/uploadify/uploadify-cancel.png',
     uploadLimit : 60,
+    successTimeout : 600,
     skipDefault : ['onSelect'],
     buttonText : "选择文件",
     width : 112,
@@ -55,7 +56,7 @@ $(function() {
     },
     onUploadComplete : function(){
       $("#upload_going").hide();
-    }    
+    }
   });
 
 });

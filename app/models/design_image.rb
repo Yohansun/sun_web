@@ -5,7 +5,7 @@ class DesignImage < ActiveRecord::Base
 
   belongs_to :imageable, :polymorphic => true
 
-  validate :file_dimensions, :unless => "errors.any?"
+  # validate :file_dimensions, :unless => "errors.any?"
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
