@@ -1,14 +1,16 @@
 # -*- encoding : utf-8 -*-
 class LandsController < ApplicationController
 	def landing
-		Land.create(:source => params[:source], :source_ip => request.remote_ip )
+		# Land.create(:source => params[:source], :source_ip => request.remote_ip )
 
-		urls = ["taipingyangshouye1", 
-						"taipingyangketingpingdao1", 
+		Rails.logger.info "landing: #{params[:source]}, #{request.remote_ip}"
+
+		urls = ["taipingyangshouye1",
+						"taipingyangketingpingdao1",
 						"taipingyangwoshipingdao1",
 						"taipingyangertongfangpingdao1",
-						"taipingyangsecaidapei1", 
-						"a963shouyedingbu1", 
+						"taipingyangsecaidapei1",
+						"a963shouyedingbu1",
 						"a963shouyejiaodian1",
 						"a963shouyedidiyiping1", "a963shouyeredian1",
 						"a963shouyemingrenzhuanfang1", "a963shejishitongdao1",
@@ -33,8 +35,8 @@ class LandsController < ApplicationController
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
 			elsif urls2.include? params[:source]
-				redirect_to other_events_review_path			
-			else	
+				redirect_to other_events_review_path
+			else
 				redirect_to root_path
 			end
 	end
