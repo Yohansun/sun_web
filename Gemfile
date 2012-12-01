@@ -22,6 +22,7 @@ group :development do
   gem "awesome_print"
   gem "map_by_method"
   gem "hirb"
+  gem "quiet_assets"
 end
 
 gem "paperclip", "<3.0"
