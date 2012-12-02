@@ -21,8 +21,9 @@ $(function() {
     swf : '/uploadify/uploadify.swf',
     cancelImage : '/uploadify/uploadify-cancel.png',
     uploadLimit : 60,
-    successTimeout : 600,
-    skipDefault : ['onSelect'],
+    successTimeout : 6000,
+    //skipDefault : ['onSelect'],
+    progressData : 'percentage',
     buttonText : "选择文件",
     width : 112,
     height : 31,
@@ -36,10 +37,8 @@ $(function() {
       var dat = eval('(' + data + ')');
       if (dat.result == 'success') {
         $.getScript(dat.upload + "?for=inspiration");
-        alert("图片上传成功");
+        //alert("图片上传成功");
       };
-      if (dat.result == 'failed')
-        {alert("图片宽度不能小于202像素！")};
     },
     postData : {
         '_http_accept': 'application/javascript',
@@ -49,13 +48,13 @@ $(function() {
         'authenticity_token': '<%= form_authenticity_token %>'
     },
     onUploadStart : function(){
-      $("#upload_going").show();
+      // $("#upload_going").show();
     },
     onUploadError : function(file, errorCode, errorMsg, errorString) {
       alert('您的网络不给力，请稍后尝试');
     },
     onUploadComplete : function(){
-      $("#upload_going").hide();
+      // $("#upload_going").hide();
     }
   });
 

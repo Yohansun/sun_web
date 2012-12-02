@@ -20,9 +20,10 @@ $(function() {
   $('#upload_photo').uploadify({
     swf : '/uploadify/uploadify.swf',
     cancelImage : '/uploadify/uploadify-cancel.png',
-    skipDefault : ['onSelect'],
+    //skipDefault : ['onSelect'],
+    progressData : 'percentage',
     buttonText : "选择文件",
-    successTimeout : 600,
+    successTimeout : 6000,
     uploadLimit : 60,
     width : 112,
     height : 31,
@@ -37,7 +38,7 @@ $(function() {
       if (dat.result == 'success') {
         $.getScript(dat.upload + "?for=design");
       };
-      alert("图片上传成功");
+      //alert("图片上传成功");
     },
     postData : {
         '_http_accept': 'application/javascript',
@@ -50,10 +51,10 @@ $(function() {
       alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
     },
     onUploadStart : function(){
-      $("#upload_going").show();
+      //$("#upload_going").show();
     },
     onUploadComplete : function(){
-      $("#upload_going").hide();
+      //$("#upload_going").hide();
     }
   });
 
