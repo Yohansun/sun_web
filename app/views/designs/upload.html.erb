@@ -24,6 +24,7 @@ $(function() {
     progressData : 'percentage',
     buttonText : "选择文件",
     successTimeout : 6000,
+    fileSizeLimit : '5MB',
     uploadLimit : 60,
     width : 112,
     height : 31,
@@ -94,7 +95,7 @@ function uploads_size () {
       <div class="suc_content ft14 clear">
         <div class="reg_list reg_width fb">上传到作品：<%= @design.title %></div>
         <div class="work_area clear">
-          <p class="fl">您已经添加了<span class="design_images_size"><%= @design.design_images.size %></span>张图片（还可以添加<span><%= 60 - @design.design_images.size %></span>张）</p>
+          <p class="fl">您已经添加了<span class="design_images_size"><%= @design.design_images.size %></span>张图片<span></span></p>
           <a href="#" class="re_add fr" id="upload_photo"></a>
           <div><img src="<%= asset_path "indicator.gif" %>" style="display:none;" id="upload_going"></div>
           <div class="upload_bin fl">
