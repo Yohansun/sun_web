@@ -43,6 +43,9 @@ gem 'exception_notification'
 gem 'newrelic_rpm'
 gem 'ekuseru'
 
+gem 'redis-store'
+gem 'redis-rails'
+
 #发送短信
 gem 'savon'
 gem 'collections'

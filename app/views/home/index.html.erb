@@ -89,6 +89,9 @@
   <%- end %>
 </div><!--slides ends-->
 <%- end %>
+
+<% cache "homepage_content", :expires_in => 3.hours do %>
+<!-- MAIN CONTENT -->
 <div class="center pr">
   <div class="centerBg indexmain">
     <div class="top1content">
@@ -469,9 +472,12 @@
       <div class="c shadow"></div>
     </div>
   </div>
-</div>
+  </div>
 <!--centerBg ends-->
 </div><!--center ends-->
+<!-- MAIN CONTENT END -->
+<% end %>
+
 <div class="footer_adv">
   <div class="inner">
     <a href="#"><img src="<%= asset_path "design/banner_design.jpg"%>" border="0" usemap="#Map"/>

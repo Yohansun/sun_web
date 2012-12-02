@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       cookies.permanent[:homepage_guide_layer_showed] = false
     end
 
-    @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18).all
+    @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18)
 
     #每周之星
     @weekly_star = WeeklyStar.order("published_at desc").first
@@ -27,15 +27,11 @@ class HomeController < ApplicationController
     #TODO灵感秀
     @inspirations = Inspiration.includes(:design_images).limit(27).order("created_at desc")
 
-    #推荐作品  TODO group_by 不知道数据多了以后翻页效果如何，待测试
-#    @design_groups = Design.select([:id, :shares_count]).group_by{|a| index = a.id%2==0}
-#    @designs_odd = @design_groups[false]
-#    @designs_even = @design_groups[true]
-    @designs = Design.includes(:design_images).limit(36).all
+    #推荐作品
+    @designs = Design.includes(:design_images).limit(36)
 
     #行业资讯
     @articles = Subject.content("articles").limit(5)
-
   end
 
   def search
