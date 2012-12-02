@@ -1,1 +1,0 @@
-$(function(){var a=$("div.galleryM"),b=a.find("div.list ul");if(b.size()<2)return;var c=b.size(),d=-1,e=function(a){if(a==d)return;a>c-1?a=0:a<0&&(a=c-1),b.eq(a).css("zIndex",10).show(),d>-1&&b.eq(d).css("zIndex",9).hide(),d=a};e(0),a.find(".moveleft").click(function(){e(d+1)}),a.find(".moveright").click(function(){e(d-1)})});
