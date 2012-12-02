@@ -63,8 +63,6 @@ class AddColumnToIndex < ActiveRecord::Migration
   	add_index :weekly_stars, :star_type_id
   	add_index :weekly_stars, :published_at
 
-  	add_index :old_design_files, :old_design_id
-
   	add_index :seller_users, :username
 
   	add_index :sys_msgs, :status

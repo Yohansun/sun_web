@@ -4,6 +4,8 @@ Icolor::Application.routes.draw do
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"
 
+  get "/21days" => "home#t1days"
+
   root :to => 'home#index'
 
   resources :votes
@@ -11,7 +13,7 @@ Icolor::Application.routes.draw do
   resources :yda_games, :only => [:create]
 
   devise_for :users, :controllers => { :registrations      => "users/register",
-                                       :sessions           => "users/sessions", 
+                                       :sessions           => "users/sessions",
                                        :passwords          => "users/passwords",
                                        :omniauth_callbacks => "users/omniauth_callbacks" }
 
@@ -151,9 +153,9 @@ Icolor::Application.routes.draw do
   match '/yda/down_yda' => 'yda#down_yda'
   match '/yda/yda_past' => 'yda#yda_past'
   match '/yda/yda_list' => 'yda#yda_list'
-  
+
   resources :weekly_tips, only: :index
-  
+
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
@@ -230,7 +232,7 @@ Icolor::Application.routes.draw do
   devise_for :admins, :controllers => { :sessions => 'magic_admin/sessions' }
   mount MagicContent::Engine => '/admin/content', :as => 'magic_content'
   mount MagicAdmin::Engine => '/admin', :as => 'magic_admin'
-  
+
   #认证考试
   resources :approves
 
@@ -242,7 +244,7 @@ Icolor::Application.routes.draw do
   post "scores/share_score" => "scores#share_score"
 
   get "areas" => "areas#index"
-  
+
   #国庆节活动页面
   get "national_day" => "function#national_day"
 

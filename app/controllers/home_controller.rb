@@ -1,5 +1,10 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
+
+  def t1days
+    redirect_to "/21days/index.html"
+  end
+
   def index
 
     #在cookies中添加首页layer显示
