@@ -25,7 +25,7 @@ role :db, "203.156.231.37", :primary => true # This is where Rails migrations wi
 
 set :user, "root"
 set :repository, "git@github.com:nioteam/icolor.git"
-set :branch, "production"
+set :branch, "master"
 set :deploy_to, "/home/www/rails/icolor"
 
 # tasks
