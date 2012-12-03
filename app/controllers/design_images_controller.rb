@@ -1,20 +1,24 @@
 class DesignImagesController < ApplicationController
   def create
-    newparams = coerce(params)
-    @upload = current_user.design_images.new(newparams[:upload])
-    if @upload.save
-      flash[:notice] = "Successfully created upload."
-      respond_to do |format|
-        format.json {render :json => { :result => 'success',
-          :upload => user_design_image_path(current_user, @upload.id) } }
+    if current_user.present?
+      newparams = coerce(params)
+      @upload = current_user.design_images.new(newparams[:upload])
+      if @upload.save
+        flash[:notice] = "Successfully created upload."
+        respond_to do |format|
+          format.json {render :json => { :result => 'success',
+            :upload => user_design_image_path(current_user, @upload.id) } }
+        end
+      else
+        respond_to do |format|
+          format.json {render :json => { :result => 'failed',
+            :action => 'new' } }
+        end
       end
     else
-       respond_to do |format|
-        format.json {render :json => { :result => 'failed',
-          :action => 'new' } }
+      redirect_to '/'
     end
   end
-end
 
   def show
     @upload = DesignImage.find(params[:id])

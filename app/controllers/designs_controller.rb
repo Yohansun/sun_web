@@ -49,7 +49,11 @@ class DesignsController < ApplicationController
   end
 
   def new
-    @design = current_user.designs.new
+    if current_user.present?
+      @design = current_user.designs.new
+    else
+      redirect_to '/'
+    end
   end
 
   def create
@@ -119,6 +123,10 @@ class DesignsController < ApplicationController
 
   private
   def find_design
-    @design = current_user.designs.find(params[:id])
+    if current_user.present?
+      @design = current_user.designs.find(params[:id])
+    else
+      redirect_to '/'
+    end
   end
 end
