@@ -382,6 +382,18 @@ ActiveRecord::Schema.define(:version => 20121130081358) do
     t.string   "work_experience"
   end
 
+  create_table "lands", :force => true do |t|
+    t.string   "source"
+    t.string   "source_ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "lands", ["created_at"], :name => "created_at"
+  add_index "lands", ["created_at"], :name => "index_lands_on_created_at"
+  add_index "lands", ["source"], :name => "index_lands_on_source"
+  add_index "lands", ["source"], :name => "source"
+
   create_table "login_logs", :force => true do |t|
     t.integer  "user_id"
     t.datetime "current_sign_in_at"
