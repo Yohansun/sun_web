@@ -10,22 +10,21 @@ group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'turbo-sprockets-rails3'
 end
 
 gem 'jquery-rails'
 
 group :development do
   gem "capistrano"
-  gem 'capistrano-unicorn'
-  gem 'debugger'
+  gem "rvm-capistrano"
   gem 'bond'
   gem 'wirble'
   gem "awesome_print"
   gem "map_by_method"
   gem "hirb"
+  gem "quiet_assets"
 end
-
-gem 'unicorn'
 
 gem "paperclip", "<3.0"
 
@@ -44,6 +43,9 @@ gem 'httmultiparty'
 gem 'exception_notification'
 gem 'newrelic_rpm'
 gem 'ekuseru'
+
+gem 'redis-store'
+gem 'redis-rails'
 
 #发送短信
 gem 'savon'

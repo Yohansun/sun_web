@@ -45,6 +45,7 @@ Icolor::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -83,7 +84,7 @@ Icolor::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.middleware.use ExceptionNotifier,
-    :email_prefix => "[ICOLOR ERROR] ",
+    :email_prefix => "[ICOLOR] ",
     :sender_address => %{"errors" <errors@networking.io>},
-    :exception_recipients => %w{nio-errors@googlegroups.com}
+    :exception_recipients => %w{errors@networking.io}
 end

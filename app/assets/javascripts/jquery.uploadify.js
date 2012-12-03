@@ -496,7 +496,7 @@ if(jQuery)(
 					// Triggered when a file upload returns a successful code
 					function onUploadSuccess(file,data,response) {
 						swfuploadify.queue.queueBytesUploaded += file.size;
-						jQuery('#' + file.id).find('.data').html(' - Complete');
+						jQuery('#' + file.id).find('.data').html(' - 已完成');
 						if (swfuploadify.settings.onUploadSuccess) swfuploadify.settings.onUploadSuccess(file,data,response);
 					}
 
