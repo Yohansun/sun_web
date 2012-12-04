@@ -10,11 +10,15 @@ class Inspiration < ActiveRecord::Base
 
 	paginates_per 20
 
-	def cover_img
+  def cover_img
 		self.design_images.first
 	end
 
 	def comments_count
     self.comments.length
-  end
+	end
+
+	def self.design_image_covers(num)
+		self.joins(:design_images).limit(num).order("inspirations.created_at desc")
+	end
 end
