@@ -32,7 +32,9 @@
           <td class="sys_topics"><%= sys_msg.content %></a></td>
           <td class="sys_time"><%= sys_msg.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td>
-            <%= link_to(image_tag(asset_path "close_btn.jpg"), "javascript:void(0)", :onclick => "checkConfirm(#{current_user.id}, #{sys_msg.id})", :id => sys_msg.id)   %>
+            <% if current_user.present? && sys_msg.present? %>
+              <%= link_to(image_tag(asset_path "close_btn.jpg"), "javascript:void(0)", :onclick => "checkConfirm(#{current_user.id}, #{sys_msg.id})", :id => sys_msg.id)   %>
+            <% end %>
           </td>
         </tr>
         <%- end -%>

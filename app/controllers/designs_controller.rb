@@ -108,11 +108,15 @@ class DesignsController < ApplicationController
   end
 
   def design_update
-    @design = current_user.designs.find(params[:id])
-    if params[:design] && @design.update_attributes(params[:design])
-      redirect_to :action => 'index' and return
+    if current_user.present?
+      @design = current_user.designs.find(params[:id])
+      if params[:design] && @design.update_attributes(params[:design])
+        redirect_to :action => 'index' and return
+      end
+      render :template => "users/design_update"
+    else
+      redirect_to '/'
     end
-    render :template => "users/design_update"
   end
 
   def autocomplete_recommend_color
