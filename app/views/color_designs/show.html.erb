@@ -61,7 +61,7 @@
             marginTop:150,
             pic: "http://www.icolor.com.cn/<%= @design.show_preview_img.url(:slide) %>",
             url:"http://<%=request.host_with_port%>/color_designs/<%=@design.id%>",
-            title:"#iColor分享#一幅精美的室内色彩搭配案例----【<%=@design.design_name %>】，推荐色：立邦<%=@design.recommend_color1%> <%=@code.name%>，让色彩融入生活，尽在iColor@刷新生活iColor，",
+            title:"#iColor分享#一幅精美的室内色彩搭配案例----【<%=@design.design_name %>】，推荐色：立邦<%=@design.recommend_color1%> <%=@code.name if @code.present? %>，让色彩融入生活，尽在iColor@刷新生活iColor，",
             data_track_clickback:true
           }
           </script>
@@ -113,7 +113,7 @@
           <tr><th>推荐色：</th>
             <%- color1, color2, color3 = search_color_code(@design.recommend_color1), search_color_code(@design.recommend_color2), search_color_code(@design.recommend_color3) %>
             <%- color_var = [(color1 if color1),(color2 if color2),(color3 if color3)].first %>
-            <%- if color_var.code =~ /^FM|^WM/ %>
+            <%- if color_var && color_var.code =~ /^FM|^WM/ %>
             <td><%= ('立邦木器漆'+ color_var.code ) if color_var %></td>
             <%- else %>
             <td><%= ('立邦'+ color_var.code + color_var.name) if color_var %></td>
