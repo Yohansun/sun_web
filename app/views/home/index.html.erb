@@ -1,6 +1,6 @@
 <% content_for :head do -%>
 <%= stylesheet_link_tag 'index' %>
-<%= stylesheet_link_tag "layer", "jquery.slider.css" %>
+
 <style type="text/css">
 .boxb_content {
   position: relative;
@@ -508,9 +508,7 @@
   };
 </script>
 <%- content_for :tail do %>
-<%= javascript_include_tag "galleryN" %>
-<%= javascript_include_tag "galleryM" %>
-<%= javascript_include_tag "galleryO" %>
+<%= javascript_include_tag "index_gallery" %>
 <%= javascript_include_tag "index3" %>
 
 <script type="text/javascript">
