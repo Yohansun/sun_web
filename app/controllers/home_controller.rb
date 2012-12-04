@@ -40,6 +40,7 @@ class HomeController < ApplicationController
   end
 
   def search
+    params[:search_word] = params[:search_word].encode("utf-8", :undef => :replace, :invalid => :replace, :replace => "*").encode("utf-8")
     case params[:qt]
     when "0", "1"
       @results = Post.where("title like ?", "%#{params[:search_word]}%").page params[:page]

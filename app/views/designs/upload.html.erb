@@ -38,8 +38,10 @@ $(function() {
       var dat = eval('(' + data + ')');
       if (dat.result == 'success') {
         $.getScript(dat.upload + "?for=design");
+        alert("图片上传成功");
+      }else{
+        alert("图片上传失败");
       };
-      //alert("图片上传成功");
     },
     postData : {
         '_http_accept': 'application/javascript',
