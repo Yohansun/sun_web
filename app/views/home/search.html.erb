@@ -5,27 +5,29 @@
   <div class="shadow">
     <div class="section group">
       <h2>含“<strong><%= params[:search_word] %></strong>”搜索结果</h2>
+      <% if @results.present? %>
       <% @results.each do |res| %>
-      <div class="results line_b_dot">
-        <% case params["qt"] %>
-        <% when "0", "1" %>
-        <h3><a href="/articles/<%= res.id %>"><%= res.title %></a></h3>
-        <p><%= gsub_body_string(res.body, 300) %></p>
-        <a href="/articles/<%= res.id %>">http://www.icolor.com.cn/articles/<%= res.id %></a>
-        <% when "2" %>
-        <h3><a href="/designs/<%= res.id %>"><%= res.title %></a></h3>
-        <p><%= gsub_body_string(res.content, 300) %></p>
-        <a href="/designs/<%= res.id %>">http://www.icolor.com.cn/designs/<%= res.id %></a>
-        <% when "3" %>
-        <h3><a href="/users/<%= res.id %>"><%= res.display_name %></a></h3>
-        <p><%= gsub_body_string(res.signature, 300) %></p>
-        <a href="/users/<%= res.id %>">http://www.icolor.com.cn/users/<%= res.id %></a>
-        <% end -%>
-      </div><!--results ends-->
+        <div class="results line_b_dot">
+          <% case params["qt"] %>
+          <% when "0", "1" %>
+          <h3><a href="/articles/<%= res.id %>"><%= res.title %></a></h3>
+          <p><%= gsub_body_string(res.body, 300) %></p>
+          <a href="/articles/<%= res.id %>">http://www.icolor.com.cn/articles/<%= res.id %></a>
+          <% when "2" %>
+          <h3><a href="/designs/<%= res.id %>"><%= res.title %></a></h3>
+          <p><%= gsub_body_string(res.content, 300) %></p>
+          <a href="/designs/<%= res.id %>">http://www.icolor.com.cn/designs/<%= res.id %></a>
+          <% when "3" %>
+          <h3><a href="/users/<%= res.id %>"><%= res.display_name %></a></h3>
+          <p><%= gsub_body_string(res.signature, 300) %></p>
+          <a href="/users/<%= res.id %>">http://www.icolor.com.cn/users/<%= res.id %></a>
+          <% end -%>
+        </div><!--results ends-->
       <%- end -%>
       <div class="pager ft12 tc mt25">
         <%= paginate @results %>
       </div>
+      <%- end -%>
       <!--pager ends-->
     </div>
   </div><!--shadow ends-->

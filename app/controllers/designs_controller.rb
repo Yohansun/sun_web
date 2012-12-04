@@ -17,7 +17,7 @@ class DesignsController < ApplicationController
         @designs = @designs.order("votes_count desc")
       elsif params[:order] == "超越刷新"
         @designs = @designs.order("is_refresh desc")
-      elsif params[:q] == "超越刷新"
+      elsif params[:q] == "super_refresh"
         @designs = @designs.where(is_refresh: true).order("created_at desc")
       else
         @designs = @designs.order("created_at desc")

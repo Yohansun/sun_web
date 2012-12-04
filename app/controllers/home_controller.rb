@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     @master_design = MasterDesign.first
 
     #TODO灵感秀
-    @inspirations = Inspiration.includes(:design_images).limit(27).order("created_at desc")
+    @inspirations = Inspiration.design_image_covers(28)
 
     #推荐作品
     @designs = Design.includes(:design_images).limit(36)

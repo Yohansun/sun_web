@@ -6,7 +6,7 @@ class Vote < ActiveRecord::Base
   after_save :update_voteable_counter
 
   def update_voteable_counter
-    self.voteable.class.increment_counter(:votes_count, self.voteable_id)
+    self.voteable.class.increment_counter(:votes_count, self.voteable_id) if self.voteable
   end
 
 end
