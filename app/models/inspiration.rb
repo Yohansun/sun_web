@@ -19,6 +19,6 @@ class Inspiration < ActiveRecord::Base
 	end
 
 	def self.design_image_covers(num)
-		self.joins(:design_images).limit(num).order("inspirations.created_at desc")
+		self.select("distinct inspirations.id").joins(:design_images).limit(num).order("inspirations.created_at desc")
 	end
 end
