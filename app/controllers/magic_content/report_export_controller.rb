@@ -73,7 +73,7 @@ module MagicContent
 
   		{}.tap do |results|
         results[:search] = "用户注册数据统计"
-  			results[:columns] = ['用户ID','用户名','用户性质','邮件地址','联系电话','省','市','区','注册时间','登录次数','招募用户']
+  			results[:columns] = ['用户ID','用户名','用户性质','邮件地址','联系电话','省','市','区','注册时间','登录次数','招募用户','刷新21用户']
   			results[:data] = [].tap do |cell|
   				users.find_each do |user|
   					cell << [user.id,
@@ -86,8 +86,8 @@ module MagicContent
   									 user.try(:area).try(:name),
   									 user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
   									 user.sign_in_count,
-  									 user.is_imported?] if user
-
+  									 user.is_imported?,
+                     user.minisite_id ? true : false] if user
   				end
   			end
   		end
