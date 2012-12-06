@@ -23,14 +23,11 @@ class LandsController < ApplicationController
 						"a963shouyemingrenzhuanfang2",
 						"a963shejishitongdao2",
 						"a963zixunzhongxinjiaodianxinwen2",
-						"a963edmhuiyuanyoujian2",
-						"pchousebankuaidingzhi-2"]
+						"a963edmhuiyuanyoujian2"]
 
 			urls2 =["80018ketingpingdao2",
 							"80018shouyetupian2",
-							"80018woshipingdao2",
-							"80018secaidapei2",
-							"pchousebankuaidingzhi2"]
+							"80018woshipingdao2"]
 
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
