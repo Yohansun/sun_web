@@ -194,6 +194,7 @@ Icolor::Application.routes.draw do
     resources :sys_msgs
     resources :moods
   end
+  resources :design_images
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
