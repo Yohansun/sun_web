@@ -1,4 +1,4 @@
-<%- if controller_name =~ /weekly_stars|^designs/ && action_name =~ /index|show/ && params[:from].present?%>
+<!--<%- if controller_name =~ /weekly_stars|^designs/ && action_name =~ /index|show/ && params[:from].present?%>
 	<div class="static">
 		<% if current_user -%>
 			<% unless current_user.common_user? %>
@@ -22,7 +22,7 @@
 		<% end -%>
 	</div>
 </div>
-<%- end %>
+<%- end %>-->
 
 <%- if ((controller_name =~ /articles|color_articles|events|designer_events|other_events|gifts|softwares|channel|faqs|mix_colors/ || action_name =~ /weibo_wall/) && params[:from].present?) || action_name =~ /city/%>
 	<div class="static static3">
