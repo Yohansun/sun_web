@@ -47,7 +47,7 @@
 				<div class="per_firm_newinfo">
 					<h4 class="pr"><%= link_to article.title, "/articles/#{article.id}" %></h4>
 					<p>
-						<%= raw truncate(article.intro, length: 80) %>
+						<%= truncate(article.intro, length: 80).split('>').last  %>
 					</p>
 					<div class="group"><%= link_to "READ MORE", "/articles/#{article.id}", class: "fl firm_w_more" %></div>
 				</div>
