@@ -27,11 +27,11 @@
     <% year  = resource.date_of_birth.year rescue nil %>
     <% month = resource.date_of_birth.month rescue nil %>
     <% day   = resource.date_of_birth.day rescue nil %>
-    <%= select_tag 'user[date_of_birth(1i)]', options_for_select((1900..(Date.today.year)).to_a.reverse, year), :class => "fl", :prompt => "请选择" %>
+    <%= select_tag 'user[date_of_birth(1i)]', options_for_select((1900..(Date.today.year)).to_a.reverse, year), :class => "fl", :prompt => "#{current_user.date_of_birth.year}" %>
     <span class="fl">年</span>
-    <%= select_tag 'user[date_of_birth(2i)]', options_for_select((1..12).to_a, month), :class => "fl", :prompt => "请选择" %>
+    <%= select_tag 'user[date_of_birth(2i)]', options_for_select((1..12).to_a, month), :class => "fl", :prompt => "#{current_user.date_of_birth.month}" %>
     <span class="fl">月</span>
-    <%= select_tag 'user[date_of_birth(3i)]', options_for_select((1..31).to_a, day), :class => "fl", :prompt => "请选择" %>
+    <%= select_tag 'user[date_of_birth(3i)]', options_for_select((1..31).to_a, day), :class => "fl", :prompt => "#{current_user.date_of_birth.day}" %>
     <span class="fl">日</span>
   </div>
 </div><!--reg_list ends-->

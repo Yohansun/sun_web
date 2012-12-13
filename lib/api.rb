@@ -235,7 +235,7 @@ module Icolor
         authenticate!
 
         inspiration         = current_user.inspirations.new
-        inspiration.title   = params['title']
+        inspiration.title   = "21day"
         inspiration.content = params['content']
         inspiration.is_minisite = true
 
