@@ -20,7 +20,7 @@
     <div class='news_top clear ft12'>
 
       <%= link_to "全部", "/articles", :class => "#{'active' if !params[:tags]  }" %>
-      <% ["设计相关","产品相关"].each do |tag| %>
+      <% ["设计相关","装修相关"].each do |tag| %>
           <%= link_to tag, "/articles?tags=#{URI.escape(tag)}", :class => "#{'active' if tag == params[:tags] }" %>
       <% end %>
     </div>
