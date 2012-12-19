@@ -318,6 +318,12 @@
   <% end %>
 <% end %>
 
+<% if content_for? :special_event_script %>
+  <%= javascript_tag do %>
+    <%= yield :special_event_script %>
+  <% end %>
+<% end %>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#new_user').bind('ajax:error', function (xhr, status, error) {
