@@ -127,9 +127,9 @@
         </ul>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
-      <li class="pr"><a href="/articles?from=top">行业资讯</a>
+      <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">行业资讯</a>
         <ul>
-          <li class="pr"><a href="/articles?from=top">装修资讯</a>
+          <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <li><a href="/color_articles?from=top">色彩资讯</a></li>
@@ -253,9 +253,9 @@
         <li><a href="/my_show">我型我秀</a></li>
       </ul>
       <ul>
-        <li><a href="#" class='fb'>行业资讯</a></li>
+        <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class='fb'>行业资讯</a></li>
         <li><a href="#">色彩资讯</a></li>
-        <li><a href="/articles">装修资讯</a></li>
+        <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a></li>
         <li><a href="#">微博资讯</a></li>
       </ul>
       <ul>
