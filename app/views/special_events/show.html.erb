@@ -1,30 +1,31 @@
 <div class="main special_event">
   <div class="wrapper group">
-  <%= form_for :attendee, url: join_special_event_path(@event, format: :json), 
-      html: {id: "event_attend_form",
-      multipart: true,
-      remote: true,
-      onkeypress: "if(event.keyCode==13||event.which==13){return false;}"} do |f| %>
-      <%= f.hidden_field :special_event_id, value: @event.id %>
-      <p>
-        <%= f.text_field :telephone %> 
-        <%= link_to '验证号码', 'javascript:;', class: 'check-telephone' %>
-      </p>
-      <br/>
-      <div class="extra_info" style='display:none'>
+    <%= hidden_field_tag 'user_signed', "#{user_signed_in? ? 'true' : 'false'}" %>
+    <%= form_for :attendee, url: join_special_event_path(@event, format: :json),
+        html: {id: "event_attend_form",
+        multipart: true,
+        remote: true,
+        onkeypress: "if(event.keyCode==13||event.which==13){return false;}"} do |f| %>
+        <%= f.hidden_field :special_event_id, value: @event.id %>
         <p>
-          <%= f.file_field :image %>
+          <%= f.text_field :telephone %>
+          <%= link_to '验证号码', 'javascript:;', class: 'check-telephone' %>
         </p>
         <br/>
-        <p>
-          <%= f.text_area :benediction, rows: 5 %>
-        </p>
-        <br/>
-        <p>
-          <%= f.submit '提交', id: 'event_join' %>
-        </p>
-      </div>
-  <%- end %>
+        <div class="extra_info" style='display:none'>
+          <p>
+            <%= f.file_field :image %>
+          </p>
+          <br/>
+          <p>
+            <%= f.text_area :benediction, rows: 5 %>
+          </p>
+          <br/>
+          <p>
+            <%= f.submit '提交', id: 'event_join' %>
+          </p>
+        </div>
+    <%- end %>
   </div>
 </div>
 
