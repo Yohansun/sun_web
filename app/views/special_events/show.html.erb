@@ -1,0 +1,145 @@
+<div class="main christmas">
+  <div><%= image_tag 'christmas/christmas_img1.jpg'%></div>
+  <div><%= image_tag 'christmas/christmas_img2.jpg'%></div>
+
+  <%= hidden_field_tag 'user_signed', "#{user_signed_in? ? 'true' : 'false'}" %>
+  <%= form_for :attendee, url: join_special_event_path(@event, format: :json),
+    html: {id: "event_attend_form",
+    multipart: true,
+    remote: true,
+    onkeypress: "if(event.keyCode==13||event.which==13){return false;}"} do |f| %>
+    <%= f.hidden_field :special_event_id, value: @event.id %>
+    <fieldset>
+      <%= f.text_field :telephone %>
+      <%= link_to '验证号码', 'javascript:;', class: 'button_large check-telephone' %>
+    </fieldset>
+    <br/>
+    <div class="extra_info" style='display:none'>
+      <fieldset>
+        <%= f.file_field :image %>
+      </fieldset>
+      <fieldset class="tr nomargin">
+        <%= f.text_area :benediction, rows: 5 %>
+        <%= f.button '提交', id: 'event_join', class: 'button_small btn_pop_send' %>
+      </fieldset>
+    </div>
+  <%- end %>
+
+  <div class="tips">
+    <h3><%= image_tag 'christmas/tit1.jpg'%></h3>
+    <p>
+      <i class="icon_object"></i>
+      <strong>活动对象：</strong>
+      <span>iColor所有的注册用户</span>
+    </p>
+    <p>
+      <i class="icon_time"></i>
+      <strong>活动时间：</strong>
+      <span>2012.12.20-2012.12.25</span>
+    </p>
+    <p>
+      <i class="icon_step"></i>
+      <strong>活动步骤：</strong>
+      <span class="display_block">Step1：注册用户点击进入活动网页，输入注册时填写的手机号码并确认</span>
+      <span class="display_block">Step2：上传个人喜欢的圣诞图片，或编写自己的圣诞祝福并@三位新浪微博用户</span>
+      <span class="display_block">Step3： 发送祝福至新浪微博或iColor的个人心情，同时有机会获得iColor提供的幸运礼物@三位新浪微博用户</span>
+    </p>
+    <p>
+      <i class="icon_award"></i>
+      <strong>活动奖励：</strong>
+      <span>所有上传照片或送祝福的用户都可以得到 iColor提供的288色卡，并有机会获得意外奖品</span>
+    </p>
+    <p>
+      <i class="icon_state"></i>
+      <strong>活动说明：</strong>
+      <span class="display_block">每个注册用户最多可参与本活动3次，一旦获得iColor为您提供的意外奖品则不可再次参与本次活动</span>
+    </p>
+    <p class="tr"><a href="#" class="button_small">返回</a></p>
+  </div>
+</div><!--main ends-->
+
+
+<% if current_user %>
+<%= hidden_field_tag 'user_path', user_path(current_user) %>
+<div class="dismatch-mobile christmas_pop2">
+  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
+  <p class="tc ft14">
+    亲爱的<span><%= current_user.username %></span>用户，您填写的手机号码和注册号码不符，请您先去
+    <%= link_to '个人账户', user_path(current_user) %>核实后，再次填写！
+  </p>
+</div>
+
+<div class="invalid-mobile christmas_pop2">
+  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
+  <p class="tc ft14">
+    亲爱的<span><%= current_user.username %></span>用户，您填写的号码不是手机号码，<br>请您先去
+    <%= link_to '个人账户', user_path(current_user) %>将联系方式更改为手机号码后，再次填写！核实后，再次填写！感谢您的参与！
+  </p>
+</div>
+
+<div class="overtime christmas_pop2">
+  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
+  <p class="tc">
+    亲爱的<span><%= current_user.username %></span>用户，您已经超过三次圣诞送祝福活动的次数限制。<br>感谢您的参与！
+  </p>
+</div>
+<% end %>
+
+<div class="christmas_pop congrats-without-award">
+  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
+  <h2 class="tc txt_green"><br>感谢您的参与<br>请再接再厉</h2>
+</div>
+
+<div class="christmas_pop congrats">
+  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
+</div>
+
+<% content_for :script do %>
+  iColor.SpecialEvent.bindEvents()
+
+  $.fn.files = function(){
+    return this.each(function(){
+      var $this = $(this);
+      var btn = $('<input class="js-file_name" type="text" value=""><button class="button_large">上传图片</button>');
+      $this.hide().after(btn).change(function(e){
+        var value = this.value.split('\\').pop();
+        if(value)
+          $(this).siblings('.js-file_name').val(value);
+          $('.js-file_name').attr('disabled', 'true')
+      });
+      btn.click(function(){
+        $this.click();
+        return false;
+      });
+    });
+  };
+  $(function(){
+    $('input[type=file]').files();
+  });
+
+  $('#overlay,.christmas_pop,.christmas_pop2').hide()
+
+    $('#overlay').click(function(){
+      $(this).hide();
+      $('.christmas_pop,.christmas_pop2').hide()
+    })
+
+    $('.btn_pop_check').click(function(){
+      $('#overlay,.christmas_pop2').show()
+    })
+
+    $('.christmas_close').click(function(){
+      $(this).parent().hide();
+      $('#overlay').hide()
+    })
+    $(window).resize(function(){
+      fix();
+    })
+    
+    var ie6 = $.browser.msie && $.browser.version == 6;
+
+    if(ie6){fix();}
+    function fix(){
+      $('#overlay').css({'height' : document.body.scrollHeight + 'px', 'width' : document.documentElement.clientWidth + 'px'});
+    }
+<% end %>
