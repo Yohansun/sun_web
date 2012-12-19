@@ -16,17 +16,18 @@ class EventAttendee < ActiveRecord::Base
     return award unless user
     random = rand(MagicSetting.event_random_range.to_i)
     has_award = EventAttendee.where(award_mark: 'B').count < MagicSetting.event_award_count.to_i
+    awards = user.event_attendees.map(&:award_mark)
 
     if imaged
-      if blessed
+      award = 'A' unless awards.include? 'A'
+
+      if blessed && !awards.include?('C')
         award = 'C' if random == 1 && has_award
       end
-
-      if award == 'D' and user.event_attendees.where(award_mark: 'D').count == 2
-        award = 'A'
-      end
     else
-      award = 'B' if blessed && random == 1 && has_award
+      unless awards.include? 'B'
+        award = 'B' if blessed && random == 1 && has_award
+      end
     end
 
     award
@@ -36,7 +37,7 @@ class EventAttendee < ActiveRecord::Base
     unless self.benediction.blank?
       mood = self.user.moods.new(content: self.benediction)
       if mood.save
-        self.user.user_tokens.where(["is_binding = ? and provider = ?", true, provider]).each do |token|
+        self.user.user_tokens.where(["provider = ?", provider]).each do |token|
           Mood.send("send_#{token.provider}", access_token: token.access_token,
             content: mood.content + suffix)
         end

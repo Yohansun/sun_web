@@ -11,9 +11,10 @@ class SpecialEventsController < ApplicationController
   def join
     result = ''
     joined_count = EventAttendee.joined_for(params[:id], current_user.id).size
+    name = current_user.name || current_user.username
     if joined_count < 3
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
-      ea.sync_to_social("weibo","来自#{ea.user.username}从#iColor发出的圣诞祝福#，更多精彩尽在www.icolor.com.cn")
+      ea.sync_to_social("weibo"," 来自#{name}从#iColor发出的圣诞祝福#，更多精彩尽在www.icolor.com.cn")
       image = DesignImage.new()
       if !params[:attendee][:image].blank?
         mime_type = MIME::Types.type_for(params[:attendee][:image].original_filename).to_s
@@ -22,8 +23,8 @@ class SpecialEventsController < ApplicationController
             image.file = params[:attendee][:image]
             image.user_id = current_user.id
             image.save!
-            inspiration = ea.user.inspirations.create(title: "#{ea.user.username}的圣诞祝福图片",
-                                                content: "#{ea.user.username}的圣诞祝福图片")
+            inspiration = ea.user.inspirations.create(title: "#{name}的圣诞祝福图片",
+                                                content: "#{name}的圣诞祝福图片")
             inspiration.design_images << image
           rescue Exception => e
             Rails.logger.debug("Upload Xmas image failed: #{e.backtrace.join("\n")}")
