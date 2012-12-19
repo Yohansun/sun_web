@@ -58,17 +58,17 @@ class SpecialEvent
       switch data.result
         when "A"
           html = '<h2 class="tc txt_green">感谢您的参与</h2>'
-          html += '<p class="tc">iColor将送您一个神秘礼物。<br>请去<a href="'+user_path+'">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的圣诞礼物！</p>'
+          html += '<p class="tc">iColor将送您一个神秘礼物。<br>请去<a href="'+user_path+'" target="_blank">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的圣诞礼物！</p>'
           $('.congrats .content').html(html)
           $('.congrats').show()
         when "B"
           html = '<h2 class="tc">恭喜您</h2>'
-          html += '<p class="tc">获得了iColor为您准备的圣诞奖品。<br>请去<a href="'+user_path+'">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的幸运奖品！</p>'
+          html += '<p class="tc">获得了iColor为您准备的圣诞奖品。<br>请去<a href="'+user_path+'" target="_blank">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的幸运奖品！</p>'
           $('.congrats .content').html(html)
           $('.congrats').show()
         when "C"
           html = '<h2 class="tc">恭喜您</h2>'
-          html += '<p class="tc">获得了iColor为您准备的圣诞奖品。<br>请去<a href="'+user_path+'">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的幸运奖品！</p>'
+          html += '<p class="tc">获得了iColor为您准备的圣诞奖品。<br>请去<a href="'+user_path+'" target="_blank">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的幸运奖品！</p>'
           $('.congrats .content').html(html)
           $('.congrats').show()
         when "overtime"
