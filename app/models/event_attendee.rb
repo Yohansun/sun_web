@@ -12,7 +12,7 @@ class EventAttendee < ActiveRecord::Base
 
   def luckjoy(imaged = false, blessed = false)
     award = 'D'
-    if EventAttendee.all.size < MagicSetting.event_award_count
+    if EventAttendee.where("award_mark <> 'D'").size < MagicSetting.event_award_count
       random = rand(MagicSetting.event_random_range)
       if random == 1
         award = 'A' if imaged
