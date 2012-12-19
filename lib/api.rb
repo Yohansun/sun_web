@@ -236,7 +236,7 @@ module Icolor
 
         inspiration         = current_user.inspirations.new
         inspiration.title   = "21day"
-        inspiration.content = params['content']
+        inspiration.content = params['content'].force_encoding("UTF-8")
         inspiration.is_minisite = true
 
         if inspiration.save
