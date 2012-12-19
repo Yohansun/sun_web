@@ -310,6 +310,14 @@
 
 <%= yield :tail %>
 
+<% if content_for? :script %>
+  <%= javascript_tag do %>
+    $(function() {
+      <%= yield :script %>
+    });
+  <% end %>
+<% end %>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#new_user').bind('ajax:error', function (xhr, status, error) {

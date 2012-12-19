@@ -14,7 +14,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'remotipart', '~> 1.0'
 group :development do
   gem "capistrano"
   gem "rvm-capistrano"

@@ -1,5 +1,12 @@
 Icolor::Application.routes.draw do
+
   require 'api'
+  resources :special_events, only: [:show] do
+    member do
+      post :join
+      put  :check_mobile
+    end
+  end
 
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"

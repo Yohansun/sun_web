@@ -12,4 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.iframe-transport
+//= require jquery.remotipart
 //= require main
+//= require icolor
+//= require special_events

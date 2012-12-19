@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130081358) do
+ActiveRecord::Schema.define(:version => 20121219040752) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20121130081358) do
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
+  add_index "design_images", ["imageable_id", "imageable_type"], :name => "imageable_id"
   add_index "design_images", ["imageable_id"], :name => "NewIndex2"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
   add_index "design_images", ["imageable_type"], :name => "NewIndex3"
@@ -264,6 +265,18 @@ ActiveRecord::Schema.define(:version => 20121130081358) do
     t.datetime "updated_at",               :null => false
     t.datetime "published_at"
   end
+
+  create_table "event_attendees", :force => true do |t|
+    t.integer  "special_event_id"
+    t.integer  "user_id"
+    t.string   "benediction",      :limit => 500
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "award_mark"
+  end
+
+  add_index "event_attendees", ["special_event_id"], :name => "index_event_attendees_on_special_event_id"
+  add_index "event_attendees", ["user_id"], :name => "index_event_attendees_on_user_id"
 
   create_table "events", :force => true do |t|
     t.text     "title"
@@ -381,18 +394,6 @@ ActiveRecord::Schema.define(:version => 20121130081358) do
     t.integer  "subject_id"
     t.string   "work_experience"
   end
-
-  create_table "lands", :force => true do |t|
-    t.string   "source"
-    t.string   "source_ip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "lands", ["created_at"], :name => "created_at"
-  add_index "lands", ["created_at"], :name => "index_lands_on_created_at"
-  add_index "lands", ["source"], :name => "index_lands_on_source"
-  add_index "lands", ["source"], :name => "source"
 
   create_table "login_logs", :force => true do |t|
     t.integer  "user_id"
@@ -779,6 +780,19 @@ ActiveRecord::Schema.define(:version => 20121130081358) do
   end
 
   add_index "sms_logs", ["created_at"], :name => "index_sms_logs_on_created_at"
+
+  create_table "special_events", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "start_at"
+    t.datetime "due_at"
+    t.integer  "actived",    :limit => 1, :default => 0
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
+  add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
 
   create_table "subjects", :force => true do |t|
     t.string   "name"

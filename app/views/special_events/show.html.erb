@@ -1,0 +1,47 @@
+<div class="main special_event">
+  <div class="wrapper group">
+  <%= form_for :attendee, url: join_special_event_path(@event, format: :json), 
+      html: {id: "event_attend_form",
+      multipart: true,
+      remote: true,
+      onkeypress: "if(event.keyCode==13||event.which==13){return false;}"} do |f| %>
+      <%= f.hidden_field :special_event_id, value: @event.id %>
+      <p>
+        <%= f.text_field :telephone %> 
+        <%= link_to '验证号码', 'javascript:;', class: 'check-telephone' %>
+      </p>
+      <br/>
+      <div class="extra_info" style='display:'>
+        <p>
+          <%= f.file_field :image %>
+        </p>
+        <br/>
+        <p>
+          <%= f.text_area :benediction, rows: 5 %>
+        </p>
+        <br/>
+        <p>
+          <%= f.submit '提交', id: 'event_join' %>
+        </p>
+      </div>
+  <%- end %>
+  </div>
+</div>
+
+<div class="invalid-mobile abs_center none" style='z-index: 9999'>
+  亲爱的**用户，您填写的号码不是手机号码，请您先去个人帐户将联系方式更改为手机号码后，再次填写！
+</div>
+<div class="dismatch-mobile abs_center none" style='z-index: 9999'>
+  亲爱的**用户，您填写的手机号码与注册号码不符，请您先去个人帐户核实后，再次填写！
+</div>
+<div class="overtime abs_center none" style='z-index: 9999'>
+  感谢您的参与，本次活动每用户仅限三次机会！
+</div>
+<div class="congrats abs_center none" style='z-index: 9999'>
+</div>
+<div class="congrats-without-award abs_center none" style='z-index: 9999'>
+  感谢您的参与！
+</div>
+<% content_for :script do %>
+  iColor.SpecialEvent.bindEvents()
+<% end %>
