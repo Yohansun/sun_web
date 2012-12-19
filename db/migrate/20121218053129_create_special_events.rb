@@ -5,7 +5,7 @@ class CreateSpecialEvents < ActiveRecord::Migration
       t.integer :user_id
       t.datetime :start_at
       t.datetime :due_at
-      t.bollean  :actived, default: false
+      t.boolean  :actived, default: false
       t.timestamps
     end
     add_index :special_events, :start_at
