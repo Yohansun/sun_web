@@ -11,7 +11,7 @@ class SpecialEventsController < ApplicationController
   def join
     result = ''
     joined_count = EventAttendee.joined_for(params[:id], current_user.id).size
-    if joined_count < 4
+    if joined_count < 3
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
       ea.sync_to_social("weibo","来自#{ea.user.username}从#iColor发出的圣诞祝福#，更多精彩尽在www.icolor.com.cn")
       image = DesignImage.new()
@@ -30,7 +30,8 @@ class SpecialEventsController < ApplicationController
           end
         end
       end
-      result = ea.luckjoy(image.persisted?, !ea.benediction.blank?)
+      result = ea.luckjoy(image.persisted?, !ea.benediction.blank?, current_user)
+      ea.update_attribute :award_mark, result
     else
       result = 'overtime'
     end
@@ -50,5 +51,4 @@ class SpecialEventsController < ApplicationController
   def fetch_event
     @event = SpecialEvent.actived_event.first
   end
-
 end

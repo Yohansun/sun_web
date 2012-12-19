@@ -1,9 +1,10 @@
 class SpecialEvent
 
-  bindEvents: ->
+  bindEvents: =>
     this.check_login()
     this.check_telephone()
     this.event_join()
+    return false
 
   check_login: ->
     if $('#user_signed').val() isnt 'true'
@@ -35,8 +36,8 @@ class SpecialEvent
             o_in()
             $('.invalid-mobile').show()
         else
-            o_in()
-            $('.invalid-mobile').show()
+          o_in()
+          $('.invalid-mobile').show()
 
   event_join: ->
     $("form#event_attend_form").live 'ajax:remotipartSubmit', (event, data, status) =>
@@ -49,24 +50,31 @@ class SpecialEvent
       button.val('提交')
       button.attr('disabled', false)
       o_in()
-      $('form#event_attend_form input[type="file"]').val('')
+      user_path = $('#user_path').val()
+      $('form#event_attend_form input.js-file_name').val('')
       $('form#event_attend_form textarea').val('')
+
       data = jQuery.parseJSON(data.responseText);
       switch data.result
         when "A"
-          $('.congrats').html('288色卡')
+          html = '<h2 class="tc txt_green">感谢您的参与</h2>'
+          html += '<p class="tc">iColor将送您一个神秘礼物。<br>请去<a href="'+user_path+'">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的圣诞礼物！</p>'
+          $('.congrats').append(html)
           $('.congrats').show()
         when "B"
-          $('.congrats').html('有机会获得1122色卡、u盘、小罐漆的其中一个')
+          html = '<h2 class="tc">恭喜您</h2>'
+          html += '<p class="tc">获得了iColor为您准备的圣诞奖品。<br>请去<a href="'+user_path+'">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的幸运奖品！</p>'
+          $('.congrats').append(html)
           $('.congrats').show()
         when "C"
-          $('.congrats').html('288色卡+有机会获得1122色卡、u盘、小罐漆的其中一个')
+          html = '<h2 class="tc">恭喜您</h2>'
+          html += '<p class="tc">获得了iColor为您准备的圣诞奖品。<br>请去<a href="'+user_path+'">个人账户</a>填写或核实您的邮寄地址，我们将尽快寄出您的幸运奖品！</p>'
+          $('.congrats').append(html)
           $('.congrats').show()
         when "overtime"
           $('.overtime').show()
         else
           $('.congrats-without-award').show()
-          
 
 
 window.iColor.SpecialEvent ?= new SpecialEvent

@@ -10,17 +10,25 @@ class EventAttendee < ActiveRecord::Base
 
   scope :joined_for,  lambda { |eid, uid| where(["special_event_id = ? and user_id = ?", eid, uid]) }
 
-  def luckjoy(imaged = false, blessed = false)
+  def luckjoy(imaged = false, blessed = false, user)
     award = 'D'
-    if EventAttendee.where("award_mark <> 'D'").size < MagicSetting.event_award_count.to_i
-      random = rand(MagicSetting.event_random_range.to_i)
-      if random == 1
-        award = 'A' if imaged
-        award = 'B' if blessed
-        award = 'C' if imaged and blessed
-        update_attribute(:award_mark, award)
+
+    return award unless user
+    random = rand(MagicSetting.event_random_range.to_i)
+    has_award = EventAttendee.where(award_mark: 'B').count < MagicSetting.event_award_count.to_i
+
+    if imaged
+      if blessed
+        award = 'C' if random == 1 && has_award
       end
+
+      if award == 'D' and user.event_attendees.where(award_mark: 'D').count == 2
+        award = 'A'
+      end
+    else
+      award = 'B' if blessed && random == 1 && has_award
     end
+
     award
   end
 
