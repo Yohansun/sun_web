@@ -12,14 +12,17 @@
     <fieldset>
       <%= f.text_field :telephone %>
       <%= link_to '验证号码', 'javascript:;', class: 'button_large check-telephone' %>
+      <span >* 请输入注册手机号码</span>
     </fieldset>
     <br/>
     <div class="extra_info" style='display:none'>
       <fieldset>
         <%= f.file_field :image %>
+        <span>* 上传格式为：jpg，请不要大于5M</span>
       </fieldset>
       <fieldset class="tr nomargin">
         <%= f.text_area :benediction, rows: 5 %>
+        <span>* 写下您给好友的祝福吧！</span>
         <%= f.button '提交', id: 'event_join', class: 'button_small btn_pop_send' %>
       </fieldset>
     </div>
@@ -47,14 +50,14 @@
     <p>
       <i class="icon_award"></i>
       <strong>活动奖励：</strong>
-      <span>所有上传照片的用户都可以得到iColor提供的288色卡，送祝福的用户都有机会获得意外奖品</span>
+      <span>所有上传照片的用户都可以得到iColor提供的288色卡，送祝福的用户有机会获得意外奖品</span>
     </p>
     <p>
       <i class="icon_state"></i>
       <strong>活动说明：</strong>
-      <span class="display_block">每个注册用户最多可参与本活动3次，一旦获得iColor为您提供的意外奖品则不可再次参与本次活动</span>
+      <span class="display_block">每个注册用户最多可参与本活动3次</span>
     </p>
-    <p class="tr"><a href="#" class="button_small">返回</a></p>
+    <p class="tr"><a href="/" class="button_small">返回</a></p>
   </div>
 </div><!--main ends-->
 
@@ -65,7 +68,7 @@
   <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
   <p class="tc ft14">
     亲爱的<span><%= current_user.username %></span>用户，您填写的手机号码和注册号码不符，请您先去
-    <%= link_to '个人账户', edit_user_path(current_user) %>核实后，再次填写！
+    <%= link_to '个人账户', edit_user_path(current_user), target: '_blank' %>核实后，再次填写！
   </p>
 </div>
 
@@ -73,7 +76,7 @@
   <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
   <p class="tc ft14">
     亲爱的<span><%= current_user.username %></span>用户，您填写的号码不是手机号码，<br>请您先去
-    <%= link_to '个人账户', edit_user_path(current_user) %>将联系方式更改为手机号码后，再次填写！核实后，再次填写！感谢您的参与！
+    <%= link_to '个人账户', edit_user_path(current_user), target: '_blank' %>将联系方式更改为手机号码后，再次填写！核实后，再次填写！感谢您的参与！
   </p>
 </div>
 
