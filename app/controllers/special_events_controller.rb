@@ -15,7 +15,7 @@ class SpecialEventsController < ApplicationController
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
       ea.sync_to_social("weibo","#来自#{ea.user.username}从iColor发出的圣诞祝福#，更多精彩尽在www.icolor.com.cn#")
       image = DesignImage.new()
-      if params[:attendee][:image]
+      if !params[:attendee][:image].blank?
         mime_type = MIME::Types.type_for(params[:attendee][:image].original_filename).to_s
         if /image\/(\S){3,4}/.match(mime_type)
           begin
