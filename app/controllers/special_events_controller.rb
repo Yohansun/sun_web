@@ -11,21 +11,23 @@ class SpecialEventsController < ApplicationController
   def join
     result = ''
     joined_count = EventAttendee.joined_for(params[:id], current_user.id).size
-    if joined_count < 400
+    if joined_count < 4
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
       ea.sync_to_social("weibo","#来自***从iColor发出的圣诞祝福#，更多精彩尽在www.icolor.com.cn#")
-
-      inspiration = ea.user.inspirations.create(title: "#{ea.user.username}的圣诞祝福图片", 
-                                              content: "#{ea.user.username}的圣诞祝福图片")
       image = DesignImage.new()
       if params[:attendee][:image]
-        begin
-          image.file = params[:attendee][:image]
-          image.user_id = current_user.id
-          image.save!
-          inspiration.design_images << image
-        rescue Exception => e
-          Rails.logger.debug("Upload Xmas image failed: #{e.backtrace.join("\n")}")
+        mime_type = MIME::Types.type_for(params[:attendee][:image].original_filename).to_s
+        if /image\/(\S){3,4}/.match(mime_type)
+          begin
+            image.file = params[:attendee][:image]
+            image.user_id = current_user.id
+            image.save!
+            inspiration = ea.user.inspirations.create(title: "#{ea.user.username}的圣诞祝福图片",
+                                                content: "#{ea.user.username}的圣诞祝福图片")
+            inspiration.design_images << image
+          rescue Exception => e
+            Rails.logger.debug("Upload Xmas image failed: #{e.backtrace.join("\n")}")
+          end
         end
       end
       result = ea.luckjoy(image.persisted?, !ea.benediction.blank?)
