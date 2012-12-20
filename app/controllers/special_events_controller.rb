@@ -14,7 +14,7 @@ class SpecialEventsController < ApplicationController
     name = current_user.name || current_user.username
     if joined_count < 3
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
-      ea.sync_to_social("weibo"," 来自#{name}从#iColor发出的圣诞祝福#，更多精彩尽在http://www.icolor.com.cn")
+      ea.sync_to_social("weibo"," 来自#{name}从#iColor发出的圣诞祝福#，更多精彩尽在 http://www.icolor.com.cn")
       image = params[:attendee][:image_id].blank? ? nil : DesignImage.find_by_id(params[:attendee][:image_id])
       if image
         inspiration = ea.user.inspirations.create(title: "#{name}的圣诞祝福图片",
