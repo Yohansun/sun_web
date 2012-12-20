@@ -241,7 +241,7 @@ module Icolor
 
         if inspiration.save
           if params["images"].present?
-            params["images"].each do |url|
+            url = params["images"]
               inspiration_image = current_user.design_images.new
 
               file_url = url.match(%r(^http://)) ?  url : nil
@@ -257,7 +257,6 @@ module Icolor
 
                 error!({ "error" => "UpdateInspirationImageError", "detail" => inspiration.errors.messages }, 200) unless inspiration_image.save
               end
-            end
           else
             error!({ "error" => "UpdateInspirationImageError", "detail" => "参数images不能为空!" }, 200)
           end
