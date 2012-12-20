@@ -29,10 +29,16 @@ class LandsController < ApplicationController
 							"80018shouyetupian2",
 							"80018woshipingdao2"]
 
+			urls3 =["80018secaidapei2",
+							"pchousebankuaidingzhi2",
+							"pchousebankuaidingzhi-2"]
+
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
 			elsif urls2.include? params[:source]
 				redirect_to other_events_review_path
+			elsif urls3.include? params[:source]
+				redirect_to "/special_events/1"
 			else
 				redirect_to root_path
 			end
