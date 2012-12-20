@@ -11,7 +11,7 @@ class SpecialEventsController < ApplicationController
   def join
     result = ''
     joined_count = EventAttendee.joined_for(params[:id], current_user.id).size
-    name = current_user.name || current_user.username
+    name = current_user.display_name
     if joined_count < 3
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
       ea.sync_to_social("weibo"," 来自#{name}从#iColor发出的圣诞祝福#，更多精彩尽在 http://www.icolor.com.cn")

@@ -74,7 +74,7 @@
 <div class="dismatch-mobile christmas_pop2">
   <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
   <p class="tc ft14">
-    亲爱的<span><%= current_user.username %></span>用户，您填写的手机号码和注册号码不符，请您先去
+    亲爱的<span><%= current_user.display_name %></span>用户，您填写的手机号码和注册号码不符，请您先去
     <%= link_to '个人账户', edit_user_path(current_user), target: '_blank' %>核实后，再次填写！
   </p>
 </div>
@@ -82,23 +82,22 @@
 <div class="invalid-mobile christmas_pop2">
   <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
   <p class="tc ft14">
-    亲爱的<span><%= current_user.username %></span>用户，您填写的号码不是手机号码，<br>请您先去
+    亲爱的<span><%= current_user.display_name %></span>用户，您填写的号码不是手机号码，<br>请您先去
     <%= link_to '个人账户', edit_user_path(current_user), target: '_blank' %>将联系方式更改为手机号码后，再次填写！核实后，再次填写！感谢您的参与！
   </p>
 </div>
-
-<div class="overtime christmas_pop2">
-  <a class="christmas_close" href="/"><%= image_tag 'christmas/christmas_close.png'%></a>
-  <p class="tc">
-    亲爱的<span><%= current_user.username %></span>用户，您已经超过三次圣诞送祝福活动的次数限制。<br>感谢您的参与！
-  </p>
-</div>
-<% end %>
 
 <div class="christmas_pop congrats-without-award">
   <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
   <h2 class="tc txt_green"><br>感谢您的参与<br>请再接再厉</h2>
 </div>
+
+<div class="overtime christmas_pop">
+  <a class="christmas_close" href="/"><%= image_tag 'christmas/christmas_close.png'%></a>
+  <h2 class="tc">亲爱的<span><%= current_user.display_name %></span>，</h2>
+  <p class="tc">您已超过三次活动的次数限制，如您还有其他圣诞图片，请至<%= link_to "灵感秀", user_path(current_user) %>与大家一同分享！</p>
+</div>
+<% end %>
 
 <div class="christmas_pop congrats">
   <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
@@ -133,6 +132,9 @@
     $('#overlay').click(function(){
       $(this).hide();
       $('.christmas_pop,.christmas_pop2').hide()
+      $('.christmas_pop.overtime').hide('slow', function(){
+        location.href = '/'
+      })
     })
 
     $('.btn_pop_check').click(function(){
