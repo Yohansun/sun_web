@@ -1,5 +1,10 @@
 <%= stylesheet_link_tag 'uploadify' %>
 <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+<style type="text/css">
+.uploadifyQueueItem {
+  background-color: transparent!important;
+}
+</style>
 <div class="main christmas">
   <div><%= image_tag 'christmas/christmas_img1.jpg'%></div>
   <div><%= image_tag 'christmas/christmas_img2.jpg'%></div>
@@ -160,13 +165,12 @@
       });
       $('#upload_photo').uploadify({
         swf : '/uploadify/uploadify.swf',
-        cancelImage : '/uploadify/uploadify-cancel.png',
-        //skipDefault : ['onSelect'],
+        cancelImage : '',
         progressData : 'percentage',
         buttonText : "选择图片",
         buttonImage : '/uploadify/browse-btn.jpg',
         fileTypeDesc : '图片文件',
-        fileTypeExts : '*.jpg; *.png',
+        fileTypeExts : '*.jpg',
         successTimeout : 6000,
         fileSizeLimit : '5MB',
         uploadLimit : 60,
@@ -176,7 +180,7 @@
         auto : true,
         checkExisting : false,
         transparent : true,
-        uploader : '<%= user_design_images_path(current_user) %>',
+        uploader : '<%= user_design_images_path(current_user || 0) %>',
         onUploadSuccess : function(file, data, response) {
           var dat = eval('(' + data + ')');
           if (dat.result == 'success') {
@@ -198,7 +202,6 @@
           alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
         }
       });
-
     });
 </script>
 <%- end -%>
