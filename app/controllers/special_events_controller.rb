@@ -21,6 +21,7 @@ class SpecialEventsController < ApplicationController
                                                 content: "#{name}的圣诞祝福图片")
         image.update_attribute(:user_id, current_user.id)
         inspiration.design_images << image
+        ea.update_attribute(:design_image_id, image.id)
       end
       # if !params[:attendee][:image].blank?
       #   mime_type = MIME::Types.type_for(params[:attendee][:image].original_filename).to_s

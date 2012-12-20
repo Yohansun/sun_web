@@ -51,8 +51,9 @@ class SpecialEvent
       button.attr('disabled', false)
       o_in()
       user_path = $('#user_path').val()
-      $('form#event_attend_form input.js-file_name').val('')
+      # $('form#event_attend_form input.js-file_name').val('')
       $('form#event_attend_form textarea').val('')
+      $("#attendee_image_id").val('');
 
       data = jQuery.parseJSON(data.responseText);
       switch data.result

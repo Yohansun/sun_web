@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219040752) do
+ActiveRecord::Schema.define(:version => 20121220044336) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20121219040752) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.string   "award_mark"
+    t.integer  "design_image_id"
   end
 
   add_index "event_attendees", ["special_event_id"], :name => "index_event_attendees_on_special_event_id"
