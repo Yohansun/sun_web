@@ -235,8 +235,8 @@ module Icolor
         authenticate!
 
         inspiration         = current_user.inspirations.new
-        inspiration.title   = "21day"
-        inspiration.content = params['content'].force_encoding("UTF-8")
+        inspiration.title   = "21days"
+        inspiration.content = CGI::unescape(params['content'])
         inspiration.is_minisite = true
 
         if inspiration.save
@@ -252,7 +252,7 @@ module Icolor
                 file.class.class_eval { attr_accessor :original_filename, :content_type }
                 file.original_filename = file_url.split("/").last
                 file.content_type = MIME::Types.type_for(file.original_filename).to_s
-                design_image.file = file
+                inspiration_image.file = file
                 inspiration_image.imageable = inspiration
 
                 error!({ "error" => "UpdateInspirationImageError", "detail" => inspiration.errors.messages }, 200) unless inspiration_image.save
