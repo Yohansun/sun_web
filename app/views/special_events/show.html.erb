@@ -52,7 +52,7 @@
       <i class="icon_step"></i>
       <strong>活动步骤：</strong>
       <span class="display_block">Step1：注册用户点击进入活动网页，输入注册时填写的手机号码并确认</span>
-      <span class="display_block">Step2：上传个人喜欢的圣诞图片，或编写自己的圣诞祝福并@三位新浪微博用户</span>
+      <span class="display_block">Step2：上传个人喜欢的圣诞图片，或编写自己的圣诞祝福并@三位新浪微博用户。点击提交后图片将出现在灵感秀频道中。</span>
       <span class="display_block">Step3： 发送祝福至新浪微博或iColor的个人心情，同时有机会获得iColor提供的幸运礼物</span>
     </p>
     <p>
@@ -93,6 +93,7 @@
 </div>
 
 <div class="overtime christmas_pop">
+  <%= hidden_field_tag 'overtime_flag' %>
   <a class="christmas_close" href="/"><%= image_tag 'christmas/christmas_close.png'%></a>
   <h2 class="tc">亲爱的<span><%= current_user.display_name %></span>，</h2>
   <p class="tc">您已超过三次活动的次数限制，如您还有其他圣诞图片，请至<%= link_to "灵感秀", user_path(current_user) %>与大家一同分享！</p>
@@ -132,9 +133,12 @@
     $('#overlay').click(function(){
       $(this).hide();
       $('.christmas_pop,.christmas_pop2').hide()
-      $('.christmas_pop.overtime').hide('slow', function(){
-        location.href = '/'
-      })
+
+      if ($('#overtime_flag').val() == 'true'){
+        $('.christmas_pop.overtime').hide('slow', function(){
+          location.href = '/'
+        })
+      }
     })
 
     $('.btn_pop_check').click(function(){

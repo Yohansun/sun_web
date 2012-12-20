@@ -73,6 +73,7 @@ class SpecialEvent
           $('.congrats .content').html(html)
           $('.congrats').show()
         when "overtime"
+          $('#overtime_flag').val('true')
           $('.overtime').show()
         else
           $('.congrats-without-award').show()
