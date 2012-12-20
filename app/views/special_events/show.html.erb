@@ -93,6 +93,7 @@
 </div>
 
 <div class="overtime christmas_pop">
+  <%= hidden_field_tag 'overtime_flag' %>
   <a class="christmas_close" href="/"><%= image_tag 'christmas/christmas_close.png'%></a>
   <h2 class="tc">亲爱的<span><%= current_user.display_name %></span>，</h2>
   <p class="tc">您已超过三次活动的次数限制，如您还有其他圣诞图片，请至<%= link_to "灵感秀", user_path(current_user) %>与大家一同分享！</p>
@@ -132,9 +133,12 @@
     $('#overlay').click(function(){
       $(this).hide();
       $('.christmas_pop,.christmas_pop2').hide()
-      $('.christmas_pop.overtime').hide('slow', function(){
-        location.href = '/'
-      })
+
+      if ($('#overtime_flag').val() == 'true'){
+        $('.christmas_pop.overtime').hide('slow', function(){
+          location.href = '/'
+        })
+      }
     })
 
     $('.btn_pop_check').click(function(){
