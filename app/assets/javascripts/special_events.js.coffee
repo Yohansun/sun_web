@@ -40,10 +40,10 @@ class SpecialEvent
           $('.invalid-mobile').show()
 
   event_join: ->
-    $("form#event_attend_form").live 'ajax:remotipartSubmit', (event, data, status) =>
-      button = $('form#event_attend_form input[type=submit]')
-      button.val('上传中，请稍候')
-      button.attr('disabled', true)
+    # $("form#event_attend_form").live 'ajax:remotipartSubmit', (event, data, status) =>
+    #   button = $('form#event_attend_form input[type=submit]')
+    #   button.val('上传中，请稍候')
+    #   button.attr('disabled', true)
 
     $("form#event_attend_form").live 'ajax:complete', (event, data, status) =>
       button = $('form#event_attend_form input[type=submit]')

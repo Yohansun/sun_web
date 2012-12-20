@@ -15,23 +15,29 @@ class SpecialEventsController < ApplicationController
     if joined_count < 3
       ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id, benediction: params[:attendee][:benediction])
       ea.sync_to_social("weibo"," 来自#{name}从#iColor发出的圣诞祝福#，更多精彩尽在www.icolor.com.cn")
-      image = DesignImage.new()
-      if !params[:attendee][:image].blank?
-        mime_type = MIME::Types.type_for(params[:attendee][:image].original_filename).to_s
-        if /image\/(\S){3,4}/.match(mime_type)
-          begin
-            image.file = params[:attendee][:image]
-            image.user_id = current_user.id
-            image.save!
-            inspiration = ea.user.inspirations.create(title: "#{name}的圣诞祝福图片",
+      image = params[:attendee][:image_id].blank? ? nil : DesignImage.find_by_id(params[:attendee][:image_id])
+      if image
+        inspiration = ea.user.inspirations.create(title: "#{name}的圣诞祝福图片",
                                                 content: "#{name}的圣诞祝福图片")
-            inspiration.design_images << image
-          rescue Exception => e
-            Rails.logger.debug("Upload Xmas image failed: #{e.backtrace.join("\n")}")
-          end
-        end
+        image.update_attribute(:user_id, current_user.id)
+        inspiration.design_images << image
       end
-      result = ea.luckjoy(image.persisted?, !ea.benediction.blank?, current_user)
+      # if !params[:attendee][:image].blank?
+      #   mime_type = MIME::Types.type_for(params[:attendee][:image].original_filename).to_s
+      #   if /image\/(\S){3,4}/.match(mime_type)
+      #     begin
+      #       image.file = params[:attendee][:image]
+      #       image.user_id = current_user.id
+      #       image.save!
+      #       inspiration = ea.user.inspirations.create(title: "#{name}的圣诞祝福图片",
+      #                                           content: "#{name}的圣诞祝福图片")
+      #       inspiration.design_images << image
+      #     rescue Exception => e
+      #       Rails.logger.debug("Upload Xmas image failed: #{e.backtrace.join("\n")}")
+      #     end
+      #   end
+      # end
+      result = ea.luckjoy(image.try(:persisted?), !ea.benediction.blank?, current_user)
       ea.update_attribute :award_mark, result
     else
       result = 'overtime'
