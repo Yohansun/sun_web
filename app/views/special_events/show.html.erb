@@ -1,3 +1,10 @@
+<%= stylesheet_link_tag 'uploadify' %>
+<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+<style type="text/css">
+.uploadifyQueueItem {
+  background-color: transparent!important;
+}
+</style>
 <div class="main christmas">
   <div><%= image_tag 'christmas/christmas_img1.jpg'%></div>
   <div><%= image_tag 'christmas/christmas_img2.jpg'%></div>
@@ -17,8 +24,9 @@
     <br/>
     <div class="extra_info" style='display:none'>
       <fieldset>
-        <%= f.file_field :image %>
-        <span>* 上传格式为：jpg，请不要大于5M</span>
+        <%= f.hidden_field :image_id %>
+        <%#= f.file_field :image %>
+        <a href="#" class="re_add fr" id="upload_photo"></a><span>* 上传格式为：jpg，请不要大于5M</span>
       </fieldset>
       <fieldset class="tr nomargin">
         <%= f.text_area :benediction, rows: 5 %>
@@ -146,3 +154,54 @@
       $('#overlay').css({'height' : document.body.scrollHeight + 'px', 'width' : document.documentElement.clientWidth + 'px'});
     }
 <% end %>
+
+<%- content_for :tail do %>
+  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+  <script type="text/javascript" charset="utf-8">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    $(function() {
+      $('#upload_photo').click(function(event){
+        event.preventDefault();
+      });
+      $('#upload_photo').uploadify({
+        swf : '/uploadify/uploadify.swf',
+        cancelImage : '',
+        progressData : 'percentage',
+        buttonText : "选择图片",
+        buttonImage : '/uploadify/browse-btn.jpg',
+        fileTypeDesc : '图片文件',
+        fileTypeExts : '*.jpg',
+        successTimeout : 6000,
+        fileSizeLimit : '5MB',
+        uploadLimit : 60,
+        width : 98,
+        height : 31,
+        multi : true,
+        auto : true,
+        checkExisting : false,
+        transparent : true,
+        uploader : '<%= user_design_images_path(current_user || 0) %>',
+        onUploadSuccess : function(file, data, response) {
+          var dat = eval('(' + data + ')');
+          if (dat.result == 'success') {
+            var image_id = dat.upload.split("/")[2];
+            $("#attendee_image_id").val(image_id);
+            alert("图片上传成功");
+          }else{
+            alert("图片上传失败");
+          };
+        },
+        postData : {
+            '_http_accept': 'application/javascript',
+            'format' : 'json',
+            '_method': 'post',
+            '<%= session_key %>' : '<%= cookies[session_key] %>',
+            'authenticity_token': '<%= form_authenticity_token %>'
+        },
+        onUploadError : function(file, errorCode, errorMsg, errorString) {
+          alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+        }
+      });
+    });
+</script>
+<%- end -%>
