@@ -1,7 +1,6 @@
 # encoding: utf-8
 class SpecialEventsController < ApplicationController
   before_filter :fetch_event
-
   respond_to    :html, :json
 
   def show

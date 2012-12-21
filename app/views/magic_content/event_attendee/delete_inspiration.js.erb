@@ -1,0 +1,4 @@
+<% if @alert == '删除成功' %>
+$('.js-upload_image_<%=@ea.id%>').html('')
+<% end %>
+alert('<%= @alert %>')

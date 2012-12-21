@@ -1,0 +1,40 @@
+<div class="content">
+  <div class="title"><h5>获奖</h5>
+  </div>
+  <!-- Dynamic table -->
+  <div class="table">
+    <div class="head"><h5 class="iFrames">获奖列表</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>活动名称</th>
+        <th>参与人</th>
+				<th>参与时间</th>
+				<th>奖品等级</th>
+				<th>祝福内容</th>
+				<th>上传作品</th>
+      </tr>
+      </thead>
+      <tbody>
+	    	<% @eas.each do |ea| %>
+				<tr class="gradeA">
+					<td><%= ea.id %></td>
+					<td><%= ea.special_event.name %></td>
+					<td><%= ea.user.display_name %></td>
+					<td><%= ea.created_at.to_formatted_s(:long_ordinal) %></td>
+					<td><%= ea.award_mark %></td>
+					<td><%= ea.benediction %></td>
+					<td class='js-upload_image_<%=ea.id%>'>
+						<% if inspiration = Inspiration.find_by_id(ea.design_image.try(:imageable_id)) %>
+							<%= inspiration.title %>
+							<%= link_to "删除作品", 
+									"/admin/content/event_attendee/#{ea.id}/delete_inspiration", remote: true, confirm: '确定删除此图片？' %>
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

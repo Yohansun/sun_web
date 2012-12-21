@@ -226,6 +226,9 @@ Icolor::Application.routes.draw do
     match '/stat' => 'stat#index', :as => 'stat'
     match '/report_export' => 'report_export#index'
     resources :my_show_settings
+    resources :event_attendee do
+      get :delete_inspiration
+    end
   end
 
   #扩充magic_admin

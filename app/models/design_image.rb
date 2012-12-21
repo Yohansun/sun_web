@@ -4,6 +4,7 @@ class DesignImage < ActiveRecord::Base
   attr_accessible :imageable_id, :imageable_type, :file
 
   belongs_to :imageable, :polymorphic => true
+  has_one :event_attendee
 
   # validate :file_dimensions, :unless => "errors.any?"
 

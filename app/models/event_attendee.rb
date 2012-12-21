@@ -5,6 +5,7 @@ class EventAttendee < ActiveRecord::Base
 
   belongs_to :special_event
   belongs_to :user
+  belongs_to :design_image
 
   validates :special_event, :user, presence: true
 
