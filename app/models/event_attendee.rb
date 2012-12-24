@@ -23,11 +23,11 @@ class EventAttendee < ActiveRecord::Base
       award = 'A' unless awards.include? 'A'
 
       if blessed && !awards.include?('C')
-        award = 'C' if random == 1 && has_award
+        award = 'C' if random == 0 && has_award
       end
     else
       unless awards.include? 'B'
-        award = 'B' if blessed && random == 1 && has_award
+        award = 'B' if blessed && random == 0 && has_award
       end
     end
 
