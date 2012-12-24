@@ -10,7 +10,7 @@ class Notifier < ActionMailer::Base
 
     case user.role.role
      when "designer"
-      @role = "设计师(" + "#{user.des_status? ? '在职' : '在读'}" + ")"
+      @role = "设计师(" + "#{user.des_status? ? '在读' : '在职'}" + ")"
      when "company"
       @role = "家装公司" 
      else 
