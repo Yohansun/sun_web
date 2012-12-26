@@ -38,7 +38,7 @@ class LandsController < ApplicationController
 			elsif urls2.include? params[:source]
 				redirect_to other_events_review_path
 			elsif urls3.include? params[:source]
-				redirect_to "/special_events/1"
+				redirect_to root_path
 			else
 				redirect_to root_path
 			end
