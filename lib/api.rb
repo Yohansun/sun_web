@@ -235,7 +235,7 @@ module Icolor
         authenticate!
 
         inspiration         = current_user.inspirations.new
-        inspiration.title   = "21days"
+        inspiration.title   = "【21days】"
         inspiration.content = CGI::unescape(params['content'])
         inspiration.is_minisite = true
 
