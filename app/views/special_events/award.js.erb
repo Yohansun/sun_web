@@ -1,0 +1,10 @@
+<% case @reasult %>
+<% when 'overtime' %>
+$('.smorethree').show()
+<% when 'C', 'A' %>
+$('.has_award').show()
+<% else %>
+$('.no_award').show()
+<% end %>
+
+$('.overlay').show()

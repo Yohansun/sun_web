@@ -1,3 +1,5 @@
+# -*- encoding:utf-8 -*-
+
 class EventAttendee < ActiveRecord::Base
   attr_accessible :special_event_id, :user_id, :image, :benediction
 
@@ -11,23 +13,21 @@ class EventAttendee < ActiveRecord::Base
 
   scope :joined_for,  lambda { |eid, uid| where(["special_event_id = ? and user_id = ?", eid, uid]) }
 
-  def luckjoy(imaged = false, blessed = false, user)
+  def luckjoy(imaged = false, user)
     award = 'D'
 
     return award unless user
-    random = rand(MagicSetting.event_random_range.to_i)
-    has_award = EventAttendee.where(award_mark: 'B').count < MagicSetting.event_award_count.to_i
-    awards = user.event_attendees.map(&:award_mark)
+    awards = user.event_attendees.map(&:award_mark) # 某一用户每次参与得奖集合
+    has_award_today = EventAttendee.where(award_mark: 'C', created_at: Time.now.beginning_of_day..Time.now.end_of_day).count < MagicSetting.event_award_count.to_i
+    
+    # 第几次中奖
+    award_at = MagicSetting.award_at
 
     if imaged
       award = 'A' unless awards.include? 'A'
 
-      if blessed && !awards.include?('C')
-        award = 'C' if random == 0 && has_award
-      end
-    else
-      unless awards.include? 'B'
-        award = 'B' if blessed && random == 0 && has_award
+      if awards.size >= award_at && has_award_today
+        award = 'C' unless awards.include?('C')
       end
     end
 
@@ -46,4 +46,15 @@ class EventAttendee < ActiveRecord::Base
     end
   end
 
+  # 发布带图片微博
+  def send_a_pic_weibo(suffix = "", pic)
+    unless benediction.blank?
+      mood = user.moods.new(content: benediction)
+      if mood.save
+        token = user.user_tokens.where(provider: 'weibo').first
+        return unless token
+        Mood.send_pic_weibo(access_token: token.access_token, content: mood.content + suffix, pic: pic)
+      end
+    end
+  end
 end
