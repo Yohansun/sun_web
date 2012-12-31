@@ -281,7 +281,7 @@
         <li><a href="/7-3" class='fb'>漆光艺彩</a></li>
         <li><a href="#">木纹风尚生活</a></li>
         <li><a href="#">墙面艺术效果</a></li>
-        <li><a href="/7-3">刷新灵感我绘我家</a></li>        
+        <li><a href="/7-3">刷新灵感我绘我家</a></li>
       </ul>
     </div>
   </div>
@@ -500,6 +500,9 @@
         };
     });
 </script>
+
+<% if Rails.env.production? %>
+
 <!-- Piwik -->
 <script type="text/javascript">
   var pkBaseURL = (("https:" == document.location.protocol) ? "https://203.156.231.36:8000/piwik/" : "http://203.156.231.36:8000/piwik/");
@@ -529,7 +532,7 @@
 
   _gaq.push(['_setAccount', 'UA-32012607-1']);
   _gaq.push(['_setDomainName', 'icolor.com.cn']);
-  _gaq.push(['_trackPageview']);  
+  _gaq.push(['_trackPageview']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -538,6 +541,8 @@
   })();
 </script>
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+<% end %>
 
 <div class="server_area">
   <a href="javascript:void(0)" class="server fr"></a>

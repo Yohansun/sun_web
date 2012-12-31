@@ -199,7 +199,6 @@ ActiveRecord::Schema.define(:version => 20121220044336) do
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
-  add_index "design_images", ["imageable_id", "imageable_type"], :name => "imageable_id"
   add_index "design_images", ["imageable_id"], :name => "NewIndex2"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
   add_index "design_images", ["imageable_type"], :name => "NewIndex3"
@@ -787,11 +786,12 @@ ActiveRecord::Schema.define(:version => 20121220044336) do
     t.integer  "user_id"
     t.datetime "start_at"
     t.datetime "due_at"
-    t.integer  "actived",    :limit => 1, :default => 0
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.boolean  "actived",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
+  add_index "special_events", ["actived"], :name => "index_special_events_on_actived"
   add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
   add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
 

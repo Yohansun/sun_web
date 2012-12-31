@@ -29,7 +29,6 @@ class Mood < ActiveRecord::Base
         :status => args[:content],
         :pic => args[:pic]
       })
-
     response.parsed_response
   end
 

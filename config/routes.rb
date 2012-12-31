@@ -1,11 +1,15 @@
+#encoding: utf-8
+
 Icolor::Application.routes.draw do
 
   require 'api'
-  resources :special_events, only: [:show] do
+  resources :special_events do
     member do
+      get  :show
       post :join
       put  :check_mobile
-      get  :award
+      post :award
+      post :weibo
     end
   end
 
