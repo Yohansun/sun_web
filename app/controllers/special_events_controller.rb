@@ -12,10 +12,10 @@ class SpecialEventsController < ApplicationController
     if current_user
       joined_count = EventAttendee.joined_for(params[:id], current_user.id).where(created_at: Time.now.beginning_of_day..Time.now.end_of_day).count
       name = current_user.display_name
-      if joined_count < 11
+
+      if joined_count < 10
         ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id)
-        ea.sync_to_social("weibo"," #iColor温馨圣诞#，来自#{name}从iColor网站发出的圣诞祝福，更多精彩尽在 http://www.icolor.com.cn")
-        image = DesignImage.find_by_id session[:image_id]
+        image = DesignImage.find_by_id params[:image_id]
         if image
           inspiration = ea.user.inspirations.create(title: "#{name}的祝福图片", content: "#{name}的祝福图片")
           image.update_attribute(:user_id, current_user.id)
@@ -32,6 +32,18 @@ class SpecialEventsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def weibo
+    ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("created_at DESC").first
+    image = DesignImage.find(ea.design_image_id)
+    if params[:zhong] == '1'
+      line = " 我在 #iColor元旦砸金蛋# 活动中砸到奖品咯！你也快来试试运气吧！ http://www.icolor.com.cn/special_events/2"
+    else
+      line = " 我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！ http://www.icolor.com.cn/special_events/2"
+    end
+    ea.sync_to_social("weibo", line, image.file.path)
+    render :text => 'OK'
   end
 
   # def join
@@ -78,7 +90,7 @@ class SpecialEventsController < ApplicationController
     tel = params[:attendee][:telephone]
     respond_to do |format|
       format.json { render :json => { result: current_user.phone == tel ? 'success' : 'fail'}, :status => :ok }
-    end  
+    end
   end
 
   private
