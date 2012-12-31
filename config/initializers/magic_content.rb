@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 
 MagicContent.extra_content_options = {'大师殿堂' => 'MasterProfile', '一周装修小贴士' => 'WeeklyTip','大师作品' => 'MasterDesign',
@@ -9,9 +11,10 @@ MagicContent.extra_settings = [
     {:tag => 'text_field_tag', :key => 'weibo_keywords', :label => '微博关键字'},
     {:tag => 'text_field_tag', :key => 'recommend_designs', :label => '推荐作品'},
     {:tag => 'text_field_tag', :key => 'statistical_time', :label => "iColor经销商报表统计截至日期(单位:日)"},
-    {:tag => 'text_area_tag', :key => 'kv_of_home_index', :label => "首页KV自定义代码"},
-    {:tag => 'text_area_tag', :key => 'event_random_range', :label => "活动中奖概率基数(整数值)"},
-    {:tag => 'text_area_tag', :key => 'event_award_count', :label => "活动奖品数量"}
+    {:tag => 'text_area_tag',  :key => 'kv_of_home_index', :label => "首页KV自定义代码"},
+    {:tag => 'text_field_tag', :key => 'event_random_range', :label => "活动中奖概率基数(整数值)"},
+    {:tag => 'text_field_tag', :key => 'event_award_count', :label => "活动奖品数量"}
+    {:tag => 'text_field_tag', :key => 'award_at', :label => "活动：第几次中小罐漆"}
 ]
 
 MagicContent.extra_menu_items = [
