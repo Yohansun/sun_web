@@ -11,7 +11,7 @@
 .new_year p.success_info{margin-top:365px;background:url("<%= asset_path 'special_event/t_img1.png'%>") no-repeat right top;}
 .new_year p.unsuccess_info{margin-top:395px;background:url("<%= asset_path 'special_event/f_img1.png'%>") no-repeat right top;}
 p.success_info,p.unsuccess_info{padding:148px 129px 0 50px;text-align:right;overflow:hidden;}
-.checkbox{float:left;width:22px;height:22px;background:url("<%= asset_path 'special_event/check_bg_f.png'%>") no-repeat;margin:5px 10px;}
+.main .checkbox{float:left;width:22px;height:22px;background:url("<%= asset_path 'special_event/check_bg_f.png'%>") no-repeat;margin:5px 10px;}
 .checkbox_checked{background:url("<%= asset_path 'special_event/check_bg_t.png'%>") no-repeat!important;}
 .new_year_close{position:absolute;top:-10px;right:-10px;}
 .flash{width:800px;height:620px;position:fixed;_position:absolute;top:50%;left:50%;margin-left:-400px;margin-top:-310px;z-index:100001;display:none;}
@@ -36,11 +36,11 @@ a.button_small{
   color:#712222;
   font:bold 16px/31px "Microsoft Yahei";
 }
-.uploadify{color:red;font-size:26px;font-family:'Microsoft Yahei';font-style:italic;line-height:145px;display:block;width:453px;height:141px;margin:0 auto;text-decoration:underline;}
+.upload_img, .uploadify{color:red;font-size:26px;font-family:'Microsoft Yahei';font-style:italic;line-height:145px;display:block;width:453px;height:141px;margin:0 auto;text-decoration:underline;}
 #upload_photo_queue {
   line-height:145px;display:block;width:400px;height:141px;margin:0 auto;
 }
-.uploadify span.uploadifyButtonText{color:red;line-height:145px;font-size: 26px;font-style: italic;}
+.upload_img, .uploadify span.uploadifyButtonText{color:red;line-height:145px;font-size: 20px;font-style: italic;}
 #upload_photo object{
   left: 0;
 }
@@ -56,69 +56,70 @@ a.button_small{
   top: -50px;
 }
 .cancel{display:inline;}
-/*#overlay{z-index:10000;}*/
+#overlay{z-index:10000;}
 </style>
 
 <script type="text/javascript" charset="utf-8">
 <%- session_key = Rails.application.config.session_options[:key] -%>
 $(function() {
-  if($('#user_signed').val() != 'true'){
+  if($('#user_signed').val() != 'true') {
     o_in()
     $('.unlogin').show()
+
+    $('#upload_photo').click(function(event){
+      event.preventDefault();
+      if($('#user_signed').val() != 'true'){
+        o_in()
+        $('.unlogin').show()
+      }
+    });
+  } else {
+    $('#upload_photo').uploadify({
+      swf : '/uploadify/uploadify.swf',
+      cancelImage : '/uploadify/uploadify-cancel.png',
+      // progressData : 'percentage',
+      buttonText : "点击上传图片（请上传小于5M的JPG格式图片）",
+      fileTypeDesc : '图片文件',
+      fileTypeExts : '*.jpg',
+      successTimeout : 6000,
+      fileSizeLimit : '5MB',
+      uploadLimit : 60,
+      width : 453,
+      height : 141,
+      multi : false,
+      auto : true,
+      checkExisting : false,
+      transparent : true,
+      uploader : '<%= user_design_images_path(current_user || 0) %>',
+      onUploadSuccess : function(file, data, response) {
+        var dat = eval('(' + data + ')');
+        if (dat.result == 'success') {
+          var image_id = dat.upload.split("/")[2];
+          $("#attendee_image_id").val(image_id);
+          alert("图片上传成功");
+          var image = $("#attendee_image_id").val()
+          if(image != '' && image != undefined){
+            $('.flash').show()
+            $('#overlay').show()
+          }
+        }else{
+          alert("图片上传失败");
+        };
+      },
+      postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+      },
+      onUploadError : function(file, errorCode, errorMsg, errorString) {
+        alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+      }
+    });
   }
 
   swfobject.registerObject("FlashID");
-
-  $('#upload_photo').click(function(event){
-    event.preventDefault();
-    if($('#user_signed').val() != 'true'){
-      o_in()
-      $('.unlogin').show()
-    }
-  });
-  $('#upload_photo').uploadify({
-    swf : '/uploadify/uploadify.swf',
-    cancelImage : '/uploadify/uploadify-cancel.png',
-    // progressData : 'percentage',
-    buttonText : "点击上传图片",
-    fileTypeDesc : '图片文件',
-    fileTypeExts : '*.jpg',
-    successTimeout : 6000,
-    fileSizeLimit : '5MB',
-    uploadLimit : 60,
-    width : 453,
-    height : 141,
-    multi : false,
-    auto : true,
-    checkExisting : false,
-    transparent : true,
-    uploader : '<%= user_design_images_path(current_user || 0) %>',
-    onUploadSuccess : function(file, data, response) {
-      var dat = eval('(' + data + ')');
-      if (dat.result == 'success') {
-        var image_id = dat.upload.split("/")[2];
-        $("#attendee_image_id").val(image_id);
-        alert("图片上传成功");
-        var image = $("#attendee_image_id").val()
-        if(image != '' && image != undefined){
-          $('.flash').show()
-          $('#overlay').show()
-        }
-      }else{
-        alert("图片上传失败");
-      };
-    },
-    postData : {
-      '_http_accept': 'application/javascript',
-      'format' : 'json',
-      '_method': 'post',
-      '<%= session_key %>' : '<%= cookies[session_key] %>',
-      'authenticity_token': '<%= form_authenticity_token %>'
-    },
-    onUploadError : function(file, errorCode, errorMsg, errorString) {
-      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
-    }
-  });
 
   $('.overlay').show()
 
@@ -190,7 +191,7 @@ function zadan() {
   <div class="active_area">
     <div style='height:145px;overflow:hidden;'>
       <%= hidden_field_tag 'attendee_image_id' %>
-      <a href="#" class="upload_img" id='upload_photo'></a>
+      <a href="#" class="upload_img" id='upload_photo'>点击上传图片</a>
     </div>
     <a href="http://www.icolor.com.cn/inspirations?from=top" class="link1">查看更多美图...</a><!--link to 灵感秀 -->
   </div>
@@ -263,7 +264,7 @@ function zadan() {
       <area shape="rect" coords="170,26,409,48" href="http://www.iColor.com.cn" />
     </map>
     <span style="display:block;color:#fff;font-size:16px;font-family:'Microsoft Yahei';margin-top:5px;text-align:left;margin-left:49px;">
-      请到<a href="/users/<%=current_user.id%>" style="color:#487ac5;text-decoration:underline;font-style:italic;">个人账户</a>
+      请到<a href="/users/<%=current_user.id%>/edit" style="color:#487ac5;text-decoration:underline;font-style:italic;">个人账户</a>
       填写或核实您的邮寄地址，我们将尽快寄出您的获奖礼物！
     </span>
   </p><!-- 中奖 -->
