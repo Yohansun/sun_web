@@ -1,43 +1,161 @@
 <%= stylesheet_link_tag 'uploadify' %>
 <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
 <style type="text/css">
-.uploadifyQueueItem {
-  background-color: transparent!important;
+.uploadifyQueueItem{background-color: transparent!important;}
+.main{width:963px;padding-bottom:75px;background:#900202;margin-bottom:50px;}
+.active_area{position:relative;background:url("<%= asset_path 'special_event/newyear_bg3.jpg'%>") no-repeat;height:203px;text-align:center;}
+.active_area .button_small{margin-top:15px;}
+.link1{position:absolute;right:86px;bottom:30px;color:#ffffff;font:14px "Microsoft Yahei";text-decoration:underline;}
+#layer{width:100%;height:100%;position:fixed;_position:absolute;top:0;left:0;background: black;cursor: pointer;opacity: 0.9;-moz-opacity: 0.9;filter: alpha(opacity=90);z-index:10000;display:none;}
+.new_year{position:fixed;_position:absolute;top:50%;left:50%;margin-left:-395px;margin-top:-350px;background:url("<%= asset_path 'special_event/bg.png'%>") no-repeat;width:765px;height:606px;padding-right:25px;z-index:100001;display:none;}
+.new_year p.success_info{margin-top:365px;background:url("<%= asset_path 'special_event/t_img1.png'%>") no-repeat right top;}
+.new_year p.unsuccess_info{margin-top:395px;background:url("<%= asset_path 'special_event/f_img1.png'%>") no-repeat right top;}
+p.success_info,p.unsuccess_info{padding:148px 148px 0 50px;text-align:right;overflow:hidden;}
+.checkbox{float:left;width:22px;height:22px;background:url("<%= asset_path 'special_event/check_bg_f.png'%>") no-repeat;}
+.checkbox_checked{background:url("<%= asset_path 'special_event/check_bg_t.png'%>") no-repeat!important;}
+.new_year_close{position:absolute;top:-10px;right:-10px;}
+.flash{width:800px;height:620px;position:absolute;top:50%;left:50%;margin-left:-400px;margin-top:-310px;z-index:100001;display:none;}
+.main .tips{background:url("<%= asset_path 'special_event/newyear_bg4.jpg'%>") no-repeat left top;padding:25px 85px;min-height:317px;_height:317px;}
+.main .tips p{color:#fff;margin:25px 0;line-height:16px;font-family:"Microsoft Yahei";}
+.main .tips span.display_block{display:block;margin:5px 0 5px 48px;}
+.main .tips i{display:inline-block;background:url("<%= asset_path 'special_event/icon.png'%>") no-repeat 0 0;width:33px;height:33px;position:relative;top:12px;margin-right:10px;}
+.main .tips strong,.main .tips span{line-height:33px;}
+.main .tips strong{font-size:18px;}
+.main .tips span{font-size:14px;}
+.main .tips i.icon_time{background-position:0 -70px;}
+.main .tips i.icon_step{background-position:0 -145px;}
+.main .tips i.icon_award{background-position:0 -290px;}
+.main .tips i.icon_state{background-position:0 -360px;}
+.morethree{width:610px;height:345px;position:fixed;_position:absolute;top:50%;left:50%;margin-left:-305px;margin-top:-175px;display:none;z-index: 100001;}
+a.button_small{
+  display:inline-block;
+  background:url("<%= asset_path 'special_event/button.jpg'%>") no-repeat top center;
+  height:31px;
+  width:70px;
+  text-align:center;
+  color:#712222;
+  font:bold 16px/31px "Microsoft Yahei";
 }
+.uploadify{color:red;font-size:26px;font-family:'Microsoft Yahei';font-style:italic;line-height:145px;display:block;width:453px;height:141px;margin:0 auto;text-decoration:underline;}
+#upload_photo object{
+  left: 0;
+}
+/*.uploadify{margin:0 auto;}*/
+.uploadify:hover .uploadifyButton {
+  background-color: transparent!important;;
+}
+#upload_photo_queue{
+  position: relative;
+  top: -50px;
+}
+.cancel{display:inline;}
 </style>
-<div class="main christmas">
-  <div><%= image_tag 'christmas/christmas_img1.jpg'%></div>
-  <div><%= image_tag 'christmas/christmas_img2.jpg'%></div>
 
-  <%= hidden_field_tag 'user_signed', "#{user_signed_in? ? 'true' : 'false'}" %>
-  <%= form_for :attendee, url: join_special_event_path(@event, format: :json),
-    html: {id: "event_attend_form",
-    multipart: true,
-    remote: true,
-    onkeypress: "if(event.keyCode==13||event.which==13){return false;}"} do |f| %>
-    <%= f.hidden_field :special_event_id, value: @event.id %>
-    <fieldset>
-      <%= f.text_field :telephone %>
-      <%= link_to '验证号码', 'javascript:;', class: 'button_large check-telephone' %>
-      <span >* 请输入注册手机号码</span>
-    </fieldset>
-    <br/>
-    <div class="extra_info" style='display:none'>
-      <fieldset>
-        <%= f.hidden_field :image_id %>
-        <%#= f.file_field :image %>
-        <a href="#" class="re_add fr" id="upload_photo"></a><span>* 上传格式为：jpg，请不要大于5M</span>
-      </fieldset>
-      <fieldset class="tr nomargin">
-        <%= f.text_area :benediction, rows: 5 %>
-        <span>* 写下您给好友的祝福吧！</span>
-        <%= f.button '提交', id: 'event_join', class: 'button_small btn_pop_send' %>
-      </fieldset>
+<script type="text/javascript" charset="utf-8">
+<%- session_key = Rails.application.config.session_options[:key] -%>
+$(function() {
+  if($('#user_signed').val() != 'true'){
+    o_in()
+    $('.unlogin').show()
+  }
+
+  swfobject.registerObject("FlashID");
+
+  $('#upload_photo').click(function(event){
+    event.preventDefault();
+    if($('#user_signed').val() != 'true'){
+      o_in()
+      $('.unlogin').show()
+    }
+  });
+  $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    progressData : 'percentage',
+    buttonText : "点击上传图片",
+    fileTypeDesc : '图片文件',
+    fileTypeExts : '*.jpg',
+    successTimeout : 6000,
+    fileSizeLimit : '5MB',
+    uploadLimit : 60,
+    width : 453,
+    height : 141,
+    multi : false,
+    auto : true,
+    checkExisting : false,
+    transparent : true,
+    uploader : '<%= user_design_images_path(current_user || 0) %>',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      if (dat.result == 'success') {
+        var image_id = dat.upload.split("/")[2];
+        $("#attendee_image_id").val(image_id);
+        alert("图片上传成功");
+      }else{
+        alert("图片上传失败");
+      };
+    },
+    postData : {
+      '_http_accept': 'application/javascript',
+      'format' : 'json',
+      '_method': 'post',
+      '<%= session_key %>' : '<%= cookies[session_key] %>',
+      'authenticity_token': '<%= form_authenticity_token %>'
+    },
+    onUploadError : function(file, errorCode, errorMsg, errorString) {
+      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+    }
+  });
+
+  $('#overlay').click(function(){
+    $(this).hide();
+    $('.new_year').hide();
+    $('.flash').hide();
+  })
+  $('.js-close').click(function(){
+    $(this).parent().hide();
+    $('#overlay').hide()
+  })
+  $(window).resize(function(){
+    fix();
+  })
+  
+  var ie6 = $.browser.msie && $.browser.version == 6;
+
+  if(ie6){fix();}
+
+  $('.js-checkbox').click(function(){
+    $(this).toggleClass('checkbox_checked')
+  })
+
+  $('.js-flash').click(function(){
+    var image = $("#attendee_image_id").val()
+    if(image != '' && image != undefined){
+      $('.flash').show()
+      $('#overlay').show()
+    }
+  })
+});
+
+function fix(){
+  $('#overlay').css({'height' : document.body.scrollHeight + 'px', 'width' : document.documentElement.clientWidth + 'px'});
+}
+</script>
+
+<div class="main">
+  <%= hidden_field_tag 'user_signed', current_user.present? %>
+  <div><%= image_tag 'special_event/newyear_bg1.jpg' %></div>
+  <div><%= image_tag 'special_event/newyear_bg2.jpg' %></div>
+  <div class="active_area">
+    <div style='height:145px;overflow:hidden;'>
+      <%= hidden_field_tag 'attendee_image_id' %>
+      <a href="#" class="upload_img" id='upload_photo'></a>
     </div>
-  <%- end %>
-
+    <a href="javascript:void(0)" class="button_small js-flash">确定</a>
+    <a href="http://www.icolor.com.cn/inspirations?from=top" class="link1">查看更多美图...</a><!--link to 灵感秀 -->
+  </div>
   <div class="tips">
-    <h3><%= image_tag 'christmas/tit1.jpg'%></h3>
+    <h3><%= image_tag 'special_event/rules_title.png' %></h3>
     <p>
       <i class="icon_object"></i>
       <strong>活动对象：</strong>
@@ -46,168 +164,89 @@
     <p>
       <i class="icon_time"></i>
       <strong>活动时间：</strong>
-      <span>2012.12.20-2012.12.25</span>
+      <span>2013.1.1-2013.1.3</span>
     </p>
     <p>
       <i class="icon_step"></i>
       <strong>活动步骤：</strong>
-      <span class="display_block">Step1：注册用户点击进入活动网页，输入注册时填写的手机号码并确认</span>
-      <span class="display_block">Step2：上传个人喜欢的圣诞图片，或编写自己的圣诞祝福并@三位新浪微博用户（点击提交后图片将出现在灵感秀频道中）</span>
-      <span class="display_block">Step3：发送祝福至新浪微博或iColor的个人心情，同时有机会获得iColor提供的幸运礼物</span>
+      <span class="display_block">Step1：注册用户上传新年相关美图</span>
+      <span class="display_block">Step2：上传成功后即可参与砸金蛋抽奖</span>
+      <span class="display_block">Step3：活动分享至已绑定的新浪微博和iColor个人心情</span>
     </p>
     <p>
       <i class="icon_award"></i>
       <strong>活动奖励：</strong>
-      <span>所有上传照片的用户都可以得到iColor提供的288色卡，送祝福的用户有机会获得意外奖品</span>
+      <span>奖品包括立邦288色卡或缤纷净味12色套装一份（奖品随机发放）</span>
     </p>
     <p>
       <i class="icon_state"></i>
       <strong>活动说明：</strong>
-      <span class="display_block">每个注册用户最多可参与本活动3次</span>
+      <span class="display_block">每位注册用户每天获10次砸金蛋机会，中奖者可活动iColor提供的活动奖励</span>
     </p>
+    <p class="tr"><a href="/" class="button_small">返回</a></p>
   </div>
 </div><!--main ends-->
 
-
+<div class="flash">
+  <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="793" height="618">
+    <param name="movie" value="/flash/SE_kick_egg_1.swf" />
+    <param name="quality" value="high" />
+    <param name="wmode" value="opaque" />
+    <param name="swfversion" value="6.0.65.0" />
+    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+    <param name="expressinstall" value="Scripts/expressInstall.swf" />
+    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" data="/flash/SE_kick_egg_1.swf" width="793" height="618">
+      <!--<![endif]-->
+      <param name="quality" value="high" />
+      <param name="wmode" value="opaque" />
+      <param name="swfversion" value="6.0.65.0" />
+      <param name="expressinstall" value="Scripts/expressInstall.swf" />
+      <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+      <div>
+        <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
+        </div>
+      <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+  </object>
+</div>
 <% if current_user %>
-<%= hidden_field_tag 'user_path', edit_user_path(current_user) %>
-<div class="dismatch-mobile christmas_pop2">
-  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
-  <p class="tc ft14">
-    亲爱的<span><%= current_user.display_name %></span>用户，您填写的手机号码和注册号码不符，请您先去
-    <%= link_to '个人账户', edit_user_path(current_user), target: '_blank' %>核实后，再次填写！
-  </p>
-</div>
-
-<div class="invalid-mobile christmas_pop2">
-  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
-  <p class="tc ft14">
-    亲爱的<span><%= current_user.display_name %></span>用户，您填写的号码不是手机号码，<br>请您先去
-    <%= link_to '个人账户', edit_user_path(current_user), target: '_blank' %>将联系方式更改为手机号码后，再次填写！核实后，再次填写！感谢您的参与！
-  </p>
-</div>
-
-<div class="christmas_pop congrats-without-award">
-  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
-  <h2 class="tc txt_green"><br>感谢您的参与<br>请再接再厉</h2>
-</div>
-
-<div class="overtime christmas_pop">
-  <%= hidden_field_tag 'overtime_flag' %>
-  <a class="christmas_close" href="/"><%= image_tag 'christmas/christmas_close.png'%></a>
-  <h2 class="tc">亲爱的<span><%= current_user.display_name %></span>，</h2>
-  <p class="tc">您已超过三次活动的次数限制，如您还有其他圣诞图片，请至<%= link_to "灵感秀", user_path(current_user) %>与大家一同分享！</p>
+<div class="new_year has_award">
+  <a href="#" class="new_year_close js-close"><%= image_tag 'special_event/close.png' %></a>
+    <p class="success_info">
+    <a href="javascript:;" class="checkbox checkbox_checked js-checkbox"></a>
+    <%= image_tag 'special_event/f_txt.png', border: "0", usemap: "#Map"%>
+    <map name="Map" id="Map">
+      <area shape="rect" coords="170,26,409,48" href="http://www.iColor.com.cn" />
+    </map>
+    <span style="display:block;color:#fff;font-size:16px;font-family:'Microsoft Yahei';margin-top:5px;">
+      请到<a href="/users/<%=current_user.id%>" style="color:#487ac5;text-decoration:underline;font-style:italic;">个人账户</a>
+      填写或核实您的邮寄地址，我们将尽快寄出您的获奖礼物！
+    </span>
+  </p><!-- 中奖 -->
+  <button type="submit" style="position:absolute;right:25px;bottom:20px;"><%= image_tag 'submit_btn.jpg' %></button>
 </div>
 <% end %>
-
-<div class="christmas_pop congrats">
-  <a class="christmas_close" href="javascript:;"><%= image_tag 'christmas/christmas_close.png'%></a>
-  <div class='content'></div>
+<div class="new_year no_award">
+  <a href="#" class="new_year_close js-close"><%= image_tag 'special_event/close.png' %></a>
+  <p class="unsuccess_info">
+  <a href="#" class="new_year_close"><%= image_tag 'special_event/close.png' %></a>
+    <a href="javascript:;" class="checkbox checkbox_checked js-checkbox"></a>
+    <%= image_tag 'special_event/f_txt.png', border: "0", usemap: "#Map"%>
+    <map name="Map" id="Map">
+      <area shape="rect" coords="170,26,409,48" href="http://www.iColor.com.cn" />
+    </map>
+  </p>
+  <button type="submit" style="position:absolute;right:25px;bottom:20px;"><%= image_tag 'submit_btn.jpg' %></button>
 </div>
 
-<% content_for :special_event_script do %>
-  iColor.SpecialEvent.bindEvents()
-
-  $.fn.files = function(){
-    return this.each(function(){
-      var $this = $(this);
-      var btn = $('<input class="js-file_name" type="text" value=""><button class="button_large">上传图片</button>');
-      $this.hide().after(btn).change(function(e){
-        var value = this.value.split('\\').pop();
-        if(value)
-          $(this).siblings('.js-file_name').val(value);
-          $('.js-file_name').attr('disabled', 'true')
-      });
-      btn.click(function(){
-        $this.click();
-        return false;
-      });
-    });
-  };
-  $(function(){
-    $('input[type=file]').files();
-  });
-
-  $('#overlay,.christmas_pop,.christmas_pop2').hide()
-
-    $('#overlay').click(function(){
-      $(this).hide();
-      $('.christmas_pop,.christmas_pop2').hide()
-
-      if ($('#overtime_flag').val() == 'true'){
-        $('.christmas_pop.overtime').hide('slow', function(){
-          location.href = '/'
-        })
-      }
-    })
-
-    $('.btn_pop_check').click(function(){
-      $('#overlay,.christmas_pop2').show()
-    })
-
-    $('.christmas_close').click(function(){
-      $(this).parent().hide();
-      $('#overlay').hide()
-    })
-    $(window).resize(function(){
-      fix();
-    })
-    
-    var ie6 = $.browser.msie && $.browser.version == 6;
-
-    if(ie6){fix();}
-    function fix(){
-      $('#overlay').css({'height' : document.body.scrollHeight + 'px', 'width' : document.documentElement.clientWidth + 'px'});
-    }
-<% end %>
-
-<%- content_for :tail do %>
-  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
-  <script type="text/javascript" charset="utf-8">
-    <%- session_key = Rails.application.config.session_options[:key] -%>
-    $(function() {
-      $('#upload_photo').click(function(event){
-        event.preventDefault();
-      });
-      $('#upload_photo').uploadify({
-        swf : '/uploadify/uploadify.swf',
-        cancelImage : '/uploadify/uploadify-cancel.png',
-        progressData : 'percentage',
-        buttonText : "选择图片",
-        buttonImage : '/uploadify/browse-btn.jpg',
-        fileTypeDesc : '图片文件',
-        fileTypeExts : '*.jpg',
-        successTimeout : 6000,
-        fileSizeLimit : '5MB',
-        uploadLimit : 60,
-        width : 98,
-        height : 31,
-        multi : true,
-        auto : true,
-        checkExisting : false,
-        transparent : true,
-        uploader : '<%= user_design_images_path(current_user || 0) %>',
-        onUploadSuccess : function(file, data, response) {
-          var dat = eval('(' + data + ')');
-          if (dat.result == 'success') {
-            var image_id = dat.upload.split("/")[2];
-            $("#attendee_image_id").val(image_id);
-            alert("图片上传成功");
-          }else{
-            alert("图片上传失败");
-          };
-        },
-        postData : {
-            '_http_accept': 'application/javascript',
-            'format' : 'json',
-            '_method': 'post',
-            '<%= session_key %>' : '<%= cookies[session_key] %>',
-            'authenticity_token': '<%= form_authenticity_token %>'
-        },
-        onUploadError : function(file, errorCode, errorMsg, errorString) {
-          alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
-        }
-      });
-    });
-</script>
-<%- end -%>
+<div class="morethree">
+  <a href="#" class="new_year_close js-close"><%= image_tag 'special_event/close.png' %></a>
+  <%= image_tag 'special_event/bg2.png', border: "0", usemap: "#Map2" %> 
+  <map name="Map2" id="Map2">
+    <area shape="rect" coords="384,169,460,211" href="http://www.icolor.com.cn/inspirations?from=top" />
+  </map>
+</div>

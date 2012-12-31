@@ -5,6 +5,7 @@ Icolor::Application.routes.draw do
     member do
       post :join
       put  :check_mobile
+      get  :award
     end
   end
 

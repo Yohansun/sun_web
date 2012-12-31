@@ -22,6 +22,17 @@ class Mood < ActiveRecord::Base
     response.parsed_response
   end
 
+  def self.send_pic_weibo(args)
+    response = post("https://api.weibo.com/2/statuses/upload.json",
+      :body => {
+        :access_token => args[:access_token],
+        :status => args[:content],
+        :pic => args[:pic]
+      })
+
+    response.parsed_response
+  end
+
   def self.send_qq_connect(args)
 
     response = post("https://graph.qq.com/t/add_t",

@@ -4,6 +4,7 @@ class DesignImagesController < ApplicationController
     @upload = DesignImage.new(newparams[:upload])
     if @upload.save
       flash[:notice] = "Successfully created upload."
+      session[:image_id] = @upload.id
       respond_to do |format|
         format.json {render :json => { :result => 'success',
           :upload => design_image_path(@upload.id) } }
