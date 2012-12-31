@@ -13,7 +13,7 @@ MagicContent.extra_settings = [
     {:tag => 'text_field_tag', :key => 'statistical_time', :label => "iColor经销商报表统计截至日期(单位:日)"},
     {:tag => 'text_area_tag',  :key => 'kv_of_home_index', :label => "首页KV自定义代码"},
     {:tag => 'text_field_tag', :key => 'event_random_range', :label => "活动中奖概率基数(整数值)"},
-    {:tag => 'text_field_tag', :key => 'event_award_count', :label => "活动奖品数量"}
+    {:tag => 'text_field_tag', :key => 'event_award_count', :label => "活动奖品数量"},
     {:tag => 'text_field_tag', :key => 'award_at', :label => "活动：第几次中小罐漆"}
 ]
 
