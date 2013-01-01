@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 # -*- Encoding: UTF-8 -*-
 class Users::RegisterController < Devise::RegistrationsController
   layout :layout_by_resource
