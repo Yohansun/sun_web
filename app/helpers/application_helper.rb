@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 # -*- Encoding: UTF-8 -*-
 module ApplicationHelper
 
@@ -35,7 +37,7 @@ module ApplicationHelper
   }
 
   def page_title
-    return BASE_TITLE if current_page?(controller:"home")
+    # return BASE_TITLE if current_page?(controller:"home")
 
     begin
       title = @user.nil? ? PAGE_TITLE : INNER_PAGE_TITLE
@@ -48,8 +50,8 @@ module ApplicationHelper
         elsif params[:star_type].include?("设计")
           return "设计之星" + "-" + BASE_TITLE
         else
-          return "每周之星" + "-" + BASE_TITLE 
-        end            
+          return "每周之星" + "-" + BASE_TITLE
+        end
       else
         title[controller_name.to_s] + "-" + BASE_TITLE
       end
@@ -127,7 +129,7 @@ module ApplicationHelper
               <a data-webid="renren" class="popup_zf_rr" href="javascript:void();"></a>
               <a class="popup_zf_kaixin" data-webid="kaixin001" href="javascript:void();"></a>
             </span>'
-      end       
+      end
     end
   end
 
@@ -212,7 +214,7 @@ module ApplicationHelper
   #获取最新的行业资讯
   def get_articles
     Subject.content("articles")
-  end  
+  end
 
   #获取公司推荐设计师
   def get_recommended_designer
@@ -221,13 +223,13 @@ module ApplicationHelper
 
   def get_designs
     @user.designs.map {|design| design.design_images}.flatten! || []
-  end  
+  end
 
   def get_skin_kvs
     if (skin = Skin.find_by_skin_type_id(session[:skin_type])).present?
       skin.skin_kv_uploads
-    end  
-  end  
+    end
+  end
 
   def get_weekly_stars
     user_urls = WeeklyStar.order("published_at desc").select("author_url").limit 5
