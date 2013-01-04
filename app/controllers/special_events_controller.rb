@@ -5,6 +5,7 @@ class SpecialEventsController < ApplicationController
   @@image_id = {}
 
   def show
+    redirect_to root_path
   end
 
   def award
