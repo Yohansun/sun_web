@@ -50,6 +50,8 @@
         </div>
         <a class="awards_next awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
         <a class="awards_per awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <!-- <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_ln.png"%>"/></a>
+        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_rn.png"%>"/></a> -->
       </div>
       <%- end -%>
     </div>
@@ -109,48 +111,66 @@
 <script type="text/javascript">
 function awards_slide(ID){
 
-  var page = 1;
-  var i = 1;
-  $(ID+'a.awards_btn_per').click(function(){
-    var $parent = $(this).parent('div.awards_list');
-    var $v_list = $parent.find('div.awards_list_slides');
-    var $v_container = $parent.children('div.awards_list_container');
+    var page = 1;
+    var i = 1;
+    $(ID+'a.awards_btn_per').click(function(){
+        var $parent = $(this).parent('div.awards_list');
+        var $v_list = $parent.find('div.awards_list_slides');
+        var $v_container = $parent.children('div.awards_list_container');
 
-    var v_width = $v_container.width();
-    var len = $v_list.find('ul.awards_slides_ul').length;
-    var page_count = Math.ceil(len/i);
+        var v_width = $v_container.width();
+        var len = $v_list.find('ul.awards_slides_ul').length;
+        var page_count = Math.ceil(len/i);
 
-    if(!$v_list.is(':animated')){
-      if(page == page_count){
-        $v_list.animate({'left':'0px'});
-        page = 1;
+        if(!$v_list.is(':animated')){
+            if(page == page_count){
+                return;
+            }else{
+                $v_list.animate({'left':'-='+v_width});
+                page++;
+                if(page == page_count){
+                    $(ID+'a.awards_btn_per').fadeTo('fast', 0.2);
+                    $(ID+'a.awards_btn_next').fadeTo('fast', 1);
+                } 
+                if(page != 1 && page != page_count){
+                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
+                    $(ID+'a.awards_btn_next').fadeTo('fast', 1);
+                } 
+                // if(page == 1) {
+                //     $(ID+'a.awards_btn_next').fadeTo('fast', 1);
+                //     $(ID+'a.awards_btn_per').fadeTo('fast', 0.2);
+                // }
+            }
+        }   
+    })
+    $(ID+'a.awards_btn_next').click(function(){
+        var $parent = $(this).parent('div.awards_list');
+        var $v_list = $parent.find('div.awards_list_slides');
+        var $v_container = $parent.children('div.awards_list_container');
 
-      }else{
-        $v_list.animate({'left':'-='+v_width});
-        page++;
-      }
-    }   
-  })
-  $(ID+'a.awards_btn_next').click(function(){
-    var $parent = $(this).parent('div.awards_list');
-    var $v_list = $parent.find('div.awards_list_slides');
-    var $v_container = $parent.children('div.awards_list_container');
+        var v_width = $v_container.width();
+        var len = $v_list.find('ul.awards_slides_ul').length;
+        var page_count = Math.ceil(len/i);
 
-    var v_width = $v_container.width();
-    var len = $v_list.find('ul.awards_slides_ul').length;
-    var page_count = Math.ceil(len/i);
-
-    if(!$v_list.is(':animated')){
-      if(page == 1){
-        $v_list.animate({left:'-='+v_width*(page_count-1)});
-        page = page_count;
-
-      }else{
-        $v_list.animate({left:'+='+v_width});
-        page--;
-      }
-    }
-  }) 
+        if(!$v_list.is(':animated')){
+            if(page == 1){return;}else{
+                $v_list.animate({left:'+='+v_width});
+                page--;
+                if(page == 1){
+                    $(ID+'a.awards_btn_next').fadeTo('fast', 0.2);
+                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
+                } 
+                if(page != page_count && page != 1){
+                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
+                    $(ID+'a.awards_btn_next').fadeTo('fast', 1);
+                } 
+                // if(page == page_count) {
+                //     $(ID+'a.awards_btn_per').fadeTo('fast', 1);
+                //     $(ID+'a.awards_btn_next').fadeTo('fast', 0.2);
+                // }
+            }
+        }
+    }).fadeTo('fast', 0.2);
 }
 awards_slide('#awards_slide1 ');
 awards_slide('#awards_slide2 ');
