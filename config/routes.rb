@@ -16,7 +16,8 @@ Icolor::Application.routes.draw do
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"
 
-  get "/21days" => "home#t1days"
+  get "/shuaxin" => redirect("/shuaxin/index.html")
+  get "/21days" => redirect("/21days/index.html")
 
   root :to => 'home#index'
 
