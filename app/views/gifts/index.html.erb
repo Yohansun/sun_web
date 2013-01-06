@@ -23,8 +23,8 @@
             <%- end %>    
           </div>
         </div>
-        <a class="awards_next awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr1.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <a class="awards_per awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr1.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr1.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr1.size < 2 ? '' : 'n'}.png"%>"/></a>
       </div>
       <%- end -%>
     </div>
@@ -48,8 +48,8 @@
             <%- end %>                              
           </div>
         </div>
-        <a class="awards_next awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <a class="awards_per awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
         <!-- <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_ln.png"%>"/></a>
         <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_rn.png"%>"/></a> -->
       </div>
@@ -75,8 +75,8 @@
             <%- end %>    
           </div>
         </div>
-        <a class="awards_next awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <a class="awards_per awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
+        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
       </div>
       <%- end -%>
     </div>
@@ -100,8 +100,8 @@
               <%- end %>                          
             </div>
           </div>
-          <a class="awards_next awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr4.size < 2 ? '' : 'n'}.png"%>"/></a>
-          <a class="awards_per awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr4.size < 2 ? '' : 'n'}.png"%>"/></a>
+          <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr4.size < 2 ? '' : 'n'}.png"%>"/></a>
+          <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr4.size < 2 ? '' : 'n'}.png"%>"/></a>
         </div>    
       <%- end -%> 
     </div>
@@ -133,8 +133,8 @@ function awards_slide(ID){
                     $(ID+'a.awards_btn_next').fadeTo('fast', 1);
                 } 
                 if(page != 1 && page != page_count){
-                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
                     $(ID+'a.awards_btn_next').fadeTo('fast', 1);
+                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
                 } 
                 // if(page == 1) {
                 //     $(ID+'a.awards_btn_next').fadeTo('fast', 1);
@@ -161,8 +161,8 @@ function awards_slide(ID){
                     $(ID+'a.awards_btn_per').fadeTo('fast', 1);
                 } 
                 if(page != page_count && page != 1){
-                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
                     $(ID+'a.awards_btn_next').fadeTo('fast', 1);
+                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
                 } 
                 // if(page == page_count) {
                 //     $(ID+'a.awards_btn_per').fadeTo('fast', 1);
