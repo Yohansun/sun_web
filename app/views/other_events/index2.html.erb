@@ -1,0 +1,65 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "exciting_activities", "style" %>
+<%- end %>
+
+<div class="main page_weekstar">
+  <div class='sub_title tr'>
+    <img src="<%= asset_path "design/title_event.png"%>"/>
+  </div>
+  <div class='sub_nav ft12 pr tr'>
+    <em><a class="fb" href="/other_events">其他精彩活动</a></em>
+    <em><a href="/events">精彩活动</a><span></span></em>
+    <em><a href="/">首页</a><span></span></em>
+    <style type="text/css">
+        .properties .intro{ width:630px;}
+    </style>
+  </div><!--sub_nav ends-->
+  <div class="wrapper group color-trend">
+
+    <div class="shadow mb25">
+      <div class="section">
+        <div class="tit_bg"><h2>往期回顾</h2></div>
+        <div class="interview_box dec_list">
+          <ul>
+            <li>
+              <div class="img"><%= link_to image_tag('design/trend/act4.jpg'),"/other_events/review" %></div>
+              <div class="properties">
+                <div class="title">
+                  <strong>活动名称：</strong><a href="/other_events/review">争当iColor点评王,抢楼点评都有奖</a><!--<span class="status">正在进行中</span>-->
+                </div>
+                <div class="time">
+                  <strong>活动时间：</strong>2012年11月1日-2012年11月15日
+                </div>
+                <div class="intro">
+                  抢到尾数12的前5名幸运儿，以及提供最精彩独到见解的5名网友，将获得iColor小龙U盘一个。
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="img"><%= link_to image_tag('design/trend/act1.jpg'),"/other_events/Proposal" %></div>
+              <div class="properties">
+                <div class="title">
+                  <strong>活动名称：</strong><a href="/other_events/Proposal">以爱之名，刷新生活</a><!--<span class="status">正在进行中</span>-->
+                </div>
+                <div class="time">
+                  <strong>活动时间：</strong>2012
+                </div>
+                <div class="intro">
+                  近日，立邦公司以“以爱之名，刷新生活”为主题，在北京国贸地铁站刷新了整条60米通道，一改往日沉闷的地铁气息，让人耳目一新。
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='sub_bot pr'>
+    <div class="pager ft12">
+      <a href="/other_events?from=top" class="prev"><span></span>上一页</a>
+      <a href="/other_events?from=top" >1</a>
+      <a href="javascript:void(0);" class="current">2</a>
+    </div><!--pager ends-->
+  </div>
+  <!--sub_bot ends-->
+</div>
