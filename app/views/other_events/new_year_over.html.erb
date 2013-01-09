@@ -1,0 +1,61 @@
+<%- content_for :head do %>
+    <style type="text/css">
+    .main{width:900px;padding-bottom:75px;background:#900202;margin-bottom:50px;}
+    .active_area{position:relative;background:url(<%= asset_path "topics/20130101/newyear_bg3.jpg" %>) no-repeat;height:203px;text-align:center;}
+    .active_area .button_small{margin-top:15px;}
+    .upload_img{color:red;font-size:26px;font-family:'Microsoft Yahei';font-style:italic;line-height:145px;display:block;width:453px;height:141px;margin:0 auto;text-decoration:underline;}
+    .link1{position:absolute;right:86px;bottom:30px;color:#ffffff;font:14px "Microsoft Yahei";text-decoration:underline;}
+
+    .tips{background:url(<%= asset_path "topics/20130101/newyear_over3.jpg" %>) no-repeat left top;padding:25px 85px;min-height:317px;_height:317px;}
+    .tips p{color:#fff;margin:25px 0;line-height:16px;font-family:"Microsoft Yahei";}
+    .tips span.display_block{display:block;margin:5px 0 5px 48px;}
+    .tips i{display:inline-block;background:url(<%= asset_path "christmas/icon.png" %>) no-repeat 0 0;width:33px;height:33px;position:relative;top:12px;margin-right:10px;}
+    .tips strong,.tips span{line-height:33px;}
+    .tips strong{font-size:18px;}
+    .tips span{font-size:14px;}
+    .tips i.icon_time{background-position:0 -70px;}
+    .tips i.icon_step{background-position:0 -145px;}
+    .tips i.icon_award{background-position:0 -290px;}
+    .tips i.icon_state{background-position:0 -360px;}
+    a.button_small,a.button_large{display:inline-block;background:url(<%= asset_path "christmas/button.jpg" %>) no-repeat top center;height:31px;text-align:center;color:#712222;font:bold 16px/31px "Microsoft Yahei";}
+    .button_large{width:98px;}
+    .button_small{width:70px;}
+    </style>
+<%- end %>
+
+<div class="main">
+    <div><img src="<%= asset_path "topics/20130101/newyear_over1.jpg" %>"></div>
+    <div><img src="<%= asset_path "topics/20130101/newyear_over2.jpg" %>"></div>
+    <div class="tips">
+      <h3><img src="<%= asset_path "topics/20130101/rules_title.png" %>"></h3>
+      <p>
+        <i class="icon_object"></i>
+        <strong>活动对象：</strong>
+        <span>iColor所有的注册用户</span>
+      </p>
+      <p>
+        <i class="icon_time"></i>
+        <strong>活动时间：</strong>
+        <span>2013.1.1-2013.1.3</span>
+      </p>
+      <p>
+        <i class="icon_step"></i>
+        <strong>活动步骤：</strong>
+        <span class="display_block">Step1：注册用户上传新年相关美图</span>
+        <span class="display_block">Step2：上传成功后即可参与砸金蛋抽奖</span>
+        <span class="display_block">Step3： 活动分享至已绑定的新浪微博和iColor个人心情</span>
+      </p>
+      <p>
+        <i class="icon_award"></i>
+        <strong>活动奖励：</strong>
+        <span>奖品包括立邦288色卡或缤纷净味12色套装一份（奖品随机发放）</span>
+      </p>
+      <p>
+        <i class="icon_state"></i>
+        <strong>活动说明：</strong>
+        <span class="display_block">每位注册用户每天获10次砸金蛋机会，中奖者可活动iColor提供的活动奖励</span>
+      </p>
+      <p><a href="#" class="button_large">查询获奖名单</a></p>
+      <!-- <p class="tr"><a href="#" class="button_small">返回</a></p> -->
+    </div>
+</div><!--main ends-->

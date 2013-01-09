@@ -124,6 +124,9 @@ Icolor::Application.routes.draw do
   match "/other_events/kv" => "other_events#kv"
   match "/other_events/Proposal" => "other_events#Proposal"
   match "/other_events/review" => "other_events#review"
+  match "/other_events/new_year_over" => "other_events#new_year_over"
+  match "/other_events/christmas_over" => "other_events#christmas_over"
+  match "/other_events/page_2" => "other_events#index2"
 
   #客服信息
   match "/info_list" => "function#infolist"

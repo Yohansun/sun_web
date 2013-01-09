@@ -1,0 +1,55 @@
+<%- content_for :head do %>
+    <style type="text/css">
+    .christmas_over{width:900px;padding-bottom:75px;background:#9e0504;margin-bottom:50px;}
+    .christmas_over .tips_over{background:url(<%= asset_path "christmas/chris_in_over3.jpg" %>) no-repeat top center;padding:1px 0 30px 90px;width:810px;}
+    .christmas_over .tips_over p{color:#fff;margin:25px 0;line-height:16px;font-family:"Microsoft Yahei";}
+    .christmas_over .tips_over span.display_block{display:block;margin:5px 0 5px 48px;}
+    .christmas_over .tips_over i{display:inline-block;background:url(<%= asset_path "christmas/icon.png" %>) no-repeat 0 0;width:33px;height:33px;position:relative;top:12px;margin-right:10px;}
+    .christmas_over .tips_over strong,.christmas .tips_over span{line-height:33px;}
+    .christmas_over .tips_over strong{font-size:18px;}
+    .christmas_over .tips_over span{font-size:14px;}
+    .christmas_over .tips_over i.icon_time{background-position:0 -70px;}
+    .christmas_over .tips_over i.icon_step{background-position:0 -145px;}
+    .christmas_over .tips_over i.icon_award{background-position:0 -290px;}
+    .christmas_over .tips_over i.icon_state{background-position:0 -360px;}
+    .christmas button,a.button_small,a.button_large{background:url(<%= asset_path "christmas/button.jpg" %>) no-repeat top center;height:31px;text-align:center;color:#712222;font:bold 16px "Microsoft Yahei";}
+    .button_large{width:98px;}
+    .button_small{width:70px;}
+    </style>
+<%- end %>
+
+<div class="main christmas_over">
+  <div><img src="<%= asset_path "christmas/chris_in_over1.jpg" %>"></div>
+  <div><img src="<%= asset_path "christmas/chris_in_over2.jpg" %>"></div>
+  <div class="tips_over">
+    <!-- <h3><img src="<%= asset_path "christmas/tit1.jpg" %>"></h3> -->
+    <p style="margin-top:0;">
+      <i class="icon_object"></i>
+      <strong>活动对象：</strong>
+      <span>iColor所有的注册用户</span>
+    </p>
+    <p>
+      <i class="icon_time"></i>
+      <strong>活动时间：</strong>
+      <span>2012.12.20-2012.12.25</span>
+    </p>
+    <p>
+      <i class="icon_step"></i>
+      <strong>活动步骤：</strong>
+      <span class="display_block">Step1：注册用户点击进入活动网页，输入注册时填写的手机号码并确认</span>
+      <span class="display_block">Step2：上传个人喜欢的圣诞图片，或编写自己的圣诞祝福并@三位新浪微博用户</span>
+      <span class="display_block">Step3： 发送祝福至新浪微博或iColor的个人心情，同时有机会获得iColor提供的幸运礼物@三位新浪微博用户</span>
+    </p>
+    <p>
+      <i class="icon_award"></i>
+      <strong>活动奖励：</strong>
+      <span>所有上传照片或送祝福的用户都可以得到 iColor提供的288色卡，并有机会获得意外奖品</span>
+    </p>
+    <p>
+      <i class="icon_state"></i>
+      <strong>活动说明：</strong>
+      <span class="display_block">每个注册用户最多可参与本活动3次，一旦获得iColor为您提供的意外奖品则不可再次参与本次活动</span>
+    </p>
+    <p><a href="#" class="button_large">查询获奖名单</a></p>
+  </div>
+</div><!--main ends-->
