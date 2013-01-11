@@ -43,6 +43,7 @@ Icolor::Application.routes.draw do
     match "/seller_user/apply_for_tools" => "sellers/seller_tool#apply_for_tools"
     match "/seller_user/reports" => "sellers/seller_reports#index"
     match "/seller_user/reports/export" => "sellers/seller_reports#export"
+    match "/seller_user/reports/export_all" => "sellers/seller_reports#export_all"
   end
 
   devise_scope :user do
