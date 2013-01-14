@@ -18,6 +18,7 @@ MagicContent.extra_settings = [
 ]
 
 MagicContent.extra_menu_items = [
+    {name: '图库管理', url: :image_libraries_path},
     {name: '微博抓取管理', url: :weibo_items_path},
     {name: '在线客服咨询回复', url: :site_messages_path},
     {name: '在线配色咨询回复', url: :mix_colors_path},
