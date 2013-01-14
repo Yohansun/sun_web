@@ -239,6 +239,7 @@ Icolor::Application.routes.draw do
     resources :event_attendee do
       get :delete_inspiration
     end
+    resources :image_libraries
   end
 
   #扩充magic_admin
