@@ -3,12 +3,13 @@
   <div class="title">
     <h5>iColor经销商账号管理</h5>
     <div class="num"><%= link_to "新增", main_app.new_seller_user_path, :class => "redNum" -%></div>
+    <div class="num"><%=link_to '下载报表',main_app.seller_user_reports_export_all_path, :class => "redNum"%></div>
   </div>
 
   <!-- Statistics -->
 
   <div class="table">
-    <div class="head"><h5 class="iFrames">用户列表</h5><%=link_to '下载报表',main_app.seller_user_reports_export_all_path%>
+    <div class="head"><h5 class="iFrames">用户列表</h5>
 </div>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
