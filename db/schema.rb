@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220044336) do
+ActiveRecord::Schema.define(:version => 20130114093521) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -189,16 +189,21 @@ ActiveRecord::Schema.define(:version => 20121220044336) do
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.boolean  "is_cover"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "title"
+    t.integer  "last_user_id"
+    t.datetime "last_updated_at"
+    t.boolean  "audited",           :default => false
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
+  add_index "design_images", ["imageable_id", "imageable_type"], :name => "imageable_id"
   add_index "design_images", ["imageable_id"], :name => "NewIndex2"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
   add_index "design_images", ["imageable_type"], :name => "NewIndex3"
@@ -786,12 +791,11 @@ ActiveRecord::Schema.define(:version => 20121220044336) do
     t.integer  "user_id"
     t.datetime "start_at"
     t.datetime "due_at"
-    t.boolean  "actived",    :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.integer  "actived",    :limit => 1, :default => 0
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
-  add_index "special_events", ["actived"], :name => "index_special_events_on_actived"
   add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
   add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
 
