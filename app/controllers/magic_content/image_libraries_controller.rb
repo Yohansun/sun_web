@@ -3,7 +3,7 @@ module MagicContent
     skip_authorize_resource :only => [:index]
 
     def index
-      
+      @images = DesignImage.available.page(params[:page])
     end
 
     def update
