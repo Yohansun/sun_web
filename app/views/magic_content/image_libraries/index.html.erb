@@ -16,30 +16,31 @@
     </div>
     <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
       <thead>
-        <th>ID</th>
+        <th width='30px'>ID</th>
         <th>名称</th>
-        <th>列表页图片</th>
+        <th width='60px'>列表页图片</th>
         <th>所属相册</th>
-        <th>发布时间</th>
+        <th width='120px'>发布时间</th>
         <th>最后修改人</th>
-        <th>最后修改时间</th>
+        <th width='120px'>最后修改时间</th>
         <th>所属频道</th>
         <th>所属用户</th>
-        <th>审核?</th>
+        <th width='35px'>审核?</th>
         <th width='260px'>操作</th>
       </thead>
       <tbody>
+        <%- @images.each do |image| -%>
         <tr>
+          <td><%= image.id %></td>
+          <td><%= image.title %></td>
+          <td><%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail') %></td>
           <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+          <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= image.last_user.username if image.last_user %></td>
+          <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
+          <td><%= image.channel_name %></td>
+          <td><%= image.user.username %></td>
+          <td><%= image.audited? ? 'Y' : 'N' %></td>
           <td>
             <%= link_to '编辑', '' %>
             <%= link_to '设置名称', '' %>
@@ -49,6 +50,7 @@
             <%= link_to '删除', '' %>
           </td>
         </tr>
+        <%- end -%>
       </tbody>
     </table>
   </div>
