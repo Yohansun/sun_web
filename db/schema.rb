@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114093521) do
+ActiveRecord::Schema.define(:version => 20130115032441) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -199,6 +199,9 @@ ActiveRecord::Schema.define(:version => 20130114093521) do
     t.integer  "last_user_id"
     t.datetime "last_updated_at"
     t.boolean  "audited",           :default => false
+    t.string   "color1"
+    t.string   "color2"
+    t.string   "color3"
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
