@@ -25,7 +25,7 @@
       
   <div class="widget first" style="position:relative;">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
-      <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"]], params[:genre])%>
+      <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"]], params[:genre]), :style=>"width: 200px;"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
     <% end %>
