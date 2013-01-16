@@ -1,7 +1,7 @@
 #encoding:utf-8
 
 class DesignImage < ActiveRecord::Base
-  attr_accessible :imageable_id, :imageable_type, :file, :tags, :area_id
+  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3
 
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee

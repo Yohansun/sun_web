@@ -211,7 +211,13 @@ Icolor::Application.routes.draw do
     resources :sys_msgs
     resources :moods
   end
-  resources :design_images
+
+  resources :design_images do
+    member do
+      get :audited
+      get :autocomplete
+    end
+  end
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
@@ -235,15 +241,25 @@ Icolor::Application.routes.draw do
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
     match '/report_export' => 'report_export#index'
+    match '/design_images/autocomplete' => 'design_images#autocomplete'
     resources :my_show_settings
     resources :event_attendee do
       get :delete_inspiration
     end
     resources :image_libraries do
-      get :categories
-      put :update_tags
+      put :update_name
+      collection do
+        get :categories
+      end
+      member do
+        put :update_tags
+        get :audited
+        get :autocomplete
+        delete :delete_image
+      end
     end
   end
+
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
     resources :image_libraries

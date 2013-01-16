@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DesignImagesController < ApplicationController
   def create
     newparams = coerce(params)
@@ -19,6 +20,26 @@ class DesignImagesController < ApplicationController
 
   def show
     @upload = DesignImage.find(params[:id])
+  end
+
+  def update
+    @image = DesignImage.find(params[:id])
+    image_params = params[:design_image]
+    @image.title = image_params[:title] if image_params[:title].present?
+    3.times.each do |item|
+      next if image_params["color#{item}".to_sym].blank?
+      if ColorCode.find_by_code(image_params["color#{item}".to_sym])
+        @image.send("color#{item}=", image_params["color#{item}".to_sym])
+      end
+    end
+    @image.save
+    redirect_to image_libraries_path
+  end
+
+  def autocomplete
+    params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
+    colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
+    render json: colors.map { |c| c.code }
   end
 
   private

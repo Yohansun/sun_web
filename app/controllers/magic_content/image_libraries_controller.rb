@@ -1,7 +1,17 @@
 # -*- encoding : utf-8 -*-
 module MagicContent
-  class ImageLibrariesController < BaseController
-    skip_authorize_resource :only => [:index, :categories, :update_tags]
+  class ImageLibrariesController < ApplicationController
+    layout "magic_admin/application"
+
+    before_filter :authenticate_admin!
+
+    def current_ability
+      @current_ability ||= AdminAbility.new(current_admin)
+    end
+
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to "/admin", :alert => '您没有权限访问此页面！'
+    end
 
     def index
       @images = DesignImage.available.page(params[:page])
@@ -31,12 +41,49 @@ module MagicContent
       end
     end
 
-    def update
-      
+    # def destroy
+      # logger.debug("dsadsadsadsadsa321321321321321321321")
+      # @image = DesignImage.find params[:id]
+      # @image.destroy
+      # redirect_to image_libraries_path
+      # destroy!{ main_app.image_libraries_path }
+    # end
+
+    def delete_image
+      @image = DesignImage.find params[:id]
+      @image.destroy
+      redirect_to main_app.image_libraries_path
     end
 
-    def destroy
-      
+    def audited
+      @image = DesignImage.find(params[:id])
+      @image.audited = true
+      if @image.save
+        flash[:alert] = "审核成功！"
+      else
+        flash[:notice] = "审核未成功！"
+      end
+      redirect_to main_app.image_libraries_path
+    end
+
+    def update
+      @image = DesignImage.find(params[:id])
+      image_params = params[:design_image]
+      @image.title = image_params[:title] if image_params[:title].present?
+      3.times.each do |item|
+        next if image_params["color#{item}".to_sym].blank?
+        if ColorCode.find_by_code(image_params["color#{item}".to_sym])
+          @image.send("color#{item}=", image_params["color#{item}".to_sym])
+        end
+      end
+      @image.save
+      redirect_to image_libraries_path
+    end
+
+    def autocomplete
+      params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
+      colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
+      render json: colors.map { |c| c.code }
     end
 
   end
