@@ -16,18 +16,19 @@ module MagicContent
     end
 
     def categories
-      # @image = DesignImage.find(params[:id])
+      @image = DesignImage.find params[:image_library_id]
       @categories = ImageLibraryCategory.where(parent_id: "0")
     end
 
     def update_tags
-      image = DesignImage.find(params[:id])
-      if image.update_attribute(:tags, params[:tags])
-        flash[:notice] = "保存成功"
+      image = DesignImage.find(params[:image_library_id])
+      if image.update_attributes(tags: params[:tags], area_id: params[:area_id])
+        flash[:alert] = "保存成功"
+        redirect_to main_app.image_libraries_path
       else
-        flash[:error] = "修改失败"
+        flash[:alert] = "保存失败, 区域信息不能为空"
+        redirect_to main_app.image_library_categories_path(image)
       end
-      redirect_to main_app.categories_image_libraries_path
     end
 
     def update

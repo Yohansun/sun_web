@@ -12,17 +12,25 @@
         }
       );
     });
+    $(function(){
+      <%- if flash[:alert].present? %>
+        alert('<%= flash[:alert] %>')
+      <%- end %>  
+    });
   </script>
 <%- end -%>
+
 <style type="text/css">
 .search_form{position:absolute;right:5px;top:5px;z-index:998;}
 .search_form .search_input{padding:3px 5px 4px;margin:0 0 0 10px;}
+ul.sub,#menu{margin: 0;}
+.content .title h5{padding:0 15px;}
 </style>
 <div class="content">
   <div class="title">
     <h5>图库管理</h5>
   </div>
-      
+
   <div class="widget first" style="position:relative;">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
       <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"]], params[:genre]), :style=>"width: 200px;"%>
@@ -69,7 +77,7 @@
             <td>
               <%= link_to '编辑', '' %>
               <%= link_to '设置名称', '' %>
-              <%= link_to '设置标签', main_app.categories_image_libraries_path %>
+              <%= link_to '设置标签', main_app.image_library_categories_path(image) %>
               <%= link_to '设置色号', '' %>
               <%= link_to '审核', '' %>
               <%= link_to '删除', '' %>
