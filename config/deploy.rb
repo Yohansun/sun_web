@@ -19,17 +19,28 @@ set :keep_releases, 3
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
 
-role :web, "203.156.231.37" # Your HTTP server, Apache/etc
-role :app, "203.156.231.37" # This may be the same as your `Web` server
-role :db, "203.156.231.37", :primary => true # This is where Rails migrations will run
+server "203.156.231.37", :web, :app, :db, primary: true
 
 set :user, "root"
 set :repository, "git@github.com:nioteam/icolor.git"
 set :branch, "master"
 set :deploy_to, "/home/www/rails/icolor"
 
+set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb) 
 # tasks
 namespace :deploy do
+
+  namespace :assets do
+    task :precompile, :roles => :web, :except => { :no_release => true } do
+      from = source.next_revision(current_revision)
+      if capture("cd #{latest_release} && #{source.local.log(from)} #{assets_dependencies.join ' '} | wc -l").to_i > 0
+        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+      else
+        logger.info "Skipping asset pre-compilation because there were no asset changes"
+      end
+    end
+  end	
+
   desc "Restart web server"
   task :restart, roles: :app, except: {no_release: true} do
     run "touch #{deploy_to}/current/tmp/restart.txt"
