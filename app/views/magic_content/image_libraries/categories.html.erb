@@ -1,0 +1,52 @@
+<% content_for :head do -%>
+  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+	<script type="text/javascript">
+    $(function() {
+	      var options = {
+	        data  : data
+	      }
+	      var sel = new LinkageSelect(options);
+        sel.bind('.level_1', null, '请选择');
+        sel.bind('.level_2', null, '请选择');
+        sel.bind('.level_3', null, '请选择');
+	    });
+	</script> 
+<% end %>
+<div class="content">
+<%#= form_tag main_app.update_tags_image_library_path(@image), :method => :put do |f| %>
+	<%- @categories.each do |c| %>
+		<h2><%= c.title %></h2>
+		<table width='100%'>
+			<tr>
+			<%- c.children.each_with_index do |child, index|%>
+				<%- if child.children.any? -%>
+					<%= "</tr><tr>".html_safe if child.id > 210 && index % 7 == 0%>
+					<td>
+						<h5><%= child.title%></h5>
+						<table>
+							<%- child.children.each_with_index do |node, sub_index| -%>
+							<tr>
+								<%#= "</tr><tr>".html_safe if node.id > 210 && sub_index % 3 == 0%>
+								<td width='33%'>
+									<%= check_box_tag "tags[]", node.id %>&nbsp;<%= node.title %>
+								</td>
+							</tr>
+							<%- end -%>
+						</table>
+					</td>
+				<%- else -%>
+					<%= "</tr><tr>".html_safe if index % 10 == 0%>
+					<td><%= check_box_tag "tags[]", child.id %> <%= child.title %></td>
+				<%- end -%>
+			<%- end %>
+			</tr>
+		</table>
+	<%- end %>
+	<%#= submit_tag "确定修改标签" %>
+	<%#= link_to "取消", main_app.image_libraries_path %>
+<%#- end %>
+</div>
+
+
+
+

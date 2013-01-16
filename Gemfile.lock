@@ -1,4 +1,11 @@
 GIT
+  remote: git@github.com:amerine/acts_as_tree.git
+  revision: e10f1a289c11a4e05138b2188f170f289203bb26
+  specs:
+    acts_as_tree (1.2.0)
+      activerecord (>= 3.0.0)
+
+GIT
   remote: git@github.com:nioteam/magic_admin.git
   revision: 62a63aca3681ee1c05f57a83c424bb46c8318179
   specs:
@@ -280,6 +287,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_tree!
   awesome_print
   bond
   capistrano
