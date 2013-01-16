@@ -6,11 +6,11 @@ class DesignImage < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
   belongs_to :user
-  belongs_to :last_user, class_name: 'User', primary_key: 'last_user_id'
+  belongs_to :last_user, class_name: 'User', primary_key: 'id'
 
   # validate :file_dimensions, :unless => "errors.any?"
 
-  scope :available, where("imageable_id is not null and imageable_type is not null and imageable_type <> 'Inspiration'").order("id, created_at")
+  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration'").order("design_images.id, design_images.created_at")
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
@@ -33,6 +33,32 @@ class DesignImage < ActiveRecord::Base
     when 'Design' then "推荐作品"
     when 'ColorDesign' then "色彩配搭"
     when 'MasterDesign' then "大师作品"
+    end
+  end
+
+  def self.search(genre, keyword)
+    case genre
+      when 'title'
+        DesignImage.available.where(title: name)
+      when 'username'
+        DesignImage.joins(:user).available.where(["users.username = ?", keyword])
+      when 'yes_update'
+        DesignImage.available.where("last_updated_at is not null")
+      when 'no_update'
+        DesignImage.available.where("last_updated_at is null")
+      when 'id'
+        DesignImage.available.where(id: keyword)
+      when 'imageable_type'
+        if keyword == '推荐作品'
+          DesignImage.available.where(imageable_type: 'Design')
+        elsif keyword == '色彩配搭'
+          DesignImage.available.where(imageable_type: 'ColorDesign')
+        elsif keyword == '大师作品'
+          DesignImage.available.where(imageable_type: 'MasterDesign')
+        end
+      when 'last_user_id'
+        last_user_id = User.select("id").where(username: keyword).first
+        DesignImage.available.where(["design_images.last_user_id = ?", last_user_id])
     end
   end
 end
