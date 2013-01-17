@@ -240,12 +240,8 @@ Icolor::Application.routes.draw do
       get :delete_inspiration
     end
     resources :image_libraries do
-      collection do
-        get :categories
-      end
-      member do
-        put :update_tags
-      end
+      get :categories
+      put :update_tags
     end
   end
 

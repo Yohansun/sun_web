@@ -1,11 +1,12 @@
 #encoding:utf-8
 
 class DesignImage < ActiveRecord::Base
-  attr_accessible :imageable_id, :imageable_type, :file
+  attr_accessible :imageable_id, :imageable_type, :file, :tags, :area_id
 
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
   belongs_to :user
+  belongs_to :area
   belongs_to :last_user, class_name: 'User', primary_key: 'id'
 
   # validate :file_dimensions, :unless => "errors.any?"
@@ -22,6 +23,23 @@ class DesignImage < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
+  validates_presence_of :area_id
+
+  def areas
+    areas = []
+    if self.area.children.any?
+      areas.push(self.area.parent.id)
+      areas.push(self.area.id)
+      areas.push(nil)
+    else
+      city = self.area.parent
+      areas.push(city.parent.id)
+      areas.push(city.id)
+      areas.push(self.area.id)
+    end
+    areas
+  end
 
   def file_dimensions
     dimensions = Paperclip::Geometry.from_file(self.file.to_file(:original))
