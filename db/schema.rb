@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116053630) do
+ActiveRecord::Schema.define(:version => 20130116091116) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(:version => 20130116053630) do
     t.string   "color2"
     t.string   "color3"
     t.text     "tags"
+    t.integer  "area_id"
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
@@ -409,13 +410,6 @@ ActiveRecord::Schema.define(:version => 20130116053630) do
     t.datetime "updated_at",      :null => false
     t.integer  "subject_id"
     t.string   "work_experience"
-  end
-
-  create_table "lands", :force => true do |t|
-    t.string   "source"
-    t.string   "source_ip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "login_logs", :force => true do |t|

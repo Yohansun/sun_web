@@ -28,15 +28,17 @@ class DesignImage < ActiveRecord::Base
 
   def areas
     areas = []
-    if self.area.children.any?
-      areas.push(self.area.parent.id)
-      areas.push(self.area.id)
-      areas.push(nil)
-    else
-      city = self.area.parent
-      areas.push(city.parent.id)
-      areas.push(city.id)
-      areas.push(self.area.id)
+    if self.area_id
+      if self.area.children.any?
+        areas.push(self.area.parent.id)
+        areas.push(self.area.id)
+        areas.push(nil)
+      else
+        city = self.area.parent
+        areas.push(city.parent.id)
+        areas.push(city.id)
+        areas.push(self.area.id)
+      end
     end
     areas
   end
