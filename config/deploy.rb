@@ -4,7 +4,7 @@ require "capistrano/ext/multistage"       #多stage部署所需
 require 'bundler/capistrano'       #添加之后部署时会调用bundle install
 require 'tinder'
 
-set :stages, %w(production icolortest)
+set :stages, %w(production icolortest icolorstage)
 set :default_stage, "production"
 
 set :application, "icolor"
