@@ -78,6 +78,10 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
+    capistrano-unicorn (0.1.6)
+      capistrano
     cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -87,6 +91,7 @@ GEM
       execjs
     coffee-script-source (1.3.1)
     collections (0.1.4)
+    daemons (1.1.9)
     devise (2.0.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -96,12 +101,15 @@ GEM
       rails (>= 3.0)
       spreadsheet (>= 0.6)
     erubis (2.7.0)
+    eventmachine (1.0.0)
     exception_notification (2.6.1)
       actionmailer (>= 3.0.4)
     execjs (1.3.2)
       multi_json (~> 1.0)
     faraday (0.8.0)
       multipart-post (~> 1.1)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     fastercsv (1.5.5)
     grape (0.2.1)
       hashie (~> 1.2)
@@ -119,6 +127,7 @@ GEM
     httmultiparty (0.3.6)
       httparty (>= 0.7.3)
       multipart-post
+    http_parser.rb (0.5.3)
     httparty (0.8.1)
       multi_json
       multi_xml
@@ -138,6 +147,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    kgio (2.7.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -215,6 +225,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    raindrops (0.10.0)
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
@@ -257,6 +268,7 @@ GEM
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simple_oauth (0.1.9)
     spreadsheet (0.7.3)
       ruby-ole (>= 1.0)
     sprockets (2.2.2)
@@ -264,15 +276,36 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
+    tinder (1.9.2)
+      eventmachine (~> 1.0)
+      faraday (~> 0.8)
+      faraday_middleware (~> 0.9)
+      hashie (~> 1.0)
+      json (~> 1.7.5)
+      mime-types (~> 1.19)
+      multi_json (~> 1.5)
+      twitter-stream (~> 0.1)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-stream (0.1.16)
+      eventmachine (>= 0.12.8)
+      http_parser.rb (~> 0.5.1)
+      simple_oauth (~> 0.1.4)
     tzinfo (0.3.35)
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    unicorn (4.5.0)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     uuidtools (2.1.3)
     warden (1.2.0)
       rack (>= 1.0)
@@ -289,6 +322,8 @@ DEPENDENCIES
   awesome_print
   bond
   capistrano
+  capistrano-ext
+  capistrano-unicorn
   coffee-rails (~> 3.2.1)
   collections
   devise
@@ -318,6 +353,9 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 3.2.3)
   savon
+  thin
+  tinder
   uglifier (>= 1.0.3)
+  unicorn
   uuidtools
   wirble

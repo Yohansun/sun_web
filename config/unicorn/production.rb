@@ -3,13 +3,15 @@
 # ------------------------------------------------------------------------------
 
 # Set your full path to application.
-app_path = "/var/rails/icolor/current"
+app_path = "/home/www/rails/icolor/current"
 
 # Set unicorn options
 worker_processes 1
 preload_app true
 timeout 180
 listen "127.0.0.1:3005"
+
+#REMEMBER TO A2ENMOD MOD_PROXY PORXY_HTTP PROXY_BALANCER
 
 # Spawn unicorn master worker for user apps (group: apps)
 user 'root', 'root'

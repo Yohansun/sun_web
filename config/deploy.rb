@@ -1,56 +1,44 @@
 # -*- encoding : utf-8 -*-
-require "rvm/capistrano"
-set :rvm_ruby_string, '1.9.2'        # Or whatever env you want it to run in.
-set :rvm_type, :system
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+require "capistrano/ext/multistage"       #多stage部署所需
+require 'bundler/capistrano'       #添加之后部署时会调用bundle install
+require 'tinder'
 
-require 'bundler/capistrano'
+set :stages, %w(production icolortest)
+set :default_stage, "production"
 
 set :application, "icolor"
 
 set :use_sudo, false
 set :scm, :git
+set :git_shallow_clone, 1
+set :git_enable_submodules, 1
 set :deploy_via, :remote_cache
+set :deploy_env, 'production'
+
+set :keep_releases, 15
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-set :keep_releases, 3
+set :deployer, `whoami`.chomp
 
-set :git_shallow_clone, 1
-set :git_enable_submodules, 1
+def campfire_say(words)
+    campfire = Tinder::Campfire.new 'nio8', token:'398fa673d19f947080feec19139fa877551a7ea2', ssl_options: {verify:false}
+    room = campfire.find_room_by_id('527885')
+    room.speak words
+end
 
-server "203.156.231.37", :web, :app, :db, primary: true
-
-set :user, "root"
-set :repository, "git@github.com:nioteam/icolor.git"
-set :branch, "master"
-set :deploy_to, "/home/www/rails/icolor"
-
-set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb) 
-# tasks
-namespace :deploy do
-
-  namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} #{assets_dependencies.join ' '} | wc -l").to_i > 0
-        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
-      else
-        logger.info "Skipping asset pre-compilation because there were no asset changes"
-      end
-    end
-  end	
-
-  desc "Restart web server"
-  task :restart, roles: :app, except: {no_release: true} do
-    run "touch #{deploy_to}/current/tmp/restart.txt"
+namespace :notify do
+  desc 'Alert Campfire of a deploy'
+  task :campfire_start do
+    campfire_say "[CAP] #{deployer} is deploying #{application} to #{stage}..."
   end
 
-  desc "Symlink shared resources on each release"
-  task :symlink_shared, :roles => :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/system #{release_path}/public/system"
+  task :campfire_end do
+    campfire_say "[CAP] #{deployer} has deployed #{application} to #{stage}, it's cool!"
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared'
+before "deploy:update", "notify:campfire_start"
+after "deploy:restart", "notify:campfire_end"

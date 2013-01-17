@@ -17,13 +17,19 @@ gem 'remotipart', '~> 1.0'
 group :development do
   gem "capistrano"
   gem "rvm-capistrano"
+  gem "capistrano-ext"
+  gem 'tinder'
+  gem 'capistrano-unicorn'
   gem 'bond'
   gem 'wirble'
   gem "awesome_print"
   gem "map_by_method"
   gem "hirb"
   gem "quiet_assets"
+  gem 'thin'
 end
+
+gem 'unicorn'  
 
 gem "paperclip", "<3.0"
 
