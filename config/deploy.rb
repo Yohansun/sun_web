@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 require "capistrano/ext/multistage"       #多stage部署所需
