@@ -244,6 +244,10 @@ Icolor::Application.routes.draw do
       put :update_tags
     end
   end
+  # this route use for kaminari pagination
+  MagicContent::Engine.routes.draw do
+    resources :image_libraries
+  end
 
   #扩充magic_admin
   scope "/admin", :module =>"magic_admin" do
