@@ -88,5 +88,5 @@ ul.sub,#menu{margin: 0;}
       <% end %>
     </table>
   </div>
-  <%= paginate @images %>
+  <%= paginate @images if @images.present? %>
 </div>
