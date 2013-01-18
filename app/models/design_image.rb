@@ -12,7 +12,7 @@ class DesignImage < ActiveRecord::Base
   # validate :file_dimensions, :unless => "errors.any?"
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration'").order("design_images.id, design_images.created_at")
-  
+
   serialize :tags, Array
 
   has_attached_file :file,
@@ -24,7 +24,7 @@ class DesignImage < ActiveRecord::Base
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
-  validates_presence_of :area_id
+  # validates_presence_of :area_id
 
   def areas
     areas = []
