@@ -1,8 +1,14 @@
+<style type="text/css">
+.search_form{position:absolute;right:5px;top:5px;z-index:998;}
+.search_form .search_input{padding:3px 5px 4px;margin:0 0 0 10px;}
+/*ul.sub,#menu{margin: 0;}
+.content .title h5{padding:0 15px;}*/
+</style>
+
 <%- content_for :tail do %>
   <%= stylesheet_link_tag "image_libraries" %>
-  <%= javascript_include_tag 'twitter/bootstrap'%>
-
-  <script type="text/javascript" >
+  <%= javascript_include_tag 'twitter/bootstrap' %>
+  <script type="text/javascript">
     $(function(){
       $('.set_name').click(function(e){
         $(this).siblings('.name_form').show()
@@ -34,27 +40,28 @@
       $('.js-close').click(function(){
         $(this).parents('form').hide();
       })
-      $('.color_input').typeahead({
+      $('.color_input, .color_input2, .color_input3').typeahead({
         source: function(query, process){
-          $.get('/admin/content/design_images/autocomplete', {num: query}, function(data){
+          $.get('/admin/content/image_libraries/1/autocomplete', {num: query}, function(data){
              process(data)
            })
         }
       })
-      $('.color_input2').typeahead({
-        source: function(query, process){
-          $.get('/admin/content/design_images/autocomplete', {num: query}, function(data){
-             process(data)
-           })
+    });
+    $(function() {
+      $(".image-thumbnail").hover(
+        function () {
+          $(this).tooltip('show');
+        },
+        function () {
+          $(this).tooltip('hide');
         }
-      })
-      $('.color_input3').typeahead({
-        source: function(query, process){
-          $.get('/admin/content/design_images/autocomplete', {num: query}, function(data){
-             process(data)
-           })
-        }
-      })
+      );
+    });
+    $(function(){
+      <%- if flash[:alert] %>
+        alert("<%= flash[:alert]%>")
+      <%- end %>
     });
   </script>
 <%- end %>
@@ -62,7 +69,7 @@
   <div class="title">
     <h5>图库管理</h5>
   </div>
-      
+  
   <div class="widget first" style="position:relative;">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
       <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"]], params[:genre]), :style=>"width: 200px;"%>
@@ -103,11 +110,10 @@
           <td>
             <%= link_to '编辑', main_app.user_designs_path(image.user.id) %>
             <%= link_to '设置名称', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
-            <!-- <a href="javascript:void(0)" class="set_name" >设置名称</a>  -->
-            <%= link_to '设置标签', '' %>
+            <%= link_to '设置标签', main_app.image_library_categories_path(image) %>
             <%= link_to '设置色号', "javascript:void(0)", :class => 'set_color', :"data-id" => image.id %>
-            <%= link_to '审核', main_app.audited_image_library_path(image), :confirm => "确认审核通过吗"%>
-            <%= link_to '删除', main_app.delete_image_image_library_path(image,image_id: image.id), method: :delete, :confirm => "确定删除吗" %>
+            <%= link_to '审核', main_app.image_library_audited_path(image), :confirm => "确认审核通过吗"%>
+            <%= link_to '删除', main_app.image_library_destroy_image_path(image), method: :delete, :confirm => "确定删除吗" %>
             <%= render partial: 'name', :locals => { :image => image }%>
             <%= render partial: 'color', :locals => { :image => image }%>
           </td>

@@ -294,6 +294,10 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-bootstrap-rails (2.2.0)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
     twitter-stream (0.1.16)
       eventmachine (>= 0.12.8)
       http_parser.rb (~> 0.5.1)
@@ -355,6 +359,7 @@ DEPENDENCIES
   savon
   thin
   tinder
+  twitter-bootstrap-rails (>= 2.1.9)
   uglifier (>= 1.0.3)
   unicorn
   uuidtools

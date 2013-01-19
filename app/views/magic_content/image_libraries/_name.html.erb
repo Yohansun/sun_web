@@ -1,11 +1,11 @@
-<%= form_for [main_app,image], :html=> {:class => 'name_form', :id => image.id } do |f| %>
+<%= form_tag main_app.image_library_update_title_path(image), :class => 'name_form', :method => :put do %>
   <h3>设置名称</h3>
   <fieldset style="height:60px;">
     <label class="name_form_label">请输入名称：</label>
-    <input type="text" class="input-xxlarge" data-provide="typeahead" name="design_image[title]">
+    <input type="text" class="input-xxlarge" data-provide="typeahead" name="design_image[title]" value="<%= image.title if image %>">
   </fieldset>
   <div class="name_form_button" >
-  	<%= f.submit :class => 'greyishBtn name_commit', :disable_with => "提交中...",:value => "保存"%>
+  	<%= submit_tag "保存",:class => 'greyishBtn name_commit', :disable_with => "提交中..." %>
     <!-- <button class="greyishBtn">保存</button> -->
     <a href="javascript:;" class="js-close button greyishBtn" >取消</a>
   </div>
