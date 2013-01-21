@@ -6,7 +6,7 @@ server "42.121.19.234", :web, :app, :db, primary: true
 set :user, "root"
 
 set :repository, "git@github.com:nioteam/icolor.git"
-set :branch, "test"
+set :branch, "master"
 
 set :deploy_to, "/home/www/rails/icolor"
 
