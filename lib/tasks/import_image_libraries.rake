@@ -30,10 +30,39 @@ task :import_image_libraries => :environment  do
           room = ImageLibraryCategory.where(title: row[5]).first
           design_image.room = room.id if room
           design_image.content = row[13]
+          design_image.user_id = new_user.id
           design_image.source = 'sina'
           design_image.save  
         end    
       end
+    end
+  end
+
+  # migartion designs table some fields to design_images
+  designs = Design.all
+  designs.each do |design|
+    tags = []
+    design.tags.each do |tag|
+      img_lib_cats = ImageLibraryCategory.where("title like '%#{tag}%'")
+      if img_lib_cats.present?
+        img_lib_cats.each do |img_lib_cat|
+          tags << img_lib_cat.id
+        end
+      end
+    end
+    styles = ImageLibraryCategory.where("title like '%#{design.style}%'")
+    if styles.present?
+      styles.each do |style|
+        tags << style.id
+      end
+    end
+    design.design_images.each do |design_img| 
+      design_img.title = design.title
+      design_img.content = design.content
+      design_img.area_id = design.area_id
+      design_img.color1 = design.recommend_color_category1
+      design_img.tags = tags unless tags.blank?
+      design_img.save
     end
   end
 end
