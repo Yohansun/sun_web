@@ -36,6 +36,7 @@ module MagicContent
     end
 
     def update_title
+      error_color = []
       @image = DesignImage.find(params[:image_library_id])
       image_params = params[:design_image]
       @image.last_user_id = current_admin.id
@@ -45,10 +46,21 @@ module MagicContent
         next if image_params["color#{item}".to_sym].blank?
         if ColorCode.find_by_code(image_params["color#{item}".to_sym])
           @image.send("color#{item}=", image_params["color#{item}".to_sym])
+        else
+          error_color.push(image_params["color#{item}".to_sym])
+          # flash[:notice] = "色号不正确"
         end
       end
       if @image.save
-        flash[:notice] = "保存成功"
+        str = ''
+        if error_color.any?
+          error_color.each do |color|
+            str += color
+          end
+          flash[:notice] = "保存成功,忽略不正确的色号: #{str}"
+        else
+          flash[:notice] = "保存成功"
+        end
       else
         flash[:alert] = "#{@image.errors.full_messages}"
       end

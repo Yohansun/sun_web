@@ -22,7 +22,8 @@
   border-color: #eed3d7;
 }
 </style>
-
+<div class="color_form_overlay">
+</div>
 <%- content_for :tail do %>
   <%= stylesheet_link_tag "image_libraries" %>
   <%= javascript_include_tag 'twitter/bootstrap' %>
@@ -30,11 +31,14 @@
     $(function(){
       $('.set_name').click(function(e){
         $(this).siblings('.name_form').show()
+        $('.color_form_overlay').show()
       })
       $('.set_color').click(function(e){
         $(this).siblings('.color_form').show()
+        $('.color_form_overlay').show()
       })
       $('.color_commit').click(function(){
+        $('.color_form_overlay').hide();
         // console.log($(this).parents('tr').html())
         if ($(this).parent().siblings('fieldset').children('input').val() == ''){
         alert('请至少在第一行输入一个色号!');
@@ -50,6 +54,7 @@
         }
       })
       $('.name_commit').click(function(){
+        $('.color_form_overlay').hide();
         if ($(this).parent().siblings('fieldset').children('input').val() == ''){
         alert('请输入名称');
         return false;
@@ -57,6 +62,8 @@
       })
       $('.js-close').click(function(){
         $(this).parents('form').hide();
+        $(this).parents('form').find('input[type="text"]').attr('value','');
+        $('.color_form_overlay').hide();
       })
       $('.color_input, .color_input2, .color_input3').typeahead({
         source: function(query, process){
@@ -144,3 +151,4 @@
   </div>
   <%= paginate @images if @images.present? %>
 </div>
+
