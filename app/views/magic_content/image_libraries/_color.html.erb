@@ -1,0 +1,20 @@
+<%= form_tag main_app.image_library_update_title_path(image), :class => 'color_form', :method => :put do %>
+  <h3>设置色号</h3>
+  <fieldset style="height:30px;padding:5px 60px">
+    <label class="color_form_label">请输入色号：</label> 
+    <input type="text" class="color_input" data-provide="typeahead" name="design_image[color1]" value="<%= image.color1 if image %>">
+  </fieldset>
+  <fieldset style="height:30px;padding:5px 60px">
+    <label class="color_form_label">请输入色号：</label>
+    <input type="text" class="color_input2" data-provide="typeahead" name="design_image[color2]" value="<%= image.color2 if image %>">
+  </fieldset>
+  <fieldset style="height:30px;padding:5px 60px">
+    <label class="color_form_label">请输入色号：</label> 
+    <input type="text" class="color_input3" data-provide="typeahead" name="design_image[color3]" value="<%= image.color3 if image %>">
+  </fieldset>
+  <div class="color_form_button" >
+    <%= submit_tag "保存", :class => 'greyishBtn color_commit', :id => 'commit#{image.id}' , :disable_with => "提交中..." %>
+    <!-- <a href="javascript:;" class="greyishBtn color_commit ppp" >aa</a> -->
+    <a href="javascript:;" class="js-close button greyishBtn" >取消</a>
+  </div>
+<%- end %>

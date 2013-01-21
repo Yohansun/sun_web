@@ -211,6 +211,7 @@ Icolor::Application.routes.draw do
     resources :sys_msgs
     resources :moods
   end
+
   resources :design_images
 
   #修改个人签名
@@ -240,10 +241,15 @@ Icolor::Application.routes.draw do
       get :delete_inspiration
     end
     resources :image_libraries do
+      get :autocomplete
       get :categories
       put :update_tags
+      put :update_title
+      get :audited
+      delete :destroy_image
     end
   end
+
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
     resources :image_libraries

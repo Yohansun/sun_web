@@ -61,5 +61,8 @@ gem 'collections'
 gem 'grape'
 gem 'uuidtools'
 
+#自动补全
+gem 'twitter-bootstrap-rails', '>= 2.1.9'
+
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"

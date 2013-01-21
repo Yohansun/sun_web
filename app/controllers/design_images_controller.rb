@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DesignImagesController < ApplicationController
   def create
     newparams = coerce(params)

@@ -1,7 +1,53 @@
-<%= content_for :tail do %>
-  <%= javascript_include_tag "bootstrap.min" %>
-  <%= stylesheet_link_tag "bootstrap.min" %>
+<style type="text/css">
+.search_form{position:absolute;right:5px;top:5px;z-index:998;}
+.search_form .search_input{padding:3px 5px 4px;margin:0 0 0 10px;}
+/*ul.sub,#menu{margin: 0;}
+.content .title h5{padding:0 15px;}*/
+</style>
+
+<%- content_for :tail do %>
+  <%= stylesheet_link_tag "image_libraries" %>
+  <%= javascript_include_tag 'twitter/bootstrap' %>
   <script type="text/javascript">
+    $(function(){
+      $('.set_name').click(function(e){
+        $(this).siblings('.name_form').show()
+      })
+      $('.set_color').click(function(e){
+        $(this).siblings('.color_form').show()
+      })
+      $('.color_commit').click(function(){
+        // console.log($(this).parents('tr').html())
+        if ($(this).parent().siblings('fieldset').children('input').val() == ''){
+        alert('请至少在第一行输入一个色号!');
+        return false;
+        }
+        var $input_parent = $(this).parent().siblings('fieldset')
+        var $input1 = $input_parent.children('.color_input').val();
+        var $input2 = $input_parent.children('.color_input2').val();
+        var $input3 = $input_parent.children('.color_input3').val();
+        if ($input1 == $input2 || $input1 == $input3 || ($input2 != '' && $input2 == $input3)){
+        alert('不能输入相同色号');
+        return false;
+        }
+      })
+      $('.name_commit').click(function(){
+        if ($(this).parent().siblings('fieldset').children('input').val() == ''){
+        alert('请输入名称');
+        return false;
+      }
+      })
+      $('.js-close').click(function(){
+        $(this).parents('form').hide();
+      })
+      $('.color_input, .color_input2, .color_input3').typeahead({
+        source: function(query, process){
+          $.get('/admin/content/image_libraries/1/autocomplete', {num: query}, function(data){
+             process(data)
+           })
+        }
+      })
+    });
     $(function() {
       $(".image-thumbnail").hover(
         function () {
@@ -13,24 +59,17 @@
       );
     });
     $(function(){
-      <%- if flash[:alert].present? %>
-        alert('<%= flash[:alert] %>')
-      <%- end %>  
+      <%- if flash[:alert] %>
+        alert("<%= flash[:alert]%>")
+      <%- end %>
     });
   </script>
-<%- end -%>
-
-<style type="text/css">
-.search_form{position:absolute;right:5px;top:5px;z-index:998;}
-.search_form .search_input{padding:3px 5px 4px;margin:0 0 0 10px;}
-ul.sub,#menu{margin: 0;}
-.content .title h5{padding:0 15px;}
-</style>
+<%- end %>
 <div class="content">
   <div class="title">
     <h5>图库管理</h5>
   </div>
-
+  
   <div class="widget first" style="position:relative;">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
       <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"]], params[:genre]), :style=>"width: 200px;"%>
@@ -55,37 +94,32 @@ ul.sub,#menu{margin: 0;}
         <th width='35px'>审核?</th>
         <th width='260px'>操作</th>
       </thead>
-      <% if @images.present? %>
-        <tbody>
-          <%- @images.each do |image| -%>
-          <tr>
-            <td><%= image.id %></td>
-            <td><%= image.title %></td>
-            <td>
-              <%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail',
-                :"data-placement" => 'right',
-                :"data-html" => true,
-                :"data-original-title" => "#{image_tag(image.file(:slide_thumb))}",
-                rel: 'tooltip') %>
-            <td>&nbsp;</td>
-            <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-            <td><%= image.try(:last_user).try(:username) if image.last_user %></td>
-            <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
-            <td><%= image.channel_name %></td>
-            <td><%= image.try(:user).try(:username) %></td>
-            <td><%= image.audited? ? 'Y' : 'N' %></td>
-            <td>
-              <%= link_to '编辑', '' %>
-              <%= link_to '设置名称', '' %>
-              <%= link_to '设置标签', main_app.image_library_categories_path(image) %>
-              <%= link_to '设置色号', '' %>
-              <%= link_to '审核', '' %>
-              <%= link_to '删除', '' %>
-            </td>
-          </tr>
-          <%- end -%>
-        </tbody>
-      <% end %>
+      <tbody>
+        <%- @images.each do |image| -%>
+        <tr>
+          <td><%= image.id %></td>
+          <td><%= truncate(image.title, length: 20) %></td>
+          <td><%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail') %></td>
+          <td>&nbsp;</td>
+          <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= image.last_user.username if image.last_user %></td>
+          <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
+          <td><%= image.channel_name %></td>
+          <td><%= image.user.username %></td>
+          <td><%= image.audited? ? 'Y' : 'N' %></td>
+          <td>
+            <%= link_to '编辑', main_app.user_designs_path(image.user.id) %>
+            <%= link_to '设置名称', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
+            <%= link_to '设置标签', main_app.image_library_categories_path(image) %>
+            <%= link_to '设置色号', "javascript:void(0)", :class => 'set_color', :"data-id" => image.id %>
+            <%= link_to '审核', main_app.image_library_audited_path(image), :confirm => "确认审核通过吗"%>
+            <%= link_to '删除', main_app.image_library_destroy_image_path(image), method: :delete, :confirm => "确定删除吗" %>
+            <%= render partial: 'name', :locals => { :image => image }%>
+            <%= render partial: 'color', :locals => { :image => image }%>
+          </td>
+        </tr>
+        <%- end -%>
+      </tbody>
     </table>
   </div>
   <%= paginate @images if @images.present? %>
