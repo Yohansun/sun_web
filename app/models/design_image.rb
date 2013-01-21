@@ -11,7 +11,7 @@ class DesignImage < ActiveRecord::Base
 
   # validate :file_dimensions, :unless => "errors.any?"
 
-  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration'").order("design_images.id, design_images.created_at")
+  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null").order("design_images.id, design_images.created_at")
 
   serialize :tags, Array
 
@@ -61,7 +61,7 @@ class DesignImage < ActiveRecord::Base
   def self.search(genre, keyword)
     case genre
       when 'title'
-        DesignImage.available.where(title: name)
+        DesignImage.available.where(title: keyword)
       when 'username'
         DesignImage.joins(:user).available.where(["users.username = ?", keyword])
       when 'yes_update'
@@ -79,8 +79,7 @@ class DesignImage < ActiveRecord::Base
           DesignImage.available.where(imageable_type: 'MasterDesign')
         end
       when 'last_user_id'
-        last_user_id = User.select("id").where(username: keyword).first
-        DesignImage.available.where(["design_images.last_user_id = ?", last_user_id])
+        DesignImage.includes(:last_user).available.where(["admins.username = ?", keyword])
     end
   end
 end
