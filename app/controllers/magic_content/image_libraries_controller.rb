@@ -21,9 +21,13 @@ module MagicContent
     end
 
     def update_tags
-      image = DesignImage.find(params[:image_library_id])
-      if image.update_attributes(tags: params[:tags], area_id: params[:area_id])
-        flash[:alert] = "保存成功"
+      @image = DesignImage.find(params[:image_library_id])
+      @image.tags = params[:tags]
+      @image.area_id = params[:area_id]
+      @image.last_user_id = current_admin.id
+      @image.last_updated_at = Time.now
+      if @image.save
+        flash[:notice] = "保存成功"
         redirect_to main_app.image_libraries_path
       else
         flash[:alert] = "保存失败, 区域信息不能为空"
@@ -34,6 +38,8 @@ module MagicContent
     def update_title
       @image = DesignImage.find(params[:image_library_id])
       image_params = params[:design_image]
+      @image.last_user_id = current_admin.id
+      @image.last_updated_at = Time.now
       @image.title = image_params[:title] if image_params[:title].present?
       [1,2,3].each do |item|
         next if image_params["color#{item}".to_sym].blank?
@@ -42,7 +48,7 @@ module MagicContent
         end
       end
       if @image.save
-        flash[:alert] = "保存成功"
+        flash[:notice] = "保存成功"
       else
         flash[:alert] = "#{@image.errors.full_messages}"
       end
@@ -59,7 +65,7 @@ module MagicContent
     def destroy_image
       @image = DesignImage.find(params[:image_library_id])
       if @image.destroy
-        flash[:alert] = "删除成功"
+        flash[:notice] = "删除成功"
       else
         flash[:alert] = "删除失败!#{@image.errors.full_messages}"
       end
@@ -68,9 +74,11 @@ module MagicContent
 
     def audited
       @image = DesignImage.find(params[:image_library_id])
+      @image.last_user_id = current_admin.id
+      @image.last_updated_at = Time.now
       @image.audited = true
       if @image.save
-        flash[:alert] = "审核成功！"
+        flash[:notice] = "审核成功！"
       else
         flash[:alert] = "审核未成功！#{@image.errors.full_messages}"
       end

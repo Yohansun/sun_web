@@ -1,13 +1,13 @@
 #encoding:utf-8
 
 class DesignImage < ActiveRecord::Base
-  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :tags, :area_id
+  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :tags, :area_id, :last_user_id, :last_updated_at
 
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
   belongs_to :user
   belongs_to :area
-  belongs_to :last_user, class_name: 'User', primary_key: 'id'
+  belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
 
   # validate :file_dimensions, :unless => "errors.any?"
 
