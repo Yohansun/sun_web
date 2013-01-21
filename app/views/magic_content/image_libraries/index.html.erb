@@ -112,13 +112,13 @@
         <%- @images.each do |image| -%>
         <tr>
           <td><%= image.id %></td>
-          <td><%= truncate(image.title, length: 20) %></td>
+          <td><%= link_to(truncate(image.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.title.present? %></td>
           <td><%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail') %></td>
           <td>&nbsp;</td>
           <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
           <td><%= image.last_user.username if image.last_user %></td>
           <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
-          <td><%= image.channel_name %></td>
+          <td><%= link_to(image.channel_name, main_app.user_design_path(user_id: image.user_id, id: image.imageable_id)) %></td>
           <td><%= image.user.username %></td>
           <td><%= image.audited? ? 'Y' : 'N' %></td>
           <td>
