@@ -38,6 +38,8 @@
   </div>
   <br/>
   <div>
+    <h3><%= @image.title %></h3>
+    <br/>
     <div class="image-preview">
       <%= image_tag(@image.file.path(:slide), width: '500px') %>
     </div>
@@ -65,7 +67,7 @@
           					<%- child.children.each_with_index do |node, sub_index| -%>
           					<tr>
           						<td width='33%'>
-                      <%= check_box_tag "tags[]", node.id, @image.tags.include?("#{node.id}") %>&nbsp;<%= node.title %>
+                      <%= check_box_tag "tags[]", node.id, @image_tag_ids.include?(node.id) %>&nbsp;<%= node.title %>
               				</td>
               			</tr>
               			<%- end -%>
@@ -73,7 +75,7 @@
               	</td>
               <%- else -%>
               	<%= "</tr><tr>".html_safe if index % 5 == 0%>
-              	<td><%= check_box_tag "tags[]", child.id, @image.tags.include?("#{child.id}") %>&nbsp;<%= child.title %></td>
+              	<td><%= check_box_tag "tags[]", child.id, @image_tag_ids.include?(child.id) %>&nbsp;<%= child.title %></td>
               <%- end -%>
         		<%- end %>
         		</tr>
