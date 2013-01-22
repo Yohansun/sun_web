@@ -17,12 +17,17 @@ module MagicContent
 
     def categories
       @image = DesignImage.find(params[:image_library_id])
+      @image_tag_ids = @image.tags.map(&:image_library_category_id)
       @categories = ImageLibraryCategory.where(parent_id: "0")
     end
 
     def update_tags
       @image = DesignImage.find(params[:image_library_id])
-      @image.tags = params[:tags]
+      if params[:tags].present?
+        params[:tags].each do |tag|
+          @image.tags << ImageTag.new(image_library_category_id: tag)
+        end
+      end
       @image.area_id = params[:area_id]
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now

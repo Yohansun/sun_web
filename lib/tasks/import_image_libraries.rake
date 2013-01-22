@@ -4,7 +4,7 @@ require 'spreadsheet'
 desc "图库数据导入"
 task :import_image_libraries => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
-  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130109.xls"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130122.xls"
   sheet1 = book.worksheet 0
   sheet1.each do |row|
     new_user = User.new
