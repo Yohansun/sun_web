@@ -28,10 +28,18 @@ module MagicContent
       @image.last_updated_at = Time.now
       if @image.save
         flash[:notice] = "保存成功"
-        redirect_to main_app.image_libraries_path
+        if params[:genre].present?
+          redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+        else
+          redirect_to image_libraries_path
+        end
       else
         flash[:alert] = "保存失败, 区域信息不能为空"
-        redirect_to main_app.image_library_categories_path(image)
+        if params[:genre].present?
+          redirect_to main_app.image_library_categories_path(image, :genre => params[:genre], :keywords => params[:keywords])
+        else
+          redirect_to main_app.image_library_categories_path(image)
+      end
       end
     end
 
@@ -64,7 +72,11 @@ module MagicContent
       else
         flash[:alert] = "#{@image.errors.full_messages}"
       end
-      redirect_to image_libraries_path
+      if params[:genre].present?
+        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+      else
+        redirect_to image_libraries_path
+      end
     end
 
     def autocomplete
@@ -81,7 +93,11 @@ module MagicContent
       else
         flash[:alert] = "删除失败!#{@image.errors.full_messages}"
       end
-      redirect_to main_app.image_libraries_path
+      if params[:genre].present?
+        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+      else
+        redirect_to image_libraries_path
+      end
     end
 
     def audited
@@ -94,7 +110,11 @@ module MagicContent
       else
         flash[:alert] = "审核未成功！#{@image.errors.full_messages}"
       end
-      redirect_to main_app.image_libraries_path
+      if params[:genre].present?
+        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+      else
+        redirect_to image_libraries_path
+      end
     end
 
   end
