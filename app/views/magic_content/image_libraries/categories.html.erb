@@ -1,14 +1,6 @@
-<%- content_for :head do %>
-	<style type="text/css">
-	.tags_main h2{margin-bottom:10px;background:#ddd;padding:5px;}
-	.tags_main table{margin-bottom:20px;}
-	.tags_main table td,.tags_main table th{padding:5px;}
-	.tags_main table td span{margin-top:2px;}
-	.tags_main table td h5{background:#eee;}
-	</style>
-<%- end %>
 <%- content_for :tail do %>
-  <%= javascript_include_tag "LinkageSelect.js", "/location.js"  %>
+  <%= stylesheet_link_tag "image_libraries" %>
+  <%= javascript_include_tag "LinkageSelect.js", "/location.js", "keymaster.min"  %>
 	<script type="text/javascript">
     $(function() {
       var options = { data  : data }
@@ -28,59 +20,72 @@
       });
     });
     $(function(){
-      <%- if flash[:alert].present? %>
-        alert('<%= flash[:alert] %>')
-      <%- end %>  
+      key('left', function(event, handler){
+        alert('left');
+      });
+      key('right', function(event, handler){
+        alert('right');
+      });      
     });
 	</script>
 <%- end %>
 
 <div class="content tags_main">
-  <h2>按区域</h2>
-  <table>
-    <tr>
-      <td><select id="province" class="level_1">省</select></td>
-      <td><select id="city" class="level_2">市</select></td>
-      <td><select id="county" class="level_3">区</select></td>
-    </tr>
-  </table>
-<%= form_tag main_app.image_library_update_tags_path(@image, :genre => params[:genre], :keywords => params[:keywords]), :method => :put do %>
-  <%= hidden_field_tag "area_id", @image.areas.last %>
-	<%- @categories.each do |c| %>
-		<h2><%= c.title %></h2>
-		<table width='100%'>
-			<tr>
-			<%- c.children.each_with_index do |child, index|%>
-				<%- if child.children.any? -%>
-					<%= "</tr><tr>".html_safe if child.id > 210 && index % 7 == 0%>
-					<td>
-						<h5><%= child.title%></h5>
-						<table>
-							<%- child.children.each_with_index do |node, sub_index| -%>
-							<tr>
-								<%#= "</tr><tr>".html_safe if node.id > 210 && sub_index % 3 == 0%>
-								<td width='33%'>
-									<%= check_box_tag "tags[]", node.id, @image.tags.include?("#{node.id}") %>&nbsp;<%= node.title %>
-								</td>
-							</tr>
-							<%- end -%>
-						</table>
-					</td>
-				<%- else -%>
-					<%= "</tr><tr>".html_safe if index % 10 == 0%>
-					<td><%= check_box_tag "tags[]", child.id, @image.tags.include?("#{child.id}") %> <%= child.title %></td>
-				<%- end -%>
-			<%- end %>
-			</tr>
-		</table>
-	<%- end %>
-	<div style="text-align:center">
-		<%= submit_tag "确定修改标签", :class=>"button basicBtn"%>
-		<%= link_to "取消", main_app.image_libraries_path(:genre => params[:genre], :keywords => params[:keywords]), :class=>"button basicBtn", :style=>"padding:3px 14px 4px" %>
-	</div>
-<%- end %>
+  <%= render partial: 'layouts/flash_message' %>
+  <div class="title">
+    <h5>
+      <%= link_to '图库管理', main_app.image_libraries_path %>&nbsp;&nbsp;>&nbsp;
+      <%= link_to(@image.imageable.title, main_app.user_design_path(user_id: @image.user_id, id: @image.imageable_id), target: '_blank') if @image.imageable.title.present? %>
+    </h5>
+  </div>
+  <br/>
+  <div>
+    <div class="image-preview">
+      <%= image_tag(@image.file.path(:slide), width: '500px') %>
+    </div>
+    <div class="tags-container">
+      <h2>按区域</h2>
+      <table>
+        <tr>
+          <td><select id="province" class="level_1">省</select></td>
+          <td><select id="city" class="level_2">市</select></td>
+          <td><select id="county" class="level_3">区</select></td>
+        </tr>
+      </table>
+      <%= form_tag main_app.image_library_update_tags_path(@image, :genre => params[:genre], :keywords => params[:keywords]), :method => :put do %>
+        <%= hidden_field_tag "area_id", @image.areas.last %>
+        <%- @categories.each do |c| %>
+          <h2><%= c.title %></h2>
+          <table width='100%'>
+          	<tr>
+          	<%- c.children.each_with_index do |child, index|%>
+          		<%- if child.children.any? -%>
+          			<%= "</tr><tr>".html_safe if child.id > 210 && index % 4 == 0%>
+          			<td>
+          				<h5><%= child.title%></h5>
+          				<table>
+          					<%- child.children.each_with_index do |node, sub_index| -%>
+          					<tr>
+          						<td width='33%'>
+                      <%= check_box_tag "tags[]", node.id, @image.tags.include?("#{node.id}") %>&nbsp;<%= node.title %>
+              				</td>
+              			</tr>
+              			<%- end -%>
+              		</table>
+              	</td>
+              <%- else -%>
+              	<%= "</tr><tr>".html_safe if index % 5 == 0%>
+              	<td><%= check_box_tag "tags[]", child.id, @image.tags.include?("#{child.id}") %>&nbsp;<%= child.title %></td>
+              <%- end -%>
+        		<%- end %>
+        		</tr>
+        	</table>
+        <%- end %>
+        <div style="text-align:center">
+          <%= submit_tag "确定修改标签", :class=>"button basicBtn"%>
+          <%= link_to "取消", main_app.image_libraries_path(:genre => params[:genre], :keywords => params[:keywords]), :class=>"button basicBtn", :style=>"padding:3px 14px 4px" %>
+        </div>
+      <%- end %>
+    </div>
+  </div>
 </div>
-
-
-
-
