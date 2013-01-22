@@ -1,29 +1,4 @@
-<style type="text/css">
-.search_form{position:absolute;right:5px;top:5px;z-index:998;}
-.search_form .search_input{padding:3px 5px 4px;margin:0 0 0 10px;}
-.alert {
-  padding: 8px 35px 8px 14px;
-  margin-bottom: 20px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-.alert-success {
-  color: #468847;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-}
-.alert-error {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
-}
-</style>
-<div class="color_form_overlay">
-</div>
+<div class="color_form_overlay"></div>
 <%- content_for :tail do %>
   <%= stylesheet_link_tag "image_libraries" %>
   <%= javascript_include_tag 'twitter/bootstrap' %>
@@ -127,7 +102,8 @@
               :"data-original-title" => "#{image_tag(image.file(:slide_thumb))}",
               rel: 'tooltip') %>
           </td>
-          <td>&nbsp;</td>
+          <td>
+            <%= link_to(truncate(image.imageable.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.imageable.title.present? %></td>
           <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
           <td><%= image.last_user.username if image.last_user %></td>
           <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
