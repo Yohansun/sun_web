@@ -15,15 +15,36 @@
         sel.bind('.level_2', null, '请选择');
         sel.bind('.level_3', null, '请选择');
       <%- end -%>
-      $('#county').change(function() {
-        $('input#area_id').val($(this).val());
-      });
     });
     $(function(){
       key('left', function(event, handler){
       });
       key('right', function(event, handler){
       });      
+    });
+    $(function(){
+    	$(".check_boxes").bind("click",function(){
+			  $.ajax({
+			    type: 'PUT',
+			    url: '<%= main_app.image_library_update_tags_path(image_library_id: @image.id) %>',
+			    data: {tag: $(this).val()},
+			    error: function(){
+			    	alert("保存失败");
+			    }
+				});
+			});
+    });
+    $(function(){
+      $("#county").bind("change",function(){
+        $.ajax({
+          type: 'PUT',
+          url: '<%= main_app.image_library_update_tags_path(image_library_id: @image.id) %>',
+          data: {area_id: $(this).val()},
+          error: function() {
+          	alert("地区保存失败");
+          }
+        });
+      });
     });
 	</script>
 <%- end %>
@@ -41,7 +62,7 @@
     <h3><%= @image.title %></h3>
     <br/>
     <div class="image-preview">
-      <%= image_tag(@image.file.path(:slide), width: '500px') %>
+      <%= image_tag(@image.file(:slide), width: '500px') %>
     </div>
     <div class="tags-container">
       <h2>按区域</h2>
@@ -52,39 +73,32 @@
           <td><select id="county" class="level_3">区</select></td>
         </tr>
       </table>
-      <%= form_tag main_app.image_library_update_tags_path(@image, :genre => params[:genre], :keywords => params[:keywords]), :method => :put do %>
-        <%= hidden_field_tag "area_id", @image.areas.last %>
-        <%- @categories.each do |c| %>
-          <h2><%= c.title %></h2>
-          <table width='100%'>
-          	<tr>
-          	<%- c.children.each_with_index do |child, index|%>
-          		<%- if child.children.any? -%>
-          			<%= "</tr><tr>".html_safe if child.id > 210 && index % 4 == 0%>
-          			<td>
-          				<h5><%= child.title%></h5>
-          				<table>
-          					<%- child.children.each_with_index do |node, sub_index| -%>
-          					<tr>
-          						<td width='33%'>
-                      <%= check_box_tag "tags[]", node.id, @image_tag_ids.include?(node.id) %>&nbsp;<%= node.title %>
-              				</td>
-              			</tr>
-              			<%- end -%>
-              		</table>
-              	</td>
-              <%- else -%>
-              	<%= "</tr><tr>".html_safe if index % 5 == 0%>
-              	<td><%= check_box_tag "tags[]", child.id, @image_tag_ids.include?(child.id) %>&nbsp;<%= child.title %></td>
-              <%- end -%>
-        		<%- end %>
-        		</tr>
-        	</table>
-        <%- end %>
-        <div style="text-align:center">
-          <%= submit_tag "确定修改标签", :class=>"button basicBtn"%>
-          <%= link_to "取消", main_app.image_libraries_path(:genre => params[:genre], :keywords => params[:keywords]), :class=>"button basicBtn", :style=>"padding:3px 14px 4px" %>
-        </div>
+      <%- @categories.each do |c| %>
+        <h2><%= c.title %></h2>
+        <table width='100%'>
+        	<tr>
+        	<%- c.children.each_with_index do |child, index|%>
+        		<%- if child.children.any? -%>
+        			<%= "</tr><tr>".html_safe if child.id > 210 && index % 4 == 0%>
+        			<td>
+        				<h5><%= child.title%></h5>
+        				<table>
+        					<%- child.children.each_with_index do |node, sub_index| -%>
+        					<tr>
+        						<td width='33%'>
+                    <%= check_box_tag "tag[]", node.id, @image_tag_ids.include?(node.id), :class => "check_boxes" %>&nbsp;<%= node.title %>
+            				</td>
+            			</tr>
+            			<%- end -%>
+            		</table>
+            	</td>
+            <%- else -%>
+            	<%= "</tr><tr>".html_safe if index % 5 == 0%>
+            	<td><%= check_box_tag "tag[]", child.id, @image_tag_ids.include?(child.id), :class => "check_boxes" %>&nbsp;<%= child.title %></td>
+            <%- end -%>
+      		<%- end %>
+      		</tr>
+      	</table>
       <%- end %>
     </div>
   </div>
