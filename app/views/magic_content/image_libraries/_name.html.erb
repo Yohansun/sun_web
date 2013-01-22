@@ -2,19 +2,19 @@
   <h3>设置详情</h3>
   <fieldset>
     <label class="name_form_label">请输入名称：</label>
-    <input type="text" class="input-xxlarge" data-provide="typeahead" name="design_image[title]" value="<%= image.title if image %>">
+    <input type="text" class="input-xxlarge" data-provide="typeahead" name="design_image[title]" value="<%= image.title %>">
   </fieldset>
   <fieldset>
     <label class="name_form_label">设计理念：</label>
-    <textarea class="design_name" name="design_image[content]"></textarea>
+    <textarea class="design_name" name="design_image[content]"><%= image.content %></textarea>
   </fieldset>
   <fieldset>
     <label class="name_form_label">推荐理由：</label>
-    <textarea class="reason_name" name="design_image[reason]"></textarea>
+    <textarea class="design_name" name="design_image[reason]"><%= image.reason %></textarea>
   </fieldset>
   <div class="name_form_button" >
   	<%= submit_tag "保存",:class => 'greyishBtn name_commit', :disable_with => "提交中...", :params =>{:genre => params[:genre], :keywords => params[:keywords]} %>
     <!-- <button class="greyishBtn">保存</button> -->
-    <a href="javascript:;" class="js-close button greyishBtn" >取消</a>
+    <input class="js-close button greyishBtn" type="reset" value="取消" />
   </div>
 <%- end %>

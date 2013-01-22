@@ -37,8 +37,10 @@
       })
       $('.js-close').click(function(){
         $(this).parents('form').hide();
-        $(this).parents('form').find('input[type="text"]').attr('value','');
         $('.color_form_overlay').hide();
+        // $(this).parents('form').find('input[type="text"]').attr('value','');
+        // $(this).parents('form').find('.design_name').text();
+        // $('.name_form')[0].reset();
       })
       $('.color_input, .color_input2, .color_input3').typeahead({
         source: function(query, process){

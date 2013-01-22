@@ -50,17 +50,20 @@ module MagicContent
 
     def update_title
       error_color = []
+      color = []
       @image = DesignImage.find(params[:image_library_id])
       image_params = params[:design_image]
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       @image.title = image_params[:title] if image_params[:title].present?
-      @image.content = image_params[:content] if image_params[:content].present?
-      @image.reason = image_params[:reason] if image_params[:reason].present?
+      @image.content = image_params[:content]
+      @image.reason = image_params[:reason]
       [1,2,3].each do |item|
-        next if image_params["color#{item}".to_sym].blank?
         if ColorCode.find_by_code(image_params["color#{item}".to_sym])
           @image.send("color#{item}=", image_params["color#{item}".to_sym])
+          color.push(image_params["color#{item}".to_sym])
+        elsif image_params["color#{item}".to_sym] == ""
+          @image.send("color#{item}=", "")
         else
           error_color.push(image_params["color#{item}".to_sym])
           # flash[:notice] = "色号不正确"
@@ -69,11 +72,14 @@ module MagicContent
       if @image.save
         str = ''
         if error_color.any?
-          error_color.each do |color|
-            str += color
+          if error_color.length == 1 && color.length == 0
+            str = error_color.first
+            flash[:alert] = "您的色号: #{str} 错误,不能保存"
+          else
+            error_color.each {|color| str += color}
+            flash[:notice] = "保存成功,忽略不正确的色号: #{str}"
           end
-          flash[:notice] = "保存成功,忽略不正确的色号: #{str}"
-        else
+        else 
           flash[:notice] = "保存成功"
         end
       else
