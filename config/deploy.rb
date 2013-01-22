@@ -5,6 +5,7 @@ require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 require "capistrano/ext/multistage"       #多stage部署所需
 require 'bundler/capistrano'       #添加之后部署时会调用bundle install
 require 'tinder'
+require "whenever/capistrano"
 
 set :stages, %w(production icolortest)
 set :default_stage, "production"

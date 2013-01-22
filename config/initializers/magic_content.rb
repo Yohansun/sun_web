@@ -27,7 +27,8 @@ MagicContent.extra_menu_items = [
     {name: '报表下载', url: :report_export_path},
     {name: 'iColor工具管理', url: :tools_path},
     {name: 'iColor个人主页皮肤管理', url: :skins_path},
-    {name: 'iColor我型我秀', url: :my_show_settings_path}
+    {name: 'iColor我型我秀', url: :my_show_settings_path},
+    {name: '硬性广告数据统计', url: :hard_sells_path}
 ]
 
 Rails.application.config.to_prepare do

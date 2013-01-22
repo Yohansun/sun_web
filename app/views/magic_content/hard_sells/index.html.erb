@@ -1,0 +1,70 @@
+<div class="content">
+  <div class="title">
+    <h5>硬广数据统计</h5>
+  </div>
+
+  <div class="widget">
+    <div class="head">
+      <h5 class="iFrames">筛选条件</h5>
+    </div>
+    <form class="mainForm" method="get">
+      <fieldset>
+        <div class="rowElem noborder" style="padding:0 14px;" id="start_date">
+          <label for="start_date">开始日期:</label>
+          <div class="formRight" style="z-index:20;">
+            <input type="text" class="datepicker" name="start_date" value="<%= params[:start_date] %>"/>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <div class="rowElem noborder" style="padding:0 14px;" id="end_date">
+          <label for="end_date">结束日期:</label>
+          <div class="formRight" style="z-index:20;">
+            <input type="text" class="datepicker" name="end_date" value="<%= params[:end_date] %>"/>
+          </div>
+          <div class="fix"></div>
+        </div>
+
+        <div class="fix"></div>
+        <div class="rowElem">
+          <%= submit_tag "查询", class: 'greyishBtn submitForm' %>
+          <div class="fix"></div>
+        </div>
+      </fieldset>
+    </form>   
+  </div>
+
+<!--   <div class="widget nobg noborder">
+    <a href="<%= main_app.report_export_path(format: :xls, params: params) if params[:search].present? %>">
+      <input type="button" class="greyishBtn mr30" value="Download as Excel" />
+    </a>
+  </div> -->
+
+  <div class="table">
+    <div class="head"><h5 class="iFrames">查询结果</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <thead>
+        <tr>
+          <% if @results.present? %>
+            <%- @results[:columns].each do |column| %>
+              <%= content_tag(:th, column)%>
+            <%- end %>
+          <%- end %>  
+        </tr>
+      </thead>
+      <tbody>       
+        <% if @results.present? %>
+          <%- @results[:data].each do |data| %>
+            <tr class="gradeA">
+              <%- if data.present? %>
+                <%- data.each do |d| %>
+                  <%= content_tag(:td, d)%>
+                <%- end %>
+              <%- end %>
+            </tr>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>
