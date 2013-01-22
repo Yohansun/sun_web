@@ -50,6 +50,8 @@ module MagicContent
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       @image.title = image_params[:title] if image_params[:title].present?
+      @image.content = image_params[:content] if image_params[:content].present?
+      @image.reason = image_params[:reason] if image_params[:reason].present?
       [1,2,3].each do |item|
         next if image_params["color#{item}".to_sym].blank?
         if ColorCode.find_by_code(image_params["color#{item}".to_sym])
