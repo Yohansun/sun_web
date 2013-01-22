@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116091116) do
+ActiveRecord::Schema.define(:version => 20130122040820) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -202,8 +202,10 @@ ActiveRecord::Schema.define(:version => 20130116091116) do
     t.string   "color1"
     t.string   "color2"
     t.string   "color3"
-    t.text     "tags"
     t.integer  "area_id"
+    t.string   "source"
+    t.integer  "room"
+    t.text     "content"
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
@@ -375,6 +377,16 @@ ActiveRecord::Schema.define(:version => 20130116091116) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  create_table "image_tags", :force => true do |t|
+    t.integer  "design_image_id"
+    t.integer  "image_library_category_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
+  add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
 
   create_table "inspirations", :force => true do |t|
     t.string   "title"
@@ -937,6 +949,8 @@ ActiveRecord::Schema.define(:version => 20130116091116) do
     t.string   "top_reason"
     t.integer  "top_order",                 :default => 0
     t.integer  "minisite_id"
+    t.string   "source"
+    t.string   "types"
   end
 
   add_index "users", ["area_id"], :name => "index_users_on_area_id"

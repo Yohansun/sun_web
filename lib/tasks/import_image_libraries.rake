@@ -26,7 +26,7 @@ task :import_image_libraries => :environment  do
           area = Area.where("name like '%#{row[3].gsub(/市/,'')}%'").first if !row[3].blank?
           design_image.area_id = area.id if area
           style = ImageLibraryCategory.where("title like '%#{row[4]}%'").first
-          design_image.tags = [style.id] if style
+          design_image.tags = ImageTag.new(image_library_category_id: style.id) if style
           room = ImageLibraryCategory.where(title: row[5]).first
           design_image.room = room.id if room
           design_image.content = row[13]
@@ -46,14 +46,14 @@ task :import_image_libraries => :environment  do
       img_lib_cats = ImageLibraryCategory.where("title like '%#{tag}%'")
       if img_lib_cats.present?
         img_lib_cats.each do |img_lib_cat|
-          tags << img_lib_cat.id
+          tags << ImageTag.new(image_library_category_id: img_lib_cat.id)
         end
       end
     end
     styles = ImageLibraryCategory.where("title like '%#{design.style}%'")
     if styles.present?
       styles.each do |style|
-        tags << style.id
+        tags << ImageTag.new(image_library_category_id: style.id)
       end
     end
     design.design_images.each do |design_img| 
@@ -62,6 +62,7 @@ task :import_image_libraries => :environment  do
       design_img.area_id = design.area_id
       design_img.color1 = design.recommend_color_category1
       design_img.tags = tags unless tags.blank?
+      design_img.reason = design.reason
       design_img.save
     end
   end
