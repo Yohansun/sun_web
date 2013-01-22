@@ -1,4 +1,4 @@
-<%= form_tag main_app.image_library_update_title_path(image), :class => 'color_form', :method => :put do %>
+<%= form_tag main_app.image_library_update_title_path(image, :genre => params[:genre], :keywords => params[:keywords]), :class => 'color_form', :method => :put do %>
   <h3>设置色号</h3>
   <fieldset style="height:30px;padding:5px 60px">
     <label class="color_form_label">请输入色号：</label> 

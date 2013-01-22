@@ -135,12 +135,12 @@
           <td><%= image.user.username %></td>
           <td><%= image.audited? ? 'Y' : 'N' %></td>
           <td>
-            <%= link_to '编辑', main_app.user_designs_path(image.user.id) %>
+            <%= link_to '编辑', main_app.user_designs_path(image.user.id, :genre => params[:genre], :keywords => params[:keywords]) %>
             <%= link_to '设置名称', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
-            <%= link_to '设置标签', main_app.image_library_categories_path(image) %>
+            <%= link_to '设置标签', main_app.image_library_categories_path(image, :genre => params[:genre], :keywords => params[:keywords]) %>
             <%= link_to '设置色号', "javascript:void(0)", :class => 'set_color', :"data-id" => image.id %>
-            <%= link_to '审核', main_app.image_library_audited_path(image), :confirm => "确认审核通过吗"%>
-            <%= link_to '删除', main_app.image_library_destroy_image_path(image), method: :delete, :confirm => "确定删除吗" %>
+            <%= link_to '审核', main_app.image_library_audited_path(image, :genre => params[:genre], :keywords => params[:keywords]), :confirm => "确认审核通过吗"%>
+            <%= link_to '删除', main_app.image_library_destroy_image_path(image, :genre => params[:genre], :keywords => params[:keywords]), method: :delete, :confirm => "确定删除吗" %>
             <%= render partial: 'name', :locals => { :image => image }%>
             <%= render partial: 'color', :locals => { :image => image }%>
           </td>

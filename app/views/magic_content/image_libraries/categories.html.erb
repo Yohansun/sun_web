@@ -44,7 +44,7 @@
       <td><select id="county" class="level_3">区</select></td>
     </tr>
   </table>
-<%= form_tag main_app.image_library_update_tags_path(@image), :method => :put do %>
+<%= form_tag main_app.image_library_update_tags_path(@image, :genre => params[:genre], :keywords => params[:keywords]), :method => :put do %>
   <%= hidden_field_tag "area_id", @image.areas.last %>
 	<%- @categories.each do |c| %>
 		<h2><%= c.title %></h2>
@@ -75,8 +75,8 @@
 		</table>
 	<%- end %>
 	<div style="text-align:center">
-		<%= submit_tag "确定修改标签", :class=>"button basicBtn" %>
-		<%= link_to "取消", main_app.image_libraries_path, :class=>"button basicBtn", :style=>"padding:3px 14px 4px" %>
+		<%= submit_tag "确定修改标签", :class=>"button basicBtn"%>
+		<%= link_to "取消", main_app.image_libraries_path(:genre => params[:genre], :keywords => params[:keywords]), :class=>"button basicBtn", :style=>"padding:3px 14px 4px" %>
 	</div>
 <%- end %>
 </div>
