@@ -371,6 +371,16 @@ ActiveRecord::Schema.define(:version => 20130122040820) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "hard_sells", :force => true do |t|
+    t.datetime "date"
+    t.string   "link"
+    t.string   "num"
+    t.string   "site"
+    t.string   "feature"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "image_library_categories", :force => true do |t|
     t.string   "title"
     t.integer  "parent_id",  :default => 0

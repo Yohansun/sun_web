@@ -233,6 +233,7 @@ Icolor::Application.routes.draw do
     resources :gifts
     resources :skins
     resources :skin_kv_uploads
+    resources :hard_sells, :only => [:index]
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
     match '/report_export' => 'report_export#index'

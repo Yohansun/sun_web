@@ -10,7 +10,9 @@ set :branch, "master"
 
 set :deploy_to, "/home/www/rails/icolor"
 
-set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb) 
+set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
+
+set :whenever_command, "bundle exec whenever"
 
 namespace :deploy do
 

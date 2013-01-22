@@ -14,6 +14,7 @@ end
 
 gem 'jquery-rails'
 gem 'remotipart', '~> 1.0'
+
 group :development do
   gem "capistrano"
   gem "rvm-capistrano"
@@ -29,7 +30,9 @@ group :development do
   gem 'thin'
 end
 
-gem 'unicorn'  
+gem 'unicorn'
+
+gem 'whenever', :require => false
 
 gem "paperclip", "<3.0"
 
