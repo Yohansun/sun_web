@@ -9,7 +9,7 @@ class DesignImage < ActiveRecord::Base
   belongs_to :user
   belongs_to :area
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
-
+  belongs_to :design, class_name: 'Design', :foreign_key => 'imageable_id'
   # validate :file_dimensions, :unless => "errors.any?"
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null").order("design_images.id DESC")

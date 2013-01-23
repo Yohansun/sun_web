@@ -14,13 +14,8 @@ task :source_user_121 => :environment  do
       user.save!(:validate => false)
       puts "user======>>> %s" % user.id
     else
-      u = User.new(:username => username,:phone => phone,:email => email,:password => "123456",:password_confirmation => "123456",:is_imported => true)
-      if u.save!(:validate => false)
-        puts "user===创建成功==>>> %s" % row[0]
-      else
-        puts "user====创建失败==>>> %s" % row[0]
-        tmp << [row[0],row[1],row[2]]
-      end
+      puts "user====创建失败==>>> %s" % row[0]
+      tmp << [row[0],row[1],row[2]]
     end
   end
   CSV.open("#{Rails.root}/lib/data/failedtasks_121.csv", 'wb') do |csv|

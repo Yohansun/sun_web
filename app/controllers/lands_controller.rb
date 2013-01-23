@@ -11,9 +11,8 @@ class LandsController < ApplicationController
 						"taipingyangertongfangpingdao1",
 						"taipingyangsecaidapei1",
 						"a963shouyedingbu1",
-						"a963shouyejiaodian1",
-						"a963shouyedidiyiping1", "a963shouyeredian1",
-						"a963shouyemingrenzhuanfang1", "a963shejishitongdao1",
+						"a963shouyedidiyiping1", 
+						"a963shouyemingrenzhuanfang1", 
 						"a963zixunzhongxinjiaodianxinwen1", "taipingyangjiajuyixingguanggaowei1",
 						"a963edmhuiyuanyoujian1",
 						"a963shouyedingbu2",
@@ -33,12 +32,16 @@ class LandsController < ApplicationController
 							"pchousebankuaidingzhi2",
 							"pchousebankuaidingzhi-2"]
 
+			urls4 = ["a963shouyejiaodian1","a963shouyeredian1","a963shejishitongdao1"]
+
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
 			elsif urls2.include? params[:source]
 				redirect_to other_events_review_path
 			elsif urls3.include? params[:source]
 				redirect_to root_path
+			elsif urls4.include? params[:source]
+				redirect_to gift_list_path
 			else
 				redirect_to root_path
 			end
