@@ -69,6 +69,11 @@ function show_login(){
 	$("#design_message").hide();
 }
 
+function prize_jan(){  
+	$('#prize_jan').show(); 
+	o_in(); 
+}
+
 function colors(){
 	o_in();
 	$("#design_message").show();
@@ -106,6 +111,9 @@ $(function(){
             $('.server_area').css('width','41px');
         }
 	});
+
+	$('.gift_kv').click(prize_jan);  
+	
 	$('#server_submit').click(function(){
 		var $area = $(this).parents('.server_input').find('textarea')
 		var txt = $area.val();

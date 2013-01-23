@@ -4,7 +4,34 @@
 
  <div class="main gift">
   <div class='wrapper gift_box'>
-    <img src="<%= asset_path "paint_art/gift_banner3.png"%>"/>
+    <!-- <img src="<%= asset_path "paint_art/gift_banner3.png"%>"/> -->
+     <div class="gift_kv" style="width:963px;height:314px;">
+      <a href="javascript:;" style="background:#fff;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;display:block;z-index:1;"></a>  
+      <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="963" height="314">
+          <param name="movie" value="<%=asset_path 'gifts/gifts_kv.swf'%>" />
+          <param name="quality" value="high" />
+          <param name="wmode" value="opaque" />
+          <param name="swfversion" value="6.0.65.0" />
+          <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+          <param name="expressinstall" value="Scripts/expressInstall.swf" />
+          <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+          <!--[if !IE]>-->
+          <object type="application/x-shockwave-flash" data="<%=asset_path 'gifts/gifts_kv.swf'%>" width="963" height="314">
+            <!--<![endif]-->
+            <param name="quality" value="high" />
+            <param name="wmode" value="opaque" />
+            <param name="swfversion" value="6.0.65.0" />
+            <param name="expressinstall" value="Scripts/expressInstall.swf" />
+            <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+            <div>
+              <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+              <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
+            </div>
+            <!--[if !IE]>-->
+          </object>
+          <!--<![endif]-->
+      </object>
+    </div>
     <div class="art_step1 art_step">
       <h2><img src=" <%= asset_path "paint_art/gift_step3_1.png"%>"/></h2>                
       <% unless @gift1.first.blank? %>
@@ -107,6 +134,94 @@
     </div>
   </div><!--wrapper ends-->
 </div><!--main ends-->
+<div id="overlay"></div>
+    <div class="abs_center ft12 none" id="prize_jan">
+        <a href="javascript:;" class="close_btn">关闭</a>
+        <div id="flower"></div>
+        <table>
+            <tr>
+                <th width="230">姓名</th>
+                <th width="120">奖品</th>
+                <th width="180">姓名</th>
+                <th width="145">奖品</th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>杨震</li>
+                        <li>王正珍</li>
+                        <li>张兴宇</li>
+                        <li>杨香银</li>
+                        <li>春天花会开</li>
+                        <li>吴桥祥</li>
+                        <li>甘秀明</li>
+                        <li>苹果</li>
+                        <li>wiwi</li>
+                        <li>尚振华</li>
+                        <li>热火</li>
+                        <li>刘涛</li>
+                        <li>江伟</li>
+                        <li>李洪良</li>
+                        <li>徐冬冬</li>
+                        <li>刘涛</li>
+                        <li>黄育波</li>
+                        <li>王双</li>
+                        <li>梵尔设计事务所</li>
+                        <li>杨茜</li>
+                        <li>王斌</li>
+                        <li>赵颖杰</li>
+                        <li>北纬30度西</li>
+                        <li>杨连海</li>
+                        <li>唐伯虎</li>
+                        <li>朱丹丹</li>
+                        <li>宋晨亮</li>
+                        <li>伍蓉蓉</li>
+                        <li>谢英顺</li>
+                        <li>李一鸣</li>
+                        <li>王喜军</li>
+                        <li>张涛</li>
+                        <li>常翠</li>
+                        <li>孙正阳</li>
+                        <li>闫帅</li>
+                        <li>李冀</li>
+                        <li>刘强</li>
+                        <li>郭丙其</li>
+                        <li>atgyuzhu</li>
+                        <li>bbnhka5232</li>
+                        <li>李红玲</li>
+                    </ul>
+                </td>
+                <td style="font-size:23px;">
+                    288色卡<br />（同上）
+                </td>
+                <td>
+                    <ul>
+                        <li>赵颖杰</li>
+                        <li>张自立</li>
+                        <li>杨香银</li>
+                        <li>杨茜</li>
+                        <li>杨连海</li>
+                        <li>杨磊</li>
+                        <li>吴桥祥</li>
+                        <li>王双</li>
+                        <li>王红星</li>
+                        <li>王广科</li>
+                        <li>孙正阳</li>
+                        <li>热火</li>
+                        <li>刘宝义</li>
+                        <li>李雪艳</li>
+                        <li>李红玲</li>
+                        <li>黄育波</li>
+                        <li>郭丙其</li>
+                        <li>方映月</li>
+                    </ul>
+                </td>
+                <td style="font-size:23px;">
+                    12色小罐漆<br />（同上）
+                </td>
+            </tr>
+        </table>
+    </div>
 
 <script type="text/javascript">
 function awards_slide(ID){
