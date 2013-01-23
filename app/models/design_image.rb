@@ -12,7 +12,9 @@ class DesignImage < ActiveRecord::Base
 
   # validate :file_dimensions, :unless => "errors.any?"
 
-  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null").order("design_images.id, design_images.created_at")
+  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null").order("design_images.id DESC")
+
+  scope :up_down_image, lambda{ |current_id| where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})")}
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",

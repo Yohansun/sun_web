@@ -1,0 +1,8 @@
+<%- if @image -%>
+console.log(<%= @image_tag_ids %>);
+$('#image-box').replaceWith('<%=j render partial: 'image_with_tags', locals: {
+  image: @image, categories: @categories, image_tag_ids: @image_tag_ids } %>');
+iColor.ImageLibrary.init_area_selection(window.area_data, '<%= @image.area_id %>', <%= @image.areas %>);
+<%- else -%>
+  alert('已经到结尾了')
+<%- end -%>

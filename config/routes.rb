@@ -247,6 +247,7 @@ Icolor::Application.routes.draw do
       put :update_tags
       put :update_title
       get :audited
+      get :up_down_page
       delete :destroy_image
     end
   end

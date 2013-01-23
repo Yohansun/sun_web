@@ -1,50 +1,12 @@
 <%- content_for :tail do %>
   <%= stylesheet_link_tag "image_libraries" %>
-  <%= javascript_include_tag "LinkageSelect.js", "/location.js", "keymaster.min"  %>
+  <%= javascript_include_tag "LinkageSelect.js", "/location.js", "keymaster.min", 'icolor', 'magic_content/image_library', 'jquery.blockui' %>
 	<script type="text/javascript">
     $(function() {
-      var options = { data  : data }
-      var sel = new LinkageSelect(options);
-      <%- if @image.area_id -%>
-        <%- provice_id, city_id, area_id = @image.areas %>
-        sel.bind('.level_1','<%= provice_id %>');
-        sel.bind('.level_2','<%= city_id %>');
-        sel.bind('.level_3','<%= area_id %>');
-      <%- else -%>
-        sel.bind('.level_1', null, '请选择');
-        sel.bind('.level_2', null, '请选择');
-        sel.bind('.level_3', null, '请选择');
-      <%- end -%>
-    });
-    $(function(){
-      key('left', function(event, handler){
-      });
-      key('right', function(event, handler){
-      });      
-    });
-    $(function(){
-    	$(".check_boxes").bind("click",function(){
-			  $.ajax({
-			    type: 'PUT',
-			    url: '<%= main_app.image_library_update_tags_path(image_library_id: @image.id) %>',
-			    data: {tag: $(this).val()},
-			    error: function(){
-			    	alert("保存失败");
-			    }
-				});
-			});
-    });
-    $(function(){
-      $("#county").bind("change",function(){
-        $.ajax({
-          type: 'PUT',
-          url: '<%= main_app.image_library_update_tags_path(image_library_id: @image.id) %>',
-          data: {area_id: $(this).val()},
-          error: function() {
-          	alert("地区保存失败");
-          }
-        });
-      });
+      window.area_data = data;
+      iColor.ImageLibrary.init_area_selection(window.area_data, '<%= @image.area_id %>',
+        <%= @image.areas %>);
+      iColor.ImageLibrary.bindEvents();
     });
 	</script>
 <%- end %>
@@ -57,49 +19,6 @@
       <%= link_to(@image.imageable.title, main_app.user_design_path(user_id: @image.user_id, id: @image.imageable_id), target: '_blank') if @image.imageable.title.present? %>
     </h5>
   </div>
-  <br/>
-  <div>
-    <h3><%= @image.title %></h3>
-    <br/>
-    <div class="image-preview">
-      <%= image_tag(@image.file(:slide), width: '500px') %>
-    </div>
-    <div class="tags-container">
-      <h2>按区域</h2>
-      <table>
-        <tr>
-          <td><select id="province" class="level_1">省</select></td>
-          <td><select id="city" class="level_2">市</select></td>
-          <td><select id="county" class="level_3">区</select></td>
-        </tr>
-      </table>
-      <%- @categories.each do |c| %>
-        <h2><%= c.title %></h2>
-        <table width='100%'>
-        	<tr>
-        	<%- c.children.each_with_index do |child, index|%>
-        		<%- if child.children.any? -%>
-        			<%= "</tr><tr>".html_safe if child.id > 210 && index % 4 == 0%>
-        			<td>
-        				<h5><%= child.title%></h5>
-        				<table>
-        					<%- child.children.each_with_index do |node, sub_index| -%>
-        					<tr>
-        						<td width='33%'>
-                    <%= check_box_tag "tag[]", node.id, @image_tag_ids.include?(node.id), :class => "check_boxes" %>&nbsp;<%= node.title %>
-            				</td>
-            			</tr>
-            			<%- end -%>
-            		</table>
-            	</td>
-            <%- else -%>
-            	<%= "</tr><tr>".html_safe if index % 5 == 0%>
-            	<td><%= check_box_tag "tag[]", child.id, @image_tag_ids.include?(child.id), :class => "check_boxes" %>&nbsp;<%= child.title %></td>
-            <%- end -%>
-      		<%- end %>
-      		</tr>
-      	</table>
-      <%- end %>
-    </div>
-  </div>
+  <h3><%= @image.title %></h3>
+  <%= render partial: 'image_with_tags', locals: { image: @image, categories: @categories, image_tag_ids: @image_tag_ids } %>
 </div>

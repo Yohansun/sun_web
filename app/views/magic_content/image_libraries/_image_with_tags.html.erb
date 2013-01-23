@@ -1,0 +1,46 @@
+<div id="image-box">
+  <div class="image-preview" data-id='<%= image.id %>'>
+    <p class='up-down-page'>
+      <a class="left"><</a>
+      <a class="right">></a>
+    </p>
+    <%= image_tag(image.file(:slide), width: '500px') %>
+  </div>
+  <div class="tags-container">
+    <h2>按区域</h2>
+    <table>
+      <tr>
+        <td><select id="province" class="level_1">省</select></td>
+        <td><select id="city" class="level_2">市</select></td>
+        <td><select id="county" class="level_3" data-image-id='<%= image.id %>'>区</select></td>
+      </tr>
+    </table>
+    <%- categories.each do |c| %>
+      <h2><%= c.title %></h2>
+      <table width='100%'>
+        <tr>
+        <%- c.children.each_with_index do |child, index|%>
+          <%- if child.children.any? -%>
+            <%= "</tr><tr>".html_safe if child.id > 210 && index % 4 == 0%>
+            <td>
+              <h5><%= child.title%></h5>
+              <table>
+                <%- child.children.each_with_index do |node, sub_index| -%>
+                <tr>
+                  <td width='33%'>
+                  <%= check_box_tag "tag[]", node.id, image_tag_ids.include?(node.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= node.title %>
+                  </td>
+                </tr>
+                <%- end -%>
+              </table>
+            </td>
+          <%- else -%>
+            <%= "</tr><tr>".html_safe if index % 5 == 0%>
+            <td><%= check_box_tag "tag[]", child.id, image_tag_ids.include?(child.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= child.title %></td>
+          <%- end -%>
+        <%- end %>
+        </tr>
+      </table>
+    <%- end %>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 module MagicContent
   class ImageLibrariesController < BaseController
-    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete]
+    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page]
 
     def index
       @images = DesignImage.available.page(params[:page])
@@ -122,6 +122,18 @@ module MagicContent
       else
         redirect_to image_libraries_path
       end
+    end
+
+    def up_down_page
+      base_image = DesignImage.find(params[:image_library_id])
+      @categories = ImageLibraryCategory.where(parent_id: "0")
+      images = DesignImage.available.up_down_image(base_image.id)
+      if params[:direction] == 'left'
+        @image = images[0] if images.any?
+      else
+        @image = images.size == 2 ? images[1] : nil
+      end
+      @image_tag_ids = @image.tags.map(&:image_library_category_id) if @image
     end
 
   end
