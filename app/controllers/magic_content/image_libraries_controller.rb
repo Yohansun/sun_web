@@ -22,29 +22,23 @@ module MagicContent
     end
 
     def update_tags
-      @image = DesignImage.find(params[:image_library_id])
-      if params[:tags].present?
-        params[:tags].each do |tag|
-          @image.tags << ImageTag.new(image_library_category_id: tag)
-        end
-      end
-      @image.area_id = params[:area_id]
-      @image.last_user_id = current_admin.id
-      @image.last_updated_at = Time.now
-      if @image.save
-        flash[:notice] = "保存成功"
-        if params[:genre].present?
-          redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+      if params[:area_id].present? || params[:tag].present?
+        @image = DesignImage.find(params[:image_library_id])
+        if tag = ImageTag.existed(@image.id, params[:tag]).try(:first)
+          tag.destroy
         else
-          redirect_to image_libraries_path
+          @image.tags << ImageTag.new(image_library_category_id: params[:tag]) if params[:tag]  
         end
+        @image.area_id = params[:area_id] if params[:area_id]
+        @image.last_user_id = current_admin.id
+        @image.last_updated_at = Time.now
+        if @image.save
+          render nothing: true, status: 200
+        else
+          render nothing: true, status: 406
+        end        
       else
-        flash[:alert] = "保存失败, 区域信息不能为空"
-        if params[:genre].present?
-          redirect_to main_app.image_library_categories_path(image, :genre => params[:genre], :keywords => params[:keywords])
-        else
-          redirect_to main_app.image_library_categories_path(image)
-      end
+        render nothing: true, status: 304
       end
     end
 
