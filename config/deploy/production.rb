@@ -5,7 +5,7 @@ set :rvm_type, :system
 server "203.156.231.37", :web, :app, :db, primary: true
 set :user, "root"
 
-set :repository, "git@github.com:nioteam/icolor.git"
+set :repository, "git@git.networking.io:nioteam/icolor.git"
 set :branch, "master"
 
 set :deploy_to, "/home/www/rails/icolor"
