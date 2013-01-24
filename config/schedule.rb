@@ -20,7 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.day, :at => '2:30 am' do
-  job_type :grep, "cd /home/www/rails/icolor/current/log && grep :task production.log.`date -d last-day +20%y%m%d` > /home/www/rails/icolor/current/public/system/landing_log/landing.log.`date -d last-day +20%y%m%d`"
+  job_type :grep, "cd /home/www/rails/icolor/current/log && grep :task production.log-`date -d last-day +20%y%m%d` > /home/www/rails/icolor/current/public/system/landing_log/landing.log.`date -d last-day +20%y%m%d`"
   grep '"Started GET \"/landing"'
 end
 
