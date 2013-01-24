@@ -12,7 +12,9 @@ class DesignImage < ActiveRecord::Base
   belongs_to :design, class_name: 'Design', :foreign_key => 'imageable_id'
   # validate :file_dimensions, :unless => "errors.any?"
 
-  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null").order("design_images.id, design_images.created_at")
+  scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null")
+
+  scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
@@ -31,7 +33,7 @@ class DesignImage < ActiveRecord::Base
       if self.area.children.any?
         areas.push(self.area.parent.id)
         areas.push(self.area.id)
-        areas.push(nil)
+        # areas.push(nil)
       else
         city = self.area.parent
         areas.push(city.parent.id)
@@ -60,31 +62,31 @@ class DesignImage < ActiveRecord::Base
   def self.search(genre, keyword)
     case genre
       when 'title'
-        DesignImage.available.where(title: keyword)
+        DesignImage.available.where(title: keyword).order("design_images.id DESC")
       when 'username'
-        DesignImage.joins(:user).available.where(["users.username = ?", keyword])
+        DesignImage.joins(:user).available.where(["users.username = ?", keyword]).order("design_images.id DESC")
       when 'yes_update'
-        DesignImage.available.where("last_updated_at is not null")
+        DesignImage.available.where("last_updated_at is not null").order("design_images.id DESC")
       when 'no_update'
-        DesignImage.available.where("last_updated_at is null")
+        DesignImage.available.where("last_updated_at is null").order("design_images.id DESC")
       when 'id'
-        DesignImage.available.where(id: keyword)
+        DesignImage.available.where(id: keyword).order("design_images.id DESC")
       when 'imageable_type'
         if keyword == '推荐作品'
-          DesignImage.available.where(imageable_type: 'Design')
+          DesignImage.available.where(imageable_type: 'Design').order("design_images.id DESC")
         elsif keyword == '色彩配搭'
-          DesignImage.available.where(imageable_type: 'ColorDesign')
+          DesignImage.available.where(imageable_type: 'ColorDesign').order("design_images.id DESC")
         elsif keyword == '大师作品'
-          DesignImage.available.where(imageable_type: 'MasterDesign')
+          DesignImage.available.where(imageable_type: 'MasterDesign').order("design_images.id DESC")
         end
       when 'last_user_id'
-        DesignImage.includes(:last_user).available.where(["admins.username = ?", keyword])
+        DesignImage.includes(:last_user).available.where(["admins.username = ?", keyword]).order("design_images.id DESC")
       when 'edit_no_verify'
-        DesignImage.available.where("last_updated_at is not null and audited is false")
+        DesignImage.available.where("last_updated_at is not null and audited is false").order("design_images.id DESC")
       when 'color_no_edit'
-        DesignImage.available.where("color1 is not null or color2 is not null or color3 is not null").includes(:tags => {:design_image_id => ""})
+        DesignImage.available.where("color1 is not null or color2 is not null or color3 is not null").includes(:tags => {:design_image_id => ""}).order("design_images.id DESC")
       when 'edit_no_color'
-        DesignImage.available.where("color1 is null and color2 is null and color3 is null").joins(:tags).where("design_image_id is not null")
+        DesignImage.available.where("color1 is null and color2 is null and color3 is null").joins(:tags).where("design_image_id is not null").order("design_images.id DESC")
     end
   end
 end
