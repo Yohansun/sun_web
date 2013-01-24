@@ -7,11 +7,11 @@
   </div>
   <h3><%= image.title %></h3>
   <div class="image-preview" data-id='<%= image.id %>'>
-    <%= image_tag(image.file(:slide), width: '500px') %>
     <p class='up-down-page'>
       <button class='left'>上一张</button>
       <button class='right'>下一张</button>
     </p>
+    <%= image_tag(image.file(:slide), width: '500px') %>
   </div>
   <%= form_tag main_app.image_library_update_tags_path(image), :method => :put do %>
   <div class="tags-container">
