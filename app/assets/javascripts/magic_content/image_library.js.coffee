@@ -4,6 +4,7 @@ class ImageLibrary
     this.previous_next_image()
     this.area_change()
     this.tag_checked()
+    this.tag_expand()
 
   previous_next_image: ->
     $('#image-box .up-down-page .left, #image-box .up-down-page .right').live 'click', (event) ->
@@ -48,6 +49,26 @@ class ImageLibrary
       select.bind('.level_1', null, '请选择');
       select.bind('.level_2', null, '请选择');
       select.bind('.level_3', null, '请选择');
+
+  tag_expand: ->
+    $('.tags-container h2 span').bind 'click', (event) ->
+      dom = $(event.currentTarget)
+      tag_id = dom.data('tag-id')
+      $('.js-tab-'+tag_id+'-childen').toggleClass('expand')
+      if tag_id is 136 || tag_id is 210
+        if dom.hasClass('expand')
+          dom.removeClass('expand')
+          dom.html('收缩')
+        else
+          dom.addClass('expand')
+          dom.html('展开')
+      else
+        if dom.hasClass('expand')
+          dom.removeClass('expand')
+          dom.html('展开')
+        else
+          dom.addClass('expand')
+          dom.html('收缩')
 
   request_loading: ->
     $.blockUI css:

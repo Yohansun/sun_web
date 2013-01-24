@@ -13,12 +13,5 @@
 
 <div class="content tags_main">
   <%= render partial: 'layouts/flash_message' %>
-  <div class="title">
-    <h5>
-      <%= link_to '图库管理', main_app.image_libraries_path %>&nbsp;&nbsp;>&nbsp;
-      <%= link_to(@image.imageable.title, main_app.user_design_path(user_id: @image.user_id, id: @image.imageable_id), target: '_blank') if @image.imageable.title.present? %>
-    </h5>
-  </div>
-  <h3><%= @image.title %></h3>
   <%= render partial: 'image_with_tags', locals: { image: @image, categories: @categories, image_tag_ids: @image_tag_ids } %>
 </div>

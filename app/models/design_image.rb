@@ -33,7 +33,7 @@ class DesignImage < ActiveRecord::Base
       if self.area.children.any?
         areas.push(self.area.parent.id)
         areas.push(self.area.id)
-        areas.push(nil)
+        # areas.push(nil)
       else
         city = self.area.parent
         areas.push(city.parent.id)

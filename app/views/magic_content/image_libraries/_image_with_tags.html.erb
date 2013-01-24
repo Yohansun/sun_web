@@ -1,10 +1,17 @@
 <div id="image-box">
+  <div class="title">
+    <h5>
+      <%= link_to '图库管理', main_app.image_libraries_path %>&nbsp;&nbsp;>&nbsp;
+      <%= link_to(image.imageable.title, main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.imageable.title.present? %>
+    </h5>
+  </div>
+  <h3><%= image.title %></h3>
   <div class="image-preview" data-id='<%= image.id %>'>
+    <%= image_tag(image.file(:slide), width: '500px') %>
     <p class='up-down-page'>
       <a class="left"><</a>
       <a class="right">></a>
     </p>
-    <%= image_tag(image.file(:slide), width: '500px') %>
   </div>
   <div class="tags-container">
     <h2>按区域</h2>
@@ -16,8 +23,13 @@
       </tr>
     </table>
     <%- categories.each do |c| %>
-      <h2><%= c.title %></h2>
-      <table width='100%'>
+      <h2>
+        <%= c.title %>
+        <span class="expand" data-tag-id='<%= c.id %>'>
+          <%= c.id == 136 || c.id == 210 ? '展开' : '收缩'%>
+        </span>
+      </h2>
+      <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 136 || c.id == 210 %>'>
         <tr>
         <%- c.children.each_with_index do |child, index|%>
           <%- if child.children.any? -%>
