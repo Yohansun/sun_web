@@ -2,9 +2,8 @@ class ImageLibrary
 
   bindEvents: =>
     this.previous_next_image()
-    this.area_change()
-    this.tag_checked()
     this.tag_expand()
+    this.tag_toggle()
 
   previous_next_image: ->
     $('#image-box .up-down-page .left, #image-box .up-down-page .right').live 'click', (event) ->
@@ -20,38 +19,33 @@ class ImageLibrary
         success: (data, textStatus, jqXHR) =>
           $.unblockUI()
 
-  area_change: ->
-    $("#county").live "change", (event) ->
-      current_id = $(event.currentTarget).data('image-id')
-      $.ajax '/admin/content/image_libraries/'+current_id+'/update_tags',
-        type: 'PUT'
-        data: {area_id: $(event.currentTarget).val()}
-        error: (jqXHR, textStatus, errorThrown) =>
-          alert "地区保存失败"
+  tag_toggle: ->
+    $('span.js-all').live 'click', (event) ->
+      dom = $(event.currentTarget)
+      tag_id = dom.data('tag-id')
+      if dom.data('type') is 'child'
+        $("tr.js-checkboxes-"+tag_id).find('input[type=checkbox]').attr('checked', true)
+      else
+        $("div.js-checkboxes-"+tag_id).find('input[type=checkbox]').attr('checked', true)
 
-  tag_checked: ->
-    $(".js-check_boxes").live "click", (event) ->
-      current_id = $(event.currentTarget).data('image-id')
-      $.ajax '/admin/content/image_libraries/'+current_id+'/update_tags',
-        type: 'PUT'
-        data: {tag: $(event.currentTarget).val()}
-        error: (jqXHR, textStatus, errorThrown) =>
-          alert "保存失败" 
-
-  init_area_selection: (area_data, image_area_id, areas) ->
-    options = { data: area_data }
-    select = new LinkageSelect(options)
-    if image_area_id isnt null
-      select.bind('.level_1', areas[0])
-      select.bind('.level_2', areas[1])
-      select.bind('.level_3', areas[2])
-    else
-      select.bind('.level_1', null, '请选择');
-      select.bind('.level_2', null, '请选择');
-      select.bind('.level_3', null, '请选择');
+    $('span.js-reverse').live 'click', (event) ->
+      dom = $(event.currentTarget)
+      tag_id = dom.data('tag-id')
+      if dom.data('type') is 'child'
+        $("tr.js-checkboxes-"+tag_id).find('input[type=checkbox]').each ->
+          if $(this).attr('checked') is 'checked'
+            $(this).attr('checked', false)
+          else
+            $(this).attr('checked', true)
+      else
+        $("div.js-checkboxes-"+tag_id).find('input[type=checkbox]').each ->
+          if $(this).attr('checked') is 'checked'
+            $(this).attr('checked', false)
+          else
+            $(this).attr('checked', true)
 
   tag_expand: ->
-    $('.tags-container h2 span').bind 'click', (event) ->
+    $('.tags-container h2 span').live 'click', (event) ->
       dom = $(event.currentTarget)
       tag_id = dom.data('tag-id')
       $('.js-tab-'+tag_id+'-childen').toggleClass('expand')
@@ -69,6 +63,18 @@ class ImageLibrary
         else
           dom.addClass('expand')
           dom.html('收缩')
+
+  init_area_selection: (area_data, image_area_id, areas) ->
+    options = { data: area_data }
+    select = new LinkageSelect(options)
+    if image_area_id isnt null
+      select.bind('.level_1', areas[0])
+      select.bind('.level_2', areas[1])
+      select.bind('.level_3', areas[2])
+    else
+      select.bind('.level_1', null, '请选择');
+      select.bind('.level_2', null, '请选择');
+      select.bind('.level_3', null, '请选择');
 
   request_loading: ->
     $.blockUI css:

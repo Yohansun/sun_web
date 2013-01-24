@@ -207,7 +207,7 @@ div.title h5 a {
   width: 50%;
   float: left;
   position: fixed;
-  top: 210px;
+  top: 205px;
   bottom: 40px;
   z-index: 999;
 }
@@ -224,7 +224,10 @@ div.title h5 a {
 .tags-container table.expand{
   display: none;
 }
-
+.tags-container .toggle-options span{
+  display: inline-block;
+  cursor: pointer;
+}
 .current{color:red;}
 .design_name,.reason_name{width:300px;height:70px;resize:none;padding:3px;}
 
@@ -236,10 +239,10 @@ div.title h5 a {
   width: 50px;
   cursor: pointer;
 }
-.up-down-page a.left {
+.up-down-page button.left {
   float: left;
 }
-.up-down-page a.right {
+.up-down-page button.right {
   float: right;
   text-align: right;
 }

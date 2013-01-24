@@ -9,17 +9,18 @@
   <div class="image-preview" data-id='<%= image.id %>'>
     <%= image_tag(image.file(:slide), width: '500px') %>
     <p class='up-down-page'>
-      <a class="left"><</a>
-      <a class="right">></a>
+      <button class='left'>上一张</button>
+      <button class='right'>下一张</button>
     </p>
   </div>
+  <%= form_tag main_app.image_library_update_tags_path(image), :method => :put do %>
   <div class="tags-container">
     <h2>按区域</h2>
     <table>
       <tr>
         <td><select id="province" class="level_1">省</select></td>
         <td><select id="city" class="level_2">市</select></td>
-        <td><select id="county" class="level_3" data-image-id='<%= image.id %>'>区</select></td>
+        <td><select id="county" class="level_3" name='area_id' data-image-id='<%= image.id %>'>区</select></td>
       </tr>
     </table>
     <%- categories.each do |c| %>
@@ -30,29 +31,39 @@
         </span>
       </h2>
       <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 136 || c.id == 210 %>'>
-        <tr>
-        <%- c.children.each_with_index do |child, index|%>
-          <%- if child.children.any? -%>
-            <%= "</tr><tr>".html_safe if child.id > 210 && index % 4 == 0%>
-            <td>
-              <h5><%= child.title%></h5>
-              <table>
-                <%- child.children.each_with_index do |node, sub_index| -%>
-                <tr>
-                  <td width='33%'>
-                  <%= check_box_tag "tag[]", node.id, image_tag_ids.include?(node.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= node.title %>
-                  </td>
-                </tr>
-                <%- end -%>
-              </table>
+        <%- if c.id != 136 && c.id != 210 -%>
+          <tr>
+            <td align='right' colspan='4' class='toggle-options'>
+              <span class="js-all" data-type='child' data-tag-id='<%= c.id %>'>全选</span>
+              <span class="js-reverse" data-type='child' data-tag-id='<%= c.id %>'>反选</span>
             </td>
-          <%- else -%>
-            <%= "</tr><tr>".html_safe if index % 5 == 0%>
-            <td><%= check_box_tag "tag[]", child.id, image_tag_ids.include?(child.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= child.title %></td>
+          </tr>
+        <%- end -%>
+        <%- c.children.in_groups_of(4, false) do |group|%>
+        <tr <%= "class=js-checkboxes-#{c.id}" if c.id != 136 && c.id != 210 %>>
+          <%- group.each do |child| -%>
+            <td>
+            <%- if child.children.any? -%>
+              <h5><%= child.title%></h5>
+              <p class='toggle-options'>
+                <span class="js-all" data-type='node' data-tag-id='<%= child.id %>'>全选</span>
+                <span class="js-reverse" data-type='node' data-tag-id='<%= child.id %>'>反选</span>
+              </p>
+              <div class='js-checkboxes-<%= child.id %>'>
+                <%- child.children.each do |node| -%>
+                  <%= check_box_tag "tags[]", node.id, image_tag_ids.include?(node.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= node.title %><br/>
+                <%- end -%>
+              </div>
+            <%- else -%>
+              <%= check_box_tag "tags[]", child.id, image_tag_ids.include?(child.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= child.title %>
+            <%- end -%>
+            </td>
           <%- end -%>
-        <%- end %>
         </tr>
+        <%- end %>
       </table>
     <%- end %>
+    <%= submit_tag '保存' %>
   </div>
+  <%- end -%>
 </div>

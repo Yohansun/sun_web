@@ -4,7 +4,7 @@ module MagicContent
     skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page]
 
     def index
-      @images = DesignImage.available.page(params[:page])
+      @images = DesignImage.available.order("design_images.id DESC")
       if params[:genre].present? 
         if params[:genre] == 'yes_update' || params[:genre] == 'no_update'
           @images = DesignImage.search(params[:genre], 'last_updated_at')
@@ -22,24 +22,24 @@ module MagicContent
     end
 
     def update_tags
-      if params[:area_id].present? || params[:tag].present?
-        @image = DesignImage.find(params[:image_library_id])
-        if tag = ImageTag.existed(@image.id, params[:tag]).try(:first)
-          tag.destroy
-        else
-          @image.tags << ImageTag.new(image_library_category_id: params[:tag]) if params[:tag]  
-        end
-        @image.area_id = params[:area_id] if params[:area_id]
-        @image.last_user_id = current_admin.id
-        @image.last_updated_at = Time.now
-        if @image.save
-          render nothing: true, status: 200
-        else
-          render nothing: true, status: 406
-        end        
-      else
-        render nothing: true, status: 304
+      @image = DesignImage.find(params[:image_library_id])
+      if params[:area_id].blank?
+        flash[:alert] = '区域信息不能为空'
+        redirect_to main_app.image_library_categories_path(@image.id) and return
       end
+      @image.area_id = params[:area_id]
+      @image.last_user_id = current_admin.id
+      @image.last_updated_at = Time.now
+      if params[:tags].present?
+        ImageTag.destroy_all(["id in (?)", @image.tags.map(&:id)])
+        params[:tags].each {|tag| @image.tags << ImageTag.new(image_library_category_id: tag)}
+      end
+      if @image.save
+        flash[:notice] = '保存成功'
+      else
+        flash[:alert] = '保存失败'
+      end
+      redirect_to main_app.image_library_categories_path(@image.id)
     end
 
     def update_title
@@ -87,7 +87,6 @@ module MagicContent
     end
 
     def autocomplete
-      #image_library_id这个id没有用,为了满足magic_admin的需要,index页面的JS是个假id
       params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
       colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
       render json: colors.map { |c| c.code }
@@ -129,9 +128,9 @@ module MagicContent
       @categories = ImageLibraryCategory.where(parent_id: "0")
       images = DesignImage.available.up_down_image(base_image.id)
       if params[:direction] == 'left'
-        @image = images[0] if images.any?
-      else
         @image = images.size == 2 ? images[1] : nil
+      else
+        @image = images[0] if images.any?
       end
       @image_tag_ids = @image.tags.map(&:image_library_category_id) if @image
     end
