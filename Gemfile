@@ -32,8 +32,6 @@ end
 
 gem 'unicorn'
 
-gem 'whenever', :require => false
-
 gem "paperclip", "<3.0"
 
 gem "magic_admin", :git => "git@github.com:nioteam/magic_admin.git"
