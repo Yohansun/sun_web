@@ -6,7 +6,7 @@ module MagicContent
     def index
       @images = DesignImage.available.order("design_images.id DESC")
       if params[:genre].present? 
-        if params[:genre] == 'yes_update' || params[:genre] == 'no_update'
+        if params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color'
           @images = DesignImage.search(params[:genre], 'last_updated_at')
         else
           @images = DesignImage.search(params[:genre], params[:keywords]) if params[:keywords].present?
@@ -53,14 +53,16 @@ module MagicContent
       @image.content = image_params[:content]
       @image.reason = image_params[:reason]
       [1,2,3].each do |item|
-        if ColorCode.find_by_code(image_params["color#{item}".to_sym])
-          @image.send("color#{item}=", image_params["color#{item}".to_sym])
-          color.push(image_params["color#{item}".to_sym])
-        elsif image_params["color#{item}".to_sym] == ""
-          @image.send("color#{item}=", "")
-        else
-          error_color.push(image_params["color#{item}".to_sym])
-          # flash[:notice] = "色号不正确"
+        if item != 1
+          if ColorCode.find_by_code(image_params["color#{item}".to_sym]) && image_params["color#{item}".to_sym].strip != image_params["color#{item-1}".to_sym].strip
+            @image.send("color#{item}=", image_params["color#{item}".to_sym].strip)
+            color.push(image_params["color#{item}".to_sym])
+          elsif image_params["color#{item}".to_sym] == ""
+            @image.send("color#{item}=", "")
+          else
+            error_color.push(image_params["color#{item}".to_sym])
+            # flash[:notice] = "色号不正确"
+          end
         end
       end
       if @image.save
@@ -80,9 +82,9 @@ module MagicContent
         flash[:alert] = "#{@image.errors.full_messages}"
       end
       if params[:genre].present?
-        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords], :page => params[:page])
       else
-        redirect_to image_libraries_path
+        redirect_to image_libraries_path(:page => params[:page])
       end
     end
 
