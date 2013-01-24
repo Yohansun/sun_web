@@ -34,7 +34,7 @@ class DesignsController < ApplicationController
         @designs = @designs.where("area_id in (#{area.map(&:id).join(',')})") 
       end
     end
-
+    sign_in(@user) if current_admin
   end
 
   def fullscreen
