@@ -6,23 +6,7 @@ task :import_earlier_click_data => :environment  do
   
   p "Starting~~~~~~~~~~~~~~~~~"
   time_array = []
-  file_array = ["landing.log.20121207",
-                "landing.log.20121215",
-                "landing.log.20121216",
-                "landing.log.20121220",
-                "landing.log.20121229",
-                "landing.log.20121231",
-                "landing.log.20130102",
-                "landing.log.20130103",
-                "landing.log.20130105",
-                "landing.log.20130106",
-                "landing.log.20130109",
-                "landing.log.20130110",
-                "landing.log.20130112",
-                "landing.log.20130113",
-                "landing.log.20130114",
-                "landing.log.20130115",
-                "landing.log.20130116"]
+  file_array = ["landing.log.20130123"]
   file_array.each do |file|
     file_name = "/tmp/#{file}"
     time_array = []
