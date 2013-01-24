@@ -79,6 +79,12 @@ class DesignImage < ActiveRecord::Base
         end
       when 'last_user_id'
         DesignImage.includes(:last_user).available.where(["admins.username = ?", keyword])
+      when 'edit_no_verify'
+        DesignImage.available.where("last_updated_at is not null and audited is false")
+      when 'color_no_edit'
+        DesignImage.available.where("color1 is not null or color2 is not null or color3 is not null").includes(:tags => {:design_image_id => ""})
+      when 'edit_no_color'
+        DesignImage.available.where("color1 is null and color2 is null and color3 is null").joins(:tags).where("design_image_id is not null")
     end
   end
 end
