@@ -20,6 +20,8 @@ class Comment < ActiveRecord::Base
         @design = Design.find self.commentable_id 
       when "Inspiration"
         @design = Inspiration.find self.commentable_id
+      when "DesignImage"
+        @design = DesignImage.find self.commentable_id
       end
       if @design
         SysMsg.create(:content => "亲爱的#{@design.user.display_name}用户，您的作品“#{@design.title}”收到了新的回复，请注意查看！",

@@ -870,3 +870,16 @@ jQuery.extend( jQuery.easing,
   return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
  }
 });
+
+$(function(){
+	//show reply textarea
+	$('.js-reply').live('click', function(e){
+		dom = $(e.currentTarget);
+		dom.parents('.img_reply_item').siblings().children('form').slideUp();
+    dom.parents('.this_btn').siblings('.img_reply2').slideToggle();		
+	});	
+	$('.js-reply_close').click(function(e){
+		e.preventDefault();
+		$(this).parents('.img_reply2').slideUp();
+	});
+})

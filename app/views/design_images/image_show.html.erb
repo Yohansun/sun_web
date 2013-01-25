@@ -1,0 +1,178 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "imgbase" %>
+<%- end %>
+<div class="imgbase border_bline">
+	<div class="imgbase_title">
+		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
+		<p>iColor为您提供<strong><%= @images_total %></strong>张装修图片</p>
+	</div><!-- imgbase_title -->
+
+	<div class="imgbase_main clear nomargin">
+		<h3 class="tit_tab"><%= @image.title %></h3>
+    <div class="imginfo_show pr">
+	    <div class="imgbase_func ft12 pa">
+				<%#= link_to "收藏", "javascript:void(0);", :class =>"imgbase_collect" %>
+				<a class="imgbase_view">浏览:<span><%= @image.design.view_count %></span></a>
+				<%= link_to "全屏观看", fullscreen_user_design_path(@image.user_id, @image.imageable_id), :class =>"imgbase_fullpage" %>
+			</div>
+	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
+	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
+	    <span class="fr">
+	    	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "imgbase/near-shop_link_btn.png" %>"></a>
+	    	<a href="http://www.nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>"></a>
+	    </span>
+	    <p class="imginfo_big_txt">
+	        <span>
+	        	<strong>设计风格：</strong>
+	        	<%= @image.design.style %>
+	        </span>
+	        <span>
+	        	<strong>作品所在城市：</strong>
+	        	<%= @image_city %>
+	        </span>
+	    </p>
+      <%- if @image_colors.any? %>
+  	    <div class="colors_recommend clear">
+  	    	<strong>推荐色</strong>
+          <%- @image_colors.each do |color| %>
+  	    	  <p class="fl"><span style="background-color:rgb(<%= color.rgb %>)"></span><em><%= color.name %></em></p>
+          <%- end %>
+  	    </div>
+      <%- end %>
+	    <p class="imginfo_big_txt">
+	      <strong>设计理念：</strong>
+	      <%= @image.content %>
+	    </p>
+      <%= form_for(Comment.new, :html => {:class => "img_reply"}) do |f| %>
+        <h3 class="img_reply_tit">评论(<%= @image.comments_count %>)</h3>
+        <%= f.hidden_field :commentable_id, value: params[:id] %>
+        <%= f.hidden_field :commentable_type, value: 'DesignImage' %>
+        <%= f.text_area :content, :placeholder =>"最多可输入140字" %>
+        <div class="tr">
+          <%= f.submit "提交评论", :class => "img_reply_btn", :confirm => "Are you sure?" %>
+        </div>
+      <% end %>
+    <%- if @comments.any? %>
+    <div class="img_reply_list">
+      <div class="comments">
+        <%= render :partial => "show_comments", locals: { comments: @comments} %>
+      </div>
+      <div class="imgbase_more_btn">
+        <a href="javascript:;" class="more_comment" data-page="1">查看更多评论
+        </a>
+      </div>
+    </div>
+    <%- end %>
+
+    </div><!--imginfo_show-->
+    <div class="author_show">
+      <div class="author_info clear">
+      	<%- if @image.user.avatar -%>
+		    	<%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl', :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
+		    <%- else -%>
+		    	<%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
+		    <%- end -%>
+        <div class="fl border_lline">
+        	<p class="clear border_bline">
+        		<strong><%= @image.user.display_name %></strong>
+        		<%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like", :id =>"votes_count#{@image.id}", :remote => true, :method => :post %>
+        		<%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
+        	</p>
+        	<p>
+        		<%= link_to "进入个人主页", user_designs_path(@image.user_id), :class =>"img_reply_btn" %>
+        	</p>
+        </div>
+      </div><!-- author_info -->
+      <!-- <div class="author_info clear">
+      	<img class="fl" src="<%#= asset_path "imgbase/user_info_img.jpg" %>">
+        <div class="fl border_lline">
+        	<p class="clear border_bline">
+        		<strong class="nomargin">历史到时尚的完美转身历史到时历史到时尚的完美转身</strong>
+        		<span class="ft12">Mirka McNeill Farmer</span>
+        	</p>
+        	<p><a href="#" class="img_reply_btn">进入大师访谈</a></p>
+        </div>
+      </div> --><!-- author_info->大师访谈 -->
+      <!-- <div class="author_info clear">
+      	<p class="clear border_bline">
+      		<strong>历史到时尚的完美转身</strong>
+      		<span>Mirka McNeill Farmer</span>
+      	</p>
+      	<p class="clear">
+      		<a href="#" class="imgbase_like">8503</a>
+      		<a href="#" class="imgbase_comm">855555</a>
+      	</p>
+      </div> --><!-- author_info->色彩搭配 -->
+
+      <div class="clear imgs_share border_bline">
+				<span class="fl t">分享:</span>
+      	<div id="jiathis_style_32x32" class="fl" style="overflow:hidden;">
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_kaixin001"></a>
+					<a class="jiathis_button_renren"></a>
+					<a class="jiathis_counter_style"></a>
+				</div>
+        <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+        <!-- JiaThis Button END -->
+
+        <%
+          role = "#{@image.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @image.user.role_id != 3
+          text = if @image.user.area_id.present?
+            province = @image.user.city.try(:parent).try(:name)
+            city = @image.user.try(:city).try(:name)
+
+            if province && city
+              province == city ? "#{city}的" : "#{province + city}的"
+            else
+              "#{city}的" if city
+            end
+          end
+        -%>
+        <script type="text/javascript" charset="utf-8">
+        var jiathis_config = {
+          boldNum:4,
+          siteNum:4,
+          showClose:false,
+          sm:"kaixin001,renren,tsina,tqq",
+          imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+          imageWidth:26,
+          marginTop:150,
+          url:"<%= user_design_url(@image.user_id, @image.imageable_id) %>)",
+          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name %>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
+          data_track_clickback:true
+        }
+        </script>
+      </div><!-- imgs_share -->
+      <div class="imgs_otherinfo border_bline">
+      	<h4>标签</h4>
+      	<%- @image_tags.each do |tag| %>
+      	  <span><%= tag %></span>
+      	<%- end %>
+      </div>
+      <div class="imgs_otherinfo border_bline">
+      	<h4>图片来源：<span><%= @image.image_come_from %></span>
+      	</h4>
+      </div>
+      <div class="imgs_in_list clear">
+      	<dl>
+      		<dt>猜你喜欢</dt>
+      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+      	</dl>
+      	<dl>
+      		<dt>精品推荐</dt>
+      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+      	</dl>
+      </div><!-- imgs_in_list -->
+      <p class="imgs_banner">
+      	<img src="<%= asset_path "imgbase/imgs_banner.jpg" %>">
+      </p>
+    </div><!--author_show-->
+	</div><!--imgbase_main-->
+</div>

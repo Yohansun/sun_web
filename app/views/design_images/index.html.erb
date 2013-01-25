@@ -316,7 +316,7 @@
 				<ul class="imgbase_list">
 					<%- @images.each_with_index do |image, index| %>
 						<li data-view="<%= image.design.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-							<a href="<%= user_design_path(image.id, image.imageable_id) %>">
+							<a href="<%= image_show_design_image_path(image) %>">
 								<%= image_tag(image.file, size: '224x162') %>
 								<p><%= truncate(image.title, length: 15) %></p>
 								<span></span>

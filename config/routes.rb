@@ -218,6 +218,10 @@ Icolor::Application.routes.draw do
     collection do
       get :decoration_parts
     end
+    member do
+      get :image_show
+      get :more_comment
+    end
   end
 
   #修改个人签名

@@ -58,6 +58,24 @@ class DesignImagesController < ApplicationController
     end
   end
 
+  def image_show
+    @image = DesignImage.includes(:design).find(params[:id])
+    @images_total = DesignImage.count
+    @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id).title}
+    if @image.area_id
+      @image_city = Area.find(@image.area_id).parent.name
+    end
+    #推荐色
+    @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
+    @comments = @image.comments.page(params[:page]).per(3)
+  end
+
+  def more_comment
+    @image = DesignImage.find(params[:id])
+    @page = params[:page].try(:to_i) +1
+    @comments = @image.comments.page(@page).per(3)
+  end
+
   private
   def coerce(params)
     if params[:upload].nil?
