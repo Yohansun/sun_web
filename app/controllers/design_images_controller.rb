@@ -22,6 +22,40 @@ class DesignImagesController < ApplicationController
     @upload = DesignImage.find(params[:id])
   end
 
+  def index
+    @image_length = DesignImage.count
+    if params[:imageable_type] == "MasterDesign"
+      @images = DesignImage.available.where(imageable_type: 'MasterDesign').page(params[:page]).per(11)
+    elsif params[:imageable_type] == "Design"
+      @images = DesignImage.available.where(imageable_type: 'Design').page(params[:page]).per(11)
+    elsif params[:imageable_type] == "ColorDesign"
+      @images = DesignImage.available.where(imageable_type: 'ColorDesign').page(params[:page]).per(11)
+    elsif params[:ranking_list] == "like"
+      @images = DesignImage.includes(:design).available.order("designs.votes_count DESC").page(params[:page]).per(11)
+    elsif params[:ranking_list] == "view_count"
+      @images = DesignImage.includes(:design).available.order("designs.view_count DESC").page(params[:page]).per(11)
+    else
+      @images = DesignImage.available.page(params[:page]).per(11)
+    end 
+  end
+  
+  def decoration_parts
+    @image_length = DesignImage.count
+    if params[:imageable_type] == "MasterDesign"
+      @images = DesignImage.available.where(imageable_type: 'MasterDesign').page(params[:page]).per(11)
+    elsif params[:imageable_type] == "Design"
+      @images = DesignImage.available.where(imageable_type: 'Design').page(params[:page]).per(11)
+    elsif params[:imageable_type] == "ColorDesign"
+      @images = DesignImage.available.where(imageable_type: 'ColorDesign').page(params[:page]).per(11)
+    elsif params[:ranking_list] == "like"
+      @images = DesignImage.includes(:design).available.order("designs.votes_count DESC").page(params[:page]).per(11)
+    elsif params[:ranking_list] == "view_count"
+      @images = DesignImage.includes(:design).available.order("designs.view_count DESC").page(params[:page]).per(11)
+    else
+      @images = DesignImage.available.page(params[:page]).per(11)
+    end
+  end
+
   private
   def coerce(params)
     if params[:upload].nil?

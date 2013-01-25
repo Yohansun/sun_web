@@ -63,6 +63,14 @@ module MagicContent
             error_color.push(image_params["color#{item}".to_sym])
             # flash[:notice] = "色号不正确"
           end
+        else
+          if ColorCode.find_by_code(image_params["color#{item}".to_sym])
+            @image.send("color#{item}=", image_params["color#{item}".to_sym].strip)
+            color.push(image_params["color#{item}".to_sym])
+          else
+            error_color.push(image_params["color#{item}".to_sym])
+            # flash[:notice] = "色号不正确"
+          end
         end
       end
       if @image.save

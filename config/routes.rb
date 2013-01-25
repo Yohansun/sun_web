@@ -212,7 +212,11 @@ Icolor::Application.routes.draw do
     resources :moods
   end
 
-  resources :design_images
+  resources :design_images do
+    collection do
+      get :decoration_parts
+    end
+  end
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
