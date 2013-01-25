@@ -22,7 +22,7 @@
                     end
                 end
                 %>
-                <%= codes.join(",") %>
+                <%= raw codes.join(",") %>
             }<%= ","  unless (index_u+1) == @design.weekly_star_uploads.size %>
             <%- end %>
         };
