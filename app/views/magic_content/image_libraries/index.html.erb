@@ -68,7 +68,7 @@
     <h5>图库管理</h5>
   </div>
   
-  <div class="widget first" style="position:relative;">
+  <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
       <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"],["编辑完成、未审核", "edit_no_verify"],["已编辑色号、未编辑标签", "color_no_edit"],["已编辑标签、未编辑色号", "edit_no_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
@@ -93,37 +93,39 @@
         <th width='260px'>操作</th>
       </thead>
       <tbody>
-        <%- @images.each do |image| -%>
-        <tr>
-          <td><%= image.id %></td>
-          <td><%= link_to(truncate(image.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.title.present? %></td>
-          <td>
-           <%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail',
-              :"data-placement" => 'right',
-              :"data-html" => true,
-              :"data-original-title" => "#{image_tag(image.file(:slide_thumb))}",
-              rel: 'tooltip') %>
-          </td>
-          <td>
-            <%= link_to(truncate(image.imageable.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.imageable.title.present? %></td>
-          <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td><%= image.last_user.username if image.last_user %></td>
-          <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
-          <td><%= link_to(image.channel_name, main_app.user_design_path(user_id: image.user_id, id: image.imageable_id)) %></td>
-          <td><%= image.user.username %></td>
-          <td><%= image.audited? ? 'Y' : 'N' %></td>
-          <td>
-            <%= link_to '编辑', main_app.user_designs_path(image.user.id, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]) %>
-            <%= link_to '设置详情', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
-            <%= link_to '设置标签', main_app.image_library_categories_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]) %>
-            <%= link_to '设置色号', "javascript:void(0)", :class => 'set_color', :"data-id" => image.id %>
-            <%= link_to '审核', main_app.image_library_audited_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), :confirm => "确认审核通过吗"%>
-            <%= link_to '删除', main_app.image_library_destroy_image_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), method: :delete, :confirm => "确定删除吗" %>
-            <%= render partial: 'name', :locals => { :image => image }%>
-            <%= render partial: 'color', :locals => { :image => image }%>
-          </td>
-        </tr>
-        <%- end -%>
+        <% if @images.present? %>
+          <%- @images.each do |image| -%>
+          <tr>
+            <td><%= image.id %></td>
+            <td><%= link_to(truncate(image.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.title.present? %></td>
+            <td>
+             <%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail',
+                :"data-placement" => 'right',
+                :"data-html" => true,
+                :"data-original-title" => "#{image_tag(image.file(:slide_thumb))}",
+                rel: 'tooltip') %>
+            </td>
+            <td>
+              <%= link_to(truncate(image.imageable.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.imageable.try(:title).present? %></td>
+            <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td><%= image.last_user.username if image.last_user %></td>
+            <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
+            <td><%= link_to(image.channel_name, main_app.user_design_path(user_id: image.user_id, id: image.imageable_id)) %></td>
+            <td><%= image.user.username %></td>
+            <td><%= image.audited? ? 'Y' : 'N' %></td>
+            <td>
+              <%= link_to '编辑', main_app.user_designs_path(image.user.id, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]) %>
+              <%= link_to '设置详情', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
+              <%= link_to '设置标签', main_app.image_library_categories_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]) %>
+              <%= link_to '设置色号', "javascript:void(0)", :class => 'set_color', :"data-id" => image.id %>
+              <%= link_to '审核', main_app.image_library_audited_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), :confirm => "确认审核通过吗"%>
+              <%= link_to '删除', main_app.image_library_destroy_image_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), method: :delete, :confirm => "确定删除吗" %>
+              <%= render partial: 'name', :locals => { :image => image }%>
+              <%= render partial: 'color', :locals => { :image => image }%>
+            </td>
+          </tr>
+          <%- end -%>
+        <% end %>
       </tbody>
     </table>
   </div>
