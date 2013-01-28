@@ -22,7 +22,7 @@
                     end
                 end
                 %>
-                <%= codes.join(",") %>
+                <%= raw codes.join(",") %>
             }<%= ","  unless (index_u+1) == @master_design.master_design_uploads.size %>
             <%- end %>
         };
