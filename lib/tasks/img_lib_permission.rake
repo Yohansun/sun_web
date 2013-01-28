@@ -20,10 +20,15 @@ task :img_lib_permissions => :environment  do
   del_function = Function.create(name: '删除')
   del_function.permissions.create(action: 'delete', subject_class: 'del')
 
+  image_function = Function.create(name: '图库管理')
+  image_function.permissions.create(action: 'manage', subject_class: 'image_libraries_path')
+
+  manage_content = Function.find(1)
+
   group_a = Group.create(name: '权限A')
-  group_a.functions = [edit_album_funtion, set_details_funtion, settings_tab_funtion, del_function]
+  group_a.functions = [edit_album_funtion, set_details_funtion, settings_tab_funtion, del_function,image_function,manage_content]
   group_b = Group.create(name: '权限B')
-  group_b.functions = [edit_album_funtion, settings_tab_funtion, audit_function, del_function]
+  group_b.functions = [edit_album_funtion, settings_tab_funtion, audit_function, del_function,image_function,manage_content]
   group_c = Group.create(name: '权限C')
-  group_c.functions = [set_color_function, del_function]
+  group_c.functions = [set_color_function, del_function,image_function,manage_content]
 end
