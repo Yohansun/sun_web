@@ -1,12 +1,5 @@
 GIT
-  remote: git@github.com:amerine/acts_as_tree.git
-  revision: e10f1a289c11a4e05138b2188f170f289203bb26
-  specs:
-    acts_as_tree (1.2.0)
-      activerecord (>= 3.0.0)
-
-GIT
-  remote: git@github.com:nioteam/magic_admin.git
+  remote: git@git.networking.io:nioteam/magic_admin.git
   revision: 9e976e70ece1edf93758f1f6070328ff4c4cf29d
   specs:
     magic_admin (0.0.1)
@@ -18,7 +11,7 @@ GIT
       simple_form (~> 2.0.0.rc)
 
 GIT
-  remote: git@github.com:nioteam/magic_content.git
+  remote: git@git.networking.io:nioteam/magic_content.git
   revision: 18e4787a4ca8355c62e8820d152e125f5f033229
   specs:
     magic_content (0.0.1)
@@ -28,6 +21,13 @@ GIT
       inherited_resources
       paperclip
       rails (~> 3.2.1)
+
+GIT
+  remote: git@github.com:amerine/acts_as_tree.git
+  revision: e10f1a289c11a4e05138b2188f170f289203bb26
+  specs:
+    acts_as_tree (1.2.0)
+      activerecord (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/

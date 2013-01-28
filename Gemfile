@@ -34,8 +34,8 @@ gem 'unicorn'
 
 gem "paperclip", "<3.0"
 
-gem "magic_admin", :git => "git@github.com:nioteam/magic_admin.git"
-gem "magic_content", :git => "git@github.com:nioteam/magic_content.git"
+gem "magic_admin", :git => "git@git.networking.io:nioteam/magic_admin.git"
+gem "magic_content", :git => "git@git.networking.io:nioteam/magic_content.git"
 gem "acts_as_tree", :git => "git@github.com:amerine/acts_as_tree.git"
 
 gem "devise"
