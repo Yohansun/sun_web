@@ -49,7 +49,7 @@
     <div class="gallery_over_mask"></div>
     <script type="text/javascript">
       $(function(){
-          var obj = galleryC({ 'images' : [<%= @master_design.master_design_uploads.map{ |design| "'#{design.file.url(:fullscreen)}'" }.join(",") %>]});
+          var obj = galleryC({ 'images' : [<%= raw @master_design.master_design_uploads.map{ |design| "'#{design.file.url(:fullscreen)}'" }.join(",") %>]});
           $('div.gallery_over span.replay a').click(function(e){
             $('div.gallery_over_wrap').hide();
             $('div.gallery_over_mask').hide();

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
   <head>
     <title>幻灯片</title>
@@ -37,7 +37,7 @@
     <div class="gallery_over_mask"></div>
     <script type="text/javascript">
       $(function(){
-          var obj = galleryC({ 'images' : ['<%= @design.show_preview_img.url(:slide) %>']});
+          var obj = galleryC({ 'images' : ['<%= raw @design.show_preview_img.url(:slide) %>']});
           $('div.gallery_over span.replay a').click(function(e){
             $('div.gallery_over_wrap').hide();
             $('div.gallery_over_mask').hide();
