@@ -57,6 +57,9 @@ module MagicContent
       @image.title = image_params[:title] if image_params[:title].present?
       @image.content = image_params[:content]
       @image.reason = image_params[:reason]
+      @image.color1_name = image_params[:color1_name]
+      @image.color2_name = image_params[:color2_name]
+      @image.color3_name = image_params[:color3_name]
       [1,2,3].each do |item|
         if item != 1
           if ColorCode.find_by_code(image_params["color#{item}".to_sym]) && image_params["color#{item}".to_sym].strip != image_params["color#{item-1}".to_sym].strip

@@ -19,7 +19,7 @@
         alert('请至少在第一行输入一个色号!');
         return false;
         }
-        var $input_parent = $(this).parent().siblings('fieldset')
+        var $input_parent = $(this).parent().siblings().find('fieldset')
         var $input1 = $input_parent.children('.color_input').val();
         var $input2 = $input_parent.children('.color_input2').val();
         var $input3 = $input_parent.children('.color_input3').val();
