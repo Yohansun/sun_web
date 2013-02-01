@@ -1,17 +1,34 @@
 <%= form_tag main_app.image_library_update_title_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), :class => 'color_form', :style => 'z-index:9000', :method => :put do %>
   <h3>设置色号</h3>
-  <fieldset style="height:30px;padding:5px 60px">
-    <label class="color_form_label">请输入色号：</label> 
-    <input type="text" class="color_input" data-provide="typeahead" name="design_image[color1]" value="<%= image.color1 %>">
-  </fieldset>
-  <fieldset style="height:30px;padding:5px 60px">
-    <label class="color_form_label">请输入色号：</label>
-    <input type="text" class="color_input2" data-provide="typeahead" name="design_image[color2]" value="<%= image.color2 %>">
-  </fieldset>
-  <fieldset style="height:30px;padding:5px 60px">
-    <label class="color_form_label">请输入色号：</label> 
-    <input type="text" class="color_input3" data-provide="typeahead" name="design_image[color3]" value="<%= image.color3 %>">
-  </fieldset>
+  <div style="float:left;width:250px;">
+    <fieldset style="height:30px;padding:5px 10px">
+      <label class="color_form_label">请输入色号：</label> 
+      <input type="text" class="color_input" data-provide="typeahead" name="design_image[color1]" value="<%= image.color1 %>">
+    </fieldset>
+    <fieldset style="height:30px;padding:5px 10px">
+      <label class="color_form_label">请输入色号：</label>
+      <input type="text" class="color_input2" data-provide="typeahead" name="design_image[color2]" value="<%= image.color2 %>">
+    </fieldset>
+    <fieldset style="height:30px;padding:5px 10px">
+      <label class="color_form_label">请输入色号：</label> 
+      <input type="text" class="color_input3" data-provide="typeahead" name="design_image[color3]" value="<%= image.color3 %>">
+    </fieldset>
+  </div>
+  <div style="float:left;width:245px;">
+    <fieldset style="height:30px;padding:5px 10px">
+      <label class="color_form_label1">颜色种类：</label>
+      <input type="text"  data-provide="typeahead" name="design_image[color1_name]" value="<%= image.color1_name if image.color1 %>">
+    </fieldset>
+    <fieldset style="height:30px;padding:5px 10px">
+      <label class="color_form_label1">颜色种类：</label> 
+      <input type="text"  data-provide="typeahead" name="design_image[color2_name]" value="<%= image.color2_name  if image.color1 %>">
+    </fieldset>
+    <fieldset style="height:30px;padding:5px 10px">
+      <label class="color_form_label1">颜色种类：</label> 
+      <input type="text"  data-provide="typeahead" name="design_image[color3_name]" value="<%= image.color3_name  if image.color1 %>">
+    </fieldset>
+  </div>
+  <%= image_tag(image.file(:fullscreen), size: '500x202') %>
   <div class="color_form_button" >
     <%= submit_tag "保存", :class => 'greyishBtn color_commit', :id => 'commit#{image.id}' , :disable_with => "提交中..." %>
     <!-- <a href="javascript:;" class="greyishBtn color_commit ppp" >aa</a> -->
