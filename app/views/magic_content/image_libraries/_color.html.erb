@@ -21,11 +21,11 @@
     </fieldset>
     <fieldset style="height:30px;padding:5px 10px">
       <label class="color_form_label1">颜色种类：</label> 
-      <input type="text"  data-provide="typeahead" name="design_image[color2_name]" value="<%= image.color2_name  if image.color1 %>">
+      <input type="text"  data-provide="typeahead" name="design_image[color2_name]" value="<%= image.color2_name  if image.color2 %>">
     </fieldset>
     <fieldset style="height:30px;padding:5px 10px">
       <label class="color_form_label1">颜色种类：</label> 
-      <input type="text"  data-provide="typeahead" name="design_image[color3_name]" value="<%= image.color3_name  if image.color1 %>">
+      <input type="text"  data-provide="typeahead" name="design_image[color3_name]" value="<%= image.color3_name  if image.color3 %>">
     </fieldset>
   </div>
   <%= image_tag(image.file(:fullscreen), size: '500x202') %>

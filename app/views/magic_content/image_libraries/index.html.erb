@@ -126,9 +126,6 @@
               <% if can? :set, :color %>
                 <%= link_to '设置色号', "javascript:void(0)", :class => 'set_color', :"data-id" => image.id %>
               <% end %>
-              <% if can? :audit, :aud %>
-              <%= link_to '审核', main_app.image_library_audited_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), :confirm => "确认审核通过吗"%>
-              <% end %>
               <% if can? :delete, :del %>
                 <%= link_to '删除', main_app.image_library_destroy_image_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), method: :delete, :confirm => "确定删除吗" %>
               <% end %>
