@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122040820) do
+ActiveRecord::Schema.define(:version => 20130201023756) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -189,8 +189,8 @@ ActiveRecord::Schema.define(:version => 20130122040820) do
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.boolean  "is_cover"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -206,6 +206,10 @@ ActiveRecord::Schema.define(:version => 20130122040820) do
     t.string   "source"
     t.integer  "room"
     t.text     "content"
+    t.text     "reason"
+    t.string   "color1_name",       :default => "墙面推荐色"
+    t.string   "color2_name",       :default => "墙面推荐色"
+    t.string   "color3_name",       :default => "墙面推荐色"
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
