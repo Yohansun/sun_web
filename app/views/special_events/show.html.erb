@@ -1,64 +1,39 @@
 <%= stylesheet_link_tag 'uploadify' %>
 <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
 <style type="text/css">
-.uploadifyQueueItem{background-color: transparent!important;}
-.main{width:963px;padding-bottom:75px;background:#900202;margin-bottom:50px;}
-.active_area{position:relative;background:url("<%= asset_path 'special_event/newyear_bg3.jpg'%>") no-repeat;height:203px;text-align:center;}
-.active_area .button_small{margin-top:15px;}
-.link1{position:absolute;right:86px;bottom:30px;color:#ffffff;font:14px "Microsoft Yahei";text-decoration:underline;}
-#layer{width:100%;height:100%;position:fixed;_position:absolute;top:0;left:0;background: black;cursor: pointer;opacity: 0.9;-moz-opacity: 0.9;filter: alpha(opacity=90);z-index:10000;display:none;}
-.new_year{position:fixed;_position:absolute;top:50%;left:50%;margin-left:-395px;margin-top:-300px;background:url("<%= asset_path 'special_event/bg.png'%>") no-repeat;width:765px;height:606px;padding-right:25px;z-index:100001;display:none;}
-.new_year p.success_info{margin-top:365px;background:url("<%= asset_path 'special_event/t_img1.png'%>") no-repeat right top;}
-.new_year p.unsuccess_info{margin-top:395px;background:url("<%= asset_path 'special_event/f_img1.png'%>") no-repeat right top;}
-p.success_info,p.unsuccess_info{padding:148px 129px 0 50px;text-align:right;overflow:hidden;}
-.new_year .checkbox{float:left;width:22px;height:22px;background:url("<%= asset_path 'special_event/check_bg_f.png'%>") no-repeat;margin:5px 10px;}
-.checkbox_checked{background:url("<%= asset_path 'special_event/check_bg_t.png'%>") no-repeat!important;}
-.new_year_close{position:absolute;top:-10px;right:-10px;}
-.flash{width:800px;height:620px;position:fixed;_position:absolute;top:50%;left:50%;margin-left:-400px;margin-top:-310px;z-index:100001;display:none;}
-.main .tips{background:url("<%= asset_path 'special_event/newyear_bg4.jpg'%>") no-repeat left top;padding:25px 85px;min-height:317px;_height:317px;}
-.main .tips p{color:#fff;margin:25px 0;line-height:16px;font-family:"Microsoft Yahei";}
-.main .tips span.display_block{display:block;margin:5px 0 5px 48px;}
-.main .tips i{display:inline-block;background:url("<%= asset_path 'special_event/icon.png'%>") no-repeat 0 0;width:33px;height:33px;position:relative;top:12px;margin-right:10px;}
-.main .tips strong,.main .tips span{line-height:33px;}
-.main .tips strong{font-size:18px;}
-.main .tips span{font-size:14px;}
-.main .tips i.icon_time{background-position:0 -70px;}
-.main .tips i.icon_step{background-position:0 -145px;}
-.main .tips i.icon_award{background-position:0 -290px;}
-.main .tips i.icon_state{background-position:0 -360px;}
-.morethree{width:610px;height:345px;position:fixed;_position:absolute;top:50%;left:50%;margin-left:-305px;margin-top:-175px;display:none;z-index: 100001;}
-a.button_small{
-  display:inline-block;
-  background:url("<%= asset_path 'special_event/button.jpg'%>") no-repeat top center;
-  height:31px;
-  width:70px;
-  text-align:center;
-  color:#712222;
-  font:bold 16px/31px "Microsoft Yahei";
-}
-.upload_img, .uploadify{color:red;font-size:26px;font-family:'Microsoft Yahei';font-style:italic;line-height:145px;display:block;width:453px;height:141px;margin:0 auto;text-decoration:underline;}
-#upload_photo_queue {
-  line-height:145px;display:block;width:400px;height:141px;margin:0 auto;
-}
-.upload_img, .uploadify span.uploadifyButtonText{color:red;line-height:145px;font-size: 20px;font-style: italic;}
-#upload_photo object{
-  left: 0;
-}
-/*.uploadify{margin:0 auto;}*/
-.uploadify:hover .uploadifyButton {
-  background-color: transparent!important;;
-}
-.uploadifyButton {
-  background-color: transparent!important;;
-}
-#upload_photo_queue{
-  position: relative;
-  top: -50px;
-}
-.cancel{display:inline;}
-#overlay{z-index:10000;}
-</style>
+body{background:url(<%= asset_path 'spring/spring/spring_bg.jpg'%>) no-repeat top center;}
+.footer{background-color:#dcdcdc;}
+.spring2013{background:url(<%= asset_path 'spring/spring/spring2013.png'%>) no-repeat;width:822px;height:1037px;margin:340px auto 10px;padding:33px 35px 0 35px;_background-image:url(<%= asset_path 'spring/spring/spring2013.gif'%>);}
+.spring_form{background:#fff url(<%= asset_path 'spring/spring/spring_form.jpg'%>) no-repeat left top;width:769px;height:370px;border:2px solid #b7b7b7;padding:20px 18px 0 31px;}
+.spring_photo{background:#fff;width:373px;height:261px;border:1px solid #b7b7b7;margin-right:17px;padding:8px 10px 33px 10px;}
+.spring_img{width:373px;height:261px;display:table-cell;vertical-align:middle;}
+.spring_img i{background:url(<%= asset_path 'spring/spring/spring_camera.png'%>) no-repeat;width:131px;height:110px;position:absolute;left:-36px;bottom:-79px;_background-image:url(<%= asset_path 'spring/spring/spring_camera.gif'%>);}
+.spring_img img{max-width:373px;max-height:261px;}
+.spring_upload{background:url(<%= asset_path 'spring/spring/spring_upload.png'%>) no-repeat;width:178px;height:51px;left:50%;top:50%;margin-left:-89px;margin-top:-20px;_background-image:url(<%= asset_path 'spring/spring/spring_upload.gif'%>);}
 
+.spring_users{width:353px;height:36px;line-height:36px;}
+.spring_form .tr{padding:5px 0;}
+.spring_form textarea{width:350px;height:232px;}
+.spring_users,.spring_form textarea{background:#fff;border:1px solid #b7b7b7;font:bold 16px "Microsoft Yahei";display:block;}
+.spring_submit{background:url(<%= asset_path 'spring/spring/spring_submit.jpg'%>) no-repeat;width:101px;height:44px;bottom:-2px;left:50%;border:0;margin-left:-51px;}
+.spring_more{bottom:8px;right:8px;font-style:italic;}
+
+.spring2013 li{background:url(<%= asset_path 'spring/spring/spring_list.jpg'%>) 0 22px no-repeat;margin:10px 0;padding:10px 0 10px 36px;}
+.spring2013 li span{font-size:18px;}
+.spring2013 li p{margin:13px 0;}
+li.spring2{background-position:0 -61px;}
+li.spring3{background-position:0 -109px;}
+li.spring4{background-position:0 -182px;}
+li.spring5{background-position:0 -326px;}
+li.spring6{background-position:0 -446px;}
+
+.spring_card{background:url(<%= asset_path 'spring/spring/spring_card.png'%>) no-repeat;width:833px;height:549px;margin-left:-416px;margin-top:-275px;}
+.spring_layer{background:#fff;position:fixed;_position:absolute;width:100%;height:100%;left:0;top:0;bottom:0;right:0;opacity:0.5;filter:alpha(opacity=50);cursor:pointer;}
+
+.spring_btn{background:url(<%= asset_path 'spring/spring/spring_btn.png'%>) no-repeat;width:136px;height:40px;text-indent:-999em;right:100px;bottom:-35px;_background-image:url(<%= asset_path 'spring/spring/spring_btn.gif'%>);}
+.spring_img div{position: absolute!important;left:50%; top: 50%;margin: -12px 0 0 -89px;}
+.spring_img object{position:absolute;left:0;top:0;}
+</style>
 <script type="text/javascript" charset="utf-8">
 <%- session_key = Rails.application.config.session_options[:key] -%>
 $(function() {
@@ -74,34 +49,37 @@ $(function() {
       }
     });
   } else {
-    $('#upload_photo').uploadify({
+    $('#spring_upload').uploadify({
       swf : '/uploadify/uploadify.swf',
       cancelImage : '/uploadify/uploadify-cancel.png',
       // progressData : 'percentage',
-      buttonText : "点击上传图片（请上传小于5M的JPG格式图片）",
+      buttonText : "<a class='spring_upload pa'></a>",
       fileTypeDesc : '图片文件',
       fileTypeExts : '*.jpg',
       successTimeout : 6000,
       fileSizeLimit : '5MB',
-      uploadLimit : 60,
-      width : 453,
-      height : 141,
+      // uploadLimit : 60,
+      width : 178,
+      height : 51,
       multi : false,
       auto : true,
       checkExisting : false,
       transparent : true,
       uploader : '<%= user_design_images_path(current_user || 0) %>',
       onUploadSuccess : function(file, data, response) {
+        $('#overlay').hide()
+        $('#spring_upload_queue').hide()
         var dat = eval('(' + data + ')');
         if (dat.result == 'success') {
           var image_id = dat.upload.split("/")[2];
           $("#attendee_image_id").val(image_id);
-          alert("图片上传成功");
-          var image = $("#attendee_image_id").val()
-          if(image != '' && image != undefined){
-            $('.flash').show()
-            $('#overlay').show()
-          }
+          $("#upload_img").attr("src",dat.path);
+
+          // var image = $("#attendee_image_id").val()
+          // if(image != '' && image != undefined){
+          //   $('.flash').show()
+          //   $('#overlay').show()
+          // }
         }else{
           alert("图片上传失败");
         };
@@ -118,175 +96,91 @@ $(function() {
       }
     });
   }
-
-  swfobject.registerObject("FlashID");
-
-  $('.overlay').show()
-
-  $('#overlay').click(function(){
-    $(this).hide();
-    $('.new_year').hide();
-    $('.flash').hide();
-  })
-  $('.js-close').click(function(){
-    $('.new_year').hide();
-    $('.morethree').hide();
-    $('#overlay').hide()
-  })
-  $(window).resize(function(){
-    fix();
-  })
-
-  var ie6 = $.browser.msie && $.browser.version == 6;
-
-  if(ie6){fix();}
-
-  $('.js-checkbox').click(function(){
-    $(this).toggleClass('checkbox_checked')
-  })
-
-  $('.js-flash').click(function(){
-    var image = $("#attendee_image_id").val()
-    if(image != '' && image != undefined){
-      $('.flash').show();
-      $('#overlay').show();
-      $(".js-checkbox").addClass("checkbox_checked");
-    }
-  })
-
-  $('.js-weibo').click(function(){
-    if ($(this).parent().has(".checkbox_checked").size() > 0) {
-      if($(this).parent().has(".success_info").size() > 0) {
-        zhong = 1;
-      } else {
-        zhong = 0;
-      }
-      $.post('/special_events/2/weibo', {zhong: zhong}, function(data, textStatus, xhr) {
-      });
-    };
-    $('.new_year').hide();
-    $('.morethree').hide();
-    $('#overlay').hide()
-  })
 });
+function submit_blessing() {
+    log = ''
+    flag = true
+    var title = $('#title').val();
+    var attendee_image_id = $('#attendee_image_id').val();
+    var blessing = $('#blessing').val();
+    if (title == null || title == ""){
+      log += '请@好友！';
+      flag = false;
+    }
+    if (attendee_image_id == null || attendee_image_id == ""){
+      log += '请上传照片！';
+      flag = false;
+    }
 
-function fix(){
-  $('#overlay').css({'height' : document.body.scrollHeight + 'px', 'width' : document.documentElement.clientWidth + 'px'});
-}
+    if (blessing == null || blessing == ""){
+      log += '请填写祝福语！'
+      flag = false;
+    }
 
-function zadan() {
-  var image = $("#attendee_image_id").val()
-  $('.flash').hide();
-  if(image != '' && image != undefined) {
-    $.post('/special_events/2/award', {image_id: image}, function(data, textStatus, xhr) {
-    });
+    if (flag == false){
+      alert(log);
+    }else{
+      $.post("<%=blessing_special_event_path%>",{attendee_image_id:attendee_image_id,title:title,blessing:blessing},function(){});
+    } 
   }
-}
 </script>
 
-<div class="main">
-  <%= hidden_field_tag 'user_signed', current_user.present? %>
-  <div><%= image_tag 'special_event/newyear_bg1.jpg' %></div>
-  <div><%= image_tag 'special_event/newyear_bg2.jpg' %></div>
-  <div class="active_area">
-    <div style='height:145px;overflow:hidden;'>
-      <%= hidden_field_tag 'attendee_image_id' %>
-      <a href="#" class="upload_img" id='upload_photo'>点击上传图片（请上传小于5M的JPG格式图片）</a>
-    </div>
-    <a href="http://www.icolor.com.cn/inspirations?from=top" class="link1">查看更多美图...</a><!--link to 灵感秀 -->
-  </div>
-  <div class="tips">
-    <h3><%= image_tag 'special_event/rules_title.png' %></h3>
-    <p>
-      <i class="icon_object"></i>
-      <strong>活动对象：</strong>
-      <span>iColor所有的注册用户</span>
-    </p>
-    <p>
-      <i class="icon_time"></i>
-      <strong>活动时间：</strong>
-      <span>2013.1.1-2013.1.3</span>
-    </p>
-    <p>
-      <i class="icon_step"></i>
-      <strong>活动步骤：</strong>
-      <span class="display_block">Step1：注册用户上传新年相关美图</span>
-      <span class="display_block">Step2：上传成功后即可参与砸金蛋抽奖</span>
-      <span class="display_block">Step3：活动分享至已绑定的新浪微博和iColor个人心情</span>
-    </p>
-    <p>
-      <i class="icon_award"></i>
-      <strong>活动奖励：</strong>
-      <span>奖品包括立邦288色卡或缤纷净味12色套装一份（奖品随机发放）</span>
-    </p>
-    <p>
-      <i class="icon_state"></i>
-      <strong>活动说明：</strong>
-      <span class="display_block">每位注册用户每天获10次砸金蛋机会，中奖者可活动iColor提供的活动奖励</span>
-    </p>
-    <p class="tr"><a href="/" class="button_small">返回</a></p>
-  </div>
-</div><!--main ends-->
+<div class="wrapper ft14 spring2013">
+	<%= hidden_field_tag 'user_signed', current_user.present? %>
 
-<div class="flash">
-  <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="793" height="618">
-    <param name="movie" value="/flash/SE_kick_egg.swf" />
-    <param name="quality" value="high" />
-    <param name="wmode" value="opaque" />
-    <param name="swfversion" value="6.0.65.0" />
-    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-    <param name="expressinstall" value="Scripts/expressInstall.swf" />
-    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-    <!--[if !IE]>-->
-    <object type="application/x-shockwave-flash" data="/flash/SE_kick_egg.swf" width="793" height="618">
-      <!--<![endif]-->
-      <param name="quality" value="high" />
-      <param name="wmode" value="opaque" />
-      <param name="swfversion" value="6.0.65.0" />
-      <param name="expressinstall" value="Scripts/expressInstall.swf" />
-      <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-      <div>
-        <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
-        </div>
-      <!--[if !IE]>-->
-    </object>
-    <!--<![endif]-->
-  </object>
-</div>
-<% if current_user %>
-<div class="new_year has_award">
-  <a href="#" class="new_year_close js-close"><%= image_tag 'special_event/close.png' %></a>
-    <p class="success_info">
-    <a href="javascript:;" class="checkbox checkbox_checked js-checkbox"></a>
-    <%= image_tag 'special_event/f_txt.png', border: "0", usemap: "#Map"%>
-    <map name="Map" id="Map">
-      <area shape="rect" coords="170,26,409,48" href="http://www.iColor.com.cn" />
-    </map>
-    <span style="display:block;color:#fff;font-size:16px;font-family:'Microsoft Yahei';margin-top:5px;text-align:left;margin-left:49px;">
-      请到<a href="/users/<%=current_user.id%>/edit" style="color:#487ac5;text-decoration:underline;font-style:italic;">个人账户</a>
-      填写或核实您的邮寄地址，我们将尽快寄出您的获奖礼物！
-    </span>
-  </p><!-- 中奖 -->
-  <button type="button" style="position:absolute;right:25px;bottom:20px;" class="js-weibo"><%= image_tag 'submit_btn.jpg' %></button>
-</div>
-<% end %>
-<div class="new_year no_award">
-  <a href="#" class="new_year_close js-close"><%= image_tag 'special_event/close.png' %></a>
-  <p class="unsuccess_info">
-    <a href="javascript:;" class="checkbox checkbox_checked js-checkbox"></a>
-    <%= image_tag 'special_event/f_txt.png', border: "0", usemap: "#Map"%>
-    <map name="Map" id="Map">
-      <area shape="rect" coords="170,26,409,48" href="http://www.iColor.com.cn" />
-    </map>
-  </p>
-  <button type="button" style="position:absolute;right:25px;bottom:20px;" class="js-weibo"><%= image_tag 'submit_btn.jpg' %></button>
-</div>
+  <form class = "spring_form pr ft16">
+		<div class="spring_photo fl">
+			<div class="spring_img pr tc">
+				<a href='javascript:;' class='spring_upload pa' id='spring_upload'></a>
+				<img src="<%= asset_path 'spring/spring/spring_img.jpg'%>" id="upload_img"/>
+				<i></i>
+			</div>
+		</div><!-- spring_photo -->
+		<div class="fl cw ft12">
+			<input type="text" class="spring_users" name="title" id="title"/>
+			<p class="tr">@3位好友，以逗号区分</p>
+			<%=text_area_tag 'blessing', '' ,:maxlength => "120" %>
+			<p class="tr">写下您的新春祝福吧！</p>
+		</div>
+    <%= hidden_field_tag 'attendee_image_id' %>
+		<input type="button" value="" class="spring_submit pa" onclick="submit_blessing()" />
+		<a href="<%=inspirations_path%>" class="spring_more cr pa ft14" target="_blank">查看更多美图>></a>
+  </form>
 
-<div class="morethree">
-  <a href="#" class="new_year_close js-close"><%= image_tag 'special_event/close.png' %></a>
-  <%= image_tag 'special_event/bg2.png', border: "0", usemap: "#Map2" %>
-  <map name="Map2" id="Map2">
-    <area shape="rect" coords="384,169,460,211" href="http://www.icolor.com.cn/inspirations?from=top" />
-  </map>
-</div>
+	<ul class="ft14 cr">
+		<li><img src="<%= asset_path 'spring/spring/spring_heading.jpg'%>" alt="活动内容介绍" /></li>
+		<li class="spring2">
+			<span>活动对象：</span>
+			iColor的注册用户
+		</li>
+		<li class="spring3">
+			<span>活动时间：</span>
+			2013.2.4-2013.2.17
+		</li>
+		<li class="spring4">
+			<span>活动步骤：</span><br /><br />
+			<p>Step1：注册用户上传春节年味的图片,图片将会被同步到灵感秀频道。</p>
+			<p>Step2：@3位好友并写祝福，提交后弹出个性化电子贺卡。</p>
+			<p>Step3：确认后电子贺卡将同步发送至新浪微博和iColor个人心情。</p>
+		</li>
+		<li class="spring5">
+			<span>活动奖励：</span><br /><br />
+			<p>每天随机抽取获奖者5名，发送iColor新春小礼物包。</p>
+			<p>活动结束后公布获奖名单并寄送礼品。</p>
+		</li>
+		<li class="spring6">
+			<span>活动说明：</span><br /><br />
+			<p>每位注册用户的活动次数不限。</p>
+		</li>
+	</ul>
+</div><!--wrapper-->
+<div class="spring_layer none"></div>
+<div class="spring_card abs_center none">
+  <img src="" id ="spring_image" />
+  <%= form_tag send_greeting_cards_special_event_path, :method => :post do %>
+    <input type="hidden" id="friends" name="friends">
+    <input type="hidden" id="image_id" name="image_id">
+    <input type="hidden" id="special_event_id" name="special_event_id">
+    <input type="submit" class="spring_btn pa" value="确定">
+  <% end %>
+</div><!-- spring_card -->

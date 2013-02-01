@@ -7,6 +7,8 @@ Icolor::Application.routes.draw do
     member do
       get  :show
       post :join
+      post :blessing
+      post :send_greeting_cards
       put  :check_mobile
       post :award
       post :weibo

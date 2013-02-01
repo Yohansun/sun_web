@@ -5,7 +5,56 @@ class SpecialEventsController < ApplicationController
   @@image_id = {}
 
   def show
-    redirect_to root_path
+    due_at = SpecialEvent.where(id: params[:id]).first if params[:id]
+    if due_at.present? && due_at.due_at.present? 
+      if Time.now.strftime("%Y%m%d").to_i > due_at.due_at.strftime("%Y%m%d").to_i
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
+  end
+
+  def blessing
+    if current_user
+      if File.directory?("public/system/blessing") == false
+        system("mkdir public/system/blessing")
+      end
+      blessing = params[:blessing].scan(/.{20}|.+/).join("\n\n")
+      image = DesignImage.find(params[:attendee_image_id])
+      system("convert #{image.file.path(:spring)} -background blue -rotate 355 public/system/blessing/#{image.id}.png")
+      system("convert public/system/blessing/#{image.id}.png -transparent blue public/system/blessing/#{image.id}.png") 
+      system("composite -geometry +490+173 -gravity SouthEast public/system/blessing/#{image.id}.png public/system/blessing/spring_card.png public/system/blessing/spring_card_#{image.id}.png")
+      system("convert -font public/system/simsun.ttf -fill white -pointsize 16 -draw \"text 670,365 '#{current_user.username}'\" public/system/blessing/spring_card_#{image.id}.png public/system/blessing/bar_#{image.id}.png")
+      system("convert -font public/system/simsun.ttf -annotate +0+0 -gravity NorthWest -fill white -pointsize 16 -draw \"text 440,160 '#{blessing}'\" public/system/blessing/bar_#{image.id}.png public/system/blessing/bar_text_#{image.id}.png")
+      joined_count = EventAttendee.joined_for(params[:id], current_user.id).where(created_at: Time.now.beginning_of_day..Time.now.end_of_day).count
+      name = current_user.display_name
+
+      if joined_count < 10
+        ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id)
+        if image
+          inspiration = ea.user.inspirations.create(title: "#{name}的祝福图片", content: "#{name}的祝福图片")
+          image.update_attribute(:user_id, current_user.id)
+          inspiration.design_images << image
+          ea.update_attribute(:design_image_id, image.id)
+        end
+
+        @result = ea.luckjoy(image.try(:persisted?), current_user)
+        ea.update_attribute :award_mark, @result
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
+  def send_greeting_cards
+    if current_user
+      line = " 春节传美图，iColor送祝福#{params[:friends]}；这是我在iColor送祝福活动中为你们制作的新春贺卡,亲们~收到祝福好运新年哦~你们也来祝福身边好友吧！活动地址：www.icolor.com.cn/special_events/2"
+      ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("created_at DESC").first
+      ea.sync_to_social("weibo", line, "#{Rails.root}/public/system/blessing/bar_text_#{params[:image_id]}.png")
+    end
+    redirect_to special_event_path(params[:id])
   end
 
   def award
