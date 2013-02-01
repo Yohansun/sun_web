@@ -36,15 +36,19 @@ class EventAttendee < ActiveRecord::Base
     award
   end
 
-  def sync_to_social(provider, suffix = "", pic = false)
+  def sync_to_social(provider, suffix = "", pic=false)
     unless self.benediction.blank? && suffix.blank?
       mood = self.user.moods.new(content: self.benediction || suffix)
+      if pic 
+        image = File.open(pic)
+        mood.img = image
+      end
       if mood.save
         self.user.user_tokens.where(["provider = ?", provider]).each do |token|
           if pic
             image = File.open(pic)
             result = Mood.send("send_pic_#{token.provider}", access_token: token.access_token,
-              content: mood.content, pic: image)
+                                content: mood.content, pic: image)
           else
             result = Mood.send("send_#{token.provider}", access_token: token.access_token,
               content: mood.content + suffix)

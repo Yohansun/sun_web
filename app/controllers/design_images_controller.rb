@@ -8,7 +8,8 @@ class DesignImagesController < ApplicationController
       session[:image_id] = @upload.id
       respond_to do |format|
         format.json {render :json => { :result => 'success',
-          :upload => design_image_path(@upload.id) } }
+          :upload => design_image_path(@upload.id),
+          :path =>  @upload.file.url(:spring_img)} }
       end
     else
       respond_to do |format|
