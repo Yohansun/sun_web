@@ -41,7 +41,7 @@ $(function() {
     o_in()
     $('.unlogin').show()
 
-    $('#upload_photo').click(function(event){
+    $('#spring_upload').click(function(event){
       event.preventDefault();
       if($('#user_signed').val() != 'true'){
         o_in()
@@ -98,6 +98,18 @@ $(function() {
   }
 });
 function submit_blessing() {
+  if($('#user_signed').val() != 'true') {
+    o_in()
+    $('.unlogin').show()
+
+    $('#upload_photo').click(function(event){
+      event.preventDefault();
+      if($('#user_signed').val() != 'true'){
+        o_in()
+        $('.unlogin').show()
+      }
+    });
+  } else {
     log = ''
     flag = true
     var title = $('#title').val();
@@ -122,6 +134,7 @@ function submit_blessing() {
     }else{
       $.post("<%=blessing_special_event_path%>",{attendee_image_id:attendee_image_id,title:title,blessing:blessing},function(){});
     } 
+  }
   }
 </script>
 
