@@ -5,13 +5,13 @@
       <%= link_to(image.imageable.title, main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.imageable.title.present? %>
     </h5>
   </div>
-  <h3><%= image.title %></h3>
+  <h3><%= image.title %>&nbsp;&nbsp;&nbsp;ID:&nbsp;<%= image.id %></h3>
   <div class="image-preview" data-id='<%= image.id %>'>
     <p class='up-down-page'>
       <button class='left'>上一张</button>
       <button class='right'>下一张</button>
     </p>
-    <%= image_tag(image.file(:slide), width: '500px') %>
+    <%= image_tag(image.file, width: '500px') %>
   </div>
   <%= form_tag main_app.image_library_update_tags_path(image), :method => :put do %>
   <div class="tags-container">
@@ -63,7 +63,11 @@
         <%- end %>
       </table>
     <%- end %>
-    <%= submit_tag '保存' %>
+    <%= submit_tag '保存', :class =>"greyishBtn" %>
+    &nbsp;
+    <% if can? :audit, :aud %>
+      <%= link_to '审核', main_app.image_library_audited_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), :confirm => "确认审核通过吗", :class =>"button basicBtn" %>
+    <% end %>
   </div>
   <%- end -%>
 </div>

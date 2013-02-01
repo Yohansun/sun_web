@@ -28,10 +28,10 @@ module MagicContent
 
     def update_tags
       @image = DesignImage.find(params[:image_library_id])
-      if params[:area_id].blank?
-        flash[:alert] = '区域信息不能为空'
-        redirect_to main_app.image_library_categories_path(@image.id) and return
-      end
+      # if params[:area_id].blank?
+      #   flash[:alert] = '区域信息不能为空'
+      #   redirect_to main_app.image_library_categories_path(@image.id) and return
+      # end
       @image.area_id = params[:area_id]
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
