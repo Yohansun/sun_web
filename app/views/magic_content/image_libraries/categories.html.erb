@@ -8,6 +8,16 @@
         <%= @image.areas %>);
       iColor.ImageLibrary.bindEvents();
     });
+    window.onload = function(){
+      var img_show = $('.image-preview img')
+      var img_height = parseInt(img_show.css('height'));
+      var img_width = parseInt(img_show.css('width'));
+      if(img_width > img_height){ 
+        img_show.css('width','500px');
+      }else{ 
+        img_show.css('height','490px');
+      }
+    };
 	</script>
 <%- end %>
 

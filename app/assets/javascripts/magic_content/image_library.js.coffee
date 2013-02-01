@@ -7,6 +7,14 @@ class ImageLibrary
 
   previous_next_image: ->
     $('#image-box .up-down-page .left, #image-box .up-down-page .right').live 'click', (event) ->
+      window.onload ->
+        img_show = $('.image-preview img')
+        img_height = parseInt(img_show.css('height'))
+        img_width = parseInt(img_show.css('width'))
+        if (img_width > img_height) 
+          img_show.css('width','500px')
+        else
+          img_show.css('height','490px')
       direction = $(event.currentTarget).attr('class')
       current_id = $('.image-preview').data('id')
       iColor.ImageLibrary.request_loading()
@@ -18,6 +26,13 @@ class ImageLibrary
           $.unblockUI()
         success: (data, textStatus, jqXHR) =>
           $.unblockUI()
+          img_show = $('.image-preview img')
+          img_height = parseInt(img_show.css('height'))
+          img_width = parseInt(img_show.css('width'))
+          if (img_width > img_height) 
+            img_show.css('width','500px')
+          else
+            img_show.css('height','490px')
 
   tag_toggle: ->
     $('span.js-all').live 'click', (event) ->
