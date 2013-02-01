@@ -87,6 +87,10 @@ class DesignImage < ActiveRecord::Base
         DesignImage.includes(:tags).available.where("(design_images.color1 is not null or design_images.color2 is not null or design_images.color3 is not null) and image_tags.design_image_id is null")
       when 'edit_no_color'
         DesignImage.includes(:tags).available.where("design_images.color1 is null and design_images.color2 is null and design_images.color3 is null and image_tags.design_image_id is not null")
+      when 'edit_color'
+        DesignImage.available.where("(color1 is not null) or (color2 is not null) or (color3 is not null)").order("design_images.id DESC")
+      when 'no_edit_color'
+        DesignImage.available.where("(color1 is null) or (color2 is null) or (color3 is null)").order("design_images.id DESC")
     end
   end
 end

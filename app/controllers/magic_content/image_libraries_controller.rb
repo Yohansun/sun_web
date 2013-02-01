@@ -6,11 +6,16 @@ module MagicContent
     def index
       @images = DesignImage.available.order("design_images.id DESC")
       if params[:genre].present? 
-        if params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color'
+        if params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
           @images = DesignImage.search(params[:genre], 'last_updated_at')
         else
           @images = DesignImage.search(params[:genre], params[:keywords]) if params[:keywords].present?
         end
+      end
+      if @images.count % 10 == 0
+        @page_count = @images.count / 10
+      else
+        @page_count = (@images.count / 10).to_i + 1
       end
       @images = @images.page(params[:page]) if @images.present?
     end

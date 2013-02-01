@@ -70,7 +70,7 @@
   
   <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
-      <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"],["编辑完成、未审核", "edit_no_verify"],["已编辑色号、未编辑标签", "color_no_edit"],["已编辑标签、未编辑色号", "edit_no_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
+      <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"],["编辑完成、未审核", "edit_no_verify"],["已编辑色号、未编辑标签", "color_no_edit"],["已编辑标签、未编辑色号", "edit_no_color"],["已编辑色号", "edit_color"],["未编辑色号","no_edit_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
     <% end %>
@@ -141,6 +141,15 @@
       </tbody>
     </table>
   </div>
-  <%= paginate @images if @images.present? %>
+  <ul>
+    <%= paginate @images if @images.present? %>
+    <form>
+      <input style="visibility:hidden" name="keyword" value="<%= params[:keywords]%>"/>
+      <input style="visibility:hidden" name="genre" value="<%=params[:genre]%>"/>
+      <li class="l_reply_num" style="margin-left:2px; margin-right:10px" >共有<span class="red"></span><%= @page_count %>页</li>
+      <li class="l_reply_num" >跳到 <input theme="2" name="page" genre="<%=params[:genre]%>" keywords="<%= params[:keywords]%>" max-page="9" type="text" style="width:30px;height:14px;" /> 页&nbsp;<button id="pager_go2" type="submit" value="确定" style="padding: 0 2px 0 2px;height:21px;line-height:15px;">确定</button>&nbsp;</li>
+    </form>
+
+  </ul>
 </div>
 
