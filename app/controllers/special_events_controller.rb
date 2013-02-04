@@ -22,7 +22,7 @@ class SpecialEventsController < ApplicationController
       end
       blessing = params[:blessing].scan(/.{20}|.+/).join("\n\n")
 
-      title = "To #{params[:title]}："
+      title = "#{params[:title].gsub(/,/, ' ')}"
 
       image = DesignImage.find(params[:attendee_image_id])
       system("convert #{image.file.path(:spring)} -background blue -rotate 355 public/system/blessing/#{image.id}.png")
@@ -54,7 +54,7 @@ class SpecialEventsController < ApplicationController
 
   def send_greeting_cards
     if current_user
-      line = " #春节传美图，iColor送祝福#{params[:friends]}；这是我在iColor送祝福活动中为你们制作的新春贺卡,亲们~收到祝福好运新年哦~你们也来祝福身边好友吧！活动地址：http://www.icolor.com.cn/special_events/3"
+      line = " #春节传美图，iColor送祝福# #{params[:friends]}；这是我在iColor送祝福活动中为你们制作的新春贺卡,亲们~收到祝福好运新年哦~你们也来祝福身边好友吧！活动地址：http://www.icolor.com.cn/special_events/3"
       ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("created_at DESC").first
       ea.sync_to_social("weibo", line, "#{Rails.root}/public/system/blessing/bar_text_#{params[:image_id]}.png")
     end

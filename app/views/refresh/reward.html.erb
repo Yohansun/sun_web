@@ -2,7 +2,7 @@
 	<div class="w_750 award">
 		<h2>活动奖励
 			<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
-				<img src="<%= asset_path "landingpage/uploading.png"%>">
+				<!-- <img src="<%#= asset_path "landingpage/uploading.png"%>"> -->
 			</a>
 		</h2>
 		<h3>活动奖励</h3>
