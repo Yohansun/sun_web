@@ -2,7 +2,7 @@
 	<div class="w_750">
 		<h2>活动日程
 			<a href="<%= (current_user.common_user? ? "/designs" : new_user_design_path(current_user)) if current_user %>" id="design_upload">
-				<img src="<%= asset_path "landingpage/uploading.png"%>">
+				<!-- <img src="<%#= asset_path "landingpage/uploading.png"%>"> -->
 			</a>
 		</h2>
 		<p>征稿时间：2012.10.22一2013.1.15<br>评选时间：2013.1.16一2013.1.21<br>获奖公布：2013.1.22<br>寄送奖品：2013.2.1起</p>
