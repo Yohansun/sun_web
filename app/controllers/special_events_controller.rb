@@ -21,19 +21,23 @@ class SpecialEventsController < ApplicationController
         system("mkdir public/system/blessing")
       end
       blessing = params[:blessing].scan(/.{20}|.+/).join("\n\n")
+
+      title = "To #{params[:title]}："
+
       image = DesignImage.find(params[:attendee_image_id])
       system("convert #{image.file.path(:spring)} -background blue -rotate 355 public/system/blessing/#{image.id}.png")
       system("convert public/system/blessing/#{image.id}.png -transparent blue public/system/blessing/#{image.id}.png") 
       system("composite -geometry +490+173 -gravity SouthEast public/system/blessing/#{image.id}.png public/system/blessing/spring_card.png public/system/blessing/spring_card_#{image.id}.png")
       system("convert -font public/system/simsun.ttf -fill white -pointsize 16 -draw \"text 670,365 '#{current_user.username}'\" public/system/blessing/spring_card_#{image.id}.png public/system/blessing/bar_#{image.id}.png")
-      system("convert -font public/system/simsun.ttf -annotate +0+0 -gravity NorthWest -fill white -pointsize 16 -draw \"text 440,160 '#{blessing}'\" public/system/blessing/bar_#{image.id}.png public/system/blessing/bar_text_#{image.id}.png")
+      system("convert -font public/system/simsun.ttf -annotate +0+0 -gravity NorthWest -fill white -pointsize 16 -draw \"text 440,130 '#{title}'\" public/system/blessing/bar_#{image.id}.png public/system/blessing/bar_title_#{image.id}.png")
+      system("convert -font public/system/simsun.ttf -annotate +0+0 -gravity NorthWest -fill white -pointsize 16 -draw \"text 440,160 '#{blessing}'\" public/system/blessing/bar_title_#{image.id}.png public/system/blessing/bar_text_#{image.id}.png")
       joined_count = EventAttendee.joined_for(params[:id], current_user.id).where(created_at: Time.now.beginning_of_day..Time.now.end_of_day).count
       name = current_user.display_name
 
       if joined_count < 10
         ea = EventAttendee.create(special_event_id: params[:id], user_id: current_user.id)
         if image
-          inspiration = ea.user.inspirations.create(title: "#{name}的祝福图片", content: "#{name}的祝福图片")
+          inspiration = ea.user.inspirations.create(title: "#{name}的新年祝福图片", content: "#{name}的新年祝福图片")
           image.update_attribute(:user_id, current_user.id)
           inspiration.design_images << image
           ea.update_attribute(:design_image_id, image.id)
