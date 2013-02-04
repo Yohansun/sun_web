@@ -18,12 +18,12 @@ class ReplyMsgsController < ApplicationController
       re_url = "/" + user_of_comment.commentable_type.try(:tableize) + "/" + user_of_comment.try(:commentable_id).to_s
     end  
 
-    SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment.user.display_name, :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
+    SysMsg.create( :content => (I18n.t "activerecord.sys_msg.reply_content", :user_of_comment => user_of_comment.try(:user).try(:display_name), :reply_module => SysMsg::MODULE["#{@reply_msg.reply_type}".to_sym]),
                    :reply_type => @reply_msg.reply_type,
                    :status => SysMsg::Status[0],
                    :reply_name => user_display_name,
                    :reply_id => user_id,
-                   :user_id => user_of_comment.user.id,
+                   :user_id => user_of_comment.try(:user).try(:id),
                    :re_url => re_url
                 )
 
@@ -34,6 +34,8 @@ class ReplyMsgsController < ApplicationController
         redirect_to "/weekly_stars/#{params[:reply_msg][:show_id]}"
       when 'designs'
         redirect_to user_design_path(@reply_msg.user.id, params[:reply_msg][:show_id])
+      when 'design_images'
+        redirect_to image_show_design_image_path(params[:reply_msg][:show_id])
       when 'inspirations'
         redirect_to inspiration_path(params[:reply_msg][:show_id])
       when 'color_designs'
@@ -43,5 +45,15 @@ class ReplyMsgsController < ApplicationController
       when 'messages'
         redirect_to user_messages_path(params[:reply_msg][:show_id])
     end
+  end
+
+  def destroy
+    @reply_msg = ReplyMsg.find(params[:id])
+    if @reply_msg.destroy
+      flash[:notice] = "删除成功"
+    else
+      flash[:alert] = "删除失败"
+    end
+    redirect_to :back
   end
 end

@@ -12,6 +12,8 @@ class CommentsController < ApplicationController
         else
           redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
         end
+      when 'DesignImage'
+        redirect_to image_show_design_image_path(@comment.commentable.id)
       when 'Faq'
         redirect_to faq_path(@comment.commentable.id)
       when 'Post'

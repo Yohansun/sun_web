@@ -6,6 +6,8 @@ class DesignImage < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
   has_many :tags, class_name: 'ImageTag'
+  has_many :votes, :as => :voteable
+  has_many :comments, :as => :commentable
   belongs_to :user
   belongs_to :area
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
@@ -26,6 +28,11 @@ class DesignImage < ActiveRecord::Base
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
   # validates_presence_of :area_id
+
+
+  def comments_count
+    self.comments.size
+  end
 
   def areas
     areas = []
@@ -56,6 +63,17 @@ class DesignImage < ActiveRecord::Base
     when 'Design' then "推荐作品"
     when 'ColorDesign' then "色彩配搭"
     when 'MasterDesign' then "大师作品"
+    end
+  end
+
+  def image_come_from
+    case self.imageable_type
+    when 'Inspiration' then '灵感秀上传'
+    when 'Design' then '设计师上传'
+    when 'ColorDesign' then "色彩配搭"
+    when 'MasterDesign' then "大师作品"
+    else
+      return 'icolor上传'
     end
   end
 
