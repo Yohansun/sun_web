@@ -3,6 +3,7 @@
 /**/
 .nav{background-image:url(<%= asset_path "imgbase/nav.png" %>);width:1194px;margin-left:-597px;}
 .navBot li a{padding:8px 18px;_padding:8px 15px;}
+.highlight{color:red!important;}
 
 .imgbase{background-color:#fff;width:1180px;margin:0 auto;padding-bottom:20px;}
 .imgbase a:hover,.search_bin a.curr_rank,.tit_tab .fresh,.imgbase_title strong{color:#e71d36;}
@@ -18,10 +19,8 @@
 /*main*/
 .imgbase_main{background:#fff;margin-bottom:35px;}
 .tit_tab{height:40px;background:#efefef;border-top:1px solid #d6d6d6;}
-.tit_tab ul li{float:left;line-height:40px;width:96px;height:40px;font-size:14px;}
-.tit_tab ul li a{color:#555555;display:block;padding:13px 20px;}
+.tit_tab ul li{float:left;line-height:14px;width:56px;height:14px;font-size:14px;color:#555555;display:block;padding:13px 20px;cursor:pointer;}
 .tit_tab ul li.active_tit{color:#fff;background:#e71d36 url(<%= asset_path "imgbase/imgbase_arrow.jpg" %>) no-repeat center bottom;}
-.tit_tab ul li.active_tit a{color:#fff;}
 .tit_tab .fresh{padding:3px 10px;background:#fff;border-radius:5px;font-weight:bold;}
 .tit_tab p{background:#fdf6b3;padding:0 10px;}
 .tit_tab p a{padding:0 6px;color:#000;font:bold 14px/40px "SimSun";}
@@ -35,7 +34,7 @@
 .tab_content select,.tab_content input{border:1px solid #ccc;}
 .tab_content select{padding:3px;color:#757575;}
 .tab_content input{padding:4px 10px;color:#6e6e6e;font-size:14px;background-color:#fff;}
-.imgbase_toggle{background:url(<%= asset_path "imgbase/arrow.jpg" %>) no-repeat;width:81px;height:22px;line-height:22px;bottom:-21px;left:50%;margin-left:-40px;text-align:center;color:#757575;font-size:12px;text-indent:12px;}
+.imgbase_toggle{background:url(<%= asset_path "imgbase/arrow.jpg" %>) no-repeat;width:81px;height:22px;line-height:22px!important;bottom:-21px;left:50%;margin-left:-40px;text-align:center;}
 .form_expand{background-position:0 -22px;}
 .form_mini{height:60px;}
 

@@ -217,6 +217,7 @@ Icolor::Application.routes.draw do
   resources :design_images do
     collection do
       get :decoration_parts
+      get :image_search_index
     end
     member do
       get :image_show

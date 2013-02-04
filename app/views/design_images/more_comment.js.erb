@@ -2,5 +2,5 @@
 	$('.img_reply_list .comments').append('<%=j render :partial => "show_comments", locals: { comments: @comments} %>');
 	$('.imgbase_more_btn a').data('page', <%= @page %>);
 <%- else %>
-	$('.more_comment').toggle();
+	$('.imgbase_more_btn').toggle();
 <%- end -%>

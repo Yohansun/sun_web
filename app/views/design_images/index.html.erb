@@ -1,14 +1,37 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "base", "reset", "imgbase", "jquery.slider"%>
-  <%= javascript_include_tag "jquery", "jquery.slider" %>
+  <%= stylesheet_link_tag "imgbase", "jquery.slider"%>
+<%- end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "jquery.slider", "LinkageSelect.js", "/location.js" %>
   <script type="text/javascript">
+  	$(function() {
+      var options = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', null, '请选择');
+      sel.bind('.level_2', null, '请选择');
+      sel.bind('.level_3', null, '请选择');
+    });
+    $(function() {
+    	$('.check_on').bind("click", function () {
+    		$(this).addClass("highlight");
+    		$.ajax({
+    			type: 'GET',
+			    url: '/design_images/image_search_index',
+			    data: { tag : $(this).val() }
+    		});
+    		console.log($(this).val());
+    	});
+    });
     $(function(){
 			var $slider = $('.imgbase_slider'),
 				$list   = $('.imgbase_list'),
 				$view   = $('#imgbase_view'),
 				$info   = $('#imgbase_info'),
 				$toggle = $('.imgbase_toggle'),
-				$form   = $('form.tab_content');
+				$form   = $('#imgbase_forms').find('form'),
+        $ul     = $('#imgbase_ul');
 			$slider.slider({
 				speed : 1500,
 				mouse : 'mouseover',
@@ -28,311 +51,170 @@
 			}).mouseleave(function(){
 				$slider.mouseleave();
 			});
+			$ul.on('click', 'li', function(){
+	      var $this = $(this),
+	          index = $this.index();
+	      $this.addClass('active_tit').siblings().removeClass();
+	      $form.eq(index).show().siblings().hide();
+      });
 			$toggle.click(function(){
 				var $this = $(this);
-				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起');
-				$form.toggleClass('form_mini');
+				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
 		});
   </script>
 <%- end %>
 <div class="imgbase">
-			<div class="imgbase_title">
-				<img src="<%= asset_path "imgbase/imgbase_tit.png" %>" >
-				<div class="clear">
-					<div class="fr imgbase_search">
-						<input type="text"><button>搜图</button>
-						<span>热门搜索：<a href="#">暖色调</a><a href="#">小户型</a><a href="#">宜家</a><a href="#">墙面色</a></span>
-					</div>
-					<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
-				</div>
-			</div><!-- imgbase_title -->
-			<div class="imgbase_main pr">
-				<div class="tit_tab clear">
-					<p class="fr">
-						<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
-						<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-						<a href="/design_images?imageable_type=Design" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
-						<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
-					</p>
-					<ul class="fl">
-						<li class="active_tit"><a href="/design_images">家装设计</a></li>
-						<li><a href="/design_images/decoration_parts">装修部件</a></li>
-					</ul>
-					<!-- <ul class="fl">
-						<li><a href="#" class="fresh">刷新百城</a></li>
-					</ul> -->
-				</div><!-- tit_tab -->
-				<form class="tab_content">
-					<fieldset>
-						<label>按户型：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">小户型</a>
-							<a href="#">中户型</a>
-							<a href="#">大户型</a>
-							<a href="#">公寓</a>
-							<a href="#">复式</a>
-							<a href="#">别墅</a>
-							<a href="#">一室户</a>
-							<a href="#">两居室</a>
-							<a href="#">三居室</a>
-							<a href="#">四居室</a>
-							<a href="#">跃层</a>
-							<a href="#">错层</a>
-							<a href="#">LOFT</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按费用：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">经济型</a>
-							<a href="#">富裕型</a>
-							<a href="#">豪华型</a>
-							<a href="#">8万以下</a>
-							<a href="#">8-15万</a>
-							<a href="#">15-30万</a>
-							<a href="#">30-100万</a>
-							<a href="#">100万以上</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按面积：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">30平米</a>
-							<a href="#">40平米</a>
-							<a href="#">50平米</a>
-							<a href="#">60平米</a>
-							<a href="#">70平米</a>
-							<a href="#">80平米</a>
-							<a href="#">90平米</a>
-							<a href="#">100平米</a>
-							<a href="#">110平米</a>
-							<a href="#">120平米</a>
-							<a href="#">130平米</a>
-							<a href="#">140平米</a>
-							<a href="#">150平米以上</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按风格：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">现代简约</a>
-							<a href="#">混搭</a>
-							<a href="#">田园</a>
-							<a href="#">乡村</a>
-							<a href="#">新古典</a>
-							<a href="#">欧美式</a>
-							<a href="#">中式</a>
-							<a href="#">韩式</a>
-							<a href="#">日式</a>
-							<a href="#">地中海</a>
-							<a href="#">东南亚</a>
-							<a href="#">波西米亚</a>
-							<a href="#">泰式</a>
-							<a href="#">港式</a>
-							<a href="#">西班牙</a>
-							<a href="#">意大利</a>
-							<a href="#">英伦</a>
-							<a href="#">墨西哥</a>
-							<a href="#">希腊</a>
-							<a href="#">简装修</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按调性：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">另类</a>
-							<a href="#">SOHO</a>
-							<a href="#">硬朗</a>
-							<a href="#">舒适</a>
-							<a href="#">梦幻</a>
-							<a href="#">可爱</a>
-							<a href="#">浪漫</a>
-							<a href="#">大气</a>
-							<a href="#">豪华</a>
-							<a href="#">实用</a>
-							<a href="#">温馨</a>
-							<a href="#">雅致</a>
-							<a href="#">时尚</a>
-							<a href="#">清新</a>
-							<a href="#">艺术</a>
-							<a href="#">前卫</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按空间：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">客厅</a>
-							<a href="#">卧室</a>
-							<a href="#">厨房</a>
-							<a href="#">餐厅</a>
-							<a href="#">书房</a>
-							<a href="#">玄关</a>
-							<a href="#">卫生间</a>
-							<a href="#">儿童房</a>
-							<a href="#">阳台</a>
-							<a href="#">衣帽间</a>
-							<a href="#">过道</a>
-							<a href="#">楼梯间</a>
-							<a href="#">阁楼</a>
-							<a href="#">阳光房</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按色彩：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">浅白色</a>
-							<a href="#">红色</a>
-							<a href="#">橙色</a>
-							<a href="#">黄色</a>
-							<a href="#">绿色</a>
-							<a href="#">蓝色</a>
-							<a href="#">紫色</a>
-							<a href="#">中性色</a>
-							<a href="#">黑色</a>
-							<a href="#">灰色</a>
-							<a href="#">咖啡色</a>
-							<a href="#">多彩</a>
-							<a href="#">原木色</a>
-							<a href="#">木器实色</a>
-							<a href="#">木器透明色</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按用途：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">新房</a>
-							<a href="#">旧房翻新</a>
-							<a href="#">婚房</a>
-							<a href="#">老人房</a>
-							<a href="#">出租房</a>
-							<a href="#">样板房</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按人群：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">白领装修</a>
-							<a href="#">设计师的家</a>
-							<a href="#">海外人家</a>
-							<a href="#">明星家居</a>
-							<a href="#">小康之家</a>
-							<a href="#">80后</a>
-							<a href="#">70后</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按图片：</label>
-						<span>
-							<a href="#">全部</a>
-							<a href="#">实景图</a>
-							<a href="#">效果图</a>
-							<a href="#">平面图</a>
-						</span>
-					</fieldset>
-					<fieldset>
-						<label>按地域：</label>
-						<span>
-							<a href="#">全部</a>
-							<select>
-								<option>请选择省</option>
-							</select>
-							<select>
-								<option>请选择市</option>
-							</select>
-							<select>
-								<option>请选择区</option>
-							</select>
-						</span>
-						<input type="submit" value="确定" />
-					</fieldset>
-					<fieldset class="lastfield">
-						<label>拼音检索：</label>
-						<a href="#">A</a>|
-						<a href="#">B</a>|
-						<a href="#">C</a>|
-						<a href="#">D</a>|
-						<a href="#">E</a>|
-						<a href="#">F</a>|
-						<a href="#">G</a>|
-						<a href="#">H</a>|
-						<a href="#">I</a>|
-						<a href="#">J</a>|
-						<a href="#">K</a>|
-						<a href="#">L</a>|
-						<a href="#">M</a>|
-						<a href="#">N</a>|
-						<a href="#">O</a>|
-						<a href="#">P</a>|
-						<a href="#">Q</a>|
-						<a href="#">R</a>|
-						<a href="#">S</a>|
-						<a href="#">T</a>|
-						<a href="#">U</a>|
-						<a href="#">V</a>|
-						<a href="#">W</a>|
-						<a href="#">X</a>|
-						<a href="#">Y</a>|
-						<a href="#">Z</a>|
-					</fieldset>
-				</form><!-- tab_content -->
-				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
-			</div><!-- imgbase_main -->
-			<div class="search_bin">
-				<a href="/design_images?ranking_list=like" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
-				<a href="/design_images?ranking_list=view_count" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-				<a href="/design_images" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
-				<p>搜索结果：现代简约,15-30万,小户型,创意家居，储藏室，样板房装修，效果图</p>
-			</div><!-- search_bin -->
-			<div class="imgbase_area clear">
-				<div class="imgbase_bin fl pr">
-					<%- if @images.present?%>
-					<div class="imgbase_func ft12 pa">
-						<a href="#" class="imgbase_collect">收藏</a>
-						<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.design.try(:view_count) %></span></a>
-						<!-- <a href="#" class="imgbase_fullpage">全屏观看</a> -->
-					</div>
-						<div class="imgbase_slider slider_bin">
-							<%- @images.each do |image| %>
-							  <%= image_tag(image.file, size: '686x496') %>
-							<%- end %>
-						</div>
-						<div id="imgbase_info">
-							<span class="imgbase_comm"><%= @images.first.design.try(:comments_count) %></span>
-							<span class="imgbase_like"><%= @images.first.design.try(:votes_count) %></span>
-							<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
-							<p><%= @images.first.user.try(:username) %> <a href="<%= user_path(@images.first.user.id) %>" >查看联系方式</a></p>
-						</div><!-- imgbase_info -->
-				</div><!-- imgbase_bin -->
-				<ul class="imgbase_list">
-					<%- @images.each_with_index do |image, index| %>
-						<li data-view="<%= image.design.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-							<a href="<%= image_show_design_image_path(image) %>">
-								<%= image_tag(image.file, size: '224x162') %>
-								<p><%= truncate(image.title, length: 15) %></p>
-								<span></span>
-							</a>
-							<div class="none">
-								<span class="imgbase_comm"><%= image.design.try(:comments_count) %></span>
-								<span class="imgbase_like"><%= image.design.try(:votes_count) %></span>
-								<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
-								<p><%= image.user.try(:username) %> <a href="<%= user_path(image.user.id) %>" >查看联系方式</a></p>
-							</div>
-						</li>
+	<div class="imgbase_title">
+		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>" >
+		<div class="clear">
+			<div class="fr imgbase_search">
+				<input type="text"><button>搜图</button>
+				<span>热门搜索：<a href="#">暖色调</a><a href="#">小户型</a><a href="#">宜家</a><a href="#">墙面色</a></span>
+			</div>
+			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
+		</div>
+	</div><!-- imgbase_title -->
+	<div class="imgbase_main pr">
+		<div class="tit_tab clear">
+			<p class="fr">
+				<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
+				<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+				<a href="/design_images?imageable_type=Design" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
+				<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
+			</p>
+			<ul id="imgbase_ul" class="fl">
+				<li class="active_tit">家装设计</li>
+				<li>装修部件</li>
+			</ul>
+			<!-- <ul class="fl">
+				<li><a href="#" class="fresh">刷新百城</a></li>
+			</ul> -->
+		</div><!-- tit_tab -->
+		<div id="imgbase_forms">
+			<form class="tab_content">
+				<%- @categories.each do |category| %>
+					<%- unless category.title == "按建筑" || category.title == "按部件" %>
+						<fieldset>
+							<label><%= category.title %>：</label>
+							<span>
+								<input type="checkbox" value="<%= category.id %>" class="check_on" />全部
+								<%- category.children.each do |cate_child| %>
+									<input type="checkbox" value="<%= cate_child.id %>" class="check_on" /><%= cate_child.title %>
+								<%- end %>
+							</span>
+						</fieldset>
 					<%- end %>
-				</ul>
 				<%- end %>
-			</div><!-- imgbase_area -->
-			<div class="pager ft12">
-				<%= paginate @images if @images.present? %>
-			</div><!-- pager -->
-		</div><!-- imgbase -->
+				
+				<fieldset>
+					<label>按地域：</label>
+					<span>
+						<select id="province" class="level_1" style="width:70px;">省</select>
+		        <select id="city" class="level_2" style="width:70px;">市</select>
+		        <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
+					</span>
+					<input type="submit" value="确定" />
+				</fieldset>
+				<fieldset class="lastfield">
+					<label>拼音检索：</label>
+					<a href="#">A</a>|
+					<a href="#">B</a>|
+					<a href="#">C</a>|
+					<a href="#">D</a>|
+					<a href="#">E</a>|
+					<a href="#">F</a>|
+					<a href="#">G</a>|
+					<a href="#">H</a>|
+					<a href="#">I</a>|
+					<a href="#">J</a>|
+					<a href="#">K</a>|
+					<a href="#">L</a>|
+					<a href="#">M</a>|
+					<a href="#">N</a>|
+					<a href="#">O</a>|
+					<a href="#">P</a>|
+					<a href="#">Q</a>|
+					<a href="#">R</a>|
+					<a href="#">S</a>|
+					<a href="#">T</a>|
+					<a href="#">U</a>|
+					<a href="#">V</a>|
+					<a href="#">W</a>|
+					<a href="#">X</a>|
+					<a href="#">Y</a>|
+					<a href="#">Z</a>|
+				</fieldset>
+				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
+			</form><!-- tab_content -->
+			<form class="tab_content none">
+				<%- @categories.each do |category| %>
+					<%- if category.title == "按部件" %>
+						<%- category.children.each do |child_lv2| %>
+							<fieldset>
+								<label><%= child_lv2.title %>：</label>
+								<span>
+									<a href="javascript:;" value ="<%= child_lv2.id %>" class="check_on">全部</a>
+									<%- child_lv2.children.each do |child_lv3| %>
+										<a href="javascript:;" value ="<%= child_lv3.id %>" class="check_on"><%= child_lv3.title %></a>
+									<%- end %>
+								</span>
+							</fieldset>
+						<%- end %>
+					<%- end %>
+				<%- end %>
+				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
+			</form><!-- tab_content -->
+		</div><!-- imgbase_forms -->
+	</div><!-- imgbase_main -->
+	<div class="search_bin">
+		<a href="/design_images?ranking_list=like" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
+		<a href="/design_images?ranking_list=view_count" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
+		<a href="/design_images" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
+		<p>搜索结果：现代简约,15-30万,小户型,创意家居，储藏室，样板房装修，效果图</p>
+	</div><!-- search_bin -->
+
+
+	<div class="imgbase_area clear">
+		<div class="imgbase_bin fl pr">
+			<%- if @images.present?%>
+			<div class="imgbase_func ft12 pa">
+				<a href="#" class="imgbase_collect">收藏</a>
+				<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.design.try(:view_count) %></span></a>
+				<!-- <a href="#" class="imgbase_fullpage">全屏观看</a> -->
+			</div>
+				<div class="imgbase_slider slider_bin">
+					<%- @images.each do |image| %>
+					  <%= image_tag(image.file, size: '686x496') %>
+					<%- end %>
+				</div>
+				<div id="imgbase_info">
+					<span class="imgbase_comm"><%= @images.first.design.try(:comments_count) %></span>
+					<span class="imgbase_like"><%= @images.first.design.try(:votes_count) %></span>
+					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
+					<p><%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >查看联系方式</a></p>
+				</div><!-- imgbase_info -->
+		</div><!-- imgbase_bin -->
+		<ul class="imgbase_list">
+			<%- @images.each_with_index do |image, index| %>
+				<li data-view="<%= image.design.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
+					<a href="<%= image_show_design_image_path(image) %>">
+						<%= image_tag(image.file, size: '224x162') %>
+						<p><%= truncate(image.title, length: 15) %></p>
+						<span></span>
+					</a>
+					<div class="none">
+						<span class="imgbase_comm"><%= image.design.try(:comments_count) %></span>
+						<span class="imgbase_like"><%= image.design.try(:votes_count) %></span>
+						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
+						<p><%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >查看联系方式</a></p>
+					</div>
+				</li>
+			<%- end %>
+		</ul>
+		<%- end %>
+	</div><!-- imgbase_area -->
+	<div class="pager ft12">
+		<%= paginate @images if @images %>
+	</div><!-- pager -->
+</div><!-- imgbase -->

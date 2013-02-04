@@ -29,6 +29,7 @@ class DesignImage < ActiveRecord::Base
 
   # validates_presence_of :area_id
 
+
   def comments_count
     self.comments.size
   end
