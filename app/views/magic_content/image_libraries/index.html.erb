@@ -11,21 +11,28 @@
       $('.set_color').click(function(e){
         $(this).siblings('.color_form').show()
         $('.color_form_overlay').show()
+        $('#image_id').val($(this).attr('data-id'))
+        input_change()
       })
+
       $('.color_commit').click(function(){
+         image_id = $('#image_id').val();
         $('.color_form_overlay').hide();
         // console.log($(this).parents('tr').html())
-        if ($(this).parent().siblings('fieldset').children('input').val() == ''){
-        alert('请至少在第一行输入一个色号!');
-        return false;
-        }
-        var $input_parent = $(this).parent().siblings().find('fieldset')
-        var $input1 = $input_parent.children('.color_input').val();
-        var $input2 = $input_parent.children('.color_input2').val();
-        var $input3 = $input_parent.children('.color_input3').val();
-        if ($input1 == $input2 || $input1 == $input3 || ($input2 != '' && $input2 == $input3)){
-        alert('不能输入相同色号');
-        return false;
+        if ($("#edited_color_"+image_id).attr('checked')==undefined){
+
+          if ($(this).parent().siblings('fieldset').children('input').val() == ''){
+            alert('请至少在第一行输入一个色号!');
+            return false;
+          }
+          var $input_parent = $(this).parent().siblings().find('fieldset')
+          var $input1 = $input_parent.children('.color_input').val();
+          var $input2 = $input_parent.children('.color_input2').val();
+          var $input3 = $input_parent.children('.color_input3').val();
+          if ($input1 == $input2 || $input1 == $input3 || ($input2 != '' && $input2 == $input3)){
+            alert('不能输入相同色号');
+            return false;
+          }
         }
       })
       $('.name_commit').click(function(){
@@ -49,6 +56,8 @@
            })
         }
       })
+
+
     });
     $(function() {
       $(".image-thumbnail").hover(

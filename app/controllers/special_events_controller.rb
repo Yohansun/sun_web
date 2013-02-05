@@ -22,8 +22,8 @@ class SpecialEventsController < ApplicationController
       end
       blessing = params[:blessing].scan(/.{20}|.+/).join("\n\n")
 
-      title = "#{params[:title].gsub(/,/, ' ')}"
-
+      tle = "#{params[:title].gsub(/,/, ' ')}"
+      title = tle.gsub(/，/, ' ')
       image = DesignImage.find(params[:attendee_image_id])
       system("convert #{image.file.path(:spring)} -background blue -rotate 355 public/system/blessing/#{image.id}.png")
       system("convert public/system/blessing/#{image.id}.png -transparent blue public/system/blessing/#{image.id}.png") 

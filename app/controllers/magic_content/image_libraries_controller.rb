@@ -57,6 +57,13 @@ module MagicContent
       @image.title = image_params[:title] if image_params[:title].present?
       @image.content = image_params[:content]
       @image.reason = image_params[:reason]
+      
+      if params[:design_image][:edited_color]
+        @image.edited_color = true
+      elsif image_params[:color1_name]
+        @image.edited_color = false
+      end
+   
       @image.color1_name = image_params[:color1_name]
       @image.color2_name = image_params[:color2_name]
       @image.color3_name = image_params[:color3_name]
@@ -76,6 +83,7 @@ module MagicContent
             @image.send("color#{item}=", image_params["color#{item}".to_sym].strip)
             color.push(image_params["color#{item}".to_sym])
           else
+            @image.color1 = image_params["color#{item}"]
             error_color.push(image_params["color#{item}".to_sym])
             # flash[:notice] = "色号不正确"
           end
@@ -83,7 +91,7 @@ module MagicContent
       end
       if @image.save
         str = ''
-        if error_color.any?
+        if error_color.any? && !@image.edited_color
           if error_color.length == 1 && color.length == 0
             str = error_color.first
             flash[:alert] = "您的色号: #{str} 错误,不能保存"
