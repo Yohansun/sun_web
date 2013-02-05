@@ -11,7 +11,9 @@
       <button class='left'>上一张</button>
       <button class='right'>下一张</button>
     </p>
-    <%= image_tag(image.file, :size =>"500x400") %>
+    <span class='zoom' id='ex1'>
+      <%= image_tag(image.file, :size =>"500x400" )%>
+    </span>             
   </div>
   <%= form_tag main_app.image_library_update_tags_path(image), :method => :put do %>
   <div class="tags-container">

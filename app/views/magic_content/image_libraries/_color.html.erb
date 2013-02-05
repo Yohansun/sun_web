@@ -1,5 +1,6 @@
 <%= form_tag main_app.image_library_update_title_path(image, :genre => params[:genre], :keywords => params[:keywords], :page => params[:page]), :class => 'color_form', :style => 'z-index:9000', :method => :put do %>
   <h3>设置色号</h3>
+  <input type="hidden" id="image_id">
   <div style="float:left;width:250px;">
     <fieldset style="height:30px;padding:5px 10px">
       <label class="color_form_label">请输入色号：</label> 
@@ -7,11 +8,19 @@
     </fieldset>
     <fieldset style="height:30px;padding:5px 10px">
       <label class="color_form_label">请输入色号：</label>
-      <input type="text" class="color_input2" data-provide="typeahead" name="design_image[color2]" value="<%= image.color2 %>">
+      <input type="text" class="color_input2" data-provide="typeahead" name="design_image[color2]" value="<%= image.color2%>">
     </fieldset>
     <fieldset style="height:30px;padding:5px 10px">
       <label class="color_form_label">请输入色号：</label> 
-      <input type="text" class="color_input3" data-provide="typeahead" name="design_image[color3]" value="<%= image.color3 %>">
+      <input type="text" class="color_input3" data-provide="typeahead" name="design_image[color3]" value="<%= image.color3%>">
+    </fieldset>
+    <fieldset style="height:30px;padding:5px 10px">
+      <% if image.edited_color == false %>
+        <input type="checkbox"  name="design_image[edited_color]" id="edited_color_<%=image.id%>">
+      <% else %>
+        <input type="checkbox"  name="design_image[edited_color]" id="edited_color_<%=image.id%>" checked>
+      <% end %>
+      <label class="color_form_label">已编辑色号</label> 
     </fieldset>
   </div>
   <div style="float:left;width:245px;">
