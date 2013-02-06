@@ -102,9 +102,9 @@ class DesignImage < ActiveRecord::Base
       when 'edit_no_verify'
         DesignImage.includes(:tags).available.where("(color1 is not null or color2 is not null or color3 is not null) and (title is not null or reason is not null or content is not null) and audited is false and image_tags.design_image_id is not null")
       when 'color_no_edit'
-        DesignImage.includes(:tags).available.where("design_images.edited_color = ? and image_tags.design_image_id is null",true)
+        DesignImage.includes(:tags).available.where("design_images.edited_color = ? and (design_images.audited is null or design_images.audited = ?)", true, false)
       when 'edit_no_color'
-        DesignImage.includes(:tags).available.where("(design_images.edited_color = ? or design_images.edited_color is null) and image_tags.design_image_id is not null",false)
+        DesignImage.includes(:tags).available.where("(design_images.edited_color = ? or design_images.edited_color is null) and design_images.audited = ?",false, true)
       when 'edit_color'
         DesignImage.available.where("design_images.edited_color = ?", true).order("design_images.id DESC")
       when 'no_edit_color'
