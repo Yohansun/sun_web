@@ -102,13 +102,13 @@ class DesignImage < ActiveRecord::Base
       when 'edit_no_verify'
         DesignImage.includes(:tags).available.where("(color1 is not null or color2 is not null or color3 is not null) and (title is not null or reason is not null or content is not null) and audited is false and image_tags.design_image_id is not null")
       when 'color_no_edit'
-        DesignImage.includes(:tags).available.where("(design_images.color1 is not null or design_images.color2 is not null or design_images.color3 is not null) and image_tags.design_image_id is null")
+        DesignImage.includes(:tags).available.where("design_images.edited_color = ? and image_tags.design_image_id is null",true)
       when 'edit_no_color'
-        DesignImage.includes(:tags).available.where("design_images.color1 is null and design_images.color2 is null and design_images.color3 is null and image_tags.design_image_id is not null")
+        DesignImage.includes(:tags).available.where("(design_images.edited_color = ? or design_images.edited_color is null) and image_tags.design_image_id is not null",false)
       when 'edit_color'
-        DesignImage.available.where("(color1 is not null) or (color2 is not null) or (color3 is not null)").order("design_images.id DESC")
+        DesignImage.available.where("design_images.edited_color = ?", true).order("design_images.id DESC")
       when 'no_edit_color'
-        DesignImage.available.where("(color1 is null) or (color2 is null) or (color3 is null)").order("design_images.id DESC")
+        DesignImage.available.where("design_images.edited_color = ? or design_images.edited_color is null", false).order("design_images.id DESC")
     end
   end
 end
