@@ -92,15 +92,15 @@
 			</ul> -->
 		</div><!-- tit_tab -->
 		<div id="imgbase_forms">
-			<form class="tab_content">
+      <%=form_tag image_search_index_design_images_path, :class => 'tab_content' do %>
 				<%- @categories.each do |category| %>
 					<%- unless category.title == "按建筑" || category.title == "按部件" %>
 						<fieldset>
 							<label><%= category.title %>：</label>
 							<span>
-								<input type="checkbox" value="<%= category.id %>" class="check_on" />全部
+								<input type="checkbox" value="<%= category.id %>" name="tag_all[<%=category.id%>]" class="check_on" />全部
 								<%- category.children.each do |cate_child| %>
-									<input type="checkbox" value="<%= cate_child.id %>" class="check_on" /><%= cate_child.title %>
+									<input type="checkbox" value="<%= cate_child.id %>" name="tag[<%=category.id%>][<%=cate_child.id%>]" class="check_on" /><%= cate_child.title %>
 								<%- end %>
 							</span>
 						</fieldset>
@@ -146,7 +146,7 @@
 					<a href="#">Z</a>|
 				</fieldset>
 				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
-			</form><!-- tab_content -->
+      <% end %>
 			<form class="tab_content none">
 				<%- @categories.each do |category| %>
 					<%- if category.title == "按部件" %>
