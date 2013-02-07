@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 class DesignsController < ApplicationController
   before_filter :find_user
@@ -28,10 +30,10 @@ class DesignsController < ApplicationController
       @designs = @designs.where("design_color like ?", design_color) if params[:design_color] && !params[:design_color].blank? && params[:design_color] !='色系'
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       if params[:area_id] && !params[:area_id].blank?
-        @designs = @designs.where(:area_id => params[:area_id]) 
+        @designs = @designs.where(:area_id => params[:area_id])
       elsif params[:area_head] && !params[:area_head].blank?
         area = Area.where(parent_id: params[:area_head])
-        @designs = @designs.where("area_id in (#{area.map(&:id).join(',')})") 
+        @designs = @designs.where("area_id in (#{area.map(&:id).join(',')})")
       end
     end
     sign_in(@user) if current_admin && @user
@@ -95,7 +97,7 @@ class DesignsController < ApplicationController
 
       if @design.is_yda?
         render :js => "colors();"
-      end          
+      end
     else
       render :action => 'edit'
     end
