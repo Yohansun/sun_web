@@ -98,9 +98,13 @@
 						<fieldset>
 							<label><%= category.title %>：</label>
 							<span>
-								<input type="checkbox" value="<%= category.id %>" name="tag_all[<%=category.id%>]" class="check_on" />全部
+								<a href="<%=image_search_index_design_images_path(tag_all_id: category.id)%>" class="check_on <% if @design_image_tag_ids &&  @design_image_tag_ids.include?(category.id.to_s) %>highlight<% end %>">全部</a>
 								<%- category.children.each do |cate_child| %>
-									<input type="checkbox" value="<%= cate_child.id %>" name="tag[<%=category.id%>][<%=cate_child.id%>]" class="check_on" /><%= cate_child.title %>
+                  <% if @design_image_tag_ids &&  @design_image_tag_ids.include?(category.id.to_s) %>
+                    <a href="<%=image_search_index_design_images_path(tag_id: cate_child.id)%>" class="check_on"><%= cate_child.title %></a>
+                  <% else %>
+									  <a href="<%=image_search_index_design_images_path(tag_id: cate_child.id)%>" class="check_on  <% if @design_image_tag_ids && @design_image_tag_ids.include?(cate_child.id.to_s) %>highlight<% end %>"><%= cate_child.title %></a>
+                  <% end %>
 								<%- end %>
 							</span>
 						</fieldset>
