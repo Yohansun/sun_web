@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ChannelController < ApplicationController
 
-  #片区快查
+  #设计快查
   def access
 
     #我型我秀页面跳转
@@ -62,6 +62,6 @@ class ChannelController < ApplicationController
       end
     end
 
-    @design_users = @design_users.page(params[:page]).per(9)
+    @design_users = @design_users.page(params[:page]).per(16)
   end
 end

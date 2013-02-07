@@ -1,528 +1,330 @@
 <% content_for :head do -%>
-<%= stylesheet_link_tag 'index' %>
-
-<style type="text/css">
-.boxb_content {
-  position: relative;
-}
-
-.boxb_text, .boxb_text2 {
-  position: absolute;
-  color: #fff;
-  background: url(<%= asset_path "master/meng1.png"%>);
-  z-index: 100px;
-}
-
-.boxb_text {
-  bottom: 0px;
-  _bottom: 2px;
-  left: 0;
-  width: 572px;
-  height: 72px;
-  padding: 15px;
-}
-
-.boxb_text2 {
-  top: 247px;
-  left: 0;
-  width: 285px;
-  height: 53px;
-  padding: 10px;
-  font: 16px/23px "Microsoft Yahei";
-  color: #fff;
-  margin: 0 7px;
-}
-
-.boxb_text h2 {
-  font: 18px "Microsoft Yahei";
-}
-
-.boxb_text p {
-  font: 12px/18px "SimSun";
-  margin-top: 8px;
-}
-
-.boxb_box {
-  width: 318px;
-}
-
-.boxb_box img.master_img {
-  padding: 7px;
-}
-
-.boxb_box p {
-  padding: 7px 10px;
-  font: 12px/20px "SimSun";
-  color: #fff;
-}
-
-.boxb_box h4{
-  font-size:50px;
-  color:#fff;
-  font-weight:bold;
-  text-align:center;
-  height:104px;
-  line-height:104px;
-}
-#home_improvement_news .list .t{height:auto!important;text-align:left;}
-#home_improvement_news .list .t a{white-space:normal;}
-</style>
+  <%= stylesheet_link_tag 'imgbase','2013index','2013base' %>
 <% end -%>
 
-<!-- 首页浮层 -->
-<!--%- unless cookies[:homepage_guide_layer_showed].eql? "false" %>
-  <%= javascript_include_tag "home_layer.js", "jquery.slider.v2.js" %>
-
-  <div id="march_lay" class="slider_bin abs_center none" data-next="下一步" data-shut="马上体验">
-    <img src="<%= asset_path "layer/kv1.png"%>" alt="" />
-    <img src="<%= asset_path "layer/kv2.png"%>" alt="" />
-    <img src="<%= asset_path "layer/kv3.png"%>" alt="" />
-    <img src="<%= asset_path "layer/kv4.png"%>" alt="" />
-  </div>
-<%#- end %>-->
-
 <%- content_for :index do %>
-<div style="background:url(<%= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div>
+<!-- <div style="background:url(<%= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div> -->
+
+<div id="grid_brush" style="left: 0px; margin-left: 0px;z-index: 999999;">
+  <a href="javascript:;" id="brush" class="none" style="left: 0px; right: auto;">刷子</a>
+  <div id="grid">
+    <a href="javascript:;" class="close_btn pa">关闭</a>
+    <img src="<%= asset_path "2013/index/float_grid.jpg"%>" usemap="#map1">
+    <map id="map1" name="map1">
+      <area shape="rect" coords="0,0,83,84" href="/master_interviews" target="_blank">
+      <area shape="rect" coords="84,0,167,84" href="/design_images" target="_blank">
+      <area shape="rect" coords="168,0,251,84" href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" target="_blank">
+      <area shape="rect" coords="0,85,83,169" href="/channel/access" target="_blank">
+      <area shape="rect" coords="84,85,167,169">
+      <area shape="rect" coords="168,85,251,169" href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" target="_blank">
+      <area shape="rect" coords="0,170,83,254" href="/softwares/tools" target="_blank">
+      <area shape="rect" coords="84,170,167,254" href="/art" target="_blank">
+      <area shape="rect" coords="168,170,251,254" href="/designer_events" target="_blank">
+    </map>
+  </div>
+</div>
+
+<a href="javascript:;" id="gotop" style="display: block;">返回顶部</a>
 <div class="slides pr">
   <%- if MagicSetting.kv_of_home_index.present? %>
     <%= raw MagicSetting.kv_of_home_index %>
   <%- end %>
 </div><!--slides ends-->
 <%- end %>
-
-<% cache "homepage_content", :expires_in => 3.hours do %>
-<!-- MAIN CONTENT -->
-<div class="center pr">
-  <div class="centerBg indexmain">
-    <div class="top1content">
-      <div class="boxA" id="master_palace">
-        <div class="titlebar">
-          <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
-          <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
-          <div class="title">
-            <span class="cn">大师殿堂</span>
-            <span class="en">Feel the Masters</span>
-          </div>
+<div class="wrapper ft14">
+  <div class="blocks clear">
+    <h2 class="tr">
+      <a href="/master_interviews?from=top" class="fl ft16">大师殿堂</a>
+      <a href="/master_interviews?from=top">大师访谈</a> |
+      <a href="/master_designs?from=top">大师作品</a>
+    </h2>
+    <div class="blocks_big mr20 pr">
+      <a href="/master_interviews?from=top"><%= image_tag @master_interview.preview_img_out, :height=>"365px", :width=>"380px" %></a>
+      <a href="#" class="blocks_title ft16"><%= @master_interview.title %> 一 <%= @master_interview.name %></a>
+    </div><!-- blocks_big -->
+    <div class="blocks_big mr20">
+      <div class="blocks_mid mb25">
+        <a href="/master_designs/<%=@master_design.id%>">
+            <%- unless @master_design.master_design_uploads.first.file.nil? %>
+              <%= image_tag(@master_design.master_design_uploads.first.file, :height=>"170px", :width=>"380px")%>
+            <%- end %>
+        </a>
+        <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= @master_design.try(:design_name) %></a>
+      </div>
+      <div class="blocks_mini mr20 blocks_show">
+        <a href="/master_interviews?from=top"><img src="<%= asset_path "2013/index/blocks1.3.png"%>" /></a>
+      </div>
+      <div class="blocks_mini">
+        <a href="/master_designs/<%=@master_design_two.id%>">
+          <%- unless @master_design_two.master_design_uploads.first.file.nil? %>
+              <%= image_tag(@master_design_two.master_design_uploads.first.file, :height=>"170px", :width=>"180px")%>
+          <%- end %>
+        </a>
+        <a href="/master_designs/<%=@master_design_two.id%>" class="blocks_title ft14"><%=@master_design_two.try(:design_name)%></a>
+      </div>
+    </div><!-- blocks_big -->
+    <div class="blocks_big pr">
+      <a href="/master_designs/<%=@master_design_three.id%>">
+        <%- unless @master_design_three.master_design_uploads.first.file.nil? %>
+              <%= image_tag(@master_design_three.master_design_uploads.first.file, :height=>"365px", :width=>"380px")%>
+        <%- end %>
+      </a>
+      <a href="/master_designs/<%=@master_design_three.id%>" class="blocks_title ft14"><%=@master_design_three.try(:design_name)%></a>
+    </div><!-- blocks_big -->
+  </div><!-- blocks -->
+  <div class="blocks clear">
+    <h2>
+      <a href="/design_images" class="ft16">装修图库</a>
+    </h2>
+    <div class="blocks_big mr20 pr">
+      <a href="<%=image_show_design_image_path(@desing_image.id)%>">
+        <%- unless @desing_image.file.nil? %>
+              <%= image_tag(@desing_image.file.url(:original), :height=>"365px", :width=>"380px")%>
+        <%- end %>
+      </a>
+      <a href="<%=image_show_design_image_path(@desing_image.id)%>" class="blocks_title ft16"><%=@desing_image.design.try(:title)%></a>
+    </div><!-- blocks_big -->
+    <div class="blocks_big mr20">
+      <div class="blocks_mid mb25">
+        <a href="<%=image_show_design_image_path(@desing_image_two.id)%>">
+          <%- unless @desing_image_two.file.nil? %>
+              <%= image_tag(@desing_image_two.file.url(:original), :height=>"170px", :width=>"380px")%>
+          <%- end %>
+        </a>
+        <a href="<%=image_show_design_image_path(@desing_image_two.id)%>" class="blocks_title ft14"><%=@desing_image_two.design.try(:title)%></a>
+      </div>
+      <div class="blocks_mini mr20 blocks_show">
+        <a href="#"><img src="<%= asset_path "2013/index/blocks2.3.png"%>" /></a>
+      </div>
+      <div class="blocks_mini">
+        <a href="<%=image_show_design_image_path(@desing_image_three.id)%>">
+          <%- unless @desing_image_three.file.nil? %>
+                <%= image_tag(@desing_image_three.file, :height=>"170px", :width=>"180px")%>
+          <%- end %>
+        </a>
+        <a href="<%=image_show_design_image_path(@desing_image_three.id)%>" class="blocks_title ft14"><%=@desing_image_three.design.try(:title)%></a>
+      </div>
+    </div><!-- blocks_big -->
+    <div class="blocks_big">
+      <div class="blocks_mini mr20">
+        <a href="<%=image_show_design_image_path(@desing_image_four.id)%>">
+          <%- unless @desing_image_four.file.nil? %>
+                <%= image_tag(@desing_image_four.file, :height=>"170px", :width=>"180px")%>
+          <%- end %>
+        </a>
+        <a href="<%=image_show_design_image_path(@desing_image_four.id)%>" class="blocks_title ft14"><%=@desing_image_four.design.try(:title)%></a>
+      </div>
+      <div class="blocks_mini">
+        <a href="<%=image_show_design_image_path(@desing_image_five.id)%>">
+          <%- unless @desing_image_five.file.nil? %>
+                <%= image_tag(@desing_image_five.file, :height=>"170px", :width=>"180px")%>
+          <%- end %>
+        </a>
+        <a href="<%=image_show_design_image_path(@desing_image_five.id)%>" class="blocks_title ft14"><%=@desing_image_five.design.try(:title)%></a>
+      </div>
+      <div class="blocks_mid mt25">
+        <a href="<%=image_show_design_image_path(@desing_image_six.id)%>">
+          <%- unless @desing_image_six.file.nil? %>
+                <%= image_tag(@desing_image_six.file, :height=>"170px", :width=>"380px")%>
+          <%- end %>
+        </a>
+        <a href="<%=image_show_design_image_path(@desing_image_six.id)%>" class="blocks_title ft14"><%=@desing_image_six.design.try(:title)%></a>
+      </div>
+    </div><!-- blocks_big -->
+  </div><!-- blocks -->
+  <div class="blocks clear">
+    <h2 class="tr">
+      <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="fl ft16">设计鉴赏</a>
+      <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a> |
+      <a href="/designs?from=top">作品展示</a> |
+      <a href="/color_designs?from=top">色彩配搭</a> |
+      <a href="/inspirations?from=top">灵感秀</a>
+    </h2>
+    <div class="blocks_big mr20 pr">
+      <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">
+        <%- unless @weekly_star.weekly_star_uploads.first.file.nil? %>
+              <%= image_tag(@weekly_star.weekly_star_uploads.first.file, :height=>"365px", :width=>"380px")%>
+        <%- end %>
+      </a>
+      <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="blocks_title ft14">
+        <span class="blocks_like fr"><%=@link_design.try(:votes_count)%></span><%=@weekly_star.design_name%>
+      </a>
+    </div><!-- blocks_big -->
+    <div class="blocks_big mr20 pr">
+      <a href="<%=user_design_path(@design.user_id, @design)%>">
+        <%- unless @design.cover_img.nil? %>
+              <%= image_tag(@design.cover_img.file, :height=>"365px", :width=>"380px")%>
+        <%- end %>
+      </a>
+      <a href="<%=user_design_path(@design.user_id, @design)%>" class="blocks_title ft14"><%=@design.title%></a>
+    </div><!-- blocks_big -->
+    <div class="blocks_big">
+      <div class="blocks_mid mb25">
+        <a href="/color_designs/<%= @color_design.id %>">
+        <%- unless @color_design.main_preview_img.nil? %>
+              <%= image_tag(@color_design.main_preview_img, :height=>"170px", :width=>"380px")%>
+        <%- end %>
+      </a>
+      <a href="/color_designs/<%= @color_design.id %>" class="blocks_title ft14"><%=@color_design.design_name%></a>
+      </div>
+      <div class="blocks_mini mr20">
+        <a href="/inspirations/<%= @inspiration.id %>">
+          <%- unless @inspiration.cover_img.file.nil? %>
+                <%= image_tag(@inspiration.cover_img.file.url(:outside), :height=>"170px", :width=>"180px")%>
+          <%- end %>
+        </a>
+        <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%=@inspiration.title%></a>
+      </div>
+      <div class="blocks_mini blocks_show">
+        <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>"><img src="<%= asset_path "2013/index/blocks3.5.png"%>" /></a>
+      </div>
+    </div><!-- blocks_big -->
+  </div><!-- blocks -->
+  <div class="blocks clear">
+    <div class="blocks_large fl mr20">
+      <h2 class="tr">
+        <a href="/channel/access?from=top" class="fl ft16">业主通道</a>
+        <a href="/channel/access">设计快查</a> |
+        <a href="/faqs">装修问答</a> |
+        <a href="/faqs#tips">装修贴士</a> |
+        <a href="/mix_colors/new">配色咨询</a> |
+        <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a>
+      </h2>
+      <div class="blocks_big mr20">
+        <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" class="fl"><img src="<%= asset_path "2013/index/blocks4.1.jpg"%>" /></a>
+        <a href="/channel/access" class="fl blocks_show"><img src="<%= asset_path "2013/index/blocks4.2.png"%>" /></a>
+        <a href="/mix_colors/new?from=top" class="fl mt25"><img src="<%= asset_path "2013/index/blocks4.3.jpg"%>" /></a>
+      </div>
+      <div class="blocks_big">
+        <div class="blocks_mini mr20">
+          <a href="/channel/access"><img src="<%= asset_path "2013/index/blocks4.4.jpg"%>" /></a>
+          <a href="/channel/access" class="blocks_title ft14">设计快查</a>
         </div>
-        <div class="box_content">
-          <div class="master_palace_content">
-            <% if @master_interview -%>
-            <div class="original">
-              <div class="image"><a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_in.url %></a></div>
-              <div class="t"><a href="/master_interviews/<%= @master_interview.id %>"><%= @master_interview.title %></a></div>
-              <div class="c">
-                <div class="text"><%=  gsub_body_string(@master_interview.intro, 80) %></div>
-              </div>
-              <div class="plus">+</div>
-            </div>
-            <div class="replace boxB">
-              <div class="box_title"><h3>大师访谈</h3></div>
-              <div class="boxb_content boxb_box">
-                <a href="/master_interviews/<%= @master_interview.id %>">
-                  <%= image_tag @master_interview.preview_img_out.url(:home_page), :class=> "master_img" %>
-                </a>
-                <div class="boxb_text2"><%= @master_interview.title %></div>
-                <p><%= gsub_body_string(@master_interview.intro, 140) %></p>
-                <h4><%= @master_interview.name %></h4>
-              </div>
-            </div>
-            <% end -%>
-          </div>
+        <div class="blocks_mini">
+          <a href="/channel/access"><img src="<%= asset_path "2013/index/blocks4.5.jpg"%>" /></a>
+          <a href="/channel/access" class="blocks_title ft14">设计代寻</a>
+        </div>
+        <div class="blocks_mid mt25">
+          <h3>装修小贴士</h3>
+          <ul class="blocks_tips ft12">
+            <% @weekly_tips.each_with_index do |weekly_tip,index| %>
+              <% weekly = weekly_tip.body.split('？') %>
+              <% if index < 1%>
+                <li><a href="/faqs#tips" title="<%=weekly[0]%>？"><%=weekly[0]%>？</a></li>
+                <p><%=weekly[1]%></p>
+              <% else %>
+                <li><a href="/faqs#tips" title="<%=weekly[0]%>？"><%=weekly[0]%>？</a></li>
+              <% end %>
+            <% end %>
+            
+            
+          </ul>
         </div>
       </div>
-
-      <div id="design_appreciation">
-        <div class="inner">
-          <div class="titlebar">
-            <span class="cn">设计鉴赏</span>
-            <span class="en">Appreciate the works</span>
-          </div>
-          <div class="box_content">
-            <div class="inner">
-              <div class="inner_inner">
-                <div class="image">
-                  <a href="/weekly_stars">
-                    <% unless @weekly_star.main_preview_img.nil? %>
-                      <%= image_tag(@weekly_star.main_preview_img.url(:index)) %>
-                    <%- end -%>
-                  </a>
-                </div>
-                <div class="t">
-                  <p>设计师：<%= @weekly_star.try(:author) %></p>
-                </div>
-                <div class="s">
-                  <p class="like"><%= @weekly_star.try(:votes_count) %></p>
-                  <p class="review">评论<%= @weekly_star.try(:comments_count) %></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div><!-- blocks_large -->
+    <div class="blocks_big">
+      <h2 class="tr">
+        <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class="fl ft16">行业资讯</a>
+        <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a> |
+        <a href="/color_articles?from=top">色彩资讯</a> |
+        <a href="/master_topics">业内动态</a>
+      </h2>
+      <div class="blocks_mid mb25">
+        <ul class="blocks_news ft12">
+          <% @articles.each do |article| %>
+          <li>
+            <span><%= article.published_at.to_date %></span>
+            <a href="/articles/<%=article.id%>" title="<%=article.title%>"><%=article.title%></a>
+          </li>
+          <% end %>
+        </ul>
       </div>
-
-      <div class="boxA" id="information">
-        <div class="titlebar">
-          <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
-          <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
-          <div class="title">
-            <span class="cn">行业资讯</span>
-            <span class="en">Sector News</span>
-          </div>
-        </div>
-        <div class="box_content">
-          <div class="inner">
-            <ul>
-              <% @home_infos.each do |info| %>
-              <li><a href="#"><%= image_tag(info.preview_img.url) %></a></li>
-              <%- end -%>
-              <li class="desc">
-                <p class="c"><%= @home_infos.first.try(:title) %></p>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="blocks_mini mr20 blocks_show">
+        <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>"><img src="<%= asset_path "2013/index/blocks5.1.png"%>" /></a>
       </div>
-
-      <div class="boxA" id="hot_topic">
-        <div class="titlebar">
-          <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
-          <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
-          <div class="title"></div>
-        </div>
-        <div class="box_content boxB shadow" style="padding:15px 20px">
-          <div class="box_title"><h3>大师热点话题</h3></div>
-          <div class="boxb_content" style="width:600px;height:236px;overflow:hidden;  ">
-            <a href="/master_topics/<%= @hot_topic.id %>">
-              <%= image_tag @hot_topic.preview_img.url(:icolor_master_topic) %>
-            </a>
-            <div class="boxb_text">
-              <h3><%= @hot_topic.title %></h3>
-              <p>
-                <%= gsub_body_string(@hot_topic.body, 130) %>
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="blocks_mini">
+        <a href="/articles/<%=@articles.first.id%>"><img src="<%= @articles.first.preview_img%>" width="180" height="170"/></a>
+        <a href="/articles/<%=@articles.first.id%>" class="blocks_title ft14"><%=@articles.first.title%></a>
       </div>
-
-      <div class="boxB" id="masters_guidance">
-        <div class="box_title"><h3>大师作品</h3>
-          <div class="more"><a href="/master_designs">+查看更多</a></div>
-        </div>
-        <% if @master_design -%>
-        <div class="boxb_content qa">
-          <div class="gallery galleryN">
-            <span class="moveleft"></span>
-            <span class="moveright"></span>
-            <div class="list">
-              <ul>
-                <%- @master_design.master_design_uploads.each do |i| %>
-                <%- unless i.file.nil? %>
-                <li><%= image_tag(i.file.url(:home_page))%></li>
-                <%- end %>
-                <%- end %>
-              </ul>
-            </div>
-          </div>
-
-          <div class="intro">
-            <h3>作者：<%= @master_design.try(:master_profile).try(:name) %></h3>
-            <p>国籍：<%= @master_design.try(:master_profile).try(:nationality) %></p>
-            <p>作品名称：<%= @master_design.try(:design_name) %></p>
-          </div>
-        </div>
-        <% end -%>
+    </div><!-- blocks_big -->
+  </div><!-- blocks -->
+  <div class="blocks clear">
+    <div class="blocks_big mr20">
+      <h2 class="tr">
+        <a href="/softwares/tools?from=top" class="fl ft16">应用工具</a>
+        <a href="/softwares/case">案例下载</a> |
+        <a href="/softwares/tools?from=top">配色软件</a> |
+        <a href="/softwares/app">APP</a>
+      </h2>
+      <div class="blocks_mini mr20 mb25">
+        <a href="/softwares/case"><img src="<%= asset_path "2013/index/blocks6.1.jpg"%>" /></a>
+        <a href="/softwares/case" class="blocks_title ft14">案例下载</a>
       </div>
-    </div>
-    <div class="top1mask"></div>
-    <div class="boxA" id="top2">
-      <div class="titlebar">
-        <div class="left"><img src="<%= asset_path "design/boxA_triangle_left.gif" %>"/></div>
-        <div class="right"><img src="<%= asset_path "design/boxA_triangle_right.gif" %>"/></div>
-        <div class="title"></div>
+      <div class="blocks_mini mb25">
+        <a href="/softwares/app"><img src="<%= asset_path "2013/index/blocks6.2.jpg"%>" /></a>
+        <a href="/softwares/app" class="blocks_title ft14">APP</a>
       </div>
-      <div class="box_content">
-        <div class="titlebar">
-          <div class="title">
-            <span class="cn">设计鉴赏</span>
-            <span class="en">Appreciate the works</span>
-          </div>
-        </div>
-        <div class="inner">
-          <div class="inner-inner">
-            <div class="boxB" id="weekly_star">
-              <div class="box_title"><h3>每周之星</h3></div>
-              <div class="boxb_content" style=" position: static; top: 0;">
-                <a href="/weekly_stars/<%= @weekly_star.id%>">
-                    <% unless @weekly_star.main_preview_img.nil? %>
-                      <%= image_tag(@weekly_star.main_preview_img.url(:index)) %>
-                    <%- end -%>
-                </a>
-                <div class="cor"></div>
-                <div class="designer">设计师：<%= @weekly_star.try(:author) %></div>
-                <div class="notes"><%= @weekly_star.try(:votes_count) %></div>
-              </div>
-            </div>
-            <div class="boxB" id="afflatus_showcase">
-              <div class="box_title"><h3>灵感秀</h3></div>
-              <div class="boxb_content">
-                <div class="galleryP">
-                  <ul>
-                    <% @inspirations.each do |insp| %>
-                    <li>
-                      <%- unless insp.cover_img.nil? -%>
-                        <a href="/inspirations/<%= insp.id %>"></a><%= image_tag insp.cover_img.try(:file).url(:home_page) %>
-                      <%- end -%>
-                    </li>
-                    <%- end -%>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="recommended_works">
-            <div class="box_title"><img src="<%= asset_path "design/recommended_works.gif" %>"></div>
-            <div class="box_content">
-              <div class="galleryM">
-                <span class="moveleft"></span>
-                <span class="moveright"></span>
-                <div class="list">
-                  <ul>
-                    <% @designs.each do |design|  %>
-                    <li>
-                      <div class="img">
-                        <a href="/designs/<%= design.id %>"><%= image_tag design.cover_img.file.url(:slide_thumb) if design.cover_img %></a>
-                      </div>
-                      <div class="s">
-                        <p class="like"><%= design.votes_count %></p>
-                        <p class="forward">转发</p>
-                        <p class="review">评论</p>
-                      </div>
-                    </li>
-                    <%- end -%>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <div class="blocks_mini mr20 blocks_show">
+        <a href="/softwares/tools"><img src="<%= asset_path "2013/index/blocks6.3.png"%>" /></a>
       </div>
-    </div>
-
-    <div id="home_improvement_news">
-      <div class="titlebar">
-        <span class="cn">行业资讯</span>
-        <span class="en">Sector News</span>
+      <div class="blocks_mini">
+        <a href="/softwares/tools?from=top"><img src="<%= asset_path "2013/index/blocks6.4.jpg"%>" /></a>
+        <a href="/softwares/tools?from=top" class="blocks_title ft14">配色软件</a>
       </div>
-      <div class="box_content">
-        <div class="left">
-          <div class="industry_news shadow">
-            <div class="boxB">
-              <div class="box_title"><h3>行业资讯</h3></div>
-              <div class="boxb_content">
-                <div class="major">
-                  <div class="legend"><a href="/articles/<%= @articles.first.try(:id) %>"><%= @articles.first.try(:title) %></a></div>
-                  <div class="desc">
-                    <%= gsub_body_string(@articles.first.try(:body), 125) %>
-                    <a href="/articles/<%= @articles.first.try(:id) %>">[查看详细]</a>
-                  </div>
-                </div>
-                <div class="list">
-                  <ul>
-                    <% @articles.shift %>
-                    <% @articles.each do |article| %>
-                    <li>
-                      <div class="img"><%= image_tag(article.preview_img.url()) %></div>
-                      <div class="t"><a href="/articles/<%= article.id %>"><%= article.title %></a></div>
-                      <div class="c"><%= gsub_body_string(article.body, 70) %><a href="/articles/<%= article.id %>">[查看详细]</a></div>
-                    </li>
-                    <%- end -%>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="right">
-          <div class="inner shadow">
-            <div class="tweibo boxB">
-              <div class="box_title"><h3>立邦官微资讯</h3></div>
-              <div class="boxb_content">
-                <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2032078483&verifier=b48b0477&dpc=1"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tweets boxB">
-            <div class="box_title"><h3>行业红人微博资讯</h3></div>
-            <div class="boxb_content">
-              <ul>
-
-              <% @weibo_data.each do |weibo| -%>
-              <li>
-                <div class="simg"><a href="http://weibo.com/<%= weibo.user_profile_url %>" target="_blank"><img src="<%= weibo.thumbnail_pic %>"></a></div>
-                <div class="bimg">
-                  <div class="popupB">
-                    <div class="popupinner">
-                      <div class="content">
-                        <div class="t">
-                          <div class="face"><a href="http://weibo.com/<%= weibo.user_profile_url %>" target="_blank"><img src="<%= weibo.user_profile_image_url %>"></a></div>
-                          <div class="tcontent">
-                            <a href="http://weibo.com/<%= weibo.user_profile_url %>" class="user" target="_blank"><%= weibo.user_name %>：</a>
-                            <%= weibo.text %>
-                            <br/>
-                            <br/>
-                            <img src="<%= weibo.bmiddle_pic %>" height="200">
-                          </div>
-                          <div class="time"><a href="http://weibo.com/<%= weibo.user_profile_url %>"  target="_blank"><%= weibo.created_time.to_formatted_s(:db) %></a> <span class="from">来自 <a href="http://weibo.com/<%= weibo.user_profile_url %>">新浪微博</a></span></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <% end -%>
-
-            </ul>
-            <!--[if IE 6]>
-            <script type="text/javascript">
-            if ($.browser.msie && $.browser.version < 7) {
-            $(function() {
-            $('div.tweets li').hover(function() {
-            //$(this).find('div.bimg').css('right','-135px');
-            $(this).addClass('hover');
-            }, function() {
-            //$(this).find('div.bimg').css('right','-1350px');
-            $(this).addClass('hover');
-            });
-            })
-            }
-            </script>
-            <![endif]-->
-          </div>
-        </div>
+    </div><!-- blocks_big -->
+    <div class="blocks_big mr20">
+      <h2 class="tr">
+        <a href="/art" class="fl ft16">漆光异彩</a>
+        <a href="/art">艺术漆效果</a> |
+        <a href="/7-1?from=top">木器漆效果</a>
+      </h2>
+      <div class="blocks_mid mb25">
+        <a href="/art"><img src="<%= asset_path "2013/index/blocks7.1.jpg"%>" /></a>
+        <a href="/art" class="blocks_title ft14">艺术漆效果</a>
       </div>
-    </div>
+      <div class="blocks_mini mr20">
+        <a href="/7-1?from=top"><img src="<%= asset_path "2013/index/blocks7.2.jpg"%>" /></a>
+        <a href="/7-1?from=top" class="blocks_title ft14">木器漆效果</a>
+      </div>
+      <div class="blocks_mini blocks_show">
+        <a href="/art"><img src="<%= asset_path "2013/index/blocks7.3.png"%>" /></a>
+      </div>
+    </div><!-- blocks_big -->
+    <div class="blocks_big">
+      <h2 class="tr">
+        <a href="/designer_events" class="fl ft16">精彩活动</a>
+        <a href="/designer_events">设计师活动</a> |
+        <a href="/other_events">其他活动</a>
+      </h2>
+      <div class="blocks_mini mr20 blocks_show">
+        <a href="/designer_events"><img src="<%= asset_path "2013/index/blocks8.1.png"%>" /></a>
+      </div>
+      <a href="/gift" class="fl"><img src="<%= asset_path "2013/index/blocks8.2.jpg"%>" /></a>
+      <div class="blocks_mid mt25">
+        <a href="/designer_events/city/npyda?page=1"><img src="<%= asset_path "design/d_act_list/pic1.jpg"%>" width="380" height="170"/></a>
+        <a href="/designer_events/city/npyda?page=1" class="blocks_title ft14">立邦亚洲青年设计师大赛(NPYDA)成功落幕</a>
+      </div>
+    </div><!-- blocks_big -->
+  </div><!-- blocks -->
+  <div class="mt25 clear">
+    <a href="/design_zg" class="fl mr20"><img src="<%= asset_path "2013/index/blocks9.1.jpg"%>" /></a>
+    <a href="/design_zg2" class="fl"><img src="<%= asset_path "2013/index/blocks9.2.jpg"%>" /></a>
+  </div><!-- mt25 -->
+</div><!--wrapper-->
+<div class="imap">
+  <div class="wrapper clear">
+    <a href="/master_interviews"><img src="<%= asset_path "2013/index/blocks10.1.png"%>" /></a>
+    <a href="/design_images"><img src="<%= asset_path "2013/index/blocks10.2.png"%>" /></a>
+    <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星")%>"><img src="<%= asset_path "2013/index/blocks10.3.png"%>" /></a>
+    <a href="/channel/access"><img src="<%= asset_path "2013/index/blocks10.4.png"%>" /></a>
+    <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>"><img src="<%= asset_path "2013/index/blocks10.5.png"%>" /></a>
+    <a href="/softwares/tools"><img src="<%= asset_path "2013/index/blocks10.6.png"%>" /></a>
+    <a href="/art"><img src="<%= asset_path "2013/index/blocks10.7.png"%>" /></a>
+    <a href="/designer_events"><img src="<%= asset_path "2013/index/blocks10.8.png"%>" class="nomargin" /></a>
   </div>
+</div><!-- imap -->
 
-  <div id="topb2">
-    <div class="box_content">
-      <div id="gift">
-        <div class="titlebar">
-          <!--<span class="cn">礼从天降</span>-->
-          <!--<span class="en">Promotion and more</span>-->
-          <img src="<%= asset_path 'design/promotion_and_more.jpg' %>">
-        </div>
-        <div class="boxb_content">
-          <a href="/gift"><img src="<%= asset_path "design/activitiesB.gif" %>"></a>
-        </div>
-      </div>
-
-      <div id="utility"  style="width:457px;">
-        <div class="inner">
-          <div class="titlebar">
-            <!--<span class="cn">实用工具</span>-->
-            <!--<span class="en">Tools & Mix</span>-->
-            <img src="<%= asset_path 'design/tools.jpg' %>">
-          </div>
-          <div class="boxb_content">
-            <img src="<%= asset_path "design/utility.jpg" %>" usemap="#utility_map"/>
-            <map name="utility_map" id="utility_map">
-              <area shape="rect" coords="0,0,202,73" href="http://www.icolor6.net/"/>
-              <area shape="rect" coords="1,78,203,147" href="/softwares/case"/>
-              <area shape="rect" coords="207,1,405,155" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank"/>
-            </map>
-          </div>
-        </div>
-      </div>
-      <div id="paint_art" style="width:232px; left:823px;">
-        <div class="inner">
-          <div class="titlebar">
-            <!--<span class="cn">漆光艺彩</span>-->
-            <!--<span class="en">Colorful arts</span>-->
-            <img src="<%= asset_path 'design/arts.jpg' %>">
-          </div>
-          <div class="boxb_content">
-            <!--<div class="boxleft"><img src="images/design/paintart.jpg"></div>-->
-            <div class="boxright">
-              <div class="galleryO" style="width:232px;">
-                <div class="buttons">
-                  <div class="moveleft"></div>
-                  <div class="moveright"></div>
-                  <div class="n"><span class="current">1</span>/<span class="total">4</span></div>
-                </div>
-                <div class="list" style="width:232px;">
-                  <ul>
-                    <li><a href="#"><img src="<%= asset_path "design/paintart1.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/paintart2.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/paintart3.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/paintart4.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/paintart5.png"%>"></a></li>
-                    <li><a href="#"><img src="<%= asset_path "design/paintart6.png"%>"></a></li>
-                  </ul>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="base">
-      <div class="c shadow"></div>
-    </div>
-  </div>
-  </div>
-<!--centerBg ends-->
-</div><!--center ends-->
-<!-- MAIN CONTENT END -->
-<% end %>
-
-<div class="footer_adv">
-  <div class="inner">
-    <a href="#"><img src="<%= asset_path "design/banner_design.jpg"%>" border="0" usemap="#Map"/>
-      <map name="Map" id="Map">
-        <area shape="rect" coords="27,167,122,196" href="/design_zg"/>
-        <area shape="rect" coords="618,152,717,183" href="/design_zg2"/>
-      </map>
-    </a>
-  </div>
-</div>
-<script type="text/javascript">
-  function kvCheckUser(){
-    <% if current_user %>
-      var userId = <%= current_user.id %>;
-      var roleName = "<%= current_user.role_chn_name %>";
-    if(userId != ""){
-      if(roleName == "普通用户"){
-        alert("抱歉！普通用户身份是无法上传作品的哦！");
-      }
-      else{
-        window.location.href="/users/"+ userId+"/designs/new";
-      }
-    }
-    <% else %>
-      show_login();
-      return false;
-    <% end %>
-  };
-</script>
 <%- content_for :tail do %>
-<%= javascript_include_tag "index_gallery" %>
-<%= javascript_include_tag "index3" %>
-
-<script type="text/javascript">
-  $(function() {
-    $("#home_improvement_news").hide();
-  });
-</script>
-
-<script type="text/javascript">
-(function() {
-var jkb = document.createElement('script'); jkb.type = "text/javascript"; jkb.async = true;
-jkb.src = "http://exp.jiankongbao.com/loadtrace.php?host_id=11187&style=6&type=1";
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(jkb, s);
-})();
-</script>
-
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+<%= javascript_include_tag "2013main" %>
 <% end -%>

@@ -42,7 +42,12 @@
   <style type="text/css" >
     .nav_hot{position:absolute;top:-13px;left:60px;}
     .nav_hot2{position: absolute;top: -5px;left: 65px;}
+    <%- if controller_name != "home" && controller_name != "design_images" %>
+     .navBot{margin:12px 0;}
+    <%- end %>
+    .navBot li{padding:1px 5px;}
   </style>
+
 
 </head>
 <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/ %>">
@@ -104,69 +109,79 @@
       <li class="pr"><a href="/master_interviews?from=top">大师殿堂</a>
         <ul>
           <li><a href="/master_interviews?from=top">大师访谈</a></li>
-          <li><a href="/master_topics?from=top">热点话题</a></li>
-          <li class="noborder pr"><a href="/master_designs?from=top">大师作品</a>
+          <li class="pr noborder"><a href="/master_designs?from=top">大师作品</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
+          <!-- <li class="noborder"><a href="/master_topics?from=top">热点话题</a></li> -->
+          
         </ul>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
+      <li class="pr"><a href="/design_images?from=top">装修图库</a>
+
       <li class="pr"><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计鉴赏</a>
         <ul>
           <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
-          <li><a href="/designs?from=top">推荐作品</a></li>
-          <li class="pr"><a href="/inspirations?from=top">灵感秀</a>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-          </li>
+          <li><a href="/designs?from=top">作品展示</a></li> 
           <li class="pr"><a href="/color_designs?from=top">色彩配搭</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <li class="noborder pr"><a href="/my_show?from=top">我型我秀</a>
+          <li class="pr noborder"><a href="/inspirations?from=top">灵感秀</a>
+            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
+          </li>
+          <!-- <li class="noborder pr"><a href="/my_show?from=top">我型我秀</a> -->
            <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
           </li>
         </ul>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
+
+      <li class="pr"><a href="/channel/access?from=top">业主通道</a>
+        <ul >
+          <li><a href="/channel/access?from=top">设计快查</a><span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span></li> 
+          <li><a href="/faqs">装修问答</a></li>
+          <li><a href="/faqs#tips">装修贴士</a></li>
+          <li><a href="/mix_colors/new?from=top">配色咨询</a></li>
+          <li class="noborder"><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">刷新服务</a></li>
+          <!-- <li><a href="/faqs?from=top">家装设计咨询</a></li>
+          <li class="noborder"><a href="/mix_colors/new?from=top">在线配色服务</a></li> -->
+        </ul>
+      </li>
+
       <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">行业资讯</a>
         <ul>
           <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <li><a href="/color_articles?from=top">色彩资讯</a></li>
-          <li class="noborder"><a href="/weibo_wall?from=top">微博资讯</a></li>
+          <li class="noborder"><a href="/master_topics">业内动态</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="/designer_events?from=top">精彩活动</a>
-        <ul class="w_nav1">
-          <li><a href="/events?from=top">年度色彩趋势活动</a></li>
-          <li><a href="/designer_events?from=top">设计师活动</a></li>
-          <li class="pr"><a href="/other_events?from=top">其他精彩活动</a></li>
-          <li class="noborder pr"><a href="/gift_list?from=top">获奖名单</a></li>
+      
+      <li class="pr"><a href="/softwares/tools?from=top">应用工具</a>
+        <ul>
+          <li><a href="/softwares/case">案例下载</a></li>
+          <li><a href="/softwares/tools">配色软件</a></li>
+          <li class="noborder"><a href="/softwares/app">APP</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="/softwares/tools?from=top">实用工具</a>
-        <ul class="w_nav2">
-          <li><a href="/softwares/tools?from=top">配色工具</a></li>
-          <li class="noborder"><a href="/softwares/app?from=top">设计应用软件</a></li>
-        </ul>
-      </li>
-      <li class="pr"><a href="/channel/access?from=top">业主通道</a>
-        <ul class="w_nav3">
-          <li class="pr"><a href="/channel/access?from=top">片区快查</a>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-          </li>
-          <li><a href="/faqs?from=top">家装设计咨询</a></li>
-          <li class="noborder"><a href="/mix_colors/new?from=top">在线配色服务</a></li>
-        </ul>
-      </li>
-      <li class="noborder pr"><a href="/art?from=top">漆光艺彩</a>
-        <ul class="w_nav4">
+      
+      <li class="pr"><a href="/art?from=top">漆光艺彩</a>
+        <ul>
           <li><a href="/art?from=top">米兰诺艺术效果</a></li>
-          <li><a href="/7-1?from=top">木纹风尚生活</a></li>
+          <li class="noborder"><a href="/7-1?from=top">木纹风尚生活</a></li>
           <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
-          <li class="noborder"><a href="/7-3?from=top">刷新灵感我绘我家</a></li>
+          <!-- <li class="noborder"><a href="/7-3?from=top">刷新灵感我绘我家</a></li> -->
         </ul>
         <!-- <span class="nav_hot"><img src="<%= asset_path "new.png"%>" /></span> -->
+      </li>
+      <li class="noborder pr"><a href="/designer_events?from=top">精彩活动</a>
+        <ul>
+          <li><a href="/designer_events?from=top">设计师活动</a></li>
+          <li><a href="/other_events?from=top">其他活动</a></li>
+          <li class="noborder"><a href="/gift_list?from=top">获奖名单</a></li>
+          <!-- <li class="noborder"><a href="/events?from=top">年度色彩趋势活动</a></li> -->
+        </ul>
       </li>
     </ul>
     <!--navBot ends-->
@@ -254,8 +269,9 @@
       </ul>
       <ul>
         <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class='fb'>行业资讯</a></li>
-        <li><a href="#">色彩资讯</a></li>
         <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a></li>
+        <li><a href="/color_articles?from=top">色彩资讯</a></li>
+        <li><a href="#">业内动态</a></li>
         <li><a href="#">微博资讯</a></li>
       </ul>
       <ul>
