@@ -27,21 +27,32 @@ class DesignImagesController < ApplicationController
   def index
     @image_length = DesignImage.count
     @categories = ImageLibraryCategory.where(parent_id: 0)
+    @tags = params[:tags].split(",").map { |e| e.to_i }.uniq.sort if params[:tags]
 
-    @images = DesignImage.available.order("created_at desc").page(params[:page]).per(11)
+    if params[:all_tags]
+      @all_tags = params[:all_tags].split(",").uniq.sort
+      tags = ImageLibraryCategory.where(parent_id: @all_tags).map(&:id)
+      @tags = (@tags + tags).uniq
+    end
 
+    @tag_names = ImageLibraryCategory.where("id in (?)", @tags).all.map { |e| e.title }
+    @images = DesignImage.includes(:tags).group("design_images.id").available.order("design_images.created_at desc").page(params[:page]).per(11)
+
+    if @tags
+      @images = @images.where("image_tags.image_library_category_id in (?)", @tags)
+    end
   end
 
   def image_search_index
     cookies[:design_image_tag_ids] ||= ''
-    @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')     
+    @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')
     if params[:tag_id]
       if @design_image_tag_ids.include? params[:tag_id]
         @design_image_tag_ids.delete(params[:tag_id])
         cookies[:design_image_tag_ids] = @design_image_tag_ids.join(',')
-      else  
+      else
         cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + params[:tag_id]
-      end 
+      end
     end
     if params[:tag_all_id]
       image_tags = ImageLibraryCategory.where(parent_id: params[:tag_all_id]).map &:id
@@ -51,13 +62,13 @@ class DesignImagesController < ApplicationController
         end
         @design_image_tag_ids.delete(params[:tag_all_id])
         cookies[:design_image_tag_ids] = @design_image_tag_ids.join(',')
-      else  
+      else
         cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + params[:tag_all_id]
         image_tags.each do |image_tag|
           cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + image_tag.to_s
         end
-      end 
-      
+      end
+
     end
     @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')
     @image_length = DesignImage.count
@@ -65,7 +76,7 @@ class DesignImagesController < ApplicationController
     @images = DesignImage.includes(:tags).available.where("image_tags.image_library_category_id in (?)", @design_image_tag_ids).page(params[:page]).per(11)
     render "index"
   end
-  
+
   def decoration_parts
     @image_length = DesignImage.count
     if params[:imageable_type] == "MasterDesign"
