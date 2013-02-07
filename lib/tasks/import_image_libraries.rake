@@ -29,7 +29,7 @@ task :import_image_libraries_sina => :environment  do
         unless file_src_arr.blank?
           file_src_arr.each do |file_src|
             design_image = design.design_images.new
-            handle = open(file_src.src) rescue nil
+            handle = open(file_src) rescue nil
             handle.class.class_eval { attr_accessor :original_filename, :content_type }
             handle.original_filename = file_src.split("/").last
             design_image.file = handle
