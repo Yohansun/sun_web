@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'spreadsheet'
 
-desc "图库数据导入"
-task :import_image_libraries => :environment  do
+desc "新浪图库数据导入"
+task :import_image_libraries_sina => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
   book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130122.xls"
   sheet1 = book.worksheet 0
@@ -28,7 +28,7 @@ task :import_image_libraries => :environment  do
         file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0].to_i}/*"]
         unless file_src_arr.blank?
           file_src_arr.each do |file_src|
-            design_image = DesignImage.new
+            design_image = design.design_images.new
             handle = open(file_src.src) rescue nil
             handle.class.class_eval { attr_accessor :original_filename, :content_type }
             handle.original_filename = file_src.split("/").last
@@ -77,4 +77,11 @@ task :import_image_libraries => :environment  do
   #     design_img.save
   #   end
   # end
+end
+
+
+desc "科普兰德图库数据导入"
+task :import_image_libraries_for_lande => :environment  do
+
+
 end
