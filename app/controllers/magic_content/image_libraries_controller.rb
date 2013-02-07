@@ -1,11 +1,12 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
+
 module MagicContent
   class ImageLibrariesController < BaseController
     skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page]
 
     def index
       @images = DesignImage.available.order("design_images.id DESC")
-      if params[:genre].present? 
+      if params[:genre].present?
         if params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
           @images = DesignImage.search(params[:genre], 'last_updated_at')
         else
@@ -17,7 +18,7 @@ module MagicContent
       else
         @page_count = (@images.count / 10).to_i + 1
       end
-      @images = @images.page(params[:page]) if @images.present?
+      @images = @images.order("design_images.id DESC").page(params[:page]) if @images.present?
     end
 
     def categories
@@ -57,13 +58,13 @@ module MagicContent
       @image.title = image_params[:title] if image_params[:title].present?
       @image.content = image_params[:content]
       @image.reason = image_params[:reason]
-      
+
       if params[:design_image][:edited_color]
         @image.edited_color = true
       elsif image_params[:color1_name]
         @image.edited_color = false
       end
-   
+
       @image.color1_name = image_params[:color1_name]
       @image.color2_name = image_params[:color2_name]
       @image.color3_name = image_params[:color3_name]
@@ -99,7 +100,7 @@ module MagicContent
             error_color.each {|color| str += color}
             flash[:notice] = "保存成功,忽略不正确的色号: #{str}"
           end
-        else 
+        else
           flash[:notice] = "保存成功"
         end
       else
