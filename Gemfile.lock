@@ -323,6 +323,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tree!
+  awesome_nested_set
   awesome_print
   bond
   capistrano
