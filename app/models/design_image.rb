@@ -106,9 +106,9 @@ class DesignImage < ActiveRecord::Base
       when 'edit_no_color'
         DesignImage.includes(:tags).available.where("(design_images.edited_color = ? or design_images.edited_color is null) and design_images.audited = ?",false, true)
       when 'edit_color'
-        DesignImage.available.where("design_images.edited_color = ?", true).order("design_images.id DESC")
+        DesignImage.available.where("design_images.edited_color = ? AND design_images.audited = ?", true, true).order("design_images.id DESC")
       when 'no_edit_color'
-        DesignImage.available.where("design_images.edited_color = ? or design_images.edited_color is null", false).order("design_images.id DESC")
+        DesignImage.available.where("(design_images.edited_color = ? or design_images.edited_color is null) AND (design_images.audited is null or design_images.audited = ?)", false, false).order("design_images.id DESC")
     end
   end
 end
