@@ -35,20 +35,11 @@ class DesignImage < ActiveRecord::Base
   end
 
   def areas
-    areas = []
     if self.area_id
-      if self.area.children.any?
-        areas.push(self.area.parent.id)
-        areas.push(self.area.id)
-        # areas.push(nil)
-      else
-        city = self.area.parent
-        areas.push(city.parent.id)
-        areas.push(city.id)
-        areas.push(self.area.id)
-      end
+      self.area.self_and_ancestors.map(&:id)
+    else
+      []
     end
-    areas
   end
 
   def file_dimensions
