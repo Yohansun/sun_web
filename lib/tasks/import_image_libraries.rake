@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # -*- encoding: utf-8 -*-
 require 'spreadsheet'
 
@@ -49,9 +51,9 @@ task :import_image_libraries_sina => :environment  do
           design_image.content = row[13]
           design_image.user_id = new_user.id
           design_image.source = 'sina'
-          design_image.save  
+          design_image.save
           p "保存成功!"
-        end    
+        end
       end
     end
   end
@@ -74,7 +76,7 @@ task :import_image_libraries_sina => :environment  do
   #       tags << ImageTag.new(image_library_category_id: style.id)
   #     end
   #   end
-  #   design.design_images.each do |design_img| 
+  #   design.design_images.each do |design_img|
   #     design_img.title = design.title
   #     design_img.content = design.content
   #     design_img.area_id = design.area_id
@@ -95,7 +97,7 @@ task :import_image_libraries_for_kepulande => :environment  do
     book = Spreadsheet.open "#{Rails.root}/lib/data/#{xls_name}"
     sheet1 = book.worksheet 0
     sheet1.each do |row|
-      next if row[1] == '路径'
+      next if row[1] == '路径' || row[1].blank?
       user = User.find_by_username(row[2])
       kpld_user = User.find_by_username("#{row[2]}-kepulande")
       new_user = nil
@@ -124,6 +126,7 @@ task :import_image_libraries_for_kepulande => :environment  do
       design.area_id = area ? area.id : 31
       # design.room_type = room.title if room
       if design.save(validate: false)
+        file_src_arr = Dir["/home/nioteam/icolor/lande/r4/#{row[1].gsub('\\', '/')}/*"]
         file_src_arr = Dir["/home/nioteam/icolor/kepulande/#{row[1]}/*"]
         unless file_src_arr.blank?
           file_src_arr.each do |file_src|
