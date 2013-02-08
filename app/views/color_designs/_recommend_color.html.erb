@@ -40,17 +40,17 @@
                     var $ul = $(this).find('ul');
                     var tmp = '';
                     for (i = 1; i <= size; i++) {
-                        if (new RegExp("^FM|^WM").test(code[i].code)) {
+                        if (code[i].rgb == '') {
                             tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
                         } else {
                             tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
                         }
                     };
-                   
+
                     $ul.html(tmp);
                     $(this).children('img').hide();
                     $(this).children('div.desc').show();
-                    $(".list ul li:last").addClass("noborder");            
+                    $(".list ul li:last").addClass("noborder");
                 }).mouseleave(function(){
                     {$(this).children('img').show();
                     $(this).children('div.desc').hide();}
