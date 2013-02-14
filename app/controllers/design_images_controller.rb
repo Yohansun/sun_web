@@ -39,7 +39,29 @@ class DesignImagesController < ApplicationController
     @images = DesignImage.includes(:tags).group("design_images.id").available.order("design_images.created_at desc").page(params[:page]).per(11)
 
     if @tags
-      @images = @images.where("image_tags.image_library_category_id in (?)", @tags)
+      @images = @images.search_tags(@tags)
+    end
+
+    unless params[:area_id].blank?
+      area = Area.find(params[:area_id])
+      areas = area.self_and_descendants
+      area_tree = area.self_and_ancestors.map(&:id)
+
+      @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
+
+      @images = @images.where(area_id: areas.map(&:id))
+    end
+
+    unless params[:search].blank?
+      @images = @images.where("title LIKE ?", "%#{params[:search]}%")
+    end
+
+    unless params[:imageable_type].blank?
+      @images = @images.where("imageable_type = ?", params[:imageable_type])
+    end
+
+    unless params[:pinyin].blank?
+      @images = @images.where("pinyin LIKE ?", "#{params[:pinyin]}%")
     end
   end
 

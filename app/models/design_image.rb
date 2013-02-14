@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+require 'ruby-pinyin'
+
 class DesignImage < ActiveRecord::Base
   attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :color1_name, :color2_name, :color3_name, :tags, :area_id, :last_user_id, :last_updated_at
 
@@ -29,6 +31,17 @@ class DesignImage < ActiveRecord::Base
 
   # validates_presence_of :area_id
 
+  before_save :set_pinyin
+
+  def set_pinyin
+    if self.title_changed?
+      set_pinyin!
+    end
+  end
+
+  def set_pinyin!
+    self.pinyin = PinYin.of_string(self.title[0]).first.to_s
+  end
 
   def comments_count
     self.comments.size
@@ -101,5 +114,25 @@ class DesignImage < ActiveRecord::Base
       when 'no_edit_color'
         DesignImage.available.where("(design_images.edited_color = ? or design_images.edited_color is null) AND (design_images.audited is null or design_images.audited = ?)", false, false).order("design_images.id DESC")
     end
+  end
+
+
+  def sha_prefix(string)
+    Digest::SHA1.hexdigest("#{string}#{rand}")[0..6]
+  end
+
+  def self.search_tags(tag_ids)
+    joins = []
+    tag_ids.each do |tag_id|
+      taggings_alias = "taggings_#{tag_id}"
+
+      tagging_join  = "JOIN image_tags #{taggings_alias}" +
+      "  ON #{taggings_alias}.design_image_id = design_images.id" +
+      " AND #{taggings_alias}.image_library_category_id = #{tag_id}"
+
+      joins << tagging_join
+    end
+
+    scoped(:joins => joins.join(" "))
   end
 end

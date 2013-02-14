@@ -2,16 +2,16 @@
   <%= stylesheet_link_tag "imgbase", "jquery.slider"%>
 <%- end %>
 <%- content_for :tail do %>
-  <%= javascript_include_tag "jquery.slider", "LinkageSelect.js", "/location.js", "underscore.js" %>
+  <%= javascript_include_tag "jquery.slider", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
   <script type="text/javascript">
   	$(function() {
       var options = {
         data  : data
       }
       var sel = new LinkageSelect(options);
-      sel.bind('.level_1', null, '请选择');
-      sel.bind('.level_2', null, '请选择');
-      sel.bind('.level_3', null, '请选择');
+      sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '请选择');
+      sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '请选择');
+      sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '请选择');
     });
     $(function() {
     	$('.check_on').bind("click", function () {
@@ -61,45 +61,8 @@
 				var $this = $(this);
 				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
+
 		});
-
-		function getParameterByName(name)
-		{
-		  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-		  var regexS = "[\\?&]" + name + "=([^&#]*)";
-		  var regex = new RegExp(regexS);
-		  var results = regex.exec(window.location.search);
-		  if(results == null)
-		    return "";
-		  else
-		    return decodeURIComponent(results[1].replace(/\+/g, " "));
-		}
-
-		function add_tag (id) {
-			var tags = getParameterByName("tags").split(",");
-			if (_.indexOf(tags, id.toString()) > 0) {
-				tags = _.without(tags, id.toString())
-			} else {
-				tags = _.union(tags, id.toString())
-			}
-			var imageable_type = getParameterByName("imageable_type");
-			var search = getParameterByName("search");
-			var all_tags = getParameterByName("all_tags");
-			window.location = "/design_images?imageable_type="+imageable_type+"&search="+search+"&all_tags="+all_tags+"&tags="+_.uniq(_.compact(tags)).join(",")
-		}
-
-		function add_all_tag (id) {
-			var all_tags = getParameterByName("all_tags").split(",");
-			if (_.indexOf(all_tags, id.toString()) > 0) {
-				all_tags = _.without(all_tags, id.toString())
-			} else {
-				all_tags = _.union(all_tags, id.toString())
-			}
-			var imageable_type = getParameterByName("imageable_type");
-			var search = getParameterByName("search");
-			var tags = getParameterByName("tags");
-			window.location = "/design_images?imageable_type="+imageable_type+"&search="+search+"&tags="+tags+"&all_tags="+_.uniq(_.compact(all_tags)).join(",")
-		}
 
   </script>
 <%- end %>
@@ -108,8 +71,10 @@
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>" >
 		<div class="clear">
 			<div class="fr imgbase_search">
-				<input type="text"><button>搜图</button>
-				<span>热门搜索：<a href="#">暖色调</a><a href="#">小户型</a><a href="#">宜家</a><a href="#">墙面色</a></span>
+				<form onsubmit="return search_query($('#search_query').val());" style="display:inline">
+					<input type="text" value="<%= params[:search] %>" id="search_query"><button type="submit">搜图</button>
+				</form>
+				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('宜家')">宜家</a><a href="javascript:search_query('墙面色')">墙面色</a></span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
 		</div>
@@ -153,36 +118,36 @@
 		        <select id="city" class="level_2" style="width:70px;">市</select>
 		        <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
 					</span>
-					<input type="submit" value="确定" />
+					<input type="button" value="确定" onclick="submit_area()" />
 				</fieldset>
-				<fieldset class="lastfield">
+				<fieldset class="lastfield pinyin_list">
 					<label>拼音检索：</label>
-					<a href="#">A</a>|
-					<a href="#">B</a>|
-					<a href="#">C</a>|
-					<a href="#">D</a>|
-					<a href="#">E</a>|
-					<a href="#">F</a>|
-					<a href="#">G</a>|
-					<a href="#">H</a>|
-					<a href="#">I</a>|
-					<a href="#">J</a>|
-					<a href="#">K</a>|
-					<a href="#">L</a>|
-					<a href="#">M</a>|
-					<a href="#">N</a>|
-					<a href="#">O</a>|
-					<a href="#">P</a>|
-					<a href="#">Q</a>|
-					<a href="#">R</a>|
-					<a href="#">S</a>|
-					<a href="#">T</a>|
-					<a href="#">U</a>|
-					<a href="#">V</a>|
-					<a href="#">W</a>|
-					<a href="#">X</a>|
-					<a href="#">Y</a>|
-					<a href="#">Z</a>|
+					<a href="javascript:void(0)">A</a>|
+          <a href="javascript:void(0)">B</a>|
+          <a href="javascript:void(0)">C</a>|
+          <a href="javascript:void(0)">D</a>|
+          <a href="javascript:void(0)">E</a>|
+          <a href="javascript:void(0)">F</a>|
+          <a href="javascript:void(0)">G</a>|
+          <a href="javascript:void(0)">H</a>|
+          <a href="javascript:void(0)">I</a>|
+          <a href="javascript:void(0)">J</a>|
+          <a href="javascript:void(0)">K</a>|
+          <a href="javascript:void(0)">L</a>|
+          <a href="javascript:void(0)">M</a>|
+          <a href="javascript:void(0)">N</a>|
+          <a href="javascript:void(0)">O</a>|
+          <a href="javascript:void(0)">P</a>|
+          <a href="javascript:void(0)">Q</a>|
+          <a href="javascript:void(0)">R</a>|
+          <a href="javascript:void(0)">S</a>|
+          <a href="javascript:void(0)">T</a>|
+          <a href="javascript:void(0)">U</a>|
+          <a href="javascript:void(0)">V</a>|
+          <a href="javascript:void(0)">W</a>|
+          <a href="javascript:void(0)">X</a>|
+          <a href="javascript:void(0)">Y</a>|
+          <a href="javascript:void(0)">Z</a>
 				</fieldset>
 				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
       <% end %>
