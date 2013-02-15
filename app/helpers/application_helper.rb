@@ -19,7 +19,7 @@ module ApplicationHelper
                  "designer_events"   => { "index" => "设计师活动", "city" => "设计师活动", "kv" => "设计师活动" },
                  "other_events"      => { "index" =>"其他精彩活动", "kv" => "其他精彩活动" },
                  "softwares"         => { "tools" => "在线配色软件", "app" => "设计师APP", "case" => "色彩搭配案例" },
-                 "channel"           => { "access" => "片区快查" },
+                 "channel"           => { "access" => "设计快查" },
                  "faqs"              => "家装设计咨询",
                  "mix_colors"        => { "new" => "在线配色服务" },
                  "register"          => "注册",
