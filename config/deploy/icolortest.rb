@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-set :rvm_ruby_string, '1.9.2'       
+set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :system
 
 server "42.121.19.234", :web, :app, :db, primary: true
@@ -8,9 +8,9 @@ set :user, "root"
 set :repository, "git@git.networking.io:nioteam/icolor.git"
 set :branch, "xiaofei"
 
-set :deploy_to, "/home/www/rails/icolor"
+set :deploy_to, "/var/rails/icolor"
 
-set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb) 
+set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
 
 namespace :deploy do
 
@@ -24,7 +24,7 @@ namespace :deploy do
   #       logger.info "Skipping asset pre-compilation because there were no asset changes"
   #     end
   #   end
-  # end 
+  # end
 
   task :start, :roles => :app do
     unicorn.start

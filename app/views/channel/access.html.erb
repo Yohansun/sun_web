@@ -2,7 +2,7 @@
     <%= stylesheet_link_tag "imgbase","2013base","2013upload" %>
     <style type="text/css">
     body, button, input, select, textarea {
-      font: 12px/1.5 tahoma,arial,宋体b8b\4f53,sans-serif;
+      font-size: 12px;
     }
   </style>
     <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
@@ -46,7 +46,7 @@
             </fieldset>
         <% end %>
 
-        
+
           <ul class="channel_list clear">
             <% @design_users.each do |user| %>
             <% sort_input = MagicSetting.recommend_designs %>
@@ -75,7 +75,7 @@
               </li>
             <%- end -%>
           </ul><!-- channel_list end -->
-        
+
 
         <div class="pager ft12">
            <%= paginate @design_users  if @design_users%>

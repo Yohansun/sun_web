@@ -42,5 +42,5 @@ namespace :notify do
   end
 end
 
-before "deploy:update", "notify:campfire_start"
-after "deploy:restart", "notify:campfire_end"
+# before "deploy:update", "notify:campfire_start"
+# after "deploy:restart", "notify:campfire_end"
