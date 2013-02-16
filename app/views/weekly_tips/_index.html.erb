@@ -3,6 +3,7 @@
       <%- body = @weekly_tips.first.body.split("\r\n\r\n") %>
       <%- if (body.size)/2 >= 5 %>
           <%- 5.times do |i| %>
+              <a name="tips<%= i %>"></a>
               <div class="faqs_title clear">
                 <span class="ask fl"></span>
 
@@ -22,6 +23,7 @@
           <%- end %>
       <%- else -%>
           <%- (body.size)/2.times do |i| %>
+              <a name="tips<%= i %>"></a>
               <div class="faqs_title clear">
                 <span class="ask fl"></span>
 

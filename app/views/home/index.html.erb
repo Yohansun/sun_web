@@ -1,5 +1,5 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'imgbase','2013index','2013base' %>
+  <%= stylesheet_link_tag '2013index', "2013base",'imgbase' %>
 <% end -%>
 
 <%- content_for :index do %>
@@ -39,8 +39,8 @@
       <a href="/master_designs?from=top">大师作品</a>
     </h2>
     <div class="blocks_big mr20 pr">
-      <a href="/master_interviews?from=top"><%= image_tag @master_interview.preview_img_out, :height=>"365px", :width=>"380px" %></a>
-      <a href="#" class="blocks_title ft16"><%= @master_interview.title %> 一 <%= @master_interview.name %></a>
+      <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_out, :height=>"365px", :width=>"380px" %></a>
+      <a href="/master_interviews/<%= @master_interview.id %>" class="blocks_title ft16"><%= @master_interview.title %> 一 <%= @master_interview.name %></a>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
@@ -201,23 +201,17 @@
           <a href="/channel/access" class="blocks_title ft14">设计快查</a>
         </div>
         <div class="blocks_mini">
-          <a href="/channel/access"><img src="<%= asset_path "2013/index/blocks4.5.jpg"%>" /></a>
-          <a href="/channel/access" class="blocks_title ft14">设计代寻</a>
+          <a href="javascript:void(0);"><img src="<%= asset_path "2013/index/blocks4.5.jpg"%>" /></a>
+          <a href="javascript:void(0);" class="blocks_title ft14">设计代寻</a>
         </div>
         <div class="blocks_mid mt25">
           <h3>装修小贴士</h3>
           <ul class="blocks_tips ft12">
-            <% @weekly_tips.each_with_index do |weekly_tip,index| %>
-              <% weekly = weekly_tip.body.split('？') %>
-              <% if index < 1%>
-                <li><a href="/faqs#tips" title="<%=weekly[0]%>？"><%=weekly[0]%>？</a></li>
-                <p><%=weekly[1]%></p>
-              <% else %>
-                <li><a href="/faqs#tips" title="<%=weekly[0]%>？"><%=weekly[0]%>？</a></li>
-              <% end %>
-            <% end %>
-
-
+            <li><a href="/faqs#tips" title="<%=@body[0]%>？"><%=@body[0]%>？</a></li>
+            <p><%= @body[1]%></p>
+            <li><a href="/faqs#tips1" title="<%=@body[2]%>？"><%=@body[2]%>？</a></li>
+            <li><a href="/faqs#tips2" title="<%=@body[4]%>？"><%=@body[4]%>？</a></li>
+            <li><a href="/faqs#tips3" title="<%=@body[6]%>？"><%=@body[6]%>？</a></li>
           </ul>
         </div>
       </div>
