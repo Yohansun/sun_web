@@ -189,7 +189,9 @@
 			</div>
 				<div class="imgbase_slider slider_bin">
 					<%- @images.each do |image| %>
-					  <%= image_tag(image.file, size: '686x496') %>
+					  <a href="<%= image_show_design_image_path(image) %>">
+					    <%= image_tag(image.file, size: '686x496') %>
+					  </a>
 					<%- end %>
 				</div>
 				<div id="imgbase_info">
