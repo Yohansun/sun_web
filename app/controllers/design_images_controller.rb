@@ -63,6 +63,14 @@ class DesignImagesController < ApplicationController
     unless params[:pinyin].blank?
       @images = @images.where("pinyin LIKE ?", "#{params[:pinyin]}%")
     end
+
+    unless params[:ranking_list].blank?
+      if params[:ranking_list] == "like"
+        @images = DesignImage.includes(:design).available.order("designs.votes_count DESC").page(params[:page]).per(11)
+      elsif params[:ranking_list] == "view_count"
+        @images = DesignImage.includes(:design).available.order("designs.view_count DESC").page(params[:page]).per(11)
+      end
+    end
   end
 
   def image_search_index
