@@ -1,6 +1,5 @@
 # encoding: utf-8
 
-# -*- encoding : utf-8 -*-
 class DesignsController < ApplicationController
   before_filter :find_user
   before_filter :find_design, :only => [:upload, :edit]

@@ -50,8 +50,8 @@
           <ul class="channel_list clear">
             <% @design_users.each do |user| %>
             <% sort_input = MagicSetting.recommend_designs %>
-            <% design_count = user.designs.order("designs.id in (#{sort_input}) desc").joins(:design_images).group("imageable_id") if user.designs%>
-            <% design = user.designs.order("created_at desc").first %>
+            <% design_count = user.designs.joins(:design_images).group("imageable_id") if user.designs %>
+            <% design = user.designs.joins(:design_images).group("imageable_id").order("created_at desc").first %>
               <li style="height:205px">
                   <div class="clear" style="height: 155px;width:273px;overflow:hidden;">
                     <% if design %>
