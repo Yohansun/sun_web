@@ -5,7 +5,7 @@ module MagicContent
     skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page]
 
     def index
-      @images = DesignImage.available.order("design_images.id DESC")
+      @images = DesignImage.available.order("design_images.id DESC, design_images.created_at DESC, design_images.source DESC")
       if params[:genre].present?
         if params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
           @images = DesignImage.search(params[:genre], 'last_updated_at')
