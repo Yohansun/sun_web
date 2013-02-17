@@ -166,7 +166,7 @@
       <div class="blocks_mid mb25">
         <a href="/color_designs/<%= @color_design.id %>">
         <%- unless @color_design.main_preview_img.nil? %>
-              <%= image_tag(@color_design.main_preview_img, :height=>"170px", :width=>"380px")%>
+              <%= image_tag(@color_design.main_preview_img.url(:home_page), :height=>"170px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="/color_designs/<%= @color_design.id %>" class="blocks_title ft14"><%=@color_design.design_name%></a>
