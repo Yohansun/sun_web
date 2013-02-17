@@ -7,7 +7,7 @@ class ColorDesign < ActiveRecord::Base
   has_many :votes, :as => :voteable
 
   attr_accessor :time
-  has_attached_file :main_preview_img, :styles => { :thumb => "80x80#", :index => "291x315#"},
+  has_attached_file :main_preview_img, :styles => { :thumb => "80x80#", :index => "291x315#", :home_page =>"380x170#"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
