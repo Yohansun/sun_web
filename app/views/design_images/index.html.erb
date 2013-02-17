@@ -82,10 +82,10 @@
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
-				<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-				<a href="/design_images?imageable_type=Design" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
-				<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
+				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
+				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
+				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -172,9 +172,9 @@
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
 	<div class="search_bin">
-		<a href="/design_images?ranking_list=like" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
-		<a href="/design_images?ranking_list=view_count" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="/design_images" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
+		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
+		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
+		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
 		<p>搜索结果：<%= @tag_names.join(", ") %></p>
 	</div><!-- search_bin -->
 

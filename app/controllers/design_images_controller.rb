@@ -66,9 +66,9 @@ class DesignImagesController < ApplicationController
 
     unless params[:ranking_list].blank?
       if params[:ranking_list] == "like"
-        @images = DesignImage.includes(:design).available.order("designs.votes_count DESC").page(params[:page]).per(11)
+        @images = @images.order("design_images.votes_count desc")
       elsif params[:ranking_list] == "view_count"
-        @images = DesignImage.includes(:design).available.order("designs.view_count DESC").page(params[:page]).per(11)
+        @images = @images.order("design_images.view_count desc")
       end
     end
   end

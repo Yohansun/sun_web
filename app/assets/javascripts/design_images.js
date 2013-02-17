@@ -73,6 +73,14 @@ function search_pinyin(pinyin) {
   refresh_search({pinyin: pinyin});
 }
 
+function search_ranking_list(ranking_list) {
+  refresh_search({ranking_list: ranking_list});
+}
+
+function search_imageable_type(imageable_type) {
+  refresh_search({imageable_type: imageable_type});
+}
+
 function refresh_search(params) {
   var imageable_type = getParameterByName("imageable_type");
   var search = getParameterByName("search");
@@ -80,6 +88,7 @@ function refresh_search(params) {
   var all_tags = getParameterByName("all_tags");
   var area_id = getParameterByName("area_id");
   var pinyin = getParameterByName("pinyin");
+  var ranking_list = getParameterByName("ranking_list");  
 
   if (params.imageable_type != null) imageable_type = params.imageable_type;
   if (params.search != null) search = params.search;
@@ -87,6 +96,7 @@ function refresh_search(params) {
   if (params.all_tags != null) all_tags = params.all_tags;
   if (params.area_id != null) area_id = params.area_id;
   if (params.pinyin != null) pinyin = params.pinyin;
+  if (params.ranking_list != null) ranking_list = params.ranking_list;
 
-  window.location = "/design_images?imageable_type="+imageable_type+"&pinyin="+pinyin+"&search="+search+"&tags="+tags+"&all_tags="+all_tags+"&area_id="+area_id;
+  window.location = "/design_images?imageable_type="+imageable_type+"&pinyin="+pinyin+"&search="+search+"&tags="+tags+"&all_tags="+all_tags+"&area_id="+area_id+"&ranking_list="+ranking_list;
 }
