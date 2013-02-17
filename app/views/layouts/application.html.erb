@@ -10,7 +10,7 @@
   <%- end %>
   <meta name="Keywords" content="<%= keyword_content %>"/>
 
-  <%= stylesheet_link_tag "application","2013base" %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
 
   <!--所有的个人主页都加载style.css -->
@@ -197,7 +197,7 @@
     </div>
 
     <div class="loginCon ft12 clear">
-      <%= form_for(:user, :url => user_session_path, :remote => true, :html => {:id => "new_user"}) do |f| %>
+      <%#= form_for(:user, :url => user_session_path, :remote => true, :html => {:id => "new_user"}) do |f| %>
           <div class="clear">
             <label for="username" class="username ft14 fl">帐号：</label>
             <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
@@ -207,19 +207,19 @@
             <input id="password" type="password" class="fl" name="user[password]"/>
             <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
           </div>
-          <input id="login" type="image" src="<%= asset_path "login.jpg" %>"/>
+          <input id="login" type="image" src="<%#= asset_path "login.jpg" %>"/>
 
           <div class="checkbox fl">
             <input type="checkbox"/><span>下次自动登录</span>
           </div>
-      <%- end %>
+      <%#- end %>
     </div>
 
     <ul class="loginCon ft12 border clear">
-      <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>"/>新浪微博</a></li>
-      <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>"/>QQ</a></li>
-      <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>"/>人人网</a></li>
-      <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>"/>开心网</a></li>
+      <li><a href="/users/auth/weibo"><img src="<%#= asset_path "sina.jpg" %>"/>新浪微博</a></li>
+      <li><a href="/users/auth/qq_connect"><img src="<%#= asset_path "qq.jpg" %>"/>QQ</a></li>
+      <li><a href="/users/auth/renren"><img src="<%#= asset_path "rr.jpg" %>"/>人人网</a></li>
+      <li class="noborder"><a href="/users/auth/kaixin"><img src="<%#= asset_path "kx.jpg" %>"/>开心网</a></li>
     </ul>
     <div class="loginCon ft12 border clear">
       <p class="fl">还没加入iColor?</p>
@@ -227,7 +227,7 @@
     </div>
   
     <div class="loginCon border">
-      <a href="/gift"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
+      <a href="/gift"><img src="<%#= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
     </div>
   </div>
  loginBg ends-->
