@@ -1,15 +1,15 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag '2013index', "2013base",'imgbase' %>
+  <%= stylesheet_link_tag 'jquery.slider','2013index', '2013base' %>
 <% end -%>
 
 <%- content_for :index do %>
-<!-- <div style="background:url(<%= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div> -->
+<!-- <div style="background:url(<%#= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div> -->
 
 <div id="grid_brush" style="left: 0px; margin-left: 0px;z-index: 999999;">
   <a href="javascript:;" id="brush" class="none" style="left: 0px; right: auto;">刷子</a>
   <div id="grid">
     <a href="javascript:;" class="close_btn pa">关闭</a>
-    <img src="<%= asset_path "2013/index/float_grid.jpg"%>" usemap="#map1">
+    <img src="<%= asset_path "2013/index/grid.png"%>" usemap="#map1">
     <map id="map1" name="map1">
       <area shape="rect" coords="0,0,83,84" href="/master_interviews" target="_blank">
       <area shape="rect" coords="84,0,167,84" href="/design_images" target="_blank">
@@ -25,12 +25,16 @@
 </div>
 
 <a href="javascript:;" id="gotop" style="display: block;">返回顶部</a>
-<div class="slides pr">
-  <%- if MagicSetting.kv_of_home_index.present? %>
-    <%= raw MagicSetting.kv_of_home_index %>
-  <%- end %>
-</div><!--slides ends-->
+
 <%- end %>
+<div class="kv2013">
+  <div class="kv2013_slider slider_bin">
+    <a href="#"><img class="lazy" src="" data-original="/system/kvs/kv1.jpg"  width="1680" height="550" /></a>
+    <a href="#"><img class="lazy" src="" data-original="/system/kvs/kv2.jpg"  width="1680" height="550" /></a>
+    <a href="#"><img class="lazy" src="" data-original="/system/kvs/kv3.jpg"  width="1680" height="550" /></a>
+    <a href="#"><img class="lazy" src="" data-original="/system/kvs/kv4.jpg"  width="1680" height="550" /></a>
+  </div>
+</div><!--kv2013-->
 <div class="wrapper ft14">
   <div class="blocks clear">
     <h2 class="tr">
@@ -51,8 +55,8 @@
         </a>
         <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= @master_design.try(:design_name) %></a>
       </div>
-      <div class="blocks_mini mr20 blocks_show">
-        <a href="/master_interviews?from=top"><img src="<%= asset_path "2013/index/blocks1.3.png"%>" /></a>
+      <div class="blocks_mini mr20">
+        <a href="/master_interviews?from=top" class="block">大师殿堂</a>
       </div>
       <div class="blocks_mini">
         <a href="/master_designs/<%=@master_design_two.id%>">
@@ -79,7 +83,7 @@
     <div class="blocks_big mr20 pr">
       <a href="<%=image_show_design_image_path(@desing_image.id)%>">
         <%- unless @desing_image.file.nil? %>
-              <%= image_tag(@desing_image.file.url(:original), :height=>"365px", :width=>"380px")%>
+              <%= image_tag(@desing_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="<%=image_show_design_image_path(@desing_image.id)%>" class="blocks_title ft16"><%=@desing_image.design.try(:title)%></a>
@@ -88,18 +92,18 @@
       <div class="blocks_mid mb25">
         <a href="<%=image_show_design_image_path(@desing_image_two.id)%>">
           <%- unless @desing_image_two.file.nil? %>
-              <%= image_tag(@desing_image_two.file.url(:original), :height=>"170px", :width=>"380px")%>
+              <%= image_tag(@desing_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@desing_image_two.id)%>" class="blocks_title ft14"><%=@desing_image_two.design.try(:title)%></a>
       </div>
-      <div class="blocks_mini mr20 blocks_show">
-        <a href="#"><img src="<%= asset_path "2013/index/blocks2.3.png"%>" /></a>
+      <div class="blocks_mini mr20">
+        <a href="#" class="block block2_3">装修图库</a>
       </div>
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@desing_image_three.id)%>">
           <%- unless @desing_image_three.file.nil? %>
-                <%= image_tag(@desing_image_three.file, :height=>"170px", :width=>"180px")%>
+                <%= image_tag(@desing_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@desing_image_three.id)%>" class="blocks_title ft14"><%=@desing_image_three.design.try(:title)%></a>
@@ -109,7 +113,7 @@
       <div class="blocks_mini mr20">
         <a href="<%=image_show_design_image_path(@desing_image_four.id)%>">
           <%- unless @desing_image_four.file.nil? %>
-                <%= image_tag(@desing_image_four.file, :height=>"170px", :width=>"180px")%>
+                <%= image_tag(@desing_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@desing_image_four.id)%>" class="blocks_title ft14"><%=@desing_image_four.design.try(:title)%></a>
@@ -117,7 +121,7 @@
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@desing_image_five.id)%>">
           <%- unless @desing_image_five.file.nil? %>
-                <%= image_tag(@desing_image_five.file, :height=>"170px", :width=>"180px")%>
+                <%= image_tag(@desing_image_five.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@desing_image_five.id)%>" class="blocks_title ft14"><%=@desing_image_five.design.try(:title)%></a>
@@ -125,7 +129,7 @@
       <div class="blocks_mid mt25">
         <a href="<%=image_show_design_image_path(@desing_image_six.id)%>">
           <%- unless @desing_image_six.file.nil? %>
-                <%= image_tag(@desing_image_six.file, :height=>"170px", :width=>"380px")%>
+                <%= image_tag(@desing_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@desing_image_six.id)%>" class="blocks_title ft14"><%=@desing_image_six.design.try(:title)%></a>
@@ -143,7 +147,7 @@
     <div class="blocks_big mr20 pr">
       <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">
         <%- unless @weekly_star.weekly_star_uploads.first.file.nil? %>
-              <%= image_tag(@weekly_star.weekly_star_uploads.first.file, :height=>"365px", :width=>"380px")%>
+              <%= image_tag(@weekly_star.weekly_star_uploads.first.file.url(:home_page1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="blocks_title ft14">
@@ -153,7 +157,7 @@
     <div class="blocks_big mr20 pr">
       <a href="<%=user_design_path(@design.user_id, @design)%>">
         <%- unless @design.cover_img.nil? %>
-              <%= image_tag(@design.cover_img.file, :height=>"365px", :width=>"380px")%>
+              <%= image_tag(@design.cover_img.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="<%=user_design_path(@design.user_id, @design)%>" class="blocks_title ft14"><%=@design.title%></a>
@@ -170,13 +174,13 @@
       <div class="blocks_mini mr20">
         <a href="/inspirations/<%= @inspiration.id %>">
           <%- unless @inspiration.cover_img.file.nil? %>
-                <%= image_tag(@inspiration.cover_img.file.url(:outside), :height=>"170px", :width=>"180px")%>
+                <%= image_tag(@inspiration.cover_img.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%=@inspiration.title%></a>
       </div>
-      <div class="blocks_mini blocks_show">
-        <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>"><img src="<%= asset_path "2013/index/blocks3.5.png"%>" /></a>
+      <div class="blocks_mini">
+        <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="block block3_5">设计鉴赏</a>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
@@ -192,7 +196,7 @@
       </h2>
       <div class="blocks_big mr20">
         <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" class="fl"><img src="<%= asset_path "2013/index/blocks4.1.jpg"%>" /></a>
-        <a href="/channel/access" class="fl blocks_show"><img src="<%= asset_path "2013/index/blocks4.2.png"%>" /></a>
+        <a href="/channel/access" class="fl block block4_2">业主通道</a>
         <a href="/mix_colors/new?from=top" class="fl mt25"><img src="<%= asset_path "2013/index/blocks4.3.jpg"%>" /></a>
       </div>
       <div class="blocks_big">
@@ -233,8 +237,8 @@
           <% end %>
         </ul>
       </div>
-      <div class="blocks_mini mr20 blocks_show">
-        <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>"><img src="<%= asset_path "2013/index/blocks5.1.png"%>" /></a>
+      <div class="blocks_mini mr20">
+        <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class="block block5_1">行业资讯</a>
       </div>
       <div class="blocks_mini">
         <a href="/articles/<%=@articles.first.id%>"><img src="<%= @articles.first.preview_img%>" width="180" height="170"/></a>
@@ -258,8 +262,8 @@
         <a href="/softwares/app"><img src="<%= asset_path "2013/index/blocks6.2.jpg"%>" /></a>
         <a href="/softwares/app" class="blocks_title ft14">APP</a>
       </div>
-      <div class="blocks_mini mr20 blocks_show">
-        <a href="/softwares/tools"><img src="<%= asset_path "2013/index/blocks6.3.png"%>" /></a>
+      <div class="blocks_mini mr20">
+        <a href="/softwares/tools" class="block block6_3">应用工具</a>
       </div>
       <div class="blocks_mini">
         <a href="/softwares/tools?from=top"><img src="<%= asset_path "2013/index/blocks6.4.jpg"%>" /></a>
@@ -280,8 +284,8 @@
         <a href="/7-1?from=top"><img src="<%= asset_path "2013/index/blocks7.2.jpg"%>" /></a>
         <a href="/7-1?from=top" class="blocks_title ft14">木器漆效果</a>
       </div>
-      <div class="blocks_mini blocks_show">
-        <a href="/art"><img src="<%= asset_path "2013/index/blocks7.3.png"%>" /></a>
+      <div class="blocks_mini">
+        <a href="/art" class="block block7_3">漆光异彩</a>
       </div>
     </div><!-- blocks_big -->
     <div class="blocks_big">
@@ -290,8 +294,8 @@
         <a href="/designer_events">设计师活动</a> |
         <a href="/other_events">其他活动</a>
       </h2>
-      <div class="blocks_mini mr20 blocks_show">
-        <a href="/designer_events"><img src="<%= asset_path "2013/index/blocks8.1.png"%>" /></a>
+      <div class="blocks_mini mr20">
+        <a href="/designer_events" class="block block8_1">精彩活动</a>
       </div>
       <a href="/gift" class="fl"><img src="<%= asset_path "2013/index/blocks8.2.jpg"%>" /></a>
       <div class="blocks_mid mt25">
@@ -307,18 +311,21 @@
 </div><!--wrapper-->
 <div class="imap">
   <div class="wrapper clear">
-    <a href="/master_interviews"><img src="<%= asset_path "2013/index/blocks10.1.png"%>" /></a>
-    <a href="/design_images"><img src="<%= asset_path "2013/index/blocks10.2.png"%>" /></a>
-    <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星")%>"><img src="<%= asset_path "2013/index/blocks10.3.png"%>" /></a>
-    <a href="/channel/access"><img src="<%= asset_path "2013/index/blocks10.4.png"%>" /></a>
-    <a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>"><img src="<%= asset_path "2013/index/blocks10.5.png"%>" /></a>
-    <a href="/softwares/tools"><img src="<%= asset_path "2013/index/blocks10.6.png"%>" /></a>
-    <a href="/art"><img src="<%= asset_path "2013/index/blocks10.7.png"%>" /></a>
-    <a href="/designer_events"><img src="<%= asset_path "2013/index/blocks10.8.png"%>" class="nomargin" /></a>
+    <img src="<%= asset_path '2013/index/blocks10.gif' %>" usemap="#imap" />
+      <map id="imap" name="imap">
+          <area shape="rect" coords="0,0,136,136" href="/master_interviews" />
+          <area shape="rect" coords="150,0,286,136" href="/design_images" />
+          <area shape="rect" coords="300,0,435,136" href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星")%>" />
+          <area shape="rect" coords="448,0,584,136" href="/channel/access" />
+          <area shape="rect" coords="597,0,733,136" href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" />
+          <area shape="rect" coords="746,0,883,136" href="/softwares/tools" />
+          <area shape="rect" coords="896,0,1032,136" href="/art" />
+          <area shape="rect" coords="1044,0,1180,136" href="/designer_events" />
+      </map>
   </div>
 </div><!-- imap -->
 
 <%- content_for :tail do %>
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
-<%= javascript_include_tag "2013main" %>
+<%= javascript_include_tag "jquery.slider", "jquery.lazyload.min","2013main" %>
 <% end -%>

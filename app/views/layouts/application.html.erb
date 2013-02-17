@@ -52,7 +52,7 @@
 </head>
 <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/ %>">
 <div class="header">
-  <div class="nav pa">
+  <div class="nav pr">
     <div class="logo">
       <a href="/"><%= image_tag "logo1.png" %></a>
     </div>
@@ -190,12 +190,12 @@
 
   <%= yield :index %><!--仅仅首页的-->
 
-  <div class="loginBg pa none">
+   <!--<div class="loginBg pa none">
     <div class="err_tips cr ft12 none pa">
       用户名或密码错误
       <span class="fr cp">x</span>
     </div>
-    <!--err_tips-->
+
     <div class="loginCon ft12 clear">
       <%= form_for(:user, :url => user_session_path, :remote => true, :html => {:id => "new_user"}) do |f| %>
           <div class="clear">
@@ -214,7 +214,7 @@
           </div>
       <%- end %>
     </div>
-    <!--loginCon ends-->
+
     <ul class="loginCon ft12 border clear">
       <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>"/>新浪微博</a></li>
       <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>"/>QQ</a></li>
@@ -225,12 +225,12 @@
       <p class="fl">还没加入iColor?</p>
       <a href="/users/sign_up" class="reg_now fl"></a>
     </div>
-    <!--loginCon ends-->
+  
     <div class="loginCon border">
       <a href="/gift"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
     </div>
   </div>
-  <!--loginBg ends-->
+ loginBg ends-->
 </div>
 <!--header ends-->
 
