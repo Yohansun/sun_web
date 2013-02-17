@@ -195,8 +195,8 @@
 					<%- end %>
 				</div>
 				<div id="imgbase_info">
-					<span class="imgbase_comm"><%= @images.first.design.try(:comments_count) %></span>
-					<span class="imgbase_like"><%= @images.first.design.try(:votes_count) %></span>
+					<span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
+					<span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
 					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
 					<p><%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >查看联系方式</a></p>
 				</div><!-- imgbase_info -->
@@ -210,8 +210,8 @@
 						<span></span>
 					</a>
 					<div class="none">
-						<span class="imgbase_comm"><%= image.design.try(:comments_count) %></span>
-						<span class="imgbase_like"><%= image.design.try(:votes_count) %></span>
+						<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
+						<span class="imgbase_like"><%= image.try(:votes_count) %></span>
 						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
 						<p><%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >查看联系方式</a></p>
 					</div>
