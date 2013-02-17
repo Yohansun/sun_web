@@ -22,7 +22,7 @@
     <div class="imginfo_show pr">
 	    <div class="imgbase_func ft12 pa">
 				<%#= link_to "收藏", "javascript:void(0);", :class =>"imgbase_collect" %>
-				<a class="imgbase_view">浏览:<span><%= @image.design.view_count %></span></a>
+				<a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
 				<%= link_to "全屏观看", fullscreen_user_design_path(@image.user_id, @image.imageable_id), :class =>"imgbase_fullpage" %>
 			</div>
 	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
@@ -83,7 +83,7 @@
     <div class="author_show">
       <div class="author_info clear">
       	<%- if @image.user.avatar -%>
-		    	<%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl', :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
+		    	<%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
 		    <%- else -%>
 		    	<%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
 		    <%- end -%>
@@ -118,19 +118,16 @@
       		<a href="#" class="imgbase_comm">855555</a>
       	</p>
       </div> --><!-- author_info->色彩搭配 -->
-
+      <!-- JiaThis Button BEGIN -->
       <div class="clear imgs_share border_bline">
-				<span class="fl t">分享:</span>
-      	<div id="jiathis_style_32x32" class="fl" style="overflow:hidden;">
-					<a class="jiathis_button_tsina"></a>
-					<a class="jiathis_button_qzone"></a>
-					<a class="jiathis_button_kaixin001"></a>
-					<a class="jiathis_button_renren"></a>
-					<a class="jiathis_counter_style"></a>
-				</div>
-        <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-        <!-- JiaThis Button END -->
-
+        <span class="fl t">分享:</span>
+        <div id="jiathis_style_32x32" class="fl" style="overflow:hidden;">
+        <a class="jiathis_button_kaixin001"></a>
+        <a class="jiathis_button_renren"></a>
+        <a class="jiathis_button_tsina"></a>
+        <a class="jiathis_button_tqq"></a>
+        <a class="jiathis_counter_style"></a>
+        </div>
         <%
           role = "#{@image.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @image.user.role_id != 3
           text = if @image.user.area_id.present?
@@ -145,20 +142,26 @@
           end
         -%>
         <script type="text/javascript" charset="utf-8">
-        var jiathis_config = {
+        var jiathis_config={
           boldNum:4,
           siteNum:4,
           showClose:false,
           sm:"kaixin001,renren,tsina,tqq",
+          summary:"",
+          hideMore:false,
+          pic:"http://www.icolor.com.cn<%= @image.file.url %>",
+          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name %>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
           imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
           imageWidth:26,
           marginTop:150,
-          url:"<%= user_design_url(@image.user_id, @image.imageable_id) %>)",
-          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name %>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
+          url:"<%= image_show_design_image_url(@image.id) %>",
           data_track_clickback:true
         }
         </script>
-      </div><!-- imgs_share -->
+        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+        <!-- JiaThis Button END -->
+      </div>
+
       <div class="imgs_otherinfo border_bline">
       	<h4>标签</h4>
       	<%- @image_tags.each do |tag| %>

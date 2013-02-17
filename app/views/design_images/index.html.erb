@@ -184,7 +184,7 @@
 			<%- if @images.present?%>
 			<div class="imgbase_func ft12 pa">
 				<a href="#" class="imgbase_collect">收藏</a>
-				<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.design.try(:view_count) %></span></a>
+				<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a>
 				<!-- <a href="#" class="imgbase_fullpage">全屏观看</a> -->
 			</div>
 				<div class="imgbase_slider slider_bin">
@@ -203,7 +203,7 @@
 		</div><!-- imgbase_bin -->
 		<ul class="imgbase_list">
 			<%- @images.each_with_index do |image, index| %>
-				<li data-view="<%= image.design.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
+				<li data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
 					<a href="<%= image_show_design_image_path(image) %>">
 						<%= image_tag(image.file, size: '224x162') %>
 						<p><%= truncate(image.title, length: 15) %></p>
