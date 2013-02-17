@@ -126,6 +126,8 @@ class DesignImagesController < ApplicationController
 
   def image_show
     @image = DesignImage.includes(:design).find(params[:id])
+    @image.view_count += 1
+    @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.count
     @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id).title}
     if @image.area_id
