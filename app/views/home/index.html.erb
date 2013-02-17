@@ -43,14 +43,14 @@
       <a href="/master_designs?from=top">大师作品</a>
     </h2>
     <div class="blocks_big mr20 pr">
-      <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_out, :height=>"365px", :width=>"380px" %></a>
+      <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_out.url(:home_page2), :height=>"365px", :width=>"380px" %></a>
       <a href="/master_interviews/<%= @master_interview.id %>" class="blocks_title ft16"><%= @master_interview.title %> 一 <%= @master_interview.name %></a>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
         <a href="/master_designs/<%=@master_design.id%>">
             <%- unless @master_design.master_design_uploads.first.file.nil? %>
-              <%= image_tag(@master_design.master_design_uploads.first.file, :height=>"170px", :width=>"380px")%>
+              <%= image_tag(@master_design.master_design_uploads.first.file.url(:home_page), :height=>"170px", :width=>"380px")%>
             <%- end %>
         </a>
         <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= @master_design.try(:design_name) %></a>
@@ -61,7 +61,7 @@
       <div class="blocks_mini">
         <a href="/master_designs/<%=@master_design_two.id%>">
           <%- unless @master_design_two.master_design_uploads.first.file.nil? %>
-              <%= image_tag(@master_design_two.master_design_uploads.first.file, :height=>"170px", :width=>"180px")%>
+              <%= image_tag(@master_design_two.master_design_uploads.first.file.url(:home_page1), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="/master_designs/<%=@master_design_two.id%>" class="blocks_title ft14"><%=@master_design_two.try(:design_name)%></a>
@@ -70,7 +70,7 @@
     <div class="blocks_big pr">
       <a href="/master_designs/<%=@master_design_three.id%>">
         <%- unless @master_design_three.master_design_uploads.first.file.nil? %>
-              <%= image_tag(@master_design_three.master_design_uploads.first.file, :height=>"365px", :width=>"380px")%>
+              <%= image_tag(@master_design_three.master_design_uploads.first.file.url(:home_page2), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="/master_designs/<%=@master_design_three.id%>" class="blocks_title ft14"><%=@master_design_three.try(:design_name)%></a>
