@@ -112,6 +112,7 @@ Icolor::Application.routes.draw do
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
   resources :reply_msgs
+  resources :rep_replies
   match "/color_designs" => "color_designs#index"
   match "/color_designs/:id" => "color_designs#show"
   match "/color_designs/:id/fullscreen" => "color_designs#fullscreen"
@@ -177,7 +178,6 @@ Icolor::Application.routes.draw do
   match '/yda/yda_list' => 'yda#yda_list'
 
   resources :weekly_tips, only: :index
-
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
@@ -188,7 +188,14 @@ Icolor::Application.routes.draw do
     match "/community/binding_cancel" => "users#binding_cancel"
 
     #用户对内和对外的相关页面
+    resources :sign_up do
+      collection do
+        get :reset
+      end
+    end
     resources :events
+    resources :asks
+    resources :collects
     resources :faqs
     resources :inspirations do
       member do
@@ -227,6 +234,8 @@ Icolor::Application.routes.draw do
       get :more_comment
       get :fullscreen
     end
+  end
+  resources :collect do
   end
 
   #修改个人签名
