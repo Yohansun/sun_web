@@ -1,7 +1,8 @@
 @charset "utf-8";
-body{background:url(<%= asset_path 'bg.jpg' %>) center top;/*overflow-x:hidden;*/*position:relative;}
-.header{ height:97px;}
-.nav{background:url(<%= asset_path "nav.png" %>) no-repeat;width:1002px;height:97px;top:0;left:50%;margin-left:-501px;z-index:9999;}
+html{overflow-x:hidden;}
+body{background:url(<%= asset_path 'bg.jpg' %>) center top;overflow-x:hidden;*position:relative;}
+.nav{background:url(<%= asset_path "imgbase/nav.png" %>) no-repeat;height:97px;margin:0 auto;z-index:9999;width:1194px;}
+
 .logo{ float:left; padding:5px 0 5px 10px;}
 /*.logo{background:url(<%= asset_path "logo.png" %>) no-repeat;width:47px;height:57px;margin:14px 0 0 18px;}
 .icolor{background:url(<%= asset_path "icolor.png" %>) no-repeat;width:99px;height:66px;margin:11px 0 0 20px;}
@@ -37,8 +38,8 @@ ul.border img{ float:left;margin:-2px 2px 0 0;}
 
 .reg{background:url(<%= asset_path "reg.png" %>) no-repeat;width:64px;height:21px;margin-top:13px;}
 .nippon{background:url(<%= asset_path "nippon.png" %>) no-repeat;width:90px;height:38px;margin:5px;}
-.navBot{clear:right;margin:12px;*width:695px;_width:720px;*margin-top:18px;}
-.navBot li{float:left;display:inline;padding:1px 8px;border-right: 2px solid #fff;}
+.navBot{clear:right;margin:12px 0 12px 12px;*margin-top:18px;*width:950px;_width:860px;}
+.navBot li{float:left;display:inline;padding:1px 2px;/*_padding:1px 4px;*/border-right: 2px solid #fff;}
 .navBot li ul{background:#e71d36;left:0;top:18px;width:88px;display:none;padding-top:1em;border-radius:0 0 5px 5px;*top:19px;position:absolute;}
 .navBot li li{float:none;display:block;border-right:none;padding:0;border-bottom:1px solid #ab0003;}
 .navBot li li a{display:block;padding:0.7em 1em; _height:1%;}
@@ -46,12 +47,12 @@ ul.border img{ float:left;margin:-2px 2px 0 0;}
 .navBot li li a:hover{background:#9b1611;}
 .navBot li li:last-child a:hover{border-radius:0 0 5px 5px;}
 .noborder{border:0!important;}
-.navBot li a{color:#fff;font-weight:bold;padding:8px;}
+.navBot li a{color:#fff;font-weight:bold;padding:8px 16px;_padding:8px 15px;}
 
 .navBot li ul.w_nav1{ width:140px;_width:150px;}
 .navBot li ul.w_nav2{ width:112px;_width:110px;}
-.navBot li ul.w_nav3{ width:112px;_width:122px;}
-.navBot li ul.w_nav4{ /*left:-25px;_left:-30px;*/ width:142px;_width:152px;}
+.navBot li ul.w_nav3{ width:128px;_width:140px;}
+.navBot li ul.w_nav4{ width:142px;_width:152px;}
 
 .slides{width:1680px;height:549px;left:50%;margin-left:-840px;overflow:hidden;}
 .slidesContainer{width:20000px;height:549px;}

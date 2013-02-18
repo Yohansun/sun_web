@@ -1,5 +1,5 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'jquery.slider','2013index', '2013base' %>
+  <%= stylesheet_link_tag 'jquery.slider', '2013base','2013index' %>
 <% end -%>
 
 <%- content_for :index do %>
@@ -98,7 +98,7 @@
         <a href="<%=image_show_design_image_path(@desing_image_two.id)%>" class="blocks_title ft14"><%=@desing_image_two.design.try(:title)%></a>
       </div>
       <div class="blocks_mini mr20">
-        <a href="#" class="block block2_3">装修图库</a>
+        <a href="/design_images?from=top" class="block block2_3">装修图库</a>
       </div>
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@desing_image_three.id)%>">
