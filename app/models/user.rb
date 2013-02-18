@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
   end
 
   def display_name   #a little fix in when company company_name;name;username
-    username = self.username.gsub("-sina", "").gsub("-kepulande", "")
+    username = self.username.gsub("-sina", "").gsub("-kepulande", "") if self.username
 
     case role_name
       when /designer|user/
