@@ -175,17 +175,25 @@
       <div class="imgs_in_list clear">
       	<dl>
       		<dt>猜你喜欢</dt>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+          <%- @like_images.each do |like_image| %>
+            <dd>
+              <a href="/design_images/<%= like_image.id %>/image_show">
+                <%= image_tag(like_image.file.url(:list), size: '178x128')%>
+                <span><%= like_image.title ? like_image.title : "未命名" %></span>
+              </a>
+            </dd>
+          <%- end %>
       	</dl>
       	<dl>
       		<dt>精品推荐</dt>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+          <%- @week_stars.each do |star| %>
+            <dd>
+              <a href="<%= star.design_link %>">
+                <%= image_tag(star.main_preview_img.url(:image_show), size: '178x128') %>
+                <span><%= star.design_name %></span>
+              </a>
+            </dd>
+          <%- end %>
       	</dl>
       </div><!-- imgs_in_list -->
       <p class="imgs_banner">
