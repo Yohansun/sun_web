@@ -136,6 +136,11 @@ class DesignImagesController < ApplicationController
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @comments = @image.comments.page(params[:page]).per(3)
+    #精品推荐
+    @week_stars = WeeklyStar.order("created_at desc").limit(4)
+    #猜你喜欢
+    tags = @image.tags.map(&:image_library_category_id)
+    @like_images = DesignImage.search_tags(tags).limit(4)
   end
 
   def more_comment
