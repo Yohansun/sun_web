@@ -36,7 +36,7 @@ class DesignImagesController < ApplicationController
     end
 
     @tag_names = ImageLibraryCategory.where("id in (?)", @tags).all.map { |e| e.title }
-    @images = DesignImage.includes(:tags).group("design_images.id").available.order("design_images.created_at desc, design_images.source desc").page(params[:page]).per(11)
+    @images = DesignImage.includes(:tags).group("design_images.id").available.page(params[:page]).per(11)
 
     if @tags
       @images = @images.search_tags(@tags)
