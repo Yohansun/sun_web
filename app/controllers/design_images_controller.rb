@@ -140,7 +140,11 @@ class DesignImagesController < ApplicationController
     @week_stars = WeeklyStar.order("created_at desc").limit(4)
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
-    @like_images = DesignImage.search_tags(tags).limit(4)
+    if tags == []
+      @like_images = DesignImage.available.order("created_at desc").limit(4)
+    else
+      @like_images = DesignImage.search_tags(tags).limit(4)
+    end
   end
 
   def more_comment
