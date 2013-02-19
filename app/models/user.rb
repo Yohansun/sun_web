@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
@@ -120,12 +122,12 @@ class User < ActiveRecord::Base
               return self.username
            else
               return self.name
-           end   
+           end
         else
            return self.name_of_company
         end
       end
-  end   
+  end
 
   def role_name
     self.role ? self.role.role : 'user'

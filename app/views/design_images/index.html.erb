@@ -64,15 +64,25 @@
 
 		});
 
+  var tags = new Array();
+  <%- if @tags -%>
+    <%- @tags.each do |tag| -%>
+      <%- if tag.children_count == 0 -%>
+      tags[<%= tag.parent_id %>] = <%= tag.id -%>;
+      <%- else -%>
+      tags[<%= tag.id %>] = <%= tag.id -%>;
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
   </script>
 <%- end %>
 <div class="imgbase">
 	<div class="imgbase_title">
-		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>" >
+		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<div class="clear">
 			<div class="fr imgbase_search">
-				<form onsubmit="return search_query($('#search_query').val());" style="display:inline">
-					<input type="text" value="<%= params[:search] %>" id="search_query"><button type="submit">搜图</button>
+				<form onsubmit="return search_query($('#search_query_value').val())" style="display:inline">
+					<input type="text" value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
 				</form>
 				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('宜家')">宜家</a><a href="javascript:search_query('墙面色')">墙面色</a></span>
 			</div>
@@ -102,9 +112,9 @@
 						<fieldset>
 							<label><%= category.title %>：</label>
 							<span>
-								<a href="javascript:add_all_tag(<%= category.id %>)" class="check_on <% if @all_tags &&  @all_tags.include?(category.id.to_s) %>highlight<% end %>">全部</a>
+								<a href="javascript:add_tag(<%= category.id %>, <%= category.id %>)" class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
 								<%- category.children.each do |cate_child| %>
-									<a href="javascript:add_tag(<%= cate_child.id %>)" class="check_on <% if @tags && @tags.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
+									<a href="javascript:add_tag(<%= category.id %>, <%= cate_child.id %>)" class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
 								<%- end %>
 							</span>
 						</fieldset>
@@ -158,9 +168,9 @@
 							<fieldset>
 								<label><%= child_lv2.title %>：</label>
 								<span>
-									<a href="javascript:add_all_tag(<%= child_lv2.id %>);" value ="<%= child_lv2.id %>" class="check_on <% if @all_tags &&  @all_tags.include?(child_lv2.id.to_s) %>highlight<% end %>">全部</a>
+									<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv2.id %>);" value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
 									<%- child_lv2.children.each do |child_lv3| %>
-										<a href="javascript:add_tag(<%= child_lv3.id %>);" value ="<%= child_lv3.id %>" class="check_on <% if @tags && @tags.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
+										<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv3.id %>);" value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
 									<%- end %>
 								</span>
 							</fieldset>
@@ -175,7 +185,7 @@
 		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
 		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
 		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
-		<p>搜索结果：<%= @tag_names.join(", ") %></p>
+		<p>搜索结果：<%= @query_params %></p>
 	</div><!-- search_bin -->
 
 
@@ -221,6 +231,6 @@
 		<%- end %>
 	</div><!-- imgbase_area -->
 	<div class="pager ft12">
-		<%= paginate @images if @images %>
+		<%= paginate @images %>
 	</div><!-- pager -->
 </div><!-- imgbase -->

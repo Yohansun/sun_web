@@ -123,17 +123,19 @@ class DesignImage < ActiveRecord::Base
   end
 
   def self.search_tags(tag_ids)
-    joins = []
-    tag_ids.each do |tag_id|
-      taggings_alias = "taggings_#{tag_id}"
+    joins(:tags).where("image_tags.image_library_category_id in (?)", tag_ids)
 
-      tagging_join  = "JOIN image_tags #{taggings_alias}" +
-      "  ON #{taggings_alias}.design_image_id = design_images.id" +
-      " AND #{taggings_alias}.image_library_category_id = #{tag_id}"
+    # joins = []
+    # tag_ids.each do |tag_id|
+    #   taggings_alias = "taggings_#{tag_id}"
 
-      joins << tagging_join
-    end
+    #   tagging_join  = "JOIN image_tags #{taggings_alias}" +
+    #   "  ON #{taggings_alias}.design_image_id = design_images.id" +
+    #   " AND #{taggings_alias}.image_library_category_id = #{tag_id}"
 
-    scoped(:joins => joins.join(" "))
+    #   joins << tagging_join
+    # end
+
+    # scoped(:joins => joins.join(" "))
   end
 end
