@@ -222,6 +222,7 @@ Icolor::Application.routes.draw do
     member do
       get :image_show
       get :more_comment
+      get :fullscreen
     end
   end
 

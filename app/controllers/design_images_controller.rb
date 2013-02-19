@@ -25,7 +25,7 @@ class DesignImagesController < ApplicationController
   end
 
   def index
-    @image_length = DesignImage.count
+    @image_length = DesignImage.available.count
     @categories = ImageLibraryCategory.where(parent_id: 0)
     @tags = params[:tags].split(",").map { |e| e.to_i }.uniq.sort if params[:tags]
 
@@ -128,7 +128,7 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.includes(:design).find(params[:id])
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
-    @images_total = DesignImage.count
+    @images_total = DesignImage.available.count
     @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id).title}
     if @image.area_id
       @image_city = Area.find(@image.area_id).parent.name
@@ -146,6 +146,11 @@ class DesignImagesController < ApplicationController
       tags = tags[0..4]
       @like_images = DesignImage.search_tags(tags).limit(4)
     end
+  end
+
+  def fullscreen
+    @design_image = DesignImage.find(params[:id])
+    render :layout => nil
   end
 
   def more_comment
