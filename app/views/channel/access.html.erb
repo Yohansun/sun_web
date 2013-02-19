@@ -59,7 +59,7 @@
                         <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="208px" height="155">
                       <% end %>
                     <% else %>
-                      <img class="fl" width="208px" height="155">
+                      <img src="<%= asset_path '2013/default_image.png' %>" class="fl" width="208px" height="155">
                     <% end %>
                     <%= link_to user_path(user) do %>
                       <%- if user.avatar %>

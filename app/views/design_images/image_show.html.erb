@@ -20,11 +20,11 @@
 	<div class="imgbase_main clear nomargin">
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
-	    <div class="imgbase_func ft12 pa">
-				<%#= link_to "收藏", "javascript:void(0);", :class =>"imgbase_collect" %>
-				<a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
-				<%= link_to "全屏观看", fullscreen_user_design_path(@image.user_id, @image.imageable_id), :class =>"imgbase_fullpage" %>
-			</div>
+      <div class="imgbase_func ft12 pa">
+        <%#= link_to "收藏", "javascript:void(0);", :class =>"imgbase_collect" %>
+        <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
+        <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"imgbase_fullpage" %>
+      </div>
 	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
 	    <span class="fr">
