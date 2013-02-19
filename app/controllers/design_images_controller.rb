@@ -27,15 +27,18 @@ class DesignImagesController < ApplicationController
   def index
     @image_length = DesignImage.available.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children)
-    @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort unless params[:tags].blank?
+    unless params[:tags].blank?
+      @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort
+      @tag_ids.delete(-1)
+    end
     @images = DesignImage.available
 
-    if @tag_ids
+    unless @tag_ids.blank?
+      Rails.logger.debug @tag_ids.inspect
       @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
       final_tags = @tags.map { |tag| tag.self_and_descendants }.flatten
       @images = @images.search_tags(final_tags.map(&:id))
       @tag_names = final_tags.map(&:title)
-      @tag_ids.delete(-1)
     end
 
     unless params[:area_id].blank?
