@@ -24,6 +24,7 @@ class DesignImage < ActiveRecord::Base
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
         :inside => "188>", :outside => "202>", :home_page => "90>",
         :home_design_image1 => "380x365#", :home_design_image2 => "380x170#", :home_design_image3 => "180x170#",
+        :design_image_big => "686x496#", :design_image_list => "224x162#",
         :slide => "900>", :slide_thumb => "205x138#",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#"},
     :whiny_thumbnails => true,

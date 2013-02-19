@@ -121,14 +121,15 @@
 
       <li class="pr"><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计鉴赏</a>
         <ul>
-          <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
+          <li class="pr">
+            <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a>
+            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
+          </li>
           <li><a href="/designs?from=top">作品展示</a></li>
           <li class="pr"><a href="/color_designs?from=top">色彩配搭</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <li class="pr noborder"><a href="/inspirations?from=top">灵感秀</a>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-          </li>
+          <li class="pr noborder"><a href="/inspirations?from=top">灵感秀</a></li>
           <!-- <li class="noborder pr"><a href="/my_show?from=top">我型我秀</a> -->
           <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
           <!-- </li> -->
@@ -138,7 +139,7 @@
 
       <li class="pr"><a href="/channel/access?from=top">业主通道</a>
         <ul >
-          <li><a href="/channel/access?from=top">设计快查</a><span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span></li>
+          <li class="pr"><a href="/channel/access?from=top">设计快查</a><span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span></li>
           <li><a href="/faqs">装修问答</a></li>
           <li><a href="/faqs#tips">装修贴士</a></li>
           <li><a href="/mix_colors/new?from=top">配色咨询</a></li>
@@ -162,7 +163,7 @@
         <ul>
           <li><a href="/softwares/case">案例下载</a></li>
           <li><a href="/softwares/tools">配色软件</a></li>
-          <li class="noborder"><a href="/softwares/app">APP</a></li>
+          <!-- <li class="noborder"><a href="/softwares/app">APP</a></li> -->
         </ul>
       </li>
 

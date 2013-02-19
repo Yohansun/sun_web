@@ -29,6 +29,7 @@
 				$list   = $('.imgbase_list'),
 				$view   = $('#imgbase_view'),
 				$info   = $('#imgbase_info'),
+				$full   = $('#imgbase_full'),
 				$toggle = $('.imgbase_toggle'),
 				$form   = $('#imgbase_forms').find('form'),
         $ul     = $('#imgbase_ul');
@@ -39,9 +40,11 @@
 				callback : function(num){
 					var $curr = $list.find('li').eq(num),
 						views = $curr.data('view'),
+						full = $curr.data('full'),
 						html  = $curr.find('div').html();
 					$curr.addClass('imgbase_curr').siblings().removeClass('imgbase_curr');
 					$view.text(views);
+					$full.attr('href', '/design_images/' + full + '/fullscreen');
 					$info.html(html);
 				}
 			});
@@ -194,13 +197,13 @@
 			<%- if @images.present?%>
 			<div class="imgbase_func ft12 pa">
 				<a href="#" class="imgbase_collect">收藏</a>
-				<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a>
-				<!-- <a href="#" class="imgbase_fullpage">全屏观看</a> -->
+				<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%#= @images.first.try(:view_count) %></span></a> -->
+				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full" %>
 			</div>
 				<div class="imgbase_slider slider_bin">
 					<%- @images.each do |image| %>
-					  <a href="<%= image_show_design_image_path(image) %>">
-					    <%= image_tag(image.file, size: '686x496') %>
+					  <a href="<%= user_design_path(image.id, image.imageable_id) %>">
+					    <%= image_tag(image.file.url(:design_image_big), size: '686x496') %>
 					  </a>
 					<%- end %>
 				</div>
@@ -208,14 +211,14 @@
 					<span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
 					<span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
 					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
-					<p><%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >查看联系方式</a></p>
+					<p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >免费咨询</a></p>
 				</div><!-- imgbase_info -->
 		</div><!-- imgbase_bin -->
 		<ul class="imgbase_list">
 			<%- @images.each_with_index do |image, index| %>
-				<li data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
+				<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
 					<a href="<%= image_show_design_image_path(image) %>">
-						<%= image_tag(image.file, size: '224x162') %>
+						<%= image_tag(image.file.url(:design_image_list), size: '224x162') %>
 						<p><%= truncate(image.title, length: 15) %></p>
 						<span></span>
 					</a>
@@ -223,7 +226,7 @@
 						<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
 						<span class="imgbase_like"><%= image.try(:votes_count) %></span>
 						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
-						<p><%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >查看联系方式</a></p>
+						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >免费咨询</a></p>
 					</div>
 				</li>
 			<%- end %>
