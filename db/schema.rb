@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214022518) do
+ActiveRecord::Schema.define(:version => 20130219055959) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.string   "color3_name",       :default => "墙面推荐色"
     t.boolean  "edited_color",      :default => false
     t.string   "pinyin"
+    t.integer  "view_count",        :default => 0
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
@@ -222,6 +223,8 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
   add_index "design_images", ["imageable_type"], :name => "NewIndex3"
   add_index "design_images", ["is_cover"], :name => "NewIndex4"
   add_index "design_images", ["is_cover"], :name => "index_design_images_on_is_cover"
+  add_index "design_images", ["source", "created_at"], :name => "source_2"
+  add_index "design_images", ["source"], :name => "source"
   add_index "design_images", ["user_id"], :name => "NewIndex1"
 
   create_table "designs", :force => true do |t|
@@ -389,9 +392,13 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
 
   create_table "image_library_categories", :force => true do |t|
     t.string   "title"
-    t.integer  "parent_id",  :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "parent_id",      :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.integer  "children_count", :default => 0
   end
 
   create_table "image_tags", :force => true do |t|

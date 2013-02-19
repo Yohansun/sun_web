@@ -39,7 +39,7 @@ gem "magic_content", :git => "git@git.networking.io:nioteam/magic_content.git"
 gem "acts_as_tree", :git => "git@github.com:amerine/acts_as_tree.git"
 
 gem "devise"
-gem 'kaminari'
+gem 'kaminari', "0.14.1"
 
 gem 'omniauth-weibo-oauth2'
 gem "omniauth-renren"

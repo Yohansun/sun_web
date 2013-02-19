@@ -26,29 +26,24 @@ class DesignImagesController < ApplicationController
 
   def index
     @image_length = DesignImage.available.count
-    @categories = ImageLibraryCategory.where(parent_id: 0)
-    @tags = params[:tags].split(",").map { |e| e.to_i }.uniq.sort if params[:tags]
+    @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children)
+    @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort unless params[:tags].blank?
+    @images = DesignImage.available
 
-    if params[:all_tags]
-      @all_tags = params[:all_tags].split(",").uniq.sort
-      tags = ImageLibraryCategory.where(parent_id: @all_tags).map(&:id)
-      @tags = (@tags + tags).uniq
-    end
-
-    @tag_names = ImageLibraryCategory.where("id in (?)", @tags).all.map { |e| e.title }
-    @images = DesignImage.includes(:tags).group("design_images.id").available.page(params[:page]).per(11)
-
-    if @tags
-      @images = @images.search_tags(@tags)
+    if @tag_ids
+      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
+      final_tags = @tags.map { |tag| tag.self_and_descendants }.flatten
+      @images = @images.search_tags(final_tags.map(&:id))
+      @tag_names = final_tags.map(&:title)
+      @tag_ids.delete(-1)
     end
 
     unless params[:area_id].blank?
       area = Area.find(params[:area_id])
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
-
+      @area_names = area.self_and_ancestors.map(&:name).join(" ")
       @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
-
       @images = @images.where(area_id: areas.map(&:id))
     end
 
@@ -70,41 +65,12 @@ class DesignImagesController < ApplicationController
       elsif params[:ranking_list] == "view_count"
         @images = @images.order("design_images.view_count desc")
       end
+    else
+      @images = @images.order("design_images.created_at DESC, design_images.source DESC")
     end
-  end
 
-  def image_search_index
-    cookies[:design_image_tag_ids] ||= ''
-    @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')
-    if params[:tag_id]
-      if @design_image_tag_ids.include? params[:tag_id]
-        @design_image_tag_ids.delete(params[:tag_id])
-        cookies[:design_image_tag_ids] = @design_image_tag_ids.join(',')
-      else
-        cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + params[:tag_id]
-      end
-    end
-    if params[:tag_all_id]
-      image_tags = ImageLibraryCategory.where(parent_id: params[:tag_all_id]).map &:id
-      if @design_image_tag_ids.include? params[:tag_all_id]
-        image_tags.each do |image_tag|
-          @design_image_tag_ids.delete(image_tag.to_s)
-        end
-        @design_image_tag_ids.delete(params[:tag_all_id])
-        cookies[:design_image_tag_ids] = @design_image_tag_ids.join(',')
-      else
-        cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + params[:tag_all_id]
-        image_tags.each do |image_tag|
-          cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + image_tag.to_s
-        end
-      end
-
-    end
-    @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')
-    @image_length = DesignImage.count
-    @categories = ImageLibraryCategory.where(parent_id: 0)
-    @images = DesignImage.includes(:tags).available.where("image_tags.image_library_category_id in (?)", @design_image_tag_ids).page(params[:page]).per(11)
-    render "index"
+    @images = @images.page(params[:page]).per(11)
+    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
   end
 
   def decoration_parts

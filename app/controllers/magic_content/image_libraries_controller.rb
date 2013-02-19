@@ -24,7 +24,7 @@ module MagicContent
     def categories
       @image = DesignImage.find(params[:image_library_id])
       @image_tag_ids = @image.tags.map(&:image_library_category_id)
-      @categories = ImageLibraryCategory.where(parent_id: "0")
+      @categories = ImageLibraryCategory.where(parent_id: nil)
     end
 
     def update_tags
@@ -152,7 +152,7 @@ module MagicContent
 
     def up_down_page
       base_image = DesignImage.find(params[:image_library_id])
-      @categories = ImageLibraryCategory.where(parent_id: "0")
+      @categories = ImageLibraryCategory.where(parent_id: nil)
       images = DesignImage.available.up_down_image(base_image.id)
       if params[:direction] == 'left'
         @image = images.size == 2 ? images[1] : nil

@@ -28,12 +28,11 @@ function getParameterByName(name)
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function add_tag (id) {
-  var tags = getParameterByName("tags").split(",");
-  if (_.indexOf(tags, id.toString()) >= 0) {
-    tags = _.without(tags, id.toString())
+function add_tag (parent_id, id) {
+  if (tags[parent_id] == id) {
+    tags[parent_id] = -1;
   } else {
-    tags = _.union(tags, id.toString())
+    tags[parent_id] = id;
   }
   refresh_search({tags: _.uniq(_.compact(tags)).join(",")});
 }
@@ -50,7 +49,7 @@ function add_all_tag (id) {
 }
 
 function submit_area() {
-  var area_id = null;
+  var area_id = "";
   if ($(".level_1").val() > 0) {
     area_id = $(".level_1").val();
   };
@@ -88,7 +87,7 @@ function refresh_search(params) {
   var all_tags = getParameterByName("all_tags");
   var area_id = getParameterByName("area_id");
   var pinyin = getParameterByName("pinyin");
-  var ranking_list = getParameterByName("ranking_list");  
+  var ranking_list = getParameterByName("ranking_list");
 
   if (params.imageable_type != null) imageable_type = params.imageable_type;
   if (params.search != null) search = params.search;
