@@ -2,7 +2,7 @@
 /**/
 .nav{background-image:url(<%= asset_path "imgbase/nav.png" %>);width:1194px;}
 .navBot li a{padding:8px 18px;_padding:8px 15px;}
-.highlight{color:red!important;}
+.highlight{color:#fff!important;background:#e71d36!important;}
 
 .imgbase{background-color:#fff;width:1180px;margin:0 auto;padding-bottom:20px;}
 .imgbase a:hover,.search_bin a.curr_rank,.tit_tab .fresh,.imgbase_title strong{color:#e71d36;}
@@ -27,12 +27,13 @@
 /*tab content*/
 .tab_content{padding:20px 20px 0;font:12px "SimSun";width:1140px;overflow:hidden;border-bottom:1px solid #ebebeb;}
 .tab_content label{padding:0 5px;color:#333333;font-weight:bold;}
-.tab_content a{color:#757575;font:12px "SimSun";padding:0 5px;}
+.tab_content a{color:#757575;font:12px "SimSun";padding:0 5px;}  
+.tab_content fieldset a{padding:5px;} 
 .tab_content fieldset{padding:8px 0;border-bottom:1px dashed #e6ccae;}
 .tab_content fieldset.lastfield{padding-top:25px;border:none;}
 .tab_content select,.tab_content input{border:1px solid #ccc;}
 .tab_content select{padding:3px;color:#757575;}
-.tab_content input{padding:4px 10px;color:#6e6e6e;font-size:14px;background-color:#fff;}
+.tab_content input{padding:4px 10px;color:#6e6e6e;font-size:14px;background:#fff url(<%= asset_path "imgbase/imgbase_button.jpg" %>);width:56px;height:25px;border:0;}
 .imgbase_toggle{background:url(<%= asset_path "imgbase/arrow.jpg" %>) no-repeat;width:81px;height:22px;line-height:22px!important;bottom:-21px;left:50%;margin-left:-40px;text-align:center;}
 .form_expand{background-position:0 -22px;}
 .form_mini{height:60px;}

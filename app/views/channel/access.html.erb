@@ -1,21 +1,21 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag "imgbase","2013base","2013upload" %>
+    <%= stylesheet_link_tag "imgbase","2013base","2013upload","/resources/js/plugins/exp/css/style.css" %>
     <style type="text/css">
     body, button, input, select, textarea {
       font-size: 12px;
     }
   </style>
-    <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+    <%= javascript_include_tag "/location.js", "LinkageSelect.js","2013main", "/resources/js/plugins/exp/exp.js" %>
 <% end -%>
 <div class="wrapper">
   <div class="channel">
-    <ul class="tabnav" style="margin-top: 101px;">
+    <!-- <ul class="tabnav clear" style="margin-top: 101px;">
         <li class="current" data-tab="#tabnav1">设计快查</li>
         <li data-tab="#tabnav2"><a href="/faqs">家装问答</a></li>
         <li data-tab="#tabnav3"><a href="/faqs#tips">装修贴士</a></li>
         <li data-tab="#tabnav4"><a href="/mix_colors/new">配色咨询</a></li>
         <li data-tab="#tabnav5"><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">刷新服务</a></li>
-    </ul>
+    </ul> -->
 
     <div class="tab_contents">
       <div class="tabspan" id="tabnav1">
@@ -53,19 +53,19 @@
             <% design_count = user.designs.joins(:design_images).group("imageable_id") if user.designs %>
             <% design = user.designs.joins(:design_images).group("imageable_id").order("created_at desc").first %>
               <li style="height:205px">
-                  <div class="clear" style="height: 155px;width:273px;overflow:hidden;">
+                  <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
                     <% if design %>
                       <%= link_to user_design_path(user.id, design.id) do %>
-                        <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="208px" height="155">
+                        <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="205" height="155">
                       <% end %>
                     <% else %>
-                      <img src="<%= asset_path '2013/default_image.png' %>" class="fl" width="208px" height="155">
+                      <img src="<%= asset_path '2013/default_image.png' %>" class="fl" width="205" height="155">
                     <% end %>
                     <%= link_to user_path(user) do %>
                       <%- if user.avatar %>
-                          <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
+                          <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fr" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
                       <%- else %>
-                          <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fl' %>
+                          <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fr' %>
                       <%- end %>
                     <% end %>
                   </div>
@@ -81,6 +81,180 @@
            <%= paginate @design_users  if @design_users%>
         </div>
 
+        <form class="submit_form">
+          <h3><img src="<%= asset_path 'channel/channel_step.png' %>"></h3>
+          <div class="form_legend">
+            提交申请表单
+            <span>SUBMIT FORM</span>
+          </div>
+          <fieldset>
+              <div class="fl">
+                  <label>姓名<span>*</span></label><input type="text">
+              </div>
+              <div class="fl">
+                  <label>电话<span>*</span></label><input type="text">
+              </div>
+          </fieldset>
+          <fieldset>
+              <div class="fl">
+                  <label>Email<span>*</span></label><input style="width:398px;" type="text">
+              </div>
+          </fieldset>
+          <fieldset>
+              <div class="fl">
+                  <label>装修面积<span>*</span></label><input type="text">
+              </div>
+              <div class="fl">
+                  <label>房型<span>*</span></label><input type="text">
+              </div>
+          </fieldset>
+          <fieldset>
+            <div class="fl linkageseclet">
+              <label>装修所在地<span>*</span></label>
+              <select class="level_1" style="width:166px;"></select>
+              <select class="level_2" style="width:166px;"></select>
+              <select class="level_3" style="width:166px;"></select>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="fl">
+              <label>楼盘名称<span>*</span></label><input type="text">
+            </div>
+            <div class="fl">
+              <label>预算<span>*</span></label><input type="text">
+            </div>
+          </fieldset>
+          <fieldset class="deshed_line">
+            <a href="upload_success.html" class="sure_submit db"></a>
+          </fieldset>
+        </form><!-- submit_form end -->
+
+        <div class="channel_banner tc">
+          <img src="<%= asset_path 'channel/channel_banner.jpg' %>">
+        </div>
+
+        <div class="channel_bottom clear">
+          <div class="bottom_list fl">
+            <dl class="fl">
+              <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+              <dd>
+                <img src="<%= asset_path 'channel/channel_list2.jpg' %>">
+                <h4>济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</h4>
+                <p>山东济南</p>
+                <div><img src="images/channel/channel_tip_month.png"></div>
+              </dd>
+              <dd>
+                <img src="<%= asset_path 'channel/channel_list2.jpg' %>">
+                <h4>济南七间宅装饰工程有限公司</h4>
+                <p>山东济南</p>
+              </dd>
+              <dd class="noborder">
+                <img src="<%= asset_path 'channel/channel_list2.jpg' %>">
+                <h4>济南七间宅装饰工程有限公司</h4>
+                <p>山东济南</p>
+              </dd>
+              <dd class="noborder">
+                <img src="<%= asset_path 'channel/channel_list2.jpg' %>">
+                <h4>济南七间宅装饰工程有限公司</h4>
+                <p>山东济南</p>
+              </dd>
+            </dl>
+            <dl class="fr">
+              <dt>热门设计师推荐<a href="#">申请加入</a></dt>
+              <dd>
+                <img src="<%= asset_path 'channel/channel_list2.jpg' %>">
+                <h4>济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</h4>
+                <p>山东济南</p>
+                <div><img src="images/channel/channel_tip_week.png"></div>
+              </dd>
+              <dd class="noborder">
+                <img src="<%= asset_path 'channel/channel_list2.jpg' %>">
+                <h4>济南七间宅装饰工程有限公司</h4>
+                <p>山东济南</p>
+              </dd>
+            </dl>
+            <div class="circle_pager fl">
+              <a href="#" class="active"></a>
+              <a href="#"></a>
+              <a href="#"></a>
+              <a href="#"></a>
+            </div>
+          </div><!-- bottom_list end -->
+          <form id="bottom_mood" class="fr">
+            <h4 class="txt_tit">iColor心情</h4>
+            <textarea id="J_t" class="mood_textarea"></textarea>
+
+            <ul class="btn_group exp-holder clear">
+              <li class="fr btn_send"><button>发布</button></li>
+              <li class="fr btn_public">
+                <span class="fl">公开</span>
+                <i class="icon-arrow-up"></i>
+                <ul class="none">
+                  <li class="active"><a href="#"><i class="icon-public"></i>公开</a></li>
+                  <li><a href="#"><i class="icon-self"></i>私密</a></li>
+                </ul>
+              </li>
+              <li class="fl btn_mood">
+                <i class="icon-color_mood"></i>色彩心情
+                <ul class="color_mood_options clear">
+                  <li class="hover"><a style="background-color:#000000" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#993300" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#333300" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#003300" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#003366" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#000080" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#333399" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#333333" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#800000" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ff6600" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#808000" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#008000" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#008080" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#0000ff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#666699" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#808080" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ff0000" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ff9900" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#99cc00" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#339966" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#33cccc" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#3366ff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#800080" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#999999" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ff00ff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ffcc00" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ffff00" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#00ff00" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#00ffff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#00ccff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#993366" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#c0c0c0" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ff99cc" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ffcc99" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ffff99" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ccffcc" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ccffff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#99ccff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#cc99ff" href="javascript:void(0)"></a></li>
+                  <li><a style="background-color:#ffffff" href="javascript:void(0)"></a></li>
+                </ul>
+              </li>
+              <li class="fl exp-block-trigger" id="J_sbt">
+                <i class="icon-face"></i>
+                表情
+              </li>
+              <li class="fl btn_pictures">
+                <span><i class="icon-pic"></i>图片</span>
+                <input type="file" value="图片" />
+              </li>
+            </ul>
+            <!-- <i class="icon-public"></i>
+            <i class="icon-self"></i>
+            <i class="icon-color_mood"></i>
+            <i class="icon-face"></i>
+            <i class="icon-pic"></i> -->
+          </form><!-- bottom_mood end -->
+        </div>
       </div>
     </div>
   </div>

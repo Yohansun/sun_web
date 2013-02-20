@@ -97,7 +97,7 @@
     </div>
     <!--navTop ends-->
     <ul class="navBot fr cw fb ft14">
-      <li><a href="/?from=top">首页</a></li>
+      <li class="active"><a href="/?from=top">首页</a></li>
       <li class="pr"><a href="/master_interviews?from=top">大师殿堂</a>
         <ul>
           <li><a href="/master_interviews?from=top">大师访谈</a></li>
@@ -105,11 +105,12 @@
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <!-- <li class="noborder"><a href="/master_topics?from=top">热点话题</a></li> -->
-
         </ul>
+      </li>
+      <li class="pr">
+        <a href="/design_images?from=top">装修图库</a>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
-      <li class="pr"><a href="/design_images?from=top">装修图库</a></li>
 
       <li class="pr"><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计鉴赏</a>
         <ul>
@@ -139,6 +140,7 @@
           <!-- <li><a href="/faqs?from=top">家装设计咨询</a></li>
           <li class="noborder"><a href="/mix_colors/new?from=top">在线配色服务</a></li> -->
         </ul>
+        <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
 
       <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">行业资讯</a>
@@ -154,7 +156,7 @@
       <li class="pr"><a href="/softwares/tools?from=top">应用工具</a>
         <ul>
           <li><a href="/softwares/case">案例下载</a></li>
-          <li><a href="/softwares/tools">配色软件</a></li>
+          <li class="noborder"><a href="/softwares/tools">配色软件</a></li>
           <!-- <li class="noborder"><a href="/softwares/app">APP</a></li> -->
         </ul>
       </li>
@@ -169,7 +171,7 @@
         <!-- <span class="nav_hot"><img src="<%= asset_path "new.png"%>" /></span> -->
       </li>
       <li class="noborder pr"><a href="/designer_events?from=top">精彩活动</a>
-        <ul style="width:105px; left: -15px">
+        <ul style="width:110px; left: -15px">
           <li><a href="/designer_events?from=top">设计师活动</a></li>
           <li><a href="/other_events?from=top">其他活动</a></li>
           <li class="noborder"><a href="/gift_list?from=top">获奖名单</a></li>
