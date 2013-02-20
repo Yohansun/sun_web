@@ -37,7 +37,7 @@
 .upload_edit2013 .control2013 input{height:auto;font-size:12px;color:#333;padding:3px;}
 .upload_edit2013 .control2013 .help-text{margin:9px 0;}
 .upload2013_2 .load_submit{background:url(<%= asset_path "submit.jpg"%>);width:155px;height:51px;margin:10px auto;}
-
+.sure_submit{background:url(<%= asset_path "submit.jpg"%>);width:155px;height:51px;margin:10px auto;}
 .upload_success{min-height:500px;}
 .upload_success p{line-height:30px;}
 .color_red{color:red;}
@@ -61,18 +61,18 @@ input.owner_search{width:164px;height:13px;border:1px solid #e5e5e5;margin:4px 4
 .channel_search .search input.fl{width:110px;}
 .channel_btn{background:url(<%= asset_path "channel/channel_search.png"%>) no-repeat -147px 0;width:67px;height:24px;}
 .channel_list{padding:0 1px 0 2px;border-left:1px solid #e6e6e6;margin-bottom:25px;}
-.channel_list li{float:left;font-size:12px;color:#7f7f7f;padding:20px 10px;border:1px solid #f2f2f2;border-width:0 1px 1px 0;}
+.channel_list li{float:left;font-size:12px;color:#7f7f7f;padding:20px 11px 20px 12px;*padding:20px 10px;*width:273px;height:220px;border:1px solid #f2f2f2;border-width:0 1px 1px 0;}
 .channel_list li div{background:#f2f2f2;}
-.channel_list li img{padding:0 2px;}
+.channel_list li img.fl{padding:0 5px 0 0;}
 .channel_list li h3{color:#535353;font-weight:bold;margin-top:8px;}
 .channel_list li p{font-size:12px;margin-top:8px;line-height:14px;}
 .channel_list li p span{color:#e71d36;}
 
-.submit_form{min-height:496px;background:url(<%= asset_path "channel/submit_form_bg.jpg"%>) no-repeat right 31px;border-bottom:1px solid #e6e6e6;}
+.submit_form{min-height:496px;*height:600px;background:url(<%= asset_path "channel/submit_form_bg.jpg"%>) no-repeat right 31px;*background-position:right 110px;border-bottom:1px solid #e6e6e6;}
 .submit_form h3{border-bottom:1px solid #e6e6e6;margin-top:80px;position:relative;height:30px;}
-.submit_form h3 img{position:absolute;top:-33px;left:35px;}
-.submit_form legend{width:50%;text-align:center;font:25px "Microsoft Yahei";color:#4a4a4a;padding:30px 0 20px;margin-bottom:30px;border-bottom:1px dashed #f2f2f2;}
-.submit_form legend span{display:block;font-size:16px;}
+.submit_form h3 img{position:absolute;top:-33px;left:35px;height:88px;}
+.submit_form .form_legend{width:50%;text-align:center;font:25px "Microsoft Yahei";color:#4a4a4a;padding:30px 0 20px;margin-bottom:30px;border-bottom:1px dashed #f2f2f2;}
+.submit_form .form_legend span{display:block;font-size:16px;}
 .submit_form fieldset{width:50%;margin:12px;font:12px "Simsun";}
 .submit_form label{float:left;width:100px;text-align:right;margin-right:10px;}
 .submit_form label span{color:red;}
@@ -85,7 +85,7 @@ fieldset.deshed_line{border-top:1px dashed #f2f2f2;margin-top:30px!important;pad
 .sub_bot .pager{margin-top:28px;}
 .pager{/*width:388px;*/text-align:center;margin:0 auto; padding:3px 0;_padding:4px 0;}
 .pager a{background:#fff;color:#7f7f7f;padding:0.2em 0.5em;border:1px solid #d1d1d1;}
-.pager a:hover,.pager a.current{color:#bb0e0e;}
+.pager a:hover,.pager a.current{color:#bb0e0e;_display:inline;}
 
 a.prev{padding-left:15px;position:relative;}
 a.next{padding-right:15px;position:relative;}
@@ -95,10 +95,71 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 /*pagebar ends*/
 /*tabnav style*/
 .channel{margin-top:30px;}
-.tabnav{background:#f8f8f8;border-bottom:1px solid #e6e6e6;overflow:hidden;font-size:14px;}
+.tabnav{background:#f8f8f8;border-bottom:1px solid #e6e6e6;/*overflow:hidden;*/font-size:14px;}
 .tabnav li{float:left;padding:25px;border-top:3px solid transparent;border-right:1px solid #e6e6e6;cursor:pointer;}
 .tabnav .current{border-top:3px solid #4e4a9e;background:#fff;font-weight:bold;color:#000;border-right-color:#fff;}
 .tab_contents .tabspan{margin:0 0 40px;padding-bottom:20px;}
 .tab_contents .tabspan.current{display:block;}
 .tabnav li a {color:#666;}
 /*channel*/
+
+/*mood*/
+.channel_bottom {margin-top:40px;}
+#bottom_mood{width:530px;}
+#bottom_mood h4{font-size:14px;font-weight:bold;margin-top:20px;}
+.mood_textarea{background:url(<%= asset_path "channel/mood_textarea_bg.jpg" %>) repeat-x;border:1px solid #c8cace;height:110px;width:496px;margin:10px 0;padding:5px;}
+.btn_group{padding-right:22px;}
+.btn_group li{position:relative;margin-right:15px;cursor:pointer;font:12px/18px "Simsun";color:#505050;}
+.btn_group li ul{/*display:none;*/position:absolute;top:17px;z-index:20}
+.btn_group li ul li a{font:12px/18px "Simsun";color:#595959;/*display:block;*/}
+.btn_group li.btn_pictures{width:45px;height:23px;overflow: hidden;cursor: pointer;}
+.btn_group li.btn_pictures input{position:relative;/*top:-20px;*/left:0;/**left:-54px;*/width:45px;filter:alpha(opacity=0);opacity:0;cursor: pointer;}
+.btn_group li.btn_pictures span{position:absolute;/**left:30px;padding:1px 25px;*/cursor: pointer;_width:40px;}
+.btn_group li.btn_send{margin-right:0;}
+.btn_send button{background:#ffde5c;border:1px solid #ecbeb8;width:65px;line-height:22px;text-align:center;color:#9d5201;}
+.btn_group li.btn_public{width:50px;}
+.btn_group li.btn_public ul{/*display:none;*/position:absolute;width:60px;border:1px solid #cccccc;background:#ffffff;}
+.btn_group li.btn_public ul li{overflow:hidden;margin:1px;}
+.btn_group li.btn_public ul li a{display:block;padding:3px;line-height:22px;}
+.btn_group li.btn_public ul li a:hover{background:#e6e6e6;}
+
+.color_mood_options{width:160px;border:1px solid #cccccc;padding:5px;background:#ffffff;display:none;}
+.color_mood_options li{float:left;width:18px;height:13px;border:1px solid #fff;text-align:center;margin:0px;padding:3px 0;}
+.color_mood_options li a{width:12px;height:12px;display:block;margin:0 auto;border:1px solid #ccc;padding:0;}
+.color_mood_options li.hover{border:1px solid #9a9afb;}
+
+.btn_group i{float:left;}
+.icon-color_mood,.icon-face,.icon-pic,.icon-public,.icon-self,.icon-arrow-up{
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 18px;
+  vertical-align: middle;
+  background-image: url(<%= asset_path "channel/btn_gourp_icon.png" %>);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+.icon-color_mood{background-position:0 0;}
+.icon-face{background-position:0 -18px;}
+.icon-pic{background-position:0 -37px;}
+.icon-public{background-position:0 -53px;}
+.icon-self{background-position:0 -72px;}
+/*.icon-arrow-down{background-position:2px -106px;}*/
+.icon-arrow-up{background-position:2px -91px;}
+/*bottom list*/
+.bottom_list{width:620px;}
+.bottom_list dl{padding:10px 0 10px 20px;}
+.bottom_list dl.fl{width:394px;}
+.bottom_list dl.fr{width:188px;padding-left:10px;}
+.bottom_list dl dt{padding:10px 0;border-bottom:1px solid #e4e4e4;margin-bottom:20px;color:#000;font-size:14px;font-family:"Simsun";font-weight:bold;}
+.bottom_list dl.fl dt{width:382px;}
+.bottom_list dl.fr dt{width:185px}
+.bottom_list dl dt a{font-size:12px;color:#1db0e7;padding:0 10px;}
+.bottom_list dl dd{float:left;position:relative;margin:0 0px 10px 0;padding-right:12px;width:185px;height:200px;border-bottom:1px dashed #d8d8d8;}
+.bottom_list dl dd h4{font:bold 12px/16px "Simsun";margin:10px 0 6px;color:#565656;overflow:hidden;text-overflow:ellipsis;height:18px;}
+.bottom_list dl dd div{position:absolute;right:12px;top:0;}
+.circle_pager{width:100%;text-align:center;}
+.circle_pager a{display:inline-block;width:12px;height:12px;background:url(<%= asset_path "channel/btn_gourp_icon.png" %>) -3px -288px;}
+.circle_pager a.active{background-position:-2px -273px;}

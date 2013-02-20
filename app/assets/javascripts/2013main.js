@@ -41,33 +41,32 @@
 
 	//grid
 	(function($){
-		var brush = _$('brush'),
-			grid  = _$('grid'),
-			bin   = _$('grid_brush'),
-			$win  = $(window);
-		if(!brush) return;
-		$(brush).click(function(){
-			this.style.display = 'none';
-			grid.style.display = 'block';
-		});
-		$(grid).find('a').click(function(){
-			grid.style.display = 'none';
-			brush.style.display = 'block';
-		});
-
-		function check(){
+		var grid  = $('#grid'),
+	    gotop = $('#gotop'),
+	    $win  = $(window);
+		if(!grid.length) return;
+		var check = function(){
 			var w = $win.width();
-			if(w <= 1780){
-				bin.style.left = 0;
-				bin.style.marginLeft = 0;
-				brush.style.left = 0;
-				brush.style.right = 'auto';
-			} else {
-				bin.style.left = '50%';
-				bin.style.marginLeft = '-868px';
-				brush.style.left = 'auto';
-				brush.style.right = '-25px';
-			}
+			grid['css'](
+				w <= 1350 ? {
+          left : 0,
+          marginLeft : 0
+        } : {
+            left : '50%',
+            marginLeft : '-673px'
+        }
+      );
+      gotop['css'](
+          w <= 1350 ? {
+          left : 'auto',
+          right : 0,
+          marginLeft : 0
+        } : {
+          left : '50%',
+          right : 'auto',
+          marginLeft : '590px'
+	      }
+		 );
 		}
 		check();
 		$win.resize(check);
@@ -77,7 +76,7 @@
 	(function($){
 		var gotop = $('#gotop');
 		if(!gotop.length) return;
-		gotop.click(function(){
+		gotop.hide().click(function(){
 			$('html,body').animate({'scrollTop':0},300);
 			gotop.fadeOut();
 		});
@@ -152,4 +151,20 @@
 			sel.bind('.linkageseclet .level_3');
 		}
 	})($);
+	
+  //color mood
+  (function($){
+      $('.btn_mood,.btn_public').hover(function(){
+      	$(this).children('ul').toggle()
+      });
+      
+      $('.color_mood_options li').hover(function(){
+          $(this).siblings('li').removeClass('hover');
+          $(this).addClass('hover');
+      });
+      $('.color_mood_options li a').click(function(){
+          var color_value = $(this).css('background-color');
+          $(this).parents('form').find('textarea').css('color', color_value);
+      });
+  })($);
 });/*$*/

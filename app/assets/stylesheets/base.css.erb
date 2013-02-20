@@ -2,7 +2,6 @@
 html{overflow-x:hidden;}
 body{background:url(<%= asset_path 'bg.jpg' %>) center top;overflow-x:hidden;*position:relative;}
 .nav{background:url(<%= asset_path "imgbase/nav.png" %>) no-repeat;height:97px;margin:0 auto;z-index:9999;width:1194px;}
-
 .logo{ float:left; padding:5px 0 5px 10px;}
 /*.logo{background:url(<%= asset_path "logo.png" %>) no-repeat;width:47px;height:57px;margin:14px 0 0 18px;}
 .icolor{background:url(<%= asset_path "icolor.png" %>) no-repeat;width:99px;height:66px;margin:11px 0 0 20px;}
@@ -38,20 +37,20 @@ ul.border img{ float:left;margin:-2px 2px 0 0;}
 
 .reg{background:url(<%= asset_path "reg.png" %>) no-repeat;width:64px;height:21px;margin-top:13px;}
 .nippon{background:url(<%= asset_path "nippon.png" %>) no-repeat;width:90px;height:38px;margin:5px;}
-.navBot{clear:right;margin:12px 0 12px 12px;*margin-top:18px;*width:950px;_width:860px;}
-.navBot li{float:left;display:inline;padding:1px 2px;/*_padding:1px 4px;*/border-right: 2px solid #fff;}
-.navBot li ul{background:#e71d36;left:0;top:18px;width:88px;display:none;padding-top:1em;border-radius:0 0 5px 5px;*top:19px;position:absolute;}
+.navBot{clear:right;margin:12px 0 12px 12px;*margin-top:18px;*width:810px;_width:860px;}
+.navBot li.active a{color:#fcdc07;}
+.navBot li{float:left;display:inline;padding:1px 2px;*padding:3px 2px;/*_padding:1px 4px;*/border-right: 2px solid #fff;}
 .navBot li li{float:none;display:block;border-right:none;padding:0;border-bottom:1px solid #ab0003;}
-.navBot li li a{display:block;padding:0.7em 1em; _height:1%;}
+.navBot li li a{display:block;padding:0.7em 1.3em; _height:1%;}
 .navBot li:hover ul{display:block;}
 .navBot li li a:hover{background:#9b1611;}
 .navBot li li:last-child a:hover{border-radius:0 0 5px 5px;}
 .noborder{border:0!important;}
-.navBot li a{color:#fff;font-weight:bold;padding:8px 16px;_padding:8px 15px;}
+.navBot li a{color:#fff;font-weight:bold;padding:8px 16px;_padding:8px 15px;text-decoration:none;}
 
-.navBot li ul.w_nav1{ width:140px;_width:150px;}
-.navBot li ul.w_nav2{ width:112px;_width:110px;}
-.navBot li ul.w_nav3{ width:128px;_width:140px;}
+/*.navBot li ul.w_nav1{ width:140px;_width:150px;}*/
+/*.navBot li ul.w_nav2{ width:94px;_width:112px;}*/
+.navBot li ul.w_nav3{ width:135px;/*_width:140px;*/}
 .navBot li ul.w_nav4{ width:142px;_width:152px;}
 
 .slides{width:1680px;height:549px;left:50%;margin-left:-840px;overflow:hidden;}
@@ -81,6 +80,7 @@ ul.border img{ float:left;margin:-2px 2px 0 0;}
 /*span.arrow_1{right:153px;_right:160px;}
 span.arrow_2{right:87px;_right:92px;}*/
 .wrapper{background:#fff;width:905px;margin:0 auto;padding: 0 43px;}
+.footer{border-top:1px solid #d4d4d4;background-color:#dcdcdc;}
 .sub_bot{background:url(<%= asset_path "sub_bot.png" %>) no-repeat;width:1043px;height:95px;padding:1px;bottom:12px;}
 .links{background:#fff;padding:15px 0;height:40px;}
 .links .w_995{overflow:hidden; _height:40px;}
@@ -181,3 +181,4 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .static_a{width:69px;margin-top:28px;}
 .static_b{width:81px;margin-top:14px;}
 .static_c{width:66px;margin-top:14px;}
+.navBot li ul{background:#e71d36 url(<%= asset_path "navulbg.png" %>) repeat-x left 14px;*background-position:left 11px;left:0;top:18px;width:94px;*width:91px;display:none;padding-top:1em;border-radius:0 0 5px 5px;*top:19px;position:absolute;}

@@ -5,24 +5,7 @@
 <%- content_for :index do %>
 <!-- <div style="background:url(<%#= asset_path "icolor_qr.png"%>) no-repeat;position:fixed;width:150px;height:167px;left:10px;bottom:10px;z-index:10;"></div> -->
 
-<div id="grid_brush" style="left: 0px; margin-left: 0px;z-index: 999999;">
-  <a href="javascript:;" id="brush" class="none" style="left: 0px; right: auto;">刷子</a>
-  <div id="grid">
-    <a href="javascript:;" class="close_btn pa">关闭</a>
-    <img src="<%= asset_path "2013/index/grid.png"%>" usemap="#map1">
-    <map id="map1" name="map1">
-      <area shape="rect" coords="0,0,83,84" href="/master_interviews" target="_blank">
-      <area shape="rect" coords="84,0,167,84" href="/design_images" target="_blank">
-      <area shape="rect" coords="168,0,251,84" href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" target="_blank">
-      <area shape="rect" coords="0,85,83,169" href="/channel/access" target="_blank">
-      <!-- <area shape="rect" coords="84,85,167,169"> -->
-      <area shape="rect" coords="168,85,251,169" href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" target="_blank">
-      <area shape="rect" coords="0,170,83,254" href="/softwares/tools" target="_blank">
-      <area shape="rect" coords="84,170,167,254" href="/art" target="_blank">
-      <area shape="rect" coords="168,170,251,254" href="/designer_events" target="_blank">
-    </map>
-  </div>
-</div>
+<img src="<%= asset_path "2013/index/grid.gif"%>" id="grid" style="z-index:1;" />
 
 <a href="javascript:;" id="gotop" style="display: block;">返回顶部</a>
 
@@ -299,14 +282,14 @@
       </div>
       <a href="/gift" class="fl"><img src="<%= asset_path "2013/index/blocks8.2.jpg"%>" /></a>
       <div class="blocks_mid mt25">
-        <a href="/designer_events/city/npyda?page=1"><img src="<%= asset_path "design/d_act_list/pic1.jpg"%>" width="380" height="170"/></a>
-        <a href="/designer_events/city/npyda?page=1" class="blocks_title ft14">立邦亚洲青年设计师大赛(NPYDA)成功落幕</a>
+        <a href="/designer_events/city/npyda?page=1"><img src="<%= asset_path "2013/index/banner-0219.jpg"%>" width="380" height="170"/></a>
+        <a href="/designer_events/city/npyda?page=1" class="blocks_title ft14">2013年度iColor未来之星活动蓄势待发，敬请期待！</a>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
   <div class="mt25 clear">
-    <a href="/design_zg" class="fl mr20"><img src="<%= asset_path "2013/index/blocks9.1.jpg"%>" /></a>
-    <a href="/design_zg2" class="fl"><img src="<%= asset_path "2013/index/blocks9.2.jpg"%>" /></a>
+    <a href="/design_zg" class="fl mr20"><img src="<%= asset_path "2013/index/blocks9.2.jpg"%>" /></a>
+    <a href="/design_zg2" class="fl"><img src="<%= asset_path "2013/index/blocks9.1.jpg"%>" /></a>
   </div><!-- mt25 -->
 </div><!--wrapper-->
 <div class="imap">

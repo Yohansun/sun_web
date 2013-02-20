@@ -95,7 +95,7 @@
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
+				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
 				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
 				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
 				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
@@ -109,7 +109,7 @@
 			</ul> -->
 		</div><!-- tit_tab -->
 		<div id="imgbase_forms">
-      <%=form_tag image_search_index_design_images_path, :class => 'tab_content' do %>
+      <%=form_tag image_search_index_design_images_path, :class => 'tab_content form_mini' do %>
 				<%- @categories.each do |category| %>
 					<%- unless category.title == "按建筑" || category.title == "按部件" %>
 						<fieldset>
@@ -131,7 +131,7 @@
 		        <select id="city" class="level_2" style="width:70px;">市</select>
 		        <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
 					</span>
-					<input type="button" value="确定" onclick="submit_area()" />
+					<input type="button" value="" onclick="submit_area()" />
 				</fieldset>
 				<fieldset class="lastfield pinyin_list">
 					<label>拼音检索：</label>
@@ -162,9 +162,9 @@
           <a href="javascript:void(0)">Y</a>|
           <a href="javascript:void(0)">Z</a>
 				</fieldset>
-				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
+				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
       <% end %>
-			<form class="tab_content none">
+			<form class="tab_content form_mini none">
 				<%- @categories.each do |category| %>
 					<%- if category.title == "按部件" %>
 						<%- category.children.each do |child_lv2| %>
@@ -180,14 +180,14 @@
 						<%- end %>
 					<%- end %>
 				<%- end %>
-				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
+				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
 	<div class="search_bin">
 		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
 		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
+		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
 		<p>搜索结果：<%= @query_params %></p>
 	</div><!-- search_bin -->
 
@@ -208,8 +208,12 @@
 					<%- end %>
 				</div>
 				<div id="imgbase_info">
-					<span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
-					<span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
+					<a href="javascript:void(0);">
+						<span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
+					</a>
+					<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
+				   <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>	
+					<%- end %>
 					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
 					<p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >免费咨询</a></p>
 				</div><!-- imgbase_info -->
@@ -223,8 +227,12 @@
 						<span></span>
 					</a>
 					<div class="none">
-						<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
-						<span class="imgbase_like"><%= image.try(:votes_count) %></span>
+						<a href="javascript:void(0);">
+							<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
+						</a>
+						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
+					   <span class="imgbase_like"><%= image.try(:votes_count) %></span>	
+						<%- end %>
 						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
 						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >免费咨询</a></p>
 					</div>
