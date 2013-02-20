@@ -1,17 +1,12 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
+  caches_page :index, :expires_in => 5.minutes
 
   def t1days
     redirect_to "/21days/index.html"
   end
 
   def index
-
-    #在cookies中添加首页layer显示
-    if cookies[:homepage_guide_layer_showed].blank?
-      cookies.permanent[:homepage_guide_layer_showed] = false
-    end
-
     @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18)
 
     #每周之星
@@ -60,7 +55,6 @@ class HomeController < ApplicationController
     @body = weekly_tip.body.split("\r\n\r\n")
 
     @articles = Subject.content("articles").page(params[:page]).per(6)
-    
   end
 
   def search
@@ -73,5 +67,9 @@ class HomeController < ApplicationController
     when "3"
       @results = User.where("username like ? or name like ? or name_of_company like ?", "%#{params[:search_word]}%", "%#{params[:search_word]}%", "%#{params[:search_word]}%").where("role_id = 1 or role_id = 2").page params[:page]
     end
+  end
+
+  def overall
+      render layout: nil
   end
 end

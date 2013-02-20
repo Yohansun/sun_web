@@ -21,6 +21,9 @@ Icolor::Application.routes.draw do
   get "/shuaxin" => redirect("/shuaxin/index.html")
   get "/21days" => redirect("/21days/index.html")
 
+  get "/users/me" => "users#me"
+  get "/users/edit_me" => "users#edit_me"
+  get "home/overall.js" => "home#overall"
   root :to => 'home#index'
 
   resources :votes

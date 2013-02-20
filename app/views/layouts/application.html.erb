@@ -47,8 +47,6 @@
     <%- end %>
     .navBot li{padding:1px 5px 2px;}
   </style>
-
-
 </head>
 <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/ %>">
 <div class="header">
@@ -57,12 +55,7 @@
       <a href="/"><%= image_tag "logo1.png" %></a>
     </div>
     <div class="navTop fr">
-      <%- if user_signed_in? %>
-          <a href="<%= user_path(current_user) %>" class="user_info fl">
-            <strong><%= truncate(current_user.display_name, length: 12) %></strong>
-            我的主页<%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
-          </a>
-      <%- end %>
+      <span class="js-user-info"></span>
 
       <iframe style="float:left;display:inline;margin:11px;" width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=2032078483&style=1&btn=red&dpc=1"></iframe>
       <div class="search fl">
@@ -97,10 +90,9 @@
         <!-- JiaThis Button END -->
       </div>
       <!--navLabel ends-->
-      <%- unless user_signed_in? %>
-          <a href="javascript:;" class="login fl"></a>
-          <a href="/users/sign_up" class="reg fl"></a>
-      <%- end %>
+
+      <a href="javascript:;" class="login fl"></a>
+      <a href="/users/sign_up" class="reg fl"></a>
       <a href="/" class="nippon fl"></a>
     </div>
     <!--navTop ends-->
@@ -189,49 +181,7 @@
   </div>
   <!--nav ends-->
 
-  <%= yield :index %><!--仅仅首页的-->
-
-   <!--<div class="loginBg pa none">
-    <div class="err_tips cr ft12 none pa">
-      用户名或密码错误
-      <span class="fr cp">x</span>
-    </div>
-
-    <div class="loginCon ft12 clear">
-      <%#= form_for(:user, :url => user_session_path, :remote => true, :html => {:id => "new_user"}) do |f| %>
-          <div class="clear">
-            <label for="username" class="username ft14 fl">帐号：</label>
-            <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
-          </div>
-          <div class="clear">
-            <label for="password" class="password ft14 fl">密码：</label>
-            <input id="password" type="password" class="fl" name="user[password]"/>
-            <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
-          </div>
-          <input id="login" type="image" src="<%#= asset_path "login.jpg" %>"/>
-
-          <div class="checkbox fl">
-            <input type="checkbox"/><span>下次自动登录</span>
-          </div>
-      <%#- end %>
-    </div>
-
-    <ul class="loginCon ft12 border clear">
-      <li><a href="/users/auth/weibo"><img src="<%#= asset_path "sina.jpg" %>"/>新浪微博</a></li>
-      <li><a href="/users/auth/qq_connect"><img src="<%#= asset_path "qq.jpg" %>"/>QQ</a></li>
-      <li><a href="/users/auth/renren"><img src="<%#= asset_path "rr.jpg" %>"/>人人网</a></li>
-      <li class="noborder"><a href="/users/auth/kaixin"><img src="<%#= asset_path "kx.jpg" %>"/>开心网</a></li>
-    </ul>
-    <div class="loginCon ft12 border clear">
-      <p class="fl">还没加入iColor?</p>
-      <a href="/users/sign_up" class="reg_now fl"></a>
-    </div>
-  
-    <div class="loginCon border">
-      <a href="/gift"><img src="<%#= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
-    </div>
-  </div>
- loginBg ends-->
+  <%= yield :index %>
 </div>
 <!--header ends-->
 
@@ -348,175 +298,8 @@
         });
     });
 </script>
-<script type="text/javascript">
 
-    // show login window for un-login user
-    $(function () {
-
-      //订阅电子期刊
-      if ($(".subscribe")) {
-            $(".subscribe").click(function (event) {
-                <% if current_user -%>
-                  o_in();
-                  $('#july_last').show().find('input[type=text]').val('');
-                  $('.subs_err').hide();
-                <% else -%>
-                  show_login();
-                  return false;
-                <% end -%>
-            });
-        };
-
-      //礼从天降登陆身份验证
-      if ($("#gift_login")) {
-            $("#gift_login").click(function (event) {
-                <% if current_user && !(current_user.common_user?) -%>
-                return true;
-                <% elsif current_user && current_user.common_user? -%>
-                alert("抱歉！普通用户身份是无法上传作品的哦！");
-                return false;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        };
-
-      if ($("#per_form")) {
-            $("#per_form").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-
-      if ($("#new_message")) {
-            $("#new_message").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        // if ($("#new_comment")) {
-        //     $("#new_comment").submit(function (event) {
-        //         <% if current_user -%>
-        //         var $area = $('#comment_content')
-        //         var txt = $area.val();
-        //         if (txt == '') {
-        //             inputBlank($area);
-        //             return false;
-        //         }
-        //         <% else -%>
-        //         show_login();
-        //         return false;
-        //         <% end -%>
-        //     });
-        // }
-        // ;
-        if ($("#new_reply_msg")) {
-            $("#new_reply_msg").submit(function (event) {
-                <% if current_user -%>
-                var $area = $('#reply_msg_content')
-                var txt = $area.val();
-                if (txt == '') {
-                    inputBlank($area);
-                    return false;
-                }
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#new_faq")) {
-            $("#new_faq").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#new_site_message")) {
-            $("#new_site_message").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                $('.server_input').hide();
-                $('.server_suc').hide();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#channel_service")) {
-            $("#channel_service").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#channel_access")) {
-            $("#channel_access").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($(".one_key_forward")) {
-            $(".one_key_forward").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#ckepop a")) {
-            $("#ckepop a").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($(".new_mix_color")) {
-            $(".new_mix_color").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        };
-    });
-</script>
+<script src="/home/overall.js" type="text/javascript"></script>
 
 <% if Rails.env.production? %>
 
