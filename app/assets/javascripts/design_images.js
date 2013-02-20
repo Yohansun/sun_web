@@ -1,10 +1,10 @@
 jQuery(document).ready(function($) {
   $(".pinyin_list a").click(function(event) {
     var pinyin = getParameterByName("pinyin");
-    if (pinyin == event.target.innerText) {
+    if (pinyin == $(event.target).text()) {
       refresh_search({pinyin: ''});
     } else {
-      refresh_search({pinyin: event.target.innerText});
+      refresh_search({pinyin: $(event.target).text()});
     }
   });
 
