@@ -24,7 +24,7 @@
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
       <div class="imgbase_func ft12 pa">
-        <%#= link_to "收藏", "javascript:void(0);", :class =>"imgbase_collect" %>
+        <%=link_to "收藏", user_collects_path(@image.id, design_image_id: @image.id), method: :post,  :class => "imgbase_collect" %>
         <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
         <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"imgbase_fullpage" %>
       </div>
@@ -93,7 +93,7 @@
         <div class="fl border_lline">
         	<p class="clear border_bline">
         		<strong><%= @image.user.display_name %></strong>
-        		<%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like", :id =>"votes_count#{@image.id}", :remote => true, :method => :post %>
+        		<%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like votes_count#{@image.id}", :remote => true, :method => :post %>
         		<%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
         	</p>
         	<p>

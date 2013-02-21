@@ -80,9 +80,9 @@
     <li style="background:none;"><button><img src="<%= asset_path "design_search.png" %>" /></button></li>
     </form>
 
-    <li>
-      <a href="/designs?q=super_refresh" style="margin:0;padding:0;"><img src="<%= asset_path "landingpage/refresh_btn.jpg"%>"/></a>
-    </li>
+    <!-- <li>
+      <a href="/designs?q=super_refresh" style="margin:0;padding:0;"><img src="<%#= asset_path "landingpage/refresh_btn.jpg"%>"/></a>
+    </li> -->
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
@@ -102,9 +102,6 @@
       <%- if design.cover_img %>
         <%= link_to user_design_path(design.user_id, design) do %>
           <%= image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}") %>
-          <%- if design.is_refresh? %>
-            <span class="design_icon"><img src="<%= asset_path "design/icon_landing.png"%>"></span>
-          <%- end %>
         <%- end %>
       <%- end %>
       <h3><%= design.title %></h3>
