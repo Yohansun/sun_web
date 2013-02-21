@@ -12,6 +12,7 @@ class DesignImage < ActiveRecord::Base
   has_many :comments, :as => :commentable
   belongs_to :user
   belongs_to :area
+  has_many :collects
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
   belongs_to :design, class_name: 'Design', :foreign_key => 'imageable_id'
   # validate :file_dimensions, :unless => "errors.any?"

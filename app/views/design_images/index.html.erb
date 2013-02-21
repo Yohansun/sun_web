@@ -30,7 +30,10 @@
 				$view   = $('#imgbase_view'),
 				$info   = $('#imgbase_info'),
 				$full   = $('#imgbase_full'),
+				$collect= $('#imgbase_collect'),
+				$full   = $('#imgbase_full'),
 				$toggle = $('.imgbase_toggle'),
+				s = $(".imgbase_collect").attr('data_s'),
 				$form   = $('#imgbase_forms').find('form'),
         $ul     = $('#imgbase_ul');
 			$slider.slider({
@@ -45,7 +48,10 @@
 					$curr.addClass('imgbase_curr').siblings().removeClass('imgbase_curr');
 					$view.text(views);
 					$full.attr('href', '/design_images/' + full + '/fullscreen');
+					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full + '&page=' + s);
+					$full.attr('href', '/design_images/' + full + '/fullscreen');
 					$info.html(html);
+					// http://localhost:3000/users/120/collects?design_image_id=120&page=1904
 				}
 			});
 			$list.on('mouseenter', 'li', function(){
@@ -95,7 +101,7 @@
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
+				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
 				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
 				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
 				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
@@ -187,7 +193,7 @@
 	<div class="search_bin">
 		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
 		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
+		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
 		<p>搜索结果：<%= @query_params %></p>
 	</div><!-- search_bin -->
 
@@ -196,8 +202,12 @@
 		<div class="imgbase_bin fl pr">
 			<%- if @images.present?%>
 			<div class="imgbase_func ft12 pa">
-				<a href="#" class="imgbase_collect">收藏</a>
-				<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%#= @images.first.try(:view_count) %></span></a> -->
+				<%- if current_user %>
+				 <!-- <a href="#" class="imgbase_collect">收藏</a> -->
+				 <%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :class => "imgbase_collect", :data_s => params[:page] %>
+				<!--  <a href="<%= user_collects_path(@images.first, design_image_id: @images.first.id,  page: params[:page]) %>" id="imgbase_collect" class="imgbase_collect" >收藏</a> -->
+				<%- end %>
+				<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a>
 				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full" %>
 			</div>
 				<div class="imgbase_slider slider_bin">

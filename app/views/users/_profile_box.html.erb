@@ -21,7 +21,43 @@ $(document).ready(function() {
     });
   <%- end -%>
 });
+$(function(){
+  $(".sort_show").children("a").attr('href','javascript:;')
+})
 </script>
+<style type="text/css">
+    .lastpage{margin-left:5px;}
+
+    .sort_show_ul li{position:relative;}
+    .weekstart_detail .review_form{margin:auto;width:815px}
+    .weekstart_detail .pager{margin:10px 0;width:auto;text-align:right}
+    /*.weekstart_detail .review_wrap{padding-bottom:30px}*/
+    .weekstart_detail .properties .tags{margin-bottom:5px;font-size:12px}
+    .weekstart_detail .properties .tags h5, .weekstart_detail .properties .tags ul, .weekstart_detail .properties .tags li{display:inline}
+    .weekstart_detail .properties .tags h5{padding-left:16px;background:url(/assets/tagA.gif) no-repeat 0 center}
+    .weekstart_detail .properties .tags li{margin-left:10px}
+    .weekstart_detail .properties .tags a{color:#ea0100;text-decoration:underline}
+
+    .reviewform{border-top:1px solid #dbdad8}
+    .reviewform .bar{padding:0 10px;height:32px;line-height:32px;color:#8a8987;font-size:14px;background:#f0fbfd}
+    .reviewform .bar h4{float:left;line-height:32px}
+    .reviewform .bar h4 span{font-weight:bold}
+    .reviewform .bar .r{float:right}
+    .reviewform .button{margin-top:10px}
+    .reviewform textarea{width:849px;height:100px;padding:5px;border:1px solid #e3e3e3;}
+
+
+    .review_listA li{zoom:1;vertical-align:top}
+    .review_listA li:after{content:'';display:block;clear:both}
+    .review_listA .bar{padding:0 18px;height:22px;border-top:1px solid #dcdcdc;line-height:22px;font-size:14px;background:#f3f3f3}
+    .review_listA .bar .user{float:left;font-weight:bold;color:#333}
+    .review_listA .bar .time{float:right;color:#909090}
+    .review_listA .content{float:left;width:750px;padding:25px 0 25px 18px;font-size:14px;word-break:break-word;}
+    .review_listA .reply{float:right;display:inline}
+    .review_listA .reply a{display:block;margin:25px 18px;padding-left:24px;padding-bottom:10px;height:20px;color:#565656;font-size:14px;background:url(/assets/reply.gif) no-repeat 0 2px}
+    * html .review_listA .reply a{width:1%;white-space:nowrap}
+
+    </style>
 <%- end %>
 <div class="host_self group">
   <div class="signup_img_box">
@@ -31,7 +67,7 @@ $(document).ready(function() {
     <%= image_tag "news/regimg_bg.jpg", :width => "194" %>
     <% end -%>
     <%- if current_user && current_user == @user %>
-      <p><%= link_to "修改账户信息", edit_user_path(current_user) %> / <%= link_to "密码修改", users_passwords_reset_path, class: "ft_red" %></p>          
+      <p><%= link_to "修改账户信息", edit_user_path(current_user) %> / <%= link_to "密码修改", users_passwords_reset_path, class: "ft_red" %></p>       
     <%- end %>
 <!--     <div class="tel_rate_point pa group" style="height:35px;left:120px;bottom:0;">
         <a href="#">话费积分</a>
@@ -91,10 +127,11 @@ $(document).ready(function() {
       <p class="d_hostaddr"><%= @user.try(:inauguration_company) || @user.try(:current_school)%></p>
     <%- end %>
     </div>    
-    <p class="icon_email">Email: <%= @user.email unless @user.is_show_email? == false && @user != current_user %></p>       
+    <!-- <p class="icon_email">Email: <%= @user.email unless @user.is_show_email? == false && @user != current_user %></p>       
     <p class="icon_qq">Q   Q:<%= @user.qq %></p>
     <p class="icon_msn">MSN: <%= @user.msn %></p>
-    <p class="icon_fetion">飞信: <%= @user.fetion %></p>
+    <p class="icon_fetion">飞信: <%= @user.fetion %></p> -->
+    <p>城市: <%= @user.location %></p>
   </div>
   <!--host_status ends-->
 </div>
@@ -123,10 +160,13 @@ $(document).ready(function() {
 <%- end %>
 <!--system_info ends-->
 
-<%- if controller_name =~ /inspirations|designs|^messages|events|moods/ %>
+<%- if controller_name =~ /inspirations|designs|^messages|events|moods|asks|collects/ %>
 <%- unless action_name =~ /new|edit|my_event/  %>
 <div class="sort_box pr mt25 group">
   <ul class="sort_show_ul group">
+    <%- unless @user.role_name == "user" %>
+      <li class="<%= "sort_show" if controller_name == 'asks' %>"><%= link_to "免费咨询", user_asks_path(@user), :class => 'sort_show_a' %></li>
+    <%- end %>
     <li class="<%= "sort_show" if controller_name == 'moods' %>">
       <%= link_to "iColor心情", user_moods_path(@user), :class => 'sort_show_a' %>
     </li>
@@ -138,6 +178,9 @@ $(document).ready(function() {
     <%- unless @user.role_name == "user" %>
       <li class="<%= "sort_show" if controller_name == 'events' %>"><%= link_to "活动公告", user_events_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
+    <%- if current_user && current_user == @user %>
+      <li class="<%= "sort_show" if controller_name == 'collects' %>"><%= link_to "我的收藏", user_collects_path(@user), :class => 'sort_show_a' %></li>
+    <%- end %>
   </ul>
 
   <%- if current_user && current_user == @user %>
@@ -147,6 +190,8 @@ $(document).ready(function() {
     <%- when "designs" %>
       <%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
     <% when "events" %>
+      <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
+      <% when "asks" %>
       <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
     <%- end -%>
   <%- end %>

@@ -1,2 +1,2 @@
-class ColorArticlesController < ApplicationController
+class CollectsController < ApplicationController
 end

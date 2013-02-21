@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   attr_accessor :login, :recommended_name, :state, :city, :district, :user_role, :is_read
 
   belongs_to :role
+  has_many :collects
   has_many :user_tokens
   has_many :inspirations
   has_many :designs
@@ -59,6 +60,7 @@ class User < ActiveRecord::Base
   has_many :customer_replies
   belongs_to :area
   has_many :reply_msgs
+  has_many :replies
   has_many :scores
   has_many :votes
   has_many :comments

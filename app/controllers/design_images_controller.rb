@@ -26,10 +26,13 @@ class DesignImagesController < ApplicationController
 
   def index
     @image_length = DesignImage.available.count
-    @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children)
-    unless params[:tags].blank?
-      @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort
-      @tag_ids.delete(-1)
+    @categories = ImageLibraryCategory.where(parent_id: 0)
+    @tags = params[:tags].split(",").map { |e| e.to_i }.uniq.sort if params[:tags]
+
+    if params[:all_tags]
+      @all_tags = params[:all_tags].split(",").uniq.sort
+      tags = ImageLibraryCategory.where(parent_id: @all_tags).map(&:id)
+      @tags = (@tags + tags).uniq
     end
     @images = DesignImage.available
 
@@ -60,6 +63,14 @@ class DesignImagesController < ApplicationController
 
     unless params[:pinyin].blank?
       @images = @images.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+    end
+
+    unless params[:ranking_list].blank?
+      if params[:ranking_list] == "like"
+        @images = @images.order("design_images.votes_count desc")
+      elsif params[:ranking_list] == "view_count"
+        @images = @images.order("design_images.view_count desc")
+      end
     end
 
     unless params[:ranking_list].blank?

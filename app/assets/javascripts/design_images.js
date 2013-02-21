@@ -89,6 +89,7 @@ function refresh_search(params) {
   var pinyin = getParameterByName("pinyin");
   var ranking_list = getParameterByName("ranking_list");
 
+
   if (params.imageable_type != null) imageable_type = params.imageable_type;
   if (params.search != null) search = params.search;
   if (params.tags != null) tags = params.tags;
