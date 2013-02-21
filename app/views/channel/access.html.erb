@@ -55,7 +55,7 @@
               <li style="height:205px">
                   <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
                     <% if design %>
-                      <%= link_to user_design_path(user.id, design.id) do %>
+                      <%= link_to user_path(user) do %>
                         <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="205" height="155">
                       <% end %>
                     <% else %>
@@ -70,7 +70,7 @@
                     <% end %>
                   </div>
                   <%- if design %>
-                    <%= link_to user_design_path(user.id, design.id) do %>
+                    <%= link_to user_path(user) do %>
                       <h3><%=design.title if design%></h3>
                     <%- end %>
                   <%- else %>
@@ -141,52 +141,177 @@
           <img src="<%= asset_path 'channel/channel_banner.jpg' %>">
         </div>
 
+
+
+
         <div class="channel_bottom clear">
           <div class="bottom_list fl">
-            <dl class="fl">
-              <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
-              <dd>
-                <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
-                <h4><a href="#">济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
-                <p>山东济南</p>
-                <div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div>
-              </dd>
-              <dd>
-                <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
-                <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
-                <p>山东济南</p>
-              </dd>
-              <dd class="noborder">
-                <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
-                <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
-                <p>山东济南</p>
-              </dd>
-              <dd class="noborder">
-                <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
-                <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
-                <p>山东济南</p>
-              </dd>
-            </dl>
-            <dl class="fr">
-              <dt>热门设计师推荐<a href="#">申请加入</a></dt>
-              <dd>
-                <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
-                <h4><a href="#">济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
-                <p>山东济南</p>
-                <div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div>
-              </dd>
-              <dd class="noborder">
-                <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
-                <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
-                <p>山东济南</p>
-              </dd>
-            </dl>
-            <div class="circle_pager fl">
+            <div class="list_page">
+                <dl class="fl">
+                    <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">1济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南1</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div>
+                    </dd>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南2</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+                <dl class="fr">
+                    <dt>热门设计师推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">1济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南1</p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="list_page none">
+                <dl class="fl">
+                    <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">2济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div>
+                    </dd>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+                <dl class="fr">
+                    <dt>热门设计师推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">2济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="list_page none">
+                <dl class="fl">
+                    <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">3济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div>
+                    </dd>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南12132</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+                <dl class="fr">
+                    <dt>热门设计师推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">3济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="list_page none">
+                <dl class="fl">
+                    <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">4济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div>
+                    </dd>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南123123</p>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+                <dl class="fr">
+                    <dt>热门设计师推荐<a href="#">申请加入</a></dt>
+                    <dd>
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">4济南七间宅装饰工程有限公司济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                        <div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div>
+                    </dd>
+                    <dd class="noborder">
+                        <a href="#"><img src="<%= asset_path 'channel/channel_list2.jpg' %>"></a>
+                        <h4><a href="#">济南七间宅装饰工程有限公司</a></h4>
+                        <p>山东济南</p>
+                    </dd>
+                </dl>
+            </div>
+            <p class="circle_pager fl">
               <a href="#" class="active"></a>
               <a href="#"></a>
               <a href="#"></a>
               <a href="#"></a>
-            </div>
+            </p>
             <div class="clear"></div>
             <div class="bottom_list_logo clear">
               <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
@@ -202,9 +327,20 @@
             </div>
             <div class="channel_passage">
               <h4 class="fl">快速通道</h4>
-              <a href="#">注册<span>register</span></a>
-              <a href="#">上传作品<span>upload works</span></a>
-              <a href="#">免费咨询<span style="font-size:9px;">free consultation</span></a>
+              <a href="/users/sign_up">注册<span>register</span></a>
+              <% if current_user -%>
+                <% unless current_user.common_user? %>
+                  <%= link_to new_user_design_path(current_user) do %>
+                    上传作品<span>upload works</span>
+                  <%- end %>
+                  <%= link_to user_asks_path(current_user) do %>
+                    免费咨询<span style="font-size:9px;">free consultation</span>
+                  <%- end %>
+                <% end -%>
+              <% else -%>
+                <%= link_to_function "上传作品", "show_login()" %>
+                <%= link_to_function "免费咨询", "show_login()" %>
+              <% end -%>
             </div>
           </div><!-- bottom_list end -->
           <div id="bottom_mood" class="fr">
@@ -313,7 +449,7 @@
                 <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
               </li>
             </ul>
-            <div class="pager ft12">
+            <!-- <div class="pager ft12">
               <a class="prev" href="#"><span></span>上一页</a>
               <a href="#">1</a>
               <a href="#" class="current">2</a>
@@ -322,7 +458,7 @@
               <a href="#">...</a>
               <a href="#">20</a>
               <a class="next" href="#">下一页<span></span></a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -339,5 +475,16 @@
         sel.bind('.level_1', null, '请选择省');
         sel.bind('.level_2', null, '请选择市');
         sel.bind('.level_3', null, '请选择区');
+    });
+    $(function(){
+      $('.circle_pager a').click(function(e){
+        e.preventDefault();
+        var a_index = $(this).index();
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        $(this).parent().siblings('div.list_page').eq(a_index).siblings('.list_page').hide();
+        $(this).parent().siblings('div.list_page').eq(a_index).show();
+        console.log(a_index)
+      });
     });
 </script>
