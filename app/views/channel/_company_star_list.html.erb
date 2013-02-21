@@ -1,0 +1,165 @@
+<div class="bottom_list fl">
+<div class="list_page">
+    <dl class="fl">
+        <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+        <%- @list_company_users1.each_with_index do |company_user, index| %>
+            <dd>
+                <%= link_to user_path(company_user) do %>
+                    <%- if company_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(company_user) do %>
+                        <%= company_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= company_user.user_location %></p>
+                <%- if index < 1 %>
+                    <div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div>
+                <%- end %>
+            </dd>
+        <%- end %>
+    </dl>
+    <dl class="fr">
+        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <%- @list_design_users1.each_with_index do |design_user, index| %>
+            <dd>
+                <%= link_to user_path(design_user) do %>
+                    <%- if design_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(design_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(design_user) do %>
+                        <%= design_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= design_user.user_location %></p>
+                <%- if index < 1 %>
+                    <div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div>
+                <%- end %>
+            </dd>
+        <%- end %>
+    </dl>
+</div>
+<div class="list_page none">
+    <dl class="fl">
+        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入1</a></dt>
+        <%- @list_company_users2.each do |company_user| %>
+            <dd>
+                <%= link_to user_path(company_user) do %>
+                    <%- if company_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(company_user) do %>
+                        <%= company_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= company_user.user_location %></p>
+            </dd>
+        <%- end %>
+    </dl>
+    <dl class="fr">
+        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <%- @list_design_users2.each do |design_user| %>
+            <dd>
+                <%= link_to user_path(design_user) do %>
+                    <%- if design_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(design_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(design_user) do %>
+                        <%= design_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= design_user.user_location %></p>
+            </dd>
+        <%- end %>
+    </dl>
+</div>
+<div class="list_page none">
+    <dl class="fl">
+        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
+        <%- @list_company_users3.each do |company_user| %>
+            <dd>
+                <%= link_to user_path(company_user) do %>
+                    <%- if company_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(company_user) do %>
+                        <%= company_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= company_user.user_location %></p>
+            </dd>
+        <%- end %>
+    </dl>
+    <dl class="fr">
+        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <%- @list_design_users3.each do |design_user| %>
+            <dd>
+                <%= link_to user_path(design_user) do %>
+                    <%- if design_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(design_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(design_user) do %>
+                        <%= design_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= design_user.user_location %></p>
+            </dd>
+        <%- end %>
+    </dl>
+</div>
+<div class="list_page none">
+    <dl class="fl">
+        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
+        <%- @list_company_users4.each do |company_user| %>
+            <dd>
+                <%= link_to user_path(company_user) do %>
+                    <%- if company_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(company_user) do %>
+                        <%= company_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= company_user.user_location %></p>
+            </dd>
+        <%- end %>
+    </dl>
+    <dl class="fr">
+        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <%- @list_design_users4.each do |design_user| %>
+            <dd>
+                <%= link_to user_path(design_user) do %>
+                    <%- if design_user.designs.last.try(:cover_img) %>
+                        <%= image_tag(design_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- end %>
+                <%- end %>
+                <h4>
+                    <%= link_to user_path(design_user) do %>
+                        <%= design_user.display_name %>
+                    <%- end %>
+                </h4>
+                <p><%= design_user.user_location %></p>
+            </dd>
+        <%- end %>
+    </dl>
+</div>
+<p class="circle_pager fl">
+  <a href="#" class="active"></a>
+  <a href="#"></a>
+  <a href="#"></a>
+  <a href="#"></a>
+</p>
