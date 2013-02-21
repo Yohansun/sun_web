@@ -1,0 +1,116 @@
+<div id="bottom_mood" class="fr">
+  <%= form_tag "/users/#{ current_user ? current_user.id : 10 }/moods", id: "per_form", class: "exp-holder", multipart: true do |f| %>
+    <h4 class="txt_tit">iColor心情</h4>
+    <textarea id="J_t" name="mood[content]" class="mood_textarea"></textarea>
+
+    <ul class="btn_group clear">
+      <li class="fr btn_send">
+        <%- if current_user %>
+          <button>发布</button>
+        <%- else %>
+          <%= link_to_function "发布", "show_login()", :class =>"buttons" %>
+        <%- end %>
+      </li>
+      <li class="fr btn_public">
+        <span class="fl">公开</span>
+        <input type="hidden" id="is_privacy" name="mood[is_privacy]" value="true"/>
+        <i class="icon-arrow-up"></i>
+        <!-- <ul class="none">
+          <li class="active per_p"><a href="javascript:void(0)" data="true"><i class="icon-public"></i>公开</a></li>
+          <li  class="per_s"><a href="javascript:void(0)" data="false"><i class="icon-self"></i>私密</a></li>
+        </ul> -->
+      </li>
+
+      <input type="hidden" id="color_code" name="mood[color_code]"/>
+      <input type="hidden" id="color_name" name="mood[color_name]"/>
+      <input type="hidden" id="font_color" name="mood[font_color]"/>
+
+      <li class="fl btn_mood">
+        <i class="icon-color_mood"></i>色彩心情
+        <ul class="color_mood_options clear">
+          <li class="hover"><a style="background-color:#000000" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#993300" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#333300" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#003300" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#003366" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#000080" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#333399" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#333333" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#800000" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ff6600" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#808000" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#008000" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#008080" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#0000ff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#666699" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#808080" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ff0000" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ff9900" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#99cc00" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#339966" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#33cccc" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#3366ff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#800080" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#999999" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ff00ff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ffcc00" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ffff00" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#00ff00" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#00ffff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#00ccff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#993366" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#c0c0c0" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ff99cc" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ffcc99" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ffff99" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ccffcc" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ccffff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#99ccff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#cc99ff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ffffff" href="javascript:void(0)"></a></li>
+        </ul>
+      </li>
+      <li class="fl exp-block-trigger" id="J_sbt">
+        <i class="icon-face"></i>表情
+      </li>
+      <li class="fl btn_pictures">
+        <span><i class="icon-pic"></i>图片</span>
+        <%= file_field_tag 'mood[img]'%>
+      </li>
+    </ul>
+    <!-- <i class="icon-public"></i>
+    <i class="icon-self"></i>
+    <i class="icon-color_mood"></i>
+    <i class="icon-face"></i>
+    <i class="icon-pic"></i> -->
+  <%- end %><!-- bottom_mood end -->
+  <ul class="mood_list">
+    <%- @moods.each do |m| %>
+      <%- if m.present? %>
+        <%- img = m.img.url if m.img.exists?(:original) -%>
+        <li>
+          <strong><%= m.user.display_name %></strong>
+          <p style="color:#<%= m.font_color %>;" class="J_resulte"><%= m.content %></p>
+          <%- if img %>
+            <p><%= image_tag m.img.url(:thumb) %></p>
+          <%- end %>
+          <span>
+            <a class="fr" href="javascript:;">转发(<%= m.shares_count %>)</a>
+            <%= forward_links("#{m.content}", user_moods_url(10), m.img.url, m.id.to_s, "Mood") %>
+            <%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %>
+          </span>
+        </li>
+      <%- end %>
+    <%- end %>
+  </ul>
+  <!-- <div class="pager ft12">
+    <a class="prev" href="#"><span></span>上一页</a>
+    <a href="#">1</a>
+    <a href="#" class="current">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">...</a>
+    <a href="#">20</a>
+    <a class="next" href="#">下一页<span></span></a>
+  </div> -->
+</div>

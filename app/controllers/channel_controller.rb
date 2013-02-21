@@ -62,6 +62,15 @@ class ChannelController < ApplicationController
       end
     end
 
-    @design_users = @design_users.page(params[:page]).per(16)
+    @design_users = @design_users.page(params[:page]).per(8)
+
+    #mood
+    @moods = Mood.order("created_at desc").limit(5)
+
+    user_ids = []
+    WeeklyStar.order("id desc").limit(10).map(&:author_url).each do |ul|
+      user_ids << ul.split("/")[-2].to_i
+    end
+    @users = User.where(id: user_ids).reverse
   end
 end

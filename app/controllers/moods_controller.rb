@@ -28,6 +28,10 @@ class MoodsController < ApplicationController
 			end
 		end
 
-		redirect_to user_moods_path(@user)
+		if controller_name = "channel"
+			redirect_to channel_access_path
+		else
+			redirect_to user_moods_path(@user)
+		end
 	end
 end

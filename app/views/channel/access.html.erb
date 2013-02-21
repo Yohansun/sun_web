@@ -314,16 +314,9 @@
             </p>
             <div class="clear"></div>
             <div class="bottom_list_logo clear">
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
-              <a href="#"><img src="<%= asset_path 'channel/channel_list3.jpg' %>"></a>
+              <%- @users.each do |user| %>
+                <%= show_avatar(user,"original","100x100") %>
+              <%- end %>
             </div>
             <div class="channel_passage">
               <h4 class="fl">快速通道</h4>
@@ -343,123 +336,7 @@
               <% end -%>
             </div>
           </div><!-- bottom_list end -->
-          <div id="bottom_mood" class="fr">
-            <form class="exp-holder">
-              <h4 class="txt_tit">iColor心情</h4>
-              <textarea id="J_t" class="mood_textarea"></textarea>
-
-              <ul class="btn_group clear">
-                <li class="fr btn_send"><button>发布</button></li>
-                <li class="fr btn_public">
-                  <span class="fl">公开</span>
-                  <i class="icon-arrow-up"></i>
-                  <ul class="none">
-                    <li class="active"><a href="#"><i class="icon-public"></i>公开</a></li>
-                    <li><a href="#"><i class="icon-self"></i>私密</a></li>
-                  </ul>
-                </li>
-                <li class="fl btn_mood">
-                  <i class="icon-color_mood"></i>色彩心情
-                  <ul class="color_mood_options clear">
-                    <li class="hover"><a style="background-color:#000000" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#993300" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#333300" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#003300" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#003366" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#000080" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#333399" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#333333" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#800000" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ff6600" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#808000" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#008000" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#008080" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#0000ff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#666699" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#808080" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ff0000" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ff9900" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#99cc00" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#339966" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#33cccc" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#3366ff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#800080" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#999999" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ff00ff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ffcc00" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ffff00" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#00ff00" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#00ffff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#00ccff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#993366" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#c0c0c0" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ff99cc" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ffcc99" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ffff99" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ccffcc" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ccffff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#99ccff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#cc99ff" href="javascript:void(0)"></a></li>
-                    <li><a style="background-color:#ffffff" href="javascript:void(0)"></a></li>
-                  </ul>
-                </li>
-                <li class="fl exp-block-trigger" id="J_sbt">
-                  <i class="icon-face"></i>表情
-                </li>
-                <li class="fl btn_pictures">
-                  <span><i class="icon-pic"></i>图片</span>
-                  <input type="file" value="图片" />
-                </li>
-              </ul>
-              <!-- <i class="icon-public"></i>
-              <i class="icon-self"></i>
-              <i class="icon-color_mood"></i>
-              <i class="icon-face"></i>
-              <i class="icon-pic"></i> -->
-            </form><!-- bottom_mood end -->
-            <ul class="mood_list">
-              <li>
-                <strong>Jane</strong>
-                <p>我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！http://www.icolor.com.cn/special_events/2</p>
-                <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
-              </li>
-              <li>
-                <strong>Jane</strong>
-                <p>我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！http://www.icolor.com.cn/special_events/2</p>
-                <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
-              </li>
-              <li>
-                <strong>Jane</strong>
-                <p>我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！http://www.icolor.com.cn/special_events/2</p>
-                <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
-              </li>
-              <li>
-                <strong>Jane</strong>
-                <p>我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！http://www.icolor.com.cn/special_events/2</p>
-                <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
-              </li>
-              <li>
-                <strong>Jane</strong>
-                <p>我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！http://www.icolor.com.cn/special_events/2</p>
-                <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
-              </li>
-              <li>
-                <strong>Jane</strong>
-                <p>我在参加 #iColor元旦砸金蛋# 活动哟！你也快来试试运气吧！http://www.icolor.com.cn/special_events/2</p>
-                <span><a class="fr" href="javascript:;">转发(16)</a>2013年01月11日 14时51分</span>
-              </li>
-            </ul>
-            <!-- <div class="pager ft12">
-              <a class="prev" href="#"><span></span>上一页</a>
-              <a href="#">1</a>
-              <a href="#" class="current">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">...</a>
-              <a href="#">20</a>
-              <a class="next" href="#">下一页<span></span></a>
-            </div> -->
-          </div>
+          <%= render :partial => "icolor_mood" %>
         </div>
       </div>
     </div>
@@ -487,4 +364,7 @@
         console.log(a_index)
       });
     });
+    // $(function() {
+    //   $('#inspiration').masonry();
+    // });
 </script>
