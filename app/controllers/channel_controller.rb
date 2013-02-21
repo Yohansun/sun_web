@@ -66,6 +66,22 @@ class ChannelController < ApplicationController
 
     #mood
     @moods = Mood.order("created_at desc").limit(5)
+    #design_star
+    design_user_ids = []
+    WeeklyStar.order("id desc").map(&:author_url).each do |ul|
+      design_user_ids << ul.split("/")[-2].to_i
+    end
+    list_design_users = User.where(id: design_user_ids, role_id: 1)
+    @list_design_users1 = list_design_users.page(1).per(2)
+    @list_design_users2 = list_design_users.page(2).per(2)
+    @list_design_users3 = list_design_users.page(3).per(2)
+    @list_design_users4 = list_design_users.page(4).per(2)
+    #company_star
+    list_company_users = User.where(id: design_user_ids, role_id: 2)
+    @list_company_users1 = list_company_users.page(1).per(4)
+    @list_company_users2 = list_company_users.page(2).per(4)
+    @list_company_users3 = list_company_users.page(3).per(4)
+    @list_company_users4 = list_company_users.page(4).per(4)
 
     user_ids = []
     WeeklyStar.order("id desc").limit(10).map(&:author_url).each do |ul|
