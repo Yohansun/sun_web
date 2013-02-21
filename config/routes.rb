@@ -238,6 +238,8 @@ Icolor::Application.routes.draw do
   resources :collect do
   end
 
+  resources :cubit_fixtures, only: :create
+
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
 

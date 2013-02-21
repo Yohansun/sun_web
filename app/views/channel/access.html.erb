@@ -87,55 +87,7 @@
            <%= paginate @design_users  if @design_users%>
         </div>
 
-        <form class="submit_form">
-          <h3><img src="<%= asset_path 'channel/channel_step.png' %>"></h3>
-          <div class="form_legend">
-            提交申请表单
-            <span>SUBMIT FORM</span>
-          </div>
-          <div class="clear form_list">
-            <fieldset>
-                <div class="fl">
-                    <label>姓名<span>*</span></label><input type="text">
-                </div>
-                <div class="fl">
-                    <label>电话<span>*</span></label><input type="text">
-                </div>
-            </fieldset>
-            <fieldset>
-                <div class="fl">
-                    <label>Email<span>*</span></label><input style="width:398px;" type="text">
-                </div>
-            </fieldset>
-            <fieldset>
-                <div class="fl">
-                    <label>装修面积<span>*</span></label><input type="text">
-                </div>
-                <div class="fl">
-                    <label>房型<span>*</span></label><input type="text">
-                </div>
-            </fieldset>
-            <fieldset>
-              <div class="fl linkageseclet">
-                <label>装修所在地<span>*</span></label>
-                <select class="level_1" style="width:166px;"></select>
-                <select class="level_2" style="width:166px;"></select>
-                <select class="level_3" style="width:166px;"></select>
-              </div>
-            </fieldset>
-            <fieldset>
-              <div class="fl">
-                <label>楼盘名称<span>*</span></label><input type="text">
-              </div>
-              <div class="fl">
-                <label>预算<span>*</span></label><input type="text">
-              </div>
-            </fieldset>
-          </div>
-          <fieldset class="deshed_line">
-            <a href="upload_success.html" class="sure_submit db"></a>
-          </fieldset>
-        </form><!-- submit_form end -->
+        <%= render :partial => "cubit_form" %>
 
         <div class="channel_banner tc">
           <img src="<%= asset_path 'channel/channel_banner.jpg' %>">
@@ -203,4 +155,7 @@
     // $(function() {
     //   $('#inspiration').masonry();
     // });
+    $('.deshed_line a.sure_submit').bind("click",function(){
+      $('form.submit_form').submit();
+    });
 </script>

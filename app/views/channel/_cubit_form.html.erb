@@ -1,0 +1,56 @@
+<%= form_tag cubit_fixtures_path, :class=>"submit_form", :remote => true do  %>
+  <h3><img src="<%= asset_path 'channel/channel_step.png' %>"></h3>
+  <div class="form_legend">
+    提交申请表单
+    <span>SUBMIT FORM</span>
+  </div>
+  <div class="clear form_list">
+    <fieldset>
+        <div class="fl">
+            <label>姓名<span>*</span></label>
+            <%= text_field :cubit_fixture, :name %>
+        </div>
+        <div class="fl">
+            <label>电话<span>*</span></label>
+            <%= text_field :cubit_fixture, :phone %>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="fl">
+            <label>Email<span>*</span></label>
+            <%= text_field :cubit_fixture, :email, :style =>"width:398px;" %>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="fl">
+            <label>装修面积<span>*</span></label>
+            <%= text_field :cubit_fixture, :fixture_area %>
+        </div>
+        <div class="fl">
+            <label>房型<span>*</span></label>
+            <%= text_field :cubit_fixture, :fixture_type %>
+        </div>
+    </fieldset>
+    <fieldset>
+      <div class="fl linkageseclet">
+        <label>装修所在地<span>*</span></label>
+        <select class="level_1" style="width:166px;" name=""></select>
+        <select class="level_2" style="width:166px;" name=""></select>
+        <select class="level_3" style="width:166px;" name="cubit_fixture[area_id]"></select>
+      </div>
+    </fieldset>
+    <fieldset>
+      <div class="fl">
+        <label>楼盘名称<span>*</span></label>
+        <%= text_field :cubit_fixture, :house_name %>
+      </div>
+      <div class="fl">
+        <label>预算<span>*</span></label>
+        <%= text_field :cubit_fixture, :pre_price %>
+      </div>
+    </fieldset>
+  </div>
+  <fieldset class="deshed_line">
+    <a href="javascript:;" class="sure_submit db"></a>
+  </fieldset>
+<%- end %><!-- submit_form end -->
