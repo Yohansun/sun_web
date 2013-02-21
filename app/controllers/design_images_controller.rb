@@ -64,15 +64,7 @@ class DesignImagesController < ApplicationController
 
     unless params[:ranking_list].blank?
       if params[:ranking_list] == "like"
-        @images = @images.order("design_images.votes_count desc")
-      elsif params[:ranking_list] == "view_count"
-        @images = @images.order("design_images.view_count desc")
-      end
-    end
-
-    unless params[:ranking_list].blank?
-      if params[:ranking_list] == "like"
-        @images = @images.order("design_images.votes_count desc")
+        @images = @images.order("design_images.collects_count desc")
       elsif params[:ranking_list] == "view_count"
         @images = @images.order("design_images.view_count desc")
       end

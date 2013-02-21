@@ -15,7 +15,7 @@ class CollectsController < ApplicationController
 			@collect.user_id = current_user.id
 			@collect.design_image_id = params[:design_image_id]
 			@collect.save
-	   	    redirect_to user_design_images_path(@user.id, page: params[:page])
+			redirect_to user_design_images_path(@user.id, page: params[:page])
 		end
 	end
 	def destroy
