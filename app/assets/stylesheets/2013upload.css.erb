@@ -64,7 +64,8 @@ input.owner_search{width:164px;height:13px;border:1px solid #e5e5e5;margin:4px 4
 .channel_list li{float:left;font-size:12px;color:#7f7f7f;padding:20px 11px 20px 12px;*padding:20px 10px;*width:273px;height:220px;border:1px solid #f2f2f2;border-width:0 1px 1px 0;}
 .channel_list li div{background:#f2f2f2;}
 .channel_list li img.fl{padding:0 5px 0 0;}
-.channel_list li h3{color:#535353;font-weight:bold;margin-top:8px;}
+.channel_list li h3{margin-top:8px;}
+.channel_list li h3 a{display:block;color:#535353;font-weight:bold;margin-top:8px;}
 .channel_list li p{font-size:12px;margin-top:8px;line-height:14px;}
 .channel_list li p span{color:#e71d36;}
 
@@ -73,13 +74,14 @@ input.owner_search{width:164px;height:13px;border:1px solid #e5e5e5;margin:4px 4
 .submit_form h3 img{position:absolute;top:-33px;left:35px;height:88px;}
 .submit_form .form_legend{width:50%;text-align:center;font:25px "Microsoft Yahei";color:#4a4a4a;padding:30px 0 20px;margin-bottom:30px;border-bottom:1px dashed #f2f2f2;}
 .submit_form .form_legend span{display:block;font-size:16px;}
-.submit_form fieldset{width:50%;margin:12px;font:12px "Simsun";}
-.submit_form label{float:left;width:100px;text-align:right;margin-right:10px;}
+.submit_form .form_list{margin-bottom:30px;}
+.submit_form fieldset{width:50%;margin:12px;*padding:0 0 10px;font:12px "Simsun";}
+.submit_form label{float:left;width:100px;text-align:right;margin-right:10px;line-height:26px;}
 .submit_form label span{color:red;}
 .submit_form input,.submit_form select{border:1px solid #d2d4d4;}
 .submit_form input{width:140px;padding:3px;height:18px;}
 .submit_form select{height:27px;}
-fieldset.deshed_line{border-top:1px dashed #f2f2f2;margin-top:30px!important;padding-top:25px;}
+fieldset.deshed_line{border-top:1px dashed #f2f2f2;/*margin-top:30px!important;*/padding-top:25px;}
 .channel_banner{padding:35px 0;border-bottom:1px solid #e6e6e6;}
 /*pagebar*/
 .sub_bot .pager{margin-top:28px;}
@@ -110,11 +112,11 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .mood_textarea{background:url(<%= asset_path "channel/mood_textarea_bg.jpg" %>) repeat-x;border:1px solid #c8cace;height:110px;width:496px;margin:10px 0;padding:5px;}
 .btn_group{padding-right:22px;}
 .btn_group li{position:relative;margin-right:15px;cursor:pointer;font:12px/18px "Simsun";color:#505050;}
-.btn_group li ul{/*display:none;*/position:absolute;top:17px;z-index:20}
+.btn_group li ul{/*display:none;*/position:absolute;top:17px;left:0;z-index:20;}
 .btn_group li ul li a{font:12px/18px "Simsun";color:#595959;/*display:block;*/}
 .btn_group li.btn_pictures{width:45px;height:23px;overflow: hidden;cursor: pointer;}
 .btn_group li.btn_pictures input{position:relative;/*top:-20px;*/left:0;/**left:-54px;*/width:45px;filter:alpha(opacity=0);opacity:0;cursor: pointer;}
-.btn_group li.btn_pictures span{position:absolute;/**left:30px;padding:1px 25px;*/cursor: pointer;_width:40px;}
+.btn_group li.btn_pictures span{position:absolute;/**left:30px;padding:1px 25px;*/cursor: pointer;*width:60px;}
 .btn_group li.btn_send{margin-right:0;}
 .btn_send button{background:#ffde5c;border:1px solid #ecbeb8;width:65px;line-height:22px;text-align:center;color:#9d5201;}
 .btn_group li.btn_public{width:50px;}
@@ -127,6 +129,12 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .color_mood_options li{float:left;width:18px;height:13px;border:1px solid #fff;text-align:center;margin:0px;padding:3px 0;}
 .color_mood_options li a{width:12px;height:12px;display:block;margin:0 auto;border:1px solid #ccc;padding:0;}
 .color_mood_options li.hover{border:1px solid #9a9afb;}
+
+.mood_list{border-top:1px solid #ccc;margin:20px 20px 28px 0;}
+.mood_list li{border-bottom:1px dashed #ccc;padding:15px 0;}
+.mood_list li strong{font-weight:bold;color:#e71d37;font-size:12px;}
+.mood_list li p{margin:10px 0;line-height:16px;}
+.mood_list li span,.mood_list li span a{color:#acacac;}
 
 .btn_group i{float:left;}
 .icon-color_mood,.icon-face,.icon-pic,.icon-public,.icon-self,.icon-arrow-up{
@@ -158,8 +166,17 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .bottom_list dl.fr dt{width:185px}
 .bottom_list dl dt a{font-size:12px;color:#1db0e7;padding:0 10px;}
 .bottom_list dl dd{float:left;position:relative;margin:0 0px 10px 0;padding-right:12px;width:185px;height:200px;border-bottom:1px dashed #d8d8d8;}
-.bottom_list dl dd h4{font:bold 12px/16px "Simsun";margin:10px 0 6px;color:#565656;overflow:hidden;text-overflow:ellipsis;height:18px;}
+.bottom_list dl dd h4 a{color:#565656;display:block;overflow:hidden;text-overflow:ellipsis;height:18px;font:bold 12px/16px "Simsun";margin:10px 0 6px;}
 .bottom_list dl dd div{position:absolute;right:12px;top:0;}
 .circle_pager{width:100%;text-align:center;}
 .circle_pager a{display:inline-block;width:12px;height:12px;background:url(<%= asset_path "channel/btn_gourp_icon.png" %>) -3px -288px;}
 .circle_pager a.active{background-position:-2px -273px;}
+
+.channel_passage{height:114px;background:#f6f6f6;margin:30px 20px;}
+.channel_passage h4{padding:17px 60px 20px 25px;background:url(<%= asset_path "channel/channel_passage.gif" %>) no-repeat right center;font:30px "Microsoft Yahei";width:68px;color:#bababa;}
+.bottom_list_logo{padding:15px 0;margin:30px 0 0 20px;border:1px solid #e4e4e4;border-width:1px 0;}
+.bottom_list_logo a{margin:10px 18px 10px 0;padding:1px;display:block;float:left;}
+.channel_passage a{margin:28px 6px 20px;margin:28px 10px 20px\9;float:left;padding:10px 6px;background:#fff;border-radius:3px;font:18px "Microsoft Yahei";color:#e71d37;min-width:110px;_width:110px;}
+.channel_passage a:hover,.channel_passage a:hover span{color:#fff;background:#e71d37;text-decoration:none;}
+.channel_passage a,.channel_passage a span{display:block;text-align:center;}
+.channel_passage a span{font-size:10px;text-transform:uppercase;}
