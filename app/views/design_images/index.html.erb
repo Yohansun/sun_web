@@ -225,7 +225,7 @@
 				   <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>	
 					<%- end %>
 					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
-					<p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >免费咨询</a></p>
+					<p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
 				</div><!-- imgbase_info -->
 		</div><!-- imgbase_bin -->
 		<ul class="imgbase_list">
@@ -244,7 +244,7 @@
 					   <span class="imgbase_like"><%= image.try(:votes_count) %></span>	
 						<%- end %>
 						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
-						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >免费咨询</a></p>
+						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_asks_path(image.user.id) %>" >免费咨询</a></p>
 					</div>
 				</li>
 			<%- end %>
