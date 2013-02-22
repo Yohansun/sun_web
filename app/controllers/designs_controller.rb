@@ -57,30 +57,79 @@ class DesignsController < ApplicationController
     end
   end
 
-  def create
-    @design = current_user.designs.build(params[:design])
-
-    if @design.save
-      current_user.create_score(current_user.id, 601 , 1 , 50)
-      redirect_to upload_user_design_path(current_user, @design)
-    else
-      flash[:design_errors] = []
-      @design.errors.messages.each do |key,value|
-        case key.to_s
-          when "title"
-            flash[:design_errors] << "作品名称不能为空！"
-          when "content"
-            flash[:design_errors] << "设计理念不能为空！"
-          when "content"
-            flash[:design_errors] << "设计理念不能为空！"
-          when "reason"
-            flash[:design_errors] << "推荐理由不能为空！"
-          when "design_color"
-            flash[:design_errors] << "色系不能为空！"
-          when "area_id"
-            flash[:design_errors] << "作品所属城市不能为空！"
-        end
+  def edit_works
+    if current_user.present?
+      if params[:id]
+        @design = current_user.designs.find(params[:id])
+      else
+        @design = current_user.designs.new
       end
+    else
+      redirect_to '/'
+    end
+  end
+
+  def design_image_tags
+
+  end
+
+  def create
+    flash[:design_errors] = []
+    flag = true
+    @design = current_user.designs.build(params[:design])
+    unless params[:design][:title].present?
+      flash[:design_errors] << "作品名称不能为空！"
+      flag = false
+    end
+    unless params[:design][:property_name].present?
+      flash[:design_errors] << "楼盘名称不能为空！"
+      flag = false
+    end
+    unless params[:design][:area_id].present?
+      flash[:design_errors] << "作品所属城市不能为空！"
+      flag = false
+    end
+
+    unless params[:apartment].present?
+      flash[:design_errors] << "请选择户型！"
+      flag = false
+    end
+
+    unless params[:style].present?
+      flash[:design_errors] << "请选择风格！"
+      flag = false
+    end
+
+    unless params[:use].present?
+      flash[:design_errors] << "请选择用途！"
+      flag = false
+    end
+    if flag
+      tag_str = params[:apartment] + "," + params[:use]
+      if params[:fee].present?
+        tag_str += "," + params[:fee]
+      end
+      if params[:acreage].present?
+        tag_str += "," + params[:acreage]
+      end
+      if params[:throng].present?
+        tag_str += "," + params[:throng]
+      end
+      tag_arr = tag_str.split(',')
+      tags = params[:style] + tag_arr
+      if @design.save
+        tags.each do |tag|
+          DesignTags.create(design_id: @design.id,image_library_category_id: tag)
+        end
+        current_user.create_score(current_user.id, 601 , 1 , 50)
+        redirect_to upload_user_design_path(current_user, @design)
+      else
+        @design.errors.messages.each do |key,value|
+          flash[:design_errors] << value
+        end
+        render :action => 'new'
+      end
+    else
       render :action => 'new'
     end
   end
@@ -88,18 +137,52 @@ class DesignsController < ApplicationController
   def update
     @design = current_user.designs.find(params[:id])
     if @design.update_attributes(params[:design])
-      if params[:cover_image]
-        image = @design.design_images.find(params[:cover_image])
-        image.is_cover = true
-        image.save
+      if (params[:design] && params[:design][:design_image_ids].present?) || params[:design_image_ids].present?
+        if params[:design] && params[:design][:design_image_ids]
+          design_image_ids = params[:design][:design_image_ids]
+        else
+          design_image_ids = params[:design_image_ids]
+        end
+        
+        logger.debug("1111111")
+        logger.debug(design_image_ids)
+        design_image_ids.each do |design_image_id|
+          image = @design.design_images.find(design_image_id)
+          image.title = params[:title][design_image_id] if params[:title] && params[:title][design_image_id].present?
+          image.color1 = params[:color1][design_image_id] if params[:color1] && params[:color1][design_image_id].present?
+          image.is_cover = true if params[:cover_image] && params[:cover_image].to_i == design_image_id.to_i
+          if image.save
+            tag_arr = []
+            if params[:effect] && params[:effect][design_image_id].present?
+              tag_arr << params[:effect][design_image_id]
+            end
+            if params[:room] && params[:room][design_image_id].present?
+              tag_arr << params[:room][design_image_id]
+            end
+            if params[:color] && params[:color][design_image_id].present?
+              tag_arr << params[:color][design_image_id]
+            end
+            if params[:tonality] && params[:tonality][design_image_id].present?
+              tag_arr << params[:tonality][design_image_id]
+            end
+            if tag_arr.present?
+              tag_arr.each do |tag|
+                ImageTag.create(design_image_id: image.id, image_library_category_id: tag)
+              end
+            end
+          end
+        end
       end
-
       if @design.is_yda?
         render :js => "colors();"
       end
     else
       render :action => 'edit'
     end
+  end
+
+  def upload_success
+    
   end
 
   def destroy
