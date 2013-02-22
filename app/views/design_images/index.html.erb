@@ -4,6 +4,27 @@
 <%- content_for :tail do %>
   <%= javascript_include_tag "jquery.slider", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
   <script type="text/javascript">
+	function show_login() {
+	        o_in();
+	        $('#login_win').show();
+	        $("#design_message").hide();
+	        $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+	            err_in();
+	        });
+	    }
+    $(function(){
+    	if ($("#new_message")) {
+		    $("#new_message").click(function (event) {
+		        <% if current_user -%>
+		        return true;
+		        <% else -%>
+		        show_login();
+		        return false;
+		        <% end -%>
+		    });
+		}
+    });
+
   	$(function() {
       var options = {
         data  : data
@@ -202,9 +223,7 @@
 		<div class="imgbase_bin fl pr">
 			<%- if @images.present?%>
 			<div class="imgbase_func ft12 pa">
-				<%- if current_user %>
-				 <%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :class => "imgbase_collect", :data_s => params[:page] %>
-				<%- end %>
+				 <%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :id => "new_message", :class => "imgbase_collect", :data_s => params[:page] %>
 				<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a> -->
 				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full" %>
 			</div>
@@ -235,7 +254,7 @@
 						<span></span>
 					</a>
 					<div class="none">
-						<a href="javascript:void(0);">
+						<a href="<%= image_show_design_image_path(image) %>">
 							<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
 						</a>
 						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>

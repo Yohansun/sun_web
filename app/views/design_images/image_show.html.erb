@@ -82,6 +82,30 @@ $('#colors_con').mouseenter(
       }).mouseleave(function(){
           {$(this).children('img').show();
           $(this).children('div.desc').hide();}
+    function show_login() {
+            o_in();
+            $('#login_win').show();
+            $("#design_message").hide();
+            $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+                err_in();
+            });
+        }
+      $(function(){
+        if ($("#new_message")) {
+          $("#new_message").click(function (event) {
+              <% if current_user -%>
+              return true;
+              <% else -%>
+              show_login();
+              return false;
+              <% end -%>
+          });
+      }
+      });
+    $(function(){
+      $(".colors_recommend").bind("mouseover mouseout", function(){
+        $(".color_hover").toggle();
+        $(".color_over").toggle();
       });
     });
   </script>
@@ -96,7 +120,7 @@ $('#colors_con').mouseenter(
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
       <div class="imgbase_func ft12 pa">
-        <%=link_to "收藏", user_collects_path(@image.id, design_image_id: @image.id), method: :post,  :class => "imgbase_collect" %>
+        <%=link_to "收藏", user_collects_path(@image.id, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "imgbase_collect" %>
         <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
         <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"imgbase_fullpage" %>
       </div>
