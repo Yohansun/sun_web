@@ -28,46 +28,18 @@
       <li class="fl btn_mood">
         <i class="icon-color_mood"></i>色彩心情
         <ul class="color_mood_options clear">
-          <li class="hover"><a style="background-color:#000000" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#993300" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#333300" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#003300" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#003366" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#000080" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#333399" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#333333" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#800000" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ff6600" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#808000" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#008000" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#008080" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#0000ff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#666699" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#808080" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ff0000" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ff9900" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#99cc00" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#339966" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#33cccc" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#3366ff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#800080" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#999999" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ff00ff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ffcc00" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ffff00" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#00ff00" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#00ffff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#00ccff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#993366" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#c0c0c0" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ff99cc" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ffcc99" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ffff99" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ccffcc" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ccffff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#99ccff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#cc99ff" href="javascript:void(0)"></a></li>
-          <li><a style="background-color:#ffffff" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#0e8752" data="0e8752"  data-name="墨绿色" data-code="GA5000-1" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#8e8e8e" data="8e8e8e"  data-name="灰色"   data-code="NN7860-4" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#a49fff" data="a49fff"  data-name="紫色"   data-code="BN0006-2" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#ffad85" data="ffad85"  data-name="白色"   data-code="OW038-4" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#dde830" data="dde830"  data-name="黄色"   data-code="YA8600-1" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#f660ff" data="f660ff"  data-name="粉色"   data-code="RC0011-4" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#fb0dcb" data="fb0dcb"  data-name="紫色" data-code="VA8900-1" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#da9316" data="da9316"  data-name="黄色" data-code="NN3440-2" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#fe604b" data="fe604b"  data-name="橙色" data-code="RC8130-2" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#2e5beb" data="2e5beb" data-name="蓝色"  data-code="BC6740-2" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#29dcbc" data="29dcbc" data-name="蓝色"  data-code="GA4500-1" href="javascript:void(0)"></a></li>
+          <li><a style="background-color:#5be71d" data="5be71d" data-name="绿色"  data-code="GA4000-1" href="javascript:void(0)"></a></li>
         </ul>
       </li>
       <li class="fl exp-block-trigger" id="J_sbt">
@@ -96,7 +68,7 @@
           <%- end %>
           <span>
             <a class="fr" href="javascript:;">转发(<%= m.shares_count %>)</a>
-            <%= forward_links("#{m.content}", user_moods_url(10), m.img.url, m.id.to_s, "Mood") %>
+            <%= forward_links("#{m.content}", user_moods_url("#{current_user ? current_user.id : 10}"), m.img.url, m.id.to_s, "Mood") %>
             <%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %>
           </span>
         </li>
@@ -114,3 +86,18 @@
     <a class="next" href="#">下一页<span></span></a>
   </div> -->
 </div>
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function () {
+      $('.color_mood_options li a').click(function () {
+        var font_color = $(this).attr('data');
+        var color_code = $(this).attr('data-code');
+        var color_name = $(this).attr('data-name');
+        $(this).parents('form').find('textarea').css('color','#' + font_color);
+        $("#font_color").val(font_color);
+        $("#color_code").val(color_code);
+        $("#color_name").val(color_name);
+      });
+    });
+  </script>
+<%- end %>
