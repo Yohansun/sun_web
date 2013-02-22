@@ -4,6 +4,8 @@ class DesignImagesController < ApplicationController
     newparams = coerce(params)
     @upload = DesignImage.new(newparams[:upload])
     @upload.user_id = params[:user_id]
+    @upload.imageable_id = params[:design_id] if params[:design_id]
+    @upload.imageable_type = params[:design_type] if params[:design_type]
     if @upload.save
       flash[:notice] = "Successfully created upload."
       session[:image_id] = @upload.id

@@ -116,11 +116,11 @@
 		</div><!-- tit_tab -->
 		<div id="imgbase_forms">
       <%=form_tag image_search_index_design_images_path, :class => 'tab_content form_mini' do %>
-				<%- @categories.each_with_index do |category,index| %>
+				<%- @categories.each do |category| %>
 					<%- unless category.title == "按建筑" || category.title == "按部件" %>
-						<fieldset class="clear">
-							<label class="fl"><%= category.title %>：</label>
-							<span class="<%= 'clear' if index < 1 %>">
+						<fieldset>
+							<label><%= category.title %>：</label>
+							<span>
 								<a href="javascript:add_tag(<%= category.id %>, <%= category.id %>)" class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
 								<%- category.children.each do |cate_child| %>
 									<a href="javascript:add_tag(<%= category.id %>, <%= cate_child.id %>)" class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
@@ -130,17 +130,17 @@
 					<%- end %>
 				<%- end %>
 
-				<fieldset class="clear">
-					<label class="fl">按地域：</label>
+				<fieldset>
+					<label>按地域：</label>
 					<span>
 						<select id="province" class="level_1" style="width:70px;">省</select>
 		        <select id="city" class="level_2" style="width:70px;">市</select>
 		        <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
-		        <input type="button" value="" onclick="submit_area()" />
 					</span>
+					<input type="button" value="" onclick="submit_area()" />
 				</fieldset>
-				<fieldset class="lastfield pinyin_list clear">
-					<label class=:"fl">拼音检索：</label>
+				<fieldset class="lastfield pinyin_list">
+					<label>拼音检索：</label>
 					<a href="javascript:void(0)">A</a>|
           <a href="javascript:void(0)">B</a>|
           <a href="javascript:void(0)">C</a>|
@@ -173,10 +173,10 @@
 			<form class="tab_content form_mini none">
 				<%- @categories.each do |category| %>
 					<%- if category.title == "按部件" %>
-						<%- category.children.each_with_index do |child_lv2,index| %>
-							<fieldset class="clear">
-								<label class="fl"><%= child_lv2.title %>：</label>
-								<span class="<%= 'clear' if index < 1 %>">
+						<%- category.children.each do |child_lv2| %>
+							<fieldset>
+								<label><%= child_lv2.title %>：</label>
+								<span>
 									<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv2.id %>);" value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
 									<%- child_lv2.children.each do |child_lv3| %>
 										<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv3.id %>);" value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>

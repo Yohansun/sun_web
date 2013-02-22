@@ -1,0 +1,59 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag '2013base', '2013upload'%>
+<% end -%>
+<div class="wrapper">
+    <div class="upload2013">
+        <h1>上传作品-更多标签选项</h1>
+    </div>
+    <form class="clear">
+        <div class="upload2013 noborder" style="min-height:500px;">
+            <h3 class="upload_tag_more"><span>按部件</span></h3>
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    家具
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <% ImageLibraryCategory.where(parent_id: 211).each do |img_lib_cat| %>
+                      <label>
+                          <%=check_box_tag "furniture[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                      </label>
+                    <% end %>
+                </div>
+            </div>
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    灯具
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 212).each do |img_lib_cat| %>
+                      <label>
+                          <%=check_box_tag "lamps[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    布艺
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <% ImageLibraryCategory.where(parent_id: 213).each do |img_lib_cat| %>
+                      <label>
+                          <%=check_box_tag "fabric[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                      </label>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="upload2013 tc">
+            <button><img src="<%= asset_path 'upload2013_save.jpg'%>"></button>
+            <a href="<%= upload_user_design_path(current_user, params[:id]) %>"><img src="<%= asset_path 'upload2013_cancel.jpg'%>"></a>
+        </div>
+        <!-- <input type="button" class="upload2013_submit" /> -->
+        <!-- <p class="help-text tc cr">*红色标注为必填项</p> -->
+    </form>
+</div><!--main ends-->

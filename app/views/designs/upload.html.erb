@@ -1,13 +1,13 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag 'reg', 'uploadify' %>
+  <%= stylesheet_link_tag '2013base', '2013upload', 'uploadify' %>
   <style type="text/css">
-    #upload_photo {
-      float: right;
-    }
+    .uploadifyButton{background:transparent;}
+    .uploadify:hover .uploadifyButton{background:transparent;}
+    .uploadify{float:left;margin-right: 20px;}
   </style>
 <% end -%>
 <%- content_for :tail do %>
-<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js", '2013main' %>
 
 <script type="text/javascript" charset="utf-8">
 <%- session_key = Rails.application.config.session_options[:key] -%>
@@ -22,24 +22,30 @@ $(function() {
     cancelImage : '/uploadify/uploadify-cancel.png',
     //skipDefault : ['onSelect'],
     progressData : 'percentage',
-    buttonText : "选择文件",
+    buttonText : "<img src='<%=asset_path 're_add.jpg'%>'>",
     fileTypeDesc : '图片文件',
     fileTypeExts : '*.jpg; *.png',
     successTimeout : 6000,
     fileSizeLimit : '5MB',
-    uploadLimit : 60,
-    width : 112,
-    height : 31,
+    // uploadLimit : 60,
+    width : 184,
+    height : 46,
     multi : true,
     auto : true,
     checkExisting : false,
     transparent : true,
-    uploader : '<%= user_design_images_path(current_user) %>',
+    uploader : '<%= user_design_images_path(current_user, design_title: @design.title, design_id: @design.id, design_type: "Design") %>',
     //buttonText : '选择文件',
     onUploadSuccess : function(file, data, response) {
       var dat = eval('(' + data + ')');
       if (dat.result == 'success') {
-        $.getScript(dat.upload + "?for=design");
+        $.getScript(dat.upload + "?for=design", function(){
+        var $btn = $('.upload2013_btn');
+          if($btn.length == 0) return;
+          $btn.click(function(){
+            $(this).toggleClass('upload2013_btn_down').next().toggle();
+          });
+        });
         alert("图片上传成功");
       }else{
         alert("图片上传失败");
@@ -62,7 +68,7 @@ $(function() {
       //$("#upload_going").hide();
     }
   });
-
+  
 });
 
 function uploads_size () {
@@ -72,6 +78,10 @@ function uploads_size () {
   } else {
     $("#upload_photo").show();
   }
+}
+function remote(id) {
+  $('#design_image'+id).remove();
+  $('#img_lib_tag_'+id).remove();
 }
 </script>
 
@@ -90,42 +100,44 @@ function uploads_size () {
 </script>
 <%- end -%>
 <%= form_for([current_user, @design], :remote => true, :html => {:multipart => true}) do |f| %>
-<div class="main syslist">
-  <div class="shadow">
-    <div class="section pr">
-      <div class="sys_bar clear ft12">
-        <span class="fl ft18">上传作品</span>
-      </div><!--sys_bar ends-->
-      <div class="suc_content ft14 clear">
-        <div class="reg_list reg_width fb">上传到作品：<%= @design.title %></div>
-        <div class="work_area clear">
-          <p class="fl">您已经添加了<span class="design_images_size"><%= @design.design_images.size %></span>张图片<span></span></p>
-          <a href="#" class="re_add fr" id="upload_photo"></a>
-          <div><img src="<%= asset_path "indicator.gif" %>" style="display:none;" id="upload_going"></div>
-          <div class="upload_bin fl">
-            <div class="load_bar clear">
-              <div class="work_title fb fl">文件</div>
-              <div class="work_size tc fl">大小</div>
-              <div class="set_cover tc fl">设为封面</div>
-              <div class="work_del tc fl">移除</div>
-            </div><!--load_bar ends-->
-            <div class="load_bar load_content" id="uploads">
-              <%= render :partial => "design_images/upload", :collection => @design.design_images -%>
-            </div><!--load_content ends-->
-            <p class="load_footer ft12 fl">
-              共有<span class="design_images_size"><%= @design.design_images.size %></span>个文件 |
-              <a href="javascript:$('.upload_item').remove();uploads_size();" class="clear_all">清空列表</a>
-            </p><!--load_footer ends-->
-            <!-- <p class="load_total ft12 fr">总计：<span>432</span>KB</p> -->
-          </div><!--upload_bin ends-->
-          <p class="load_info ft12 fl">
-            您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张
-          </p><!--load_info ends-->
-        </div><!--work_area-->
-        <div class="reg_list reg_width clear"></div>
-        <a href="javascript:void(0)" class="load_submit db"></a>
-      </div><!--suc_content ends-->
-    </div><!--section ends-->
-  </div><!--shadow ends-->
-</div><!--main ends-->
+<div class="wrapper">
+  <div class="upload2013">
+    <h1>上传作品</h1>
+  </div>
+  <div class="upload2013_2 clear">
+    <h2 class="fb">上传到作品：<%= @design.title %></h2>
+    <input type="hidden" id="design_title" value="<%= @design.title %>">
+    <a href="#" class="re_add fl mr20" id="upload_photo"></a>
+    <p class="fl" style="margin-top: 35px!important;">您已经添加了<span class="design_images_size" style="color:red;"><%= @design.design_images.size %></span>张图片（还可以添加<span>58</span>张）</p>
+  </div>
+  <div class="upload2013_2 clear">
+    <div class="clear">
+        <div class="load_bar clear">
+            <div class="work_title fb fl">文件</div>
+            <div class="work_size tc fl">大小</div>
+            <div class="set_cover tc fl">设为封面</div>
+            <div class="work_del tc fl">移除</div>
+            <div class="work_del tc fl">编辑标签</div>
+        </div><!--load_bar ends-->
+        <div class="load_bar load_content" id="uploads">
+          <%= render :partial => "design_images/upload", :collection => @design.design_images -%>
+        </div><!--load_content ends-->
+        <p class="load_footer ft12 fl">
+            共有<span style="color:red" class="design_images_size"><%= @design.design_images.size %></span>个文件 | 
+            <a href="javascript:$('.upload_item').remove();uploads_size();$('.remote_image_tag').remove()" class="clear_all">清空列表</a>
+        </p><!--load_footer ends-->
+        <p class="load_total ft12 fr">总计：<span>432</span>KB</p>
+    </div><!--upload_bin ends-->
+    <p class="load_info ft12">
+        您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张
+    </p><!--load_info ends-->
+  </div><!--work_area-->
+<div id="image_tag">
+  <%= render :partial => "design_images/img_lib_tag", :collection => @design.design_images -%>
+</div>
+  <fieldset class="upload2013_2 ft14 clear">
+      <input type="image" src="<%=asset_path 'submit.jpg'%>" class="sure_submit db">
+      <!-- <p class="help-text tc cr">*红色标注为必填项</p> -->
+  </fieldset><!--suc_content ends-->
+</div><!--ends-->
 <% end -%>
