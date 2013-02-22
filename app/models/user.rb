@@ -1,4 +1,6 @@
 # encoding: utf-8
+
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
   validates_presence_of :username, :email, :if => :email_required?, :on => :create
@@ -113,15 +115,13 @@ class User < ActiveRecord::Base
   end
 
   def display_name   #a little fix in when company company_name;name;username
-    username = self.username.gsub("-sina", "").gsub("-kepulande", "") if self.username
-
     case role_name
       when /designer|user/
-        self.name.blank? ? username : self.name
+        self.name.blank? ? self.username : self.name
       when "company"
         if self.name_of_company.blank?
            if self.name.blank?
-              return username
+              return self.username
            else
               return self.name
            end

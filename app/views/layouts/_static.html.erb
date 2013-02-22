@@ -25,9 +25,10 @@
 <%- end %>-->
 
 <%#- if ((controller_name =~ /articles|color_articles|events|designer_events|other_events|gifts|softwares|channel|faqs|mix_colors/ || action_name =~ /weibo_wall/) && params[:from].present?) || action_name =~ /city/%>
+<%- if ((controller_name =~ /design_images|weekly_stars|channel/)) %>
 	<div class="static static3">
 		<a href="/master_interviews?from=top&utm_source=static_banner_master_interviews&utm_medium=banner&utm_content=master_interviews&utm_campaign=static_banner" class="static_a" target="_blank" >大师殿堂</a>
 		<a href="/weekly_stars?from=top&star_type=每周之星&utm_source=static_banner_weekly_stars&utm_medium=banner&utm_content=weekly_stars&utm_campaign=static_banner" class="static_b" target="_blank" >设计鉴赏</a>
 		<a href="/channel/access?from=top&utm_source=static_banner_access&utm_medium=banner&utm_content=access&utm_campaign=static_banner" class="static_c" target="_blank">漆光艺彩</a>
 	</div>
-<%#- end %>
+<%- end %>
