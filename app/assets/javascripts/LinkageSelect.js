@@ -148,7 +148,7 @@ function LinkageSelect(options) {
 			element[0].selectedIndex	= 0;
 			element.attr('selectedIndex' , selected_index);
 		}
-		element.width(element.width());
+		// element.width(element.width());
 	}
 
 	/**

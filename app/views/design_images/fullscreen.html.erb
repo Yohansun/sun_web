@@ -12,7 +12,7 @@
       <div class="galleryC">
         <div class="toolbar">
           <div class="toolbar_wrap">
-            <div class="exit"><%= link_to "退出全屏", image_show_design_image_path(@design_image) %></div>
+            <div class="exit"><%= link_to_function "退出全屏", "window.opener = null; window.close();" %></div>
           </div>
         </div>
         <div class="big_image">

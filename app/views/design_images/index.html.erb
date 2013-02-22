@@ -225,7 +225,7 @@
 			<div class="imgbase_func ft12 pa">
 				 <%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :id => "new_message", :class => "imgbase_collect", :data_s => params[:page] %>
 				<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a> -->
-				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full" %>
+				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full", :target => '_blank' %>
 			</div>
 				<div class="imgbase_slider slider_bin">
 					<%- @images.each do |image| %>
@@ -239,7 +239,7 @@
 						<span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
 					</a>
 					<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
-				   <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>	
+				   <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
 					<%- end %>
 					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
 					<p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
