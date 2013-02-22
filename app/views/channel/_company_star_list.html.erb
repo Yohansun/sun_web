@@ -45,7 +45,7 @@
 </div>
 <div class="list_page none">
     <dl class="fl">
-        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入1</a></dt>
+        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
         <%- @list_company_users2.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
@@ -158,8 +158,7 @@
     </dl>
 </div>
 <p class="circle_pager fl">
-  <a href="#" class="active"></a>
-  <a href="#"></a>
-  <a href="#"></a>
-  <a href="#"></a>
+<%- (1..@star_list_counter).each do |num| -%>
+  <a href="#" class="<%= "active" if num == 1 %>"></a>
+<%- end -%>
 </p>
