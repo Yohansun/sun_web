@@ -1,7 +1,7 @@
 <div class="bottom_list fl">
 <div class="list_page">
     <dl class="fl">
-        <dt>热门家装公司推荐<a href="#">申请加入</a></dt>
+        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
         <%- @list_company_users1.each_with_index do |company_user, index| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
