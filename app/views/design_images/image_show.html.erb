@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "imgbase" %>
+  <%= stylesheet_link_tag "imgbase", "style" %>
   <style type="text/css">
     .jiathis_style{display:none!important;}
     .popup_zf {
@@ -16,7 +16,7 @@
         }
         .design_listA li {overflow:visible;}
 
-        .desc ul p{max-width: 150px;*max-width: none;}
+        /*.desc ul p{max-width: 150px;*max-width: none;}*/
   </style>
 <%- end %>
 <%- content_for :tail do %>
@@ -50,7 +50,7 @@ var color_codes = {
       %>
       <%= codes.join(",").html_safe %>
   }
-  
+
 };
 
 $('#colors_con').mouseenter(
@@ -115,10 +115,10 @@ $('#colors_con').mouseenter(
 	        	<%= @image_city %>
 	        </span>
 	    </p>
-      
-	    <div class="colors_recommend clear">
+
+	    <div class="colors_recommend colorsbox clear">
 	    	<strong>推荐色</strong>
-        
+
         <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
           <img src="<%= asset_path "design/colors2.gif" %>" />
           <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
@@ -128,9 +128,9 @@ $('#colors_con').mouseenter(
             </div>
           </div>
         </div>
-	    </div> 
-      
-      
+	    </div>
+
+
 	    <p class="imginfo_big_txt">
 	      <strong>设计理念：</strong>
 	      <%= @image.content %>

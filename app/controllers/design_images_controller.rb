@@ -102,7 +102,12 @@ class DesignImagesController < ApplicationController
     @images_total = DesignImage.available.count
     @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id).title}
     if @image.area_id
-      @image_city = Area.find(@image.area_id).parent.name
+      area = Area.find(@image.area_id)
+      if area.parent_id
+        @image_city = @image_city.parent.name
+      else
+        @image_city = @image_city.name
+      end
     end
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
