@@ -118,12 +118,12 @@
                 <%- end %>
               <% end -%>
             <% else -%>
-              <%= link_to_function "上传作品", "show_login()" %>
-              <%= link_to_function "免费咨询", "show_login()" %>
+              <%= link_to_function raw("上传作品<span>upload works</span>"), "show_login()" %>
+              <%= link_to_function raw('免费咨询<span style="font-size:9px;">free consultation</span>'), "show_login()" %>
             <% end -%>
           </div>
           </div><!-- bottom_list end -->
-          
+
           <%= render :partial => "icolor_mood" %>
         </div>
       </div>

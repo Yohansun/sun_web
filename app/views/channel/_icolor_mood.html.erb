@@ -8,13 +8,13 @@
         <%- if current_user %>
           <button>发布</button>
         <%- else %>
-          <%= link_to_function "发布", "show_login()", :class =>"buttons" %>
+          <%= link_to_function raw("<button>发布</button>"), "show_login()", :class =>"buttons" %>
         <%- end %>
       </li>
       <li class="fr btn_public">
-        <span class="fl">公开</span>
+        <!-- <span class="fl">公开</span> -->
         <input type="hidden" id="is_privacy" name="mood[is_privacy]" value="true"/>
-        <i class="icon-arrow-up"></i>
+        <!-- <i class="icon-arrow-up"></i> -->
         <!-- <ul class="none">
           <li class="active per_p"><a href="javascript:void(0)" data="true"><i class="icon-public"></i>公开</a></li>
           <li  class="per_s"><a href="javascript:void(0)" data="false"><i class="icon-self"></i>私密</a></li>
