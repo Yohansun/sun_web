@@ -104,9 +104,9 @@ class DesignImagesController < ApplicationController
     if @image.area_id
       area = Area.find(@image.area_id)
       if area.parent_id
-        @image_city = @image_city.parent.name
+        @image_city = area.parent.name
       else
-        @image_city = @image_city.name
+        @image_city = area.name
       end
     end
     #推荐色
