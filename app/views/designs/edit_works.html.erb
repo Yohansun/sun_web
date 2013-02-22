@@ -31,6 +31,11 @@
       sel.bind('.level_3');
     }
   })($);
+
+  function jump(){
+    design_title = $("#design_title").val();
+    window.location = '/users/<%=current_user.id%>/designs/edit_works?id='+design_title;
+  }
   </script>
 
   <!--[if IE 6]>
@@ -47,14 +52,14 @@
     <%= form_for([current_user, @design], :calss=>"clear") do |f| %>
         <div class="upload2013">
             <div align="center"> 
-              <input id="new_works" name="new_works" type="radio" checked>新建作品
-              <input id="new_works" name="new_works" type="radio" onclick="javascript:window.location.replace('<%=edit_works_user_designs_path(current_user)%>');">选择已有作品
+              <input id="new_works" name="new_works" type="radio" onclick="javascript:window.location.replace('<%=new_user_design_path(current_user)%>');">新建作品
+              <input id="new_works" name="new_works" type="radio" checked>选择已有作品
             </div>
             
             <div class="control2013">
                 <%= f.label :title, raw("作品名称<span class='cr'>*</span>"), class: "label2013" %>
-                <%= f.text_field :title, class: "width652 fl inputs_count", "data-count"=> "50" -%>
-                <span class="help-text fl">还可以输入<b class="cr inputs_count_tip">50</b>符汉字</span>
+                <%= f.select :title, options_for_select(Design.where(user_id: current_user.id).map { |design| [design.title, design.id] },@design.id),{:prompt => '--请选择--'}, {:onchange => 'jump()'} -%>
+                <span class="help-text fl">请选择作品名称</span>
             </div>
             <div class="control2013">
                 <label class="label2013">

@@ -9,6 +9,9 @@
       <input type="radio" name="cover_image" value="<%= upload.id %>" />
   </div><!--set_cover ends-->
   <div class="work_del tc fl">
-      <a href="javascript:$('#design_image<%= upload.id %>').remove();uploads_size();" class="load_del">删除</a>
+      <a href="javascript:remote(<%= upload.id %>);uploads_size();" class="load_del">删除</a>
   </div><!--work_del ends-->
+  <div class="work_del upload_edit tc fl">
+      <a href="#<%=upload.id%>" class="load_del">编辑标签</a>
+  </div><!--upload_edit ends-->
 </div><!--file_list ends-->
