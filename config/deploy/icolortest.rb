@@ -7,7 +7,7 @@ set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
 set :branch, "xiaofei"
-
+set :keep_releases, 3
 set :deploy_to, "/home/www/rails/icolor"
 
 set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
