@@ -5,8 +5,8 @@
         <%- @list_company_users1.each_with_index do |company_user, index| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
-                    <%- if company_user.designs.last.try(:cover_img) %>
-                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- if company_user.designs.joins(:design_images).group("imageable_id").last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.joins(:design_images).group("imageable_id").last.cover_img.file.url(:list), :size =>"185x140")%>
                     <%- end %>
                 <%- end %>
                 <h4>
@@ -49,8 +49,8 @@
         <%- @list_company_users2.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
-                    <%- if company_user.designs.last.try(:cover_img) %>
-                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- if company_user.designs.joins(:design_images).group("imageable_id").last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.joins(:design_images).group("imageable_id").last.cover_img.file.url(:list), :size =>"185x140")%>
                     <%- end %>
                 <%- end %>
                 <h4>
@@ -87,8 +87,8 @@
         <%- @list_company_users3.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
-                    <%- if company_user.designs.last.try(:cover_img) %>
-                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- if company_user.designs.joins(:design_images).group("imageable_id").last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.joins(:design_images).group("imageable_id").last.cover_img.file.url(:list), :size =>"185x140")%>
                     <%- end %>
                 <%- end %>
                 <h4>
@@ -125,8 +125,8 @@
         <%- @list_company_users4.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
-                    <%- if company_user.designs.last.try(:cover_img) %>
-                        <%= image_tag(company_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
+                    <%- if company_user.designs.joins(:design_images).group("imageable_id").last.try(:cover_img) %>
+                        <%= image_tag(company_user.designs.joins(:design_images).group("imageable_id").last.cover_img.file.url(:list), :size =>"185x140")%>
                     <%- end %>
                 <%- end %>
                 <h4>
@@ -143,7 +143,7 @@
         <%- @list_design_users4.each do |design_user| %>
             <dd>
                 <%= link_to user_path(design_user) do %>
-                    <%- if design_user.designs.last.try(:cover_img) %>
+                    <%- if design_user.designs.joins(:design_images).group("imageable_id").last.try(:cover_img) %>
                         <%= image_tag(design_user.designs.last.cover_img.file.url(:list), :size =>"185x140")%>
                     <%- end %>
                 <%- end %>
