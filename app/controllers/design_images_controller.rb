@@ -28,7 +28,7 @@ class DesignImagesController < ApplicationController
 
   def index
     @image_length = DesignImage.available.count
-    @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children)
+    @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     unless params[:tags].blank?
        @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)

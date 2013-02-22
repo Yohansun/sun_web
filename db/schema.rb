@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219055959) do
+ActiveRecord::Schema.define(:version => 20130222133344) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -118,6 +118,13 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "collects", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "design_image_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "color_codes", :force => true do |t|
     t.string   "code"
     t.string   "name"
@@ -171,6 +178,19 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
 
+  create_table "cubit_fixtures", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "fixture_area"
+    t.string   "fixture_type"
+    t.integer  "area_id"
+    t.string   "house_name"
+    t.string   "pre_price"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "customer_replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -214,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
     t.boolean  "edited_color",      :default => false
     t.string   "pinyin"
     t.integer  "view_count",        :default => 0
+    t.integer  "collects_count",    :default => 0
   end
 
   add_index "design_images", ["created_at"], :name => "NewIndex5"
@@ -226,6 +247,16 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
   add_index "design_images", ["source", "created_at"], :name => "source_2"
   add_index "design_images", ["source"], :name => "source"
   add_index "design_images", ["user_id"], :name => "NewIndex1"
+
+  create_table "design_tags", :force => true do |t|
+    t.integer  "design_id"
+    t.integer  "image_library_category_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "design_tags", ["design_id"], :name => "index_design_tags_on_design_id"
+  add_index "design_tags", ["image_library_category_id"], :name => "index_design_tags_on_image_library_category_id"
 
   create_table "designs", :force => true do |t|
     t.string   "title"
@@ -246,6 +277,7 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
     t.string   "recommend_color_category1"
     t.boolean  "is_yda",                    :default => false
     t.boolean  "is_refresh",                :default => false
+    t.string   "property_name"
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
@@ -399,6 +431,7 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
     t.integer  "rgt"
     t.integer  "depth"
     t.integer  "children_count", :default => 0
+    t.integer  "position",       :default => 0
   end
 
   create_table "image_tags", :force => true do |t|
@@ -688,6 +721,25 @@ ActiveRecord::Schema.define(:version => 20130219055959) do
     t.datetime "img_updated_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "rep_replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.string   "reply_type"
+    t.integer  "source_reply_id"
+    t.string   "content"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "reply_id"
+  end
+
+  create_table "replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "reply_user_id"
+    t.text     "content"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "reply_msgs", :force => true do |t|
