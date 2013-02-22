@@ -31,7 +31,7 @@ class DesignImagesController < ApplicationController
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children)
     unless params[:tags].blank?
        @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort
-       @tag_ids.delete(-1) 
+       @tag_ids.delete(-1)
     end
     @images = DesignImage.available
 
@@ -71,7 +71,7 @@ class DesignImagesController < ApplicationController
         @images = @images.order("design_images.view_count desc")
       end
     else
-      @images = @images.order("design_images.created_at DESC, design_images.source DESC")
+      @images = @images.order("design_images.source DESC, design_images.created_at DESC")
     end
 
     @images = @images.page(params[:page]).per(11)
