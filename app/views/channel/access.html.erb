@@ -19,8 +19,9 @@
 
     <div class="tab_contents">
       <div class="tabspan" id="tabnav1">
+        <%= render :partial => "cubit_form" %>
         <%= form_tag "/channel/access", :method => "put", :class=>"channel_search clear" do %>
-            <fieldset class="linkageseclet fl">
+            <fieldset class="linkageseclet2 fl">
                 <select id="province" class="level_1" name="province_id">
                   <option>请选择省--不限</option>
                 </select>
@@ -82,19 +83,13 @@
             <%- end -%>
           </ul><!-- channel_list end -->
 
-
         <div class="pager ft12">
            <%= paginate @design_users  if @design_users%>
         </div>
-
-        <%= render :partial => "cubit_form" %>
-
+        
         <div class="channel_banner tc">
           <img src="<%= asset_path 'channel/channel_banner.jpg' %>">
         </div>
-
-
-
 
         <div class="channel_bottom clear">
           <%= render :partial => "company_star_list"%>
