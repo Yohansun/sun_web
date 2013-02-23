@@ -121,7 +121,11 @@ $('#colors_con').mouseenter(
     <div class="imginfo_show pr">
       <div class="imgbase_func ft12 pa">
         <a class="imgbase_collect" href="<%= download_design_image_path(@image.id) %>" style="background-position:-1px -125px;">免费下载</a>
-        <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "imgbase_collect" %>
+        <%- if current_user %>
+          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "imgbase_collect" %>
+        <%- else %>
+          <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "imgbase_collect" %>
+        <%- end %>
         <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
         <%= link_to "全屏观看", fullscreen_design_image_path(@image, :img => "img"), :class =>"imgbase_fullpage" %>
         <%#= link_to "免费下载", download_design_image_path(@image.id)  %>
