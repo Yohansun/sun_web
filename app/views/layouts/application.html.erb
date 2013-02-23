@@ -189,7 +189,7 @@
 <%- if VisitIp.find_by_ip(request.ip).nil? %>
   <div id="overlay" style="display:block;z-index:10000;"></div>
   <div style="position:fixed;_position:absolute;top:50px;left:50%;margin-left:-494px;_margin-left:-480px;z-index:10001">
-    <a class="js-index_popclose0223" href="javascript:;" style="position:absolute;right:56px;top:63px;display:block;width:37px;height:37px;"><img src="<%= asset_path '2013/index/index_popclose0223.jpg' %>"></a>
+    <a class="js-index_popclose0223" href="javascript:;" style="position:absolute;right:56px;top:63px;z-index:10001"><img src="<%= asset_path '2013/index/index_popclose0223.jpg' %>"></a>
     <img src="<%= asset_path '2013/index/index_pop0223.png' %>">
   </div>
 <%- end %>
@@ -362,8 +362,9 @@ $(document).ready(function () {
 <% end %>
 
 <div class="server_area">
-  <a href="javascript:void(0)" class="server fr"></a>
-
+  <%- unless controller_name == "weekly_stars" || controller_name == "design_images" || controller_name == "designs" %>
+    <a href="javascript:void(0)" class="server fr"></a>
+  <%- end %>
   <div class="server_input none">
     <%= form_tag online_qa_path, :id => "new_site_message", :remote => true do %>
         <div class="server_content ft14 tc fb">

@@ -10,8 +10,10 @@ class AsksController < ApplicationController
 	   if params[:message] && @user
 	   	 if current_user
 		     params[:message][:reply_user_id] = current_user.id
-	     end  
+	     end
+	     content = params[:message][:content]
 	     @user.replies.create(params[:message])
+	     Notifier.ask(@user,content).deliver
 	   end
 	   redirect_to user_asks_path
 	end
