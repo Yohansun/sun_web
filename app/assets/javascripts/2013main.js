@@ -74,17 +74,22 @@
 
 	//gotop
 	(function($){
-		var gotop = $('#gotop');
-		if(!gotop.length) return;
-		gotop.hide().click(function(){
-			$('html,body').animate({'scrollTop':0},300);
-			gotop.fadeOut();
-		});
-		$(window).scroll(function(){
-			var h = $(this).scrollTop();
-			h > 1000 && !gotop.is(':visible') && gotop.fadeIn();
-			h <= 1000 && gotop.is(':visible') && gotop.fadeOut();
-		});
+
+		if(!ie6){
+			var gotop = $('#gotop');
+			if(!gotop.length) return;
+			gotop.hide().click(function(){
+				$('html,body').animate({'scrollTop':0},300);
+				gotop.fadeOut();
+			});
+			$(window).scroll(function(){
+				var h = $(this).scrollTop();
+				h > 1000 && !gotop.is(':visible') && gotop.fadeIn();
+				h <= 1000 && gotop.is(':visible') && gotop.fadeOut();
+			});
+		}
+
+		
 	})($);
 
 	//spring2013
