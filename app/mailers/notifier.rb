@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# -*- encoding: utf-8 -*-
 class Notifier < ActionMailer::Base
   default from: "icolor@nipponpaint.com.cn"
 
@@ -61,6 +60,15 @@ class Notifier < ActionMailer::Base
     mail(:to => email,
          :subject => "恭喜您！您的作品【春色满屋】被评选为本周设计之星啦！",
          :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
+
+  def ask(user,content)
+    @user = user
+    @content = content
+    mail(:to => "501225658@qq.com",
+         :subject => "来自#{@user.display_name}的免费咨询",
+         :body => "用户咨询：#{@content}"
         )
   end
 end

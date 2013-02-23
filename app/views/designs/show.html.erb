@@ -144,7 +144,10 @@
           <%- end %>
           <tr>
             <th>设计师：</th>
-            <td><%= @design.user.display_name %><a href="<%= user_path(@design.user) %>">[进入个人主页]</a></td>
+            <td><%= @design.user.display_name %>
+              <a href="<%= user_path(@design.user) %>">[进入个人主页]</a>
+              <a href="<%= user_asks_path(@design.user) %>">[免费咨询]</a>
+            </td>
           </tr>
           <%- unless @design.try(:style) == "风格" %>
           <tr>

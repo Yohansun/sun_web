@@ -150,7 +150,8 @@
         <tr><th>设计师：</th>
           <td><%=  @design.author %>
             <%- unless @design.author_url.blank? %>
-                <a href="<%= @design.author_url %>">[进入个人主页]</a></td>
+                <a href="<%= @design.author_url %>">[进入个人主页]</a>
+                <a href="<%= user_asks_path(@link_design.user.id) %>">[免费咨询]</a></td>
             <%- end %>
             </tr>
     <%- end %>
