@@ -17,4 +17,12 @@ class MasterDesignsController < ApplicationController
     @master_design_next = MasterDesign.where("published_at > ?", @master_design.published_at).last
     render :layout => nil
   end
+  def download
+    target_file = MasterDesign.find(params[:id])
+      if target_file
+        send_file target_file.main_preview_img.path
+      else
+        render nothing: true, status: 404
+      end
+  end
 end

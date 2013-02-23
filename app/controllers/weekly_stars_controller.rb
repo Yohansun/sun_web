@@ -2,7 +2,16 @@
 class WeeklyStarsController < ApplicationController
 
   helper_method :star_blank?
-
+ 
+  def download
+    target_file = WeeklyStar.find(params[:id])
+      if target_file
+        send_file target_file.main_preview_img.path
+      else
+        render nothing: true, status: 404
+      end
+     
+  end
   def index
     params[:star_type] ||= "每周之星"
 

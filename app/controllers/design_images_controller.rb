@@ -23,6 +23,15 @@ class DesignImagesController < ApplicationController
     end
   end
 
+  def download
+    target_file = DesignImage.find(params[:id])
+      if target_file
+        send_file target_file.file.path
+      else
+        render nothing: true, status: 404
+      end
+  end
+
   def show
     @upload = DesignImage.find(params[:id])
   end
@@ -31,7 +40,7 @@ class DesignImagesController < ApplicationController
     @image_length = DesignImage.available.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     unless params[:tags].blank?
-       @tag_ids = params[:tags].split(",").map { |e| e.to_i }.uniq.sort
+       @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
     end
     @images = DesignImage.available

@@ -15,6 +15,7 @@ class Design < ActiveRecord::Base
   has_many :votes, :as => :voteable
   has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
   has_many :color_codes
+  has_many :collects
 
   paginates_per 8
 

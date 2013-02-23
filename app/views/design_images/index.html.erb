@@ -52,7 +52,6 @@
 				$info   = $('#imgbase_info'),
 				$full   = $('#imgbase_full'),
 				$collect= $('#imgbase_collect'),
-				$full   = $('#imgbase_full'),
 				$toggle = $('.imgbase_toggle'),
 				s = $(".imgbase_collect").attr('data_s'),
 				$form   = $('#imgbase_forms').find('form'),
@@ -70,7 +69,6 @@
 					$view.text(views);
 					$full.attr('href', '/design_images/' + full + '/fullscreen');
 					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full + '&page=' + s);
-					$full.attr('href', '/design_images/' + full + '/fullscreen');
 					$info.html(html);
 					// http://localhost:3000/users/120/collects?design_image_id=120&page=1904
 				}
@@ -225,7 +223,7 @@
 			<div class="imgbase_func ft12 pa">
 				 <%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :id => "new_message", :class => "imgbase_collect", :data_s => params[:page] %>
 				<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a> -->
-				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full", :target => '_blank' %>
+				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id, img: 'imgs', page: params[:page], imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search], tags: params[:tags], all_tags: params[:all_tags], area_id: params[:area_id], ranking_list: params[:ranking_list]), :class =>"imgbase_fullpage", :id =>"imgbase_full" %>
 			</div>
 				<div class="imgbase_slider slider_bin">
 					<%- @images.each do |image| %>

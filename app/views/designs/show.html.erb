@@ -6,12 +6,32 @@
   </style>
 <% end -%>
 <% content_for :tail do -%>
-  <%= javascript_include_tag 'galleryB.js','reply' %>
+  <%= javascript_include_tag 'galleryB.js','reply.js' %>
   <script type="text/javascript">
     $(".slide_thumb").click(function(event) {
       event.preventDefault();
       $(".big_image img").attr("src", $(event.target).parent().attr("href"));
     });
+  function show_login() {
+          o_in();
+          $('#login_win').show();
+          $("#design_message").hide();
+          $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+              err_in();
+          });
+      }
+  $(function(){
+    if ($("#new_message")) {
+        $("#new_message").click(function (event) {
+            <% if current_user -%>
+            return true;
+            <% else -%>
+            show_login();
+            return false;
+            <% end -%>
+        });
+    }
+  });
   </script>
 <% end -%>
 <div class="main page_weekstar page_weekstar_detail">
@@ -24,7 +44,7 @@
     <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group">
-    <div class="weekstart_titleB">
+    <div class="weekstart_titleB pr">
       <h1><%= @design.title %></h1>
       <div class="subtitle">
         <div class="votes">
@@ -78,7 +98,11 @@
         </div>
       </div>
       <div class="fullscreen_btn">
-        <%= link_to "全屏观看", fullscreen_user_design_path(@design.user_id, @design) %>
+        <%= link_to "全屏观看", fullscreen_user_design_path(@design.user_id, @design, :img => 'imgs') %>
+      </div>
+      <div class="collect_btn">
+        <%= link_to "收藏", user_collects_path(designs_id: @design.id,user_id: @design.user_id), method: :post, id: "new_message", :style => "margin-right:15px;"  %>
+        <%= link_to "免费下载", download_user_design_path(@design.user_id, @design) %>
       </div>
     </div>
     <div class="weekstart_detail">

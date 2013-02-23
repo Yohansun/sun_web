@@ -23,7 +23,7 @@
   <em><a href="/">首页</a><span></span></em>
 </div><!--sub_nav ends-->
   <div class="wrapper group">
-    <div class="weekstart_titleB">
+    <div class="weekstart_titleB pr">
       <h1><%= @inspiration.title %></h1>
       <div class="subtitle">
         <%= link_to votes_path(:voteable_id => @inspiration.id, :voteable_type => "Inspiration"), :remote => true, :method => 'post', :class => "votes xin_red" do %>
@@ -79,6 +79,7 @@
       <div class="fullscreen_btn">
         <%= link_to "全屏观看", fullscreen_user_inspiration_path(@inspiration.user_id, @inspiration) %>
       </div>
+      <div class="collect_btn"><%= link_to "免费下载", download_inspiration_path(@inspiration.id), :style => "margin-right:15px;" %></div>
     </div>
     <div class="weekstart_detail">
       <div class="big_image">
