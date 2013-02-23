@@ -7,6 +7,7 @@ class DesignImagesController < ApplicationController
     @upload.imageable_id = params[:design_id] if params[:design_id]
     @upload.imageable_type = params[:design_type] if params[:design_type]
     if @upload.save
+      # system("convert 1.jpg public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite dest.jpg")
       flash[:notice] = "Successfully created upload."
       session[:image_id] = @upload.id
       respond_to do |format|
@@ -76,6 +77,33 @@ class DesignImagesController < ApplicationController
 
     @images = @images.page(params[:page]).per(11)
     @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+  end
+
+  def image_tag
+    image_tags_arr = []
+
+    image_tags = ImageTag.where(design_image_id: params[:image_id], genre: 'image_tag2')
+    if image_tags.present?
+      image_tags.each do |image_tag|
+        image_tag.destroy
+      end
+    end
+
+    if params[:furniture].present?
+      image_tags_arr += params[:furniture]
+    end
+    if params[:lamps].present?
+      image_tags_arr += params[:lamps]
+    end
+    if params[:fabric].present?
+      image_tags_arr += params[:fabric]
+    end
+    if image_tags_arr.present?
+      image_tags_arr.each do |image_tag|
+        ImageTag.create(design_image_id: params[:image_id],image_library_category_id: image_tag, genre: 'image_tag2')
+      end
+    end
+    render :js => "window.close();"
   end
 
   def decoration_parts

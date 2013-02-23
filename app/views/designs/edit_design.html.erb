@@ -24,20 +24,18 @@
       var options = {
         data  : data
       }
-
+      <% area = Area.find @design.area_id %>
       var sel = new LinkageSelect(options);
-      sel.bind('.level_1');
-      sel.bind('.level_2');
-      sel.bind('.level_3');
+      sel.bind('.level_1','<%=area.parent.parent.id%>');
+      sel.bind('.level_2','<%=area.parent.id%>');
+      sel.bind('.level_3','<%=area.id%>');
     }
   })($);
-
   function jump(){
-    design_title = $("#design_title").val();
-    window.location = '/users/<%=current_user.id%>/designs/edit_works?id='+design_title;
+    design_title = $("#edit_title").val();
+    window.location = "/users/<%=current_user.id%>/designs/"+ design_title +"/edit_design"
   }
   </script>
-
   <!--[if IE 6]>
   <script src="../js/png.js"></script>
   <script>
@@ -47,19 +45,20 @@
 <% end %>
 <div class="wrapper">
     <div class="upload2013">
-        <h1>上传作品</h1>
+        <h1>编辑作品</h1>
     </div>
-    <%= form_for([current_user, @design], :calss=>"clear") do |f| %>
+    <%= form_tag update_design_user_designs_path(current_user),:class=>'clear' do %>
         <div class="upload2013">
             <div align="center"> 
               <input id="new_works" name="new_works" type="radio" onclick="javascript:window.location.replace('<%=new_user_design_path(current_user)%>');">新建作品
               <input id="new_works" name="new_works" type="radio" checked>选择已有作品
             </div>
-            
+            <input type="hidden" name="id" value="<%=@design.id%>">
             <div class="control2013">
-                <%= f.label :title, raw("作品名称<span class='cr'>*</span>"), class: "label2013" %>
-                <%= f.select :title, options_for_select(Design.where(user_id: current_user.id).map { |design| [design.title, design.id] },@design.id),{:prompt => '--请选择--'}, {:onchange => 'jump()'} -%>
-                <span class="help-text fl">请选择作品名称</span>
+                 <%= label_tag :title, raw("作品名称<span class='cr'>*</span>"), class: "label2013" %>
+                <%= text_field_tag 'design[title]',@design.title, class: "width652 fl inputs_count", "data-count"=> "50" -%>
+                <span class="help-text fl">还可以输入<b class="cr inputs_count_tip">50</b>符汉字</span>
+                 <%= select_tag "edit_title", options_for_select(Design.order('created_at desc').where(user_id: current_user.id).map { |design| [design.title, design.id] },@design.id),:prompt => '--请选择--', :onchange => 'jump()' -%>
             </div>
             <div class="control2013">
                 <label class="label2013">
@@ -70,7 +69,14 @@
                     <div class="clear">
                       <% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
                         <label>
+                          <% @design_tags.each do |design_tag| %>
+                            <% if design_tag.to_i == img_lib_cat.id %>
+                              <%=radio_button_tag "apartment",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                            <% end %>
+                          <% end %>
+                          <% unless @design_tags.include?(img_lib_cat.id) %>
                             <%=radio_button_tag "apartment",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% end %>
                         </label>
                       <% end %>
                     </div>
@@ -85,7 +91,14 @@
                     <div class="clear">
                       <% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
                         <label>
-                          <%= check_box_tag "style[]", img_lib_cat.id %><%=img_lib_cat.title%>
+                          <% @design_tags.each do |design_tag| %>
+                            <% if design_tag.to_i == img_lib_cat.id %>
+                              <%= check_box_tag "style[]", img_lib_cat.id, true%><%=img_lib_cat.title%>
+                            <% end %>
+                          <% end %>
+                          <% unless @design_tags.include?(img_lib_cat.id) %>
+                            <%=check_box_tag "style[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% end %>
                         </label>
                       <% end %>
                     </div>
@@ -100,7 +113,14 @@
                     <div class="clear">
                       <% ImageLibraryCategory.where(parent_id: 122).each do |img_lib_cat| %>
                         <label>
-                           <%=radio_button_tag "use",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% @design_tags.each do |design_tag| %>
+                            <% if design_tag.to_i == img_lib_cat.id %>
+                              <%=radio_button_tag "use",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                            <% end %>
+                          <% end %>
+                          <% unless @design_tags.include?(img_lib_cat.id) %>
+                            <%=radio_button_tag "use",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% end %>
                         </label>
                       <% end %>
                     </div>
@@ -118,15 +138,15 @@
                 </div>
             </div>
             <div class="control2013">
-                <%= f.label :property_name, raw("楼盘名称<span class='cr'>*</span>"), class: "label2013" %>
-                <%= f.text_field :property_name, class: "width335 fl" -%>
+                <%= label_tag :property_name, raw("楼盘名称<span class='cr'>*</span>"), class: "label2013" %>
+                <%= text_field_tag 'design[property_name]', @design.property_name, class: "width335 fl" -%>
             </div>
         </div>
         <div class="upload2013 noborder">
             <div class="control2013">
-              <%= f.label :content, "设计理念", class: "label2013" %>
+              <%= label_tag :content, "设计理念", class: "label2013" %>
                 <div class="fl">
-                    <%= f.text_area :content, class: "inputs_count", "data-count"=>"2000" -%>
+                    <%= text_area_tag 'design[content]', @design.content, class: "inputs_count", "data-count"=>"2000" -%>
                     <p class="help-text">还可以输入<b class="cr inputs_count_tip">2000</b> 字符/汉字</p>
                 </div>
             </div>
@@ -137,7 +157,14 @@
                     <div class="clear">
                       <% ImageLibraryCategory.where(parent_id: 19).each do |img_lib_cat| %>
                         <label>
-                           <%=radio_button_tag "fee",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% @design_tags.each do |design_tag| %>
+                            <% if design_tag.to_i == img_lib_cat.id %>
+                              <%=radio_button_tag "fee",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                            <% end %>
+                          <% end %>
+                          <% unless @design_tags.include?(img_lib_cat.id) %>
+                            <%=radio_button_tag "fee",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% end %>
                         </label>
                       <% end %>
                     </div>
@@ -150,7 +177,14 @@
                     <div class="clear">
                       <% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
                         <label>
-                           <%=radio_button_tag "acreage",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% @design_tags.each do |design_tag| %>
+                            <% if design_tag.to_i == img_lib_cat.id %>
+                              <%=radio_button_tag "acreage",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                            <% end %>
+                          <% end %>
+                          <% unless @design_tags.include?(img_lib_cat.id) %>
+                            <%=radio_button_tag "acreage",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% end %>
                         </label>
                       <% end %>
                     </div>
@@ -163,7 +197,14 @@
                     <div class="clear">
                       <% ImageLibraryCategory.where(parent_id: 127).each do |img_lib_cat| %>
                         <label>
-                           <%=radio_button_tag "throng",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% @design_tags.each do |design_tag| %>
+                            <% if design_tag.to_i == img_lib_cat.id %>
+                              <%=radio_button_tag "throng",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                            <% end %>
+                          <% end %>
+                          <% unless @design_tags.include?(img_lib_cat.id) %>
+                            <%=radio_button_tag "throng",img_lib_cat.id%><%=img_lib_cat.title%>
+                          <% end %>
                         </label>
                       <% end %>
                     </div>

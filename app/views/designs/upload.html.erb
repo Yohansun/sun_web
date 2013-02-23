@@ -82,6 +82,8 @@ function uploads_size () {
 function remote(id) {
   $('#design_image'+id).remove();
   $('#img_lib_tag_'+id).remove();
+  image_id = $('#delete_image_id').val();
+  $('#delete_image_id').val(image_id + ',' + id);
 }
 </script>
 
@@ -135,8 +137,10 @@ function remote(id) {
 <div id="image_tag">
   <%= render :partial => "design_images/img_lib_tag", :collection => @design.design_images -%>
 </div>
+
+  <input type="hidden" id="delete_image_id" name="delete_image_id" >
   <fieldset class="upload2013_2 ft14 clear">
-      <input type="image" src="<%=asset_path 'submit.jpg'%>" class="sure_submit db">
+      <input type="image" src="<%=asset_path 'submit.jpg'%>" class="sure_submit db load_submit">
       <!-- <p class="help-text tc cr">*红色标注为必填项</p> -->
   </fieldset><!--suc_content ends-->
 </div><!--ends-->

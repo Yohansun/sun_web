@@ -208,7 +208,13 @@ Icolor::Application.routes.draw do
       member do
         get :upload
         get :fullscreen
+        get :edit_design
+        get :design_image_tags
         match :design_update
+      end
+      collection do 
+        post :update_design
+        get :upload_success
       end
     end
     resources :design_images
@@ -228,6 +234,7 @@ Icolor::Application.routes.draw do
     collection do
       get :decoration_parts
       get :image_search_index
+      post :image_tag
     end
     member do
       get :image_show
