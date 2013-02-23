@@ -22,14 +22,14 @@
         <%= render :partial => "cubit_form" %>
         <%= form_tag "/channel/access", :method => "put", :class=>"channel_search clear" do %>
             <fieldset class="linkageseclet2 fl">
-                <select id="province" class="level_1" name="province_id">
-                  <option>请选择省--不限</option>
+                <select id="province" class="level_1" style="width:134px;" name="province_id">
+                  <!-- <option>请选择省--不限</option> -->
                 </select>
-                <select id="city" class="level_2" name="city_id">
-                  <option>请选择市--不限</option>
+                <select id="city" class="level_2" style="width:134px;" name="city_id">
+                  <!-- <option>请选择市--不限</option> -->
                 </select>
-                <select id="country" class="level_3" name="area_id">
-                  <option>请选择区--不限</option>
+                <select id="country" class="level_3" style="width:134px;" name="area_id">
+                  <!-- <option>请选择区--不限</option> -->
                 </select>
                 <select name="user_role">
                   <option value="">请选择身份</option>
@@ -144,7 +144,6 @@
         $(this).addClass('active');
         $(this).parent().siblings('div.list_page').eq(a_index).siblings('.list_page').hide();
         $(this).parent().siblings('div.list_page').eq(a_index).show();
-        console.log(a_index)
       });
     });
     // $(function() {
