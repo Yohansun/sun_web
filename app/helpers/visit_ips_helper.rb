@@ -1,0 +1,2 @@
+module VisitIpsHelper
+end

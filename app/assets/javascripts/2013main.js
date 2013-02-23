@@ -165,6 +165,12 @@
 		      sel.bind('.linkageseclet2 .level_3');
 		}
 	})($);
+
+	(function($){
+	  $('.channel_list a').click(function(){
+	   $(this).parents('li').children('h3').children('a').css('color','#ff0000')
+	  })
+	})($);
 	
   //color mood
   (function($){
