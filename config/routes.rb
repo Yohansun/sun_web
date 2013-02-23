@@ -80,6 +80,7 @@ Icolor::Application.routes.draw do
   match "/master_designs" => "master_designs#index"
   match "/master_designs/:id" => "master_designs#show"
   match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
+  match "/master_designs/:id/download" => "master_designs#download"
 
   #行业资讯
   match "/color_articles" => "color_articles#index"
@@ -98,7 +99,12 @@ Icolor::Application.routes.draw do
   match "/contact" => "contact#index"
 
   #设计鉴赏
-  resources :weekly_stars, :only => [:index, :show]
+  # resources :weekly_stars, :only => [:index, :show]
+  resources :weekly_stars do
+    member do
+      get :download
+    end
+  end
   match "/weekly_stars/:id/fullscreen" => "weekly_stars#fullscreen"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
@@ -108,7 +114,11 @@ Icolor::Application.routes.draw do
   match "/my_show" => "my_show#index"
   match "/my_show/autocomplete_username" => "my_show#autocomplete_username"
 
-  resources :inspirations
+  resources :inspirations do
+    member do
+      get :download
+    end
+  end
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
   resources :reply_msgs
@@ -116,6 +126,8 @@ Icolor::Application.routes.draw do
   match "/color_designs" => "color_designs#index"
   match "/color_designs/:id" => "color_designs#show"
   match "/color_designs/:id/fullscreen" => "color_designs#fullscreen"
+  match "/color_designs/:id/download" => "color_designs#download"
+
 
   #精彩活动
   match "/events" => "events#index"
@@ -211,6 +223,7 @@ Icolor::Application.routes.draw do
         get :edit_design
         get :design_image_tags
         match :design_update
+        get :download
       end
       collection do 
         post :update_design
@@ -240,6 +253,7 @@ Icolor::Application.routes.draw do
       get :image_show
       get :more_comment
       get :fullscreen
+      get :download
     end
   end
   resources :collect do

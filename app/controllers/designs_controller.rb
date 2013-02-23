@@ -4,6 +4,19 @@ class DesignsController < ApplicationController
   before_filter :find_user
   before_filter :find_design, :only => [:upload, :edit]
 
+  def download
+    target_file = DesignImage.where(:imageable_id => params[:id])
+    target_file.each do |t|
+      system("zip public/design#{params[:id]}.zip -j #{t.file.path} ")
+    end
+    if target_file
+      send_file "public/design#{params[:id]}.zip"
+      # system("rm public/design#{params[:id]}.zip")
+    else
+      redirect_to user_design_path(@user.id, id: params[:id])
+    end
+  end
+
   def index
     sort_input = MagicSetting.recommend_designs
     if @user

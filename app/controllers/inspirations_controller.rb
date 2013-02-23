@@ -23,6 +23,15 @@ class InspirationsController < ApplicationController
     end
   end
 
+  def download
+    target_file = Inspiration.find(params[:id])
+    if target_file
+      send_file target_file.design_images.first.file.path
+    else
+      render nothing: true, status: 404
+    end
+  end
+
   def fullscreen
     @inspiration = @user.inspirations.find(params[:id])
     @inspiration_next = Inspiration.where("id > ?", params[:id]).first

@@ -37,4 +37,13 @@ class ColorDesignsController < ApplicationController
     render :layout => nil
   end
 
+  def download
+    target_file = ColorDesign.find(params[:id])
+      if target_file
+        send_file target_file.show_preview_img.path
+      else
+        render nothing: true, status: 404
+      end
+  end
+
 end
