@@ -56,13 +56,13 @@
               <li style="height:205px">
                   <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
                     <% if design %>
-                      <%= link_to user_path(user) do %>
+                      <%= link_to user_path(user), :target => "_blank" do %>
                         <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="205" height="155">
                       <% end %>
                     <% else %>
                       <img src="<%= asset_path '2013/default_image.png' %>" class="fl" width="208px" height="155">
                     <% end %>
-                    <%= link_to user_path(user) do %>
+                    <%= link_to user_path(user), :target => "_blank" do %>
                       <%- if user.avatar %>
                           <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fr" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
                       <%- else %>
@@ -70,13 +70,15 @@
                       <%- end %>
                     <% end %>
                   </div>
-                  <%- if design %>
-                    <%= link_to user_path(user) do %>
-                      <h3><%=design.title if design%></h3>
+                  <h3>
+                    <%- if design %>
+                      <%= link_to user_path(user), :target => "_blank" do %>
+                        <%=design.title if design%>
+                      <%- end %>
+                    <%- else %>
+                      <h3>未上传作品</h3>
                     <%- end %>
-                  <%- else %>
-                    <h3>未上传作品</h3>
-                  <%- end %>
+                  </h3>
                   <p><%=user.display_name ? user.display_name : user.name%> (<%=user.area.name if user.area%>)</p>
                   <p><span><%=design_count.length%></span> 作品 / <span><%=user.inspirations.count%></span> 灵感秀</p>
               </li>
