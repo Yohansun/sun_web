@@ -7,8 +7,8 @@ class Design < ActiveRecord::Base
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
     :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color,
-    :recommend_color_category1, :is_yda, :is_refresh
-  validates_presence_of :title, :content, :area_id
+    :recommend_color_category1, :is_yda, :is_refresh, :property_name
+  validates_presence_of :title, :area_id, :property_name
 
   belongs_to :user
   has_many :comments, :as => :commentable
