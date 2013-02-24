@@ -155,15 +155,6 @@
 		      sel.bind('.linkageseclet1 .level_2');
 		      sel.bind('.linkageseclet1 .level_3');
 		  }
-		  if(typeof data != 'undefined'){
-		      var options2    = {
-		          data    : data // data变量数据从location.js得来
-		      }
-		      var sel = new LinkageSelect(options2);
-		      sel.bind('.linkageseclet2 .level_1','1');
-		      sel.bind('.linkageseclet2 .level_2');
-		      sel.bind('.linkageseclet2 .level_3');
-		}
 	})($);
 
 	(function($){

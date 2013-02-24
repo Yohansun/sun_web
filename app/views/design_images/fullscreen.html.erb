@@ -12,13 +12,7 @@
       <div class="galleryC">
         <div class="toolbar">
           <div class="toolbar_wrap">
-            <%- if params[:img] == "imgs" %>
-               <div class="exit"><%= link_to "退出全屏", user_design_images_path(@design_image, page: params[:page], imageable_type: params[:imageable_type], pinyin: params[:pinyin], search: params[:search], tags: params[:tags], all_tags: params[:all_tags], area_id: params[:area_id], ranking_list: params[:ranking_list]) %></div>
-            <%- elsif params[:img] == "img" %>
-               <div class="exit"><%= link_to "退出全屏", image_show_design_image_path(@design_image) %></div>
-            <%- else %>
-               <div class="exit"><%= link_to "退出全屏", user_design_images_path(@design_image, page: params[:page], imageable_type: params[:imageable_type],pinyin: params[:pinyin], search: params[:search], tags: params[:tags], all_tags: params[:all_tags], area_id: params[:area_id], ranking_list: params[:ranking_list]) %></div>
-            <%- end %>
+            <div class="exit"><%= link_to_function "退出全屏", "window.opener = null; window.close();" %></div>
           </div>
         </div>
         <div class="big_image">

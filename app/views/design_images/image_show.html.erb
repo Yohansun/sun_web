@@ -127,8 +127,7 @@ $('#colors_con').mouseenter(
           <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "imgbase_collect" %>
         <%- end %>
         <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
-        <%= link_to "全屏观看", fullscreen_design_image_path(@image, :img => "img"), :class =>"imgbase_fullpage" %>
-        <%#= link_to "免费下载", download_design_image_path(@image.id)  %>
+        <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"imgbase_fullpage", :target => "_blank" %>
       </div>
 	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
