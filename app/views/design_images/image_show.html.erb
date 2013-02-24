@@ -21,94 +21,90 @@
   </style>
 <%- end %>
 <%- content_for :tail do %>
-  <script type="text/javascript">
-    // $(function(){
-    //   $(".colors_recommend").bind("mouseover mouseout", function(){
-    //     $(".color_hover").toggle();
-    //     $(".color_over").toggle();
-    //   });
-    // });
+<script type="text/javascript">
 $(function() {
-Object.size = function(obj) {
+  Object.size = function(obj) {
   var size = 0, key;
   for (key in obj) {
-      if (obj.hasOwnProperty(key)) size++;
+    if (obj.hasOwnProperty(key)) size++;
   }
   return size;
-};
+  };
+});
 
 var color_codes = {
   <%- color1, color2, color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3) %>
 
   '<%= @image.id %>': {
-      <%-
-      codes = []
-      [color1, color2, color3].each_with_index do |color, index|
-          unless color.blank?
-              codes << "'#{index+1}': { 'rgb': '#{color.rgb}', 'code': '#{color.code}', 'name': '#{color.name}', 'category': '#{@image.color1_name}'}"
-          end
-      end
-      %>
-      <%= codes.join(",").html_safe %>
+    <%-
+    codes = []
+    [color1, color2, color3].each_with_index do |color, index|
+        unless color.blank?
+            codes << "'#{index+1}': { 'rgb': '#{color.rgb}', 'code': '#{color.code}', 'name': '#{color.name}', 'category': '#{@image.color1_name}'}"
+        end
+    end
+    %>
+    <%= codes.join(",").html_safe %>
   }
-
 };
 
-$('#colors_con').mouseenter(
-      function() {
-          var id = $("#gallery_caption").text() * 1;
-          if (id == 0) {
-              id = <%= @image.try(:id) %>
-          };
+$('#colors_con').mouseenter(function() {
+  var id = $("#gallery_caption").text() * 1;
+  if (id == 0) {
+      id = <%= @image.try(:id) %>
+  }
 
-          code = color_codes[id];
-
-          // Get the size of an object
-          var size = Object.size(code);
-          var $ul = $(this).find('ul');
-          var tmp = '';
-          for (i = 1; i <= size; i++) {
-              if (code[i].rgb == '') {
-                  tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
-              } else {
-                  tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
-              }
-          };
-
-          $ul.html(tmp);
-          $(this).children('img').hide();
-          $(this).children('div.desc').show();
-          $(".list ul li:last").addClass("noborder");
-      }).mouseleave(function(){
-          {$(this).children('img').show();
-          $(this).children('div.desc').hide();}
-    function show_login() {
-            o_in();
-            $('#login_win').show();
-            $("#design_message").hide();
-            $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
-                err_in();
-            });
-        }
-      $(function(){
-        if ($("#new_message")) {
-          $("#new_message").click(function (event) {
-              <% if current_user -%>
-              return true;
-              <% else -%>
-              show_login();
-              return false;
-              <% end -%>
-          });
+  code = color_codes[id];
+  // Get the size of an object
+  var size = Object.size(code);
+  var $ul = $(this).find('ul');
+  var tmp = '';
+  for (i = 1; i <= size; i++) {
+      if (code[i].rgb == '') {
+          tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
+      } else {
+          tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
       }
-      });
-    $(function(){
-      $(".colors_recommend").bind("mouseover mouseout", function(){
-        $(".color_hover").toggle();
-        $(".color_over").toggle();
-      });
+  };
+
+  $ul.html(tmp);
+  $(this).children('img').hide();
+  $(this).children('div.desc').show();
+  $(".list ul li:last").addClass("noborder");
+}).mouseleave(function(){
+  $(this).children('img').show();
+  $(this).children('div.desc').hide();
+});
+
+$(function(){
+  if ($("#new_message")) {
+    $("#new_message").click(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
     });
-  </script>
+  }
+});
+
+function show_login() {
+  o_in();
+  $('#login_win').show();
+  $("#design_message").hide();
+  $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+      err_in();
+  });
+}
+
+$(function(){
+  $(".colors_recommend").bind("mouseover mouseout", function(){
+    $(".color_hover").toggle();
+    $(".color_over").toggle();
+  });
+});
+</script>
 <%- end %>
 <div class="imgbase border_bline">
 	<div class="imgbase_title">
