@@ -22,13 +22,10 @@
         <%= form_tag "/channel/access", :method => "put", :class=>"channel_search clear" do %>
             <fieldset class="linkageseclet2 fl">
                 <select id="province" class="level_1" style="width:134px;" name="province_id">
-                  <!-- <option>请选择省--不限</option> -->
                 </select>
                 <select id="city" class="level_2" style="width:134px;" name="city_id">
-                  <!-- <option>请选择市--不限</option> -->
                 </select>
                 <select id="country" class="level_3" style="width:134px;" name="area_id">
-                  <!-- <option>请选择区--不限</option> -->
                 </select>
                 <select name="user_role">
                   <option value="">请选择身份</option>
@@ -103,7 +100,6 @@
           </div>
           <div class="channel_passage">
             <h4 class="fl">快速通道</h4>
-            <a href="/users/sign_up">注册<span>register</span></a>
             <% if current_user -%>
               <% unless current_user.common_user? %>
                 <%= link_to new_user_design_path(current_user) do %>
@@ -114,6 +110,7 @@
                 <%- end %>
               <% end -%>
             <% else -%>
+              <a href="/users/sign_up">注册<span>register</span></a>
               <%= link_to_function raw("上传作品<span>upload works</span>"), "show_login()" %>
               <%= link_to_function raw('免费咨询<span style="font-size:9px;">free consultation</span>'), "show_login()" %>
             <% end -%>
@@ -147,9 +144,6 @@
         $(this).parent().siblings('div.list_page').eq(a_index).show();
       });
     });
-    // $(function() {
-    //   $('#inspiration').masonry();
-    // });
     $('.deshed_line a.sure_submit').bind("click",function(){
       $('form.submit_form').submit();
     });

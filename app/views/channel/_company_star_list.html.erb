@@ -1,7 +1,11 @@
 <div class="bottom_list fl">
 <div class="list_page">
     <dl class="fl">
-        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门家装公司推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_company_users1.each_with_index do |company_user, index| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
@@ -22,7 +26,11 @@
         <%- end %>
     </dl>
     <dl class="fr">
-        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门设计师推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_design_users1.each_with_index do |design_user, index| %>
             <dd>
                 <%= link_to user_path(design_user) do %>
@@ -45,7 +53,11 @@
 </div>
 <div class="list_page none">
     <dl class="fl">
-        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门家装公司推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_company_users2.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
@@ -63,7 +75,11 @@
         <%- end %>
     </dl>
     <dl class="fr">
-        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门设计师推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_design_users2.each do |design_user| %>
             <dd>
                 <%= link_to user_path(design_user) do %>
@@ -83,7 +99,11 @@
 </div>
 <div class="list_page none">
     <dl class="fl">
-        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门家装公司推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_company_users3.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
@@ -101,7 +121,11 @@
         <%- end %>
     </dl>
     <dl class="fr">
-        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门设计师推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_design_users3.each do |design_user| %>
             <dd>
                 <%= link_to user_path(design_user) do %>
@@ -121,7 +145,11 @@
 </div>
 <div class="list_page none">
     <dl class="fl">
-        <dt>热门家装公司推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门家装公司推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_company_users4.each do |company_user| %>
             <dd>
                 <%= link_to user_path(company_user) do %>
@@ -139,7 +167,11 @@
         <%- end %>
     </dl>
     <dl class="fr">
-        <dt>热门设计师推荐<a href="/users/sign_up">申请加入</a></dt>
+        <dt>热门设计师推荐
+            <%- unless current_user %>
+            <a href="/users/sign_up">申请加入</a>
+            <%- end %>
+        </dt>
         <%- @list_design_users4.each do |design_user| %>
             <dd>
                 <%= link_to user_path(design_user) do %>
