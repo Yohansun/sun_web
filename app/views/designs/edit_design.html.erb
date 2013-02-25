@@ -33,7 +33,11 @@
   })($);
   function jump(){
     design_title = $("#edit_title").val();
-    window.location = "/users/<%=current_user.id%>/designs/"+ design_title +"/edit_design"
+    if(design_title == ''){
+      window.location = "/users/<%=current_user.id%>/designs/new";
+    }else{
+      window.location = "/users/<%=current_user.id%>/designs/"+ design_title +"/edit_design";
+    }
   }
   </script>
   <!--[if IE 6]>
@@ -70,7 +74,7 @@
                       <% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
                         <label>
                           <% @design_tags.each do |design_tag| %>
-                            <% if design_tag.to_i == img_lib_cat.id %>
+                            <% if design_tag == img_lib_cat.id %>
                               <%=radio_button_tag "apartment",img_lib_cat.id, true%><%=img_lib_cat.title%>
                             <% end %>
                           <% end %>
@@ -92,7 +96,7 @@
                       <% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
                         <label>
                           <% @design_tags.each do |design_tag| %>
-                            <% if design_tag.to_i == img_lib_cat.id %>
+                            <% if design_tag == img_lib_cat.id %>
                               <%= check_box_tag "style[]", img_lib_cat.id, true%><%=img_lib_cat.title%>
                             <% end %>
                           <% end %>
@@ -114,7 +118,7 @@
                       <% ImageLibraryCategory.where(parent_id: 122).each do |img_lib_cat| %>
                         <label>
                           <% @design_tags.each do |design_tag| %>
-                            <% if design_tag.to_i == img_lib_cat.id %>
+                            <% if design_tag == img_lib_cat.id %>
                               <%=radio_button_tag "use",img_lib_cat.id, true%><%=img_lib_cat.title%>
                             <% end %>
                           <% end %>
@@ -158,7 +162,7 @@
                       <% ImageLibraryCategory.where(parent_id: 19).each do |img_lib_cat| %>
                         <label>
                           <% @design_tags.each do |design_tag| %>
-                            <% if design_tag.to_i == img_lib_cat.id %>
+                            <% if design_tag == img_lib_cat.id %>
                               <%=radio_button_tag "fee",img_lib_cat.id, true%><%=img_lib_cat.title%>
                             <% end %>
                           <% end %>
@@ -178,7 +182,7 @@
                       <% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
                         <label>
                           <% @design_tags.each do |design_tag| %>
-                            <% if design_tag.to_i == img_lib_cat.id %>
+                            <% if design_tag == img_lib_cat.id %>
                               <%=radio_button_tag "acreage",img_lib_cat.id,true%><%=img_lib_cat.title%>
                             <% end %>
                           <% end %>
@@ -198,7 +202,7 @@
                       <% ImageLibraryCategory.where(parent_id: 127).each do |img_lib_cat| %>
                         <label>
                           <% @design_tags.each do |design_tag| %>
-                            <% if design_tag.to_i == img_lib_cat.id %>
+                            <% if design_tag == img_lib_cat.id %>
                               <%=radio_button_tag "throng",img_lib_cat.id,true%><%=img_lib_cat.title%>
                             <% end %>
                           <% end %>

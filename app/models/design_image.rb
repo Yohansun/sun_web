@@ -28,8 +28,14 @@ class DesignImage < ActiveRecord::Base
         :inside => "188>", :outside => "202>", :home_page => "90>",
         :home_design_image1 => "380x365#", :home_design_image2 => "380x170#", :home_design_image3 => "180x170#",
         :design_image_big => "686x496#", :design_image_list => "224x162#",
-        :slide => "900>", :slide_thumb => "205x138#",
+        :slide => "900>",
+        :slide_thumb => "205x138#",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#"},
+    :convert_options => {
+      :slide => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
+      :design_image_big => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
+      :original => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite "
+      },
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

@@ -7,7 +7,6 @@ class DesignImagesController < ApplicationController
     @upload.imageable_id = params[:design_id] if params[:design_id]
     @upload.imageable_type = params[:design_type] if params[:design_type]
     if @upload.save
-      # system("convert 1.jpg public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite dest.jpg")
       flash[:notice] = "Successfully created upload."
       session[:image_id] = @upload.id
       respond_to do |format|
@@ -110,6 +109,39 @@ class DesignImagesController < ApplicationController
     end
     if params[:fabric].present?
       image_tags_arr += params[:fabric]
+    end
+    if params[:metope].present?
+      image_tags_arr += params[:metope]
+    end
+    if params[:accessories].present?
+      image_tags_arr += params[:accessories]
+    end
+    if params[:appliances].present?
+      image_tags_arr += params[:appliances]
+    end
+    if params[:cupboard].present?
+      image_tags_arr += params[:cupboard]
+    end
+    if params[:baths].present?
+      image_tags_arr += params[:baths]
+    end
+    if params[:ceramic_tile].present?
+      image_tags_arr += params[:ceramic_tile]
+    end
+    if params[:floor].present?
+      image_tags_arr += params[:floor]
+    end
+    if params[:articles].present?
+      image_tags_arr += params[:articles]
+    end
+    if params[:doors_windows].present?
+      image_tags_arr += params[:doors_windows]
+    end
+    if params[:digital].present?
+      image_tags_arr += params[:digital]
+    end
+    if params[:other].present?
+      image_tags_arr += params[:other]
     end
     if image_tags_arr.present?
       image_tags_arr.each do |image_tag|
