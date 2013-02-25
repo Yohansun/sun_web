@@ -122,7 +122,7 @@ $(function(){
         <%- else %>
           <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "imgbase_collect" %>
         <%- end %>
-        <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a>
+        <!-- <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a> -->
         <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"imgbase_fullpage", :target => "_blank" %>
       </div>
 	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
@@ -229,7 +229,7 @@ $(function(){
         <a class="jiathis_button_renren"></a>
         <a class="jiathis_button_tsina"></a>
         <a class="jiathis_button_tqq"></a>
-        <a class="jiathis_counter_style"></a>
+        <!-- <a class="jiathis_counter_style"></a> -->
         </div>
         <%
           role = "#{@image.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @image.user.role_id != 3
@@ -300,7 +300,7 @@ $(function(){
       	</dl>
       </div><!-- imgs_in_list -->
       <p class="imgs_banner">
-      	<img src="<%= asset_path "imgbase/imgs_banner.jpg" %>">
+      	<img src="<%= asset_path '2013/index/2013yda.jpg' %>">
       </p>
     </div><!--author_show-->
 	</div><!--imgbase_main-->
