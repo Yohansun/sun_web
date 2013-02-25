@@ -174,5 +174,5 @@ end
 #         img.update_attribute(:sorts, 2) if img.sorts != 1
 #       end
 #     end
+#   end
 # end
-end
