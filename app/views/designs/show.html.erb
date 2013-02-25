@@ -174,7 +174,7 @@
           <%- unless @design.area_id.blank? %>
           <tr>
             <th>作品所在城市：</th>
-            <td><%= Area.find(@design.try(:area_id)).try(:name) %></td>
+            <td><%= Area.find(@design.try(:area_id)).try(:parent).try(:name) %></td>
           </tr>
           <%- end %>
           <%- unless @design.try(:content).blank? %>
