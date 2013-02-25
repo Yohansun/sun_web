@@ -302,9 +302,10 @@
                   <ul class="group" style="overflow:hidden;">
                     <%- @image_colors[index].each do |color| %>
                       <li>
-                        <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
-                          <h5><%= color.name %></h5>
-                          <p><%= color.code %></p>
+                        <%- background = color.rgb.blank? ? "background:url(/assets/color_code/' + color.code + '.png)" : "background-color: rgb(#{color.rgb})" -%>
+                        <div class="colorblock" style="<%= background %>">
+                          <h5><%= image.color1_name %></h5>
+                          <p>立邦(<%= color.code %>)<%= color.name %></p>
                         </div>
                       </li>
                     <%- end %>
