@@ -42,54 +42,22 @@
 	//grid
 	(function($){
 		var grid  = $('#grid'),
-	    gotop = $('#gotop'),
-	    $win  = $(window);
+	    	$win  = $(window);
 		if(!grid.length) return;
 		var check = function(){
 			var w = $win.width();
 			grid['css'](
 				w <= 1350 ? {
-          left : 0,
-          marginLeft : 0
-        } : {
-            left : '50%',
-            marginLeft : '-673px'
-        }
-      );
-      gotop['css'](
-          w <= 1350 ? {
-          left : 'auto',
-          right : 0,
-          marginLeft : 0
-        } : {
-          left : '50%',
-          right : 'auto',
-          marginLeft : '590px'
-	      }
-		 );
-		}
+          			left : 0,
+          			marginLeft : 0
+        		} : {
+            		left : '50%',
+            		marginLeft : '-673px'
+        		}
+      		);
+		};
 		check();
 		$win.resize(check);
-	})($);
-
-	//gotop
-	(function($){
-
-		if(!ie6){
-			var gotop = $('#gotop');
-			if(!gotop.length) return;
-			gotop.hide().click(function(){
-				$('html,body').animate({'scrollTop':0},300);
-				gotop.fadeOut();
-			});
-			$(window).scroll(function(){
-				var h = $(this).scrollTop();
-				h > 1000 && !gotop.is(':visible') && gotop.fadeIn();
-				h <= 1000 && gotop.is(':visible') && gotop.fadeOut();
-			});
-		}
-
-		
 	})($);
 
 	//spring2013
