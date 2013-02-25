@@ -86,6 +86,10 @@ class DesignImagesController < ApplicationController
 
     @images = @images.page(params[:page]).per(11)
     @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    @image_colors = []
+    @images.each do |image|
+      @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
+    end
   end
 
   def image_tag

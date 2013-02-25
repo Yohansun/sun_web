@@ -55,13 +55,14 @@
 				$toggle = $('.imgbase_toggle'),
 				s = $(".imgbase_collect").attr('data_s'),
 				$form   = $('#imgbase_forms').find('form'),
-        $ul     = $('#imgbase_ul');
+        $ul     = $('#imgbase_ul'),
+        $container = $("imagebase_bin");
 			$slider.slider({
 				speed : 1500,
 				mouse : 'mouseover',
 				duration : 5000,
 				callback : function(num){
-					var $curr = $list.find('li').eq(num),
+					var $curr = $list.find('> li').eq(num),
 						views = $curr.data('view'),
 						full = $curr.data('full'),
 						html  = $curr.find('div').html();
@@ -70,7 +71,7 @@
 					$full.attr('href', '/design_images/' + full + '/fullscreen');
 					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full + '&page=' + s);
 					$info.html(html);
-					// http://localhost:3000/users/120/collects?design_image_id=120&page=1904
+          $container.append($curr.find('.colorsbox').html());
 				}
 			});
 			$list.on('mouseenter', 'li', function(){
@@ -90,6 +91,9 @@
 				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
 
+      $('.colors_con').hover(function(){
+        $(this).children().fadeToggle('fast');
+      });
 		});
 
   var tags = new Array();
@@ -220,11 +224,12 @@
 	<div class="imgbase_area clear">
 		<div class="imgbase_bin fl pr">
 			<%- if @images.present?%>
-			<div class="imgbase_func ft12 pa">
-				 <%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :id => "new_message", :class => "imgbase_collect", :data_s => params[:page] %>
-				<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a> -->
-				<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full", :target => '_blank' %>
-			</div>
+        <div class="imgbase_func ft12 pa">
+          <%= link_to '免费下载', download_design_image_path(@images.first.id), style: 'background-position:-1px -125px;', class: 'imgbase_collect' %>
+        	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id, page: params[:page]), method: :post,:id =>"imgbase_collect",  :id => "new_message", :class => "imgbase_collect", :data_s => params[:page] %>
+        	<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a> -->
+        	<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full", :target => '_blank' %>
+        </div>
 				<div class="imgbase_slider slider_bin">
 					<%- @images.each do |image| %>
 					  <a href="<%= user_design_path(image.id, image.imageable_id) %>">
@@ -232,16 +237,43 @@
 					  </a>
 					<%- end %>
 				</div>
-				<div id="imgbase_info">
-					<a href="javascript:void(0);">
-						<span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
-					</a>
-					<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
-				   <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
-					<%- end %>
-					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
-					<p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
-				</div><!-- imgbase_info -->
+        <div id="imgbase_info">
+          <a href="javascript:void(0);">
+            <span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
+          </a>
+          <%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
+           <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
+          <%- end %>
+          <h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
+          <p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
+        </div><!-- imgbase_info -->
+        <div class="colorsbox" style="height:82px;overflow:hidden;">
+          <%= image_tag('colors_icon_tit.png', style: 'float:left; margin:15px 15px 0 0;') %>
+          <div class="colors_con" style="float:left;padding:20px 0 0; height:35px; position:relative;">
+            <%= image_tag('colors2.jpg', style: 'display: inline-block;') %>
+            <div class="desc" style="height: 35px; width: 542px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
+              <div class="list" style="height:35px;">
+                <ul class="group" style="overflow:hidden;">
+                  <%- @image_colors.first.each do |color| %>
+                    <li>
+                      <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
+                        <h5><%= color.name %></h5>
+                        <p><%= color.code %></p>
+                      </div>
+                    </li>
+                  <%- end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="fr" style="margin:10px;">
+            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;">
+              <%= image_tag("go_shops_small.jpg") %>
+            </a>
+            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1">
+              <%= image_tag('tmall.jpg') %></a>
+          </div>
+        </div>
 		</div><!-- imgbase_bin -->
 		<ul class="imgbase_list">
 			<%- @images.each_with_index do |image, index| %>
@@ -261,6 +293,33 @@
 						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
 						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_asks_path(image.user.id) %>" >免费咨询</a></p>
 					</div>
+          <div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
+            <%= image_tag('colors_icon_tit.png', style: 'float:left; margin:15px 15px 0 0;') %>
+            <div class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+              <%= image_tag('colors2.jpg', style: 'display: inline-block;') %>
+              <div class="desc" style="height: 35px; width: 542px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
+                <div class="list" style="height:35px;">
+                  <ul class="group" style="overflow:hidden;">
+                    <%- @image_colors[index].each do |color| %>
+                      <li>
+                        <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
+                          <h5><%= color.name %></h5>
+                          <p><%= color.code %></p>
+                        </div>
+                      </li>
+                    <%- end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="fr" style="margin:10px;">
+              <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;">
+              <%= image_tag("go_shops_small.jpg") %>
+              </a>
+              <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1">
+                <%= image_tag('tmall.jpg') %></a>
+            </div>
+          </div>
 				</li>
 			<%- end %>
 		</ul>
