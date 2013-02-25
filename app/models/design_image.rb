@@ -19,6 +19,8 @@ class DesignImage < ActiveRecord::Base
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null")
 
+  scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
+
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
 
   has_attached_file :file,

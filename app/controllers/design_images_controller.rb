@@ -37,7 +37,7 @@ class DesignImagesController < ApplicationController
   end
 
   def index
-    @images = DesignImage.available.order("sorts ASC, created_at DESC")
+    @images = DesignImage.available.audited_with_colors.order("sorts ASC, created_at DESC")
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     unless params[:tags].blank?
