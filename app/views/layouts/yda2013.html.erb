@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>icolor-创意未来</title>
+<%= stylesheet_link_tag "landingpage_20130121" %>
+<%= javascript_include_tag "jquery", "main" %>
+<!--[if IE 6]>
+	<script src="js/png.js"></script>
+	<script>
+	PNG.fix('img,div,a,ul,li,i');
+	</script>
+<![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+	<div class="header group">
+		<h1><a href="/"><img src="<%= asset_path 'landingpage/landingpage_logo.png' %>"></a></h1>
+		<ul class="nav">
+			<li><a class="li_cur" href="/yda/2013">首页</a></li>
+			<li><a href="/yda/2013/event_purpose">赛事宗旨</a></li>
+			<li><a href="/yda/2013/info">参赛说明</a></li>
+			<li><a href="/yda/2013/agenda">赛事日程</a></li>
+			<li><a href="/yda/2013/prize">奖项设置</a></li>
+			<li><a href="/yda/2013/rater">评委介绍</a></li>
+		</ul>
+		<a class="back_icolor" href="/"><img src="<%= asset_path 'landingpage/back_icolor.png' %>"></a>
+	</div><!-- header -->
+
+	<%= yield %>
+</div>
+
+<div id="footer">
+	<div class="main">
+		<a href="http://www.icolor.com.cn/">返回icolor</a> | <a href="http://www.nipponpaint.com.cn/web/index.jsp" target="_blank">立邦官网</a> | <a href="http://www.icolor.com.cn/contact" target="_blank">联系我们</a> | <a href="http://www.icolor.com.cn/rules" target="_blank">会员机制</a> | <a href="http://shop.nipponpaint.com.cn/" target="_blank">网上商城</a> | <a href="http://www.icolor.com.cn/state" target="_blank">网站声明</a>
+		<span>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</span>
+	</div>
+</div>
+</body>
+</html>

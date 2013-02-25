@@ -173,6 +173,14 @@ Icolor::Application.routes.draw do
   match '/yda/yda_past' => 'yda#yda_past'
   match '/yda/yda_list' => 'yda#yda_list'
 
+  #yda2013
+  match '/yda/2013' => 'yda2013#index'
+  match '/yda/2013/event_purpose' => 'yda2013#event_purpose'
+  match '/yda/2013/info' => 'yda2013#info'
+  match '/yda/2013/agenda' => 'yda2013#agenda'
+  match '/yda/2013/prize' => 'yda2013#prize'
+  match '/yda/2013/rater' => 'yda2013#rater'
+
   resources :weekly_tips, only: :index
 
   #个人主页
