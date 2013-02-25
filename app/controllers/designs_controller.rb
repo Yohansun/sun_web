@@ -137,12 +137,12 @@ class DesignsController < ApplicationController
         redirect_to upload_user_design_path(current_user, @design)
       else
         @design.errors.messages.each do |key,value|
-          flash[:design_errors] << value
+          flash[:design_errors] += value
         end
-        render :action => 'edit_design'
+        render :action => 'new'
       end
     else
-      render :action => 'edit_design'
+      render :action => 'new'
     end
   end
 
@@ -238,6 +238,7 @@ class DesignsController < ApplicationController
       flash[:design_errors] << "请选择用途！"
       flag = false
     end
+    @design_tags = DesignTags.where(design_id: params[:id]).map &:image_library_category_id
     if flag
       tag_str = params[:apartment] + "," + params[:use]
       if params[:fee].present?
@@ -249,12 +250,12 @@ class DesignsController < ApplicationController
       if params[:throng].present?
         tag_str += "," + params[:throng]
       end
-      @design_tags = DesignTags.where(design_id: params[:id])
+      design_tags = DesignTags.where(design_id: params[:id])
       tag_arr = tag_str.split(',')
       tags = params[:style] + tag_arr
       if @design.update_attributes(params[:design])
-        @design_tags = DesignTags.where(design_id: params[:id])
-        @design_tags.each do |tag|
+        design_tags = DesignTags.where(design_id: params[:id])
+        design_tags.each do |tag|
           tag.destroy
         end
         tags.each do |tag|
@@ -264,7 +265,7 @@ class DesignsController < ApplicationController
         redirect_to upload_user_design_path(current_user, @design)
       else
         @design.errors.messages.each do |key,value|
-          flash[:design_errors] << value
+          flash[:design_errors] += value
         end
         render :action => 'edit_design'
       end
