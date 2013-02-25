@@ -56,7 +56,7 @@
 				s = $(".imgbase_collect").attr('data_s'),
 				$form   = $('#imgbase_forms').find('form'),
         $ul     = $('#imgbase_ul'),
-        $container = $("imagebase_bin");
+        $colorsbox = $(".imgbase_bin > .colorsbox");
 			$slider.slider({
 				speed : 1500,
 				mouse : 'mouseover',
@@ -71,7 +71,7 @@
 					$full.attr('href', '/design_images/' + full + '/fullscreen');
 					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full + '&page=' + s);
 					$info.html(html);
-          $container.append($curr.find('.colorsbox').html());
+          $colorsbox.html($curr.find('.colorsbox').html());
 				}
 			});
 			$list.on('mouseenter', 'li', function(){
@@ -91,7 +91,7 @@
 				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
 
-      $('.colors_con').hover(function(){
+      $('.colors_con').live('hover', function(){
         $(this).children().fadeToggle('fast');
       });
 		});
@@ -303,10 +303,9 @@
                     <%- @image_colors[index].each do |color| %>
                       <li>
                         <%- background = color.rgb.blank? ? "background:url(/assets/color_code/' + color.code + '.png)" : "background-color: rgb(#{color.rgb})" -%>
-                        <div class="colorblock" style="<%= background %>">
-                          <h5><%= image.color1_name %></h5>
-                          <p>立邦(<%= color.code %>)<%= color.name %></p>
-                        </div>
+                        <div class="colorblock" style="<%= background %>"></div>
+                        <h5><%= image.color1_name %></h5>
+                        <p>立邦(<%= color.code %>)<%= color.name %></p>
                       </li>
                     <%- end %>
                   </ul>
