@@ -3,7 +3,7 @@
 require 'ruby-pinyin'
 
 class DesignImage < ActiveRecord::Base
-  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :color1_name, :color2_name, :color3_name, :tags, :area_id, :last_user_id, :last_updated_at, :view_count
+  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :color1_name, :color2_name, :color3_name, :tags, :area_id, :last_user_id, :last_updated_at, :view_count, :sorts
 
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
@@ -35,11 +35,21 @@ class DesignImage < ActiveRecord::Base
   # validates_presence_of :area_id
 
   before_save :set_pinyin
+  before_save :set_sort
 
   def set_pinyin
     if self.title_changed?
       set_pinyin!
     end
+  end
+
+  # 科普兰德(1)-每周之星(2 后台设置)-大师作品(3)-sina(4)-色彩搭配(5)-自行上传(100)
+  def set_sort
+    self.sorts = 100
+    self.sorts = 1 if source == 'kepulande'
+    self.sorts = 3 if self.imageable_type == 'MasterDesign'
+    self.sorts = 4 if source == 'sina'
+    self.sorts = 5 if self.imageable_type == 'ColorDesign'
   end
 
   def set_pinyin!

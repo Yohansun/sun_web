@@ -37,13 +37,13 @@ class DesignImagesController < ApplicationController
   end
 
   def index
-    @image_length = DesignImage.available.count
+    @images = DesignImage.available.order("sorts ASC, created_at DESC")
+    @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     unless params[:tags].blank?
        @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
     end
-    @images = DesignImage.available
 
     unless @tag_ids.blank?
       Rails.logger.debug @tag_ids.inspect

@@ -151,3 +151,22 @@ task :import_image_libraries_for_kepulande => :environment  do
     end
   end
 end
+
+task :update_image_sort => :environment  do
+  DesignImage.all.each do |img|
+    sorts = 100
+    sorts = 1 if img.source == 'kepulande'
+    sorts = 3 if img.imageable_type == 'MasterDesign'
+    sorts = 4 if img.source == 'sina'
+    sorts = 5 if img.imageable_type == 'ColorDesign'
+    img.update_attribute(:sorts, sorts)
+  end
+  WeeklyStar.all.each do |ws|
+    design_id = ws.design_link.split('/').last
+    if design = Design.find(design_id)
+      design.design_images.each do |img|
+        img.update_attribute(:sorts, 2) if img.sorts != 1
+      end
+    end
+  end
+end
