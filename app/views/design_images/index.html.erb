@@ -230,13 +230,17 @@
         	<!-- <a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.try(:view_count) %></span></a> -->
         	<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"imgbase_fullpage", :id =>"imgbase_full", :target => '_blank' %>
         </div>
-				<div class="imgbase_slider slider_bin">
-					<%- @images.each do |image| %>
-					  <a href="<%= user_design_path(image.id, image.imageable_id) %>">
-					    <%= image_tag(image.file.url(:design_image_big), size: '686x496') %>
-					  </a>
-					<%- end %>
+		<div class="imgbase_slider slider_bin">
+			<%- @images.each do |image| %>
+				<div class="fl">
+					<table style="width:686px;height:427px;">
+						<tr>
+							<td align="center" style="width:686px;overflow:hidden;"><%= image_tag(image.file.url(:design_image_big)) %></td>
+						</tr>
+					</table>
 				</div>
+			<% end %>
+		</div>
         <div id="imgbase_info">
           <a href="javascript:void(0);">
             <span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
