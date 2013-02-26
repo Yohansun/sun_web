@@ -172,12 +172,17 @@ class DesignsController < ApplicationController
         image.title = params[:title][design_image_id] if params[:title] && params[:title][design_image_id].present?
         image.color1 = params[:color1][design_image_id] if params[:color1] && params[:color1][design_image_id].present?
         image.is_cover = true if params[:cover_image] && params[:cover_image].to_i == design_image_id.to_i
+        image.area_id = @design.area_id
         if image.save
           image_tags = ImageTag.where(design_image_id: image.id, genre: 'image_tag1')
           if image_tags.present?
             image_tags.each do |image_tag|
               image_tag.destroy
             end
+          end
+          design_tags = DesignTags.where(design_id: @design.id)
+          design_tags.each do |design_tag|
+            ImageTag.create(design_image_id: image.id, image_library_category_id: design_tag.image_library_category_id, genre: 'image_tag3')
           end
           tag_arr = []
           if params[:effect] && params[:effect][design_image_id].present?
