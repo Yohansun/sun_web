@@ -38,26 +38,31 @@ task :import_image_libraries_sina => :environment  do
     design.room_type = room.title if room
     if design.save(validate: false)
       file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0].to_i}/*"]
-      unless file_src_arr.blank?
+      if file_src_arr.present?
         file_src_arr.each do |file_src|
-          design_image = design.design_images.new
-          handle = open(file_src) rescue nil
-          handle.class.class_eval { attr_accessor :original_filename, :content_type }
-          handle.original_filename = file_src.split("/").last
-          design_image.file = handle
-          design_image.title = row[1]
-          design_image.area_id = area ? area.id : 31
-          image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-          design_image.tags = [image_tag] if image_tag.present?
-          design_image.room = room.id if room
-          design_image.content = row[10]
-          design_image.user_id = new_user.id
-          design_image.source = 'sina'
-          design_image.sorts = 4
-          if design_image.save
-            p "保存成功!"
-          else
-            p "保存失败!---#{row[0]}"
+          p '获取到图片！！！'
+          p file_src
+          after_poking = file_src.split('.').last
+          if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG' 
+            design_image = design.design_images.new
+            handle = open(file_src) rescue nil
+            handle.class.class_eval { attr_accessor :original_filename, :content_type }
+            handle.original_filename = file_src.split("/").last
+            design_image.file = handle
+            design_image.title = row[1]
+            design_image.area_id = area ? area.id : 31
+            image_tag = ImageTag.where(image_library_category_id: style.id).first if style
+            design_image.tags = [image_tag] if image_tag.present?
+            design_image.room = room.id if room
+            design_image.content = row[10]
+            design_image.user_id = new_user.id
+            design_image.source = 'sina'
+            design_image.sorts = 4
+            if design_image.save
+              p "保存成功!"
+            else
+              p "保存失败!---#{row[0]}"
+            end
           end
         end
       end
