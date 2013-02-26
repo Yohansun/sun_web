@@ -47,7 +47,7 @@
   <div class='wrapper pb60 group pt25'>
     <div class="works_detail_tit line_b_dot group pr">
       <!-- JiaThis Button BEGIN -->
-      <div id="ckepop" class="pa" style="top:30px;right:250px;">
+      <div id="ckepop" class="pa" style="top:35px;right:250px;">
         <span class="jiathis_txt">一键分享：</span>
         <a class="jiathis_button_tsina"></a>
         <a class="jiathis_button_kaixin001"></a>
@@ -73,13 +73,11 @@
       </script>
       <!-- JiaThis Button END -->
       <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) || @master_design.master_name %></strong></h3>
-      <div class="full_play">
-        <a href="/master_designs/<%= @master_design.id %>/fullscreen">全屏观看</a>
+      <div class="btn_group fr">
+        <%= link_to "免费下载", "/master_designs/#{@master_design.id}/download", :class =>"icon_freedown" %>
+        <%= link_to "收藏", user_collects_path(@master_design.id, master_design_id: @master_design.id), method: :post, id: "new_message", :class => "icon_colleting" %>
+        <a href="/master_designs/<%= @master_design.id %>/fullscreen" class="icon_fullscreen">全屏观看</a>
       </div>
-      <div class="collect_btn" style="top:26px;">
-        <%= link_to "收藏", user_collects_path(@master_design.id, master_design_id: @master_design.id), method: :post, id: "new_message", :style => "margin-right:15px;" %>
-        <%= link_to "免费下载", "/master_designs/#{@master_design.id}/download"  %>
-      </div>     
     </div>
     <div class="kv_loop mt25">
       <div class="gallery">

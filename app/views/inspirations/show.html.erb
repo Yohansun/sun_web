@@ -76,10 +76,11 @@
           <%#= forward_links("#iColor分享#一套灵感图片，装修灵感从点滴积累开始，让我们一起行动吧！更多灵感创意，尽在iColor，@刷新生活iColor，", inspiration_url(@inspiration), cover_img, @inspiration.id.to_s, "Inspiration") %>
         </div>
       </div>
-      <div class="fullscreen_btn">
-        <%= link_to "全屏观看", fullscreen_user_inspiration_path(@inspiration.user_id, @inspiration) %>
+
+      <div class="btn_group fr" style="margin-top:5px;">
+        <%= link_to "免费下载", download_inspiration_path(@inspiration.id), :class => "icon_freedown" %>
+        <%= link_to "全屏观看", fullscreen_user_inspiration_path(@inspiration.user_id, @inspiration), :class =>"icon_fullscreen" %>
       </div>
-      <div class="collect_btn"><%= link_to "免费下载", download_inspiration_path(@inspiration.id), :style => "margin-right:15px;" %></div>
     </div>
     <div class="weekstart_detail">
       <div class="big_image">

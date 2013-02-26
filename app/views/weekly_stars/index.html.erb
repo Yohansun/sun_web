@@ -61,10 +61,10 @@
           <p>STAR OF THIS <%= params[:star_type].include?("月度") ? 'MONTH' : 'WEEK' %></p>
         </h1>
       </a>
-      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
-      <div class="collect_btn">
-        <%= link_to "收藏", user_collects_path(@design.id, weekly_star_id: @design.id), method: :post, id: "new_message", style:"margin-right:15px;" %>
-        <%= link_to "免费下载", download_weekly_star_path(@design.id) %>
+      <div class="btn_group fr">
+        <%= link_to "免费下载", download_weekly_star_path(@design.id), :class =>"icon_freedown" %>
+        <%= link_to "收藏", user_collects_path(@design.id, weekly_star_id: @design.id), method: :post, id: "new_message", :class =>"icon_colleting" %>
+        <%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
       </div>
       <%- end %>      
     </div>
@@ -150,10 +150,12 @@
         <tr><th>设计师：</th>
           <td><%=  @design.author %>
             <%- unless @design.author_url.blank? %>
-                <a href="<%= @design.author_url %>">[进入个人主页]</a>
-                <a href="<%= user_asks_path(@link_design.user.id) %>">[免费咨询]</a></td>
+                <%= link_to user_asks_path(@link_design.user.id) do %>
+                  <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
+                <%- end %>
             <%- end %>
-            </tr>
+          </td>
+        </tr>
     <%- end %>
     <%- unless @design.project_name.blank? %>
         <tr><th>项目名称：</th>
