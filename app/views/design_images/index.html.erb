@@ -118,7 +118,7 @@
 				<form onsubmit="return search_query($('#search_query_value').val())" style="display:inline">
 					<input type="text" value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
 				</form>
-				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('客厅')">客厅</a><a href="javascript:search_query('墙面色')">墙面色</a></span>
+				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('客厅')">客厅</a><a href="javascript:search_query('墙面色')">简约</a></span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
 		</div>
@@ -237,7 +237,7 @@
 				<div class="fl">
 					<table style="width:686px;height:427px;">
 						<tr>
-							<td align="center" style="width:686px;overflow:hidden;"><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= image_tag(image.file.url(:design_image_big)) %></a></td>
+							<td align="center" style="width:686px;overflow:hidden;"><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank" ><%= image_tag(image.file.url(:design_image_big)) %></a></td>
 						</tr>
 					</table>
 				</div>
@@ -250,7 +250,7 @@
           <%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
            <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
           <%- end %>
-          <h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
+          <h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
           <p>设计师：<%= @images.first.user.try(:display_name) %> <a target="_blank" href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
         </div><!-- imgbase_info -->
         <div class="colorsbox" style="height:82px;overflow:hidden;">
@@ -273,10 +273,10 @@
             </div>
           </div>
           <div class="fr" style="margin:10px;">
-            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;">
+            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;" target="_blank">
               <%= image_tag("go_shops_small.jpg") %>
             </a>
-            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1">
+            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank">
               <%= image_tag('tmall.jpg') %></a>
           </div>
         </div>
@@ -284,7 +284,7 @@
 		<ul class="imgbase_list">
 			<%- @images.each_with_index do |image, index| %>
 				<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-					<a href="<%= image_show_design_image_path(image) %>">
+					<a href="<%= image_show_design_image_path(image) %>" target="_blank">
 						<%= image_tag(image.file.url(:design_image_list), size: '224x162') %>
 						<p><%= truncate(image.title, length: 15) %></p>
 						<span></span>
@@ -296,8 +296,8 @@
 						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
 					   <span class="imgbase_like votes_count<%= image.id %>"><%= image.try(:votes_count) %></span>
 						<%- end %>
-						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
-						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_asks_path(image.user.id) %>" >免费咨询</a></p>
+						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank"><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
+						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_asks_path(image.user.id) %>" target="_blank">免费咨询</a></p>
 					</div>
           <div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
             <%= image_tag('colors_icon_tit.png', style: 'float:left; margin:15px 15px 0 0;') %>
@@ -319,10 +319,10 @@
               </div>
             </div>
             <div class="fr" style="margin:10px;">
-              <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;">
+              <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;" target="_blank">
               <%= image_tag("go_shops_small.jpg") %>
               </a>
-              <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1">
+              <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank">
                 <%= image_tag('tmall.jpg') %></a>
             </div>
           </div>
