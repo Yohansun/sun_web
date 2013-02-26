@@ -3,6 +3,24 @@
 .nav{background-image:url(<%= asset_path "imgbase/nav.png" %>);width:1194px;}
 .navBot li a{padding:8px 18px;_padding:8px 15px;}
 .highlight{color:#fff!important;background:#e71d36!important;}
+.img_vertical_align{
+	width:760px;height:507px;
+	text-align:center;
+	background:#ececec;
+
+	/* 兼容标准浏览器 */
+	display: table-cell;
+	vertical-align:middle;
+
+	/* 兼容IE6/IE7 */
+	*display:block;
+	*font-size:443px;  /* 字体大小约为容器高度的0.873倍 400*0.873 = 349 */
+	*font-family:Arial;  /* 防止非utf-8引起的hack失效问题，如gbk编码 */
+}
+
+.img_vertical_align img{
+	vertical-align:middle;
+}
 
 .imgbase{background-color:#fff;width:1180px;margin:0 auto;padding-bottom:20px;}
 .imgbase a:hover,.search_bin a.curr_rank,.tit_tab .fresh,.imgbase_title strong{color:#e71d36;}

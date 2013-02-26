@@ -125,7 +125,9 @@ $(function(){
         <%- end %>
         <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>">免费下载</a>
      </div>
-	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
+     <div class="img_vertical_align">  
+	     <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img") %>
+     </div>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
 	    <span class="fr">
 	    	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "imgbase/near-shop_link_btn.png" %>"></a>
