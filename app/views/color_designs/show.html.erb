@@ -88,12 +88,11 @@
           <%#= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{@design.design_name}】，推荐色：立邦#{@design.recommend_color1} #{@code.name}，让色彩融入生活，尽在iColor@刷新生活iColor", "http://#{request.host_with_port}/color_designs/#{@design.id}", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
         </div>
       </div>
-      <div class="fullscreen_btn">
-        <%= link_to "全屏观看", "/color_designs/#{@design.id}/fullscreen" %>
-      </div>
-      <div class="collect_btn">
-        <%= link_to "收藏", user_collects_path(@design, color_design_id: @design.id), method: :post, id: "new_message", :style => "margin-right:15px;"  %>
-        <%= link_to "免费下载", "/color_designs/#{@design.id}/download"  %>
+
+      <div class="btn_group fr" style="margin-top:5px;">
+        <%= link_to "免费下载", "/color_designs/#{@design.id}/download", :class =>"icon_freedown" %>
+        <%= link_to "收藏", user_collects_path(@design, color_design_id: @design.id), method: :post, id: "new_message", :class => "icon_colleting"  %>
+        <%= link_to "全屏观看", "/color_designs/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
       </div>
     </div>
     <div class="weekstart_detail">

@@ -115,16 +115,16 @@ $(function(){
 	<div class="imgbase_main clear nomargin">
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
-      <div class="imgbase_func ft12 pa">
-        <a class="imgbase_collect" href="<%= download_design_image_path(@image.id) %>" style="background-position:-1px -125px;">免费下载</a>
+      <div class="imgbase_func ft12 pa btn_group">
+        <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>">免费下载</a>
         <%- if current_user %>
-          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "imgbase_collect" %>
+          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "icon_colleting" %>
         <%- else %>
-          <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "imgbase_collect" %>
+          <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "icon_colleting" %>
         <%- end %>
-        <!-- <a class="imgbase_view">浏览:<span><%= @image.view_count %></span></a> -->
-        <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"imgbase_fullpage", :target => "_blank" %>
-      </div>
+        <a class="icon_view">浏览:<span><%= @image.view_count %></span></a>
+        <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"icon_fullscreen", :target => "_blank" %>
+     </div>
 	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
 	    <span class="fr">
