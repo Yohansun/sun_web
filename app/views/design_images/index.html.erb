@@ -227,10 +227,10 @@
 		<div class="imgbase_bin fl pr">
 			<%- if @images.present?%>
         <div class="imgbase_func ft12 pa btn_group">
-			<%= link_to '免费下载', download_design_image_path(@images.first.id), :class => 'icon_freedown imgbase_down_id' %>
-        	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id), method: :post, :id => "new_message", :class => "icon_colleting imgbase_collect_id" %>
         	<!-- <a class="icon_view">浏览:<span id="imgbase_view"><%#= @images.first.try(:view_count) %></span></a> -->
         	<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"icon_fullscreen", :id =>"imgbase_full", :target => '_blank' %>
+        	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id), method: :post, :id => "new_message", :class => "icon_colleting imgbase_collect_id" %>
+        	<%= link_to '免费下载', download_design_image_path(@images.first.id), :class => 'icon_freedown imgbase_down_id' %>
 		</div>
 		<div class="imgbase_slider slider_bin">
 			<%- @images.each do |image| %>
