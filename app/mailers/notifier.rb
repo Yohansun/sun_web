@@ -66,7 +66,7 @@ class Notifier < ActionMailer::Base
   def ask(user,content)
     @user = user
     @content = content
-    mail(:to => "501225658@qq.com",
+    mail(:to => "icolor@nipponpaint.com.cn",
          :subject => "来自#{@user.display_name}的免费咨询",
          :body => "用户咨询：#{@content}"
         )
