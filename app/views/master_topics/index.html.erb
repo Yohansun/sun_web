@@ -11,7 +11,7 @@
     <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
   <div class="sub_nav ft12 pr tr">
-    <em><a class="fb" href="/master_topics">热点话题</a></em>
+    <em><a class="fb" href="/master_topics">业内动态</a></em>
     <em><a href="/master_interviews">大师殿堂</a><span></span></em>
     <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
@@ -25,7 +25,7 @@
                     <h3><a href="/master_topics/<%= topic.id %>" ><%= topic.title %></a></h3>
                     <div class="h3_sub pr group" style=" overflow:visible">
                       <span>时间：<%= topic.published_at.to_formatted_s(:db) %></span><span class="zf">转发(0)</span><span class="pl">评论(<%= topic.comments.length%>)</span>
-                      <%= forward_links("#iColor分享#一篇精彩家装热点话题--【#{topic.title}】，更多家装资讯，尽在iColor，@刷新生活iColor，", 
+                      <%= forward_links("#iColor分享#一篇精彩家装业内动态--【#{topic.title}】，更多家装资讯，尽在iColor，@刷新生活iColor，", 
                           master_topic_url(topic.id), 
                           topic.preview_img.url(:icolor_master_topics), 
                           topic.id.to_s, "MasterTopic") %>
