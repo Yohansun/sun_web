@@ -118,7 +118,7 @@
 				<form onsubmit="return search_query($('#search_query_value').val())" style="display:inline">
 					<input type="text" value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
 				</form>
-				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('宜家')">宜家</a><a href="javascript:search_query('墙面色')">墙面色</a></span>
+				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('客厅')">客厅</a><a href="javascript:search_query('墙面色')">墙面色</a></span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
 		</div>
@@ -251,7 +251,7 @@
            <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
           <%- end %>
           <h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
-          <p>设计师：<%= @images.first.user.try(:display_name) %> <a href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
+          <p>设计师：<%= @images.first.user.try(:display_name) %> <a target="_blank" href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
         </div><!-- imgbase_info -->
         <div class="colorsbox" style="height:82px;overflow:hidden;">
           <%= image_tag('colors_icon_tit.png', style: 'float:left; margin:15px 15px 0 0;') %>
