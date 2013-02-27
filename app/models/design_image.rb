@@ -142,20 +142,19 @@ class DesignImage < ActiveRecord::Base
     Digest::SHA1.hexdigest("#{string}#{rand}")[0..6]
   end
 
-  def self.search_tags(tag_ids)
-    joins(:tags).where("image_tags.image_library_category_id in (?)", tag_ids)
+  def self.search_tags(tag_ids, use_in_query = false)
+    return joins(:tags).where("image_tags.image_library_category_id in (?)", tag_ids) if use_in_query
+    joins = []
+    tag_ids.each do |tag_id|
+      taggings_alias = "taggings_#{tag_id}"
 
-    # joins = []
-    # tag_ids.each do |tag_id|
-    #   taggings_alias = "taggings_#{tag_id}"
+      tagging_join  = "JOIN image_tags #{taggings_alias}" +
+      " ON #{taggings_alias}.design_image_id = design_images.id" +
+      " AND #{taggings_alias}.image_library_category_id = #{tag_id}"
 
-    #   tagging_join  = "JOIN image_tags #{taggings_alias}" +
-    #   "  ON #{taggings_alias}.design_image_id = design_images.id" +
-    #   " AND #{taggings_alias}.image_library_category_id = #{tag_id}"
+      joins << tagging_join
+    end
 
-    #   joins << tagging_join
-    # end
-
-    # scoped(:joins => joins.join(" "))
+    scoped(:joins => joins.join(" "))
   end
 end

@@ -46,7 +46,7 @@ class DesignImagesController < ApplicationController
 
     unless @tag_ids.blank?
       Rails.logger.debug @tag_ids.inspect
-      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
+      @tags = ImageLibraryCategory.where("id in (?) and parent_id is not null", @tag_ids).all
       final_tags = @tags.map { |tag| tag.self_and_descendants }.flatten
       @images = @images.search_tags(final_tags.map(&:id))
       @tag_names = final_tags.map(&:title)
@@ -62,7 +62,8 @@ class DesignImagesController < ApplicationController
     end
 
     unless params[:search].blank?
-      @images = @images.where("title LIKE ?", "%#{params[:search]}%")
+      tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
+      @images = @images.search_tags(tags.map(&:id), true)
     end
 
     unless params[:imageable_type].blank?
@@ -70,7 +71,8 @@ class DesignImagesController < ApplicationController
     end
 
     unless params[:pinyin].blank?
-      @images = @images.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+      @images = @images.search_tags(tags.map(&:id), true)
     end
 
     unless params[:ranking_list].blank?
@@ -82,7 +84,6 @@ class DesignImagesController < ApplicationController
     else
       @images = @images.order("design_images.source DESC, design_images.created_at DESC")
     end
-
     @images = @images.page(params[:page]).per(11)
     @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
     @image_colors = []
@@ -193,7 +194,7 @@ class DesignImagesController < ApplicationController
       @like_images = DesignImage.available.order("created_at desc").limit(4)
     else
       tags = tags[0..4]
-      @like_images = DesignImage.search_tags(tags).limit(4)
+      @like_images = DesignImage.search_tags(tags, true).limit(4)
     end
   end
 
