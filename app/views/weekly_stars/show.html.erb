@@ -114,9 +114,10 @@
     <%- end %>
     <%- unless @design.author.blank? %>
         <tr><th>设计师：</th>
-          <td><%=  @design.author %>
-            <%- unless @design.author_url.blank? %>
-                <a href="<%= @design.author_url %>"><img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>"></a>
+          <td>
+            <%=  @design.author %>
+            <%= link_to user_asks_path(@link_design.user.id) do %>
+              <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
             <%- end %>
           </td>
         </tr>
