@@ -237,7 +237,7 @@
 				<div class="fl">
 					<table style="width:686px;height:427px;">
 						<tr>
-							<td align="center" style="width:686px;overflow:hidden;"><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank" ><%= image_tag(image.file.url(:design_image_big)) %></a></td>
+							<td align="center" style="width:686px;overflow:hidden;"><a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" ><%= image_tag(image.file.url(:design_image_big)) %></a></td>
 						</tr>
 					</table>
 				</div>
