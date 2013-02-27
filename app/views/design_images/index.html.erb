@@ -2,7 +2,7 @@
   <%= stylesheet_link_tag "imgbase", "jquery.slider"%>
 <%- end %>
 <%- content_for :tail do %>
-  <%= javascript_include_tag "jquery.slider", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
+  <%= javascript_include_tag "slides", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
   <script type="text/javascript">
 	function show_login() {
 	        o_in();
@@ -46,7 +46,7 @@
     	});
     });
     $(function(){
-			var $slider = $('.imgbase_slider'),
+			var $slider = $('#feb_slides'),
 				$list   = $('.imgbase_list'),
 				$view   = $('#imgbase_view'),
 				$info   = $('#imgbase_info'),
@@ -58,11 +58,13 @@
 				$form   = $('#imgbase_forms').find('form'),
         $ul     = $('#imgbase_ul'),
         $colorsbox = $(".imgbase_bin > .colorsbox");
-			$slider.slider({
-				speed : 2500,
-				mouse : 'mouseover',
-				duration : 5000,
-				callback : function(num){
+			$slider.slides({  
+				next: 'slider_next',  
+				prev: 'slider_prev',  
+				play: 5000,  
+				pause: 2500,  
+				animationComplete:function(){ 
+					var num = $slider.find('.current').index(); 
 					var $curr = $list.find('> li').eq(num),
 						views = $curr.data('view'),
 						full = $curr.data('full'),
@@ -73,12 +75,12 @@
 					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full);
 					$down.attr('href', '/design_images/' + full + '/download');
 					$info.html(html);
-          $colorsbox.html($curr.find('.colorsbox').html());
+          			$colorsbox.html($curr.find('.colorsbox').html());
 				}
 			});
 			$list.on('mouseenter', 'li', function(){
 				var index = $(this).index();
-				$slider.find('li').eq(index).mouseover();
+				$slider.find('li').eq(index).find('a').click();
 			}).mouseleave(function(){
 				$slider.mouseleave();
 			});
@@ -232,17 +234,19 @@
         	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id), method: :post, :id => "new_message", :class => "icon_colleting imgbase_collect_id" %>
         	<%= link_to '免费下载', download_design_image_path(@images.first.id), :class => 'icon_freedown imgbase_down_id' %>
 		</div>
-		<div class="imgbase_slider slider_bin">
-			<%- @images.each do |image| %>
-				<div class="fl">
-					<table style="width:686px;height:427px;">
-						<tr>
-							<td align="center" style="width:686px;overflow:hidden;"><a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" ><%= image_tag(image.file.url(:design_image_big)) %></a></td>
-						</tr>
-					</table>
-				</div>
-			<% end %>
-		</div>
+		<div id="feb_slides">  
+			<div class="slides_container">
+				<%- @images.each do |image| %>
+					<div>
+						<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" >
+							<%= image_tag(image.file.url(:design_image_big)) %>
+						</a>
+					</div>
+				<%- end %>   
+			</div>  
+			<a href="javascript:;" class="slider_next">next</a>  
+			<a href="javascript:;" class="slider_prev">prev</a>
+		</div>  
         <div id="imgbase_info">
           <a href="javascript:void(0);">
             <span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
