@@ -39,6 +39,7 @@ class DesignImagesController < ApplicationController
     @images = DesignImage.available.audited_with_colors.order("sorts ASC, created_at DESC")
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
+    @tag_names = []
     unless params[:tags].blank?
        @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
@@ -49,7 +50,7 @@ class DesignImagesController < ApplicationController
       @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
       final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
       @images = @images.search_tags(final_tags.map(&:id))
-      @tag_names = final_tags.map(&:title)
+      @tag_names << final_tags.map(&:title)
     end
 
     unless params[:area_id].blank?
@@ -64,7 +65,7 @@ class DesignImagesController < ApplicationController
     unless params[:search].blank?
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
       @images = @images.search_tags(tags.map(&:id), true)
-      @tag_names = tags.map(&:title)
+      @tag_names << tags.map(&:title)
     end
 
     unless params[:imageable_type].blank?
@@ -74,7 +75,7 @@ class DesignImagesController < ApplicationController
     unless params[:pinyin].blank?
       tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
       @images = @images.search_tags(tags.map(&:id), true)
-      @tag_names = tags.map(&:title)
+      @tag_names << tags.map(&:title)
     end
 
     unless params[:ranking_list].blank?
