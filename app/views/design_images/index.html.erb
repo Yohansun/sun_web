@@ -238,9 +238,11 @@
 			<div class="slides_container">
 				<%- @images.each do |image| %>
 					<div>
-						<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" >
+						<div>
+							<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" >
 							<%= image_tag(image.file.url(:design_image_big)) %>
-						</a>
+							</a>
+						</div>
 					</div>
 				<%- end %>   
 			</div>  
