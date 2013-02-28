@@ -1,9 +1,26 @@
 /*nav bug hack*/
-.navBot li{padding:1px 2px;}
 /**/
-.nav{background-image:url(<%= asset_path "imgbase/nav.png" %>);width:1194px;margin-left:-597px;}
+.nav{background-image:url(<%= asset_path "imgbase/nav.png" %>);width:1194px;}
 .navBot li a{padding:8px 18px;_padding:8px 15px;}
-.highlight{color:red!important;}
+.highlight{color:#fff!important;background:#e71d36!important;}
+.img_vertical_align{
+	width:760px;height:507px;
+	text-align:center;
+	background:#ececec;
+
+	/* 兼容标准浏览器 */
+	display: table-cell;
+	vertical-align:middle;
+
+	/* 兼容IE6/IE7 */
+	*display:block;
+	*font-size:443px;  /* 字体大小约为容器高度的0.873倍 400*0.873 = 349 */
+	*font-family:Arial;  /* 防止非utf-8引起的hack失效问题，如gbk编码 */
+}
+
+.img_vertical_align img{
+	vertical-align:middle;
+}
 
 .imgbase{background-color:#fff;width:1180px;margin:0 auto;padding-bottom:20px;}
 .imgbase a:hover,.search_bin a.curr_rank,.tit_tab .fresh,.imgbase_title strong{color:#e71d36;}
@@ -27,16 +44,19 @@
 .tit_tab p a.active_condition{color:red;}
 /*tab content*/
 .tab_content{padding:20px 20px 0;font:12px "SimSun";width:1140px;overflow:hidden;border-bottom:1px solid #ebebeb;}
-.tab_content label{padding:0 5px;color:#333333;font-weight:bold;}
+.tab_content label{padding:6px 5px;color:#333333;font-weight:bold;}
 .tab_content a{color:#757575;font:12px "SimSun";padding:0 5px;}
-.tab_content fieldset{padding:8px 0;border-bottom:1px dashed #e6ccae;}
+.tab_content fieldset a{padding:1px 5px;line-height:22px;float:left;margin:0 5px 4px;}
+.tab_content fieldset span{margin-left:65px;display:block}
+.tab_content fieldset.lastfield a{float:none;}
+.tab_content fieldset{padding:2px 0;border-bottom:1px dashed #e6ccae;}
 .tab_content fieldset.lastfield{padding-top:25px;border:none;}
 .tab_content select,.tab_content input{border:1px solid #ccc;}
 .tab_content select{padding:3px;color:#757575;}
-.tab_content input{padding:4px 10px;color:#6e6e6e;font-size:14px;background-color:#fff;}
+.tab_content input{padding:4px 10px;color:#6e6e6e;font-size:14px;background:#fff url(<%= asset_path "imgbase/imgbase_button.jpg" %>);width:56px;height:25px;border:0;}
 .imgbase_toggle{background:url(<%= asset_path "imgbase/arrow.jpg" %>) no-repeat;width:81px;height:22px;line-height:22px!important;bottom:-21px;left:50%;margin-left:-40px;text-align:center;}
 .form_expand{background-position:0 -22px;}
-.form_mini{height:60px;}
+.form_mini{height:90px;}
 
 .search_bin{background:#ebebeb;border-top:2px solid #e71d36;padding:15px 20px;}
 .search_bin p{color:#333;font:bold 14px 'Arial';margin-right:190px;}
@@ -54,7 +74,7 @@
 
 .imgbase_bin{width:686px;height:579px;margin-left:7px;}
 #imgbase_info,.imgbase_collect,.imgbase_fullpage{background:url(<%= asset_path "imgbase/imgbase_icon.jpg" %>) no-repeat;}
-#imgbase_info{background-repeat:repeat-x;width:666px;height:62px;padding:10px;font-size:14px;}
+#imgbase_info{background-repeat:repeat-x;width:666px;height:60px;padding:10px;font-size:14px;}
 #imgbase_info h4{margin:10px 0;}
 #imgbase_info h4 a{color:#e71d36;}
 #imgbase_info span,#imgbase_info p,.imgbase_like,.imgbase_comm{color:#ededed;}
@@ -63,7 +83,7 @@
 .imgbase_like,.imgbase_comm{background:url(<%= asset_path "imgbase/imgbase_like.png" %>) no-repeat;margin-left:5px;padding-left:20px;height:16px;font-size:12px;line-height:16px;float:right;display:inline;}
 .imgbase_comm{background-position:0 -16px;}
 
-.imgbase_func{right:8px;top:8px;width:300px;height:21px;text-align:right;z-index:2;}
+.imgbase_func{right:8px;top:8px;width:340px;height:21px;text-align:right;z-index:10;}
 .imgbase_collect,.imgbase_view,.imgbase_fullpage{background-color:#fafbfc;border:1px solid #ccc;border-radius:3px;height:21px;}
 .imgbase_collect,.imgbase_fullpage{padding:3px 5px 3px 30px;color:#000;}
 .imgbase_collect{background-position:0 -82px;}
@@ -139,3 +159,12 @@ a.img_reply_btn{display:inline-block;}
 .border_bline{border-bottom:1px solid #e6e6e6;}
 .border_lline{border-left:1px solid #e6e6e6;}
 .nomargin{margin:0!important;}
+
+.colorsbox .colors_con .desc .list li .colorblock{float:left;margin:0 5px 0 0;width:30px;height:30px}
+.colorsbox .colors_con .desc .list li{ float:left; border-right:1px dotted #ccc; margin-right:10px; padding:0 10px;}
+.colorsbox .colors_con .desc .list li h5{ color:#6d1718; font:12px "Microsoft Yahei";}
+.colorsbox .colors_con .desc .list li p{ font:12px "Microsoft Yahei"; padding:0 5px 5px 35px;}
+
+.yellow{background:#fff107;}
+.blue{background:#006fba;}
+.red{ background:#d90c25;}

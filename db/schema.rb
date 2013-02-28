@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214022518) do
+ActiveRecord::Schema.define(:version => 20130227074456) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -118,6 +118,17 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "collects", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "design_image_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "weekly_star_id"
+    t.integer  "design_id"
+    t.integer  "color_design_id"
+    t.integer  "master_design_id"
+  end
+
   create_table "color_codes", :force => true do |t|
     t.string   "code"
     t.string   "name"
@@ -171,6 +182,19 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
 
+  create_table "cubit_fixtures", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "fixture_area"
+    t.string   "fixture_type"
+    t.integer  "area_id"
+    t.string   "house_name"
+    t.string   "pre_price"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "customer_replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -207,22 +231,40 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.integer  "room"
     t.text     "content"
     t.text     "reason"
-    t.integer  "votes_count",       :default => 0
     t.string   "color1_name",       :default => "墙面推荐色"
     t.string   "color2_name",       :default => "墙面推荐色"
     t.string   "color3_name",       :default => "墙面推荐色"
+    t.integer  "votes_count",       :default => 0
     t.boolean  "edited_color",      :default => false
     t.string   "pinyin"
+    t.integer  "view_count",        :default => 0
+    t.integer  "collects_count",    :default => 0
+    t.integer  "sorts",             :default => 100
   end
 
-  add_index "design_images", ["created_at"], :name => "NewIndex5"
+  add_index "design_images", ["area_id"], :name => "area_id"
+  add_index "design_images", ["audited", "edited_color"], :name => "index_design_images_on_audited_and_edited_color"
+  add_index "design_images", ["created_at"], :name => "created_at"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
-  add_index "design_images", ["imageable_id"], :name => "NewIndex2"
+  add_index "design_images", ["imageable_id"], :name => "imageable_id"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
-  add_index "design_images", ["imageable_type"], :name => "NewIndex3"
-  add_index "design_images", ["is_cover"], :name => "NewIndex4"
+  add_index "design_images", ["imageable_type"], :name => "imageable_type"
   add_index "design_images", ["is_cover"], :name => "index_design_images_on_is_cover"
-  add_index "design_images", ["user_id"], :name => "NewIndex1"
+  add_index "design_images", ["pinyin"], :name => "index_design_images_on_pinyin"
+  add_index "design_images", ["sorts"], :name => "index_design_images_on_sorts"
+  add_index "design_images", ["source"], :name => "source"
+  add_index "design_images", ["view_count"], :name => "index_design_images_on_view_count"
+  add_index "design_images", ["votes_count"], :name => "votes_count"
+
+  create_table "design_tags", :force => true do |t|
+    t.integer  "design_id"
+    t.integer  "image_library_category_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "design_tags", ["design_id"], :name => "index_design_tags_on_design_id"
+  add_index "design_tags", ["image_library_category_id"], :name => "index_design_tags_on_image_library_category_id"
 
   create_table "designs", :force => true do |t|
     t.string   "title"
@@ -243,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.string   "recommend_color_category1"
     t.boolean  "is_yda",                    :default => false
     t.boolean  "is_refresh",                :default => false
+    t.string   "property_name"
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
@@ -389,18 +432,30 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
 
   create_table "image_library_categories", :force => true do |t|
     t.string   "title"
-    t.integer  "parent_id",  :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "parent_id",      :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.integer  "children_count", :default => 0
+    t.integer  "position",       :default => 0
+    t.string   "pinyin"
   end
+
+  add_index "image_library_categories", ["lft"], :name => "index_image_library_categories_on_lft"
+  add_index "image_library_categories", ["parent_id"], :name => "index_image_library_categories_on_parent_id"
+  add_index "image_library_categories", ["pinyin"], :name => "index_image_library_categories_on_pinyin"
 
   create_table "image_tags", :force => true do |t|
     t.integer  "design_image_id"
     t.integer  "image_library_category_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.string   "genre"
   end
 
+  add_index "image_tags", ["design_image_id"], :name => "design_image_id"
   add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
   add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
 
@@ -439,6 +494,18 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.integer  "subject_id"
     t.string   "work_experience"
   end
+
+  create_table "lands", :force => true do |t|
+    t.string   "source"
+    t.string   "source_ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "lands", ["created_at"], :name => "created_at"
+  add_index "lands", ["created_at"], :name => "index_lands_on_created_at"
+  add_index "lands", ["source"], :name => "index_lands_on_source"
+  add_index "lands", ["source"], :name => "source"
 
   create_table "login_logs", :force => true do |t|
     t.integer  "user_id"
@@ -597,7 +664,6 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
   end
 
   add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
-  add_index "old_design_files", ["old_design_id"], :name => "index_old_design_files_on_old_design_id"
 
   create_table "old_designs", :force => true do |t|
     t.string   "title",       :limit => 256
@@ -681,6 +747,25 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.datetime "img_updated_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "rep_replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.string   "reply_type"
+    t.integer  "source_reply_id"
+    t.string   "content"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "reply_id"
+  end
+
+  create_table "replies", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "reply_user_id"
+    t.text     "content"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "reply_msgs", :force => true do |t|
@@ -999,6 +1084,12 @@ ActiveRecord::Schema.define(:version => 20130214022518) do
     t.datetime "published_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "visit_ips", :force => true do |t|
+    t.string   "ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "votes", :force => true do |t|

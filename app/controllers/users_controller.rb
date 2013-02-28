@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  def me
+    redirect_to user_path(current_user)
+  end
+
+  def edit_me
+    redirect_to edit_user_path(current_user)
+  end
+
   def show
     user = User.find(params[:id])
     if user.role_name == "user"
@@ -31,7 +39,7 @@ class UsersController < ApplicationController
         end
 
         return @messages
-      end      
+      end
     end
   end
 
@@ -102,7 +110,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id]) if params[:user_id]
     @providers = @user.user_tokens.map {|u| u.provider if u.is_binding?}
 
-    load_skin 
+    load_skin
   end
 
   def binding_cancel

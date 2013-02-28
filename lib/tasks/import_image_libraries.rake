@@ -6,7 +6,7 @@ require 'spreadsheet'
 desc "新浪图库数据导入"
 task :import_image_libraries_sina => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
-  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130122.xls"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130227.xls"
   sheet1 = book.worksheet 0
   sheet1.each do |row|
     user = User.find_by_username(row[6])
@@ -20,8 +20,10 @@ task :import_image_libraries_sina => :environment  do
       new_user = User.new
       new_user.username = "#{row[6]}"+"-sina"
       new_user.password = '123456'
-      new_user.types = row[7]
+      new_user.types = '设计师'
       new_user.source = 'sina'
+      new_user.role_id = 1
+      new_user.des_status = 1
       new_user.save(validate: false)
     end
     style = ImageLibraryCategory.where("title like '%#{row[4]}%'").first
@@ -29,30 +31,39 @@ task :import_image_libraries_sina => :environment  do
     area = Area.where("name like '%#{row[3].gsub(/市/,'')}%'").first if !row[3].blank?
     design = Design.new
     design.title = row[1]
-    design.content = row[13]
+    design.content = row[10]
     design.user_id = new_user.id
     design.style = style.title if style
     design.area_id = area ? area.id : 31
     design.room_type = room.title if room
     if design.save(validate: false)
       file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0].to_i}/*"]
-      unless file_src_arr.blank?
+      if file_src_arr.present?
         file_src_arr.each do |file_src|
-          design_image = design.design_images.new
-          handle = open(file_src) rescue nil
-          handle.class.class_eval { attr_accessor :original_filename, :content_type }
-          handle.original_filename = file_src.split("/").last
-          design_image.file = handle
-          design_image.title = row[1]
-          design_image.area_id = area ? area.id : 31
-          image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-          design_image.tags = [image_tag] if image_tag.present?
-          design_image.room = room.id if room
-          design_image.content = row[13]
-          design_image.user_id = new_user.id
-          design_image.source = 'sina'
-          design_image.save
-          p "保存成功!"
+          p '获取到图片！！！'
+          p file_src
+          after_poking = file_src.split('.').last
+          if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG' 
+            design_image = design.design_images.new
+            handle = open(file_src) rescue nil
+            handle.class.class_eval { attr_accessor :original_filename, :content_type }
+            handle.original_filename = file_src.split("/").last
+            design_image.file = handle
+            design_image.title = row[1]
+            design_image.area_id = area ? area.id : 31
+            image_tag = ImageTag.where(image_library_category_id: style.id).first if style
+            design_image.tags = [image_tag] if image_tag.present?
+            design_image.room = room.id if room
+            design_image.content = row[10]
+            design_image.user_id = new_user.id
+            design_image.source = 'sina'
+            #design_image.sorts = 4
+            if design_image.save
+              p "保存成功!"
+            else
+              p "保存失败!---#{row[0]}"
+            end
+          end
         end
       end
     end
@@ -147,6 +158,25 @@ task :import_image_libraries_for_kepulande => :environment  do
             p "保存成功!"
           end
         end
+      end
+    end
+  end
+end
+
+task :update_image_sort => :environment  do
+  DesignImage.all.each do |img|
+    sorts = 100
+    sorts = 1 if img.source == 'kepulande'
+    sorts = 3 if img.imageable_type == 'MasterDesign'
+    sorts = 4 if img.source == 'sina'
+    sorts = 5 if img.imageable_type == 'ColorDesign'
+    img.update_attribute(:sorts, sorts)
+  end
+  WeeklyStar.all.each do |ws|
+    design_id = ws.design_link.split('/').last
+    if design = Design.find(design_id)
+      design.design_images.each do |img|
+        img.update_attribute(:sorts, 2) if img.sorts != 1
       end
     end
   end

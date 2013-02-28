@@ -1,10 +1,10 @@
 jQuery(document).ready(function($) {
   $(".pinyin_list a").click(function(event) {
     var pinyin = getParameterByName("pinyin");
-    if (pinyin == event.target.innerText) {
+    if (pinyin == $(event.target).text()) {
       refresh_search({pinyin: ''});
     } else {
-      refresh_search({pinyin: event.target.innerText});
+      refresh_search({pinyin: $(event.target).text()});
     }
   });
 
@@ -28,12 +28,11 @@ function getParameterByName(name)
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function add_tag (id) {
-  var tags = getParameterByName("tags").split(",");
-  if (_.indexOf(tags, id.toString()) >= 0) {
-    tags = _.without(tags, id.toString())
+function add_tag (parent_id, id) {
+  if (tags[parent_id] == id) {
+    tags[parent_id] = -1;
   } else {
-    tags = _.union(tags, id.toString())
+    tags[parent_id] = id;
   }
   refresh_search({tags: _.uniq(_.compact(tags)).join(",")});
 }
@@ -50,7 +49,7 @@ function add_all_tag (id) {
 }
 
 function submit_area() {
-  var area_id = null;
+  var area_id = "";
   if ($(".level_1").val() > 0) {
     area_id = $(".level_1").val();
   };
@@ -73,6 +72,14 @@ function search_pinyin(pinyin) {
   refresh_search({pinyin: pinyin});
 }
 
+function search_ranking_list(ranking_list) {
+  refresh_search({ranking_list: ranking_list});
+}
+
+function search_imageable_type(imageable_type) {
+  refresh_search({imageable_type: imageable_type});
+}
+
 function refresh_search(params) {
   var imageable_type = getParameterByName("imageable_type");
   var search = getParameterByName("search");
@@ -80,6 +87,8 @@ function refresh_search(params) {
   var all_tags = getParameterByName("all_tags");
   var area_id = getParameterByName("area_id");
   var pinyin = getParameterByName("pinyin");
+  var ranking_list = getParameterByName("ranking_list");
+
 
   if (params.imageable_type != null) imageable_type = params.imageable_type;
   if (params.search != null) search = params.search;
@@ -87,6 +96,7 @@ function refresh_search(params) {
   if (params.all_tags != null) all_tags = params.all_tags;
   if (params.area_id != null) area_id = params.area_id;
   if (params.pinyin != null) pinyin = params.pinyin;
+  if (params.ranking_list != null) ranking_list = params.ranking_list;
 
-  window.location = "/design_images?imageable_type="+imageable_type+"&pinyin="+pinyin+"&search="+search+"&tags="+tags+"&all_tags="+all_tags+"&area_id="+area_id;
+  window.location = "/design_images?imageable_type="+imageable_type+"&pinyin="+pinyin+"&search="+search+"&tags="+tags+"&all_tags="+all_tags+"&area_id="+area_id+"&ranking_list="+ranking_list;
 }

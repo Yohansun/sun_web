@@ -1,7 +1,8 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
+
 class ChannelController < ApplicationController
 
-  #片区快查
+  #设计快查
   def access
 
     #我型我秀页面跳转
@@ -62,6 +63,37 @@ class ChannelController < ApplicationController
       end
     end
 
-    @design_users = @design_users.page(params[:page]).per(9)
+    @design_users = @design_users.page(params[:page]).per(8)
+
+    #mood
+    @moods = Mood.order("created_at desc").limit(5)
+
+    #design_star
+    design_user_ids = []
+    WeeklyStar.order("id desc").map(&:author_url).each do |ul|
+      design_user_ids << ul.split("/")[-2].to_i
+    end
+    list_design_users = User.where(id: design_user_ids, role_id: 1).limit(8)
+
+    # @xiaofei: 必须重构这些代码
+    @list_design_users1 = list_design_users.page(1).per(2)
+    @list_design_users2 = list_design_users.page(2).per(2)
+    @list_design_users3 = list_design_users.page(3).per(2)
+    @list_design_users4 = list_design_users.page(4).per(2)
+
+    #company_star
+    list_company_users = User.where(id: design_user_ids, role_id: 2).limit(16)
+    @list_company_users1 = list_company_users.page(1).per(4)
+    @list_company_users2 = list_company_users.page(2).per(4)
+    @list_company_users3 = list_company_users.page(3).per(4)
+    @list_company_users4 = list_company_users.page(4).per(4)
+
+    @star_list_counter = [list_design_users.size/2.0, list_company_users.size/4.0].min.ceil
+
+    user_ids = []
+    WeeklyStar.order("id desc").limit(10).map(&:author_url).each do |ul|
+      user_ids << ul.split("/")[-2].to_i
+    end
+    @users = User.where(id: user_ids).reverse
   end
 end

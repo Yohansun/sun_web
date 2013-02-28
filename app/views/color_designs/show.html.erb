@@ -16,6 +16,26 @@
             event.preventDefault();
             $(".big_image img").attr("src", $(event.target).parent().attr("href"));
         });
+        function show_login() {
+          o_in();
+          $('#login_win').show();
+          $("#design_message").hide();
+          $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+              err_in();
+          });
+      }
+        $(function(){
+          if ($("#new_message")) {
+            $("#new_message").click(function (event) {
+                <% if current_user -%>
+                return true;
+                <% else -%>
+                show_login();
+                return false;
+                <% end -%>
+            });
+        }
+        });
     </script>
 <% end -%>
 <div class="main page_weekstar page_weekstar_detail">
@@ -28,7 +48,7 @@
     <em><a href="/">首页</a><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group">
-    <div class="weekstart_titleB">
+    <div class="weekstart_titleB pr">
       <h1><%= @design.design_name %></h1>
 
       <div class="subtitle">
@@ -68,8 +88,11 @@
           <%#= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{@design.design_name}】，推荐色：立邦#{@design.recommend_color1} #{@code.name}，让色彩融入生活，尽在iColor@刷新生活iColor", "http://#{request.host_with_port}/color_designs/#{@design.id}", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
         </div>
       </div>
-      <div class="fullscreen_btn">
-        <%= link_to "全屏观看", "/color_designs/#{@design.id}/fullscreen" %>
+
+      <div class="btn_group fr" style="margin-top:5px;">
+        <%= link_to "免费下载", "/color_designs/#{@design.id}/download", :class =>"icon_freedown" %>
+        <%= link_to "收藏", user_collects_path(@design, color_design_id: @design.id), method: :post, id: "new_message", :class => "icon_colleting"  %>
+        <%= link_to "全屏观看", "/color_designs/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
       </div>
     </div>
     <div class="weekstart_detail">

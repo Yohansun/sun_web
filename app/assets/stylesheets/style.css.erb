@@ -41,7 +41,8 @@ p.master_icon_bg{background: url(<%= asset_path "master/msg_bg.png"%>) no-repeat
 .hot_topics_box .h3_sub span{ float:left;font:12px "arial simsun";color:#868686; margin-right:10px;}
 .h3_sub span.zf,.h3_sub span.pl{ padding-left:20px; line-height:17px;}
 .h3_sub span.zf{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -35px;}
-.h3_sub span.pl{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -16px;}
+.h3_sub span.zf{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -35px;}
+.transpond_btn{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left -16px;}
 
 .hot_topics_con p.pl40{ margin-top:34px;}
 .hot_topics_con p.pl40,.new_act .new_news p.pl40{background:url(<%= asset_path "master/tag_icon.png"%>) no-repeat left center;font:13px "arial simsun";color:#e9700f;}
@@ -151,7 +152,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 .design_result  ul.d_works.add_icon li a{display:block;position:relative;}
 .design_result  ul.d_works li a span.design_icon{position:absolute;top:-6px;right:-5px;}
 
-.design_result h3{border-bottom:1px dotted #a09f9d; font:14px "Microsoft Yahei"; color:#313131; font-weight:bold;margin-top:10px; padding-bottom:7px;}
+.design_result h3{border-bottom:1px dotted #a09f9d; font:14px "Microsoft Yahei"; color:#313131; font-weight:bold;margin-top:10px; padding-bottom:7px;overflow:hidden;height:14px;}
 .design_result p,.inspiration_result .row p{overflow:hidden; margin-top:5px; font-size:12px; color:#666; line-height:20px;}
 .design_result p strong,.design_result p span,.inspiration_result p strong,.inspiration_result .row p span{ float:left;color:#5c5c5c; padding-left:20px;display:block; margin-right:10px; line-height:18px;}
 .design_result p.p1 strong,.inspiration_result p.p1 strong{ background:url(<%= asset_path "design/d_icon.png"%>) no-repeat left 2px;}
@@ -217,7 +218,7 @@ ul.design_filter .li_current a{color:#ffffff;}
 .host_self .host_status h2 {height:30px;overflow:hidden;font:18px "Microsoft Yahei"; color:#000;margin:5px 0;padding-left:7px;zoom:1;}
 .host_self .host_status h2 em{float:left; display:block; padding-left:20px; background:url(<%= asset_path "personal/gold_icon.png"%>) no-repeat left 4px;font:12px "Microsoft Yahei";line-height:24px;}
 .host_self .host_status h2 strong{float:left; margin-right:25px;line-height:26px;}
-.host_self .host_status p{ background:url(<%= asset_path "personal/signup_icon.png"%>) no-repeat;font:14px "Microsoft Yahei"; padding:3px 40px;color:#666666;}
+.host_self .host_status p{ /*background:url(<%= asset_path "personal/signup_icon.png"%>) no-repeat;*/font:14px "Microsoft Yahei"; padding:3px 7px;color:#666666;}
 .host_self .host_status p.icon_email{ background-position:7px 7px;}
 .host_self .host_status p.icon_qq{ background-position:7px -20px;}
 .host_self .host_status p.icon_msn{ background-position:7px -44px;}
@@ -260,8 +261,8 @@ a.launch_act{background: url(<%= asset_path "personal/launch_act.png"%>) no-repe
 .host_sort ul.show_tit_ul li.sort_show_tit a{font:16px/25px "Microsoft Yahei";color:#fff;}
 
 .sort_box{padding:0 20px;*z-index:2!important;}
-.sort_box ul.sort_show_ul{ position:relative; z-index:2; height:31px; width:600px;}
-.sort_box ul.sort_show_ul li{ float:left; background:#dfded9; text-align:center; margin-right:13px; height:31px; width:91px;}
+.sort_box ul.sort_show_ul{ position:relative; z-index:2; height:31px; width:760px;}
+.sort_box ul.sort_show_ul li{ float:left; background:#dfded9; text-align:center; margin-right:8px; height:31px; width:91px;}
 .sort_box ul.sort_show_ul li a{font:14px/31px "Microsoft Yahei";color:#7a786b;}
 .sort_box ul.sort_show_ul li.sort_show{position:relative; top:-3px;*top:-4px!important;background:url(<%= asset_path "personal/sort_cur_bg.png"%>) no-repeat center top; text-align:center; padding:5px 15px 10px; min-width:64px; height:25px;}
 .sort_box ul.sort_show_ul li.sort_show a{font:16px/25px "Microsoft Yahei";color:#fff;}
@@ -295,7 +296,7 @@ a.launch_act{background: url(<%= asset_path "personal/launch_act.png"%>) no-repe
 /*out/in works*/
 .host_works_img{ width:207px; height:224px;}
 .host_main .design_result  ul.d_works{ padding:0;}
-.host_main .design_result  ul.d_works li{ position:relative;width:207px; *margin:0px 6px 0 0!important;}
+.host_main .design_result  ul.d_works li{ position:relative;width:207px;height:340px; *margin:0px 6px 0 0!important;}
 .host_works_edit{ position:absolute; right:0px; top:203px; /*display:none;*/}
 .host_works_edit a{ float:right; margin-left:10px;}
 .host_main .design_result ul.d_works{ border-bottom:1px dotted #A09F9D; border-top:none; padding-bottom:15px;}
@@ -304,7 +305,7 @@ form.host_msgboard{ padding-bottom:25px;}
 form.host_msgboard textarea{ width:836px; height:55px; padding:10px; border:1px solid #e2e2e2;color:#c5c5c5;font-size:12px;}
 form.host_msgboard p{ text-align:right; padding:5px;font-size:12px;}
 form.host_msgboard input.host_reset{ background: url(<%= asset_path "design/resetB.gif"%>) no-repeat; height:31px; width:61px; margin-left:10px;}
-form.host_msgboard input.host_submit{ background: url(<%= asset_path "design/submitB.gif"%>) no-repeat; height:31px; width:94px; margin-left:20px;}
+form.host_msgboard input.host_submit{ background: url(<%= asset_path "design/submitB.gif"%>) no-repeat; height:31px; width:94px; margin-top:12px;}
 
 .msgboard_list {padding:5px 30px 5px 45px;}
 .msgboad_item{ overflow:hidden; margin:2px 0; padding:10px 0;}
@@ -1150,7 +1151,7 @@ span.list_icon{background:url(<%= asset_path "show/list_icon.png"%>) no-repeat!i
 .section.zhengzhoubg .items p,.section.hangzhou .items p,.section.qingdao .items p,.section.jinan .items p,.section.xian .items p,.section.haikou .items p,.section.beijing .items p{font: 14px/28px "Microsoft Yahei";color:#666666;text-indent: 30px;}
 .section.zhengzhoubg .items p.pt50,.section.hangzhou .items p.pt50,.section.qingdao .items p.pt50,.section.jinan .items p.pt50,.section.xian .items p.pt50,.section.beijing .items p.pt50{padding-top: 50px;}
 .section.zhengzhoubg .items p.ft18,.section.hangzhou .items p.ft18,.section.qingdao .items p.ft18,.section.jinan .items p.ft18,.section.xian .items p.ft18,.section.beijing .items p.ft18{font: 18px/30px "Microsoft Yahei";color:#272727;}
- 
+
 .section.zhengzhoubg .items h3,.section.hangzhou .items h3,.section.hangzhou .items h3,.section.jinan .items h3,.section.xian .items h3,.section.haikou .items h3,.section.beijing .items h3{font-size: 24px;color:#666666;margin-bottom: 20px;}
 .section.zhengzhoubg .items h4,.section.hangzhou .items h4,.section.qingdao .items h4,.section.jinan .items h4,.section.xian .items h4{font:bold 14px "Microsoft Yahei";color:#666666;margin-bottom: 10px;}
 .section.zhengzhoubg .items img.fl,.section.hangzhou .items img.fl,.section.qingdao .items img.fl,.section.jinan .items img.fl,.section.xian .items img.fl{margin-right:20px;}
@@ -1205,3 +1206,6 @@ table#prize_table4{height:470px;left:432px;top:65px;width:430px;}
 #overlay{z-index:10000;}
 
 
+.collect_btn{position:absolute;top:79px;right:122px;}
+.collect_btn a{color:#333;}
+.del_color{background:url(<%= asset_path 'design/review_remove.jpg'%>) no-repeat 0 5px;}

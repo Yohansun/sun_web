@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/amerine/acts_as_tree.git
+  revision: e10f1a289c11a4e05138b2188f170f289203bb26
+  specs:
+    acts_as_tree (1.2.0)
+      activerecord (>= 3.0.0)
+
+GIT
   remote: git@git.networking.io:nioteam/magic_admin.git
   revision: 9e976e70ece1edf93758f1f6070328ff4c4cf29d
   specs:
@@ -21,13 +28,6 @@ GIT
       inherited_resources
       paperclip
       rails (~> 3.2.1)
-
-GIT
-  remote: git@github.com:amerine/acts_as_tree.git
-  revision: e10f1a289c11a4e05138b2188f170f289203bb26
-  specs:
-    acts_as_tree (1.2.0)
-      activerecord (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -143,10 +143,9 @@ GEM
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.7.6)
-    kaminari (0.13.0)
+    kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-      railties (>= 3.0.0)
     kgio (2.7.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -340,7 +339,7 @@ DEPENDENCIES
   httmultiparty
   jquery-rails
   json
-  kaminari
+  kaminari (= 0.14.1)
   magic_admin!
   magic_content!
   map_by_method

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>幻灯片</title>
+    <meta charset="utf-8" />
+    <%= stylesheet_link_tag  "reset", "galleryc"  %>
+    <%= javascript_include_tag  "jquery","galleryC"  %>
+  </head>
+  <body>
+    <div class="galleryC_wrap">
+      <div class="title"><h1><%= @design_image.title ? @design_image.title : "未命名" %><span class="qin_span"></span></h1></div>
+      <div class="galleryC">
+        <div class="toolbar">
+          <div class="toolbar_wrap">
+            <div class="exit"><%= link_to_function "退出全屏", "window.opener = null; window.close();" %></div>
+          </div>
+        </div>
+        <div class="big_image">
+          <%= image_tag(@design_image.file.url(:fullscreen))%>
+        </div>
+      </div>
+    </div>
+    <div class="gallery_over_mask"></div>
+  </body>
+</html>

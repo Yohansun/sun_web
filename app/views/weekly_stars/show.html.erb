@@ -31,7 +31,7 @@
         <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
           <span class="fl">2012.5.12 往期作品</span>
       </div>
-      <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen" %></div>
+      <div class="btn_group fr" style="margin-top:10px;"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %></div>
       <h1><%= @design.design_name %></h1>
     </div>
 <%- else %>
@@ -43,7 +43,7 @@
       <span class="fl"><%= @design.try(:published_at).try(:to_date) %>往期作品</span>
     <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="star_next fl"></a>
   </div>
-  <div class="fullscreen_btn"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show" %></div>
+  <div class="btn_group fr" style="margin-top:10px;"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show", :class =>"icon_fullscreen" %></div>
   <h1><%= @design.design_name %></h1>
 </div>
 <%- end %>
@@ -114,11 +114,13 @@
     <%- end %>
     <%- unless @design.author.blank? %>
         <tr><th>设计师：</th>
-          <td><%=  @design.author %>
-            <%- unless @design.author_url.blank? %>
-                <a href="<%= @design.author_url %>">[进入个人主页]</a></td>
+          <td>
+            <%=  @design.author %>
+            <%= link_to user_asks_path(@link_design.user.id) do %>
+              <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
             <%- end %>
-            </tr>
+          </td>
+        </tr>
     <%- end %>
     <%- unless @design.project_name.blank? %>
         <tr><th>项目名称：</th>

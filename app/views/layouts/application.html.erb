@@ -42,22 +42,20 @@
   <style type="text/css" >
     .nav_hot{position:absolute;top:-13px;left:60px;}
     .nav_hot2{position: absolute;top: -5px;left: 65px;}
+    <%- if controller_name != "home" && controller_name != "design_images" %>
+     .navBot{margin:12px 0;}
+    <%- end %>
+    .navBot li{padding:1px 5px 2px;}
   </style>
-
 </head>
 <body style="<%= 'height:100%;' if controller_name =~ /master_designs|design_appreciation|color_designs/ %>">
 <div class="header">
-  <div class="nav pa">
+  <div class="nav pr">
     <div class="logo">
       <a href="/"><%= image_tag "logo1.png" %></a>
     </div>
     <div class="navTop fr">
-      <%- if user_signed_in? %>
-          <a href="<%= user_path(current_user) %>" class="user_info fl">
-            <strong><%= truncate(current_user.display_name, length: 12) %></strong>
-            我的主页<%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
-          </a>
-      <%- end %>
+      <span class="js-user-info"></span>
 
       <iframe style="float:left;display:inline;margin:11px;" width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=2032078483&style=1&btn=red&dpc=1"></iframe>
       <div class="search fl">
@@ -92,133 +90,108 @@
         <!-- JiaThis Button END -->
       </div>
       <!--navLabel ends-->
-      <%- unless user_signed_in? %>
-          <a href="javascript:;" class="login fl"></a>
-          <a href="/users/sign_up" class="reg fl"></a>
-      <%- end %>
+
+      <a href="javascript:;" class="login fl"></a>
+      <a href="/users/sign_up" class="reg fl"></a>
       <a href="/" class="nippon fl"></a>
     </div>
     <!--navTop ends-->
     <ul class="navBot fr cw fb ft14">
-      <li><a href="/?from=top">首页</a></li>
-      <li class="pr"><a href="/master_interviews?from=top">大师殿堂</a>
+      <li><a href="/?from=top" class="<%= 'active' if controller_name == 'home' %>">首页</a></li>
+      <li class="pr"><a href="/master_interviews?from=top" class="<%= 'active' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">大师殿堂</a>
         <ul>
-          <li><a href="/master_interviews?from=top">大师访谈</a></li>
-          <li><a href="/master_topics?from=top">热点话题</a></li>
-          <li class="noborder pr"><a href="/master_designs?from=top">大师作品</a>
+          <li><a href="/master_interviews?from=top" class="<%= 'active' if controller_name == 'master_interviews' %>">大师访谈</a></li>
+          <li class="pr noborder"><a href="/master_designs?from=top" class="<%= 'active' if controller_name == 'master_designs' %>">大师作品</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
+          <!-- <li class="noborder"><a href="/master_topics?from=top">业内动态</a></li> -->
+        </ul>
+      </li>
+      <li class="pr">
+        <a href="/design_images?from=top" class="<%= 'active' if controller_name == 'design_images' %>">装修图库</a>
+        <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
+      </li>
+
+      <li class="pr"><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="<%= 'active' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations' %>">设计鉴赏</a>
+        <ul>
+          <li class="pr">
+            <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="<%= 'active' if controller_name == 'weekly_stars' %>">设计之星</a>
+            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
+          </li>
+          <li><a href="/designs?from=top" class="<%= 'active' if controller_name == 'designs' %>">作品展示</a></li>
+          <li class="pr"><a href="/color_designs?from=top" class="<%= 'active' if controller_name == 'color_designs' %>">色彩配搭</a>
+            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
+          </li>
+          <li class="pr noborder"><a href="/inspirations?from=top" class="<%= 'active' if controller_name == 'inspirations' %>">灵感秀</a></li>
+          <!-- <li class="noborder pr"><a href="/my_show?from=top">我型我秀</a> -->
+          <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
+          <!-- </li> -->
         </ul>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
-      <li class="pr"><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计鉴赏</a>
-        <ul>
-          <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
-          <li><a href="/designs?from=top">推荐作品</a></li>
-          <li class="pr"><a href="/inspirations?from=top">灵感秀</a>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-          </li>
-          <li class="pr"><a href="/color_designs?from=top">色彩配搭</a>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-          </li>
-          <li class="noborder pr"><a href="/my_show?from=top">我型我秀</a>
-           <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
-          </li>
+
+      <li class="pr"><a href="/channel/access?from=top" class="<%= 'active' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' %>">业主通道</a>
+        <ul >
+          <li class="pr"><a href="/channel/access?from=top" class="<%= 'active' if controller_name == 'channel' %>">设计快查</a><span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span></li>
+          <li><a href="/faqs" class="<%= 'active' if controller_name == 'faqs' %>">装修问答</a></li>
+          <li><a href="/faqs#tips">装修贴士</a></li>
+          <li><a href="/mix_colors/new?from=top" class="<%= 'active' if controller_name == 'mix_colors' %>">配色咨询</a></li>
+          <li class="noborder"><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">刷新服务</a></li>
+          <!-- <li><a href="/faqs?from=top">装修问答</a></li>
+          <li class="noborder"><a href="/mix_colors/new?from=top">配色咨询</a></li> -->
         </ul>
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
-      <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">行业资讯</a>
+
+      <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class="<%= 'active' if controller_name == 'articles' || controller_name == 'color_articles' || controller_name == 'master_topics' %>">行业资讯</a>
         <ul>
-          <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a>
+          <li class="pr"><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class="<%= 'active' if controller_name == 'articles' %>">装修资讯</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <li><a href="/color_articles?from=top">色彩资讯</a></li>
-          <li class="noborder"><a href="/weibo_wall?from=top">微博资讯</a></li>
+          <li><a href="/color_articles?from=top" class="<%= 'active' if controller_name == 'color_articles' %>">色彩资讯</a></li>
+          <li class="noborder"><a href="/master_topics" class="<%= 'active' if controller_name == 'master_topics' %>">业内动态</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="/designer_events?from=top">精彩活动</a>
-        <ul class="w_nav1">
-          <li><a href="/events?from=top">年度色彩趋势活动</a></li>
-          <li><a href="/designer_events?from=top">设计师活动</a></li>
-          <li class="pr"><a href="/other_events?from=top">其他精彩活动</a></li>
-          <li class="noborder pr"><a href="/gift_list?from=top">获奖名单</a></li>
+      <li class="pr"><a href="/softwares/tools?from=top" class="<%= 'active' if controller_name == 'softwares' %>">应用工具</a>
+        <ul>
+          <li><a href="/softwares/case" class="<%= 'active' if controller_name == 'softwares' && action_name == 'case' %>">案例下载</a></li>
+          <li class="noborder"><a href="/softwares/tools"  class="<%= 'active' if controller_name == 'softwares' && action_name == 'tools' %>">配色软件</a></li>
+          <!-- <li class="noborder"><a href="/softwares/app">APP</a></li> -->
         </ul>
       </li>
-      <li class="pr"><a href="/softwares/tools?from=top">实用工具</a>
-        <ul class="w_nav2">
-          <li><a href="/softwares/tools?from=top">配色工具</a></li>
-          <li class="noborder"><a href="javascript:void(0);">设计应用软件</a></li>
-          <!-- <li class="noborder"><a href="/softwares/app?from=top">设计应用软件</a></li> -->
-        </ul>
-      </li>
-      <li class="pr"><a href="/channel/access?from=top">业主通道</a>
-        <ul class="w_nav3">
-          <li class="pr"><a href="/channel/access?from=top">片区快查</a>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-          </li>
-          <li><a href="/faqs?from=top">家装设计咨询</a></li>
-          <li class="noborder"><a href="/mix_colors/new?from=top">在线配色服务</a></li>
-        </ul>
-      </li>
-      <li class="noborder pr"><a href="/art?from=top">漆光艺彩</a>
-        <ul class="w_nav4">
-          <li><a href="/art?from=top">米兰诺艺术效果</a></li>
-          <li><a href="/7-1?from=top">木纹风尚生活</a></li>
+
+      <li class="pr"><a href="/art?from=top" class="<%= 'active' if controller_name == 'function' %>">漆光艺彩</a>
+        <ul style="width:146px">
+          <li><a href="/art?from=top" class="<%= 'active' if controller_name == 'function' && action_name == 'art' %>">米兰诺艺术效果</a></li>
+          <li class="noborder"><a href="/7-1?from=top" class="<%= 'active' if controller_name == 'function' && action_name == '7-1' %>">木纹风尚生活</a></li>
           <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
-          <li class="noborder"><a href="/7-3?from=top">刷新灵感我绘我家</a></li>
+          <!-- <li class="noborder"><a href="/7-3?from=top">刷新灵感我绘我家</a></li> -->
         </ul>
         <!-- <span class="nav_hot"><img src="<%= asset_path "new.png"%>" /></span> -->
+      </li>
+      <li class="noborder pr"><a href="/designer_events?from=top" class="<%= 'active' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts' %>">精彩活动</a>
+        <ul style="width:116px; left: -25px;_left: -17px">
+          <li><a href="/designer_events?from=top" class="<%= 'active' if controller_name == 'designer_events' %>">设计师活动</a></li>
+          <li><a href="/other_events?from=top" class="<%= 'active' if controller_name == 'other_events' %>">其他活动</a></li>
+          <li class="noborder"><a href="/gift_list?from=top" class="<%= 'active' if controller_name == 'gifts' %>">获奖名单</a></li>
+          <!-- <li class="noborder"><a href="/events?from=top">年度色彩趋势活动</a></li> -->
+        </ul>
       </li>
     </ul>
     <!--navBot ends-->
   </div>
   <!--nav ends-->
 
-  <%= yield :index %><!--仅仅首页的-->
-
-  <div class="loginBg pa none">
-    <div class="err_tips cr ft12 none pa">
-      用户名或密码错误
-      <span class="fr cp">x</span>
-    </div>
-    <!--err_tips-->
-    <div class="loginCon ft12 clear">
-      <%= form_for(:user, :url => user_session_path, :remote => true, :html => {:id => "new_user"}) do |f| %>
-          <div class="clear">
-            <label for="username" class="username ft14 fl">帐号：</label>
-            <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
-          </div>
-          <div class="clear">
-            <label for="password" class="password ft14 fl">密码：</label>
-            <input id="password" type="password" class="fl" name="user[password]"/>
-            <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
-          </div>
-          <input id="login" type="image" src="<%= asset_path "login.jpg" %>"/>
-
-          <div class="checkbox fl">
-            <input type="checkbox"/><span>下次自动登录</span>
-          </div>
-      <%- end %>
-    </div>
-    <!--loginCon ends-->
-    <ul class="loginCon ft12 border clear">
-      <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>"/>新浪微博</a></li>
-      <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>"/>QQ</a></li>
-      <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>"/>人人网</a></li>
-      <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>"/>开心网</a></li>
-    </ul>
-    <div class="loginCon ft12 border clear">
-      <p class="fl">还没加入iColor?</p>
-      <a href="/users/sign_up" class="reg_now fl"></a>
-    </div>
-    <!--loginCon ends-->
-    <div class="loginCon border">
-      <a href="/gift"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads"/></a>
-    </div>
-  </div>
-  <!--loginBg ends-->
+  <%= yield :index %>
 </div>
 <!--header ends-->
+<%- if VisitIp.find_by_ip(request.ip).nil? %>
+  <div id="overlay" style="display:block;z-index:10000;"></div>
+  <div style="position:fixed;_position:absolute;top:50px;left:50%;margin-left:-494px;_margin-left:-480px;z-index:10001">
+    <a class="js-index_popclose0223" href="javascript:;" style="position:absolute;right:56px;top:63px;z-index:10001"><img src="<%= asset_path '2013/index/index_popclose0223.jpg' %>"></a>
+    <img src="<%= asset_path '2013/index/index_pop0223.png' %>">
+  </div>
+<%- end %>
 
 <%= yield %>
 
@@ -242,48 +215,50 @@
       <ul>
         <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
         <li><a href="/master_interviews">大师访谈</a></li>
-        <li><a href="/master_topics">热点话题</a></li>
-        <li><a href="/master_designs">大师作品</a></li>
+        <li><a href="/master_designs?from=top">大师作品</a></li>
+      </ul>
+      <ul>
+        <li><a href="/design_images?from=top">装修图库</a></li>
       </ul>
       <ul>
         <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class='fb'>设计鉴赏</a></li>
         <li><a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
-        <li><a href="/designs">推荐作品</a></li>
-        <li><a href="/inspirations">灵感秀</a></li>
+        <li><a href="/designs">作品展示</a></li>
         <li><a href="/color_designs">色彩配搭</a></li>
-        <li><a href="/my_show">我型我秀</a></li>
-      </ul>
-      <ul>
-        <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class='fb'>行业资讯</a></li>
-        <li><a href="#">色彩资讯</a></li>
-        <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a></li>
-        <li><a href="#">微博资讯</a></li>
-      </ul>
-      <ul>
-        <li><a href="#" class='fb'>精彩活动</a></li>
-        <li><a href="#">年度色彩趋势活动</a></li>
-        <li><a href="/events">设计师活动</a></li>
-        <li><a href="#">其他精彩活动</a></li>
-      </ul>
-      <ul>
-        <li><a href="/softwares/case" class='fb'>实用工具</a></li>
-        <li><a href="/softwares/tools">配色工具</a></li>
-        <li><a href="javascript:void(0);">设计应用软件</a></li>
-        <!-- <li><a href="/softwares/app">设计应用软件</a></li> -->
+        <li><a href="/inspirations">灵感秀</a></li>
       </ul>
       <ul>
         <li>
           <a href="#" class='fb'>业主通道</a>
         </li>
-        <li><a href="/channel/access">片区快查</a></li>
-        <li><a href="/faqs">家装设计咨询</a></li>
-        <li><a href="/mix_colors/new">在线配色服务</a></li>
+        <li><a href="/channel/access">设计快查</a></li>
+        <li><a href="/faqs">装修问答</a></li>
+        <li><a href="/faqs#tips">装修贴士</a></li>
+        <li><a href="/mix_colors/new?from=top">配色咨询</a></li>
+        <li><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a></li>
+      </ul>
+      <ul>
+        <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>" class='fb'>行业资讯</a></li>
+        <li><a href="/articles?from=top&tags=<%= URI.escape("设计相关") %>">装修资讯</a></li>
+        <li><a href="/color_articles?from=top">色彩资讯</a></li>
+        <li><a href="/master_topics">业内动态</a></li>
+      </ul>
+      <ul>
+        <li><a href="/softwares/tools?from=top" class='fb'>应用工具</a></li>
+        <li><a href="/softwares/case">案例下载</a></li>
+        <li><a href="/softwares/tools">配色软件</a></li>
+        <!-- <li><a href="/softwares/app">设计应用软件</a></li> -->
+      </ul>
+      <ul>
+        <li><a href="/art?from=top" class='fb'>漆光艺彩</a></li>
+        <li><a href="/art?from=top">米兰诺艺术效果</a></li>
+        <li><a href="/7-1?from=top">木纹风尚生活</a></li>
       </ul>
       <ul class="ul_last">
-        <li><a href="/7-3" class='fb'>漆光艺彩</a></li>
-        <li><a href="#">木纹风尚生活</a></li>
-        <li><a href="#">墙面艺术效果</a></li>
-        <li><a href="/7-3">刷新灵感我绘我家</a></li>
+        <li><a href="/designer_events?from=top" class='fb'>精彩活动</a></li>
+        <li><a href="/designer_events?from=top">设计师活动</a></li>
+        <li><a href="/other_events?from=top">其他活动</a></li>
+        <li><a href="/gift_list?from=top">获奖名单</a></li>
       </ul>
     </div>
   </div>
@@ -327,180 +302,21 @@
 <% end %>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#new_user').bind('ajax:error', function (xhr, status, error) {
-            err_in();
-        });
-    });
-</script>
-<script type="text/javascript">
-
-    // show login window for un-login user
-    $(function () {
-
-      //订阅电子期刊
-      if ($(".subscribe")) {
-            $(".subscribe").click(function (event) {
-                <% if current_user -%>
-                  o_in();
-                  $('#july_last').show().find('input[type=text]').val('');
-                  $('.subs_err').hide();
-                <% else -%>
-                  show_login();
-                  return false;
-                <% end -%>
-            });
-        };
-
-      //礼从天降登陆身份验证
-      if ($("#gift_login")) {
-            $("#gift_login").click(function (event) {
-                <% if current_user && !(current_user.common_user?) -%>
-                return true;
-                <% elsif current_user && current_user.common_user? -%>
-                alert("抱歉！普通用户身份是无法上传作品的哦！");
-                return false;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        };
-
-      if ($("#per_form")) {
-            $("#per_form").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-
-      if ($("#new_message")) {
-            $("#new_message").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        // if ($("#new_comment")) {
-        //     $("#new_comment").submit(function (event) {
-        //         <% if current_user -%>
-        //         var $area = $('#comment_content')
-        //         var txt = $area.val();
-        //         if (txt == '') {
-        //             inputBlank($area);
-        //             return false;
-        //         }
-        //         <% else -%>
-        //         show_login();
-        //         return false;
-        //         <% end -%>
-        //     });
-        // }
-        // ;
-        if ($("#new_reply_msg")) {
-            $("#new_reply_msg").submit(function (event) {
-                <% if current_user -%>
-                var $area = $('#reply_msg_content')
-                var txt = $area.val();
-                if (txt == '') {
-                    inputBlank($area);
-                    return false;
-                }
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#new_faq")) {
-            $("#new_faq").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#new_site_message")) {
-            $("#new_site_message").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                $('.server_input').hide();
-                $('.server_suc').hide();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#channel_service")) {
-            $("#channel_service").submit(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#channel_access")) {
-            $("#channel_access").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($(".one_key_forward")) {
-            $(".one_key_forward").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($("#ckepop a")) {
-            $("#ckepop a").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-        ;
-        if ($(".new_mix_color")) {
-            $(".new_mix_color").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        };
-    });
+$(document).ready(function () {
+  $.getScript("/home/overall.js?"+(new Date().valueOf()));
+  $('#new_user').bind('ajax:error', function (xhr, status, error) {
+    err_in();
+  });
+  $('a.js-index_popclose0223').click(function(){
+    $(this).parent('div').hide();
+    $('#overlay').hide();
+  });
+  $.ajax({
+    type: "POST",
+    url: "<%= visit_ips_path %>",
+    data: { ip : "<%= request.ip %>" }
+  });
+});
 </script>
 
 <% if Rails.env.production? %>
@@ -547,8 +363,9 @@
 <% end %>
 
 <div class="server_area">
-  <a href="javascript:void(0)" class="server fr"></a>
-
+  <%- unless controller_name == "weekly_stars" || controller_name == "design_images" || controller_name == "designs" %>
+    <a href="javascript:void(0)" class="server fr"></a>
+  <%- end %>
   <div class="server_input none">
     <%= form_tag online_qa_path, :id => "new_site_message", :remote => true do %>
         <div class="server_content ft14 tc fb">
@@ -580,5 +397,6 @@
   <!--server_suc ends-->
 </div>
 <!--server_area ends-->
+<a href="javascript:;" id="gotop">返回顶部</a>
 </body>
 </html>

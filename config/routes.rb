@@ -21,6 +21,9 @@ Icolor::Application.routes.draw do
   get "/shuaxin" => redirect("/shuaxin/index.html")
   get "/21days" => redirect("/21days/index.html")
 
+  get "/users/me" => "users#me"
+  get "/users/edit_me" => "users#edit_me"
+  get "home/overall.js" => "home#overall"
   root :to => 'home#index'
 
   resources :votes
@@ -77,6 +80,7 @@ Icolor::Application.routes.draw do
   match "/master_designs" => "master_designs#index"
   match "/master_designs/:id" => "master_designs#show"
   match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
+  match "/master_designs/:id/download" => "master_designs#download"
 
   #行业资讯
   match "/color_articles" => "color_articles#index"
@@ -95,7 +99,12 @@ Icolor::Application.routes.draw do
   match "/contact" => "contact#index"
 
   #设计鉴赏
-  resources :weekly_stars, :only => [:index, :show]
+  # resources :weekly_stars, :only => [:index, :show]
+  resources :weekly_stars do
+    member do
+      get :download
+    end
+  end
   match "/weekly_stars/:id/fullscreen" => "weekly_stars#fullscreen"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
@@ -105,13 +114,20 @@ Icolor::Application.routes.draw do
   match "/my_show" => "my_show#index"
   match "/my_show/autocomplete_username" => "my_show#autocomplete_username"
 
-  resources :inspirations
+  resources :inspirations do
+    member do
+      get :download
+    end
+  end
   match "/inspirations_upload" => "inspirations#upload"
   resources :comments
   resources :reply_msgs
+  resources :rep_replies
   match "/color_designs" => "color_designs#index"
   match "/color_designs/:id" => "color_designs#show"
   match "/color_designs/:id/fullscreen" => "color_designs#fullscreen"
+  match "/color_designs/:id/download" => "color_designs#download"
+
 
   #精彩活动
   match "/events" => "events#index"
@@ -182,7 +198,6 @@ Icolor::Application.routes.draw do
   match '/yda/2013/rater' => 'yda2013#rater'
 
   resources :weekly_tips, only: :index
-
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
@@ -193,7 +208,14 @@ Icolor::Application.routes.draw do
     match "/community/binding_cancel" => "users#binding_cancel"
 
     #用户对内和对外的相关页面
+    resources :sign_up do
+      collection do
+        get :reset
+      end
+    end
     resources :events
+    resources :asks
+    resources :collects
     resources :faqs
     resources :inspirations do
       member do
@@ -206,7 +228,14 @@ Icolor::Application.routes.draw do
       member do
         get :upload
         get :fullscreen
+        get :edit_design
+        get :design_image_tags
         match :design_update
+        get :download
+      end
+      collection do 
+        post :update_design
+        get :upload_success
       end
     end
     resources :design_images
@@ -226,12 +255,20 @@ Icolor::Application.routes.draw do
     collection do
       get :decoration_parts
       get :image_search_index
+      post :image_tag
     end
     member do
       get :image_show
       get :more_comment
+      get :fullscreen
+      get :download
     end
   end
+  resources :collect do
+  end
+
+  resources :cubit_fixtures, only: :create
+  resources :visit_ips,only: :create
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"

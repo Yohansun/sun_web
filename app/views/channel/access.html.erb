@@ -1,88 +1,129 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag 'news' %>
-    <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+    <%= stylesheet_link_tag "imgbase","2013base","2013upload","/resources/js/plugins/exp/css/style.css" %>
+    <style type="text/css">
+    body, button, input, select, textarea {
+      font-size: 12px;
+    }
+  </style>
+    <%= javascript_include_tag "/location.js", "LinkageSelect.js","2013main", "/resources/js/plugins/exp/exp.js" %>
 <% end -%>
-<div class="main">
-  <div class='sub_title tr'>
-    <img src='<%= asset_path "news/title_owner.png"%>'/>
-  </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/channel/access">片区快查</a></em>
-    <em><a href="/channel/access?from=top">业主通道</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
-  </div><!--sub_nav ends-->
-  <div class='wrapper'>
-    <div class="owner_map clear">
-      <% if MagicSetting.promote_designers -%>
-          <% MagicSetting.promote_designers.split(",").each do |user_id| -%>
-              <% user = User.find(user_id.to_i) rescue nil -%>
-              <% if params[:user_role].eql?("company") %>
-              <%= link_to image_tag(user.avatar.file.url(:access_wall), :title => "家装公司-#{user.display_name}", :alt => "家装公司-#{user.display_name}"), user_path(user) if user.company? && !user.avatar.nil? && !user.avatar.file.nil? %>
-              <% else %>
-              <%= link_to image_tag(user.avatar.file.url(:access_wall), :title => "装修设计师-#{user.display_name}", :alt => "装修设计师-#{user.display_name}"), user_path(user) if user.company? == false && !user.avatar.nil? && !user.avatar.file.nil? %>
-              <% end -%>
-          <% end -%>
-      <% end -%>
-      <!--<img src='<%#= asset_path "news/kv.jpg" %>'/>-->
-    </div>
-    <!--owner_map ends-->
-    <div class="owner_bar ft12 clear">
-      <%= form_tag("/channel/access", :method => "put") do%>
-      <img src="<%= asset_path "news/hot_search.png"%>" class="fl"/>
-      <select id="province" class="level_1" name="province_id">
-        <option>请选择省--不限</option>
-      </select>
-      <select id="city" class="level_2" name="city_id">
-        <option>请选择市--不限</option>
-      </select>
-      <select id="country" class="level_3" name="area_id">
-        <option>请选择区--不限</option>
-      </select>
-      <select name="user_role">
-        <option value="">请选择身份</option>
-        <option value="designer_0">设计师（在职）</option>
-        <option value="designer_1">设计师（在读）</option>
-        <option value="company">家装公司</option>
-      </select>
-      <input type="text" value="请输入关键字" class="owner_search fl" name="keywords"/>
-      <input type="image" src="<%= asset_path "news/search_btn.jpg"%>" class="owner_sub fl"/>
-      <%- end %>
-    </div>
-    <!--owner_bar ends-->    
-    <% @design_users.each do |user| %>
-        <div class="owner clear">
-          <%= link_to user_path(user) do %>
-              <%- if user.avatar %>
-                  <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fl" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
-              <%- else %>
-                  <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fl' %>
-              <%- end %>
-          <% end -%>
+<div class="wrapper">
+  <div class="channel">
+    <!-- <ul class="tabnav clear" style="margin-top: 101px;">
+        <li class="current" data-tab="#tabnav1">设计快查</li>
+        <li data-tab="#tabnav2"><a href="/faqs">家装问答</a></li>
+        <li data-tab="#tabnav3"><a href="/faqs#tips">装修贴士</a></li>
+        <li data-tab="#tabnav4"><a href="/mix_colors/new">配色咨询</a></li>
+        <li data-tab="#tabnav5"><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">刷新服务</a></li>
+    </ul> -->
+    <div class="tab_contents">
+      <div class="tabspan" id="tabnav1">
+        <%= render :partial => "cubit_form" %>
+        <%= form_tag "/channel/access", :method => "put", :class=>"channel_search clear" do %>
+            <fieldset class="linkageseclet2 fl">
+                <select id="province" class="level_1" style="width:134px;" name="province_id">
+                </select>
+                <select id="city" class="level_2" style="width:134px;" name="city_id">
+                </select>
+                <select id="country" class="level_3" style="width:134px;" name="area_id">
+                </select>
+                <select name="user_role">
+                  <option value="">请选择身份</option>
+                  <option value="designer_0">设计师（在职）</option>
+                  <option value="designer_1">设计师（在读）</option>
+                  <option value="company">家装公司</option>
+                </select>
+            </fieldset>
+            <fieldset class="search fl">
+                <input type="text" class="fl" name="keywords">
+                <input type="image" src="<%= asset_path "search-icon.jpg"%>">
+            </fieldset>
+            <fieldset>
+                <button class="channel_btn"></button>
+            </fieldset>
+        <% end %>
 
-          <div class="owner_center fl ft12">
-            <span class="owner_name fl fb ft14"><%= user.display_name %></span>
-            <span class="owner_city fl">(<%= user.user_location %>)</span>
-            <%= link_to "进入主页", user_path(user), :class => "fl" %>
-            <div class="owner_info fl pr">
-              <span></span>
-              <%= user.signature %>
-            </div>
-            <!--owner_info ends-->
-          </div>
-          <!--owner_center ends-->
-          <%= link_to "我要咨询", user_messages_path(user), :class => "owner_ask tc ft14 fr fb", :id => "channel_access" %>
+
+          <ul class="channel_list clear">
+            <% @design_users.each do |user| %>
+            <% sort_input = MagicSetting.recommend_designs %>
+            <% design_count = user.designs.joins(:design_images).group("imageable_id") if user.designs %>
+            <% design = user.designs.joins(:design_images).group("imageable_id").order("created_at desc").first %>
+              <li style="height:205px">
+                  <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
+                    <% if design %>
+                      <%= link_to user_path(user), :target => "_blank" do %>
+                        <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="205" height="155">
+                      <% end %>
+                    <% else %>
+                      <img src="<%= asset_path '2013/default_image.png' %>" class="fl" width="208px" height="155">
+                    <% end %>
+                    <%= link_to user_path(user), :target => "_blank" do %>
+                      <%- if user.avatar %>
+                          <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fr" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
+                      <%- else %>
+                          <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fr' %>
+                      <%- end %>
+                    <% end %>
+                  </div>
+                  <h3>
+                    <%- if design %>
+                      <%= link_to user_path(user), :target => "_blank" do %>
+                        <%=design.title if design%>
+                      <%- end %>
+                    <%- else %>
+                      <h3>未上传作品</h3>
+                    <%- end %>
+                  </h3>
+                  <p><%=user.display_name ? user.display_name : user.name%> (<%=user.area.name if user.area%>)</p>
+                  <p><span><%=design_count.length%></span> 作品 / <span><%=user.inspirations.count%></span> 灵感秀</p>
+              </li>
+            <%- end -%>
+          </ul><!-- channel_list end -->
+
+        <div class="pager ft12">
+           <%= paginate @design_users  if @design_users%>
         </div>
-    <%- end -%>
-  </div>
-  <!--wrapper ends-->
-  <div class='sub_bot ft12 pr'>
-    <div class="pager ft12">
-      <%= paginate @design_users %>
+        
+        <div class="channel_banner tc">
+          <img src="<%= asset_path '2013/ydabanner.jpg' %>">
+          <img src="<%= asset_path '2013/yda_2.jpg' %>" style="margin-left:20px;">
+        </div>
+
+        <div class="channel_bottom clear">
+          <%= render :partial => "company_star_list"%>
+
+          <div class="clear"></div>
+          <div class="bottom_list_logo clear">
+            <%- @users.each do |user| %>
+              <%= show_avatar(user,"original","100x100") %>
+            <%- end %>
+          </div>
+          <div class="channel_passage">
+            <h4 class="fl">快速通道</h4>
+            <% if current_user -%>
+              <% unless current_user.common_user? %>
+                <%= link_to new_user_design_path(current_user) do %>
+                  上传作品<span>upload works</span>
+                <%- end %>
+                <%= link_to user_asks_path(current_user) do %>
+                  免费咨询<span style="font-size:9px;">free consultation</span>
+                <%- end %>
+              <% end -%>
+            <% else -%>
+              <a href="/users/sign_up">注册<span>register</span></a>
+              <%= link_to_function raw("上传作品<span>upload works</span>"), "show_login()" %>
+              <%= link_to_function raw('免费咨询<span style="font-size:9px;">free consultation</span>'), "show_login()" %>
+            <% end -%>
+          </div>
+          </div><!-- bottom_list end -->
+
+          <%= render :partial => "icolor_mood" %>
+        </div>
+      </div>
     </div>
-    <!--pager ends-->
   </div>
-  <!--sub_bot ends-->
-</div><!--main ends-->
+</div><!--wrapper ends-->
 <script type="text/javascript" charset="utf-8">
     $(function() {
         var options = {
@@ -93,5 +134,18 @@
         sel.bind('.level_1', null, '请选择省');
         sel.bind('.level_2', null, '请选择市');
         sel.bind('.level_3', null, '请选择区');
+    });
+    $(function(){
+      $('.circle_pager a').click(function(e){
+        e.preventDefault();
+        var a_index = $(this).index();
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        $(this).parent().siblings('div.list_page').eq(a_index).siblings('.list_page').hide();
+        $(this).parent().siblings('div.list_page').eq(a_index).show();
+      });
+    });
+    $('.deshed_line a.sure_submit').bind("click",function(){
+      $('form.submit_form').submit();
     });
 </script>

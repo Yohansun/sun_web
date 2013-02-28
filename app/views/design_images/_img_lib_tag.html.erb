@@ -1,0 +1,108 @@
+<div class="remote_image_tag">
+  <a name="<%=img_lib_tag.id%>"></a>
+  <fieldset class="upload2013_2 upload_edit2013" id="img_lib_tag_<%= img_lib_tag.id %>">
+      <img class="fl" src="<%=img_lib_tag.file.url(:img_lib_tag)%>">
+      <div class="work_info2013">
+          <div class="control2013 clear">
+              <label class="label2013">
+                  图片名称<!-- <span class="cr">*</span> -->
+              </label>
+              <input type="text" name="title[<%=img_lib_tag.id%>]" class="fl inputs_count design_image_title" value="<%= img_lib_tag.title ? img_lib_tag.title : img_lib_tag.design.title%>" />
+          </div>
+          <% image_tags = img_lib_tag.tags.map &:image_library_category_id%>
+          <div class="control2013 clear">
+              <label class="label2013">
+                  图片<!-- <span class="cr">*</span> -->
+              </label>
+              <% ImageLibraryCategory.where(parent_id: 132).each do |img_lib_cat| %>
+                <label>
+                  <% image_tags.each do |image_tag| %>
+                    <% if image_tag.to_i == img_lib_cat.id %>
+                      <%=radio_button_tag "effect[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless image_tags.include?(img_lib_cat.id) %>
+                    <%=radio_button_tag "effect[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+          </div>
+          <div class="control2013 clear">
+              <label class="label2013">
+                  空间
+              </label>
+              <div class="upload2013_toggle checkbox2013 fl">
+                  <a href="javascript:;" class="upload2013_btn pa"></a>
+                  <div class="clear">
+                    <% ImageLibraryCategory.where(parent_id: 82).each do |img_lib_cat| %>
+                      <label>
+                        <% image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=radio_button_tag "room[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless image_tags.include?(img_lib_cat.id) %>
+                          <%=radio_button_tag "room[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                  </div>
+              </div>
+          </div>
+          <div class="control2013 clear">
+              <label class="label2013">
+                  色彩
+              </label>
+              <div class="upload2013_toggle checkbox2013 fl">
+                  <a href="javascript:;" class="upload2013_btn pa"></a>
+                  <div class="clear">
+                    <% ImageLibraryCategory.where(parent_id: 107).each do |img_lib_cat| %>
+                      <label>
+                        <% image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=radio_button_tag "color[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless image_tags.include?(img_lib_cat.id) %>
+                          <%=radio_button_tag "color[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                  </div>
+              </div>
+          </div>
+          <div class="control2013 clear">
+              <label class="label2013">
+                  推荐色号<!-- <span class="cr">*</span> -->
+              </label>
+              <input type="text" name="color1[<%=img_lib_tag.id%>]" class="fl inputs_count" value="<%=img_lib_tag.color1%>" />
+              <p class="help-text">填写立邦推荐色号，有机会获得iColor提供的小礼物</p>
+          </div>
+          <div class="control2013 clear">
+              <label class="label2013">
+                  调性
+              </label>
+              <div class="upload2013_toggle checkbox2013 fl">
+                  <a href="javascript:;" class="upload2013_btn pa"></a>
+                  <div class="clear">
+                    <% ImageLibraryCategory.where(parent_id: 62).each do |img_lib_cat| %>
+                      <label>
+                        <% image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=radio_button_tag "tonality[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless image_tags.include?(img_lib_cat.id) %>
+                          <%=radio_button_tag "tonality[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                  </div>
+              </div>
+          </div>
+          <div class="control2013 clear tr">  
+            <a href="<%=design_image_tags_user_design_path(current_user,img_lib_tag.design,design_image_id: img_lib_tag.id)%>" target="_blank" style="color:#ff0000;font-weight:bold;margin-right:12px">+ 选择更多标签</a>  
+          </div>
+      </div>
+  </fieldset>
+</div>

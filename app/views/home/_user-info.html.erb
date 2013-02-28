@@ -1,0 +1,4 @@
+<a href="<%= user_asks_path(current_user) %>" class="user_info fl">
+  <strong><%= truncate(current_user.display_name, length: 12) %></strong>
+  我的主页<%= link_to '退出', destroy_user_session_path, :method => :delete, :class => "user_info out fl" %>
+</a>

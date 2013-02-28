@@ -62,15 +62,13 @@
 <div class="design_message subs_input abs_center none" id="design_message">
   <div class="subs_title ft18">
     <span class="fl">提示</span>
-    <a href="<%= user_path(current_user) if current_user%>" class="close_btn fr"></a>
+    <a href="/users/me" class="close_btn fr"></a>
   </div><!--subs_title ends-->
   <div class="subs_content aligncenter">
     <div class="ft14 tc"><img class="fl" src="<%= asset_path "design/fullfill_img.jpg" %>" /><p>感谢参与！请完善您的<br />个人信息以便我们进行奖品递送。</p></div>
   </div><!--subs_content ends-->
   <p class="subs_submit tc">
-    <% if current_user %>
-    <a href="/users/<%= current_user.id %>/edit"><image src="<%= asset_path "design/fullfill_btn.jpg" %>" /></a>
-    <% end -%>
+    <a href="/users/edit_me"><image src="<%= asset_path "design/fullfill_btn.jpg" %>" /></a>
   </p>
 </div><!--subs_input ends-->
 

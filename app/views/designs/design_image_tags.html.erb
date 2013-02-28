@@ -1,0 +1,336 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag '2013base', '2013upload'%>
+<% end -%>
+<div class="wrapper">
+    <div class="upload2013">
+        <h1>上传作品-更多标签选项</h1>
+    </div>
+    <%= form_tag image_tag_design_images_path, :remote => true, :html => {:multipart => true}, :class=>'clear' do %>
+        <div class="upload2013 noborder" style="min-height:500px;">
+            <h3 class="upload_tag_more"><span>按部件</span></h3>
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    家具
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <% ImageLibraryCategory.where(parent_id: 211).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "furniture[]",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "furniture[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                </div>
+            </div>
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    灯具
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 212).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "lamps[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "lamps[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    墙面
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 214).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "metope[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "metope[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    饰品
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 215).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "accessories[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "accessories[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    家电
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 216).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "appliances[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "appliances[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    橱柜
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 217).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "cupboard[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "cupboard[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    卫浴
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 218).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "baths[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "baths[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    瓷砖
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 219).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "ceramic_tile[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "ceramic_tile[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    地板
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 220).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "floor[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "floor[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    用品
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 221).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "articles[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "articles[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    门窗
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 222).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "doors_windows[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "doors_windows[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    数码
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 223).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "digital[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "digital[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    其他
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <!-- <a href="javascript:;" class="upload2013_btn pa"></a> -->
+                    <!-- <div class="clear"> -->
+                    <% ImageLibraryCategory.where(parent_id: 224).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "other[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "other[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="control2013 upload2013_toggle_more">
+                <label class="label2013">
+                    布艺
+                </label>
+                <div class="upload2013_toggle checkbox2013 fl">
+                    <% ImageLibraryCategory.where(parent_id: 213).each do |img_lib_cat| %>
+                      <label>
+                        <% @image_tags.each do |image_tag| %>
+                          <% if image_tag.to_i == img_lib_cat.id %>
+                            <%=check_box_tag "fabric[]",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                          <% end %>
+                        <% end %>
+                        <% unless @image_tags.include?(img_lib_cat.id) %>
+                          <%=check_box_tag "fabric[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                        <% end %>
+                      </label>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        <div class="upload2013 tc">
+            <input type="hidden" name="image_id" value="<%=params[:design_image_id]%>">
+            <input type="image" src="<%=asset_path 'upload2013_save.jpg'%>">
+            <a href="javascript:window.close()"><img src="<%= asset_path 'upload2013_cancel.jpg'%>"></a>
+        </div>
+        <!-- <input type="button" class="upload2013_submit" /> -->
+        <!-- <p class="help-text tc cr">*红色标注为必填项</p> -->
+    <% end %>
+</div><!--main ends-->

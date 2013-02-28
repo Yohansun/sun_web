@@ -1,7 +1,9 @@
+# encoding: utf-8
+
 #-*- encoding: utf-8 -*-
 desc "Add E-Link and two more accounts"
 task :add_permissions_and_users => :environment  do
-  
+
   e_admin = create_admin('e-link')
   user01 = create_admin('user01')
   user02 = create_admin('user02')
@@ -59,6 +61,6 @@ def create_permission(action, subject_class, can = 1)
   Permission.create(
     action: action,
     subject_class: subject_class,
-    can: can 
+    can: can
   )
 end

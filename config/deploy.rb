@@ -15,7 +15,7 @@ set :use_sudo, false
 set :scm, :git
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :deploy_env, 'production'
 
 set :keep_releases, 15
@@ -42,5 +42,5 @@ namespace :notify do
   end
 end
 
-before "deploy:update", "notify:campfire_start"
-after "deploy:restart", "notify:campfire_end"
+# before "deploy:update", "notify:campfire_start"
+# after "deploy:restart", "notify:campfire_end"

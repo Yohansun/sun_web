@@ -1,5 +1,110 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "imgbase" %>
+  <%= stylesheet_link_tag "imgbase", "style" %>
+  <style type="text/css">
+    .jiathis_style{display:none!important;}
+    .popup_zf {
+            bottom: 18px;
+            background: #fff !important;
+        }
+
+        .design_listA li {
+            position: relative;
+        }
+
+        #gallery_caption {
+            display: none;
+        }
+        .design_listA li {overflow:visible;}
+
+        .colors_recommend p {width: 100%;}
+        /*.desc ul p{max-width: 150px;*max-width: none;}*/
+  </style>
+<%- end %>
+<%- content_for :tail do %>
+<script type="text/javascript">
+$(function() {
+  Object.size = function(obj) {
+  var size = 0, key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) size++;
+  }
+  return size;
+  };
+});
+
+var color_codes = {
+  <%- color1, color2, color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3) %>
+
+  '<%= @image.id %>': {
+    <%-
+    codes = []
+    [color1, color2, color3].each_with_index do |color, index|
+        unless color.blank?
+            codes << "'#{index+1}': { 'rgb': '#{color.rgb}', 'code': '#{color.code}', 'name': '#{color.name}', 'category': '#{@image.color1_name}'}"
+        end
+    end
+    %>
+    <%= codes.join(",").html_safe %>
+  }
+};
+
+$('#colors_con').mouseenter(function() {
+  var id = $("#gallery_caption").text() * 1;
+  if (id == 0) {
+      id = <%= @image.try(:id) %>
+  }
+
+  code = color_codes[id];
+  // Get the size of an object
+  var size = Object.size(code);
+  var $ul = $(this).find('ul');
+  var tmp = '';
+  for (i = 1; i <= size; i++) {
+      if (code[i].rgb == '') {
+          tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
+      } else {
+          tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
+      }
+  };
+
+  $ul.html(tmp);
+  $(this).children('img').hide();
+  $(this).children('div.desc').show();
+  $(".list ul li:last").addClass("noborder");
+}).mouseleave(function(){
+  $(this).children('img').show();
+  $(this).children('div.desc').hide();
+});
+
+$(function(){
+  if ($("#new_message")) {
+    $("#new_message").click(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+  }
+});
+
+function show_login() {
+  o_in();
+  $('#login_win').show();
+  $("#design_message").hide();
+  $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+      err_in();
+  });
+}
+
+$(function(){
+  $(".colors_recommend").bind("mouseover mouseout", function(){
+    $(".color_hover").toggle();
+    $(".color_over").toggle();
+  });
+});
+</script>
 <%- end %>
 <div class="imgbase border_bline">
 	<div class="imgbase_title">
@@ -10,12 +115,19 @@
 	<div class="imgbase_main clear nomargin">
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
-	    <div class="imgbase_func ft12 pa">
-				<%#= link_to "收藏", "javascript:void(0);", :class =>"imgbase_collect" %>
-				<a class="imgbase_view">浏览:<span><%= @image.design.view_count %></span></a>
-				<%= link_to "全屏观看", fullscreen_user_design_path(@image.user_id, @image.imageable_id), :class =>"imgbase_fullpage" %>
-			</div>
-	    <%= image_tag(@image.file, size: '760x507', :class =>"imginfo_big_img") %>
+      <div class="imgbase_func ft12 pa btn_group">
+        <!-- <a class="icon_view">浏览:<span><%= @image.view_count %></span></a> -->
+        <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"icon_fullscreen", :target => "_blank" %>
+        <%- if current_user %>
+          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "icon_colleting" %>
+        <%- else %>
+          <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "icon_colleting" %>
+        <%- end %>
+        <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>">免费下载</a>
+     </div>
+     <div class="img_vertical_align">  
+	     <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img") %>
+     </div>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
 	    <span class="fr">
 	    	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "imgbase/near-shop_link_btn.png" %>"></a>
@@ -31,14 +143,22 @@
 	        	<%= @image_city %>
 	        </span>
 	    </p>
-      <%- if @image_colors.any? %>
-  	    <div class="colors_recommend clear">
-  	    	<strong>推荐色</strong>
-          <%- @image_colors.each do |color| %>
-  	    	  <p class="fl"><span style="background-color:rgb(<%= color.rgb %>)"></span><em><%= color.name %></em></p>
-          <%- end %>
-  	    </div>
-      <%- end %>
+
+	    <div class="colors_recommend colorsbox clear">
+	    	<strong>推荐色</strong>
+
+        <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
+          <img src="<%= asset_path "design/colors2.gif" %>" />
+          <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
+            <div class="list" style="height:35px;">
+              <ul class="group" style="overflow:hidden;">
+              </ul>
+            </div>
+          </div>
+        </div>
+	    </div>
+
+
 	    <p class="imginfo_big_txt">
 	      <strong>设计理念：</strong>
 	      <%= @image.content %>
@@ -68,14 +188,14 @@
     <div class="author_show">
       <div class="author_info clear">
       	<%- if @image.user.avatar -%>
-		    	<%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl', :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
+		    	<%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
 		    <%- else -%>
 		    	<%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
 		    <%- end -%>
         <div class="fl border_lline">
         	<p class="clear border_bline">
         		<strong><%= @image.user.display_name %></strong>
-        		<%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like", :id =>"votes_count#{@image.id}", :remote => true, :method => :post %>
+        		<%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like votes_count#{@image.id}", :remote => true, :method => :post %>
         		<%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
         	</p>
         	<p>
@@ -103,19 +223,16 @@
       		<a href="#" class="imgbase_comm">855555</a>
       	</p>
       </div> --><!-- author_info->色彩搭配 -->
-
+      <!-- JiaThis Button BEGIN -->
       <div class="clear imgs_share border_bline">
-				<span class="fl t">分享:</span>
-      	<div id="jiathis_style_32x32" class="fl" style="overflow:hidden;">
-					<a class="jiathis_button_tsina"></a>
-					<a class="jiathis_button_qzone"></a>
-					<a class="jiathis_button_kaixin001"></a>
-					<a class="jiathis_button_renren"></a>
-					<a class="jiathis_counter_style"></a>
-				</div>
-        <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-        <!-- JiaThis Button END -->
-
+        <span class="fl t">分享:</span>
+        <div id="jiathis_style_32x32" class="fl" style="overflow:hidden;">
+        <a class="jiathis_button_kaixin001"></a>
+        <a class="jiathis_button_renren"></a>
+        <a class="jiathis_button_tsina"></a>
+        <a class="jiathis_button_tqq"></a>
+        <!-- <a class="jiathis_counter_style"></a> -->
+        </div>
         <%
           role = "#{@image.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @image.user.role_id != 3
           text = if @image.user.area_id.present?
@@ -130,24 +247,30 @@
           end
         -%>
         <script type="text/javascript" charset="utf-8">
-        var jiathis_config = {
+        var jiathis_config={
           boldNum:4,
           siteNum:4,
           showClose:false,
           sm:"kaixin001,renren,tsina,tqq",
+          summary:"",
+          hideMore:false,
+          pic:"http://www.icolor.com.cn<%= @image.file.url %>",
+          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name %>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
           imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
           imageWidth:26,
           marginTop:150,
-          url:"<%= user_design_url(@image.user_id, @image.imageable_id) %>)",
-          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name %>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
+          url:"<%= image_show_design_image_url(@image.id) %>",
           data_track_clickback:true
         }
         </script>
-      </div><!-- imgs_share -->
+        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+        <!-- JiaThis Button END -->
+      </div>
+
       <div class="imgs_otherinfo border_bline">
       	<h4>标签</h4>
       	<%- @image_tags.each do |tag| %>
-      	  <span><%= tag %></span>
+      	  <span style="font-size:12px;"><%= tag %></span>
       	<%- end %>
       </div>
       <div class="imgs_otherinfo border_bline">
@@ -157,21 +280,29 @@
       <div class="imgs_in_list clear">
       	<dl>
       		<dt>猜你喜欢</dt>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-	    		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+          <%- @like_images.each do |like_image| %>
+            <dd>
+              <a href="/design_images/<%= like_image.id %>/image_show">
+                <%= image_tag(like_image.file.url(:list), size: '178x128')%>
+                <span><%= like_image.title ? like_image.title : "未命名" %></span>
+              </a>
+            </dd>
+          <%- end %>
       	</dl>
       	<dl>
       		<dt>精品推荐</dt>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
-      		<dd><a href="javascript:;"><img src="<%= asset_path "imgbase/img_like2.jpg" %>"><span>1号乡村公馆-1</span></a></dd>
+          <%- @week_stars.each do |star| %>
+            <dd>
+              <a href="<%= star.design_link %>">
+                <%= image_tag(star.main_preview_img.url(:image_show), size: '178x128') %>
+                <span><%= star.design_name %></span>
+              </a>
+            </dd>
+          <%- end %>
       	</dl>
       </div><!-- imgs_in_list -->
       <p class="imgs_banner">
-      	<img src="<%= asset_path "imgbase/imgs_banner.jpg" %>">
+      	<img src="<%= asset_path '2013/index/2013yda.jpg' %>">
       </p>
     </div><!--author_show-->
 	</div><!--imgbase_main-->

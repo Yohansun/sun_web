@@ -3,28 +3,39 @@
 require 'ruby-pinyin'
 
 class DesignImage < ActiveRecord::Base
-  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :color1_name, :color2_name, :color3_name, :tags, :area_id, :last_user_id, :last_updated_at
+  attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :color1_name, :color2_name, :color3_name, :tags, :area_id, :last_user_id, :last_updated_at, :view_count, :sorts
 
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
-  has_many :tags, class_name: 'ImageTag'
+  has_many :tags, class_name: 'ImageTag',:dependent => :destroy
   has_many :votes, :as => :voteable
   has_many :comments, :as => :commentable
   belongs_to :user
   belongs_to :area
+  has_many :collects
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
   belongs_to :design, class_name: 'Design', :foreign_key => 'imageable_id'
   # validate :file_dimensions, :unless => "errors.any?"
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null")
 
+  scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
+
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
         :inside => "188>", :outside => "202>", :home_page => "90>",
-        :slide => "900>", :slide_thumb => "205x138#",
-        :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#"},
+        :home_design_image1 => "380x365#", :home_design_image2 => "380x170#", :home_design_image3 => "180x170#",
+        :design_image_big => "686x496>", :design_image_list => "224x162#",
+        :slide => "900>",
+        :slide_thumb => "205x138#",
+        :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#"},
+    :convert_options => {
+      :slide => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
+      :design_image_big => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
+      :original => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite "
+      },
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
@@ -32,6 +43,7 @@ class DesignImage < ActiveRecord::Base
   # validates_presence_of :area_id
 
   before_save :set_pinyin
+  before_save :set_sort
 
   def set_pinyin
     if self.title_changed?
@@ -39,8 +51,17 @@ class DesignImage < ActiveRecord::Base
     end
   end
 
+  # 科普兰德(1)-每周之星(2 后台设置)-大师作品(3)-sina(4)-色彩搭配(5)-自行上传(100)
+  def set_sort
+    self.sorts = 100
+    self.sorts = 1 if source == 'kepulande'
+    self.sorts = 3 if self.imageable_type == 'MasterDesign'
+    self.sorts = 4 if source == 'sina'
+    self.sorts = 5 if self.imageable_type == 'ColorDesign'
+  end
+
   def set_pinyin!
-    self.pinyin = PinYin.of_string(self.title[0]).first.to_s
+    self.pinyin = PinYin.of_string(self.title.to_s[0]).first.to_s
   end
 
   def comments_count
@@ -121,13 +142,14 @@ class DesignImage < ActiveRecord::Base
     Digest::SHA1.hexdigest("#{string}#{rand}")[0..6]
   end
 
-  def self.search_tags(tag_ids)
+  def self.search_tags(tag_ids, use_in_query = false)
+    return joins(:tags).where("image_tags.image_library_category_id in (?)", tag_ids) if use_in_query
     joins = []
     tag_ids.each do |tag_id|
       taggings_alias = "taggings_#{tag_id}"
 
       tagging_join  = "JOIN image_tags #{taggings_alias}" +
-      "  ON #{taggings_alias}.design_image_id = design_images.id" +
+      " ON #{taggings_alias}.design_image_id = design_images.id" +
       " AND #{taggings_alias}.image_library_category_id = #{tag_id}"
 
       joins << tagging_join

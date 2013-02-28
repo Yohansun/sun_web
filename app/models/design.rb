@@ -1,4 +1,5 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
+
 require 'open-uri'
 
 class Design < ActiveRecord::Base
@@ -6,14 +7,15 @@ class Design < ActiveRecord::Base
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
     :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color,
-    :recommend_color_category1, :is_yda, :is_refresh
-  validates_presence_of :title, :content, :reason, :design_color, :area_id
+    :recommend_color_category1, :is_yda, :is_refresh, :property_name
+  validates_presence_of :title, :area_id, :property_name
 
   belongs_to :user
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
   has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
   has_many :color_codes
+  has_many :collects
 
   paginates_per 8
 
@@ -27,7 +29,7 @@ class Design < ActiveRecord::Base
   end
 
   def cover_img
-    self.design_images.first
+    self.design_images.available.first
   end
 
   def comments_count

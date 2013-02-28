@@ -4,6 +4,8 @@ class DesignImagesController < ApplicationController
     newparams = coerce(params)
     @upload = DesignImage.new(newparams[:upload])
     @upload.user_id = params[:user_id]
+    @upload.imageable_id = params[:design_id] if params[:design_id]
+    @upload.imageable_type = params[:design_type] if params[:design_type]
     if @upload.save
       flash[:notice] = "Successfully created upload."
       session[:image_id] = @upload.id
@@ -20,40 +22,50 @@ class DesignImagesController < ApplicationController
     end
   end
 
+  def download
+    target_file = DesignImage.find(params[:id])
+      if target_file
+        send_file target_file.file.path
+      else
+        render nothing: true, status: 404
+      end
+  end
+
   def show
     @upload = DesignImage.find(params[:id])
   end
 
   def index
-    @image_length = DesignImage.count
-    @categories = ImageLibraryCategory.where(parent_id: 0)
-    @tags = params[:tags].split(",").map { |e| e.to_i }.uniq.sort if params[:tags]
-
-    if params[:all_tags]
-      @all_tags = params[:all_tags].split(",").uniq.sort
-      tags = ImageLibraryCategory.where(parent_id: @all_tags).map(&:id)
-      @tags = (@tags + tags).uniq
+    @images = DesignImage.available.audited_with_colors.order("sorts ASC, created_at DESC")
+    @image_length = @images.count
+    @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
+    @tag_names = []
+    unless params[:tags].blank?
+       @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
+       @tag_ids.delete(-1)
     end
 
-    @tag_names = ImageLibraryCategory.where("id in (?)", @tags).all.map { |e| e.title }
-    @images = DesignImage.includes(:tags).group("design_images.id").available.order("design_images.created_at desc").page(params[:page]).per(11)
-
-    if @tags
-      @images = @images.search_tags(@tags)
+    unless @tag_ids.blank?
+      Rails.logger.debug @tag_ids.inspect
+      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
+      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+      @images = @images.search_tags(final_tags.map(&:id))
+      @tag_names << final_tags.map(&:title)
     end
 
     unless params[:area_id].blank?
       area = Area.find(params[:area_id])
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
-
+      @area_names = area.self_and_ancestors.map(&:name).join(" ")
       @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
-
       @images = @images.where(area_id: areas.map(&:id))
     end
 
     unless params[:search].blank?
-      @images = @images.where("title LIKE ?", "%#{params[:search]}%")
+      tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
+      @images = @images.search_tags(tags.map(&:id), true)
+      @tag_names << tags.map(&:title)
     end
 
     unless params[:imageable_type].blank?
@@ -61,42 +73,86 @@ class DesignImagesController < ApplicationController
     end
 
     unless params[:pinyin].blank?
-      @images = @images.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+      @images = @images.search_tags(tags.map(&:id), true)
+      @tag_names << tags.map(&:title)
+    end
+
+    unless params[:ranking_list].blank?
+      if params[:ranking_list] == "like"
+        @images = @images.order("design_images.collects_count desc")
+      elsif params[:ranking_list] == "view_count"
+        @images = @images.order("design_images.view_count desc")
+      end
+    else
+      @images = @images.order("design_images.source DESC, design_images.created_at DESC")
+    end
+    @images = @images.page(params[:page]).per(11)
+    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    @image_colors = []
+    @images.each do |image|
+      @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
     end
   end
 
-  def image_search_index
-    cookies[:design_image_tag_ids] ||= ''
-    @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')
-    if params[:tag_id]
-      if @design_image_tag_ids.include? params[:tag_id]
-        @design_image_tag_ids.delete(params[:tag_id])
-        cookies[:design_image_tag_ids] = @design_image_tag_ids.join(',')
-      else
-        cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + params[:tag_id]
-      end
-    end
-    if params[:tag_all_id]
-      image_tags = ImageLibraryCategory.where(parent_id: params[:tag_all_id]).map &:id
-      if @design_image_tag_ids.include? params[:tag_all_id]
-        image_tags.each do |image_tag|
-          @design_image_tag_ids.delete(image_tag.to_s)
-        end
-        @design_image_tag_ids.delete(params[:tag_all_id])
-        cookies[:design_image_tag_ids] = @design_image_tag_ids.join(',')
-      else
-        cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + params[:tag_all_id]
-        image_tags.each do |image_tag|
-          cookies[:design_image_tag_ids] = cookies[:design_image_tag_ids] + "," + image_tag.to_s
-        end
-      end
+  def image_tag
+    image_tags_arr = []
 
+    image_tags = ImageTag.where(design_image_id: params[:image_id], genre: 'image_tag2')
+    if image_tags.present?
+      image_tags.each do |image_tag|
+        image_tag.destroy
+      end
     end
-    @design_image_tag_ids =  cookies[:design_image_tag_ids].split(',')
-    @image_length = DesignImage.count
-    @categories = ImageLibraryCategory.where(parent_id: 0)
-    @images = DesignImage.includes(:tags).available.where("image_tags.image_library_category_id in (?)", @design_image_tag_ids).page(params[:page]).per(11)
-    render "index"
+
+    if params[:furniture].present?
+      image_tags_arr += params[:furniture]
+    end
+    if params[:lamps].present?
+      image_tags_arr += params[:lamps]
+    end
+    if params[:fabric].present?
+      image_tags_arr += params[:fabric]
+    end
+    if params[:metope].present?
+      image_tags_arr += params[:metope]
+    end
+    if params[:accessories].present?
+      image_tags_arr += params[:accessories]
+    end
+    if params[:appliances].present?
+      image_tags_arr += params[:appliances]
+    end
+    if params[:cupboard].present?
+      image_tags_arr += params[:cupboard]
+    end
+    if params[:baths].present?
+      image_tags_arr += params[:baths]
+    end
+    if params[:ceramic_tile].present?
+      image_tags_arr += params[:ceramic_tile]
+    end
+    if params[:floor].present?
+      image_tags_arr += params[:floor]
+    end
+    if params[:articles].present?
+      image_tags_arr += params[:articles]
+    end
+    if params[:doors_windows].present?
+      image_tags_arr += params[:doors_windows]
+    end
+    if params[:digital].present?
+      image_tags_arr += params[:digital]
+    end
+    if params[:other].present?
+      image_tags_arr += params[:other]
+    end
+    if image_tags_arr.present?
+      image_tags_arr.each do |image_tag|
+        ImageTag.create(design_image_id: params[:image_id],image_library_category_id: image_tag, genre: 'image_tag2')
+      end
+    end
+    render :js => "window.close();"
   end
 
   def decoration_parts
@@ -118,14 +174,36 @@ class DesignImagesController < ApplicationController
 
   def image_show
     @image = DesignImage.includes(:design).find(params[:id])
-    @images_total = DesignImage.count
+    @image.view_count += 1
+    @image.update_attributes(:view_count => @image.view_count)
+    @images_total = DesignImage.available.count
     @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id).title}
     if @image.area_id
-      @image_city = Area.find(@image.area_id).parent.name
+      area = Area.find(@image.area_id)
+      if area.parent_id
+        @image_city = area.parent.name
+      else
+        @image_city = area.name
+      end
     end
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @comments = @image.comments.page(params[:page]).per(3)
+    #精品推荐
+    @week_stars = WeeklyStar.order("created_at desc").limit(4)
+    #猜你喜欢
+    tags = @image.tags.map(&:image_library_category_id)
+    if tags == []
+      @like_images = DesignImage.available.order("created_at desc").limit(4)
+    else
+      tags = tags[0..4]
+      @like_images = DesignImage.search_tags(tags, true).limit(4)
+    end
+  end
+
+  def fullscreen
+    @design_image = DesignImage.find(params[:id])
+    render :layout => nil
   end
 
   def more_comment

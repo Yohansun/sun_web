@@ -1,0 +1,100 @@
+<script type="text/javascript">
+    $(function() {
+       $(".update_li").hover(function(){
+       	$(this).children(".host_works_edit").show();},
+       	function(){
+       	 $(this).children(".host_works_edit").hide();
+       	})
+    });
+</script>
+<div class="main signup group">
+  <div class="shadow signup_box">
+    <div class="section">
+
+      <%= render :partial => "users/profile_box" %>
+	      <div class="host_main">
+			<div class="design_result">
+				<ul class="d_works group">
+				  <%- if @images.present?%>
+	                <%- @images.each do |image| %>
+					<li id = "<%= image.id %>" class = "update_li">
+						<div class = 'host_works_edit'>
+                            <%= link_to "删除", user_collect_path(current_user, image), :method => :delete, class: "works_img_del", confirm:"确认删除？" %>
+						</div>
+						<%- if image.design_image_id %>
+							<a href="<%= image_show_design_image_path(image.design_image_id) %>">
+								<%= image_tag(image.design_image.try(:file), :class => "host_works_img" ) %>
+							</a>
+							<h3><%= image.design_image.try(:design).try(:title)  %></h3>
+							<p class="p1 group">
+								<strong class="ft14 fb">当前票数：<%= image.design_image.try(:votes_count)  %></strong>
+							</p> 
+							<p class="transpond p2 group">
+								<span class="transpond_btn ft12">转发 (<%= image.design_image.try(:design).try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%- image.design_image.try(:comments_count)%>)</span>
+							</p>        
+							<p>
+								风格：<%= image.design_image.try(:design).try(:style) %>
+							</p>
+						<%- elsif image.weekly_star_id %>
+						    <a href="<%= weekly_stars_path(star_type: "每周之星", from: "top") %>">
+							<%= image_tag(image.weekly_star.weekly_star_uploads.first.try(:file), :class => "host_works_img" ) %>
+						    </a>
+						    <h3><%= image.weekly_star.try(:design_name)  %></h3>
+							<p class="p1 group">
+								<strong class="ft14 fb">当前票数：<%= image.weekly_star.try(:votes_count)  %></strong>
+							</p> 
+							<p class="transpond p2 group">
+								<span class="transpond_btn ft12">转发 (<%= image.weekly_star.try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%= image.weekly_star.try(:comments_count)  %>)</span>
+							</p>        
+							<p>
+								风格：<%= image.weekly_star.try(:design_style) %>
+							</p>
+						<%- elsif image.color_design_id %>
+						    <a href="<%= color_designs_path(image.color_design_id) %>">
+							<%= image_tag(ColorDesign.find(image.color_design_id).try(:main_preview_img), :class => "host_works_img" ) %>
+						    </a>
+						    <h3><%= image.color_design.try(:design_name)  %></h3>
+							<p class="p1 group">
+								<strong class="ft14 fb">当前票数：<%= image.color_design.try(:votes_count)  %></strong>
+							</p> 
+							<p class="transpond p2 group">
+								<span class="transpond_btn ft12">转发 (<%= image.color_design.try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%= image.color_design.try(:comments_count)  %>)</span>
+							</p>        
+							<p>
+								风格：<%= image.color_design.try(:design_style) %>
+							</p>
+						<%- elsif image.master_design_id %>
+						    <a href="/master_designs/<%= image.master_design_id %> ">
+							<%= image_tag(MasterDesign.find(image.master_design_id).try(:main_preview_img), :class => "host_works_img" ) %>
+						    </a>
+						    <h3><%= image.master_design.try(:design_name)  %></h3>
+						<%- elsif image.design_id %>
+						    <a href="/designs/<%= image.design_id %>" >
+							<%= image_tag(Design.find(image.design_id).design_images.first.try(:file), :class => "host_works_img" ) %>
+						    </a>
+						    <h3><%= image.design.try(:title)  %></h3>
+							<p class="p1 group">
+								<strong class="ft14 fb">当前票数：<%= image.design.try(:votes_count)  %></strong>
+							</p> 
+							<p class="transpond p2 group">
+								<span class="transpond_btn ft12">转发 (<%= image.design.try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%= image.design.try(:comments_count)  %>)</span>
+							</p>        
+							<p>
+								风格：<%= image.design.try(:style) %>
+							</p>
+						<%- end %>
+						
+					</li>
+					<%-end %>
+	              <%-end %>
+				</ul><!--result one ends-->
+			</div><!--design_result ends-->
+		</div>
+		
+
+	<div class="pager host_pager ft12">
+		<%= paginate @images if @images %>
+	</div><!--pager ends-->
+    </div>
+  </div>
+</div>

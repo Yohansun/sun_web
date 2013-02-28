@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# -*- encoding: utf-8 -*-
 class Notifier < ActionMailer::Base
   default from: "icolor@nipponpaint.com.cn"
 
@@ -61,6 +60,24 @@ class Notifier < ActionMailer::Base
     mail(:to => email,
          :subject => "恭喜您！您的作品【春色满屋】被评选为本周设计之星啦！",
          :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
+
+  def ask(user,content)
+    @user = user
+    @content = content
+    mail(:to => "icolor@nipponpaint.com.cn",
+         :subject => "来自#{@user.display_name}的免费咨询",
+         :body => "用户咨询：#{@content}"
+        )
+  end
+
+  def cubit_fixture(id)
+    @cubit = CubitFixture.find(id)
+    @area = Area.find(@cubit.area_id)
+    mail(:to => %w{sammizhou@nipponpaint.com.cn,WeiWei@nipponpaint.com.cn,YangJie@nipponpaint.com.cn},
+         :subject => "装修丘比特",
+         :body => "用户姓名：#{@cubit.name} \n用户电话：#{@cubit.phone} \n用户Email：#{@cubit.email} \n\n装修面积：#{@cubit.fixture_area}\n房型:#{@cubit.fixture_type}\n装修所在地:#{@area.parent.name}#{@area.name}\n楼盘名称:#{@cubit.house_name}\n预算:#{@cubit.pre_price}\n"
         )
   end
 end

@@ -1,0 +1,210 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'reg','dd' %>
+  <style type="text/css">
+    .recommend_color_category1 input{width: 90px !important;margin-right: 15px;}
+    .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+    #color_select{}
+    .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
+    .dd .ddChild a.nobg,
+    .dd .ddChild a.nobg:visited { background-image:none; padding-left:10px; }    
+    .work_number .dd{ margin-right:15px;}
+    #design_style, #design_design_color{width:108px;}
+    #design_recommend_color_category1, #province, #city{background:white;border:1px solid #ccc;width:108px}
+  </style>
+  <% if current_user && !current_user.common_user? %>
+    <%= render :partial => "/refresh/new" %>
+  <% end %>
+<% end -%>
+
+<% content_for :tail do -%>
+<%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+<%= javascript_include_tag "jquery.autocomplete.js", "uncompressed.jquery.dd.js" %>
+<script type="text/javascript">
+  <%- unless flash[:design_errors].blank? %>
+  <%-
+      errors = ""
+      flash[:design_errors].each do |e|
+        errors << "*" + e + '\n'
+      end
+  %>
+    alert("<%= errors %>");
+  <%- end %>
+
+$(function(){
+  try {
+          //$("body select").msDropDown();
+          oHandler = $("#design_design_color, #design_style").msDropDown({
+            useSprite : 'sprite'
+          }).data("dd");
+          $("#ver").html($.msDropDown.version);
+        } catch(e) {
+          alert("Error: " + e.message);
+        }
+});
+
+$(function(){
+  var options = {
+    data  : data
+  }
+
+  var sel = new LinkageSelect(options);
+  sel.bind('.level_1');
+  sel.bind('.level_2');
+
+  $('div.tags a').click(function(){
+    var txt = $(this).text();
+    add_tag(txt)
+  });
+  $('input.add_tag_on').click(function(){
+    var txt = $('input.add_tag').val();
+    if(txt!='')
+      add_tag(txt)
+  });
+  del_tag();
+});
+
+function del_tag(){
+  $('a.labels img').click(function(){
+    var tag = $(this).parents('a.labels').text();
+    var tags = $("#design_tag_list").val().split(",");
+    var idx = tags.indexOf(tag);
+
+    if(idx!=-1) tags.splice(idx, 1);
+    $("#design_tag_list").val(tags.join(","));
+
+    $(this).parents('a.labels').remove();
+  });
+}
+
+function add_tag(text){
+  var $list = $('div.tag_list');
+  var $a = $('div.tag_list a');
+  var arr = new Array();
+  $a.each(function(i){
+    arr.push($a.eq(i).text());
+  });
+  if(arr.indexOf(text)<0)
+  {
+    var $app = '<a href="javascript:void(0)" class="labels fl cr">'+text+'<img src="/assets/news/labels.jpg" /></a>';
+    $list.append($app);
+
+    var tags = $("#design_tag_list").val().split(",");
+    tags.push(text);
+    $("#design_tag_list").val(tags.join(","));
+
+    del_tag();
+  }
+}
+/*reg2*/
+</script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#design_recommend_color_category1").autocomplete("<%= user_designs_autocomplete_recommend_color_path(current_user)%>");
+    });
+</script>
+<% end -%>
+
+<%= form_for([current_user, @design]) do |f| %>
+<%= hidden_field_tag "user_id", current_user.id %>
+<%= hidden_field_tag "design[is_yda]", 0 %>
+<%= hidden_field_tag "design[is_refresh]", 0 %>
+<div class="main syslist uploads">
+  <div class="shadow">
+    <div class="section">
+      <div class="sys_bar clear ft12">
+        <span class="fl ft18">上传作品</span>
+      </div><!--sys_bar ends-->
+      <div class="reg_content ft14">
+        <div class="reg_list reg_width fl">
+          <%= f.label :title, "作品名称：" %>
+          <%= f.text_field :title, class: "works fl" -%>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <%= f.label :content, "设计理念：" %>
+          <%= f.text_area :content, class: "works_details fb ft14 fl" -%>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <%= f.label :reason, "推荐理由：" %>
+          <%= f.text_area :reason, class: "works_details fb ft14 fl" -%>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <%= f.label :style, "风格："  %>
+          <div class="fl">
+            <%= f.select :style, design_style_option, class: "f111l", html: { class: "111"} %>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <%= f.label :design_color, "色系：" %>
+            <ul id="color_styles" class="clear">
+              <li>
+                <span>浅白色系</span>
+                <%= check_box_tag "design[design_color][]", "浅白色系" %>
+              </li>
+              <li class="color_second">
+                <span>红色系</span>
+                <%= check_box_tag "design[design_color][]", "红色系" %>
+              </li>
+              <li class="color_third">
+                <span>橙色系</span>
+                <%= check_box_tag "design[design_color][]", "橙色系" %>
+              </li>
+              <li class="color_forth">
+                <span>黄色系</span>
+                <%= check_box_tag "design[design_color][]", "黄色系" %>
+              </li>
+              <li class="color_fifth">
+                <span>绿色系</span>
+                <%= check_box_tag "design[design_color][]", "绿色系" %>
+              </li>
+              <li class="color_sixth">
+                <span>蓝色系</span>
+                <%= check_box_tag "design[design_color][]", "蓝色系" %>
+              </li>
+              <li class="color_seventh">
+                <span>紫色系</span>
+                <%= check_box_tag "design[design_color][]", "紫色系" %>
+              </li>
+              <li class="color_eighth">
+                <span>中性色系</span>
+                <%= check_box_tag "design[design_color][]", "中性色系" %>
+              </li>
+            </ul>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="house">选择色号：</label>
+          <span>请填写推荐立邦产品色号</span>
+           <%= f.select :recommend_color_category1, ColorCode.all.collect {|c| [ c.name.to_s + " " + c.code.to_s, c.code ]},  :prompt => "请选择", class: "add_tag" -%>
+          <span>（凡填写色号的用户iColor均有精美礼品赠送哦）</span>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="city">作品建筑所属城市：</label>
+          <div class="fl">
+            <select id="province" class="level_1 fl" ></select>
+            <select id="city" class="level_2 fl" name="design[area_id]"></select>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="labels">标签：</label>
+          <div class="tag_list fl">
+
+          </div>
+          <%= f.hidden_field :tag_list %>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label></label>
+          <div class="fl tags">
+            <% ["客厅设计", "田园风格", "欧式奢华风", "斯堪的纳维亚半岛风格", "小清新",
+              "黄色系", "结构美学设计", "宜家简约设计风格", "中式古典风格", "低调的奢华", "北欧", "灰色调"].each do |tag| -%>
+              <a href="javascript:void(0)" class="tag fl ft14 cw bg<%= rand(20) + 1 %>"><%= tag %></a>
+            <% end -%>
+            <br/>
+            <input type="text" class="add_tag fl" id="new_tag" />
+            <input type="image" src="<%= asset_path "news/add_tag.jpg" %>" class="add_tag_on fl" onclick="add_tag($('#new_tag').val());$('#new_tag').val("");return false;" />
+          </div>
+        </div><!--reg_list ends-->
+        <input type="image" src="<%= asset_path "news/add_img.jpg" %>" class="add_img fl" />
+      </div><!--reg_content ends-->
+    </div><!--section ends-->
+  </div><!--shadow ends-->
+</div><!--main ends-->
+<% end %>

@@ -2,8 +2,29 @@
   <%= stylesheet_link_tag "imgbase", "jquery.slider"%>
 <%- end %>
 <%- content_for :tail do %>
-  <%= javascript_include_tag "jquery.slider", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
+  <%= javascript_include_tag "slides", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
   <script type="text/javascript">
+	function show_login() {
+	        o_in();
+	        $('#login_win').show();
+	        $("#design_message").hide();
+	        $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
+	            err_in();
+	        });
+	    }
+    $(function(){
+    	if ($("#new_message")) {
+		    $("#new_message").click(function (event) {
+		        <% if current_user -%>
+		        return true;
+		        <% else -%>
+		        show_login();
+		        return false;
+		        <% end -%>
+		    });
+		}
+    });
+
   	$(function() {
       var options = {
         data  : data
@@ -25,29 +46,41 @@
     	});
     });
     $(function(){
-			var $slider = $('.imgbase_slider'),
+			var $slider = $('#feb_slides'),
 				$list   = $('.imgbase_list'),
 				$view   = $('#imgbase_view'),
 				$info   = $('#imgbase_info'),
+				$full   = $('#imgbase_full'),
+				$collect= $('.imgbase_collect_id'),
+				$down   = $('.imgbase_down_id'),
 				$toggle = $('.imgbase_toggle'),
+				// s = $(".imgbase_collect").attr('data_s'),
 				$form   = $('#imgbase_forms').find('form'),
-        $ul     = $('#imgbase_ul');
-			$slider.slider({
-				speed : 1500,
-				mouse : 'mouseover',
-				duration : 5000,
-				callback : function(num){
-					var $curr = $list.find('li').eq(num),
+        $ul     = $('#imgbase_ul'),
+        $colorsbox = $(".imgbase_bin > .colorsbox");
+			$slider.slides({  
+				next: 'slider_next',  
+				prev: 'slider_prev',  
+				play: 5000,  
+				pause: 2500,  
+				animationComplete:function(){ 
+					var num = $slider.find('.current').index(); 
+					var $curr = $list.find('> li').eq(num),
 						views = $curr.data('view'),
+						full = $curr.data('full'),
 						html  = $curr.find('div').html();
 					$curr.addClass('imgbase_curr').siblings().removeClass('imgbase_curr');
 					$view.text(views);
+					$full.attr('href', '/design_images/' + full + '/fullscreen');
+					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full);
+					$down.attr('href', '/design_images/' + full + '/download');
 					$info.html(html);
+          			$colorsbox.html($curr.find('.colorsbox').html());
 				}
 			});
 			$list.on('mouseenter', 'li', function(){
 				var index = $(this).index();
-				$slider.find('li').eq(index).mouseover();
+				$slider.find('li').eq(index).find('a').click();
 			}).mouseleave(function(){
 				$slider.mouseleave();
 			});
@@ -62,19 +95,32 @@
 				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
 
+      $('.colors_con').live('hover', function(){
+        $(this).children().fadeToggle('fast');
+      });
 		});
 
+  var tags = new Array();
+  <%- if @tags -%>
+    <%- @tags.each do |tag| -%>
+      <%- if tag.children_count == 0 -%>
+      tags[<%= tag.parent_id %>] = <%= tag.id -%>;
+      <%- else -%>
+      tags[<%= tag.id %>] = <%= tag.id -%>;
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
   </script>
 <%- end %>
 <div class="imgbase">
 	<div class="imgbase_title">
-		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>" >
+		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<div class="clear">
 			<div class="fr imgbase_search">
-				<form onsubmit="return search_query($('#search_query').val());" style="display:inline">
-					<input type="text" value="<%= params[:search] %>" id="search_query"><button type="submit">搜图</button>
+				<form onsubmit="return search_query($('#search_query_value').val())" style="display:inline">
+					<input type="text" value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
 				</form>
-				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('宜家')">宜家</a><a href="javascript:search_query('墙面色')">墙面色</a></span>
+				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('客厅')">客厅</a><a href="javascript:search_query('简约')">简约</a></span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
 		</div>
@@ -82,10 +128,10 @@
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
-				<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-				<a href="/design_images?imageable_type=Design" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
-				<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
+				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
+				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
+				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -96,32 +142,32 @@
 			</ul> -->
 		</div><!-- tit_tab -->
 		<div id="imgbase_forms">
-      <%=form_tag image_search_index_design_images_path, :class => 'tab_content' do %>
+      <%=form_tag image_search_index_design_images_path, :class => 'tab_content form_mini' do %>
 				<%- @categories.each do |category| %>
 					<%- unless category.title == "按建筑" || category.title == "按部件" %>
-						<fieldset>
-							<label><%= category.title %>：</label>
+						<fieldset class="clear">
+							<label class="fl"><%= category.title %>：</label>
 							<span>
-								<a href="javascript:add_all_tag(<%= category.id %>)" class="check_on <% if @all_tags &&  @all_tags.include?(category.id.to_s) %>highlight<% end %>">全部</a>
+								<a href="javascript:add_tag(<%= category.id %>, <%= category.id %>)" class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
 								<%- category.children.each do |cate_child| %>
-									<a href="javascript:add_tag(<%= cate_child.id %>)" class="check_on <% if @tags && @tags.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
+									<a href="javascript:add_tag(<%= category.id %>, <%= cate_child.id %>)" class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
 								<%- end %>
 							</span>
 						</fieldset>
 					<%- end %>
 				<%- end %>
 
-				<fieldset>
-					<label>按地域：</label>
+				<fieldset class="clear">
+					<label class="fl">按地域：</label>
 					<span>
 						<select id="province" class="level_1" style="width:70px;">省</select>
 		        <select id="city" class="level_2" style="width:70px;">市</select>
 		        <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
+		        <input type="button" value="" onclick="submit_area()" />
 					</span>
-					<input type="button" value="确定" onclick="submit_area()" />
 				</fieldset>
-				<fieldset class="lastfield pinyin_list">
-					<label>拼音检索：</label>
+				<fieldset class="lastfield pinyin_list clear">
+					<label class="fl">拼音检索：</label>
 					<a href="javascript:void(0)">A</a>|
           <a href="javascript:void(0)">B</a>|
           <a href="javascript:void(0)">C</a>|
@@ -149,76 +195,149 @@
           <a href="javascript:void(0)">Y</a>|
           <a href="javascript:void(0)">Z</a>
 				</fieldset>
-				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
+				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
       <% end %>
-			<form class="tab_content none">
+			<form class="tab_content form_mini none">
 				<%- @categories.each do |category| %>
 					<%- if category.title == "按部件" %>
 						<%- category.children.each do |child_lv2| %>
-							<fieldset>
-								<label><%= child_lv2.title %>：</label>
+							<fieldset class="clear">
+								<label class="fl"><%= child_lv2.title %>：</label>
 								<span>
-									<a href="javascript:add_all_tag(<%= child_lv2.id %>);" value ="<%= child_lv2.id %>" class="check_on <% if @all_tags &&  @all_tags.include?(child_lv2.id.to_s) %>highlight<% end %>">全部</a>
+									<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv2.id %>);" value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
 									<%- child_lv2.children.each do |child_lv3| %>
-										<a href="javascript:add_tag(<%= child_lv3.id %>);" value ="<%= child_lv3.id %>" class="check_on <% if @tags && @tags.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
+										<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv3.id %>);" value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
 									<%- end %>
 								</span>
 							</fieldset>
 						<%- end %>
 					<%- end %>
 				<%- end %>
-				<a href="javascript:;" class="pa imgbase_toggle">收起</a>
+				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
 	<div class="search_bin">
-		<a href="/design_images?ranking_list=like" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
-		<a href="/design_images?ranking_list=view_count" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="/design_images" class="fr <%= "curr_rank" if params[:ranking_list] == nil && params[:controller] == "design_images" %>">默认排行</a>
-		<p>搜索结果：<%= @tag_names.join(", ") %></p>
+		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
+		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
+		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
+		<p>搜索结果：<%= @query_params %></p>
 	</div><!-- search_bin -->
 
 
 	<div class="imgbase_area clear">
 		<div class="imgbase_bin fl pr">
 			<%- if @images.present?%>
-			<div class="imgbase_func ft12 pa">
-				<a href="#" class="imgbase_collect">收藏</a>
-				<a class="imgbase_view">浏览:<span id="imgbase_view"><%= @images.first.design.try(:view_count) %></span></a>
-				<!-- <a href="#" class="imgbase_fullpage">全屏观看</a> -->
-			</div>
-				<div class="imgbase_slider slider_bin">
-					<%- @images.each do |image| %>
-					  <%= image_tag(image.file, size: '686x496') %>
-					<%- end %>
-				</div>
-				<div id="imgbase_info">
-					<span class="imgbase_comm"><%= @images.first.design.try(:comments_count) %></span>
-					<span class="imgbase_like"><%= @images.first.design.try(:votes_count) %></span>
-					<h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
-					<p><%= @images.first.user.try(:display_name) %> <a href="<%= user_path(@images.first.user.id) %>" >查看联系方式</a></p>
-				</div><!-- imgbase_info -->
+        <div class="imgbase_func ft12 pa btn_group">
+        	<!-- <a class="icon_view">浏览:<span id="imgbase_view"><%#= @images.first.try(:view_count) %></span></a> -->
+        	<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"icon_fullscreen", :id =>"imgbase_full", :target => '_blank' %>
+        	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id), method: :post, :id => "new_message", :class => "icon_colleting imgbase_collect_id" %>
+        	<%= link_to '免费下载', download_design_image_path(@images.first.id), :class => 'icon_freedown imgbase_down_id' %>
+		</div>
+		<div id="feb_slides">  
+			<div class="slides_container">
+				<%- @images.each do |image| %>
+					<div>
+						<div>
+							<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" >
+							<%= image_tag(image.file.url(:design_image_big)) %>
+							</a>
+						</div>
+					</div>
+				<%- end %>   
+			</div>  
+			<a href="javascript:;" class="slider_next">next</a>  
+			<a href="javascript:;" class="slider_prev">prev</a>
+		</div>  
+        <div id="imgbase_info">
+          <a href="javascript:void(0);">
+            <span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
+          </a>
+          <%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
+           <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
+          <%- end %>
+          <h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
+          <p>设计师：<%= @images.first.user.try(:display_name) %> <a target="_blank" href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a></p>
+        </div><!-- imgbase_info -->
+        <div class="colorsbox" style="height:82px;overflow:hidden;">
+          <%= image_tag('colors_icon_tit.png', style: 'float:left; margin:15px 15px 0 0;') %>
+          <div class="colors_con" style="float:left;padding:20px 0 0; height:35px; position:relative;">
+            <%= image_tag('colors2.jpg', style: 'display: inline-block;') %>
+            <div class="desc" style="height: 35px; width: 542px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
+              <div class="list" style="height:35px;">
+                <ul class="group" style="overflow:hidden;">
+                  <%- @image_colors.first.each do |color| %>
+                    <li>
+                      <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
+                        <h5><%= color.name %></h5>
+                        <p><%= color.code %></p>
+                      </div>
+                    </li>
+                  <%- end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="fr" style="margin:10px;">
+            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;" target="_blank">
+              <%= image_tag("go_shops_small.jpg") %>
+            </a>
+            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank">
+              <%= image_tag('tmall.jpg') %></a>
+          </div>
+        </div>
 		</div><!-- imgbase_bin -->
 		<ul class="imgbase_list">
 			<%- @images.each_with_index do |image, index| %>
-				<li data-view="<%= image.design.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-					<a href="<%= image_show_design_image_path(image) %>">
-						<%= image_tag(image.file, size: '224x162') %>
+				<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
+					<a href="<%= image_show_design_image_path(image) %>" target="_blank">
+						<%= image_tag(image.file.url(:design_image_list), size: '224x162') %>
 						<p><%= truncate(image.title, length: 15) %></p>
 						<span></span>
 					</a>
 					<div class="none">
-						<span class="imgbase_comm"><%= image.design.try(:comments_count) %></span>
-						<span class="imgbase_like"><%= image.design.try(:votes_count) %></span>
-						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" ><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
-						<p><%= image.user.try(:display_name) %> <a href="<%= user_path(image.user.id) %>" >查看联系方式</a></p>
+						<a href="<%= image_show_design_image_path(image) %>">
+							<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
+						</a>
+						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
+					   <span class="imgbase_like votes_count<%= image.id %>"><%= image.try(:votes_count) %></span>
+						<%- end %>
+						<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank"><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
+						<p>设计师：<%= image.user.try(:display_name) %> <a href="<%= user_asks_path(image.user.id) %>" target="_blank">免费咨询</a></p>
 					</div>
+          <div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
+            <%= image_tag('colors_icon_tit.png', style: 'float:left; margin:15px 15px 0 0;') %>
+            <div class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+              <%= image_tag('colors2.jpg', style: 'display: inline-block;') %>
+              <div class="desc" style="height: 35px; width: 542px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
+                <div class="list" style="height:35px;">
+                  <ul class="group" style="overflow:hidden;">
+                    <%- @image_colors[index].each do |color| %>
+                      <li>
+                        <%- background = color.rgb.blank? ? "background:url(/assets/color_code/' + color.code + '.png)" : "background-color: rgb(#{color.rgb})" -%>
+                        <div class="colorblock" style="<%= background %>"></div>
+                        <h5><%= image.color1_name %></h5>
+                        <p>立邦(<%= color.code %>)<%= color.name %></p>
+                      </li>
+                    <%- end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="fr" style="margin:10px;">
+              <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="db" style="margin-bottom:5px;" target="_blank">
+              <%= image_tag("go_shops_small.jpg") %>
+              </a>
+              <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank">
+                <%= image_tag('tmall.jpg') %></a>
+            </div>
+          </div>
 				</li>
 			<%- end %>
 		</ul>
 		<%- end %>
 	</div><!-- imgbase_area -->
 	<div class="pager ft12">
-		<%= paginate @images if @images %>
+		<%= paginate @images %>
 	</div><!-- pager -->
 </div><!-- imgbase -->
