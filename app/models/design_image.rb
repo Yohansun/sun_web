@@ -61,7 +61,7 @@ class DesignImage < ActiveRecord::Base
   end
 
   def set_pinyin!
-    self.pinyin = PinYin.of_string(self.title[0]).first.to_s
+    self.pinyin = PinYin.of_string(self.title.to_s[0]).first.to_s
   end
 
   def comments_count
