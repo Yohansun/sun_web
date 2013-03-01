@@ -1,7 +1,9 @@
+# encoding: utf-8
+
 # -*- encoding: utf-8 -*-
 task :import_other_design_images => :environment  do
   %w(ColorDesign).each do |model|
-    model.constantize.find_each do |item| 
+    model.constantize.find_each do |item|
       file_src_arr = [item.show_preview_img.path(:original)]
       if file_src_arr.present?
         file_src_arr.each do |file_src|
@@ -11,7 +13,8 @@ task :import_other_design_images => :environment  do
           handle.original_filename = item.show_preview_img.try(:original_filename)
           design_image.file = handle
           design_image.title = item.design_name
-          design_image.content =  item.design_thought 
+          design_image.content =  item.design_thought
+          design_image.user_id = 0
           style = item.design_style
           usage = item.design_usage
           color = item.design_color
@@ -27,6 +30,6 @@ task :import_other_design_images => :environment  do
           end
         end
       end
-    end 
+    end
   end
 end

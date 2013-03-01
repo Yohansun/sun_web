@@ -18,4 +18,8 @@ class ColorDesign < ActiveRecord::Base
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
+
+  def title
+    self.design_name
+  end
 end
