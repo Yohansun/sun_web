@@ -7,6 +7,10 @@ set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
 set :branch, "xiaofei"
+set :scm, :git
+set :git_shallow_clone, 1
+set :git_enable_submodules, 1
+set :deploy_via, :remote_cache
 set :keep_releases, 3
 set :deploy_to, "/home/www/rails/icolor"
 
