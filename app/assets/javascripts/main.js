@@ -917,15 +917,6 @@ $(function(){
 });
 
 $(function(){
-  $('.tab_content').children().hide().eq(0).show();
-  $('.tab_nav li').click(function(){
-      var index_num = $(this).index();
-      var $index_num_con = $('.tab_content').children('div[class^="tab_con"]').eq(index_num);
-      console.log(index_num)
-      console.log($index_num_con.html())
-      $(this).addClass('active').siblings().removeClass('active');
-      $index_num_con.show().siblings().hide();
-  });
   //pop
 	$('.landing_overlay,.pop_rule').hide();
 	$('.pop_btn').click(function(){
