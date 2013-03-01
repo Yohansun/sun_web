@@ -284,7 +284,7 @@ $(function(){
             <dd>
               <a href="/design_images/<%= like_image.id %>/image_show">
                 <%= image_tag(like_image.file.url(:list), size: '178x128')%>
-                <span><%= like_image.title ? like_image.title : "未命名" %></span>
+                <span><%= truncate(like_image.title ? like_image.title : "未命名", length: 15) %></span>
               </a>
             </dd>
           <%- end %>
@@ -295,7 +295,7 @@ $(function(){
             <dd>
               <a href="<%= star.design_link %>">
                 <%= image_tag(star.main_preview_img.url(:image_show), size: '178x128') %>
-                <span><%= star.design_name %></span>
+                <span><%= truncate(star.design_name, length: 15) %></span>
               </a>
             </dd>
           <%- end %>
