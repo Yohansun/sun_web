@@ -917,6 +917,13 @@ $(function(){
 });
 
 $(function(){
+  $('.js-yda .tab_content').children().hide().eq(0).show();
+  $('.js-yda .tab_nav li').click(function(){
+      var index_num = $(this).index();
+      var $index_num_con = $('.js-yda .tab_content').children('div[class^="tab_con"]').eq(index_num);
+      $(this).addClass('active').siblings().removeClass('active');
+      $index_num_con.show().siblings().hide();
+  });
   //pop
 	$('.landing_overlay,.pop_rule').hide();
 	$('.pop_btn').click(function(){
