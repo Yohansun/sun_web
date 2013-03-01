@@ -24,11 +24,11 @@
       var options = {
         data  : data
       }
-      <% area = Area.find @design.area_id %>
+      <% area = Area.find @design.area_id  if @design && @design.area_id.present?%>
       var sel = new LinkageSelect(options);
-      sel.bind('.level_1','<%=area.parent.parent.id%>');
-      sel.bind('.level_2','<%=area.parent.id%>');
-      sel.bind('.level_3','<%=area.id%>');
+      sel.bind('.level_1','<%=area.parent.parent.id if area%>');
+      sel.bind('.level_2','<%=area.parent.id if area%>');
+      sel.bind('.level_3','<%=area.id if area%>');
     }
   })($);
   function jump(){
