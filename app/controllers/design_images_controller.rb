@@ -188,6 +188,11 @@ class DesignImagesController < ApplicationController
         @image_city = area.name
       end
     end
+    #获取图片第几张
+    @image_num = 1
+    @images = @image.design.design_images
+    @images.select{|image|  @image_num += 1 if image.id != @image.id}
+
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @comments = @image.comments.page(params[:page]).per(3)
