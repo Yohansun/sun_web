@@ -42,44 +42,32 @@
                 <button class="channel_btn"></button>
             </fieldset>
         <% end %>
-
-
-          <ul class="channel_list clear">
-            <% @design_users.each do |user| %>
-            <% sort_input = MagicSetting.recommend_designs %>
-            <% design_count = user.designs.joins(:design_images).group("imageable_id") if user.designs %>
+        <ul class="channel_list clear">
+          <%- @design_users.each do |user| %>
             <% design = user.designs.joins(:design_images).group("imageable_id").order("created_at desc").first %>
-              <li style="height:205px">
-                  <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
-                    <% if design %>
-                      <%= link_to user_path(user), :target => "_blank" do %>
-                        <img class="fl" src="<%=design.try(:design_images).first.try(:file) if user.designs.first%>" width="205" height="155">
-                      <% end %>
-                    <% else %>
-                      <img src="<%= asset_path '2013/default_image.png' %>" class="fl" width="208px" height="155">
-                    <% end %>
-                    <%= link_to user_path(user), :target => "_blank" do %>
-                      <%- if user.avatar %>
-                          <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fr" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
-                      <%- else %>
-                          <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fr' %>
-                      <%- end %>
-                    <% end %>
-                  </div>
-                  <h3>
-                    <%- if design %>
-                      <%= link_to user_path(user), :target => "_blank" do %>
-                        <%=design.title if design%>
-                      <%- end %>
-                    <%- else %>
-                      <h3>未上传作品</h3>
-                    <%- end %>
-                  </h3>
-                  <p><%=user.display_name ? user.display_name : user.name%> (<%=user.area.name if user.area%>)</p>
-                  <p><span><%=design_count.length%></span> 作品 / <span><%=user.inspirations.count%></span> 灵感秀</p>
-              </li>
-            <%- end -%>
-          </ul><!-- channel_list end -->
+            <li style="height:205px">
+              <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
+                <%= link_to user_path(user), :target => "_blank" do %>
+                  <img class="fl" src="<%=design.try(:design_images).try(:first).try(:file) if user.designs.first%>" width="205" height="155">
+                <% end %>
+                <%= link_to user_path(user), :target => "_blank" do %>
+                  <%- if user.avatar %>
+                      <img src="<%= user.avatar.try(:file).try(:url, :access_icon) %>" class="fr" title="装修设计师-<%= user.display_name %>" alt="装修设计师-<%= user.display_name %>">
+                  <%- else %>
+                      <%= image_tag "news/regimg_bg.jpg", :width => "57", :height => "57", :class => 'fr' %>
+                  <%- end %>
+                <% end %>
+              </div>
+              <h3>
+                <%= link_to user_path(user), :target => "_blank",:title =>"#{design.title if design}" do %>
+                  <%= truncate(design.title, length: 20) if design%>
+                <%- end %>
+              </h3>
+              <p><%=user.display_name ? user.display_name : user.name%> (<%=user.area.name if user.area%>)</p>
+              <p><span><%= user.design_count %></span> 作品 / <span><%=user.inspirations.count%></span> 灵感秀</p>
+            </li>
+          <%- end %>
+        </ul><!-- channel_list end -->
 
         <div class="pager ft12">
            <%= paginate @design_users  if @design_users%>
