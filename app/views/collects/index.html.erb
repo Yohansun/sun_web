@@ -82,6 +82,17 @@
 							<p>
 								风格：<%= image.design.try(:style) %>
 							</p>
+						<%- elsif image.inspiration %>
+						    <a href="/designs/<%= image.design_id %>" >
+						    <%= image_tag(image.inspiration.design_images.first.try(:file), :class => "host_works_img" ) %>
+						    </a>
+						    <h3><%= image.inspiration.try(:title)  %></h3>
+							<p class="p1 group">
+								<strong class="ft14 fb">当前票数：<%= image.inspiration.try(:votes_count)  %></strong>
+							</p> 
+							<p class="transpond p2 group">
+								<span class="transpond_btn ft12">转发 (<%= image.inspiration.try(:shares_count)  %>)</span>
+							</p>
 						<%- end %>
 						
 					</li>
