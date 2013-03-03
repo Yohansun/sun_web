@@ -153,3 +153,12 @@ if ($(".new_mix_color")) {
 }
 
 });
+
+function yda_kv_link () {
+    <% if current_user -%>
+        window.location.href = "<%= new_user_design_path(current_user) %>";
+    <% else -%>
+        show_login();
+        return false;
+    <% end -%>
+}
