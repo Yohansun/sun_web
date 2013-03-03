@@ -11,7 +11,7 @@
 <div class="kv2013">
   <div class="kv2013_slider slider_bin">
     <a href="/yda/2013">
-      <img class="lazy" src="" data-original="/system/kvs/new_kv.jpg"  width="1680" height="550" />
+      <img class="lazy" src="" data-original="/system/kvs/new_kv.jpg"  width="1680" height="550" usemap="Map1" />
     </a>
     <a href="/weekly_stars?utm_source=kv_stars&utm_medium=kv&utm_content=weekly_star&utm_campaign=kv" target="_blank">
       <img class="lazy" src="" data-original="/system/kvs/kvstar_227.jpg"  width="1680" height="550" />
@@ -23,6 +23,14 @@
       <img class="lazy" src="" data-original="/system/kvs/kv_120118_3.jpg" width="1680" height="550" usemap="#Map3" />
     <!-- </a> -->
   </div>
+  <map name="Map1" id="Map1">
+    <%- if current_user %>
+      <area shape="rect" coords="475,266,595,301" href="<%= new_user_design_path(current_user) %>" />
+    <%- else %>
+      <area shape="rect" coords="475,266,595,301" href="javascript:show_login();" />
+    <%- end %>
+      <area shape="rect" coords="609,266,729,301" href="javascript:void(0);" />
+  </map>
 
   <map name="Map2" id="Map2">
     <area shape="rect" coords="898,119,1019,168" href="http://www.icolor.com.cn/21days/cal_mac.zip" />

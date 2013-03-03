@@ -211,53 +211,23 @@ $(function(){
 
     </div><!--imginfo_show-->
     <div class="author_show">
-      <%- if @image.imageable_type == "Design" %>
-        <div class="author_info clear">
-          <%- if @image.user.avatar -%>
-              <%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
-          <%- else -%>
-            <%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
-          <%- end -%>
-          <div class="fl border_lline">
-            <p class="clear border_bline">
-              <strong><%= @image.user.display_name %></strong>
-              <%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like votes_count#{@image.id}", :remote => true, :method => :post %>
-              <%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
-            </p>
-            <p>
-              <%= link_to "进入个人主页", user_designs_path(@image.user_id), :class =>"img_reply_btn" %>
-            </p>
-          </div>
-        </div><!-- author_info -->
-      <%- elsif @image.imageable_type == "MasterDesign" %>
-        <div class="author_info clear">
-          <%- if @image.user.avatar -%>
-            <%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119" %>
-          <%- else -%>
-            <%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
-          <%- end -%>
-          <div class="fl border_lline">
-            <p class="clear border_bline">
-              <strong class="nomargin"><%= @image.user.display_name %></strong>
-              <span class="ft12">Mirka McNeill Farmer</span>
-            </p>
-            <p>
-              <%= link_to "进入大师访谈", user_designs_path(@image.user_id), :class =>"img_reply_btn" %>
-            </p>
-          </div>
-        </div><!-- author_info->大师访谈 -->
-      <%- elsif @image.imageable_type == "ColorDesign" %>
-        <div class="author_info clear">
+      <div class="author_info clear">
+        <%- if @image.user.avatar -%>
+            <%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
+        <%- else -%>
+          <%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
+        <%- end -%>
+        <div class="fl border_lline">
           <p class="clear border_bline">
             <strong><%= @image.user.display_name %></strong>
-            <span>Mirka McNeill Farmer</span>
-          </p>
-          <p class="clear">
             <%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like votes_count#{@image.id}", :remote => true, :method => :post %>
             <%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
           </p>
-        </div><!-- author_info->色彩搭配 -->
-      <%- end %>
+          <p>
+            <%= link_to "进入个人主页", user_designs_path(@image.user_id), :class =>"img_reply_btn" %>
+          </p>
+        </div>
+      </div><!-- author_info -->
       <!-- JiaThis Button BEGIN -->
       <div class="clear imgs_share border_bline">
         <span class="fl t">分享:</span>
