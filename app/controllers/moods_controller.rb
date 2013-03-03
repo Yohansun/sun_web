@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 class MoodsController < ApplicationController
 	before_filter :find_user
@@ -5,10 +7,10 @@ class MoodsController < ApplicationController
 	def index
 		if @user
 			@moods = Mood.order("created_at desc").page(params[:page]).per(5)
-		end	
+		end
 
 		@weekly_stars = WeeklyStar.order("published_at desc").limit 5
-		
+
 		load_skin
 	end
 
@@ -28,7 +30,7 @@ class MoodsController < ApplicationController
 			end
 		end
 
-		if controller_name = "channel"
+		if controller_name == "channel"
 			redirect_to channel_access_path
 		else
 			redirect_to user_moods_path(@user)
