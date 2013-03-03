@@ -3,7 +3,7 @@ class MasterDesign < ActiveRecord::Base
   belongs_to :subject
   belongs_to :master_profile
   has_many :master_design_uploads
-  has_many :collects
+  has_many :collects, :dependent => :destroy
   has_many :design_images
 
   attr_accessor :time
