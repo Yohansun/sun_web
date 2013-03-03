@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class DesignImagesController < ApplicationController
+  caches_action :index, :expires_in => 5.minutes
+
   def create
     newparams = coerce(params)
     @upload = DesignImage.new(newparams[:upload])
