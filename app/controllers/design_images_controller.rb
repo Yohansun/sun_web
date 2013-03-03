@@ -191,7 +191,13 @@ class DesignImagesController < ApplicationController
     #获取图片第几张
     @image_num = 1
     @images = @image.design.design_images
-    @images.select{|image|  @image_num += 1 if image.id != @image.id}
+    @images.each do |image|
+      if image.id.to_i == @image.id.to_i
+        break
+      else
+        @image_num += 1
+      end
+    end
 
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
