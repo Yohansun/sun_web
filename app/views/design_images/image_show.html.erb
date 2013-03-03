@@ -119,7 +119,7 @@ $(function(){
         <!-- <a class="icon_view">浏览:<span><%= @image.view_count %></span></a> -->
         <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"icon_fullscreen", :target => "_blank" %>
         <%- if current_user %>
-          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), method: :post, :id => "new_message" , :class => "icon_colleting" %>
+          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), :remote => true, method: :post, :id => "new_message" , :class => "icon_colleting" %>
         <%- else %>
           <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "icon_colleting" %>
         <%- end %>

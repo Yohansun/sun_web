@@ -15,6 +15,8 @@ class DesignImage < ActiveRecord::Base
   has_many :collects
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
   belongs_to :design, class_name: 'Design', :foreign_key => 'imageable_id'
+  belongs_to :master_design, class_name: "MasterDesign",  :foreign_key => "master_design_id"
+  belongs_to :color_design, class_name: "ColorDesign",  :foreign_key => "color_design_id"
   # validate :file_dimensions, :unless => "errors.any?"
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null")

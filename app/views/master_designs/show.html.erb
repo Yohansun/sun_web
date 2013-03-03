@@ -75,7 +75,7 @@
       <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) || @master_design.master_name %></strong></h3>
       <div class="btn_group fr">
         <%= link_to "免费下载", "/master_designs/#{@master_design.id}/download", :class =>"icon_freedown" %>
-        <%= link_to "收藏", user_collects_path(@master_design.id, master_design_id: @master_design.id), method: :post, id: "new_message", :class => "icon_colleting" %>
+        <%= link_to "收藏", user_collects_path(@master_design.id, master_design_id: @master_design.id), :remote => true, method: :post, id: "new_message", :class => "icon_colleting" %>
         <a href="/master_designs/<%= @master_design.id %>/fullscreen" class="icon_fullscreen">全屏观看</a>
       </div>
     </div>

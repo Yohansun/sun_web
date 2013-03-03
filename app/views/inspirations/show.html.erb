@@ -90,7 +90,7 @@
       </div>
 
       <div class="btn_group fr" style="margin-top:5px;">
-        <%= link_to "收藏", user_collects_path(@inspiration, color_design_id: @inspiration.id), method: :post, id: "new_message", :class => "icon_colleting"  %>
+        <%= link_to "收藏", user_collects_path(@inspiration, in_design_id: @inspiration.id), :remote => true, method: :post, id: "new_message", :class => "icon_colleting"  %>
         <%= link_to "全屏观看", fullscreen_user_inspiration_path(@inspiration.user_id, @inspiration), :class =>"icon_fullscreen" %>
       </div>
     </div>
