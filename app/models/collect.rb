@@ -7,5 +7,5 @@ class Collect < ActiveRecord::Base
   belongs_to :color_design
   belongs_to :master_design
   belongs_to :inspiration
-  validates_uniqueness_of :user_id, :scope => [:color_design_id, :design_image_id, :inspiration_id, :master_design_id, :weekly_star_id], :message => "you have already collect it"
+  validates_uniqueness_of :user_id, :scope => [:color_design_id, :design_image_id, :inspiration_id, :master_design_id, :weekly_star_id, :design_id], :message => "you have already collect it"
 end
