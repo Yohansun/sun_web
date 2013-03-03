@@ -51,7 +51,7 @@
 				<div class="tit_tab clear">
 					<p class="fr">
 						<a href="/design_images/decoration_parts" class="<%="active_condition" if params[:controller] == 'design_images' && params[:imageable_type] == nil %>">所有图片</a>
-						<a href="/design_images/decoration_parts?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+						<a href="/design_images/decoration_parts?imageable_type=MasterDesignUpload" class="<%="active_condition" if params[:imageable_type] == 'MasterDesignUpload'%>">大师作品</a>
 						<a href="/design_images/decoration_parts?imageable_type=Design" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
 						<a href="/design_images/decoration_parts?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 					</p>
@@ -330,7 +330,7 @@
 							<p><%= @images.first.user.try(:username) %> <a href="<%= user_path(@images.first.user.id) %>" >查看联系方式</a></p>
 						</div><!-- imgbase_info -->
 				</div><!-- imgbase_bin -->
-				
+
 				<ul class="imgbase_list">
 					<%- @images.each_with_index do |image, index| %>
 						<li data-view="<%= image.design.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">

@@ -18,10 +18,10 @@
 
         .colors_recommend p {width: 100%;}
         /*.desc ul p{max-width: 150px;*max-width: none;}*/
-        #feb_slides{width:760px;height:507px;background:#ececec;overflow: hidden;}  
-        #feb_slides .slider_prev,#feb_slides .slider_next{background-image:url(<%= image_path "news/app_pointer.png" %>);width:32px;height:52px;top: 26%;}  
+        #feb_slides{width:760px;height:507px;background:#ececec;overflow: hidden;}
+        #feb_slides .slider_prev,#feb_slides .slider_next{background-image:url(<%= image_path "news/app_pointer.png" %>);width:32px;height:52px;top: 26%;}
         .slider_prev{left:28px;}
-        .slides_container,.slides_container div{width: 760px;height:507px;}  
+        .slides_container,.slides_container div{width: 760px;height:507px;}
   </style>
 <%- end %>
 <%- content_for :tail do %>
@@ -31,8 +31,8 @@
 
 $(function(){
   var $slider = $('#feb_slides');
-  $slider.slides({  
-    next: 'slider_next',  
+  $slider.slides({
+    next: 'slider_next',
     prev: 'slider_prev'
   });
 });
@@ -140,7 +140,7 @@ $(function(){
         <%- end %>
         <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>">免费下载</a>
      </div>
-     <div class="img_vertical_align" id="feb_slides">  
+     <div class="img_vertical_align" id="feb_slides">
         <div class="slides_container">
           <%- @image.design.design_images.each do |image| %>
             <div>
@@ -148,9 +148,9 @@ $(function(){
                 <%= image_tag(image.file.url(:design_image_big), :class =>"imginfo_big_img") %>
               </div>
             </div>
-          <%- end %>   
-        </div>  
-       <a href="javascript:;" class="slider_next">next</a>  
+          <%- end %>
+        </div>
+       <a href="javascript:;" class="slider_next">next</a>
        <a href="javascript:;" class="slider_prev">prev</a>
      </div>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>

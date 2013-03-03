@@ -58,13 +58,13 @@
 				$form   = $('#imgbase_forms').find('form'),
         $ul     = $('#imgbase_ul'),
         $colorsbox = $(".imgbase_bin > .colorsbox");
-			$slider.slides({  
-				next: 'slider_next',  
-				prev: 'slider_prev',  
-				play: 5000,  
-				pause: 2500,  
-				animationComplete:function(){ 
-					var num = $slider.find('.current').index(); 
+			$slider.slides({
+				next: 'slider_next',
+				prev: 'slider_prev',
+				play: 5000,
+				pause: 2500,
+				animationComplete:function(){
+					var num = $slider.find('.current').index();
 					var $curr = $list.find('> li').eq(num),
 						views = $curr.data('view'),
 						full = $curr.data('full'),
@@ -129,7 +129,7 @@
 		<div class="tit_tab clear">
 			<p class="fr">
 				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
-				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+				<a href="javascript:search_imageable_type('MasterDesignUpload')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesignUpload'%>">大师作品</a>
 				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">推荐作品</a>
 				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
@@ -234,7 +234,7 @@
         	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id), :remote => true, method: :post, :id => "new_message", :class => "icon_colleting imgbase_collect_id" %>
         	<%= link_to '免费下载', download_design_image_path(@images.first.id), :class => 'icon_freedown imgbase_down_id' %>
 		</div>
-		<div id="feb_slides">  
+		<div id="feb_slides">
 			<div class="slides_container">
 				<%- @images.each do |image| %>
 					<div>
@@ -244,11 +244,11 @@
 							</a>
 						</div>
 					</div>
-				<%- end %>   
-			</div>  
-			<a href="javascript:;" class="slider_next">next</a>  
+				<%- end %>
+			</div>
+			<a href="javascript:;" class="slider_next">next</a>
 			<a href="javascript:;" class="slider_prev">prev</a>
-		</div>  
+		</div>
         <div id="imgbase_info">
           <a href="javascript:void(0);">
             <span class="imgbase_comm"><%= @images.first.try(:comments_count) %></span>
