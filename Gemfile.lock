@@ -32,6 +32,8 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    abacus_count (0.0.1)
+      activerecord (>= 3.0.0)
     actionmailer (3.2.11)
       actionpack (= 3.2.11)
       mail (~> 2.4.4)
@@ -322,6 +324,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  abacus_count
   acts_as_tree!
   awesome_nested_set
   awesome_print

@@ -23,11 +23,11 @@ class ChannelController < ApplicationController
     end
 
     unless params[:province_id].blank?
-      @design_users = @design_users.where("area_id in (?)", Area.find(params[:province_id]).self_and_descendants)
+      @design_users = @design_users.where("users.area_id in (?)", Area.find(params[:province_id]).self_and_descendants)
     end
 
     unless params[:city_id].blank?
-      @design_users = @design_users.where("area_id in (?)",Area.find(params[:city_id]).self_and_descendants)
+      @design_users = @design_users.where("users.area_id in (?)",Area.find(params[:city_id]).self_and_descendants)
     end
 
     unless params[:area_id].blank?
@@ -50,20 +50,21 @@ class ChannelController < ApplicationController
     end
 
     if params[:user_role].blank?
-      @design_users = @design_users.order("find_in_set(id,'#{ws.reverse.join(",")}') desc").order("current_sign_in_at desc")
+      @design_users = @design_users.order("find_in_set(users.id,'#{ws.reverse.join(",")}') desc").order("current_sign_in_at desc")
     elsif params[:user_role].match /designer/
       @design_users = @design_users.order("current_sign_in_at desc")
     elsif params[:user_role].match /company/
       sellers = @design_users.where("top_order != 0").order("top_order desc").limit(10).map(&:id)
 
       unless sellers.blank?
-        @design_users = @design_users.order("find_in_set(id,'#{sellers.reverse.join(",")}') desc").order("current_sign_in_at desc")
+        @design_users = @design_users.order("find_in_set(users.id,'#{sellers.reverse.join(",")}') desc").order("current_sign_in_at desc")
       else
         @design_users = @design_users.order("current_sign_in_at desc")
       end
     end
 
-    @design_users = @design_users.page(params[:page]).per(8)
+    #use abacus
+    @design_users = @design_users.select("users.*, count(designs.id) as design_count").joins(:designs).group("user_id").having("design_count > 0").abacus.page(params[:page]).per(8)
 
     #mood
     @moods = Mood.order("created_at desc").limit(5)
