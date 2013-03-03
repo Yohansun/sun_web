@@ -45,7 +45,7 @@ class DesignsController < ApplicationController
         @designs = @designs.where(:area_id => params[:area_id])
       elsif params[:area_head] && !params[:area_head].blank?
         area = Area.where(parent_id: params[:area_head])
-        @designs = @designs.where("area_id in (#{area.map(&:id).join(',')})")
+        @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
     end
     sign_in(@user) if current_admin && @user
