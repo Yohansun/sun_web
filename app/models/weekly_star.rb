@@ -6,7 +6,7 @@ class WeeklyStar < ActiveRecord::Base
 
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
-  has_many :collects
+  has_many :collects, :dependent => :destroy
 
   attr_accessor :time
   has_attached_file :main_preview_img, :styles => {:thumb => "80x80#", :index=>"230x138#",:image_show => "178x128#"},
