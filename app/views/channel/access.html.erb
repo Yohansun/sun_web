@@ -44,11 +44,11 @@
         <% end %>
         <ul class="channel_list clear">
           <%- @design_users.each do |user| %>
-            <% design = user.designs.joins(:design_images).group("imageable_id").order("created_at desc").first %>
+            <% designs = user.designs.joins(:design_images).group("imageable_id") %>
             <li style="height:205px">
               <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
                 <%= link_to user_path(user), :target => "_blank" do %>
-                  <img class="fl" src="<%=design.try(:design_images).try(:first).try(:file) if user.designs.first%>" width="205" height="155">
+                  <img class="fl" src="<%=designs.first.try(:design_images).try(:first).try(:file) if designs.first%>" width="205" height="155">
                 <% end %>
                 <%= link_to user_path(user), :target => "_blank" do %>
                   <%- if user.avatar %>
@@ -59,12 +59,12 @@
                 <% end %>
               </div>
               <h3>
-                <%= link_to user_path(user), :target => "_blank",:title =>"#{design.title if design}" do %>
-                  <%= truncate(design.title, length: 20) if design%>
+                <%= link_to user_path(user), :target => "_blank",:title =>"#{designs.first.title if designs.first}" do %>
+                  <%= truncate(designs.first.title, length: 20) if designs.first%>
                 <%- end %>
               </h3>
               <p><%=user.display_name ? user.display_name : user.name%> (<%=user.area.name if user.area%>)</p>
-              <p><span><%= user.design_count %></span> 作品 / <span><%=user.inspirations.count%></span> 灵感秀</p>
+              <p><span><%= designs.abacus.count %></span> 作品 / <span><%=user.inspirations.count%></span> 灵感秀</p>
             </li>
           <%- end %>
         </ul><!-- channel_list end -->
