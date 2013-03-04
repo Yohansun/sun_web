@@ -8,38 +8,9 @@
 <img src="<%= asset_path "2013/index/grid.gif"%>" id="grid" style="z-index:1;" />
 
 <%- end %>
-<div class="kv2013">
-  <div class="kv2013_slider slider_bin">
-    <a href="/yda/2013">
-      <img class="lazy" src="" data-original="/system/kvs/new_kv.jpg"  width="1680" height="550" usemap="Map1" />
-    </a>
-    <a href="/weekly_stars?utm_source=kv_stars&utm_medium=kv&utm_content=weekly_star&utm_campaign=kv" target="_blank">
-      <img class="lazy" src="" data-original="/system/kvs/kvstar_227.jpg"  width="1680" height="550" />
-    </a>
-    <!-- <a href="http://www.icolor.com.cn/21days" > -->
-      <img class="lazy" src="" data-original="/system/kvs/2013.jpg"  width="1680" height="550" usemap="#Map2" />
-    <!-- </a> -->
-    <!-- <a href="http://www.icolor.com.cn/refresh/home" target="_blank"> -->
-      <img class="lazy" src="" data-original="/system/kvs/kv_120118_3.jpg" width="1680" height="550" usemap="#Map3" />
-    <!-- </a> -->
-  </div>
-  <map name="Map1" id="Map1">
-      <area shape="rect" coords="475,266,595,301" href="javascript:yda_kv_link();" />
-      <area shape="rect" coords="609,266,729,301" href="javascript:void(0);" />
-  </map>
-
-  <map name="Map2" id="Map2">
-    <area shape="rect" coords="898,119,1019,168" href="http://www.icolor.com.cn/21days/cal_mac.zip" />
-    <area shape="rect" coords="1033,119,1154,168" href="http://www.icolor.com.cn/21days/cal_pc.zip" />
-  </map>
-  <map id="Map3" name="Map3">
-    <area shape="rect" coords="494,345,605,389" href="http://www.icolor.com.cn/gift_list?from=top" />
-    <area shape="rect" coords="800,255,1006,455" href="http://www.icolor.com.cn/users/66322/designs/2844" target="_blank" />
-    <area shape="rect" coords="987,139,1141,275" href="http://www.icolor.com.cn/users/67445/designs/4148" target="_blank" />
-    <area shape="rect" coords="1050,260,1204,402" href="http://www.icolor.com.cn/users/68213/designs/5049" target="_blank" />
-    <area shape="rect" coords="1012,389,1164,536" href="http://www.icolor.com.cn/designs/7434" target="_blank" />
-  </map>
-</div><!--kv2013-->
+  <%- if MagicSetting.kv_of_home_index.present? %>
+    <%= raw MagicSetting.kv_of_home_index %>
+  <%- end %>
 <div class="wrapper ft14">
   <div class="blocks clear">
     <h2 class="tr">
