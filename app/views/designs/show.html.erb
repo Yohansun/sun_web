@@ -106,9 +106,13 @@
     </div>
     <div class="weekstart_detail">
       <div class="big_image">
-        <% if @design.cover_img -%>
-          <%= image_tag @design.cover_img.file.url(:slide), :title => "装修设计欣赏-#{@design.title}", :alt => "装修设计欣赏-#{@design.title}" %>
-        <% end -%>
+        <%- if params[:image_id] %>
+          <%= image_tag @image.file.url(:slide), :title => "装修设计欣赏-#{@design.title}", :alt => "装修设计欣赏-#{@design.title}" %>
+        <%- else %>
+          <% if @design.cover_img -%>
+            <%= image_tag @design.cover_img.file.url(:slide), :title => "装修设计欣赏-#{@design.title}", :alt => "装修设计欣赏-#{@design.title}" %>
+          <% end -%>
+        <%- end %>
       </div>
       <div class="galleryB">
         <span class="moveleft"></span>
