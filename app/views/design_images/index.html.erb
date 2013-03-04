@@ -227,7 +227,7 @@
 				<%- @images.each do |image| %>
 					<div>
 						<div>
-							<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank" >
+							<a href="<%= user_design_path(image.id, image.imageable_id, image_id: image.id) %>" target="_blank" >
 							<%= image_tag(image.file.url(:design_image_big)) %>
 							</a>
 						</div>

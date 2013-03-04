@@ -60,6 +60,9 @@ class DesignsController < ApplicationController
   def show
     @design = Design.find(params[:id])
     @comments = @design.comments.page params[:page]
+    if params[:image_id]
+      @image = DesignImage.find(params[:image_id])
+    end
   end
 
   def new
