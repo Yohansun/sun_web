@@ -91,19 +91,6 @@ $('#colors_con').mouseenter(function() {
   $(this).children('div.desc').hide();
 });
 
-$(function(){
-  if ($("#new_message")) {
-    $("#new_message").click(function (event) {
-        <% if current_user -%>
-        return true;
-        <% else -%>
-        show_login();
-        return false;
-        <% end -%>
-    });
-  }
-});
-
 function show_login() {
   o_in();
   $('#login_win').show();
@@ -153,7 +140,9 @@ $(function(){
        <a href="javascript:;" class="slider_next">next</a>
        <a href="javascript:;" class="slider_prev">prev</a>
      </div>
+      <%- unless @image.imageable_type == "MasterDesignUpload" -%>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
+      <%- end -%>
 	    <span class="fr">
 	    	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "imgbase/near-shop_link_btn.png" %>"></a>
 	    	<a href="http://www.nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>"></a>
@@ -211,6 +200,8 @@ $(function(){
 
     </div><!--imginfo_show-->
     <div class="author_show">
+
+      <%- unless @image.imageable_type == "MasterDesignUpload" -%>
       <div class="author_info clear">
         <%- if @image.user.avatar -%>
             <%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
@@ -271,6 +262,7 @@ $(function(){
         <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
         <!-- JiaThis Button END -->
       </div>
+      <%- end -%>
 
       <div class="imgs_otherinfo border_bline">
       	<h4>标签</h4>
