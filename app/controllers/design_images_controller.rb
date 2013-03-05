@@ -190,7 +190,19 @@ class DesignImagesController < ApplicationController
     end
     #获取图片第几张
     @image_num = 1
-    @images = @image.design.design_images
+    if @image.imageable_type == 'MasterDesignUpload'
+      mdu = MasterDesignUpload.find @image.imageable_id
+      master_design = mdu.master_design.master_design_uploads.select("id")
+      mdu_id_arr = []
+      master_design.each do |md|
+        mdu_id_arr << md.id
+      end
+      mdu_id_arr = mdu_id_arr.join(",")
+      @images = DesignImage.where("imageable_id in (#{mdu_id_arr}) and imageable_type = 'MasterDesignUpload'")
+    end
+    if @image.imageable_type == 'Design'
+      @images = @image.design.design_images
+    end
     @images.each do |image|
       if image.id.to_i == @image.id.to_i
         break

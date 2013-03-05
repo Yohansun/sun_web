@@ -204,14 +204,14 @@ $(function(){
 
       <%- unless @image.imageable_type == "MasterDesignUpload" -%>
       <div class="author_info clear">
-        <%- if @image.user.avatar -%>
+        <%- if @image.user && @image.user.avatar -%>
             <%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
         <%- else -%>
           <%= image_tag "news/regimg_bg.jpg", size: '119x119', :class =>"fl" %>
         <%- end -%>
         <div class="fl border_lline">
           <p class="clear border_bline">
-            <strong><%= @image.user.display_name %></strong>
+            <strong><%= @image.user.display_name if @image.user%></strong>
             <%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like votes_count#{@image.id}", :remote => true, :method => :post %>
             <%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
           </p>
@@ -231,8 +231,8 @@ $(function(){
         <!-- <a class="jiathis_counter_style"></a> -->
         </div>
         <%
-          role = "#{@image.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @image.user.role_id != 3
-          text = if @image.user.area_id.present?
+          role = "#{@image.try(:user).(:role_id).eql?(2) ? '家装公司' : '设计师'}:" if @image.user && @image.user.role_id != 3
+          text = if @image.user && @image.user.area_id.present?
             province = @image.user.city.try(:parent).try(:name)
             city = @image.user.try(:city).try(:name)
 
@@ -252,7 +252,7 @@ $(function(){
           summary:"",
           hideMore:false,
           pic:"http://www.icolor.com.cn<%= @image.file.url %>",
-          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name %>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
+          title:"#iColor分享#来自<%= text %><%= role %><%= @image.user.display_name if @image.user%>的作品【<%= @image.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
           imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
           imageWidth:26,
           marginTop:150,
