@@ -31,8 +31,8 @@
 
 $(function(){
   var $slider = $('#feb_slides');
-  $slider.slides({  
-    next: 'slider_next',  
+  $slider.slides({
+    next: 'slider_next',
     prev: 'slider_prev',
     start: <%=@image_num%>
   });
@@ -231,7 +231,7 @@ $(function(){
         <!-- <a class="jiathis_counter_style"></a> -->
         </div>
         <%
-          role = "#{@image.try(:user).(:role_id).eql?(2) ? '家装公司' : '设计师'}:" if @image.user && @image.user.role_id != 3
+          role = "#{@image.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @image.user && @image.user.role_id != 3
           text = if @image.user && @image.user.area_id.present?
             province = @image.user.city.try(:parent).try(:name)
             city = @image.user.try(:city).try(:name)

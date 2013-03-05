@@ -46,8 +46,8 @@ task :import_other_design_images => :environment  do
             usage = item.design_usage
             color = item.design_color
             style_ids = ImageLibraryCategory.where("title like '%#{style}%' or title like '%#{usage}%' or title like '%#{color}%' ").map(&:id).join(',')
-            image_tags = ImageTag.where(" image_library_category_id in (#{style_ids})")
-            design_image.tags =image_tags if image_tags.present?
+            # image_tags = ImageTag.where(" image_library_category_id in (#{style_ids})")
+            # design_image.tags =image_tags if image_tags.present?
             design_image.imageable_id = item.id
             design_image.imageable_type = model
             if design_image.save
