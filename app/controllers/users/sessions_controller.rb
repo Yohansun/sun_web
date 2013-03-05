@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
     resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
     resource.first_login_today(resource)
-    respond_with resource
+    respond_with resource, :location => after_sign_out_path_for(resource)
   end
 
   protected

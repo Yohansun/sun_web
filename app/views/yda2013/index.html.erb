@@ -1,6 +1,20 @@
 <div class="landing_index">
 	<img src="<%= asset_path 'landingpage/20130121/landingpage_index-0121.png' %>" border="0" usemap="#Map">
-	<map name="Map" id="Map" style="background:red">
-		<area shape="rect"  style="background:red" coords="141,267,319,313" href="#" />
+	<map name="Map" id="Map">
+		<area shape="rect" coords="74,222,200,260" href="javascript:yda_kv_link();" />
+		<area shape="rect" coords="229,220,356,260" href="javascript:void(0);" />
 	</map>
 </div>
+<%- content_for :tail do %>
+	<script type="text/javascript">
+		function yda_kv_link() {
+		    <% if current_user && current_user.role_id == 1 -%>
+		      window.location.href = "<%= new_user_design_path(current_user) %>";
+		    <% elsif current_user %>
+		      window.location.href = "javascript:void(0)";
+		    <% else -%>
+		      show_login();
+		    <% end -%>
+			};
+	</script>
+<%- end %>
