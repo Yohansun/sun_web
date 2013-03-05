@@ -9,6 +9,6 @@ class MasterDesignUpload < ActiveRecord::Base
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
   def title
-    self.master_design.design_name
+    self.master_design.design_name if self.master_design
   end
 end
