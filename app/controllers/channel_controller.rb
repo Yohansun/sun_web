@@ -16,7 +16,7 @@ class ChannelController < ApplicationController
       params[:area_id] = params[:area]
     end
 
-    unless params[:keywords] == "请输入关键字"
+    if params[:keywords].present?
       @design_users = User.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
     else
       @design_users = User
@@ -64,7 +64,7 @@ class ChannelController < ApplicationController
     end
 
     #use abacus
-    @design_users = @design_users.select("users.*, count(designs.id) as design_count").joins(:designs).group("user_id").having("design_count > 0").abacus.page(params[:page]).per(8)
+    @design_users = @design_users.select("users.*, count(design_images.id) as design_image_count").joins(:designs).joins("left join design_images on design_images.imageable_id = designs.id and `design_images`.`imageable_type` = 'Design'").group("users.id").having("design_image_count > 0").abacus.page(params[:page]).per(8)
 
     #mood
     @moods = Mood.order("created_at desc").limit(5)
