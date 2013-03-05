@@ -26,6 +26,32 @@ task :fix_image_tags => :environment do
   end
 end
 
+desc "Fix missing image tags"
+task :fix_missing_tags => :environment do
+  total_missing = []
+  open("update_tags.log").readlines.each do |line|
+    line.strip!
+    data = line.split("Parameters: ").last
+    hash = eval(data)
+    tags = hash["tags"].map { |e| e.to_i }
+    design_image_id = hash["image_library_id"].to_i
+    current_tags = ImageTag.where(:design_image_id => design_image_id).all.map { |e| e.image_library_category_id }
+    if tags != current_tags
+      p design_image_id
+      # p tags
+      # p current_tags
+      missing_tags = (tags - current_tags)
+      p missing_tags
+      total_missing << missing_tags
+
+      missing_tags.each do |tag_id|
+        ImageTag.create(design_image_id: design_image_id, image_library_category_id: tag_id)
+      end
+    end
+  end
+  p total_missing.flatten.size
+end
+
 task :import_other_design_images => :environment  do
   %w(ColorDesign).each do |model|
     model.constantize.find_each do |item|
