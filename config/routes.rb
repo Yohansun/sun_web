@@ -357,4 +357,9 @@ Icolor::Application.routes.draw do
     get "reward" => "refresh#reward"
     get "judge" => "refresh#judge"
   end
+
+  scope "/baicheng", :module =>"baicheng" do
+    resources :stories
+  end
+
 end
