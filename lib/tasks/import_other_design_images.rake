@@ -1,6 +1,31 @@
 # encoding: utf-8
 
-# -*- encoding: utf-8 -*-
+desc "Fix image tags"
+task :fix_image_tags1 => :environment do
+  f = File.open("fullids.csv", "w+")
+  open("tagids.csv").readlines.each do |line|
+    line.strip!
+    row = line.split(",")
+    right_tag = ImageTag.find(row[0]).design_image_id
+    f.write([row[0], row[1], right_tag].join(","))
+    f.write("\n")
+  end
+  f.close
+end
+
+task :fix_image_tags => :environment do
+  open("fullids.csv").readlines.each do |line|
+    line.strip!
+    row = line.split(",")
+    tag = ImageTag.find(row[0])
+    if tag.design_image_id.to_i == row[1].to_i
+      tag.design_image_id = row[2].to_i
+      tag.save
+      p tag.id
+    end
+  end
+end
+
 task :import_other_design_images => :environment  do
   %w(ColorDesign).each do |model|
     model.constantize.find_each do |item|
