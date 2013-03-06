@@ -4,7 +4,7 @@
 		<li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
 		<li><a href="/seller_user/reports">iColor报告下载</a></li>
 		<li><a href="<%= seller_user_seller_sms_url %>">icolor短信通知</a></li>
-		<li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+		<!-- <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li> -->
 	</ul><!--count_left ends-->
 	<div class="count_right fr">
 		<div class="count_sum fl">
@@ -38,7 +38,7 @@
 						<td><%= report.created_time.strftime("%Y-%m-%d %H:%M:%S") if report %></td>
 						<td><%= link_to "下载", seller_user_reports_export_path(statistical_time: "#{year}-#{month}-#{day}", file_name: "iColor#{year}年#{month}月报告") %></td>
 					</tr>
-				<%- elsif Time.now.year > year %>	
+				<%- elsif Time.now.year > year %>
 					<tr>
 						<td class="tl">iColor<%= year %>年<%= month %>月报告</td>
 						<td><%= month.eql?(12) ? year+1 : year %>-<%= month.eql?(12) ? 1 : month+1 %>-<%= day %></td>
@@ -46,7 +46,7 @@
 						<td><%= report.created_time.strftime("%Y-%m-%d %H:%M:%S") if report %></td>
 						<td><%= link_to "下载", seller_user_reports_export_path(statistical_time: "#{year}-#{month}-#{day}", file_name: "iColor#{year}年#{month}月报告") %></td>
 					</tr>
-				<%- end %>	
+				<%- end %>
 			<%- end %>
 		<%- end %>
 	</table>

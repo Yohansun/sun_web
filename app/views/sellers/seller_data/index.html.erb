@@ -18,7 +18,7 @@
     <li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
     <li><a href="/seller_user/reports">iColor报告下载</a></li>
     <li><a href="<%= seller_user_seller_sms_url %>">icolor短信通知</a></li>
-    <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+    <!-- <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li> -->
   </ul><!--count_left ends-->
   <div class="count_right fr">
     <div class="count_sum fl">
@@ -66,15 +66,15 @@
       <th width="100" class="noborder">备注</th>
     </tr>
     <%- @companies.each do |cc|%>
-      <%- 
-        current_month = cc.seller_datas.current_month.first 
+      <%-
+        current_month = cc.seller_datas.current_month.first
 
         if current_month
           array = []
           array << ("<p>" + current_month.product_top1 + ":" + current_month.product_top1_quantity.to_s + "</p>") unless current_month.product_top1.blank?
           array << ("<p>" + current_month.product_top2 + ":" + current_month.product_top2_quantity.to_s  + "</p>") unless current_month.product_top2.blank?
           array << ("<p>" + current_month.product_top3 + ":" + current_month.product_top3_quantity.to_s  + "</p>") unless current_month.product_top3.blank?
-        end  
+        end
       %>
       <tr id="<%= cc.id %>">
       <td><%= cc.display_name %></td>
@@ -96,7 +96,7 @@
           <p><%= current_month.sales %></p>
         <%- else %>
           <button>请输入</button>
-        <%- end %>        
+        <%- end %>
       </td>
       <td class="product_name">
         <%- unless array.blank? %>
@@ -200,4 +200,4 @@
     <input type="text"   id="form2_input" class="input_text" name="seller_data[sales]"/>
     <input type="submit" value="确定" class="input_submit" />
   <%- end %>
-<%- end %>  
+<%- end %>

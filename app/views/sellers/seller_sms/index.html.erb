@@ -9,7 +9,7 @@
     <li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
     <li><a href="/seller_user/reports">iColor报告下载</a></li>
     <li><a href="<%= seller_user_seller_sms_url %>">iColor短信通知</a></li>
-    <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+    <!-- <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li> -->
   </ul><!--count_left ends-->
   <div class="count_right fr">
     <div class="count_sum info_ul fl">
@@ -20,13 +20,13 @@
     <h2>通知内容：</h2>
     <textarea id="sms_data_content"></textarea>
     <h2>选择发送用户：</h2>
-    
+
     <%= render :partial => 'table' %>
 
     <p class="tc cl">
       <input type="image" src="<%= asset_path "count/info_submit.jpg"%>" class="info_submit" href="javascript:void(0)" onclick="sendSms()"/>
-    </p>  
-  </div>  
+    </p>
+  </div>
 </div><!--count ends-->
 
 <%- content_for :tail do %>
@@ -48,7 +48,7 @@
             alert(message);
           }
         });
-      }; 
+      };
     }
 
     $(function(){
@@ -58,4 +58,4 @@
       })
     });
   </script>
-<%- end %>  
+<%- end %>

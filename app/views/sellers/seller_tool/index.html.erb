@@ -4,7 +4,7 @@
     <li><a href="<%= seller_user_seller_data_url %>">iColor用户数据统计</a></li>
     <li><a href="/seller_user/reports">iColor报告下载</a></li>
     <li><a href="<%= seller_user_seller_sms_url %>">icolor短信通知</a></li>
-    <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li>
+    <!-- <li><a href="<%= seller_user_seller_tool_url %>">iColor工具申请</a></li> -->
   </ul><!--count_left ends-->
   <div class="count_right fr">
     <div class="count_sum data_tool fl">
@@ -18,7 +18,7 @@
         <%= t.img_file_name.blank? ? image_tag(asset_path "count/tools1.jpg") : image_tag(t.img.url(:thumb))%>
         <%- unless t.tag_counts_on(:tags).blank? %>
           <h3><%= t.tag_counts_on(:tags).map {|tag| tag.name}.join(",") %></h3>
-        <%- end %>  
+        <%- end %>
         <p>
           <%= t.try(:name) %><br/>
           每季度<%= t.try(:total) %>套<br/>
@@ -37,7 +37,7 @@
       $(function(){
         $('.data_tools li:even').css('clear','left')
       });
-      
+
       function apply_for_tools(id) {
           $.post("/seller_user/apply_for_tools", {seller_user:{tool_ids:id, apply_for_tools:true}}, function(message) {
               if (message != "") {
