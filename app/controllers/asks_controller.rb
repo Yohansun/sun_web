@@ -13,7 +13,7 @@ class AsksController < ApplicationController
 	     end
 	     content = params[:message][:content]
 	     @user.replies.create(params[:message])
-	     Notifier.ask(@user,content).deliver
+	     Notifier.ask(@user, current_user, content).deliver
 	   end
 	   redirect_to user_asks_path
 	end

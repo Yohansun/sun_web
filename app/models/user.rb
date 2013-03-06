@@ -132,6 +132,10 @@ class User < ActiveRecord::Base
       end
   end
 
+  def full_info
+    [display_name, role_chn_name, "出生日期: #{date_of_birth}", email, user_location].compact.join(", ")
+  end
+
   def role_name
     self.role ? self.role.role : 'user'
   end

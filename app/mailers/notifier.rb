@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 class Notifier < ActionMailer::Base
   default from: "icolor@nipponpaint.com.cn"
@@ -11,13 +13,13 @@ class Notifier < ActionMailer::Base
      when "designer"
       @role = "设计师(" + "#{user.des_status? ? '在读' : '在职'}" + ")"
      when "company"
-      @role = "家装公司" 
-     else 
+      @role = "家装公司"
+     else
       @role = "普通用户"
     end
-    
+
     @path = user_url(user)
-       
+
   	mail(:to => emails,
          :subject => "#{user.display_name}发来的在线咨询",
          :reply_to => 'icolor@nipponpaint.com.cn'
@@ -63,12 +65,12 @@ class Notifier < ActionMailer::Base
         )
   end
 
-  def ask(user,content)
+  def ask(user,current_user,content)
     @user = user
     @content = content
     mail(:to => "icolor@nipponpaint.com.cn",
-         :subject => "来自#{@user.display_name}的免费咨询",
-         :body => "用户咨询：#{@content}"
+         :subject => "对 #{@user.display_name} 的免费咨询",
+         :body => "被咨询用户信息: #{@user.full_info}  \n咨询用户信息: #{current_user.full_info if current_user}  \n咨询内容：#{@content}"
         )
   end
 
