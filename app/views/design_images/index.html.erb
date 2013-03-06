@@ -108,6 +108,7 @@
 				<form onsubmit="return search_query($('#search_query_value').val())" style="display:inline">
 					<input type="text" value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
 				</form>
+				<span>热门搜索：<a href="javascript:search_query('暖色调')">暖色调</a><a href="javascript:search_query('小户型')">小户型</a><a href="javascript:search_query('客厅')">客厅</a><a href="javascript:search_query('简约')">简约</a></span>
 			</div>
 			<!-- <p>iColor为您提供<strong><%#= @image_length%></strong>张装修图片</p> -->
 		</div>
@@ -118,6 +119,7 @@
 				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
 				<a href="javascript:search_imageable_type('MasterDesignUpload')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesignUpload'%>">大师作品</a>
 				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">作品展示</a>
+				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
