@@ -87,7 +87,7 @@
             imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
             imageWidth:26,
             marginTop:150,
-            pic: "http://www.icolor.com.cn/<%= @design.cover_img.file.url(:slide) %>",
+            pic: "http://www.icolor.com.cn/<%= @design.cover_img.try(:file).try(:url, :slide) %>",
             url:"<%= user_design_url(@design.user_id, @design) %>",
             title:"#iColor分享#来自<%= text %><%= role %><%= @design.user.display_name %>的作品【<%= @design.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，",
             data_track_clickback:true

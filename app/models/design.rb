@@ -28,6 +28,17 @@ class Design < ActiveRecord::Base
     end
   end
 
+  def location
+    if self.area_id
+      area = Area.find(area_id)
+      if area.parent.name == area.parent.parent.name
+        area.parent.name + " " + area.name
+      else
+        area.parent.parent.name + " " + area.parent.name + " " + area.name
+      end
+    end 
+  end
+
   def cover_img
     self.design_images.first
   end

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>百城活动</title>
+<%= stylesheet_link_tag "baicheng" %>
+<%= javascript_include_tag "jquery","jquery_ujs" %>
+<%= yield :head %>
+</head>
+<body>
+	<div class="header">
+		<ul class="nav center clear">
+			<li><a href="#" class="nav-icon">地图</a></li>
+			<li><a href="#" class="nav-icon nav-icon2">网格</a></li>
+			<li><a href="javascript:;" class="nav-title">分类</a></li>
+			<li><a href="javascript:;" class="nav-small">全部</a></li>
+			<li><a href="javascript:;" class="nav-icon nav-icon3">设计作品</a></li>
+			<li><a href="javascript:;" class="nav-icon nav-icon4">刷新感言和爱情故事</a></li>
+			<li><a href="javascript:;" class="nav-title">地域</a></li>
+			<li><a href="javascript:;" class="nav-small">全部</a></li>
+			<li>
+				<form action="" method="">
+					<select>
+						<option>省/直辖市</option>
+					</select>
+					<select>
+						<option>城市</option>
+					</select>
+				</form>
+			</li>
+		</ul>
+	</div><!-- header -->
+	<%= yield %>
+	<div class="footer">
+		<ul class="center clear">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">大众三级跳</a></li>
+			<li><a href="#">设计大PK</a></li>
+			<li><a href="#">作品聚集地</a></li>
+			<li><a href="#">活动规则及奖项设置</a></li>
+			<li class="tc">
+				<a href="#">注册</a> <a>·</a> <a href="#">登录</a>
+				<a href="#" class="ft12">返回iColor网</a>
+			</li>
+		</ul>
+	</div><!-- footer -->
+	<div id="layer"></div>
+	<div class="unlogin abs-center none" id="login_win">
+	  <%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
+		  <div class="subs_title ft18">
+		    <span class="fl">请先登录</span>
+		    <a href="javascript:void(0)" class="close_btn fr"> 关闭</a>
+		  </div><!--subs_title ends-->
+		  <div class="err_tips cr ft12 none pa">
+		    用户名或密码错误
+		    <span class="fr cp">x</span>
+		  </div><!--err_tips-->
+		  <div class="loginCon ft12 clear">
+		    <form>
+		      <div>
+		        <label for="username" class="username ft14 fl">帐号：</label>
+		        <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
+		      </div>
+		      <div class="clear">
+		        <label for="password" class="password ft14 fl">密码：</label>
+		        <input id="password" type="password" class="fl" name="user[password]"/>
+		        <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
+		      </div>
+		      <input id="login" type="image" src="<%= asset_path "login.jpg" %>" />
+		      <div class="checkbox fl">
+		        <input type="checkbox" /><span>下次自动登录</span>
+		      </div>
+		    </form>
+		  </div><!--loginCon ends-->
+	  <%- end %>
+	  <ul class="loginCon ft12 border clear">
+	    <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>" />新浪微博</a></li>
+	    <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>" />QQ</a></li>
+	    <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>" />人人网</a></li>
+	    <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>" />开心网</a></li>
+	  </ul>
+	  <div class="loginCon ft12 border clear">
+	    <p class="fl">还没加入iColor?</p>
+	    <a href="/users/sign_up" class="reg_now fl"></a>
+	  </div><!--loginCon ends-->
+	  <div class="loginCon border">
+	    <a href="/users/sign_up"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads" /></a>
+	  </div>
+	</div><!--unlogin ends-->
+	<%= yield :tail %>
+	<script type="text/javascript">
+		$(function(){
+	    if ($(".new_message")) {
+	        $(".new_message").click(function () {
+	            <% if current_user -%>
+	            return true;
+	            <% else -%>
+	            alert('请先登录');
+	            return false;
+	            <% end -%>
+	        });
+	    };
+	    $('.close-btn').click(function(){
+				$('.abs-center').hide();
+				$('#layer').hide();
+			});
+	  });
+		function upload_link () {
+			<% if current_user && current_user.role_id == 1 -%>
+        window.location.href = "alert('跳转上传页面的地方')";
+	    <% elsif current_user %>
+	      window.location.href = "javascript:void(0);";
+	    <% else -%>
+	      alert('请登录');
+	    <% end -%>
+		};
+		function show_login () {
+			$('.unlogin').show();
+			$('#layer').show();
+		};
+	</script>
+</body>
+</html>

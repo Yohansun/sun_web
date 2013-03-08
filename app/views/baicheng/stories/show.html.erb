@@ -1,2 +1,147 @@
-<h1>Baicheng::Stories#show</h1>
-<p>Find me in app/views/baicheng/stories/show.html.erb</p>
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "baicheng/jquery.slider","baicheng/style" %>
+<%- end %>
+<%- content_for :tail do %>
+	<%= javascript_include_tag "jquery.slider","baicheng/main" %>
+<%- end %>
+<div class="wrapper">
+	<div class="refresh-logo fl">
+		<a href="#" title="活动近况" class="e-recent">活动近况</a>
+		<a href="#" title="上传作品 Upload" class="e-upload">上传作品 Upload</a>
+		<a href="#" title="发表故事 征集设计" class="e-publish">发表故事 征集设计</a>
+	</div><!-- refresh-logo -->
+	<div class="refresh-container fl">
+		<div class="refresh-bin">
+			<div class="pr">
+				<div class="story-slider slider_bin">
+					<%- @story.story_images.each do |image| %>
+						<div>
+							<a href="#" date-vote="<%#= image.votes_count %>">
+								<%= image_tag(image.file.url(:slide), size: "680x353") %>
+							</a>
+						</div>
+					<%- end %>
+				</div>
+				<div class="show-group pa">
+					<ul class="clear">
+						<li><a href="#" class="icon-like"><%= @story.votes_count %></a></li>
+						<li><a href="#" class="icon-view">0<%#= @story.comments_count %></a></li>
+					</ul>
+				</div>
+			</div>
+			<p class="img-info clear">
+				<span class="fr nomargin">
+					<span class="fl ft12" style="margin:3px 3px 0 0">分享</span>
+					<!-- JiaThis Button BEGIN -->
+					<span class="jiathis_style fl" style="margin:3px 0 0 0">
+						<a class="jiathis_button_renren"></a>
+						<a class="jiathis_button_kaixin001"></a>
+						<a class="jiathis_button_tsina"></a>
+						<a class="jiathis_button_qzone"></a>
+						<!-- <a class="jiathis_button_tqq"></a> -->
+						<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a> -->
+						<a class="jiathis_counter_style"></a>
+					</span>
+					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script>
+					<!-- JiaThis Button END -->
+				</span>
+				<span>楼盘名称：<%= @story.property_name %></span>
+				<span>楼盘所在地：<%= @story.location %></span>
+			</p>
+			<div class="img-info">
+				<div class="clear">
+					<a href="javascript:upload_link();" class="fl btn-title">我来设计</a>
+					<div class="show-group fl">
+						<ul class="clear">
+							<li>
+								<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect new_message" %>
+							</li>
+						</ul>
+					</div>
+					<div class="show-group fl">
+						<ul class="clear">
+							<li><a href="<%= download_story_path(@story.id) %>" class="icon-download">下载</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="questionmart clear ft12 pr">
+					<span class="fl nomargin">如何参与用户房型图的设计 </span>
+					<div class="js-questionmart fl">
+						<img style="padding:7px 20px 0 3px;" src="<%= asset_path 'baicheng/content/questionmark.jpg' %>">
+						<div class="questionmart_pop none">
+							<h3>收藏/下载房型图（线上）</h3>
+							<div class="clear">
+								<div>当家装公司/设计师对大众用户上传的某房型图感兴趣有意参与设计的时候：</div>
+								<div class="clear">
+									<span class="fl nomargin">可点击</span>
+									<div class="show-group fl">
+										<ul class="clear nomargin">
+											<li>
+												<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect new_message" %>
+											</li>
+										</ul>
+									</div>
+									<span class="fl">,随时进入<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>的收藏再次查看</span>
+								</div>
+
+								<div class="clear">
+									<span class="fl nomargin">或是点击</span>
+									<div class="show-group fl">
+										<ul class="clear nomargin">
+											<li><a href="<%= download_story_path(@story.id) %>" class="icon-download">下载</a></li>
+										</ul>
+									</div>
+									<span class="fl">,将房型图下载到本地进行设计。</span>
+								</div>
+							</div>
+							<h3 style="margin-top:15px;">房型设计（线下）</h3>
+							<p>家装公司/设计师对下载的房型图进行设计。</p>
+							<h3 style="margin-top:30px;">房型设计上传（线上）</h3>
+							<p class="clear">
+								<span class="fl nomargin">家装公司/设计师点击</span>
+								<a href="javascript:upload_link();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<span class="fl">，将设计图上传。</span>
+							</p>
+							<h3 style="margin-top:25px;">上传合同（线上）</h3>
+							<p>
+								当家装公司/设计师的作品被上传房型图的大众用户选中，经过咨询沟通，并成功下单后。家装公司/设计师可进入
+								<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>，点击
+								<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+							</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="img-info">
+				<h3 class="cr tc fb"><%= @story.title %></h3>
+				<p class="tc ft12 author">作者：<%= @story.user.display_name %></p>
+				<p><%= @story.content %></p>
+				<p class="clear">
+					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr" do %>
+						<%= image_tag("baicheng/content/btn_vote.png")%>
+					<%- end %>
+				</p>
+			</div>
+			<div class="img-info">
+				<h4 class="fb">已提交作品</h4>
+				<ul class="oldworks clear">
+					<%- @stories.each do |story| %>
+						<li class="nomargin">
+							<a href="<%= story_path(story.id) %>" target="_blank">
+								<%= image_tag(story.cover_img.try(:file).try(:url, :list), size: "203x146")%>
+							</a>
+							<h5>
+								<a href="<%= story_path(story.id) %>" class="cr" target="_blank"><%= story.title %></a>
+							</h5>
+							<p>
+								<span class="fr nomargin ft12"><%= Area.find(story.area_id).parent.name if story.area_id %></span>
+								<span class="ft12"><%= story.user.display_name %></span>
+							</p>
+						</li>
+					<%- end %>
+				</ul>
+			</div>
+		</div>
+	</div><!-- refresh-container -->
+</div><!-- wrapper -->

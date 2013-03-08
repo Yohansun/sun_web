@@ -1,0 +1,2 @@
+module Baicheng::DesignWorksHelper
+end

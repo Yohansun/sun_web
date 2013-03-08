@@ -359,7 +359,12 @@ Icolor::Application.routes.draw do
   end
 
   scope "/baicheng", :module =>"baicheng" do
-    resources :stories
+    resources :stories do
+      member do
+        get :download
+      end
+    end
+    resources :design_works
   end
 
 end
