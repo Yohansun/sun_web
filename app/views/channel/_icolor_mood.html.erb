@@ -3,12 +3,13 @@
     <h4 class="txt_tit">iColor心情</h4>
     <textarea id="J_t" name="mood[content]" class="mood_textarea"></textarea>
 
-    <ul class="btn_group clear">
+    <ul class="moodbtn_group clear">
       <li class="fr btn_send">
         <%- if current_user %>
           <button>发布</button>
         <%- else %>
-          <%= link_to_function raw("<button>发布</button>"), "show_login()", :class =>"buttons" %>
+          <%#= link_to_function raw("<button>发布</button>"), "show_login()", :class =>"buttons" %>
+          <button onclick="show_login();">发布</button>
         <%- end %>
       </li>
       <li class="fr btn_public">

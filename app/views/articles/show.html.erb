@@ -18,10 +18,10 @@
   </div><!--sub_nav ends-->
   <div class="wrapper group news_detail">
     <div class='news_top clear ft12'>
-      <%= link_to "全部", "/articles" %>
-      <% ["设计相关","产品相关"].each do |tag| %>
-          <%= link_to tag, "/articles?tags=#{URI.escape(tag)}", :class => "#{'active' if tag == params[:tags] }" %>
-      <% end %>
+      <%#= link_to "全部", "/articles" %>
+      <%# ["设计相关","产品相关"].each do |tag| %>
+          <%#= link_to tag, "/articles?tags=#{URI.escape(tag)}", :class => "#{'active' if tag == params[:tags] }" %>
+      <%# end %>
     </div>
     <div class="shadow news_detail_main">
       <div class="section">
