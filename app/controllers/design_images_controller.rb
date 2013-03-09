@@ -38,7 +38,7 @@ class DesignImagesController < ApplicationController
   end
 
   def index
-    @images = DesignImage.available.audited_with_colors.order("sorts ASC, created_at DESC")
+    @images = DesignImage.available.audited_with_colors
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     @tag_names = []
@@ -82,12 +82,12 @@ class DesignImagesController < ApplicationController
 
     unless params[:ranking_list].blank?
       if params[:ranking_list] == "like"
-        @images = @images.order("design_images.collects_count desc")
+        @images = @images.order("design_images.votes_count desc")
       elsif params[:ranking_list] == "view_count"
         @images = @images.order("design_images.view_count desc")
       end
     else
-      @images = @images.order("design_images.source DESC, design_images.created_at DESC")
+      @images = @images.order("sorts ASC, design_images.source DESC, design_images.created_at DESC")
     end
     @images = @images.page(params[:page]).per(11)
     @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
