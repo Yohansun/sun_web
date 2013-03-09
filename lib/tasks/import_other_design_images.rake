@@ -88,7 +88,7 @@ task :import_other_design_images => :environment  do
   end
 end
 
-task :import_master_design_uploads => :environment  do
+task :import_master_design => :environment  do
   %w(MasterDesignUpload).each do |model|
     model.constantize.find_each do |item|
       file_src_arr = [item.file.path(:original)]
@@ -103,7 +103,7 @@ task :import_master_design_uploads => :environment  do
             handle.original_filename = item.file.try(:original_filename)
             design_image.file = handle
 
-            design_image.title = item.master_design.design_name
+            design_image.title = item.master_design.design_name if item.master_design.design_name
             design_image.content =  item.master_design.design_intro
             design_image.user_id = 0
             # style = item.design_style
@@ -112,16 +112,30 @@ task :import_master_design_uploads => :environment  do
             # style_ids = ImageLibraryCategory.where("title like '%#{style}%' or title like '%#{usage}%' or title like '%#{color}%' ").map(&:id).join(',')
             # image_tags = ImageTag.where(" image_library_category_id in (#{style_ids})")
             # design_image.tags =image_tags if image_tags.present?
-            design_image.imageable_id = item.id
+            design_image.imageable_id = item.master_design_id
             design_image.imageable_type = model
             if design_image.save
               p "#{item.id}保存成功!"
+              p "imageable_id:        #{item.master_design_id}"
             else
               p "保存失败!---#{row[0]}"
             end
           end
         end
       end
+    end
+  end
+end
+task :import_master_design_upload_to_master_design => :environment do
+  @images = DesignImage.where("design_images.imageable_type = 'MasterDesignUpload' ")
+  @images.each do |image|
+    @design = MasterDesignUpload.find(image.imageable_id)
+    imageable_id = @design.master_design_id
+    if image.imageable_type && image.imageable_id
+      image.update_attributes!(imageable_type: "MasterDesign", imageable_id: imageable_id)
+      p"#{image.id} save success!"
+    else
+      p"failed "
     end
   end
 end

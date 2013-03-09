@@ -117,7 +117,7 @@
 		<div class="tit_tab clear">
 			<p class="fr">
 				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
-				<a href="javascript:search_imageable_type('MasterDesignUpload')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesignUpload'%>">大师作品</a>
+				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
 				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">作品展示</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
@@ -243,7 +243,7 @@
           <%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
            <span class="imgbase_like"><%= @images.first.try(:votes_count) %></span>
           <%- end %>
-					<%- unless @images.first.imageable_type == "MasterDesignUpload" -%>
+					<%- unless @images.first.imageable_type == "MasterDesign" -%>
 	          <h4><a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank" ><%= truncate(@images.first.design.try(:title), length: 15) %>  <span>(查看该套作品)</span></a></h4>
 	          <p>设计师：<%= @images.first.user.try(:display_name) %> <% if @images.first.user %><a target="_blank" href="<%= user_asks_path(@images.first.user.id) %>" >免费咨询</a><% end %></p>
           <%- end -%>
@@ -291,7 +291,7 @@
 						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
 					   <span class="imgbase_like votes_count<%= image.id %>"><%= image.try(:votes_count) %></span>
 						<%- end %>
-						<%- unless image.imageable_type == "MasterDesignUpload" -%>
+						<%- unless image.imageable_type == "MasterDesign" -%>
 							<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank"><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>
 							<p>设计师：<%= image.user.try(:display_name) %> <% if image.user %><a href="<%= user_asks_path(image.user.id) %>" target="_blank">免费咨询</a><% end %></p>
 						<%- end -%>

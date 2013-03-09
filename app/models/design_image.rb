@@ -89,7 +89,7 @@ class DesignImage < ActiveRecord::Base
     case self.imageable_type
     when 'Design' then "推荐作品"
     when 'ColorDesign' then "色彩配搭"
-    when 'MasterDesignUpload' then "大师作品"
+    when 'MasterDesign' then "大师作品"
     end
   end
 
@@ -98,7 +98,7 @@ class DesignImage < ActiveRecord::Base
     when 'Inspiration' then '灵感秀上传'
     when 'Design' then '设计师上传'
     when 'ColorDesign' then "色彩配搭"
-    when 'MasterDesignUpload' then "大师作品"
+    when 'MasterDesign' then "大师作品"
     else
       return 'icolor上传'
     end
@@ -117,12 +117,12 @@ class DesignImage < ActiveRecord::Base
       when 'id'
         DesignImage.available.where(id: keyword).order("design_images.id DESC")
       when 'imageable_type'
-        if keyword == 'Design'
+        if keyword == '推荐作品'
           DesignImage.available.where(imageable_type: 'Design').order("design_images.id DESC")
-        elsif keyword == 'ColorDesign'
+        elsif keyword == '色彩搭配'
           DesignImage.available.where(imageable_type: 'ColorDesign').order("design_images.id DESC")
-        elsif keyword == 'MasterDesignUpload'
-          DesignImage.available.where(imageable_type: 'MasterDesignUpload').order("design_images.id DESC")
+        elsif keyword == '大师作品'
+          DesignImage.available.where(imageable_type: 'MasterDesign').order("design_images.id DESC")
         end
       when 'last_user_id'
         DesignImage.includes(:last_user).available.where(["admins.username = ?", keyword]).order("design_images.id DESC")
@@ -136,6 +136,8 @@ class DesignImage < ActiveRecord::Base
         DesignImage.available.where("design_images.edited_color = ? AND design_images.audited = ?", true, true).order("design_images.id DESC")
       when 'no_edit_color'
         DesignImage.available.where("(design_images.edited_color = ? or design_images.edited_color is null) AND (design_images.audited is null or design_images.audited = ?)", false, false).order("design_images.id DESC")
+        when 'imageable_id'
+        DesignImage.available.where("design_images.imageable_id = ?", keyword).order("design_images.id DESC")
     end
   end
 

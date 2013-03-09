@@ -176,6 +176,9 @@ class DesignImagesController < ApplicationController
 
   def image_show
     @image = DesignImage.includes(:design).find(params[:id])
+    if @image.imageable_type == "MasterDesign"
+       @master_design = MasterDesign.find(@image.imageable_id)
+    end 
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.available.audited_with_colors.count
@@ -190,15 +193,15 @@ class DesignImagesController < ApplicationController
     end
     #获取图片第几张
     @image_num = 1
-    if @image.imageable_type == 'MasterDesignUpload'
-      mdu = MasterDesignUpload.find @image.imageable_id
-      master_design = mdu.master_design.master_design_uploads.select("id")
+    if @image.imageable_type == 'MasterDesign'
+      mdu = MasterDesign.find @image.imageable_id
+      master_design = mdu.master_design_uploads.select("id")
       mdu_id_arr = []
       master_design.each do |md|
         mdu_id_arr << md.id
       end
       mdu_id_arr = mdu_id_arr.join(",")
-      @images = DesignImage.where("imageable_id in (#{mdu_id_arr}) and imageable_type = 'MasterDesignUpload'")
+      @images = DesignImage.where("imageable_id in (#{mdu_id_arr}) and imageable_type = 'MasterDesign'")
     end
     if @image.imageable_type == 'Design'
       @images = @image.design.design_images

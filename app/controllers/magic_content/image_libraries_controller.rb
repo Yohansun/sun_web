@@ -13,10 +13,12 @@ module MagicContent
           @images = DesignImage.search(params[:genre], params[:keywords]) if params[:keywords].present?
         end
       end
-      if @images.count % 10 == 0
-        @page_count = @images.count / 10
-      else
-        @page_count = (@images.count / 10).to_i + 1
+      if @images
+        if @images.count % 10 == 0
+          @page_count = @images.count / 10
+        else
+          @page_count = (@images.count / 10).to_i + 1
+        end
       end
       @images = @images.order("design_images.id DESC").page(params[:page]) if @images.present?
     end
