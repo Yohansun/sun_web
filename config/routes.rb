@@ -306,11 +306,18 @@ Icolor::Application.routes.draw do
       get :up_down_page
       delete :destroy_image
     end
+    resources :suit_images do
+      put :update_title
+      get :categories
+      put :update_tags_suits
+      get :audited
+    end
   end
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
     resources :image_libraries
+    resources :suit_images
   end
 
   #扩充magic_admin

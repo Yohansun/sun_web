@@ -79,7 +79,7 @@
 
   <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
-      <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"],["编辑完成、未审核", "edit_no_verify"],["已编辑色号，未审核标签", "color_no_edit"],["已审核标签，未编辑色号", "edit_no_color"],["已编辑色号, 已审核标签", "edit_color"],["未编辑色号, 未审核标签","no_edit_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
+      <%=select_tag :genre, options_for_select([["选择筛选条件",""],["图片名称","title"],["图片作者","username"],["已被管理员修改过的图片","yes_update"],["未被管理员修改过的图片","no_update"],["图片ID","id"],["所属频道","imageable_type"],["按修改管理员","last_user_id"],["编辑完成、未审核", "edit_no_verify"],["已编辑色号，未审核标签", "color_no_edit"],["已审核标签，未编辑色号", "edit_no_color"],[" 套图ID", "imageable_id"],["已编辑色号, 已审核标签", "edit_color"],["未编辑色号, 未审核标签","no_edit_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
     <% end %>
@@ -106,7 +106,11 @@
           <%- @images.each do |image| -%>
           <tr>
             <td><%= image.id %></td>
-            <td><%= link_to(truncate(image.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.title.present? %></td>
+            <td>
+              <%- if image.user_id %>
+               <%= link_to(truncate(image.title, length: 20), main_app.user_design_path(user_id: image.user_id, id: image.imageable_id), target: '_blank') if image.title.present? %>
+              <%- end %>
+            </td>
             <td>
              <%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail',
                 :"data-placement" => 'right',

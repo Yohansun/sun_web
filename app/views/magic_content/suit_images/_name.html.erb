@@ -1,0 +1,12 @@
+<%= form_tag main_app.suit_image_update_title_path(image.imageable_id), :class => 'name_form', :style => 'z-index:9000', :method => :put do %>
+  <h3>设置名称</h3>
+  <fieldset>
+    <label class="name_form_label">请输入名称：</label>
+    <input type="text" class="input-xxlarge" data-provide="typeahead" name="design_image[id]" value="<%= image.title %>">
+  </fieldset>
+  <div class="name_form_button" >
+  	<%= submit_tag "保存",:class => 'greyishBtn name_commit', :disable_with => "提交中..." %>
+    <!-- <button class="greyishBtn">保存</button> -->
+    <input class="js-close button greyishBtn" type="reset" value="取消" />
+  </div>
+<%- end %>

@@ -1,0 +1,104 @@
+<div class="color_form_overlay"></div>
+<%- content_for :tail do %>
+  <%= stylesheet_link_tag "image_libraries" %>
+  <%= javascript_include_tag 'twitter/bootstrap' %>
+  <script type="text/javascript">
+    $(function(){
+      $('.set_name').click(function(){
+        $(this).siblings('.name_form').show()
+        $('.color_form_overlay').show()
+      })
+      $('.js-close').click(function(){
+        $(this).parents('form').hide();
+        $('.color_form_overlay').hide();
+      })
+    });
+  </script>
+<%- end %>
+<div class="content">
+  <%= render partial: 'layouts/flash_message' %>
+  <div class="title">
+    <h5>套图管理</h5>
+  </div>
+
+  <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
+    <div class="head">
+      <h5 class="iFrames">套图列表</h5>
+    </div>
+
+    <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
+      <thead>
+        <th width='30px'>ID</th>
+        <th>名称</th>
+        <th width='60px'>列表页图片</th>
+        <th>所属相册</th>
+        <th width='120px'>发布时间</th>
+        <th>最后修改人</th>
+        <th width='120px'>最后修改时间</th>
+        <th>所属频道</th>
+        <th>所属用户</th>
+        <th width='180px'>操作</th>
+      </thead>
+      <tbody>
+        <% if @images.present? %>
+          <%- @images.each do |image| -%>
+          <tr>
+            <td><%= image.imageable_id %></td>
+            <td>
+               <%= truncate(image.title, length: 20) if image.title.present? %>
+            </td>
+            <td>
+             <%= image_tag(image.try(:file), size: '50x50', class: 'image-thumbnail',
+                :"data-placement" => 'right',
+                :"data-html" => true,
+                # :"data-original-title" => "#{image_tag(image.try(:file).slide_thumb)}",
+                rel: 'tooltip') %>
+            </td>
+            <td>
+              <%- if image.imageable_type == "ColorDesign" && image.try(:imageable_id) %>
+                <%= link_to(truncate(image.imageable.title, length: 20), main_app.color_designs_path(image.imageable_id), target: '_blank') if image.imageable.try(:title).present? %>
+              <%- elsif  image.imageable_type == "MasterDesign" && image.try(:imageable_id) %>
+                <a href="/master_designs/<%= image.imageable_id %>">
+                   <%= truncate(image.imageable.title, length: 20) if image.imageable.try(:title).present? %>
+                </a>
+
+              <% end -%>
+            </td>
+            <td><%= image.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td><%= image.last_user.username if image.last_user %></td>
+            <td><%= image.last_updated_at.strftime("%Y-%m-%d %H:%M") if image.last_updated_at %></td>
+            <%- if image.imageable_type == "ColorDesign" && image.try(:imageable_id) %>
+              <td>
+                <%= link_to(image.channel_name, main_app.color_designs_path(image.imageable_id)) %>
+              </td>
+            <%- elsif image.imageable_type == "MasterDesign" && image.try(:imageable_id) %>
+                <td>
+                  <a href="/master_designs">
+                    <%= image.channel_name %>
+                  </a>
+              </td>
+            <%- end %>
+            <td><%= image.user.username if image.user %></td>
+            <td>
+              <%# if can? :set_details, :details %>
+                <%#= link_to '设置名称', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
+              <%# end %>
+              <% if can? :settings, :tab %>
+                <%= link_to '管理套图', main_app.image_libraries_path(:keywords => image.imageable_id, :genre => "imageable_id") %>
+              <% end %>
+              <% if can? :settings, :tab %>
+                <%= link_to '设置标签', main_app.suit_image_categories_path(image) %>
+              <% end %>
+              <%= render partial: 'name', :locals => { :image => image }%>
+            </td>
+          </tr>
+          <%- end -%>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <%= paginate @images if @images.present? %>
+  </ul>
+</div>
+

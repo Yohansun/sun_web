@@ -141,7 +141,7 @@ $(function(){
        <a href="javascript:;" class="slider_next">next</a>
        <a href="javascript:;" class="slider_prev">prev</a>
      </div>
-      <%- unless @image.imageable_type == "MasterDesignUpload" -%>
+      <%- unless @image.imageable_type == "MasterDesign" || @image.imageable_type == "ColorDesign" -%>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
       <%- end -%>
 	    <span class="fr">
@@ -202,7 +202,7 @@ $(function(){
     </div><!--imginfo_show-->
     <div class="author_show">
 
-      <%- unless @image.imageable_type == "MasterDesignUpload" -%>
+      <%- unless @image.imageable_type == "MasterDesign" || @image.imageable_type == "ColorDesign"-%>
       <div class="author_info clear">
         <%- if @image.user && @image.user.avatar -%>
             <%= image_tag @image.user.avatar.file(:profile), :class => 'box_shadow fl',:size =>"119x119", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
@@ -220,6 +220,40 @@ $(function(){
           </p>
         </div>
       </div><!-- author_info -->
+      <%- if @image.imageable_type == "MasterDesign" %>
+          <div class="author_info clear">
+            <%= image_tag(@image.try(:file), :class => "fl") %>
+              <div class="fl border_lline">
+                <p class="clear border_bline">
+                  <strong class="nomargin">
+                     <%= @image.try(:title)%>
+                  </strong>s
+                </p>
+                <p>
+                  <a href="/master_interviews/<%= @master_design.master_profile_id %>" class="img_reply_btn">进入大师访谈</a>
+                </p>
+              </div>
+          </div><!-- author_info->大师访谈 -->
+      <%- elsif @image.imageable_type == "Design" %>
+          <div class="author_info clear">
+            <p class="clear border_bline">
+              <strong>
+                <%= @image.design.try(:title) %>
+              </strong>
+              <span>
+                <%= @image.design.user.display_name %>
+              </span>
+            </p>
+            <p class="clear">
+              <a href="javascript:void(0);" class="imgbase_like">
+                <%= @image.design.votes_count %>
+              </a>
+              <a href="javascript:void(0);" class="imgbase_comm">
+                <%= @image.design.comments_count %>
+              </a>
+            </p>
+          </div><!-- author_info->色彩搭配 -->
+      <%- end %>
       <!-- JiaThis Button BEGIN -->
       <div class="clear imgs_share border_bline">
         <span class="fl t">分享:</span>
