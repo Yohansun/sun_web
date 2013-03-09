@@ -184,7 +184,7 @@ $(function(){
         <%= f.hidden_field :commentable_type, value: 'DesignImage' %>
         <%= f.text_area :content, :placeholder =>"最多可输入140字" %>
         <div class="tr">
-          <%= f.submit "提交评论", :class => "img_reply_btn", :confirm => "Are you sure?" %>
+          <%= f.submit "提交评论", :class => "img_reply_btn" %>
         </div>
       <% end %>
     <%- if @comments.any? %>
