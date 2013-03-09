@@ -179,7 +179,8 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.includes(:design).find(params[:id])
     if @image.imageable_type == "MasterDesign"
        @master_design = MasterDesign.find(@image.imageable_id)
-    end
+    end 
+
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.available.audited_with_colors.count
