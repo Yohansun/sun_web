@@ -86,8 +86,14 @@ $(function() {
           <input type="text" class="password fl"  value="" name="user[msn]"/>
         </div><!--reg_list ends-->
         <div class="border_bottom tc ft12">
-          <span class="fb">注：</span>完成此步骤可获得更多积分哦！
+        <div class="tc ft16" style="margin-left:-30px;">
+          <input type="checkbox" name="user[is_imported]" value="1" <%= 'checked' if current_user.is_imported? %> />
+          <span class="fb" style="margin-left:10px;">是否参加现场见面会</span>
         </div>
+        <br />
+        <span class="fb">注：</span>完成此步骤可获得更多积分哦！
+      </div>
+
         <p class="tc">
         <input type="image" src="<%= asset_path "news/submit.jpg" %>" />&nbsp;
         <a href="/users/suc_regist"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
