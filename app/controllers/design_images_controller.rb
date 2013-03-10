@@ -87,7 +87,8 @@ class DesignImagesController < ApplicationController
         @images = @images.order("design_images.view_count desc")
       end
     else
-      @images = @images.order("sorts ASC, design_images.source DESC, design_images.created_at DESC")
+      # @images = @images.order("sorts ASC, design_images.source DESC, design_images.created_at DESC")
+      @images = @images.order("design_images.created_at DESC")
     end
     @images = @images.page(params[:page]).per(11)
     @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
@@ -178,7 +179,7 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.includes(:design).find(params[:id])
     if @image.imageable_type == "MasterDesign"
        @master_design = MasterDesign.find(@image.imageable_id)
-    end 
+    end
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.available.audited_with_colors.count
