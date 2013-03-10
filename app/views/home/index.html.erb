@@ -20,7 +20,8 @@
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_out.url(:home_page2), :height=>"365px", :width=>"380px" %></a>
-      <a href="/master_interviews/<%= @master_interview.id %>" class="blocks_title ft16"><%= @master_interview.title %> 一 <%= @master_interview.name %></a>
+      <%- master_interview = @master_interview.title + '一' + @master_interview.name %>
+      <a href="/master_interviews/<%= @master_interview.id %>" class="blocks_title ft16"><%= truncate(master_interview, length: 25) %></a>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
@@ -29,7 +30,7 @@
               <%= image_tag(@master_design.master_design_uploads.first.file.url(:home_page), :height=>"170px", :width=>"380px")%>
             <%- end %>
         </a>
-        <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= @master_design.try(:design_name) %></a>
+        <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= truncate(@master_design.try(:design_name), length: 20) %></a>
       </div>
       <div class="blocks_mini mr20">
         <a href="/master_interviews?from=top" class="block">大师殿堂</a>
@@ -40,7 +41,7 @@
               <%= image_tag(@master_design_two.master_design_uploads.first.file.url(:home_page1), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="/master_designs/<%=@master_design_two.id%>" class="blocks_title ft14"><%=@master_design_two.try(:design_name)%></a>
+        <a href="/master_designs/<%=@master_design_two.id%>" class="blocks_title ft14"><%= truncate(@master_design_two.try(:design_name), length: 11)%></a>
       </div>
     </div><!-- blocks_big -->
     <div class="blocks_big pr">
@@ -49,7 +50,7 @@
               <%= image_tag(@master_design_three.master_design_uploads.first.file.url(:home_page3), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
-      <a href="/master_designs/<%=@master_design_three.id%>" class="blocks_title ft14"><%=@master_design_three.try(:design_name)%></a>
+      <a href="/master_designs/<%=@master_design_three.id%>" class="blocks_title ft14"><%= truncate(@master_design_three.try(:design_name), length: 20)%></a>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
   <div class="blocks clear">
@@ -62,7 +63,7 @@
               <%= image_tag(@desing_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
-      <a href="<%=image_show_design_image_path(@desing_image.id)%>" class="blocks_title ft16"><%=@desing_image.design.try(:title)%></a>
+      <a href="<%=image_show_design_image_path(@desing_image.id)%>" class="blocks_title ft16"><%= truncate(@desing_image.design.try(:title), length: 20)%></a>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
@@ -71,7 +72,7 @@
               <%= image_tag(@desing_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_two.id)%>" class="blocks_title ft14"><%=@desing_image_two.design.try(:title)%></a>
+        <a href="<%=image_show_design_image_path(@desing_image_two.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_two.design.try(:title), length: 20)%></a>
       </div>
       <div class="blocks_mini mr20">
         <a href="/design_images?from=top" class="block block2_3">装修图库</a>
@@ -82,7 +83,7 @@
                 <%= image_tag(@desing_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_three.id)%>" class="blocks_title ft14"><%=@desing_image_three.design.try(:title)%></a>
+        <a href="<%=image_show_design_image_path(@desing_image_three.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_three.design.try(:title), length: 11)%></a>
       </div>
     </div><!-- blocks_big -->
     <div class="blocks_big">
@@ -92,7 +93,7 @@
                 <%= image_tag(@desing_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_four.id)%>" class="blocks_title ft14"><%=@desing_image_four.design.try(:title)%></a>
+        <a href="<%=image_show_design_image_path(@desing_image_four.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_four.design.try(:title), length: 11)%></a>
       </div>
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@desing_image_five.id)%>">
@@ -100,7 +101,7 @@
                 <%= image_tag(@desing_image_five.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_five.id)%>" class="blocks_title ft14"><%=@desing_image_five.design.try(:title)%></a>
+        <a href="<%=image_show_design_image_path(@desing_image_five.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_five.design.try(:title), length: 11)%></a>
       </div>
       <div class="blocks_mid mt25">
         <a href="<%=image_show_design_image_path(@desing_image_six.id)%>">
@@ -108,7 +109,7 @@
                 <%= image_tag(@desing_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_six.id)%>" class="blocks_title ft14"><%=@desing_image_six.design.try(:title)%></a>
+        <a href="<%=image_show_design_image_path(@desing_image_six.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_six.design.try(:title), length: 20)%></a>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
@@ -127,7 +128,7 @@
         <%- end %>
       </a>
       <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="blocks_title ft14">
-        <span class="blocks_like fr"><%=@link_design.try(:votes_count)%></span><%=@weekly_star.design_name%>
+        <span class="blocks_like fr"><%=@link_design.try(:votes_count)%></span><%= truncate(@weekly_star.design_name, length: 20)%>
       </a>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20 pr">
@@ -136,7 +137,7 @@
               <%= image_tag(@design.cover_img.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
-      <a href="<%=user_design_path(@design.user_id, @design)%>" class="blocks_title ft14"><%=@design.title%></a>
+      <a href="<%=user_design_path(@design.user_id, @design)%>" class="blocks_title ft14"><%= truncate(@design.title, length:20)%></a>
     </div><!-- blocks_big -->
     <div class="blocks_big">
       <div class="blocks_mid mb25">
@@ -145,7 +146,7 @@
               <%= image_tag(@color_design.main_preview_img.url(:home_page), :height=>"170px", :width=>"380px")%>
         <%- end %>
       </a>
-      <a href="/color_designs/<%= @color_design.id %>" class="blocks_title ft14"><%=@color_design.design_name%></a>
+      <a href="/color_designs/<%= @color_design.id %>" class="blocks_title ft14"><%=truncate(@color_design.design_name, length: 20)%></a>
       </div>
       <div class="blocks_mini mr20">
         <a href="/inspirations/<%= @inspiration.id %>">
@@ -153,7 +154,7 @@
                 <%= image_tag(@inspiration.cover_img.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%=@inspiration.title%></a>
+        <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%= truncate(@inspiration.title, length: 11)%></a>
       </div>
       <div class="blocks_mini">
         <a href="/weekly_stars?from=top&star_type=<%= URI.escape("每周之星") %>" class="block block3_5">设计鉴赏</a>
@@ -218,7 +219,7 @@
       </div>
       <div class="blocks_mini">
         <a href="/articles/<%=@articles.first.id%>"><img src="<%= @articles.first.preview_img%>" width="180" height="170"/></a>
-        <a href="/articles/<%=@articles.first.id%>" class="blocks_title ft14"><%=@articles.first.title%></a>
+        <a href="/articles/<%=@articles.first.id%>" class="blocks_title ft14"><%= truncate(@articles.first.title, length: 12)%></a>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
