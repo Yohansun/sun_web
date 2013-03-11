@@ -30,8 +30,14 @@
 				<%= link_to '活动规则及奖项设置', 'intros_path', class: "#{'active' if controller_name == 'intros'}" %>
 			</li>
 			<li class="tc">
-				<a href="#">注册</a> <a>·</a> <a href="#">登录</a>
-				<a href="#" class="ft12">返回iColor网</a>
+				<%- unless current_user %>
+					<a href="/users/sign_up">注册</a>
+					<a>·</a>
+					<a href="javascript:show_login();">登录</a>
+				<%- else %>
+					<a><%= current_user.display_name %></a>
+				<%- end %>
+				<a href="http://www.icolor.com.cn" class="ft12">返回iColor网</a>
 			</li>
 		</ul>
 	</div><!-- footer -->

@@ -2,12 +2,12 @@
 class CollectsController < ApplicationController
 	before_filter :find_user
 	def index
-		@images = current_user.collects.page(params[:page]).per(8)
+		@images = @user.collects.page(params[:page]).per(8)
 	end
 	def create
-		if check_collect(current_user,params)
+		if check_collect(@user,params)
 			@collect = Collect.new()
-			@collect.user_id = current_user.id
+			@collect.user_id = @user.id
 			if params[:weekly_star_id]
 				@collect.weekly_star_id = params[:weekly_star_id]
 				@collect.save

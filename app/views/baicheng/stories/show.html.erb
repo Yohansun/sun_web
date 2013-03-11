@@ -2,14 +2,12 @@
 	<%= stylesheet_link_tag "baicheng/jquery.slider","baicheng/style" %>
 <%- end %>
 <%- content_for :tail do %>
-	<%= javascript_include_tag "jquery.slider","baicheng/main" %>
+	<%= javascript_include_tag "jquery.slider" %>
 <%- end %>
+<%= render partial: 'baicheng/design_works/navs' %>
 <div class="wrapper">
 	<div class="refresh-logo fl">
-		<img src="<%= asset_path 'baicheng/refresh/leftlogo.png' %>">
-		<a href="#" title="活动近况" class="e-recent">活动近况</a>
-		<a href="#" title="上传作品 Upload" class="e-upload">上传作品 Upload</a>
-		<a href="#" title="发表故事 征集设计" class="e-publish">发表故事 征集设计</a>
+		<%= render partial: 'baicheng/design_works/sidebar' %>
 	</div><!-- refresh-logo -->
 	<div class="refresh-container fl">
 		<div class="refresh-bin">

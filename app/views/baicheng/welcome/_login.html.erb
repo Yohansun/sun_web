@@ -2,7 +2,7 @@
   <%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
     <div class="subs_title ft18">
       <span class="fl">请先登录</span>
-      <a href="javascript:void(0)" class="close_btn fr"> 关闭</a>
+      <a href="javascript:void(0)" class="close-btn fr"> 关闭</a>
     </div><!--subs_title ends-->
     <div class="err_tips cr ft12 none pa">
       用户名或密码错误
@@ -12,7 +12,7 @@
       <form>
         <div>
           <label for="username" class="username ft14 fl">帐号：</label>
-          <input id="username" type="text" class="fl" value="用户名/邮箱/手机" name="user[login]"/>
+          <input id="username" type="text" class="fl" placeholder="用户名/邮箱/手机" name="user[login]"/>
         </div>
         <div class="clear">
           <label for="password" class="password ft14 fl">密码：</label>
