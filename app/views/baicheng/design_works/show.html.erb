@@ -176,7 +176,7 @@
 								</h5>
 								<p class="pr">
 									<%= comment.content %>
-									<%- unless @design.user == current_user %>
+									<%- if @design.user == current_user %>
 										<a href="javascript:;" class="reply-btn js-reply">回复</a>
 									<%- end %>
 								</p>
@@ -193,7 +193,7 @@
 									<p class="pr noborder">
 										<em class="cr"><%= reply.user.display_name %></em>
 										 回复说：<%= reply.content %>
-										 <%- unless @design.user == current_user %>
+										 <%- if @design.user == current_user %>
 										 	<%= link_to "删除", reply_msg_path(reply.id), :class => "reply_del", method: :delete, :confirm => "确定删除么?" %>
 										 <%- end %>
 									</p>
