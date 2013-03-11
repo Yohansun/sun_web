@@ -1,0 +1,33 @@
+<%-
+  mode = params[:mode] ? 'grid' : 'map'
+  path = controller_name == 'stories' ? stories_path : design_works_path
+-%>
+<div class="header">
+  <ul class="nav center clear">
+    <li><%= link_to '地图', path %></li>
+    <li><%= link_to '网格', "#{path}?mode=grid", class: "nav-icon nav-icon2" %></li>
+    <li><a href="javascript:;" class="nav-title">分类</a></li>
+    <li><%= link_to '全部', "#{path}?mode=#{mode}", class: 'nav-small' %></li>
+    <li>
+      <%= link_to '设计作品', opus_design_works_path(mode: mode),
+        class: "nav-icon nav-icon3 #{'active' if controller_name == 'design_works' && action_name == 'opus'}" %>
+    </li>
+    <li>
+      <%= link_to '刷新感言和爱情故事', stories_path(mode: mode),
+        class: "nav-icon nav-icon4 #{'active' if controller_name == 'stories'}" %>
+    </li>
+    <li><a href="javascript:;" class="nav-title">地域</a></li>
+    <li><a href="javascript:;" class="nav-small">全部</a></li>
+    <li>
+      <form action="" method="">
+        <select>
+          <option>省/直辖市</option>
+        </select>
+        <select>
+          <option>城市</option>
+        </select>
+        <input type="submit" class="nav_submit" value="确定">
+      </form>
+    </li>
+  </ul>
+</div>

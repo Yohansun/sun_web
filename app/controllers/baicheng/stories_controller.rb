@@ -2,6 +2,10 @@
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
 
+  def index
+
+  end
+
   def new
   end
 

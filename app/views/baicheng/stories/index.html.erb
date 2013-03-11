@@ -1,0 +1,2 @@
+<%= render partial: 'baicheng/design_works/navs' %>
+<%= render partial: params[:mode].present? && params[:mode] == 'grid' ? 'baicheng/design_works/grid' : 'baicheng/design_works/map', locals: {data: nil} %>

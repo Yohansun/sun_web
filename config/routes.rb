@@ -364,13 +364,18 @@ Icolor::Application.routes.draw do
 
   scope "/baicheng", :module =>"baicheng" do
     root  to: 'welcome#index'
-    match ':page', to: 'welcome#show', via: :get
+    resources :design_works do
+      collection do
+        get :opus
+      end
+    end
     resources :stories do
       member do
         get :download
       end
     end
-    resources :design_works
+    match ':page', to: 'welcome#show', via: :get
+
   end
 
 end

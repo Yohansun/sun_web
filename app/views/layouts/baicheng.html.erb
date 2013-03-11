@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>百城活动</title>
 <%= stylesheet_link_tag "baicheng" %>
-<%= javascript_include_tag "jquery","jquery_ujs" %>
+<%= javascript_include_tag "baicheng" %>
 <%= yield :head %>
 </head>
 <body>
@@ -23,8 +23,12 @@
 				<%= link_to '设计大PK', '/baicheng/pk',
 					class: "#{'active' if controller_name == 'welcome' && params[:page] == 'pk'}" %>
 			</li>
-			<li><a href="#">作品聚集地</a></li>
-			<li><a href="#">活动规则及奖项设置</a></li>
+			<li>
+				<%= link_to '作品聚集地', design_works_path, class: "#{'active' if controller_name == 'design_works'}" %>
+			</li>
+			<li>
+				<%= link_to '活动规则及奖项设置', 'intros_path', class: "#{'active' if controller_name == 'intros'}" %>
+			</li>
 			<li class="tc">
 				<a href="#">注册</a> <a>·</a> <a href="#">登录</a>
 				<a href="#" class="ft12">返回iColor网</a>

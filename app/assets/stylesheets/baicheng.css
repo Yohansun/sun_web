@@ -10,5 +10,7 @@
  *
  *= require baicheng/reset
  *= require baicheng/base
+ *= require baicheng/jquery.layer.v3
+ *= require baicheng/main
  *= require_self
 */

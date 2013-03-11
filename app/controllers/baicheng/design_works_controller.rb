@@ -2,6 +2,12 @@
 class Baicheng::DesignWorksController < ApplicationController
 	layout 'baicheng'
 
+  def index
+  end
+
+  def opus
+  end
+
   def new
   end
 
