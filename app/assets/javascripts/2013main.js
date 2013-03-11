@@ -15,8 +15,9 @@
 
 	//kv
 	(function($){
-		var $slider = $('.kv2013_slider'),
-        $ul = $slider.slider({
+		var $slider = $('.kv2013_slider');
+		if(!$slider.length) return;
+    var $ul = $slider.slider({
 	            buttons : false,
 	            speed : 800,
 	            pagerClass : 'pager_rest'
@@ -54,7 +55,7 @@
 		spring_upload.click(function(){
 			$('#spring_upload').click();
 		});
-	
+
 		//spring_card
 		$('.spring_form').submit(function(e){
 			e.preventDefault();
@@ -116,13 +117,13 @@
 	   $(this).parents('li').children('h3').children('a').css('color','#ff0000')
 	  })
 	})($);
-	
+
   //color mood
   (function($){
       $('.btn_mood,.btn_public').hover(function(){
       	$(this).children('ul').toggle()
       });
-      
+
       $('.color_mood_options li').hover(function(){
           $(this).siblings('li').removeClass('hover');
           $(this).addClass('hover');
