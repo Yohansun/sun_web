@@ -1,0 +1,51 @@
+<%= render partial: 'baicheng/design_works/event_activity' %>
+
+
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "baicheng/map" %>
+<%- end %>
+
+<%- content_for :tail do %>
+  <script type="text/javascript">
+  $(function(){
+    var recent = Layer({
+      // auto : true,      // 是否自动弹出，默认false
+      btn : $('.e-recent'), // 触发弹窗按钮
+      box : $('.e-pop')   // 弹窗
+    });
+    $('.e-pop img').attr('draggable',false);
+
+    $('#e-ml1')
+    .spinCounter({spinTime: 1000, stopDigit: 2})
+    .next().spinCounter({spinTime: 1260, stopDigit: 5})
+    .next().spinCounter({spinTime: 1520, stopDigit: 0})
+    .next().spinCounter({spinTime: 1800, stopDigit: 0});
+
+    $('#e-ct1')
+    .spinCounter({spinTime: 1000, stopDigit: 8})
+    .next().spinCounter({spinTime: 1500, stopDigit: 2});
+
+    $('#e-ds1').spinCounter({spinTime: 1000, stopDigit: 1})
+    .next().spinCounter({spinTime: 1260, stopDigit: 6})
+    .next().spinCounter({spinTime: 1520, stopDigit: 0})
+    .next().spinCounter({spinTime: 1800, stopDigit: 0});
+
+    $('#e-ps1').spinCounter({spinTime: 1000, stopDigit: 1})
+    .next().spinCounter({spinTime: 1160, stopDigit: 2})
+    .next().spinCounter({spinTime: 1320, stopDigit: 0})
+    .next().spinCounter({spinTime: 1480, stopDigit: 0})
+    .next().spinCounter({spinTime: 1640, stopDigit: 0})
+    .next().spinCounter({spinTime: 1800, stopDigit: 0});
+
+    $('#e-st1').spinCounter({spinTime: 1000, stopDigit: 1})
+    .next().spinCounter({spinTime: 1400, stopDigit: 0})
+    .next().spinCounter({spinTime: 1800, stopDigit: 2});
+
+    $('#e-pro1').spinCounter({spinTime: 1000, stopDigit: 2})
+    .next().spinCounter({spinTime: 1200, stopDigit: 0})
+    .next().spinCounter({spinTime: 1400, stopDigit: 0})
+    .next().spinCounter({spinTime: 1600, stopDigit: 0})
+    .next().spinCounter({spinTime: 1800, stopDigit: 0});
+  });
+  </script>
+<%- end %>
