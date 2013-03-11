@@ -29,7 +29,7 @@ class Design < ActiveRecord::Base
   end
 
   def cover_img
-    self.design_images.available.first
+    self.design_images.first
   end
 
   def comments_count
