@@ -4,57 +4,10 @@
 <%- content_for :tail do %>
 	<%= javascript_include_tag "jquery.slider","baicheng/main" %>
 	<script type="text/javascript">
-		$(function() {
-		  Object.size = function(obj) {
-		  var size = 0, key;
-		  for (key in obj) {
-		    if (obj.hasOwnProperty(key)) size++;
-		  }
-		  return size;
-		  };
-		});
-		var color_codes = {
-		  <%- color1, color2, color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3) %>
-
-		  '<%= @image.id %>': {
-		    <%-
-		    codes = []
-		    [color1, color2, color3].each_with_index do |color, index|
-		        unless color.blank?
-		            codes << "'#{index+1}': { 'rgb': '#{color.rgb}', 'code': '#{color.code}', 'name': '#{color.name}', 'category': '#{@image.color1_name}'}"
-		        end
-		    end
-		    %>
-		    <%= codes.join(",").html_safe %>
-		  }
-		};
-
-		$('#colors_con').mouseenter(function() {
-		  var id = $("#gallery_caption").text() * 1;
-		  if (id == 0) {
-		      id = <%= @image.try(:id) %>
-		  }
-
-		  code = color_codes[id];
-		  // Get the size of an object
-		  var size = Object.size(code);
-		  var $ul = $(this).find('ul');
-		  var tmp = '';
-		  for (i = 1; i <= size; i++) {
-		      if (code[i].rgb == '') {
-		          tmp += '<li><div class="colorblock" style="background:url(/assets/color_code/' + code[i].code + '.png)"></div><h5>' + code[i].category + '</h5><p>立邦木器漆(' + code[i].code + ')</p></li>';
-		      } else {
-		          tmp += '<li><div class="colorblock" style="background-color:rgb(' + code[i].rgb + ')"></div><h5>' + code[i].category + '</h5><p>立邦(' + code[i].code + ')' + code[i].name + '</p></li>';
-		      }
-		  };
-
-		  $ul.html(tmp);
-		  $(this).children('img').hide();
-		  $(this).children('div.desc').show();
-		  $(".list ul li:last").addClass("noborder");
-		}).mouseleave(function(){
-		  $(this).children('img').show();
-		  $(this).children('div.desc').hide();
+		$(function(){
+			$('.colors_con').live('hover', function(){
+        $(this).children().fadeToggle('fast');
+      });
 		});
 	</script>
 <%- end %>
@@ -68,12 +21,36 @@
 		<div class="refresh-bin">
 			<div class="pr">
 				<div class="story-slider slider_bin">
-					<%- @design_images.each do |design_image| %>
+					<%- @design_images.each_with_index do |design_image,index| %>
 						<div>
 							<a href="#">
 								<%= image_tag(design_image.try(:file).url(:design_work_slide), size: "680x353") %>
 							</a>
-						</div>
+							<div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
+								<img src="<%= asset_path 'baicheng/content/colors_icon_tit.jpg' %>" style="float:left; margin:15px 5px 0 10px;" />
+								<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+				          <img src="<%= asset_path "baicheng/content/colors2.jpg" %>"  style="display: inline-block;" />
+				          <div class="desc" style=" height:35px; width:600px; margin:19px 0px;display:none; position:absolute; left:1px; top:1px;">
+				            <div class="list" style="height:35px;">
+				              <ul class="group" style="overflow:hidden;">
+				              	<%- @image_colors[index].each do |color| %>
+				                  <li>
+				                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
+				                      <h5><%= color.name %></h5>
+				                      <p>立邦(<%= color.code %>)</p>
+				                    </div>
+				                  </li>
+				                <%- end %>
+				              </ul>
+				            </div>
+				          </div>
+				        </div>
+				        <div class="fr" style="margin:10px;">
+				        	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="db" style="margin-bottom:5px;"><img src="<%= asset_path 'baicheng/content/go_shops.jpg' %>"></a>
+				        	<a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'baicheng/content/tmall.jpg' %>"></a>
+				        </div>
+				      </div>
+				    </div>
 					<%- end %>
 				</div>
 				<div class="show-group pa">
@@ -99,21 +76,29 @@
 				</div>
 			</div>
 
-			<div class="colorsbox" style="height:82px;overflow:hidden;">
+			<div id="colors_boxes" class="colorsbox" style="height:82px;overflow:hidden;">
 				<img src="<%= asset_path 'baicheng/content/colors_icon_tit.jpg' %>" style="float:left; margin:15px 5px 0 10px;" />
 				<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
           <img src="<%= asset_path "baicheng/content/colors2.jpg" %>"  style="display: inline-block;" />
           <div class="desc" style=" height:35px; width:600px; margin:19px 0px;display:none; position:absolute; left:1px; top:1px;">
             <div class="list" style="height:35px;">
               <ul class="group" style="overflow:hidden;">
+              	<%- @image_colors.last.each do |color| %>
+                  <li>
+                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
+                      <h5><%= color.name %></h5>
+                      <p>立邦(<%= color.code %>)</p>
+                    </div>
+                  </li>
+                <%- end %>
               </ul>
             </div>
           </div>
         </div>
 				
 				<div class="fr" style="margin:10px;">
-					<a href="#" class="db" style="margin-bottom:5px;"><img src="<%= asset_path 'baicheng/content/go_shops.jpg' %>"></a>
-					<a href="#"><img src="<%= asset_path 'baicheng/content/tmall.jpg' %>"></a>
+					<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="db" style="margin-bottom:5px;"><img src="<%= asset_path 'baicheng/content/go_shops.jpg' %>"></a>
+					<a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'baicheng/content/tmall.jpg' %>"></a>
 				</div>
 			</div>
 			<!-- Colors END -->

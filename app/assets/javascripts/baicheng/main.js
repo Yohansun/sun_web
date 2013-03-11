@@ -1,5 +1,10 @@
 $(function(){
-	if($.fn.slider)	$('.story-slider').slider();
+	if($.fn.slider)	$('.story-slider').slider({
+		callback : function(num){
+			var html = $('.story-slider').children().children().eq(num).find('.colorsbox').html();
+			$('#colors_boxes').html(html);
+		}
+	});
 	$('.js-questionmart').hover(function(){
 		$(this).children('.questionmart_pop').toggle();
 	});
