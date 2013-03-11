@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-body{background: url(<%= asset_path 'refresh/refresh-bg.jpg' %>) no-repeat top center;}
+body{background: url(/asset/refresh/refresh-bg.jpg) no-repeat top center;}
 .header a,.footer a{color: #fff;}
 .header,.footer{width: 100%;min-width: 1180px;position: fixed;left: 0;z-index: 2;}
 .header{background: #000;top: 0;}
@@ -10,7 +10,7 @@ body{background: url(<%= asset_path 'refresh/refresh-bg.jpg' %>) no-repeat top c
 .nav a,.footer a,.refresh-logo a{display: block;}
 .nav a{padding: 16px 18px;font-size: 14px;_position: relative;}
 .nav .nav-icon{padding-left: 40px;}
-.nav-icon{background: url(<%= asset_path 'nav/nav-icon.png' %>) no-repeat 12px center;_background-image: url(/asset/nav/nav-icon.gif);}
+.nav-icon{background: url(/asset/nav/nav-icon.png) no-repeat 12px center;_background-image: url(/asset/nav/nav-icon.gif);}
 .nav-icon:hover,.subpage{background-color: #e71d36;}
 .nav-icon2{background-position: -77px center;}
 .nav-icon3{background-position: -243px center;}
@@ -26,7 +26,7 @@ body{background: url(<%= asset_path 'refresh/refresh-bg.jpg' %>) no-repeat top c
 .subpage a:hover,.nav a.active{background: #bc000e;}
 .subpage .logo a{width:132px;padding: 0;}
 
-.subnav{position:absolute;top:46px;left:0;background:url(<%= asset_path 'baicheng/nav/subnav_arrow.png' %>) no-repeat center top;padding-top:6px;}
+.subnav{position:absolute;top:46px;left:0;background:url(/asset/nav/subnav_arrow.png) no-repeat center top;padding-top:6px;}
 .subpage .subnav li{border-bottom:1px dotted #66142a;}
 .subpage .subnav a{width:106px;text-align:center;padding:10px 0;font:12px "Microsoft Yahei";background:#aa000d;}
 
@@ -40,14 +40,14 @@ body{background: url(<%= asset_path 'refresh/refresh-bg.jpg' %>) no-repeat top c
 .footer .tc .ft12{font-size: 13px;font-weight: normal;color: #787878;display:block;}
 
 .wrapper{height: 746px;padding-top: 86px;margin-bottom: 68px;}
-.refresh-logo{background: url(<%= asset_path 'baicheng/refresh/refresh-logo.png' %>) no-repeat;width: 210px;height: 392px;padding:40px 7px 0 0;margin: 0 29px 0 77px;text-align:center;}
+.refresh-logo{background: url(/asset/refresh/refresh-logo.png) no-repeat;width: 210px;height: 392px;padding:40px 7px 0 0;margin: 0 29px 0 77px;text-align:center;}
 .refresh-logo img{margin-bottom:47px;}
-.refresh-logo a{background: url(<%= asset_path 'baicheng/refresh/refresh-btn.jpg' %>) no-repeat;width: 155px;height: 45px;text-indent: -999em;margin: 0 auto 14px;}
+.refresh-logo a{background: url(/asset/refresh/refresh-btn.jpg) no-repeat;width: 155px;height: 45px;text-indent: -999em;margin: 0 auto 14px;}
 .refresh-logo .e-recent{background-position: 0 0;height: 38px;}
 .refresh-logo .e-upload{background-position: 0 -52px;}
 .refresh-logo .e-publish{background-position: 0 -111px;}
 .refresh-container,.grid-container{height: 717px;overflow: hidden;}
-.refresh-container{background: url(<%= asset_path 'baicheng/refresh/refresh-container.png' %>) no-repeat;width: 682px;padding: 2px 4px 4px 0;}
+.refresh-container{background: url(/asset/refresh/refresh-container.png) no-repeat;width: 682px;padding: 2px 4px 4px 0;}
 .refresh-bin{width: 682px;width:702px\9;height: 717px;overflow: auto;}
 /*.refresh-bin*/div::-webkit-scrollbar,html::-webkit-scrollbar{display: none;}
 
@@ -62,12 +62,12 @@ body{background: url(<%= asset_path 'refresh/refresh-bg.jpg' %>) no-repeat top c
 .unlogin.abs-center{background:#fff;border:5px solid #666;width:304px;height:339px;margin-left:-152px;margin-top:-170px;}
 .unlogin .subs_title{margin-bottom:20px;height:22px;background:#f5f5f5;border-bottom:1px solid #e6e6e6;padding:8px;color:#959494;}
 .unlogin .err_tips{top:30px;}
-.unlogin .close-btn{background:url(<%= asset_path 'baicheng/close_btn.jpg' %>) no-repeat;width:21px;height:21px;}
+.unlogin .close-btn{background:url(/asset/close_btn.jpg) no-repeat;width:21px;height:21px;}
 .loginCon{width:260px;margin:0 auto;}
 label.password{padding-top:8px;}
 input#username{width:208px;color:#aeaeae;}
 input#password{width:108px;margin:9px 0;color:#aeaeae;}
-span.tips{display:block;background:url(<%= asset_path 'baicheng/tips.jpg' %>) no-repeat;width:96px;height:22px;padding-top:4px;margin:9px 2px 0 0;}
+span.tips{display:block;background:url(/asset/tips.jpg) no-repeat;width:96px;height:22px;padding-top:4px;margin:9px 2px 0 0;}
 span.tips a{color:#4ba958;}
 span.tips a:hover{text-decoration:underline;}
 input#login{margin-left:42px;float:left;display:inline;}
@@ -78,5 +78,5 @@ input#login{margin-left:42px;float:left;display:inline;}
 ul.border li{float:left;display:inline;padding:0 5px;border-right:1px solid #dbdbdb;}
 ul.border img{ float:left;margin:-2px 2px 0 0;}
 .border a{color:#0058a2;}
-.reg_now{background:url(<%= asset_path 'baicheng/register.jpg' %>) no-repeat;width:137px;height:32px;}
+.reg_now{background:url(/asset/register.jpg) no-repeat;width:137px;height:32px;}
 .loginCon p.fl{margin:9px;color:#000;}
