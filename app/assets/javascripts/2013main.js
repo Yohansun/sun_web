@@ -15,28 +15,14 @@
 
 	//kv
 	(function($){
-		var $lazy = $('.lazy'),
-        $slider = $('.kv2013_slider'),
-        count = 0;
-    if(!$lazy.length || !$slider.length) return;
-    $lazy.lazyload({
-        event : "sporty",
-        load : function(){
-            count ++;
-            if(count == $slider.children().length){
-                var    $ul = $slider.slider({
-                        buttons : false,
-                        speed : 800,
-                        pagerClass : 'pager_rest'
-                    }).find('ul'),
-                    num = $ul.find('li').length - 1;
-                $ul.css('margin-left', - (num * 45 + 12)/2 + 'px');
-            }
-        }
-    });
-    $(window).bind("load", function(){
-        $lazy.trigger("sporty");
-    });
+		var $slider = $('.kv2013_slider'),
+        $ul = $slider.slider({
+	            buttons : false,
+	            speed : 800,
+	            pagerClass : 'pager_rest'
+	        }).find('ul'),
+	        num = $ul.find('li').length - 1;
+	    $ul.css('margin-left', - (num * 45 + 12)/2 + 'px');
 	})($);
 
 	//grid
