@@ -375,7 +375,7 @@ Icolor::Application.routes.draw do
       end
     end
     match ':page', to: 'welcome#show', via: :get
-
+    resources :story_images
   end
 
 end

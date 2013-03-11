@@ -1,0 +1,2 @@
+module Baicheng::StoryImagesHelper
+end
