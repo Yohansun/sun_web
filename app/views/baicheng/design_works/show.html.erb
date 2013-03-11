@@ -13,6 +13,7 @@
 <%- end %>
 <div class="wrapper">
 	<div class="refresh-logo fl">
+		<img src="<%= asset_path 'baicheng/refresh/leftlogo.png' %>">
 		<a href="#" title="活动近况" class="e-recent">活动近况</a>
 		<a href="#" title="上传作品 Upload" class="e-upload">上传作品 Upload</a>
 		<a href="#" title="发表故事 征集设计" class="e-publish">发表故事 征集设计</a>
@@ -35,10 +36,9 @@
 				              <ul class="group" style="overflow:hidden;">
 				              	<%- @image_colors[index].each do |color| %>
 				                  <li>
-				                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
-				                      <h5><%= color.name %></h5>
-				                      <p>立邦(<%= color.code %>)</p>
-				                    </div>
+				                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+				                    <h5><%= color.name %></h5>
+				                    <p>立邦(<%= color.code %>)</p>
 				                  </li>
 				                <%- end %>
 				              </ul>
@@ -85,10 +85,9 @@
               <ul class="group" style="overflow:hidden;">
               	<%- @image_colors.last.each do |color| %>
                   <li>
-                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)">
-                      <h5><%= color.name %></h5>
-                      <p>立邦(<%= color.code %>)</p>
-                    </div>
+                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+                    <h5><%= color.name %></h5>
+                    <p>立邦(<%= color.code %>)</p>
                   </li>
                 <%- end %>
               </ul>
@@ -152,8 +151,10 @@
 				</p>
 			</div>
 			<div class="img-info">
-				<h4 class="icon-word cr fb">业主感言</h4>
-				<p class="thankwords">无论装修也好，做事也罢。我们都要有一个方法论做指导。如果仅仅凭借个人的好恶亦或者习惯去做某事，处理问题的过程中肯定会有很多关节是我们考虑不周全的，这样也会造成很多不必要的麻烦。</p>
+				<%- if @design.speech.present? %>
+				  <h4 class="icon-word cr fb">业主感言</h4>
+				  <p class="thankwords"><%= @design.speech %></p>
+				<%- end %>
 				<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
 					<h5 class="fb">
 						<span class="fr nomargin">0/140</span>
