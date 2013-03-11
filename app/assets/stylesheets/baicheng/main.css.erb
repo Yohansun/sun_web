@@ -5,7 +5,7 @@
 .refresh-control{margin: 12px 0;overflow: hidden;}
 .refresh-control label{width: 75px;text-align: right;float: left;display: inline;margin: 12px 20px 0 0;font: 14px "Simsun";}
 .refresh-section{border-top: 1px solid #e6e6e6;padding: 10px 15px 10px 20px;}
-.form-text1,.form-text2,.form-text3,.form-text4,.refresh-form textarea{background-color: #fcfcfc;border: 1px solid #e6e6e6;float: left;font: 12px  "Simsun";}
+.form-text1,.form-text2,.form-text3,.form-text4,.refresh-form textarea{background-color: #fcfcfc;border: 1px solid #e6e6e6;float: left;font: 14px  "Simsun";}
 .form-text1,.form-text2,.form-text3,.form-text4{width: 542px;height: 36px;padding: 0 4px;line-height: 36px\9;box-shadow: inset 0 1px 10px rgba(0,0,0,0.1);}
 .refresh-form textarea{width: 546px;height: 97px;}
 .refresh-form b{color: #f00;}
@@ -31,16 +31,15 @@ input.form-text3{width: 130px;margin-right: 10px;}
 input.form-text4{width: 180px;}
 
 .upload2013-toggle{border-top:1px solid #e6e6e6;margin-top:21px;position:relative;font-size:12px;color:#6a6a6a;padding:10px 0;}
-.upload2013-btn{background:url(../images/refresh/upload2013-btn.jpg) no-repeat;width:19px;height:23px;right:0;top:-1px;}
+.upload2013-btn{background:url(<%= asset_path 'baicheng/refresh/upload2013-btn.jpg' %>) no-repeat;width:19px;height:23px;right:0;top:-1px;}
 .upload2013-btn-down{background-position:0 100%;}
 .upload2013-toggle label{margin: 10px 30px 10px 0;width: auto;text-align: left;font-size: 12px;}
-.upload2013-toggle input{vertical-align: top;margin-right: 3px;}
+.upload2013-toggle input{margin-right: 3px;float:left;margin-top:-3px\9;}
 .checkbox2013 label{width:88px;margin-right:0;}
-.refresh-submit{background: url(../images/refresh/refresh-submit.jpg) no-repeat;width: 114px;height: 37px;border: 0;margin-bottom: 10px;}
+.refresh-submit{background: url(<%= asset_path 'baicheng/refresh/refresh-submit.jpg' %>) no-repeat;width: 114px;height: 37px;border: 0;margin-bottom: 10px;}
 .refresh-multi label{width: auto;}
 
-.grid-ul{margin-left: -7px;/*IE7 bug here*/}
-.grid-ul li{background: url(../images/grid/grid-bg.png) no-repeat;width: 204px;height: 201px;float: left;display: inline;padding: 2px 3px 4px;margin: 0 0 18px 7px;}
+.grid-ul li{background: url(<%= asset_path 'baicheng/grid/grid-bg.png' %>) no-repeat;width: 204px;height: 201px;float: left;display: inline;padding: 2px 3px 4px;margin: 0 5px 18px 0px;}
 .bubble{width: 190px;height: 201px;padding: 0 7px;display: block;color: #fff;font-size: 17px;text-align: center;line-height: 337px;}
 .bubble,.grid-bin h3 a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 

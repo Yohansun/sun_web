@@ -11,7 +11,7 @@ q:before,q:after,blockquote:before,blockquote:after{content:"";}
 .clear:after{clear:both;}
 .clear{*zoom: 1;}
 
-html{overflow-y:hidden;font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+html{overflow-y:scroll;font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
 a:hover,a:active{outline:0;}
 img{border:none;-ms-interpolation-mode:bicubic;}
 button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}
