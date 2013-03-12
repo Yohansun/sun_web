@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>百城活动</title>
-<%= stylesheet_link_tag "baicheng/reset", "baicheng/base", "baicheng/style" %>
-<%= javascript_include_tag "jquery","baicheng/main" %>
+<%= stylesheet_link_tag "baicheng_all.css", "baicheng/style" %>
+<%= javascript_include_tag "baicheng" %>
 <%= yield :head %>
 </head>
 <body>
 <div class="header subpage">
 	<ul class="nav center clear">
-		<li class="logo"><a href="#"><img src="<%= asset_path 'nav/logo.gif' %>" /></a></li>
+		<li class="logo"><a href="http://www.icolor.com.cn"><img src="<%= asset_path 'nav/logo.gif' %>" /></a></li>
 		<li>
-			<%=link_to '活动规则', intros_path() %>
+			<%=link_to '活动规则', intro_path(:id => 'index') %>
 		</li>
 		<li
 			<a href="baicheng/intros/content" >
@@ -40,16 +40,50 @@
 <%= yield %>
 <div class="footer subpage">
 	<ul class="center clear">
-		<li><a href="1.html">首页</a></li>
-		<li><a href="2.html">大众三级跳</a></li>
-		<li><a href="3.html">设计大PK</a></li>
-		<li><a href="map.html">作品聚集地</a></li>
-		<li><a class="active" href="5.1.html">活动规则及奖项设置</a></li>
+		<li>
+			<%= link_to '首页', '/baicheng',
+				class: "#{'active' if controller_name == 'welcome' && params[:page].blank?}" %>
+		</li>
+		<li>
+			<%= link_to '大众三级跳', '/baicheng/jump',
+				class: "#{'active' if controller_name == 'welcome' && params[:page] == 'jump'}" %>
+		</li>
+		<li>
+			<%= link_to '设计大PK', '/baicheng/pk',
+				class: "#{'active' if controller_name == 'welcome' && params[:page] == 'pk'}" %>
+		</li>
+		<li>
+			<%= link_to '作品聚集地', design_works_path, class: "#{'active' if controller_name == 'design_works'}" %>
+		</li>
+		<li>
+			<%= link_to '活动规则及奖项设置', intro_path(id: 'index'), class: "#{'active' if controller_name == 'intros'}" %>
+		</li>
 		<li class="tc">
-			<a href="#">注册</a> <a>·</a> <a href="#">登录</a>
-			<a href="#" class="ft12">返回iColor网</a>
+			<%- unless current_user %>
+				<a href="/users/sign_up">注册</a>
+				<a>·</a>
+				<a href="javascript:show_login();">登录</a>
+			<%- else %>
+				<a><%= current_user.display_name %></a>
+			<%- end %>
+			<a href="http://www.icolor.com.cn" class="ft12">返回iColor网</a>
 		</li>
 	</ul>
 </div><!-- footer -->
+<div id="layer"></div>
+<%= render partial: 'baicheng/welcome/login' %>
+<%= yield :tail %>
+<script type="text/javascript">
+	$(function(){
+		$('.close-btn').click(function(){
+			$('.abs-center').hide();
+			$('#layer').hide();
+		});
+	});
+	function show_login () {
+		$('.unlogin').show();
+		$('#layer').show();
+	};
+</script>
 </body>
 </html>

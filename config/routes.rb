@@ -4,10 +4,6 @@ Icolor::Application.routes.draw do
 
   get "welcome/index"
 
-  get "intros/index"
-
-  get "intros/show"
-
   require 'api'
   resources :special_events do
     member do
@@ -379,7 +375,7 @@ Icolor::Application.routes.draw do
     end
     match ':page', to: 'welcome#show', via: :get
     resources :story_images
-    resources :intros, only: [:index, :show]
+    resources :intros, only: :show
   end
 
 end

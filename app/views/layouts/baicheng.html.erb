@@ -27,7 +27,7 @@
 				<%= link_to '作品聚集地', design_works_path, class: "#{'active' if controller_name == 'design_works'}" %>
 			</li>
 			<li>
-				<%= link_to '活动规则及奖项设置', 'intros_path', class: "#{'active' if controller_name == 'intros'}" %>
+				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'), class: "#{'active' if controller_name == 'intros'}" %>
 			</li>
 			<li class="tc">
 				<%- unless current_user %>
