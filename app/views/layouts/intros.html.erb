@@ -12,28 +12,26 @@
 	<ul class="nav center clear">
 		<li class="logo"><a href="http://www.icolor.com.cn"><img src="<%= asset_path 'nav/logo.gif' %>" /></a></li>
 		<li>
-			<%=link_to '活动规则', intro_path(:id => 'index') %>
+			<%=link_to '活动规则', intro_path(:id => 'index'), class: "#{'active' if  params[:id] == 'index'}" %>
 		</li>
-		<li
-			<a href="baicheng/intros/content" >
-			</a>
-			<%=link_to '活动内容', intro_path(:id => 'content') %>
-			<ul class="subnav none">
+		<li>
+			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  params[:id] == 'content'}" %>
+			<ul class="subnav none" style="display: none;">
 				<li><a href="#">家装公司/设计师</a></li>
 				<li class="noborder"><a href="#">大众用户</a></li>
 			</ul>
 		</li>
 		<li>
-            <%=link_to '活动奖项', intro_path(:id => 'award') %>
+            <%=link_to '活动奖项', intro_path(:id => 'award'), class: "#{'active' if  params[:id] == 'award'}" %>
 		</li>
 		<li>
-            <%=link_to '评选细则', intro_path(:id => 'detail') %>
+            <%=link_to '评选细则', intro_path(:id => 'detail'), class: "#{'active' if  params[:id] == 'detail'}" %>
 		</li>
 		<li>
-            <%=link_to '评委名单', intro_path(:id => 'name') %>
+            <%=link_to '评委名单', intro_path(:id => 'name'), class: "#{'active' if  params[:id] == 'name'}" %>
 		</li>
 		<li>
-            <%=link_to '活动时间', intro_path(:id => 'time') %>
+            <%=link_to '活动时间', intro_path(:id => 'time'), class: "#{'active' if  params[:id] == 'time'}" %>
 		</li>
 	</ul>
 </div><!-- header -->

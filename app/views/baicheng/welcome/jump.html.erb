@@ -4,6 +4,15 @@
   </style>
   <%= stylesheet_link_tag "baicheng/index" %>
 <%- end %>
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $('.leap-btn1').click(function (){
+      <%- unless current_user %>
+        show_login();
+      <%- end %>
+    });
+  </script>
+<%- end %>
 <div class="wrapper leap pr">
   <%= link_to '刷新百城iColor', '/baicheng', class: "index-logo" %>
   <a href="javascript:void(0)" class="leap-join">立即参加</a>
@@ -19,6 +28,6 @@
     <a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
     <a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_30">更多</span></a>
   </span>
-  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script><script type="text/javascript" src="http://v3.jiathis.com/code/plugin.client.js" charset="utf-8"></script><div style="position:absolute;width:0px;height:0px;"><div class="ctf" style="width: 0px; height: 0px;"><span>Flash</span></div></div>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script><script type="text/javascript" src="http://v3.jiathis.com/code/plugin.client.js" charset="utf-8"></script><div style="position:absolute;width:0px;height:0px;"><div class="ctf" style="width: 0px; height: 0px;"><!-- <span>Flash</span> --></div></div>
    <!--JiaThis Button END -->
 </div>
