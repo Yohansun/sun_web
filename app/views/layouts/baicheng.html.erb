@@ -35,7 +35,11 @@
 					<a>·</a>
 					<a href="javascript:show_login();">登录</a>
 				<%- else %>
-					<a><%= current_user.display_name %></a>
+					<a href="<%= user_asks_path(current_user) %>">
+						<%= truncate(current_user.display_name, length: 12) %>
+					</a>
+					<a>·</a>
+					<%= link_to '退出', destroy_user_session_path, :method => :delete %>
 				<%- end %>
 				<a href="http://www.icolor.com.cn" class="ft12">返回iColor网</a>
 			</li>
