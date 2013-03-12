@@ -2,7 +2,7 @@
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :system
 
-server "203.156.231.37", :web, :app, :db, primary: true
+server "118.126.9.65", :web, :app, :db, primary: true
 set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
