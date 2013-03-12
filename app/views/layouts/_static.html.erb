@@ -26,8 +26,8 @@
 
 <%#- if ((controller_name =~ /articles|color_articles|events|designer_events|other_events|gifts|softwares|channel|faqs|mix_colors/ || action_name =~ /weibo_wall/) && params[:from].present?) || action_name =~ /city/%>
 	<div class="static static3">
-		<a href="/design_images?from=top&utm_source=static_banner_design_images&utm_medium=banner&utm_content=design_images&utm_campaign=static_banner" class="static_a" target="_blank" >装修图库</a>
-		<a href="/weekly_stars?from=top&star_type=每周之星&utm_source=static_banner_weekly_stars&utm_medium=banner&utm_content=weekly_stars&utm_campaign=static_banner" class="static_b" target="_blank" >设计鉴赏</a>
-		<a href="/channel/access?from=top&utm_source=static_banner_access&utm_medium=banner&utm_content=access&utm_campaign=static_banner" class="static_c" target="_blank">设计快查</a>
+		<a href="/design_images?utm_source=static_banner_design_images&utm_medium=banner&utm_content=design_images&utm_campaign=static_banner<%= link_suffix %>" class="static_a" target="_blank" >装修图库</a>
+		<a href="/weekly_stars?star_type=每周之星&utm_source=static_banner_weekly_stars&utm_medium=banner&utm_content=weekly_stars&utm_campaign=static_banner<%= link_suffix %>" class="static_b" target="_blank" >设计鉴赏</a>
+		<a href="/channel/access?utm_source=static_banner_access&utm_medium=banner&utm_content=access&utm_campaign=static_banner<%= link_suffix %>" class="static_c" target="_blank">设计快查</a>
 	</div>
 <%#- end %>

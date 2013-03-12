@@ -263,4 +263,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def link_suffix
+    "#from=top"
+  end
 end
