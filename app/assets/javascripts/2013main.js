@@ -17,7 +17,7 @@
 	(function($){
 		var $slider = $('.kv2013_slider');
 		if(!$slider.length) return;
-    var $ul = $slider.slider({
+    	var $ul = $slider.slider({
 	            buttons : false,
 	            speed : 800,
 	            pagerClass : 'pager_rest'
