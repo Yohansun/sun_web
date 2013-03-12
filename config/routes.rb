@@ -78,7 +78,7 @@ Icolor::Application.routes.draw do
   match "/master_interviews/:id" => "master_interviews#show"
   resources :master_topics, :only => [:index, :show]
   match "/master_designs" => "master_designs#index"
-  match "/master_designs/:id" => "master_designs#show"
+  match "/master_designs/:id" => "master_designs#show", as: 'master_design'
   match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
   match "/master_designs/:id/download" => "master_designs#download"
 
@@ -233,7 +233,7 @@ Icolor::Application.routes.draw do
         match :design_update
         get :download
       end
-      collection do 
+      collection do
         post :update_design
         get :upload_success
       end
