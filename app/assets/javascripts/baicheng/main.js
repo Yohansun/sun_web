@@ -30,21 +30,13 @@ $(function(){
 	// })($);
 
 	//reply
-	function reply_slideUp(remove_wrap){
-		remove_wrap.slideUp(function(){
-			$(this).remove();
-		})
-	};
-	$('.js-reply').click(function(){		
-		var reply_form = $(this).parents('.comment-item').children().hasClass('reply_form');
-		if(reply_form == false){
-			reply_slideUp($('.reply_form'))
-			$('<form class="reply_form"><textarea></textarea><button class="submit_btn">提交评论</button><button class="submit_btn submit_btn_cancel js-submit_btn_cancel">取消</button></form>').appendTo($(this).parents('.comment-item')).slideDown();
-		}
+	$('.js-reply').click(function(){
+		$(this).parents('.comment-list').find('.comment-form').hide()
+		$(this).parent('p').siblings('.comment-form').slideDown();
 	});
 	$('.comment-list').on('click','.js-submit_btn_cancel',function(e){
 		e.preventDefault();
-		reply_slideUp($(this).parents('.reply_form'))
+		$(this).parents('.reply_form').slideUp()
 	});
 
 	//subnav
