@@ -16,7 +16,7 @@
 				<div class="story-slider slider_bin">
 					<%- @story.story_images.each do |image| %>
 						<div>
-							<a href="#" date-vote="<%#= image.votes_count %>">
+							<a href="#">
 								<%= image_tag(image.file.url(:slide), size: "680x353") %>
 							</a>
 						</div>
@@ -25,7 +25,6 @@
 				<div class="show-group pa">
 					<ul class="clear">
 						<li><a href="#" class="icon-like"><%= @story.votes_count %></a></li>
-						<li><a href="#" class="icon-view">0<%#= @story.comments_count %></a></li>
 					</ul>
 				</div>
 			</div>
