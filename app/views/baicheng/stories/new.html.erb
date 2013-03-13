@@ -155,9 +155,9 @@ $(function(){
 });
 </script>
 <% end %>
-<%= render partial: 'baicheng/design_works/navs' %>
+<%= render partial: 'baicheng/welcome/navs' %>
 <div class="wrapper">
-	<%=render partial: 'baicheng/design_works/sidebar' %>
+	<%=render partial: 'baicheng/welcome/sidebar' %>
 	<div class="refresh-container refresh-upload">
 			<h1>发表故事 征集设计</h1>
 			<%= form_for @story, html:{:class=>"refresh-form ft12", :onsubmit => "return form_valid();"} do |f| %>
@@ -191,10 +191,10 @@ $(function(){
 									<div class="work-del tc fl">移除</div>
 								</div><!--load-bar ends-->
 								<div class="load-bar load-content" id="uploads">
-									
+
 								</div><!--load-content ends-->
 								<p class="load-footer ft12">
-									共有<b class="story_image_size">0</b>个文件 | 
+									共有<b class="story_image_size">0</b>个文件 |
 									<a href="javascript:remove_design_image();" class="clear-all">清空列表</a>
 									<br>您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张
 								</p><!--load-footer ends-->

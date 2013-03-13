@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307180913) do
+ActiveRecord::Schema.define(:version => 20130313075838) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -98,6 +98,17 @@ ActiveRecord::Schema.define(:version => 20130307180913) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
   end
+
+  create_table "baicheng_events", :force => true do |t|
+    t.integer  "eventable_id"
+    t.string   "eventable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "area_id"
+  end
+
+  add_index "baicheng_events", ["area_id"], :name => "index_baicheng_events_on_area_id"
+  add_index "baicheng_events", ["eventable_type", "eventable_id"], :name => "index_baicheng_events_on_eventable_type_and_eventable_id"
 
   create_table "banners", :force => true do |t|
     t.string   "position"
@@ -288,6 +299,10 @@ ActiveRecord::Schema.define(:version => 20130307180913) do
     t.boolean  "is_yda",                    :default => false
     t.boolean  "is_refresh",                :default => false
     t.string   "property_name"
+    t.text     "speech"
+    t.boolean  "future_star_active",        :default => false
+    t.integer  "story_id"
+    t.boolean  "baicheng_active",           :default => false
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"

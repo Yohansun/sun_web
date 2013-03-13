@@ -3,10 +3,11 @@ class Baicheng::DesignWorksController < ApplicationController
 	layout 'baicheng'
 
   def index
+    @event_data = BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
   end
 
   def opus
-    @designs = Design.scoped.page(params[:page]).per(28)
+    @event_data = BaichengEvent.by_type(Design.name).order('created_at DESC').page(params[:page]).per(28)
   end
 
   def new

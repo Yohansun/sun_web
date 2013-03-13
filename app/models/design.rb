@@ -20,6 +20,7 @@ class Design < ActiveRecord::Base
   paginates_per 8
 
   after_create :update_user_design_code_count
+  after_create :sync_baicheng_event
 
   #更新用户上传作品数色号（权重）。片区快查用
   def update_user_design_code_count
@@ -36,7 +37,7 @@ class Design < ActiveRecord::Base
       else
         area.parent.parent.name + " " + area.parent.name + " " + area.name
       end
-    end 
+    end
   end
 
   def cover_img
@@ -69,5 +70,9 @@ class Design < ActiveRecord::Base
         image.save
       end
     end
+  end
+
+  def sync_baicheng_event
+    BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name)
   end
 end

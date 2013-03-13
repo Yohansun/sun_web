@@ -2,7 +2,7 @@
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
-    @stories = Story.scoped.page(params[:page]).per(28)
+    @event_data = BaichengEvent.by_type(Story.name).order('created_at DESC').page(params[:page]).per(28)
   end
 
   def new

@@ -7,6 +7,8 @@ class Story < ActiveRecord::Base
   belongs_to :area
   belongs_to :user
 
+  after_create :sync_baicheng_event
+
   def cover_img
   	self.story_images.where(is_cover: 1).try(:first)
   end
@@ -19,6 +21,10 @@ class Story < ActiveRecord::Base
       else
         area.parent.parent.name + " " + area.parent.name + " " + area.name
       end
-    end 
+    end
+  end
+
+  def sync_baicheng_event
+    BaichengEvent.create(eventable_id: self.id, eventable_type: Story.name)
   end
 end
