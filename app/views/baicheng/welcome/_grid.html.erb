@@ -30,10 +30,18 @@
             <li>
               <div class="grid-bin">
                 <div class="grid-img">
-                  <%= link_to image_tag('baicheng/grid/grid.jpg'), 'javascript:void(0)' %>
+                  <%- if item.eventable.cover_img %>
+                    <%= link_to design_work_path(item.eventable) do %>
+                      <%= image_tag(item.eventable.cover_img.file.url(:index), size: '203x145') %>
+                    <%- end %>
+                  <%- end %>
                 </div>
-                <h3><a href="#">我的艺术家</a></h3>
-                <p><span>清新田园</span>极美设计（北京）</p>
+                <h3><%= link_to truncate(item.eventable.title, length: 15), design_work_path(item.eventable)%></h3>
+                <p>
+                  <span><%= link_to item.eventable.try(:style), design_work_path(item.eventable) %></span>
+                  <%= link_to truncate(item.eventable.user.try(:name_of_company) ||
+                      item.eventable.user.name, length: 10), design_work_path(item.eventable) %>
+                </p>
               </div>
             </li>
           <%- end -%>
