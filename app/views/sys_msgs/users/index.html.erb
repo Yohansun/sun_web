@@ -29,7 +29,7 @@
         <% @sys_msgs.each do |sys_msg|%>
         <tr class="sys_row">
           <td><%= sys_msg.reply_name %></td>
-          <td class="sys_topics"><%= sys_msg.content %></a></td>
+          <td class="sys_topics"><%= sys_msg.content.html_safe %></a></td>
           <td class="sys_time"><%= sys_msg.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td>
             <% if current_user.present? && sys_msg.present? %>
