@@ -152,6 +152,21 @@ if ($(".new_mix_color")) {
     });
 }
 
+$('#new_user').bind('ajax:error', function (xhr, status, error) {
+    err_in();
+});
+
+$('a.js-index_popclose0223').click(function(){
+    $(this).parent('div').hide();
+    $('#overlay').hide();
+});
+
+$.ajax({
+    type: "POST",
+    url: "<%= visit_ips_path %>",
+    data: { ip : "<%= request.ip %>" }
+});
+
 });
 
 function yda_kv_link () {

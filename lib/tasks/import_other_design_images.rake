@@ -55,6 +55,11 @@ end
 task :import_other_design_images => :environment  do
   %w(ColorDesign).each do |model|
     model.constantize.find_each do |item|
+      if DesignImage.where(["imageable_type = 'ColorDesign' AND imageable_id = ?", item.id]).exists?
+        p "#{item.id} exists!"
+        next
+      end
+
       file_src_arr = [item.show_preview_img.path(:original)]
       if file_src_arr.present?
         file_src_arr.each do |file_src|
