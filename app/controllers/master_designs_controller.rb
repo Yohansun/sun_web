@@ -17,12 +17,17 @@ class MasterDesignsController < ApplicationController
     @master_design_next = MasterDesign.where("published_at > ?", @master_design.published_at).last
     render :layout => nil
   end
+  
   def download
     target_file = MasterDesign.find(params[:id])
-      if target_file
-        send_file target_file.main_preview_img.path
-      else
-        render nothing: true, status: 404
+    if target_file.master_design_uploads
+      target_file.master_design_uploads.each do |t|
+        system("zip public/master_design#{params[:id]}.zip -j #{t.file.path} ")
       end
+      send_file "public/master_design#{params[:id]}.zip"
+    else
+      render nothing: true, status: 404
+    end
   end
+  
 end
