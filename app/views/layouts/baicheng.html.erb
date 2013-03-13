@@ -50,30 +50,15 @@
 	<%= yield :tail %>
 	<script type="text/javascript">
 		$(function(){
-	    if ($(".new_message")) {
-	        $(".new_message").click(function () {
-	            <% if current_user -%>
-	            return true;
-	            <% else -%>
-	            alert('请先登录');
-	            return false;
-	            <% end -%>
-	        });
-	    };
 	    $('.close-btn').click(function(){
 				$('.abs-center').hide();
 				$('#layer').hide();
 			});
-	  });
-		function upload_link () {
-			<% if current_user && current_user.role_id == 1 -%>
-        window.location.href = "alert('跳转上传页面的地方')";
-	    <% elsif current_user %>
-	      window.location.href = "javascript:void(0);";
-	    <% else -%>
-	      alert('请登录');
-	    <% end -%>
-		};
+	    $('.e-pop-btn').click(function(){
+				$('.abs-center').hide();
+				$('#layer').hide();
+			});
+	   });
 		function show_login () {
 			$('.unlogin').show();
 			$('#layer').show();

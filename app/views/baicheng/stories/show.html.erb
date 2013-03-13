@@ -49,11 +49,19 @@
 			</p>
 			<div class="img-info">
 				<div class="clear">
-					<a href="javascript:upload_link();" class="fl btn-title">我来设计</a>
+					<%- if current_user && current_user.role_id == '1' %>
+						<a href="javascript:void(0);" class="fl btn-title">我来设计</a>
+					<%- else %>
+						<a href="javascript:show_login();" class="fl btn-title">我来设计</a>
+					<%- end %>
 					<div class="show-group fl">
 						<ul class="clear">
 							<li>
-								<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect new_message" %>
+								<%- if current_user %>
+									<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
+								<%- else %>
+									<a href="javascript:show_login();" class="icon-collect">收藏</a>
+								<%- end %>
 							</li>
 						</ul>
 					</div>
@@ -76,7 +84,11 @@
 									<div class="show-group fl">
 										<ul class="clear nomargin">
 											<li>
-												<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect new_message" %>
+												<%- if current_user %>
+													<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
+												<%- else %>
+													<a href="javascript:show_login();" class="icon-collect"></a>
+												<%- end %>
 											</li>
 										</ul>
 									</div>
@@ -98,7 +110,11 @@
 							<h3 style="margin-top:30px;">房型设计上传（线上）</h3>
 							<p class="clear">
 								<span class="fl nomargin">家装公司/设计师点击</span>
-								<a href="javascript:upload_link();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<%- if current_user %>
+									<a href="javascript:void(0);" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<%- else %>
+									<a href="javascript:show_login();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<%- end %>
 								<span class="fl">，将设计图上传。</span>
 							</p>
 							<h3 style="margin-top:25px;">上传合同（线上）</h3>
