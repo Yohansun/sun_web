@@ -24,7 +24,7 @@
 				</div>
 				<div class="show-group pa">
 					<ul class="clear">
-						<li><a href="#" class="icon-like"><%= @story.votes_count %></a></li>
+						<li><a href="javascript:void(0);" class="icon-like"><%= @story.votes_count %></a></li>
 					</ul>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 			</p>
 			<div class="img-info">
 				<div class="clear">
-					<%- if current_user && current_user.role_id == '1' %>
+					<%- if current_user && current_user.role_id == 1 %>
 						<a href="javascript:void(0);" class="fl btn-title">我来设计</a>
 					<%- else %>
 						<a href="javascript:show_login();" class="fl btn-title">我来设计</a>
@@ -87,7 +87,7 @@
 												<%- if current_user %>
 													<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
 												<%- else %>
-													<a href="javascript:show_login();" class="icon-collect"></a>
+													<a href="javascript:show_login();" class="icon-collect">收藏</a>
 												<%- end %>
 											</li>
 										</ul>

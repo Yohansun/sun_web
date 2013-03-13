@@ -7,7 +7,14 @@
 <div class="wrapper pk pr">
   <%= link_to '刷新百城iColor', '/baicheng', class: "index-logo" %>
   <h1>家装公司\设计师 用作品说话 刷新行业地位 各式奖项 诱人大礼等你拿</h1>
-  <a href="#" class="pk-btn">我要参加</a>
+  <%- if current_user && current_user.role_id == 3 %>
+    <a href="javascript:alert('只有设计师才能上传作品！');" class="pk-btn">我要参加</a>
+  <%- elsif current_user %>
+    <a href="<%= new_user_design_path(current_user) %>" class="pk-btn">我要参加</a>
+  <%- else %>
+    <a href="javascript:show_login();" class="pk-btn">我要参加</a>
+  <%- end %>
+
   <%= link_to '大众三级跳', '/baicheng/jump', class: "pk-left" %>
   <!-- JiaThis Button BEGIN -->
   <span class="jiathis_style">

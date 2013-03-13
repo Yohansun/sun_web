@@ -55,7 +55,7 @@
 				<div class="show-group pa">
 					<ul class="clear">
 						<li><a href="#" class="icon-like"><%= @design.votes_count %></a></li>
-						<li><a href="#" class="icon-view"><%= @design.comments_count %></a></li>
+						<li><a href="<%= design_work_path(@design) %>#tips" class="icon-view"><%= @design.comments_count %></a></li>
 					</ul>
 				</div>
 
@@ -149,6 +149,7 @@
 					<span>推荐理由：</span><em>	<%= @design.reason %></em>
 				</p>
 			</div>
+			<a name="tips"></a>
 			<div class="img-info">
 				<%- if @design.speech.present? %>
 				  <h4 class="icon-word cr fb">业主感言</h4>
