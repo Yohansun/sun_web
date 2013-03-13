@@ -45,9 +45,16 @@
 					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
 			</li>
 			<li class="pr">
-				<a href="#" class="bot-nav6">注册·登录</a>
-				<a href="#" class="bot-nav7">返回iColor网</a>
-
+				<%- if current_user %>
+					<a href="<%= user_asks_path(current_user) %>" class="bot-nav6">
+						<%= truncate(current_user.display_name, length: 12) %>
+					</a>				
+					<!-- <a href="javascript:show_login();">登录</a> -->
+				<%- else %>
+					<a href="/users/sign_up?return_to=<%= request.url %>" class="bot-nav6">注册·登录</a>
+					<%#= link_to '退出', destroy_user_session_path, :method => :delete %>
+				<%- end %>
+				<a href="http://www.icolor.com.cn" class="bot-nav7">返回iColor网</a>
 			</li>
 		</ul>
 	</div><!-- footer -->

@@ -1,5 +1,9 @@
 <% if !@messages.blank? %>
 alert("<%= raw @messages %>");
 <%- else -%>
-  window.location.replace("/users/suc_regist");
+  <%- if params[:return_to].present? %>
+    window.location.replace("/users/suc_regist?return_to=<%= params[:return_to]%>");
+  <%- else %>
+    window.location.replace("/users/suc_regist");
+  <%- end %>
 <%- end -%>
