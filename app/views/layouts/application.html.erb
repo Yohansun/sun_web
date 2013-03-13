@@ -185,13 +185,14 @@
   <%= yield :index %>
 </div>
 <!--header ends-->
-<%- if VisitIp.find_by_ip(request.ip).nil? %>
+
+<div id="pop0223" style="display:none">
   <div id="overlay" style="display:block;z-index:10000;"></div>
   <div style="position:fixed;_position:absolute;top:50px;left:50%;margin-left:-494px;_margin-left:-480px;z-index:10001">
     <a class="js-index_popclose0223" href="javascript:;" style="position:absolute;right:56px;top:63px;z-index:10001"><img src="<%= asset_path '2013/index/index_popclose0223.jpg' %>"></a>
     <img src="<%= asset_path '2013/index/index_pop0223.png' %>">
   </div>
-<%- end %>
+</div>
 
 <%= yield %>
 

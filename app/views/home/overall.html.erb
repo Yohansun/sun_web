@@ -167,6 +167,10 @@ $.ajax({
     data: { ip : "<%= request.ip %>" }
 });
 
+<%- if VisitIp.find_by_ip(request.ip).nil? %>
+$("#pop0223").show();
+<%- end -%>
+
 });
 
 function yda_kv_link () {
