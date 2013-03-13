@@ -3,7 +3,7 @@ class Baicheng::StoryImagesController < ApplicationController
     if current_user
       @upload = StoryImage.new
       @upload.file = params[:Filedata]
-      @upload.user_id = 1 #current_user.id
+      @upload.user_id = current_user.id
       if @upload.save
         flash[:notice] = "Successfully created upload."
         session[:image_id] = @upload.id

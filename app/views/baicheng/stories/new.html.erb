@@ -155,10 +155,10 @@ $(function(){
 });
 </script>
 <% end %>
+<%= render partial: 'baicheng/design_works/navs' %>
 <div class="wrapper">
 	<%=render partial: 'baicheng/design_works/sidebar' %>
-	<div class="refresh-container fl">
-		<div class="refresh-bin refresh-upload">
+	<div class="refresh-container refresh-upload">
 			<h1>发表故事 征集设计</h1>
 			<%= form_for @story, html:{:class=>"refresh-form ft12", :onsubmit => "return form_valid();"} do |f| %>
 
@@ -300,6 +300,5 @@ $(function(){
 					<input type="submit" class="refresh-submit" value="" /><br />*红色标注为必填项
 				</p>
 			<% end %>
-		</div>
 	</div><!-- refresh-container -->
 </div><!-- wrapper -->

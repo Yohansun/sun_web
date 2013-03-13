@@ -92,6 +92,7 @@ class DesignsController < ApplicationController
     flash[:design_errors] = []
     flag = true
     @design = current_user.designs.build(params[:design])
+    @design.story_id = params[:story_id] if params[:story_id].present?
     unless params[:design][:title].present?
       flash[:design_errors] << "作品名称不能为空！"
       flag = false

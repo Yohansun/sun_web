@@ -35,7 +35,8 @@ class Baicheng::StoriesController < ApplicationController
             end
           end
         end
-        redirect_to design_works_path(mode: "grid")
+        redirect_to story_path(story)
+        # redirect_to design_works_path(mode: "grid")
       else
         render :new
       end
