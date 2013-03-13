@@ -24,7 +24,6 @@ class Baicheng::DesignWorksController < ApplicationController
   	@design_images.each do |image|
   		@image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
   	end
-  	@image = DesignImage.find(70431)
   	@comments = @design.comments.page(params[:page]).per(4)
   end
 end
