@@ -2,7 +2,7 @@
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
-
+    @stories = Story.scoped.page(params[:page]).per(28)
   end
 
   def new
@@ -35,8 +35,7 @@ class Baicheng::StoriesController < ApplicationController
             end
           end
         end
-        redirect_to story_path(story)
-        # redirect_to design_works_path(mode: "grid")
+        redirect_to stories_path(mode: "grid")
       else
         render :new
       end

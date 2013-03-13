@@ -6,6 +6,7 @@ class Baicheng::DesignWorksController < ApplicationController
   end
 
   def opus
+    @designs = Design.scoped.page(params[:page]).per(28)
   end
 
   def new
