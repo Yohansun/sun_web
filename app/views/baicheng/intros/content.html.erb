@@ -4,7 +4,15 @@
 	<ul class="pr">
 		<li>• <strong>活动时间：</strong>2013年3月至2013年10月</li>
 		<li>• <strong>参与内容：</strong><br>所有新注册的家装公司和设计师用户，每周均有机会获得Luck Draw的幸运奖。</li>
-		<li class="clear active_upload"><a class="fl" href="#"></a></li>
+		<li class="clear active_upload">
+			<%- if current_user && current_user.role_id == 1 %>
+				<a href="<%= new_user_design_path(current_user) %>" class="fl"></a>
+			<%- elsif current_user %>
+				<a class="fl" href="javascript:alert('只有设计师才能上传作品！');"></a>
+			<%- else %>
+				<a href="javascript:show_login();" class="fl"></a>
+			<%- end %>
+		</li>
 	</ul>
 	<h4 class="step2">为爱刷新暨新房设计案例征集</h4>
 	<ul class="pr">
