@@ -3,7 +3,7 @@ require "csv"
 
 desc "导入外部硬广点击数据"
 task :import_click_data => :environment  do
-  
+
   p "Starting~~~~~~~~~~~~~~~~~"
   time_array = []
   #file_array = ["landing.log.20130102","landing.log.20130103","landing.log.20130105","landing.log.20130106","landing.log.20130109","landing.log.20130110","landing.log.20130112","landing.log.20130113","landing.log.20130114","landing.log.20130115","landing.log.20130116"]
@@ -33,48 +33,50 @@ task :import_click_data => :environment  do
 
     days.each do |day|
       contents.each do |content|
-        hs = HardSell.new
-        hs.link = 'http://www.icolor.com.cn/landing?source=' + content.to_s
-        hs.date = day
-        if value_count_time_hash[day][content] != 0
-          hs.num = value_count_time_hash[day][content]
-        else
-          hs.num = 0
+        if content.present?
+          hs = HardSell.new
+          hs.link = 'http://www.icolor.com.cn/landing?source=' + content.to_s
+          hs.date = day
+          if value_count_time_hash[day][content] != 0
+            hs.num = value_count_time_hash[day][content]
+          else
+            hs.num = 0
+          end
+          case content
+          when "80018shouyetupian2"
+            hs.feature = "首页图片轮播"
+            hs.site = "装修点评网"
+          when "80018ketingpingdao2"
+            hs.feature = "客厅频道"
+            hs.site = "装修点评网"
+          when "80018ketingpingdao2"
+            hs.feature = "80018woshipingdao2"
+            hs.site = "装修点评网"
+          when "80018secaidapei2"
+            hs.feature = "色彩搭配"
+            hs.site = "装修点评网"
+          when "a963shouyedingbu2","a963shouyejiaodian2","a963shouyedidiyiping2","a963shouyeredian2","a963shouyemingrenzhuanfang2"
+            hs.feature = "首页"
+            hs.site = "A963"
+          when "a963shejishitongdao2"
+            hs.feature = "设计师通道"
+            hs.site = "A963"
+          when "a963zixunzhongxinjiaodianxinwen2"
+            hs.feature = "资讯中心"
+            hs.site = "A963"
+          when "a963edmhuiyuanyoujian2"
+            hs.feature = "会员EDM"
+            hs.site = "A963"
+          when "pchousebankuaidingzhi2","pchousebankuaidingzhi-2"
+            hs.feature = "版块定制"
+            hs.site = "太平洋家居网"
+          else
+            hs.feature = "其他版块"
+            hs.site = "其他站点"
+          end
+          hs.save
+          p "."
         end
-        case content
-        when "80018shouyetupian2"
-          hs.feature = "首页图片轮播"
-          hs.site = "装修点评网"
-        when "80018ketingpingdao2"
-          hs.feature = "客厅频道"
-          hs.site = "装修点评网"
-        when "80018ketingpingdao2"
-          hs.feature = "80018woshipingdao2"
-          hs.site = "装修点评网"
-        when "80018secaidapei2"
-          hs.feature = "色彩搭配"
-          hs.site = "装修点评网"
-        when "a963shouyedingbu2","a963shouyejiaodian2","a963shouyedidiyiping2","a963shouyeredian2","a963shouyemingrenzhuanfang2"
-          hs.feature = "首页"
-          hs.site = "A963"
-        when "a963shejishitongdao2"
-          hs.feature = "设计师通道"
-          hs.site = "A963"
-        when "a963zixunzhongxinjiaodianxinwen2"
-          hs.feature = "资讯中心"
-          hs.site = "A963"
-        when "a963edmhuiyuanyoujian2"
-          hs.feature = "会员EDM"
-          hs.site = "A963"
-        when "pchousebankuaidingzhi2","pchousebankuaidingzhi-2"
-          hs.feature = "版块定制"
-          hs.site = "太平洋家居网"
-        else
-          hs.feature = "其他版块"
-          hs.site = "其他站点"
-        end
-        hs.save
-        p "."
       end
     end
     p "Finished"
