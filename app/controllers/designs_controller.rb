@@ -284,7 +284,22 @@ class DesignsController < ApplicationController
   end
 
   def upload_success
-    
+    @design = Design.find params[:design_id]
+    if current_user.role_id == 1 && current_user.des_status == true
+      render "upload_success2"
+    elsif (current_user.role_id == 1 && current_user.des_status == false) || current_user.role_id == 2 
+      render "upload_success3"
+    end
+  end
+
+  def update_design_active
+    @design = Design.find params[:design_id]
+    @design.future_star_active = true if params[:future_star_active]
+    @design.speech = params[:design][:speech] if params[:design][:speech]
+    @design.property_name = params[:property_name] if params[:property_name].present?
+    @design.baicheng_active = true if params[:baicheng_active]
+    @design.save
+    redirect_to user_path(current_user)
   end
 
   def destroy

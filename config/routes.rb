@@ -236,6 +236,7 @@ Icolor::Application.routes.draw do
         get :download
       end
       collection do
+        post :update_design_active
         post :update_design
         get :upload_success
       end
