@@ -218,7 +218,11 @@
         <div class="imgbase_func ft12 pa btn_group">
         	<!-- <a class="icon_view">浏览:<span id="imgbase_view"><%#= @images.first.try(:view_count) %></span></a> -->
         	<%= link_to "全屏观看", fullscreen_design_image_path(@images.first.id), :class =>"icon_fullscreen", :id =>"imgbase_full", :target => '_blank' %>
-        	<%=link_to "收藏", user_collects_path(@images.first, design_image_id: @images.first.id), :remote => true, method: :post, :id => "new_message", :class => "icon_colleting imgbase_collect_id" %>
+                <%- if current_user %>
+                  <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), :remote => true, method: :post, :id => "new_message" , :class => "icon_colleting" %>
+                <%- else %>
+                  <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "icon_colleting" %>
+                <%- end %>
         	<%= link_to '免费下载', download_design_image_path(@images.first.id), :class => 'icon_freedown imgbase_down_id' %>
 		</div>
 		<div id="feb_slides">
