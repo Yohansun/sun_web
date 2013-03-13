@@ -9,39 +9,45 @@
 </head>
 <body>
 	<%= yield %>
+<!-- <div class="footer">
+	<ul class="center clear">
+		<li><a href="1.html" class="bot-nav1">首页</a></li>
+		<li><a href="2.html" class="bot-nav2">大众三级跳</a></li>
+		<li><a href="3.html" class="bot-nav3">设计大PK</a></li>
+		<li><a href="map.html" class="bot-nav4 active">作品聚集地</a></li>
+		<li><a href="5.1.html" class="bot-nav5">活动规则及奖项设置</a></li>
+		<li class="pr">
+			<a href="#" class="bot-nav6">注册·登录</a>
+			<a href="#" class="bot-nav7">返回iColor网</a>
+		</li>
+	</ul>
+</div> -->
 	<div class="footer">
 		<ul class="center clear">
 			<li>
 				<%= link_to '首页', '/baicheng',
-					class: "#{'active' if controller_name == 'welcome' && params[:page].blank?}" %>
+					class: "bot-nav1 #{'active' if controller_name == 'welcome' && params[:page].blank?}" %>
 			</li>
 			<li>
 				<%= link_to '大众三级跳', '/baicheng/jump',
-					class: "#{'active' if controller_name == 'welcome' && params[:page] == 'jump'}" %>
+					class: "bot-nav2 #{'active' if controller_name == 'welcome' && params[:page] == 'jump'}" %>
 			</li>
 			<li>
 				<%= link_to '设计大PK', '/baicheng/pk',
-					class: "#{'active' if controller_name == 'welcome' && params[:page] == 'pk'}" %>
+					class: "bot-nav3 #{'active' if controller_name == 'welcome' && params[:page] == 'pk'}" %>
 			</li>
 			<li>
-				<%= link_to '作品聚集地', design_works_path, class: "#{'active' if controller_name == 'design_works'}" %>
+				<%= link_to '作品聚集地', design_works_path,
+					class: "bot-nav4 #{'active' if controller_name =~ /design_works|stories/ }" %>
 			</li>
 			<li>
-				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'), class: "#{'active' if controller_name == 'intros'}" %>
+				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'),
+					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
 			</li>
-			<li class="tc">
-				<%- unless current_user %>
-					<a href="/users/sign_up">注册</a>
-					<a>·</a>
-					<a href="javascript:show_login();">登录</a>
-				<%- else %>
-					<a href="<%= user_asks_path(current_user) %>">
-						<%= truncate(current_user.display_name, length: 12) %>
-					</a>
-					<a>·</a>
-					<%= link_to '退出', destroy_user_session_path, :method => :delete %>
-				<%- end %>
-				<a href="http://www.icolor.com.cn" class="ft12">返回iColor网</a>
+			<li class="pr">
+				<a href="#" class="bot-nav6">注册·登录</a>
+				<a href="#" class="bot-nav7">返回iColor网</a>
+
 			</li>
 		</ul>
 	</div><!-- footer -->

@@ -1,55 +1,73 @@
 @charset "utf-8";
 
-body{background: url(<%= asset_path 'refresh/refresh-bg.jpg' %>) no-repeat top center;}
-.header a,.footer a{color: #fff;}
+body{background: url(<%= asset_path 'baicheng/refresh/refresh-bg.jpg' %>) no-repeat top center fixed;}
 .header,.footer{width: 100%;min-width: 1180px;position: fixed;left: 0;z-index: 2;}
 .header{background: #000;top: 0;}
 .center,.wrapper{width: 1080px;margin: 0 auto;}
 .nav{background: #424242;}
-.nav li{float: left;position:relative;}
+.nav li{float: left;display: inline;}
 .nav a,.footer a,.refresh-logo a{display: block;}
-.nav a{padding: 16px 18px;font-size: 14px;_position: relative;}
-.nav .nav-icon{padding-left: 40px;}
-.nav-icon{background: url(<%= asset_path 'nav/nav-icon.png' %>) no-repeat 12px center;_background-image: url(/asset/nav/nav-icon.gif);}
-.nav-icon:hover,.subpage{background-color: #e71d36;}
-.nav-icon2{background-position: -77px center;}
-.nav-icon3{background-position: -243px center;}
-.nav-icon4{background-position: -354px center;}
-.nav .nav-title{color: #ffb119;padding: 15px 10px;}
-.nav .nav-small{font-size: 12px;padding: 6px;margin: 11px 5px;background-color: #373838;}
-.nav select{width: 105px;margin: 11px 5px;color: #c5c5c5;padding: 4px;font-size: 12px;border: 1px solid #c5c5c5;}
-.nav_submit{width: 50px;height: 27px;background: #fff;border: 1px solid #ccc;font: 14px "Microsoft Yahei";color: #666;line-height: 21px;}
+.nav a{background: url(<%= asset_path 'baicheng/nav/top-nav.png' %>) no-repeat;text-indent: -999em;}
+.top-nav1,.top-nav2{width: 86px;height: 49px;}
+.top-nav3,.top-nav4,.top-nav5,.top-nav6,.top-nav7{height: 32px;margin: 9px 5px 0 0;}
+.nav-bg{background: #585858;height: 49px;}
+.nav .top-nav1{background-position: 0 0;}
+.nav .top-nav2{background-position: -86px 0;}
+.nav .top-nav3{background-position: -483px 0;width: 49px;}
+.nav .top-nav4{background-position: -451px 0;width: 32px;}
+.nav .top-nav5{background-position: -172px 0;width: 106px;}
+.nav .top-nav6{background-position: -278px 0;width: 173px;}
+.nav .top-nav7{background-position: -483px -49px;width: 52px;}
+.top-nav1:hover,.top-nav1.active{background-position:0 -49px;}
+.top-nav2:hover,.top-nav2.active{background-position:-86px -49px;}
+.top-nav4:hover,.top-nav4.active{background-position:-451px -49px;}
+.top-nav5:hover,.top-nav5.active{background-position:-172px -49px;}
+.top-nav6:hover,.top-nav6.active{background-position:-278px -49px;}
+.nav select{width: 105px;height: 27px;margin: 11px 5px;color: #c5c5c5;padding: 4px;font-size: 12px;border: 1px solid #c5c5c5;vertical-align: middle;*margin-top: 13px;}
+.nav_submit{width: 50px;height: 27px;background: #fff;border: 1px solid #ccc;font: 14px "Microsoft Yahei";color: #666;line-height: 21px;*height: 20px;*line-height: 15px;*margin-top: -3px;}
 
-.subpage .center{width: 1000px;background: none;}
-.logo{width: 364px;}
-.subpage a{padding: 17px 25px;}
-.subpage a:hover,.nav a.active{background: #bc000e;}
+.footer{background: #000;bottom: 0;height: 69px;}
+.footer li{float: left;display: inline;}
+.footer a,.footer .pr{background: url(<%= asset_path 'baicheng/nav/bot-nav.jpg' %>) no-repeat;height: 69px;text-indent: -999em;}
+.footer .bot-nav1{background-position: 0 0;width: 85px;}
+.footer .bot-nav2{background-position: -85px 0;width: 140px;}
+.footer .bot-nav3{background-position: -225px 0;width: 124px;}
+.footer .bot-nav4{background-position: -349px 0;width: 140px;}
+.footer .bot-nav5{background-position: -489px 0;width: 215px;}
+.bot-nav1:hover,.bot-nav1.active{background-position: 0 -69px;}
+.bot-nav2:hover,.bot-nav2.active{background-position: -85px -69px;}
+.bot-nav3:hover,.bot-nav3.active{background-position: -225px -69px;}
+.bot-nav4:hover,.bot-nav4.active{background-position: -349px -69px;}
+.bot-nav5:hover,.bot-nav5.active{background-position: -489px -69px;}
+
+.footer .pr{background-position: right top;width: 111px;float: right;display: inline;}
+.footer .bot-nav6,.footer .bot-nav7{background: none;width: 111px;height: 34px;position: absolute;left: 0;top: 0;}
+.footer .bot-nav7{top: 35px;}
+
+.subpage,.subpage .nav{background: #e71d36;}
+.subpage .nav a{background-image: none;text-indent: 0;padding: 17px 25px;color: #fff;font-size: 14px;}
 .subpage .logo a{width:132px;padding: 0;}
+.logo{width: 364px;}
+.subpage a:hover,.subpage a.active{background: #bc000e;}
+.subpage li{position: relative;}
+.sub{width: 1000px;}
 
 .subnav{position:absolute;top:46px;left:0;background:url(<%= asset_path 'baicheng/nav/subnav_arrow.png' %>) no-repeat center top;padding-top:6px;}
 .subpage .subnav li{border-bottom:1px dotted #66142a;}
 .subpage .subnav a{width:106px;text-align:center;padding:10px 0;font:12px "Microsoft Yahei";background:#aa000d;}
 
-.footer{background: #000;bottom: 0;}
-.footer li{float: left;display: inline;}
-.footer a{font:18px "方正粗圆_GBK","Microsoft Yahei";padding: 23px 28px;_position: relative;}
-.footer a:hover,.footer a.active{background: #333;color: #ffc600;}
-.footer .tc{float: right;width: 110px;font-size: 20px;padding: 13px 0;}
-.footer .tc:hover{background: #333;}
-.footer .tc a{padding: 0;font-size: 15px;display: inline;}
-.footer .tc .ft12{font-size: 13px;font-weight: normal;color: #787878;display:block;}
-
-.wrapper{height: 746px;padding-top: 86px;margin-bottom: 68px;}
-.refresh-logo{background: url(<%= asset_path 'baicheng/refresh/refresh-logo.png' %>) no-repeat;width: 210px;height: 392px;padding:40px 7px 0 0;margin: 0 29px 0 77px;text-align:center;}
+.wrapper{padding-top: 86px;margin-bottom: 68px;}
+.refresh-logo{background: url(<%= asset_path 'baicheng/refresh/refresh-logo.png' %>) no-repeat;width: 210px;height: 392px;padding:40px 7px 0 0;margin: 0 29px 0 77px;text-align:center;*left: 50%;*margin-left: -470px;}
 .refresh-logo img{margin-bottom:47px;}
 .refresh-logo a{background: url(<%= asset_path 'baicheng/refresh/refresh-btn.jpg' %>) no-repeat;width: 155px;height: 45px;text-indent: -999em;margin: 0 auto 14px;}
-.refresh-logo .e-recent{background-position: 0 0;height: 38px;}
+.refresh-logo .e-recent{background-position: -1px 0;height: 38px;}
 .refresh-logo .e-upload{background-position: 0 -52px;}
 .refresh-logo .e-publish{background-position: 0 -111px;}
-.refresh-container,.grid-container{height: 717px;overflow: hidden;}
-.refresh-container{background: url(<%= asset_path 'baicheng/refresh/refresh-container.png' %>) no-repeat;width: 682px;padding: 2px 4px 4px 0;}
+.grid-container{height: 717px;overflow: hidden;}
+.refresh-container{background: url(<%= asset_path 'baicheng/refresh/refresh-container.png' %>) repeat-y;width: 682px;padding: 2px 4px 4px 0;margin-left: 324px;}
 .refresh-bin{width: 682px;width:702px\9;height: 717px;overflow: auto;}
-/*.refresh-bin*/div::-webkit-scrollbar,html::-webkit-scrollbar{display: none;}
+div::-webkit-scrollbar,html::-webkit-scrollbar{display: none;}
+.container-bot{background: url(<%= asset_path 'baicheng/refresh/container-bot.png' %>) no-repeat;width: 686px;height: 15px;position: relative;top: 19px;}
 
 .grid-container{width: 1080px;}
 .grid-container .refresh-bin{width: 1080px;width:1100px\9;}
