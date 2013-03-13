@@ -17,8 +17,8 @@
 		<li>
 			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  params[:id] == 'content'}" %>
 			<ul class="subnav none" style="display: none;">
-				<li><a href="#">家装公司/设计师</a></li>
-				<li class="noborder"><a href="#">大众用户</a></li>
+				<li><a href="<%= intro_path(id: 'content') %>">家装公司/设计师</a></li>
+				<li class="noborder"><a href="<%= intro_path(id: 'content_user')%>">大众用户</a></li>
 			</ul>
 		</li>
 		<li>
