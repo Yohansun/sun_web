@@ -220,32 +220,6 @@ $(function(){
           </p>
         </div>
       </div><!-- author_info -->
-      <%- if @image.imageable_type == "MasterDesign" %>
-          <div class="author_info clear">
-            <%= image_tag(@image.try(:file), :class => "fl") %>
-              <div class="fl border_lline">
-                <p class="clear border_bline">
-                  <strong class="nomargin">
-                     <%= @image.try(:title)%>
-                  </strong>s
-                </p>
-                <p>
-                  <a href="/master_interviews/<%= @master_design.master_profile_id %>" class="img_reply_btn">进入大师访谈</a>
-                </p>
-              </div>
-          </div><!-- author_info->大师访谈 -->
-      <%- elsif @image.imageable_type == "Design" %>
-          <div class="author_info clear">
-            <p class="clear border_bline">
-              <strong>
-                <%= @image.design.try(:title) %>
-              </strong>
-              <span>
-                <%= @image.design.user.display_name %>
-              </span>
-            </p>
-          </div><!-- author_info->色彩搭配 -->
-      <%- end %>
       <!-- JiaThis Button BEGIN -->
       <div class="clear imgs_share border_bline">
         <span class="fl t">分享:</span>
