@@ -35,7 +35,7 @@
 				<%- if current_user %>
 					<a href="<%= user_asks_path(current_user) %>" class="bot-nav6">
 						<%= truncate(current_user.display_name, length: 12) %>
-					</a>				
+					</a>
 					<!-- <a href="javascript:show_login();">登录</a> -->
 				<%- else %>
 					<a href="/users/sign_up?return_to=<%= request.url %>" class="bot-nav6">注册·登录</a>
@@ -48,8 +48,18 @@
 	<div id="layer"></div>
 	<%= render partial: 'baicheng/welcome/login' %>
 	<%= yield :tail %>
+	<%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
 	<script type="text/javascript">
 		$(function(){
+	    if(typeof data != 'undefined'){
+	      var options = {
+	        data  : data
+	      }
+	      var sel = new LinkageSelect(options);
+	      sel.bind('.area_1');
+	      sel.bind('.area_2');
+	    }
+
 	    $('.close-btn').click(function(){
 				$('.abs-center').hide();
 				$('#layer').hide();

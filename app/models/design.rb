@@ -21,6 +21,7 @@ class Design < ActiveRecord::Base
 
   after_create :update_user_design_code_count
   after_create :sync_baicheng_event
+  before_destroy :clear_baicheng_event
 
   #更新用户上传作品数色号（权重）。片区快查用
   def update_user_design_code_count
@@ -73,6 +74,11 @@ class Design < ActiveRecord::Base
   end
 
   def sync_baicheng_event
-    BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name)
+    BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
   end
+
+  def clear_baicheng_event
+    BaichengEvent.find_by_design(self.id).try(:destroy_all)
+  end
+
 end

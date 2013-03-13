@@ -3,7 +3,11 @@ class Baicheng::DesignWorksController < ApplicationController
 	layout 'baicheng'
 
   def index
-    @event_data = BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
+    @event_data = if params[:search_area].present?
+                    BaichengEvent.search_by_area(params[:search_area]).page(params[:page]).per(28)
+                  else
+                    BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
+                  end
   end
 
   def opus

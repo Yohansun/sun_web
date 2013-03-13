@@ -25,6 +25,6 @@ class Story < ActiveRecord::Base
   end
 
   def sync_baicheng_event
-    BaichengEvent.create(eventable_id: self.id, eventable_type: Story.name)
+    BaichengEvent.create(eventable_id: self.id, eventable_type: Story.name, area_id: self.area_id)
   end
 end

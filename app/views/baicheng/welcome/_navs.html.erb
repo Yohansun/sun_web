@@ -1,14 +1,14 @@
 <%-
   mode = params[:mode] ? 'grid' : ''
-  path = controller_name == 'stories' ? stories_path : (action_name == 'opus' ? opus_design_works_path : design_works_path)
+  path = request.path
 -%>
 <div class="header">
   <ul class="nav center clear">
     <li>
-      <%= link_to '地图', path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && action_name != 'new'}" %>
+      <%= link_to '地图', path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
     </li>
     <li>
-      <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && action_name != 'new'}" %>
+      <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
     </li>
     <li class="nav-bg"><a href="javascript:void(0)" class="top-nav3">分类</a></li>
     <li class="nav-bg">
