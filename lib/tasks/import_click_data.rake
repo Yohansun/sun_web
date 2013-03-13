@@ -12,7 +12,7 @@ task :import_click_data => :environment  do
   if File.exist?(file_name)
     File.open(file_name, "r").each_line do |line|
       line_time = line.scan(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)[0]
-      line_content = line.scan(/\=[0-9a-z-]+/)[0].to_s.gsub('=','')
+      line_content = line.scan(/\=[0-9a-z-_]+/)[0].to_s.gsub('=','')
       time_array << [line_time, line_content]
     end
 
