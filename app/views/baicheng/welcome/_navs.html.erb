@@ -19,7 +19,7 @@
         <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
       </li>
     <%- end %>
-    <li class="nav-bg"><a href="javascript:void(0)" class="top-nav3">分类</a></li>
+    <li class="nav-bg"><a class="top-nav3">分类</a></li>
     <li class="nav-bg">
       <%= link_to '全部', mode.blank? ? design_works_path : design_works_path(mode: mode),
         class: "top-nav4 #{'active' if controller_name == 'design_works' && action_name == 'index'}" %>
@@ -31,7 +31,7 @@
     <li class="nav-bg">
       <%= link_to '刷新感言和爱情故事', mode.blank? ? stories_path : stories_path(mode: mode),
         class: "top-nav6 #{'active' if controller_name == 'stories'}" %>
-    <li><a href="#" class="top-nav7">地域</a></li>
+    <li><a class="top-nav7">地域</a></li>
     <li><a href="#" class="top-nav4 active">全部</a></li>
     <li>
       <form action="/baicheng/design_works" method="get">
