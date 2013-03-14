@@ -22,7 +22,7 @@
           </div>
       </div>
       <%# if Time.now.to_date > "2013-03-18".to_date %>
-        <% if @design.story_id.present? %>
+        <%# if @design.story_id.present? %>
           <div class="upload2013_2 clear noborder"><!-- 最后一个活动添加class noborder  -->
             <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg2.jpg"%> ">
             <div class="active_content">
@@ -44,7 +44,7 @@
             </div>
           </div>
         <%# end %>
-      <% end %>
+      <%# end %>
       <fieldset class="tc">
           <input type="hidden" name="design_id" value="<%=params[:design_id] if params[:design_id]%>">
           <button><img src="<%= asset_path "success/btn.jpg"%>"></button>

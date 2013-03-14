@@ -19,8 +19,9 @@ class BaichengEvent < ActiveRecord::Base
     BaichengEvent.where(["eventable_id = ? and eventable_type = ?", design_id, Design.name])
   end
 
-  def self.map
-
+  def self.map(area_id)
+    area_arr_id = Area.where(parent_id: area_id).map &:id
+    
   end
 
 end
