@@ -1,5 +1,9 @@
 <% unless @messages.blank? %>
   alert("<%= raw @messages %>");
 <%- else -%>
-  window.location.replace("/users/complete");
+  <%- if params[:return_to].present? %>
+    window.location.replace("/users/complete?return_to=<%= params[:return_to] %>");
+  <%- else %>
+    window.location.replace("/users/complete");
+  <%- end %>
 <%- end -%>

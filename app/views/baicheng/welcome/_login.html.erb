@@ -1,0 +1,42 @@
+<div class="unlogin abs-center none" id="login_win">
+  <%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
+    <div class="subs_title ft18">
+      <span class="fl">请先登录</span>
+      <a href="javascript:void(0)" class="close-btn fr"> 关闭</a>
+    </div><!--subs_title ends-->
+    <div class="err_tips cr ft12 none pa">
+      用户名或密码错误
+      <span class="fr cp">x</span>
+    </div><!--err_tips-->
+    <div class="loginCon ft12 clear">
+      <form>
+        <div>
+          <label for="username" class="username ft14 fl">帐号：</label>
+          <input id="username" type="text" class="fl" placeholder="用户名/邮箱/手机" name="user[login]"/>
+        </div>
+        <div class="clear">
+          <label for="password" class="password ft14 fl">密码：</label>
+          <input id="password" type="password" class="fl" name="user[password]"/>
+          <span class="tips tc fr"><a href="/users/password/new">忘记密码？</a></span>
+        </div>
+        <input id="login" type="image" src="<%= asset_path "login.jpg" %>" />
+        <div class="checkbox fl">
+          <input type="checkbox" /><span>下次自动登录</span>
+        </div>
+      </form>
+    </div><!--loginCon ends-->
+  <%- end %>
+  <ul class="loginCon ft12 border clear">
+    <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>" />新浪微博</a></li>
+    <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>" />QQ</a></li>
+    <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>" />人人网</a></li>
+    <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>" />开心网</a></li>
+  </ul>
+  <div class="loginCon ft12 border clear">
+    <p class="fl">还没加入iColor?</p>
+    <a href="/users/sign_up?return_to=<%= root_url %>" class="reg_now fl"></a>
+  </div><!--loginCon ends-->
+  <div class="loginCon border">
+    <a href="/users/sign_up"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads" /></a>
+  </div>
+</div><!--unlogin ends-->

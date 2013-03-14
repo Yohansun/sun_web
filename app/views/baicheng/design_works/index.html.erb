@@ -1,0 +1,2 @@
+<%= render partial: 'baicheng/welcome/navs' %>
+<%= render partial: "baicheng/welcome/#{params[:mode].blank? ? 'map' : 'grid'}", locals: {data: @event_data} %>

@@ -1,0 +1,40 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag '2013base', '2013upload'%>
+<% end -%>
+<div class="wrapper">
+  <div class="upload_success">
+    <div class="upload2013_2">
+        <div class="tc"><img src="<%= asset_path 'upload_true.jpg'%>"></div>
+        <p class="tc color_red">您的大作也可同步参与iColor正在的以下活动，期待您的参与</p>
+    </div>
+    <br>
+    <%= form_tag update_design_active_user_designs_path(current_user), class: "active_form" do%>
+      <%# if @design.story_id.present? %>
+        <div class="upload2013_2 clear noborder"><!-- 最后一个活动添加class noborder  -->
+          <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg2.jpg"%> ">
+          <div class="active_content">
+              <h3><%=check_box_tag "baicheng_active","ok",true, :style=>"width:25px;"%>刷新百城活动</a></h3>
+              <h4>活动简介</h4>
+              <p>2013年iColor携手新浪家居举办的首届“刷新百城”活动，暨优秀设计案例征集 & 网络评选活动正式启航。</p>
+              <p style="padding-bottom:15px;"><img src="<%= asset_path "success/upload_sucimg2_con.jpg"%>"></p>
+              <p>活动时间：2013年3月至2013年11月</p>
+              <!-- <form class="active_form"> -->
+              <fieldset>
+                  <label>请填写作品所在楼盘</label>
+                  <input type="text" placeholder="<%=@design.property_name%>" name="property_name">
+              </fieldset>
+              <fieldset>
+                  <label>业主感言</label>
+                  <span>（如您的设计作品希望参与iColor刷新大奖的评比，请务必填写业主感言！）</span>
+                  <%= text_area "design", "speech" -%>
+              </fieldset>
+          </div>
+        </div>
+      <%# end %>
+      <fieldset class="tc">
+        <input type="hidden" name="design_id" value="<%=params[:design_id] if params[:design_id]%>">
+          <button><img src="<%= asset_path "success/btn.jpg"%>"></button>
+      </fieldset>
+    <% end %>
+  </div>
+</div><!--ends-->

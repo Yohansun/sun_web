@@ -2,6 +2,8 @@
 
 Icolor::Application.routes.draw do
 
+  get "welcome/index"
+
   require 'api'
   resources :special_events do
     member do
@@ -234,6 +236,7 @@ Icolor::Application.routes.draw do
         get :download
       end
       collection do
+        post :update_design_active
         post :update_design
         get :upload_success
       end
@@ -316,6 +319,7 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+
     resources :image_libraries
     resources :suit_images
   end
@@ -357,4 +361,22 @@ Icolor::Application.routes.draw do
     get "reward" => "refresh#reward"
     get "judge" => "refresh#judge"
   end
+
+  scope "/baicheng", :module =>"baicheng" do
+    root  to: 'welcome#index'
+    resources :design_works do
+      collection do
+        get :opus
+      end
+    end
+    resources :stories do
+      member do
+        get :download
+      end
+    end
+    match ':page', to: 'welcome#show', via: :get
+    resources :story_images
+    resources :intros, only: :show
+  end
+
 end

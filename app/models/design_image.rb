@@ -29,6 +29,7 @@ class DesignImage < ActiveRecord::Base
         :inside => "188>", :outside => "202>", :home_page => "90>",
         :home_design_image1 => "380x365#", :home_design_image2 => "380x170#", :home_design_image3 => "180x170#",
         :design_image_big => "686x496>", :design_image_list => "224x162#",
+        :design_work_slide =>"680x353#",
         :slide => "900>",
         :slide_thumb => "205x138#",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#"},
@@ -137,7 +138,7 @@ class DesignImage < ActiveRecord::Base
         DesignImage.available.where("design_images.edited_color = ? AND design_images.audited = ?", true, true).order("design_images.id DESC")
       when 'no_edit_color'
         DesignImage.available.where("(design_images.edited_color = ? or design_images.edited_color is null) AND (design_images.audited is null or design_images.audited = ?)", false, false).order("design_images.id DESC")
-        when 'imageable_id'
+      when 'imageable_id'
         DesignImage.available.where("design_images.imageable_id = ? and design_images.imageable_type = ?", keyword, 'MasterDesign').order("design_images.id DESC")
     end
   end

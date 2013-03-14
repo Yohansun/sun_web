@@ -1,0 +1,29 @@
+<%- content_for :head do %>
+  <style type='text/css'>
+    body{background: url(<%= asset_path 'baicheng/index/pk-bg.jpg' %>) no-repeat top center;}
+  </style>
+  <%= stylesheet_link_tag "baicheng/index" %>
+<%- end %>
+<div class="wrapper pk pr">
+  <%= link_to '刷新百城iColor', '/baicheng', class: "index-logo" %>
+  <h1>家装公司\设计师 用作品说话 刷新行业地位 各式奖项 诱人大礼等你拿</h1>
+  <%- if current_user && current_user.role_id == 3 %>
+    <a href="javascript:alert('只有设计师才能上传作品！');" class="pk-btn">我要参加</a>
+  <%- elsif current_user %>
+    <a href="<%= new_user_design_path(current_user) %>" class="pk-btn">我要参加</a>
+  <%- else %>
+    <a href="javascript:show_login();" class="pk-btn">我要参加</a>
+  <%- end %>
+
+  <%= link_to '大众三级跳', '/baicheng/jump', class: "pk-left" %>
+  <!-- JiaThis Button BEGIN -->
+  <span class="jiathis_style jia_custom">
+    <span class="jiathis_txt">分享 </span>
+    <a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+    <a class="jiathis_button_douban" title="分享到豆瓣网"><span class="jiathis_txt jtico jtico_douban"></span></a>
+    <a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+    <a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_30">更多</span></a>
+  </span>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script><script type="text/javascript" src="http://v3.jiathis.com/code/plugin.client.js" charset="utf-8"></script><div style="position:absolute;width:0px;height:0px;"><div class="ctf" style="width: 0px; height: 0px;"><!-- <span>Flash</span> --></div></div>
+  <!-- JiaThis Button END -->
+</div>

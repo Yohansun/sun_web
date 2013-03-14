@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227074456) do
+ActiveRecord::Schema.define(:version => 20130313075838) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -99,6 +99,17 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.datetime "file_updated_at"
   end
 
+  create_table "baicheng_events", :force => true do |t|
+    t.integer  "eventable_id"
+    t.string   "eventable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "area_id"
+  end
+
+  add_index "baicheng_events", ["area_id"], :name => "index_baicheng_events_on_area_id"
+  add_index "baicheng_events", ["eventable_type", "eventable_id"], :name => "index_baicheng_events_on_eventable_type_and_eventable_id"
+
   create_table "banners", :force => true do |t|
     t.string   "position"
     t.string   "desc"
@@ -127,6 +138,8 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.integer  "design_id"
     t.integer  "color_design_id"
     t.integer  "master_design_id"
+    t.integer  "inspiration_id"
+    t.integer  "story_id"
   end
 
   create_table "color_codes", :force => true do |t|
@@ -231,10 +244,10 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.integer  "room"
     t.text     "content"
     t.text     "reason"
-    t.integer  "votes_count",       :default => 0
     t.string   "color1_name",       :default => "墙面推荐色"
     t.string   "color2_name",       :default => "墙面推荐色"
     t.string   "color3_name",       :default => "墙面推荐色"
+    t.integer  "votes_count",       :default => 0
     t.boolean  "edited_color",      :default => false
     t.string   "pinyin"
     t.integer  "view_count",        :default => 0
@@ -242,16 +255,19 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.integer  "sorts",             :default => 100
   end
 
-  add_index "design_images", ["created_at"], :name => "NewIndex5"
+  add_index "design_images", ["area_id"], :name => "area_id"
+  add_index "design_images", ["audited", "edited_color"], :name => "index_design_images_on_audited_and_edited_color"
+  add_index "design_images", ["created_at"], :name => "created_at"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
-  add_index "design_images", ["imageable_id"], :name => "NewIndex2"
+  add_index "design_images", ["imageable_id"], :name => "imageable_id"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
-  add_index "design_images", ["imageable_type"], :name => "NewIndex3"
-  add_index "design_images", ["is_cover"], :name => "NewIndex4"
+  add_index "design_images", ["imageable_type"], :name => "imageable_type"
   add_index "design_images", ["is_cover"], :name => "index_design_images_on_is_cover"
-  add_index "design_images", ["source", "created_at"], :name => "source_2"
+  add_index "design_images", ["pinyin"], :name => "index_design_images_on_pinyin"
+  add_index "design_images", ["sorts"], :name => "index_design_images_on_sorts"
   add_index "design_images", ["source"], :name => "source"
-  add_index "design_images", ["user_id"], :name => "NewIndex1"
+  add_index "design_images", ["view_count"], :name => "index_design_images_on_view_count"
+  add_index "design_images", ["votes_count"], :name => "votes_count"
 
   create_table "design_tags", :force => true do |t|
     t.integer  "design_id"
@@ -283,6 +299,10 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.boolean  "is_yda",                    :default => false
     t.boolean  "is_refresh",                :default => false
     t.string   "property_name"
+    t.text     "speech"
+    t.boolean  "future_star_active",        :default => false
+    t.integer  "story_id"
+    t.boolean  "baicheng_active",           :default => false
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
@@ -440,6 +460,8 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.string   "pinyin"
   end
 
+  add_index "image_library_categories", ["lft"], :name => "index_image_library_categories_on_lft"
+  add_index "image_library_categories", ["parent_id"], :name => "index_image_library_categories_on_parent_id"
   add_index "image_library_categories", ["pinyin"], :name => "index_image_library_categories_on_pinyin"
 
   create_table "image_tags", :force => true do |t|
@@ -450,6 +472,7 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.string   "genre"
   end
 
+  add_index "image_tags", ["design_image_id"], :name => "design_image_id"
   add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
   add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
 
@@ -488,6 +511,18 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
     t.integer  "subject_id"
     t.string   "work_experience"
   end
+
+  create_table "lands", :force => true do |t|
+    t.string   "source"
+    t.string   "source_ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "lands", ["created_at"], :name => "created_at"
+  add_index "lands", ["created_at"], :name => "index_lands_on_created_at"
+  add_index "lands", ["source"], :name => "index_lands_on_source"
+  add_index "lands", ["source"], :name => "source"
 
   create_table "login_logs", :force => true do |t|
     t.integer  "user_id"
@@ -646,7 +681,6 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
   end
 
   add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
-  add_index "old_design_files", ["old_design_id"], :name => "index_old_design_files_on_old_design_id"
 
   create_table "old_designs", :force => true do |t|
     t.string   "title",       :limit => 256
@@ -907,6 +941,42 @@ ActiveRecord::Schema.define(:version => 20130227074456) do
   add_index "special_events", ["actived"], :name => "index_special_events_on_actived"
   add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
   add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
+
+  create_table "stories", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "area_id"
+    t.integer  "user_id"
+    t.string   "property_name"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "parent_id"
+    t.integer  "votes_count",   :default => 0
+  end
+
+  create_table "story_image_tags", :force => true do |t|
+    t.integer  "image_library_category_id"
+    t.integer  "story_image_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "story_image_tags", ["story_image_id"], :name => "index_story_image_tags_on_story_image_id"
+
+  create_table "story_images", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "story_id"
+    t.boolean  "is_cover"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "story_images", ["story_id"], :name => "index_story_images_on_story_id"
+  add_index "story_images", ["user_id"], :name => "index_story_images_on_user_id"
 
   create_table "subjects", :force => true do |t|
     t.string   "name"

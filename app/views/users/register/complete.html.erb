@@ -43,6 +43,7 @@ $(function() {
   <div class="reg_bg2 pr"></div>
   <div class="wrapper">
     <%= form_for :user, :url => "/user/update", :remote => true  do |f| %>
+      <%= hidden_field_tag :return_to, params[:return_to] %>
       <div class="reg_content ft14">
         <div class="reg_list reg_bd_top fl referr_input">
           <label for="uesername">是否有推荐人：</label>
@@ -96,7 +97,11 @@ $(function() {
 
         <p class="tc">
         <input type="image" src="<%= asset_path "news/submit.jpg" %>" />&nbsp;
-        <a href="/users/suc_regist"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
+        <%- if params[:return_to].present? %>
+          <a href="/users/suc_regist?return_to=<%= params[:return_to]%>"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
+        <%- else %>
+          <a href="/users/suc_regist"><img src="<%= asset_path "news/reg_skip.jpg" %>" /></a>
+        <%- end %>
         </p>
       </div><!--reg_content ends-->
     <%- end %>

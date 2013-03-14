@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+.index,.leap,.pk{height: 1000px;padding: 0;margin-bottom: 69px;}
+.index a,.leap a,.pk a{text-indent: -999em;display: block;position: absolute;}
+.index span a,.leap span a,.pk span a{position: static;display: inline;text-indent: 0;}
+.index-logo,.pk h1,.pk-btn{left: 50%;}
+/*index*/
+.index{background: url(<%= asset_path 'baicheng/index/index.jpg' %>) no-repeat;}
+.index-logo{background: url(<%= asset_path 'baicheng/index/leap-logo.png' %>) no-repeat;width: 196px;height: 171px;margin-left: -85px;top: 0;}
+.index-join,.index-pk,.leap-join{background: url(<%= asset_path 'baicheng/index/index-join.png' %>) no-repeat;width: 137px;height: 39px;}
+.index-join{top: 184px;left: 13px;}
+.index-pk{background-position: 0 -39px;top: 185px;left: 653px;}
+.index-btn1{background: url(<%= asset_path 'baicheng/index/index-btn1.png' %>) no-repeat;width: 173px;height: 177px;top: 586px;left: 286px;}
+.index-btn2{background: url(<%= asset_path 'baicheng/index/index-btn2.png' %>) no-repeat;width: 200px;height: 188px;top: 480px;left: 86px;}
+.index-btn3{background: url(<%= asset_path 'baicheng/index/index-btn3.png' %>) no-repeat;width: 220px;height: 201px;top: 370px;left: 260px;}
+
+/*leap*/
+.leap{background: url(<%= asset_path 'baicheng/index/leap.jpg' %>) no-repeat;}
+.leap .index-logo,.pk .index-logo{left: 3px;top: 17px;margin-left: 0;}
+.leap-join{background-position: 0 -78px;left: 294px;top: 188px;}
+.leap-btn1{background: url(<%= asset_path 'baicheng/index/leap-btn1.png' %>) no-repeat;width: 222px;height: 227px;left: 340px;top: 520px;}
+.leap-btn2{background: url(<%= asset_path 'baicheng/index/leap-btn2.png' %>) no-repeat;width: 266px;height: 250px;left: 645px;top: 440px;}
+.leap-btn3{background: url(<%= asset_path 'baicheng/index/leap-btn3.png' %>) no-repeat;width: 305px;height: 277px;left: 373px;top: 249px;}
+.leap .leap-right,.pk .pk-left{width: 118px;height: 234px;position: fixed;top: 50%;margin-top: -117px;}
+.leap .leap-right{background: url(<%= asset_path 'baicheng/index/leap-right.png' %>) no-repeat;right: 0;}
+
+/*pk*/
+.pk{background: url(<%= asset_path 'baicheng/index/pk.jpg' %>) no-repeat;}
+.pk h1{background: url(<%= asset_path 'baicheng/index/pk-header.png' %>) no-repeat;width: 536px;height: 128px;text-indent: -999em;position: absolute;margin-left: -268px;top: 62px;}
+.pk-btn{background: url(<%= asset_path 'baicheng/index/pk-btn.png' %>) no-repeat;width: 224px;height: 63px;margin-left: -112px;top: 648px;}
+.pk .pk-left{background: url(<%= asset_path 'baicheng/index/pk-left.png' %>) no-repeat;left: 0;}

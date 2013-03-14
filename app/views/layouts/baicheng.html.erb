@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>百城活动</title>
+<%= stylesheet_link_tag "baicheng_all.css" %>
+<%= javascript_include_tag "baicheng" %>
+<%= yield :head %>
+</head>
+<body>
+	<%= yield %>
+	<div class="footer">
+		<ul class="center clear">
+			<li>
+				<%= link_to '首页', '/baicheng',
+					class: "bot-nav1 #{'active' if controller_name == 'welcome' && params[:page].blank?}" %>
+			</li>
+			<li>
+				<%= link_to '大众三级跳', '/baicheng/jump',
+					class: "bot-nav2 #{'active' if controller_name == 'welcome' && params[:page] == 'jump'}" %>
+			</li>
+			<li>
+				<%= link_to '设计大PK', '/baicheng/pk',
+					class: "bot-nav3 #{'active' if controller_name == 'welcome' && params[:page] == 'pk'}" %>
+			</li>
+			<li>
+				<%= link_to '作品聚集地', design_works_path,
+					class: "bot-nav4 #{'active' if controller_name =~ /design_works|stories/ }" %>
+			</li>
+			<li>
+				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'),
+					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
+			</li>
+			<li class="pr">
+				<%- if current_user %>
+					<a href="<%= user_asks_path(current_user) %>" class="bot-nav8"><%= truncate(current_user.display_name, length: 12) %></a>
+				<%- else %>
+				<%= link_to_function "注册·登录", "show_login()", :class=>"bot-nav6" %>
+					<%#= link_to '退出', destroy_user_session_path, :method => :delete %>
+				<%- end %>
+				<a href="http://www.icolor.com.cn" class="bot-nav7">返回iColor网</a>
+			</li>
+		</ul>
+	</div><!-- footer -->
+	<div id="layer"></div>
+	<%= render partial: 'baicheng/welcome/login' %>
+	<%= yield :tail %>
+	<%= javascript_include_tag "/location.js" %>
+	<script type="text/javascript">
+		$(function(){
+	    if(typeof data != 'undefined'){
+	      var options = {
+	        data  : data
+	      }
+	      var sel = new LinkageSelect(options);
+	      sel.bind('.area_1');
+	      sel.bind('.area_2');
+	    }
+
+	    $('.close-btn').click(function(){
+				$('.abs-center').hide();
+				$('#layer').hide();
+			});
+	    $('.e-pop-btn').click(function(){
+				$('.abs-center').hide();
+				$('#layer').hide();
+			});
+	   });
+		function show_login () {
+			$('.unlogin').show();
+			$('#layer').show();
+		};
+	</script>
+</body>
+</html>

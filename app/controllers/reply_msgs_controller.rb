@@ -34,6 +34,8 @@ class ReplyMsgsController < ApplicationController
         redirect_to "/weekly_stars/#{params[:reply_msg][:show_id]}"
       when 'designs'
         redirect_to user_design_path(@reply_msg.user.id, params[:reply_msg][:show_id])
+      when 'design_works'
+        redirect_to design_work_path(params[:reply_msg][:show_id])
       when 'design_images'
         redirect_to image_show_design_image_path(params[:reply_msg][:show_id])
       when 'inspirations'

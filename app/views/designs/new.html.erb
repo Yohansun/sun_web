@@ -166,6 +166,9 @@
                 </div>
             </div>
         </div>
+        <% if params[:story_id].present? %>
+          <input type="hidden" name="story_id" value="<%=params[:story_id]%>">
+        <% end %>
         <input type="image" src="<%=asset_path 'upload2013_submit.jpg'%>" class="upload2013_submit">
         <!-- <input type="button" class="upload2013_submit" /> -->
         <p class="help-text tc cr">*红色标注为必填项</p>

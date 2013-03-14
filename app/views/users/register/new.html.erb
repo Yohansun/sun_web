@@ -8,6 +8,7 @@
   <div class="reg_bg1 pr"></div>
   <div class="wrapper">
     <%= form_for(resource, :as => resource_name, :url => "/users", :remote => true ) do |f| %>
+      <%= hidden_field_tag :return_to, params[:return_to] %>
       <div class="reg_content ft14">
         <div class="reg_list fl">
           <label for="uesername"><span>*</span>用户名：</label>
