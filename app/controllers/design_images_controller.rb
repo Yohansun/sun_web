@@ -193,6 +193,7 @@ class DesignImagesController < ApplicationController
       end
     end
     #获取图片第几张
+    @images = []
     @image_num = 1
     if @image.imageable_type == 'MasterDesign'
       mdu = MasterDesign.find @image.imageable_id
