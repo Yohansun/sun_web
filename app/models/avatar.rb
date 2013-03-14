@@ -3,10 +3,21 @@ require "open-uri"
 class Avatar < ActiveRecord::Base
   belongs_to :user
   has_attached_file :file,
-    :styles => {:upload => "155x135#", :profile => "194x194#", :icon => "48x48#", :thumb => "78x70#", :access_icon => "57x57#", :access_wall => "99x99#"},
+    :styles => {:round => ["36x36>", :png],:upload => "155x135#", :profile => "194x194#", :icon => "48x48#", :thumb => "78x70#", :access_icon => "57x57#", :access_wall => "99x99#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
-    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension",
+    :convert_options => {:round => Proc.new{self.convert_options}}
+
+  def self.convert_options
+    trans = ""
+    px = 20
+    trans << " \\( +clone  -threshold -1 "
+    trans << "-draw 'fill black polygon 0,0 0,#{px} #{px},0 fill white circle #{px},#{px} #{px},0' "
+    trans << "\\( +clone -flip \\) -compose Multiply -composite "
+    trans << "\\( +clone -flop \\) -compose Multiply -composite "
+    trans << "\\) +matte -compose CopyOpacity -composite "
+  end  
 
   def self.load_data
     email_array = []

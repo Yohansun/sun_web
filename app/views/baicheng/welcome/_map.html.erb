@@ -30,22 +30,23 @@
     <% cnt = 0 %>
     <% cnt2 = 0 %>
     <!--xinliang-->
-    <% if controller_name == "design_works" && params[:unload].present? %>
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
       <% if @xx.present? %>
         <li class="dot1" title="新乡">
           <ul class="map-ring">
             <% @xx.each_with_index do |xx,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(xx.design)%>">
                   <%- if xx.design.user.avatar %>
-                    <img src="<%=xx.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=xx.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=xx.design.user.username%></a>
+                  <a href="<%=design_work_path(xx.design)%>"><%=xx.design.user.username%></a>
                   <b><%=xx.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -71,12 +72,14 @@
           <ul class="map-ring">
             <% @xx.each_with_index do |xx,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=xx.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(xx.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=xx.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (12 - cnt) != 0 %>
               <% (12 - cnt).times do |i| %>
@@ -95,12 +98,14 @@
             
             <% @xx.each_with_index do |xx,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=xx.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(xx.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=xx.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (6 - cnt) != 0 %>
               <% (6 - cnt).times do |i| %>
@@ -111,15 +116,15 @@
             <% @xx2.each_with_index do |xx,i| %>
               <% cnt2 = i+7 %>
               <li class="token token<%=i+7%>">
-                <a href="#">
+                <a href="<%=design_work_path(xx.design)%>">
                   <%- if xx.design.user.avatar %>
-                    <img src="<%=xx.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=xx.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=xx.design.user.username%></a>
+                  <a href="<%=design_work_path(xx.design)%>"><%=xx.design.user.username%></a>
                   <b><%=xx.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -143,22 +148,22 @@
     <!--xinliang end-->
 
     <!--langfang-->
-    <% if controller_name == "design_works" && params[:unload].present? %>
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
       <% if @lf.present? %>
         <li class="dot2" title="廊坊">
           <ul class="map-ring">
             <% @lf.each_with_index do |lf,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(lf.design)%>">
                   <%- if lf.design.user.avatar %>
-                    <img src="<%=lf.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=lf.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=lf.design.user.username%></a>
+                  <a href="<%=design_work_path(lf.design)%>"><%=lf.design.user.username%></a>
                   <b><%=lf.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -184,12 +189,14 @@
           <ul class="map-ring">
             <% @lf.each_with_index do |lf,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=lf.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(lf.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=lf.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (12-cnt) != 0 %>
               <%(12-cnt).times do |i| %>
@@ -207,12 +214,14 @@
           <ul class="map-ring">
             <% @lf.each_with_index do |lf,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=lf.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(lf.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=lf.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (6-cnt) != 0 %>
               <%(6-cnt).times do |i| %>
@@ -222,15 +231,15 @@
             <% @lf2.each_with_index do |lf,i| %>
               <% cnt2 = i+7 %>
               <li class="token token<%=i+7%>">
-                <a href="#">
+                <a href="<%=design_work_path(lf.design)%>">
                   <%- if lf.design.user.avatar %>
-                    <img src="<%=lf.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=lf.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=lf.design.user.username%></a>
+                  <a href="<%=design_work_path(lf.design)%>"><%=lf.design.user.username%></a>
                   <b><%=lf.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -254,22 +263,22 @@
     <!--langfang end-->
 
     <!--datong-->
-    <% if controller_name == "design_works" && params[:unload].present? %>
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
       <% if @dt.present? %>
         <li class="dot3" title="大同">
           <ul class="map-ring">
             <% @dt.each_with_index do |dt,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(dt.design)%>">
                   <%- if dt.design.user.avatar %>
-                    <img src="<%=dt.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=dt.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=dt.design.user.username%></a>
+                  <a href="<%=design_work_path(dt.design)%>"><%=dt.design.user.username%></a>
                   <b><%=dt.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -295,12 +304,14 @@
           <ul class="map-ring">
             <% @dt.each_with_index do |dt,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=dt.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(dt.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=dt.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (12-cnt) != 0 %>
               <%(12-cnt).times do |i| %>
@@ -318,12 +329,14 @@
           <ul class="map-ring">
             <% @dt.each_with_index do |dt,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=dt.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(dt.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=dt.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (6-cnt) != 0 %>
               <%(6-cnt).times do |i| %>
@@ -333,15 +346,15 @@
             <% @dt2.each_with_index do |dt,i| %>
               <% cnt2 = i+7 %>
               <li class="token token<%=i+7%>">
-                <a href="#">
+                <a href="<%=design_work_path(dt.design)%>">
                   <%- if dt.design.user.avatar %>
-                    <img src="<%=dt.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=dt.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=dt.design.user.username%></a>
+                  <a href="<%=design_work_path(dt.design)%>"><%=dt.design.user.username%></a>
                   <b><%=dt.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -365,22 +378,22 @@
     <!--datong end -->
 
     <!--sjz-->
-    <% if controller_name == "design_works" && params[:unload].present? %>
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
       <% if @sjz.present? %>
         <li class="dot4" title="石家庄">
           <ul class="map-ring">
             <% @sjz.each_with_index do |sjz,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(sjz.design)%>">
                   <%- if sjz.design.user.avatar %>
-                    <img src="<%=sjz.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=sjz.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=sjz.design.user.username%></a>
+                  <a href="<%=design_work_path(sjz.design)%>"><%=sjz.design.user.username%></a>
                   <b><%=sjz.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -406,12 +419,14 @@
           <ul class="map-ring">
             <% @sjz.each_with_index do |sjz,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=sjz.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(sjz.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=sjz.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (12-cnt) != 0 %>
               <%(12-cnt).times do |i| %>
@@ -429,12 +444,14 @@
           <ul class="map-lamp">
             <% @sjz.each_with_index do |sjz,i| %>
               <% cnt = i+1 %>
-              <li class="msg msg<%=i+1%> content">
-                <div>
-                  <p><%=sjz.story.title%></p>
-                  <i></i>
-                </div>
-              </li>
+              <a href="<%=story_path(sjz.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=sjz.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
             <% end %>
             <% if (6-cnt) != 0 %>
               <%(6-cnt).times do |i| %>
@@ -444,15 +461,15 @@
             <% @sjz2.each_with_index do |sjz,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(sjz.design)%>">
                   <%- if sjz.design.user.avatar %>
-                    <img src="<%=sjz.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=sjz.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=sjz.design.user.username%></a>
+                  <a href="<%=design_work_path(sjz.design)%>"><%=sjz.design.user.username%></a>
                   <b><%=sjz.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -476,22 +493,22 @@
     <!--sjz end-->
 
     <!--ly-->
-    <% if controller_name == "design_works" && params[:unload].present? %>
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
       <% if @ly.present? %>
         <li class="dot5" title="洛阳">
           <ul class="map-ring">
             <% @ly.each_with_index do |ly,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(ly.design)%>">
                   <%- if ly.design.user.avatar %>
-                    <img src="<%=ly.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=ly.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=ly.design.user.username%></a>
+                  <a href="<%=design_work_path(ly.design)%>"><%=ly.design.user.username%></a>
                   <b><%=ly.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -517,12 +534,14 @@
           <ul class="map-ring">
             <% @ly.each_with_index do |ly,i| %>
             <% cnt = i+1 %>
-            <li class="msg msg<%=i+1%> content">
-              <div>
-                <p><%=ly.story.title%></p>
-                <i></i>
-              </div>
-            </li>
+            <a href="<%=story_path(ly.story)%>">
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=ly.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            </a>
             <% end %>
             <% if (12-cnt) != 0 %>
               <%(12-cnt).times do |i| %>
@@ -541,15 +560,15 @@
             <% @ly2.each_with_index do |ly,i| %>
               <% cnt2 = i+1 %>
               <li class="token token<%=i+1%>">
-                <a href="#">
+                <a href="<%=design_work_path(ly.design)%>">
                   <%- if ly.design.user.avatar %>
-                    <img src="<%=ly.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                    <img src="<%=ly.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
-                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
-                  <a href="#"><%=ly.design.user.username%></a>
+                  <a href="<%=design_work_path(ly.design)%>"><%=ly.design.user.username%></a>
                   <b><%=ly.design.user.area.name%></b>
                   <i></i>
                 </div>
@@ -566,12 +585,14 @@
             <% end %> 
             <% @ly.each_with_index do |ly,i| %>
             <% cnt = i+1 %>
-            <li class="msg msg<%=i+1%> content">
-              <div>
-                <p><%=ly.story.title%></p>
-                <i></i>
-              </div>
-            </li>
+            <a href="<%=story_path(ly.story)%>">
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=ly.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            </a>
             <% end %>
             <% if (6-cnt) != 0 %>
               <%(6-cnt).times do |i| %>

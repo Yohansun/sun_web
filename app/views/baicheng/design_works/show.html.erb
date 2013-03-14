@@ -82,13 +82,15 @@
           <div class="desc" style=" height:35px; width:600px; margin:19px 0px;display:none; position:absolute; left:1px; top:1px;">
             <div class="list" style="height:35px;">
               <ul class="group" style="overflow:hidden;">
-              	<%- @image_colors.last.each do |color| %>
-                  <li>
-                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
-                    <h5><%= color.name %></h5>
-                    <p>立邦(<%= color.code %>)</p>
-                  </li>
-                <%- end %>
+              	<% if @image_colors.present? %>
+	              	<%- @image_colors.last.each do |color| %>
+	                  <li>
+	                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+	                    <h5><%= color.name %></h5>
+	                    <p>立邦(<%= color.code %>)</p>
+	                  </li>
+	                <%- end %>
+                <% end %>
               </ul>
             </div>
           </div>
