@@ -16,6 +16,7 @@ class Design < ActiveRecord::Base
   has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
   has_many :color_codes
   has_many :collects, :dependent => :destroy
+  has_one :baicheng_event
 
   paginates_per 8
 
@@ -74,9 +75,9 @@ class Design < ActiveRecord::Base
   end
 
   def sync_baicheng_event
-    if self.story_id.present?
+    #if self.story_id.present?
       BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
-    end
+    #end
   end
 
   def clear_baicheng_event

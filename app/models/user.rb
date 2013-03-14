@@ -70,6 +70,7 @@ class User < ActiveRecord::Base
   has_many :login_logs
   has_one :phone_expense
   has_many :event_attendees
+  has_many :baicheng_events
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
