@@ -65,7 +65,8 @@ class Baicheng::StoriesController < ApplicationController
 
   def show
   	@story = Story.find(params[:id])
-  	@stories = Story.where(parent_id: @story.id).limit(3)
+  	#@stories = Story.where(parent_id: @story.id).limit(3)
+      @designs = Design.where(story_id: @story.id).limit(3)
   end
 
   def download

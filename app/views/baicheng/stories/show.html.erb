@@ -145,17 +145,17 @@
 			<div class="img-info">
 				<h4 class="fb">已提交作品</h4>
 				<ul class="oldworks clear">
-					<%- @stories.each do |story| %>
+					<%- @designs.each do |design| %>
 						<li class="nomargin">
-							<a href="<%= story_path(story.id) %>" target="_blank">
-								<%= image_tag(story.cover_img.try(:file).try(:url, :list), size: "203x146")%>
+							<a href="<%= user_design_path(design.user_id, design) %>" target="_blank">
+								<%= image_tag(design.cover_img.try(:file).try(:url, :design_image_list), size: "203x146")%>
 							</a>
 							<h5>
-								<a href="<%= story_path(story.id) %>" class="cr" target="_blank"><%= story.title %></a>
+								<a href="<%= user_design_path(design.user_id, design) %>" class="cr" target="_blank"><%= design.title %></a>
 							</h5>
 							<p>
-								<span class="fr nomargin ft12"><%= Area.find(story.area_id).parent.name if story.area_id %></span>
-								<span class="ft12"><%= story.user.display_name %></span>
+								<span class="fr nomargin ft12"><%= Area.find(design.area_id).parent.name if design.area_id %></span>
+								<span class="ft12"><%= design.user.display_name %></span>
 							</p>
 						</li>
 					<%- end %>
