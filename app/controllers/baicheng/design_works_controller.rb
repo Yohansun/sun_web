@@ -32,6 +32,11 @@ class Baicheng::DesignWorksController < ApplicationController
 
   def opus
     @event_data = BaichengEvent.by_type(Design.name).order('created_at DESC').page(params[:page]).per(28)
+    @xx = BaichengEvent.baicheng_map_design(825)
+    @lf = BaichengEvent.baicheng_map_design(647)
+    @dt = BaichengEvent.baicheng_map_design(1046)
+    @sjz = BaichengEvent.baicheng_map_design(661)
+    @ly = BaichengEvent.baicheng_map_design(855)
   end
 
   def new

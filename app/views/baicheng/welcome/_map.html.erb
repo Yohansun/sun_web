@@ -27,261 +27,562 @@
 
 
 <ul id="map">
+    <% cnt = 0 %>
+    <% cnt2 = 0 %>
     <!--xinliang-->
-    <% if @xx.present? && @xx2.present? %>
-      <li class="dot1" title="新乡">
-        <ul class="map-ring">
-          <% cnt = 0 %>
-          <% @xx.each_with_index do |xx,i| %>
-            <% cnt = i+1 %>
-            <li class="msg msg<%=i+1%> content">
-              <div>
-                <p><%=xx.story.title%></p>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (6-cnt) != 0 %>
-            <%(6-cnt).times do |i| %>
-              <li class="msg msg<%=cnt+(i+1)%>"></li>
-            <% end %>
-          <% end %>
-
-          <% cnt2 = 0 %>
-          <% @xx2.each_with_index do |xx,i| %>
-            <% cnt2 = i+7 %>
-            <li class="token token<%=i+7%>">
-              <a href="#">
-                <%- if xx.design.user.avatar %>
-                  <img src="<%=xx.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
-                <%- else %>
-                  <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
-                <%- end %>
-              </a>
-              <div>
-                <a href="#"><%=xx.design.user.username%></a>
-                <b><%=xx.design.user.area.name%></b>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (12-cnt2) != 0 %>
-            <%(12-cnt2).times do |i| %>
-              <li class="token token<%=cnt2+(i+1)%>">
+    <% if controller_name == "design_works" && params[:unload].present? %>
+      <% if @xx.present? %>
+        <li class="dot1" title="新乡">
+          <ul class="map-ring">
+            <% @xx.each_with_index do |xx,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
                 <a href="#">
-                    <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  <%- if xx.design.user.avatar %>
+                    <img src="<%=xx.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
                 </a>
+                <div>
+                  <a href="#"><%=xx.design.user.username%></a>
+                  <b><%=xx.design.user.area.name%></b>
+                  <i></i>
+                </div>
               </li>
             <% end %>
-          <% end %>
-        </ul>
-      </li>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot1 empty" title="新乡"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present? %>
+      <% if @xx.present? %>
+        <li class="dot1" title="新乡">
+          <ul class="map-ring">
+            <% @xx.each_with_index do |xx,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=xx.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12 - cnt) != 0 %>
+              <% (12 - cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot1 empty" title="新乡"></li>
+      <% end %>
     <% else %>
-      <li class="dot1 empty" title="新乡"></li>
+      <% if @xx.present? && @xx2.present? %>
+        <li class="dot1" title="新乡">
+          <ul class="map-ring">
+            
+            <% @xx.each_with_index do |xx,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=xx.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6 - cnt) != 0 %>
+              <% (6 - cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+
+            <% @xx2.each_with_index do |xx,i| %>
+              <% cnt2 = i+7 %>
+              <li class="token token<%=i+7%>">
+                <a href="#">
+                  <%- if xx.design.user.avatar %>
+                    <img src="<%=xx.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="#"><%=xx.design.user.username%></a>
+                  <b><%=xx.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot1 empty" title="新乡"></li>
+      <% end %>
     <% end %>
     <!--xinliang end-->
 
     <!--langfang-->
-    <% if @lf.present? && @lf2.present? %>
-      <li class="dot2" title="廊坊">
-        <ul class="map-ring">
-          <% @lf.each_with_index do |lf,i| %>
-            <% cnt = i+1 %>
-            <li class="msg msg<%=i+1%> content">
-              <div>
-                <p><%=lf.story.title%></p>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (6-cnt) != 0 %>
-            <%(6-cnt).times do |i| %>
-              <li class="msg msg<%=cnt+(i+1)%>"></li>
-            <% end %>
-          <% end %>
-          <% @lf2.each_with_index do |lf,i| %>
-            <% cnt2 = i+7 %>
-            <li class="token token<%=i+7%>">
-              <a href="#">
-                <%- if lf.design.user.avatar %>
-                  <img src="<%=lf.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
-                <%- else %>
-                  <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
-                <%- end %>
-              </a>
-              <div>
-                <a href="#"><%=lf.design.user.username%></a>
-                <b><%=lf.design.user.area.name%></b>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (12-cnt2) != 0 %>
-            <%(12-cnt2).times do |i| %>
-              <li class="token token<%=cnt2+(i+1)%>">
+    <% if controller_name == "design_works" && params[:unload].present? %>
+      <% if @lf.present? %>
+        <li class="dot2" title="廊坊">
+          <ul class="map-ring">
+            <% @lf.each_with_index do |lf,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
                 <a href="#">
-                    <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  <%- if lf.design.user.avatar %>
+                    <img src="<%=lf.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
                 </a>
+                <div>
+                  <a href="#"><%=lf.design.user.username%></a>
+                  <b><%=lf.design.user.area.name%></b>
+                  <i></i>
+                </div>
               </li>
             <% end %>
-          <% end %>
-        </ul>
-      </li>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot2 empty" title="廊坊"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @lf.present? %>
+        <li class="dot2" title="廊坊">
+          <ul class="map-ring">
+            <% @lf.each_with_index do |lf,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=lf.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot2 empty" title="廊坊"></li>
+      <% end %>
     <% else %>
-      <li class="dot2 empty" title="廊坊"></li>
+      <% if @lf.present? && @lf2.present? %>
+        <li class="dot2" title="廊坊">
+          <ul class="map-ring">
+            <% @lf.each_with_index do |lf,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=lf.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+            <% @lf2.each_with_index do |lf,i| %>
+              <% cnt2 = i+7 %>
+              <li class="token token<%=i+7%>">
+                <a href="#">
+                  <%- if lf.design.user.avatar %>
+                    <img src="<%=lf.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="#"><%=lf.design.user.username%></a>
+                  <b><%=lf.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot2 empty" title="廊坊"></li>
+      <% end %>
     <% end %>
     <!--langfang end-->
 
     <!--datong-->
-    <% if @dt.present? && @dt2.present? %>
-      <li class="dot3" title="大同">
-        <ul class="map-ring">
-          <% @dt.each_with_index do |dt,i| %>
-            <% cnt = i+1 %>
-            <li class="msg msg<%=i+1%> content">
-              <div>
-                <p><%=dt.story.title%></p>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (6-cnt) != 0 %>
-            <%(6-cnt).times do |i| %>
-              <li class="msg msg<%=cnt+(i+1)%>"></li>
-            <% end %>
-          <% end %>
-          <% @dt2.each_with_index do |dt,i| %>
-            <% cnt2 = i+7 %>
-            <li class="token token<%=i+7%>">
-              <a href="#">
-                <%- if dt.design.user.avatar %>
-                  <img src="<%=dt.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
-                <%- else %>
-                  <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
-                <%- end %>
-              </a>
-              <div>
-                <a href="#"><%=dt.design.user.username%></a>
-                <b><%=dt.design.user.area.name%></b>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (12-cnt2) != 0 %>
-            <%(12-cnt2).times do |i| %>
-              <li class="token token<%=cnt2+(i+1)%>">
+    <% if controller_name == "design_works" && params[:unload].present? %>
+      <% if @dt.present? %>
+        <li class="dot3" title="大同">
+          <ul class="map-ring">
+            <% @dt.each_with_index do |dt,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
                 <a href="#">
-                    <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  <%- if dt.design.user.avatar %>
+                    <img src="<%=dt.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
                 </a>
+                <div>
+                  <a href="#"><%=dt.design.user.username%></a>
+                  <b><%=dt.design.user.area.name%></b>
+                  <i></i>
+                </div>
               </li>
             <% end %>
-          <% end %> 
-        </ul>
-      </li>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %> 
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot3 empty" title="大同"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @dt.present? %>
+        <li class="dot3" title="大同">
+          <ul class="map-ring">
+            <% @dt.each_with_index do |dt,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=dt.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot3 empty" title="大同"></li>
+      <% end %>
     <% else %>
-      <li class="dot3 empty" title="大同"></li>
+      <% if @dt.present? && @dt2.present? %>
+        <li class="dot3" title="大同">
+          <ul class="map-ring">
+            <% @dt.each_with_index do |dt,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=dt.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+            <% @dt2.each_with_index do |dt,i| %>
+              <% cnt2 = i+7 %>
+              <li class="token token<%=i+7%>">
+                <a href="#">
+                  <%- if dt.design.user.avatar %>
+                    <img src="<%=dt.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="#"><%=dt.design.user.username%></a>
+                  <b><%=dt.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %> 
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot3 empty" title="大同"></li>
+      <% end %>
     <% end %>
     <!--datong end -->
 
     <!--sjz-->
-    <% if @sjz.present? && @sjz2.present? %>
-      <li class="dot4" title="石家庄">
-        <ul class="map-lamp">
-          <% @sjz.each_with_index do |sjz,i| %>
-            <% cnt = i+1 %>
-            <li class="msg msg<%=i+1%> content">
-              <div>
-                <p><%=sjz.story.title%></p>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (6-cnt) != 0 %>
-            <%(6-cnt).times do |i| %>
-              <li class="msg msg<%=cnt+(i+1)%>"></li>
-            <% end %>
-          <% end %>
-          <% @sjz2.each_with_index do |sjz,i| %>
-            <% cnt2 = i+1 %>
-            <li class="token token<%=i+1%>">
-              <a href="#">
-                <%- if sjz.design.user.avatar %>
-                  <img src="<%=sjz.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
-                <%- else %>
-                  <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
-                <%- end %>
-              </a>
-              <div>
-                <a href="#"><%=sjz.design.user.username%></a>
-                <b><%=sjz.design.user.area.name%></b>
-                <i></i>
-              </div>
-            </li>
-          <% end %>
-          <% if (6-cnt2) != 0 %>
-            <%(6-cnt2).times do |i| %>
-              <li class="token token<%=cnt2+(i+1)%>">
+    <% if controller_name == "design_works" && params[:unload].present? %>
+      <% if @sjz.present? %>
+        <li class="dot4" title="石家庄">
+          <ul class="map-ring">
+            <% @sjz.each_with_index do |sjz,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
                 <a href="#">
-                    <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  <%- if sjz.design.user.avatar %>
+                    <img src="<%=sjz.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
                 </a>
+                <div>
+                  <a href="#"><%=sjz.design.user.username%></a>
+                  <b><%=sjz.design.user.area.name%></b>
+                  <i></i>
+                </div>
               </li>
             <% end %>
-          <% end %> 
-        </ul>
-      </li>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %> 
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot4 empty" title="石家庄"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @sjz.present? %>
+        <li class="dot4" title="石家庄">
+          <ul class="map-ring">
+            <% @sjz.each_with_index do |sjz,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=sjz.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot4 empty" title="石家庄"></li>
+      <% end %>
     <% else %>
-      <li class="dot4 empty" title="石家庄"></li>
+      <% if @sjz.present? && @sjz2.present? %>
+        <li class="dot4" title="石家庄">
+          <ul class="map-lamp">
+            <% @sjz.each_with_index do |sjz,i| %>
+              <% cnt = i+1 %>
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=sjz.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+            <% @sjz2.each_with_index do |sjz,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="#">
+                  <%- if sjz.design.user.avatar %>
+                    <img src="<%=sjz.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="#"><%=sjz.design.user.username%></a>
+                  <b><%=sjz.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6-cnt2) != 0 %>
+              <%(6-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %> 
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot4 empty" title="石家庄"></li>
+      <% end %>
     <% end %>
     <!--sjz end-->
 
     <!--ly-->
-    <% if @ly.present? && @ly2.present? %>
-      <li class="dot5" title="洛阳">
-        <ul class="map-ray">
-          <% @ly2.each_with_index do |ly,i| %>
-            <% cnt2 = i+1 %>
-            <li class="token token<%=i+1%>">
-              <a href="#">
-                <%- if ly.design.user.avatar %>
-                  <img src="<%=ly.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
-                <%- else %>
-                  <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
-                <%- end %>
-              </a>
+    <% if controller_name == "design_works" && params[:unload].present? %>
+      <% if @ly.present? %>
+        <li class="dot5" title="洛阳">
+          <ul class="map-ring">
+            <% @ly.each_with_index do |ly,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="#">
+                  <%- if ly.design.user.avatar %>
+                    <img src="<%=ly.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="#"><%=ly.design.user.username%></a>
+                  <b><%=ly.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %> 
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot5 empty" title="洛阳"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @ly.present? %>
+        <li class="dot5" title="洛阳">
+          <ul class="map-ring">
+            <% @ly.each_with_index do |ly,i| %>
+            <% cnt = i+1 %>
+            <li class="msg msg<%=i+1%> content">
               <div>
-                <a href="#"><%=ly.design.user.username%></a>
-                <b><%=ly.design.user.area.name%></b>
+                <p><%=ly.story.title%></p>
                 <i></i>
               </div>
             </li>
-          <% end %>
-          <% if (6-cnt2) != 0 %>
-            <%(6-cnt2).times do |i| %>
-              <li class="token token<%=cnt2+(i+1)%>">
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot5 empty" title="洛阳"></li>
+      <% end %>
+    <% else %>
+      <% if @ly.present? && @ly2.present? %>
+        <li class="dot5" title="洛阳">
+          <ul class="map-ray">
+            <% @ly2.each_with_index do |ly,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
                 <a href="#">
-                    <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  <%- if ly.design.user.avatar %>
+                    <img src="<%=ly.design.user.avatar.try(:url, :access_icon)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <%= image_tag "news/regimg_bg.jpg", :width => "36", :height => "36"%>
+                  <%- end %>
                 </a>
+                <div>
+                  <a href="#"><%=ly.design.user.username%></a>
+                  <b><%=ly.design.user.area.name%></b>
+                  <i></i>
+                </div>
               </li>
             <% end %>
-          <% end %> 
-          <% @ly.each_with_index do |ly,i| %>
-          <% cnt = i+1 %>
-          <li class="msg msg<%=i+1%> content">
-            <div>
-              <p><%=ly.story.title%></p>
-              <i></i>
-            </div>
-          </li>
-          <% end %>
-          <% if (6-cnt) != 0 %>
-            <%(6-cnt).times do |i| %>
-              <li class="msg msg<%=cnt+(i+1)%>"></li>
+            <% if (6-cnt2) != 0 %>
+              <%(6-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %> 
+            <% @ly.each_with_index do |ly,i| %>
+            <% cnt = i+1 %>
+            <li class="msg msg<%=i+1%> content">
+              <div>
+                <p><%=ly.story.title%></p>
+                <i></i>
+              </div>
+            </li>
             <% end %>
-          <% end %>
-        </ul>
-      </li>
-    <% else %>
-      <li class="dot5 empty" title="洛阳"></li>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="dot5 empty" title="洛阳"></li>
+      <% end %>
     <% end %>
     <!--ly end -->
     <li class="dot6 empty" title="承德"></li>
