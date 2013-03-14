@@ -25,11 +25,11 @@
         class: "top-nav4 #{'active' if controller_name == 'design_works' && action_name == 'index'}" %>
     </li>
     <li class="nav-bg">
-      <%= link_to '设计作品', mode.blank? ? opus_design_works_path : opus_design_works_path(mode: mode),
+      <%= link_to '设计作品', mode.blank? ? opus_design_works_path(unload: 1) : opus_design_works_path(mode: mode,unload: 1),
         class: "top-nav5 #{'active' if controller_name == 'design_works' && action_name == 'opus'}" %>
     </li>
     <li class="nav-bg">
-      <%= link_to '刷新感言和爱情故事', mode.blank? ? stories_path : stories_path(mode: mode),
+      <%= link_to '刷新感言和爱情故事', mode.blank? ? stories_path(unload: 1) : stories_path(mode: mode,unload: 1),
         class: "top-nav6 #{'active' if controller_name == 'stories'}" %>
     <li><a class="top-nav7">地域</a></li>
     <li><a href="#" class="top-nav4 active">全部</a></li>

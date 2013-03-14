@@ -135,7 +135,7 @@
 			<div class="img-info">
 				<h3 class="cr tc fb"><%= @story.title %></h3>
 				<p class="tc ft12 author">作者：<%= @story.user.display_name %></p>
-				<p><%= @story.content %></p>
+				<p style="word-wrap:break-word;"><%= @story.content %></p>
 				<p class="clear">
 					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr", id: "votes_count#{@story.id}" do %>
 						<%= image_tag("baicheng/content/btn_vote.png")%>

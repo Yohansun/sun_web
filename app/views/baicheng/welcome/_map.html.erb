@@ -568,7 +568,9 @@
   });  
   $(function(){
     var recent = Layer({
-      auto : true,      // 是否自动弹出，默认false
+      <%- unless params[:unload].present? %>
+        auto : true,      // 是否自动弹出，默认false
+      <%- end %>
       btn : $('.e-recent'), // 触发弹窗按钮
       box : $('.e-pop')   // 弹窗
     });
