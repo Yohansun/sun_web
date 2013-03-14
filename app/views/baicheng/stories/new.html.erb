@@ -224,7 +224,7 @@ $(function(){
 							<div class="clear none">
 								<% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
                   <label>
-                      <%=radio_button_tag "apartment",img_lib_cat.id, {},:id=>"apartment"%><%=img_lib_cat.title%>
+                      <%=radio_button_tag "apartment",img_lib_cat.id, false,:id=>"apartment"%><%=img_lib_cat.title%>
                   </label>
                 <% end %>
 							</div>

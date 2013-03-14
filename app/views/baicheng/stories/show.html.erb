@@ -49,10 +49,10 @@
 			</p>
 			<div class="img-info">
 				<div class="clear">
-					<%- if current_user && current_user.role_id == 1 %>
-						<a href="javascript:void(0);" class="fl btn-title">我来设计</a>
+					<%- if current_user && current_user.role_id != 3 %>
+						<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title">我来设计</a>
 					<%- elsif current_user %>
-						<a href="javascript:alert('只有设计师才能上传！');" class="fl btn-title">我来设计</a>
+						<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title">我来设计</a>
 					<%- else %>
 						<a href="javascript:show_login();" class="fl btn-title">我来设计</a>
 					<%- end %>
@@ -112,10 +112,10 @@
 							<h3 style="margin-top:30px;">房型设计上传（线上）</h3>
 							<p class="clear">
 								<span class="fl nomargin">家装公司/设计师点击</span>
-								<%- if current_user && current_user.role_id == 1 %>
-									<a href="javascript:void(0);" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<%- if current_user && current_user.role_id != 3 %>
+									<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title" style="padding:1px 0;">我来设计</a>
 								<%- elsif current_user %>
-									<a href="javascript:alert('只有设计师才能上传！');" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+									<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title" style="padding:1px 0;">我来设计</a>
 								<%- else %>
 									<a href="javascript:show_login();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
 								<%- end %>
