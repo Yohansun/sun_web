@@ -14,7 +14,7 @@
 				<div class="story-slider slider_bin">
 					<%- @story.story_images.each do |image| %>
 						<div>
-							<a href="#">
+							<a href="javascript:void(0);">
 								<%= image_tag(image.file.url(:slide), size: "680x353") %>
 							</a>
 						</div>

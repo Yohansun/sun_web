@@ -21,7 +21,7 @@
 				<div class="story-slider slider_bin">
 					<%- @design_images.each_with_index do |design_image,index| %>
 						<div>
-							<a href="#">
+							<a href="javascript:void(0);">
 								<%= image_tag(design_image.try(:file).url(:design_work_slide), size: "680x353") %>
 							</a>
 							<div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
@@ -52,7 +52,7 @@
 				</div>
 				<div class="show-group pa">
 					<ul class="clear">
-						<li><a href="#" class="icon-like"><%= @design.votes_count %></a></li>
+						<li><a href="javascript:void(0);" class="icon-like"><%= @design.votes_count %></a></li>
 						<li><a href="<%= design_work_path(@design) %>#tips" class="icon-view"><%= @design.comments_count %></a></li>
 					</ul>
 				</div>
