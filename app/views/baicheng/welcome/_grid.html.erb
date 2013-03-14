@@ -16,7 +16,7 @@
          <% if current_user -%>
             <a href="<%=new_story_path%>" title="发表故事 征集设计" class="e-publish">发表故事 征集设计</a>
          <% else -%>
-           <%= link_to_function "发表故事 征集设计", "show_login()", :class=>"e-upload" %>
+           <%= link_to_function "发表故事 征集设计", "show_login()", :class=>"e-publish" %>
          <% end %>
       </div><!-- refresh-logo -->
       <ul class="grid-ul">
