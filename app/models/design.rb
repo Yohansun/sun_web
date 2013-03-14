@@ -74,7 +74,9 @@ class Design < ActiveRecord::Base
   end
 
   def sync_baicheng_event
-    BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
+    if self.story_id.present?
+      BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
+    end
   end
 
   def clear_baicheng_event
