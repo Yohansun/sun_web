@@ -3,6 +3,17 @@ class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
     @event_data = BaichengEvent.by_type(Story.name).order('created_at DESC').page(params[:page]).per(28)
+    @xx = BaichengEvent.story_type(825)
+    @xx2 = BaichengEvent.design_type(825)
+    @lf = BaichengEvent.story_type(647)
+    @lf2 = BaichengEvent.design_type(647)
+    @dt = BaichengEvent.story_type(1046)
+    @dt2 = BaichengEvent.design_type(1046)
+    @sjz = BaichengEvent.story_type(661)
+    @sjz2 = BaichengEvent.design_type(661)
+    @ly = BaichengEvent.story_type(855)
+    @ly2 = BaichengEvent.design_type(855)
+
   end
 
   def new

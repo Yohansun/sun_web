@@ -20,12 +20,12 @@ class Baicheng::DesignWorksController < ApplicationController
       @sjz2 = BaichengEvent.design_type(661)
       @ly = BaichengEvent.story_type(855)
       @ly2 = BaichengEvent.design_type(855)
-      @cd = BaichengEvent.story_type(746)
-      @cd2 = BaichengEvent.design_type(746)
-      @ty = BaichengEvent.story_type(1000)
-      @ty2 = BaichengEvent.design_type(1000)
-      @ay = BaichengEvent.story_type(873)
-      @ay2 = BaichengEvent.design_type(873)
+      # @cd = BaichengEvent.story_type(746)
+      # @cd2 = BaichengEvent.design_type(746)
+      # @ty = BaichengEvent.story_type(1000)
+      # @ty2 = BaichengEvent.design_type(1000)
+      # @ay = BaichengEvent.story_type(873)
+      # @ay2 = BaichengEvent.design_type(873)
 
     end
   end
