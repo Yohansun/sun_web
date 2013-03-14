@@ -14,7 +14,7 @@ class Story < ActiveRecord::Base
   end
 
   def location
-    if self.area_id
+    if self.area_id && self.area_id != 0
       area = Area.find(area_id)
       if area.parent.name == area.parent.parent.name
         area.parent.name + " " + area.name
