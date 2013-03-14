@@ -23,7 +23,7 @@
 				<div class="show-group pa">
 					<ul class="clear">
 						<li>
-							<%= link_to "#{@story.votes_count}", votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "icon-like votes_count#{@story.id}" %>
+							<%= link_to "#{@story.votes_count}", votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "icon-like",id: "votes_count#{@story.id}" %>
 						</li>
 					</ul>
 				</div>
@@ -137,7 +137,7 @@
 				<p class="tc ft12 author">作者：<%= @story.user.display_name %></p>
 				<p><%= @story.content %></p>
 				<p class="clear">
-					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr" do %>
+					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr", id: "votes_count#{@story.id}" do %>
 						<%= image_tag("baicheng/content/btn_vote.png")%>
 					<%- end %>
 				</p>

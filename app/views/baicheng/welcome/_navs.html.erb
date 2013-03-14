@@ -4,12 +4,21 @@
 -%>
 <div class="header">
   <ul class="nav center clear">
-    <li>
-      <%= link_to '地图', path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
-    </li>
-    <li>
-      <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
-    </li>
+    <%- if (controller_name == 'design_works' && %w(new show).include?(action_name)) || (controller_name == 'stories' && %w(new show).include?(action_name)) %>
+      <li>
+        <%= link_to '地图', design_works_path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+      <li>
+        <%= link_to '网格', "#{design_works_path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+    <%- else %>
+      <li>
+        <%= link_to '地图', path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+      <li>
+        <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+    <%- end %>
     <li class="nav-bg"><a href="javascript:void(0)" class="top-nav3">分类</a></li>
     <li class="nav-bg">
       <%= link_to '全部', mode.blank? ? design_works_path : design_works_path(mode: mode),

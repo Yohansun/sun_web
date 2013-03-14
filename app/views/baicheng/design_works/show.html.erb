@@ -53,7 +53,7 @@
 				<div class="show-group pa">
 					<ul class="clear">
 						<li>
-							<%= link_to "#{@design.votes_count}", votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => :post, :class => "icon-like votes_count#{@design.id}" %>
+							<%= link_to "#{@design.votes_count}", votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => :post, :class => "icon-like",id: "votes_count#{@design.id}" %>
 						</li>
 						<li><a href="<%= design_work_path(@design) %>#tips" class="icon-view"><%= @design.comments_count %></a></li>
 					</ul>
@@ -127,14 +127,19 @@
 							<h3 style="margin:5px 0">免费咨询（线上）</h3>
 							<div class="clear">
 								<span class="fl nomargin">大众用户点击</span>
-								<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title" style="padding:1px 0;">免费咨询</a>
-								<span class="fl nomargin">后，</span>
+								<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title">免费咨询</a>
+								<span class="fl nomargin">后，</span><br>
 								<span class="fl nomargin">与家装公司/设计师进行免费咨询。</span>
 							</div>
-							<h3 style="margin-top:15px;">签约下单（线下）</h3>
+							<h3 style="margin-top:10px;">签约下单（线下）</h3>
 							<p>大众用户与家装公司/设计师咨询后，成功签约。</p>
-							<h3 style="margin-top:16px;">上传合同（线上）</h3>
-							<p>家装公司/设计师可进入<a href="<%= user_path(@design.user_id) %>" style="color:#333;" target="_blank">个人主页</a>，<br>点击<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a></p>
+							<h3 style="margin-top:5px;">上传合同（线上）</h3>
+							<p>
+								家装公司/设计师可进入
+								<a href="<%= user_path(@design.user_id) %>" style="color:#333;" target="_blank">个人主页</a>，<br>点击
+								<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+								<a href="#" class="cr fb">上传合同</a>
+							</p>
 						</div>
 					</div>
 				</div>
