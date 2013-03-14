@@ -1,8 +1,8 @@
 @charset "utf-8";
 
 body{background: url(<%= asset_path 'baicheng/map/map-bg.jpg' %>) no-repeat top center;}
-.map{background: url(<%= asset_path 'baicheng/map/map.jpg' %>) no-repeat;height: 900px;padding: 0;margin-bottom: 69px;}
-.map .refresh-logo{background: none;position: absolute;left: 0;bottom: 100px;z-index: 1;}
+.map{background: url(<%= asset_path 'baicheng/map/map.jpg' %>) no-repeat;height: 1000px;padding: 0;margin-bottom: 69px;}
+.map .refresh-logo{background: none;position: fixed;left: 50%;bottom: 50px;z-index: 1;margin: 0 0 0 -540px;}
 #map{width: 1080px;height: 900px;position: relative;left: 0;top: 0;font-size: 12px;}
 #map li{position: absolute;cursor: pointer;}
 #map > li{background: url(<%= asset_path 'baicheng/map/map-dot.jpg' %>) no-repeat;width: 9px;height: 9px;}
