@@ -39,8 +39,12 @@
                 </div>
                 <h3><%= link_to truncate(item.eventable.title, length: 15), design_work_path(item.eventable)%></h3>
                 <p>
-                  <span><%= link_to item.eventable.try(:style), design_work_path(item.eventable) %></span>
-                  <%= link_to truncate(item.eventable.user.try(:name_of_company) ||
+                  <span>
+                    <%- if item.eventable.style.present? %>
+                      <%= link_to item.eventable.try(:style), design_work_path(item.eventable) %>
+                    <%- end %>
+                  </span>
+                  <%= link_to truncate(item.eventable.user.try(:display_name) ||
                       item.eventable.user.name, length: 10), design_work_path(item.eventable) %>
                 </p>
               </div>
