@@ -2,8 +2,7 @@
   <%= stylesheet_link_tag '2013base', '2013upload'%>
 <% end -%>
 <div class="wrapper">
-  <% if Time.now.to_date > "2013-03-18".to_date %>
-    <div class="upload_success">
+  <div class="upload_success">
     <div class="upload2013_2">
         <div class="tc"><img src="<%= asset_path 'upload_true.jpg'%>"></div>
         <p class="tc color_red">您的大作也可同步参与iColor正在的以下活动，期待您的参与</p>
@@ -38,16 +37,4 @@
       </fieldset>
     <% end %>
   </div>
-  <% else %>
-    <div class="upload_success">
-      <div class="upload2013_2">
-          <div class="tc"><img src="<%= asset_path 'upload_true.jpg'%>"></div>
-          <p class="tc">请去<a class="color_red" href="<%= user_path(current_user) %>">个人资料</a>页填写或核实您的邮寄地址，以便我们能顺利寄送您获得的小礼物。</p>
-          <p class="tc color_red">同步参与iColor正火热进行的以下活动...</p>
-      </div>
-      <br>
-      <p class="tc"><!-- 系统将在 <span id="jumpTo" class="cont_num color_red">3</span> 秒后自动进入我的个人主页<br> --><a href="<%= user_path(current_user) %>"><img src="<%= asset_path 'success/btn.jpg'%>"></a></p>
-    </div>
-
-  <% end %>
 </div><!--ends-->

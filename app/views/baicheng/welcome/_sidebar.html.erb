@@ -13,7 +13,8 @@
 		  <% else %>
 		  		<a href="<%=new_user_design_path(current_user)%>" title="上传作品 Upload" class="e-upload">上传作品 Upload</a>
 		  <% end %>
-
+		<% else %>
+			<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" title="上传作品 Upload" class="e-upload">上传作品 Upload</a>
 		<% end %>
 	<% else -%>
 	   <%= link_to_function "上传作品 Upload", "show_login()", :class=>"e-upload" %>

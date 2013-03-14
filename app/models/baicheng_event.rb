@@ -1,5 +1,5 @@
 class BaichengEvent < ActiveRecord::Base
-  attr_accessible :eventable_id, :eventable_type
+  attr_accessible :eventable_id, :eventable_type, :area_id
 
   belongs_to :eventable, :polymorphic => true
 
@@ -17,6 +17,10 @@ class BaichengEvent < ActiveRecord::Base
 
   def self.find_by_design(design_id)
     BaichengEvent.where(["eventable_id = ? and eventable_type = ?", design_id, Design.name])
+  end
+
+  def self.map
+
   end
 
 end

@@ -21,7 +21,7 @@
               <p>活动时间：2013年3月至2013年6月</p>
           </div>
       </div>
-      <% if Time.now.to_date > "2013-03-18".to_date %>
+      <%# if Time.now.to_date > "2013-03-18".to_date %>
         <% if @design.story_id.present? %>
           <div class="upload2013_2 clear noborder"><!-- 最后一个活动添加class noborder  -->
             <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg2.jpg"%> ">
@@ -43,7 +43,7 @@
                 </fieldset>
             </div>
           </div>
-        <% end %>
+        <%# end %>
       <% end %>
       <fieldset class="tc">
           <input type="hidden" name="design_id" value="<%=params[:design_id] if params[:design_id]%>">
