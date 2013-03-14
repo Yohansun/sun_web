@@ -6,18 +6,89 @@ body{background: url(<%= asset_path 'baicheng/map/map-bg.jpg' %>) no-repeat top 
 #map{width: 1080px;height: 900px;position: relative;left: 0;top: 0;font-size: 12px;}
 #map li{position: absolute;cursor: pointer;}
 #map > li{background: url(<%= asset_path 'baicheng/map/map-dot.jpg' %>) no-repeat;width: 9px;height: 9px;}
-.dot1{left: 291px;top: 291px;}
-.dot2{left: 354px;top: 441px;}
-.dot3{left: 429px;top: 430px;}
-.dot4{left: 483px;top: 564px;}
-.dot5{left: 531px;top: 436px;}
-.dot6{left: 622px;top: 678px;}
-.dot7{left: 665px;top: 356px;}
-.dot8{left: 682px;top: 539px;}
-.dot9{left: 724px;top: 419px;}
-.dot10{left: 729px;top: 623px;}
-.dot11{left: 825px;top: 555px;}
-.dot12{left: 856px;top: 306px;}
+#map > li.empty{background-image: url(<%= asset_path 'baicheng/map/map-dot.png'%>);}
+.dot1{left: 707px;top: 450px;}
+.dot2{left: 755px;top: 362px;}
+.dot3{left: 694px;top: 353px;}
+.dot4{left: 733px;top: 390px;}
+.dot5{left: 687px;top: 468px;}
+.dot6{left: 799px;top: 307px;}
+.dot7{left: 703px;top: 394px;}
+.dot8{left: 715px;top: 414px;}
+.dot9{left: 805px;top: 643px;}
+.dot10{left: 675px;top: 442px;}
+.dot11{left: 733px;top: 313px;}
+.dot12{left: 838px;top: 406px;}
+.dot13{left: 569px;top: 532px;}
+.dot14{left: 590px;top: 342px;}
+.dot15{left: 624px;top: 461px;}
+.dot16{left: 689px;top: 332px;}
+.dot17{left: 607px;top: 683px;}
+.dot18{left: 788px;top: 460px;}
+.dot19{left: 574px;top: 571px;}
+.dot20{left: 764px;top: 354px;}
+.dot21{left: 875px;top: 314px;}
+.dot22{left: 725px;top: 466px;}
+.dot23{left: 813px;top: 425px;}
+.dot24{left: 549px;top: 560px;}
+.dot25{left: 610px;top: 475px;}
+.dot26{left: 926px;top: 227px;}
+.dot27{left: 854px;top: 568px;}
+.dot28{left: 747px;top: 370px;}
+.dot29{left: 611px;top: 527px;}
+.dot30{left: 684px;top: 528px;}
+.dot31{left: 848px;top: 536px;}
+.dot32{left: 751px;top: 597px;}
+.dot33{left: 708px;top: 429px;}
+.dot34{left: 771px;top: 418px;}
+.dot35{left: 684px;top: 547px;}
+.dot36{left: 762px;top: 427px;}
+.dot37{left: 813px;top: 572px;}
+.dot38{left: 826px;top: 328px;}
+.dot39{left: 657px;top: 453px;}
+.dot40{left: 800px;top: 666px;}
+.dot41{left: 771px;top: 442px;}
+.dot42{left: 860px;top: 200px;}
+.dot43{left: 546px;top: 576px;}
+.dot44{left: 777px;top: 510px;}
+.dot45{left: 802px;top: 581px;}
+.dot46{left: 593px;top: 492px;}
+.dot47{left: 829px;top: 513px;}
+.dot48{left: 834px;top: 531px;}
+.dot49{left: 731px;top: 533px;}
+.dot50{left: 824px;top: 557px;}
+.dot51{left: 603px;top: 381px;}
+.dot52{left: 834px;top: 586px;}
+.dot53{left: 832px;top: 621px;}
+.dot54{left: 779px;top: 688px;}
+.dot55{left: 704px;top: 607px;}
+.dot56{left: 639px;top: 789px;}
+.dot57{left: 799px;top: 487px;}
+.dot58{left: 779px;top: 522px;}
+.dot59{left: 825px;top: 523px;}
+.dot60{left: 685px;top: 497px;}
+.dot61{left: 696px;top: 678px;}
+.dot62{left: 839px;top: 367px;}
+.dot63{left: 832px;top: 547px;}
+.dot64{left: 810px;top: 548px;}
+.dot65{left: 866px;top: 344px;}
+.dot66{left: 903px;top: 269px;}
+.dot67{left: 575px;top: 515px;}
+.dot68{left: 940px;top: 276px;}
+.dot69{left: 610px;top: 551px;}
+.dot70{left: 493px;top: 644px;}
+.dot71{left: 610px;top: 602px;}
+.dot72{left: 609px;top: 667px;}
+.dot73{left: 612px;top: 586px;}
+.dot74{left: 752px;top: 491px;}
+.dot75{left: 755px;top: 478px;}
+.dot76{left: 702px;top: 464px;}
+.dot77{left: 567px;top: 431px;}
+.dot78{left: 775px;top: 369px;}
+.dot79{left: 812px;top: 438px;}
+.dot80{left: 313px;top: 270px;}
+.dot81{left: 648px;top: 465px;}
+
 
 #map li ul{position: relative;display: none\9;z-index: 2;
 	-webkit-transform:scale(0);
@@ -29,7 +100,7 @@ body{background: url(<%= asset_path 'baicheng/map/map-bg.jpg' %>) no-repeat top 
 	transform:scale(0);
 	transition:all 0.5s;
 }
-#map li:hover ul,#map li ul:hover{display: block\9;
+#map ul.ul-active{display: block\9;
 	-webkit-transform:scale(1);
 	-moz-transform:scale(1);
 	-o-transform:scale(1);

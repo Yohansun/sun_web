@@ -1,6 +1,6 @@
 
 <% content_for :tail do -%>
-  <%= javascript_include_tag "/location.js", "jquery.uploadify.js" %>
+  <%= javascript_include_tag "jquery.uploadify.js","/location.js", "LinkageSelect.js" %>
   <script type="text/javascript">
   <%- session_key = Rails.application.config.session_options[:key] -%>
 
@@ -165,15 +165,15 @@ $(function(){
 			<!-- <form action="" method="" class="refresh-form ft12"> -->
 				<div class="refresh-section">
 					<div class="refresh-control">
-						<label>主题</label>
+						<label>主题<b>*</b></label>
 						<div class="form-article">
-							<%= f.text_field :title, class: "form-text1",:placeholder=>"爱，让我们在一起" -%>
+							<%= f.text_field :title, class: "form-text1",:placeholder=>"爱，让我们在一起", :maxlength=> "20" -%>
 						</div>
 					</div>
 					<div class="refresh-control">
-						<label style="margin-top:0;">正文</label>
+						<label style="margin-top:0;">正文<b>*</b></label>
 						<div class="form-article">
-							 <%= f.text_area :content, "data-count"=>"200" -%>
+							 <%= f.text_area :content, "data-total"=>"200" -%>
 							<span class="helper-text fl">还可以输入<b>200</b>字</span>
 							<span class="helper-text fr">（字数不少于200字）</span>
 						</div>
