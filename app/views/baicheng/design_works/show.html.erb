@@ -172,12 +172,12 @@
 				<%- end %>
 				<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
 					<h5 class="fb">
-						<span class="fr nomargin">0/140</span>
+						<span class="fr nomargin"><b id="word-tip">0</b>/140</span>
 						评论(<%= @design.comments_count %>)
 					</h5>
           <%= f.hidden_field :commentable_id, value: @design.id %>
           <%= f.hidden_field :commentable_type, value: 'Design' %>
-          <%= f.text_area :content %>
+          <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140' %>
           <button class="submit_btn">提交评论</button>
         <%- end %>
 				<div class="pr">

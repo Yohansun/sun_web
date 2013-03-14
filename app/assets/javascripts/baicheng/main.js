@@ -53,5 +53,18 @@ $(function(){
 
 	$('.nav').children('li').hover(function(){
 		$(this).children('.subnav').toggle()
-	})
+	});
+	areaTip('#refresh-textarea','#word-tip');
+ 		function areaTip(element,node){
+ 			$(element).bind('keydown',function(){
+ 				var $this = $(this),
+ 					$node = $(node),
+ 					total = $this.data('total'),
+ 					num = $this.val().length;
+ 				if(num>140){$node.css('color','#f00');}
+ 				else{$node.css('color','#8A8987');}
+ 				$node.text(num);
+ 				$this.val($this.val().slice(0, total));
+ 			});
+ 		}
 });
