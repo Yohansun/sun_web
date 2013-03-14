@@ -97,7 +97,9 @@
       </div>
     </div>
     <div class="weekstart_detail">
-      <div class="big_image">
+      <div class="big_image pr">
+        <a href="<%= "/color_designs/#{@design_prev}" %>" class="link_prev_img"></a>
+        <a href="<%= "/color_designs/#{@design_next}" %>" class="link_next_img"></a>
         <% if @design.show_preview_img -%>
             <%= image_tag @design.show_preview_img.url(:slide), :alt => "装修设计欣赏-#{@design.design_name}" %>
         <% end -%>

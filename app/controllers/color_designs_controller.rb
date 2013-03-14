@@ -22,6 +22,14 @@ class ColorDesignsController < ApplicationController
     @tags = ColorDesign.tag_counts_on(:tags)
     @comments = @design.comments.page params[:page]
     @code = ColorCode.find_by_code(@design.recommend_color1)
+
+    @design_next = ColorDesign.where("id < ?", params[:id]).last if @design
+    @design_next = @design_next.id if @design_next
+    @design_next = @design.id if @design_next.blank?
+
+    @design_prev = ColorDesign.where("id > ?", params[:id]).last if @design
+    @design_prev = @design_prev.id if @design_prev
+    @design_prev = @design.id if @design_prev.blank?
   end
 
   def get_color_designs
