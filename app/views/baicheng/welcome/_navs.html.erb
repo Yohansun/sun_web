@@ -21,7 +21,7 @@
     <%- end %>
     <li class="nav-bg"><a class="top-nav3">分类</a></li>
     <li class="nav-bg">
-      <%= link_to '全部', mode.blank? ? design_works_path : design_works_path(mode: mode),
+      <%= link_to '全部', mode.blank? ? design_works_path(unload: 1) : design_works_path(mode: mode),
         class: "top-nav4 #{'active' if controller_name == 'design_works' && action_name == 'index'}" %>
     </li>
     <li class="nav-bg">
@@ -32,7 +32,7 @@
       <%= link_to '刷新感言和爱情故事', mode.blank? ? stories_path(unload: 1) : stories_path(mode: mode,unload: 1),
         class: "top-nav6 #{'active' if controller_name == 'stories'}" %>
     <li><a class="top-nav7">地域</a></li>
-    <li><a href="#" class="top-nav4 active">全部</a></li>
+    <li><a href="<%= design_works_path(mode: 'grid') %>" class="top-nav4 active">全部</a></li>
     <li>
       <form action="/baicheng/design_works" method="get">
         <input type="hidden" name='mode' value='grid'>

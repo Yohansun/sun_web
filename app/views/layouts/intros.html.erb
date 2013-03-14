@@ -29,8 +29,7 @@
             <%=link_to '评选细则', intro_path(:id => 'detail'), class: "#{'active' if  params[:id] == 'detail'}" %>
 		</li>
 		<li>
-            <%#=link_to '评委名单', intro_path(:id => 'name'), class: "#{'active' if  params[:id] == 'name'}" %>
-            <a href="javascript:void(0);">评委名单</a>
+            <%=link_to '评委名单', intro_path(:id => 'name'), class: "#{'active' if  params[:id] == 'name'}" %>
 		</li>
 		<li>
             <%=link_to '活动时间', intro_path(:id => 'time'), class: "#{'active' if  params[:id] == 'time'}" %>
