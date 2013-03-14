@@ -25,13 +25,10 @@
     <li><a href="#" class="top-nav7">地域</a></li>
     <li><a href="#" class="top-nav4 active">全部</a></li>
     <li>
-      <form action="" method="">
-        <select>
-          <option>省/直辖市</option>
-        </select>
-        <select>
-          <option>城市</option>
-        </select>
+      <form action="/baicheng/design_works" method="get">
+        <input type="hidden" name='mode' value='grid'>
+        <select id="province" class="area_1" ><option>省/直辖市</option></select>
+        <select id="city" class="area_2" name='search_area'><option>城市</option></select>
         <input type="submit" class="nav_submit" value="确定">
       </form>
     </li>
