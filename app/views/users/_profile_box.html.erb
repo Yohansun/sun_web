@@ -175,9 +175,11 @@ $(function(){
     <%- end %>
     <li class="<%= "sort_show" if controller_name == 'inspirations' %>"><%= link_to "灵感秀", user_inspirations_path(@user), :class => 'sort_show_a' %></li>
    <!--  <li class="<%#= "sort_show" if controller_name == 'messages' %>"><%#= link_to "留言板", user_messages_path(@user), :class => 'sort_show_a' %></li> -->
+    <!--
     <%- unless @user.role_name == "user" %>
       <li class="<%= "sort_show" if controller_name == 'events' %>"><%= link_to "活动公告", user_events_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
+    -->
     <%- if current_user && current_user == @user %>
       <li class="<%= "sort_show" if controller_name == 'collects' %>"><%= link_to "我的收藏", user_collects_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
@@ -190,9 +192,9 @@ $(function(){
     <%- when "designs" %>
       <%=link_to "我要上传", new_user_design_path(current_user), class: "launch_act" %>
     <% when "events" %>
-      <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
-      <% when "asks" %>
-      <%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>
+      <!--<%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>-->
+    <% when "asks" %>
+      <!--<%=link_to "发起新活动", new_user_event_path(current_user), class: "launch_act" %>-->
     <%- end -%>
   <%- end %>
 </div>
