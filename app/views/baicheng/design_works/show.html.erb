@@ -52,7 +52,9 @@
 				</div>
 				<div class="show-group pa">
 					<ul class="clear">
-						<li><a href="javascript:void(0);" class="icon-like"><%= @design.votes_count %></a></li>
+						<li>
+							<%= link_to "#{@design.votes_count}", votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => :post, :class => "icon-like votes_count#{@design.id}" %>
+						</li>
 						<li><a href="<%= design_work_path(@design) %>#tips" class="icon-view"><%= @design.comments_count %></a></li>
 					</ul>
 				</div>
