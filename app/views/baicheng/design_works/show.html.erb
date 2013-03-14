@@ -149,7 +149,12 @@
 					<span>设计师：</span><em><%= @design.user.display_name %></em>
 				</p>
 				<p class="workinfo clear">
-					<span>设计风格：</span><em>	<%= @design.style %></em>
+					<span>设计风格：</span>
+					<em>	
+						<% @style_ids.each do |style| %>
+							<%= ImageLibraryCategory.find(style).title %>
+						<% end %>
+					</em>
 				</p>
 				<p class="workinfo clear">
 					<span>楼盘名称：</span><em><%= @design.property_name %></em>

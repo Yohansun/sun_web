@@ -50,5 +50,9 @@ class Baicheng::DesignWorksController < ApplicationController
   		@image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
   	end
   	@comments = @design.comments.page(params[:page]).per(4)
+
+    ilc = ImageLibraryCategory.where(parent_id: 34).map(&:id)
+    design_tags = DesignTags.where(image_library_category_id: ilc,design_id: @design.id) if @design
+    @style_ids = design_tags.map(&:image_library_category_id)
   end
 end
