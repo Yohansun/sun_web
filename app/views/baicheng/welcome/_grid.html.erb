@@ -37,7 +37,7 @@
                 <div class="grid-img">
                   <%- if item.eventable.cover_img %>
                     <%= link_to design_work_path(item.eventable) do %>
-                      <%= image_tag(item.eventable.cover_img.file.url(:grid_list), size: '204x145') %>
+                      <%= image_tag(item.eventable.cover_img.file.url(:grid_list)) %>
                     <%- end %>
                   <%- end %>
                 </div>
