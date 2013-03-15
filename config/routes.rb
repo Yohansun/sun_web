@@ -363,7 +363,7 @@ Icolor::Application.routes.draw do
   end
 
   scope "/baicheng", :module =>"baicheng" do
-    root  to: 'welcome#index'
+    #root  to: 'welcome#index'
     resources :design_works do
       collection do
         get :opus
