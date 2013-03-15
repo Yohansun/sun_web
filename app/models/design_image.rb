@@ -32,7 +32,8 @@ class DesignImage < ActiveRecord::Base
         :design_work_slide =>"680x353#",
         :slide => "900>",
         :slide_thumb => "205x138#",
-        :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#"},
+        :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
+        :grid_list => "204x145"},
     :convert_options => {
       :slide => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
       :design_image_big => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
