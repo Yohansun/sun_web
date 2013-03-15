@@ -71,10 +71,6 @@ var Layer = (function($, document){
 			this.btn && this.btn.length && this.btn.click($.proxy(this.layin, this));
 			this.close.click($.proxy(this.layout, this));
 			if(flag) return;
-			this.layer.click($.proxy(this.layout, this));
-			$(document).keydown(function(e){
-				e.which === 27 && that.layer.is(':visible') && that.layout();
-			});
 			ie6 && $(window).resize($.proxy(this.fix, this));
 			flag = true;
 		}
