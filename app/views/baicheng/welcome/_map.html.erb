@@ -42,7 +42,6 @@
                     <img src="<%=xx.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
                   <%- else %>
                     <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
-                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
                   <%- end %>
                 </a>
                 <div>
@@ -95,7 +94,7 @@
       <% if @xx.present? && @xx2.present? %>
         <li class="dot1" title="新乡">
           <ul class="map-ring">
-            
+
             <% @xx.each_with_index do |xx,i| %>
               <% cnt = i+1 %>
               <a href="<%=story_path(xx.story)%>">
@@ -292,7 +291,7 @@
                   </a>
                 </li>
               <% end %>
-            <% end %> 
+            <% end %>
           </ul>
         </li>
       <% else %>
@@ -368,7 +367,7 @@
                   </a>
                 </li>
               <% end %>
-            <% end %> 
+            <% end %>
           </ul>
         </li>
       <% else %>
@@ -407,7 +406,7 @@
                   </a>
                 </li>
               <% end %>
-            <% end %> 
+            <% end %>
           </ul>
         </li>
       <% else %>
@@ -483,7 +482,7 @@
                   </a>
                 </li>
               <% end %>
-            <% end %> 
+            <% end %>
           </ul>
         </li>
       <% else %>
@@ -522,7 +521,7 @@
                   </a>
                 </li>
               <% end %>
-            <% end %> 
+            <% end %>
           </ul>
         </li>
       <% else %>
@@ -582,7 +581,7 @@
                   </a>
                 </li>
               <% end %>
-            <% end %> 
+            <% end %>
             <% @ly.each_with_index do |ly,i| %>
             <% cnt = i+1 %>
             <a href="<%=story_path(ly.story)%>">
@@ -702,11 +701,11 @@
 
 <%- content_for :tail do %>
   <script type="text/javascript">
-  $('#map').on('click', function(e){  
+  $('#map').on('click', function(e){
     $(this).find('.ul-active').removeClass('ul-active');
     var $target = $(e.target);
-    $target.is('li') && $target.find('ul').addClass('ul-active'); 
-  });  
+    $target.is('li') && $target.find('ul').addClass('ul-active');
+  });
   $(function(){
     var recent = Layer({
       <%- unless params[:unload].present? %>
