@@ -701,11 +701,6 @@
 
 <%- content_for :tail do %>
   <script type="text/javascript">
-  $('#map').on('click', function(e){
-    $(this).find('.ul-active').removeClass('ul-active');
-    var $target = $(e.target);
-    $target.is('li') && $target.find('ul').addClass('ul-active');
-  });
   $(function(){
     var recent = Layer({
       <%- unless params[:unload].present? %>
