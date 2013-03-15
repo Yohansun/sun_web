@@ -22,7 +22,7 @@
 					<%- @design_images.each_with_index do |design_image,index| %>
 						<div>
 							<a href="javascript:void(0);">
-								<%= image_tag(design_image.try(:file).url(:design_work_slide), size: "680x353") %>
+								<%= image_tag(design_image.try(:file).url(:design_work_slide)) %>
 							</a>
 							<div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
 								<img src="<%= asset_path 'baicheng/content/colors_icon_tit.jpg' %>" style="float:left; margin:15px 5px 0 10px;" />
