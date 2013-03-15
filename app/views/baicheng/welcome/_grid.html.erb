@@ -45,11 +45,11 @@
                 <p>
                   <span>
                     <%- if item.eventable.style.present? %>
-                      <%= link_to item.eventable.try(:style), design_work_path(item.eventable) %>
+                      <%= link_to item.eventable.try(:style), design_work_path(item.eventable),style: "color:#959595;" %>
                     <%- end %>
                   </span>
-                  <%= link_to truncate(item.eventable.user.try(:display_name) ||
-                      item.eventable.user.name, length: 10), design_work_path(item.eventable) %>
+                  <%= link_to truncate(item.eventable.user.try(:display_name) || item.eventable.user.name, length: 10), design_work_path(item.eventable),style: "color:#959595;" %>
+                  &nbsp;&nbsp;(<%= item.eventable.try(:city_name) if item.eventable %>)
                 </p>
               </div>
             </li>

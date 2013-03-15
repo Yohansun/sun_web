@@ -31,8 +31,15 @@ class Design < ActiveRecord::Base
     end
   end
 
+  def city_name
+    if self.area_id && self.area_id != 0
+      area = Area.find(area_id)
+      return area.parent.name
+    end
+  end
+
   def location
-    if self.area_id
+    if self.area_id && self.area_id != 0
       area = Area.find(area_id)
       if area.parent.name == area.parent.parent.name
         area.parent.name + " " + area.name
