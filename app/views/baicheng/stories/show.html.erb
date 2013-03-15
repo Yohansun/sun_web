@@ -15,7 +15,7 @@
 					<%- @story.story_images.each do |image| %>
 						<div>
 							<a href="javascript:void(0);">
-								<%= image_tag(image.file.url(:design_work_slide)) %>
+								<%= image_tag(image.file.url(:slide)) %>
 							</a>
 						</div>
 					<%- end %>
