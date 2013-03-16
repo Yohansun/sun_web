@@ -34,6 +34,7 @@ class Baicheng::DesignWorksController < ApplicationController
                   else
                     BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
                   end
+    @all_style_ids = ImageLibraryCategory.where(parent_id: 34).map(&:id)
     @search_province = params[:search_province]
     @search_area = params[:search_area]
   end

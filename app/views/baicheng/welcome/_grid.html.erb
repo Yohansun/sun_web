@@ -44,8 +44,12 @@
                 <h3><%= link_to truncate(item.eventable.title, length: 15), design_work_path(item.eventable)%></h3>
                 <p>
                   <span>
-                    <%- if item.eventable.style.present? %>
-                      <%= link_to item.eventable.try(:style), design_work_path(item.eventable),style: "color:#959595;" %>
+                    <%- design = item.eventable %>
+                    <%- design_tags = DesignTags.where(image_library_category_id: @all_style_ids,design_id: design.id) %>
+                    <%- style_id = design_tags.map(&:image_library_category_id).first %>
+                    <%- style = ImageLibraryCategory.find_by_id(style_id).try(:title) %>
+                    <%- if style.present? %>
+                      <%= link_to style, design_work_path(item.eventable),style: "color:#959595;" %>
                     <%- end %>
                   </span>
                   <%= link_to truncate(item.eventable.user.try(:display_name) || item.eventable.user.name, length: 10), design_work_path(item.eventable),style: "color:#959595;" %>

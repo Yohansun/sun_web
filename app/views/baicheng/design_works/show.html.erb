@@ -154,7 +154,7 @@
 					<span>设计风格：</span>
 					<em>	
 						<% @style_ids.each do |style| %>
-							<%= ImageLibraryCategory.find(style).title %>
+							<%= ImageLibraryCategory.find_by_id(style).try(:title) %>
 						<% end %>
 					</em>
 				</p>
