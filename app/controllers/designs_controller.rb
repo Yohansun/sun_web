@@ -80,7 +80,11 @@ class DesignsController < ApplicationController
         @design_tags = DesignTags.where(design_id: params[:id]).map &:image_library_category_id
       end
     else
-      redirect_to '/'
+      if params[:baicheng_active]
+        redirect_to "/baicheng/design_works/#{params[:id]}"
+      else
+        redirect_to '/'
+      end
     end
   end
 
