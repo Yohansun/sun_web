@@ -80,11 +80,7 @@ class DesignsController < ApplicationController
         @design_tags = DesignTags.where(design_id: params[:id]).map &:image_library_category_id
       end
     else
-      if params[:baicheng_active]
-        redirect_to "/baicheng/design_works/#{params[:id]}"
-      else
-        redirect_to '/'
-      end
+      redirect_to '/'
     end
   end
 
@@ -303,7 +299,11 @@ class DesignsController < ApplicationController
     @design.property_name = params[:property_name] if params[:property_name].present?
     @design.baicheng_active = true if params[:baicheng_active]
     @design.save
-    redirect_to user_path(current_user)
+    if params[:baicheng_active]
+        redirect_to "/baicheng/design_works/#{params[:design_id]}"
+    else
+        redirect_to user_path(current_user)
+    end
   end
 
   def destroy

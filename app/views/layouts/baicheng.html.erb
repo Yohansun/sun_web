@@ -54,8 +54,10 @@
 	        data  : data
 	      }
 	      var sel = new LinkageSelect(options);
-	      sel.bind('.area_1');
-	      sel.bind('.area_2');
+	      var province_id = "<%= @search_province %>";
+	      var area_id = "<%= @search_area %>";
+	      sel.bind('.area_1', province_id);
+	      sel.bind('.area_2', area_id);
 	    }
 
 	    $('.close-btn').click(function(){

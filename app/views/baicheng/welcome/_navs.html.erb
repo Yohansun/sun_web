@@ -43,20 +43,4 @@
     </li>
   </ul>
 </div>
-<script>
-  var search_province = "<%= @search_province %>";
-  var search_area = "<%= @search_area %>";
-  window.onload = initSel;
-  function initSel()
-  {
-    var oSel = document.getElementById('province');
-    oSel.value = search_province;
-    $(oSel).change(function(){
-    }).change();
-    setTimeout(function(){
-      var v_area = document.getElementById('city');
-        v_area.value = search_area;
 
-    },50)
-  }
-</script>
