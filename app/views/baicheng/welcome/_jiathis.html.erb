@@ -1,5 +1,9 @@
 <!-- JiaThis Button BEGIN -->
+<%- if params[:mode].blank? && controller_name == 'design_works' && action_name == 'index' %>
+	<span class="jiathis_style jia_map">
+<%- else %>
   <span class="jiathis_style jia_custom">
+<%- end %>
     <span class="jiathis_txt">分享 </span>
     <a class="jiathis_button_renren"></a>
     <a class="jiathis_button_douban" title="分享到豆瓣网"></a>

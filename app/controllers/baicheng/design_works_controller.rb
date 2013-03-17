@@ -40,6 +40,7 @@ class Baicheng::DesignWorksController < ApplicationController
     @dt = BaichengEvent.baicheng_map_design(1046)
     @sjz = BaichengEvent.baicheng_map_design(661)
     @ly = BaichengEvent.baicheng_map_design(855)
+    @all_style_ids = ImageLibraryCategory.where(parent_id: 34).map(&:id)
   end
 
   def new

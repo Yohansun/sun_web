@@ -10,13 +10,13 @@
 </head>
 <body>
 <div class="header subpage">
-	<ul class="nav center clear">
+	<ul class="nav center sub clear">
 		<li class="logo"><a href="http://www.icolor.com.cn"><img src="<%= asset_path 'nav/logo.gif' %>" /></a></li>
 		<!-- <li>
 			<%#=link_to '活动规则', intro_path(:id => 'index'), class: "#{'active' if  params[:id] == 'index'}" %>
 		</li> -->
 		<li>
-			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  params[:id] == 'content'}" %>
+			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  (params[:id] == 'content' || params[:id] == 'content_user')}" %>
 			<ul class="subnav none" style="display: none;">
 				<li><a href="<%= intro_path(id: 'content') %>">家装公司/设计师</a></li>
 				<li class="noborder"><a href="<%= intro_path(id: 'content_user')%>">大众用户</a></li>

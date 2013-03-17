@@ -1,28 +1,30 @@
 <div class="wrapper rules actives">
-	<h3><img src="<%= asset_path 'baicheng/rules/title2_2.png' %>"></h3>
-	<h4 class="step1">注册有奖</h4>
-	<ul class="pr">
-		<li>• <strong>活动时间：</strong>2013年3月至2013年10月</li>
-		<li>• <strong>参与内容：</strong><br>所有新注册的普通大众用户，每周均有机会获得Luck Draw的幸运奖。</li>
-		<li class="clear active_publish">
-			<% if current_user -%>
-			  	<a href="<%=new_story_path%>" class="fl"></a>
-			<% else -%>
-			   <a class="fl" href="javascript:show_login();"></a>
-			<% end %>
-		</li>
-	</ul>
-	<h4 class="step2">为爱刷新暨新房设计案例征集</h4>
-	<ul class="pr">
-		<li>• <strong>活动主题：</strong>以<strong class="cr fb">“因爱之名，刷新生活”</strong>为主旨，讲述当代年轻人在成长中经历或见证的，关于<strong class="cr fb">家 • 刷新 • 爱情</strong>的故事，阐述家的刷新对于人生成<br>长或爱情经历的重要性，传递对生活及家的美好向往。</li>
-		<li style="margin-top:30px;">• <strong>活动时间：</strong>2013年3月至2013年8月</li>
-		<li>• <strong>参与内容：</strong><br>上传故事和房型图：上传自己的爱情故事及所需刷新的家的房型图或<br>  照片，面向设计师征集设计，即可参与iColor刷新大奖的评比，更有<br>机会获得 iColor提供的<strong class="cr fb">希腊爱琴海双人蜜月游</strong>。<br>投票：对其他装修爱情故事进行投票。</li>
-		<li style="position:absolute;bottom:0px;right:0;"><img src="<%= asset_path 'baicheng/rules/imgbg2.jpg' %>"></li>
-	</ul>
-	<h4 class="step3">设计案例征集评选</h4>
-	<ul class="noborder">
-		<li>• <strong>活动时间：</strong>2013年3月至2013年10月</li>
-		<li>• <strong>活动主题：</strong>设计师上传设计作品，进行案例征集评选。</li>
-		<li>• <strong>参与内容：</strong><br>投票：对所有设计师上传的设计案例进行投票，便有机会参与每周的投票幸运奖Luck Draw。<br>咨询：咨询心仪的家装公司/设计师，3天内可获免费专业解答。每个城市前10名咨询成功并【成功下订】的大众用户，更可获得咨询下订奖。</li>
-	</ul>
+	<div class="rules-bin">  
+		<h3><img src="<%= asset_path 'baicheng/rules/title2_2.png' %>"></h3>
+		<h4 class="step1">注册有奖</h4>
+		<ul class="pr">
+			<li>• <strong>活动时间：</strong>2013年3月至2013年10月</li>
+			<li>• <strong>参与内容：</strong><br>所有新注册的普通大众用户，每周均有机会获得Luck Draw的幸运奖。</li>
+			<li class="clear active_publish">
+				<% if current_user -%>
+				  	<a href="<%=new_story_path%>" class="fl"></a>
+				<% else -%>
+				   <a class="fl" href="javascript:show_login();"></a>
+				<% end %>
+			</li>
+		</ul>
+		<h4 class="step2">为爱刷新暨新房设计案例征集</h4>
+		<ul class="pr">
+			<li>• <strong>活动主题：</strong>以<strong class="cr fb">“因爱之名，刷新生活”</strong>为主旨，讲述当代年轻人在成长中经历或见证的，关于<strong class="cr fb">家 • 刷新 • 爱情</strong>的故事，阐述家的刷新对于人生成<br>长或爱情经历的重要性，传递对生活及家的美好向往。</li>
+			<li style="margin-top:30px;">• <strong>活动时间：</strong>2013年3月至2013年8月</li>
+			<li>• <strong>参与内容：</strong><br>上传故事和房型图：上传自己的爱情故事及所需刷新的家的房型图或<br>  照片，面向设计师征集设计，即可参与iColor刷新大奖的评比，更有<br>机会获得 iColor提供的<strong class="cr fb">希腊爱琴海双人蜜月游</strong>。<br>投票：对其他装修爱情故事进行投票。</li>
+			<li style="position:absolute;bottom:0px;right:0;"><img src="<%= asset_path 'baicheng/rules/imgbg2.jpg' %>"></li>
+		</ul>
+		<h4 class="step3">设计案例征集评选</h4>
+		<ul class="noborder">
+			<li>• <strong>活动时间：</strong>2013年3月至2013年10月</li>
+			<li>• <strong>活动主题：</strong>设计师上传设计作品，进行案例征集评选。</li>
+			<li>• <strong>参与内容：</strong><br>投票：对所有设计师上传的设计案例进行投票，便有机会参与每周的投票幸运奖Luck Draw。<br>咨询：咨询心仪的家装公司/设计师，3天内可获免费专业解答。每个城市前10名咨询成功并【成功下订】的大众用户，更可获得咨询下订奖。</li>
+		</ul>
+	</div>
 </div><!-- wrapper -->

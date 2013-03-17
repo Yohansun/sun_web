@@ -9,6 +9,7 @@
 <%= yield :head %>
 </head>
 <body>
+ 	<%= yield :body_head %>
 	<%= yield %>
 	<div class="footer">
 		<ul class="center clear">
@@ -45,6 +46,7 @@
 	</div><!-- footer -->
 	<div id="layer"></div>
 	<%= render partial: 'baicheng/welcome/login' %>
+	<%= yield :body_tail %>
 	<%= yield :tail %>
 	<%= javascript_include_tag "/location.js" %>
 	<script type="text/javascript">

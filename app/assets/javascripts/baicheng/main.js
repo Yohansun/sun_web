@@ -72,4 +72,50 @@ $(function(){
         }
       });
     }
+
+  // footer auto fix
+  (function($, win){
+    
+    function fix(){
+      win = $(win);
+    var footer = $('.footer'),
+      jia = $('.jia_custom'),
+      mapJia = $('.jia_map');
+      var winH = win.height();
+      
+      if(winH <= 600){
+        footer.css({
+          'position' : 'fixed',
+          'top' : 'auto',
+          'bottom' : 0
+        });
+        jia.css({
+          'position' : 'fixed',
+          'top' : 'auto',
+          'bottom' : '77px'
+        });
+        mapJia.css({
+          'top' : 'auto',
+          'bottom' : '77px'
+        });
+      } else {
+        footer.css({
+          'position' : 'absolute',
+          'top' : '531px',
+          'bottom' : 'auto'
+        });
+        jia.css({
+          'position' : 'absolute',
+          'top' : '505px',
+          'bottom' : 'auto'
+        });
+        mapJia.css({
+          'top' : '505px',
+          'bottom' : 'auto'
+        });
+      }
+    }
+    fix();
+    win.resize(fix);
+  }(jQuery, window));
 });

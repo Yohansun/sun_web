@@ -1,5 +1,4 @@
 <div class="wrapper map pr">
-  <%#= render partial: 'baicheng/welcome/sidebar' %>
   <%= render partial: 'baicheng/welcome/jiathis' %>
   <div class="refresh-logo">
     <%= image_tag('baicheng/refresh/leftlogo.png') %>
@@ -697,6 +696,16 @@
 
 <%- content_for :head do %>
   <%= stylesheet_link_tag "baicheng/map" %>
+<%- end %>
+
+<%- content_for :body_head do %>
+  <div class="map-wrapper">
+    <div class="map-bin">
+<%- end %>
+
+<%- content_for :body_tail do %>
+    </div><!-- map-bin -->
+  </div><!-- map-wrapper -->
 <%- end %>
 
 <%- content_for :tail do %>
