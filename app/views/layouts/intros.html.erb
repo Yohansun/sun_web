@@ -12,9 +12,9 @@
 <div class="header subpage">
 	<ul class="nav center clear">
 		<li class="logo"><a href="http://www.icolor.com.cn"><img src="<%= asset_path 'nav/logo.gif' %>" /></a></li>
-		<li>
-			<%=link_to '活动规则', intro_path(:id => 'index'), class: "#{'active' if  params[:id] == 'index'}" %>
-		</li>
+		<!-- <li>
+			<%#=link_to '活动规则', intro_path(:id => 'index'), class: "#{'active' if  params[:id] == 'index'}" %>
+		</li> -->
 		<li>
 			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  params[:id] == 'content'}" %>
 			<ul class="subnav none" style="display: none;">
@@ -56,7 +56,7 @@
 					class: "bot-nav4 #{'active' if controller_name =~ /design_works|stories/ }" %>
 			</li>
 			<li>
-				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'),
+				<%= link_to '活动规则及奖项设置', intro_path(id: 'content'),
 					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
 			</li>
 			<li class="pr">
