@@ -1,5 +1,5 @@
 <!-- JiaThis Button BEGIN -->
-<%- if params[:mode].blank? && controller_name == 'design_works' && action_name == 'index' %>
+<%- if params[:mode].blank? && %w(design_works stories).include?(controller_name) && %w(opus index).include?(action_name) %>
 	<span class="jiathis_style jia_map">
 <%- else %>
   <span class="jiathis_style jia_custom">
