@@ -21,7 +21,7 @@ class Design < ActiveRecord::Base
   paginates_per 8
 
   after_create :update_user_design_code_count
-  after_create :sync_baicheng_event
+  after_update :sync_baicheng_event
   before_destroy :clear_baicheng_event
 
   #更新用户上传作品数色号（权重）。片区快查用
@@ -82,9 +82,9 @@ class Design < ActiveRecord::Base
   end
 
   def sync_baicheng_event
-    #if self.story_id.present?
+    if self.baicheng_active.present? && self.baicheng_active == true
       BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
-    #end
+    end
   end
 
   def clear_baicheng_event

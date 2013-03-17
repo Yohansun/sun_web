@@ -297,7 +297,11 @@ class DesignsController < ApplicationController
     @design.future_star_active = true if params[:future_star_active]
     @design.speech = params[:design][:speech] if params[:design][:speech]
     @design.property_name = params[:property_name] if params[:property_name].present?
-    @design.baicheng_active = true if params[:baicheng_active]
+    if params[:baicheng_active]
+      @design.baicheng_active = true
+    else
+      @design.baicheng_active = false
+    end
     @design.save
     if params[:baicheng_active]
         redirect_to "/baicheng/design_works/#{params[:design_id]}"

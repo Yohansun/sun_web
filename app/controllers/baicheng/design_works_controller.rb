@@ -28,12 +28,6 @@ class Baicheng::DesignWorksController < ApplicationController
       # @ay2 = BaichengEvent.design_type(873)
 
     end
-
-    @event_data = if params[:search_area].present?
-                    BaichengEvent.search_by_area(params[:search_area]).page(params[:page]).per(28)
-                  else
-                    BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
-                  end
     @all_style_ids = ImageLibraryCategory.where(parent_id: 34).map(&:id)
     @search_province = params[:search_province]
     @search_area = params[:search_area]
