@@ -63,6 +63,34 @@ class LandsController < ApplicationController
 							"souhu_zhuangxiudaxue_shouye",
 							"80018_wangyouyangbanjian_neiyeyouce"]
 
+			urls_baicheng = ["baicheng_soufun_tuliao",
+							"baicheng_soufun_news",
+							"baicheng_soufun_bbs",
+							"baicheng_soufun_beijing",
+							"baicheng_soufun_shanghai",
+							"baicheng_soufun_guangzhou",
+							"baicheng_soufun_shenzhen",
+							"baicheng_soufun_tianjing",
+							"baicheng_soufun_chongqing",
+							"baicheng_soufun_chengdu",
+							"baicheng_soufun_wuhan",
+							"baicheng_soufun_hangzhou",
+							"baicheng_soufun_shijiazhuang",
+							"baicheng_soufun_xiaoqu",
+							"baicheng_souhu_homepage",
+							"baicheng_souhu_homepage_rectangle",
+							"baicheng_souhu_designer_right",
+							"baicheng_souhu_tuliao_left",
+							"baicheng_souhu_news_left",
+							"baicheng_souhu_news_first_link",
+							"baicheng_hejia_home_three",
+							"baicheng_hejia_painting_channel",
+							"baicheng_hejia_jushang",
+							"baicheng_hejia_tuwenzixun",
+							"baicheng_zhuangxiu_colors",
+							"baicheng_zhuangxiu_formats",
+							"baicheng_zhuangxiu_designers"]
+
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
 			elsif urls2.include? params[:source]
@@ -73,6 +101,8 @@ class LandsController < ApplicationController
 				redirect_to gift_list_path
 			elsif urls_design_images.include? params[:source]
 				redirect_to design_images_path
+			elsif urls_baicheng.include? params[:source]
+				redirect_to '/baicheng'
 			else
 				redirect_to root_path
 			end
