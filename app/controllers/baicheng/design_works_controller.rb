@@ -12,9 +12,12 @@ class Baicheng::DesignWorksController < ApplicationController
         @title = "刷新百城设计师作品展示-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
         @description = "立邦icolor刷新百城设计案例征集评选活作品展示。全国设计师作品分布。"
     end
- 
     if params[:mode]
-      @event_data = if params[:search_area].present?
+      @event_data = if params[:search_area] == "other"
+                      baicheng_location = Rails.cache.read(:baicheng_location)
+                      without_area_ids = baicheng_location["area"][params[:search_province].to_i].split(",")
+                      BaichengEvent.search_areas(params[:search_province],without_area_ids).page(params[:page]).per(28)
+                    elsif params[:search_area].present?
                       BaichengEvent.search_by_area(params[:search_area]).page(params[:page]).per(28)
                     else
                       BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)

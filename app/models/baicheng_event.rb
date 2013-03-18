@@ -5,6 +5,7 @@ class BaichengEvent < ActiveRecord::Base
   belongs_to :user
   belongs_to :story, class_name: 'Story', :foreign_key => 'eventable_id'
   belongs_to :design, class_name: 'Design', :foreign_key => 'eventable_id'
+  belongs_to :area
 
   scope :by_type, lambda {|type| where(eventable_type: type) }
 
@@ -16,6 +17,12 @@ class BaichengEvent < ActiveRecord::Base
     area = Area.find(area_id)
     areas = area.self_and_descendants
     BaichengEvent.scoped.where(["area_id in (?)", areas.map(&:id)])
+ end
+ 
+  def self.search_areas(province_id,area_ids)
+    areas = Area.find(province_id).children.select {|area| !area_ids.include?(area.id)}
+    parse_area_ids = areas.collect{|area| area.children.map(&:id)}.flatten
+    BaichengEvent.where(["area_id in (?)",parse_area_ids])
   end
 
   def self.find_by_design(design_id)
