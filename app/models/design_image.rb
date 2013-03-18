@@ -56,7 +56,7 @@ class DesignImage < ActiveRecord::Base
 
   # 科普兰德(1)-每周之星(2 后台设置)-大师作品(3)-sina(4)-色彩搭配(5)-自行上传(100)
   def set_sort
-    self.sorts = 100
+    self.sorts = 100 if self.sorts.blank?
     self.sorts = 1 if source == 'kepulande'
     self.sorts = 3 if self.imageable_type == 'MasterDesign'
     self.sorts = 4 if source == 'sina'

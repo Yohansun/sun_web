@@ -71,7 +71,11 @@ class DesignImagesController < ApplicationController
     end
 
     unless params[:imageable_type].blank?
-      @images = @images.where("imageable_type = ?", params[:imageable_type])
+      if params[:imageable_type] == 'WeekStart'
+        @images = @images.where("sorts = 2")
+      else
+        @images = @images.where("imageable_type = ?", params[:imageable_type])
+      end
     end
 
     unless params[:pinyin].blank?
