@@ -204,6 +204,7 @@ Icolor::Application.routes.draw do
   resources :users do
     match "update_suc" => "users#update_suc"
     match '/designs/autocomplete_recommend_color' => 'designs#autocomplete_recommend_color'
+    match '/designs/autocomplete' => 'designs#autocomplete'
 
     #社区绑定
     match "community" => "users#community"

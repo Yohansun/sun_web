@@ -334,6 +334,12 @@ class DesignsController < ApplicationController
     render :text => colors.join("\n")
   end
 
+  def autocomplete
+      params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
+      colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
+      render json: colors.map { |c| c.code }
+  end
+
   private
   def find_design
     if current_user.present?
