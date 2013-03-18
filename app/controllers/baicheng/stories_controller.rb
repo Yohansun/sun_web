@@ -25,6 +25,9 @@ class Baicheng::StoriesController < ApplicationController
   end
 
   def new
+    @title = "上传icolor“刷新百城”设计案例征集评选设计作品-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+    @description = "上传立邦icolor刷新百城设计案例征集评选活动设计师作品。"
+    
     if current_user
       @story = Story.new
       @story_image = StoryImage.new
