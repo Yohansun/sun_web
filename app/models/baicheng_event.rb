@@ -20,7 +20,10 @@ class BaichengEvent < ActiveRecord::Base
  end
  
   def self.search_areas(province_id,area_ids)
+<<<<<<< HEAD
     area_ids = area_ids.map(&:to_i)
+=======
+>>>>>>> 解决冲突
     areas = Area.find(province_id).children.select {|area| !area_ids.include?(area.id)}
     parse_area_ids = areas.collect{|area| area.children.map(&:id)}.flatten
     BaichengEvent.where(["area_id in (?)",parse_area_ids])
