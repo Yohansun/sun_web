@@ -1,3 +1,4 @@
+#encoding: utf-8
 class BaichengEvent < ActiveRecord::Base
   attr_accessible :eventable_id, :eventable_type, :area_id
 
@@ -15,6 +16,8 @@ class BaichengEvent < ActiveRecord::Base
 
   def self.search_by_area(area_id)
     area = Area.find(area_id)
+    # 省级市下拉列表中出现义乌，义乌本来是属于金华的。 处理地级市
+    return BaichengEvent.where(:area_id => area_id) if area.children.blank?
     areas = area.self_and_descendants
     BaichengEvent.scoped.where(["area_id in (?)", areas.map(&:id)])
  end
