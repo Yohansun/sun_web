@@ -3,7 +3,6 @@ class Baicheng::DesignWorksController < ApplicationController
 	layout 'baicheng'
 
   def index
-
     case params[:mode]
       when "grid"
         @title = "刷新百城作品展示-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
