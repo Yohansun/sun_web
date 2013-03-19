@@ -89,7 +89,6 @@ function refresh_search(params) {
   var pinyin = getParameterByName("pinyin");
   var ranking_list = getParameterByName("ranking_list");
 
-
   if (params.imageable_type != null) imageable_type = params.imageable_type;
   if (params.search != null) search = params.search;
   if (params.tags != null) tags = params.tags;
@@ -97,6 +96,9 @@ function refresh_search(params) {
   if (params.area_id != null) area_id = params.area_id;
   if (params.pinyin != null) pinyin = params.pinyin;
   if (params.ranking_list != null) ranking_list = params.ranking_list;
+
+  if (params.imageable_type != undefined) search = "";
+  if (params.search != undefined) imageable_type = "";
 
   window.location = "/design_images?imageable_type="+imageable_type+"&pinyin="+pinyin+"&search="+search+"&tags="+tags+"&all_tags="+all_tags+"&area_id="+area_id+"&ranking_list="+ranking_list;
 }
