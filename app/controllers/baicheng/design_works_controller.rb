@@ -17,7 +17,7 @@ class Baicheng::DesignWorksController < ApplicationController
                       without_area_ids = baicheng_location["area"][params[:search_province].to_i].split(",")
                       BaichengEvent.search_areas(params[:search_province],without_area_ids).page(params[:page]).per(28)
                     elsif params[:search_area].present?
-                      BaichengEvent.search_by_area(params[:search_area]).page(params[:page]).per(28)
+                      BaichengEvent.search_by_area(params[:search_area].to_i).page(params[:page]).per(28)
                     else
                       BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
                     end
