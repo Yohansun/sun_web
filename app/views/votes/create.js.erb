@@ -1,6 +1,8 @@
 <%- if controller_name = "design_images" %>
-  $("#votes_count<%= params[:voteable_id]%>").html(parseInt($("#votes_count<%= params[:voteable_id] %>").html()) + 1);
+  var vote = parseInt($("#votes_count<%= params[:voteable_id] %>").html()) + 1
+  $("#votes_count<%= params[:voteable_id]%>").html(vote);
 <%- else %>
-  $("#votes_count<%= params[:voteable_id]%>").html(parseInt($("#votes_count<%= params[:voteable_id] %>").html()) + 1);
+  var vote = parseInt($("#votes_count<%= params[:voteable_id] %>").html()) + 1
+  $("#votes_count<%= params[:voteable_id]%>").html(vote);
 <%- end %>
 alert("投票成功!");
