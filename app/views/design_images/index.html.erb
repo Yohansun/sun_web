@@ -119,7 +119,7 @@
 				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
 				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
 				<a href="javascript:search_imageable_type('Design')" class="<%="active_condition" if params[:imageable_type] == 'Design'%>">作品展示</a>
-				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>				
+				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -301,7 +301,7 @@
 							<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
 						</a>
 						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
-					   <span class="imgbase_like votes_count<%= image.id %>"><%= image.try(:votes_count) %></span>
+					   <span class="imgbase_like votes_count<%= image.id %>" id="votes_count<%= image.id %>"><%= image.try(:votes_count) %></span>
 						<%- end %>
 						<%- unless image.imageable_type == "MasterDesign" -%>
 							<h4><a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank"><%= truncate(image.design.try(:title), length: 15) %> <span>(查看该套作品)</span></a></h4>

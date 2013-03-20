@@ -1,5 +1,4 @@
 <div class="wrapper map pr">
-  <%#= render partial: 'baicheng/welcome/sidebar' %>
   <%= render partial: 'baicheng/welcome/jiathis' %>
   <div class="refresh-logo">
     <%= image_tag('baicheng/refresh/leftlogo.png') %>
@@ -27,444 +26,584 @@
 
 
 <ul id="map">
-    <li class="dot1" title="新乡">
-      <ul class="map-ring">
-        <li class="token token1">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+    <% cnt = 0 %>
+    <% cnt2 = 0 %>
+    <!--xinliang-->
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
+      <% if @xx.present? %>
+        <li class="dot1" title="新乡">
+          <ul class="map-ring">
+            <% @xx.each_with_index do |xx,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(xx.design)%>">
+                  <%- if xx.design.user.avatar %>
+                    <img src="<%=xx.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(xx.design)%>"><%=xx.design.user.username%></a>
+                  <b><%=xx.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token2">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot1 empty" title="新乡"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present? %>
+      <% if @xx.present? %>
+        <li class="dot1" title="新乡">
+          <ul class="map-ring">
+            <% @xx.each_with_index do |xx,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(xx.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=xx.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (12 - cnt) != 0 %>
+              <% (12 - cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token3">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot1 empty" title="新乡"></li>
+      <% end %>
+    <% else %>
+      <% if @xx.present? && @xx2.present? %>
+        <li class="dot1" title="新乡">
+          <ul class="map-ring">
+
+            <% @xx.each_with_index do |xx,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(xx.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=xx.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (6 - cnt) != 0 %>
+              <% (6 - cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+
+            <% @xx2.each_with_index do |xx,i| %>
+              <% cnt2 = i+7 %>
+              <li class="token token<%=i+7%>">
+                <a href="<%=design_work_path(xx.design)%>">
+                  <%- if xx.design.user.avatar %>
+                    <img src="<%=xx.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(xx.design)%>"><%=xx.design.user.username%></a>
+                  <b><%=xx.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token4">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot1 empty" title="新乡"></li>
+      <% end %>
+    <% end %>
+    <!--xinliang end-->
+
+    <!--langfang-->
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
+      <% if @lf.present? %>
+        <li class="dot2" title="廊坊">
+          <ul class="map-ring">
+            <% @lf.each_with_index do |lf,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(lf.design)%>">
+                  <%- if lf.design.user.avatar %>
+                    <img src="<%=lf.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(lf.design)%>"><%=lf.design.user.username%></a>
+                  <b><%=lf.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token5">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot2 empty" title="廊坊"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @lf.present? %>
+        <li class="dot2" title="廊坊">
+          <ul class="map-ring">
+            <% @lf.each_with_index do |lf,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(lf.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=lf.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token6">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot2 empty" title="廊坊"></li>
+      <% end %>
+    <% else %>
+      <% if @lf.present? && @lf2.present? %>
+        <li class="dot2" title="廊坊">
+          <ul class="map-ring">
+            <% @lf.each_with_index do |lf,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(lf.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=lf.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+            <% @lf2.each_with_index do |lf,i| %>
+              <% cnt2 = i+7 %>
+              <li class="token token<%=i+7%>">
+                <a href="<%=design_work_path(lf.design)%>">
+                  <%- if lf.design.user.avatar %>
+                    <img src="<%=lf.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(lf.design)%>"><%=lf.design.user.username%></a>
+                  <b><%=lf.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token7">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot2 empty" title="廊坊"></li>
+      <% end %>
+    <% end %>
+    <!--langfang end-->
+
+    <!--datong-->
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
+      <% if @dt.present? %>
+        <li class="dot3" title="大同">
+          <ul class="map-ring">
+            <% @dt.each_with_index do |dt,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(dt.design)%>">
+                  <%- if dt.design.user.avatar %>
+                    <img src="<%=dt.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(dt.design)%>"><%=dt.design.user.username%></a>
+                  <b><%=dt.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token8">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot3 empty" title="大同"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @dt.present? %>
+        <li class="dot3" title="大同">
+          <ul class="map-ring">
+            <% @dt.each_with_index do |dt,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(dt.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=dt.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token9">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot3 empty" title="大同"></li>
+      <% end %>
+    <% else %>
+      <% if @dt.present? && @dt2.present? %>
+        <li class="dot3" title="大同">
+          <ul class="map-ring">
+            <% @dt.each_with_index do |dt,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(dt.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=dt.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+            <% @dt2.each_with_index do |dt,i| %>
+              <% cnt2 = i+7 %>
+              <li class="token token<%=i+7%>">
+                <a href="<%=design_work_path(dt.design)%>">
+                  <%- if dt.design.user.avatar %>
+                    <img src="<%=dt.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(dt.design)%>"><%=dt.design.user.username%></a>
+                  <b><%=dt.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token10">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot3 empty" title="大同"></li>
+      <% end %>
+    <% end %>
+    <!--datong end -->
+
+    <!--sjz-->
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
+      <% if @sjz.present? %>
+        <li class="dot4" title="石家庄">
+          <ul class="map-ring">
+            <% @sjz.each_with_index do |sjz,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(sjz.design)%>">
+                  <%- if sjz.design.user.avatar %>
+                    <img src="<%=sjz.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(sjz.design)%>"><%=sjz.design.user.username%></a>
+                  <b><%=sjz.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token11">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot4 empty" title="石家庄"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @sjz.present? %>
+        <li class="dot4" title="石家庄">
+          <ul class="map-ring">
+            <% @sjz.each_with_index do |sjz,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(sjz.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=sjz.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="token token12">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot4 empty" title="石家庄"></li>
+      <% end %>
+    <% else %>
+      <% if @sjz.present? && @sjz2.present? %>
+        <li class="dot4" title="石家庄">
+          <ul class="map-lamp">
+            <% @sjz.each_with_index do |sjz,i| %>
+              <% cnt = i+1 %>
+              <a href="<%=story_path(sjz.story)%>">
+                <li class="msg msg<%=i+1%> content">
+                  <div>
+                    <p><%=sjz.story.title%></p>
+                    <i></i>
+                  </div>
+                </li>
+              </a>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+            <% @sjz2.each_with_index do |sjz,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(sjz.design)%>">
+                  <%- if sjz.design.user.avatar %>
+                    <img src="<%=sjz.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(sjz.design)%>"><%=sjz.design.user.username%></a>
+                  <b><%=sjz.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6-cnt2) != 0 %>
+              <%(6-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-      </ul>
-    </li>
-    <li class="dot2" title="廊坊">
-      <ul class="map-ring">
-        <li class="msg msg1">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot4 empty" title="石家庄"></li>
+      <% end %>
+    <% end %>
+    <!--sjz end-->
+
+    <!--ly-->
+    <% if controller_name == "design_works" && action_name == "opus" && params[:unload].present? %>
+      <% if @ly.present? %>
+        <li class="dot5" title="洛阳">
+          <ul class="map-ring">
+            <% @ly.each_with_index do |ly,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(ly.design)%>">
+                  <%- if ly.design.user.avatar %>
+                    <img src="<%=ly.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(ly.design)%>"><%=ly.design.user.username%></a>
+                  <b><%=ly.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (12-cnt2) != 0 %>
+              <%(12-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="msg msg2">
-          <div>
-            <p>爱让我们在一起爱</p>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot5 empty" title="洛阳"></li>
+      <% end %>
+    <% elsif controller_name == "stories" && params[:unload].present?%>
+      <% if @ly.present? %>
+        <li class="dot5" title="洛阳">
+          <ul class="map-ring">
+            <% @ly.each_with_index do |ly,i| %>
+            <% cnt = i+1 %>
+            <a href="<%=story_path(ly.story)%>">
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=ly.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            </a>
+            <% end %>
+            <% if (12-cnt) != 0 %>
+              <%(12-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="msg msg3">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
+      <% else %>
+        <li class="dot5 empty" title="洛阳"></li>
+      <% end %>
+    <% else %>
+      <% if @ly.present? && @ly2.present? %>
+        <li class="dot5" title="洛阳">
+          <ul class="map-ray">
+            <% @ly2.each_with_index do |ly,i| %>
+              <% cnt2 = i+1 %>
+              <li class="token token<%=i+1%>">
+                <a href="<%=design_work_path(ly.design)%>">
+                  <%- if ly.design.user.avatar %>
+                    <img src="<%=ly.design.user.avatar.try(:file).try(:url, :round)%>" height = "36" width = "36" />
+                  <%- else %>
+                    <img src="<%=asset_path 'user_top.png'%>" height = "36" width = "36" />
+                  <%- end %>
+                </a>
+                <div>
+                  <a href="<%=design_work_path(ly.design)%>"><%=ly.design.user.username%></a>
+                  <b><%=ly.design.user.area.name%></b>
+                  <i></i>
+                </div>
+              </li>
+            <% end %>
+            <% if (6-cnt2) != 0 %>
+              <%(6-cnt2).times do |i| %>
+                <li class="token token<%=cnt2+(i+1)%>">
+                  <a href="#">
+                      <img src="<%=asset_path 'baicheng/map/img.png'%>" height = "36" width = "36" />
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+            <% @ly.each_with_index do |ly,i| %>
+            <% cnt = i+1 %>
+            <a href="<%=story_path(ly.story)%>">
+              <li class="msg msg<%=i+1%> content">
+                <div>
+                  <p><%=ly.story.title%></p>
+                  <i></i>
+                </div>
+              </li>
+            </a>
+            <% end %>
+            <% if (6-cnt) != 0 %>
+              <%(6-cnt).times do |i| %>
+                <li class="msg msg<%=cnt+(i+1)%>"></li>
+              <% end %>
+            <% end %>
+          </ul>
         </li>
-        <li class="msg msg4">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg5">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg6">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg7">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg8">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg9">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg10">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg11">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg12">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="dot3" title="大同">
-      <ul class="map-ring">
-        <li class="msg msg1">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg2">
-          <div>
-            <p>爱让我们在一起爱</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg3">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg4">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg5">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg6">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg7">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token8">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token9">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token10">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token11">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token12">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="dot4" title="石家庄">
-      <ul class="map-lamp">
-        <li class="msg msg1">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg2">
-          <div>
-            <p>爱让我们在一起爱</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg3">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg4">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg5">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg6">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token1">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token2">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token3">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token4">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token5">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token6">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="dot5" title="洛阳">
-      <ul class="map-ray">
-        <li class="token token1">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token2">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token3">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token4">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token5">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="token token6">
-          <a href="#"><img src="images/map/img.png" /></a>
-          <div>
-            <a href="#">佘大师</a>
-            <b>杭州</b>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg1">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg2">
-          <div>
-            <p>爱让我们在一起爱</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg3">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg4">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg5">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-        <li class="msg msg6">
-          <div>
-            <p>爱让我们在一起</p>
-            <i></i>
-          </div>
-        </li>
-      </ul>
-    </li>
+      <% else %>
+        <li class="dot5 empty" title="洛阳"></li>
+      <% end %>
+    <% end %>
+    <!--ly end -->
     <li class="dot6 empty" title="承德"></li>
     <li class="dot7 empty" title="太原"></li>
     <li class="dot8 empty" title="安阳"></li>
@@ -559,16 +698,23 @@
   <%= stylesheet_link_tag "baicheng/map" %>
 <%- end %>
 
+<%- content_for :body_head do %>
+  <div class="map-wrapper">
+    <div class="map-bin">
+<%- end %>
+
+<%- content_for :body_tail do %>
+    </div><!-- map-bin -->
+  </div><!-- map-wrapper -->
+<%- end %>
+
 <%- content_for :tail do %>
   <script type="text/javascript">
-  $('#map').on('click', function(e){  
-    $(this).find('.ul-active').removeClass('ul-active');
-    var $target = $(e.target);
-    $target.is('li') && $target.find('ul').addClass('ul-active'); 
-  });  
   $(function(){
     var recent = Layer({
-      auto : true,      // 是否自动弹出，默认false
+      <%- unless params[:unload].present? %>
+        auto : true,      // 是否自动弹出，默认false
+      <%- end %>
       btn : $('.e-recent'), // 触发弹窗按钮
       box : $('.e-pop')   // 弹窗
     });

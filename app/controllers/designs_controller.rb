@@ -297,9 +297,17 @@ class DesignsController < ApplicationController
     @design.future_star_active = true if params[:future_star_active]
     @design.speech = params[:design][:speech] if params[:design][:speech]
     @design.property_name = params[:property_name] if params[:property_name].present?
-    @design.baicheng_active = true if params[:baicheng_active]
+    if params[:baicheng_active]
+      @design.baicheng_active = true
+    else
+      @design.baicheng_active = false
+    end
     @design.save
-    redirect_to user_path(current_user)
+    if params[:baicheng_active]
+        redirect_to "/baicheng/design_works/#{params[:design_id]}"
+    else
+        redirect_to user_path(current_user)
+    end
   end
 
   def destroy
@@ -324,6 +332,12 @@ class DesignsController < ApplicationController
     colors = ColorCode.select(:code).where("code LIKE ?", "%#{params[:q]}%").all.map {
         |e| e.code }
     render :text => colors.join("\n")
+  end
+
+  def autocomplete
+      params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
+      colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
+      render json: colors.map { |c| c.code }
   end
 
   private

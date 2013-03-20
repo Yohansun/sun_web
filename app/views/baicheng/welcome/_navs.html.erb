@@ -4,33 +4,43 @@
 -%>
 <div class="header">
   <ul class="nav center clear">
-    <li>
-      <%= link_to '地图', path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
-    </li>
-    <li>
-      <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
-    </li>
-    <li class="nav-bg"><a href="javascript:void(0)" class="top-nav3">分类</a></li>
+    <%- if (controller_name == 'design_works' && %w(new show).include?(action_name)) || (controller_name == 'stories' && %w(new show).include?(action_name)) %>
+      <li>
+        <%= link_to '地图', design_works_path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+      <li>
+        <%= link_to '网格', "#{design_works_path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+    <%- else %>
+      <li>
+        <%= link_to '地图', path, class: "top-nav1 #{'active' if params[:mode] != 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+      <li>
+        <%= link_to '网格', "#{path}?mode=grid", class: "top-nav2 #{'active' if params[:mode] == 'grid' && !%w(new show).include?(action_name)}" %>
+      </li>
+    <%- end %>
+    <li class="nav-bg"><a class="top-nav3">分类</a></li>
     <li class="nav-bg">
-      <%= link_to '全部', mode.blank? ? design_works_path : design_works_path(mode: mode),
+      <%= link_to '全部', mode.blank? ? design_works_path(unload: 1) : design_works_path(mode: mode),
         class: "top-nav4 #{'active' if controller_name == 'design_works' && action_name == 'index'}" %>
     </li>
     <li class="nav-bg">
-      <%= link_to '设计作品', mode.blank? ? opus_design_works_path : opus_design_works_path(mode: mode),
+      <%= link_to '设计作品', mode.blank? ? opus_design_works_path(unload: 1) : opus_design_works_path(mode: mode,unload: 1),
         class: "top-nav5 #{'active' if controller_name == 'design_works' && action_name == 'opus'}" %>
     </li>
     <li class="nav-bg">
-      <%= link_to '刷新感言和爱情故事', mode.blank? ? stories_path : stories_path(mode: mode),
+      <%= link_to '刷新感言和爱情故事', mode.blank? ? stories_path(unload: 1) : stories_path(mode: mode,unload: 1),
         class: "top-nav6 #{'active' if controller_name == 'stories'}" %>
-    <li><a href="#" class="top-nav7">地域</a></li>
-    <li><a href="#" class="top-nav4 active">全部</a></li>
+    <li><a class="top-nav7">地域</a></li>
+    <li><a href="<%= design_works_path(mode: 'grid') %>" class="top-nav4 active">全部</a></li>
     <li>
       <form action="/baicheng/design_works" method="get">
         <input type="hidden" name='mode' value='grid'>
-        <select id="province" class="area_1" ><option>省/直辖市</option></select>
+        <select id="province" class="area_1" name="search_province"><option>省/直辖市</option></select>
         <select id="city" class="area_2" name='search_area'><option>城市</option></select>
         <input type="submit" class="nav_submit" value="确定">
       </form>
     </li>
   </ul>
 </div>
+

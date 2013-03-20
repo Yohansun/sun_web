@@ -29,10 +29,11 @@ class DesignImage < ActiveRecord::Base
         :inside => "188>", :outside => "202>", :home_page => "90>",
         :home_design_image1 => "380x365#", :home_design_image2 => "380x170#", :home_design_image3 => "180x170#",
         :design_image_big => "686x496>", :design_image_list => "224x162#",
-        :design_work_slide =>"680x353#",
+        :design_work_slide =>"680x353>",
         :slide => "900>",
         :slide_thumb => "205x138#",
-        :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#"},
+        :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
+        :grid_list => "204x145>"},
     :convert_options => {
       :slide => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
       :design_image_big => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
@@ -55,7 +56,7 @@ class DesignImage < ActiveRecord::Base
 
   # 科普兰德(1)-每周之星(2 后台设置)-大师作品(3)-sina(4)-色彩搭配(5)-自行上传(100)
   def set_sort
-    self.sorts = 100
+    self.sorts = 100 if self.sorts.blank?
     self.sorts = 1 if source == 'kepulande'
     self.sorts = 3 if self.imageable_type == 'MasterDesign'
     self.sorts = 4 if source == 'sina'

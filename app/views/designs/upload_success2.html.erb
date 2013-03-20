@@ -10,7 +10,7 @@
     </div>
     <br>
     <%= form_tag update_design_active_user_designs_path(current_user), class: "active_form" do%>
-      <div class="upload2013_2 clear <% if Time.now.to_date < "2013-03-18".to_date %> noborder <% end %>">
+      <div class="upload2013_2 clear">
         <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg1.jpg"%>">
           <div class="active_content">
               <!-- <h3><a href="#" class="upload_option js-upload_options upload_checked">未来之星活动</a></h3> -->
@@ -26,7 +26,7 @@
           <div class="upload2013_2 clear noborder"><!-- 最后一个活动添加class noborder  -->
             <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg2.jpg"%> ">
             <div class="active_content">
-                <h3><%=check_box_tag "baicheng_active","ok",false, :style=>"width:25px;"%>刷新百城活动</a></h3>
+                <h3><%=check_box_tag "baicheng_active","ok",true, :style=>"width:25px;"%>刷新百城活动</a></h3>
                 <h4>活动简介</h4>
                 <p>2013年iColor携手新浪家居举办的首届“刷新百城”活动，暨优秀设计案例征集 & 网络评选活动正式启航。</p>
                 <p style="padding-bottom:15px;"><img src="<%= asset_path "success/upload_sucimg2_con.jpg"%>"></p>

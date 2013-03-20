@@ -1,0 +1,252 @@
+<% content_for :tail do -%>
+<%= javascript_include_tag "jquery.uploadify.js" %>
+	<script type="text/javascript">
+    var flag = true;
+		$(function(){
+			$('.form-text3').blur(function(){
+				user_id = $(this).val()
+				if(user_id != ""){
+					$.get("<%=get_user_story_contracts_path%>",{user_id: user_id},function(data){
+						 if(data.result == "success"){
+              flag = true;
+              html = "<label>80s爱情故事的故事名</label><select id='user_story' name='story_id'><option>请选择故事名</option>"
+                if(data.story != ""){
+                  data.story.forEach(function(el) {
+                    html += "<option value=" + el.id + ">"+ el.title +"</option>";
+                  });
+                  html += "</select>"
+                  $("#story_name").html(html);
+                }else{
+                  html += "</select>"
+                  $("#story_name").html(html);
+                }
+						 }else{
+                flag = false;
+						 		$("#story_name").html("<span style='color: red; line-height: 38px;'>该用户不存在！</span>");
+						 }
+					});
+				}
+			});
+      $('.form-text2').blur(function(){
+        user_id = $(this).val()
+        if(user_id != ""){
+          $.get("<%=get_user_story_contracts_path%>",{user_id: user_id},function(data){
+            html = ""
+             if(data.result == "success"){
+                flag = true;
+                $("#is_error").html("<span style='color: #33CC33; line-height: 38px;'>√</span>");
+             }else{
+                flag = false;
+                $("#is_error").html("<span style='color: red; line-height: 38px;'>该用户不存在！</span>");
+             }
+          });
+        }
+      });
+      <%- session_key = Rails.application.config.session_options[:key] -%>
+      $('#upload_photo').uploadify({
+        swf : '/uploadify/uploadify.swf',
+        cancelImage : '/uploadify/uploadify-cancel.png',
+        //skipDefault : ['onSelect'],
+        progressData : 'percentage',
+        buttonText : "<a class='upload-btn fl'>选择图片</a>",
+        fileTypeDesc : '图片文件',
+        fileTypeExts : '*.jpg; *.png',
+        successTimeout : 6000,
+        fileSizeLimit : '5MB',
+        uploadLimit : 60,
+        width : 184,
+        height : 46,
+        multi : true,
+        auto : true,
+        checkExisting : false,
+        transparent : true,
+        uploader : '/baicheng/contract_images',
+        //buttonText : '选择文件',
+        onUploadSuccess : function(file, data, response) {
+          var dat = eval('(' + data + ')');
+          if (dat.result == 'success') {
+            $.getScript(dat.upload + "?for=design", function(){
+            var $btn = $('.upload2013_btn');
+            if($btn.length == 0) return;
+              $btn.unbind('click').click(function(){
+                $(this).toggleClass('upload2013_btn_down').next().toggle();
+              });
+            });
+            var current = parseInt($('.js-images_num span:eq(1)').text());
+            $('.js-images_num span:eq(1)').text(current - 1);
+          }else{
+            alert("图片上传失败");
+          };
+        },
+        postData : {
+            '_http_accept': 'application/javascript',
+            'format' : 'json',
+            '_method': 'post',
+            '<%= session_key %>' : '<%= cookies[session_key] %>',
+            'authenticity_token': '<%= form_authenticity_token %>'
+        },
+        onUploadError : function(file, errorCode, errorMsg, errorString) {
+          alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+        },
+        onUploadStart : function(){
+          //$("#upload_going").show();
+        },
+        onUploadComplete : function(){
+          //$("#upload_going").hide();
+        }
+      });
+		});
+  function remote(id) {
+  $('#contract_image'+id).remove();
+  $('.contract_image_size').html(parseInt($('.contract_image_size').html()) - 1);
+  }
+  function remove_image_all(){
+    $('.upload_item').remove();
+    $('.contract_image_size').html(0);
+  }
+
+  function form_valid(){
+    flags = true;
+    log = "";
+    genre = parseInt($('#select-contract').val());
+    u_id = $("#u_id").val();
+    u_id2 = $("#u_id2").val();
+    story_id = $("#user_story").val();
+    imgCount = $(".contract_image_size").text();
+    if(genre == 1){
+      if(u_id == ""){
+        log += "请输入用户ID！";
+        flags = false;
+      }else{
+        if(flag == false){
+          log += "请输入正确的用户ID！";
+          flags = false;
+        }else{
+          if(story_id == "" || story_id == "请选择故事名"){
+          log += "请选择故事名！";
+          flags = false;
+          }
+        }
+      }
+    }
+    if(genre == 2){
+      if(u_id2 == ""){
+        log += "请输入用户ID！";
+        flags = false;
+      }else{
+        if(flag == false){
+          log += "请输入正确的用户ID！";
+          flags = false;
+        }
+      }
+    }
+    if(parseInt(imgCount) == 0){
+      log += "不能一张图片都没有哦！";
+      flags = false;
+    }
+    if(flags == false){
+      alert(log);
+      return false;
+    }else{
+      return true;
+    }
+  }
+	</script>
+<% end %>
+<%= render partial: 'baicheng/welcome/navs' %>
+<%= render partial: 'baicheng/welcome/active_map' %>
+<div class="wrapper">
+	<%=render partial: 'baicheng/welcome/sidebar' %>
+	<div class="refresh-container refresh-upload">
+		<!-- <div class="refresh-bin"> -->
+			<h1>上传合同</h1>
+      <%= form_tag @contract, :class=>"refresh-form ft12", :onsubmit=>"return form_valid();" do %>
+			<form action="" method="" class="refresh-form ft12">
+				<div class="refresh-section">
+					<div class="refresh-control">
+						<label>合同类型</label>
+						<div class="form-article">
+							<select id="select-contract" name="genre">
+								<option value="1">为爱刷新</option>
+								<option value="2">咨询下单</option>
+							</select>
+						</div>
+					</div>
+					<div class="refresh-control refresh-multi" id="1">
+						<label>80s爱情故事的ID</label>
+						<input type="text" class="form-text3" id="u_id" name="u_id" />
+						<div id="story_name">
+							<label>80s爱情故事的故事名</label>
+							<select id="user_story">
+								<option>请选择故事名</option>
+							</select>
+						</div>
+					</div>
+					<div class="refresh-control none" id="2">
+						<label>咨询用户名</label>
+						<div class="form-article">
+							<input type="text" class="form-text2" id="u_id2" name="u_id2" />
+              <div id="is_error"></div>
+						</div>
+					</div>
+				</div>
+				<div class="refresh-section">
+					<div class="refresh-control">
+						<label>上传图片</label>
+						<div class="form-article">
+							<input type="file" class="none" />
+							<a href="javascript:;" class="upload-btn fl" id="upload_photo">选择图片</a>
+							<!-- <button class="upload-btn">选择图片</button> -->
+							<div class="upload-bin fl">
+								<div class="load-bar clear">
+									<div class="work-title fb fl">文件</div>
+									<div class="set-cover tc fl">设为封面</div>
+									<div class="work-del tc fl">移除</div>
+								</div><!--load-bar ends-->
+								<div class="load-bar load-content" id="uploads">
+									
+									
+								</div><!--load-content ends-->
+								<p class="load-footer ft12">
+									共有<b class="contract_image_size">0</b>个文件 | 
+									<a href="javascript:remove_image_all();" class="clear-all">清空列表</a>
+									<br>您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张
+								</p><!--load-footer ends-->
+							</div><!-- upload-bin -->
+						</div>
+					</div>
+				</div>
+				<p class="tc cr">
+          <input type="hidden" name="type" value="<%=params[:type]%>">
+					<input type="submit" class="refresh-submit" value="" /><br />*红色标注为必填项
+				</p>
+			<% end %>
+		<!-- </div> -->
+		<div class="container-bot"></div>
+	</div><!-- refresh-container -->
+</div>
+<script type="text/javascript">
+$(function(){
+
+	//page 4.3
+	(function($){
+		var o = {
+			get : function(id){
+				return document.getElementById(id);
+			},
+			show : function(ele){
+				ele.style.display = 'block';
+			},
+			hide : function(ele){
+				ele.style.display = 'none';
+			}
+		};
+		o.get('select-contract').onchange = function(){
+			var a = this.value,
+				b = a == 1 ? 2 : 1;
+			o.show(o.get(a));
+			o.hide(o.get(b));
+		};
+	}($));
+});
+</script>

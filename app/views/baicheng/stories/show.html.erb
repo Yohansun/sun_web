@@ -9,13 +9,13 @@
 <div class="wrapper">
 	<%= render partial: 'baicheng/welcome/sidebar' %>
 	<div class="refresh-container">
-		<!-- <div class="refresh-bin"> -->
+		<div class="refresh-bin newheight"> 
 			<div class="pr">
 				<div class="story-slider slider_bin">
 					<%- @story.story_images.each do |image| %>
 						<div>
 							<a href="javascript:void(0);">
-								<%= image_tag(image.file.url(:slide), size: "680x353") %>
+								<%= image_tag(image.file.url(:slide)) %>
 							</a>
 						</div>
 					<%- end %>
@@ -23,7 +23,7 @@
 				<div class="show-group pa">
 					<ul class="clear">
 						<li>
-							<%= link_to "#{@story.votes_count}", votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "icon-like votes_count#{@story.id}" %>
+							<%= link_to "#{@story.votes_count}", votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "icon-like",id: "votes_count#{@story.id}" %>
 						</li>
 					</ul>
 				</div>
@@ -49,10 +49,10 @@
 			</p>
 			<div class="img-info">
 				<div class="clear">
-					<%- if current_user && current_user.role_id == 1 %>
-						<a href="javascript:void(0);" class="fl btn-title">我来设计</a>
+					<%- if current_user && current_user.role_id != 3 %>
+						<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title">我来设计</a>
 					<%- elsif current_user %>
-						<a href="javascript:alert('只有设计师才能上传！');" class="fl btn-title">我来设计</a>
+						<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title">我来设计</a>
 					<%- else %>
 						<a href="javascript:show_login();" class="fl btn-title">我来设计</a>
 					<%- end %>
@@ -112,10 +112,10 @@
 							<h3 style="margin-top:30px;">房型设计上传（线上）</h3>
 							<p class="clear">
 								<span class="fl nomargin">家装公司/设计师点击</span>
-								<%- if current_user && current_user.role_id == 1 %>
-									<a href="javascript:void(0);" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<%- if current_user && current_user.role_id != 3 %>
+									<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title" style="padding:1px 0;">我来设计</a>
 								<%- elsif current_user %>
-									<a href="javascript:alert('只有设计师才能上传！');" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+									<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title" style="padding:1px 0;">我来设计</a>
 								<%- else %>
 									<a href="javascript:show_login();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
 								<%- end %>
@@ -125,7 +125,16 @@
 							<p>
 								当家装公司/设计师的作品被上传房型图的大众用户选中，经过咨询沟通，并成功下单后。家装公司/设计师可进入
 								<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>，点击
-								<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+								<% if current_user -%>
+                  <% unless current_user.common_user? %>
+                  	<a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+                  <% else %>
+                  	<a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+                  <% end %>
+                <% else -%>
+                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+                <% end %>
+								
 							</p>
 						</div>
 					</div>
@@ -135,9 +144,9 @@
 			<div class="img-info">
 				<h3 class="cr tc fb"><%= @story.title %></h3>
 				<p class="tc ft12 author">作者：<%= @story.user.display_name %></p>
-				<p><%= @story.content %></p>
+				<p style="word-wrap:break-word;"><%= @story.content %></p>
 				<p class="clear">
-					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr" do %>
+					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr", id: "votes_count#{@story.id}" do %>
 						<%= image_tag("baicheng/content/btn_vote.png")%>
 					<%- end %>
 				</p>
@@ -145,23 +154,23 @@
 			<div class="img-info">
 				<h4 class="fb">已提交作品</h4>
 				<ul class="oldworks clear">
-					<%- @stories.each do |story| %>
+					<%- @designs.each do |design| %>
 						<li class="nomargin">
-							<a href="<%= story_path(story.id) %>" target="_blank">
-								<%= image_tag(story.cover_img.try(:file).try(:url, :list), size: "203x146")%>
+							<a href="<%= user_design_path(design.user_id, design) %>" target="_blank">
+								<%= image_tag(design.cover_img.try(:file).try(:url, :design_image_list), size: "203x146")%>
 							</a>
 							<h5>
-								<a href="<%= story_path(story.id) %>" class="cr" target="_blank"><%= story.title %></a>
+								<a href="<%= user_design_path(design.user_id, design) %>" class="cr" target="_blank"><%= design.title %></a>
 							</h5>
 							<p>
-								<span class="fr nomargin ft12"><%= Area.find(story.area_id).parent.name if story.area_id %></span>
-								<span class="ft12"><%= story.user.display_name %></span>
+								<span class="fr nomargin ft12"><%= Area.find(design.area_id).parent.name if design.area_id %></span>
+								<span class="ft12"><%= design.user.display_name %></span>
 							</p>
 						</li>
 					<%- end %>
 				</ul>
 			</div>
-		<!-- </div> -->
+		</div>
 		<div class="container-bot"></div>
 	</div><!-- refresh-container -->
 </div><!-- wrapper -->

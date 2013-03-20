@@ -2,12 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>百城活动</title>
+<title><%= @title %></title>
+<meta name="description" content="<%= @description %>" />
+<%= csrf_meta_tag %>
 <%= stylesheet_link_tag "baicheng_all.css" %>
 <%= javascript_include_tag "baicheng" %>
 <%= yield :head %>
 </head>
 <body>
+ 	<%= yield :body_head %>
 	<%= yield %>
 	<div class="footer">
 		<ul class="center clear">
@@ -28,7 +31,7 @@
 					class: "bot-nav4 #{'active' if controller_name =~ /design_works|stories/ }" %>
 			</li>
 			<li>
-				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'),
+				<%= link_to '活动规则及奖项设置', intro_path(id: 'content'),
 					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
 			</li>
 			<li class="pr">
@@ -44,8 +47,9 @@
 	</div><!-- footer -->
 	<div id="layer"></div>
 	<%= render partial: 'baicheng/welcome/login' %>
+	<%= yield :body_tail %>
 	<%= yield :tail %>
-	<%= javascript_include_tag "/location.js" %>
+	<%= javascript_include_tag "/baicheng_location.js" %>
 	<script type="text/javascript">
 		$(function(){
 	    if(typeof data != 'undefined'){
@@ -53,8 +57,10 @@
 	        data  : data
 	      }
 	      var sel = new LinkageSelect(options);
-	      sel.bind('.area_1');
-	      sel.bind('.area_2');
+	      var province_id = "<%= @search_province %>";
+	      var area_id = "<%= @search_area %>";
+	      sel.bind('.area_1', province_id);
+	      sel.bind('.area_2', area_id);
 	    }
 
 	    $('.close-btn').click(function(){

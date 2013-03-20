@@ -11,7 +11,9 @@
   <div class="work_del tc fl">
       <a href="javascript:remote(<%= upload.id %>);uploads_size();" class="load_del">删除</a>
   </div><!--work_del ends-->
+  <% if upload.imageable_type == "Design" %>
   <div class="work_del upload_edit tc fl">
       <a href="#<%=upload.id%>" class="load_del">编辑标签</a>
   </div><!--upload_edit ends-->
+  <% end %>
 </div><!--file_list ends-->

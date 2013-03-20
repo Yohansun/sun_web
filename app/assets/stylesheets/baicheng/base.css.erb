@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 body{background: url(<%= asset_path 'baicheng/refresh/refresh-bg.jpg' %>) no-repeat top center fixed;}
-.header,.footer{width: 100%;min-width: 1180px;position: fixed;left: 0;z-index: 2;}
+.header,.footer{width: 100%;min-width: 1180px;position: fixed;left: 0;z-index: 1002;}
 .header{background: #000;top: 0;}
 .center,.wrapper{width: 1080px;margin: 0 auto;}
 .nav{background: #424242;}
@@ -26,7 +26,7 @@ body{background: url(<%= asset_path 'baicheng/refresh/refresh-bg.jpg' %>) no-rep
 .nav select{width: 105px;height: 27px;margin: 11px 5px;color: #c5c5c5;padding: 4px;font-size: 12px;border: 1px solid #c5c5c5;vertical-align: middle;*margin-top: 13px;}
 .nav_submit{width: 50px;height: 27px;background: #fff;border: 1px solid #ccc;font: 14px "Microsoft Yahei";color: #666;line-height: 21px;*height: 20px;*line-height: 15px;*margin-top: -3px;}
 
-.footer{background: #000;bottom: 0;height: 69px;}
+.footer{background: #000;top: 531px;height: 69px;position: absolute;}
 .footer li{float: left;display: inline;}
 .footer a,.footer .pr{background: url(<%= asset_path 'baicheng/nav/bot-nav.jpg' %>) no-repeat;height: 69px;text-indent: -999em;}
 .footer .bot-nav1{background-position: 0 0;width: 85px;}
@@ -64,9 +64,9 @@ body{background: url(<%= asset_path 'baicheng/refresh/refresh-bg.jpg' %>) no-rep
 .refresh-logo .e-recent{background-position: -1px 0;height: 38px;}
 .refresh-logo .e-upload{background-position: 0 -52px;}
 .refresh-logo .e-publish{background-position: 0 -111px;}
-.grid-container{height: 717px;overflow: hidden;}
-.refresh-container{background: url(<%= asset_path 'baicheng/refresh/refresh-container.png' %>) repeat-y;width: 682px;padding: 2px 4px 4px 0;margin-left: 324px;}
-.refresh-bin{width: 682px;width:702px\9;height: 717px;overflow: auto;}
+.grid-container{height: 433px;overflow: hidden;}  
+.refresh-container{background: url(<%= asset_path 'baicheng/refresh/refresh-container.png' %>) repeat-y;width: 682px;padding: 2px 4px 4px 0;margin-left: 324px;overflow: hidden;height: 436px;}  
+.refresh-bin{width: 682px;width:702px\9;height: 433px;overflow: auto;}
 div::-webkit-scrollbar,html::-webkit-scrollbar{display: none;}
 .container-bot{background: url(<%= asset_path 'baicheng/refresh/container-bot.png' %>) no-repeat;width: 686px;height: 15px;position: relative;top: 19px;}
 
@@ -99,4 +99,5 @@ ul.border img{ float:left;margin:-2px 2px 0 0;}
 .border a{color:#0058a2;}
 .reg_now{background:url(<%= asset_path 'baicheng/register.jpg' %>) no-repeat;width:137px;height:32px;}
 .loginCon p.fl{margin:9px;color:#000;}
-.jia_custom{position: fixed;bottom: 85px;left: 50%;margin-left: 412px;color: #fff;z-index:5;}
+.jia_custom,.jia_map{position: absolute;top: 505px;left: 50%;margin-left: 412px;color: #fff;}
+.newheight{height: 407px;} 

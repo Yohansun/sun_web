@@ -44,7 +44,7 @@ module MagicContent
       design_id = design_link.split('/').last
       if design = Design.find(design_id)
         design.design_images.each do |img|
-          img.update_attribute(:sorts, 2) if img.sorts != 1
+          img.update_attribute(:sorts, 2)
         end
       end
     end

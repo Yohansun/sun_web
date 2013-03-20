@@ -204,6 +204,7 @@ Icolor::Application.routes.draw do
   resources :users do
     match "update_suc" => "users#update_suc"
     match '/designs/autocomplete_recommend_color' => 'designs#autocomplete_recommend_color'
+    match '/designs/autocomplete' => 'designs#autocomplete'
 
     #社区绑定
     match "community" => "users#community"
@@ -375,6 +376,13 @@ Icolor::Application.routes.draw do
       end
     end
     match ':page', to: 'welcome#show', via: :get
+    resources :contracts do
+      collection do
+        get :get_user_story
+        post :upload_image
+      end
+    end
+    resources :contract_images
     resources :story_images
     resources :intros, only: :show
   end

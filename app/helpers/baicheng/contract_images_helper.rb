@@ -1,0 +1,2 @@
+module Baicheng::ContractImagesHelper
+end

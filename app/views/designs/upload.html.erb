@@ -130,7 +130,14 @@ function remove_design_image(){
         $(".edit_design").submit();
       }
     })
-  })
+    $('.color_autocomplete').typeahead({
+        source: function(query, process){
+          $.get('<%= user_designs_autocomplete_path(1) %>', {num: query}, function(data){
+             process(data)
+           });
+        }
+      });
+  });
 </script>
 <%- end -%>
 <%= form_for([current_user, @design], :remote => true, :html => {:multipart => true}) do |f| %>

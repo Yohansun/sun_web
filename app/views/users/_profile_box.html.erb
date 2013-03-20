@@ -153,9 +153,16 @@ $(function(){
   <li class="icon_active">
     <%= link_to "我报名的活动", "/users/#{@user.id}/events/my_event", :class => "#{'host_cur' if action_name == "my_event"}" %>
   </li>
-  <li class="icon_community noborder">
+  <li class="icon_community">
     <%= link_to "社区绑定", user_community_path, :class => "#{'host_cur' if action_name == "community"}" %>
   </li>
+  <% if current_user %>
+    <% unless current_user.common_user? %>
+      <li class="per_btn_upload noborder">
+        <a href="<%=new_contract_path(type: 'prsonil')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+      </li>
+    <% end %>
+  <% end %>
 </ul>
 <%- end %>
 <!--system_info ends-->

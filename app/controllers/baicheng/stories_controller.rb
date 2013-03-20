@@ -3,9 +3,31 @@ class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
     @event_data = BaichengEvent.by_type(Story.name).order('created_at DESC').page(params[:page]).per(28)
+    if params[:unload].present?
+      @xx = BaichengEvent.baicheng_map_story(825)
+      @lf = BaichengEvent.baicheng_map_story(647)
+      @dt = BaichengEvent.baicheng_map_story(1046)
+      @sjz = BaichengEvent.baicheng_map_story(661)
+      @ly = BaichengEvent.baicheng_map_story(855)
+    else
+      @xx = BaichengEvent.story_type(825)
+      @xx2 = BaichengEvent.design_type(825)
+      @lf = BaichengEvent.story_type(647)
+      @lf2 = BaichengEvent.design_type(647)
+      @dt = BaichengEvent.story_type(1046)
+      @dt2 = BaichengEvent.design_type(1046)
+      @sjz = BaichengEvent.story_type(661)
+      @sjz2 = BaichengEvent.design_type(661)
+      @ly = BaichengEvent.story_type(855)
+      @ly2 = BaichengEvent.design_type(855)
+    end
+
   end
 
   def new
+    @title = "上传icolor“刷新百城”设计案例征集评选设计作品-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+    @description = "上传立邦icolor刷新百城设计案例征集评选活动设计师作品。"
+    
     if current_user
       @story = Story.new
       @story_image = StoryImage.new
@@ -46,7 +68,8 @@ class Baicheng::StoriesController < ApplicationController
 
   def show
   	@story = Story.find(params[:id])
-  	@stories = Story.where(parent_id: @story.id).limit(3)
+  	#@stories = Story.where(parent_id: @story.id).limit(3)
+      @designs = Design.where(story_id: @story.id).limit(3)
   end
 
   def download

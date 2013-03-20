@@ -12,7 +12,8 @@
 
 /*story slider*/
 .story-slider{width:680px;height:353px;}
-.story-slider .slider_container div{width:680px;height:353px;float:left;}
+.story-slider .slider_container > div{background: #ececec;width:680px;height:353px;float:none;text-align: center;display: table-cell;vertical-align: middle;*font: 308px "Arial";*float: left;}  
+.story-slider .slider_container img{vertical-align: middle;} 
 .story-slider .slider_prev,.story-slider .slider_next{width:45px;height:45px;background:url(<%= asset_path 'baicheng/content/content_icon.png' %>) no-repeat;margin-top:-22px;}
 .story-slider .slider_next{background-position:0 -45px;}
 .story-slider ul{right:50%;margin-right:-40px;}

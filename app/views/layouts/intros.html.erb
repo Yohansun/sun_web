@@ -2,20 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>百城活动</title>
+<title><%= @title %></title>
+<meta name="description" content="<%= @description %>" />
+<%= csrf_meta_tag %>
 <%= stylesheet_link_tag "baicheng_all.css", "baicheng/style" %>
 <%= javascript_include_tag "baicheng" %>
 <%= yield :head %>
 </head>
 <body>
 <div class="header subpage">
-	<ul class="nav center clear">
+	<ul class="nav center sub clear">
 		<li class="logo"><a href="http://www.icolor.com.cn"><img src="<%= asset_path 'nav/logo.gif' %>" /></a></li>
+		<!-- <li>
+			<%#=link_to '活动规则', intro_path(:id => 'index'), class: "#{'active' if  params[:id] == 'index'}" %>
+		</li> -->
 		<li>
-			<%=link_to '活动规则', intro_path(:id => 'index'), class: "#{'active' if  params[:id] == 'index'}" %>
-		</li>
-		<li>
-			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  params[:id] == 'content'}" %>
+			<%=link_to '活动内容', intro_path(:id => 'content'), class: "#{'active' if  (params[:id] == 'content' || params[:id] == 'content_user')}" %>
 			<ul class="subnav none" style="display: none;">
 				<li><a href="<%= intro_path(id: 'content') %>">家装公司/设计师</a></li>
 				<li class="noborder"><a href="<%= intro_path(id: 'content_user')%>">大众用户</a></li>
@@ -28,8 +30,7 @@
             <%=link_to '评选细则', intro_path(:id => 'detail'), class: "#{'active' if  params[:id] == 'detail'}" %>
 		</li>
 		<li>
-            <%#=link_to '评委名单', intro_path(:id => 'name'), class: "#{'active' if  params[:id] == 'name'}" %>
-            <a href="javascript:void(0);">评委名单</a>
+            <%=link_to '评委名单', intro_path(:id => 'name'), class: "#{'active' if  params[:id] == 'name'}" %>
 		</li>
 		<li>
             <%=link_to '活动时间', intro_path(:id => 'time'), class: "#{'active' if  params[:id] == 'time'}" %>
@@ -38,7 +39,7 @@
 </div><!-- header -->
 <%= yield %>
 	<div class="footer">
-		<ul class="center clear">
+		<ul class="center sub clear">
 			<li>
 				<%= link_to '首页', '/baicheng',
 					class: "bot-nav1 #{'active' if controller_name == 'welcome' && params[:page].blank?}" %>
@@ -56,7 +57,7 @@
 					class: "bot-nav4 #{'active' if controller_name =~ /design_works|stories/ }" %>
 			</li>
 			<li>
-				<%= link_to '活动规则及奖项设置', intro_path(id: 'index'),
+				<%= link_to '活动规则及奖项设置', intro_path(id: 'content'),
 					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
 			</li>
 			<li class="pr">

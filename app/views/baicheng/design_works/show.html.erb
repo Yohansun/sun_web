@@ -16,13 +16,13 @@
 <div class="wrapper">
 	<%= render partial: 'baicheng/welcome/sidebar' %>
 	<div class="refresh-container">
-		<!-- <div class="refresh-bin"> -->
+		<div class="refresh-bin newheight"> 
 			<div class="pr">
 				<div class="story-slider slider_bin">
 					<%- @design_images.each_with_index do |design_image,index| %>
 						<div>
 							<a href="javascript:void(0);">
-								<%= image_tag(design_image.try(:file).url(:design_work_slide), size: "680x353") %>
+								<%= image_tag(design_image.try(:file).url(:design_work_slide)) %>
 							</a>
 							<div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
 								<img src="<%= asset_path 'baicheng/content/colors_icon_tit.jpg' %>" style="float:left; margin:15px 5px 0 10px;" />
@@ -53,7 +53,7 @@
 				<div class="show-group pa">
 					<ul class="clear">
 						<li>
-							<%= link_to "#{@design.votes_count}", votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => :post, :class => "icon-like votes_count#{@design.id}" %>
+							<%= link_to "#{@design.votes_count}", votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => :post, :class => "icon-like",id: "votes_count#{@design.id}" %>
 						</li>
 						<li><a href="<%= design_work_path(@design) %>#tips" class="icon-view"><%= @design.comments_count %></a></li>
 					</ul>
@@ -82,13 +82,15 @@
           <div class="desc" style=" height:35px; width:600px; margin:19px 0px;display:none; position:absolute; left:1px; top:1px;">
             <div class="list" style="height:35px;">
               <ul class="group" style="overflow:hidden;">
-              	<%- @image_colors.last.each do |color| %>
-                  <li>
-                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
-                    <h5><%= color.name %></h5>
-                    <p>立邦(<%= color.code %>)</p>
-                  </li>
-                <%- end %>
+              	<% if @image_colors.present? %>
+	              	<%- @image_colors.last.each do |color| %>
+	                  <li>
+	                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+	                    <h5><%= color.name %></h5>
+	                    <p>立邦(<%= color.code %>)</p>
+	                  </li>
+	                <%- end %>
+                <% end %>
               </ul>
             </div>
           </div>
@@ -120,21 +122,48 @@
 					<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title" target= "_blank">免费咨询</a>
 				</div>
 				<div class="questionmart clear ft12 pr">
-					<span class="fl nomargin">咨询成功后，快来<a href="#" class="cr fb">上传合同</a>，抢装修基金 </span>
+					<% if current_user -%>
+          	<% unless current_user.common_user? %>
+              <span class="fl nomargin">咨询成功后，快来<a href="<%=new_contract_path(type: 'baicheng')%>" title="上传合同" class="cr fb">上传合同</a>，抢装修基金 </span>
+              
+            <% else %>
+              <span class="fl nomargin">咨询成功后，快来<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" title="上传合同" class="cr fb">上传合同</a>，抢装修基金 </span>
+              
+            <% end %>
+          <% else -%>
+            <span class="fl nomargin">咨询成功后，快来<%= link_to_function "上传合同", "show_login()", :class=>"cr fb" %>，抢装修基金 </span>
+          <% end %>   
+
 					<div class="js-questionmart fl">
 						<img style="padding:7px 20px 0 3px;" src="<%= asset_path 'baicheng/content/questionmark.jpg' %>">
 						<div class="questionmart_pop questionmart_pop2 none">
 							<h3 style="margin:5px 0">免费咨询（线上）</h3>
 							<div class="clear">
 								<span class="fl nomargin">大众用户点击</span>
-								<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title" style="padding:1px 0;">免费咨询</a>
-								<span class="fl nomargin">后，</span>
+								<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title">免费咨询</a>
+								<span class="fl nomargin">后，</span><br>
 								<span class="fl nomargin">与家装公司/设计师进行免费咨询。</span>
 							</div>
-							<h3 style="margin-top:15px;">签约下单（线下）</h3>
+							<h3 style="margin-top:10px;">签约下单（线下）</h3>
 							<p>大众用户与家装公司/设计师咨询后，成功签约。</p>
-							<h3 style="margin-top:16px;">上传合同（线上）</h3>
-							<p>家装公司/设计师可进入<a href="<%= user_path(@design.user_id) %>" style="color:#333;" target="_blank">个人主页</a>，<br>点击<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a></p>
+							<h3 style="margin-top:5px;">上传合同（线上）</h3>
+							<p>
+								家装公司/设计师可进入
+								<a href="<%= user_path(@design.user_id) %>" style="color:#333;" target="_blank">个人主页</a>，<br>点击
+                <% if current_user -%>
+                  <% unless current_user.common_user? %>
+                    <a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                    <a href="<%=new_contract_path(type: 'baicheng')%>" class="cr fb">上传合同</a>
+                  <% else %>
+                    <a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                    <a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="cr fb">上传合同</a>
+                  <% end %>
+                <% else -%>
+                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                  <%= link_to_function "上传合同", "show_login()", :class=>"cr fb" %>
+                <% end %>
+								
+							</p>
 						</div>
 					</div>
 				</div>
@@ -144,7 +173,12 @@
 					<span>设计师：</span><em><%= @design.user.display_name %></em>
 				</p>
 				<p class="workinfo clear">
-					<span>设计风格：</span><em>	<%= @design.style %></em>
+					<span>设计风格：</span>
+					<em>	
+						<% @style_ids.each do |style| %>
+							<%= ImageLibraryCategory.find_by_id(style).try(:title) %>
+						<% end %>
+					</em>
 				</p>
 				<p class="workinfo clear">
 					<span>楼盘名称：</span><em><%= @design.property_name %></em>
@@ -167,12 +201,12 @@
 				<%- end %>
 				<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
 					<h5 class="fb">
-						<span class="fr nomargin">0/140</span>
+						<span class="fr nomargin"><b id="word-tip">0</b>/140</span>
 						评论(<%= @design.comments_count %>)
 					</h5>
           <%= f.hidden_field :commentable_id, value: @design.id %>
           <%= f.hidden_field :commentable_type, value: 'Design' %>
-          <%= f.text_area :content %>
+          <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140' %>
           <button class="submit_btn">提交评论</button>
         <%- end %>
 				<div class="pr">
@@ -215,7 +249,7 @@
 					</div>
 				</div>
 			</div>
-		<!-- </div> -->
+		</div>
 		<div class="container-bot"></div>
 	</div><!-- refresh-container -->
 </div><!-- wrapper -->

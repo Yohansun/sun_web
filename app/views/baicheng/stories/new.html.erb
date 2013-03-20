@@ -156,9 +156,11 @@ $(function(){
 </script>
 <% end %>
 <%= render partial: 'baicheng/welcome/navs' %>
+<%= render partial: 'baicheng/welcome/active_map' %>
 <div class="wrapper">
 	<%=render partial: 'baicheng/welcome/sidebar' %>
 	<div class="refresh-container refresh-upload">
+        <div class="refresh-bin newheight">
 			<h1>发表故事 征集设计</h1>
 			<%= form_for @story, html:{:class=>"refresh-form ft12", :onsubmit => "return form_valid();"} do |f| %>
 
@@ -224,7 +226,7 @@ $(function(){
 							<div class="clear none">
 								<% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
                   <label>
-                      <%=radio_button_tag "apartment",img_lib_cat.id, {},:id=>"apartment"%><%=img_lib_cat.title%>
+                      <%=radio_button_tag "apartment",img_lib_cat.id, false,:id=>"apartment"%><%=img_lib_cat.title%>
                   </label>
                 <% end %>
 							</div>
@@ -300,5 +302,6 @@ $(function(){
 					<input type="submit" class="refresh-submit" value="" /><br />*红色标注为必填项
 				</p>
 			<% end %>
+        </div>
 	</div><!-- refresh-container -->
 </div><!-- wrapper -->
