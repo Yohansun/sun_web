@@ -232,7 +232,7 @@
 					<div>
 						<div>
               <%- unless image.imageable_type == "MasterDesign" -%>
-							 <a href="<%= user_design_path(image.id, image.imageable_id, image_id: image.id) %>" target="_blank" >
+							 <a href="<%= user_design_path(image.user_id, image.imageable_id, image_id: image.id) %>" target="_blank" >
               <%- else -%>
                 <a href="<%= master_design_path(image.imageable_id) %>" target="_blank" >
               <%- end -%>
