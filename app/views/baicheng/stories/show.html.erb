@@ -125,7 +125,16 @@
 							<p>
 								当家装公司/设计师的作品被上传房型图的大众用户选中，经过咨询沟通，并成功下单后。家装公司/设计师可进入
 								<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>，点击
-								<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+								<% if current_user -%>
+                  <% unless current_user.common_user? %>
+                  	<a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+                  <% else %>
+                  	<a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+                  <% end %>
+                <% else -%>
+                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
+                <% end %>
+								
 							</p>
 						</div>
 					</div>

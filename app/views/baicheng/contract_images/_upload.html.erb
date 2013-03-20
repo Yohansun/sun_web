@@ -1,0 +1,13 @@
+<div class="file-list clear upload_item" id="contract_image<%= upload.id %>">
+    <div class="work-title fl">
+      <%= image_tag upload.file.url(:thumb), :class => "fl" %>
+      <p class="file-name"><%= upload.file.original_filename %></p>
+      <%= hidden_field_tag "contract_image_ids[]", upload.id %>
+  </div><!--work_title ends-->
+  <div class="set-cover tc fl">
+      <input type="radio" name="cover_image" value="<%= upload.id %>" />
+  </div><!--set_cover ends-->
+  <div class="work-del tc fl">
+      <a href="javascript:remote(<%= upload.id %>);" class="load-del">删除</a>
+  </div><!--work_del ends-->
+</div><!--file_list ends-->

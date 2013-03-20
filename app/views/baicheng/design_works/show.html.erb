@@ -122,7 +122,18 @@
 					<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title" target= "_blank">免费咨询</a>
 				</div>
 				<div class="questionmart clear ft12 pr">
-					<span class="fl nomargin">咨询成功后，快来<a href="#" class="cr fb">上传合同</a>，抢装修基金 </span>
+					<% if current_user -%>
+          	<% unless current_user.common_user? %>
+              <span class="fl nomargin">咨询成功后，快来<a href="<%=new_contract_path(type: 'baicheng')%>" title="上传合同" class="cr fb">上传合同</a>，抢装修基金 </span>
+              
+            <% else %>
+              <span class="fl nomargin">咨询成功后，快来<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" title="上传合同" class="cr fb">上传合同</a>，抢装修基金 </span>
+              
+            <% end %>
+          <% else -%>
+            <span class="fl nomargin">咨询成功后，快来<%= link_to_function "上传合同", "show_login()", :class=>"cr fb" %>，抢装修基金 </span>
+          <% end %>   
+
 					<div class="js-questionmart fl">
 						<img style="padding:7px 20px 0 3px;" src="<%= asset_path 'baicheng/content/questionmark.jpg' %>">
 						<div class="questionmart_pop questionmart_pop2 none">
@@ -139,8 +150,19 @@
 							<p>
 								家装公司/设计师可进入
 								<a href="<%= user_path(@design.user_id) %>" style="color:#333;" target="_blank">个人主页</a>，<br>点击
-								<a href="#"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
-								<a href="#" class="cr fb">上传合同</a>
+                <% if current_user -%>
+                  <% unless current_user.common_user? %>
+                    <a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                    <a href="<%=new_contract_path(type: 'baicheng')%>" class="cr fb">上传合同</a>
+                  <% else %>
+                    <a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                    <a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="cr fb">上传合同</a>
+                  <% end %>
+                <% else -%>
+                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                  <%= link_to_function "上传合同", "show_login()", :class=>"cr fb" %>
+                <% end %>
+								
 							</p>
 						</div>
 					</div>

@@ -6,62 +6,64 @@ require 'spreadsheet'
 desc "新浪图库数据导入"
 task :import_image_libraries_sina => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
-  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130309.xls"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130320.xls"
   sheet1 = book.worksheet 0
   sheet1.each do |row|
-    user = User.find_by_username(row[6]) if row[6].present?
-    sina_user = User.find_by_username("#{row[6]}-sina") if row[6].present?
-    new_user = nil
-    if user && user.source == 'sina'
-      new_user = user
-    elsif sina_user
-      new_user = sina_user
-    else
-      new_user = User.new
-      new_user.username = "#{row[6]}"+"-sina" if row[6].present?
-      new_user.password = '123456'
-      new_user.types = '设计师'
-      new_user.source = 'sina'
-      new_user.role_id = 1
-      new_user.des_status = 1
-      new_user.save(validate: false)
-    end
-    style = ImageLibraryCategory.where("title like '%#{row[4]}%'").first if row[4].present?
-    room = ImageLibraryCategory.where(title: row[5]).first  if row[5].present?
-    area = Area.where("name like '%#{row[3].gsub(/市/,'')}%'").first if !row[3].blank?
-    design = Design.new
-    design.title = row[1]
-    design.content = row[10]
-    design.user_id = new_user.id
-    design.style = style.title if style
-    design.area_id = area ? area.id : 31
-    design.room_type = room.title if room
-    if design.save(validate: false)
-      file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0].to_i}/*"]
-      if file_src_arr.present?
-        file_src_arr.each do |file_src|
-          p '获取到图片！！！'
-          p file_src
-          after_poking = file_src.split('.').last
-          if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG' 
-            design_image = design.design_images.new
-            handle = open(file_src) rescue nil
-            handle.class.class_eval { attr_accessor :original_filename, :content_type }
-            handle.original_filename = file_src.split("/").last
-            design_image.file = handle
-            design_image.title = row[1]
-            design_image.area_id = area ? area.id : 31
-            image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-            design_image.tags = [image_tag] if image_tag.present?
-            design_image.room = room.id if room
-            design_image.content = row[10]
-            design_image.user_id = new_user.id
-            design_image.source = 'sina'
-            design_image.sorts = 4
-            if design_image.save
-              p "保存成功!"
-            else
-              p "保存失败!---#{row[0]}"
+    if row[6].present?
+      user = User.find_by_username(row[6]) if row[6].present?
+      sina_user = User.find_by_username("#{row[6]}-sina") if row[6].present?
+      new_user = nil
+      if user && user.source == 'sina'
+        new_user = user
+      elsif sina_user
+        new_user = sina_user
+      else
+        new_user = User.new
+        new_user.username = "#{row[6]}"+"-sina" if row[6].present?
+        new_user.password = '123456'
+        new_user.types = '设计师'
+        new_user.source = 'sina'
+        new_user.role_id = 1
+        new_user.des_status = 1
+        new_user.save(validate: false)
+      end
+      style = ImageLibraryCategory.where("title like '%#{row[4]}%'").first if row[4].present?
+      room = ImageLibraryCategory.where(title: row[5]).first  if row[5].present?
+      area = Area.where("name like '%#{row[3].gsub(/市/,'')}%'").first if !row[3].blank?
+      design = Design.new
+      design.title = row[1]
+      design.content = row[10]
+      design.user_id = new_user.id
+      design.style = style.title if style
+      design.area_id = area ? area.id : 31
+      design.room_type = room.title if room
+      if design.save(validate: false)
+        file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0].to_i}/*"]
+        if file_src_arr.present?
+          file_src_arr.each do |file_src|
+            p '获取到图片！！！'
+            p file_src
+            after_poking = file_src.split('.').last
+            if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG' 
+              design_image = design.design_images.new
+              handle = open(file_src) rescue nil
+              handle.class.class_eval { attr_accessor :original_filename, :content_type }
+              handle.original_filename = file_src.split("/").last
+              design_image.file = handle
+              design_image.title = row[1]
+              design_image.area_id = area ? area.id : 31
+              image_tag = ImageTag.where(image_library_category_id: style.id).first if style
+              design_image.tags = [image_tag] if image_tag.present?
+              design_image.room = room.id if room
+              design_image.content = row[10]
+              design_image.user_id = new_user.id
+              design_image.source = 'sina'
+              design_image.sorts = 4
+              if design_image.save
+                p "保存成功!"
+              else
+                p "保存失败!---#{row[0]}"
+              end
             end
           end
         end
@@ -97,6 +99,75 @@ task :import_image_libraries_sina => :environment  do
   #     design_img.save
   #   end
   # end
+end
+
+
+task :import_image_libraries_sina2 => :environment  do
+  Spreadsheet.client_encoding ="UTF-8"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130319_2.xls"
+  sheet1 = book.worksheet 0
+  sheet1.each do |row|
+    if row[6].present?
+      user = User.find_by_username(row[6]) if row[6].present?
+      sina_user = User.find_by_username("#{row[6]}-sina") if row[6].present?
+      new_user = nil
+      if user && user.source == 'sina'
+        new_user = user
+      elsif sina_user
+        new_user = sina_user
+      else
+        new_user = User.new
+        new_user.username = "#{row[6]}"+"-sina" if row[6].present?
+        new_user.password = '123456'
+        new_user.types = '设计师'
+        new_user.source = 'sina'
+        new_user.role_id = 1
+        new_user.des_status = 1
+        new_user.save(validate: false)
+      end
+      style = ImageLibraryCategory.where("title like '%#{row[4]}%'").first if row[4].present?
+      room = ImageLibraryCategory.where(title: row[5]).first  if row[5].present?
+      area = Area.where("name like '%#{row[3].gsub(/市/,'')}%'").first if !row[3].blank?
+      design = Design.new
+      design.title = row[1]
+      design.content = row[10]
+      design.user_id = new_user.id
+      design.style = style.title if style
+      design.area_id = area ? area.id : 31
+      design.room_type = room.title if room
+      if design.save(validate: false)
+        file_src_arr = Dir["/home/nioteam/icolor/sina2/#{row[0].to_i}/*"]
+        if file_src_arr.present?
+          file_src_arr.each do |file_src|
+            p '获取到图片！！！'
+            p file_src
+            after_poking = file_src.split('.').last
+            if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG' 
+              design_image = design.design_images.new
+              handle = open(file_src) rescue nil
+              handle.class.class_eval { attr_accessor :original_filename, :content_type }
+              handle.original_filename = file_src.split("/").last
+              design_image.file = handle
+              design_image.title = row[1]
+              design_image.area_id = area ? area.id : 31
+              image_tag = ImageTag.where(image_library_category_id: style.id).first if style
+              design_image.tags = [image_tag] if image_tag.present?
+              design_image.room = room.id if room
+              design_image.content = row[10]
+              design_image.user_id = new_user.id
+              design_image.source = 'sina'
+              design_image.sorts = 4
+              if design_image.save
+                p "保存成功!"
+              else
+                p "保存失败!---#{row[0]}"
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end
 
 
