@@ -25,9 +25,11 @@
 .imgbase{background-color:#fff;width:1180px;margin:0 auto;padding-bottom:20px;}
 .imgbase a:hover,.search_bin a.curr_rank,.tit_tab .fresh,.imgbase_title strong{color:#e71d36;}
 /**/
-.imgbase_title{background:url(<%= asset_path "imgbase/imgbase_bg.jpg" %>) no-repeat center bottom;height:94px;padding:20px 0 0 30px;margin:0 auto;}
+.imgbase_title{background:url(<%= asset_path "imgbase/imgbase_bg.jpg" %>) no-repeat center bottom;min-height:94px;_height:94px;padding:20px 0 0 30px;margin:0 auto;}
 .imgbase_title p{font:bold 18px/30px "Microsoft Yahei";color:#131313;padding-left:3px;}
 .imgbase_title strong{font-weight:700;}
+.imgbase_title p .select_options{max-width:800px;_width:800px;_overflow:hidden;font:normal 12px/16px "SimSun";margin:10px 15px 0 0;/*text-align:right;*/overflow:hidden;}
+.select_alloptions{max-width:740px;_width:740px;_overflow:hidden;}
 .imgbase_search{margin-top:5px;}
 .imgbase_search button{background:url(<%= asset_path "imgbase/imgbase_btn.jpg" %>);width:44px;height:23px;color:#a94305;font-size:14px;}
 .imgbase_search input{height:20px;margin-right:2px;background:#fff url(<%= asset_path "search-icon.jpg" %>) no-repeat 5px center;border:1px solid #d6d6d6;outline:none;width:150px;padding-left:25px;font-size:14px;}

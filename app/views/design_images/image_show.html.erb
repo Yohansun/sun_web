@@ -113,6 +113,9 @@ $(function(){
 	<div class="imgbase_title">
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<!-- <p>iColor为您提供<strong><%#= @images_total %></strong>张装修图片</p> -->
+    <p class="clear">
+      <span class="fr select_options"><span class="fl">搜索结果：</span><span class="fl select_alloptions"><%=params[:where]%></span></span>
+    </p>
 	</div><!-- imgbase_title -->
 
 	<div class="imgbase_main clear nomargin">
