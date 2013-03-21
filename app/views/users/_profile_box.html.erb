@@ -131,7 +131,8 @@ $(function(){
     <p class="icon_qq">Q   Q:<%= @user.qq %></p>
     <p class="icon_msn">MSN: <%= @user.msn %></p>
     <p class="icon_fetion">飞信: <%= @user.fetion %></p> -->
-    <p>城市: <%= @user.location unless @user.location == "NULL" %></p>
+    <!--<p>城市: <%= @user.location unless @user.location == "NULL" %></p> -->
+	<p>城市: <%= @user.user_location %></p>
   </div>
   <!--host_status ends-->
 </div>
