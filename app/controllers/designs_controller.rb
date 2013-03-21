@@ -303,11 +303,11 @@ class DesignsController < ApplicationController
       @design.baicheng_active = false
     end
     @design.save
-    if params[:baicheng_active]
-        redirect_to "/baicheng/design_works/#{params[:design_id]}"
-    else
-        redirect_to user_path(current_user)
-    end
+    #if params[:baicheng_active]
+    #    redirect_to "/baicheng/design_works/#{params[:design_id]}"
+    #else
+    redirect_to user_path(current_user)
+    #end
   end
 
   def destroy
