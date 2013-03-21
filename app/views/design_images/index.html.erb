@@ -299,13 +299,13 @@
 		<ul class="imgbase_list">
 			<%- @images.each_with_index do |image, index| %>
 				<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-					<a href="<%= image_show_design_image_path(image) %>" target="_blank">
+					<a href="<%= image_show_design_image_path(image,where: @query_params) %>" target="_blank">
 						<%= image_tag(image.file.url(:design_image_list), size: '224x162') %>
 						<p><%= truncate(image.title, length: 15) %></p>
 						<span></span>
 					</a>
 					<div class="none">
-						<a href="<%= image_show_design_image_path(image) %>">
+						<a href="<%= image_show_design_image_path(image,where: @query_params) %>">
 							<span class="imgbase_comm"><%= image.try(:comments_count) %></span>
 						</a>
 						<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, :method => :post do %>
