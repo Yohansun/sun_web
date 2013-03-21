@@ -209,7 +209,15 @@
 		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
 		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
 		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
-		<p>搜索结果：<%= @query_params %></p>
+		<%- if @query_params.present? %>
+			<p class="srch-items">
+				您的选择：
+				<%= @query_params %>
+				<!-- <span class="srch-span">家具：<i>实木家具</i><a href="javascript:;" class="srch-del">删除</a></span> -->
+				<span class="srch-divider">|</span>
+				<button class="srch-span" onclick="javascript:window.location='<%= design_images_path(imageable_type: params[:imageable_type],ranking_list: params[:ranking_list]) %>';">重新选择</button>
+			</p>
+		<%- end %>
 	</div><!-- search_bin -->
 
 
