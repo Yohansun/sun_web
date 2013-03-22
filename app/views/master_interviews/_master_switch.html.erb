@@ -1,17 +1,17 @@
 <div class="design_tit group pb10 line_b_dot">
   <ul class="design_filter group">
 	<%- if !params[:master_kind] %>
-        <li class="<%= 'li_current' if params[:tags] == '全部' %> ">
-          <a href="/master_interviews?tags=<%= URI.escape("全部") %>">全部</a>
+        <li class="<%= 'li_current' if params[:action] == 'all' %> ">
+		  <%= link_to "全部", all_master_interviews_path%>
         </li>
-        <li class="<%= 'li_current' if params[:tags] == '海外' %> ">
-		  <a href="/master_interviews?tags=<%= URI.escape("海外") %>">海外</a>
+        <li class="<%= 'li_current' if params[:action] == 'oversea' %> ">
+			<%= link_to "海外",oversea_master_interviews_path %>
 		</li>
-		<li class="<%= 'li_current' if params[:tags] == '港澳台' %> ">
-		  <a href="/master_interviews?tags=<%= URI.escape("港澳台") %>">港澳台</a>
+		<li class="<%= 'li_current' if params[:action] == 'hk_tw_mc' %> ">
+			<%= link_to "港澳台", hk_tw_mc_master_interviews_path %>
 		</li>
-		<li class="<%= 'li_current' if params[:tags] == '中国大陆' %> ">
-		  <a href="/master_interviews?tags=<%= URI.escape("中国大陆") %>">中国大陆</a>
+		<li class="<%= 'li_current' if params[:action] == 'cn' %> ">	
+			<%= link_to "中国大陆", cn_master_interviews_path %>
 		</li>
 	<%- else %>
         <li class="<%= 'li_current' if params[:tags] == '全部' || !params[:tags] %> ">

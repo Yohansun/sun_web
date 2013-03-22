@@ -99,31 +99,33 @@
     <!--navTop ends-->
     <ul class="navBot fr cw fb ft14">
       <li><a href="/<%= link_suffix %>" class="<%= 'active' if controller_name == 'home' %>">首页</a></li>
-      <li class="pr"><a href="/master_interviews<%= link_suffix %>" class="<%= 'active' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">大师殿堂</a>
+<!--      <li class="pr"><a href="/master_interviews<%= link_suffix %>" class="<%= 'active' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">大师殿堂</a> -->
+	 	 <li class="pr"><a href="/master_interviews" class="<%= 'active' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">大师殿堂</a>	
         <ul>
-          <li><a href="/master_interviews<%= link_suffix %>" class="<%= 'active' if controller_name == 'master_interviews' %>">大师访谈</a></li>
-          <li class="pr noborder"><a href="/master_designs<%= link_suffix %>" class="<%= 'active' if controller_name == 'master_designs' %>">大师作品</a>
+          <li><a href="/master_interviews" class="<%= 'active' if controller_name == 'master_interviews' %>">大师访谈</a></li>
+          <li class="pr noborder"><a href="/master_designs" class="<%= 'active' if controller_name == 'master_designs' %>">大师作品</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <!-- <li class="noborder"><a href="/master_topics<%= link_suffix %>">业内动态</a></li> -->
         </ul>
       </li>
       <li class="pr">
-        <a href="/design_images<%= link_suffix %>" class="<%= 'active' if controller_name == 'design_images' %>">装修图库</a>
+        <a href="/design_images" class="<%= 'active' if controller_name == 'design_images' %>">装修图库</a>
         <span class="nav_hot"><img src="<%= asset_path "new.png" %>"></span>
       </li>
 
-      <li class="pr"><a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>" class="<%= 'active' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations' %>">设计鉴赏</a>
+      <li class="pr">
+		  <%= link_to "设计鉴赏", weekly_stars_path,:class => ('active' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations') %>
         <ul>
           <li class="pr">
-            <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>" class="<%= 'active' if controller_name == 'weekly_stars' %>">设计之星</a>
+			  <%= link_to "设计之星", weekly_stars_path,:class => ('active' if controller_name == 'weekly_stars') %>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <li><a href="/designs<%= link_suffix %>" class="<%= 'active' if controller_name == 'designs' %>">作品展示</a></li>
-          <li class="pr"><a href="/color_designs<%= link_suffix %>" class="<%= 'active' if controller_name == 'color_designs' %>">色彩配搭</a>
+          <li><a href="/designs" class="<%= 'active' if controller_name == 'designs' %>">作品展示</a></li>
+          <li class="pr"><a href="/color_designs" class="<%= 'active' if controller_name == 'color_designs' %>">色彩配搭</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <li class="pr noborder"><a href="/inspirations<%= link_suffix %>" class="<%= 'active' if controller_name == 'inspirations' %>">灵感秀</a></li>
+          <li class="pr noborder"><a href="/inspirations" class="<%= 'active' if controller_name == 'inspirations' %>">灵感秀</a></li>
           <!-- <li class="noborder pr"><a href="/my_show<%= link_suffix %>">我型我秀</a> -->
           <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
           <!-- </li> -->
@@ -131,12 +133,13 @@
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
 
-      <li class="pr"><a href="/channel/access<%= link_suffix %>" class="<%= 'active' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' %>">业主通道</a>
+      <li class="pr"><a href="/channel/access" class="<%= 'active' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' %>">业主通道</a>
         <ul >
-          <li class="pr"><a href="/channel/access<%= link_suffix %>" class="<%= 'active' if controller_name == 'channel' %>">设计快查</a><span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span></li>
+          <li class="pr"><a href="/channel/access" class="<%= 'active' if controller_name == 'channel' %>">设计快查</a><span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span></li>
           <li><a href="/faqs" class="<%= 'active' if controller_name == 'faqs' %>">装修问答</a></li>
-          <li><a href="/faqs#tips">装修贴士</a></li>
-          <li><a href="/mix_colors/new<%= link_suffix %>" class="<%= 'active' if controller_name == 'mix_colors' %>">配色咨询</a></li>
+<!--          <li><a href="/faqs#tips">装修贴士</a></li> -->
+			  <li><a href="/faqs">装修贴士</a></li>
+          <li><a href="/mix_colors/new" class="<%= 'active' if controller_name == 'mix_colors' %>">配色咨询</a></li>
           <li class="noborder"><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">刷新服务</a></li>
           <!-- <li><a href="/faqs<%= link_suffix %>">装修问答</a></li>
           <li class="noborder"><a href="/mix_colors/new<%= link_suffix %>">配色咨询</a></li> -->
@@ -144,16 +147,16 @@
         <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
 
-      <li class="pr"><a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" class="<%= 'active' if controller_name == 'articles' || controller_name == 'color_articles' || controller_name == 'master_topics' %>">行业资讯</a>
+      <li class="pr"><a href="/articles" class="<%= 'active' if controller_name == 'articles' || controller_name == 'color_articles' || controller_name == 'master_topics' %>">行业资讯</a>
         <ul>
-          <li class="pr"><a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" class="<%= 'active' if controller_name == 'articles' %>">装修资讯</a>
+          <li class="pr"><a href="/articles" class="<%= 'active' if controller_name == 'articles' %>">装修资讯</a>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <li><a href="/color_articles<%= link_suffix %>" class="<%= 'active' if controller_name == 'color_articles' %>">色彩资讯</a></li>
+          <li><a href="/color_articles" class="<%= 'active' if controller_name == 'color_articles' %>">色彩资讯</a></li>
           <li class="noborder"><a href="/master_topics" class="<%= 'active' if controller_name == 'master_topics' %>">业内动态</a></li>
         </ul>
       </li>
-      <li class="pr"><a href="/softwares/tools<%= link_suffix %>" class="<%= 'active' if controller_name == 'softwares' %>">应用工具</a>
+      <li class="pr"><a href="/softwares/tools" class="<%= 'active' if controller_name == 'softwares' %>">应用工具</a>
         <ul>
           <li><a href="/softwares/case" class="<%= 'active' if controller_name == 'softwares' && action_name == 'case' %>">案例下载</a></li>
           <li class="noborder"><a href="/softwares/tools"  class="<%= 'active' if controller_name == 'softwares' && action_name == 'tools' %>">配色软件</a></li>
@@ -161,20 +164,20 @@
         </ul>
       </li>
 
-      <li class="pr"><a href="/art<%= link_suffix %>" class="<%= 'active' if controller_name == 'function' %>">漆光艺彩</a>
+      <li class="pr"><a href="/art" class="<%= 'active' if controller_name == 'function' %>">漆光艺彩</a>
         <ul style="width:146px">
-          <li><a href="/art<%= link_suffix %>" class="<%= 'active' if controller_name == 'function' && action_name == 'art' %>">米兰诺艺术效果</a></li>
-          <li class="noborder"><a href="/7-1<%= link_suffix %>" class="<%= 'active' if controller_name == 'function' && action_name == '7-1' %>">木纹风尚生活</a></li>
+          <li><a href="/art" class="<%= 'active' if controller_name == 'function' && action_name == 'art' %>">米兰诺艺术效果</a></li>
+          <li class="noborder"><a href="/7-1" class="<%= 'active' if controller_name == 'function' && action_name == '7-1' %>">木纹风尚生活</a></li>
           <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
           <!-- <li class="noborder"><a href="/7-3<%= link_suffix %>">刷新灵感我绘我家</a></li> -->
         </ul>
         <!-- <span class="nav_hot"><img src="<%= asset_path "new.png"%>" /></span> -->
       </li>
-      <li class="noborder pr"><a href="/designer_events<%= link_suffix %>" class="<%= 'active' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts' %>">精彩活动</a>
+      <li class="noborder pr"><a href="/designer_events" class="<%= 'active' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts' %>">精彩活动</a>
         <ul style="width:116px; left: -25px;_left: -17px">
-          <li><a href="/designer_events<%= link_suffix %>" class="<%= 'active' if controller_name == 'designer_events' %>">设计师活动</a></li>
-          <li><a href="/other_events<%= link_suffix %>" class="<%= 'active' if controller_name == 'other_events' %>">其他活动</a></li>
-          <li class="noborder"><a href="/gift_list<%= link_suffix %>" class="<%= 'active' if controller_name == 'gifts' %>">获奖名单</a></li>
+          <li><a href="/designer_events" class="<%= 'active' if controller_name == 'designer_events' %>">设计师活动</a></li>
+          <li><a href="/other_events" class="<%= 'active' if controller_name == 'other_events' %>">其他活动</a></li>
+          <li class="noborder"><a href="/gift_list" class="<%= 'active' if controller_name == 'gifts' %>">获奖名单</a></li>
           <!-- <li class="noborder"><a href="/events<%= link_suffix %>">年度色彩趋势活动</a></li> -->
         </ul>
       </li>

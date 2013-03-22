@@ -74,8 +74,18 @@ Icolor::Application.routes.draw do
   match "/site_messages" => "site_messages#create", via: :post, as: 'online_qa'
 
   #大师殿堂
-  match "/master_interviews" => "master_interviews#index"
-  match "/master_interviews/:id" => "master_interviews#show"
+  resources :master_interviews,:only => [:index,:show] do
+    collection do
+      get :all                                                  #所有
+      get :oversea                                              #海外
+      match "hk-tw-mc",:action => "hk_tw_mc",:as => "hk_tw_mc"  #港澳台
+      get :cn                                                   #中国大陆
+      get :shinei                                               #室内空间大师
+      get :color                                                #色彩大师
+    end
+    
+  end
+  
   resources :master_topics, :only => [:index, :show]
   match "/master_designs" => "master_designs#index"
   match "/master_designs/:id" => "master_designs#show", as: 'master_design'
@@ -99,6 +109,14 @@ Icolor::Application.routes.draw do
 
   #设计鉴赏
   # resources :weekly_stars, :only => [:index, :show]
+  #设计之星
+  match "weekly_stars-design" => "weekly_stars#index"                             ,:as => "weekly_stars"
+  #每周之星
+  match "weekly_stars-week"   => "weekly_stars#weekly_stars_week"                 ,:as => "weekly_stars_week_weekly_stars"
+  #月度色彩之星
+  match "weekly_stars-month-color" => "weekly_stars#weekly_stars_month_color"     ,:as => "weekly_stars_month_color_weekly_stars"
+  #月度设计之星
+  match "weekly_stars-month-design" => "weekly_stars#weekly_stars_month_design"   ,:as => "weekly_stars_month_design_weekly_stars"
   resources :weekly_stars do
     member do
       get :download
@@ -113,6 +131,13 @@ Icolor::Application.routes.draw do
   match "/my_show" => "my_show#index"
   match "/my_show/autocomplete_username" => "my_show#autocomplete_username"
 
+
+  #最新
+  match "inspirations-new"      => "inspirations#inspirations_new"          ,:as => "inspirations_new"
+  #最热
+  match "inspirations-hot"      => "inspirations#inspirations_hot"          ,:as => "inspirations_hot"
+  #刷新21天
+  match "inspirations-minisite" => "inspirations#inspirations_minisite"     ,:as => "inspirations_minisite"      
   resources :inspirations do
     member do
       get :download

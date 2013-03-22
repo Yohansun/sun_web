@@ -57,8 +57,8 @@
       <%- unless @design.id.nil? %>
       <a href="/weekly_stars/<%= @design.id %>">
         <h1>
-          <%= params[:star_type][0,2] %><b><%= params[:star_type][2..-1] %></b>
-          <p>STAR OF THIS <%= params[:star_type].include?("月度") ? 'MONTH' : 'WEEK' %></p>
+          <%= @title1 %><b><%= @title2 %></b>
+          <p>STAR OF THIS <%= @title.include?("月度") ? 'MONTH' : 'WEEK' %></p>
         </h1>
       </a>
       <div class="btn_group fr">
@@ -73,16 +73,14 @@
         <h3 class="this_week_tit"><%= @design.design_name %></h3>
         <ul class="this_week_tab group">
           <%- 
-            ["每周之星","月度色彩之星","月度设计之星"].each do |type|
-            unless star_blank?(type) 
+            {weekly_stars_week_weekly_stars_path		=> "每周之星",
+			weekly_stars_month_color_weekly_stars_path 	=> "月度色彩之星",
+			weekly_stars_month_design_weekly_stars_path	=> "月度设计之星"}.each do |pat,type|
           %>
-            <li class="<%= 'this_week_btnhover' if params[:star_type] == type %>">
-              <a href="/weekly_stars?star_type=<%= URI.escape(type) %>"><%= type %></a>
+            <li class="<%= 'this_week_btnhover' if request.fullpath == pat %>">
+				<%= link_to type,pat %>
             </li>  
-          <%- 
-            end 
-          end
-          %>  
+          <%-end%>  
         </ul>
       </div>
 

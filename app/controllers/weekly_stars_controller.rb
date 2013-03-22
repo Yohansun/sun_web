@@ -13,10 +13,10 @@ class WeeklyStarsController < ApplicationController
      
   end
   def index
-    params[:star_type] ||= "每周之星"
+    @title1,@title2 = "每周","之星"
 
     designs = WeeklyStar.order("published_at desc") || WeeklyStar.new
-    star_type_id = WeeklyStar.get_star_type_id params[:star_type]
+    star_type_id = WeeklyStar.get_star_type_id(@title="每周之星")
 
     @design = designs.where(star_type_id: star_type_id).first    
     design_id = @design.design_link.split("/").last
@@ -32,6 +32,25 @@ class WeeklyStarsController < ApplicationController
     # end  
     @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(8)
   end
+  
+  {:weekly_stars_week 			    => "每周之星",
+    :weekly_stars_month_color 	=> "月度色彩之星",
+    :weekly_stars_month_design 	=> "月度设计之星"}.
+    each do |act,star_type|
+      define_method(act) do
+        #TODO
+        star_type_id = WeeklyStar.get_star_type_id(star_type)
+        #每周之星
+        @design = WeeklyStar.order("published_at desc").find_by_star_type_id(star_type_id)
+        design_id = @design.design_link.split("/").last
+        @link_design = Design.find(design_id)
+
+        @elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8) 
+        @title = @title1 = star_type.dup
+        @title1.delete!(@title2="之星")
+        render "index"
+      end
+    end
 
   def show
     @design = WeeklyStar.find(params[:id])

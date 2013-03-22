@@ -27,14 +27,14 @@
   <div class='wrapper pb60 group'>
     <div class="design_tit group">
       <ul class="design_filter group">
-        <li class=<%="#{'li_current' if params[:order] == '最新' }" %> >
-        <a href="/inspirations?order=<%= URI.escape('最新')%>">最新</a>
+        <li class=<%="#{'li_current' if params[:action] == 'inspirations_new' }" %> >
+		<%= link_to "最新",inspirations_new_path %>
         </li>
-        <li class=<%="#{'li_current' if params[:order] == '最热' }" %> >
-        <a href="/inspirations?order=<%= URI.escape('最热')%>">最热</a>
+        <li class=<%="#{'li_current' if params[:action] == 'inspirations_hot' }" %> >
+		<%= link_to "最热",inspirations_hot_path %>			
         </li>
         <li class="refresh_21">
-            <a href="/inspirations?order=minisite"><img src="<%= asset_path "icon_03.jpg"%>" /></a>
+            <a href="/inspirations-minisite"><img src="<%= asset_path "icon_03.jpg"%>" /></a>
         </li>
       </ul>
       <div class="upload_btn">
