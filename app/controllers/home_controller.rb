@@ -29,12 +29,12 @@ class HomeController < ApplicationController
     @master_design_three = MasterDesign.order("updated_at desc").limit(3).last
 
     #图库装修
-    @desing_image = DesignImage.available.audited_with_colors.order("created_at desc").limit(1).first
-    @desing_image_two = DesignImage.available.audited_with_colors.order("created_at desc").limit(2).last
-    @desing_image_three = DesignImage.available.audited_with_colors.order("created_at desc").limit(3).last
-    @desing_image_four = DesignImage.available.audited_with_colors.order("created_at desc").limit(4).last
-    @desing_image_five = DesignImage.available.audited_with_colors.order("created_at desc").limit(5).last
-    @desing_image_six = DesignImage.available.audited_with_colors.order("created_at desc").limit(6).last
+    @design_image = DesignImage.available.audited_with_colors.order("created_at desc").limit(1).first
+    @design_image_two = DesignImage.available.audited_with_colors.order("created_at desc").limit(2).last
+    @design_image_three = DesignImage.available.audited_with_colors.order("created_at desc").limit(3).last
+    @design_image_four = DesignImage.available.audited_with_colors.order("created_at desc").limit(4).last
+    @design_image_five = DesignImage.available.audited_with_colors.order("created_at desc").limit(5).last
+    @design_image_six = DesignImage.available.audited_with_colors.order("created_at desc").limit(6).last
 
     #TODO灵感秀
     @inspiration = Inspiration.joins(:design_images).group("inspirations.id").where("design_images.imageable_id = inspirations.id").order("inspirations.created_at desc").first

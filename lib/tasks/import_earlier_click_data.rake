@@ -6,22 +6,20 @@ task :import_earlier_click_data => :environment  do
 
   p "Starting~~~~~~~~~~~~~~~~~"
 
-  p "Start Delete!!!!!"
-  date_array = ["2013-02-28".to_time(:local),"2013-03-01".to_time(:local),"2013-03-02".to_time(:local),"2013-03-03".to_time(:local),
-    "2013-03-04".to_time(:local),"2013-03-05".to_time(:local),"2013-03-06".to_time(:local),"2013-03-07".to_time(:local),"2013-03-08".to_time(:local),
-    "2013-03-09".to_time(:local),"2013-03-10".to_time(:local),"2013-03-11".to_time(:local),"2013-03-12".to_time(:local)]
-  date_array.each do |date|
-    p "delete #{date}"
-    HardSell.where(date: date).delete_all
-  end
+  #p "Start Delete!!!!!"
+  # date_array = ["2013-02-28".to_time(:local),"2013-03-01".to_time(:local),"2013-03-02".to_time(:local),"2013-03-03".to_time(:local),
+  # "2013-03-04".to_time(:local),"2013-03-05".to_time(:local),"2013-03-06".to_time(:local),"2013-03-07".to_time(:local),"2013-03-08".to_time(:local),
+  # "2013-03-09".to_time(:local),"2013-03-10".to_time(:local),"2013-03-11".to_time(:local),"2013-03-12".to_time(:local)]
+  #date_array.each do |date|
+  p "delete ALL HardSell !!!!"
+  HardSell.delete_all
+  #end
 
   p "Start Build!!!!!"
   time_array = []
-  file_array = ["landing.log.20130228","landing.log.20130301","landing.log.20130302","landing.log.20130303",
-    "landing.log.20130304","landing.log.20130305","landing.log.20130306","landing.log.20130307","landing.log.20130308",
-    "landing.log.20130309","landing.log.20130310","landing.log.20130311","landing.log.20130312"]
+  file_array = Dir.foreach("#{Rails.root}/public/system/relog_landing_log/").to_a
   file_array.each do |file|
-    file_name = "#{Rails.root}/public/system/landing_log/" + file
+    file_name = "#{Rails.root}/public/system/relog_landing_log/" + file
     time_array = []
     days = []
     contents = []
