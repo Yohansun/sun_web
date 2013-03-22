@@ -83,8 +83,8 @@
 				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
 			
-			if($(".imgbase_toggle").hasClass('form_expand')){
-				$toggle.text("收起");
+			if($toggle.hasClass('form_expand')){
+				$toggle.text("展开");
 			}
 			else {
 				$toggle.text("收起");
@@ -215,7 +215,7 @@
 						<%- end %>
 					<%- end %>
 				<%- end %>
-				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
+				<!--<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a> -->
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
