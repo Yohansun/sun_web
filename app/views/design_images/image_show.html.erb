@@ -29,14 +29,14 @@
 
 <script type="text/javascript">
 
-$(function(){
-  var $slider = $('#feb_slides');
-  $slider.slides({
-    next: 'slider_next',
-    prev: 'slider_prev',
-    start: <%=@image_num%>
-  });
-});
+// $(function(){
+//   var $slider = $('#feb_slides');
+//   $slider.slides({
+//     next: 'slider_next',
+//     prev: 'slider_prev',
+//     start: <%#=@image_num%>
+//   });
+// });
 
 $(function() {
   Object.size = function(obj) {
@@ -114,7 +114,7 @@ $(function(){
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<!-- <p>iColor为您提供<strong><%#= @images_total %></strong>张装修图片</p> -->
     <p class="clear">
-      <span class="fr select_options"><span class="fl">搜索结果：</span><span class="fl select_alloptions"><%=params[:where]%></span></span>
+      <span class="fr select_options"><span class="fl">搜索结果：</span><span class="fl select_alloptions"><%=@query_params%></span></span>
     </p>
 	</div><!-- imgbase_title -->
 
@@ -131,18 +131,24 @@ $(function(){
         <%- end %>
         <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>">免费下载</a>
      </div>
-     <div class="img_vertical_align" id="feb_slides">
+     <div id="feb_slides">
         <div class="slides_container">
-          <%- @images.each do |image| %>
-            <div >
-              <div>
-                  <%= image_tag(image.file.url(:design_image_big), :class =>"imginfo_big_img") %>
-              </div>
+          <div>
+            <div class="img_vertical_align">
+                <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img") %>
             </div>
-          <%- end %>
+          </div>
         </div>
-       <a href="javascript:;" class="slider_next">next</a>
-       <a href="javascript:;" class="slider_prev">prev</a>
+      <% if @next_id %>
+        <a href="<%= image_show_design_image_path(@next_id.first.id,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: params[:site].to_i + 1) %>" class="slider_next">next</a>
+      <% else %>
+        <a class="slider_next">next</a>
+      <% end %>
+      <% if @up_id %>
+        <a href="<%=image_show_design_image_path(@up_id.first.id,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: params[:site].to_i - 1)%>" class="slider_prev">prev</a>
+      <% else %>
+        <a class="slider_prev">prev</a>
+      <% end %>
      </div>
       <%- unless @image.imageable_type == "MasterDesign" || @image.imageable_type == "ColorDesign" -%>
 	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>

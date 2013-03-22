@@ -202,23 +202,82 @@ class DesignImagesController < ApplicationController
         @image_city = area.name
       end
     end
-    #获取图片第几张
-    @images = []
-    @image_num = 1
-    if @image.imageable_type == 'MasterDesign'
-      mdu = MasterDesign.find @image.imageable_id
-      @images = DesignImage.where("imageable_id = #{mdu.id} and imageable_type = 'MasterDesign'")
+    @tag_names = []
+    images = DesignImage.available.audited_with_colors
+    unless params[:tags].blank?
+       @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
+       @tag_ids.delete(-1)
     end
-    if @image.imageable_type == 'Design'
-      @images = @image.design.design_images
+
+    unless @tag_ids.blank?
+      Rails.logger.debug @tag_ids.inspect
+      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
+      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+      images = images.search_tags(final_tags.map(&:id))
+      @tag_names << final_tags.map(&:title)
     end
-    @images.each do |image|
-      if image.id.to_i == @image.id.to_i
-        break
+
+    unless params[:area_id].blank?
+      area = Area.find(params[:area_id])
+      areas = area.self_and_descendants
+      area_tree = area.self_and_ancestors.map(&:id)
+      @area_names = area.self_and_ancestors.map(&:name).join(" ")
+      @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
+      images = images.where(area_id: areas.map(&:id))
+    end
+
+    unless params[:search].blank?
+      tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
+      images = images.search_tags(tags.map(&:id), true)
+      @tag_names << tags.map(&:title)
+    end
+
+    unless params[:imageable_type].blank?
+      if params[:imageable_type] == 'WeekStart'
+        images = images.where("sorts = 2")
       else
-        @image_num += 1
+        images = images.where("imageable_type = ?", params[:imageable_type])
       end
     end
+
+    unless params[:pinyin].blank?
+      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+      images = images.search_tags(tags.map(&:id), true)
+      @tag_names << tags.map(&:title)
+    end
+
+    unless params[:ranking_list].blank?
+      if params[:ranking_list] == "like"
+        images = images.order("design_images.votes_count desc")
+      elsif params[:ranking_list] == "view_count"
+        images = images.order("design_images.view_count desc")
+      end
+    else
+      images = images.order("design_images.created_at DESC")
+    end
+    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    count = images.count 
+    site = params[:site].to_i - 1
+    @up_id = images.offset(site - 1).limit(1) if site > 1
+    @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
+
+    # #获取图片第几张
+    # @images = []
+    # @image_num = 1
+    # if @image.imageable_type == 'MasterDesign'
+    #   mdu = MasterDesign.find @image.imageable_id
+    #   @images = DesignImage.where("imageable_id = #{mdu.id} and imageable_type = 'MasterDesign'")
+    # end
+    # if @image.imageable_type == 'Design'
+    #   @images = @image.design.design_images
+    # end
+    # @images.each do |image|
+    #   if image.id.to_i == @image.id.to_i
+    #     break
+    #   else
+    #     @image_num += 1
+    #   end
+    # end
 
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
