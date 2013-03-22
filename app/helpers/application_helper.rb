@@ -270,7 +270,7 @@ module ApplicationHelper
   
   # TASK290
   ALLOW_CONVERSION = Hash.new {|k,v| k[v] = []}.tap do |hash|
-    hash[:home]          = [:index],
+    hash[:home]          = [:index];
     hash[:design_images] = [:index]
   end
   
@@ -283,7 +283,7 @@ module ApplicationHelper
   def allow_conversion(ctrl,act)
     ctrl,act = ctrl.to_sym,act.to_sym
     ALLOW_CONVERSION[ctrl].tap do |actions|
-      actions.include?(act)
+      return actions.include?(act)
     end
   end
 end
