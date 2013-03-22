@@ -18,6 +18,8 @@ task :import_earlier_click_data => :environment  do
   p "Start Build!!!!!"
   time_array = []
   file_array = Dir.foreach("#{Rails.root}/public/system/relog_landing_log/").to_a
+  file_array.delete("..")
+  file_array.delete(".")
   file_array.each do |file|
     file_name = "#{Rails.root}/public/system/relog_landing_log/" + file
     time_array = []
