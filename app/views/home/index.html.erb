@@ -58,58 +58,58 @@
       <a href="/design_images" class="ft16">装修图库</a>
     </h2>
     <div class="blocks_big mr20 pr">
-      <a href="<%=image_show_design_image_path(@desing_image.id)%>">
-        <%- unless @desing_image.file.nil? %>
-              <%= image_tag(@desing_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
+      <a href="<%=image_show_design_image_path(@design_image.id)%>">
+        <%- unless @design_image.file.nil? %>
+              <%= image_tag(@design_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
-      <a href="<%=image_show_design_image_path(@desing_image.id)%>" class="blocks_title ft16"><%= truncate(@desing_image.design.try(:title), length: 20)%></a>
+      <a href="<%=image_show_design_image_path(@design_image.id)%>" class="blocks_title ft16"><%= truncate(@design_image.design.try(:title), length: 20)%></a>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
-        <a href="<%=image_show_design_image_path(@desing_image_two.id)%>">
-          <%- unless @desing_image_two.file.nil? %>
-              <%= image_tag(@desing_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
+        <a href="<%=image_show_design_image_path(@design_image_two.id)%>">
+          <%- unless @design_image_two.file.nil? %>
+              <%= image_tag(@design_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_two.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_two.design.try(:title), length: 20)%></a>
+        <a href="<%=image_show_design_image_path(@design_image_two.id)%>" class="blocks_title ft14"><%= truncate(@design_image_two.design.try(:title), length: 20)%></a>
       </div>
       <div class="blocks_mini mr20">
         <a href="/design_images<%= link_suffix %>" class="block block2_3">装修图库</a>
       </div>
       <div class="blocks_mini">
-        <a href="<%=image_show_design_image_path(@desing_image_three.id)%>">
-          <%- unless @desing_image_three.file.nil? %>
-                <%= image_tag(@desing_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+        <a href="<%=image_show_design_image_path(@design_image_three.id)%>">
+          <%- unless @design_image_three.file.nil? %>
+                <%= image_tag(@design_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_three.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_three.design.try(:title), length: 11)%></a>
+        <a href="<%=image_show_design_image_path(@design_image_three.id)%>" class="blocks_title ft14"><%= truncate(@design_image_three.design.try(:title), length: 11)%></a>
       </div>
     </div><!-- blocks_big -->
     <div class="blocks_big">
       <div class="blocks_mini mr20">
-        <a href="<%=image_show_design_image_path(@desing_image_four.id)%>">
-          <%- unless @desing_image_four.file.nil? %>
-                <%= image_tag(@desing_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+        <a href="<%=image_show_design_image_path(@design_image_four.id)%>">
+          <%- unless @design_image_four.file.nil? %>
+                <%= image_tag(@design_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_four.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_four.design.try(:title), length: 11)%></a>
+        <a href="<%=image_show_design_image_path(@design_image_four.id)%>" class="blocks_title ft14"><%= truncate(@design_image_four.design.try(:title), length: 11)%></a>
       </div>
       <div class="blocks_mini">
-        <a href="<%=image_show_design_image_path(@desing_image_five.id)%>">
-          <%- unless @desing_image_five.file.nil? %>
-                <%= image_tag(@desing_image_five.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+        <a href="<%=image_show_design_image_path(@design_image_five.id)%>">
+          <%- unless @design_image_five.file.nil? %>
+                <%= image_tag(@design_image_five.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_five.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_five.design.try(:title), length: 11)%></a>
+        <a href="<%=image_show_design_image_path(@design_image_five.id)%>" class="blocks_title ft14"><%= truncate(@design_image_five.design.try(:title), length: 11)%></a>
       </div>
       <div class="blocks_mid mt25">
-        <a href="<%=image_show_design_image_path(@desing_image_six.id)%>">
-          <%- unless @desing_image_six.file.nil? %>
-                <%= image_tag(@desing_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
+        <a href="<%=image_show_design_image_path(@design_image_six.id)%>">
+          <%- unless @design_image_six.file.nil? %>
+                <%= image_tag(@design_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
-        <a href="<%=image_show_design_image_path(@desing_image_six.id)%>" class="blocks_title ft14"><%= truncate(@desing_image_six.design.try(:title), length: 20)%></a>
+        <a href="<%=image_show_design_image_path(@design_image_six.id)%>" class="blocks_title ft14"><%= truncate(@design_image_six.design.try(:title), length: 20)%></a>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
