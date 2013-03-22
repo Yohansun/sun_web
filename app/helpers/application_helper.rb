@@ -268,9 +268,22 @@ module ApplicationHelper
     "#from=top"
   end
   
-  ALLOW_CONVERSION = %w(home design_images)
+  # TASK290
+  ALLOW_CONVERSION = Hash.new {|k,v| k[v] = []}.tap do |hash|
+    hash[:home]          = [:index],
+    hash[:design_images] = [:index]
+  end
   
   def rendered_script_conversion
-    render("conversion/#{params[:controller]}") if ALLOW_CONVERSION.include?(params[:controller])
+    ctrl,act = params[:controller],params[:action]
+    path_url = "conversion/#{ctrl}_#{act}"
+    render(path_url) if allow_conversion(ctrl,act)
+  end
+  
+  def allow_conversion(ctrl,act)
+    ctrl,act = ctrl.to_sym,act.to_sym
+    ALLOW_CONVERSION[ctrl].tap do |actions|
+      actions.include?(act)
+    end
   end
 end
