@@ -111,25 +111,28 @@ $(function(){
 <%- end %>
 <div class="imgbase border_bline">
 	<div class="imgbase_title">
-		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
-		<!-- <p>iColor为您提供<strong><%#= @images_total %></strong>张装修图片</p> -->
-    <p class="clear">
-      <span class="fr select_options"><span class="fl">搜索结果：</span><span class="fl select_alloptions"><%=@query_params%></span></span>
-    </p>
+        <img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
+        <p class="clear">
+          <span class="fr select_options">
+            <span class="fl">搜索结果：</span>
+            <span class="fl select_alloptions"><%=params[:where]%></span>
+          </span>
+          iColor为您提供<strong><%= @images_total %></strong>张装修图片
+        </p>
 	</div><!-- imgbase_title -->
 
 	<div class="imgbase_main clear nomargin">
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
       <div class="imgbase_func ft12 pa btn_group">
-        <!-- <a class="icon_view">浏览:<span><%= @image.view_count %></span></a> -->
-        <%= link_to "全屏观看", fullscreen_design_image_path(@image), :class =>"icon_fullscreen", :target => "_blank" %>
+        <%= link_to "", fullscreen_design_image_path(@image), :class =>"icon_fullscreen", :target => "_blank" %>
         <%- if current_user %>
-          <%=link_to "收藏", user_collects_path(current_user, design_image_id: @image.id), :remote => true, method: :post, :id => "new_message" , :class => "icon_colleting" %>
+          <%=link_to "", user_collects_path(current_user, design_image_id: @image.id), :remote => true, method: :post, :id => "new_message" , :class => "icon_colleting" %>
         <%- else %>
-          <%=link_to_function "收藏", "show_login()", :id => "new_message" , :class => "icon_colleting" %>
+          <%=link_to_function "", "show_login()", :id => "new_message" , :class => "icon_colleting" %>
         <%- end %>
-        <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>">免费下载</a>
+        <a class="icon_freedown" href="<%= download_design_image_path(@image.id) %>"></a>
+        <!-- <a class="icon_view">浏览:<span><%= @image.view_count %></span></a> -->
      </div>
      <div id="feb_slides">
         <div class="slides_container">
@@ -151,37 +154,52 @@ $(function(){
       <% end %>
      </div>
       <%- unless @image.imageable_type == "MasterDesign" || @image.imageable_type == "ColorDesign" -%>
-	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group" %>
+	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group img_reply_btn" %>
       <%- end -%>
-	    <span class="fr">
-	    	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "imgbase/near-shop_link_btn.png" %>"></a>
-	    	<a href="http://www.nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>"></a>
-	    </span>
-	    <p class="imginfo_big_txt">
-	        <span>
-	        	<strong>设计风格：</strong>
-	        	<%= @image.design.style %>
-	        </span>
-	        <span>
-	        	<strong>作品所在城市：</strong>
-	        	<%= @image_city %>
-	        </span>
-	    </p>
-
-	    <div class="colors_recommend colorsbox clear">
+	    <!-- <div class="colors_recommend colorsbox clear">
 	    	<strong>推荐色</strong>
+            <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
+              <img src="<%#= asset_path "design/colors2.gif" %>" />
+              <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
+                <div class="list" style="height:35px;">
+                  <ul class="group" style="overflow:hidden;">
+                  </ul>
+                </div>
+              </div>
+            </div>
+	    </div> -->
 
-        <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
-          <img src="<%= asset_path "design/colors2.gif" %>" />
-          <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
-            <div class="list" style="height:35px;">
-              <ul class="group" style="overflow:hidden;">
-              </ul>
+      <div class="colorsbox clear border_bline" style="height:82px;">
+          <img src="<%= asset_path 'colors_icon_tit.png' %>" style="float:left; margin:15px 15px 0 15px;" />
+          <div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+            <img src="<%= asset_path 'colors2.jpg' %>" style="display: inline-block;">
+            <div class="desc" style="height: 35px; width: 562px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none; background-position: initial initial; background-repeat: initial initial;">
+              <div class="list" style="height:35px;">
+                <ul class="group" style="overflow:hidden;">
+                </ul>
+              </div>
             </div>
           </div>
+          <div class="fr ft12 btn_group border_lline">
+            <%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"icon_like votes_count#{@image.id}", :remote => true, :method => :post %>
+            <%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"icon_view" %>
+          </div>
         </div>
-	    </div>
 
+        <p class="imginfo_big_txt">
+            <span class="fr nomargin">
+              <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'imgbase/tmall.jpg' %>"></a>
+              <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path 'imgbase/go_shops.jpg' %>"></a>
+            </span>
+            <span class="lineh40">
+              <strong>设计风格：</strong>
+              <%= @image.design.style %>
+            </span>
+            <span>
+              <strong>作品所在城市：</strong>
+              <%= @image_city %>
+            </span>
+        </p>
 
 	    <p class="imginfo_big_txt">
 	      <strong>设计理念：</strong>
