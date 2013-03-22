@@ -95,7 +95,12 @@ class DesignImagesController < ApplicationController
       @images = @images.order("design_images.created_at DESC")
     end
     @images = @images.page(params[:page]).per(11)
-    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    @query_params = ([@tag_names] - [""]).compact.join(", ")
+    @query_params = @query_params.split(',')
+    @query_tags = []
+    @query_params.each do |tag|
+      @query_tags << ImageLibraryCategory.find_by_title(tag.strip)
+    end
     @image_colors = []
     @images.each do |image|
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
