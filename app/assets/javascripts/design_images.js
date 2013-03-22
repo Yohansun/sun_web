@@ -63,6 +63,14 @@ function submit_area() {
   refresh_search({area_id: area_id});
 }
 
+function delete_submit_area() {
+  refresh_search({area_id: ""});
+}
+
+function delete_pinyin() {
+  refresh_search({pinyin: ""});
+}
+
 function search_query(query) {
   refresh_search({search: query});
   return false;

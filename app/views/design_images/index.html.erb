@@ -223,11 +223,18 @@
 		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
 		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
 		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
-		<%- if @query_params.present? %>
+		<%- if @query_params.present? || @area_names.present? || params[:pinyin].present? %>
 			<p class="srch-items">
 				您的选择：
-				<%= @query_params %>
-				<!-- <span class="srch-span">家具：<i>实木家具</i><a href="javascript:;" class="srch-del">删除</a></span> -->
+				<%- @query_tags.each do |tag| %>
+					<span class="srch-span"><%= tag.parent.title %>: <i><%= tag.title %></i><a href="javascript:add_tag(<%= tag.parent_id %>, <%= tag.id %>);" class="srch-del">删除</a></span>
+				<%- end %>
+				<%- if params[:pinyin].present? %>
+					<span class="srch-span">拼音: <i><%= params[:pinyin] %></i><a href="javascript:delete_pinyin();" class="srch-del">删除</a></span>
+				<%- end %>
+				<%- if @area_names.present? %>
+					<span class="srch-span">地区: <i><%= @area_names %></i><a href="javascript:delete_submit_area();" class="srch-del">删除</a></span>
+				<%- end %>
 				<span class="srch-divider">|</span>
 				<button class="srch-span" onclick="javascript:window.location='<%= design_images_path(imageable_type: params[:imageable_type],ranking_list: params[:ranking_list]) %>';">重新选择</button>
 			</p>
