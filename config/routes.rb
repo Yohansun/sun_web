@@ -78,19 +78,37 @@ Icolor::Application.routes.draw do
     collection do
       get :all                                                  #所有
       get :oversea                                              #海外
-      match "hk-tw-mc",:action => "hk_tw_mc",:as => "hk_tw_mc"  #港澳台
+      match "hk_tw_mc",:action => "hk_tw_mc",:as => "hk_tw_mc"  #港澳台
       get :cn                                                   #中国大陆
-      get :shinei                                               #室内空间大师
-      get :color                                                #色彩大师
     end
-    
   end
+  match "master_interviews/hk_tw_mc/:type" => "master_interviews#hk_tw_mc"
+  match "master_interviews/cn/:type"       => "master_interviews#cn"      
+  match "master_interviews/oversea/:type"  => "master_interviews#oversea" 
+  match "master_interviews/all/:type"      => "master_interviews#all" 
+  
   
   resources :master_topics, :only => [:index, :show]
-  match "/master_designs" => "master_designs#index"
-  match "/master_designs/:id" => "master_designs#show", as: 'master_design'
-  match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
-  match "/master_designs/:id/download" => "master_designs#download"
+  
+  resources :master_designs ,:only => [:index,:show] do
+    collection do
+      get :all                                                  #所有
+      get :oversea                                              #海外
+      match "hk_tw_mc",:action => "hk_tw_mc",:as => "hk_tw_mc"  #港澳台
+      get :cn                                                   #中国大陆
+    end
+    member do
+      get :fullscreen
+      get :download
+    end
+  end
+  
+  match "master_designs/hk_tw_mc/:type" => "master_designs#hk_tw_mc"
+  match "master_designs/cn/:type"       => "master_designs#cn"      
+  match "master_designs/oversea/:type"  => "master_designs#oversea" 
+  match "master_designs/all/:type"      => "master_designs#all"
+  
+  
 
   #行业资讯
   match "/color_articles" => "color_articles#index"

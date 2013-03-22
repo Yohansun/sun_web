@@ -15,7 +15,9 @@ class MasterInterviewsController < ApplicationController
   
   {:oversea => "海外",:hk_tw_mc => "港澳台",:cn => "中国大陆"}.each do |act,tag|
     define_method(act) do
-      @articles = @articles.tagged_with(tag)
+      hash = {"shinei" => "室内空间大师","color" => "色彩大师"}
+      condition = hash.keys.include?(type = params[:type]) ? {:master_kind => hash[type]} : nil
+      @articles = @articles.tagged_with(tag).where(condition)
       render "index"
     end
   end
