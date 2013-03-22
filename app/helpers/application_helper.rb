@@ -267,4 +267,10 @@ module ApplicationHelper
   def link_suffix
     "#from=top"
   end
+  
+  ALLOW_CONVERSION = %w(home design_images)
+  
+  def rendered_script_conversion
+    render("conversion/#{params[:controller]}") if ALLOW_CONVERSION.include?(params[:controller])
+  end
 end
