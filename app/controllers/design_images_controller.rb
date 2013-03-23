@@ -95,10 +95,13 @@ class DesignImagesController < ApplicationController
       @images = @images.order("design_images.created_at DESC")
     end
     @images = @images.page(params[:page]).per(11)
-    @query_params = ([@tag_names] - [""]).compact.join(", ")
-    @query_params = @query_params.split(',')
+    #use in show or other page
+    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    #use in design_image index
+    @query_params_index = ([@tag_names] - [""]).compact.join(", ")
+    @query_params_index = @query_params_index.split(',')
     @query_tags = []
-    @query_params.each do |tag|
+    @query_params_index.each do |tag|
       @query_tags << ImageLibraryCategory.find_by_title(tag.strip)
     end
     @image_colors = []

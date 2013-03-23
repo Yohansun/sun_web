@@ -62,9 +62,9 @@
         </h1>
       </a>
       <div class="btn_group fr">
-        <%= link_to "免费下载", download_weekly_star_path(@design.id), :class =>"icon_freedown" %>
-        <%= link_to "收藏", user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class =>"icon_colleting" %>
-        <%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
+        <%= link_to "", download_weekly_star_path(@design.id), :class =>"icon_freedown" %>
+        <%= link_to "", user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class =>"icon_colleting" %>
+        <%= link_to "", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
       </div>
       <%- end %>      
     </div>
