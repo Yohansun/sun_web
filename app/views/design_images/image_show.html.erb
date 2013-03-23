@@ -238,7 +238,12 @@ $(function(){
         <%- end -%>
         <div class="fl border_lline">
           <p class="clear border_bline">
-            <strong><%= @image.user.display_name if @image.user%></strong>
+            <strong>
+              <%= @image.user.display_name if @image.user%>
+              <%- if @image.user %>
+                <a href="<%= user_asks_path(@image.user.id) %>" class="img_reply_btn">免费咨询</a>
+              <%- end %>
+            </strong>
             <%= link_to "#{@image.votes_count}", votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>"imgbase_like votes_count#{@image.id}", :remote => true, :method => :post %>
             <%= link_to "#{@image.comments_count}", "javascript:void(0);", :class =>"imgbase_comm" %>
           </p>
