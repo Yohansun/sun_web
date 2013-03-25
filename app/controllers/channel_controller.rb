@@ -64,7 +64,8 @@ class ChannelController < ApplicationController
     end
 
     #use abacus
-    @design_users = @design_users.select("users.*, count(design_images.id) as design_image_count").joins(:designs).joins("left join design_images on design_images.imageable_id = designs.id and `design_images`.`imageable_type` = 'Design'").group("users.id").having("design_image_count > 0").abacus.page(params[:page]).per(8)
+    #@design_users = @design_users.select("users.*, count(design_images.id) as design_image_count").joins(:designs).joins("left join design_images on design_images.imageable_id = designs.id and `design_images`.`imageable_type` = 'Design'").group("users.id").having("design_image_count > 0").abacus.page(params[:page]).per(8)
+    @design_users = @design_users.joins(:design_images).where("design_images.imageable_type = 'Design' and users.id = design_images.user_id").group("users.id").abacus.page(params[:page]).per(8)
 
     #mood
     @moods = Mood.order("created_at desc").limit(5)
