@@ -2,8 +2,6 @@
 
 Icolor::Application.routes.draw do
 
-  get "welcome/index"
-
   require 'api'
   resources :special_events do
     member do
@@ -364,7 +362,7 @@ Icolor::Application.routes.draw do
   end
 
   scope "/baicheng", :module =>"baicheng" do
-    #root  to: 'welcome#index'
+    root  to: 'welcome#index', as: 'baicheng_root'
     resources :design_works do
       collection do
         get :opus
