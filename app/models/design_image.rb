@@ -108,7 +108,7 @@ class DesignImage < ActiveRecord::Base
   def self.search(genre, keyword)
     case genre
       when 'yes_color'
-        DesignImage.includes(:tags).available.where("(color1 is not null or color2 is not null or color3 is not null) and edited_color is false")
+        DesignImage.available.where("(color1 is not null or color2 is not null or color3 is not null) and edited_color is false")
       when 'title'
         DesignImage.available.where(title: keyword).order("design_images.id DESC")
       when 'username'
