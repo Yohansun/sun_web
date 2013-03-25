@@ -193,7 +193,7 @@ $(function(){
             </span>
             <span class="lineh40">
               <strong>设计风格：</strong>
-              <%= @image.design.style %>
+              <%= @image_tags.map(&:title).join(',').or("无") %>
             </span>
             <span>
               <strong>作品所在城市：</strong>

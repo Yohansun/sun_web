@@ -26,6 +26,7 @@ class DesignImage < ActiveRecord::Base
   scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
 
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
+  
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
@@ -45,6 +46,9 @@ class DesignImage < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+    
+
+    delegate :id,:to => :design, :allow_nil => true ,:prefix => true
 
   # validates_presence_of :area_id
 
