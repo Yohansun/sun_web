@@ -102,7 +102,7 @@ class LandsController < ApplicationController
 			elsif urls_design_images.include? params[:source]
 				redirect_to design_images_path
 			elsif urls_baicheng.include? params[:source]
-				redirect_to '/baicheng'
+				redirect_to baicheng_root_path
 			else
 				redirect_to root_path
 			end
