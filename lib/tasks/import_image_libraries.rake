@@ -6,7 +6,7 @@ require 'spreadsheet'
 desc "新浪图库数据导入"
 task :import_image_libraries_sina => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
-  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130321.xls"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130325.xls"
   sheet1 = book.worksheet 0
   sheet1.each do |row|
     if row[6].present?
