@@ -193,7 +193,7 @@ $(function(){
             </span>
             <span class="lineh40">
               <strong>设计风格：</strong>
-              <%= @image_tags.map(&:title).join(',').or("无") %>
+              <%= @image_styles.map(&:title).join(',').or("无") %>
             </span>
             <span>
               <strong>作品所在城市：</strong>
@@ -334,7 +334,7 @@ $(function(){
       <div class="imgs_otherinfo border_bline">
       	<h4>标签</h4>
       	<%- @image_tags.each do |tag| %>
-      	  <span style="font-size:12px;"><%= tag %></span>
+      	   <span style="font-size:12px;"><%= tag %></span>
       	<%- end %>
       </div>
       <div class="imgs_otherinfo border_bline">
