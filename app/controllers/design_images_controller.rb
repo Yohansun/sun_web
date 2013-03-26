@@ -196,8 +196,6 @@ class DesignImagesController < ApplicationController
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.available.audited_with_colors.count
-    @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id)}
-    @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
     if @image.area_id
       area = Area.find(@image.area_id)
       if area.parent_id

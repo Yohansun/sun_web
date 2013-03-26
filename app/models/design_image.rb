@@ -15,7 +15,7 @@ class DesignImage < ActiveRecord::Base
   has_many :collects, :dependent => :destroy
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
   belongs_to :design, :polymorphic => true,foreign_type: "imageable_type", foreign_key: 'imageable_id'
-  
+
   #所有标签
   has_many :all_tags    ,:through => :tags,:source => :image_library_category
   #图片风格
