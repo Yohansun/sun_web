@@ -17,6 +17,8 @@ class Design < ActiveRecord::Base
   has_many :color_codes
   has_many :collects, :dependent => :destroy
   has_one :baicheng_event
+  #最新的一张作品图片
+  has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
 
   paginates_per 8
 
@@ -47,10 +49,6 @@ class Design < ActiveRecord::Base
         area.parent.parent.name + " " + area.parent.name + " " + area.name
       end
     end
-  end
-
-  def cover_img
-    self.design_images.first
   end
 
   def comments_count
