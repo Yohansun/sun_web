@@ -62,9 +62,57 @@
 					$down.attr('href', '/design_images/' + full + '/download');
 					$info.html(html);
 					$conte.html($curr.find('.imginfo_big_txt').html());
-          			$colorsbox.html($curr.find('.colorsbox').html());
+          $colorsbox.html($curr.find('.colorsbox').html());
+          <% if !params[:page].present? %>
+	          if(num == 0 ){
+	          	$("#prev").hide();
+	          }else{
+							$("#prev").show();
+	          }
+          <% end %>
+          <% if @images.current_page == @images.total_pages %>
+						if(num == $list.children().length -1){
+	          	$("#next").hide();
+	          }else{
+							$("#next").show();
+	          }
+					<% end %>
+          
+          //fn(full)
 				}
 			});
+			<% if params[:page].present? %>
+				$('#prev').show();
+				$('#prev').click(function(event) {
+					var li_index = $list.find('.imgbase_curr').index();
+					event.preventDefault()
+					if(li_index == 0){
+					 	<% if  (params[:page].to_i - 1) == 1 %>
+					 		window.location = "<%= design_images_path %>"
+					 	<% else %>
+					 		window.location = "<%= design_images_path params.merge(:page => (@images.current_page - 1)) %>"
+					 	<% end %>
+					}
+				})
+			<% else %>
+				$("#prev").hide();
+			<% end %>
+			<% if @images.current_page == @images.total_pages %>
+				
+					var li_index = $list.find('.imgbase_curr');
+					var last_id = li_index.data('full');
+					if(last_id == <%=@images.last.id%>){
+						$("#next").hide();
+					}
+			<% else %>
+				$('#next').click(function(event) {
+					var li_index = $list.find('.imgbase_curr').index();
+					if(li_index == 10){
+						window.location = "<%= design_images_path params.merge(:page => (@images.current_page + 1)) %>"
+					}
+				});
+			<% end %>
+			
 			$list.on('mouseenter', 'li', function(){
 				var index = $(this).index();
 				$slider.find('li').eq(index).find('a').click();
@@ -280,8 +328,12 @@
 							</div>
 						<%- end %>
 					</div>
-					<a href="javascript:;" class="slider_next">next</a>
-					<a href="javascript:;" class="slider_prev">prev</a>
+					
+						<a href="javascript:;" class="slider_next"  id="next">next</a>
+					
+					
+						<a href="javascript:;" class="slider_prev" id="prev">prev</a>
+					
 				</div>
 
 				<div class="colorsbox clear border_bline" style="height:82px;">
