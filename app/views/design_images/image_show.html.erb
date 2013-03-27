@@ -200,11 +200,12 @@ $(function(){
               <%= @image_city %>
             </span>
         </p>
-
+		<% if @image.content.present? %>
 	    <p class="imginfo_big_txt">
 	      <strong>设计理念：</strong>
 	      <%= @image.content %>
 	    </p>
+		<% end %>
       <%= form_for(Comment.new, :html => {:class => "img_reply"}) do |f| %>
         <h3 class="img_reply_tit">评论(<%= @image.comments_count %>)</h3>
         <%= f.hidden_field :commentable_id, value: params[:id] %>
