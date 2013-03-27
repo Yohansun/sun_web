@@ -4,7 +4,6 @@ class ChannelController < ApplicationController
 
   #设计快查
   def access
-
     #我型我秀页面跳转
     if params.has_key? "role"
       params[:role] << ("_" + params[:des_status]) if params[:des_status].present?
@@ -64,7 +63,7 @@ class ChannelController < ApplicationController
     WeeklyStar.order("id desc").map(&:author_url).each do |ul|
       design_user_ids << ul.split("/")[-2].to_i
     end
-    list_design_users = User.where(id: design_user_ids, role_id: 1).limit(8)
+    list_design_users = User.where(id: design_user_ids, role_id: 1).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc").limit(8)
 
     # @xiaofei: 必须重构这些代码
     @list_design_users1 = list_design_users.page(1).per(2)
@@ -73,7 +72,7 @@ class ChannelController < ApplicationController
     @list_design_users4 = list_design_users.page(4).per(2)
 
     #company_star
-    list_company_users = User.where(id: design_user_ids, role_id: 2).limit(16)
+    list_company_users = User.where(id: design_user_ids, role_id: 2).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc").limit(16)
     @list_company_users1 = list_company_users.page(1).per(4)
     @list_company_users2 = list_company_users.page(2).per(4)
     @list_company_users3 = list_company_users.page(3).per(4)
