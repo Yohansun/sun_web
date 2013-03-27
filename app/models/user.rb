@@ -71,6 +71,22 @@ class User < ActiveRecord::Base
   has_one :phone_expense
   has_many :event_attendees
   has_many :baicheng_events
+  #公司作品
+  has_many :company_designs ,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 2}} , :order => "designs.created_at desc"
+  #个人作品
+  has_many :personal_designs,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 1}}
+  #公司最新作品
+  has_many :news_company_designs ,:through => :company_designs , :source => :design_images,:include => :user,:order => "design_images.created_at desc"
+  #个人最新作品
+  has_many :news_personal_designs,:through => :personal_designs, :source => :design_images,:include => :user,:order => "design_images.created_at desc"
+  
+  def news_company_design
+    news_company_designs.first
+  end
+  
+  def news_personal_design
+    news_personal_designs.first
+  end
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
