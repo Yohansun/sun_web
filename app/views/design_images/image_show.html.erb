@@ -212,7 +212,7 @@ $(function(){
         <%= f.hidden_field :commentable_type, value: 'DesignImage' %>
         <%= f.text_area :content, :placeholder =>"最多可输入140字" %>
         <div class="tr">
-          <%= f.submit "提交评论", :class => "img_reply_btn" %>
+          <%= f.submit "提交评论", :class => "img_reply_btn noborder" %>
         </div>
       <% end %>
     <%- if @comments.any? %>
@@ -335,9 +335,9 @@ $(function(){
       <div class="imgs_otherinfo border_bline imgbase_in_tags">
       	<h4>标签</h4>
       	<%- @image.all_tags.each do |tag| %>
-                <a href="<%= design_images_path(tags: tag.id) %>" target="_blank">
-                  <%= tag.title %>
-                </a>
+              <!-- <span style="font-size:12px;"> -->
+                <a href="<%= design_images_path(tags: tag.id) %>" target="_blank"><%= tag.title %></a>
+              <!-- </span> -->
       	<%- end %>
       </div>
       <div class="imgs_otherinfo border_bline">

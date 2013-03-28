@@ -99,7 +99,7 @@
       </div>
       <div class="btn_group fr" style="margin-top:8px;">
         <%= link_to "", download_user_design_path(@design.user_id, @design), :class =>"icon_freedown" %>
-        <%= link_to "", user_collects_path(designs_id: @design.id,user_id: @design.user_id), :remote => true, method: :post, id: "new_message", :style => "margin-right:15px;", :class =>"icon_colleting" %>
+        <%= link_to "", user_collects_path(designs_id: @design.id,user_id: @design.user_id), :remote => true, method: :post, id: "new_message", :class =>"icon_colleting" %>
         <!-- <a class="icon_view" href="#">浏览:125552</a> -->
         <%= link_to "", fullscreen_user_design_path(@design.user_id, @design, :img => 'imgs'), :class =>"icon_fullscreen" %>
       </div>
