@@ -1,144 +1,144 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style", "exciting_activities" %>
+<%= stylesheet_link_tag "style", "exciting_activities" %>
 <%- end %>
 <div class="main page_weekstar">
-  <div class='sub_title tr'><img src="<%= asset_path "design/title_event.png"%>"/></div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/designer_events">设计师活动</a></em>
-    <em><a href="/events">精彩活动</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
-  </div><!--sub_nav ends-->
-  <!--sub_nav ends-->
-  <script type="text/javascript">
-      function yda_kv_link() {
-          <% if current_user && current_user.role_id == 1 -%>
-            window.location.href = "<%= new_user_design_path(current_user) %>";
-          <% elsif current_user %>
-            window.location.href = "javascript:void(0)";
-          <% else -%>
-            show_login();
-          <% end -%>
-              };
-  </script>
-  <div class="wrapper d_act_list pb30 group">
-    <div class="shadow event event_desc">
-        <div class="landing_index">
-          <img src="<%= asset_path 'design/d_act_list/shuaxinshenghuo.jpg' %>" border="0" usemap="#Map">
-          <map name="Map" id="Map">
-            <area shape="rect" coords="184,179,269,205" href="javascript:yda_kv_link();" />
-            <area shape="rect" coords="278,179,363,205" href="javascript:void(0);" />
-          </map>
-        </div>
-        <h2 class="tl"><span class="fr">活动时间：2013年3月6日至    活动主办方：iColor</span>2013年度iColor未来之星活动</h2>
-    </div>
-    <div class="shadow">
-      <div class="section">
+<div class='sub_title tr'><img src="<%= asset_path "design/title_event.png"%>"/></div>
+<div class='sub_nav ft12 pr tr'>
+<em><a class="fb" href="/designer_events">设计师活动</a></em>
+<em><a href="/events">精彩活动</a><span></span></em>
+<em><a href="/">首页</a><span></span></em>
+</div><!--sub_nav ends-->
+<!--sub_nav ends-->
+<script type="text/javascript">
+function yda_kv_link() {
+<% if current_user && current_user.role_id == 1 -%>
+window.location.href = "<%= new_user_design_path(current_user) %>";
+<% elsif current_user %>
+window.location.href = "javascript:void(0)";
+<% else -%>
+show_login();
+<% end -%>
+};
+</script>
+<div class="wrapper d_act_list pb30 group">
+<div class="shadow event event_desc">
+<div class="landing_index">
+<img src="<%= asset_path 'design/d_act_list/shuaxinshenghuo.jpg' %>" border="0" usemap="#Map">
+<map name="Map" id="Map">
+<area shape="rect" coords="184,179,269,205" href="javascript:yda_kv_link();" />
+<area shape="rect" coords="278,179,363,205" href="javascript:void(0);" />
+</map>
+</div>
+<h2 class="tl"><span class="fr">活动时间：2013年3月6日至 活动主办方：iColor</span>2013年度iColor未来之星活动</h2>
+</div>
+<div class="shadow">
+<div class="section">
 
-        <div class="interview_box dec_list line_b_dot"><a href="<%=gift_list_path%>" ><img class="fl" src="<%= asset_path "design/d_act_list/chaoyue.jpg"%>"/></a>
-          <a href="<%=gift_list_path%>" ><h3 class="fr">超越*刷新 中国室内设计作品征集活动</h3></a>
-          <p class="fr">
-            2012 年度超越●刷新（中国室内设计作品征集活动 --- iColor 携手 A963 共创设计未来）活动日前落下帷幕。 
-          </p>
-          <a class="fl designer_events" href="<%=gift_list_path%>" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="<%=home_refresh_path%>" ><img class="fl" src="<%= asset_path "design/d_act_list/chaoyue.jpg"%>"/></a>
+<a href="<%=gift_list_path%>" ><h3 class="fr">超越*刷新 中国室内设计作品征集活动</h3></a>
+<p class="fr">
+2012 年度超越●刷新（中国室内设计作品征集活动 --- iColor 携手 A963 共创设计未来）活动日前落下帷幕。
+</p>
+<a class="fl designer_events" href="<%=home_refresh_path%>" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/npyda?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/pic1.jpg"%>"/></a>
-          <a href="/designer_events/city/npyda?page=1" ><h3 class="fr">重塑 重建 重生 ---- 2012立邦亚洲青年设计师大赛（NPYDA）成功落幕</h3></a>
-          <p class="fr">
-            2012年度第四届立邦亚洲青年设计师大赛（Nippon Paint Young Design Award 简称：NPYDA）的颁奖典礼今日在马来西亚吉隆坡落下帷幕。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/npyda?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/npyda?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/pic1.jpg"%>"/></a>
+<a href="/designer_events/city/npyda?page=1" ><h3 class="fr">重塑 重建 重生 ---- 2012立邦亚洲青年设计师大赛（NPYDA）成功落幕</h3></a>
+<p class="fr">
+2012年度第四届立邦亚洲青年设计师大赛（Nippon Paint Young Design Award 简称：NPYDA）的颁奖典礼今日在马来西亚吉隆坡落下帷幕。
+</p>
+<a class="fl designer_events" href="/designer_events/city/npyda?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/beijingb?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/beijingb1115.jpg"%>"/></a>
-          <a href="/designer_events/city/beijingb?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道(北京站)</h3></a>
-          <p class="fr">
-            2012年11月15日14:00，立邦iColor家装公司见面会在北京五环大酒店顺利召开，寒冷的天气不能阻止北京家装设计界的热情，来自北京的近150位家装公司的代表及设计师一同出席了本次活动,让整个会场座无虚席，场面空前的宏大。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/beijingb?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/beijingb?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/beijingb1115.jpg"%>"/></a>
+<a href="/designer_events/city/beijingb?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道(北京站)</h3></a>
+<p class="fr">
+2012年11月15日14:00，立邦iColor家装公司见面会在北京五环大酒店顺利召开，寒冷的天气不能阻止北京家装设计界的热情，来自北京的近150位家装公司的代表及设计师一同出席了本次活动,让整个会场座无虚席，场面空前的宏大。
+</p>
+<a class="fl designer_events" href="/designer_events/city/beijingb?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/20zhounian?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/20zhounian.jpg"%>"/></a>
-          <a href="/designer_events/city/20zhounian?page=1" ><h3 class="fr">立邦20周年庆，感恩大回馈 --- 进店有礼活动火热进行中！</h3></a>
-          <p class="fr">2012年11月12日至2012年12月10日只要您是iColor的注册设计师，并与您的客户一起至立邦专卖店选购产品，出示此活动邮件打印稿/短信并秀出您的iColor身份，就能在次月获赠立邦1881色卡或话费一份。</p>
-          <a class="fl designer_events" href="/designer_events/city/20zhounian?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/20zhounian?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/20zhounian.jpg"%>"/></a>
+<a href="/designer_events/city/20zhounian?page=1" ><h3 class="fr">立邦20周年庆，感恩大回馈 --- 进店有礼活动火热进行中！</h3></a>
+<p class="fr">2012年11月12日至2012年12月10日只要您是iColor的注册设计师，并与您的客户一起至立邦专卖店选购产品，出示此活动邮件打印稿/短信并秀出您的iColor身份，就能在次月获赠立邦1881色卡或话费一份。</p>
+<a class="fl designer_events" href="/designer_events/city/20zhounian?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/haikou?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/hzk1102.jpg"%>"/></a>
-          <a href="/designer_events/city/haikou?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（海口站）</h3></a>
-          <p class="fr">2012年10月24日15:00，立邦iColor家装公司见面会在椰城之乡海口赛仑吉地大酒店顺利召开，来自海口当地的近30位家装公司的代表及设计师一同出席了本次活动。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/haikou?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/haikou?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/hzk1102.jpg"%>"/></a>
+<a href="/designer_events/city/haikou?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（海口站）</h3></a>
+<p class="fr">2012年10月24日15:00，立邦iColor家装公司见面会在椰城之乡海口赛仑吉地大酒店顺利召开，来自海口当地的近30位家装公司的代表及设计师一同出席了本次活动。
+</p>
+<a class="fl designer_events" href="/designer_events/city/haikou?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/xian1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/xian0907.jpg"%>"/></a>
-          <a href="/designer_events/city/xian1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（西安站)</h3></a>
-          <p class="fr">9月7日，立邦iColor家装公司见面会在西安顺利召开。古城独特的魅力又给iColor见面会带来了一抹色彩。当天，来自西安的家装公司的代表及设计师把会场挤得满满当当，三个小时的时间，设计师和家装公司代表带着期待而来，带着惊喜而归。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/xian1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/xian1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/xian0907.jpg"%>"/></a>
+<a href="/designer_events/city/xian1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（西安站)</h3></a>
+<p class="fr">9月7日，立邦iColor家装公司见面会在西安顺利召开。古城独特的魅力又给iColor见面会带来了一抹色彩。当天，来自西安的家装公司的代表及设计师把会场挤得满满当当，三个小时的时间，设计师和家装公司代表带着期待而来，带着惊喜而归。
+</p>
+<a class="fl designer_events" href="/designer_events/city/xian1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/jinan1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/jinan0904.jpg"%>"/></a>
-          <a href="/designer_events/city/jinan1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（济南站）</h3></a>
-          <p class="fr">9月4日，立邦iColor家装公司见面会济南站顺利召开。当天，济南晴空万里，还未到开始时间，来自济南的近150位家装公司的代表及设计师就已经把会场挤得满满当当，许多设计师还自带了电脑，济南站再一次把iColor推荐会推向了高潮。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/jinan1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/jinan1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/jinan0904.jpg"%>"/></a>
+<a href="/designer_events/city/jinan1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（济南站）</h3></a>
+<p class="fr">9月4日，立邦iColor家装公司见面会济南站顺利召开。当天，济南晴空万里，还未到开始时间，来自济南的近150位家装公司的代表及设计师就已经把会场挤得满满当当，许多设计师还自带了电脑，济南站再一次把iColor推荐会推向了高潮。
+</p>
+<a class="fl designer_events" href="/designer_events/city/jinan1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/qingdao1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/qingdao0831.jpg"%>"/></a>
-          <a href="/designer_events/city/qingdao1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（青岛站）</h3></a>
-          <p class="fr">8月31日，立邦iColor家装公司见面会青岛站顺利召开。当天，青岛阳光灿烂，风和日丽，来自青岛的近150位家装公司的代表及设计师一同出席了本次活动，现场异常火爆。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/qingdao1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/qingdao1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/qingdao0831.jpg"%>"/></a>
+<a href="/designer_events/city/qingdao1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（青岛站）</h3></a>
+<p class="fr">8月31日，立邦iColor家装公司见面会青岛站顺利召开。当天，青岛阳光灿烂，风和日丽，来自青岛的近150位家装公司的代表及设计师一同出席了本次活动，现场异常火爆。
+</p>
+<a class="fl designer_events" href="/designer_events/city/qingdao1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/hangzhou1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/hangzhou0830.jpg"%>"/></a>
-          <a href="/designer_events/city/hangzhou1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（杭州站）</h3></a>
-          <p class="fr">7月31日，立邦iColor家装公司见面会杭州站顺利召开，来自杭州当地的近50位家装公司的代表及设计师一同出席了本次活动。
-          </p>
-          <a class="fl designer_events" href="/designer_events/city/hangzhou1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/hangzhou1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/hangzhou0830.jpg"%>"/></a>
+<a href="/designer_events/city/hangzhou1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（杭州站）</h3></a>
+<p class="fr">7月31日，立邦iColor家装公司见面会杭州站顺利召开，来自杭州当地的近50位家装公司的代表及设计师一同出席了本次活动。
+</p>
+<a class="fl designer_events" href="/designer_events/city/hangzhou1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/zhengzhou1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/zhengzhou0831.jpeg"%>"/></a>
-          <a href="/designer_events/city/zhengzhou1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（郑州站）</h3></a>
-          <p class="fr">8月20日，立邦iColor家装公司见面会郑州站顺利召开，虽然这几天郑州遭遇暴雨，但是完全没有挡住当地家装公司与设计师的热情，来自郑州的近100位家装公司的代表及设计师一同出席了本次活动，现场座无虚席。</p>
-          <a class="fl designer_events" href="/designer_events/city/zhengzhou1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/zhengzhou1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/zhengzhou0831.jpeg"%>"/></a>
+<a href="/designer_events/city/zhengzhou1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（郑州站）</h3></a>
+<p class="fr">8月20日，立邦iColor家装公司见面会郑州站顺利召开，虽然这几天郑州遭遇暴雨，但是完全没有挡住当地家装公司与设计师的热情，来自郑州的近100位家装公司的代表及设计师一同出席了本次活动，现场座无虚席。</p>
+<a class="fl designer_events" href="/designer_events/city/zhengzhou1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/shenyang2?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/shenyang0817.jpg"%>"/></a>
-          <a href="/designer_events/city/shenyang2?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（沈阳站）</h3></a>
-          <p class="fr">6月13日的沈阳一扫前几日的阴霾，阳光明媚，迎来了立邦全国家装公司见面会沈阳站的序幕拉开。活动现场座无虚席，近200多人的当地家装公司代表出席了活动。</p>
-          <a class="fl designer_events" href="/designer_events/city/shenyang2?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/shenyang2?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/shenyang0817.jpg"%>"/></a>
+<a href="/designer_events/city/shenyang2?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（沈阳站）</h3></a>
+<p class="fr">6月13日的沈阳一扫前几日的阴霾，阳光明媚，迎来了立邦全国家装公司见面会沈阳站的序幕拉开。活动现场座无虚席，近200多人的当地家装公司代表出席了活动。</p>
+<a class="fl designer_events" href="/designer_events/city/shenyang2?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/nanjing1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/nanjing0817.jpg"%>"/></a>
-          <a href="/designer_events/city/nanjing1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（南京站）</h3></a>
-          <p class="fr">2012年6月19日，立邦全国家装公司见面会南京站顺利召开。南京当地的近60位家装公司代表和设计师出席了本次活动。</p>
-          <a class="fl designer_events" href="/designer_events/city/nanjing1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
-        </div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/nanjing1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/nanjing0817.jpg"%>"/></a>
+<a href="/designer_events/city/nanjing1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（南京站）</h3></a>
+<p class="fr">2012年6月19日，立邦全国家装公司见面会南京站顺利召开。南京当地的近60位家装公司代表和设计师出席了本次活动。</p>
+<a class="fl designer_events" href="/designer_events/city/nanjing1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a>
+</div>
 
-          <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/xuzhou1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/xuzhou0817.jpg"%>"/></a>
-          <a href="/designer_events/city/xuzhou1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（徐州站）</h3></a>
-          <p class="fr">继2012年6月19日立邦iColor全国家装公司见面会南京站的顺利召开后，6月20日温暖的午后江苏省第二站---徐州iColor全国家装公司见面会又热闹开场。来自徐州当地的将近50位家装公司代表和设计师出席了活动。</p>
-          <a class="fl designer_events" href="/designer_events/city/xuzhou1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a></div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/xuzhou1?page=1" ><img class="fl" src="<%= asset_path "design/d_act_list/xuzhou0817.jpg"%>"/></a>
+<a href="/designer_events/city/xuzhou1?page=1" ><h3 class="fr">2012立邦和家装界精英携手刷新 --- 立邦iColor全国家装公司见面会现场报道（徐州站）</h3></a>
+<p class="fr">继2012年6月19日立邦iColor全国家装公司见面会南京站的顺利召开后，6月20日温暖的午后江苏省第二站---徐州iColor全国家装公司见面会又热闹开场。来自徐州当地的将近50位家装公司代表和设计师出席了活动。</p>
+<a class="fl designer_events" href="/designer_events/city/xuzhou1?page=1" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a></div>
 
-        <div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/shanghai2012" ><img class="fl" src="<%= asset_path "design/d_act_list/2012shanghai.jpg"%>"/></a>
-          <a href="/designer_events/city/shanghai2012" ><h3 class="fr">2012年立邦色彩趋势设计师沙龙活动----上海站</h3></a>
-          <p class="fr">2012年3月13日，中国涂料行业领导企业立邦(NipponPaint)在上海浦东佳友维景大酒店举办了“2012年立邦色彩趋势设计师沙龙活动----上海站”。此次活动交请来自各知名家装公司的60余位设计师们，一起分享2012年度色彩趋势，探讨色彩在室内环境中的运用。</p>
-          <a class="fl designer_events" href="/designer_events/city/shanghai2012" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a></div>
+<div class="interview_box dec_list line_b_dot"><a href="/designer_events/city/shanghai2012" ><img class="fl" src="<%= asset_path "design/d_act_list/2012shanghai.jpg"%>"/></a>
+<a href="/designer_events/city/shanghai2012" ><h3 class="fr">2012年立邦色彩趋势设计师沙龙活动----上海站</h3></a>
+<p class="fr">2012年3月13日，中国涂料行业领导企业立邦(NipponPaint)在上海浦东佳友维景大酒店举办了“2012年立邦色彩趋势设计师沙龙活动----上海站”。此次活动交请来自各知名家装公司的60余位设计师们，一起分享2012年度色彩趋势，探讨色彩在室内环境中的运用。</p>
+<a class="fl designer_events" href="/designer_events/city/shanghai2012" ><img src="<%= asset_path "master/look_detail_btn.png"%>"/></a></div>
 
-      </div>
-    </div>
-  </div>
-  <div class='sub_bot pr'>
-    <div class="pager ft12">
-      <a href="#" class="prev"><span></span>上一页</a>
-      <a href="/designer_events" class="current">1</a>
-      <a href="/designer_events/index_2">2</a>
-      <a href="/designer_events/index_3">3</a>
-      <a href="/designer_events/index_2" class="next">下一页<span></span></a>
-    </div>
-    <!--pager ends-->
-  </div>
-  <!--sub_bot ends-->
+</div>
+</div>
+</div>
+<div class='sub_bot pr'>
+<div class="pager ft12">
+<a href="#" class="prev"><span></span>上一页</a>
+<a href="/designer_events" class="current">1</a>
+<a href="/designer_events/index_2">2</a>
+<a href="/designer_events/index_3">3</a>
+<a href="/designer_events/index_2" class="next">下一页<span></span></a>
+</div>
+<!--pager ends-->
+</div>
+<!--sub_bot ends-->
 </div>

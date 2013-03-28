@@ -83,7 +83,10 @@ function close_all(){
     $('.abs_center').hide();
     o_out();
 }
-
+function prize_jan(){
+	$('#prize_jan').show();
+  	o_in();
+}
 function inputBlank(area){
 	area.css({background:"#fcc",opacity:0}).animate({opacity:1},200);
   area.animate({opacity:0.5},200);
