@@ -44,10 +44,10 @@ module MagicContent
       all_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t)
 
       designs = {}
-      designs['zz'] = all_designs.select{|design| design.user.try(:role_id).eql?(1) && design.user.des_status.eql?(false)}
-      designs['zd'] = all_designs.select{|design| design.user.try(:role_id).eql?(1) && design.user.des_status.eql?(true)}
-      designs['gs'] = all_designs.select{|design| design.user.try(:role_id).eql?(2)}
-      designs['pt'] = all_designs.select{|design| design.user.try(:role_id).eql?(3)}
+      designs['zz'] = all_designs.where('role_id = ? AND des_status = ?', 1, false)
+      designs['zd'] = all_designs.where('role_id = ? AND des_status = ?', 1, true)
+      designs['gs'] = all_designs.where('role_id = ?', 2)
+      designs['pt'] = all_designs.where('role_id = ?', 3)
 
       ##第三方连接进入icolor
       land_sql_conditions = "SELECT source, count(source) as count
@@ -79,6 +79,18 @@ module MagicContent
       @reg_not_login_count2 = @reg_count2 - @reg_and_login_count2
       @reg_not_login_count3 = @reg_count3 - @reg_and_login_count3
       @reg_not_login_count4 = @reg_count4 - @reg_and_login_count4
+
+      #sina发表作品数
+      @sina_design_count1 = designs['zz'].where("design_images.source = 'sina'").count
+      @sina_design_count2 = designs['zd'].where("design_images.source = 'sina'").count
+      @sina_design_count3 = designs['gs'].where("design_images.source = 'sina'").count
+      @sina_design_count4 = designs['pt'].where("design_images.source = 'sina'").count
+
+      #科普兰德发表作品数
+      @kepulande_design_count1 = designs['zz'].where("design_images.source = 'kepulande'").count
+      @kepulande_design_count2 = designs['zd'].where("design_images.source = 'kepulande'").count
+      @kepulande_design_count3 = designs['gs'].where("design_images.source = 'kepulande'").count
+      @kepulande_design_count4 = designs['pt'].where("design_images.source = 'kepulande'").count
 
       ##片区活跃度
       ##华东地区（山东，江苏，安徽，江西，浙江，福建，上海）
