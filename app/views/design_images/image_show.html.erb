@@ -154,7 +154,7 @@ $(function(){
       <% end %>
      </div>
       <%- unless @image.imageable_type == "MasterDesign" || @image.imageable_type == "ColorDesign" -%>
-	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group img_reply_btn" %>
+	    <%= link_to "查看该套作品", user_design_path(@image.user_id, @image.imageable_id), :class =>"link_group img_reply_btn check_imgs" %>
       <%- end -%>
 	    <!-- <div class="colors_recommend colorsbox clear">
 	    	<strong>推荐色</strong>
@@ -332,12 +332,12 @@ $(function(){
       </div>
       <%- end -%>
 
-      <div class="imgs_otherinfo border_bline">
+      <div class="imgs_otherinfo border_bline imgbase_in_tags">
       	<h4>标签</h4>
       	<%- @image.all_tags.each do |tag| %>
-              <span style="font-size:12px;">
-                <a href="<%= design_images_path(tags: tag.id) %>" target="_blank" style="color:black;"><%= tag.title %></a>
-              </span>
+                <a href="<%= design_images_path(tags: tag.id) %>" target="_blank">
+                  <%= tag.title %>
+                </a>
       	<%- end %>
       </div>
       <div class="imgs_otherinfo border_bline">
