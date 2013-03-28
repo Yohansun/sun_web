@@ -81,6 +81,8 @@
           //fn(full)
 				}
 			});
+// console.log($('.imgbase_list').children().last().data('full'))
+			
 			<% if params[:page].present? %>
 				$('#prev').show();
 				$('#prev').click(function(event) {
@@ -88,9 +90,9 @@
 					event.preventDefault()
 					if(li_index == 0){
 					 	<% if  (params[:page].to_i - 1) == 1 %>
-					 		window.location = "<%= design_images_path %>"
+					 		window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:return => 1)) %>"
 					 	<% else %>
-					 		window.location = "<%= design_images_path params.merge(:page => (@images.current_page - 1)) %>"
+					 		window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page - 1),:return => 1))%>"
 					 	<% end %>
 					}
 				})
@@ -108,10 +110,12 @@
 				$('#next').click(function(event) {
 					var li_index = $list.find('.imgbase_curr').index();
 					if(li_index == 10){
-						window.location = "<%= design_images_path params.merge(:page => (@images.current_page + 1)) %>"
+						window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page + 1))) %>"
 					}
 				});
 			<% end %>
+
+
 			$list.on('mouseenter', 'li', function(){
 				var index = $(this).index();
 				$slider.find('li').eq(index).find('a').click();
@@ -139,7 +143,8 @@
       $('.colors_con').live('hover', function(){
         $(this).children().fadeToggle('fast');
       });
-		});
+
+});
 
   var tags = new Array();
   <%- if @tags -%>
@@ -153,6 +158,16 @@
   <%- end -%>
   </script>
 <%- end %>
+<% if params[:return].present? %>
+<script type="text/javascript">
+$(function(){
+  setTimeout(function(){
+  $('.imgbase_list').children().last().trigger('mouseover');
+  },500)
+})
+</script>
+<% end %>
+
 <div class="imgbase">
 	<div class="imgbase_title">
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
