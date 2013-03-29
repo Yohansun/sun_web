@@ -107,7 +107,7 @@ task :import_image_libraries_for_kepulande => :environment  do
   # files = ['kepulande_r1.xls', 'kepulande_r2.xls', 'kepulande_r3.xls', 'kepulande_r4.xls']
   # files.each do |xls_name|
     image_id = []
-    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande_20130307.xls"
+    book = Spreadsheet.open "#{Rails.root}/lib/data/kapulande_r8.xls"
     sheet1 = book.worksheet 0
     sheet1.each do |row|
       next if row[1] == '路径' || row[1].blank?
@@ -126,6 +126,8 @@ task :import_image_libraries_for_kepulande => :environment  do
         new_user.name_of_company = row[4] if row[4].present?
         new_user.email = row[8] if row[8].present?
         new_user.source = 'kepulande'
+        new_user.role_id = 1
+        new_user.des_status = 0
         new_user.save(validate: false)
       end
       #style = ImageLibraryCategory.where(title: row[6]).first
@@ -141,31 +143,36 @@ task :import_image_libraries_for_kepulande => :environment  do
       if design.save(validate: false)
         # file_src_arr = Dir["/home/nioteam/icolor/lande/r4/#{row[1].gsub('\\', '/')}/*"]
         file_src_arr = Dir["/home/nioteam/icolor/kepulande/#{row[1]}/*"]
+        # file_src_arr = Dir["/Users/sky/Downloads/kepulande/#{row[1]}/*"]
         unless file_src_arr.blank?
           file_src_arr.each do |file_src|
-            design_image = design.design_images.new
-            handle = open(file_src) rescue nil
-            handle.class.class_eval { attr_accessor :original_filename, :content_type }
-            handle.original_filename = file_src.split("/").last
-            design_image.file = handle
-            design_image.title = row[0]
-            design_image.area_id = area ? area.id : 31
-            #image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-            #design_image.tags = [image_tag] if image_tag.present?
-            # design_image.room = room.id if room
-            # design_image.content = row[13]
-            design_image.user_id = new_user.id
-            design_image.source = 'kepulande'
-            if design_image.save
-              if row[6].present?
-                tag_arr = row[6].split(',')
-                tag_arr.each do |tag|
-                  style = ImageLibraryCategory.where("title like '%现代%'").first
-                  ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id).first if style
+            p file_src
+            after_poking = file_src.split('.').last
+            if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG'
+              design_image = design.design_images.new
+              handle = open(file_src) rescue nil
+              handle.class.class_eval { attr_accessor :original_filename, :content_type }
+              handle.original_filename = file_src.split("/").last
+              design_image.file = handle
+              design_image.title = row[0]
+              design_image.area_id = area ? area.id : 31
+              #image_tag = ImageTag.where(image_library_category_id: style.id).first if style
+              #design_image.tags = [image_tag] if image_tag.present?
+              # design_image.room = room.id if room
+              # design_image.content = row[13]
+              design_image.user_id = new_user.id
+              design_image.source = 'kepulande'
+              if design_image.save
+                if row[6].present?
+                  tag_arr = row[6].split(',')
+                  tag_arr.each do |tag|
+                    style = ImageLibraryCategory.where("title like ?",'%#{tag}%').first
+                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id).first if style
+                  end
                 end
+                image_id << design_image.id
+                p "保存成功!"
               end
-              image_id << design_image.id
-              p "保存成功!"
             end
           end
         end
