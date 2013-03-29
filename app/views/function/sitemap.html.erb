@@ -1,0 +1,60 @@
+<% content_for :head do -%>
+    <%= stylesheet_link_tag "2013base" %>
+    <style type="text/css">
+        .map{font: 14px "Arial";margin: 30px auto;}
+        h1{background: #f8f8f8;height: 70px;border-bottom: 1px solid #e6e6e6;margin-bottom: 100px;}
+        .map-title{background: #fff;border-top: 3px solid #666;padding: 24px;font: bold 15px "Arial";color: #000;}
+        .map-section{border-top: 1px solid #e6e6e6;position: relative;height: 100px;padding: 20px 38px;}
+        .map-section .map-title{background: #f8f8f8 url(<%= asset_path 'map-title.gif' %>) no-repeat 10px 50%;position: absolute;padding:12px 24px;top: -46px;left: 38px;border-left: 1px solid #e6e6e6;border-right: 1px solid #e6e6e6;}
+        .map-a{background: #f8f8f8;border: 1px solid #e6e6e6;color: #666;padding: 10px;float: left;padding: 6px 28px;margin-right: 15px;-webkit-transition: all 0.2s;-moz-transition: all 0.2s;-o-transition: all 0.2s;transition: all 0.2s;}
+        .map-a:hover{background: #f0f0f0;color: #000}
+    </style>
+<% end -%>
+<div class="wrapper map">
+    <h1><a class="map-title fl">网站地图</a></h1>
+    <div class="map-section">
+        <a href="/master_interviews" class="map-title" style="border-top-color:#e61c32;">大师殿堂</a>
+        <a href="/master_interviews" class="map-a">大师访谈</a>
+        <a href="/master_designs" class="map-a">大师作品</a>
+    </div>
+    <div class="map-section">
+        <a href="/design_images" class="map-title" style="border-top-color:#e84814;">装修图库</a>
+    </div>
+    <div class="map-section">
+        <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>" class="map-title" style="border-top-color:#fdbe11;">设计鉴赏</a>
+        <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>" class="map-a">设计之星</a>
+        <a href="/designs" class="map-a">作品展示</a>
+        <a href="/color_designs" class="map-a">色彩搭配</a>
+        <a href="/inspirations" class="map-a">灵感秀</a>
+    </div>
+    <div class="map-section">
+        <a href="/channel/access" class="map-title" style="border-top-color:#4c4a9e;">业主通道</a>
+        <a href="/channel/access" class="map-a">设计快查</a>
+        <a href="/faqs" class="map-a">装修问答</a>
+        <a href="/faqs#tips" class="map-a">装修贴士</a>
+        <a href="/mix_colors/new" class="map-a">配色咨询</a>
+        <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" class="map-a">刷新服务</a>
+    </div>
+    <div class="map-section">
+        <a href="/articles?tags=<%= URI.escape("设计相关") %>" class="map-title" style="border-top-color:#39adc6;">行业资讯</a>
+        <a href="/articles?tags=<%= URI.escape("设计相关") %>" class="map-a">装修资讯</a>
+        <a href="/color_articles" class="map-a">色彩资讯</a>
+        <a href="/master_topics" class="map-a">业内动态</a>
+    </div>
+    <div class="map-section">
+        <a href="/softwares/tools" class="map-title" style="border-top-color:#219ede;">应用工具</a>
+        <a href="/softwares/case" class="map-a">案例下载</a>
+        <a href="/softwares/tools" class="map-a">配色软件</a>
+    </div>
+    <div class="map-section">
+        <a href="/art" class="map-title" style="border-top-color:#10ab12;">漆光异彩</a>
+        <a href="/art" class="map-a">米兰诺艺术效果</a>
+        <a href="/7-1" class="map-a">木纹风尚生活</a>
+    </div>
+    <div class="map-section">
+        <a href="/designer_events" class="map-title" style="border-top-color:#b70833;">精彩活动</a>
+        <a href="/designer_events" class="map-a">设计师活动</a>
+        <a href="/other_events" class="map-a">其他活动</a>
+        <a href="/gift_list" class="map-a">获奖名单</a>
+    </div>
+</div><!--wrapper-->
