@@ -19,7 +19,7 @@
       <a href="/master_designs<%= link_suffix %>">大师作品</a>
     </h2>
     <div class="blocks_big mr20 pr">
-      <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag @master_interview.preview_img_out.url(:home_page2), :height=>"365px", :width=>"380px" %></a>
+      <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag  (asset_path '2013/grey.gif'), "data-original" => @master_interview.preview_img_out.url(:home_page2), :height=>"365px", :width=>"380px" %></a>
       <%- master_interview = @master_interview.title + '一' + @master_interview.name %>
       <a href="/master_interviews/<%= @master_interview.id %>" class="blocks_title ft16"><%= truncate(master_interview, length: 25) %></a>
     </div><!-- blocks_big -->
@@ -27,7 +27,7 @@
       <div class="blocks_mid mb25">
         <a href="/master_designs/<%=@master_design.id%>">
             <%- unless @master_design.master_design_uploads.first.file.nil? %>
-              <%= image_tag(@master_design.master_design_uploads.first.file.url(:home_page), :height=>"170px", :width=>"380px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@master_design.master_design_uploads.first.file.url(:home_page), :height=>"170px", :width=>"380px")%>
             <%- end %>
         </a>
         <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= truncate(@master_design.try(:design_name), length: 20) %></a>
@@ -38,7 +38,7 @@
       <div class="blocks_mini">
         <a href="/master_designs/<%=@master_design_two.id%>">
           <%- unless @master_design_two.master_design_uploads.first.file.nil? %>
-              <%= image_tag(@master_design_two.master_design_uploads.first.file.url(:home_page1), :height=>"170px", :width=>"180px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@master_design_two.master_design_uploads.first.file.url(:home_page1), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="/master_designs/<%=@master_design_two.id%>" class="blocks_title ft14"><%= truncate(@master_design_two.try(:design_name), length: 11)%></a>
@@ -47,7 +47,7 @@
     <div class="blocks_big pr">
       <a href="/master_designs/<%=@master_design_three.id%>">
         <%- unless @master_design_three.master_design_uploads.first.file.nil? %>
-              <%= image_tag(@master_design_three.master_design_uploads.first.file.url(:home_page3), :height=>"365px", :width=>"380px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@master_design_three.master_design_uploads.first.file.url(:home_page3), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="/master_designs/<%=@master_design_three.id%>" class="blocks_title ft14"><%= truncate(@master_design_three.try(:design_name), length: 20)%></a>
@@ -60,7 +60,7 @@
     <div class="blocks_big mr20 pr">
       <a href="<%=image_show_design_image_path(@design_image.id)%>">
         <%- unless @design_image.file.nil? %>
-              <%= image_tag(@design_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="<%=image_show_design_image_path(@design_image.id)%>" class="blocks_title ft16"><%= truncate(@design_image.design.try(:title), length: 20)%></a>
@@ -69,7 +69,7 @@
       <div class="blocks_mid mb25">
         <a href="<%=image_show_design_image_path(@design_image_two.id)%>">
           <%- unless @design_image_two.file.nil? %>
-              <%= image_tag(@design_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@design_image_two.id)%>" class="blocks_title ft14"><%= truncate(@design_image_two.design.try(:title), length: 20)%></a>
@@ -80,7 +80,7 @@
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@design_image_three.id)%>">
           <%- unless @design_image_three.file.nil? %>
-                <%= image_tag(@design_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+                <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@design_image_three.id)%>" class="blocks_title ft14"><%= truncate(@design_image_three.design.try(:title), length: 11)%></a>
@@ -90,7 +90,7 @@
       <div class="blocks_mini mr20">
         <a href="<%=image_show_design_image_path(@design_image_four.id)%>">
           <%- unless @design_image_four.file.nil? %>
-                <%= image_tag(@design_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+                <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@design_image_four.id)%>" class="blocks_title ft14"><%= truncate(@design_image_four.design.try(:title), length: 11)%></a>
@@ -98,7 +98,7 @@
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@design_image_five.id)%>">
           <%- unless @design_image_five.file.nil? %>
-                <%= image_tag(@design_image_five.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+                <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_five.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@design_image_five.id)%>" class="blocks_title ft14"><%= truncate(@design_image_five.design.try(:title), length: 11)%></a>
@@ -106,7 +106,7 @@
       <div class="blocks_mid mt25">
         <a href="<%=image_show_design_image_path(@design_image_six.id)%>">
           <%- unless @design_image_six.file.nil? %>
-                <%= image_tag(@design_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
+                <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
         <a href="<%=image_show_design_image_path(@design_image_six.id)%>" class="blocks_title ft14"><%= truncate(@design_image_six.design.try(:title), length: 20)%></a>
@@ -134,7 +134,7 @@
     <div class="blocks_big mr20 pr">
       <a href="<%=user_design_path(@design.user_id, @design)%>">
         <%- unless @design.cover_img.nil? %>
-              <%= image_tag(@design.cover_img.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design.cover_img.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="<%=user_design_path(@design.user_id, @design)%>" class="blocks_title ft14"><%= truncate(@design.title, length:20)%></a>
@@ -143,7 +143,7 @@
       <div class="blocks_mid mb25">
         <a href="/color_designs/<%= @color_design.id %>">
         <%- unless @color_design.main_preview_img.nil? %>
-              <%= image_tag(@color_design.main_preview_img.url(:home_page), :height=>"170px", :width=>"380px")%>
+              <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@color_design.main_preview_img.url(:home_page), :height=>"170px", :width=>"380px")%>
         <%- end %>
       </a>
       <a href="/color_designs/<%= @color_design.id %>" class="blocks_title ft14"><%=truncate(@color_design.design_name, length: 20)%></a>
@@ -151,7 +151,7 @@
       <div class="blocks_mini mr20">
         <a href="/inspirations/<%= @inspiration.id %>">
           <%- unless @inspiration.cover_img.file.nil? %>
-                <%= image_tag(@inspiration.cover_img.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
+                <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@inspiration.cover_img.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
         <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%= truncate(@inspiration.title, length: 11)%></a>
@@ -172,17 +172,17 @@
         <a style="margin:0 6px;" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a>
       </h2>
       <div class="blocks_big mr20">
-        <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" class="fl"><img src="<%= asset_path "2013/index/blocks4.1.jpg"%>" /></a>
+        <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" class="fl"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.1.jpg"%>" /></a>
         <a href="/channel/access" class="fl block block4_2">业主通道</a>
-        <a href="/mix_colors/new<%= link_suffix %>" class="fl mt25"><img src="<%= asset_path "2013/index/blocks4.3.jpg"%>" /></a>
+        <a href="/mix_colors/new<%= link_suffix %>" class="fl mt25"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.3.jpg"%>" /></a>
       </div>
       <div class="blocks_big">
         <div class="blocks_mini mr20">
-          <a href="/channel/access#search"><img src="<%= asset_path "2013/index/blocks4.4.jpg"%>" /></a>
+          <a href="/channel/access#search"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.4.jpg"%>" /></a>
           <a href="/channel/access#search" class="blocks_title ft14">设计快查</a>
         </div>
         <div class="blocks_mini">
-          <a href="/channel/access#cubit"><img src="<%= asset_path "2013/index/blocks4.5.jpg"%>" /></a>
+          <a href="/channel/access#cubit"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.5.jpg"%>" /></a>
           <a href="/channel/access#cubit" class="blocks_title ft14">装修丘比特</a>
         </div>
         <div class="blocks_mid mt25">
@@ -218,7 +218,7 @@
         <a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" class="block block5_1">行业资讯</a>
       </div>
       <div class="blocks_mini">
-        <a href="/articles/<%=@articles.first.id%>"><img src="<%= @articles.first.preview_img%>" width="180" height="170"/></a>
+        <a href="/articles/<%=@articles.first.id%>"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= @articles.first.preview_img%>" width="180" height="170"/></a>
         <a href="/articles/<%=@articles.first.id%>" class="blocks_title ft14"><%= truncate(@articles.first.title, length: 12)%></a>
       </div>
     </div><!-- blocks_big -->
@@ -232,18 +232,18 @@
         <a href="javascript:;">APP</a>
       </h2>
       <div class="blocks_mini mr20 mb25">
-        <a href="/softwares/case"><img src="<%= asset_path "2013/index/blocks6.1.jpg"%>" /></a>
+        <a href="/softwares/case"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks6.1.jpg"%>" /></a>
         <a href="/softwares/case" class="blocks_title ft14">案例下载</a>
       </div>
       <div class="blocks_mini mb25">
-        <a href="javascript:;"><img src="<%= asset_path "2013/index/blocks6.2.jpg"%>" /></a>
+        <a href="javascript:;"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks6.2.jpg"%>" /></a>
         <a href="javascript:;" class="blocks_title ft14">配色软件</a>
       </div>
       <div class="blocks_mini mr20">
         <a href="/softwares/tools" class="block block6_3">应用工具</a>
       </div>
       <div class="blocks_mini">
-        <a href="/softwares/tools<%= link_suffix %>"><img src="<%= asset_path "2013/index/blocks6.4.jpg"%>" /></a>
+        <a href="/softwares/tools<%= link_suffix %>"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks6.4.jpg"%>" /></a>
         <a href="/softwares/tools<%= link_suffix %>" class="blocks_title ft14">配色软件</a>
       </div>
     </div><!-- blocks_big -->
@@ -254,11 +254,11 @@
         <a href="/7-1<%= link_suffix %>">木器漆效果</a>
       </h2>
       <div class="blocks_mid mb25">
-        <a href="/art"><img src="<%= asset_path "2013/index/blocks7.1.jpg"%>" /></a>
+        <a href="/art"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks7.1.jpg"%>" /></a>
         <a href="/art" class="blocks_title ft14">艺术漆效果</a>
       </div>
       <div class="blocks_mini mr20">
-        <a href="/7-1<%= link_suffix %>"><img src="<%= asset_path "2013/index/blocks7.2.jpg"%>" /></a>
+        <a href="/7-1<%= link_suffix %>"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks7.2.jpg"%>" /></a>
         <a href="/7-1<%= link_suffix %>" class="blocks_title ft14">木器漆效果</a>
       </div>
       <div class="blocks_mini">
@@ -274,21 +274,21 @@
       <div class="blocks_mini mr20">
         <a href="/designer_events" class="block block8_1">精彩活动</a>
       </div>
-      <a href="/gift" class="fl"><img src="<%= asset_path "2013/index/blocks8.2.jpg"%>" /></a>
+      <a href="/gift" class="fl"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks8.2.jpg"%>" /></a>
       <div class="blocks_mid mt25">
-        <a href="/yda/2013"><img src="<%= asset_path "2013/index/banner-0219.jpg"%>" width="380" height="170"/></a>
+        <a href="/yda/2013"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/banner-0219.jpg"%>" width="380" height="170"/></a>
         <a href="/yda/2013" class="blocks_title ft14">2013年度iColor未来之星活动开始啦！</a>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
   <div class="mt25 clear">
-    <a href="/design_zg" class="fl mr20"><img src="<%= asset_path "2013/index/blocks9.2.jpg"%>" /></a>
-    <a href="/design_zg2" class="fl"><img src="<%= asset_path "2013/index/blocks9.1.jpg"%>" /></a>
+    <a href="/design_zg" class="fl mr20"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks9.2.jpg"%>" /></a>
+    <a href="/design_zg2" class="fl"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks9.1.jpg"%>" /></a>
   </div><!-- mt25 -->
 </div><!--wrapper-->
 <div class="imap">
   <div class="wrapper clear">
-    <img src="<%= asset_path '2013/index/blocks10.gif' %>" usemap="#imap" />
+    <img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path '2013/index/blocks10.gif' %>" usemap="#imap" />
       <map id="imap" name="imap">
           <area shape="rect" coords="0,0,136,136" href="/master_interviews" />
           <area shape="rect" coords="150,0,286,136" href="/design_images" />
@@ -304,5 +304,5 @@
 
 <%- content_for :tail do %>
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
-<%= javascript_include_tag "jquery.slider","2013main" %>
+<%= javascript_include_tag "jquery.lazyload.min","jquery.slider","2013main" %>
 <% end -%>
