@@ -158,6 +158,7 @@ Icolor::Application.routes.draw do
   match "/rules2" => "function#rules2" #话费积分活动细则
   match "/state" => "function#state" #网站声明
   match "/about" => "function#about" #关于我们
+  match "/sitemap" => "function#sitemap" #网站地图 
   match "/suc_ins" => "function#suc_ins" #发布成功页面
   match "/suc_works" => "function#suc_works" #发布成功页面
   match "/token" => "function#token" #头像修改页面
