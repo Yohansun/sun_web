@@ -31,11 +31,6 @@ class LandsController < ApplicationController
 			urls3 =["80018secaidapei2",
 							"pchousebankuaidingzhi2",
 							"pchousebankuaidingzhi-2",
-						  "souhu_jiajushouye",
-							"souhu_jiajushejishi",
-							"souhu_tuliaopindao",
-							"souhu_xinwenzhongxin",
-							"souhu_bendixinwen",
 							"hejia_shouye",
 							"hejia_youqituliaohangye",
 							"hejia_jushangzhongduan",
@@ -61,7 +56,13 @@ class LandsController < ApplicationController
 							"soufang_shijiazhuang_shouye",
 							"soufang_xiaoquwang_pinpaizhanshi",
 							"souhu_zhuangxiudaxue_shouye",
-							"80018_wangyouyangbanjian_neiyeyouce"]
+							"souhu_jiajushouye",
+							"souhu_jiajushejishi",
+							"souhu_tuliaopindao",
+							"souhu_xinwenzhongxin",
+							"souhu_bendixinwen",
+							"80018_wangyouyangbanjian_neiyeyouce",
+							"souhu_zhuangxiuzongluntantiezizhidingqu"]
 
 			urls_baicheng = ["baicheng_soufun_tuliao",
 							"baicheng_soufun_news",
@@ -91,6 +92,66 @@ class LandsController < ApplicationController
 							"baicheng_zhuangxiu_formats",
 							"baicheng_zhuangxiu_designers"]
 
+			#0327重新新加的监测
+			urls_design_imgs = ["327_soufang1",
+							"327_soufang2",
+							"327_soufang3",
+							"327_soufang4",
+							"327_soufang5",
+							"327_soufang6",
+							"327_soufang7",
+							"327_soufang8",
+							"327_soufang9",
+							"327_soufang10",
+							"327_soufang11",
+							"327_soufang12",
+							"327_soufang13",
+							"327_soufang14",
+							"327_hejia1",
+							"327_hejia2",
+							"327_hejia3",
+							"327_hejia4",
+							"dianpingwang_shouyetupianlunbo",
+							"327_zhuangxiudianpin1",
+							"327_zhuangxiudianpin2",
+							"327_zhuangxiudianpin3",
+							"pipa_shouyezhtizhuangxiu"
+			]
+
+			urls_channel_access = [
+							"souhu_jiajushouyedaogoubangshou",
+							"souhu_jiajubeijingyemiandaogoubangshou",
+							"327_soufang_ck1",
+							"327_soufang_ck2",
+							"327_soufang_ck3",
+							"327_soufang_ck4",
+							"327_soufang_ck5",
+							"327_soufang_ck6",
+							"327_soufang_ck7",
+							"327_soufang_ck8",
+							"327_soufang_ck9",
+							"327_soufang_ck10",
+							"327_soufang_ck11",
+							"327_soufang_ck12",
+							"327_soufang_ck13",
+							"327_soufang_ck14",
+							"327_souhujiaodian_kc1",
+							"327_souhujiaodian_kc2",
+							"327_souhujiaodian_kc3",
+							"327_souhujiaodian_kc4",
+							"327_souhujiaodian_kc5",
+							"327_souhujiaodian_kc6",
+							"327_hejia_kc1",
+							"327_hejia_kc2",
+							"327_hejia_kc3",
+							"327_hejia_kc4",
+							"dianpingwang_shouyetupianlunbo2",
+							"327_zhuangxiudianpin_kc1",
+							"327_zhuangxiudianpin_kc2",
+							"327_zhuangxiudianpin_kc3",
+							"pipa_shouyezhtizhuangxiu2"
+						]
+
 			if urls.include? params[:source]
 				redirect_to home_refresh_path
 			elsif urls2.include? params[:source]
@@ -103,6 +164,10 @@ class LandsController < ApplicationController
 				redirect_to design_images_path
 			elsif urls_baicheng.include? params[:source]
 				redirect_to baicheng_root_path
+			elsif urls_channel_access.include? params[:source]
+				redirect_to channel_access_path
+			elsif urls_design_imgs.include? params[:source]
+				redirect_to design_images_path
 			else
 				redirect_to root_path
 			end
