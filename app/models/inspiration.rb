@@ -7,7 +7,8 @@ class Inspiration < ActiveRecord::Base
 	has_many :comments, :as => :commentable
 	has_many :votes, :as => :voteable
 	has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
-    has_many :collects, :dependent => :destroy
+  has_many :collects, :dependent => :destroy
+  
 	paginates_per 20
 
   def cover_img

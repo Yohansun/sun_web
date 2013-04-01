@@ -16,3 +16,9 @@ public/flash/april_7.3.0406.swf
 .DS_Store
 lib/data/export_data
 Gemfile.lock
+public/articles
+public/design_images
+public/faqs
+public/master_designs
+public/master_interviews
+sitemap*.gz

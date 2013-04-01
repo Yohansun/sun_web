@@ -84,6 +84,7 @@ GEM
       capistrano (>= 1.0.0)
     capistrano-unicorn (0.1.6)
       capistrano
+    chronic (0.9.1)
     cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -279,6 +280,8 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     simple_oauth (0.1.9)
+    sitemap_generator (3.4)
+      builder
     spreadsheet (0.7.3)
       ruby-ole (>= 1.0)
     sprockets (2.2.2)
@@ -326,6 +329,9 @@ GEM
     wasabi (2.5.0)
       httpi (~> 1.0)
       nokogiri (>= 1.4.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     wirble (0.1.3)
 
 PLATFORMS
@@ -371,10 +377,12 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 3.2.3)
   savon
+  sitemap_generator
   thin
   tinder
   twitter-bootstrap-rails (>= 2.1.9)
   uglifier (>= 1.0.3)
   unicorn
   uuidtools
+  whenever
   wirble

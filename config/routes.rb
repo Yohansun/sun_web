@@ -84,8 +84,7 @@ Icolor::Application.routes.draw do
 
   #行业资讯
   match "/color_articles" => "color_articles#index"
-  match "/articles" => "articles#index"
-  match "/articles/:id" => "articles#show"
+  resources :articles,:only => [:index,:show]
 
   #业主通道
   resources :faqs

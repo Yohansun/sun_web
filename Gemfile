@@ -73,3 +73,8 @@ gem 'ruby-pinyin'
 gem "abacus_count"
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
 #gem "magic_content", :path => "/home/mos/code/magic_content"
+
+#sitemap
+gem "sitemap_generator"
+#定时更新sitemap
+gem 'whenever', :require => false
