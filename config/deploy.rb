@@ -54,4 +54,3 @@ desc "生成定时任务"
 task :update_crontab, :roles => :db do
   run "cd #{current_path} && bundle exec whenever --set environment=#{deploy_env} --update-crontab #{application}"
 end
-
