@@ -77,12 +77,12 @@
 							$("#next").show();
 	          }
 					<% end %>
-          
+
           //fn(full)
 				}
 			});
 // console.log($('.imgbase_list').children().last().data('full'))
-			
+
 			<% if params[:page].present? %>
 				$('#prev').show();
 				$('#prev').click(function(event) {
@@ -100,7 +100,7 @@
 				$("#prev").hide();
 			<% end %>
 			<% if @images.current_page == @images.total_pages %>
-				
+
 					var li_index = $list.find('.imgbase_curr');
 					var last_id = li_index.data('full');
 					if(last_id == <%=@images.last.id%>){
@@ -342,12 +342,12 @@ $(function(){
 							</div>
 						<%- end %>
 					</div>
-					
+
 						<a href="javascript:;" class="slider_next"  id="next">next</a>
-					
-					
+
+
 						<a href="javascript:;" class="slider_prev" id="prev">prev</a>
-					
+
 				</div>
 
 				<div class="colorsbox clear border_bline" style="height:82px;">
