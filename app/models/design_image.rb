@@ -20,7 +20,6 @@ class DesignImage < ActiveRecord::Base
   has_many :all_tags    ,:through => :tags,:source => :image_library_category
   #图片风格
   has_many :image_styles,:through => :tags,:source => :image_library_category,:conditions => {:parent_id => 34}
-
   # validate :file_dimensions, :unless => "errors.any?"
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null")
