@@ -6,3 +6,4 @@
 
 User-agent: *
 Allow: /
+Sitemap: http://www.icolor.com.cn/sitemap_index.xml.gz
