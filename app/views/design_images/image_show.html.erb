@@ -138,7 +138,7 @@ $(function(){
         <div class="slides_container">
           <div>
             <div class="img_vertical_align">
-                <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img", alt: @image.design.try(:title)) %>
+                <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img", alt: @image.design.try(:title), title: @image.design.try(:title)) %>
             </div>
           </div>
         </div>
@@ -347,7 +347,7 @@ $(function(){
           <%- @like_images.each do |like_image| %>
             <dd>
               <a href="/design_images/<%= like_image.id %>/image_show">
-                <%= image_tag(like_image.file.url(:list), size: '178x128', alt: like_image.design.try(:title))%>
+                <%= image_tag(like_image.file.url(:list), size: '178x128', alt: like_image.design.try(:title), title: like_image.design.try(:title))%>
                 <span><%= truncate(like_image.title ? like_image.title : "未命名", length: 15) %></span>
               </a>
             </dd>
@@ -358,7 +358,7 @@ $(function(){
           <%- @week_stars.each do |star| %>
             <dd>
               <a href="<%= star.design_link %>">
-                <%= image_tag(star.main_preview_img.url(:image_show), size: '178x128', alt: star.design_name) %>
+                <%= image_tag(star.main_preview_img.url(:image_show), size: '178x128', alt: star.design_name, title: star.design_name) %>
                 <span><%= truncate(star.design_name, length: 15) %></span>
               </a>
             </dd>

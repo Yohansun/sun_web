@@ -111,16 +111,16 @@
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<div class="clear">
 			<div class="fr imgbase_search">
-				<form onsubmit="return search_query($('#search_query_value').val())" style="display:inline">
-					<input type="text" value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
+				<form action='/design_images' method='get' style="display:inline">
+					<input type="text" name='search' value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
 				</form>
 				<span>热门搜索：
 					<%- if MagicSetting.color_tag.present? %>
-						<a href="javascript:search_query('<%= MagicSetting.color_tag %>')"><%= MagicSetting.color_tag %></a>
+						<a href="/design_images?search=<%= MagicSetting.color_tag %>"><%= MagicSetting.color_tag %></a>
 					<%- end %>
-					<a href="javascript:search_query('小户型')">小户型</a>
-					<a href="javascript:search_query('客厅')">客厅</a>
-					<a href="javascript:search_query('简约')">简约</a>
+					<a href="/design_images?search=小户型">小户型</a>
+					<a href="/design_images?search=客厅">客厅</a>
+					<a href="/design_images?search=简约">简约</a>
 				</span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
@@ -129,10 +129,12 @@
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="javascript:search_imageable_type('')" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
-				<a href="javascript:search_imageable_type('MasterDesign')" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-				<!-- <a href="javascript:search_imageable_type('WeekStart')" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a> -->
-				<a href="javascript:search_imageable_type('ColorDesign')" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
+				<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
+				<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+				<!--
+        <a href="/design_images?imageable_type=WeekStart" class="<%#="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
+        -->
+				<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -173,32 +175,32 @@
 				</fieldset>
 				<fieldset class="lastfield pinyin_list clear">
 					<label class="fl">拼音检索：</label>
-					<a href="javascript:void(0)">A</a>|
-          <a href="javascript:void(0)">B</a>|
-          <a href="javascript:void(0)">C</a>|
-          <a href="javascript:void(0)">D</a>|
-          <a href="javascript:void(0)">E</a>|
-          <a href="javascript:void(0)">F</a>|
-          <a href="javascript:void(0)">G</a>|
-          <a href="javascript:void(0)">H</a>|
-          <a href="javascript:void(0)">I</a>|
-          <a href="javascript:void(0)">J</a>|
-          <a href="javascript:void(0)">K</a>|
-          <a href="javascript:void(0)">L</a>|
-          <a href="javascript:void(0)">M</a>|
-          <a href="javascript:void(0)">N</a>|
-          <a href="javascript:void(0)">O</a>|
-          <a href="javascript:void(0)">P</a>|
-          <a href="javascript:void(0)">Q</a>|
-          <a href="javascript:void(0)">R</a>|
-          <a href="javascript:void(0)">S</a>|
-          <a href="javascript:void(0)">T</a>|
-          <a href="javascript:void(0)">U</a>|
-          <a href="javascript:void(0)">V</a>|
-          <a href="javascript:void(0)">W</a>|
-          <a href="javascript:void(0)">X</a>|
-          <a href="javascript:void(0)">Y</a>|
-          <a href="javascript:void(0)">Z</a>
+					<a href="/design_images?pinyin=A">A</a>|
+          <a href="/design_images?pinyin=B">B</a>|
+          <a href="/design_images?pinyin=C">C</a>|
+          <a href="/design_images?pinyin=D">D</a>|
+          <a href="/design_images?pinyin=E">E</a>|
+          <a href="/design_images?pinyin=F">F</a>|
+          <a href="/design_images?pinyin=G">G</a>|
+          <a href="/design_images?pinyin=H">H</a>|
+          <a href="/design_images?pinyin=I">I</a>|
+          <a href="/design_images?pinyin=J">J</a>|
+          <a href="/design_images?pinyin=K">K</a>|
+          <a href="/design_images?pinyin=L">L</a>|
+          <a href="/design_images?pinyin=M">M</a>|
+          <a href="/design_images?pinyin=N">N</a>|
+          <a href="/design_images?pinyin=O">O</a>|
+          <a href="/design_images?pinyin=P">P</a>|
+          <a href="/design_images?pinyin=Q">Q</a>|
+          <a href="/design_images?pinyin=R">R</a>|
+          <a href="/design_images?pinyin=S">S</a>|
+          <a href="/design_images?pinyin=T">T</a>|
+          <a href="/design_images?pinyin=U">U</a>|
+          <a href="/design_images?pinyin=V">V</a>|
+          <a href="/design_images?pinyin=W">W</a>|
+          <a href="/design_images?pinyin=X">X</a>|
+          <a href="/design_images?pinyin=Y">Y</a>|
+          <a href="/design_images?pinyin=Z">Z</a>
 				</fieldset>
 				<a href="javascript:;" class="<%= params["tags"].blank? ? "pa imgbase_toggle form_expand" : "pa imgbase_toggle" %>">展开</a>
       <% end %>
@@ -227,9 +229,9 @@
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
 	<div class="search_bin">
-		<a href="javascript:search_ranking_list('like')" class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
-		<a href="javascript:search_ranking_list('view_count')" class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="javascript:search_ranking_list('')" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
+		<a href="/design_images?ranking_list=like" data-rank='like' class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
+		<a href="/design_images?ranking_list=view_count" data-rank='view_count' class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
+		<a href="/design_images" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
 		<%- if @query_params_index.present? || @area_names.present? || params[:pinyin].present? %>
 			<p class="srch-items">
 				您的选择：
@@ -267,11 +269,11 @@
 								<div class="img_vertical_align">
 									<%- unless image.imageable_type == "MasterDesign" -%>
 										<a href="<%= user_design_path(image.user_id, image.imageable_id, image_id: image.id) %>" target="_blank" >
-											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title)) %>
+											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title), title: image.design.try(:title)) %>
 										</a>
 									<%- else -%>
 										<a href="<%= master_design_path(image.imageable_id) %>" target="_blank" >
-											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title)) %>
+											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title), title: image.design.try(:title)) %>
 										</a>
 									<%- end -%>
 								</div>
@@ -353,7 +355,7 @@
 				<%- @images.each_with_index do |image, index| %>
 					<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
 						<a href="<%= image_show_design_image_path(image,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: site + (index + 1)) %>" target="_blank">
-							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title)) %>
+							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title), title: image.design.try(:title)) %>
 							<p><%= truncate(image.title, length: 15) %></p>
 							<span></span>
 						</a>

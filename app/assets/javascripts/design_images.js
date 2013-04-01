@@ -1,11 +1,21 @@
 jQuery(document).ready(function($) {
   $(".pinyin_list a").click(function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     var pinyin = getParameterByName("pinyin");
     if (pinyin == $(event.target).text()) {
       refresh_search({pinyin: ''});
     } else {
       refresh_search({pinyin: $(event.target).text()});
     }
+  });
+
+  $('.search_bin a.fr').click(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var rank = getParameterByName("ranking_list");
+    var target_rank = $(event.target).data('rank');
+    refresh_search({ranking_list: target_rank == undefined ? '' : target_rank });
   });
 
   $(".pinyin_list a").each(function (){
@@ -71,22 +81,22 @@ function delete_pinyin() {
   refresh_search({pinyin: ""});
 }
 
-function search_query(query) {
-  refresh_search({search: query});
-  return false;
-}
+// function search_query(query) {
+//   refresh_search({search: query});
+//   return false;
+// }
 
-function search_pinyin(pinyin) {
-  refresh_search({pinyin: pinyin});
-}
+// function search_pinyin(pinyin) {
+//   refresh_search({pinyin: pinyin});
+// }
 
-function search_ranking_list(ranking_list) {
-  refresh_search({ranking_list: ranking_list});
-}
+// function search_ranking_list(ranking_list) {
+//   refresh_search({ranking_list: ranking_list});
+// }
 
-function search_imageable_type(imageable_type) {
-  refresh_search({imageable_type: imageable_type});
-}
+// function search_imageable_type(imageable_type) {
+//   refresh_search({imageable_type: imageable_type});
+// }
 
 function refresh_search(params) {
   var imageable_type = getParameterByName("imageable_type");
