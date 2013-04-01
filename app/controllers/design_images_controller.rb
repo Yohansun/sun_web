@@ -259,7 +259,7 @@ class DesignImagesController < ApplicationController
       images = images.order("design_images.created_at DESC")
     end
     @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
-    count = images.count 
+    count = images.count
     site = params[:site].to_i - 1
     @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
     @next_id = images.offset(site + 1).limit(1) if (site + 1) < count

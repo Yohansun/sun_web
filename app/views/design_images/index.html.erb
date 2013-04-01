@@ -23,14 +23,11 @@
       sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '请选择');
     });
     $(function() {
-    	$('.check_on').bind("click", function () {
+    	$('.check_on').bind("click", function (event) {
     		$(this).addClass("highlight");
-    		$.ajax({
-    			type: 'GET',
-			    url: '/design_images/image_search_index',
-			    data: { tag : $(this).val() }
-    		});
-    		console.log($(this).val());
+        event.preventDefault();
+        event.stopPropagation();
+        add_tag($(event.currentTarget).data('parent-id'), $(event.currentTarget).data('tag-id'));
     	});
     });
     $(function(){
@@ -84,7 +81,7 @@
 				var $this = $(this);
 				$this.toggleClass('form_expand').text($this.hasClass('form_expand') ? '展开' : '收起').parent().toggleClass('form_mini');
 			});
-			
+
 			if($toggle.hasClass('form_expand')){
 				$toggle.text("展开");
 			}
@@ -152,9 +149,13 @@
 						<fieldset class="clear">
 							<label class="fl"><%= category.title %>：</label>
 							<span>
-								<a href="javascript:add_tag(<%= category.id %>, <%= category.id %>)" class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
+								<a href="/design_images?tags=<%=category.id%>"
+                  data-parent-id='<%= category.id %>' data-tag-id='<%= category.id %>'
+                  class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
 								<%- category.children.each do |cate_child| %>
-									<a href="javascript:add_tag(<%= category.id %>, <%= cate_child.id %>)" class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
+									<a href="/design_images?tags=<%= cate_child.id %>"
+                    data-parent-id='<%= category.id %>' data-tag-id='<%= cate_child.id %>'
+                    class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
 								<%- end %>
 							</span>
 						</fieldset>
@@ -208,9 +209,13 @@
 							<fieldset class="clear">
 								<label class="fl"><%= child_lv2.title %>：</label>
 								<span>
-									<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv2.id %>);" value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
+									<a href="/design_images?tags=<%= child_lv2.id %>"
+                    data-parent-id='<%= child_lv2.id %>' data-tag-id='<%= child_lv2.id %>'
+                    value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
 									<%- child_lv2.children.each do |child_lv3| %>
-										<a href="javascript:add_tag(<%= child_lv2.id %>, <%= child_lv3.id %>);" value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
+										<a href="/design_images?tags=<%= child_lv2.id %>,<%= child_lv3.id %>"
+                      data-parent-id='<%= child_lv2.id %>' data-tag-id='<%= child_lv3.id %>'
+                      value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
 									<%- end %>
 								</span>
 							</fieldset>
@@ -262,11 +267,11 @@
 								<div class="img_vertical_align">
 									<%- unless image.imageable_type == "MasterDesign" -%>
 										<a href="<%= user_design_path(image.user_id, image.imageable_id, image_id: image.id) %>" target="_blank" >
-											<%= image_tag(image.file.url(:design_image_big)) %>
+											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title)) %>
 										</a>
 									<%- else -%>
 										<a href="<%= master_design_path(image.imageable_id) %>" target="_blank" >
-											<%= image_tag(image.file.url(:design_image_big)) %>
+											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title)) %>
 										</a>
 									<%- end -%>
 								</div>
@@ -348,7 +353,7 @@
 				<%- @images.each_with_index do |image, index| %>
 					<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
 						<a href="<%= image_show_design_image_path(image,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: site + (index + 1)) %>" target="_blank">
-							<%= image_tag(image.file.url(:design_image_list), size: '224x162') %>
+							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title)) %>
 							<p><%= truncate(image.title, length: 15) %></p>
 							<span></span>
 						</a>
