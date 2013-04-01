@@ -107,7 +107,7 @@ task :import_image_libraries_for_kepulande => :environment  do
   # files = ['kepulande_r1.xls', 'kepulande_r2.xls', 'kepulande_r3.xls', 'kepulande_r4.xls']
   # files.each do |xls_name|
     image_id = []
-    book = Spreadsheet.open "#{Rails.root}/lib/data/kapulande_r8.xls"
+    book = Spreadsheet.open "#{Rails.root}/lib/data/kapulande_20130329.xls"
     sheet1 = book.worksheet 0
     sheet1.each do |row|
       next if row[1] == '路径' || row[1].blank?
@@ -167,7 +167,7 @@ task :import_image_libraries_for_kepulande => :environment  do
                   tag_arr = row[6].split(',')
                   tag_arr.each do |tag|
                     style = ImageLibraryCategory.where("title like ?",'%#{tag}%').first
-                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id).first if style
+                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id, genre: 'kepulande').first if style
                   end
                 end
                 image_id << design_image.id
