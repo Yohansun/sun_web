@@ -123,7 +123,7 @@
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>">
-        <%- unless @weekly_star.weekly_star_uploads.first.file.nil? %>
+        <%- if @weekly_star.weekly_star_uploads.first.try(:file) %>
               <%= image_tag(@weekly_star.weekly_star_uploads.first.file.url(:home_page1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
