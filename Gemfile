@@ -28,7 +28,7 @@ group :development do
   gem "hirb"
   gem "quiet_assets"
   gem 'thin'
-  gem "debugger"
+  #gem "debugger"
 end
 
 gem 'unicorn'
