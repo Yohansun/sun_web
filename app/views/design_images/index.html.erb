@@ -1,5 +1,8 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "imgbase", "jquery.slider"%>
+  <style type="text/css">
+  	.check_imgs{padding-left:25px;background:#e71d36 url(<%= asset_path 'imgbase/icon_freeq.png' %>) no-repeat 8px -17px;text-decoration:none;}
+  </style>
 <%- end %>
 <%- content_for :tail do %>
   <%= javascript_include_tag "slides", "LinkageSelect.js", "/location.js", "underscore.js", "design_images.js" %>
@@ -385,9 +388,9 @@ $(function(){
 					</span>
 					<%- unless @images.first.imageable_type == "MasterDesign" -%>
 						<span class="fl march-twenty-a">
-							<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank">
-								<%= truncate(@images.first.design.try(:title), length: 15) %>
-								<span>(查看该套作品)</span>
+							<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank"><%= truncate(@images.first.design.try(:title), length: 15) %> </a>
+							<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+								查看该套作品
 							</a>
 						</span>
 						<span class="fl cl">
@@ -404,8 +407,11 @@ $(function(){
 						<span class="fl march-twenty-a">
 							<a href="/master_designs/<%= @images.first.imageable_id %>" target="_blank">
 								<%= truncate(@images.first.imageable.try(:title), length: 15) %>
-								<span>(查看该套作品)</span>
 							</a>
+								<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+									查看该套作品
+								</a>
+							
 						</span>
 						<span class="fl cl">
 							<strong>
@@ -435,7 +441,9 @@ $(function(){
 								<span class="fl march-twenty-a">
 									<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank">
 										<%= truncate(image.design.try(:title), length: 15) %>
-										<span>(查看该套作品)</span>
+									</a>
+									<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+										查看该套作品
 									</a>
 								</span>
 								<span class="fl cl">
@@ -452,7 +460,10 @@ $(function(){
 								<span class="fl march-twenty-a">
 									<a href="/master_designs/<%= image.imageable_id %>" target="_blank">
 										<%= truncate(image.imageable.try(:title), length: 15) %>
-										<span>(查看该套作品)</span>
+									</a>
+									<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+										查看该套作品
+									</a>
 									</a>
 								</span>
 								<span class="fl cl">
