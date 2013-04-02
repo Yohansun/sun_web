@@ -325,6 +325,7 @@ Icolor::Application.routes.draw do
 
   #扩充magic_admin
   scope "/admin", :module =>"magic_admin" do
+    root :to => "main#dashboard" ,as: "admin_root"
     match '/users' => 'users#index'
     resources :seller_users
     match "/autocomplete_area" => 'seller_users#autocomplete_area'
