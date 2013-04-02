@@ -84,7 +84,7 @@ module MagicContent
   									 user.city.try(:parent).try(:name),
   									 user.try(:city).try(:name), 
   									 user.try(:area).try(:name),
-                     user.try(:recipient_address),
+  									 user.role_address,
   									 user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
   									 user.sign_in_count,
   									 user.is_imported?,
