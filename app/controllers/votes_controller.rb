@@ -18,7 +18,9 @@ class VotesController < ApplicationController
       end
     elsif current_user.blank?
       #vote.save!
-      render :action => 'fail'
+      vote.save
+      render :action => 'create'
+      #render :action => 'fail'
     end
   end
 
