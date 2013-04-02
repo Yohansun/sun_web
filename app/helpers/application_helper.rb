@@ -184,7 +184,7 @@ module ApplicationHelper
   end
 
   def color_master_image
-    if params[:master_kind] == "色彩大师"
+    if params[:type] == "color"
       url = "master/color_master_hover.png"
     else
       url = "master/color_master_btn.png"
@@ -193,7 +193,7 @@ module ApplicationHelper
   end
 
   def space_master_image
-    if params[:master_kind] == "室内空间大师"
+    if params[:type] == "shinei"
       url = "master/space_master_hover.png"
     else
       url = "master/space_master_btn.png"

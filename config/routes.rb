@@ -74,13 +74,41 @@ Icolor::Application.routes.draw do
   match "/site_messages" => "site_messages#create", via: :post, as: 'online_qa'
 
   #大师殿堂
-  match "/master_interviews" => "master_interviews#index"
-  match "/master_interviews/:id" => "master_interviews#show"
+  resources :master_interviews,:only => [:index,:show] do
+    collection do
+      get :all                                                  #所有
+      get :oversea                                              #海外
+      match "hk_tw_mc",:action => "hk_tw_mc",:as => "hk_tw_mc"  #港澳台
+      get :cn                                                   #中国大陆
+    end
+  end
+  match "master_interviews/hk_tw_mc/:type" => "master_interviews#hk_tw_mc"
+  match "master_interviews/cn/:type"       => "master_interviews#cn"      
+  match "master_interviews/oversea/:type"  => "master_interviews#oversea" 
+  match "master_interviews/all/:type"      => "master_interviews#all" 
+  
+  
   resources :master_topics, :only => [:index, :show]
-  match "/master_designs" => "master_designs#index"
-  match "/master_designs/:id" => "master_designs#show", as: 'master_design'
-  match "/master_designs/:id/fullscreen" => "master_designs#fullscreen"
-  match "/master_designs/:id/download" => "master_designs#download"
+  
+  resources :master_designs ,:only => [:index,:show] do
+    collection do
+      get :all                                                  #所有
+      get :oversea                                              #海外
+      match "hk_tw_mc",:action => "hk_tw_mc",:as => "hk_tw_mc"  #港澳台
+      get :cn                                                   #中国大陆
+    end
+    member do
+      get :fullscreen
+      get :download
+    end
+  end
+  
+  match "master_designs/hk_tw_mc/:type" => "master_designs#hk_tw_mc"
+  match "master_designs/cn/:type"       => "master_designs#cn"      
+  match "master_designs/oversea/:type"  => "master_designs#oversea" 
+  match "master_designs/all/:type"      => "master_designs#all"
+  
+  
 
   #行业资讯
   match "/color_articles" => "color_articles#index"
@@ -99,6 +127,14 @@ Icolor::Application.routes.draw do
 
   #设计鉴赏
   # resources :weekly_stars, :only => [:index, :show]
+  #设计之星
+  match "weekly_stars-design" => "weekly_stars#index"                             ,:as => "weekly_stars"
+  #每周之星
+  match "weekly_stars-week"   => "weekly_stars#weekly_stars_week"                 ,:as => "weekly_stars_week_weekly_stars"
+  #月度色彩之星
+  match "weekly_stars-month-color" => "weekly_stars#weekly_stars_month_color"     ,:as => "weekly_stars_month_color_weekly_stars"
+  #月度设计之星
+  match "weekly_stars-month-design" => "weekly_stars#weekly_stars_month_design"   ,:as => "weekly_stars_month_design_weekly_stars"
   resources :weekly_stars do
     member do
       get :download
@@ -113,6 +149,13 @@ Icolor::Application.routes.draw do
   match "/my_show" => "my_show#index"
   match "/my_show/autocomplete_username" => "my_show#autocomplete_username"
 
+
+  #最新
+  match "inspirations-new"      => "inspirations#inspirations_new"          ,:as => "inspirations_new"
+  #最热
+  match "inspirations-hot"      => "inspirations#inspirations_hot"          ,:as => "inspirations_hot"
+  #刷新21天
+  match "inspirations-minisite" => "inspirations#inspirations_minisite"     ,:as => "inspirations_minisite"      
   resources :inspirations do
     member do
       get :download

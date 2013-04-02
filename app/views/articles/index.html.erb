@@ -33,9 +33,9 @@
           <div class="section clear">
             <%= image_tag article.preview_img.url(:icolor_articles) if article.preview_img %>
             <div class="article fl ft14">
-              <h1><%= link_to article.title, "/articles/#{article.id}?tags=#{tag}" %></h1>
+              <h1><%= link_to article.title, "/articles/#{article.id}-design" %></h1>
               <span>时间：<%= article.published_at.to_date %></span>
-              <p><%= raw article.intro %>...<br/><%= link_to "[详细]", "/articles/#{article.id}?tags=#{tag}" %></p>
+              <p><%= raw article.intro %>...<br/><%= link_to "[详细]", "/articles/#{article.id}-design" %></p>
             </div>
             <!--article ends-->
           </div><!--section ends-->
@@ -47,9 +47,9 @@
           <div class="section clear">
             <%= image_tag article.preview_img.url(:icolor_articles) if article.preview_img %>
             <div class="article fl ft14">
-              <h1><%= link_to article.title, "/articles/#{article.id}" %></h1>
+              <h1><%= link_to article.title, "/articles/#{article.id}-design" %></h1>
               <span>时间：<%= article.published_at.to_date %></span>
-              <p><%= raw article.intro %>...<br/><%= link_to "[详细]", "/articles/#{article.id}" %></p>
+              <p><%= raw article.intro %>...<br/><%= link_to "[详细]", "/articles/#{article.id}-design" %></p>
             </div>
             <!--article ends-->
           </div><!--section ends-->

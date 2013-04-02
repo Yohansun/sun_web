@@ -15,10 +15,12 @@ class DesignImage < ActiveRecord::Base
   has_many :collects, :dependent => :destroy
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
   belongs_to :design, :polymorphic => true,foreign_type: "imageable_type", foreign_key: 'imageable_id'
+
   #所有标签
   has_many :all_tags    ,:through => :tags,:source => :image_library_category
   #图片风格
   has_many :image_styles,:through => :tags,:source => :image_library_category,:conditions => {:parent_id => 34}
+
   # validate :file_dimensions, :unless => "errors.any?"
 
   scope :available, where("design_images.imageable_id is not null and design_images.imageable_type is not null and design_images.imageable_type <> 'Inspiration' and design_images.user_id is not null")
@@ -26,6 +28,7 @@ class DesignImage < ActiveRecord::Base
   scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
 
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
+  
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
@@ -45,6 +48,9 @@ class DesignImage < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+    
+
+    delegate :id,:to => :design, :allow_nil => true ,:prefix => true
 
   # validates_presence_of :area_id
 

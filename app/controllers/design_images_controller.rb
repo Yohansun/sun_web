@@ -188,15 +188,16 @@ class DesignImagesController < ApplicationController
   end
 
   def image_show
-    @image = DesignImage.includes(:design).find(params[:id])
+    @image = DesignImage.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
        @master_design = MasterDesign.find(@image.imageable_id)
-    end 
+    end
 
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.available.audited_with_colors.count
-    @image_tags = @image.tags.map{|a| ImageLibraryCategory.find(a.image_library_category_id).title}
+    @image_tags = ImageLibraryCategory.find(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
+    # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
     if @image.area_id
       area = Area.find(@image.area_id)
       if area.parent_id

@@ -20,10 +20,24 @@
     	var $ul = $slider.slider({
 	            buttons : false,
 	            speed : 800,
-	            pagerClass : 'pager_rest'
+	            pagerClass : 'pager_rest',
+				callback : function(n){
+					var $img = $slider.find('img');
+					$img.eq(n+1).trigger('slide');
+				}
 	        }).find('ul'),
 	        num = $ul.find('li').length - 1;
 	    $ul.css('margin-left', - (num * 45 + 12)/2 + 'px');
+	})($);
+
+	// lazyload
+	(function($){
+		$(".kv2013_slider img").lazyload({
+			event : "slide"
+		}).eq(0).trigger('slide').end().eq(1).trigger('slide');
+		$('.wrapper img').add('.imap img').lazyload({
+			effect : 'fadeIn'
+		});
 	})($);
 
 	//grid

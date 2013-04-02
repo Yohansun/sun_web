@@ -75,7 +75,9 @@
                   <h3><%= design.design_name %></h3>
 
                   <p class="p2 group">
-                    <a href="/color_designs/<%= design.id %>"><span class="gzh ft12"><%= design.votes_count %></span></a><span class="zf ft12">转发 (<%=design.shares_count %>)</span>
+                    <%= link_to  raw("<span class='gzh ft12' id='votes_count#{design.id}'>#{design.votes_count}</span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
+                    
+                    <span class="zf ft12">转发 (<%=design.shares_count %>)</span>
                     <a href="/color_designs/<%= design.id %>#review_focus"><span class="pl ft12">评论 (<%=design.comments.length %>)</span></a>
                   </p>
                   <%= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{design.design_name}】，推荐色：立邦#{design.try(:recommend_color1)} #{ColorCode.find_by_code(design.recommend_color1).try(:name)}，让色彩融入生活，尽在iColor@刷新生活iColor，", "http://#{request.host_with_port}/color_designs/#{design.id}", design.main_preview_img.url, design.id.to_s, "ColorDesign") %>
