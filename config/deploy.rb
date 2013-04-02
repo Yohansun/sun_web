@@ -47,12 +47,10 @@ end
 
 desc "生成sitemap"
 task :refresh_sitemaps do
-  run "cd #{release_path} && RAILS_ENV=#{deploy_env} bundle exec rake sitemap:refresh"
+  run "cd #{current_path} && RAILS_ENV=#{deploy_env} bundle exec rake sitemap:refresh"
 end
 
 desc "生成定时任务"
 task :update_crontab, :roles => :db do
   run "cd #{current_path} && bundle exec whenever --set environment=#{deploy_env} --update-crontab #{application}"
 end
-
-after "deploy", "refresh_sitemaps", "update_crontab"
