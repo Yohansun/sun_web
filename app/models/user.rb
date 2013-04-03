@@ -79,11 +79,11 @@ class User < ActiveRecord::Base
   has_many :news_company_designs ,:through => :company_designs , :source => :design_images,:include => :user,:order => "design_images.created_at desc"
   #个人最新作品
   has_many :news_personal_designs,:through => :personal_designs, :source => :design_images,:include => :user,:order => "design_images.created_at desc"
-  
+
   def news_company_design
     news_company_designs.first
   end
-  
+
   def news_personal_design
     news_personal_designs.first
   end
@@ -349,6 +349,10 @@ class User < ActiveRecord::Base
     areas[1] ||= ''
     areas[2] ||= ''
     areas
+  end
+
+  def available_designs
+    self.designs.joins(:design_images).group("imageable_id")
   end
 
   #获取用户话费信息

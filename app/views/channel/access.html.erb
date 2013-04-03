@@ -46,11 +46,13 @@
         <% end %>
         <ul class="channel_list clear">
           <%- @design_users.each do |user| %>
-            <% designs = user.designs.joins(:design_images).group("imageable_id") %>
+            <% designs = user.available_designs %>
+            <% design_first = designs.first %>
             <li style="height:205px">
               <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
                 <%= link_to user_path(user), :target => "_blank" do %>
-                  <img class="fl" src="<%=designs.first.try(:design_images).try(:first).try(:file) if designs.first%>" width="205" height="155">
+                  <%= image_tag(design_first.try(:design_images).try(:first).try(:file),
+                      size: '205x155', class: 'fl') %>
                 <% end %>
                 <%= link_to user_path(user), :target => "_blank" do %>
                   <%- if user.avatar %>
@@ -61,11 +63,10 @@
                 <% end %>
               </div>
               <h3>
-                <%= link_to user_path(user), :target => "_blank",:title =>"#{designs.first.title if designs.first}" do %>
-                  <%= truncate(designs.first.title, length: 20) if designs.first%>
-                <%- end %>
+                <%= link_to truncate(design_first.title, length: 20), user_path(user),
+                    target: '_blank', title: design_first.title %>
               </h3>
-              <p><%=user.display_name ? user.display_name : user.name%> (<%=user.area.name if user.area%>)</p>
+              <p><%=user.display_name ? user.display_name : user.name%> <%="(#{user.area.name})" if user.area %></p>
               <p><span><%= designs.abacus.count %></span> 作品</p>
             </li>
           <%- end %>
@@ -74,7 +75,7 @@
         <div class="pager ft12">
            <%= paginate @design_users  if @design_users%>
         </div>
-        
+
         <div class="channel_banner tc">
           <a href="/yda/2013"><img src="<%= asset_path '2013/ydabanner.jpg' %>"></a>
           <img src="<%= asset_path '2013/yda_2.jpg' %>" style="margin-left:20px;">

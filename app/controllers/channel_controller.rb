@@ -38,7 +38,7 @@ class ChannelController < ApplicationController
       des_status = params[:user_role] == "designer_1"
       @design_users = @design_users.where(:des_status => des_status ).order("current_sign_in_at desc")
     when /company/
-      @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)        
+      @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
       sellers = @design_users.where("top_order != 0").order("top_order desc").limit(10).map(&:id)
 
       unless sellers.blank?
@@ -50,7 +50,7 @@ class ChannelController < ApplicationController
 
     #use abacus
     #@design_users = @design_users.select("users.*, count(design_images.id) as design_image_count").joins(:designs).joins("left join design_images on design_images.imageable_id = designs.id and `design_images`.`imageable_type` = 'Design'").group("users.id").having("design_image_count > 0").abacus.page(params[:page]).per(8)
-    @design_users = @design_users.joins(:design_images).
+    @design_users = @design_users.includes(:design_images).
                                   where(:design_images => {:imageable_type => 'Design'}).
                                   group("users.id").order("design_images.created_at desc").abacus.
                                   page(params[:page]).per(8)

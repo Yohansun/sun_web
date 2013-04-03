@@ -175,7 +175,7 @@
         <%- @list_design_users4.each do |design_user| %>
             <dd>
                 <%= link_to user_path(design_user) do %>
-                    <%- if design_user.designs.joins(:design_images).group("imageable_id").last.try(:cover_img) %>
+                    <%- if design_user.news_personal_design %>
                         <%= image_tag(design_user.news_personal_design.file.url(:list), :size =>"185x140") rescue ""%>
                     <%- end %>
                 <%- end %>
