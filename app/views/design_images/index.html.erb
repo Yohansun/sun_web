@@ -196,9 +196,7 @@ $(function(){
 			<p class="fr">
 				<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
 				<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-				<!--
-        <a href="/design_images?imageable_type=WeekStart" class="<%#="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
-        -->
+        <a href="/design_images?imageable_type=WeekStart" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
 				<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
@@ -388,8 +386,8 @@ $(function(){
 					</span>
 					<%- unless @images.first.imageable_type == "MasterDesign" -%>
 						<span class="fl march-twenty-a">
-							<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" target="_blank"><%= truncate(@images.first.design.try(:title), length: 15) %> </a>
-							<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+							<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" target="_blank"><%= truncate(@images.first.design.try(:title), length: 15) %> </a>
+							<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
 								查看该套作品
 							</a>
 						</span>
@@ -408,7 +406,7 @@ $(function(){
 							<a href="/master_designs/<%= @images.first.imageable_id %>" target="_blank">
 								<%= truncate(@images.first.imageable.try(:title), length: 15) %>
 							</a>
-								<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+								<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
 									查看该套作品
 								</a>
 							
@@ -439,10 +437,10 @@ $(function(){
 							</span>
 							<%- unless @images.first.imageable_type == "MasterDesign" -%>
 								<span class="fl march-twenty-a">
-									<a href="<%= user_design_path(image.id, image.imageable_id) %>" target="_blank">
+									<a href="<%= user_design_path(image.user_id, image.imageable_id) %>" target="_blank">
 										<%= truncate(image.design.try(:title), length: 15) %>
 									</a>
-									<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+									<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
 										查看该套作品
 									</a>
 								</span>
@@ -461,7 +459,7 @@ $(function(){
 									<a href="/master_designs/<%= image.imageable_id %>" target="_blank">
 										<%= truncate(image.imageable.try(:title), length: 15) %>
 									</a>
-									<a href="<%= user_design_path(@images.first.id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+									<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
 										查看该套作品
 									</a>
 									</a>
