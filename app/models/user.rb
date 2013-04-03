@@ -338,6 +338,11 @@ class User < ActiveRecord::Base
       return "普通用户"
     end
   end
+  
+  #只有角色是公司 取的收件地址才是公司地址(company_address), 其他都是收货地址(recipient_address)
+  def role_address
+    self.role_chn_name == "公司" ? self.company_address : self.recipient_address
+  end
 
   def ydaed?
     self.yda_game ? true : false
