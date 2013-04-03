@@ -30,16 +30,6 @@
 	    $ul.css('margin-left', - (num * 45 + 12)/2 + 'px');
 	})($);
 
-	// lazyload
-	(function($){
-		$(".kv2013_slider img").lazyload({
-			event : "slide"
-		}).eq(0).trigger('slide').end().eq(1).trigger('slide');
-		$('.wrapper img').add('.imap img').lazyload({
-			effect : 'fadeIn'
-		});
-	})($);
-
 	//grid
 	(function($){
 		var grid  = $('#grid'),
