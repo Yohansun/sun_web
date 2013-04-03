@@ -151,25 +151,31 @@ class LandsController < ApplicationController
 							"327_zhuangxiudianpin_kc3",
 							"pipa_shouyezhtizhuangxiu2"
 						]
+			#TASK 458
+			urls_star = ["327_hejia_star1","327_zhuangxiudianpin_star1"
+			]
 
-			if urls.include? params[:source]
-				redirect_to home_refresh_path
+
+	 		redirect_to redirect_to_url = if urls.include? params[:source]
+				home_refresh_path
 			elsif urls2.include? params[:source]
-				redirect_to other_events_review_path
+				other_events_review_path
 			elsif urls3.include? params[:source]
-				redirect_to root_path
+				root_path
 			elsif urls4.include? params[:source]
-				redirect_to gift_list_path
+				gift_list_path
 			elsif urls_design_images.include? params[:source]
-				redirect_to design_images_path
+				design_images_path
 			elsif urls_baicheng.include? params[:source]
-				redirect_to baicheng_root_path
+				baicheng_root_path
 			elsif urls_channel_access.include? params[:source]
-				redirect_to channel_access_path
+				channel_access_path
 			elsif urls_design_imgs.include? params[:source]
-				redirect_to design_images_path
+				design_images_path
+			elsif urls_star.include? params[:source]
+				weekly_stars_path
 			else
-				redirect_to root_path
+				root_path
 			end
 	end
 end
