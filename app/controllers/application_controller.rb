@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :search_color_code
+  helper_method :search_color_code,:find_or_build_zip_file
 
   def stored_location_for(resource)
     if current_user && current_user.not_role?
@@ -80,4 +80,25 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
+	#find_or_build_zip_file("tmp/file.zip",:ab_paths => ["/root/pictures/1.jpg",.....],:cache_name => :cache_name)
+	#or
+	#find_or_build_zip_file("tmp/file.zip",:ab_paths => ["/root/pictures/1.jpg",.....],:cache_name => :cache_name) do |file|
+	#  send_file file
+	#end
+	#
+	#记住更新某个相册的时候记住Rails.cache.write(:cache_name,false)
+	def find_or_build_zip_file(*vals,&block)
+		options = vals.extract_options!
+		options.assert_valid_keys(:ab_paths,:cache_name)
+		raise "参数不能为空"	if vals.blank?
+		raise "没有图片"			if options[:ab_paths].blank?
+		zipfile = File.expand_path(vals.shift)
+    
+		if Rails.cache.read(options[:cache_name]).blank?
+			FileUtils.rm(zipfile) if File.exists?(zipfile)
+			%x[zip -j #{zipfile} #{options[:ab_paths].join(" ")}] && Rails.cache.write(options[:cache_name],true)
+		end
+		block_given? ? yield(zipfile) : zipfile
+	end
 end
