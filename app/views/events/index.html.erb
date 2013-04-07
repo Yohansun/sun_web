@@ -24,9 +24,9 @@
     <img src="<%= asset_path "design/title_event.png"%>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/events">年度色彩趋势活动</a></em>
+    <em><%= link_to "年度色彩趋势活动", "/events", :class => 'fb' %></em>
     <em><a href="#">精彩活动</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group color-trend">
     <div class="shadow">

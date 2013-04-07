@@ -10,17 +10,17 @@
         <div class="results line_b_dot">
           <% case params["qt"] %>
           <% when "0", "1" %>
-          <h3><a href="/articles/<%= res.id %>"><%= res.title %></a></h3>
+          <h3><%= link_to "#{res.title}", "/articles/#{res.id}" %></h3>
           <p><%= gsub_body_string(res.body, 300) %></p>
-          <a href="/articles/<%= res.id %>">http://www.icolor.com.cn/articles/<%= res.id %></a>
+          <%= link_to "http://www.icolor.com.cn/articles/#{res.id}", "/articles/#{res.id}" %>
           <% when "2" %>
-          <h3><a href="/designs/<%= res.id %>"><%= res.title %></a></h3>
+          <h3><%= link_to "#{res.title}", "/designs/#{res.id}" %></h3>
           <p><%= gsub_body_string(res.content, 300) %></p>
-          <a href="/designs/<%= res.id %>">http://www.icolor.com.cn/designs/<%= res.id %></a>
+          <%= link_to "http://www.icolor.com.cn/designs/#{res.id}", "/designs/#{res.id}" %>
           <% when "3" %>
-          <h3><a href="/users/<%= res.id %>"><%= res.display_name %></a></h3>
+          <h3><%= link_to "#{res.display_name}", "/users/#{res.id}" %></h3>
           <p><%= gsub_body_string(res.signature, 300) %></p>
-          <a href="/users/<%= res.id %>">http://www.icolor.com.cn/users/<%= res.id %></a>
+          <%= link_to "http://www.icolor.com.cn/users/#{res.id}", "/users/#{res.id}" %>
           <% end -%>
         </div><!--results ends-->
       <%- end -%>

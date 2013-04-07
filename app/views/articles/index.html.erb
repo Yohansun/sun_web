@@ -12,9 +12,9 @@
     <img src="<%= asset_path "news/title_news.png" %>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>">装修资讯</a></em>
-    <em><a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>">行业资讯</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "装修资讯", "/articles?tags=#{URI.escape("设计相关")}#{link_suffix}", :class => 'fb' %></em>
+    <em><%= link_to "行业资讯", "/articles?tags=#{URI.escape("设计相关")}#{link_suffix}" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper'>
     <!-- <div class='news_top clear ft12'>

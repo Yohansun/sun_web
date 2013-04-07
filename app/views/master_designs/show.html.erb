@@ -40,9 +40,9 @@
     <img src='<%= set_style[:pic_path] %>' />
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/master_designs">大师作品</a></em>
-    <em><a href="/master_interviews">大师殿堂</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "大师作品", "/master_designs", :class => 'fb' %></em>
+    <em><%= link_to "大师殿堂", "/master_interviews" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper pb60 group pt25'>
     <div class="works_detail_tit line_b_dot group pr">

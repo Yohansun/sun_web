@@ -20,9 +20,9 @@
   <img src="<%= asset_path "design/title_design.png" %>"/>
 </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/weekly_stars">每周之星</a></em>
-    <em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "每周之星", "/weekly_stars", :class => 'fb' %></em>
+    <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
 <div class="wrapper group">
 <%- if @design == WeeklyStar.last %>

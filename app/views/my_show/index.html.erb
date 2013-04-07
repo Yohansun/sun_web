@@ -15,9 +15,9 @@
 		<img src='<%= asset_path "design/title_design.png"%>' />
 	</div>
 	<div class='sub_nav ft12 pr tr'>
-		<em><a class="fb" href="/my_show">我型我秀</a></em>
-		<em><a href="/weekly_stars">设计鉴赏</a><span></span></em>
-		<em><a href="/">首页</a><span></span></em>
+		<em><%= link_to "我型我秀", "/my_show", :class => 'fb' %></em>
+		<em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
+		<em><%= link_to "首页", "/" %><span></span></em>
 	</div><!--sub_nav ends-->
 	<div class="wrapper show_page group">
 		<div class="con_left">

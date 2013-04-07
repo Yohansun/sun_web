@@ -14,9 +14,9 @@
 <div class="wrapper ft14">
   <div class="blocks clear">
     <h2 class="tr">
-      <a href="/master_interviews<%= link_suffix %>" class="fl ft16">大师殿堂</a>
-      <a href="/master_interviews<%= link_suffix %>">大师访谈</a> |
-      <a href="/master_designs<%= link_suffix %>">大师作品</a>
+      <%= link_to "大师殿堂", "/master_interviews#{link_suffix}", :class => 'fl ft16' %>
+      <%= link_to "大师访谈", "/master_interviews#{link_suffix}" %> |
+      <%= link_to "大师作品", "/master_designs#{link_suffix}" %>
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag  (asset_path '2013/grey.gif'), "data-original" => @master_interview.preview_img_out.url(:home_page2), :height=>"365px", :width=>"380px" %></a>
@@ -115,11 +115,11 @@
   </div><!-- blocks -->
   <div class="blocks clear">
     <h2 class="tr">
-      <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>" class="fl ft16">设计鉴赏</a>
-      <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>">设计之星</a> |
-      <a href="/designs<%= link_suffix %>">作品展示</a> |
-      <a href="/color_designs<%= link_suffix %>">色彩配搭</a> |
-      <a href="/inspirations<%= link_suffix %>">灵感秀</a>
+      <%= link_to "设计鉴赏", "/weekly_stars?star_type=#{URI.escape("每周之星")}#{link_suffix}", :class => 'fl ft16' %>
+      <%= link_to "设计之星", "/weekly_stars?star_type=#{URI.escape("每周之星")}#{link_suffix}" %> |
+      <%= link_to "作品展示", "/designs#{link_suffix}" %> |
+      <%= link_to "色彩配搭", "/color_designs#{link_suffix}" %> |
+      <%= link_to "灵感秀", "/inspirations#{link_suffix}" %>
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>">
@@ -157,7 +157,7 @@
         <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%= truncate(@inspiration.title, length: 11)%></a>
       </div>
       <div class="blocks_mini">
-        <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>" class="block block3_5">设计鉴赏</a>
+        <%= link_to "设计鉴赏", "/weekly_stars?star_type=#{URI.escape("每周之星")}#{link_suffix}", :class => "block block3_5" %>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
@@ -209,7 +209,7 @@
           <% @articles.each do |article| %>
           <li>
             <span><%= article.published_at.to_date %></span>
-            <a href="/articles/<%=article.id%>" title="<%=article.title%>"><%=article.title%></a>
+            <%= link_to "#{article.title}", "/articles/#{article.id}" %>
           </li>
           <% end %>
         </ul>
