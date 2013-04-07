@@ -7,9 +7,9 @@
     <img src="<%= asset_path "design/title_event.png"%>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/other_events">其他精彩活动</a></em>
-    <em><a href="/events">精彩活动</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "其他活动", "/other_events", :class => 'fb' %></em>
+    <em><%= link_to "精彩活动", "/events" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
     <style type="text/css">
         .properties .intro{ width:630px;}
     </style>
@@ -25,7 +25,7 @@
               <div class="img"><%= link_to image_tag('design/trend/act4.jpg'),"/other_events/review" %></div>
               <div class="properties">
                 <div class="title">
-                  <strong>活动名称：</strong><a href="/other_events/review">争当iColor点评王,抢楼点评都有奖</a><!--<span class="status">正在进行中</span>-->
+                  <strong>活动名称：</strong><%= link_to "争当iColor点评王,抢楼点评都有奖", "/other_events/review" %><!--<span class="status">正在进行中</span>-->
                 </div>
                 <div class="time">
                   <strong>活动时间：</strong>2012年11月1日-2012年11月15日
@@ -39,7 +39,7 @@
               <div class="img"><%= link_to image_tag('design/trend/act1.jpg'),"/other_events/Proposal" %></div>
               <div class="properties">
                 <div class="title">
-                  <strong>活动名称：</strong><a href="/other_events/Proposal">以爱之名，刷新生活</a><!--<span class="status">正在进行中</span>-->
+                  <strong>活动名称：</strong><%= link_to "以爱之名，刷新生活", "/other_events/Proposal" %><!--<span class="status">正在进行中</span>-->
                 </div>
                 <div class="time">
                   <strong>活动时间：</strong>2012

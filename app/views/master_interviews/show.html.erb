@@ -11,9 +11,9 @@
     <img src="<%= asset_path "master/title_master.png" %>" alt=""/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/master_interviews">大师访谈</a></em>
-    <em><a href="/master_interviews">大师殿堂</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "大师访谈", "/master_interviews", :class => 'fb' %></em>
+    <em><%= link_to "大师殿堂", "/master_interviews" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
   </div>
   <!--sub_nav ends-->
   <div class='wrapper pb60'>

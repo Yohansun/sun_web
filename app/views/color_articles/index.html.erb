@@ -7,9 +7,9 @@
     <img src="<%= asset_path "design/title_news.png"%>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><a class="fb" href="/color_articles">色彩资讯</a></em>
-    <em><a href="/articles">行业资讯</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "色彩资讯", "/color_articles", :class => 'fb' %></em>
+    <em><%= link_to "行业资讯", "/articles" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group color-trend">
     <div class="shadow">

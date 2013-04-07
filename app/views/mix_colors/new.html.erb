@@ -13,9 +13,9 @@
     <img src="<%= asset_path "design/title_owner.png" %>">
   </div>
   <div class="sub_nav ft12 pr tr">
-    <em><a class="fb" href="/mix_colors/new">配色咨询</a></em>
-    <em><a href="/channel/access">业主通道</a><span></span></em>
-    <em><a href="/">首页</a><span></span></em>
+    <em><%= link_to "配色咨询", "/mix_colors/new", :class => 'fb' %></em>
+    <em><%= link_to "业主通道", "/channel/access" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
     <style type="text/css">
         span.arrow_1 {
             right: 178px;
