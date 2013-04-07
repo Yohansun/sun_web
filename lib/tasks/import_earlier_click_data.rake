@@ -148,7 +148,7 @@ task :import_earlier_click_data => :environment  do
           when "327_hejia2","327_hejia_kc2"
             hs.feature = "油漆涂料行业频道"
             hs.site = "和家"
-          when "327_hejia3","327_hejia_kc3"
+          when "327_hejia3","327_hejia_kc3","327_hejia_star3"
             hs.feature = "居尚终端页"
             hs.site = "和家"
           when "327_hejia4","327_hejia_kc4"
@@ -160,7 +160,7 @@ task :import_earlier_click_data => :environment  do
           when "327_zhuangxiudianpin2","327_zhuangxiudianpin_kc2"
             hs.feature = "网友样板间"
             hs.site = "装修点评网"
-          when "327_zhuangxiudianpin3","327_zhuangxiudianpin_kc3"
+          when "327_zhuangxiudianpin3","327_zhuangxiudianpin_kc3","327_zhuangxiudianpin_star3"
             hs.feature = "设计师"
             hs.site = "装修点评网"
           else

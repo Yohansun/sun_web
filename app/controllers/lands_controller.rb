@@ -152,7 +152,10 @@ class LandsController < ApplicationController
 							"pipa_shouyezhtizhuangxiu2"
 						]
 			#TASK 458
-			urls_star = ["327_hejia_star1","327_zhuangxiudianpin_star1"
+			urls_star = ["327_hejia_star1",
+				"327_hejia_star3",
+				"327_zhuangxiudianpin_star1",
+				"327_zhuangxiudianpin_star3"
 			]
 
 
