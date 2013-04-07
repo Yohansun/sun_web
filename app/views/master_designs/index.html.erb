@@ -22,7 +22,6 @@
   <div class='wrapper pb60'>
     <%= render :partial => "master_switch" %>
     <%- @master_designs.each do |design| %>
-      <%- unless design.master_profile.try(:name) == "郑仕梁" && design.master_name == "郑仕梁"%>
         <div class="shadow mt25">
           <div class="section master_works_list group">
             <%= link_to image_tag(design.main_preview_img.url(:index), :title => "设计鉴赏-#{design.design_name}", :alt => "设计鉴赏-#{design.design_name}"), "/master_designs/#{design.id}", :class => "works_b" %>
@@ -55,7 +54,6 @@
           </div>
         </div>
         <!--master_works_list ends-->
-      <%- end %>
     <%- end %>
   </div>
   <!--wrapper ends-->
