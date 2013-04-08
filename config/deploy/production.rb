@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'new_relic/recipes'
+
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :system
 
@@ -54,3 +56,4 @@ after "deploy", "refresh_sitemaps", "update_crontab"
 
 require 'capistrano-unicorn'
 
+after "deploy:update", "newrelic:notice_deployment"
