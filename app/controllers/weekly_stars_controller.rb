@@ -1,17 +1,35 @@
 # -*- encoding : utf-8 -*-
 class WeeklyStarsController < ApplicationController
+  DefaultActions = {
+		:weekly_stars_week          => "每周之星",
+		:weekly_stars_month_color   => "月度色彩之星",
+		:weekly_stars_month_design  => "月度设计之星"
+	}.freeze
 
   helper_method :star_blank?
  
-  def download
-    target_file = WeeklyStar.find(params[:id])
-      if target_file
-        send_file target_file.main_preview_img.path
-      else
-        render nothing: true, status: 404
-      end
-     
-  end
+	def download
+		target_file = WeeklyStar.find(params[:id])
+		image_paths = []
+
+		target_file.weekly_star_uploads.tap do |weekly|
+			weekly.collect {|x| image_paths << x.file.path if File.exists?(x.file.path)}
+		end
+		added_actions = DefaultActions.merge(:index => "每周之星")
+		#防止传过来的值不一致造成对服务器的攻击
+		raise "参数不包含在列表中" unless added_actions.keys.include?(params[:target].to_sym) 
+		target_name = added_actions[params[:target].to_sym]
+
+		find_or_build_zip_file("public/#{target_name}.zip",:ab_paths => image_paths,:cache_name => PinYin.permlink(target_name)) do |zfile|
+			send_file zfile
+		end
+
+	rescue Exception => e
+		respond_to do |format|
+			format.html {render :text => %!<script>alert("#{e.message}");window.history.back(-1)</script>!}
+		end
+	end
+
   def index
     @title1,@title2 = "每周","之星"
 
@@ -33,24 +51,21 @@ class WeeklyStarsController < ApplicationController
     @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(8)
   end
   
-  {:weekly_stars_week 			    => "每周之星",
-    :weekly_stars_month_color 	=> "月度色彩之星",
-    :weekly_stars_month_design 	=> "月度设计之星"}.
-    each do |act,star_type|
-      define_method(act) do
-        #TODO
-        star_type_id = WeeklyStar.get_star_type_id(star_type)
-        #每周之星
-        @design = WeeklyStar.order("published_at desc").find_by_star_type_id(star_type_id)
-        design_id = @design.design_link.split("/").last
-        @link_design = Design.find(design_id)
+	DefaultActions.each do |act,star_type|
+		define_method(act) do
+			#TODO
+			star_type_id = WeeklyStar.get_star_type_id(star_type)
+			#每周之星
+			@design = WeeklyStar.order("published_at desc").find_by_star_type_id(star_type_id)
+			design_id = @design.design_link.split("/").last
+			@link_design = Design.find(design_id)
 
-        @elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8) 
-        @title = @title1 = star_type.dup
-        @title1.delete!(@title2="之星")
-        render "index"
-      end
-    end
+			@elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8) 
+			@title = @title1 = star_type.dup
+			@title1.delete!(@title2="之星")
+			render "index"
+		end
+	end
 
   def show
     @design = WeeklyStar.find(params[:id])
@@ -72,5 +87,5 @@ class WeeklyStarsController < ApplicationController
   def star_blank?(star_type)
     star_type_id = WeeklyStar.get_star_type_id star_type
     WeeklyStar.where(star_type_id: star_type_id).blank?
-  end  
+  end
 end
