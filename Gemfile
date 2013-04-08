@@ -49,7 +49,7 @@ gem "omniauth-qq-connect"
 gem 'httmultiparty'
 
 gem 'exception_notification'
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', "~> 3.6.0.78"
 gem 'ekuseru'
 
 gem 'redis-store'
