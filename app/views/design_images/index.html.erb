@@ -291,7 +291,7 @@ $(function(){
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
-	<div class="search_bin">
+	<div class="search_bin clear">
 		<a href="/design_images?ranking_list=like" data-rank='like' class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
 		<a href="/design_images?ranking_list=view_count" data-rank='view_count' class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
 		<a href="/design_images" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
