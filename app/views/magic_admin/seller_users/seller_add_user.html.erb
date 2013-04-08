@@ -1,3 +1,17 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+      $("#all").click(function(){  
+          $("input[name='user_ids[]']").each(function(){
+           $(this).attr("checked",true);
+          });  
+         });
+      $("#delAll").click(function(){  
+          $("input[name='user_ids[]']").each(function(){
+           $(this).attr("checked",false);
+          });  
+         });
+  </script>
+<%- end %>
 <!-- Content -->
 <div class="content">
   <div class="title"><h5>管理家装公司</h5></div>
@@ -5,6 +19,8 @@
 	<div class="widget">
 		<ul class="tabs">
     	<li><a href="#tab1">一般信息</a></li>
+      <li><a href="javascript:;" id="all">全部选择</a></li>
+      <li><a href="javascript:;" id="delAll">取消全选</a></li>
   	</ul>
   	<div class="tab_container">
     	<div id="tab1" class="tab_content"> 
