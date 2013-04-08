@@ -6,6 +6,12 @@
             $(".popupA").show();
          <%- end %>
         })
+        $(".submit_xxlarge").click(function(){
+           if ($('.input-xxlarge').val() == ''){
+            alert('请输入具体内容!');
+            return false;
+          }
+        })
     </script>
 <%- end -%>
 <div class="main page_weekstar">
@@ -50,7 +56,7 @@
             <tr class="f_content">
               <th>内　　容：</th>
               <td>
-                <%= f.text_area :description %>
+                <%= f.text_area :description, :class => 'input-xxlarge'%>
                 您还可以输入<span id="characters">500</span>字
               </td>
             </tr>
@@ -62,7 +68,7 @@
             </tr>
             <tr class="f_submit">
               <th>&nbsp;</th>
-              <td><input type="image" src="<%= asset_path "design/submitB.gif" %>" alt="提交" value="提交">
+              <td><input type="image" src="<%= asset_path "design/submitB.gif" %>" class="submit_xxlarge" alt="提交" value="提交">
                 <input type="reset" class="reset" value="重置">
               </td>
             </tr>
