@@ -201,7 +201,7 @@ $(function(){
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
-				<!-- <li>装修部件</li> -->
+				<li>装修部件</li>
 			</ul>
 			<!-- <ul class="fl">
 				<li><a href="#" class="fresh">刷新百城</a></li>
@@ -267,7 +267,7 @@ $(function(){
 				</fieldset>
 				<a href="javascript:;" class="<%= params["tags"].blank? ? "pa imgbase_toggle form_expand" : "pa imgbase_toggle" %>">展开</a>
       <% end %>
-			<form class="tab_content form_mini none">
+			<form class="<%= params[:tags].blank? ? 'tab_content form_mini' : 'tab_content' %> none">
 				<%- @categories.each do |category| %>
 					<%- if category.title == "按部件" %>
 						<%- category.children.each do |child_lv2| %>
@@ -287,7 +287,7 @@ $(function(){
 						<%- end %>
 					<%- end %>
 				<%- end %>
-				<!--<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a> -->
+				<a href="javascript:;" class="<%= params["tags"].blank? ? "pa imgbase_toggle form_expand" : "pa imgbase_toggle" %>">展开</a> 
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
