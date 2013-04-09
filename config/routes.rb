@@ -116,7 +116,7 @@ Icolor::Application.routes.draw do
 
   #业主通道
   resources :faqs
-  match "/channel/access" => "channel#access",:as => "channel"
+  match "/channel/access" => "channel#access"
 
   #实用工具
   match "/softwares/app" => "softwares#app"

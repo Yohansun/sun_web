@@ -21,7 +21,7 @@
         <a name="cubit"></a>
         <%= render :partial => "cubit_form" %>
         <a name="search"></a>
-        <%= form_for @search, :url => channel_path,:html => {:method => :get,:class => "channel_search clear"} do |f| %>
+        <%= form_for @search, :url => channel_access_path,:html => {:method => :get,:class => "channel_search clear"} do |f| %>
             <fieldset class="linkageseclet2 fl">
                 <select id="province" class="level_1" style="width:134px;" name="province_id">
                 </select>
