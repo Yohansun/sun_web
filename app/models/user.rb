@@ -79,6 +79,8 @@ class User < ActiveRecord::Base
   has_many :news_company_designs ,:through => :company_designs , :source => :design_images,:include => :user,:order => "design_images.created_at desc"
   #个人最新作品
   has_many :news_personal_designs,:through => :personal_designs, :source => :design_images,:include => :user,:order => "design_images.created_at desc"
+  
+  scope :weekly_related, ->(role,design_user_ids) {where(id: design_user_ids, role_id: role).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc")}
 
   def news_company_design
     news_company_designs.first

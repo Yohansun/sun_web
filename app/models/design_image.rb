@@ -20,6 +20,9 @@ class DesignImage < ActiveRecord::Base
   has_many :all_tags    ,:through => :tags,:source => :image_library_category
   #图片风格
   has_many :image_styles,:through => :tags,:source => :image_library_category,:conditions => {:parent_id => 34}
+  
+  #应用在channel_controller#access中
+  scope :users,joins(:user).select("count(design_images.user_id) as ucount,design_images.id,design_images.user_id,design_images.created_at,design_images.file_file_name,design_images.file_updated_at").group(:user_id).order("design_images.created_at desc")
 
   # validate :file_dimensions, :unless => "errors.any?"
 
@@ -114,7 +117,7 @@ class DesignImage < ActiveRecord::Base
     end
   end
 
-  def self.search(genre, keyword)
+  def self.search_with(genre, keyword)
     case genre
       when 'yes_color'
         DesignImage.available.where("(color1 is not null or color2 is not null or color3 is not null) and edited_color is false")

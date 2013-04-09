@@ -21,7 +21,7 @@
         <a name="cubit"></a>
         <%= render :partial => "cubit_form" %>
         <a name="search"></a>
-        <%= form_tag "/channel/access", :method => "put", :class=>"channel_search clear" do %>
+        <%= form_for @search, :url => channel_path,:html => {:method => :get,:class => "channel_search clear"} do |f| %>
             <fieldset class="linkageseclet2 fl">
                 <select id="province" class="level_1" style="width:134px;" name="province_id">
                 </select>
@@ -29,15 +29,10 @@
                 </select>
                 <select id="country" class="level_3" style="width:134px;" name="area_id">
                 </select>
-                <select name="user_role">
-                  <option value="">请选择身份</option>
-                  <option value="designer_0">设计师（在职）</option>
-                  <option value="designer_1">设计师（在读）</option>
-                  <option value="company">家装公司</option>
-                </select>
+                <%= select_tag "user_role", options_for_select([["请选择身份",""],["设计师(在职)","designer_0"],["设计师(在读)","designer_1"],["家装公司","company"]],params[:user_role]) %>
             </fieldset>
             <fieldset class="search fl">
-                <input type="text" class="fl" name="keywords">
+              <%= f.text_field :user_username_or_user_name_like,:class => "fl" %>
                 <input type="image" src="<%= asset_path "search-icon.jpg"%>">
             </fieldset>
             <fieldset>
@@ -45,14 +40,12 @@
             </fieldset>
         <% end %>
         <ul class="channel_list clear">
-          <%- @design_users.each do |user| %>
-            <% designs = user.available_designs %>
-            <% design_first = designs.first %>
+          <%- @design_users.each do |design| %>
+          <% user = design.user %>
             <li style="height:205px">
               <div class="clear" style="height: 155px;width:270px;overflow:hidden;">
                 <%= link_to user_path(user), :target => "_blank" do %>
-                  <%= image_tag(design_first.try(:design_images).try(:first).try(:file),
-                      size: '205x155', class: 'fl') %>
+                  <%= image_tag(design.file.url(:list),size: '205x155', class: 'fl') rescue ""%>
                 <% end %>
                 <%= link_to user_path(user), :target => "_blank" do %>
                   <%- if user.avatar %>
@@ -63,11 +56,11 @@
                 <% end %>
               </div>
               <h3>
-                <%= link_to truncate(design_first.title, length: 20), user_path(user),
-                    target: '_blank', title: design_first.title %>
+                <%= link_to truncate(design.title, length: 20), user_path(user),
+                    target: '_blank', title: design.title rescue '' %>
               </h3>
               <p><%=user.display_name ? user.display_name : user.name%> <%="(#{user.area.name})" if user.area %></p>
-              <p><span><%= designs.abacus.count %></span> 作品</p>
+              <p><span><%= design.ucount %></span> 作品</p>
             </li>
           <%- end %>
         </ul><!-- channel_list end -->

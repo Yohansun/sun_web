@@ -4,6 +4,8 @@ class ChannelController < ApplicationController
 
   #设计快查
   def access
+    params[:search] ||= {}
+    
     #我型我秀页面跳转
     if params.has_key? "role"
       params[:role] << ("_" + params[:des_status]) if params[:des_status].present?
@@ -15,75 +17,33 @@ class ChannelController < ApplicationController
       params[:area_id] = params[:area]
     end
 
-    if params[:keywords].present?
-      @design_users = User.where("name like ? or username like ?", "%#{params[:keywords]}%", "%#{params[:keywords]}%")
-    else
-      @design_users = User
-    end
-
-    unless params[:province_id].blank?
-      @design_users = @design_users.where("users.area_id in (?)", Area.find(params[:province_id]).self_and_descendants)
-    end
-
-    unless params[:city_id].blank?
-      @design_users = @design_users.where("users.area_id in (?)",Area.find(params[:city_id]).self_and_descendants)
-    end
-
-    unless params[:area_id].blank?
-       @design_users = @design_users.where(:area_id => params[:area_id])
-    end
-
+    #请求添加字段标实 实习和在读设计师
     case params[:user_role]
     when /designer/
       des_status = params[:user_role] == "designer_1"
-      @design_users = @design_users.where(:des_status => des_status ).order("current_sign_in_at desc")
+      params[:search].merge!({:user_role_id_equals => 1,:user_des_status_equals => des_status})
     when /company/
-      @design_users = @design_users.where(:role_id => Role.find_by_role("company").id)
-      sellers = @design_users.where("top_order != 0").order("top_order desc").limit(10).map(&:id)
-
-      unless sellers.blank?
-        @design_users = @design_users.order("find_in_set(users.id,'#{sellers.reverse.join(",")}') desc").order("current_sign_in_at desc")
-      else
-        @design_users = @design_users.order("current_sign_in_at desc")
-      end
+      params[:search].merge!({:user_role_id_equals => 2})
     end
+    
+    province_id,city_id,area_id = params[:province_id].or(nil),params[:city_id].or(nil),params[:area_id].or(nil)
 
-    #use abacus
-    #@design_users = @design_users.select("users.*, count(design_images.id) as design_image_count").joins(:designs).joins("left join design_images on design_images.imageable_id = designs.id and `design_images`.`imageable_type` = 'Design'").group("users.id").having("design_image_count > 0").abacus.page(params[:page]).per(8)
-    @design_users = @design_users.includes(:design_images).
-                                  where(:design_images => {:imageable_type => 'Design'}).
-                                  group("users.id").order("design_images.created_at desc").abacus.
-                                  page(params[:page]).per(8)
-
+    if area_id.present?
+      params[:search][:area_id_eq] = area_id
+    elsif province_id.present?
+      params[:search][:user_area_id_in] = Area.robot(province_id,[city_id].compact).map(&:id)
+    end
+    
+    @search = DesignImage.users.search(params[:search])
+    @design_users = @search.page(params[:page]).per(8)
+    
     #mood
     @moods = Mood.order("created_at desc").limit(5)
 
-    #design_star
-    design_user_ids = []
-    WeeklyStar.order("id desc").map(&:author_url).each do |ul|
-      design_user_ids << ul.split("/")[-2].to_i
-    end
-    list_design_users = User.where(id: design_user_ids, role_id: 1).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc").limit(8)
+    design_user_ids = WeeklyStar.order("id desc").map(&:author_url).collect {|url| url.scan(/(\d+)(\/designs)/) && $1 }.compact.uniq
+    
+    @designers  = User.weekly_related(1,design_user_ids).limit(8)
 
-    # @xiaofei: 必须重构这些代码
-    @list_design_users1 = list_design_users.page(1).per(2)
-    @list_design_users2 = list_design_users.page(2).per(2)
-    @list_design_users3 = list_design_users.page(3).per(2)
-    @list_design_users4 = list_design_users.page(4).per(2)
-
-    #company_star
-    list_company_users = User.where(id: design_user_ids, role_id: 2).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc").limit(16)
-    @list_company_users1 = list_company_users.page(1).per(4)
-    @list_company_users2 = list_company_users.page(2).per(4)
-    @list_company_users3 = list_company_users.page(3).per(4)
-    @list_company_users4 = list_company_users.page(4).per(4)
-
-    @star_list_counter = [list_design_users.size/2.0, list_company_users.size/4.0].min.ceil
-
-    user_ids = []
-    WeeklyStar.order("id desc").limit(10).map(&:author_url).each do |ul|
-      user_ids << ul.split("/")[-2].to_i
-    end
-    @users = User.where(id: user_ids).reverse
+    @companys   = User.weekly_related(2,design_user_ids).limit(16)
   end
 end
