@@ -1,24 +1,24 @@
 <div class="design_tit group pb10 line_b_dot">
   <ul class="design_filter group">
-        <li class="<%= 'li_current' if params[:action] == 'all' %> ">
-		  <%= link_to "全部", all_master_interviews_path + "/#{params[:type]}" %>
-        </li>
-        <li class="<%= 'li_current' if params[:action] == 'oversea' %> ">
-			<%= link_to "海外",oversea_master_interviews_path + "/#{params[:type]}"  %>
-		</li>
-		<li class="<%= 'li_current' if params[:action] == 'hk_tw_mc' %> ">
-			<%= link_to "港澳台", hk_tw_mc_master_interviews_path + "/#{params[:type]}"  %>
-		</li>
-		<li class="<%= 'li_current' if params[:action] == 'cn' %> ">	
-			<%= link_to "中国大陆", cn_master_interviews_path + "/#{params[:type]}"  %>
-		</li>
+    <li class="<%= 'li_current' if params[:action] == 'all' %> ">
+      <%= link_to "全部", all_master_interviews_path + "/#{params[:type]}" %>
+    </li>
+    <li class="<%= 'li_current' if params[:action] == 'oversea' %> ">
+      <%= link_to "海外",oversea_master_interviews_path + "/#{params[:type]}"  %>
+    </li>
+    <li class="<%= 'li_current' if params[:action] == 'hk_tw_mc' %> ">
+      <%= link_to "港澳台", hk_tw_mc_master_interviews_path + "/#{params[:type]}"  %>
+    </li>
+    <li class="<%= 'li_current' if params[:action] == 'cn' %> ">	
+      <%= link_to "中国大陆", cn_master_interviews_path + "/#{params[:type]}"  %>
+    </li>
   </ul>
 </div>
 
 <!--design_tit ends-->
 <div class="list_btn line_b_dot">
-	<% url = params[:action] == "index" ? "/#{params[:controller]}/all" : "/#{params[:controller]}/#{params[:action]}" %>
-	<%= link_to image_tag(asset_path space_master_image),"#{url}/shinei" %>
-	<%= link_to image_tag(asset_path color_master_image),"#{url}/color" %>	
+  <% url = params[:action] == "index" ? "/#{params[:controller]}/all" : "/#{params[:controller]}/#{params[:action]}" %>
+  <%= link_to image_tag(asset_path space_master_image),"#{url}/shinei" %>
+  <%= link_to image_tag(asset_path color_master_image),"#{url}/color" %>	
 </div>
 <!--list_btn ends-->
