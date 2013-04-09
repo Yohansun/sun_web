@@ -203,11 +203,14 @@
         <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link1.png")), 'http://www.nipponpaint.com.cn/' %>
         <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link2.jpeg")), 'http://shop.nipponpaint.com.cn/' %>
         <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link3.png")), 'http://nipponpaint.tmall.com/shop/viewShop.htm' %>
-        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link4.png")), 'http://www.e-jjj.com/' %>
+        <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link4.png")), 'http://www.e-jjj.com/' %>
+        <%= image_tag(asset_path("link4.png")) %>
         <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link5.png")), 'http://www.80018.cn/' %>
         <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link6.png")), 'http://www.pchouse.com.cn/' %>
-        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link7.png")), 'http://www.spta.gov.cn/index.html' %>
-        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link8.png")), 'http://www.colorcoordinator.cn/' %>
+        <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link7.png")), 'http://www.spta.gov.cn/index.html' %>
+        <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link8.png")), 'http://www.colorcoordinator.cn/' %>
+        <%= image_tag(asset_path("link7.png")) %>
+        <%= image_tag(asset_path("link8.png")) %>
     </div>
     <!--w_995 ends-->
   </div>
