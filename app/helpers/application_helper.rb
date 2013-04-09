@@ -1,71 +1,386 @@
 #encoding: utf-8
-
-# -*- Encoding: UTF-8 -*-
 module ApplicationHelper
 
-  BASE_TITLE = "立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+  BASE_TITLE = "立邦iColor装修设计鉴赏 | 设计师作品欣赏、访谈"
 
-  PAGE_TITLE = { "master_interviews" => "设计大师访谈",
-                 "master_topics"     => "热点装修话题",
-                 "master_designs"    => "大师作品",
-                 "weekly_stars"      => "每周之星",
-                 "designs"           => "推荐装修作品",
-                 "inspirations"      => "装修灵感秀",
-                 "color_designs"     => "色彩配搭",
-                 "articles"          => "装修资讯",
-                 "color_articles"    => "色彩资讯",
-                 "function"          => { "weibo_wall" => "微博资讯", "7-1" => "木纹风尚生活", "7-2" => "墙面艺术效果", "7-3" => "刷新灵感我绘我家", "rules" => "会员机制" },
-                 "events"            => "年度色彩趋势活动",
-                 "designer_events"   => { "index" => "设计师活动", "city" => "设计师活动", "kv" => "设计师活动" },
-                 "other_events"      => { "index" =>"其他精彩活动", "kv" => "其他精彩活动" },
-                 "softwares"         => { "tools" => "在线配色软件", "app" => "设计师APP", "case" => "色彩搭配案例" },
-                 "channel"           => { "access" => "设计快查" },
-                 "faqs"              => "家装设计咨询",
-                 "mix_colors"        => { "new" => "在线配色服务" },
-                 "register"          => "注册",
-                 "users"             => { "edit" => "修改账户信息", "omniauth_user" => "完善个人信息" }
-  }
+  # PAGE_TITLE = { "master_interviews" => "设计大师访谈",
+  #                "master_topics"     => "热点装修话题",
+  #                "master_designs"    => "大师作品",
+  #                "weekly_stars"      => "每周之星",
+  #                "designs"           => "推荐装修作品",
+  #                "inspirations"      => "装修灵感秀",
+  #                "color_designs"     => "色彩配搭",
+  #                "articles"          => "装修资讯",
+  #                "color_articles"    => "色彩资讯",
+  #                "function"          => { "weibo_wall" => "微博资讯", "7-1" => "木纹风尚生活", "7-2" => "墙面艺术效果", "7-3" => "刷新灵感我绘我家", "rules" => "会员机制" },
+  #                "events"            => "年度色彩趋势活动",
+  #                "designer_events"   => { "index" => "设计师活动", "city" => "设计师活动", "kv" => "设计师活动" },
+  #                "other_events"      => { "index" =>"其他精彩活动", "kv" => "其他精彩活动" },
+  #                "softwares"         => { "tools" => "在线配色软件", "app" => "设计师APP", "case" => "色彩搭配案例" },
+  #                "channel"           => { "access" => "设计快查" },
+  #                "faqs"              => "家装设计咨询",
+  #                "mix_colors"        => { "new" => "在线配色服务" },
+  #                "register"          => "注册",
+  #                "users"             => { "edit" => "修改账户信息", "omniauth_user" => "完善个人信息" }
+  # }
 
-  INNER_PAGE_TITLE = { "events"       => { "index" => "活动公告", "my_event" => "我报名的活动" },
-                       "designs"      => "作品",
-                       "inspirations" => "灵感秀",
-                       "messages"     => "留言板",
-                       "rank"         => "我的积分",
-                       "sys_msgs"     => "系统消息",
-                       "faqs"         => "我的提问",
-                       "register"     => "完善个人信息"
-  }
+  # INNER_PAGE_TITLE = { "events"       => { "index" => "活动公告", "my_event" => "我报名的活动" },
+  #                      "designs"      => "作品",
+  #                      "inspirations" => "灵感秀",
+  #                      "messages"     => "留言板",
+  #                      "rank"         => "我的积分",
+  #                      "sys_msgs"     => "系统消息",
+  #                      "faqs"         => "我的提问",
+  #                      "register"     => " "
+  # }
 
   def page_title
-    # return BASE_TITLE if current_page?(controller:"home")
-
-    begin
-      title = @user.nil? ? PAGE_TITLE : INNER_PAGE_TITLE
-
-      if title[controller_name.to_s][action_name.to_s].present?
-        title[controller_name.to_s][action_name.to_s] + "-" + BASE_TITLE
-      elsif controller_name.eql? "weekly_stars"
-        if params[:star_type].include?("色彩")
-          return "色彩之星" + "-" + BASE_TITLE
-        elsif params[:star_type].include?("设计")
-          return "设计之星" + "-" + BASE_TITLE
+        #首页
+        if  controller_name == 'home'
+          BASE_TITLE
+        #大师访谈
+        elsif controller_name == 'master_interviews' && params[:type] == 'shinei'
+          if controller_name == 'master_interviews'
+            "【室内空间大师 | 大师访谈】- 大师殿堂" + '-' + BASE_TITLE
+          else
+            "【室内空间大师 | 大师作品】- 大师殿堂" + '-' + BASE_TITLE
+          end
+        elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'color'
+          if controller_name == 'master_interviews'
+            "【色彩大师 | 大师访谈】- 大师殿堂" + '-' + BASE_TITLE
+          else
+            "【色彩大师 | 大师作品】- 大师殿堂" + '-' + BASE_TITLE
+          end
+        elsif controller_name == 'master_interviews' && %w{index all}.include?(action_name)
+          "【#{'全部 |' if action_name == 'all'} 大师访谈】- 大师殿堂" + '-' + BASE_TITLE
+        elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'oversea'
+          if controller_name == "master_interviews"
+            "【海外 | 大师访谈】- 大师殿堂" + '-' + BASE_TITLE
+          else
+            "【海外 | 大师作品】- 大师殿堂" + '-' + BASE_TITLE
+          end
+        elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'hk_tw_mc'
+          if controller_name == 'master_interviews'
+            "【港澳台 | 大师访谈】- 大师殿堂" + '-' + BASE_TITLE
+          else
+            "【港澳台 | 大师作品】- 大师殿堂" + '-' + BASE_TITLE
+          end
+        elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'cn'
+          if controller_name == 'master_interviews'
+            "【中国大陆 | 大师访谈】- 大师殿堂" + '-' + BASE_TITLE
+          else
+            "【中国大陆 | 大师作品】- 大师殿堂" + '-' + BASE_TITLE
+          end
+        elsif controller_name == 'master_interviews' && action_name == 'show'
+          "【iColor设计大师-#{@article.name}】- 简介、访谈、作品、寄语" + '-' + BASE_TITLE
+        #大师作品
+        elsif controller_name == 'master_designs' && %w{index all}.include?(action_name)
+          "【#{'全部 |' if action_name == 'all'} 大师作品】- 大师殿堂" + '-' + BASE_TITLE
+        elsif controller_name == 'master_designs' && action_name == 'show'
+          "【#{@master_design.design_name} | #{@master_design.master_profile.try(:name) || @master_design.master_name}】- 室内空间大师" + '-' + BASE_TITLE
+        #装修图库
+        elsif controller_name == 'design_images'
+          "【装修图库】" + BASE_TITLE
+        #设计之星
+        elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
+          "【每周之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_color'
+          "【月度色彩之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_design'
+          "【月度设计之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
+        #个人主页(通用)
+        elsif controller_name == 'users'
+          "【iColor设计师-#{current_user.display_name}】- 个人主页" + '-' + BASE_TITLE
+        #作品展示
+        elsif controller_name == 'designs' && action_name == 'index'
+          "【作品展示】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'designs' && action_name == 'show'
+          "【#{@design.user.display_name} | #{@design.title}】- 设计鉴赏" + '-' + BASE_TITLE
+        #色彩搭配
+        elsif controller_name == 'color_designs' && action_name == 'index'
+          "【色彩搭配】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'color_designs' && action_name == 'show'
+          "【#{@design.design_style} #{@design.design_color} #{@design.design_usage} | 色彩搭配】- 设计鉴赏" + '-' + BASE_TITLE
+        #灵感秀
+        elsif controller_name == 'inspirations' && action_name == 'index'
+          "【灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'inspirations' && action_name == 'inspirations_new'
+          "【最新 | 灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'inspirations' && action_name == 'inspirations_hot'
+          "【最热 | 灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'inspirations' && action_name == 'inspirations_minisite'
+          "【刷新21天 | 灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'inspirations' && action_name == 'show'
+          "【#{@inspiration.title} | 灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
+        #业主通道
+        elsif controller_name == 'channel'
+          "【设计快查】- 业主通道" + '-' + BASE_TITLE
+        elsif controller_name == 'faqs'
+          "【装修问答】- 业主通道" + '-' + BASE_TITLE
+        elsif controller_name == 'mix_colors'
+          "【配色咨询】- 业主通道" + '-' + BASE_TITLE
+        #行业资讯
+        elsif controller_name == 'articles' && action_name == 'index'
+          "【装修资讯】- 行业资讯" + '-' + BASE_TITLE
+        elsif controller_name == 'articles' && action_name == 'show'
+          "【#{@article.title} | 装修资讯】- 行业资讯" + '-' + BASE_TITLE
+        elsif controller_name == 'color_articles' && action_name == 'index'
+          "【色彩资讯】- 行业资讯" + '-' + BASE_TITLE
+        elsif controller_name == 'master_topics' && action_name == 'index'
+          "【业内动态】- 行业资讯" + '-' + BASE_TITLE
+        elsif controller_name == 'master_topics' && action_name == 'show'
+          "【#{@topic.title} | 业内动态】- 行业资讯" + '-' + BASE_TITLE
+        elsif controller_name == 'softwares' && action_name == 'case'
+          "【色彩案例搭配 | 案例下载】- 应用工具" + '-' + BASE_TITLE
+        elsif controller_name == 'softwares' && action_name == 'tools'
+          "【在线配色软件 | 配色软件】- 应用工具" + '-' + BASE_TITLE
+        #漆光异彩
+        elsif controller_name == 'function' && action_name == 'art'
+          "【MILANO米兰诺艺术效果】- 漆光异彩" + '-' + BASE_TITLE
+        elsif controller_name == 'function' && action_name == '7-1'
+          "【木纹风尚生活】- 漆光异彩" + '-' + BASE_TITLE
+        #精彩活动
+        elsif controller_name == 'designer_events' #&& %w{index index_2 index_3}.include?(action_name)
+          "【设计师活动】- 精彩活动" + '-' + BASE_TITLE
+        elsif controller_name == 'other_events' && action_name == 'index'
+          "【其他活动】- 精彩活动" + '-' + BASE_TITLE
+        elsif controller_name == 'other_events'
+          "【木纹风尚生活】- 精彩活动" + '-' + BASE_TITLE
+        elsif controller_name == 'gifts' && action_name == 'index'
+          "【获奖名单】- 精彩活动" + '-' + BASE_TITLE
         else
-          return "每周之星" + "-" + BASE_TITLE
+          BASE_TITLE
         end
-      else
-        title[controller_name.to_s] + "-" + BASE_TITLE
-      end
     rescue
       BASE_TITLE
+  end
+
+  # def page_title
+  #   # return BASE_TITLE if current_page?(controller:"home")
+
+  #   begin
+  #     title = @user.nil? ? PAGE_TITLE : INNER_PAGE_TITLE
+
+  #     if title[controller_name.to_s][action_name.to_s].present?
+  #       title[controller_name.to_s][action_name.to_s] + "-" + BASE_TITLE
+  #     elsif controller_name.eql? "weekly_stars"
+  #       if params[:star_type].include?("色彩")
+  #         return "色彩之星" + "-" + BASE_TITLE
+  #       elsif params[:star_type].include?("设计")
+  #         return "设计之星" + "-" + BASE_TITLE
+  #       else
+  #         return "每周之星" + "-" + BASE_TITLE
+  #       end
+  #     else
+  #       title[controller_name.to_s] + "-" + BASE_TITLE
+  #     end
+  #   rescue
+  #     BASE_TITLE
+  #   end
+  # end
+
+  def des_content
+    star_descript1 = "立邦iColor装修设计鉴赏带您领略iColor"
+    star_descript2 = "设计师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    channel_descript = "立邦iColor装修设计鉴赏涵盖装修知识,家装知识,装修经验,家居装修,装修指导,室内装修知识，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    article_desctipt = "立邦iColor装修设计鉴赏涵盖丰富、专业的装家具修行业资讯，包括：色彩资讯、业内动态供您参阅，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    designer_events_descript = "立邦iColor装修设计鉴赏将定期举办精彩活动，并邀设计师参加活动，成为设计师展现家居装修设计风采专业平台。还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+
+    #首页
+    if  controller_name == 'home'
+      "立邦iColor装修设计鉴赏涵盖世界级大师访谈，大师设计作品与专业设计作品欣赏，为你带来更多装修灵感以及专业的家装资讯，更有家装专业实用工具，满足你的色彩家装需求，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #大师访谈
+    elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'shinei'
+      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'color'
+      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名色彩设计大师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'master_interviews' && %w{index all}.include?(action_name)
+      "立邦iColor装修设计鉴赏带您领略顶级的国际、港澳台、国内知名设计大师，通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'oversea'
+      "立邦iColor装修设计鉴赏带您领略顶级的国际、海外知名设计大师，通过iColor设计师访欣赏略设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'hk_tw_mc'
+      "立邦iColor装修设计鉴赏带您领略顶级的港澳台地区知名设计大师，通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'cn'
+      "立邦iColor装修设计鉴赏带您领略顶级国内知名设计大师，通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'master_interviews' && action_name == 'show'
+      "立邦 iColor顶级【国际、港澳台、国内知名设计大师】-#{@article.name}，简介，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #大师作品
+    elsif controller_name == 'master_designs' && %w{index all}.include?(action_name)
+      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师以及色彩设计大师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'master_designs' && action_name == 'show'
+      "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name}，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #设计之星
+    elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
+      star_descript1 + '【每周之星】' + star_descript2
+    elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_color'
+      star_descript1 + '【月度色彩之星】' + star_descript2
+    elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_design'
+      star_descript1 + '【月度设计之星】' + star_descript2
+    #个人主页(通用)
+    elsif controller_name == 'users'
+      "立邦iColor明星设计师 — 设计师姓名的个人主页为您展示装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。" 
+    #作品展示
+    elsif controller_name == 'designs' && action_name == 'index'
+      "立邦iColor装修设计鉴赏带您领略优秀的立邦iColor设计师专业装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'designs' && action_name == 'show'
+      "立邦iColor明星设计师 — 设计师姓名作品作品名称。还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #色彩搭配
+    elsif controller_name == 'color_designs' && action_name == 'index'
+      "立邦iColor装修设计鉴赏带您领略色彩搭配装修效果图，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'color_designs' && action_name == 'show'
+      "立邦iColor装修设计鉴赏带您领略风格,色系,区域,色彩搭配装修效果图，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #灵感秀
+    elsif controller_name == 'inspirations' && action_name == 'index'
+      "立邦iColor装修设计鉴赏灵感秀充满了最新、最热的灵感图片，帮您寻找装修设计灵感元素，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'inspirations' && action_name == 'inspirations_new'
+      "立邦iColor装修设计鉴赏灵感秀充满了最新灵感图片，帮您寻找装修设计灵感元素，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'inspirations' && action_name == 'inspirations_hot'
+      "立邦iColor装修设计鉴赏灵感秀充满了最热灵感图片，帮您寻找装修设计灵感元素，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'inspirations' && action_name == 'inspirations_minisite'
+      "立邦iColor装修设计鉴赏刷新21天活动，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'inspirations' && action_name == 'show'
+      "立邦iColor装修设计鉴赏灵感秀灵感秀名称，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #业主通道
+    elsif controller_name == 'channel'
+      channel_descript
+    elsif controller_name == 'faqs'
+      channel_descript
+    elsif controller_name == 'mix_colors'
+      "立邦iColor装修设计鉴赏为您提供配色资讯服务，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #行业资讯
+    elsif controller_name == 'articles' && action_name == 'index'
+      article_desctipt
+    elsif controller_name == 'articles' && action_name == 'show'
+      article_desctipt
+    elsif controller_name == 'color_articles' && action_name == 'index'
+      article_desctipt
+    elsif controller_name == 'master_topics' && action_name == 'index'
+      article_desctipt
+    elsif controller_name == 'master_topics' && action_name == 'show'
+      article_desctipt
+    elsif controller_name == 'softwares' && action_name == 'case'
+      "立邦iColor装修设计鉴赏为您提供专业色彩案例搭配供您下载，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'softwares' && action_name == 'tools'
+      "立邦iColor装修设计鉴赏为您提供专业的在线配色软件应用，更加方便、快速生成符合您装修设计的配色方案，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #漆光异彩
+    elsif controller_name == 'function' && action_name == 'art'
+      "立邦iColor装修设计鉴赏带您欣赏MILANO米兰诺艺术漆，刷出漆光异彩，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    elsif controller_name == 'function' && action_name == '7-1'
+      "立邦iColor装修设计鉴赏带您欣赏木纹风尚生活，刷新美木纹生活新风尚，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    #精彩活动
+    elsif controller_name == 'designer_events' #&& %w{index index_2 index_3}.include?(action_name)
+      designer_events_descript
+    elsif controller_name == 'other_events' && action_name == 'index'
+      designer_events_descript
+    elsif controller_name == 'other_events'
+      designer_events_descript
+    elsif controller_name == 'gifts' && action_name == 'index'
+      "立邦iColor装修设计鉴赏刷新生活21天，并邀设计师参加活动，成为设计师展现家居装修设计风采专业平台。还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    else
+      "立邦iColor装修设计鉴赏涵盖世界级大师访谈，大师设计作品与专业设计作品欣赏，为你带来更多装修灵感以及专业的家装资讯，更有家装专业实用工具，满足你的色彩家装需求，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
     end
   end
 
-  def des_content
-    "立邦 iColor 装修设计世界级大师访谈，大师设计作品与专业设计作品欣赏，为你带来更多装修灵感。以及专业的家装资讯、行业红人资讯解读，更有家装专业实用工具，满足你的色彩家装需求。"
-  end
-
   def keyword_content
-    "iColor,立邦,装修设计,设计师"
+    star_key = "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    inspirations_key = "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    softwares_key = "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    art_key = "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    designer_events_key = "iColor立邦活动,设计师活动,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+
+    #首页
+    if controller_name == 'home' && action_name == 'index'
+      "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #大师访谈
+    elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'shinei'
+      "室内空间设计师,色彩设计师,装修设计师,明星设计师,家装经典作品,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'color'
+      "色彩设计师,室内设计师,装修设计大师,明星设计师,装修设计大师,室内空间设计,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'master_interviews' && %w{index all}.include?(action_name)
+      "海外设计师,国际设计师,香港,台湾,港澳台设计师.中国设计师,室内设计师,iColor设计师访谈,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'oversea'
+      "海外设计师.国际设计师,装修大师,室内设计师,装修设计师,iColor设计大师访谈,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'hk_tw_mc'
+      "香港,台湾,港澳台设计师,装修大师,室内设计师,装修设计师,iColor设计大师访谈,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'cn'
+      "中国设计师,装修大师,室内设计师,装修设计师,iColor设计师访谈,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'master_interviews' && action_name == 'show'
+      "iColor设计大师,#{@article.name},简介,访谈,作品,寄语,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #大师作品
+    elsif controller_name == 'master_designs' && %w{index all}.include?(action_name)
+      "iColor设计师,室内空间大师,色彩设计大师,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'master_designs' && action_name == 'show'
+      "#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name},家居家居装饰,装修建材,建材导购室内装修,装修图片,装修效果图,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #设计之星
+    elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
+      "明星设计师," + star_key
+    elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_color'
+      "明星色彩设计师," + star_key
+    elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_design'
+      "明星设计师," + star_key
+    #个人主页(通用)
+    elsif controller_name == 'users'
+      "明星设计师,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #作品展示
+    elsif controller_name == 'designs' && action_name == 'index'
+      "装修案例,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'designs' && action_name == 'show'
+      "装修案例,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #色彩搭配
+    elsif controller_name == 'color_designs' && action_name == 'index'
+      "色彩搭配,色彩装修案例,#{params[:design_style].present? ? params[:design_style] : '风格' },#{params[:design_color].present? ? params[:design_color] : '色系' },#{params[:design_usage].present? ? params[:design_usage] : '区域' },iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'color_designs' && action_name == 'show'
+      "#{params[:design_style].present? ? params[:design_style] : '风格' },#{params[:design_color].present? ? params[:design_color] : '色系' },#{params[:design_usage].present? ? params[:design_usage] : '区域' },色彩搭配,色彩装修案例iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #灵感秀
+    elsif controller_name == 'inspirations' && action_name == 'index'
+      inspirations_key
+    elsif controller_name == 'inspirations' && action_name == 'inspirations_new'
+      inspirations_key
+    elsif controller_name == 'inspirations' && action_name == 'inspirations_hot'
+      inspirations_key
+    elsif controller_name == 'inspirations' && action_name == 'inspirations_minisite'
+      "刷新21天," + inspirations_key
+    elsif controller_name == 'inspirations' && action_name == 'show'
+      inspirations_key
+    #业主通道
+    elsif controller_name == 'channel'
+      "设计报名,设计推荐,装修公司,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'faqs'
+      "装修知识,家装知识,装修经验,家居装修,装修指导,室内装修知识,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'mix_colors'
+      "配色方案,配色服务,配色咨询iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    #行业资讯
+    elsif controller_name == 'articles' && action_name == 'index'
+      "装修资讯,专业家装资讯,色彩资讯,装修业内动态,装修行业资讯,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'articles' && action_name == 'show'
+      "#{@article.title},装修资讯,专业家装资讯,装修行业资讯,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'color_articles' && action_name == 'index'
+      "色彩资讯,装修资讯,专业家装资讯,装修行业资讯,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'master_topics' && action_name == 'index'
+      "业内动态资讯,装修资讯,专业家装资讯,装修行业资讯,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'master_topics' && action_name == 'show'
+      "业内动态资讯,装修资讯,专业家装资讯,色彩资讯,装修行业资讯,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    elsif controller_name == 'softwares' && action_name == 'case'
+      "装修效果图下载,家装案例分享," + softwares_key
+    elsif controller_name == 'softwares' && action_name == 'tools'
+      "配色方案,配色软件,家装配色软件," + softwares_key
+    #漆光异彩
+    elsif controller_name == 'function' && action_name == 'art'
+      "MILANO米兰诺艺术漆,艺术漆效果图,微电影" + art_key
+    elsif controller_name == 'function' && action_name == '7-1'
+      "木纹漆,木纹效果图," + art_key
+    #精彩活动
+    elsif controller_name == 'designer_events' #&& %w{index index_2 index_3}.include?(action_name)
+      designer_events_key
+    elsif controller_name == 'other_events' && action_name == 'index'
+      designer_events_key
+    elsif controller_name == 'other_events'
+      designer_events_key
+    elsif controller_name == 'gifts' && action_name == 'index'
+      designer_events_key
+    else
+      "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
+    end
   end
 
   def forward_links(title, url = '', pic = '', id, type)

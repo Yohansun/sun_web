@@ -5,10 +5,10 @@
   <title><%= page_title %></title>
   <%= csrf_meta_tag %>
 
-  <%- if controller_name == "home" %>
-     <meta name="Description" content="<%= des_content %>"/>
+  <%- unless controller_name == "design_images" %>
+    <meta name="Description" content="<%= des_content %>"/>
+    <meta name="Keywords" content="<%= keyword_content %>"/>
   <%- end %>
-  <meta name="Keywords" content="<%= keyword_content %>"/>
 
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
