@@ -38,7 +38,7 @@ task :import_image_libraries_sina => :environment  do
       design.area_id = area ? area.id : 31
       design.room_type = room.title if room
       if design.save(validate: false)
-        file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0].to_i}/*"]
+        file_src_arr = Dir["/home/nioteam/icolor/sina/#{row[0]}/*"]
         if file_src_arr.present?
           file_src_arr.each do |file_src|
             p '获取到图片！！！'
