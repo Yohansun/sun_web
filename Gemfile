@@ -28,9 +28,9 @@ group :development do
   gem "hirb"
   gem "quiet_assets"
   gem 'thin'
-  #gem "debugger"
+  gem "debugger"
 end
-
+gem "meta_search"
 gem 'unicorn'
 
 gem "paperclip", "<3.0"
