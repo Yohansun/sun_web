@@ -48,6 +48,7 @@
     </fieldset>
   </div>
   <fieldset class="deshed_line">
-    <a href="javascript:;" class="sure_submit db"></a>
+    <!-- <a href="javascript:;" class="sure_submit db"></a> -->
+    <%= submit_tag "确认提交",:class => 'sure_submit db', :disable_with => "提交中..." %>
   </fieldset>
 <%- end %><!-- submit_form end -->
