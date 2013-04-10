@@ -17,7 +17,11 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 every :day, :at => '5:00 am', :roles => [:app] do
-  rake "-s sitemap:refresh"
+  rake "sitemap:refresh"
+end
+
+every :day, :at => '3:00 am', :roles => [:app] do
+  rake "import_click_data"
 end
 
 # Learn more: http://github.com/javan/whenever

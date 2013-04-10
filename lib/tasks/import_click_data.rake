@@ -6,8 +6,6 @@ task :import_click_data => :environment  do
 
   p "Starting~~~~~~~~~~~~~~~~~"
   time_array = []
-  #file_array = ["landing.log.20130102","landing.log.20130103","landing.log.20130105","landing.log.20130106","landing.log.20130109","landing.log.20130110","landing.log.20130112","landing.log.20130113","landing.log.20130114","landing.log.20130115","landing.log.20130116"]
-  #file_array.each do |file|
   file_name = "#{Rails.root}/public/system/landing_log/" + "landing.log." + (Time.now - 1.day).strftime("%Y%m%d")
   if File.exist?(file_name)
     File.open(file_name, "r").each_line do |line|
