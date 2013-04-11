@@ -181,34 +181,34 @@ module ApplicationHelper
 
   def des_content
     star_descript1 = "立邦iColor装修设计鉴赏带您领略iColor"
-    star_descript2 = "设计师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
-    channel_descript = "立邦iColor装修设计鉴赏涵盖装修知识,家装知识,装修经验,家居装修,装修指导,室内装修知识，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
-    article_desctipt = "立邦iColor装修设计鉴赏涵盖丰富、专业的装家具修行业资讯，包括：色彩资讯、业内动态供您参阅，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
-    designer_events_descript = "立邦iColor装修设计鉴赏将定期举办精彩活动，并邀设计师参加活动，成为设计师展现家居装修设计风采专业平台。还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+    star_descript2 = "设计师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
+    channel_descript = "立邦iColor装修设计鉴赏涵盖装修知识,家装知识,装修经验,家居装修,装修指导,室内装修知识,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
+    article_desctipt = "立邦iColor装修设计鉴赏涵盖丰富、专业的装家具修行业资讯,包括：色彩资讯、业内动态供您参阅,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
+    designer_events_descript = "立邦iColor装修设计鉴赏将定期举办精彩活动,并邀设计师参加活动,成为设计师展现家居装修设计风采专业平台.还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
 
     #首页
     if  controller_name == 'home'
-      "立邦iColor装修设计鉴赏涵盖世界级大师访谈，大师设计作品与专业设计作品欣赏，为你带来更多装修灵感以及专业的家装资讯，更有家装专业实用工具，满足你的色彩家装需求，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏涵盖世界级大师访谈,大师设计作品与专业设计作品欣赏,为你带来更多装修灵感以及专业的家装资讯,更有家装专业实用工具,满足你的色彩家装需求,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #大师访谈
     elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'shinei'
-      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif %w{master_interviews master_designs}.include?(controller_name) && params[:type] == 'color'
-      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名色彩设计大师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名色彩设计大师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'master_interviews' && %w{index all}.include?(action_name)
-      "立邦iColor装修设计鉴赏带您领略顶级的国际、港澳台、国内知名设计大师，通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略顶级的国际、港澳台、国内知名设计大师,通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'oversea'
-      "立邦iColor装修设计鉴赏带您领略顶级的国际、海外知名设计大师，通过iColor设计师访欣赏略设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略顶级的国际、海外知名设计大师,通过iColor设计师访欣赏略设计大师所完成的经典国际家居设计精品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'hk_tw_mc'
-      "立邦iColor装修设计鉴赏带您领略顶级的港澳台地区知名设计大师，通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略顶级的港澳台地区知名设计大师,通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif %w{master_interviews master_designs}.include?(controller_name) && action_name == 'cn'
-      "立邦iColor装修设计鉴赏带您领略顶级国内知名设计大师，通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略顶级国内知名设计大师,通过iColor设计师访谈欣赏设计大师所完成的经典国际家居设计精品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'master_interviews' && action_name == 'show'
-      "立邦 iColor顶级【国际、港澳台、国内知名设计大师】-#{@article.name}，简介，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦 iColor顶级【国际、港澳台、国内知名设计大师】-#{@article.name},简介,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #大师作品
     elsif controller_name == 'master_designs' && %w{index all}.include?(action_name)
-      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师以及色彩设计大师装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师以及色彩设计大师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'master_designs' && action_name == 'show'
-      "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name}，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name},还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #设计之星
     elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
       star_descript1 + '【每周之星】' + star_descript2
@@ -218,35 +218,35 @@ module ApplicationHelper
       star_descript1 + '【月度设计之星】' + star_descript2
     #个人主页(通用)
     elsif controller_name == 'users'
-      "立邦iColor明星设计师 — 设计师姓名的个人主页为您展示装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。" 
+      "立邦iColor明星设计师 — 设计师姓名的个人主页为您展示装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor." 
     #作品展示
     elsif controller_name == 'designs' && action_name == 'index'
-      "立邦iColor装修设计鉴赏带您领略优秀的立邦iColor设计师专业装修设计作品，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略优秀的立邦iColor设计师专业装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'designs' && action_name == 'show'
-      "立邦iColor明星设计师 — 设计师姓名作品作品名称。还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor明星设计师 — 设计师姓名作品作品名称.还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #色彩搭配
     elsif controller_name == 'color_designs' && action_name == 'index'
-      "立邦iColor装修设计鉴赏带您领略色彩搭配装修效果图，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略色彩搭配装修效果图,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'color_designs' && action_name == 'show'
-      "立邦iColor装修设计鉴赏带您领略风格,色系,区域,色彩搭配装修效果图，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您领略风格,色系,区域,色彩搭配装修效果图,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #灵感秀
     elsif controller_name == 'inspirations' && action_name == 'index'
-      "立邦iColor装修设计鉴赏灵感秀充满了最新、最热的灵感图片，帮您寻找装修设计灵感元素，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏灵感秀充满了最新、最热的灵感图片,帮您寻找装修设计灵感元素,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'inspirations' && action_name == 'inspirations_new'
-      "立邦iColor装修设计鉴赏灵感秀充满了最新灵感图片，帮您寻找装修设计灵感元素，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏灵感秀充满了最新灵感图片,帮您寻找装修设计灵感元素,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'inspirations' && action_name == 'inspirations_hot'
-      "立邦iColor装修设计鉴赏灵感秀充满了最热灵感图片，帮您寻找装修设计灵感元素，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏灵感秀充满了最热灵感图片,帮您寻找装修设计灵感元素,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'inspirations' && action_name == 'inspirations_minisite'
-      "立邦iColor装修设计鉴赏刷新21天活动，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏刷新21天活动,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'inspirations' && action_name == 'show'
-      "立邦iColor装修设计鉴赏灵感秀灵感秀名称，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏灵感秀灵感秀名称,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #业主通道
     elsif controller_name == 'channel'
       channel_descript
     elsif controller_name == 'faqs'
       channel_descript
     elsif controller_name == 'mix_colors'
-      "立邦iColor装修设计鉴赏为您提供配色资讯服务，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏为您提供配色资讯服务,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #行业资讯
     elsif controller_name == 'articles' && action_name == 'index'
       article_desctipt
@@ -259,14 +259,14 @@ module ApplicationHelper
     elsif controller_name == 'master_topics' && action_name == 'show'
       article_desctipt
     elsif controller_name == 'softwares' && action_name == 'case'
-      "立邦iColor装修设计鉴赏为您提供专业色彩案例搭配供您下载，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏为您提供专业色彩案例搭配供您下载,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'softwares' && action_name == 'tools'
-      "立邦iColor装修设计鉴赏为您提供专业的在线配色软件应用，更加方便、快速生成符合您装修设计的配色方案，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏为您提供专业的在线配色软件应用,更加方便、快速生成符合您装修设计的配色方案,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #漆光异彩
     elsif controller_name == 'function' && action_name == 'art'
-      "立邦iColor装修设计鉴赏带您欣赏MILANO米兰诺艺术漆，刷出漆光异彩，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您欣赏MILANO米兰诺艺术漆,刷出漆光异彩,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'function' && action_name == '7-1'
-      "立邦iColor装修设计鉴赏带您欣赏木纹风尚生活，刷新美木纹生活新风尚，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏带您欣赏木纹风尚生活,刷新美木纹生活新风尚,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #精彩活动
     elsif controller_name == 'designer_events' #&& %w{index index_2 index_3}.include?(action_name)
       designer_events_descript
@@ -275,9 +275,9 @@ module ApplicationHelper
     elsif controller_name == 'other_events'
       designer_events_descript
     elsif controller_name == 'gifts' && action_name == 'index'
-      "立邦iColor装修设计鉴赏刷新生活21天，并邀设计师参加活动，成为设计师展现家居装修设计风采专业平台。还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏刷新生活21天,并邀设计师参加活动,成为设计师展现家居装修设计风采专业平台.还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     else
-      "立邦iColor装修设计鉴赏涵盖世界级大师访谈，大师设计作品与专业设计作品欣赏，为你带来更多装修灵感以及专业的家装资讯，更有家装专业实用工具，满足你的色彩家装需求，还有更多精彩装修效果图，以及设计装修案例、灵感家装图片尽在立邦iColor。"
+      "立邦iColor装修设计鉴赏涵盖世界级大师访谈,大师设计作品与专业设计作品欣赏,为你带来更多装修灵感以及专业的家装资讯,更有家装专业实用工具,满足你的色彩家装需求,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     end
   end
 
