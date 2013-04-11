@@ -1,19 +1,21 @@
 # encoding: utf-8
-
+require 'zip/zip'
 class DesignsController < ApplicationController
   before_filter :find_user
   before_filter :find_design, :only => [:upload, :edit]
 
   def download
     target_file = DesignImage.where(:imageable_id => params[:id])
-    target_file.each do |t|
-      system("zip public/design#{params[:id]}.zip -j #{t.file.path} ")
-    end
-    if target_file
-      send_file "public/design#{params[:id]}.zip"
-      # system("rm public/design#{params[:id]}.zip")
+    zipfile_name = "#{Rails.root}/public/design#{params[:id]}.zip"
+    if File.exists?(zipfile_name)
+      send_file zipfile_name
     else
-      redirect_to user_design_path(@user.id, id: params[:id])
+      Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+        target_file.each do |filename|
+          zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
+        end
+      end
+      send_file zipfile_name
     end
   end
 

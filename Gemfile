@@ -78,3 +78,5 @@ gem "abacus_count"
 gem "sitemap_generator"
 #定时更新sitemap
 gem 'whenever', :require => false
+
+gem 'rubyzip'
