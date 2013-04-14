@@ -268,6 +268,7 @@ GEM
       railties (~> 3.1)
     ruby-ole (1.2.11.4)
     ruby-pinyin (0.1.0)
+    rubyzip (0.9.9)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
     sass (3.1.17)
@@ -382,6 +383,7 @@ DEPENDENCIES
   redis-store
   remotipart (~> 1.0)
   ruby-pinyin
+  rubyzip
   rvm-capistrano
   sass-rails (~> 3.2.3)
   savon

@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'zip/zip'
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
@@ -75,11 +76,17 @@ class Baicheng::StoriesController < ApplicationController
   def download
     target_file = StoryImage.where(:story_id => params[:id])
     unless target_file.blank?
-	    target_file.each do |t|
-	      system("zip public/design#{params[:id]}.zip -j #{t.file.path} ")
-	    end
-      send_file "public/design#{params[:id]}.zip"
-      # system("rm public/design#{params[:id]}.zip")
+      zipfile_name = "#{Rails.root}/public/design#{params[:id]}.zip"
+      if File.exists?(zipfile_name)
+        send_file zipfile_name
+      else
+        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+          target_file.each do |filename|
+            zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
+          end
+        end
+        send_file zipfile_name
+      end
     else
       redirect_to :back
     end
