@@ -19,7 +19,7 @@ task :import_earlier_click_data => :environment  do
   # file_array.delete(".")
 
   p "Start Build!!!!!"
-  file_array = ["landing.log.20130401","landing.log.20130402","landing.log.20130403","landing.log.20130404","landing.log.20130405","landing.log.20130406","landing.log.20130407","landing.log.20130408","landing.log.20130409"]
+  file_array = ["landing.log.20130410","landing.log.20130411","landing.log.20130412","landing.log.20130413","landing.log.20130414"]
   file_array.each do |file|
     file_name = "#{Rails.root}/public/system/landing_log/" + file
     time_array = []
