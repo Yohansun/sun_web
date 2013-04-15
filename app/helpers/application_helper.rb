@@ -587,6 +587,7 @@ module ApplicationHelper
   ALLOW_CONVERSION = Hash.new {|k,v| k[v] = []}.tap do |hash|
     hash[:home]          = [:index];
     hash[:design_images] = [:index]
+    hash[:channel]       = [:access]
   end
   
   def rendered_script_conversion
