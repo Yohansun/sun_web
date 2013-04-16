@@ -294,7 +294,7 @@ class DesignImagesController < ApplicationController
       @like_images = DesignImage.available.order("created_at desc").limit(4)
     else
       tags = tags[0..4]
-      @like_images = DesignImage.search_tags(tags, true).limit(4)
+      @like_images = DesignImage.available.search_tags(tags, true).limit(4)
     end
   end
 
