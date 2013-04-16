@@ -291,10 +291,10 @@ class DesignImagesController < ApplicationController
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
-      @like_images = DesignImage.available.order("created_at desc").limit(4)
+      @like_images = DesignImage.available.audited_with_colors.order("created_at desc").limit(4)
     else
       tags = tags[0..4]
-      @like_images = DesignImage.search_tags(tags, true).limit(4)
+      @like_images = DesignImage.available.audited_with_colors.search_tags(tags, true).limit(4)
     end
   end
 
