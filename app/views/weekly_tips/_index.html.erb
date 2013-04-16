@@ -22,12 +22,14 @@
               <!--faqs_content ends-->
           <%- end %>
       <%- else -%>
-          <%- (body.size)/2.times do |i| %>
+          <%#- (body.size)/2.times do |i| %>
+          <%- @weekly_tips.each_with_index do |tip, i| %>
+              <%- body = tip.body.split("\r\n\r\n") %>
               <a name="tips<%= i %>"></a>
               <div class="faqs_title clear">
                 <span class="ask fl"></span>
 
-                <p class="fl fb ft14"><%= body[2*i] %></p>
+                <p class="fl fb ft14"><%= body[0] %></p>
                 <a href="javascript:void(0)" class="tips_bullet fr"></a>
               </div>
               <!--faqs_title ends-->
@@ -35,12 +37,13 @@
                 <span class="answer fl"></span>
 
                 <div class="fl">
-                  <p> <%= body[2*i+1] %> </p>
+                  <p> <%= body[1] %> </p>
                 </div>
                 <!--fl ends-->
               </div>
               <!--faqs_content ends-->
           <%- end %>
+          <%#- end %>
       <%- end %>
   <%- end %>
 </div><!--faqs ends-->
