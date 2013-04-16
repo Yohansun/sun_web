@@ -32,7 +32,7 @@ module MagicContent
       end_t   = params[:end_date].to_time(:local)
 
       #查询时间段内创建的用户
-      users = User.select("role_id,created_at,area_id,des_status,sign_in_count").where(:created_at => begin_t..end_t)
+      users = User.select("role_id,created_at,area_id,des_status,sign_in_count").where(:created_at => begin_t..end_t).where("source != 'sina' and source != 'kepulande'")
 
       role = {}
       role['zz'] = users.where(role_id: 1,des_status: false)
@@ -40,14 +40,14 @@ module MagicContent
       role['gs'] = users.where(role_id: 2)
       role['pt'] = users.where(role_id: 3)
 
-      #查询时间段内创建的作品
-      all_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t)
+      #自然和招募数据 查询时间段内创建的作品
+      all_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t).where("users.source != 'sina' and users.source != 'kepulande'")
 
       designs = {}
-      designs['zz'] = all_designs.where('role_id = ? AND des_status = ?', 1, false)
-      designs['zd'] = all_designs.where('role_id = ? AND des_status = ?', 1, true)
-      designs['gs'] = all_designs.where('role_id = ?', 2)
-      designs['pt'] = all_designs.where('role_id = ?', 3)
+      designs['zz'] = all_designs.where('users.role_id = ? AND users.des_status = ?', 1, false)
+      designs['zd'] = all_designs.where('users.role_id = ? AND users.des_status = ?', 1, true)
+      designs['gs'] = all_designs.where('users.role_id = ?', 2)
+      designs['pt'] = all_designs.where('users.role_id = ?', 3)
 
       ##第三方连接进入icolor
       land_sql_conditions = "SELECT source, count(source) as count
@@ -57,40 +57,59 @@ module MagicContent
       @lands = Land.find_by_sql land_sql_conditions
 
       #统计注册用户
-      @reg_count1 = role['zz'].count
-      @reg_count2 = role['zd'].count
-      @reg_count3 = role['gs'].count
+      @reg_count1 = role['zz'].where(is_imported: false).count
+      @reg_count1_imported = role['zz'].where(is_imported: true).count
+      @reg_count2 = role['zd'].where(is_imported: false).count
+      @reg_count2_imported = role['zd'].where(is_imported: true).count
+      @reg_count3 = role['gs'].where(is_imported: false).count
+      @reg_count3_imported = role['gs'].where(is_imported: true).count
       @reg_count4 = role['pt'].count
 
       #统计上传作品用户
-      @design_count1 = designs['zz'].count
-      @design_count2 = designs['zd'].count
-      @design_count3 = designs['gs'].count
+      @design_count1 = designs['zz'].where('users.is_imported = ?', false).count
+      @design_count1_imported = designs['zz'].where('users.is_imported = ?', true).count
+      @design_count2 = designs['zd'].where('users.is_imported = ?', false).count
+      @design_count2_imported = designs['zd'].where('users.is_imported = ?', true).count
+      @design_count3 = designs['gs'].where('users.is_imported = ?', false).count
+      @design_count3_imported = designs['gs'].where('users.is_imported = ?', true).count
       @design_count4 = designs['pt'].count
 
       #统计登录过的用户
-      @reg_and_login_count1 = role['zz'].where('sign_in_count > 0').count
-      @reg_and_login_count2 = role['zd'].where('sign_in_count > 0').count
-      @reg_and_login_count3 = role['gs'].where('sign_in_count > 0').count
+      @reg_and_login_count1 = role['zz'].where(is_imported: false).where('sign_in_count > 0').count
+      @reg_and_login_count1_imported = role['zz'].where(is_imported: true).where('sign_in_count > 0').count
+      @reg_and_login_count2 = role['zd'].where(is_imported: false).where('sign_in_count > 0').count
+      @reg_and_login_count2_imported = role['zd'].where(is_imported: true).where('sign_in_count > 0').count
+      @reg_and_login_count3 = role['gs'].where(is_imported: false).where('sign_in_count > 0').count
+      @reg_and_login_count3_imported = role['gs'].where(is_imported: true).where('sign_in_count > 0').count
       @reg_and_login_count4 = role['pt'].where('sign_in_count > 0').count
 
       #注册没有登录的用户
       @reg_not_login_count1 = @reg_count1 - @reg_and_login_count1
+      @reg_not_login_count1_imported = @reg_count1_imported - @reg_and_login_count1_imported
       @reg_not_login_count2 = @reg_count2 - @reg_and_login_count2
+      @reg_not_login_count2_imported = @reg_count2_imported - @reg_and_login_count2_imported
       @reg_not_login_count3 = @reg_count3 - @reg_and_login_count3
+      @reg_not_login_count3_imported = @reg_count3_imported - @reg_and_login_count3_imported
       @reg_not_login_count4 = @reg_count4 - @reg_and_login_count4
 
+      #新浪和科普兰德 导入数据作品数
+      import_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t)
+
+      imp_designs = {}
+      imp_designs['zz'] = import_designs.where('users.role_id = ? AND users.des_status = ?', 1, false)
+      imp_designs['zd'] = import_designs.where('users.role_id = ? AND users.des_status = ?', 1, true)
+      imp_designs['gs'] = import_designs.where('users.role_id = ?', 2)
+      imp_designs['pt'] = import_designs.where('users.role_id = ?', 3)
+
       #sina发表作品数
-      @sina_design_count1 = designs['zz'].where("design_images.source = 'sina'").count
-      @sina_design_count2 = designs['zd'].where("design_images.source = 'sina'").count
-      @sina_design_count3 = designs['gs'].where("design_images.source = 'sina'").count
-      @sina_design_count4 = designs['pt'].where("design_images.source = 'sina'").count
+      @sina_design_count1 = imp_designs['zz'].where("design_images.source = 'sina'").count
+      @sina_design_count2 = imp_designs['zd'].where("design_images.source = 'sina'").count
+      @sina_design_count3 = imp_designs['gs'].where("design_images.source = 'sina'").count
 
       #科普兰德发表作品数
-      @kepulande_design_count1 = designs['zz'].where("design_images.source = 'kepulande'").count
-      @kepulande_design_count2 = designs['zd'].where("design_images.source = 'kepulande'").count
-      @kepulande_design_count3 = designs['gs'].where("design_images.source = 'kepulande'").count
-      @kepulande_design_count4 = designs['pt'].where("design_images.source = 'kepulande'").count
+      @kepulande_design_count1 = imp_designs['zz'].where("design_images.source = 'kepulande'").count
+      @kepulande_design_count2 = imp_designs['zd'].where("design_images.source = 'kepulande'").count
+      @kepulande_design_count3 = imp_designs['gs'].where("design_images.source = 'kepulande'").count
 
       ##片区活跃度
       ##华东地区（山东，江苏，安徽，江西，浙江，福建，上海）

@@ -1,3 +1,6 @@
+<style type="text/css">
+.table-bordered th{border:1px solid #ddd;vertical-align:middle;}
+</style>
 <div class="content">
   <div class="title"><h5>数据统计</h5></div>
   <!-- Dynamic table -->
@@ -31,23 +34,107 @@
 
   <div class="table">
     <div class="head"><h5 class="iFrames">查询结果</h5></div>
-    <table cellpadding="0" cellspacing="0" border="0" class="display">
+    <table cellpadding="0" cellspacing="0" border="0" class="display table-bordered">
+      <thead>
+        <tr>
+          <th rowspan="2" width="20%">项目</th>
+          <th colspan="2" width="20%">设计师（在职）</th>
+          <th colspan="2" width="20%">设计师（在读）</th>
+          <th colspan="2" width="20%">家装公司</th>
+          <th rowspan="2" width="20%">普通用户</th>
+        </tr>
+        <tr>
+          <th width="">自然</th>
+          <th width="">招募</th>
+          <th width="">自然</th>
+          <th width="">招募</th>
+          <th width="">自然</th>
+          <th width="">招募</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA">
+          <td>用户注册数</td>
+          <td><%= @reg_count1 %></td>
+          <td><%= @reg_count1_imported %></td>
+          <td><%= @reg_count2 %></td>
+          <td><%= @reg_count2_imported %></td>
+          <td><%= @reg_count3 %></td>
+          <td><%= @reg_count3_imported %></td>
+          <td><%= @reg_count4 %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>发表作品数</td>
+          <td><%= @design_count1 %></td>
+          <td><%= @design_count1_imported %></td>
+          <td><%= @design_count2 %></td>
+          <td><%= @design_count2_imported %></td>
+          <td><%= @design_count3 %></td>
+          <td><%= @design_count3_imported %></td>
+          <td><%= @design_count4 %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>注册后登陆用户</td>
+          <td><%= @reg_and_login_count1 %></td>
+          <td><%= @reg_and_login_count1_imported %></td>
+          <td><%= @reg_and_login_count2 %></td>
+          <td><%= @reg_and_login_count2_imported %></td>
+          <td><%= @reg_and_login_count3 %></td>
+          <td><%= @reg_and_login_count3_imported %></td>
+          <td><%= @reg_and_login_count4 %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>注册后未登陆用户</td>
+          <td><%= @reg_not_login_count1 %></td>
+          <td><%= @reg_not_login_count1_imported %></td>
+          <td><%= @reg_not_login_count2 %></td>
+          <td><%= @reg_not_login_count2_imported %></td>
+          <td><%= @reg_not_login_count3 %></td>
+          <td><%= @reg_not_login_count3_imported %></td>
+          <td><%= @reg_not_login_count4 %></td>
+        </tr>
+        <!-- <tr class="gradeA">
+          <td>sina发表作品数</td>
+          <td><%= @sina_design_count1 %></td>
+          <td><%= @sina_design_count2 %></td>
+          <td><%= @sina_design_count3 %></td>
+          <td><%= @sina_design_count4 %></td>
+        </tr>  
+        <tr class="gradeA">
+          <td>科普兰德发表作品数</td>
+          <td><%= @kepulande_design_count1 %></td>
+          <td><%= @kepulande_design_count2 %></td>
+          <td><%= @kepulande_design_count3 %></td>
+          <td><%= @kepulande_design_count4 %></td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table">
+    <div class="head"><h5 class="iFrames">导入数据</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display table-bordered">
       <thead>
         <tr>
           <th width="20%">项目</th>
           <th width="20%">设计师（在职）</th>
           <th width="20%">设计师（在读）</th>
           <th width="20%">家装公司</th>
-          <th width="20%">普通用户</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="gradeA"><td>用户注册数</td><td><%= @reg_count1 %></td><td><%= @reg_count2 %></td><td><%= @reg_count3 %></td><td><%= @reg_count4 %></td></tr>
-        <tr class="gradeA"><td>发表作品数</td><td><%= @design_count1 %></td><td><%= @design_count2 %></td><td><%= @design_count3 %></td><td><%= @design_count4 %></td></tr>
-        <tr class="gradeA"><td>注册后登陆用户</td><td><%= @reg_and_login_count1 %></td><td><%= @reg_and_login_count2 %></td><td><%= @reg_and_login_count3 %></td><td><%= @reg_and_login_count4 %></td></tr>
-        <tr class="gradeA"><td>注册后未登陆用户</td><td><%= @reg_not_login_count1 %></td><td><%= @reg_not_login_count2 %></td><td><%= @reg_not_login_count3 %></td><td><%= @reg_not_login_count4 %></td></tr>
-        <tr class="gradeA"><td>sina发表作品数</td><td><%= @sina_design_count1 %></td><td><%= @sina_design_count2 %></td><td><%= @sina_design_count3 %></td><td><%= @sina_design_count4 %></td></tr>  
-        <tr class="gradeA"><td>科普兰德发表作品数</td><td><%= @kepulande_design_count1 %></td><td><%= @kepulande_design_count2 %></td><td><%= @kepulande_design_count3 %></td><td><%= @kepulande_design_count4 %></td></tr>
+        <tr class="gradeA">
+          <td>sina发表作品数</td>
+          <td><%= @sina_design_count1 %></td>
+          <td><%= @sina_design_count2 %></td>
+          <td><%= @sina_design_count3 %></td>
+        </tr>  
+        <tr class="gradeA">
+          <td>科普兰德发表作品数</td>
+          <td><%= @kepulande_design_count1 %></td>
+          <td><%= @kepulande_design_count2 %></td>
+          <td><%= @kepulande_design_count3 %></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -87,28 +174,28 @@
 
     <tbody>
       <% @data.each do |key, value| %>
-      <tr class="gradeA">
-        <td rowspan="3"><%= area_name(key) %></td>
-        <td>注册数</td>
-        <td><%= sum_count('zz', 'reg', value) %></td>
-        <td><%= sum_count('zd', 'reg', value) %></td>
-        <td><%= sum_count('gs', 'reg', value) %></td>
-        <td><%= sum_count('pt', 'reg', value) %></td>
-      </tr>
-      <tr class="gradeA">
-        <td>登录数</td>
-        <td><%= sum_count('zz', 'login', value) %></td>
-        <td><%= sum_count('zd', 'login', value) %></td>
-        <td><%= sum_count('gs', 'login', value) %></td>
-        <td><%= sum_count('pt', 'login', value) %></td>
-      </tr>
-      <tr class="gradeA">
-        <td>上传作品数</td>
-        <td><%= sum_count('zz', 'design', value) %></td>
-        <td><%= sum_count('zd', 'design', value) %></td>
-        <td><%= sum_count('gs', 'design', value) %></td>
-        <td><%= sum_count('pt', 'design', value) %></td>
-      </tr>
+        <tr class="gradeA">
+          <td rowspan="3"><%= area_name(key) %></td>
+          <td>注册数</td>
+          <td><%= sum_count('zz', 'reg', value) %></td>
+          <td><%= sum_count('zd', 'reg', value) %></td>
+          <td><%= sum_count('gs', 'reg', value) %></td>
+          <td><%= sum_count('pt', 'reg', value) %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>登录数</td>
+          <td><%= sum_count('zz', 'login', value) %></td>
+          <td><%= sum_count('zd', 'login', value) %></td>
+          <td><%= sum_count('gs', 'login', value) %></td>
+          <td><%= sum_count('pt', 'login', value) %></td>
+        </tr>
+        <tr class="gradeA">
+          <td>上传作品数</td>
+          <td><%= sum_count('zz', 'design', value) %></td>
+          <td><%= sum_count('zd', 'design', value) %></td>
+          <td><%= sum_count('gs', 'design', value) %></td>
+          <td><%= sum_count('pt', 'design', value) %></td>
+        </tr>
       <% end %>
     </tbody>
     </table>
