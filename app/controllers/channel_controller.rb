@@ -46,4 +46,8 @@ class ChannelController < ApplicationController
 
     @companys   = User.weekly_related(2,design_user_ids).limit(16)
   end
+
+  def refresh_service
+    
+  end
 end

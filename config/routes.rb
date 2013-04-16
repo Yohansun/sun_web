@@ -120,6 +120,7 @@ Icolor::Application.routes.draw do
   #业主通道
   resources :faqs
   match "/channel/access" => "channel#access"
+  match "/channel/refresh_service" => "channel#refresh_service"
 
   #实用工具
   match "/softwares/app" => "softwares#app"
