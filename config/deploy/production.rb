@@ -52,7 +52,7 @@ namespace :deploy do
 end
 
 before 'bundle:install', 'deploy:symlink_shared'
-after "deploy", "refresh_sitemaps", "update_crontab"
+after "deploy:update","refresh_sitemaps","update_crontab"
 
 require 'capistrano-unicorn'
 
