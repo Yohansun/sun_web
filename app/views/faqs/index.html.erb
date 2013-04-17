@@ -22,27 +22,27 @@
     <em><%= link_to "业主通道", "/channel/access" %><span></span></em>
     <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
-  <div class='wrapper'>
-    <div class="faq_bar clear ft14">
-      <p class="faq_title fl fb">标题<span>(共<%= @faqs.size %>条)</span></p>
+  <!-- <div class='wrapper'> -->
+    <!-- <div class="faq_bar clear ft14">
+      <p class="faq_title fl fb">标题<span>(共<%#= @faqs.size %>条)</span></p>
       <p class="faq_num fl tc">回答数</p>
       <p class="faq_date tr fr">提问时间</p>
-    </div>
+    </div> -->
     <!--faq_bar ends-->
-    <%- @faqs.each do |f| %>
-        <div class='faq_list clear ft14'>
-          <p class="faq_title fl"><a href="/faqs/<%= f.try(:id) %>"><%= f.try(:title) %></a></p>
-          <p class="faq_num fl tc"><%= f.comments_count %></p>
-          <p class="faq_date tr fr"><%= f.created_at.strftime("%Y-%m-%d %H:%M:%S")[0..9] %></p>
-        </div>
+    <%#- @faqs.each do |f| %>
+        <!-- <div class='faq_list clear ft14'>
+          <p class="faq_title fl"><a href="/faqs/<%#= f.try(:id) %>"><%#= f.try(:title) %></a></p>
+          <p class="faq_num fl tc"><%#= f.comments_count %></p>
+          <p class="faq_date tr fr"><%#= f.created_at.strftime("%Y-%m-%d %H:%M:%S")[0..9] %></p>
+        </div> -->
         <!--news_top ends-->
-    <%- end %>
-    <div class="pag_container">
-      <div class="pager ft12">
-        <%= paginate @faqs %>
-      </div>
+    <%#- end %>
+    <!-- <div class="pag_container">
+      <div class="pager ft12"> -->
+        <%#= paginate @faqs %>
+      <!-- </div> -->
       <!--pager ends-->
-    </div>
+    <!-- </div> -->
     <!--pag_container ends-->
     <a name="tips"></a>
     <div class="weekly_tips ft12" id="weekly_tips" style="border-bottom: none;padding-bottom: 0px;margin-bottom: 0px;">
@@ -56,16 +56,16 @@
       <!--pager ends-->
     </div>
     <!--pag_container ends-->
-    <div class="owners_form formB">
+    <!--<div class="owners_form formB">
       <div class="title">
         <h5>我要提问：</h5>
       </div>
       <div class="form_target">
         <iframe id="upload_target" name="upload_target"></iframe>
-      </div>
+      </div> -->
 
-      <%= form_for :faq, :url => faqs_path, :html => { :multipart => true, :id => 'new_faq', :onsubmit => 'return check()' } do %>
-          <table>
+      <%#= form_for :faq, :url => faqs_path, :html => { :multipart => true, :id => 'new_faq', :onsubmit => 'return check()' } do %>
+         <!--  <table>
             <tr class="f_title">
               <th>标　　题：</th>
               <td><input type="text" class="f_input" name="faq[title]" id="faq_title"></td>
@@ -73,7 +73,7 @@
 
             <tr class="f_image">
               <th>上传图片：</th>
-              <td> <%= file_field(:faq, :img, :class => "fl") %>
+              <td> <%#= file_field(:faq, :img, :class => "fl") %>
               </td>
             </tr>
 
@@ -87,13 +87,13 @@
 
             <tr class="f_submit">
               <th>&nbsp;</th>
-              <td><input type="image" src="<%= asset_path "design/submitB.gif" %>" alt="提交" value="提交"/>
+              <td><input type="image" src="<%#= asset_path "design/submitB.gif" %>" alt="提交" value="提交"/>
                 <input type="reset" class="reset" value="重置"/>
               </td>
             </tr>
-          </table>
-      <%- end %>
-    </div>
+          </table> -->
+      <%#- end %>
+    <!-- </div> -->
   </div>
   <!--wrapper ends-->
   <div class="popupA">
