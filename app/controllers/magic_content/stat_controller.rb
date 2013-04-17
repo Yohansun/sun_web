@@ -32,7 +32,7 @@ module MagicContent
       end_t   = params[:end_date].to_time(:local)
 
       #查询时间段内创建的用户
-      users = User.select("role_id,created_at,area_id,des_status,sign_in_count").where(:created_at => begin_t..end_t).where("source != 'sina' and source != 'kepulande'")
+      users = User.select("role_id,created_at,area_id,des_status,sign_in_count").where(:created_at => begin_t..end_t).where("source is null")
 
       role = {}
       role['zz'] = users.where(role_id: 1,des_status: false)
@@ -41,7 +41,7 @@ module MagicContent
       role['pt'] = users.where(role_id: 3)
 
       #自然和招募数据 查询时间段内创建的作品
-      all_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t).where("users.source != 'sina' and users.source != 'kepulande'")
+      all_designs = Design.includes(:user).includes(:design_images).where('design_images.file_file_size > 0').where("designs.created_at" => begin_t..end_t).where("users.source is null")
 
       designs = {}
       designs['zz'] = all_designs.where('users.role_id = ? AND users.des_status = ?', 1, false)
