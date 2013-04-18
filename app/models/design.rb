@@ -20,6 +20,8 @@ class Design < ActiveRecord::Base
   #最新的一张作品图片
   has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
 
+  scope :time_range, ->(start_date,end_date){joins(:user).where(:users => {:role_id => 1,:des_status => true},:created_at => start_date.to_time..end_date.to_time)}
+
   paginates_per 8
 
   after_create :update_user_design_code_count
