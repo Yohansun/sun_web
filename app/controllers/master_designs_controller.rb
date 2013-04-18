@@ -18,7 +18,7 @@ class MasterDesignsController < ApplicationController
     define_method(act) do
       hash = {"shinei" => "室内空间大师","color" => "色彩大师"}
       condition = hash.keys.include?(type = params[:type]) ? {:master_profile => {:master_kind => hash[type]}} : nil
-      @master_designs = @master_designs.tagged_with(tag).joins(:master_profile).where(condition)
+      @master_designs = @master_designs.tagged_with(tag).joins(:master_profile)
       render "index"
     end
   end
