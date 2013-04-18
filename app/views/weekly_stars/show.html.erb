@@ -43,7 +43,7 @@
       <span class="fl"><%= @design.try(:published_at).try(:to_date) %>往期作品</span>
     <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="star_next fl"></a>
   </div>
-  <div class="btn_group fr" style="margin-top:10px;"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show", :class =>"icon_fullscreen" %></div>
+  <div class="btn_group fr" style="margin-top:10px;"><%= link_to "", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show", :class =>"icon_fullscreen" %></div>
   <h1><%= @design.design_name %></h1>
 </div>
 <%- end %>

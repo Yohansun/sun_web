@@ -25,3 +25,38 @@ task :add_master_design_image_to_design_images => :environment  do
       end
     end
   end
+
+
+
+
+
+  # encoding: utf-8
+
+# -*- encoding: utf-8 -*-
+task :add_week_tip => :environment  do
+  tips = []
+  WeeklyTip.find_each do |tip|
+    t = tip.body.split("\r\n\r\n")
+    time = (t.size)/2
+    time.times do |i|
+      tips << {:body => t[2*i] + "\r\n\r\n" + t[2*i+1], 
+        :week => tip.week, :published_at => tip.published_at, :created_at => tip.created_at,
+        :updated_at => tip.updated_at, :subject_id => tip.subject_id  }
+      p "#{tip.id}+#{i} ===> success"
+    end 
+  end
+  WeeklyTip.delete_all
+  s = tips.size
+  s.times do |i|
+   w = WeeklyTip.new
+   # w.id = tips[i][:id]
+   w.week = tips[i][:week]
+   w.body = tips[i][:body]
+   w.published_at = tips[i][:published_at]
+   w.subject_id = tips[i][:subject_id]
+   w.created_at = tips[i][:created_at]
+   w.updated_at = tips[i][:updated_at]
+   w.save
+   p"success !!!!!!" 
+  end
+end
