@@ -20,12 +20,18 @@
     a.button_small,a.button_large{display:inline-block;background:url(<%= asset_path "christmas/button.jpg" %>) no-repeat top center;height:31px;text-align:center;color:#712222;font:bold 16px/31px "Microsoft Yahei";}
     .button_large{width:98px;}
     .button_small{width:70px;}
+    .acts_over_tag{position:absolute;bottom:0;right:100px;} 
     </style>
 <%- end %>
 
 <div class="main">
     <div><img src="<%= asset_path "topics/20130101/newyear_over1.jpg" %>"></div>
-    <div><img src="<%= asset_path "topics/20130101/newyear_over2.jpg" %>"></div>
+    <div class="pr">
+      <img src="<%= asset_path "topics/20130101/newyear_over2.jpg" %>">
+      <span class="acts_over_tag">
+        <img src="<%= asset_path 'act_over.png' %>">
+      </span>
+    </div>
     <div class="tips">
       <h3><img src="<%= asset_path "topics/20130101/rules_title.png" %>"></h3>
       <p>
