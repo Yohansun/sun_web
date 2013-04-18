@@ -9,12 +9,12 @@ class ColorDesign < ActiveRecord::Base
   has_many :design_images
 
   attr_accessor :time
-  has_attached_file :main_preview_img, :styles => { :thumb => "80x80#", :index => "291x315#", :home_page =>"380x170#"},
+  has_attached_file :main_preview_img, :styles => { :thumb => "80x80#", :index => "291x315#", :home_page =>"380x170#", :mobile_index => "140x178#"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
-  has_attached_file :show_preview_img, :styles => { :thumb => "80x80#", :slide => "888x590>"},
+  has_attached_file :show_preview_img, :styles => { :thumb => "80x80#", :slide => "888x590>", :mobile_slide => "320x206#", :mobile_fullscreen => "320x320#"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

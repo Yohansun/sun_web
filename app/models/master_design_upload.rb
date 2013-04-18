@@ -3,6 +3,8 @@ class MasterDesignUpload < ActiveRecord::Base
 
   has_attached_file :file, :styles => {:thumb => "105x97#", :slide => "550x365#",
     :fullscreen => "980x655>", :interview => "153x184#",
+    :mobile_slide => "320x206#",
+    :mobile_fullscreen => "320x320#",
     :home_page => "380x170#",:home_page1 => "180x170#",:home_page3 => "380x365#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
