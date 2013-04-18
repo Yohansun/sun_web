@@ -25,7 +25,11 @@ class ApiController < ApplicationController
     end
       
     if user.save
-      render :text => '<results suc="true" msg=""/>'
+      respond_to do |format|
+        format.json {render :json => { :result => 'true',
+         :mag => "注册成功!" } }
+      end
+      #render :text => '<results suc="true" msg=""/>'
     else
       messages = ''
       valid_result = user.errors.messages
@@ -34,16 +38,28 @@ class ApiController < ApplicationController
           messages << value[0]
         end
       end
-      render :text => "<results suc='false' msg='#{messages}'/>"
+      respond_to do |format|
+        format.json {render :json => { :result => 'false',
+         :mag =>"#{messages}" } }
+      end
+      #render :text => "<results suc='false' msg='#{messages}'/>"
     end
   end
 
   def login
     user = User.find_for_database_authentication(:login => params[:username])
     if user && user.valid_password?(params[:password])
-      render :text => '<results suc="true" msg=""/>'
+      respond_to do |format|
+        format.json {render :json => { :result => 'true',
+         :mag => "登陆成功!" } }
+      end
+      #render :text => '<results suc="true" msg=""/>'
     else
-      render :text => '<results suc="false" msg="用户名或密码错误"/>'
+      respond_to do |format|
+        format.json {render :json => { :result => 'false',
+         :mag => "用户名或密码错误!" } }
+      end
+      #render :text => '<results suc="false" msg=""/>'
     end
   end
 end

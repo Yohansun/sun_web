@@ -38,25 +38,35 @@ class DesignImagesController < ApplicationController
   end
 
   def index
+    @content = ""
     @images = DesignImage.available.audited_with_colors
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     @tag_names = []
     unless params[:tags].blank?
-       @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
+       @tag_ids = CGI.unescape(params[:tags]).split("-").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
     end
 
     unless @tag_ids.blank?
-      Rails.logger.debug @tag_ids.inspect
-      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
-      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
-      @images = @images.search_tags(final_tags.map(&:id))
-      @tag_names << final_tags.map(&:title)
+      tag_arrs = []
+      @tag_ids.each do |tag_arr|
+        if tag_arr.to_i != 0
+          tag_arrs << tag_arr
+        end
+      end
+      if tag_arrs.present?
+        @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
+        @tags.map {|tag| @content += tag.title + "、"}
+        final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+        @images = @images.search_tags(final_tags.map(&:id))
+        @tag_names << final_tags.map(&:title)
+      end
     end
 
-    unless params[:area_id].blank?
+    if params[:area_id].present? && params[:area_id].to_s != "0"
       area = Area.find(params[:area_id])
+      @content += area.parent.name + "、"
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
       @area_names = area.self_and_ancestors.map(&:name).join(" ")
@@ -64,13 +74,14 @@ class DesignImagesController < ApplicationController
       @images = @images.where(area_id: areas.map(&:id))
     end
 
-    unless params[:search].blank?
+    if params[:search].present? && params[:search].to_s != "_"
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
+      tags.map { |tag| @content += tag.title + "、" }
       @images = @images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
 
-    unless params[:imageable_type].blank?
+    if params[:imageable_type].present? && params[:imageable_type].to_s != "all"
       if params[:imageable_type] == 'WeekStart'
         @images = @images.where("sorts = 2")
       else
@@ -78,8 +89,9 @@ class DesignImagesController < ApplicationController
       end
     end
 
-    unless params[:pinyin].blank?
+    if params[:pinyin].present? && params[:pinyin].to_s != "0"
       tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+      tags.map { |tag| @content += tag.title + "、" }
       @images = @images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
@@ -209,19 +221,27 @@ class DesignImagesController < ApplicationController
     @tag_names = []
     images = DesignImage.available.audited_with_colors
     unless params[:tags].blank?
-       @tag_ids = CGI.unescape(params[:tags]).split(",").map { |e| e.to_i }.uniq.sort
+       @tag_ids = CGI.unescape(params[:tags]).split("-").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
     end
 
     unless @tag_ids.blank?
-      Rails.logger.debug @tag_ids.inspect
-      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids).all
-      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
-      images = images.search_tags(final_tags.map(&:id))
-      @tag_names << final_tags.map(&:title)
+      tag_arrs = []
+      @tag_ids.each do |tag_arr|
+        if tag_arr.to_i != 0
+          tag_arrs << tag_arr
+        end
+      end
+
+      if tag_arrs.present?
+        @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
+        final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+        images = images.search_tags(final_tags.map(&:id))
+        @tag_names << final_tags.map(&:title)
+      end
     end
 
-    unless params[:area_id].blank?
+    if params[:area_id].present? && params[:area_id].to_s != "0"
       area = Area.find(params[:area_id])
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
@@ -230,13 +250,13 @@ class DesignImagesController < ApplicationController
       images = images.where(area_id: areas.map(&:id))
     end
 
-    unless params[:search].blank?
+    if params[:search].present? && params[:search] != '_'
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
       images = images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
 
-    unless params[:imageable_type].blank?
+    if params[:imageable_type].present? && params[:imageable_type] != "all"
       if params[:imageable_type] == 'WeekStart'
         images = images.where("sorts = 2")
       else
@@ -244,13 +264,13 @@ class DesignImagesController < ApplicationController
       end
     end
 
-    unless params[:pinyin].blank?
+    if params[:pinyin].present? && params[:pinyin].to_i != 0
       tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
       images = images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
 
-    unless params[:ranking_list].blank?
+    if params[:ranking_list].present? && params[:ranking_list].to_i != 0
       if params[:ranking_list] == "like"
         images = images.order("design_images.votes_count desc")
       elsif params[:ranking_list] == "view_count"
@@ -259,7 +279,11 @@ class DesignImagesController < ApplicationController
     else
       images = images.order("design_images.created_at DESC")
     end
-    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    if params[:pinyin].present? && params[:pinyin].to_i != 0
+      @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    else
+      @query_params = ([@tag_names, @area_names]).compact.join(", ")
+    end
     count = images.count
     site = params[:site].to_i - 1
     @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1

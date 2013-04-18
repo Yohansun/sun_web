@@ -14,9 +14,9 @@
 <div class="wrapper ft14">
   <div class="blocks clear">
     <h2 class="tr">
-      <%= link_to "大师殿堂", "/master_interviews#{link_suffix}", :class => 'fl ft16' %>
-      <%= link_to "大师访谈", "/master_interviews#{link_suffix}" %> |
-      <%= link_to "大师作品", "/master_designs#{link_suffix}" %>
+      <%= link_to "大师殿堂", "/master_interviews", :class => 'fl ft16' %>
+      <%= link_to "大师访谈", "/master_interviews" %> |
+      <%= link_to "大师作品", "/master_designs" %>
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="/master_interviews/<%= @master_interview.id %>"><%= image_tag  (asset_path '2013/grey.gif'), "data-original" => @master_interview.preview_img_out.url(:home_page2), :height=>"365px", :width=>"380px" %></a>
@@ -33,7 +33,7 @@
         <a href="/master_designs/<%=@master_design.id%>" class="blocks_title ft14"><span class="blocks_arrow fr"></span><%= truncate(@master_design.try(:design_name), length: 20) %></a>
       </div>
       <div class="blocks_mini mr20">
-        <a href="/master_interviews<%= link_suffix %>" class="block">大师殿堂</a>
+        <a href="/master_interviews" class="block">大师殿堂</a>
       </div>
       <div class="blocks_mini">
         <a href="/master_designs/<%=@master_design_two.id%>">
@@ -55,7 +55,7 @@
   </div><!-- blocks -->
   <div class="blocks clear">
     <h2>
-      <a href="/design_images" class="ft16">装修图库</a>
+      <a href="/images" class="ft16">装修图库</a>
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="<%=image_show_design_image_path(@design_image.id)%>">
@@ -75,7 +75,7 @@
         <a href="<%=image_show_design_image_path(@design_image_two.id)%>" class="blocks_title ft14"><%= truncate(@design_image_two.design.try(:title), length: 20)%></a>
       </div>
       <div class="blocks_mini mr20">
-        <a href="/design_images<%= link_suffix %>" class="block block2_3">装修图库</a>
+        <a href="/images" class="block block2_3">装修图库</a>
       </div>
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@design_image_three.id)%>">
@@ -115,19 +115,19 @@
   </div><!-- blocks -->
   <div class="blocks clear">
     <h2 class="tr">
-      <%= link_to "设计鉴赏", "/weekly_stars?star_type=#{URI.escape("每周之星")}#{link_suffix}", :class => 'fl ft16' %>
-      <%= link_to "设计之星", "/weekly_stars?star_type=#{URI.escape("每周之星")}#{link_suffix}" %> |
-      <%= link_to "作品展示", "/designs#{link_suffix}" %> |
-      <%= link_to "色彩配搭", "/color_designs#{link_suffix}" %> |
-      <%= link_to "灵感秀", "/inspirations#{link_suffix}" %>
+      <%= link_to "设计鉴赏", "/weekly_stars?star_type=#{URI.escape("每周之星")}", :class => 'fl ft16' %>
+      <%= link_to "设计之星", "/weekly_stars?star_type=#{URI.escape("每周之星")}" %> |
+      <%= link_to "作品展示", "/designs" %> |
+      <%= link_to "色彩配搭", "/color_designs" %> |
+      <%= link_to "灵感秀", "/inspirations" %>
     </h2>
     <div class="blocks_big mr20 pr">
-      <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>">
+      <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>">
         <%- if @weekly_star.weekly_star_uploads.first.try(:file) %>
               <%= image_tag(@weekly_star.weekly_star_uploads.first.file.url(:home_page1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
-      <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>" class="blocks_title ft14">
+      <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>" class="blocks_title ft14">
         <span class="blocks_like fr"><%=@link_design.try(:votes_count)%></span><%= truncate(@weekly_star.design_name, length: 20)%>
       </a>
     </div><!-- blocks_big -->
@@ -157,14 +157,14 @@
         <a href="/inspirations/<%= @inspiration.id %>" class="blocks_title ft14"><%= truncate(@inspiration.title, length: 11)%></a>
       </div>
       <div class="blocks_mini">
-        <%= link_to "设计鉴赏", "/weekly_stars?star_type=#{URI.escape("每周之星")}#{link_suffix}", :class => "block block3_5" %>
+        <%= link_to "设计鉴赏", "/weekly_stars?star_type=#{URI.escape("每周之星")}", :class => "block block3_5" %>
       </div>
     </div><!-- blocks_big -->
   </div><!-- blocks -->
   <div class="blocks clear">
     <div class="blocks_large fl mr20">
       <h2 class="tr">
-        <a href="/channel/access<%= link_suffix %>" class="fl ft16">业主通道</a>
+        <a href="/channel/access" class="fl ft16">业主通道</a>
         <a style="margin:0 6px;" href="/channel/access">设计快查</a> |
         <a style="margin:0 6px;" href="/faqs">装修问答</a> |
         <a style="margin:0 6px;" href="/faqs#tips">装修贴士</a> |
@@ -174,7 +174,7 @@
       <div class="blocks_big mr20">
         <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" class="fl"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.1.jpg"%>" /></a>
         <a href="/channel/access" class="fl block block4_2">业主通道</a>
-        <a href="/mix_colors/new<%= link_suffix %>" class="fl mt25"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.3.jpg"%>" /></a>
+        <a href="/mix_colors/new" class="fl mt25"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks4.3.jpg"%>" /></a>
       </div>
       <div class="blocks_big">
         <div class="blocks_mini mr20">
@@ -204,9 +204,9 @@
     </div><!-- blocks_large -->
     <div class="blocks_big">
       <h2 class="tr">
-        <a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" class="fl ft16">行业资讯</a>
-        <a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>">装修资讯</a> |
-        <a href="/color_articles<%= link_suffix %>">色彩资讯</a> |
+        <a href="/articles?tags=<%= URI.escape("设计相关") %>" class="fl ft16">行业资讯</a>
+        <a href="/articles?tags=<%= URI.escape("设计相关") %>">装修资讯</a> |
+        <a href="/color_articles">色彩资讯</a> |
         <a href="/master_topics">业内动态</a>
       </h2>
       <div class="blocks_mid mb25">
@@ -220,7 +220,7 @@
         </ul>
       </div>
       <div class="blocks_mini mr20">
-        <a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" class="block block5_1">行业资讯</a>
+        <a href="/articles?tags=<%= URI.escape("设计相关") %>" class="block block5_1">行业资讯</a>
       </div>
       <div class="blocks_mini">
         <a href="/articles/<%=@articles.first.id%>"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= @articles.first.preview_img%>" width="180" height="170"/></a>
@@ -231,9 +231,9 @@
   <div class="blocks clear">
     <div class="blocks_big mr20">
       <h2 class="tr">
-        <a href="/softwares/tools<%= link_suffix %>" class="fl ft16">应用工具</a>
+        <a href="/softwares/tools" class="fl ft16">应用工具</a>
         <a href="/softwares/case">案例下载</a> |
-        <a href="/softwares/tools<%= link_suffix %>">配色软件</a> |
+        <a href="/softwares/tools">配色软件</a> |
         <a href="javascript:;">APP</a>
       </h2>
       <div class="blocks_mini mr20 mb25">
@@ -248,23 +248,23 @@
         <a href="/softwares/tools" class="block block6_3">应用工具</a>
       </div>
       <div class="blocks_mini">
-        <a href="/softwares/tools<%= link_suffix %>"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks6.4.jpg"%>" /></a>
-        <a href="/softwares/tools<%= link_suffix %>" class="blocks_title ft14">配色软件</a>
+        <a href="/softwares/tools"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks6.4.jpg"%>" /></a>
+        <a href="/softwares/tools" class="blocks_title ft14">配色软件</a>
       </div>
     </div><!-- blocks_big -->
     <div class="blocks_big mr20">
       <h2 class="tr">
         <a href="/art" class="fl ft16">漆光艺彩</a>
         <a href="/art">艺术漆效果</a> |
-        <a href="/7-1<%= link_suffix %>">木器漆效果</a>
+        <a href="/7-1">木器漆效果</a>
       </h2>
       <div class="blocks_mid mb25">
         <a href="/art"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks7.1.jpg"%>" /></a>
         <a href="/art" class="blocks_title ft14">艺术漆效果</a>
       </div>
       <div class="blocks_mini mr20">
-        <a href="/7-1<%= link_suffix %>"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks7.2.jpg"%>" /></a>
-        <a href="/7-1<%= link_suffix %>" class="blocks_title ft14">木器漆效果</a>
+        <a href="/7-1"><img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path "2013/index/blocks7.2.jpg"%>" /></a>
+        <a href="/7-1" class="blocks_title ft14">木器漆效果</a>
       </div>
       <div class="blocks_mini">
         <a href="/art" class="block block7_3">漆光艺彩</a>
@@ -296,10 +296,10 @@
     <img src="<%= asset_path '2013/grey.gif'%>" data-original="<%= asset_path '2013/index/blocks10.gif' %>" usemap="#imap" />
       <map id="imap" name="imap">
           <area shape="rect" coords="0,0,136,136" href="/master_interviews" />
-          <area shape="rect" coords="150,0,286,136" href="/design_images" />
-          <area shape="rect" coords="300,0,435,136" href="/weekly_stars?star_type=<%= URI.escape("每周之星")%><%= link_suffix %>" />
+          <area shape="rect" coords="150,0,286,136" href="/images" />
+          <area shape="rect" coords="300,0,435,136" href="/weekly_stars?star_type=<%= URI.escape("每周之星")%>" />
           <area shape="rect" coords="448,0,584,136" href="/channel/access" />
-          <area shape="rect" coords="597,0,733,136" href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" />
+          <area shape="rect" coords="597,0,733,136" href="/articles?tags=<%= URI.escape("设计相关") %>" />
           <area shape="rect" coords="746,0,883,136" href="/softwares/tools" />
           <area shape="rect" coords="896,0,1032,136" href="/art" />
           <area shape="rect" coords="1044,0,1180,136" href="/designer_events" />

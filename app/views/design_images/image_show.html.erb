@@ -125,7 +125,7 @@ $(function(){
 		<h3 class="tit_tab"><%= @image.title %></h3>
     <div class="imginfo_show pr">
       <div class="imgbase_func ft12 pa btn_group">
-        <%= link_to "", fullscreen_design_image_path(@image), :class =>"icon_fullscreen", :target => "_blank" %>
+        <%= link_to "", "/images/#{@image.id}/fullscreen", :class =>"icon_fullscreen", :target => "_blank" %>
         <%- if current_user %>
           <%=link_to "", user_collects_path(current_user, design_image_id: @image.id), :remote => true, method: :post, :id => "new_message" , :class => "icon_colleting" %>
         <%- else %>
@@ -143,12 +143,15 @@ $(function(){
           </div>
         </div>
       <% if @next_id %>
-        <a href="<%= image_show_design_image_path(@next_id.first.id,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: params[:site].to_i + 1) %>" class="slider_next">next</a>
+        <!-- <a href="<%= image_show_design_image_path(@next_id.first.id,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: params[:site].to_i + 1) %>" class="slider_next">next</a> -->
+        <a href="/images/<%=@next_id.first.id%>/image_show/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=params[:site].to_i + 1%>" class="slider_next">next</a>
       <% else %>
         <a class="slider_next">next</a>
       <% end %>
       <% if @up_id %>
-        <a href="<%=image_show_design_image_path(@up_id.first.id,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: params[:site].to_i - 1)%>" class="slider_prev">prev</a>
+        <!-- <a href="<%=image_show_design_image_path(@up_id.first.id,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: params[:site].to_i - 1)%>" class="slider_prev">prev</a> -->
+        <a href="/images/<%=@up_id.first.id%>/image_show/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=params[:site].to_i - 1%>" class="slider_prev">prev</a>
+
       <% else %>
         <a class="slider_prev">prev</a>
       <% end %>
@@ -336,7 +339,7 @@ $(function(){
       	<h4>标签</h4>
       	<%- @image.all_tags.uniq.each do |tag| %>
               <!-- <span style="font-size:12px;"> -->
-                <a href="<%= design_images_path(tags: tag.id) %>" target="_blank"><%= tag.title %></a>
+                <a href="/images/<%=tag.id%>-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0-0" target="_blank"><%= tag.title %></a>
               <!-- </span> -->
       	<%- end %>
       </div>
@@ -349,7 +352,7 @@ $(function(){
       		<dt>猜你喜欢</dt>
           <%- @like_images.each do |like_image| %>
             <dd>
-              <a href="/design_images/<%= like_image.id %>/image_show">
+              <a href="/images/<%= like_image.id %>/image_show">
                 <%= image_tag(like_image.file.url(:list), size: '178x128', alt: like_image.design.try(:title), title: like_image.design.try(:title))%>
                 <span><%= truncate(like_image.title ? like_image.title : "未命名", length: 15) %></span>
               </a>

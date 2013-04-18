@@ -5,10 +5,8 @@
   <title><%= page_title %></title>
   <%= csrf_meta_tag %>
 
-  <%- unless controller_name == "design_images" %>
     <meta name="Description" content="<%= des_content %>"/>
     <meta name="Keywords" content="<%= keyword_content %>"/>
-  <%- end %>
 
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
@@ -105,11 +103,11 @@
           <li class="pr noborder"><%= link_to "大师作品", "/master_designs", :class => ('active' if controller_name == 'master_designs') %>
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
-          <!-- <li class="noborder"><a href="/master_topics<%= link_suffix %>">业内动态</a></li> -->
+          <!-- <li class="noborder"><a href="/master_topics">业内动态</a></li> -->
         </ul>
       </li>
       <li class="pr">
-        <%= link_to "装修图库", "/design_images", :class => "#{'active' if controller_name == 'design_images'}" %>
+        <%= link_to "装修图库", "/images", :class => "#{'active' if controller_name == 'design_images'}" %>
         <span class="nav_hot"><img src="<%= asset_path "new.png" %>"></span>
       </li>
 
@@ -125,7 +123,7 @@
             <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <li class="pr noborder"><%= link_to "灵感秀", "/inspirations", :class => "#{'active' if controller_name == 'inspirations'}" %></li>
-          <!-- <li class="noborder pr"><a href="/my_show<%= link_suffix %>">我型我秀</a> -->
+          <!-- <li class="noborder pr"><a href="/my_show">我型我秀</a> -->
           <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
           <!-- </li> -->
         </ul>
@@ -167,7 +165,7 @@
           <li><%= link_to "米兰诺艺术效果", "/art", :class => "#{'active' if controller_name == 'function' && action_name == 'art'}" %></li>
           <li class="noborder"><%= link_to "木纹风尚生活", "/7-1", :class => "#{'active' if controller_name == 'function' && action_name == '7-1'}" %></li>
           <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
-          <!-- <li class="noborder"><a href="/7-3<%= link_suffix %>">刷新灵感我绘我家</a></li> -->
+          <!-- <li class="noborder"><a href="/7-3">刷新灵感我绘我家</a></li> -->
         </ul>
         <!-- <span class="nav_hot"><img src="<%= asset_path "new.png"%>" /></span> -->
       </li>
@@ -176,7 +174,7 @@
           <li><%= link_to "设计师活动", "/designer_events", :class => "#{'active' if controller_name == 'designer_events'}" %></li>
           <li><%= link_to "其他活动", "/other_events", :class => "#{'active' if controller_name == 'other_events'}" %></li>
           <li class="noborder"><%= link_to "获奖名单", "/gift_list", :class => "#{'active' if controller_name == 'gifts'}" %></li>
-          <!-- <li class="noborder"><a href="/events<%= link_suffix %>">年度色彩趋势活动</a></li> -->
+          <!-- <li class="noborder"><a href="/events">年度色彩趋势活动</a></li> -->
         </ul>
       </li>
     </ul>
@@ -225,14 +223,14 @@
       <ul>
         <li><a href="/master_interviews" class='fb'>大师殿堂</a></li>
         <li><a href="/master_interviews">大师访谈</a></li>
-        <li><a href="/master_designs<%= link_suffix %>">大师作品</a></li>
+        <li><a href="/master_designs">大师作品</a></li>
       </ul>
       <ul>
-        <li><a href="/design_images<%= link_suffix %>">装修图库</a></li>
+        <li><a href="/images">装修图库</a></li>
       </ul>
       <ul>
-        <li><a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>" class='fb'>设计鉴赏</a></li>
-        <li><a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %><%= link_suffix %>">设计之星</a></li>
+        <li><a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>" class='fb'>设计鉴赏</a></li>
+        <li><a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>">设计之星</a></li>
         <li><a href="/designs">作品展示</a></li>
         <li><a href="/color_designs">色彩配搭</a></li>
         <li><a href="/inspirations">灵感秀</a></li>
@@ -244,31 +242,31 @@
         <li><a href="/channel/access">设计快查</a></li>
         <li><a href="/faqs">装修问答</a></li>
         <li><a href="/faqs#tips">装修贴士</a></li>
-        <li><a href="/mix_colors/new<%= link_suffix %>">配色咨询</a></li>
+        <li><a href="/mix_colors/new">配色咨询</a></li>
         <li><a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a></li>
       </ul>
       <ul>
-        <li><a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>" class='fb'>行业资讯</a></li>
-        <li><a href="/articles?tags=<%= URI.escape("设计相关") %><%= link_suffix %>">装修资讯</a></li>
-        <li><a href="/color_articles<%= link_suffix %>">色彩资讯</a></li>
+        <li><a href="/articles?tags=<%= URI.escape("设计相关") %>" class='fb'>行业资讯</a></li>
+        <li><a href="/articles?tags=<%= URI.escape("设计相关") %>">装修资讯</a></li>
+        <li><a href="/color_articles">色彩资讯</a></li>
         <li><a href="/master_topics">业内动态</a></li>
       </ul>
       <ul>
-        <li><a href="/softwares/tools<%= link_suffix %>" class='fb'>应用工具</a></li>
+        <li><a href="/softwares/tools" class='fb'>应用工具</a></li>
         <li><a href="/softwares/case">案例下载</a></li>
         <li><a href="/softwares/tools">配色软件</a></li>
         <!-- <li><a href="/softwares/app">设计应用软件</a></li> -->
       </ul>
       <ul>
-        <li><a href="/art<%= link_suffix %>" class='fb'>漆光艺彩</a></li>
-        <li><a href="/art<%= link_suffix %>">米兰诺艺术效果</a></li>
-        <li><a href="/7-1<%= link_suffix %>">木纹风尚生活</a></li>
+        <li><a href="/art" class='fb'>漆光艺彩</a></li>
+        <li><a href="/art">米兰诺艺术效果</a></li>
+        <li><a href="/7-1">木纹风尚生活</a></li>
       </ul>
       <ul class="ul_last">
-        <li><a href="/designer_events<%= link_suffix %>" class='fb'>精彩活动</a></li>
-        <li><a href="/designer_events<%= link_suffix %>">设计师活动</a></li>
-        <li><a href="/other_events<%= link_suffix %>">其他活动</a></li>
-        <li><a href="/gift_list<%= link_suffix %>">获奖名单</a></li>
+        <li><a href="/designer_events" class='fb'>精彩活动</a></li>
+        <li><a href="/designer_events">设计师活动</a></li>
+        <li><a href="/other_events">其他活动</a></li>
+        <li><a href="/gift_list">获奖名单</a></li>
       </ul>
     </div>
   </div>

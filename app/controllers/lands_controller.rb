@@ -168,13 +168,13 @@ class LandsController < ApplicationController
 			elsif urls4.include? params[:source]
 				gift_list_path
 			elsif urls_design_images.include? params[:source]
-				design_images_path
+				images_path
 			elsif urls_baicheng.include? params[:source]
 				baicheng_root_path
 			elsif urls_channel_access.include? params[:source]
 				channel_access_path
 			elsif urls_design_imgs.include? params[:source]
-				design_images_path
+				images_path
 			elsif urls_star.include? params[:source]
 				weekly_stars_path
 			else
