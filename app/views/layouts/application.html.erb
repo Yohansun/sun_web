@@ -202,16 +202,16 @@
   <div class='links'>
     <div class='w_995'>
         <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link1.png")), 'http://www.nipponpaint.com.cn/' %>
-        <%= link_to image_tag(asset_path("立邦漆官方网站.png")), 'http://www.nipponpaint.com.cn/' %>
+        <%= link_to image_tag(asset_path("立邦漆官方网站.png")), 'http://www.nipponpaint.com.cn/',target: '_blank' %>
         <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link2.jpeg")), 'http://shop.nipponpaint.com.cn/' %>
-        <%= link_to image_tag(asset_path("立邦漆官方商城.jpeg")), 'http://shop.nipponpaint.com.cn/' %>
+        <%= link_to image_tag(asset_path("立邦漆官方商城.jpeg")), 'http://shop.nipponpaint.com.cn/',target: '_blank' %>
         <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link3.png")), 'http://nipponpaint.tmall.com/shop/viewShop.htm' %>
-        <%= link_to image_tag(asset_path("立邦天猫商城.png")), 'http://nipponpaint.tmall.com/shop/viewShop.htm' %>
+        <%= link_to image_tag(asset_path("立邦天猫商城.png")), 'http://nipponpaint.tmall.com/shop/viewShop.htm',target: '_blank' %>
         <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link4.png")), 'http://www.e-jjj.com/' %>
         <%#= image_tag(asset_path("link4.png")) %>
-        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link5.png")), 'http://www.80018.cn/' %>
-        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link6.png")), 'http://www.pchouse.com.cn/' %>
-        <%= link_to image_tag(asset_path("link9.png")), 'http://jiaju.sina.com.cn/', "target"=>"_blank" %>
+        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link5.png")), 'http://www.80018.cn/',target: '_blank' %>
+        <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link6.png")), 'http://www.pchouse.com.cn/',target: '_blank' %>
+        <%= link_to image_tag(asset_path("link9.png")), 'http://jiaju.sina.com.cn/', target: '_blank' %>
         <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link7.png")), 'http://www.spta.gov.cn/index.html' %>
         <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link8.png")), 'http://www.colorcoordinator.cn/' %>
         <%#= image_tag(asset_path("link7.png")) %>
