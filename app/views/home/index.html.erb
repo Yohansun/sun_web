@@ -188,11 +188,16 @@
         <div class="blocks_mid mt25">
           <h3>装修小贴士</h3>
           <ul class="blocks_tips ft12">
-            <li><a href="/faqs#tips" title="<%=@body[0]%>"><%=@body[0]%></a></li>
-            <p><%= @body[1]%></p>
-            <li><a href="/faqs#tips1" title="<%=@body[2]%>"><%=@body[2]%></a></li>
-            <li><a href="/faqs#tips2" title="<%=@body[4]%>"><%=@body[4]%></a></li>
-            <li><a href="/faqs#tips3" title="<%=@body[6]%>"><%=@body[6]%></a></li>
+            <%- @weekly_tip.each_with_index do |tip, i| %>
+                <%- body = tip.body.split("\r\n\r\n") %>
+                <li><a href="/faqs#tips" title="<%=body[0]%>"><%= body[0]%></a></li>
+                <p><%= truncate(body[1], length:60) %></p>
+            <%- end %>
+            <!-- <li><a href="/faqs#tips" title="<%#=@body[0]%>"><%#=@body[0]%></a></li>
+            <p><%#= @body[1]%></p>
+            <li><a href="/faqs#tips1" title="<%#=@body[2]%>"><%#=@body[2]%></a></li>
+            <li><a href="/faqs#tips2" title="<%#=@body[4]%>"><%#=@body[4]%></a></li>
+            <li><a href="/faqs#tips3" title="<%#=@body[6]%>"><%#=@body[6]%></a></li> -->
           </ul>
         </div>
       </div>

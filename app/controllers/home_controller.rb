@@ -51,8 +51,8 @@ class HomeController < ApplicationController
     @articles = Subject.content("articles").limit(5)
 
     #生活小贴士
-    weekly_tip = WeeklyTip.order("created_at desc").first
-    @body = weekly_tip.body.split("\r\n\r\n")
+    @weekly_tip = WeeklyTip.order("created_at desc").limit 2
+    # @body = weekly_tip.body.split("\r\n\r\n")
 
     @articles = Subject.content("articles").page(params[:page]).per(6)
   end
