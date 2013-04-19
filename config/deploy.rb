@@ -25,23 +25,6 @@ ssh_options[:forward_agent] = true
 
 set :deployer, `whoami`.chomp
 
-def campfire_say(words)
-    campfire = Tinder::Campfire.new 'nio8', token:'398fa673d19f947080feec19139fa877551a7ea2', ssl_options: {verify:false}
-    room = campfire.find_room_by_id('527885')
-    room.speak words
-end
-
-namespace :notify do
-  desc 'Alert Campfire of a deploy'
-  task :campfire_start do
-    campfire_say "[CAP] #{deployer} is deploying #{application} to #{stage}..."
-  end
-
-  task :campfire_end do
-    campfire_say "[CAP] #{deployer} has deployed #{application} to #{stage}, it's cool!"
-  end
-end
-
 # before "deploy:update", "notify:campfire_start"
 # after "deploy:restart", "notify:campfire_end"
 

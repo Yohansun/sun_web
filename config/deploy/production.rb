@@ -15,7 +15,7 @@ set :git_enable_submodules, 1
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/www/rails/icolor"
 set :keep_releases, 5
-set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
+# set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
 
 namespace :deploy do
 
@@ -56,4 +56,4 @@ after "deploy:update","refresh_sitemaps","update_crontab"
 
 require 'capistrano-unicorn'
 
-after "deploy:update", "newrelic:notice_deployment"
+# after "deploy:update", "newrelic:notice_deployment"
