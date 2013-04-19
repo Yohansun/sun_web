@@ -15,7 +15,7 @@
 </head>
 	<body>  
 		<div class="header">
-			<div class="nav pa">
+			<div class="nav">
 				<div class="logo">
 					<a href="/"><img src="<%= asset_path "logo2.png"%>" /></a>
 				</div>
@@ -36,14 +36,21 @@
 		<div class='footer mt50'>
 		<div class='links'>
     <div class='w_995'>
-      <a href='http://www.nipponpaint.com.cn/'><img src="<%= asset_path "link1.png" %>" target="_blank" alt="" /></a>
-      <a href='http://shop.nipponpaint.com.cn/'><img src="<%= asset_path "link2.jpeg" %>" target="_blank" alt="" /></a>
-      <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%= asset_path "link3.png" %>" target="_blank" alt="" /></a>
-      <a href='http://www.e-jjj.com/'><img src="<%= asset_path "link4.png" %>" target="_blank" alt="" /></a>
-      <a href='http://www.80018.cn/'><img src="<%= asset_path "link5.png" %>" target="_blank" alt="" /></a>
-      <a href='http://www.pchouse.com.cn/'><img src="<%= asset_path "link6.png" %>" target="_blank" alt="" /></a>
-      <a href='http://www.spta.gov.cn/index.html'><img src='<%= asset_path "link7.png" %>' target="_blank" alt="" /></a>
-      <a href='http://www.colorcoordinator.cn/'><img src='<%= asset_path "link8.png" %>' target="_blank" alt="" /></a>
+      <!-- <a href='http://www.nipponpaint.com.cn/'><img src="<%#= asset_path "link1.png" %>" target="_blank" alt="" /></a>
+      <a href='http://shop.nipponpaint.com.cn/'><img src="<%#= asset_path "link2.jpeg" %>" target="_blank" alt="" /></a>
+      <a href='http://nipponpaint.tmall.com/shop/viewShop.htm'><img src="<%#= asset_path "link3.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.e-jjj.com/'><img src="<%#= asset_path "link4.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.80018.cn/'><img src="<%#= asset_path "link5.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.pchouse.com.cn/'><img src="<%#= asset_path "link6.png" %>" target="_blank" alt="" /></a>
+      <a href='http://www.spta.gov.cn/index.html'><img src='<%#= asset_path "link7.png" %>' target="_blank" alt="" /></a>
+      <a href='http://www.colorcoordinator.cn/'><img src='<%#= asset_path "link8.png" %>' target="_blank" alt="" /></a> -->
+      <%#= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link1.png")), 'http://www.nipponpaint.com.cn/' %>
+      <%= link_to image_tag(asset_path("立邦漆官方网站.png")), 'http://www.nipponpaint.com.cn/' %>
+      <%= link_to image_tag(asset_path("立邦漆官方商城.jpeg")), 'http://shop.nipponpaint.com.cn/' %>
+      <%= link_to image_tag(asset_path("立邦天猫商城.png")), 'http://nipponpaint.tmall.com/shop/viewShop.htm' %>
+      <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link5.png")), 'http://www.80018.cn/' %>
+      <%= link_to_if request.env['REQUEST_PATH'] == "/", image_tag(asset_path("link6.png")), 'http://www.pchouse.com.cn/' %>
+      <%= link_to image_tag(asset_path("link9.png")), 'http://jiaju.sina.com.cn/', "target"=>"_blank" %>
     </div>
     <!--w_995 ends-->
   </div>
