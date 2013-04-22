@@ -1,0 +1,13 @@
+<%- content_for :head do  %>
+    <%= stylesheet_link_tag "2013base","2013upload" %>
+	<style type="text/css">
+		.servers{background:url(<%= asset_path 'servers.jpg' %>) no-repeat;position:relative;height:671px;margin-bottom:90px;}
+		.servers_btn{position:absolute;bottom:-49px;right:-20px;display:block;}
+		.server_video{padding-top:165px;width:745px;height:411px;margin:0 auto;}
+	</style>
+<%- end %>
+
+<div class="wrapper servers">
+	<div class="server_video"></div>
+	<a class="servers_btn" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank"><img src="<%= asset_path 'servers_btn.png' %>"></a>
+</div><!--ends-->
