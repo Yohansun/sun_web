@@ -334,7 +334,7 @@ $(function(){
 
       <div class="imgs_otherinfo border_bline imgbase_in_tags">
       	<h4>标签</h4>
-      	<%- @image.all_tags.each do |tag| %>
+      	<%- @image.all_tags.uniq.each do |tag| %>
               <!-- <span style="font-size:12px;"> -->
                 <a href="<%= design_images_path(tags: tag.id) %>" target="_blank"><%= tag.title %></a>
               <!-- </span> -->
