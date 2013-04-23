@@ -159,6 +159,8 @@ class DesignImage < ActiveRecord::Base
         DesignImage.available.where("(design_images.edited_color = ? or design_images.edited_color is null) AND (design_images.audited is null or design_images.audited = ?)", false, false).order("design_images.id DESC")
       when 'imageable_id'
         DesignImage.available.where("design_images.imageable_id = ? and design_images.imageable_type = ?", keyword, 'MasterDesign').order("design_images.id DESC")
+      when 'no_audited'
+        DesignImage.available.where("no_audited is true").order("design_images.id DESC")
     end
   end
 
