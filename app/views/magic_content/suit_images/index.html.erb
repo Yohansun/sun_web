@@ -15,9 +15,6 @@
         $(this).parents('form').hide();
         $('.color_form_overlay').hide();
       })
-      if($("#genre").val() == "pub_date"){
-        $('.pub_time').show()
-      }
       $("#genre").change(function(e){
         if($(this).val() == 'pub_date' || $(this).val() == 'al_date'){
           $('.pub_time').show()
@@ -25,9 +22,6 @@
           $('.pub_time').hide()
         }
       })
-      if($("#genre").val() == "al_date"){
-        $('.pub_time').show()
-      }
     });
   </script>
 <%- end %>
