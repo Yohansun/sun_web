@@ -134,11 +134,11 @@
 
       <li class="pr"><%= link_to "业主通道", "/channel/access", :class => "#{'active' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' }" %>
         <ul >
-          <li class="pr"><%= link_to "设计快查", "/channel/access", :class => "#{'active' if controller_name == 'channel'}" %><span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span></li>
+          <li class="pr"><%= link_to "设计快查", "/channel/access", :class => "#{'active' if controller_name == 'channel' && action_name == 'access'}" %><span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span></li>
           <li><%= link_to "装修问答", "/faqs", :class => "#{'active' if controller_name == 'faqs'}" %></li>
           <li><%= link_to "装修贴士", "/faqs#tips" %></li>
           <li><%= link_to "配色咨询", "/mix_colors/new", :class => "#{'active' if controller_name == 'mix_colors'}" %></li>
-          <li class="noborder"><%= link_to "刷新服务", "/channel/refresh_service" %></li>
+          <li class="noborder"><%= link_to "刷新服务", "/channel/refresh_service", :class => "#{'active' if controller_name == 'channel' && action_name == 'refresh_service'}" %></li>
           <!-- <li><a href="/faqs<%= link_suffix %>">装修问答</a></li>
           <li class="noborder"><a href="/mix_colors/new<%= link_suffix %>">配色咨询</a></li> -->
         </ul>
