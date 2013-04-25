@@ -19,6 +19,7 @@ class Design < ActiveRecord::Base
   has_many :design_tags,:class_name => "DesignTags"
   has_many :design_styles, :through => :design_tags,:source => :image_library_category,:conditions => ["image_library_categories.parent_id = 34"]
   belongs_to :story, :counter_cache => true
+
   has_one :baicheng_event
   #最新的一张作品图片
   has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
