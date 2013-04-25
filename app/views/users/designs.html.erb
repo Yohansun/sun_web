@@ -51,7 +51,7 @@
                 end
               -%>
               <%= forward_links("#iColor分享#来自#{text}#{role}#{design.user.display_name}的作品【#{design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
-              <p>风格：<%= design.style %></p>
+              <p>风格：<%= design.design_style_names %></p>
             </li>
             <% end -%>
           </ul>

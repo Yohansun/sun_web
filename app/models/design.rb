@@ -16,6 +16,8 @@ class Design < ActiveRecord::Base
   has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
   has_many :color_codes
   has_many :collects, :dependent => :destroy
+  has_many :design_tags,:class_name => "DesignTags"
+  has_many :design_styles, :through => :design_tags,:source => :image_library_category,:conditions => ["image_library_categories.parent_id = 34"]
   has_one :baicheng_event
   #最新的一张作品图片
   has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
@@ -27,6 +29,10 @@ class Design < ActiveRecord::Base
   after_create :update_user_design_code_count
   after_update :sync_baicheng_event
   before_destroy :clear_baicheng_event
+  
+  def design_style_names
+    design_styles.map(&:title).join(',')
+  end
 
   #更新用户上传作品数色号（权重）。片区快查用
   def update_user_design_code_count
