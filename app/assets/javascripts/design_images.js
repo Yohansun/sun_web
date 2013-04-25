@@ -19,7 +19,14 @@ jQuery(document).ready(function($) {
   });
 
   $(".pinyin_list a").each(function (){
-    var pinyin = getParameterByName("pinyin");
+    // var pinyin = getParameterByName("pinyin");
+    worth = _.last(window.location.href.split("/images/")).split("-");
+    worth = worth.reverse();
+    if(worth.length > 2){
+      var pinyin = worth[4]
+    }else{
+      var pinyin = worth[5]
+    }
     if($(this).text() == pinyin) {
       $(this).addClass("highlight");
     }
@@ -29,7 +36,7 @@ jQuery(document).ready(function($) {
 function getParameterByName(name)
 {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regexS = "[\\?-]" + name + "=([^-#]*)";
   var regex = new RegExp(regexS);
   var results = regex.exec(window.location.search);
   if(results == null)
@@ -44,7 +51,7 @@ function add_tag (parent_id, id) {
   } else {
     tags[parent_id] = id;
   }
-  refresh_search({tags: _.uniq(_.compact(tags)).join(",")});
+  refresh_search({tags: _.uniq(_.compact(tags)).join("-")});
 }
 
 function add_all_tag (id) {
@@ -99,15 +106,27 @@ function delete_pinyin() {
 // }
 
 function refresh_search(params) {
-  var imageable_type = getParameterByName("imageable_type");
-  var search = getParameterByName("search");
-  var tags = getParameterByName("tags");
-  var all_tags = getParameterByName("all_tags");
-  var area_id = getParameterByName("area_id");
-  var pinyin = getParameterByName("pinyin");
-  var ranking_list = getParameterByName("ranking_list");
-
-  if (params.imageable_type != null) imageable_type = params.imageable_type;
+  worth = _.last(window.location.href.split("/images/")).split("-");
+  worth = worth.reverse();
+  if(worth.length > 2){
+  var imageable_type = worth[7]
+  var ranking_list = worth[6]
+  var area_id = worth[5]
+  var pinyin = worth[4]
+  var search = worth[3]
+  var all_tags = worth[2]
+  var page = worth[1]
+  }else{
+    var imageable_type = worth[8]
+    var ranking_list = worth[7]
+    var area_id = worth[6]
+    var pinyin = worth[5]
+    var search = worth[4]
+    var all_tags = worth[3]
+    var page = worth[2]
+  }
+  // var url = "";
+  if (params.imageable_type != null) imageable_type = params.imageable_type;  
   if (params.search != null) search = params.search;
   if (params.tags != null) tags = params.tags;
   if (params.all_tags != null) all_tags = params.all_tags;
@@ -117,6 +136,52 @@ function refresh_search(params) {
 
   if (params.imageable_type != undefined) search = "";
   if (params.search != undefined) imageable_type = "";
+  
+  if(params.tags != null){
+    var tags = params.tags.split('-');
+   for(var i = 10 - tags.length; i --;){
+      tags.push(0);
+   }
+   tags = tags.join('-') + '-';
+  } else {
+    var tags = '';
+    if(worth.length > 2){
+      var arr = worth.splice(worth.length - 10)
+      for (var i = 1; i <= 10; i++) {
+        if(arr[i] != undefined){
+          tags += arr[i] + "-"
+        }
+      }
 
-  window.location = "/design_images?imageable_type="+imageable_type+"&pinyin="+pinyin+"&search="+search+"&tags="+tags+"&all_tags="+all_tags+"&area_id="+area_id+"&ranking_list="+ranking_list;
+    }else{
+      for (var i = 0; i < 10; i++) {
+       tags += "0" + "-"
+      }
+    }
+  }
+
+
+  if(imageable_type == null || imageable_type == 0 || imageable_type == 'undefined'){
+    imageable_type = 'all'
+  }
+  if(ranking_list == null || ranking_list == 0 || ranking_list == 'undefined'){
+    ranking_list = '0'
+  }
+  if(area_id == null || area_id == 0 || area_id == 'undefined'){
+    area_id = '0'
+  }
+  if(pinyin == null || pinyin == 0 || pinyin == 'undefined'){
+    pinyin = '0'
+  }
+  if(search == null || search == "_" || search == 'undefined'){
+    search = '_'
+  }
+  if(all_tags == null || all_tags == 0 || all_tags == 'undefined'){
+    all_tags = '0'
+  }
+  if(page == null || page == 0 || page == 'undefined'){
+    page = '0'
+  }
+
+  window.location = "/images/" + tags + imageable_type + "-" + ranking_list + "-" + area_id + "-" + pinyin + "-" + search + "-" + all_tags + "-" + 0 + "-" + "0";
 }

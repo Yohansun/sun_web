@@ -79,6 +79,12 @@ module ApplicationHelper
         elsif controller_name == 'master_designs' && action_name == 'show'
           "【#{@master_design.design_name} | #{@master_design.master_profile.try(:name) || @master_design.master_name}】- 室内空间大师" + '-' + BASE_TITLE
         #装修图库
+        elsif controller_name == 'design_images' && action_name == 'index'
+          if @content.present?
+            @content + "立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+          else
+            "【装修图库】- 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+          end
         elsif controller_name == 'design_images'
           "【装修图库】" + BASE_TITLE
         #设计之星
@@ -209,6 +215,12 @@ module ApplicationHelper
       "立邦iColor装修设计鉴赏带您欣赏顶级的国际、港澳台、国内知名室内空间设计大师以及色彩设计大师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'master_designs' && action_name == 'show'
       "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name},还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
+    elsif controller_name == 'design_images' && action_name == 'index'
+      if @content.present?
+        "立邦 iColor装修图库，精心挑选" + @content + "满足您的个性化装修需求。"
+      else
+        "立邦 iColor 装修图库"
+      end
     #设计之星
     elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
       star_descript1 + '【每周之星】' + star_descript2
@@ -378,6 +390,12 @@ module ApplicationHelper
       designer_events_key
     elsif controller_name == 'gifts' && action_name == 'index'
       designer_events_key
+    elsif controller_name == 'design_images' && action_name == 'index'
+      if @content.present?
+        @content.gsub(/、/,',') + "立邦 iColor 装修图库"
+      else
+        "立邦 iColor 装修图库"
+      end
     else
       "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
     end

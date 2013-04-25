@@ -60,13 +60,13 @@
 						html  = $curr.find('div').html();
 					$curr.addClass('imgbase_curr').siblings().removeClass('imgbase_curr');
 					$view.text(views);
-					$full.attr('href', '/design_images/' + full + '/fullscreen');
+					$full.attr('href', '/images/' + full + '/fullscreen');
 					$collect.attr('href', '/users/' + full + '/collects?design_image_id=' + full);
 					$down.attr('href', '/design_images/' + full + '/download');
 					$info.html(html);
 					$conte.html($curr.find('.imginfo_big_txt').html());
           $colorsbox.html($curr.find('.colorsbox').html());
-          <% if !params[:page].present? %>
+          <% if !params[:page].present? || params[:page].to_i == 0 %>
 	          if(num == 0 ){
 	          	$("#prev").hide();
 	          }else{
@@ -86,16 +86,19 @@
 			});
 // console.log($('.imgbase_list').children().last().data('full'))
 
-			<% if params[:page].present? %>
+			<% if params[:page].present? &&  params[:page].to_i != 0 %>
 				$('#prev').show();
 				$('#prev').click(function(event) {
 					var li_index = $list.find('.imgbase_curr').index();
 					event.preventDefault()
 					if(li_index == 0){
 					 	<% if  (params[:page].to_i - 1) == 1 %>
-					 		window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:return => 1)) %>"
+					 		//window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:return => 1)) %>"
+              ///0-0-0-0-0-0-0-0-0-all-view_count-3-B-a-0-0
+                window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-0-1"
 					 	<% else %>
-					 		window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page - 1),:return => 1))%>"
+					 		// window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page - 1),:return => 1))%>"
+              window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=@images.current_page - 1%>-1"
 					 	<% end %>
 					}
 				})
@@ -113,7 +116,8 @@
 				$('#next').click(function(event) {
 					var li_index = $list.find('.imgbase_curr').index();
 					if(li_index == 10){
-						window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page + 1))) %>"
+						// window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page + 1))) %>"
+            window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=@images.current_page + 1%>-0"
 					}
 				});
 			<% end %>
@@ -159,9 +163,17 @@
       <%- end -%>
     <%- end -%>
   <%- end -%>
+  function search_sub(){
+  var search = $("#search_query_value").val();
+  if(search == "" || search == null){
+    window.location = "/images"
+  }else{
+    window.location = "/images/0-0-0-0-0-0-0-0-0-all-0-0-0-" + search + "-0-0-0"
+  }
+}
   </script>
 <%- end %>
-<% if params[:return].present? %>
+<% if params[:return].present? && params[:return].to_i == 1 %>
 <script type="text/javascript">
 $(function(){
   setTimeout(function(){
@@ -176,16 +188,16 @@ $(function(){
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<div class="clear">
 			<div class="fr imgbase_search">
-				<form action='/design_images' method='get' style="display:inline">
-					<input type="text" name='search' value="<%= params[:search] %>" id="search_query_value"><button type="submit">搜图</button>
+				<form action='/images/' method='get' style="display:inline">
+					<input type="text" name='search' value="<%= params[:search] if params[:search].present? && params[:search].to_s != "_"%>" id="search_query_value"><button type="button"  onclick="search_sub()">搜图</button>
 				</form>
 				<span>热门搜索：
 					<%- if MagicSetting.color_tag.present? %>
-						<a href="/design_images?search=<%= MagicSetting.color_tag %>"><%= MagicSetting.color_tag %></a>
+						<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-<%= MagicSetting.color_tag %>-0-0-0"><%= MagicSetting.color_tag %></a>
 					<%- end %>
-					<a href="/design_images?search=小户型">小户型</a>
-					<a href="/design_images?search=客厅">客厅</a>
-					<a href="/design_images?search=简约">简约</a>
+					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-小户型-0-0-0">小户型</a>
+					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-客厅-0-0-0">客厅</a>
+					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-简约-0-0-0">简约</a>
 				</span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
@@ -194,10 +206,10 @@ $(function(){
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="/design_images" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "") %>">所有图片</a>
-				<a href="/design_images?imageable_type=MasterDesign" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-        <a href="/design_images?imageable_type=WeekStart" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
-				<a href="/design_images?imageable_type=ColorDesign" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
+				<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0-0" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "" || params[:imageable_type] == "all") %>">所有图片</a>
+				<a href="/images/0-0-0-0-0-0-0-0-0-0-MasterDesign-0-0-0-_-0-0-0" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+        <a href="/images/0-0-0-0-0-0-0-0-0-0-WeekStart-0-0-0-_-0-0-0" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
+				<a href="/images/0-0-0-0-0-0-0-0-0-0-ColorDesign-0-0-0-_-0-0-0" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩搭配</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -214,11 +226,11 @@ $(function(){
 						<fieldset class="clear">
 							<label class="fl"><%= category.title %>：</label>
 							<span>
-								<a href="/design_images?tags=<%=category.id%>"
+								<a href="/images?tags=<%=category.id%>"
                   data-parent-id='<%= category.id %>' data-tag-id='<%= category.id %>'
                   class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
 								<%- category.children.each do |cate_child| %>
-									<a href="/design_images?tags=<%= cate_child.id %>"
+									<a href="/images?tags=<%= cate_child.id %>"
                     data-parent-id='<%= category.id %>' data-tag-id='<%= cate_child.id %>'
                     class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
 								<%- end %>
@@ -238,32 +250,32 @@ $(function(){
 				</fieldset>
 				<fieldset class="lastfield pinyin_list clear">
 					<label class="fl">拼音检索：</label>
-					<a href="/design_images?pinyin=A">A</a>|
-          <a href="/design_images?pinyin=B">B</a>|
-          <a href="/design_images?pinyin=C">C</a>|
-          <a href="/design_images?pinyin=D">D</a>|
-          <a href="/design_images?pinyin=E">E</a>|
-          <a href="/design_images?pinyin=F">F</a>|
-          <a href="/design_images?pinyin=G">G</a>|
-          <a href="/design_images?pinyin=H">H</a>|
-          <a href="/design_images?pinyin=I">I</a>|
-          <a href="/design_images?pinyin=J">J</a>|
-          <a href="/design_images?pinyin=K">K</a>|
-          <a href="/design_images?pinyin=L">L</a>|
-          <a href="/design_images?pinyin=M">M</a>|
-          <a href="/design_images?pinyin=N">N</a>|
-          <a href="/design_images?pinyin=O">O</a>|
-          <a href="/design_images?pinyin=P">P</a>|
-          <a href="/design_images?pinyin=Q">Q</a>|
-          <a href="/design_images?pinyin=R">R</a>|
-          <a href="/design_images?pinyin=S">S</a>|
-          <a href="/design_images?pinyin=T">T</a>|
-          <a href="/design_images?pinyin=U">U</a>|
-          <a href="/design_images?pinyin=V">V</a>|
-          <a href="/design_images?pinyin=W">W</a>|
-          <a href="/design_images?pinyin=X">X</a>|
-          <a href="/design_images?pinyin=Y">Y</a>|
-          <a href="/design_images?pinyin=Z">Z</a>
+					<a href="/images?pinyin=A">A</a>|
+          <a href="/images?pinyin=B">B</a>|
+          <a href="/images?pinyin=C">C</a>|
+          <a href="/images?pinyin=D">D</a>|
+          <a href="/images?pinyin=E">E</a>|
+          <a href="/images?pinyin=F">F</a>|
+          <a href="/images?pinyin=G">G</a>|
+          <a href="/images?pinyin=H">H</a>|
+          <a href="/images?pinyin=I">I</a>|
+          <a href="/images?pinyin=J">J</a>|
+          <a href="/images?pinyin=K">K</a>|
+          <a href="/images?pinyin=L">L</a>|
+          <a href="/images?pinyin=M">M</a>|
+          <a href="/images?pinyin=N">N</a>|
+          <a href="/images?pinyin=O">O</a>|
+          <a href="/images?pinyin=P">P</a>|
+          <a href="/images?pinyin=Q">Q</a>|
+          <a href="/images?pinyin=R">R</a>|
+          <a href="/images?pinyin=S">S</a>|
+          <a href="/images?pinyin=T">T</a>|
+          <a href="/images?pinyin=U">U</a>|
+          <a href="/images?pinyin=V">V</a>|
+          <a href="/images?pinyin=W">W</a>|
+          <a href="/images?pinyin=X">X</a>|
+          <a href="/images?pinyin=Y">Y</a>|
+          <a href="/images?pinyin=Z">Z</a>
 				</fieldset>
 				<a href="javascript:;" class="<%= params["tags"].blank? ? "pa imgbase_toggle form_expand" : "pa imgbase_toggle" %>">展开</a>
       <% end %>
@@ -274,11 +286,11 @@ $(function(){
 							<fieldset class="clear">
 								<label class="fl"><%= child_lv2.title %>：</label>
 								<span>
-									<a href="/design_images?tags=<%= child_lv2.id %>"
+									<a href="/images?tags=<%= child_lv2.id %>"
                     data-parent-id='<%= child_lv2.id %>' data-tag-id='<%= child_lv2.id %>'
                     value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
 									<%- child_lv2.children.each do |child_lv3| %>
-										<a href="/design_images?tags=<%= child_lv2.id %>,<%= child_lv3.id %>"
+										<a href="/images?tags=<%= child_lv2.id %>,<%= child_lv3.id %>"
                       data-parent-id='<%= child_lv2.id %>' data-tag-id='<%= child_lv3.id %>'
                       value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
 									<%- end %>
@@ -292,23 +304,24 @@ $(function(){
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
 	<div class="search_bin clear">
-		<a href="/design_images?ranking_list=like" data-rank='like' class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
-		<a href="/design_images?ranking_list=view_count" data-rank='view_count' class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="/design_images" class="fr <%= "curr_rank" if (params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
-		<%- if @query_params_index.present? || @area_names.present? || params[:pinyin].present? %>
+		<a href="/images?ranking_list=like" data-rank='like' class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
+		<a href="/images?ranking_list=view_count" data-rank='view_count' class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
+		<a href="/images" class="fr <%= "curr_rank" if (params[:ranking_list] == "0" || params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
+		<%- if @query_params_index.present? || @area_names.present? || (params[:pinyin].present? && params[:pinyin].to_i != 0)%>
 			<p class="srch-items">
 				您的选择：
 				<%- @query_tags.each do |tag| %>
-					<span class="srch-span"><%= tag.parent.try(:title) %>: <i><%= tag.try(:title) %></i><a href="javascript:add_tag(<%= tag.parent_id %>, <%= tag.id %>);" class="srch-del">删除</a></span>
+          <% next if tag.blank? %>
+					<span class="srch-span"><%= tag.parent.title %>: <i><%= tag.title %></i><a href="javascript:add_tag(<%= tag.parent_id %>, <%= tag.id %>);" class="srch-del">删除</a></span>
 				<%- end %>
-				<%- if params[:pinyin].present? %>
+				<%- if params[:pinyin].present? && params[:pinyin].to_s != "0" %>
 					<span class="srch-span">拼音: <i><%= params[:pinyin] %></i><a href="javascript:delete_pinyin();" class="srch-del">删除</a></span>
 				<%- end %>
 				<%- if @area_names.present? %>
 					<span class="srch-span">地区: <i><%= @area_names %></i><a href="javascript:delete_submit_area();" class="srch-del">删除</a></span>
 				<%- end %>
 				<span class="srch-divider">|</span>
-				<button class="srch-span" onclick="javascript:window.location='<%= design_images_path(imageable_type: params[:imageable_type],ranking_list: params[:ranking_list]) %>';">重新选择</button>
+				<button class="srch-span" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0%>-0-0-_-0-0-0';">重新选择</button>
 			</p>
 		<%- end %>
 	</div><!-- search_bin -->
@@ -317,7 +330,7 @@ $(function(){
 		<div class="imgbase_area clear">
 			<div class="imgbase_bin fl pr">
 				<div class="imgbase_func ft12 pa btn_group">
-					<%= link_to "", fullscreen_design_image_path(@images.first.id), :class =>"icon_fullscreen", :id =>"imgbase_full", :target => '_blank' %>
+					<%= link_to "", "/images/#{@images.first.id}/fullscreen", :class =>"icon_fullscreen", :id =>"imgbase_full", :target => '_blank' %>
 					<%- if current_user %>
 						<%=link_to "", user_collects_path(current_user, design_image_id: @images.first.id), :remote => true, method: :post, :id => "new_message" , :class => "icon_colleting" %>
 					<%- else %>
@@ -421,10 +434,17 @@ $(function(){
 			</div><!-- imgbase_bin -->
 
 			<ul class="imgbase_list">
-				<% site =  params[:page] ? (params[:page].to_i - 1) * 11 : 0 * 11 %>
+				<%
+         if params[:page].present? && params[:page].to_i != 0
+          site = (params[:page].to_i - 1) * 11
+         else
+          site =  0 * 11 
+         end
+        %>
 				<%- @images.each_with_index do |image, index| %>
 					<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-						<a href="<%= image_show_design_image_path(image,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: site + (index + 1)) %>" target="_blank">
+						<!-- <a href="<%= image_show_design_image_path(image,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: site + (index + 1)) %>" target="_blank"> -->
+						<a href="/images/<%=image.id%>/image_show/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=site + (index + 1)%>" target="_blank">
 							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title), title: image.design.try(:title)) %>
 							<p><%= truncate(image.title, length: 15) %></p>
 							<span></span>
