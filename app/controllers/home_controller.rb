@@ -55,6 +55,8 @@ class HomeController < ApplicationController
     # @body = weekly_tip.body.split("\r\n\r\n")
 
     @articles = Subject.content("articles").page(params[:page]).per(6)
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def search

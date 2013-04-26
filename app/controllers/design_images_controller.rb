@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # -*- encoding : utf-8 -*-
 class DesignImagesController < ApplicationController
   caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
@@ -120,6 +122,8 @@ class DesignImagesController < ApplicationController
     @images.each do |image|
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
     end
+
+    expires_in 30.minutes, 'max-stale' => 1.hours, :public => true
   end
 
   def image_tag
