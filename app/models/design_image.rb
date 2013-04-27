@@ -123,7 +123,7 @@ class DesignImage < ActiveRecord::Base
     end
   end
 
-  def self.search_with(genre, keyword)
+  def self.search_with(genre, keyword, start_date, end_date)
     case genre
       when 'yes_color'
         DesignImage.available.where("(color1 is not null or color2 is not null or color3 is not null) and edited_color is false")
@@ -161,6 +161,14 @@ class DesignImage < ActiveRecord::Base
         DesignImage.available.where("design_images.imageable_id = ? and design_images.imageable_type = ?", keyword, 'MasterDesign').order("design_images.id DESC")
       when 'no_audited'
         DesignImage.available.where("no_audited is true").order("design_images.id DESC")
+      when 'pub_time'
+        DesignImage.available.where(:created_at => (start_date.to_time)..(end_date.to_time + 1.day)).order("design_images.id DESC")
+      when 'al_time'
+        DesignImage.available.where(:updated_at => (start_date.to_time)..(end_date.to_time + 1.day)).order("design_images.id DESC")
+      when 'pub_date'
+        DesignImage.available.where("(created_at >= :start_date AND created_at <= :end_date) AND (design_images.imageable_type = 'MasterDesign')",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}).order("design_images.id DESC")
+      when 'al_date'
+        DesignImage.available.where("(updated_at >= :start_date AND updated_at <= :end_date) AND (design_images.imageable_type = 'MasterDesign')",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}).order("design_images.id DESC")
     end
   end
 

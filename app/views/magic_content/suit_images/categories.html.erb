@@ -34,6 +34,14 @@
       iColor.ImageLibrary.bindEvents();
     });
     $(function() {
+      $(".expand-image").click(function(){
+          if($('.expand-image').text() == "收缩")
+          {
+            $('.js-tab-image-childen').hide()
+          }else{
+            $('.js-tab-image-childen').show()
+          }
+      })
       $(".image-thumbnail").hover(
         function () {
           $(this).tooltip('show');
@@ -46,10 +54,15 @@
     $(document).ready(function(){
       $('#ex1').zoom(); 
     });
+    $(function(){
+      $('.js-hover li').hover(function(){
+        $(this).find('.thumbnail_big').toggle()
+    })
+    })
 	</script>
 <%- end %>
 
-<div class="content tags_main">
+<div class="content content_image tags_main">
   <%= render partial: 'layouts/flash_message' %>
   <%= render partial: 'image_with_tags', locals: { image: @image, categories: @categories, image_tag_ids: @image_tag_ids } %>
 </div>

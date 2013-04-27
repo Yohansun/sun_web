@@ -3,6 +3,7 @@ class ImageLibrary
   bindEvents: =>
     this.previous_next_image()
     this.tag_expand()
+    this.tag_expands()
     this.tag_toggle()
 
   previous_next_image: ->
@@ -63,6 +64,26 @@ class ImageLibrary
       dom = $(event.currentTarget)
       tag_id = dom.data('tag-id')
       $('.js-tab-'+tag_id+'-childen').toggleClass('expand')
+      if  tag_id == 1 ||tag_id == 19 ||tag_id == 28 || tag_id == 122 || tag_id == 127 || tag_id == 132 || tag_id is 136 || tag_id is 210 || tag_id is 34 || tag_id is 62 || tag_id is 82 || tag_id is 107
+        if dom.hasClass('expand')
+          dom.removeClass('expand')
+          dom.html('收缩')
+        else
+          dom.addClass('expand')
+          dom.html('展开')
+      else
+        if dom.hasClass('expand')
+          dom.removeClass('expand')
+          dom.html('展开')
+        else
+          dom.addClass('expand')
+          dom.html('收缩')
+
+  tag_expands: ->
+    $('.container h2 span').live 'click', (event) ->
+      dom = $(event.currentTarget)
+      tag_id = dom.data('tag-id')
+      $('.js-tab-'+tag_id+'-childen').toggleClass('expand')
       if tag_id is 136 || tag_id is 210
         if dom.hasClass('expand')
           dom.removeClass('expand')
@@ -77,6 +98,7 @@ class ImageLibrary
         else
           dom.addClass('expand')
           dom.html('收缩')
+
 
   init_area_selection: (area_data, image_area_id, areas) ->
     options = { data: area_data }
