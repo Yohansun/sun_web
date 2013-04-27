@@ -2,12 +2,12 @@
 
 module MagicContent
   class ImageLibrariesController < BaseController
-    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page]
+    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :no_audited]
 
     def index
-      @images = DesignImage.available.order("design_images.id DESC")
+      @images = DesignImage.available.where("no_audited is false").order("design_images.id DESC")
       if params[:genre].present?
-        if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
+        if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color' || params[:genre] == 'no_audited'
           @images = DesignImage.search_with(params[:genre], 'last_updated_at')
         else
           @images = DesignImage.search_with(params[:genre], params[:keywords]) if params[:keywords].present?
@@ -144,6 +144,23 @@ module MagicContent
         flash[:notice] = "审核成功！"
       else
         flash[:alert] = "审核未成功！#{@image.errors.full_messages}"
+      end
+      if params[:genre].present?
+        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+      else
+        redirect_to image_libraries_path
+      end
+    end
+
+    def no_audited
+      @image = DesignImage.find(params[:image_library_id])
+      @image.last_user_id = current_admin.id
+      @image.last_updated_at = Time.now
+      @image.no_audited = true
+      if @image.save
+        flash[:notice] = "不予审核成功！"
+      else
+        flash[:alert] = "不予审核未成功！#{@image.errors.full_messages}"
       end
       if params[:genre].present?
         redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
