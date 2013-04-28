@@ -7,7 +7,45 @@
 	</style>
 <%- end %>
 
+<%- content_for :tail do %>
+	<%= javascript_include_tag "2013main.js", "/Scripts/swfobject_modified.js" %>
+	<script type="text/javascript">
+      swfobject.registerObject("FLVPlayer");
+   </script>
+<%- end %>
+
 <div class="wrapper servers">
-	<div class="server_video"></div>
-	<a class="servers_btn" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank"><img src="<%= asset_path 'servers_btn.png' %>"></a>
+	<div class="server_video" align="center">
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="746" height="412" id="FLVPlayer">
+		<param name="movie" value="/flash/FLVPlayer_Progressive.swf" />
+		<param name="quality" value="high" />
+		<param name="wmode" value="opaque" />
+		<param name="scale" value="noscale" />
+		<param name="salign" value="lt" />
+		<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/flash/servers_4min&amp;autoPlay=false&amp;autoRewind=false" />
+		<param name="swfversion" value="8,0,0,0" />
+		<!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+		<param name="expressinstall" value="/Scripts/expressInstall.swf" />
+		<!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+		<!--[if !IE]>-->
+		<object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="746" height="412">
+		<!--<![endif]-->
+		<param name="quality" value="high" />
+		<param name="wmode" value="opaque" />
+		<param name="scale" value="noscale" />
+		<param name="salign" value="lt" />
+		<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/flash/servers_4min&amp;autoPlay=false&amp;autoRewind=false" />
+		<param name="swfversion" value="8,0,0,0" />
+		<param name="expressinstall" value="/Scripts/expressInstall.swf" />
+		<!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+		<div>
+		<h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
+		</div>
+		<!--[if !IE]>-->
+		</object>
+		<!--<![endif]-->
+		</object>
+		</div>
+	<a class="servers_btn" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/"><img src="<%= asset_path 'servers_btn.png' %>"></a>
 </div><!--ends-->
