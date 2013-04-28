@@ -34,6 +34,7 @@ module ApplicationHelper
   #                      "register"     => " "
   # }
 
+
   def page_title
         #首页
         if  controller_name == 'home'
@@ -80,13 +81,29 @@ module ApplicationHelper
           "【#{@master_design.design_name} | #{@master_design.master_profile.try(:name) || @master_design.master_name}】- 室内空间大师" + '-' + BASE_TITLE
         #装修图库
         elsif controller_name == 'design_images' && action_name == 'index'
+          s1 = ""
+          s2 = ""
           if @content.present?
-            @content + "立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+            if @content[0..10].present?
+              @content[0..10].each do |c|
+                if c.present?
+                  s1 += c
+                end
+              end
+            end
+            if @content[11..25].present?
+              @content[11..25].each do |content|
+                if content.present?
+                  s2 += content + "、"
+                end
+              end
+            end
+            "" + s1 + "装修图片大全，您可以设计自己的" + s2 + " 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           else
-            "【装修图库】- 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+             "风格、调性、面积、费用、户型、色彩、用途、人群、图片、拼音检索、装修图片大全，您可以设计自己的 空间、家具、灯具、布艺、漆面、饰品、家电、橱柜、卫浴、瓷砖、地板、用品、门窗、数码、其他、装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           end
         elsif controller_name == 'design_images'
-          "【装修图库】" + BASE_TITLE
+           "风格、调性、面积、费用、户型、色彩、用途、人群、图片、拼音检索、装修图片大全，您可以设计自己的 空间、家具、灯具、布艺、漆面、饰品、家电、橱柜、卫浴、瓷砖、地板、用品、门窗、数码、其他、装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
         #设计之星
         elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
           "【每周之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
@@ -217,9 +234,27 @@ module ApplicationHelper
       "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name},还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'design_images' && action_name == 'index'
       if @content.present?
-        "立邦 iColor装修图库，精心挑选" + @content + "满足您的个性化装修需求。"
+        s1 = ""
+        s2 = ""
+        if @content.present?
+          if @content[0..10].present?
+            @content[0..10].each do |c|
+              if c.present?
+                s1 += c
+              end
+            end
+          end
+          if @content[11..25].present?
+            @content[11..25].each do |content|
+              if content.present?
+                s2 += content
+              end
+            end
+          end
+        end
+        "立邦 iColor装修图库，精心挑选" + s1 + "2013装修图片大全，方便您设计自己的" + s2 + "装修效果图，满足您的个性化装修需求。"
       else
-        "立邦 iColor 装修图库"
+        "立邦 iColor装修图库，精心挑选 2013装修图片大全，方便您设计自己的按空间 装修效果图，满足您的个性化装修需求。"
       end
     #设计之星
     elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
@@ -392,9 +427,15 @@ module ApplicationHelper
       designer_events_key
     elsif controller_name == 'design_images' && action_name == 'index'
       if @content.present?
-        @content.gsub(/、/,',') + "立邦 iColor 装修图库"
+        content = ""
+        @content.each do |c|
+          if c.present?
+            content += c + ","
+          end
+        end
+        content
       else
-        "立邦 iColor 装修图库"
+        ""
       end
     else
       "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"

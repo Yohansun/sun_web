@@ -40,7 +40,7 @@ class DesignImagesController < ApplicationController
   end
 
   def index
-    @content = ""
+    @content = []
     @images = DesignImage.available.audited_with_colors
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
@@ -54,12 +54,43 @@ class DesignImagesController < ApplicationController
       tag_arrs = []
       @tag_ids.each do |tag_arr|
         if tag_arr.to_i != 0
+          tag = ImageLibraryCategory.find tag_arr
+          tag_id = 0
+          if tag.parent_id.present? && tag.parent_id != 210
+            tag_id = tag.parent_id
+          else
+            tag_id = tag.id
+          end
+          @content[1] = "按风格" if tag_id == 34  
+          @content[2] = "按调性" if tag_id == 62  
+          @content[3] = "按面积" if tag_id == 28  
+          @content[4] = "按费用" if tag_id == 19  
+          @content[5] = "按户型" if tag_id == 1  
+          @content[6] = "按色彩" if tag_id == 107 
+          @content[7] = "按用途" if tag_id == 122
+          @content[8] = "按人群" if tag_id == 127
+          @content[9] = "按图片" if tag_id == 132
+          @content[10] = "按空间" if tag_id == 82  
+          @content[12] = "按家具" if tag_id == 211 
+          @content[13] = "按灯具" if tag_id == 212 
+          @content[14] = "按布艺" if tag_id == 213
+          @content[15] = "按漆面" if tag_id == 214  
+          @content[16] = "按饰品" if tag_id == 215  
+          @content[17] = "按家电" if tag_id == 216  
+          @content[18] = "按橱柜" if tag_id == 217
+          @content[19] = "按卫浴" if tag_id == 218
+          @content[20] = "按瓷砖" if tag_id == 219
+          @content[21] = "按地板" if tag_id == 220
+          @content[22] = "按用品" if tag_id == 221
+          @content[23] = "按门窗" if tag_id == 222
+          @content[24] = "按数码" if tag_id == 223
+          @content[25] = "按其他" if tag_id == 224
+
           tag_arrs << tag_arr
         end
       end
       if tag_arrs.present?
         @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
-        @tags.map {|tag| @content += tag.title + "、"}
         final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
         @images = @images.search_tags(final_tags.map(&:id))
         @tag_names << final_tags.map(&:title)
@@ -68,7 +99,7 @@ class DesignImagesController < ApplicationController
 
     if params[:area_id].present? && params[:area_id].to_s != "0"
       area = Area.find(params[:area_id])
-      @content += area.parent.name + "、"
+      @content[0] = area.parent.name 
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
       @area_names = area.self_and_ancestors.map(&:name).join(" ")
@@ -78,7 +109,6 @@ class DesignImagesController < ApplicationController
 
     if params[:search].present? && params[:search].to_s != "_"
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
-      tags.map { |tag| @content += tag.title + "、" }
       @images = @images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
@@ -93,7 +123,7 @@ class DesignImagesController < ApplicationController
 
     if params[:pinyin].present? && params[:pinyin].to_s != "0"
       tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
-      tags.map { |tag| @content += tag.title + "、" }
+      @content[11] = params[:pinyin]
       @images = @images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
@@ -122,7 +152,6 @@ class DesignImagesController < ApplicationController
     @images.each do |image|
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
     end
-
     expires_in 30.minutes, 'max-stale' => 1.hours, :public => true
   end
 
