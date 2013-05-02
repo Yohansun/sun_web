@@ -9,7 +9,7 @@
     </h5>
   </div>
   <h3><%= image.title %>&nbsp;&nbsp;&nbsp;套图ID:&nbsp;<%= image.imageable_id %></h3>
-  <div class="image-preview" data-id='<%= image.id %>'>
+  <!-- <div class="image-preview" data-id='<%= image.id %>'>
     <p class='up-down-page'>
       <button class='left'>上一张</button>
       <button class='right'>下一张</button>
@@ -17,6 +17,21 @@
     <span class='zoom' id='ex1' style="margin-top:40px">
       <%= image_tag(image.file, :size =>"500x400" )%>
     </span>
+  </div> -->
+  <div class="tags-container">
+    <h2>套图
+        <span class="expand-image">收缩</span>
+    </h2>
+    <ul class="thumbnailsa clear js-hover js-tab-image-childen">
+      <%- @images.each do |image| %>
+        <li class="span4">
+          <a href="#" class="thumbnail">
+            <%= image_tag(image.file, :size =>"170x120" )%>
+          </a>
+          <div class="thumbnail_big"><%= image_tag(image.file, :size =>"325x260" )%></div>
+        </li>
+      <%- end %>
+    </ul>
   </div>
   <%= form_tag main_app.suit_image_update_tags_suits_path(image), :method => :put do %>
   <div class="tags-container">
@@ -32,11 +47,11 @@
       <h2>
         <%= c.title %>
         <span class="expand" data-tag-id='<%= c.id %>'>
-          <%= c.id == 136 || c.id == 210 ? '展开' : '收缩'%>
+          <%= c.id == 1 || c.id == 19 || c.id == 28 || c.id == 122 || c.id == 127 || c.id == 132 || c.id == 136 || c.id == 210 || c.id == 34 || c.id == 62 || c.id == 82 || c.id == 107? '展开' : '收缩'%>
         </span>
       </h2>
-      <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 136 || c.id == 210 %>'>
-        <%- if c.id != 136 && c.id != 210 -%>
+      <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 1 || c.id == 19 || c.id == 28 || c.id == 122 || c.id == 127 || c.id == 132 || c.id == 136 || c.id == 210 || c.id == 34 || c.id == 62 || c.id == 82 || c.id == 107 %>'>
+        <%- if c.id != 1 || c.id != 19 || c.id != 28 || c.id != 122 || c.id != 127 || c.id != 132 || c.id != 136 || c.id != 210 || c.id != 34 || c.id != 62 || c.id != 82 || c.id != 107 -%>
           <tr>
             <td align='right' colspan='4' class='toggle-options'>
               <span class="js-all" data-type='child' data-tag-id='<%= c.id %>'>全选</span>
@@ -45,7 +60,7 @@
           </tr>
         <%- end -%>
         <%- c.children.in_groups_of(4, false) do |group|%>
-        <tr <%= "class=js-checkboxes-#{c.id}" if c.id != 136 && c.id != 210 %>>
+        <tr <%= "class=js-checkboxes-#{c.id}" if c.id != 1 || c.id != 19 || c.id != 28 || c.id != 122 || c.id != 127 || c.id != 132 || c.id != 136 || c.id != 210 ||c.id != 34 || c.id != 62 || c.id != 82 || c.id != 107 %>>
           <%- group.each do |child| -%>
             <td>
             <%- if child.children.any? -%>

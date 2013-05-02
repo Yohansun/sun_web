@@ -2,6 +2,7 @@ class Area < ActiveRecord::Base
   acts_as_nested_set :counter_cache => :children_count
   #Area.rebot(省ID,[市ID])
   #Area.rebot(3198,[3213]) or Area.rebot(3198)
+  has_many :users
   scope :robot, ->(s,q=[]) { where("parent_id in (?)",q.or(select(:id).where(:parent_id => s))) }
 
   [:parent,:root,:province,:city,:district].each do |instance|

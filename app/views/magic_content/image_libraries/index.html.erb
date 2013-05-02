@@ -1,13 +1,29 @@
 <div class="color_form_overlay"></div>
+<style type="text/css">
+.pub_time{display:none;display:none;}
+</style>
 <%- content_for :tail do %>
   <%= stylesheet_link_tag "image_libraries" %>
   <%= javascript_include_tag 'twitter/bootstrap' %>
   <script type="text/javascript">
     $(function(){
+      if($("#genre").val() == "pub_time"){
+        $('.pub_time').show()
+      }
       $('.set_name').click(function(e){
         $(this).siblings('.name_form').show()
         $('.color_form_overlay').show()
       })
+      $("#genre").change(function(e){
+        if($(this).val() == 'pub_time' || $(this).val() == 'al_time'){
+          $('.pub_time').show()
+        }else{
+          $('.pub_time').hide()
+        }
+      })
+      if($("#genre").val() == "al_time"){
+        $('.pub_time').show()
+      }
       $('.set_color').click(function(e){
         $(this).siblings('.color_form').show()
         $('.color_form_overlay').show()
@@ -79,6 +95,11 @@
 
   <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
     <%=form_tag main_app.image_libraries_path, :method=>:get, :class=>"search_form" do %>
+      <span class="pub_time">
+        <input type="text" class="datepicker" placeholder="开始日期" name="start_date" value="<%= params[:start_date] %>"/>
+        <input type="text" class="datepicker" placeholder="结束日期" name="end_date" value="<%= params[:end_date] %>"/>
+      </span>
+
       <%=select_tag :genre, options_for_select([["选择筛选条件",""],
           ["图片名称","title"],
           ["图片作者","username"],
@@ -94,6 +115,8 @@
           ["已编辑色号, 已审核标签", "edit_color"],
           ["未编辑色号, 未审核标签","no_edit_color"],
           ["不予审核的图片","no_audited"],
+          ["发布时间","pub_time"],
+          ["修改时间","al_time"],
           ["已填写色号", "yes_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
@@ -172,6 +195,8 @@
     <form>
       <input style="visibility:hidden" name="keyword" value="<%= params[:keywords]%>"/>
       <input style="visibility:hidden" name="genre" value="<%=params[:genre]%>"/>
+      <input style="visibility:hidden" name="genre" value="<%=params[:start_date]%>"/>
+      <input style="visibility:hidden" name="genre" value="<%=params[:end_date]%>"/>
       <li class="l_reply_num" style="margin-left:2px; margin-right:10px" >共有<span class="red"></span><%= @page_count %>页</li>
       <li class="l_reply_num" >跳到 <input theme="2" name="page" genre="<%=params[:genre]%>" keywords="<%= params[:keywords]%>" max-page="9" type="text" style="width:30px;height:14px;" /> 页&nbsp;<button id="pager_go2" type="submit" value="确定" style="padding: 0 2px 0 2px;height:21px;line-height:15px;">确定</button>&nbsp;</li>
     </form>

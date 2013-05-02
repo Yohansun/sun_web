@@ -213,7 +213,7 @@ div.title h5 a {
 }
 .tags-container {
   float: right;
-  width: 48%;
+  width: 100%;
 }
 .tags-container h2 span{
   float: right;
@@ -225,6 +225,23 @@ div.title h5 a {
   display: none;
 }
 .tags-container .toggle-options span{
+  display: inline-block;
+  cursor: pointer;
+}
+.container {
+  float: right;
+  width: 48%;
+}
+.container h2 span{
+  float: right;
+  font-size: 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+.container table.expand{
+  display: none;
+}
+.container .toggle-options span{
   display: inline-block;
   cursor: pointer;
 }
@@ -246,3 +263,10 @@ div.title h5 a {
   float: right;
   text-align: right;
 }
+/*.thumbnailsa{overflow:hidden;}*/
+.content_image{float:left;width:78%;overflow:visible;}
+.thumbnailsa li.span4{position:relative;float:left;width:25%;text-align:center;margin:15px 0;}
+.thumbnail_big{position:absolute;top:60px;right:0;width:325px;height:260px;overflow:hidden;display:none;z-index:9999}
+.clear:before,.clear:after{content:".";display:block;height:0;visibility:hidden;}
+.clear:after{clear:both;}
+.clear{*zoom: 1;}

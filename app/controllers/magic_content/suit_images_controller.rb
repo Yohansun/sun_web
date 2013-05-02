@@ -5,11 +5,29 @@ module MagicContent
     skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :update_tags_suits]
     def index
       @images = DesignImage.available.where("design_images.imageable_type = 'MasterDesign' ")
+      if params[:genre].present?
+        if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color' || params[:genre] == 'no_audited'
+          @images = DesignImage.search_with(params[:genre], 'last_updated_at', "", "")
+        elsif params[:start_date] && params[:end_date]
+          @images = DesignImage.search_with(params[:genre], params[:keywords], params[:start_date], params[:end_date])
+        else
+          @images = DesignImage.search_with(params[:genre], params[:keywords], "", "") if params[:keywords].present?
+        end
+      end
       @images = @images.group("imageable_id").page(params[:page]).per(8)
+      if @images
+        if @images.length % 8 == 0
+          @page_count = @images.length / 8
+        else
+          @page_count = (@images.length / 8).to_i + 1
+        end
+      end
     end
 
     def categories
       @image = DesignImage.find(params[:suit_image_id])
+      imageable_id = @image.imageable_id
+      @images = DesignImage.find_all_by_imageable_id imageable_id
       @image_tag_ids = @image.tags.map &:image_library_category_id
       @categories = ImageLibraryCategory.where(parent_id: nil)
     end
