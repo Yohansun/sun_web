@@ -128,7 +128,7 @@ class DesignImagesController < ApplicationController
       @tag_names << tags.map(&:title)
     end
 
-    unless params[:ranking_list].blank?
+    if params[:ranking_list].present? && params[:ranking_list] != "0"
       if params[:ranking_list] == "like"
         @images = @images.order("design_images.votes_count desc")
       elsif params[:ranking_list] == "view_count"
