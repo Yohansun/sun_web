@@ -62,7 +62,16 @@ class LandsController < ApplicationController
 							"souhu_xinwenzhongxin",
 							"souhu_bendixinwen",
 							"80018_wangyouyangbanjian_neiyeyouce",
-							"souhu_zhuangxiuzongluntantiezizhidingqu"]
+							"souhu_zhuangxiuzongluntantiezizhidingqu",
+							#20130428story_605
+							"428_sina_tk1",
+							"428_sina_tk3",
+							"428_sina_tk4",
+							"428_taipingyang_tk3",
+							"428_taipingyang_tk4",
+							"428_pipawang_tk2",
+							"428_pipawang_tk3"
+						]
 
 			urls_baicheng = ["baicheng_soufun_tuliao",
 							"baicheng_soufun_news",
@@ -90,7 +99,112 @@ class LandsController < ApplicationController
 							"baicheng_hejia_tuwenzixun",
 							"baicheng_zhuangxiu_colors",
 							"baicheng_zhuangxiu_formats",
-							"baicheng_zhuangxiu_designers"]
+							"baicheng_zhuangxiu_designers",
+							#20130428story_605
+							"428_sina_baicheng1",
+							"428_sina_baicheng2",
+							"428_sina_baicheng3",
+							"428_sina_baicheng4",
+							"428_sina_baicheng5",
+							"428_taipingyang_baicheng1",
+							"428_taipingyang_baicheng2",
+							"428_taipingyang_baicheng3",
+							"428_taipingyang_baicheng4",
+							"428_soufang_baicheng1",
+							"428_soufang_baicheng2",
+							"428_soufang_baicheng3",
+							"428_soufang_baicheng4",
+							"428_soufang_baicheng5",
+							"428_soufang_baicheng6",
+							"428_soufang_baicheng7",
+							"428_soufang_baicheng8",
+							"428_soufang_baicheng9",
+							"428_soufang_baicheng10",
+							"428_soufang_baicheng11",
+							"428_soufang_baicheng12",
+							"428_soufang_baicheng13",
+							"428_soufang_baicheng14",
+							"428_souhujiaodian_baicheng1",
+							"428_souhujiaodian_baicheng2",
+							"428_souhujiaodian_baicheng3",
+							"428_souhujiaodian_baicheng4",
+							"428_souhujiaodian_baicheng5",
+							"428_souhujiaodian_baicheng6",
+							"428_souhujiaodian_baicheng7",
+							"428_souhujiaodian_baicheng8",
+							"428_souhujiaodian_baicheng9",
+							"428_hejia_baicheng1",
+							"428_hejia_baicheng2",
+							"428_hejia_baicheng3",
+							"428_hejia_baicheng4",
+							"428_zhuangxiudianpin_baicheng1",
+							"428_zhuangxiudianpin_baicheng2",
+							"428_zhuangxiudianpin_baicheng3",
+							"428_zhuangxiudianpin_baicheng4",
+							"428_zhuangxiudianpin_baicheng5",
+							"428_pipawang_baicheng1",
+							"428_pipawang_baicheng2",
+							"428_pipawang_baicheng3"]
+
+			urls_color_designs = ["428_sina_color1",
+				"428_sina_color2",
+				"428_sina_color4",
+				"428_taipingyang_color2",
+				"428_taipingyang_color3",
+				"428_soufang_color1",
+				"428_soufang_color2",
+				"428_soufang_color3",
+				"428_soufang_color4",
+				"428_soufang_color5",
+				"428_soufang_color6",
+				"428_soufang_color7",
+				"428_soufang_color8",
+				"428_soufang_color9",
+				"428_soufang_color10",
+				"428_soufang_color11",
+				"428_soufang_color12",
+				"428_soufang_color13",
+				"428_soufang_color14",
+				"428_souhujiaodian_color1",
+				"428_souhujiaodian_color2",
+				"428_souhujiaodian_color3",
+				"428_souhujiaodian_color4",
+				"428_souhujiaodian_color5",
+				"428_souhujiaodian_color6",
+				"428_souhujiaodian_color7",
+				"428_souhujiaodian_color8",
+				"428_souhujiaodian_color9",
+				"428_hejia_color1",
+				"428_hejia_color2",
+				"428_hejia_color3",
+				"428_zhuangxiudianpin_color1",
+				"428_zhuangxiudianpin_color2",
+				"428_zhuangxiudianpin_color3",
+				"428_zhuangxiudianpin_color4"
+			]
+			urls_master_designs = ["428_sina_m_design1",
+				"428_sina_m_design4",
+				"428_taipingyang_m_design1",
+				"428_taipingyang_m_design2",
+				"428_taipingyang_m_design3",
+				"428_taipingyang_m_design4",
+				"428_souhujiaodian_m_design1",
+				"428_souhujiaodian_m_design2",
+				"428_souhujiaodian_m_design3",
+				"428_souhujiaodian_m_design4",
+				"428_souhujiaodian_m_design5",
+				"428_souhujiaodian_m_design6",
+				"428_souhujiaodian_m_design7",
+				"428_souhujiaodian_m_design8",
+				"428_souhujiaodian_m_design9",
+				"428_hejia_m_design1",
+				"428_hejia_m_design3",
+				"428_hejia_m_design4",
+				"428_zhuangxiudianpin_m_design1",
+				"428_zhuangxiudianpin_m_design4",
+				"428_pipawang_m_design1",
+				"428_pipawang_m_design2",
+				"428_pipawang_m_design3"]
 
 			#0327重新新加的监测
 			urls_design_imgs = ["327_soufang1",
@@ -149,13 +263,31 @@ class LandsController < ApplicationController
 							"327_zhuangxiudianpin_kc1",
 							"327_zhuangxiudianpin_kc2",
 							"327_zhuangxiudianpin_kc3",
-							"pipa_shouyezhtizhuangxiu2"
+							"pipa_shouyezhtizhuangxiu2",
+							#20130428story_605
+							"428_sina_ck1",
+							"428_sina_ck4",
+							"428_sina_ck5",
+							"428_taipingyang_ck1",
+							"428_taipingyang_ck3",
+							"428_taipingyang_ck4",
+							"428_pipawang_ck2",
+							"428_pipawang_ck3"
 						]
 			#TASK 458
 			urls_star = ["327_hejia_star1",
 				"327_hejia_star3",
 				"327_zhuangxiudianpin_star1",
-				"327_zhuangxiudianpin_star3"
+				"327_zhuangxiudianpin_star3",
+				#20130428story_605
+				"428_sina_star1",
+				"428_sina_star4",
+				"428_taipingyang_star3",
+				"428_hejia_star1",
+				"428_hejia_star3",
+				"428_zhuangxiudianpin_star2",
+				"428_zhuangxiudianpin_star3",
+				"428_zhuangxiudianpin_star4"
 			]
 
 
@@ -177,6 +309,10 @@ class LandsController < ApplicationController
 				images_path
 			elsif urls_star.include? params[:source]
 				weekly_stars_path
+			elsif urls_color_designs.include? params[:source]
+				color_designs_path
+			elsif urls_master_designs.include? params[:source]
+				master_interviews_path
 			else
 				root_path
 			end
