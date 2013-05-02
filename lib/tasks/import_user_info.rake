@@ -1,5 +1,57 @@
 # -*- encoding: utf-8 -*-
 
+
+desc "导入城市用户"
+task :import_users => :environment  do
+	CSV.foreach("#{Rails.root}/lib/data/user_20130502.csv") do |row|
+		
+		role = row[0] ? row[0].force_encoding("UTF-8") : nil
+        unless role.blank?
+			role_id = 2
+		else
+			role_id = 1
+			des_status = 0
+		end
+
+		company = row[1] ? row[1].force_encoding('UTF-8') : nil
+        name = row[2] ? row[2].force_encoding("UTF-8") : nil
+        phone = row[3] ? row[3].force_encoding("UTF-8") : nil
+		email = row[4] ? row[4].force_encoding("UTF-8") : nil			
+		
+		#p "#{role}|#{role_id}|#{company}|#{name}|#{phone}|#{email}"
+
+		area = Area.find_by_name('南昌市')
+		user = User.find_by_username(name)
+
+		if user.blank?
+			unless email.blank?
+				u = User.new(
+							:username => user.blank? ? "#{name}" : name,					
+							:name_of_company => company,
+							:name => name,
+							:role_id => role_id,
+							:phone => phone,
+							:email => email,
+							:password => "123456",
+							:password_confirmation => "123456",
+							:area_id => area.id,
+							:is_read => true,
+							:is_imported => true,
+							:des_status => des_status#,
+							#:company_address => company_address,   #new add features
+		                    #:qq => qq
+						)
+				p "#{role_id}|#{company}|#{name}|#{phone}|#{email}|#{u.save}"
+			else
+				p "没有Email的用户: #{company}|#{name}|#{phone}|#{email}"
+			end
+		else
+			p "已存在的用户: #{company}|#{name}|#{phone}|#{email}"
+		end
+	end
+end
+
+
 desc "导入用户"
 task :source_user_infom => :environment  do
 	tmp = []                                              
