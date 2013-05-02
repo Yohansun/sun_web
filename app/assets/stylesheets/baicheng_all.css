@@ -8,8 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require baicheng/reset
- *= require baicheng/base
- *= require baicheng/jquery.layer.v3
- *= require baicheng/main
+ *= require baicheng/bootstrap
+ *= require baicheng/common
+ *= require baicheng/style
+ *= require baicheng/rules
+ *= require baicheng/steps
 */

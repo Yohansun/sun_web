@@ -15,4 +15,3 @@
 //= require jquery.layer.v3
 //= require jrollingcounter
 //= require LinkageSelect
-//= require baicheng/main
