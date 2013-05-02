@@ -109,21 +109,23 @@ function refresh_search(params) {
   worth = _.last(window.location.href.split("/images/")).split("-");
   worth = worth.reverse();
   if(worth.length > 2){
-  var imageable_type = worth[7]
-  var ranking_list = worth[6]
-  var area_id = worth[5]
-  var pinyin = worth[4]
-  var search = worth[3]
-  var all_tags = worth[2]
-  var page = worth[1]
+    worth_page = worth[0].split("/");
+    var imageable_type = worth[6]
+    var ranking_list = worth[5]
+    var area_id = worth[4]
+    var pinyin = worth[3]
+    var search = worth[2]
+    var all_tags = worth[1]
+    var page = worth_page[1]
   }else{
-    var imageable_type = worth[8]
-    var ranking_list = worth[7]
-    var area_id = worth[6]
-    var pinyin = worth[5]
-    var search = worth[4]
-    var all_tags = worth[3]
-    var page = worth[2]
+    // worth_page = worth[1].split("/");
+    var imageable_type = worth[7]
+    var ranking_list = worth[6]
+    var area_id = worth[5]
+    var pinyin = worth[4]
+    var search = worth[3]
+    var all_tags = worth[2]
+    // var page = worth_page[1]
   }
   // var url = "";
   if (params.imageable_type != null) imageable_type = params.imageable_type;  
@@ -183,5 +185,5 @@ function refresh_search(params) {
     page = '0'
   }
 
-  window.location = "/images/" + tags + imageable_type + "-" + ranking_list + "-" + area_id + "-" + pinyin + "-" + search + "-" + all_tags + "-" + 0 + "-" + "0";
+  window.location = "/images/" + tags + imageable_type + "-" + ranking_list + "-" + area_id + "-" + pinyin + "-" + search + "-" + all_tags + "-" + "0/0";
 }
