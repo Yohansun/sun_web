@@ -428,6 +428,11 @@ Icolor::Application.routes.draw do
     resources :stories do
       member do
         get :download
+        get :image_new
+      end
+      collection do 
+        post :update_image
+        post :update_title
       end
     end
     resources :design_competes do
@@ -439,6 +444,8 @@ Icolor::Application.routes.draw do
     end
     resources :sysinfo
     resources :upload_contract
+    resources :story_images
+    resources :actives
     match ':page', to: 'welcome#show', via: :get
     resources :contracts do
       collection do
@@ -447,7 +454,7 @@ Icolor::Application.routes.draw do
       end
     end
     resources :contract_images
-    resources :story_images
+
     resources :intros, only: :show
   end
 

@@ -10,8 +10,6 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require baicheng/jquery
 //= require jquery_ujs
-//= require jquery.layer.v3
-//= require jrollingcounter
-//= require LinkageSelect
+//= require baicheng/bootstrap

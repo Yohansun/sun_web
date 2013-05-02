@@ -21,15 +21,15 @@
 	<div class="navbar navbar-fixed-top navbar_top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="./index.html"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
+				<a class="brand" href="<%=baicheng_root_path%>"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active">
-							<a href="./index.html">首页</a>
+						<li <% if controller_name == "welcome" && action_name == "index"%>class="active"<% end %>>
+							<a href="<%=baicheng_root_path%>">首页</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="">
-							<a href="./2.html">我要装修</a>
+							<a href="<%=new_story_path%>">我要装修</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="">
@@ -44,8 +44,8 @@
 							<a href="./5.html">时尚榜样</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="./6.html">活动章程及说明</a>
+						<li <% if controller_name == "actives" && action_name == "index"%>class="active"<% end %>>
+							<a href="<%=actives_path%>">活动章程及说明</a>
 						</li>
 					</ul>
 				</div>
@@ -79,7 +79,7 @@
 	<div class="navbar navbar_footer nomargin">
 		<div class="navbar-inner nopadding">
 			<div class="container">
-				<a class="brand" href="./index.html"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
+				<a class="brand" href="<%=baicheng_root_path%>"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
 				<p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
 				<ul class="nav pull-right">
 					<li>
@@ -116,9 +116,9 @@
 	<div class="wel_login" style="display:none">
 	  <%= render partial: 'baicheng/welcome/login' %>
     </div>
-	<%#= yield :body_tail %>
-	<%#= yield :tail %>
-	<%#= javascript_include_tag "/baicheng_location.js" %>
+	<%= yield :body_tail %>
+	<%= yield :tail %>
+	<%= javascript_include_tag "/baicheng_location.js" %>
 	<script type="text/javascript">
 		swfobject.registerObject("FlashID");
 		$(function(){

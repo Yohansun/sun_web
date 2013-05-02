@@ -1,7 +1,7 @@
 class Story < ActiveRecord::Base
-  attr_accessible :title, :content, :area_id, :user_id, :property_name, :parent_id
+  attr_accessible :title, :content, :area_id, :user_id, :property_name, :parent_id, :demand, :budget
 
-  has_many :story_images, :dependent => :destroy
+  has_one :story_image, :dependent => :destroy
   has_many :votes, :as => :voteable
   has_many :collects, :dependent => :destroy
   belongs_to :area

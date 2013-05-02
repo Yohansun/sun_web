@@ -1,108 +1,66 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "baicheng/steps.css" %>
+<%- end %>
 
 <% content_for :tail do -%>
-  <%= javascript_include_tag "jquery.uploadify.js","/location.js", "LinkageSelect.js" %>
+  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
   <script type="text/javascript">
-  <%- session_key = Rails.application.config.session_options[:key] -%>
+  	$(function(){
+  		(function($){
+        $('.refresh-form').on('click', '.upload2013-btn', function(){
+         $(this).toggleClass('upload2013-btn-down').next().slideToggle(200)
+         .closest('.refresh-control').siblings().find('.clear').slideUp(200);
+        });
+  			$('textarea').bind('keydown keyup', function(){
+  				var $this = $(this);
+  				var total = $this.data('total');
+  				if(!total) return;
+  				var len = total - $this.val().length;
+  				if(len < 0) {
+  					$this.val($this.val().slice(0, total));
+  				} else{
+  					$this.next().find('b').text(len);
+  				}
+  			});
+  		}($));
 
-  (function($){
-    $('#upload_photo').uploadify({
-    swf : '/uploadify/uploadify.swf',
-    cancelImage : '/uploadify/uploadify-cancel.png',
-    //skipDefault : ['onSelect'],
-    progressData : 'percentage',
-    buttonText : "<a class='upload-btn fl'>选择图片</a>",
-    fileTypeDesc : '图片文件',
-    fileTypeExts : '*.jpg; *.png',
-    successTimeout : 6000,
-    fileSizeLimit : '5MB',
-    uploadLimit : 60,
-    width : 184,
-    height : 46,
-    multi : true,
-    auto : true,
-    checkExisting : false,
-    transparent : true,
-    uploader : '/baicheng/story_images',
-    //buttonText : '选择文件',
-    onUploadSuccess : function(file, data, response) {
-      var dat = eval('(' + data + ')');
-      if (dat.result == 'success') {
-        $.getScript(dat.upload + "?for=design", function(){
-        var $btn = $('.upload2013_btn');
-        if($btn.length == 0) return;
-          $btn.unbind('click').click(function(){
-            $(this).toggleClass('upload2013_btn_down').next().toggle();
-          });
-        });
-        var current = parseInt($('.js-images_num span:eq(1)').text());
-        $('.js-images_num span:eq(1)').text(current - 1);
-      }else{
-        alert("图片上传失败");
-      };
-    },
-    postData : {
-        '_http_accept': 'application/javascript',
-        'format' : 'json',
-        '_method': 'post',
-        '<%= session_key %>' : '<%= cookies[session_key] %>',
-        'authenticity_token': '<%= form_authenticity_token %>'
-    },
-    onUploadError : function(file, errorCode, errorMsg, errorString) {
-      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
-    },
-    onUploadStart : function(){
-      //$("#upload_going").show();
-    },
-    onUploadComplete : function(){
-      //$("#upload_going").hide();
-    }
-  });
-
-    //linkageselect
-    if(typeof data != 'undefined'){
-      var options = {
-        data  : data
-      }
-
-      var sel = new LinkageSelect(options);
-      sel.bind('.level_1');
-      sel.bind('.level_2');
-      sel.bind('.level_3');
-    }
-  })($);
-  function remote(id) {
-  $('#story_image'+id).remove();
-  $('.story_image_size').html(parseInt($('.story_image_size').html()) - 1);
-  }
-  function remove_design_image(){
-    $('.upload_item').remove();
- 	$('.story_image_size').html(0);
-  }
-  function form_valid(){
+  		if(typeof data != 'undefined'){
+  			var sel = new LinkageSelect({data : data});
+  			sel.bind('.linkageseclet .level_1','<%=@story.area.try(:parent).try(:parent).try(:id) %>');
+  			sel.bind('.linkageseclet .level_2','<%=@story.area.try(:parent).try(:id) %>');
+  			sel.bind('.linkageseclet .level_3','<%=@story.try(:area_id) %>');
+  		}
+  	});
+  	function form_valid(){
     flag = true
     alt = ""
-  	story_title = $('#story_title').val();
-  	story_content = $('#story_content').val();
+  	// story_title = $('#story_title').val();
+  	// story_content = $('#story_content').val();
   	story_area_id = $('#story_area_id').val();
   	story_property_name = $('#story_property_name').val();
   	apartment = $("[name='apartment']:checked");
-    imgCount = $(".story_image_size").text();
     style = $("[name='style[]']:checked");
-    use = $("[name='use[]']:checked");
-    if(story_title == ""){
-      alt += "请输入主题！";
-      flag = false;
-    }
-    if(story_content == ""){
-      alt += "请输入正文！";
-      flag = false;
-    }
-    if(parseInt(imgCount) == 0){
-      alt += "不能一张图片都没有哦！";
-      flag = false;
-    }
+    acreage = $("[name='acreage[]']:checked");
+    room = $("[name='room[]']:checked");
+    fee = $("[name='fee[]']:checked");
+
+    
+    // imgCount = $(".story_image_size").text();
+    // use = $("[name='use[]']:checked");
+    // if(story_title == ""){
+    //   alt += "请输入主题！";
+    //   flag = false;
+    // }
+    // if(story_content == ""){
+    //   alt += "请输入正文！";
+    //   flag = false;
+    // }
+    // if(parseInt(imgCount) == 0){
+    //   alt += "不能一张图片都没有哦！";
+    //   flag = false;
+    // }
     if(story_area_id == ""){
-      alt += "请输入地区！";
+      alt += "请选择地区！";
       flag = false;
     }
     if(story_property_name == ""){
@@ -117,8 +75,15 @@
       alt += "请选择风格！";
       flag = false;
     }
-    if(use.length==0){
-      alt += "请选择用途！";
+    if(acreage.length == 0){
+    	alt += "请选择面积！"
+    }
+    if(room.length == 0){
+      alt += "请选择重点设计功能区！";
+      flag = false;
+    }
+    if(fee.length==0){
+      alt += "请选择装修预算！";
       flag = false;
     }
     if(flag == false){
@@ -130,178 +95,107 @@
   }
   </script>
 
-
-  <script type="text/javascript">
-$(function(){
-
-  //page 4.3
-  (function($){
-    $('.refresh-section').on('click', '.upload2013-btn', function(){
-      $(this).toggleClass('upload2013-btn-down').next().toggle();
-    });
-
-    $('textarea').bind('keydown keyup', function(){
-      var $this = $(this);
-      var total = $this.data('total');
-      if(!total) return;
-      var len = total - $this.val().length;
-      if(len < 0) {
-        $this.val($this.val().slice(0, total));
-      } else{
-        $this.next().find('b').text(len);
-      }
-    });
-  }($));
-});
-</script>
 <% end %>
-<%= render partial: 'baicheng/welcome/navs' %>
-<%= render partial: 'baicheng/welcome/active_map' %>
-<div class="wrapper">
-	<%=render partial: 'baicheng/welcome/sidebar' %>
-	<div class="refresh-container refresh-upload">
-        <div class="refresh-bin newheight">
-			<h1>发表故事 征集设计</h1>
-			<%= form_for @story, html:{:class=>"refresh-form ft12", :onsubmit => "return form_valid();"} do |f| %>
-
-			<!-- <form action="" method="" class="refresh-form ft12"> -->
-				<div class="refresh-section">
-					<div class="refresh-control">
-						<label>主题<b>*</b></label>
-						<div class="form-article">
-							<%= f.text_field :title, class: "form-text1",:placeholder=>"爱，让我们在一起", :maxlength=> "20" -%>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label style="margin-top:0;">正文<b>*</b></label>
-						<div class="form-article">
-							 <%= f.text_area :content, "data-total"=>"200" -%>
-							<span class="helper-text fl">还可以输入<b>200</b>字</span>
-							<span class="helper-text fr">（字数不少于200字）</span>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>上传图片</label>
-						<div class="form-article">
-							<input type="file" class="none" />
-              <a href="#" class="upload-btn fl" id="upload_photo">选择图片</a>
-							<!-- <button class="upload-btn">选择图片</button> -->
-							<div class="upload-bin fl">
-								<div class="load-bar clear">
-									<div class="work-title fb fl">文件</div>
-									<div class="set-cover tc fl">设为封面</div>
-									<div class="work-del tc fl">移除</div>
-								</div><!--load-bar ends-->
-								<div class="load-bar load-content" id="uploads">
-
-								</div><!--load-content ends-->
-								<p class="load-footer ft12">
-									共有<b class="story_image_size">0</b>个文件 |
-									<a href="javascript:remove_design_image();" class="clear-all">清空列表</a>
-									<br>您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张
-								</p><!--load-footer ends-->
-							</div><!-- upload-bin -->
-						</div>
+<div class="container-fluid step1">
+	<div class="container">
+		<h1>step1 填写家装需求</h1>
+    <%= form_for @story, html:{:class=>"refresh-form ft12", :onsubmit => "return form_valid();"} do |f| %>
+			<div class="refresh-control">
+				<label>所在城市<b>*</b></label>
+				<div class="form-article linkageseclet">
+					<select class="level_1">
+						<!-- <option>省/直辖市</option> -->
+					</select>
+					<select class="level_2">
+						<!-- <option>城市</option> -->
+					</select>
+					<select class="level_3" id="story_area_id" name="story[area_id]">
+						<!-- <option>区</option> -->
+					</select>
+				</div>
+			</div>
+			<div class="refresh-control mt20">
+				<label>楼盘名称<b>*</b></label>
+				<div class="form-article">
+          <%= f.text_field :property_name, class: "form-text1 nomargin" -%>
+				</div>
+			</div>
+			<div class="refresh-control">
+				<label>户型<b>*</b></label>
+				<div class="form-article upload2013-toggle pull-left">
+					<a href="javascript:;" class="upload2013-btn pa"></a>
+					<div class="clear">
+            <% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
+              <label>
+                  <%=radio_button_tag "apartment",img_lib_cat.id, false,:id=>"apartment"%><%=img_lib_cat.title%>
+              </label>
+            <% end %>
 					</div>
 				</div>
-				<div class="refresh-section">
-					<div class="refresh-control">
-						<label>所在城市<b>*</b></label>
-						<div class="form-article">
-							<select id="province" class="level_1 fl" ><option>省/直辖市</option></select>
-              <select id="city" class="level_2 fl"><option>城市</option></select>
-              <select class="level_3 fl" id="story_area_id" name="story[area_id]"><option>区</option></select>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>楼盘名称<b>*</b></label>
-						<div class="form-article">
-              <%= f.text_field :property_name, class: "form-text2" -%>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>户型<b>*</b></label>
-						<div class="form-article upload2013-toggle fl">
-							<a href="javascript:;" class="upload2013-btn pa upload2013-btn-down"></a>
-							<div class="clear none">
-								<% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
-                  <label>
-                      <%=radio_button_tag "apartment",img_lib_cat.id, false,:id=>"apartment"%><%=img_lib_cat.title%>
-                  </label>
-                <% end %>
-							</div>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>期望风格<b>*</b></label>
-						<div class="form-article upload2013-toggle checkbox2013 fl">
-							<a href="javascript:;" class="upload2013-btn pa upload2013-btn-down"></a>
-							<div class="clear none">
-								<% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
-                  <label>
-                    <%= check_box_tag "style[]", img_lib_cat.id %><%=img_lib_cat.title%>
-                  </label>
-                <% end %>
-							</div>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>用途<b>*</b></label>
-						<div class="form-article upload2013-toggle checkbox2013 fl">
-							<a href="javascript:;" class="upload2013-btn pa upload2013-btn-down"></a>
-							<div class="clear none">
-								<% ImageLibraryCategory.where(parent_id: 122).each do |img_lib_cat| %>
-                  <label>
-                     <%=check_box_tag "use[]",img_lib_cat.id%><%=img_lib_cat.title%>
-                  </label>
-                <% end %>
-							</div>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>装修报价</label>
-						<div class="form-article upload2013-toggle checkbox2013 fl">
-							<a href="javascript:;" class="upload2013-btn pa upload2013-btn-down"></a>
-							<div class="clear none">
-								<% ImageLibraryCategory.where(parent_id: 19).each do |img_lib_cat| %>
-                  <label>
-                     <%=check_box_tag "fee[]",img_lib_cat.id%><%=img_lib_cat.title%>
-                  </label>
-                <% end %>
-							</div>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>面积</label>
-						<div class="form-article upload2013-toggle checkbox2013 fl">
-							<a href="javascript:;" class="upload2013-btn pa upload2013-btn-down"></a>
-							<div class="clear none">
-								<% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
-                  <label>
-                     <%=check_box_tag "acreage[]",img_lib_cat.id%><%=img_lib_cat.title%>
-                  </label>
-                <% end %>
-							</div>
-						</div>
-					</div>
-					<div class="refresh-control">
-						<label>人群</label>
-						<div class="form-article upload2013-toggle checkbox2013 fl">
-							<a href="javascript:;" class="upload2013-btn pa upload2013-btn-down"></a>
-							<div class="clear none">
-								<% ImageLibraryCategory.where(parent_id: 127).each do |img_lib_cat| %>
-                  <label>
-                     <%=check_box_tag "throng[]",img_lib_cat.id%><%=img_lib_cat.title%>
-                  </label>
-                <% end %>
-							</div>
-						</div>
+			</div>
+			<div class="refresh-control">
+				<label>期望风格<b>*</b></label>
+				<div class="form-article upload2013-toggle checkbox2013">
+					<a href="javascript:;" class="upload2013-btn pa"></a>
+					<div class="clear none">
+						<% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
+              <label>
+                <%= check_box_tag "style[]", img_lib_cat.id %><%=img_lib_cat.title%>
+              </label>
+            <% end %>
 					</div>
 				</div>
-				<p class="tc cr">
-					<input type="submit" class="refresh-submit" value="" /><br />*红色标注为必填项
-				</p>
-			<% end %>
-        </div>
-	</div><!-- refresh-container -->
-</div><!-- wrapper -->
+			</div>
+			<div class="refresh-control">
+				<label>面积<b>*</b></label>
+				<div class="form-article upload2013-toggle checkbox2013">
+					<a href="javascript:;" class="upload2013-btn pa"></a>
+					<div class="clear none">
+						<% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
+              <label>
+                 <%=check_box_tag "acreage[]",img_lib_cat.id%><%=img_lib_cat.title%>
+              </label>
+            <% end %>
+					</div>
+				</div>
+			</div>
+			<div class="refresh-control">
+				<label>重点设计功能区<b>*</b></label>
+				<div class="form-article upload2013-toggle checkbox2013">
+					<a href="javascript:;" class="upload2013-btn pa"></a>
+					<div class="clear none">
+						<% ImageLibraryCategory.where(parent_id: 82).each do |img_lib_cat| %>
+              <label>
+                  <%=check_box_tag "room[]",img_lib_cat.id%><%=img_lib_cat.title%>
+              </label>
+            <% end %>
+					</div>
+				</div>
+			</div>
+			<div class="refresh-control">
+				<label>装修预算<b>*</b></label>
+				<div class="form-article upload2013-toggle checkbox2013">
+					<a href="javascript:;" class="upload2013-btn pa"></a>
+					<div class="clear none">
+						<label><input type="checkbox" name="fee[]" value="5万-8万">5万-8万</label>
+						<label><input type="checkbox" name="fee[]" value="8万-15万">8万-15万</label>
+						<label><input type="checkbox" name="fee[]" value="15万-30万">15万-30万</label>
+						<label><input type="checkbox" name="fee[]" value="30-100万">30-100万</label>
+						<label><input type="checkbox" name="fee[]" value="100万以上">100万以上</label>
+					</div>
+				</div>
+			</div>
+			<div class="refresh-control">
+				<label style="margin-top:0;">个性需求</label>
+				<div class="form-article">
+          <%= f.text_area :demand, "data-total"=>"30", :placeholder=>"我喜欢简单的生活，装修不需要很华丽，但一定要很舒服！" -%>
+					<span class="helper-text">还可以输入<b>30</b>字</span>
+				</div>
+			</div>
+			<p class="text-center cr">
+        <input type="hidden" value="<%=params[:id] if params[:id]%>" name="stroy_id">
+				<input type="submit" class="step1-btn" value=""><br>*红色标注为必填项
+			</p>
+		<% end %>
+	</div>
+</div>

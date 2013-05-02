@@ -30,10 +30,13 @@ class Baicheng::StoriesController < ApplicationController
     @description = "上传立邦icolor刷新百城设计案例征集评选活动设计师作品。"
     
     if current_user
-      @story = Story.new
-      @story_image = StoryImage.new
+      if params[:id].present?
+        @story = Story.find params[:id]
+      else
+        @story = Story.new
+      end
     else
-      redirect_to root_path
+      redirect_to baicheng_root_path
     end
   end
 
@@ -42,28 +45,86 @@ class Baicheng::StoriesController < ApplicationController
       tags = []
       tags << params[:apartment] if params[:apartment].present?
       tags += params[:style] if params[:style].present?
-      tags += params[:fee] if params[:fee].present?
       tags += params[:acreage] if params[:acreage].present?
-      tags += params[:throng] if params[:throng].present?
-      story = Story.new(params[:story])
+      tags += params[:room] if params[:room].present?
+      if params[:stroy_id].present?
+        story = Story.find(params[:stroy_id])
+      else
+        story = Story.new(params[:story])
+      end
       story.user_id = current_user.id
+      story.budget =  params[:fee].join(",") if params[:fee].present?
       if story.save
-        params[:story_image_ids].each do |story_image_id|
-          story_image = StoryImage.find(story_image_id)
-          story_image.story_id = story.id
-          story_image.is_cover = true if params[:cover_image] && params[:cover_image].to_i == story_image_id.to_i
-          if story_image.save
-            tags.each do |tag|
-              StoryImageTag.create(image_library_category_id: tag, story_image_id: story_image.id)
-            end
-          end
+        tags.each do |tag|
+          StoryImageTag.create(image_library_category_id: tag, story_image_id: story.id)
         end
-        redirect_to stories_path(mode: "grid")
+        redirect_to image_new_story_path(story)
       else
         render :new
       end
     else
-      redirect_to root_path
+      redirect_to baicheng_root_path
+    end
+  end
+
+    def update
+    if current_user
+      tags = []
+      tags << params[:apartment] if params[:apartment].present?
+      tags += params[:style] if params[:style].present?
+      tags += params[:acreage] if params[:acreage].present?
+      tags += params[:room] if params[:room].present?
+      story = Story.find(params[:stroy_id])
+      story.user_id = current_user.id
+      story.budget =  params[:fee].join(",") if params[:fee].present?
+      if story.save
+        sit = StoryImageTag.where(story_image_id: story.id)
+        if sit.present?
+          sit.each do |s|
+            s.destroy
+          end
+        end
+        tags.each do |tag|
+          StoryImageTag.create(image_library_category_id: tag, story_image_id: story.id)
+        end
+        redirect_to image_new_story_path(story)
+      else
+        render :new
+      end
+    else
+      redirect_to baicheng_root_path
+    end
+  end
+
+  def image_new
+    @upload = StoryImage.where(story_id: params[:id])
+  end
+
+   def update_image
+    story_image = StoryImage.find params[:story_image_id]
+    story_image.story_id = params[:story_id]
+    story_image.is_cover = true
+    if story_image.save  
+    else
+      render :image_new
+    end
+  end
+
+  def update_title
+    if params[:title].present? 
+      title = params[:title]
+    else
+      title = current_user.name ? current_user.name : current_user.username
+    end
+    content = params[:content].present? ? params[:content] : "美味的佳肴，清新的空气，亲密的家人……生活的每个细节都散发着幸福的味道。因爱之名，刷新生活！我要让家人更健康更舒适更快乐的生活！"
+    story = Story.find(params[:stroy_id])
+    story.title = title
+    story.content = content
+    story.is_save = true
+    if story.save
+
+    else
+      render :update_image
     end
   end
 

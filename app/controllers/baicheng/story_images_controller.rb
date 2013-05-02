@@ -1,7 +1,10 @@
 class Baicheng::StoryImagesController < ApplicationController
   def create
     if current_user
-      @upload = StoryImage.new
+      @upload = StoryImage.where(user_id: current_user.id).first
+      unless @upload.present?
+        @upload = StoryImage.new
+      end
       @upload.file = params[:Filedata]
       @upload.user_id = current_user.id
       if @upload.save

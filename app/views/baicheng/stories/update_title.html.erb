@@ -1,0 +1,14 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "baicheng/steps.css" %>
+<%- end %>
+<div class="container-fluid step4 text-center">
+	<div class="container">
+		<h1>您的家装需求已提交完成！</h1>
+		<p>
+			立邦团队将于<b>3</b>天内与您联系确认以上信息，<br />
+			你将获取多家专业家装公司/设计师提交的家装创意方案，<br />
+			因爱之名 刷新生活！
+		</p>
+		<a href="<%=story_path(params[:stroy_id])%>" class="step4-btn">关闭</a>
+	</div>
+</div>
