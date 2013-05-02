@@ -1,0 +1,7 @@
+.navbar_top .navbar-inner{filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);}
+.navbar_footer .navbar-inner{filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#e7e7e7', GradientType=0);}
+.system_info_tip{*min-width:70px;}
+.search_area .btn.btn-small{*line-height:16px;*height:24px;}
+.works .design_list{*padding-bottom:30px;}
+.designers .thumbnails{*padding-bottom:20px;}
+.works_carousel .carousel-indicators a{*margin:0 2px;}

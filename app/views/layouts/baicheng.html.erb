@@ -2,80 +2,146 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><%= @title %></title>
-<meta name="description" content="<%= @description %>" />
+<!-- <title><%= @title %></title> -->
+<title>百城</title>
+<!-- <meta name="description" content="<%= @description %>" /> -->
 <%= csrf_meta_tag %>
 <%= stylesheet_link_tag "baicheng_all.css" %>
 <%= javascript_include_tag "baicheng" %>
+
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie6.css'%>">
+<![endif]-->
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie7.css'%>">
+<![endif]-->
 <%= yield :head %>
 </head>
 <body>
+	<div class="navbar navbar-fixed-top navbar_top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="./index.html"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active">
+							<a href="./index.html">首页</a>
+						</li>
+						<li class="divider-vertical_nav"></li>
+						<li class="">
+							<a href="./2.html">我要装修</a>
+						</li>
+						<li class="divider-vertical_nav"></li>
+						<li class="">
+							<a href="./3.html">我能设计</a>
+						</li>
+						<li class="divider-vertical_nav"></li>
+						<li>
+							<a href="./4.html">设计作品大比拼</a>
+						</li>
+						<li class="divider-vertical_nav"></li>
+						<li class="">
+							<a href="./5.html">时尚榜样</a>
+						</li>
+						<li class="divider-vertical_nav"></li>
+						<li class="">
+							<a href="./6.html">活动章程及说明</a>
+						</li>
+					</ul>
+				</div>
+				<ul class="nav pull-right">
+					<li>
+						<a href="#"><i class="icon-refresh_login"></i>登录</a>
+					</li>
+					<li class="divider-vertical"></li>
+
+					<li>
+						<a href="#"><i class="icon-refresh_register"></i>注册</a>
+					</li>
+				</ul><!-- right nav end -->
+
+				<!-- <ul class="nav nav_userinfo pull-right">
+					<li class="pr user_name">
+						<a class="username_css" href="#">Jane(3)</a>
+						<span class="system_info_tip"><em class="tip_arrow"></em>3条系统消息</span>
+					</li>
+					<li><a href="#">查看我的活动主页</a></li>
+					<li class="divider-vertical_dot"></li>
+					<li><a href="#">退出</a></li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
  	<%= yield :body_head %>
 	<%= yield %>
-	<div class="footer">
-		<ul class="center clear">
-			<li>
-				<%= link_to '首页', '/baicheng',
-					class: "bot-nav1 #{'active' if controller_name == 'welcome' && params[:page].blank?}" %>
-			</li>
-			<li>
-				<%= link_to '大众三级跳', '/baicheng/jump',
-					class: "bot-nav2 #{'active' if controller_name == 'welcome' && params[:page] == 'jump'}" %>
-			</li>
-			<li>
-				<%= link_to '设计大PK', '/baicheng/pk',
-					class: "bot-nav3 #{'active' if controller_name == 'welcome' && params[:page] == 'pk'}" %>
-			</li>
-			<li>
-				<%= link_to '作品聚集地', design_works_path,
-					class: "bot-nav4 #{'active' if controller_name =~ /design_works|stories/ }" %>
-			</li>
-			<li>
-				<%= link_to '活动规则及奖项设置', intro_path(id: 'content'),
-					class: "bot-nav5 #{'active' if controller_name == 'intros'}" %>
-			</li>
-			<li class="pr">
-				<%- if current_user %>
-					<a href="<%= user_asks_path(current_user) %>" class="bot-nav8"><%= truncate(current_user.display_name, length: 12) %></a>
-				<%- else %>
-				<%= link_to_function "注册·登录", "show_login()", :class=>"bot-nav6" %>
-					<%#= link_to '退出', destroy_user_session_path, :method => :delete %>
-				<%- end %>
-				<a href="http://www.icolor.com.cn" class="bot-nav7">返回iColor网</a>
-			</li>
-		</ul>
-	</div><!-- footer -->
-	<div id="layer"></div>
-	<%= render partial: 'baicheng/welcome/login' %>
-	<%= yield :body_tail %>
-	<%= yield :tail %>
-	<%= javascript_include_tag "/baicheng_location.js" %>
-	<script type="text/javascript">
-		$(function(){
-	    if(typeof data != 'undefined'){
-	      var options = {
-	        data  : data
-	      }
-	      var sel = new LinkageSelect(options);
-	      var province_id = "<%= @search_province %>";
-	      var area_id = "<%= @search_area %>";
-	      sel.bind('.area_1', province_id);
-	      sel.bind('.area_2', area_id);
-	    }
+	<div class="navbar navbar_footer nomargin">
+		<div class="navbar-inner nopadding">
+			<div class="container">
+				<a class="brand" href="./index.html"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
+				<p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
+				<ul class="nav pull-right">
+					<li>
+						<a class="txt_img_align" style="padding:10px 0;" href="#">去<img class="pad_h5" src="<%=asset_path 'baicheng/logo_link.png'%>"></a>
+					</li>
+					<li>
+						<a style="padding:10px 10px 10px 0;" href="#">查看更多案例</a>
+					</li>
+					<li class="divider-vertical_footer"></li>
 
-	    $('.close-btn').click(function(){
-				$('.abs-center').hide();
-				$('#layer').hide();
-			});
-	    $('.e-pop-btn').click(function(){
-				$('.abs-center').hide();
-				$('#layer').hide();
-			});
-	   });
-		function show_login () {
-			$('.unlogin').show();
-			$('#layer').show();
-		};
+					<li>
+						<a href="#">免责声明</a>
+					</li>
+					<li class="divider-vertical_footer"></li>
+
+					<li>
+						<!-- JiaThis Button BEGIN -->
+						<div id="ckepop" class="jiathis_area none clearfix share_area">
+							<span class="jiathis_txt">分享：</span>
+							<a class="jiathis_button_renren"></a>
+							<a class="jiathis_button_douban"></a>
+							<a class="jiathis_button_tsina"></a>
+							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+							<!-- <a class="jiathis_counter_style"></a> -->
+						</div>
+						<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+						<!-- JiaThis Button END -->
+					</li>
+				</ul><!-- right nav end -->
+			</div>
+		</div>
+	</div>
+	<div id="layer"></div>
+	<%#= render partial: 'baicheng/welcome/login' %>
+	<%#= yield :body_tail %>
+	<%#= yield :tail %>
+	<%#= javascript_include_tag "/baicheng_location.js" %>
+	<script type="text/javascript">
+		swfobject.registerObject("FlashID");
+		// $(function(){
+	 //    if(typeof data != 'undefined'){
+	 //      var options = {
+	 //        data  : data
+	 //      }
+	 //      var sel = new LinkageSelect(options);
+	 //      var province_id = "<%= @search_province %>";
+	 //      var area_id = "<%= @search_area %>";
+	 //      sel.bind('.area_1', province_id);
+	 //      sel.bind('.area_2', area_id);
+	 //    }
+
+	 //    $('.close-btn').click(function(){
+		// 		$('.abs-center').hide();
+		// 		$('#layer').hide();
+		// 	});
+	 //    $('.e-pop-btn').click(function(){
+		// 		$('.abs-center').hide();
+		// 		$('#layer').hide();
+		// 	});
+	 //   });
+		// function show_login () {
+		// 	$('.unlogin').show();
+		// 	$('#layer').show();
+		// };
 	</script>
 </body>
 </html>
