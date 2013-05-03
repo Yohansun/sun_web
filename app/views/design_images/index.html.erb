@@ -444,7 +444,7 @@ $(function(){
 				<%- @images.each_with_index do |image, index| %>
 					<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
 						<!-- <a href="<%= image_show_design_image_path(image,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: site + (index + 1)) %>" target="_blank"> -->
-						<a href="/images/<%=image.id%>/image_show/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=site + (index + 1)%>" target="_blank">
+						<a href="/images/<%=image.id%>_<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=site + (index + 1)%>" target="_blank">
 							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title), title: image.design.try(:title)) %>
 							<p><%= truncate(image.title, length: 15) %></p>
 							<span></span>
