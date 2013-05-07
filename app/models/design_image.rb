@@ -31,6 +31,8 @@ class DesignImage < ActiveRecord::Base
   scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
 
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
+
+  scope :from, where("created_at > (?)", "2013-3-1")
   
 
   has_attached_file :file,

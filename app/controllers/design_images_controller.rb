@@ -234,7 +234,7 @@ class DesignImagesController < ApplicationController
   end
 
   def image_show
-    @image = DesignImage.includes(:design).includes(:tags).find(params[:id])
+    @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
        @master_design = MasterDesign.find(@image.imageable_id)
     end
@@ -345,7 +345,7 @@ class DesignImagesController < ApplicationController
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @comments = @image.comments.page(params[:page]).per(3)
     #精品推荐
-    @week_stars = WeeklyStar.order("created_at desc").limit(4)
+    @week_stars = WeeklyStar.from.order("created_at desc").limit(4)
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
