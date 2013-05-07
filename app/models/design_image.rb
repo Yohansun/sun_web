@@ -74,6 +74,10 @@ class DesignImage < ActiveRecord::Base
     end
   end
 
+  def design_style_names
+    image_styles.map(&:title).join(',')
+  end
+
   # 科普兰德(1)-每周之星(2 后台设置)-大师作品(3)-sina(4)-色彩搭配(5)-自行上传(100)
   def set_sort
     self.sorts = 100 if self.sorts.blank?
