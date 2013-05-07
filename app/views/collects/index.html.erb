@@ -93,6 +93,17 @@
 							<p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%= image.inspiration.try(:shares_count)  %>)</span>
 							</p>
+						<%- elsif image.story_id %>
+						    <a href="/designs/<%= image.design_id %>" >
+						    <%= image_tag(image.story.story_images.first.try(:file), :class => "host_works_img" ) %>
+						    </a>
+						    <h3><%= image.story.try(:title)  %></h3>
+							<p class="p1 group">
+								<strong class="ft14 fb">当前票数：<%= image.story.try(:votes_count)  %></strong>
+							</p> 
+							<!-- <p class="transpond p2 group">
+								<span class="transpond_btn ft12">转发 (<%#= image.story.try(:shares_count)  %>)</span>
+							</p> -->
 						<%- end %>
 						
 					</li>

@@ -9,4 +9,14 @@ class StoryImage < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+def self.so_user(keyword)
+	StoryImage.joins(:story => :user).where("users.username=?", keyword)
 end
+def self.so_design(keyword)
+	StoryImage.joins(:story).where("stories.title=?", keyword)
+end
+def self.so_area(keyword)
+  StoryImage.joins(:story => :area).where("areas.id=?", keyword)
+end
+end
+

@@ -430,6 +430,15 @@ Icolor::Application.routes.draw do
         get :download
       end
     end
+    resources :design_competes do
+      member do
+        get :download
+        post :comment
+        delete :destroy_comment
+      end
+    end
+    resources :sysinfo
+    resources :upload_contract
     match ':page', to: 'welcome#show', via: :get
     resources :contracts do
       collection do

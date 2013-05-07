@@ -1,0 +1,95 @@
+<%-if current_user.role_id == 3 %>
+	<div class="container-fluid">
+		<div class="design_works pad_t60">
+			<div class="wrapper pad_b40">
+				<div class="redline_b4">
+					<div class="clearfix sys_top border_dot_b1 pad_b40">
+						<a class="pull-left show" href="#"><img src="<%= asset_path "baicheng/userimg.jpg" %>"></a>
+						<a href="#" class="pull-left sys_user_name"><span>Hi，<strong class="color_red"><%= current_user.username %></strong>，您共收到了<strong class="color_red">4</strong>条系统通知，请注意查看。</span></a>
+					</div>
+					<div class="mar_h20">
+						<ul class="unstyled system_list">
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+						</ul>
+						<div class="pagination pagination-centered">
+							<ul>
+								<!-- <li class="disabled"><a href="#">上一页</a></li> -->
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a class="noborder nomargin nopadding" href="#">...</a></li>
+								<li><a href="#">下一页</a></li>
+								<li><a href="#">最后一页</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<%-elsif current_user.des_status == false && current_user.role_id == 1%>
+<div class="container-fluid">
+		<div class="design_works pad_t60">
+			<div class="wrapper pad_b40">
+				<div class="redline_b4">
+					<div class="clearfix sys_top border_dot_b1 pad_b40">
+						<a class="pull-left show" href="#"><img src="<%= asset_path "baicheng/userimg.jpg" %>"></a>
+						<a href="#" class="pull-left sys_user_name"><span>Hi，<strong class="color_red"><%= current_user.username %></strong>，您共收到了<strong class="color_red">4</strong>条系统通知，请注意查看。</span></a>
+						<!-- <a href="#" class="pull-left well well-small sys_user_name pr"><span class="arrow_left"><img src="images/system/arrow_left.jpg"></span>Hi，<strong class="color_red">小丸子</strong>，您共收到了<strong class="color_red">4</strong>条系统通知，请注意查看。</a> -->
+						<!-- <a href="#" class="pull-left sys_works_more">更多家装需求 期待您的精彩设计</a> -->
+					</div>
+					<div class="mar_h20">
+						<ul class="unstyled system_list">
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+							<li class="border_dot_b1">
+								<h5><a href="#">胡云</a> 对我发布的<a href="#">《爱，让我们在一起》</a>上传了设计。</h5>
+								<p><a class="pull-right" href="#">查看</a>2012-10-31 11:20</p>
+							</li>
+						</ul>
+						<div class="pagination pagination-centered">
+							<ul>
+								<!-- <li class="disabled"><a href="#">上一页</a></li> -->
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a class="noborder nomargin nopadding" href="#">...</a></li>
+								<li><a href="#">下一页</a></li>
+								<li><a href="#">最后一页</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<%- end %>

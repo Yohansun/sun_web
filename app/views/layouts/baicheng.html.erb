@@ -7,7 +7,7 @@
 <!-- <meta name="description" content="<%= @description %>" /> -->
 <%= csrf_meta_tag %>
 <%= stylesheet_link_tag "baicheng_all.css" %>
-<%= javascript_include_tag "baicheng" %>
+<%= javascript_include_tag "baicheng","main.js" %>
 
 <!--[if IE 6]>
 <link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie6.css'%>">
@@ -37,7 +37,7 @@
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li>
-							<a href="./4.html">设计作品大比拼</a>
+							<a href="/baicheng/design_competes">设计作品大比拼</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="">
@@ -49,26 +49,28 @@
 						</li>
 					</ul>
 				</div>
-				<ul class="nav pull-right">
-					<li>
-						<a href="#"><i class="icon-refresh_login"></i>登录</a>
-					</li>
-					<li class="divider-vertical"></li>
+				<%- if current_user %>
+				    <ul class="nav nav_userinfo pull-right">
+						<li class="pr user_name">
+							<a class="username_css" href="/baicheng/sysinfo"><%= current_user.try(:username) %>(3)</a>
+							<span class="system_info_tip"><em class="tip_arrow"></em>3条系统消息</span>
+						</li>
+						<li><a href="#">查看我的活动主页</a></li>
+						<li class="divider-vertical_dot"></li>
+						<li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
+					</ul>
+                <%-else %>
+					<ul class="nav pull-right">
+						<li>
+							<a href="#"><i class="icon-refresh_login"></i>登录</a>
+						</li>
+						<li class="divider-vertical"></li>
 
-					<li>
-						<a href="#"><i class="icon-refresh_register"></i>注册</a>
-					</li>
-				</ul><!-- right nav end -->
-
-				<!-- <ul class="nav nav_userinfo pull-right">
-					<li class="pr user_name">
-						<a class="username_css" href="#">Jane(3)</a>
-						<span class="system_info_tip"><em class="tip_arrow"></em>3条系统消息</span>
-					</li>
-					<li><a href="#">查看我的活动主页</a></li>
-					<li class="divider-vertical_dot"></li>
-					<li><a href="#">退出</a></li>
-				</ul> -->
+						<li>
+							<a href="#"><i class="icon-refresh_register"></i>注册</a>
+						</li>
+					</ul><!-- right nav end -->
+				<%- end %>
 			</div>
 		</div>
 	</div>
@@ -111,37 +113,29 @@
 		</div>
 	</div>
 	<div id="layer"></div>
-	<%#= render partial: 'baicheng/welcome/login' %>
+	<div class="wel_login" style="display:none">
+	  <%= render partial: 'baicheng/welcome/login' %>
+    </div>
 	<%#= yield :body_tail %>
 	<%#= yield :tail %>
 	<%#= javascript_include_tag "/baicheng_location.js" %>
 	<script type="text/javascript">
 		swfobject.registerObject("FlashID");
-		// $(function(){
-	 //    if(typeof data != 'undefined'){
-	 //      var options = {
-	 //        data  : data
-	 //      }
-	 //      var sel = new LinkageSelect(options);
-	 //      var province_id = "<%= @search_province %>";
-	 //      var area_id = "<%= @search_area %>";
-	 //      sel.bind('.area_1', province_id);
-	 //      sel.bind('.area_2', area_id);
-	 //    }
-
-	 //    $('.close-btn').click(function(){
-		// 		$('.abs-center').hide();
-		// 		$('#layer').hide();
-		// 	});
-	 //    $('.e-pop-btn').click(function(){
-		// 		$('.abs-center').hide();
-		// 		$('#layer').hide();
-		// 	});
-	 //   });
-		// function show_login () {
-		// 	$('.unlogin').show();
-		// 	$('#layer').show();
-		// };
+		$(function(){
+	    $('.close-btn').click(function(){
+				$('.abs-center').hide();
+				$('#layer').hide();
+			});
+	    $('.e-pop-btn').click(function(){
+				$('.abs-center').hide();
+				$('#layer').hide();
+			});
+	   });
+		function show_login () {
+			$('.wel_login').show();
+			$('.unlogin').show();
+			$('#layer').show();
+		};
 	</script>
 </body>
 </html>

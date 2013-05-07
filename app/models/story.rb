@@ -7,6 +7,7 @@ class Story < ActiveRecord::Base
   belongs_to :area
   belongs_to :user
   has_one :baicheng_event
+  has_many :story_comments, :dependent => :destroy
 
   after_create :sync_baicheng_event
 

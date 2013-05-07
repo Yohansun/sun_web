@@ -27,6 +27,7 @@ class CollectsController < ApplicationController
 				@collect.inspiration_id = params[:in_design_id]
 				@collect.save
 			elsif params[:story_id]
+				Story.increment_counter(:votes_count, params[:story_id])
 				@collect.story_id = params[:story_id]
 				@collect.save
 			end

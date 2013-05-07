@@ -1,0 +1,72 @@
+<%- content_for :head do %>
+<%= javascript_include_tag "jquery.uploadify.js","/location.js", "LinkageSelect.js" %>
+	<script type="text/javascript">
+	  $(function() {
+      var options = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1');
+      sel.bind('.level_2');
+      sel.bind('.level_3');
+    });
+	</script>
+<%- end %>
+<div class="container-fluid">
+	<div class="design_works pad_t60">
+		<div class="wrapper pad_b40">
+			<%= form_tag design_competes_path, :method => "get", :class => "design_list_form mar_h20" do %>
+				<fieldset class="form-inline search_area">
+					<%=select_tag :design, options_for_select([["全部作品",""],
+			          ["房型图设计","home_design"],
+			          ["原创设计", " prototypical_design"]], params[:design]), :class => "input-small nomargin" %>
+					<select class="span2 nomargin level_1">
+						<option>省/直辖市</option>
+					</select>
+					<select class="span2 nomargin level_2">
+						<option>城市</option>
+					</select>
+					<select class="span2 nomargin level_3" name='area_id'>
+						<option>区</option>
+					</select>
+					<select class="input-small nomargin" name="tag">
+						  <option value="">户型</option>
+					</select>
+					<select class="input-small nomargin" name="cost">
+						<option value="">预算</option>
+					</select>
+					<button type="" class="btn btn-small btn_yellow">确定</button>
+					<!-- <input type="text" class="span2" placeholder="搜用户"> -->
+					<select class="span2 nomargin" name="soso">
+						<option value="so_user">搜用户</option>
+						<option value="so_design">搜作品</option>
+					</select>
+					<%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => ''%>
+					<input type="submit" class="search_btn" value="">
+				</fieldset>
+			<%- end %>
+			<div class="divider_hori_dot"></div>
+			<div class="redline_b4">
+				<ul class="thumbnails design_list nomargin">
+					<%- @designs.each do |design| %>
+						<li class="span2">
+							<div class="thumbnail nopadding">
+								<span class="<%= list_tag list_tag_deal if design.is_cover == true %>"></span>
+								<%= link_to image_tag(design.try(:file).try(:url), :size =>'203x146'), design_compete_path(design)  %>
+								<div class="works_tit">
+									<h5 class="nomargin">
+										<%=link_to design.story.try(:title), design_compete_path(design) %>
+									</h5>
+									<p class="nomargin"><span class="pull-right"><%= design.story.user.try(:username) %></span>极美设计</p>
+								</div>
+							</div>
+						</li>
+					<%- end %>
+				</ul>
+				<div class="pagination pagination-centered">
+					<%= paginate @designs %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
