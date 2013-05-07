@@ -156,7 +156,7 @@
           <%- unless @design.try(:style) == "风格" %>
           <tr>
             <th>设计风格：</th>
-            <td><%= @design.try(:style) %></td>
+            <td><%= @design.design_style_names %></td>
           </tr>
           <%- end %>
           <%- if @design.try(:design_color) != "色系" && !@design.design_color.blank? %>
