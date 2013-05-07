@@ -16,6 +16,9 @@ class Baicheng::WelcomeController < ApplicationController
   		when "pk"
 	  		@title = "家装公司设计师作品PK-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
 	  		@description = "快速上传立邦icolor刷新百城设计案例征集评选活作品。"
+            when "disclaimer"
+              @title = ""
+              @description = ""
   	end
 
     render "#{params[:page]}"

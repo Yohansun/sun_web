@@ -1,0 +1,255 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "baicheng/jquery.slider","baicheng/style" %>
+<%- end %>
+<%- content_for :tail do %>
+	<%= javascript_include_tag "jquery.slider" %>
+	<script type="text/javascript">
+		$(function(){
+			$('.colors_con').live('hover', function(){
+        $(this).children().fadeToggle('fast');
+      });
+		});
+	</script>
+<%- end %>
+<%= render partial: 'baicheng/welcome/navs' %>
+<%= render partial: 'baicheng/welcome/active_map' %>
+<div class="wrapper">
+	<%= render partial: 'baicheng/welcome/sidebar' %>
+	<div class="refresh-container">
+		<div class="refresh-bin newheight"> 
+			<div class="pr">
+				<div class="story-slider slider_bin">
+					<%- @design_images.each_with_index do |design_image,index| %>
+						<div>
+							<a href="javascript:void(0);">
+								<%= image_tag(design_image.try(:file).url(:design_work_slide)) %>
+							</a>
+							<div class="colorsbox" style="height:82px;overflow:hidden;display:none;">
+								<img src="<%= asset_path 'baicheng/content/colors_icon_tit.jpg' %>" style="float:left; margin:15px 5px 0 10px;" />
+								<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+				          <img src="<%= asset_path "baicheng/content/colors2.jpg" %>"  style="display: inline-block;" />
+				          <div class="desc" style=" height:35px; width:600px; margin:19px 0px;display:none; position:absolute; left:1px; top:1px;">
+				            <div class="list" style="height:35px;">
+				              <ul class="group" style="overflow:hidden;">
+				              	<%- @image_colors[index].each do |color| %>
+				                  <li>
+				                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+				                    <h5><%= color.name %></h5>
+				                    <p>立邦(<%= color.code %>)</p>
+				                  </li>
+				                <%- end %>
+				              </ul>
+				            </div>
+				          </div>
+				        </div>
+				        <div class="fr" style="margin:10px;">
+				        	<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="db" style="margin-bottom:5px;"><img src="<%= asset_path 'baicheng/content/go_shops.jpg' %>"></a>
+				        	<a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'baicheng/content/tmall.jpg' %>"></a>
+				        </div>
+				      </div>
+				    </div>
+					<%- end %>
+				</div>
+				<div class="show-group pa">
+					<ul class="clear">
+						<li>
+							<%= link_to "#{@design.votes_count}", votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => :post, :class => "icon-like",id: "votes_count#{@design.id}" %>
+						</li>
+						<li><a href="<%= design_work_path(@design) %>#tips" class="icon-view"><%= @design.comments_count %></a></li>
+					</ul>
+				</div>
+
+				<div class="slider-btngroup clear">
+					<div class="show-group fl">
+						<ul class="clear">
+							<li>
+								<%= link_to "收藏", user_collects_path(@design.user_id,:designs_id =>@design), :remote => true, method: :post, :class =>"icon-collect new_message" %>
+							</li>
+						</ul>
+					</div>
+					<div class="show-group fl">
+						<ul class="clear">
+							<li><a href="<%= download_user_design_path(@design.user_id, @design.id) %>" class="icon-download">下载</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div id="colors_boxes" class="colorsbox" style="height:82px;overflow:hidden;">
+				<img src="<%= asset_path 'baicheng/content/colors_icon_tit.jpg' %>" style="float:left; margin:15px 5px 0 10px;" />
+				<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+          <img src="<%= asset_path "baicheng/content/colors2.jpg" %>"  style="display: inline-block;" />
+          <div class="desc" style=" height:35px; width:600px; margin:19px 0px;display:none; position:absolute; left:1px; top:1px;">
+            <div class="list" style="height:35px;">
+              <ul class="group" style="overflow:hidden;">
+              	<% if @image_colors.present? %>
+	              	<%- @image_colors.last.each do |color| %>
+	                  <li>
+	                    <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+	                    <h5><%= color.name %></h5>
+	                    <p>立邦(<%= color.code %>)</p>
+	                  </li>
+	                <%- end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+				<div class="fr" style="margin:10px;">
+					<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="db" style="margin-bottom:5px;"><img src="<%= asset_path 'baicheng/content/go_shops.jpg' %>"></a>
+					<a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'baicheng/content/tmall.jpg' %>"></a>
+				</div>
+			</div>
+			<!-- Colors END -->
+			<div class="img-info">
+				<div class="clear">
+					<span class="fr nomargin">
+						<span class="fl ft12" style="margin:3px 3px 0 0">分享</span>
+						<!-- JiaThis Button BEGIN -->
+						<span class="jiathis_style fl" style="margin:3px 0 0 0">
+							<a class="jiathis_button_renren"></a>
+							<a class="jiathis_button_kaixin001"></a>
+							<a class="jiathis_button_tsina"></a>
+							<a class="jiathis_button_qzone"></a>
+							<!-- <a class="jiathis_button_tqq"></a> -->
+							<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a> -->
+							<a class="jiathis_counter_style"></a>
+						</span>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script>
+						<!-- JiaThis Button END -->
+					</span>
+					<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title" target= "_blank">免费咨询</a>
+				</div>
+				<div class="questionmart clear ft12 pr">
+					<% if current_user -%>
+          	<% unless current_user.common_user? %>
+              <span class="fl nomargin">咨询成功后，快来<a href="<%=new_contract_path(type: 'baicheng')%>" title="上传合同" class="cr fb">上传合同</a>，抢装修基金 </span>
+              
+            <% else %>
+              <span class="fl nomargin">咨询成功后，快来<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" title="上传合同" class="cr fb">上传合同</a>，抢装修基金 </span>
+              
+            <% end %>
+          <% else -%>
+            <span class="fl nomargin">咨询成功后，快来<%= link_to_function "上传合同", "show_login()", :class=>"cr fb" %>，抢装修基金 </span>
+          <% end %>   
+
+					<div class="js-questionmart fl">
+						<img style="padding:7px 20px 0 3px;" src="<%= asset_path 'baicheng/content/questionmark.jpg' %>">
+						<div class="questionmart_pop questionmart_pop2 none">
+							<h3 style="margin:5px 0">免费咨询（线上）</h3>
+							<div class="clear">
+								<span class="fl nomargin">大众用户点击</span>
+								<a href="<%= user_asks_path(@design.user_id) %>" class="fl btn-title">免费咨询</a>
+								<span class="fl nomargin">后，</span><br>
+								<span class="fl nomargin">与家装公司/设计师进行免费咨询。</span>
+							</div>
+							<h3 style="margin-top:10px;">签约下单（线下）</h3>
+							<p>大众用户与家装公司/设计师咨询后，成功签约。</p>
+							<h3 style="margin-top:5px;">上传合同（线上）</h3>
+							<p>
+								家装公司/设计师可进入
+								<a href="<%= user_path(@design.user_id) %>" style="color:#333;" target="_blank">个人主页</a>，<br>点击
+                <% if current_user -%>
+                  <% unless current_user.common_user? %>
+                    <a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                    <a href="<%=new_contract_path(type: 'baicheng')%>" class="cr fb">上传合同</a>
+                  <% else %>
+                    <a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                    <a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="cr fb">上传合同</a>
+                  <% end %>
+                <% else -%>
+                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a><br>或直接点击此页的
+                  <%= link_to_function "上传合同", "show_login()", :class=>"cr fb" %>
+                <% end %>
+								
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="img-info">
+				<p class="workinfo clear">
+					<span>设计师：</span><em><%= @design.user.display_name %></em>
+				</p>
+				<p class="workinfo clear">
+					<span>设计风格：</span>
+					<em>	
+						<% @style_ids.each do |style| %>
+							<%= ImageLibraryCategory.find_by_id(style).try(:title) %>
+						<% end %>
+					</em>
+				</p>
+				<p class="workinfo clear">
+					<span>楼盘名称：</span><em><%= @design.property_name %></em>
+				</p>
+				<p class="workinfo clear">
+					<span>楼盘所在地：</span><em><%= @design.location %></em>
+				</p>
+				<p class="workinfo clear">
+					<span>设计说明：</span><em>	<%= @design.content %></em>
+				</p>
+				<p class="workinfo clear">
+					<span>推荐理由：</span><em>	<%= @design.reason %></em>
+				</p>
+			</div>
+			<a name="tips"></a>
+			<div class="img-info">
+				<%- if @design.speech.present? %>
+				  <h4 class="icon-word cr fb">业主感言</h4>
+				  <p class="thankwords"><%= @design.speech %></p>
+				<%- end %>
+				<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
+					<h5 class="fb">
+						<span class="fr nomargin"><b id="word-tip">0</b>/140</span>
+						评论(<%= @design.comments_count %>)
+					</h5>
+          <%= f.hidden_field :commentable_id, value: @design.id %>
+          <%= f.hidden_field :commentable_type, value: 'Design' %>
+          <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140' %>
+          <button class="submit_btn">提交评论</button>
+        <%- end %>
+				<div class="pr">
+					<div class="pager ft12 comment-pager">
+						<%= paginate @comments %>
+					</div>
+					<div class="comment-list">
+						<%- @comments.each do |comment| %>
+							<div class="comment-item">
+								<h5>
+									<span class="fr"><%= comment.created_at.to_date %></span>
+									<%= comment.user ? comment.user.display_name : "匿名" %>
+								</h5>
+								<p class="pr">
+									<%= comment.content %>
+									<%- if @design.user == current_user %>
+										<a href="javascript:;" class="reply-btn js-reply">回复</a>
+									<%- end %>
+								</p>
+                <%= form_for(ReplyMsg.new, :html => {:class => "reply_form comment-form clear none"}) do |f| %>
+                  <%= f.hidden_field :show_id, value: @design.id %>
+                  <%= f.hidden_field :comment_id, value: comment.id %>
+                  <%= f.hidden_field :reply_type, value: "design_works" %>
+                  <%= f.text_area :content, :rows => 2 %>
+                  <button class="submit_btn">提交评论</button>
+                  <button class="submit_btn submit_btn_cancel js-submit_btn_cancel">取消</button>
+                <%- end %>
+
+								<%- comment.reply_msgs.order("created_at DESC").each do |reply| %>
+									<p class="pr noborder">
+										<em class="cr"><%= reply.user.display_name %></em>
+										 回复说：<%= reply.content %>
+										 <%- if @design.user == current_user %>
+										 	<%= link_to "删除", reply_msg_path(reply.id), :class => "reply_del", method: :delete, :confirm => "确定删除么?" %>
+										 <%- end %>
+									</p>
+								<%- end %>
+							</div>
+						<%- end %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-bot"></div>
+	</div><!-- refresh-container -->
+</div><!-- wrapper -->

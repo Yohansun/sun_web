@@ -1,2 +1,73 @@
-<%= render partial: 'baicheng/welcome/navs' %>
-<%= render partial: "baicheng/welcome/#{params[:mode].blank? ? 'map' : 'grid'}" , locals: {data: @event_data} %>
+<%- content_for :tail do %>
+	<script type="text/javascript" charset="utf-8">
+	    $(function() {
+	        var options = {
+	            data  : data
+	        }
+
+	        var sel = new LinkageSelect(options);
+	        sel.bind('.level_1', null, '请选择省');
+	        sel.bind('.level_2', null, '请选择市');
+	        sel.bind('.level_3', null, '请选择区');
+	    });
+	</script>
+<%- end %>
+<div class="container-fluid">
+	<div class="mydesign">
+		<div class="banner1"></div>
+		<div class="wrapper pr pad_b40">
+			<%- if current_user && current_user.role_id == 1 %>
+			  <%= link_to "upload", new_user_design_path(current_user), class: 'upload_btn', target: '_blank' %>
+			<%- elsif current_user %>
+			  <a class="upload_btn" href="javascript:alert('icolor网站只有设计师才能上传作品!');">upload</a>
+			<%- else %>
+           <a class="upload_btn" href="javascript:alert('请先登录!');">upload</a>
+			<%- end %>
+			<%= form_for @search, :url => stories_path, :html =>{:class => 'design_list_form mar_h20 clearfix', method: :get} do |f| %>
+				<ul class="breadcrumb pull-left nomargin">
+					<li>排序：</li>
+					<li class="<%= 'active' if params[:sort].blank? %>"><%= link_to '默认', stories_path %><span class="divider">|</span></li>
+					<li class="<%= 'active' if params[:sort] == 'hot' %>"><%= link_to '热门抢', stories_path(sort: 'hot') %><span class="divider">|</span></li>
+					<li class="<%= 'active' if params[:sort] == 'new_chance' %>"><%= link_to '新机会', stories_path(sort: 'new_chance') %></li>
+				</ul>
+				<fieldset class="pull-right form-inline search_area">
+					<select id="province" class="level_1 span2 nomargin" name="province_id">
+                </select>
+                <select id="city" class="level_2 span2 nomargin" name="city_id">
+                </select>
+                <select id="country" class="level_3 span2 nomargin" name="area_id">
+                </select>
+					<button type="" class="btn btn-small btn_yellow">确定</button>
+					<%= f.text_field :user_username_or_user_name_or_user_name_of_company_like, :class =>"span2",:placeholder =>"搜用户" %>
+					<input type="submit" class="search_btn" value="">
+				</fieldset>
+			<%- end %>
+			<div class="divider_hori_dot"></div>
+			<div class="redline_b4">
+				<ul class="thumbnails design_list nomargin">
+					<%- @stories.each do |story| %>
+					  <li class="span2">
+							<div class="thumbnail nopadding">
+								<%- if story.designs_count == 3 %>
+								  <span class="list_tag list_tag_full"></span>
+								<%- else %>
+								  <span class="list_tag list_tag_deal"></span>
+								<%- end %>
+								<a href="<%= story_path(story.id) %>" class="list_img_a">
+									<%= image_tag(story.story_images.first.file.url(:baicheng_list)) %>
+								</a>
+								<div class="design_list_tit">
+									<h5 class="nomargin"><a href="<%= story_path(story.id) %>"><%= story.title %></a></h5>
+									<p class="nomargin"><%= story.user.display_name %> (<%= story.location %>)</p>
+								</div>
+							</div>
+						</li>
+					<%- end %>
+				</ul>
+				<div class="pagination pagination-centered">
+					<%= paginate @stories %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

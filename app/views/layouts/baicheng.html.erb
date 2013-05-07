@@ -6,34 +6,28 @@
 <title>百城</title>
 <!-- <meta name="description" content="<%= @description %>" /> -->
 <%= csrf_meta_tag %>
-<%= stylesheet_link_tag "baicheng_all.css" %>
-<%= javascript_include_tag "baicheng","main.js" %>
+<%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
+<%= javascript_include_tag "baicheng","baicheng/bootstrap","main.js" %>
 
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie6.css'%>">
-<![endif]-->
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie7.css'%>">
-<![endif]-->
 <%= yield :head %>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top navbar_top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="<%=baicheng_root_path%>"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
+				<a class="brand" href="<%= root_path %>"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li <% if controller_name == "welcome" && action_name == "index"%>class="active"<% end %>>
-							<a href="<%=baicheng_root_path%>">首页</a>
+						<li class="<%= 'active' if controller_name == 'welcome' %>">
+							<%= link_to "首页", baicheng_root_path %>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="">
 							<a href="<%=new_story_path%>">我要装修</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="./3.html">我能设计</a>
+						<li class="<%= 'active' if controller_name == 'stories' %>">
+							<%= link_to "我能设计", stories_path %>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li>
@@ -50,27 +44,27 @@
 					</ul>
 				</div>
 				<%- if current_user %>
-				    <ul class="nav nav_userinfo pull-right">
+					<ul class="nav nav_userinfo pull-right">
 						<li class="pr user_name">
-							<a class="username_css" href="/baicheng/sysinfo"><%= current_user.try(:username) %>(3)</a>
+							<a class="username_css" href="<%= user_asks_path(current_user) %>" target="_blank"><%= current_user.display_name %>(3)</a>
 							<span class="system_info_tip"><em class="tip_arrow"></em>3条系统消息</span>
 						</li>
-						<li><a href="#">查看我的活动主页</a></li>
+						<li><a href="<%= act_stories_path %>">查看我的活动主页</a></li>
 						<li class="divider-vertical_dot"></li>
 						<li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
 					</ul>
-                <%-else %>
-					<ul class="nav pull-right">
+				<%- else %>
+				  <ul class="nav pull-right">
 						<li>
-							<a href="#"><i class="icon-refresh_login"></i>登录</a>
+							<a href="javascript:show_login();"><i class="icon-refresh_login"></i>登录</a>
 						</li>
 						<li class="divider-vertical"></li>
 
 						<li>
-							<a href="#"><i class="icon-refresh_register"></i>注册</a>
+							<a href="/users/sign_up"><i class="icon-refresh_register"></i>注册</a>
 						</li>
-					</ul><!-- right nav end -->
-				<%- end %>
+					</ul> 
+				<%- end %><!-- right nav end -->
 			</div>
 		</div>
 	</div>
@@ -79,19 +73,19 @@
 	<div class="navbar navbar_footer nomargin">
 		<div class="navbar-inner nopadding">
 			<div class="container">
-				<a class="brand" href="<%=baicheng_root_path%>"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
+				<a class="brand" href="<%= root_path %>"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
 				<p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
 				<ul class="nav pull-right">
 					<li>
-						<a class="txt_img_align" style="padding:10px 0;" href="#">去<img class="pad_h5" src="<%=asset_path 'baicheng/logo_link.png'%>"></a>
+						<a class="txt_img_align" style="padding:10px 0;" href="<%= root_path %>">去<img class="pad_h5" src="<%=asset_path 'baicheng/logo_link.png'%>"></a>
 					</li>
 					<li>
-						<a style="padding:10px 10px 10px 0;" href="#">查看更多案例</a>
+						<a style="padding:10px 10px 10px 0;" href="<%= root_path %>">查看更多案例</a>
 					</li>
 					<li class="divider-vertical_footer"></li>
 
 					<li>
-						<a href="#">免责声明</a>
+						<a href="/love/disclaimer">免责声明</a>
 					</li>
 					<li class="divider-vertical_footer"></li>
 
@@ -113,12 +107,10 @@
 		</div>
 	</div>
 	<div id="layer"></div>
-	<div class="wel_login" style="display:none">
-	  <%= render partial: 'baicheng/welcome/login' %>
-    </div>
+	<%= render partial: 'baicheng/welcome/login' %>
 	<%= yield :body_tail %>
 	<%= yield :tail %>
-	<%= javascript_include_tag "/baicheng_location.js" %>
+	<%= javascript_include_tag "/location.js" %>
 	<script type="text/javascript">
 		swfobject.registerObject("FlashID");
 		$(function(){

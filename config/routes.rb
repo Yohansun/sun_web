@@ -418,7 +418,7 @@ Icolor::Application.routes.draw do
     get "judge" => "refresh#judge"
   end
 
-  scope "/baicheng", :module =>"baicheng" do
+  scope "/love", :module =>"baicheng" do
     root  to: 'welcome#index', as: 'baicheng_root'
     resources :design_works do
       collection do
@@ -426,6 +426,9 @@ Icolor::Application.routes.draw do
       end
     end
     resources :stories do
+      collection do
+        get :act
+      end
       member do
         get :download
         get :image_new

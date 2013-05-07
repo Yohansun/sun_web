@@ -3,26 +3,48 @@ require 'zip/zip'
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
-    @event_data = BaichengEvent.by_type(Story.name).order('created_at DESC').page(params[:page]).per(28)
-    if params[:unload].present?
-      @xx = BaichengEvent.baicheng_map_story(825)
-      @lf = BaichengEvent.baicheng_map_story(647)
-      @dt = BaichengEvent.baicheng_map_story(1046)
-      @sjz = BaichengEvent.baicheng_map_story(661)
-      @ly = BaichengEvent.baicheng_map_story(855)
-    else
-      @xx = BaichengEvent.story_type(825)
-      @xx2 = BaichengEvent.design_type(825)
-      @lf = BaichengEvent.story_type(647)
-      @lf2 = BaichengEvent.design_type(647)
-      @dt = BaichengEvent.story_type(1046)
-      @dt2 = BaichengEvent.design_type(1046)
-      @sjz = BaichengEvent.story_type(661)
-      @sjz2 = BaichengEvent.design_type(661)
-      @ly = BaichengEvent.story_type(855)
-      @ly2 = BaichengEvent.design_type(855)
+    # @event_data = BaichengEvent.by_type(Story.name).order('created_at DESC').page(params[:page]).per(28)
+    # if params[:unload].present?
+    #   @xx = BaichengEvent.baicheng_map_story(825)
+    #   @lf = BaichengEvent.baicheng_map_story(647)
+    #   @dt = BaichengEvent.baicheng_map_story(1046)
+    #   @sjz = BaichengEvent.baicheng_map_story(661)
+    #   @ly = BaichengEvent.baicheng_map_story(855)
+    # else
+    #   @xx = BaichengEvent.story_type(825)
+    #   @xx2 = BaichengEvent.design_type(825)
+    #   @lf = BaichengEvent.story_type(647)
+    #   @lf2 = BaichengEvent.design_type(647)
+    #   @dt = BaichengEvent.story_type(1046)
+    #   @dt2 = BaichengEvent.design_type(1046)
+    #   @sjz = BaichengEvent.story_type(661)
+    #   @sjz2 = BaichengEvent.design_type(661)
+    #   @ly = BaichengEvent.story_type(855)
+    #   @ly2 = BaichengEvent.design_type(855)
+    # end
+
+    params[:search] ||= {}
+
+    province_id,city_id,area_id = params[:province_id].or(nil),params[:city_id].or(nil),params[:area_id].or(nil)
+
+    if area_id.present?
+      params[:search][:area_id_eq] = area_id
+    elsif province_id.present?
+      params[:search][:area_id_in] = Area.robot(province_id,[city_id].compact).map(&:id)
     end
 
+    @search = Story.search(params[:search])
+    @stories = @search
+    if params[:sort].present?
+        case params[:sort]
+        when 'hot'
+          @search_sort = @search.order("stories.designs_count")
+        when 'new_chance'
+          @search_sort = @search.order("stories.designs_count")
+        end
+        @stories = @search_sort
+    end
+    @stories = @stories.order("stories.created_at desc").page(params[:page]).per(24)
   end
 
   def new
@@ -130,8 +152,12 @@ class Baicheng::StoriesController < ApplicationController
 
   def show
   	@story = Story.find(params[:id])
-  	#@stories = Story.where(parent_id: @story.id).limit(3)
+      @story_image = @story.story_images.first
       @designs = Design.where(story_id: @story.id).limit(3)
+  end
+
+  def act
+    
   end
 
   def download

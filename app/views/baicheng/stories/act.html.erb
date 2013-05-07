@@ -1,0 +1,90 @@
+<div class="container-fluid">
+	<div class="design_works pad_t60">
+		<div class="wrapper pad_b40">
+			<div class="clearfix sys_top">
+				<a class="pull-left show" href="<%= user_asks_path(current_user) %>" target="_blank">
+					<%= image_tag 'baicheng/system/userimg.jpg' %>
+				</a>
+				<!-- <a href="javascript:;" class="pull-left well well-small sys_user_name pr"><span class="arrow_left"><img src="images/system/arrow_left.jpg"></span><strong class="color_red">景涛</strong>的活动主页</a> -->
+
+				<a href="<%= user_asks_path(current_user) %>" class="pull-left sys_user_name" target="_blank"><span><strong class="color_red"><%= current_user.display_name %></strong>的活动主页</span></a>
+				<a href="<%= stories_path %>" class="pull-left sys_works_more">更多家装需求 期待您的精彩设计</a>
+			</div>
+			<div class="redline_b4 pad_b40">
+				<h5 class="sys_title"><span>我想设计</span></h5>
+				<ul class="thumbnails design_list nomargin">
+					<li class="span2">
+						<div class="thumbnail nopadding">
+							<!-- <span class="list_tag list_tag_full"></span> -->
+							<a href="javascript:;" class="list_img_a">
+								<%= image_tag 'baicheng/mydesign/list1.jpg' %>
+							</a>
+							<div class="design_list_tit">
+								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+								<p class="nomargin">小丸子 (杭州)</p>
+							</div>
+						</div>
+						<p class="well well-small text-center status">倒计时<i class="i_icon i_icon_big icon_day">7</i>天</p>
+					</li>
+					<li class="span2">
+						<div class="thumbnail nopadding">
+							<!-- <span class="list_tag list_tag_full"></span> -->
+							<a href="javascript:;" class="list_img_a">
+								<%= image_tag 'baicheng/mydesign/list1.jpg' %>
+							</a>
+							<div class="design_list_tit">
+								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+								<p class="nomargin">小丸子 (杭州)</p>
+							</div>
+						</div>
+						<p class="well well-small text-center status"><i class="i_icon i_icon_xbig mar_h5 icon_full"></i>设计已满</p>
+					</li>
+					<li class="span2">
+						<div class="thumbnail nopadding">
+							<!-- <span class="list_tag list_tag_full"></span> -->
+							<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
+							<div class="design_list_tit">
+								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+								<p class="nomargin">小丸子 (杭州)</p>
+							</div>
+						</div>
+						<p class="well well-small text-center status">倒计时<i class="i_icon i_icon_big icon_day">7</i>天</p>
+					</li>
+					<li class="span2">
+						<div class="thumbnail nopadding">
+							<!-- <span class="list_tag list_tag_full"></span> -->
+							<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
+							<div class="design_list_tit">
+								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+								<p class="nomargin">小丸子 (杭州)</p>
+							</div>
+						</div>
+						<p class="well well-small text-center status"><i class="i_icon i_icon_xbig mar_h5 icon_warn"></i>已过期</p>
+					</li>
+				</ul>
+				<h5 class="sys_title"><span>我已上传</span></h5>
+				<ul class="thumbnails design_list nomargin">
+					<li class="span2">
+						<div class="thumbnail nopadding">
+							<!-- <span class="list_tag list_tag_deal"></span> -->
+							<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
+							<div class="works_tit">
+								<h5 class="nomargin">为<a href="javascript:;">“爱，让我们在一起”</a>做的设计</h5>
+								<p class="nomargin"><span class="pull-right">现代简约</span>极美设计</p>
+							</div>
+						</div>
+					</li>
+					<li class="span2">
+						<div class="thumbnail nopadding">
+							<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
+							<div class="works_tit">
+								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+								<p class="nomargin"><span class="pull-right">现代简约</span>极美设计</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

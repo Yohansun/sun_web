@@ -1,176 +1,235 @@
-<%- content_for :head do %>
-	<%= stylesheet_link_tag "baicheng/jquery.slider","baicheng/style" %>
-<%- end %>
-<%- content_for :tail do %>
-	<%= javascript_include_tag "jquery.slider" %>
-<%- end %>
-<%= render partial: 'baicheng/welcome/navs' %>
-<%= render partial: 'baicheng/welcome/active_map' %>
-<div class="wrapper">
-	<%= render partial: 'baicheng/welcome/sidebar' %>
-	<div class="refresh-container">
-		<div class="refresh-bin newheight"> 
-			<div class="pr">
-				<div class="story-slider slider_bin">
-					<%- @story.story_images.each do |image| %>
-						<div>
-							<a href="javascript:void(0);">
-								<%= image_tag(image.file.url(:slide)) %>
-							</a>
+<div class="container-fluid">
+	<div class="mydesign pad_t60">
+		<div class="wrapper pr pad_b40">
+			<div class="redline_b4">
+				<div class="clearfix pad_h25">
+					<div class="w670 pull-left">
+						<div style="text-align:center;width:670px;height:353px;display:table-cell;vertical-align:middle;font-size:308px;">
+							<%= image_tag(@story_image.file.url(:baicheng_slide)) %>
 						</div>
-					<%- end %>
+					</div>
+					<div class="w190 pull-left design_intro pr">
+						<i class="in_arrow"><%= image_tag 'baicheng/mydesign/in_arrow.png' %></i>
+						<h5 class="pad_h20 border_dot_b1">装修需求</h5>
+						<p class="pad_h20 border_dot_b1">
+							<span class="show">户型：<strong>两居室</strong></span>
+							<span class="show">期望风格：<strong>现代简约</strong></span>
+							<span class="show">面积：<strong>80平</strong></span>
+							<span class="show">重点设计功能区：<strong>卧室</strong></span>
+							<span class="show">装修预算：<strong>8-10万</strong></span>
+							<span class="show">个性需求：<strong class="show">我喜欢简单的生活，装修不需要很华丽，但一定要很舒服！</strong></span>
+						</p>
+						<div>
+							<!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
+							<a href="#design_tips" class="design_btn" role="button" data-toggle="modal"></a>
+							<div class="btn_group text-center">
+								<a class="btns btn_down" href="javascript:;"><span><i class="i_icon icon_down"></i>下载房型图</span></a>
+								<a class="btns btn_upload" href="<%= new_user_design_path(current_user) %>"><span><i class="i_icon icon_upload"></i>上传设计</span></a>
+							</div>
+							<a href="javascript:;" class="show text-center color_red"><small>如何参与用户房型图的设计 <i class="i_icon icon_question"></i></small></a>
+						</div>
+					</div>
 				</div>
-				<div class="show-group pa">
-					<ul class="clear">
-						<li>
-							<%= link_to "#{@story.votes_count}", votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "icon-like",id: "votes_count#{@story.id}" %>
+				<div class="divider_hori_dot"></div>
+				<p class="info_place border_dot_b1">
+					<span class="pull-right"><a class="color_red nomargin"><%= @story.user.display_name %></a> 的房型图</span>
+					<strong>楼盘名称： <span>金地凯旋</span>   楼盘所在地：<span>江苏省 南京市</span></strong>
+				</p>
+				<div class="info_detail">
+					<h4 class="color_red text-center">爱，让我们在一起</h4>
+					<p>“装修”在别人听起来是一项很艰难的工作，每每提到装修就是一脸的茫然。可是“装修”却是我的爱好之一，我喜欢把自己的房子按照自己的喜好装修成自己的风格，也喜欢去逛各大建材市场，看看现下的流行趋势，更喜欢在装大里和商家和业主们交流，尤其喜欢参加装大组织的活动，如果能从中认识更多的朋友，我非常荣幸。</p>
+				</div>
+				<div class="mar_h20 clearfix border_dot_b1">
+					<a class="pull-right vote_btn" href="javascript:alert('投票成功!');"><i class="i_icon i_icon_big icon_vote"></i>投票(20)</a>
+					<!-- JiaThis Button BEGIN -->
+					<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:110px;">
+						<span class="jiathis_txt">分享：</span>
+						<a class="jiathis_button_renren"></a>
+						<a class="jiathis_button_douban"></a>
+						<a class="jiathis_button_tsina"></a>
+						<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a> -->
+						<!-- <a class="jiathis_counter_style"></a> -->
+					</div>
+					<!-- // <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script> -->
+					<!-- JiaThis Button END -->
+				</div>
+				<div class="mar_h20 pad_b40 designers border_dot_b1">
+					<h5><i class="i_icon icon_tit"></i>想为你设计的家装公司/设计师</h5>
+					<span class="in_arrow_top"><%= image_tag 'baicheng/mydesign/in_arrow_top.png' %></span>
+					<ul class="thumbnails well">
+						<li class="span2">
+							<div class="thumbnail nopadding noborder noshadow">
+								<a class="show" href="<%= user_path(current_user) %>">
+									<%= image_tag 'baicheng/mydesign/designer1.png' %>
+								</a>
+								<p>尊筑设计</p>
+								<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
+							</div>
+						</li>
+						<li class="divider-vertical_designer"></li>
+						<li class="span2">
+							<div class="thumbnail nopadding noborder noshadow">
+								<a class="show" href="<%= user_path(current_user) %>"><%= image_tag 'baicheng/mydesign/designer1.png' %></a>
+								<p>尊筑设计</p>
+								<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
+							</div>
+						</li>
+						<li class="divider-vertical_designer"></li>
+						<li class="span2">
+							<div class="thumbnail nopadding noborder noshadow">
+								<a class="show" href="<%= user_path(current_user) %>"><%= image_tag 'baicheng/mydesign/designer1.png' %></a>
+								<p>尊筑设计</p>
+								<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
+							</div>
+						</li>
+						<li class="divider-vertical_designer"></li>
+						<li class="span2">
+							<div class="thumbnail nopadding noborder noshadow">
+								<a class="show" href="<%= user_path(current_user) %>"><%= image_tag 'baicheng/mydesign/designer1.png' %></a>
+								<p>尊筑设计</p>
+								<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
+							</div>
+						</li>
+						<li class="divider-vertical_designer"></li>
+						<li class="span2">
+							<div class="thumbnail nopadding noborder noshadow">
+								<a class="show" href="<%= user_path(current_user) %>"><%= image_tag 'baicheng/mydesign/designer1.png' %></a>
+								<p>尊筑设计</p>
+								<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
+							</div>
+						</li>
+						<li class="divider-vertical_designer"></li>
+						<li class="span2">
+							<div class="thumbnail nopadding noborder noshadow">
+								<a class="show" href="<%= user_path(current_user) %>"><%= image_tag 'baicheng/mydesign/designer1.png' %></a>
+								<p>尊筑设计</p>
+								<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
+							</div>
 						</li>
 					</ul>
 				</div>
-			</div>
-			<p class="img-info clear">
-				<span class="fr nomargin">
-					<span class="fl ft12" style="margin:3px 3px 0 0">分享</span>
-					<!-- JiaThis Button BEGIN -->
-					<span class="jiathis_style fl" style="margin:3px 0 0 0">
-						<a class="jiathis_button_renren"></a>
-						<a class="jiathis_button_kaixin001"></a>
-						<a class="jiathis_button_tsina"></a>
-						<a class="jiathis_button_qzone"></a>
-						<!-- <a class="jiathis_button_tqq"></a> -->
-						<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a> -->
-						<a class="jiathis_counter_style"></a>
-					</span>
-					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script>
-					<!-- JiaThis Button END -->
-				</span>
-				<span>楼盘名称：<%= @story.property_name %></span>
-				<span>楼盘所在地：<%= @story.location %></span>
-			</p>
-			<div class="img-info">
-				<div class="clear">
-					<%- if current_user && current_user.role_id != 3 %>
-						<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title">我来设计</a>
-					<%- elsif current_user %>
-						<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title">我来设计</a>
-					<%- else %>
-						<a href="javascript:show_login();" class="fl btn-title">我来设计</a>
-					<%- end %>
-					<div class="show-group fl">
-						<ul class="clear">
-							<li>
-								<%- if current_user %>
-									<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
-								<%- else %>
-									<a href="javascript:show_login();" class="icon-collect">收藏</a>
-								<%- end %>
-							</li>
-						</ul>
-					</div>
-					<div class="show-group fl">
-						<ul class="clear">
-							<li><a href="<%= download_story_path(@story.id) %>" class="icon-download">下载</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="questionmart clear ft12 pr">
-					<span class="fl nomargin">如何参与用户房型图的设计 </span>
-					<div class="js-questionmart fl">
-						<img style="padding:7px 20px 0 3px;" src="<%= asset_path 'baicheng/content/questionmark.jpg' %>">
-						<div class="questionmart_pop none">
-							<h3>收藏/下载房型图（线上）</h3>
-							<div class="clear">
-								<div>当家装公司/设计师对大众用户上传的某房型图感兴趣有意参与设计的时候：</div>
-								<div class="clear">
-									<span class="fl nomargin">可点击</span>
-									<div class="show-group fl">
-										<ul class="clear nomargin">
-											<li>
-												<%- if current_user %>
-													<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
-												<%- else %>
-													<a href="javascript:show_login();" class="icon-collect">收藏</a>
-												<%- end %>
-											</li>
-										</ul>
-									</div>
-									<span class="fl">,随时进入<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>的收藏再次查看</span>
+				<div class="mar_h20 works border_dot_b1 pad_b40">
+					<h5><i class="i_icon icon_tit"></i>已提交作品<span class="well well-small noborder">选择心仪作品上传<a href="javascript:;" class="color_red">施工合同</a>，更有机会获得立邦产品购买的折扣券哦!</span></h5>
+					<ul class="thumbnails design_list">
+						<li class="span2">
+							<div class="thumbnail nopadding">
+								<!-- <span class="list_tag list_tag_deal"></span> -->
+								<a href="javascript:;" class="list_img_a">
+									<%= image_tag 'baicheng/mydesign/list1.jpg' %>
+								</a>
+								<div class="works_tit border_dot_b1">
+									<h5 class="nomargin nopadding"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+									<p class="nomargin"><span class="pull-right">现代简约</span>极美设计</p>
 								</div>
-
-								<div class="clear">
-									<span class="fl nomargin">或是点击</span>
-									<div class="show-group fl">
-										<ul class="clear nomargin">
-											<li><a href="<%= download_story_path(@story.id) %>" class="icon-download">下载</a></li>
-										</ul>
-									</div>
-									<span class="fl">,将房型图下载到本地进行设计。</span>
-								</div>
+								<p class="upload_good"><a href="javascript:;" class="pull-right upload_btn_red"><span class="text-center">上传合同</span></a><a href="javascript:;" class="i_icon icon_talk"></a></p>
 							</div>
-							<h3 style="margin-top:15px;">房型设计（线下）</h3>
-							<p>家装公司/设计师对下载的房型图进行设计。</p>
-							<h3 style="margin-top:30px;">房型设计上传（线上）</h3>
-							<p class="clear">
-								<span class="fl nomargin">家装公司/设计师点击</span>
-								<%- if current_user && current_user.role_id != 3 %>
-									<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title" style="padding:1px 0;">我来设计</a>
-								<%- elsif current_user %>
-									<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title" style="padding:1px 0;">我来设计</a>
-								<%- else %>
-									<a href="javascript:show_login();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
-								<%- end %>
-								<span class="fl">，将设计图上传。</span>
-							</p>
-							<h3 style="margin-top:25px;">上传合同（线上）</h3>
-							<p>
-								当家装公司/设计师的作品被上传房型图的大众用户选中，经过咨询沟通，并成功下单后。家装公司/设计师可进入
-								<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>，点击
-								<% if current_user -%>
-                  <% unless current_user.common_user? %>
-                  	<a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
-                  <% else %>
-                  	<a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
-                  <% end %>
-                <% else -%>
-                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
-                <% end %>
-								
-							</p>
+						</li>
+						<li class="span2">
+							<div class="thumbnail nopadding">
+								<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
+								<div class="works_tit border_dot_b1">
+									<h5 class="nomargin nopadding"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+									<p class="nomargin"><span class="pull-right">现代简约</span>极美设计</p>
+								</div>
+								<p class="upload_good"><a href="javascript:;" class="pull-right upload_btn_red"><span class="text-center">上传合同</span></a><a href="javascript:;" class="i_icon icon_talking"></a></p>
+							</div>
+						</li>
+						<li class="span2">
+							<div class="thumbnail nopadding">
+								<!-- <span class="list_tag list_tag_deal"></span> -->
+								<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
+								<div class="works_tit border_dot_b1">
+									<h5 class="nomargin nopadding"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
+									<p class="nomargin"><span class="pull-right">现代简约</span>极美设计</p>
+								</div>
+								<p class="upload_good"><a href="javascript:;" class="pull-right upload_btn_red"><span class="text-center">上传合同</span></a><a href="javascript:;" class="i_icon icon_talk"></a></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="reviews">
+					<h5><i class="i_icon icon_tit"></i>留言板</h5>
+					<form>
+						<p class="alert alert-info"><span class="pull-right">0/140</span>留言 (86)</p>
+						<textarea class="textarea_def"></textarea>
+						<div class="clearfix">
+							<button type="submit" class="pull-left vote_btn vote_btn_small nomargin noborder">提交留言</button>
+						</div>
+					</form>
+					<div class="pr">
+						<div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
+							<ul>
+								<!-- <li class="disabled"><a href="javascript:;">上一页</a></li> -->
+								<li class="active"><a href="javascript:;">1</a></li>
+								<li><a href="javascript:;">2</a></li>
+								<li><a href="javascript:;">3</a></li>
+								<li><a href="javascript:;">4</a></li>
+								<li><a href="javascript:;">5</a></li>
+								<li><a class="noborder nomargin nopadding" href="javascript:;">...</a></li>
+								<li><a href="javascript:;">下一页</a></li>
+								<li><a class="nomargin" href="javascript:;">最后一页</a></li>
+							</ul>
+						</div>
+						<div class="review_item">
+							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
+							<div class="clearfix">
+								<span class="review_btns pull-right">
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
+								</span>
+								<p class="review_txt border_dot_b1">很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯</p>
+							</div>
+							<p class="nomargin"><span class="color_red">佘大湿</span>回复说：期待实景图~~</p>
+						</div>
+						<div class="review_item">
+							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
+							<div class="clearfix">
+								<span class="review_btns pull-right">
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
+								</span>
+								<p class="review_txt border_dot_b1">很好！非常好用的工具！</p>
+							</div>
+							<p class="nomargin"><span class="color_red">佘大湿</span>回复说：期待实景图~~</p>
+						</div>
+						<div class="review_item">
+							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
+							<div class="clearfix">
+								<span class="review_btns pull-right">
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
+								</span>
+								<p class="review_txt">很好！非常好用的工具！</p>
+							</div>
+							<form>
+								<textarea class="textarea_def"></textarea>
+								<div class="btn_group clearfix">
+									<button type="submit" class="pull-left vote_btn vote_btn_small  noborder">提交留言</button>
+									<a class="pull-left vote_btn vote_btn_small vote_btn_gray noborder">取消</a>
+								</div>
+							</form>
+						</div>
+						<div class="review_item">
+							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
+							<div class="clearfix">
+								<span class="review_btns pull-right">
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
+								</span>
+								<p class="review_txt border_dot_b1">很好！非常好用的工具！赞一个⋯⋯很好！</p>
+							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
-			<div class="img-info">
-				<h3 class="cr tc fb"><%= @story.title %></h3>
-				<p class="tc ft12 author">作者：<%= @story.user.display_name %></p>
-				<p style="word-wrap:break-word;"><%= @story.content %></p>
-				<p class="clear">
-					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr", id: "votes_count#{@story.id}" do %>
-						<%= image_tag("baicheng/content/btn_vote.png")%>
-					<%- end %>
-				</p>
-			</div>
-			<div class="img-info">
-				<h4 class="fb">已提交作品</h4>
-				<ul class="oldworks clear">
-					<%- @designs.each do |design| %>
-						<li class="nomargin">
-							<a href="<%= user_design_path(design.user_id, design) %>" target="_blank">
-								<%= image_tag(design.cover_img.try(:file).try(:url, :design_image_list), size: "203x146")%>
-							</a>
-							<h5>
-								<a href="<%= user_design_path(design.user_id, design) %>" class="cr" target="_blank"><%= design.title %></a>
-							</h5>
-							<p>
-								<span class="fr nomargin ft12"><%= Area.find(design.area_id).parent.name if design.area_id %></span>
-								<span class="ft12"><%= design.user.display_name %></span>
-							</p>
-						</li>
-					<%- end %>
-				</ul>
-			</div>
 		</div>
-		<div class="container-bot"></div>
-	</div><!-- refresh-container -->
-</div><!-- wrapper -->
+	</div>
+</div>
+
+<!-- modal pops -->
+<div class="design_tips clearfix modal hide fade" id="design_tips">
+	<a class="close_btn" data-dismiss="modal" aria-hidden="true" href="javascript:;">X</a><br><br>
+	<h4 class="text-center">小提示</h4>
+	<p class="text-center" style="padding:20px;">请在点击后<strong class="color_red">10</strong>天之内，上传房型图设计方案<br>（包含1张平面图、1张重点设计功能区立面图、1张效果图，具体参见活动<a href="javascript:;" class="color_red a_decration">评比标准</a>，过期视为自动放弃）<br>每个房型图仅接受<strong class="color_red">前3套</strong>设计方案，还请尽快上传设计哦！</p>
+</div>
+<!-- modal pops ends -->

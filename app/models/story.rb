@@ -4,6 +4,7 @@ class Story < ActiveRecord::Base
   has_one :story_image, :dependent => :destroy
   has_many :votes, :as => :voteable
   has_many :collects, :dependent => :destroy
+  has_many :designs
   belongs_to :area
   belongs_to :user
   has_one :baicheng_event
