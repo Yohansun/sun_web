@@ -152,7 +152,7 @@ class Baicheng::StoriesController < ApplicationController
 
   def show
   	@story = Story.find(params[:id])
-      @story_image = @story.story_images.first
+      @story_image = @story.story_image
       @designs = Design.where(story_id: @story.id).limit(3)
   end
 

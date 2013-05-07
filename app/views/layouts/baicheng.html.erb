@@ -7,7 +7,7 @@
 <!-- <meta name="description" content="<%= @description %>" /> -->
 <%= csrf_meta_tag %>
 <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
-<%= javascript_include_tag "baicheng","baicheng/bootstrap","main.js" %>
+<%= javascript_include_tag "baicheng","baicheng/LinkageSelect/LinkageSelect","baicheng/bootstrap","main.js" %>
 
 <%= yield :head %>
 </head>
@@ -31,11 +31,11 @@
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li>
-							<a href="/baicheng/design_competes">设计作品大比拼</a>
+							<a href="/love/design_competes">设计作品大比拼</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="">
-							<a href="./5.html">时尚榜样</a>
+							<a href="javascript:;">时尚榜样</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li <% if controller_name == "actives" && action_name == "index"%>class="active"<% end %>>
@@ -112,7 +112,7 @@
 	<%= yield :tail %>
 	<%= javascript_include_tag "/location.js" %>
 	<script type="text/javascript">
-		swfobject.registerObject("FlashID");
+		// swfobject.registerObject("FlashID");
 		$(function(){
 	    $('.close-btn').click(function(){
 				$('.abs-center').hide();
