@@ -149,7 +149,16 @@
 								</li>
 							</ul>
 						</div>
-						<a href="#" class="rules-public-btn">我要装修</a>
+            <% if current_user %>
+              <% story = Story.where(user_id: current_user.id, is_save: true) %>
+              <%  if story.present? %>
+                <a href="javascript:alert('您已近上传过房型图！');" class="rules-public-btn" >我要装修</a>
+              <% else %>
+                <a href="<%= new_story_path %>" class="rules-public-btn" >我要装修</a>
+              <% end %>
+            <% else -%>
+              <%= link_to_function "我要装修", "show_login()",:class=>"rules-public-btn" %>
+            <% end -%>
 					</div>
 					<div class="rules-designers hide">
 						<h1>活动内容 针对大众用户</h1>
@@ -174,7 +183,7 @@
 									<span>•</span>
 									<p>
 										<strong>上传作品</strong><br />
-										方式一：在<a href="3.html">我能设计</a>频道挑选普通大众上传的房型图，下载、设计后提交，参与活动类奖项评选（iColor刷新大奖）<br />
+										方式一：在<a href="<%=stories_path%>">我能设计</a>频道挑选普通大众上传的房型图，下载、设计后提交，参与活动类奖项评选（iColor刷新大奖）<br />
 										方式二：上传本人已有的原创设计参与专业类奖项评选<b>（如填写设计故事或业主感言更可参加iColor刷新大奖的评选）</b>
 									</p>
 								</li>
@@ -187,7 +196,13 @@
 								</li>
 							</ul>
 						</div>
-						<a href="#" class="rules-designers-btn">我要设计</a>
+						<% if current_user %>
+							<% unless current_user.common_user? %>
+						    <a href="<%=new_user_design_path(current_user)%>" class="rules-designers-btn">我要设计</a>
+              <% end -%>
+            <% else -%>
+              <%= link_to_function "我要设计", "show_login()", :class=>"rules-designers-btn" %>
+            <% end -%>
 					</div>
 				</div><!-- rules-contents -->
 				<div class="rules-awards mt30 clearfix hide">

@@ -22,8 +22,17 @@
 							<%= link_to "首页", baicheng_root_path %>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="<%=new_story_path%>">我要装修</a>
+						<li <% if controller_name == "stories" && action_name == "new"%>class="active"<% end %>>
+							<% if current_user %>
+                <% story = Story.where(user_id: current_user.id, is_save: true) %>
+                <%  if story.present? %>
+  						    <a href="javascript:alert('您已近上传过房型图！');" >我要装修</a>
+                <% else %>
+                  <a href="<%= new_story_path %>">我要装修</a>
+                <% end %>
+              <% else -%>
+                <%= link_to_function "我要装修", "show_login()" %>
+              <% end -%>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="<%= 'active' if controller_name == 'stories' && %w{index show}.include?(action_name) %>">
