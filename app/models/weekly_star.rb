@@ -14,6 +14,8 @@ class WeeklyStar < ActiveRecord::Base
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
+  scope :from, where("created_at > (?)", "2013-3-1")
+
   STAR_TYPE = {
     1 => "每周之星",
     2 => "月度色彩之星",
