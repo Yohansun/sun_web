@@ -105,7 +105,7 @@ module ApplicationHelper
         # elsif controller_name == 'design_images'
         #    "装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
         elsif controller_name == 'design_images' && action_name == 'image_show'
-          "#{@image.title}装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+          "#{@image.title}装修图片 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
         #设计之星
         elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
           "【每周之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
