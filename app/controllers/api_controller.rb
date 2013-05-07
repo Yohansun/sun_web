@@ -9,7 +9,8 @@ class ApiController < ApplicationController
     user.email = params[:email]
     user.is_read = true
     user.is_from_minisite = true
-    user.area_id = params[:area_id]
+    user.area_id = params[:area_id] if params[:area_id]
+    user.phone = params[:phone]
     #user.role_id = Role.find_by_role(params[:role]).id
     case params[:role]
     when "designer1"
