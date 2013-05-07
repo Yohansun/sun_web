@@ -31,22 +31,22 @@
 							<div id="myCarousel" class="carousel works_carousel slide" style="height:367px">
 								<!-- Carousel items -->
 								<div class="carousel-inner">
-									<%- @designs.each do |design| %>
+									<%#- @designs.each do |design| %>
 										<div class="active item">
 											<a href="#">
 												<%= image_tag @design.file.url(:slide) %>
 											</a>
 										</div>
-									<%- end %>
+									<%#- end %>
 								</div>
 								<!-- Carousel nav -->
 								<a class="carousel-control left" href="#myCarousel" data-slide="prev"><!-- &lsaquo; --></a>
 								<a class="carousel-control right" href="#myCarousel" data-slide="next"><!-- &rsaquo; --></a>
-								<div class="carousel-indicators clearfix">
+								<!-- <div class="carousel-indicators clearfix">
 									<a href="javascript:;" data-target="#myCarousel" data-slide-to="0" class="active"></a>
 									<a href="javascript:;" data-target="#myCarousel" data-slide-to="1"></a>
 									<a href="javascript:;" data-target="#myCarousel" data-slide-to="2"></a>
-								</div>
+								</div> -->
 							</div>
 							<div class="btn_group btns_absolute">
 								<span class="btns btns_small btn_down">

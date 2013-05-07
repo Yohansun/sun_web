@@ -94,8 +94,8 @@
 								<span class="transpond_btn ft12">转发 (<%= image.inspiration.try(:shares_count)  %>)</span>
 							</p>
 						<%- elsif image.story_id %>
-						    <a href="/designs/<%= image.design_id %>" >
-						    <%= image_tag(image.story.story_images.first.try(:file), :class => "host_works_img" ) %>
+						    <a href="/baicheng/design_competes/<%= image.story_id %>" >
+						    <%= image_tag(image.story.story_image.try(:file), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.story.try(:title)  %></h3>
 							<p class="p1 group">

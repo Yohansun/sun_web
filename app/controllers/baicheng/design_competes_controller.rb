@@ -30,7 +30,6 @@ class Baicheng::DesignCompetesController < ApplicationController
     @design = StoryImage.find params[:id]
     @story_id = @design.story_id
     @story = Story.find @story_id
-    @designs = @story.story_images
     @comments = StoryComment.where("story_id = ?", @story_id).order("created_at DESC").page(params[:page]).per(8)
   end
 
@@ -62,26 +61,32 @@ class Baicheng::DesignCompetesController < ApplicationController
   end
 
   def download
+    # target_file = Story.find params[:id]
+    # unless target_file.blank?
+    #   zipfile_name = "#{Rails.root}/public/design_competes#{params[:id]}.zip"
+    #   if File.exists?(zipfile_name)
+    #     send_file zipfile_name
+    #   else
+    #     Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+    #       if target_file.length == 1
+    #         filename = target_file
+    #         zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
+    #       else
+    #         target_file.each do |filename|
+    #           zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
+    #         end
+    #       end
+    #     end
+    #     send_file zipfile_name
+    #   end
+    # else
+    #   redirect_to :back
+    # end
     target_file = Story.find params[:id]
-    unless target_file.blank?
-      zipfile_name = "#{Rails.root}/public/design_competes#{params[:id]}.zip"
-      if File.exists?(zipfile_name)
-        send_file zipfile_name
-      else
-        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
-          if target_file.length == 1
-            filename = target_file
-            zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
-          else
-            target_file.each do |filename|
-              zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
-            end
-          end
-        end
-        send_file zipfile_name
-      end
+    if target_file
+      send_file target_file.story_image.file.path
     else
-      redirect_to :back
+      render nothing: true, status: 404
     end
   end
 
