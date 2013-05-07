@@ -168,6 +168,10 @@ class Baicheng::StoriesController < ApplicationController
     end
   end
 
+  def act
+    
+  end
+
   def download
     target_file = StoryImage.where(:story_id => params[:id])
     unless target_file.blank?
