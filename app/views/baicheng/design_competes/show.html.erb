@@ -37,7 +37,8 @@
 									<%#- @designs.each do |design| %>
 										<div class="active item">
 											<a href="#">
-												<%= image_tag @design.file.url(:slide) %>
+												<%#= image_tag @design.file.url(:slide) %>
+												<img src="<%= asset_path 'baicheng/mydesign/design_in_img.jpg' %>">
 											</a>
 										</div>
 									<%#- end %>
@@ -55,7 +56,7 @@
 								<span class="btns btns_small btn_down">
 									<span>
 										<a href="javascript:;"><i class="i_icon i_icon_medium icon_like"></i><%= @story.votes_count %> </a>
-										<a href="javascript:;"><i class="i_icon i_icon_medium icon_review"></i><%= @story.comment_count %></a>
+										<a href="javascript:;"><i class="i_icon i_icon_medium icon_review"></i>0<%#= @story.comment_count %></a>
 									</span>
 								</span>
 							</div>
