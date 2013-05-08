@@ -55,7 +55,7 @@
 						<li class="span2">
 							<div class="thumbnail nopadding">
 								<span class="<%= "list_tag list_tag_deal" if design.is_cover == true %>"></span>
-								<%= link_to image_tag(design.try(:file).try(:url), :size =>'203x146'), design_compete_path(design)  %>
+								<%= link_to image_tag(design.try(:file).try(:url), :size =>'203x146'), design_compete_path(design), :class => 'list_img_a'  %>
 								<div class="works_tit">
 									<h5 class="nomargin">
 										<%=link_to design.story.try(:title), design_compete_path(design) %>
