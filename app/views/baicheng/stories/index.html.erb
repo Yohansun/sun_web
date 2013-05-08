@@ -54,7 +54,8 @@
 								  <span class="list_tag list_tag_deal"></span>
 								<%- end %>
 								<a href="<%= story_path(story.id) %>" class="list_img_a">
-									<%= image_tag(story.story_image.file.url(:list), size: "201x145") %>
+									<%= image_tag 'baicheng/mydesign/list1.jpg' %>
+									<%#= image_tag(story.story_image.file.url(:list), size: "201x145") %>
 								</a>
 								<div class="design_list_tit">
 									<h5 class="nomargin"><a href="<%= story_path(story.id) %>"><%= story.title %></a></h5>
