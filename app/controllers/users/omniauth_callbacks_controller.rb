@@ -36,10 +36,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
 
         flash[:notice] = "Authentication successful"
-
-        if request.env['omniauth.origin'].match %r(community)
-          current_user.user_tokens.find_by_provider(provider).update_attribute :is_binding, true #更新社区绑定状态
-          redirect_to request.env['omniauth.origin'] #设置社区绑定授权后的返回页面
+        if session[:api_login].present?
+            redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{current_user.id}"
+        else
+          if request.env['omniauth.origin'].match %r(community)
+            current_user.user_tokens.find_by_provider(provider).update_attribute :is_binding, true #更新社区绑定状态
+            redirect_to request.env['omniauth.origin'] #设置社区绑定授权后的返回页面
+          end
         end
         return
       else
@@ -54,8 +57,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if authentication.changed? || authentication.access_token.blank?
             authentication.update_attribute :access_token, omniauth['access_token']
           end
-
-          sign_in_and_redirect(:user, authentication.user)
+          if session[:api_login].present?
+            redirect_to "/icolormobile/icolor/index.php/Users/improveinfo/id/#{authentication.user.id}"
+          else
+            sign_in_and_redirect(:user, authentication.user)
+          end
           return
         else
           #create a new user
@@ -69,12 +75,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
           if user.save(:validate => false)
             flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
-            sign_in(:user, user)
-            redirect_to stored_location_for(user)
+            if session[:api_login].present?
+              redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{user.id}"
+            else
+              sign_in(:user, user)
+              redirect_to stored_location_for(user)
+            end
             return
           else
             session[:omniauth] = omniauth.except('extra')
-            redirect_to new_user_registration_url
+            if session[:api_login].present?
+              redirect_to "/icolormobile/icolor/index.php/Register/login"
+            else
+              redirect_to new_user_registration_url
+            end
             return
           end
         end

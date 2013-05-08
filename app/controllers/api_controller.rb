@@ -63,4 +63,60 @@ class ApiController < ApplicationController
       #render :text => '<results suc="false" msg=""/>'
     end
   end
+
+  def update_user
+    user = User.find params[:user_id]
+    user.email = params[:email]
+    user.is_read = true
+    user.is_from_minisite = true
+    user.area_id = params[:area_id] if params[:area_id]
+    user.phone = params[:phone]
+    user.role_id = Role.find_by_role(params[:role]).id
+    case params[:role]
+    when "designer1"
+      user.role_id = 1
+      user.des_status = 1
+    when "designer0"
+      user.role_id = 1
+      user.des_status = 0
+    when "company"
+      user.role_id = 2 
+    when "user"
+      user.role_id = 3
+    end
+    if user.save
+      respond_to do |format|
+        format.json {render :json => { :result => 'true',
+         :mag => "注册成功!" } }
+      end
+    else
+      messages = ''
+      valid_result = user.errors.messages
+      if valid_result.size > 0
+        valid_result.each do |_, value|
+          messages << value[0]
+        end
+      end
+      respond_to do |format|
+        format.json {render :json => { :result => 'false',
+         :mag =>"#{messages}" } }
+      end
+    end
+  end
+
+  def external_login
+    session[:api_login] = 'mobile'
+    if params[:type] == "weibo"
+      redirect_to "/users/auth/weibo"
+    end
+    if params[:type] == "qq_connect"
+      redirect_to "/users/auth/qq_connect"
+    end
+    if params[:type] == "renren"
+      redirect_to "/users/auth/renren"
+    end
+    if params[:type] == "kaixin"
+      redirect_to "/users/auth/kaixin"
+    end
+  end
 end

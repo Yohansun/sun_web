@@ -69,8 +69,10 @@ Icolor::Application.routes.draw do
 
   get '/shares' => 'shares#index'
 
+  get "/api/external_login" => "api#external_login"
   post "/api/login" => "api#login"
   post "/api/create_user" => "api#create_user"
+  post "/api/update_user" => "api#update_user"
 
   #在线配色
   resources :mix_colors, :as => :pre_mix_colors
