@@ -19,7 +19,10 @@
            $(this).parents('.review_item').next('.form_comment').show().siblings('.form_comment').hide();
 
 	  	})
+	  	$('#colors_con').hover(function(){
+		$(this).children().fadeToggle('fast');
     });
+});
 	</script>
 <%- end %>
 <div class="container-fluid">
@@ -84,12 +87,16 @@
 							<p class="pad_h20 border_dot_b1">
 								<span class="show"><strong>设计师：<%= @story.user.try(:username) %></strong></span>
 								<span class="show"><strong>设计风格：现代简约</strong></span>
-								<!-- <span class="show"><strong>楼盘名称：xxx</strong></span>
-								<span class="show"><strong>楼盘所在地：北京市 xxxx</strong></span> -->
+								<span class="show"><strong>楼盘名称：孔雀城</strong></span>
+								<span class="show"><strong>楼盘所在地：北京市</strong></span>
 							</p>
 							<div>
 								<!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
-								<a href="#" class="design_btn ask_btn"></a>
+								<%-if current_user%>
+								  <a href="<%= user_asks_path(@story.user)%>" class="design_btn ask_btn"></a>
+								<%- else %>
+								  <a href="javascript:show_login();" class="design_btn ask_btn"></a>
+								<%-end %>
 								<!-- JiaThis Button BEGIN -->
 								<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:163px;">
 									<span class="jiathis_txt">分享：</span>
@@ -166,7 +173,7 @@
 								<%- @comments.each do |comment| %>
 									<div class="review_item">
 										<p class="review_name">
-											<span class="pull-right"><%= comment.created_at %></span>
+											<span class="pull-right"><%= comment.created_at.to_date %></span>
 											<strong>
 												<%- if comment.user %>
 												  <%= comment.user.username %>

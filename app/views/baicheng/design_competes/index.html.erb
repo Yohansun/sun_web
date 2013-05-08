@@ -40,11 +40,11 @@
 					</select>
 					<button type="" class="btn btn-small btn_yellow">确定</button>
 					<!-- <input type="text" class="span2" placeholder="搜用户"> -->
-					<select class="span2 nomargin" name="soso">
+					<select class="span2 nomargin" name="soso" style="width:102px;">
 						<option value="so_user">搜用户</option>
 						<option value="so_design">搜作品</option>
 					</select>
-					<%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => ''%>
+					<%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'input-small'%>
 					<input type="submit" class="search_btn" value="">
 				</fieldset>
 			<%- end %>

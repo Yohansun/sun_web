@@ -86,7 +86,11 @@ class Baicheng::DesignCompetesController < ApplicationController
     # end
     target_file = Story.find params[:id]
     if target_file
-      send_file target_file.story_image.file.path
+      if File.exists?(target_file.story_image.file.path)
+        send_file target_file.story_image.file.path
+      else
+        render nothing: true, status: 404
+      end
     else
       render nothing: true, status: 404
     end

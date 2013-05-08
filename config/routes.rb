@@ -445,6 +445,7 @@ Icolor::Application.routes.draw do
         delete :destroy_comment
       end
     end
+    resources :fashion_model
     resources :sysinfo
     resources :upload_contract
     resources :story_images
