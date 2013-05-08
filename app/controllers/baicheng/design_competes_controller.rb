@@ -2,25 +2,27 @@
 class Baicheng::DesignCompetesController < ApplicationController
   layout 'baicheng'
   before_filter :find_user
+  # before_filter :get_tags, :only => [:index]
   def index
     @images = StoryImage.order("created_at DESC")
-    if params[:design]
-      
-    end
-    if params[:area_id]
-      @images = @images.so_area(params[:area_id])
-    end
-    if params[:tag]
-      
-    end
-    if params[:cost]
+    if params[:design].present?
 
     end
-    if params[:soso]
+    if params[:area_id].present?
+      p"#{params[:area_id]}"
+      @images = @images.joins(:story => :area).where("areas.id=?", params[:area_id])
+    end
+    if params[:tag].present?
+      @images = @images.joins(:tags).where("story_image_tags.image_library_category_id = ?", params[:tag])
+    end
+    if params[:cost].present?
+
+    end
+    if params[:soso].present?
       if params[:soso] == "so_user"
-        @images = @images.so_user(params[:keywords]) if params[:keywords]
+        @images = @images.joins(:story => :user).where("users.username=?", params[:keywords]) if params[:keywords]
       else
-        @images = @images..so_design(params[:keywords]) if params[:keywords]
+        @images = @images.joins(:story).where("stories.title=?", params[:keywords]) if params[:keywords]
       end
     end
     @designs = @images.page(params[:page]).per(24)
@@ -87,6 +89,14 @@ class Baicheng::DesignCompetesController < ApplicationController
       send_file target_file.story_image.file.path
     else
       render nothing: true, status: 404
+    end
+  end
+
+  def get_tags
+    @tags = []
+    @tags << {:title => "户型", :id => ""}
+    ImageLibraryCategory.where(parent_id: 1).each do |tag|
+      @tags << {title: tag.title, id: tag.id }
     end
   end
 

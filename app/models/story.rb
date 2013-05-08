@@ -9,6 +9,7 @@ class Story < ActiveRecord::Base
   belongs_to :user
   has_one :baicheng_event
   has_many :story_comments, :dependent => :destroy
+  # has_many :tags, class_name: 'StoryImageTag', :foreign_key => 'story_image_id',:dependent => :destroy
 
   after_create :sync_baicheng_event
 

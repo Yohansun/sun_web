@@ -30,7 +30,10 @@
 						<option>区</option>
 					</select>
 					<select class="input-small nomargin" name="tag">
-						  <option value="">户型</option>
+						<option value="">户型</option>
+						<%- ImageLibraryCategory.where(parent_id: 1).each do |tag| %>
+						  <option value="<%= tag.id %>"><%= tag.title %></option>
+						<%- end %>
 					</select>
 					<select class="input-small nomargin" name="cost">
 						<option value="">预算</option>
