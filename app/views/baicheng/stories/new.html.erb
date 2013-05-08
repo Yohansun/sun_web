@@ -164,7 +164,7 @@
 				<div class="form-article upload2013-toggle checkbox2013">
 					<a href="javascript:;" class="upload2013-btn pa"></a>
 					<div class="clear none">
-						<% ImageLibraryCategory.where(parent_id: 82).each do |img_lib_cat| %>
+						<% ImageLibraryCategory.where("id in (83,84,85,86,87,90,91,89)").each do |img_lib_cat| %>
               <label>
                   <%=check_box_tag "room[]",img_lib_cat.id%><%=img_lib_cat.title%>
               </label>

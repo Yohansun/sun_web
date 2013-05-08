@@ -7,7 +7,7 @@
 <!-- <meta name="description" content="<%= @description %>" /> -->
 <%= csrf_meta_tag %>
 <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
-<%= javascript_include_tag "baicheng","baicheng/LinkageSelect/LinkageSelect","main" %>
+<%= javascript_include_tag "baicheng","baicheng/LinkageSelect/LinkageSelect" %>
 
 <%= yield :head %>
 </head>
@@ -15,7 +15,7 @@
 	<div class="navbar navbar-fixed-top navbar_top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="<%= root_path %>"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
+				<img alt="logo" class="brand" src="<%=asset_path 'baicheng/logo.jpg'%>">
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="<%= 'active' if controller_name == 'welcome' %>">
@@ -26,7 +26,7 @@
 							<% if current_user %>
                 <% story = Story.where(user_id: current_user.id, is_save: true) %>
                 <%  if story.present? %>
-  						    <a href="javascript:alert('您已近上传过房型图！');" >我要装修</a>
+  						    <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
                 <% else %>
                   <a href="<%= new_story_path %>">我要装修</a>
                 <% end %>
@@ -55,7 +55,7 @@
 				<%- if current_user %>
 					<ul class="nav nav_userinfo pull-right">
 						<li class="pr user_name">
-							<a class="username_css" href="<%= user_asks_path(current_user) %>" target="_blank"><%= current_user.display_name %>(3)</a>
+							<a class="username_css" href="<%= sysinfo_index_path %>" target="_blank"><%= current_user.display_name %>(3)</a>
 							<span class="system_info_tip"><em class="tip_arrow"></em>3条系统消息</span>
 						</li>
 						<li><a href="<%= act_stories_path %>">查看我的活动主页</a></li>
@@ -100,11 +100,11 @@
 
 					<li>
 						<!-- JiaThis Button BEGIN -->
-						<div id="ckepop" class="jiathis_area none clearfix share_area">
+						<div id="ckepop" class="jiathis_area clearfix share_area">
 							<span class="jiathis_txt">分享：</span>
-							<a class="jiathis_button_renren"></a>
-							<a class="jiathis_button_douban"></a>
-							<a class="jiathis_button_tsina"></a>
+							<a class="jiathis_button_renren" style="float:left;"></a>
+							<a class="jiathis_button_douban" style="float:left;"></a>
+							<a class="jiathis_button_tsina" style="float:left;"></a>
 							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
 							<!-- <a class="jiathis_counter_style"></a> -->
 						</div>
@@ -137,6 +137,18 @@
 			$('.unlogin').show();
 			$('#layer').show();
 		};
+		function verify(){
+			<% if current_user %>
+        <% story = Story.where(user_id: current_user.id, is_save: true) %>
+        <%  if story.present? %>
+          alert('您已经上传过房型图！');
+        <% else %>
+          window.location='<%= new_story_path %>'
+        <% end %>
+      <% else -%>
+        show_login();
+      <% end -%>
+		}
 	</script>
 </body>
 </html>

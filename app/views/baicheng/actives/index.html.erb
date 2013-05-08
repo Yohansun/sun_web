@@ -152,7 +152,7 @@
             <% if current_user %>
               <% story = Story.where(user_id: current_user.id, is_save: true) %>
               <%  if story.present? %>
-                <a href="javascript:alert('您已近上传过房型图！');" class="rules-public-btn" >我要装修</a>
+                <a href="javascript:alert('您已经上传过房型图！');" class="rules-public-btn" >我要装修</a>
               <% else %>
                 <a href="<%= new_story_path %>" class="rules-public-btn" >我要装修</a>
               <% end %>
