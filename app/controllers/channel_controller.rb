@@ -34,7 +34,7 @@ class ChannelController < ApplicationController
       params[:search][:user_area_id_in] = Area.robot(province_id,[city_id].compact).map(&:id)
     end
     
-    @search = DesignImage.users.search(params[:search])
+    @search = DesignImage.available.users.search(params[:search])
     @design_users = @search.page(params[:page]).per(8)
     
     #mood
