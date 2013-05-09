@@ -28,5 +28,9 @@ class WeeklyStar < ActiveRecord::Base
 
   def self.get_star_type_id(arg)
     STAR_TYPE.key(arg)
-  end                  
+  end
+  
+  def user_id
+    author_url.scan(/(\d+)(\/designs)/) && $1 if author_url.present?
+  end
 end
