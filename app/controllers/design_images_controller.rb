@@ -100,7 +100,7 @@ class DesignImagesController < ApplicationController
 
     if params[:area_id].present? && params[:area_id].to_s != "0"
       area = Area.find(params[:area_id])
-      @content[0] = area.parent.name 
+      @content[0] = area.parent.blank? ? nil : area.parent.name 
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
       @area_names = area.self_and_ancestors.map(&:name).join(" ")
