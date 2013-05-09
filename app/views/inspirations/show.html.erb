@@ -38,7 +38,7 @@
     <div class="weekstart_titleB pr">
       <h1><%= @inspiration.title %></h1>
       <div class="subtitle">
-        <%= link_to votes_path(:voteable_id => @inspiration.id, :voteable_type => "Inspiration"), :remote => true, :method => 'post', :class => "votes xin_red" do %>
+        <%= link_to votes_path(:voteable_id => @inspiration.id, :voteable_type => "Inspiration"), :remote => true, :method => 'post', :class => "votes xin_red", :title => "" do %>
           <span id='votes_count<%= @inspiration.id%>'><%= @inspiration.votes_count %></span>
         <%- end %>
         <div class="operate pr">
