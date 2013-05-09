@@ -154,11 +154,11 @@
   <!--wrapper ends-->
   <div class="sub_bot pr">
     <div class="pager topic_pager ft12">
-      <%- unless @prev_topic.nil? %>
-          <a href="/master_topics/<%= @next_topic.id %>" class="prev"><span></span>上一篇</a>
-      <%- end %>
       <%- unless @next_topic.nil? %>
-          <a href="/master_topics/<%= @prev_topic.id %>" class="next"><span></span>下一篇</a>
+          <a href="/master_topics/<%= @next_topic.try(:id) %>" class="prev"><span></span>上一篇</a>
+      <%- end %>
+      <%- unless @prev_topic.nil? %>
+          <a href="/master_topics/<%= @prev_topic.try(:id) %>" class="next"><span></span>下一篇</a>
       <%- end %>
     </div>
     <!--pager ends-->
