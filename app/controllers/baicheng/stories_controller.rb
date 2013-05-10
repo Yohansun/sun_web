@@ -169,7 +169,12 @@ class Baicheng::StoriesController < ApplicationController
   end
 
   def act
-    
+    if current_user.present?
+      @designs = current_user.designs.where("designs.story_id is not null or designs.story_id <> '' ")
+      render :act
+    else
+      redirect_to baicheng_root_path
+    end
   end
 
   def download

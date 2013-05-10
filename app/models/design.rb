@@ -16,7 +16,11 @@ class Design < ActiveRecord::Base
   has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
   has_many :color_codes
   has_many :collects, :dependent => :destroy
+<<<<<<< HEAD
   has_many :design_tags,:class_name => "DesignTags"
+=======
+  has_many :design_tags,:class_name => "DesignTags"  
+>>>>>>> 百城我能设计首页 内页 活动主页修改
   has_many :design_styles, :through => :design_tags,:source => :image_library_category,:conditions => ["image_library_categories.parent_id = 34"]
   belongs_to :story, :counter_cache => true
 
@@ -38,6 +42,10 @@ class Design < ActiveRecord::Base
   def design_style_names
     design_styles.map(&:title).join(',')
   end
+
+  def design_style_names  
+    design_styles.map(&:title).join(',')  
+  end  
 
   def design_style_names  
     design_styles.map(&:title).join(',')  
