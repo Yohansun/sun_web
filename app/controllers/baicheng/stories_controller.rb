@@ -3,26 +3,6 @@ require 'zip/zip'
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
   def index
-    # @event_data = BaichengEvent.by_type(Story.name).order('created_at DESC').page(params[:page]).per(28)
-    # if params[:unload].present?
-    #   @xx = BaichengEvent.baicheng_map_story(825)
-    #   @lf = BaichengEvent.baicheng_map_story(647)
-    #   @dt = BaichengEvent.baicheng_map_story(1046)
-    #   @sjz = BaichengEvent.baicheng_map_story(661)
-    #   @ly = BaichengEvent.baicheng_map_story(855)
-    # else
-    #   @xx = BaichengEvent.story_type(825)
-    #   @xx2 = BaichengEvent.design_type(825)
-    #   @lf = BaichengEvent.story_type(647)
-    #   @lf2 = BaichengEvent.design_type(647)
-    #   @dt = BaichengEvent.story_type(1046)
-    #   @dt2 = BaichengEvent.design_type(1046)
-    #   @sjz = BaichengEvent.story_type(661)
-    #   @sjz2 = BaichengEvent.design_type(661)
-    #   @ly = BaichengEvent.story_type(855)
-    #   @ly2 = BaichengEvent.design_type(855)
-    # end
-
     params[:search] ||= {}
 
     province_id,city_id,area_id = params[:province_id].or(nil),params[:city_id].or(nil),params[:area_id].or(nil)
@@ -34,7 +14,7 @@ class Baicheng::StoriesController < ApplicationController
     end
 
     @search = Story.search(params[:search])
-    @stories = @search
+    @stories = @search.where(:is_save => true)
     if params[:sort].present?
         case params[:sort]
         when 'hot'
@@ -42,7 +22,7 @@ class Baicheng::StoriesController < ApplicationController
         when 'new_chance'
           @search_sort = @search.order("stories.designs_count")
         end
-        @stories = @search_sort
+        @stories = @search_sort.where(:is_save => true)
     end
     @stories = @stories.order("stories.created_at desc").page(params[:page]).per(24)
   end
@@ -151,19 +131,23 @@ class Baicheng::StoriesController < ApplicationController
   end
 
   def show
-  	@story = Story.find(params[:id])
-      @story_image = @story.story_image
-      @designs = Design.where(story_id: @story.id).limit(3)
+    @story = Story.find(params[:id])
+    @story_image = @story.story_image
   end
 
   def act
-    
+    if current_user.present?
+      @designs = current_user.designs.where("designs.story_id is not null or designs.story_id <> '' ")
+      render :act
+    else
+      redirect_to baicheng_root_path
+    end
   end
 
   def download
     target_file = StoryImage.where(:story_id => params[:id])
     unless target_file.blank?
-      zipfile_name = "#{Rails.root}/public/design#{params[:id]}.zip"
+      zipfile_name = "#{Rails.root}/public/system/zip/story#{params[:id]}.zip"
       if File.exists?(zipfile_name)
         send_file zipfile_name
       else

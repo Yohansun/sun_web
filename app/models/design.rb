@@ -7,7 +7,7 @@ class Design < ActiveRecord::Base
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
     :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color,
-    :recommend_color_category1, :is_yda, :is_refresh, :property_name, :speech
+    :recommend_color_category1, :is_yda, :is_refresh, :property_name, :speech, :story_talking_id
   validates_presence_of :title, :area_id, :property_name
 
   belongs_to :user
@@ -34,6 +34,10 @@ class Design < ActiveRecord::Base
   def design_style_names
     design_styles.map(&:title).join(',')
   end
+
+  def design_style_names  
+    design_styles.map(&:title).join(',')  
+  end  
 
   #更新用户上传作品数色号（权重）。片区快查用
   def update_user_design_code_count

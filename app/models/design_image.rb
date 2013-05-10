@@ -22,7 +22,7 @@ class DesignImage < ActiveRecord::Base
   has_many :image_styles,:through => :tags,:source => :image_library_category,:conditions => {:parent_id => 34}
   
   #应用在channel_controller#access中
-  scope :users,joins(:user).select("count(design_images.user_id) as ucount,design_images.id,design_images.user_id,design_images.created_at,design_images.file_file_name,design_images.file_updated_at").group(:user_id).order("design_images.created_at desc")
+  scope :users,joins(:user).select("count(design_images.user_id) as ucount,design_images.id,design_images.user_id,design_images.created_at,design_images.file_file_name,design_images.file_updated_at").group(:user_id).order("design_images.updated_at desc")
 
   # validate :file_dimensions, :unless => "errors.any?"
 
@@ -47,7 +47,7 @@ class DesignImage < ActiveRecord::Base
         :mobile_list => "220x100#",
         :mobile_slide => "320x206#",
         :design_work_slide =>"680x353>",
-        :slide => "900>",
+        :slide => "900>",:baicheng_list => "201x145>",
         :slide_thumb => "205x138#",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
         :grid_list => "204x145>"},

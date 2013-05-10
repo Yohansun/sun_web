@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Story < ActiveRecord::Base
   attr_accessible :title, :content, :area_id, :user_id, :property_name, :parent_id, :demand, :budget
 

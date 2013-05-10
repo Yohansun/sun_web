@@ -155,6 +155,7 @@ Icolor::Application.routes.draw do
   match "/weekly_stars/:id/fullscreen" => "weekly_stars#fullscreen"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
+  post "/designs/story_talking/:id" => "designs#story_talking", as: "story_talking"
   match "/designs_upload" => "designs#upload"
 
   #我型我秀

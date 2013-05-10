@@ -19,6 +19,21 @@ class DesignsController < ApplicationController
     end
   end
 
+  def story_talking
+    if params[:id].present?
+      design = Design.find(params[:id])
+      #点击洽谈用户的id
+      design.story_talking_id = current_user.id
+      if design.save
+        render :js => "alert('洽谈成功!');location.reload();"
+      else
+        render nothing: true
+      end
+    else
+      render nothing: true
+    end
+  end
+
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
