@@ -12,6 +12,12 @@ class CommentsController < ApplicationController
         else
           redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
         end
+      when 'Story'
+        if request.headers['referer'].match %r(stories|design_competes)
+          redirect_to request.headers['referer']
+        else
+          redirect_to :back
+        end
       when 'DesignImage'
         redirect_to image_show_design_image_path(@comment.commentable.id)
       when 'Faq'

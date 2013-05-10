@@ -133,6 +133,7 @@ class Baicheng::StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @story_image = @story.story_image
+    @comments = @story.comments.page(params[:page]).per(4)
   end
 
   def act

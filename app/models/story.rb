@@ -5,6 +5,7 @@ class Story < ActiveRecord::Base
   has_one :story_image, :dependent => :destroy
   has_many :votes, :as => :voteable
   has_many :collects, :dependent => :destroy
+  has_many :comments, :as => :commentable
   has_many :designs
   belongs_to :area
   belongs_to :user
@@ -16,6 +17,10 @@ class Story < ActiveRecord::Base
 
   def cover_img
   	self.story_images.where(is_cover: 1).try(:first)
+  end
+
+  def comments_count
+    self.comments.size
   end
 
   def location

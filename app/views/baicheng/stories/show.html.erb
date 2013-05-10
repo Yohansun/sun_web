@@ -1,3 +1,38 @@
+<% content_for :tail do -%>
+  <script type="text/javascript">
+  	$(function(){
+  		(function($){
+		$('textarea').bind('keydown keyup', function(){
+			var $this = $(this);
+			var total = $this.data('total');
+			if(!total) return;
+			var len = total - $this.val().length;
+			if(len < 0) {
+				$this.val($this.val().slice(0, total));
+			} else{
+				$('form.comment-form').find('b').text(len);
+			}
+		});
+  		}($));
+  		$("button.vote_btn_small").click(function(){
+           if($(this).parents('form.comment-form').val()==""){
+			  		alert("评论内容不能为空!")
+		            return false
+			  	}
+        });
+  		$("button.vote_btn_small").click(function(){
+           if($(this).parents('form.reply_form').val()==""){
+			  		alert("回复内容不能为空!")
+		            return false
+			  	}
+        });
+		$(".reply_comment").click(function(){
+			$(this).parents('.review_item').find('form.reply_form').show().siblings('form.reply_form').hide();
+		})
+  	});
+  	</script>
+<%- end %>
+
 <div class="container-fluid">
 	<div class="mydesign pad_t60">
 		<div class="wrapper pr pad_b40">
@@ -143,75 +178,50 @@
 				</div>
 				<div class="reviews">
 					<h5><i class="i_icon icon_tit"></i>留言板</h5>
-					<form>
-						<p class="alert alert-info"><span class="pull-right">0/140</span>留言 (86)</p>
-						<textarea class="textarea_def"></textarea>
+					<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
+						<p class="alert alert-info"><span class="pull-right"><b>0</b>/140</span>留言 (<%= @story.comments_count %>)</p>
+						<%= f.hidden_field :commentable_id, value: @story.id %>
+			         <%= f.hidden_field :commentable_type, value: 'Story' %>
+			         <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140',class: "textarea_def" %>
 						<div class="clearfix">
 							<button type="submit" class="pull-left vote_btn vote_btn_small nomargin noborder">提交留言</button>
 						</div>
-					</form>
+		        <%- end %>
 					<div class="pr">
 						<div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
-							<ul>
-								<!-- <li class="disabled"><a href="javascript:;">上一页</a></li> -->
-								<li class="active"><a href="javascript:;">1</a></li>
-								<li><a href="javascript:;">2</a></li>
-								<li><a href="javascript:;">3</a></li>
-								<li><a href="javascript:;">4</a></li>
-								<li><a href="javascript:;">5</a></li>
-								<li><a class="noborder nomargin nopadding" href="javascript:;">...</a></li>
-								<li><a href="javascript:;">下一页</a></li>
-								<li><a class="nomargin" href="javascript:;">最后一页</a></li>
-							</ul>
+							<%= paginate @comments %>
 						</div>
-						<div class="review_item">
-							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
-							<div class="clearfix">
-								<span class="review_btns pull-right">
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
-								</span>
-								<p class="review_txt border_dot_b1">很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯很好！非常好用的工具！赞一个⋯⋯</p>
-							</div>
-							<p class="nomargin"><span class="color_red">佘大湿</span>回复说：期待实景图~~</p>
-						</div>
-						<div class="review_item">
-							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
-							<div class="clearfix">
-								<span class="review_btns pull-right">
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
-								</span>
-								<p class="review_txt border_dot_b1">很好！非常好用的工具！</p>
-							</div>
-							<p class="nomargin"><span class="color_red">佘大湿</span>回复说：期待实景图~~</p>
-						</div>
-						<div class="review_item">
-							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
-							<div class="clearfix">
-								<span class="review_btns pull-right">
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
-								</span>
-								<p class="review_txt">很好！非常好用的工具！</p>
-							</div>
-							<form>
-								<textarea class="textarea_def"></textarea>
-								<div class="btn_group clearfix">
-									<button type="submit" class="pull-left vote_btn vote_btn_small  noborder">提交留言</button>
-									<a class="pull-left vote_btn vote_btn_small vote_btn_gray noborder">取消</a>
+						<%- @comments.each do |comment| %>
+							<div class="review_item">
+								<p class="review_name"><span class="pull-right"><%= comment.created_at.to_date %></span><strong><%= comment.user ? comment.user.display_name : "匿名" %></strong></p>
+								<div class="clearfix">
+									<span class="review_btns pull-right">
+										<a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									</span>
+									<p class="review_txt border_dot_b1"><%= comment.content %></p>
 								</div>
-							</form>
-						</div>
-						<div class="review_item">
-							<p class="review_name"><span class="pull-right">2013-04-28</span><strong>Jane</strong></p>
-							<div class="clearfix">
-								<span class="review_btns pull-right">
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
-									<a href="javascript:;"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
-								</span>
-								<p class="review_txt border_dot_b1">很好！非常好用的工具！赞一个⋯⋯很好！</p>
+								<%= form_for(ReplyMsg.new, :html => {:class => "reply_form clear none"}) do |f| %>
+			                  <%= f.hidden_field :show_id, value: @story.id %>
+			                  <%= f.hidden_field :comment_id, value: comment.id %>
+			                  <%= f.hidden_field :reply_type, value: "stories" %>
+			                  <%= f.text_area :content, :rows => 2, class: 'textarea_def' %>
+			                  <div class="btn_group clearfix">
+										<button type="submit" class="pull-left vote_btn vote_btn_small  noborder">提交留言</button>
+										<a class="pull-left vote_btn vote_btn_small vote_btn_gray noborder">取消</a>
+									</div>
+			                <%- end %>
+
+								<%- comment.reply_msgs.order("created_at DESC").each do |reply| %>
+									<p class="nomargin">
+										<span class="color_red"><%= reply.user.display_name %></span>
+										回复说：<%= reply.content %>
+									</p>
+									<span class="review_btns pull-right">
+									<%#= link_to "删除", reply_msg_path(reply.id), :class => "i_icon i_icon_big i_icon_del", method: :delete, :confirm => "确定删除么?" %>
+									</span>
+								<%- end %>
 							</div>
+						<%- end %>
 						</div>
 					</div>
 				</div>
