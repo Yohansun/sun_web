@@ -110,7 +110,13 @@ class DesignsController < ApplicationController
     flash[:design_errors] = []
     flag = true
     @design = current_user.designs.build(params[:design])
-    @design.story_id = params[:story_id] if params[:story_id].present?
+    if params[:story_id].present?
+      @design.story_id = params[:story_id] 
+      @design.baicheng_active = true
+    end
+    if params[:baicheng_active].present?
+      @design.baicheng_active = true
+    end
     unless params[:design][:title].present?
       flash[:design_errors] << "作品名称不能为空！"
       flag = false
@@ -334,11 +340,11 @@ class DesignsController < ApplicationController
       @design.baicheng_active = false
     end
     @design.save
-    #if params[:baicheng_active]
-    #    redirect_to "/baicheng/design_works/#{params[:design_id]}"
-    #else
-    redirect_to user_path(current_user)
-    #end
+    if @design.baicheng_active
+       redirect_to design_competes_path
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   def destroy

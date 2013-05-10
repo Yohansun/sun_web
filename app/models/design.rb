@@ -28,7 +28,7 @@ class Design < ActiveRecord::Base
   paginates_per 8
 
   after_create :update_user_design_code_count
-  after_update :sync_baicheng_event
+  #after_update :sync_baicheng_event
   before_destroy :clear_baicheng_event
   
   def design_style_names
@@ -92,11 +92,11 @@ class Design < ActiveRecord::Base
     end
   end
 
-  def sync_baicheng_event
-    if self.baicheng_active.present? && self.baicheng_active == true
-      BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
-    end
-  end
+  # def sync_baicheng_event
+  #   if self.baicheng_active.present? && self.baicheng_active == true
+  #     BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
+  #   end
+  # end
 
   def clear_baicheng_event
     BaichengEvent.find_by_design(self.id).try(:destroy_all)
