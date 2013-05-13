@@ -117,10 +117,18 @@ module MagicContent
   			results[:columns] = ['作品ID','上传时间','作品名','推荐色号','用户ID','用户名','用户类型','用户电话','电子邮箱','公司名称','招募用户','分享次数','投票数','评论数','省','市','区','是否刷新百城活动','是否未来设计师活动']
   			results[:data] = [].tap do |cell|
   				designs.find_each do |design|
+            color = ""
+            colors = design.design_images.where("color1 is not null").limit(2)
+            if colors.present?
+              colors.each do |c|
+                color += c.color1 + "   "
+              end
+            end
+
   					cell << [design.id,
   									 design.created_at.strftime("%Y-%m-%d %H:%M:%S"),
   									 design.title,
-  									 design.try(:recommend_color_category1),
+  									 color,
   									 design.user.id,
   									 design.user.display_name,
   									 design.user.role_chn_name,
