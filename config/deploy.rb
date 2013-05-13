@@ -37,3 +37,7 @@ desc "生成定时任务"
 task :update_crontab, :roles => :db do
   run "cd #{release_path} && bundle exec whenever --set environment=#{deploy_env} --update-crontab #{application}"
 end
+
+task :clear_rails_cache do
+  run "cd #{release_path} && bundle exec rake cache:clear RAILS_ENV=#{deploy_env}"
+end
