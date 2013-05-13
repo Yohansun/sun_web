@@ -16,7 +16,7 @@
         $('.color_form_overlay').hide();
       })
       $("#genre").change(function(e){
-        if($(this).val() == 'pub_date' || $(this).val() == 'al_date'){
+        if($(this).val() == 'pub_date' || $(this).val() == 'al_date' || $(this).val() == 'last_al_date'){
           $('.pub_time').show()
         }else{
           $('.pub_time').hide()
@@ -40,7 +40,8 @@
 
       <%=select_tag :genre, options_for_select([["选择时间筛选条件",""],
           ["发布时间","pub_date"],
-          ["修改时间","al_date"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
+          ["修改时间","al_date"],
+          ["根据最后修改时间","last_al_date"],], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
     <% end %>

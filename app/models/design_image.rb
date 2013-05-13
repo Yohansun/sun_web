@@ -175,6 +175,10 @@ class DesignImage < ActiveRecord::Base
         DesignImage.available.where("(created_at >= :start_date AND created_at <= :end_date) AND (design_images.imageable_type = 'MasterDesign')",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}).order("design_images.id DESC")
       when 'al_date'
         DesignImage.available.where("(updated_at >= :start_date AND updated_at <= :end_date) AND (design_images.imageable_type = 'MasterDesign')",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}).order("design_images.id DESC")
+      when 'last_al_date'
+        DesignImage.available.where("(last_updated_at >= :start_date AND last_updated_at <= :end_date) AND (design_images.imageable_type = 'MasterDesign')",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}).order("design_images.id DESC")
+      when 'last_al_time'
+        DesignImage.available.where("(last_updated_at >= :start_date AND last_updated_at <= :end_date) AND (design_images.imageable_type = 'MasterDesign')",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}).order("design_images.id DESC")
     end
   end
 
