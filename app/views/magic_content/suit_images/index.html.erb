@@ -134,8 +134,8 @@
     <form>
       <input style="visibility:hidden" name="keyword" value="<%= params[:keywords]%>"/>
       <input style="visibility:hidden" name="genre" value="<%=params[:genre]%>"/>
-      <input style="visibility:hidden" name="genre" value="<%=params[:start_date]%>"/>
-      <input style="visibility:hidden" name="genre" value="<%=params[:end_date]%>"/>
+      <input style="visibility:hidden" name="start_date" value="<%=params[:start_date]%>"/>
+      <input style="visibility:hidden" name="end_date" value="<%=params[:end_date]%>"/>
       <li class="l_reply_num" style="margin-left:2px; margin-right:10px" >共有<span class="red"></span><%= @page_count %>页</li>
       <li class="l_reply_num" >跳到 <input theme="2" name="page" genre="<%=params[:genre]%>" keywords="<%= params[:keywords]%>" max-page="9" type="text" style="width:30px;height:14px;" /> 页&nbsp;<button id="pager_go2" type="submit" value="确定" style="padding: 0 2px 0 2px;height:21px;line-height:15px;">确定</button>&nbsp;</li>
     </form>
