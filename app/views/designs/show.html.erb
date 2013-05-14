@@ -129,16 +129,18 @@
         </div>
       </div>
       <div class="properties">
-        <%- unless @design.tag_counts_on(:tags).size == 0 %>
-        <div class="tags">
-          <h5>标签</h5>
-          <ul>
-            <%- @design.tag_counts_on(:tags).each do |tag| %>
-              <li><%= link_to tag.name, "" %></li>
-            <%- end %>
-          </ul>
-        </div>
-        <%- end %>
+        <!--
+          <%- unless @design.tag_counts_on(:tags).size == 0 %>
+          <div class="tags">
+            <h5>标签</h5>
+            <ul>
+              <%- @design.tag_counts_on(:tags).each do |tag| %>
+                <li><%= link_to tag.name, "" %></li>
+              <%- end %>
+            </ul>
+          </div>
+          <%- end %>
+        -->
         <table class="propertyA">
           <%- unless @design.user.try(:name_of_company).blank? %>
           <tr>

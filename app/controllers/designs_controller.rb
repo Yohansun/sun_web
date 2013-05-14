@@ -22,11 +22,11 @@ class DesignsController < ApplicationController
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("created_at desc").page(params[:page]).joins(:design_images).group("imageable_id")
+      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("created_at desc").includes(:design_images).page(params[:page])
 
       load_skin
     else
-      @designs = Design.order("designs.id in (#{sort_input}) desc").page(params[:page]).per(9).joins(:design_images).group("imageable_id")
+      @designs = Design.order("designs.id in (#{sort_input}) desc").includes(:design_images).page(params[:page]).per(9)
     end
     unless @designs.nil?
       if params[:order] == "最热"
