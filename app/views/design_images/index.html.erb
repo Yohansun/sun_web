@@ -343,12 +343,16 @@ $(function(){
 						<%- @images.each do |image| %>
 							<div>
 								<div class="img_vertical_align">
-									<%- unless image.imageable_type == "MasterDesign" -%>
-										<a href="<%= user_design_path(image.user_id, image.imageable_id, image_id: image.id) %>" target="_blank" >
+									<%- if image.imageable_type == "MasterDesign" -%>
+										<a href="<%= master_design_path(image.imageable_id) %>" target="_blank" >
 											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title), title: image.design.try(:title)) %>
 										</a>
-									<%- else -%>
-										<a href="<%= master_design_path(image.imageable_id) %>" target="_blank" >
+									<%- elsif image.imageable_type == "ColorDesign" -%>
+										<a href="/color_designs/<%= image.imageable_id %>" target="_blank" >
+											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title), title: image.design.try(:title)) %>
+										</a>
+									<%- else %>
+										<a href="<%= user_design_path(image.user_id, image.imageable_id, image_id: image.id) %>" target="_blank" >
 											<%= image_tag(image.file.url(:design_image_big), alt: image.design.try(:title), title: image.design.try(:title)) %>
 										</a>
 									<%- end -%>
@@ -397,7 +401,28 @@ $(function(){
 						<a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'imgbase/tmall.jpg' %>"></a>
 						<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path 'imgbase/go_shops.jpg' %>"></a>
 					</span>
-					<%- unless @images.first.imageable_type == "MasterDesign" -%>
+					<%- if @images.first.imageable_type == "MasterDesign" -%>
+						<span class="fl march-twenty-a">
+							<a href="/master_designs/<%= @images.first.imageable_id %>" target="_blank">
+								<%= truncate(@images.first.imageable.try(:title), length: 15) %>
+							</a>
+								<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+									查看该套作品
+								</a>
+							
+						</span>
+						<span class="fl cl">
+							<strong>
+								<%= @images.first.imageable.master_profile.try(:name) || @images.first.imageable.master_name %>
+							</strong>
+						</span>
+					<%- elsif @images.first.imageable_type == "ColorDesign" %>
+						<span class="fl march-twenty-a">
+							<a href="/color_designs/<%= @images.first.imageable_id %>" target="_blank"><%= truncate(@images.first.try(:title), length: 15) %> </a>
+						</span>
+						<span class="fl cl">
+						</span>
+					<%- else %>
 						<span class="fl march-twenty-a">
 							<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" target="_blank"><%= truncate(@images.first.design.try(:title), length: 15) %> </a>
 							<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
@@ -414,21 +439,6 @@ $(function(){
 								<% end %>
 							</strong>
 						</span>
-					<%- else %>
-						<span class="fl march-twenty-a">
-							<a href="/master_designs/<%= @images.first.imageable_id %>" target="_blank">
-								<%= truncate(@images.first.imageable.try(:title), length: 15) %>
-							</a>
-								<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
-									查看该套作品
-								</a>
-							
-						</span>
-						<span class="fl cl">
-							<strong>
-								<%= @images.first.imageable.master_profile.try(:name) || @images.first.imageable.master_name %>
-							</strong>
-						</span>
 					<%- end %>
 				</p>
 			</div><!-- imgbase_bin -->
@@ -443,7 +453,7 @@ $(function(){
         %>
 				<%- @images.each_with_index do |image, index| %>
 					<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-						<!-- <a href="<%= image_show_design_image_path(image,imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list], site: site + (index + 1)) %>" target="_blank"> -->
+						
 						<a href="/images/<%=image.id%>_<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=site + (index + 1)%>" target="_blank">
 							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title), title: image.design.try(:title)) %>
 							<p><%= truncate(image.title, length: 15) %></p>
@@ -455,7 +465,28 @@ $(function(){
 								<a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path 'imgbase/tmall.jpg' %>"></a>
 								<a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path 'imgbase/go_shops.jpg' %>"></a>
 							</span>
-							<%- unless @images.first.imageable_type == "MasterDesign" -%>
+							<%- if @images.first.imageable_type == "MasterDesign" -%>
+								<span class="fl march-twenty-a">
+									<a href="/master_designs/<%= image.imageable_id %>" target="_blank">
+										<%= truncate(image.imageable.try(:title), length: 15) %>
+									</a>
+									<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
+										查看该套作品
+									</a>
+									</a>
+								</span>
+								<span class="fl cl">
+									<strong>
+										<%= image.imageable.master_profile.try(:name) || image.imageable.master_name %>
+									</strong>
+								</span>
+							<%- elsif @images.first.imageable_type == "ColorDesign" -%>
+								<span class="fl march-twenty-a">
+									<a href="/color_designs/<%= image.imageable_id %>" target="_blank">
+										<%= truncate(image.try(:title), length: 15) %>
+									</a>
+								</span>
+							<%- else %>
 								<span class="fl march-twenty-a">
 									<a href="<%= user_design_path(image.user_id, image.imageable_id) %>" target="_blank">
 										<%= truncate(image.design.try(:title), length: 15) %>
@@ -472,21 +503,6 @@ $(function(){
 												免费咨询
 											</a>
 										<% end %>
-									</strong>
-								</span>
-							<%- else %>
-								<span class="fl march-twenty-a">
-									<a href="/master_designs/<%= image.imageable_id %>" target="_blank">
-										<%= truncate(image.imageable.try(:title), length: 15) %>
-									</a>
-									<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
-										查看该套作品
-									</a>
-									</a>
-								</span>
-								<span class="fl cl">
-									<strong>
-										<%= image.imageable.master_profile.try(:name) || image.imageable.master_name %>
 									</strong>
 								</span>
 							<%- end %>
