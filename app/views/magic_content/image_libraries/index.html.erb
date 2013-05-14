@@ -10,12 +10,18 @@
       if($("#genre").val() == "pub_time"){
         $('.pub_time').show()
       }
+      if($("#genre").val() == "al_time"){
+        $('.pub_time').show()
+      }
+      if($("#genre").val() == "last_al_time"){
+        $('.pub_time').show()
+      }
       $('.set_name').click(function(e){
         $(this).siblings('.name_form').show()
         $('.color_form_overlay').show()
       })
       $("#genre").change(function(e){
-        if($(this).val() == 'pub_time' || $(this).val() == 'al_time'){
+        if($(this).val() == 'pub_time' || $(this).val() == 'al_time' || $(this).val() == 'last_al_time'){
           $('.pub_time').show()
         }else{
           $('.pub_time').hide()
@@ -113,7 +119,7 @@
           ["未编辑色号, 未审核标签","no_edit_color"],
           ["不予审核的图片","no_audited"],
           ["发布时间","pub_time"],
-          ["修改时间","al_time"],
+          ["修改时间","al_time"],["根据最后修改时间","last_al_time"],
           ["已填写色号", "yes_color"]], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
