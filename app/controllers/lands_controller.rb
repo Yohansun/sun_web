@@ -149,7 +149,26 @@ class LandsController < ApplicationController
 							"428_zhuangxiudianpin_baicheng5",
 							"428_pipawang_baicheng1",
 							"428_pipawang_baicheng2",
-							"428_pipawang_baicheng3"]
+							"428_pipawang_baicheng3",
+							"509_soufang_love_1",
+							"509_soufang_love_2",
+							"509_soufang_love_3",
+							"509_soufang_love_4",
+							"509_soufang_love_5",
+							"509_soufang_love_6",
+							"509_soufang_love_7",
+							"509_soufang_love_8",
+							"509_soufang_love_9",
+							"509_soufang_love_10",
+							"509_soufang_love_11",
+							"509_souhu_love_1",
+							"509_souhu_love_2",
+							"509_souhu_love_3",
+							"509_souhu_love_4",
+							"509_souhu_love_5",
+							"509_souhu_love_6",
+							"509_yichuanmei_love_1"
+						]
 
 			urls_color_designs = ["428_sina_color1",
 				"428_sina_color2",
