@@ -70,7 +70,12 @@ class LandsController < ApplicationController
 							"428_taipingyang_tk3",
 							"428_taipingyang_tk4",
 							"428_pipawang_tk2",
-							"428_pipawang_tk3"
+							"428_pipawang_tk3",
+							"514_sina_tk1",
+							"514_sina_tk2",
+							"514_taipingyang_tk1",
+							"514_zhuangxiu_tk1",
+							"514_pipa_tk1"
 						]
 
 			urls_baicheng = ["baicheng_soufun_tuliao",
@@ -180,7 +185,11 @@ class LandsController < ApplicationController
 				"428_zhuangxiudianpin_color1",
 				"428_zhuangxiudianpin_color2",
 				"428_zhuangxiudianpin_color3",
-				"428_zhuangxiudianpin_color4"
+				"428_zhuangxiudianpin_color4",
+				"514_sina_scdp1",
+				"514_taipingyang_scdp1",
+				"514_zhuangxiu_scdp1",
+				"514_zhuangxiu_scdp2"
 			]
 			urls_master_designs = ["428_sina_m_design1",
 				"428_sina_m_design4",
@@ -204,7 +213,9 @@ class LandsController < ApplicationController
 				"428_zhuangxiudianpin_m_design4",
 				"428_pipawang_m_design1",
 				"428_pipawang_m_design2",
-				"428_pipawang_m_design3"]
+				"428_pipawang_m_design3",
+				"514_zhuangxiu_master1",
+				"514_zhuangxiu_master2"]
 
 			#0327重新新加的监测
 			urls_design_imgs = ["327_soufang1",
@@ -272,7 +283,13 @@ class LandsController < ApplicationController
 							"428_taipingyang_ck3",
 							"428_taipingyang_ck4",
 							"428_pipawang_ck2",
-							"428_pipawang_ck3"
+							"428_pipawang_ck3",
+							"514_sina_qiubit1",
+							"514_taipingyang_qiubit1",
+							"514_taipingyang_qiubit2",
+							"514_taipingyang_qiubit3",
+							"514_zhuangxiu_qiubit1",
+							"514_pipa_qiubit1"
 						]
 			#TASK 458
 			urls_star = ["327_hejia_star1",
