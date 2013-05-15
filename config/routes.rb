@@ -3,11 +3,11 @@
 Icolor::Application.routes.draw do
   match "/images/(:id)_:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:site" => "design_images#image_show"
   match "/images" => "design_images#index"
-  match "/images/:page" => "design_images#index"
   match "/images/:id/image_show" => "design_images#image_show", as: 'image_show_design_image'
   match "/images/:id/fullscreen" => "design_images#fullscreen"
   match "/images/:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:return" => "design_images#index"
   match "/images/:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:return/:page" => "design_images#index"
+  match "/images/:page" => "design_images#index"
   require 'api'
   resources :special_events do
     member do

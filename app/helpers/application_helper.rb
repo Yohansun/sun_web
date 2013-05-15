@@ -100,7 +100,7 @@ module ApplicationHelper
             end
             "" + s1 + "装修图片大全，您可以设计自己的" + s2 + " 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           else
-             "装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+             "装修效果图大全2013图片、室内装修效果图大全、装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           end
         # elsif controller_name == 'design_images'
         #    "装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
@@ -256,7 +256,7 @@ module ApplicationHelper
         end
         "立邦 iColor装修图库，精心挑选" + s1 + "2013装修图片大全，方便您设计自己的" + s2 + "装修效果图，满足您的个性化装修需求。"
       else
-        "装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+        "立邦 iColor装修图库，提供近6万张最流行的装修效果图大全2013图片、室内装修效果图大全欣赏、装修风格鉴赏，展示丰富的客厅、厨房、卫生间、卧室、阳台等各种分类装修效果图，满足您的一切装修设计需求。"
       end
     elsif controller_name == 'design_images' && action_name == 'image_show'
       "立邦 iColor 装修图库装修效果图专区，提供2013年国内外最新的#{@image.title}装修图片，设计效果图，是目前更新速度最快、最经典的装修效果图案例。"
@@ -439,7 +439,7 @@ module ApplicationHelper
         end
         content
       else
-        "装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+        "装修,装修设计,室内装修效果图大全,装修效果图,装修效果图大全2013图片,装修图片,装修风格"
       end
     elsif controller_name == 'design_images' && action_name == 'image_show'
       "#{@image.title}装修图片,设计效果图,装修图库"

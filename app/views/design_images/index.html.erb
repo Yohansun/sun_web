@@ -95,7 +95,7 @@
 					 	<% if  (params[:page].to_i - 1) == 1 %>
 					 		//window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:return => 1)) %>"
               ///0-0-0-0-0-0-0-0-0-all-view_count-3-B-a-0-0
-                window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1/0"
+                window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1"
 					 	<% else %>
 					 		// window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page - 1),:return => 1))%>"
               window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1/<%=@images.current_page - 1%>"
@@ -168,7 +168,7 @@
   if(search == "" || search == null){
     window.location = "/images"
   }else{
-    window.location = "/images/0-0-0-0-0-0-0-0-0-all-0-0-0-" + search + "-0-0/0"
+    window.location = "/images/0-0-0-0-0-0-0-0-0-all-0-0-0-" + search + "-0-0"
   }
 }
   </script>
@@ -193,11 +193,11 @@ $(function(){
 				</form>
 				<span>热门搜索：
 					<%- if MagicSetting.color_tag.present? %>
-						<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-<%= MagicSetting.color_tag %>-0-0/0"><%= MagicSetting.color_tag %></a>
+						<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-<%= MagicSetting.color_tag %>-0-0"><%= MagicSetting.color_tag %></a>
 					<%- end %>
-					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-小户型-0-0/0">小户型</a>
-					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-客厅-0-0/0">客厅</a>
-					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-简约-0-0/0">简约</a>
+					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-小户型-0-0">小户型</a>
+					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-客厅-0-0">客厅</a>
+					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-简约-0-0">简约</a>
 				</span>
 			</div>
 			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
@@ -206,10 +206,10 @@ $(function(){
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0/0" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "" || params[:imageable_type] == "all") %>">所有图片</a>
-				<a href="/images/0-0-0-0-0-0-0-0-0-0-MasterDesign-0-0-0-_-0-0/0" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-        <a href="/images/0-0-0-0-0-0-0-0-0-0-WeekStart-0-0-0-_-0-0/0" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
-				<a href="/images/0-0-0-0-0-0-0-0-0-0-ColorDesign-0-0-0-_-0-0/0" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩配搭</a>
+				<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "" || params[:imageable_type] == "all") %>">所有图片</a>
+				<a href="/images/0-0-0-0-0-0-0-0-0-0-MasterDesign-0-0-0-_-0-0" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
+        <a href="/images/0-0-0-0-0-0-0-0-0-0-WeekStart-0-0-0-_-0-0" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
+				<a href="/images/0-0-0-0-0-0-0-0-0-0-ColorDesign-0-0-0-_-0-0" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩配搭</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -321,7 +321,7 @@ $(function(){
 					<span class="srch-span">地区: <i><%= @area_names %></i><a href="javascript:delete_submit_area();" class="srch-del">删除</a></span>
 				<%- end %>
 				<span class="srch-divider">|</span>
-				<button class="srch-span" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0%>-0-0-_-0-0/0';">重新选择</button>
+				<button class="srch-span" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0%>-0-0-_-0-0';">重新选择</button>
 			</p>
 		<%- end %>
 	</div><!-- search_bin -->
