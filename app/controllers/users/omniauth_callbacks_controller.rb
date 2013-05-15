@@ -37,7 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         flash[:notice] = "Authentication successful"
         if session[:api_login].present?
-            redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{current_user.id}"
+            redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{current_user.id}/username/#{current_user.username}"
         else
           if request.env['omniauth.origin'].match %r(community)
             current_user.user_tokens.find_by_provider(provider).update_attribute :is_binding, true #更新社区绑定状态
@@ -76,7 +76,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if user.save(:validate => false)
             flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
             if session[:api_login].present?
-              redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{user.id}"
+              redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{user.id}/username/#{user.username}"
             else
               sign_in(:user, user)
               redirect_to stored_location_for(user)

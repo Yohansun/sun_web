@@ -9,7 +9,7 @@ class ApiController < ApplicationController
     user.email = params[:email]
     user.is_read = true
     user.is_from_minisite = true
-    user.area_id = params[:area_id] if params[:area_id]
+    user.area_id = params[:area_id] ? params[:area_id] : 31
     user.phone = params[:phone]
     #user.role_id = Role.find_by_role(params[:role]).id
     case params[:role]
@@ -25,10 +25,10 @@ class ApiController < ApplicationController
       user.role_id = 3
     end
       
-    if user.save
+    if user.save(validate: false)
       respond_to do |format|
         format.json {render :json => { :result => 'true',
-         :mag => "注册成功!" } }
+         :mag => "注册成功!", :uid => '#{user.id}' } }
       end
       #render :text => '<results suc="true" msg=""/>'
     else
@@ -52,7 +52,7 @@ class ApiController < ApplicationController
     if user && user.valid_password?(params[:password])
       respond_to do |format|
         format.json {render :json => { :result => 'true',
-         :mag => "登陆成功!" } }
+         :mag => "登陆成功!", :uid => "#{user.id}" } }
       end
       #render :text => '<results suc="true" msg=""/>'
     else
@@ -71,7 +71,7 @@ class ApiController < ApplicationController
     user.is_from_minisite = true
     user.area_id = params[:area_id] if params[:area_id]
     user.phone = params[:phone]
-    user.role_id = Role.find_by_role(params[:role]).id
+    #user.role_id = Role.find_by_role(params[:role]).id
     case params[:role]
     when "designer1"
       user.role_id = 1
@@ -84,10 +84,10 @@ class ApiController < ApplicationController
     when "user"
       user.role_id = 3
     end
-    if user.save
+    if user.save(validate: false)
       respond_to do |format|
         format.json {render :json => { :result => 'true',
-         :mag => "注册成功!" } }
+         :mag => "注册成功!", :uid => '#{user.id}' } }
       end
     else
       messages = ''

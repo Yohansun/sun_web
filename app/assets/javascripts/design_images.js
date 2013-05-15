@@ -185,5 +185,5 @@ function refresh_search(params) {
     page = '0'
   }
 
-  window.location = "/images/" + tags + imageable_type + "-" + ranking_list + "-" + area_id + "-" + pinyin + "-" + search + "-" + all_tags + "-" + "0/0";
+  window.location = "/images/" + tags + imageable_type + "-" + ranking_list + "-" + area_id + "-" + pinyin + "-" + search + "-" + all_tags + "-" + "0";
 }
