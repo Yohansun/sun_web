@@ -39,5 +39,5 @@ task :update_crontab, :roles => :db do
 end
 
 task :clear_rails_cache do
-  run "cd #{release_path} && bundle exec rake cache:clear RAILS_ENV=#{deploy_env}"
+  run "cd #{release_path} && bundle exec rake tmp:cache:clear RAILS_ENV=#{deploy_env}"
 end
