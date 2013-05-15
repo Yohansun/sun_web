@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+.winner-bin{background: url(<%= asset_path "winner/winner-bg.jpg"%>) no-repeat;width: 963px;margin: 30px auto 50px;}
+.winner-bin h1{height: 400px;}
+.winner-bin h1,.winner-bin h2,.winner-prev,.winner-next{text-indent: -999em;}
+.winner-bin h2{background: url(<%= asset_path "winner/winner-hd.png"%>) no-repeat;height: 36px;}
+.pd30{padding: 30px;}
+.winner-reg{background: #f5c294;padding-top: 1px;}
+.winner-reg h2{left: 30px;top: -35px;}
+.winner-reg h2,.winner-vote h2{width: 127px;}
+.winner-slide{width: 850px;margin: 0 auto;}
+.winner-prev,.winner-next{background: url(<%= asset_path "winner/winner-bullets.png"%>) no-repeat;width: 33px;height: 57px;left: 0;top: 52%;margin-top: -29px;filter:alpha(opacity=50);opacity: 0.5;
+	-webkit-transition:opacity 0.5s;
+	-moz-transition:opacity 0.5s;
+	transition:opacity 0.5s;
+	_background-image: url(<%= asset_path "winner/winner-bullets.gif"%>);
+}
+.winner-next{background-position: -33px 0;left: auto;right: 0;}
+.winner-prev:hover,.winner-next:hover{filter:alpha(opacity=100);opacity: 1;}
+.winner-slide-bin{width: 664px;margin: 0 auto;overflow: hidden;}
+.winner-slide-bin ul{overflow: hidden;float: left;_display: inline;}
+.winner-slide-bin li{width: 664px;text-align: right;margin: 10px 0;font: bold 14px "SimHei";color: #fefffe;*margin: 5px 0;}
+.winner-slide-bin .h3{background: url(<%= asset_path "winner/winner-bg2.png"%>) no-repeat;text-align: center;width: 664px;height: 18px;margin: 20px auto;padding: 5px 0;line-height: 18px;font-size: 18px;font-weight: bold;color: #fff;}
+.winner-slide-bin span{float: left;font: 15px "Microsoft Yahei";margin-top: -2px;}
+.winner-slide-container{width: 99999em;position: relative;}
+
+.winner-vote{background: #ff861f;}
+.winner-vote h2{background-position: -127px 0;}
+
+.winner-color{background: #9f1b1b;}
+.winner-color h2{width: 441px;background-position: -254px 0;}

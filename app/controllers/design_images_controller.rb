@@ -153,7 +153,7 @@ class DesignImagesController < ApplicationController
     @images.each do |image|
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
     end
-    expires_in 30.minutes, 'max-stale' => 1.hours, :public => true
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def image_tag

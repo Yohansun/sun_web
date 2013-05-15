@@ -372,7 +372,7 @@ $(function(){
 					<%= image_tag('colors_icon_tit.png', style: 'float:left; margin-top:15px;') %>
 					<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
 						<%= image_tag('colors2.jpg', style: 'display: inline-block;') %>
-						<div class="desc" style="height: 35px; width: 620px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
+						<div class="desc" style="height: 35px; width: 560px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
 							<div class="list" style="height:35px;">
 								<ul class="group" style="overflow:hidden;">
 									<%- @image_colors.first.each do |color| %>
@@ -387,9 +387,9 @@ $(function(){
 						</div>
 					</div>
 					<div class="fr ft12 btn_group btn_group_imgs border_lline">
-						<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :remote => true, class: "icon_like votes_count#{@images.first.id}", :method => :post do %>
-			           <%= @images.first.try(:votes_count) %>
-			         <%- end %>
+						<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :title => '', :remote => true, class: "icon_like votes_count#{@images.first.id}", :method => :post do %>
+				           <%= @images.first.try(:votes_count) %>
+				        <%- end %>
 						<a href="javascript:void(0);" class="icon_view">
 			            <%= @images.first.try(:comments_count) %>
 			         </a>
@@ -512,7 +512,7 @@ $(function(){
 							<%= image_tag('colors_icon_tit.png', style: 'float:left; margin-top:15px;') %>
 							<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
 								<%= image_tag('colors2.jpg', style: 'display: inline-block;') %>
-								<div class="desc" style="height: 35px; width: 620px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
+								<div class="desc" style="height: 35px; width: 560px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
 									<div class="list" style="height:35px;">
 										<ul class="group" style="overflow:hidden;">
 											<%- @image_colors[index].each do |color| %>
@@ -528,7 +528,7 @@ $(function(){
 								</div>
 							</div>
 							<div class="fr ft12 btn_group btn_group_imgs border_lline">
-								<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, class: "icon_like votes_count#{image.id}", :method => :post do %>
+								<%= link_to votes_path(:voteable_id => image.id, :voteable_type => "DesignImage"), :remote => true, class: "icon_like votes_count#{image.id}", :method => :post, :title => image.try(:votes_count) do %>
 									<%= image.try(:votes_count) %>
 								<%- end %>
 								<a href="javascript:void(0);" class="icon_view">

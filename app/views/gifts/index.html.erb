@@ -2,360 +2,148 @@
   <%= stylesheet_link_tag "style" %>
  <% end -%>
 
- <div class="main gift">
-  <div class='wrapper gift_box'>
-    <!-- <img src="<%= asset_path "paint_art/gift_banner3.png"%>"/> -->
-     <div class="gift_kv pr" style="width:963px;height:314px;">
-      <a href="javascript:;" style="background:#fff;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;display:block;z-index:1;"></a>  
-      <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="963" height="314">
-          <param name="movie" value="<%=asset_path 'gifts/gifts_kv.swf'%>" />
-          <param name="quality" value="high" />
-          <param name="wmode" value="opaque" />
-          <param name="swfversion" value="6.0.65.0" />
-          <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-          <param name="expressinstall" value="Scripts/expressInstall.swf" />
-          <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-          <!--[if !IE]>-->
-          <object type="application/x-shockwave-flash" data="<%=asset_path 'gifts/gifts_kv.swf'%>" width="963" height="314">
-            <!--<![endif]-->
-            <param name="quality" value="high" />
-            <param name="wmode" value="opaque" />
-            <param name="swfversion" value="6.0.65.0" />
-            <param name="expressinstall" value="Scripts/expressInstall.swf" />
-            <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-            <div>
-              <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-              <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
+ <div class="main winner-bin">
+    <h1>因爱之名 刷新生活 ————立邦携手万名设计师为您免费设计新家</h1>
+        <% if @regs.present? %>
+            <div class="winner-reg pr pd30">
+            <h2 class="pa">注册有奖</h2>
+            <div class="winner-slide pr">
+                    <a href="javascript:;" class="winner-prev pa">prev</a>
+                    <a href="javascript:;" class="winner-next pa">next</a>
+                    <div class="winner-slide-bin pr">
+                        <div class="winner-slide-container">
+                            <%- @regs.each do |d|%>
+                                <%- give_time = d[0] %>
+                                <%- end_time = d[1] %>
+                                <%- gift = @reg_luck.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
+                                <ul>
+                                  <li class="h3"><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></li>
+                                  <%- gift.each do |g| %> 
+                                    <li><span><%= g.winner%></span><%= g.gift_name%></li>
+                                  <%- end -%>   
+                                </ul>  
+                            <%- end %>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--[if !IE]>-->
-          </object>
-          <!--<![endif]-->
-      </object>
-    </div>
-    <div class="art_step1 art_step">
-      <h2><img src=" <%= asset_path "paint_art/gift_step3_1.png"%>"/></h2>                
-      <% unless @gift1.first.blank? %>
-      <div class="awards_list" id="awards_slide1">                    
-        <div class="awards_list_container">
-          <div class="awards_list_slides group pr">
-            <%- @dates_arr1.each do |d|%>
-            <%- give_time = d[0] %>
-            <%- end_time = d[1] %>
-            <%- gift = @gift1.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
-            <ul class="awards_slides_ul">
-              <li class="awards_date pr"><h3><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></h3></li>
-              <%- gift.each do |g| %>                                                       <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
-              <%- end -%>   
-            </ul>  
-            <%- end %>    
-          </div>
-        </div>
-        <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr1.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr1.size < 2 ? '' : 'n'}.png"%>"/></a>
-      </div>
-      <%- end -%>
-    </div>
+        <%- end -%>
 
-    <div class="art_step2 art_step">
-      <h2><img src="<%= asset_path "paint_art/gift_step3_2.png"%>"/></h2>
-      <% unless @gift2.first.blank? %>
-      <div class="awards_list" id="awards_slide2">
-        <div class="awards_list_container marl155 group">
-          <div class="awards_list_slides marl155 group pr">
-            <%- @dates_arr2.each do |d|%>
-            <%- end_year = d.split('/')[0] %>
-            <%- end_month = d.split('/')[1] %>
-            <%- gift = @gift2.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>    
-            <ul class="awards_slides_ul">
-              <li class="awards_date pr"><h3><%= end_year + "/" + end_month %></h3></li>
-              <%- gift.each do |g| %>                                                 
-              <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
-              <%- end -%>   
-            </ul>  
-            <%- end %>                              
-          </div>
-        </div>
-        <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr2.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <!-- <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_ln.png"%>"/></a>
-        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_rn.png"%>"/></a> -->
-      </div>
-      <%- end -%>
-    </div>
-
-    <div class="art_step3 art_step">
-      <h2><img src="<%= asset_path "paint_art/gift_step3_3.png"%>"/></h2>
-      <% unless @gift3.first.blank? %>
-      <div class="awards_list" id="awards_slide3">
-        <div class="awards_list_container">
-          <div class="awards_list_slides group pr">
-            <%- @dates_arr3.each do |d|%>
-            <%- give_time = d[0] %>
-            <%- end_time = d[1] %>
-            <%- gift = @gift3.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
-            <ul class="awards_slides_ul">
-              <li class="awards_date pr"><h3><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></h3></li>
-              <%- gift.each do |g| %> 
-              <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
-              <%- end -%>   
-            </ul>  
-            <%- end %>    
-          </div>
-        </div>
-        <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
-        <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr3.size < 2 ? '' : 'n'}.png"%>"/></a>
-      </div>
-      <%- end -%>
-    </div>
-
-    <div class="art_step4 art_step">
-      <h2><img src="<%= asset_path "paint_art/gift_step3_4.png"%>"></h2>
-      <% unless @gift4.first.blank? %>
-        <div class="awards_list" id="awards_slide4">
-          <div class="awards_list_container marl155 group">
-            <div class="awards_list_slides marl155 group pr">
-              <%- @dates_arr4.each do |d|%>
-                <%- end_year = d.split('/')[0] %>
-                <%- end_month = d.split('/')[1] %>
-                <%- gift = @gift4.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>    
-                <ul class="awards_slides_ul">
-                  <li class="awards_date pr"><h3><%= end_year + "/" + end_month %></h3></li>
-                  <%- gift.each do |g| %>                                                 
-                  <li><em><%= g.gift_sub_type%></em><span><%= g.winner%></span><strong><%= g.gift_name%></strong></li>
-                  <%- end -%>   
-                </ul>  
-              <%- end %>                          
+        <% if @votes.present? %>
+            <div class="winner-vote pd30">
+            <h2>投票有礼</h2>
+            <div class="winner-slide pr">
+                    <a href="javascript:;" class="winner-prev pa">prev</a>
+                    <a href="javascript:;" class="winner-next pa">next</a>
+                    <div class="winner-slide-bin pr">
+                        <div class="winner-slide-container">
+                            <%- @votes.each do |d|%>
+                            <ul>
+                                <%- end_year = d.split('/')[0] %>
+                                <%- end_month = d.split('/')[1] %>
+                                <%- gift = @vote_luck.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>  
+                                  <li class="h3"><%= end_year + "/" + end_month %></li>
+                                  <%- gift.each do |g| %> 
+                                    <li><span><%= g.winner%></span><%= g.gift_name%></li>
+                                  <%- end -%>   
+                            </ul>      
+                            <%- end %>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <a class="awards_next awards_btn_next" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_l#{@dates_arr4.size < 2 ? '' : 'n'}.png"%>"/></a>
-          <a class="awards_per awards_btn_per" href="javascript:void(0)"><img src="<%= asset_path "paint_art/awards_btn_r#{@dates_arr4.size < 2 ? '' : 'n'}.png"%>"/></a>
-        </div>    
-      <%- end -%> 
-    </div>
-  </div><!--wrapper ends-->
+        <%- end -%>
+
+        <% if @months.present? %>
+            <div class="winner-color pd30">
+            <h2>月度最佳色彩奖/月度最佳设计奖</h2>
+            <div class="winner-slide pr">
+                    <a href="javascript:;" class="winner-prev pa">prev</a>
+                    <a href="javascript:;" class="winner-next pa">next</a>
+                    <div class="winner-slide-bin pr">
+                        <div class="winner-slide-container">
+                            <%- @votes.each do |d|%>
+                            <ul>
+                                <%- end_year = d.split('/')[0] %>
+                                <%- end_month = d.split('/')[1] %>
+                                <%- gift = @month_best.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>  
+                                  <li class="h3"><%= end_year + "/" + end_month %></li>
+                                  <%- gift.each do |g| %> 
+                                    <li><span><%= g.winner%></span><%= g.gift_name%></li>
+                                  <%- end -%>   
+                            </ul>      
+                            <%- end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%- end -%>
 </div><!--main ends-->
-<div id="overlay"></div>
-    <div class="abs_center ft12 none" id="prize_jan">
-        <a href="javascript:;" class="close_btn">关闭</a>
-        <div id="flower"></div>
-        <table id="prize_table1">
-            <tr>
-                <th colspan="3">设计为王奖</th>
-            </tr>
-            <tr>
-                <td class="tr">老鬼</td>
-                <td width="20"></td>
-                <td>《温情摇滚乐》</td>
-            </tr>
-        </table>
-        <table id="prize_table2">
-            <tr>
-                <th colspan="3">刷新生活奖</th>
-            </tr>
-            <tr>
-                <td class="tr">戴黎龙</td>
-                <td width="20"></td>
-                <td>《十二橡树庄园别墅设计》</td>
-            </tr>
-            <tr>
-                <td class="tr">邓东川</td>
-                <td width="20"></td>
-                <td>《海悦蓝庭》</td>
-            </tr>
-            <tr>
-                <td class="tr">李进</td>
-                <td width="20"></td>
-                <td>《诗意田园》</td>
-            </tr>
-        </table>
-        <table id="prize_table3">
-            <tr>
-                <th colspan="3">漆光异彩奖</th>
-            </tr>
-            <tr>
-                <td class="tr">chizi</td>
-                <td width="20"></td>
-                <td>《美式品质.缤纷多彩的混搭生活》</td>
-            </tr>
-            <tr>
-                <td class="tr">靳涛</td>
-                <td width="20"></td>
-                <td>《猫的乐园》</td>
-            </tr>
-            <tr>
-                <td class="tr">刘涛</td>
-                <td width="20"></td>
-                <td>《美式—乡间小麓》</td>
-            </tr>
-            <tr>
-                <td class="tr">jiushu</td>
-                <td width="20"></td>
-                <td>《水榭简欧》</td>
-            </tr>
-            <tr>
-                <td class="tr">柳元</td>
-                <td width="20"></td>
-                <td>《天鹅堡》</td>
-            </tr>
-            <tr>
-                <td class="tr">王燕超</td>
-                <td width="20"></td>
-                <td>《非洲部落》</td>
-            </tr>
-            <tr>
-                <td class="tr">极美设计机构</td>
-                <td width="20"></td>
-                <td>《我的艺术家》</td>
-            </tr>
-            <tr>
-                <td class="tr">黄羽</td>
-                <td width="20"></td>
-                <td>《美式乡村风格样板房设计》</td>
-            </tr>
-        </table>
-        <table id="prize_table4">
-            <tr>
-                <th colspan="3">秀色可居奖</th>
-            </tr>
-            <tr>
-                <td class="tr">孟玲</td>
-                <td width="20"></td>
-                <td>《海边度假》</td>
-            </tr>
-            <tr>
-                <td class="tr">rzchengshucai</td>
-                <td width="20"></td>
-                <td>《温暖乡村》</td>
-            </tr>
-            <tr>
-                <td class="tr">郑州大铭装饰工程有限公司</td>
-                <td width="20"></td>
-                <td>《思念果岭王女士家居装修设计》</td>
-            </tr>
-            <tr>
-                <td class="tr">徐冬冬</td>
-                <td width="20"></td>
-                <td>《黄金99新中式》</td>
-            </tr>
-            <tr>
-                <td class="tr">同城伟业</td>
-                <td width="20"></td>
-                <td>《简中式》</td>
-            </tr>
-            <tr>
-                <td class="tr">xinkongjian</td>
-                <td width="20"></td>
-                <td>《简欧风格》</td>
-            </tr>
-            <tr>
-                <td class="tr">郜世峰</td>
-                <td width="20"></td>
-                <td>《爱的箴言》</td>
-            </tr>
-            <tr>
-                <td class="tr">刘帅</td>
-                <td width="20"></td>
-                <td>《合二为一，何乐不为！》</td>
-            </tr>
-            <tr>
-                <td class="tr">任周景</td>
-                <td width="20"></td>
-                <td>《迷恋中国风》</td>
-            </tr>
-            <tr>
-                <td class="tr">李雷夫</td>
-                <td width="20"></td>
-                <td>《享•时光——尚爱西厨》</td>
-            </tr>
-            <tr>
-                <td class="tr">叶惠明</td>
-                <td width="20"></td>
-                <td>《牛奶巧克力---古朴清风》</td>
-            </tr>
-            <tr>
-                <td class="tr">茧</td>
-                <td width="20"></td>
-                <td>《名人名家艺术品展厅》</td>
-            </tr>
-            <tr>
-                <td class="tr">徐旭俊</td>
-                <td width="20"></td>
-                <td>《红色经典》</td>
-            </tr>
-            <tr>
-                <td class="tr">心房子室内设计师事务所</td>
-                <td width="20"></td>
-                <td>《重庆金科 • 天湖美镇（西班牙风格）》</td>
-            </tr>
-            <tr>
-                <td class="tr">黄育波</td>
-                <td width="20"></td>
-                <td>《写意东方》</td>
-            </tr>
-        </table>
-    </div>
+
 <script type="text/javascript">
-function awards_slide(ID){
+;(function($){
+    $.fn.winnerSlider = function(config){
+        config = $.extend({
+            speed : 400
+        }, config);
+        return this.each(function(){
+            var that = $(this),
+                slide = that.children(),
+                $ul = that.find('ul'),
+                pages = $ul.length,
+                width = that.width(),
+                arr = [],
+                pager = 1;
+            if(pages < 2) return;
 
-    var page = 1;
-    var i = 1;
-    $(ID+'a.awards_btn_per').click(function(){
-        var $parent = $(this).parent('div.awards_list');
-        var $v_list = $parent.find('div.awards_list_slides');
-        var $v_container = $parent.children('div.awards_list_container');
+            $ul.each(function(i, ul){
+                arr.push($(ul).remove());
+            });
+            slide.append(arr[0]);
 
-        var v_width = $v_container.width();
-        var len = $v_list.find('ul.awards_slides_ul').length;
-        var page_count = Math.ceil(len/i);
-
-        if(!$v_list.is(':animated')){
-            if(page == page_count){
-                return;
-            }else{
-                $v_list.animate({'left':'-='+v_width});
-                page++;
-                if(page == page_count){
-                    $(ID+'a.awards_btn_per').fadeTo('fast', 0.2);
-                    $(ID+'a.awards_btn_next').fadeTo('fast', 1);
-                } 
-                if(page != 1 && page != page_count){
-                    $(ID+'a.awards_btn_next').fadeTo('fast', 1);
-                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
-                } 
+            that.siblings('.winner-next').click(function(){
+                playL(pager + 1);
+                that.animate({'height' : slide.find('ul').last().outerHeight() + 'px'}, 'fast');
+            });
+            that.siblings('.winner-prev').click(function(){
+                playR(pager - 1);
+                that.animate({'height' : slide.find('ul').first().outerHeight() + 'px'}, 'fast');
+            })
+            function playL(page){
+                if(slide.is(':animated')) return;
+                var ul;
+                if(page <= pages){
+                    ul = arr[page - 1];
+                    pager = page;
+                } else {
+                    ul = arr[0];
+                    pager = 1;
+                }
+                slide.append(ul).animate({'left' : - width + 'px'}, config.speed,function (){
+                    slide.find('ul').first().remove();
+                    slide.css('left', 0);
+                });
             }
-        }   
-    })
-    $(ID+'a.awards_btn_next').click(function(){
-        var $parent = $(this).parent('div.awards_list');
-        var $v_list = $parent.find('div.awards_list_slides');
-        var $v_container = $parent.children('div.awards_list_container');
-
-        var v_width = $v_container.width();
-        var len = $v_list.find('ul.awards_slides_ul').length;
-        var page_count = Math.ceil(len/i);
-
-        if(!$v_list.is(':animated')){
-            if(page == 1){return;}else{
-                $v_list.animate({left:'+='+v_width});
-                page--;
-                if(page == 1){
-                    $(ID+'a.awards_btn_next').fadeTo('fast', 0.2);
-                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
-                } 
-                if(page != page_count && page != 1){
-                    $(ID+'a.awards_btn_next').fadeTo('fast', 1);
-                    $(ID+'a.awards_btn_per').fadeTo('fast', 1);
-                } 
-                // if(page == page_count) {
-                //     $(ID+'a.awards_btn_per').fadeTo('fast', 1);
-                //     $(ID+'a.awards_btn_next').fadeTo('fast', 0.2);
-                // }
+            
+            function playR(page){
+                if(slide.is(':animated')) return;
+                var ul;
+                if(page === 0){
+                    ul = arr[arr.length - 1];
+                    pager = pages;
+                } else {
+                    ul = arr[page - 1];
+                    pager = page;
+                }
+                slide.prepend(ul).css('left', - width + 'px').animate({'left': 0}, config.speed, function(){
+                    slide.find('ul').last().remove();
+                });
             }
-        }
-    }).fadeTo('fast', 0.2);
-}
-awards_slide('#awards_slide1 ');
-awards_slide('#awards_slide2 ');
-awards_slide('#awards_slide3 ');
-awards_slide('#awards_slide4 ');
+        });
+    };
+    $(function(){
+        $('.winner-slide-bin').winnerSlider();
+    });
+})(jQuery);
 </script>
