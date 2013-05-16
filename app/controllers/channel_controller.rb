@@ -44,7 +44,7 @@ class ChannelController < ApplicationController
     #每周之星,月度之星 = stars
     stars = WeeklyStar.order("published_at desc").partition {|weekly_star| weekly_star.star_type_id == 1 }
     
-    weekly_user_ids,per_month_user_ids = stars.collect {|star| star.map(&:user_id) }.compact.uniq }
+    weekly_user_ids,per_month_user_ids = stars.collect {|star| star.map(&:user_id) }.compact.uniq
     
     @designers  = User.weekly_related(1,weekly_user_ids).page(1).per(8)
 
