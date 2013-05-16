@@ -5,7 +5,7 @@ module MagicContent
     skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :no_audited]
 
     def index
-      @images = DesignImage.available.where("no_audited is false").order("design_images.id DESC")
+      @images = DesignImage.available.order("design_images.id DESC")
       if params[:genre].present?
         if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
           @images = DesignImage.search_with(params[:genre], 'last_updated_at', "", "")
@@ -22,7 +22,7 @@ module MagicContent
           @page_count = (@images.count / 10).to_i + 1
         end
       end
-      @images = @images.order("design_images.id DESC").page(params[:page]) if @images.present?
+      @images = @images.where("no_audited is false").order("design_images.id DESC").page(params[:page]) if @images.present?
     end
 
     def categories
@@ -164,11 +164,11 @@ module MagicContent
       else
         flash[:alert] = "不予审核未成功！#{@image.errors.full_messages}"
       end
-      if params[:page].present?
-        redirect_to image_libraries_path(:page => params[:page], :genre => params[:genre], :keywords => params[:keywords])
-      else
-        redirect_to image_libraries_path
-      end
+      # if params[:page].present?
+        redirect_to image_libraries_path(:page => params[:page], :genre => params[:genre], :keywords => params[:keywords], :start_date => params[:start_date], :end_date => params[:end_date])
+      # else
+      #   redirect_to image_libraries_path
+      # end
     end
 
     def up_down_page
