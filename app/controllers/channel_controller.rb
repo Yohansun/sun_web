@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class ChannelController < ApplicationController
+  #caches_page :index, :expires_in => 60.minutes
 
   #设计快查
   def access
@@ -34,7 +35,7 @@ class ChannelController < ApplicationController
       params[:search][:user_area_id_in] = Area.robot(province_id,[city_id].compact).map(&:id)
     end
     
-    @search = DesignImage.available.users.search(params[:search])
+    @search = DesignImage.order("id desc").available.users.search(params[:search])
     @design_users = @search.page(params[:page]).per(8)
     
     #mood
@@ -45,6 +46,8 @@ class ChannelController < ApplicationController
     @designers  = User.weekly_related(1,design_user_ids).limit(8)
 
     @companys   = User.weekly_related(2,design_user_ids).limit(16)
+
+    #expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def refresh_service
