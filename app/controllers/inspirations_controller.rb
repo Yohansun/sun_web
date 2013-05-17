@@ -35,6 +35,8 @@ class InspirationsController < ApplicationController
   def show
     @inspiration = Inspiration.find(params[:id])
     @comments    = @inspiration.comments.page params[:page]
+    @inspiration_next = Inspiration.where("id > ?", params[:id]).first.try(:id) ||  @inspiration.id
+    @inspiration_prev = Inspiration.where("id < ?", params[:id]).first.try(:id)  ||  @inspiration.id
   end
 
   def new
