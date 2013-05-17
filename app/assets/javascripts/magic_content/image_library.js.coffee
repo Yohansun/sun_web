@@ -64,7 +64,7 @@ class ImageLibrary
       dom = $(event.currentTarget)
       tag_id = dom.data('tag-id')
       $('.js-tab-'+tag_id+'-childen').toggleClass('expand')
-      if  tag_id == 1 ||tag_id == 19 ||tag_id == 28 || tag_id == 122 || tag_id == 127 || tag_id == 132 || tag_id is 136 || tag_id is 210 || tag_id is 34 || tag_id is 62 || tag_id is 82 || tag_id is 107
+      if  tag_id is 210
         if dom.hasClass('expand')
           dom.removeClass('expand')
           dom.html('收缩')
@@ -84,7 +84,7 @@ class ImageLibrary
       dom = $(event.currentTarget)
       tag_id = dom.data('tag-id')
       $('.js-tab-'+tag_id+'-childen').toggleClass('expand')
-      if tag_id is 136 || tag_id is 210
+      if tag_id is 136
         if dom.hasClass('expand')
           dom.removeClass('expand')
           dom.html('收缩')
