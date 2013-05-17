@@ -4,7 +4,7 @@ require 'ruby-pinyin'
 
 class DesignImage < ActiveRecord::Base
   attr_accessible :imageable_id, :imageable_type, :file, :title, :color1, :color2, :color3, :color1_name, :color2_name, :color3_name, :tags, :area_id, :last_user_id, :last_updated_at, :view_count, :sorts
-
+  TYPE={MasterDesign: '大师作品',WeekStart: '设计之星',ColorDesign: '色彩配搭'}
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
   has_many :tags, class_name: 'ImageTag',:dependent => :destroy
