@@ -98,7 +98,7 @@
   <% @designs.in_groups_of(3, false).each do |group| -%>
   <ul class="d_works add_icon group">
     <% group.each do |design| -%>
-    <li>
+    <li >
       <%- if design.cover_img %>
         <%= link_to user_design_path(design.user_id, design) do %>
           <%= image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}") %>
@@ -158,4 +158,4 @@
   <!--pager ends-->
 </div>
 <!--sub_bot ends-->
-</div><!--main ends-->
+</div><!--main ends12-->
