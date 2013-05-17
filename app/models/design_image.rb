@@ -112,7 +112,7 @@ class DesignImage < ActiveRecord::Base
 
   def channel_name
     case self.imageable_type
-    when 'Design' then "推荐作品"
+    when 'Design' then "作品展示"
     when 'ColorDesign' then "色彩配搭"
     when 'MasterDesign' then "大师作品"
     end
