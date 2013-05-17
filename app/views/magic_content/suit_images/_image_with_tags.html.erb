@@ -85,9 +85,9 @@
     <%- end %>
     <%= submit_tag '保存', :class =>"greyishBtn" %>
     &nbsp;
-    <% if can? :audit, :aud %>
-      <%= link_to '审核', main_app.suit_image_audited_path(image, :genre => "imageable_id", :keywords => image.imageable_id, :page => params[:page]), :confirm => "确认审核通过吗", :class =>"button basicBtn" %>
-    <% end %>
+    <%# if can? :audit, :aud %>
+      <%#= link_to '审核', main_app.suit_image_audited_path(image, :genre => "imageable_id", :keywords => image.imageable_id, :page => params[:page]), :confirm => "确认审核通过吗", :class =>"button basicBtn" %>
+    <%# end %>
   </div>
   <%- end -%>
 </div>
