@@ -64,7 +64,7 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
-      @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null')
+      @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null').uniq
     end
     @designs = @designs.joins(:design_images)
     sign_in(@user) if current_admin && @user
