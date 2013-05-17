@@ -22,11 +22,11 @@ class DesignsController < ApplicationController
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("created_at desc").includes(:design_images).page(params[:page])
+      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.created_at desc").page(params[:page])
 
       load_skin
     else
-      @designs = Design.order("designs.id in (#{sort_input}) desc").includes(:design_images).page(params[:page]).per(9)
+      @designs = Design.order("designs.id in (#{sort_input}) desc").page(params[:page]).per(9)
     end
     unless @designs.nil?
       if params[:order] == "最热"
@@ -34,9 +34,9 @@ class DesignsController < ApplicationController
       elsif params[:order] == "未来之星"
         @designs = @designs.where(future_star_active: true)
       elsif params[:q] == "super_refresh"
-        @designs = @designs.where(is_refresh: true).order("created_at desc")
+        @designs = @designs.where(is_refresh: true).order("designs.created_at desc")
       else
-        @designs = @designs.order("created_at desc")
+        @designs = @designs.order("designs.created_at desc")
       end
       style = "%#{params[:style]}%"
       design_color = "%#{params[:design_color]}%"
@@ -49,6 +49,7 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
+      @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null')
     end
     sign_in(@user) if current_admin && @user
   end
@@ -156,14 +157,14 @@ class DesignsController < ApplicationController
     @design = current_user.designs.find(params[:id])
 
     if params[:delete_image_id].present?
-        delete_image_ids = params[:delete_image_id].split(',')
-        delete_image_ids.each do |image_id|
-          unless image_id.blank?
-            design_image = DesignImage.find(image_id)
-            design_image.destroy if design_image
-          end
-        end 
-      end
+      delete_image_ids = params[:delete_image_id].split(',')
+      delete_image_ids.each do |image_id|
+        unless image_id.blank?
+          design_image = DesignImage.find(image_id)
+          design_image.destroy if design_image
+        end
+      end 
+    end
 
     design_image_ids = []
     if (params[:design] && params[:design][:design_image_ids].present?) || params[:design_image_ids].present?
@@ -332,14 +333,14 @@ class DesignsController < ApplicationController
 
   def autocomplete_recommend_color
     colors = ColorCode.select(:code).where("code LIKE ?", "%#{params[:q]}%").all.map {
-        |e| e.code }
+      |e| e.code }
     render :text => colors.join("\n")
   end
 
   def autocomplete
-      params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
-      colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
-      render json: colors.map { |c| c.code }
+    params[:num] = params[:num].gsub(/\W/, '') if params[:num].present?
+    colors = ColorCode.where("code LIKE '%#{params[:num]}%'")
+    render json: colors.map { |c| c.code }
   end
 
   private
