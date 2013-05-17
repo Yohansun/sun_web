@@ -4,7 +4,7 @@ module MagicContent
   class SuitImagesController < BaseController
     skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :update_tags_suits]
     def index
-      @images = DesignImage.available.where("design_images.imageable_type = 'MasterDesign' ")
+      @images = DesignImage.available 
       if params[:genre].present?
         if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color' || params[:genre] == 'no_audited'
           @images = DesignImage.search_with(params[:genre], 'last_updated_at', "", "")
@@ -15,13 +15,7 @@ module MagicContent
         end
       end
       @images = @images.group("imageable_id").page(params[:page]).per(8)
-      if @images
-        if @images.length % 8 == 0
-          @page_count = @images.length / 8
-        else
-          @page_count = (@images.length / 8).to_i + 1
-        end
-      end
+      
     end
 
     def categories

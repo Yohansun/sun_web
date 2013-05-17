@@ -109,6 +109,12 @@
                     <%= image.channel_name %>
                   </a>
               </td>
+              <%else%>
+                 <td>
+                   <a href="/<%= image.imageable_type.underscore.pluralize %>">
+                    <%= image.channel_name %>
+                  </a>
+              </td>
             <%- end %>
             <td><%= image.user.username if image.user %></td>
             <td>
