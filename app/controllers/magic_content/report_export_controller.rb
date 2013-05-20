@@ -73,11 +73,12 @@ module MagicContent
 
   		{}.tap do |results|
         results[:search] = "用户注册数据统计"
-  			results[:columns] = ['用户ID','用户名','用户性质','邮件地址','联系电话','省','市','区','收件地址','注册时间','登录次数','招募用户','作品数','所属公司','刷新21用户']
+  			results[:columns] = ['用户ID','用户名', '真实姓名', '用户性质','邮件地址','联系电话','省','市','区','收件地址','注册时间','登录次数','招募用户','作品数','所属公司','刷新21用户']
   			results[:data] = [].tap do |cell|
   				users.find_each do |user|
   					cell << [user.id,
   									 user.display_name,
+                     user.name,
   									 user.role_chn_name,
   									 user.try(:email),
   									 user.try(:phone),
