@@ -47,9 +47,10 @@
         <input type="text" class="datepicker" placeholder="结束日期" name="end_date" value="<%= params[:end_date] %>"/>
       </span>
 
-      <%=select_tag :genre, options_for_select([["选择时间筛选条件",""],
+      <%=select_tag :genre, options_for_select([["选择筛选条件",""],
           ["发布时间","pub_date"],
           ["修改时间","al_date"],
+          ["套图ID","imageable_id"],
           ["根据最后修改时间","last_al_date"],], params[:genre]), :style=>"width: 200px;z-index:8000;position:relative"%>
       <%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'search_input'%>
       <input type='submit' class="button basicBtn" value='筛选'/>
