@@ -77,7 +77,7 @@ module MagicContent
   			results[:data] = [].tap do |cell|
   				users.find_each do |user|
   					cell << [user.id,
-  									 user.display_name,
+  									 user.username,
                      user.name,
   									 user.role_chn_name,
   									 user.try(:email),
