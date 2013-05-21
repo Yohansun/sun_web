@@ -140,7 +140,12 @@
         <br/>
         设计师：<%= design.user.display_name %>
         <br/>
-        风格：<%= design.design_style_names %>
+        <% if design.cover_img.source == "yda" %>
+          <% tag = ImageTag.where("design_image_id = #{design.cover_img.id}").map &:image_library_category_id %>
+          风格：<%= (ImageLibraryCategory.where("id in (#{tag.join(",")})").map &:title).join(",") if tag.present? %>
+        <% else %>
+          风格：<%= design.design_style_names %>
+        <% end %>
       </p>
     </li>
     <% end -%>
