@@ -17,7 +17,7 @@
                                 <%- end_time = d[1] %>
                                 <%- gift = @reg_luck.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
                                 <ul>
-                                  <li class="h3"><%= (give_time + 1.days).strftime("%Y/%m/%d") %> - <%= (end_time + 1.days).strftime("%Y/%m/%d") %></li>
+                                  <li class="h3"><%= (give_time + 1.days).strftime("%Y年%m月%d日") %> - <%= (end_time + 1.days).strftime("%Y年%m月%d日") %></li>
                                   <%- gift.each do |g| %> 
                                     <li><span><%= g.winner%></span><%= g.gift_name%></li>
                                   <%- end -%>   
@@ -43,7 +43,7 @@
                                 <%- end_year = d.split('/')[0] %>
                                 <%- end_month = d.split('/')[1] %>
                                 <%- gift = @vote_luck.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>  
-                                  <li class="h3"><%= end_year + "/" + end_month %></li>
+                                  <li class="h3"><%= "#{end_year}年#{end_month}月" %></li>
                                   <%- gift.each do |g| %> 
                                     <li><span><%= g.winner%></span><%= g.gift_name%></li>
                                   <%- end -%>   
@@ -63,16 +63,16 @@
                     <a href="javascript:;" class="winner-next pa">next</a>
                     <div class="winner-slide-bin pr">
                         <div class="winner-slide-container">
-                            <%- @votes.each do |d|%>
+                            <%- @months.each do |d|%>
                             <ul>
                                 <%- end_year = d.split('/')[0] %>
                                 <%- end_month = d.split('/')[1] %>
                                 <%- gift = @month_best.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>  
-                                  <li class="h3"><%= end_year + "/" + end_month %></li>
+                                  <li class="h3"><%= "#{end_year}年#{end_month}月" %></li>
                                   <%- gift.each do |g| %> 
                                     <li><span><%= g.winner%></span><%= g.gift_name%></li>
                                   <%- end -%>   
-                            </ul>      
+                            </ul>
                             <%- end %>
                         </div>
                     </div>

@@ -12,6 +12,6 @@ class GiftsController < ApplicationController
         @votes = @vote_luck.collect{|item| item.end_time.strftime("%Y/%m")}.uniq
 
         @month_best = Gift.where("gift_type like ?", "月度最佳色彩及设计奖").order("give_time DESC")
-        @months = @vote_luck.collect{|item| item.end_time.strftime("%Y/%m")}.uniq
+        @months = @month_best.collect{|item| item.end_time.strftime("%Y/%m")}.uniq
     end
 end
