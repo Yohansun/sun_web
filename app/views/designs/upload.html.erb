@@ -97,6 +97,16 @@ $(function() {
         work_size += work_size_each;
     }
     $('.load_total span').text(work_size);
+    // 推荐色号 + 推荐艺术漆 checkbox <= 3
+    (function($){
+        $('fieldset').on('click', ':checkbox', function(e){
+            var len = $(e.delegateTarget).find(':checkbox:checked').length;
+            if(len >3){
+                alert('选太多了亲！');
+                return false;
+            }
+        });
+    })(jQuery);
 });
 
 function uploads_size () {
