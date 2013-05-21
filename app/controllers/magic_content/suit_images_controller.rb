@@ -29,7 +29,7 @@ module MagicContent
       imageable_id = @image.imageable_id
       @images = DesignImage.find_all_by_imageable_id imageable_id
       @image_tag_ids = @image.tags.map &:image_library_category_id
-      @categories = ImageLibraryCategory.where(parent_id: nil)
+      @categories = ImageLibraryCategory.where("parent_id is null AND id != 366")
     end
     
     def update_tags_suits
