@@ -26,47 +26,44 @@
       </tr>
     </table>
     <%- categories.each do |c| %>
-    <%- unless c.id != 62  && c.id != 82 && c.id != 107 && c.id != 132 && c.id != 210 %>
-          <h2>
-        <h2>
-          <%= c.title %>
-          <span class="expand" data-tag-id='<%= c.id %>'>
-            <%= c.id == 136 ? '展开' : '收缩'%>
-          </span>
-        </h2>
-        <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 136 %>'>
-          <%- if c.id != 136 -%>
-            <tr>
-              <td align='right' colspan='4' class='toggle-options'>
-                <span class="js-all" data-type='child' data-tag-id='<%= c.id %>'>全选</span>
-                <span class="js-reverse" data-type='child' data-tag-id='<%= c.id %>'>反选</span>
-              </td>
-            </tr>
+      <h2>  
+        <%= c.title %>  
+        <span class="expand" data-tag-id='<%= c.id %>'>  
+          <%= c.id == 136 || c.id == 210 || c.id == 366? '展开' : '收缩'%>  
+        </span>  
+      </h2>  
+      <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 136 || c.id == 210 || c.id == 366 %>'>  
+        <%- if c.id != 136 && c.id != 210 || c.id != 366 -%>  
+          <tr>  
+            <td align='right' colspan='4' class='toggle-options'>  
+              <span class="js-all" data-type='child' data-tag-id='<%= c.id %>'>全选</span>  
+              <span class="js-reverse" data-type='child' data-tag-id='<%= c.id %>'>反选</span>  
+            </td>  
+          </tr>  
+        <%- end -%>  
+        <%- c.children.in_groups_of(4, false) do |group|%>  
+        <tr <%= "class=js-checkboxes-#{c.id}" if c.id != 136 && c.id != 210 && c.id != 366 %>>  
+          <%- group.each do |child| -%>  
+            <td>  
+            <%- if child.children.any? -%>  
+              <h5><%= child.title%></h5>  
+              <p class='toggle-options'>  
+                <span class="js-all" data-type='node' data-tag-id='<%= child.id %>'>全选</span>  
+                <span class="js-reverse" data-type='node' data-tag-id='<%= child.id %>'>反选</span>  
+              </p>  
+              <div class='js-checkboxes-<%= child.id %>'>  
+                <%- child.children.each do |node| -%>  
+                  <%= check_box_tag "tags[]", node.id, image_tag_ids.include?(node.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= node.title %><br/>  
+                <%- end -%>  
+              </div>  
+            <%- else -%>  
+              <%= check_box_tag "tags[]", child.id, image_tag_ids.include?(child.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= child.title %>  
+            <%- end -%>  
+            </td>  
           <%- end -%>
-          <%- c.children.in_groups_of(4, false) do |group|%>
-          <tr <%= "class=js-checkboxes-#{c.id}" if c.id != 136 %>>
-            <%- group.each do |child| -%>
-              <td>
-              <%- if child.children.any? -%>
-                <h5><%= child.title%></h5>
-                <p class='toggle-options'>
-                  <span class="js-all" data-type='node' data-tag-id='<%= child.id %>'>全选</span>
-                  <span class="js-reverse" data-type='node' data-tag-id='<%= child.id %>'>反选</span>
-                </p>
-                <div class='js-checkboxes-<%= child.id %>'>
-                  <%- child.children.each do |node| -%>
-                    <%= check_box_tag "tags[]", node.id, image_tag_ids.include?(node.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= node.title %><br/>
-                  <%- end -%>
-                </div>
-              <%- else -%>
-                <%= check_box_tag "tags[]", child.id, image_tag_ids.include?(child.id), :class => "js-check_boxes", :"data-image-id" => image.id %>&nbsp;<%= child.title %>
-              <%- end -%>
-              </td>
-            <%- end -%>
-          </tr>
-          <%- end %>
-        </table>
-      <%- end %>  
+          </tr>  
+        <%- end %>  
+      </table> 
     <%- end %>
     <%= submit_tag '保存', :class =>"greyishBtn" %>
     &nbsp;
