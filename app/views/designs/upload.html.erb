@@ -99,11 +99,13 @@ $(function() {
     $('.load_total span').text(work_size);
     // 推荐色号 + 推荐艺术漆 checkbox <= 3
     (function($){
-        $('fieldset').on('click', ':checkbox', function(e){
-            var len = $(e.delegateTarget).find(':checkbox:checked').length;
-            if(len >3){
+        $('#image_tag').on('click', '.remote_image_tag', function(e){
+            if($(e.target).is('input:checkbox')){
+              var len = $(this).find(':checkbox:checked').length;
+              if(len >3){
                 alert('选太多了亲！');
                 return false;
+              }
             }
         });
     })(jQuery);
