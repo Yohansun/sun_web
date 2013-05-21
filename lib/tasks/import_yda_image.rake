@@ -6,11 +6,10 @@ require 'spreadsheet'
 desc "未来之星数据导入"
 task :import_yda_image => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
-  book = Spreadsheet.open "#{Rails.root}/lib/data/yda_20130519.xls"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/yda_20130513.xls"
   sheet1 = book.worksheet 0
   sheet1.each do |row|
-    if row[9].present?
-      area = Area.where("name like '%#{row[6].gsub(/市/,'')}%'").first if !row[6].blank?
+    if row[0].present?
       user = User.find_by_username(row[0]) if row[0].present?
       sina_user = User.find_by_username("#{row[0]}") if row[0].present?
       new_user = nil
@@ -22,10 +21,9 @@ task :import_yda_image => :environment  do
         new_user = User.new
         new_user.username = "#{row[0]}" if row[0].present?
         new_user.password = "#{row[1]}"
-        new_user.email = row[7].present? ? row[7] : "#{row[0]}@163.com"
+        new_user.email = row[7]
         new_user.phone = row[8]
         new_user.name = row[9]
-        new_user.area_id = area ? area.id : 31
         new_user.current_school = row[10]
         new_user.types = '设计师'
         new_user.source = 'yda'
@@ -33,13 +31,12 @@ task :import_yda_image => :environment  do
         new_user.des_status = 1
         new_user.save(validate: false)
       end
-      design_area = Area.where("name like '%#{row[13].gsub(/市/,'')}%'").first if !row[13].blank?
+      area = Area.where("name like '%#{row[6].gsub(/市/,'')}%'").first if !row[3].blank?
       design = Design.new
       design.title = row[11]
-      design.content = row[14]
-      design.property_name = row[14]
+      design.content = row[13]
       design.user_id = new_user.id
-      design.area_id = design_area ? design_area.id : 31
+      design.area_id = area ? area.id : 31
       if design.save(validate: false)
         file_src_arr = Dir["/home/nioteam/icolor/yda/#{row[9]}/*"]
         if file_src_arr.present?
@@ -54,8 +51,8 @@ task :import_yda_image => :environment  do
               handle.original_filename = file_src.split("/").last
               design_image.file = handle
               design_image.title = row[11]
-              design_image.area_id = design_area ? design_area.id : 31
-              design_image.content = row[14]
+              design_image.area_id = area ? area.id : 31
+              design_image.content = row[13]
               design_image.user_id = new_user.id
               design_image.source = 'yda'
               design_image.sorts = 6
@@ -64,7 +61,7 @@ task :import_yda_image => :environment  do
                   tag_arr = row[12].split(',')
                   tag_arr.each do |tag|
                     style = ImageLibraryCategory.where("title like ?",'%#{tag}%').first
-                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id, genre: 'yda').first if style
+                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id, genre: 'kepulande').first if style
                   end
                 end
                 p "保存成功!"

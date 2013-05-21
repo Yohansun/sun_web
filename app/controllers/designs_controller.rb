@@ -22,7 +22,7 @@ class DesignsController < ApplicationController
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.created_at desc").includes(:design_images).page(params[:page])
+      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("created_at desc").includes(:design_images).page(params[:page])
 
       load_skin
     else
@@ -34,9 +34,9 @@ class DesignsController < ApplicationController
       elsif params[:order] == "未来之星"
         @designs = @designs.where(future_star_active: true)
       elsif params[:q] == "super_refresh"
-        @designs = @designs.where(is_refresh: true).order("designs.created_at desc")
+        @designs = @designs.where(is_refresh: true).order("created_at desc")
       else
-        @designs = @designs.order("designs.created_at desc")
+        @designs = @designs.order("created_at desc")
       end
       style = "%#{params[:style]}%"
       design_color = "%#{params[:design_color]}%"
@@ -50,7 +50,6 @@ class DesignsController < ApplicationController
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
     end
-    @designs = @designs.joins(:design_images)
     sign_in(@user) if current_admin && @user
   end
 
@@ -177,20 +176,7 @@ class DesignsController < ApplicationController
       design_image_ids.each do |design_image_id|
         image = @design.design_images.find(design_image_id)
         image.title = params[:title][design_image_id] if params[:title] && params[:title][design_image_id].present?
-        if params[:color_name] && params[:color_name][design_image_id].present?
-          color1 = nil
-          color2 = nil
-          color3 = nil
-
-          params[:color_name][design_image_id].each_with_index do |color_name,index|
-            color1 = color_name if "color1" == "color#{index + 1}"
-            color2 = color_name if "color2" == "color#{index + 1}"
-            color3 = color_name if "color3" == "color#{index + 1}"
-          end
-          image.color1 = color1
-          image.color2 = color2
-          image.color3 = color3
-        end 
+        image.color1 = params[:color1][design_image_id] if params[:color1] && params[:color1][design_image_id].present?
         image.is_cover = true if params[:cover_image] && params[:cover_image].to_i == design_image_id.to_i
         image.area_id = @design.area_id
         if image.save
