@@ -47,11 +47,11 @@
       <h2>  
         <%= c.title %>  
         <span class="expand" data-tag-id='<%= c.id %>'>  
-          <%= c.id == 1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107? '展开' : '收缩'%>
+          <%= c.id == (1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107)? '展开' : '收缩'%>
         </span>        
       </h2>        
-      <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == 1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107 %>'>  
-        <%- if c.id != 1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107 -%>  
+      <table width='100%' class='js-tab-<%= c.id %>-childen <%= 'expand' if c.id == (1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107) %>'>  
+        <%- if c.id != (1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107) -%>  
           <tr>  
             <td align='right' colspan='4' class='toggle-options'>  
               <span class="js-all" data-type='child' data-tag-id='<%= c.id %>'>全选</span>  
@@ -60,7 +60,7 @@
           </tr>  
         <%- end -%>  
         <%- c.children.in_groups_of(4, false) do |group|%>  
-        <tr <%= "class=js-checkboxes-#{c.id}" if c.id != 1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107 %>>  
+        <tr <%= "class=js-checkboxes-#{c.id}" if c.id != (1 || 19 || 28 || 122 || 127 || 132 || 136 || 210 || 34 || 62 || 82 || 107) %>>  
           <%- group.each do |child| -%>  
             <td>  
             <%- if child.children.any? -%>  
