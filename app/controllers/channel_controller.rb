@@ -49,6 +49,8 @@ class ChannelController < ApplicationController
     @designers  = User.weekly_related(1,weekly_user_ids).page(1).per(8)
 
     @companys   = User.weekly_related(2,per_month_user_ids).page(1).per(16)
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def refresh_service

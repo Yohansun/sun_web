@@ -3,10 +3,14 @@ class MasterInterviewsController < ApplicationController
   before_filter :find_by_subject,:except => :show
   def index
     @articles = @articles.where(:master_kind => params[:master_kind]) unless params[:master_kind].blank?
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def show
     @article = MasterProfile.find(params[:id])
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
   
   def all

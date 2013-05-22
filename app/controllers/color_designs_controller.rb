@@ -15,6 +15,8 @@ class ColorDesignsController < ApplicationController
       @designs = @designs.where(:design_usage => params[:design_usage]) if params[:design_usage] && !params[:design_usage].blank? && params[:design_usage] !='功能区'
 
     end
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
   
   def show
@@ -30,6 +32,8 @@ class ColorDesignsController < ApplicationController
     @design_prev = ColorDesign.where("id > ?", params[:id]).last if @design
     @design_prev = @design_prev.id if @design_prev
     @design_prev = @design.id if @design_prev.blank?
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def get_color_designs
