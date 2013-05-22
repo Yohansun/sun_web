@@ -4,7 +4,7 @@ require 'new_relic/recipes'
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :system
 
-server "118.126.9.65", :web, :app, :db, primary: true
+server "210.13.98.30", :web, :app, :db, primary: true
 set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
@@ -56,4 +56,4 @@ after "deploy:update","refresh_sitemaps","update_crontab", "clear_rails_cache"
 
 require 'capistrano-unicorn'
 
-# after "deploy:update", "newrelic:notice_deployment"
+after "deploy:update", "newrelic:notice_deployment"
