@@ -26,7 +26,6 @@
     $(".reply_comment").click(function(){
 			$(this).parents('.review_item').find('form.reply_form').show().siblings('form.reply_form').hide();
 		});
-                
     $("a.cancel").click(function(){
           $(this).parents('form.reply_form').hide();
   });
@@ -46,7 +45,6 @@
 										<div class="<%= 'active' if index==0 %> item">
 											<a href="#">
 												<%= image_tag design.file.url(:slide) %>
-											 
 											</a>
 										</div>
 									<%- end %>
@@ -221,7 +219,6 @@
 									
 									  </p>
                                                                                 </div>
-                                                                                
 								<%- end %>
 							</div>
 						<%- end %>
