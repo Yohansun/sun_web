@@ -20,7 +20,9 @@ class Baicheng::StoriesController < ApplicationController
         when 'hot'
           @search_sort = @search.order("stories.designs_count")
         when 'new_chance'
-          @search_sort = @search.order("stories.designs_count")
+          @search_sort = @search.order("stories.designs_count desc")
+        else
+          @search_sort = @search
         end
         @stories = @search_sort.where(:is_save => true)
     end

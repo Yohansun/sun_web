@@ -11,7 +11,9 @@
 .ft14{font-size:14px;}
 .mt30{margin-top:30px;}
 .fb{font-weight: bold;}  
-.pd30{padding: 30px;} 
+.pd30{padding: 30px;}
+.m020{margin: 0 20px;}
+.underline{text-decoration: underline!important;}
 
 /*header*/
 .container-fluid{padding:65px 0 0;}
@@ -34,7 +36,11 @@
 .navbar .nav_userinfo{background:#f3f3f3;padding:0 17px 0 25px;}
 .navbar .nav_userinfo .username_css,
 .navbar .nav_userinfo .username_css:hover{color:#e71d36;max-width:90px;height:45px;overflow:hidden;}
-.navbar .nav_userinfo .system_info_tip{position:absolute;top:45px;right:-70px;padding:2px 7px;color:#ff871f;background:#fbf8e9;border:1px solid #e7d3a9;font:12px/14px "SimHei";text-align:center;}
+.navbar .nav_userinfo .system_info_tip,.navbar .nav_userinfo .system_info_tip:hover{position:absolute;top:40px;right:-53px;padding:2px 7px;color:#ff871f;background:#fbf8e9;border:1px solid #e7d3a9;font:12px/14px "SimHei";text-align:center;}  
+.nav li a.hide{display: none;}  
+.nav li .username_css:hover + a.hide{display: block;}  
+.navbar .nav_designer .nav_box{padding-top: 13px;}  
+.navbar .nav_designer .nav_box a{line-height: 20px;padding-top: 0;padding-bottom: 0;}
 .tip_arrow{position:absolute;top:-6px;left:10px;width:6px;height:6px;background:url(<%= asset_path 'baicheng/info_tip_arrow.png'%>) no-repeat;}
 
 

@@ -37,7 +37,14 @@
 
 .design_list_tit p,.works_tit p{font:12px/20px "SimSun";}
 .design_list_tit h5,.design_list_tit p,.works_tit h5,.works_tit p{height:20px;overflow:hidden;}
-
+.design_list .btn-block{font-weight: bold;margin-top:7px;}  
+.design_list .disabled{color: #bbb;  
+	background-image: -webkit-linear-gradient(to bottom, #efefe4,#e0e0d5);  
+	background-image: -moz-linear-gradient(to bottom, #efefe4,#e0e0d5);  
+	background-image: -o-linear-gradient(to bottom, #efefe4,#e0e0d5);  
+	background-image: linear-gradient(to bottom, #efefe4,#e0e0d5);  
+	background-color: #e0e0d5;  
+}
 /*list in*/
 .in_arrow{position:absolute;top:4px;left:0;width:18px;height:31px;}
 .design_intro{background:#f6f6f6;min-height:353px;}
@@ -46,7 +53,7 @@
 .design_intro.works_intro p{height:115px;margin-bottom:100px;}
 .design_intro.works_intro p strong{line-height:26px;}
 .design_intro p span{font:12px "Microsoft Yahei";color:#6e6e6e;}
-.design_intro p strong{color:#292929;font-weight:normal;}
+.design_intro p strong{color:#292929;}
 .design_btn{display:block;width:161px;height:40px;background:url(<%= asset_path 'baicheng/btns.png' %>) no-repeat;margin:0 auto;}
 .design_btn.ask_btn{background-position:0 -40px;}
 /*.design_btn.sys_user_name{background-position:0 -536px;}*/
@@ -60,7 +67,9 @@
 .upload_btn_red span{padding-right:9px;min-width:68px;background-position:right -116px;color:#fff;font:14px/22px "Microsoft Yahei";}
 .btn_group .btns.btns_small{height:20px;line-height:20px;background-position:0 -162px;}
 .btn_group .btns.btns_small span{background-position:right -162px;}
-
+.btn_group .btn_upload{background: url(<%= asset_path 'baicheng/btn_upload.jpg' %>) no-repeat;width: 160px;height: 33px;text-indent: -999em;margin-top: 5px;}
+.upload_btn_gray{background-position:0 -646px;}
+.upload_btn_gray span{background-position:right -646px;}
 
 .i_icon{display:inline-block;width:16px;height:16px;line-height:16px;background:url(<%= asset_path 'baicheng/btns.png' %>) no-repeat 0 0;vertical-align:text-top;}
 .icon_upload{background-position:-32px -305px;}
@@ -139,6 +148,7 @@
 .divider-vertical_nav.divider-vertical_nav_long{background:url(<%= asset_path 'baicheng/line_long.jpg' %>) no-repeat center center;height:70px;}
 /*system page*/
 .sys_top{padding:10px 0;margin:0 20px;}
+.sys_top p{color: #e71d36;}
 .sys_user_name,.sys_user_name:hover{display:inline-block;height:50px;padding:0px 0px 0 15px;max-width:780px;overflow:hidden;font:18px/40px "Microsoft Yahei";color:#9999a3;margin:0 5px 5px 10px;background:url(<%= asset_path 'baicheng/system/user_msg.jpg' %>) no-repeat;}
 .sys_user_name span{display:inline-block;height:40px;background:url(<%= asset_path 'baicheng/system/user_msg.jpg' %>) no-repeat right top;padding:5px 10px 5px 0;}
 /*.arrow_left{position:absolute;left:-7px;top:17px;}
@@ -152,6 +162,7 @@
 .status i{margin-top:-4px;}
 .system_list li{padding:10px 0;}
 .system_list li a,.system_list li a:hover{text-decoration:none;}
+.system_list li p{color:#bdbdbd;} 
 /*.status span.radius3{border-radius:3px;}*/
 /*colors*/
 .colorsbox .colors_con .desc .list li{ float:left; border-right:1px dotted #ccc; margin-right:5px; padding:0 5px 0 0;list-style:none;}
@@ -162,11 +173,20 @@
 
 /*modal beginning/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .design_tips{background:url(<%= asset_path 'baicheng/mydesign/design_pop.jpg' %>) no-repeat;width:696px;height:267px;/*position:absolute;*/top:20%;left:50%;margin-left:-348px;}
-.design_tips .close_btn{width:20px;height:20px;background:#c90000;color:#fff;margin:6px 8px 0 0;text-align:center;float:right;display:block;}
+.design_tips .close_btn{width:20px;height:20px;background:#c90000;color:#fff;margin:6px 8px 0 0;float:right;display:block;}
 .design_tips .close_btn:hover{text-decoration:none;}
 .design_tips h4{color:#c90000;font:22px/22px 'Microsoft Yahei';}
+.design_tips h5{font:bold 15px 'Microsoft Yahei';}
 .design_tips p strong{font-size:18px;}
+.design_tips p{line-height: 26px;}
+.design_tips p a{color: #c90000;text-decoration: underline;}
 .design_tips .a_decration{text-decoration:underline;}
+
+
+.design_pop2{background: url(<%= asset_path 'baicheng/mydesign/design_pop2.png' %>) no-repeat;width: 400px;height: 381px;right: 175px;bottom: -92px;z-index: 10;}
+.design_pop2 h2{font:bold 15px "Microsoft Yahei";padding: 10px 26px;}
+.design_pop2 ul{list-style: none;font-size: 12px;margin: 30px 20px 0 65px;}
+.design_pop2 li{margin: 27px 0;line-height: 28px;}
 /*modal ending/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 
