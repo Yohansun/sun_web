@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 
     case @comment.commentable_type
       when 'Design'
-        if request.headers['referer'].match %r(weekly_stars|design_works)
+        if request.headers['referer'].match %r(weekly_stars|design_works|design_competes)
           redirect_to request.headers['referer']
         else
           redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)

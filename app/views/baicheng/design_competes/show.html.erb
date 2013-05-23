@@ -22,6 +22,10 @@
 	  	$('#colors_con').hover(function(){
 		$(this).children().fadeToggle('fast');
     });
+    
+    $(".reply_comment").click(function(){
+			$(this).parents('.review_item').find('form.reply_form').show().siblings('form.reply_form').hide();
+		});
 });
 	</script>
 <%- end %>
@@ -34,36 +38,36 @@
 							<div id="myCarousel" class="carousel works_carousel slide" style="height:367px">
 								<!-- Carousel items -->
 								<div class="carousel-inner">
-									<%#- @designs.each do |design| %>
+									<%- @design.design_images.each do |design| %>
 										<div class="active item">
 											<a href="#">
-												<%#= image_tag @design.file.url(:slide) %>
-												<img src="<%= asset_path 'baicheng/mydesign/design_in_img.jpg' %>">
+												<%= image_tag design.file.url(:slide) %>
+												<%#*<img src="<%= asset_path 'baicheng/mydesign/design_in_img.jpg' ">%>
 											</a>
 										</div>
-									<%#- end %>
+									<%- end %>
 								</div>
 								<!-- Carousel nav -->
 								<a class="carousel-control left" href="#myCarousel" data-slide="prev"><!-- &lsaquo; --></a>
 								<a class="carousel-control right" href="#myCarousel" data-slide="next"><!-- &rsaquo; --></a>
-								<!-- <div class="carousel-indicators clearfix">
+								  <div class="carousel-indicators clearfix">
 									<a href="javascript:;" data-target="#myCarousel" data-slide-to="0" class="active"></a>
 									<a href="javascript:;" data-target="#myCarousel" data-slide-to="1"></a>
 									<a href="javascript:;" data-target="#myCarousel" data-slide-to="2"></a>
-								</div> -->
+								</div> 
 							</div>
 							<div class="btn_group btns_absolute">
 								<span class="btns btns_small btn_down">
 									<span>
-										<a href="javascript:;"><i class="i_icon i_icon_medium icon_like"></i><%= @story.votes_count %> </a>
-										<a href="javascript:;"><i class="i_icon i_icon_medium icon_review"></i>0<%#= @story.comment_count %></a>
+										<a href="javascript:;"><i class="i_icon i_icon_medium icon_like"></i><%= @design.votes_count %> </a>
+										<a href="javascript:;"><i class="i_icon i_icon_medium icon_review"></i><%= @design.comments.count %></a>
 									</span>
 								</span>
 							</div>
 							<div class="btn_group btns_absolute_two">
 								<%- if current_user %>
 								    <%#= link_to "收藏", user_collects_path(current_user,:story_id =>@story_id), :remote => true, method: :post, :class =>"btns btns_small btn_down nomargin i_icon i_icon_medium icon_collect" %>
-								    <a class="btns btns_small btn_down nomargin" data-method="post" data-remote="true" href="<%= user_collects_path(current_user,story_id: @story_id) %>">
+								    <a class="btns btns_small btn_down nomargin" data-method="post" data-remote="true" href="<%= user_collects_path(current_user,design_id: @design) %>">
 										<span><i class="i_icon i_icon_medium icon_collect"></i>收藏</span>
 									</a>
 								<%- else %>
@@ -72,7 +76,7 @@
 									</a>
 								<%- end %>
 								<%- if current_user %>
-									<a class="btns btns_small btn_down nomargin" href="<%= download_design_compete_path(@design) %>">
+									<a class="btns btns_small btn_down nomargin" href="<%= download_user_design_path(@design.user,@design) %>">
 										<span><i class="i_icon i_icon_medium icon_down"></i>下载</span>
 									</a>
 								<%- else %>
@@ -86,15 +90,15 @@
 							<i class="in_arrow"><img src="<%= asset_path 'baicheng/mydesign/in_arrow.png'%>"></i>
 							<h5 class="pad_h20 border_dot_b1">作品简介</h5>
 							<p class="pad_h20 border_dot_b1">
-								<span class="show"><strong>设计师：<%= @story.user.try(:username) %></strong></span>
-								<span class="show"><strong>设计风格：现代简约</strong></span>
-								<span class="show"><strong>楼盘名称：孔雀城</strong></span>
-								<span class="show"><strong>楼盘所在地：北京市</strong></span>
+								<span class="show"><strong>设计师：<%= @design.user.try(:username) %></strong></span>
+                                                                <span class="show"><strong>设计风格：<%= @design.design_styles.first.try(:title) %></strong></span>
+                                                                <span class="show"><strong>楼盘名称：<%= @design.try(:property_name) %></strong></span>
+                                                                <span class="show"><strong>楼盘所在地：<%= @design.city_name %></strong></span>
 							</p>
 							<div>
 								<!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
 								<%-if current_user%>
-								  <a href="<%= user_asks_path(@story.user)%>" class="design_btn ask_btn"></a>
+								  <a href="<%= user_asks_path(@design.user)%>" class="design_btn ask_btn"></a>
 								<%- else %>
 								  <a href="javascript:show_login();" class="design_btn ask_btn"></a>
 								<%-end %>
@@ -121,22 +125,16 @@
 							<div class="desc" style="height: 35px; width: 590px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none; background-position: initial initial; background-repeat: initial initial;">
 								<div class="list" style="height:35px;">
 									<ul class="group nomargin" style="overflow:hidden;">
-										<li>
-											<div class="colorblock" style="background-color:red"></div>
-											<h5 class="nomargin">室内墙面漆</h5>
-											<p class="nomargin">立邦(RA0700-1)勃艮地红</p>
-										</li>
-										<li>
-											<div class="colorblock" style="background-color:#006eb9"></div>
-											<h5 class="nomargin">蓝色妖姬</h5>
-											<p class="nomargin">立邦(RA0700-1)勃艮地红</p>
-										</li>
-										<li class="noborder">
-											<div class="colorblock" style="background-color:#006eb9"></div>
-											<h5 class="nomargin">蓝色妖姬</h5>
-											<p class="nomargin">立邦(RA0700-1)勃艮地红</p>
-										</li>
-									</ul>
+                                                                          <% if @image_colors.present? %>
+                                                                            <%- @image_colors.last.each do |color| %>
+                                                                            <li>
+                                                                            <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+                                                                            <h5><%= color.name %></h5>
+                                                                            <p>立邦(<%= color.code %>)</p>
+                                                                            </li>
+                                                                            <%- end %>
+                                                                          <% end %>
+                                                                        </ul>
 								</div>
 							</div>
 						</div>
@@ -144,83 +142,73 @@
 							<a href="#" class="shops"></a><a href="#" class="buy_pro"></a>
 						</div> -->
 						<div class="btn_group pull-right" style="margin:20px 15px 10px;">
-							<a class="pull-left design_btn shops_btn" href="#"></a>
-							<a class="pull-left design_btn buy_btn" href="#"></a>
+        						<a class="pull-left design_btn shops_btn" href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp"></a>
+							<a class="pull-left design_btn buy_btn" href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1"></a>
 						</div>
 						<p class="divider-vertical_nav divider-vertical_nav_long pull-right mar_h5"></p>
 					</div>
-					<p class="info_place border_dot_b1"><strong>作品名称： 为<a href="#" class="color_red"><%= @story.try(:title)%></a>做的设计</strong></p>
+                                        <p class="info_place border_dot_b1"><strong>作品名称： <%= @design.title %></strong></p>
 					<div class="mar_h20 designers space_big border_dot_b1">
 						<h5><i class="i_icon icon_tit"></i>设计理念</h5>
-						<p class="pad_h25">简约型家居的设计越来越受到大众的欢迎，这也是现代人的需要。简约的设计让空间看上去更加的整洁大方，没有繁琐杂物。不仅能够体现主人的品味还能从中感受到简单生活、享受生活的理念，尤其在社会节奏越来越快速的情况下，这种简单设计就越发的珍贵。</p>
+                                                <p class="pad_h25"> <%= @design.content %></p>
 					</div>
 					<div class="mar_h20 designers space_big">
 						<h5><i class="i_icon icon_tit"></i>评论区</h5>
 					</div>
-					<div class="reviews">
-						<%= form_tag comment_design_compete_path, :class=>"submit_form" do %>
-							<p class="alert alert-info"><span class="pull-right">0/140</span>评论 (<%= @comments.length %>)</p>
-							<textarea class="textarea_def def_t" name="content"></textarea>
-							<input style="visibility:hidden" name="story_id" value="<%= @story_id %>"/>
-							<div class="clearfix">
-								<button type="submit" class="pull-left vote_btn vote_btn_small nomargin noborder vote_btn_story">提交评论</button>
-							</div>
-						<%- end %>
-						<div class="pr adsakjdajds">
-							<div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
-								<%= paginate @comments %>
-							</div>
-							<div class="reviews_group">
-								<%- @comments.each do |comment| %>
-									<div class="review_item">
-										<p class="review_name">
-											<span class="pull-right"><%= comment.created_at.to_date %></span>
-											<strong>
-												<%- if comment.user %>
-												  <%= comment.user.username %>
-												<%- else %>
-												  匿名
-												<%- end %>
-											</strong>
-										</p>
-										<div class="clearfix">
-											<span class="review_btns pull-right">
-												<a href="javascript:void(0)" class="recommented_com"><i class="i_icon i_icon_big i_icon_review
-	                                             recommented_com"></i>回复</a>
-	                                            <%- if current_user %>
-													<%- if current_user.id == @story.user_id %>
-													  <a href="<%= destroy_comment_design_compete_path(comment) %>"><i class="i_icon i_icon_big i_icon_del"></i>删除</a>
-													<%- end %>
-												<%- end %>
-											</span>
-											<p class="review_txt border_dot_b1"><%= comment.content %></p>
-										</div>
-										<%- if comment.re_s.length > 0 %>
-											<%- comment.re_s.each do |reply| %>
-											  <p class="nomargin">
-											  	<span class="color_red">
-											  		<%- if reply.user %>
-													  <%= reply.user.username %>
-													<%- else %>
-													  匿名
-													<%- end %>
-											  	</span>回复说：<%= reply.content%>
-											  </p>
-											<%- end %>
-										<%- end %>
+                                        
+                                        <div class="reviews">
+					 
+					<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
+						<p class="alert alert-info"><span class="pull-right"><b>0</b>/140</span>评论 (<%= @design.comments_count %>)</p>
+						<%= f.hidden_field :commentable_id, value: @design.id %>
+			         <%= f.hidden_field :commentable_type, value: 'Design' %>
+			         <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140',class: "textarea_def" %>
+						<div class="clearfix">
+							<button type="submit" class="pull-left vote_btn vote_btn_small nomargin noborder">提交评论</button>
+						</div>
+		        <%- end %>
+					<div class="pr">
+						<div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
+							<%= paginate @comments %>
+						</div>
+						<%- @comments.each do |comment| %>
+							<div class="review_item">
+								<p class="review_name"><span class="pull-right"><%= comment.created_at.to_date %></span><strong><%= comment.user ? comment.user.display_name : "匿名" %></strong></p>
+								<div class="clearfix">
+                                                                 
+                                                                  <% if current_user.id==@design.user.id %>
+									<span class="review_btns pull-right">
+										<a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									</span>
+                                                                  <% end %>
+									<p class="review_txt border_dot_b1"><%= comment.content %></p>
+								</div>
+								<%= form_for(ReplyMsg.new, :html => {:class => "reply_form clear none"}) do |f| %>
+			                  <%= f.hidden_field :show_id, value: @design.id %>
+			                  <%= f.hidden_field :comment_id, value: comment.id %>
+			                  <%= f.hidden_field :reply_type, value: "designs" %>
+			                  <%= f.text_area :content, :rows => 2, class: 'textarea_def' %>
+			                  <div class="btn_group clearfix">
+										<button type="submit" class="pull-left vote_btn vote_btn_small  noborder">回复评论</button>
+										<a class="pull-left vote_btn vote_btn_small vote_btn_gray noborder">取消</a>
 									</div>
-									<%= form_tag comment_design_compete_path, :class => "form_comment",:id => comment.id, :style => "display:none;" do %>
-										<textarea class="textarea_def def_t_t" name="content"></textarea>
-										<input style="visibility:hidden" name="comment_id" value="<%= comment.id %>"/>
-										<input style="visibility:hidden" name="story_id" value="<%= @story.id %>"/>
-										<div class="clearfix">
-											<button type="submit" class="pull-left vote_btn vote_btn_small nomargin noborder vote_btn_re">提交评论</button>
-										</div>
-									<%- end %>
+			                <%- end %>
+
+								<%- comment.reply_msgs.order("created_at DESC").each do |reply| %>
+									<p class="nomargin">
+										<span class="color_red"><%= reply.user.display_name %></span>
+										回复说：<%= reply.content %>
+									</p>
+									<span class="review_btns pull-right">
+									<%= link_to "删除", reply_msg_path(reply.id), :class => "i_icon i_icon_big i_icon_del", method: :delete, :confirm => "确定删除么?"        if current_user==@design.user %>
+									</span>
 								<%- end %>
 							</div>
+						<%- end %>
 						</div>
 					</div>
+                                        
+					 
 				</div>
 			</div>
 		</div>

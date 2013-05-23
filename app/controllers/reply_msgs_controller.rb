@@ -33,7 +33,12 @@ class ReplyMsgsController < ApplicationController
       when 'weekly_stars'
         redirect_to "/weekly_stars/#{params[:reply_msg][:show_id]}"
       when 'designs'
-        redirect_to user_design_path(@reply_msg.user.id, params[:reply_msg][:show_id])
+        
+        if request.headers['referer'].match %r(design_competes)
+          redirect_to request.headers['referer']
+        else 
+          redirect_to user_design_path(@reply_msg.user.id, params[:reply_msg][:show_id])
+        end
       when 'design_works'
         redirect_to design_work_path(params[:reply_msg][:show_id])
       when 'stories'

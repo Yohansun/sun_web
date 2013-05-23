@@ -4,35 +4,54 @@ class Baicheng::DesignCompetesController < ApplicationController
   before_filter :find_user
   # before_filter :get_tags, :only => [:index]
   def index
-    @images = StoryImage.order("created_at DESC")
-    if params[:design].present?
-
+     
+    
+    @desgins = Design.baicheng.includes(:cover_img).order("created_at DESC")
+    province_id,city_id,area_id = params[:province_id].or(nil),params[:city_id].or(nil),params[:area_id].or(nil)
+    area_ids =[]
+    if area_id.present?
+      area_ids  = [area_id]
+    elsif province_id.present?
+      area_ids   = Area.robot(province_id,[city_id].compact).map(&:id)
     end
-    if params[:area_id].present?
-      p"#{params[:area_id]}"
-      @images = @images.joins(:story => :area).where("areas.id=?", params[:area_id])
+    
+    unless area_ids.empty?
+      Rails.logger.info area_ids
+      @desgins =  @desgins.where(area_id: area_ids)
     end
-    if params[:tag].present?
-      @images = @images.joins(:tags).where("story_image_tags.image_library_category_id = ?", params[:tag])
+    
+    if params[:tag].present? 
+      @desgins = @desgins.joins(:design_tags).where("design_tags.image_library_category_id = ?", params[:tag])
     end
     if params[:cost].present?
-
+      @desgins = @desgins.joins(:design_tags).where("design_tags.image_library_category_id = ?", params[:cost])
     end
-    if params[:soso].present?
+    if params[:style].present?
+      @desgins = @desgins.joins(:design_tags).where("design_tags.image_library_category_id = ?", params[:style])
+    end
+    
+    if params[:keywords].present?
       if params[:soso] == "so_user"
-        @images = @images.joins(:story => :user).where("users.username=?", params[:keywords]) if params[:keywords]
+        @desgins = Design.baicheng.includes(:cover_img).order("created_at DESC").joins(:user).where("users.username=?", params[:keywords]) if params[:keywords].present?
       else
-        @images = @images.joins(:story).where("stories.title=?", params[:keywords]) if params[:keywords]
+        @desgins = Design.baicheng.includes(:cover_img).order("created_at DESC").where("title=?", params[:keywords]) if params[:keywords].present?
       end
     end
-    @designs = @images.page(params[:page]).per(24)
+    @designs = @desgins.page(params[:page]).per(24).limit(2)
   end
 
   def show
-    @design = StoryImage.find params[:id]
+    @design = Design.baicheng.find params[:id]
     @story_id = @design.story_id
-    @story = Story.find @story_id
-    @comments = StoryComment.where("story_id = ?", @story_id).order("created_at DESC").page(params[:page]).per(8)
+    @story = Story.where(id: @story_id).first
+    
+ 	  @design_images = @design.design_images.available
+  	@image_colors = []
+  	@design_images.each do |image|
+  		@image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
+  	end
+ 
+    @comments = @design.comments.page(params[:page]).per(8)
   end
 
   def comment
