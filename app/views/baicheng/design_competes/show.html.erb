@@ -34,208 +34,202 @@
   </script>
 <%- end %>
 <div class="container-fluid">
-  <div class="design_works pad_t60">
-    <div class="wrapper pr pad_b40">
-      <div class="redline_b4">
-        <div class="clearfix pad_h25">
-          <div class="w670 pull-left pr">
-            <div id="myCarousel" class="carousel works_carousel slide" style="height:367px">
-              <!-- Carousel items -->
-              <div class="carousel-inner">
-                <%- @design.design_images.each_with_index do |design,index| %>
-                  <div class="<%= 'active' if index==0 %> item">
-                    <a href="#">
-                      <%= image_tag design.file.url(:slide) %>
+		<div class="design_works pad_t60">
+			<div class="wrapper pr pad_b40">
+				<div class="redline_b4">
+					<div class="clearfix pad_h25">
+						<div class="w670 pull-left pr">
+							<div id="myCarousel" class="carousel works_carousel slide" style="height:367px">
+								<!-- Carousel items -->
+								<div class="carousel-inner">
+									<%- @design.design_images.each_with_index do |design,index| %>
+										<div class="<%= 'active' if index==0 %> item">
+											<a href="#">
+												<%= image_tag design.file.url(:slide) %>
+											 
+											</a>
+										</div>
+									<%- end %>
+								</div>
+								<!-- Carousel nav -->
+								<a class="carousel-control left" href="#myCarousel" data-slide="prev"><!-- &lsaquo; --></a>
+								<a class="carousel-control right" href="#myCarousel" data-slide="next"><!-- &rsaquo; --></a>
+								  <div class="carousel-indicators clearfix">
+                                                                    <%- @design.design_images.each_with_index do |design,index| %>
+                                                                      <a href="javascript:;" data-target="#myCarousel" data-slide-to="<%= index %>" class="<%= 'active' if index==0 %>"></a>
+                                                                    <% end %>
+								</div> 
+							</div>
+							<div class="btn_group btns_absolute">
+								<span class="btns btns_small btn_down">
+									<span>
+                                                                          <%= link_to votes_path(:voteable_id => @design.id, :voteable_type => "Design"),remote: true,method: 'post',title: '' do %>
+                                                                          <i class='i_icon i_icon_medium icon_like'></i> <span class='votes_countre<%= @design.id %> '><%= @design.votes_count %> </span>
+                                                                          <% end %>
+                                                                          <a href="#comments"><i class="i_icon i_icon_medium icon_review"></i><%= @design.comments.count %></a>
+									</span>
+								</span>
+							</div>
+							<div class="btn_group btns_absolute_two">
+								<%- if current_user %>
+								    <%#= link_to "收藏", user_collects_path(current_user,:story_id =>@story_id), :remote => true, method: :post, :class =>"btns btns_small btn_down nomargin i_icon i_icon_medium icon_collect" %>
+								    <a class="btns btns_small btn_down nomargin" data-method="post" data-remote="true" href="<%= user_collects_path(current_user,design_id: @design) %>">
+										<span><i class="i_icon i_icon_medium icon_collect"></i>收藏</span>
+									</a>
+								<%- else %>
+									<a class="btns btns_small btn_down nomargin" href="javascript:show_login();">
+										<span><i class="i_icon i_icon_medium icon_collect"></i>收藏</span>
+									</a>
+								<%- end %>
+								<%- if current_user %>
+									<a class="btns btns_small btn_down nomargin" href="<%= download_user_design_path(@design.user,@design) %>">
+										<span><i class="i_icon i_icon_medium icon_down"></i>下载</span>
+									</a>
+								<%- else %>
+									<a class="btns btns_small btn_down nomargin" href="javascript:show_login();">
+											<span><i class="i_icon i_icon_medium icon_down"></i>下载</span>
+									</a>
+								<%- end %>
+							</div>
+						</div>
+						<div class="w190 pull-left design_intro works_intro pr">
+							<i class="in_arrow"><img src="<%= asset_path 'baicheng/mydesign/in_arrow.png'%>"></i>
+							<h5 class="pad_h20 border_dot_b1">作品简介</h5>
+							<p class="pad_h20 border_dot_b1">
+								<span class="show"><strong>设计师：<%= @design.user.try(:username) %></strong></span>
+                                                                <span class="show"><strong>设计风格：<%= @design.design_styles.first.try(:title) %></strong></span>
+                                                                <span class="show"><strong>楼盘名称：<%= @design.try(:property_name) %></strong></span>
+                                                                <span class="show"><strong>楼盘所在地：<%= @design.city_name %></strong></span>
+							</p>
+							<div>
+								<!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
+								<%-if current_user%>
+								  <a href="<%= user_asks_path(@design.user)%>" class="design_btn ask_btn"></a>
+								<%- else %>
+								  <a href="javascript:show_login();" class="design_btn ask_btn"></a>
+								<%-end %>
+								<!-- JiaThis Button BEGIN -->
+								<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:163px;">
+									<span class="jiathis_txt">分享：</span>
+									<a class="jiathis_button_renren"></a>
+									<a class="jiathis_button_douban"></a>
+									<a class="jiathis_button_kaixin001"></a>
+									<a class="jiathis_button_tsina"></a>
+									<a class="jiathis_button_qzone"></a>
+									<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a> -->
+									<!-- <a class="jiathis_counter_style"></a> -->
+								</div>
+								<!-- JiaThis Button END -->
+							</div>
+						</div>
+					</div>
+					<div class="divider_hori_dot"></div>
+					<div class="colorsbox clear border_bline mar_h5" style="height:82px;">
+						<img src="<%= asset_path 'baicheng/mydesign/colors_icon_tit.png'%>" style="float:left; margin:15px 15px 0 15px;" />
+						<div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
+							<img src="<%= asset_path 'baicheng/mydesign/colors2.jpg'%>" style="display: inline-block;">
+							<div class="desc" style="height: 35px; width: 590px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none; background-position: initial initial; background-repeat: initial initial;">
+								<div class="list" style="height:35px;">
+									<ul class="group nomargin" style="overflow:hidden;">
+                                                                          <% if @image_colors.present? %>
+                                                                            <%- @image_colors.last.each do |color| %>
+                                                                            <li>
+                                                                            <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+                                                                            <h5><%= color.name %></h5>
+                                                                            <p>立邦(<%= color.code %>)</p>
+                                                                            </li>
+                                                                            <%- end %>
+                                                                          <% end %>
+                                                                        </ul>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="pull-right">
+							<a href="#" class="shops"></a><a href="#" class="buy_pro"></a>
+						</div> -->
+						<div class="btn_group pull-right" style="margin:20px 15px 10px;">
+        						<a class="pull-left design_btn shops_btn" href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp"></a>
+							<a class="pull-left design_btn buy_btn" href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1"></a>
+						</div>
+						<p class="divider-vertical_nav divider-vertical_nav_long pull-right mar_h5"></p>
+					</div>
+                              
+                                        
+                                        <p class="info_place border_dot_b1 clearfix">
+                                          <strong class="pull-left" style="width:435px;">作品名称：<span class="color_red"> <%= @design.title %></span> </strong>
+                                          <% if @story %>
+                                            <strong>房型图名称： <a href="<%= story_path(@story) %>" class="underline color_red"><%=  @story.user.username   %>的房型图</a></strong>
+                                          <%end %>
+					</p>
+					<div class="mar_h20 designers space_big border_dot_b1">
+						<h5><i class="i_icon icon_tit"></i>设计理念</h5>
+                                                <p class="pad_h25"> <%= @design.content %></p>
+					</div>
+					<div class="mar_h20 designers space_big">
+						<h5><i class="i_icon icon_tit"></i>评论区</h5>
+					</div>
+                                        
+                                        <div class="reviews" id='comments'>
+					 
+					<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
+						<p class="alert alert-info"><span class="pull-right"><b>0</b>/140</span>评论 (<%= @design.comments_count %>)</p>
+						<%= f.hidden_field :commentable_id, value: @design.id %>
+                                                <%= f.hidden_field :commentable_type, value: 'Design' %>
+                                                <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140',class: "textarea_def def_t" %>
+                                                   <div class="clearfix">
+							<button type="submit" class="pull-left vote_btn vote_btn_small  vote_btn_story nomargin noborder">提交评论</button>
+						</div>
+                                        <%- end %>
+					<div class="pr">
+						<div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
+							<%= paginate @comments %>
+						</div>
+						<%- @comments.each do |comment| %>
+							<div class="review_item">
+								<p class="review_name"><span class="pull-right"><%= comment.created_at.to_date %></span><strong><%= comment.user ? comment.user.display_name : "匿名" %></strong></p>
+								<div class="clearfix">
+                                                                 
+                                                                  <% if signed_in? && current_user.id==@design.user.id %>
+									<span class="review_btns pull-right">
+										<a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+									</span>
+                                                                  <% end %>
+									<p class="review_txt border_dot_b1"><%= comment.content %></p>
+								</div>
+								<%= form_for(ReplyMsg.new, :html => {:class => "reply_form clear none"}) do |f| %>
+                                                                        <%= f.hidden_field :show_id, value: @design.id %>
+                                                                        <%= f.hidden_field :comment_id, value: comment.id %>
+                                                                        <%= f.hidden_field :reply_type, value: "designs" %>
+                                                                        <%= f.text_area :content, :rows => 2, class: 'textarea_def def_t_t' %>
+                                                                        <div class="btn_group clearfix">
+										<button type="submit" class="pull-left vote_btn vote_btn_small vote_btn_re noborder">回复评论</button>
+										<a class="pull-left vote_btn vote_btn_small  vote_btn_gray noborder cancel">取消</a>
+									</div>
+			                                       <%- end %>
 
-                    </a>
-                  </div>
-                <%- end %>
-              </div>
-              <!-- Carousel nav -->
-              <a class="carousel-control left" href="#myCarousel" data-slide="prev"><!-- &lsaquo; --></a>
-              <a class="carousel-control right" href="#myCarousel" data-slide="next"><!-- &rsaquo; --></a>
-              <div class="carousel-indicators clearfix">
-                <%- @design.design_images.each_with_index do |design,index| %>
-                  <a href="javascript:;" data-target="#myCarousel" data-slide-to="<%= index %>" class="<%= 'active' if index==0 %>"></a>
-                <% end %>
-              </div> 
-            </div>
-            <div class="btn_group btns_absolute">
-              <span class="btns btns_small btn_down">
-                <span>
-                  <%= link_to votes_path(:voteable_id => @design.id, :voteable_type => "Design"),remote: true,method: 'post',title: '' do %>
-                    <i class='i_icon i_icon_medium icon_like'></i> <abbr class='votes_countre<%= @design.id %> '><%= @design.votes_count %> </abbr>
-                  <% end %>
-                  <a href="#comments"><i class="i_icon i_icon_medium icon_review"></i><%= @design.comments.count %></a>
-                </span>
-              </span>
-            </div>
-            <div class="btn_group btns_absolute_two">
-              <%- if current_user %>
-  <%#= link_to "收藏", user_collects_path(current_user,:story_id =>@story_id), :remote => true, method: :post, :class =>"btns btns_small btn_down nomargin i_icon i_icon_medium icon_collect" %>
-                <a class="btns btns_small btn_down nomargin" data-method="post" data-remote="true" href="<%= user_collects_path(current_user,design_id: @design) %>">
-                  <span><i class="i_icon i_icon_medium icon_collect"></i>收藏</span>
-                </a>
-              <%- else %>
-                <a class="btns btns_small btn_down nomargin" href="javascript:show_login();">
-                  <span><i class="i_icon i_icon_medium icon_collect"></i>收藏</span>
-                </a>
-              <%- end %>
-              <%- if current_user %>
-                <a class="btns btns_small btn_down nomargin" href="<%= download_user_design_path(@design.user,@design) %>">
-                  <span><i class="i_icon i_icon_medium icon_down"></i>下载</span>
-                </a>
-              <%- else %>
-                <a class="btns btns_small btn_down nomargin" href="javascript:show_login();">
-                  <span><i class="i_icon i_icon_medium icon_down"></i>下载</span>
-                </a>
-              <%- end %>
-            </div>
-          </div>
-          <div class="w190 pull-left design_intro works_intro pr">
-            <i class="in_arrow"><img src="<%= asset_path 'baicheng/mydesign/in_arrow.png'%>"></i>
-            <h5 class="pad_h20 border_dot_b1">作品简介</h5>
-            <p class="pad_h20 border_dot_b1">
-              <span class="show"><strong>设计师：<%= @design.user.try(:username) %></strong></span>
-              <span class="show"><strong>设计风格：<%= @design.design_styles.first.try(:title) %></strong></span>
-              <span class="show"><strong>楼盘名称：<%= @design.try(:property_name) %></strong></span>
-              <span class="show"><strong>楼盘所在地：<%= @design.city_name %></strong></span>
-            </p>
-            <div>
-              <!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
-              <%-if current_user%>
-                <a href="<%= user_asks_path(@design.user)%>" class="design_btn ask_btn"></a>
-              <%- else %>
-                <a href="javascript:show_login();" class="design_btn ask_btn"></a>
-              <%-end %>
-              <!-- JiaThis Button BEGIN -->
-              <div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:163px;">
-                <span class="jiathis_txt">分享：</span>
-                <a class="jiathis_button_renren"></a>
-                <a class="jiathis_button_douban"></a>
-                <a class="jiathis_button_kaixin001"></a>
-                <a class="jiathis_button_tsina"></a>
-                <a class="jiathis_button_qzone"></a>
-                <!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a> -->
-                <!-- <a class="jiathis_counter_style"></a> -->
-              </div>
-              <!-- JiaThis Button END -->
-            </div>
-          </div>
-        </div>
-        <div class="divider_hori_dot"></div>
-        <div class="colorsbox clear border_bline mar_h5" style="height:82px;">
-          <img src="<%= asset_path 'baicheng/mydesign/colors_icon_tit.png'%>" style="float:left; margin:15px 15px 0 15px;" />
-          <div id="colors_con" class="colors_con" style="float:left; padding:20px 0 0; height:35px; position:relative;">
-            <img src="<%= asset_path 'baicheng/mydesign/colors2.jpg'%>" style="display: inline-block;">
-            <div class="desc" style="height: 35px; width: 590px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none; background-position: initial initial; background-repeat: initial initial;">
-              <div class="list" style="height:35px;">
-                <ul class="group nomargin" style="overflow:hidden;">
-                  <%- color = search_color_code(@design.recommend_color_category1) %>
-                  <% if   color  %>
-                    <li>
-                      <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
-                      <h5><%= color.name %></h5>
-                      <p>
-                        <%= color.code.match(/^[F,W]M/) ? "立邦木器漆" : "立邦" %>
-                        (<%= color.code %>)<%= color.name %>                  
-                      </p>
-                    </li>
-                  <% end %>
-
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="pull-right">
-                  <a href="#" class="shops"></a><a href="#" class="buy_pro"></a>
-          </div> -->
-          <div class="btn_group pull-right" style="margin:20px 15px 10px;">
-            <a class="pull-left design_btn shops_btn" href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp"></a>
-            <a class="pull-left design_btn buy_btn" href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1"></a>
-          </div>
-          <p class="divider-vertical_nav divider-vertical_nav_long pull-right mar_h5"></p>
-        </div>
-
-
-        <p class="info_place border_dot_b1 clearfix">
-          <strong class="pull-left" style="width:435px;">作品名称：<span class="color_red"> <%= @design.title %></span> </strong>
-          <% if @story %>
-            <strong>房型图名称： <a href="<%= story_path(@story) %>" class="underline color_red"><%=  @story.user.username   %>的房型图</a></strong>
-          <%end %>
-        </p>
-        <div class="mar_h20 designers space_big border_dot_b1">
-          <h5><i class="i_icon icon_tit"></i>设计理念</h5>
-          <p class="pad_h25"> <%= @design.content %></p>
-        </div>
-        <div class="mar_h20 designers space_big">
-          <h5><i class="i_icon icon_tit"></i>评论区</h5>
-        </div>
-
-        <div class="reviews" id='comments'>
-
-          <%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
-            <p class="alert alert-info"><span class="pull-right"><b>0</b>/140</span>评论 (<%= @design.comments_count %>)</p>
-            <%= f.hidden_field :commentable_id, value: @design.id %>
-            <%= f.hidden_field :commentable_type, value: 'Design' %>
-            <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140',class: "textarea_def def_t" %>
-              <div class="clearfix">
-                <button type="submit" class="pull-left vote_btn vote_btn_small  vote_btn_story nomargin noborder">提交评论</button>
-              </div>
-            <%- end %>
-            <div class="pr">
-              <div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
-                <%= paginate @comments %>
-              </div>
-              <%- @comments.each do |comment| %>
-                <div class="review_item">
-                  <p class="review_name"><span class="pull-right"><%= comment.created_at.to_date %></span><strong><%= comment.user ? comment.user.display_name : "匿名" %></strong></p>
-                  <div class="clearfix">
-
-                    <% if signed_in? && current_user.id==@design.user.id %>
-                      <span class="review_btns pull-right">
-                        <a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
-
-                        <%= link_to  comment_path(comment),method: :delete,title: '删除' , :confirm => "确定删除么?" ,title: '' do    %>
-                          <i class='i_icon i_icon_big i_icon_del'></i>删除
-                        <% end %>
-                      </span>
-                    <% end %>
-                    <p class="review_txt border_dot_b1"><%= comment.content %></p>
-                  </div>
-                  <%= form_for(ReplyMsg.new, :html => {:class => "reply_form clear none"}) do |f| %>
-                    <%= f.hidden_field :show_id, value: @design.id %>
-                    <%= f.hidden_field :comment_id, value: comment.id %>
-                    <%= f.hidden_field :reply_type, value: "designs" %>
-                    <%= f.text_area :content, :rows => 2, class: 'textarea_def def_t_t' %>
-                      <div class="btn_group clearfix">
-                        <button type="submit" class="pull-left vote_btn vote_btn_small vote_btn_re noborder">回复评论</button>
-                        <a class="pull-left vote_btn vote_btn_small  vote_btn_gray noborder cancel">取消</a>
-                      </div>
-                    <%- end %>
-
-                    <%- comment.reply_msgs.order("created_at DESC").each do |reply| %>
-                      <div class="nomargin">
-                        <span class="review_btns pull-right">
-                          <%= link_to  reply_msg_path(reply.id),method: :delete,title: '删除' , :confirm => "确定删除么?",title: ''  do    %>
-                            <i class='i_icon i_icon_big i_icon_del'></i>删除
-                          <% end if current_user.id == @design.user.id %>
-                        </span>
-                        <p>
-
-                          <span class="color_red"><%= reply.user.display_name %></span>
-                          回复说：<%= reply.content %>
-                        </p>
-                      </div>
-
-                    <%- end %>
-                  </div>
-                <%- end %>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-    </div>
+								<%- comment.reply_msgs.order("created_at DESC").each do |reply| %>
+									<div class="nomargin">
+                                                                          <span class="review_btns pull-right">
+  									    <%= link_to  reply_msg_path(reply.id),method: :delete,title: '删除' , :confirm => "确定删除么?"  do    %>
+                                                                              <i class='i_icon i_icon_big i_icon_del'></i>删除
+                                                                             <% end  %>
+									    </span>
+                                                                          <p>
+                                                                                                                                                    	
+                                                                          <span class="color_red"><%= reply.user.display_name %></span>
+										回复说：<%= reply.content %>
+									
+									  </p>
+                                                                                </div>
+                                                                                
+								<%- end %>
+							</div>
+						<%- end %>
+						</div>
+					</div>
+                                        
+					 
+				</div>
+			</div>
+		</div>
+	</div>
