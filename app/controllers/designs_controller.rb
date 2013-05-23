@@ -68,7 +68,7 @@ class DesignsController < ApplicationController
   end
 
   def new
-    if current_user.present?
+    if current_user.present? && !current_user.common_user?
       @design = current_user.designs.new
     else
       redirect_to '/'
@@ -344,7 +344,7 @@ class DesignsController < ApplicationController
 
   private
   def find_design
-    if current_user.present?
+    if current_user.present? && !current_user.common_user?
       @design = current_user.designs.find(params[:id])
     else
       redirect_to '/'
