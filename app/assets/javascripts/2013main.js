@@ -137,4 +137,15 @@
           $(this).parents('form').find('textarea').css('color', color_value);
       });
   })($);
+  // lazyload 
+  (function($){ 
+  	if($.fn.lazyload){
+  		$(".kv2013_slider img").lazyload({ 
+  			event : "slide"
+  			}).eq(0).trigger('slide').end().eq(1).trigger('slide'); 
+  		$('.wrapper img').add('.imap img').add('.footer img').lazyload({
+  			effect : 'fadeIn' 
+  			}); 
+  	}
+  })($); 
 });/*$*/
