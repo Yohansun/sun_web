@@ -13,7 +13,7 @@ class MasterProfile < ActiveRecord::Base
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
   has_attached_file :preview_img_out,
-    :styles => { :thumb => "80x80#", :original => "278x282#", :home_page => "305x314#", :home_page2 => "380x365#" },
+    :styles => { :thumb => "80x80#", :original => "278x282#", :home_page => "305x314#", :home_page2 => "380x365#", :mobile_original => "145x150#" },
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

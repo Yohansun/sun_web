@@ -83,7 +83,7 @@ module ApplicationHelper
         elsif controller_name == 'design_images' && action_name == 'index'
           s1 = ""
           s2 = ""
-          if @content.present?
+          if @content.present? || @imageable_type.present?
             if @content[0..10].present?
               @content[0..10].each do |c|
                 if c.present?
@@ -98,7 +98,7 @@ module ApplicationHelper
                 end
               end
             end
-            "" + s1 + "装修图片大全，您可以设计自己的" + s2 + " 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+            @imageable_type + s1 + "装修图片大全，您可以设计自己的" + s2 + " 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           else
              "装修效果图大全2013图片、室内装修效果图大全、装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           end
@@ -235,7 +235,7 @@ module ApplicationHelper
     elsif controller_name == 'master_designs' && action_name == 'show'
       "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name},还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'design_images' && action_name == 'index'
-      if @content.present?
+      if @content.present? || @imageable_type.present?
         s1 = ""
         s2 = ""
         if @content.present?
@@ -254,7 +254,7 @@ module ApplicationHelper
             end
           end
         end
-        "立邦 iColor装修图库，精心挑选" + s1 + "2013装修图片大全，方便您设计自己的" + s2 + "装修效果图，满足您的个性化装修需求。"
+        "立邦 iColor装修图库，精心挑选#{@imageable_type}" + s1 + "2013装修图片大全，方便您设计自己的" + s2 + "装修效果图，满足您的个性化装修需求。"
       else
         "立邦 iColor装修图库，提供近6万张最流行的装修效果图大全2013图片、室内装修效果图大全欣赏、装修风格鉴赏，展示丰富的客厅、厨房、卫生间、卧室、阳台等各种分类装修效果图，满足您的一切装修设计需求。"
       end
@@ -430,14 +430,16 @@ module ApplicationHelper
     elsif controller_name == 'gifts' && action_name == 'index'
       designer_events_key
     elsif controller_name == 'design_images' && action_name == 'index'
-      if @content.present?
+      if @content.present? || @imageable_type.present?
         content = ""
-        @content.each do |c|
-          if c.present?
-            content += c + ","
+        if @content.present?
+          @content.each do |c|
+            if c.present?
+              content += c + ","
+            end
           end
         end
-        content
+        @imageable_type + content + "装修图片 , 装修效果图"
       else
         "装修,装修设计,室内装修效果图大全,装修效果图,装修效果图大全2013图片,装修图片,装修风格"
       end
