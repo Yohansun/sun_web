@@ -41,6 +41,7 @@ class DesignImagesController < ApplicationController
 
   def index
     @content = []
+    @imageable_type = ""
     @images = DesignImage.available.audited_with_colors
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
@@ -112,9 +113,16 @@ class DesignImagesController < ApplicationController
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
       @images = @images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
+      @content[6] = "#{params[:search]}" + "#{@content[6]}" if params[:search] == "橙色系"
+      @content[5] = "#{params[:search]}" + "#{@content[5]}" if params[:search] == "小户型"
+      @content[11] = "#{params[:search]}" + "#{@content[11]}" if params[:search] == "客厅"
+      @content[1] = "#{params[:search]}" + "#{@content[1]}" if params[:search] == "简约"
     end
 
     if params[:imageable_type].present? && params[:imageable_type].to_s != "all"
+      @imageable_type = "大师作品" if params[:imageable_type] == "MasterDesign"
+      @imageable_type = "设计之星" if params[:imageable_type] == "WeekStart"
+      @imageable_type = "色彩配搭" if params[:imageable_type] == "ColorDesign"
       if params[:imageable_type] == 'WeekStart'
         @images = @images.where("sorts = 2")
       else
