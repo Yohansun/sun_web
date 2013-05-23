@@ -387,7 +387,7 @@ $(function(){
 						</div>
 					</div>
 					<div class="fr ft12 btn_group btn_group_imgs border_lline">
-						<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :title => '', :remote => true, class: "icon_like votes_count#{@images.first.id}", :method => :post do %>
+						<%= link_to votes_path(:voteable_id => @images.first.id, :voteable_type => "DesignImage"), :title => '', :remote => true, class: "icon_like votes_count#{@images.first.id}", :method => :post, :title => @images.first.try(:votes_count) do %>
 				           <%= @images.first.try(:votes_count) %>
 				        <%- end %>
 						<a href="javascript:void(0);" class="icon_view">

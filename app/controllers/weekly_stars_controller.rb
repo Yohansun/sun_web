@@ -49,6 +49,8 @@ class WeeklyStarsController < ApplicationController
     #   star_ids << star.id if star.present?
     # end  
     @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(8)
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
   
 	DefaultActions.each do |act,star_type|

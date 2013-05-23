@@ -3,18 +3,22 @@ class ArticlesController < ApplicationController
 
   def index
     @weekly_tips = WeeklyTip.page(1)
+
+    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def show
-    @article = Post.find(params[:id])
-    tags=@article.tag_counts_on(:tags)
-    if tags.present?
+     @article = Post.find(params[:id])
+     tags=@article.tag_counts_on(:tags)
+     if tags.present?
      @prev_article = get_articles.tagged_with(tags).where("published_at < ?", @article.published_at).first
      @next_article = get_articles.tagged_with(tags).where("published_at > ?", @article.published_at).last
      else
-    @prev_article = get_articles.where("published_at < ?", @article.published_at).first
-    @next_article = get_articles.where("published_at > ?", @article.published_at).last  
-     end  
+      @prev_article = get_articles.where("published_at < ?", @article.published_at).first
+      @next_article = get_articles.where("published_at > ?", @article.published_at).last  
+     end
+
+     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def get_articles
