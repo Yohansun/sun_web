@@ -3,7 +3,10 @@ class Baicheng::SysinfoController < ApplicationController
   layout 'baicheng'
  
   def index
-    @msgs = current_user.sys_msgs.unscoped.baicheng.baicheng_order.order('status asc, created_at desc').page(params[:page])
+    @msgs = current_user.sys_msgs.baicheng.baicheng_order.order('status asc, created_at desc').page(params[:page])
+    Rails.logger.info(@msgs.size )
+        Rails.logger.info(current_user.sys_msgs.baicheng.size )
+    
   end
   def show
     @msg =  current_user.sys_msgs.baicheng.find(params[:id])

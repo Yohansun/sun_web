@@ -114,7 +114,7 @@ class Design < ActiveRecord::Base
       ##TODO （比如：想要设计的作品，已上传的作品数量变更）
       self.story.want_designers.each do |user|
         Sysmsg.send_to(user,"您的<a herf=/love/stories/act >个人活动主页</a>有最新信息更新，快去查看。",
-          {:reply_type => "baicheng",:re_url =>"/love/stories/act"}) unless user==self.user
+          {:reply_type => "baicheng",:re_url =>"/love/stories/act",site_message_id: 123}) unless user==self.user
       end
     end
   end

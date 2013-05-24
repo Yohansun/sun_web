@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RepReply < ActiveRecord::Base
   attr_accessor :show_id
   belongs_to :reply
