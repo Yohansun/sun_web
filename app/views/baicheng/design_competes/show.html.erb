@@ -64,7 +64,7 @@
               <span class="btns btns_small btn_down">
                 <span>
                   <%= link_to votes_path(:voteable_id => @design.id, :voteable_type => "Design"),remote: true,method: 'post',title: '' do %>
-                    <i class='i_icon i_icon_medium icon_like'></i> <span class='votes_countre<%= @design.id %> '><%= @design.votes_count %> </span>
+                    <i class='i_icon i_icon_medium icon_like'></i> <abbr class='votes_countre<%= @design.id %> '><%= @design.votes_count %> </abbr>
                   <% end %>
                   <a href="#comments"><i class="i_icon i_icon_medium icon_review"></i><%= @design.comments.count %></a>
                 </span>
