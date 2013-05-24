@@ -162,7 +162,7 @@ class DesignsController < ApplicationController
           DesignTags.create(design_id: @design.id,image_library_category_id: tag)
         end
         current_user.create_score(current_user.id, 601 , 1 , 50)
-        redirect_to upload_user_design_path(current_user, @design)
+        redirect_to upload_user_design_path(current_user, @design, {:story_id => params[:story_id]})
       else
         @design.errors.messages.each do |key,value|
           flash[:design_errors] += value
@@ -341,7 +341,8 @@ class DesignsController < ApplicationController
     end
     @design.save
     if @design.baicheng_active
-       redirect_to design_competes_path
+       # redirect_to design_competes_path
+       redirect_to "/love/design_competes/#{params[:story_id]}"
     else
       redirect_to user_path(current_user)
     end

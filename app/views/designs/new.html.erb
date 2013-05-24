@@ -50,12 +50,13 @@
         <h1>上传作品</h1>
     </div>
     <%= form_for([current_user, @design], :calss=>"clear") do |f| %>
+    <%= hidden_field_tag "story_id", params[:story_id] %>
         <div class="upload2013">
             <div class="control2013">
                 <%= f.label :title, raw("作品名称<span class='cr'>*</span>"), class: "label2013" %>
                 <% if params[:story_id].present? %>
                   <% story = Story.find params[:story_id]%>
-                  <%= f.text_field :title, class: "width652 fl inputs_count", "data-count"=> "50", value: "#{story.title}", "readonly" => true -%>
+                  <%= f.text_field :title, class: "width652 fl inputs_count", "data-count"=> "50", value: "为#{story.property_name}设计的房型图" -%>
                 <% else %>
                   <%= f.text_field :title, class: "width652 fl inputs_count", "data-count"=> "50" -%>
                   <span class="help-text fl">还可以输入<b class="cr inputs_count_tip">50</b>符汉字</span>
