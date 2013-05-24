@@ -1,84 +1,87 @@
 <div class="container-fluid">
 	<div class="design_works pad_t60">
 		<div class="wrapper pad_b40">
-			<div class="clearfix sys_top">
-				<a class="pull-left show" href="<%= user_asks_path(current_user) if current_user %>" target="_blank" id='monitor_link_326848'>
-					<%= image_tag 'baicheng/system/userimg.jpg' %>
-				</a>
-				<!-- <a href="javascript:;" class="pull-left well well-small sys_user_name pr"><span class="arrow_left"><img src="images/system/arrow_left.jpg"></span><strong class="color_red">景涛</strong>的活动主页</a> -->
-
-				<a href="<%= user_asks_path(current_user) if current_user %>" class="pull-left sys_user_name" target="_blank"><span><strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页</span></a>
-				<a href="<%= stories_path %>" class="pull-left sys_works_more" id='monitor_link_326845'>更多家装需求 期待您的精彩设计</a>
+			<div class="sys_top">
+				<p>
+					<a href="javascript:void(0)" class="pull-left">
+						<%= image_tag 'baicheng/system/userimg.jpg' %>
+					</a>
+					<a href="javascript:void(0)" class="sys_user_name"><span>
+					<strong class="color_red">
+						<%= current_user.display_name if current_user %>
+					</strong>的活动主页</span></a>
+				</p>
+				<p>
+					<strong>客户买单，你积分！</strong><br />
+					不论是您为客户代购还是陪客户在立邦专卖店购买产品，<br />
+					只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
+				</p>
 			</div>
 			<div class="redline_b4 pad_b40">
 				<h5 class="sys_title"><span>我想设计</span></h5>
 				<ul class="thumbnails design_list nomargin">
-					<li class="span2">
-						<div class="thumbnail nopadding">
-							<!-- <span class="list_tag list_tag_full"></span> -->
-							<a href="javascript:;" class="list_img_a">
-								<%= image_tag 'baicheng/mydesign/list1.jpg' %>
-							</a>
-							<div class="design_list_tit">
-								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
-								<p class="nomargin">小丸子 (杭州)</p>
-							</div>
-						</div>
-						<p class="well well-small text-center status">倒计时<i class="i_icon i_icon_big icon_day">7</i>天</p>
-					</li>
-					<li class="span2">
-						<div class="thumbnail nopadding">
-							<!-- <span class="list_tag list_tag_full"></span> -->
-							<a href="javascript:;" class="list_img_a">
-								<%= image_tag 'baicheng/mydesign/list1.jpg' %>
-							</a>
-							<div class="design_list_tit">
-								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
-								<p class="nomargin">小丸子 (杭州)</p>
-							</div>
-						</div>
-						<p class="well well-small text-center status"><i class="i_icon i_icon_xbig mar_h5 icon_full"></i>设计已满</p>
-					</li>
-					<li class="span2">
-						<div class="thumbnail nopadding">
-							<!-- <span class="list_tag list_tag_full"></span> -->
-							<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
-							<div class="design_list_tit">
-								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
-								<p class="nomargin">小丸子 (杭州)</p>
-							</div>
-						</div>
-						<p class="well well-small text-center status">倒计时<i class="i_icon i_icon_big icon_day">7</i>天</p>
-					</li>
-					<li class="span2">
-						<div class="thumbnail nopadding">
-							<!-- <span class="list_tag list_tag_full"></span> -->
-							<a href="javascript:;" class="list_img_a"><%= image_tag 'baicheng/mydesign/list1.jpg' %></a>
-							<div class="design_list_tit">
-								<h5 class="nomargin"><a href="javascript:;">爱家，就用爱去浇灌它</a></h5>
-								<p class="nomargin">小丸子 (杭州)</p>
-							</div>
-						</div>
-						<p class="well well-small text-center status"><i class="i_icon i_icon_xbig mar_h5 icon_warn"></i>已过期</p>
-					</li>
-				</ul>
-				<h5 class="sys_title"><span>我已上传</span></h5>
-				<ul class="thumbnails design_list nomargin">
-					<%- @designs.each do |design| %>
-						<li class="span2">
-							<div class="thumbnail nopadding">
-								<!-- <span class="list_tag list_tag_deal"></span> -->
-								<a href="<%= design_compete_path(design) %>" class="list_img_a">
-									<%= image_tag(design.cover_img.file.url(:baicheng_list)) if design.cover_img.present? %>
-								</a>
-								<div class="works_tit">
-									<h5 class="nomargin"><a href="javascript:;"></a><%= design.title %></h5>
-									<p class="nomargin"><span class="pull-right"><%= design.design_style_names.split(',')[0] %></span><%= design.user.display_name %></p>
+					<% @story_users.each do |story_user| %>
+						<% if story_user.story.designs.present? %>
+							<li class="span2">
+								<div class="thumbnail nopadding">
+									<a href="/users/<%= story_user.user.id %>/designs/<%= story_user.story.designs.last.id %>" class="list_img_a">
+										<%= image_tag(story_user.story.designs.last.design_images.first.file.url(:baicheng_list)) if story_user.story.designs.last.design_images.first.present? %>
+									</a>
+									<div class="design_list_tit">
+										<h5 class="nomargin">
+											<a href="#">
+												<%= story_user.story.designs.last.title %>
+											</a>
+										</h5>
+										<p class="nomargin">(<%= story_user.story.designs.last.area.city.name %>)</p>
+										<p class="nomargin"><i class="i_icon icon_tel"></i><%= story_user.user.phone %></p>
+									</div>
 								</div>
-							</div>
-						</li>
-					<%- end %>
+								<p class="well well-small text-center status"></p>
+								<a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
+							</li>
+						<% else %>
+							<li class="span2">
+								<div class="thumbnail nopadding">
+									<a href="#" class="list_img_a">
+										<%= image_tag(story_user.story.story_image.file.url(:baicheng_list)) %>
+									</a>
+									<div class="design_list_tit">
+										<h5 class="nomargin">
+											<a href="#">
+												<%= story_user.story.title %>
+											</a>
+										</h5>
+										<p class="nomargin">(<%= story_user.story.area.city.name %>)</p>
+										<p class="nomargin">
+											<i class="i_icon icon_tel"></i>
+											<%= story_user.story.user.phone %>
+										</p>
+									</div>
+								</div>
+
+								<p class="well well-small text-center status">
+									<%= design_countdown story_user %>
+								</p>
+
+								<a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
+							</li>
+						<% end %>
+					<% end %>
 				</ul>
+				<p class="text-right m020">
+					<strong><a href="/love/stories" class="cr">查看更多家装需求&gt;&gt;</a></strong>
+				</p>
+				<h5 class="sys_title"><span>积分兑换</span></h5>
+				<p class="m020">
+					<strong>
+						您目前的累计积分为<span class="cr">18</span>分，可用积分为<span class="cr">12</span>分。
+						<a href="#" class="cr">点击兑换</a>
+					</strong>
+				</p>
+				<p class="text-right m020">
+					<strong><a href="#" class="cr">产品购买积分兑换细则&gt;&gt;</a></strong>
+				</p>
 			</div>
 		</div>
 	</div>

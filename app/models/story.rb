@@ -16,6 +16,8 @@ class Story < ActiveRecord::Base
   has_many :want_designers, :through => :stroy_users, :source => :user #想设计的设计师
   # has_many :tags, class_name: 'StoryImageTag', :foreign_key => 'story_image_id',:dependent => :destroy
 
+  belongs_to :design
+
   after_create :sync_baicheng_event
 
   def cover_img

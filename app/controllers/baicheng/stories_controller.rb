@@ -140,7 +140,7 @@ class Baicheng::StoriesController < ApplicationController
 
   def act
     if current_user.present?
-      @designs = current_user.designs.where("designs.story_id is not null or designs.story_id <> '' ")
+      @story_users = StoryUser.story_ids(current_user.id) if current_user.present?
       render :act
     else
       redirect_to baicheng_root_path

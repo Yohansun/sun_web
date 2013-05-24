@@ -12,4 +12,6 @@ class StoryUser < ActiveRecord::Base
       {:reply_type => "baicheng",:re_url =>"/love/stories/#{self.story.id}"})  
     true
   end
+
+  scope :story_ids, lambda{ |user_id| where(user_id: user_id) if user_id.present? }
 end

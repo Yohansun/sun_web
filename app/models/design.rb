@@ -23,6 +23,7 @@ class Design < ActiveRecord::Base
   has_one :baicheng_event
   #最新的一张作品图片
   has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
+  belongs_to :area
 
   scope :time_range, ->(start_date,end_date){joins(:user).where(:users => {:role_id => 1,:des_status => true,:source => nil},:created_at => start_date.to_time..end_date.to_time)}
   scope :baicheng,->{where(baicheng_active: true)}
