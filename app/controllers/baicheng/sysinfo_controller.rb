@@ -8,7 +8,6 @@ class Baicheng::SysinfoController < ApplicationController
   def show
     @msg =  current_user.sys_msgs.baicheng.find(params[:id])
     @msg.read
-    Rails.logger.info( @msg.re_url || root_path)
     redirect_to   @msg.re_url || root_path
   end
 end

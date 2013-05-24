@@ -108,10 +108,13 @@ class Design < ActiveRecord::Base
   private
   def send_baicheng_sys_msg
     if self.story
-      Sysmsg.send_to(self.story.user,"设计师<a herf=/users/#{self.user.id} >#{self.user.display_name}</a>对我发布的《<a herf=/love/stories/#{self.story.id}>房型图</a>》上传了设计。",:reply_type => "baicheng")
-      ##TODO 个人活动主页有更新（比如：想要设计的作品，已上传的作品数量变更）
-      #    Sysmsg.send_to(self.story.user,"设计师<a herf=/users/#{self.user.id} >#{self.user.display_name}</a>对我发布的《<a herf=/love/stories/#{self.story.id}>房型图</a>》上传了设计。",:reply_type => "baicheng")
-
+      Sysmsg.send_to(self.story.user,"设计师<a herf=/users/#{self.user.id} >#{self.user.display_name}</a>对我发布的《<a herf=/love/stories/#{self.story.id}>房型图</a>》上传了设计。",
+        {:reply_type => "baicheng",re_url=>"/love/stories/#{self.story.id}"})
+      ##TODO （比如：想要设计的作品，已上传的作品数量变更）
+      self.story.want_designers.each do |user|
+        Sysmsg.send_to(user,"您的<a herf=/love/stories/act >个人活动主页</a>有最新信息更新，快去查看。",
+          {:reply_type => "baicheng",:re_url =>"/love/stories/act"}) unless user==self.user
+      end
     end
   end
 end
