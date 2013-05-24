@@ -121,6 +121,7 @@ class Baicheng::StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story_image = @story.story_image
     @comments = @story.comments.page(params[:page]).per(4)
+    @story_users = StoryUser.where(story_id: @story).order("design_time desc").limit(6)
   end
 
   def act
@@ -129,6 +130,26 @@ class Baicheng::StoriesController < ApplicationController
       render :act
     else
       redirect_to baicheng_root_path
+    end
+  end
+
+  def storyuser
+    if params[:story_id] && params[:user_id]
+      if check_storyuser(params)
+        story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
+        render :js => "alert('预定成功!');"
+      else
+        user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
+        if user.design_time + 15.days < Time.now
+          user.design_time = Time.now
+          user.save
+          render :js => "alert('时间过期重新预定!');"
+        else
+          render :js => "alert('您已经预定过了!');"
+        end
+      end
+    else
+      render nothing: true
     end
   end
 
@@ -148,6 +169,17 @@ class Baicheng::StoriesController < ApplicationController
       end
     else
       redirect_to :back
+    end
+  end
+
+  private
+
+  def check_storyuser(params)
+    user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id])
+    if user.blank?
+      return true
+    else
+      return false
     end
   end
 end

@@ -429,6 +429,7 @@ Icolor::Application.routes.draw do
     resources :stories do
       collection do
         get :act
+        post :storyuser
       end
       member do
         get :download

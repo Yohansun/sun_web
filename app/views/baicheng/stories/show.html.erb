@@ -60,7 +60,7 @@
 						<div class="pr">
 							<!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
 							<%- if current_user %>
-								<a href="#design_tips" class="design_btn" role="button" data-toggle="modal"></a>
+								<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
 							<%- else %>
 								<a href="javascript:show_login();" class="design_btn" role="button" data-toggle="modal"></a>
 							<%- end %>
@@ -84,9 +84,15 @@
 								<h2>如果对此房型图感兴趣，可按以下步骤操作</h2>
 								<ul>
 									<li>点击
-										<a href="#design_tips" data-toggle="modal">
-											<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
-										</a>
+										<%- if current_user %>
+											<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" data-toggle="modal" data-method="post" data-remote="true">
+												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
+											</a>
+										<%- else %>
+											<a href="javascript:show_login();" data-toggle="modal">
+												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
+											</a>
+										<%- end %>
 										，预定房型图。<br />并按系统提示，将房型图下载到本地。
 										</li>
 									<li>针对下载的房型图及用户需求进行设计，需包含<br />
@@ -156,27 +162,33 @@
 						<!-- JiaThis Button END -->
 					</div>
 				<%- end %>
-				<div class="mar_h20 pad_b40 designers border_dot_b1">
-					<h5><i class="i_icon icon_tit"></i>想为你设计的家装公司/设计师</h5>
-					<span class="in_arrow_top"><%= image_tag 'baicheng/mydesign/in_arrow_top.png' %></span>
-					<ul class="thumbnails well">
-						<%- 6.times.each_with_index do |index| %>
-							<li class="span2">
-								<div class="thumbnail nopadding noborder noshadow">
-									<a class="show" href="<%= user_path(current_user) if current_user %>">
-										<%= image_tag 'baicheng/mydesign/designer1.png' %>
-									</a>
-									<p>尊筑设计</p>
-									<p class="nopadding"><i class="i_icon icon_tel"></i>18614589568</p>
-								</div>
-							</li>
-							<%- unless index == 5 %>
-								<li class="divider-vertical_designer"></li>
+				<%- if @story.user == current_user %>
+					<div class="mar_h20 pad_b40 designers border_dot_b1">
+						<h5><i class="i_icon icon_tit"></i>想为你设计的家装公司/设计师</h5>
+						<span class="in_arrow_top"><%= image_tag 'baicheng/mydesign/in_arrow_top.png' %></span>
+						<ul class="thumbnails well">
+							<%- @story_users.each_with_index do |story_user,index| %>
+								<%- user = User.find_by_id(story_user.user_id) %>
+								<li class="span2">
+									<div class="thumbnail nopadding noborder noshadow">
+										<a class="show" href="<%= user_path(user) %>">
+											<%- if user && user.avatar -%>
+							          <%= image_tag user.avatar.file(:profile),:size =>"92x92" %>
+							        <%- else -%>
+							          <%= image_tag "news/regimg_bg.jpg", size: '92x92' %>
+							        <%- end -%>
+							      </a>
+										<p><%= user.display_name %></p>
+										<p class="nopadding"><i class="i_icon icon_tel"></i><%= user.phone %></p>
+									</div>
+								</li>
+								<%- unless index == 5 %>
+									<li class="divider-vertical_designer"></li>
+								<%- end %>
 							<%- end %>
-						<%- end %>
-						
-					</ul>
-				</div>
+						</ul>
+					</div>
+				<%- end %>
 				<div class="mar_h20 works border_dot_b1 pad_b40">
 					<h5><i class="i_icon icon_tit"></i>已提交作品<span class="well well-small noborder">选择心仪作品上传<a href="javascript:;" class="color_red">施工合同</a>，更有机会获得立邦产品购买的折扣券哦!</span></h5>
 					<ul class="thumbnails design_list">
@@ -192,7 +204,7 @@
 										<p class="nomargin"><i class="i_icon icon_tel"></i><%= design.user.phone %></p>
 									</div>
 									<p class="upload_good">
-										<%- if current_user %>
+										<%- unless current_user %>
 											<a href="javascript:;" class="pull-right upload_btn_red upload_btn_gray">
 												<span class="text-center">合同已上传</span>
 											</a>
