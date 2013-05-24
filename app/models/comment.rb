@@ -23,7 +23,7 @@ class Comment < ActiveRecord::Base
         
         @design = Design.find self.commentable_id 
         if @design.story 
-          story =  @design.story 
+          story =  @design.story
           SysMsg.send_to(story.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对为我设计的《<a href=/love/stories/#{story.id}>房型图</a>》 进行了留言。",{:reply_type => "baicheng",
              :re_url =>"/love/stories/#{story.id}"}   )
           SysMsg.send_to(@design.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对我上传的原创设计《<a href=/love/design_competes/#{@design.id}>#{@design.title}</a>》进行了评论。",
