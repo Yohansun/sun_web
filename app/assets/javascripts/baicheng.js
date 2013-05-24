@@ -13,3 +13,4 @@
 //= require baicheng/jquery
 //= require jquery_ujs
 //= require baicheng/bootstrap
+//= require baicheng/monitor_record

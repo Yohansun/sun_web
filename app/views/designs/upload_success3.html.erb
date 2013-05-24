@@ -1,19 +1,54 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag '2013base', '2013upload'%>
-<% end -%>
-<div class="wrapper">
-  <div class="upload_success">
-    <div class="upload2013_2">
+  <% if @design.baicheng_active %>
+    <script type='text/javascript'>
+    // Conversion Name: 因爱之名-房型图内页-landing on作品提交完成页
+    // INSTRUCTIONS 
+    // The Conversion Tags should be placed at the top of the <BODY> section of the HTML page. 
+    // In case you want to ensure that the full page loads as a prerequisite for a conversion 
+    // being recorded, place the tag at the bottom of the page. Note, however, that this may 
+    // skew the data in the case of slow-loading pages and in general not recommended. 
+    //
+    // NOTE: It is possible to test if the tags are working correctly before campaign launch 
+    // as follows:  Browse to http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=at, which is 
+    // a page that lets you set your local machine to 'testing' mode.  In this mode, when 
+    // visiting a page that includes an conversion tag, a new window will open, showing you 
+    // the data sent by the conversion tag to the MediaMind servers. 
+    // 
+    // END of instructions (These instruction lines can be deleted from the actual HTML)
+      var ebRand = Math.random() + '';
+      ebRand = ebRand * 1000000;
+    //<![CDATA[ 
+      document.write('<scr' + 'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326827&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+    //]]>
+      CClicki[10008]._trackEvent({
+        type: 1,
+        labels: [
+          {"按钮名称": "landing on作品提交完成页"}
+        ],
+        values: [
+          {"数量": 1}
+        ]
+      });
+    </script>
+    <noscript>
+    <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326827&amp;ns=1"/>
+    </noscript>
+    end
+  <% end -%>
+  <div class="wrapper">
+    <div class="upload_success">
+      <div class="upload2013_2">
         <div class="tc"><img src="<%= asset_path 'upload_true.jpg'%>"></div>
         <p class="tc color_red">您的大作也可同步参与iColor正在的以下活动，期待您的参与</p>
-    </div>
-    <br>
-    <%= form_tag update_design_active_user_designs_path(current_user), class: "active_form" do%>
-    <%= hidden_field_tag "story_id", params[:story_id] %>
+      </div>
+      <br>
+      <%= form_tag update_design_active_user_designs_path(current_user), class: "active_form" do%>
+          <%= hidden_field_tag "story_id", params[:story_id] %>
       <%# if @design.story_id.present? %>
-        <div class="upload2013_2 clear noborder"><!-- 最后一个活动添加class noborder  -->
-          <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg2.jpg"%> ">
-          <div class="active_content">
+          <div class="upload2013_2 clear noborder"><!-- 最后一个活动添加class noborder  -->
+            <img class="pad_border fl" src="<%= asset_path "success/upload_sucimg2.jpg"%> ">
+            <div class="active_content">
               <h3>
                 <% if @design.baicheng_active %>
                   <%=check_box_tag "baicheng_active","ok",true, :style=>"width:25px;"%>刷新百城活动
@@ -27,21 +62,21 @@
               <p>活动时间：2013年3月至2013年11月</p>
               <!-- <form class="active_form"> -->
               <fieldset>
-                  <label>请填写作品所在楼盘</label>
-                  <input type="text" placeholder="<%=@design.property_name%>" name="property_name">
+                <label>请填写作品所在楼盘</label>
+                <input type="text" placeholder="<%=@design.property_name%>" name="property_name">
               </fieldset>
               <fieldset>
-                  <label>业主感言</label>
-                  <span>（如您的设计作品希望参与iColor刷新大奖的评比，请务必填写业主感言！）</span>
-                  <%= text_area "design", "speech" -%>
+                <label>业主感言</label>
+                <span>（如您的设计作品希望参与iColor刷新大奖的评比，请务必填写业主感言！）</span>
+                <%= text_area "design", "speech" -%>
               </fieldset>
+            </div>
           </div>
-        </div>
       <%# end %>
-      <fieldset class="tc">
-        <input type="hidden" name="design_id" value="<%=params[:design_id] if params[:design_id]%>">
-          <button><img src="<%= asset_path "success/btn.jpg"%>"></button>
-      </fieldset>
-    <% end %>
-  </div>
-</div><!--ends-->
+          <fieldset class="tc">
+            <input type="hidden" name="design_id" value="<%=params[:design_id] if params[:design_id]%>">
+            <button><img src="<%= asset_path "success/btn.jpg"%>"></button>
+          </fieldset>
+        <% end %>
+      </div>
+    </div><!--ends-->
