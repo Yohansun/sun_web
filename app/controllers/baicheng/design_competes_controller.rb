@@ -37,7 +37,7 @@ class Baicheng::DesignCompetesController < ApplicationController
         @desgins = Design.baicheng.includes(:cover_img).order("created_at DESC").where("title=?", params[:keywords]) if params[:keywords].present?
       end
     end
-    @designs = @desgins.page(params[:page]).per(24).limit(2)
+    @designs = @desgins.page(params[:page]).per(24)
   end
 
   def show

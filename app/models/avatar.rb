@@ -7,8 +7,9 @@ class Avatar < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension",
-    :convert_options => {:round => Proc.new{self.convert_options}}
-
+    :convert_options => {:round => Proc.new{self.convert_options}},
+    :default_url =>  ActionController::Base.helpers.asset_path("news/regimg_bg.jpg")
+     
   def self.convert_options
     trans = ""
     px = 20

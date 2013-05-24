@@ -8,14 +8,17 @@ class SysMsg < ActiveRecord::Base
             :inspirations  => "灵感秀",
             :color_designs => "色彩搭配",
             :events        => "年度色彩趋势活动",
-            :messages      => "留言板"
+            :messages      => "留言板",
+            :baicheng      => "百城"
             }
-
+   
   belongs_to :user
 
   belongs_to :site_message
-
+  
   ##TODO 怎么排序
   default_scope :order => "created_at DESC"
+  
+  scope :baicheng,->{where(reply_type: :baicheng)}
 
 end

@@ -591,7 +591,16 @@ module ApplicationHelper
       link_to image_tag(asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}"), user_path(user)
     end
   end
-
+  
+  def avatar_img(*args)
+    user, type, size = args[0], args[1], args[2]
+    if user.avatar.present?
+       image_tag("#{user.avatar.file.url(type.blank? ? :original : type.to_sym)}", size: "#{size if size.present?}") 
+    else
+       image_tag(asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}") 
+    end
+  end
+  
   #家装公司个性主页helper
   #获取最新的行业资讯
   def get_articles
