@@ -12,7 +12,7 @@
             <% @msgs.each do |msg| %>
             <li class="border_dot_b1">
               <h5><%= raw msg.content %></h5>
-              <p><a class="pull-right" href="#">查看</a><%= l msg.created_at,format: :long %></p>
+              <p><a class="pull-right" href="<%= sysinfo_path(msg) %>">查看</a><%= l msg.created_at,format: :long %></p>
             </li>
             <% end %>
           </ul>

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class SysMsg < ActiveRecord::Base
-  Status = { 0=> "new", 1 => "read" }
+  Status = { new: 0, read: 1 }
 
   MODULE = {:master_topics => "热点话题",
             :weekly_stars  => "每周之星",
@@ -20,10 +20,17 @@ class SysMsg < ActiveRecord::Base
   default_scope :order => "created_at DESC"
   
   scope :baicheng,->{where(reply_type: :baicheng)}
-  scope :unread,->{where(status: 0)}
+  scope :unread,->{where(status: SysMsg::Status[:new])}
+  scope :baicheng_order,->{order('site_message_id desc')}
+  
   
   def self.send_to user,msg,others={}
-    SysMsg.create({:content => msg,:status => SysMsg::Status[0], :reply_name => "系统",
+    SysMsg.create({:content => msg,:status => SysMsg::Status[:new], :reply_name => "系统",
           :user_id => user.id}.merge(others) )
+  end
+  
+  def read
+   self.status =  SysMsg::Status[:read]
+   self.save
   end
 end

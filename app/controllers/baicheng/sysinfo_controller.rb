@@ -3,7 +3,12 @@ class Baicheng::SysinfoController < ApplicationController
   layout 'baicheng'
  
   def index
-    @msgs = current_user.sys_msgs.baicheng.page(params[:page])
+    @msgs = current_user.sys_msgs.unscoped.baicheng.baicheng_order.order('status asc, created_at desc').page(params[:page])
   end
-
+  def show
+    @msg =  current_user.sys_msgs.baicheng.find(params[:id])
+    @msg.read
+    Rails.logger.info( @msg.re_url || root_path)
+    redirect_to   @msg.re_url || root_path
+  end
 end

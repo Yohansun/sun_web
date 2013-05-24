@@ -24,8 +24,10 @@ class Comment < ActiveRecord::Base
         @design = Design.find self.commentable_id 
         if @design.story 
           story =  @design.story 
-          SysMsg.send_to(story.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对为我设计的《<a href=/love/stories/#{story.id}>房型图</a>》 进行了留言。",:reply_type => "baicheng"   )
-          SysMsg.send_to(@design.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对我上传的原创设计《<a href=/love/design_competes/#{@design.id}>#{@design.title}</a>》进行了评论。",:reply_type => "baicheng"   )
+          SysMsg.send_to(story.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对为我设计的《<a href=/love/stories/#{story.id}>房型图</a>》 进行了留言。",{:reply_type => "baicheng",
+             :re_url =>"/love/stories/#{story.id}"}   )
+          SysMsg.send_to(@design.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对我上传的原创设计《<a href=/love/design_competes/#{@design.id}>#{@design.title}</a>》进行了评论。",
+            {:reply_type => "baicheng", :re_url =>"/love/design_competes/#{@design.id}"})
          end
       when "Inspiration"
         @design = Inspiration.find self.commentable_id
@@ -33,8 +35,8 @@ class Comment < ActiveRecord::Base
         @design = DesignImage.find self.commentable_id
       when 'Story'
         story = Story.find self.commentable_id
-     
-        SysMsg.send_to(story.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对我发布的《<a href=/love/stories/#{story.id}>房型图</a>》进行了留言。",:reply_type => "baicheng"   )
+        SysMsg.send_to(story.user,  "<a href=/users/#{user_id}> #{user_display_name}</a>对我发布的《<a href=/love/stories/#{story.id}>房型图</a>》进行了留言。",
+          {:reply_type => "baicheng",:re_url =>"/love/stories/#{story.id}"})
       end
       if @design
         SysMsg.create(:content => "亲爱的#{@design.user.display_name}用户，您的作品 <<a href=/users/#{@design.user_id}/designs/#{@design.id}>#{@design.title}</a>> 收到了新的回复，请注意查看！",
