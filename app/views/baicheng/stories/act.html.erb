@@ -2,13 +2,13 @@
 	<div class="design_works pad_t60">
 		<div class="wrapper pad_b40">
 			<div class="clearfix sys_top">
-				<a class="pull-left show" href="<%= user_asks_path(current_user) if current_user %>" target="_blank">
+				<a class="pull-left show" href="<%= user_asks_path(current_user) if current_user %>" target="_blank" id='monitor_link_326848'>
 					<%= image_tag 'baicheng/system/userimg.jpg' %>
 				</a>
 				<!-- <a href="javascript:;" class="pull-left well well-small sys_user_name pr"><span class="arrow_left"><img src="images/system/arrow_left.jpg"></span><strong class="color_red">景涛</strong>的活动主页</a> -->
 
 				<a href="<%= user_asks_path(current_user) if current_user %>" class="pull-left sys_user_name" target="_blank"><span><strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页</span></a>
-				<a href="<%= stories_path %>" class="pull-left sys_works_more">更多家装需求 期待您的精彩设计</a>
+				<a href="<%= stories_path %>" class="pull-left sys_works_more" id='monitor_link_326845'>更多家装需求 期待您的精彩设计</a>
 			</div>
 			<div class="redline_b4 pad_b40">
 				<h5 class="sys_title"><span>我想设计</span></h5>

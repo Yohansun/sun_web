@@ -160,20 +160,7 @@ function init_monitor_link_click() {
         });
          triggerEBConversion(326801);
     });
-
-    $('#monitor_link_326802').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "登陆"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-         triggerEBConversion(326802);
-    });
-
+ 
     $('#monitor_link_326803').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
@@ -201,7 +188,7 @@ function init_monitor_link_click() {
          triggerEBConversion(326805);
     });
 
-    $('#monitor_link_326806').click(function() {
+    $('#user_name_msg_tip').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [
@@ -346,21 +333,8 @@ function init_monitor_link_click() {
         });
          triggerEBConversion(326822);
     });
-
-    $('#monitor_link_326822').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "作品图"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-         triggerEBConversion(326822);
-    });
-
-    $('#monitor_link_326824').click(function() {
+ 
+    $('.list_img_a').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [
@@ -452,7 +426,7 @@ function init_monitor_link_click() {
          triggerEBConversion(326831);
     });
 
-    $('#monitor_link_326832').click(function() {
+    $('.icon_talk').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [

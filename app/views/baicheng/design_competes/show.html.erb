@@ -104,18 +104,18 @@
             <div>
               <!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
               <%-if current_user%>
-                <a href="<%= user_asks_path(@design.user)%>" class="design_btn ask_btn"></a>
+                <a href="<%= user_asks_path(@design.user)%>" class="design_btn ask_btn" id='monitor_link_326836'></a>
               <%- else %>
                 <a href="javascript:show_login();" class="design_btn ask_btn"></a>
               <%-end %>
               <!-- JiaThis Button BEGIN -->
               <div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:163px;">
                 <span class="jiathis_txt">分享：</span>
-                <a class="jiathis_button_renren"></a>
-                <a class="jiathis_button_douban"></a>
-                <a class="jiathis_button_kaixin001"></a>
-                <a class="jiathis_button_tsina"></a>
-                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_renren" id='monitor_link_326837'></a>
+                <a class="jiathis_button_douban" id='monitor_link_326838'></a>
+                <a class="jiathis_button_kaixin001" id='monitor_link_326839'></a>
+                <a class="jiathis_button_tsina" id='monitor_link_326840'></a>
+                <a class="jiathis_button_qzone" id='monitor_link_326841'></a>
                 <!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a> -->
                 <!-- <a class="jiathis_counter_style"></a> -->
               </div>
@@ -151,8 +151,8 @@
                   <a href="#" class="shops"></a><a href="#" class="buy_pro"></a>
           </div> -->
           <div class="btn_group pull-right" style="margin:20px 15px 10px;">
-            <a class="pull-left design_btn shops_btn" href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp"></a>
-            <a class="pull-left design_btn buy_btn" href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1"></a>
+            <a class="pull-left design_btn shops_btn" href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" id='monitor_link_326842'></a>
+            <a class="pull-left design_btn buy_btn" href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" id='monitor_link_326843'></a>
           </div>
           <p class="divider-vertical_nav divider-vertical_nav_long pull-right mar_h5"></p>
         </div>
@@ -161,7 +161,7 @@
         <p class="info_place border_dot_b1 clearfix">
           <strong class="pull-left" style="width:435px;">作品名称：<span class="color_red"> <%= @design.title %></span> </strong>
           <% if @story %>
-            <strong>房型图名称： <a href="<%= story_path(@story) %>" class="underline color_red"><%=  @story.user.username   %>的房型图</a></strong>
+            <strong>房型图名称： <a href="<%= story_path(@story) %>" class="underline color_red" id='monitor_link_326844'><%=  @story.user.username   %>的房型图</a></strong>
           <%end %>
         </p>
         <div class="mar_h20 designers space_big border_dot_b1">

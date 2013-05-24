@@ -63,7 +63,7 @@
 						<div class="pr">
 							<!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
 							<%- if current_user %>
-								<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
+								<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
 							<%- else %>
 								<a href="javascript:show_login();" class="design_btn" role="button" data-toggle="modal"></a>
 							<%- end %>
@@ -73,7 +73,7 @@
 										<span>上传设计</span>
 									</a>
 								<%- elsif current_user %>
-								<a class="btns btn_upload" href="<%= new_user_design_path(current_user,story_id: params[:id]) %>">
+								<a class="btns btn_upload" href="<%= new_user_design_path(current_user,story_id: params[:id]) %>" id ='monitor_link_326826'>
 									<span>上传设计</span>
 								</a>
 								<%- else %>
@@ -157,10 +157,10 @@
 						<%- end %>
 						<!-- JiaThis Button BEGIN -->
 						<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:110px;">
-							<span class="jiathis_txt">分享：</span>
-							<a class="jiathis_button_renren"></a>
-							<a class="jiathis_button_douban"></a>
-							<a class="jiathis_button_tsina"></a>
+							<span class="jiathis_txt" id ='monitor_link_326828'>分享：</span>
+							<a class="jiathis_button_renren" id ='monitor_link_326829'></a>
+							<a class="jiathis_button_douban" id ='monitor_link_326830'></a>
+							<a class="jiathis_button_tsina"  id ='monitor_link_326831'></a>
 						</div>
 						<!-- JiaThis Button END -->
 					</div>
@@ -212,13 +212,13 @@
 												<span class="text-center">合同已上传</span>
 											</a>
 										<%- else %>
-											<a href="javascript:;" class="pull-right upload_btn_red">
+											<a href="javascript:;" class="pull-right upload_btn_red" id='monitor_link_326833' >
 												<span class="text-center">上传合同</span>
 											</a>
 										<%- end %>
 										<%- if design.story_talking_id.blank? %>
 											<%- if @story.user == current_user %>
-												<%= link_to '', story_talking_path(design), method: :post, remote: true, class: 'i_icon icon_talk' %>
+												<%= link_to '', story_talking_path(design), method: :post, remote: true, class: 'i_icon icon_talk'  %>
 											<%- else %>
 												<a href="javascript:;" class="i_icon icon_talk"></a>
 											<%- end %>

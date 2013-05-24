@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- <title><%= @title %></title> -->
-    <title>百城</title>
-    <!-- <meta name="description" content="<%= @description %>" /> -->
+  <title><%= @title || '百城' %></title>  
+  
+  <meta name="description" content="<%= @description ||'百城' %>" />  
+   <meta name="keywords" content="<%= @key_words ||'百城' %>">
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
     <%= javascript_include_tag "baicheng","baicheng/LinkageSelect/LinkageSelect" %>
@@ -87,9 +88,9 @@
                     <span class="system_info_tip none" id='user_msg_tip'><em class="tip_arrow"></em><%= current_user.sys_msgs.baicheng.unread.size %>条系统消息</span>
                   <% end %>
                 </li>
-                <li><a href="<%= act_stories_path %>">查看我的活动主页</a></li>
+                <li><a href="<%= act_stories_path %>" id='monitor_link_326809'>查看我的活动主页</a></li>
                 <li class="divider-vertical_dot"></li>
-                <li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
+                <li><%= link_to '退出', destroy_user_session_path, :method => :delete ,id: 'monitor_link_326808'%></li>
               </ul>
             <%- else %>
               <ul class="nav pull-right">
@@ -99,7 +100,7 @@
                 <li class="divider-vertical"></li>
 
                 <li>
-                  <a href="/users/sign_up?return_to=love"><i class="icon-refresh_register"></i>注册</a>
+                  <a href="/users/sign_up?return_to=love" id='monitor_link_326803'><i class="icon-refresh_register"></i>注册</a>
                 </li>
               </ul> 
             <%- end %><!-- right nav end -->
@@ -118,12 +119,12 @@
               <a class="txt_img_align" style="padding:10px 0;" href="<%= root_path %>">去<img class="pad_h5" src="<%=asset_path 'baicheng/logo_link.png'%>"></a>
             </li>
             <li>
-              <a style="padding:10px 10px 10px 0;" href="<%= root_path %>">查看更多案例</a>
+              <a style="padding:10px 10px 10px 0;" href="<%= root_path %>" id='monitor_link_326811'>查看更多案例</a>
             </li>
             <li class="divider-vertical_footer"></li>
 
             <li>
-              <a href="/love/disclaimer">免责声明</a>
+              <a href="/love/disclaimer"  id='monitor_link_326812'>免责声明</a>
             </li>
             <li class="divider-vertical_footer"></li>
 
@@ -131,9 +132,9 @@
               <!-- JiaThis Button BEGIN -->
               <div id="ckepop" class="jiathis_area clearfix share_area">
                 <span class="jiathis_txt">分享：</span>
-                <a class="jiathis_button_renren" style="float:left;"></a>
-                <a class="jiathis_button_douban" style="float:left;"></a>
-                <a class="jiathis_button_tsina" style="float:left;"></a>
+                <a class="jiathis_button_renren" style="float:left;"  id='monitor_link_326813'></a>
+                <a class="jiathis_button_douban" style="float:left;" id='monitor_link_326814'></a>
+                <a class="jiathis_button_tsina" style="float:left;" id='monitor_link_326815'></a>
                 <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
                 <!-- <a class="jiathis_counter_style"></a> -->
               </div>
@@ -175,6 +176,16 @@
         $('.wel_login').show();
         $('.unlogin').show();
         $('#layer').show();
+        CClicki[10008]._trackEvent({
+          type: 1,
+          labels: [
+            {"按钮名称": "登陆"}
+          ],
+          values: [
+            {"数量": 1}
+          ]
+        });
+        triggerEBConversion(326802);
       }
       ;
       function verify() {
