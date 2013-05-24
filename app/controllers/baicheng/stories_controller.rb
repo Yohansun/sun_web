@@ -137,15 +137,15 @@ class Baicheng::StoriesController < ApplicationController
     if params[:story_id] && params[:user_id]
       if check_storyuser(params)
         story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
-        render :js => "alert('预定成功!');"
+        render :js => "show_modal();"
       else
         user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
         if user.design_time + 15.days < Time.now
           user.design_time = Time.now
           user.save
-          render :js => "alert('时间过期重新预定!');"
+          render :js => "show_modal();"
         else
-          render :js => "alert('您已经预定过了!');"
+          render :js => "alert('您已点过一次，不能再次点击!');"
         end
       end
     else
