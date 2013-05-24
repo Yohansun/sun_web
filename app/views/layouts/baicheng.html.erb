@@ -55,9 +55,9 @@
 				<%- if current_user %>
 					<ul class="nav nav_userinfo pull-right">
 						<li class="pr user_name">
-							<a class="username_css" href="<%= sysinfo_index_path %>" target="_blank"><%= "#{current_user.display_name} #{ "(#{current_user.sys_msgs.baicheng.unread.size}) " if current_user.sys_msgs.baicheng.unread.size>0} "%></a>
+							<a class="username_css"  id='user_name_msg_tip' href="<%= sysinfo_index_path %>" target="_blank"><%= "#{current_user.display_name} #{ "(#{current_user.sys_msgs.baicheng.unread.size}) " if current_user.sys_msgs.baicheng.unread.size>0} "%></a>
                                                         <% if  current_user.sys_msgs.baicheng.unread.size>0%>
-                                                          <span class="system_info_tip"><em class="tip_arrow"></em><%= current_user.sys_msgs.baicheng.unread.size %>条系统消息</span>
+                                                          <span class="system_info_tip none" id='user_msg_tip'><em class="tip_arrow"></em><%= current_user.sys_msgs.baicheng.unread.size %>条系统消息</span>
                                                         <% end %>
 						</li>
 						<li><a href="<%= act_stories_path %>">查看我的活动主页</a></li>
@@ -133,6 +133,16 @@
 				$('.abs-center').hide();
 				$('#layer').hide();
 			});
+               
+						 
+              $('#user_name_msg_tip').hover(function(){
+                      $('#user_msg_tip').toggle().mouseenter(function(){
+                              $(this).show();
+                      }).mouseleave(function(){
+                              $(this).hide();
+                      });
+              });
+						 
 	   });
 		function show_login () {
 			$('.wel_login').show();
