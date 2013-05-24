@@ -10,6 +10,7 @@ class Baicheng::FashionModelController < ApplicationController
   end
   
   def show
+
   end
 
 end

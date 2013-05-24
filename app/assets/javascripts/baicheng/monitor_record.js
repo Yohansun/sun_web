@@ -160,6 +160,7 @@ function init_monitor_link_click() {
         });
          triggerEBConversion(326801);
     });
+
     $('#monitor_link_326802').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
@@ -172,6 +173,7 @@ function init_monitor_link_click() {
         });
          triggerEBConversion(326802);
     });
+
     $('#monitor_link_326803').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
