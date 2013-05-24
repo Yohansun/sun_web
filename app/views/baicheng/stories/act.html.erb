@@ -69,7 +69,7 @@
 							<div class="thumbnail nopadding">
 								<!-- <span class="list_tag list_tag_deal"></span> -->
 								<a href="<%= design_compete_path(design) %>" class="list_img_a">
-									<%= image_tag(design.cover_img.file.url(:baicheng_list)) %>
+									<%= image_tag(design.cover_img.file.url(:baicheng_list)) if design.cover_img.present? %>
 								</a>
 								<div class="works_tit">
 									<h5 class="nomargin"><a href="javascript:;"></a><%= design.title %></h5>

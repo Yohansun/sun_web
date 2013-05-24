@@ -48,15 +48,18 @@
 								<a href="javascript:;" class="pull-left">参与内容</a>
 							</span>
 						</h3>
-						立邦携手全国超过10000名专业家装公司和设计师，为您免费设计，打造您梦想的空间，让您全情投入刷新生活。
 						<ul>
 							<li>
 								<span>•</span>
-								<p>普通大众用户：可以发布在成长中经历或见证的关于家•刷新•爱情的美好故事或爱情宣言，上传需整体装修的新房房型图，并标明设计需求，即有机会免费征集多套定制设计作品。</p>
+								<p>立邦携手全国超过10000名专业家装公司和设计师，为您免费设计，打造您梦想的空间，让您全情投入刷新生活。</p>
 							</li>
 							<li>
-								<span>• 家装公司和设计师：</span>
-								<p style="margin-left:136px;">可以上传已有的设计作品（注意标注作品所在城市和楼盘信息）,参加专业类奖项评选；<br />也可以针对普通大众用户公布的房型图进行设计上传，参加活动类奖项评选，更有机会达成商业合作。</p>
+								<span>•</span>
+								<p>普通大众用户：可以发布在成长中经历或见证的关于家•刷新•爱情的美好故事或爱情宣言，上传需整体装修的新房房型图，并标明设计需求，即可免费征集多套定制设计作品。</p>
+							</li>
+							<li>
+								<span>•</span>
+								<p>家装公司和设计师：可以上传已有的设计作品（注意标注作品所在城市和楼盘信息,,参加专业类奖项评选;；也可以针对普通大众用户公布的房型图进行设计上传，参加活动类奖项评选，更有机会达成商业合作。</p>
 							</li>
 						</ul>
 					</div>
@@ -73,15 +76,15 @@
 							</li>
 							<li>
 								<span>•</span>
-								<p>普通大众用户发布的爱的宣言（故事）必须是本人的原创，不得有抄袭或剽窃他人文字、侵犯他人知识产权及其他合法权益的行为，否则责任自负。房型图需为整体待装修的<b>新房房型图</b>（局部翻新不包括在内），每套房型图最多获得<b>3位</b>设计师的免费创意。</p>
+								<p>普通大众用户发布的爱的宣言（故事）必须是本人的原创，不得有抄袭或剽窃他人文字、侵犯他人知识产权及其他合法权益的行为，否则责任自负。房型图需为整体待装修的新房房型图（局部翻新不包括在内），每套房型图最多获得3位设计师的免费创意。</p>
 							</li>
 							<li>
 								<span>•</span>
 								<p>家装公司和设计师参与活动上传的作品，必须是个人原创设计的作品，不能有抄袭或剽窃他人设计成果、侵犯他人知识产权及其他合法权益的行为，否则责任自负。</p>
 								<p class="font-italic fixie7">
-									对于上传的已有原创作品，需包含3-5张同一套室内设计的设计图纸（CAD图纸、手绘、3D效果图任选其一）或实际效果图。作品以图片（JPG、GIF、PNG或BMP格式均可）形式上传，单张图片大小不超过1M，且勿加任何水印。对于标注<b>立邦色号</b>或<b>艺术漆色号</b>的作品，评委会将重点优先考虑。另外，如填写设计故事，还可参加iColor刷新大奖的角逐。<br />
-									对于针对普通大众的房型图设计，以<b>创意方案</b>为主。可上传3张图纸：<b>一张平面图、一张主要立面图 和 一张效果图</b>即可。<br />
-									设计作品中不得出现推荐非立邦品牌的涂料产品，或对立邦产品进行诋毁、贬低的成分。
+									对于上传的已有原创作品，需包含3-5张同一套室内设计的设计图纸（CAD图纸、手绘、3D效果图任选其一）或实际效果图。作品以 图片（JPG、GIF、PNG或BMP格式均可）形式上传，单张图片大小不超过1M，且勿加任何水印。对于标注立邦色号或艺术漆色号的作品，评委会将重点优先考虑。另外，如填写设计故事，还可参加iColor刷新大奖的角逐。<br />
+									设计作品中不得出现推荐非立邦品牌的涂料产品，或对立邦产品进行诋毁、贬低的成分。<br />
+									对于针对普通大众的房型图设计，以创意方案为主.可上传3张图纸：一张平面图、一张主要立面图 和 一张效果图即可。
 								</p>
 							</li>
 							<li>
@@ -149,16 +152,7 @@
 								</li>
 							</ul>
 						</div>
-            <% if current_user %>
-              <% story = Story.where(user_id: current_user.id, is_save: true) %>
-              <%  if story.present? %>
-                <a href="javascript:alert('您已经上传过房型图！');" class="rules-public-btn" >我要装修</a>
-              <% else %>
-                <a href="<%= new_story_path %>" class="rules-public-btn" >我要装修</a>
-              <% end %>
-            <% else -%>
-              <%= link_to_function "我要装修", "show_login()",:class=>"rules-public-btn" %>
-            <% end -%>
+						<a href="#" class="rules-public-btn">我要装修</a>
 					</div>
 					<div class="rules-designers hide">
 						<h1>活动内容 针对大众用户</h1>
@@ -183,7 +177,7 @@
 									<span>•</span>
 									<p>
 										<strong>上传作品</strong><br />
-										方式一：在<a href="<%=stories_path%>">我能设计</a>频道挑选普通大众上传的房型图，下载、设计后提交，参与活动类奖项评选（iColor刷新大奖）<br />
+										方式一：在<a href="3.html">我能设计</a>频道挑选普通大众上传的房型图，下载、设计后提交，参与活动类奖项评选（iColor刷新大奖）<br />
 										方式二：上传本人已有的原创设计参与专业类奖项评选<b>（如填写设计故事或业主感言更可参加iColor刷新大奖的评选）</b>
 									</p>
 								</li>
@@ -196,19 +190,13 @@
 								</li>
 							</ul>
 						</div>
-						<% if current_user %>
-							<% unless current_user.common_user? %>
-						    <a href="<%=new_user_design_path(current_user)%>" class="rules-designers-btn">我要设计</a>
-              <% end -%>
-            <% else -%>
-              <%= link_to_function "我要设计", "show_login()", :class=>"rules-designers-btn" %>
-            <% end -%>
+						<a href="#" class="rules-designers-btn">我要设计</a>
 					</div>
 				</div><!-- rules-contents -->
 				<div class="rules-awards mt30 clearfix hide">
-					<img src="<%=asset_path 'baicheng/rules/banner.jpg'%>">
+					<img src="images/rules/banner.jpg">
 					<dl style="width:51%;">
-						<dt><img src="<%=asset_path 'baicheng/rules/title3_1.jpg'%>"></dt>
+						<dt><img src="images/rules/title3_1.jpg"></dt>
 						<dd class="awards">
 							<h3>iColor刷新大奖</h3>
 							<p>• 针对大众新房房型图所做的房型图设计<br>• 上传原创设计作品<span class="cr">（需填写设计故事或业主感言）</span></p>
@@ -249,7 +237,7 @@
 						</dd>
 					</dl style="width:49%;">
 					<dl>
-						<dt><img src="<%=asset_path 'baicheng/rules/title3_2.jpg'%>"></dt>
+						<dt><img src="images/rules/title3_2.jpg"></dt>
 						<dd class="awards awards_eight">
 							<h3>iColor刷新大奖</h3>
 							<p>• 发布爱的宣言+填写装修需求+上传房型图<br />
