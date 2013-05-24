@@ -18,7 +18,6 @@
         var h = document.getElementsByTagName('script')[0];
         h.parentNode.insertBefore(c, h);
       })();
-
       function triggerEBConversion(ebConversionID)
       {
         try
@@ -33,11 +32,8 @@
         catch (e) {
         }
       }
-
-
     </script>
-
-    <%= yield :head %>
+<%= yield :head %>
   </head>
   <body>
     <div class="navbar navbar-fixed-top navbar_top">
@@ -161,8 +157,10 @@
           $('.abs-center').hide();
           $('#layer').hide();
         });
-
-
+        $('.drophover_toggle').parent().hover(function(){
+          console.log($(this))
+          $(this).find('.drophover_menu').toggle();
+        });
         $('#user_name_msg_tip').hover(function() {
           $('#user_msg_tip').toggle().mouseenter(function() {
             $(this).show();
@@ -170,7 +168,6 @@
             $(this).hide();
           });
         });
-
       });
       function show_login() {
         $('.wel_login').show();
@@ -186,24 +183,23 @@
           ]
         });
         triggerEBConversion(326802);
-      }
-      ;
+      };
       function verify() {
-<% if current_user %>
-  <% unless current_user.common_user? %>
-            window.location = '<%= stories_path %>'
-  <% else %>
-    <% story = Story.where(user_id: current_user.id, is_save: true) %>
-    <%  if story.present? %>
-              alert('您已经上传过房型图！');
-    <% else %>
-              window.location = '<%= new_story_path %>'
-    <% end %>
-  <% end %>
-<% else -%>
-          show_login();
-<% end -%>
-      }
+        <% if current_user %>
+          <% unless current_user.common_user? %>
+                    window.location = '<%= stories_path %>'
+          <% else %>
+            <% story = Story.where(user_id: current_user.id, is_save: true) %>
+            <%  if story.present? %>
+                      alert('您已经上传过房型图！');
+            <% else %>
+                      window.location = '<%= new_story_path %>'
+            <% end %>
+          <% end %>
+        <% else -%>
+                  show_login();
+        <% end -%>
+              }
     </script>
   </body>
 </html>
