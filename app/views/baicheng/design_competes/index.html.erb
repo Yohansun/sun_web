@@ -47,7 +47,7 @@
 					<%- @designs.each do |design| %>
 						<li class="span2">
 							<div class="thumbnail nopadding">
-								<span class="<%= "list_tag list_tag_deal" if design.story %>"></span>
+								<span class="<%= "list_tag list_tag_deal" if false %>"></span>
 								<%= link_to image_tag(design.cover_img.try(:file).try(:url), :size =>'203x146'), design_compete_path(design), :class => 'list_img_a'  %>
 								<div class="works_tit">
 									<h5 class="nomargin">

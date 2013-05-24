@@ -20,5 +20,10 @@ class SysMsg < ActiveRecord::Base
   default_scope :order => "created_at DESC"
   
   scope :baicheng,->{where(reply_type: :baicheng)}
-
+  scope :unread,->{where(status: 0)}
+  
+  def self.send_to user,msg,others={}
+    SysMsg.create({:content => msg,:status => SysMsg::Status[0], :reply_name => "系统",
+          :user_id => user.id}.merge(others) )
+  end
 end
