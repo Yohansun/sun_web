@@ -24,15 +24,15 @@
 						<li class="divider-vertical_nav"></li>
 						<li <% if controller_name == "stories" && action_name == "new"%>class="active"<% end %>>
 							<% if current_user %>
-                <% story = Story.where(user_id: current_user.id, is_save: true) %>
-                <%  if story.present? %>
-  						    <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
-                <% else %>
-                  <a href="<%= new_story_path %>">我要装修</a>
-                <% end %>
-              <% else -%>
-                <%= link_to_function "我要装修", "show_login()" %>
-              <% end -%>
+								<% story = Story.where(user_id: current_user.id, is_save: true) %>
+								<%  if story.present? %>
+										<a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
+								<% else %>
+								  <a href="<%= new_story_path %>">我要装修</a>
+								<% end %>
+						  <% else -%>
+								<%= link_to_function "我要装修", "show_login()" %>
+						  <% end -%>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="<%= 'active' if controller_name == 'stories' && %w{index show}.include?(action_name) %>">
@@ -72,14 +72,14 @@
 						<li class="divider-vertical"></li>
 
 						<li>
-							<a href="/users/sign_up"><i class="icon-refresh_register"></i>注册</a>
+							<a href="/users/sign_up?return_to=love"><i class="icon-refresh_register"></i>注册</a>
 						</li>
 					</ul> 
 				<%- end %><!-- right nav end -->
 			</div>
 		</div>
 	</div>
- 	<%= yield :body_head %>
+	<%= yield :body_head %>
 	<%= yield %>
 	<div class="navbar navbar_footer nomargin">
 		<div class="navbar-inner nopadding">
@@ -125,11 +125,11 @@
 	<script type="text/javascript">
 		// swfobject.registerObject("FlashID");
 		$(function(){
-	    $('.close-btn').click(function(){
+		$('.close-btn').click(function(){
 				$('.abs-center').hide();
 				$('#layer').hide();
 			});
-	    $('.e-pop-btn').click(function(){
+		$('.e-pop-btn').click(function(){
 				$('.abs-center').hide();
 				$('#layer').hide();
 			});
@@ -141,15 +141,19 @@
 		};
 		function verify(){
 			<% if current_user %>
-        <% story = Story.where(user_id: current_user.id, is_save: true) %>
-        <%  if story.present? %>
-          alert('您已经上传过房型图！');
-        <% else %>
-          window.location='<%= new_story_path %>'
-        <% end %>
-      <% else -%>
-        show_login();
-      <% end -%>
+				<% unless current_user.common_user? %>
+					window.location='<%= stories_path %>'
+				<% else %>
+					<% story = Story.where(user_id: current_user.id, is_save: true) %>
+					<%  if story.present? %>
+					  alert('您已经上传过房型图！');
+					<% else %>
+					  window.location='<%= new_story_path %>'
+					<% end %>
+				<% end %>
+			<% else -%>
+					show_login();
+		  <% end -%>
 		}
 	</script>
 </body>

@@ -57,7 +57,7 @@ class Baicheng::StoriesController < ApplicationController
         story = Story.new(params[:story])
       end
       story.user_id = current_user.id
-      story.budget =  params[:fee].join(",") if params[:fee].present?
+      story.budget =  params[:fee] if params[:fee].present?
       if story.save
         tags.each do |tag|
           StoryImageTag.create(image_library_category_id: tag, story_image_id: story.id)
@@ -80,7 +80,7 @@ class Baicheng::StoriesController < ApplicationController
       tags += params[:room] if params[:room].present?
       story = Story.find(params[:stroy_id])
       story.user_id = current_user.id
-      story.budget =  params[:fee].join(",") if params[:fee].present?
+      story.budget =  params[:fee] if params[:fee].present?
       if story.save
         sit = StoryImageTag.where(story_image_id: story.id)
         if sit.present?
@@ -109,26 +109,11 @@ class Baicheng::StoriesController < ApplicationController
     story_image.story_id = params[:story_id]
     story_image.is_cover = true
     if story_image.save  
+      @story = Story.find params[:story_id]
+      @story.is_save = true
+      @story.save
     else
       render :image_new
-    end
-  end
-
-  def update_title
-    if params[:title].present? 
-      title = params[:title]
-    else
-      title = current_user.name ? current_user.name : current_user.username
-    end
-    content = params[:content].present? ? params[:content] : "美味的佳肴，清新的空气，亲密的家人……生活的每个细节都散发着幸福的味道。因爱之名，刷新生活！我要让家人更健康更舒适更快乐的生活！"
-    story = Story.find(params[:stroy_id])
-    story.title = title
-    story.content = content
-    story.is_save = true
-    if story.save
-
-    else
-      render :update_image
     end
   end
 

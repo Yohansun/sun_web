@@ -1,28 +1,14 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "baicheng/steps.css" %>
 <%- end %>
-<div class="container-fluid step3">
+<div class="container-fluid step4 text-center">
 	<div class="container">
-		<h1>step3 发布爱的宣言</h1>
-		<%= form_tag(update_title_stories_path, :class=>"refresh-form ft12") do %>
-			<div class="refresh-control">
-				<label>主题</label>
-				<div class="form-article">
-					<input type="text" maxlength="10" class="input-block-level" name="title"placeholder="<%=current_user.name ? current_user.name : current_user.username%>的房型图">
-					<span class="helper-text">不超过<b>10</b>字</span>
-				</div>
-			</div>
-			<div class="refresh-control">
-				<label style="margin-top:0;">正文</label>
-				<div class="form-article">
-					<textarea data-total="30" name="content" placeholder="美味的佳肴，清新的空气，亲密的家人……生活的每个细节都散发着幸福的味道。因爱之名，刷新生活！我要让家人更健康更舒适更快乐的生活！"></textarea>
-				</div>
-			</div>
-			<p class="text-right">
-				<input type="hidden" name="stroy_id" value="<%=params[:story_id]%>">
-				<a href="<%=image_new_story_path(params[:story_id])%>" class="steps-back pull-left">返回</a>
-				<input type="submit" class="step3-submit" value="">
-			</p>
-    <% end %>
+		<h1>您的家装需求已提交完成！</h1>
+		<p>
+			立邦团队将于<b>3</b>天内与您联系确认以上信息，<br />
+			你将获取多家专业家装公司/设计师提交的家装创意方案，<br />
+			因爱之名 刷新生活！
+		</p>
+		<a href="<%=story_path(@story.id)%>" class="step4-btn">关闭</a>
 	</div>
 </div>
