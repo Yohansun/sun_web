@@ -18,7 +18,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        onclick = "triggerEBConversion(326789)";
+        triggerEBConversion(326789);
     });
 
     $('#monitor_link_326790').click(function() {
@@ -43,7 +43,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        onclick = "triggerEBConversion(326791)";
+        triggerEBConversion(326791);
     });
 
     $('#monitor_link_326792').click(function() {
@@ -56,7 +56,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        onclick = "triggerEBConversion(326792)";
+        triggerEBConversion(326792);
     });
 
     $('#monitor_link_326793').click(function() {
@@ -69,7 +69,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        onclick = "triggerEBConversion(326793)";
+        triggerEBConversion(326793);
     });
 
     $('#monitor_link_326794').click(function() {
@@ -82,7 +82,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        onclick = "triggerEBConversion(326794)";
+        triggerEBConversion(326794);
     });
 
     $('#monitor_link_326796').click(function() {

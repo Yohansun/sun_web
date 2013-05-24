@@ -43,7 +43,7 @@
               <!-- Carousel items -->
               <div class="carousel-inner">
                 <%- @design.design_images.each_with_index do |design,index| %>
-                  <div class="<%= 'active' if index==0 %> item">
+                  <div class="<%= 'active' if index==0 %> item" style='text-align:center;width:670px;height:353px;display:table-cell;vertical-align:middle;'>
                     <a href="#">
                       <%= image_tag design.file.url(:design_work_slide) %>
 
