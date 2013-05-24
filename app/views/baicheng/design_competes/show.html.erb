@@ -34,7 +34,7 @@
   </script>
 <%- end %>
 <div class="container-fluid">
-  <div class="design_works pad_t60">O
+  <div class="design_works pad_t60">
     <div class="wrapper pr pad_b40">
       <div class="redline_b4">
         <div class="clearfix pad_h25">
@@ -43,7 +43,7 @@
               <!-- Carousel items -->
               <div class="carousel-inner">
                 <%- @design.design_images.each_with_index do |design,index| %>
-                  <div class="<%= 'active' if index==0 %> item" style='text-align:center;width:670px;height:353px;display:table-cell;vertical-align:middle;'>
+                  <div class="<%= 'active' if index==0 %> item">
                     <a href="#">
                       <%= image_tag design.file.url(:design_work_slide) %>
 
