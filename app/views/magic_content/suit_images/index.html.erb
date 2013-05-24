@@ -115,10 +115,10 @@
               <%# if can? :set_details, :details %>
                 <%#= link_to '设置名称', "javascript:void(0)", :class => 'set_name', :"data-id" => image.id %>
               <%# end %>
-              <% if can? :settings, :tab %>
+              <% if can? :suit_settings, :tab %>
                 <%= link_to '管理套图', main_app.image_libraries_path(:keywords => image.imageable_id, :genre => "imageable_id") %>
               <% end %>
-              <% if can? :settings, :tab %>
+              <% if can? :suit_settings, :tab %>
                 <%= link_to '设置标签', main_app.suit_image_categories_path(image) %>
               <% end %>
               <%= render partial: 'name', :locals => { :image => image }%>
