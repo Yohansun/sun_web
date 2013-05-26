@@ -20,15 +20,15 @@ class Baicheng::StoriesController < ApplicationController
     @search = Story.search(params[:search])
     @stories = @search.where(:is_save => true)
     if params[:sort].present?
-      case params[:sort]
-      when 'hot'
-        @search_sort = @search.order("stories.designs_count")
-      when 'new_chance'
-        @search_sort = @search.order("stories.designs_count desc")
-      else
-        @search_sort = @search
-      end
-      @stories = @search_sort.where(:is_save => true)
+        case params[:sort]
+        when 'hot'
+          @search_sort = @search.order("find_in_set(stories.designs_count,'2,1,0,3') asc")
+        when 'new_chance'
+          @search_sort = @search.order("stories.designs_count desc")
+        else
+          @search_sort = @search
+        end
+        @stories = @search_sort.where(:is_save => true)
     end
     @stories = @stories.order("stories.created_at desc").page(params[:page]).per(24)
   end
