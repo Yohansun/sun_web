@@ -8,7 +8,7 @@
    <meta name="keywords" content="<%= @key_words ||'百城' %>">
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
-    <%= javascript_include_tag "baicheng","baicheng/LinkageSelect/LinkageSelect" %>
+    <%= javascript_include_tag "baicheng" %>
     <script type='text/javascript'>
       (function() {
         var c = document.createElement('script');
@@ -145,7 +145,7 @@
     <%= render partial: 'baicheng/welcome/login' %>
     <%= yield :body_tail %>
     <%= yield :tail %>
-    <%= javascript_include_tag "/location.js" %>
+    <%= javascript_include_tag "/location.js","LinkageSelect.js" %>
     <script type="text/javascript">
       // swfobject.registerObject("FlashID");
       $(function() {

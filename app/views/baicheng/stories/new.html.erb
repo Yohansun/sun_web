@@ -38,7 +38,6 @@ CClicki[10008]._trackEvent({
 <%- end %>
 
 <% content_for :tail do -%>
-  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
   <script type="text/javascript">
   	$(function(){
   		(function($){
@@ -61,9 +60,9 @@ CClicki[10008]._trackEvent({
 
   		if(typeof data != 'undefined'){
   			var sel = new LinkageSelect({data : data});
-  			sel.bind('.linkageseclet .level_1','<%=@story.area.try(:parent).try(:parent).try(:id) %>');
-  			sel.bind('.linkageseclet .level_2','<%=@story.area.try(:parent).try(:id) %>');
-  			sel.bind('.linkageseclet .level_3','<%=@story.try(:area_id) %>');
+  			sel.bind('.linkageseclet .level_1','<%=@story.area.try(:parent).try(:parent).try(:id) %>', '省/直辖市');
+  			sel.bind('.linkageseclet .level_2','<%=@story.area.try(:parent).try(:id) %>', '城市');
+  			sel.bind('.linkageseclet .level_3','<%=@story.try(:area_id) %>', '区');
   		}
   	});
   	function form_valid(){

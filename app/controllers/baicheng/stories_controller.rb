@@ -2,6 +2,7 @@
 require 'zip/zip'
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
+  
   def index
     @title = "我来设计_挑选感兴趣房型图-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
     @description = "立邦icolor因爱之名刷新生活 我能设计活动，装修设计师上传设计作品，挑选感兴趣的房型图，获得更多装修需求机会。"
