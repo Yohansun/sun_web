@@ -43,7 +43,7 @@ CClicki[10008]._trackEvent({
   		(function($){
         $('.refresh-form').on('click', '.upload2013-btn', function(){
          $(this).toggleClass('upload2013-btn-down').next().slideToggle(200)
-         .closest('.refresh-control').siblings().find('.clear').slideUp(200);
+       //   .closest('.refresh-control').siblings().find('.clear').slideUp(200);
         });
   			$('textarea').bind('keydown keyup', function(){
   				var $this = $(this);
@@ -171,7 +171,7 @@ CClicki[10008]._trackEvent({
 				<label>期望风格<b>*</b></label>
 				<div class="form-article upload2013-toggle checkbox2013">
 					<a href="javascript:;" class="upload2013-btn pa"></a>
-					<div class="clear none">
+					<div class="clear">
 						<% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
               <label>
                 <%= check_box_tag "style[]", img_lib_cat.id %><%=img_lib_cat.title%>
@@ -184,7 +184,7 @@ CClicki[10008]._trackEvent({
 				<label>面积<b>*</b></label>
 				<div class="form-article upload2013-toggle checkbox2013">
 					<a href="javascript:;" class="upload2013-btn pa"></a>
-					<div class="clear none">
+					<div class="clear">
 						<% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
               <label>
                  <%=check_box_tag "acreage[]",img_lib_cat.id%><%=img_lib_cat.title%>
@@ -197,7 +197,7 @@ CClicki[10008]._trackEvent({
 				<label>重点设计功能区<b>*</b></label>
 				<div class="form-article upload2013-toggle checkbox2013">
 					<a href="javascript:;" class="upload2013-btn pa"></a>
-					<div class="clear none">
+					<div class="clear">
 						<% ImageLibraryCategory.where("id in (83,84,85,86,87,90,91,89)").each do |img_lib_cat| %>
               <label>
                   <%=check_box_tag "room[]",img_lib_cat.id%><%=img_lib_cat.title%>
@@ -210,7 +210,7 @@ CClicki[10008]._trackEvent({
 				<label>装修预算<b>*</b></label>
 				<div class="form-article upload2013-toggle checkbox2013">
 					<a href="javascript:;" class="upload2013-btn pa"></a>
-					<div class="clear none">
+					<div class="clear">
 						<label><input id="fee" name="fee" type="radio" value="5万-8万">5万-8万</label>
 						<label><input id="fee" name="fee" type="radio" value="8万-15万">8万-15万</label>
 						<label><input id="fee" name="fee" type="radio" value="15万-30万">15万-30万</label>
