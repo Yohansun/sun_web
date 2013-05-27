@@ -40,6 +40,21 @@ CClicki[10008]._trackEvent({
 <% content_for :tail do -%>
   <script type="text/javascript">
   	$(function(){
+      // textarea default value
+    (function($){
+      var text = $('.refresh-form textarea').get(0),
+        value = '我想要一个公主房，梦幻粉色调性。\n另外，可以放下50双鞋子、100条裙子、20顶帽子！';
+      text.value = value;
+      text.onfocus = function(){
+        var val = this.value;
+        if(val == value) this.value = '';
+      };
+      text.onblur = function(){
+        var val = this.value;
+        if(val === '') this.value = value;
+      };
+    }(jQuery));
+
   		(function($){
         $('.refresh-form').on('click', '.upload2013-btn', function(){
          $(this).toggleClass('upload2013-btn-down').next().slideToggle(200)
@@ -73,9 +88,9 @@ CClicki[10008]._trackEvent({
   	story_area_id = $('#story_area_id').val();
   	story_property_name = $('#story_property_name').val();
   	apartment = $("[name='apartment']:checked");
-    style = $("[name='style[]']:checked");
+    style = $("[name='style']:checked");
     acreage = $("[name='acreage[]']:checked");
-    room = $("[name='room[]']:checked");
+    room = $("[name='room']:checked");
     fee = $("[name='fee']:checked");
 
     
@@ -174,7 +189,7 @@ CClicki[10008]._trackEvent({
 					<div class="clear">
 						<% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
               <label>
-                <%= check_box_tag "style[]", img_lib_cat.id %><%=img_lib_cat.title%>
+                <%= radio_button_tag "style", img_lib_cat.id %><%=img_lib_cat.title%>
               </label>
             <% end %>
 					</div>
@@ -200,7 +215,7 @@ CClicki[10008]._trackEvent({
 					<div class="clear">
 						<% ImageLibraryCategory.where("id in (83,84,85,86,87,90,91,89)").each do |img_lib_cat| %>
               <label>
-                  <%=check_box_tag "room[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <%=radio_button_tag "room",img_lib_cat.id%><%=img_lib_cat.title%>
               </label>
             <% end %>
 					</div>
@@ -222,8 +237,8 @@ CClicki[10008]._trackEvent({
 			<div class="refresh-control">
 				<label style="margin-top:0;">个性需求</label>
 				<div class="form-article">
-          <%= f.text_area :demand, "data-total"=>"40", :placeholder=>"我喜欢简单的生活，装修不需要很华丽，但一定要很舒服！" -%>
-					<span class="helper-text">还可以输入<b>40</b>字</span>
+          <%= f.text_area :demand, "data-total"=>"100" -%>
+					<span class="helper-text">还可以输入<b>100</b>字</span>
 				</div>
 			</div>
 			<p class="text-center cr">

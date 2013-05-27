@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
 
   belongs_to :design
 
-  after_create :sync_baicheng_event
+  after_update :sync_baicheng_event
 
   def cover_img
   	self.story_images.where(is_cover: 1).try(:first)
@@ -40,6 +40,10 @@ class Story < ActiveRecord::Base
   end
 
   def sync_baicheng_event
-    BaichengEvent.create(eventable_id: self.id, eventable_type: Story.name, area_id: self.area_id)
+    if self.is_save.present? && self.is_save == true
+      name = self.user.name.present? ? self.user.name : self.user.username
+      SysMsg.send_to(self.user,"您已成功发表了 #{name}的房型图。",
+          {:reply_type => "baicheng",:re_url =>"/love/stories/#{self.id}"})
+    end
   end
 end
