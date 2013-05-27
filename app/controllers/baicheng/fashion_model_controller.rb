@@ -10,7 +10,15 @@ class Baicheng::FashionModelController < ApplicationController
   end
   
   def show
-
+    @title = "时尚榜样_装修者评论平台-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+    @description = "立邦icolor因爱之名刷新生活 装修者交流平台，可以发表设计需求，装修心得，发布爱情故事或爱的宣言，查看留言信息，查看设计师设计的作品。"
+    @key_words = '装修者,装修心得,爱情故事,爱的宣言'
+    
+    if params[:id]=='native'
+      @title = "时尚榜样_装修设计师评论平台-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+      @description = "立邦icolor因爱之名刷新生活 装修设计师交流平台，可以收到对装修设计作品的点评评论，查看留言和回复。"
+      @key_words = '立邦刷新生活,装修设计师,装修点评,装修心得'
+    end
   end
 
 end
