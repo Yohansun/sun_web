@@ -119,4 +119,20 @@ class ApiController < ApplicationController
       redirect_to "/users/auth/kaixin"
     end
   end
+
+  def baicheng_login
+    session[:baigcheng_login] = 'baicheng'
+    if params[:type] == "weibo"
+      redirect_to "/users/auth/weibo"
+    end
+    if params[:type] == "qq_connect"
+      redirect_to "/users/auth/qq_connect"
+    end
+    if params[:type] == "renren"
+      redirect_to "/users/auth/renren"
+    end
+    if params[:type] == "kaixin"
+      redirect_to "/users/auth/kaixin"
+    end
+  end
 end

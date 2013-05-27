@@ -89,7 +89,7 @@ CClicki[10008]._trackEvent({
   	story_property_name = $('#story_property_name').val();
   	apartment = $("[name='apartment']:checked");
     style = $("[name='style']:checked");
-    acreage = $("[name='acreage[]']:checked");
+    acreage = $("[name='acreage']:checked");
     room = $("[name='room']:checked");
     fee = $("[name='fee']:checked");
 
@@ -202,7 +202,7 @@ CClicki[10008]._trackEvent({
 					<div class="clear">
 						<% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
               <label>
-                 <%=check_box_tag "acreage[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                 <%=radio_button_tag "acreage",img_lib_cat.id%><%=img_lib_cat.title%>
               </label>
             <% end %>
 					</div>

@@ -69,6 +69,7 @@ Icolor::Application.routes.draw do
 
   get '/shares' => 'shares#index'
 
+  get "/api/baicheng_login" => "api#baicheng_login"
   get "/api/external_login" => "api#external_login"
   post "/api/login" => "api#login"
   post "/api/create_user" => "api#create_user"

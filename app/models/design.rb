@@ -43,6 +43,10 @@ class Design < ActiveRecord::Base
     design_styles.map(&:title).join(',')  
   end  
 
+  def design_style_names  
+    design_styles.map(&:title).join(',')  
+  end  
+
   #更新用户上传作品数色号（权重）。片区快查用
   def update_user_design_code_count
     unless self.recommend_color_category1.blank?

@@ -41,7 +41,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         else
           if request.env['omniauth.origin'].match %r(community)
             current_user.user_tokens.find_by_provider(provider).update_attribute :is_binding, true #更新社区绑定状态
-            redirect_to request.env['omniauth.origin'] #设置社区绑定授权后的返回页面
+            if session[:baigcheng_login].present?
+              redirect_to baicheng_root_path
+            else
+              redirect_to request.env['omniauth.origin'] #设置社区绑定授权后的返回页面
+            end
           end
         end
         return
@@ -60,7 +64,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if session[:api_login].present?
             redirect_to "/icolormobile/icolor/index.php/Users/improveinfo/id/#{authentication.user.id}"
           else
-            sign_in_and_redirect(:user, authentication.user)
+            if session[:baigcheng_login].present?
+              sign_in(:user, authentication.user)
+              redirect_to baicheng_root_path
+            else
+              sign_in_and_redirect(:user, authentication.user)
+            end
           end
           return
         else
@@ -79,7 +88,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{user.id}/username/#{user.username}"
             else
               sign_in(:user, user)
-              redirect_to stored_location_for(user)
+              if session[:baigcheng_login].present?
+                redirect_to baicheng_root_path
+              else
+                redirect_to stored_location_for(user)
+              end
             end
             return
           else
@@ -87,7 +100,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             if session[:api_login].present?
               redirect_to "/icolormobile/icolor/index.php/Register/login"
             else
-              redirect_to new_user_registration_url
+              if session[:baigcheng_login].present?
+                redirect_to baicheng_root_path
+              else
+                redirect_to new_user_registration_url
+              end
             end
             return
           end
