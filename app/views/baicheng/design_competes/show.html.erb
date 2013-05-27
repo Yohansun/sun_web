@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-  <%= javascript_include_tag "jquery.slider", "main" %>
+  <%= javascript_include_tag "jquery.slider"%>
   <script type="text/javascript">
     $(function() {
       $(".vote_btn_story").click(function() {
@@ -64,7 +64,7 @@
               <span class="btns btns_small btn_down">
                 <span>
                   <%= link_to votes_path(:voteable_id => @design.id, :voteable_type => "Design"),remote: true,method: 'post',title: '' do %>
-                    <i class='i_icon i_icon_medium icon_like'></i> <abbr class='votes_countre<%= @design.id %> '><%= @design.votes_count %> </abbr>
+                    <i class='i_icon i_icon_medium icon_like'></i> <abbr class='votes_count<%= @design.id %> '><%= @design.votes_count %> </abbr>
                   <% end %>
                   <a href="#comments"><i class="i_icon i_icon_medium icon_review"></i><%= @design.comments.count %></a>
                 </span>
@@ -73,7 +73,7 @@
             <div class="btn_group btns_absolute_two">
               <%- if current_user %>
   <%#= link_to "收藏", user_collects_path(current_user,:story_id =>@story_id), :remote => true, method: :post, :class =>"btns btns_small btn_down nomargin i_icon i_icon_medium icon_collect" %>
-                <a class="btns btns_small btn_down nomargin" data-method="post" data-remote="true" href="<%= user_collects_path(current_user,design_id: @design) %>">
+                <a class="btns btns_small btn_down nomargin" data-method="post" data-remote="true" href="<%= user_collects_path(current_user,designs_id: @design) %>">
                   <span><i class="i_icon i_icon_medium icon_collect"></i>收藏</span>
                 </a>
               <%- else %>
@@ -99,12 +99,12 @@
               <span class="show"><strong>设计师：<%= @design.user.try(:username) %></strong></span>
               <span class="show"><strong>设计风格：<%= @design.design_styles.first.try(:title) %></strong></span>
               <span class="show"><strong>楼盘名称：<%= @design.try(:property_name) %></strong></span>
-              <span class="show"><strong>楼盘所在地：<%= @design.city_name %></strong></span>
+              <span class="show"><strong>楼盘所在地：<%= @design.location %></strong></span>
             </p>
             <div>
               <!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
               <%-if current_user%>
-                <a href="<%= user_asks_path(@design.user)%>" class="design_btn ask_btn" id='monitor_link_326836'></a>
+                <a href="<%= user_asks_path(@design.user)%>" target="_blank" class="design_btn ask_btn" id='monitor_link_326836'></a>
               <%- else %>
                 <a href="javascript:show_login();" class="design_btn ask_btn"></a>
               <%-end %>
