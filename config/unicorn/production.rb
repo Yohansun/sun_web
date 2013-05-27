@@ -6,7 +6,7 @@
 app_path = "/home/www/rails/icolor/current"
 
 # Set unicorn options
-worker_processes 2
+worker_processes 15
 preload_app true
 timeout 180
 listen "127.0.0.1:3005"
