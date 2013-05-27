@@ -43,7 +43,7 @@
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="<%= 'active' if controller_name == 'welcome' %>">
-							<%= link_to "首页", baicheng_root_path %>
+                  <%= link_to "首页", baicheng_root_path,id: 'monitor_link_326789' %>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li <% if controller_name == "stories" && action_name == "new"%>class="active"<% end %>>
@@ -52,31 +52,31 @@
                 <%  if story.present? %>
   						    <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
                 <% else %>
-                  <a href="<%= new_story_path %>">我要装修</a>
+                      <a href="<%= new_story_path %>" id='monitor_link_326790'>我要装修</a>
                 <% end %>
               <% else -%>
                 <%= link_to_function "我要装修", "show_login()" %>
               <% end -%>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="<%= 'active ' if controller_name == 'stories' && %w{index show}.include?(action_name) %>">
-							<%= link_to "我能设计", stories_path %>
+                <li class="<%= 'active' if controller_name == 'stories' && %w{index show}.include?(action_name) %>">
+                  <%= link_to "我来设计", stories_path,id: 'monitor_link_326791' %>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li  class="<%= 'active ' if controller_name == 'design_competes' %>">
-							<a href="/love/design_competes">设计作品大比拼</a>
+                <li  class="<%= 'active' if controller_name == 'design_competes' %>">
+                  <a href="/love/design_competes" id='monitor_link_326792'>设计作品大比拼</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
 						<li class="<%= 'active ' if controller_name == 'fashion_model' %> pr">
-							<a href="<%= fashion_model_path("foreign") %>" class="drophover_toggle" >时尚榜样</a>
+							<a href="<%= fashion_model_path("foreign") %>" class="drophover_toggle" id='monitor_link_326793'>时尚榜样</a>
 							<ul class="drophover_menu hide">
 								<li><a href="<%= fashion_model_path("foreign") %>" class="<%= 'active' if params[:id] == 'foreign' %>">Edward Davinson</a></li>
-								<li><a href="<%= fashion_model_path("native") %>" class="<%= 'active' if params[:id] == 'native' %>">崔睿</a></li>
+								<li><a href="<%= fashion_model_path("native") %>" class="<%= 'active' if params[:id] == 'native' %>" id='monitor_link_326794' >崔睿</a></li>
 							</ul>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li <% if controller_name == "actives " && action_name == "index"%>class="active "<% end %>>
-							<a href="<%=actives_path%>">活动章程及说明</a>
+                <li <% if controller_name == "actives" && action_name == "index"%>class="active"<% end %>>
+                  <a href="<%=actives_path%>" id='monitor_link_326795'>活动章程及说明</a>
 						</li>
 					</ul>
 				</div>
@@ -88,9 +88,9 @@
                 <span class="system_info_tip none" id='user_msg_tip'><em class="tip_arrow"></em><%= current_user.sys_msgs.baicheng.unread.size %>条系统消息</span>
               <% end %>
             </li>
-            <li><a href="<%= act_stories_path %>">查看我的活动主页</a></li>
+                <li><a href="<%= act_stories_path %>" id='monitor_link_326809'>查看我的活动主页</a></li>
             <li class="divider-vertical_dot"></li>
-            <li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
+                <li><%= link_to '退出', destroy_user_session_path, :method => :delete ,id: 'monitor_link_326808'%></li>
           </ul>
         <%- else %>
           <ul class="nav pull-right">
@@ -100,7 +100,7 @@
             <li class="divider-vertical"></li>
 
             <li>
-              <a href="/users/sign_up?return_to=love"><i class="icon-refresh_register"></i>注册</a>
+                  <a href="/users/sign_up?return_to=love" id='monitor_link_326803'><i class="icon-refresh_register"></i>注册</a>
             </li>
           </ul> 
         <%- end %><!-- right nav end -->
