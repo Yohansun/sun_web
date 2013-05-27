@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><%= @title || '百城' %></title>  
+  <title><%= @title || '因爱之名 刷新生活' %></title>  
   
-  <meta name="description" content="<%= @description ||'百城' %>" />  
-   <meta name="keywords" content="<%= @key_words ||'百城' %>">
+  <meta name="description" content="<%= @description ||'因爱之名 刷新生活' %>" />  
+   <meta name="keywords" content="<%= @key_words ||'因爱之名 刷新生活' %>">
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
     <%= javascript_include_tag "baicheng" %>
@@ -39,7 +39,7 @@
 	<div class="navbar navbar-fixed-top navbar_top">
 		<div class="navbar-inner">
 			<div class="container">
-				<img alt="logo" class="brand" src="<%=asset_path 'baicheng/logo.jpg'%>">
+        <a class="brand" href="<%= root_path %>"><img alt="iColor" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="<%= 'active' if controller_name == 'welcome' %>">
@@ -112,7 +112,7 @@
     <div class="navbar navbar_footer nomargin">
       <div class="navbar-inner nopadding">
         <div class="container">
-          <a class="brand" href="<%= root_path %>"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
+          <a class="brand" href="http://shop.nipponpaint.com.cn" target="_blank"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
           <p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
           <ul class="nav pull-right">
             <li>

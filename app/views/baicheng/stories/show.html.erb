@@ -47,7 +47,6 @@
 					<div class="w670 pull-left">
 						<div style="text-align:center;width:670px;height:353px;display:table-cell;vertical-align:middle;font-size:308px;">
 							<%= image_tag(@story_image.try(:file).try(:url, :slide)) %>
-							<%#= image_tag 'baicheng/mydesign/design_in_img.jpg' %>
 						</div>
 					</div>
 					<div class="w190 pull-left design_intro pr">
@@ -62,7 +61,9 @@
 						</p>
 						<div class="pr">
 							<!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
-							<%- if current_user %>
+							<%- if @story.user == current_user %>
+								<a href="javascript:void(0);" class="design_btn" role="button" data-toggle="modal"></a>
+							<%- elsif current_user %>
 								<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
 							<%- else %>
 								<a href="javascript:show_login();" class="design_btn" role="button" data-toggle="modal"></a>
@@ -87,7 +88,11 @@
 								<h2>如果对此房型图感兴趣，可按以下步骤操作</h2>
 								<ul>
 									<li>点击
-										<%- if current_user %>
+										<%- if @story.user == current_user %>
+											<a href="javascript:void(0);" data-toggle="modal">
+												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
+											</a>
+										<%- elsif current_user %>
 											<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" data-toggle="modal" data-method="post" data-remote="true">
 												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
 											</a>
@@ -193,7 +198,7 @@
 					</div>
 				<%- end %>
 				<div class="mar_h20 works border_dot_b1 pad_b40">
-					<h5><i class="i_icon icon_tit"></i>已提交作品<span class="well well-small noborder">选择心仪作品上传<a href="javascript:;" class="color_red">施工合同</a>，更有机会获得立邦产品购买的折扣券哦!</span></h5>
+					<h5><i class="i_icon icon_tit"></i>已提交作品<span class="well well-small noborder">选择心仪作品上传<a class="color_red">施工合同</a>，更有机会获得立邦产品购买的折扣券哦!</span></h5>
 					<ul class="thumbnails design_list">
 						<%- @story.designs.each do |design| %>
 							<li class="span2">
@@ -252,7 +257,9 @@
 								<div class="clearfix">
 									<%- if current_user %>
 										<span class="review_btns pull-right">
-											<a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+											<%- unless comment.user == current_user %>
+												<a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+											<%- end %>
 											<%- if @story.user == current_user %>
 												<%= link_to comment_path(comment.id), method: :delete, :confirm => '确定删除么?',:title => '' do %>
 													<i class='i_icon i_icon_big i_icon_del'></i>删除
