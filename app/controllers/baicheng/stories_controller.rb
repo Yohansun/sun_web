@@ -54,7 +54,7 @@ class Baicheng::StoriesController < ApplicationController
       tags = []
       tags << params[:apartment] if params[:apartment].present?
       tags << params[:style] if params[:style].present?
-      tags += params[:acreage] if params[:acreage].present?
+      tags << params[:acreage] if params[:acreage].present?
       tags << params[:room] if params[:room].present?
       if params[:stroy_id].present?
         story = Story.find(params[:stroy_id])
@@ -81,7 +81,7 @@ class Baicheng::StoriesController < ApplicationController
       tags = []
       tags << params[:apartment] if params[:apartment].present?
       tags << params[:style] if params[:style].present?
-      tags += params[:acreage] if params[:acreage].present?
+      tags << params[:acreage] if params[:acreage].present?
       tags << params[:room] if params[:room].present?
       story = Story.find(params[:stroy_id])
       story.user_id = current_user.id

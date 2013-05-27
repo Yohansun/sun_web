@@ -27,10 +27,10 @@
     </div><!--loginCon ends-->
   <%- end %>
   <ul class="loginCon ft12 border clearfix">
-    <li><a href="/users/auth/weibo"><img src="<%= asset_path "sina.jpg" %>" />新浪微博</a></li>
-    <li><a href="/users/auth/qq_connect"><img src="<%= asset_path "qq.jpg" %>" />QQ</a></li>
-    <li><a href="/users/auth/renren"><img src="<%= asset_path "rr.jpg" %>" />人人网</a></li>
-    <li class="noborder"><a href="/users/auth/kaixin"><img src="<%= asset_path "kx.jpg" %>" />开心网</a></li>
+    <li><a href="/api/baicheng_login?type=weibo"><img src="<%= asset_path "sina.jpg" %>" />新浪微博</a></li>
+    <li><a href="/api/baicheng_login?type=qq_connect"><img src="<%= asset_path "qq.jpg" %>" />QQ</a></li>
+    <li><a href="/api/baicheng_login?type=renren"><img src="<%= asset_path "rr.jpg" %>" />人人网</a></li>
+    <li class="noborder"><a href="/api/baicheng_login?type=kaixin"><img src="<%= asset_path "kx.jpg" %>" />开心网</a></li>
   </ul>
   <div class="loginCon ft12 border clearfix">
     <p class="pull-left" style="margin:5px 0;">还没加入iColor?</p>
