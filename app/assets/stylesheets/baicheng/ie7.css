@@ -5,3 +5,4 @@
 .works .design_list{*padding-bottom:30px;}
 .designers .thumbnails{*padding-bottom:20px;}
 .works_carousel .carousel-indicators a{*margin:0 2px;}
+.works_carousel .carousel-inner .item{*height:367px;*text-align:center;} 
