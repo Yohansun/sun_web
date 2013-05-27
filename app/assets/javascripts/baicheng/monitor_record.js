@@ -333,11 +333,7 @@ function init_monitor_link_click() {
         });
          triggerEBConversion(326822);
     });
-<<<<<<< HEAD
-
-=======
  
->>>>>>> seo1
     $('.list_img_a').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
