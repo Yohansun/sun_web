@@ -4,13 +4,13 @@
       $('.rules-nav').on('click', '> li > a', function() {
         var hash = this.hash.substr(1);
         $(this).parent().addClass('active').siblings().removeClass('active');
-         set_title_des_keywords($(this).attr('href'));
+        set_title_des_keywords($(this).attr('href'));
         $('.' + hash).show().siblings().hide();
       }).on('click', 'ul a', function() {
         var hash = this.hash.substr(1);
         $('.' + hash).show().siblings().hide();
         $(this).closest('ul').siblings('a').click();
-         set_title_des_keywords($(this).attr('href'));
+        set_title_des_keywords($(this).attr('href'));
       });
       set_title_des_keywords('');
     });
@@ -212,11 +212,14 @@
                 </li> -->
               </ul>
             </div>
-            <% story = Story.where(user_id: current_user.id, is_save: true) %>
-            <%  if story.present? %>
-              <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
+            <% if signed_in? %>
+              <% if Story.where(user_id: current_user.id, is_save: true).count>0  %>
+                <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
+              <% else %>
+                <a href="/love/stories/new" class="rules-public-btn">我要装修</a>
+              <% end  %>
             <% else %>
-              <a href="/love/stories/new" class="rules-public-btn">我要装修</a>
+              <a href=" javascript:show_login();" class="rules-public-btn">我要装修</a>
             <% end %>
           </div>
           <div class="rules-designers hide">
