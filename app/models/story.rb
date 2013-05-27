@@ -38,12 +38,19 @@ class Story < ActiveRecord::Base
       end
     end
   end
+  
+  def city_name
+    if self.area_id && self.area_id != 0
+      area = Area.find(area_id)
+      return area.parent.name
+    end
+  end
 
   def sync_baicheng_event
     if self.is_save.present? && self.is_save == true
       name = self.user.name.present? ? self.user.name : self.user.username
       SysMsg.send_to(self.user,"您已成功发表了 #{name}的房型图。",
-          {:reply_type => "baicheng",:re_url =>"/love/stories/#{self.id}"})
+        {:reply_type => "baicheng",:re_url =>"/love/stories/#{self.id}"})
     end
   end
 end

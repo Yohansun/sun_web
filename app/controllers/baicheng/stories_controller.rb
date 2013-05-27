@@ -61,6 +61,7 @@ class Baicheng::StoriesController < ApplicationController
       else
         story = Story.new(params[:story])
       end
+      Rails.logger.info(tags)
       story.user_id = current_user.id
       story.budget =  params[:fee] if params[:fee].present?
       if story.save
@@ -167,16 +168,7 @@ class Baicheng::StoriesController < ApplicationController
       render nothing: true
     end
   end
-
-  def act
-    if current_user.present?
-      @designs = current_user.designs.where("designs.story_id is not null or designs.story_id <> '' ")
-      render :act
-    else
-      redirect_to baicheng_root_path
-    end
-  end
-
+ 
   def download
     target_file = StoryImage.where(:story_id => params[:id])
     unless target_file.blank?

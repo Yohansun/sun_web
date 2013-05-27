@@ -176,7 +176,7 @@ CClicki[10008]._trackEvent({
 					<div class="clear">
             <% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
               <label>
-                  <%=radio_button_tag "apartment",img_lib_cat.id, false,:id=>"apartment"%><%=img_lib_cat.title%>
+                  <%=radio_button_tag "apartment",img_lib_cat.id, false,:name=>"apartment"%><%=img_lib_cat.title%>
               </label>
             <% end %>
 					</div>

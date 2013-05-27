@@ -3,7 +3,7 @@ class StoryImage < ActiveRecord::Base
   attr_accessible :is_cover, :user_id, :story_id, :file
 
   belongs_to :story
-  has_many :tags, class_name: 'StoryImageTag',:dependent => :destroy
+  has_many :tags, class_name: 'StoryImageTag',:dependent => :destroy ,:primary_key=>:story_id
   has_many :story_styles, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 34}
   has_many :house_type, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 1}
   has_many :acreages, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 28}
