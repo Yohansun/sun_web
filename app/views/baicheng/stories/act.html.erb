@@ -3,9 +3,7 @@
 		<div class="wrapper pad_b40">
 			<div class="sys_top">
 				<p>
-					<a href="javascript:void(0)" class="pull-left">
-						<%= image_tag 'baicheng/system/userimg.jpg' %>
-					</a>
+					<%= avatar_img(current_user,"icon","46x46") %>
 					<a href="javascript:void(0)" class="sys_user_name"><span>
 					<strong class="color_red">
 						<%= current_user.display_name if current_user %>
@@ -29,7 +27,7 @@
 									</a>
 									<div class="design_list_tit">
 										<h5 class="nomargin">
-											<a href="#">
+                                                                                  <a href="<%= design_compete_path(story_user.story.designs.last) %>">
 												<%= story_user.story.designs.last.title %>
 											</a>
 										</h5>
@@ -43,7 +41,7 @@
 						<% else %>
 							<li class="span2">
 								<div class="thumbnail nopadding">
-									<a href="#" class="list_img_a">
+                                                                  <a href="<%= story_path(story_user.story) %>" class="list_img_a">
 										<%= image_tag(story_user.story.story_image.file.url(:baicheng_list)) %>
 									</a>
 									<div class="design_list_tit">
@@ -75,7 +73,7 @@
 				<h5 class="sys_title"><span>积分兑换</span></h5>
 				<p class="m020">
 					<strong>
-						您目前的累计积分为<span class="cr">18</span>分，可用积分为<span class="cr">12</span>分。
+						您目前的累计积分为<span class="cr">0</span>分，可用积分为<span class="cr">0</span>分。
 						<a href="#" class="cr">点击兑换</a>
 					</strong>
 				</p>

@@ -49,7 +49,10 @@ class Baicheng::DesignCompetesController < ApplicationController
     @story_id = @design.story_id
     @story = Story.where(id: @story_id).first
     @comments = @design.comments.page(params[:page]).per(8)
-          
+    @image_colors = []  
+    @design.design_images.available.each do |image|  
+      @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])  
+    end      
     @title = "设计作品大比拼_#{@story.user.display_name if @story}房型设计-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈(**为设计作品名称)"
     @description = "立邦icolor因爱之名刷新生活 设计作品大比拼活动，展示设计作品图片、楼盘名称、装修设计风格，您可以免费咨询。"
     @key_words = '设计作品名称,楼盘名称,装修设计风格'

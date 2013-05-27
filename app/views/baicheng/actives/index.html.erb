@@ -1,16 +1,16 @@
-<% content_for :tail do -%>
+<% content_for :tail do -%>  
   <script type="text/javascript">
     $(function() {
       $('.rules-nav').on('click', '> li > a', function() {
         var hash = this.hash.substr(1);
-        set_title_des_keywords($(this).attr('href'));
         $(this).parent().addClass('active').siblings().removeClass('active');
+         set_title_des_keywords($(this).attr('href'));
         $('.' + hash).show().siblings().hide();
       }).on('click', 'ul a', function() {
         var hash = this.hash.substr(1);
         $('.' + hash).show().siblings().hide();
         $(this).closest('ul').siblings('a').click();
-        set_title_des_keywords($(this).attr('href'));
+         set_title_des_keywords($(this).attr('href'));
       });
       set_title_des_keywords('');
     });
@@ -67,28 +67,29 @@
           k = '立邦刷新生活,装修活动规则,icolor设计大奖';
           break;
       }
-      document.title= t;
+
+      document.title = t;
       $('meta[name=description]').attr('description', d);
       $('meta[name=keywords]').attr('keywords', k);
     }
-  </script>
-<% end %>
+  </script>  
+<% end %> 
 <div class="container-fluid">
   <div class="design_works pad_t60">
     <div class="wrapper rules pad_b40">
       <ul class="rules-nav clearfix">
-        <li class="active"><a href="#rules-rules">活动规则</a></li>
+        <li class="active"><a href="#rules-rules" id="monitor_link_326796">活动规则</a></li>
         <li class="pr">
-          <a href="#rules-contents">活动内容</a>
+          <a href="#rules-contents" id="monitor_link_326797">活动内容</a>
           <ul class="rules-subnav">
             <li><a href="#rules-public">大众用户</a></li>
             <li><a href="#rules-designers" class="noborder">家装公司/设计师</a></li>
           </ul>
         </li>
-        <li><a href="#rules-awards">活动奖项</a></li>
-        <li><a href="#rules-regulations">评选细则</a></li>
-        <li><a href="#rules-judges">评委名单</a></li>
-        <li><a href="#rules-timetable">活动时间</a></li>
+        <li><a href="#rules-awards" id="monitor_link_326798">活动奖项</a></li>
+        <li><a href="#rules-regulations"  id="monitor_link_326799">评选细则</a></li>
+        <li><a href="#rules-judges" id="monitor_link_326800">评委名单</a></li>
+        <li><a href="#rules-timetable" id="monitor_link_326801">活动时间</a></li>
       </ul>
       <div class="rules-bin ft14">
         <div class="rules-rules pd30">
@@ -136,13 +137,13 @@
               </li>
               <li>
                 <span>•</span>
-                <p>大众用户上传的房型图必须为个人所有或有权装修的，需整体待装修的新房房型图（局部翻新不包括在内），每套房型图最多获得3  的位设计师的免费创意设计。</p>
+                <p>大众用户上传的房型图必须为个人所有或有权装修的，需整体待装修的新房房型图（局部翻新不包括在内），每套房型图最多获得3位设计师的免费创意设计。</p>
               </li>
               <li>
                 <span>•</span>
-                <p>家装公司和设计师参与活动上传的作品，必须是个人设计的作品，不能有抄袭或剽窃他人设计成果、侵犯他人知识产权及其他合法权轨益的行为，否则责任自负。</p>
+                <p>家装公司和设计师参与活动上传的作品，必须是个人设计的作品，不能有抄袭或剽窃他人设计成果、侵犯他人知识产权及其他合法权益的行为，否则责任自负。</p>
                 <p class="font-italic fixie7">
-                  房型图的设计，以创意方案为主。可上传3张图纸：一张平面图、一张主要立面图 和 一张效果图即可。作品以图片（JPG、GIF、PNG或BMP格式均可）形 的式上传，单张图片大小不超过1M，且勿加任何水印。对于标注立邦色号或艺术漆色号的作品，评委会将重点优先考虑。<br />
+                  房型图的设计，以创意方案为主。可上传3张图纸：一张平面图、一张主要立面图 和 一张效果图即可。作品以图片（JPG、GIF、PNG或BMP格式均可）的形式上传，单张图片大小不超过1M，且勿加任何水印。对于标注立邦色号或艺术漆色号的作品，评委会将重点优先考虑。<br />
                   设计作品中不得出现推荐非立邦品牌的涂料产品，或对立邦产品进行诋毁、贬低的成分。<br />
                   设计作品中不得出现推荐非立邦品牌的涂料产品，或对立邦产品进行诋毁、贬低的成分。
                 </p>
@@ -198,7 +199,7 @@
                 <li>
                   <span>•</span>
                   <p>
-                    发布新房整体装修需求，上传新房房型图，就有机会获得设计师的免费创意设计。如将最终的装修合同上传，还有机会获得“希腊爱方琴海双人蜜月游”。
+                    发布新房整体装修需求，上传新房房型图，就有机会获得设计师的免费创意设计。如将最终的装修合同上传，还有机会获得“希腊爱琴海双人蜜月游”。
                   </p>
                 </li>
                 <li>
@@ -211,7 +212,12 @@
                 </li> -->
               </ul>
             </div>
-            <a href="/love/stories/new" class="rules-public-btn">我要装修</a>
+            <% story = Story.where(user_id: current_user.id, is_save: true) %>
+            <%  if story.present? %>
+              <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
+            <% else %>
+              <a href="/love/stories/new" class="rules-public-btn">我要装修</a>
+            <% end %>
           </div>
           <div class="rules-designers hide">
             <h1>活动内容 针对大众用户</h1>
@@ -363,7 +369,7 @@
           </ul>
           <table class="rules-table2 mt30">
             <tbody><tr>
-                <th align="left" width="560">因爱之名•刷新生活——立邦携手万名设计师为您免费设计新家</th>
+                <th align="left" width="560">因爱之名•刷新生活——立邦号召万名设计师为您免费设计新家</th>
                 <th>评选揭晓</th>
                 <th>奖品发送</th>
               </tr>

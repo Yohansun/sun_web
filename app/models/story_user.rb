@@ -4,6 +4,8 @@ class StoryUser < ActiveRecord::Base
   belongs_to :story 
   belongs_to :user
   
+  scope :current_month,->{where(design_time: Time.now.beginning_of_month..Time.now.end_of_month)}
+  
   after_create :send_msg
   private
   def send_msg
@@ -12,6 +14,8 @@ class StoryUser < ActiveRecord::Base
       {:reply_type => "baicheng",:re_url =>"/love/stories/#{self.story.id}"})  
     true
   end
+  
+  
 
   scope :story_ids, lambda{ |user_id| where(user_id: user_id) if user_id.present? }
 end
