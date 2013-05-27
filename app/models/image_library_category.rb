@@ -4,7 +4,8 @@ require 'ruby-pinyin'
 class ImageLibraryCategory < ActiveRecord::Base
   acts_as_nested_set :counter_cache => :children_count
   attr_protected :lft, :rgt
-
+  scope :style,->{where(parent_id: 34)}
+  scope :cost,->{where(parent_id: 19)}
   before_save :set_pinyin
 
   def set_pinyin

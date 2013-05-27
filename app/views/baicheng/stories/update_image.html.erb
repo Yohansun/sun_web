@@ -1,0 +1,15 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "baicheng/steps.css" %>
+<%- end %>
+<div class="container-fluid step4 text-center">
+	<div class="container">
+		<h1>您的家装需求已提交完成！</h1>
+		<p>
+			iColo客服将于<b>3</b>天内与您联系确认以上信息，<br />
+			期待您遇到心仪的设计师，多多沟通，打造出只属于您的爱巢。<br />
+			一旦装修签约成功，上传合同还有机会赢取“爱琴海浪漫游”哦！
+
+		</p>
+		<a href="<%=story_path(@story.id)%>" class="step4-btn">关闭</a>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<% if params[:id] == "foreign" %>
+  <div class="container-fluid">
+	<div class="role-model pad_t60">
+		<div class="wrapper">
+			<p>Edward Davinson是上海国拍红酒品鉴专家，六七年前他从伦敦来到上海。上海这个充满艺术气质的城市，立刻成为了他的新欢，他把家按在这里，慢慢体会这个城市的美。</p>
+			<p>在Edward Davinson的心里，红色是代表喜庆和爱意的，宝宝房间里热烈的中国红，红色的墙壁上挂满了孩子的照片。和每个幸福的父亲一样，每每谈起孩子他都是一脸的骄傲。</p>
+			<p>而中式的装修设计，更能在表现家的温暖之余，将艺术品完美的结合起来。客厅和私人空间交接处大红色描金的龙凤呈祥的朱门，便是主人的心水之物。他要让艺术品和自己和家人生活在一起，每天都能感受到美的力量。</p>
+			<img src="<%= asset_path 'baicheng/works/model.jpg' %>" width="837" height="1892" class="model-img" />
+			<i class="pull-right">以上资料由《美好家园》友情提供</i>
+			<div class="redline_b4 pad_b40"></div>
+		</div>
+	</div>
+<% elsif params[:id] == "native" %>
+  <div class="container-fluid">
+	<div class="role-model role-model2 pad_t60">
+		<div class="wrapper">
+			<p>崔睿是一名室内设计师，并在京城有着自己的家居饰品店。在这次刷新家的时候，她完全得体现出自己的审美需求，她是一个“自然简单生活理念”的追随者，所以家就和她的穿着一样，安静舒适，富有生活气息。</p>
+			<p>白色，如此单纯的色彩，在崔睿的手中却能发挥中独特的魅力。如同中国山水画的留白一样，她让墙面空出来，只是配一幅手抄的《心经》、一张古琴，仅此而已。</p>
+			<p>家中的竹木家具，很多是从景德镇定做的。那里是她曾经见到过的山水田园，如今她要把这幅画面搬回来，让家成为自己的世外桃源。</p>
+			<img src="<%= asset_path 'baicheng/works/model2.jpg' %>" width="837" height="1892" class="model-img" />
+			<i class="pull-right">以上资料由《美好家园》友情提供</i>
+			<div class="redline_b4 pad_b40"></div>
+		</div>
+	</div>
+<% end %>

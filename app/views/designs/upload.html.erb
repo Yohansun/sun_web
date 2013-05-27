@@ -153,6 +153,7 @@ function remove_design_image(){
 </script>
 <%- end -%>
 <%= form_for([current_user, @design], :remote => true, :html => {:multipart => true}) do |f| %>
+<%= hidden_field_tag "story_id", params[:story_id] %>
 <div class="wrapper">
   <div class="upload2013">
     <h1>上传作品</h1>

@@ -2,6 +2,8 @@ var vote = parseInt($("#votes_count<%= params[:voteable_id] %>").html()) + 1
   $("#votes_count<%= params[:voteable_id]%>").html(vote);
 var vote2 = parseInt($(".votes_count<%= params[:voteable_id] %>").html()) + 1
   $(".votes_count<%= params[:voteable_id]%>").html(vote2);
+var vote_story = parseInt($(".story_votes_count<%= params[:voteable_id] %> > small").html()) + 1
+  $(".story_votes_count<%= params[:voteable_id]%> > small").html(vote_story);
 var votes_index = parseInt($("#votes_count<%= params[:voteable_id] %>").html())
   $("#votes_count<%= params[:voteable_id]%>").html(votes_index);
 alert("投票成功!");

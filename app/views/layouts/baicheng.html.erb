@@ -1,147 +1,209 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- <title><%= @title %></title> -->
-<title>百城</title>
-<!-- <meta name="description" content="<%= @description %>" /> -->
-<%= csrf_meta_tag %>
-<%= stylesheet_link_tag "baicheng_all.css" %>
-<%= javascript_include_tag "baicheng" %>
-
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie6.css'%>">
-<![endif]-->
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="<%=asset_path 'baicheng/ie7.css'%>">
-<![endif]-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title><%= @title || '因爱之名 刷新生活' %></title>  
+  
+  <meta name="description" content="<%= @description ||'因爱之名 刷新生活' %>" />  
+   <meta name="keywords" content="<%= @key_words ||'因爱之名 刷新生活' %>">
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
+    <%= javascript_include_tag "baicheng" %>
+    <script type='text/javascript'>
+      (function() {
+        var c = document.createElement('script');
+        c.type = 'text/javascript';
+        c.async = true;
+        c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'pro.clicki.cn/boot/10008';
+        var h = document.getElementsByTagName('script')[0];
+        h.parentNode.insertBefore(c, h);
+      })();
+      function triggerEBConversion(ebConversionID)
+      {
+        try
+        {
+          var oScript = document.createElement("SCRIPT");
+          var ebRand = Math.random() + ' ';
+          ebRand = ebRand * 1000000;
+          var conversionURL = "HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&ActivityID=" + ebConversionID + "&ns=1&rnd=" + ebRand;
+          var conversionImg = new Image();
+          conversionImg.src = conversionURL;
+        }
+        catch (e) {
+        }
+      }
+    </script>
 <%= yield :head %>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top navbar_top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="./index.html"><img alt="logo" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
+        <a class="brand" href="<%= root_path %>"><img alt="iColor" src="<%=asset_path 'baicheng/logo.jpg'%>"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active">
-							<a href="./index.html">首页</a>
+						<li class="<%= 'active' if controller_name == 'welcome' %>">
+                  <%= link_to "首页", baicheng_root_path,id: 'monitor_link_326789' %>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="./2.html">我要装修</a>
+						<li <% if controller_name == "stories" && action_name == "new"%>class="active"<% end %>>
+							<% if current_user %>
+                <% story = Story.where(user_id: current_user.id, is_save: true) %>
+                <%  if story.present? %>
+  						    <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
+                <% else %>
+                      <a href="<%= new_story_path %>" id='monitor_link_326790'>我要装修</a>
+                <% end %>
+              <% else -%>
+                <%= link_to_function "我要装修", "show_login()" %>
+              <% end -%>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="./3.html">我能设计</a>
+                <li class="<%= 'active' if controller_name == 'stories' && %w{index show}.include?(action_name) %>">
+                  <%= link_to "我来设计", stories_path,id: 'monitor_link_326791' %>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li>
-							<a href="./4.html">设计作品大比拼</a>
+                <li  class="<%= 'active' if controller_name == 'design_competes' %>">
+                  <a href="/love/design_competes" id='monitor_link_326792'>设计作品大比拼</a>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="./5.html">时尚榜样</a>
+						<li class="<%= 'active ' if controller_name == 'fashion_model' %> pr">
+							<a href="<%= fashion_model_path("foreign") %>" class="drophover_toggle" id='monitor_link_326793'>时尚榜样</a>
+							<ul class="drophover_menu hide">
+								<li><a href="<%= fashion_model_path("foreign") %>" class="<%= 'active' if params[:id] == 'foreign' %>">Edward Davinson</a></li>
+								<li><a href="<%= fashion_model_path("native") %>" class="<%= 'active' if params[:id] == 'native' %>" id='monitor_link_326794' >崔睿</a></li>
+							</ul>
 						</li>
 						<li class="divider-vertical_nav"></li>
-						<li class="">
-							<a href="./6.html">活动章程及说明</a>
+                <li <% if controller_name == "actives" && action_name == "index"%>class="active"<% end %>>
+                  <a href="<%=actives_path%>" id='monitor_link_326795'>活动章程及说明</a>
 						</li>
 					</ul>
 				</div>
-				<ul class="nav pull-right">
-					<li>
-						<a href="#"><i class="icon-refresh_login"></i>登录</a>
-					</li>
-					<li class="divider-vertical"></li>
+        <%- if current_user %>
+          <ul class="nav nav_userinfo pull-right">
+            <li class="pr user_name">
+              <a class="username_css"  id='user_name_msg_tip' href="<%= sysinfo_index_path %>" target="_blank"><%= "#{current_user.display_name} #{ "(#{current_user.sys_msgs.baicheng.unread.size}) " if current_user.sys_msgs.baicheng.unread.size>0} "%></a>
+              <% if  current_user.sys_msgs.baicheng.unread.size>0%>
+                <span class="system_info_tip none" id='user_msg_tip'><em class="tip_arrow"></em><%= current_user.sys_msgs.baicheng.unread.size %>条系统消息</span>
+              <% end %>
+            </li>
+                <li><a href="<%= act_stories_path %>" id='monitor_link_326809'>查看我的活动主页</a></li>
+            <li class="divider-vertical_dot"></li>
+                <li><%= link_to '退出', destroy_user_session_path, :method => :delete ,id: 'monitor_link_326808'%></li>
+          </ul>
+        <%- else %>
+          <ul class="nav pull-right">
+            <li>
+              <a href="javascript:show_login();"><i class="icon-refresh_login"></i>登录</a>
+            </li>
+            <li class="divider-vertical"></li>
 
-					<li>
-						<a href="#"><i class="icon-refresh_register"></i>注册</a>
-					</li>
-				</ul><!-- right nav end -->
+            <li>
+                  <a href="/users/sign_up?return_to=love" id='monitor_link_326803'><i class="icon-refresh_register"></i>注册</a>
+            </li>
+          </ul> 
+        <%- end %><!-- right nav end -->
+        </div>
+      </div>
+    </div>
+    <%= yield :body_head %>
+    <%= yield %>
+    <div class="navbar navbar_footer nomargin">
+      <div class="navbar-inner nopadding">
+        <div class="container">
+          <a class="brand" href="http://shop.nipponpaint.com.cn" target="_blank"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
+          <p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
+          <ul class="nav pull-right">
+            <li>
+              <a class="txt_img_align" style="padding:10px 0;" href="<%= root_path %>">去<img class="pad_h5" src="<%=asset_path 'baicheng/logo_link.png'%>"></a>
+            </li>
+            <li>
+              <a style="padding:10px 10px 10px 0;" href="<%= root_path %>" id='monitor_link_326811'>查看更多案例</a>
+            </li>
+            <li class="divider-vertical_footer"></li>
 
-				<!-- <ul class="nav nav_userinfo pull-right">
-					<li class="pr user_name">
-						<a class="username_css" href="#">Jane(3)</a>
-						<span class="system_info_tip"><em class="tip_arrow"></em>3条系统消息</span>
-					</li>
-					<li><a href="#">查看我的活动主页</a></li>
-					<li class="divider-vertical_dot"></li>
-					<li><a href="#">退出</a></li>
-				</ul> -->
-			</div>
-		</div>
-	</div>
- 	<%= yield :body_head %>
-	<%= yield %>
-	<div class="navbar navbar_footer nomargin">
-		<div class="navbar-inner nopadding">
-			<div class="container">
-				<a class="brand" href="./index.html"><img alt="logo" src="<%=asset_path 'baicheng/logo_footer.png'%>"></a>
-				<p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
-				<ul class="nav pull-right">
-					<li>
-						<a class="txt_img_align" style="padding:10px 0;" href="#">去<img class="pad_h5" src="<%=asset_path 'baicheng/logo_link.png'%>"></a>
-					</li>
-					<li>
-						<a style="padding:10px 10px 10px 0;" href="#">查看更多案例</a>
-					</li>
-					<li class="divider-vertical_footer"></li>
+            <li>
+              <a href="/love/disclaimer"  id='monitor_link_326812'>免责声明</a>
+            </li>
+            <li class="divider-vertical_footer"></li>
 
-					<li>
-						<a href="#">免责声明</a>
-					</li>
-					<li class="divider-vertical_footer"></li>
-
-					<li>
-						<!-- JiaThis Button BEGIN -->
-						<div id="ckepop" class="jiathis_area none clearfix share_area">
-							<span class="jiathis_txt">分享：</span>
-							<a class="jiathis_button_renren"></a>
-							<a class="jiathis_button_douban"></a>
-							<a class="jiathis_button_tsina"></a>
-							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
-							<!-- <a class="jiathis_counter_style"></a> -->
-						</div>
-						<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-						<!-- JiaThis Button END -->
-					</li>
-				</ul><!-- right nav end -->
-			</div>
-		</div>
-	</div>
-	<div id="layer"></div>
-	<%#= render partial: 'baicheng/welcome/login' %>
-	<%#= yield :body_tail %>
-	<%#= yield :tail %>
-	<%#= javascript_include_tag "/baicheng_location.js" %>
-	<script type="text/javascript">
-		swfobject.registerObject("FlashID");
-		// $(function(){
-	 //    if(typeof data != 'undefined'){
-	 //      var options = {
-	 //        data  : data
-	 //      }
-	 //      var sel = new LinkageSelect(options);
-	 //      var province_id = "<%= @search_province %>";
-	 //      var area_id = "<%= @search_area %>";
-	 //      sel.bind('.area_1', province_id);
-	 //      sel.bind('.area_2', area_id);
-	 //    }
-
-	 //    $('.close-btn').click(function(){
-		// 		$('.abs-center').hide();
-		// 		$('#layer').hide();
-		// 	});
-	 //    $('.e-pop-btn').click(function(){
-		// 		$('.abs-center').hide();
-		// 		$('#layer').hide();
-		// 	});
-	 //   });
-		// function show_login () {
-		// 	$('.unlogin').show();
-		// 	$('#layer').show();
-		// };
-	</script>
-</body>
+            <li>
+              <!-- JiaThis Button BEGIN -->
+              <div id="ckepop" class="jiathis_area clearfix share_area">
+                <span class="jiathis_txt">分享：</span>
+                <a class="jiathis_button_renren" style="float:left;"  id='monitor_link_326813'></a>
+                <a class="jiathis_button_douban" style="float:left;" id='monitor_link_326814'></a>
+                <a class="jiathis_button_tsina" style="float:left;" id='monitor_link_326815'></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+                <!-- <a class="jiathis_counter_style"></a> -->
+              </div>
+              <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+              <!-- JiaThis Button END -->
+            </li>
+          </ul><!-- right nav end -->
+        </div>
+      </div>
+    </div>
+    <div id="layer"></div>
+    <%= render partial: 'baicheng/welcome/login' %>
+    <%= yield :body_tail %>
+    <%= yield :tail %>
+    <%= javascript_include_tag "/location.js","LinkageSelect.js" %>
+    <script type="text/javascript">
+      // swfobject.registerObject("FlashID");
+      $(function() {
+        $('.close-btn').click(function() {
+          $('.abs-center').hide();
+          $('#layer').hide();
+        });
+        $('.e-pop-btn').click(function() {
+          $('.abs-center').hide();
+          $('#layer').hide();
+        });
+        $('.drophover_toggle').parent().hover(function(){
+          console.log($(this))
+          $(this).find('.drophover_menu').toggle();
+        });
+        $('#user_name_msg_tip').hover(function() {
+          $('#user_msg_tip').toggle().mouseenter(function() {
+            $(this).show();
+          }).mouseleave(function() {
+            $(this).hide();
+          });
+        });
+      });
+      function show_login() {
+        $('.wel_login').show();
+        $('.unlogin').show();
+        $('#layer').show();
+        CClicki[10008]._trackEvent({
+          type: 1,
+          labels: [
+            {"按钮名称": "登陆"}
+          ],
+          values: [
+            {"数量": 1}
+          ]
+        });
+        triggerEBConversion(326802);
+      };
+      function verify() {
+        <% if current_user %>
+          <% unless current_user.common_user? %>
+                    window.location = '<%= stories_path %>'
+          <% else %>
+            <% story = Story.where(user_id: current_user.id, is_save: true) %>
+            <%  if story.present? %>
+                      alert('您已经上传过房型图！');
+            <% else %>
+                      window.location = '<%= new_story_path %>'
+            <% end %>
+          <% end %>
+        <% else -%>
+                  show_login();
+        <% end -%>
+              }
+    </script>
+  </body>
 </html>

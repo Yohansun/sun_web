@@ -1,176 +1,315 @@
-<%- content_for :head do %>
-	<%= stylesheet_link_tag "baicheng/jquery.slider","baicheng/style" %>
+<% content_for :tail do -%>
+  <script type="text/javascript">
+  	$(function(){
+  		(function($){
+		$('textarea').bind('keydown keyup', function(){
+			var $this = $(this);
+			var total = $this.data('total');
+			if(!total) return;
+			var len = total - $this.val().length;
+			if(len < 0) {
+				$this.val($this.val().slice(0, total));
+			} else{
+				$('form.comment-form').find('b').text(len);
+			}
+		});
+  		}($));
+  		$("button.comment_button").click(function(){
+           if($('.c_area').val()==""){
+			  		alert("评论内容不能为空!")
+		            return false
+			  	}
+        });
+  		$("button.reply_button").click(function(){
+           if($('.r_area').val()==""){
+			  		alert("回复内容不能为空!")
+		            return false
+			  	}
+        });
+			$(".reply_comment").click(function(){
+				$(this).parents('.review_item').find('form.reply_form').toggle();
+			});
+			$('.reset_button').click(function(){
+				$(this).parents('.reply_form').hide();
+			});
+  	});
+  	function show_modal () {
+  		$('#design_tips').modal('show');
+  	};
+  	</script>
 <%- end %>
-<%- content_for :tail do %>
-	<%= javascript_include_tag "jquery.slider" %>
-<%- end %>
-<%= render partial: 'baicheng/welcome/navs' %>
-<%= render partial: 'baicheng/welcome/active_map' %>
-<div class="wrapper">
-	<%= render partial: 'baicheng/welcome/sidebar' %>
-	<div class="refresh-container">
-		<div class="refresh-bin newheight"> 
-			<div class="pr">
-				<div class="story-slider slider_bin">
-					<%- @story.story_images.each do |image| %>
-						<div>
-							<a href="javascript:void(0);">
-								<%= image_tag(image.file.url(:slide)) %>
-							</a>
+
+<div class="container-fluid">
+	<div class="mydesign pad_t60">
+		<div class="wrapper pr pad_b40">
+			<div class="redline_b4">
+				<div class="clearfix pad_h25">
+					<div class="w670 pull-left">
+						<div style="text-align:center;width:670px;height:353px;display:table-cell;vertical-align:middle;font-size:308px;">
+							<%= image_tag(@story_image.try(:file).try(:url, :slide)) %>
 						</div>
-					<%- end %>
+					</div>
+					<div class="w190 pull-left design_intro pr">
+						<i class="in_arrow"><%= image_tag 'baicheng/mydesign/in_arrow.png' %></i>
+						<h5 class="pad_h20 border_dot_b1">装修需求</h5>
+						<p class="pad_h20 border_dot_b1">
+							<span class="show">户型：<strong><%= @story_image.house_type_names %></strong></span>
+							<span class="show">期望风格：<strong><%= @story_image.story_style_names %></strong></span>
+							<span class="show">面积：<strong><%= @story_image.acreages_names %></strong></span>
+							<span class="show">重点设计功能区：<strong><%= @story_image.spaces_names %></strong></span>
+							<span class="show">装修预算：<strong><%= @story.budget %></strong></span>
+						</p>
+						<div class="pr">
+							<!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
+							<%- if @story.user == current_user %>
+								<a href="javascript:void(0);" class="design_btn" role="button" data-toggle="modal"></a>
+							<%- elsif current_user %>
+								<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
+							<%- else %>
+								<a href="javascript:show_login();" class="design_btn" role="button" data-toggle="modal"></a>
+							<%- end %>
+							<div class="btn_group text-center">
+								<%- if @story.designs_count == 3 %>
+								  <a class="btns btn_upload" href="javascript:alert('设计已满!');">
+										<span>上传设计</span>
+									</a>
+								<%- elsif current_user %>
+								<a class="btns btn_upload" href="<%= new_user_design_path(current_user,story_id: params[:id]) %>" id ='monitor_link_326826'>
+									<span>上传设计</span>
+								</a>
+								<%- else %>
+									<a class="btns btn_upload" href="javascript:show_login();">
+										<span>上传设计</span>
+									</a>
+								<%- end %>
+							</div>
+							<a href="javascript:;" class="show text-center color_red"><small>如何参与用户房型图的设计 <i class="i_icon icon_question"></i></small></a>
+							<div class="design_pop2 hide pa">
+								<h2>如果对此房型图感兴趣，可按以下步骤操作</h2>
+								<ul>
+									<li>点击
+										<%- if @story.user == current_user %>
+											<a href="javascript:void(0);" data-toggle="modal">
+												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
+											</a>
+										<%- elsif current_user %>
+											<a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" data-toggle="modal" data-method="post" data-remote="true">
+												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
+											</a>
+										<%- else %>
+											<a href="javascript:show_login();" data-toggle="modal">
+												<%= image_tag 'baicheng/mydesign/design_pop2_a.jpg' %>
+											</a>
+										<%- end %>
+										，预定房型图。<br />并按系统提示，将房型图下载到本地。
+										</li>
+									<li>针对下载的房型图及用户需求进行设计，需包含<br />
+									<strong class="color_red">平面图一张、重点设计功能区立面图一张、效果图一张</strong>
+									</li>
+									<li>点击
+										<%- if @story.designs_count == 3 %>
+											<a href="javascript:alert('设计已满!');">
+												<%= image_tag 'baicheng/mydesign/design_pop2_b.jpg' %>
+											</a>
+										<%- elsif current_user %>
+											<a href="<%= new_user_design_path(current_user,story_id: params[:id]) %>">
+												<%= image_tag 'baicheng/mydesign/design_pop2_b.jpg' %>
+											</a>
+										<%- else %>
+											<a href="javascript:show_login();">
+												<%= image_tag 'baicheng/mydesign/design_pop2_b.jpg' %>
+											</a>
+										<%- end %>
+										，上传以上三张设计图。
+										</li>
+								</ul>
+							</div>
+							<script type="text/javascript">
+							window.onload = function(){
+								$('.design_intro a.color_red').hover(function(){
+									$(this).next().toggle().mouseenter(function(){
+										$(this).show();
+									}).mouseleave(function(){
+										$(this).hide();
+									});
+								});
+							};
+							</script>
+						</div>
+					</div>
 				</div>
-				<div class="show-group pa">
-					<ul class="clear">
-						<li>
-							<%= link_to "#{@story.votes_count}", votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "icon-like",id: "votes_count#{@story.id}" %>
-						</li>
+				<div class="divider_hori_dot"></div>
+				<p class="info_place border_dot_b1">
+					<span class="pull-right">
+						<strong class="color_red nomargin"><%= @story.user.display_name %></strong> 的房型图
+					</span>
+					<strong>
+						楼盘名称：
+						<span><%= @story.property_name %></span>
+						楼盘所在地：
+						<span><%= @story.location %></span>
+					</strong>
+				</p>
+				<%- if @story.demand.present? %>
+					<div class="info_detail">
+						<h4 class="color_red text-center"><%= @story.user.display_name %>的个性需求</h4>
+						<p><%= @story.demand %></p>
+					</div>
+					<div class="mar_h20 clearfix border_dot_b1">
+						<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => 'Story'), :remote => true, :method => 'post', :class => "pull-right vote_btn story_votes_count#{@story.id}" do %>
+							<i class='i_icon i_icon_big icon_vote'></i>
+							投票(<small><%= @story.votes_count %></small>)
+						<%- end %>
+						<!-- JiaThis Button BEGIN -->
+						<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:110px;">
+							<span class="jiathis_txt" id ='monitor_link_326828'>分享：</span>
+							<a class="jiathis_button_renren" id ='monitor_link_326829'></a>
+							<a class="jiathis_button_douban" id ='monitor_link_326830'></a>
+							<a class="jiathis_button_tsina"  id ='monitor_link_326831'></a>
+						</div>
+						<!-- JiaThis Button END -->
+					</div>
+				<%- end %>
+				<%- if @story.user == current_user %>
+					<div class="mar_h20 pad_b40 designers border_dot_b1">
+						<h5><i class="i_icon icon_tit"></i>想为你设计的家装公司/设计师</h5>
+						<span class="in_arrow_top"><%= image_tag 'baicheng/mydesign/in_arrow_top.png' %></span>
+						<ul class="thumbnails well">
+							<%- @story_users.each_with_index do |story_user,index| %>
+								<%- user = User.find_by_id(story_user.user_id) %>
+								<li class="span2">
+									<div class="thumbnail nopadding noborder noshadow">
+										<a class="show" href="<%= user_path(user) %>">
+											<%- if user && user.avatar -%>
+							          <%= image_tag user.avatar.file(:profile),:size =>"92x92" %>
+							        <%- else -%>
+							          <%= image_tag "news/regimg_bg.jpg", size: '92x92' %>
+							        <%- end -%>
+							      </a>
+										<p><%= user.display_name %></p>
+										<p class="nopadding"><i class="i_icon icon_tel"></i><%= user.phone %></p>
+									</div>
+								</li>
+								<%- unless index == 5 %>
+									<li class="divider-vertical_designer"></li>
+								<%- end %>
+							<%- end %>
+						</ul>
+					</div>
+				<%- end %>
+				<div class="mar_h20 works border_dot_b1 pad_b40">
+					<h5><i class="i_icon icon_tit"></i>已提交作品<span class="well well-small noborder">选择心仪作品上传<a class="color_red">施工合同</a>，更有机会获得立邦产品购买的折扣券哦!</span></h5>
+					<ul class="thumbnails design_list">
+						<%- @story.designs.each do |design| %>
+							<li class="span2">
+								<div class="thumbnail nopadding">
+									<!-- <span class="list_tag list_tag_deal"></span> -->
+									<a href="<%= design_compete_path(design) %>" class="list_img_a">
+										<%= image_tag(design.cover_img.file.url(:baicheng_list)) if design.cover_img.present? %>
+									</a>
+									<div class="works_tit border_dot_b1">
+										<p class="nomargin"><%= design.title %>（<%= design.city_name %>）</p>
+										<p class="nomargin"><i class="i_icon icon_tel"></i><%= design.user.phone %></p>
+									</div>
+									<p class="upload_good">
+										<%- unless current_user %>
+											<a href="javascript:;" class="pull-right upload_btn_red upload_btn_gray">
+												<span class="text-center">合同已上传</span>
+											</a>
+										<%- else %>
+											<a href="javascript:;" class="pull-right upload_btn_red" id='monitor_link_326833' >
+												<span class="text-center">上传合同</span>
+											</a>
+										<%- end %>
+										<%- if design.story_talking_id.blank? %>
+											<%- if @story.user == current_user %>
+												<%= link_to '', story_talking_path(design), method: :post, remote: true, class: 'i_icon icon_talk'  %>
+											<%- else %>
+												<a href="javascript:;" class="i_icon icon_talk"></a>
+											<%- end %>
+										<%- else %>
+											<a href="javascript:;" class="i_icon icon_talking"></a>
+										<%- end %>
+									</p>
+								</div>
+							</li>
+						<%- end %>
 					</ul>
 				</div>
-			</div>
-			<p class="img-info clear">
-				<span class="fr nomargin">
-					<span class="fl ft12" style="margin:3px 3px 0 0">分享</span>
-					<!-- JiaThis Button BEGIN -->
-					<span class="jiathis_style fl" style="margin:3px 0 0 0">
-						<a class="jiathis_button_renren"></a>
-						<a class="jiathis_button_kaixin001"></a>
-						<a class="jiathis_button_tsina"></a>
-						<a class="jiathis_button_qzone"></a>
-						<!-- <a class="jiathis_button_tqq"></a> -->
-						<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a> -->
-						<a class="jiathis_counter_style"></a>
-					</span>
-					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1362023134897376" charset="utf-8"></script>
-					<!-- JiaThis Button END -->
-				</span>
-				<span>楼盘名称：<%= @story.property_name %></span>
-				<span>楼盘所在地：<%= @story.location %></span>
-			</p>
-			<div class="img-info">
-				<div class="clear">
-					<%- if current_user && current_user.role_id != 3 %>
-						<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title">我来设计</a>
-					<%- elsif current_user %>
-						<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title">我来设计</a>
-					<%- else %>
-						<a href="javascript:show_login();" class="fl btn-title">我来设计</a>
-					<%- end %>
-					<div class="show-group fl">
-						<ul class="clear">
-							<li>
-								<%- if current_user %>
-									<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
-								<%- else %>
-									<a href="javascript:show_login();" class="icon-collect">收藏</a>
-								<%- end %>
-							</li>
-						</ul>
-					</div>
-					<div class="show-group fl">
-						<ul class="clear">
-							<li><a href="<%= download_story_path(@story.id) %>" class="icon-download">下载</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="questionmart clear ft12 pr">
-					<span class="fl nomargin">如何参与用户房型图的设计 </span>
-					<div class="js-questionmart fl">
-						<img style="padding:7px 20px 0 3px;" src="<%= asset_path 'baicheng/content/questionmark.jpg' %>">
-						<div class="questionmart_pop none">
-							<h3>收藏/下载房型图（线上）</h3>
-							<div class="clear">
-								<div>当家装公司/设计师对大众用户上传的某房型图感兴趣有意参与设计的时候：</div>
-								<div class="clear">
-									<span class="fl nomargin">可点击</span>
-									<div class="show-group fl">
-										<ul class="clear nomargin">
-											<li>
-												<%- if current_user %>
-													<%= link_to "收藏", user_collects_path(@story.user_id,:story_id =>@story.id), :remote => true, method: :post, :class =>"icon-collect" %>
-												<%- else %>
-													<a href="javascript:show_login();" class="icon-collect">收藏</a>
+				<div class="reviews">
+					<h5><i class="i_icon icon_tit"></i>留言板</h5>
+					<%= form_for(Comment.new, :html => {:class => "comment-form"}) do |f| %>
+						<p class="alert alert-info"><span class="pull-right"><b>0</b>/140</span>留言 (<%= @story.comments_count %>)</p>
+						<%= f.hidden_field :commentable_id, value: @story.id %>
+			         <%= f.hidden_field :commentable_type, value: 'Story' %>
+			         <%= f.text_area :content, :id => "refresh-textarea", 'data-total' => '140',class: "textarea_def c_area" %>
+						<div class="clearfix">
+							<button type="submit" class="pull-left vote_btn vote_btn_small comment_button nomargin noborder">提交留言</button>
+						</div>
+		        <%- end %>
+					<div class="pr">
+						<div class="pagination pagination-right nomargin" style="position:absolute;right:0;top:-43px;">
+							<%= paginate @comments %>
+						</div>
+						<%- @comments.each do |comment| %>
+							<div class="review_item">
+								<p class="review_name"><span class="pull-right"><%= comment.created_at.to_date %></span><strong><%= comment.user ? comment.user.display_name : "匿名" %></strong></p>
+								<div class="clearfix">
+									<%- if current_user %>
+										<span class="review_btns pull-right">
+											<%- unless comment.user == current_user %>
+												<a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
+											<%- end %>
+											<%- if @story.user == current_user %>
+												<%= link_to comment_path(comment.id), method: :delete, :confirm => '确定删除么?',:title => '' do %>
+													<i class='i_icon i_icon_big i_icon_del'></i>删除
 												<%- end %>
-											</li>
-										</ul>
-									</div>
-									<span class="fl">,随时进入<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>的收藏再次查看</span>
+											<%- end %>
+										</span>
+									<%- end %>
+									<p class="review_txt border_dot_b1"><%= comment.content %></p>
 								</div>
+								<%= form_for(ReplyMsg.new, :html => {:class => "reply_form clear none"}) do |f| %>
+			                  <%= f.hidden_field :show_id, value: @story.id %>
+			                  <%= f.hidden_field :comment_id, value: comment.id %>
+			                  <%= f.hidden_field :reply_type, value: "stories" %>
+			                  <%= f.text_area :content, :rows => 2, class: 'textarea_def r_area' %>
+			                  <div class="btn_group clearfix">
+										<button type="submit" class="pull-left vote_btn vote_btn_small reply_button noborder">提交留言</button>
+										<a class="pull-left vote_btn vote_btn_small reset_button vote_btn_gray noborder">取消</a>
+									</div>
+			                <%- end %>
 
-								<div class="clear">
-									<span class="fl nomargin">或是点击</span>
-									<div class="show-group fl">
-										<ul class="clear nomargin">
-											<li><a href="<%= download_story_path(@story.id) %>" class="icon-download">下载</a></li>
-										</ul>
-									</div>
-									<span class="fl">,将房型图下载到本地进行设计。</span>
-								</div>
-							</div>
-							<h3 style="margin-top:15px;">房型设计（线下）</h3>
-							<p>家装公司/设计师对下载的房型图进行设计。</p>
-							<h3 style="margin-top:30px;">房型设计上传（线上）</h3>
-							<p class="clear">
-								<span class="fl nomargin">家装公司/设计师点击</span>
-								<%- if current_user && current_user.role_id != 3 %>
-									<a href="<%=new_user_design_path(current_user, story_id: @story.id)%>" class="fl btn-title" style="padding:1px 0;">我来设计</a>
-								<%- elsif current_user %>
-									<a href="javascript:alert('只有设计师/家装公司才能上传哦！');" class="fl btn-title" style="padding:1px 0;">我来设计</a>
-								<%- else %>
-									<a href="javascript:show_login();" class="fl btn-title" style="padding:1px 0;">我来设计</a>
+								<%- comment.reply_msgs.order("created_at DESC").each do |reply| %>
+									<p class="nomargin">
+										<span class="color_red"><%= reply.user.display_name %></span>
+										回复说：<%= reply.content %>
+									</p>
+									<%- if @story.user == current_user %>
+									<span class="review_btns pull-right">
+										<%= link_to reply_msg_path(reply.id), method: :delete, :confirm => '确定删除么?', :title => '' do %>
+												<i class='i_icon i_icon_big i_icon_del'></i>删除
+										<%- end %>
+									</span>
+									<%- end %>
 								<%- end %>
-								<span class="fl">，将设计图上传。</span>
-							</p>
-							<h3 style="margin-top:25px;">上传合同（线上）</h3>
-							<p>
-								当家装公司/设计师的作品被上传房型图的大众用户选中，经过咨询沟通，并成功下单后。家装公司/设计师可进入
-								<a  style="color:#333;" href="<%= user_path(current_user) if current_user %>" target="_blank">个人主页</a>，点击
-								<% if current_user -%>
-                  <% unless current_user.common_user? %>
-                  	<a href="<%=new_contract_path(type: 'baicheng')%>"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
-                  <% else %>
-                  	<a href="javascript:alert('只有设计师/家装公司才能上传哦！');"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
-                  <% end %>
-                <% else -%>
-                  <a href="javascript:show_login();"><img src="<%= asset_path 'baicheng/content/upload.jpg' %>"></a>
-                <% end %>
-								
-							</p>
+							</div>
+						<%- end %>
 						</div>
 					</div>
-
 				</div>
 			</div>
-			<div class="img-info">
-				<h3 class="cr tc fb"><%= @story.title %></h3>
-				<p class="tc ft12 author">作者：<%= @story.user.display_name %></p>
-				<p style="word-wrap:break-word;"><%= @story.content %></p>
-				<p class="clear">
-					<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => "Story"), :remote => true, :method => 'post', :class => "fr", id: "votes_count#{@story.id}" do %>
-						<%= image_tag("baicheng/content/btn_vote.png")%>
-					<%- end %>
-				</p>
-			</div>
-			<div class="img-info">
-				<h4 class="fb">已提交作品</h4>
-				<ul class="oldworks clear">
-					<%- @designs.each do |design| %>
-						<li class="nomargin">
-							<a href="<%= user_design_path(design.user_id, design) %>" target="_blank">
-								<%= image_tag(design.cover_img.try(:file).try(:url, :design_image_list), size: "203x146")%>
-							</a>
-							<h5>
-								<a href="<%= user_design_path(design.user_id, design) %>" class="cr" target="_blank"><%= design.title %></a>
-							</h5>
-							<p>
-								<span class="fr nomargin ft12"><%= Area.find(design.area_id).parent.name if design.area_id %></span>
-								<span class="ft12"><%= design.user.display_name %></span>
-							</p>
-						</li>
-					<%- end %>
-				</ul>
-			</div>
 		</div>
-		<div class="container-bot"></div>
-	</div><!-- refresh-container -->
-</div><!-- wrapper -->
+	</div>
+</div>
+
+<!-- modal pops -->
+<div class="design_tips clearfix modal hide fade text-center" id="design_tips">
+	<a class="close_btn" data-dismiss="modal" aria-hidden="true" href="#">X</a><br><br>
+	<h4>小提示</h4>
+	<h5 class="mt30">您已预定了<%= @story.user.display_name %>（<%= @story.user.phone %>）的房型图</h5>
+	<p>请先<strong><em><a href="<%= download_story_path(@story) %>">下载房型图</a></em></strong>，记得15天内上传设计方案，每套户型仅接受前3套哦！<br />
+	（包含1张平面图、1张重点设计功能区立面图、1张效果图，具体参见活动<strong><a href="/love/actives#rules-regulations" target="_blank">评比标准</a></strong>，过期视为自动放弃）<br />
+	建议：速速联系业主，上门测量后出具的设计图胜出几率更大！<br />
+	iColor特别提醒：陪同业主进店购买立邦产品，还能有话费等积分奖励哦！</p>
+</div><!-- modal pops ends -->

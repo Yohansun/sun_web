@@ -155,6 +155,7 @@ Icolor::Application.routes.draw do
   match "/weekly_stars/:id/fullscreen" => "weekly_stars#fullscreen"
   match "/designs" => "designs#index"
   match "/designs/:id" => "designs#show"
+  post "/designs/story_talking/:id" => "designs#story_talking", as: "story_talking"
   match "/designs_upload" => "designs#upload"
 
   #我型我秀
@@ -418,7 +419,7 @@ Icolor::Application.routes.draw do
     get "judge" => "refresh#judge"
   end
 
-  scope "/baicheng", :module =>"baicheng" do
+  scope "/love", :module =>"baicheng" do
     root  to: 'welcome#index', as: 'baicheng_root'
     resources :design_works do
       collection do
@@ -426,10 +427,31 @@ Icolor::Application.routes.draw do
       end
     end
     resources :stories do
+      collection do
+        get :act
+        post :storyuser
+      end
       member do
         get :download
+        get :image_new
+      end
+      collection do 
+        post :update_image
+        post :update_title
       end
     end
+    resources :design_competes do
+      member do
+        get :download
+        post :comment
+        delete :destroy_comment
+      end
+    end
+    resources :fashion_model
+    resources :sysinfo
+    resources :upload_contract
+    resources :story_images
+    resources :actives
     match ':page', to: 'welcome#show', via: :get
     resources :contracts do
       collection do
@@ -438,7 +460,7 @@ Icolor::Application.routes.draw do
       end
     end
     resources :contract_images
-    resources :story_images
+
     resources :intros, only: :show
   end
 

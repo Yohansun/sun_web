@@ -19,6 +19,21 @@ class DesignsController < ApplicationController
     end
   end
 
+  def story_talking
+    if params[:id].present?
+      design = Design.find(params[:id])
+      #点击洽谈用户的id
+      design.story_talking_id = current_user.id
+      if design.save
+        render :js => "alert('洽谈成功!');location.reload();"
+      else
+        render nothing: true
+      end
+    else
+      render nothing: true
+    end
+  end
+
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
@@ -95,7 +110,13 @@ class DesignsController < ApplicationController
     flash[:design_errors] = []
     flag = true
     @design = current_user.designs.build(params[:design])
-    @design.story_id = params[:story_id] if params[:story_id].present?
+    if params[:story_id].present?
+      @design.story_id = params[:story_id] 
+      @design.baicheng_active = true
+    end
+    if params[:baicheng_active].present?
+      @design.baicheng_active = true
+    end
     unless params[:design][:title].present?
       flash[:design_errors] << "作品名称不能为空！"
       flag = false
@@ -141,7 +162,7 @@ class DesignsController < ApplicationController
           DesignTags.create(design_id: @design.id,image_library_category_id: tag)
         end
         current_user.create_score(current_user.id, 601 , 1 , 50)
-        redirect_to upload_user_design_path(current_user, @design)
+        redirect_to upload_user_design_path(current_user, @design, {:story_id => params[:story_id]})
       else
         @design.errors.messages.each do |key,value|
           flash[:design_errors] += value
@@ -319,11 +340,12 @@ class DesignsController < ApplicationController
       @design.baicheng_active = false
     end
     @design.save
-    #if params[:baicheng_active]
-    #    redirect_to "/baicheng/design_works/#{params[:design_id]}"
-    #else
-    redirect_to user_path(current_user)
-    #end
+    if @design.baicheng_active
+       # redirect_to design_competes_path
+       redirect_to "/love/design_competes/#{params[:story_id]}"
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   def destroy

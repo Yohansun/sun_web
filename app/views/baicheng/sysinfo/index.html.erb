@@ -1,0 +1,26 @@
+ 
+<div class="container-fluid">
+  <div class="design_works pad_t60">
+    <div class="wrapper pad_b40">
+      <div class="redline_b4">
+        <div class="clearfix sys_top border_dot_b1 pad_b40">
+          <a class="pull-left show" href="#"><%= avatar_img(current_user,"icon","46x46") %></a>
+          <a href="#" class="pull-left sys_user_name"><span>Hi，<strong class="color_red"><%= current_user.username %></strong>，您共收到了<strong class="color_red"><%= current_user.sys_msgs.baicheng.size   %></strong>条系统通知，请注意查看。</span></a>
+        </div>
+        <div class="mar_h20">
+          <ul class="unstyled system_list">
+            <% @msgs.each do |msg| %>
+            <li class="border_dot_b1">
+              <h5><%= raw msg.content %></h5>
+              <p><a class="pull-right" href="<%= sysinfo_path(msg) %>">查看</a><%= l msg.created_at,format: :long %></p>
+            </li>
+            <% end %>
+          </ul>
+          <div class="pagination pagination-centered">
+             <%= paginate @msgs %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

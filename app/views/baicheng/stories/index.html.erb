@@ -1,2 +1,96 @@
-<%= render partial: 'baicheng/welcome/navs' %>
-<%= render partial: "baicheng/welcome/#{params[:mode].blank? ? 'map' : 'grid'}" , locals: {data: @event_data} %>
+<%- content_for :tail do %>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      var options = {
+        data: data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '省/直辖市');
+      sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '城市');
+      sel.bind('.level_3', <%= params[:area_id].present? ? params[:area_id] : "null" %>, '区');
+    });
+  </script>
+
+  <script type='text/javascript'>
+  // Conversion Name: 因爱之名-我来设计内页-Landing on我来设计
+  // INSTRUCTIONS 
+  // The Conversion Tags should be placed at the top of the <BODY> section of the HTML page. 
+  // In case you want to ensure that the full page loads as a prerequisite for a conversion 
+  // being recorded, place the tag at the bottom of the page. Note, however, that this may 
+  // skew the data in the case of slow-loading pages and in general not recommended. 
+  //
+  // NOTE: It is possible to test if the tags are working correctly before campaign launch 
+  // as follows:  Browse to http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=at, which is 
+  // a page that lets you set your local machine to 'testing' mode.  In this mode, when 
+  // visiting a page that includes an conversion tag, a new window will open, showing you 
+  // the data sent by the conversion tag to the MediaMind servers. 
+  // 
+  // END of instructions (These instruction lines can be deleted from the actual HTML)
+    var ebRand = Math.random() + '';
+    ebRand = ebRand * 1000000;
+  //<![CDATA[ 
+    document.write('<scr' + 'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326823&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+  //]]>
+    CClicki[10008]._trackEvent({
+      type: 1,
+      labels: [
+        {"按钮名称": "Landing on我来设计"}
+      ],
+      values: [
+        {"数量": 1}
+      ]
+    });
+  </script>
+  <noscript>
+  <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326823&amp;ns=1"/>
+  </noscript>
+<%- end %>
+<div class="container-fluid">
+  <div class="mydesign">
+    <div class="banner1"></div>
+    <div class="wrapper pr pad_b40">
+      <%= form_for @search, :url => stories_path, :html =>{:class => 'design_list_form mar_h20 clearfix', method: :get} do |f| %>
+        <fieldset class="ft12 form-inline search_area text-right">
+          <p class="pull-left">
+            房型图排序
+            <%= select_tag :sort, options_for_select([["默认排序",""],
+                ["热门排序↑","hot"],
+                ["热门排序↓", "new_chance"]], params[:sort]), :class => "span2", :onChange =>'submit();' %>
+          </p>
+          寻找同城房型图
+          <select id="province" class="level_1 span2" name="province_id"></select>
+          <select id="city" class="level_2 span2" name="city_id"></select>
+          <select id="country" class="level_3 span2" name="area_id"></select>
+          <button type="" class="btn btn-small btn_yellow">确定</button>
+          <%= f.text_field :user_username_or_user_name_or_user_name_of_company_like, :class =>"span2",:placeholder =>"搜用户" %>
+          <input type="submit" class="search_btn" value="">
+        </fieldset>
+      <%- end %>
+      <div class="divider_hori_dot"></div>
+      <div class="redline_b4">
+        <ul class="thumbnails design_list nomargin">
+          <%- @stories.each do |story| %>
+            <li class="span2">
+              <div class="thumbnail nopadding">
+                <%- if story.designs_count == 3 %>
+                  <span class="list_tag list_tag_full"></span>
+                <%- end %>
+                <!-- <span class="list_tag list_tag_deal"></span> -->
+                <a href="<%= story_path(story.id) %>" class="list_img_a">
+                  <%= image_tag(story.story_image.file.url(:baicheng_list)) %>
+                </a>
+                <div class="design_list_tit">
+                  <h5 class="nomargin"><a href="<%= story_path(story.id) %>"><%= story.title %></a></h5>
+                  <p class="nomargin"><%= story.user.display_name %> (<%= story.location %>)</p>
+                </div>
+              </div>
+            </li>
+          <%- end %>
+        </ul>
+        <div class="pagination pagination-centered">
+          <%= paginate @stories %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

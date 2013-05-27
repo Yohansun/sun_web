@@ -1,0 +1,117 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "baicheng/steps.css" %>
+<%- end %>
+<% content_for :tail do -%>
+  <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript">
+  <%- session_key = Rails.application.config.session_options[:key] -%>
+
+  (function($){
+    $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    //skipDefault : ['onSelect'],
+    progressData : 'percentage',
+    buttonText : "<a class='step2-upload pull-left'>选择图片</a>",
+    fileTypeDesc : '图片文件',
+    fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+    successTimeout : 6000,
+    fileSizeLimit : '3MB',
+    // uploadLimit : 1,
+    width : 88,
+    height : 34,
+    multi : true,
+    auto : true,
+    checkExisting : false,
+    transparent : true,
+    uploader : '/love/story_images',
+    //buttonText : '选择文件',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      if (dat.result == 'success') {
+        $.getScript(dat.upload + "?for=design", function(){});
+      }else{
+        alert("图片上传失败");
+      };
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    },
+    onUploadError : function(file, errorCode, errorMsg, errorString) {
+      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+    },
+    onUploadStart : function(){
+      //$("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      //$("#upload_going").hide();
+    }
+  });
+
+  })($);
+  function remote(id) {
+  $('#story_image'+id).remove();
+  }
+  function remove_design_image(){
+    $('.upload_item').remove();
+  }
+  function form_valid(){
+    flag = true
+    alt = ""
+    imgCount = $(".upload_item").size();
+    if(imgCount < 1){
+      alt += "不能一张图片都没有哦！";
+      flag = false;
+    }
+
+    if(flag == false){
+      alert(alt);
+      return false;
+    }else{
+      return true;
+    }
+  }
+  </script>
+ <% end %>
+<div class="container-fluid step2">
+	<div class="container">
+		<h1>您的家装需求已提交完成！</h1>
+		<!-- <form action="2.3.html" method="" class="refresh-form ft12"> -->
+			<%= form_tag(update_image_stories_path, :class=>"refresh-form ft12", :onsubmit=>"return form_valid()") do %>
+			<div class="refresh-control">
+				<div class="form-article">
+          <p>上传您的房型图：<img src="<%=asset_path "step2-model.jpg"%>" /></p>
+          <div>
+					<!-- <p style="line-height:34px;"> -->
+          <div class="step2-upload pull-left">
+						<a href="#" class="pull-left" id="upload_photo">选择图片</a>
+          </div>
+          您可将购房合同中的房型图页面扫描成图片格式或手机拍照后直接上传；<br />
+            若没有房型图？还可去<a href="http://sh.soufun.com" class="step2-archor" target="_blank" id='monitor_link_326819'>搜房网</a>查找
+						<!-- 没有房型图？去 <a href="http://sh.soufun.com" class="step2-archor" target="_blank">搜房网</a>查找 -->
+					</p>
+        </div>
+					<p class="mt30">已经上传文件</p>
+					<div class="step2-area text-right">
+						<div class="load-bar load-content" id="uploads">
+							<%= render :partial => "baicheng/story_images/upload", :collection => @upload -%>						</div><!--load-content ends-->
+					</div>
+					<p>
+						建议上传大小不超过3M的JPG,GIF,PNG,BMP格式图片<br />
+						高质量房型图更方便设计人员为您设计
+					</p>
+				</div>
+			</div>
+			<p class="text-right">
+				<input type="hidden" name="story_id" value="<%=params[:id]%>">
+				<a href="<%=new_story_path(id: params[:id])%>" class="steps-back pull-left">返回</a>
+				<input type="submit" class="step1-btn" value="" id='monitor_link_326820'>
+			</p>
+			<% end %>
+		<!-- </form> -->
+	</div>
+</div>

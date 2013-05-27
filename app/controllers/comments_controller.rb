@@ -7,10 +7,16 @@ class CommentsController < ApplicationController
 
     case @comment.commentable_type
       when 'Design'
-        if request.headers['referer'].match %r(weekly_stars|design_works)
+        if request.headers['referer'].match %r(weekly_stars|design_works|design_competes)
           redirect_to request.headers['referer']
         else
           redirect_to user_design_path(@comment.commentable.user_id, @comment.commentable.id)
+        end
+      when 'Story'
+        if request.headers['referer'].match %r(stories|design_competes)
+          redirect_to request.headers['referer']
+        else
+          redirect_to :back
         end
       when 'DesignImage'
         redirect_to image_show_design_image_path(@comment.commentable.id)
@@ -30,5 +36,11 @@ class CommentsController < ApplicationController
         redirect_to "/events/#{@comment.commentable.id}"
       else
     end
+  end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to :back
   end
 end

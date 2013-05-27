@@ -7,7 +7,7 @@ class Design < ActiveRecord::Base
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
     :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color,
-    :recommend_color_category1, :is_yda, :is_refresh, :property_name, :speech
+    :recommend_color_category1, :is_yda, :is_refresh, :property_name, :speech, :story_talking_id
   validates_presence_of :title, :area_id, :property_name
 
   belongs_to :user
@@ -18,21 +18,30 @@ class Design < ActiveRecord::Base
   has_many :collects, :dependent => :destroy
   has_many :design_tags,:class_name => "DesignTags"
   has_many :design_styles, :through => :design_tags,:source => :image_library_category,:conditions => ["image_library_categories.parent_id = 34"]
+  belongs_to :story, :counter_cache => true
+
   has_one :baicheng_event
   #最新的一张作品图片
   has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
+  belongs_to :area
 
   scope :time_range, ->(start_date,end_date){joins(:user).where(:users => {:role_id => 1,:des_status => true,:source => nil},:created_at => start_date.to_time..end_date.to_time)}
+  scope :baicheng,->{where(baicheng_active: true)}
 
   paginates_per 8
 
   after_create :update_user_design_code_count
-  after_update :sync_baicheng_event
+  after_create :send_baicheng_sys_msg
+  #after_update :sync_baicheng_event
   before_destroy :clear_baicheng_event
   
   def design_style_names
     design_styles.map(&:title).join(',')
   end
+
+  def design_style_names  
+    design_styles.map(&:title).join(',')  
+  end  
 
   #更新用户上传作品数色号（权重）。片区快查用
   def update_user_design_code_count
@@ -87,14 +96,27 @@ class Design < ActiveRecord::Base
     end
   end
 
-  def sync_baicheng_event
-    if self.baicheng_active.present? && self.baicheng_active == true
-      BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
-    end
-  end
+  # def sync_baicheng_event
+  #   if self.baicheng_active.present? && self.baicheng_active == true
+  #     BaichengEvent.create(eventable_id: self.id, eventable_type: Design.name, area_id: self.area_id)
+  #   end
+  # end
 
+  
   def clear_baicheng_event
     BaichengEvent.find_by_design(self.id).try(:destroy_all)
   end
 
+  private
+  def send_baicheng_sys_msg
+    if self.story
+      SysMsg.send_to(self.story.user,"设计师<a href=/users/#{self.user.id} >#{self.user.display_name}</a>对我发布的《<a href=/love/stories/#{self.story.id}>房型图</a>》上传了设计。",
+        {:reply_type => "baicheng",re_url=>"/love/stories/#{self.story.id}"})
+      ##TODO （比如：想要设计的作品，已上传的作品数量变更）
+      self.story.want_designers.each do |user|
+        SysMsg.send_to(user,"您的<a href=/love/stories/act >个人活动主页</a>有最新信息更新，快去查看。",
+          {:reply_type => "baicheng",:re_url =>"/love/stories/act",site_message_id: 123}) unless user==self.user
+      end
+    end
+  end
 end

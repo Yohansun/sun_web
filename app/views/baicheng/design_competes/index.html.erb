@@ -1,0 +1,68 @@
+<%- content_for :head do %>
+<%= javascript_include_tag "jquery.uploadify.js" %>
+	<script type="text/javascript">
+	  $(function() {
+      var options = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '省/直辖市');
+      sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '城市');
+      sel.bind('.level_3', <%= params[:area_id].present? ? params[:area_id] : "null" %>, '区');
+    });
+	</script>
+<%- end %>
+<div class="container-fluid">
+	<div class="design_works pad_t60">
+		<div class="wrapper pad_b40">
+			<%= form_tag design_competes_path, :method => "get", :class => "design_list_form mar_h20" do %>
+				<fieldset class="form-inline search_area">
+					 
+					<select class="span2 nomargin level_1" name="province_id">
+						<option>省/直辖市</option>
+					</select>
+					<select class="span2 nomargin level_2" name='city_id'>
+						<option>城市</option>
+					</select>
+					<select class="span2 nomargin level_3" name='area_id'>
+						<option>区</option>
+					</select>
+                                        <%=  select_tag "style", options_from_collection_for_select(ImageLibraryCategory.style, "id", "title",params[:style]),:prompt=>'风格',class: "input-small nomargin"   %>
+                                  	<%=  select_tag "tag", options_from_collection_for_select(ImageLibraryCategory.where(parent_id: 1), "id", "title",params[:tag]),:prompt=>'户型',class: "input-small nomargin"   %>
+                                 	<%=  select_tag "cost", options_from_collection_for_select( ImageLibraryCategory.cost, "id", "title",params[:cost]),:prompt=>'预算',class: "input-small nomargin"   %>
+ 
+					<button type="" class="btn btn-small btn_yellow">确定</button>
+					<!-- <input type="text" class="span2" placeholder="搜用户"> -->
+					<select class="span2 nomargin" name="soso" style="width:102px;">
+						<option value="so_user">搜用户</option>
+						<option value="so_design">搜作品</option>
+					</select>
+					<%=text_field_tag :keywords, params[:keywords], :placeholder => '输入筛选内容', :class => 'input-small'%>
+					<input type="submit" class="search_btn" value="">
+				</fieldset>
+			<%- end %>
+			<div class="divider_hori_dot"></div>
+			<div class="redline_b4">
+				<ul class="thumbnails design_list nomargin">
+					<%- @designs.each do |design| %>
+						<li class="span2">
+							<div class="thumbnail nopadding">
+								<span class="<%= "list_tag list_tag_deal" if false %>"></span>
+								<%= link_to image_tag(design.cover_img.try(:file).try(:url), :size =>'203x146'), design_compete_path(design), :class => 'list_img_a'  %>
+								<div class="works_tit">
+									<h5 class="nomargin">
+										<%=link_to design.try(:title), design_compete_path(design) %>
+									</h5>
+                                                                  <p class="nomargin"><span class="pull-right"><%= design.design_styles.first.try(:title) %></span><%= design.user.try(:username) %>(<%= design.user.city.name %>)</p>
+								</div>
+							</div>
+						</li>
+					<%- end %>
+				</ul>
+				<div class="pagination pagination-centered">
+					<%= paginate @designs %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

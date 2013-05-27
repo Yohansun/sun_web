@@ -1,1 +1,1 @@
-window.location.replace("<%= upload_success_user_designs_path(design_id: @design.id) %>");
+window.location.replace("<%= upload_success_user_designs_path({:design_id => @design.id, :story_id => params[:story_id]}) %>");

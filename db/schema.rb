@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313075838) do
+ActiveRecord::Schema.define(:version => 20130502100254) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -195,6 +195,27 @@ ActiveRecord::Schema.define(:version => 20130313075838) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
 
+  create_table "contract_images", :force => true do |t|
+    t.integer  "contract_id"
+    t.integer  "user_id"
+    t.boolean  "is_cover",          :default => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "contracts", :force => true do |t|
+    t.string   "genre"
+    t.integer  "u_id"
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "cubit_fixtures", :force => true do |t|
     t.string   "name"
     t.string   "phone"
@@ -253,21 +274,24 @@ ActiveRecord::Schema.define(:version => 20130313075838) do
     t.integer  "view_count",        :default => 0
     t.integer  "collects_count",    :default => 0
     t.integer  "sorts",             :default => 100
+    t.boolean  "no_audited",        :default => false
   end
 
   add_index "design_images", ["area_id"], :name => "area_id"
-  add_index "design_images", ["audited", "edited_color"], :name => "index_design_images_on_audited_and_edited_color"
-  add_index "design_images", ["created_at"], :name => "created_at"
+  add_index "design_images", ["audited"], :name => "audited"
+  add_index "design_images", ["created_at", "file_file_name", "file_updated_at"], :name => "index_design_images_on_timestamp"
+  add_index "design_images", ["created_at"], :name => "NewIndex5"
+  add_index "design_images", ["edited_color"], :name => "edited_color"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
-  add_index "design_images", ["imageable_id"], :name => "imageable_id"
+  add_index "design_images", ["id", "imageable_id", "imageable_type", "created_at"], :name => "id"
+  add_index "design_images", ["imageable_id"], :name => "NewIndex2"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
-  add_index "design_images", ["imageable_type"], :name => "imageable_type"
+  add_index "design_images", ["imageable_type"], :name => "NewIndex3"
+  add_index "design_images", ["is_cover"], :name => "NewIndex4"
   add_index "design_images", ["is_cover"], :name => "index_design_images_on_is_cover"
-  add_index "design_images", ["pinyin"], :name => "index_design_images_on_pinyin"
-  add_index "design_images", ["sorts"], :name => "index_design_images_on_sorts"
+  add_index "design_images", ["sorts"], :name => "sorts"
   add_index "design_images", ["source"], :name => "source"
-  add_index "design_images", ["view_count"], :name => "index_design_images_on_view_count"
-  add_index "design_images", ["votes_count"], :name => "votes_count"
+  add_index "design_images", ["user_id"], :name => "NewIndex1"
 
   create_table "design_tags", :force => true do |t|
     t.integer  "design_id"
@@ -460,9 +484,8 @@ ActiveRecord::Schema.define(:version => 20130313075838) do
     t.string   "pinyin"
   end
 
-  add_index "image_library_categories", ["lft"], :name => "index_image_library_categories_on_lft"
-  add_index "image_library_categories", ["parent_id"], :name => "index_image_library_categories_on_parent_id"
   add_index "image_library_categories", ["pinyin"], :name => "index_image_library_categories_on_pinyin"
+  add_index "image_library_categories", ["title"], :name => "title"
 
   create_table "image_tags", :force => true do |t|
     t.integer  "design_image_id"
@@ -472,6 +495,7 @@ ActiveRecord::Schema.define(:version => 20130313075838) do
     t.string   "genre"
   end
 
+  add_index "image_tags", ["design_image_id", "image_library_category_id"], :name => "index_design_image_id_and_image_library_category_id"
   add_index "image_tags", ["design_image_id"], :name => "design_image_id"
   add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
   add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
@@ -661,42 +685,44 @@ ActiveRecord::Schema.define(:version => 20130313075838) do
 
   create_table "old_articles", :force => true do |t|
     t.integer  "class_id"
-    t.string   "title",      :limit => 200
+    t.string   "title"
     t.string   "image"
     t.text     "content"
-    t.datetime "publish_at",                               :null => false
-    t.integer  "view_count", :limit => 8,   :default => 0
+    t.datetime "publish_at"
+    t.integer  "view_count"
     t.string   "thumb"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "old_design_files", :force => true do |t|
-    t.string   "title",         :limit => 256
-    t.string   "src",           :limit => 256
-    t.integer  "index"
     t.integer  "old_design_id"
-    t.datetime "create_date",                  :null => false
-    t.integer  "photo_type",    :limit => 1
-    t.binary   "is_cover",      :limit => 1
-    t.string   "space",         :limit => 20
+    t.string   "title"
+    t.string   "src"
+    t.integer  "index"
+    t.datetime "create_date"
+    t.integer  "photo_type"
+    t.boolean  "is_cover"
+    t.string   "space"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
-
-  add_index "old_design_files", ["old_design_id"], :name => "NewIndex1"
 
   create_table "old_designs", :force => true do |t|
-    t.string   "title",       :limit => 256
-    t.string   "tags",        :limit => 256
+    t.string   "title"
     t.integer  "user_id"
-    t.datetime "create_date",                               :null => false
-    t.integer  "view_count",  :limit => 8
-    t.binary   "recommended", :limit => 1
-    t.string   "style",       :limit => 20
-    t.binary   "month_star",  :limit => 1
-    t.integer  "month",       :limit => 1
+    t.integer  "month"
     t.integer  "year"
-    t.integer  "top_n",                      :default => 0, :null => false
+    t.integer  "top_n"
+    t.string   "tags"
+    t.datetime "create_date"
+    t.integer  "view_count"
+    t.boolean  "recommended"
+    t.boolean  "month_star"
+    t.string   "style"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
-
-  add_index "old_designs", ["user_id"], :name => "NewIndex1"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -952,6 +978,9 @@ ActiveRecord::Schema.define(:version => 20130313075838) do
     t.datetime "updated_at",                   :null => false
     t.integer  "parent_id"
     t.integer  "votes_count",   :default => 0
+    t.string   "budget"
+    t.text     "demand"
+    t.boolean  "is_save"
   end
 
   create_table "story_image_tags", :force => true do |t|
