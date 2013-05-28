@@ -5,7 +5,7 @@ class LandSource < ActiveRecord::Base
   validates_uniqueness_of :code
 
   def self.add_new_lands
-    CSV.foreach("#{Rails.root}/lib/data/new_lands.csv") do |row|
+    CSV.foreach("#{Rails.root}/lib/data/new_lands_0528.csv") do |row|
       site = row[0]
       position = row[1]
       code = row[2].scan(/\=[0-9a-z-_]+/)[0].to_s.gsub('=','')
