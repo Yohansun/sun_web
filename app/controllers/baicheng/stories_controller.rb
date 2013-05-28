@@ -20,15 +20,15 @@ class Baicheng::StoriesController < ApplicationController
     @search = Story.search(params[:search])
     @stories = @search.where(:is_save => true)
     if params[:sort].present?
-        case params[:sort]
-        when 'hot'
-          @search_sort = @search.order("find_in_set(stories.designs_count,'2,1,0,3') asc")
-        when 'new_chance'
-          @search_sort = @search.order("stories.designs_count desc")
-        else
-          @search_sort = @search
-        end
-        @stories = @search_sort.where(:is_save => true)
+      case params[:sort]
+      when 'hot'
+        @search_sort = @search.order("find_in_set(stories.designs_count,'2,1,0,3') asc")
+      when 'new_chance'
+        @search_sort = @search.order("stories.designs_count desc")
+      else
+        @search_sort = @search
+      end
+      @stories = @search_sort.where(:is_save => true)
     end
     @stories = @stories.order("stories.created_at desc").page(params[:page]).per(24)
   end
@@ -151,21 +151,25 @@ class Baicheng::StoriesController < ApplicationController
 
   def storyuser
     if params[:story_id] && params[:user_id]
-      if check_storyuser(params)
-        story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
-        render :js => "show_modal();"
-      else
-        user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
-        if user.design_time + 15.days < Time.now
-          user.design_time = Time.now
-          user.save
-          render :js => "show_modal();"
+      if StoryUser.where(user_id: current_user.id).current_month.count<5
+        if check_storyuser(params)
+          story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
+          render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}');show_modal();"
         else
-          render :js => "alert('您已点过一次，不能再次点击!');"
+          user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
+          if user.design_time + 15.days < Time.now
+            user.design_time = Time.now
+            user.save
+            render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}'); show_modal();"
+          else
+            render :js => "alert('您已点过一次，不能再次点击!');"
+          end
         end
+      else
+        render nothing: true
       end
     else
-      render nothing: true
+       render :js => "alert('您本月的预订已满5套，无法继续预订房型图。');"
     end
   end
  
