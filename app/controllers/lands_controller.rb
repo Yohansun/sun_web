@@ -75,7 +75,10 @@ class LandsController < ApplicationController
 							"514_sina_tk2",
 							"514_taipingyang_tk1",
 							"514_zhuangxiu_tk1",
-							"514_pipa_tk1"
+							"514_pipa_tk1",
+              '0528_soufun_dope_first_frame',
+              '0528_soufun_dope_scroll_link',
+              '0528_sohu_dope_first_picture'
 						]
 
 			urls_baicheng = ["baicheng_soufun_tuliao",
@@ -323,7 +326,8 @@ class LandsController < ApplicationController
 				"428_hejia_star3",
 				"428_zhuangxiudianpin_star2",
 				"428_zhuangxiudianpin_star3",
-				"428_zhuangxiudianpin_star4"
+				"428_zhuangxiudianpin_star4",
+        '0528_soufun_school_first_frame'
 			]
 
 
