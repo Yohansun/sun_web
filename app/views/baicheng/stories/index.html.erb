@@ -80,8 +80,8 @@
                   <%= image_tag(story.story_image.file.url(:baicheng_list)) %>
                 </a>
                 <div class="design_list_tit">
-                  <h5 class="nomargin"><a href="<%= story_path(story.id) %>"><%= story.title %>的房型图</a></h5>
-                  <p class="nomargin">(<%= story.city_name%>)</p>
+                  <h5 class="nomargin"><a href="<%= story_path(story.id) %>"><%= story.user.display_name %>的房型图</a></h5>
+                  <p class="nomargin"> <%= story.city_name%></p>
                 </div>
               </div>
             </li>
