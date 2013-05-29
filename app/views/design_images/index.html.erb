@@ -456,7 +456,7 @@ $(function(){
 						
 						<a href="/images/<%=image.id%>_<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=site + (index + 1)%>" target="_blank">
 							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title), title: image.design.try(:title)) %>
-							<p><%= truncate(image.title, length: 15) %></p>
+							<p><%= truncate(image.design.try(:title), length: 15) %></p>
 							<span></span>
 						</a>
 
