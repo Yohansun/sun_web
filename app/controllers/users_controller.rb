@@ -67,7 +67,11 @@ class UsersController < ApplicationController
 
       current_user.attributes = params[:user]
       if current_user.save
-        redirect_to(root_path)
+        if session[:baigcheng_login].present?
+          redirect_to baicheng_root_path
+        else
+          redirect_to(root_path)
+        end
       else
         valid_result = current_user.errors.messages
 
