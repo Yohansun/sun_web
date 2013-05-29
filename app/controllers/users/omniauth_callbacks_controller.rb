@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def failure
+    render text: "#{ env['omniauth.error']}"
+  end
   def action_missing(provider)
     if !User.omniauth_providers.index(provider.to_sym).nil?
       omniauth = env["omniauth.auth"]
