@@ -13,7 +13,7 @@ class Design < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
-  has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover desc,design_images.created_at DESC'
+  has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover desc'
   has_many :color_codes
   has_many :collects, :dependent => :destroy
   has_many :design_tags,:class_name => "DesignTags"
@@ -22,7 +22,7 @@ class Design < ActiveRecord::Base
 
   has_one :baicheng_event
   #最新的一张作品图片
-  has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "design_images.created_at desc"
+  has_one :cover_img,:as => :imageable,:class_name => "DesignImage",:order => "is_cover desc,design_images.created_at desc"
   belongs_to :area
 
   scope :time_range, ->(start_date,end_date){joins(:user).where(:users => {:role_id => 1,:des_status => true,:source => nil},:created_at => start_date.to_time..end_date.to_time)}
