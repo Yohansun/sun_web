@@ -16,10 +16,10 @@ class Baicheng::IntrosController < ApplicationController
     	@description = "“刷新百城”设计案例征集评选活动评选细则，评委评选：由国内外著名室内设计专家及立邦色彩组成（名单暂未定）。在每个城市参与活动的普通用户、设计师和家装公司中评选出获奖选手。"
       when "name"
       	@title = "刷新百城”设计案例征集评选活动评委名单-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    	@description = "立邦icolor刷新百城设计案例征集评选活动评委名单。"
+    	@description = "立邦iColor刷新百城设计案例征集评选活动评委名单。"
     when "time"
     	@title = "刷新百城”设计案例征集评选活动时间-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    	@description = "立邦icolor刷新百城设计案例征集评选活动时间表。包括刷新百城设计案例征集评选时间，评选揭晓时间，奖品发送时间。"
+    	@description = "立邦iColor刷新百城设计案例征集评选活动时间表。包括刷新百城设计案例征集评选时间，评选揭晓时间，奖品发送时间。"
     end
   	
     render "#{params[:id]}"
