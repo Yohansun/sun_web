@@ -116,6 +116,8 @@ class Design < ActiveRecord::Base
     if self.story
       SysMsg.send_to(self.story.user,"设计师<a href=/users/#{self.user.id} >#{self.user.display_name}</a>对我发布的《<a href=/love/stories/#{self.story.id}>房型图</a>》上传了设计。",
         {:reply_type => "baicheng",:re_url=>"/love/stories/#{self.story.id}"})
+      SysMsg.send_to(self.user,"您已经对<a href=/users/#{self.story.user.id} >#{self.story.user.display_name}</a>的《<a href=/love/stories/#{self.story.id}>房型图</a>》上传了设计。",
+        {:reply_type => "baicheng",:re_url=>"/love/stories/#{self.story.id}"})
       ##TODO （比如：想要设计的作品，已上传的作品数量变更）
       self.story.want_designers.each do |user|
         SysMsg.send_to(user,"您的<a href=/love/stories/act >个人活动主页</a>有最新信息更新，快去查看。",

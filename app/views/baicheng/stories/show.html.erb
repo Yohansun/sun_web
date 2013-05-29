@@ -321,7 +321,7 @@
 		<h4>小提示</h4>
 		<h5 class="mt30">
 			您已预定了<%= @story.user.display_name %>（<%= @story.user.phone %>）的房型图 <br />
-			您本月还可预订<strong><%= 5- StoryUser.where(user_id: current_user.id).current_month.count %></strong>套房型图
+			您本月还可预订<strong><%=   (StoryUser.where("user_id = ? and story_id = ?",current_user.id,@story.id).exists? ? 5 :4 ) - StoryUser.where(user_id: current_user.id).current_month.count  %></strong>套房型图
 		</h5>
 		<p>请先<em><a href="<%= download_story_path(@story) %>" target="_blank"><strong>下载房型图</strong></a></em>，记得<strong>15</strong>天内上传设计方案，每套户型仅接受前3套哦！<br />
 		（包含1张平面图、1张重点设计功能区立面图、1张效果图，具体参见活动<a href="/love/actives#rules-regulations" target="_blank"><strong>评比标准</strong></a>，过期视为自动放弃）<br />
