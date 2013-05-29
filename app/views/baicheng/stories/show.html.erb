@@ -74,15 +74,15 @@
 										<span>上传设计</span>
 									</a>
 								<%- elsif current_user %>
-                                                                  <% if @story.want_designers.include?(current_user) %>
-								<a class="btns btn_upload" href="<%= new_user_design_path(current_user,story_id: params[:id]) %>" id ='monitor_link_326826'>
-									<span>上传设计</span>
-								</a>
-                                                                <% else %>
-                                                          	<a class="btns btn_upload" href="javascript:alert('必须先点击我想设计');" id ='monitor_link_326826'>
-									<span>上传设计</span>
-								</a>
-                                                                <% end %>
+                  <% if @story.want_designers.include?(current_user) %>
+										<a class="btns btn_upload" href="<%= new_user_design_path(current_user,story_id: params[:id]) %>" id ='monitor_link_326826'>
+											<span>上传设计</span>
+										</a>
+                  <% else %>
+										<a class="btns btn_upload" href="javascript:alert('必须先点击我想设计');" id ='monitor_link_326826'>
+											<span>上传设计</span>
+										</a>
+                  <% end %>
 								<%- else %>
 									<a class="btns btn_upload" href="javascript:show_login();">
 										<span>上传设计</span>
@@ -162,19 +162,22 @@
 						<p><%= @story.demand %></p>
 					</div>
 					<div class="mar_h20 clearfix border_dot_b1">
-						<%= link_to votes_path(:voteable_id => @story.id, :voteable_type => 'Story'), :remote => true, :method => 'post', :class => "pull-right vote_btn story_votes_count#{@story.id}" do %>
-							<i class='i_icon i_icon_big icon_vote'></i>
-							投票(<small><%= @story.votes_count %></small>)
-						<%- end %>
+						<!-- <a class="pull-right vote_btn"><i class="i_icon i_icon_big icon_vote"></i>投票(865)</a> -->
 						<!-- JiaThis Button BEGIN -->
-						<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:110px;">
-							<span class="jiathis_txt" id ='monitor_link_326828'>分享：</span>
-							<a class="jiathis_button_renren" id ='monitor_link_326829'></a>
-							<a class="jiathis_button_douban" id ='monitor_link_326830'></a>
-							<a class="jiathis_button_tsina"  id ='monitor_link_326831'></a>
+						<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:140px;">
+							<span class="jiathis_txt">分享：</span>
+							<a class="jiathis_button_renren"></a>
+							<a class="jiathis_button_douban"></a>
+							<a class="jiathis_button_kaixin001"></a>
+							<a class="jiathis_button_tsina"></a>
+							<a class="jiathis_button_qzone"></a>
+							<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a> -->
+							<!-- <a class="jiathis_counter_style"></a> -->
 						</div>
+						<!-- // <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script> -->
 						<!-- JiaThis Button END -->
 					</div>
+
 				<%- end %>
 				
 					<div class="mar_h20 pad_b40 designers border_dot_b1">
@@ -193,9 +196,9 @@
 							        <%- end -%>
 							      </a>
 										<p><%= user.display_name %></p>
-                                                                                <%- if @story.user == current_user %>
-										<p class="nopadding"><i class="i_icon icon_tel"></i><%= user.phone %></p>
-                                                                                <%- end %>
+                    <%- if @story.user == current_user %>
+											<p class="nopadding"><i class="i_icon icon_tel"></i><%= user.phone %></p>
+                    <%- end %>
 									</div>
 								</li>
 								<%- unless index == 5 %>
@@ -312,23 +315,17 @@
 </div>
 
 <!-- modal pops -->
-<%if signed_in? %>
-<div class="design_tips clearfix modal hide fade text-center" id="design_tips" style="display: block;" aria-hidden="false">
+<%- if signed_in? %>
+	<div class="design_tips clearfix modal hide fade text-center" id="design_tips" aria-hidden="false">
 		<a class="close_btn" data-dismiss="modal" aria-hidden="true" href="#">X</a><br><br>
 		<h4>小提示</h4>
 		<h5 class="mt30">
-			您已预定了<%= @story.user.display_name %>（<%= @story.user.phone %>）的房型图 <br>
-                        您本月还可预订<strong><%= 5- StoryUser.where(user_id: current_user.id).current_month.count %></strong>套房型图
+			您已预定了<%= @story.user.display_name %>（<%= @story.user.phone %>）的房型图 <br />
+			您本月还可预订<strong><%= 5- StoryUser.where(user_id: current_user.id).current_month.count %></strong>套房型图
 		</h5>
-		<p>请先<em><a  href="<%= download_story_path(@story) %>" target="_blank"><strong>下载房型图</strong></a></em>，记得<strong>15</strong>天内上传设计方案，每套户型仅接受前3套哦！<br>
-		（包含1张平面图、1张重点设计功能区立面图、1张效果图，具体参见活动<a  href="/love/actives#rules-regulations" target="_blank"><strong>评比标准</strong></a>，过期视为自动放弃）<br>
+		<p>请先<em><a href="<%= download_story_path(@story) %>" target="_blank"><strong>下载房型图</strong></a></em>，记得<strong>15</strong>天内上传设计方案，每套户型仅接受前3套哦！<br />
+		（包含1张平面图、1张重点设计功能区立面图、1张效果图，具体参见活动<a href="/love/actives#rules-regulations" target="_blank"><strong>评比标准</strong></a>，过期视为自动放弃）<br />
 		建议：速速联系业主，上门测量后出具的设计图胜出几率更大！</p>
 	</div>
-<% end %>
+<%- end %>
 <!-- modal pops ends -->
-
-
-
-
- 
-

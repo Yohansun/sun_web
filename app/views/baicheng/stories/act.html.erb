@@ -4,10 +4,11 @@
 			<div class="sys_top">
 				<p>
 					<%= avatar_img(current_user,"icon","46x46") %>
-					<a href="javascript:void(0)" class="sys_user_name"><span>
-					<strong class="color_red">
-						<%= current_user.display_name if current_user %>
-					</strong>的活动主页</span></a>
+					<a class="sys_user_name">
+						<span>
+							<strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页
+						</span>
+					</a>
 				</p>
 				<p>
 					<strong>客户买单，你积分！</strong><br />
@@ -27,7 +28,7 @@
 									</a>
 									<div class="design_list_tit">
 										<h5 class="nomargin">
-                                                                                  <a href="<%= design_compete_path(story_user.story.designs.last) %>">
+                      <a href="<%= design_compete_path(story_user.story.designs.last) %>">
 												<%= story_user.story.designs.last.title %>
 											</a>
 										</h5>
@@ -41,7 +42,7 @@
 						<% else %>
 							<li class="span2">
 								<div class="thumbnail nopadding">
-                                                                  <a href="<%= story_path(story_user.story) %>" class="list_img_a">
+                  <a href="<%= story_path(story_user.story_id) %>" class="list_img_a">
 										<%= image_tag(story_user.story.story_image.file.url(:baicheng_list)) %>
 									</a>
 									<div class="design_list_tit">
@@ -52,7 +53,7 @@
 										</h5>
 										<p class="nomargin">(<%= story_user.story.area.city.name %>)</p>
 										<p class="nomargin">
-											<i class="i_icon icon_tel"></i>
+											<i class="i_icon icon_tel_blue"></i>
 											<%= story_user.story.user.phone %>
 										</p>
 									</div>
