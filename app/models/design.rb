@@ -13,7 +13,7 @@ class Design < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
-  has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
+  has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover desc,design_images.created_at DESC'
   has_many :color_codes
   has_many :collects, :dependent => :destroy
   has_many :design_tags,:class_name => "DesignTags"
