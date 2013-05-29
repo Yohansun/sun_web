@@ -9,7 +9,7 @@ class Baicheng::DesignWorksController < ApplicationController
         @description = "立邦icolor刷新百城设计案例征集评选活作品展示。"
       else
         @title = "刷新百城设计师作品展示-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-        @description = "立邦icolor刷新百城设计案例征集评选活作品展示。全国设计师作品分布。"
+        @description = "立邦iColor刷新百城设计案例征集评选活作品展示。全国设计师作品分布。"
     end
     if params[:mode]
       @event_data = if params[:search_area] == "other"
@@ -60,7 +60,7 @@ class Baicheng::DesignWorksController < ApplicationController
 
   def show
     @title = "上传刷新感言和爱情故事-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "上传立邦icolor刷新百城设计案例征集评选活动刷新感言和爱情故事。"
+    @description = "上传立邦iColor刷新百城设计案例征集评选活动刷新感言和爱情故事。"
 
   	@design = Design.find(params[:id])
   	@design_images = @design.design_images.available

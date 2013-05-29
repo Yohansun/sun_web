@@ -6,7 +6,7 @@ class Baicheng::DesignCompetesController < ApplicationController
   def index
      
     @title = "设计作品大比拼_展示各种风格装修设计作品-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "立邦icolor因爱之名刷新生活 设计作品大比拼活动，展示各种风格装修设计作品，你可以按城市、户型、风格、预算，选择适合您的装修设计图。"
+    @description = "立邦iColor因爱之名刷新生活 设计作品大比拼活动，展示各种风格装修设计作品，你可以按城市、户型、风格、预算，选择适合您的装修设计图。"
     @key_words = '装修设计作品,装修风格,装修户型,装修设计图'
     @desgins = Design.baicheng.includes(:cover_img).order("created_at DESC")
     province_id,city_id,area_id = params[:province_id].or(nil),params[:city_id].or(nil),params[:area_id].or(nil)
@@ -54,7 +54,7 @@ class Baicheng::DesignCompetesController < ApplicationController
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])  
     end      
     @title = "设计作品大比拼_#{@story.user.display_name if @story}房型设计-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈(**为设计作品名称)"
-    @description = "立邦icolor因爱之名刷新生活 设计作品大比拼活动，展示设计作品图片、楼盘名称、装修设计风格，您可以免费咨询。"
+    @description = "立邦iColor因爱之名刷新生活 设计作品大比拼活动，展示设计作品图片、楼盘名称、装修设计风格，您可以免费咨询。"
     @key_words = '设计作品名称,楼盘名称,装修设计风格'
   end
   

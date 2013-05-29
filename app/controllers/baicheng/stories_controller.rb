@@ -5,7 +5,7 @@ class Baicheng::StoriesController < ApplicationController
   
   def index
     @title = "我来设计_挑选感兴趣房型图-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "立邦icolor因爱之名刷新生活 我能设计活动，装修设计师上传设计作品，挑选感兴趣的房型图，获得更多装修需求机会。"
+    @description = "立邦iColor因爱之名刷新生活 我能设计活动，装修设计师上传设计作品，挑选感兴趣的房型图，获得更多装修需求机会。"
     @key_words = '设计作品,房型图,装修需求'
     params[:search] ||= {}
 
@@ -35,7 +35,7 @@ class Baicheng::StoriesController < ApplicationController
 
   def new
     @title = "我要装修_填写装修需求-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "立邦icolor因爱之名刷新生活 我要装修活动，第一步装修者填写装修需求，免费获得家装设计。"
+    @description = "立邦iColor因爱之名刷新生活 我要装修活动，第一步装修者填写装修需求，免费获得家装设计。"
     @key_words = '刷新生活,装修者,装修需求,家装设计'
     
     if current_user
@@ -108,14 +108,14 @@ class Baicheng::StoriesController < ApplicationController
 
   def image_new
     @title = "我要装修_填写装修需求-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "立邦icolor因爱之名刷新生活 我要装修活动，第二步装修者上传新房房型图，免费获得家装设计。"
+    @description = "立邦iColor因爱之名刷新生活 我要装修活动，第二步装修者上传新房房型图，免费获得家装设计。"
     @key_words = '刷新生活,装修者,装修需求,家装设计'
     @upload = StoryImage.where(story_id: params[:id])
   end
 
   def update_image
     @title = "我要装修_提交装修需求-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "立邦icolor因爱之名刷新生活 我要装修活动，装修者提交完成家装需求，将获得专业家装公司和设计师的家装创意方案。"
+    @description = "立邦iColor因爱之名刷新生活 我要装修活动，装修者提交完成家装需求，将获得专业家装公司和设计师的家装创意方案。"
     @key_words = '家装公司,装修设计师,装修设计方案'
     story_image = StoryImage.find params[:story_image_id]
     story_image.story_id = params[:story_id]
@@ -135,7 +135,7 @@ class Baicheng::StoriesController < ApplicationController
     @comments = @story.comments.page(params[:page]).per(4)
     @story_users = StoryUser.where(story_id: @story).order("design_time desc").limit(6)
     @title = "我来设计_#{@story.user.display_name}房型图-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
-    @description = "立邦icolor因爱之名刷新生活 我能设计活动，装修设计师选定房型图，您将看到其他想为您设计的家装公司和室内设计师。"
+    @description = "立邦iColor因爱之名刷新生活 我能设计活动，装修设计师选定房型图，您将看到其他想为您设计的家装公司和室内设计师。"
     @key_words = '立邦刷新生活,家装公司,室内设计师'
 
   end
