@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :search_color_code,:find_or_build_zip_file
 
+  around_filter :catch_exceptions
+
   def stored_location_for(resource)
     if current_user && current_user.not_role?
       flash[:notice] = "Congratulations, you're signed up!"
@@ -101,4 +103,13 @@ class ApplicationController < ActionController::Base
 		end
 		block_given? ? yield(zipfile) : zipfile
 	end
+
+private
+  def catch_exceptions
+    yield
+  rescue StandardError => e
+    logger.debug "[----------] #{e.to_s}" 
+    raise e
+  end
+
 end

@@ -26,7 +26,7 @@
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
         <a href="/master_designs/<%=@master_design.id%>">
-            <%- unless @master_design.master_design_uploads.first.file.nil? %>
+            <%- if @master_design.master_design_uploads.first.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@master_design.master_design_uploads.first.file.url(:home_page), :height=>"170px", :width=>"380px")%>
             <%- end %>
         </a>
@@ -37,7 +37,7 @@
       </div>
       <div class="blocks_mini">
         <a href="/master_designs/<%=@master_design_two.id%>">
-          <%- unless @master_design_two.master_design_uploads.first.file.nil? %>
+          <%- if @master_design_two.master_design_uploads.first.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@master_design_two.master_design_uploads.first.file.url(:home_page1), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
@@ -46,7 +46,7 @@
     </div><!-- blocks_big -->
     <div class="blocks_big pr">
       <a href="/master_designs/<%=@master_design_three.id%>">
-        <%- unless @master_design_three.master_design_uploads.first.file.nil? %>
+        <%- if @master_design_three.master_design_uploads.first.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@master_design_three.master_design_uploads.first.file.url(:home_page3), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
@@ -59,7 +59,7 @@
     </h2>
     <div class="blocks_big mr20 pr">
       <a href="<%=image_show_design_image_path(@design_image.id)%>">
-        <%- unless @design_image.file.nil? %>
+        <%- if @design_image.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
@@ -68,7 +68,7 @@
     <div class="blocks_big mr20">
       <div class="blocks_mid mb25">
         <a href="<%=image_show_design_image_path(@design_image_two.id)%>">
-          <%- unless @design_image_two.file.nil? %>
+          <%- if @design_image_two.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_two.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
@@ -79,7 +79,7 @@
       </div>
       <div class="blocks_mini">
         <a href="<%=image_show_design_image_path(@design_image_three.id)%>">
-          <%- unless @design_image_three.file.nil? %>
+          <%- if @design_image_three.present? %>
                 <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_three.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
@@ -89,7 +89,7 @@
     <div class="blocks_big">
       <div class="blocks_mini mr20">
         <a href="<%=image_show_design_image_path(@design_image_four.id)%>">
-          <%- unless @design_image_four.file.nil? %>
+          <%- if @design_image_four.present? %>
                 <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_four.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
@@ -105,7 +105,7 @@
       </div>
       <div class="blocks_mid mt25">
         <a href="<%=image_show_design_image_path(@design_image_six.id)%>">
-          <%- unless @design_image_six.file.nil? %>
+          <%- if @design_image_six.present? %>
                 <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design_image_six.file.url(:home_design_image2), :height=>"170px", :width=>"380px")%>
           <%- end %>
         </a>
@@ -133,7 +133,7 @@
     </div><!-- blocks_big -->
     <div class="blocks_big mr20 pr">
       <a href="<%=user_design_path(@design.user_id, @design)%>">
-        <%- unless @design.cover_img.nil? %>
+        <%- if @design.cover_img.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@design.cover_img.file.url(:home_design_image1), :height=>"365px", :width=>"380px")%>
         <%- end %>
       </a>
@@ -142,7 +142,7 @@
     <div class="blocks_big">
       <div class="blocks_mid mb25">
         <a href="/color_designs/<%= @color_design.id %>">
-        <%- unless @color_design.main_preview_img.nil? %>
+        <%- if @color_design.main_preview_img.present? %>
               <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@color_design.main_preview_img.url(:home_page), :height=>"170px", :width=>"380px")%>
         <%- end %>
       </a>
@@ -150,7 +150,7 @@
       </div>
       <div class="blocks_mini mr20">
         <a href="/inspirations/<%= @inspiration.id %>">
-          <%- unless @inspiration.cover_img.file.nil? %>
+          <%- if @inspiration.cover_img.present? %>
                 <%= image_tag( (asset_path '2013/grey.gif'), "data-original"=>@inspiration.cover_img.file.url(:home_design_image3), :height=>"170px", :width=>"180px")%>
           <%- end %>
         </a>
