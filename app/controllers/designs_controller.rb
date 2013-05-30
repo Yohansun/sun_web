@@ -37,7 +37,7 @@ class DesignsController < ApplicationController
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.created_at desc").includes(:design_images).page(params[:page])
+      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.created_at desc").page(params[:page])
 
       load_skin
     else
