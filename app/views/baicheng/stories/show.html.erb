@@ -166,11 +166,10 @@
 						<!-- JiaThis Button BEGIN -->
 						<div id="ckepop" class="jiathis_area share_area clearfix pull-right" style="min-width:140px;">
 							<span class="jiathis_txt">分享：</span>
-							<a class="jiathis_button_renren"></a>
-							<a class="jiathis_button_douban"></a>
-							<a class="jiathis_button_kaixin001"></a>
-							<a class="jiathis_button_tsina"></a>
-							<a class="jiathis_button_qzone"></a>
+							<a class="jiathis_button_renren"  id ='monitor_link_326828' ></a>
+							<a class="jiathis_button_douban" id ='monitor_link_326829'></a>
+                                                        <a class="jiathis_button_kaixin001"  id ='monitor_link_326830'></a>
+							<a class="jiathis_button_tsina"  id ='monitor_link_326831'></a>
 							<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a> -->
 							<!-- <a class="jiathis_counter_style"></a> -->
 						</div>
@@ -224,11 +223,11 @@
 									</div>
 									<p class="upload_good">
 										<%- unless current_user %>
-											<a href="javascript:;" class="pull-right upload_btn_red upload_btn_gray">
+											<a href="javascript:;" class="pull-right upload_btn_red upload_btn_gray upload_contract">
 												<span class="text-center">合同已上传</span>
 											</a>
 										<%- else %>
-											<a href="javascript:;" class="pull-right upload_btn_red" id='monitor_link_326833' >
+											<a href="javascript:;" class="pull-right upload_btn_red upload_contract"  >
 												<span class="text-center">上传合同</span>
 											</a>
 										<%- end %>

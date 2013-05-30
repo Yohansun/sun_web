@@ -26,6 +26,19 @@
     transparent : true,
     uploader : '/love/story_images',
     //buttonText : '选择文件',
+    'onDialogOpen' : function(){
+         
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "Step2_上传您的房型图"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        triggerEBConversion(326818);
+    },
     onUploadSuccess : function(file, data, response) {
       var dat = eval('(' + data + ')');
       if (dat.result == 'success') {

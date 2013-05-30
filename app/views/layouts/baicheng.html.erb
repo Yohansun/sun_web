@@ -70,9 +70,9 @@
               </li>
               <li class="divider-vertical_nav"></li>
               <li class="<%= 'active ' if controller_name == 'fashion_model' %> pr">
-                <a href="<%= fashion_model_path("foreign") %>" class="drophover_toggle" id='monitor_link_326793'>时尚榜样</a>
+                <a href="<%= fashion_model_path("foreign") %>" class="drophover_toggle fashion_model" >时尚榜样</a>
                 <ul class="drophover_menu hide">
-                  <li><a href="<%= fashion_model_path("foreign") %>" class="<%= 'active' if params[:id] == 'foreign' %>">Edward Davinson</a></li>
+                  <li><a href="<%= fashion_model_path("foreign") %>" class="fashion_model <%= 'active' if params[:id] == 'foreign' %>">Edward Davinson</a></li>
                   <li><a href="<%= fashion_model_path("native") %>" class="<%= 'active' if params[:id] == 'native' %>" id='monitor_link_326794' >崔睿</a></li>
                 </ul>
               </li>
@@ -92,11 +92,11 @@
               </li>
               <li class="nav_box">
                 <%if current_user.common_user?   %>
-                  <a href="<%=    Story.where(user_id: current_user.id, is_save: true).exists? ?  story_path(Story.where(user_id: current_user.id, is_save: true).first.id )  : "javascript:alert('您还没上传房型图！')"%>" id='monitor_link_326809'>查看我房型图</a> 
+                  <a href="<%=    Story.where(user_id: current_user.id, is_save: true).exists? ?  story_path(Story.where(user_id: current_user.id, is_save: true).first.id )  : "javascript:alert('您还没上传房型图！')"%>" id='monitor_link_326807'>查看我房型图</a> 
                 <% else %>
                   <a href="<%= act_stories_path %>" id='monitor_link_326809'>查看我的活动主页</a> 
 
-    <%#*<a href="#" >查看我的购买积分</a>%> 
+    <%#*<a href="#" id='monitor_link_326810'>查看我的购买积分</a>%> 
                 <%end  %>
               </li>
               <li class="divider-vertical_dot"></li>
@@ -212,6 +212,16 @@
       }
       ;
       function verify() {
+        CClicki[10008]._trackEvent({
+          type: 1,
+          labels: [
+            {"按钮名称": "立即参加"}
+          ],
+          values: [
+            {"数量": 1}
+          ]
+        });
+        triggerEBConversion(326805);
 <% if current_user %>
   <% unless current_user.common_user? %>
             window.location = '<%= stories_path %>'

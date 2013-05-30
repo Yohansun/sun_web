@@ -60,7 +60,7 @@ function init_monitor_link_click() {
 
     });
 
-    $('#monitor_link_326793').click(function() {
+    $('.fashion_model').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [
@@ -189,19 +189,7 @@ function init_monitor_link_click() {
         triggerEBConversion(326803);
     });
 
-
-    $('#monitor_link_326805').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "立即参加"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326805);
-    });
+ 
 
     $('#user_name_msg_tip').click(function() {
         CClicki[10008]._trackEvent({
@@ -336,7 +324,50 @@ function init_monitor_link_click() {
     });
 
 
-    $('#monitor_link_326822').click(function() {
+    $('#monitor_link_326817').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "Step1_保存下一步"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        triggerEBConversion(326817);
+    });
+
+ 
+
+    $('#monitor_link_326819').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "Step2_搜房网按钮"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        triggerEBConversion(326819);
+    });
+
+
+    $('#monitor_link_326820').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "Step2_保存下一步"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        triggerEBConversion(326820);
+    });
+
+
+    $('.design_compete .list_img_a').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [
@@ -349,7 +380,7 @@ function init_monitor_link_click() {
         triggerEBConversion(326822);
     });
 
-    $('.list_img_a').click(function() {
+    $('.stories  .list_img_a').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [
@@ -454,7 +485,7 @@ function init_monitor_link_click() {
         triggerEBConversion(326832);
     });
 
-    $('#monitor_link_326833').click(function() {
+    $('.upload_contract').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
             labels: [
