@@ -64,7 +64,7 @@
             <div class="pr">
               <!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
               <%- if signed_in? &&  current_user.common_user? %>
-                <a href="javascript:alert('不能点击此按钮!');" class="design_btn" role="button" data-toggle="modal"></a>
+                <a href="#" class="design_btn" role="button" data-toggle="modal"></a>
               <%- elsif current_user %>
                 <a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
               <%- else %>
@@ -88,9 +88,15 @@
                       </a>
                     <% end %>
                   <% else %>
-                    <a class="btns btn_upload" href="javascript:alert('必须先点击我想设计');" id ='monitor_link_326826'>
-                      <span>上传设计</span>
-                    </a>
+                    <% if current_user.common_user?  %>
+                      <a class="btns btn_upload" href="#" id ='monitor_link_326826'>
+                        <span>上传设计</span>
+                      </a>
+                    <% else %>
+                      <a class="btns btn_upload" href="javascript:alert('必须先点击我想设计');" id ='monitor_link_326826'>
+                        <span>上传设计</span>
+                      </a>
+                    <% end %>
                   <% end %>
                 <%- else %>
                   <a class="btns btn_upload" href="javascript:show_login();">
@@ -139,17 +145,19 @@
                   </li>
                 </ul>
               </div>
-              <script type="text/javascript">
-                window.onload = function() {
-                  $('.design_intro a.color_red').hover(function() {
-                    $(this).next().toggle().mouseenter(function() {
-                      $(this).show();
-                    }).mouseleave(function() {
-                      $(this).hide();
+              <%- if signed_in? &&  !current_user.common_user? %>
+                <script type="text/javascript">
+                  window.onload = function() {
+                    $('.design_intro a.color_red').hover(function() {
+                      $(this).next().toggle().mouseenter(function() {
+                        $(this).show();
+                      }).mouseleave(function() {
+                        $(this).hide();
+                      });
                     });
-                  });
-                };
-              </script>
+                  };
+                </script>
+              <% end %>
             </div>
           </div>
         </div>

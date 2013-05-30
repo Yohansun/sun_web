@@ -343,7 +343,7 @@ class DesignsController < ApplicationController
     @design.save
     if @design.baicheng_active
        # redirect_to design_competes_path
-       redirect_to "/love/design_competes/#{params[:story_id]}"
+       redirect_to "/love/design_competes/#{params[:design_id]}"
     else
       redirect_to user_path(current_user)
     end
