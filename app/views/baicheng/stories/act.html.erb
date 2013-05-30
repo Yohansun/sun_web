@@ -1,87 +1,87 @@
 <div class="container-fluid">
-	<div class="design_works pad_t60">
-		<div class="wrapper pad_b40">
-			<div class="sys_top">
-				<p>
-					<%= avatar_img(current_user,"icon","46x46") %>
-					<a class="sys_user_name">
-						<span>
-							<strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页
-						</span>
-					</a>
-				</p>
-				<p>
-					<strong>客户买单，你积分！</strong><br />
-					不论是您为客户代购还是陪客户在立邦专卖店购买产品，<br />
-					只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
-				</p>
-			</div>
-			<div class="redline_b4 pad_b40">
-				<h5 class="sys_title"><span>我想设计</span></h5>
-				<ul class="thumbnails design_list nomargin">
-					<% @story_users.each do |story_user| %>
-						<% if story_user.story.designs.present? %>
-							<li class="span2">
-								<div class="thumbnail nopadding">
-									<a href="/users/<%= story_user.user.id %>/designs/<%= story_user.story.designs.last.id %>" class="list_img_a">
-										<%= image_tag(story_user.story.designs.last.design_images.first.file.url(:baicheng_list)) if story_user.story.designs.last.design_images.first.present? %>
-									</a>
-									<div class="design_list_tit">
-										<h5 class="nomargin">
+  <div class="design_works pad_t60">
+    <div class="wrapper pad_b40">
+      <div class="sys_top">
+        <p>
+          <%= avatar_img(current_user,"icon","46x46") %>
+          <a class="sys_user_name">
+            <span>
+              <strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页
+            </span>
+          </a>
+        </p>
+        <p>
+          <strong>客户买单，你积分！</strong><br />
+          不论是您为客户代购还是陪客户在立邦专卖店购买产品，<br />
+          只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
+        </p>
+      </div>
+      <div class="redline_b4 pad_b40">
+        <h5 class="sys_title"><span>我想设计</span></h5>
+        <ul class="thumbnails design_list nomargin">
+          <% @story_users.each do |story_user| %>
+            <% if story_user.story.designs.last.present? %>
+              <li class="span2">
+                <div class="thumbnail nopadding">
+                  <a href="<%= design_compete_path(story_user.story.designs.last)  %>" class="list_img_a">
+                    <%= image_tag(story_user.story.designs.last.design_images.first.file.url(:baicheng_list)) if story_user.story.designs.last.design_images.first.present? %>
+                  </a>
+                  <div class="design_list_tit">
+                    <h5 class="nomargin">
                       <a href="<%= design_compete_path(story_user.story.designs.last) %>">
-												<%= story_user.story.designs.last.title %>
-											</a>
-										</h5>
-										<p class="nomargin">(<%= story_user.story.designs.last.area.city.name %>)</p>
-										<p class="nomargin"><i class="i_icon icon_tel"></i><%= story_user.user.phone %></p>
-									</div>
-								</div>
-								<p class="well well-small text-center status"></p>
-								<a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
-							</li>
-						<% else %>
-							<li class="span2">
-								<div class="thumbnail nopadding">
+                        <%= story_user.story.designs.last.title %>
+                      </a>
+                    </h5>
+                    <p class="nomargin">(<%= story_user.story.designs.last.area.city.name %>)</p>
+                    <p class="nomargin"><i class="i_icon icon_tel"></i><%= story_user.user.phone %></p>
+                  </div>
+                </div>
+                <p class="well well-small text-center status">设计已上传</p>
+                <a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
+              </li>
+            <% else %>
+              <li class="span2">
+                <div class="thumbnail nopadding">
                   <a href="<%= story_path(story_user.story_id) %>" class="list_img_a">
-										<%= image_tag(story_user.story.story_image.file.url(:baicheng_list)) %>
-									</a>
-									<div class="design_list_tit">
-										<h5 class="nomargin">
-											<a href="#">
-												<%= story_user.story.title %>
-											</a>
-										</h5>
-										<p class="nomargin">(<%= story_user.story.area.city.name %>)</p>
-										<p class="nomargin">
-											<i class="i_icon icon_tel_blue"></i>
-											<%= story_user.story.user.phone %>
-										</p>
-									</div>
-								</div>
+                    <%= image_tag(story_user.story.story_image.file.url(:baicheng_list)) %>
+                  </a>
+                  <div class="design_list_tit">
+                    <h5 class="nomargin">
+                      <a href="#">
+                        <%= story_user.story.title %>
+                      </a>
+                    </h5>
+                    <p class="nomargin">(<%= story_user.story.area.city.name %>)</p>
+                    <p class="nomargin">
+                      <i class="i_icon icon_tel_blue"></i>
+                      <%= story_user.story.user.phone %>
+                    </p>
+                  </div>
+                </div>
 
-								<p class="well well-small text-center status">
-									<%= design_countdown story_user %>
-								</p>
+                <p class="well well-small text-center status">
+                  <%= design_countdown story_user %>
+                </p>
 
-								<a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
-							</li>
-						<% end %>
-					<% end %>
-				</ul>
-				<p class="text-right m020">
-					<strong><a href="/love/stories" class="cr" id='monitor_link_326845'>查看更多家装需求&gt;&gt;</a></strong>
-				</p>
-				<h5 class="sys_title"><span>积分兑换</span></h5>
-				<p class="m020">
-					<strong>
-						您目前的累计积分为<span class="cr">0</span>分，可用积分为<span class="cr">0</span>分。
-						<a href="#" class="cr" id="monitor_link_326846">点击兑换</a>
-					</strong>
-				</p>
-				<p class="text-right m020">
-					<strong><a href="#" class="cr" id="monitor_link_326847">产品购买积分兑换细则&gt;&gt;</a></strong>
-				</p>
-			</div>
-		</div>
-	</div>
+                <a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+        <p class="text-right m020">
+          <strong><a href="/love/stories" class="cr" id='monitor_link_326845'>查看更多家装需求&gt;&gt;</a></strong>
+        </p>
+        <h5 class="sys_title"><span>积分兑换</span></h5>
+        <p class="m020">
+          <strong>
+            您目前的累计积分为<span class="cr">0</span>分，可用积分为<span class="cr">0</span>分。
+            <a href="#" class="cr" id="monitor_link_326846">点击兑换</a>
+          </strong>
+        </p>
+        <p class="text-right m020">
+          <strong><a href="#" class="cr" id="monitor_link_326847">产品购买积分兑换细则&gt;&gt;</a></strong>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
