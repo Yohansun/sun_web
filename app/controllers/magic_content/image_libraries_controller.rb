@@ -148,9 +148,9 @@ module MagicContent
         flash[:alert] = "审核未成功！#{@image.errors.full_messages}"
       end
       if params[:genre].present?
-        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords])
+        redirect_to image_libraries_path(:genre => params[:genre], :keywords => params[:keywords],page: params[:page])
       else
-        redirect_to image_libraries_path
+        redirect_to image_libraries_path(page: params[:page])
       end
     end
 

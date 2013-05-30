@@ -15,7 +15,7 @@
       <%= image_tag(image.file, :size =>"500x400" )%>
     </span>
   </div>
-  <%= form_tag main_app.image_library_update_tags_path(image), :method => :put do %>
+  <%= form_tag main_app.image_library_update_tags_path(image,page: params[:page]), :method => :put do %>
   <div class="container">
     <h2>按区域</h2>
     <table>

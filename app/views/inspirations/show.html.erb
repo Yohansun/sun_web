@@ -95,7 +95,9 @@
       </div>
     </div>
     <div class="weekstart_detail">
-      <div class="big_image">
+      <div class="big_image pr">
+        <a href="<%= "/inspirations/#{@inspiration_prev}" %>" class="link_prev_img"></a>
+        <a href="<%= "/inspirations/#{@inspiration_next}" %>" class="link_next_img"></a>
         <% if @inspiration.cover_img -%>
           <%= image_tag @inspiration.cover_img.file.url(:slide), :title => "装修设计欣赏-#{@inspiration.title}", :alt => "装修设计欣赏-#{@inspiration.title}" %>
         <% end -%>
