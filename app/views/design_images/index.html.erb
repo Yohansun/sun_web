@@ -204,7 +204,7 @@ $(function(){
 		</div>
 	</div><!-- imgbase_title -->
         <div class="breadcrumb "> 
-          <p>
+          <p style="font-size:14px">
           <%= link_to '首页','/' %> > <%= link_to '装修图库','/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0' %> <%=  ">#{DesignImage::TYPE[params[:imageable_type].to_sym]}" if params[:imageable_type]!='all' and params[:imageable_type].present? %>
           </p>
         </div>
