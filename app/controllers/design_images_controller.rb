@@ -46,12 +46,12 @@ class DesignImagesController < ApplicationController
     @image_length = @images.count
     @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
     @tag_names = []
-    unless params[:tags].blank?
+    if params[:tags].present?
        @tag_ids = CGI.unescape(params[:tags]).split("-").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
     end
 
-    unless @tag_ids.blank?
+    if @tag_ids.present?
       tag_arrs = []
       @tag_ids.each do |tag_arr|
         if tag_arr.to_i != 0
@@ -92,7 +92,7 @@ class DesignImagesController < ApplicationController
         end
       end
       if tag_arrs.present?
-        @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
+        @tags = ImageLibraryCategory.where("id in (?)", tag_arrs)
         final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
         @images = @images.search_tags(final_tags.map(&:id))
         @tag_names << final_tags.map(&:title)

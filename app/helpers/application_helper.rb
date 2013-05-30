@@ -3,38 +3,6 @@ module ApplicationHelper
 
   BASE_TITLE = "立邦iColor装修设计鉴赏 | 设计师作品欣赏、访谈"
 
-  # PAGE_TITLE = { "master_interviews" => "设计大师访谈",
-  #                "master_topics"     => "热点装修话题",
-  #                "master_designs"    => "大师作品",
-  #                "weekly_stars"      => "每周之星",
-  #                "designs"           => "推荐装修作品",
-  #                "inspirations"      => "装修灵感秀",
-  #                "color_designs"     => "色彩配搭",
-  #                "articles"          => "装修资讯",
-  #                "color_articles"    => "色彩资讯",
-  #                "function"          => { "weibo_wall" => "微博资讯", "7-1" => "木纹风尚生活", "7-2" => "墙面艺术效果", "7-3" => "刷新灵感我绘我家", "rules" => "会员机制" },
-  #                "events"            => "年度色彩趋势活动",
-  #                "designer_events"   => { "index" => "设计师活动", "city" => "设计师活动", "kv" => "设计师活动" },
-  #                "other_events"      => { "index" =>"其他精彩活动", "kv" => "其他精彩活动" },
-  #                "softwares"         => { "tools" => "在线配色软件", "app" => "设计师APP", "case" => "色彩搭配案例" },
-  #                "channel"           => { "access" => "设计快查" },
-  #                "faqs"              => "家装设计咨询",
-  #                "mix_colors"        => { "new" => "在线配色服务" },
-  #                "register"          => "注册",
-  #                "users"             => { "edit" => "修改账户信息", "omniauth_user" => "完善个人信息" }
-  # }
-
-  # INNER_PAGE_TITLE = { "events"       => { "index" => "活动公告", "my_event" => "我报名的活动" },
-  #                      "designs"      => "作品",
-  #                      "inspirations" => "灵感秀",
-  #                      "messages"     => "留言板",
-  #                      "rank"         => "我的积分",
-  #                      "sys_msgs"     => "系统消息",
-  #                      "faqs"         => "我的提问",
-  #                      "register"     => " "
-  # }
-
-
   def page_title
         #首页
         if  controller_name == 'home'
@@ -81,24 +49,11 @@ module ApplicationHelper
           "【#{@master_design.design_name} | #{@master_design.master_profile.try(:name) || @master_design.master_name}】- 室内空间大师" + '-' + BASE_TITLE
         #装修图库
         elsif controller_name == 'design_images' && action_name == 'index'
-          s1 = ""
-          s2 = ""
+          s1, s2= "", ""
           if @content.present? || @imageable_type.present?
-            if @content[0..10].present?
-              @content[0..10].each do |c|
-                if c.present?
-                  s1 += c
-                end
-              end
-            end
-            if @content[11..25].present?
-              @content[11..25].each do |content|
-                if content.present?
-                  s2 += content + "、"
-                end
-              end
-            end
-            @imageable_type + s1 + "装修图片大全，您可以设计自己的" + s2 + " 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+            s1 = @content[0..10].compact.join(',').to_s if @content[0..10].present?
+            s2 = @content[11..25].compact.join('、').to_s if @content[11..25].present?
+            "#{@imageable_type}#{s1}装修图片大全，您可以设计自己的#{s2} 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           else
              "装修效果图大全2013图片、室内装修效果图大全、装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           end
@@ -180,30 +135,6 @@ module ApplicationHelper
       BASE_TITLE
   end
 
-  # def page_title
-  #   # return BASE_TITLE if current_page?(controller:"home")
-
-  #   begin
-  #     title = @user.nil? ? PAGE_TITLE : INNER_PAGE_TITLE
-
-  #     if title[controller_name.to_s][action_name.to_s].present?
-  #       title[controller_name.to_s][action_name.to_s] + "-" + BASE_TITLE
-  #     elsif controller_name.eql? "weekly_stars"
-  #       if params[:star_type].include?("色彩")
-  #         return "色彩之星" + "-" + BASE_TITLE
-  #       elsif params[:star_type].include?("设计")
-  #         return "设计之星" + "-" + BASE_TITLE
-  #       else
-  #         return "每周之星" + "-" + BASE_TITLE
-  #       end
-  #     else
-  #       title[controller_name.to_s] + "-" + BASE_TITLE
-  #     end
-  #   rescue
-  #     BASE_TITLE
-  #   end
-  # end
-
   def des_content
     star_descript1 = "立邦iColor装修设计鉴赏带您领略iColor"
     star_descript2 = "设计师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
@@ -236,24 +167,9 @@ module ApplicationHelper
       "立邦iColor装修设计鉴赏带您欣赏顶级的【国际、港澳台、国内知名色彩设计大师、室内空间设计大师】#{@master_design.design_name},#{@master_design.master_profile.try(:name) || @master_design.master_name},还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     elsif controller_name == 'design_images' && action_name == 'index'
       if @content.present? || @imageable_type.present?
-        s1 = ""
-        s2 = ""
-        if @content.present?
-          if @content[0..10].present?
-            @content[0..10].each do |c|
-              if c.present?
-                s1 += c
-              end
-            end
-          end
-          if @content[11..25].present?
-            @content[11..25].each do |content|
-              if content.present?
-                s2 += content
-              end
-            end
-          end
-        end
+        s1, s2 = "", ""
+        s1 = @content[0..10].collect{|c| c.present? ? c : nil }.compact.join(',').to_s  if @content[0..10].present?
+        s2 = @content[11..25].collect{|c| c.present? ? c : nil }.compact.join('、').to_s  if @content[11..25].present?
         "立邦 iColor装修图库，精心挑选#{@imageable_type}" + s1 + "2013装修图片大全，方便您设计自己的" + s2 + "装修效果图，满足您的个性化装修需求。"
       else
         "立邦 iColor装修图库，提供近6万张最流行的装修效果图大全2013图片、室内装修效果图大全欣赏、装修风格鉴赏，展示丰富的客厅、厨房、卫生间、卧室、阳台等各种分类装修效果图，满足您的一切装修设计需求。"
@@ -432,14 +348,8 @@ module ApplicationHelper
     elsif controller_name == 'design_images' && action_name == 'index'
       if @content.present? || @imageable_type.present?
         content = ""
-        if @content.present?
-          @content.each do |c|
-            if c.present?
-              content += c + ","
-            end
-          end
-        end
-        @imageable_type + content + "装修图片 , 装修效果图"
+        content = @content.collect{|c| c }.compact.join(',').to_s if @content.present?
+        "#{@imageable_type}#{content}装修图片,装修效果图"
       else
         "装修,装修设计,室内装修效果图大全,装修效果图,装修效果图大全2013图片,装修图片,装修风格"
       end
