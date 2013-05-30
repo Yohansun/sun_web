@@ -47,7 +47,7 @@ class DesignsController < ApplicationController
       if params[:order] == "最热"
         @designs = @designs.order("votes_count desc")
       elsif params[:order] == "未来之星"
-        @designs = @designs.where(future_star_active: true)
+        @designs = @designs.joins(:user).where("users.source = 'yda'").order("designs.created_at desc")
       elsif params[:q] == "super_refresh"
         @designs = @designs.where(is_refresh: true).order("designs.created_at desc")
       else
