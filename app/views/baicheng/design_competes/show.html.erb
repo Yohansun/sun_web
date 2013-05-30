@@ -7,18 +7,18 @@
           alert("评论内容不能为空哦!")
           return false
         }
-      })
+      });
       $(".vote_btn_re").click(function() {
         if ($(".def_t_t").val() == "") {
           alert("回复评论内容不能为空哦!")
           return false
         }
-      })
+      });
       $(".recommented_com").click(function(e) {
         // $(".form_comment").show()
         $(this).parents('.review_item').next('.form_comment').show().siblings('.form_comment').hide();
 
-      })
+      });
       $('#colors_con').hover(function() {
         $(this).children().fadeToggle('fast');
       });
