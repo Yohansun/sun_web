@@ -166,10 +166,10 @@ class Baicheng::StoriesController < ApplicationController
           end
         end
       else
-        render nothing: true
+        render :js => "alert('您本月的预订已满5套，无法继续预订房型图。');"
       end
     else
-       render :js => "alert('您本月的预订已满5套，无法继续预订房型图。');"
+      render nothing: true 
     end
   end
  
