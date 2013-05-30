@@ -31,7 +31,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326790);
+        triggerEBConversion(326790);
     });
     $('#monitor_link_326791').click(function() {
         CClicki[10008]._trackEvent({
@@ -57,6 +57,7 @@ function init_monitor_link_click() {
             ]
         });
         triggerEBConversion(326792);
+
     });
 
     $('#monitor_link_326793').click(function() {
@@ -85,6 +86,20 @@ function init_monitor_link_click() {
         triggerEBConversion(326794);
     });
 
+
+    $('#monitor_link_326795').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "活动章程及说明"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        triggerEBConversion(326795);
+    });
+
     $('#monitor_link_326796').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
@@ -107,7 +122,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326797);
+        triggerEBConversion(326797);
     });
     $('#monitor_link_326798').click(function() {
         CClicki[10008]._trackEvent({
@@ -119,7 +134,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326798);
+        triggerEBConversion(326798);
     });
 
     $('#monitor_link_326799').click(function() {
@@ -132,7 +147,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326799);
+        triggerEBConversion(326799);
     });
 
     $('#monitor_link_326800').click(function() {
@@ -145,7 +160,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326800);
+        triggerEBConversion(326800);
     });
 
     $('#monitor_link_326801').click(function() {
@@ -158,9 +173,9 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326801);
+        triggerEBConversion(326801);
     });
-    
+
     $('#monitor_link_326803').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
@@ -171,7 +186,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326803);
+        triggerEBConversion(326803);
     });
 
 
@@ -185,7 +200,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326805);
+        triggerEBConversion(326805);
     });
 
     $('#user_name_msg_tip').click(function() {
@@ -198,7 +213,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326806);
+        triggerEBConversion(326806);
     });
 
 
@@ -212,7 +227,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326807);
+        triggerEBConversion(326807);
     });
 
 
@@ -226,7 +241,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326808);
+        triggerEBConversion(326808);
     });
 
     $('#monitor_link_326809').click(function() {
@@ -239,7 +254,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326809);
+        triggerEBConversion(326809);
     });
 
     $('#monitor_link_326810').click(function() {
@@ -252,7 +267,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326810);
+        triggerEBConversion(326810);
     });
 
     $('#monitor_link_326811').click(function() {
@@ -265,7 +280,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326811);
+        triggerEBConversion(326811);
     });
 
     $('#monitor_link_326812').click(function() {
@@ -278,7 +293,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326812);
+        triggerEBConversion(326812);
     });
 
     $('#monitor_link_326813').click(function() {
@@ -291,7 +306,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326813);
+        triggerEBConversion(326813);
     });
 
     $('#monitor_link_326814').click(function() {
@@ -304,7 +319,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326814);
+        triggerEBConversion(326814);
     });
 
     $('#monitor_link_326815').click(function() {
@@ -317,7 +332,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326815);
+        triggerEBConversion(326815);
     });
 
 
@@ -331,9 +346,9 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326822);
+        triggerEBConversion(326822);
     });
- 
+
     $('.list_img_a').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
@@ -344,7 +359,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326824);
+        triggerEBConversion(326824);
     });
 
 
@@ -358,7 +373,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326825);
+        triggerEBConversion(326825);
     });
 
     $('#monitor_link_326826').click(function() {
@@ -371,7 +386,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326826);
+        triggerEBConversion(326826);
     });
 
     $('#monitor_link_326828').click(function() {
@@ -384,7 +399,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326828);
+        triggerEBConversion(326828);
     });
 
     $('#monitor_link_326829').click(function() {
@@ -397,7 +412,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326829);
+        triggerEBConversion(326829);
     });
 
     $('#monitor_link_326830').click(function() {
@@ -410,7 +425,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326830);
+        triggerEBConversion(326830);
     });
 
     $('#monitor_link_326831').click(function() {
@@ -423,7 +438,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326831);
+        triggerEBConversion(326831);
     });
 
     $('.icon_talk').click(function() {
@@ -436,7 +451,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326832);
+        triggerEBConversion(326832);
     });
 
     $('#monitor_link_326833').click(function() {
@@ -449,7 +464,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326833);
+        triggerEBConversion(326833);
     });
 
     $('#monitor_link_326834').click(function() {
@@ -462,7 +477,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326834);
+        triggerEBConversion(326834);
     });
 
     $('#monitor_link_326835').click(function() {
@@ -475,7 +490,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326835);
+        triggerEBConversion(326835);
     });
 
     $('#monitor_link_326836').click(function() {
@@ -488,7 +503,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326836);
+        triggerEBConversion(326836);
     });
 
 
@@ -502,7 +517,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326837);
+        triggerEBConversion(326837);
     });
 
 
@@ -516,7 +531,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326838);
+        triggerEBConversion(326838);
     });
 
 
@@ -530,7 +545,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326839);
+        triggerEBConversion(326839);
     });
 
 
@@ -544,7 +559,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326840);
+        triggerEBConversion(326840);
     });
 
     $('#monitor_link_326841').click(function() {
@@ -557,7 +572,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326841);
+        triggerEBConversion(326841);
     });
 
     $('#monitor_link_326842').click(function() {
@@ -570,7 +585,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326842);
+        triggerEBConversion(326842);
     });
 
 
@@ -584,7 +599,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326843);
+        triggerEBConversion(326843);
     });
 
     $('#monitor_link_326844').click(function() {
@@ -597,7 +612,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326844);
+        triggerEBConversion(326844);
     });
 
     $('#monitor_link_326845').click(function() {
@@ -610,7 +625,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326845);
+        triggerEBConversion(326845);
     });
 
 
@@ -624,7 +639,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326846);
+        triggerEBConversion(326846);
     });
 
     $('#monitor_link_326847').click(function() {
@@ -637,7 +652,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326847);
+        triggerEBConversion(326847);
     });
 
 
@@ -651,7 +666,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326848);
+        triggerEBConversion(326848);
     });
 
     $('#monitor_link_326849').click(function() {
@@ -664,7 +679,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326849);
+        triggerEBConversion(326849);
     });
 
 
@@ -678,7 +693,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-         triggerEBConversion(326850);
+        triggerEBConversion(326850);
     });
 }
 ;
