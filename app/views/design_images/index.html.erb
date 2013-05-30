@@ -311,8 +311,8 @@ $(function(){
 			<p class="srch-items">
 				您的选择：
 				<%- @query_tags.each do |tag| %>
-          <% next if tag.blank? %>
-					<span class="srch-span"><%= tag.parent.title %>: <i><%= tag.title %></i><a href="javascript:add_tag(<%= tag.parent_id %>, <%= tag.id %>);" class="srch-del">删除</a></span>
+          		<% next if tag.blank? %>
+					<span class="srch-span"><%= tag.parent.present? ? tag.parent.title : "" %>: <i><%= tag.title %></i><a href="javascript:add_tag(<%= tag.parent_id %>, <%= tag.id %>);" class="srch-del">删除</a></span>
 				<%- end %>
 				<%- if params[:pinyin].present? && params[:pinyin].to_s != "0" %>
 					<span class="srch-span">拼音: <i><%= params[:pinyin] %></i><a href="javascript:delete_pinyin();" class="srch-del">删除</a></span>

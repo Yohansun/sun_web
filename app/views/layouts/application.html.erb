@@ -101,38 +101,31 @@
         <ul>
           <li><%= link_to "大师访谈", "/master_interviews", :class => ('active' if controller_name == 'master_interviews') %></li>
           <li class="pr noborder"><%= link_to "大师作品", "/master_designs", :class => ('active' if controller_name == 'master_designs') %>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <!-- <li class="noborder"><a href="/master_topics">业内动态</a></li> -->
         </ul>
       </li>
       <li class="pr">
         <%= link_to "装修图库", "/images", :class => "#{'active' if controller_name == 'design_images'}" %>
-        <span class="nav_hot"><img src="<%= asset_path "new.png" %>"></span>
       </li>
 
       <li class="pr"><%= link_to "设计鉴赏", "/weekly_stars",:class => ('active' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations') %>
         <ul>
           <li class="pr">
             <%= link_to "设计之星", "/weekly_stars",:class => ('active' if controller_name == 'weekly_stars') %>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <li><%= link_to "作品展示", "/designs", :class => "#{'active' if controller_name == 'designs'}" %></li>
           <li class="pr"><%= link_to "色彩配搭", "/color_designs", :class => "#{'active' if controller_name == 'color_designs'}" %>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <li class="pr noborder"><%= link_to "灵感秀", "/inspirations", :class => "#{'active' if controller_name == 'inspirations'}" %></li>
           <!-- <li class="noborder pr"><a href="/my_show">我型我秀</a> -->
-          <!--  <span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span> -->
           <!-- </li> -->
         </ul>
-        <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
 
       <li class="pr"><%= link_to "业主通道", "/channel/access", :class => "#{'active' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' }" %>
         <ul >
-          <li class="pr"><%= link_to "设计快查", "/channel/access", :class => "#{'active' if controller_name == 'channel'}" %><span class="nav_hot2"><img src="<%= asset_path "new.png" %>"></span></li>
+          <li class="pr"><%= link_to "设计快查", "/channel/access", :class => "#{'active' if controller_name == 'channel'}" %></li>
           <!-- <li><%#= link_to "装修问答", "/faqs", :class => "#{'active' if controller_name == 'faqs'}" %></li> -->
           <li><%= link_to "装修贴士", "/faqs" %></li>
           <li><%= link_to "配色咨询", "/mix_colors/new", :class => "#{'active' if controller_name == 'mix_colors'}" %></li>
@@ -140,13 +133,11 @@
           <!-- <li><a href="/faqs<%= link_suffix %>">装修问答</a></li>
           <li class="noborder"><a href="/mix_colors/new<%= link_suffix %>">配色咨询</a></li> -->
         </ul>
-        <span class="nav_hot"><img src="<%= asset_path "hot.png" %>"></span>
       </li>
 
       <li class="pr"><%= link_to "行业资讯", "/articles", :class => "#{'active' if controller_name == 'articles' || controller_name == 'color_articles' || controller_name == 'master_topics'}" %>
         <ul>
           <li class="pr"><%= link_to "装修资讯", "/articles", :class => "#{'active' if controller_name == 'articles'}" %>
-            <span class="nav_hot2"><img src="<%= asset_path "hot.png" %>"></span>
           </li>
           <li><%= link_to "色彩资讯", "/color_articles", :class => "#{'active' if controller_name == 'color_articles'}" %></li>
           <li class="noborder"><%= link_to "业内动态", "/master_topics", :class => "#{'active' if controller_name == 'master_topics'}" %></li>
@@ -167,7 +158,6 @@
           <!--<li><a href="/7-2">墙面艺术效果</a></li>-->
           <!-- <li class="noborder"><a href="/7-3">刷新灵感我绘我家</a></li> -->
         </ul>
-        <!-- <span class="nav_hot"><img src="<%= asset_path "new.png"%>" /></span> -->
       </li>
       <li class="noborder pr"><%= link_to "精彩活动", "/designer_events", :class => "#{'active' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts'}" %>
         <ul style="width:116px; left: -25px;_left: -17px">
