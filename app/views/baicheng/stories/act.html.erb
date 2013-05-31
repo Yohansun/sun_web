@@ -20,23 +20,24 @@
         <h5 class="sys_title"><span>我想设计</span></h5>
         <ul class="thumbnails design_list nomargin">
           <% @story_users.each do |story_user| %>
-            <% if story_user.story.designs.last.present? %>
+            <% design =  story_user.story.designs.where(user_id: current_user.id).first%>
+            <% if design %>
               <li class="span2">
                 <div class="thumbnail nopadding">
-                  <a href="<%= design_compete_path(story_user.story.designs.last)  %>" class="list_img_a">
-                    <%= image_tag(story_user.story.designs.last.design_images.first.file.url(:baicheng_list)) if story_user.story.designs.last.design_images.first.present? %>
+                  <a href="<%= design_compete_path(design)  %>" class="list_img_a">
+                    <%= image_tag(design.design_images.first.file.url(:baicheng_list))  %>
                   </a>
                   <div class="design_list_tit">
                     <h5 class="nomargin">
-                      <a href="<%= design_compete_path(story_user.story.designs.last) %>">
-                        <%= story_user.story.designs.last.title %>
+                      <a href="<%= design_compete_path(design) %>">
+                        <%= design.title %>
                       </a>
                     </h5>
-                    <p class="nomargin">(<%= story_user.story.designs.last.area.city.name %>)</p>
+                    <p class="nomargin">(<%= design.area.city.name %>)</p>
                     <p class="nomargin"><i class="i_icon icon_tel"></i><%= story_user.user.phone %></p>
                   </div>
                 </div>
-                <p class="well well-small text-center status">设计已上传</p>
+                <p class="well well-small text-center status"><i class="i_icon i_icon_xbig mar_h5 icon_upload"></i> 设计已上传</p>
                 <a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
               </li>
             <% else %>

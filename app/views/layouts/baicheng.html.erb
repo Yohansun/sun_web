@@ -22,12 +22,11 @@
         {
           try
           {
-            var oScript = document.createElement("SCRIPT");
             var ebRand = Math.random() + ' ';
             ebRand = ebRand * 1000000;
-            var conversionURL = "HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&ActivityID=" + ebConversionID + "&ns=1&rnd=" + ebRand;
-            var conversionImg = new Image();
-            conversionImg.src = conversionURL;
+            var ebURL = "HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&ActivityID=" + ebConversionID + "&rnd=" + ebRand;
+            var ebScript = new Image();
+            ebScript.src = ebURL;
           }
           catch (e) {
           }
