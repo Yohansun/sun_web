@@ -154,7 +154,7 @@ class Baicheng::StoriesController < ApplicationController
       if Story.find(params[:story_id]).designs_count<3
         if StoryUser.where(user_id: current_user.id).current_month.count<5
           if check_storyuser(params)
-            story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
+            StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
             render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}');show_modal();"
           else
             user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
