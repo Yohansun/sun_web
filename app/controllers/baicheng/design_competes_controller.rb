@@ -39,7 +39,7 @@ class Baicheng::DesignCompetesController < ApplicationController
         @desgins = Design.baicheng.order("designs.created_at DESC").where("title=?", params[:keywords]) if params[:keywords].present?
       end
     end
-    @designs = @desgins.joins(:cover_img).where('design_images.id is not null').page(params[:page]).per(24)
+    @designs = @desgins.joins(:cover_img).where('design_images.id is not null').uniq.page(params[:page]).per(24)
   end
 
   def show
