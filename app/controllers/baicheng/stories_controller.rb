@@ -151,26 +151,32 @@ class Baicheng::StoriesController < ApplicationController
 
   def storyuser
     if params[:story_id] && params[:user_id]
-      if StoryUser.where(user_id: current_user.id).current_month.count<5
-        if check_storyuser(params)
-          story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
-          render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}');show_modal();"
-        else
-          user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
-          if user.design_time + 15.days < Time.now
-            user.design_time = Time.now
-            user.save
-            render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}'); show_modal();"
+      if Story.find(params[:story_id]).designs_count<3
+        if StoryUser.where(user_id: current_user.id).current_month.count<5
+          if check_storyuser(params)
+            story_user = StoryUser.create(story_id: params[:story_id],user_id: params[:user_id],design_time: Time.now)
+            render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}');show_modal();"
           else
-            render :js => "alert('您已点过一次，不能再次点击!');"
+            user = StoryUser.where("user_id = ? and story_id = ?",params[:user_id],params[:story_id]).first
+            if user.design_time + 15.days < Time.now
+              user.design_time = Time.now
+              user.save
+              render :js => "$('#monitor_link_326826').attr('href','#{new_user_design_path(params[:user_id],story_id: params[:story_id])}'); show_modal();"
+            else
+              render :js => "alert('您已点过一次，不能再次点击!');"
+            end
           end
+        else
+          render :js => "alert('您本月的预订已满5套，无法继续预订房型图。');"
         end
       else
-        render :js => "alert('您本月的预订已满5套，无法继续预订房型图。');"
+          render :js => "alert('设计已满!');"
       end
+    
     else
       render nothing: true 
     end
+    
   end
  
   def download
