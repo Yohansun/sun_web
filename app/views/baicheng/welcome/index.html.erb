@@ -23,23 +23,12 @@ document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityS
 <noscript>
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326788&amp;ns=1"/>
 </noscript>
-<script type="text/javascript">
-  swfobject.registerObject("FlashID");
-  CClicki[10008]._trackEvent({
-    type: 1,
-    labels: [
-        {"按钮名称":"Landing on homepage"}
-    ],
-    values: [
-        {"数量":1}    
-    ]
-});
-</script>
+
 <% end %>
 <div class="container-fluid">
   <div class="text-center">
     <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1400" height="590">
-      <param name="movie" value="flash/icolor-yazm-v5.swf" />
+      <param name="movie" value="/flash/icolor-yazm-v5.swf" />
       <param name="quality" value="high" />
       <param name="wmode" value="opaque" />
       <param name="swfversion" value="11.0.0.0" />
@@ -47,7 +36,7 @@ document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityS
       <param name="expressinstall" value="Scripts/expressInstall.swf" />
       <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
       <!--[if !IE]>-->
-      <object type="application/x-shockwave-flash" data="flash/icolor-yazm-v5.swf" width="1400" height="590">
+      <object type="application/x-shockwave-flash" data="/flash/icolor-yazm-v5.swf" width="1400" height="590">
         <!--<![endif]-->
         <param name="quality" value="high" />
         <param name="wmode" value="opaque" />
@@ -64,3 +53,16 @@ document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityS
     </object>
   </div>
 </div>
+
+<script type="text/javascript">
+  swfobject.registerObject("FlashID");
+  CClicki[10008]._trackEvent({
+    type: 1,
+    labels: [
+        {"按钮名称":"Landing on homepage"}
+    ],
+    values: [
+        {"数量":1}    
+    ]
+});
+</script>
