@@ -424,8 +424,8 @@ Icolor::Application.routes.draw do
     
     get "1.html" => "welcome#index"
     get "2.1.html" => "stories#new"
-    get "2.2.html" => "stories#update_image"
-    get "2.3.html" => "stories#image_new"
+    get "2.2.html" => "stories#image_new"
+    
     get "3.1.html" => "stories#index"
     get ":id.3.2.html" => "stories#show"
     get "4.1.html" => "design_competes#index"
