@@ -37,9 +37,9 @@ Icolor::Application.routes.draw do
   resources :yda_games, :only => [:create]
 
   devise_for :users, :controllers => { :registrations      => "users/register",
-                                       :sessions           => "users/sessions",
-                                       :passwords          => "users/passwords",
-                                       :omniauth_callbacks => "users/omniauth_callbacks" }
+    :sessions           => "users/sessions",
+    :passwords          => "users/passwords",
+    :omniauth_callbacks => "users/omniauth_callbacks" }
 
   devise_for :seller_users, :controllers => { :sessions => "sellers/sessions"}
 
@@ -190,7 +190,7 @@ Icolor::Application.routes.draw do
   match "/events/:id" => "events#show"
   match "/designer_events" => "designer_events#index"
   match "/designer_events/index_2" => "designer_events#index_2" #第二页的显示 5个站点
-   match "/designer_events/index_3" => "designer_events#index_3"
+  match "/designer_events/index_3" => "designer_events#index_3"
   match "/designer_events/kv" => "designer_events#kv" #第一列表也KV点击后的页面
   match "/designer_events/weibo" => "designer_events#weibo"
   match "/designer_events/:id" => "designer_events#show"
@@ -421,6 +421,23 @@ Icolor::Application.routes.draw do
   end
 
   scope "/love", :module =>"baicheng" do
+    
+    get "1.html" => "welcome#index"
+    get "2.1.html" => "stories#new"
+    get "2.2.html" => "stories#update_image"
+    get "2.3.html" => "stories#image_new"
+    get "3.1.html" => "stories#index"
+    get ":id.3.2.html" => "stories#show"
+    get "4.1.html" => "design_competes#index"
+    get ":id.4.2.html" => "design_competes#show"
+  
+    match '5.1.html' => 'fashion_model#show', :defaults => { :id => 'foreign'}
+      
+    match '5.2.html' => 'fashion_model#show', :defaults => { :id => 'native'}
+     
+    match '6.1.html' => 'actives#index'
+   
+    
     root  to: 'welcome#index', as: 'baicheng_root'
     resources :design_works do
       collection do

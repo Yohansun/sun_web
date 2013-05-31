@@ -19,6 +19,7 @@ function init_monitor_link_click() {
             ]
         });
         triggerEBConversion(326789);
+        
     });
 
     $('#monitor_link_326790').click(function() {
@@ -88,92 +89,123 @@ function init_monitor_link_click() {
 
 
     $('#monitor_link_326795').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326795);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+            triggerEBConversion(326795);
+        } catch (e) {
+
+        }
     });
 
     $('#monitor_link_326796').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明-活动规划"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326796);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明-活动规划"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+            triggerEBConversion(326796);
+        } catch (e) {
+
+        }
     });
     $('#monitor_link_326797').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明-活动内容"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326797);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明-活动内容"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+            triggerEBConversion(326797);
+        } catch (e) {
+
+        }
     });
     $('#monitor_link_326798').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明-活动奖项"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326798);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明-活动奖项"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+            triggerEBConversion(326798);
+        } catch (e) {
+
+        }
     });
 
     $('#monitor_link_326799').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明-评选细则"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326799);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明-评选细则"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+            triggerEBConversion(326799);
+        } catch (e) {
+
+        }
     });
 
     $('#monitor_link_326800').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明-评委名单"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326800);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明-评委名单"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+
+            triggerEBConversion(326800);
+
+
+        } catch (e) {
+
+        }
     });
 
     $('#monitor_link_326801').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "活动章程及说明-活动时间"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        triggerEBConversion(326801);
+        try {
+            CClicki[10008]._trackEvent({
+                type: 1,
+                labels: [
+                    {"按钮名称": "活动章程及说明-活动时间"}
+                ],
+                values: [
+                    {"数量": 1}
+                ]
+            });
+            triggerEBConversion(326801);
+        } catch (e) {
+
+        }
     });
 
     $('#monitor_link_326803').click(function() {
@@ -189,7 +221,7 @@ function init_monitor_link_click() {
         triggerEBConversion(326803);
     });
 
- 
+
 
     $('#user_name_msg_tip').click(function() {
         CClicki[10008]._trackEvent({
@@ -337,7 +369,7 @@ function init_monitor_link_click() {
         triggerEBConversion(326817);
     });
 
- 
+
 
     $('#monitor_link_326819').click(function() {
         CClicki[10008]._trackEvent({

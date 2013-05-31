@@ -1,6 +1,7 @@
 <% content_for :tail do -%>  
   <script type="text/javascript">
-    $(function() {
+    $(document).ready(function() {
+
       $('.rules-nav').on('click', '> li > a', function() {
         var hash = this.hash.substr(1);
         $(this).parent().addClass('active').siblings().removeClass('active');
@@ -13,6 +14,13 @@
         set_title_des_keywords($(this).attr('href'));
       });
       set_title_des_keywords('');
+      var m_hash = window.location.hash.substring(1);
+ 
+      if (m_hash)
+      {
+        $('a[href$=\'' + m_hash + '\']').trigger('click');
+       }
+
     });
 
     function set_title_des_keywords(mark)
@@ -144,7 +152,7 @@
                 <p>家装公司和设计师参与活动上传的作品，必须是个人设计的作品，不能有抄袭或剽窃他人设计成果、侵犯他人知识产权及其他合法权益的行为，否则责任自负。</p>
                 <p class="font-italic fixie7">
                   房型图的设计，以创意方案为主。可上传3张图纸：一张平面图、一张主要立面图 和 一张效果图即可。作品以图片（JPG、GIF、PNG或BMP格式均可）的形式上传，单张图片大小不超过1M，且勿加任何水印。对于标注立邦色号或艺术漆色号的作品，评委会将重点优先考虑。<br />
-             
+
                   设计作品中不得出现推荐非立邦品牌的涂料产品，或对立邦产品进行诋毁、贬低的成分。
                 </p>
               </li>
@@ -362,17 +370,18 @@
             </span>
           </h3>
           <ul class="rules-timeline clearfix">
-            <li>5月</li>
+            
             <li>6月</li>
             <li>7月</li>
             <li>8月</li>
             <li>9月</li>
             <li>10月</li>
             <li>11月</li>
+            
           </ul>
           <table class="rules-table2 mt30">
             <tbody><tr>
-                <th align="left" width="560">因爱之名•刷新生活——立邦号召万名设计师为您免费设计新家</th>
+                <th align="left" width="520">因爱之名•刷新生活——立邦号召万名设计师为您免费设计新家</th>
                 <th>评选揭晓</th>
                 <th>奖品发送</th>
               </tr>
@@ -393,18 +402,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript">
-  $(function() {
-    $('.rules-nav').on('click', '> li > a', function() {
-      var hash = this.hash.substr(1);
-      $(this).parent().addClass('active').siblings().removeClass('active');
-      $('.' + hash).show().siblings().hide();
-    }).on('click', 'ul a', function() {
-      var hash = this.hash.substr(1);
-      $('.' + hash).show().siblings().hide();
-      $(this).closest('ul').siblings('a').click();
-    });
-  });
-</script>
