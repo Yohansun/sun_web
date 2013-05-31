@@ -1,48 +1,49 @@
 <div class="container-fluid">
-  <div class="design_works pad_t60">
-    <div class="wrapper pad_b40">
-      <div class="sys_top">
-        <p>
-          <%= avatar_img(current_user,"icon","46x46") %>
-          <a class="sys_user_name">
-            <span>
-              <strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页
-            </span>
-          </a>
-        </p>
-        <p>
-          <strong>客户买单，你积分！</strong><br />
-          不论是您为客户代购还是陪客户在立邦专卖店购买产品，<br />
-          只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
-        </p>
-      </div>
-      <div class="redline_b4 pad_b40">
-        <h5 class="sys_title"><span>我想设计</span></h5>
-        <ul class="thumbnails design_list nomargin">
-          <% @story_users.each do |story_user| %>
-            <% design =  story_user.story.designs.where(user_id: current_user.id).first%>
-            <% if design %>
-              <li class="span2">
-                <div class="thumbnail nopadding">
-                  <a href="<%= design_compete_path(design)  %>" class="list_img_a">
-                    <%= image_tag(design.design_images.first.file.url(:baicheng_list))  %>
-                  </a>
-                  <div class="design_list_tit">
-                    <h5 class="nomargin">
-                      <a href="<%= design_compete_path(design) %>">
-                        <%= design.title %>
-                      </a>
-                    </h5>
-                    <p class="nomargin">(<%= design.area.city.name %>)</p>
-                    <p class="nomargin"><i class="i_icon icon_tel"></i><%= story_user.user.phone %></p>
-                  </div>
-                </div>
-                <p class="well well-small text-center status"><i class="i_icon i_icon_xbig mar_h5 icon_updow_act"></i> 设计已上传</p>
-                <a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
-              </li>
-            <% else %>
-              <li class="span2">
-                <div class="thumbnail nopadding">
+	<div class="design_works pad_t60">
+		<div class="wrapper pad_b40">
+			<div class="sys_top">
+				<p>
+					<%= avatar_img(current_user,"icon","46x46") %>
+					<a class="sys_user_name">
+						<span>
+							<strong class="color_red"><%= current_user.display_name if current_user %></strong>的活动主页
+						</span>
+					</a>
+				</p>
+				<p>
+					<strong>客户买单，你积分！</strong><br />
+					不论是您为客户代购还是陪客户在立邦专卖店购买产品，<br />
+					只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
+				</p>
+			</div>
+			<div class="redline_b4 pad_b40">
+				<h5 class="sys_title"><span>我想设计</span></h5>
+				<ul class="thumbnails design_list nomargin">
+					<% @story_users.each do |story_user| %>
+						<% if story_user.story.designs.present? %>
+							<li class="span2">
+								<div class="thumbnail nopadding">
+									<a href="/users/<%= story_user.user.id %>/designs/<%= story_user.story.designs.last.id %>" class="list_img_a">
+										<%= image_tag(story_user.story.designs.last.design_images.first.file.url(:baicheng_list)) if story_user.story.designs.last.design_images.first.present? %>
+									</a>
+									<div class="design_list_tit">
+										<h5 class="nomargin">
+                      <a href="<%= design_compete_path(story_user.story.designs.last) %>">
+												<%= story_user.story.designs.last.title %>
+											</a>
+										</h5>
+										<p class="nomargin">(<%= story_user.story.designs.last.area.city.name %>)</p>
+										<p class="nomargin"><i class="i_icon icon_tel"></i><%= story_user.user.phone %></p>
+									</div>
+								</div>
+								<p class="well well-small text-center status">
+									<%= design_countdown story_user %>
+								</p>
+								<a href="#" class="btn btn-block btn-warning disabled">产品记录赢积分</a>
+							</li>
+						<% else %>
+							<li class="span2">
+								<div class="thumbnail nopadding">
                   <a href="<%= story_path(story_user.story_id) %>" class="list_img_a">
                     <%= image_tag(story_user.story.story_image.file.url(:baicheng_list)) %>
                   </a>
