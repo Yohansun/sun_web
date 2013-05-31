@@ -40,6 +40,9 @@ class DesignImagesController < ApplicationController
   end
 
   def index
+    # skip images home page
+    redirect_to '/images', :status => 301 if request.query_string.present?
+
     @content = []
     @imageable_type = ""
     @images = DesignImage.available.audited_with_colors
