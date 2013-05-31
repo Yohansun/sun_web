@@ -53,7 +53,7 @@
 									<h5 class="nomargin">
 										<%=link_to design.try(:title), design_compete_path(design) %>
 									</h5>
-                                                                  <p class="nomargin"><span class="pull-right"><%= design.design_styles.first.try(:title) %></span><%= design.user.try(:username) %>(<%= design.user.city.name %>)</p>
+                                                                  <p class="nomargin"><span class="pull-right"><%= design.design_styles.first.try(:title) %></span><%= design.user.try(:username) %>(<%= design.user.city.try(:name) %>)</p>
 								</div>
 							</div>
 						</li>
