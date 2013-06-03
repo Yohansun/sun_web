@@ -25,6 +25,22 @@ document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityS
 </noscript>
 
 <% end %>
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= baicheng_root_url %>",
+        title:"#因爱之名 刷新生活#立邦号召万名设计师为您免费设计新家活动正在如火如荼开展中，准备装修，却不知从何开始的朋友们有福了，一对一免费设计，实现您的家居梦想~还不快来参加！<%= baicheng_root_url %>",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
 <div class="container-fluid">
   <div class="text-center">
     <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1400" height="590">

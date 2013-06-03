@@ -33,6 +33,23 @@
     });
   </script>
 <%- end %>
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= design_compete_url(@design) %>",
+        title:"#因爱之名 刷新生活#来自<%= @design.location %>的设计师:<%= @design.user.display_name %>参加了“因爱之名 刷新生活”活动并上传了作品【<%= @design.title %>】，还不快来顶下，好作品需要您的投票支持哦！@刷新生活iColor <%= design_compete_url(@design) %>",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
+
 <div class="container-fluid">
   <div class="design_works pad_t60">
     <div class="wrapper pr pad_b40">

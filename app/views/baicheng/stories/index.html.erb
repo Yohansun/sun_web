@@ -45,6 +45,23 @@
   <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326823&amp;ns=1"/>
   </noscript>
 <%- end %>
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= stories_url %>",
+        title:"#因爱之名 刷新生活#立邦号召万名设计师为您免费设计新家活动正在如火如荼开展中，现在已经有好多用户上传房型图，提供装修需求啦！如果你的新家也需要装修，苦于不知如何设计，那就赶快来参加活动吧~ <%= stories_url %>",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
+
 <div class="container-fluid">
   <div class="mydesign">
     <div class="banner1"></div>

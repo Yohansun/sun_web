@@ -82,6 +82,22 @@
     }
   </script>  
 <% end %> 
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= actives_url %>",
+        title:"#因爱之名 刷新生活#立邦号召万名设计师为您免费设计新家活动正在如火如荼开展中，你有新房需要设计吗？想要获得“希腊爱琴海双人蜜月游”吗？这里有专业的设计师为你免费设计，还有大奖等你来领，快来了解活动详情吧~ <%= actives_url %>",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
 <div class="container-fluid">
   <div class="design_works pad_t60">
     <div class="wrapper rules pad_b40">
