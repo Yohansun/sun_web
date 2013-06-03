@@ -9,8 +9,9 @@ class LandSource < ActiveRecord::Base
       site = row[0]
       position = row[1]
       code = row[2].scan(/\=[0-9a-z-_]+/)[0].to_s.gsub('=','')
+      path = row[3]
       if LandSource.find_by_code(code) == nil
-        LandSource.create(site: site, position: position, code: code)
+        LandSource.create(site: site, position: position, code: code, path: path)
         p "#{code} added"
       else
         p "#{code} has already been added"
