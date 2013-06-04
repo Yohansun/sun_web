@@ -6,7 +6,7 @@ class DesignsController < ApplicationController
 
   def download
     target_file = DesignImage.where(:imageable_id => params[:id])
-    zipfile_name = "#{Rails.root}/public/design#{params[:id]}.zip"
+    zipfile_name = "#{Rails.root}/public/system/zip/design#{params[:id]}.zip"
     if File.exists?(zipfile_name)
       send_file zipfile_name
     else

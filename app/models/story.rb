@@ -11,7 +11,7 @@ class Story < ActiveRecord::Base
   belongs_to :user
   has_one :baicheng_event
   
-  has_many :story_comments, :dependent => :destroy
+  # has_many :story_comments, :dependent => :destroy #如果这句用不着,就删了吧
   has_many :story_users
   has_many :want_designers, :through => :story_users, :source => :user #想设计的设计师
   # has_many :tags, class_name: 'StoryImageTag', :foreign_key => 'story_image_id',:dependent => :destroy
