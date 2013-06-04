@@ -18,40 +18,28 @@ task :import_earlier_click_data => :environment  do
   # file_array.delete(".")
 
   # 重做几天的数据
-  date_array = ["2013-04-25".to_time(:local),
-                "2013-04-26".to_time(:local),
-                "2013-04-27".to_time(:local),
-                "2013-04-28".to_time(:local),
-                "2013-04-29".to_time(:local),
-                "2013-04-30".to_time(:local),
-                "2013-05-01".to_time(:local),
-                "2013-05-02".to_time(:local),
-                "2013-05-03".to_time(:local),
-                "2013-05-04".to_time(:local),
-                "2013-05-05".to_time(:local),
-                "2013-05-06".to_time(:local),
-                "2013-05-07".to_time(:local),
-                "2013-05-08".to_time(:local)]
+  # date_array = ["2013-04-25".to_time(:local),
+  #               "2013-04-26".to_time(:local),
+  #               "2013-04-27".to_time(:local),
+  #               "2013-04-28".to_time(:local),
+  #               "2013-04-29".to_time(:local),
+  #               "2013-04-30".to_time(:local),
+  #               "2013-05-01".to_time(:local),
+  #               "2013-05-02".to_time(:local),
+  #               "2013-05-03".to_time(:local),
+  #               "2013-05-04".to_time(:local),
+  #               "2013-05-05".to_time(:local),
+  #               "2013-05-06".to_time(:local),
+  #               "2013-05-07".to_time(:local),
+  #               "2013-05-08".to_time(:local)]
 
-  date_array.each do |date|
-    p "delete #{date} HardSell"
-    HardSell.where(date: date).delete_all
-  end
+  # date_array.each do |date|
+  #   p "delete #{date} HardSell"
+  #   HardSell.where(date: date).delete_all
+  # end
 
   p "Start Build!!!!!"
-  file_array = ["landing.log.20130425",
-                "landing.log.20130426",
-                "landing.log.20130427",
-                "landing.log.20130428",
-                "landing.log.20130429",
-                "landing.log.20130430",
-                "landing.log.20130501",
-                "landing.log.20130502",
-                "landing.log.20130503",
-                "landing.log.20130504",
-                "landing.log.20130505",
-                "landing.log.20130506",
-                "landing.log.20130507"]
+  file_array = ["landing.log.20130530"]
   file_array.each do |file|
     file_name = "#{Rails.root}/public/system/landing_log/" + file
     time_array = []
