@@ -32,7 +32,7 @@ class MasterDesignsController < ApplicationController
   def download
     target_file = MasterDesign.find(params[:id])
     if target_file.master_design_uploads
-      zipfile_name = "#{Rails.root}/public/master_design#{params[:id]}.zip"
+      zipfile_name = "#{Rails.root}/public/system/zip/master_design#{params[:id]}.zip"
       if File.exists?(zipfile_name)
         send_file zipfile_name
       else
