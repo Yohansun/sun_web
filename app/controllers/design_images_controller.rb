@@ -40,6 +40,9 @@ class DesignImagesController < ApplicationController
   end
 
   def index
+    # skip images home page
+    redirect_to '/images', :status => 301 if request.query_string.present?
+
     @content = []
     @imageable_type = ""
     @images = DesignImage.available.audited_with_colors
@@ -331,24 +334,6 @@ class DesignImagesController < ApplicationController
     @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
     @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
 
-    # #获取图片第几张
-    # @images = []
-    # @image_num = 1
-    # if @image.imageable_type == 'MasterDesign'
-    #   mdu = MasterDesign.find @image.imageable_id
-    #   @images = DesignImage.where("imageable_id = #{mdu.id} and imageable_type = 'MasterDesign'")
-    # end
-    # if @image.imageable_type == 'Design'
-    #   @images = @image.design.design_images
-    # end
-    # @images.each do |image|
-    #   if image.id.to_i == @image.id.to_i
-    #     break
-    #   else
-    #     @image_num += 1
-    #   end
-    # end
-
     #推荐色
     @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @comments = @image.comments.page(params[:page]).per(3)
@@ -357,10 +342,10 @@ class DesignImagesController < ApplicationController
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
-      @like_images = DesignImage.available.audited_with_colors.order("created_at desc").uniq.limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.order("created_at desc").uniq.limit(4)
     else
       tags = tags[0..4]
-      @like_images = DesignImage.available.audited_with_colors.search_tags(tags, true).uniq.limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).uniq.limit(4)
     end
   end
 
