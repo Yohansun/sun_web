@@ -266,7 +266,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        return newTriggerEBConversion(this, 326808);
+        triggerEBConversion(326808);
     });
 
     $('#monitor_link_326809').click(function() {
