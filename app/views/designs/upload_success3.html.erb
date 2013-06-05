@@ -1,6 +1,18 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag '2013base', '2013upload'%>
-  <% if @design.baicheng_active %>
+  <script type='text/javascript'>
+
+  (function() {
+    var c = document.createElement('script');
+    c.type = 'text/javascript';
+    c.async = true;
+    c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'pro.clicki.cn/boot/10008';
+    var h = document.getElementsByTagName('script')[0];
+    h.parentNode.insertBefore(c, h);
+  })();
+</script>  
+<% end -%>
+ <% if @design.baicheng_active %>
     <script type='text/javascript'>
     // Conversion Name: 因爱之名-房型图内页-landing on作品提交完成页
     // INSTRUCTIONS 
@@ -35,7 +47,6 @@
     <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326827&amp;ns=1"/>
     </noscript>
     <% end -%>
-  <% end -%>
   <div class="wrapper">
     <div class="upload_success">
       <div class="upload2013_2">
