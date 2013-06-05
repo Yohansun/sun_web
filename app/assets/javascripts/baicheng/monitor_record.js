@@ -8,8 +8,9 @@ $(function() {
 
 function newTriggerEBConversion(object, id) {
     var re = /#\w/;
+  
     mmConversionTag(id, object, $(object).attr('target') || '_self', $(object).attr('href'));
-    return re.test($(object).attr('href'));
+    return re.test($(object).attr('href')) ||   ($(object).prop("tagName") !=='A');
 }
 function init_monitor_link_click() {
     $('#monitor_link_326789').click(function() {
