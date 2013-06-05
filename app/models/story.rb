@@ -17,9 +17,10 @@ class Story < ActiveRecord::Base
   # has_many :tags, class_name: 'StoryImageTag', :foreign_key => 'story_image_id',:dependent => :destroy
 
   belongs_to :design
-
+ 
   after_update :sync_baicheng_event
 
+  scope :has_uploaded,->{joins(:story_image).where('not story_images.id is null')}
   def cover_img
   	self.story_images.where(is_cover: 1).try(:first)
   end
@@ -38,6 +39,8 @@ class Story < ActiveRecord::Base
       end
     end
   end
+  
+  
   
   def city_name
     if self.area_id && self.area_id != 0

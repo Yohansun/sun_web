@@ -1,23 +1,105 @@
-<div class="content">
-  <div class="title"><h5> 家装咨询回复 </h5></div>
-  <!-- Dynamic table -->
-  <div class="table">
-    <div class="head"><h5 class="iFrames">
-      家装咨询列表
-    </h5></div>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-      <thead>
-        <tr>
-          <th width="5%">ID</th>
-          <th>咨询人</th>
-          <th width="20%">发布时间</th>
-          <th width="100px">操作</th>
-        </tr>
-      </thead>
-      <tbody>
-         
+<%- content_for :tail do %>
+  <%= stylesheet_link_tag "image_libraries" %>
+  <%= javascript_include_tag 'twitter/bootstrap' %>
+  <script>
+    function GetDateStr(AddDayCount)
+    {
+      var dd = new Date();
+      dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期 
+      var y = dd.getFullYear();
+      var m = dd.getMonth() + 1;//获取当前月份的日期 
+      var d = dd.getDate();
+      return y + "-" + m + "-" + d;
+    }
+    function set_date(type) {
+      begin_d = GetDateStr(0);
+      end_d = GetDateStr(0);
+
+      $('#begin_date').attr("disabled", type != 'custom');
+      $('#end_date').attr("disabled", type != 'custom');
+      $('#begin_date').val(begin_d);
+      $('#end_date').val(end_d);
+    }
+
+    $(function() {
+      set_date('');
+      $('#<%= params[:search_type] || 'today'   %>')
+      $('input:radio').change(
+              function() {
+                set_date($(this).val());
+              }
+      );
+
+    });
+  </script>
+
+<%end%>
  
-      </tbody>
-    </table>
+<div class="content">
+
+  <div class="title">
+    <h5>日报表下载</h5>
   </div>
-</div>
+
+  <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
+
+    <%= form_tag '', class: 'search_form',method: 'get'  do %> 
+
+        <input type="radio" id="today" name="search_type" id='today' value="today" checked="true"/> 
+        <label for="today" >当日报表</label>
+
+        <input type="radio"   id="yesterday" name="search_type" id='yesterday'   value="yesterday" /> 
+        <label for="yesterday" >昨日报表</label>
+        <span class="pub_time" style="border: 1px solid #d5d5d5;padding:4px">
+          <input type="radio"   id="custom" name="search_type"  id='custom'   value="custom" /> 
+
+          <label for="custom" >自选报表</label>
+          <input type="text" class="datepicker" placeholder="开始日期" name="begin_date" id='begin_date'  value="<%= params[:begin_date] %>"/>
+          <input type="text" class="datepicker" placeholder="结束日期" name="end_date" id='end_date' value="<%= params[:end_date] %>"/>
+        </span>
+        &nbsp;
+        <input type="submit" class="button basicBtn" value="确定">
+        <input type="submit" class="button basicBtn" value="导出Excel">
+      <%end %>   
+      <div class="head">
+        <h5 class="iFrames">图库列表</h5>
+      </div>
+
+      <table cellpadding="0" cellspacing="0" border="0" class="display" >
+        <thead>
+          <tr>  <th>房型图上传时间</th>
+            <th>用户名</th>
+            <th>省</th>
+            <th>市</th>
+            <th>省</th>
+            <th>区</th>
+            <th>电话</th>
+            <th>邮箱</th>
+            <th>户型图URL</th>
+            <th>是否上传合同</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <body>
+          <% @results.each do |item| %>
+          <tr>
+            <td><%= l item.created_at,format: :long %></td>
+            <td><%=  item.user.display_name%></td>
+            <td><%= item.location.split(' ')[0] %></td>
+            <td><%= item.location.split(' ')[1] %></td>
+            <td><%= item.location.split(' ')[2] %></td>
+            <td><%= item.user.phone %></td>
+            <td><%= item.user.email %></td>
+            <td><%= item.story_image.file.url %></td>
+            <td>否</td>
+            <td><%= link_to '显示' %><%= link_to '隐藏' %></td>
+          </tr>
+        <% end %>
+        </body>
+      </table>
+    </div>
+    <div class="pager host_pager ft12"> 
+      <%= paginate @results %>
+    </div>
+  </div>
+
