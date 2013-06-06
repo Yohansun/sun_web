@@ -9,6 +9,7 @@
       <%= csrf_meta_tag %>
       <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
       <%= javascript_include_tag "baicheng" %>
+      <script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
       <script type='text/javascript'>
         (function() {
           var c = document.createElement('script');
@@ -220,16 +221,20 @@
             {"数量": 1}
           ]
         });
-        triggerEBConversion(326805);
+        
+       
+      
 <% if current_user %>
   <% unless current_user.common_user? %>
-            window.location = '<%= stories_path %>'
+            <%#*window.location = '<%= stories_path'%>
+             mmConversionTag(326805, this, '_self','<%= stories_path %>');
   <% else %>
     <% story = Story.where(user_id: current_user.id, is_save: true) %>
     <%  if story.present? %>
               alert('您已经上传过房型图！');
     <% else %>
-              window.location = '<%= new_story_path %>'
+              <%#*window.location = '<%= new_story_path '%>
+            mmConversionTag(326805, this, '_self','<%= new_story_path %>');
     <% end %>
   <% end %>
 <% else -%>
