@@ -441,7 +441,7 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        return newTriggerEBConversion(this, 326825);
+        triggerEBConversion(326825);
     });
 
     $('#monitor_link_326826').click(function() {
