@@ -1,42 +1,40 @@
 <% content_for :head do -%>
+  <script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
   <%= stylesheet_link_tag 'reg' %>
-<script type='text/javascript'>
+  <script type='text/javascript'>
 
-  (function() {
-    var c = document.createElement('script');
-    c.type = 'text/javascript';
-    c.async = true;
-    c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'pro.clicki.cn/boot/10008';
-    var h = document.getElementsByTagName('script')[0];
-    h.parentNode.insertBefore(c, h);
-  })();
-</script>
+    (function() {
+      var c = document.createElement('script');
+      c.type = 'text/javascript';
+      c.async = true;
+      c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'pro.clicki.cn/boot/10008';
+      var h = document.getElementsByTagName('script')[0];
+      h.parentNode.insertBefore(c, h);
+
+      mmConversionTag(326804, this);
+    })();
+  </script>
 
 <% end -%>
 <script>
 
-    var _CiQ10008 = _CiQ10008 || [];
+  var _CiQ10008 = _CiQ10008 || [];
 
-    _CiQ10008.push(['_trackEvent',   {
-
+  _CiQ10008.push(['_trackEvent', {
       type: 1,
-
       labels: [
-
         {"按钮名称": "注册成功提示页"}
 
       ],
-
       values: [
-
         {"数量": 1}
 
       ]
 
-    } ]);
+    }]);
 
 </script>
- 
+
 <noscript>
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326804&amp;ns=1"/>
 </noscript>

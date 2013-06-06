@@ -266,7 +266,8 @@ function init_monitor_link_click() {
                 {"数量": 1}
             ]
         });
-        triggerEBConversion(326808);
+        mmConversionTag(326808,this);
+        
     });
 
     $('#monitor_link_326809').click(function() {
