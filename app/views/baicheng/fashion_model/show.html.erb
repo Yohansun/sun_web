@@ -1,3 +1,20 @@
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"http://www.icolor.com.cn/love/fashion_model/<%= params[:id] %>",
+        title:"#因爱之名 刷新生活#想要了解时尚人士的家居设计，解读他们的艺术风格，学习大师设计理念，iColor“时尚榜样”等着你来一同欣赏 http://www.icolor.com.cn/love/fashion_model/<%= params[:id] %>",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
+
 <% if params[:id] == "foreign" %>
   <div class="container-fluid">
 	<div class="role-model pad_t60">

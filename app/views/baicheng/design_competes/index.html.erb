@@ -12,6 +12,22 @@
     });
 	</script>
 <%- end %>
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= design_competes_url %>",
+        title:"#因爱之名 刷新生活#立邦号召万名设计师为您免费设计新家活动正在如火如荼开展中，全国家装设计师在此汇聚一堂，等待着为你的新家出谋划策，你有新房装修需求？还不快来参与，绝对为你量身定制支好招！",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
 <div class="container-fluid">
 	<div class="design_works pad_t60">
 		<div class="wrapper pad_b40">

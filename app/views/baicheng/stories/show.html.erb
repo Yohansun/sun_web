@@ -40,6 +40,23 @@
     ;
   </script>
 <%- end %>
+<%- content_for :jiathis_config do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:0,
+        siteNum:7,
+        showClose:false,
+        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= story_url(@story) %>",
+        title:"#因爱之名 刷新生活#来自<%= @story.location %>的用户:<%= @story.user.display_name %>参加了“因爱之名 刷新生活”活动并发布了TA的装修需求哦！还不快来抢设计，争装修订单~~@刷新生活iColor <%= story_url(@story) %>",
+        summary:" ",
+        data_track_clickback:true
+    }
+  </script>
+<%- end %>
+
 
 <div class="container-fluid">
   <div class="mydesign pad_t60">

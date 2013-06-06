@@ -145,8 +145,10 @@
                 <a class="jiathis_button_douban" style="float:left;" id='monitor_link_326814'></a>
                 <a class="jiathis_button_tsina" style="float:left;" id='monitor_link_326815'></a>
                 <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
-                <!-- <a class="jiathis_counter_style"></a> -->
               </div>
+              <%- if content_for? :jiathis_config %>
+                <%= yield :jiathis_config %>
+              <%- end %>
               <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
               <!-- JiaThis Button END -->
             </li>
