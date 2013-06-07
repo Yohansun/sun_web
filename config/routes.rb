@@ -377,7 +377,7 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
-
+     match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :image_libraries
     resources :suit_images
   end
