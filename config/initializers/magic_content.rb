@@ -30,7 +30,13 @@ MagicContent.extra_menu_items = [
     {name: 'iColor工具管理', url: :tools_path},
     {name: 'iColor个人主页皮肤管理', url: :skins_path},
     {name: 'iColor我型我秀', url: :my_show_settings_path},
-    {name: '硬性广告数据统计', url: :hard_sells_path}
+    {name: '硬性广告数据统计', url: :hard_sells_path},
+ 
+]
+
+MagicContent.baicheng_menu_items = [
+ 
+    {name: '百城统计', url: :baicheng_daily_report_path},
 ]
 
 Rails.application.config.to_prepare do

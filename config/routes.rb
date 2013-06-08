@@ -348,6 +348,7 @@ Icolor::Application.routes.draw do
     resources :gifts
     resources :skins
     resources :skin_kv_uploads
+    match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :hard_sells, :only => [:index]
     match '/color_codes/autocomplete_recommend_color' => 'color_codes#autocomplete_recommend_color'
     match '/stat' => 'stat#index', :as => 'stat'
@@ -376,7 +377,7 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
-
+     match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :image_libraries
     resources :suit_images
   end
