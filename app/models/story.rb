@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'csv'
 class Story < ActiveRecord::Base
- ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+  ActionView::Base.send(:include, Rails.application.routes.url_helpers)
  
   
   attr_accessible :title, :content, :area_id, :user_id, :property_name, :parent_id, :demand, :budget
@@ -49,32 +49,32 @@ class Story < ActiveRecord::Base
     column_names=%w{
   上传户型时间	业主用户名	省	市	区	电话	邮箱	业主户型链接地址	是否上传合同	已点击我想设计的设计师	电话	邮箱	是否上传作品	设计师上传设计稿地址	购买时间	专卖店编号	产品名称	数量	积分
     }
-    CSV.generate(options) do |csv|
-      csv << column_names
-      all.each do |story|
-        if story.want_designers.size >0
+    Story.convert(CSV.generate(options) do |csv|
+        csv << column_names
+        all.each do |story|
+          if story.want_designers.size >0
         
-          story.want_designers.each do |designer|
+            story.want_designers.each do |designer|
           
+              csv << [story.created_at.to_s(:db),story.user.display_name,
+                story.location.split(' ')[0],story.location.split(' ')[1],story.location.split(' ')[2],
+                story.user.phone,story.user.email, ActionController::Base.helpers.url_for("/love/stories/#{story.id}"),'否',
+                designer.display_name,designer.phone,designer.email,story.designs.where(user_id: designer.id).first ? '是' : '否',
+                story.designs.where(user_id: designer.id).first ? ActionController::Base.helpers.url_for("/love/design_competes/#{story.designs.where(user_id: designer.id).first.id}") : '',
+                '','','','','',''
+              ]
+            end
+          else
             csv << [story.created_at,story.user.display_name,
               story.location.split(' ')[0],story.location.split(' ')[1],story.location.split(' ')[2],
-              story.user.phone,story.user.email, ActionController::Base.helpers.url_for("/love/stories/#{story.id}"),'否',
-              designer.display_name,designer.phone,designer.email,story.designs.where(user_id: designer.id).first ? '是' : '否',
-              story.designs.where(user_id: designer.id).first ? ActionController::Base.helpers.url_for("/love/design_competes/#{story.designs.where(user_id: designer.id).first.id}") : '',
+              story.user.phone,story.user.email,ActionController::Base.helpers.url_for("/love/stories/#{story.id}"),'否',
+              '否',
+              '',
               '','','','','',''
             ]
           end
-        else
-          csv << [story.created_at,story.user.display_name,
-            story.location.split(' ')[0],story.location.split(' ')[1],story.location.split(' ')[2],
-            story.user.phone,story.user.email,ActionController::Base.helpers.url_for("/love/stories/#{story.id}"),'否',
-            '否',
-            '',
-            '','','','','',''
-          ]
         end
-      end
-    end
+      end)
   end
   
   
@@ -93,4 +93,15 @@ class Story < ActiveRecord::Base
         {:reply_type => "baicheng",:re_url =>"/love/stories/#{self.id}"})
     end
   end
+  
+  private
+  def self.convert(str)
+    require 'iconv'
+    begin
+      converter = Iconv.new("GBK", "UTF-8")
+      converter.iconv(str)
+    rescue
+      str
+    end
+  end 
 end

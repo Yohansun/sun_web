@@ -1,3 +1,4 @@
+# encoding: utf-8
 module MagicContent
   class BaichengController < BaseController
 
@@ -13,14 +14,12 @@ module MagicContent
         begin_t = Time.now
         end_t = Time.now
       end
+      @results = Story.has_uploaded.includes(:want_designers=>:designs).where(created_at: begin_t.beginning_of_day..end_t.end_of_day)
       if params[:submit]
-        @results = Story.has_uploaded.includes(:want_designers=>:designs).where(created_at: begin_t.beginning_of_day..end_t.end_of_day)
-        send_data  @results.with_detail_to_csv, :filename =>"baicheng_daily_report_#{Time.now.to_date.to_s}.csv" 
+        send_data  @results.with_detail_to_csv, :type => 'text/csv; charset=utf8; header=present',:filename =>"baicheng_daily_report_#{Time.now.to_date.to_s}.csv" 
       else
-        @results = Story.has_uploaded.includes(:want_designers=>:designs).where(created_at: begin_t.beginning_of_day..end_t.end_of_day).page(params[:page])
+        @results = @results.page(params[:page])
       end
     end
-    
-     
   end
 end
