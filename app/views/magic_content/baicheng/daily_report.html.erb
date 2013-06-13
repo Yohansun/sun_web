@@ -27,7 +27,13 @@
     }
 
     $(function() {
+      $('[data-toggle*=]').click(function() {
+        $($(this).attr('data-toggle')).toggle();
+      });
 
+      $('[data-hide*=]').click(function() {
+        $($(this).attr('data-hide')).hide();
+      });
 
       $('input:radio').change(
               function() {
@@ -98,7 +104,7 @@
             <td><%= item.user.email %></td>
             <td><%= link_to url_for("/love/stories/#{item.id}"),url_for("/love/stories/#{item.id}"),target: '_blank'  %></td>
             <td>否</td>
-            <td> <%= link_to_if item.want_designers.size>0, '显示',"javascript:$('##{dom_id(item,'detail')}').toggle()"  %> <%= link_to_if  item.want_designers.size>0, '隐藏',"javascript:$('##{dom_id(item,'detail')}').hide()"   %></td>
+            <td> <%= link_to_if item.want_designers.size>0, '显示',"#" ,:'data-toggle'=>"##{dom_id(item,'detail')}" %> <%= link_to_if  item.want_designers.size>0, '隐藏',"#" ,:'data-hide'=>"##{dom_id(item,'detail')}"   %></td>
           </tr>
           <tr id='<%= dom_id(item,'detail') %>' style='display:none'>
             <td colspan="10">
