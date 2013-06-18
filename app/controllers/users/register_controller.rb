@@ -16,9 +16,11 @@ class Users::RegisterController < Devise::RegistrationsController
     #   end
       params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id unless params[:user][:user_role].blank?
     end
-
+    
+     
+    
     build_resource
-
+    resource.create_from = params[:return_to]
     if resource.save
       if resource.active_for_authentication?
         resource.create_score(resource.id, 101, 1, 100)
