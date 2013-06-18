@@ -66,7 +66,7 @@ class DesignsController < ApplicationController
       end
       @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null').uniq
     end
-    @designs = @designs.joins(:design_images)
+     
     sign_in(@user) if current_admin && @user
   end
 
