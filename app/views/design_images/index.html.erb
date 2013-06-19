@@ -569,7 +569,7 @@ $(function(){
 		</div><!-- imgbase_area -->
 
 		<div class="pager ft12">
-			<%= paginate @images %>
+			<%= paginate @images, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
 		</div><!-- pager -->
 	<%- else %>
 		<div class="imgbase_area clear">
