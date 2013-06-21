@@ -260,12 +260,12 @@
                     <p class="nomargin"><i class="i_icon icon_tel"></i><%= design.user.phone %></p>
                   </div>
                   <p class="upload_good">
-                    <%- unless current_user %>
+                    <%- if  @story.contract && design.user==@story.contract.user  %>
                       <a href="javascript:;" class="pull-right upload_btn_red upload_btn_gray upload_contract">
                         <span class="text-center">合同已上传</span>
                       </a>
                     <%- else %>
-                      <a href="javascript:;" class="pull-right upload_btn_red upload_contract"  >
+                      <a href="<%= @story.contract || !current_user ? '#' :  new_upload_contract_path(story_user_id:  StoryUser.where(story_id: @story,user_id: design.user_id)) %>" class="pull-right <%=  @story.contract || !current_user  ? 'upload_btn_gray' : 'upload_btn_red' %> upload_contract"  >
                         <span class="text-center">上传合同</span>
                       </a>
                     <%- end %>

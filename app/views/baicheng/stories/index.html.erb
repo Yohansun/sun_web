@@ -89,10 +89,12 @@
           <%- @stories.each do |story| %>
             <li class="span2">
               <div class="thumbnail nopadding stories">
-                <%- if story.designs_count == 3 %>
+                <%if story.contract %>
+                  <span class="list_tag list_tag_deal"></span> 
+                <% elsif story.designs_count == 3 %>
                   <span class="list_tag list_tag_full"></span>
                 <%- end %>
-                <!-- <span class="list_tag list_tag_deal"></span> -->
+                
                 <a href="<%= story_path(story.id) %>" class="list_img_a">
                   <%= image_tag(story.story_image.file.url(:baicheng_list)) %>
                 </a>
