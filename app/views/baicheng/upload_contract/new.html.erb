@@ -1,6 +1,6 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "baicheng/steps" %>
- 
+
   <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
   <script type="text/javascript">
     var flag = true;
@@ -88,7 +88,8 @@
             <p class="mt30">您只需将合同原件中 <strong class="cr">有合同双方签字盖章的页面</strong> 扫描成图片并上传即可。<br />建议：以JPG、GIF、PNG或BMP文件上传，单张图片5M以下。</p>
             <p class="text-right pad_h15">移除<span class="pull-left">文件</span></p>
             <div class="step2-area text-right">
-
+              <div class="load-bar load-content" id="uploads">
+              </div>
             </div>
           </div>
         </div>
