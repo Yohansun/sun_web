@@ -1,0 +1,103 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "baicheng/steps" %>
+
+  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+  <script type="text/javascript">
+    var flag = true;
+    $(function() {
+
+  <%- session_key = Rails.application.config.session_options[:key] -%>
+      $('#upload_photo').uploadify({
+        swf: '/uploadify/uploadify.swf',
+        cancelImage: '/uploadify/uploadify-cancel.png',
+        //skipDefault : ['onSelect'],
+        progressData: 'percentage',
+        buttonText: "<a class='contract-btn show'>选择图片</a>",
+        fileTypeDesc: '图片文件',
+        fileTypeExts: '*.jpg; *.png',
+        successTimeout: 6000,
+        fileSizeLimit: '5MB',
+        uploadLimit: 60,
+        width: 184,
+        height: 46,
+        multi: true,
+        auto: true,
+        checkExisting: false,
+        transparent: true,
+        uploader: '/love/contract_images',
+        //buttonText : '选择文件',
+        onUploadSuccess: function(file, data, response) {
+          var dat = eval('(' + data + ')');
+          if (dat.result == 'success') {
+            $.getScript(dat.upload + "?for=design", function() {
+              var $btn = $('.upload2013_btn');
+              if ($btn.length == 0)
+                return;
+              $btn.unbind('click').click(function() {
+                $(this).toggleClass('upload2013_btn_down').next().toggle();
+              });
+            });
+            var current = parseInt($('.js-images_num span:eq(1)').text());
+            $('.js-images_num span:eq(1)').text(current - 1);
+          } else {
+            alert("图片上传失败");
+          }
+          ;
+        },
+        postData: {
+          '_http_accept': 'application/javascript',
+          'format': 'json',
+          '_method': 'post',
+          '<%= session_key %>': '<%= cookies[session_key] %>',
+          'authenticity_token': '<%= form_authenticity_token %>'
+        },
+        onUploadError: function(file, errorCode, errorMsg, errorString) {
+          alert('您的网络不给力，请稍后尝试' + errorCode + errorMsg);
+        },
+        onUploadStart: function() {
+          //$("#upload_going").show();
+        },
+        onUploadComplete: function() {
+          //$("#upload_going").hide();
+        }
+      });
+    });
+    function remote(id) {
+      $('#contract_image' + id).remove();
+     
+    }
+    function remove_image_all() {
+         $('.upload_item').remove();
+       
+    }
+
+  </script>
+<%- end %>
+<div class="container-fluid">
+  <div class="design_works pad_t60">
+    <div class="wrapper upload-contract pad_b40">
+      <h1>上传合同</h1>
+      <%=  form_for :upload,url: upload_contract_path(story_user_id: params[:story_user_id]), :class=>"refresh-form pd30 ft12" do %>
+        <div class="refresh-control">
+          <label>上传合同</label>
+          <div class="form-article">
+            <div>
+              <a href="#" id="upload_photo" class="contract-btn show">选择合同文件</a>
+            </div>
+            <br>
+            <p class="mt30">您只需将合同原件中 <strong class="cr">有合同双方签字盖章的页面</strong> 扫描成图片并上传即可。<br />建议：以JPG、GIF、PNG或BMP文件上传，单张图片5M以下。</p>
+            <p class="text-right pad_h15">移除<span class="pull-left">文件</span></p>
+            <div class="step2-area text-right">
+              <div class="load-bar load-content" id="uploads">
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-center">
+          <input type="submit" class="step3-submit" value="">
+        </p>
+      <% end %>
+      <div class="redline_b4 pad_t60"></div>
+    </div>
+  </div>
+</div>
