@@ -27,9 +27,11 @@ module Baicheng::StoriesHelper
 				result = "<i class='i_icon i_icon_xbig mar_h5 icon_updow_act'></i>设计已上传"
 			end
       
-      if story_user.story.contract.present?
-				result = "<i class='i_icon i_icon_xbig mar_h5 icon_deal'></i>设计已上传"
-			end		
+      if story_user.story.contract
+        Rails.logger.info('icon_deal')
+				result = "<i class='i_icon i_icon_xbig mar_h5 icon_deal'></i>设计已成交"
+			end
+		
 		rescue Exception => e
 			puts e.to_s
 		end

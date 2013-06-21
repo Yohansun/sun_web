@@ -43,16 +43,16 @@
 <%- content_for :jiathis_config do %>
   <script type="text/javascript" charset="utf-8">
     var jiathis_config = {
-        boldNum:0,
-        siteNum:7,
-        showClose:false,
-        sm:"t163,kaixin001,renren,douban,tsina,tqq,tsohu",
-        imageWidth:26,
-        marginTop:150,
-        url:"<%= story_url(@story) %>",
-        title:"#因爱之名 刷新生活#来自<%= @story.location %>的用户:<%= @story.user.display_name %>参加了“因爱之名 刷新生活”活动并发布了TA的装修需求哦！还不快来抢设计，争装修订单~~@刷新生活iColor <%= story_url(@story) %>",
-        summary:" ",
-        data_track_clickback:true
+      boldNum: 0,
+      siteNum: 7,
+      showClose: false,
+      sm: "t163,kaixin001,renren,douban,tsina,tqq,tsohu",
+      imageWidth: 26,
+      marginTop: 150,
+      url: "<%= story_url(@story) %>",
+      title: "#因爱之名 刷新生活#来自<%= @story.location %>的用户:<%= @story.user.display_name %>参加了“因爱之名 刷新生活”活动并发布了TA的装修需求哦！还不快来抢设计，争装修订单~~@刷新生活iColor <%= story_url(@story) %>",
+      summary: " ",
+      data_track_clickback: true
     }
   </script>
 <%- end %>
@@ -85,6 +85,8 @@
               <%- elsif current_user %>
                 <% if  @story.designs_count > 2 %>
                   <a href="javascript:alert('设计已满!');" class="design_btn" ></a>
+                <% elsif @story.contract%>
+                  <a href="javascript:alert('设计已经成交!');" class="design_btn" ></a>
                 <% else %>
                   <a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
                 <% end %>          
