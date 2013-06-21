@@ -22,7 +22,7 @@ class Baicheng::UploadContractController < ApplicationController
           contract_image.is_cover = true if params[:cover_image] && params[:cover_image].to_i == contract_image_id.to_i
           contract_image.save
         end  
-        redirect_to stories_path(Sstory_user.story_id)  
+        redirect_to stories_path(story_user.story_id)  
       end
     else 
       redirect_to root_path
