@@ -468,7 +468,7 @@ Icolor::Application.routes.draw do
     end
     resources :fashion_model
     resources :sysinfo
-    resources :upload_contract
+    resource :upload_contract ,controller: :upload_contract
     resources :story_images
     resources :actives
     match ':page', to: 'welcome#show', via: :get
