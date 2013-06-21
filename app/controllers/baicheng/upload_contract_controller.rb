@@ -10,7 +10,7 @@ class Baicheng::UploadContractController < ApplicationController
   end
   
   def create
-    if current_user && (story_user = StoryUser.where(id: params[:story_user_id],user_id: current_user.id).first)
+    if current_user && (story_user = StoryUser.where(id: params[:story_user_id]).first)
       contract = Contract.new
       contract.u_id = story_user.user_id
       contract.story_id = story_user.story_id  
