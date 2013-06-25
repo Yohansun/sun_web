@@ -259,7 +259,9 @@
                   </a>
                   <div class="works_tit border_dot_b1">
                     <p class="nomargin"><%= design.user.display_name %>（<%= design.city_name %>）</p>
-                    <p class="nomargin"><i class="i_icon icon_tel"></i><%= design.user.phone %></p>
+                    <%- if @story.user == current_user %>
+                      <p class="nomargin"><i class="i_icon icon_tel"></i><%= design.user.phone %></p>
+                    <%- end %>
                   </div>
                   <p class="upload_good">
                     <%- if  @story.contract && design.user==@story.contract.user  %>
