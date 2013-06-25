@@ -227,7 +227,7 @@
                           <span class="review_btns pull-right">
                             <%= link_to  reply_msg_path(reply.id),method: :delete,title: '删除' , :confirm => "确定删除么?",title: ''  do    %>
                               <i class='i_icon i_icon_big i_icon_del'></i>删除
-                            <% end if current_user.id == @design.user.id %>
+                            <% end if current_user &&  current_user.id == @design.user.id %>
                           </span>
                           <p>
 

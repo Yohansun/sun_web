@@ -51,6 +51,8 @@ class Baicheng::DesignCompetesController < ApplicationController
     @comments = @design.comments.page(params[:page]).per(8)
     @image_colors = []  
     @design.design_images.available.each do |image|  
+      cc = ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
+      next if cc.blank? 
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])  
     end      
     @title = "设计作品大比拼_#{@story.user.display_name if @story}房型设计-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈(**为设计作品名称)"
