@@ -25,7 +25,7 @@ class DesignsController < ApplicationController
       #点击洽谈用户的id
       design.story_talking_id = current_user.id
       if design.save
-        render :js => "alert('按照屏幕显示的联系方式与设计师进行深入洽谈，会获得更符合期望的设计！洽谈成功后上传合同，更有机会获得爱琴海双人浪漫游！');location.reload();"
+        render :js => "alert('按照屏幕显示的联系方式与设计师进行深入洽谈，会获得更符合期望的设计！洽谈成功后上传合同，更有机会获得爱琴海双人浪漫游！');"
       else
         render nothing: true
       end

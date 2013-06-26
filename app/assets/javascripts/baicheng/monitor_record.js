@@ -510,18 +510,18 @@ function init_monitor_link_click() {
         return newTriggerEBConversion(this, 326831);
     });
 
-    $('.icon_talk').click(function() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "已提交作品-洽谈"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        return newTriggerEBConversion(this, 326832);
-    });
+    // $('.icon_talk').click(function() {
+    //     CClicki[10008]._trackEvent({
+    //         type: 1,
+    //         labels: [
+    //             {"按钮名称": "已提交作品-洽谈"}
+    //         ],
+    //         values: [
+    //             {"数量": 1}
+    //         ]
+    //     });
+    //     return newTriggerEBConversion(this, 326832);
+    // });
 
     $('.upload_contract').click(function() {
         CClicki[10008]._trackEvent({

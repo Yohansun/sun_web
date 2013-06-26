@@ -38,7 +38,23 @@
       $('.reset_button').click(function() {
         $(this).parents('.reply_form').hide();
       });
+      $('a.icon_talk').bind('ajax:success', function(evt, data, status, xhr){
+        talking_seo();
+        location.reload();
+      });
     });
+    function talking_seo() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "已提交作品-洽谈"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 326832);
+    };
     function show_modal() {
       $('#design_tips').modal('show');
     }
@@ -287,12 +303,12 @@
                     <%- if design.story_talking_id.blank? %>
                       <%- if @story.user == current_user %>
                         <%= link_to '', story_talking_path(design), method: :post, remote: true, class: 'i_icon icon_talk'  %>
-                        <%- else %>
-                          <a href="javascript:;" class="i_icon icon_talk_back"></a>
-                        <%- end %>
                       <%- else %>
-                        <a href="javascript:;" class="i_icon icon_talking"></a>
+                        <a href="javascript:;" class="i_icon icon_talk_back"></a>
                       <%- end %>
+                    <%- else %>
+                      <a href="javascript:;" class="i_icon icon_talking"></a>
+                    <%- end %>
                     </p>
                   </div>
                 </li>
