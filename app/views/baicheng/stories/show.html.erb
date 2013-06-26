@@ -1,3 +1,8 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .icon_talk_back{height:21px;width:66px;background:url(<%= asset_path 'baicheng/btns.png' %>) no-repeat 0 -87px;}
+  </style>
+<%- end %>
 <% content_for :tail do -%>
   <script type="text/javascript">
     $(function() {
@@ -33,7 +38,23 @@
       $('.reset_button').click(function() {
         $(this).parents('.reply_form').hide();
       });
+      $('a.icon_talk').bind('ajax:success', function(evt, data, status, xhr){
+        talking_seo();
+        location.reload();
+      });
     });
+    function talking_seo() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "已提交作品-洽谈"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 326832);
+    };
     function show_modal() {
       $('#design_tips').modal('show');
     }
@@ -269,19 +290,25 @@
                         <span class="text-center">合同已上传</span>
                       </a>
                     <%- else %>
-                      <a href="<%= @story.contract || !current_user ? '#' :  new_upload_contract_path(story_user_id:  StoryUser.where(story_id: @story,user_id: design.user_id).first.id) %>" class="pull-right <%=  @story.contract || !current_user  ? 'upload_btn_gray' : '' %> upload_btn_red upload_contract"  >
-                        <span class="text-center">上传合同</span>
-                      </a>
+                      <%- if @story.contract || !current_user %>
+                        <a href="javascript:void(0);" class="pull-right upload_btn_gray upload_btn_red">
+                          <span class="text-center">上传合同</span>
+                        </a>
+                      <%- else %>
+                        <a href="<%= new_upload_contract_path(story_user_id:  StoryUser.where(story_id: @story,user_id: design.user_id).first.id) %>" class="pull-right upload_btn_red upload_contract">
+                          <span class="text-center">上传合同</span>
+                        </a>
+                      <%- end %>
                     <%- end %>
                     <%- if design.story_talking_id.blank? %>
                       <%- if @story.user == current_user %>
                         <%= link_to '', story_talking_path(design), method: :post, remote: true, class: 'i_icon icon_talk'  %>
-                        <%- else %>
-                          <a href="javascript:;" class="i_icon icon_talk"></a>
-                        <%- end %>
                       <%- else %>
-                        <a href="javascript:;" class="i_icon icon_talking"></a>
+                        <a href="javascript:;" class="i_icon icon_talk_back"></a>
                       <%- end %>
+                    <%- else %>
+                      <a href="javascript:;" class="i_icon icon_talking"></a>
+                    <%- end %>
                     </p>
                   </div>
                 </li>
