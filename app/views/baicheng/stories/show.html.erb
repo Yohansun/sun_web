@@ -43,18 +43,6 @@
         location.reload();
       });
     });
-    function talking_seo() {
-        CClicki[10008]._trackEvent({
-            type: 1,
-            labels: [
-                {"按钮名称": "已提交作品-洽谈"}
-            ],
-            values: [
-                {"数量": 1}
-            ]
-        });
-        return newTriggerEBConversion(this, 326832);
-    };
     function show_modal() {
       $('#design_tips').modal('show');
     }
@@ -286,12 +274,12 @@
                   </div>
                   <p class="upload_good">
                     <%- if  @story.contract && design.user==@story.contract.user  %>
-                      <a href="javascript:;" class="pull-right upload_btn_red upload_btn_gray upload_contract">
+                      <a class="pull-right upload_btn_red upload_btn_gray upload_contract">
                         <span class="text-center">合同已上传</span>
                       </a>
                     <%- else %>
                       <%- if @story.contract || !current_user %>
-                        <a href="javascript:void(0);" class="pull-right upload_btn_gray upload_btn_red">
+                        <a class="pull-right upload_btn_gray upload_btn_red">
                           <span class="text-center">上传合同</span>
                         </a>
                       <%- else %>
@@ -304,10 +292,10 @@
                       <%- if @story.user == current_user %>
                         <%= link_to '', story_talking_path(design), method: :post, remote: true, class: 'i_icon icon_talk'  %>
                       <%- else %>
-                        <a href="javascript:;" class="i_icon icon_talk_back"></a>
+                        <a class="i_icon icon_talk_back"></a>
                       <%- end %>
                     <%- else %>
-                      <a href="javascript:;" class="i_icon icon_talking"></a>
+                      <a class="i_icon icon_talking"></a>
                     <%- end %>
                     </p>
                   </div>
