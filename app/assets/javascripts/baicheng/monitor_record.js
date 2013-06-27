@@ -91,6 +91,32 @@ function init_monitor_link_click() {
         return newTriggerEBConversion(this, 326793);
     });
 
+    $('#monitor_link_337428').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "因爱之名-王丽坤"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 337428);
+    });
+
+    $('#monitor_link_337621').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "因爱之名-Edward Davinson"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 337621);
+    });
+
     $('#monitor_link_326794').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
