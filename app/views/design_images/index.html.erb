@@ -174,34 +174,46 @@
       });
 });
 
-  var tags = new Array();
-  <%- if @tags -%>
-    <%- @tags.each do |tag| -%>
-      <%- if tag.children_count == 0 -%>
-      tags[<%= tag.parent_id %>] = <%= tag.id -%>;
-      <%- else -%>
-      tags[<%= tag.id %>] = <%= tag.id -%>;
-      <%- end -%>
-    <%- end -%>
-  <%- end -%>
+  
   function search_sub(){
-  var search = $("#search_query_value").val();
-  if(search == "" || search == null){
-    window.location = "/images"
-  }else{
-    window.location = "/images/0-0-0-0-0-0-0-0-0-all-0-0-0-" + search + "-0-0"
-  }
-}
+	  var search = $("#search_query_value").val();
+	  if(search == "" || search == null){
+	    window.location = "/images"
+	  }else{
+	  	var link = "/images/<%= prefix_link %>-0_0_" + search + "_0_0_0"
+	    window.location = link
+	  }
+	}
+
+	function submit_area() {
+	  var area_id = "";
+	  if ($(".level_1").val() > 0) {
+	    area_id = $(".level_1").val();
+	  };
+	  if ($(".level_2").val() > 0) {
+	    area_id = $(".level_2").val();
+	  };
+	  if ($(".level_3").val() > 0) {
+	    area_id = $(".level_3").val();
+	  };
+
+	  if(area_id == "" || area_id == null){
+	    window.location = "/images"
+	  }else{
+	  	var link = "/images/<%= prefix_link %>-" + area_id + "_0_0_0_0_0"
+	    window.location = link
+	  }
+	}
   </script>
 <%- end %>
 <% if params[:return].present? && params[:return].to_i == 1 %>
-<script type="text/javascript">
-$(function(){
-  setTimeout(function(){
-  $('.imgbase_list').children().last().trigger('mouseover');
-  },500)
-})
-</script>
+	<script type="text/javascript">
+	$(function(){
+	  setTimeout(function(){
+	  	$('.imgbase_list').children().last().trigger('mouseover');
+	  },500)
+	})
+	</script>
 <% end %>
 
 <div class="imgbase">
@@ -209,19 +221,20 @@ $(function(){
 		<img src="<%= asset_path "imgbase/imgbase_tit.png" %>">
 		<div class="clear">
 			<div class="fr imgbase_search">
-				<form action='/images/' method='get' style="display:inline">
-					<input type="text" name='search' value="<%= params[:search] if params[:search].present? && params[:search].to_s != "_"%>" id="search_query_value"><button type="button"  onclick="search_sub()">搜图</button>
+				<form action='/images/' method='post' style="display:inline">
+					<input type="text" name='search' value="<%= @user_word %>" id="search_query_value">
+					<button type="button"  onclick="search_sub()">搜图</button>
 				</form>
 				<span>热门搜索：
 					<%- if MagicSetting.color_tag.present? %>
-						<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-<%= MagicSetting.color_tag %>-0-0"><%= MagicSetting.color_tag %></a>
+						<a href="/images/<%= show_link MagicSetting.color_tag, :color %>"><%= MagicSetting.color_tag %></a>
 					<%- end %>
-					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-小户型-0-0">小户型</a>
-					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-客厅-0-0">客厅</a>
-					<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-简约-0-0">简约</a>
+					<a href="/images/<%= show_link '小户型', :color %>">小户型</a>
+					<a href="/images/<%= show_link '客厅', :color %>">客厅</a>
+					<a href="/images/<%= show_link '简约', :color %>">简约</a>
 				</span>
 			</div>
-			<p>iColor为您提供<strong><%= @image_length%></strong>张装修图片</p>
+			<p>iColor为您提供<strong><%= @images_count %></strong>张装修图片</p>
 		</div>
 	</div><!-- imgbase_title -->
         <div class="breadcrumb "> 
@@ -232,10 +245,10 @@ $(function(){
 	<div class="imgbase_main pr">
 		<div class="tit_tab clear">
 			<p class="fr">
-				<a href="/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0" class="<%="active_condition" if params[:controller] == 'design_images' && (params[:imageable_type] == nil || params[:imageable_type] == "" || params[:imageable_type] == "all") %>">所有图片</a>
-				<a href="/images/0-0-0-0-0-0-0-0-0-0-MasterDesign-0-0-0-_-0-0" class="<%="active_condition" if params[:imageable_type] == 'MasterDesign'%>">大师作品</a>
-        <a href="/images/0-0-0-0-0-0-0-0-0-0-WeekStart-0-0-0-_-0-0" class="<%="active_condition" if params[:imageable_type] == 'WeekStart'%>">设计之星</a>
-				<a href="/images/0-0-0-0-0-0-0-0-0-0-ColorDesign-0-0-0-_-0-0" class="<%="active_condition" if params[:imageable_type] == 'ColorDesign'%>">色彩配搭</a>
+				<a href="/images/<%= show_link 'All', :subject %>" class="<%="active_condition" if params[:controller] == 'design_images' && @subject == "All" %>">所有图片</a>
+				<a href="/images/<%= show_link 'MasterDesign', :subject %>" class="<%="active_condition" if @subject == 'MasterDesign'%>">大师作品</a>
+        <a href="/images/<%= show_link 'WeekStart', :subject %>" class="<%="active_condition" if @subject == 'WeekStart'%>">设计之星</a>
+				<a href="/images/<%= show_link 'ColorDesign', :subject %>" class="<%="active_condition" if @subject == 'ColorDesign'%>">色彩配搭</a>
 			</p>
 			<ul id="imgbase_ul" class="fl">
 				<li class="active_tit">家装设计</li>
@@ -246,19 +259,15 @@ $(function(){
 			</ul> -->
 		</div><!-- tit_tab -->
 		<div id="imgbase_forms">
-      <%=form_tag image_search_index_design_images_path, :class => 'tab_content form_mini' do %> 
+      <%=form_tag image_search_index_design_images_path, :class => @tag_ids.blank? ? 'tab_content form_mini' : 'tab_content' do %>
 				<%- @categories.each do |category| %>
-					<%- unless category.title == "按建筑" || category.title == "按部件" %>
+					<%- unless category.title == "按部件" %>
 						<fieldset class="clear">
 							<label class="fl"><%= category.title %>：</label>
 							<span>
-								<a href="/images?tags=<%=category.id%>"
-                  data-parent-id='<%= category.id %>' data-tag-id='<%= category.id %>'
-                  class="check_on <% if @tag_ids &&  @tag_ids.include?(category.id) %>highlight<% end %>">全部</a>
+								<a href="/images/<%= show_link category.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(category.id.to_s) %>">全部</a>
 								<%- category.children.each do |cate_child| %>
-									<a href="/images?tags=<%= cate_child.id %>"
-                    data-parent-id='<%= category.id %>' data-tag-id='<%= cate_child.id %>'
-                    class="check_on <% if @tag_ids && @tag_ids.include?(cate_child.id) %>highlight<% end %>"><%= cate_child.title %></a>
+									<a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
 								<%- end %>
 							</span>
 						</fieldset>
@@ -268,57 +277,53 @@ $(function(){
 				<fieldset class="clear">
 					<label class="fl">按地域：</label>
 					<span>
-						<select id="province" class="level_1" style="width:70px;">省</select>
+		        <select id="province" class="level_1" style="width:70px;">省</select>
 		        <select id="city" class="level_2" style="width:70px;">市</select>
 		        <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
-		        <input type="button" value="" onclick="submit_area()" />
+		        <input type="button" value="" onclick="submit_area();return false;" />
 					</span>
 				</fieldset>
 				<fieldset class="lastfield pinyin_list clear">
 					<label class="fl">拼音检索：</label>
-					<a href="/images?pinyin=A">A</a>|
-          <a href="/images?pinyin=B">B</a>|
-          <a href="/images?pinyin=C">C</a>|
-          <a href="/images?pinyin=D">D</a>|
-          <a href="/images?pinyin=E">E</a>|
-          <a href="/images?pinyin=F">F</a>|
-          <a href="/images?pinyin=G">G</a>|
-          <a href="/images?pinyin=H">H</a>|
-          <a href="/images?pinyin=I">I</a>|
-          <a href="/images?pinyin=J">J</a>|
-          <a href="/images?pinyin=K">K</a>|
-          <a href="/images?pinyin=L">L</a>|
-          <a href="/images?pinyin=M">M</a>|
-          <a href="/images?pinyin=N">N</a>|
-          <a href="/images?pinyin=O">O</a>|
-          <a href="/images?pinyin=P">P</a>|
-          <a href="/images?pinyin=Q">Q</a>|
-          <a href="/images?pinyin=R">R</a>|
-          <a href="/images?pinyin=S">S</a>|
-          <a href="/images?pinyin=T">T</a>|
-          <a href="/images?pinyin=U">U</a>|
-          <a href="/images?pinyin=V">V</a>|
-          <a href="/images?pinyin=W">W</a>|
-          <a href="/images?pinyin=X">X</a>|
-          <a href="/images?pinyin=Y">Y</a>|
-          <a href="/images?pinyin=Z">Z</a>
+					<a href="/images/<%= show_link "A", :pinyin %>">A</a>|
+          <a href="/images/<%= show_link "B", :pinyin %>">B</a>|
+          <a href="/images/<%= show_link "C", :pinyin %>">C</a>|
+          <a href="/images/<%= show_link "D", :pinyin %>">D</a>|
+          <a href="/images/<%= show_link "E", :pinyin %>">E</a>|
+          <a href="/images/<%= show_link "F", :pinyin %>">F</a>|
+          <a href="/images/<%= show_link "G", :pinyin %>">G</a>|
+          <a href="/images/<%= show_link "H", :pinyin %>">H</a>|
+          <a href="/images/<%= show_link "I", :pinyin %>">I</a>|
+          <a href="/images/<%= show_link "J", :pinyin %>">J</a>|
+          <a href="/images/<%= show_link "K", :pinyin %>">K</a>|
+          <a href="/images/<%= show_link "L", :pinyin %>">L</a>|
+          <a href="/images/<%= show_link "M", :pinyin %>">M</a>|
+          <a href="/images/<%= show_link "N", :pinyin %>">N</a>|
+          <a href="/images/<%= show_link "O", :pinyin %>">O</a>|
+          <a href="/images/<%= show_link "P", :pinyin %>">P</a>|
+          <a href="/images/<%= show_link "Q", :pinyin %>">Q</a>|
+          <a href="/images/<%= show_link "R", :pinyin %>">R</a>|
+          <a href="/images/<%= show_link "S", :pinyin %>">S</a>|
+          <a href="/images/<%= show_link "T", :pinyin %>">T</a>|
+          <a href="/images/<%= show_link "U", :pinyin %>">U</a>|
+          <a href="/images/<%= show_link "V", :pinyin %>">V</a>|
+          <a href="/images/<%= show_link "W", :pinyin %>">W</a>|
+          <a href="/images/<%= show_link "X", :pinyin %>">X</a>|
+          <a href="/images/<%= show_link "Y", :pinyin %>">Y</a>|
+          <a href="/images/<%= show_link "Z", :pinyin %>">Z</a>
 				</fieldset>
 				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
       <% end %>
-			<form class="tab_content form_mini none">
+			<form class="<%= @tag_ids.blank? ? 'tab_content form_mini' : 'tab_content' %> none">
 				<%- @categories.each do |category| %>
 					<%- if category.title == "按部件" %>
 						<%- category.children.each do |child_lv2| %>
 							<fieldset class="clear">
 								<label class="fl"><%= child_lv2.title %>：</label>
 								<span>
-									<a href="/images?tags=<%= child_lv2.id %>"
-                    data-parent-id='<%= child_lv2.id %>' data-tag-id='<%= child_lv2.id %>'
-                    value ="<%= child_lv2.id %>" class="check_on <% if @tag_ids &&  @tag_ids.include?(child_lv2.id) %>highlight<% end %>">全部</a>
+									<a href="/images/<%= show_link child_lv2.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(child_lv2.id.to_s) %>">全部</a>
 									<%- child_lv2.children.each do |child_lv3| %>
-										<a href="/images?tags=<%= child_lv2.id %>,<%= child_lv3.id %>"
-                      data-parent-id='<%= child_lv2.id %>' data-tag-id='<%= child_lv3.id %>'
-                      value ="<%= child_lv3.id %>" class="check_on <% if @tag_ids && @tag_ids.include?(child_lv3.id) %>highlight<% end %>"><%= child_lv3.title %></a>
+										<a href="/images/<%= show_link child_lv3.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(child_lv3.id.to_s) %>"><%= child_lv3.title %></a>
 									<%- end %>
 								</span>
 							</fieldset>
@@ -326,29 +331,39 @@ $(function(){
 					<%- end %>
 				<%- end %>
 				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a> 
-				
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
 	<div class="search_bin clear">
-		<a href="/images?ranking_list=like" data-rank='like' class="fr <%= "curr_rank" if params[:ranking_list] == "like" %>">喜欢排行</a>
-		<a href="/images?ranking_list=view_count" data-rank='view_count' class="fr <%= "curr_rank" if params[:ranking_list] == "view_count" %>">浏览排行</a>
-		<a href="/images" class="fr <%= "curr_rank" if (params[:ranking_list] == "0" || params[:ranking_list] == nil || params[:ranking_list] == "") && params[:controller] == "design_images" %>">默认排行</a>
-		<%- if @query_params_index.present? || @area_names.present? || (params[:pinyin].present? && params[:pinyin].to_i != 0)%>
+		<a href="/images/<%= show_link "like", :rank %>" class="fr <%= "curr_rank" if @rank == "like" %>">喜欢排行</a>
+		<a href="/images/<%= show_link "view", :rank %>" class="fr <%= "curr_rank" if @rank == "view" %>">浏览排行</a>
+		<a href="/images/<%= show_link "0", :rank %>" class="fr <%= "curr_rank" if @rank == "0" %>">默认排行</a>
+		<%- if @area_names.present? || @pinyin.present? || @query_tags.present? %>
 			<p class="srch-items">
 				您的选择：
 				<%- @query_tags.each do |tag| %>
           		<% next if tag.blank? %>
-					<span class="srch-span"><%= tag.parent.present? ? tag.parent.title : "" %>: <i><%= tag.title %></i><a href="javascript:add_tag(<%= tag.parent_id %>, <%= tag.id %>);" class="srch-del">删除</a></span>
+					<span class="srch-span"><%= tag.parent.present? ? "#{tag.parent.title}" : "" %>: <i><%= tag.title %></i>
+						<a href="<%= delete_link tag.id, :tag %>" class="srch-del">删除</a>
+					</span>
 				<%- end %>
-				<%- if params[:pinyin].present? && params[:pinyin].to_s != "0" %>
-					<span class="srch-span">拼音: <i><%= params[:pinyin] %></i><a href="javascript:delete_pinyin();" class="srch-del">删除</a></span>
+				<%- if @color.present? && @color.to_s != "0" %>
+					<span class="srch-span">查询: <i><%= @color %></i>
+						<a href="<%= delete_link @color, :color %>" class="srch-del">删除</a>
+					</span>
+				<%- end %>
+				<%- if @pinyin.present? && @pinyin.to_s != "0" %>
+					<span class="srch-span">拼音: <i><%= @pinyin %></i>
+						<a href="<%= delete_link @pinyin, :pinyin %>" class="srch-del">删除</a>
+					</span>
 				<%- end %>
 				<%- if @area_names.present? %>
-					<span class="srch-span">地区: <i><%= @area_names %></i><a href="javascript:delete_submit_area();" class="srch-del">删除</a></span>
+					<span class="srch-span">地区: <i><%= @area_names %></i>
+						<a href="<%= delete_link @area, :area %>" class="srch-del">删除</a>
+					</span>
 				<%- end %>
 				<span class="srch-divider">|</span>
-				<button class="srch-span" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0%>-0-0-_-0-0';">重新选择</button>
+				<button class="srch-span" onclick="javascript:window.location='/images';">重新选择</button>
 			</p>
 		<%- end %>
 	</div><!-- search_bin -->
@@ -499,7 +514,6 @@ $(function(){
 									</a>
 									<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
 										查看该套作品
-									</a>
 									</a>
 								</span>
 								<span class="fl cl">

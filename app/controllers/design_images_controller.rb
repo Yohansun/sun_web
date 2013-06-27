@@ -41,19 +41,38 @@ class DesignImagesController < ApplicationController
 
   def index
     # skip images home page
-    redirect_to '/images', :status => 301 if request.query_string.present?
+    return redirect_to '/images', :status => 301 if request.query_string.present?
 
-    @content = []
-    @imageable_type = ""
-    @images = DesignImage.available.audited_with_colors
-    @image_length = @images.count
-    @categories = ImageLibraryCategory.where(parent_id: nil).includes(:children).order("position")
-    @tag_names = []
-    if params[:tags].present?
-       @tag_ids = CGI.unescape(params[:tags]).split("-").map { |e| e.to_i }.uniq.sort
-       @tag_ids.delete(-1)
+    @search_word = params[:search]
+
+    @path = params[:path]
+    @ids = []
+    @ids = @path.split('-') if @path.present?
+
+    @other_ids = []
+    @other_ids = @ids.last.split('_') if @ids.present?
+    if @other_ids.present?
+      @area = @other_ids[0]
+      @pinyin = @other_ids[1]
+      @color = @other_ids[2]
+      @subject = @other_ids[3]
+      @user_word = @search_word
+      @rank = @other_ids[4]
     end
 
+    @categories = ImageLibraryCategory.parent_categories
+    @category_ids = @categories.collect{|categorie|
+      {
+        id: categorie.id,
+        childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
+      }
+    }
+
+    # only select ids
+    @ids.delete_at(-1)
+    @tag_ids = @ids.uniq
+
+    @content = []
     if @tag_ids.present?
       tag_arrs = []
       @tag_ids.each do |tag_arr|
@@ -94,77 +113,87 @@ class DesignImagesController < ApplicationController
           tag_arrs << tag_arr
         end
       end
-      if tag_arrs.present?
-        @tags = ImageLibraryCategory.where("id in (?)", tag_arrs)
-        final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
-        @images = @images.search_tags(final_tags.map(&:id))
-        @tag_names << final_tags.map(&:title)
-      end
     end
 
-    if params[:area_id].present? && params[:area_id].to_s != "0"
-      area = Area.find(params[:area_id])
-      @content[0] = area.parent.blank? ? nil : area.parent.name 
+    @design_images = DesignImage.available.audited_with_colors
+    @images_count = @design_images.count
+
+    @tag_names = []
+
+    if @tag_ids.present?
+      @tags = ImageLibraryCategory.where("id in (?)", @tag_ids)
+      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+      @design_images = @design_images.search_tags(final_tags.map(&:id))
+      @tag_names << final_tags.map(&:title)
+    end
+
+    if @area.present? && @area.to_s != "0"
+      area = Area.find(@area)
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
       @area_names = area.self_and_ancestors.map(&:name).join(" ")
       @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
-      @images = @images.where(area_id: areas.map(&:id))
+      @design_images = @design_images.where(area_id: areas.map(&:id))
+
+      @content[0] = area.parent.blank? ? nil : area.parent.name
     end
 
-    if params[:search].present? && params[:search].to_s != "_"
-      tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
-      @images = @images.search_tags(tags.map(&:id), true)
-      @tag_names << tags.map(&:title)
-      @content[6] = "#{params[:search]}" + "#{@content[6]}" if params[:search] == "橙色系"
-      @content[5] = "#{params[:search]}" + "#{@content[5]}" if params[:search] == "小户型"
-      @content[11] = "#{params[:search]}" + "#{@content[11]}" if params[:search] == "客厅"
-      @content[1] = "#{params[:search]}" + "#{@content[1]}" if params[:search] == "简约"
+    word = @color if @color.present?
+    word = @user_word if @user_word.present?
+    if word.present? && word.to_s != "0"
+      @tags = ImageLibraryCategory.where("title like ?", "%#{word}%")
+      @design_images = @design_images.search_tags(@tags.map(&:id), true)
+      @tag_names << @tags.map(&:title)
+
+      @content[6] = "#{word}" + "#{@content[6]}" if word == "橙色系"
+      @content[5] = "#{word}" + "#{@content[5]}" if word == "小户型"
+      @content[11] = "#{word}" + "#{@content[11]}" if word == "客厅"
+      @content[1] = "#{word}" + "#{@content[1]}" if word == "简约"
     end
 
-    if params[:imageable_type].present? && params[:imageable_type].to_s != "all"
-      @imageable_type = "大师作品" if params[:imageable_type] == "MasterDesign"
-      @imageable_type = "设计之星" if params[:imageable_type] == "WeekStart"
-      @imageable_type = "色彩配搭" if params[:imageable_type] == "ColorDesign"
-      if params[:imageable_type] == 'WeekStart'
-        @images = @images.where("sorts = 2")
+    if @subject.present? && @subject.to_s != "0" && @subject.to_s != "All"
+      @imageable_type = "大师作品" if @subject == "MasterDesign"
+      @imageable_type = "设计之星" if @subject == "WeekStart"
+      @imageable_type = "色彩配搭" if @subject == "ColorDesign"
+      if @subject == 'WeekStart'
+        @design_images = @design_images.where("sorts = 2")
       else
-        @images = @images.where("imageable_type = ?", params[:imageable_type])
+        @design_images = @design_images.where("imageable_type = ?", @subject)
       end
     end
 
-    if params[:pinyin].present? && params[:pinyin].to_s != "0"
-      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
-      @content[10] = params[:pinyin]
-      @images = @images.search_tags(tags.map(&:id), true)
-      @tag_names << tags.map(&:title)
+    if @pinyin.present? && @pinyin.to_s != "0"
+      @tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{@pinyin}%")
+      @design_images.search_tags(@tags.map(&:id), true)
+      @tag_names << @tags.map(&:title)
+
+      @content[10] = @pinyin
     end
 
-    if params[:ranking_list].present? && params[:ranking_list] != "0"
-      if params[:ranking_list] == "like"
-        @images = @images.order("design_images.votes_count desc")
-      elsif params[:ranking_list] == "view_count"
-        @images = @images.order("design_images.view_count desc")
+    if @rank == 'like' || @rank == 'view'
+      if @rank == 'like'
+        ranks = "design_images.votes_count desc"
+      elsif @rank == 'view'
+        ranks = "design_images.view_count desc"
       end
     else
-      # @images = @images.order("sorts ASC, design_images.source DESC, design_images.created_at DESC")
-      @images = @images.order("design_images.created_at DESC")
+      ranks = "design_images.created_at DESC"
     end
-    @images = @images.page(params[:page]).per(11)
-    #use in show or other page
-    @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
-    #use in design_image index
-    @query_params_index = ([@tag_names] - [""]).compact.join(", ")
-    @query_params_index = @query_params_index.split(',')
+
+    @images = @design_images.order(ranks).page(params[:page]).per(11)
+
     @query_tags = []
-    @query_params_index.each do |tag|
-      @query_tags << ImageLibraryCategory.find_by_title(tag.strip)
-    end
+    @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
+    @query_tags = @ilcs if @ilcs.present?
+
     @image_colors = []
-    @images.each do |image|
+    @design_images.each do |image|
       @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
     end
+
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
+
+    render :index
   end
 
   def image_tag
