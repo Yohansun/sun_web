@@ -278,12 +278,12 @@
                         <span class="text-center">合同已上传</span>
                       </a>
                     <%- else %>
-                      <%- if @story.contract || !current_user %>
-                        <a class="pull-right upload_btn_gray upload_btn_red">
+                      <%- if @story.user == current_user && @story.contract.nil? %>
+                        <a href="<%= new_upload_contract_path(story_user_id:  StoryUser.where(story_id: @story,user_id: design.user_id).first.id) %>" class="pull-right upload_btn_red upload_contract">
                           <span class="text-center">上传合同</span>
                         </a>
                       <%- else %>
-                        <a href="<%= new_upload_contract_path(story_user_id:  StoryUser.where(story_id: @story,user_id: design.user_id).first.id) %>" class="pull-right upload_btn_red upload_contract">
+                        <a class="pull-right upload_btn_red upload_btn_gray">
                           <span class="text-center">上传合同</span>
                         </a>
                       <%- end %>
