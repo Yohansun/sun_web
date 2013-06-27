@@ -12,6 +12,18 @@ function newTriggerEBConversion(object, id) {
     mmConversionTag(id, object, $(object).attr('target') || '_self', $(object).attr('href'));
     return re.test($(object).attr('href')) ||   ($(object).prop("tagName") !=='A');
 }
+function talking_seo() {
+    CClicki[10008]._trackEvent({
+        type: 1,
+        labels: [
+            {"按钮名称": "已提交作品-洽谈"}
+        ],
+        values: [
+            {"数量": 1}
+        ]
+    });
+    return newTriggerEBConversion(this, 326832);
+};
 function init_monitor_link_click() {
     $('#monitor_link_326789').click(function() {
         CClicki[10008]._trackEvent({
