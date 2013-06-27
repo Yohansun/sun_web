@@ -70,9 +70,10 @@
               </li>
               <li class="divider-vertical_nav"></li>
               <li class="<%= 'active ' if controller_name == 'fashion_model' %> pr">
-                <a href="<%= fashion_model_path("foreign") %>" class="drophover_toggle fashion_model" >时尚榜样</a>
+                <a href="<%= fashion_model_path("wanglikun") %>" class="drophover_toggle fashion_model" >时尚榜样</a>
                 <ul class="drophover_menu hide">
-                  <li><a href="<%= fashion_model_path("foreign") %>" class="fashion_model <%= 'active' if params[:id] == 'foreign' %>">Edward Davinson</a></li>
+                  <li><a href="<%= fashion_model_path("wanglikun") %>" class="fashion_model <%= 'active' if params[:id] == 'wanglikun' %>" id='monitor_link_337428'>王丽坤</a></li>
+                  <li><a href="<%= fashion_model_path("foreign") %>" class="fashion_model <%= 'active' if params[:id] == 'foreign' %>" id='monitor_link_337621'>Edward Davinson</a></li>
                   <li><a href="<%= fashion_model_path("native") %>" class="<%= 'active' if params[:id] == 'native' %>" id='monitor_link_326794' >崔睿</a></li>
                 </ul>
               </li>

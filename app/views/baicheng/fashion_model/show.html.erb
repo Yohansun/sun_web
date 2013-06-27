@@ -14,6 +14,13 @@
     }
   </script>
 <%- end %>
+<%- content_for :head do %>
+<style type="text/css">
+.role-model3{background: url(<%= asset_path 'baicheng/works/bg5_3.jpg' %>) no-repeat center top;min-height:170px;}
+.role-model3 .wrapper{padding:15px 25px 25px;box-shadow:0px -1px 4px #ddd;}
+.role-model3 .model-img{margin:0 0 40px;}
+</style>
+<%- end %>
 
 <% if params[:id] == "foreign" %>
   <div class="container-fluid">
@@ -37,6 +44,20 @@
 			<img src="<%= asset_path 'baicheng/works/model2.jpg' %>" width="837" height="1892" class="model-img" />
 			<i class="pull-right">以上资料由《美好家园》友情提供</i>
 			<div class="redline_b4 pad_b40"></div>
+		</div>
+	</div>
+<% elsif params[:id] == "wanglikun" %>
+	<div class="container-fluid">
+		<div class="role-model role-model3 pad_t60">
+			<div class="wrapper">
+				<div><%= image_tag 'baicheng/works/model3_1.jpg', class: 'model-img' %></div>
+				<div><%= image_tag 'baicheng/works/model3_2.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model3_3.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model3_4.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model3_5.jpg' %></div>
+				<i class="pull-right">以上王丽坤素雅空间由韩文强和美好家园空间秀合作设计</i>
+				<div class="redline_b4 pad_b40"></div>
+			</div>
 		</div>
 	</div>
 <% end %>
