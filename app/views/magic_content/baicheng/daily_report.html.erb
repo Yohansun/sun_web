@@ -50,7 +50,7 @@
 <div class="content">
 
   <div class="title">
-    <h5>百城统计</h5>
+    <h5>因爱之名统计</h5>
   </div>
 
   <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
@@ -72,11 +72,39 @@
         &nbsp;
         <input type="submit" class="button basicBtn"  value="确定">
         <input type="submit" class="button basicBtn" name='submit' value="导出Excel">
-      <%end %>   
+      <%end %>
       <div class="head">
         <h5 class="iFrames">日报表下载</h5>
       </div>
+      <table cellpadding="0" cellspacing="0" border="0" class="display" >
+          <tr>
+            <td>本阶段发布房型图数: &nbsp;&nbsp;&nbsp;<b><%= @count1 %></b></td>
+            <td>历史发布房型图数: &nbsp;&nbsp;&nbsp;<b><%= @count2 %></b></td>
+            <td>房型图总数: &nbsp;&nbsp;&nbsp;<b><%= @count3 %></b></td>
+          </tr>
+          <tr>
+            <td>被预订的房型图: &nbsp;&nbsp;&nbsp;<b><%= @count4 %></b></td>
+            <td>未被预订的房型图: &nbsp;&nbsp;&nbsp;<b><%= @count5 %></b></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>收到作品的房型图: &nbsp;&nbsp;&nbsp;<b><%= @count6 %></b></td>
+            <td>未收到作品的房型图: &nbsp;&nbsp;&nbsp;<b><%= @count7 %></b></td>
+            <td></td>
+          </tr>
 
+          <tr>
+            <td>本阶段发布的作品数: &nbsp;&nbsp;&nbsp;<b><%= @count8 %></b></td>
+            <td>历史发布作品数: &nbsp;&nbsp;&nbsp;<b><%= @count9 %></b></td>
+            <td>作品总数: &nbsp;&nbsp;&nbsp;<b><%= @count10 %></b></td>
+          </tr>
+          <tr>
+            <td>被洽谈的作品数: &nbsp;&nbsp;&nbsp;<b><%= @count11 %></b></td>
+            <td>已成交的作品数: &nbsp;&nbsp;&nbsp;<b><%= @count12 %></b></td>
+            <td></td>
+          </tr>
+      </table>
+      <br/>
       <table cellpadding="0" cellspacing="0" border="0" class="display" >
         <thead>
           <tr>  
@@ -104,7 +132,7 @@
             <td><%= item.user.email %></td>
             <td><%= link_to url_for("/love/stories/#{item.id}"),url_for("/love/stories/#{item.id}"),target: '_blank'  %></td>
             <td>否</td>
-            <td> <%= link_to_if item.want_designers.size>0, '显示',"#" ,:'data-toggle'=>"##{dom_id(item,'detail')}" %> <%= link_to_if  item.want_designers.size>0, '隐藏',"#" ,:'data-hide'=>"##{dom_id(item,'detail')}"   %></td>
+            <td> <%= link_to_if item.want_designers.size>0, '显示',"javascript:void(0);" ,:'data-toggle'=>"##{dom_id(item,'detail')}" %> <%= link_to_if  item.want_designers.size>0, '隐藏',"javascript:void(0);" ,:'data-hide'=>"##{dom_id(item,'detail')}"   %></td>
           </tr>
           <tr id='<%= dom_id(item,'detail') %>' style='display:none'>
             <td colspan="10">

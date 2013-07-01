@@ -36,7 +36,7 @@ MagicContent.extra_menu_items = [
 
 MagicContent.baicheng_menu_items = [
  
-    {name: '百城统计', url: :baicheng_daily_report_path},
+    {name: '因爱之名统计', url: :baicheng_daily_report_path},
 ]
 
 Rails.application.config.to_prepare do

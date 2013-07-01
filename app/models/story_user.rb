@@ -5,6 +5,7 @@ class StoryUser < ActiveRecord::Base
   belongs_to :user
   
   scope :current_month,->{where(design_time: Time.now.beginning_of_month..Time.now.end_of_month)}
+  scope :uniq_story,->{select("distinct story_id")}
   
   after_create :send_msg
   private
