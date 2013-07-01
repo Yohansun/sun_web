@@ -40,7 +40,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         flash[:notice] = "Authentication successful"
         if session[:api_login].present?
-            redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{current_user.id}/username/#{current_user.username}"
+            redirect_to "/mobile/index.php/Users/apilogin/id/#{current_user.id}/name/#{current_user.username}"
         else
           if request.env['omniauth.origin'].match %r(community)
             current_user.user_tokens.find_by_provider(provider).update_attribute :is_binding, true #更新社区绑定状态
@@ -65,7 +65,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             authentication.update_attribute :access_token, omniauth['access_token']
           end
           if session[:api_login].present?
-            redirect_to "/icolormobile/icolor/index.php/Users/improveinfo/id/#{authentication.user.id}"
+            redirect_to "/mobile/index.php/Users/improveinfo/id/#{authentication.user.id}"
           else
             if session[:baigcheng_login].present?
               sign_in(:user, authentication.user)
@@ -88,7 +88,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if user.save(:validate => false)
             flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
             if session[:api_login].present?
-              redirect_to "/icolormobile/icolor/index.php/Users/apilogin/id/#{user.id}/username/#{user.username}"
+              redirect_to "/mobile/index.php/Users/apilogin/id/#{user.id}/name/#{user.username}"
             else
               sign_in(:user, user)
               if session[:baigcheng_login].present?
@@ -101,7 +101,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           else
             session[:omniauth] = omniauth.except('extra')
             if session[:api_login].present?
-              redirect_to "/icolormobile/icolor/index.php/Register/login"
+              redirect_to "/mobile/index.php/Register/login"
             else
               if session[:baigcheng_login].present?
                 redirect_to baicheng_root_path
