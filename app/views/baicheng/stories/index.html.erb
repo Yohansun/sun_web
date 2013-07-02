@@ -96,7 +96,7 @@
                 <%- end %>
                 
                 <a href="<%= story_path(story.id) %>" class="list_img_a">
-                  <%= image_tag(story.story_image.file.url(:baicheng_list)) %>
+                  <%= image_tag(story.story_image.file.url(:baicheng_list)) if story.story_image.present? %>
                 </a>
                 <div class="design_list_tit">
                   <h5 class="nomargin"><a href="<%= story_path(story.id) %>"><%= story.user.display_name %>的房型图</a></h5>
