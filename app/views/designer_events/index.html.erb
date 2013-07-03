@@ -23,7 +23,9 @@
   <div class="wrapper d_act_list pb30 group">
     <div class="shadow event event_desc">
         <div class="section clear">
-          <img src="<%= asset_path 'design_events/yinai_big.jpg' %>" border="0" usemap="#Map">
+          <%= link_to baicheng_root_path, target: '_blank' do %>
+            <%= image_tag 'design_events/yinai_big.jpg', border: 0 %>
+          <% end %>
           <h2 class="tl"><span class="fr">活动时间：2013年6月至9月 活动主办方：iColor</span>因爱之名刷新生活</h2>
         </div>
     </div>
