@@ -87,6 +87,25 @@
           $(this).tooltip('hide');
         }
       );
+      $('.check_all').click(function(){
+        if (this.checked) {
+          $('.js-checkboxes').find('input[type=checkbox]').attr('checked', true);
+        }else{
+          $('.js-checkboxes').find('input[type=checkbox]').attr('checked', false);
+        };
+      });
+      $('.audio_all').click(function(){
+        var ids = [];
+        $('.js-checkboxes').find('input[type=checkbox]:checked').each(function(){
+          ids.push($(this).data('image-id'));
+        });
+        console.log(ids);
+        $.ajax({
+          type: "GET",
+          url: "<%= main_app.no_audited_all_image_libraries_path %>",
+          data: {image_ids : ids}
+        });
+      });
     });
   </script>
 <%- end %>
@@ -126,10 +145,13 @@
     <% end %>
     <div class="head">
       <h5 class="iFrames">图库列表</h5>
+
+      <a href="javascript:;" class="greyishBtn audio_all">全部不予审核</a>
     </div>
 
     <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
       <thead>
+        <th width='10px'>全选<input type="checkbox" class="check_all"></th>
         <th width='30px'>ID</th>
         <th>名称</th>
         <th width='60px'>列表页图片</th>
@@ -145,7 +167,8 @@
       <tbody>
         <% if @images.present? %>
           <%- @images.each do |image| -%>
-          <tr>
+          <tr class="js-checkboxes">
+            <td><%= check_box_tag "image_ids[]", image.id, image.no_audited?, :"data-image-id" => image.id %></td>
             <td><%= image.id %></td>
             <td>
               <%- if image.user_id %>

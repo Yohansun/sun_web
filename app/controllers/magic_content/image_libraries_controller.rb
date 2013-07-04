@@ -2,7 +2,7 @@
 
 module MagicContent
   class ImageLibrariesController < BaseController
-    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :no_audited]
+    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :no_audited, :no_audited_all]
 
     def index
       @images = DesignImage.available.order("design_images.id DESC")
@@ -175,6 +175,15 @@ module MagicContent
       # else
       #   redirect_to image_libraries_path
       # end
+    end
+
+    def no_audited_all
+      if params[:image_ids].present?
+        DesignImage.where(id: params[:image_ids]).update_all(last_user_id: current_admin.id, last_updated_at: Time.now, no_audited: true)
+        render :js => "alert('全部不予审核成功！');location.reload();"
+      else
+        render nothing: true, status: 200
+      end
     end
 
     def up_down_page
