@@ -9,8 +9,10 @@ module MagicContent
       if params[:genre].present?
         if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
           @images = DesignImage.search_with(params[:genre], 'last_updated_at', "", "")
-        elsif params[:start_date] && params[:end_date]
+        elsif params[:start_date].present? && params[:end_date].present?
           @images = DesignImage.search_with(params[:genre], params[:keywords], params[:start_date], params[:end_date])
+        elsif params[:genre] == 'no_audited'
+          @images = DesignImage.search_with(params[:genre], params[:keywords], "", "")
         else
           @images = DesignImage.search_with(params[:genre], params[:keywords], "", "") if params[:keywords].present?
         end
@@ -22,7 +24,11 @@ module MagicContent
           @page_count = (@images.count / 10).to_i + 1
         end
       end
-      @images = @images.where("no_audited is false").order("design_images.id DESC").page(params[:page]) if @images.present?
+      if params[:genre] == 'no_audited'
+        @images = @images.page(params[:page])
+      else
+        @images = @images.where("no_audited is false").order("design_images.id DESC").page(params[:page]) if @images.present?
+      end
     end
 
     def categories
