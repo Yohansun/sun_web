@@ -10,7 +10,7 @@ class Story < ActiveRecord::Base
   has_many :votes, :as => :voteable
   has_many :collects, :dependent => :destroy
   has_many :comments, :as => :commentable
-  has_many :designs
+  has_many :designs, dependent: :nullify
   belongs_to :area
   belongs_to :user
   has_one :baicheng_event
@@ -19,12 +19,14 @@ class Story < ActiveRecord::Base
   has_many :story_users, :dependent => :destroy
   has_many :want_designers, :through => :story_users, :source => :user #想设计的设计师
   # has_many :tags, class_name: 'StoryImageTag', :foreign_key => 'story_image_id',:dependent => :destroy
-
   belongs_to :design
  
+  #has_uploaded 等同于is_save=1,未上传story_image的story,默认save都是0,页面不会显示.
+  scope :has_uploaded,->{joins(:story_image).where('not story_images.id is null')}
+  scope :available,->(start_time,end_time){where(created_at: (start_time..end_time),is_save: true)}
+
   after_update :sync_baicheng_event
 
-  scope :has_uploaded,->{joins(:story_image).where('not story_images.id is null')}
   def cover_img
   	self.story_images.where(is_cover: 1).try(:first)
   end

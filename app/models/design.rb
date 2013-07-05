@@ -27,6 +27,8 @@ class Design < ActiveRecord::Base
 
   scope :time_range, ->(start_date,end_date){joins(:user).where(:users => {:role_id => 1,:des_status => true,:source => nil},:created_at => start_date.to_time..end_date.to_time)}
   scope :baicheng,->{where(baicheng_active: true)}
+  scope :story_design,->{where("story_id is not null")}
+  scope :story_talking_design,->{where("story_talking_id is not null")}
 
   paginates_per 8
 
