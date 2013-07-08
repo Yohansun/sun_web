@@ -89,16 +89,18 @@
             </p>
             <div class="pr">
               <!-- <a href="javascript:;myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
-              <%- if signed_in? &&  current_user.common_user? %>
-                <a href="#" class="design_btn" role="button" data-toggle="modal"></a>
-              <%- elsif current_user %>
-                <% if  @story.designs_count > 2 %>
-                  <a href="javascript:alert('设计已满!');" class="design_btn" ></a>
-                <% elsif @story.contract%>
-                  <a href="javascript:alert('设计已经成交!');" class="design_btn" ></a>
-                <% else %>
-                  <a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
-                <% end %>          
+              <%- if current_user %>
+                <%- if current_user.common_user? %>
+                  <a href="#" class="design_btn" role="button" data-toggle="modal"></a>
+                <%- else %>
+                  <% if @story.designs_count > 2 %>
+                    <a href="javascript:alert('设计已满!');" class="design_btn" ></a>
+                  <% elsif @story.contract %>
+                    <a href="javascript:alert('设计已经成交!');" class="design_btn" ></a>
+                  <% else %>
+                    <a href="<%= storyuser_stories_path(story_id: @story,user_id: current_user) %>" class="design_btn" id ='monitor_link_326825'role="button" data-toggle="modal" data-method="post" data-remote="true"></a>
+                  <% end %>
+                <%- end %>
               <%- else %>
                 <a href="javascript:show_login();" class="design_btn" role="button" data-toggle="modal"></a>
               <%- end %>
@@ -110,7 +112,7 @@
                   </a>
                 <%- elsif current_user %>
                   <% if @story.want_designers.include?(current_user) %>
-                    <%unless  @story.designs.where(user_id: current_user.id).exists?%>
+                    <% unless @story.designs.where(user_id: current_user.id).exists? %>
                       <a class="btns btn_upload" href="<%= new_user_design_path(current_user,story_id: params[:id]) %>" id ='monitor_link_326826'>
                         <span>上传设计</span>
                       </a>
@@ -177,7 +179,8 @@
                   </li>
                 </ul>
               </div>
-              <%- if signed_in? &&  !current_user.common_user? %>
+
+              <%- if current_user && !current_user.role_id == 3 %>
                 <script type="text/javascript">
                   window.onload = function() {
                     $('.design_intro a.color_red').hover(function() {
@@ -190,6 +193,7 @@
                   };
                 </script>
               <% end %>
+
             </div>
           </div>
         </div>
