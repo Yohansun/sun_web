@@ -148,6 +148,7 @@ module MagicContent
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       @image.audited = true
+      @image.no_audited = false
       if @image.save
         flash[:notice] = "审核成功！"
       else

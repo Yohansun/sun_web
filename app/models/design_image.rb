@@ -169,7 +169,7 @@ class DesignImage < ActiveRecord::Base
         if keyword.blank?
           DesignImage.available.where(["no_audited is true"]).order("design_images.id DESC")
         else
-          DesignImage.includes(:last_user).available.where(["no_audited is true AND admins.username = ?", keyword]).order("design_images.id DESC")
+          DesignImage.includes(:last_user).available.where(["no_audited is true AND admins.username like ?", "%#{keyword}%"]).order("design_images.id DESC")
         end
       when 'pub_time'
         DesignImage.available.where(:created_at => (start_date.to_time)..(end_date.to_time + 1.day)).order("design_images.id DESC")
