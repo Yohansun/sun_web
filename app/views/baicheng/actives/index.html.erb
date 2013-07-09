@@ -236,7 +236,7 @@
                 </li> -->
               </ul>
             </div>
-            <% if signed_in? %>
+            <% if current_user %>
               <% if Story.where(user_id: current_user.id, is_save: true).count>0  %>
                 <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
               <% else %>

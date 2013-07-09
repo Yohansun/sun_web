@@ -200,7 +200,7 @@
                     <p class="review_name"><span class="pull-right"><%= comment.created_at.to_date %></span><strong><%= comment.user ? comment.user.display_name : "匿名" %></strong></p>
                     <div class="clearfix">
 
-                      <% if signed_in? && current_user.id==@design.user.id %>
+                      <% if current_user && current_user.id==@design.user.id %>
                         <span class="review_btns pull-right">
                           <a href="javascript:;" class='reply_comment'><i class="i_icon i_icon_big i_icon_review"></i>回复</a>
 
