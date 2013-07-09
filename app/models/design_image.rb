@@ -166,10 +166,18 @@ class DesignImage < ActiveRecord::Base
       when 'imageable_id'
         DesignImage.available.where("design_images.imageable_id = ?", keyword).order("design_images.id DESC")
       when 'no_audited'
-        if keyword.blank?
-          DesignImage.available.where(["no_audited is true"]).order("design_images.id DESC")
+        if start_date.blank? || end_date.blank?
+          if keyword.blank?
+            DesignImage.available.where(["no_audited is true"]).order("design_images.id DESC")
+          else
+            DesignImage.includes(:last_user).available.where(["no_audited is true AND admins.username like ?", "%#{keyword}%"]).order("design_images.id DESC")
+          end
         else
-          DesignImage.includes(:last_user).available.where(["no_audited is true AND admins.username like ?", "%#{keyword}%"]).order("design_images.id DESC")
+          if keyword.blank?
+            DesignImage.available.where(["(updated_at >= :start_date AND updated_at <= :end_date) AND no_audited is true",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}]).order("design_images.id DESC")
+          else
+            DesignImage.includes(:last_user).available.where(["(design_images.updated_at >= :start_date AND design_images.updated_at <= :end_date) AND no_audited is true",{:start_date => start_date.to_time, :end_date => end_date.to_time + 1.day}]).where(["admins.username like ?", "%#{keyword}%"]).order("design_images.id DESC")
+          end
         end
       when 'pub_time'
         DesignImage.available.where(:created_at => (start_date.to_time)..(end_date.to_time + 1.day)).order("design_images.id DESC")

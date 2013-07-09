@@ -166,6 +166,7 @@ module MagicContent
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       @image.no_audited = true
+      @image.audited = false
       if @image.save
         flash[:notice] = "不予审核成功！"
       else
@@ -180,7 +181,7 @@ module MagicContent
 
     def no_audited_all
       if params[:image_ids].present?
-        DesignImage.where(id: params[:image_ids]).update_all(last_user_id: current_admin.id, last_updated_at: Time.now, no_audited: true)
+        DesignImage.where(id: params[:image_ids]).update_all(last_user_id: current_admin.id, last_updated_at: Time.now, no_audited: true, audited: false)
         render :js => "alert('全部不予审核成功！');location.reload();"
       else
         render nothing: true, status: 200

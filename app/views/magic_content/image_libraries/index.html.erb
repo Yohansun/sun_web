@@ -23,12 +23,15 @@
       if($("#genre").val() == "last_al_time"){
         $('.pub_time').show()
       }
+      if($("#genre").val() == "no_audited"){
+        $('.pub_time').show()
+      }
       $('.set_name').click(function(e){
         $(this).siblings('.name_form').show()
         $('.color_form_overlay').show()
       })
       $("#genre").change(function(e){
-        if($(this).val() == 'pub_time' || $(this).val() == 'al_time' || $(this).val() == 'last_al_time'){
+        if($(this).val() == 'pub_time' || $(this).val() == 'al_time' || $(this).val() == 'last_al_time' || $(this).val() == 'no_audited'){
           $('.pub_time').show()
         }else{
           $('.pub_time').hide()
@@ -103,10 +106,9 @@
       });
       $('.audio_all').click(function(){
         var ids = [];
-        $('.js-checkboxes').find('input[type=checkbox]:checked').each(function(){
-          ids.push($(this).data('image-id'));
+        $('.js-checkboxes').find('input[type=checkbox]:checked').each(function (i,item){
+          ids.push($(item).data('image-id'));
         });
-        console.log(ids);
         $.ajax({
           type: "GET",
           url: "<%= main_app.no_audited_all_image_libraries_path %>",
