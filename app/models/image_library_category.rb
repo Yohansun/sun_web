@@ -6,6 +6,11 @@ class ImageLibraryCategory < ActiveRecord::Base
   attr_protected :lft, :rgt
   scope :style,->{where(parent_id: 34)}
   scope :cost,->{where(parent_id: 19)}
+
+  scope :parent_categories, ->{
+    where("parent_id is null AND title != '按建筑'").includes(:children).order("position")
+  }
+
   before_save :set_pinyin
 
   def set_pinyin
