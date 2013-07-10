@@ -5,8 +5,8 @@ Icolor::Application.routes.draw do
   match "/images/:id/image_show" => "design_images#image_show", as: 'image_show_design_image'
   match "/images/:id/fullscreen" => "design_images#fullscreen"
   match "/images/*path/:page" => "design_images#index"
-  match "/images/:page" => "design_images#index"
   match "/images/*path" => "design_images#index"
+  match "/images/:page" => "design_images#index"
   match "/images" => "design_images#index"
   
   require 'api'
