@@ -5,6 +5,7 @@ Icolor::Application.routes.draw do
   match "/images/:id/image_show" => "design_images#image_show", as: 'image_show_design_image'
   match "/images/:id/fullscreen" => "design_images#fullscreen"
   match "/images/*path/:page" => "design_images#index"
+  match "/images/:page" => "design_images#index"
   match "/images/*path" => "design_images#index"
   match "/images" => "design_images#index"
   
@@ -308,6 +309,12 @@ Icolor::Application.routes.draw do
     end
     resources :sys_msgs
     resources :moods
+
+    match '/purchase/detail' => 'purchase#detail'
+    resources :purchase
+
+    match '/points/exchange' => 'points#exchange'
+    resources :points
   end
 
   resources :design_images do
@@ -377,7 +384,7 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
-     match "/baicheng/daily_report"=>'baicheng#daily_report'
+    match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :image_libraries
     resources :suit_images
   end
