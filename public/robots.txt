@@ -3,7 +3,8 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-Agent: *
 # Disallow: /
-
 User-agent: *
-Allow: /
+Disallow: /Gallery/
+Disallow: /Space/
+Disallow: /News/
 Sitemap: http://www.icolor.com.cn/sitemap_index.xml.gz
