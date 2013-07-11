@@ -2,15 +2,17 @@
 
 module MagicContent
   class ImageLibrariesController < BaseController
-    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :no_audited]
+    skip_authorize_resource :only => [:index, :categories, :update_tags, :update_title, :destroy_image, :audited, :autocomplete, :up_down_page, :no_audited, :no_audited_all]
 
     def index
       @images = DesignImage.available.order("design_images.id DESC")
       if params[:genre].present?
         if params[:genre] == 'yes_color' || params[:genre] == 'yes_update' || params[:genre] == 'no_update' || params[:genre] == 'edit_no_verify' || params[:genre] == 'color_no_edit' || params[:genre] == 'edit_no_color' || params[:genre] == 'edit_color' || params[:genre] == 'no_edit_color'
           @images = DesignImage.search_with(params[:genre], 'last_updated_at', "", "")
-        elsif params[:start_date] && params[:end_date]
+        elsif params[:start_date].present? && params[:end_date].present?
           @images = DesignImage.search_with(params[:genre], params[:keywords], params[:start_date], params[:end_date])
+        elsif params[:genre] == 'no_audited'
+          @images = DesignImage.search_with(params[:genre], params[:keywords], "", "")
         else
           @images = DesignImage.search_with(params[:genre], params[:keywords], "", "") if params[:keywords].present?
         end
@@ -22,7 +24,11 @@ module MagicContent
           @page_count = (@images.count / 10).to_i + 1
         end
       end
-      @images = @images.where("no_audited is false").order("design_images.id DESC").page(params[:page]) if @images.present?
+      if params[:genre] == 'no_audited'
+        @images = @images.page(params[:page])
+      else
+        @images = @images.where("no_audited is false").order("design_images.id DESC").page(params[:page]) if @images.present?
+      end
     end
 
     def categories
@@ -142,6 +148,7 @@ module MagicContent
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       @image.audited = true
+      @image.no_audited = false
       if @image.save
         flash[:notice] = "审核成功！"
       else
@@ -159,6 +166,7 @@ module MagicContent
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       @image.no_audited = true
+      @image.audited = false
       if @image.save
         flash[:notice] = "不予审核成功！"
       else
@@ -169,6 +177,15 @@ module MagicContent
       # else
       #   redirect_to image_libraries_path
       # end
+    end
+
+    def no_audited_all
+      if params[:image_ids].present?
+        DesignImage.where(id: params[:image_ids]).update_all(last_user_id: current_admin.id, last_updated_at: Time.now, no_audited: true, audited: false)
+        render :js => "alert('全部不予审核成功！');location.reload();"
+      else
+        render nothing: true, status: 200
+      end
     end
 
     def up_down_page

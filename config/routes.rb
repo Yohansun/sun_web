@@ -365,6 +365,9 @@ Icolor::Application.routes.draw do
       get :delete_inspiration
     end
     resources :image_libraries do
+      collection do
+        get :no_audited_all
+      end
       get :autocomplete
       get :categories
       put :update_tags

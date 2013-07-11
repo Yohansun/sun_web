@@ -1,6 +1,13 @@
 <div class="color_form_overlay"></div>
 <style type="text/css">
 .pub_time{display:none;display:none;}
+.tooltip.in {
+  opacity: 1 !important;
+  filter: alpha(opacity=100) !important;
+}
+.tooltip-inner {
+  max-width: 650px !important;
+}
 </style>
 <%- content_for :tail do %>
   <%= stylesheet_link_tag "image_libraries" %>
@@ -16,12 +23,15 @@
       if($("#genre").val() == "last_al_time"){
         $('.pub_time').show()
       }
+      if($("#genre").val() == "no_audited"){
+        $('.pub_time').show()
+      }
       $('.set_name').click(function(e){
         $(this).siblings('.name_form').show()
         $('.color_form_overlay').show()
       })
       $("#genre").change(function(e){
-        if($(this).val() == 'pub_time' || $(this).val() == 'al_time' || $(this).val() == 'last_al_time'){
+        if($(this).val() == 'pub_time' || $(this).val() == 'al_time' || $(this).val() == 'last_al_time' || $(this).val() == 'no_audited'){
           $('.pub_time').show()
         }else{
           $('.pub_time').hide()
@@ -87,6 +97,24 @@
           $(this).tooltip('hide');
         }
       );
+      $('.check_all').click(function(){
+        if (this.checked) {
+          $('.js-checkboxes').find('input[type=checkbox]').attr('checked', true);
+        }else{
+          $('.js-checkboxes').find('input[type=checkbox]').attr('checked', false);
+        };
+      });
+      $('.audio_all').click(function(){
+        var ids = [];
+        $('.js-checkboxes').find('input[type=checkbox]:checked').each(function (i,item){
+          ids.push($(item).data('image-id'));
+        });
+        $.ajax({
+          type: "GET",
+          url: "<%= main_app.no_audited_all_image_libraries_path %>",
+          data: {image_ids : ids}
+        });
+      });
     });
   </script>
 <%- end %>
@@ -126,10 +154,13 @@
     <% end %>
     <div class="head">
       <h5 class="iFrames">图库列表</h5>
+
+      <a href="javascript:;" style="float:left;margin-top:8px;" class="greyishBtn audio_all">全部不予审核</a>
     </div>
 
     <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
       <thead>
+        <th width='10px'>全选<input type="checkbox" class="check_all"></th>
         <th width='30px'>ID</th>
         <th>名称</th>
         <th width='60px'>列表页图片</th>
@@ -145,7 +176,8 @@
       <tbody>
         <% if @images.present? %>
           <%- @images.each do |image| -%>
-          <tr>
+          <tr class="js-checkboxes">
+            <td><%= check_box_tag "image_ids[]", image.id, image.no_audited?, :"data-image-id" => image.id %></td>
             <td><%= image.id %></td>
             <td>
               <%- if image.user_id %>
@@ -156,7 +188,7 @@
              <%= image_tag(image.file(:thumb), size: '50x50', class: 'image-thumbnail',
                 :"data-placement" => 'right',
                 :"data-html" => true,
-                :"data-original-title" => "#{image_tag(image.file(:slide_thumb))}",
+                :"data-original-title" => "#{image_tag(image.file(:image_libraries_hover))}",
                 rel: 'tooltip') %>
             </td>
             <td>
