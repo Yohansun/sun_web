@@ -212,18 +212,20 @@
           ]
         });
         triggerEBConversion(326802);
-      }
-      ;
+      };
+
       function verify() {
-        CClicki[10008]._trackEvent({
-          type: 1,
-          labels: [
-            {"按钮名称": "立即参加"}
-          ],
-          values: [
-            {"数量": 1}
-          ]
-        });
+        if (!(typeof CClicki === "undefined")) {
+          CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+              {"按钮名称": "立即参加"}
+            ],
+            values: [
+              {"数量": 1}
+            ]
+          });
+        }
         
        
       
