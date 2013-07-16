@@ -1,0 +1,53 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "style", "point" %>
+<%- end %>
+<div class="main w964 group">
+  <div class="shadow signup_box">
+    <div class="section">
+
+      <%= render :partial => "users/profile_box" %>
+
+      <div class="host_main">
+        <p class="lh25 ft16 line_b1 mb5">
+          <strong class="cr ft16"><%= @point_user_name %></strong> 的购买产品记录表
+        </p>
+
+        <p class="lh25 ft14 mt25 mb25">
+          <%= @point_user_buy_date %>   产生积分： <strong class="cr"><%= @total_points %></strong>分    审核状态： <%= status_text @point_user.status %></p>
+        
+        <div class="">
+
+          <table class="record_list_old record_check mb15">
+            <tr>
+              <th width="110">省</th>
+              <th width="110">市</th>
+              <th width="110">区</th>
+              <th width="110">购买时间</th>
+              <th width="110">专卖店编号</th>
+              <th width="110">产品名称</th>
+              <th width="110">数量</th>
+              <th width="110">积分</th>
+            </tr>
+            <% @point_exchanges.each do |point_exchange| %>
+              <tr>
+                <td><%= point_exchange.area.province.name %></td>
+                <td><%= point_exchange.area.city.name %></td>
+                <td><%= point_exchange.area.district.name %></td>
+                <td><%= point_exchange.buy_date.to_s(:short) %></td>
+                <td><%= point_exchange.point_store.store_no %></td>
+                <td><%= point_exchange.point_product.product_name %></td>
+                <td><%= point_exchange.product_number %></td>
+                <td><%= point_exchange.total_point %></td>
+              </tr>
+            <% end %>
+          </table>
+          <p class="ft14 tr mb5">累计积分：<strong class="cr"><%= @total_points %></strong>分</p>
+          <p class="tr pb35 line_b1"><a href="<%= user_points_exchange_path(@user) %>" class="cr ft14 fb">快去积分兑换奖品>></a></p>
+          <P class="tc mt25 mb15"><a href="<%= user_purchase_index_path %>"><img src="<%= asset_path "personal/point_back.jpg"%>" /></a></P>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</div>

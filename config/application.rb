@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -60,3 +61,9 @@ module Icolor
     config.i18n.default_locale = 'zh-CN'
   end
 end
+
+Time::DATE_FORMATS.merge!(
+  :default => '%Y-%m-%d %H:%M:%S',
+  :short => '%Y-%m-%d',
+  :short_cn => '%Y年%m月%d日'
+)

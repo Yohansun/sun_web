@@ -83,6 +83,9 @@ class User < ActiveRecord::Base
   
   scope :weekly_related, ->(role,design_user_ids) {where(id: design_user_ids, role_id: role).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc")}
 
+  scope :username_or_name, ->(user_name_or_name) {where('username=? OR name=?', user_name_or_name, user_name_or_name)}
+  scope :role_id, ->(role_id) {where('role_id=?', role_id)}
+
   def news_company_design
     news_company_designs.first
   end

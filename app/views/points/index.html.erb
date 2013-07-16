@@ -1,0 +1,73 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "point" %>
+<%- end %>
+<div class="main w964 group">
+  <div class="shadow signup_box">
+    <div class="section">
+
+      <%= render :partial => "users/profile_box" %>
+
+      <div class="host_main">
+          <p class="cr lh25 ft14 mb5 fb">
+            客户买单，你积分！<br>无论是您为客户代购还是陪客户在立邦专卖店购买产品，<br>只要记下成交的产品名称和桶数，就能获取积分兑换iCoolor众多礼品哦！
+          </p>
+          <p class="lh25 ft14 mb5">
+            提醒：<br>1  您的购买产品记录表记录完成后，请注意提交。提交后此次记录表产生的积分会自动累计进入您的积分账号<br>2  您的累计积分经审核后才能转化成可兑换积分，进行奖品兑换。所以请注意购买产品记录表填写的真实性<br>3  当您选择完所需兑换礼品，确定兑换后，您的礼品会在10个工作日内按个人账户所留的地址寄送。
+          </p>
+
+          <h5 class="cr mb15 mt25">积分礼品</h5>
+          <ul class="gifts_list clear">
+            <% @point_gifts.each_with_index do |gift, index| %>
+              <% i_index = index + 1 %>
+              <li class='<%= "noborder_right" if (i_index % 4) == 0 && i_index != 0 %>'>
+                <a href="#" class="gift_img">
+                  <img src="<%= gift.file.url(:list) %>" alt="" />
+                </a>
+                <a href="#">
+                  <span class="db"><%= gift.gift_name %></span>
+                  <span class="db">所需积分<strong class="cr"><%= gift.gift_point %></strong></span>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+
+          <div class="pager host_pager ft12 mt25">
+            <%= paginate @point_gifts %>
+          </div>
+
+          <h5 class="cr mb15 mt25">产品积分</h5>
+          <div class="clear pt25 border_top">
+            <table class="gifts_table fl pr">
+              <tr>
+                <th width="360">产品</th>
+                <th width="70">积分</th>
+              </tr>
+              <% @point_products.each_with_index do |product, index| %>
+                <% if index < @middle_value %>
+                  <tr>
+                    <td><%= product.product_name %></td>
+                    <td><%= product.product_point %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </table>
+            <table class="gifts_table fl">
+              <tr>
+                <th width="375">产品</th>
+                <th width="70">积分</th>
+              </tr>
+              <% @point_products.each_with_index do |product, index| %>
+                <% if index >= @middle_value %>
+                  <tr>
+                    <td><%= product.product_name %></td>
+                    <td><%= product.product_point %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </table>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>

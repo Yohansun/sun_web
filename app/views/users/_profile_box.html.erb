@@ -140,11 +140,14 @@ $(function(){
 <!--host_self ends-->
 <%- if current_user && current_user == @user %>
 <ul class="system_info group">
-  <%#- unless current_user.role_name == "user" %>
-    <!-- <li class="icon_point"> -->
-      <%#= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank"}" %>
-    <!-- </li> -->
-  <%#- end %>
+  <%- unless current_user.role_name == "user" %>
+    <li class="icon_point">
+      <%= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank"}" %>
+    </li>
+  <%- end %>
+  <li class="icon_record">
+    <%= link_to "我的购买产品记录表", user_purchase_index_path, :class => "#{'host_cur' if controller_name == "purchase"}" %>
+  </li>
   <li class="icon_info">
     <%= link_to "系统消息#{"("+@user.sys_msgs.size.to_s+")" if @user.sys_msgs.size >0}", user_sys_msgs_path, :class => "#{'host_cur' if controller_name == "sys_msgs"}" %>
   </li>
@@ -168,9 +171,9 @@ $(function(){
 <%- end %>
 <!--system_info ends-->
 
-<%- if controller_name =~ /inspirations|designs|^messages|events|moods|asks|collects/ %>
+<%- if controller_name =~ /inspirations|designs|^messages|events|moods|asks|collects|purchase|points/ %>
 <%- unless action_name =~ /new|edit|my_event/  %>
-<div class="sort_box pr mt25 group">
+<div class="sort_box pr group">
   <ul class="sort_show_ul group">
     <%- unless @user.role_name == "user" %>
       <li class="<%= "sort_show" if controller_name == 'asks' %>"><%= link_to "免费咨询", user_asks_path(@user), :class => 'sort_show_a' %></li>
@@ -190,6 +193,12 @@ $(function(){
     -->
     <%- if current_user && current_user == @user %>
       <li class="<%= "sort_show" if controller_name == 'collects' %>"><%= link_to "我的收藏", user_collects_path(@user), :class => 'sort_show_a' %></li>
+    <%- end %>
+    <%- if current_user && current_user == @user %>
+      <li class="<%= "sort_show" if controller_name == 'points' && action_name == 'index' %>"><%= link_to "积分兑换细则", user_points_path(@user), :class => 'sort_show_a' %></li>
+    <%- end %>
+    <%- if current_user && current_user == @user %>
+      <li class="<%= "sort_show" if controller_name == 'points' && action_name == 'exchange' %>"><%= link_to "积分奖品兑换", user_points_exchange_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
   </ul>
 

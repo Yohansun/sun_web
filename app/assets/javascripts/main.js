@@ -937,3 +937,42 @@ $(function(){
 		$('.pop_rule').hide();
 	});
 });
+
+//point2 
+$(function(){
+	//—— change number
+	$('.js_minus').on('click',function(){
+		var input = $(this).siblings('input');
+		var input_val = $(this).siblings('input').val();
+		if (input_val > 0) {
+			input.val(input_val--)
+		}else if(input_val = 0){
+			input.val(0)
+		}else{
+			input.val(0)
+		};
+		// console.log(input_val)
+		input.val(input_val);
+	});
+	$('.js_plus').on('click',function(){
+		var input = $(this).siblings('input');
+		var input_val = $(this).siblings('input').val();
+		if (input_val >= 0) {
+			input.val(input_val++)
+		};
+		// console.log(input_val)
+		input.val(input_val);
+	});
+
+	//del
+	$('.js_gifts_del').on('click',function(){
+		// console.log(00)
+		$(this).parents('tr').remove();
+	});
+	
+	//options-checkbox all or none
+	var $first_tr_checkbox = $('.js_checkall tr:first').find(':checkbox');
+	$first_tr_checkbox.on('click',function(){
+		$first_tr_checkbox.parents('.js_checkall').find(':checkbox').prop('checked',$first_tr_checkbox.prop('checked'))
+	});
+});

@@ -66,7 +66,7 @@
             <option value="3">设计师/家装公司</option>
           </select>
           <div class="fr">
-            <input type="text" class="fl" value="<%= params["search_word"] || 'Search' %>" name="search_word"/>
+            <input type="text" class="fl" value="<%= params["search_word"] || 'Search' %>" name="search_word" style="padding:0;box-shadow:none;" />
             <input type="image" style="margin-right:2px;" src="<%= asset_path("search-icon.jpg") %>"/>
           </div>
         <%- end %>

@@ -311,9 +311,12 @@ Icolor::Application.routes.draw do
     resources :moods
 
     match '/purchase/detail' => 'purchase#detail'
+    post '/purchase/search_user' => 'purchase#search_user'
+    post '/purchase/add_product' => 'purchase#add_product'
     resources :purchase
 
     match '/points/exchange' => 'points#exchange'
+    post '/points/add_gift' => 'points#add_gift'
     resources :points
   end
 

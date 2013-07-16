@@ -1,0 +1,97 @@
+<%- content_for :tail do %>
+  <%= stylesheet_link_tag "point", "bootstrap.min", "datepicker", "bootstrap-timepicker" %>
+  <%= javascript_include_tag "LinkageSelect.js", "/location.js" %>
+  <script type="text/javascript">
+
+    $(function() {
+        var options = {
+          data  : data
+        }
+        var sel = new LinkageSelect(options);
+        sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '省');
+        sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '市');
+        sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '区');
+
+        $('.datepickers').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+
+        $('form[data-update-target]').bind('ajax:success', function(evt, data) {
+            alert('通过检测')
+            var target = $(this).data('update-target');
+            $('#' + target).html(data);
+        }).bind("ajax:error", function(evt, data) {
+            alert(data.responseText);
+        });
+
+    });
+    
+  </script>
+
+  <style>
+    .nav {
+      margin: 0 auto;
+    }
+    .footer ul {
+      margin: 0px 80px 0px 0px;
+    }
+    .footer ul li {
+      line-height: 14px;
+    }
+  </style>
+
+<% end %>
+
+<div class="main w964 group">
+  <div class="shadow signup_box">
+    <div class="section">
+
+      <%= render :partial => "users/profile_box" %>
+
+      <div class="host_main">
+            <p class="lh25 ft16 line_b1 mb5">
+              <strong class="cr ft16"><%= @user.display_name %> </strong> 的购买产品记录表
+            </p>
+
+            <p class="lh25 ft14 mt25 mb25">请注意选择购买的每种产品的具体信息，以便我们准确统计出您的累计积分。</p>
+
+              <%= form_tag(user_purchase_search_user_url, :remote => true, :'data-update-target' => 'update-container', :class => 'record_form') do %>
+                <fieldset class="clear ft12 mb15">
+                  <label class="fl">购买产品的用户名：</label>
+                  <input type="text" class="fl" name="name" id="name" />
+                  <%= submit_tag "用户名检测", data: { disable_with: "请等待..." }, class: "fl check_btn" %>
+                </fieldset>
+              <% end %>
+
+              <div id="update-container">
+                
+              </div>
+
+              <p class="mb15 ft14">已提交的购买产品记录表</p>
+              <table class="record_list_old mb15">
+                  <tr>
+                    <th width="210">购买产品的用户名</th>
+                    <th width="180">填写时间</th>
+                    <th width="180">产生积分</th>
+                    <th width="180">审核状态</th>
+                    <th width="180">详情查看</th>
+                  </tr>
+                <% @point_users.each do |point_user| %>
+                  <tr>
+                    <td><%= point_user.point_user.username %></td>
+                    <td><%= point_user.created_at.to_s(:short) %></td>
+                    <td><%= point_user.point_exchanges.sum(&:total_point) %>分</td>
+                    <td class="<%= status_css point_user.status %>"><%= status_text point_user.status %></td>
+                    <td><a href="<%= "#{user_purchase_detail_path}?point_user_id=#{point_user.id}" %>" class="cr">查看</a></td>
+                  </tr>
+                <% end %>
+              </table>
+              <p class="mb15 tr ft14">
+                您目前的累计积分已达：<strong class="cr"><%= @totol_point %></strong>分 
+                可用积分 <strong class="cr">0</strong> 分
+              </p>
+              <p class="tr"><a href="<%= user_points_exchange_path(@user) %>" class="cr ft14 fb">快去积分兑换奖品>></a></p>
+
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<%- content_for :head do %>
+    <%= stylesheet_link_tag "point" %>
+    <script type="text/javascript">
+      $(function() {
+          $("#gift_div").hide();
+
+          $('form[data-update-target]').live('ajax:success', function(evt, data) {
+              var target = $(this).data('update-target');
+              $('#' + target).html(data);
+          });
+
+          $('form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+              alert("兑换成功,等待审核");
+              var url = $(this).data('redirect_url');
+              window.location.href = url;
+          }).bind("ajax:error", function(evt, data) {
+              alert(data.responseText);
+              var url = $(this).data('redirect_url');
+              window.location.href = url;
+          });
+
+          $("form #add_gift").click(function(event){
+              event.preventDefault();
+
+              var product_user_id = <%= @user.id %>;
+              var gift_number = $(this).parent().parent().find("input[name='gift_number']").val();
+              var gift_image = $(this).parent().parent().parent().find("#gift_image").prop('src');
+              var gift_name = $(this).parent().parent().parent().find("#gift_name").text();
+              var gift_point = $(this).parent().parent().parent().find("#gift_point").text();
+              var total_gift_point = parseInt(gift_point) * parseInt(gift_number);
+
+              if (gift_number == 0) {
+                alert("请选择数量");
+                return false;
+              }
+
+              var html_tr = "<tr>" +
+                "<td><input id='sel_gift' type='checkbox' checked><img width='115' height='72' src='"+ gift_image +"'></td>" +
+                "<td>"+ gift_name + "<input type='hidden' value='" + gift_name + "' name='gift_name[]' id='gift_name'></td>" +
+                "<td class='tc'>"+ gift_point +"分"+ "<input type='hidden' value='" + gift_point + "' name='gift_point[]' id='gift_point'></td>" +
+                "<td class='tc'><p class='ft12 change_num clear pb10'><a href='javascript:;' class='num_plus fr js_plus'></a><input class='num_input fr' id='gift_number' type='text' value='" + gift_number +"'><a href='javascript:;' class='num_minus fr js_minus'></a></p>"+ "<input type='hidden' value='" + gift_number + "' name='gift_number[]' id='gift_number'></td>" +
+                "<td class='tc'>"+ total_gift_point +"分"+ "<input type='hidden' value='" + total_gift_point + "' name='total_gift_point[]' id='total_gift_point'></td>" +
+                "<td class='tc'><a href='javascript:void(0);' id='del' class='gifts_del js_gifts_del'>删除</a></td>" +
+                "</tr>"
+
+              $("#gifts_list").append(html_tr);
+
+              $("#gift_div").show();
+
+              function newSum() {
+                  var total=0;
+
+                  $('input:checkbox').each(function() {
+                    if(this.checked) {
+                      var t_points = $(this).parent().parent().find("#total_gift_point").val();
+                      total += parseInt(t_points);
+                    }
+                  });
+                  $('#total_points').text(total);
+              }
+              newSum.call(this);
+
+              $('input:checkbox').change(function() {
+                var total=0;
+                $('input:checkbox').each(function() {
+                  if(this.checked) {
+                    var t_points = $(this).parent().parent().find("#total_gift_point").val();
+                    total += parseInt(t_points);
+                  }
+                });
+                $('#total_points').text(total);
+              });
+
+              $("#gifts_list tr:last #del").on('click',function(){
+                  $(this).parent().parent().remove();
+
+                  if ($("#gifts_list tr").length == 0) { 
+                      $("#gift_div").hide();
+                  }
+              });
+          });
+
+      });
+    </script>
+<%- end %>
+<div class="main w964 group">
+  <div class="shadow signup_box">
+    <div class="section">
+
+      <%= render :partial => "users/profile_box" %>
+
+      <div class="host_main">
+        <p class="lh25 ft16 line_b1 mb5">
+          您目前的累计积分为<strong class="cr fb"><%= @totol_point %></strong>分，
+          可用积分为<strong class="cr fb">0</strong>分
+        </p>
+
+        <h5 class="ft14 fb mb25 mt25">选择您可兑换的礼品：</h5>
+        
+        <ul class="gifts_list h330 clear">
+          <% @point_gifts.each_with_index do |gift, index| %>
+              <% i_index = index + 1 %>
+                <li class='<%= "noborder_right" if (i_index % 4) == 0 && i_index != 0 %>'>
+                  <a href="javascript:void(0);" class="gift_img">
+                    <img src="<%= gift.file.url(:list) %>" id="gift_image" />
+                  </a>
+                  <a href="javascript:void(0);">
+                    <span class="db" id='gift_name'><%= gift.gift_name %></span>
+                    <span class="db">所需积分<strong class="cr" id='gift_point'><%= gift.gift_point %></strong></span>
+                  </a>
+                  <%= form_tag(user_points_choose_gift_url, :remote => true, :'data-update-target' => 'update-container') do %>
+                  <p class="ft12 change_num clear pb10">
+                    <span class="fl">数量</span>
+                    <a href="javascript:;" class="num_minus fl js_minus"></a>
+                    <input id="gift_number" name="gift_number" class="num_input fl" type="text" placeholder="0">
+                    <a href="javascript:;" class="num_plus fl js_plus"></a>
+                  </p>
+                  <p>
+                    <%= link_to image_tag(asset_path "personal/point_btn.jpg"), "javascript:void(0);", :id => "add_gift", class: "search_button", alt: '我要兑换' %>
+                  </p>
+                  <% end %>
+                </li>
+          <% end %>
+        </ul>
+
+        <div id="gift_div">
+          <h5 class="mb15 mt25 line_b5">您已选择：</h5>
+          <%= form_tag(user_points_add_gift_url, :remote => true, :'data-redirect_url' => user_points_exchange_path(@user)) do %>
+            <%= hidden_field_tag 'gift_user_id', @user.id %>
+            <table class="gifts_select mb15 js_checkall" id="gifts_list">
+              <tr>
+                <th class="tl" width="155"><input type="checkbox">全选</th>
+                <th class="tl" width="260">礼品名称</th>
+                <th width="76">单位积分</th>
+                <th width="170">数量</th>
+                <th width="80">积分合计</th>
+                <th width="140">操作</th>
+              </tr>
+            </table>
+            <p class="fb tr ft14 mb5">礼品总积分：<strong class="cr fb" id="total_points">0</strong> 分</p>
+            <p class="fb tr ft14 mb5">您目前剩余可用积分：<strong class="cr fb" id="user_point">0</strong> 分</p>
+            <p class="tr">
+              <%= image_submit_tag(asset_path "personal/change_btn.jpg", data: { disable_with: "请等待..." }, class: 'record_submit', alt: '提交') %>
+            </p>
+          <% end %>
+        </div>
+
+        <p class="gifts_tips">
+          友情提示：<br>当您点击确认兑换后，您此次兑换即可生效，不可更改，对应积分也即刻从您可用积分的账户中去除。<br>请去<a href="<%= user_purchase_index_path %>" class="cr fb">个人账户</a>填写或核实您的邮寄地址，我们会在您确认兑换后的<strong class="cr fb">10</strong>个工作日内寄出您此次兑换的礼品。
+        </p>
+
+        <!-- <div id="update-container">
+          <%= render :partial => 'choose_gift' %>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

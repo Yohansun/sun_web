@@ -1,0 +1,167 @@
+<script type="text/javascript">
+  $(function() {
+    $("#product_div").hide();
+
+    var options = {
+      data  : data
+    }
+    var sel = new LinkageSelect(options);
+    sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '省');
+    sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '市');
+    sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '区');
+
+    $('.datepickers').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+
+    $('form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+        var url = $(this).data('redirect_url');
+        window.location.href = url;
+    }).bind("ajax:error", function(evt, data) {
+        alert(data.responseText);
+        var url = $(this).data('redirect_url');
+        window.location.href = url;
+    });
+
+    $('#product_number').change(function() {
+      var product_name = $('#product_name').val();
+      if ($.trim(product_name).length == 0) {
+        $(this).prop('selectedIndex', 0); 
+        alert("请先选择产品名称");
+        return false;
+      } else {
+        var product_point = $('#product_name').val();
+        var product_number = $('#product_number').val();
+        var total_point = product_point * product_number
+        $('#total_number').val(total_point);
+      }
+    });
+
+    $('#product_name').change(function() {
+      var product_number = $('#product_number').val();
+      if ($.trim(product_number).length == 0) {
+        return false;
+      } else {
+        var product_point = $('#product_name').val();
+        var product_number = $('#product_number').val();
+        var total_point = product_point * product_number
+        $('#total_number').val(total_point);
+      }
+    });
+
+    $("#add_product").click(function(event){
+        event.preventDefault();
+
+        var product_user_id = <%= @user.id %>;
+        var county = $('#county').val();
+        var buyer_date = $('#buyer_date').val();
+        var store_no = $('#store_no').val();
+        var product_point = $('#product_name').val();
+        var product_number = $('#product_number').val();
+        var total_number = $('#total_number').val();
+
+        var province_text = $('#province').find("option:selected").text();
+        var city_text = $('#city').find("option:selected").text();
+        var county_text = $('#county').find("option:selected").text();
+        var store_no_text = $('#store_no').find("option:selected").text();
+        var product_name_text = $('#product_name').find("option:selected").text();
+
+        if ($.trim(county).length == 0) {
+          alert("请选择省市区");
+          return false;
+        } else if ($.trim(buyer_date).length == 0) {
+          alert("请选择购买日期");
+          return false;
+        } else if ($.trim(store_no).length == 0) {
+          alert("请选择专卖店编号");
+          return false;
+        } else if ($.trim(product_point).length == 0) {
+          alert("请选择产品名称");
+          return false;
+        } else if ($.trim(product_number).length == 0) {
+          alert("请选择数量");
+          return false;
+        }
+
+        var html_tr = "<tr>" +
+          "<td>" + province_text + "</td>" +
+          "<td>" + city_text + "</td>" +
+          "<td>" + county_text + "<input type='hidden' value='" + county + "' name='area_id[]' id='area_id'></td>" +
+          "<td>" + buyer_date + "<input type='hidden' value='" + buyer_date + "' name='buyer_date[]' id='buyer_date'></td>" +
+          "<td>" + store_no_text + "<input type='hidden' value='" + store_no + "' name='store_no[]' id='store_no'></td>" +
+          "<td>" + product_name_text + "<input type='hidden' value='" + product_name_text + "' name='product_name[]' id='product_name'></td>" +
+          "<td>" + product_number + "<input type='hidden' value='" + product_number + "' name='product_number[]' id='product_number'></td>" +
+          "<td class='td_total_number'>" + total_number + "<input type='hidden' value='" + total_number + "' name='point_number[]' id='point_number'></td>" +
+          "<td><a href='javascript:void(0);' id='del' class='cr js_gifts_del'>删除</a></td> " +
+          "</tr>"
+        $("#products_list").append(html_tr);
+
+        $("#product_div").show();
+
+        function newSum() {
+            var total=0;
+            $('#products_list td.td_total_number').each(function() {
+                total += parseInt($(this).html());
+            });
+            $('#total_points').text(total);
+        }
+        newSum.call(this);
+
+        $("#products_list tr:last #del").on('click',function(){
+            $(this).parent().parent().remove();
+
+            if ($("#products_list tr").length == 0) { 
+                $("#product_div").hide();
+            }
+        });
+    });
+
+  });
+</script>
+
+<fieldset class="mb15">
+  <table class="record_list">
+      <tr>
+        <th>
+          <select id="province" class="level_1" style="width:70px;">省</select>
+        </th>
+        <th>
+          <select id="city" class="level_2" style="width:70px;">市</select>
+        </th>
+        <th>
+          <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
+        </th>
+        <th>
+          <%= text_field_tag "buyer_date", '', :placeholder => '购买时间', :class => "input-medium datepickers", :name => 'buyer_date', :id => 'buyer_date', :readonly => 'readonly' %>
+        </th>
+        <th>
+          <%= select_tag "store_no", options_from_collection_for_select(@point_stores, "id", "store_no"), prompt: "专卖店编号" %>
+        </th>
+        <th>
+          <%= select_tag "product_name", options_from_collection_for_select(@point_products, "product_point", "product_name"), prompt: "产品名称" %>
+        </th>
+        <th>
+          <%= select_tag "product_number", options_for_select(@point_product_number), prompt: "数量" %>
+        </th>
+        <th>
+          <input type="text" id="total_number" disabled value="" />
+        </th>
+        <th>
+          <%= link_to "添加", "javascript:void(0);", :id => "add_product", :"data-href" => user_purchase_add_product_url, class: "gifts_del" %>
+        </th>
+      </tr>
+</table>
+</fieldset>
+
+<div id="product_div">
+<%= form_tag(user_purchase_add_product_url, :remote => true, :'data-redirect_url' => user_purchase_index_path, :class => 'record_form') do %>
+  <%= hidden_field_tag 'product_user_id', @user.id %>
+  <fieldset class="mb15">
+    <table class="record_list table" id="products_list">
+    </table>
+  </fieldset>
+  <p class="line_b1 ft14 tr">累计积分：<strong class="cr" id="total_points">0</strong>分</p>
+  <P class="line_b1 tr pb35 mt25 mb15">
+    <%= image_submit_tag(asset_path "personal/point_submit.jpg", data: { disable_with: "请等待..." }, class: 'record_submit', alt: '提交') %>
+  </p>
+<% end %>
+</div>
+
