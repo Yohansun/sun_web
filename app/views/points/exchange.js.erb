@@ -1,0 +1,2 @@
+$('#gift_details').html('<%= escape_javascript render :partial => "gifts" %>');
+$('#paginator').html('<%= escape_javascript(paginate(@point_gifts, :remote=>true).to_s)%>');
