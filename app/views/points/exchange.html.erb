@@ -4,11 +4,6 @@
       $(function() {
           $("#gift_div").hide();
 
-          $('form[data-update-target]').live('ajax:success', function(evt, data) {
-              var target = $(this).data('update-target');
-              $('#' + target).html(data);
-          });
-
           $('form[data-redirect_url]').bind('ajax:success', function(evt, data) {
               alert("兑换成功,等待审核");
               var url = $(this).data('redirect_url');
@@ -19,14 +14,14 @@
               window.location.href = url;
           });
 
-          $("form #add_gift").click(function(event){
+          $(".gifts_list #add_gift").click(function(event){
               event.preventDefault();
 
               var product_user_id = <%= @user.id %>;
               var gift_number = $(this).parent().parent().find("input[name='gift_number']").val();
-              var gift_image = $(this).parent().parent().parent().find("#gift_image").prop('src');
-              var gift_name = $(this).parent().parent().parent().find("#gift_name").text();
-              var gift_point = $(this).parent().parent().parent().find("#gift_point").text();
+              var gift_image = $(this).parent().parent().find("#gift_image").prop('src');
+              var gift_name = $(this).parent().parent().find("#gift_name").text();
+              var gift_point = $(this).parent().parent().find("#gift_point").text();
               var total_gift_point = parseInt(gift_point) * parseInt(gift_number);
 
               if (gift_number == 0) {
@@ -108,7 +103,6 @@
                     <span class="db" id='gift_name'><%= gift.gift_name %></span>
                     <span class="db">所需积分<strong class="cr" id='gift_point'><%= gift.gift_point %></strong></span>
                   </a>
-                  <%= form_tag(user_points_choose_gift_url, :remote => true, :'data-update-target' => 'update-container') do %>
                   <p class="ft12 change_num clear pb10">
                     <span class="fl">数量</span>
                     <a href="javascript:;" class="num_minus fl js_minus"></a>
@@ -118,7 +112,6 @@
                   <p>
                     <%= link_to image_tag(asset_path "personal/point_btn.jpg"), "javascript:void(0);", :id => "add_gift", class: "search_button", alt: '我要兑换' %>
                   </p>
-                  <% end %>
                 </li>
           <% end %>
         </ul>
@@ -149,9 +142,6 @@
           友情提示：<br>当您点击确认兑换后，您此次兑换即可生效，不可更改，对应积分也即刻从您可用积分的账户中去除。<br>请去<a href="<%= user_purchase_index_path %>" class="cr fb">个人账户</a>填写或核实您的邮寄地址，我们会在您确认兑换后的<strong class="cr fb">10</strong>个工作日内寄出您此次兑换的礼品。
         </p>
 
-        <!-- <div id="update-container">
-          <%= render :partial => 'choose_gift' %>
-        </div> -->
       </div>
     </div>
   </div>
