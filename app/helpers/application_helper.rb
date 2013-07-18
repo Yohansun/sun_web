@@ -49,21 +49,28 @@ module ApplicationHelper
           "【#{@master_design.design_name} | #{@master_design.master_profile.try(:name) || @master_design.master_name}】- 室内空间大师" + '-' + BASE_TITLE
         #装修图库
         elsif controller_name == 'design_images' && action_name == 'index'
-          s1, s2= "", ""
+          s1, s2, s3 = "", "", ""
           if @content.present? || @imageable_type.present?
-            s1 = @content[0..10].compact.join(',').to_s if @content[0..10].present?
-            s2 = @content[11..25].compact.join('、').to_s if @content[11..25].present?
-            "#{@imageable_type}#{s1}装修图片大全，您可以设计自己的#{s2} 装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+            s1 = @content[0..8].compact.join(',').to_s if @content[0..8].present?
+            s2 = @content[9..10].compact.join('').to_s if @content[9..10].present?
+            s3 = @content[11].to_s if @content[11].present?
+            if @content[12].present?
+              "【#{@content[12].to_s}】装修效果图，【#{@content[12].to_s}】效果图，【#{@content[12].to_s}】设计效果图 - 立邦icolor"
+            else
+              "#{@imageable_type}#{s1},#{s2}装修效果图, #{s3} - 立邦 iColor"
+            end
           else
-             "装修效果图大全2013图片、室内装修效果图大全、装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+             "装修效果图大全最新2013、2013年室内装修效果图大全、家庭装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
           end
         # elsif controller_name == 'design_images'
         #    "装修图片大全，您可以设计自己的装修效果图 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
         elsif controller_name == 'design_images' && action_name == 'image_show'
           "#{@image.title}装修图片 - 立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
+        elsif controller_name == 'design_images' && action_name == 'fullscreen'
+          "【#{@design_name}】大图  【#{@author}】 -  立邦icolor"
         #设计之星
-        elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index}.include?(action_name)
-          "【每周之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
+        elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index show}.include?(action_name)
+          "【#{@design_name}】【#{@company_name}】【#{@author}】 - 立邦icolor设计之星"
         elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_color'
           "【月度色彩之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
         elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_design'
@@ -76,6 +83,9 @@ module ApplicationHelper
           "【作品展示】- 设计鉴赏" + '-' + BASE_TITLE
         elsif controller_name == 'designs' && action_name == 'show'
           "【#{@design.user.display_name} | #{@design.title}】- 设计鉴赏" + '-' + BASE_TITLE
+        #幻灯片
+        elsif controller_name == 'designs' && action_name == 'fullscreen'
+          "【#{@design_name}】大图  【#{@author}】 -  立邦icolor"
         #色彩搭配
         elsif controller_name == 'color_designs' && action_name == 'index'
           "【色彩搭配】- 设计鉴赏" + '-' + BASE_TITLE
@@ -94,7 +104,7 @@ module ApplicationHelper
           "【#{@inspiration.title} | 灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
         #业主通道
         elsif controller_name == 'channel'
-          "【设计快查】- 业主通道" + '-' + BASE_TITLE
+          "【设计快查】- 装修公司免费推荐 -立邦iColor"
         elsif controller_name == 'faqs'
           "【装修问答】- 业主通道" + '-' + BASE_TITLE
         elsif controller_name == 'mix_colors'
@@ -138,7 +148,7 @@ module ApplicationHelper
   def des_content
     star_descript1 = "立邦iColor装修设计鉴赏带您领略iColor"
     star_descript2 = "设计师装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
-    channel_descript = "立邦iColor装修设计鉴赏涵盖装修知识,家装知识,装修经验,家居装修,装修指导,室内装修知识,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
+    channel_descript = "填写申请表后，立邦iColor为您免费推荐3家同城优秀家装公司。浏览2013装修效果图大全、欣赏设计师独家作品、搜索全国热门装修公司，就在立邦icolor。"
     article_desctipt = "立邦iColor装修设计鉴赏涵盖丰富、专业的装家具修行业资讯,包括：色彩资讯、业内动态供您参阅,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     designer_events_descript = "立邦iColor装修设计鉴赏将定期举办精彩活动,并邀设计师参加活动,成为设计师展现家居装修设计风采专业平台.还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
 

@@ -84,31 +84,33 @@ class DesignImagesController < ApplicationController
           else
             tag_id = tag.id
           end
-         
-          @content[1] = (tag.title == "按风格" ? "风格" : tag.title)  if tag_id == 34 
-          @content[2] = (tag.title == "按调性" ? "调性" : tag.title)  if tag_id == 62  
-          @content[3] = (tag.title == "按面积" ? "面积" : tag.title)  if tag_id == 28  
-          @content[4] = (tag.title == "按费用" ? "费用" : tag.title)  if tag_id == 19  
-          @content[5] = (tag.title == "按户型" ? "户型" : tag.title)  if tag_id == 1  
-          @content[6] = (tag.title == "按色彩" ? "色彩" : tag.title)  if tag_id == 107 
-          @content[7] = (tag.title == "按用途" ? "用途" : tag.title)  if tag_id == 122
-          @content[8] = (tag.title == "按人群" ? "人群" : tag.title)  if tag_id == 127
-          @content[9] = (tag.title == "按图片" ? "图片" : tag.title)  if tag_id == 132
-          @content[11] = (tag.title == "按空间" ? "空间" : tag.title)  if tag_id == 82  
-          @content[12] = (tag.title == "按家具" ? "家具" : tag.title)  if tag_id == 211 
-          @content[13] = (tag.title == "按灯具" ? "灯具" : tag.title)  if tag_id == 212 
-          @content[14] = (tag.title == "按布艺" ? "布艺" : tag.title)  if tag_id == 213
-          @content[15] = (tag.title == "按漆面" ? "漆面" : tag.title)  if tag_id == 214  
-          @content[16] = (tag.title == "按饰品" ? "饰品" : tag.title)  if tag_id == 215  
-          @content[17] = (tag.title == "按家电" ? "家电" : tag.title)  if tag_id == 216  
-          @content[18] = (tag.title == "按橱柜" ? "橱柜" : tag.title)  if tag_id == 217
-          @content[19] = (tag.title == "按卫浴" ? "卫浴" : tag.title)  if tag_id == 218
-          @content[20] = (tag.title == "按瓷砖" ? "瓷砖" : tag.title)  if tag_id == 219
-          @content[21] = (tag.title == "按地板" ? "地板" : tag.title)  if tag_id == 220
-          @content[22] = (tag.title == "按用品" ? "用品" : tag.title)  if tag_id == 221
-          @content[23] = (tag.title == "按门窗" ? "门窗" : tag.title)  if tag_id == 222
-          @content[24] = (tag.title == "按数码" ? "数码" : tag.title)  if tag_id == 223
-          @content[25] = (tag.title == "按其他" ? "其他" : tag.title)  if tag_id == 224
+
+          case tag_id
+            when 127
+              @content[1] = (tag.title == "按人群" ? "人群" : tag.title)
+            when 122
+              @content[2] = (tag.title == "按用途" ? "用途" : tag.title)
+            when 19
+              @content[3] = (tag.title == "按费用" ? "费用" : tag.title)
+            when 366
+              @content[4] = (tag.title == "局部空间" ? "局部空间" : tag.title)
+            when 62
+              @content[5] = (tag.title == "按调性" ? "调性" : tag.title)
+            when 107
+              @content[6] = (tag.title == "按色彩" ? "色彩" : tag.title)
+            when 1
+              @content[7] = (tag.title == "按户型" ? "户型" : tag.title)
+            when 34
+              @content[8] = (tag.title == "按风格" ? "风格" : tag.title)
+            when 28
+              @content[9] = (tag.title == "按面积" ? "面积" : tag.title)
+            when 82
+              @content[10] = (tag.title == "按空间" ? "空间" : tag.title)
+            when 132
+              @content[11] = (tag.title == "按图片" ? "图片" : tag.title)
+            else
+              @content[12] = tag.title
+          end
 
           tag_arrs << tag_arr
         end
@@ -135,7 +137,7 @@ class DesignImagesController < ApplicationController
       @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
       @design_images = @design_images.where(area_id: areas.map(&:id))
 
-      @content[0] = area.parent.blank? ? nil : area.parent.name
+      # @content[0] = area.parent.blank? ? nil : area.parent.name
     end
 
     word = @color if @color.present?
@@ -146,9 +148,9 @@ class DesignImagesController < ApplicationController
       @tag_names << @tags.map(&:title)
 
       @content[6] = "#{word}" + "#{@content[6]}" if word == "橙色系"
-      @content[5] = "#{word}" + "#{@content[5]}" if word == "小户型"
-      @content[11] = "#{word}" + "#{@content[11]}" if word == "客厅"
-      @content[1] = "#{word}" + "#{@content[1]}" if word == "简约"
+      @content[7] = "#{word}" + "#{@content[7]}" if word == "小户型"
+      @content[10] = "#{word}" + "#{@content[10]}" if word == "客厅"
+      @content[8] = "#{word}" + "#{@content[8]}" if word == "简约"
     end
 
     if @subject.present? && @subject.to_s != "0" && @subject.to_s != "All"
@@ -380,6 +382,10 @@ class DesignImagesController < ApplicationController
 
   def fullscreen
     @design_image = DesignImage.find(params[:id])
+
+    @design_name = @design_image.design.title
+    @author = @design_image.user.username
+
     render :layout => nil
   end
 
