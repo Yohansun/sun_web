@@ -395,6 +395,8 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+  get "home_image_lib/index"
+
   get "home/index"
 
     match "/baicheng/daily_report"=>'baicheng#daily_report'
@@ -504,6 +506,9 @@ Icolor::Application.routes.draw do
   end
 
   scope "/manage", :module =>"manage" do
+    get "home_image_lib(/:action)", to: 'home_image_lib#index'
+    get "home_image_lib/tags", to: 'home_image_lib#tags'
+
     root to: 'home#index'
     resources :owner_enter
     resources :home_banners do

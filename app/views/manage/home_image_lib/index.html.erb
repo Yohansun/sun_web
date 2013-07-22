@@ -1,0 +1,165 @@
+<style type="text/css">
+	.imgshow .img_group{width:240px!important;margin-right:6px;margin-left:0}
+	.imgshow .img_group a{float:left;}
+	.imgshow a{overflow:hidden;display:block;background:#ddd;}
+	.imgshow_big,.imgshow_big a,.imgshow_big img{/*width:410px;*/margin:0;max-width:410px;max-height:240px;overflow:hidden;border:0;}
+	.imgshow_big .ace-thumbnails>li{border:0;margin:0;}
+	.imgshow_big .ace-thumbnails>li>:first-child>.text{text-align:left;height:auto;font-weight:bold;top:auto;}
+
+	.base_img1{width:240px;height:140px;margin-bottom:6px;}
+	.base_img2{width:140px;height:94px;margin-right:6px;}
+	.base_img3{width:94px;height:94px;}
+
+	.base_img4{width:140px;height:94px;margin-right:6px;margin-bottom:6px;}
+	.base_img5{width:94px;height:94px;margin-bottom:6px;}
+	.base_img6{width:140px;height:140px;margin-right:6px;}
+	.base_img7{width:94px;height:140px;}
+
+	.imgshow_big a{margin:0!important;}
+
+	.imgshow_big .base_img1 {width:408px;height:244px;margin-right:6px;}
+	.imgshow_big .base_img2 {width:244px;height:162px;margin-right:6px;}
+	.imgshow_big .base_img3 {width:162px;height:162px;margin-right:6px;}
+	.imgshow_big .base_img5 {width:162px;height:162px;margin-right:6px;}
+	.imgshow_big .base_img4 {width:244px;height:162px;margin-right:6px;}
+	.imgshow_big .base_img6 {width:244px;height:244px;margin-right:6px;}
+	.imgshow_big .base_img7 {width:162px;height:244px;margin-right:6px;}
+
+	.w1170{width:1170px!important;}
+	.nom{margin:0!important;}
+
+	.bs-docs-example {
+		  position: relative;
+		  margin: 15px 0;
+		  padding: 39px 19px 14px;
+		  *padding-top: 19px;
+		  background-color: #fff;
+		  border: 1px solid #ddd;
+		  -webkit-border-radius: 4px;
+		     -moz-border-radius: 4px;
+		          border-radius: 4px;
+		}
+
+		/* Echo out a label for the example */
+		.bs-docs-example:after {
+		  content: "编辑信息";
+		  position: absolute;
+		  top: -1px;
+		  left: -1px;
+		  padding: 3px 7px;
+		  font-size: 12px;
+		  font-weight: bold;
+		  background-color: #f5f5f5;
+		  border: 1px solid #ddd;
+		  color: #9da0a4;
+		  -webkit-border-radius: 4px 0 4px 0;
+		     -moz-border-radius: 4px 0 4px 0;
+		          border-radius: 4px 0 4px 0;
+		}
+</style>
+<script type="text/javascript">
+$(function(){
+	$('a[class^="base_img"]').on('click', function(e){
+		e.preventDefault();
+		var $i_src = $(this).children().attr('src');
+		var $i_class = $(this).attr('class');
+		var $i_alt = $(this).find('img').attr('alt');
+		$('.imgshow_big').find('a').removeClass().addClass($i_class)
+		$('.imgshow_big').find('img').attr('src',$i_src);
+		$('.imgshow_big').find('.text').children().text($i_alt)
+	})
+})
+</script>
+
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="active"><a href="/manage/home_image_lib/tags">标签设置</a></li>
+    <span>|</span>
+    <li class="">图片设置</li>
+  </ul>
+</div>
+
+<div class="" style="padding: 10px;">
+
+<h5>选择要编辑的区块</h5>
+<div class="clearfix imgshow">
+	<div class="pull-left">
+		<div class="pull-left img_group">
+			<a href="javascript:;" class="base_img1"><img alt="90平地中海小户型 清新的海洋" src="images/gallery/image-1.jpg"></a>
+			<a href="javascript:;" class="base_img2"><img alt="90平地中海小户型 清新的海洋2" src="images/gallery/image-2.jpg"></a>
+			<a href="javascript:;" class="base_img3"><img alt="90平地中海小户型 清新的海洋3" src="images/gallery/image-3.jpg"></a>
+		</div>
+		<div class="pull-left img_group">
+			<a href="javascript:;" class="base_img4"><img alt="90平地中海小户型 清新的海洋4" src="images/gallery/image-4.jpg"></a>
+			<a href="javascript:;" class="base_img5"><img alt="90平地中海小户型 清新的海洋5" src="images/gallery/image-5.jpg"></a>
+			<a href="javascript:;" class="base_img6"><img alt="90平地中海小户型 清新的海洋6" src="images/gallery/image-6.jpg"></a>
+			<a href="javascript:;" class="base_img7"><img alt="90平地中海小户型 清新的海洋7" src="images/gallery/image-3.jpg"></a>
+		</div>
+	</div>
+	<div class="pull-left imgshow_big">
+		<ul class="ace-thumbnails">
+			<li>
+				<a class="base_img1" href="#" data-rel="colorbox">
+					<img width="240" src="images/gallery/thumb-1.jpg" />
+					<div class="text">
+						<div class="inner">90平地中海小户型 清新的海洋</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<p></p>
+
+<div class="row-fluid ">
+	<div class="span6 ">
+
+		<form class="bs-docs-example">
+		  <div class="controls docs-input-sizes">
+
+		  	<div class="input-prepend">
+					<span class="add-on">图片标题</span>
+					<input type="text" class="input-xlarge">
+				</div>
+				<div class="input-prepend">
+					<span class="add-on">图片链接</span>
+					<input type="text" class="input-xxlarge">
+				</div>
+
+			  <div class="control-group">
+			    
+			    <table class="table table-condensed">
+            <thead>
+            </thead>
+            <tbody>
+            	<tr>
+                <td colspan="4">
+                	已上传的图片 <button class="btn btn-small btn-primary" type="button">上传图片</button>
+                	图片限定尺寸 XXXxXXX
+                </td>
+              </tr>
+              <tr>
+                <td><img class="img-polaroid" src="images/gallery/image-1.jpg"></td>
+                <td>图片名称</td>
+                <td>大小</td>
+                <td><button class="btn btn-small btn-primary" type="button">删除</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+			  </div>
+
+			  <div class="">
+			  	<button class="btn btn-small btn-primary" type="button">保存</button>
+          <button class="btn btn-small btn-primary" type="button">保存并跳转到下一张</button>
+        </div>
+
+		  </div>
+		</form>
+
+	</div>
+</div>
+
+
+</div>
