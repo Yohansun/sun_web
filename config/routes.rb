@@ -505,7 +505,8 @@ Icolor::Application.routes.draw do
 
   scope "/manage", :module =>"manage" do
     root to: 'home#index'
-    
+    resources :owner_enter do
+    end
   end
 
 end

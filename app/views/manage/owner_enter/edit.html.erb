@@ -1,0 +1,47 @@
+<%- content_for :head do %>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      $('.clear1').click(function(){
+        $('.title1').attr('value','');
+        $('.content1').attr('value','');
+        $('.link1').attr('value','');
+      });
+      $('.clear2').click(function(){
+        $('.title2').attr('value','');
+        $('.content2').attr('value','');
+        $('.link2').attr('value','');
+      })
+    });
+  </script>
+<%- end %>
+<%= form_for @new do |f| %>
+  <div class="clearfix">
+    <p class="span2" style="width:50px;margin-top: 6px;">排序</p>
+    <select name="new">
+      <% if @new.order_id == 1 %>
+        <option>1</option>
+        <option>2</option>
+      <% else %>
+        <option>2</option>
+        <option>1</option>
+      <% end %>
+    </select>
+  </div>
+  <div class="clearfix">
+    <p class="span2" style="width:50px;margin-top: 6px;">标题</p>
+    <input class="span2 input-large title" id="prependedInput" type="text" name="title" value="<%= @new.try(:title) %>">
+  </div>
+  <div class="clearfix">
+    <p class="span2" style="width:50px;margin-top: 6px;">内容</p>
+    <textarea rows="3" name="content" class="content"><%= @new.try(:content) %></textarea>
+  </div>
+  <div class="clearfix">
+    <p class="span2" style="width:50px;margin-top: 6px;">链接</p>
+    <input class="span2 input-large link" id="prependedInput" type="text" value="<%= @new.try(:link) %>" name="link">
+    <a href="">检测链接</a>
+    <input style="margin-top: -8px;margin-left: 176px;" type="submit" value="保存">
+    <a href="/manage/owner_enter  " style="margin-top: -8px;margin-left: 10px;margin-right:10px;">取消</a>
+    <a href="#" class="clear">清空</a>
+    <input type="hidden" name="current_id" value="<%= @new.order_id %>" >
+  </div>
+<% end %>
