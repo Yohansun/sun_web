@@ -8,8 +8,9 @@ class PurchaseController < ApplicationController
   	@point_stores = PointStore.all
   	@point_users = PointUser.where(user_id: current_user.id)
 
-  	@totol_point = 0
-  	@totol_point = @point_users.collect{|item| item.point_exchanges.sum(:total_point) }.sum if @point_users
+  	@total_point, @user_total_point = 0, 0
+  	@total_point = PointUser.user_pass_total_points current_user.id
+  	@user_total_point = PointUser.user_total_points current_user.id
   end
 
   def detail

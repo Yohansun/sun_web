@@ -10,8 +10,8 @@
               window.location.href = url;
           }).bind("ajax:error", function(evt, data) {
               alert(data.responseText);
-              var url = $(this).data('redirect_url');
-              window.location.href = url;
+              // var url = $(this).data('redirect_url');
+              // window.location.href = url;
           });
 
       });
@@ -25,8 +25,8 @@
 
       <div class="host_main">
         <p class="lh25 ft16 line_b1 mb5">
-          您目前的累计积分为<strong class="cr fb"><%= @totol_point %></strong>分，
-          可用积分为<strong class="cr fb">0</strong>分
+          您目前的累计积分为<strong class="cr fb"><%= @total_point %></strong>分，
+          可用积分为<strong class="cr fb"><%= @user_total_point %></strong>分
         </p>
 
         <h5 class="ft14 fb mb25 mt25">选择您可兑换的礼品：</h5>
@@ -44,7 +44,7 @@
             <%= hidden_field_tag 'gift_user_id', @user.id %>
             <table class="gifts_select mb15 js_checkall" id="gifts_list">
               <tr>
-                <th class="tl" width="155"><input type="checkbox">全选</th>
+                <th class="tl" width="155"><input type="checkbox" id="checkall">全选</th>
                 <th class="tl" width="260">礼品名称</th>
                 <th width="76">单位积分</th>
                 <th width="170">数量</th>
@@ -52,8 +52,8 @@
                 <th width="140">操作</th>
               </tr>
             </table>
-            <p class="fb tr ft14 mb5">礼品总积分：<strong class="cr fb" id="total_points">0</strong> 分</p>
-            <p class="fb tr ft14 mb5">您目前剩余可用积分：<strong class="cr fb" id="user_point">0</strong> 分</p>
+            <p class="fb tr ft14 mb5">礼品总积分：<strong class="cr fb js-total_point" id="total_point">0</strong> 分</p>
+            <p class="fb tr ft14 mb5">您目前剩余可用积分：<strong class="cr fb" id="user_point"><%= @user_total_point %></strong> 分</p>
             <p class="tr">
               <%= image_submit_tag(asset_path "personal/change_btn.jpg", data: { disable_with: "请等待..." }, class: 'record_submit', alt: '提交') %>
             </p>
