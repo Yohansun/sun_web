@@ -1,0 +1,137 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "baicheng/steps.css" %>
+<%- end %>
+<% content_for :tail do -%>
+  <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript">
+  <%- session_key = Rails.application.config.session_options[:key] -%>
+
+  (function($){
+    $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    //skipDefault : ['onSelect'],
+    progressData : 'percentage',
+    buttonText : "<button>选择图片</button>",
+    fileTypeDesc : '图片文件',
+    fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+    successTimeout : 6000,
+    fileSizeLimit : '30kB',
+    // uploadLimit : 1,
+    width : 88,
+    height : 34,
+    multi : true,
+    auto : true,
+    queueSizeLimit: 1,
+    checkExisting : false,
+    transparent : true,
+    uploader : '/manage/fit_images',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      if (dat.result == 'success') {
+        $.getScript(dat.upload + "?for=design", function(){});
+      }else{
+        alert("图片上传失败");
+      };
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    },
+    onUploadError : function(file, errorCode, errorMsg, errorString) {
+      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+    },
+    onUploadStart : function(){
+      //$("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      //$("#upload_going").hide();
+    }
+  });
+    $(".fit_btn").click(function(){
+      if ($(".title").val() == "" ){
+        alert("please input your title!!!")
+      }else if ($(".link").val() == ""){
+        alert("please input your link!!!")
+      }else if ($(".title").val().length > 8){
+        alert("标题必须输入<8个汉字")
+      }
+      
+    })
+    
+  })($);
+  function remote(id) {
+  $('#fit_image'+id).remove();
+  $('#fit_big_image'+id).remove();
+  }
+  function edit(id) {
+
+  }
+  function remove_design_image(){
+    $('.upload_item').remove();
+  }
+  function form_valid(){
+    flag = true
+    alt = ""
+    imgCount = $(".upload_item").size();
+    if(imgCount < 1){
+      alt += "不能一张图片都没有哦！";
+      flag = false;
+    }
+
+    if(flag == false){
+      alert(alt);
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
+  </script>
+ <% end %>
+<div class="container-fluid">
+	<div class="container">
+      <%#= form_for @fit_image, :class=>"refresh-form ft12", :onsubmit=>"return form_valid()" do |f| %>
+			<%= form_tag(fit_images_path, :class=>"refresh-form ft12", :onsubmit=>"return form_valid()") do %>
+			<div class="refresh-control">
+				<div class="form-article">
+          <div class="clearfix" style="margin-left: -25px;">
+            <p class="span2" style="width:50px;margin-top: 6px;">标题</p>
+            <input class="span2 input-large title" id="prependedInput" type="text" name="title" value="" class="title">
+            <span class="text-error">标题必须输入8个汉字</span>
+          </div>
+          <div class="clearfix" style="margin-left: -25px;">
+            <p class="span2" style="width:50px;margin-top: 6px;">链接</p>
+            <input class="span2 input-large link" id="prependedInput" type="text" value="" name="link" class="link">
+            <a href="">检测链接</a>
+          </div>
+          <div class="control-group" style="width:800px;">
+						<div class="clearfix"><button id="upload_photo">上传图片</button></div>
+            <p class="text-error">图片尺寸必须是138x165</p>
+          </div>
+          <p class="mt30">已经上传文件</p>
+          <div class="step2-area text-right" style="height:60px;">
+            <div class="load-bar load-content" id="uploads">
+            </div><!--load-content ends-->
+          </div>
+					<p>
+						建议上传大小不超过3M的JPG,GIF,PNG,BMP格式图片<br />
+					</p>
+				</div>
+			</div>
+			<p class="text-right">
+				<input type="hidden" name="story_id" value="<%=params[:id]%>">
+				<a href="<%=new_story_path(id: params[:id])%>" class="steps-back pull-left">返回</a>
+				<input type="submit" class="step1-btn fit_btn" value="" id='monitor_link_326820'>
+			</p>
+      <!-- <div class="step2-area text-right" style="height:2500px;">
+        <div class="load-bar load-content" id="uploads_big">
+        </div>
+      </div> -->
+			<% end %>
+		<!-- </form> -->
+	</div>
+</div>

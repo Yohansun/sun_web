@@ -1,0 +1,11 @@
+<div class="file-list clear upload_item clearfix" id="fit_image<%= upload.id %>" style="width:500px">
+	<a href="#" class="pull-left" style="margin-top: 16px;">
+		<%= image_tag upload.file.url(:thumb)%>
+	</a>
+	<p class="pull-left" style="margin-top: 16px;"><%= upload.file.original_filename %></p>
+	<%= hidden_field_tag "fit_image_id", upload.id %>
+	<button type="button" class="btn" onclick="remote(<%= upload.id %>)">删除</button>
+	<a href="#">
+		<%= image_tag upload.file.url, :style=> "margin-top: -210px;margin-left: 839px;"%>
+	</a>
+</div><!--file-list ends-->

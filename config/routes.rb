@@ -508,6 +508,7 @@ Icolor::Application.routes.draw do
     resources :owner_enter do
     resources :home_banners do
     end
+    resources :fit_images
   end
 
 end
