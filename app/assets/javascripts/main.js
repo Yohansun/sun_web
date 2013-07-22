@@ -900,6 +900,31 @@ $(function(){
 
 	//point2 
 	$(function(){
+		//add exchange
+		$('.js-exchange_btn').on('click', function(e){
+			e.preventDefault();
+			var parents_li = $(this).parents('li');
+			var ex_img_url = parents_li.find('img[data-url="ex_img_url"]').attr('src');
+			var ex_gift_name = parents_li.find('[data-name="ex_gift_name"]').text();
+			var ex_point = parents_li.find('[data-point="ex_point"]').text();
+			var ex_gift_num = parents_li.find('.num_input').val();
+
+			if (ex_gift_num == 0) {
+        alert("请选择数量");
+        return false;
+      }
+
+			$('.js_checkall').append("<tr><td>" + 
+				"<input type='checkbox' class='js-checkbox' checked>" +
+				"<img src='" + ex_img_url + "'></td>" + 
+				"<td>" + ex_gift_name + "<input type='hidden' value='" + ex_gift_name + "' name='gift_name[]' id='gift_name'></td>" +
+				"<td class='tc js-unit_point'>" + ex_point + "分<input type='hidden' name='gift_point[]' id='gift_point' value='" + ex_point + "'></td>" +
+				"<td class='tc'><p class='ft12 change_num clear pb10'><a href='javascript:;' class='num_plus fr js_plus'></a><input name='gift_number[]' id='gift_number' class='num_input fr' type='text' value='" + ex_gift_num + "'><a href='javascript:;' class='num_minus fr js_minus'></a></p></td>" +
+				"<td class='tc js-sum_point js-sum_point_on'>" + (ex_gift_num*ex_point) + "分<input type='hidden' name='total_gift_point[]' id='total_gift_point' value='" + (ex_gift_num*ex_point) + "'></td><td class='tc'><a class='gifts_del js_gifts_del' href='javascript:;'>删除</a></td></tr>");
+			add()
+		});
+
+
 		function total_numpoint (that,input_val){
 			var unit_point_td = $(that).parents('tr').children('.js-unit_point');
 			var unit_point = $(that).parents('tr').children('.js-unit_point').find('input').val();
@@ -924,7 +949,7 @@ $(function(){
 			$('#total_point').text(total);
 		}
 
-		$('.js_checkall .js-checkbox').on('change',function(){
+		$('.js_checkall').on('change','.js-checkbox',function(){
 			var $this = $(this);
 			var prop = $this.prop('checked');
 			var td = $this.parents('tr').find('.js-sum_point');
@@ -935,7 +960,7 @@ $(function(){
 
 
 		//—— change number
-		$('.js_minus').on('click',function(){
+		$('.js_checkall,.gifts_list').on('click','.js_minus',function(){
 			var input = $(this).siblings('input');
 			var input_val = $(this).siblings('input').val();
 			if (input_val > 0) {
@@ -948,7 +973,7 @@ $(function(){
 			total_numpoint(this,input_val);
 			add()
 		});
-		$('.js_plus').on('click',function(){
+		$('.js_checkall,.gifts_list').on('click','.js_plus',function(){
 			var input = $(this).siblings('input');
 			var input_val = $(this).siblings('input').val();
 			if (input_val >= 0) {
@@ -963,14 +988,14 @@ $(function(){
 		});
 
 		//del
-		$('.js_gifts_del').on('click',function(){
+		$('.js_checkall').on('click','.js_gifts_del',function(){
 			// console.log(00)
 			$(this).parents('tr').remove();
 			add();
 		});
 		
 		//options-checkbox all or none
-		$('#checkall').on('click',function(){
+		$('.js_checkall').on('click','#checkall',function(){
 			$(this).parents('table').find('.js-checkbox').prop('checked',this.checked).trigger('change');
 		});
 

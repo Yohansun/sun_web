@@ -2,172 +2,16 @@
   <%= stylesheet_link_tag "point" %>
   <%= javascript_include_tag "main" %>
 <% end %>
-<script type="text/javascript">
-  $(function() {
-      $(".gifts_list #add_gift").click(function(event){
-          event.preventDefault();
-
-          var product_user_id = <%= @user.id %>;
-          var gift_number = $(this).parent().parent().find("input[name='gift_number']").val();
-          var gift_image = $(this).parent().parent().find("#gift_image").prop('src');
-          var gift_name = $(this).parent().parent().find("#gift_name").text();
-          var gift_point = $(this).parent().parent().find("#gift_point").text();
-          var total_gift_point = parseInt(gift_point) * parseInt(gift_number);
-
-          if (gift_number == 0) {
-            alert("请选择数量");
-            return false;
-          }
-
-          var html_tr = "<tr id='add_gift_list'>" +
-            "<td><input id='sel_gift' type='checkbox' class='js-checkbox' checked><img width='115' height='72' src='"+ gift_image +"'></td>" +
-            "<td>"+ gift_name + "<input type='hidden' value='" + gift_name + "' name='gift_name[]' id='gift_name'></td>" +
-            "<td class='tc js-unit_point'>"+ gift_point +"分"+ "<input type='hidden' value='" + gift_point + "' name='gift_point[]' id='gift_point'></td>" +
-            "<td class='tc'><p class='ft12 change_num clear pb10'><a href='javascript:;' class='num_plus fr js_plus'></a><input class='num_input fr' name='gift_number[]' id='gift_number' type='text' value='" + gift_number +"'><a href='javascript:;' class='num_minus fr js_minus'></a></p></td>" +
-            "<td class='tc js-sum_point'>"+ total_gift_point +"分"+ "<input type='hidden' value='" + total_gift_point + "' name='total_gift_point[]' id='total_gift_point'></td>" +
-            "<td class='tc'><a href='javascript:void(0);' id='del' class='gifts_del js_gifts_del'>删除</a></td>" +
-            "</tr>"
-
-          function addAddTableRow(tr) {
-            $('#gifts_list tr:last').after(tr); 
-          }
-          addAddTableRow(html_tr);
-
-          $("#gift_div").show();
-
-          function newSum() {
-              var total=0;
-              $('#gifts_list #add_gift_list input:checkbox').each(function() {
-                if(this.checked) {
-                  var t_points = $(this).parent().parent().find("#total_gift_point").val();
-                  total += parseInt(t_points);
-                }
-              });
-              alert(total);
-              $('#total_point').text(total);
-          }
-          newSum.call(this);
-
-          function total_numpoint (that,input_val){
-            var unit_point_td = $(that).parents('tr').children('.js-unit_point');
-            var unit_point = $(that).parents('tr').children('.js-unit_point').find('input').val();
-            var sum_point_td = $(that).parents('tr').children('.js-sum_point');
-            var sum_point = unit_point * input_val;
-            var total_point = $(that).parents('form').find('.js-total_point');
-            if (unit_point_td.length >0) {
-              sum_point_td.text(sum_point + '分');
-              total_point.text()
-            };
-          };
-
-          function add(){
-            var sum = $('.js_checkall').find('.js-sum_point_on');
-            var arr = sum.map(function(i, td){
-              return parseInt(td.innerHTML);
-            });
-            var total = 0;
-            for (var i = arr.length; i-- ; ) {
-              total += arr[i];
-            }
-            $('#total_point').text(total);
-          }
-
-          $('.js_checkall .js-checkbox').on('change',function(){
-            var $this = $(this);
-            var prop = $this.prop('checked');
-            var td = $this.parents('tr').find('.js-sum_point');
-            if(prop) td.addClass('js-sum_point_on');
-            else td.removeClass('js-sum_point_on');
-            add()
-          });
-
-
-          //—— change number
-          $('.js_minus').on('click',function(){
-            var input = $(this).siblings('input');
-            var input_val = $(this).siblings('input').val();
-            if (input_val > 0) {
-              input_val --
-            }else {
-              input_val = 0;
-            };
-            // console.log(input_val)
-            input.val(input_val);
-            total_numpoint(this,input_val);
-            add()
-          });
-          $('.js_plus').on('click',function(){
-            var input = $(this).siblings('input');
-            var input_val = $(this).siblings('input').val();
-            if (input_val >= 0) {
-              input_val++
-            } else {
-              input_val = 1;
-            }
-            // console.log(input_val)
-            input.val(input_val);
-            total_numpoint(this,input_val);
-            add()
-          });
-
-          //del
-          $('.js_gifts_del').on('click',function(){
-            // console.log(00)
-            $(this).parents('tr').remove();
-            add();
-          });
-          
-          //options-checkbox all or none
-          $('#checkall').on('click',function(){
-            $(this).parents('table').find('.js-checkbox').prop('checked',this.checked).trigger('change');
-          });
-
-          $('.num_input').keyup(function(){
-            if(isNaN(this.value)){
-              this.value = 0;
-              total_numpoint(this,0);
-            }
-            else {
-              total_numpoint(this,this.value);
-              add();
-            }
-          })
-
-          // $('input:checkbox').change(function() {
-          //   var total=0;
-          //   $('input:checkbox').each(function() {
-          //     if(this.checked) {
-          //       var t_points = $(this).parent().parent().find("#total_gift_point").val();
-          //       total += parseInt(t_points);
-          //     }
-          //   });
-          //   $('#total_points').text(total);
-          // });
-
-          // $("#gifts_list tr:last #del").on('click',function(){
-          //     $(this).parent().parent().remove();
-
-          //     if ($("#gifts_list tr").length == 0) { 
-          //         $("#gift_div").hide();
-          //     }
-          // });
-
-          
-
-      });
-
-  });
-</script>
 <ul class="gifts_list h330 clear">
   <% @point_gifts.each_with_index do |gift, index| %>
       <% i_index = index + 1 %>
         <li class='<%= "noborder_right" if (i_index % 4) == 0 && i_index != 0 %>'>
           <a href="javascript:void(0);" class="gift_img">
-            <img src="<%= gift.file.url(:list) %>" id="gift_image" />
+            <img data-url="ex_img_url" src="<%= gift.file.url(:list) %>" id="gift_image" />
           </a>
           <a href="javascript:void(0);">
-            <span class="db" id='gift_name'><%= gift.gift_name %></span>
-            <span class="db">所需积分<strong class="cr" id='gift_point'><%= gift.gift_point %></strong></span>
+            <span class="db" id='gift_name' data-name="ex_gift_name"><%= gift.gift_name %></span>
+            <span class="db">所需积分<strong class="cr" id='gift_point' data-point="ex_point"><%= gift.gift_point %></strong></span>
           </a>
           <p class="ft12 change_num clear pb10">
             <span class="fl">数量</span>
@@ -176,7 +20,7 @@
             <a href="javascript:;" class="num_plus fl js_plus"></a>
           </p>
           <p>
-            <%= link_to image_tag(asset_path "personal/point_btn.jpg"), "javascript:void(0);", :id => "add_gift", class: "search_button", alt: '我要兑换' %>
+            <%= link_to image_tag(asset_path "personal/point_btn.jpg"), "javascript:void(0);", :id => "add_gift", class: "search_button js-exchange_btn", alt: '我要兑换' %>
           </p>
         </li>
   <% end %>

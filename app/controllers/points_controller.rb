@@ -16,6 +16,7 @@ class PointsController < ApplicationController
   end
 
   def add_gift
+    p params
   	gift_user_id = params[:gift_user_id]
   	gift_names = params[:gift_name]
   	gift_points = params[:gift_point]
@@ -44,7 +45,7 @@ class PointsController < ApplicationController
         render :json => {:result => "success"}, :layout => false
       end
 	  rescue => e
-			render :text => "礼品选择错误，请重新添写#{e}"
+			render :text => "礼品选择错误，请重新添写"
 		end
   end
 
