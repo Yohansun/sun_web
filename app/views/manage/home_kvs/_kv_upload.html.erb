@@ -1,0 +1,28 @@
+<div class="widget-box">
+	<div class="form-actions center">
+		<%= image_tag upload.try(:file).try(:url, :big), style: 'width:700px;height:345px;' %>
+	</div>
+	<div class="widget-header">
+		<h4>上传KV</h4>
+	</div>
+
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<form>
+			<div>
+		    <div class="work_title fl">
+		      <%= image_tag upload.try(:file).try(:url, :list), style: 'width:200px;height:100px;' %>
+		      <p class="file_name"><%= upload.try(:file).try(:original_filename) %></p>
+				  </div><!--work_title ends-->
+				  <div class="work_size tc fl"><%= upload.get_geometry(upload.file.path(:original)) %></div>
+				  
+				  <div class="work_del tc fl">
+				    <%= link_to '删除', delete_file_home_kv_path(upload), confirm: '确认删除图片?' %>
+				  </div><!--work_del ends-->
+				  
+				</div><!--file_list ends-->
+			</form>
+
+		</div>
+	</div>
+</div>

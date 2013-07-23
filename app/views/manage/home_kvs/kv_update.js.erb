@@ -1,0 +1,8 @@
+alert('保存成功!');
+<%- if params[:next].present? %>
+	window.location.href = "<%= home_kvs_path(sort: params[:next].to_i + 1) %>";
+<%- elsif params[:position].present? %>
+	window.location.href = "<%= home_kvs_path(sort: params[:position]) %>";
+<%- else %>
+	window.location.reload();
+<%- end %>

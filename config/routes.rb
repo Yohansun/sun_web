@@ -514,6 +514,17 @@ Icolor::Application.routes.draw do
         get :insert_news
       end
     end
+
+    resources :home_kvs do
+      member do
+        post :kv_update
+        get :delete_file
+      end
+      collection do
+        post :kv_insert
+      end
+    end
+    resources :kv_maps
   end
 
 end

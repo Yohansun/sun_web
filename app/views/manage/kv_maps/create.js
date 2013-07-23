@@ -1,0 +1,1 @@
+$('.replace_maps').replaceWith('<%=j render partial: 'manage/home_kvs/maps', locals: { maps: @kv.kv_maps} %>');
