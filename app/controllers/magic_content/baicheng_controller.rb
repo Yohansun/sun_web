@@ -1,7 +1,6 @@
 # encoding: utf-8
 module MagicContent
   class BaichengController < BaseController
-
     def daily_report
       case params[:search_type]  
       when 'yesterday'
@@ -33,6 +32,49 @@ module MagicContent
         send_data  @results.with_detail_to_csv.encode("gb18030"), :type => 'text/csv; charset=gb18030; header=present',:filename =>"baicheng_daily_report_#{Time.now.to_date.to_s}.csv" 
       else
         @results = @results.page(params[:page])
+      end
+    end
+
+    def story_screen
+      if params[:where_name]
+        case params[:search_type]  
+        when 'username'
+          user = User.where("username = '#{params[:where_name]}' or name = '#{params[:where_name]}'") 
+          if user.present?
+            user_id = user.map(&:id).join(",")
+            @stories = Story.where("user_id in (#{user_id})") 
+          end
+        when 'story_id'
+          @stories = Story.where(id: params[:where_name])
+        end
+      end
+    end
+
+    def story_del
+      if params[:baicheng_id]
+        story = Story.find params[:baicheng_id]
+        story.is_save = false
+        story.save
+        name = story.user.name ? story.user.name : story.user.username
+        if params[:search_type] && params[:search_type] == "story_id"
+          redirect_to main_app.baicheng_story_screen_path(where_name: story.id,search_type: "story_id")
+        else
+          redirect_to main_app.baicheng_story_screen_path(where_name: name,search_type: "username")
+        end
+      end
+    end
+
+    def story_restoration
+      if params[:baicheng_id]
+        story = Story.find params[:baicheng_id]
+        story.is_save = true
+        story.save
+        name = story.user.name ? story.user.name : story.user.username
+        if params[:search_type] && params[:search_type] == "story_id"
+          redirect_to main_app.baicheng_story_screen_path(where_name: story.id,search_type: "story_id")
+        else
+          redirect_to main_app.baicheng_story_screen_path(where_name: name,search_type: "username")
+        end
       end
     end
   end

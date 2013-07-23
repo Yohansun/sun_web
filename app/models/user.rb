@@ -71,6 +71,7 @@ class User < ActiveRecord::Base
   has_one :phone_expense
   has_many :event_attendees
   has_many :baicheng_events
+  has_many :stories
   #公司作品
   has_many :company_designs ,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 2}} , :order => "designs.created_at desc"
   #个人作品
