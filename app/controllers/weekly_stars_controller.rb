@@ -78,6 +78,10 @@ class WeeklyStarsController < ApplicationController
 
     @prev_star = WeeklyStar.where("published_at < ?", @design.published_at).order("published_at desc").first
     @next_star = WeeklyStar.where("published_at > ?", @design.published_at).order("published_at desc").last
+
+    @design_name = @design.design_name
+    @company_name = @design.company_name
+    @author = @design.author
   end
 
   def fullscreen

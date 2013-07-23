@@ -73,6 +73,10 @@ class DesignsController < ApplicationController
   def fullscreen
     @design = @user.designs.find(params[:id])
     @design_next = Design.includes(:design_images).where("designs.id > ? and design_images.file_file_size > ?", params[:id], 0).first
+
+    @design_name = @design.title
+    @author = @design.user.username
+    
     render :layout => nil
   end
 
