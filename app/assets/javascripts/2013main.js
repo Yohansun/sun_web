@@ -20,6 +20,7 @@
     	var $ul = $slider.slider({
 	            buttons : false,
 	            speed : 800,
+	            duration : 5000,
 	            pagerClass : 'pager_rest',
 				callback : function(n){
 					var $img = $slider.find('img');
