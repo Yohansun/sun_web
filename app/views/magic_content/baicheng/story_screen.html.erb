@@ -1,0 +1,94 @@
+<%- content_for :tail do %>
+  <%= stylesheet_link_tag "image_libraries" %>
+  <%#= javascript_include_tag 'twitter/bootstrap' %>
+  <script type="text/javascript">
+  $(function(){
+  //   $('.js_delall').click(function(){
+  //     // var id11 = $(this).siblings('table').find('input:checked').attr('id');
+  //     var id_arr = $(this).siblings('table').find('input:checked').map(function(i, checked){ return checked.value});
+  //     id_str = ""
+  //     for (var i = 0; i < id_arr.length; i++) {
+  //       id_str += id_arr[i] + ","
+  //     };
+  //     $.get('', {all_id: id_str}, function(data){
+  //     });
+  //   })
+  // })
+  </script>
+<%end%>
+
+<div class="content">
+
+  <div class="title">
+    <h5>房型图删选</h5>
+  </div>
+
+  <div class="widget first" style="position:relative;width:99.7%;min-height:500px">
+
+    <%= form_tag '/admin/content/baicheng/story_screen', class: 'search_form',method: 'get'  do %> 
+
+        <input type="radio" id="today" name="search_type" id='today' value="username" checked="true"/> 
+        <label for="today" >用户名</label>
+
+        <input type="radio"   id="yesterday" name="search_type" id='yesterday'   value="story_id" /> 
+        <label for="yesterday" >房型图ID</label>
+        <input type="text" id="where_name" name="where_name">
+        <input type="submit" class="button basicBtn"  value="确定">
+      <%end %>
+      <div class="head">
+        <h5 class="iFrames">房型图筛选</h5>
+      </div>
+      <table cellpadding="0" cellspacing="0" border="0" class="display" >
+      <br/>
+      <!-- <input type="button" name="all_del" value="全部删除" class="js_delall"> <input type="button" name="all_restoration" value="全部恢复"> -->
+      <table cellpadding="0" cellspacing="0" border="0" class="display" >
+        <thead>
+          <tr>  
+            <th>房型图URL</th>
+            <th>上传日期</th>
+            <th>房型图</th>
+            <th>业主用户名</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <body>
+          <% if @stories.present? %>
+            <% @stories.each do |story| %>
+            <% next unless story.story_image %>
+              <tr>  
+                <th><a href="/love/stories/<%= story.id %>" target="_blank">查看房型图</a></th>
+                <th><%= story.created_at.to_date %></th>
+                <th><img src="<%= story.story_image.file.url(:thumb) %>"></th>
+                <th><% if story.user.name %><%= story.user.name %><% else %><%= story.user.username %><% end %></th>
+                <% if params[:search_type] %>
+                  <th>
+                    <% if story.is_save == true %>
+                      <a href="/admin/content/baicheng/<%=story.id%>/story_del?search_type=<%=params[:search_type]%>">
+                      删除</a>
+                    <% else %>
+                      已删除
+                    <% end %>
+                     &nbsp 
+                     <% if story.is_save == true %>
+                      已恢复
+                     <% else %>
+                      <a href="/admin/content/baicheng/<%=story.id%>/story_restoration?search_type=<%=params[:search_type]%>">恢复</a>
+                    <% end %>
+
+                  </th>
+                <% end %>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr> 
+              <th colspan="6">没有找到筛选结果</th>
+            </tr>
+          <% end %>
+        </body>
+      </table>
+
+    </div>
+  </div>
+
+
+
