@@ -1,0 +1,18 @@
+<tbody class="tbody1">
+	<tr class="insert_tr">
+		<td><a href="javascript:;" class="recommend_insert">保存</a></td>
+		<td>
+			<%= select_tag :position, options_for_select((1..6).to_a), style: 'width:50px;', id: 'recommend_select_insert' %>
+		</td>
+		<td>
+			<%= text_field_tag :title, nil, id: 'recommend_title_insert' %>
+		</td>
+		<td>
+			<%= text_field_tag :url, nil, id: 'recommend_url_insert' %>
+		</td>
+		<td>
+			<a href="javascript:;" id="link4">检测链接</a>
+		</td>
+	</tr>
+	<%= render :partial => 'form', locals: { recommends: @recommends } %>
+</tbody>

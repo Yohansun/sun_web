@@ -525,6 +525,14 @@ Icolor::Application.routes.draw do
       end
     end
     resources :kv_maps
-  end
 
+    resources :home_recommends do
+      collection do
+        get :edit_recommend
+        post :update_recommend
+        post :delete_last
+        post :insert_recommend
+      end
+    end
+  end
 end

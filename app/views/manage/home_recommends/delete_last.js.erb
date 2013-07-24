@@ -1,0 +1,15 @@
+$('.tbody1').replaceWith('<%=j render partial: 'insert_form' %>');
+$('#link4').click(function(){
+	window.open($('#recommend_url_insert').val());
+});
+
+$('.recommend_insert').click(function(){
+	var $position = $('#recommend_select_insert').val(),
+			$title = $('#recommend_title_insert').val(),
+			$url = $('#recommend_url_insert').val();
+	$.ajax({
+		type: "POST",
+    url: "<%= insert_recommend_home_recommends_path %>",
+    data: {position : $position, title : $title, url : $url}
+	});
+});
