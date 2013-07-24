@@ -41,7 +41,7 @@
 				$.ajax({
 					type: "POST",
           url: "<%= kv_update_home_kv_path(@kv_id) %>",
-          data: {title : $title, url : $url, next : <%= params[:sort] %>}
+          data: {title : $title, url : $url, next : <%= params[:sort].present? ? params[:sort] : 0 %>}
 				});
 			});
 
@@ -50,7 +50,7 @@
 				$.ajax({
 					type: "POST",
           url: "<%= kv_update_home_kv_path(@kv_id) %>",
-          data: {sort : <%= params[:sort] %>, position : $position}
+          data: {sort : <%= params[:sort].present? ? params[:sort] : 0 %>, position : $position}
 				});
 			});
 		});
@@ -188,7 +188,7 @@
 				<div class="widget-body">
 					<div class="widget-main">
 						<%= form_for(KvMap.new, :html => {:class => "form-inline"}, remote: true ) do |f| %>
-							<%= f.hidden_field :home_kv_id, value: @kv.nil? ? nil : @kv.id %>
+							<%= f.hidden_field :home_kv_id, value: @kv.nil? ? nil : @kv.id, id: 'hidden_map_id' %>
 							<label>位置:</label>
 							X&nbsp;<%= f.text_field :x_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
 							Y&nbsp;<%= f.text_field :y_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
