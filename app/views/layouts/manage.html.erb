@@ -57,13 +57,13 @@
     </div>
 
     <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
-      <li class="active"><a href="#">主键KV设置</a></li>
+      <li class=""><a href="#">主键KV设置</a></li>
       <li class=""><a href="#">精华推荐</a></li>
       <li class=""><a href="#">装修图库</a></li>
       <li class=""><a href="#">设计鉴賞</a></li>
       <li class="<%= 'active' if params[:controller] == "manage/owner_enter" %>"><a href="manage/owner_enter">业主通道</a></li>
       <li class=""><a href="#">装修资讯</a></li>
-      <li class=""><a href="#">banner管理</a></li>
+      <li class="<%= 'active' if params[:controller] == 'manage/home_banners' %>"><a href="/manage/home_banners">banner管理</a></li>
     </ul>
         
   </div>

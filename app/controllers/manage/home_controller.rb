@@ -3,5 +3,5 @@ class Manage::HomeController < Manage::BaseController
 	
   def index
   end
-  
+
 end

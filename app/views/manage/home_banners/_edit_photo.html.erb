@@ -1,0 +1,19 @@
+<div class="form-actions banner_edit<%= upload.id %>" id="bannner_edit_image<%= upload.id %>">
+	<a name="Editbanner">
+		<div>
+		  <%= image_tag upload.file.url, :style => "magin-left:10px"%>
+		</div>
+		<div class="clearfix mt20">
+		  <select name="banner_name[<%= upload.id %>]" style="margin:0;width: 170px;" class="input-medium">
+			  <option>精华推荐banner 270x100</option>
+			  <option>业主通道banner 290x200</option>
+			  <option>底部大banner 670x85</option>
+			  <option>底部小banner 310x85</option>
+			  <option>大师殿堂banner 1000x85</option>
+			</select>
+			<label class="pull-left" style="margin-left: 5px;">链接:	</label>
+			<input class="pull-left link<%= upload.id %>" id="prependedInput" type="text" value="" name="link[<%= upload.id %>]" style="margin-top: -4px;">
+		    <a href="" class="pull-left" style="" onclick="inspect_link(<%= upload.id %>)" >检测链接</a>
+	  </div>
+  </a>
+</div>
