@@ -509,6 +509,11 @@ Icolor::Application.routes.draw do
     resources :home_banners do
     end
     resources :fit_images
+    resources :fit_literals do
+      collection do
+        get :insert_news
+      end
+    end
   end
 
 end

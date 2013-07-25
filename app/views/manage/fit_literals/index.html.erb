@@ -1,0 +1,34 @@
+<% content_for :tail do -%>
+  <script type="text/javascript">
+    $(function(){
+    	$('.edit_fit_literal').click(function(){
+        $(this).parents('li').siblings().find('.edit_fit_literal').attr('href','')
+    	});
+    })
+  </script>
+  <% end %>
+<div class="clearfix">
+   <span><a href="manage/fit_images">图片咨询</a>|<a href="manage/fit_literals">文字咨询</a></span>
+</div>
+<ul class="unstyled">
+	<li>
+		<h5 class="pull-left" style="width:20%">操作</h5>
+		<h5 class="pull-left" style="width:20%">排序</h5>
+		<h5 class="pull-left" style="width:20%">标题(最多输入十个汉字)</h5>
+		<h5 class="pull-left" style="width:15%">链接</h5>
+		<h5 class="pull-left" style="width:20%">最后修改日期</h5>
+	</li>
+	<% @news.each do |new| %>
+		<li  class="form-inline edit_form<%= new.id%>">
+			<label style="width:20%">
+				<%= link_to "编辑", edit_fit_literal_path(new), :remote => true, :class => "edit_fit_literal" %>
+			</label>
+			<label style="width:20%"><%= new.order_id %></label>
+			<label style="width:20%"><%= new.title %></label>
+			<label style="width:15%"><%= new.link %></label>
+			<label style="width:20%"><span class="label label-warning"><%= new.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+			</label>
+		</li>
+  <% end %>
+</ul>
+<%=link_to "最上方插入一行", insert_news_fit_literals_path, confirm: "此操作会删除最上方的记录，是否继续? " %>
