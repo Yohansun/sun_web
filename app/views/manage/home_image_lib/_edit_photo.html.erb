@@ -38,7 +38,7 @@ function open_link() {
 }
 </script>
 <div class="span6" id="upload_image">
-  <%= form_tag(home_image_lib_upload_image_url, :id => 'edit_form', :remote => true, :'data-redirect_url' => '/manage/home_image_lib', :'data-home_image_lib_photo_id' => @home_image_lib_photo.id, :class => 'bs-docs-example') do %>
+  <%= form_tag(upload_image_home_image_lib_index_url, :id => 'edit_form', :remote => true, :'data-redirect_url' => '/manage/home_image_lib', :'data-home_image_lib_photo_id' => @home_image_lib_photo.id, :class => 'bs-docs-example') do %>
     <%= hidden_field_tag 'photo_id', @home_image_lib_photo.id %>
     <div class="controls docs-input-sizes">
       <div class="input-prepend">

@@ -53,7 +53,7 @@
 
 <% @tags.each do |tag| %>
 
-<%= form_tag(home_image_lib_create_tag_list_url, :remote => true, :'data-redirect_url' => home_image_lib_tags_url) do %>
+<%= form_tag(create_tag_list_home_image_lib_index_url, :remote => true, :'data-redirect_url' => tags_home_image_lib_index_url) do %>
 <%= hidden_field_tag 'home_image_lib_tag_id', tag.id %>
 <div class="tags_setting">
 		<fieldset class="show_tags js-show_tags">
