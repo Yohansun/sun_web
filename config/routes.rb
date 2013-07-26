@@ -1,5 +1,4 @@
 #encoding: utf-8
-
 Icolor::Application.routes.draw do
   match "/images/(:id)_:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:site" => "design_images#image_show"
   match "/images/:id/image_show" => "design_images#image_show", as: 'image_show_design_image'
@@ -395,6 +394,8 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+  get "home_design_show/index"
+
   get "home_image_lib/index"
 
   get "home/index"
@@ -505,9 +506,22 @@ Icolor::Application.routes.draw do
     resources :intros, only: :show
   end
 
-  scope "/manage", :module =>"manage" do
-    get "home_image_lib(/:action)", to: 'home_image_lib#index'
-    get "home_image_lib/tags", to: 'home_image_lib#tags'
+  scope '/manage', :module => 'manage' do
+    # 首页装修图库后台
+    get 'home_image_lib(/:action)', to: 'home_image_lib#index'
+    get 'home_image_lib/tags', to: 'home_image_lib#tags'
+    post 'home_image_lib/create_tag_list', to: 'home_image_lib#create_tag_list'
+    match 'home_image_lib/edit_tag_list', to: 'home_image_lib#edit_tag_list'
+    post 'home_image_lib/photos', to: 'home_image_lib#photos'
+    post 'home_image_lib/upload_image', to: 'home_image_lib#upload_image'
+    post 'home_image_lib/search_vote', to: 'home_image_lib#search_vote'
+
+    # 首页设计鉴賞后台
+    get "home_design_show(/:action)", to: 'home_design_show#index'
+    post "home_design_show/create_image", to: 'home_design_show#create_image'
+    post "home_design_show/edit", to: 'home_design_show#edit'
+    post "home_design_show/save_data", to: 'home_design_show#save_data'
+    delete "home_design_show/destroy", to: 'home_design_show#destroy'
 
     root to: 'home#index'
     resources :owner_enter

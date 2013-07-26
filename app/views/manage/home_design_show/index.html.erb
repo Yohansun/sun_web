@@ -1,0 +1,151 @@
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<style type="text/css">
+	.boder_white {
+		padding: 20px;
+	}
+	.w1170{width:1170px!important;}
+	.nom{margin:0!important;}
+	.bs-docs-example {
+		  position: relative;
+		  margin: 15px 0;
+		  padding: 39px 19px 14px;
+		  *padding-top: 19px;
+		  background-color: #fff;
+		  border: 1px solid #ddd;
+		  -webkit-border-radius: 4px;
+		     -moz-border-radius: 4px;
+		          border-radius: 4px;
+		}
+		.bs-docs-example:after {
+		  content: "编辑信息";
+		  position: absolute;
+		  top: -1px;
+		  left: -1px;
+		  padding: 3px 7px;
+		  font-size: 12px;
+		  font-weight: bold;
+		  background-color: #f5f5f5;
+		  border: 1px solid #ddd;
+		  color: #9da0a4;
+		  -webkit-border-radius: 4px 0 4px 0;
+		     -moz-border-radius: 4px 0 4px 0;
+		          border-radius: 4px 0 4px 0;
+		}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	$('.edit_show').hide();
+
+	$('table tr td #edit_tag').on('click', function(e){
+		e.preventDefault();
+
+		var home_design_show_id = $(this).attr('home_design_show_id');
+		var design_type = $(this).attr('design_type');
+
+		if ($.trim(home_design_show_id).length == 0) {
+			alert('错误,请重新选择');
+			return false;
+		} else {
+			$.post("/manage/home_design_show/edit",{home_design_show_id: home_design_show_id, design_type: design_type},function(result){
+		    $('.edit_show').html(result);
+		  });
+		}
+
+		$('.edit_show').show();
+	})
+})
+</script>
+
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+  	<% if @design_type.to_s == 1.to_s %>
+    	<li class="">设计之星</li>
+    <% else %>
+    	<li class="active"><a href="/manage/home_design_show?design_type=1">设计之星</a></li>
+    <% end %>
+    <span>|</span>
+    <% if @design_type.to_s == 2.to_s %>
+    	<li class="">作品展示</li>
+    <% else %>
+    	<li class="active"><a href="/manage/home_design_show?design_type=2">作品展示</a></li>
+    <% end %>
+    <span>|</span>
+    <% if @design_type.to_s == 3.to_s %>
+    	<li class="">色彩配搭</li>
+    <% else %>
+    	<li class="active"><a href="/manage/home_design_show?design_type=3">色彩配搭</a></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="boder_white">
+已上传的图片
+<span class="btn btn-small btn-primary fileinput-button">
+    <i class="icon-plus icon-white"></i>
+    <span>上传图片...</span>
+    <input id="fileupload" type="file" name="file" multiple>
+</span>
+<p></p>
+<div class="span8">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>文件名</th>
+      <th>尺寸</th>
+      <th>当前位置</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @home_design_shows.each do |item| %>
+	    <tr>
+	      <td>
+	      	<img src="<%= item.file.url(:list_80x80) %>">
+	      </td>
+	      <td><%= item.file_file_name %></td>
+	      <td><%= show_dimensions item.position %></td>
+	      <td><%= show_position item.position %></td>
+	      <td>
+	      <%= link_to("删除", home_design_show_destroy_path(id: item.id),
+                          :data => { :confirm => "你确定要删除?" },
+                          :method => :delete,
+                          :class => 'btn btn-link') %>
+	      </td>
+	      <td>
+	      	<%= link_to "编辑标签", "javascript:;", :id => "edit_tag", :home_design_show_id => item.id, :design_type => item.design_type, :class => 'btn btn-link' %>
+	      </td>
+	    </tr>
+	  <% end %>
+  </tbody>
+</table>
+
+</div>
+
+<p></p>
+
+<div class="row-fluid edit_show">
+</div>
+
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload" %>
+<script>
+$(function () {
+    var design_type = <%= @design_type %>;
+    var url = 'home_design_show/create_image?design_type=' + design_type;
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+        maxNumberOfFiles: 1,
+        maxFileSize: 5000000,
+        done: function (e, data) {
+        	window.location.href = "/manage/home_design_show?design_type=<%= @design_type %>";
+        }
+    })
+});
+</script>

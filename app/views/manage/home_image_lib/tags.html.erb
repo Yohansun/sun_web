@@ -1,7 +1,96 @@
+<%- content_for :head do %>
+	<script type="text/javascript">
+		$(function() {
+			$('.js-edit_tags').hide();
+			$('.js-btn').click(function(){
+				$(this).parents('fieldset').hide();
+				$(this).parents('fieldset').siblings('fieldset').show();
+			})
+
+			$('#tags form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+				alert("保存成功");
+				var url = $(this).data('redirect_url');
+				window.location.href = url;
+			}).bind("ajax:error", function(evt, data) {
+				alert(data.responseText);
+			});
+
+			$('#tags #category').change(function(event) {
+				event.preventDefault();
+				var obj_category = this;
+
+				var category = $(this).val();
+				if ($.trim(category).length == 0) {
+					alert('错误,请重新选择');
+					return false;
+				} else {
+					$.post("edit_tag_list",{category: category},function(result){
+				    $(obj_category).parents().parents().find("div.edit_check").html(result);
+				  });
+				}
+			});
+
+		});
+	</script>
+	<%- end %>
+
 <div id="breadcrumbs">
   <ul class="breadcrumb">
     <li class="">标签设置</li>
     <span>|</span>
     <li class="active"><a href="/manage/home_image_lib/index">图片设置</a></li>
   </ul>
+</div>
+<style>
+	.edit_check div.inline {
+		width: 100px;
+	}
+	.radio.inline + .radio.inline, .checkbox.inline + .checkbox.inline {
+		margin: 0;
+	}
+</style>
+<div style="padding:15px;" id="tags">
+
+<% @tags.each do |tag| %>
+
+<%= form_tag(home_image_lib_create_tag_list_url, :remote => true, :'data-redirect_url' => home_image_lib_tags_url) do %>
+<%= hidden_field_tag 'home_image_lib_tag_id', tag.id %>
+<div class="tags_setting">
+		<fieldset class="show_tags js-show_tags">
+			<h4 class="title nom"><%= tag.category.title %></h4>
+			<div class="row-fluid">
+				<div class="span5">
+					<% ImageLibraryCategory.find_all_by_id(tag.category_list.split(',')).each do |cate| %>
+						<label class="checkbox inline"><%= cate.title %></label>
+					<% end %>
+				</div>
+				<a href="javascript:;" class="span1 text-right js-btn btn btn-small btn-primary">编辑</a>
+			</div>
+		</fieldset>
+		<fieldset class="edit_tags js-edit_tags">
+			<div class="title">
+				<%= select_tag "category", options_from_collection_for_select(@categories, 'id', 'title', "#{tag.category_id}") %>
+			</div>
+			<div class="row-fluid">
+				<div class="span8 edit_check">
+					<% tag.category.children.each do |cate| %>
+						<div class="inline">
+							<%= check_box_tag 'category_ids[]', cate.id, tag.category_list.split(',').include?(cate.id.to_s), :class => 'checkbox' %>
+							<label class="lbl" for="checkbox1"><%= cate.title %></label>
+						</div>
+					<% end %>
+				</div>
+				<div class="span2 text-right">
+				<%= submit_tag "保存", data: { disable_with: "请等待..." }, :class => 'js-btn btn btn-small btn-primary' %>
+					<a href="javascript:;" class="js-btn">取消</a>
+				</div>
+			</div>
+			<label class="pull-right inline">
+			</label>
+		</fieldset>
+</div>
+<% end %>
+
+<% end %>
+
 </div>

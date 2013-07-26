@@ -1,3 +1,4 @@
 class HomeImageLibTag < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :category, :class_name => "ImageLibraryCategory", :foreign_key => "category_id"
+
 end

@@ -1,0 +1,80 @@
+<script type="text/javascript">
+  $(function(){
+
+    $('#upload_image form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+      alert("保存成功");
+      var url = $(this).data('redirect_url');
+      window.location.href = url;
+    }).bind("ajax:error", function(evt, data) {
+      alert(data.responseText);
+    });
+
+    $('#get_vote').on('click', function(event) {
+      var url = $('#url').val();
+      $.post("home_image_lib/search_vote",{url: url},function(result){
+        $('#vote').val(result);
+      });
+    });
+
+  });
+
+  function open_link() {
+    var url = $('#url').val();
+    window.open(url, "_blank");
+  }
+</script>
+
+<div class="span6" id="upload_image">
+  <%= form_tag('home_design_show/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/home_design_show?design_type=#{@design_type}", :class => 'bs-docs-example') do %>
+    <%= hidden_field_tag 'design_id', @home_design_show.id %>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <span class="add-on">标题</span>
+        <input type="text" id="title" name="title" class="input-xlarge" value="<%= @title %>" data-maxlength=11 maxlength=11 />
+        <span class="help-inline">标题最多11个字</span>
+      </div>
+      <div class="span2">
+        <img src="<%= @home_design_show.file.url(:list_80x80) %>">
+      </div>
+      <div class="span6">
+
+        <div class="form-horizontal">
+
+          <div class="control-group">
+            <label class="control-label">位置</label>
+            <div class="controls">
+                <select name='position'>
+                  <option value=1>左1</option>
+                  <option value=2>右1</option>
+                  <option value=3>右2</option>
+                  <option value=4>右3</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">链接</label>
+            <div class="controls">
+              <input type="text" id="url" name="url" class="input-xlarge" value="<%= @home_design_show.url %>">
+              <%= link_to "检测链接", "javascript:open_link();", :id => "check_link", :class => 'btn btn-link' %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">投票数</label>
+            <div class="controls">
+            <input type="text" id="vote" name="vote" class="input-mini" value="<%= @home_design_show.vote %>">
+              <%= link_to "获取投票数", "javascript:void(0);", :id => "get_vote", :class => 'btn btn-link' %>
+            </div>
+          </div>
+
+          <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-large btn-primary' %>
+          <!-- <%= submit_tag "保存并跳转到下一张", :id => 'next_save', data: { disable_with: "请等待..." }, :class => 'btn btn-large btn-primary' %> -->
+
+          
+        </div>
+    </div>
+
+  <% end %>
+</div>

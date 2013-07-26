@@ -1,12 +1,9 @@
-class HomeImageLibPhoto < ActiveRecord::Base
+class HomeDesignShow < ActiveRecord::Base
   
-   has_attached_file :file,
+  has_attached_file :file,
 		:styles => {
-				:list_408x244 => "408x244#",
-				:list_244x162 => "244x162#",
-				:list_162x162 => "162x162#",
-				:list_244x244 => "244x244#",
-				:list_162x244 => "162x244#",
+				:list_200x260 => "200x260#",
+				:list_80x80 => "80x80#"
 			},
 		:url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
 		:path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

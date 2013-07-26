@@ -1,0 +1,6 @@
+<% @image_library_category.children.each do |cate| %>
+	<div class="inline">
+		<%= check_box_tag 'category_ids[]', cate.id, false, :class => 'checkbox' %>
+		<label class="lbl" for="checkbox1"><%= cate.title %></label>
+	</div>
+<% end %>
