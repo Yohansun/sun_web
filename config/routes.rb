@@ -507,30 +507,6 @@ Icolor::Application.routes.draw do
   end
 
   scope '/manage', :module => 'manage' do
-    # 首页装修图库后台
-    resources :home_image_lib do
-      collection do
-        get :tags
-        post :create_tag_list
-        match :edit_tag_list
-        post :photos
-        post :upload_image
-        post :search_vote
-      end
-    end
-
-    # 首页设计鉴賞后台
-    delete "home_design_show/destroy", to: 'home_design_show#destroy'
-    resources :home_design_show do
-      collection do
-        get :tags
-        post :create_image
-        post :edit
-        post :save_data
-      end
-    end
-
-    root to: 'home#index'
     resources :owner_enter
     resources :home_banners do
     end
@@ -560,5 +536,30 @@ Icolor::Application.routes.draw do
         post :insert_recommend
       end
     end
+
+    # 首页装修图库后台
+    resources :home_image_lib do
+      collection do
+        get :tags
+        post :create_tag_list
+        match :edit_tag_list
+        post :photos
+        post :upload_image
+        post :search_vote
+      end
+    end
+
+    # 首页设计鉴賞后台
+    delete "home_design_show/destroy", to: 'home_design_show#destroy'
+    resources :home_design_show do
+      collection do
+        get :tags
+        post :create_image
+        post :edit
+        post :save_data
+      end
+    end
+
+    root to: 'home_kvs#index'
   end
 end
