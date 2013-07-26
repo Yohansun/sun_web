@@ -58,7 +58,8 @@
   }
   function inspect_link(id){
     if($('.link'+id).val() == ""){
-      alert("your link is nothing, please input your link.")
+      alert("your link is nothing, please input your link.");
+      return false;
     }else{
       var content = $('.link'+id).attr("value")
       window.open(content)

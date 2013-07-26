@@ -16,7 +16,6 @@
     fileTypeDesc : '图片文件',
     fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
     successTimeout : 6000,
-    fileSizeLimit : '30kB',
     // uploadLimit : 1,
     width : 88,
     height : 34,
@@ -53,14 +52,24 @@
   });
     $(".fit_btn").click(function(){
       if ($(".title").val() == "" ){
-        alert("please input your title!!!")
+        alert("请输入标题!!!");
+        return false;
       }else if ($(".link").val() == ""){
-        alert("please input your link!!!")
+        alert("请输入链接!!!");
+        return false;
       }else if ($(".title").val().length > 8){
-        alert("标题必须输入<8个汉字")
+        alert("标题必须输入8个汉字");
+        return false;
       }
-      
-    })
+    });
+    $(".inspect_fit_image_link").click(function(){
+      if($(".link").val() == ""){
+        alert("请输入链接!!!");
+        return false;
+      }else{
+        window.open($(".link").val());
+      }
+    });
     
   })($);
   function remote(id) {
@@ -93,7 +102,7 @@
   </script>
  <% end %>
 <div class="clearfix" style="margin-left: 64px;margin-bottom: 20px;">
-  <span><a href="fit_images">图片咨询</a>|<a href="fit_literals">文字咨询</a></span>
+  <span><a href="fit_images">图片咨询</a>|<a href="fit_literals">文字资讯</a></span>
 </div>
 <div class="container-fluid">
 	<div class="container">
@@ -109,7 +118,7 @@
           <div class="clearfix" style="margin-left: -25px;">
             <p class="span2" style="width:50px;margin-top: 6px;">链接</p>
             <input class="span2 input-large link" id="prependedInput" type="text" value="" name="link" class="link">
-            <a href="">检测链接</a>
+            <a href="javascript:;" class="inspect_fit_image_link">检测链接</a>
           </div>
           <div class="control-group" style="width:800px;">
 						<div class="clearfix"><button id="upload_photo">上传图片</button></div>
