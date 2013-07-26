@@ -1,6 +1,6 @@
 <div class="widget-box">
 	<div class="form-actions center">
-		<%= image_tag @kv.try(:file).try(:url, :big), style: 'width:700px;height:345px;' %>
+		<%= image_tag @kv.try(:file).try(:url, :big), style: 'width:700px;height:345px;' if @kv %>
 	</div>
 	<div class="widget-header">
 		<h4>上传KV</h4>
@@ -11,7 +11,7 @@
 			<form>
 			<div>
 		    <div class="work_title fl">
-		      <%= image_tag @kv.try(:file).try(:url, :list), style: 'width:200px;height:100px;' %>
+		      <%= image_tag @kv.try(:file).try(:url, :list), style: 'width:200px;height:100px;' if @kv %>
 		      <p class="file_name"><%= @kv.try(:file).try(:original_filename) %></p>
 				  </div><!--work_title ends-->
 				  <div class="work_size tc fl"><%= @kv.get_geometry(@kv.file.path(:original)) if @kv %></div>
