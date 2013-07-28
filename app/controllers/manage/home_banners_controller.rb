@@ -2,6 +2,7 @@ class Manage::HomeBannersController < Manage::BaseController
   layout "manage"
   skip_before_filter :verify_authenticity_token, :only => [:create, :index]
   def index
+    @banners = HomeBanner.order("id desc")
   end
 
   def create
@@ -32,7 +33,10 @@ class Manage::HomeBannersController < Manage::BaseController
     @upload = HomeBanner.find(params[:id])
   end
 
-  def new
+  def destroy
+    @banner = HomeBanner.find params[:id]
+    @banner.delete
+    redirect_to home_banners_path 
   end
 
   def update

@@ -12,12 +12,12 @@
     cancelImage : '/uploadify/uploadify-cancel.png',
     //skipDefault : ['onSelect'],
     progressData : 'percentage',
-    buttonText : "<button>选择图片</button>",
+    buttonText : "<button >选择图片</button>",
     fileTypeDesc : '图片文件',
     fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
     successTimeout : 6000,
     fileSizeLimit : '3MB',
-    // uploadLimit : 1,
+    uploadLimit : 4,
     width : 88,
     height : 34,
     multi : true,
@@ -75,7 +75,13 @@
     if(imgCount < 1){
       alt += "不能一张图片都没有哦！";
       flag = false;
-    }
+    }else if ($(".upload_item").size() > 4)
+     {
+      alert("不能上传超过4张图片");
+      return false;
+     }else{
+      return true;
+     }
 
     if(flag == false){
       alert(alt);
@@ -99,6 +105,20 @@
             <p class="mt30">已经上传文件</p>
             <div class="text-right">
               <div class="load-bar load-content" id="uploads">
+                <% @banners.each do |banner| %>
+                  <div class="file-list clear upload_item" id="banner_image<%= banner.id %>">
+                    <a href="#" class="pull-left" style="margin-top: 16px;">
+                      <%= image_tag banner.file.url(:thumb)%>
+                    </a>
+                    <p class="pull-left" style="margin-top: 16px;"><%= banner.file.original_filename %></p>
+                    <%#= hidden_field_tag "home_banner_id", banner.id %>
+                    <input type="hidden" name="home_banner_id[<%= banner.id %>]" value="<%= banner.id %>">
+                    <div class="clearfix">
+                      <%=link_to "删除", home_banner_path(banner), method: :delete, confirm: 'delete it?', :class => 'btn'%>
+                      <a href="#Editbanner" type="button" class="btn" >编辑</a>
+                    </div>  
+                  </div><!--file-list ends-->
+                <% end %>
               </div><!--load-content ends-->
             </div>
   					<p>
@@ -108,10 +128,31 @@
   			</div>
         <div class="">
           <div class="load-bar load-content" id="uploads_big">
+            <% @banners.each do |banner| %>
+              <div class="form-actions banner_edit<%= banner.id %>" id="bannner_edit_image<%= banner.id %>">
+                <a name="Editbanner">
+                  <div>
+                    <%= image_tag banner.file.url, :style => "magin-left:10px"%>
+                  </div>
+                  <div class="clearfix mt20">
+                    <select name="banner_name[<%= banner.id %>]" style="margin:0;width: 170px;" class="input-medium">
+                      <option>精华推荐banner 270x100</option>
+                      <option>业主通道banner 290x200</option>
+                      <option>底部大banner 670x85</option>
+                      <option>底部小banner 310x85</option>
+                      <option>大师殿堂banner 1000x85</option>
+                    </select>
+                    <label class="pull-left" style="margin-left: 5px;">链接:  </label>
+                    <input class="pull-left link<%= banner.id %>" id="prependedInput" type="text" value="" name="link[<%= banner.id %>]" style="margin-top: -4px;">
+                      <a href="" class="pull-left" style="" onclick="inspect_link(<%= banner.id %>)" >检测链接</a>
+                  </div>
+                </a>
+              </div>
+            <% end %>
           </div><!--load-content ends-->
         </div>
         <div>
-          <input type="submit" class="step1-btn submit_btn" value="" id='monitor_link_326820' style="margin-top: 20px;" >
+          <input type="submit" class="submit_btn" value="保存" id='monitor_link_326820' style="margin-top: 20px;" >
         </div>
 			<% end %>
 		<!-- </form> -->

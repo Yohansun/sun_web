@@ -3,6 +3,7 @@ class Manage::FitImagesController < Manage::BaseController
 	layout "manage"
 
   def index
+  	@upload = FitImage.first
   end
 
   def create

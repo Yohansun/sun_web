@@ -6,7 +6,7 @@
 	<%#= hidden_field_tag "home_banner_id", upload.id %>
 	<input type="hidden" name="home_banner_id[<%= upload.id %>]" value="<%= upload.id %>">
 	<div class="clearfix">
-	  <button type="button" class="btn" onclick="remote(<%= upload.id %>)">删除</button>
+	  <%=link_to "删除", home_banner_path(upload), method: :delete, confirm: 'delete it?', :class => 'btn'%>
 	  <a href="#Editbanner" type="button" class="btn" >编辑</a>
 	</div>	
 </div><!--file-list ends-->

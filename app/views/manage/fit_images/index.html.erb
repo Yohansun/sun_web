@@ -60,6 +60,15 @@
       }else if ($(".title").val().length > 8){
         alert("标题必须输入8个汉字");
         return false;
+      }else{
+        return true;}
+      });
+    $(".inspect_fit_image_link").click(function(){
+      if($(".link").val() == ""){
+        alert("请输入链接!!!");
+        return false;
+      }else{
+        window.open($(".link").val());
       }
     });
     $(".inspect_fit_image_link").click(function(){
@@ -70,7 +79,6 @@
         window.open($(".link").val());
       }
     });
-    
   })($);
   function remote(id) {
   $('#fit_image'+id).remove();
@@ -89,7 +97,13 @@
     if(imgCount < 1){
       alt += "不能一张图片都没有哦！";
       flag = false;
-    }
+    }else if ($(".upload_item").size() > 1)
+     {
+      alert("不能上传超过1张图片");
+      return false;
+     }else{
+      return true;
+     }
 
     if(flag == false){
       alert(alt);
@@ -126,8 +140,21 @@
           </div>
           <p class="mt30">已经上传文件</p>
           <div class="step2-area text-right" style="height:60px;">
-            <div class="load-bar load-content" id="uploads">
-            </div><!--load-content ends-->
+            <% if @upload %>
+              <div class="load-bar load-content" id="uploads">
+              <div class="file-list clear upload_item clearfix" id="fit_image<%= @upload.id %>" style="width:500px">
+                <a href="#" class="pull-left" style="margin-top: 16px;">
+                  <%= image_tag @upload.file.url(:thumb)%>
+                </a>
+                <p class="pull-left" style="margin-top: 16px;"><%= @upload.file.original_filename %></p>
+                <%= hidden_field_tag "fit_image_id", @upload.id %>
+                <button type="button" class="btn" onclick="remote(<%= @upload.id %>)">删除</button>
+                <a href="#">
+                  <%= image_tag @upload.file.url, :style=> "margin-top: -210px;margin-left: 839px;"%>
+                </a>
+              </div><!--file-list ends-->
+              </div><!--load-content ends-->
+            <% end %>
           </div>
 					<p>
 						建议上传大小不超过3M的JPG,GIF,PNG,BMP格式图片<br />
@@ -136,8 +163,7 @@
 			</div>
 			<p class="text-right">
 				<input type="hidden" name="story_id" value="<%=params[:id]%>">
-				<a href="<%=new_story_path(id: params[:id])%>" class="steps-back pull-left">返回</a>
-				<input type="submit" class="step1-btn fit_btn" value="" id='monitor_link_326820'>
+				<input type="submit" class="fit_btn" value="保存" id='monitor_link_326820'>
 			</p>
       <!-- <div class="step2-area text-right" style="height:2500px;">
         <div class="load-bar load-content" id="uploads_big">
