@@ -1,3 +1,8 @@
+<%- content_for :head do %>
+	<style type="text/css">
+		.active_red a{color:red!important;}
+	</style>
+<%- end %>
 <%- content_for :tail do %>
 	<%= javascript_include_tag "jquery.uploadify.js" %>
 	<script type="text/javascript">
@@ -109,15 +114,15 @@
 <%- end %>
 <div id="breadcrumbs">
   <ul class="breadcrumb">
-    <li class="<%= 'active' if params[:sort] == '1' %>"><%= link_to '第1帧', home_kvs_path(sort: 1) %></li>
+    <li class="<%= 'active_red' if params[:sort] == '1' %>"><%= link_to '第1帧', home_kvs_path(sort: 1) %></li>
     <span>|</span>
-    <li class="<%= 'active' if params[:sort] == '2' %>"><%= link_to '第2帧', home_kvs_path(sort: 2) %></li>
+    <li class="<%= 'active_red' if params[:sort] == '2' %>"><%= link_to '第2帧', home_kvs_path(sort: 2) %></li>
     <span>|</span>
-    <li class="<%= 'active' if params[:sort] == '3' %>"><%= link_to '第3帧', home_kvs_path(sort: 3) %></li>
+    <li class="<%= 'active_red' if params[:sort] == '3' %>"><%= link_to '第3帧', home_kvs_path(sort: 3) %></li>
     <span>|</span>
-    <li class="<%= 'active' if params[:sort] == '4' %>"><%= link_to '第4帧', home_kvs_path(sort: 4) %></li>
+    <li class="<%= 'active_red' if params[:sort] == '4' %>"><%= link_to '第4帧', home_kvs_path(sort: 4) %></li>
     <span>|</span>
-    <li class="<%= 'active' if params[:sort] == '5' %>"><%= link_to '第5帧', home_kvs_path(sort: 5) %></li>
+    <li class="<%= 'active_red' if params[:sort] == '5' %>"><%= link_to '第5帧', home_kvs_path(sort: 5) %></li>
   </ul>
 </div>
 <%- if params[:sort].present? %>

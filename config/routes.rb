@@ -560,6 +560,6 @@ Icolor::Application.routes.draw do
       end
     end
 
-    root to: 'home_kvs#index'
+    root to: 'home_kvs#index', as: 'manage_root'
   end
 end

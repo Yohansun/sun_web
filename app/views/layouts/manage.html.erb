@@ -23,7 +23,7 @@
   <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a href="/manage" class="brand"><small>2013新版icolor首页</small></a>
+          <a href="<%= manage_root_path(sort: 1) %>" class="brand"><small>2013新版icolor首页</small></a>
 
           <ul class="nav ace-nav pull-right">
 
@@ -58,7 +58,7 @@
 
     <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
       <li class="<%= 'active' if controller_name == 'home_kvs' %>">
-        <a href="/manage/home_kvs">主键KV设置</a>
+        <a href="<%= manage_root_path(sort: 1) %>">主键KV设置</a>
       </li>
       <li class="<%= 'active' if controller_name == 'home_recommends' %>">
         <a href="/manage/home_recommends">精华推荐</a>
