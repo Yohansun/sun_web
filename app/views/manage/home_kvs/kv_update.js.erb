@@ -1,8 +1,12 @@
 alert('保存成功!');
-<%- if params[:next].present? %>
-	window.location.href = "<%= home_kvs_path(sort: params[:next].to_i + 1) %>";
-<%- elsif params[:position].present? %>
+<%- if params[:position].present? %>
 	window.location.href = "<%= home_kvs_path(sort: params[:position]) %>";
+<%- elsif params[:next].present? %>
+	<%- if params[:next] == '5' %>
+		window.location.href = "<%= home_kvs_path(sort: 1) %>";
+	<%- else %>
+		window.location.href = "<%= home_kvs_path(sort: params[:next].to_i + 1) %>";
+	<%- end %>
 <%- else %>
 	window.location.reload();
 <%- end %>
