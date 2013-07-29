@@ -3,6 +3,10 @@ class Manage::HomeBannersController < Manage::BaseController
   skip_before_filter :verify_authenticity_token, :only => [:create, :index]
   def index
     @banners = HomeBanner.order("id desc")
+    @banner_name = []
+    HomeBanner.find_each do |banners|
+      @banner_name << banners.banner_name
+    end
   end
 
   def create

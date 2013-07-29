@@ -136,11 +136,12 @@
                   </div>
                   <div class="clearfix mt20">
                     <select name="banner_name[<%= banner.id %>]" style="margin:0;width: 170px;" class="input-medium">
-                      <option>精华推荐banner 270x100</option>
-                      <option>业主通道banner 290x200</option>
-                      <option>底部大banner 670x85</option>
-                      <option>底部小banner 310x85</option>
-                      <option>大师殿堂banner 1000x85</option>
+                      <option><%= banner.banner_name %></option>
+                      <%= @banner_name.each do |banner_name| %>
+                        <% unless banner_name == banner.banner_name %>
+                          <option>精华推荐banner 270x100</option>
+                        <% end %>
+                      <% end %>
                     </select>
                     <label class="pull-left" style="margin-left: 5px;">链接:  </label>
                     <input class="pull-left link<%= banner.id %>" id="prependedInput" type="text" value="" name="link[<%= banner.id %>]" style="margin-top: -4px;">
