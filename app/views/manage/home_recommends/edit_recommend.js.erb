@@ -3,6 +3,18 @@ $('.edit_recommend').unbind('click');
 $('#link3').click(function(){
 	window.open($('#recommend_url_field').val());
 });
+(function($) {
+  $('.title-field').bind('keydown keyup', function() {
+    var $this = $(this);
+    var total = $this.data('total');
+    if (!total)
+      return;
+    var len = total - $this.val().length;
+    if (len < 0) {
+      $this.val($this.val().slice(0, total));
+    }
+  });
+}($));
 
 $('.recommend_save').click(function(){
 	var $position = $('#recommend_select_field').val(),

@@ -4,7 +4,7 @@
 		<%= select_tag :position, options_for_select((1..6).to_a, recommend.position), style: 'width:50px;', id: 'recommend_select_field' %>
 	</td>
 	<td>
-		<%= text_field_tag :title, recommend.title, id: 'recommend_title_field' %>
+		<%= text_field_tag :title, recommend.title, id: 'recommend_title_field', class: 'title-field', :'data-total' => '20' %>
 	</td>
 	<td>
 		<%= text_field_tag :url, recommend.url, id: 'recommend_url_field' %>
