@@ -12,12 +12,12 @@
     cancelImage : '/uploadify/uploadify-cancel.png',
     //skipDefault : ['onSelect'],
     progressData : 'percentage',
-    buttonText : "<button >选择图片</button>",
+    buttonText : "<button>选择图片</button>",
     fileTypeDesc : '图片文件',
     fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
     successTimeout : 6000,
     fileSizeLimit : '3MB',
-    uploadLimit : 4,
+    uploadLimit : 5,
     width : 88,
     height : 34,
     multi : true,
@@ -75,9 +75,9 @@
     if(imgCount < 1){
       alt += "不能一张图片都没有哦！";
       flag = false;
-    }else if ($(".upload_item").size() > 4)
+    }else if ($(".upload_item").size() > 5)
      {
-      alert("不能上传超过4张图片");
+      alert("不能上传超过5张图片");
       return false;
      }else{
       return true;

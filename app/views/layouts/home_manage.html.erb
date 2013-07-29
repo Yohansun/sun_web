@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title><%= page_title %></title>
+  <%= csrf_meta_tag %>
+
+    <meta name="Description" content="<%= des_content %>"/>
+    <meta name="Keywords" content="<%= keyword_content %>"/>
+
+    <%= stylesheet_link_tag "manage/bootstrap", "manage/bootstrap-responsive.css", "manage/jquery.slider.css", "manage/icolor", "
+      manage/ie6" %>
+    <%= javascript_include_tag "main.js", "manage/jquery.min.js",
+      "manage/bootstrap.js", "manage/jquery.slider.js", "manage/main.js" %>
+
+    <!--所有的个人主页都加载style.css -->
+    <%- if params[:user_id] %>
+        <%= stylesheet_link_tag "style" %>
+    <%- end %>
+    <%= yield :head %>
+    <!--[if IE 6]>
+    <script src="/png.js"></script>
+    <script>
+        PNG.fix('img,div,a,ul,li,h2,strong,span,p');
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript" charset="utf-8">
+        var jiathis_config = {
+            boldNum:4,
+            siteNum:4,
+            showClose:false,
+            sm:"kaixin001,renren,tsina,tqq",
+            imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+            imageWidth:26,
+            marginTop:150,
+            url:"http://www.icolor.com.cn",
+            title:"#iColor分享#一个你不容错过的网站，更多精彩装修案例、灵感家装图片尽在iColor，@刷新生活iColor，",
+            data_track_clickback:true
+        }
+    </script>
+    <style type="text/css" >
+      .nav_hot{position:absolute;top:-13px;left:60px;}
+      .nav_hot2{position: absolute;top: -5px;left: 65px;}
+      <%- if controller_name != "home" && controller_name != "design_images" %>
+       .navBot{margin:12px 0;}
+      <%- end %>
+      .navBot li{padding:1px 5px 2px;}
+    </style>
+</head>
+<body>
+  <div class="navbar mb10 h120">
+    <div class="container">
+      <div class="home_head">
+        <a class="brand" href="/"><%= image_tag "logo.jpg" %></a>
+        <div class="nav_top pull-right form-inline">
+          <span class="input-append follow_button">
+            <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+            <wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button>
+          </span>
+          <span class="js-user-info"></span>
+          <%#= form_tag("/search", :method => "get") do %>
+            <span class="top_search">
+              <input type="text" value="<%= params["search_word"] || 'Search' %>" name="search_word"/>
+              <button class="" type="button">search</button>
+            </span>
+            <select class="input-small" name="qt">
+              <option value="0">选择分类</option>
+              <option value="1">文章</option>
+              <option value="2">作品</option>
+              <option value="3">设计师/家装公司</option>
+            </select>
+          <%# end %>
+          <a class="help-inline subscribe" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
+          <a class="help-inline" href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
+          <a class="help-inline jiathis_btn" href="javascript:void(0)">分享</a>
+          <div id="ckepop" class="jiathis_area none">
+            <span class="jiathis_txt">一键分享：</span>
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_kaixin001"></a>
+            <a class="jiathis_button_renren"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+            <a class="jiathis_counter_style"></a>
+          </div>
+          <a href="javascript:;" target="_blank" class="login btn btn-mini btn_gray js-login">登录</a>
+          <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red">免费注册</a>
+          <a href="#" target="_blank"><%= image_tag "nippon.png" %></a>
+        </div>
+        <ul class="nav nav_red nomargin">
+          <li class="<%='active noborder' if controller_name == 'home' %>">
+            <a href="/">首页</a>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">
+            <a href="/master_interviews" target="_blank" >大师殿堂</a>
+            <ul class="subnav">
+              <li>
+                <%= link_to "大师访谈", "/master_interviews", :class => ('active noborder' if controller_name == 'master_interviews') %>
+              </li>
+              <li>
+                <%= link_to "大师作品", "/master_designs", :class => ('active noborder' if controller_name == 'master_designs') %>
+              </li>
+            </ul>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'design_images' %>">
+            <a href="/images" target="_blank">装修图库</a>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations' %>">
+            <a href="/weekly_stars" target="_blank">设计鉴赏</a>
+            <ul class="subnav">
+              <li>
+                <%= link_to "设计之星", "/weekly_stars",:class => ('active noborder' if controller_name == 'weekly_stars') %>
+              </li>
+              <li>
+                <%= link_to "作品展示", "/designs", :class => "#{'active noborder' if controller_name == 'designs'}" %>
+              </li>
+              <li>
+                <%= link_to "色彩配搭", "/color_designs", :class => "#{'active noborder' if controller_name == 'color_designs'}" %>
+              </li>
+              <li>
+                <%= link_to "灵感秀", "/inspirations", :class => "#{'active noborder' if controller_name == 'inspirations'}" %>
+              </li>
+            </ul>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' %>" >
+            <a href="/channel/access" target="_blank">业主通道</a>
+            <ul class="subnav">
+              <li><%= link_to "设计快查", "/channel/access", :class => "#{'active noborder' if controller_name == 'channel'}" %></li>
+              <li><%= link_to "装修贴士", "/faqs" %></li>
+              <li><%= link_to "配色咨询", "/mix_colors/new", :class => "#{'active noborder' if controller_name == 'mix_colors'}" %></li>
+              <li><%= link_to "刷新服务", "/channel/refresh_service", :class => "#{'active noborder' if controller_name == 'channel' && action_name == 'refresh_service'}" %></li>
+            </ul>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'articles' || controller_name == 'color_articles' || controller_name == 'master_topics' %>" >
+            <a href="/articles" target="_blank">行业资讯</a>
+            <ul class="subnav">
+              <li><%= link_to "装修资讯", "/articles", :class => "#{'active noborder' if controller_name == 'articles'}" %></li>
+              <li><%= link_to "色彩资讯", "/color_articles", :class => "#{'active noborder' if controller_name == 'color_articles'}" %></li>
+              <li><%= link_to "业内动态", "/master_topics", :class => "#{'active noborder' if controller_name == 'master_topics'}" %></li>
+            </ul>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'softwares' %>" >
+            <a href="/softwares/tools" target="_blank">应用工具</a>
+            <ul class="subnav">
+              <li><%= link_to "案例下载", "/softwares/case", :class => "#{'active noborder' if controller_name == 'softwares' && action_name == 'case'}" %></li>
+              <li><%= link_to "配色软件", "/softwares/tools", :class => "#{'active noborder' if controller_name == 'softwares' && action_name == 'tools'}" %></li>
+            </ul>
+          </li>
+          <li class="<%= 'active noborder' if controller_name == 'function' %>" >
+            <a href="/art" target="_blank">漆光艺彩</a>
+            <ul class="subnav">
+              <li><%= link_to "米兰诺艺术效果", "/art", :class => "#{'active noborder' if controller_name == 'function' && action_name == 'art'}" %></li>
+              <li><%= link_to "木纹风尚生活", "/7-1", :class => "#{'active noborder' if controller_name == 'function' && action_name == '7-1'}" %></li>
+            </ul>
+          </li>
+          <li class="w112">
+            <a href="/designer_events" class="<%= 'active noborder' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts' %>" target="_blank">精彩活动</a>
+            <ul class="subnav">
+              <li><%= link_to "设计师活动", "/designer_events", :class => "#{'active noborder' if controller_name == 'designer_events'}" %></li>
+              <li><%= link_to "其他活动", "/other_events", :class => "#{'active noborder' if controller_name == 'other_events'}" %></li>
+              <li><%= link_to "获奖名单", "/gift_list", :class => "#{'active noborder' if controller_name == 'gifts'}" %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <%= yield %>
+      <div class="home_footer">
+        <ul class="index_main index_map clearfix">
+          <li>
+            <i class="icon-map icon-map1"></i>
+            <a href="/master_interviews"><strong>大师殿堂</strong></a>
+            <a href="/master_interviews">大师访谈</a>
+            <a href="/master_designs">大师作品</a>
+          </li>
+          <li>
+            <i class="icon-map icon-map2"></i>
+            <a href="/images"><strong>装修图库</strong></a>
+          </li>
+          <li>
+            <i class="icon-map icon-map3"></i>
+            <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>"><strong>设计鉴赏</strong></a>
+            <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>">设计之星</a>
+            <a href="/designs">作品展示</a>
+            <a href="/color_designs">色彩配搭</a>
+            <a href="/inspirations">灵感秀</a>
+          </li>
+          <li>
+            <i class="icon-map icon-map4"></i>
+            <a href="#"><strong>业主通道</strong></a>
+            <a href="/channel/access">设计快查</a>
+            <a href="/faqs">装修贴士</a>
+            <a href="/mix_colors/new<%= link_suffix %>">配色咨询</a>
+            <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a>
+          </li>
+          <li>
+            <i class="icon-map icon-map5"></i>
+            <a href="/articles?tags=<%= URI.escape("设计相关") %>"><strong>行业资讯</strong></a>
+            <a href="/articles?tags=<%= URI.escape("设计相关") %>">装修资讯</a>
+            <a href="/color_articles">色彩资讯</a>
+            <a href="/master_topics">业内动态</a>
+          </li>
+          <li>
+            <i class="icon-map icon-map6"></i>
+            <a href="/softwares/tools"><strong>应用工具</strong></a>
+            <a href="/softwares/case">案例下载</a>
+            <a href="/softwares/tools">配色软件</a>
+          </li>
+          <li>
+            <i class="icon-map icon-map7"></i>
+            <a href="/art"><strong>漆光艺彩</strong></a>
+            <a href="/art">米兰诺艺术效果</a>
+            <a href="/7-1">木纹风尚生活</a>
+          </li>
+          <li>
+            <i class="icon-map icon-map8"></i>
+            <a href="/designer_events"><strong>精彩活动</strong></a>
+            <a href="/designer_events">设计师活动</a>
+            <a href="/other_events">其他活动</a>
+            <a href="/gift_list">获奖名单</a>
+          </li>
+        </ul>
+
+        <div class="footer">
+          <hr class="border2">
+          <p class="links">
+            <strong>友情链接:</strong><a href="#" target="_blank">立邦官网</a><a href="#" target="_blank">立邦官方商城</a><a href="#" target="_blank">立邦天猫商城</a>
+          </p>
+          <hr class="border2">
+          <p class="text-center pt15">
+            <a href="http://www.nipponpaint.com.cn/" target="_blank">立邦官网</a> |
+            <a href="/contact" target="_blank">联系我们</a> |
+            <a href="/rules" target="_blank">会员机制</a> |
+            <a href="http://shop.nipponpaint.com.cn/" target="_blank">网上商城</a> |
+            <a href="/state" target="_blank">网站声明</a> |
+            <a href="/about" target="_blank">关于我们</a> |
+            <a href="/sitemap" target="_blank">网站地图</a>
+          </p>
+          <p class="text-center">
+            <small>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved<br>沪ICP备08019990号</small>
+          </p>
+        </div>
+        <p id="back-top">
+          <a href="#top"><%= image_tag "manage/back_top.png" %></a>
+        </p>
+        <a href="javascript:;" class="codebar"><%= image_tag "manage/code.png" %></a>
+      </div>
+      <%= yield :tail %>
+    </div>
+  </div>
+  <%= render "layouts/overlay" %>
+</body>
+</html>
