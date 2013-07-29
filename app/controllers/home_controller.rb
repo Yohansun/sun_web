@@ -8,7 +8,6 @@ class HomeController < ApplicationController
   end
 
   def index
-    
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 

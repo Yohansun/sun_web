@@ -8,8 +8,7 @@
     <meta name="Description" content="<%= des_content %>"/>
     <meta name="Keywords" content="<%= keyword_content %>"/>
 
-    <%= stylesheet_link_tag "manage/bootstrap", "manage/bootstrap-responsive.css", "manage/jquery.slider.css", "manage/icolor", "
-      manage/ie6" %>
+    <%= stylesheet_link_tag "manage/bootstrap.css", "manage/bootstrap-responsive.css", "manage/jquery.slider.css", "manage/icolor.css", "manage/ie6.css" %>
     <%= javascript_include_tag "main.js", "manage/jquery.min.js",
       "manage/bootstrap.js", "manage/jquery.slider.js", "manage/main.js" %>
 
@@ -53,16 +52,16 @@
     <div class="container">
       <div class="home_head">
         <a class="brand" href="/"><%= image_tag "logo.jpg" %></a>
-        <div class="nav_top pull-right form-inline">
+        <div class="navTop nav_top pull-right form-inline">
+          <span class="js-user-info"></span>
           <span class="input-append follow_button">
             <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
             <wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button>
           </span>
-          <span class="js-user-info"></span>
-          <%#= form_tag("/search", :method => "get") do %>
+          <%= form_tag("/search", :method => "get", :style => "display:inline") do %>
             <span class="top_search">
-              <input type="text" value="<%= params["search_word"] || 'Search' %>" name="search_word"/>
-              <button class="" type="button">search</button>
+              <input type="text" value="" placeholder="<%= params["search_word"] || 'Search' %>" name="search_word"/>
+              <button class="" type="submit">search</button>
             </span>
             <select class="input-small" name="qt">
               <option value="0">选择分类</option>
@@ -70,7 +69,7 @@
               <option value="2">作品</option>
               <option value="3">设计师/家装公司</option>
             </select>
-          <%# end %>
+          <% end %>
           <a class="help-inline subscribe" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
           <a class="help-inline" href="javascript:void(0)" class="subscribe">订阅电子期刊</a> |
           <a class="help-inline jiathis_btn" href="javascript:void(0)">分享</a>
@@ -84,7 +83,7 @@
             <a class="jiathis_counter_style"></a>
           </div>
           <a href="javascript:;" target="_blank" class="login btn btn-mini btn_gray js-login">登录</a>
-          <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red">免费注册</a>
+          <a href="/users/sign_up" target="_blank" class="reg btn btn-mini btn_red">免费注册</a>
           <a href="#" target="_blank"><%= image_tag "nippon.png" %></a>
         </div>
         <ul class="nav nav_red nomargin">
@@ -247,6 +246,12 @@
       <%= yield :tail %>
     </div>
   </div>
-  <%= render "layouts/overlay" %>
+  <%= render "layouts/login" %>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.getScript("/home/overall.js?"+(new Date().valueOf()));
+    });
+  </script>
+
 </body>
 </html>
