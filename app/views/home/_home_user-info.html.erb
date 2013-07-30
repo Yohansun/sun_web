@@ -1,0 +1,5 @@
+<div class="user_infos pull-right">
+	<a href="<%= user_asks_path(current_user) %>">
+		<strong class="text-error"><%= truncate(current_user.display_name, length: 12) %></strong>我的主页</a>
+	<%= link_to '退出', destroy_user_session_path, :method => :delete %>
+</div>

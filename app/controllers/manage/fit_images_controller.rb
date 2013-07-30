@@ -32,5 +32,11 @@ class Manage::FitImagesController < Manage::BaseController
   def show
     @upload = FitImage.find(params[:id])
   end
+
+  def destroy
+  	@banner = FitImage.find params[:id]
+    @banner.delete
+    redirect_to fit_images_path 
+  end
   
 end

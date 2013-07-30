@@ -1,0 +1,165 @@
+$(document).ready(function(){
+    function is_mobile() {
+       var regex_match = /(nokia|iphone|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i;
+         var u = navigator.userAgent;
+         if (null == u) {
+          return true;
+         }
+         var result = regex_match.exec(u);
+         if (null == result) {
+          return false
+         } else {
+          return true
+         }
+        }
+    if (is_mobile()) {
+     document.location.href= 'http://www.icolor.com.cn/mobile/';
+    }
+})
+
+<%- if user_signed_in? %>
+    $('.js-user-info').html("<%= escape_javascript(render(:partial => "home_user-info")) %>");
+    $('.navTop .login').hide();
+    $('.navTop .reg').hide();
+<%- end %>
+
+$(function () {
+
+if ($("#per_form")) {
+    $("#per_form").submit(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#new_message")) {
+    $("#new_message").submit(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#new_reply_msg")) {
+    $("#new_reply_msg").submit(function (event) {
+        <% if current_user -%>
+        var $area = $('#reply_msg_content')
+        var txt = $area.val();
+        if (txt == '') {
+            inputBlank($area);
+            return false;
+        }
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#new_faq")) {
+    $("#new_faq").submit(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#new_site_message")) {
+    $("#new_site_message").submit(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        $('.server_input').hide();
+        $('.server_suc').hide();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#channel_service")) {
+    $("#channel_service").submit(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#channel_access")) {
+    $("#channel_access").click(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($(".one_key_forward")) {
+    $(".one_key_forward").click(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($("#ckepop a")) {
+    $("#ckepop a").click(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+if ($(".new_mix_color")) {
+    $(".new_mix_color").click(function (event) {
+        <% if current_user -%>
+        return true;
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
+$('#new_user').bind('ajax:error', function (xhr, status, error) {
+    err_in();
+});
+
+$.ajax({
+    type: "POST",
+    url: "<%= visit_ips_path %>",
+    data: { ip : "<%= request.ip %>" }
+});
+
+});
+
+function yda_kv_link () {
+    <% if current_user && current_user.role_id == 1 -%>
+        window.location.href = "<%= new_user_design_path(current_user) %>";
+    <% elsif current_user %>
+        window.location.href = "javascript:void(0)";
+    <% else -%>
+        show_login();
+    <% end -%>
+}

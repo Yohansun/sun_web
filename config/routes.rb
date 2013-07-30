@@ -30,6 +30,7 @@ Icolor::Application.routes.draw do
   get "/users/me" => "users#me"
   get "/users/edit_me" => "users#edit_me"
   get "home/overall.js" => "home#overall"
+  get "home/home_overall.js" => "home#home_overall"
   root :to => 'home#index'
 
   resources :votes

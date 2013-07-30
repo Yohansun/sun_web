@@ -1,3 +1,35 @@
+<!-- <div id="overlay"></div><!--overlay ends--> -->
+<div class="modal subs_input hide" id="july_last">
+  <div class="subs_title ft18">
+    <span class="fl">提示</span>
+    <a href="javascript:void(0)" class="close_btn close" data-dismiss="modal" aria-hidden="true"></a>
+  </div><!--subs_title ends-->
+  <%= form_tag maillists_path, :remote => true do %>
+  <div class="subs_content text-center">
+    <div class="subs_info ft14">请输入您接收电子期刊的E-mail地址</div>
+    <input type="text" name="maillist[email]"/>
+    <p class="subs_err ft12 none">* 抱歉，您输入的邮箱地址不正确! *</p>
+  </div><!--subs_content ends-->
+  <p class="subs_submit text-center">
+    <input type="image" src="<%= asset_path "submit_btn.jpg" %>" />
+  </p>
+  <%- end %>
+</div><!--subs_input ends 订阅电子期刊-->
+<div class="modal subs_input hide subs_suc">
+  <div class="subs_title ft18">
+    <span class="fl">提示</span>
+    <a href="javascript:void(0)" class="close_btn fr share_close"></a>
+  </div><!--subs_title ends-->
+  <div class="subs_content text-center">
+    <img src="<%= asset_path "subs_suc.jpg" %>" />
+    <p class="ft14">我们将以月刊的形式向您发送icolor电子期刊，<br />精彩内容敬请期待！</p>
+  </div><!--subs_content ends-->
+  <p class="subs_submit text-center">
+    <input type="image" src="<%= asset_path "submit_btn.jpg" %>" />
+  </p>
+</div><!--subs_suc ends 订阅成功-->
+
+
 <div class="unlogin modal" style="height: 354px;">
 	<%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
 		<div class="login_tit">
@@ -12,12 +44,12 @@
 			<form class="login_form">
 	      <div class="clearfix">
 	        <label for="username" class="username ft14 fl login_label">帐号：</label>
-	        <input id="username" type="text" value="用户名/邮箱/手机" name="user[login]"/>
+	        <input id="username" type="text" placeholder="用户名/邮箱/手机" name="user[login]" value=""/>
 	      </div>
 	      <div class="clearfix">
 	        <label for="password" class="password ft14 fl login_label">密码：</label>
 	        <input id="password" type="password" class="fl" name="user[password]"/>
-	        <span class="tips tc fr pass_tips"><a href="/users/password/new">忘记密码？</a></span>
+	        <span class="tips text-center fr pass_tips"><a href="/users/password/new">忘记密码？</a></span>
 	      </div>
 				<p class="clearfix">
 		      <input id="login" type="image" src="<%= asset_path "login.jpg" %>" />

@@ -14,6 +14,14 @@ class HomeController < ApplicationController
     @footer_banner_two = HomeBanner.find_by_banner_name "底部小banner 310x85"
     @chief_banner = HomeBanner.find_by_banner_name "精华推荐banner 270x100"
     @master_banner = HomeBanner.find_by_banner_name "大师殿堂banner 1000x85"
+    
+    #装修资讯
+    @fit_literals = FitLiteral.order("order_id asc")
+    @fit_image = FitImage.first
+
+    #业主通道
+    @owner_entrys = OwnerEnter.order("order_id asc")
+
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
@@ -30,6 +38,10 @@ class HomeController < ApplicationController
   end
 
   def overall
+      render layout: nil
+  end
+
+  def home_overall
       render layout: nil
   end
 end

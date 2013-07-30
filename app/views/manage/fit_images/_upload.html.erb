@@ -4,7 +4,8 @@
 	</a>
 	<p class="pull-left" style="margin-top: 16px;"><%= upload.file.original_filename %></p>
 	<%= hidden_field_tag "fit_image_id", upload.id %>
-	<button type="button" class="btn" onclick="remote(<%= upload.id %>)">删除</button>
+	<!-- <button type="button" class="btn" onclick="remote(<%= upload.id %>)">删除</button> -->
+	<%=link_to "删除", fit_image_path(upload), method: :delete, confirm: 'delete it?', :class => 'btn'%>
 	<a href="#">
 		<%= image_tag upload.file.url, :style=> "margin-top: -210px;margin-left: 839px;"%>
 	</a>

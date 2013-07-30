@@ -10,14 +10,22 @@
         if($('.title').val()=="" )
           {alert("请输入标题内容");
           return false;
-          }
-        else if($('.content').val()=="" ){
-          {alert("请输入内容");
-           return false;}
-        }else if($('.link').val()=="" )
-        {alert("请输入链接");
-         return false;}
-      });
+          }else if($('.content').val()=="" ){
+            alert("请输入内容");
+            return false;
+          }else if($('.link').val()=="" ){
+          alert("请输入链接");
+           return false;
+         }else if($('.title').val().length>16){
+           alert("标题内容不得超过16个字");
+           return false;
+         }else if($('.content').val().length>81){
+           alert("内容不得超过81个字");
+           return false;
+         }else{
+          return true;
+         }
+        });
       $(".inspect_owner_enter").click(function(){
         window.open($(".link").val());
       })
