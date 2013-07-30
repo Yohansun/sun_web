@@ -11,6 +11,9 @@ class HomeDesignShow < ActiveRecord::Base
 	 before_create :randomize_file_name
 	 before_post_process :randomize_file_name
 
+	 scope :design_type, lambda{ |design_type| where(design_type: design_type)}
+	 scope :position, lambda{ |position| where(position: position)}
+
 private
   def randomize_file_name
     unless file_file_name.nil?

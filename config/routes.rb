@@ -32,6 +32,7 @@ Icolor::Application.routes.draw do
   get "home/overall.js" => "home#overall"
   get "home/home_overall.js" => "home#home_overall"
   root :to => 'home#index'
+  get "home/design_show"
 
   resources :votes
 
@@ -395,12 +396,6 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
-  get "home_design_show/index"
-
-  get "home_image_lib/index"
-
-  get "home/index"
-
     match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :image_libraries
     resources :suit_images

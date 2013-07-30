@@ -1,0 +1,62 @@
+<div class="index_design">
+  <p class="clearfix index_tit">
+    <a href="/inspirations" target="_blank" class="pull-right"><small>灵感秀</small></a>
+    <a class="pull-right"> | </a>
+    <a href="/color_designs" target="_blank" class="pull-right"><small>色彩配搭</small></a>
+    <a class="pull-right"> | </a>
+    <a href="/designs" target="_blank" class="pull-right"><small>作品展示</small></a>
+    <a class="pull-right"> | </a>
+    <a href="/weekly_stars" target="_blank" class="pull-right"><small>设计之星</small></a>
+    <strong class="pull-left">设计鉴赏</strong>
+  </p>
+  <hr class="border2 border2_mt2">
+  <div class="index_main clearfix">
+    <ul class="design_show clearfix">
+      <li class="pull-left">
+        <p class="clearfix">
+          <a href="<%= @week_star_left.url if @week_star_left.present? %>" class="mr10"><img src="<%= @week_star_left.file(:list_200x260) if @week_star_left.present? %>" alt=""></a>
+          <a href="<%= @week_star_right1.url if @week_star_right1.present? %>" class="w80"><img src="<%= @week_star_right1.file(:list_80x80) if @week_star_right1.present? %>" alt=""></a>
+          <a href="<%= @week_star_right2.url if @week_star_right2.present? %>" class="w80"><img src="<%= @week_star_right2.file(:list_80x80) if @week_star_right2.present? %>" alt=""></a>
+          <a href="<%= @week_star_right3.url if @week_star_right3.present? %>" class="w80"><img src="<%= @week_star_right3.file(:list_80x80) if @week_star_right3.present? %>" alt=""></a>
+        </p>
+        <h5>
+          <a href="<%= @week_star_left.url if @week_star_left.present? %>" class="pull-right">
+            <i class="icon-i16 icon-xin_gray"></i><%= @week_star_left.vote if @week_star_left.present? %>
+          </a>
+          <a href="<%= @week_star_left.url if @week_star_left.present? %>"><%= @week_star_title %></a>
+        </h5>
+        <a href="/weekly_stars"><small class="muted">更多设计之星>></small></a>
+      </li>
+      <li class="pull-left">
+        <p class="clearfix">
+          <a href="<%= @design_left.url if @design_left.present? %>" class="mr10"><img src="<%= @design_left.file(:list_200x260) if @design_left.present? %>" alt=""></a>
+          <a href="<%= @design_right1.url if @design_right1.present? %>" class="w80"><img src="<%= @design_right1.file(:list_80x80) if @design_right1.present? %>" alt=""></a>
+          <a href="<%= @design_right2.url if @design_right2.present? %>" class="w80"><img src="<%= @design_right2.file(:list_80x80) if @design_right2.present? %>" alt=""></a>
+          <a href="<%= @design_right3.url if @design_right3.present? %>" class="w80"><img src="<%= @design_right3.file(:list_80x80) if @design_right3.present? %>" alt=""></a>
+        </p>
+        <h5>
+          <a href="<%= @design_left.url if @design_left.present? %>" class="pull-right">
+            <i class="icon-i16 icon-xin_gray"></i><%= @design_left.vote if @design_left.present? %>
+          </a>
+          <a href="<%= @design_left.url if @design_left.present? %>"><%= @design_title %></a>
+        </h5>
+        <a href="/designs"><small class="muted">更多作品展示>></small></a>
+      </li>
+      <li class="pull-left noborder nomargin nopadding">
+        <p class="clearfix">
+          <a href="<%= @color_left.url if @color_left.present? %>" class="mr10"><img src="<%= @color_left.file(:list_200x260) if @color_left.present? %>" alt=""></a>
+          <a href="<%= @color_right1.url if @color_right1.present? %>" class="w80"><img src="<%= @color_right1.file(:list_80x80) if @color_right1.present? %>" alt=""></a>
+          <a href="<%= @color_right2.url if @color_right2.present? %>" class="w80"><img src="<%= @color_right2.file(:list_80x80) if @color_right2.present? %>" alt=""></a>
+          <a href="<%= @color_right3.url if @color_right3.present? %>" class="w80"><img src="<%= @color_right3.file(:list_80x80) if @color_right3.present? %>" alt=""></a>
+        </p>
+        <h5>
+          <a href="<%= @color_left.url if @color_left.present? %>" class="pull-right">
+            <i class="icon-i16 icon-xin_gray"></i><%= @color_left.vote if @color_left.present? %>
+          </a>
+          <a href="<%= @color_left.url if @color_left.present? %>"><%= @color_title %></a>
+        </h5>
+        <a href="/color_designs"><small class="muted">更多色彩搭配>></small></a>
+      </li>
+    </ul>
+  </div>
+</div>

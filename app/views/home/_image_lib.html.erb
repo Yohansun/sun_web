@@ -1,0 +1,86 @@
+<div class="index_base">
+  <p class="clearfix index_tit">
+    <a href="/images" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
+    <strong class="pull-left">装修图库</strong>
+  </p>
+  <hr class="border2 border2_mt2">
+  <div class="index_main clearfix">
+    <div class="pull-left tagbase">
+      <% @image_tags.each_with_index do |image_tag, index| %>
+        <dl class="clearfix <%= 'noborder nomargin' if index == @image_tags.size - 1 %>">
+          <dt><a href="/images/<%= tag_link image_tag.category_id %>" class="pull-right">更多>></a><%= tag_name image_tag.category_id %></dt>
+          <% tags = image_tag.category_list.split(',') || [] %>
+          <% tags.each do |tag| %>
+            <dd><a href="/images/<%= tag_link tag %>"><%= tag_name tag %></a></dd>
+          <% end %>
+        </dl>
+      <% end %>
+    </div>
+    <div class="pull-left imgbase_show">
+      <a href="<%= @image_lib1.url if @image_lib1.present? %>" target="_blank" class="show1">
+        <img src="<%= @image_lib1.file(:list_408x244) if @image_lib1.present? %>" alt="">
+        <p>
+          <span><%= @image_lib1.title if @image_lib1.present? %></span>
+          <span class="none">
+            <i class="icon-i16 icon-xin mr5"></i>
+            <%= @image_lib1.vote if @image_lib1.present? %>
+          </span>
+        </p>
+      </a>
+      <a href="<%= @image_lib2.url if @image_lib1.present? %>" target="_blank" class="show2">
+        <img src="<%= @image_lib2.file(:list_244x162) if @image_lib2.present? %>" alt="">
+        <p>
+          <span><%= @image_lib2.title if @image_lib2.present? %></span>
+          <span class="none"><i class="icon-i16 icon-xin mr5"></i>
+            <%= @image_lib2.vote if @image_lib2.present? %>
+          </span>
+        </p>
+      </a>
+      <a href="<%= @image_lib3.url if @image_lib3.present? %>" target="_blank" class="show3">
+        <img src="<%= @image_lib3.file(:list_162x162) if @image_lib3.present? %>" alt="">
+        <p>
+          <span><%= @image_lib3.title if @image_lib3.present? %></span>
+          <span class="none"><i class="icon-i16 icon-xin mr5"></i>
+          <%= @image_lib3.vote if @image_lib3.present? %>
+          </span>
+        </p>
+      </a>
+    </div>
+    <div class="pull-left imgbase_show">
+      <a href="<%= @image_lib4.url if @image_lib4.present? %>" target="_blank" class="show4">
+        <img src="<%= @image_lib4.file(:list_162x162) if @image_lib4.present? %>" alt="">
+        <p>
+          <span><%= @image_lib4.title if @image_lib4.present? %></span>
+          <span class="none"><i class="icon-i16 icon-xin mr5"></i>
+          <%= @image_lib4.vote if @image_lib4.present? %>
+          </span>
+        </p>
+      </a>
+      <a href="<%= @image_lib5.url if @image_lib5.present? %>" target="_blank" class="show5">
+        <img src="<%= @image_lib4.file(:list_244x162) if @image_lib4.present? %>" alt="">
+        <p>
+          <span><%= @image_lib5.title if @image_lib5.present? %></span>
+          <span class="none"><i class="icon-i16 icon-xin mr5"></i>
+          <%= @image_lib5.vote if @image_lib5.present? %>
+          </span>
+        </p>
+      </a>
+      <a href="<%= @image_lib6.url if @image_lib6.present? %>" target="_blank" class="show6">
+        <img src="<%= @image_lib6.file(:list_244x244) if @image_lib6.present? %>" alt="">
+        <p>
+          <span><%= @image_lib6.title if @image_lib6.present? %></span>
+          <span class="none"><i class="icon-i16 icon-xin mr5"></i>
+          <%= @image_lib6.vote if @image_lib6.present? %></span>
+        </p>
+      </a>
+      <a href="<%= @image_lib7.url if @image_lib7.present? %>" target="_blank" class="show7">
+        <img src="<%= @image_lib7.file(:list_162x244) if @image_lib7.present? %>" alt="">
+        <p>
+          <span><%= @image_lib7.title if @image_lib7.present? %></span>
+          <span class="none"><i class="icon-i16 icon-xin mr5"></i>
+          <%= @image_lib7.vote if @image_lib7.present? %></span>
+        </p>
+      </a>
+    </div>
+  </div>
+</div>

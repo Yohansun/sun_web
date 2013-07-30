@@ -14,6 +14,8 @@ class HomeImageLibPhoto < ActiveRecord::Base
 	 before_create :randomize_file_name
 	 before_post_process :randomize_file_name
 
+	 scope :find_id, lambda{ |id| where(id: id)}
+
 private
   def randomize_file_name
     unless file_file_name.nil?

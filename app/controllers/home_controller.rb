@@ -22,6 +22,50 @@ class HomeController < ApplicationController
     #业主通道
     @owner_entrys = OwnerEnter.order("order_id asc")
 
+    # design tag
+    @image_tags = HomeImageLibTag.all
+    @categories = ImageLibraryCategory.parent_categories
+    @category_ids = @categories.collect{|categorie|
+      {
+        id: categorie.id,
+        childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
+      }
+    }
+
+    # design image
+    @image_lib1 = HomeImageLibPhoto.find_by_id(1)
+    @image_lib2 = HomeImageLibPhoto.find_by_id(2)
+    @image_lib3 = HomeImageLibPhoto.find_by_id(3)
+    @image_lib4 = HomeImageLibPhoto.find_by_id(4)
+    @image_lib5 = HomeImageLibPhoto.find_by_id(5)
+    @image_lib6 = HomeImageLibPhoto.find_by_id(6)
+    @image_lib7 = HomeImageLibPhoto.find_by_id(7)
+
+    # design show
+    @week_star = HomeDesignShow.design_type(1)
+    if @week_star.present?
+      @week_star_title = @week_star.position(0).last.title
+      @week_star_left = @week_star.position(1).last
+      @week_star_right1 = @week_star.position(2).last
+      @week_star_right2 = @week_star.position(3).last
+      @week_star_right3 = @week_star.position(4).last
+    end
+    @design_show = HomeDesignShow.design_type(2)
+    if @design_show.present?
+      @design_title = @design_show.position(0).last.title
+      @design_left = @design_show.position(1).last
+      @design_right1 = @design_show.position(2).last
+      @design_right2 = @design_show.position(3).last
+      @design_right3 = @design_show.position(4).last
+    end
+    @color_show = HomeDesignShow.design_type(3)
+    if @color_show.present?
+      @color_title = @color_show.position(0).last.title
+      @color_left = @color_show.position(1).last
+      @color_right1 = @color_show.position(2).last
+      @color_right2 = @color_show.position(3).last
+      @color_right3 = @color_show.position(4).last
+    end
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
