@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'new_relic/recipes'
-
+require 'hipchat/capistrano'
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :system
 
@@ -15,6 +15,9 @@ set :git_enable_submodules, 1
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/www/rails/icolor"
 set :keep_releases, 5
+set :hipchat_token, "4cbf6fde19410295cad3d202a87ade"
+set :hipchat_room_name, "Release House"
+set :hipchat_announce, false
 # set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
 
 namespace :deploy do
