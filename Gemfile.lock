@@ -137,6 +137,8 @@ GEM
     hashie (1.2.0)
     highline (1.6.12)
     hike (1.2.3)
+    hipchat (0.10.0)
+      httparty
     hirb (0.6.2)
     httmultiparty (0.3.6)
       httparty (>= 0.7.3)
@@ -364,6 +366,7 @@ DEPENDENCIES
   ekuseru
   exception_notification
   grape
+  hipchat
   hirb
   httmultiparty
   jquery-rails

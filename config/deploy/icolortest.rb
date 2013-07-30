@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'hipchat/capistrano'
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :system
 
@@ -15,7 +16,9 @@ set :keep_releases, 3
 set :deploy_to, "/home/www/rails/icolor"
 
 set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
-
+set :hipchat_token, "4cbf6fde19410295cad3d202a87ade"
+set :hipchat_room_name, "Release House"
+set :hipchat_announce, false
 namespace :deploy do
 
   # COMMET BELOW WHEN FRESH CAP
