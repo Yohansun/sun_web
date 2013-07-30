@@ -143,6 +143,19 @@ function init_monitor_link_click() {
         return newTriggerEBConversion(this, 341517);
     });
 
+    $('#monitor_link_346296').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "因爱之名-王丽坤-观看视频"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 346296);
+    });
+
     $('#monitor_link_326795').click(function() {
         try {
             CClicki[10008]._trackEvent({
