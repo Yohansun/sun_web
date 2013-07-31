@@ -17,6 +17,20 @@ $(document).ready(function(){
     }
 })
 
+//订阅电子期刊
+if ($(".subscribe")) {
+    $(".subscribe").click(function (event) {
+        <% if current_user -%>
+        o_in();
+        $('#july_last').show().find('input[type=text]').val('');
+        $('.subs_err').hide();
+        <% else -%>
+        show_login();
+        return false;
+        <% end -%>
+    });
+}
+
 <%- if user_signed_in? %>
     $('.js-user-info').html("<%= escape_javascript(render(:partial => "home_user-info")) %>");
     $('.navTop .login').hide();

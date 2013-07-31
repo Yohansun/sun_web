@@ -52,7 +52,7 @@ class HomeController < ApplicationController
     end
     @design_show = HomeDesignShow.design_type(2)
     if @design_show.present?
-      @design_title = @design_show.position(0).last.title
+      @design_title = @design_show.position(0).last.try(:title)
       @design_left = @design_show.position(1).last
       @design_right1 = @design_show.position(2).last
       @design_right2 = @design_show.position(3).last
@@ -60,7 +60,7 @@ class HomeController < ApplicationController
     end
     @color_show = HomeDesignShow.design_type(3)
     if @color_show.present?
-      @color_title = @color_show.position(0).last.title
+      @color_title = @color_show.position(0).last.try(:title)
       @color_left = @color_show.position(1).last
       @color_right1 = @color_show.position(2).last
       @color_right2 = @color_show.position(3).last

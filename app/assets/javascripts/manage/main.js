@@ -220,7 +220,11 @@ $(function(){
       close_all();
 		}
 		});
-
+    $('.js-close_btn').click(function(e){
+		e.preventDefault();
+		$('#overlay').fadeOut('fast');
+		$('.unlogin').hide();
+	});
 /*	$('a.subscribe').click(function(){
 		if($('.subs_suc').is(':visible'))return false;
 		o_in();
