@@ -57,9 +57,8 @@ class DesignImagesController < ApplicationController
       @color = @other_ids[2]
       @subject = @other_ids[3]
       @user_word = @search_word
-      @rank = @other_ids[4]
+      @rank = @other_ids[5]
     end
-
     @categories = ImageLibraryCategory.parent_categories
     @category_ids = @categories.collect{|categorie|
       {
