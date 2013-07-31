@@ -8,6 +8,12 @@ class HomeController < ApplicationController
   end
 
   def index
+    #首页KV
+    @home_kvs = HomeKv.includes(:kv_maps).order("position")
+
+    # 精华推荐
+    @home_recommends = HomeRecommend.order("position")
+
     # banner
     @owner_entry_banner = HomeBanner.find_by_banner_name "业主通道banner 290x200" 
     @footer_banner_one = HomeBanner.find_by_banner_name "底部大banner 670x85"
