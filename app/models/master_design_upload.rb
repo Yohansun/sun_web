@@ -2,7 +2,7 @@ class MasterDesignUpload < ActiveRecord::Base
   belongs_to :master_design
 
   has_attached_file :file, :styles => {:thumb => "105x97#", :slide => "550x365#",
-    :fullscreen => "980x655>", :interview => "153x184#",
+    :fullscreen => "980x655>", :interview => "153x184#", :home_slide => "145x125#",
     :mobile_slide => "320x206#",
     :mobile_fullscreen => "320x320#",
     :home_slide => "145x125#",
