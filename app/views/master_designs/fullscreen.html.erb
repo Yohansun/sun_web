@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>幻灯片</title>
+    <title>【<%=@master_design.design_name%>】【<%=@master_design.master_profile.try(:name) || @master_design.master_name%>】设计作品 - 立邦iColor</title>
     <meta charset="utf-8" />
     <%= stylesheet_link_tag  "reset","galleryc"  %>
     <%= javascript_include_tag  "jquery","galleryC"  %>
