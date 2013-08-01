@@ -1,7 +1,7 @@
 #encoding: utf-8
 module ApplicationHelper
 
-  BASE_TITLE = "立邦iColor装修设计鉴赏 | 设计师作品欣赏、访谈"
+  BASE_TITLE = "装修设计|如何装修|装修效果图大全2013图片  -  立邦iColor官方网站"
 
   def page_title
         #首页

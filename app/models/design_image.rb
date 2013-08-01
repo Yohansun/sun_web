@@ -16,6 +16,10 @@ class DesignImage < ActiveRecord::Base
   belongs_to :last_user, class_name: 'Admin', primary_key: 'id'
   belongs_to :design, :polymorphic => true,foreign_type: "imageable_type", foreign_key: 'imageable_id'
 
+  has_many :house_type, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 1}
+  has_many :acreages, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 28}
+  has_many :use, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 122}
+
   #所有标签
   has_many :all_tags    ,:through => :tags,:source => :image_library_category
   #图片风格
@@ -72,6 +76,18 @@ class DesignImage < ActiveRecord::Base
     if self.title_changed?
       set_pinyin!
     end
+  end
+
+  def house_type_names  
+    house_type.map(&:title).first
+  end
+
+  def acreages_names  
+    acreages.map(&:title).first
+  end
+
+  def use_names  
+    use.map(&:title).first
   end
 
   def design_style_names
