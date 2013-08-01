@@ -10,7 +10,11 @@ class StoryImage < ActiveRecord::Base
   has_many :spaces, :through => :tags,:source => :image_library_category,:conditions => {:parent_id => 82}
 
   has_attached_file :file,
-    :styles => {:slide => "680x353>",:list =>"203x146#", :baicheng_list => "201x145>", :baicheng_slide => "670x353>", :spring_img=>"373x261#", :thumb=>"83x58#"},
+    :styles => {:slide => "680x353>",:list =>"203x146#", :baicheng_list => "201x145>", 
+      :baicheng_slide => "670x353>", :spring_img=>"373x261#", :thumb=>"83x58#",
+      :mobile_baicheng_list => "146x104#",
+      :mobile_slide => "320x206#",
+      :mobile_fullscreen => "320x358#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
