@@ -1,5 +1,5 @@
 <%- content_for :tail do %>
-  <%= stylesheet_link_tag "point", "bootstrap.min", "datepicker", "bootstrap-timepicker" %>
+  <%= stylesheet_link_tag "bootstrap.min", "datepicker", "bootstrap-timepicker", "application", "point" %>
   <%= javascript_include_tag "LinkageSelect.js", "/location.js" %>
   <script type="text/javascript">
 
@@ -57,7 +57,7 @@
                 <fieldset class="clear ft12 mb15">
                   <label class="fl">购买产品的用户名：</label>
                   <input type="text" class="fl" name="name" id="name" />
-                  <%= submit_tag "用户名检测", data: { disable_with: "请等待..." }, class: "fl check_btn" %>
+                  <%= button_tag "用户名检测", data: { disable_with: "请等待..." }, class: "fl check_btn" %>
                 </fieldset>
               <% end %>
 
