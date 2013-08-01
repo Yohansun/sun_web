@@ -76,12 +76,12 @@
         <h5 class="sys_title"><span>积分兑换</span></h5>
         <p class="m020">
           <strong>
-            您目前的累计积分为<span class="cr">0</span>分，可用积分为<span class="cr">0</span>分。
-            <a href="#" class="cr" id="monitor_link_326846">点击兑换</a>
+            您目前的累计积分为<span class="cr"><%= @total_point %></span>分，可用积分为<span class="cr"><%= @user_total_point %></span>分。
+            <a href="<%= "/users/#{current_user.id}/points/exchange" %>" class="cr" id="monitor_link_326846" target="_blank">点击兑换</a>
           </strong>
         </p>
         <p class="text-right m020">
-          <strong><a href="#" class="cr" id="monitor_link_326847">产品购买积分兑换细则&gt;&gt;</a></strong>
+          <strong><a href="<%= "/users/#{current_user.id}/points" %>" class="cr" id="monitor_link_326847" target="_blank">产品购买积分兑换细则&gt;&gt;</a></strong>
         </p>
       </div>
     </div>

@@ -143,6 +143,11 @@ class Baicheng::StoriesController < ApplicationController
   def act
     if current_user.present?
       @story_users = StoryUser.story_ids(current_user.id) if current_user.present?
+
+      @total_point, @user_total_point = 0, 0
+      @total_point = PointUser.user_pass_total_points current_user.id
+      @user_total_point = PointUser.user_total_points current_user.id
+    
       render :act
     else
       redirect_to baicheng_root_path
