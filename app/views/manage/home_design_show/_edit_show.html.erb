@@ -78,10 +78,10 @@
         <div class="clearfix mt5">
           <label for="" class="pull-left control-label mr10">位置</label>
           <select name='position' class=' pull-left input-small'>
-            <option value=1>左1</option>
-            <option value=2>右1</option>
-            <option value=3>右2</option>
-            <option value=4>右3</option>
+            <option value=1 <%= "selected" if @home_design_show.position == 1 %>>左1</option>
+            <option value=2 <%= "selected" if @home_design_show.position == 2 %>>右1</option>
+            <option value=3 <%= "selected" if @home_design_show.position == 3 %>>右2</option>
+            <option value=4 <%= "selected" if @home_design_show.position == 4 %>>右3</option>
           </select>
         </div>
         <div class="clearfix mt5">

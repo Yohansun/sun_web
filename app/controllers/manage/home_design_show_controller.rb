@@ -42,20 +42,25 @@ class Manage::HomeDesignShowController < Manage::BaseController
   	design_id = params[:design_id]
     position = params[:position]
   	@home_design_show = HomeDesignShow.find_by_id(design_id)
-  	@home_design_show.url = params[:url]
-  	@home_design_show.vote = params[:vote]
-  	@home_design_show.position = position
-  	if @home_design_show.save
-  		@home_design_show_design_type = HomeDesignShow.find_or_create_by_position_and_design_type(0, @home_design_show.design_type)
-  		@home_design_show_design_type.title = title
-  		if @home_design_show_design_type.save
-				render :json => {:result => "success"}, :layout => false
-			else
-				render :text => '错误'
-			end
-		else
-			render :text => '错误'
-		end
+    @hds_count = HomeDesignShow.where(design_type: @home_design_show.design_type, position: position).count
+    if (@home_design_show.position.to_s == position.to_s) && @hds_count < 2
+    	@home_design_show.url = params[:url]
+    	@home_design_show.vote = params[:vote]
+    	@home_design_show.position = position
+    	if @home_design_show.save
+    		@home_design_show_design_type = HomeDesignShow.find_or_create_by_position_and_design_type(0, @home_design_show.design_type)
+    		@home_design_show_design_type.title = title
+    		if @home_design_show_design_type.save
+  				render :json => {:result => "success"}, :layout => false
+  			else
+  				render :text => '未保存成功'
+  			end
+  		else
+  			render :text => '未保存成功'
+  		end
+    else
+      render :text => '存在相同位置'
+    end
   end
 
   def destroy
