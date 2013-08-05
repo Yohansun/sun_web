@@ -20,6 +20,14 @@ private
       extension = File.extname(file_file_name).downcase
       self.file.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
     end
+
+    temp = self.file.queued_for_write[:original]
+    unless temp.nil?
+      geo = Paperclip::Geometry.from_file(temp)
+      self.image_width = geo.width
+      self.image_height = geo.height
+    end
+
   end
 
 end

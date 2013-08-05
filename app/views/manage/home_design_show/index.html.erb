@@ -42,12 +42,13 @@ $(function(){
 
 		var home_design_show_id = $(this).attr('home_design_show_id');
 		var design_type = $(this).attr('design_type');
+		var index_id = $(this).attr('index_id');
 
 		if ($.trim(home_design_show_id).length == 0) {
 			alert('错误,请重新选择');
 			return false;
 		} else {
-			$.post("/manage/home_design_show/edit",{home_design_show_id: home_design_show_id, design_type: design_type},function(result){
+			$.post("/manage/home_design_show/edit",{home_design_show_id: home_design_show_id, design_type: design_type, index_id: index_id},function(result){
 		    $('.edit_show').html(result);
 		  });
 		}
@@ -79,8 +80,7 @@ $(function(){
   </ul>
 </div>
 
-<div class="boder_white">
-已上传的图片
+<div class="boder_white">已上传的图片
 <span class="btn btn-small btn-primary fileinput-button">
     <i class="icon-plus icon-white"></i>
     <span>上传图片...</span>
@@ -101,24 +101,26 @@ $(function(){
     </tr>
   </thead>
   <tbody>
+  	<% index_id = 1 %>
   	<% @home_design_shows.each do |item| %>
 	    <tr>
 	      <td>
 	      	<img src="<%= item.file.url(:list_80x80) %>">
 	      </td>
 	      <td><%= item.file_file_name %></td>
-	      <td><%= show_dimensions item.position %></td>
+	      <td><%= "#{item.image_width}x#{item.image_height}" if item.image_width.present? %></td>
 	      <td><%= show_position item.position %></td>
 	      <td>
-	      <%= link_to("删除", home_design_show_destroy_path(id: item.id),
+	      <%= link_to("删除", home_design_show_destroy_path(id: item.id, design_type: @design_type),
                           :data => { :confirm => "你确定要删除?" },
                           :method => :delete,
                           :class => 'btn btn-link') %>
 	      </td>
 	      <td>
-	      	<%= link_to "编辑标签", "javascript:;", :id => "edit_tag", :home_design_show_id => item.id, :design_type => item.design_type, :class => 'btn btn-link' %>
+	      	<%= link_to "编辑标签", "javascript:;", :id => "edit_tag", :home_design_show_id => item.id, :index_id => index_id, :design_type => item.design_type, :class => "link#{index_id} btn btn-link" %>
 	      </td>
 	    </tr>
+	    <% index_id += 1 %>
 	  <% end %>
   </tbody>
 </table>
@@ -133,7 +135,7 @@ $(function(){
 <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
                               "upload_image/jquery.iframe-transport",
                               "upload_image/jquery.fileupload" %>
-<script>
+<script type="text/javascript">
 $(function () {
     var design_type = <%= @design_type %>;
     var url = 'home_design_show/create_image?design_type=' + design_type;
@@ -144,7 +146,11 @@ $(function () {
         maxNumberOfFiles: 1,
         maxFileSize: 5000000,
         done: function (e, data) {
+        	alert(data.result.notify);
         	window.location.href = "/manage/home_design_show?design_type=<%= @design_type %>";
+        },
+        error: function (e, data) {
+        	alert(data.result);
         }
     })
 });
