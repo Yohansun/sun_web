@@ -1,38 +1,35 @@
-<%- content_for :head do %>
-	<script type="text/javascript">
-		$(function() {
-			$('.js-edit_tags').hide();
-			$('.js-btn').click(function(){
-				$(this).parents('fieldset').hide();
-				$(this).parents('fieldset').siblings('fieldset').show();
-			})
+<script type="text/javascript">
+	$(function() {
+		$('.js-edit_tags').hide();
+		$('.js-btn').click(function(){
+			$(this).parents('fieldset').hide();
+			$(this).parents('fieldset').siblings('fieldset').show();
+		})
 
-			$('#tags form[data-redirect_url]').bind('ajax:success', function(evt, data) {
-				alert("保存成功");
-				var url = $(this).data('redirect_url');
-				window.location.href = url;
-			}).bind("ajax:error", function(evt, data) {
-				alert(data.responseText);
-			});
-
-			$('#tags #category').change(function(event) {
-				event.preventDefault();
-				var obj_category = this;
-
-				var category = $(this).val();
-				if ($.trim(category).length == 0) {
-					alert('错误,请重新选择');
-					return false;
-				} else {
-					$.post("edit_tag_list",{category: category},function(result){
-				    $(obj_category).parents().parents().find("div.edit_check").html(result);
-				  });
-				}
-			});
-
+		$('#tags form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+			alert("保存成功");
+			var url = $(this).data('redirect_url');
+			window.location.href = url;
+		}).bind("ajax:error", function(evt, data) {
+			alert(data.responseText);
 		});
-	</script>
-	<%- end %>
+
+		$('#tags #category').change(function(event) {
+			event.preventDefault();
+			var obj_category = this;
+			var category = $(this).val();
+			if ($.trim(category).length == 0) {
+				alert('错误,请重新选择');
+				return false;
+			} else {
+				$.post("edit_tag_list",{category: category},function(result){
+			    $(obj_category).parent().next().find(".edit_check").html(result);
+			  });
+			}
+		});
+
+	});
+</script>
 
 <div id="breadcrumbs">
   <ul class="breadcrumb">
@@ -52,6 +49,28 @@
 <div style="padding:15px;" id="tags">
 
 <% @tags.each do |tag| %>
+
+<script type="text/javascript">
+$(function() {
+	var voteMax = 6
+	// var voteMin = 3
+	var errorMsgMax = "最多能选" + voteMax + "个";
+	// var errorMsgMin = "最少能选" + voteMin + "个";
+	$("input:checkbox[id='category_id_<%= tag.id %>']").each(function(){
+	  $(this).click(function(){
+	    var checkNum = $("input:checkbox[id='category_id_<%= tag.id %>']:checked").length;
+	    if (checkNum > voteMax ) {
+	      $(this).attr("checked", false);
+	      alert(errorMsgMax);
+	    }
+	    //  else if(checkNum < voteMin ) {
+	    //   $(this).attr("checked","checked");
+	    //   alert(errorMsgMin);
+	    // }
+	  });
+	});
+});
+</script>
 
 <%= form_tag(create_tag_list_home_image_lib_index_url, :remote => true, :'data-redirect_url' => tags_home_image_lib_index_url) do %>
 <%= hidden_field_tag 'home_image_lib_tag_id', tag.id %>
@@ -75,7 +94,7 @@
 				<div class="span8 edit_check">
 					<% tag.category.children.each do |cate| %>
 						<div class="inline">
-							<%= check_box_tag 'category_ids[]', cate.id, tag.category_list.split(',').include?(cate.id.to_s), :class => 'checkbox' %>
+							<%= check_box_tag 'category_ids[]', cate.id, tag.category_list.split(',').include?(cate.id.to_s), :id => "category_id_#{tag.id}", :class => 'checkbox' %>
 							<label class="lbl" for="checkbox1"><%= cate.title %></label>
 						</div>
 					<% end %>
