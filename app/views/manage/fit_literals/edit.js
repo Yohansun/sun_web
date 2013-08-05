@@ -8,3 +8,6 @@ $(".literal_submit").click(function(){
   	return true;
   }
 });
+$(".inspect_fit_liter_link").click(function(){
+    window.open($(".liter_link").val());
+})

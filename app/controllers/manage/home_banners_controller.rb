@@ -1,12 +1,10 @@
+# encoding: utf-8
 class Manage::HomeBannersController < Manage::BaseController
   layout "manage"
   skip_before_filter :verify_authenticity_token, :only => [:create, :index]
   def index
     @banners = HomeBanner.order("id desc")
-    @banner_name = []
-    HomeBanner.find_each do |banners|
-      @banner_name << banners.banner_name
-    end
+    @banner_name = ["业主通道banner 290x200","精华推荐banner 270x100","底部大banner 670x85","底部小banner 310x85","大师殿堂banner 1000x85"]
   end
 
   def create

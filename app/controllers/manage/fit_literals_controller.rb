@@ -6,6 +6,7 @@ class Manage::FitLiteralsController < Manage::BaseController
 
   def edit
   	@new = FitLiteral.find params[:id]
+    @orders = [1,2,3,4,5,6]
   	render :edit
   end
 

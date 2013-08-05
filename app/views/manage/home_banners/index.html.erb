@@ -139,7 +139,7 @@
                       <option><%= banner.banner_name %></option>
                       <%= @banner_name.each do |banner_name| %>
                         <% unless banner_name == banner.banner_name %>
-                          <option>精华推荐banner 270x100</option>
+                          <option><%= banner_name %></option>
                         <% end %>
                       <% end %>
                     </select>
