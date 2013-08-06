@@ -43,7 +43,7 @@ class Manage::HomeDesignShowController < Manage::BaseController
     position = params[:position]
   	@home_design_show = HomeDesignShow.find_by_id(design_id)
     @hds_count = HomeDesignShow.where(design_type: @home_design_show.design_type, position: position).count
-    if (@home_design_show.position.to_s == position.to_s) && @hds_count < 2
+    if ((@home_design_show.position == -1) && (@hds_count == 0) ) || ((@home_design_show.position.to_s == position.to_s) && @hds_count < 2)
     	@home_design_show.url = params[:url]
     	@home_design_show.vote = params[:vote]
     	@home_design_show.position = position
