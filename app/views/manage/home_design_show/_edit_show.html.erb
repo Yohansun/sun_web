@@ -44,9 +44,12 @@
 </script>
 
 <style>
+#upload_image {
+  width: 900px;
+}
 .design_form .control-label{width:auto;}
 .form_edit{margin-top:20px;}
-/*.editarea{width:570px;}*/
+.editarea{width:500px;}
 .editarea .media{border-bottom:1px dotted #ddd;padding-bottom:20px;}
 .editarea .media:last-child{border:0;}
 /*.editarea img{width:150px;height:80px;}*/
@@ -59,7 +62,7 @@
 .showarea .img_small,.showarea .img_small img{width:80px;height:80px;}
 </style>
 
-<div class="span6" id="upload_image">
+<div id="upload_image">
 <%= form_tag('home_design_show/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/home_design_show?design_type=#{@design_type}") do %>
 <%= hidden_field_tag 'design_id', @home_design_show.id %>
 <h5>编辑信息</h5>
@@ -85,13 +88,13 @@
           </select>
         </div>
         <div class="clearfix mt5">
-          <label for="" class="control-label">链接</label>
+          <label for="" class="control-label" style="float:left;">链接</label>
           <input type="text" id="url" name="url" class="pull-left input-xlarge mr10" value="<%= @home_design_show.url %>">
           <p class="pull-left control-label" onclick="open_link();return false;" style="color:#0088CC;">检测链接</p>
         </div>
 
         <div class="clearfix mt5">
-          <label class="control-label">投票数</label>
+          <label class="control-label" style="float:left;">投票数</label>
           <div class="controls">
           <input type="text" id="vote" name="vote" class="input-mini" value="<%= @home_design_show.vote %>">
             <%= link_to "获取投票数", "javascript:void(0);", :id => "get_vote", :class => 'btn btn-link' %>
