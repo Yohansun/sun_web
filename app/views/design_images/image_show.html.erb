@@ -138,7 +138,7 @@ $(function(){
         <div class="slides_container">
           <div>
             <div class="img_vertical_align">
-                <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img", alt: @image.design.try(:title), title: @image.design.try(:title)) %>
+                <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
             </div>
           </div>
         </div>
