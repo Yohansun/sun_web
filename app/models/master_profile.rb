@@ -7,7 +7,7 @@ class MasterProfile < ActiveRecord::Base
   default_scope order("published_at DESC")
 
   has_attached_file :preview_img_in,
-    :styles => { :thumb => "80x80#", :original => "477x317#" },
+    :styles => { :thumb => "80x80#", :original => "477x317#", :home_img => "144x154#" },
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
