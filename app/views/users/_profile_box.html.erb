@@ -140,11 +140,11 @@ $(function(){
 <!--host_self ends-->
 <%- if current_user && current_user == @user %>
 <ul class="system_info group">
-  <%- unless current_user.role_name == "user" %>
-    <li class="icon_point">
-      <%= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank"}" %>
-    </li>
-  <%- end %>
+  <%#- unless current_user.role_name == "user" %>
+    <!-- <li class="icon_point"> -->
+      <%#= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank"}" %>
+    <!-- </li> -->
+  <%#- end %>
   <li class="icon_info">
     <%= link_to "系统消息#{"("+@user.sys_msgs.size.to_s+")" if @user.sys_msgs.size >0}", user_sys_msgs_path, :class => "#{'host_cur' if controller_name == "sys_msgs"}" %>
   </li>
