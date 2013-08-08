@@ -14,6 +14,9 @@ class Manage::HomeDesignShowController < Manage::BaseController
   	@home_design_show_title = HomeDesignShow.where(position: 0, design_type: @design_type).first
   	@title = @home_design_show_title.title if @home_design_show_title.present?
 
+    @design_type_next = @design_type.to_i + 1
+    @design_type_next = 1 if @design_type_next > 3
+
   	render :partial => "edit_show"
   end
 
