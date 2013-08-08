@@ -24,7 +24,7 @@ class DesignImage < ActiveRecord::Base
   has_many :all_tags    ,:through => :tags,:source => :image_library_category
   #图片风格
   has_many :image_styles,:through => :tags,:source => :image_library_category,:conditions => {:parent_id => 34}
-  
+
   #应用在channel_controller#access中
   scope :users,joins(:user).select("count(design_images.user_id) as ucount,design_images.id,design_images.user_id,design_images.created_at,design_images.file_file_name,design_images.file_updated_at").group(:user_id).order("design_images.updated_at desc")
 
@@ -37,7 +37,7 @@ class DesignImage < ActiveRecord::Base
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
 
   scope :from, where("design_images.created_at > (?)", "2013-3-1")
-  
+
 
   has_attached_file :file,
     :styles => {:thumb => "60x45#", :index => "291x315#", :list => "188x214#",
@@ -66,7 +66,7 @@ class DesignImage < ActiveRecord::Base
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
-    
+
 
     delegate :id,:to => :design, :allow_nil => true ,:prefix => true
 
@@ -75,21 +75,29 @@ class DesignImage < ActiveRecord::Base
   before_save :set_pinyin
   before_save :set_sort
 
+  def color_codes
+    code = []
+    code << ColorCode.find_by_code(color1)
+    code << ColorCode.find_by_code(color2)
+    code << ColorCode.find_by_code(color3)
+    code.compact
+  end
+
   def set_pinyin
     if self.title_changed?
       set_pinyin!
     end
   end
 
-  def house_type_names  
+  def house_type_names
     house_type.map(&:title).first
   end
 
-  def acreages_names  
+  def acreages_names
     acreages.map(&:title).first
   end
 
-  def use_names  
+  def use_names
     use.map(&:title).first
   end
 
