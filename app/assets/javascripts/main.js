@@ -36,7 +36,7 @@ function show_login(){
 	}
 function colors(){
 	$('#overlay').fadeIn('fast').children().show();
-}	
+}
 function close_all(){
 	$('.abs_center').hide();
 	o_out();
@@ -94,7 +94,7 @@ $(function(){
 
 	$('a.close_btn').click(close_all);
 	$('#overlay').click(close_all);
-	
+
 	$('body').keydown(function(e){
 		if(e.which == 27){
 			close_all();
@@ -122,12 +122,12 @@ $(function(){
 		return false;
 	});
 	$('.subs_suc :input').click(close_all);
-	
+
 	function isEmail(str){
        var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
        return reg.test(str);
 	}
-	
+
 /*form.check_valid*/
 	$('form.check_valid').submit(function(){
 		var $area = $(this).find('textarea');
@@ -138,7 +138,7 @@ $(function(){
 			return false;
 		}
 	});
-	
+
 });
 
 /*kv slides*/
@@ -295,14 +295,14 @@ $(function(){
 	var $topBin = $('.case_display');
 	var topW = $topBin.width();
 	var $topSlide = $('.case_container');
-	
+
 	var $ul = $('.case_list ul');
 	var $li = $ul.children('li');
 	var len = $li.length;
 	var _speed = 800;
 	var botW = 122;
 	var key = 0;
-	
+
 	function slide(arg){
 		if(!$topSlide.is(':animated'))
 		{
@@ -353,7 +353,7 @@ $(function(){
 		$(this).find('ul').show();
 	},function(){
 		$(this).find('ul').hide();
-		});	
+		});
 
 /*faq_ask*/
 
@@ -580,23 +580,23 @@ $(function(){
 		var num = $status.index(this);
 		$('.user_details').eq(num).show().siblings('.user_details').hide();
 	});
-	
-/*big_img*/	
+
+/*big_img*/
 	$('.big_image').hover(function(){
 		$(this).children('.pa').toggle();
 	})
-	
+
 /*float_ads*/
 	$('.shut_float').click(function(){
 		$(this).parent().hide();
 	})
-	
+
 /*qin_slide*/
 			qin_slide('#qin_slide1 ');
 			qin_slide('#qin_slide2 ');
 			qin_slide('#qin_slide3 ');
 			//qin_slide('#slide3 ');
-			
+
 /*over_text*/
 	var $over = $('.over_text');
 	var hh = $over.children('div').outerHeight();
@@ -626,14 +626,14 @@ $(function(){
 });
 
 			function qin_slide(ID){
-				
+
 				var page = 1;
 				var i = 3;
 				$(ID+'a.works_next').click(function(){
 					var $parent = $(this).parent('div.works_list_slide');
 					var $v_list = $parent.find('div.img_works_list');
 					var $v_box = $parent.children('div.img_works_box');
-					
+
 					var v_width = $v_box.width();
 					var len = $v_list.find('img').length;
 					var page_count = Math.ceil(len/i);
@@ -642,18 +642,18 @@ $(function(){
 						if(page == page_count){
 							$v_list.animate({'left':'0px'});
 							page = 1;
-							
+
 						}else{
 							$v_list.animate({'left':'-='+v_width});
 							page++;
 						}
-					}	
+					}
 				})
 				$(ID+'a.works_pre').click(function(){
 					var $parent = $(this).parent('div.works_list_slide');
 					var $v_list = $parent.find('div.img_works_list');
 					var $v_box = $parent.children('div.img_works_box');
-					
+
 					var v_width = $v_box.width();
 					var len = $v_list.find('img').length;
 					var page_count = Math.ceil(len/i);
@@ -661,23 +661,23 @@ $(function(){
 						if(page == 1){
 							$v_list.animate({left:'-='+v_width*(page_count-1)});
 							page = page_count;
-							
+
 						}else{
 							$v_list.animate({left:'+='+v_width});
 							page--;
 						}
 					}
 				})
-				
+
 				}
-				
-//转发				
+
+//转发
 $(function(){
 		/*$('span.zf').hover(function(){
 			$(this).parent('.p2').siblings('span.popup_zf').toggle();
 			$(this).siblings('span.popup_zf').toggle();
 			//$(this).siblings('div.popup_zf').toggle();
-			
+
 		})
 
 		$('.forward,.trans a').hover(function(){
@@ -741,7 +741,7 @@ $(function(){
 			}, 'fast');
 		});
 	}
-	
+
 /*user_email*/
 	$('#user_type').change(function(){
 		var target = $(this).children().last().text();
@@ -839,7 +839,7 @@ function reply_slideUp(remove_wrap){
 }
 $(function(){
 	//show reply textarea
-	$('.js-reply').click(function(){		
+	$('.js-reply').click(function(){
 		var img_reply2 = $(this).parents('.img_reply_item').children().hasClass('img_reply2');
 		if(img_reply2 == false){
 			reply_slideUp($('.img_reply2'))
@@ -860,7 +860,7 @@ $(function(){
 })
 
 $(function(){
-	$('.tab_content').children().hide().eq(0).show();
+	// $('.tab_content').children().hide().eq(0).show();
 	$('.tab_nav li').click(function(){
 		var index_num = $(this).index();
 		var $index_num_con = $('.tab_content').children('div[class^="tab_con"]').eq(index_num);
@@ -898,7 +898,7 @@ $(function(){
 	})
 
 
-	//point2 
+	//point2
 	$(function(){
 		//add exchange
 		$('.js-exchange_btn').on('click', function(e){
@@ -914,9 +914,9 @@ $(function(){
         return false;
       }
 
-			$('.js_checkall').append("<tr><td>" + 
+			$('.js_checkall').append("<tr><td>" +
 				"<input type='checkbox' class='js-checkbox' checked>" +
-				"<img src='" + ex_img_url + "'></td>" + 
+				"<img src='" + ex_img_url + "'></td>" +
 				"<td>" + ex_gift_name + "<input type='hidden' value='" + ex_gift_name + "' name='gift_name[]' id='gift_name'></td>" +
 				"<td class='tc js-unit_point'>" + ex_point + "分<input type='hidden' name='gift_point[]' id='gift_point' value='" + ex_point + "'></td>" +
 				"<td class='tc'><p class='ft12 change_num clear pb10'><a href='javascript:;' class='num_plus fr js_plus'></a><input name='gift_number[]' id='gift_number' class='num_input fr' type='text' value='" + ex_gift_num + "'><a href='javascript:;' class='num_minus fr js_minus'></a></p></td>" +
@@ -993,7 +993,7 @@ $(function(){
 			$(this).parents('tr').remove();
 			add();
 		});
-		
+
 		//options-checkbox all or none
 		$('.js_checkall').on('click','#checkall',function(){
 			$(this).parents('table').find('.js-checkbox').prop('checked',this.checked).trigger('change');
