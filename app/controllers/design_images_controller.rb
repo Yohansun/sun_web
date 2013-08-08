@@ -2,7 +2,7 @@
 
 # -*- encoding : utf-8 -*-
 class DesignImagesController < ApplicationController
-  caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
+  #caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
 
   def create
     newparams = coerce(params)
@@ -186,11 +186,6 @@ class DesignImagesController < ApplicationController
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
     @query_tags = @ilcs if @ilcs.present?
-
-    @image_colors = []
-    @design_images.each do |image|
-      @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
-    end
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
 

@@ -135,7 +135,7 @@
 	      $this.addClass('active_tit').siblings().removeClass();
 	      $form.eq(index).show().siblings().hide();
       });
-			
+
 			$toggle.click(function(){
 				var $this = $(this);
 				if($this.hasClass('form_expand')){
@@ -143,7 +143,7 @@
 					$.eraseCookie('expand');
 					document.cookie = "";
 					$.createCookie('expand', 1);
-					
+
 				} else {
 					$this.addClass('form_expand').text('展开').parent().addClass('form_mini');
 					$.eraseCookie('expand');
@@ -174,7 +174,7 @@
       });
 });
 
-  
+
   function search_sub(){
 	  var search = $("#search_query_value").val();
 	  if(search == "" || search == null){
@@ -237,7 +237,7 @@
 			<p>iColor为您提供<strong><%= @images_count %></strong>张装修图片</p>
 		</div>
 	</div><!-- imgbase_title -->
-        <div class="breadcrumb "> 
+        <div class="breadcrumb ">
           <p style="font-size:14px">
           <%= link_to '首页','/' %> > <%= link_to '装修图库','/images/0-0-0-0-0-0-0-0-0-0-all-0-0-0-_-0-0' %> <%=  ">#{DesignImage::TYPE[params[:imageable_type].to_sym]}" if params[:imageable_type]!='all' and params[:imageable_type].present? %>
           </p>
@@ -330,7 +330,7 @@
 						<%- end %>
 					<%- end %>
 				<%- end %>
-				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a> 
+				<a href="javascript:;" class="pa imgbase_toggle form_expand">展开</a>
 			</form><!-- tab_content -->
 		</div><!-- imgbase_forms -->
 	</div><!-- imgbase_main -->
@@ -417,7 +417,7 @@
 						<div class="desc" style="height: 35px; width: 560px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
 							<div class="list" style="height:35px;">
 								<ul class="group" style="overflow:hidden;">
-									<%- @image_colors.first.each do |color| %>
+									<%- @images.first.color_codes.each do |color| %>
 										<li>
 											<div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
 											<h5><%= color.name %></h5>
@@ -451,7 +451,7 @@
 								<a href="<%= user_design_path(@images.first.user_id, @images.first.imageable_id) %>" class="img_reply_btn check_imgs" target="_blank">
 									查看该套作品
 								</a>
-							
+
 						</span>
 						<span class="fl cl">
 							<strong>
@@ -490,12 +490,12 @@
          if params[:page].present? && params[:page].to_i != 0
           site = (params[:page].to_i - 1) * 11
          else
-          site =  0 * 11 
+          site =  0 * 11
          end
         %>
 				<%- @images.each_with_index do |image, index| %>
 					<li data-full="<%= image.id %>" data-view="<%= image.try(:view_count) %>" class="<%= 'imgbase_curr' if index == 0 %>">
-						
+
 						<a href="/images/<%=image.id%>_<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0 %>-<%= params[:search] ? params[:search] : '_' %>-<%=params[:all_tags] ? params[:all_tags] : 0%>-<%=site + (index + 1)%>" target="_blank">
 							<%= image_tag(image.file.url(:design_image_list), size: '224x162', alt: image.design.try(:title), title: image.design.try(:title)) %>
 							<p><%= truncate(image.design.try(:title), length: 15) %></p>
@@ -556,7 +556,7 @@
 								<div class="desc" style="height: 35px; width: 560px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none;">
 									<div class="list" style="height:35px;">
 										<ul class="group" style="overflow:hidden;">
-											<%- @image_colors[index].each do |color| %>
+											<%- image.color_codes.each do |color| %>
 												<li>
 													<%- background = color.rgb.blank? ? "background:url(/assets/color_code/' + color.code + '.png)" : "background-color: rgb(#{color.rgb})" -%>
 													<div class="colorblock" style="<%= background %>"></div>
