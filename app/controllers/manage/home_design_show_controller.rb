@@ -54,6 +54,14 @@ class Manage::HomeDesignShowController < Manage::BaseController
     		@home_design_show_design_type = HomeDesignShow.find_or_create_by_position_and_design_type(0, @home_design_show.design_type)
     		@home_design_show_design_type.title = title
     		if @home_design_show_design_type.save
+
+          Rails.cache.clear
+          system('redis-cli flushall')
+          home_index_page = "#{Rails.root.to_s}/public/index.html"
+          if File.exist?(home_index_page)
+            File.delete(home_index_page)
+          end
+
   				render :json => {:result => "success"}, :layout => false
   			else
   				render :text => '未保存成功'

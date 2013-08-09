@@ -4,23 +4,22 @@
     $('#upload_image form[data-redirect_url]').bind('ajax:success', function(evt, data) {
       alert("保存成功");
 
-      // var url = $(this).data('redirect_url');
-      var url = "/manage/home_design_show?design_type=<%= @design_type_next %>"
-
-      // if ($.trim(window.flag).length == 0) {
-      //   var i_id = <%= @index_id %>;
-      //   if ($.trim(i_id).length == 0) {
-      //     window.location.href = url;
-      //   } else {
-      //     var next_id = i_id + 1
-      //     if (next_id > 4) {
-      //       next_id = 1
-      //     }
-      //     $('.link' + next_id).click();
-      //   }
-      // } else {
+      if ($.trim(window.flag).length == 0) {
+        // var i_id = <%= @index_id %>;
+        // if ($.trim(i_id).length == 0) {
+          var url = "/manage/home_design_show?design_type=<%= @design_type_next %>"
+          window.location.href = url;
+        // } else {
+        //   var next_id = i_id + 1
+        //   if (next_id > 4) {
+        //     next_id = 1
+        //   }
+        //   $('.link' + next_id).click();
+        // }
+      } else {
+        var url = $(this).data('redirect_url');
         window.location.href = url;
-      // }
+      }
     }).bind("ajax:error", function(evt, data) {
       alert(data.responseText);
     });
@@ -40,7 +39,7 @@
   }
 
   function btn_save() {
-    // window.flag = 1; 
+    window.flag = 1; 
   }
 </script>
 
