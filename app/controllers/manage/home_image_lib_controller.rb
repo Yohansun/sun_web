@@ -23,9 +23,6 @@ class Manage::HomeImageLibController < Manage::BaseController
 		@home_image_lib_photo.vote = params[:vote] if params[:vote].present?
   	if @home_image_lib_photo.save
 
-      # 清缓存
-      system('redis-cli flushall')
-
   		if params[:file].present?
 				render :partial => "show_image"
 			else
@@ -56,6 +53,10 @@ class Manage::HomeImageLibController < Manage::BaseController
     	@tag.category_id = params[:category]
     	@tag.category_list = params[:category_ids].join(',')
     	if @tag.save
+        
+        # 清缓存
+        system('redis-cli flushall')
+
     	  render :json => {:result => "success"}, :layout => false
     	else
     		render :text => '错误，请返回'
