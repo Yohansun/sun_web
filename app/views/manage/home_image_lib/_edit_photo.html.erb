@@ -4,22 +4,22 @@
                               "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
 $(function () {
-  try {
-    var p_id = $('#photo_id').val();
-    var url = 'home_image_lib/upload_image?photo_id=' + p_id;
-      $('#fileupload').fileupload({
-          url: url,
-          dataType: 'html',
-          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-          maxNumberOfFiles: 1,
-          maxFileSize: 5000000,
-          start: function (e) {
-              // alert(123);
-          },
-          done: function (e, data) {
-            $('#show_image').html(data.result);
-          }
-      })
+    try {
+      var p_id = $('#photo_id').val();
+      var url = 'home_image_lib/upload_image?photo_id=' + p_id;
+        $('#fileupload').fileupload({
+            url: url,
+            dataType: 'html',
+            acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+            maxNumberOfFiles: 1,
+            maxFileSize: 5000000,
+            start: function (e) {
+                // alert(123);
+            },
+            done: function (e, data) {
+              $('#show_image').html(data.result);
+            }
+        })
     } catch (ex) {
         alert('upload:' + ex);
     }
