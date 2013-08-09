@@ -15,7 +15,6 @@ class Manage::HomeImageLibController < Manage::BaseController
   end
 
   def upload_image
-  	p params
   	photo_id =  params[:photo_id]
   	@home_image_lib_photo = HomeImageLibPhoto.find_by_id(photo_id)
 		@home_image_lib_photo.file = params[:file].tempfile if params[:file].present?
@@ -23,6 +22,10 @@ class Manage::HomeImageLibController < Manage::BaseController
 		@home_image_lib_photo.url = params[:url] if params[:url].present?
 		@home_image_lib_photo.vote = params[:vote] if params[:vote].present?
   	if @home_image_lib_photo.save
+
+      # 清缓存
+      system('redis-cli flushall')
+
   		if params[:file].present?
 				render :partial => "show_image"
 			else
