@@ -141,9 +141,9 @@ $(function(){
 <%- if current_user && current_user == @user %>
 <ul class="system_info group">
   <%- unless current_user.role_name == "user" %>
-    <li class="icon_point">
-      <%= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank"}" %>
-    </li>
+    <!-- <li class="icon_point"> -->
+      <%#= link_to "我的积分", user_rank_index_path, :class => "#{'host_cur' if controller_name == "rank"}" %>
+    <!-- </li> -->
   <%- end %>
   <li class="icon_record">
     <%= link_to "我的购买产品记录表", user_purchase_index_path, :class => "#{'host_cur' if controller_name == "purchase"}" %>
