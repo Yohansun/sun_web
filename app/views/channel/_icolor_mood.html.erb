@@ -2,7 +2,7 @@
   <%= form_tag "/users/#{ current_user ? current_user.id : 10 }/moods", id: "per_form", class: "exp-holder", multipart: true do |f| %>
     <h4 class="txt_tit">iColor心情</h4>
     <textarea id="J_t" name="mood[content]" class="mood_textarea"></textarea>
-
+    <input type="hidden" name="controller_name" value="channel">
     <ul class="moodbtn_group clear">
       <li class="fr btn_send">
         <%- if current_user %>
