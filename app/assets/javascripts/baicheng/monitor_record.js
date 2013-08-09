@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -8,7 +8,7 @@ $(function() {
 
 function newTriggerEBConversion(object, id) {
     var re = /#\w/;
-  
+
     mmConversionTag(id, object, $(object).attr('target') || '_self', $(object).attr('href'));
     return re.test($(object).attr('href')) ||   ($(object).prop("tagName") !=='A');
 }
@@ -330,7 +330,7 @@ function init_monitor_link_click() {
             ]
         });
         mmConversionTag(326808,this);
-        
+
     });
 
     $('#monitor_link_326809').click(function() {
@@ -801,6 +801,7 @@ function init_monitor_link_click() {
         return newTriggerEBConversion(this, 326848);
     });
 
+    //not used in upload_contract show
     $('#monitor_link_326849').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,

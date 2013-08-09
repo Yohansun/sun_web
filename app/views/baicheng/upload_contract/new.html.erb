@@ -58,17 +58,26 @@
           //$("#upload_going").show();
         },
         onUploadComplete: function() {
-          //$("#upload_going").hide();
+          CClicki[10008]._trackEvent({
+              type: 1,
+              labels: [
+                  {"按钮名称": "选择合同文件"}
+              ],
+              values: [
+                  {"数量": 1}
+              ]
+          });
+          return newTriggerEBConversion(this, 326849);
         }
       });
     });
     function remote(id) {
       $('#contract_image' + id).remove();
-     
+
     }
     function remove_image_all() {
          $('.upload_item').remove();
-       
+
     }
 
   </script>
@@ -94,7 +103,7 @@
           </div>
         </div>
         <p class="text-center">
-          <input type="submit" class="step3-submit" value="">
+          <input type="submit" class="step3-submit" id ='monitor_link_326850' value="">
         </p>
       <% end %>
       <div class="redline_b4 pad_t60"></div>
