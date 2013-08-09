@@ -4,8 +4,6 @@
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 require "capistrano/ext/multistage"       #多stage部署所需
 require 'bundler/capistrano'       #添加之后部署时会调用bundle install
-require 'tinder'
-
 
 set :stages, %w(production icolortest)
 set :default_stage, "production"
@@ -18,15 +16,12 @@ set :git_enable_submodules, 1
 #set :deploy_via, :remote_cache
 set :deploy_env, 'production'
 
-set :keep_releases, 15
+set :keep_releases, 5
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 set :deployer, `whoami`.chomp
-
-# before "deploy:update", "notify:campfire_start"
-# after "deploy:restart", "notify:campfire_end"
 
 desc "生成sitemap"
 task :refresh_sitemaps do
