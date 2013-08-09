@@ -18,12 +18,45 @@
     'bootstrap/ace-elements.min' %>
 
   <%= yield :head %>
+
+  <style>
+    select, 
+    textarea, 
+    input[type="text"], 
+    input[type="password"], 
+    input[type="datetime"], 
+    input[type="datetime-local"], 
+    input[type="date"], 
+    input[type="month"], 
+    input[type="time"], 
+    input[type="week"], 
+    input[type="number"], 
+    input[type="email"], 
+    input[type="url"], 
+    input[type="search"], 
+    input[type="tel"], 
+    input[type="color"], 
+    .uneditable-input{padding:2px 4px;height:18px;font:12px/18px "Microsoft Yahei";}
+    select, 
+    input[type="text"]{height:24px;line-height:24px;font-size:12px;}
+    input[type="file"]{height:24px;line-height:24px;font-size:12px;}
+    label, input, button, select, textarea{font-size:12px;}
+
+    .navbar .brand{font-size:13px;}/*去掉small标签*/
+    .btn-small{border-width:0;}
+    .tags_setting .btn-small{line-height: 30px;}
+    .nav{font-size:12px;}
+
+    .form-horizontal .control-label{padding-top:3px;font-size:12px;}
+    .widget-header h5,.widget-header h4{font:12px "Microsoft Yahei";}
+
+  </style>
 <body>
 
   <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a href="<%= manage_root_path(sort: 1) %>" class="brand"><small>2013新版icolor首页</small></a>
+          <a href="<%= manage_root_path(sort: 1) %>" class="brand">2013新版icolor首页</a>
 
           <ul class="nav ace-nav pull-right">
 

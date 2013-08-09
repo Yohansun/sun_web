@@ -1,15 +1,41 @@
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload" %>
+<script type="text/javascript">
+$(function () {
+  try {
+    var p_id = $('#photo_id').val();
+    var url = 'home_image_lib/upload_image?photo_id=' + p_id;
+      $('#fileupload').fileupload({
+          url: url,
+          dataType: 'html',
+          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 5000000,
+          start: function (e) {
+              // alert(123);
+          },
+          done: function (e, data) {
+            $('#show_image').html(data.result);
+          }
+      })
+    } catch (ex) {
+        alert('upload:' + ex);
+    }
+});
+</script>
 <script type="text/javascript">
 $(function(){
 
   $('#upload_image form[data-redirect_url]').bind('ajax:success', function(evt, data) {
     alert("保存成功");
-    var id = $(this).data('home_image_lib_photo_id');
-    if ($.trim(id).length == 0) {
+    var photo_id = $(this).data('home_image_lib_photo_id');
+    if ($.trim(photo_id).length == 0) {
       var url = $(this).data('redirect_url');
       window.location.href = url;
     } else {
-      var next_id = id + 1
+      var next_id = photo_id + 1
       if (next_id > 7) {
         next_id = 1
       }
@@ -88,22 +114,3 @@ function open_link() {
     </div>
   <% end %>
 </div>
-<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
-                              "upload_image/jquery.iframe-transport",
-                              "upload_image/jquery.fileupload" %>
-<script>
-$(function () {
-    var photo_id = $('#photo_id').val();
-    var url = 'home_image_lib/upload_image?photo_id=' + photo_id;
-    $('#fileupload').fileupload({
-        url: url,
-        dataType: 'html',
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles: 1,
-        maxFileSize: 5000000,
-        done: function (e, data) {
-          $('#show_image').html(data.result);
-        }
-    })
-});
-</script>

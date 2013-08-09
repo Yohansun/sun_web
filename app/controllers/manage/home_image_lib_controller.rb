@@ -48,14 +48,18 @@ class Manage::HomeImageLibController < Manage::BaseController
   def create_tag_list
   	home_image_lib_tag_id = params[:home_image_lib_tag_id]
   	category_ids = params[:category_ids]
-  	@tag = HomeImageLibTag.find_by_id(home_image_lib_tag_id)
-  	@tag.category_id = params[:category]
-  	@tag.category_list = params[:category_ids].join(',')
-  	if @tag.save
-  	  render :json => {:result => "success"}, :layout => false
-  	else
-  		render :text => '错误，请返回'
-  	end
+    if params[:category_ids].present?
+    	@tag = HomeImageLibTag.find_by_id(home_image_lib_tag_id)
+    	@tag.category_id = params[:category]
+    	@tag.category_list = params[:category_ids].join(',')
+    	if @tag.save
+    	  render :json => {:result => "success"}, :layout => false
+    	else
+    		render :text => '错误，请返回'
+    	end
+    else
+      render :text => "不能选择为空"
+    end
   end
 
   def search_vote
