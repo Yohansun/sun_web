@@ -1,53 +1,66 @@
-<div class="bottom_list fl">
-  <% company_with_designers = @companys.in_groups_of(4,false).zip(@designers.in_groups_of(2,false)) %>
-  <% row = -1;cell = 0%>
-  <% company_with_designers.each do |companys,designers|%>
-  <div class="<%= row += 1; row > 0 ? "list_page none" : "list_page" %>">
-    <dl class="fl">
-      <dt>热门家装公司推荐
-        <%= link_to "申请加入",new_user_registration_path  if current_user.blank?%>
-      </dt>
-
-      <% companys.each_with_index do |company,index| %>
-        <dd>
-          <%= link_to user_path(company) do %>
-            <%- if company.news_company_design %>
-              <%= image_tag(company.news_company_design.file.url(:list), :size =>"185x140") rescue ""%>
-            <%- end %>
-          <%- end %>
-
-        <h4><%= link_to company.display_name, user_path(company) %></h4>
-
-        <p><%= company.user_location %></p>
-        <%- if row == 0 && index == 0 %><div><img src="<%= asset_path 'channel/channel_tip_month.png' %>"></div><%- end %>
-      </dd>
-      <% end %>
-  </dl>
-
-   <dl class="fr">
-      <dt>热门设计师推荐<%= link_to "申请加入",new_user_registration_path  if current_user.blank?%></dt>
-
-      <% designers.each_with_index do |designer,index| %>
-        <dd>
-          <%= link_to user_path(designer) do %>
-            <%- if designer.news_personal_design %>
-              <%= image_tag(designer.news_personal_design.file.url(:list), :size =>"185x140") rescue ""%>
-            <%- end %>
-          <%- end %>
-
-          <h4><%= link_to designer.display_name, user_path(designer)%></h4>
-
-          <p><%= designer.user_location %></p>
-
-          <%- if row == 0 && index == 0  %><div><img src="<%= asset_path 'channel/channel_tip_week.png' %>"></div><%- end %>
-        </dd>
-      <% end %>
-  </dl>
-  </div>
-<% end %>
-
-  <p class="circle_pager fl">
-    <%- company_with_designers.count.times do |num| -%>
-    <a href="#" class="<%= "active" if num == 1 %>"></a>
-    <%- end -%>
-  </p>
+<% companies = @companys.in_groups_of(3,false) %>
+<div class="chann2_left pull-left">
+	<div><small>查看更多装修资讯 了解相关装修服务</small></div>
+	<hr class="border2 border2_mt2">
+	<div class="chann_warp">
+		<h5>热门家装公司推荐</h5>
+		<div id="" class="channel_slide slider-bin">
+			<div class="slider-container">
+				<ul class="unstyled lists_text clearfix">
+          <% companies.each do |companys| %>
+            <% companys.each do |company| %>
+    					<li class="">
+    						<a href="#" class="item_img">
+    							<%- if company.news_company_design %>
+                    <%= image_tag(company.news_company_design.file.url(:list), height: '115') rescue ""%>
+                  <%- end %>
+    							<i class="icon-star_of icon-star_month"></i>
+    						</a>
+    						<h6><%= link_to company.display_name, user_path(company) %></h6>
+    						<p><%= company.user_location %></p>
+    					</li>
+  					<% end %>
+          <% end %>
+				</ul>
+			</div>
+			<ul class="chann_indicators">
+        <% companies.count.times do |num| %>
+  				<li class="<%= "slider-active" if num == 0 %>"><a href="javascript:;">1</a></li>
+        <% end %>
+			</ul>
+		</div>
+    <% designers = @designers.in_groups_of(3,false) %>
+		<h5>热门设计师推荐</h5>
+		<div id="" class="channel_slide slider-bin">
+			<div class="slider-container">
+				<ul class="unstyled lists_text clearfix">
+          <% designers.each do |designy| %>
+            <% designy.each do |designer| %>
+    					<li class="">
+    						<a href="#" class="item_img">
+    							<%- if designer.news_personal_design %>
+                    <%= image_tag(designer.news_personal_design.file.url(:list), height: '115') rescue ""%>
+                  <%- end %>
+    							<i class="icon-star_of icon-star_month"></i>
+    						</a>
+    						<h6><%= link_to designer.display_name, user_path(designer)%></h6>
+    						<p><%= designer.user_location %></p>
+    					</li>
+            <% end %>
+					<% end %>
+				</ul>
+			</div>
+			<ul class="chann_indicators">
+        <% designers.count.times do |num| %>
+				  <li class="<%= "slider-active" if num == 0 %>"><a href="javascript:;">1</a></li>
+        <% end %>
+			</ul>
+		</div>
+		<div class="channel_passage clearfix">
+			<span class="pull-left">快速通道</span>
+			<a href="#">注册有礼</a>
+			<a href="/color_designs">色彩配搭</a>
+			<a href="#">图库专题精编</a>
+		</div>
+	</div>
+</div>

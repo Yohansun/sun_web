@@ -1,4 +1,22 @@
 $(function(){
+
+	;(function($){
+		//mood color
+		function hover_toggle (btnclass, sec){
+			$('[data-hover="hover_toggle"]').hide();
+			btnclass.on('mouseenter mouseleave', function(){
+				$(this).children('[data-hover="hover_toggle"]').toggle();
+			});
+			if(sec){
+				btnclass.find('a').on('click', function(){//console.log(sec)
+					var color_value = $(this).css('background-color');
+					$(this).parents('form').find('textarea').css('color', color_value);
+				});
+			};
+		};
+		hover_toggle($('.js_hovertoggle'))
+		hover_toggle($('.js_colors'), true)
+	})($);
 	//index imgbase
 	$('.imgbase_show a').hover(function(){
 		$(this).find('span:eq(1)').toggleClass('none')
@@ -51,7 +69,14 @@ $(function(){
 		$('#master_slide').slider({
 			pagers : false
 		});
+		$('.channel_slide').slider({
+			buttons : false,
+			auto : false,
+			scroll : 3,
+			pagers : '.chann_indicators'
+		});
 	})($);
+
 
 	// back top
 	;(function($){

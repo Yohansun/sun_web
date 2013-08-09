@@ -1,37 +1,35 @@
-<div class="chann_warp">
-  <a name="icolor_color"></a>
-  <h5>iColor心情</h5>
+<div id="bottom_mood" class="fr">
   <%= form_tag "/users/#{ current_user ? current_user.id : 10 }/moods", id: "per_form", class: "exp-holder", multipart: true do |f| %>
+    <h4 class="txt_tit">iColor心情</h4>
     <textarea id="J_t" name="mood[content]" class="mood_textarea"></textarea>
-    <ul class="moodbtn_group unstyled clearfix">
-      <li class="pull-right btn_send">
+
+    <ul class="moodbtn_group clear">
+      <li class="fr btn_send">
         <%- if current_user %>
           <button>发布</button>
         <%- else %>
+          <%#= link_to_function raw("<button>发布</button>"), "show_login()", :class =>"buttons" %>
           <button onclick="show_login();">发布</button>
         <%- end %>
       </li>
-      <!-- <li class="pull-right btn_public">
-        <span class="pull-left js_hovertoggle">公开
-          <i class="icon-mood icon-arrow-up"></i>
-          <ul class="unstyled" data-hover="hover_toggle">
-            <li class="active"><a href="javascript:;"><i class="icon-mood icon-public"></i>公开</a></li>
-            <li><a href="javascript:;"><i class="icon-mood icon-self"></i>私密</a></li>
-          </ul>
-        </span>
-      </li> -->
+      <li class="fr btn_public">
+        <!-- <span class="fl">公开</span> -->
+        <input type="hidden" id="is_privacy" name="mood[is_privacy]" value="true"/>
+        <!-- <i class="icon-arrow-up"></i> -->
+        <!-- <ul class="none">
+          <li class="active per_p"><a href="javascript:void(0)" data="true"><i class="icon-public"></i>公开</a></li>
+          <li  class="per_s"><a href="javascript:void(0)" data="false"><i class="icon-self"></i>私密</a></li>
+        </ul> -->
+      </li>
 
-      <input type="hidden" id="is_privacy" name="mood[is_privacy]" value="true"/>
       <input type="hidden" id="color_code" name="mood[color_code]"/>
       <input type="hidden" id="color_name" name="mood[color_name]"/>
       <input type="hidden" id="font_color" name="mood[font_color]"/>
-      <input type="hidden" id="controller_name" name="controller_name" value="channel">
 
-      <li class="pull-left btn_mood js_colors">
-        <i class="icon-mood icon-color_mood"></i>
-        色彩心情
-        <ul class="color_mood_options unstyled clearfix" data-hover="hover_toggle">
-           <li><a style="background-color:#0e8752" data="0e8752"  data-name="墨绿色" data-code="GA5000-1" href="javascript:void(0)"></a></li>
+      <li class="fl btn_mood">
+        <i class="icon-color_mood"></i>色彩心情
+        <ul class="color_mood_options clear">
+          <li><a style="background-color:#0e8752" data="0e8752"  data-name="墨绿色" data-code="GA5000-1" href="javascript:void(0)"></a></li>
           <li><a style="background-color:#8e8e8e" data="8e8e8e"  data-name="灰色"   data-code="NN7860-4" href="javascript:void(0)"></a></li>
           <li><a style="background-color:#a49fff" data="a49fff"  data-name="紫色"   data-code="BN0006-2" href="javascript:void(0)"></a></li>
           <li><a style="background-color:#ffad85" data="ffad85"  data-name="白色"   data-code="OW038-4" href="javascript:void(0)"></a></li>
@@ -45,40 +43,50 @@
           <li><a style="background-color:#5be71d" data="5be71d" data-name="绿色"  data-code="GA4000-1" href="javascript:void(0)"></a></li>
         </ul>
       </li>
-      <li class="pull-left exp-block-trigger" id="J_sbt">
-        <i class="icon-mood icon-face"></i>
-        表情
+      <li class="fl exp-block-trigger" id="J_sbt">
+        <i class="icon-face"></i>表情
       </li>
-      <li class="pull-left btn_pictures">
-        <span><i class="icon-mood icon-pic"></i>图片</span>
+      <li class="fl btn_pictures">
+        <span><i class="icon-pic"></i>图片</span>
         <%= file_field_tag 'mood[img]'%>
       </li>
     </ul>
-  <% end %><!-- bottom_mood end -->
-  <ul class="mood_list unstyled">
-     <%- @moods.each do |m| %>
+    <!-- <i class="icon-public"></i>
+    <i class="icon-self"></i>
+    <i class="icon-color_mood"></i>
+    <i class="icon-face"></i>
+    <i class="icon-pic"></i> -->
+  <%- end %><!-- bottom_mood end -->
+  <ul class="mood_list">
+    <%- @moods.each do |m| %>
       <%- if m.present? %>
         <%- img = m.img.url if m.img.exists?(:original) -%>
-
         <li>
           <strong><%= m.user.display_name %></strong>
           <p style="color:#<%= m.font_color %>;" class="J_resulte"><%= m.content %></p>
           <%- if img %>
             <p><%= image_tag m.img.url(:thumb) %></p>
           <%- end %>
-          <span><a class="pull-right" href="javascript:;">转发(<%= m.shares_count %>)</a><%= forward_links("#{m.content}", user_moods_url("#{current_user ? current_user.id : 10}"), m.img.url, m.id.to_s, "Mood") %>
-            <%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %></span>
+          <span>
+            <a class="fr" href="javascript:;">转发(<%= m.shares_count %>)</a>
+            <%= forward_links("#{m.content}", user_moods_url("#{current_user ? current_user.id : 10}"), m.img.url, m.id.to_s, "Mood") %>
+            <%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %>
+          </span>
         </li>
-      <% end %>
+      <%- end %>
     <%- end %>
   </ul>
-  <% if current_user %>
-    <div class="link_mood">
-      <a href="/users/<%=current_user.id%>/moods" class="a_hover_red">去我的iColor心情>></a>
-    </div>
-  <% end %>
+  <!-- <div class="pager ft12">
+    <a class="prev" href="#"><span></span>上一页</a>
+    <a href="#">1</a>
+    <a href="#" class="current">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">...</a>
+    <a href="#">20</a>
+    <a class="next" href="#">下一页<span></span></a>
+  </div> -->
 </div>
-
 <%- content_for :tail do %>
   <script type="text/javascript">
     $(function () {

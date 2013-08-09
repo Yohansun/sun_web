@@ -12,7 +12,6 @@ $.fn.slider = function(config){
             pagers : true,                  // 显示翻页
             pagerText : 'number',           // 翻页文本
             auto : true,                    // 自动滚动
-            pause : true,                   // 悬浮暂停
             mouse : 'click',                // 触发事件
             duration : 4000,                // 间隔时间
             speed : 800,                    // 滚动速度
@@ -25,9 +24,9 @@ $.fn.slider = function(config){
             ul = bin.find('ul'),
             li = ul.find('li'),
             pages = Math.ceil(li.length / config.scroll),
-            len = bin.width() / li.width(),
+            len = bin.width() / li.outerWidth(),
             odd = li.length % config.scroll,
-            width = li.width() * config.scroll,
+            width = li.outerWidth() * config.scroll,
             pager = 1,
             pag = '',
             prev = '',
@@ -47,7 +46,7 @@ $.fn.slider = function(config){
                 pag.append(pagli + '</ul>');
             } else {
                 pag = that.find(config.pagers);
-            }
+            }           
             pag.on(config.mouse, 'li', function(e){
                 play($(this).index() + 1, e);
             });
@@ -76,7 +75,7 @@ $.fn.slider = function(config){
         function play(num, e){
             if(num == 0) {
                 ul.css('left', - width * pages).stop(true).animate({
-                    'left' : '+=' + width
+                    'left' : '+=' + width 
                 }, config.speed, config.easing);
                 pager = pages;
             } else if(num > pages + 1){
@@ -102,7 +101,7 @@ $.fn.slider = function(config){
         var sliding;
         if(config.auto){
             that.hover(function(){
-                config.pause && clearInterval(sliding);
+                clearInterval(sliding);
             }, function(){
                 clearInterval(sliding);
                 sliding = setInterval(function(){
