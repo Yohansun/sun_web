@@ -45,7 +45,7 @@
 
 <style>
 #upload_image {
-  width: 900px;
+  /*width: 900px;*/
 }
 .design_form .control-label{width:auto;}
 .form_edit{margin-top:20px;}
@@ -65,50 +65,50 @@
 <div id="upload_image">
 <%= form_tag('home_design_show/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/home_design_show?design_type=#{@design_type}") do %>
 <%= hidden_field_tag 'design_id', @home_design_show.id %>
-<h5>编辑信息</h5>
-<div class="clearfix">
-  <label for="" class="pull-left control-label mr10">标题</label>
-  <input type="text" id="title" name="title" class="pull-left input-xlarge mr10" value="<%= @title %>" data-maxlength=11 maxlength=11 />
-  <p class="pull-left control-label text-error">标题最多输入11个汉字</p>
+<!-- <h5>编辑信息</h5> -->
+<div class="clearfix form-inline">
+  <label for="" class="control-label">标题</label>
+  <input type="text" id="title" name="title" class="input-xlarge" value="<%= @title %>" data-maxlength=11 maxlength=11 />
+  <span class="help-inline text-error">标题最多输入11个汉字</span>
 </div>
 <div class="clearfix form_edit">
-  <div class="pull-left editarea">
+  <div class="editarea">
     <div class="media">
-      <a class="pull-left" href="#">
+      <!-- <a class="pull-left" href="#">
         <img src="<%= @home_design_show.file.url(:list_80x80) %>" alt="">
-      </a>
+      </a> -->
       <div class="media-body">
-        <div class="clearfix mt5">
-          <label for="" class="pull-left control-label mr10">位置</label>
-          <select name='position' class=' pull-left input-small'>
+        <p class="form-inline">
+          <label for="" class="control-label">位置</label>
+          <select name='position' class='input-small'>
             <option value=1 <%= "selected" if @home_design_show.position == 1 %>>左1</option>
             <option value=2 <%= "selected" if @home_design_show.position == 2 %>>右1</option>
             <option value=3 <%= "selected" if @home_design_show.position == 3 %>>右2</option>
             <option value=4 <%= "selected" if @home_design_show.position == 4 %>>右3</option>
           </select>
-        </div>
-        <div class="clearfix mt5">
-          <label for="" class="control-label" style="float:left;">链接</label>
-          <input type="text" id="url" name="url" class="pull-left input-xlarge mr10" value="<%= @home_design_show.url %>">
-          <p class="pull-left control-label" onclick="open_link();return false;" style="color:#0088CC;">检测链接</p>
-        </div>
-
-        <div class="clearfix mt5">
-          <label class="control-label" style="float:left;">投票数</label>
-          <div class="controls">
-          <input type="text" id="vote" name="vote" class="input-mini" value="<%= @home_design_show.vote %>">
-            <%= link_to "获取投票数", "javascript:void(0);", :id => "get_vote", :class => 'btn btn-link' %>
-          </div>
-        </div>
-
+          <label class="control-label">投票数</label>
+          <!-- <div class="controls"> -->
+          	<input type="text" id="vote" name="vote" class="input-mini" value="<%= @home_design_show.vote %>">
+          	<%= link_to "获取投票数", "javascript:void(0);", :id => "get_vote", :class => 'btn btn-link' %>
+          <!-- </div> -->
+        </p>
+        <p class="form-inline">
+          <label for="" class="control-label">链接</label>
+          <input type="text" id="url" name="url" class="input-xlarge" value="<%= @home_design_show.url %>">
+          <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测链接</a>
+        </p>
+        <p class="form-inline">
+        	<%= submit_tag "保存", :id => 'save', :onclick => "return btn_save();", data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+        	<%= submit_tag "保存并跳转到下一栏", :id => 'next_save', data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+        </p>
       </div>
     </div>
-    <div class="media">
+    <!-- <div class="media">
     </div>
     <div class="media">
-    </div>
+    </div> -->
   </div>
-  <div class="pull-right showarea">
+  <div class="showarea">
     <a class="pull-left img_big" href="javascript:;">
       <span>左一 200x260</span>
       <!-- <img src="images/gallery/image-2.jpg" alt=""> -->
@@ -127,10 +127,6 @@
     </a>
   </div>
 </div>
-
-<%= submit_tag "保存", :id => 'save', :onclick => "return btn_save();", data: { disable_with: "请等待..." }, :class => 'btn btn-large btn-primary' %>
-<%= submit_tag "保存并跳转到下一栏", :id => 'next_save', data: { disable_with: "请等待..." }, :class => 'btn btn-large btn-primary' %>
-
 <% end %>
 </div>
 

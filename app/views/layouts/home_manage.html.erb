@@ -93,19 +93,27 @@
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>
           </li>
+          <li class="">
+            <a href="#" target="_blank">刷新生活</a>
+            <ul class="subnav">
+              <li><a href="#">爱生活新开始</a></li>
+              <li><a href="/art">漆光艺彩</a></li>
+              <li><a href="/channel/refresh_service">刷新服务</a></li>
+            </ul>
+          </li>
           <li class="<%= 'active noborder' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">
             <a href="/master_interviews" target="_blank" >大师殿堂</a>
             <ul class="subnav">
-              <li>
-                <%= link_to "大师访谈", "/master_interviews", :class => ('active noborder' if controller_name == 'master_interviews') %>
-              </li>
-              <li>
-                <%= link_to "大师作品", "/master_designs", :class => ('active noborder' if controller_name == 'master_designs') %>
-              </li>
+              <li><a href="/master_interviews/all/shinei">室内空间大师</a></li>
+              <li><a href="/master_interviews/all/color">色彩大师</a></li>
             </ul>
           </li>
           <li class="<%= 'active noborder' if controller_name == 'design_images' %>">
             <a href="/images" target="_blank">装修图库</a>
+              <ul class="subnav">
+                <li><a href="#">图库首页</a></li>
+                <li><a href="#">图库专题</a></li>
+              </ul>
           </li>
           <li class="<%= 'active noborder' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations' %>">
             <a href="/weekly_stars" target="_blank">设计鉴赏</a>
@@ -130,7 +138,7 @@
               <li><%= link_to "设计快查", "/channel/access", :class => "#{'active noborder' if controller_name == 'channel'}" %></li>
               <li><%= link_to "装修贴士", "/faqs" %></li>
               <li><%= link_to "配色咨询", "/mix_colors/new", :class => "#{'active noborder' if controller_name == 'mix_colors'}" %></li>
-              <li><%= link_to "刷新服务", "/channel/refresh_service", :class => "#{'active noborder' if controller_name == 'channel' && action_name == 'refresh_service'}" %></li>
+              <!-- <li><%= link_to "刷新服务", "/channel/refresh_service", :class => "#{'active noborder' if controller_name == 'channel' && action_name == 'refresh_service'}" %></li> -->
             </ul>
           </li>
           <li class="<%= 'active noborder' if controller_name == 'articles' || controller_name == 'color_articles' || controller_name == 'master_topics' %>" >
@@ -148,13 +156,13 @@
               <li><%= link_to "配色软件", "/softwares/tools", :class => "#{'active noborder' if controller_name == 'softwares' && action_name == 'tools'}" %></li>
             </ul>
           </li>
-          <li class="<%= 'active noborder' if controller_name == 'function' %>" >
+          <!-- <li class="<%= 'active noborder' if controller_name == 'function' %>" >
             <a href="/art" target="_blank">漆光艺彩</a>
             <ul class="subnav">
               <li><%= link_to "米兰诺艺术效果", "/art", :class => "#{'active noborder' if controller_name == 'function' && action_name == 'art'}" %></li>
               <li><%= link_to "木纹风尚生活", "/7-1", :class => "#{'active noborder' if controller_name == 'function' && action_name == '7-1'}" %></li>
             </ul>
-          </li>
+          </li> -->
           <li class="w112">
             <a href="/designer_events" class="<%= 'active noborder' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts' %>" target="_blank">精彩活动</a>
             <ul class="subnav">
@@ -172,14 +180,23 @@
     <div class="home_footer">
       <ul class="index_main index_map clearfix">
         <li>
+          <i class="icon-map icon-map9"></i>
+          <a href="#"><strong>刷新生活</strong></a>
+          <a href="#">爱生活新开始</a>
+          <a href="/art">漆光艺彩</a>
+          <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a>
+        </li>
+        <li>
           <i class="icon-map icon-map1"></i>
           <a href="/master_interviews"><strong>大师殿堂</strong></a>
-          <a href="/master_interviews">大师访谈</a>
-          <a href="/master_designs">大师作品</a>
+          <a href="/master_interviews/all/shinei">室内空间大师</a>
+          <a href="/master_interviews/all/color">色彩大师</a>
         </li>
         <li>
           <i class="icon-map icon-map2"></i>
           <a href="/images"><strong>装修图库</strong></a>
+          <a href="/images">家装设计</a>
+          <a href="/images">装修部件</a>
         </li>
         <li>
           <i class="icon-map icon-map3"></i>
@@ -195,7 +212,6 @@
           <a href="/channel/access">设计快查</a>
           <a href="/faqs">装修贴士</a>
           <a href="/mix_colors/new<%= link_suffix %>">配色咨询</a>
-          <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a>
         </li>
         <li>
           <i class="icon-map icon-map5"></i>
@@ -210,12 +226,12 @@
           <a href="/softwares/case">案例下载</a>
           <a href="/softwares/tools">配色软件</a>
         </li>
-        <li>
+        <!-- <li>
           <i class="icon-map icon-map7"></i>
           <a href="/art"><strong>漆光艺彩</strong></a>
           <a href="/art">米兰诺艺术效果</a>
           <a href="/7-1">木纹风尚生活</a>
-        </li>
+        </li> -->
         <li>
           <i class="icon-map icon-map8"></i>
           <a href="/designer_events"><strong>精彩活动</strong></a>

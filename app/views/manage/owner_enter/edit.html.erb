@@ -32,34 +32,38 @@
     });
   </script>
 <%- end %>
-<%= form_for @new do |f| %>
-  <div class="clearfix">
-    <p class="span2" style="width:50px;margin-top: 6px;">排序</p>
-    <select name="new">
-      <% if @new.order_id == 1 %>
-        <option>1</option>
-        <option>2</option>
-      <% else %>
-        <option>2</option>
-        <option>1</option>
-      <% end %>
-    </select>
-  </div>
-  <div class="clearfix">
-    <p class="span2" style="width:50px;margin-top: 6px;">标题</p>
-    <input class="span2 input-large title" id="prependedInput" type="text" name="title" value="<%= @new.try(:title) %>">
-  </div>
-  <div class="clearfix">
-    <p class="span2" style="width:50px;margin-top: 6px;">内容</p>
-    <textarea rows="3" name="content" class="content"><%= @new.try(:content) %></textarea>
-  </div>
-  <div class="clearfix">
-    <p class="span2" style="width:50px;margin-top: 6px;">链接</p>
-    <input class="span2 input-large link" id="prependedInput" type="text" value="<%= @new.try(:link) %>" name="link">
-    <a href="javascript:;" class="inspect_owner_enter">检测链接</a>
-    <input style="margin-top: -8px;margin-left: 176px;" type="submit" class="owner_enter_submit" value="保存">
-    <a href="/manage/owner_enter  " style="margin-top: -8px;margin-left: 10px;margin-right:10px;">取消</a>
-    <a href="#" class="clear">清空</a>
-    <input type="hidden" name="current_id" value="<%= @new.order_id %>" >
-  </div>
-<% end %>
+<div class="container-fluid">
+  <%= form_for @new do |f| %>
+    <p class="form-inline mt30">
+      <label class="control-label">排序</label>
+      <select name="new">
+        <% if @new.order_id == 1 %>
+          <option>1</option>
+          <option>2</option>
+        <% else %>
+          <option>2</option>
+          <option>1</option>
+        <% end %>
+      </select>
+    </p>
+    <p class="form-inline">
+      <label class="control-label">标题</label>
+      <input class="input-large title" id="prependedInput" type="text" name="title" value="<%= @new.try(:title) %>">
+    </p>
+    <p class="form-inline">
+      <label class="control-label">内容</label>
+      <textarea rows="3" name="content" class="content"><%= @new.try(:content) %></textarea>
+    </p>
+    <p class="form-inline">
+      <label class="control-label">链接</label>
+      <input class="input-large link" id="prependedInput" type="text" value="<%= @new.try(:link) %>" name="link">
+      <a href="javascript:;" class="inspect_owner_enter">检测链接</a>
+    </p>
+    <p>
+      <input type="submit" class="owner_enter_submit btn btn-small btn-primary" value="保存">
+      <a href="/manage/owner_enter  " class="btn btn-link">取消</a>
+      <a href="#" class="clear btn btn-link">清空</a>
+      <input type="hidden" name="current_id" value="<%= @new.order_id %>" >
+    </p>
+  <% end %>
+</div>

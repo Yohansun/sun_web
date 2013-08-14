@@ -37,19 +37,20 @@
     input[type="tel"], 
     input[type="color"], 
     .uneditable-input{padding:2px 4px;height:18px;font:12px/18px "Microsoft Yahei";}
-    select, 
-    input[type="text"]{height:24px;line-height:24px;font-size:12px;}
+    select{height:24px;line-height:24px;font-size:12px;}
     input[type="file"]{height:24px;line-height:24px;font-size:12px;}
     label, input, button, select, textarea{font-size:12px;}
 
     .navbar .brand{font-size:13px;}/*去掉small标签*/
     .btn-small{border-width:0;}
-    .tags_setting .btn-small{line-height: 30px;}
+    /*.tags_setting .btn-small{line-height: 30px;}*/
     .nav{font-size:12px;}
-
+    .nom{margin:0!important;}
+    .mt30{margin-top:30px;}
     .form-horizontal .control-label{padding-top:3px;font-size:12px;}
     .widget-header h5,.widget-header h4{font:12px "Microsoft Yahei";}
-
+    .input-prepend .add-on{padding:1px 5px;font-size:12px;}
+    .btn{font-size:12px!important;text-align:center;vertical-align:middle;}
   </style>
 <body>
 
@@ -124,10 +125,141 @@
       </ul>
     <% end %>        
   </div>
-</div>
 
-  <%= yield %>
 
+  <div class="container-fluid" id="main-container">
+      <a id="menu-toggler" href="#">
+        <span></span>
+      </a>
+
+      <div id="sidebar">
+        <h5 id="sidebar-shortcuts" class="nom">2013新版icolor</h5>
+
+        <ul class="nav nav-list">
+          <li class="active">
+            <a href="/manage?sort=1">
+              <i class="icon-dashboard"></i>
+              <span>首页</span>
+            </a>
+          </li>
+<!--           <li>
+            <a href="#" class="dropdown-toggle">
+              <i class="icon-desktop"></i>
+              <span>站点结构</span>
+
+              <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+              <li>
+                <a href="elements.html">
+                  <i class="icon-double-angle-right"></i>
+                  全部结构
+                </a>
+              </li>
+
+              <li>
+                <a href="buttons.html">
+                  <i class="icon-double-angle-right"></i>
+                  行业资讯
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  装修资讯
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  大师访谈
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  大师话题
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  大师作品
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  一周小贴士
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  色彩配搭
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  每周之星
+                </a>
+              </li>
+
+              <li>
+                <a href="treeview.html">
+                  <i class="icon-double-angle-right"></i>
+                  获奖名单
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="tables.html">
+              <i class="icon-list"></i>
+              <span>站点设置</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="dropdown-toggle">
+              <i class="icon-edit"></i>
+              <span>广告管理</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="widgets.html">
+              <i class="icon-list-alt"></i>
+              <span>扩展功能</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="calendar.html">
+              <i class="icon-calendar"></i>
+              <span>百城</span>
+            </a>
+          </li> -->
+        </ul><!--/.nav-list-->
+
+        <div id="sidebar-collapse">
+          <i class="icon-double-angle-left"></i>
+        </div>
+      </div>
+      <div id="main-content" class="clearfix">
+        <%= yield %>
+      </div>
+   </div>     
   <%= yield :tail %>
 </body>
 </html>

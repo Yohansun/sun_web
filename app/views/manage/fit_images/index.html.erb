@@ -115,13 +115,16 @@
   
   </script>
  <% end %>
-<div class="clearfix" style="margin-left: 64px;margin-bottom: 20px;">
-  <span><a href="fit_images">图片咨询</a>|<a href="fit_literals">文字资讯</a></span>
+<div id="breadcrumbs">
+ <ul class="breadcrumb">
+  <li><a href="fit_images">图片资讯</a><span>|</span></li>
+  <li><a href="fit_literals">文字资讯</a></li>
+ </ul>
 </div>
 <div class="container-fluid">
-	<div class="container">
+	<!-- <div class="container"> -->
       <%#= form_for @fit_image, :class=>"refresh-form ft12", :onsubmit=>"return form_valid()" do |f| %>
-			<%= form_tag(fit_images_path, :class=>"refresh-form ft12", :onsubmit=>"return form_valid()") do %>
+			<%= form_tag(fit_images_path, :class=>"refresh-form ft12 mt30", :onsubmit=>"return form_valid()") do %>
 			<div class="refresh-control">
 				<div class="form-article">
           <div class="clearfix" style="margin-left: -25px;">
@@ -164,9 +167,9 @@
 					</p>
 				</div>
 			</div>
-			<p class="text-right">
+			<p>
 				<input type="hidden" name="story_id" value="<%=params[:id]%>">
-				<input type="submit" class="fit_btn" value="保存" id='monitor_link_326820'>
+				<input type="submit" class="fit_btn btn btn-small btn-primary" value="保存" id='monitor_link_326820'>
 			</p>
       <!-- <div class="step2-area text-right" style="height:2500px;">
         <div class="load-bar load-content" id="uploads_big">
@@ -174,5 +177,5 @@
       </div> -->
 			<% end %>
 		<!-- </form> -->
-	</div>
+	<!-- </div> -->
 </div>

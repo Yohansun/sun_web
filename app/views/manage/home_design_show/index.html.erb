@@ -1,10 +1,9 @@
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
 <style type="text/css">
 	.boder_white {
-		padding: 20px;
+		padding: 20px 0;
 	}
 	.w1170{width:1170px!important;}
-	.nom{margin:0!important;}
 	.bs-docs-example {
 		  position: relative;
 		  margin: 15px 0;
@@ -31,6 +30,9 @@
 		     -moz-border-radius: 4px 0 4px 0;
 		          border-radius: 4px 0 4px 0;
 		}
+		/*.file_name{width:170px;overflow:hidden;white-space:normal;word-wrap:break-word;}*/
+		.table_design_list{width:auto;}
+		.table_design_list td,.table_design_list th{font-size:12px!important;text-align:center;vertical-align:middle;}
 </style>
 
 <script type="text/javascript">
@@ -79,25 +81,25 @@ $(function(){
     <% end %>
   </ul>
 </div>
-
+<div class="container-fluid">
 <div class="boder_white">已上传的图片
 <span class="btn btn-small btn-primary fileinput-button">
     <i class="icon-plus icon-white"></i>
     <span>上传图片...</span>
     <input id="fileupload" type="file" name="file" multiple>
 </span>
-<p></p>
+</div>
 <div class="clearfix">
 
-<table class="table span8">
+<table class="table span6 nom table_design_list">
   <thead>
     <tr>
-      <th></th>
-      <th>文件名</th>
-      <th>尺寸</th>
-      <th>当前位置</th>
-      <th></th>
-      <th></th>
+      <th width="85"></th>
+      <!-- <th width="">文件名</th> -->
+      <th width="40">尺寸</th>
+      <th width="80">当前位置</th>
+      <th width="120">操作</th>
+      <!-- <th width="80"></th> -->
     </tr>
   </thead>
   <tbody>
@@ -107,27 +109,27 @@ $(function(){
 	      <td>
 	      	<img src="<%= item.file.url(:list_80x80) %>">
 	      </td>
-	      <td><%= item.file_file_name %></td>
+	      <!-- <td><p class="file_name"><%= item.file_file_name %></p></td> -->
 	      <td><%= "#{item.image_width}x#{item.image_height}" if item.image_width.present? %></td>
 	      <td><%= show_position item.position %></td>
 	      <td>
-	      <%= link_to("删除", home_design_show_destroy_path(id: item.id, design_type: @design_type),
+	      	 <%= link_to("删除", home_design_show_destroy_path(id: item.id, design_type: @design_type),
                           :data => { :confirm => "你确定要删除?" },
                           :method => :delete,
                           :class => 'btn btn-link') %>
+	      	<%= link_to "编辑", "javascript:;", :id => "edit_tag", :home_design_show_id => item.id, :index_id => index_id, :design_type => item.design_type, :class => "link#{index_id} btn btn-link" %>
 	      </td>
-	      <td>
-	      	<%= link_to "编辑标签", "javascript:;", :id => "edit_tag", :home_design_show_id => item.id, :index_id => index_id, :design_type => item.design_type, :class => "link#{index_id} btn btn-link" %>
-	      </td>
+	      <!-- <td></td> -->
 	    </tr>
 	    <% index_id += 1 %>
 	  <% end %>
   </tbody>
 </table>
 
+<div class="edit_show span6">
+</div>
 </div>
 
-<div class="edit_show">
 </div>
 
 <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
