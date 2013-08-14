@@ -56,7 +56,11 @@
   <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a href="<%= manage_root_path(sort: 1) %>" class="brand">2013新版icolor首页</a>
+          <% if controller_name == "channel_tips" %>
+            <a href="<%= channel_tips_path %>" class="brand">2013新版icolor设计快查</a>
+          <% else %>
+            <a href="<%= manage_root_path(sort: 1) %>" class="brand">2013新版icolor首页</a>            
+          <% end %>
 
           <ul class="nav ace-nav pull-right">
 
@@ -88,31 +92,37 @@
         </div>
       </div>
     </div>
-
-    <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
-      <li class="<%= 'active' if controller_name == 'home_kvs' %>">
-        <a href="<%= manage_root_path(sort: 1) %>">主键KV设置</a>
-      </li>
-      <li class="<%= 'active' if controller_name == 'home_recommends' %>">
-        <a href="/manage/home_recommends">精华推荐</a>
-      </li>
-      <li class="<%= 'active' if controller_name == 'home_image_lib' %>">
-        <a href="/manage/home_image_lib">装修图库</a>
-      </li>
-      <li class="<%= 'active' if controller_name == 'home_design_show' %>">
-        <a href="/manage/home_design_show">设计鉴賞</a>
-      </li>
-      <li class="<%= 'active' if controller_name == "owner_enter" %>">
-        <a href="/manage/owner_enter">业主通道</a>
-      </li>
-      <li class="<%= 'active' if controller_name == 'fit_images' %>">
-        <a href="/manage/fit_images">装修资讯</a>
-      </li>
-      <li class="<%= 'active' if controller_name == 'home_banners' %>">
-        <a href="/manage/home_banners">banner管理</a>
-      </li>
-    </ul>
-        
+    <% if controller_name == "channel_tips" %>
+      <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
+        <li class="<%= 'active' if controller_name == 'channel_tips' %>">
+          <a href="<%= channel_tips_path %>">装修小贴士</a>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
+        <li class="<%= 'active' if controller_name == 'home_kvs' %>">
+          <a href="<%= manage_root_path(sort: 1) %>">主键KV设置</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'home_recommends' %>">
+          <a href="/manage/home_recommends">精华推荐</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'home_image_lib' %>">
+          <a href="/manage/home_image_lib">装修图库</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'home_design_show' %>">
+          <a href="/manage/home_design_show">设计鉴賞</a>
+        </li>
+        <li class="<%= 'active' if controller_name == "owner_enter" %>">
+          <a href="/manage/owner_enter">业主通道</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'fit_images' %>">
+          <a href="/manage/fit_images">装修资讯</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'home_banners' %>">
+          <a href="/manage/home_banners">banner管理</a>
+        </li>
+      </ul>
+    <% end %>        
   </div>
 </div>
 

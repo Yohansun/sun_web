@@ -504,6 +504,12 @@ Icolor::Application.routes.draw do
 
   scope '/manage', :module => 'manage' do
     resources :owner_enter
+    resources :channel_tips do 
+      collection do 
+        post :update_tip
+        get :find_owner
+      end
+    end
     resources :home_banners do
     end
     resources :fit_images
