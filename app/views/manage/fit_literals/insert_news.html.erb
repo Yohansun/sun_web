@@ -2,7 +2,7 @@
   <script type="text/javascript">
     $(function(){
     	$('.new_fit_lit_save').click(function(){
-        if ($(".insert_new_title").val().length > 10){
+        if ($(".title").val().length > 10){
 				  alert("标题必须输入不超过10个汉字");
 				  return false;}
 				else{
@@ -45,10 +45,10 @@
 					    </select>
 						</td>
 						<td>
-							<input name="insert_new_title" value="">
+							<input name="title" value="">
 						</td>
 						<td>
-							<input name="insert_new_link" value="">
+							<input name="link" value="">
 						</td>
 						<td>
 							<span class="">
