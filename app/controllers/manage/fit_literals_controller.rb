@@ -16,7 +16,7 @@ class Manage::FitLiteralsController < Manage::BaseController
     @new.title = params[:title] if params[:title]
     @new.link = params[:link] if params[:link]
     if @new.save
-  	  redirect_to fit_literals_path
+      render js: "alert('保存成功!');location.reload();"
     end
   end
 
