@@ -93,37 +93,7 @@
         </div>
       </div>
     </div>
-    <% if controller_name == "channel_tips" %>
-      <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
-        <li class="<%= 'active' if controller_name == 'channel_tips' %>">
-          <a href="<%= channel_tips_path %>">装修小贴士</a>
-        </li>
-      </ul>
-    <% else %>
-      <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
-        <li class="<%= 'active' if controller_name == 'home_kvs' %>">
-          <a href="<%= manage_root_path(sort: 1) %>">主键KV设置</a>
-        </li>
-        <li class="<%= 'active' if controller_name == 'home_recommends' %>">
-          <a href="/manage/home_recommends">精华推荐</a>
-        </li>
-        <li class="<%= 'active' if controller_name == 'home_image_lib' %>">
-          <a href="/manage/home_image_lib">装修图库</a>
-        </li>
-        <li class="<%= 'active' if controller_name == 'home_design_show' %>">
-          <a href="/manage/home_design_show">设计鉴賞</a>
-        </li>
-        <li class="<%= 'active' if controller_name == "owner_enter" %>">
-          <a href="/manage/owner_enter">业主通道</a>
-        </li>
-        <li class="<%= 'active' if controller_name == 'fit_images' %>">
-          <a href="/manage/fit_images">装修资讯</a>
-        </li>
-        <li class="<%= 'active' if controller_name == 'home_banners' %>">
-          <a href="/manage/home_banners">banner管理</a>
-        </li>
-      </ul>
-    <% end %>        
+           
   </div>
 
 
@@ -142,121 +112,46 @@
               <span>首页</span>
             </a>
           </li>
-<!--           <li>
-            <a href="#" class="dropdown-toggle">
-              <i class="icon-desktop"></i>
-              <span>站点结构</span>
-
-              <b class="arrow icon-angle-down"></b>
-            </a>
-
-            <ul class="submenu">
-              <li>
-                <a href="elements.html">
-                  <i class="icon-double-angle-right"></i>
-                  全部结构
-                </a>
-              </li>
-
-              <li>
-                <a href="buttons.html">
-                  <i class="icon-double-angle-right"></i>
-                  行业资讯
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  装修资讯
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  大师访谈
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  大师话题
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  大师作品
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  一周小贴士
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  色彩配搭
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  每周之星
-                </a>
-              </li>
-
-              <li>
-                <a href="treeview.html">
-                  <i class="icon-double-angle-right"></i>
-                  获奖名单
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            <a href="tables.html">
-              <i class="icon-list"></i>
-              <span>站点设置</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="dropdown-toggle">
-              <i class="icon-edit"></i>
-              <span>广告管理</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="widgets.html">
-              <i class="icon-list-alt"></i>
-              <span>扩展功能</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="calendar.html">
-              <i class="icon-calendar"></i>
-              <span>百城</span>
-            </a>
-          </li> -->
-        </ul><!--/.nav-list-->
+        </ul>
 
         <div id="sidebar-collapse">
           <i class="icon-double-angle-left"></i>
         </div>
       </div>
       <div id="main-content" class="clearfix">
+      
+        <% if controller_name == "channel_tips" %>
+          <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
+            <li class="<%= 'active' if controller_name == 'channel_tips' %>">
+              <a href="<%= channel_tips_path %>">装修小贴士</a>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
+            <li class="<%= 'active' if controller_name == 'home_kvs' %>">
+              <a href="<%= manage_root_path(sort: 1) %>">主键KV设置</a>
+            </li>
+            <li class="<%= 'active' if controller_name == 'home_recommends' %>">
+              <a href="/manage/home_recommends">精华推荐</a>
+            </li>
+            <li class="<%= 'active' if controller_name == 'home_image_lib' %>">
+              <a href="/manage/home_image_lib">装修图库</a>
+            </li>
+            <li class="<%= 'active' if controller_name == 'home_design_show' %>">
+              <a href="/manage/home_design_show">设计鉴賞</a>
+            </li>
+            <li class="<%= 'active' if controller_name == "owner_enter" %>">
+              <a href="/manage/owner_enter">业主通道</a>
+            </li>
+            <li class="<%= 'active' if controller_name == 'fit_images' %>">
+              <a href="/manage/fit_images">装修资讯</a>
+            </li>
+            <li class="<%= 'active' if controller_name == 'home_banners' %>">
+              <a href="/manage/home_banners">banner管理</a>
+            </li>
+          </ul>
+        <% end %>
+
         <%= yield %>
       </div>
    </div>     
