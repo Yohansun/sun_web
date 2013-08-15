@@ -21,8 +21,8 @@ class Manage::FitLiteralsController < Manage::BaseController
   end
 
   def insert_news
-    @new = FitLiteral.find_by_order_id 6
-    @new.delete
+    @new = FitLiteral.order("order_id asc").last
+    @new.delete if FitLiteral.count == 6
     FitLiteral.find_each do |new|
       new.order_id += 1
       new.save
