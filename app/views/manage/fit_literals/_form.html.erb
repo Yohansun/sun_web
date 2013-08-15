@@ -1,29 +1,27 @@
-<%= form_for @new do |f| %>
-	<label style="width:20%">
-		<input type="submit" class="literal_submit" value="保存" id='monitor_link_326820'>
-		<input type="hidden" value="<%= @new.id%>" name='fit_literal_id'>
-		<%= link_to "取消", fit_literals_path %>
-	</label>
-	<label style="width:20%">
-		<select name="order_id" style="margin:0;width: 170px;" class="input-medium">
-          <option><%= @new.order_id%></option>
-          <%= @orders.each do |order| %>
-            <% unless order == @new.order_id %>
-              <option><%= order %></option>
-            <% end %>
-          <% end %>
-        </select>
-	</label>
-	<label style="width:20%">
-		<input class="literal_title" name="title" value="<%= @new.title%>">
-	</label>
-	<label style="width:15%">
-		<input style="width:131px;"name="link" class="liter_link" value="<%= @new.link%>">
-		<a href="javascript:;" class="inspect_fit_liter_link">检测链接</a>
-	</label>
-	<label style="width:20%">
-		<span class="label label-warning">
-			<input name="update_at" value="<%= @new.updated_at.strftime("%Y-%m-%d %H:%M") %>">
-		</span>
-	</label>
-<% end %>
+<td>
+	<input type="submit" class="literal_submit" value="保存" id='monitor_link_326820'>
+	<input type="hidden" value="<%= @new.id%>" name='fit_literal_id'>
+	<%= link_to "取消", fit_literals_path %>
+</td>
+<td>
+	<select name="order_id" class="input-medium literal_select">
+      <option><%= @new.order_id%></option>
+      <%= @orders.each do |order| %>
+        <% unless order == @new.order_id %>
+          <option><%= order %></option>
+        <% end %>
+      <% end %>
+    </select>
+</td>
+<td>
+	<input class="literal_title" name="title" value="<%= @new.title%>">
+</td>
+<td>
+	<input name="link" class="liter_link" value="<%= @new.link%>">
+	<a href="javascript:;" class="inspect_fit_liter_link">检测链接</a>
+</td>
+<td>
+	<span class="label label-warning">
+		<input name="update_at" value="<%= @new.updated_at.strftime("%Y-%m-%d %H:%M") %>">
+	</span>
+</td>
