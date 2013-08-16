@@ -6,6 +6,7 @@ require 'spreadsheet'
 desc "新浪图库数据导入"
 task :import_image_libraries_sina => :environment  do
   Spreadsheet.client_encoding ="UTF-8"
+  image_id = []
   book = Spreadsheet.open "#{Rails.root}/lib/data/sina_20130408.xls"
   sheet1 = book.worksheet 0
   sheet1.each do |row|
@@ -68,6 +69,7 @@ task :import_image_libraries_sina => :environment  do
                 #   end
                 # end
                 p "保存成功!"
+                image_id << design_image.id
               else
                 p "保存失败!---#{row[0]}"
               end
@@ -75,6 +77,11 @@ task :import_image_libraries_sina => :environment  do
           end
         end
       end
+    end
+  end
+  CSV.open("#{Rails.root}/lib/data/export_data/sina_#{Time.now.to_date}导入ID.csv", "wb") do |csv|
+    image_id.each do |id|
+      csv << [id]
     end
   end
 
@@ -196,186 +203,9 @@ task :import_image_libraries_for_kepulande => :environment  do
         end
       end
     end
-  # end
-end
-
-desc "科普兰德图库数据导入12"
-task :import_image_libraries_for_kepulande12 => :environment  do
-  Spreadsheet.client_encoding = "UTF-8"
-  # files = ['kepulande_r1.xls', 'kepulande_r2.xls', 'kepulande_r3.xls', 'kepulande_r4.xls']
-  # files.each do |xls_name|
-    image_id = []
-    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande-r12_20130509.xls"
-    sheet1 = book.worksheet 0
-    sheet1.each do |row|
-      name = ""
-      if row[2].present?
-        name = row[2]
-      else
-        name = row[3]
-      end
-      next if row[1] == '路径' || row[1].blank?
-      user = User.find_by_username(name)
-      kpld_user = User.find_by_username("#{name}-kepulande")
-      new_user = nil
-      if user && user.source == 'kepulande'
-        new_user = user
-      elsif kpld_user
-        new_user = kpld_user
-      else
-        new_user = User.new
-        new_user.username = "#{name}-kepulande"
-        new_user.password = '123456'
-        new_user.types = '设计师'
-        new_user.name_of_company = row[4] if row[4].present?
-        new_user.email = row[8] if row[8].present?
-        new_user.source = 'kepulande'
-        new_user.role_id = 1
-        new_user.des_status = 0
-        new_user.save(validate: false)
-      end
-      #style = ImageLibraryCategory.where(title: row[6]).first
-      # room = ImageLibraryCategory.where(title: row[5]).first
-      area = Area.where("name like '%#{row[5].gsub(/市/,'')}%'").first if row[5].present?
-      design = Design.new
-      design.title = row[0]
-      # design.content = row[13]
-      design.user_id = new_user.id
-      #design.style = style.title if style
-      design.area_id = area ? area.id : 31
-      # design.room_type = room.title if room
-      if design.save(validate: false)
-        # file_src_arr = Dir["/home/nioteam/icolor/lande/r4/#{row[1].gsub('\\', '/')}/*"]
-        file_src_arr = Dir["/home/nioteam/icolor/kepulande12/#{row[1]}/*"]
-        # file_src_arr = Dir["/Users/sky/Downloads/kepulande/#{row[1]}/*"]
-        unless file_src_arr.blank?
-          file_src_arr.each do |file_src|
-            p file_src
-            after_poking = file_src.split('.').last
-            if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG'
-              p "图片格式"
-              p "#{after_poking}" 
-              design_image = design.design_images.new
-              handle = open(file_src) rescue nil
-              handle.class.class_eval { attr_accessor :original_filename, :content_type }
-              handle.original_filename = file_src.split("/").last
-              design_image.file = handle
-              design_image.title = row[0]
-              design_image.area_id = area ? area.id : 31
-              #image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-              #design_image.tags = [image_tag] if image_tag.present?
-              # design_image.room = room.id if room
-              # design_image.content = row[13]
-              design_image.user_id = new_user.id
-              design_image.source = 'kepulande'
-              p "~~~~~~~开始保存！"
-              if design_image.save
-                if row[6].present?
-                  tag_arr = row[6].split(',')
-                  tag_arr.each do |tag|
-                    style = ImageLibraryCategory.where("title like ?",'%#{tag}%').first
-                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id, genre: 'kepulande').first if style
-                  end
-                end
-                image_id << design_image.id
-                p "保存成功!"
-              else
-                p "保存失败"
-              end
-            end
-          end
-        end
-      end
-    end
-  # end
-end
-
-desc "科普兰德图库数据导入13"
-task :import_image_libraries_for_kepulande13 => :environment  do
-  Spreadsheet.client_encoding = "UTF-8"
-  # files = ['kepulande_r1.xls', 'kepulande_r2.xls', 'kepulande_r3.xls', 'kepulande_r4.xls']
-  # files.each do |xls_name|
-    image_id = []
-    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande-r13_20130509.xls"
-    sheet1 = book.worksheet 0
-    sheet1.each do |row|
-      name = ""
-      if row[2].present?
-        name = row[2]
-      else
-        name = row[3]
-      end
-      next if row[1] == '路径' || row[1].blank?
-      user = User.find_by_username(name)
-      kpld_user = User.find_by_username("#{name}-kepulande")
-      new_user = nil
-      if user && user.source == 'kepulande'
-        new_user = user
-      elsif kpld_user
-        new_user = kpld_user
-      else
-        new_user = User.new
-        new_user.username = "#{name}-kepulande"
-        new_user.password = '123456'
-        new_user.types = '设计师'
-        new_user.name_of_company = row[4] if row[4].present?
-        new_user.email = row[8] if row[8].present?
-        new_user.source = 'kepulande'
-        new_user.role_id = 1
-        new_user.des_status = 0
-        new_user.save(validate: false)
-      end
-      #style = ImageLibraryCategory.where(title: row[6]).first
-      # room = ImageLibraryCategory.where(title: row[5]).first
-      area = Area.where("name like '%#{row[5].gsub(/市/,'')}%'").first if row[5].present?
-      design = Design.new
-      design.title = row[0]
-      # design.content = row[13]
-      design.user_id = new_user.id
-      #design.style = style.title if style
-      design.area_id = area ? area.id : 31
-      # design.room_type = room.title if room
-      if design.save(validate: false)
-        # file_src_arr = Dir["/home/nioteam/icolor/lande/r4/#{row[1].gsub('\\', '/')}/*"]
-        file_src_arr = Dir["/home/nioteam/icolor/kepulande13/#{row[1]}/*"]
-        # file_src_arr = Dir["/Users/sky/Downloads/kepulande/#{row[1]}/*"]
-        unless file_src_arr.blank?
-          file_src_arr.each do |file_src|
-            p file_src
-            after_poking = file_src.split('.').last
-            if after_poking == 'jpg' || after_poking == 'JPG' || after_poking == 'jpeg' || after_poking == 'JPEG'
-              p "图片格式"
-              p "#{after_poking}" 
-              design_image = design.design_images.new
-              handle = open(file_src) rescue nil
-              handle.class.class_eval { attr_accessor :original_filename, :content_type }
-              handle.original_filename = file_src.split("/").last
-              design_image.file = handle
-              design_image.title = row[0]
-              design_image.area_id = area ? area.id : 31
-              #image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-              #design_image.tags = [image_tag] if image_tag.present?
-              # design_image.room = room.id if room
-              # design_image.content = row[13]
-              design_image.user_id = new_user.id
-              design_image.source = 'kepulande'
-              p "~~~~~~~开始保存！"
-              if design_image.save
-                if row[6].present?
-                  tag_arr = row[6].split(',')
-                  tag_arr.each do |tag|
-                    style = ImageLibraryCategory.where("title like ?",'%#{tag}%').first
-                    ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id, genre: 'kepulande').first if style
-                  end
-                end
-                image_id << design_image.id
-                p "保存成功!"
-              else
-                p "保存失败"
-              end
-            end
-          end
-        end
+    CSV.open("#{Rails.root}/lib/data/export_data/kepulande_#{Time.now.to_date}导入ID.csv", "wb") do |csv|
+      image_id.each do |id|
+        csv << [id]
       end
     end
   # end
