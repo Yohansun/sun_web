@@ -13,7 +13,7 @@
 <li class="<%= 'active' if controller_name == "owner_enter" %>">
   <a href="/manage/owner_enter">业主通道</a>
 </li>
-<li class="<%= 'active' if controller_name == 'fit_images' %>">
+<li class="<%= 'active' if controller_name =~ /fit_images|fit_literals/ %>">
   <a href="/manage/fit_images">装修资讯</a>
 </li>
 <li class="<%= 'active' if controller_name == 'home_banners' %>">
