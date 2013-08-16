@@ -57,17 +57,19 @@
 						</td>
 				    <% end %>
 			  </tr>
-				<% @news.each do |new| %>
-					<tr  class="form-inline edit_form<%= new.id%>">
-						<td>
-							<%= link_to "编辑", edit_fit_literal_path(new), :remote => true %>
-						</td>
-						<td><%= new.order_id %></td>
-						<td><%= new.title %></td>
-						<td><%= new.link %></td>
-						<td><span class="label label-warning"><%= new.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
-						</td>
-					</tr>
+				<% @news.each_with_index do |new,index| %>
+				  <% unless index == 5 %>
+						<tr  class="form-inline edit_form<%= new.try(:id) %>">
+							<td>
+								<%= link_to "编辑", edit_fit_literal_path(new), :remote => true %>
+							</td>
+							<td><%= new.order_id + 1 %></td>
+							<td><%= new.title %></td>
+							<td><%= new.link %></td>
+							<td><span class="label label-warning"><%= new.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+							</td>
+						</tr>
+			    <% end %>
 			  <% end %>
 		  </tbody>
 		</table>

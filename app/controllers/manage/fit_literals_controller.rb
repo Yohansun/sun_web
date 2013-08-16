@@ -21,17 +21,25 @@ class Manage::FitLiteralsController < Manage::BaseController
   end
 
   def insert_news
-    @new = FitLiteral.order("order_id asc").last
-    @new.delete if FitLiteral.count == 6
-    FitLiteral.find_each do |new|
-      new.order_id += 1
-      new.save
-    end
+    # @new = FitLiteral.order("order_id asc").last
+    # @new.delete if FitLiteral.count == 6
+    # FitLiteral.find_each do |new|
+    #   new.order_id += 1
+    #   new.save
+    # end
     @news = FitLiteral.order("order_id asc")
   end
   
   def create
-    FitLiteral.create :title => params[:title], :link => params[:link], :order_id => params[:order_id]
+    FitLiteral.find_each do |new|
+      unless new.order_id == 6
+        new.order_id += 1 
+        new.save
+      else
+        literal = FitLiteral.find(new.id)
+        literal.update_attributes(:title => params[:title], :link => params[:link], :order_id => params[:order_id])
+      end
+    end
     redirect_to fit_literals_path
   end
 end
