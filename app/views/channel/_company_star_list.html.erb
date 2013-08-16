@@ -12,7 +12,7 @@
     					<li class="">
     						<a href="#" class="item_img">
     							<%- if company.news_company_design %>
-                    <%= image_tag(company.news_company_design.file.url(:list), height: '115') rescue ""%>
+                    <%= image_tag(company.news_company_design.file.url(:channel_image), height: '115') rescue ""%>
                   <%- end %>
     							<i class="icon-star_of icon-star_month"></i>
     						</a>
@@ -39,7 +39,7 @@
     					<li class="">
     						<a href="#" class="item_img">
     							<%- if designer.news_personal_design %>
-                    <%= image_tag(designer.news_personal_design.file.url(:list), height: '115') rescue ""%>
+                    <%= image_tag(designer.news_personal_design.file.url(:channel_image), height: '115') rescue ""%>
                   <%- end %>
     							<i class="icon-star_of icon-star_month"></i>
     						</a>
