@@ -16,6 +16,7 @@
 <%- end %>
 <%- content_for :head do %>
 <style type="text/css">
+/*wanglikun_css*/
 .role-model3{background: url(<%= asset_path 'baicheng/works/bg5_3.jpg' %>) no-repeat center top;min-height:170px;}
 .role-model3 .wrapper{padding:15px 25px 25px;box-shadow:0px -1px 4px #ddd;}
 .role-model3 .model-img{margin:0 0 40px;}
@@ -46,6 +47,32 @@
 			<div class="redline_b4 pad_b40"></div>
 		</div>
 	</div>
+<% elsif params[:id] == "luojialiang" %>
+	<style type="text/css">
+	/*luojialiang_css*/
+	.role-model4{background: url(<%= asset_path 'baicheng/works/bg5_5.jpg' %>) no-repeat center top;min-height:170px;}
+	.role-model4 .wrapper{padding:15px 25px 25px;box-shadow:0px -1px 4px #ddd;*border:1px solid #ddd;background-position:0 90px;}
+	.role-model4 .model-img{margin:0 0 40px;}
+	.video_btn{top:-275px;left:415px;}
+	.redline_b4{margin:0 -25px;}
+	</style>
+	<div class="container-fluid">
+		<div class="role-model role-model4 pad_t60">
+			<div class="wrapper pr">
+				<div><%= image_tag 'baicheng/works/model5_1.jpg', class: 'model-img' %></div>
+				<div><%= image_tag 'baicheng/works/model5_2.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model5_3.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model5_4.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model5_5.jpg' %></div>
+				<div style="position:relative;padding:29px 0;margin:0 -25px;"><%= image_tag 'baicheng/works/bg6.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model5_6.jpg' %></div>
+				<div><%= image_tag 'baicheng/works/model5_7.jpg' %></div>
+				<i class="pull-right">以上资料由《美好家园》友情提供</i>
+				<div class="redline_b4 pad_b40"></div>
+				<a class="video_btn" href="<%= fashion_model_path("ljlmov") %>"><%= image_tag 'baicheng/works/video_btn.png' %></a>
+			</div>
+		</div>
+	</div>
 <% elsif params[:id] == "wanglikun" %>
 	<div class="container-fluid">
 		<div class="role-model role-model3 pad_t60">
@@ -57,7 +84,28 @@
 				<div><%= image_tag 'baicheng/works/model3_5.jpg' %></div>
 				<i class="pull-right">以上王丽坤素雅空间由韩文强和美好家园空间秀合作设计</i>
 				<div class="redline_b4 pad_b40"></div>
-				<a class="video_btn" href="/love/fashion_model/mov" id='monitor_link_346296'><%= image_tag 'baicheng/works/video_btn.jpg' %></a>
+				<a class="video_btn" href="/love/fashion_model/mov" id='monitor_link_346296'><%= image_tag 'baicheng/works/video_btn.png' %></a>
+			</div>
+		</div>
+	</div>
+<% elsif params[:id] == "ljlmov" %>
+	<style type="text/css">
+	.container-fluid{background:url(<%= asset_path 'baicheng/works/model_video.jpg' %>) no-repeat center bottom;}
+	.role-video{background:url(<%= asset_path 'baicheng/works/model5_8.jpg' %>) no-repeat center top;height:753px;}
+	.video-wrapper{*margin-top:127px;}
+	</style>
+	<div class="container-fluid">
+		<div class="role-model role-video pad_t60">
+			<div class="video-wrapper">
+				<a href="/system/flash/luojialiang.flv" style="display:block;width:900px;height:506px" id="player"></a>
+				<%= javascript_include_tag 'baicheng/flowplayer-3.2.11.min' %>
+				<script>
+				flowplayer("player", "/system/flash/flowplayer-3.2.12.swf", {
+					clip: {
+						autoPlay: false
+					}
+				});
+				</script>
 			</div>
 		</div>
 	</div>
