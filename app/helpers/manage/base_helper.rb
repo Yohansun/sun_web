@@ -6,7 +6,7 @@ module Manage::BaseHelper
       	'home'
       when /channel_tips/
       	'channel_tips'
-      when /banner_group|banner_home/
+      when /banner_group|banner_home|banner_channel/
       	'banner'
       else
       	'nothing'
