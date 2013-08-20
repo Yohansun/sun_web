@@ -567,7 +567,13 @@ Icolor::Application.routes.draw do
     end
 
     # banner管理
-    resources :banner_group
+    delete "banner_group/destroy", to: 'banner_group#destroy'
+    resources :banner_group do
+      collection do
+        post :save_data
+      end
+    end
+
     resources :banner_home do
       collection do
         post :create_image

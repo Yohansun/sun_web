@@ -2,18 +2,18 @@
 class Manage::BannerHomeController < Manage::BaseController
 
   def index
-  	i_banner_id =  params[:i_banner_id]
-    i_banner_id = 1 if params[:i_banner_id].blank?
+  	position =  params[:position]
+    position = 1 if params[:position].blank?
 
   	@i_banner_groups = IBannerGroup.all
   	@i_banner_groups_count = @i_banner_groups.count
 
-  	@i_banner = IBanner.page_name('首页').find_id(i_banner_id).first
+  	@i_banner = IBanner.page_name('首页').position(position).first
   end
 
   def create_image
-  	i_banner_id =  params[:i_banner_id]
-    @i_banner = IBanner.page_name('首页').find_id(i_banner_id).first
+  	position =  params[:position]
+    @i_banner = IBanner.page_name('首页').position(position).first
     result = "上传失败"
     if @i_banner
   		@i_banner.file = params[:file].tempfile if params[:file].present?
@@ -29,11 +29,11 @@ class Manage::BannerHomeController < Manage::BaseController
   end
 
   def save_data
-  	i_banner_id = params[:i_banner_id]
+  	position = params[:position]
   	photo_name = params[:photo_name]
   	i_banner_group_id = params[:i_banner_group_id]
 
-  	@i_banner = IBanner.page_name('首页').find_id(i_banner_id).first
+  	@i_banner = IBanner.page_name('首页').position(position).first
   	if @i_banner
   		@i_banner.photo_name = photo_name
   		@i_banner.i_banner_group_id = i_banner_group_id

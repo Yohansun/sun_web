@@ -1,179 +1,108 @@
 <script type="text/javascript">
 $(function(){
-	$('.js-tips_cancel').on('click', function(e){
+	$('#new_group_pannel').hide();
+
+	$('.js-edit_tags').hide();
+	$('.js-btn').click(function(){
+		$(this).parents('fieldset').hide();
+		$(this).parents('fieldset').siblings('fieldset').show();
+	})
+
+	$('#new_group').on('click', function(e){
 		e.preventDefault();
-		var $ps_tr = $(this).parents('tr');
-		var $tips_p = $ps_tr.find('p.tips_toggle');
-		$tips_p.show();
-		$tips_p.next().addClass('hidden');
-
-		$(this).parent().siblings('.tips_links').show();
-		$(this).parent('.tips_edit_btn').addClass('hidden');
-	});
-	$('.js-tips_save').on('click', function(){
-		console.log($(this).parents('tr').find('.tips_edit_select').children('option:selected').text())
-		console.log($(this).parents('tr').find('.tips_tit_edit').val())
-		console.log($(this).parents('tr').find('.tips_con_edit').val())
-		console.log($(this).parents('tr').find('.tips_site_edit').val())
+		$('#new_group_pannel').show();
 	});
 
-	(function($){
-		$('.js-grename,.js-gcancel').on('click', function(){
-			$(this).parent().toggle().siblings('[data-toggle-btn="toggle"]').toggle();
-			$(this).parent().siblings('.group_m').find('[data-toggle-btn="toggle"]').toggle();
-		});
-	})($);
-	(function($){
-		$('.js-addtr').on('click', function(){
-			$(this).parent('.tips_form').find('tbody').prepend('<tr><td><a href="javascript:;" class="js-edit hidden">编辑</a><p class="tips_links hidden"><a href="javascript:;">首页1</a><a href="javascript:;">首页2</a></p><p class="tips_edit_btn"><a class="js-tips_save" href="javascript:;">保存</a><a class="js-tips_cancel" href="javascript:;">取消</a></p></td><td><p class="tips_order tips_toggle hidden">1</p><select class="input-small tips_edit_select"></select></td><td><p class="tips_tit tips_toggle hidden">title1</p><input type="text" class="input-medium tips_tit_edit"></td><td><p class="tips_con tips_toggle hidden">content1</p><textarea rows="3" class="input-medium tips_con_edit"></textarea></td><td><p class="tips_site tips_toggle hidden">www.icolor.com.cn</p><input type="text" class="input-medium tips_site_edit" ></td><td><p class="tips_latesttime">2013-08-13</p></td></tr>')
-		})
-	})($);
+  $('#new_group_pannel form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+    alert("保存成功");
+    var url = $(this).data('redirect_url');
+    window.location.href = url;
+  }).bind("ajax:error", function(evt, data) {
+    alert(data.responseText);
+  });
+
+  $('.show_tags #link_delete_group').bind('ajax:success', function(evt, data) {
+  	if (data.result == "error") {
+  		alert("删除失败! 必须先清空当前组的banner");
+  		return false;
+  	}
+    alert("删除成功");
+    var url = "/manage/banner_group";
+    window.location.href = url;
+  }).bind("ajax:error", function(evt, data) {
+    alert(data.responseText);
+  });
+
 });
 </script>
 <div class="main">
 	<button id="new_group" class="btn btn-small btn-primary">新建组</button>
 
 	<div id="new_group_pannel" class="clearfix row-fluid">
-		<div class="span1">
-			<a href="#">保存</a>
-		</div>
-		<div class="span11 group_m nom">
-			<div class="clearfix">
-				<span class="span4"><input type="text" placeholder="因爱之名宣传广告"></span>
-				<span class="span4" style="line-height:30px;">共0个banner</span>
-			</div>
-		</div>
-	</div>
-	
-	<hr>
-	<div class="clearfix row-fluid gm_wrap">
-		<div class="span1" data-toggle-btn="toggle">
-			<a href="javascript:;" class="js-grename">重命名组</a><br>
-			<a href="javascript:;" class="js-gremove">删除组</a>
-		</div>
-		<div class="span1 nom" data-toggle-btn="toggle" style="display:none">
-			<a href="javascript:;" class="js-gsave">保存</a><br>
-			<a href="javascript:;" class="js-gcancel">取消</a>
-		</div>
-		<div class="span11 group_m nom">
-			<div class="clearfix">
-				<strong class="span4 lead" data-toggle-btn="toggle">因爱之名宣传广告</strong>
-				<span class="span4" style="display:none" data-toggle-btn="toggle"><input type="text" placeholder=""></span>
-				<span class="span4" style="line-height:30px;">共5个banner</span>
-			</div>
-			<ul class="thumbnails">
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-			</ul>
+		<div class="widget-main">
+			<div class="span1"></div>
+			<%= form_tag('banner_group/save_data', :class => 'form-inline', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_group") do %>
+				<input type="text" name="name" class="input-large">
+				<%= button_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-info btn-small' %>
+			<% end %>
 		</div>
 	</div>
 	<hr>
-	<div class="clearfix row-fluid gm_wrap">
-		<div class="span1" data-toggle-btn="toggle">
-			<a href="javascript:;" class="js-grename">重命名组</a><br>
-			<a href="javascript:;" class="js-gremove">删除组</a>
-		</div>
-		<div class="span1 nom" data-toggle-btn="toggle" style="display:none">
-			<a href="javascript:;" class="js-gsave">保存</a><br>
-			<a href="javascript:;" class="js-gcancel">取消</a>
-		</div>
-		<div class="span11 group_m nom">
-			<div class="clearfix">
-				<strong class="span4 lead" data-toggle-btn="toggle">因爱之名宣传广告</strong>
-				<span class="span4" style="display:none" data-toggle-btn="toggle"><input type="text" placeholder=""></span>
-				<span class="span4" style="line-height:30px;">共4个banner</span>
+
+<% @i_banner_groups.each do |i_banner_group| %>
+	<%= form_tag('banner_group/save_data', :class => 'form-inline', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_group") do %>
+	<div class="tags_setting span12">
+		<fieldset class="show_tags js-show_tags">
+			<div class="span1" data-toggle-btn="toggle">
+				<a href="javascript:;" class="js-btn">重命名组</a><br>
+				<%= link_to("删除组", banner_group_destroy_path(id: i_banner_group.id),
+	                          :data => { :confirm => "你确定要删除组?" },
+	                          :method => :delete,
+	                          :class => 'js-gremove', 
+	                          :'data-remote' => true,
+	                          :remote => true,
+	                          :'data-type' => 'json',
+	                          :id => 'link_delete_group') %>
 			</div>
-			<ul class="thumbnails">
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-				<li class="span3">
-					<div class="thumbnail well well-small nom">
-						<span class="block text-success">20130808每周之星1</span>
-						<span class="block">设计快查</span>
-						<span class="block">670x85</span>
-						<span class="block">
-							[<a href="#">查看</a>][<a href="#">编辑</a>]
-						</span>
-					</div>
-				</li>
-			</ul>
+
+			<div class="clearfix">
+				<strong class="span3 lead" data-toggle-btn="toggle"><%= i_banner_group.name %></strong>
+				<span class="span2" style="display:none" data-toggle-btn="toggle"><input type="text" placeholder=""></span>
+				<span class="span3" style="line-height:30px;">共<%= i_banner_group.i_banners.count %>个banner</span>
+			</div>
+
+		</fieldset>
+		<fieldset class="edit_tags js-edit_tags">
+			<input type="text" name="name" placeholder="" value="<%= i_banner_group.name %>">
+			<div class="span1">
+			<%= submit_tag "保存", data: { disable_with: "请等待..." }, :class => 'js-btn btn btn-small btn-primary' %><br/>
+				<a href="javascript:;" class="js-btn">取消</a>
+			</div>
+		</fieldset>
+
+		<div class="span12">
+			<div class="span1"></div>
+			<div class="span11 group_m nom">
+				<ul class="thumbnails">
+				<% i_banner_group.i_banners.each do |i_banner| %>
+					<li class="span2">
+						<div class="thumbnail well well-small nom">
+							<span class="block text-success"><%= i_banner.photo_name %></span>
+							<span class="block"><%= i_banner.page_name %></span>
+							<span class="block"><%= i_banner.size %></span>
+							<span class="block">
+								[<a href="<%= link_banner_show i_banner.page_name, i_banner.position %>">查看</a>]
+								[<a href="<%= link_banner_show i_banner.page_name, i_banner.position %>">编辑</a>]
+							</span>
+						</div>
+					</li>
+				<% end %>
+				</ul>
+			</div>
 		</div>
 	</div>
+	<hr class="span12">
+	<% end %>
+<% end %>
 
 </div>

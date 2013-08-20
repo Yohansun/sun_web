@@ -19,21 +19,21 @@
 		<div class="clearfix row-fluid bann_edit">
 			<div class="span3 well well-small nom">
 				<p class="text-right">
-					<a href="/manage/banner_home?i_banner_id=1" class="btn btn-medium <%= @i_banner.id == 1 ? 'btn-primary' : 'btn-light' %>">270x100</a>
+					<a href="/manage/banner_home?position=1" class="btn btn-medium <%= @i_banner.id == 1 ? 'btn-primary' : 'btn-light' %>">270x100</a>
 				</p>
 				<p class="">
-					<a href="/manage/banner_home?i_banner_id=2" class="btn btn-small btn-block <%= @i_banner.id == 2 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
+					<a href="/manage/banner_home?position=2" class="btn btn-small btn-block <%= @i_banner.id == 2 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
 				</p>
 				<p class="">
-					<a href="/manage/banner_home?i_banner_id=3" class="btn btn-small btn-block <%= @i_banner.id == 3 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
+					<a href="/manage/banner_home?position=3" class="btn btn-small btn-block <%= @i_banner.id == 3 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
 				</p>
 				<p class="text-left">
-					<a href="/manage/banner_home?i_banner_id=4" class="btn btn-large <%= @i_banner.id == 4 ? 'btn-primary' : 'btn-light' %>">290x200</a>
+					<a href="/manage/banner_home?position=4" class="btn btn-large <%= @i_banner.id == 4 ? 'btn-primary' : 'btn-light' %>">290x200</a>
 				</p>
 				<div class="clearfix">
 					<p class="text-left">
-						<a href="/manage/banner_home?i_banner_id=5" class="btn btn-small span7 <%= @i_banner.id == 5 ? 'btn-primary' : 'btn-light' %>">670x85</a>
-						<a href="/manage/banner_home?i_banner_id=6" class="btn btn-small span5 <%= @i_banner.id == 6 ? 'btn-primary' : 'btn-light' %>">310x85</a>
+						<a href="/manage/banner_home?position=5" class="btn btn-small span7 <%= @i_banner.id == 5 ? 'btn-primary' : 'btn-light' %>">670x85</a>
+						<a href="/manage/banner_home?position=6" class="btn btn-small span5 <%= @i_banner.id == 6 ? 'btn-primary' : 'btn-light' %>">310x85</a>
 					</p>
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 						<h5>编辑信息</h5>
 					</div>
 					<div class="widget-body">
-						<%= form_tag('banner_home/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_home?i_banner_id=#{@i_banner.id}", :class => "widget-main clearfix nom") do %>
+						<%= form_tag('banner_home/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_home?position=#{@i_banner.position}", :class => "widget-main clearfix nom") do %>
 						<%= hidden_field_tag 'i_banner_id', @i_banner.id %>
 							<div class="span4 form-inline">
 								<label class="span3 control-label">图片标识</label>
@@ -89,8 +89,8 @@
                               "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
 $(function() {
-    var i_banner_id = <%= @i_banner.id %>;
-    var url = 'banner_home/create_image?i_banner_id=' + i_banner_id;
+    var position = <%= @i_banner.position %>;
+    var url = 'banner_home/create_image?position=' + position;
     $('#fileupload').fileupload({
         url: url,
         dataType: 'json',
@@ -99,7 +99,7 @@ $(function() {
         maxFileSize: 5000000,
         done: function (e, data) {
         	alert(data.result.notify);
-        	window.location.href = "/manage/banner_home?i_banner_id=<%= @i_banner.id %>";
+        	window.location.href = "/manage/banner_home?position=<%= @i_banner.position %>";
         },
         error: function (e, data) {
         	alert(data.result);
