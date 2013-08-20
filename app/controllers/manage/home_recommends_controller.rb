@@ -28,6 +28,11 @@ class Manage::HomeRecommendsController < Manage::BaseController
 
 	def insert_recommend
 		if params[:position] && params[:title] && params[:url]
+			HomeRecommend.find_each {|a| a.increment!(:position)}
+			last = HomeRecommend.order("position").last
+			if last.present?
+				last.destroy
+			end
 			recommend = HomeRecommend.find_by_position(params[:position])
 			if recommend.present?
 				recommend.destroy
@@ -38,11 +43,6 @@ class Manage::HomeRecommendsController < Manage::BaseController
 	end
 
 	def delete_last
-		HomeRecommend.find_each {|a| a.increment!(:position)}
-	  last = HomeRecommend.order("position").last
-	  if last.present?
-	  	last.destroy
-	  end
 		@recommends = HomeRecommend.order("position")
 		respond_to do |format|
 			format.js

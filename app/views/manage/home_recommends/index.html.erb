@@ -36,7 +36,7 @@
 					<%= render :partial => 'form', locals: { recommends: @recommends } %>
 				</tbody>
 			</table>
-			<%= link_to '最上方插入一行', delete_last_home_recommends_path, class: 'btn btn-small', confirm: '此操作会删除最后一行记录,是否继续?', method: :post, remote: true %>
+			<%= link_to '最上方插入一行', delete_last_home_recommends_path, class: 'btn btn-small', method: :post, remote: true %>
 		<!--</div>/span-->
 	</div>
 </div>

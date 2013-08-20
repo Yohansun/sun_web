@@ -19,9 +19,11 @@ $('.recommend_insert').click(function(){
 	var $position = $('#recommend_select_insert').val(),
 			$title = $('#recommend_title_insert').val(),
 			$url = $('#recommend_url_insert').val();
-	$.ajax({
-		type: "POST",
-    url: "<%= insert_recommend_home_recommends_path %>",
-    data: {position : $position, title : $title, url : $url}
-	});
+  if (confirm('当前操作会删除排序6的记录，是否继续？')) {
+  	$.ajax({
+  		type: "POST",
+      url: "<%= insert_recommend_home_recommends_path %>",
+      data: {position : $position, title : $title, url : $url}
+  	});
+  };
 });
