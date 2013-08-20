@@ -17,6 +17,8 @@ class IBanner < ActiveRecord::Base
 
 	 scope :position, lambda{ |position| where(position: position)}
 	 scope :class_name, lambda{ |class_name| where(class_name: class_name)}
+	 scope :page_name, lambda{ |page_name| where(page_name: page_name)}
+	 scope :find_id, lambda{ |id| where(id: id)}
 
 private
   def randomize_file_name

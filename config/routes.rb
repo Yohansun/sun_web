@@ -396,6 +396,8 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+  get "banner_home/index"
+
   get "banner_group/index"
 
     match "/baicheng/daily_report"=>'baicheng#daily_report'
@@ -566,6 +568,12 @@ Icolor::Application.routes.draw do
 
     # banner管理
     resources :banner_group
+    resources :banner_home do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
 
     root to: 'home_kvs#index', as: 'manage_root'
   end

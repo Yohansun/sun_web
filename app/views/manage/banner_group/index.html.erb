@@ -1,0 +1,179 @@
+<script type="text/javascript">
+$(function(){
+	$('.js-tips_cancel').on('click', function(e){
+		e.preventDefault();
+		var $ps_tr = $(this).parents('tr');
+		var $tips_p = $ps_tr.find('p.tips_toggle');
+		$tips_p.show();
+		$tips_p.next().addClass('hidden');
+
+		$(this).parent().siblings('.tips_links').show();
+		$(this).parent('.tips_edit_btn').addClass('hidden');
+	});
+	$('.js-tips_save').on('click', function(){
+		console.log($(this).parents('tr').find('.tips_edit_select').children('option:selected').text())
+		console.log($(this).parents('tr').find('.tips_tit_edit').val())
+		console.log($(this).parents('tr').find('.tips_con_edit').val())
+		console.log($(this).parents('tr').find('.tips_site_edit').val())
+	});
+
+	(function($){
+		$('.js-grename,.js-gcancel').on('click', function(){
+			$(this).parent().toggle().siblings('[data-toggle-btn="toggle"]').toggle();
+			$(this).parent().siblings('.group_m').find('[data-toggle-btn="toggle"]').toggle();
+		});
+	})($);
+	(function($){
+		$('.js-addtr').on('click', function(){
+			$(this).parent('.tips_form').find('tbody').prepend('<tr><td><a href="javascript:;" class="js-edit hidden">编辑</a><p class="tips_links hidden"><a href="javascript:;">首页1</a><a href="javascript:;">首页2</a></p><p class="tips_edit_btn"><a class="js-tips_save" href="javascript:;">保存</a><a class="js-tips_cancel" href="javascript:;">取消</a></p></td><td><p class="tips_order tips_toggle hidden">1</p><select class="input-small tips_edit_select"></select></td><td><p class="tips_tit tips_toggle hidden">title1</p><input type="text" class="input-medium tips_tit_edit"></td><td><p class="tips_con tips_toggle hidden">content1</p><textarea rows="3" class="input-medium tips_con_edit"></textarea></td><td><p class="tips_site tips_toggle hidden">www.icolor.com.cn</p><input type="text" class="input-medium tips_site_edit" ></td><td><p class="tips_latesttime">2013-08-13</p></td></tr>')
+		})
+	})($);
+});
+</script>
+<div class="main">
+	<button id="new_group" class="btn btn-small btn-primary">新建组</button>
+
+	<div id="new_group_pannel" class="clearfix row-fluid">
+		<div class="span1">
+			<a href="#">保存</a>
+		</div>
+		<div class="span11 group_m nom">
+			<div class="clearfix">
+				<span class="span4"><input type="text" placeholder="因爱之名宣传广告"></span>
+				<span class="span4" style="line-height:30px;">共0个banner</span>
+			</div>
+		</div>
+	</div>
+	
+	<hr>
+	<div class="clearfix row-fluid gm_wrap">
+		<div class="span1" data-toggle-btn="toggle">
+			<a href="javascript:;" class="js-grename">重命名组</a><br>
+			<a href="javascript:;" class="js-gremove">删除组</a>
+		</div>
+		<div class="span1 nom" data-toggle-btn="toggle" style="display:none">
+			<a href="javascript:;" class="js-gsave">保存</a><br>
+			<a href="javascript:;" class="js-gcancel">取消</a>
+		</div>
+		<div class="span11 group_m nom">
+			<div class="clearfix">
+				<strong class="span4 lead" data-toggle-btn="toggle">因爱之名宣传广告</strong>
+				<span class="span4" style="display:none" data-toggle-btn="toggle"><input type="text" placeholder=""></span>
+				<span class="span4" style="line-height:30px;">共5个banner</span>
+			</div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<hr>
+	<div class="clearfix row-fluid gm_wrap">
+		<div class="span1" data-toggle-btn="toggle">
+			<a href="javascript:;" class="js-grename">重命名组</a><br>
+			<a href="javascript:;" class="js-gremove">删除组</a>
+		</div>
+		<div class="span1 nom" data-toggle-btn="toggle" style="display:none">
+			<a href="javascript:;" class="js-gsave">保存</a><br>
+			<a href="javascript:;" class="js-gcancel">取消</a>
+		</div>
+		<div class="span11 group_m nom">
+			<div class="clearfix">
+				<strong class="span4 lead" data-toggle-btn="toggle">因爱之名宣传广告</strong>
+				<span class="span4" style="display:none" data-toggle-btn="toggle"><input type="text" placeholder=""></span>
+				<span class="span4" style="line-height:30px;">共4个banner</span>
+			</div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail well well-small nom">
+						<span class="block text-success">20130808每周之星1</span>
+						<span class="block">设计快查</span>
+						<span class="block">670x85</span>
+						<span class="block">
+							[<a href="#">查看</a>][<a href="#">编辑</a>]
+						</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
