@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><%= @title || '因爱之名 刷新生活' %></title>  
+    <title><%= @title || '因爱之名 刷新生活' %></title>
 
-    <meta name="description" content="<%= @description ||'因爱之名 刷新生活' %>" />  
+    <meta name="description" content="<%= @description ||'因爱之名 刷新生活' %>" />
     <meta name="keywords" content="<%= @key_words ||'因爱之名 刷新生活' %>">
       <%= csrf_meta_tag %>
       <%= stylesheet_link_tag "baicheng_all.css","baicheng/base" %>
@@ -53,7 +53,7 @@
                     <a href="javascript:alert('您已经上传过房型图！');" >我要装修</a>
                   <% elsif  not current_user.common_user?%>
                     <a href="javascript:alert('很抱歉，只有以“普通用户”身份注册的用户才可以发布装修需求，设计师/家装公司用户请点击“我来设计”参与房型图设计！');" >我要装修</a>
-                  <% else %>                       
+                  <% else %>
                     <a href="<%= new_story_path %>" id='monitor_link_326790'>我要装修</a>
                   <% end %>
                 <% else -%>
@@ -72,10 +72,12 @@
               <li class="<%= 'active ' if controller_name == 'fashion_model' %> pr">
                 <a href="<%= fashion_model_path("wanglikun") %>" class="drophover_toggle fashion_model" >时尚榜样</a>
                 <ul class="drophover_menu hide">
+                  <li><a href="<%= fashion_model_path("luojialiang") %>" class="<%= 'active' if params[:id] == 'luojialiang' %>" id='monitor_link_350559'>罗嘉良</a></li>
                   <li><a href="<%= fashion_model_path("wanglikun") %>" class="<%= 'active' if params[:id] == 'wanglikun' %>" id='monitor_link_337428'>王丽坤</a></li>
                   <li><a href="<%= fashion_model_path("foreign") %>" class="<%= 'active' if params[:id] == 'foreign' %>" id='monitor_link_337621'>Edward Davinson</a></li>
                   <li><a href="<%= fashion_model_path("native") %>" class="<%= 'active' if params[:id] == 'native' %>" id='monitor_link_326794' >崔睿</a></li>
-                  <li><a href="<%= fashion_model_path("mov") %>" class="<%= 'active' if params[:id] == 'mov' %>" id='monitor_link_341517'>精彩视频</a></li>
+                  <li><a href="<%= fashion_model_path("ljlmov") %>" class="<%= 'active' if params[:id] == 'ljlmov' %>" id='monitor_link_350560'>罗嘉良精彩视频</a></li>
+                  <li><a href="<%= fashion_model_path("mov") %>" class="<%= 'active' if params[:id] == 'mov' %>" id='monitor_link_341517'>王丽坤精彩视频</a></li>
                 </ul>
               </li>
               <li class="divider-vertical_nav"></li>
@@ -94,11 +96,11 @@
               </li>
               <li class="nav_box">
                 <%if current_user.common_user?   %>
-                  <a href="<%=    Story.where(user_id: current_user.id, is_save: true).exists? ?  story_path(Story.where(user_id: current_user.id, is_save: true).first.id )  : "javascript:alert('您还没上传房型图！')"%>" id='monitor_link_326807'>查看我房型图</a> 
+                  <a href="<%=    Story.where(user_id: current_user.id, is_save: true).exists? ?  story_path(Story.where(user_id: current_user.id, is_save: true).first.id )  : "javascript:alert('您还没上传房型图！')"%>" id='monitor_link_326807'>查看我房型图</a>
                 <% else %>
-                  <a href="<%= act_stories_path %>" id='monitor_link_326809'>查看我的活动主页</a> 
+                  <a href="<%= act_stories_path %>" id='monitor_link_326809'>查看我的活动主页</a>
 
-    <%#*<a href="#" id='monitor_link_326810'>查看我的购买积分</a>%> 
+    <%#*<a href="#" id='monitor_link_326810'>查看我的购买积分</a>%>
                 <%end  %>
               </li>
               <li class="divider-vertical_dot"></li>
@@ -114,7 +116,7 @@
               <li>
                 <a href="/users/sign_up?return_to=love" id='monitor_link_326803'><i class="icon-refresh_register"></i>注册</a>
               </li>
-            </ul> 
+            </ul>
           <%- end %><!-- right nav end -->
         </div>
       </div>
@@ -227,9 +229,9 @@
             ]
           });
         }
-        
-       
-      
+
+
+
 <% if current_user %>
   <% unless current_user.common_user? %>
             <%#*window.location = '<%= stories_path'%>

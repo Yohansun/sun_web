@@ -91,6 +91,19 @@ function init_monitor_link_click() {
         return newTriggerEBConversion(this, 326793);
     });
 
+    $('#monitor_link_350559').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "因爱之名-罗嘉良"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 350559);
+    });
+
     $('#monitor_link_337428').click(function() {
         CClicki[10008]._trackEvent({
             type: 1,
@@ -141,6 +154,19 @@ function init_monitor_link_click() {
             ]
         });
         return newTriggerEBConversion(this, 341517);
+    });
+
+    $('#monitor_link_350560').click(function() {
+        CClicki[10008]._trackEvent({
+            type: 1,
+            labels: [
+                {"按钮名称": "因爱之名-罗嘉良精彩视频"}
+            ],
+            values: [
+                {"数量": 1}
+            ]
+        });
+        return newTriggerEBConversion(this, 350560);
     });
 
     $('#monitor_link_346296').click(function() {
