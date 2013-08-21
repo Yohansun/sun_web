@@ -56,6 +56,7 @@
 					<div class="widget-body">
 						<%= form_tag('banner_home/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_home?position=#{@i_banner.position}", :class => "widget-main clearfix nom") do %>
 						<%= hidden_field_tag 'i_banner_id', @i_banner.id %>
+						<%= hidden_field_tag 'position', @i_banner.position %>
 							<div class="span4 form-inline">
 								<label class="span3 control-label">图片标识</label>
 								<div class="span9">
