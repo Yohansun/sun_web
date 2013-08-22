@@ -10,7 +10,7 @@
   </style>
   <script type="text/javascript">
     $(function() {
-      $('.tips_form').on('click','.js-edit', function(e){
+      $('.js-edit').on('click', function(e){
         e.preventDefault();
         var $ps_tr = $(this).parents('tr');
         $ps_tr.siblings().find('p.tips_toggle').show();
@@ -54,7 +54,7 @@
           $tips_order_sel.children('option').eq(tips_order-1).attr('selected','selected');
         };
       });
-      $('.tips_form').on('click','.js-tips_cancel', function(e){
+      $('.js-tips_cancel').on('click', function(e){
         // console.log(77)
         e.preventDefault();
         var $ps_tr = $(this).parents('tr');
@@ -67,7 +67,7 @@
         $(this).parent('.tips_edit_btn').addClass('none');
         $ps_tr.find('.tips_checkbtn').addClass('none');
       });
-      $('.tips_form').on('click','.js-tips_save', function(){
+      $('.js-tips_save').on('click', function(){
        var id = $(this).attr('id')
        var rank = $(this).parents('tr').find('.tips_edit_select').children('option:selected').text()
        var title = $(this).parents('tr').find('.tips_tit_edit').val()
@@ -84,54 +84,54 @@
   </script>
 <%- end %>
 <div id="index_tab5" class="tab-pane active">
-	<table class="table bordered table-bordered table-hover tips_list">
-		<thead>
-			<tr>
-				<th>操作</th>
-				<th>排序</th>
-				<th>标题[最多输入16个汉字]</th>
-				<th>内容[最多输入60个汉字]</th>
-				<th>链接</th>
-				<th>最后修改时间</th>
-			</tr>
-		</thead>
-		<tbody>
+  <table class="table bordered table-bordered table-hover tips_list">
+    <thead>
+      <tr>
+        <th>操作</th>
+        <th>排序</th>
+        <th>标题[最多输入16个汉字]</th>
+        <th>内容[最多输入60个汉字]</th>
+        <th>链接</th>
+        <th>最后修改时间</th>
+      </tr>
+    </thead>
+    <tbody>
       <% @channel_tips.each do |channel_tip| %>
-				<tr>
-					<td  style="text-align:center">
-						<a align="center" href="javascript:;" class="js-edit">编辑</a>
-						<p class="tips_links">
-							<%= link_to "首页1", find_owner_channel_tips_path(oe_id: @owner_enters.first.id, ct_id: channel_tip.id),  method: :get, :confirm => "当前行的数据将被首页第1条装修小贴士数据覆盖，同时内容部分只截取前60个汉字。是否继续?" %>
-							<%= link_to "首页2", find_owner_channel_tips_path(oe_id: @owner_enters.last.id, ct_id: channel_tip.id),  method: :get, :confirm => "当前行的数据将被首页第2条装修小贴士数据覆盖，同时内容部分只截取前60个汉字。是否继续?" %>
-						</p>
-						<p class="none tips_edit_btn">
-							<a class="js-tips_save" href="javascript:;" id="<%=channel_tip.id%>">保存</a>
-							<a class="js-tips_cancel" href="javascript:;">取消</a>
-						</p>
-					</td>
-					<td>
-						<p class="tips_order tips_toggle"><%=channel_tip.rank%></p>
-						<select class="input-small tips_edit_select none"></select>
-					</td>
-					<td>
-						<p class="tips_tit tips_toggle"><%=channel_tip.title%></p>
-						<input type="text" class="input-medium tips_tit_edit none" maxlength="16">
-					</td>
-					<td>
-						<p class="tips_con tips_toggle"><%=channel_tip.content%></p>
-						<textarea rows="3" class="input-medium tips_con_edit none" maxlength="60"></textarea>
-					</td>
-					<td>
-						<p class="tips_site tips_toggle"><%=link_to channel_tip.link, "#{channel_tip.link}", target: "_blank"%></p>
-						<input type="text" class="input-medium tips_site_edit none" >
+        <tr>
+          <td  style="text-align:center">
+            <a align="center" href="javascript:;" class="js-edit">编辑</a>
+            <p class="tips_links">
+              <%= link_to "首页1", find_owner_channel_tips_path(oe_id: @owner_enters.first.id, ct_id: channel_tip.id),  method: :get, :confirm => "当前行的数据将被首页第1条装修小贴士数据覆盖，同时内容部分只截取前60个汉字。是否继续?" %>
+              <%= link_to "首页2", find_owner_channel_tips_path(oe_id: @owner_enters.last.id, ct_id: channel_tip.id),  method: :get, :confirm => "当前行的数据将被首页第2条装修小贴士数据覆盖，同时内容部分只截取前60个汉字。是否继续?" %>
+            </p>
+            <p class="none tips_edit_btn">
+              <a class="js-tips_save" href="javascript:;" id="<%=channel_tip.id%>">保存</a>
+              <a class="js-tips_cancel" href="javascript:;">取消</a>
+            </p>
+          </td>
+          <td>
+            <p class="tips_order tips_toggle"><%=channel_tip.rank%></p>
+            <select class="input-small tips_edit_select none"></select>
+          </td>
+          <td>
+            <p class="tips_tit tips_toggle"><%=channel_tip.title%></p>
+            <input type="text" class="input-medium tips_tit_edit none" maxlength="16">
+          </td>
+          <td>
+            <p class="tips_con tips_toggle"><%=channel_tip.content%></p>
+            <textarea rows="3" class="input-medium tips_con_edit none" maxlength="60"></textarea>
+          </td>
+          <td>
+            <p class="tips_site tips_toggle"><%=link_to channel_tip.link, "#{channel_tip.link}", target: "_blank"%></p>
+            <input type="text" class="input-medium tips_site_edit none" >
             <p><a href="javascript:;" class="tips_checkbtn none">检查</a></p>
-					</td>
-					<td>
-						<p class="tips_latesttime"><%=channel_tip.updated_at.to_date%></p>
-						<!-- <input type="text" placeholder="2013-08-13"> -->
-					</td>
-				</tr>
+          </td>
+          <td>
+            <p class="tips_latesttime"><%=channel_tip.updated_at.to_date%></p>
+            <!-- <input type="text" placeholder="2013-08-13"> -->
+          </td>
+        </tr>
       <% end %>
-		</tbody>
-	</table>
+    </tbody>
+  </table>
 </div>
