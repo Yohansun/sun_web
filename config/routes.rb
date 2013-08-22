@@ -514,6 +514,11 @@ Icolor::Application.routes.draw do
         get :find_owner
       end
     end
+    resources :questions do 
+      collection do 
+        post :create_or_update
+      end
+    end
     resources :home_banners do
     end
     resources :fit_images

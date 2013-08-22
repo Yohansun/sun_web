@@ -10,7 +10,7 @@
   </style>
   <script type="text/javascript">
     $(function() {
-      $('.js-edit').on('click', function(e){
+      $('.tips_form').on('click','.js-edit', function(e){
         e.preventDefault();
         var $ps_tr = $(this).parents('tr');
         $ps_tr.siblings().find('p.tips_toggle').show();
@@ -54,7 +54,7 @@
           $tips_order_sel.children('option').eq(tips_order-1).attr('selected','selected');
         };
       });
-      $('.js-tips_cancel').on('click', function(e){
+      $('.tips_form').on('click','.js-tips_cancel', function(e){
         // console.log(77)
         e.preventDefault();
         var $ps_tr = $(this).parents('tr');
@@ -67,7 +67,7 @@
         $(this).parent('.tips_edit_btn').addClass('none');
         $ps_tr.find('.tips_checkbtn').addClass('none');
       });
-      $('.js-tips_save').on('click', function(){
+      $('.tips_form').on('click','.js-tips_save', function(){
        var id = $(this).attr('id')
        var rank = $(this).parents('tr').find('.tips_edit_select').children('option:selected').text()
        var title = $(this).parents('tr').find('.tips_tit_edit').val()

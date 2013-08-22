@@ -1,0 +1,58 @@
+# encoding: utf-8
+class Manage::QuestionsController < Manage::BaseController
+	
+  def index
+    @questions = Question.order("rank asc")
+  end
+
+  def create_or_update
+    rank = 0
+  	if params[:id] == "save"
+  	  question = Question.new
+      question.title = params[:title]
+      question.rank = params[:rank]
+      question.link = params[:link]
+      question.admin_id = current_admin.id
+        if question.save
+          ques = Question.where("rank >= ? and created_at < ?",question.rank,question.created_at)
+          ques.each do |que|
+            if que.rank == 5 
+              que.destroy
+            else
+              que.rank += 1
+              que.save
+            end
+          end
+        render js: "alert('保存成功!');location.reload();"
+        return
+      else
+        render js: "alert('保存失败!');location.reload();"
+        return
+      end
+  	else
+      question = Question.find(params[:id])
+      rank = question.rank
+      question.title = params[:title]
+      question.rank = params[:rank]  
+      question.link = params[:link]
+      question.admin_id = current_admin.id
+      if question.save
+        sum = rank - question.rank
+        if sum > 0 
+          sum.times do |s|
+            ss = s + 1
+              ques = Question.where("rank = ? and updated_at < ?",ss,question.updated_at)
+              ques.first.rank = ss.to_i + 1
+              ques.first.save
+          end
+        end
+        render js: "alert('保存成功!');location.reload();"
+        return
+      else
+        render js: "alert('保存失败!');location.reload();"
+        return
+      end
+  	end
+
+  end
+end
