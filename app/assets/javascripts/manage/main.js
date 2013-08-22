@@ -75,6 +75,11 @@ $(function(){
 			scroll : 3,
 			pagers : '.chann_indicators'
 		});
+		$('#refresh_slide').slider({
+			buttons : false,
+			scroll : 1,
+			pagers : '.circle_indicators'
+		});
 	})($);
 
 
