@@ -34,6 +34,9 @@ class HomeController < ApplicationController
     @fit_literals = FitLiteral.order("order_id asc")
     @fit_image = FitImage.first
 
+    #精彩资讯
+    @questions = Question.order("rank asc")
+
     #业主通道
     @owner_entrys = OwnerEnter.order("order_id asc")
 

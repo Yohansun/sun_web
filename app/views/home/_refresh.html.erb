@@ -46,11 +46,9 @@
 			<div class="media-body">
 				<h5 class="title nomargin"><a class="pull-right" href="#"><small class="muted">更多></small></a>精彩资讯</h5 class="title">
 				<ul class="unstyled nomargin">
-					<li><a href="#" target="_blank">崔睿：家是心中的桃花源2013立邦地铁涂绘艺术展启幕</a></li>
-					<li><a href="#" target="_blank">Edward Davinson：因为爱 家是...</a></li>
-					<li><a href="#" target="_blank">万名设计师为您免费设计新家</a></li>
-					<li><a href="#" target="_blank">iColor拉近彼此距离见证家装魅力</a></li>
-					<li><a href="#" target="_blank">2013立邦地铁涂绘艺术展启幕</a></li>
+					<% @questions.each do |question| %>
+						<li><a href="<%=question.link%>" target="_blank"><%=question.title%></a></li>
+					<% end %>
 				</ul>
 			</div>
 		</div>
