@@ -33,6 +33,7 @@
         '<td>' +
           '<p class="tips_site tips_toggle none">www.icolor.com.cn</p>' +
           '<input type="text" class="input-medium tips_site_edit" >' +
+          '<p><a href="javascript:;" class="tips_checkbtn">检查</a></p>' + 
         '</td>' +
         '<td>' +
           '<p class="tips_latesttime"><%=Time.now.to_date%></p>' +
@@ -146,6 +147,10 @@
          $.post("<%=create_or_update_questions_path %>",{id:id,title:title,rank:rank,link:link},function(){});
        }
       })
+      $('.tips_form').on('click','.tips_checkbtn', function(){
+        var url = $(this).parents().siblings('input').val();
+        open(url)
+      });
 
 })($);
 </script>
@@ -189,7 +194,7 @@
               <input type="text" class="input-medium none tips_tit_edit">
             </td>
             <td>
-              <p class="tips_site tips_toggle"><%=question.link%></p>
+              <p class="tips_site tips_toggle"><a href="<%=question.link%>"><%=question.link%></a></p>
               <input type="text" class="input-medium none tips_site_edit" >
               <p><a href="javascript:;" class="tips_checkbtn none">检查</a></p>
             </td>

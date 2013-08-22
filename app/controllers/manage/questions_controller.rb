@@ -37,9 +37,11 @@ class Manage::QuestionsController < Manage::BaseController
       question.link = params[:link]
       question.admin_id = current_admin.id
       if question.save
-        que = Question.where("rank = ? and updated_at < ?",question.rank,question.updated_at).first
-        que.rank = rank
-        que.save
+        unless rank.to_i == params[:rank].to_i
+          que = Question.where("rank = ? and updated_at < ?",question.rank,question.updated_at).first
+          que.rank = rank
+          que.save
+        end
         render js: "alert('保存成功!');location.reload();"
         return
       else
