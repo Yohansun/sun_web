@@ -9,7 +9,7 @@ class HomeController < ApplicationController
 
   def index
     #首页KV
-    @home_kvs = HomeKv.includes(:kv_maps).order("position")
+    @home_kvs = HomeKv.includes(:kv_maps).kv_position.order("position")
 
     # 精华推荐
     @home_recommends = HomeRecommend.order("position")
@@ -24,12 +24,12 @@ class HomeController < ApplicationController
     end
 
     # banner
-    @owner_entry_banner = HomeBanner.find_by_banner_name "业主通道banner 290x200" 
+    @owner_entry_banner = HomeBanner.find_by_banner_name "业主通道banner 290x200"
     @footer_banner_one = HomeBanner.find_by_banner_name "底部大banner 670x85"
     @footer_banner_two = HomeBanner.find_by_banner_name "底部小banner 310x85"
     @chief_banner = HomeBanner.find_by_banner_name "精华推荐banner 270x100"
     @master_banner = HomeBanner.find_by_banner_name "大师殿堂banner 1000x85"
-    
+
     #装修资讯
     @fit_literals = FitLiteral.order("order_id asc")
     @fit_image = FitImage.first

@@ -514,8 +514,8 @@ Icolor::Application.routes.draw do
         get :find_owner
       end
     end
-    resources :questions do 
-      collection do 
+    resources :questions do
+      collection do
         post :create_or_update
       end
     end
@@ -525,6 +525,13 @@ Icolor::Application.routes.draw do
     resources :fit_literals do
       collection do
         get :insert_news
+      end
+    end
+
+    resources :special_kv do
+      collection do
+        post :create_image
+        post :save_data
       end
     end
 

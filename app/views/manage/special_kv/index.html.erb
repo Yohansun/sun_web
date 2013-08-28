@@ -1,0 +1,126 @@
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<%- content_for :tail do %>
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload" %>
+<script type="text/javascript">
+  $(function(){
+  	$('#special_link1').click(function(){
+			window.open($('#special-field-1').val());
+		});
+		$('#special_link2').click(function(){
+			window.open($('#special-field-2').val());
+		});
+
+    var url = 'special_kv/create_image';
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+        maxNumberOfFiles: 1,
+        maxFileSize: 5000000,
+        done: function (e, data) {
+        	alert(data.result.notify);
+        	window.location.href = "/manage/special_kv";
+        },
+        error: function (e, data) {
+        	alert(data.result);
+        }
+    });
+
+    $('.save_button').click(function(){
+  		var $visible = 0
+  		if($('.visible_checkbox').is(':checked')) {
+			    $visible = 1;
+			};
+			var $url = $('#special-field-1').val();
+			$.ajax({
+				type: "POST",
+        url: "<%= save_data_special_kv_index_path(id: @kv.id) %>",
+        data: {url : $url, visible : $visible}
+			});
+		});
+  });
+</script>
+<%- end %>
+<div class="row-fluid">
+	<div style="margin:15px;">
+		<div class="span7">
+			<p>(上传尺寸限制: 宽度1000px,高度不限)</p>
+			<div class="load-bar load-content" id="uploads">
+				<div class="widget-box center">
+					<p class="banner_show">
+						<img src="<%= asset_path @kv.try(:file).try(:url, :special_cms) %>">
+					</p>
+				</div>
+			</div>
+
+			<div class="widget-main">
+				<input name="visible" type="checkbox" class="visible_checkbox" <%= 'checked' if @kv.visible? %>>
+				<span class="lbl">是否在前端显示</span>
+
+				<a class="btn btn-small btn-primary save_button pull-right" style="margin-left:10px;">保存</a>
+				<span class="btn btn-small btn-primary fileinput-button pull-right">
+					<i class="icon-plus icon-white"></i>
+					<span>上传图片...</span>
+					<input id="fileupload" type="file" name="file" multiple="">
+				</span>
+			</div>
+		</div>
+
+		<div class="span4">
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h5>编辑信息</h5>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<form class="form-inline">
+								<div class="control-group">
+									<label class="control-label" for="special-field-1">链接</label>
+									<div class="controls">
+										<input type="text" id="special-field-1" value="<%= @kv.url if @kv %>">
+										<a href="javascript:;" class="help-line" id="special_link1" target="_blank">检测链接</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="space-6"></div>
+
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-header widget-header-small">
+						<h5 class="lighter">热区</h5>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<%= form_for(KvMap.new, :html => {:class => "form-inline"}, remote: true ) do |f| %>
+								<%= f.hidden_field :home_kv_id, value: @kv.nil? ? nil : @kv.id, id: 'hidden_map_id' %>
+								<label>位置:</label>
+								X&nbsp;<%= f.text_field :x_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								Y&nbsp;<%= f.text_field :y_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								W&nbsp;<%= f.text_field :width, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								H&nbsp;<%= f.text_field :high, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								<div class="clear"></div><br />
+
+								<label class="control-label">链接</label>
+								<%= f.text_field :url, value: nil, id: 'special-field-2' %>
+								<a href="javascript:;" class="help-line" id="special_link2">检测链接</a>
+								<div class="clear"></div>
+								<%= f.submit '添加', class: 'btn btn-info btn-small' %>
+							<%- end %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%= render :partial => 'manage/home_kvs/maps', locals: { maps: @kv.nil? ? [] : @kv.kv_maps} %>
+		</div>
+	</div>
+</div>
