@@ -1,0 +1,60 @@
+<%- content_for :head do %>
+<style type="text/css">
+  .tags_group label{width:40px;margin-top:-7px;text-align:center;}
+  .tags_group .span2{margin-left:0;}
+  .mr15{margin-right: 15px;}
+  .bor_b1{border-bottom: 1px solid #ddd;padding-bottom:15px;}
+</style>
+  <script type="text/javascript">
+  $(function(){
+  <% if params[:save].present? %>
+    alert("保存成功！")
+  <% end %>
+  $('#tag_sort_all').submit(function(){
+    var arr = $(this).find('select').map(function(i,select){
+      return select.value;
+    }).get();
+    var ret = true;
+    var obj = {};
+    $.each(arr, function(i, value){
+      if (!(value in obj)){
+        obj[value] = 1
+      } else {
+        ret = false;
+      }
+    });
+    if(ret == false){
+      alert("标签组名不能重复选择！");
+      return false
+    }else{
+      return true;
+    }
+  })
+  })
+  </script>
+
+<%- end -%>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="<%= 'active_red' if controller_name == 'tag_sorts' %>"><%= link_to '标签组排序', tag_sorts_path %></li>
+  </ul>
+</div>
+<div id="" class="container-fluid mt20"> 
+   <form class="tips_form form-inline mt30 bor_b1">
+    <%=select_tag "genre",options_for_select([["家装设计","1"],["装修部件","0"]], params[:genre]),class: "input-small mr15"%><input type="submit" value="确定" class="btn btn-small btn-primary js-addtr ">
+   </form>
+  
+  <%= form_tag update_tag_sort_tag_sorts_path, :class=>"tips_form tags_group", :id=>"tag_sort_all" do %>
+    <div class="row-fluid">
+    <% @tags.each_with_index do |tag,index| %>
+      <div class="span2">
+        <label class="inline"><%= index + 1 %></label>
+        <%=select_tag "tag_sorts[#{tag.id}]",options_from_collection_for_select(@tags, "category_id", "title",tag.category_id),class: "input-small"%>
+      </div>
+    <% end %>
+    </div>
+    
+    <div><input type="submit" value="保存" class="btn btn-small btn-primary js-addtr input-small"></div>
+    
+  <% end %>
+</div>

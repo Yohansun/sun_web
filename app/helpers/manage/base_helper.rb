@@ -8,6 +8,8 @@ module Manage::BaseHelper
       	'channel_tips'
       when /banner_group|banner_home|banner_channel|special_kv/
       	'banner'
+      when /tag_sorts/
+        'design_images'
       else
       	'nothing'
     end

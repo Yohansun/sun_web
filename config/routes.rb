@@ -508,6 +508,11 @@ Icolor::Application.routes.draw do
 
   scope '/manage', :module => 'manage' do
     resources :owner_enter
+    resources :tag_sorts do 
+      collection do 
+        post :update_tag_sort
+      end
+    end
     resources :channel_tips do
       collection do
         post :update_tip
