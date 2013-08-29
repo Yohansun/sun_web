@@ -113,6 +113,20 @@
             </a>
           </li>
 
+          <li class="<%= 'active' if left_menu_active('life') == 'on' %>">
+            <a href="/manage/life_memoirs">
+              <i class="icon-refresh"></i>
+              <span>刷新生活</span>
+            </a>
+          </li>
+
+          <li class="<%= 'active' if left_menu_active('column') == 'on' %>">
+            <a href="/manage/universal_column">
+              <i class="icon-tablet"></i>
+              <span>通栏</span>
+            </a>
+          </li>
+
         </ul>
 
         <div id="sidebar-collapse">
@@ -120,10 +134,12 @@
         </div>
       </div>
       <div id="main-content" class="clearfix">
-      <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
-        <%= render :partial => nav_path %>
-      </ul>
-      <%= yield %>
+        <% unless nav_path == "manage/base/nothing" %>
+          <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
+            <%= render :partial => nav_path %>
+          </ul>
+        <% end %>
+        <%= yield %>
       </div>
    </div>
   <%= yield :tail %>

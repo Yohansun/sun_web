@@ -1,0 +1,76 @@
+<style type="text/css">
+    .active_red a{color:red!important;}
+    .mt20{margin-top: 20px;}
+    .unclick,.unclick:hover{background-color:gray!important;cursor: default;}
+    .none{display: none!important;}
+</style>
+<script>
+// alert($('#files').is(':disabled'));
+// if ($('#files').is(':disabled') == false) {
+//     alert('ok');
+//     $("#files").attr('disabled', 'false');
+//     // $('#files').removeAttr("disabled");
+// }
+</script>
+
+<script type="text/javascript">
+$(function(){
+
+  $('.editarea #btn_edit').on('click', function(e){
+    e.preventDefault();
+    var that = this;
+    
+    var home_life_video_id = $(this).attr('home_life_video_id');
+    if ($.trim(home_life_video_id).length == 0) {
+      alert('错误,请重新选择');
+      return false;
+    } else {
+      $.get("/manage/home_life_videos/" + home_life_video_id + "/edit",{home_life_video_id: home_life_video_id},function(result){
+        $(that).parents('#show_edit').html(result);
+      });
+
+      //不能重复点击
+      $('.editarea #btn_edit').unbind("click");
+      $('.editarea #btn_edit').on('click', function(e){
+        alert("操作失败，每次只能对一条记录进行编辑.")
+      })
+    }
+
+  })
+});
+</script>
+
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="<%= 'active_red' if controller_name == 'home_life_videos' %>">
+        <%= link_to '视频设置', home_life_videos_path %>
+    </li>
+    <span>|</span>
+    <li>
+        <%= link_to '精彩资讯', questions_path %>
+    </li>
+  </ul>
+</div>
+
+<div class="main">
+
+<div id="edit_div">
+    <%= render :partial => "show" %>
+</div>
+
+</div>
+
+<%= javascript_include_tag "upload_image/tmpl.min",
+                              "upload_image/load-image.min",
+                              "upload_image/vendor/jquery.ui.widget", 
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload",
+                              "upload_image/jquery.fileupload-process",
+                              "upload_image/jquery.fileupload-image",
+                              "upload_image/jquery.fileupload-audio",
+                              "upload_image/jquery.fileupload-video",
+                              "upload_image/jquery.fileupload-validate",
+                              "upload_image/jquery.fileupload-ui" %>
+<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
+
+

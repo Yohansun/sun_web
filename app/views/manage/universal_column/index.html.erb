@@ -1,0 +1,12 @@
+<%= form_tag('/manage/universal_column', :method => 'get', :id => 'show_form') do %>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="">
+      <%= select_tag "column_type", options_from_collection_for_select(@i_column_types, "id", "name"), :class => "input-medium" %>
+    </li>
+    <li class="">
+    	<%= submit_tag "选择", :id => 'save', :class => 'btn btn-mini btn-primary' %>
+    </li>
+  </ul>
+</div>
+<% end %>

@@ -1,0 +1,50 @@
+<div class="bs-docs-grid">
+  <% @home_life_videos.each do |home_life_video| %>
+  <div class="row show-grid" id="show_edit">
+    <div class="span2">
+        <img id="photo_show" src="<%= home_life_video.file.url(:list_1000x85) %>" alt="" />
+    </div>
+    <div class="span5">
+
+      <div class="clearfix form_edit">
+        <div class="editarea">
+          <div class="media">
+            <div class="media-body">
+              <form id="fileupload" action="#" method="POST" enctype="multipart/form-data">
+                  <p class="form-inline">
+                      <div class="fileupload-buttonbar">
+                          <a href="javascript:;" home_life_video_id="<%= home_life_video.id %>" id="btn_edit" class="btn btn-mini btn-link">编辑</a>
+                          <input type="checkbox" class="toggle">
+                          <span class="fileupload-loading"></span>
+                      </div>
+                      <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                  </p>
+                  <p class="form-inline">
+                    <label for="" class="control-label">排序：</label>
+                    <span class="help-inline text-error">
+                      <%= home_life_video.rank %>
+                    </span>
+                  </p>
+                  <p class="form-inline">
+                    <label for="" class="control-label">标题：</label>
+                    <span class="help-inline text-error">
+                      <%= home_life_video.title %>
+                    </span>
+                  </p>
+                  <p class="form-inline">
+                    <label for="" class="control-label">链接：</label>
+                    <span class="help-inline text-error">
+                      <%= home_life_video.url %>
+                    </span>
+                  </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <hr />
+  <% end %>
+</div>
