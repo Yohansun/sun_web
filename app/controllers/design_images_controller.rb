@@ -2,7 +2,7 @@
 
 # -*- encoding : utf-8 -*-
 class DesignImagesController < ApplicationController
-  #caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
+  caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
 
   def create
     newparams = coerce(params)
