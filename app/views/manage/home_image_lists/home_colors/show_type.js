@@ -1,0 +1,1 @@
+$('#uploads').replaceWith("<%= escape_javascript(render(:partial => "manage/home_image_lists/home_types/upload", :locals => {:upload => @upload})) %>");

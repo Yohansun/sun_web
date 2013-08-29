@@ -2,7 +2,7 @@ module Manage::BaseHelper
 
 	def nav_path
 		c_name = case controller_name
-      when /home_kvs|home_recommends|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals/
+      when /home_kvs|home_recommends|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
       	'home'
       when /channel_tips/
       	'channel_tips'

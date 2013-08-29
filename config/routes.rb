@@ -505,7 +505,7 @@ Icolor::Application.routes.draw do
 
     resources :intros, only: :show
   end
-
+  
   scope '/manage', :module => 'manage' do
     resources :owner_enter
     resources :tag_sorts do 
@@ -531,6 +531,35 @@ Icolor::Application.routes.draw do
       collection do
         get :insert_news
       end
+    end
+    
+    scope '/home_image_lists', :module => 'home_image_lists' do
+      resource :home_colors do
+        get 'show_type', on: :collection
+        post 'update_category', on: :collection
+      end
+      resource :home_types do
+        get 'show_type', on: :collection
+        post 'update_category', on: :collection
+      end
+      resource :home_spaces do
+        get 'show_type', on: :collection
+        post 'update_category', on: :collection
+      end
+      resource :home_costs do
+        get 'show_type', on: :collection
+        post 'update_category', on: :collection
+      end
+      resource :home_styles do
+        get 'show_type', on: :collection
+        post 'update_category', on: :collection
+      end
+    end
+
+    resources :home_image_lists do
+      get 'search_type', on: :collection
+      post 'save_home_image_list', on: :collection
+      get 'edit_home_image_list', on: :collection
     end
 
     resources :special_kv do

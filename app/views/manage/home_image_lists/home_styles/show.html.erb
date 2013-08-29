@@ -1,0 +1,56 @@
+<%= render :partial => "manage/home_image_lists/head" %>
+<div class="tags-container">
+  <%= render :partial => "category" %>
+  <div class="clear-fix load-bar load-content" id="uploads_big">
+    <% @banners.each do |banner| %>
+      <div class="clear-fix widget-main form-actions banner_edit<%= banner.id %>" id="bannner_edit_image<%= banner.id %>">
+      	<%= link_to "编辑", edit_home_styles_path(order_id: banner.order_id), :class => "edit_fit_literal pull-left", :style => "width: 50px;" %>
+        <div class="clear-fix pull-left" style="width: 170px;">
+          <%= image_tag banner.file.url(:thumb) %>
+        </div>
+        <div class="pull-left" style="width: 770px;margin-top: -11px;">
+					<ul class="unstyled spaced">
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<strong>排序:  </strong><%= banner.order_id %>
+						</li>
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<strong>标题:  </strong>(<b style='color:red;'>不超过12个字</b>)
+						</li>
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<%= banner.title%>
+						</li>
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<strong>链接:   </strong>
+						</li>
+						<li>
+							<i class="icon-caret-right blue image_link"></i>
+							<%= banner.link %>
+						</li>
+					</ul>
+        </div>
+      </div>
+    <% end %>
+  </div><!--load-content ends-->
+  <%# end %>
+</div>
+<% content_for :tail do -%>
+  <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript">
+    $(function(){
+    	$(".expand-image").click(function(){
+			  if($('.expand-image').text() == "收缩")
+			  {
+			    $('.js-tab-image-childen').hide()
+			    $('.expand-image').html("展开")
+			  }else{
+			  	$('.expand-image').html("收缩")
+			    $('.js-tab-image-childen').show()
+			  }
+			})
+    })
+  </script>
+<% end %>
