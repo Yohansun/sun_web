@@ -1,0 +1,2 @@
+module Manage::BannerRefreshHelper
+end

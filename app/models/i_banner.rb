@@ -1,12 +1,14 @@
 class IBanner < ActiveRecord::Base
 	belongs_to :i_banner_group
-  
+
   has_attached_file :file,
 		:styles => {
 				:list_1000x85 => "1000x85#",
 				:list_670x85 => "670x85#",
 				:list_310x85 => "310x85#",
 				:list_270x100 => "270x100#",
+				:list_230x230 => "230x230#",
+				:list_230x170 => "230x170#",
 				:list_290x200 => "290x200#"
 			},
 		:url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",

@@ -501,11 +501,11 @@ Icolor::Application.routes.draw do
 
     resources :intros, only: :show
   end
-  
+
   scope '/manage', :module => 'manage' do
     resources :owner_enter
-    resources :tag_sorts do 
-      collection do 
+    resources :tag_sorts do
+      collection do
         post :update_tag_sort
       end
     end
@@ -528,7 +528,7 @@ Icolor::Application.routes.draw do
         get :insert_news
       end
     end
-    
+
     scope '/home_image_lists', :module => 'home_image_lists' do
       resource :home_colors do
         get 'show_type', on: :collection
@@ -624,6 +624,13 @@ Icolor::Application.routes.draw do
     end
 
     resources :banner_channel do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :banner_refresh do
       collection do
         post :create_image
         post :save_data

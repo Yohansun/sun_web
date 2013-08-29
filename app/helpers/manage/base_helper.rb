@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Manage::BaseHelper
 
 	def nav_path
@@ -6,7 +7,7 @@ module Manage::BaseHelper
       	'home'
       when /channel_tips/
       	'channel_tips'
-      when /banner_group|banner_home|banner_channel|special_kv/
+      when /banner_group|banner_home|banner_channel|banner_refresh|special_kv/
       	'banner'
       when /tag_sorts/
         'design_images'
@@ -16,6 +17,24 @@ module Manage::BaseHelper
       	'nothing'
     end
     "manage/base/#{c_name}"
+  end
+
+  def refresh_label_path
+    label_name = case params[:page_name]
+      when '刷新实录'
+        'refresh_label1'
+      when '刷新实录视频页'
+        'refresh_label2'
+      when '刷新生活精彩咨讯'
+        'refresh_label3'
+      when '刷新效果'
+        'refresh_label4'
+      when '刷新服务'
+        'refresh_label5'
+      else
+        'nothing'
+    end
+    "manage/banner_refresh/#{label_name}"
   end
 
   def left_menu_active key
