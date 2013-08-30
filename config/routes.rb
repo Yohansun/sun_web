@@ -528,6 +528,11 @@ Icolor::Application.routes.draw do
     resources :home_banners do
     end
     resources :fit_images
+    resource :home_heads do
+      get 'show_type', on: :collection
+      get 'insert_news', on: :collection
+      post 'save_insert', on: :collection
+    end
     resources :fit_literals do
       collection do
         get :insert_news
