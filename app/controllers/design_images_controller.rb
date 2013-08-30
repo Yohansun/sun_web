@@ -116,7 +116,7 @@ class DesignImagesController < ApplicationController
       end
     end
 
-    @design_images = DesignImage.available.audited_with_colors
+    @design_images = DesignImage.from.available.audited_with_colors
     @images_count = @design_images.count
 
     @tag_names = []
