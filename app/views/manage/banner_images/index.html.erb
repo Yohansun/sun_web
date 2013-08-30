@@ -1,7 +1,9 @@
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
 <script type="text/javascript">
   $(function(){
-
+  	$('#home_link1').click(function(){
+				window.open($('#home-url-1').val());
+			});
     $('form[data-redirect_url]').bind('ajax:success', function(evt, data) {
       alert("保存成功");
 
@@ -64,7 +66,18 @@
 									<p class="nom"><a href="#">查看所有banner</a></p>
 								</div>
 							</div>
-							<p class="span12 nom">页面标识 <%= @i_banner.page_name %></p>
+
+							<div class="span4 form-inline">
+								<label class="span3 control-label">链接</label>
+								<div class="span9">
+									<input class="input-medium" id="home-url-1" type="text" name="url" value="<%= @i_banner.url %>" />
+									<p class="nom"><a href="javascript:void(0);" id="home_link1">检测链接</a></p>
+								</div>
+							</div>
+
+							<div class="span4 form-inline">
+								<p class="span12 nom">页面标识&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @i_banner.page_name %></p>
+							</div>
 							<p class="span12 nom">
 								<%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
 							</p>

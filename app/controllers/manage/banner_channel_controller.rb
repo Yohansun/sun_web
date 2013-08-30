@@ -32,11 +32,13 @@ class Manage::BannerChannelController < Manage::BaseController
   def save_data
   	position = params[:position]
   	photo_name = params[:photo_name]
+    url = params[:url]
   	i_banner_group_id = params[:i_banner_group_id]
 
   	@i_banner = IBanner.page_name('设计快查').position(position).first
   	if @i_banner
   		@i_banner.photo_name = photo_name
+      @i_banner.url = url
   		@i_banner.i_banner_group_id = i_banner_group_id
   	end
 

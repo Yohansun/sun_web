@@ -1,7 +1,9 @@
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
 <script type="text/javascript">
   $(function(){
-
+  	$('#images_link1').click(function(){
+				window.open($('#images-url-1').val());
+			});
     $('form[data-redirect_url]').bind('ajax:success', function(evt, data) {
       alert("保存成功");
 
@@ -23,6 +25,10 @@
 				</p>
 				<p class="">
 					<a href="/manage/banner_home?position=2" class="btn btn-small btn-block <%= @i_banner.id == 2 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
+				</p>
+				<p class="text-right">
+					<a href="/manage/banner_home?position=7" class="btn btn-small <%= @i_banner.position == 7 ? 'btn-primary' : 'btn-light' %>">240x170</a>
+					<a href="/manage/banner_home?position=8" class="btn btn-small <%= @i_banner.position == 8 ? 'btn-primary' : 'btn-light' %>">230x170</a>
 				</p>
 				<p class="">
 					<a href="/manage/banner_home?position=3" class="btn btn-small btn-block <%= @i_banner.id == 3 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
@@ -72,7 +78,18 @@
 									<p class="nom"><a href="#">查看所有banner</a></p>
 								</div>
 							</div>
-							<p class="span12 nom">页面标识 <%= @i_banner.page_name %></p>
+
+							<div class="span4 form-inline">
+								<label class="span3 control-label">链接</label>
+								<div class="span9">
+									<input class="input-medium" id="images-url-1" type="text" name="url" value="<%= @i_banner.url %>" />
+									<p class="nom"><a href="javascript:void(0);" id="images_link1">检测链接</a></p>
+								</div>
+							</div>
+
+							<div class="span4 form-inline">
+								<p class="span12 nom">页面标识&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @i_banner.page_name %></p>
+							</div>
 							<p class="span12 nom">
 								<%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
 							</p>
@@ -85,7 +102,7 @@
 	</div>
 
 </div>
-<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                               "upload_image/jquery.iframe-transport",
                               "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
@@ -107,4 +124,4 @@ $(function() {
         }
     })
 });
-</script>			
+</script>

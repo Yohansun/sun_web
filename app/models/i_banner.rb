@@ -9,6 +9,7 @@ class IBanner < ActiveRecord::Base
 				:list_270x100 => "270x100#",
 				:list_230x230 => "230x230#",
 				:list_230x170 => "230x170#",
+				:list_240x170 => "240x170#",
 				:list_290x200 => "290x200#"
 			},
 		:url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
