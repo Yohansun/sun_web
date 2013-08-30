@@ -37,20 +37,3 @@
   </div><!--load-content ends-->
   <%# end %>
 </div>
-<% content_for :tail do -%>
-  <%= javascript_include_tag "jquery.uploadify.js" %>
-  <script type="text/javascript">
-    $(function(){
-    	$(".expand-image").click(function(){
-			  if($('.expand-image').text() == "收缩")
-			  {
-			    $('.js-tab-image-childen').hide()
-			    $('.expand-image').html("展开")
-			  }else{
-			  	$('.expand-image').html("收缩")
-			    $('.js-tab-image-childen').show()
-			  }
-			})
-    })
-  </script>
-<% end %>

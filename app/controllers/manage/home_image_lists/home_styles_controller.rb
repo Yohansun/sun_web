@@ -7,21 +7,32 @@ class Manage::HomeImageLists::HomeStylesController < Manage::BaseController
   end
 
   def update
-    @image = HomeStyle.find params[:id]
-    @image.title = params[:title]
-    @image.link = params[:link]
-    # if @image.save
-    #   render js: "alert('保存成功!');location.reload();"
-    # end
+    tags = params[:tags].map{|tag| tag.to_i}
+    type_tags = HomeTypeCategory.styles.map &:tag
+    if type_tags.size >= tags.size
+      type_tags.each do |type_tag|
+        unless tags.include?(type_tag.to_i)
+           HomeTypeCategory.find_by_tag(type_tag).destroy
+        end
+      end
+      type_tags = HomeTypeCategory.styles.map &:tag
+    end
+    if tags.size > type_tags.size
+      tags.each do |tag|
+        unless type_tags.include?(tag.to_i)
+          HomeTypeCategory.create(:tag => tag.to_i, :tagable_type => "home_style")
+        end
+      end
+    end
     redirect_to home_styles_path if @image.save
   end
   
   def update_category
     tags = params[:tags]
-    type_tags = HomeTypeCategory.categories.map &:tag
+    type_tags = HomeTypeCategory.styles.map &:tag
     tags.each do |tag|
       unless type_tags.include?(tag.to_i)
-        HomeTypeCategory.create(:tag => tag.to_i, :tagable_type => "home_type")
+        HomeTypeCategory.create(:tag => tag.to_i, :tagable_type => "home_style")
       end
     end
     redirect_to home_styles_path
@@ -51,9 +62,10 @@ class Manage::HomeImageLists::HomeStylesController < Manage::BaseController
   end
 
   def get_data
+    @order_ids = HomeStyle.order("order_id asc").map &:order_id
     @lists = HomeImageList.all
     @categories = ImageLibraryCategory.where(parent_id: 34)
     @banners = HomeStyle.order("order_id asc")
-    @home_categories = HomeTypeCategory.where("home_type_categories.tagable_type = ?", "home_type").map &:tag
+    @home_categories = HomeTypeCategory.where("home_type_categories.tagable_type = ?", "home_style").map &:tag
   end
 end

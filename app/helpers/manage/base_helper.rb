@@ -3,13 +3,13 @@ module Manage::BaseHelper
 
 	def nav_path
 		c_name = case controller_name
-      when /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
+      when /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals/
       	'home'
       when /channel_tips/
       	'channel_tips'
       when /banner_group|banner_home|banner_channel|banner_refresh|special_kv/
       	'banner'
-      when /tag_sorts/
+      when /tag_sorts|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
         'design_images'
       when /life_memoirs|life_info/
         'life'

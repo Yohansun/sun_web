@@ -55,7 +55,15 @@
 								</li>
 								<li class="clear-fix">
 									<i class="icon-caret-right blue"></i>
-									<strong>排序:  </strong><%= banner.order_id %>   
+									<strong>排序:  </strong>
+									<select name="order_id" class="input-medium literal_select">
+								    <option><%= @order_id%></option>
+								    <%= @order_ids.each do |order| %>
+								      <% unless order == @order_id %>
+								        <option><%= order %></option>
+								      <% end %>
+								    <% end %>
+								  </select>
 								</li>
 								<li>
 									<i class="icon-caret-right blue"></i>
@@ -131,34 +139,6 @@
 				  //$("#upload_going").hide();
 				}
 			});
-    	$(".expand-image").click(function(){
-			  if($('.expand-image').text() == "收缩")
-			  {
-			    $('.js-tab-image-childen').hide()
-			    $('.expand-image').html("展开")
-			  }else{
-			  	$('.expand-image').html("收缩")
-			    $('.js-tab-image-childen').show()
-			  }
-			})
-			$(".inspect_link").click(function(){
-	      if($(".image_link").val() == ""){
-	        alert("请输入链接!!!");
-	        return false;
-	      }else{
-	        window.open($(".image_link").val());
-	      }
-	    });
-      $(".home_type_save").click(function(){
-	    	if($(".image_title").val().length > 12){
-          alert("标题不能超过12个字");
-          return false;
-	    	}
-	    	if($(".image_link").val() == ""){
-          alert("链接不能为空");
-          return false;
-	    	}
-	    });
     })
   </script>
 <% end %>

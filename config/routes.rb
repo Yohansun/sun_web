@@ -554,8 +554,6 @@ Icolor::Application.routes.draw do
 
     resources :home_image_lists do
       get 'search_type', on: :collection
-      post 'save_home_image_list', on: :collection
-      get 'edit_home_image_list', on: :collection
     end
 
     resources :special_kv do

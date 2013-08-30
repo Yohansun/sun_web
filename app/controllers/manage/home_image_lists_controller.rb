@@ -19,18 +19,4 @@ class Manage::HomeImageListsController < Manage::BaseController
   	end
   end
 
-  # def search_type
-  # 	@categories = ImageLibraryCategory.where(parent_id: 1)
-  # 	@banners = HomeType.order("order_id asc")
-  # 	render :search_type
-  # end
-  
-  def edit_home_image_list
-  	@image = HomeType.find params[:id]
-  	render :edit_home_image_list
-  end
-
-  def save_home_image_list
-    
-  end
 end

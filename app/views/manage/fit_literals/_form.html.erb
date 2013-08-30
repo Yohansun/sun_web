@@ -5,13 +5,13 @@
 </td>
 <td>
 	<select name="order_id" class="input-medium literal_select">
-      <option><%= @new.order_id%></option>
-      <%= @orders.each do |order| %>
-        <% unless order == @new.order_id %>
-          <option><%= order %></option>
-        <% end %>
+    <option><%= @new.order_id%></option>
+    <%= @orders.each do |order| %>
+      <% unless order == @new.order_id %>
+        <option><%= order %></option>
       <% end %>
-    </select>
+    <% end %>
+  </select>
 </td>
 <td>
 	<input class="literal_title" name="title" value="<%= @new.title%>">
