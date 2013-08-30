@@ -1,0 +1,27 @@
+<td>
+	<input type="submit" class="literal_submit" value="保存" id='monitor_link_326820'>
+	<input type="hidden" value="<%= @new.id%>" name='fit_literal_id'>
+	<%= link_to "取消", home_liter_heads_path %>
+</td>
+<td>
+	<select name="order_id" class="input-medium literal_select">
+    <option><%= @new.order_id%></option>
+    <%= @orders.each do |order| %>
+      <% unless order == @new.order_id %>
+        <option><%= order %></option>
+      <% end %>
+    <% end %>
+  </select>
+</td>
+<td>
+	<input class="literal_title" name="title" value="<%= @new.title%>">
+</td>
+<td>
+	<input name="link" class="liter_link" value="<%= @new.link%>">
+	<a href="javascript:;" class="inspect_fit_liter_link">检测链接</a>
+</td>
+<td>
+	<span class="">
+		<%= @new.updated_at.strftime("%Y-%m-%d %H:%M") %>
+	</span>
+</td>

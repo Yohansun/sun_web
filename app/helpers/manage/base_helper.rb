@@ -9,7 +9,7 @@ module Manage::BaseHelper
       	'channel_tips'
       when /banner_group|banner_home|banner_channel|banner_refresh|banner_images|special_kv/
       	'banner'
-      when /tag_sorts|seo_sites|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
+      when /tag_sorts|seo_sites|home_liter_heads|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
         'design_images'
       when /life_memoirs|life_info/
         'life'

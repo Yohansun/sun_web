@@ -1,0 +1,20 @@
+<div id="breadcrumbs">
+ <ul class="breadcrumb">
+  <li><a href="home_heads">图片头条</a><span>|</span></li>
+  <li><a href="home_liter_heads"><b style='color:red;'>文字头条</a></b><span>|</span></li>
+  <li class="active"><a href="home_image_lists">图片列表</a></li>
+ </ul>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<%=form_tag home_liter_heads_path, :method=>:get, :class=>"home_image_list_serach_form" do %>
+				<%=select_tag :design_type, options_for_select([["红标题","home_red_liters"],
+          ["黑标题","home_black_liters"],
+          ["装修风格","home_style_liters"],
+          ["装修费用","home_cost_liters"],
+          ["装修空间","home_space_liters"],
+          ["装修色彩","home_color_liters"],["装修户型","home_type_liters"]], params[:design_type]), :style => "margin-top: 9px;" %>
+			<input type='submit' class="button confirm_buttton" value='确定'/>
+		<% end %>
+	</div>
+</div>
