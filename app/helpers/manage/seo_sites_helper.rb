@@ -1,0 +1,2 @@
+module Manage::SeoSitesHelper
+end
