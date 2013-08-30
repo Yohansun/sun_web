@@ -26,7 +26,7 @@ class Manage::BannerChannelController < Manage::BaseController
   		end
     end
 
-    render :json => {:notify => "上传成功"}, :layout => false
+    render :json => {:notify => result}, :layout => false
   end
 
   def save_data

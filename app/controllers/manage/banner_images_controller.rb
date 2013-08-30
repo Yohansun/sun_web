@@ -1,5 +1,5 @@
 #encoding: utf-8
-class Manage::BannerRefreshController < Manage::BaseController
+class Manage::BannerImagesController < Manage::BaseController
 
 	def index
   	@i_banner_groups = IBannerGroup.all
@@ -12,7 +12,7 @@ class Manage::BannerRefreshController < Manage::BaseController
 	  		@i_banner = IBanner.page_name(params[:page_name]).first
 	  	end
 	  else
-	  	@i_banner = IBanner.page_name('刷新实录').first
+	  	@i_banner = IBanner.page_name('图库首页').first
 	  end
   end
 

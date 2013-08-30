@@ -7,7 +7,7 @@ module Manage::BaseHelper
       	'home'
       when /channel_tips/
       	'channel_tips'
-      when /banner_group|banner_home|banner_channel|banner_refresh|special_kv/
+      when /banner_group|banner_home|banner_channel|banner_refresh|banner_images|special_kv/
       	'banner'
       when /tag_sorts|seo_sites|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
         'design_images'
@@ -35,6 +35,20 @@ module Manage::BaseHelper
         'nothing'
     end
     "manage/banner_refresh/#{label_name}"
+  end
+
+  def images_label_path
+    label_name = case params[:page_name]
+      when '图库首页'
+        'images_label1'
+      when '图库列表页'
+        'images_label2'
+      when '图库内页'
+        'images_label3'
+      else
+        'nothing'
+    end
+    "manage/banner_images/#{label_name}"
   end
 
   def left_menu_active key

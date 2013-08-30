@@ -1,0 +1,2 @@
+module Manage::BannerImagesHelper
+end
