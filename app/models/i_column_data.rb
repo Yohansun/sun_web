@@ -12,6 +12,7 @@ class IColumnData < ActiveRecord::Base
 	 before_post_process :randomize_file_name
 
 	 scope :position, lambda{ |position| where(position: position)}
+	 scope :show_data, lambda{ |i_column_type_id| where(i_column_type_id: i_column_type_id).where("position is null").order("rank desc")}
 
 private
   def randomize_file_name

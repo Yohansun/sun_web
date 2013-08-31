@@ -667,7 +667,6 @@ Icolor::Application.routes.draw do
 
     resources :universal_column do
       collection do
-        post :create_image
         post :save_data
       end
     end
