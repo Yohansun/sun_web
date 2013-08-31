@@ -1,3 +1,4 @@
+#encoding: utf-8
 class AddInitDataToIColumnData < ActiveRecord::Migration
   def change
   	IColumnType.create :name => "最新大师作品"
