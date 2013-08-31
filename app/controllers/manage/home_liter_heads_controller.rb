@@ -26,6 +26,7 @@ class Manage::HomeLiterHeadsController < Manage::BaseController
   def edit
     @new = HomeLiterHead.find params[:id]
     @orders = HomeLiterHead.where("genre = ?", params[:genre]).map &:order_id
+    @genre_type = @new.genre_type
     render :edit
   end
 
@@ -33,8 +34,9 @@ class Manage::HomeLiterHeadsController < Manage::BaseController
     @new = HomeLiterHead.find params[:home_liter_head_id]
     @new.title = params[:title] if params[:title]
     @new.link = params[:link] if params[:link]
-    unless @new.order_id == params[:home_liter_head_id].to_i
-      @ano_new = HomeLiterHead.find_by_order_id params[:order_id].to_i
+    unless @new.order_id == params[:order_id].to_i
+      genre = @new.genre
+      @ano_new = HomeLiterHead.where(genre: genre, order_id: params[:order_id].to_i).first
       @ano_new.update_attributes(order_id: @new.order_id)
       @new.order_id = params[:order_id] if params[:order_id]
     end
@@ -50,14 +52,16 @@ class Manage::HomeLiterHeadsController < Manage::BaseController
 
   def create
     HomeLiterHead.order("order_id asc").where("genre = ?", params[:genre]).each do |image|
-      image.order_id += 1
-      image.save
+      unless image.order_id == 0
+        image.order_id += 1
+        image.save
+      end
     end
     @image = HomeLiterHead.order("order_id asc").where("genre = ?", params[:genre]).last
     @image.title = params[:title]
     @image.link = params[:link]
     @image.order_id = 1
-    redirect_to home_liter_heads_path if @image.save
+    redirect_to home_liter_heads_path(design_type:params[:design_type] ) if @image.save
   end
 
 end

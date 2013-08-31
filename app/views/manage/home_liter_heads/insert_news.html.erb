@@ -2,8 +2,9 @@
   <script type="text/javascript">
     $(function(){
     	$('.new_fit_lit_save').click(function(){
-        if ($(".title").val().length > 10 || $(".title").val().length == 0){
-				  alert("标题必须输入不超过10个汉字同时标题不能为空");
+    		<% if @news.first.genre_type == "red" || @news.first.genre_type == "black" %>
+        if ($(".title").val().length > 16 || $(".title").val().length == 0){
+				  alert("标题必须输入不超过12个汉字同时标题不能为空");
 				  return false;}
 				else if($(".link").val() == ""){
           alert("请输入链接");
@@ -12,6 +13,18 @@
 				else{
 				 	return true;
 				}
+				<% else %>
+				  if ($(".title").val().length > 12 || $(".title").val().length == 0){
+					  alert("标题必须输入不超过12个汉字同时标题不能为空");
+					  return false;}
+					else if($(".link").val() == ""){
+	          alert("请输入链接");
+					  return false;
+					}
+					else{
+					 	return true;
+					}
+				<% end %>
 			});
     })
   </script>
@@ -24,17 +37,33 @@
         <tr>
           <td>操作</td>
           <td>排序</td>
-          <td>标题（最多输入十个汉字）</td>
+          <% if @news.first.genre_type == "red" || @news.first.genre_type == "black" %>
+            <td>标题（最多输入16个汉字）</td>
+          <% else %>
+            <td>标题（最多输入12个汉字）</td>
+          <% end %>
           <td>链接</td>
           <td>最后修改日期</td>
         </tr>
       </thead>
       <tbody>
+			  <% if @news.first.order_id == 0 %>
+					<tr  class="form-inline edit_form<%= @news.first.try(:id) %>">
+						<td>
+							<%= link_to "编辑", edit_home_liter_head_path(@news.first), :remote => true %>
+						</td>
+						<td><%= @news.first.order_id%></td>
+						<td><%= @news.first.title %></td>
+						<td><%= @news.first.link %></td>
+						<td><span class="label label-warning"><%= @news.first.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+						</td>
+					</tr>
+		    <% end %>
 				<tr class="form-inline">
-					<%= form_tag(home_liter_heads_path, method: "post") do %>
+					<%= form_tag(home_liter_heads_path(genre: @news.first.genre, design_type: params[:design_type]), method: "post") do %>
 						<td>
 							<input type="submit" class="new_fit_lit_save" value="保存" id='monitor_link_326820'>
-							<%= link_to "取消", fit_literals_path %>
+							<%= link_to "取消", home_liter_heads_path(design_type: "home_" + @news.first.genre_type + "_liters") %>
 						</td>
 						<td>
 							1<input name="order_id" value="1" style="display:none;">
@@ -54,6 +83,7 @@
 				    <% end %>
 			  </tr>
 				<% @news.each_with_index do |new,index| %>
+				  <% unless new.order_id == 0 %>
 						<tr  class="form-inline edit_form<%= new.try(:id) %>">
 							<td>
 								<%= link_to "编辑", edit_home_liter_head_path(new), :remote => true %>
@@ -64,6 +94,7 @@
 							<td><span class="label label-warning"><%= new.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
 							</td>
 						</tr>
+			    <% end %>
 			  <% end %>
 		  </tbody>
 		</table>

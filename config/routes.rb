@@ -548,22 +548,27 @@ Icolor::Application.routes.draw do
     scope '/home_image_lists', :module => 'home_image_lists' do
       resource :home_colors do
         get 'show_type', on: :collection
+        get 'insert_news', on: :collection
         post 'update_category', on: :collection
       end
       resource :home_types do
         get 'show_type', on: :collection
+        get 'insert_news', on: :collection
         post 'update_category', on: :collection
       end
       resource :home_spaces do
         get 'show_type', on: :collection
+        get 'insert_news', on: :collection
         post 'update_category', on: :collection
       end
       resource :home_costs do
         get 'show_type', on: :collection
+        get 'insert_news', on: :collection
         post 'update_category', on: :collection
       end
       resource :home_styles do
         get 'show_type', on: :collection
+        get 'insert_news', on: :collection
         post 'update_category', on: :collection
       end
     end

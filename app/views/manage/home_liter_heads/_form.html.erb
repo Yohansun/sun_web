@@ -1,17 +1,21 @@
 <td>
 	<input type="submit" class="literal_submit" value="保存" id='monitor_link_326820'>
 	<input type="hidden" value="<%= @new.id%>" name='fit_literal_id'>
-	<%= link_to "取消", home_liter_heads_path %>
+	<%= link_to "取消", home_liter_heads_path(design_type: "home_" + @new.genre_type + "_liters") %>
 </td>
 <td>
-	<select name="order_id" class="input-medium literal_select">
-    <option><%= @new.order_id%></option>
-    <%= @orders.each do |order| %>
-      <% unless order == @new.order_id %>
-        <option><%= order %></option>
-      <% end %>
-    <% end %>
-  </select>
+	<% unless @new.order_id == 0 %>
+		<select name="order_id" class="input-medium literal_select">
+	    <option><%= @new.order_id%></option>
+	    <%= @orders.each do |order| %>
+	      <% unless order == @new.order_id %>
+	        <option><%= order %></option>
+	      <% end %>
+	    <% end %>
+	  </select>
+	<% else %>
+	  0
+  <% end %>
 </td>
 <td>
 	<input class="literal_title" name="title" value="<%= @new.title%>">
