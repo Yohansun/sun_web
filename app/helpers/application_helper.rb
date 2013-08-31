@@ -195,7 +195,7 @@ module ApplicationHelper
       star_descript1 + '【月度设计之星】' + star_descript2
     #个人主页(通用)
     elsif controller_name == 'users'
-      "立邦iColor明星设计师 — 设计师姓名的个人主页为您展示装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor." 
+      "立邦iColor明星设计师 — 设计师姓名的个人主页为您展示装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     #作品展示
     elsif controller_name == 'designs' && action_name == 'index'
       "立邦iColor装修设计鉴赏带您领略优秀的立邦iColor设计师专业装修设计作品,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
@@ -511,16 +511,16 @@ module ApplicationHelper
       link_to image_tag(asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}"), user_path(user)
     end
   end
-  
+
   def avatar_img(*args)
     user, type, size = args[0], args[1], args[2]
     if user.avatar.present?
-       image_tag("#{user.avatar.file.url(type.blank? ? :original : type.to_sym)}", size: "#{size if size.present?}") 
+       image_tag("#{user.avatar.file.url(type.blank? ? :original : type.to_sym)}", size: "#{size if size.present?}")
     else
-       image_tag(asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}") 
+       image_tag(asset_path("news/regimg_bg.jpg"), size: "#{size if size.present?}")
     end
   end
-  
+
   #家装公司个性主页helper
   #获取最新的行业资讯
   def get_articles
@@ -578,20 +578,30 @@ module ApplicationHelper
   def link_suffix
     "#from=top"
   end
-  
+
+  def footer_links
+    c_name = case controller_name
+    when /design_images/
+      'design_images_links'
+    else
+      'default_links'
+    end
+    "layouts/footer_links/#{c_name}"
+  end
+
   # TASK290
   ALLOW_CONVERSION = Hash.new {|k,v| k[v] = []}.tap do |hash|
     hash[:home]          = [:index];
     hash[:design_images] = [:index]
     hash[:channel]       = [:access]
   end
-  
+
   def rendered_script_conversion
     ctrl,act = params[:controller],params[:action]
     path_url = "conversion/#{ctrl}_#{act}"
     render(path_url) if allow_conversion(ctrl,act)
   end
-  
+
   def allow_conversion(ctrl,act)
     ctrl,act = ctrl.to_sym,act.to_sym
     ALLOW_CONVERSION[ctrl].tap do |actions|

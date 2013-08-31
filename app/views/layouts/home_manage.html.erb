@@ -109,9 +109,9 @@
             </ul>
           </li>
           <li class="<%= 'active noborder' if controller_name == 'design_images' %>">
-            <a href="/images" target="_blank">装修图库</a>
+            <a href="<%= lists_design_images_path %>" target="_blank">装修图库</a>
               <ul class="subnav">
-                <li><a href="#">图库首页</a></li>
+                <li><a href="<%= lists_design_images_path %>">图库首页</a></li>
                 <li><a href="#">图库专题</a></li>
               </ul>
           </li>
@@ -175,7 +175,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container <%= 'map' if controller_name == 'design_images' %>">
     <%= yield %>
     <div class="home_footer">
       <ul class="index_main index_map clearfix">
@@ -243,9 +243,7 @@
 
       <div class="footer">
         <hr class="border2">
-        <p class="links">
-          <strong>友情链接:</strong><a href="http://www.nipponpaint.com.cn/" target="_blank">立邦官网</a><a href="http://shop.nipponpaint.com.cn/" target="_blank">立邦官方商城</a><a href="http://nipponpaint.tmall.com/shop/viewShop.htm" target="_blank">立邦天猫商城</a>
-        </p>
+        <%= render partial: footer_links %>
         <hr class="border2">
         <p class="text-center pt15">
           <a href="http://www.nipponpaint.com.cn/" target="_blank">立邦官网</a> |

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
   layout "home_manage"
-  caches_page :index, :expires_in => 60.minutes
+  #caches_page :index, :expires_in => 60.minutes
 
   def t1days
     redirect_to "/21days/index.html"
