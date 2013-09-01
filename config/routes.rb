@@ -676,19 +676,11 @@ Icolor::Application.routes.draw do
       end
     end
 
-    resources :life_memoirs do
-      collection do
-        post :create_image
-        post :save_data
-      end
-    end
+    delete "life_memoirs/destroy", to: 'life_memoirs#destroy'
+    resources :life_memoirs
 
-    resources :life_info do
-      collection do
-        post :create_image
-        post :save_data
-      end
-    end
+    delete "life_infos/destroy", to: 'life_infos#destroy'
+    resources :life_infos
 
     root to: 'home_kvs#index', as: 'manage_root'
   end

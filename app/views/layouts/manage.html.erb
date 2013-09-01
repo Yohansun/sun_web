@@ -10,12 +10,22 @@
     'bootstrap/font-awesome.min',
     'bootstrap/ace.min',
     'bootstrap/ace-responsive.min',
-    'bootstrap/ace-skins.min' %>
+    'bootstrap/ace-skins.min',
+    'datepicker',
+    'bootstrap-timepicker' %>
   <%= javascript_include_tag 'jquery',
     'jquery_ujs',
     'bootstrap/bootstrap.min',
     'bootstrap/ace.min',
-    'bootstrap/ace-elements.min',"manage/home_image_lists" %>
+    'bootstrap/ace-elements.min','manage/home_image_lists', 'bootstrap-datetimepicker' %>
+
+  <script>
+    //datepicker & timepicker
+    $(function(){
+      $('.datepickers').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+      $(".datetimepicker_full").datetimepicker({weekStart:1,todayBtn:1,autoclose:1,todayHighlight:1,startView:2,forceParse:0,showMeridian:1});
+    });
+  </script>
 
   <%= yield :head %>
 
