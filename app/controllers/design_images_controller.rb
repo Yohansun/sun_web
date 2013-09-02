@@ -2,6 +2,7 @@
 class DesignImagesController < ApplicationController
   layout "home_manage"
   #caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
+  before_filter :get_categories, only: [:index, :lists]
 
   def create
     newparams = coerce(params)
@@ -102,6 +103,10 @@ class DesignImagesController < ApplicationController
     @type_categories1 = @type_categories[0..8]
     @type_categories2 = @type_categories[9..-1]
     #装修风格
+    @style_categories = ImageLibraryCategory.where(parent_id: 34)
+    @style_categories1 = @style_categories[0..8]
+    @style_categories2 = @style_categories[9..17]
+    @style_categories3 = @style_categories[18..-1]
     #装修空间
     @space_categories = ImageLibraryCategory.where(parent_id: 82)
     @space_categories1 = @space_categories[0..9]
@@ -134,13 +139,13 @@ class DesignImagesController < ApplicationController
       @user_word = @search_word
       @rank = @other_ids[5]
     end
-    @categories = ImageLibraryCategory.parent_categories
-    @category_ids = @categories.collect{|categorie|
-      {
-        id: categorie.id,
-        childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
-      }
-    }
+    # @categories = ImageLibraryCategory.parent_categories
+    # @category_ids = @categories.collect{|categorie|
+    #   {
+    #     id: categorie.id,
+    #     childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
+    #   }
+    # }
 
     # only select ids
     @ids.delete_at(-1)
@@ -462,6 +467,16 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.find(params[:id])
     @page = params[:page].try(:to_i) +1
     @comments = @image.comments.page(@page).per(3)
+  end
+
+  def get_categories
+    @categories = ImageLibraryCategory.parent_categories
+    @category_ids = @categories.collect{|categorie|
+      {
+        id: categorie.id,
+        childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
+      }
+    }
   end
 
   private

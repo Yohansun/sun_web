@@ -1,8 +1,23 @@
+<%-
+	more_id = case name
+	when '装修户型'
+		1
+	when '装修风格'
+		34
+	when '装修费用'
+		19
+	when '装修空间'
+		82
+	when '装修色彩'
+		107
+	end
+%>
+
 <p class="clearfix index_tit">
-	<a href="#" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
+	<a href="/images/<%= show_link(more_id) %>" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
 	<strong class="pull-left mr10 ft14"><%= name %></strong>
 	<%- tags.each_with_index do |tag,index| %>
-		<a href="#"><%= tag.title %></a>
+		<a href="/images/<%= show_link(tag.id) %>"><%= tag.title %></a>
 		<%- unless index == tags.size - 1 %> |<%- end %>
 	<%- end %>
 </p>
