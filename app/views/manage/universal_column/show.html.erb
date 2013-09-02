@@ -28,17 +28,21 @@
         window.location.href = url;
     }).bind('ajax:beforeSend', function(evt, xhr, status){
       var title = $('#title').val();
-      if ($.trim(title).length == 0) {
-	      alert('标题不能为空并且不能超过14个汉字');
-	      return false;
-	    }
+      var link = $('#url').val();
+      
+      if ($(this).attr("id") == "fileupload") {
+        if ($.trim(title).length == 0) {
+  	      alert('标题不能为空并且不能超过14个汉字');
+  	      return false;
+  	    };
 
-	    var link = $('#url').val();
-	    if ($.trim(link).length == 0) {
-	      alert('链接不能为空!');
-	      return false;
-	    }
-	    alert('当前保存操作会删除排序值为6的记录，是否继续?');
+  	    if ($.trim(link).length == 0 && $(this).attr("id") == "fileupload") {
+  	      alert('链接不能为空!');
+  	      return false;
+  	    }
+  	    alert('当前保存操作会删除排序值为6的记录，是否继续?');
+      }	    
+	    
     }).bind("ajax:error", function(evt, xhr, status, error) {
       alert(xhr.responseText);
     });
