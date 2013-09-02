@@ -14,90 +14,32 @@
 
 	<div class="clearfix refresh_lists">
 		<div class="unstyled map-left index_main pull-left">
-			<div class="media tit_con">
-				<a class="pull-left media_a" href="#">
-					<img class="media-object" data-src="holder.js/64x64" src=<%= asset_path "refresh_life/refresh/refresh_list1.jpg" %> >
-				</a>
-				<div class="media-body refresh_list">
-					<ul class="ul_dot clearfix nomargin">
-						<li>
-							<h5 class="nomargin"><a href="#" target="_blank">iColor 未来之星暨梦想空间设计大赛圆满落幕</a></h5>
-							<p class="nomargin"><a href="#">2013年5月27日，由 iColor 网站与立邦公司共同举办的 iColor 未来之星设计大赛颁奖典礼在北京中央美术学院隆重举行。</a></p>
-						</li>
-					</ul>
-					<div class="nomargin clearfix"><a class="btn_detail pull-left" href="#">查看详情</a></div>
+			<% @i_life_infos.each do |info| %>
+				<div class="media tit_con">
+					<a class="pull-left media_a" href="javascript:void(0);">
+						<%= image_tag(info.file.try(:url), :class => "media-object" ) %>
+						<!-- <img class="media-object" data-src="holder.js/64x64" src=<%#= asset_path "refresh_life/refresh/refresh_list1.jpg" %> > -->
+					</a>
+					<div class="media-body refresh_list">
+						<ul class="ul_dot clearfix nomargin">
+							<li>
+								<h5 class="nomargin"><a href="#" target="_blank"><%= info.title %></a></h5>
+								<p class="nomargin"><a href="#"><%= info.summary %></a></p>
+							</li>
+						</ul>
+						<div class="nomargin clearfix"><a class="btn_detail pull-left" href="<%= info.url %>">查看详情</a></div>
+					</div>
 				</div>
-			</div>
-			<div class="media tit_con">
-				<a class="pull-left media_a" href="#">
-					<img class="media-object" data-src="holder.js/64x64" src=<%= asset_path "refresh_life/refresh/refresh_list2.jpg" %> >
-				</a>
-				<div class="media-body refresh_list">
-					<ul class="ul_dot clearfix nomargin">
-						<li>
-							<h5 class="nomargin"><a href="#" target="_blank">iColor 未来之星暨梦想空间设计大赛圆满落幕</a></h5>
-							<p class="nomargin"><a href="#">2013年5月27日，由 iColor 网站与立邦公司共同举办的 iColor 未来之星设计大赛颁奖典礼在北京中央美术学院隆重举行。</a></p>
-						</li>
-					</ul>
-					<div class="nomargin clearfix"><a class="btn_detail pull-left" href="#">查看详情</a></div>
-				</div>
-			</div>
-			<div class="media tit_con">
-				<a class="pull-left media_a" href="#">
-					<img class="media-object" data-src="holder.js/64x64" src=<%= asset_path "refresh_life/refresh/refresh_list1.jpg" %> >
-				</a>
-				<div class="media-body refresh_list">
-					<ul class="ul_dot clearfix nomargin">
-						<li>
-							<h5 class="nomargin"><a href="#" target="_blank">iColor 未来之星暨梦想空间设计大赛圆满落幕</a></h5>
-							<p class="nomargin"><a href="#">2013年5月27日，由 iColor 网站与立邦公司共同举办的 iColor 未来之星设计大赛颁奖典礼在北京中央美术学院隆重举行。</a></p>
-						</li>
-					</ul>
-					<div class="nomargin clearfix"><a class="btn_detail pull-left" href="#">查看详情</a></div>
-				</div>
-			</div>
-			<div class="media tit_con">
-				<a class="pull-left media_a" href="#">
-					<img class="media-object" data-src="holder.js/64x64" src=<%= asset_path "refresh_life/refresh/refresh_list2.jpg" %> >
-				</a>
-				<div class="media-body refresh_list">
-					<ul class="ul_dot clearfix nomargin">
-						<li>
-							<h5 class="nomargin"><a href="#" target="_blank">iColor 未来之星暨梦想空间设计大赛圆满落幕</a></h5>
-							<p class="nomargin"><a href="#">2013年5月27日，由 iColor 网站与立邦公司共同举办的 iColor 未来之星设计大赛颁奖典礼在北京中央美术学院隆重举行。</a></p>
-						</li>
-					</ul>
-					<div class="nomargin clearfix"><a class="btn_detail pull-left" href="#">查看详情</a></div>
-				</div>
-			</div>
-			<div class="media tit_con">
-				<a class="pull-left media_a" href="#">
-					<img class="media-object" data-src="holder.js/64x64" src=<%= asset_path "refresh_life/refresh/refresh_list2.jpg" %> >
-				</a>
-				<div class="media-body refresh_list">
-					<ul class="ul_dot clearfix nomargin">
-						<li>
-							<h5 class="nomargin"><a href="#" target="_blank">iColor 未来之星暨梦想空间设计大赛圆满落幕</a></h5>
-							<p class="nomargin"><a href="#">2013年5月27日，由 iColor 网站与立邦公司共同举办的 iColor 未来之星设计大赛颁奖典礼在北京中央美术学院隆重举行。</a></p>
-						</li>
-					</ul>
-					<div class="nomargin clearfix"><a class="btn_detail pull-left" href="#">查看详情</a></div>
-				</div>
-			</div>
-			<form class="pager pager-form noborder">
-				<a class="prev" href="#"><span></span>上一页</a>
-				<a href="#" class="current">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">...</a>
-				<a href="#">20</a>
-				<a class="next" href="#">下一页<span></span></a>
-				&nbsp;&nbsp;
-				共200页
-				跳到第<input type="text" />页
-				<input type="submit" value="GO" class="pager-submit" />
-			</form>
+			<% end %>
+			<ul class="pager pager-form noborder clear-fix">
+				<%= paginate @i_life_infos if @i_life_infos.present? %>
+				<!-- <form class="pager pager-form noborder pull-left">
+					&nbsp;&nbsp;
+					共<%= @page_count%>页
+					跳到第<input type="page_text" />页
+					<input type="submit" value="GO" class="" />
+				</form> -->
+			</ul>
 		</div>
 		<div class="pull-right">
 			<div class="chann_warp chann1_right map-right index_main">

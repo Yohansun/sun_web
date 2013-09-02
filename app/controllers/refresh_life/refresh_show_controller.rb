@@ -5,8 +5,4 @@ class RefreshLife::RefreshShowController < RefreshLife::BaseRefreshController
     
   end
 
-  def show
-    
-  end
-
 end
