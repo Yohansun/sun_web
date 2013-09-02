@@ -3,7 +3,7 @@ class HomeHead < ActiveRecord::Base
   attr_accessible :title, :link, :order_id, :file
   validates :title, :length => { :maximum => 12 }
   has_attached_file :file,
-    :styles => {:thumb => "132x180#"},
+    :styles => {:thumb => "132x180#",:big => "300x410#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

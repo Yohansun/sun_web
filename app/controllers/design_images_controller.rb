@@ -53,6 +53,65 @@ class DesignImagesController < ApplicationController
     @banner7 = i_banners.find_by_position(7)
     @banner8 = i_banners.find_by_position(8)
 
+    #热门搜索
+    @hot_search = SeoSite.order("rank asc").where("genre = 1")
+    #面包屑导航
+    @seo_sites = SeoSite.order("rank desc").where("genre = 0")
+
+    #home_heads picture
+    @home_heads = HomeHead.order("order_id")
+    #红标题
+    @liters_red = HomeLiterHead.order("order_id asc").where("genre = 0")
+    #黑标题
+    @liters_black = HomeLiterHead.order("order_id asc").where("genre = 1")
+    #装修户型
+    @type = HomeLiterHead.order("order_id asc").where("genre = ?", 6)
+    #装修风格
+    @style = HomeLiterHead.order("order_id asc").where("genre = ?", 4)
+    #装修费用
+    @cost = HomeLiterHead.order("order_id asc").where("genre = ?", 3)
+    #装修空间
+    @space = HomeLiterHead.order("order_id asc").where("genre = ?", 5)
+    #装修色彩
+    @color = HomeLiterHead.order("order_id asc").where("genre = ?", 2)
+
+    #装修户型图片
+    @home_types = HomeType.order("order_id")
+    home_type_tags = HomeTypeCategory.where("tagable_type = ?", "home_type").map &:tag
+    @home_type_tags = ImageLibraryCategory.find(home_type_tags)
+    #装修风格图片
+    @home_styles = HomeStyle.order("order_id")
+    home_style_tags = HomeTypeCategory.where("tagable_type = ?", "home_style").map &:tag
+    @home_style_tags = ImageLibraryCategory.find(home_style_tags)
+    #装修费用图片
+    @home_costs = HomeCost.order("order_id")
+    home_cost_tags = HomeTypeCategory.where("tagable_type = ?", "home_cost").map &:tag
+    @home_cost_tags = ImageLibraryCategory.find(home_cost_tags)
+    #装修空间图片
+    @home_spaces = HomeSpace.order("order_id")
+    home_space_tags = HomeTypeCategory.where("tagable_type = ?", "home_space").map &:tag
+    @home_space_tags = ImageLibraryCategory.find(home_space_tags)
+    #装修色彩图片
+    @home_colors = HomeColor.order("order_id")
+    home_color_tags = HomeTypeCategory.where("tagable_type = ?", "home_color").map &:tag
+    @home_color_tags = ImageLibraryCategory.find(home_color_tags)
+
+    #footer标签
+    #装修户型
+    @type_categories = ImageLibraryCategory.where(parent_id: 1)
+    @type_categories1 = @type_categories[0..8]
+    @type_categories2 = @type_categories[9..-1]
+    #装修风格
+    #装修空间
+    @space_categories = ImageLibraryCategory.where(parent_id: 82)
+    @space_categories1 = @space_categories[0..9]
+    @space_categories2 = @space_categories[10..-1]
+    #装修色彩
+    @color_categories = ImageLibraryCategory.where(parent_id: 107)
+    @color_categories1 = @color_categories[0..9]
+    @color_categories2 = @color_categories[10..-1]
+    #装修费用
+    @cost_categories = ImageLibraryCategory.where(parent_id: 19)
   end
 
   def index

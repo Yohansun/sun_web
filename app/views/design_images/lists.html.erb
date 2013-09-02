@@ -5,13 +5,9 @@
 <h3 class="chann_caption nomargin">
 	<div class="map-search pull-right">
 		<p class="pull-left">热门搜索：
-			<a href="#">欧式</a>
-			<a href="#">小户型</a>
-			<a href="#">客厅</a>
-			<a href="#">背景墙</a>
-			<a href="#">阳台</a>
-			<a href="#">暖色调</a>
-			<a href="#">卧室</a>
+			<%- @hot_search.each do |s| %>
+				<a href="<%= s.link %>"><%= s.title %></a>
+			<%- end %>
 		</p>
 		<form action="#" class="pull-left">
 			<input type="text" class="map-text" placeholder="婚房装修" />
@@ -24,18 +20,15 @@
 </h3>
 <ul class="map-nav bd clearfix">
 	<li class="pull-left"><a href="/design_images/lists">图库首页</a></li>
-	<li class="pull-left"><a href="#">装修图片大全</a></li>
+	<li class="pull-left"><a href="/images">装修图片大全</a></li>
 	<li class="pull-left"><a href="#">装修户型</a></li>
 	<li class="pull-left"><a href="#">装修风格</a></li>
 	<li class="pull-left"><a href="#">装修费用</a></li>
 	<li class="pull-left"><a href="#">装修空间</a></li>
 	<li class="pull-left"><a href="#">装修色彩</a></li>
-	<li class="pull-right"><a href="#">装修色彩配搭</a></li>
-	<li class="pull-right"><a href="#">小户型卧室</a></li>
-	<li class="pull-right"><a href="#">欧式厨房</a></li>
-	<li class="pull-right"><a href="#">经济型现代简约</a></li>
-	<li class="pull-right"><a href="#">餐厅隔断设计</a></li>
-	<li class="pull-right"><a href="#">蓝色系儿童房</a></li>
+	<%- @seo_sites.each do |s| %>
+		<li class="pull-right"><a href="<%= s.link %>"><%= s.title %></a></li>
+	<%- end %>
 </ul>
 <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
 
@@ -49,77 +42,79 @@
 		<div class="slider-bin">
 			<div class="slider-container">
 				<ul class="clearfix nomargin">
+					<%- @home_heads.each do |image| %>
 					<li class="item">
-						<a class="pull-left media_a title_opacity" href="#">
-							<img class="media-object" data-src="holder.js/64x64" src="<%= asset_path 'manage/map/map-slider.jpg'%>">
+						<a class="pull-left media_a title_opacity" href="<%= image.link %>" target="_blank">
+							<%= image_tag image.file.url(:big), class: 'media-object' %>
 							<p>
-								<span>80平糖果色甜美公寓1</span>
+								<span><%= image.title %></span>
 							</p>
 						</a>
 					</li>
-					<li class="item">
-						<a class="pull-left media_a title_opacity" href="#">
-							<img class="media-object" data-src="holder.js/64x64" src="<%= asset_path 'manage/map/map-slider.jpg' %>">
-							<p>
-								<span>80平糖果色甜美公寓2</span>
-							</p>
-						</a>
-					</li>
+					<%- end %>
 				</ul>
 			</div>
 			<ul class="circle_indicators nomargin">
-				<li class="slider-active"><a href="javascript:;">1</a></li>
-				<li><a href="javascript:;">2</a></li>
+				<%- @home_heads.each_with_index do |image,index| %>
+					<li class="<%= 'slider-active' if index == 0 %>"><a href="javascript:;"><%= index %></a></li>
+				<%- end %>
 			</ul>
 		</div>
 	</div>
 	<div class="map-cen pull-left">
-		<h4 class="text-center"><a href="#" class="map-title1">简约现代宜家三居设计</a></h4>
+		<h4 class="text-center"><a href="<%= @liters_red[0].link %>" class="map-title1" target="_blank"><%= @liters_red[0].title %></a></h4>
 		<div class="map-news">
-			<a href="#">大胆玩色 2套现代休闲美宅时尚比拼2套现代休闲美宅时尚比拼</a>
+			<a href="<%= @liters_red[1].link %>" target="_blank"><%= @liters_red[1].title %></a>
 			<span>|</span>
-			<a href="#">阁楼华丽变身 3套儿童房改造案例</a>
-			<a href="#">小瓷砖定乾坤 61个卫浴间万能模板</a>
+			<a href="<%= @liters_red[2].link %>" target="_blank"><%= @liters_red[2].title %></a>
+			<a href="<%= @liters_red[3].link %>" target="_blank"><%= @liters_red[3].title %></a>
 			<span>|</span>
-			<a href="#">现代简约装修 年轻夫妇甜蜜婚房</a>
+			<a href="<%= @liters_red[4].link %>" target="_blank"><%= @liters_red[4].title %></a>
 		</div>
-		<h4 class="text-center"><a href="#" class="map-title2">简约现代宜家三居设计</a></h4>
+
+		<h4 class="text-center"><a href="<%= @liters_black[0].link %>" class="map-title2" target="_blank"><%= @liters_black[0].title %></a></h4>
 		<div class="map-news">
-			<a href="#">110平米时尚混搭 田园气质童话梦想</a>
+			<a href="<%= @liters_black[1].link %>" target="_blank"><%= @liters_black[1].title %></a>
 			<span>|</span>
-			<a href="#">简约主义8万装100平米三居室婚房</a>
-			<a href="#">130平米大气轩昂 三人的古典美宅</a>
+			<a href="<%= @liters_black[2].link %>" target="_blank"><%= @liters_black[2].title %></a>
+			<a href="<%= @liters_black[3].link %>" target="_blank"><%= @liters_black[3].title %></a>
 			<span>|</span>
-			<a href="#">独具一格 孩子视角看120平色彩家</a>
+			<a href="<%= @liters_black[4].link %>" target="_blank"><%= @liters_black[4].title %></a>
 		</div>
 		<ul class="map-bt">
 			<li>
 				<a href="#" class="map-bt1">装修户型</a><span>|</span>
-				<a href="#" class="map-bt2">风景这边独好 阳台也能很浪漫</a>
-				<a href="#" class="map-bt2">荐12款实惠的小户型电视柜</a>
+				<%- @type.each do |type| %>
+					<a href="<%= type.link %>" class="map-bt2" target="_blank"><%= type.title %></a>
+				<%- end %>
 			</li>
 			<li>
 				<a href="#" class="map-bt1">装修风格</a><span>|</span>
-				<a href="#" class="map-bt2">两套悠然自在三居室设计推荐</a>
-				<a href="#" class="map-bt2">南非别墅的色彩视觉震撼</a>
+				<%- @style.each do |style| %>
+					<a href="<%= style.link %>" class="map-bt2" target="_blank"><%= style.title %></a>
+				<%- end %>
 			</li>
 			<li>
 				<a href="#" class="map-bt1">装修费用</a><span>|</span>
-				<a href="#" class="map-bt2">8万半包95平时尚浪漫田园美家</a>
-				<a href="#" class="map-bt2">白领7万装92平两房两厅幸福</a>
+				<%- @cost.each do |cost| %>
+					<a href="<%= cost.link %>" class="map-bt2" target="_blank"><%= cost.title %></a>
+				<%- end %>
 			</li>
 			<li>
 				<a href="#" class="map-bt1">装修空间</a><span>|</span>
-				<a href="#" class="map-bt2">突破极限3-7平小浴室制胜空间</a>
-				<a href="#" class="map-bt2">11招让居家和时尚并排走</a>
+				<%- @space.each do |space| %>
+					<a href="<%= space.link %>" class="map-bt2" target="_blank"><%= space.title %></a>
+				<%- end %>
 			</li>
 			<li>
 				<a href="#" class="map-bt1">装修色彩</a><span>|</span>
-				<a href="#" class="map-bt2">淡雅色彩让你在夏日享清凉</a>
-				<a href="#" class="map-bt2">浪漫地中海风情 80后小户型</a>
+				<%- @color.each do |color| %>
+					<a href="<%= color.link %>" class="map-bt2" target="_blank"><%= color.title %></a>
+				<%- end %>
 			</li>
 		</ul>
 	</div>
+
 	<div class="map-r pull-right">
 		<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_230x230) %></a>
 		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner3.try(:file).try(:url, :list_230x170), class: "mt10" %></a>
@@ -136,50 +131,7 @@
 </div>
 
 <div class="index_base clearfix">
-	<p class="clearfix index_tit">
-		<a href="#" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
-		<strong class="pull-left mr10 ft14">装修户型</strong>
-		<a href="#">小户型</a> |
-		<a href="#">两居室</a> |
-		<a href="#">三居室</a> |
-		<a href="#">60平</a> |
-		<a href="#">120平</a>
-	</p>
-	<hr class="border2 border2_mt2">
-	<ul class="map-left index_main pull-left">
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map01.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map02.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map03.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map04.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map05.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map06.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map07.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map08.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-	</ul>
+	<%= render partial: 'home_image_lists', locals: { resource: @home_types, tags: @home_type_tags, name: '装修户型' } %>
 	<ul class="map-right index_main pull-right">
 		<li class="text-center">装修户型排行榜</li>
 		<li class="map-r1">
@@ -195,50 +147,7 @@
 	</ul>
 </div>
 <div class="index_base clearfix">
-	<p class="clearfix index_tit">
-		<a href="#" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
-		<strong class="pull-left mr10 ft14">装修风格</strong>
-		<a href="#">现代简约</a> |
-		<a href="#">欧美流行</a> |
-		<a href="#">混搭</a> |
-		<a href="#">田园</a> |
-		<a href="#">日式</a>
-	</p>
-	<hr class="border2 border2_mt2">
-	<ul class="map-left index_main pull-left">
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map09.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map10.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map11.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map12.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map13.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map14.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map15.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map16.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-	</ul>
+	<%= render partial: 'home_image_lists', locals: { resource: @home_styles, tags: @home_style_tags, name: '装修风格' } %>
 	<ul class="map-right index_main pull-right">
 		<li class="text-center">装修风格排行榜</li>
 		<li class="map-r1">
@@ -256,49 +165,7 @@
 <a href="<%= @banner6.url? ? @banner6.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner6.try(:file).try(:url, :list_1000x85) %></a>
 
 <div class="index_base clearfix">
-	<p class="clearfix index_tit">
-		<a href="#" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
-		<strong class="pull-left mr10 ft14">装修费用</strong>
-		<a href="#">经济型</a> |
-		<a href="#">8万以下</a> |
-		<a href="#">8-15万</a> |
-		<a href="#">15-30万</a>
-	</p>
-	<hr class="border2 border2_mt2">
-	<ul class="map-left index_main pull-left">
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map01.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map02.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map03.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map04.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map05.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map06.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map07.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map08.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-	</ul>
+	<%= render partial: 'home_image_lists', locals: { resource: @home_costs, tags: @home_cost_tags, name: '装修费用' } %>
 	<ul class="map-right index_main pull-right">
 		<li class="text-center">装修费用排行榜</li>
 		<li class="map-r1">
@@ -314,50 +181,7 @@
 	</ul>
 </div>
 <div class="index_base clearfix">
-	<p class="clearfix index_tit">
-		<a href="#" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
-		<strong class="pull-left mr10 ft14">装修空间</strong>
-		<a href="#">客厅</a> |
-		<a href="#">卧室</a> |
-		<a href="#">厨房</a> |
-		<a href="#">卫生间</a> |
-		<a href="#">阳台</a>
-	</p>
-	<hr class="border2 border2_mt2">
-	<ul class="map-left index_main pull-left">
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map09.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map10.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map11.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map12.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map13.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map14.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map15.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map16.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-	</ul>
+	<%= render partial: 'home_image_lists', locals: { resource: @home_spaces, tags: @home_space_tags, name: '装修空间' } %>
 	<ul class="map-right index_main pull-right">
 		<li class="text-center">装修空间排行榜</li>
 		<li class="map-r1">
@@ -373,50 +197,7 @@
 	</ul>
 </div>
 <div class="index_base clearfix">
-	<p class="clearfix index_tit">
-		<a href="#" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
-		<strong class="pull-left mr10 ft14">装修色彩</strong>
-		<a href="#">浅白色系</a> |
-		<a href="#">紫色系</a> |
-		<a href="#">中性色系</a> |
-		<a href="#">暖色调</a> |
-		<a href="#">木器实色</a>
-	</p>
-	<hr class="border2 border2_mt2">
-	<ul class="map-left index_main pull-left">
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map09.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map10.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map11.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map12.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map13.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">时尚雅致景观视野</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map14.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">循著彩虹階梯奔向幸福</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map15.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">浪漫地中海 海洋的味道</a></p>
-		</li>
-		<li>
-			<a href="#"><img src="<%= asset_path 'manage/map/img/map16.jpg'%>" alt="" /></a>
-			<p class="text-center"><a href="#">东南亚风情两居室</a></p>
-		</li>
-	</ul>
+	<%= render partial: 'home_image_lists', locals: { resource: @home_colors, tags: @home_color_tags, name: '装修色彩' } %>
 	<ul class="map-right index_main pull-right">
 		<li class="text-center">装修色彩排行榜</li>
 		<li class="map-r1">
@@ -445,25 +226,14 @@
 	<li class="map-bot1">
 		<strong>装修户型</strong>
 		<div>
-			<p><a href="#">小户型</a></p>
-			<p><a href="#">公寓</a></p>
-			<p><a href="#">复式</a></p>
-			<p><a href="#">别墅</a></p>
-			<p><a href="#">一室</a></p>
-			<p><a href="#">两居</a></p>
-			<p><a href="#">三居</a></p>
-			<p><a href="#">四居</a></p>
-			<p><a href="#">四居以上</a></p>
+			<%- @type_categories1.each do |type1| %>
+				<p><a href="#"><%= type1.title %></a></p>
+			<%- end %>
 		</div>
 		<div>
-			<p><a href="#">挑高</a></p>
-			<p><a href="#">跃层</a></p>
-			<p><a href="#">错层</a></p>
-			<p><a href="#">四合院</a></p>
-			<p><a href="#">老洋房</a></p>
-			<p><a href="#">石库门</a></p>
-			<p><a href="#">楼中楼</a></p>
-			<p><a href="#">LOFT</a></p>
+			<%- @type_categories2.each do |type2| %>
+				<p><a href="#"><%= type2.title %></a></p>
+			<%- end %>
 		</div>
 	</li>
 	<li class="map-bot2">
@@ -505,61 +275,35 @@
 	<li class="map-bot3">
 		<strong>装修空间</strong>
 		<div>
-			<p><a href="#">客厅</a></p>
-			<p><a href="#">卧室</a></p>
-			<p><a href="#">厨房</a></p>
-			<p><a href="#">餐厅</a></p>
-			<p><a href="#">书房</a></p>
-			<p><a href="#">阳台</a></p>
-			<p><a href="#">卫生间</a></p>
-			<p><a href="#">儿童房</a></p>
-			<p><a href="#">老人房</a></p>
-			<p><a href="#">过道</a></p>
+			<%- @space_categories1.each do |space1| %>
+				<p><a href="#"><%= space1.title %></a></p>
+			<%- end %>
 		</div>
 		<div>
-			<p><a href="#">工作间</a></p>
-			<p><a href="#">地下室</a></p>
-			<p><a href="#">储藏室</a></p>
-			<p><a href="#">花园</a></p>
-			<p><a href="#">洗衣间</a></p>
-			<p><a href="#">化妆间</a></p>
-			<p><a href="#">健身房</a></p>
-			<p><a href="#">休闲区</a></p>
-			<p><a href="#">庭院</a></p>
+			<%- @space_categories2.each do |space2| %>
+				<p><a href="#"><%= space2.title %></a></p>
+			<%- end %>
 		</div>
 	</li>
 	<li class="map-bot4">
 		<strong>装修色彩</strong>
 		<div>
-			<p><a href="#">浅白色系</a></p>
-			<p><a href="#">红色系</a></p>
-			<p><a href="#">橙色系</a></p>
-			<p><a href="#">黄色系</a></p>
-			<p><a href="#">绿色系</a></p>
-			<p><a href="#">蓝色系</a></p>
-			<p><a href="#">紫色系</a></p>
-			<p><a href="#">中性色系</a></p>
-			<p><a href="#">冷色调</a></p>
-			<p><a href="#">暖色调</a></p>
+			<%- @color_categories1.each do |icolor1| %>
+				<p><a href="#"><%= icolor1.title %></a></p>
+			<%- end %>
 		</div>
 		<div>
-			<p><a href="#">无彩色</a></p>
-			<p><a href="#">木器实色</a></p>
-			<p><a href="#">木器透明色</a></p>
-			<p><a href="#">多彩色</a></p>
+			<%- @color_categories2.each do |icolor2| %>
+				<p><a href="#"><%= icolor2.title %></a></p>
+			<%- end %>
 		</div>
 	</li>
 	<li class="map-bot5">
 		<strong>装修费用</strong>
 		<div>
-			<p><a href="#">经济型</a></p>
-			<p><a href="#">富裕型</a></p>
-			<p><a href="#">豪华型</a></p>
-			<p><a href="#">8万以下</a></p>
-			<p><a href="#">8-15万</a></p>
-			<p><a href="#">15-30万</a></p>
-			<p><a href="#">30-100万</a></p>
-			<p><a href="#">100万以上</a></p>
+			<%- @cost_categories.each do |cost| %>
+				<p><a href="#"><%= cost.title %></a></p>
+			<%- end %>
 		</div>
 	</li>
 </ul>
