@@ -1,0 +1,231 @@
+<% content_for :head do -%>
+    <%= stylesheet_link_tag "refresh_life/map", "art" %>
+    <%= javascript_include_tag "refresh_life/art", "refresh_life/jquery-ui.min.js", "jquery.draggablecarousel-0.1.js", "easing" %>
+<% end -%>
+<div class="container refresh_main">
+	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
+	<ul class="breadcrumb">
+		<li><a href="/">首页</a> > </li>
+		<li><a href="#">刷新生活</a> > </li>
+		<li class="active">刷新效果</li>
+	</ul>
+	<hr class="border2 border2_mt2">
+
+	<div class="refresh_art">
+		<div class="art_top pr">
+			<ul class="pa">
+				<li>
+					<div class="art_info pr">
+						<span>RA0500-SRG1 艳红玫瑰</span>
+						<img src=<%= asset_path "art/stone1.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>ON0024-SRG2 金碧辉煌</span>
+						<img src=<%= asset_path "art/stone2.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>YN0035-SRS3 法国乳酪</span>
+						<img src=<%= asset_path "art/stone3.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>BC6710-SRS4 山亭夏日</span>
+						<img src=<%= asset_path "art/stone4.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>GC4570-FG03 素雅水彩</span>
+						<img src=<%= asset_path "art/stone5.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>ON0071-FGO2 棕榈天堂</span>
+						<img src=<%= asset_path "art/stone6.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>RA7900-FGG1 良宵好景</span>
+						<img src=<%= asset_path "art/stone7.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>VA0004-FGG1 紫醉金迷</span>
+						<img src=<%= asset_path "art/stone8.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>VC7060-FGS4 银河星光</span>
+						<img src=<%= asset_path "art/stone9.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>RC0092-FGS4 寒冬腊月</span>
+						<img src=<%= asset_path "art/stone10.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span> YN3610-FGC 麦田守望3</span>
+						<img src=<%= asset_path "art/stone11.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+				<li>
+					<div class="art_info pr">
+						<span>NN2680-FGC2 玉宇琼楼</span>
+						<img src=<%= asset_path "art/stone12.png" %> />
+					</div>
+					<!-- <a href="javascript:;" class="overs hide pa"></a> -->
+				</li>
+			</ul>
+		</div><!--art_top ends-->
+		<div class="art_bot">
+			<div class="art_box_bin">
+				<div class="art_box pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts1_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts2_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts3_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts4_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts5_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts6_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts7_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts8_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts9_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts10_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts11_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+				<div class="art_box hide pr">
+					<div class="art_bin">
+						<img src=<%= asset_path "art/arts12_0.jpg" %> />
+					</div>
+				</div><!--art_box ends-->
+			</div><!--art_box_bin ends-->
+			<div class="text-right"><img src=<%= asset_path "art/art_text.jpg" %>></div>
+			<ul class="art_nav clearfix">
+				<li class="art_nav1 selected pull-left">媒体报道</li>
+				<li class="art_nav2 pull-left">刷新服务</li>
+				<li class="art_nav3 pull-left">艺术漆效果图册</li>
+				<li class="art_nav4 pull-left">艺术漆设计</li>
+				<li class="art_nav5 pull-left">艺术漆地铁SHOW</li>
+			</ul>
+			<div id="art_container">
+				<div class="ipad1 pr">
+					<div id="carousel">
+						<ul class="nomargin">
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+							<li><img src=<%= asset_path "art/ipad1_img1.jpg" %> alt=""></li>
+						</ul>
+					</div>
+					<a href="javascript:;" class="ipad1_zoom pa">全屏观看</a>
+					<a href="javascript:;" class="ipad1_prev draggablecarousel-prev pa">prev</a>
+					<a href="javascript:;" class="ipad1_next draggablecarousel-next pa">next</a>
+				</div>
+				<div class="ipad1 pr hide">
+					<div class="ipad1_img2">
+						<a href="http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-700.flv" style="display:block;width:847px;height:465px" id="player"></a>
+						<script>
+						// flowplayer("player", <%= asset_path "art/flowplayer-3.2.12.swf" %>);
+						</script>
+					</div><!--ipad1_img2 ends-->
+					<div class="video_words pa">
+						艺术漆首批上市地区：上海 
+						相关产品与服务信息请拨打：800-810-1687
+					</div>
+					<img src=<%= asset_path "art/ipad2_img.jpg" %> alt="" class="ipad1_img3 pa" />
+					<!-- JiaThis Button BEGIN -->
+					<div id="ckepop" class="cw pa" style="right:142px;bottom:66px;">
+						<span class="jiathis_txt">分享：</span>
+						<a class="jiathis_button_qzone"></a>
+						<a class="jiathis_button_tsina"></a>
+						<a class="jiathis_button_renren"></a>
+						<a class="jiathis_button_kaixin001"></a>
+					</div>
+					<!-- JiaThis Button END -->
+				</div>
+				<div class="ipad1 pr hide">
+					<img src=<%= asset_path "art/ipad1_img1.jpg" %> alt="coming soon" title="coming soon" />
+				</div>
+				<div class="ipad1 pr hide">
+					<img src=<%= asset_path "art/ipad1_img1.jpg" %> alt="coming soon" title="coming soon" />
+				</div>
+				<div class="ipad1 pr hide">
+					<img src=<%= asset_path "art/ipad1_img1.jpg" %> alt="coming soon" title="coming soon" />
+				</div>
+			</div>
+		</div><!--art_bot ends-->
+	</div><!--wrapper ends-->
+
+	<%= render :partial => "refresh_life/refresh_list/foot_select" %>
+</div>
+<% content_for :tails do -%>
+    
+<% end -%>

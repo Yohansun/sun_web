@@ -502,6 +502,11 @@ Icolor::Application.routes.draw do
 
     resources :intros, only: :show
   end
+  
+  scope '/refresh_life', :module => 'refresh_life' do
+    resources :refresh_show
+    resources :refresh_list
+  end
 
   scope '/manage', :module => 'manage' do
     resources :owner_enter
