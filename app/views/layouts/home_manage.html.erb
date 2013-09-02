@@ -52,43 +52,43 @@
     <div class="container">
       <div class="home_head">
         <a class="brand" href="/"><%= image_tag "logo.jpg" %></a>
-        <div class="navTop nav_top pull-right form-inline">
+        <%= form_tag("/search", :method => "get",:class => "nav_top pull-right form-inline") do %>
           <span class="input-append follow_button">
             <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
             <wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button>
           </span>
-          <%= form_tag("/search", :method => "get", :style => "display:inline") do %>
+            <span class="top_search">
+              <input type="text" value="" placeholder="<%= params["search_word"] || 'Search' %>" name="search_word"/>
+              <button class="" type="submit">search</button>
+            </span>
             <select class="input-small" name="qt">
               <option value="0">选择分类</option>
               <option value="1">文章</option>
               <option value="2">作品</option>
               <option value="3">设计师/家装公司</option>
             </select>
-            <span class="top_search">
-              <input type="text" value="" placeholder="<%= params["search_word"] || 'Search' %>" name="search_word"/>
-              <button class="" type="submit">search</button>
-            </span>
-          <% end %>
-          <a class="help-inline" target="_blank" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
-          <a class="help-inline subscribe" href="javascript:;">订阅电子期刊</a> |
+
+          <a class="help-inline a_hover_red" target="_blank" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
+          <a class="help-inline a_hover_red" href="javascript:;">订阅电子期刊</a> |
           <!-- <a class="help-inline jiathis_btn" href="javascript:void(0)">分享</a> -->
           <a class="help-inline js-share_btn" href="#">分享</a>
           <!-- JiaThis Button BEGIN -->
           <div id="ckepop" class="jiathis_area">
-            <a class="jiathis_button_tsina"></a>
-            <a class="jiathis_button_kaixin001"></a>
-            <a class="jiathis_button_renren"></a>
-            <a class="jiathis_button_qzone"></a>
+            <a class="jiathis_button_tsina"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+            <a class="jiathis_button_kaixin001"><span class="jiathis_txt jtico jtico_kaixin001"></span></a>
+            <a class="jiathis_button_renren"><span class="jiathis_txt jtico jtico_renren"></span></a>
+            <a class="jiathis_button_qzone"><span class="jiathis_txt jtico jtico_qzone"></span></a>
             <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-            <a class="jiathis_counter_style"></a>
+            <a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_13" title="累计分享0次">0</span></a>
           </div>
           <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
           <!-- JiaThis Button END -->
-          <a data-toggle="modal" class="btn btn-mini btn_gray login js-login" href="#login_modal">登录</a>
-          <a href="/users/sign_up" target="_blank" class="reg btn btn-mini btn_red">免费注册</a>
+          <a data-toggle="modal" class="btn btn-mini btn_gray nomargin" href="#login_modal">登录</a>
+          <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red nomargin">免费注册</a>
           <a href="#" target="_blank"><%= image_tag "nippon.png" %></a>
-        </div>
+
         <span class="js-user-info"></span>
+        <% end %>
         <ul class="nav nav_red nomargin">
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>
