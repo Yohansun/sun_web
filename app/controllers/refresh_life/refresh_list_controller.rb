@@ -13,8 +13,4 @@ class RefreshLife::RefreshListController < RefreshLife::BaseRefreshController
     end
   end
 
-  def show
-    
-  end
-
 end
