@@ -132,85 +132,25 @@
 
 <div class="index_base clearfix">
 	<%= render partial: 'home_image_lists', locals: { resource: @home_types, tags: @home_type_tags, name: '装修户型' } %>
-	<ul class="map-right index_main pull-right">
-		<li class="text-center">装修户型排行榜</li>
-		<li class="map-r1">
-			<a href="#">
-				<strong>20万装修148平简欧风舒适四房</strong>
-				<img src="<%= asset_path 'manage/map/img/map01.jpg'%>" alt="" />
-			</a>
-		</li>
-		<li class="map-r2"><a href="#">东南亚混搭中式 五行风水人家</a></li>
-		<li class="map-r3"><a href="#">128平大空间彰显现代美式风情</a></li>
-		<li class="map-r4"><a href="#">惬意欧式古典风 9.8万打造</a></li>
-		<li class="map-r5"><a href="#">海派南美家居装饰风格家</a></li>
-	</ul>
+	<%= render partial: 'ranking_list', locals: { name: '装修户型排行榜',i_column_type_id: 10 } %>
 </div>
 <div class="index_base clearfix">
 	<%= render partial: 'home_image_lists', locals: { resource: @home_styles, tags: @home_style_tags, name: '装修风格' } %>
-	<ul class="map-right index_main pull-right">
-		<li class="text-center">装修风格排行榜</li>
-		<li class="map-r1">
-			<a href="#">
-				<strong>20万装修148平简欧风舒适四房</strong>
-				<img src="<%= asset_path 'manage/map/img/map09.jpg'%>" alt="" />
-			</a>
-		</li>
-		<li class="map-r2"><a href="#">东南亚混搭中式 五行风水人家</a></li>
-		<li class="map-r3"><a href="#">128平大空间彰显现代美式风情</a></li>
-		<li class="map-r4"><a href="#">惬意欧式古典风 9.8万打造</a></li>
-		<li class="map-r5"><a href="#">海派南美家居装饰风格家</a></li>
-	</ul>
+	<%= render partial: 'ranking_list', locals: { name: '装修风格排行榜',i_column_type_id: 11 } %>
 </div>
 <a href="<%= @banner6.url? ? @banner6.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner6.try(:file).try(:url, :list_1000x85) %></a>
 
 <div class="index_base clearfix">
 	<%= render partial: 'home_image_lists', locals: { resource: @home_costs, tags: @home_cost_tags, name: '装修费用' } %>
-	<ul class="map-right index_main pull-right">
-		<li class="text-center">装修费用排行榜</li>
-		<li class="map-r1">
-			<a href="#">
-				<strong>20万装修148平简欧风舒适四房</strong>
-				<img src="<%= asset_path 'manage/map/img/map01.jpg'%>" alt="" />
-			</a>
-		</li>
-		<li class="map-r2"><a href="#">东南亚混搭中式 五行风水人家</a></li>
-		<li class="map-r3"><a href="#">128平大空间彰显现代美式风情</a></li>
-		<li class="map-r4"><a href="#">惬意欧式古典风 9.8万打造</a></li>
-		<li class="map-r5"><a href="#">海派南美家居装饰风格家</a></li>
-	</ul>
+	<%= render partial: 'ranking_list', locals: { name: '装修费用排行榜',i_column_type_id: 12 } %>
 </div>
 <div class="index_base clearfix">
 	<%= render partial: 'home_image_lists', locals: { resource: @home_spaces, tags: @home_space_tags, name: '装修空间' } %>
-	<ul class="map-right index_main pull-right">
-		<li class="text-center">装修空间排行榜</li>
-		<li class="map-r1">
-			<a href="#">
-				<strong>20万装修148平简欧风舒适四房</strong>
-				<img src="<%= asset_path 'manage/map/img/map09.jpg'%>" alt="" />
-			</a>
-		</li>
-		<li class="map-r2"><a href="#">东南亚混搭中式 五行风水人家</a></li>
-		<li class="map-r3"><a href="#">128平大空间彰显现代美式风情</a></li>
-		<li class="map-r4"><a href="#">惬意欧式古典风 9.8万打造</a></li>
-		<li class="map-r5"><a href="#">海派南美家居装饰风格家</a></li>
-	</ul>
+	<%= render partial: 'ranking_list', locals: { name: '装修空间排行榜',i_column_type_id: 13 } %>
 </div>
 <div class="index_base clearfix">
 	<%= render partial: 'home_image_lists', locals: { resource: @home_colors, tags: @home_color_tags, name: '装修色彩' } %>
-	<ul class="map-right index_main pull-right">
-		<li class="text-center">装修色彩排行榜</li>
-		<li class="map-r1">
-			<a href="#">
-				<strong>20万装修148平简欧风舒适四房</strong>
-				<img src="<%= asset_path 'manage/map/img/map09.jpg'%>" alt="" />
-			</a>
-		</li>
-		<li class="map-r2"><a href="#">东南亚混搭中式 五行风水人家</a></li>
-		<li class="map-r3"><a href="#">128平大空间彰显现代美式风情</a></li>
-		<li class="map-r4"><a href="#">惬意欧式古典风 9.8万打造</a></li>
-		<li class="map-r5"><a href="#">海派南美家居装饰风格家</a></li>
-	</ul>
+	<%= render partial: 'ranking_list', locals: { name: '装修色彩排行榜',i_column_type_id: 14 } %>
 </div>
 
 <div class="clearfix">

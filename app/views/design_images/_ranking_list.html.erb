@@ -1,0 +1,10 @@
+<ul class="map-right index_main pull-right js-img_show">
+	<li class="text-center"><%= name %></li>
+	<% IColumnData.show_data(i_column_type_id).limit(5).each_with_index do |dcs,index| %>
+		<li class="map-r1 dott1 <%="active" if index == 0%>">
+        <i ></i>
+        <strong class="js-title"><%=dcs.title%></strong><br>
+        <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+    </li>
+	<% end %>
+</ul>
