@@ -13,22 +13,16 @@
 			<div class="slider-bin pull-left">
 				<div class="slider-container">
 					<ul class="clearfix nomargin">
+						<% @home_life_videos.each do |hfv| %>
 						<li class="item">
-							<a class="pull-left media_a title_opacity" href="#">
-								<img class="media-object" data-src="holder.js/64x64" src="<%= asset_path 'manage/index/refresh_video.jpg' %>">
+							<a class="pull-left media_a title_opacity" href="<%=hfv.url%>">
+								<img class="media-object" data-src="holder.js/64x64" src="<%=hfv.file.url(:list_1000x85)%>">
 								<p>
-									<span>幸福生活 新的开始</span>
+									<span><%=hfv.title%></span>
 								</p>
 							</a>
 						</li>
-						<li class="item">
-							<a class="pull-left media_a title_opacity" href="#">
-								<img class="media-object" data-src="holder.js/64x64" src="<%= asset_path 'manage/index/refresh_video.jpg' %>">
-								<p>
-									<span>幸福生活 新的开始2</span>
-								</p>
-							</a>
-						</li>
+						<% end %>
 					</ul>
 				</div>
 				<ul class="circle_indicators nomargin">

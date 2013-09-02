@@ -3,7 +3,7 @@
 </style>
 <div class="container refresh_main">
 		<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
-		<div class="mt10"><a href="#"><img src="<%= asset_path @kv.try(:file).try(:url, :special) %>"></a></div>
+		<div class="mt10"><a href="<%=@kv.url if @kv%>"><img src="<%= asset_path @kv.try(:file).try(:url, :special) %>"></a></div>
 		<ul class="breadcrumb">
 			<li><a href="#">首页</a> > </li>
 			<li><a href="#">刷新生活</a> > </li>
@@ -91,17 +91,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="mt10"><a href="#"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_230x230)%>"></a></div>
-				<div class="mt10"><a href="#"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_230x170)%>"></a></div>
+				<div class="mt10"><a href="<%=@i_banner.position(1).first.url if @i_banner.position(1).first %>"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_230x230)%>"></a></div>
+				<div class="mt10"><a href="<%=@i_banner.position(2).first.url if @i_banner.position(2).first %>"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_230x170)%>"></a></div>
 			</div>
 		</div>
 
 		<div class="index_main refresh_news mt10 clearfix">
 			<%= render :partial => "foot_select" %>
-			<div class="pull-right"><a href="#"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_230x230)%>"></a></div>
+			<div class="pull-right"><a href="<%=@i_banner.position(3).first.url if @i_banner.position(3).first %>"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_230x230)%>"></a></div>
 		</div>
 
 		<div class="clearfix">
-			<div class="footer_banner pull-left"><a href="#"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_670x85)%>"></a></div>
-			<div class="footer_banner pull-right"><a href="#"><img src="<%=@i_banner.position(5).first.try(:file).try(:url,:list_310x85)%>"></a></div>
+			<div class="footer_banner pull-left"><a href="<%=@i_banner.position(4).first.url if @i_banner.position(4).first %>"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_670x85)%>"></a></div>
+			<div class="footer_banner pull-right"><a href="<%=@i_banner.position(5).first.url if @i_banner.position(5).first %>"><img src="<%=@i_banner.position(5).first.try(:file).try(:url,:list_310x85)%>"></a></div>
 		</div>

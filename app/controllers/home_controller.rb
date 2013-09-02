@@ -84,6 +84,8 @@ class HomeController < ApplicationController
       @color_right2 = @color_show.position(3).last
       @color_right3 = @color_show.position(4).last
     end
+
+    @home_life_videos = HomeLifeVideo.order("rank asc")
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 

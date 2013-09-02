@@ -58,16 +58,16 @@
             <wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button>
           </span>
           <%= form_tag("/search", :method => "get", :style => "display:inline") do %>
-            <span class="top_search">
-              <input type="text" value="" placeholder="<%= params["search_word"] || 'Search' %>" name="search_word"/>
-              <button class="" type="submit">search</button>
-            </span>
             <select class="input-small" name="qt">
               <option value="0">选择分类</option>
               <option value="1">文章</option>
               <option value="2">作品</option>
               <option value="3">设计师/家装公司</option>
             </select>
+            <span class="top_search">
+              <input type="text" value="" placeholder="<%= params["search_word"] || 'Search' %>" name="search_word"/>
+              <button class="" type="submit">search</button>
+            </span>
           <% end %>
           <a class="help-inline" target="_blank" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
           <a class="help-inline subscribe" href="javascript:;">订阅电子期刊</a> |

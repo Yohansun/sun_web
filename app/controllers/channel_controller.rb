@@ -53,6 +53,10 @@ class ChannelController < ApplicationController
 
     @channel_tips = ChannelTip.order("rank asc")
 
+    @ibnner1 = IBanner.page_name('设计快查').position(1).first
+    @ibnner2 = IBanner.page_name('设计快查').position(2).first
+    @ibnner3 = IBanner.page_name('设计快查').position(3).first
+
     #expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
