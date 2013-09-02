@@ -84,7 +84,13 @@ class HomeController < ApplicationController
       @color_right2 = @color_show.position(3).last
       @color_right3 = @color_show.position(4).last
     end
-
+    @i_banner1 = IBanner.page_name('首页').position(1).first
+    @i_banner2 = IBanner.page_name('首页').position(3).first
+    @i_banner3 = IBanner.page_name('首页').position(4).first
+    @i_banner4 = IBanner.page_name('首页').position(5).first
+    @i_banner5 = IBanner.page_name('首页').position(6).first
+    @i_banner6 = IBanner.page_name('首页').position(7).first
+    @i_banner7 = IBanner.page_name('首页').position(8).first
     @home_life_videos = HomeLifeVideo.order("rank asc")
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
