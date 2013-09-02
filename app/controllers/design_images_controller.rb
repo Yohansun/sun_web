@@ -96,27 +96,6 @@ class DesignImagesController < ApplicationController
     @home_colors = HomeColor.order("order_id")
     home_color_tags = HomeTypeCategory.where("tagable_type = ?", "home_color").map &:tag
     @home_color_tags = ImageLibraryCategory.find(home_color_tags)
-
-    #footer标签
-    #装修户型
-    @type_categories = ImageLibraryCategory.where(parent_id: 1)
-    @type_categories1 = @type_categories[0..8]
-    @type_categories2 = @type_categories[9..-1]
-    #装修风格
-    @style_categories = ImageLibraryCategory.where(parent_id: 34)
-    @style_categories1 = @style_categories[0..8]
-    @style_categories2 = @style_categories[9..17]
-    @style_categories3 = @style_categories[18..-1]
-    #装修空间
-    @space_categories = ImageLibraryCategory.where(parent_id: 82)
-    @space_categories1 = @space_categories[0..9]
-    @space_categories2 = @space_categories[10..-1]
-    #装修色彩
-    @color_categories = ImageLibraryCategory.where(parent_id: 107)
-    @color_categories1 = @color_categories[0..9]
-    @color_categories2 = @color_categories[10..-1]
-    #装修费用
-    @cost_categories = ImageLibraryCategory.where(parent_id: 19)
   end
 
   def index
@@ -266,6 +245,11 @@ class DesignImagesController < ApplicationController
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
     @query_tags = @ilcs if @ilcs.present?
+
+    # @image_colors = []
+    # @design_images.each do |image|
+    #   @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
+    # end
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
 
@@ -477,6 +461,27 @@ class DesignImagesController < ApplicationController
         childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
       }
     }
+
+    #footer标签
+    #装修户型
+    @type_categories = ImageLibraryCategory.where(parent_id: 1)
+    @type_categories1 = @type_categories[0..8]
+    @type_categories2 = @type_categories[9..-1]
+    #装修风格
+    @style_categories = ImageLibraryCategory.where(parent_id: 34)
+    @style_categories1 = @style_categories[0..8]
+    @style_categories2 = @style_categories[9..17]
+    @style_categories3 = @style_categories[18..-1]
+    #装修空间
+    @space_categories = ImageLibraryCategory.where(parent_id: 82)
+    @space_categories1 = @space_categories[0..9]
+    @space_categories2 = @space_categories[10..-1]
+    #装修色彩
+    @color_categories = ImageLibraryCategory.where(parent_id: 107)
+    @color_categories1 = @color_categories[0..9]
+    @color_categories2 = @color_categories[10..-1]
+    #装修费用
+    @cost_categories = ImageLibraryCategory.where(parent_id: 19)
   end
 
   private
