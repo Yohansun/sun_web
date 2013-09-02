@@ -17,6 +17,21 @@ class Manage::HomeImageLists::HomeCostsController < Manage::BaseController
     end
     redirect_to home_costs_path if @image.save
   end
+
+  def insert_news
+  end
+
+  def save_insert
+    HomeCost.order("order_id asc").each do |image|
+      image.order_id += 1
+      image.save
+    end
+    @image = HomeCost.order("order_id asc").last
+    @image.title = params[:title]
+    @image.link = params[:link]
+    @image.order_id = 1
+    redirect_to home_costs_path if @image.save
+  end
   
   def update_category
     tags = params[:tags].map{|tag| tag.to_i}

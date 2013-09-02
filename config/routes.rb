@@ -550,26 +550,31 @@ Icolor::Application.routes.draw do
         get 'show_type', on: :collection
         get 'insert_news', on: :collection
         post 'update_category', on: :collection
+        post 'save_insert', on: :collection
       end
       resource :home_types do
         get 'show_type', on: :collection
         get 'insert_news', on: :collection
         post 'update_category', on: :collection
+        post 'save_insert', on: :collection
       end
       resource :home_spaces do
         get 'show_type', on: :collection
         get 'insert_news', on: :collection
         post 'update_category', on: :collection
+        post 'save_insert', on: :collection
       end
       resource :home_costs do
         get 'show_type', on: :collection
         get 'insert_news', on: :collection
         post 'update_category', on: :collection
+        post 'save_insert', on: :collection
       end
       resource :home_styles do
         get 'show_type', on: :collection
         get 'insert_news', on: :collection
         post 'update_category', on: :collection
+        post 'save_insert', on: :collection
       end
     end
 
