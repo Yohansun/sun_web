@@ -341,6 +341,9 @@ Icolor::Application.routes.draw do
   resources :cubit_fixtures, only: :create
   resources :visit_ips,only: :create
 
+  #刷新实录
+  resources :refresh_record
+
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
 

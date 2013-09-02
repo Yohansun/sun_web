@@ -1048,4 +1048,13 @@ $(function(){
 		$('.landing_overlay').hide();
 		$('.pop_rule').hide();
 	});
+
+	;(function($){
+		$('.js-img_show').on('click', '.js-title', function(){
+			$(this).parent('li').siblings().find('a.js-img').hide();
+			$(this).parent('li').addClass('active').siblings('li').removeClass('active')
+			$(this).siblings('a.js-img').show();
+		})
+	}($));
+
 });

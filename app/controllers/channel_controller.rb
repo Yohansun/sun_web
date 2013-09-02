@@ -57,5 +57,10 @@ class ChannelController < ApplicationController
   end
 
   def refresh_service
+    @i_banner = IBanner.page_name("刷新服务")
+    @decoration_color_scheme = IColumnData.show_data(9).limit(5)
+    @rrdrs = IColumnData.show_data(4).limit(5)
+    @decoration_color_scheme_url = IColumnData.where(i_column_type_id: 9, position: 0).first
+    @rrdr_url = IColumnData.where(i_column_type_id: 4, position: 0).first
   end
 end

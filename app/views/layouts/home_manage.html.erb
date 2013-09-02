@@ -8,7 +8,7 @@
     <meta name="Description" content="<%= des_content %>"/>
     <meta name="Keywords" content="<%= keyword_content %>"/>
 
-    <%= stylesheet_link_tag "manage/bootstrap.css", "manage/bootstrap-responsive.css", "manage/jquery.slider.css", "manage/icolor.css", "/resources/js/plugins/exp/css/style.css" %>
+    <%= stylesheet_link_tag "manage/bootstrap.css", "manage/bootstrap-responsive.css", "manage/jquery.slider.css", "manage/icolor.css","manage/map.css", "/resources/js/plugins/exp/css/style.css" %>
     <%= javascript_include_tag "application","manage/jquery.min.js",
       "manage/bootstrap.js", "manage/jquery.slider.js", "manage/main.js" %>
 
@@ -94,9 +94,9 @@
             <a href="/">首页</a>
           </li>
           <li class="">
-            <a href="#" target="_blank">刷新生活</a>
+            <a href="<%=refresh_record_index_path%>" target="_blank">刷新生活</a>
             <ul class="subnav">
-              <li><a href="#">刷新实录</a></li>
+              <li><a href="<%=refresh_record_index_path%>">刷新实录</a></li>
               <li><a href="/art">刷新效果</a></li>
               <li><a href="/channel/refresh_service">刷新服务</a></li>
             </ul>
