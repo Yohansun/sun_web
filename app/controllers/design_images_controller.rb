@@ -2,7 +2,7 @@
 class DesignImagesController < ApplicationController
   layout "home_manage"
   #caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
-  before_filter :get_categories, only: [:index, :lists]
+  before_filter :get_categories, only: [:index, :lists, :image_show]
 
   def create
     newparams = coerce(params)
@@ -53,11 +53,6 @@ class DesignImagesController < ApplicationController
     @banner6 = i_banners.find_by_position(6)
     @banner7 = i_banners.find_by_position(7)
     @banner8 = i_banners.find_by_position(8)
-
-    #热门搜索
-    @hot_search = SeoSite.order("rank asc").where("genre = 1")
-    #面包屑导航
-    @seo_sites = SeoSite.order("rank desc").where("genre = 0")
 
     #home_heads picture
     @home_heads = HomeHead.order("order_id")
@@ -334,6 +329,22 @@ class DesignImagesController < ApplicationController
   end
 
   def image_show
+    #manage
+    #banners
+    i_banners = IBanner.page_name('图库内页')
+    @banner1 = i_banners.find_by_position(1)
+    @banner2 = i_banners.find_by_position(2)
+    @banner3 = i_banners.find_by_position(3)
+    @banner4 = i_banners.find_by_position(4)
+
+    #大师访谈
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    #相关资讯
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    #manage_end
+
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
        @master_design = MasterDesign.find(@image.imageable_id)
@@ -424,8 +435,8 @@ class DesignImagesController < ApplicationController
     @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
 
     #推荐色
-    @image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
-    @comments = @image.comments.page(params[:page]).per(3)
+    #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
+    @comments = @image.comments.order("created_at desc").page(params[:page]).per(3)
     #精品推荐
     @week_stars = WeeklyStar.from.order("created_at desc").limit(4)
     #猜你喜欢
@@ -461,6 +472,10 @@ class DesignImagesController < ApplicationController
         childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
       }
     }
+    #热门搜索
+    @hot_search = SeoSite.order("rank asc").where("genre = 1")
+    #面包屑导航
+    @seo_sites = SeoSite.order("rank desc").where("genre = 0")
 
     #footer标签
     #装修户型

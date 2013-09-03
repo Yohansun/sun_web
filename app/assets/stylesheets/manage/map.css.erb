@@ -436,3 +436,75 @@ a.map-title1{
 .pager-submit{
 	border: 0;
 }
+
+/*== map-big ==*/
+.map-big{
+	width: 620px;
+	height: 388px;
+}
+.map-kv-slider{
+	width: 87px;
+	position: relative;
+}
+.map-kv-slider ul{
+	position: relative;
+	list-style: none;
+	margin: 0 0 0 5px;
+	width: 75px;
+}
+.map-kv-slider li{
+	margin: 8px 0;
+}
+.map-kv-slider a{
+	color: #666;
+	display: block;
+	text-align: center;
+	padding: 3px;
+}
+.map-kv-slider a:hover{
+	color: #f60;
+	text-decoration: underline;
+}
+.map-prev,.map-next-bullet{
+	border-bottom: 1px solid #d0cfb7;
+}
+.map-next,.map-top-bullet{
+	border-top: 1px solid #fff;
+}
+.map-next-bullet,.map-prev-bullet{
+	background: url(<%= asset_path 'manage/map/in/map-bullet.png'%>) no-repeat;
+	text-indent: 100%;
+	overflow: hidden;
+}
+.map-prev-bullet{
+	background-position: center 7px;
+}
+.map-next-bullet{
+	background-position: center -13px;
+}
+.map-kv-container{
+	width: 80px;
+	height: 340px;
+	margin: 8px auto;
+	position: relative;
+	overflow: hidden;
+}
+.map-kv-container a{
+	position: relative;
+	padding: 0;
+	width: 80px;
+	height: 75px;
+	display: block;
+}
+.map-kv-container span{
+	background: url(<%= asset_path 'manage/map/in/map-active.png'%>) no-repeat;
+	position: absolute;
+	top: 0;
+	left: -5px;
+	width: 80px;
+	height: 75px;
+	display: none;
+}
+.map-kv-container a:hover span,.map-active span{
+	display: block;
+}
