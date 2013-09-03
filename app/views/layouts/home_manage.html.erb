@@ -93,7 +93,7 @@
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>
           </li>
-          <li class="">
+          <li class="<%='active noborder' if controller_name == 'refresh_record' || controller_name == 'art' || controller_name == 'channel'%>">
             <a href="<%=refresh_record_index_path%>" target="_blank">刷新生活</a>
             <ul class="subnav">
               <li><a href="<%=refresh_record_index_path%>">刷新实录</a></li>
@@ -132,7 +132,7 @@
               </li>
             </ul>
           </li>
-          <li class="<%= 'active noborder' if controller_name == 'channel' || controller_name == 'faqs' || controller_name == 'mix_colors' %>" >
+          <li class="<%= 'active noborder' if (controller_name == 'channel' && action_name == 'access') || controller_name == 'faqs' || controller_name == 'mix_colors' %>" >
             <a href="/channel/access" target="_blank">业主通道</a>
             <ul class="subnav">
               <li><%= link_to "设计快查", "/channel/access", :class => "#{'active noborder' if controller_name == 'channel'}" %></li>
@@ -181,10 +181,10 @@
       <ul class="index_main index_map clearfix">
         <li>
           <i class="icon-map icon-map9"></i>
-          <a href="#"><strong>刷新生活</strong></a>
-          <a href="#">刷新实录</a>
+          <a href="/refresh_record"><strong>刷新生活</strong></a>
+          <a href="/refresh_record">刷新实录</a>
           <a href="/art">刷新效果</a>
-          <a href="http://www.nipponpaint.com.cn/shuaxin/fuwu/">刷新服务</a>
+          <a href="/channel/refresh_service">刷新服务</a>
         </li>
         <li>
           <i class="icon-map icon-map1"></i>
