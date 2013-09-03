@@ -1,6 +1,6 @@
 <% content_for :head do -%>
     <%= stylesheet_link_tag "refresh_life/map"  %>
-    <%= javascript_include_tag "exp/css/style.css", "exp/exp.js", "LinkageSelect/location.js", "LinkageSelect/LinkageSelect.js" %>
+    <%= javascript_include_tag "exp/css/style.css", "exp/exp.js", "LinkageSelect/location.js", "LinkageSelect/LinkageSelect.js", "flowplayer-3.2.11.min.js" %>
 <% end -%>
 <div class="container refresh_main">
 	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
@@ -18,36 +18,15 @@
 				<%= @life_memoir.title %>
 			</h4>
 			<div class="video text-center">
-				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="600" height="331" id="FLVPlayer">
-					<param name="movie" value="FLVPlayer_Progressive.swf" />
-					<param name="quality" value="high" />
-					<param name="wmode" value="opaque" />
-					<param name="scale" value="noscale" />
-					<param name="salign" value="lt" />
-					<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=Clear_Skin_1&amp;streamName=<%=@life_memoir.video.url%>&amp;autoPlay=false&amp;autoRewind=false" />
-					<param name="swfversion" value="8,0,0,0" />
-					<!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-					<param name="expressinstall" value="Scripts/expressInstall.swf" />
-					<!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-					<!--[if !IE]>-->
-					<object type="application/x-shockwave-flash" data="FLVPlayer_Progressive.swf" width="600" height="331">
-						<!--<![endif]-->
-						<param name="quality" value="high" />
-						<param name="wmode" value="opaque" />
-						<param name="scale" value="noscale" />
-						<param name="salign" value="lt" />
-						<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=Clear_Skin_1&amp;streamName=<%=@life_memoir.video.url%>&amp;autoPlay=false&amp;autoRewind=false" />
-						<param name="swfversion" value="8,0,0,0" />
-						<param name="expressinstall" value="Scripts/expressInstall.swf" />
-						<!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-						<div>
-							<h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-							<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
-						</div>
-						<!--[if !IE]>-->
-					</object>
-					<!--<![endif]-->
-				</object>
+				 <a href="<%= @life_memoir.video %>" style="display:block;width:600px;height:331px;margin:0 auto;" id="player"></a>
+				 <script language="JavaScript">
+					flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
+					 clip:  {
+					  autoPlay: false,
+					  autoBuffering: true
+					 }
+					});
+				</script>
 			</div>
 			<div class="refresh_banner">
 				<a href="#"><img src=<%= asset_path "refresh_life/refresh/refresh_banner.jpg" %>></a>
