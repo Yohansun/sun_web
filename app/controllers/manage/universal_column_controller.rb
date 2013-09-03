@@ -42,7 +42,7 @@ class Manage::UniversalColumnController < Manage::BaseController
   		item.save
   	end
 
-  	if @i_column_datas.count == 6
+  	if @i_column_datas.count == 5
   		@i_column_datas.first.destroy
   	end
 
@@ -79,7 +79,7 @@ class Manage::UniversalColumnController < Manage::BaseController
   		end
 
       @i_column_datas = IColumnData.show_data(i_column_type_id)
-      rank_value = 6
+      rank_value = 5
 	  	@i_column_datas.each do |item|
 	  		unless @i_column_data == item
 	  			if item.rank == rank.to_i

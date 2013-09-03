@@ -23,21 +23,6 @@
         PNG.fix('img,div,a,ul,li,h2,strong,span,p');
     </script>
     <![endif]-->
-
-    <script type="text/javascript" charset="utf-8">
-        var jiathis_config = {
-            boldNum:4,
-            siteNum:4,
-            showClose:false,
-            sm:"kaixin001,renren,tsina,tqq",
-            imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-            imageWidth:26,
-            marginTop:150,
-            url:"http://www.icolor.com.cn",
-            title:"#iColor分享#一个你不容错过的网站，更多精彩装修案例、灵感家装图片尽在iColor，@刷新生活iColor，",
-            data_track_clickback:true
-        }
-    </script>
     <style type="text/css" >
       .nav_hot{position:absolute;top:-13px;left:60px;}
       .nav_hot2{position: absolute;top: -5px;left: 65px;}
@@ -73,22 +58,21 @@
           <!-- <a class="help-inline jiathis_btn" href="javascript:void(0)">分享</a> -->
           <a class="help-inline js-share_btn" href="#">分享</a>
           <!-- JiaThis Button BEGIN -->
-          <div id="ckepop" class="jiathis_area">
-            <a class="jiathis_button_tsina"><span class="jiathis_txt jtico jtico_tsina"></span></a>
-            <a class="jiathis_button_kaixin001"><span class="jiathis_txt jtico jtico_kaixin001"></span></a>
-            <a class="jiathis_button_renren"><span class="jiathis_txt jtico jtico_renren"></span></a>
-            <a class="jiathis_button_qzone"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+          <div class="jiathis_style jiathis_area">
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_kaixin001"></a>
+            <a class="jiathis_button_renren"></a>
+            <a class="jiathis_button_qzone"></a>
             <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-            <a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_13" title="累计分享0次">0</span></a>
+            <a class="jiathis_counter_style"></a>
           </div>
-          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+          <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
           <!-- JiaThis Button END -->
           <a data-toggle="modal" class="btn btn-mini btn_gray login js-login nomargin" href="#login_modal">登录</a>
           <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red nomargin">免费注册</a>
           <a href="#" target="_blank"><%= image_tag "nippon.png" %></a>
-
-        <span class="js-user-info"></span>
         <% end %>
+        <div class="user_infos pull-right js-user-info"></div>
         <ul class="nav nav_red nomargin">
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>

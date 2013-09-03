@@ -22,9 +22,9 @@ $(function(){
 		$(this).find('span:eq(1)').toggleClass('none')
 	});
 	//index subnav
-	$('.nav li').hover(function(){
-		$(this).find('ul').toggle()
-	});
+	// $('.nav li').hover(function(){
+	// 	$(this).find('ul').toggle()
+	// });
 	/*li:hover js*/
 	var ie6 = (function(){
 		var i = document.createElement("b");
@@ -56,9 +56,9 @@ $(function(){
 	// })
 
     //share jiathis
-	$('.js-share_btn,.jiathis_area').hover(function(){
-		$('.jiathis_area').toggle()
-	});
+	// $('.js-share_btn,.jiathis_area').hover(function(){
+	// 	$('.jiathis_area').toggle()
+	// });
 	// index slider
 	;(function($){
 		if(!$.fn.slider) return;

@@ -18,7 +18,7 @@
 				<%= @life_memoir.title %>
 			</h4>
 			<div class="video text-center">
-				 <a href="<%= @life_memoir.video %>" style="display:block;width:600px;height:331px;margin:0 auto;" id="player"></a>
+				 <a href="<%= @life_memoir.video.url %>" style="display:block;width:600px;height:331px;margin:0 auto;" id="player"></a>
 				 <script language="JavaScript">
 					flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
 					 clip:  {
