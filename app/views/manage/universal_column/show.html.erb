@@ -70,6 +70,10 @@
 	  })
 
   });
+  function open_link() {
+      var url = $('#more_url').val();
+      window.open(url, "_blank");
+  }
 </script>
 
 <%= form_tag('/manage/universal_column/show', :method => 'get', :id => 'show_form') do %>
