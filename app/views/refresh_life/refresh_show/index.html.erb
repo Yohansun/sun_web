@@ -1,6 +1,7 @@
 <% content_for :head do -%>
     <%= stylesheet_link_tag "refresh_life/map", "art", "style" %>
-    <%= javascript_include_tag "art.js", "refresh_life/jquery-ui.min.js", "jquery.draggablecarousel-0.1.js", "refresh_life/easing" %>
+
+  <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js" %>
 <% end -%>
 <div class="container refresh_main">
 	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
@@ -175,14 +176,14 @@
 				<div class="ipad1 pr">
 					<div id="carousel">
 						<ul class="nomargin">
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
 						</ul>
 					</div>
 					<a href="javascript:;" class="ipad1_zoom pa">全屏观看</a>
@@ -225,6 +226,13 @@
 
 	<%= render :partial => "refresh_life/refresh_list/foot_select" %>
 </div>
-<% content_for :tails do -%>
-    
-<% end -%>
+<div id="overlay2">
+    <div id="arts_bin">
+        <div id="arts">
+            <ul>
+                <li><img src="<%= asset_path "art/ipad1_img1.jpg"%>"></li>
+            </ul>
+        </div>
+        <a href="javascript:;" id="lay_close"></a>
+    </div><!--arts ends-->
+</div><!--overlay ends-->
