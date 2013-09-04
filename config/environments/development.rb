@@ -63,9 +63,10 @@ Icolor::Application.configure do
 
   # Do not compress assets
   config.assets.compress                                 = false
+  config.assets.enabled                                  = true
 
   # Expands the lines which load the assets
-  config.assets.debug                                    = true
+  config.assets.debug                                    = false
 
   config.assets.prefix = "/dev-assets"
 end

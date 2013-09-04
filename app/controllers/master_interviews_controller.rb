@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class MasterInterviewsController < ApplicationController
+  layout "home_manage"
   before_filter :find_by_subject,:except => :show
   def index
     @articles = @articles.where(:master_kind => params[:master_kind]) unless params[:master_kind].blank?
