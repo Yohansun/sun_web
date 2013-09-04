@@ -460,6 +460,8 @@ class DesignImagesController < ApplicationController
 
     #推荐色
     #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
+    @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
+
     @comments = @image.comments.order("created_at desc").page(params[:page]).per(3)
     #精品推荐
     @week_stars = WeeklyStar.from.order("created_at desc").limit(4)
