@@ -439,7 +439,7 @@ a small{font-size:12px;}
 .icon-freedown{background-position:-16px -152px;}
 .icon-collect{background-position:-32px -152px;}
 .icon-fullscreen{background-position:0 -168px;}
-.icon-toparrow{background-position:-1px -191px;}
+.icon-toparrow{background-position:0px -270px;}
 
 .work_infos{margin:0 0 0 9px;padding:0 0 10px 10px;border-bottom:1px solid #eaeadf;}
 .work_info{font:12px/18px "SimSun";color:#666;}
@@ -464,8 +464,9 @@ a small{font-size:12px;}
 .work_comments .mood_list .comment_text{margin-left:68px;}
 .re_comments{position:relative;padding:10px 13px;background:#f7f7f7;border:1px solid #ededed;margin:10px 0;}
 .re_comments strong{font-weight:normal!important;}
-.re_comments .icon-toparrow{position:absolute;top:-10px;left:20px;width:20px;}
-
+.re_comments .icon-toparrow{position:absolute;top:-17px;left:20px;width:20px;}
+.r_comment_form{display:none;}
+.r_comment_form .re_comments{height:50px;width:639px;padding:5px;resize:none;}
 
 .imgbase_in_right{padding-right:9px;}
 .author_info{border-bottom:1px solid #e9e9e9;padding-bottom:13px;}
@@ -498,3 +499,25 @@ a small{font-size:12px;}
 
 .gobuy{width:59px;height:47px;background:url(<%= asset_path 'manage/btns/btns_icon2.png' %>) no-repeat 0 -114px;}
 .goshop{width:73px;height:47px;background:url(<%= asset_path 'manage/btns/btns_icon2.png' %>) no-repeat 0 -160px;margin-left:3px;}
+
+/*exp*/
+.exp-layer{display:none;position:absolute;left:200px;top:200px;z-index:10;width:394px;border-radius:4px;padding:4px;background:url(<%= asset_path 'manage/biaoqingbao/img/layer_bg.png'%>);}
+.exp-layer .holder{position:relative;z-index:30;border:1px solid #c3c3c3;border-radius:4px;background:#fff;}
+.exp-layer .exp-tri{position:absolute;left:30px;top:-7px;z-index:40;width:16px;height:12px;background:url(<%= asset_path 'manage/biaoqingbao/img/layer_arrow.png'%>);}
+.exp-layer .exp-close{display:block;position:absolute;right:14px;top:5px;z-index:20;width:20px;height:20px;background:url(<%= asset_path 'manage/biaoqingbao/img/ico.png'%>) 5px -250px no-repeat;}
+.exp-layer .exp-close:hover{background-position:0 -1954px;}
+.exp-layer .exp-tab{padding:4px 4px 0 6px;background:#F0F0F0;}
+.exp-layer .exp-tab a{display:block;float:left;height:25px;margin:0 3px;padding:0 10px;border:1px solid #E8E8E8;border-bottom:0;border-radius:4px 4px 0 0;background:#fff;font-size:12px;font-weight:400;text-overflow:clip;color:#666;text-decoration:none;line-height:25px;}
+.exp-layer .exp-sub-tab{position:relative;margin:10px 0px 0px 16px;padding-right:60px;overflow:hidden;}
+.exp-layer .exp-sub-tab a{display:block;float:left;height:23px;padding:0 7px;color:#9ABBC8;font-size:12px;font-weight:400;text-decoration:none;line-height:23px;}
+.exp-layer .exp-sub-tab a.slct{background:none repeat scroll 0 0 #F0F0F0;border-radius:3px 3px 3px 3px;cursor:default;position:relative;text-decoration:none;z-index:2;}
+.exp-layer .exp-sub-tab span{float: left; margin: 0 5px; color:#9ABBC8;}
+.exp-layer .sub-tab-pagination{position:absolute;right:10px;top:0px;height:100%;}
+.exp-layer .sub-tab-pagination a{display:none;width:17px;height:17px;margin:0 2px;padding:0;background:url(<%= asset_path 'manage/biaoqingbao/img/ico.png'%>) no-repeat;cursor:pointer;display:inline;line-height:17px;}
+.exp-layer .sub-tab-pagination .pre{background-position:0 -1290px;}
+.exp-layer .sub-tab-pagination .next{background-position:0 -1176px;}
+.exp-layer .sub-tab-pagination a.pre-disable{background-position:0 -1367px;cursor:default;}
+.exp-layer .sub-tab-pagination a.next-disalbe{background-position:0 -1253px;cursor:default;}
+.exp-layer .exp-detail{margin:10px;}
+.exp-detail li{display:block;float:left;width:26px;height:22px;margin:-1px 0 0 -1px;border:1px solid #e8e8e8;padding:4px 2px;text-align:center;cursor:pointer;}
+.exp-detail li:hover{position:relative;border:1px solid #0095cd;background:#fff9ec;z-index:50;}

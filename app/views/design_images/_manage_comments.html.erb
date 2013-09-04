@@ -28,7 +28,14 @@
 					<%- end %>
 				</div>
 			</div>
-			<div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
+			<div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right js-recomment" href="javascript:;">回复</a></div>
+			<form class="comment_text r_comment_form">
+				<textarea class="re_comments"></textarea>
+				<div>
+					<button class="btn btn-small">提交</button>
+					<a href="#" class="btn btn-small js-close">取消</a>
+				</div>
+			</form>
 		</li>
 	<%- end %>
 </ul>
