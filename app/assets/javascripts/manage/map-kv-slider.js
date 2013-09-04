@@ -1,6 +1,6 @@
 // map-kv-slider.js
 
-jQuery(function($){
+jQuery(function($){return false
 	var bin = $('.map-kv-slider'),
 		ul = bin.find('ul'),
 		li = ul.find('li'),

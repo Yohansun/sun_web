@@ -56,6 +56,7 @@ class DesignImage < ActiveRecord::Base
         :mobile_baicheng_fullscreen => "320x358#",
         :slide => "900>",:baicheng_list => "201x145>",
         :channel_image => "155x115#",
+        :image_show_thumb => "75x75#",
         :slide_thumb => "205x138#",:image_libraries_hover => "650x500>",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
         :grid_list => "204x145>",
@@ -122,6 +123,22 @@ class DesignImage < ActiveRecord::Base
 
   def set_pinyin!
     self.pinyin = PinYin.of_string(self.title.to_s[0]).first.to_s
+  end
+
+  def house_type_names
+    house_type.map(&:title).first
+  end
+
+  def acreages_names
+    acreages.map(&:title).first
+  end
+
+  def use_names
+    use.map(&:title).first
+  end
+
+  def design_style_names
+    image_styles.map(&:title).join(',')
   end
 
   def comments_count

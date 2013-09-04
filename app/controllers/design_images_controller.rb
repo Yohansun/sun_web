@@ -351,7 +351,7 @@ class DesignImagesController < ApplicationController
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
     #manage_end
-
+    @tag_names = []
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
        @master_design = MasterDesign.find(@image.imageable_id)
@@ -370,10 +370,20 @@ class DesignImagesController < ApplicationController
         @image_city = area.name
       end
     end
-    @tag_names = []
+    @ids = []
+    @ids = params[:path].split('-') if params[:path].present?
+    @other_ids = []
+    @other_ids = @ids.last.split('_') if @ids.present?
+    if @other_ids.present?
+      @area = @other_ids[0]
+      @pinyin = @other_ids[1]
+      @search = @other_ids[2]
+      @type = @other_ids[3]
+      @rank = @other_ids[5]
+    end
     images = DesignImage.available.audited_with_colors
-    unless params[:tags].blank?
-       @tag_ids = CGI.unescape(params[:tags]).split("-").map { |e| e.to_i }.uniq.sort
+    unless params[:path].blank?
+       @tag_ids = CGI.unescape(params[:path]).split("-").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
     end
 
@@ -393,8 +403,8 @@ class DesignImagesController < ApplicationController
       end
     end
 
-    if params[:area_id].present? && params[:area_id].to_s != "0"
-      area = Area.find(params[:area_id])
+    if @area.present? && @area.to_s != "0"
+      area = Area.find(@area)
       areas = area.self_and_descendants
       area_tree = area.self_and_ancestors.map(&:id)
       @area_names = area.self_and_ancestors.map(&:name).join(" ")
@@ -402,37 +412,36 @@ class DesignImagesController < ApplicationController
       images = images.where(area_id: areas.map(&:id))
     end
 
-    if params[:search].present? && params[:search] != '_'
-      tags = ImageLibraryCategory.where("title LIKE ?", "%#{params[:search]}%")
+    if @search.present? && @search != '_' && @search.to_s != "0"
+      tags = ImageLibraryCategory.where("title LIKE ?", "%#{@search}%")
       images = images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
 
-    if params[:imageable_type].present? && params[:imageable_type] != "all"
-      if params[:imageable_type] == 'WeekStart'
+    if @type.present? && @type.to_s != "0"
+      if @type == 'WeekStart'
         images = images.where("sorts = 2")
       else
-        images = images.where("imageable_type = ?", params[:imageable_type])
-      end
-    end
+        images = images.where("imageable_type = ?", @type)
+      end    end
 
-    if params[:pinyin].present? && params[:pinyin].to_i != 0
-      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{params[:pinyin]}%")
+    if @pinyin.present? && @pinyin.to_s != "0"
+      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{@pinyin}%")
       images = images.search_tags(tags.map(&:id), true)
       @tag_names << tags.map(&:title)
     end
 
-    if params[:ranking_list].present? && params[:ranking_list].to_i != 0
-      if params[:ranking_list] == "like"
+    if @rank.present? && @rank.to_i != 0
+      if @rank == "like"
         images = images.order("design_images.votes_count desc")
-      elsif params[:ranking_list] == "view_count"
+      elsif @rank == "view_count"
         images = images.order("design_images.view_count desc")
       end
     else
       images = images.order("design_images.created_at DESC")
     end
-    if params[:pinyin].present? && params[:pinyin].to_i != 0
-      @query_params = ([@tag_names, @area_names, params[:pinyin]] - [""]).compact.join(", ")
+    if @pinyin.present? && @pinyin.to_i != 0
+      @query_params = ([@tag_names, @area_names, @pinyin] - [""]).compact.join(", ")
     else
       @query_params = ([@tag_names, @area_names]).compact.join(", ")
     end
@@ -440,6 +449,7 @@ class DesignImagesController < ApplicationController
     site = params[:site].to_i - 1
     @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
     @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
+    @image_thumb = images.offset(site + 3).limit(3) if (site + 3) < count
 
     #推荐色
     #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
