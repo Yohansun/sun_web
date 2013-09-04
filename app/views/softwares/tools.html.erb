@@ -1,6 +1,6 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "news" %>
-    <%= javascript_include_tag 'myfocus' %>
+    <%= stylesheet_link_tag "news","master_interviews" %>
+    <%= javascript_include_tag 'myfocus'%>
     <style type="text/css">
         .popup_zf {
             width: 180px;
@@ -43,11 +43,16 @@
         .popup_zf a.popup_zf_kaixin {
             background-position: left -48px;
         }
-
+        .clear:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
     </style>
 <%- end %>
 <div class="main">
-  <div class='sub_title tr'>
+  <div class='sub_title text-right'>
     <img src='<%= asset_path "news/title_tools.png" %>'/>
   </div>
   <div class='sub_nav ft12 pr tr'>

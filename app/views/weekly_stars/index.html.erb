@@ -1,5 +1,5 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag 'style', 'weekstar' %>
+    <%= stylesheet_link_tag 'style', 'weekstar',"master_interviews" %>
     <style type="text/css">
         .popup_zf {
             bottom: 18px;
@@ -16,6 +16,30 @@
         .design_listA li {overflow:visible;}
 
         .desc ul p{max-width: 150px;*max-width: none;}
+        ul.this_week_tab {
+          list-style:none;
+          margin: 0;
+          padding: 0;
+          border: none;
+          font-weight: normal;
+          font-style: normal;
+          font-size: 100%;
+          line-height: 1;
+          font-family: inherit;
+          outline: none;
+        }
+        .weekstart_titleC{height: 60px;}
+        .weekstart_titleC .btn_group{float:right;}
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, q, s, samp, small, strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td {
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 100%;
+        line-height: 1;
+        font-family: inherit;
+        outline: none;
     </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -44,7 +68,7 @@
    </script>
 <%- end %>
 <div class="main page_weekstar page_weekstar_detail">
-  <div class='sub_title tr pt25'>
+  <div class='sub_title text-right pt25'>
     <img src="<%= asset_path "design/title_design.png" %>" />
   </div>
   <div class='sub_nav ft12 pr tr'>
@@ -61,7 +85,7 @@
           <p>STAR OF THIS <%= @title.include?("月度") ? 'MONTH' : 'WEEK' %></p>
         </h1>
       </a>
-      <div class="btn_group fr">
+      <div class="btn_group fr text-right">
         <%= link_to "", download_weekly_star_path(@design.id,:target => params[:action]), :class =>"icon_freedown" %>
         <%= link_to "", user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class =>"icon_colleting" %>
         <%= link_to "", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
@@ -106,7 +130,7 @@
             <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).try(:length) %>)</span></a>   
           </div>
         </div>
-        <div class="colors_box b_shadow">
+        <div class="colors_box b_shadow" style="height:auto;margin:auto">
           <div class="colorsbox " style="padding:10px 0; overflow:hidden;">
             <div class="color-picker group">
               <div class="colors_tit" style="float:left; margin:20px 5px 0 0;">

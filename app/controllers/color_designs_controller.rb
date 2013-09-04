@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ColorDesignsController < ApplicationController
+  layout "home_manage"
   before_filter :get_color_designs
 
   def index

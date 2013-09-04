@@ -1,4 +1,5 @@
 class MasterTopicsController < ApplicationController
+  layout "home_manage"
   before_filter :get_topics
 
   def show

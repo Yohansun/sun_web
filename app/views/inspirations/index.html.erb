@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag 'style' %>
+    <%= stylesheet_link_tag 'style',"master_interviews" %>
     <style type="text/css">
      .popup_zf {
             bottom: 6px;
@@ -15,8 +15,8 @@
       });
     </script>
 <%- end %>
-<div class="main">
-  <div class='sub_title tr pt25'>
+<div class="main" style="width:auto">
+  <div class='sub_title text-right pt25'>
     <img src='<%= asset_path "design/title_design.png"%>' />
   </div>
   <div class='sub_nav ft12 pr tr'>

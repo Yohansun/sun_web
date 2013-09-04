@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class WeeklyStarsController < ApplicationController
+  layout "home_manage"
   DefaultActions = {
 		:weekly_stars_week          => "每周之星",
 		:weekly_stars_month_color   => "月度色彩之星",

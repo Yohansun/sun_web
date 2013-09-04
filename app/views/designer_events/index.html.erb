@@ -1,8 +1,33 @@
 <%- content_for :head do %>
-<%= stylesheet_link_tag "style", "exciting_activities" %>
+<%= stylesheet_link_tag "style","master_interviews" %>
+<style type="text/css" media="screen">
+.fr {
+  float: right;
+  display: inline;
+}
+.fl {
+  float: left;
+  display: inline;
+}
+.dec_list {
+margin: 20px 20px 20px 15px;
+overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, q, s, samp, small, strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+border: none;
+font-weight: normal;
+font-style: normal;
+font-size: 100%;
+line-height: 1;
+font-family: inherit;
+outline: none;
+}
+</style>
 <%- end %>
-<div class="main page_weekstar">
-  <div class='sub_title tr'><img src="<%= asset_path "design/title_event.png"%>"/></div>
+<div class="main page_weekstar" style="width:auto">
+  <div class='sub_title text-right'><img src="<%= asset_path "design/title_event.png"%>"/></div>
   <div class='sub_nav ft12 pr tr'>
     <em><%= link_to "设计师活动", "/designer_events", :class => 'fb' %></em>
     <em><%= link_to "精彩活动", "/events" %><span></span></em>

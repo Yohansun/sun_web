@@ -1,4 +1,5 @@
 class MixColorsController < InheritedResources::Base
+  layout "home_manage"
   before_filter :find_user
   def new
     @mix_color = MixColor.new

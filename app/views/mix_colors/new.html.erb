@@ -1,5 +1,5 @@
 <%= content_for :tail do %>
-    <%= stylesheet_link_tag "owners_channel" %>
+    <%= stylesheet_link_tag "owners_channel","master_interviews" %>
     <script type="text/javascript">
         $(document).ready(function() {
          <%- if flash[:mix_color] %>
@@ -14,8 +14,8 @@
         })
     </script>
 <%- end -%>
-<div class="main page_weekstar">
-  <div class="sub_title tr">
+<div class="main" style="width:auto">
+  <div class="sub_title text-right">
     <img src="<%= asset_path "design/title_owner.png" %>">
   </div>
   <div class="sub_nav ft12 pr tr">

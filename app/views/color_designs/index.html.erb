@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "style","master_interviews" %>
     <%= stylesheet_link_tag "dd" %>
     <%= javascript_include_tag "uncompressed.jquery.dd" %>
     <script type="text/javascript">
@@ -34,7 +34,7 @@
     </script>
 <%- end %>
 <div class="main">
-  <div class='sub_title tr pt25'>
+  <div class='sub_title text-right pt25'>
     <img src='<%= asset_path "design/title_design.png"%>'/>
   </div>
   <div class='sub_nav ft12 pr tr'>
@@ -68,7 +68,7 @@
     <div class="design_result color_design">
     <%- unless @designs.nil? %>
       <% @designs.in_groups_of(3, false).each do |group| -%>
-          <ul class="d_works group">
+          <ul class="d_works group" style="margin:0">
             <% group.each do |design| -%>
                 <li class="pr">
                   <a href="/color_designs/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt=""/></a>
