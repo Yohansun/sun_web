@@ -40,7 +40,7 @@ class DesignImagesController < ApplicationController
   end
 
   def lists
-    @design_images = DesignImage.available.audited_with_colors
+    @design_images = DesignImage.from.available.audited_with_colors
     @images_count = @design_images.count
 
     #banners
@@ -235,7 +235,7 @@ class DesignImagesController < ApplicationController
       ranks = "design_images.created_at DESC"
     end
 
-    @images = @design_images.order(ranks).page(params[:page]).per(11)
+    @images = @design_images.order(ranks).page(params[:page]).per(18)
 
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
@@ -245,6 +245,13 @@ class DesignImagesController < ApplicationController
     # @design_images.each do |image|
     #   @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
     # end
+
+    @special_kv = HomeKv.where(position: nil, visible: true).first
+
+    #banners
+    i_banners = IBanner.page_name('图库列表页')
+    @banner1 = i_banners.find_by_position(1)
+    @banner2 = i_banners.find_by_position(2)
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
 

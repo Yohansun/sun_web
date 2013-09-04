@@ -19,7 +19,7 @@
 	<div class="map-search pull-right">
 		<p class="pull-left">热门搜索：
 			<%- @hot_search.each do |s| %>
-				<a href="<%= s.link %>"><%= s.title %></a>
+				<a href="<%= s.link %>" target="_blank"><%= s.title %></a>
 			<%- end %>
 		</p>
 		<form action="/icolor/" method='post' class="pull-left">
