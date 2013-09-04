@@ -248,6 +248,13 @@ class DesignImagesController < ApplicationController
 
     @special_kv = HomeKv.where(position: nil, visible: true).first
 
+    #装修图库精选
+    @images_jingxuan = IColumnData.show_data(2).limit(5)
+    @images_jingxuan_more = IColumnData.where(i_column_type_id: 2,position: 0).first
+    #设计之星作品精选
+    @star_jingxuan = IColumnData.show_data(3).limit(5)
+    @star_jingxuan_more = IColumnData.where(i_column_type_id: 3,position: 0).first
+
     #banners
     i_banners = IBanner.page_name('图库列表页')
     @banner1 = i_banners.find_by_position(1)
