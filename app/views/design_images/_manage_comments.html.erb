@@ -22,6 +22,7 @@
 							<p>
 								<strong><%= r.user.display_name %></strong>
 								<span class="muted">说</span>
+								<p><%= r.content %></p>
 							</p>
 							<p class="muted"><%= r.created_at.to_date %></p>
 						</div>
@@ -29,13 +30,16 @@
 				</div>
 			</div>
 			<div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right js-recomment" href="javascript:;">回复</a></div>
-			<form class="comment_text r_comment_form">
-				<textarea class="re_comments"></textarea>
+			<%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
+				<%= f.hidden_field :show_id, value: image.id %>
+				<%= f.hidden_field :comment_id, value: c.id %>
+				<%= f.hidden_field :reply_type, value: "design_images" %>
+				<%= f.text_area :content, class: 're_comments' %>
 				<div>
 					<button class="btn btn-small">提交</button>
 					<a href="#" class="btn btn-small js-close">取消</a>
 				</div>
-			</form>
+			<%- end %>
 		</li>
 	<%- end %>
 </ul>
