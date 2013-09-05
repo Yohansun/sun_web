@@ -32,9 +32,9 @@
 			</ul>
 		</div>
 	<% end %>
-	<div class="pull-right"><a href="<%=@i_banner1 if @i_banner1%>"><img src="<%=@i_banner1.file.url(:list_230x230)%>"></a></div>
+	<div class="pull-right"><a href="<%=@i_banner1 if @i_banner1%>"><img src="<%=@i_banner1.file.url(:list_230x230) if @i_banner1%>"></a></div>
 </div>
 <div class="clearfix">
-	<div class="footer_banner pull-left"><a href="<%=@i_banner2 if @i_banner2%>"><img src="<%=@i_banner2.file.url(:list_670x85)%>"></a></div>
-	<div class="footer_banner pull-right"><a href="<%=@i_banner3 if @i_banner3%>"><img src="<%=@i_banner3.file.url(:list_310x85)%>"></a></div>
+	<div class="footer_banner pull-left"><a href="<%=@i_banner2 if @i_banner2%>"><img src="<%=@i_banner2.file.url(:list_670x85) if @i_banner2%>"></a></div>
+	<div class="footer_banner pull-right"><a href="<%=@i_banner3 if @i_banner3%>"><img src="<%=@i_banner3.file.url(:list_310x85) if @i_banner3%>"></a></div>
 </div>

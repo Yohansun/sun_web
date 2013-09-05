@@ -3,7 +3,11 @@
 </style>
 <div class="container refresh_main">
 		<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
-		<div class="mt10"><a href="<%=@kv.url if @kv%>"><img src="<%= asset_path @kv.try(:file).try(:url, :special) %>"></a></div>
+		<% if @kv %>
+			<div class="mt10">
+				<a href="<%=@kv.url%>"><img src="<%= asset_path @kv.try(:file).try(:url, :special) %>"></a>
+			</div>
+		<% end %>
 		<ul class="breadcrumb">
 			<li><a href="#">首页</a> > </li>
 			<li><a href="#">刷新生活</a> > </li>

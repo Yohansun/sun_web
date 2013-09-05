@@ -3,7 +3,7 @@ class RefreshRecordController < ApplicationController
   layout "home_manage"
   before_filter :get_data
   def index
-    @kv = HomeKv.where(position: nil).first
+    @kv = HomeKv.where(position: nil, visible: true).first
     @life_memoirs = ILifeMemoir.order("created_at desc").page(params[:page]).per(4)
     @wonderfuls = IColumnData.show_data(17).limit(5)
     @wonderfuls_url = IColumnData.where(i_column_type_id: 17, position: 0).first
