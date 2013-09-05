@@ -18,12 +18,14 @@
 <h3 class="chann_caption nomargin">
 	<div class="map-search pull-right">
 		<p class="pull-left">热门搜索：
-			<%- @hot_search.each do |s| %>
-				<a href="<%= s.link %>" target="_blank"><%= s.title %></a>
+			<%- @hot_search.each_with_index do |s,i| %>
+				<%- unless i == @hot_search.size - 1 %>
+					<a href="<%= s.link %>" target="_blank"><%= s.title %></a>
+				<%- end %>
 			<%- end %>
 		</p>
 		<form action="/icolor/" method='post' class="pull-left">
-			<input type="text" name='search' value="<%= @user_word if @user_word %>" class="search_query_value map-text">
+			<input type="text" name='search' value="<%= @hot_search.last.try(:title) %>" class="search_query_value map-text">
 			<input type="submit" class="map-submit" value="搜图" onclick="return false;" />
 		</form>
 	</div>
@@ -42,6 +44,7 @@
 	<%- @seo_sites.each do |s| %>
 		<li class="pull-right"><a href="<%= s.link %>"><%= s.title %></a></li>
 	<%- end %>
+	<li class="pull-right"><a href="/color_designs" target="_blank">装修色彩搭配</a></li>
 </ul>
 <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
 
@@ -96,31 +99,31 @@
 		</div>
 		<ul class="map-bt">
 			<li>
-				<a href="#" class="map-bt1">装修户型</a><span>|</span>
+				<a href="/images/<%= show_link(1) %>" class="map-bt1" target="_blank">装修户型</a><span>|</span>
 				<%- @type.each do |type| %>
 					<a href="<%= type.link %>" class="map-bt2" target="_blank"><%= type.title %></a>
 				<%- end %>
 			</li>
 			<li>
-				<a href="#" class="map-bt1">装修风格</a><span>|</span>
+				<a href="/images/<%= show_link(34) %>" class="map-bt1" target="_blank">装修风格</a><span>|</span>
 				<%- @style.each do |style| %>
 					<a href="<%= style.link %>" class="map-bt2" target="_blank"><%= style.title %></a>
 				<%- end %>
 			</li>
 			<li>
-				<a href="#" class="map-bt1">装修费用</a><span>|</span>
+				<a href="/images/<%= show_link(19) %>" class="map-bt1" target="_blank">装修费用</a><span>|</span>
 				<%- @cost.each do |cost| %>
 					<a href="<%= cost.link %>" class="map-bt2" target="_blank"><%= cost.title %></a>
 				<%- end %>
 			</li>
 			<li>
-				<a href="#" class="map-bt1">装修空间</a><span>|</span>
+				<a href="/images/<%= show_link(82) %>" class="map-bt1" target="_blank">装修空间</a><span>|</span>
 				<%- @space.each do |space| %>
 					<a href="<%= space.link %>" class="map-bt2" target="_blank"><%= space.title %></a>
 				<%- end %>
 			</li>
 			<li>
-				<a href="#" class="map-bt1">装修色彩</a><span>|</span>
+				<a href="/images/<%= show_link(107) %>" class="map-bt1" target="_blank">装修色彩</a><span>|</span>
 				<%- @color.each do |color| %>
 					<a href="<%= color.link %>" class="map-bt2" target="_blank"><%= color.title %></a>
 				<%- end %>
