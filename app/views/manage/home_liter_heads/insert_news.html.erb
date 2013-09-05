@@ -47,18 +47,6 @@
         </tr>
       </thead>
       <tbody>
-			  <% if @news.first.order_id == 0 %>
-					<tr  class="form-inline edit_form<%= @news.first.try(:id) %>">
-						<td>
-							<%= link_to "编辑", edit_home_liter_head_path(@news.first), :remote => true %>
-						</td>
-						<td><%= @news.first.order_id%></td>
-						<td><%= @news.first.title %></td>
-						<td><%= @news.first.link %></td>
-						<td><span class="label label-warning"><%= @news.first.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
-						</td>
-					</tr>
-		    <% end %>
 				<tr class="form-inline">
 					<%= form_tag(home_liter_heads_path(genre: @news.first.genre, design_type: params[:design_type]), method: "post") do %>
 						<td>
@@ -82,6 +70,19 @@
 						</td>
 				    <% end %>
 			  </tr>
+			  
+			  <% if @news.first.order_id == 0 %>
+					<tr  class="form-inline edit_form<%= @news.first.try(:id) %>">
+						<td>
+							<%= link_to "编辑", edit_home_liter_head_path(@news.first), :remote => true %>
+						</td>
+						<td><%= @news.first.order_id%></td>
+						<td><%= @news.first.title %></td>
+						<td><%= @news.first.link %></td>
+						<td><span class="label label-warning"><%= @news.first.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+						</td>
+					</tr>
+		    <% end %>
 				<% @news.each_with_index do |new,index| %>
 				  <% unless new.order_id == 0 %>
 						<tr  class="form-inline edit_form<%= new.try(:id) %>">
