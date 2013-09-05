@@ -1,12 +1,12 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag 'style', 'weekstar',"master_interviews" %>
-    <style type="text/css">
-        .shadow {
-            zoom: 1;
-        }
-    </style>
+<%= stylesheet_link_tag 'style', 'weekstar' %>
+<style type="text/css">
+.shadow {
+  zoom: 1;
+}
+</style>
 <%- end %>
-<div class="main" style="width:auto">
+<div class="main">
   <div class='sub_title text-right'>
     <img src='<%= set_style[:pic_path] %>' alt=""/>
   </div>
@@ -17,55 +17,55 @@
   </div><!--sub_nav ends-->
   <div class='wrapper pt25 pb30'>
     <%- if @topics %>
-        <%- @topics.each do |topic| %>
-            <div class="shadow mt25 mb15">
-              <div class="section">
-                <div class="hot_topics_box group">
-                  <div class="fl">
-                    <h3><%= link_to "#{topic.title}", "/master_topics/#{topic.id}" %></h3>
-                    <div class="h3_sub pr group" style=" overflow:visible">
-                      <span>时间：<%= topic.published_at.to_formatted_s(:db) %></span><span class="zf">转发(0)</span><span class="pl">评论(<%= topic.comments.length%>)</span>
-                      <%= forward_links("#iColor分享#一篇精彩家装业内动态--【#{topic.title}】，更多家装资讯，尽在iColor，@刷新生活iColor，", 
-                          master_topic_url(topic.id), 
-                          topic.preview_img.url(:icolor_master_topics), 
-                          topic.id.to_s, "MasterTopic") %>
-                    </div>
-                    <div class="hot_topic_main group">
-                      <%= image_tag topic.preview_img.url(:icolor_master_topics) if topic.preview_img %>
-                      <div class="hot_topics_con">
-                        <p><%= raw topic.intro %>...<%= link_to "[详细]", "/master_topics/#{topic.id}" %></p>
-                      <p class="pl40">
-                        <%- topic.tag_counts_on(:tags).each do |tag| %>
-                        <span><%= link_to tag.name,  "/master_topics?tags=#{URI.escape(tag.name)}"%></span>
-                        <%- end %>
-                      </p>
-                      </div>
-                    </div>
-                  </div>
-                  <!--fl-->
-                  <%- if topic.comments.size > 0 %>
-                  <div class="fr new_comm">
-                  <h4>最新评论</h4>
-                    <ul>
-                      <%- if topic.comments.size >6 %>
-                        <%- topic.comments[0..5].each do |comment| %>
-                            <li><%= comment.content.first(12)+"..." %></li>
-                        <%- end %>
-                            <li class="noborder"><%= topic.comments[6].content.first(12) %></li>
-                      <%- else %>
-                          <%- topic.comments[0...topic.comments.size-1].each do |comment| %>
-                              <li><%= comment.content.first(12)+"..." %></li>
-                          <%- end %>
-                          <li class="noborder"><%= topic.comments[topic.comments.size-1].content.first(12) %></li>
-                      <%- end %>
-                    </ul>
-                  </div>
+    <%- @topics.each do |topic| %>
+    <div class="shadow mt25 mb15">
+      <div class="section">
+        <div class="hot_topics_box group">
+          <div class="fl">
+            <h3><%= link_to "#{topic.title}", "/master_topics/#{topic.id}" %></h3>
+            <div class="h3_sub pr group" style=" overflow:visible">
+              <span>时间：<%= topic.published_at.to_formatted_s(:db) %></span><span class="zf">转发(0)</span><span class="pl">评论(<%= topic.comments.length%>)</span>
+              <%= forward_links("#iColor分享#一篇精彩家装业内动态--【#{topic.title}】，更多家装资讯，尽在iColor，@刷新生活iColor，", 
+                master_topic_url(topic.id), 
+                topic.preview_img.url(:icolor_master_topics), 
+                topic.id.to_s, "MasterTopic") %>
+            </div>
+            <div class="hot_topic_main group">
+              <%= image_tag topic.preview_img.url(:icolor_master_topics) if topic.preview_img %>
+              <div class="hot_topics_con">
+                <p><%= raw topic.intro %>...<%= link_to "[详细]", "/master_topics/#{topic.id}" %></p>
+                <p class="pl40">
+                  <%- topic.tag_counts_on(:tags).each do |tag| %>
+                  <span><%= link_to tag.name,  "/master_topics?tags=#{URI.escape(tag.name)}"%></span>
                   <%- end %>
-                  <!--fr-->
-                </div>
+                </p>
               </div>
             </div>
-        <%- end %>
+          </div>
+          <!--fl-->
+          <%- if topic.comments.size > 0 %>
+          <div class="fr new_comm">
+            <h4>最新评论</h4>
+            <ul>
+              <%- if topic.comments.size >6 %>
+              <%- topic.comments[0..5].each do |comment| %>
+              <li><%= comment.content.first(12)+"..." %></li>
+              <%- end %>
+              <li class="noborder"><%= topic.comments[6].content.first(12) %></li>
+              <%- else %>
+              <%- topic.comments[0...topic.comments.size-1].each do |comment| %>
+              <li><%= comment.content.first(12)+"..." %></li>
+              <%- end %>
+              <li class="noborder"><%= topic.comments[topic.comments.size-1].content.first(12) %></li>
+              <%- end %>
+            </ul>
+          </div>
+          <%- end %>
+          <!--fr-->
+        </div>
+      </div>
+    </div>
+    <%- end %>
     <%- end %>
   </div>
   <!--wrapper ends-->
@@ -76,6 +76,4 @@
     </div>
     <!--pager ends-->
   </div>
-</div><!--pager ends-->
-</div><!--sub_bot ends-->
-</div><!--main ends-->
+</div>

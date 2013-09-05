@@ -1,5 +1,5 @@
 <%- content_for :head do %>
-<%= stylesheet_link_tag "style","master_interviews" %>
+<%= stylesheet_link_tag "style"%>
 <style type="text/css" media="screen">
 .fr {
   float: right;
@@ -26,7 +26,7 @@ outline: none;
 }
 </style>
 <%- end %>
-<div class="main page_weekstar" style="width:auto">
+<div class="main page_weekstar">
   <div class='sub_title text-right'><img src="<%= asset_path "design/title_event.png"%>"/></div>
   <div class='sub_nav ft12 pr tr'>
     <em><%= link_to "设计师活动", "/designer_events", :class => 'fb' %></em>
