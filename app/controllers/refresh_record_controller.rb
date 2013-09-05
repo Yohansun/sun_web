@@ -14,6 +14,9 @@ class RefreshRecordController < ApplicationController
 
   def show
     @life_memoir = ILifeMemoir.find params[:id]
+    @i_column_data = IColumnData.where(i_column_type_id: 1, position: 0).first
+    @url = @i_column_data.url if @i_column_data
+    @i_column_datas = IColumnData.show_data(1)
   end
 
   def get_data

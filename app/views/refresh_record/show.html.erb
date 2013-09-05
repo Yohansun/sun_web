@@ -1,5 +1,5 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag "refresh_life/map", "style.css"  %>
+    <%#= stylesheet_link_tag "refresh_life/map", "style.css"  %>
     <%= javascript_include_tag "exp/exp.js", "LinkageSelect/location.js", "LinkageSelect/LinkageSelect.js", "flowplayer-3.2.11.min.js" %>
 <% end -%>
 <div class="container refresh_main">
@@ -33,26 +33,20 @@
 			</div>
 		</div>
 		<div class="pull-right">
-			<ul class="unstyled map-right index_main">
-				<li class="clearfix refresh_r_tit">
-					<a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>
-					<strong class="pull-left">最新大师作品</strong>					
-				</li>
-				<% if @master_design_datas.present? %>
-					<% @master_design_datas.each_with_index do |data, index| %>
-					  <% if index == 0 %>
-					    <li class="map-r1 dott1">
-								<a href="#">
-									<strong><%= data.title %></strong>
-									<%= image_tag data.file.url  %>
-								</a>
-							</li>
-					  <% else %>
-					    <li class="map-r2"><a href="<%= data.url %>"><%= data.title %></a></li>
-					  <% end %>
-					<% end %>
-				<% end %>
-			</ul>
+			<ul class="unstyled map-right index_main js-img_show">
+					<li class="clearfix refresh_r_tit">
+						<a href="<%=@url if @url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+						<strong class="pull-left">最新大师作品</strong>					
+					</li>
+          <% @i_column_datas.each_with_index do |cd,index| %>
+					<li class="map-r1 dott1 <%="active" if index == 0%>">
+              <i class="icon-i16 icon-<%=index+1%>"></i>
+							<strong class="js-title"><%=cd.title%></strong><br>
+							<a href="#" class="<%="hide" if index != 0%> js-img"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+					</li>
+          <% end %>
+				</ul>
+
 			<div class="chann_warp chann1_right map-right index_main">
 				<div class="media media_chann">
 					<a class="pull-left" href="/design_images/lists">

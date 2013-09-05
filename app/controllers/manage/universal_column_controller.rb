@@ -21,7 +21,6 @@ class Manage::UniversalColumnController < Manage::BaseController
   	@url = @i_column_data.url if @i_column_data
 
   	@i_column_datas = IColumnData.show_data(@column_type)
-  	p @i_column_datas
   end
 
   def edit
