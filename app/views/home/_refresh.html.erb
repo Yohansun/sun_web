@@ -46,7 +46,7 @@
 				</ul>
 			</div>
 		</div>
-		<a href="#" class="pull-left mr5"><%= image_tag @i_banner6.file.url(:list_240x170) %></a>
-		<a href="#" class="pull-left"><%= image_tag @i_banner7.file.url(:list_240x170) %></a>
+		<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_240x170), class: 'pull-left mr5' %></a>
+		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner3.try(:file).try(:url, :list_240x170), class: 'pull-left' %></a>
 	</div>
 </div>
