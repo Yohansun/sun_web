@@ -10,13 +10,13 @@ class Manage::BannerGroupController < Manage::BaseController
   	i_banner_group_id = params[:i_banner_group_id]
 
   	if name.blank?
-	  	render :text => '保存失败! 组名不允许为空。' 
+	  	render :text => '保存失败! 组名不允许为空。'
 	  	return false
 	  end
 
 	  @i_banner_group = IBannerGroup.find_by_name(name)
 	  if @i_banner_group
-	  	render :text => '保存失败! 已存在相同的组名。' 
+	  	render :text => '保存失败! 已存在相同的组名。'
 	  	return false
 	  end
 
@@ -33,7 +33,17 @@ class Manage::BannerGroupController < Manage::BaseController
   	else
   		render :text => '未保存成功'
   	end
+  end
 
+  def update_data
+    if params[:group_id] && params[:update] && params[:name]
+      @i_banner_group = IBannerGroup.find_by_id(params[:group_id])
+      if @i_banner_group.update_attribute(:name, params[:name])
+        render :js => "alert('保存成功!');location.reload();"
+      else
+        render :js => "alert('保存失败!');location.reload();"
+      end
+    end
   end
 
   def destroy

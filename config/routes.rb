@@ -506,7 +506,7 @@ Icolor::Application.routes.draw do
 
     resources :intros, only: :show
   end
-  
+
   scope '/refresh_life', :module => 'refresh_life' do
     resources :refresh_show
     resources :refresh_list
@@ -646,6 +646,7 @@ Icolor::Application.routes.draw do
     resources :banner_group do
       collection do
         post :save_data
+        post :update_data
       end
     end
 
