@@ -61,9 +61,9 @@
 							<div class="span4 form-inline">
 								<label class="span1 control-label">组</label>
 								<div class="span9">
-								<%= select_tag "i_banner_group_id", options_from_collection_for_select(@i_banner_groups, "id", "name", @i_banner.i_banner_group_id), :class => "input-medium" %>
-									<p class="nom">当前组共有<strong class="text-error"><%= @i_banner_groups_count %></strong></p>
-									<p class="nom"><a href="#">查看所有banner</a></p>
+								<%= select_tag "i_banner_group_id", options_from_collection_for_select(@i_banner_groups, "id", "name", @i_banner.i_banner_group_id), prompt: "请选择组", :class => "input-medium" %>
+									<p class="nom">&nbsp;<strong class="text-error"></strong></p>
+									<p class="nom">&nbsp;</p>
 								</div>
 							</div>
 
