@@ -25,13 +25,13 @@
 
     $('input[name="video"]').change(function(){
 		   var filename = $(this).val().toLowerCase();;
-		   if (!/\.(flv)$/.test(filename)) { 
-				  alert("请选择文件类型为flv的文件!"); 
+		   if (!/\.(flv)$/.test(filename)) {
+				  alert("请选择文件类型为flv的文件!");
 				  this.value = "";
-				  return false; 
+				  return false;
 			 } else {
 		   	$('#filename').html(filename);
-			 } 
+			 }
 		});
 
 		$('#show_panel form[data-redirect_url]').bind('ajax:success', function(evt, data, status, xhr) {
@@ -103,7 +103,7 @@
 
   function open_page() {
     var page_num = $('#page_to').val();
-    url = "/manage/life_memoirs?page=" + page_num 
+    url = "/manage/life_memoirs?page=" + page_num
     window.open(url, "_blank");
   }
 </script>
@@ -158,16 +158,16 @@
 		    <div class="">
 		      <div class="media">
 		        <div class="media-body">
-		        			<label for="" class="control-label">主标题(不超过20字)：</label>
+		        			<label for="" class="control-label"><b>主标题(不超过20字)：<b></label>
 		              <p class="form-inline">
 		                <input type="text" id="title" name="title" class="input-xlarge" value="" maxlength=20 maxlength=20>
 		              </p>
 
-		              <label for="" class="control-label">副标题(不超过20字)：</label>
+		              <label for="" class="control-label"><b>副标题(不超过20字)：</b></label>
 		              <p class="form-inline">
 		                <input type="text" id="s_title" name="s_title" class="input-xlarge" value="" maxlength=20 maxlength=20>
 		              </p>
-		              <label for="" class="control-label">摘要(不超过50字)：</label>
+		              <label for="" class="control-label"><b>摘要(不超过50字)：</b></label>
 		              <p class="form-inline">
 		                <textarea id="summary" name="summary" class="input-xlarge" rows="3" maxlength=50 maxlength=50></textarea>
 		              </p>
@@ -181,12 +181,12 @@
 		    <div class="">
 		      <div class="media">
 		        <div class="media-body">
-		        			<label for="" class="control-label">链接：</label>
+		        			<label for="" class="control-label"><b>链接：</b></label>
 		        			<p class="form-inline">
 		                <input type="text" id="url" name="url" class="input-xlarge" value="" placeholder="请输入链接">
 		                <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测链接</a>
 		              </p>
-		              <label for="" class="control-label">视频(格式flv)</label>
+		              <label for="" class="control-label"><b>视频(格式flv)</b></label>
 		              <p class="form-inline">
 		                <span class="btn fileinput-button btn-mini btn-primary">
 		                  <i class="glyphicon glyphicon-plus"></i>
@@ -195,7 +195,7 @@
 		                </span>
 		                <div id="filename"></div>
 		              </p>
-		              <label for="" class="control-label">图片(尺寸340x240)</label>
+		              <label for="" class="control-label"><b>图片(尺寸340x240)</b></label>
 		              <p class="form-inline">
 		                <span class="btn fileinput-button btn-mini btn-primary">
 		                  <i class="glyphicon glyphicon-plus"></i>
@@ -267,15 +267,15 @@
 			    <div class="">
 			      <div class="media">
 			        <div class="media-body">
-			        			<label for="" class="control-label">链接：</label>
+			        			<label for="" class="control-label"><b>链接：</b></label>
 			        			<p class="form-inline">
 			                <a href="<%= i_life_memoir.url %>" target="_blank"><%= i_life_memoir.url %></a>
 			              </p>
-			              <label for="" class="control-label">视频(格式flv)</label>
+			              <label for="" class="control-label"><b>视频(格式flv)</b></label>
 			              <p class="form-inline">
 			                <a href="<%= i_life_memoir.video.url %>" target="_blank"><%= i_life_memoir.video_file_name %></a>
 			              </p>
-			              <label for="" class="control-label">最后修改日期</label>
+			              <label for="" class="control-label"><b>最后修改日期</b></label>
 			              <p class="form-inline">
 			                <%= i_life_memoir.updated_at.to_s %>
 			              </p>
@@ -305,7 +305,7 @@
 			  <a href="javascript:;" class="btn btn-small btn-primary" onclick="open_page();return false;">Go</a>
 			</div>
 		<% end %>
-		
+
   </div>
 
 </div>
