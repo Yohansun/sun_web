@@ -35,16 +35,6 @@ class Manage::UniversalColumnController < Manage::BaseController
   	url = params[:url]
   	id = params[:id]
 
-  	@i_column_datas = IColumnData.show_data(id)
-  	@i_column_datas.each do |item|
-  		item.rank = item.rank + 1
-  		item.save
-  	end
-
-  	if @i_column_datas.count == 5
-  		@i_column_datas.first.destroy
-  	end
-
   	@i_column_data = IColumnData.new
 		@i_column_data.file = params[:files].tempfile if params[:files].present?
     @i_column_data.title = title
@@ -52,6 +42,15 @@ class Manage::UniversalColumnController < Manage::BaseController
 		@i_column_data.url = url
 		@i_column_data.i_column_type_id = id
 		if @i_column_data.save
+      i_column_data = IColumnData.where("rank >= ? and created_at < ?",@i_column_data.rank,@i_column_data.created_at)
+      i_column_data.each do |icd|
+        if icd.rank == 5 
+          icd.destroy
+        else
+          icd.rank += 1
+          icd.save
+        end
+      end
 			redirect_to request.referer if params[:files].present?
   		render :json => {notify: '上传成功', referer: request.referer}, :layout => false if params[:files].blank?
 		else
@@ -69,32 +68,24 @@ class Manage::UniversalColumnController < Manage::BaseController
     @i_column_data = IColumnData.find_by_id(@id)
     result = "上传失败"
     if @i_column_data
-  		@i_column_data.file = params[:files].tempfile if params[:files].present?
+      i_column_data_rank = @i_column_data.rank
+  		@i_column_data.file = params[:files_up].tempfile if params[:files_up].present?
       @i_column_data.title = title
       @i_column_data.rank = rank
   		@i_column_data.url = url
     	if @i_column_data.save
+        unless i_column_data_rank.to_i == rank.to_i
+          que = IColumnData.where("rank = ? and updated_at < ?",@i_column_data.rank,@i_column_data.updated_at).first
+          que.rank = i_column_data_rank
+          que.save
+        end
     		result = "上传成功"
   		end
-
-      @i_column_datas = IColumnData.show_data(i_column_type_id)
-      rank_value = 5
-	  	@i_column_datas.each do |item|
-	  		unless @i_column_data == item
-	  			if item.rank == rank.to_i
-		  			rank_value -= 1
-		  		end
-		  		item.rank = rank_value
-		  		item.save
-	  		end
-	  		rank_value -= 1
-	  	end
-
     end
 
     @referer = request.referer
 
-    if params[:files].present?
+    if params[:files_up].present?
       redirect_to request.referer
     else
       render :json => {:notify => result}, :layout => false
