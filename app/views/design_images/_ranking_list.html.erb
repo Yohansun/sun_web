@@ -4,7 +4,7 @@
 		<li class="map-r1 dott1 <%="active" if index == 0%>">
         <i class="icon-i16 icon-<%= index+1 %>"></i>
         <strong class="js-title"><%=dcs.title%></strong><br>
-        <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+        <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
     </li>
 	<% end %>
 </ul>
