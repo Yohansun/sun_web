@@ -1,6 +1,6 @@
 <ul class="unstyled map-right index_main mt10 js-img_show">
 	<li class="clearfix refresh_r_tit">
-		<li class="map-r0 text-right"><strong><%= name %></strong><a href="#">更多></a></li>
+		<li class="map-r0 text-right"><strong><%= name %></strong><a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank">更多></a></li>
 	</li>
 	<% IColumnData.show_data(i_column_type_id).limit(5).each_with_index do |dcs,index| %>
 	<li class="map-r1 dott1 <%="active" if index == 0%>">
