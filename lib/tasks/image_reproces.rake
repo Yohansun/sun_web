@@ -22,7 +22,7 @@ task :design_image_reproces => :environment  do
   # ids
   # arr = [54,99,207,287,364,423,514,538,635,670,763,840,914,981,71,156,229,297,383,431,520,559,644,716,792,871,930,74,160,266,308,407,433,528,594,663,734,837,886,932,92,169,285,314,417,438,531,623,667,751,839,903,971]
 
-  @arr = DesignImage.all
+  @arr = DesignImage.available.audited_with_colors.order("id desc").where("id < 89752").limit(100)
   # @arr = DesignImage.where("id In (?)",arr)
 
   @all_size = @arr.size
