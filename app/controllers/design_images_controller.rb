@@ -236,7 +236,6 @@ class DesignImagesController < ApplicationController
     end
 
     @images = @design_images.order(ranks).page(params[:page]).per(18)
-
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
     @query_tags = @ilcs if @ilcs.present?
@@ -366,7 +365,7 @@ class DesignImagesController < ApplicationController
 
     @image.view_count += 1
     @image.update_attributes(:view_count => @image.view_count)
-    @images_total = DesignImage.available.audited_with_colors.count
+    @images_total = DesignImage.from.available.audited_with_colors.count
     @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
     if @image.area_id
@@ -388,7 +387,7 @@ class DesignImagesController < ApplicationController
       @type = @other_ids[3]
       @rank = @other_ids[5]
     end
-    images = DesignImage.available.audited_with_colors
+    images = DesignImage.from.available.audited_with_colors
     unless params[:path].blank?
        @tag_ids = CGI.unescape(params[:path]).split("-").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
@@ -430,7 +429,8 @@ class DesignImagesController < ApplicationController
         images = images.where("sorts = 2")
       else
         images = images.where("imageable_type = ?", @type)
-      end    end
+      end    
+    end
 
     if @pinyin.present? && @pinyin.to_s != "0"
       tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{@pinyin}%")
@@ -456,8 +456,16 @@ class DesignImagesController < ApplicationController
     site = params[:site].to_i - 1
     @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
     @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
-    @image_thumb = images.offset(site + 3).limit(3) if (site + 3) < count
+    if site <= 4
+      @up_ids = images.offset(0).limit(1)
+    else
+      @up_ids = images.offset(site - 4).limit(1)
+    end
 
+    if (site + 4) < count
+      @next_ids = images.offset(site + 4).limit(1)
+    end
+    @image_thumb = images.offset(site + 1).limit(3) if (site + 1) < count
     #推荐色
     #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
