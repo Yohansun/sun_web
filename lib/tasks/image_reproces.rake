@@ -14,7 +14,7 @@ task :design_image_reproces => :environment  do
   # DesignImage.find_each{|image| image.file.reprocess! if image.file; p image.id}
 
   # 总共开启的线程数
-  @thread_count = 20
+  @thread_count = 10
 
   # 每个显示处理多少张图睡眠
   @sleep_time = 50
