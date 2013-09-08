@@ -480,9 +480,11 @@ class DesignImagesController < ApplicationController
     if tags == []
       @like_images = DesignImage.from.available.audited_with_colors.order("created_at desc").uniq.limit(4)
     else
-      tags = tags[0..4]
+      tags = tags.sample(4)
       @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).uniq.limit(4)
     end
+    #最新更新
+    @latest_mounth_images = DesignImage.from.available.audited_with_colors.latest_mounth_images.sample(4)
   end
 
   def fullscreen

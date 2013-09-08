@@ -34,6 +34,8 @@ class DesignImage < ActiveRecord::Base
 
   scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
 
+  scope :latest_mounth_images,->{where("design_images.updated_at > ? and design_images.updated_at <= ?", Time.now - 30.days, Time.now)}
+
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
 
   scope :from, where("design_images.created_at > (?)", "2013-3-1")
