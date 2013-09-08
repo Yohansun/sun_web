@@ -258,6 +258,8 @@ class DesignImagesController < ApplicationController
     i_banners = IBanner.page_name('图库列表页')
     @banner1 = i_banners.find_by_position(1)
     @banner2 = i_banners.find_by_position(2)
+    @fitting_parts = TagSort.order("id asc").where("genre = 0")  
+    @home_design = TagSort.order("id asc").where("genre = 1")
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
 
