@@ -1,5 +1,5 @@
 <%= content_for :tail do %>
-    <%= stylesheet_link_tag "owners_channel" %>
+    <%= stylesheet_link_tag "owners_channel","style" %>
     <script type="text/javascript">
         $(document).ready(function() {
          <%- if flash[:mix_color] %>
@@ -14,8 +14,8 @@
         })
     </script>
 <%- end -%>
-<div class="main page_weekstar">
-  <div class="sub_title tr">
+<div class="main">
+  <div class="sub_title text-right">
     <img src="<%= asset_path "design/title_owner.png" %>">
   </div>
   <div class="sub_nav ft12 pr tr">
@@ -57,7 +57,7 @@
               <th>内　　容：</th>
               <td>
                 <%= f.text_area :description, :class => 'input-xxlarge'%>
-                您还可以输入<span id="characters">500</span>字
+                您还可以输入<span id="characters" style="vertical-align:top;">500</span>字
               </td>
             </tr>
             <tr class="f_image">

@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class ChannelController < ApplicationController
+  layout "home_manage"
   #caches_page :index, :expires_in => 60.minutes
   
    #设计快查
@@ -36,23 +37,34 @@ class ChannelController < ApplicationController
     end
     
     @search = DesignImage.available.users.search(params[:search])
-    @design_users = @search.page(params[:page]).per(8)
+    @design_users = @search.page(params[:page]).per(10)
     
     #mood
-    @moods = Mood.order("created_at desc").limit(5)
+    @moods = Mood.order("created_at desc").limit(4)
     
     #每周之星,月度之星 = stars
     stars = WeeklyStar.order("published_at desc").partition {|weekly_star| weekly_star.star_type_id == 1 }
     
     weekly_user_ids,per_month_user_ids = stars.collect {|star| star.map(&:user_id).compact.uniq}
     
-    @designers  = User.weekly_related(1,weekly_user_ids).page(1).per(8)
+    @designers  = User.weekly_related(1,weekly_user_ids).page(1).per(9)
 
-    @companys   = User.weekly_related(2,per_month_user_ids).page(1).per(16)
+    @companys   = User.weekly_related(2,per_month_user_ids).page(1).per(9)
 
-    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
+    @channel_tips = ChannelTip.order("rank asc")
+
+    @ibnner1 = IBanner.page_name('设计快查').position(1).first
+    @ibnner2 = IBanner.page_name('设计快查').position(2).first
+    @ibnner3 = IBanner.page_name('设计快查').position(3).first
+
+    #expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def refresh_service
+    @i_banner = IBanner.page_name("刷新服务")
+    @decoration_color_scheme = IColumnData.show_data(9).limit(5)
+    @rrdrs = IColumnData.show_data(4).limit(5)
+    @decoration_color_scheme_url = IColumnData.where(i_column_type_id: 9, position: 0).first
+    @rrdr_url = IColumnData.where(i_column_type_id: 4, position: 0).first
   end
 end

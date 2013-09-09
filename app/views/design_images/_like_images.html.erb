@@ -1,0 +1,8 @@
+<%- resource.each do |image| %>
+  <dd class="pull-left">
+    <a href="/images/<%= image.id %>/image_show" target="_blank">
+      <%= image_tag(image.file.url(:like_image), alt: image.design.try(:title), title: image.design.try(:title))%>
+    </a>
+    <p class="text-center"><%= image.title ? image.title : "未命名" %></p>
+  </dd>
+<%- end %>

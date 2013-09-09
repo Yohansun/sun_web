@@ -1,0 +1,15 @@
+<tr>
+	<td><a href="javascript:;" class="recommend_save">保存</a>|<a href="/manage/home_recommends">取消</a></td>
+	<td>
+		<%= select_tag :position, options_for_select((1..6).to_a, recommend.position), style: 'width:50px;', id: 'recommend_select_field' %>
+	</td>
+	<td>
+		<%= text_field_tag :title, recommend.title, id: 'recommend_title_field', class: 'title-field', :'data-total' => '20' %>
+	</td>
+	<td>
+		<%= text_field_tag :url, recommend.url, id: 'recommend_url_field' %>
+	</td>
+	<td>
+		<a href="javascript:;" id="link3">检测链接</a>
+	</td>
+</tr>

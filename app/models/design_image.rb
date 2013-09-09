@@ -34,6 +34,8 @@ class DesignImage < ActiveRecord::Base
 
   scope :audited_with_colors, where(["edited_color = ? and audited = ?", true, true])
 
+  scope :latest_mounth_images,->{where("design_images.updated_at > ? and design_images.updated_at <= ?", Time.now - 30.days, Time.now)}
+
   scope :up_down_image, lambda{ |current_id| unscoped.where("id IN (select max(id) from design_images where id < #{current_id} union select min(id) from design_images where id > #{current_id})").order('id')}
 
   scope :from, where("design_images.created_at > (?)", "2013-3-1")
@@ -56,12 +58,17 @@ class DesignImage < ActiveRecord::Base
         :mobile_baicheng_fullscreen => "320x358#",
         :slide => "900>",:baicheng_list => "201x145>",
         :channel_image => "155x115#",
+        :image_show_thumb => "80x75#",
+        :image_map_list => "210>",
+        :image_map_show => "620x388#",
         :slide_thumb => "205x138#",:image_libraries_hover => "650x500>",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
-        :grid_list => "204x145>"},
+        :grid_list => "204x145>",
+        :like_image => "110x80>"},
     :convert_options => {
       :slide => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
       :design_image_big => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
+      :image_map_show => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
       :original => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite "
       },
     :whiny_thumbnails => true,
@@ -106,6 +113,10 @@ class DesignImage < ActiveRecord::Base
     image_styles.map(&:title).join(',')
   end
 
+  def design_title(id)
+    Design.find(id).title
+  end
+
   # 科普兰德(1)-每周之星(2 后台设置)-大师作品(3)-sina(4)-色彩搭配(5)-自行上传(100)
   def set_sort
     self.sorts = 100 if self.sorts.blank?
@@ -117,6 +128,22 @@ class DesignImage < ActiveRecord::Base
 
   def set_pinyin!
     self.pinyin = PinYin.of_string(self.title.to_s[0]).first.to_s
+  end
+
+  def house_type_names
+    house_type.map(&:title).first
+  end
+
+  def acreages_names
+    acreages.map(&:title).first
+  end
+
+  def use_names
+    use.map(&:title).first
+  end
+
+  def design_style_names
+    image_styles.map(&:title).join(',')
   end
 
   def comments_count

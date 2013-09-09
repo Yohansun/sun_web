@@ -1,0 +1,137 @@
+<%- content_for :tail do %>
+  <style type="text/css">
+  .tips_con_edit{width:200px;height:80px;overflow-y:scroll;}
+  .tips_list th,.tips_list td{vertical-align:middle;word-wrap:break-word;}
+  .tips_list th{text-align:center;}
+  .tips_list p{margin:0!important;}
+  /*.tips_list .tips_site,.tips_list .tips_con{width:445px;white-space:normal;word-wrap:break-word;overflow:hidden;}*/
+  /*.tips_list .tips_tit{width:200px;white-space: normal;word-wrap:break-word;overflow:hidden;}*/
+  .none{display: none!important;}
+  </style>
+  <script type="text/javascript">
+    $(function() {
+      $('.js-edit').on('click', function(e){
+        e.preventDefault();
+        var $ps_tr = $(this).parents('tr');
+        $ps_tr.siblings().find('p.tips_toggle').show();
+        $ps_tr.siblings().find('p.tips_toggle').next().addClass('none');
+        $ps_tr.siblings().find('.js-edit').show();
+        $ps_tr.siblings().find('.tips_checkbtn').addClass('none');
+        // $ps_tr.siblings()
+
+        //按钮
+        $(this).hide();
+        $(this).siblings('.tips_links').hide().parents('tr').siblings().find('.tips_links').show();
+        $(this).siblings('.tips_edit_btn').removeClass('none').parents('tr').siblings().find('.tips_edit_btn').addClass('none');
+        
+        //编辑状态
+        var $tips_p = $ps_tr.find('p.tips_toggle');
+        $tips_p.hide();
+        $tips_p.next().removeClass('none');
+
+        var tips_tit = $ps_tr.find('.tips_tit').text();
+        var tips_con = $ps_tr.find('.tips_con').text();
+        var tips_site = $ps_tr.find('.tips_site').text();
+        $ps_tr.find('.tips_tit_edit').val(tips_tit)
+        $ps_tr.find('.tips_con_edit').val(tips_con)
+        $ps_tr.find('.tips_site_edit').val(tips_site)
+        $ps_tr.find('.tips_checkbtn').removeClass('none')
+
+        //序号
+        var tips_len = $ps_tr.siblings().length + 1;
+        var tips_order = $ps_tr.find('.tips_order').text();
+        
+        var $tips_order_sel = $ps_tr.find('.tips_order').siblings('select');
+        if ($tips_order_sel.children().length == 0) {
+          for (var i = 1; i <= tips_len; i++) {
+            if (i == tips_order) {
+              $tips_order_sel.append('<option value="" selected>' + i +'</option>');
+            }else{
+              $tips_order_sel.append('<option value="">' + i +'</option>');
+            };
+          };
+        }else{
+          $tips_order_sel.children('option').eq(tips_order-1).attr('selected','selected');
+        };
+      });
+      $('.js-tips_cancel').on('click', function(e){
+        // console.log(77)
+        e.preventDefault();
+        var $ps_tr = $(this).parents('tr');
+        var $tips_p = $ps_tr.find('p.tips_toggle');
+        $tips_p.show();
+        $tips_p.next().addClass('none');
+        $ps_tr.find('.js-edit').show();
+
+        $(this).parent().siblings('.tips_links').show();
+        $(this).parent('.tips_edit_btn').addClass('none');
+        $ps_tr.find('.tips_checkbtn').addClass('none');
+      });
+      $('.js-tips_save').on('click', function(){
+       var id = $(this).attr('id')
+       var rank = $(this).parents('tr').find('.tips_edit_select').children('option:selected').text()
+       var title = $(this).parents('tr').find('.tips_tit_edit').val()
+       var content = $(this).parents('tr').find('.tips_con_edit').val()
+       var link = $(this).parents('tr').find('.tips_site_edit').val()
+       $.post("<%=update_tip_channel_tips_path%>",{id:id,title:title,content:content,rank:rank,link:link},function(){});
+      });
+
+      $('.tips_checkbtn').on('click', function(){
+        var url = $(this).parents().siblings('input').val();
+        open(url)
+      });
+    });
+  </script>
+<%- end %>
+<div id="index_tab5" class="tab-pane active">
+  <table class="table bordered table-bordered table-hover tips_list">
+    <thead>
+      <tr>
+        <th width="15%">操作</th>
+        <th width="5%">排序</th>
+        <th width="20%">标题[最多输入16个汉字]</th>
+        <th width="25%">内容[最多输入60个汉字]</th>
+        <th width="20%">链接</th>
+        <th width="15%">最后修改时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @channel_tips.each do |channel_tip| %>
+        <tr>
+          <td  style="text-align:center">
+            <a align="center" href="javascript:;" class="js-edit">编辑</a>
+            <p class="tips_links">
+              <%= link_to "首页1", find_owner_channel_tips_path(oe_id: @owner_enters.first.id, ct_id: channel_tip.id),  method: :get, :confirm => "当前行的数据将被首页第1条装修小贴士数据覆盖，同时内容部分只截取前60个汉字。是否继续?" %>
+              <%= link_to "首页2", find_owner_channel_tips_path(oe_id: @owner_enters.last.id, ct_id: channel_tip.id),  method: :get, :confirm => "当前行的数据将被首页第2条装修小贴士数据覆盖，同时内容部分只截取前60个汉字。是否继续?" %>
+            </p>
+            <p class="none tips_edit_btn">
+              <a class="js-tips_save" href="javascript:;" id="<%=channel_tip.id%>">保存</a>
+              <a class="js-tips_cancel" href="javascript:;">取消</a>
+            </p>
+          </td>
+          <td>
+            <p class="tips_order tips_toggle"><%=channel_tip.rank%></p>
+            <select class="input-small tips_edit_select none"></select>
+          </td>
+          <td>
+            <p class="tips_tit tips_toggle"><%=channel_tip.title%></p>
+            <input type="text" class="input-medium tips_tit_edit none" maxlength="16">
+          </td>
+          <td>
+            <p class="tips_con tips_toggle"><%=channel_tip.content%></p>
+            <textarea rows="3" class="input-medium tips_con_edit none" maxlength="60"></textarea>
+          </td>
+          <td>
+            <p class="tips_site tips_toggle"><%=link_to channel_tip.link, "#{channel_tip.link}", target: "_blank"%></p>
+            <input type="text" class="input-medium tips_site_edit none" >
+            <p><a href="javascript:;" class="tips_checkbtn none">检查</a></p>
+          </td>
+          <td>
+            <p class="tips_latesttime"><%=channel_tip.updated_at.to_date%></p>
+            <!-- <input type="text" placeholder="2013-08-13"> -->
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

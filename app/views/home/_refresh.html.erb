@@ -1,0 +1,52 @@
+<div class="index_refresh">
+	<p class="clearfix index_tit">
+		<a href="/channel/refresh_service" target="_blank" class="pull-right"><small>刷新服务</small></a>
+		<a class="pull-right"> | </a>
+		<a href="/refresh_life/refresh_show" target="_blank" class="pull-right"><small>刷新效果</small></a>
+		<a class="pull-right"> | </a>
+		<a href="/refresh_record" target="_blank" class="pull-right"><small>刷新实录</small></a>
+		<strong class="pull-left">刷新生活</strong>
+	</p>
+	<hr class="border2 border2_mt2">
+	<div class="index_main clearfix">
+		<div id="refresh_slide" class="media tit_con media_refresh pull-left mr10">
+			<div class="slider-bin pull-left">
+				<div class="slider-container">
+					<ul class="clearfix nomargin">
+						<% @home_life_videos.each do |hfv| %>
+						<li class="item">
+							<a class="pull-left media_a title_opacity" href="<%=hfv.url%>">
+								<img class="media-object" data-src="holder.js/64x64" src="<%=hfv.file.url(:list_1000x85)%>">
+								<p>
+									<span><%=hfv.title%></span>
+								</p>
+							</a>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+				<ul class="circle_indicators nomargin">
+					<li class="slider-active"><a href="javascript:;">1</a></li>
+					<li><a href="javascript:;">2</a></li>
+					<!-- <li><a href="javascript:;">3</a></li> -->
+				</ul>
+			</div>
+			<!-- <a class="pull-left media_a title_opacity" href="#">
+				<img class="media-object" data-src="holder.js/64x64" src="images/index/refresh_video.jpg">
+				<p>
+					<span>幸福生活 新的开始</span>
+				</p>
+			</a> -->
+			<div class="media-body">
+				<h5 class="title nomargin"><a class="pull-right" href="/refresh_life/refresh_list"><small class="muted">更多></small></a>精彩资讯</h5 class="title">
+				<ul class="unstyled nomargin">
+					<% @questions.each do |question| %>
+						<li><a href="<%=question.link%>" target="_blank"><%=question.title%></a></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_240x170), class: 'pull-left mr5' %></a>
+		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner3.try(:file).try(:url, :list_240x170), class: 'pull-left' %></a>
+	</div>
+</div>

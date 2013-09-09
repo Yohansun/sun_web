@@ -1,0 +1,69 @@
+<%- content_for :head do %>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      $('.clear').click(function(){
+        $('.title').attr('value','');
+        $('.content').attr('value','');
+        $('.link').attr('value','');
+      });
+      $(".owner_enter_submit").click(function(){
+        if($('.title').val()=="" )
+          {alert("请输入标题内容");
+          return false;
+          }else if($('.content').val()=="" ){
+            alert("请输入内容");
+            return false;
+          }else if($('.link').val()=="" ){
+          alert("请输入链接");
+           return false;
+         }else if($('.title').val().length>16){
+           alert("标题内容不得超过16个字");
+           return false;
+         }else if($('.content').val().length>81){
+           alert("内容不得超过81个字");
+           return false;
+         }else{
+          return true;
+         }
+        });
+      $(".inspect_owner_enter").click(function(){
+        window.open($(".link").val());
+      })
+    });
+  </script>
+<%- end %>
+<div class="container-fluid">
+  <%= form_for @new do |f| %>
+    <p class="form-inline mt30">
+      <label class="control-label">排序</label>
+      <select name="new">
+        <% if @new.order_id == 1 %>
+          <option>1</option>
+          <option>2</option>
+        <% else %>
+          <option>2</option>
+          <option>1</option>
+        <% end %>
+      </select>
+    </p>
+    <p class="form-inline">
+      <label class="control-label">标题</label>
+      <input class="input-large title" id="prependedInput" type="text" name="title" value="<%= @new.try(:title) %>">
+    </p>
+    <p class="form-inline">
+      <label class="control-label">内容</label>
+      <textarea rows="3" name="content" class="content span4"><%= @new.try(:content) %></textarea>
+    </p>
+    <p class="form-inline">
+      <label class="control-label">链接</label>
+      <input class="input-large link" id="prependedInput" type="text" value="<%= @new.try(:link) %>" name="link">
+      <a href="javascript:;" class="inspect_owner_enter">检测链接</a>
+    </p>
+    <p>
+      <input type="submit" class="owner_enter_submit btn btn-small btn-primary" value="保存">
+      <a href="/manage/owner_enter  " class="btn btn-link">取消</a>
+      <a href="#" class="clear btn btn-link">清空</a>
+      <input type="hidden" name="current_id" value="<%= @new.order_id %>" >
+    </p>
+  <% end %>
+</div>

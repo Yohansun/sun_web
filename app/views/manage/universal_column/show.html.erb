@@ -1,0 +1,215 @@
+<%= javascript_include_tag "upload_image/jquery.imagepreview.js" %>
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<script>
+  $(function() {
+  	$('#show_panel').hide();
+
+  	$('#new_group').on('click', function(e){
+			e.preventDefault();
+			$('#show_panel').show();
+		});
+
+		$('#cancel_panel').on('click', function(e){
+			e.preventDefault();
+			$('#show_panel').hide();
+		});
+
+    $.imagepreview({
+      file : $('#files'),
+      img : $('#photo'),
+      maxWidth : 155,
+      maxHeight : 115
+    });
+
+    $('form[data-redirect_url]').bind('ajax:success', function(evt, data, status, xhr) {
+        alert("保存成功");
+        // var url = $(this).data('redirect_url');
+        var url = data.referer
+        window.location.href = url;
+    }).bind('ajax:beforeSend', function(evt, xhr, status){
+      var title = $('#title').val();
+      var link = $('#url').val();
+      
+      if ($(this).attr("id") == "fileupload") {
+        if ($.trim(title).length == 0) {
+  	      alert('标题不能为空并且不能超过14个汉字');
+  	      return false;
+  	    };
+
+  	    if ($.trim(link).length == 0 && $(this).attr("id") == "fileupload") {
+  	      alert('链接不能为空!');
+  	      return false;
+  	    }
+  	    alert('当前保存操作会删除排序值为5的记录，是否继续?');
+      }	    
+	    
+    }).bind("ajax:error", function(evt, xhr, status, error) {
+      alert(xhr.responseText);
+    });
+
+    $('.editarea #btn_edit').on('click', function(e){
+	    e.preventDefault();
+	    var that = this;
+	    
+	    var i_column_data_id = $(this).attr('i_column_data_id');
+	    if ($.trim(i_column_data_id).length == 0) {
+	      alert('错误,请重新选择');
+	      return false;
+	    } else {
+	      $.get("/manage/universal_column/" + i_column_data_id + "/edit",{i_column_data_id: i_column_data_id},function(result){
+	        $(that).parents('#show_edit').html(result);
+	      });
+
+	      //不能重复点击
+	      $('.editarea #btn_edit').unbind("click");
+	      $('.editarea #btn_edit').on('click', function(e){
+	        alert("操作失败，每次只能对一条记录进行编辑.")
+	      })
+	    }
+
+	  })
+
+  });
+  function open_link() {
+      var url = $('#more_url').val();
+      window.open(url, "_blank");
+  }
+</script>
+
+<%= form_tag('/manage/universal_column/show', :method => 'get', :id => 'show_form') do %>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="">
+      <%= select_tag "column_type", options_from_collection_for_select(@i_column_types, "id", "name", @column_type.to_i), :class => "input-medium" %>
+    </li>
+    <li class="">
+    	<%= submit_tag "选择", :id => 'save', :class => 'btn btn-mini btn-primary' %>
+    </li>
+  </ul>
+</div>
+<% end %>
+
+<div class="main bs-docs-grid">
+<div class="row show-grid">
+	<div class="span1">
+		<button id="new_group" class="btn btn-small btn-primary">插入一行</button>
+	</div>
+	<div class="span11">
+			<%= form_tag(save_data_universal_column_index_path, :class => 'form-inline', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/universal_column") do %>
+			<%= hidden_field_tag 'id', @i_column_type.id %>
+				<label for="" class="control-label">本栏更多url：</label>
+	    <input type="text" id="more_url" name="more_url" class="input-xlarge" value="<%= @url %>">
+	    <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测</a>
+				<%= button_tag "更改", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-info btn-mini btn-primary' %>
+			<% end %>
+	</div>
+</div>
+
+<div id="show_panel">
+<div class="bs-docs-grid">
+<div class="row show-grid">
+<hr>
+	<div class="span2">
+	    <div id="upload_files_container">
+	      <img id="photo" src="" alt="" />
+	    </div>
+	</div>
+	<div class="span5">
+	  <div class="clearfix form_edit">
+	    <div class="">
+	      <div class="media">
+	        <div class="media-body">
+	          <%= form_tag(universal_column_index_path, :multipart => true, :id => 'fileupload', :remote => true, :'data-redirect_url' => "/manage/universal_column") do %>
+	          <%= hidden_field_tag 'id', @i_column_type.id %>
+	              <p class="form-inline">
+	                  <div class="fileupload-buttonbar">
+	                      <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-primary' %>
+	                      <button id="cancel_panel" class="btn btn-mini btn-primary">取消</button>
+	                      <input type="checkbox" class="toggle">
+	                      <span class="fileupload-loading"></span>
+	                  </div>
+	                  <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+	              </p>
+	              <p class="form-inline">
+	                <label for="" class="control-label">排序：1　　　　　</label>
+	                
+	                <span class="btn fileinput-button btn-mini btn-primary">
+	                  <i class="glyphicon glyphicon-plus"></i>
+	                  <span>上传图片</span>
+	                  <input type="file" name="files" id="files">
+	                </span>
+	                <label for="" class="control-label">尺寸155x115</label>
+	              </p>
+
+	              <p class="form-inline">
+	                <label for="" class="control-label">标题：</label>
+	                <input type="text" id="title" name="title" class="input-xlarge" value="" placeholder="请输入标题" maxlength=14 maxlength=14>
+	                <span class="help-inline text-error">(14个汉字)</span>
+	              </p>
+	              <p class="form-inline">
+	                <label for="" class="control-label">链接：</label>
+	                <input type="text" id="url" name="url" class="input-xlarge" value="" placeholder="请输入链接">
+	                <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测链接</a>
+	              </p>
+	          <% end %>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+</div>
+</div>
+
+<hr>
+
+<div class="bs-docs-grid">
+  <% @i_column_datas.each do |i_column_data| %>
+  <div class="row show-grid" id="show_edit">
+    <div class="span2">
+        <img id="photo_show" src="<%= i_column_data.file.url(:list_155x115) %>" alt="" />
+    </div>
+    <div class="span5">
+
+      <div class="clearfix form_edit">
+        <div class="editarea">
+          <div class="media">
+            <div class="media-body">
+              <form id="fileupload" action="#" method="POST" enctype="multipart/form-data">
+                  <p class="form-inline">
+                      <div class="fileupload-buttonbar">
+                          <a href="javascript:;" i_column_data_id="<%= i_column_data.id %>" id="btn_edit" class="btn btn-mini btn-link">编辑</a>
+                          <input type="checkbox" class="toggle">
+                          <span class="fileupload-loading"></span>
+                      </div>
+                      <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                  </p>
+                  <p class="form-inline">
+                    <label for="" class="control-label">排序：</label>
+                    <span class="help-inline text-error">
+                      <%= i_column_data.rank %>
+                    </span>
+                  </p>
+                  <p class="form-inline">
+                    <label for="" class="control-label">标题：</label>
+                    <span class="help-inline text-error">
+                      <%= i_column_data.title %>
+                    </span>
+                  </p>
+                  <p class="form-inline">
+                    <label for="" class="control-label">链接：</label>
+                    <span class="help-inline text-error">
+                      <%= i_column_data.url %>
+                    </span>
+                  </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <hr />
+  <% end %>
+</div>

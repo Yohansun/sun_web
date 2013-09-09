@@ -159,7 +159,7 @@
           <!-- <li class="noborder"><a href="/7-3">刷新灵感我绘我家</a></li> -->
         </ul>
       </li>
-      <li class="noborder pr"><%= link_to "精彩活动", "/designer_events", :class => "#{'active' if controller_name == 'designer_events' || controller_name == 'other_events' || controller_name == 'gifts'}" %>
+      <li class="noborder pr"><%= link_to "精彩活动", "/designer_events", :class => "#{'active' if controller_name =~ /designer_events|other_events|gifts/}" %>
         <ul style="width:116px; left: -25px;_left: -17px">
           <li><%= link_to "设计师活动", "/designer_events", :class => "#{'active' if controller_name == 'designer_events'}" %></li>
           <li><%= link_to "其他活动", "/other_events", :class => "#{'active' if controller_name == 'other_events'}" %></li>

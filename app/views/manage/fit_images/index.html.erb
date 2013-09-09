@@ -1,0 +1,181 @@
+<%- content_for :head do %>
+	<%= stylesheet_link_tag "baicheng/steps.css" %>
+<%- end %>
+<% content_for :tail do -%>
+  <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript">
+  <%- session_key = Rails.application.config.session_options[:key] -%>
+
+  (function($){
+    $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    //skipDefault : ['onSelect'],
+    progressData : 'percentage',
+    buttonText : "<button>选择图片</button>",
+    fileTypeDesc : '图片文件',
+    fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+    successTimeout : 6000,
+    // uploadLimit : 1,
+    width : 88,
+    height : 34,
+    multi : true,
+    auto : true,
+    queueSizeLimit: 1,
+    checkExisting : false,
+    transparent : true,
+    uploader : '/manage/fit_images',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      if (dat.result == 'success') {
+        $.getScript(dat.upload + "?for=design", function(){});
+      }else{
+        alert("图片上传失败");
+      };
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    },
+    onUploadError : function(file, errorCode, errorMsg, errorString) {
+      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+    },
+    onUploadStart : function(){
+      //$("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      //$("#upload_going").hide();
+    }
+  });
+    $(".fit_btn").click(function(){
+      if ($(".title").val() == "" ){
+        alert("请输入标题!!!");
+        return false;
+      }else if ($(".link").val() == ""){
+        alert("请输入链接!!!");
+        return false;
+      }else if ($(".title").val().length > 8){
+        alert("标题最多输入8个汉字");
+        return false;
+      }else{
+        return true;}
+      });
+    $(".inspect_fit_image_link").click(function(){
+      if($(".link").val() == ""){
+        alert("请输入链接!!!");
+        return false;
+      }else{
+        window.open($(".link").val());
+      }
+    });
+    $(".inspect_fit_image_link").click(function(){
+      if($(".link").val() == ""){
+        alert("请输入链接!!!");
+        return false;
+      }else{
+        window.open($(".link").val());
+      }
+    });
+  })($);
+  function remote(id) {
+  $('#fit_image'+id).remove();
+  $('#fit_big_image'+id).remove();
+  }
+  function edit(id) {
+
+  }
+  function remove_design_image(){
+    $('.upload_item').remove();
+  }
+  function form_valid(){
+    flag = true
+    alt = ""
+    imgCount = $(".upload_item").size();
+    if(imgCount < 1){
+      alt += "不能一张图片都没有哦！";
+      flag = false;
+    }else if ($(".upload_item").size() > 1)
+     {
+      alert("不能上传超过1张图片");
+      return false;
+     }else{
+      return true;
+     }
+
+    if(flag == false){
+      alert(alt);
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
+  </script>
+ <% end %>
+<div id="breadcrumbs">
+ <ul class="breadcrumb">
+  <li><a href="fit_images">图片资讯</a><span>|</span></li>
+  <li><a href="fit_literals">文字资讯</a></li>
+ </ul>
+</div>
+<div class="container-fluid">
+	<!-- <div class="container"> -->
+      <%#= form_for @fit_image, :class=>"refresh-form ft12", :onsubmit=>"return form_valid()" do |f| %>
+			<%= form_tag(fit_images_path, :class=>"refresh-form ft12 mt30", :onsubmit=>"return form_valid()") do %>
+			<div class="refresh-control">
+				<div class="form-article">
+          <div class="clearfix" style="margin-left: -25px;">
+            <p class="span2" style="width:50px;margin-top: 6px;">标题</p>
+            <input class="span2 input-large title" id="prependedInput" type="text" name="title" value="<%= @upload.try(:title) %>" class="title">
+            <span class="text-error">标题最多输入8个汉字</span>
+          </div>
+          <div class="clearfix" style="margin-left: -25px;">
+            <p class="span2" style="width:50px;margin-top: 6px;">链接</p>
+            <input class="span2 input-large link" id="prependedInput" type="text" value="<%= @upload.try(:link) %>" name="link" class="link">
+            <a href="javascript:;" class="inspect_fit_image_link">检测链接</a>
+          </div>
+          <div class="control-group" style="width:800px;">
+						<div class="clearfix"><button id="upload_photo">上传图片</button></div>
+            <p class="text-error">图片尺寸必须是138x165</p>
+          </div>
+          <p class="mt30">已经上传文件</p>
+          <div class="step2-area text-right" style="height:60px;">
+            <% if @upload %>
+              <div class="load-bar load-content" id="uploads">
+                <div class="file-list clear upload_item clearfix" id="fit_image<%= @upload.id %>" style="width:500px">
+                  <a href="#" class="pull-left" style="margin-top: 16px;">
+                    <%= image_tag @upload.file.url(:thumb)%>
+                  </a>
+                  <p class="pull-left" style="margin-top: 16px;"><%= @upload.file.original_filename %></p>
+                  <%= hidden_field_tag "fit_image_id", @upload.id %>
+                  <%=link_to "删除", fit_image_path(@upload), method: :delete, confirm: 'delete it?', :class => 'btn'%>
+                  <a href="#">
+                    <%= image_tag @upload.file.url, :style=> "margin-top: -210px;margin-left: 839px;"%>
+                  </a>
+                </div><!--file-list ends-->
+              </div><!--load-content ends-->
+            <% else %>
+              <div class="load-bar load-content" id="uploads">
+              </div><!--load-content ends-->
+            <% end %>
+          </div>
+					<p>
+						建议上传大小不超过3M的JPG,GIF,PNG,BMP格式图片<br />
+					</p>
+				</div>
+			</div>
+			<p>
+				<input type="hidden" name="story_id" value="<%=params[:id]%>">
+				<input type="submit" class="fit_btn btn btn-small btn-primary" value="保存" id='monitor_link_326820'>
+			</p>
+      <!-- <div class="step2-area text-right" style="height:2500px;">
+        <div class="load-bar load-content" id="uploads_big">
+        </div>
+      </div> -->
+			<% end %>
+		<!-- </form> -->
+	<!-- </div> -->
+</div>

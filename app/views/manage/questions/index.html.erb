@@ -1,0 +1,210 @@
+<%- content_for :head do %>
+    <style type="text/css">
+        .active_red a{color:red!important;}
+        .mt20{margin-top: 20px;}
+        .unclick,.unclick:hover{background-color:gray!important;cursor: default;}
+.none{display: none!important;}
+    </style>
+<%- end %>
+<%- content_for :tail do %>
+<script type="text/javascript">
+  (function($){
+
+  $('.js-addtr').one('click', function(){
+    func.call(this);
+  });
+  function func(){
+     $(this).parent('.tips_form').find('tbody').prepend(' ' + 
+      '<tr class="row_id">' +
+        '<td>' +
+          '<a href="javascript:;" class="js-edit none">编辑</a>' +
+          '<p class="tips_edit_btn"><a class="js-tips_save que_save" href="javascript:;" id="save">保存</a> | ' +
+            '<a class="js-tips_cancel" href="javascript:;">取消</a>' +
+          '</p>' +
+        '</td>' +
+        '<td>' +
+          '<p class="tips_order tips_toggle none">1</p>' +
+          '<select class="input-small tips_edit_select"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>' +
+        '</td>' +
+        '<td>' +
+          '<p class="tips_tit tips_toggle none">title1</p>' +
+          '<input type="text" class="input-medium tips_tit_edit">' +
+        '</td>' + 
+        '<td>' +
+          '<p class="tips_site tips_toggle none">www.icolor.com.cn</p>' +
+          '<input type="text" class="input-medium tips_site_edit" >' +
+          '<p><a href="javascript:;" class="tips_checkbtn">检查</a></p>' + 
+        '</td>' +
+        '<td>' +
+          '<p class="tips_latesttime"><%=Time.now.to_date%></p>' +
+        '</td>' +
+      '</tr>');
+     $(this).addClass('unclick')
+// $(this).removeClass('js-addtr')
+  }
+
+  // $('.tips_form table').on('click','.js-tips_cancel', function(){//alert($(this))
+  //   $(this).parents('.row_id').remove();
+  //   $('.js-addtr').one('click', function(){
+  //     func.call(this)
+  //   });
+
+  //   $(this).parents('.tips_form').find('tr').removeClass('row_id');
+  //     $('.js-addtr').removeClass('unclick')
+  // }) 
+  //---------------------
+      $('.tips_form').on('click','.js-edit', function(e){
+        e.preventDefault();
+        $('.js-addtr').unbind().addClass('unclick');
+        $('.row_id').remove();
+        var $ps_tr = $(this).parents('tr');
+        $ps_tr.siblings().find('p.tips_toggle').show();
+        $ps_tr.siblings().find('p.tips_toggle').next().addClass('none');
+        $ps_tr.siblings().find('.js-edit').show();
+        $ps_tr.siblings().find('.tips_checkbtn').addClass('none');
+        // $ps_tr.addClass('row_id')
+        // $ps_tr.siblings()
+
+        //按钮
+        $(this).hide();
+        $(this).siblings('.tips_links').hide().parents('tr').siblings().find('.tips_links').show();
+        $(this).siblings('.tips_edit_btn').removeClass('none').parents('tr').siblings().find('.tips_edit_btn').addClass('none');
+        
+        //编辑状态
+        var $tips_p = $ps_tr.find('p.tips_toggle');
+        $tips_p.hide();
+        $tips_p.next().removeClass('none');
+
+        var tips_tit = $ps_tr.find('.tips_tit').text();
+        var tips_con = $ps_tr.find('.tips_con').text();
+        var tips_site = $ps_tr.find('.tips_site').text();
+        $ps_tr.find('.tips_tit_edit').val(tips_tit)
+        $ps_tr.find('.tips_con_edit').val(tips_con)
+        $ps_tr.find('.tips_site_edit').val(tips_site)
+        $ps_tr.find('.tips_checkbtn').removeClass('none')
+
+        //序号
+        var tips_len = $ps_tr.siblings().length + 1;
+        var tips_order = $ps_tr.find('.tips_order').text();
+        
+        var $tips_order_sel = $ps_tr.find('.tips_order').siblings('select');
+        if ($tips_order_sel.children().length == 0) {
+          for (var i = 1; i <= tips_len; i++) {
+            if (i == tips_order) {
+              $tips_order_sel.append('<option value="" selected>' + i +'</option>');
+            }else{
+              $tips_order_sel.append('<option value="">' + i +'</option>');
+            };
+          };
+        }else{
+          $tips_order_sel.children('option').eq(tips_order-1).attr('selected','selected');
+        };
+      });
+      $('.tips_form').on('click','.js-tips_cancel', function(e){
+        // console.log(77)
+        e.preventDefault();
+        $(this).parents('.row_id').remove();
+        var $ps_tr = $(this).parents('tr');
+        var $tips_p = $ps_tr.find('p.tips_toggle');
+        $tips_p.show();
+        $tips_p.next().addClass('none');
+        $ps_tr.find('.js-edit').show();
+
+        $(this).parent().siblings('.tips_links').show();
+        $(this).parent('.tips_edit_btn').addClass('none');
+        $ps_tr.find('.tips_checkbtn').addClass('none');
+        $('.js-addtr').one('click', function(){
+          func.call(this)
+        });
+        $('.js-addtr').removeClass('unclick')
+      });
+
+      $('.tips_form').on('click','.que_save', function(){
+       var id = $(this).attr('id')
+       var rank = $(this).parents('tr').find('.tips_edit_select').children('option:selected').text()
+       var title = $(this).parents('tr').find('.tips_tit_edit').val()
+       var link = $(this).parents('tr').find('.tips_site_edit').val()
+       if(title == ""){
+          alert("请输入标题!")
+       }else if(link == ""){
+          alert("请输入连接!")
+       }else{
+        if(confirm("当前操作会删除最后一条记录，是否继续?")){
+         $.post("<%=create_or_update_questions_path %>",{id:id,title:title,rank:rank,link:link},function(){});
+        }
+       }
+      });
+      $('.tips_form').on('click','.edit_save', function(){
+        var id = $(this).attr('id')
+       var rank = $(this).parents('tr').find('.tips_edit_select').children('option:selected').text()
+       var title = $(this).parents('tr').find('.tips_tit_edit').val()
+       var link = $(this).parents('tr').find('.tips_site_edit').val()
+       if(title == ""){
+          alert("请输入标题!")
+       }else if(link == ""){
+          alert("请输入连接!")
+       }else{
+         $.post("<%=create_or_update_questions_path %>",{id:id,title:title,rank:rank,link:link},function(){});
+       }
+      })
+      $('.tips_form').on('click','.tips_checkbtn', function(){
+        var url = $(this).parents().siblings('input').val();
+        open(url)
+      });
+
+})($);
+</script>
+
+<% end %>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li><a href="/manage/home_life_videos">视频设置</a></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if controller_name == 'questions' %>"><%= link_to '精彩资讯', questions_path %></li>
+  </ul>
+</div>
+<div id="" class="container-fluid mt20"> 
+  <form class="tips_form">
+    <table class="table bordered table-bordered table-hover">
+      <thead>
+        <tr>
+          <th width="10%">操作</th>
+          <th width="10%">排序</th>
+          <th width="20%">标题[最多输入16个汉字]</th>
+          <th width="20%">链接</th>
+          <th width="15%">最后修改时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+          <tr>
+            <td>
+              <a href="javascript:;" class="js-edit">编辑</a>
+              <p class="none tips_edit_btn">
+                <a class="js-tips_save edit_save" href="javascript:;" id="<%=question.id%>">保存</a>
+                <a class="js-tips_cancel" href="javascript:;">取消</a>
+              </p>
+            </td>
+            <td>
+              <p class="tips_order tips_toggle"><%=question.rank%></p>
+              <select class="input-small none tips_edit_select"></select>
+            </td>
+            <td>
+              <p class="tips_tit tips_toggle"><%=question.title%></p>
+              <input type="text" class="input-medium none tips_tit_edit">
+            </td>
+            <td>
+              <p class="tips_site tips_toggle"><a href="<%=question.link%>"><%=question.link%></a></p>
+              <input type="text" class="input-medium none tips_site_edit" >
+              <p><a href="javascript:;" class="tips_checkbtn none">检查</a></p>
+            </td>
+            <td>
+              <p class="tips_latesttime"><%=question.updated_at.to_date%></p>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <a class="btn btn-small btn-primary js-addtr" href="#">在上方插入一行</a>
+  </form>
+</div>

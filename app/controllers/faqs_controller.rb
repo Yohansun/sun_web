@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class FaqsController < ApplicationController
+  layout "home_manage"
   before_filter :find_user
 
   def index

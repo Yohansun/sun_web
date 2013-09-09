@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class InspirationsController < ApplicationController
+  layout "home_manage"
   before_filter :find_user
   before_filter :find_inspiration, :only => [:upload, :edit]
   before_filter :judge_inspiration,:only => [:index,:inspirations_hot,:inspirations_new,:inspirations_minisite]

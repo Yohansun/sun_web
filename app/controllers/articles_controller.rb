@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  layout "home_manage"
   before_filter :get_articles
 
   def index

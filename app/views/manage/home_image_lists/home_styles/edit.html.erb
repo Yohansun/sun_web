@@ -1,0 +1,144 @@
+<%= render :partial => "manage/home_image_lists/head" %>
+<div class="tags-container">
+  <%= render :partial => "category" %>
+  <div class="clear-fix load-bar load-content" id="uploads_big">
+    <% @banners.each_with_index do |banner, index| %>
+      <% unless (index + 1) == @order_id %>
+	      <div class="clear-fix widget-main form-actions banner_edit<%= banner.id %>" id="bannner_edit_image<%= banner.id %>">
+	      	<%= link_to "编辑", edit_home_styles_path(order_id: banner.order_id), :class => "edit_fit_literal pull-left", :style => "width: 50px;" %>
+	        <div class="clear-fix pull-left" style="width: 170px;">
+	          <%= image_tag banner.file.url(:thumb) %>
+	        </div>
+	        <div class="pull-left" style="width: 770px;margin-top: -11px;">
+						<ul class="unstyled spaced">
+							<li>
+								<i class="icon-caret-right blue"></i>
+								<strong>排序:  </strong><%= banner.order_id %>
+							</li>
+							<li>
+								<i class="icon-caret-right blue"></i>
+								<strong>标题:  </strong>(<b style='color:red;'>不超过12个字</b>)
+							</li>
+							<li>
+								<i class="icon-caret-right blue"></i>
+								<%= banner.title%>
+							</li>
+							<li>
+								<i class="icon-caret-right blue"></i>
+								<strong>链接:   </strong>
+							</li>
+							<li>
+								<i class="icon-caret-right blue"></i>
+								<%= banner.link %>
+							</li>
+						</ul>
+	        </div>
+	      </div>
+	    <% else %>
+	      <%=form_tag home_styles_path, :method=>:put, :class=>"home_image_list_serach_form" do %>
+		      <div class="clear-fix widget-main form-actions">
+						<div class="pull-left" style="width: 50px;">
+							<div>
+								<input type="submit" class="home_type_save btn btn-small" value="保存">
+							</div>
+							<div>
+								<%= link_to "取消", home_styles_path, :class =>"btn btn-small", :style => "margin-top: 2px;" %>
+							</div>
+						</div>
+						<div class="clear-fix pull-left load-bar load-content" id="uploads" style="width: 170px;">
+							<%= image_tag banner.file.url(:thumb) %>
+					  </div>
+						<div class="pull-left" style="width: 770px;margin-top: -11px;">
+							<ul class="unstyled spaced">
+								<li>
+					        <button class="pull-left" id="upload_photo">上传图片</button>
+								</li>
+								<li class="clear-fix">
+									<i class="icon-caret-right blue"></i>
+									<strong>排序:  </strong>
+									<select name="order_id" class="input-medium literal_select">
+								    <option><%= @order_id%></option>
+								    <%= @order_ids.each do |order| %>
+								      <% unless order == @order_id %>
+								        <option><%= order %></option>
+								      <% end %>
+								    <% end %>
+								  </select>
+								</li>
+								<li>
+									<i class="icon-caret-right blue"></i>
+									<strong>标题:  </strong>(<b style='color:red;'>不超过12个字</b>) 
+								</li>
+								<li>
+									<i class="icon-caret-right blue"></i>
+									<input class="image_title" name="title" value="<%= banner.title%>">
+									<input class="image_id" name="id" value="<%= banner.id%>" style="display:none;">
+								</li>
+								<li>
+									<i class="icon-caret-right blue"></i>
+									<strong>链接:   </strong>
+								</li>
+								<li>
+									<i class="icon-caret-right blue"></i>
+									<input class="image_link" name="link" value="<%= banner.link%>">  <a href="javascript:;" class="inspect_link">检测链接</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				<% end %>
+	    <% end %>
+    <% end %>
+  </div>
+  <%# end %>
+</div>
+<% content_for :tail do -%>
+  <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    $(function(){
+    	$('#upload_photo').uploadify({
+				swf : '/uploadify/uploadify.swf',
+				cancelImage : '/uploadify/uploadify-cancel.png',
+				//skipDefault : ['onSelect'],
+				progressData : 'percentage',
+				buttonText : "<button>选择图片</button>",
+				fileTypeDesc : '图片文件',
+				fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+				successTimeout : 6000,
+				// uploadLimit : 1,
+				width : 88,
+				height : 34,
+				multi : true,
+				auto : true,
+				queueSizeLimit: 1,
+				checkExisting : false,
+				transparent : true,
+				uploader : '/manage/home_image_lists/home_styles?order_id=<%= @order_id%>',
+				onUploadSuccess : function(file, data, response) {
+				  var dat = eval('(' + data + ')');
+				  if (dat.result == 'success') {
+				    $.getScript(dat.upload + "?for=design", function(){});
+				  }else{
+				    alert("图片上传失败");
+				  };
+				},
+				postData : {
+				    '_http_accept': 'application/javascript',
+				    'format' : 'json',
+				    '_method': 'post',
+				    '<%= session_key %>' : '<%= cookies[session_key] %>',
+				    'authenticity_token': '<%= form_authenticity_token %>'
+				},
+				onUploadError : function(file, errorCode, errorMsg, errorString) {
+				  alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+				},
+				onUploadStart : function(){
+				  //$("#upload_going").show();
+				},
+				onUploadComplete : function(){
+				  //$("#upload_going").hide();
+				}
+			});
+    })
+  </script>
+<% end %>

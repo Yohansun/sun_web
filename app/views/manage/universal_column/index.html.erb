@@ -1,0 +1,25 @@
+<script>
+  function open_link() {
+    var url = $('#url').val();
+    if ($.trim(url).length == 0) {
+      alert('链接不能为空');
+      return false;
+    }
+    window.open(url, "_blank");
+  }
+</script>
+
+<%= form_tag('/manage/universal_column/show', :method => 'get', :id => 'show_form') do %>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="">
+      <%= select_tag "column_type", options_from_collection_for_select(@i_column_types, "id", "name"), :class => "input-medium" %>
+    </li>
+    <li class="">
+    	<%= submit_tag "选择", :id => 'save', :class => 'btn btn-mini btn-primary' %>
+    </li>
+  </ul>
+</div>
+<% end %>
+
+</div>

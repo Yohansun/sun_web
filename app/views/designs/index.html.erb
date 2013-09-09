@@ -1,19 +1,23 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "style", "dd" %>
+    <%= stylesheet_link_tag "style", "dd"%>
+    
     <style type="text/css">
-    .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
-    #color_select{}
-    .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
-    .dd .ddChild a.nobg,
-    .dd .ddChild a.nobg:visited {background:none;padding-left:10px; }    
-    #style_child a{background:none!important;padding-left:10px;}
-    .work_number .dd{ margin-right:15px;}
-    #design_style, #design_design_color{width:108px;}
-    #province, #city{background:white;border:1px solid #ccc;width:108px;height:23px;}
-  </style>
+      ul.design_filter li{float:left;background:white; margin-right:5px;list-style:none;}
+      .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+      #color_select{}
+      .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
+      .dd .ddChild a.nobg,
+      .dd .ddChild a.nobg:visited {background:none;padding-left:10px; }    
+      #style_child a{background:none!important;padding-left:10px;}
+      .work_number .dd{ margin-right:15px;}
+      #design_style, #design_design_color{width:108px;}
+      #province, #city{background:white;border:1px solid #ccc;width:108px;height:23px;}
+      ul.d_works ,.add_icon,.group {
+        margin: 0;
+      }
+    </style>
 <%- end %>
 <%- content_for :tail do %>
-    <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
     <%= javascript_include_tag "uncompressed.jquery.dd.js" %>
     <script type="text/javascript">
     $(function() {
@@ -47,7 +51,7 @@
     </script>
 <%- end %>
 <div class="main">
-<div class='sub_title tr pt25'>
+<div class='sub_title text-right pt25'>
   <img src='<%= asset_path "design/title_design.png" %>'/>
 </div>
 <div class='sub_nav ft12 pr tr'>
@@ -55,18 +59,18 @@
     <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
     <em><%= link_to "首页", "/" %><span></span></em>
 </div><!--sub_nav ends-->
-<div class='wrapper pb60 group'>
+<div class='wrapper pb60 group' style="margin:0 auto;">
 <div class="design_tit group">
-  <ul class="design_filter group">
+  <ul class="design_filter unstyled nomargin">
     <form method="get" id="filter_form">
-      <li>
-        <%= select_tag "order", options_for_select(design_order_option, params[:order]) %>
+      <li style="width:82px;">
+        <%= select_tag "order", options_for_select(design_order_option, params[:order]), :style => "width:82px" %>
       <li>
     <li>
-       <%= select_tag "style", options_for_select(design_style_option, params[:style]) %>
+       <%= select_tag "style", options_for_select(design_style_option, params[:style]), :style => "width:96px;" %>
     </li>
     <li>
-       <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]) %>
+       <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), :style => "width:83px;" %>
     </li>    
     <!-- <li> -->
       <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
@@ -77,17 +81,17 @@
       <select id="city" class="level_2 arrow_filter" name="area_id">
       </select>
     </li>
-    <li style="background:none;"><button><img src="<%= asset_path "design_search.png" %>" /></button></li>
+    <li><button style="background:none;margin-top:-3px;" class="noborder"><img src="<%= asset_path "design_search.png" %>" /></button></li>
     <li> 
       <%= link_to  "/designs?order=未来之星" ,style: 'padding:0px;margin:0px' do%>
         <%   image_tag  "design_search_yda.png"  %>
       <% end %>
     </li>
-    </form>
 
     <!-- <li>
       <a href="/designs?q=super_refresh" style="margin:0;padding:0;"><img src="<%#= asset_path "landingpage/refresh_btn.jpg"%>"/></a>
     </li> -->
+    </form>
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
@@ -101,7 +105,7 @@
 </div>
 <div class="design_result">
   <% @designs.in_groups_of(3, false).each do |group| -%>
-  <ul class="d_works add_icon group">
+  <ul class="d_works add_icon group unstyled">
     <% group.each do |design| -%>
     <li >
       <%- if design.cover_img %>

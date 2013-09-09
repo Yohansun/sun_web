@@ -1,63 +1,97 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
-  caches_page :index, :expires_in => 60.minutes
+  layout "home_manage"
+  #caches_page :index, :expires_in => 60.minutes
 
   def t1days
     redirect_to "/21days/index.html"
   end
 
   def index
-    # @weibo_data = WeiboItem.where("thumbnail_pic IS NOT NULL AND status = 1").order("created_time DESC").limit(18)
+    #首页KV
+    @home_kvs = HomeKv.includes(:kv_maps).kv_position.order("position")
 
-    #每周之星
-    @weekly_star = WeeklyStar.order("published_at desc").first
-    design_id = @weekly_star.design_link.split("/").last
-    @link_design = Design.find_by_id(design_id)
+    # 精华推荐
+    @home_recommends = HomeRecommend.order("position")
 
-    #家装资讯
-    # @home_infos = Subject.content("articles").limit(3)
+    # 大师殿堂
+    @master_profile = MasterProfile.first
+    @master_designs = @master_profile.master_designs
+    if @master_designs.present?
+      @master_design_images = @master_designs.first.master_design_uploads
+    else
+      @master_design_images = []
+    end
 
-    #大师访谈
-    @master_interview = MasterProfile.first
+    # banner
+    @owner_entry_banner = HomeBanner.find_by_banner_name "业主通道banner 290x200"
+    @footer_banner_one = HomeBanner.find_by_banner_name "底部大banner 670x85"
+    @footer_banner_two = HomeBanner.find_by_banner_name "底部小banner 310x85"
+    @chief_banner = HomeBanner.find_by_banner_name "精华推荐banner 270x100"
+    @master_banner = HomeBanner.find_by_banner_name "大师殿堂banner 1000x85"
 
-    #热点话题
-    # @hot_topic = Subject.content("master_topics").first  || Post.new
+    #装修资讯
+    @fit_literals = FitLiteral.order("order_id asc")
+    @fit_image = FitImage.first
 
-    #大师作品
-    @master_designs = MasterDesign.order("updated_at desc").limit(3)
-    @master_design = @master_designs[0]
-    @master_design_two = @master_designs[1]
-    @master_design_three = @master_designs[2]
+    #精彩资讯
+    @questions = Question.order("rank asc")
 
-    #图库装修
-    @design_images = DesignImage.available.audited_with_colors.order("created_at desc").limit(6)
-    @design_image = @design_images[0]
-    @design_image_two = @design_images[1]
-    @design_image_three = @design_images[2]
-    @design_image_four = @design_images[3]
-    @design_image_five = @design_images[4]
-    @design_image_six = @design_images[5]
+    #业主通道
+    @owner_entrys = OwnerEnter.order("order_id asc")
 
-    #TODO灵感秀
-    @inspiration = Inspiration.joins(:design_images).last
+    # design tag
+    @image_tags = HomeImageLibTag.all
+    @categories = ImageLibraryCategory.parent_categories
+    @category_ids = @categories.collect{|categorie|
+      {
+        id: categorie.id,
+        childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
+      }
+    }
 
-    #推荐作品
-    # @designs = Design.includes(:design_images).limit(36)
-    sort_input = MagicSetting.recommend_designs
-    @design = Design.joins(:design_images).order("design_images.created_at desc").first
+    # design image
+    @image_lib1 = HomeImageLibPhoto.find_by_id(1)
+    @image_lib2 = HomeImageLibPhoto.find_by_id(2)
+    @image_lib3 = HomeImageLibPhoto.find_by_id(3)
+    @image_lib4 = HomeImageLibPhoto.find_by_id(4)
+    @image_lib5 = HomeImageLibPhoto.find_by_id(5)
+    @image_lib6 = HomeImageLibPhoto.find_by_id(6)
+    @image_lib7 = HomeImageLibPhoto.find_by_id(7)
 
-    #色彩搭配
-    @color_design = Subject.content("color_designs").last
-
-    #行业资讯
-    @articles = Subject.content("articles").limit(5)
-
-    #生活小贴士
-    @weekly_tip = WeeklyTip.order("created_at desc").limit(2)
-    # @body = weekly_tip.body.split("\r\n\r\n")
-
-    @articles = Subject.content("articles").page(params[:page]).per(6)
-
+    # design show
+    @week_star = HomeDesignShow.design_type(1)
+    if @week_star.present?
+      @week_star_title = @week_star.position(0).last.title
+      @week_star_left = @week_star.position(1).last
+      @week_star_right1 = @week_star.position(2).last
+      @week_star_right2 = @week_star.position(3).last
+      @week_star_right3 = @week_star.position(4).last
+    end
+    @design_show = HomeDesignShow.design_type(2)
+    if @design_show.present?
+      @design_title = @design_show.position(0).last.try(:title)
+      @design_left = @design_show.position(1).last
+      @design_right1 = @design_show.position(2).last
+      @design_right2 = @design_show.position(3).last
+      @design_right3 = @design_show.position(4).last
+    end
+    @color_show = HomeDesignShow.design_type(3)
+    if @color_show.present?
+      @color_title = @color_show.position(0).last.try(:title)
+      @color_left = @color_show.position(1).last
+      @color_right1 = @color_show.position(2).last
+      @color_right2 = @color_show.position(3).last
+      @color_right3 = @color_show.position(4).last
+    end
+    @banner1 = IBanner.page_name('首页').position(1).first
+    @banner2 = IBanner.page_name('首页').position(7).first
+    @banner3 = IBanner.page_name('首页').position(8).first
+    @banner4 = IBanner.page_name('首页').position(3).first
+    @banner5 = IBanner.page_name('首页').position(4).first
+    @banner6 = IBanner.page_name('首页').position(5).first
+    @banner7 = IBanner.page_name('首页').position(6).first
+    @home_life_videos = HomeLifeVideo.order("rank asc")
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
@@ -74,6 +108,10 @@ class HomeController < ApplicationController
   end
 
   def overall
+      render layout: nil
+  end
+
+  def home_overall
       render layout: nil
   end
 end

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>icolor</title>
+  <%= csrf_meta_tag %>
+
+  <%= stylesheet_link_tag 'bootstrap/bootstrap.min' ,
+    'bootstrap/bootstrap-responsive.min',
+    'bootstrap/font-awesome.min',
+    'bootstrap/ace.min',
+    'bootstrap/ace-responsive.min',
+    'bootstrap/ace-skins.min',
+    'datepicker',
+    'bootstrap-timepicker' %>
+  <%= javascript_include_tag 'jquery',
+    'jquery_ujs',
+    'bootstrap/bootstrap.min',
+    'bootstrap/ace.min',
+    'bootstrap/ace-elements.min','manage/home_image_lists', 'bootstrap-datetimepicker' %>
+
+  <script>
+    //datepicker & timepicker
+    $(function(){
+      $('.datepickers').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+      $(".datetimepicker_full").datetimepicker({weekStart:1,todayBtn:1,autoclose:1,todayHighlight:1,startView:2,forceParse:0,showMeridian:1});
+    });
+  </script>
+
+  <%= yield :head %>
+
+  <style>
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    .uneditable-input{padding:2px 4px;height:18px;font:12px/18px "Microsoft Yahei";}
+    select{height:24px;line-height:24px;font-size:12px;}
+    input[type="file"]{height:24px;line-height:24px;font-size:12px;}
+    label, input, button, select, textarea{font-size:12px;}
+    textarea{height:auto;}
+    .navbar .brand{font-size:13px;}/*去掉small标签*/
+    .btn-small{border-width:0;}
+    /*.tags_setting .btn-small{line-height: 30px;}*/
+    .nav{font-size:12px;}
+    .nom{margin:0!important;}
+    .mt30{margin-top:30px;}
+    .form-horizontal .control-label{padding-top:3px;font-size:12px;}
+    .widget-header h5,.widget-header h4{font:12px "Microsoft Yahei";}
+    .input-prepend .add-on{padding:1px 5px;font-size:12px;}
+    .btn{font-size:12px!important;text-align:center;vertical-align:middle;}
+    .main {margin: 20px;}
+    .active_red a{color:red!important;}
+  </style>
+<body>
+  <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a href="<%= manage_root_path(sort: 1) %>" class="brand">2013新版icolor</a>
+          <ul class="nav ace-nav pull-right">
+
+            <li class="grey">
+              <a href="/admin/content/subjects" >
+                <i class="icon-tasks"></i>
+                <span class="badge badge-grey">返回管理</span>
+              </a>
+            </li>
+
+            <li class="light-blue user-profile">
+              <a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
+                <span id="user_info">
+                  <small>欢迎,</small>
+                  <%= current_admin.username %>
+                </span>
+
+                <i class="icon-caret-down"></i>
+              </a>
+
+              <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
+                <li>
+                  <a href="/admins/sign_out" data-method="delete"><i class="icon-off"></i>退出系统</a>
+                </li>
+              </ul>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" id="main-container">
+      <a id="menu-toggler" href="#">
+        <span></span>
+      </a>
+
+      <div id="sidebar" class="menu-min">
+        <ul class="nav nav-list">
+
+          <li class="<%= 'active' if left_menu_active('home') == 'on' %>">
+            <a href="/manage?sort=1">
+              <i class="icon-home"></i>
+              <span>首页</span>
+            </a>
+          </li>
+
+          <li class="<%= 'active' if left_menu_active('banner') == 'on' %>">
+            <a href="/manage/banner_group">
+              <i class="icon-dashboard"></i>
+              <span>banner管理</span>
+            </a>
+          </li>
+
+          <li class="<%= 'active' if left_menu_active('life') == 'on' %>">
+            <a href="/manage/life_memoirs">
+              <i class="icon-refresh"></i>
+              <span>刷新生活</span>
+            </a>
+          </li>
+
+          <li class="<%= 'active' if left_menu_active('column') == 'on' %>">
+            <a href="/manage/universal_column">
+              <i class="icon-tablet"></i>
+              <span>通栏</span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div id="sidebar-collapse">
+          <i class="icon-double-angle-left"></i>
+        </div>
+      </div>
+      <div id="main-content" class="clearfix">
+        <% unless nav_path == "manage/base/nothing" %>
+          <ul class="nav nav-pills widget-header" style="background-color:#F5F5F5;margin:0;">
+            <%= render :partial => nav_path %>
+          </ul>
+        <% end %>
+        <%= yield %>
+      </div>
+   </div>
+  <%= yield :tail %>
+</body>
+</html>

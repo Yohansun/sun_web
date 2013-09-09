@@ -1,14 +1,14 @@
 #encoding: utf-8
-
 Icolor::Application.routes.draw do
-  match "/images/(:id)_:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:site" => "design_images#image_show"
+  # match "/images/(:id)_:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:site" => "design_images#image_show"
+  match "/images/:id/:site/*path" => "design_images#image_show"
   match "/images/:id/image_show" => "design_images#image_show", as: 'image_show_design_image'
   match "/images/:id/fullscreen" => "design_images#fullscreen"
   match "/images/:page/page" => "design_images#index"
   match "/images/*path/:page" => "design_images#index"
   match "/images/*path" => "design_images#index"
   match "/images" => "design_images#index"
-  
+
   require 'api'
   resources :special_events do
     member do
@@ -31,7 +31,9 @@ Icolor::Application.routes.draw do
   get "/users/me" => "users#me"
   get "/users/edit_me" => "users#edit_me"
   get "home/overall.js" => "home#overall"
+  get "home/home_overall.js" => "home#home_overall"
   root :to => 'home#index'
+  get "home/design_show"
 
   resources :votes
 
@@ -95,13 +97,13 @@ Icolor::Application.routes.draw do
     end
   end
   match "master_interviews/hk-tw-mc/:type" => "master_interviews#hk_tw_mc"
-  match "master_interviews/hk_tw_mc/:type" => "master_interviews#hk_tw_mc"  
-  match "master_interviews/cn/:type"       => "master_interviews#cn"      
-  match "master_interviews/oversea/:type"  => "master_interviews#oversea" 
-  match "master_interviews/all/:type"      => "master_interviews#all" 
-  
+  match "master_interviews/hk_tw_mc/:type" => "master_interviews#hk_tw_mc"
+  match "master_interviews/cn/:type"       => "master_interviews#cn"
+  match "master_interviews/oversea/:type"  => "master_interviews#oversea"
+  match "master_interviews/all/:type"      => "master_interviews#all"
+
   resources :master_topics, :only => [:index, :show]
-  
+
   resources :master_designs ,:only => [:index,:show] do
     collection do
       get :all                                                  #所有
@@ -114,14 +116,14 @@ Icolor::Application.routes.draw do
       get :download
     end
   end
-  
+
   match "master_designs/hk-tw-mc/:type" => "master_designs#hk_tw_mc"
-  match "master_designs/hk_tw_mc/:type" => "master_interviews#hk_tw_mc"  
-  match "master_designs/cn/:type"       => "master_designs#cn"      
-  match "master_designs/oversea/:type"  => "master_designs#oversea" 
+  match "master_designs/hk_tw_mc/:type" => "master_interviews#hk_tw_mc"
+  match "master_designs/cn/:type"       => "master_designs#cn"
+  match "master_designs/oversea/:type"  => "master_designs#oversea"
   match "master_designs/all/:type"      => "master_designs#all"
-  
-  
+
+
 
   #行业资讯
   match "/color_articles" => "color_articles#index"
@@ -170,7 +172,7 @@ Icolor::Application.routes.draw do
   #最热
   match "inspirations-hot"      => "inspirations#inspirations_hot"          ,:as => "inspirations_hot"
   #刷新21天
-  match "inspirations-minisite" => "inspirations#inspirations_minisite"     ,:as => "inspirations_minisite"      
+  match "inspirations-minisite" => "inspirations#inspirations_minisite"     ,:as => "inspirations_minisite"
   resources :inspirations do
     member do
       get :download
@@ -215,7 +217,7 @@ Icolor::Application.routes.draw do
   match "/rules2" => "function#rules2" #话费积分活动细则
   match "/state" => "function#state" #网站声明
   match "/about" => "function#about" #关于我们
-  match "/sitemap" => "function#sitemap" #网站地图 
+  match "/sitemap" => "function#sitemap" #网站地图
   match "/suc_ins" => "function#suc_ins" #发布成功页面
   match "/suc_works" => "function#suc_works" #发布成功页面
   match "/token" => "function#token" #头像修改页面
@@ -325,6 +327,7 @@ Icolor::Application.routes.draw do
       get :decoration_parts
       get :image_search_index
       post :image_tag
+      get :lists
     end
     member do
       get :image_show
@@ -338,6 +341,9 @@ Icolor::Application.routes.draw do
 
   resources :cubit_fixtures, only: :create
   resources :visit_ips,only: :create
+
+  #刷新实录
+  resources :refresh_record
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
@@ -440,23 +446,23 @@ Icolor::Application.routes.draw do
   end
 
   scope "/love", :module =>"baicheng" do
-    
+
     get "1.html" => "welcome#index"
     get "2.1.html" => "stories#new"
     get "2.2.html" => "stories#image_new"
-    
+
     get "3.1.html" => "stories#index"
     get ":id.3.2.html" => "stories#show"
     get "4.1.html" => "design_competes#index"
     get ":id.4.2.html" => "design_competes#show"
-  
+
     match '5.1.html' => 'fashion_model#show', :defaults => { :id => 'foreign'}
-      
+
     match '5.2.html' => 'fashion_model#show', :defaults => { :id => 'native'}
-     
+
     match '6.1.html' => 'actives#index'
-   
-    
+
+
     root  to: 'welcome#index', as: 'baicheng_root'
     resources :design_works do
       collection do
@@ -472,7 +478,7 @@ Icolor::Application.routes.draw do
         get :download
         get :image_new
       end
-      collection do 
+      collection do
         post :update_image
         post :update_title
       end
@@ -501,4 +507,196 @@ Icolor::Application.routes.draw do
     resources :intros, only: :show
   end
 
+  scope '/refresh_life', :module => 'refresh_life' do
+    resources :refresh_show
+    resources :refresh_list
+  end
+
+  scope '/manage', :module => 'manage' do
+    resources :owner_enter
+    resources :seo_sites do
+      collection do
+        post :update_tag
+      end
+    end
+    resources :tag_sorts do
+      collection do
+        post :update_tag_sort
+      end
+    end
+    resources :channel_tips do
+      collection do
+        post :update_tip
+        get :find_owner
+      end
+    end
+    resources :questions do
+      collection do
+        post :create_or_update
+      end
+    end
+    resources :home_banners do
+    end
+    resources :home_liter_heads do
+      collection do
+        get :insert_news
+      end
+    end
+    resources :fit_images
+    resource :home_heads do
+      get 'show_type', on: :collection
+      get 'insert_news', on: :collection
+      post 'save_insert', on: :collection
+    end
+    resources :fit_literals do
+      collection do
+        get :insert_news
+      end
+    end
+
+    scope '/home_image_lists', :module => 'home_image_lists' do
+      resource :home_colors do
+        get 'show_type', on: :collection
+        get 'insert_news', on: :collection
+        post 'update_category', on: :collection
+        post 'save_insert', on: :collection
+      end
+      resource :home_types do
+        get 'show_type', on: :collection
+        get 'insert_news', on: :collection
+        post 'update_category', on: :collection
+        post 'save_insert', on: :collection
+      end
+      resource :home_spaces do
+        get 'show_type', on: :collection
+        get 'insert_news', on: :collection
+        post 'update_category', on: :collection
+        post 'save_insert', on: :collection
+      end
+      resource :home_costs do
+        get 'show_type', on: :collection
+        get 'insert_news', on: :collection
+        post 'update_category', on: :collection
+        post 'save_insert', on: :collection
+      end
+      resource :home_styles do
+        get 'show_type', on: :collection
+        get 'insert_news', on: :collection
+        post 'update_category', on: :collection
+        post 'save_insert', on: :collection
+      end
+    end
+
+    resources :home_image_lists do
+      get 'search_type', on: :collection
+    end
+
+    resources :special_kv do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :home_kvs do
+      member do
+        post :kv_update
+        get :delete_file
+      end
+      collection do
+        post :kv_insert
+      end
+    end
+    resources :kv_maps
+
+    resources :home_recommends do
+      collection do
+        get :edit_recommend
+        post :update_recommend
+        post :delete_last
+        post :insert_recommend
+      end
+    end
+
+    # 首页装修图库后台
+    resources :home_image_lib do
+      collection do
+        get :tags
+        post :create_tag_list
+        match :edit_tag_list
+        post :photos
+        post :upload_image
+        post :search_vote
+      end
+    end
+
+    # 首页设计鉴賞后台
+    delete "home_design_show/destroy", to: 'home_design_show#destroy'
+    resources :home_design_show do
+      collection do
+        get :tags
+        post :create_image
+        post :edit
+        post :save_data
+      end
+    end
+
+    # banner管理
+    delete "banner_group/destroy", to: 'banner_group#destroy'
+    resources :banner_group do
+      collection do
+        post :save_data
+        post :update_data
+      end
+    end
+
+    resources :banner_home do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :banner_channel do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :banner_refresh do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :banner_images do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :home_life_videos do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :universal_column do
+      collection do
+        post :save_data
+      end
+    end
+
+    delete "life_memoirs/destroy", to: 'life_memoirs#destroy'
+    resources :life_memoirs
+
+    delete "life_infos/destroy", to: 'life_infos#destroy'
+    resources :life_infos
+
+    root to: 'home_kvs#index', as: 'manage_root'
+  end
 end

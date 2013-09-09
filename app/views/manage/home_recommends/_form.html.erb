@@ -1,0 +1,11 @@
+<%- recommends.each do |r| %>
+	<tr class="recommend<%= r.id %>">
+		<td>
+			<a href="javascript:;" class="edit_recommend" data-recommend-id="<%= r.id %>">编辑</a>
+		</td>
+		<td><%= r.position %></td>
+		<td class="hidden-480"><%= r.title %></td>
+		<td class="hidden-phone"><%= r.url %></td>
+		<td class="hidden-480"><%= r.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+	</tr>
+<%- end %>

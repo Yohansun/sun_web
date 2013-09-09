@@ -1,0 +1,98 @@
+<!-- Left navigation -->
+<div class="leftNav">
+  <ul id="menu">
+
+    <li class="dash">
+      <a href="javascript:void(0);" title="" class="active opened"><span>2013新版icolor</span></a>
+      <ul class="sub">
+        <li><%= link_to "首页", main_app.manage_root_path(sort: 1) %></li>
+        <li><%= link_to "设计快查", main_app.channel_tips_path %></li>
+        <li><%= link_to "banner管理", main_app.banner_group_index_path %></li>
+        <li><%= link_to "装修图库", main_app.tag_sorts_path %></li>
+        <li><%= link_to "刷新生活", main_app.life_memoirs_url %></li>
+        <li><%= link_to "通栏", main_app.universal_column_index_path %></li>
+      </ul>
+    </li>
+
+    <li class="dash">
+      <a href="<%= url_for subjects_path %>" title="" class="active opened"><span>站点结构</span></a>
+      <ul class="sub">
+        <% if (can? :manage, :all) %> 
+          <li><%= link_to "全部结构", subjects_path, :class => ('current' if request.original_fullpath == subjects_path) %></li>
+        <% end %>
+
+        <%- nested_set_options(Subject) do |subject| %>
+          <% next if cannot?(:manage, subject)%>
+          <%- if subject.parent_id.nil? %>
+            <li>
+              <%= link_to subject.name, content_path(subject), :class => ('current' if request.original_fullpath == content_path(subject)) %>
+              <%- if @subject && !@subject.new_record? && @subject.is_or_is_descendant_of?(subject) %>
+                <ul class="third">
+                  <%- subject.children.each do |branch| %>
+                    <li>
+                      <%= link_to branch.name, content_path(branch), :class => ('current' if request.original_fullpath == content_path(branch)) %>
+                      <% if @subject && !@subject.new_record? && @subject.is_or_is_descendant_of?(branch) %>
+                        <ul class="four noborder">
+                          <%- branch.children.each do |leave| %>
+                            <li><%= link_to leave.name, content_path(leave), :class => ('current' if request.original_fullpath == content_path(leave)) %></li>
+                          <%- end %>
+                        </ul>
+                      <% end %>
+                    </li>
+                  <%- end %>
+                </ul>
+              <%- end %>
+            </li>
+          <%- end %>
+        <%- end %>
+      </ul>
+    </li>
+    <li class="widgets">
+      <a href="#" title="" class="exp inactive"><span>站点设置</span></a>
+      <ul class="sub">
+        <% if (can? :manage, MagicSetting) -%>
+          <li><%= link_to "基础设置", magic_settings_path -%></li>
+          <li><%= link_to "获奖管理", '/admin/content/event_attendee' -%></li>
+        <% end -%>
+      <!-- <li><%= link_to "站点模块", "#" -%></li> -->
+      </ul>
+    </li>
+    <li class="gallery">
+      <a href="#" title="" class="exp inactive"><span>广告管理</span></a>
+      <ul class="sub">
+        <!-- <li><%= link_to "所有广告", "#" %></li> -->
+      </ul>
+    </li>
+    <li class="pic">
+      <a href="#" class="exp inactive"><span>扩展功能</span></a>
+      <ul class="sub">
+        <!-- 
+          <li><%= link_to "SEO活力药剂", "#" -%></li>
+          <li><%= link_to "专题魔法棒", "#" -%></li>
+          <li><%= link_to "图片魔力剪", "#" -%></li> 
+        -->
+        <% if MagicContent.extra_menu_items -%>
+          <% MagicContent.extra_menu_items.each do |item| -%>
+            <% if (can? :manage, item[:url]) %>
+              <li><%= link_to item[:name], main_app.send(item[:url]) -%></li>
+            <% end -%>
+          <% end -%>
+        <% end -%>
+      </ul>
+    </li>
+    <li class="pic">
+      <a href="#" class="exp inactive"><span>因爱之名</span></a>
+      <ul class="sub">
+
+        <% if MagicContent.baicheng_menu_items -%>
+          <% MagicContent.baicheng_menu_items.each do |item| -%>
+            <% if (can? :manage, item[:url]) %>
+              <li><%= link_to item[:name], main_app.send(item[:url]) -%></li>
+            <% end -%>
+          <% end -%>
+        <% end -%>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!-- Left navigation -->

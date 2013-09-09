@@ -1,0 +1,84 @@
+
+<script>
+  $(function() {
+    $.imagepreview({
+      file : $('#files_up'),
+      img : $('#photo_up'),
+      maxWidth : 155,
+      maxHeight : 115
+    });
+
+    $('form[data-redirect_url]').bind('ajax:success', function(evt, data, status, xhr) {
+        alert("保存成功");
+
+        var url = $(this).data('redirect_url');
+        window.location.href = url;
+    }).bind('ajax:complete', function(evt, xhr, status){
+      eval(xhr.responseText);
+    }).bind("ajax:error", function(evt, xhr, status, error) {
+      alert(xhr.responseText);
+    });
+
+  });
+
+  function open_link() {
+    var url = $('#url').val();
+    window.open(url, "_blank");
+  }
+</script>
+
+<div class="span2">
+    <div id="upload_files_container">
+      <img id="photo_up" src="<%= @i_column_data.file.url(:list_155x115) %>" alt="" />
+    </div>
+</div>
+<div class="span5">
+  <div class="clearfix form_edit">
+    <div class="editarea">
+      <div class="media">
+        <div class="media-body">
+          <%= form_tag(universal_column_path(@i_column_data.id), :multipart => true, :id => 'fileupload', :method => 'put', :remote => true, :'data-redirect_url' => "/manage/universal_column/show?column_type=#{@i_column_data.i_column_type_id}") do %>
+          <%= hidden_field_tag 'i_column_type_id', @i_column_data.i_column_type_id %>
+              <p class="form-inline">
+                  <div class="fileupload-buttonbar">
+                      <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-primary' %>
+                      <a href="/manage/universal_column" class="btn btn-mini btn-primary">取消</a>
+                      <input type="checkbox" class="toggle">
+                      <span class="fileupload-loading"></span>
+                  </div>
+                  <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+              </p>
+              <p class="form-inline">
+                <label for="" class="control-label">排序</label>
+                <select name='rank' class='input-small'>
+                  <option value=1 <%= 'selected' if @i_column_data.rank == 1 %>>1</option>
+                  <option value=2 <%= 'selected' if @i_column_data.rank == 2 %>>2</option>
+                  <option value=3 <%= 'selected' if @i_column_data.rank == 3 %>>3</option>
+                  <option value=4 <%= 'selected' if @i_column_data.rank == 4 %>>4</option>
+                  <option value=5 <%= 'selected' if @i_column_data.rank == 5 %>>5</option>
+                </select>
+                　　　　　
+                <span class="btn fileinput-button btn-mini btn-primary">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  <span>上传图片</span>
+                  <input type="file" name="files_up" id="files_up">
+                </span>
+                <label for="" class="control-label">尺寸155x115</label>
+              </p>
+              <p class="form-inline">
+                <label for="" class="control-label">标题</label>
+                <input type="text" id="title" name="title" class="input-xlarge" value="<%= @i_column_data.title %>" maxlength=10 maxlength=10>
+                <span class="help-inline text-error">(10个汉字)</span>
+              </p>
+              <p class="form-inline">
+                <label for="" class="control-label">链接</label>
+                <input type="text" id="url" name="url" class="input-xlarge" value="<%= @i_column_data.url %>">
+                <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测链接</a>
+              </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

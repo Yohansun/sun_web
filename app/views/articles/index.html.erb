@@ -1,5 +1,5 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag "news", "industry_news" %>
+    <%= stylesheet_link_tag "news","style", "industry_news"%>
     <style type="text/css">
         .article a {
             color: #b90000;
@@ -8,7 +8,7 @@
     </style>
 <% end -%>
 <div class="main">
-  <div class='sub_title tr'>
+  <div class='sub_title text-right'>
     <img src="<%= asset_path "news/title_news.png" %>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>

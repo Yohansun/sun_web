@@ -1,0 +1,311 @@
+<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<script type="text/javascript">
+  $(function() {
+    $('.datetimepicker_full').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+
+    $('#show_panel').hide();
+
+  	$('#new_group').on('click', function(e){
+			e.preventDefault();
+			$('#show_panel').show();
+		});
+
+		$('#cancel_panel').on('click', function(e){
+			e.preventDefault();
+			$('#show_panel').hide();
+		});
+
+		$.imagepreview({
+      file : $('#files'),
+      img : $('#photo'),
+      maxWidth : 220,
+      maxHeight : 155
+    });
+
+    $('input[name="video"]').change(function(){
+		   var filename = $(this).val().toLowerCase();;
+		   if (!/\.(flv)$/.test(filename)) {
+				  alert("请选择文件类型为flv的文件!");
+				  this.value = "";
+				  return false;
+			 } else {
+		   	$('#filename').html(filename);
+			 }
+		});
+
+		$('#show_panel form[data-redirect_url]').bind('ajax:success', function(evt, data, status, xhr) {
+        alert("保存成功");
+        // var url = $(this).data('redirect_url');
+        var url = data.referer
+        window.location.href = url;
+    }).bind('ajax:beforeSend', function(evt, xhr, status){
+      var title = $('#title').val();
+      if ($.trim(title).length == 0) {
+	      alert('主标题不能为空!');
+	      return false;
+	    }
+
+	    var s_title = $('#s_title').val();
+      if ($.trim(s_title).length == 0) {
+	      alert('副标题不能为空!');
+	      return false;
+	    }
+
+	    var summary = $('#summary').val();
+	    if ($.trim(summary).length == 0) {
+	      alert('摘要不能为空!');
+	      return false;
+	    }
+
+	    var link = $('#url').val();
+	    if ($.trim(link).length == 0) {
+	      alert('链接不能为空!');
+	      return false;
+	    }
+
+	    var files = $('#files').val();
+	    if ($.trim(files).length == 0) {
+	      alert('图片不能为空!');
+	      return false;
+	    }
+
+    }).bind("ajax:error", function(evt, xhr, status, error) {
+      alert(xhr.responseText);
+    });
+
+    $('#show_edit #btn_edit').on('click', function(e){
+	    e.preventDefault();
+	    var that = this;
+	    var i_life_memoir_id = $(this).attr('i_life_memoir_id');
+	    if ($.trim(i_life_memoir_id).length == 0) {
+	      alert('错误,请重新选择');
+	      return false;
+	    } else {
+	      $.get("/manage/life_memoirs/" + i_life_memoir_id + "/edit",{i_life_memoir_id: i_life_memoir_id},function(result){
+	        $(that).parents('#show_edit').html(result);
+	      });
+
+	      //不能重复点击
+	      $('#show_edit #btn_edit').unbind("click");
+	      $('#show_edit #btn_edit').on('click', function(e){
+	        alert("操作失败，每次只能对一条记录进行编辑.")
+	      })
+	    }
+	  })
+
+  });
+
+	function open_link() {
+    var url = $('#url').val();
+    window.open(url, "_blank");
+  }
+
+  function open_page() {
+    var page_num = $('#page_to').val();
+    url = "/manage/life_memoirs?page=" + page_num
+    window.open(url, "_blank");
+  }
+</script>
+
+<div class="main bs-docs-grid" style="margin:15px 15px 50px 15px;">
+	<div class="row show-grid">
+		<div class="span2">
+			<button id="new_group" class="btn btn-small btn-primary">在上方插入一行</button>
+		</div>
+		<div class="span11">
+				<%= form_tag(life_memoirs_path, :class => 'form-inline', :method => 'get', :id => 'edit_form', :'data-redirect_url' => "/manage/life_memoirs") do %>
+					<%= text_field_tag "data_start", '2012-01-01 00:00:00', :class => "input-medium datetimepicker_full", :name => 'data_start', :id => 'data_start', :readonly => 'readonly' %>
+					to<%= text_field_tag "data_end", Time.now.to_s, :class => "input-medium datetimepicker_full", :name => 'data_end', :id => 'data_end', :readonly => 'readonly' %>
+					<label for="" class="control-label"><b>and</b></label>
+					<select name='title_id' class='input-small'>
+	          <option value=1 <%= 'selected' if @title_id == "1" %>>主标题</option>
+	          <option value=2 <%= 'selected' if @title_id == "2" %>>副标题</option>
+	          <option value=3 <%= 'selected' if @title_id == "3" %>>摘要</option>
+	        </select>
+			    <input type="text" id="key" name="key" class="input-small" value="<%= @key %>">
+					<%= button_tag "查询", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+				<% end %>
+		</div>
+	</div>
+
+
+	<div id="show_panel">
+	<%= form_tag(life_memoirs_path, :multipart => true, :id => 'new_data', :remote => true, :'data-redirect_url' => "/manage/life_memoirs") do %>
+	<%= hidden_field_tag 'id', 1 %>
+	<div class="bs-docs-grid">
+	<div class="row show-grid">
+	<hr>
+		<div class="span1">
+				<p class="form-inline">
+	          <div class="fileupload-buttonbar">
+	              <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-mini btn-primary' %>
+	          </div>
+	      </p>
+	      <p class="form-inline">
+	          <div class="fileupload-buttonbar">
+	              <button id="cancel_panel" class="btn btn-mini btn-primary">取消</button>
+	          </div>
+	      </p>
+		</div>
+		<div class="span2">
+		    <div id="upload_files_container">
+		      <img id="photo" src="" alt="" />
+		    </div>
+		</div>
+		<div class="span4">
+		  <div class="clearfix form_edit">
+		    <div class="">
+		      <div class="media">
+		        <div class="media-body">
+		        			<label for="" class="control-label"><b>主标题(不超过20字)：<b></label>
+		              <p class="form-inline">
+		                <input type="text" id="title" name="title" class="input-xlarge" value="" maxlength=20 maxlength=20>
+		              </p>
+
+		              <label for="" class="control-label"><b>副标题(不超过20字)：</b></label>
+		              <p class="form-inline">
+		                <input type="text" id="s_title" name="s_title" class="input-xlarge" value="" maxlength=20 maxlength=20>
+		              </p>
+		              <label for="" class="control-label"><b>摘要(不超过50字)：</b></label>
+		              <p class="form-inline">
+		                <textarea id="summary" name="summary" class="input-xlarge" rows="3" maxlength=50 maxlength=50></textarea>
+		              </p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="span5">
+		  <div class="clearfix form_edit">
+		    <div class="">
+		      <div class="media">
+		        <div class="media-body">
+		        			<label for="" class="control-label"><b>链接：</b></label>
+		        			<p class="form-inline">
+		                <input type="text" id="url" name="url" class="input-xlarge" value="" placeholder="请输入链接">
+		                <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测链接</a>
+		              </p>
+		              <label for="" class="control-label"><b>视频(格式flv)</b></label>
+		              <p class="form-inline">
+		                <span class="btn fileinput-button btn-mini btn-primary">
+		                  <i class="glyphicon glyphicon-plus"></i>
+		                  <span>上传视频</span>
+		                  <input type="file" name="video" id="video">
+		                </span>
+		                <div id="filename"></div>
+		              </p>
+		              <label for="" class="control-label"><b>图片(尺寸340x240)</b></label>
+		              <p class="form-inline">
+		                <span class="btn fileinput-button btn-mini btn-primary">
+		                  <i class="glyphicon glyphicon-plus"></i>
+		                  <span>上传图片</span>
+		                  <input type="file" name="files" id="files">
+		                </span>
+		              </p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	</div>
+	<% end %>
+	</div>
+
+	<hr>
+
+
+
+	<div class="bs-docs-grid">
+	<% @i_life_memoirs.each do |i_life_memoir| %>
+		<div class="row show-grid" id="show_edit">
+			<div class="span1">
+					<p class="form-inline">
+		          <div class="fileupload-buttonbar">
+		              <a href="javascript:;" i_life_memoir_id="<%= i_life_memoir.id %>" id="btn_edit" class="btn btn-mini btn-primary">编辑</a>
+		          </div>
+		      </p>
+		      <p class="form-inline">
+		          <div class="fileupload-buttonbar">
+		              <%= link_to("删除", life_memoirs_destroy_path(id: i_life_memoir.id),
+                          :data => { :confirm => "你确定要删除?" },
+                          :method => :delete,
+                          :class => 'btn btn-mini btn-primary') %>
+		          </div>
+		      </p>
+			</div>
+			<div class="span2">
+			    <div id="upload_files_container">
+			      <img id="photo" src="<%= i_life_memoir.file.url %>" alt="" />
+			    </div>
+			</div>
+			<div class="span4">
+			  <div class="clearfix form_edit">
+			    <div class="">
+			      <div class="media">
+			        <div class="media-body">
+			        			<label for="" class="control-label"><b>主标题(不超过20字)：</b></label>
+			              <p class="form-inline">
+			                <%= i_life_memoir.title %>
+			              </p>
+			              <label for="" class="control-label"><b>副标题(不超过20字)：</b></label>
+			              <p class="form-inline">
+			                <%= i_life_memoir.s_title %>
+			              </p>
+			              <label for="" class="control-label"><b>摘要：</b></label>
+			              <p class="form-inline">
+			                <%= i_life_memoir.summary %>
+			              </p>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="span5">
+			  <div class="clearfix form_edit">
+			    <div class="">
+			      <div class="media">
+			        <div class="media-body">
+			        			<label for="" class="control-label"><b>链接：</b></label>
+			        			<p class="form-inline">
+			                <a href="<%= i_life_memoir.url %>" target="_blank"><%= i_life_memoir.url %></a>
+			              </p>
+			              <label for="" class="control-label"><b>视频(格式flv)</b></label>
+			              <p class="form-inline">
+			                <a href="<%= i_life_memoir.video.url %>" target="_blank"><%= i_life_memoir.video_file_name %></a>
+			              </p>
+			              <label for="" class="control-label"><b>最后修改日期</b></label>
+			              <p class="form-inline">
+			                <%= i_life_memoir.updated_at.to_s %>
+			              </p>
+			              <p class="form-inline">
+			                ID: <%= i_life_memoir.id.to_s %>
+			              </p>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<hr>
+		<% end %>
+	</div>
+
+	<div class="navbar-form pull-left">
+    <div class="span4">
+    	<%= paginate @i_life_memoirs, :outer_window => 5 %>
+    </div>
+    <% if @i_life_memoirs.count > 4 %>
+	    <div class="span1">
+		    共<%= @i_life_memoirs.num_pages %>页
+			</div>
+			<div class="span2">
+				跳到<input type="text" id="page_to" name="page_to" class="input-mini">页
+			  <a href="javascript:;" class="btn btn-small btn-primary" onclick="open_page();return false;">Go</a>
+			</div>
+		<% end %>
+
+  </div>
+
+</div>

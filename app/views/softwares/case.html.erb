@@ -1,5 +1,13 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "news" %>
+    <%= stylesheet_link_tag "news","style" %>
+    <style type="text/css" media="screen">
+    .clear:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    </style>
 <%- end %>
 <%- content_for :tail do %>
     <%= javascript_include_tag 'myfocus' %>

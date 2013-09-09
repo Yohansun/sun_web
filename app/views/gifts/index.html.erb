@@ -1,9 +1,40 @@
  <%- content_for :head do %>
-  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "style"%>
  <% end -%>
+<style>
+    
+    .winner-bin{background: url(/dev-assets/winner/winner-bg.jpg) no-repeat;width: 963px;margin: 30px auto 50px;}
+.winner-bin h1{height: 400px;}
+.winner-bin h1,.winner-bin h2,.winner-prev,.winner-next{text-indent: -999em;}
+.winner-bin h2{background: url(/dev-assets/winner/winner-hd.png) no-repeat;height: 36px;}
+.pd30{padding: 30px;}
+.winner-reg{background: #f5c294;padding-top: 1px;}
+.winner-reg h2{left: 30px;top: -35px;}
+.winner-reg h2,.winner-vote h2{width: 127px;}
+.winner-slide{width: 850px;margin: 0 auto;}
+.winner-prev,.winner-next{background: url(/dev-assets/winner/winner-bullets.png) no-repeat;width: 33px;height: 57px;left: 0;top: 52%;margin-top: -29px;filter:alpha(opacity=50);opacity: 0.5;
+    -webkit-transition:opacity 0.5s;
+    -moz-transition:opacity 0.5s;
+    transition:opacity 0.5s;
+    _background-image: url(/dev-assets/winner/winner-bullets.gif);
+}
+.winner-next{background-position: -33px 0;left: auto;right: 0;}
+.winner-prev:hover,.winner-next:hover{filter:alpha(opacity=100);opacity: 1;}
+.winner-slide-bin{width: 664px;margin: 0 auto;overflow: hidden;}
+.winner-slide-bin ul{overflow: hidden;float: left;_display: inline;}
+.winner-slide-bin li{width: 639px;text-align: right;margin: 10px 0;font: bold 14px "SimHei";color: #fefffe;*margin: 5px 0;}
+.winner-slide-bin .h3{background: url(/dev-assets/winner/winner-bg2.png) no-repeat;text-align: center;width: 664px;height: 18px;margin: 20px auto;padding: 5px 0;line-height: 18px;font-size: 18px;font-weight: bold;color: #fff;}
+.winner-slide-bin span{float: left;font: 15px "Microsoft Yahei";margin-top: -2px;}
+.winner-slide-container{width: 99999em;position: relative;}
 
+.winner-vote{background: #ff861f;}
+.winner-vote h2{background-position: -127px 0;}
+
+.winner-color{background: #9f1b1b;}
+.winner-color h2{width: 441px;background-position: -254px 0;}
+</style>
  <div class="main winner-bin">
-    <h1>因爱之名 刷新生活 ————立邦携手万名设计师为您免费设计新家</h1>
+    <h1 class="nomargin">因爱之名 刷新生活 ————立邦携手万名设计师为您免费设计新家</h1>
         <% if @regs.present? %>
             <div class="winner-reg pr pd30">
             <h2 class="pa">注册有奖</h2>
@@ -16,7 +47,7 @@
                                 <%- give_time = d[0] %>
                                 <%- end_time = d[1] %>
                                 <%- gift = @reg_luck.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>    
-                                <ul>
+                                <ul class="unstyled">
                                   <li class="h3"><%= (give_time + 1.days).strftime("%Y年%m月%d日") %> - <%= (end_time + 1.days).strftime("%Y年%m月%d日") %></li>
                                   <%- gift.each do |g| %> 
                                     <li><span><%= g.winner%></span><%= g.gift_name%></li>
@@ -39,7 +70,7 @@
                     <div class="winner-slide-bin pr">
                         <div class="winner-slide-container">
                             <%- @votes.each do |d|%>
-                            <ul>
+                            <ul class="unstyled">
                                 <%- end_year = d.split('/')[0] %>
                                 <%- end_month = d.split('/')[1] %>
                                 <%- gift = @vote_luck.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>  
@@ -64,7 +95,7 @@
                     <div class="winner-slide-bin pr">
                         <div class="winner-slide-container">
                             <%- @months.each do |d|%>
-                            <ul>
+                            <ul class="unstyled">
                                 <%- end_year = d.split('/')[0] %>
                                 <%- end_month = d.split('/')[1] %>
                                 <%- gift = @month_best.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>  

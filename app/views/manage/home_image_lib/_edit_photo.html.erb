@@ -1,0 +1,116 @@
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload" %>
+<script type="text/javascript">
+$(function () {
+    try {
+      var p_id = $('#photo_id').val();
+      var url = 'home_image_lib/upload_image?photo_id=' + p_id;
+        $('#fileupload').fileupload({
+            url: url,
+            dataType: 'html',
+            acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+            maxNumberOfFiles: 1,
+            maxFileSize: 5000000,
+            start: function (e) {
+                // alert(123);
+            },
+            done: function (e, data) {
+              $('#show_image').html(data.result);
+            }
+        })
+    } catch (ex) {
+        alert('upload:' + ex);
+    }
+});
+</script>
+<script type="text/javascript">
+$(function(){
+
+  $('#upload_image form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+    alert("保存成功");
+    var photo_id = $(this).data('home_image_lib_photo_id');
+    if ($.trim(photo_id).length == 0) {
+      var url = $(this).data('redirect_url');
+      window.location.href = url;
+    } else {
+      var next_id = photo_id + 1
+      if (next_id > 7) {
+        next_id = 1
+      }
+      $('.base_img' + next_id).click();
+    }
+  }).bind("ajax:error", function(evt, data) {
+    alert(data.responseText);
+  });
+
+  $('#get_vote').on('click', function(event) {
+    var url = $('#url').val();
+    $.post("home_image_lib/search_vote",{url: url},function(result){
+      $('#vote').val(result);
+    });
+  });
+
+});
+
+function btn_save() {
+  $('#edit_form').attr('data-home_image_lib_photo_id', '')
+}
+
+function open_link() {
+  var url = $('#url').val();
+  window.open(url, "_blank");
+}
+</script>
+<div class="span6" id="upload_image">
+  <%= form_tag(upload_image_home_image_lib_index_url, :id => 'edit_form', :remote => true, :'data-redirect_url' => '/manage/home_image_lib', :'data-home_image_lib_photo_id' => @home_image_lib_photo.id, :class => 'bs-docs-example') do %>
+    <%= hidden_field_tag 'photo_id', @home_image_lib_photo.id %>
+    <div class="controls docs-input-sizes">
+      <div class="input-prepend">
+        <span class="add-on">图片标题</span>
+        <input type="text" id="title" name="title" class="input-xlarge" value="<%= @home_image_lib_photo.title %>" data-maxlength=<%= @home_image_lib_photo.title_limit %> maxlength=<%= @home_image_lib_photo.title_limit %> />
+        <span class="help-inline">标题最多<%= @home_image_lib_photo.title_limit %>个字</span>
+      </div>
+      <div class="input-prepend">
+        <span class="add-on">图片链接</span>
+        <input type="text" id="url" name="url" class="input-xlarge" value="<%= @home_image_lib_photo.url %>">
+        <%= link_to "检测链接", "javascript:open_link();", :id => "check_link", :class => 'btn btn-link' %>
+      </div>
+      <div class="input-prepend">
+        <span class="add-on">投 票 数</span>
+        <input type="text" id="vote" name="vote" class="input-mini" value="<%= @home_image_lib_photo.vote %>">
+        <%= link_to "获取投票数", "javascript:void(0);", :id => "get_vote", :class => 'btn btn-link' %>
+      </div>
+      <div class="control-group">
+        <table class="table table-condensed">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="4">
+                已上传的图片
+                <span class="btn btn-small btn-primary fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>上传图片...</span>
+                    <input id="fileupload" type="file" name="file" multiple>
+                </span>
+                图片限定尺寸 <%= @home_image_lib_photo.dimensions %>
+              </td>
+            </tr>
+            <tr id="show_image">
+              <td><img width="82" height="167" class="img-polaroid" src="<%= @home_image_lib_photo.file.url("list_#{@home_image_lib_photo.dimensions}".to_sym) %>"></td>
+              <td><%= @home_image_lib_photo.file_file_name %></td>
+              <td><%= number_to_human_size(@home_image_lib_photo.file_file_size, precision: 2) %></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <%= submit_tag "保存", :id => 'save', :onclick => "return btn_save();", data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+        <%= submit_tag "保存并跳转到下一张", :id => 'next_save', data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

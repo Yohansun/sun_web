@@ -1,0 +1,49 @@
+<ul class="mood_list unstyled nomargin">
+	<%- comments.each_with_index do |c,i| %>
+		<li>
+			<div class="clearfix">
+				<div class="pull-left comment_photo">
+					<%- if c.user.try(:avatar) -%>
+						<%= image_tag(c.user.avatar.file(:icon), :size =>"50x50")%>
+					<%- else -%>
+						<%= image_tag "news/regimg_bg.jpg", size: '50x50' %>
+					<%- end -%>
+				</div>
+				<div class="comment_text">
+					<p>
+						<strong class="pull-right comment_floor"><%= comments.size - i %>F</strong>
+						<strong><%= c.user ? c.user.display_name : "匿名" %></strong>
+						<span class="comment_date"><%= c.created_at.to_date %></span>
+					</p>
+					<p class="J_resulte"><%= c.content %></p>
+					<%- c.reply_msgs.order("created_at DESC").each do |r| %>
+						<div class="re_comments">
+							<i class="icon-i16 icon-toparrow"></i>
+							<p>
+								<strong><%= r.user.display_name %></strong>
+								<span class="muted">说</span>
+								<p><%= r.content %></p>
+							</p>
+							<p class="muted"><%= r.created_at.to_date %></p>
+						</div>
+					<%- end %>
+				</div>
+			</div>
+			<div class="clearfix" style="margin-bottom:-10px;">
+				<%- if current_user %>
+					<a class="pull-right js-recomment" href="javascript:;">回复</a>
+				<%- end %>
+			</div>
+			<%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
+				<%= f.hidden_field :show_id, value: image.id %>
+				<%= f.hidden_field :comment_id, value: c.id %>
+				<%= f.hidden_field :reply_type, value: "design_images" %>
+				<%= f.text_area :content, class: 're_comments' %>
+				<div>
+					<button class="btn btn-small">提交</button>
+					<a href="#" class="btn btn-small js-close">取消</a>
+				</div>
+			<%- end %>
+		</li>
+	<%- end %>
+</ul>

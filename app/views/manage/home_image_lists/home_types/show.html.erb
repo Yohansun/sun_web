@@ -1,0 +1,40 @@
+<%= render :partial => "manage/home_image_lists/head" %>
+<div class="tags-container">
+  <%= render :partial => "category" %>
+  <%=link_to "最上方插入一行", insert_news_home_types_path, :class => "btn btn-small btn-primary", confirm: "如果上传图片或保存您的更改将会更改排序第8的记录，是否继续? " %>
+  <div class="clear-fix load-bar load-content" id="uploads_big">
+    <% @banners.each do |banner| %>
+      <div class="clear-fix widget-main form-actions banner_edit<%= banner.id %>" id="bannner_edit_image<%= banner.id %>">
+      	<%= link_to "编辑", edit_home_types_path(order_id: banner.order_id), :class => "edit_fit_literal pull-left", :style => "width: 50px;" %>
+        <div class="clear-fix pull-left" style="width: 170px;">
+          <%= image_tag banner.file.url(:thumb) %>
+        </div>
+        <div class="pull-left" style="width: 770px;margin-top: -11px;">
+					<ul class="unstyled spaced">
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<strong>排序:  </strong><%= banner.order_id %>
+						</li>
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<strong>标题:  </strong>(<b style='color:red;'>不超过12个字</b>)
+						</li>
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<%= banner.title%>
+						</li>
+						<li>
+							<i class="icon-caret-right blue"></i>
+							<strong>链接:   </strong>
+						</li>
+						<li>
+							<i class="icon-caret-right blue image_link"></i>
+							<%= banner.link %>
+						</li>
+					</ul>
+        </div>
+      </div>
+    <% end %>
+  </div><!--load-content ends-->
+  <%# end %>
+</div>

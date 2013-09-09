@@ -1,0 +1,29 @@
+$('.tbody1').replaceWith('<%=j render partial: 'insert_form' %>');
+$('#link4').click(function(){
+	window.open($('#recommend_url_insert').val());
+});
+(function($) {
+  $('.title-field').bind('keydown keyup', function() {
+    var $this = $(this);
+    var total = $this.data('total');
+    if (!total)
+      return;
+    var len = total - $this.val().length;
+    if (len < 0) {
+      $this.val($this.val().slice(0, total));
+    }
+  });
+}($));
+
+$('.recommend_insert').click(function(){
+	var $position = $('#recommend_select_insert').val(),
+			$title = $('#recommend_title_insert').val(),
+			$url = $('#recommend_url_insert').val();
+  if (confirm('当前操作会删除排序6的记录，是否继续？')) {
+  	$.ajax({
+  		type: "POST",
+      url: "<%= insert_recommend_home_recommends_path %>",
+      data: {position : $position, title : $title, url : $url}
+  	});
+  };
+});

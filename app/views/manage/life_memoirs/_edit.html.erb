@@ -1,0 +1,145 @@
+<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<script>
+  $(function() {
+    $.imagepreview({
+      file : $('#files_edit'),
+      img : $('#photo_edit'),
+      maxWidth : 155,
+      maxHeight : 115
+    });
+
+    $('form[data-redirect_url]').bind('ajax:success', function(evt, data, status, xhr) {
+        alert("保存成功");
+        // var url = $(this).data('redirect_url');
+        var url = data.referer
+        window.location.href = url;
+    }).bind('ajax:beforeSend', function(evt, xhr, status){
+      var title = $('#title_edit').val();
+      if ($.trim(title).length == 0) {
+        alert('主标题不能为空!');
+        return false;
+      }
+
+      var s_title = $('#s_title_edit').val();
+      if ($.trim(s_title).length == 0) {
+        alert('副标题不能为空!');
+        return false;
+      }
+
+      var summary = $('#summary_edit').val();
+      if ($.trim(summary).length == 0) {
+        alert('摘要不能为空!');
+        return false;
+      }
+
+      var link = $('#url_edit').val();
+      if ($.trim(link).length == 0) {
+        alert('链接不能为空!');
+        return false;
+      }
+
+      // var files = $('#files_edit').val();
+      // if ($.trim(files).length == 0) {
+      //   alert('图片不能为空!');
+      //   return false;
+      // }
+
+    }).bind("ajax:error", function(evt, xhr, status, error) {
+      alert(xhr.responseText);
+    });
+
+    $('#video_edit').change(function(){
+       var filename = $(this).val().toLowerCase();;
+       if (!/\.(flv)$/.test(filename)) { 
+          alert("请选择文件类型为flv的文件!"); 
+          this.value = "";
+          return false; 
+       } else {
+        $('#filename_edit').html(filename);
+       } 
+    });
+
+  });
+
+  function open_link() {
+    var url = $('#url').val();
+    window.open(url, "_blank");
+  }
+</script>
+
+<%= form_tag(life_memoir_path(@i_life_memoir.id), :multipart => true, :id => 'edit_data', :method => 'put', :remote => true, :'data-redirect_url' => "/manage/life_memoirs") do %>
+<%= hidden_field_tag 'i_life_memoir_id', @i_life_memoir.id %>
+  <div class="span1">
+      <p class="form-inline">
+          <div class="fileupload-buttonbar">
+              <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-mini btn-primary' %>
+          </div>
+      </p>
+      <p class="form-inline">
+          <div class="fileupload-buttonbar">
+              <a href="/manage/life_memoirs" class="btn btn-mini btn-primary">取消</a>
+          </div>
+      </p>
+  </div>
+  <div class="span2">
+      <div id="upload_files_container">
+        <img id="photo_edit" src="<%= @i_life_memoir.file.url %>" alt="" />
+      </div>
+  </div>
+  <div class="span4">
+    <div class="clearfix form_edit">
+      <div class="">
+        <div class="media">
+          <div class="media-body">
+                <label for="" class="control-label">主标题(不超过20字)：</label>
+                <p class="form-inline">
+                  <input type="text" id="title_edit" name="title" class="input-xlarge" value="<%= @i_life_memoir.title %>" maxlength=20 maxlength=20>
+                </p>
+
+                <label for="" class="control-label">副标题(不超过20字)：</label>
+                <p class="form-inline">
+                  <input type="text" id="s_title_edit" name="s_title" class="input-xlarge" value="<%= @i_life_memoir.s_title %>" maxlength=20 maxlength=20>
+                </p>
+                <label for="" class="control-label">摘要：</label>
+                <p class="form-inline">
+                  <textarea id="summary_edit" name="summary" class="input-xlarge" rows="3" maxlength=50 maxlength=50><%= @i_life_memoir.summary %></textarea>
+                </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="span5">
+    <div class="clearfix form_edit">
+      <div class="">
+        <div class="media">
+          <div class="media-body">
+                <label for="" class="control-label">链接：</label>
+                <p class="form-inline">
+                  <input type="text" id="url_edit" name="url" class="input-xlarge" value="<%= @i_life_memoir.url %>" placeholder="请输入链接">
+                  <a href="javascript:;" class="help-inline btn btn-link" onclick="open_link();return false;">检测链接</a>
+                </p>
+                <label for="" class="control-label">视频(格式flv)</label>
+                <p class="form-inline">
+                  <span class="btn fileinput-button btn-mini btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>上传视频</span>
+                    <input type="file" name="video" id="video_edit">
+                  </span>
+                  <div id="filename_edit"><%= @i_life_memoir.video_file_name %></div>
+                </p>
+                <label for="" class="control-label">图片(尺寸340x240)</label>
+                <p class="form-inline">
+                  <span class="btn fileinput-button btn-mini btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>上传图片</span>
+                    <input type="file" name="files" id="files_edit">
+                  </span>
+                </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

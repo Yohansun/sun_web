@@ -1,51 +1,89 @@
-<%- content_for :head do  %>
-    <%= stylesheet_link_tag "2013base","2013upload" %>
-	<style type="text/css">
-		.servers{background:url(<%= asset_path 'servers.jpg' %>) no-repeat;position:relative;height:671px;margin-bottom:90px;}
-		.servers_btn{position:absolute;bottom:-49px;right:-20px;display:block;}
-		.server_video{padding-top:165px;width:745px;height:411px;margin:0 auto;}
-	</style>
-<%- end %>
-
-<%- content_for :tail do %>
-	<%= javascript_include_tag "2013main.js", "/Scripts/swfobject_modified.js" %>
-	<script type="text/javascript">
-      swfobject.registerObject("FLVPlayer");
-   </script>
-<%- end %>
-
-<div class="wrapper servers">
-	<div class="server_video" align="center">
-		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="746" height="412" id="FLVPlayer">
-		<param name="movie" value="/flash/FLVPlayer_Progressive.swf" />
-		<param name="quality" value="high" />
-		<param name="wmode" value="opaque" />
-		<param name="scale" value="noscale" />
-		<param name="salign" value="lt" />
-		<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/flash/servers_4min&amp;autoPlay=false&amp;autoRewind=false" />
-		<param name="swfversion" value="8,0,0,0" />
-		<!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-		<param name="expressinstall" value="/Scripts/expressInstall.swf" />
-		<!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-		<!--[if !IE]>-->
-		<object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="746" height="412">
-		<!--<![endif]-->
-		<param name="quality" value="high" />
-		<param name="wmode" value="opaque" />
-		<param name="scale" value="noscale" />
-		<param name="salign" value="lt" />
-		<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/flash/servers_4min&amp;autoPlay=false&amp;autoRewind=false" />
-		<param name="swfversion" value="8,0,0,0" />
-		<param name="expressinstall" value="/Scripts/expressInstall.swf" />
-		<!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-		<div>
-		<h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
+<div class="container">
+		<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>免费为您提供全方位的家装咨询和服务</small></h3>
+		<div class="clearfix">
+			<div class="footer_banner pull-left"><a href="<%=@i_banner.position(1).first.url%>"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_670x85)%>"></a></div>
+			<div class="footer_banner pull-right"><a href="<%=@i_banner.position(2).first.url%>"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_310x85)%>"></a></div>
 		</div>
-		<!--[if !IE]>-->
-		</object>
-		<!--<![endif]-->
-		</object>
+		<ul class="breadcrumb">
+			<li><a href="#">首页</a> > </li>
+			<li><a href="#">刷新生活</a> > </li>
+			<li class="active">刷新服务</li>
+		</ul>
+		<hr class="border2 border2_mt2">
+
+		<div class="clearfix refresh_video">
+			<div class="unstyled map-left index_main pull-left">
+				<div class="refresh_bg">
+					<h3 class="refresh_l_tit">
+						<img class="pull-right" src="<%=asset_path 'manage/refresh_tel.png'%>">
+						立邦 刷新服务
+					</h3>
+					<div class="video">
+						<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="600" height="331" id="FLVPlayer">
+							<param name="movie" value="/flash/FLVPlayer_Progressive.swf">
+							<param name="quality" value="high">
+							<param name="wmode" value="opaque">
+							<param name="scale" value="noscale">
+							<param name="salign" value="lt">
+							<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/flash/refresh-3-mins&amp;autoPlay=false&amp;autoRewind=false">
+							<param name="swfversion" value="8,0,0,0">
+							<!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+							<param name="expressinstall" value="Scripts/expressInstall.swf">
+							<!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+							<!--[if !IE]>-->
+							<object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="600" height="331">
+								<!--<![endif]-->
+								<param name="quality" value="high">
+								<param name="wmode" value="opaque">
+								<param name="scale" value="noscale">
+								<param name="salign" value="lt">
+								<param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/flash/refresh-3-mins&amp;autoPlay=false&amp;autoRewind=false">
+								<param name="swfversion" value="8,0,0,0">
+								<param name="expressinstall" value="Scripts/expressInstall.swf">
+								<!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+								<div>
+									<h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+									<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player"></a></p>
+								</div>
+								<!--[if !IE]>-->
+							</object>
+							<!--<![endif]-->
+						</object>
+					</div>
+					<p class="text-center">
+						<a href="http://shuaxinfuwu.nipponpaint.com.cn/" target="_blank" class="refresh_video_btn"></a>
+					</p>
+				</div>
+				<div class="refresh_banner">
+					<a href="<%=@i_banner.position(3).first.url%>"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_670x85)%>"></a>
+				</div>
+			</div>
+			<div class="pull-right">
+				<ul class="unstyled map-right index_main js-img_show">
+					<li class="clearfix refresh_r_tit">
+						<a href="<%=@decoration_color_scheme_url.url if @decoration_color_scheme_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+						<strong class="pull-left">装修色彩配搭</strong>					
+					</li>
+					<% @decoration_color_scheme.each_with_index do |dcs,index| %>
+					<li class="map-r1 dott1 <%="active" if index == 0%>">
+              <i ></i>
+              <strong class="js-title"><%=dcs.title%></strong><br>
+              <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+          </li>
+					<% end %>
+				</ul>
+				<ul class="unstyled map-right index_main js-img_show">
+					<li class="clearfix refresh_r_tit">
+						<a href="<%=@rrdr_url.url if @rrdr_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+						<strong class="pull-left">装修效果图精华推荐</strong>					
+					</li>
+          <% @rrdrs.each_with_index do |rr,index| %>
+					<li class="map-r1 dott1 <%="active" if index == 0%>">
+              <i></i>
+							<strong class="js-title"><%=rr.title%></strong><br>
+							<a href="<%=rr.url%>" class="<%="hide" if index != 0%> js-img"><img src="<%=rr.file.url(:list_155x115)%>" alt="" /></a>
+					</li>
+          <% end %>
+				</ul>
+			</div>
 		</div>
-	<a class="servers_btn" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/"><img src="<%= asset_path 'servers_btn.png' %>"></a>
-</div><!--ends-->

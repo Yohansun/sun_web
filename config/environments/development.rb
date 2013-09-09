@@ -16,20 +16,37 @@ Icolor::Application.configure do
   config.cache_store = :redis_store
 
   # Don't care if the mailer can't send
-  # config.action_mailer.delivery_method       = :smtp
+  #============yes email===
+  # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.perform_deliveries    = true
   # config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.default :charset => "utf-8"
-  # config.action_mailer.default_url_options               = { :host => "localhost:3000" }
+  # config.action_mailer.default_url_options               = { :host => "www.icolor.com.cn" }
   # config.action_mailer.delivery_method                   = :smtp
   # config.action_mailer.smtp_settings                     = {
-  #     :address              => "smtp.gmail.com",
+  #     :address              => "smtp.sendgrid.net",
   #     :port                 => 587,
-  #     :domain               => 'baci.lindsaar.net',
-  #     :user_name            => 'changhong@networking.io',
-  #     :password             => 'YCH198875',
+  #     :domain               => 'icolor.com.cn',
+  #     :user_name            => 'nio',
+  #     :password             => 'sendgridqqq',
   #     :authentication       => 'plain',
   #     :enable_starttls_auto => true }
+
+#============no eamil===
+  config.action_mailer.delivery_method       = :smtp
+  config.action_mailer.perform_deliveries    = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default_url_options               = { :host => "localhost:3000" }
+  config.action_mailer.delivery_method                   = :smtp
+  config.action_mailer.smtp_settings                     = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => 'baci.lindsaar.net',
+      :user_name            => 'changhong@networking.io',
+      :password             => 'YCH198875',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation                      = :log
@@ -46,9 +63,10 @@ Icolor::Application.configure do
 
   # Do not compress assets
   config.assets.compress                                 = false
+  config.assets.enabled                                  = true
 
   # Expands the lines which load the assets
-  config.assets.debug                                    = true
+  config.assets.debug                                    = false
 
   config.assets.prefix = "/dev-assets"
 end

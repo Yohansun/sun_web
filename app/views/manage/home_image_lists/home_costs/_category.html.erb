@@ -1,0 +1,31 @@
+<%=form_tag update_category_home_costs_path, :method=>:post, :class=>"home_image_list_serach_form" do %>
+	<h4>按户型
+	    <span class="expand-image">收缩</span>
+	</h4>
+	<div>
+		<input type="submit" class="pull-left btn btn-small cate_save" value="保存">
+		<table width='100%' class='js-tab-image-childen'>
+			<% @categories.in_groups_of(8, false) do |groups| %>
+		  	<tr>
+		  		<% groups.each do |category| %>
+		  		  <% unless @home_categories.include?(category.id) %>
+			    		<td class="type_category">
+			    			<label>
+				    			<%= check_box_tag "tags[]", category.id, false,:class => "checkbox", :"data-image-id" => category.id %>&nbsp;
+				    			<span class='lbl'><%= category.title %></span>
+			    			</label>
+			    		</td>
+			    	<% else %>
+			    	  <td class="type_category">
+			    			<label>
+				    			<%= check_box_tag "tags[]", category.id, true,:class => "checkbox", :"data-image-id" => category.id %>&nbsp;
+				    			<span class='lbl'><%= category.title %></span>
+			    			</label>
+			    		</td>
+			    	<% end %>
+		  		<% end %>
+		  	</tr>
+			<% end %>
+		</table>
+	<div>
+<% end %>

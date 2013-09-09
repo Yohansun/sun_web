@@ -1,0 +1,16 @@
+<% @news.each_with_index do |new, index| %>
+  <form style="margin-left: 43px;margin-top: 20px;">
+    <fieldset>
+      <strong>排序 <%= new.order_id %></strong>
+      <h2 class="help-block"><%= new.try(:title) %></h2>
+      <div class="clearfix">
+        <span class=""><%= new.try(:content) %></span>
+        <a href="<%= edit_owner_enter_path(new) %>" class="btn btn-link">编辑</a>
+      </div>
+      <address>
+  	  <a class="help-block" href="<%= new.try(:link) %>"><%= new.try(:link) %></a>
+  	</address>
+    </fieldset>
+  </form>
+  <hr style="display: block;-webkit-margin-before: 0.5em;-webkit-margin-after: 0.5em;-webkit-margin-start: auto;-webkit-margin-end: auto;border-style: inset;border-width: 1px;}">
+<% end %>

@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 class GiftsController < ApplicationController
+  layout "home_manage"
 	def index
 
         #注册有奖             

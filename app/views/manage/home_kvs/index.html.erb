@@ -1,0 +1,217 @@
+<%- content_for :tail do %>
+	<%= javascript_include_tag "jquery.uploadify.js" %>
+	<script type="text/javascript">
+		<%- @kv_id = @kv.nil? ? 0 : @kv.id %>
+		$(function(){
+			$('#link1').click(function(){
+				window.open($('#form-field-2').val());
+			});
+			$('#link2').click(function(){
+				window.open($('#form-field-3').val());
+			});
+
+			$('tr.map_ids').each(function(i,v){
+				console.log($(v).data('map-id'));
+			});
+			(function($) {
+        $('#form-field-1').bind('keydown keyup', function() {
+          var $this = $(this);
+          var total = $this.data('total');
+          if (!total)
+            return;
+          var len = total - $this.val().length;
+          if (len < 0) {
+            $this.val($this.val().slice(0, total));
+          }
+        });
+      }($));
+
+			$('.save_button').click(function(){
+				var $title = $('#form-field-1').val(),
+						$url = $('#form-field-2').val();
+				$.ajax({
+					type: "POST",
+          url: "<%= kv_update_home_kv_path(@kv_id) %>",
+          data: {title : $title, url : $url}
+				});
+			});
+			$('.save_button_next').click(function(){
+				var $title = $('#form-field-1').val(),
+						$url = $('#form-field-2').val();
+				$.ajax({
+					type: "POST",
+          url: "<%= kv_update_home_kv_path(@kv_id) %>",
+          data: {title : $title, url : $url, next : <%= params[:sort].present? ? params[:sort] : 0 %>}
+				});
+			});
+
+			$('.change_sort').click(function(){
+				var $position = $('.change_select').val();
+				$.ajax({
+					type: "POST",
+          url: "<%= kv_update_home_kv_path(@kv_id) %>",
+          data: {sort : <%= params[:sort].present? ? params[:sort] : 0 %>, position : $position}
+				});
+			});
+		});
+	</script>
+<script type="text/javascript">
+  <%- session_key = Rails.application.config.session_options[:key] -%>
+
+  (function($){
+    $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    //skipDefault : ['onSelect'],
+    progressData : 'percentage',
+    buttonText : "<a class='btn btn-small'>上传</a>",
+    fileTypeDesc : '图片文件',
+    fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+    successTimeout : 6000,
+    fileSizeLimit : '3MB',
+    // uploadLimit : 1,
+    width : 88,
+    height : 34,
+    multi : true,
+    auto : true,
+    checkExisting : false,
+    transparent : true,
+    uploader : '/manage/home_kvs?sort=<%= params[:sort] %>',
+    //buttonText : '选择文件',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      if (dat.result == 'success') {
+        $.getScript(dat.upload + "?for=design", function(){});
+      }else{
+        alert("图片上传失败");
+      };
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    },
+    onUploadError : function(file, errorCode, errorMsg, errorString) {
+      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+    },
+    onUploadStart : function(){
+      //$("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      //$("#upload_going").hide();
+    }
+  });
+  })($);
+
+</script>
+<%- end %>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li class="<%= 'active_red' if params[:sort] == '1' %>"><%= link_to '第1帧', home_kvs_path(sort: 1) %></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:sort] == '2' %>"><%= link_to '第2帧', home_kvs_path(sort: 2) %></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:sort] == '3' %>"><%= link_to '第3帧', home_kvs_path(sort: 3) %></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:sort] == '4' %>"><%= link_to '第4帧', home_kvs_path(sort: 4) %></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:sort] == '5' %>"><%= link_to '第5帧', home_kvs_path(sort: 5) %></li>
+  </ul>
+</div>
+<%- if params[:sort].present? %>
+<div class="row-fluid">
+	<div style="margin:15px;">
+		<div class="span7">
+			<p>
+				<a class="btn btn-small" id="upload_photo">上传</a><b style="color:red;">图片必须是700x345</b>
+			</p>
+			<div class="load-bar load-content" id="uploads">
+				<%- if @upload.present? %>
+					<%= render :partial => "kv_upload", :collection => @upload -%>
+				<%- else %>
+					<%= render :partial => 'kv_upload_2' %>
+				<%- end %>
+			</div>
+
+			<div class="widget-main">
+				<a class="btn btn-small save_button">保存</a>
+				<a class="btn btn-small save_button_next">保存并跳到下一帧</a>
+				<a href="<%= kv_insert_home_kvs_path(insert: params[:sort]) %>" class="btn btn-small pull-right" data-confirm="此操作会删除现在的第5帧,是否要继续?" data-method="post">插入一帧</a>
+				<a class="btn btn-small change_sort pull-right" style="margin-right:5px;">转换</a>
+				<select class="pull-right change_select" style="margin-right:5px;">
+					<option value="">请选择想要转换的帧数</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="span4">
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h5>编辑信息</h5>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<form class="form-inline">
+								<div class="control-group">
+									<label class="control-label" for="form-field-1">标题</label>
+									<div class="controls">
+										<input type="text" id="form-field-1" data-total='8' value="<%= @kv.title if @kv %>">
+										<span class="help-inline" style="color:red;">标题最多输入8个汉字</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="form-field-2">链接</label>
+									<div class="controls">
+										<input type="text" id="form-field-2" value="<%= @kv.url if @kv %>">
+										<a href="javascript:;" class="help-line" id="link1" target="_blank">检测链接</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="space-6"></div>
+
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-header widget-header-small">
+						<h5 class="lighter">编辑button</h5>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<%= form_for(KvMap.new, :html => {:class => "form-inline"}, remote: true ) do |f| %>
+								<%= f.hidden_field :home_kv_id, value: @kv.nil? ? nil : @kv.id, id: 'hidden_map_id' %>
+								<label>位置:</label>
+								X&nbsp;<%= f.text_field :x_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								Y&nbsp;<%= f.text_field :y_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								W&nbsp;<%= f.text_field :width, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								H&nbsp;<%= f.text_field :high, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+								<div class="clear"></div><br />
+
+								<label class="control-label">链接</label>
+								<%= f.text_field :url, value: nil, id: 'form-field-3' %>
+								<a href="javascript:;" class="help-line" id="link2">检测链接</a>
+								<div class="clear"></div>
+								<%= f.submit '添加', class: 'btn btn-info btn-small' %>
+							<%- end %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%= render :partial => 'maps', locals: { maps: @kv.nil? ? [] : @kv.kv_maps} %>
+		</div>
+	</div>
+</div>
+<%- end %>

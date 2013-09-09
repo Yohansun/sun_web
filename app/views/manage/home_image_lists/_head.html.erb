@@ -1,0 +1,32 @@
+<div id="breadcrumbs">
+ <ul class="breadcrumb">
+  <li><a href="home_heads">图片头条</a><span>|</span></li>
+  <li><a href="home_liter_heads">文字头条</a><span>|</span></li>
+  <li class="active"><a href="home_image_lists"><b style='color:red;'>图片列表</b></a></li>
+ </ul>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<%=form_tag search_type_home_image_lists_path, :method=>:get, :class=>"home_image_list_serach_form" do %>
+			<select class="chosen-select" id="form-field-select-3" style="margin-top: 9px;" name="design_type">
+				<% if controller_name == 'home_types' || controller_name == "home_image_lists" %>
+				  <option value="home_type">装修户型</option>
+				<% elsif controller_name == 'home_styles'%>
+				  <option value="home_style">装修风格</option>
+				<% elsif controller_name == 'home_costs'%>
+				  <option value="home_cost">装修费用</option>
+				<% elsif controller_name == 'home_spaces'%>
+				  <option value="home_space">装修空间</option>
+				<% elsif controller_name == 'home_colors'%>
+				  <option value="home_color">装修色彩</option>
+				<% end %>
+				<% @lists.each do |list| %>
+				  <% unless controller_name == (list.value + "s") %>
+				  	<option value="<%= list.value%>"><%= list.title%></option>
+				  <% end %>
+				<% end %>
+			</select>
+			<input type='submit' class="button confirm_buttton" value='确定'/>
+		<% end %>
+	</div>
+</div>

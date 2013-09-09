@@ -1,0 +1,27 @@
+<script type="text/javascript">
+$(function() {
+	var voteMax = 6
+	// var voteMin = 3
+	var errorMsgMax = "最多能选" + voteMax + "个";
+	// var errorMsgMin = "最少能选" + voteMin + "个";
+	$("input:checkbox[id='category_ids_0']").each(function(){
+	  $(this).click(function(){
+	    var checkNum = $("input:checkbox[id='category_ids_0']:checked").length;
+	    if (checkNum > voteMax ) {
+	      $(this).attr("checked", false);
+	      alert(errorMsgMax);
+	    }
+	    //  else if(checkNum < voteMin ) {
+	    //   $(this).attr("checked","checked");
+	    //   alert(errorMsgMin);
+	    // }
+	  });
+	});
+});
+</script>
+<% @image_library_category.children.each do |cate| %>
+	<div class="inline">
+		<%= check_box_tag 'category_ids[]', cate.id, false, :id => "category_ids_0", :class => 'checkbox' %>
+		<label class="lbl" for="checkbox1"><%= cate.title %></label>
+	</div>
+<% end %>

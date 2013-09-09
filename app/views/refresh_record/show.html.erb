@@ -1,0 +1,88 @@
+<% content_for :head do -%>
+    <%#= stylesheet_link_tag "refresh_life/map", "style.css"  %>
+    <%= javascript_include_tag "exp/exp.js", "LinkageSelect/location.js", "LinkageSelect/LinkageSelect.js", "flowplayer-3.2.11.min.js" %>
+<% end -%>
+<div class="container refresh_main">
+	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
+	<ul class="breadcrumb">
+		<li><a href="/">首页</a> > </li>
+		<li><a href="#">刷新生活</a> > </li>
+		<li><a href="/refresh_record">刷新实录</a> > </li>
+		<li class="active">幸福生活 新的开始</li>
+	</ul>
+	<hr class="border2 border2_mt2">
+
+	<div class="clearfix refresh_lists refresh_video1">
+		<div class="unstyled map-left index_main pull-left">
+			<h4 class="video_title text-center">
+				<%= @life_memoir.title %>
+			</h4>
+			<div class="video text-center">
+				 <a href="<%= @life_memoir.video.url %>" style="display:block;width:600px;height:331px;margin:0 auto;" id="player"></a>
+				 <script language="JavaScript">
+					flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
+					 clip:  {
+					  autoPlay: false,
+					  autoBuffering: true
+					 }
+					});
+				</script>
+			</div>
+			<div class="refresh_banner">
+				<a href="#"><img src=<%= asset_path "refresh_life/refresh/refresh_banner.jpg" %>></a>
+			</div>
+		</div>
+		<div class="pull-right">
+			<ul class="unstyled map-right index_main js-img_show">
+					<li class="clearfix refresh_r_tit">
+						<a href="<%=@url if @url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+						<strong class="pull-left">最新大师作品</strong>					
+					</li>
+          <% @i_column_datas.each_with_index do |cd,index| %>
+					<li class="map-r1 dott1 <%="active" if index == 0%>">
+              <i class="icon-i16 icon-<%=index+1%>"></i>
+							<strong class="js-title"><%=cd.title%></strong><br>
+							<a href="#" class="<%="hide" if index != 0%> js-img"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+					</li>
+          <% end %>
+				</ul>
+
+			<div class="chann_warp chann1_right map-right index_main">
+				<div class="media media_chann">
+					<a class="pull-left" href="/design_images/lists">
+						<i class="icon-chann icon-chann_imgbase"></i>
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><a class="media-heading_link_a" href="/images">装修图库</a></h4>
+						<p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+					</div>
+				</div>
+				<div class="media media_chann">
+					<a class="pull-left" href="/color_designs">
+						<i class="icon-chann icon-chann_match"></i>
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><a class="media-heading_link_a" href="/color_designs">色彩配搭</a></h4>
+						<p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+					</div>
+				</div>
+				<div class="media media_chann">
+					<a class="pull-left" href="/channel/refresh_service">
+						<i class="icon-chann icon-chann_fresh2"></i>
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><a class="media-heading_link_a" href="/channel/refresh_service">立邦刷新服务</a></h4>
+						<p class="media_con nomargin">对话顶尖设计大师，提升家装专业眼界！</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="index_main refresh_news mt10 clearfix">
+		<%= render :partial => "foot_select" %>
+		<div class="pull-right"><a href="#"><img src="<%= asset_path "refresh_life/refresh/refresh_list_banner3.jpg" %>"></a></div>
+	</div>
+</div>
+<% content_for :tails do -%>
+    
+<% end -%>

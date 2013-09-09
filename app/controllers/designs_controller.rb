@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'zip/zip'
 class DesignsController < ApplicationController
+  layout "home_manage"
   before_filter :find_user
   before_filter :find_design, :only => [:upload, :edit]
 

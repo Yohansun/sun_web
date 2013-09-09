@@ -1,8 +1,8 @@
 <div class="file-list clear upload_item" id="story_image<%= upload.id %>">
-	<a href="#" class="pull-left">
+	<a href="#" class="pull-left" style="margin-top: 16px;">
 		<%= image_tag upload.file.url(:thumb)%>
 	</a>
-		<p class="pull-left"><%= upload.file.original_filename %></p>
-		<%= hidden_field_tag "story_image_id", upload.id %>
-		<button type="button" class="btn" onclick="remote(<%= upload.id %>)">删除</button>	
+	<p class="pull-left" style="margin-top: 16px;"><%= upload.file.original_filename %></p>
+	<%= hidden_field_tag "story_image_id", upload.id %>
+	<button type="button" class="btn" onclick="remote(<%= upload.id %>)">删除</button>	
 </div><!--file-list ends-->

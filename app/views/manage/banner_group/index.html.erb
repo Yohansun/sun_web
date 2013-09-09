@@ -1,0 +1,109 @@
+<script type="text/javascript">
+$(function(){
+	$('#new_group_pannel').hide();
+
+	$('.js-edit_tags').hide();
+	$('.js-btn').click(function(){
+		$(this).parents('fieldset').hide();
+		$(this).parents('fieldset').siblings('fieldset').show();
+	})
+
+	$('#new_group').on('click', function(e){
+		e.preventDefault();
+		$('#new_group_pannel').show();
+	});
+
+  $('#new_group_pannel form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+    alert("保存成功");
+    var url = $(this).data('redirect_url');
+    window.location.href = url;
+  }).bind("ajax:error", function(evt, data) {
+    alert(data.responseText);
+  });
+
+  $('.show_tags #link_delete_group').bind('ajax:success', function(evt, data) {
+  	if (data.result == "error") {
+  		alert("删除失败! 必须先清空当前组的banner");
+  		return false;
+  	}
+    alert("删除成功");
+    var url = "/manage/banner_group";
+    window.location.href = url;
+  }).bind("ajax:error", function(evt, data) {
+    alert(data.responseText);
+  });
+
+});
+</script>
+<div class="main">
+	<button id="new_group" class="btn btn-small btn-primary">新建组</button>
+
+	<div id="new_group_pannel" class="clearfix row-fluid">
+		<div class="widget-main">
+			<div class="span1"></div>
+			<%= form_tag('banner_group/save_data', :class => 'form-inline', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_group") do %>
+				<input type="text" name="name" class="input-large">
+				<%= button_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-info btn-small' %>
+			<% end %>
+		</div>
+	</div>
+	<hr>
+
+<% @i_banner_groups.each do |i_banner_group| %>
+	<%= form_tag('banner_group/update_data?update=true', :class => 'form-inline', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_group") do %>
+	<div class="tags_setting span12">
+		<fieldset class="show_tags js-show_tags">
+			<div class="span1" data-toggle-btn="toggle">
+				<a href="javascript:;" class="js-btn">重命名组</a><br>
+				<%= link_to("删除组", banner_group_destroy_path(id: i_banner_group.id),
+	                          :data => { :confirm => "你确定要删除组?" },
+	                          :method => :delete,
+	                          :class => 'js-gremove',
+	                          :'data-remote' => true,
+	                          :remote => true,
+	                          :'data-type' => 'json',
+	                          :id => 'link_delete_group') %>
+			</div>
+
+			<div class="clearfix">
+				<strong class="span3 lead" data-toggle-btn="toggle"><%= i_banner_group.name %></strong>
+				<span class="span2" style="display:none" data-toggle-btn="toggle"><input type="text" placeholder=""></span>
+				<span class="span3" style="line-height:30px;">共<%= i_banner_group.i_banners.count %>个banner</span>
+			</div>
+
+		</fieldset>
+		<fieldset class="edit_tags js-edit_tags">
+			<input type="text" name="name" placeholder="" value="<%= i_banner_group.name %>">
+			<%= hidden_field_tag :group_id, i_banner_group.id %>
+			<div class="span1">
+			<%= submit_tag "保存", data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %><br/>
+				<a href="javascript:;" class="js-btn">取消</a>
+			</div>
+		</fieldset>
+
+		<div class="span12">
+			<div class="span1"></div>
+			<div class="span11 group_m nom">
+				<ul class="thumbnails">
+				<% i_banner_group.i_banners.each do |i_banner| %>
+					<li class="span2">
+						<div class="thumbnail well well-small nom">
+							<span class="block text-success"><%= i_banner.photo_name %></span>
+							<span class="block"><%= i_banner.page_name %></span>
+							<span class="block"><%= i_banner.size %></span>
+							<span class="block">
+								[<a href="<%= link_banner_show(i_banner.page_name, i_banner.position) %>" target="_blank">查看</a>]
+								[<a href="<%= link_banner_show(i_banner.page_name, i_banner.position) %>" target="_blank">编辑</a>]
+							</span>
+						</div>
+					</li>
+				<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<hr class="span12">
+	<% end %>
+<% end %>
+
+</div>
