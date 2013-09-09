@@ -80,7 +80,7 @@
 					<% @master_design_datas.each_with_index do |data, index| %>
 					  <% if index == 0 %>
 					    <li class="map-r1 dott1">
-								<a href="#">
+								<a href="<%= data.try(:url)%>">
 									<strong><%= data.title %></strong>
 									<%= image_tag data.file.url  %>
 								</a>

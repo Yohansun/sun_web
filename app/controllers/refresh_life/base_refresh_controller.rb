@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RefreshLife::BaseRefreshController < ApplicationController
 	layout "home_manage"
 	before_filter :get_data
@@ -9,6 +10,7 @@ class RefreshLife::BaseRefreshController < ApplicationController
     @design_datas = IColumnData.where(i_column_type_id: 2).limit 5
     @weekly_star_datas = IColumnData.where(i_column_type_id: 3).limit 5
     @master_design_datas = IColumnData.where(i_column_type_id: 1).limit 5
+    @i_banner = IBanner.page_name("刷新实录")
   end
 
 end
