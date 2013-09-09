@@ -95,8 +95,9 @@
           <li class="<%= 'active noborder' if controller_name == 'design_images' %>">
             <a href="<%= lists_design_images_path %>" target="_blank">装修图库</a>
               <ul class="subnav">
-                <li><a href="<%= lists_design_images_path %>">图库首页</a></li>
-                <!-- <li><a href="#">图库专题</a></li> -->
+                <li><a href="<%= lists_design_images_path %>">图库精华</a></li>
+                <li><a href="/images">装修图库大全</a></li>
+                <!-- <li><a href="#">装修案例专题</a></li> -->
               </ul>
           </li>
           <li class="<%= 'active noborder' if controller_name == 'weekly_stars' || controller_name == 'designs' || controller_name == 'color_designs' || controller_name == 'inspirations' %>">
@@ -178,9 +179,9 @@
         </li>
         <li>
           <i class="icon-map icon-map2"></i>
-          <a href="/images"><strong>装修图库</strong></a>
-          <a href="/images">家装设计</a>
-          <a href="/images">装修部件</a>
+          <a href="<%= lists_design_images_path %>"><strong>图库精华</strong></a>
+          <a href="/images">装修图库大全</a>
+          <!-- <a href="#">装修案例专题</a> -->
         </li>
         <li>
           <i class="icon-map icon-map3"></i>
