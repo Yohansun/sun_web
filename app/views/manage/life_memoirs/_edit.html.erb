@@ -51,13 +51,13 @@
 
     $('#video_edit').change(function(){
        var filename = $(this).val().toLowerCase();;
-       if (!/\.(flv)$/.test(filename)) { 
-          alert("请选择文件类型为flv的文件!"); 
+       if (!/\.(flv)$/.test(filename)) {
+          alert("请选择文件类型为flv的文件!");
           this.value = "";
-          return false; 
+          return false;
        } else {
         $('#filename_edit').html(filename);
-       } 
+       }
     });
 
   });
@@ -127,7 +127,7 @@
                     <span>上传视频</span>
                     <input type="file" name="video" id="video_edit">
                   </span>
-                  <div id="filename_edit"><%= @i_life_memoir.video_file_name %></div>
+                  <div id="filename_edit"><%= @i_life_memoir.video_name %></div>
                 </p>
                 <label for="" class="control-label">图片(尺寸340x240)</label>
                 <p class="form-inline">

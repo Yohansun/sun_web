@@ -1,5 +1,5 @@
 class ILifeMemoir < ActiveRecord::Base
-  
+
   has_attached_file :file,
 		:styles => {
 				:list_340x240 => "340x240#",

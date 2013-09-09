@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Manage::LifeMemoirsController < Manage::BaseController
-	
+
   def index
   	data_start = params[:data_start]
   	data_end = params[:data_end]
@@ -47,7 +47,10 @@ class Manage::LifeMemoirsController < Manage::BaseController
   	@i_life_memoir.url = url
   	@i_life_memoir.summary = summary
   	@i_life_memoir.file = params[:files].tempfile if params[:files].present?
-  	@i_life_memoir.video = params[:video].tempfile if params[:video].present?
+    if params[:video].present? && params[:video].original_filename
+      @i_life_memoir.video = params[:video].tempfile
+      @i_life_memoir.video_name = params[:video].original_filename
+    end
   	if @i_life_memoir.save
 			redirect_to request.referer if params[:files].present? || params[:video].present?
   		render :json => {notify: '上传成功', referer: request.referer}, :layout => false if params[:files].blank? && params[:video].blank?
@@ -69,7 +72,10 @@ class Manage::LifeMemoirsController < Manage::BaseController
   	@i_life_memoir.url = url
   	@i_life_memoir.summary = summary
   	@i_life_memoir.file = params[:files].tempfile if params[:files].present?
-  	@i_life_memoir.video = params[:video].tempfile if params[:video].present?
+    if params[:video].present? && params[:video].original_filename
+    	@i_life_memoir.video = params[:video].tempfile
+      @i_life_memoir.video_name = params[:video].original_filename
+    end
   	if @i_life_memoir.save
 			redirect_to request.referer if params[:files].present? || params[:video].present?
   		render :json => {notify: '上传成功', referer: request.referer}, :layout => false if params[:files].blank? && params[:video].blank?
