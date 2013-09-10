@@ -41,7 +41,7 @@ class Manage::LifeInfosController < Manage::BaseController
   	@i_life_info.title = title
   	@i_life_info.url = url
   	@i_life_info.summary = summary
-  	@i_life_info.file = params[:files].tempfile if params[:files].present?
+  	@i_life_info.file = params[:files] if params[:files].present?
   	if @i_life_info.save
 			redirect_to request.referer if params[:files].present?
   		render :json => {notify: '上传成功', referer: request.referer}, :layout => false if params[:files].blank?
@@ -60,7 +60,7 @@ class Manage::LifeInfosController < Manage::BaseController
   	@i_life_info.title = title
   	@i_life_info.url = url
   	@i_life_info.summary = summary
-  	@i_life_info.file = params[:files].tempfile if params[:files].present?
+  	@i_life_info.file = params[:files] if params[:files].present?
   	if @i_life_info.save
 			redirect_to request.referer if params[:files].present?
   		render :json => {notify: '上传成功', referer: request.referer}, :layout => false if params[:files].blank?

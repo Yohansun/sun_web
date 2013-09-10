@@ -36,7 +36,7 @@ class Manage::UniversalColumnController < Manage::BaseController
   	id = params[:id]
 
   	@i_column_data = IColumnData.new
-		@i_column_data.file = params[:files].tempfile if params[:files].present?
+		@i_column_data.file = params[:files] if params[:files].present?
     @i_column_data.title = title
     @i_column_data.rank = 1
 		@i_column_data.url = url

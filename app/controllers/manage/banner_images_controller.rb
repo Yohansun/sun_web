@@ -23,7 +23,7 @@ class Manage::BannerImagesController < Manage::BaseController
     result = "上传失败"
     if @i_banner
       if params[:file].present? && params[:file].original_filename
-    		@i_banner.file = params[:file].tempfile
+    		@i_banner.file = params[:file]
         @i_banner.photo_name = params[:file].original_filename.truncate(10, :omission => '').split('.').first
       end
   		@i_banner.page_name = page_name
