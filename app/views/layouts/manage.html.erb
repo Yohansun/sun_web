@@ -68,7 +68,7 @@
   <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a href="<%= manage_root_path(sort: 1) %>" class="brand">2013新版icolor</a>
+          <a href="<%= manage_root_path(sort: 1) %>" class="brand"><% if controller_name == "channel_tips"%>2013新版icolor 业主通道<% else %>2013新版icolor<% end %></a>
           <ul class="nav ace-nav pull-right">
 
             <li class="grey">
