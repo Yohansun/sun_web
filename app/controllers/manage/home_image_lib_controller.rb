@@ -17,7 +17,7 @@ class Manage::HomeImageLibController < Manage::BaseController
   def upload_image
   	photo_id =  params[:photo_id]
   	@home_image_lib_photo = HomeImageLibPhoto.find_by_id(photo_id)
-		@home_image_lib_photo.file = params[:file].tempfile if params[:file].present?
+		@home_image_lib_photo.file = params[:file] if params[:file].present?
 		@home_image_lib_photo.title = params[:title] if params[:title].present?
 		@home_image_lib_photo.url = params[:url] if params[:url].present?
 		@home_image_lib_photo.vote = params[:vote] if params[:vote].present?

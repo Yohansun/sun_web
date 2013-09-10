@@ -46,9 +46,9 @@ class Manage::LifeMemoirsController < Manage::BaseController
   	@i_life_memoir.s_title = s_title
   	@i_life_memoir.url = url
   	@i_life_memoir.summary = summary
-  	@i_life_memoir.file = params[:files].tempfile if params[:files].present?
+  	@i_life_memoir.file = params[:files] if params[:files].present?
     if params[:video].present? && params[:video].original_filename
-      @i_life_memoir.video = params[:video].tempfile
+      @i_life_memoir.video = params[:video]
       @i_life_memoir.video_name = params[:video].original_filename
     end
   	if @i_life_memoir.save
@@ -71,9 +71,9 @@ class Manage::LifeMemoirsController < Manage::BaseController
   	@i_life_memoir.s_title = s_title
   	@i_life_memoir.url = url
   	@i_life_memoir.summary = summary
-  	@i_life_memoir.file = params[:files].tempfile if params[:files].present?
+  	@i_life_memoir.file = params[:files] if params[:files].present?
     if params[:video].present? && params[:video].original_filename
-    	@i_life_memoir.video = params[:video].tempfile
+    	@i_life_memoir.video = params[:video]
       @i_life_memoir.video_name = params[:video].original_filename
     end
   	if @i_life_memoir.save

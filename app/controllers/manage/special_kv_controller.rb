@@ -9,7 +9,7 @@ class Manage::SpecialKvController < Manage::BaseController
     @kv = HomeKv.where(position: nil).first
     result = "上传失败"
     if @kv
-  		@kv.file = params[:file].tempfile if params[:file].present?
+  		@kv.file = params[:file] if params[:file].present?
     	if @kv.save
     		if params[:file].present?
   				result = "上传成功"

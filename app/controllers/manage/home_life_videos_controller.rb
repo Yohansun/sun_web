@@ -19,7 +19,7 @@ class Manage::HomeLifeVideosController < Manage::BaseController
     @home_life_video = HomeLifeVideo.find_by_id(@id)
     result = "上传失败"
     if @home_life_video
-  		@home_life_video.file = params[:files].tempfile if params[:files].present?
+  		@home_life_video.file = params[:files] if params[:files].present?
       @home_life_video.title = title
       @home_life_video.rank = rank
   		@home_life_video.url = url

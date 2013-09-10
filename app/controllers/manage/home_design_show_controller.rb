@@ -25,7 +25,7 @@ class Manage::HomeDesignShowController < Manage::BaseController
     @home_design_show_count = HomeDesignShow.where(design_type: design_type).where("position <> 0").count
     if @home_design_show_count < 4
     	@home_design_show = HomeDesignShow.new
-  		@home_design_show.file = params[:file].tempfile if params[:file].present?
+  		@home_design_show.file = params[:file] if params[:file].present?
   		@home_design_show.design_type = design_type
   		@home_design_show.position = -1
     	if @home_design_show.save
