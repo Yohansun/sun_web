@@ -42,7 +42,7 @@
               <p class="form-inline">
                   <div class="fileupload-buttonbar">
                       <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-primary' %>
-                      <a href="/manage/universal_column" class="btn btn-mini btn-primary">取消</a>
+                      <a href="/manage/universal_column/show?column_type=<%=@i_column_data.i_column_type_id%>" class="btn btn-mini btn-primary">取消</a>
                       <input type="checkbox" class="toggle">
                       <span class="fileupload-loading"></span>
                   </div>
