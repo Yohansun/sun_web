@@ -10,6 +10,7 @@ class RefreshLife::BaseRefreshController < ApplicationController
     @design_datas = IColumnData.where(i_column_type_id: 2).limit 5
     @weekly_star_datas = IColumnData.where(i_column_type_id: 3).limit 5
     @master_design_datas = IColumnData.where(i_column_type_id: 1).limit 5
+    @master_design_data_url = IColumnData.where(i_column_type_id: 1).first
     @i_banner = IBanner.page_name("刷新实录")
   end
 

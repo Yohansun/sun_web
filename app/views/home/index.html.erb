@@ -124,7 +124,7 @@ $(function(){
               <% @owner_entrys.each_with_index do |oe,index| %>
                 <li class="<%='noborder' if index == 1%>" style="height: auto;white-space: normal;overflow: visible;">
                   <h5 class="nomargin"><a href="<%= oe.link %>" target="_blank"><%= oe.title %></a></h5>
-                  <p class="nomargin" style="height: 72px;overflow: hidden;"><a ><%= truncate(oe.content, length: 60) %></a></p>
+                  <p class="nomargin" style="height: 72px;overflow: hidden;"><a ><%= truncate(oe.content, length: 90) %></a></p>
                 </li>
               <%  end %>
             </ul>
