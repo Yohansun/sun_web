@@ -1,0 +1,39 @@
+<% content_for :head do -%>
+    <%= stylesheet_link_tag "industry_news" %>
+<% end -%>
+<%- content_for :tail do %>
+     <!-- <div class="float_ads tr">
+      <a href="/gift"><img src="<%#rail= asset_path "float_ads.gif"%>"/></a><br/>
+      <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
+    </div> -->
+<%- end %>
+<div class="main industry_news">
+  <div class='sub_title tr'>
+    <img src="<%= asset_path "design/title_news.png" %>"/>
+  </div>
+  <div class="wrapper group news_detail">
+    <div class="shadow news_detail_main">
+      <div class="section">
+        <div class="title">
+          <h1><%= @article.title %></h1>
+          <div class="info clear" style="padding:0 280px;">
+            <div class="time">时间：<%= @article.published_at.to_date %></div>
+            <div id="ckepop" class="fr">
+              <span class="jiathis_txt">一键分享：</span>
+              <a class="jiathis_button_tsina"></a>
+              <a class="jiathis_button_kaixin001"></a>
+              <a class="jiathis_button_renren"></a>
+              <a class="jiathis_button_qzone"></a>
+              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+              <a class="jiathis_counter_style"></a>
+            </div>
+          </div>
+        </div>
+        <div class="news_content">
+          <%= raw @article.body %>
+        </div>
+      </div>
+    </div>
+    <!--sub_bot ends-->
+  </div>
+</div>

@@ -1,13 +1,24 @@
 <div class="content">
-  <div class="title"><h5><%= parent.name %> > 新闻</h5>
+  <% if  parent.name == "精彩资讯" %>
+    <div class="title"><h5>刷新生活 > 精彩资讯列表</h5>
+  <% else %>
+     <div class="title"><h5><%= parent.name %> > 新闻</h5>
+  <% end %>
     <div class="num"><%= link_to '新增新闻', new_subject_post_path(parent), :class => "redNum" %></div>
+    <div class="num"><a href="/manage/life_memoirs" class="redNum">返回刷新生活 </a></div>
 	<%- if can?(:manage, Subject) && parent -%>
     <div class="num"><%= link_to '结构管理', subjects_path(:parent_id => parent), :class => "redNum" %></div>
 	<%- end -%>
   </div>
   <!-- Dynamic table -->
   <div class="table">
-    <div class="head"><h5 class="iFrames">新闻列表</h5></div>
+    <div class="head">
+      <% if  parent.name == "精彩资讯" %>
+        <h5 class="iFrames">精彩资讯列表</h5>
+      <% else %>
+        <h5 class="iFrames">新闻列表</h5>
+      <% end %>
+    </div>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <thead>
       <tr>

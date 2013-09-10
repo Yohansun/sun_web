@@ -17,17 +17,17 @@
 			<% @i_life_infos.each do |info| %>
 				<div class="media tit_con">
 					<a class="pull-left media_a" href="javascript:void(0);">
-						<%= image_tag(info.file.try(:url), :class => "media-object" ) %>
+						<%= image_tag(info.preview_img	, :class => "media-object" ) %>
 						<!-- <img class="media-object" data-src="holder.js/64x64" src=<%#= asset_path "refresh_life/refresh/refresh_list1.jpg" %> > -->
 					</a>
 					<div class="media-body refresh_list">
 						<ul class="ul_dot clearfix nomargin">
 							<li>
-								<h5 class="nomargin"><a href="#" target="_blank"><%= info.title %></a></h5>
-								<p class="nomargin"><a href="#"><%= info.summary %></a></p>
+								<h5 class="nomargin"><a href="<%= refresh_list_path(info) %>" target="_blank"><%= info.title %></a></h5>
+								<p class="nomargin"><a href="<%= refresh_list_path(info) %>"><%= info.intro %></a></p>
 							</li>
 						</ul>
-						<div class="nomargin clearfix"><a class="btn_detail pull-left" href="<%= info.url %>">查看详情</a></div>
+						<div class="nomargin clearfix"><a class="btn_detail pull-left" href="<%= refresh_list_path(info) %>">查看详情</a></div>
 					</div>
 				</div>
 			<% end %>

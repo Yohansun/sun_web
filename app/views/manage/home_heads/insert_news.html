@@ -46,7 +46,7 @@
 
     <% @banners.each_with_index do |banner, index| %>
       <div class="clear-fix widget-main form-actions banner_edit<%= banner.id %>" id="bannner_edit_image<%= banner.id %>">
-      	<%= link_to "编辑", edit_home_liter_heads_path(order_id: banner.order_id), :class => "edit_fit_literal pull-left", :style => "width: 50px;" %>
+      	<%= link_to "编辑", edit_home_heads_path(order_id: banner.order_id), :class => "edit_fit_literal pull-left", :style => "width: 50px;" %>
         <div class="clear-fix pull-left" style="width: 170px;">
           <%= image_tag banner.file.url(:thumb) %>
         </div>

@@ -1,7 +1,7 @@
 <% content_for :head do -%>
     <%= stylesheet_link_tag "refresh_life/map", "art" %>
 
-  <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js" %>
+  <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js", "flowplayer-3.2.11.min.js" %>
 <% end -%>
 <div class="container refresh_main">
 	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>iColor和您一起刷新家，新开始</small></h3>
@@ -179,14 +179,13 @@
 				<div class="ipad1 pr">
 					<div id="carousel">
 						<ul class="nomargin">
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li class=""><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+							<li><img src="<%= asset_path "art/pdf2.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/pdf3.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/pdf4.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/pdf5.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/pdf6.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/pdf7.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/pdf8.jpg"%>" alt=""></li>
 						</ul>
 					</div>
 					<a href="javascript:;" class="ipad1_zoom pa">全屏观看</a>
@@ -211,9 +210,16 @@
 					<a href="javascript:;" class="ipad1_next draggablecarousel-next pa">next</a>
 				</div>
 				<div class="ipad1 pr hide">
-					<ul class="nomargin">
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
-							<li><img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt=""></li>
+					<div id="carousel">
+						<ul class="nomargin">
+							<li><img src="<%= asset_path "art/ipad1_img5.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img6.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img7.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img8.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img3.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img4.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img1.jpg"%>" alt=""></li>
+              <li><img src="<%= asset_path "art/ipad1_img2.jpg"%>" alt=""></li>
 						</ul>
 					</div>
 					<a href="javascript:;" class="ipad1_zoom pa">全屏观看</a>
@@ -221,7 +227,31 @@
 					<a href="javascript:;" class="ipad1_next draggablecarousel-next pa">next</a>
 				</div>
 				<div class="ipad1 pr hide">
-					<img src="<%= asset_path "art/ipad1_img1.jpg" %>" alt="coming soon" title="coming soon" />
+					<div class="ipad1_img2">
+            <a href="/flash/refresh-3-mins.flv" style="display:block;width:847px;height:465px" id="player"></a>
+            <script language="JavaScript">
+							flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
+							 clip:  {
+							  autoPlay: false,
+							  autoBuffering: true
+							 }
+							});
+						</script>
+          </div><!--ipad1_img2 ends-->
+          <a class="video_words pa" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">
+                  艺术漆首批上市地区：上海 
+                  相关产品与服务信息请拨打：800-810-1687
+          </a>
+          <img src="<%= asset_path "art/ipad2_img.jpg"%>" alt="" class="ipad1_img3 pa" />
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop" class="cw pa" style="right:142px;bottom:66px;">
+              <span class="jiathis_txt">分享：</span>
+              <a class="jiathis_button_qzone"></a>
+              <a class="jiathis_button_tsina"></a>
+              <a class="jiathis_button_renren"></a>
+              <a class="jiathis_button_kaixin001"></a>
+          </div>
+          <!-- JiaThis Button END -->
 				</div>
 			</div>
 		</div><!--art_bot ends-->
