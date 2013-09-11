@@ -42,7 +42,7 @@ class Manage::UniversalColumnController < Manage::BaseController
 		@i_column_data.url = url
 		@i_column_data.i_column_type_id = id
 		if @i_column_data.save
-      i_column_data = IColumnData.where("rank >= ? and created_at < ?",@i_column_data.rank,@i_column_data.created_at)
+      i_column_data = IColumnData.where("rank >= ? and created_at < ? and i_column_type_id = ?",@i_column_data.rank,@i_column_data.created_at, @i_column_data.i_column_type_id)
       i_column_data.each do |icd|
         if icd.rank == 5 
           icd.destroy
@@ -75,7 +75,7 @@ class Manage::UniversalColumnController < Manage::BaseController
   		@i_column_data.url = url
     	if @i_column_data.save
         unless i_column_data_rank.to_i == rank.to_i
-          que = IColumnData.where("rank = ? and updated_at < ?",@i_column_data.rank,@i_column_data.updated_at).first
+          que = IColumnData.where("rank = ? and updated_at < ? and i_column_type_id = ?",@i_column_data.rank,@i_column_data.updated_at,i_column_type_id).first
           que.rank = i_column_data_rank
           que.save
         end
