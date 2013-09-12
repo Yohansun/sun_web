@@ -25,7 +25,7 @@
 			<%- end %>
 		</p>
 		<form action="/icolor/" method='post' class="pull-left">
-			<input type="text" name='search' value="<%= @hot_search.last.try(:title) %>" class="search_query_value map-text">
+			<input type="text" name='search' placeholder="<%= @hot_search.last.try(:title) %>" class="search_query_value map-text">
 			<input type="submit" class="map-submit" value="搜图" onclick="return false;" />
 		</form>
 	</div>
