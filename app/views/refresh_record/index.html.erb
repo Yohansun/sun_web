@@ -5,7 +5,12 @@
 		<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>iColor和您一起刷新家，新开始</small></h3>
 		<% if @kv %>
 			<div class="mt10">
-				<a href="<%=@kv.url%>"><img src="<%= asset_path @kv.try(:file).try(:url, :special) %>"></a>
+        <a href="<%= @kv.url %>" target="_blank"><%= image_tag(@kv.file.url(:special), usemap: "#mapkv_special") %></a>
+        <map id="mapkv_special" name="mapkv_special">
+          <%- @kv.kv_maps.each do |map| %>
+            <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+          <%- end %>
+        </map>
 			</div>
 		<% end %>
 		<ul class="breadcrumb">
@@ -60,7 +65,7 @@
 				<ul class="unstyled map-right index_main js-img_show">
 					<li class="clearfix refresh_r_tit">
 						<a href="<%=@wonderfuls_url.url if @wonderfuls_url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
-						<strong class="pull-left">精彩资讯</strong>					
+						<strong class="pull-left">精彩资讯</strong>
 					</li>
           <% @wonderfuls.each_with_index do |cd,index| %>
 					<li class="map-r1 dott1 <%="active" if index == 0%>">

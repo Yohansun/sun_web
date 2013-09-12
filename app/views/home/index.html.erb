@@ -25,16 +25,12 @@ $(function(){
           <ul class="clearfix">
             <%- @home_kvs.each_with_index do |k,index| %>
               <li class="item">
-                <%- if k.kv_maps.any? %>
-                  <%= image_tag(k.try(:file).try(:url,:big), usemap: "#mapkv#{index}") %>
+                  <a href="<%= k.url %>" target="_blank"><%= image_tag(k.try(:file).try(:url,:big), usemap: "#mapkv#{index}") %></a>
                   <map id="mapkv<%= index %>" name="mapkv<%= index %>">
                     <%- k.kv_maps.each do |map| %>
                       <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
                     <%- end %>
                   </map>
-                <%- else %>
-                  <a href="<%= k.url %>" target="_blank"><%= image_tag(k.try(:file).try(:url,:big)) %></a>
-                <%- end %>
               </li>
             <%- end %>
           </ul>
