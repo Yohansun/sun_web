@@ -25,7 +25,7 @@ module Manage::BaseHelper
         'refresh_label1'
       when '刷新实录视频页'
         'refresh_label2'
-      when '刷新生活精彩咨讯'
+      when '刷新生活精彩资讯'
         'refresh_label3'
       when '刷新效果'
         'refresh_label4'
