@@ -234,8 +234,9 @@ class DesignImagesController < ApplicationController
     else
       ranks = "design_images.created_at DESC"
     end
-
-    @images = @design_images.order(ranks).page(params[:page]).per(18)
+    @design_images = @design_images.order(ranks)
+    @img_count = @design_images.count
+    @images = @design_images.page(params[:page]).per(18)
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
     @query_tags = @ilcs if @ilcs.present?
@@ -258,7 +259,7 @@ class DesignImagesController < ApplicationController
     i_banners = IBanner.page_name('图库列表页')
     @banner1 = i_banners.find_by_position(1)
     @banner2 = i_banners.find_by_position(2)
-    @fitting_parts = TagSort.order("id asc").where("genre = 0")  
+    @fitting_parts = TagSort.order("id asc").where("genre = 0")
     @home_design = TagSort.order("id asc").where("genre = 1")
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
@@ -431,7 +432,7 @@ class DesignImagesController < ApplicationController
         images = images.where("sorts = 2")
       else
         images = images.where("imageable_type = ?", @type)
-      end    
+      end
     end
 
     if @pinyin.present? && @pinyin.to_s != "0"
