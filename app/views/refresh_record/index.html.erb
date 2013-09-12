@@ -69,9 +69,9 @@
 					</li>
           <% @wonderfuls.each_with_index do |cd,index| %>
 					<li class="map-r1 dott1 <%="active" if index == 0%>">
-              <i class="icon-i16 icon-<%=index+1%>"></i>
+              <i class="icon-i16 icon-<%=index+1%>"><%=index+1%></i>
 							<strong class="js-title"><%=cd.title%></strong><br>
-							<a href="#" class="<%="hide" if index != 0%> js-img"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+							<a href="<%= cd.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
 					</li>
           <% end %>
 				</ul>
