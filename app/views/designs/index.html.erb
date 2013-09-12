@@ -1,13 +1,13 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "style", "dd"%>
-    
+
     <style type="text/css">
       ul.design_filter li{float:left;background:white; margin-right:5px;list-style:none;}
       .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
       #color_select{}
       .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
       .dd .ddChild a.nobg,
-      .dd .ddChild a.nobg:visited {background:none;padding-left:10px; }    
+      .dd .ddChild a.nobg:visited {background:none;padding-left:10px; }
       #style_child a{background:none!important;padding-left:10px;}
       .work_number .dd{ margin-right:15px;}
       #design_style, #design_design_color{width:108px;}
@@ -15,6 +15,7 @@
       ul.d_works ,.add_icon,.group {
         margin: 0;
       }
+      #filter_form .ddChild{top:251px!important;}
     </style>
 <%- end %>
 <%- content_for :tail do %>
@@ -60,18 +61,18 @@
     <em><%= link_to "首页", "/" %><span></span></em>
 </div><!--sub_nav ends-->
 <div class='wrapper pb60 group' style="margin:0 auto;">
-<div class="design_tit group">
+<form class="design_tit group" method="get" id="filter_form">
   <ul class="design_filter unstyled nomargin">
-    <form method="get" id="filter_form">
-      <li style="width:82px;">
-        <%= select_tag "order", options_for_select(design_order_option, params[:order]), :style => "width:82px" %>
-      <li>
+    <!-- <form method="get" id="filter_form"> -->
+    <li style="width:82px;">
+      <%= select_tag "order", options_for_select(design_order_option, params[:order]), :style => "width:82px" %>
+    </li>
     <li>
        <%= select_tag "style", options_for_select(design_style_option, params[:style]), :style => "width:96px;" %>
     </li>
     <li>
        <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), :style => "width:83px;" %>
-    </li>    
+    </li>
     <!-- <li> -->
       <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
     <!-- </li> -->
@@ -82,7 +83,7 @@
       </select>
     </li>
     <li><button style="background:none;margin-top:-3px;" class="noborder"><img src="<%= asset_path "design_search.png" %>" /></button></li>
-    <li> 
+    <li>
       <%= link_to  "/designs?order=未来之星" ,style: 'padding:0px;margin:0px' do%>
         <%   image_tag  "design_search_yda.png"  %>
       <% end %>
@@ -91,7 +92,7 @@
     <!-- <li>
       <a href="/designs?q=super_refresh" style="margin:0;padding:0;"><img src="<%#= asset_path "landingpage/refresh_btn.jpg"%>"/></a>
     </li> -->
-    </form>
+    <!-- </form> -->
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
@@ -102,7 +103,7 @@
       <%= link_to_function "我要上传", "show_login()" %>
     <% end -%>
   </div>
-</div>
+</form>
 <div class="design_result">
   <% @designs.in_groups_of(3, false).each do |group| -%>
   <ul class="d_works add_icon group unstyled">
@@ -136,7 +137,7 @@
             province == city ? "#{city}的" : "#{province + city}的"
           else
             "#{city}的" if city
-          end          
+          end
         end
       -%>
       <%= forward_links("#iColor分享#来自#{text}#{role}#{design.user.display_name}的作品【#{design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
