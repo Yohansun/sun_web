@@ -207,16 +207,12 @@
 </ul>
 
 <%- if @special_kv %>
-  <%- if @special_kv.kv_maps.any? %>
-    <%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %>
-    <map id="mapkv_special" name="mapkv_special">
-      <%- @special_kv.kv_maps.each do |map| %>
-        <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
-      <%- end %>
-    </map>
-  <%- else %>
-    <a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), class: 'mt10 bd') %></a>
-  <%- end %>
+  <a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %></a>
+  <map id="mapkv_special" name="mapkv_special">
+    <%- @special_kv.kv_maps.each do |map| %>
+      <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+    <%- end %>
+  </map>
 <%- end %>
 
 <ul class="breadcrumb">
