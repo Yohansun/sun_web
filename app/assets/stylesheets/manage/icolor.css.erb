@@ -127,10 +127,12 @@ input#login{margin:0 10px 0 42px;float:left;display:inline;}
 /*###################################### login ending #################################################*/
 
 /*###################################### gotop&codebar beginning ######################################*/
-#back-top{position:fixed;bottom:25%;left:50%;margin:0 0 6px 501px;width:50px;height:50px;}
+#back-top{position:fixed;bottom:25%;/*left:50%;margin:0 0 6px 501px;*/width:50px;height:50px;right:10px;}
 #back-top a,.codebar{display:block;opacity:0.6;}
 #back-top a:hover,.codebar:hover{opacity:1;}
-.codebar{position:fixed;bottom:25%;left:50%;margin:0 0 -52px 501px;width:50px;height:56px;}
+.codebar{position:fixed;bottom:25%;/*left:50%;margin:0 0 -52px 501px;*/width:50px;height:56px;z-index:999999;right:10px;margin-bottom:-52px;}
+.code_big{position:fixed;width:90px;height:90px;bottom:25%;/*left:50%;margin:0 0 -52px 409px;*/display:none;right:65px;margin-bottom:-52px;}
+.codebar:hover .code_big{display:block;}
 /*###################################### gotop&codebar ending #########################################*/
 .a_hover_red:hover,
 .footer a:hover,

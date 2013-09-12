@@ -29,7 +29,7 @@
 				</script>
 			</div>
 			<div class="refresh_banner">
-				<a href="#"><img src=<%= asset_path "refresh_life/refresh/refresh_banner.jpg" %>></a>
+				<a href="#"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_670x85)%>"></a>
 			</div>
 		</div>
 		<div class="pull-right">
@@ -80,11 +80,11 @@
 	</div>
 	<div class="index_main refresh_news mt10 clearfix">
 		<%= render :partial => "foot_select" %>
-		<div class="pull-right"><a href="#"><img src="<%= asset_path "refresh_life/refresh/refresh_list_banner3.jpg" %>"></a></div>
+		<div class="pull-right"><a href="#"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_230x230)%>"></a></div>
 	</div>
 	<div class="clearfix">
-		<div class="footer_banner pull-left"><a href="<%=@i_banner.position(4).first.url if @i_banner.position(4).first %>"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_670x85)%>"></a></div>
-		<div class="footer_banner pull-right"><a href="<%=@i_banner.position(5).first.url if @i_banner.position(5).first %>"><img src="<%=@i_banner.position(5).first.try(:file).try(:url,:list_310x85)%>"></a></div>
+		<div class="footer_banner pull-left"><a href="<%=@i_banner.position(4).first.url if @i_banner.position(4).first %>"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_670x85)%>"></a></div>
+		<div class="footer_banner pull-right"><a href="<%=@i_banner.position(5).first.url if @i_banner.position(5).first %>"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_310x85)%>"></a></div>
 	</div>
 </div>
 <% content_for :tails do -%>
