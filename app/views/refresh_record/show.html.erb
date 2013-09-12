@@ -36,11 +36,11 @@
 			<ul class="unstyled map-right index_main js-img_show">
 					<li class="clearfix refresh_r_tit">
 						<a href="<%=@url if @url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
-						<strong class="pull-left">最新大师作品</strong>					
+						<strong class="pull-left">最新大师作品</strong>
 					</li>
           <% @i_column_datas.each_with_index do |cd,index| %>
 					<li class="map-r1 dott1 <%="active" if index == 0%>">
-              <i class="icon-i16 icon-<%=index+1%>"></i>
+              <i class="icon-i16 icon-<%=index+1%>"><%=index+1%></i>
 							<strong class="js-title"><%=cd.title%></strong><br>
 							<a href="#" class="<%="hide" if index != 0%> js-img"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
 					</li>
@@ -88,5 +88,5 @@
 	</div>
 </div>
 <% content_for :tails do -%>
-    
+
 <% end -%>

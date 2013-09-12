@@ -184,7 +184,7 @@
       <%- end %>
     </p>
     <form action='/images/' method='post' style="display:inline" class="pull-left">
-      <input type="text" name='search' value="<%= @hot_search.last.try(:title) %>" id="search_query_value" class="map-text">
+      <input type="text" name='search' placeholder="<%= @hot_search.last.try(:title) %>" id="search_query_value" class="map-text">
       <input type="button"  onclick="search_sub()" class="map-submit" value="搜图" />
     </form>
   </div>
