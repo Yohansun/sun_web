@@ -62,11 +62,11 @@
 				<ul class="unstyled map-right index_main js-img_show">
 					<li class="clearfix refresh_r_tit">
 						<a href="<%=@decoration_color_scheme_url.url if @decoration_color_scheme_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
-						<strong class="pull-left">装修色彩配搭</strong>					
+						<strong class="pull-left">装修色彩配搭</strong>
 					</li>
 					<% @decoration_color_scheme.each_with_index do |dcs,index| %>
 					<li class="map-r1 dott1 <%="active" if index == 0%>">
-              <i ></i>
+              <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
               <strong class="js-title"><%=dcs.title%></strong><br>
               <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
           </li>
@@ -75,11 +75,11 @@
 				<ul class="unstyled map-right index_main js-img_show">
 					<li class="clearfix refresh_r_tit">
 						<a href="<%=@rrdr_url.url if @rrdr_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
-						<strong class="pull-left">装修效果图精华推荐</strong>					
+						<strong class="pull-left">装修效果图精华推荐</strong>
 					</li>
           <% @rrdrs.each_with_index do |rr,index| %>
 					<li class="map-r1 dott1 <%="active" if index == 0%>">
-              <i></i>
+              <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
 							<strong class="js-title"><%=rr.title%></strong><br>
 							<a href="<%=rr.url%>" class="<%="hide" if index != 0%> js-img"><img src="<%=rr.file.url(:list_155x115)%>" alt="" /></a>
 					</li>

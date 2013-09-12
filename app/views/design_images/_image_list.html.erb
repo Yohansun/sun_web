@@ -4,7 +4,7 @@
 	</li>
 	<% IColumnData.show_data(i_column_type_id).limit(5).each_with_index do |dcs,index| %>
 	<li class="map-r1 dott1 <%="active" if index == 0%>">
-      <i class="icon-i16 icon-<%= index+1 %>"></i>
+      <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
       <%- unless i_column_type_id == 7 %>
       <strong class="js-title"><%=dcs.title%></strong><br>
       	<a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
