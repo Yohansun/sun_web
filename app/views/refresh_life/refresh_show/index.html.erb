@@ -177,20 +177,17 @@
 			</ul>
 			<div id="art_container">
 				<div class="ipad1 pr">
-					<div id="carousel">
-						<ul class="nomargin">
-							<li><img src="<%= asset_path "art/pdf2.jpg"%>" alt=""></li>
-              <li><img src="<%= asset_path "art/pdf3.jpg"%>" alt=""></li>
-              <li><img src="<%= asset_path "art/pdf4.jpg"%>" alt=""></li>
-              <li><img src="<%= asset_path "art/pdf5.jpg"%>" alt=""></li>
-              <li><img src="<%= asset_path "art/pdf6.jpg"%>" alt=""></li>
-              <li><img src="<%= asset_path "art/pdf7.jpg"%>" alt=""></li>
-              <li><img src="<%= asset_path "art/pdf8.jpg"%>" alt=""></li>
-						</ul>
-					</div>
-					<a href= "/pdf/e-art.pdf" class="ipad2_down pa">一键下载</a>
-					<a href="javascript:;" class="ipad1_prev draggablecarousel-prev pa">prev</a>
-					<a href="javascript:;" class="ipad1_next draggablecarousel-next pa">next</a>
+					<div class="ipad1_img2">
+            <a href="/system/flash/refresh-1-mins.flv" style="display:block;width:847px;height:465px" id="player"></a>
+            <script language="JavaScript">
+							flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
+							 clip:  {
+							  autoPlay: false,
+							  autoBuffering: true
+							 }
+							});
+						</script>
+          </div><!--ipad1_img2 ends-->
 				</div>
 				<div class="ipad1 pr hide">
 					<img src="<%= asset_path "art/ipad1_img2.jpg" %>" alt="coming soon" title="coming soon" />
