@@ -513,6 +513,7 @@ Icolor::Application.routes.draw do
   end
 
   scope '/manage', :module => 'manage' do
+    get '/clear_cache', to: 'home#clear_cache'
     resources :owner_enter
     resources :seo_sites do
       collection do
