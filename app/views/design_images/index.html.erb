@@ -338,7 +338,7 @@
 
 
 <div class="map-flow index_main mt10 pull-left">
-  <div id="map-flow">
+  <div id="map-flow" class="clearfix">
     <%
        if params[:page].present? && params[:page].to_i != 0
         site = (params[:page].to_i - 1) * 18
@@ -347,7 +347,7 @@
        end
     %>
     <% @images.each_with_index do |image,index| %>
-    <div>
+    <div class="pull-left">
       <a href="/images/<%=image.id%>/<%=site + (index + 1)%>/<%=show_link image.id%>" target="_blank" >
         <%= image_tag(image.file.url(:image_map_list), alt: image.design.try(:title), title: image.design.try(:title)) %>
         <p><%= image.design.try(:title) %></p>
