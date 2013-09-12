@@ -1,16 +1,17 @@
+<%- colum_datas = IColumnData.show_data(i_column_type_id).limit(5) %>
 <%- if i_column_type_id == 7 %>
   <ul class="map-rel map-right index_main mt10">
     <li class="map-r0 text-right"><strong><%= name %></strong><a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank">更多></a></li>
-    <% IColumnData.show_data(i_column_type_id).limit(5).each_with_index do |dcs,index| %>
-    <li class="map-r1 dott1 <%="active" if index == 0%>">
-          <strong><a href="<%=dcs.url %>" target="_blank"><%=dcs.title%></a></strong><br>
+    <% colum_datas.each_with_index do |dcs,index| %>
+    <li class="map-r1 dott1 <%="active" if index == 0%> <%= 'noborder' if index + 1 == colum_datas.size %>">
+      <strong><a href="<%=dcs.url %>" target="_blank"><%=dcs.title%></a></strong><br>
     </li>
     <% end %>
   </ul>
 <%- else %>
   <ul class="unstyled map-right index_main mt10 js-img_show">
     <li class="map-r0 text-right"><strong><%= name %></strong><a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank">更多></a></li>
-    <% IColumnData.show_data(i_column_type_id).limit(5).each_with_index do |dcs,index| %>
+    <% colum_datas.each_with_index do |dcs,index| %>
     <li class="map-r1 dott1 <%="active" if index == 0%>">
         <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
           <strong class="js-title"><%=dcs.title%></strong><br>
