@@ -947,8 +947,13 @@ $(function(){
         $(this).find('ul').toggle()
     });
     //share jiathis
-    $('.js-share_btn,.jiathis_area').hover(function(){
+    $('.js-share_btn').hover(function(){
         $('.jiathis_area').toggle()
+    });
+    $(".jiathis_area").mouseover(function(){
+      $(this).show()
+    }).mouseout(function(){
+      $(this).hide()
     });
     //li:hover js
     var ie6 = (function(){
