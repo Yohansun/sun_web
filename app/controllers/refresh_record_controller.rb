@@ -17,7 +17,7 @@ class RefreshRecordController < ApplicationController
     @i_column_data = IColumnData.where(i_column_type_id: 1, position: 0).first
     @url = @i_column_data.url if @i_column_data
     @i_column_datas = IColumnData.show_data(1)
-    @i_banner = IBanner.page_name("刷新实录")
+    @i_banner = IBanner.page_name("刷新实录视频页")
   end
 
   def get_data

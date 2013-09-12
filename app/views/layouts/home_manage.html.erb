@@ -77,7 +77,7 @@
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>
           </li>
-          <li class="<%='active noborder' if controller_name == 'refresh_record' || controller_name == 'art' || controller_name == 'channel'%>">
+          <li class="<%='active noborder' if controller_name == 'refresh_record' || controller_name == 'art' %>">
             <a href="<%=refresh_record_index_path%>" target="_blank">刷新生活</a>
             <ul class="subnav">
               <li><a href="<%=refresh_record_index_path%>">刷新实录</a></li>
@@ -246,7 +246,10 @@
       <p id="back-top">
         <a href="#top"><%= image_tag "manage/back_top.png" %></a>
       </p>
-      <a href="javascript:;" class="codebar"><%= image_tag "manage/code.png" %></a>
+      <a href="javascript:;" class="codebar">
+        <img class="code_big" src="<%= asset_path 'code_big.jpg' %>">
+        <%= image_tag "manage/code.png" %>
+      </a>
     </div>
     <%= yield :tail %>
   </div>
