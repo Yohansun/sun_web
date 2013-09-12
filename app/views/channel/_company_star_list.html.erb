@@ -10,7 +10,7 @@
           <% companies.each do |companys| %>
             <% companys.each do |company| %>
     					<li class="">
-    						<a href="#" class="item_img">
+    						<a href="<%=user_path(company)%>" class="item_img">
     							<%- if company.news_company_design %>
                     <%= image_tag(company.news_company_design.file.url(:channel_image), height: '115') rescue ""%>
                   <%- end %>
@@ -36,17 +36,17 @@
 				<ul class="unstyled lists_text clearfix">
           <% designers.each do |designy| %>
             <% designy.each do |designer| %>
+            <%- if designer.news_personal_design %>
     					<li class="">
-    						<a href="#" class="item_img">
-    							<%- if designer.news_personal_design %>
+    						<a href="<%=user_path(designer)%>" class="item_img">
                     <%= image_tag(designer.news_personal_design.file.url(:channel_image), height: '115') rescue ""%>
-                  <%- end %>
     							<i class="icon-star_of icon-star_month"></i>
     						</a>
     						<h6><%= link_to designer.display_name, user_path(designer)%></h6>
     						<p><%= designer.user_location %></p>
     					</li>
             <% end %>
+            <%- end %>
 					<% end %>
 				</ul>
 			</div>
