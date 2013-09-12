@@ -32,6 +32,9 @@
         })
 
     </script>
+    <style type="text/css">
+      #filter_form .ddChild{top:257px!important;}
+    </style>
 <%- end %>
 <div class="main">
   <div class='sub_title text-right pt25'>
@@ -43,9 +46,9 @@
     <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper pb60 group'>
-    <div class="design_tit group">
+    <form class="design_tit group" method="get" id="filter_form">
       <ul class="design_filter group unstyled">
-        <form method="get" id="filter_form">
+        <!-- <form method="get" id="filter_form"> -->
         <li>
             <%= select_tag "order", options_for_select(color_design_order_option, params[:order]), class: "arrow_filter li_current",
                     :onchange => "$('#filter_form').submit()" ,:style =>"width:108px;" %>
@@ -61,10 +64,10 @@
           <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), class: "arrow_filter",
                          :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
         </li>
-        </form>
+        <!-- </form> -->
 
       </ul>
-    </div>
+    </form>
     <div class="design_result color_design">
     <%- unless @designs.nil? %>
       <% @designs.in_groups_of(3, false).each do |group| -%>
@@ -76,7 +79,7 @@
 
                   <p class="p2 group">
                     <%= link_to  raw("<span class='gzh ft12' id='votes_count#{design.id}'>#{design.votes_count}</span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
-                    
+
                     <span class="zf ft12">转发 (<%=design.shares_count %>)</span>
                     <a href="/color_designs/<%= design.id %>#review_focus"><span class="pl ft12">评论 (<%=design.comments.length %>)</span></a>
                   </p>
