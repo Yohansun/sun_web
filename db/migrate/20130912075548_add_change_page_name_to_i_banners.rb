@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddChangePageNameToIBanners < ActiveRecord::Migration
   def change
     aa = IBanner.where(page_name: '刷新生活精彩咨讯')
