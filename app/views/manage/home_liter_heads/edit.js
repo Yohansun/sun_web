@@ -3,7 +3,7 @@ $('.edit_form<%= @new.id%>').append("<%= escape_javascript(render(:partial => "f
 $(".literal_submit").click(function(){
 	<% if @genre_type == "red" || @genre_type == "black" %>
 	  if ($(".literal_title").val().length > 16 || $(".literal_title").val() == "" ){
-	    alert("标题必须输入不超过16个汉字同时标题不能为空");
+	    alert("标题必须输入不超过16个汉字同时标题不能为空！");
 	    return false;
 	  }else if($(".liter_link").val() == ""){
 	    alert("请输入链接");
@@ -12,8 +12,8 @@ $(".literal_submit").click(function(){
 	  	return true;
 	  }
   <% else %>
-    if ($(".literal_title").val().length > 12 || $(".literal_title").val() == "" ){
-	    alert("标题必须输入不超过12个汉字同时标题不能为空");
+    if ($(".literal_title").val().length > 14 || $(".literal_title").val() == "" ){
+	    alert("标题必须输入不超过14个汉字同时标题不能为空！");
 	    return false;
 	  }else if($(".liter_link").val() == ""){
 	    alert("请输入链接");
