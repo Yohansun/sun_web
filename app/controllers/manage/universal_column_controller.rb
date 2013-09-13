@@ -4,7 +4,7 @@ class Manage::UniversalColumnController < Manage::BaseController
   def index
   	column_type = params[:column_type]
 
-  	@i_column_types = IColumnType.all
+  	@i_column_types = IColumnType.order("rank asc").all
   	@i_column_type = IColumnType.where(id: column_type).first
 
   	@i_column_datas = []
@@ -44,7 +44,7 @@ class Manage::UniversalColumnController < Manage::BaseController
 		if @i_column_data.save
       i_column_data = IColumnData.where("rank >= ? and created_at < ? and i_column_type_id = ?",@i_column_data.rank,@i_column_data.created_at, @i_column_data.i_column_type_id)
       i_column_data.each do |icd|
-        if icd.rank == 5 
+        if icd.rank == 5
           icd.destroy
         else
           icd.rank += 1
@@ -97,7 +97,7 @@ class Manage::UniversalColumnController < Manage::BaseController
   	url = params[:more_url]
 
   	result = "上传失败"
-  
+
   	@i_column_data = IColumnData.find_or_create_by_i_column_type_id_and_position(id, 0)
   	@i_column_data.url = url
   	@i_column_data.position = 0
