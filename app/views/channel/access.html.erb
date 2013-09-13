@@ -8,7 +8,13 @@
 <% end -%>
 <div class="container">
     <h3 class="chann_caption nomargin"><i class="icon-map icon-map4 icon_colors"></i><strong>业主通道</strong><small>免费为您提供全方位的家装咨询和服务</small></h3>
-    <div class="mt10"><img src="<%=@ibnner1.file.url(:list_1000x85) if @ibnner1%>"></div>
+    <% if @ibnner1 %>
+      <div class="mt10">
+        <a href="<%=@ibnner1.url%>" target="_blank">
+          <img src="<%=@ibnner1.file.url(:list_1000x85) %>">
+        </a>
+      </div>
+    <% end %>
     <ul class="breadcrumb">
       <li><a href="#">首页</a> > </li>
       <li><a href="#">业主通道</a> > </li>
@@ -114,10 +120,13 @@
       <div class="footer_banner pull-right"><a href="<%=@ibnner3.url if @ibnner3 %>"><img src="<%=@ibnner3.file.url(:list_310x85) if @ibnner3%>"></a></div>
     </div>
 
-    <div class="channel3 clearfix mt20">
+    <div class="channel3 clearfix">
       <%= render :partial => "company_star_list"%>
       <div class="chann2_right pull-right">
-        <div><small>分享您的心路历程,记录您的装修点滴</small></div>
+        <p class="clearfix index_tit">
+          <strong class="pull-left">分享您的心</strong>路历程,记录您的装修点滴
+        </p>
+        <!-- <div><small>分享您的心路历程,记录您的装修点滴</small></div> -->
         <hr class="border2 border2_mt2">
         <%= render :partial => "icolor_mood" %>
       </div>
