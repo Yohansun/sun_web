@@ -360,6 +360,7 @@ class DesignImagesController < ApplicationController
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
     #manage_end
+
     @tag_names = []
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
@@ -391,6 +392,7 @@ class DesignImagesController < ApplicationController
       @rank = @other_ids[5]
     end
     images = DesignImage.from.available.audited_with_colors
+
     unless params[:path].blank?
        @tag_ids = CGI.unescape(params[:path]).split("-").map { |e| e.to_i }.uniq.sort
        @tag_ids.delete(-1)
@@ -408,7 +410,8 @@ class DesignImagesController < ApplicationController
         @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
         final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
         images = images.search_tags(final_tags.map(&:id))
-        @tag_names << final_tags.map(&:title)
+        #取出所有搜索出来的标签,不包括特殊标签 拼音地域
+        @tag_names << final_tags
       end
     end
 
@@ -424,7 +427,7 @@ class DesignImagesController < ApplicationController
     if @search.present? && @search != '_' && @search.to_s != "0"
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{@search}%")
       images = images.search_tags(tags.map(&:id), true)
-      @tag_names << tags.map(&:title)
+      @tag_names << tags
     end
 
     if @type.present? && @type.to_s != "0"
@@ -438,7 +441,6 @@ class DesignImagesController < ApplicationController
     if @pinyin.present? && @pinyin.to_s != "0"
       tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{@pinyin}%")
       images = images.search_tags(tags.map(&:id), true)
-      @tag_names << tags.map(&:title)
     end
 
     if @rank.present? && @rank.to_i != 0
@@ -450,11 +452,12 @@ class DesignImagesController < ApplicationController
     else
       images = images.order("design_images.created_at DESC")
     end
-    if @pinyin.present? && @pinyin.to_i != 0
-      @query_params = ([@tag_names, @area_names, @pinyin] - [""]).compact.join(", ")
-    else
-      @query_params = ([@tag_names, @area_names]).compact.join(", ")
-    end
+
+    #筛选出搜索过的标签,用来重新筛选
+    @tag_names = @tag_names.flatten
+    #在delete_link helper中调用,需要去掉非标签的搜索(地域,拼音)
+    @ids.delete_at(-1)
+
     count = images.count
     site = params[:site].to_i - 1
     @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
