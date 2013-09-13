@@ -77,11 +77,13 @@
 					<strong class="pull-left">最新大师作品</strong>
 				</li>
         <% @master_design_datas.each_with_index do |cd,index| %>
-				<li class="dott1 <%="active" if index == 0%>">
-          <i class="icon-i16 icon-<%=index+1%>"><%=index+1%></i>
-					<strong class="js-title"><%=cd.title%></strong><br>
-					<a href="<%= cd.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
-				</li>
+	        <% unless cd.position == 0 %>
+						<li class="map-r1 dott1 <%="active" if index == 1 %>">
+		          <i class="icon-i16 icon-<%=index%>"><%=index%></i>
+							<strong class="js-title"><%=cd.title%></strong><br>
+							<a href="<%= cd.url %>" class="<%="hide" if index != 1%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+						</li>
+	        <% end %>
         <% end %>
 			</ul>
 			<div><a href="#"><img src="<%= asset_path "refresh_life/refresh/refresh_list_banner1.jpg" %>" ></a></div>
