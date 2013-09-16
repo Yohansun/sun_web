@@ -1,6 +1,6 @@
 <%- colum_datas = IColumnData.show_data(i_column_type_id).limit(5) %>
 <%- if i_column_type_id == 7 %>
-  <ul class="map-rel map-right index_main mt10">
+  <ul class="map-rel map-right index_main mt10 unstyled">
     <li class="map-r0 text-right"><strong><%= name %></strong><a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank">更多></a></li>
     <% colum_datas.each_with_index do |dcs,index| %>
     <li class="map-r1 dott1 <%="active" if index == 0%> <%= 'noborder' if index + 1 == colum_datas.size %>">
