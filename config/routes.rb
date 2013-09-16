@@ -343,7 +343,11 @@ Icolor::Application.routes.draw do
   resources :visit_ips,only: :create
 
   #刷新实录
-  resources :refresh_record
+  resources :refresh_record do
+    collection do
+      get :re_list
+    end
+  end
 
   #修改个人签名
   post "/users/:id/update_user_signature" => "users#update_user_signature"
@@ -366,7 +370,7 @@ Icolor::Application.routes.draw do
     resources :skin_kv_uploads
     match "/baicheng/daily_report"=>'baicheng#daily_report'
     match "/baicheng/story_screen"=>'baicheng#story_screen'
-    resources :baicheng do 
+    resources :baicheng do
       get :story_del
       get :story_restoration
     end

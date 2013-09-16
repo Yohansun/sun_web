@@ -25,4 +25,7 @@ class RefreshRecordController < ApplicationController
     @images = IColumnData.show_data(2).limit 5
   end
 
+  def re_list
+
+  end
 end
