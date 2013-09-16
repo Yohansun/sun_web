@@ -1,13 +1,12 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag "refresh_life/map", "art" %>
-
+	<%= stylesheet_link_tag "refresh_life/map", "art" %>
   <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js", "flowplayer-3.2.11.min.js" %>
 <% end -%>
 <div class="container refresh_main">
 	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>iColor和您一起刷新家，新开始</small></h3>
 	<ul class="breadcrumb">
 		<li><a href="/">首页</a> > </li>
-		<li><a href="#">刷新生活</a> > </li>
+		<li><a href="<%=refresh_record_index_path%>">刷新生活</a> > </li>
 		<li class="active">刷新效果</li>
 	</ul>
 	<hr class="border2 border2_mt2">
@@ -236,7 +235,7 @@
 						</script>
           </div><!--ipad1_img2 ends-->
           <a class="video_words pa" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">
-                  艺术漆首批上市地区：上海 
+                  艺术漆首批上市地区：上海
                   相关产品与服务信息请拨打：800-810-1687
           </a>
           <img src="<%= asset_path "art/ipad2_img.jpg"%>" alt="" class="ipad1_img3 pa" />
@@ -254,7 +253,7 @@
 		</div><!--art_bot ends-->
 	</div><!--wrapper ends-->
 
-	<%= render :partial => "refresh_life/refresh_list/foot_select" %>
+	<%= render :partial => "foot_select" %>
 </div>
 <div id="overlay2">
     <div id="arts_bin">
