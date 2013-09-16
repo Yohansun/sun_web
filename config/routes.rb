@@ -346,6 +346,7 @@ Icolor::Application.routes.draw do
   resources :refresh_record do
     collection do
       get :re_list
+      get :re_wlk
     end
   end
 
