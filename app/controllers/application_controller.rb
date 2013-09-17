@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :search_color_code,:find_or_build_zip_file
+  layout "home_manage"
 
   around_filter :catch_exceptions
 
@@ -28,23 +29,23 @@ class ApplicationController < ActionController::Base
       if referer =~ %r(#{request.base_url}/users(/\d{1,}/(designs|inspirations)?)?)
         if $1.blank? || $2.blank?
           return "/"
-        else          
+        else
           referer_link = request.base_url + "/" + $2
           return referer_link
         end
-      else  
-        return referer  
-      end  
+      else
+        return referer
+      end
     else
       return "/"
-    end  
+    end
   end
 
   def load_skin
     skin = nil
     Skin.find_each do |s|
       skin = s.user_ids.split(",").include?(@user.id.to_s) ? s : nil
-    end    
+    end
 
     if skin.present?
       session[:skin_type] = skin.skin_type_id
@@ -82,7 +83,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
 	#find_or_build_zip_file("tmp/file.zip",:ab_paths => ["/root/pictures/1.jpg",.....],:cache_name => :cache_name)
 	#or
 	#find_or_build_zip_file("tmp/file.zip",:ab_paths => ["/root/pictures/1.jpg",.....],:cache_name => :cache_name) do |file|
@@ -96,7 +97,7 @@ class ApplicationController < ActionController::Base
 		raise "参数不能为空"	if vals.blank?
 		raise "没有图片"			if options[:ab_paths].blank?
 		zipfile = File.expand_path(vals.shift)
-    
+
 		if Rails.cache.read(options[:cache_name]).blank?
 			FileUtils.rm(zipfile) if File.exists?(zipfile)
 			%x[zip -j #{zipfile} #{options[:ab_paths].join(" ")}] && Rails.cache.write(options[:cache_name],true)
@@ -108,7 +109,7 @@ private
   def catch_exceptions
     yield
   rescue StandardError => e
-    logger.debug "[----------] #{e.to_s}" 
+    logger.debug "[----------] #{e.to_s}"
     raise e
   end
 

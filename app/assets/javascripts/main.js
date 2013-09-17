@@ -81,6 +81,7 @@ function colors(){
 
 function close_all(){
     $('.abs_center').hide();
+    $('.unlogin').hide();
     o_out();
 }
 function prize_jan(){
@@ -1094,6 +1095,15 @@ $(function(){
             $(this).parent('li').siblings().find('a.js-img').hide();
             $(this).parent('li').addClass('active').siblings('li').removeClass('active')
             $(this).siblings('a.js-img').show();
+        })
+    }($));
+
+    ;(function($){
+        $('.js-ask_btn').click(function(){
+            $(this).children('.ask_form').show();
+        });
+        $('.js-ask_btn').mouseleave(function(){
+            $('.ask_form').hide();
         })
     }($));
 });
