@@ -39,4 +39,26 @@
     </div>
   </div>
   <div class="text-center dott1 pt30"><%= submit_tag "",:class => 'input_submit'%></div>
+  <script type="text/javascript">
+  $(function(){
+    var bool = true;
+    var one = true;
+    $('.chann1_left').submit(function(){
+      var input_submit = $(this).find('.input_submit');
+      if(one){
+        input_submit.bind('click', inputTimeout);
+        setTimeout(function(){
+          input_submit.unbind('click', inputTimeout);
+          one = bool = true;
+        },5000);
+        one = false;
+      }
+      return bool;
+    })
+    function inputTimeout(){
+      bool = false;
+      alert('系统正在处理上一次提交的需求，请稍后再试！')
+    }
+  })
+  </script>
 <% end %>
