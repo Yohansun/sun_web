@@ -243,13 +243,34 @@
           <small>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved<br>沪ICP备08019990号</small>
         </p>
       </div>
-      <p id="back-top">
-        <a href="#top"><%= image_tag "manage/back_top.png" %></a>
-      </p>
-      <a href="javascript:;" class="codebar">
-        <img class="code_big" src="<%= asset_path 'code_big.jpg' %>">
-        <%= image_tag "manage/code.png" %>
-      </a>
+      <div id="float_right_btn">
+        <p id="back-top">
+          <a href="#top"><%= image_tag 'back_top.png' %></a>
+        </p>
+        <a href="javascript:;" class="codebar">
+          <%= image_tag 'code_big.jpg', class: 'code_big' %>
+          <%= image_tag 'code.png' %>
+        </a>
+        <a href="javascript:;" class="ask_btn mt10 js-ask_btn">
+          <%= image_tag 'ask.png', alt: '我要咨询' %>
+          <%= form_tag online_qa_path, :class => "ask_form nomargin server_input", :id => "new_site_message", :remote => true do %>
+            <fieldset class="">
+              <h5>我要咨询</h5>
+              <p>
+                亲爱的会员您好！请问您有什么需要咨询？<br>
+                您可以给我们留言，我们会通过系统消息对您的留言给予答复；<br>
+                您也可以发送邮件至icolor@nipponpaint.com.cn，<br>
+                我们也将尽快回复给您！
+              </p>
+              <%= text_area_tag "site_message[desc]" %>
+              <div class="text-right">
+                <button class="btn btn-success btn-large">确定</button>
+              </div>
+            </fieldset>
+          <%- end %>
+        </a>
+      </div>
+
     </div>
     <%= yield :tail %>
   </div>

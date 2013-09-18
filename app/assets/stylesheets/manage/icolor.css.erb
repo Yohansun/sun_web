@@ -127,12 +127,19 @@ input#login{margin:0 10px 0 42px;float:left;display:inline;}
 /*###################################### login ending #################################################*/
 
 /*###################################### gotop&codebar beginning ######################################*/
-#back-top{position:fixed;bottom:25%;/*left:50%;margin:0 0 6px 501px;*/width:50px;height:50px;right:10px;}
-#back-top a,.codebar{display:block;opacity:0.6;}
-#back-top a:hover,.codebar:hover{opacity:1;}
-.codebar{position:fixed;bottom:25%;/*left:50%;margin:0 0 -52px 501px;*/width:50px;height:56px;z-index:999999;right:10px;margin-bottom:-52px;}
-.code_big{position:fixed;width:90px;height:90px;bottom:25%;/*left:50%;margin:0 0 -52px 409px;*/display:none;right:65px;margin-bottom:-52px;}
-.codebar:hover .code_big{display:block;}
+#float_right_btn{position:fixed;bottom:25%;right:10px;width:50px;}
+#back-top{width:50px;height:50px;}
+#back-top a,.codebar,.ask_btn{display:block;opacity:0.6;}
+#back-top a:hover,.codebar:hover,.ask_btn:hover{opacity:1;}
+.codebar{width:50px;height:56px;z-index:999999;display:block;position:relative;}
+.code_big{position:absolute;width:90px;height:90px;bottom:0;display:none;right:55px;max-width:90px;}
+.codebar:hover .code_big,.ask_btn{display:block;}
+.ask_btn{position:relative;}
+.ask_form{position:absolute;right:50px;bottom:-7px;width:307px;height:350px;background:url(<%= asset_path 'ask_content_bg.png' %>);display:none;}
+.ask_form fieldset{padding:10px 20px 20px 15px;}
+.ask_form textarea{width:256px;height:120px;border:1px solid #d8d8d8;resize:none;border-radius:0;}
+.ask_form p{font:12px/16px "Simsun",Arial;color:#656d78;}
+.ask_form h5{color:#434a54;}
 /*###################################### gotop&codebar ending #########################################*/
 .a_hover_red:hover,
 .footer a:hover,
