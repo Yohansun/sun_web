@@ -8,12 +8,14 @@ task :check_design_image => :environment  do
   file_arr1.each do |file|
     file_arr2 = Dir["#{file}/*"]
     file_arr2.each do |file2|
-      if File.directory?("#{file2}/channel_image") == false
-        arr = Dir["#{file2}/thumb/*"]
-        path = arr[0].split('.').first
-        id = path.split('/').last
-        tmp << ["#{id}"]
-        count += 1
+      arr = Dir["#{file2}/original/*"]
+      if arr.present?
+        if File.directory?("#{file2}/image_map_list") == false
+          path = arr[0].split('.').first
+          id = path.split('/').last
+          tmp << ["#{id}"]
+          count += 1
+        end
       end
     end
   end
