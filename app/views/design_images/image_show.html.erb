@@ -176,9 +176,15 @@
       <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
     </div>
     <div class="work_infos">
-      <p class="work_info nomargin">设计风格：<%= @image.design_style_names %></p>
-      <p class="work_info">作品所在城市：<%= @image_city %></p>
-      <p class="work_info">设计理念：<%= @image.content %></p>
+      <%- unless @image.design_style_names.present? %>
+        <p class="work_info nomargin">设计风格：<%= @image.design_style_names %></p>
+      <%- end %>
+      <%- if @image_city %>
+        <p class="work_info">作品所在城市：<%= @image_city %></p>
+      <%- end %>
+      <%- if @image.content? %>
+        <p class="work_info">设计理念：<%= @image.content %></p>
+      <%- end %>
     </div>
     <div class="work_tags">
       <span>标签：</span>
