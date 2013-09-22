@@ -247,6 +247,8 @@ a.launch_act{background: url(<%= asset_path "personal/launch_act.png"%>) no-repe
 .signup_box ul.system_info li.icon_community,
 .per_works ul.system_info li.icon_community{ background-position:0 -273px;}
 .signup_box ul.system_info li.per_btn_upload,.per_works ul.system_info li.per_btn_upload{background:none;padding-left:0;}
+.signup_box ul.system_info li.icon_record,
+.per_works ul.system_info li.icon_record{ background-position:0 -940px;}
 
 .per_works ul.system_info{color:#191919;}
 .signup_box ul.system_info li a{font:14px "Microsoft Yahei"; color:#666666;}
@@ -265,7 +267,7 @@ a.launch_act{background: url(<%= asset_path "personal/launch_act.png"%>) no-repe
 .sort_box ul.sort_show_ul{ position:relative; z-index:2; height:31px; width:760px;}
 .sort_box ul.sort_show_ul li{ float:left; background:#dfded9; text-align:center; margin-right:8px; height:31px; width:91px;}
 .sort_box ul.sort_show_ul li a{font:14px/31px "Microsoft Yahei";color:#7a786b;}
-.sort_box ul.sort_show_ul li.sort_show{position:relative; top:-3px;*top:-4px!important;background:url(<%= asset_path "personal/sort_cur_bg.png"%>) no-repeat center top; text-align:center; padding:5px 15px 10px; min-width:64px; height:25px;}
+.sort_box ul.sort_show_ul li.sort_show{position:relative; top:-3px;*top:-4px!important;background:url(<%= asset_path "personal/sort_cur_bg.png"%>) no-repeat center top; text-align:center; padding:5px 0px 10px; min-width:105px; height:25px;}
 .sort_box ul.sort_show_ul li.sort_show a{font:16px/25px "Microsoft Yahei";color:#fff;}
 /*d in notice*/
 .host_main{ background:url(<%= asset_path "personal/host_bg_t.png"%>) no-repeat top center; padding:25px 20px; position:relative;top:-8px;*top:1px!important;_top:-8px; z-index:1;}
@@ -1216,7 +1218,7 @@ table#prize_table4{height:470px;left:432px;top:65px;width:430px;}
 .collect_btn a{color:#333;}
 .del_color{background:url(<%= asset_path 'design/review_remove.jpg'%>) no-repeat 0 5px;}
 
-.shijiazhuang_border{border-bottom: 1px dashed #cac6b5;} 
+.shijiazhuang_border{border-bottom: 1px dashed #cac6b5;}
 
 /**/
 .navBot li{padding:1px 5px 2px;}
@@ -1248,7 +1250,7 @@ ul{list-style:none;margin-left:0}
 .c_t_center{background:url(<%= asset_path "c_t_center.png" %>) no-repeat;width:264px;height:326px;}
 .c_t_right{background:url(<%= asset_path "c_t_right.png" %>) no-repeat;width:307px;height:326px;}
 
-.main{width:1043px;/*margin:97px auto 0 auto;*/margin:10px auto 0 auto;position:relative;left:-17px;}
+.main{/*width:1043px;margin:97px auto 0 auto;*/margin:10px auto 0 auto;position:relative;left:-17px;}
 .sub_title{width:995px;margin:0 auto;}
 .sub_nav{background:url(<%= asset_path "sub_nav.png" %>) no-repeat;width:1005px;height:22px;margin:0 auto;padding:28px 13px;top:12px;}
 .sub_nav a{color:#fff;margin-right:20px;}
@@ -1357,20 +1359,21 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .static_b{width:81px;margin-top:16px;height:31px;line-height:31px;text-indent:1em;}
 .static_c{width:66px;margin-top:16px;}
 
-/*.btn_group{margin-top:33px;}*/  
-.btn_group a{float:left;color:#fff;background-image:url(<%= asset_path 'imgbase/icon_btns_img.png' %>);width:77px;height:21px;font:12px/21px "Microsoft Yahei";}  
-.btn_group a.icon_colleting{background-position:-77px 0;width:54px;padding-right:0;}  
-.btn_group a.icon_freedown{background-position:0px 0;}  
-.btn_group a.icon_fullscreen{background-position:-131px 0;width:53px;}  
-.btn_group a.icon_view,.btn_group a.icon_like{width:56px;padding-left:22px;text-align:left;white-space:nowrap;margin:3px 0;height:auto;}  
-.btn_group a.icon_like{background-position:-184px 0;}  
+/*.btn_group{margin-top:33px;}*/
+.btn_group a{float:left;color:#fff;background-image:url(<%= asset_path 'imgbase/icon_btns_img.png' %>);width:77px;height:21px;font:12px/21px "Microsoft Yahei";}
+.btn_group a.icon_colleting{background-position:-77px 0;width:54px;padding-right:0;}
+.btn_group a.icon_freedown{background-position:0px 0;}
+.btn_group a.icon_fullscreen{background-position:-131px 0;width:53px;}
+.btn_group a.icon_view,.btn_group a.icon_like{width:56px;padding-left:22px;text-align:left;white-space:nowrap;margin:3px 0;height:auto;}
+.btn_group a.icon_like{background-position:-184px 0;}
 .btn_group a.icon_view{background-position:-262px 0;}
 
 .imgbase .btn_group a:hover{color:#fff;}
 .imgbase_func.btn_group a{float:right;}
-.weekstart_titleC .btn_group{margin-top:33px;} 
+.weekstart_titleC .btn_group{margin-top:33px;}
 .navBot li ul{background:#e71d36 url(<%= asset_path "navulbg.png" %>) repeat-x left 14px;*background-position:left 11px;_background-position:left 13px;left:0;top:18px;width:102px;*width:99px;_width:100px;display:none;padding-top:1em;border-radius:0 0 5px 5px;*top:19px;position:absolute;}
 #gotop{background:url(<%= asset_path "2013/index/gotop.png" %>) no-repeat;width:60px;height:60px;display:block;_display:none;text-indent:-999em;position:fixed;left:50%;bottom:37px;margin-left:590px;z-index:100;}
 #back-top,.codebar{margin-left:519px;}
 
 .navBot li{padding:1px 5px 2px;}
+.main_new{position:static;width:939px;padding:25px 30px;}

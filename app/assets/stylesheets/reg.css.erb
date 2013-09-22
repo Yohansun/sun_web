@@ -1,9 +1,9 @@
 @charset "utf-8";
-.main{width:961px;/*margin:115px auto 53px auto;*/margin:15px auto 53px auto;background:#fff;padding-bottom:47px;border:1px solid #fff;}
+.main{/*width:961px;margin:115px auto 53px auto;*/margin:15px auto 53px auto;background:#fff;padding-bottom:47px;border:1px solid #fff;}
 .reg_bg1,.reg_bg2,.reg_bg3{background:url(<%= asset_path "news/reg_bg1.gif"%>) no-repeat;width:934px;height:240px;margin:0 auto;top:35px;}
 .reg_bg2{background-image:url(<%= asset_path "news/reg_bg2.gif"%>);}
 .reg_bg3{background-image:url(<%= asset_path "news/reg_bg3.gif"%>);}
-.wrapper{padding:45px 0;border:1px solid #c3c3c3;border-top:none;border-radius:5px;width:903px;}
+.wrapper{padding:45px 0;border:1px solid #c3c3c3;border-top:none;border-radius:5px;width:903px;margin:0 auto;}
 ul.regs{margin:0px auto;width:805px;}
 ul.regs li{float:left;display:inline;width:166px;height:229px;border-left:1px dotted #787878;padding:4px 50px;}
 ul.regs li img{cursor:pointer;}
@@ -95,7 +95,7 @@ a.sys_next{background:url(<%= asset_path "arrow_next.png"%>) no-repeat 52px cent
 img.icon{margin:5px;}
 .details{width:316px;height:75px;margin-top:10px;border:1px solid #e2e2e2;}
 .reset_commit{width:166px;margin:20px 0 0 321px;}
-.reset_reset{border:1px solid #e2e2e2;padding:0.5em 1em;margin-left:10px;}
+.reset_reset{border:1px solid #e2e2e2;padding:0.4em 1em;margin-left:10px;}
 
 /*uploads*/
 .uploads .shadow,.uploads .shadow .section{height:1000px;}
@@ -207,3 +207,18 @@ li.rotate_right{background:url(<%= asset_path "news/token_right.png"%>) no-repea
 
 .aligncenter div{padding:23px;}
 .aligncenter div p{font-size:18px;margin:14px 0;line-height:25px;}
+
+.reg_list div.fl select{width:80px;}
+.reg_list div.fl select:first-child{margin-left:0;}
+.tc{text-align:center;}
+.fl{float:left;}
+.fr{float:right;}
+.pr{position:relative;}
+.cr{color:red;}
+.ft12{font-size:12px;}
+.ft14{font-size:14px;}
+q:before,q:after,blockquote:before,blockquote:after{content:"";}
+.clear:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clear{display:inline-block;}
+*html .clear{height:1%;}
+.clear{display:block;}

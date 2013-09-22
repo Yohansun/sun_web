@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
   protected
   def layout_by_resource
     if devise_controller? && resource_name == :user
-      'application'
+      'home_manage'
     end
   end
 end

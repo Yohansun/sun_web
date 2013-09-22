@@ -7,7 +7,7 @@
 
 <%= form_for([current_user, @inspiration]) do |f| %>
   <%= hidden_field_tag "user_id", current_user.id %>
-  <div class="main syslist ">
+  <div class="main syslist main_new">
     <div class="shadow">
       <div class="section pr">
         <div class="sys_bar clear ft12">
@@ -24,8 +24,8 @@
             <div class="fl tc ins_tips ft12">
               <span id="july_26">还可输入<span>400</span>字</span>
               <span class="none" id="overflow6_4">您已经超出<span class="cr"></span>字</span>
-              <br />   
-            </div>        
+              <br />
+            </div>
           </div>
           <%= image_submit_tag "news/add_img.jpg", :class => 'add_img fl' %>
         </div>
