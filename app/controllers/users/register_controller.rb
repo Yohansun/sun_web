@@ -16,9 +16,9 @@ class Users::RegisterController < Devise::RegistrationsController
     #   end
       params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id unless params[:user][:user_role].blank?
     end
-    
-     
-    
+
+
+
     build_resource
     resource.create_from = params[:return_to]
     if resource.save
@@ -78,7 +78,7 @@ class Users::RegisterController < Devise::RegistrationsController
 
   def layout_by_resource
     if devise_controller? && resource_name == :user
-      'application'
+      'home_manage'
     end
   end
 end

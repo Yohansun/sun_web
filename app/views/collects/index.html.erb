@@ -7,7 +7,7 @@
        	})
     });
 </script>
-<div class="main signup group">
+<div class="main signup group main_new">
   <div class="shadow signup_box">
     <div class="section">
 
@@ -28,10 +28,10 @@
 							<h3><%= image.design_image.try(:design).try(:title)  %></h3>
 							<p class="p1 group">
 								<strong class="ft14 fb">当前票数：<%= image.design_image.try(:votes_count)  %></strong>
-							</p> 
+							</p>
 							<p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%= image.design_image.try(:design).try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%- image.design_image.try(:comments_count)%>)</span>
-							</p>        
+							</p>
 							<p>
 								风格：<%= image.design_image.try(:design).try(:style) %>
 							</p>
@@ -42,10 +42,10 @@
 						    <h3><%= image.weekly_star.try(:design_name)  %></h3>
 							<p class="p1 group">
 								<strong class="ft14 fb">当前票数：<%= image.weekly_star.try(:votes_count)  %></strong>
-							</p> 
+							</p>
 							<p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%= image.weekly_star.try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%= image.weekly_star.try(:comments_count)  %>)</span>
-							</p>        
+							</p>
 							<p>
 								风格：<%= image.weekly_star.try(:design_style) %>
 							</p>
@@ -56,10 +56,10 @@
 						    <h3><%= image.color_design.try(:design_name)  %></h3>
 							<p class="p1 group">
 								<strong class="ft14 fb">当前票数：<%= image.color_design.try(:votes_count)  %></strong>
-							</p> 
+							</p>
 							<p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%= image.color_design.try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%= image.color_design.try(:comments_count)  %>)</span>
-							</p>        
+							</p>
 							<p>
 								风格：<%= image.color_design.try(:design_style) %>
 							</p>
@@ -75,10 +75,10 @@
 						    <h3><%= image.design.try(:title)  %></h3>
 							<p class="p1 group">
 								<strong class="ft14 fb">当前票数：<%= image.design.try(:votes_count)  %></strong>
-							</p> 
+							</p>
 							<p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%= image.design.try(:shares_count)  %>)</span><span class="pl ft12">评论 (<%= image.design.try(:comments_count)  %>)</span>
-							</p>        
+							</p>
 							<p>
 								风格：<%= image.design.try(:style) %>
 							</p>
@@ -89,7 +89,7 @@
 						    <h3><%= image.inspiration.try(:title)  %></h3>
 							<p class="p1 group">
 								<strong class="ft14 fb">当前票数：<%= image.inspiration.try(:votes_count)  %></strong>
-							</p> 
+							</p>
 							<p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%= image.inspiration.try(:shares_count)  %>)</span>
 							</p>
@@ -100,19 +100,19 @@
 						    <h3><%= image.story.try(:title)  %></h3>
 							<p class="p1 group">
 								<strong class="ft14 fb">当前票数：<%= image.story.try(:votes_count)  %></strong>
-							</p> 
+							</p>
 							<!-- <p class="transpond p2 group">
 								<span class="transpond_btn ft12">转发 (<%#= image.story.try(:shares_count)  %>)</span>
 							</p> -->
 						<%- end %>
-						
+
 					</li>
 					<%-end %>
 	              <%-end %>
 				</ul><!--result one ends-->
 			</div><!--design_result ends-->
 		</div>
-		
+
 
 	<div class="pager host_pager ft12">
 		<%= paginate @images if @images %>

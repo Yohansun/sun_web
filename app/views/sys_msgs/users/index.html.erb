@@ -8,7 +8,7 @@
       <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
     </div> -->
 <%- end %>
-<div class="main signup group">
+<div class="main signup group main_new">
   <div class="shadow signup_box">
     <div class="section">
       <%= render :partial => "users/profile_box" %>
@@ -19,19 +19,19 @@
         <span class="host_ts pa">(共<span id="total_msg"><%= @sys_msgs.size%></span>条)</span> </div>
       <!--host_sort ends-->
 
-      <table class="sys_content ft14 tc">
+      <table class="sys_content ft14 tc" style="width:96%;margin:10px auto;">
         <tr class="sys_head">
-          <th class="th_1">发件人</th>
-          <th class="th_2">主题</th>
-          <th class="th_3">时间</th>
-          <th class="th_4">删除</th>
+          <th width="20%">发件人</th>
+          <th width="55%">主题</th>
+          <th width="20%">时间</th>
+          <th width="5%">删除</th>
         </tr>
         <% @sys_msgs.each do |sys_msg|%>
         <tr class="sys_row">
-          <td><%= sys_msg.reply_name %></td>
+          <td class="text-center"><%= sys_msg.reply_name %></td>
           <td class="sys_topics"><%= sys_msg.content.html_safe %></a></td>
-          <td class="sys_time"><%= sys_msg.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <td>
+          <td class="sys_time text-center"><%= sys_msg.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td class="text-center">
             <% if current_user.present? && sys_msg.present? %>
               <%= link_to(image_tag(asset_path "close_btn.jpg"), "javascript:void(0)", :onclick => "checkConfirm(#{current_user.id}, #{sys_msg.id})", :id => sys_msg.id)   %>
             <% end %>
@@ -39,7 +39,7 @@
         </tr>
         <%- end -%>
       </table>
-      <div class="pager host_pager ft12"> 
+      <div class="pager host_pager ft12">
         <%= paginate @sys_msgs%>
       </div>
       <!--pager ends-->
@@ -55,10 +55,10 @@
   }
   function del_msg(current_user_id, sys_msg_id){
     var del_url = "/users/"+ current_user_id + "/sys_msgs/" + sys_msg_id;
-    $.ajax({ 
-      url: del_url, 
-      type : "delete", 
-      data:{}, 
+    $.ajax({
+      url: del_url,
+      type : "delete",
+      data:{},
       datatype: "json",
       success: function(result){
           if(result == "ok"){

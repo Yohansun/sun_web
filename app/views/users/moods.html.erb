@@ -8,7 +8,7 @@
 	</style>
 <%- end %>
 
-<div class="main signup group">
+<div class="main signup group main_new">
 	<div class="shadow signup_box">
 		<div class="section">
 
@@ -40,7 +40,7 @@
 									<input type="hidden" id="color_code" name="mood[color_code]"/>
 									<input type="hidden" id="color_name" name="mood[color_name]"/>
 									<input type="hidden" id="font_color" name="mood[font_color]"/>
-									
+
 									<li class="per_mood per_mood2">色彩心情
 										<ul class="per_mood_options">
 											<li><a class="mood_1" data="0e8752"  data-name="墨绿色" data-code="GA5000-1" href="javascript:void(0)"></a></li>
@@ -66,21 +66,21 @@
 						<%- @moods.each do |m| %>
 							<%- if m.present? %>
 								<%- img = m.img.url if m.img.exists?(:original) -%>
-								
+
 								<div class="per_con pr">
-									<p><%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %></p>									
+									<p><%= m.created_at.strftime("%Y年%m月%d日 %H时%M分") %></p>
 									<p>
 										<span><%= m.user.display_name %>发表:</span>
 										<p style="color:#<%= m.font_color %>;" class="J_resulte">
 											<%= m.content %>
 										</p>
-									</p>	
+									</p>
 									<%- if img %>
 										<%= image_tag m.img.url(:thumb) %>
 									<%- end %>
 									<p class="p2">
 										<span class="zf" href="#">转发(<%= m.shares_count %>)</span>
-									</p>									
+									</p>
 									<%= forward_links("#{m.content}", user_moods_url, m.img.url, m.id.to_s, "Mood") %>
 								</div>
 							<%- end %>
@@ -106,7 +106,7 @@
 						</ul>
 						<p class="per_more"><a href="/weekly_stars">更多...</a></p>
 					</div>
-					<div class="clear"></div>     
+					<div class="clear"></div>
 				</div>
 			</div>
 		</div>
