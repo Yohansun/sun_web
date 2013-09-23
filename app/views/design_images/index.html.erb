@@ -1,9 +1,5 @@
-<%- content_for :head do %>
-  <%= stylesheet_link_tag "manage/bootstrap","jquery.slider","manage/icolor","manage/map" %>
-  <%= javascript_include_tag "jquery.masonry","jsCookie" %>
-<%- end %>
 <%- content_for :tail do %>
-
+  <%= javascript_include_tag "jquery.masonry","jsCookie" %>
   <script type="text/javascript">
   function show_login() {
           o_in();
@@ -278,10 +274,10 @@
             <fieldset class="clearfix noborder">
               <label class="pull-left"><%= category.title %>：</label>
               <span>
-                <select id="province" class="level_1" style="width:70px;">省</select>
-                <select id="city" class="level_2" style="width:70px;">市</select>
-                <select id="county" class="level_3" style="width:70px;" name='area_id'>区</select>
-                <input type="submit" class= "map-srch-submit" value="确定" onclick="submit_area();return false;" />
+                <select id="province" class="level_1">省</select>
+                <select id="city" class="level_2">市</select>
+                <select id="county" class="level_3" name='area_id'>区</select>
+                <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
               </span>
             </fieldset>
           <% end %>
