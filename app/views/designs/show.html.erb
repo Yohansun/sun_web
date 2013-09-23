@@ -225,7 +225,7 @@
           <ul class="review_listA">
             <% @comments.each do |c| %>
             <li>
-              <div class="bar">                
+              <div class="bar">
                 <% if c.user %>
                   <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
                 <% else %>

@@ -99,7 +99,7 @@
         $("ul.pull-left.nomargin").find("li").eq(cookie).addClass("active_tit list-curr");
         $form.eq(cookie).show().siblings().hide();
       };
-
+      // 展开收起JS
       $toggle.click(function(){
         var $this = $(this);
         if($this.hasClass('map-list-down')){
@@ -108,21 +108,18 @@
           $.createCookie('expand', 2);
         }
       });
+      // 有标签筛选,展开
+      <%- if @tag_ids.present? %>
+        $.createCookie('expand', 2);
+      <%- end %>
+
       var cookie = $.readCookie('expand');
       if(cookie == 1){
         $toggle.addClass('map-list-down').text('展开').parent().addClass("map-mini");
       } else if(cookie == 2){
         $toggle.removeClass('map-list-down').text('收起').parent().removeClass("map-mini");
       }
-      // $(window).unload(function(){alert(1)})
-      // if($toggle.hasClass('form_expand')){
-      //  $toggle.text("展开");
-      //  alert(1);
-      // }
-      // else {
-      //  $toggle.text("收起");
-      //  alert(2);
-      // };
+      // 展开收起JS END
 
       $('.colors_con').live('hover', function(){
         $(this).children().fadeToggle('fast');
@@ -202,14 +199,16 @@
   <li class="pull-right"><a href="/color_designs" target="_blank">装修色彩搭配</a></li>
 </ul>
 
-<%- if @special_kv %>
-  <a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %></a>
-  <%- if @special_kv.kv_maps.any? %>
-    <map id="mapkv_special" name="mapkv_special">
-      <%- @special_kv.kv_maps.each do |map| %>
-        <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
-      <%- end %>
-    </map>
+<%- unless params[:path] %>
+  <%- if @special_kv %>
+    <a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %></a>
+    <%- if @special_kv.kv_maps.any? %>
+      <map id="mapkv_special" name="mapkv_special">
+        <%- @special_kv.kv_maps.each do |map| %>
+          <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+        <%- end %>
+      </map>
+    <%- end %>
   <%- end %>
 <%- end %>
 
@@ -258,7 +257,7 @@
         <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images';">重新选择</span>
       </p>
 
-      <div class="map-list-form map-mini">
+      <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
         <%- @home_design.each do |category| %>
           <%- unless category.title == "按地区" %>
             <fieldset class="clearfix">
@@ -283,8 +282,11 @@
           <% end %>
         <% end %>
 
-
-        <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
+        <%- if @tag_ids.blank? %>
+          <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
+        <%- else %>
+          <a href="javascript:;" class="pa map-list-up">收起</a>
+        <%- end %>
       </div>
     <%- end %>
 
@@ -315,7 +317,7 @@
         <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images';">重新选择</button>
       </p>
 
-      <div class="map-list-form map-mini">
+      <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
 
         <%- @fitting_parts.each do |child_lv2| %>
           <fieldset class="clearfix">
@@ -328,12 +330,16 @@
               </span>
           </fieldset>
         <%- end %>
-        <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
+
+        <%- if @tag_ids.blank? %>
+          <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
+        <%- else %>
+          <a href="javascript:;" class="pa map-list-up">收起</a>
+        <%- end %>
       </div>
     </form><!-- tab_content -->
   </div>
 </div>
-
 
 <div class="map-flow index_main mt10 pull-left">
   <div id="map-flow" class="clearfix">
