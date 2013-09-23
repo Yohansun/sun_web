@@ -54,7 +54,7 @@
         <%- end %>
       </ul>
       <div class="indexkv_r_img">
-        <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_270x100) %></a>
+        <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' if @banner1 %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_270x100) %></a>
       </div>
     </div>
   </div>
@@ -98,7 +98,7 @@
   </div>
 
   <div class="footer_banner">
-    <a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner4.try(:file).try(:url, :list_1000x85) %></a>
+    <a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' if @banner4 %>" target="_blank"><%= image_tag @banner4.try(:file).try(:url, :list_1000x85) %></a>
   </div>
 
   <%= render :partial => 'design_show' %>
@@ -116,7 +116,7 @@
       <hr class="border2 border2_mt2">
       <div class="index_main">
         <div class="media tit_con">
-          <a href="<%= @banner5.url? ? @banner5.url : 'javascript:void(0);' %>" target="_blank" class="pull-left media_a"><%= image_tag @banner5.try(:file).try(:url, :list_290x200), class: 'media-object' %></a>
+          <a href="<%= @banner5.url? ? @banner5.url : 'javascript:void(0);' if @banner5 %>" target="_blank" class="pull-left media_a"><%= image_tag @banner5.try(:file).try(:url, :list_290x200), class: 'media-object' %></a>
           <div class="media-body">
             <ul class="ul_dot nomargin">
               <% @owner_entrys.each_with_index do |oe,index| %>
@@ -161,9 +161,9 @@
 
   <div class="clearfix">
     <div class="footer_banner pull-left">
-      <a href="<%= @banner6.url? ? @banner6.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner6.try(:file).try(:url, :list_670x85) %></a>
+      <a href="<%= @banner6.url? ? @banner6.url : 'javascript:void(0);' if @banner6 %>" target="_blank"><%= image_tag @banner6.try(:file).try(:url, :list_670x85) %></a>
     </div>
     <div class="footer_banner pull-right">
-      <a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner7.try(:file).try(:url, :list_310x85) %></a>
+      <a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);' if @banner7 %>" target="_blank"><%= image_tag @banner7.try(:file).try(:url, :list_310x85) %></a>
     </div>
   </div>
