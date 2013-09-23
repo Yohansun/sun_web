@@ -103,6 +103,8 @@ module ApplicationHelper
         elsif controller_name == 'inspirations' && action_name == 'show'
           "【#{@inspiration.title} | 灵感秀】- 设计鉴赏" + '-' + BASE_TITLE
         #业主通道
+        elsif controller_name == 'channel' && action_name == 'refresh_service'
+          "刷新服务|icolor和您一起刷新家，新开始 - 立邦iColor官方网站"
         elsif controller_name == 'channel'
           "【设计快查】- 装修公司免费推荐 -立邦iColor"
         elsif controller_name == 'faqs'
