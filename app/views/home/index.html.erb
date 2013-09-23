@@ -147,8 +147,8 @@
           <% end %>
           <div class="media-body">
             <ul class="ul_dot nomargin">
-              <% @fit_literals.each do |literal| %>
-                <li>
+              <% @fit_literals.each_with_index do |literal,i| %>
+                <li class="<%= 'noborder' if i + 1 == @fit_literals.size %>">
                   <a href="<%= literal.try(:link) %>" target="_blank"><%= literal.try(:title) %></a>
                 </li>
               <% end %>

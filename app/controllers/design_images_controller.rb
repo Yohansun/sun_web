@@ -113,13 +113,6 @@ class DesignImagesController < ApplicationController
       @user_word = @search_word
       @rank = @other_ids[5]
     end
-    # @categories = ImageLibraryCategory.parent_categories
-    # @category_ids = @categories.collect{|categorie|
-    #   {
-    #     id: categorie.id,
-    #     childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
-    #   }
-    # }
 
     # only select ids
     @ids.delete_at(-1)
@@ -240,11 +233,6 @@ class DesignImagesController < ApplicationController
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
     @query_tags = @ilcs if @ilcs.present?
-
-    # @image_colors = []
-    # @design_images.each do |image|
-    #   @image_colors << ColorCode.where("code in (?)", [image.color1, image.color2, image.color3])
-    # end
 
     @special_kv = HomeKv.where(position: nil, visible: true).first
 
