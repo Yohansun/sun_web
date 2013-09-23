@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913083859) do
+ActiveRecord::Schema.define(:version => 20130923173840) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -1024,6 +1024,16 @@ ActiveRecord::Schema.define(:version => 20130913083859) do
     t.datetime "updated_at",   :null => false
     t.datetime "published_at"
   end
+
+  create_table "parent_tags", :force => true do |t|
+    t.integer  "design_image_id"
+    t.integer  "image_library_category_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "parent_tags", ["design_image_id"], :name => "index_parent_tags_on_design_image_id"
+  add_index "parent_tags", ["image_library_category_id"], :name => "index_parent_tags_on_image_library_category_id"
 
   create_table "permissions", :force => true do |t|
     t.string   "name"

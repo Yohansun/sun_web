@@ -35,12 +35,10 @@
         $collect= $('.imgbase_collect_id'),
         $down   = $('.imgbase_down_id'),
         $toggle = $('.map-list-up'),
-        // s = $(".imgbase_collect").attr('data_s'),
         $form   = $('.map-list-search'),
         $ul     = $('.nomargin'),
         $conte = $('.imgbase_bin > .imginfo_big_txt'),
         $colorsbox = $(".imgbase_bin > .colorsbox");
-// console.log($('.imgbase_list').children().last().data('full'))
 
       <% if params[:page].present? &&  params[:page].to_i != 0 %>
         $('#prev').show();
@@ -49,11 +47,9 @@
           event.preventDefault()
           if(li_index == 0){
             <% if  (params[:page].to_i - 1) == 1 %>
-              //window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:return => 1)) %>"
               ///0-0-0-0-0-0-0-0-0-all-view_count-3-B-a-0-0
                 window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1"
             <% else %>
-              // window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page - 1),:return => 1))%>"
               window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1/<%=@images.current_page - 1%>"
             <% end %>
           }
@@ -72,7 +68,6 @@
         $('#next').click(function(event) {
           var li_index = $list.find('.imgbase_curr').index();
           if(li_index == 10){
-            // window.location = "<%=escape_javascript(raw design_images_path(imageable_type: params[:imageable_type],pinyin: params[:pinyin],search: params[:search],tags: params[:tags],all_tags: params[:all_tags],area_id: params[:area_id],ranking_list: params[:ranking_list],:page => (@images.current_page + 1))) %>"
             window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-0/<%=@images.current_page + 1%>"
           }
         });
@@ -271,7 +266,7 @@
 
                   <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if cate_children_ids & tags == [] %>">全部</a>
                   <%- category.category(category.category_id).each do |cate_child| %>
-                  <a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
+                    <a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids && @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
                   <%- end %>
                 </span>
             </fieldset>
@@ -296,7 +291,7 @@
       </div>
     <%- end %>
 
-    <form class="map-list-search hide pr" style="display: none;">
+    <form class="map-list-search hide pr" style="display:none;">
       <p class="map-srch-bin">
         您的选择：
         <%- @query_tags.each do |tag| %>
@@ -320,11 +315,10 @@
           <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
         </span>
         <%- end %>
-        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images';">重新选择</button>
+        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images';">重新选择</span>
       </p>
 
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
-
         <%- @fitting_parts.each do |child_lv2| %>
           <fieldset class="clearfix">
             <label class="pull-left"><%= child_lv2.title %>：</label>

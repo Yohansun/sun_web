@@ -8,6 +8,7 @@ class DesignImage < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
   has_one :event_attendee
   has_many :tags, class_name: 'ImageTag',:dependent => :destroy
+  has_many :parent_tags,:dependent => :destroy
   has_many :votes, :as => :voteable
   has_many :comments, :as => :commentable
   belongs_to :user
