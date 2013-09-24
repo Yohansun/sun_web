@@ -5,37 +5,37 @@
   <div class="options dott1 clearfix">
     <div class="pull-left form-inline option">
       <label for="input1" class="control-label">姓名<span>*</span></label>
-      <%= text_field :cubit_fixture, :name ,:class => "input-medium"%>
+      <%= text_field :cubit_fixtures, :name ,:class => "input-medium"%>
     </div>
     <div class="pull-left form-inline option">
       <label for="input2" class="control-label">电话<span>*</span></label>
-      <%= text_field :cubit_fixture, :phone, :class => "input-medium" %>
+      <%= text_field :cubit_fixtures, :phone, :class => "input-medium" %>
     </div>
     <div class="pull-left form-inline option">
       <label for="input3" class="control-label">装修面积<span>*</span></label>
-      <%= text_field :cubit_fixture, :fixture_area, :class => "input-medium" %>
+      <%= text_field :cubit_fixtures, :fixture_area, :class => "input-medium" %>
     </div>
     <div class="pull-left form-inline option">
       <label for="" class="control-label">期望风格<span>*</span></label>
-      <%=  select_tag "cubit_fixture[style]", options_from_collection_for_select(ImageLibraryCategory.style, "title", "title",params[:style]),:prompt=>'请选择', :class => "input-medium"  %>
+      <%=  select_tag "cubit_fixtures[style]", options_from_collection_for_select(ImageLibraryCategory.style, "title", "title",params[:style]),:prompt=>'请选择', :class => "input-medium"  %>
     </div>
     <div class="pull-left form-inline option">
       <label for="input4" class="control-label">楼盘名称<span>*</span></label>
-      <%= text_field :cubit_fixture, :house_name, :class => "input-medium" %>
+      <%= text_field :cubit_fixtures, :house_name, :class => "input-medium" %>
     </div>
     <div class="pull-left form-inline option">
       <label for="" class="control-label">房型<span>*</span></label>
-      <%=  select_tag "cubit_fixture[fixture_type]", options_from_collection_for_select(ImageLibraryCategory.where(parent_id: 1), "id", "title",params[:tag]),:prompt=>'请选择',class: "input-medium"%>
+      <%=  select_tag "cubit_fixtures[fixture_type]", options_from_collection_for_select(ImageLibraryCategory.where(parent_id: 1), "title", "title",params[:tag]),:prompt=>'请选择',class: "input-medium"%>
     </div>
     <div class="pull-left form-inline option linkageseclet2">
       <label for="" class="control-label">装修区域<span>*</span></label>
         <select class="level_1 input-small" name=""></select>
         <select class="level_2 input-small" name=""></select>
-        <select class="level_3 input-small" name="cubit_fixture[area_id]"></select>
+        <select class="level_3 input-small" name="cubit_fixtures[area_id]"></select>
     </div>
     <div class="pull-left form-inline option">
       <label for="" class="control-label">装修预算<span>*</span></label>
-      <%=  select_tag "cubit_fixture[pre_price]", options_from_collection_for_select(ImageLibraryCategory.cost, "title", "title",params[:style]),:prompt=>'请选择', :class => "input-medium"  %>
+      <%=  select_tag "cubit_fixtures[pre_price]", options_from_collection_for_select(ImageLibraryCategory.cost, "title", "title",params[:style]),:prompt=>'请选择', :class => "input-medium"  %>
     </div>
   </div>
   <div class="text-center dott1 pt30"><%= submit_tag "",:class => 'input_submit'%></div>

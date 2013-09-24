@@ -25,9 +25,9 @@
     </ul>
   </div>
 
-  <div class="pull-right"><a href="<%= @i_banner1.url? ? @i_banner1.url : 'javascript:void(0);' %>" target="_blank"><img src="<%=@i_banner1.try(:file).try(:url,:list_230x230)%>"></a></div>
+  <div class="pull-right"><a href="<%= @i_banner1.url? ? @i_banner1.url : 'javascript:void(0);' if @i_banner1 %>" target="_blank"><img src="<%=@i_banner1.try(:file).try(:url,:list_230x230)%>"></a></div>
 </div>
 <div class="clearfix">
-  <div class="footer_banner pull-left"><a href="<%= @i_banner2.url? ? @i_banner2.url : 'javascript:void(0);' %>" target="_blank"><img src="<%=@i_banner2.try(:file).try(:url,:list_670x85)%>"></a></div>
-  <div class="footer_banner pull-right"><a href="<%= @i_banner3.url? ? @i_banner3.url : 'javascript:void(0);' %>" target="_blank"><img src="<%=@i_banner3.try(:file).try(:url,:list_310x85)%>"></a></div>
+  <div class="footer_banner pull-left"><a href="<%= @i_banner2.url? ? @i_banner2.url : 'javascript:void(0);' if @i_banner2 %>" target="_blank"><img src="<%=@i_banner2.try(:file).try(:url,:list_670x85)%>"></a></div>
+  <div class="footer_banner pull-right"><a href="<%= @i_banner3.url? ? @i_banner3.url : 'javascript:void(0);' if @i_banner3 %>" target="_blank"><img src="<%=@i_banner3.try(:file).try(:url,:list_310x85)%>"></a></div>
 </div>

@@ -6,7 +6,7 @@ class RefreshLife::BaseRefreshController < ApplicationController
   def get_data
   	@design_more = IColumnData.where(i_column_type_id: 2, position: 0).first
   	@weekly_star_more = IColumnData.where(i_column_type_id: 3, position: 0).first
-  	@master_design_more = IColumnData.where(i_column_type_id: 1, position: 0).first
+  	@master_design_more = IColumnData.where(i_column_type_id: 17, position: 0).first
     @design_datas = IColumnData.where(i_column_type_id: 2).limit(6).order("rank asc")
     @weekly_star_datas = IColumnData.where(i_column_type_id: 3).limit(6).order("rank asc")
     #精彩资讯 通栏逻辑
