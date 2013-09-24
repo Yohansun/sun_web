@@ -33,10 +33,10 @@ class ChannelController < ApplicationController
     if area_id.present?
       params[:search][:area_id_eq] = area_id
     elsif province_id.present?
-      params[:search][:user_area_id_in] = Area.robot(province_id,[city_id].compact).map(&:id)
+      @user_area_id_in = Area.robot(province_id,[city_id].compact).map(&:id)
     end
 
-    @search = DesignImage.available.users.search(params[:search])
+    @search = DesignImage.available.users.search(params[:search].merge({:user_area_id_in => @user_area_id_in}))
     @design_users = @search.page(params[:page]).per(10)
 
     #mood
