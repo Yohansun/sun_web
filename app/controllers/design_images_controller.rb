@@ -476,7 +476,8 @@ class DesignImagesController < ApplicationController
       @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).uniq.limit(4)
     end
     #最新更新
-    @latest_mounth_images = DesignImage.from.available.audited_with_colors.latest_mounth_images.sample(4)
+    # @latest_mounth_images = DesignImage.from.available.audited_with_colors.latest_mounth_images.sample(4)
+    @latest_mounth_images = DesignImage.order("created_at desc").limit(1000).available.audited_with_colors.sample(4)
   end
 
   def fullscreen
