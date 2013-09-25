@@ -145,9 +145,10 @@ function remove_design_image(){
       if(parseInt(imgCount) == 0){
         alert("不能一张图片都没有哦");
         return false;
-      }else{
-        $(".edit_design").submit();
       }
+      // else{
+        // $(".edit_design").submit();
+      // }
     })
     $('.color_autocomplete').typeahead({
         source: function(query, process){
