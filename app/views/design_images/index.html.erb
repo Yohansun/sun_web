@@ -230,9 +230,9 @@
         您的选择：
         <%- @query_tags.each do |tag| %>
         <% next if tag.blank? %>
-        <span class="map-srch-s"><%= tag.parent.present? ? "#{tag.parent.title}" : "" %>: <i><%= tag.title %></i>
-          <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
-        </span>
+          <span class="map-srch-s"><%= (tag.parent.present? && tag.parent.title != '按部件') ? "#{tag.parent.title}" : "全部" %>: <i><%= tag.title %></i>
+            <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
+          </span>
         <%- end %>
         <%- if @color.present? && @color.to_s != "0" %>
         <span class="map-srch-s">查询: <i><%= @color %></i>
@@ -296,7 +296,7 @@
         您的选择：
         <%- @query_tags.each do |tag| %>
         <% next if tag.blank? %>
-        <span class="map-srch-s"><%= tag.parent.present? ? "#{tag.parent.title}" : "" %>: <i><%= tag.title %></i>
+        <span class="map-srch-s"><%= (tag.parent.present? && tag.parent.title != '按部件') ? "#{tag.parent.title}" : "全部" %>: <i><%= tag.title %></i>
           <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
         </span>
         <%- end %>
