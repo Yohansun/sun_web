@@ -46,6 +46,13 @@
   PNG.fix('img,div,a,ul,li');
   </script>
   <![endif]-->
+  <style type="text/css">
+  .nav_top{clear:none;}
+  .wrapper{width:1000px;}
+  .width652{width:472px;}
+  .control2013 div.fl{width:720px;}
+  .control2013 textarea{width:705px;}
+  </style>
 <% end %>
 <div class="wrapper">
     <div class="upload2013">
@@ -53,7 +60,7 @@
     </div>
     <%= form_tag update_design_user_designs_path(current_user),:class=>'clear' do %>
         <div class="upload2013">
-            <div align="center"> 
+            <div align="center">
               <input id="new_works" name="new_works" type="radio" onclick="javascript:window.location.replace('<%=new_user_design_path(current_user)%>');">新建作品
               <input id="new_works" name="new_works" type="radio" checked>选择已有作品
             </div>

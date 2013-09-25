@@ -44,6 +44,13 @@
   PNG.fix('img,div,a,ul,li');
   </script>
   <![endif]-->
+  <style type="text/css">
+  .nav_top{clear:none;}
+  .wrapper{width:1000px;}
+  .width652{width:472px;}
+  .control2013 div.fl{width:720px;}
+  .control2013 textarea{width:705px;}
+  </style>
 <% end %>
 <div class="wrapper">
     <div class="upload2013">
@@ -61,7 +68,7 @@
                   <%= f.text_field :title, class: "width652 fl inputs_count", "data-count"=> "50" -%>
                   <span class="help-text fl">还可以输入<b class="cr inputs_count_tip">50</b>符汉字</span>
                   <% unless params[:baicheng_active].present? %>
-                    <%= select_tag "edit_title", 
+                    <%= select_tag "edit_title",
                     options_for_select(Design.order('created_at desc').where("user_id = #{current_user.id} and story_id is null").map { |design| [design.title, design.id] },@design.id),:prompt => '--请选择--', :onchange => 'jump()' -%>
                    <% end %>
                 <% end %>
@@ -183,6 +190,6 @@
         <% end %>
         <input type="image" src="<%=asset_path 'upload2013_submit.jpg'%>" class="upload2013_submit">
         <!-- <input type="button" class="upload2013_submit" /> -->
-        <p class="help-text tc cr">*红色标注为必填项</p>
+        <p class="help-text tc cr" style="padding:10px 0 30px">*红色标注为必填项</p>
     <% end %>
 </div><!--main ends-->
