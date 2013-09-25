@@ -4,6 +4,13 @@
     .uploadifyButton{background:transparent;}
     .uploadify:hover .uploadifyButton{background:transparent;}
     .uploadify{float:left;margin-right: 20px;}
+
+  .nav_top{clear:none;}
+  .wrapper{width:1000px;}
+  .width652{width:472px;}
+  .control2013 div.fl{width:720px;}
+  .control2013 textarea{width:705px;}
+  .upload_edit2013 .control2013 {width:610px;}
   </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -177,7 +184,7 @@ function remove_design_image(){
           <%= render :partial => "design_images/upload", :collection => @design.design_images -%>
         </div><!--load_content ends-->
         <p class="load_footer ft12 fl">
-            共有<span style="color:red" class="design_images_size"><%= @design.design_images.size %></span>个文件 | 
+            共有<span style="color:red" class="design_images_size"><%= @design.design_images.size %></span>个文件 |
             <a href="javascript:remove_design_image();uploads_size();" class="clear_all">清空列表</a>
         </p><!--load_footer ends-->
         <p class="load_total ft12 fr">总计：<span>0</span>KB</p>
