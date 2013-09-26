@@ -4,7 +4,7 @@ $(".literal_submit").click(function(){
 	<% if @genre_type == "red" || @genre_type == "black" %>
 	  if ($(".literal_title").val().length > 16 || $(".literal_title").val() == "" ){
 	    alert("标题必须输入不超过16个汉字同时标题不能为空！");
-	    return false;
+	    Backbone.history.navigate('manage/home_liter_heads?design_type=home_'+'<%= @genre_type %>'+'_liters', true)
 	  }else if($(".liter_link").val() == ""){
 	    alert("请输入链接");
 		  return false;
@@ -14,7 +14,7 @@ $(".literal_submit").click(function(){
   <% else %>
     if ($(".literal_title").val().length > 14 || $(".literal_title").val() == "" ){
 	    alert("标题必须输入不超过14个汉字同时标题不能为空！");
-	    return false;
+	    Backbone.history.navigate('manage/home_liter_heads?design_type=home_'+'<%= @genre_type %>'+'_liters', true)
 	  }else if($(".liter_link").val() == ""){
 	    alert("请输入链接");
 		  return false;
