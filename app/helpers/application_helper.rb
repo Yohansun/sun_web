@@ -140,6 +140,14 @@ module ApplicationHelper
           "【木纹风尚生活】- 精彩活动" + '-' + BASE_TITLE
         elsif controller_name == 'gifts' && action_name == 'index'
           "【获奖名单】- 精彩活动" + '-' + BASE_TITLE
+        elsif controller_name == 'refresh_record' && action_name == 'show'
+          "[#{@life_memoir.s_title}]｜ icolor和您一起刷新家，新开始 －   立邦iColor官方网站"
+        elsif controller_name == 'refresh_record'
+          "刷新实录|icolor和您一起刷新家，新开始 - 立邦iColor官方网站"
+        elsif controller_name == 'refresh_show'
+          "刷新效果|icolor和您一起刷新家，新开始 - 立邦iColor官方网站"
+        elsif controller_name == 'refresh_list'
+          "刷新生活精彩资讯｜icolor和您一起刷新家，新开始 －   立邦iColor官方网站"
         else
           BASE_TITLE
         end
