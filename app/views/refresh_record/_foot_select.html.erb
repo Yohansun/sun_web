@@ -1,5 +1,5 @@
 <div class="refresh_new pull-left">
-	<h5><a href="<%=@images_url.url if @images_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
+	<h5><a href="<%= @design_more.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
 	<ul class="ul_dot">
 	  <% @images.each do |image| %>
 		  <li><a href="" target="_blank"><%=image.title%></a></li>
@@ -7,7 +7,7 @@
   </ul>
 </div>
 <div class="refresh_new pull-left">
-	<h5><a href="<%=@design_url.url if @design_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
+	<h5><a href="<%= @weekly_star_more.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
 	<ul class="ul_dot">
     <% @designs.each do |design| %>
 		  <li><a href="<%=design.url%>" target="_blank"><%=design.title%></a></li>
