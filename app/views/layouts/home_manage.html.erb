@@ -54,18 +54,15 @@
           </span>
           <a class="help-inline a_hover_red" target="_blank" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
           <a class="help-inline subscribe a_hover_red" href="javascript:;">订阅电子期刊</a> |
-          <!-- <a class="help-inline jiathis_btn" href="javascript:void(0)">分享</a> -->
           <a class="help-inline js-share_btn" href="#">分享</a>
-          <!-- JiaThis Button BEGIN -->
-          <div class="jiathis_style jiathis_area">
-            <a class="jiathis_button_tsina"></a>
-            <a class="jiathis_button_kaixin001"></a>
-            <a class="jiathis_button_renren"></a>
-            <a class="jiathis_button_qzone"></a>
-            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-            <a class="jiathis_counter_style"></a>
+          <div class="bshare-custom jiathis_area">
+            <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+            <a title="分享到开心网" class="bshare-kaixin001"></a>
+            <a title="分享到人人网" class="bshare-renren"></a>
+            <a title="分享到QQ空间" class="bshare-qzone"></a>
+            <a title="分享到腾讯微博" class="bshare-qqmb"></a>
+            <span class="BSHARE_COUNT bshare-share-count">0</span>
           </div>
-          <!-- JiaThis Button END -->
           <a data-toggle="modal" class="btn btn-mini btn_gray login js-login nomargin" href="#login_modal">登录</a>
           <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red nomargin">免费注册</a>
           <a href="#" target="_blank"><%= image_tag "nippon.png" %></a>
@@ -299,7 +296,8 @@
     var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F60925cbfbdc097b3cfc9493e515f0d24' type='text/javascript'%3E%3C/script%3E"));
   </script>
-  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+  <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 
 </body>
 </html>
