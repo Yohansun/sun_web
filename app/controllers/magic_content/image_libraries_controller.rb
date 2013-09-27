@@ -47,7 +47,8 @@ module MagicContent
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       if params[:tags].present?
-        ImageTag.destroy_all(["id in (?)", @image.tags.map(&:id)])
+        ImageTag.destroy_all(design_image_id: @image.id)
+        ParentTag.destroy_all(design_image_id: @image.id)
         params[:tags].each {|tag| @image.tags << ImageTag.new(image_library_category_id: tag)}
       end
       if @image.save
