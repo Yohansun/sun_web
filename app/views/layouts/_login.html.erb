@@ -29,6 +29,15 @@
   </p>
 </div><!--subs_suc ends 订阅成功-->
 
+<div class="float_banner js-banner_hover">
+  <a href="javascript:;" class="float_bann block">
+    <img class="" src="<%= asset_path "float_bann.jpg" %>" alt="" />
+  </a>
+  <p class="hidden float_bann_big">
+    <span class="js-close"></span>
+    <a href="/inspirations" target="_blank"><img class="" src="<%= asset_path "float_bann_big.jpg" %>" alt="" /></a>
+  </p>
+</div>
 
 <div class="unlogin modal" style="height: 354px;">
 	<%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
