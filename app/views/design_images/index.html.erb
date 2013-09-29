@@ -194,7 +194,7 @@
   <li class="pull-right"><a href="/color_designs" target="_blank">装修色彩搭配</a></li>
 </ul>
 
-<%- unless params[:path] %>
+<%- if params[:path].blank? && params[:page].blank? %>
   <%- if @special_kv %>
     <a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %></a>
     <%- if @special_kv.kv_maps.any? %>
@@ -249,7 +249,7 @@
           <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
         </span>
         <%- end %>
-        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images';">重新选择</span>
+        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
       </p>
 
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
@@ -315,7 +315,7 @@
           <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
         </span>
         <%- end %>
-        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images';">重新选择</span>
+        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
       </p>
 
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
