@@ -1,0 +1,9 @@
+<% if @hds.design_type == 1 %>
+  $(".week-vote").text(<%=@hds.vote%>)
+<% end %>
+<% if @hds.design_type == 2 %>
+  $(".design-vote").text(<%=@hds.vote%>)
+<% end %>
+<% if @hds.design_type == 3 %>
+  $(".color-vote").text(<%=@hds.vote%>)
+<% end %>

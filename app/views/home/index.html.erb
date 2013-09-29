@@ -11,11 +11,14 @@
   }
 </style>
 <script type="text/javascript">
-// $(function(){
-//   $('.imgbase_show a').hover(function(){
-//     $(this).find('span:eq(1)').toggleClass('none')
-//   });
-// });
+$(function(){
+  $.get("<%=home_get_vote_path%>",{},function(data){
+    var indexVote = $('.index-vote')
+    indexVote.eq(0).text(data.week_vote)
+    indexVote.eq(1).text(data.design_vote)
+    indexVote.eq(2).text(data.color_vote)
+  })
+});
 </script>
 <% end -%>
   <div class="clearfix mt10">

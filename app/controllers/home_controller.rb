@@ -2,6 +2,7 @@
 class HomeController < ApplicationController
   layout "home_manage"
   #caches_page :index, :expires_in => 60.minutes
+  #before_filter :get_vote
 
   def t1days
     redirect_to "/21days/index.html"
@@ -113,5 +114,44 @@ class HomeController < ApplicationController
 
   def home_overall
       render layout: nil
+  end
+
+  def get_vote
+    week_vote = 0
+    design_vote = 0
+    color_vote = 0
+    @week_star = HomeDesignShow.design_type(1)
+    if @week_star.present?
+      @week_star_left = @week_star.position(1).last
+      week_vote = @week_star_left.vote if @week_star_left
+    end
+    @design_show = HomeDesignShow.design_type(2)
+    if @design_show.present?
+      @design_left = @design_show.position(1).last
+      design_vote = @design_left.vote if @design_left
+    end
+    @color_show = HomeDesignShow.design_type(3)
+    if @color_show.present?
+      @color_left = @color_show.position(1).last
+      color_vote = @color_left.vote if @color_left
+    end
+    respond_to do |format|
+      format.json {render :json => { :week_vote => week_vote, :design_vote => design_vote, :color_vote => color_vote,
+        :action => 'index'
+        }
+      }
+    end
+  end
+
+  def update_vote
+    @hds = HomeDesignShow.find params[:id]
+    if @hds
+      if @hds.vote.present?
+        @hds.vote = @hds.vote.to_i + 1
+      else
+        @hds.vote = 1
+      end
+      @hds.save
+    end
   end
 end

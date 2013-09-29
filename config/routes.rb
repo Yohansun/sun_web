@@ -34,6 +34,8 @@ Icolor::Application.routes.draw do
   get "home/home_overall.js" => "home#home_overall"
   root :to => 'home#index'
   get "home/design_show"
+  get "home/get_vote" => "home#get_vote"
+  post "home/update_vote" => "home#update_vote"
 
   resources :votes
 
