@@ -1,15 +1,6 @@
 <%- content_for :tail do %>
   <%= javascript_include_tag "jquery.masonry","jsCookie" %>
   <script type="text/javascript">
-  function show_login() {
-          o_in();
-          $('#login_win').show();
-          $("#design_message").hide();
-          $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
-              err_in();
-          });
-      }
-
     $(function() {
       var options = {
         data  : data

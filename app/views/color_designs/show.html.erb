@@ -16,14 +16,6 @@
             event.preventDefault();
             $(".big_image img").attr("src", $(event.target).parent().attr("href"));
         });
-        function show_login() {
-          o_in();
-          $('#login_win').show();
-          $("#design_message").hide();
-          $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
-              err_in();
-          });
-      }
         $(function(){
           if ($("#new_message")) {
             $("#new_message").click(function (event) {
@@ -35,7 +27,7 @@
                 <% end -%>
             });
         }
-        
+
         });
     </script>
 <% end -%>
@@ -143,7 +135,7 @@
             <td><%= ('立邦木器漆'+ color_var.code ) if color_var %></td>
             <%- else %>
             <td><%= ('立邦'+ color_var.code + color_var.name) if color_var %></td>
-            <%- end %>  
+            <%- end %>
           </tr>
           <tr><th>搭配理念：</th>
             <td><%= @design.design_thought %></td>
@@ -179,7 +171,7 @@
           <ul class="review_listA">
             <% @comments.each do |c| %>
                 <li>
-                  <div class="bar">                    
+                  <div class="bar">
                     <% if c.user %>
                       <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
                     <% else %>
