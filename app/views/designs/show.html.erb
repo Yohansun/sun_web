@@ -12,14 +12,6 @@
       event.preventDefault();
       $(".big_image img").attr("src", $(event.target).parent().attr("href"));
     });
-  function show_login() {
-          o_in();
-          $('#login_win').show();
-          $("#design_message").hide();
-          $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
-              err_in();
-          });
-      }
   $(function(){
     if ($("#new_message")) {
         $("#new_message").click(function (event) {

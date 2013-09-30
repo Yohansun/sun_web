@@ -117,15 +117,6 @@
 </div><!--unlogin ends-->
 
 <script type="text/javascript">
-    function show_login() {
-        o_in();
-        $('#login_win').show();
-        $("#design_message").hide();
-        $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
-            err_in();
-        });
-    }
-
     function design_message(){
       o_in();
       $("#design_message").show();

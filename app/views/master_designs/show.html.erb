@@ -13,14 +13,6 @@
 <%- content_for :tail do %>
    <%= render :partial => "recommend_color" %>
    <script type="text/javascript">
-   function show_login() {
-          o_in();
-          $('#login_win').show();
-          $("#design_message").hide();
-          $('#overlay_new_user, #new_user').bind('ajax:error', function (xhr, status, error) {
-              err_in();
-          });
-      }
     $(function(){
       if ($("#new_message")) {
         $("#new_message").click(function (event) {
@@ -110,7 +102,7 @@
             <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
             <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
           </div>
-        </div>  
+        </div>
       </div>
     </div>
   </div>
