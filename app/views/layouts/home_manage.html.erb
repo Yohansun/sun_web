@@ -272,16 +272,13 @@
     $(function(){
       ;(function($){
         //左侧banner
-        $('.js-banner_hover').mouseover(function(){
+        $('.js-banner_hover').on('mouseover mouseout','a',function(){
           $('.float_bann').addClass('hidden');
           $('.float_bann_big').removeClass('hidden');
-        }).mouseout(function(){
-          $('.float_bann').removeClass('hidden');
-          $('.float_bann_big').addClass('hidden')
         });
         $('.js-close').on('click', function(){
           $(this).parent().addClass('hidden');
-          $(this).parent().siblings().removeClass('hidden')
+          $(this).parent().siblings().removeClass('hidden');
         });
       }($));
     });
