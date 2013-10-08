@@ -249,13 +249,7 @@
             <fieldset class="clearfix">
               <label class="pull-left"><%= category.title %>：</label>
                 <span>
-                  <%
-                  cate_children = category.category(category.category_id)
-                  cate_children_ids = cate_children.map(&:id).uniq
-                  tags = @tag_ids.map{|a| a.to_i}
-                  %>
-
-                  <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if cate_children_ids & tags == [] %>">全部</a>
+                  <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if highlight(category) %>">全部</a>
                   <%- category.category(category.category_id).each do |cate_child| %>
                     <a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids && @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
                   <%- end %>
@@ -314,12 +308,7 @@
           <fieldset class="clearfix">
             <label class="pull-left"><%= child_lv2.title %>：</label>
               <span>
-                <%
-                cate_children = child_lv2.category(child_lv2.category_id)
-                cate_children_ids = cate_children.map(&:id).uniq
-                tags = @tag_ids.map{|a| a.to_i}
-                %>
-                <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="<%= 'highlight' if cate_children_ids & tags == [] %>">全部</a>
+                <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="<%= 'highlight' if highlight(child_lv2) %>">全部</a>
                 <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
                   <a href="/images/<%= show_link child_lv3.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(child_lv3.id.to_s) %>"><%= child_lv3.title %></a>
                 <%- end %>
