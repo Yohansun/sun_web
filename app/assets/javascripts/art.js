@@ -12,11 +12,17 @@ $(function(){
 		$('.art_box').hide().eq(num).show();
 	});
 
-	$('.ipad1_zoom').click(o_in2);
+	$('.ipad1_zoom').on('click', o_in2);
 	$('#lay_close').click(o_out2);
 
     function o_in2(){
     $('#overlay2').fadeIn('fast');
+    var $carousel_wrap = $(this).siblings('.carousel').children('ul');
+    var left = Math.abs(parseInt($carousel_wrap.css('left')));
+    var img_index = parseInt(left/857);
+    var curr_imgsrc = $carousel_wrap.find('img').eq(img_index).attr('src')
+    console.log(curr_imgsrc)
+    $('#arts').find('img').attr('src',curr_imgsrc)
     }
     function o_out2(){
     $('#overlay2').fadeOut('fast');
@@ -30,7 +36,7 @@ $(function(){
         $('#art_container').children().eq(index).show().siblings().hide();
     });
 
-	$('#carousel,#pdf_container,#arts').draggableCarousel({
+	$('.carousel,#pdf_container,#arts').draggableCarousel({
 		'keyControls' : true,
 		'transitionDuration' : 1000
 	});
