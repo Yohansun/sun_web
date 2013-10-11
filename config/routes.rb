@@ -32,8 +32,10 @@ Icolor::Application.routes.draw do
   get "/users/edit_me" => "users#edit_me"
   get "home/overall.js" => "home#overall"
   get "home/home_overall.js" => "home#home_overall"
+  get "home/image_show_loading" => "home#image_show_loading"
   root :to => 'home#index'
   get "home/design_show"
+  get "home/image_vote" => "home#image_vote"
   get "home/get_vote" => "home#get_vote"
   post "home/update_vote" => "home#update_vote"
 
@@ -181,7 +183,11 @@ Icolor::Application.routes.draw do
     end
   end
   match "/inspirations_upload" => "inspirations#upload"
-  resources :comments
+  resources :comments do
+    collection do
+      get :get_comments
+    end
+  end
   resources :reply_msgs
   resources :rep_replies
   match "/color_designs" => "color_designs#index"

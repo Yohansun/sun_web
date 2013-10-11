@@ -116,6 +116,19 @@ class HomeController < ApplicationController
       render layout: nil
   end
 
+  def image_show_loading
+    render layout: nil
+  end
+
+  def image_vote
+    if params[:image_id]
+      @image = DesignImage.find_by_id(params[:image_id])
+      render :json => {:image_vote => @image.votes_count}
+    else
+      render nothing: true
+    end
+  end
+
   def get_vote
     week_vote = 0
     design_vote = 0

@@ -43,4 +43,9 @@ class CommentsController < ApplicationController
     comment.destroy
     redirect_to :back
   end
+
+  def get_comments
+    @image = DesignImage.find(params[:id])
+    @comments = @image.comments.order("created_at desc").page(params[:page]).per(3)
+  end
 end

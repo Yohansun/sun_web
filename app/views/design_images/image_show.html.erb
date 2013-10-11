@@ -3,6 +3,7 @@
   <%= javascript_include_tag "manage/map-kv-slider.js","/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
     $(function() {
+      $.getScript("/home/image_show_loading.js?"+(new Date().valueOf()));
       $('.map-submit').click(function(){
         var search = $(".search_query_value").val();
         if(search == "" || search == null){
@@ -136,15 +137,11 @@
     <div class="btn_group clearfix">
       <a href="<%= user_design_path(@image.user_id, @image.imageable_id) %>" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该套作品</a>
       <a href="/images/<%= @image.id%>/fullscreen" class="btn2 pull-right" target="_blank" title=''><i class="icon-i16 icon-fullscreen"></i>全屏</a>
-      <%- if current_user %>
-    <%= link_to user_collects_path(current_user, design_image_id: @image.id), class: 'btn2 pull-right', :remote => true, method: :post, :title => '' do %>
-      <i class='icon-i16 icon-collect'></i>收藏
-    <%- end %>
-    <%- else %>
-    <a href="javascript:show_login();" class="btn2 pull-right" title=''><i class="icon-i16 icon-collect"></i>收藏</a>
-    <%- end %>
+      <%= link_to user_collects_path(1, design_image_id: @image.id), class: 'btn2 pull-right img_show_collect', :remote => true, method: :post, :title => '' do %>
+          <i class='icon-i16 icon-collect'></i>收藏
+        <%- end %>
       <a href="<%= download_design_image_path(@image.id) %>" class="btn2 pull-right" title=''><i class="icon-i16 icon-freedown"></i>免费下载</a>
-      <%= link_to votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>" btn2 pull-right manage_span#{@image.id}", :remote => true, :method => :post, :title => '' do %>
+      <%= link_to votes_path(:voteable_id => @image.id, :voteable_type => "DesignImage"), :class =>" btn2 pull-right img_show_votes_link manage_span#{@image.id}", :'data-image_id' => @image.id, :remote => true, :method => :post, :title => '' do %>
         <i class='icon-i16 icon-xin_gray'></i>
         <span><%= @image.votes_count %></span>
       <%- end %>
@@ -206,9 +203,9 @@
       </div>
       <!-- JiaThis Button END -->
     </div>
-    <div class="work_comments">
+    <div class="work_comments" data-image_id="<%= @image.id %>" data-site="<%= params[:site] %>" data-path="<%= params[:path] %>">
       <%= form_for(Comment.new, :html => {:class => "comment_form exp-holder"}) do |f| %>
-        <h5>评论<span class="text-error">（<%= @image.comments_count %>）</span></h5>
+        <h5>评论<span class="text-error comment_count"></span></h5>
         <%= f.hidden_field :commentable_id, value: params[:id] %>
     <%= f.hidden_field :commentable_type, value: 'DesignImage', id: 'J_t' %>
     <%= f.text_area :content, :placeholder =>"最多可输入1000字" %>
@@ -220,12 +217,9 @@
           </li>
         </ul>
       <%- end %><!-- bottom_mood end -->
-      <%- if @comments.any? %>
-        <%= render :partial => "manage_comments", locals: { comments: @comments, image: @image} %>
-      <%- end %>
-      <div class="pager ft12">
-        <%= paginate @comments %>
-      </div>
+
+      <ul class="get_comments_ul mood_list unstyled nomargin">评论加载中...</ul>
+
     </div>
   </div>
   <div class="pull-right imgbase_in_right">
