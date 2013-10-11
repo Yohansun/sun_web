@@ -20,9 +20,8 @@ $(function(){
     var $carousel_wrap = $(this).siblings('.carousel').children('ul');
     var left = Math.abs(parseInt($carousel_wrap.css('left')));
     var img_index = parseInt(left/857);
-    var curr_imgsrc = $carousel_wrap.find('img').eq(img_index).attr('src')
-    console.log(curr_imgsrc)
-    $('#arts').find('img').attr('src',curr_imgsrc)
+    var curr_imgsrc = $carousel_wrap.find('img').eq(img_index).attr('data-src');
+    $('#arts').find('img').attr('src',curr_imgsrc);
     }
     function o_out2(){
     $('#overlay2').fadeOut('fast');
