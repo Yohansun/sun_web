@@ -103,9 +103,9 @@
         <%= image_tag(@image.file.url(:image_map_show), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
       </div>
       <div class="map-kv-slider pull-right">
-        <% if @up_id %>
-          <a href="/images/<%=@up_id.first.id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
-          <a href="/images/<%=@up_ids.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
+        <% if @image_arr.first.id != @image.id %>
+          <a href="/images/<%=@up_id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
+          <a href="/images/<%=@image_arr.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
         <% else %>
           <a class="map-prev">上一张图</a>
           <a class="map-prev-bullet">prev</a>
@@ -113,20 +113,21 @@
         <div class="map-kv-container">
           <ul>
             <li class="map-active"><a ><span></span><img src="<%= @image.file.url(:image_show_thumb) %>" alt="" /></a></li>
-            <% if  @image_thumb %>
-              <% @image_thumb.each_with_index do |image,index| %>
+            <% if  @image_thumb_arr %>
+              <% @image_thumb_arr.each_with_index do |image,index| %>
                 <li><a href="/images/<%=image.id%>/<%=params[:site].to_i + (index+1)%>/<%=params[:path]%>"><span></span><img src="<%=image.file.url(:image_show_thumb)%>" alt="" /></a></li>
               <% end %>
             <% end %>
           </ul>
         </div>
-        <% if @next_ids %>
-          <a href="/images/<%=@next_ids.first.id%>/<%=params[:site].to_i + 4%>/<%=params[:path]%>" class="map-next-bullet">next</a>
+        <% if @image_arr.last.id != @image.id %>
+          <a href="/images/<%=@image_arr.last.id%>/<% if (params[:site].to_i + 4) >= @images_total %><%=@images_total%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet">next</a>
         <% else %>
           <a class="map-next-bullet">next</a>
         <% end %>
+
         <% if @next_id %>
-          <a href="/images/<%=@next_id.first.id%>/<%=params[:site].to_i + 1%>/<%=params[:path]%>" class="map-next">下一张图</a>
+          <a href="/images/<%=@next_id%>/<%=params[:site].to_i + 1%>/<%=params[:path]%>" class="map-next">下一张图</a>
         <% else %>
           <a class="map-next">下一张图</a>
         <% end %>

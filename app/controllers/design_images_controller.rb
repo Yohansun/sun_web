@@ -451,20 +451,42 @@ class DesignImagesController < ApplicationController
     #在delete_link helper中调用,需要去掉非标签的搜索(地域,拼音)
     @ids.delete_at(-1)
 
-    count = images.count
+    #图库内页图片切换逻辑--------Start>>>>>>>>>>>>>>>>>>
     site = params[:site].to_i - 1
-    @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
-    @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
     if site <= 4
-      @up_ids = images.offset(0).limit(1)
+      limit = site + 1 + 4
+      @image_arr = images.offset(0).limit(limit)
     else
-      @up_ids = images.offset(site - 4).limit(1)
+      @image_arr = images.offset(site - 4).limit(9)
     end
+    image_id_arr = []
+    @image_thumb_arr = []
 
-    if (site + 4) < count
-      @next_ids = images.offset(site + 4).limit(1)
+    @image_arr.each do |im|
+      image_id_arr << im
     end
-    @image_thumb = images.offset(site + 1).limit(3) if (site + 1) < count
+    image_id_arr.each_with_index do |i,index|
+      if i.id == @image.id
+        @next_id = image_id_arr[index+1].id if image_id_arr[index+1].present?
+        @up_id = image_id_arr[index-1].id if image_id_arr[index-1].present?
+        @image_thumb_arr = image_id_arr[index+1..index+3]
+      end
+    end
+    # @up_id = images.offset(site - 1).limit(1) if (site + 1) > 1
+    # @next_id = images.offset(site + 1).limit(1) if (site + 1) < count
+    # if site <= 4
+    #   @up_ids = images.offset(0).limit(1)
+    # else
+    #   @up_ids = images.offset(site - 4).limit(1)
+    # end
+
+    # if (site + 4) < count
+    #   @next_ids = images.offset(site + 4).limit(1)
+    # end
+    # @image_thumb = images.offset(site + 1).limit(3) if (site + 1) < count
+
+    #------------图库内页图片切换逻辑END>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     #推荐色
     #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
