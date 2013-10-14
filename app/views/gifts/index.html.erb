@@ -84,31 +84,6 @@ _background-image: url(<%= asset_path 'winner/winner-bullets.gif' %>);
                 </div>
             </div>
         <%- end -%>
-
-        <% if @months.present? %>
-            <div class="winner-color pd30">
-            <h2>月度最佳色彩奖/月度最佳设计奖</h2>
-            <div class="winner-slide pr">
-                    <a href="javascript:;" class="winner-prev pa">prev</a>
-                    <a href="javascript:;" class="winner-next pa">next</a>
-                    <div class="winner-slide-bin pr">
-                        <div class="winner-slide-container">
-                            <%- @months.each do |d|%>
-                            <ul class="unstyled">
-                                <%- end_year = d.split('/')[0] %>
-                                <%- end_month = d.split('/')[1] %>
-                                <%- gift = @month_best.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>
-                                  <li class="h3"><%= "#{end_year}年#{end_month}月" %></li>
-                                  <%- gift.each do |g| %>
-                                    <li><span><%= g.winner%></span><%= g.gift_name%></li>
-                                  <%- end -%>
-                            </ul>
-                            <%- end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <%- end -%>
 </div><!--main ends-->
 
 <script type="text/javascript">
