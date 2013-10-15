@@ -1,24 +1,25 @@
 # -*- encoding : utf-8 -*-
+require 'new_relic/recipes'
 require 'hipchat/capistrano'
-set :rvm_ruby_string, '1.9.2'
+set :rvm_ruby_string, '1.9.3-p448'
 set :rvm_type, :system
 
-server "42.121.19.234", :web, :app, :db, primary: true
+server "210.13.98.31", :web, :app, :db, primary: true
 set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
-set :branch, "task_1015"
+set :branch, "master_0909"
 set :scm, :git
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
 set :deploy_via, :remote_cache
-set :keep_releases, 3
-set :deploy_to, "/home/www/rails/icolor"
-
-set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
+set :deploy_to, "/bigdata/rails/icolor"
+set :keep_releases, 5
 set :hipchat_token, "4cbf6fde19410295cad3d202a87ade"
 set :hipchat_room_name, "Release House"
 set :hipchat_announce, false
+# set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
+
 namespace :deploy do
 
   # COMMET BELOW WHEN FRESH CAP
@@ -33,17 +34,9 @@ namespace :deploy do
   #   end
   # end
 
-  task :start, :roles => :app do
-    unicorn.start
-  end
-
-  task :stop, :roles => :app do
-    unicorn.stop
-  end
-
-  desc "Restart Application"
-  task :restart, :roles => :app do
-    unicorn.reload
+  desc "Restart web server"
+  task :restart, roles: :app, except: {no_release: true} do
+    run "touch #{deploy_to}/current/tmp/restart.txt"
   end
 
   desc "Symlink shared resources on each release"
@@ -54,5 +47,6 @@ namespace :deploy do
 end
 
 before 'bundle:install', 'deploy:symlink_shared'
+#after "deploy:symlink_shared","refresh_sitemaps","update_crontab"
 
-require 'capistrano-unicorn'
+after "deploy:update", "newrelic:notice_deployment"
