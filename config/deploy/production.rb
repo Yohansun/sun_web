@@ -8,7 +8,7 @@ server "134.119.18.11", :web, :app, :db, primary: true
 set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
-set :branch, "master_0701"
+set :branch, "master_0909"
 set :scm, :git
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
@@ -18,8 +18,21 @@ set :keep_releases, 5
 set :hipchat_token, "4cbf6fde19410295cad3d202a87ade"
 set :hipchat_room_name, "Release House"
 set :hipchat_announce, false
+# set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
 
 namespace :deploy do
+
+  # COMMET BELOW WHEN FRESH CAP
+  # namespace :assets do
+  #   task :precompile, :roles => :web, :except => { :no_release => true } do
+  #     from = source.next_revision(current_revision)
+  #     if capture("cd #{latest_release} && #{source.local.log(from)} #{assets_dependencies.join ' '} | wc -l").to_i > 0
+  #       run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+  #     else
+  #       logger.info "Skipping asset pre-compilation because there were no asset changes"
+  #     end
+  #   end
+  # end
 
   desc "Restart web server"
   task :restart, roles: :app, except: {no_release: true} do
@@ -34,6 +47,6 @@ namespace :deploy do
 end
 
 before 'bundle:install', 'deploy:symlink_shared'
-after "deploy:update","refresh_sitemaps","update_crontab", "clear_rails_cache"
+#after "deploy:symlink_shared","refresh_sitemaps","update_crontab"
 
 after "deploy:update", "newrelic:notice_deployment"
