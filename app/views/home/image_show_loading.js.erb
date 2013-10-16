@@ -1,0 +1,33 @@
+$(function(){
+  var $image_id = $('.work_comments').data('image_id'),
+      $site = $('.work_comments').data('site'),
+      $path = $('.work_comments').data('path');
+
+  if ($(".img_show_votes_link")) {
+    $.getJSON("<%= home_image_vote_path %>",{image_id: $image_id},function(data){
+        $('.img_show_votes_link > span').text(data.image_vote);
+    })
+  };
+
+  var $page = getParameters().page;
+  if (!($page == undefined)) {
+    $.ajax({
+      type: 'GET',
+      data: { id : $image_id,
+              site : $site,
+              path : $path,
+              page : parseInt($page)
+            },
+      url: '/comments/get_comments'
+    });
+  }else{
+    $.ajax({
+      type: 'GET',
+      data: { id : $image_id,
+              site : $site,
+              path : $path
+            },
+      url: '/comments/get_comments'
+    });
+  };
+});

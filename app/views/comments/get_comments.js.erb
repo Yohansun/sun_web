@@ -1,0 +1,6 @@
+<%- if @comments.any? %>
+  $('.get_comments_ul').html("<%=j render :partial => 'design_images/comments' %>");
+<%- else %>
+  $('.get_comments_ul').remove();
+<%- end -%>
+$('.comment_count').text('（' + <%= @image.comments.count %> + '）');

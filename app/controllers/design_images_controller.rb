@@ -1,8 +1,8 @@
 # encoding: utf-8
 class DesignImagesController < ApplicationController
   layout "home_manage"
-  #caches_action :index, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
   before_filter :get_categories, only: [:index, :lists, :image_show]
+  caches_action :image_show, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
 
   def create
     newparams = coerce(params)
@@ -491,7 +491,6 @@ class DesignImagesController < ApplicationController
     #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
 
-    @comments = @image.comments.order("created_at desc").page(params[:page]).per(3)
     #精品推荐
     @week_stars = WeeklyStar.from.order("created_at desc").limit(4)
     #猜你喜欢
