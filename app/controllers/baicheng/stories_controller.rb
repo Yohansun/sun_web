@@ -2,7 +2,7 @@
 require 'zip/zip'
 class Baicheng::StoriesController < ApplicationController
   layout 'baicheng'
-  
+
   def index
     @title = "我来设计_挑选感兴趣房型图-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
     @description = "立邦iColor因爱之名刷新生活 我能设计活动，装修设计师上传设计作品，挑选感兴趣的房型图，获得更多装修需求机会。"
@@ -37,16 +37,17 @@ class Baicheng::StoriesController < ApplicationController
     @title = "我要装修_填写装修需求-立邦 iColor 装修设计鉴赏、设计师作品欣赏、访谈"
     @description = "立邦iColor因爱之名刷新生活 我要装修活动，第一步装修者填写装修需求，免费获得家装设计。"
     @key_words = '刷新生活,装修者,装修需求,家装设计'
-    
-    if current_user
-      if params[:id].present?
-        @story = Story.find params[:id]
-      else
-        @story = Story.new
-      end
-    else
-      redirect_to baicheng_root_path
-    end
+
+    # if current_user
+    #   if params[:id].present?
+    #     @story = Story.find params[:id]
+    #   else
+    #     @story = Story.new
+    #   end
+    # else
+    #   redirect_to baicheng_root_path
+    # end
+    redirect_to baicheng_root_path
   end
 
   def create
@@ -120,7 +121,7 @@ class Baicheng::StoriesController < ApplicationController
     story_image = StoryImage.find params[:story_image_id]
     story_image.story_id = params[:story_id]
     story_image.is_cover = true
-    if story_image.save  
+    if story_image.save
       @story = Story.find params[:story_id]
       @story.is_save = true
       @story.save
@@ -147,7 +148,7 @@ class Baicheng::StoriesController < ApplicationController
       @total_point, @user_total_point = 0, 0
       @total_point = PointUser.user_pass_total_points current_user.id
       @user_total_point = PointUser.user_total_points current_user.id
-    
+
       render :act
     else
       redirect_to baicheng_root_path
@@ -181,13 +182,13 @@ class Baicheng::StoriesController < ApplicationController
       else
          render :js => "alert('设计成交不能提交了!');"
       end
-    
+
     else
-      render nothing: true 
+      render nothing: true
     end
-    
+
   end
- 
+
   def download
     target_file = StoryImage.where(:story_id => params[:id])
     unless target_file.blank?
