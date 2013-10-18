@@ -65,9 +65,9 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
-      @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null').uniq
+      @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null')
     end
-     
+
     sign_in(@user) if current_admin && @user
   end
 
@@ -77,7 +77,7 @@ class DesignsController < ApplicationController
 
     @design_name = @design.title
     @author = @design.user.username
-    
+
     render :layout => nil
   end
 
@@ -117,7 +117,7 @@ class DesignsController < ApplicationController
     flag = true
     @design = current_user.designs.build(params[:design])
     if params[:story_id].present?
-      @design.story_id = params[:story_id] 
+      @design.story_id = params[:story_id]
       @design.baicheng_active = true
     end
     if params[:baicheng_active].present?
@@ -190,7 +190,7 @@ class DesignsController < ApplicationController
           design_image = DesignImage.find(image_id)
           design_image.destroy if design_image
         end
-      end 
+      end
     end
 
     design_image_ids = []
@@ -217,7 +217,7 @@ class DesignsController < ApplicationController
           image.color1 = color1
           image.color2 = color2
           image.color3 = color3
-        end 
+        end
         image.is_cover = true if params[:cover_image] && params[:cover_image].to_i == design_image_id.to_i
         image.area_id = @design.area_id
         if image.save
@@ -330,7 +330,7 @@ class DesignsController < ApplicationController
     @design = Design.find params[:design_id]
     if current_user.role_id == 1 && current_user.des_status == true
       render "upload_success2"
-    elsif (current_user.role_id == 1 && current_user.des_status == false) || current_user.role_id == 2 
+    elsif (current_user.role_id == 1 && current_user.des_status == false) || current_user.role_id == 2
       render "upload_success3"
     end
   end
