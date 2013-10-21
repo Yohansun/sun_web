@@ -220,23 +220,23 @@
         }
 
 
-
-<% if current_user %>
-  <% unless current_user.common_user? %>
-            <%#*window.location = '<%= stories_path'%>
-             mmConversionTag(326805, this, '_self','<%= stories_path %>');
-  <% else %>
-    <% story = Story.where(user_id: current_user.id, is_save: true) %>
-    <%  if story.present? %>
-              alert('您已经上传过房型图！');
-    <% else %>
-              <%#*window.location = '<%= new_story_path '%>
-            mmConversionTag(326805, this, '_self','<%= new_story_path %>');
-    <% end %>
-  <% end %>
-<% else -%>
-          show_login();
-<% end -%>
+        alert("亲爱的用户，本年度因爱之名活动的我要装修活动已经结束，谢谢您的关注！");
+      // <%# if current_user %>
+      //   <%# unless current_user.common_user? %>
+      //             <%#*window.location = '<%= stories_path'%>
+      //              mmConversionTag(326805, this, '_self','<%= stories_path %>');
+      //   <%# else %>
+      //     <%# story = Story.where(user_id: current_user.id, is_save: true) %>
+      //     <%#  if story.present? %>
+      //               alert('您已经上传过房型图！');
+      //     <%# else %>
+      //               <%#*window.location = '<%= new_story_path '%>
+      //             mmConversionTag(326805, this, '_self','<%= new_story_path %>');
+      //     <%# end %>
+      //   <%# end %>
+      // <%# else -%>
+      //           show_login();
+      // <%# end -%>
       }
 
       (function(i, s, o, g, r, a, m) {
