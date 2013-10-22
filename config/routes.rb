@@ -336,6 +336,7 @@ Icolor::Application.routes.draw do
       get :image_search_index
       post :image_tag
       get :lists
+      get :get_thumb
     end
     member do
       get :image_show
