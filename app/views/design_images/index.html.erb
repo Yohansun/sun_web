@@ -1,5 +1,8 @@
 <%- content_for :tail do %>
   <%= javascript_include_tag "jquery.masonry","jsCookie" %>
+  <style type="text/css">
+    .highlight_gray {background-color:#E3E3E3;}
+  </style>
   <script type="text/javascript">
     $(function() {
       var options = {
@@ -246,7 +249,7 @@
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
         <%- @home_design.each do |category| %>
           <%- unless category.title == "按地区" %>
-            <fieldset class="clearfix">
+            <fieldset class="clearfix <%= 'highlight_gray' if @tag_ids.include?(category.category_id.to_s) %>">
               <label class="pull-left"><%= category.title %>：</label>
                 <span>
                   <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if highlight(category) %>">全部</a>
