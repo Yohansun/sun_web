@@ -556,6 +556,16 @@ class DesignImagesController < ApplicationController
     @cost_categories = ImageLibraryCategory.where(parent_id: 19)
   end
 
+  def get_thumb
+    images = DesignImage.from.available.audited_with_colors.order("design_images.created_at DESC")
+    site = params[:site].to_i - 1
+    @image_arr = images.offset(site).limit(4)
+    respond_to do |format|
+      format.json {render :json => { :result => @image_arr, :site => site } }
+    end
+
+  end
+
   private
   def coerce(params)
     if params[:upload].nil?

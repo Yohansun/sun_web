@@ -32,6 +32,39 @@
     sel.bind('.level1_3', null, '区');
     });
   </script>
+  <script type="text/javascript">
+  $(function() {
+    var image_id = <%=@image_arr.last.id %>;
+    var site = 0;
+    <% if (params[:site].to_i + 4) >= @images_total %>
+      site = 4
+    <% else %>
+      site = <%= params[:site].to_i + 4 %>
+    <% end %>
+    setInterval(function(){
+      $.get("<%= get_thumb_design_images_path %>",{id:image_id,site:site},function(data){
+        re_site = data.site;
+        html = '<ul>';
+        data.result.forEach(function(el) {
+          var str = makeStr(el.id);
+          re_site = ++re_site
+          html += "<li><a href='/images/" + el.id+ "/" +  re_site + "/<%=params[:path]%>'><span></span>" +
+                  "<img src=/system/design_images/files/" + str.slice(0, 3) + '/' + str.slice(3)+ "/image_show_thumb/" + el.id + " /></a></li>";
+        });
+        html += '</ul>';
+         $(".map-kv-container").html(html);
+      })
+      site = site + 4
+    },5000)
+    function makeStr(num){
+      num = (num + '').split('');
+      while(num.length < 6){
+        num.unshift('0')
+      }
+      return num.join('')
+    }
+  });
+  </script>
 <%- end %>
 <h3 class="chann_caption nomargin">
   <div class="map-search pull-right">
