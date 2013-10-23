@@ -201,7 +201,6 @@ class DesignImagesController < ApplicationController
       @tags = ImageLibraryCategory.where("title like ?", "%#{word}%")
       @design_images = @design_images.search_tags(@tags.map(&:id), true)
       @tag_names << @tags.map(&:title)
-
       @content[6] = "#{word}" + "#{@content[6]}" if word == "橙色系"
       @content[7] = "#{word}" + "#{@content[7]}" if word == "小户型"
       @content[10] = "#{word}" + "#{@content[10]}" if word == "客厅"
@@ -220,10 +219,9 @@ class DesignImagesController < ApplicationController
     end
 
     if @pinyin.present? && @pinyin.to_s != "0"
-      @tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{@pinyin}%")
+      @tags = ImageLibraryCategory.where("pinyin LIKE ?", "%#{@pinyin}%")
       @design_images.search_tags(@tags.map(&:id), true)
       @tag_names << @tags.map(&:title)
-
       @content[10] = @pinyin
     end
 
@@ -435,7 +433,7 @@ class DesignImagesController < ApplicationController
     end
 
     if @pinyin.present? && @pinyin.to_s != "0"
-      tags = ImageLibraryCategory.where("pinyin LIKE ?", "#{@pinyin}%")
+      tags = ImageLibraryCategory.where("pinyin LIKE ?", "%#{@pinyin}%")
       images = images.search_tags(tags.map(&:id), true)
     end
 
@@ -458,9 +456,9 @@ class DesignImagesController < ApplicationController
     site = params[:site].to_i - 1
     if site <= 4
       limit = site + 1 + 4
-      @image_arr = images.offset(0).limit(limit)
+      @image_arr = images.select("distinct design_images.id, design_images.*").offset(0).limit(limit)
     else
-      @image_arr = images.offset(site - 4).limit(9)
+      @image_arr = images.select("distinct design_images.id, design_images.*").offset(site - 4).limit(9)
     end
     image_id_arr = []
     @image_thumb_arr = []
