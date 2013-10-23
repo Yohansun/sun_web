@@ -2,7 +2,6 @@
 class DesignImagesController < ApplicationController
   layout "home_manage"
   before_filter :get_categories, only: [:index, :lists, :image_show]
-  caches_action :image_show, :expires_in => 30.minutes, :cache_path => Proc.new { |c| c.params }
 
   def create
     newparams = coerce(params)
@@ -123,7 +122,9 @@ class DesignImagesController < ApplicationController
       tag_arrs = []
       @tag_ids.each do |tag_arr|
         if tag_arr.to_i != 0
+
           tag = ImageLibraryCategory.find tag_arr
+
           tag_id = 0
           if tag.parent_id.present? && tag.parent_id != 210
             tag_id = tag.parent_id
@@ -164,7 +165,10 @@ class DesignImagesController < ApplicationController
     end
 
     @design_images = DesignImage.from.available.audited_with_colors
-    @images_count = @design_images.count
+
+    @images_count = Rails.cache.fetch("data-model-images_count", expires_in: 1.day) do
+      DesignImage.from.available.audited_with_colors.count
+    end
 
     @tag_names = []
 
@@ -175,7 +179,7 @@ class DesignImagesController < ApplicationController
       #取不含parent的标签
       final_tags = @tags.select{|item| item.parent_id.present?}.map { |tag| tag.self_and_descendants }.flatten
       #优先筛选parent的标签
-      @design_images = @design_images.joins(:parent_tags).where("parent_tags.image_library_category_id in (?)", parent_tags).uniq if parent_tags.present?
+      @design_images = @design_images.joins(:parent_tags).where("parent_tags.image_library_category_id in (?)", parent_tags).group("design_images.id") if parent_tags.present?
       @design_images = @design_images.search_tags(final_tags.map(&:id))
       @tag_names << final_tags.map(&:title)
     end
@@ -252,10 +256,11 @@ class DesignImagesController < ApplicationController
     i_banners = IBanner.page_name('图库列表页')
     @banner1 = i_banners.find_by_position(1)
     @banner2 = i_banners.find_by_position(2)
+
     @fitting_parts = TagSort.order("id asc").where("genre = 0")
     @home_design = TagSort.order("id asc").where("genre = 1")
 
-    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
+    expires_in 7.days, 'max-stale' => 8.days, :public => true
 
     render :index
   end
@@ -360,8 +365,6 @@ class DesignImagesController < ApplicationController
        @master_design = MasterDesign.find(@image.imageable_id)
     end
 
-    @image.view_count += 1
-    @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.from.available.audited_with_colors.count
     @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
@@ -496,14 +499,25 @@ class DesignImagesController < ApplicationController
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
-      @like_images = DesignImage.from.available.audited_with_colors.order("created_at desc").uniq.limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.order("created_at desc").limit(4)
     else
       tags = tags.sample(4)
-      @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).uniq.limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).limit(4)
     end
     #最新更新
     # @latest_mounth_images = DesignImage.from.available.audited_with_colors.latest_mounth_images.sample(4)
     @latest_mounth_images = DesignImage.order("created_at desc").limit(1000).available.audited_with_colors.sample(4)
+
+    expires_in 7.days, 'max-stale' => 8.days, :public => true
+  end
+
+  def view_count
+    # 增加图片浏览计数
+    @image = DesignImage.find(params[:id])
+    @image.view_count += 1
+    @image.save
+
+    render text: @image.view_count
   end
 
   def fullscreen
@@ -522,38 +536,27 @@ class DesignImagesController < ApplicationController
   end
 
   def get_categories
-    @categories = ImageLibraryCategory.parent_categories
-    @category_ids = @categories.collect{|categorie|
-      {
-        id: categorie.id,
-        childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
-      }
-    }
+    @category_ids = Rails.cache.fetch("data-model-category_ids", expires_in: 10.days) do
+      ImageLibraryCategory.parent_categories.collect do |categorie|
+        {
+          id: categorie.id,
+          childs: categorie.children.collect{|c| {child_ids: c.id, child_child_ids: c.children.collect{|cc| cc.id} } }
+        }
+      end
+    end
+
     #热门搜索
     @hot_search = SeoSite.order("rank asc").where("genre = 1")
     #面包屑导航
     @seo_sites = SeoSite.order("rank desc").where("genre = 0")
 
     #footer标签
-    #装修户型
-    @type_categories = ImageLibraryCategory.where(parent_id: 1)
-    @type_categories1 = @type_categories[0..8]
-    @type_categories2 = @type_categories[9..-1]
-    #装修风格
-    @style_categories = ImageLibraryCategory.where(parent_id: 34)
-    @style_categories1 = @style_categories[0..8]
-    @style_categories2 = @style_categories[9..17]
-    @style_categories3 = @style_categories[18..-1]
-    #装修空间
-    @space_categories = ImageLibraryCategory.where(parent_id: 82)
-    @space_categories1 = @space_categories[0..9]
-    @space_categories2 = @space_categories[10..-1]
-    #装修色彩
-    @color_categories = ImageLibraryCategory.where(parent_id: 107)
-    @color_categories1 = @color_categories[0..9]
-    @color_categories2 = @color_categories[10..-1]
-    #装修费用
-    @cost_categories = ImageLibraryCategory.where(parent_id: 19)
+    @footer_categories = []
+    @footer_categories << ImageLibraryCategory.where(parent_id: 1)    #装修户型
+    @footer_categories << ImageLibraryCategory.where(parent_id: 34)   #装修风格
+    @footer_categories << ImageLibraryCategory.where(parent_id: 82)   #装修空间
+    @footer_categories << ImageLibraryCategory.where(parent_id: 107)  #装修色彩
+    @footer_categories << ImageLibraryCategory.where(parent_id: 19)   #装修费用
   end
 
   def get_thumb
