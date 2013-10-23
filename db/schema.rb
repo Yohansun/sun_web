@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923173840) do
+ActiveRecord::Schema.define(:version => 20131023062918) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -295,6 +295,7 @@ ActiveRecord::Schema.define(:version => 20130923173840) do
   add_index "design_images", ["area_id"], :name => "area_id"
   add_index "design_images", ["audited"], :name => "audited"
   add_index "design_images", ["created_at", "file_file_name", "file_updated_at"], :name => "index_design_images_on_timestamp"
+  add_index "design_images", ["created_at", "imageable_id", "imageable_type", "user_id", "edited_color", "audited"], :name => "count_index"
   add_index "design_images", ["created_at"], :name => "NewIndex5"
   add_index "design_images", ["edited_color"], :name => "edited_color"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
@@ -799,6 +800,17 @@ ActiveRecord::Schema.define(:version => 20130923173840) do
   add_index "image_tags", ["design_image_id"], :name => "design_image_id"
   add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
   add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
+
+  create_table "image_tags_right", :force => true do |t|
+    t.integer  "design_image_id"
+    t.integer  "image_library_category_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "image_tags_right", ["design_image_id"], :name => "design_image_id"
+  add_index "image_tags_right", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
+  add_index "image_tags_right", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
 
   create_table "inspirations", :force => true do |t|
     t.string   "title"
