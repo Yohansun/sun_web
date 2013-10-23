@@ -49,7 +49,7 @@
           var str = makeStr(el.id);
           re_site = ++re_site
           html += "<li><a href='/images/" + el.id+ "/" +  re_site + "/<%=params[:path]%>'><span></span>" +
-                  "<img src=/system/design_images/files/" + str.slice(0, 3) + '/' + str.slice(3)+ "/image_show_thumb/" + el.id + " /></a></li>";
+                  "<img src='/system/design_images/files/000/" + str.slice(0, 3) + '/' + str.slice(3)+ "/image_show_thumb/" + el.id + ".jpg' /></a></li>";
         });
         html += '</ul>';
          $(".map-kv-container").html(html);
