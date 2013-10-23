@@ -365,8 +365,6 @@ class DesignImagesController < ApplicationController
        @master_design = MasterDesign.find(@image.imageable_id)
     end
 
-    @image.view_count += 1
-    @image.update_attributes(:view_count => @image.view_count)
     @images_total = DesignImage.from.available.audited_with_colors.count
     @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
@@ -511,6 +509,15 @@ class DesignImagesController < ApplicationController
     @latest_mounth_images = DesignImage.order("created_at desc").limit(1000).available.audited_with_colors.sample(4)
 
     expires_in 7.days, 'max-stale' => 8.days, :public => true
+  end
+
+  def view_count
+    # 增加图片浏览计数
+    @image = DesignImage.find(params[:id])
+    @image.view_count += 1
+    @image.save
+
+    render text: @image.view_count
   end
 
   def fullscreen
