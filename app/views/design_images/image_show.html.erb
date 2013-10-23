@@ -67,7 +67,6 @@
   </script>
   <script type="text/javascript">
   $(function() {
-    var image_id = <%=@image_arr.last.id %>;
     var site = 0;
     <% if (params[:site].to_i + 4) >= @images_total %>
       site = 4
@@ -75,7 +74,7 @@
       site = <%= params[:site].to_i + 4 %>
     <% end %>
     setInterval(function(){
-      $.get("<%= get_thumb_design_images_path %>",{id:image_id,site:site},function(data){
+      $.get("<%= get_thumb_design_images_path %>",{site:site},function(data){
         re_site = data.site;
         html = '<ul>';
         data.result.forEach(function(el) {
@@ -180,7 +179,7 @@
         <div class="map-kv-container">
           <ul>
             <li class="map-active"><a ><span></span><img src="<%= @image.file.url(:image_show_thumb) %>" alt="" /></a></li>
-            <% if  @image_thumb_arr %>
+            <% if @image_thumb_arr %>
               <% @image_thumb_arr.each_with_index do |image,index| %>
                 <li><a href="/images/<%=image.id%>/<%=params[:site].to_i + (index+1)%>/<%=params[:path]%>"><span></span><img src="<%=image.file.url(:image_show_thumb)%>" alt="" /></a></li>
               <% end %>
