@@ -179,7 +179,7 @@ class DesignImagesController < ApplicationController
       #取不含parent的标签
       final_tags = @tags.select{|item| item.parent_id.present?}.map { |tag| tag.self_and_descendants }.flatten
       #优先筛选parent的标签
-      @design_images = @design_images.joins(:parent_tags).where("parent_tags.image_library_category_id in (?)", parent_tags).group("design_images.id") if parent_tags.present?
+      @design_images = @design_images.joins(:parent_tags).where("parent_tags.image_library_category_id in (?)", parent_tags) if parent_tags.present?
       @design_images = @design_images.search_tags(final_tags.map(&:id))
       @tag_names << final_tags.map(&:title)
     end
