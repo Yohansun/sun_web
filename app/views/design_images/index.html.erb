@@ -1,93 +1,93 @@
 <%- content_for :tail do %>
-  <%= javascript_include_tag "jquery.masonry","jsCookie" %>
-  <style type="text/css">
-    .highlight_gray {background-color:#E3E3E3;}
-  </style>
-  <script type="text/javascript">
-    $(function() {
-      var options = {
-        data  : data
-      }
-      var sel = new LinkageSelect(options);
-      sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '请选择');
-      sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '请选择');
-      sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '请选择');
+<%= javascript_include_tag "jquery.masonry","jsCookie" %>
+<style type="text/css">
+  .highlight_gray {background-color:#E3E3E3;}
+</style>
+<script type="text/javascript">
+  $(function() {
+    var options = {
+      data  : data
+    }
+    var sel = new LinkageSelect(options);
+    sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '请选择');
+    sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '请选择');
+    sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '请选择');
+  });
+  $(function() {
+    $('.check_on').bind("click", function (event) {
+      $(this).addClass("highlight");
+      event.preventDefault();
+      event.stopPropagation();
+      add_tag($(event.currentTarget).data('parent-id'), $(event.currentTarget).data('tag-id'));
     });
-    $(function() {
-      $('.check_on').bind("click", function (event) {
-        $(this).addClass("highlight");
-        event.preventDefault();
-        event.stopPropagation();
-        add_tag($(event.currentTarget).data('parent-id'), $(event.currentTarget).data('tag-id'));
-      });
-    });
-    $(function(){
-      var $list   = $('.imgbase_list'),
-        $view   = $('#imgbase_view'),
-        $info   = $('#imgbase_info'),
-        $full   = $('#imgbase_full'),
-        $collect= $('.imgbase_collect_id'),
-        $down   = $('.imgbase_down_id'),
-        $toggle = $('.map-list-up'),
-        $form   = $('.map-list-search'),
-        $ul     = $('.nomargin'),
-        $conte = $('.imgbase_bin > .imginfo_big_txt'),
-        $colorsbox = $(".imgbase_bin > .colorsbox");
+  });
+  $(function(){
+    var $list   = $('.imgbase_list'),
+    $view   = $('#imgbase_view'),
+    $info   = $('#imgbase_info'),
+    $full   = $('#imgbase_full'),
+    $collect= $('.imgbase_collect_id'),
+    $down   = $('.imgbase_down_id'),
+    $toggle = $('.map-list-up'),
+    $form   = $('.map-list-search'),
+    $ul     = $('.nomargin'),
+    $conte = $('.imgbase_bin > .imginfo_big_txt'),
+    $colorsbox = $(".imgbase_bin > .colorsbox");
 
-      <% if params[:page].present? &&  params[:page].to_i != 0 %>
-        $('#prev').show();
-        $('#prev').click(function(event) {
-          var li_index = $list.find('.imgbase_curr').index();
-          event.preventDefault()
-          if(li_index == 0){
-            <% if  (params[:page].to_i - 1) == 1 %>
+    <% if params[:page].present? &&  params[:page].to_i != 0 %>
+    $('#prev').show();
+    $('#prev').click(function(event) {
+      var li_index = $list.find('.imgbase_curr').index();
+      event.preventDefault()
+      if(li_index == 0){
+        <% if  (params[:page].to_i - 1) == 1 %>
               ///0-0-0-0-0-0-0-0-0-all-view_count-3-B-a-0-0
-                window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1"
-            <% else %>
+              window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1"
+              <% else %>
               window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1/<%=@images.current_page - 1%>"
-            <% end %>
-          }
-        })
-      <% else %>
-        $("#prev").hide();
-      <% end %>
-      <% if @images.current_page == @images.total_pages %>
+              <% end %>
+            }
+          })
+<% else %>
+$("#prev").hide();
+<% end %>
+<% if @images.current_page == @images.total_pages %>
 
-          var li_index = $list.find('.imgbase_curr');
-          var last_id = li_index.data('full');
-          if(last_id == <%=@images.last.id%>){
-            $("#next").hide();
-          }
-      <% else %>
-        $('#next').click(function(event) {
-          var li_index = $list.find('.imgbase_curr').index();
-          if(li_index == 10){
-            window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-0/<%=@images.current_page + 1%>"
-          }
-        });
-      <% end %>
+var li_index = $list.find('.imgbase_curr');
+var last_id = li_index.data('full');
+if(last_id == <%=@images.last.id%>){
+  $("#next").hide();
+}
+<% else %>
+$('#next').click(function(event) {
+  var li_index = $list.find('.imgbase_curr').index();
+  if(li_index == 10){
+    window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-0/<%=@images.current_page + 1%>"
+  }
+});
+<% end %>
 
 
-      $list.on('mouseenter', 'li', function(){
-        var index = $(this).index();
-        $slider.find('li').eq(index).find('a').click();
-      }).mouseleave(function(){
-        $slider.mouseleave();
-      });
-      $ul.on('click', 'li', function(){
-        var $this = $(this),
-            index = $this.index();
-            $.createCookie('nomargin', index);
-        $this.addClass('active_tit').siblings().removeClass();
-        $form.eq(index).show().siblings().hide();
-      });
+$list.on('mouseenter', 'li', function(){
+  var index = $(this).index();
+  $slider.find('li').eq(index).find('a').click();
+}).mouseleave(function(){
+  $slider.mouseleave();
+});
+$ul.on('click', 'li', function(){
+  var $this = $(this),
+  index = $this.index();
+  $.createCookie('nomargin', index);
+  $this.addClass('active_tit').siblings().removeClass();
+  $form.eq(index).show().siblings().hide();
+});
 
-      var cookie = $.readCookie("nomargin");
-      if (cookie != ""){
-        $("ul.pull-left.nomargin").find("li").not(':eq(' + cookie + ')').removeClass("list-curr");
-        $("ul.pull-left.nomargin").find("li").eq(cookie).addClass("active_tit list-curr");
-        $form.eq(cookie).show().siblings().hide();
-      };
+var cookie = $.readCookie("nomargin");
+if (cookie != ""){
+  $("ul.pull-left.nomargin").find("li").not(':eq(' + cookie + ')').removeClass("list-curr");
+  $("ul.pull-left.nomargin").find("li").eq(cookie).addClass("active_tit list-curr");
+  $form.eq(cookie).show().siblings().hide();
+};
       // 展开收起JS
       $toggle.click(function(){
         var $this = $(this);
@@ -99,7 +99,7 @@
       });
       // 有标签筛选,展开
       <%- if @tag_ids.present? %>
-        $.createCookie('expand', 2);
+      $.createCookie('expand', 2);
       <%- end %>
 
       var cookie = $.readCookie('expand');
@@ -113,56 +113,56 @@
       $('.colors_con').live('hover', function(){
         $(this).children().fadeToggle('fast');
       });
-});
+    });
 
-  function search_sub(){
-    var search = $("#search_query_value").val();
-    if(search == "" || search == null){
-      window.location = "/images"
-    }else{
-      var link = "/images/<%= prefix_link %>-0_0_" + search + "_0_0_0"
-      window.location = link
-    }
+function search_sub(){
+  var search = $("#search_query_value").val();
+  if(search == "" || search == null){
+    window.location = "/images"
+  }else{
+    var link = "/images/<%= prefix_link %>-0_0_" + search + "_0_0_0"
+    window.location = link
   }
+}
 
-  function submit_area() {
-    var area_id = "";
-    if ($(".level_1").val() > 0) {
-      area_id = $(".level_1").val();
-    };
-    if ($(".level_2").val() > 0) {
-      area_id = $(".level_2").val();
-    };
-    if ($(".level_3").val() > 0) {
-      area_id = $(".level_3").val();
-    };
+function submit_area() {
+  var area_id = "";
+  if ($(".level_1").val() > 0) {
+    area_id = $(".level_1").val();
+  };
+  if ($(".level_2").val() > 0) {
+    area_id = $(".level_2").val();
+  };
+  if ($(".level_3").val() > 0) {
+    area_id = $(".level_3").val();
+  };
 
-    if(area_id == "" || area_id == null){
-      window.location = "/images"
-    }else{
-      var link = "/images/<%= prefix_link %>-" + area_id + "_0_0_0_0_0"
-      window.location = link
-    }
+  if(area_id == "" || area_id == null){
+    window.location = "/images"
+  }else{
+    var link = "/images/<%= prefix_link %>-" + area_id + "_0_0_0_0_0"
+    window.location = link
   }
-  </script>
+}
+</script>
 <%- end %>
 <% if params[:return].present? && params[:return].to_i == 1 %>
-  <script type="text/javascript">
+<script type="text/javascript">
   $(function(){
     setTimeout(function(){
       $('.imgbase_list').children().last().trigger('mouseover');
     },500)
   })
-  </script>
+</script>
 <% end %>
 <h3 class="chann_caption nomargin">
   <div class="map-search pull-right">
     <p class="pull-left">
       热门搜索：
       <%- @hot_search.each_with_index do |s,i| %>
-        <%- unless i == @hot_search.size - 1 %>
-          <a href="<%= s.link %>" target="_blank"><%= s.title %></a>
-        <%- end %>
+      <%- unless i == @hot_search.size - 1 %>
+      <a href="<%= s.link %>" target="_blank"><%= s.title %></a>
+      <%- end %>
       <%- end %>
     </p>
     <form action='/images/' method='post' style="display:inline" class="pull-left">
@@ -183,22 +183,22 @@
   <li class="pull-left"><a href="/images/<%= show_link(82) %>">装修空间</a></li>
   <li class="pull-left"><a href="/images/<%= show_link(107) %>">装修色彩</a></li>
   <%- @seo_sites.each do |s| %>
-    <li class="pull-right"><a href="<%= s.link %>"><%= s.title %></a></li>
+  <li class="pull-right"><a href="<%= s.link %>"><%= s.title %></a></li>
   <%- end %>
   <li class="pull-right"><a href="/color_designs" target="_blank">装修色彩搭配</a></li>
 </ul>
 
 <%- if params[:path].blank? && params[:page].blank? %>
-  <%- if @special_kv %>
-    <a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %></a>
-    <%- if @special_kv.kv_maps.any? %>
-      <map id="mapkv_special" name="mapkv_special">
-        <%- @special_kv.kv_maps.each do |map| %>
-          <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
-        <%- end %>
-      </map>
-    <%- end %>
+<%- if @special_kv %>
+<a href="<%= @special_kv.url %>" target="_blank"><%= image_tag(@special_kv.file.url(:special), usemap: "#mapkv_special", class: 'mt10 bd') %></a>
+<%- if @special_kv.kv_maps.any? %>
+<map id="mapkv_special" name="mapkv_special">
+  <%- @special_kv.kv_maps.each do |map| %>
+  <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
   <%- end %>
+</map>
+<%- end %>
+<%- end %>
 <%- end %>
 
 <ul class="breadcrumb">
@@ -220,63 +220,63 @@
 
   <div>
     <%=form_tag image_search_index_design_images_path, :class => 'map-list-search pr',:style => "display: block" do %>
-      <p class="map-srch-bin">
-        您的选择：
-        <%- @query_tags.each do |tag| %>
-        <% next if tag.blank? %>
-          <span class="map-srch-s"><%= (tag.parent.present? && tag.parent.title != '按部件') ? "#{tag.parent.title}" : "全部" %>: <i><%= tag.title %></i>
-            <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
-          </span>
-        <%- end %>
-        <%- if @color.present? && @color.to_s != "0" %>
-        <span class="map-srch-s">查询: <i><%= @color %></i>
-          <a href="<%= delete_link @color, :color %>" class="map-srch-del">删除</a>
-        </span>
-        <%- end %>
-        <%- if @pinyin.present? && @pinyin.to_s != "0" %>
-        <span class="map-srch-s">拼音: <i><%= @pinyin %></i>
-          <a href="<%= delete_link @pinyin, :pinyin %>" class="map-srch-del">删除</a>
-        </span>
-        <%- end %>
-        <%- if @area_names.present? %>
-        <span class="map-srch-s">地区: <i><%= @area_names %></i>
-          <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
-        </span>
-        <%- end %>
-        <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
-      </p>
+    <p class="map-srch-bin">
+      您的选择：
+      <%- @query_tags.each do |tag| %>
+      <% next if tag.blank? %>
+      <span class="map-srch-s"><%= (tag.parent.present? && tag.parent.title != '按部件') ? "#{tag.parent.title}" : "全部" %>: <i><%= tag.title %></i>
+        <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
+      </span>
+      <%- end %>
+      <%- if @color.present? && @color.to_s != "0" %>
+      <span class="map-srch-s">查询: <i><%= @color %></i>
+        <a href="<%= delete_link @color, :color %>" class="map-srch-del">删除</a>
+      </span>
+      <%- end %>
+      <%- if @pinyin.present? && @pinyin.to_s != "0" %>
+      <span class="map-srch-s">拼音: <i><%= @pinyin %></i>
+        <a href="<%= delete_link @pinyin, :pinyin %>" class="map-srch-del">删除</a>
+      </span>
+      <%- end %>
+      <%- if @area_names.present? %>
+      <span class="map-srch-s">地区: <i><%= @area_names %></i>
+        <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
+      </span>
+      <%- end %>
+      <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
+    </p>
 
-      <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
-        <%- @home_design.each do |category| %>
-          <%- unless category.title == "按地区" %>
-            <fieldset class="clearfix <%= 'highlight_gray' if @tag_ids.include?(category.category_id.to_s) %>">
-              <label class="pull-left"><%= category.title %>：</label>
-                <span>
-                  <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if highlight(category) %>">全部</a>
-                  <%- category.category(category.category_id).each do |cate_child| %>
-                    <a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids && @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
-                  <%- end %>
-                </span>
-            </fieldset>
-          <% else %>
-            <fieldset class="clearfix noborder">
-              <label class="pull-left"><%= category.title %>：</label>
-              <span>
-                <select id="province" class="level_1">省</select>
-                <select id="city" class="level_2">市</select>
-                <select id="county" class="level_3" name='area_id'>区</select>
-                <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
-              </span>
-            </fieldset>
-          <% end %>
-        <% end %>
+    <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
+      <%- @home_design.each do |category| %>
+      <%- unless category.title == "按地区" %>
+      <fieldset class="clearfix <%= 'highlight_gray' if @tag_ids.include?(category.category_id.to_s) %>">
+        <label class="pull-left"><%= category.title %>：</label>
+        <span>
+          <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if highlight(category) %>">全部</a>
+          <%- category.category(category.category_id).each do |cate_child| %>
+          <a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids && @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
+          <%- end %>
+        </span>
+      </fieldset>
+      <% else %>
+      <fieldset class="clearfix noborder">
+        <label class="pull-left"><%= category.title %>：</label>
+        <span>
+          <select id="province" class="level_1">省</select>
+          <select id="city" class="level_2">市</select>
+          <select id="county" class="level_3" name='area_id'>区</select>
+          <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
+        </span>
+      </fieldset>
+      <% end %>
+      <% end %>
 
-        <%- if @tag_ids.blank? %>
-          <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
-        <%- else %>
-          <a href="javascript:;" class="pa map-list-up">收起</a>
-        <%- end %>
-      </div>
+      <%- if @tag_ids.blank? %>
+      <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
+      <%- else %>
+      <a href="javascript:;" class="pa map-list-up">收起</a>
+      <%- end %>
+    </div>
     <%- end %>
 
     <form class="map-list-search hide pr" style="display:none;">
@@ -308,21 +308,21 @@
 
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
         <%- @fitting_parts.each do |child_lv2| %>
-          <fieldset class="clearfix">
-            <label class="pull-left"><%= child_lv2.title %>：</label>
-              <span>
-                <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="<%= 'highlight' if highlight(child_lv2) %>">全部</a>
-                <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
-                  <a href="/images/<%= show_link child_lv3.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(child_lv3.id.to_s) %>"><%= child_lv3.title %></a>
-                <%- end %>
-              </span>
-          </fieldset>
+        <fieldset class="clearfix">
+          <label class="pull-left"><%= child_lv2.title %>：</label>
+          <span>
+            <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="<%= 'highlight' if highlight(child_lv2) %>">全部</a>
+            <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
+            <a href="/images/<%= show_link child_lv3.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(child_lv3.id.to_s) %>"><%= child_lv3.title %></a>
+            <%- end %>
+          </span>
+        </fieldset>
         <%- end %>
 
         <%- if @tag_ids.blank? %>
-          <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
+        <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
         <%- else %>
-          <a href="javascript:;" class="pa map-list-up">收起</a>
+        <a href="javascript:;" class="pa map-list-up">收起</a>
         <%- end %>
       </div>
     </form><!-- tab_content -->
@@ -332,11 +332,11 @@
 <div class="map-flow index_main mt10 pull-left">
   <div id="map-flow" class="clearfix">
     <%
-       if params[:page].present? && params[:page].to_i != 0
-        site = (params[:page].to_i - 1) * 18
-       else
-        site =  0 * 18
-       end
+    if params[:page].present? && params[:page].to_i != 0
+      site = (params[:page].to_i - 1) * 18
+    else
+      site =  0 * 18
+    end
     %>
     <% @images.each_with_index do |image,index| %>
     <div class="pull-left">
@@ -351,39 +351,39 @@
     <%= paginate @images, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
   </form>
 </div>
-  <div class="map-flow-r pull-right">
-    <%= render partial: 'image_list', locals: { i_column_type_id: 1, name: '最新大师作品' } %>
-    <%= render partial: 'image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
-    <%= render partial: 'image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
-    <%= render partial: 'image_list', locals: { i_column_type_id: 9, name: '装修色彩配搭' } %>
-    <%= render partial: 'image_list', locals: { i_column_type_id: 7, name: '相关资讯' } %>
-  </div>
+<div class="map-flow-r pull-right">
+  <%= render partial: 'image_list', locals: { i_column_type_id: 1, name: '最新大师作品' } %>
+  <%= render partial: 'image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
+  <%= render partial: 'image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
+  <%= render partial: 'image_list', locals: { i_column_type_id: 9, name: '装修色彩配搭' } %>
+  <%= render partial: 'image_list', locals: { i_column_type_id: 7, name: '相关资讯' } %>
+</div>
 
-  <div class="index_main refresh_news mt10 clearfix pull-left">
-    <div class="refresh_new pull-left">
-      <h5><a href="<%= @images_jingxuan_more.url if @images_jingxuan_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
-      <ul class="ul_dot">
-        <%- @images_jingxuan.each_with_index do |m,i| %>
-          <li class="<%= 'noborder' if i == @images_jingxuan.size - 1 %>">
-            <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
-          </li>
-        <%- end %>
-      </ul>
-    </div>
-    <div class="refresh_new pull-left">
-      <h5><a href="<%= @star_jingxuan_more.url if @star_jingxuan_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
-      <ul class="ul_dot">
-        <%- @star_jingxuan.each_with_index do |m,i| %>
-          <li class="<%= 'noborder' if i == @star_jingxuan.size - 1 %>">
-            <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
-          </li>
-        <%- end %>
-      </ul>
-    </div>
-    <div class="pull-right">
-      <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_230x230) %></a>
-    </div>
+<div class="index_main refresh_news mt10 clearfix pull-left">
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @images_jingxuan_more.url if @images_jingxuan_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
+    <ul class="ul_dot">
+      <%- @images_jingxuan.each_with_index do |m,i| %>
+      <li class="<%= 'noborder' if i == @images_jingxuan.size - 1 %>">
+        <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+      </li>
+      <%- end %>
+    </ul>
   </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @star_jingxuan_more.url if @star_jingxuan_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
+    <ul class="ul_dot">
+      <%- @star_jingxuan.each_with_index do |m,i| %>
+      <li class="<%= 'noborder' if i == @star_jingxuan.size - 1 %>">
+        <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+      </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="pull-right">
+    <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_230x230) %></a>
+  </div>
+</div>
 
 <a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
 

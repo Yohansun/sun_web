@@ -13,25 +13,33 @@ class DesignImagesController < ApplicationController
       flash[:notice] = "Successfully created upload."
       session[:image_id] = @upload.id
       respond_to do |format|
-        format.json {render :json => { :result => 'success',
-          :upload => design_image_path(@upload.id),
-          :path =>  @upload.file.url(:spring_img)} }
+        format.json {
+          render :json => {
+            :result => 'success',
+            :upload => design_image_path(@upload.id),
+            :path =>  @upload.file.url(:spring_img)
+          }
+        }
       end
     else
       respond_to do |format|
-        format.json {render :json => { :result => 'failed',
-          :action => 'new' } }
+        format.json {
+          render :json => {
+            :result => 'failed',
+            :action => 'new'
+          }
+        }
       end
     end
   end
 
   def download
     target_file = DesignImage.find(params[:id])
-      if target_file
-        send_file target_file.file.path
-      else
-        render nothing: true, status: 404
-      end
+    if target_file
+      send_file target_file.file.path
+    else
+      render nothing: true, status: 404
+    end
   end
 
   def show
@@ -40,7 +48,10 @@ class DesignImagesController < ApplicationController
 
   def lists
     @design_images = DesignImage.from.available.audited_with_colors
-    @images_count = @design_images.count
+
+    @images_count = Rails.cache.fetch("data-model-images_count", expires_in: 1.day) do
+      DesignImage.from.available.audited_with_colors.count
+    end
 
     #banners
     i_banners = IBanner.page_name('图库首页')
@@ -133,30 +144,30 @@ class DesignImagesController < ApplicationController
           end
 
           case tag_id
-            when 127
-              @content[1] = (tag.title == "按人群" ? "人群" : tag.title)
-            when 122
-              @content[2] = (tag.title == "按用途" ? "用途" : tag.title)
-            when 19
-              @content[3] = (tag.title == "按费用" ? "费用" : tag.title)
-            when 366
-              @content[4] = (tag.title == "局部空间" ? "局部空间" : tag.title)
-            when 62
-              @content[5] = (tag.title == "按调性" ? "调性" : tag.title)
-            when 107
-              @content[6] = (tag.title == "按色彩" ? "色彩" : tag.title)
-            when 1
-              @content[7] = (tag.title == "按户型" ? "户型" : tag.title)
-            when 34
-              @content[8] = (tag.title == "按风格" ? "风格" : tag.title)
-            when 28
-              @content[9] = (tag.title == "按面积" ? "面积" : tag.title)
-            when 82
-              @content[10] = (tag.title == "按空间" ? "空间" : tag.title)
-            when 132
-              @content[11] = (tag.title == "按图片" ? "图片" : tag.title)
-            else
-              @content[12] = tag.title
+          when 127
+            @content[1] = (tag.title == "按人群" ? "人群" : tag.title)
+          when 122
+            @content[2] = (tag.title == "按用途" ? "用途" : tag.title)
+          when 19
+            @content[3] = (tag.title == "按费用" ? "费用" : tag.title)
+          when 366
+            @content[4] = (tag.title == "局部空间" ? "局部空间" : tag.title)
+          when 62
+            @content[5] = (tag.title == "按调性" ? "调性" : tag.title)
+          when 107
+            @content[6] = (tag.title == "按色彩" ? "色彩" : tag.title)
+          when 1
+            @content[7] = (tag.title == "按户型" ? "户型" : tag.title)
+          when 34
+            @content[8] = (tag.title == "按风格" ? "风格" : tag.title)
+          when 28
+            @content[9] = (tag.title == "按面积" ? "面积" : tag.title)
+          when 82
+            @content[10] = (tag.title == "按空间" ? "空间" : tag.title)
+          when 132
+            @content[11] = (tag.title == "按图片" ? "图片" : tag.title)
+          else
+            @content[12] = tag.title
           end
 
           tag_arrs << tag_arr
@@ -360,11 +371,11 @@ class DesignImagesController < ApplicationController
     @tag_names = []
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
-       @master_design = MasterDesign.find(@image.imageable_id)
-    end
+     @master_design = MasterDesign.find(@image.imageable_id)
+   end
 
-    @images_total = DesignImage.from.available.audited_with_colors.count
-    @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
+   @images_total = DesignImage.from.available.audited_with_colors.count
+   @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
     if @image.area_id
       area = Area.find(@image.area_id)
@@ -388,22 +399,22 @@ class DesignImagesController < ApplicationController
     images = DesignImage.from.available.audited_with_colors
 
     unless params[:path].blank?
-       @tag_ids = CGI.unescape(params[:path]).split("-").map { |e| e.to_i }.uniq.sort
-       @tag_ids.delete(-1)
+     @tag_ids = CGI.unescape(params[:path]).split("-").map { |e| e.to_i }.uniq.sort
+     @tag_ids.delete(-1)
+   end
+
+   unless @tag_ids.blank?
+    tag_arrs = []
+    @tag_ids.each do |tag_arr|
+      if tag_arr.to_i != 0
+        tag_arrs << tag_arr
+      end
     end
 
-    unless @tag_ids.blank?
-      tag_arrs = []
-      @tag_ids.each do |tag_arr|
-        if tag_arr.to_i != 0
-          tag_arrs << tag_arr
-        end
-      end
-
-      if tag_arrs.present?
-        @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
-        final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
-        images = images.search_tags(final_tags.map(&:id))
+    if tag_arrs.present?
+      @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
+      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+      images = images.search_tags(final_tags.map(&:id))
         #取出所有搜索出来的标签,不包括特殊标签 拼音地域
         @tag_names << final_tags
       end
