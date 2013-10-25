@@ -8,7 +8,7 @@ server "134.119.18.11", :web, :app, :db, primary: true
 set :user, "root"
 
 set :repository, "git@git.networking.io:nioteam/icolor.git"
-set :branch, "master_0909"
+set :branch, "master"
 set :scm, :git
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
