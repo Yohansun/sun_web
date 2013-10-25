@@ -98,6 +98,10 @@ $(function() {
 
   // 有标签筛选,展开
   <%- if @tag_ids.present? %>
+    $("<%= @tag_ids.map{|id| "fieldset.js-cate-#{id}" }.join(", ") %>").addClass('highlight_gray');
+    $("<%= @tag_ids.map{|id| "a.js-tag-#{id}" }.join(", ") %>").addClass('highlight');
+    $("a.js-cate-all").addClass('highlight');
+    $("<%= @tags.map{|tag| "a.js-cate-all-#{tag.parent_id}" }.join(", ") %>").removeClass('highlight');
     $.createCookie('expand', 2);
   <%- end %>
 
@@ -246,28 +250,30 @@ function submit_area() {
     </p>
 
     <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
-      <%- @home_design.each do |category| %>
-      <%- unless category.title == "按地区" %>
-      <fieldset class="clearfix <%= 'highlight_gray' if @tag_ids.include?(category.category_id.to_s) %>">
-        <label class="pull-left"><%= category.title %>：</label>
-        <span>
-          <a href="/images/<%= show_link category.category_id.to_i %>" class="<%= 'highlight' if highlight(category) %>">全部</a>
-          <%- category.category(category.category_id).each do |cate_child| %>
-          <a href="/images/<%= show_link cate_child.id %>" class="<%= 'highlight' if @tag_ids && @tag_ids.include?(cate_child.id.to_s) %>"><%= cate_child.title %></a>
-          <%- end %>
-        </span>
-      </fieldset>
-      <% else %>
-      <fieldset class="clearfix noborder">
-        <label class="pull-left"><%= category.title %>：</label>
-        <span>
-          <select id="province" class="level_1">省</select>
-          <select id="city" class="level_2">市</select>
-          <select id="county" class="level_3" name='area_id'>区</select>
-          <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
-        </span>
-      </fieldset>
-      <% end %>
+      <% cache ['design_images', 'home_design'] do %>
+        <%- @home_design.each do |category| %>
+          <%- unless category.title == "按地区" %>
+          <fieldset class="clearfix js-cate-<%= category.id %>">
+            <label class="pull-left"><%= category.title %>：</label>
+            <span>
+              <a href="/images/<%= show_link category.category_id.to_i %>" class="js-cate-all js-cate-all-<%= category.category_id %>">全部</a>
+              <%- category.category(category.category_id).each do |cate_child| %>
+              <a href="/images/<%= show_link cate_child.id %>" class="js-tag-<%= cate_child.id %>"><%= cate_child.title %></a>
+              <%- end %>
+            </span>
+          </fieldset>
+          <% else %>
+          <fieldset class="clearfix noborder">
+            <label class="pull-left"><%= category.title %>：</label>
+            <span>
+              <select id="province" class="level_1">省</select>
+              <select id="city" class="level_2">市</select>
+              <select id="county" class="level_3" name='area_id'>区</select>
+              <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
+            </span>
+          </fieldset>
+          <% end %>
+        <% end %>
       <% end %>
 
       <%- if @tag_ids.blank? %>
@@ -306,16 +312,18 @@ function submit_area() {
       </p>
 
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
-        <%- @fitting_parts.each do |child_lv2| %>
-        <fieldset class="clearfix">
-          <label class="pull-left"><%= child_lv2.title %>：</label>
-          <span>
-            <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="<%= 'highlight' if highlight(child_lv2) %>">全部</a>
-            <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
-            <a href="/images/<%= show_link child_lv3.id %>" class="<%= 'highlight' if @tag_ids &&  @tag_ids.include?(child_lv3.id.to_s) %>"><%= child_lv3.title %></a>
-            <%- end %>
-          </span>
-        </fieldset>
+        <% cache ['design_images', 'fitting_parts'] do %>
+          <%- @fitting_parts.each do |child_lv2| %>
+          <fieldset class="clearfix">
+            <label class="pull-left"><%= child_lv2.title %>：</label>
+            <span>
+              <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="js-cate-all js-cate-all-<%= child_lv2.category_id %>">全部</a>
+              <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
+              <a href="/images/<%= show_link child_lv3.id %>" class="js-tag-<%= child_lv3.id %>"><%= child_lv3.title %></a>
+              <%- end %>
+            </span>
+          </fieldset>
+          <%- end %>
         <%- end %>
 
         <%- if @tag_ids.blank? %>

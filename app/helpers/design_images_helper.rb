@@ -1,14 +1,5 @@
 # encoding: utf-8
 module DesignImagesHelper
-
-	def highlight(category)
-		cate_children = category.category(category.category_id)
-		cate_children_ids = cate_children.map(&:id).uniq
-		tags = @tag_ids.map{|a| a.to_i}
-
-		return cate_children_ids & tags == []
-	end
-
 	def prefix_link
 		ids = @category_ids.collect {|item| item[:id]}
 		ids.fill('0').join('-')

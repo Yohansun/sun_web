@@ -49,10 +49,6 @@ class DesignImagesController < ApplicationController
   def lists
     @design_images = DesignImage.from.available.audited_with_colors
 
-    @images_count = Rails.cache.fetch("data-model-images_count", expires_in: 1.day) do
-      DesignImage.from.available.audited_with_colors.count
-    end
-
     #banners
     i_banners = IBanner.page_name('图库首页')
     @banner1 = i_banners.find_by_position(1)
@@ -176,10 +172,6 @@ class DesignImagesController < ApplicationController
     end
 
     @design_images = DesignImage.from.available.audited_with_colors
-
-    @images_count = Rails.cache.fetch("data-model-images_count", expires_in: 1.day) do
-      DesignImage.from.available.audited_with_colors.count
-    end
 
     @tag_names = []
 
@@ -374,7 +366,6 @@ class DesignImagesController < ApplicationController
      @master_design = MasterDesign.find(@image.imageable_id)
    end
 
-   @images_total = DesignImage.from.available.audited_with_colors.count
    @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
     if @image.area_id
@@ -508,6 +499,7 @@ class DesignImagesController < ApplicationController
 
   def get_latest_and_likes
     @image = DesignImage.find(params[:id])
+
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
@@ -516,8 +508,13 @@ class DesignImagesController < ApplicationController
       tags = tags.sample(4)
       @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).limit(4)
     end
+
     #最新更新
-    @latest_month_images = DesignImage.order("created_at desc").limit(1000).available.audited_with_colors.sample(4)
+    latest_images = Rails.cache.fetch("data-model-latest_1000_images", expires_in: 7.days) do
+      DesignImage.order("created_at desc").available.audited_with_colors.limit(1000)
+    end
+    @latest_month_images = latest_images.sample(4)
+
     expires_in 7.days, 'max-stale' => 8.days, :public => true
   end
 
@@ -546,6 +543,10 @@ class DesignImagesController < ApplicationController
   end
 
   def get_categories
+    @images_count = Rails.cache.fetch("data-model-images_count", expires_in: 7.days) do
+      DesignImage.from.available.audited_with_colors.count
+    end
+
     @category_ids = Rails.cache.fetch("data-model-category_ids", expires_in: 10.days) do
       ImageLibraryCategory.parent_categories.collect do |categorie|
         {

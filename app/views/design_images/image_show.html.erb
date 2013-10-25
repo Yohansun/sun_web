@@ -76,7 +76,7 @@
   <script type="text/javascript">
   $(function() {
     var site = 0;
-    <% if (params[:site].to_i + 4) >= @images_total %>
+    <% if (params[:site].to_i + 4) >= @images_count %>
       site = 4
     <% else %>
       site = <%= params[:site].to_i + 4 %>
@@ -122,7 +122,7 @@
   </div>
   <i class="icon-map icon-map2 icon_colors"></i>
   <strong>装修图库</strong>
-  <small>iColor为您提供<span class="cr"><%= @images_total %></span>张装修图片</small>
+  <small>iColor为您提供<span class="cr"><%= @images_count %></span>张装修图片</small>
 </h3>
 <ul class="map-nav bd clearfix unstyled">
   <li class="pull-left"><a href="/design_images/lists">图库精华</a></li>
@@ -195,7 +195,7 @@
           </ul>
         </div>
         <% if @image_arr.last.id != @image.id %>
-          <a href="/images/<%=@image_arr.last.id%>/<% if (params[:site].to_i + 4) >= @images_total %><%=@images_total%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet">next</a>
+          <a href="/images/<%=@image_arr.last.id%>/<% if (params[:site].to_i + 4) >= @images_count %><%=@images_count%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet">next</a>
         <% else %>
           <a class="map-next-bullet">next</a>
         <% end %>
