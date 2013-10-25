@@ -4,116 +4,115 @@
   .highlight_gray {background-color:#E3E3E3;}
 </style>
 <script type="text/javascript">
-  $(function() {
-    var options = {
-      data  : data
-    }
-    var sel = new LinkageSelect(options);
-    sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '请选择');
-    sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '请选择');
-    sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '请选择');
-  });
-  $(function() {
-    $('.check_on').bind("click", function (event) {
-      $(this).addClass("highlight");
-      event.preventDefault();
-      event.stopPropagation();
-      add_tag($(event.currentTarget).data('parent-id'), $(event.currentTarget).data('tag-id'));
-    });
-  });
-  $(function(){
-    var $list   = $('.imgbase_list'),
-    $view   = $('#imgbase_view'),
-    $info   = $('#imgbase_info'),
-    $full   = $('#imgbase_full'),
-    $collect= $('.imgbase_collect_id'),
-    $down   = $('.imgbase_down_id'),
-    $toggle = $('.map-list-up'),
-    $form   = $('.map-list-search'),
-    $ul     = $('.nomargin'),
-    $conte = $('.imgbase_bin > .imginfo_big_txt'),
-    $colorsbox = $(".imgbase_bin > .colorsbox");
-
-    <% if params[:page].present? &&  params[:page].to_i != 0 %>
-    $('#prev').show();
-    $('#prev').click(function(event) {
-      var li_index = $list.find('.imgbase_curr').index();
-      event.preventDefault()
-      if(li_index == 0){
-        <% if  (params[:page].to_i - 1) == 1 %>
-              ///0-0-0-0-0-0-0-0-0-all-view_count-3-B-a-0-0
-              window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1"
-              <% else %>
-              window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1/<%=@images.current_page - 1%>"
-              <% end %>
-            }
-          })
-<% else %>
-$("#prev").hide();
-<% end %>
-<% if @images.current_page == @images.total_pages %>
-
-var li_index = $list.find('.imgbase_curr');
-var last_id = li_index.data('full');
-if(last_id == <%=@images.last.id%>){
-  $("#next").hide();
-}
-<% else %>
-$('#next').click(function(event) {
-  var li_index = $list.find('.imgbase_curr').index();
-  if(li_index == 10){
-    window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-0/<%=@images.current_page + 1%>"
+$(function() {
+  var options = {
+    data  : data
   }
-});
-<% end %>
+  var sel = new LinkageSelect(options);
+  sel.bind('.level_1', <%= @area_level_1 ? "'#{@area_level_1}'".html_safe : "null" %>, '请选择');
+  sel.bind('.level_2', <%= @area_level_2 ? "'#{@area_level_2}'".html_safe : "null" %>, '请选择');
+  sel.bind('.level_3', <%= @area_level_3 ? "'#{@area_level_3}'".html_safe : "null" %>, '请选择');
 
+  $('.check_on').bind("click", function (event) {
+    $(this).addClass("highlight");
+    event.preventDefault();
+    event.stopPropagation();
+    add_tag($(event.currentTarget).data('parent-id'), $(event.currentTarget).data('tag-id'));
+  });
 
-$list.on('mouseenter', 'li', function(){
-  var index = $(this).index();
-  $slider.find('li').eq(index).find('a').click();
-}).mouseleave(function(){
-  $slider.mouseleave();
-});
-$ul.on('click', 'li', function(){
-  var $this = $(this),
-  index = $this.index();
-  $.createCookie('nomargin', index);
-  $this.addClass('active_tit').siblings().removeClass();
-  $form.eq(index).show().siblings().hide();
-});
+  var $list   = $('.imgbase_list'),
+  $view   = $('#imgbase_view'),
+  $info   = $('#imgbase_info'),
+  $full   = $('#imgbase_full'),
+  $collect= $('.imgbase_collect_id'),
+  $down   = $('.imgbase_down_id'),
+  $toggle = $('.map-list-up'),
+  $form   = $('.map-list-search'),
+  $ul     = $('.nomargin'),
+  $conte = $('.imgbase_bin > .imginfo_big_txt'),
+  $colorsbox = $(".imgbase_bin > .colorsbox");
 
-var cookie = $.readCookie("nomargin");
-if (cookie != ""){
-  $("ul.pull-left.nomargin").find("li").not(':eq(' + cookie + ')').removeClass("list-curr");
-  $("ul.pull-left.nomargin").find("li").eq(cookie).addClass("active_tit list-curr");
-  $form.eq(cookie).show().siblings().hide();
-};
-      // 展开收起JS
-      $toggle.click(function(){
-        var $this = $(this);
-        if($this.hasClass('map-list-down')){
-          $.createCookie('expand', 1);
-        } else {
-          $.createCookie('expand', 2);
-        }
-      });
-      // 有标签筛选,展开
-      <%- if @tag_ids.present? %>
-      $.createCookie('expand', 2);
-      <%- end %>
+  <% if params[:page].present? &&  params[:page].to_i != 0 %>
+  $('#prev').show();
+  $('#prev').click(function(event) {
+    var li_index = $list.find('.imgbase_curr').index();
+    event.preventDefault()
+    if(li_index == 0){
+      <% if  (params[:page].to_i - 1) == 1 %>
+        ///0-0-0-0-0-0-0-0-0-all-view_count-3-B-a-0-0
+        window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1"
+      <% else %>
+        window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-1/<%=@images.current_page - 1%>"
+      <% end %>
+    }
+  })
+  <% else %>
+    $("#prev").hide();
+  <% end %>
 
-      var cookie = $.readCookie('expand');
-      if(cookie == 1){
-        $toggle.addClass('map-list-down').text('展开').parent().addClass("map-mini");
-      } else if(cookie == 2){
-        $toggle.removeClass('map-list-down').text('收起').parent().removeClass("map-mini");
+  <% if @images.current_page == @images.total_pages %>
+    var li_index = $list.find('.imgbase_curr');
+    var last_id = li_index.data('full');
+    if(last_id == <%=@images.last.id%>){
+      $("#next").hide();
+    }
+  <% else %>
+    $('#next').click(function(event) {
+    var li_index = $list.find('.imgbase_curr').index();
+      if(li_index == 10){
+        window.location = "/images/<%=params[:tags] ? params[:tags] : '0-0-0-0-0-0-0-0-0-0'%>-<%=params[:imageable_type] ? params[:imageable_type] : 'all'%>-<%=params[:ranking_list] ? params[:ranking_list] : 0 %>-<%=params[:area_id] ? params[:area_id] : 0 %>-<%=params[:pinyin] ? params[:pinyin] : 0%>-<%=params[:search] ? params[:search] : '_'%>-<%=params[:all_tags] ? params[:all_tags] : 0%>-0/<%=@images.current_page + 1%>"
       }
-      // 展开收起JS END
-
-      $('.colors_con').live('hover', function(){
-        $(this).children().fadeToggle('fast');
-      });
     });
+  <% end %>
+
+  $list.on('mouseenter', 'li', function(){
+    var index = $(this).index();
+    $slider.find('li').eq(index).find('a').click();
+  }).mouseleave(function(){
+    $slider.mouseleave();
+  });
+  $ul.on('click', 'li', function(){
+    var $this = $(this),
+    index = $this.index();
+    $.createCookie('nomargin', index);
+    $this.addClass('active_tit').siblings().removeClass();
+    $form.eq(index).show().siblings().hide();
+  });
+
+  var cookie = $.readCookie("nomargin");
+  if (cookie != ""){
+    $("ul.pull-left.nomargin").find("li").not(':eq(' + cookie + ')').removeClass("list-curr");
+    $("ul.pull-left.nomargin").find("li").eq(cookie).addClass("active_tit list-curr");
+    $form.eq(cookie).show().siblings().hide();
+  };
+
+  // 展开收起JS
+  $toggle.click(function(){
+    var $this = $(this);
+    if($this.hasClass('map-list-down')){
+      $.createCookie('expand', 1);
+    } else {
+      $.createCookie('expand', 2);
+    }
+  });
+
+  // 有标签筛选,展开
+  <%- if @tag_ids.present? %>
+    $.createCookie('expand', 2);
+  <%- end %>
+
+  var cookie = $.readCookie('expand');
+  if(cookie == 1){
+    $toggle.addClass('map-list-down').text('展开').parent().addClass("map-mini");
+  } else if(cookie == 2){
+    $toggle.removeClass('map-list-down').text('收起').parent().removeClass("map-mini");
+  }
+  // 展开收起JS END
+
+  $('.colors_con').live('hover', function(){
+    $(this).children().fadeToggle('fast');
+  });
+});
 
 function search_sub(){
   var search = $("#search_query_value").val();
