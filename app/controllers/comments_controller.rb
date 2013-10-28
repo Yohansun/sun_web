@@ -46,6 +46,7 @@ class CommentsController < ApplicationController
 
   def get_comments
     @image = DesignImage.find(params[:id])
-    @comments = @image.comments.order("created_at desc").page(params[:page]).per(3)
+    @img_comment_count = @image.comments_count
+    @comments = @image.comments.includes(:reply_msgs).page(params[:page]).per(3)
   end
 end

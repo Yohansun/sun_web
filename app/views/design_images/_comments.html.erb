@@ -1,4 +1,4 @@
-<%- @comments.each_with_index do |c,i| %>
+<%- comments.each_with_index do |c,i| %>
 	<li>
 		<div class="clearfix">
 			<div class="pull-left comment_photo">
@@ -10,7 +10,7 @@
 			</div>
 			<div class="comment_text">
 				<p>
-					<strong class="pull-right comment_floor"><%= @comments.size - i %>F</strong>
+					<strong class="pull-right comment_floor"><%= comments.size - i %>F</strong>
 					<strong><%= c.user ? c.user.display_name : "匿名" %></strong>
 					<span class="comment_date"><%= c.created_at.to_date %></span>
 				</p>
@@ -34,7 +34,7 @@
 			<%- end %>
 		</div>
 		<%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
-			<%= f.hidden_field :show_id, value: @image.id %>
+			<%= f.hidden_field :show_id, value: params[:id] %>
 			<%= f.hidden_field :comment_id, value: c.id %>
 			<%= f.hidden_field :reply_type, value: "design_images" %>
 			<%= f.text_area :content, class: 're_comments' %>
@@ -46,5 +46,5 @@
 	</li>
 <%- end %>
 <div class="pager ft12">
-  <%= paginate @comments, :params => {:controller => "design_images", :action => "image_show", id: @image.id, site: "#{params[:site]}", path: "#{params[:path]}"} %>
+  <%= paginate comments, :params => {:controller => "design_images", :action => "image_show", id: params[:id], site: "#{params[:site]}", path: "#{params[:path]}"} %>
 </div>
