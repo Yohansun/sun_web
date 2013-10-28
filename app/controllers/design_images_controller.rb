@@ -492,8 +492,11 @@ class DesignImagesController < ApplicationController
     #@image_colors = ColorCode.where("code in (?)", [@image.color1,@image.color2,@image.color3])
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
 
-    #精品推荐
-    @week_stars = WeeklyStar.from.order("created_at desc").limit(4)
+    expires_in 7.days, 'max-stale' => 8.days, :public => true
+  end
+
+  def get_latest_and_likes
+    @image = DesignImage.find(params[:id])
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
@@ -503,9 +506,7 @@ class DesignImagesController < ApplicationController
       @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).limit(4)
     end
     #最新更新
-    # @latest_mounth_images = DesignImage.from.available.audited_with_colors.latest_mounth_images.sample(4)
-    @latest_mounth_images = DesignImage.order("created_at desc").limit(1000).available.audited_with_colors.sample(4)
-
+    @latest_month_images = DesignImage.order("created_at desc").limit(1000).available.audited_with_colors.sample(4)
     expires_in 7.days, 'max-stale' => 8.days, :public => true
   end
 

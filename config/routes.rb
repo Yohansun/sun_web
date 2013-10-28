@@ -343,6 +343,7 @@ Icolor::Application.routes.draw do
       get :more_comment
       get :fullscreen
       get :download
+      get :get_latest_and_likes
       post :view_count
     end
   end
