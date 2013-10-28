@@ -70,14 +70,14 @@
 		</div><!--loginCon ends-->
 	<% end %>
 	<ul class="loginCon login_way clearfix">
-		<li><a href="#"><%= image_tag "manage/login/sina.jpg" %>新浪微博</a></li>
-		<li><a href="#"><%= image_tag "manage/login/qq.jpg" %>QQ</a></li>
-		<li><a href="#"><%= image_tag "manage/login/rr.jpg" %>人人网</a></li>
-		<li class="noborder"><a href="#"><%= image_tag "manage/login/kx.jpg" %>开心网</a></li>
+		<li><a href="/api/baicheng_login?type=weibo"><%= image_tag "manage/login/sina.jpg" %>新浪微博</a></li>
+		<li><a href="/api/baicheng_login?type=qq_connect"><%= image_tag "manage/login/qq.jpg" %>QQ</a></li>
+		<li><a href="/api/baicheng_login?type=renren"><%= image_tag "manage/login/rr.jpg" %>人人网</a></li>
+		<li class="noborder"><a href="/api/baicheng_login?type=kaixin"><%= image_tag "manage/login/kx.jpg" %>开心网</a></li>
 	</ul>
 	<div class="loginCon register_now clearfix">
 		<p class="pull-left">还没加入iColor?</p>
-		<a href="reg.html" class="reg_now pull-left"></a>
+		<a href="/users/sign_up" class="reg_now pull-left"></a>
 	</div><!--loginCon ends-->
 	<div class="loginCon">
 		<a href="/users/sign_up"><img src="<%= asset_path "reg_ads.jpg" %>" alt="ads" /></a>

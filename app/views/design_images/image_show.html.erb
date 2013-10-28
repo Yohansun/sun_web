@@ -2,6 +2,18 @@
   <%= stylesheet_link_tag "manage/map.css" %>
   <%= javascript_include_tag "manage/map-kv-slider.js","/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
+    // 评论回复JS弹框
+    function js_comment_reply () {
+        $('.js-recomment').click(function(){
+          $(this).parents('li').siblings().find('.r_comment_form').hide();
+          $(this).parents('li').find('.r_comment_form').show();
+        });
+        $('.js-close').click(function(e){
+          e.preventDefault();
+          $(this).parents('.r_comment_form').hide();
+        });
+    };
+
     $(function() {
       var $image_id = $('.work_comments').data('image_id'),
           $site = $('.work_comments').data('site'),
@@ -25,6 +37,8 @@
                   page : parseInt($page)
                 },
           url: '/comments/get_comments'
+        }).done(function() {
+          js_comment_reply();
         });
       }else{
         $.ajax({
@@ -34,6 +48,8 @@
                   path : $path
                 },
           url: '/comments/get_comments'
+        }).done(function() {
+          js_comment_reply();
         });
       };
 
@@ -45,15 +61,6 @@
         var link = "/images/<%= prefix_link %>-0_0_" + search + "_0_0_0"
         window.location = link
         }
-      });
-
-      $('.js-recomment').click(function(){
-        $(this).parents('li').siblings().find('.r_comment_form').hide();
-        $(this).parents('li').find('.r_comment_form').show();
-      });
-      $('.js-close').click(function(e){
-        e.preventDefault();
-        $(this).parents('.r_comment_form').hide();
       });
 
       var options = {
