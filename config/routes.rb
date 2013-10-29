@@ -349,6 +349,8 @@ Icolor::Application.routes.draw do
   resources :collect do
   end
 
+  resources :huaxun_homes
+
   resources :cubit_fixtures, only: :create
   resources :visit_ips,only: :create
 
