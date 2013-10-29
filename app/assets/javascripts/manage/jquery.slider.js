@@ -16,6 +16,7 @@ $.fn.slider = function(config){
             duration : 4000,                // 间隔时间
             speed : 800,                    // 滚动速度
             scroll : 1,                     // 滚动个数
+            margin : 0,
             callback : function(index, e){} // 回调函数 参数index:0起头的pager; e:触发滚动源
         }, config);
 
@@ -26,7 +27,7 @@ $.fn.slider = function(config){
             pages = Math.ceil(li.length / config.scroll),
             len = bin.width() / li.outerWidth(),
             odd = li.length % config.scroll,
-            width = li.outerWidth() * config.scroll,
+            width = li.outerWidth() * config.scroll + config.margin,
             pager = 1,
             pag = '',
             prev = '',
@@ -46,7 +47,7 @@ $.fn.slider = function(config){
                 pag.append(pagli + '</ul>');
             } else {
                 pag = that.find(config.pagers);
-            }           
+            }
             pag.on(config.mouse, 'li', function(e){
                 play($(this).index() + 1, e);
             });
@@ -75,7 +76,7 @@ $.fn.slider = function(config){
         function play(num, e){
             if(num == 0) {
                 ul.css('left', - width * pages).stop(true).animate({
-                    'left' : '+=' + width 
+                    'left' : '+=' + width
                 }, config.speed, config.easing);
                 pager = pages;
             } else if(num > pages + 1){
