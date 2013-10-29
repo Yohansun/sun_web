@@ -86,6 +86,12 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .icon-more_yellow{background-position:-15px -48px;margin-top:-1px;}
 .icon-xin{background-position:-16px -16px;margin-top:0;}
 .icon-xin_gray{background-position:-32px -16px;margin-top:0;}
+.icon-xin_gray2{background-position:-32px -299px;margin-top:0;}
+.icon-comment1{background-position:-32px -314px;margin-top:0;}
+.icon-share1{background-position:-32px -329px;margin-top:-1px;}
+.icon-edit2{background-position:1px -341px;}
+.icon-i30{height:30px;width:30px;line-height:30px;background:url(<%= asset_path 'manage/icons.png'%>) no-repeat;}
+.icon-phone1{background-position:1px -362px;}
 .noborder{border:0!important;}
 .nomargin{margin:0!important;}
 .nopadding{padding:0!important;}
@@ -102,6 +108,9 @@ hr.border2{height:0px;font-size:0;line-height:0;border-top:1px solid #d0cfb7;bor
 hr.border2.border2_mt2{margin-top:0px;}
 .linet1{border-top:1px solid #ddd;}
 .dott1{border-top:1px dotted #ddd;}
+.text-important{color:#e71d36;}
+.text-warning{color:#ff7b23;}
+.text-muted{color:#b9b9b9;}
 /*###################################### login beginning ##############################################*/
 #overlay{}
 .unlogin{background:#fff;border:5px solid #666;width:304px;height:339px;margin-left:-152px;display:none;}
@@ -293,6 +302,7 @@ a.title_opacity p span.none{display:none;}
 .channel_search .search input{margin-bottom:0;}
 .channel_search .search input.input-medium{width:80px;*width:76px;border:0;background:transparent;padding:4px 3px 4px 6px;}
 .channel_btn{background:url(<%= asset_path 'manage/channel/btns/btns_icon2.png'%>) no-repeat 0 -38px;width:67px;height:24px;color:#9d5201;}
+.channel_btn_gray{background:#dfdfdf;border:1px solid #d4d4d4;color:#6b6b6b;height:17px;display:inline-block;padding:2px 6px 3px;}
 .channel_search select{width:108px;*margin-top:0;}
 .input_image{margin-top:4px;width:14px;overflow:hidden;}
 /*--------channel list*/
@@ -364,7 +374,7 @@ a.title_opacity p span.none{display:none;}
 .mood_list li{border-bottom:1px dotted #ccc;padding:5px 3px;}
 .mood_list li strong{font-weight:bold;color:#e71d37;font-size:12px;}
 .mood_list li p{margin:3px 0 10px;line-height:16px;}
-.mood_list li span,.mood_list li span a{color:#acacac;}
+.mood_list li span.comment_date,.mood_list li span a{color:#acacac;}
 
 .link_mood{font-size:12px;padding:10px 0 24px;*padding-bottom:36px;text-align:right;}
 .link_mood a{color:#333333;}

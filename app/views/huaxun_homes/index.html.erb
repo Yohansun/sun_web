@@ -1,0 +1,620 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "manage/per_home" %>
+<%- end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "exp/exp" %>
+  <script type="text/javascript">
+    $(function(){
+      $('#haxun').slider({
+        buttons : false,
+        pagers: '.circle_indicators'
+      });
+      $('#haxun_design_slide').slider({
+        pagers: '.circle_indicators',
+        margin : 16
+      });
+    })
+    </script>
+<% end %>
+<ul class="breadcrumb">
+  <li><a href="#">首页</a> > </li>
+  <li class="active">用户中心</li>
+</ul>
+<hr class="border2 border2_mt2">
+<div class="per_banner" style="min-height:441px;">
+  <img src="<%= asset_path 'manage/per_home_huaxun/per_banner.jpg'%>" alt="" style="height:300px;width:1000px;" />
+  <div class="per_photo">
+    <div>
+      <img src="<%= asset_path 'manage/per_home_huaxun/haxun_logo.jpg'%>" alt="" />
+      <a href="#" class="per_edit">
+        <i class="icon-i16 icon-edit2"></i>编辑个人资料
+      </a>
+    </div>
+    <h4>华浔品味装饰</h4>
+  </div>
+  <ul class="per_links unstyled clearfix">
+    <li class="pull-left">
+      <i class="icon-phone1 icon-i30"></i>
+      <span style="color:#676666;font:bold 14px 'SimSun';">全国服务热线：</span><span class="phone_number">400-628-1968</span>
+    </li>
+    <li class="pull-right">
+      <a href="#">案例赏析</a>
+      <a href="#">免费咨询</a>
+      <a href="#">精英团队</a>
+      <a href="#">联系方式</a>
+    </li>
+  </ul>
+</div>
+<div class="per_home clearfix">
+  <div class="per_left index_main pull-left">
+    <p class="clearfix index_tit">
+      <a class="active" href="javascript:;" target="_blank">精选作品</a>
+      <a href="javascript:;" target="_blank">全部作品</a>
+      <strong class="pull-left mr5">案例赏析</strong>
+    </p>
+    <hr class="border2 border2_mt2">
+    <div>
+      <ul class="per_works unstyled clearfix mt20">
+        <li class="">
+          <a href="http://www.icolor.com.cn/users/122728/designs/103932" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work.jpg'%>" alt="" /></a>
+          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103932">大儒世家卧虎</a></h5>
+          <p class="nomargin">黄育波</p>
+          <p class="nomargin">风格: 现代简约</p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i>8503</span>
+            <span><i class="icon-i16 icon-comment1"></i>24</span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i>24</span>
+          </p>
+        </li>
+        <li class="">
+          <a href="http://www.icolor.com.cn/users/122728/designs/103930" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work2.jpg'%>" alt="" /></a>
+          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103930">融汇江山某豪宅</a></h5>
+          <p class="nomargin">胡寿海</p>
+          <p class="nomargin">风格: 现代简约</p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i>8503</span>
+            <span><i class="icon-i16 icon-comment1"></i>24</span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i>24</span>
+          </p>
+        </li>
+        <li class="">
+          <a href="http://www.icolor.com.cn/users/122728/designs/103927" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work3.jpg'%>" alt="" /></a>
+          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103927">万科朗润园17A别墅</a></h5>
+          <p class="nomargin">谭明飞、黄杰伍</p>
+          <p class="nomargin">风格: 现代简约</p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i>8503</span>
+            <span><i class="icon-i16 icon-comment1"></i>24</span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i>24</span>
+          </p>
+        </li>
+        <li class="">
+          <a href="http://www.icolor.com.cn/users/122728/designs/103923" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work4.jpg'%>" alt="" /></a>
+          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103923">坤和山水人家</a></h5>
+          <p class="nomargin">张平</p>
+          <p class="nomargin">风格: 现代简约</p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i>8503</span>
+            <span><i class="icon-i16 icon-comment1"></i>24</span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i>24</span>
+          </p>
+        </li>
+        <li class="">
+          <a href="http://www.icolor.com.cn/users/122728/designs/103922" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work5.jpg'%>" alt="" /></a>
+          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103922">永怡聚豪园周生雅居</a></h5>
+          <p class="nomargin">胡杨</p>
+          <p class="nomargin">风格: 现代简约</p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i>8503</span>
+            <span><i class="icon-i16 icon-comment1"></i>24</span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i>24</span>
+          </p>
+        </li>
+        <li class="">
+          <a href="http://www.icolor.com.cn/users/122728/designs/103921" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work6.jpg'%>" alt="" /></a>
+          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103921">阳光美地王总</a></h5>
+          <p class="nomargin">刘云</p>
+          <p class="nomargin">风格: 现代简约</p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i>8503</span>
+            <span><i class="icon-i16 icon-comment1"></i>24</span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i>24</span>
+          </p>
+        </li>
+      </ul>
+      <div class="pager">
+        <!-- <a href="#" class=""></a> -->
+        <a class="current" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">...</a>
+        <a href="#">20</a>
+        <a href="#" class="">下一页</a>
+        <a href="#" class="">最后一页</a>
+      </div>
+    </div>
+  </div>
+  <div class="per_right index_main pull-right">
+    <div class="work_comments nomargin nopadding">
+      <form class="comment_form exp-holder">
+        <h5>免费咨询</h5>
+        <textarea id="" class=""></textarea>
+        <ul class="moodbtn_group unstyled clearfix">
+          <li class="pull-right btn_send"><span class="muted">还可以输入<span class="text-important">1000</span>个字符</span><button class="">提交留言</button></li>
+          <li class="pull-left exp-block-trigger" id="">
+            <i class="icon-mood icon-face"></i>
+            添加表情
+          </li>
+        </ul>
+      </form><!-- bottom_mood end -->
+      <ul class="mood_list unstyled nomargin">
+        <li>
+          <div class="clearfix">
+            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_2.jpg'%>"></div>
+            <div class="comment_text">
+              <p>
+                <strong class="pull-right comment_floor">3F</strong>
+                <strong>麦唛小</strong>
+                <span class="comment_date">2012-11-13</span>
+              </p>
+              <p>[哈哈]啥时候才能有这样的家啊~~~~~</p>
+            </div>
+          </div>
+          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
+          <form class="comment_form exp-holder nomargin">
+            <textarea id="" class=""></textarea>
+            <ul class="moodbtn_group unstyled clearfix">
+              <li class="pull-right noborder nopadding">
+                <span class="muted">
+                  还可以输入
+                  <span class="text-important">1000</span>
+                  个字符
+                </span>
+                <button class="channel_btn noborder"><small>确认回复</small></button>
+                <a href="javascript:;" class="channel_btn_gray"><small>取消回复</small></a>
+              </li>
+              <li class="pull-left exp-block-trigger noborder nopadding" id="">
+                <i class="icon-mood icon-face"></i>
+                添加表情
+              </li>
+            </ul>
+          </form><!-- bottom_mood end -->
+        </li>
+        <li>
+          <div class="clearfix">
+            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_1.jpg'%>"></div>
+            <div class="comment_text">
+              <p>
+                <strong class="pull-right comment_floor">2F</strong>
+                <strong>Jane</strong>
+                <span class="comment_date">2012-11-13</span>
+              </p>
+              <p>嫁给我你立马就有了~哈哈哈哈</p>
+              <div class="re_comments">
+                <i class="icon-i16 icon-toparrow"></i>
+                <p>
+                  <strong>麦唛小</strong>
+                  <span class="muted">说</span>
+                </p>
+                <p class="muted">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
+        </li>
+        <li>
+          <div class="clearfix">
+            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_1.jpg'%>"></div>
+            <div class="comment_text">
+              <p>
+                <strong class="pull-right comment_floor">2F</strong>
+                <strong>Jane</strong>
+                <span class="comment_date">2012-11-13</span>
+              </p>
+              <p>嫁给我你立马就有了~哈哈哈哈</p>
+              <div class="re_comments">
+                <i class="icon-i16 icon-toparrow"></i>
+                <p>
+                  <strong>麦唛小</strong>
+                  <span class="muted">说</span>
+                </p>
+                <p class="muted">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
+        </li>
+        <li>
+          <div class="clearfix">
+            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_2.jpg'%>"></div>
+            <div class="comment_text">
+              <p>
+                <strong class="pull-right comment_floor">1F</strong>
+                <strong>麦唛小</strong>
+                <span class="comment_date">2012-11-13</span>
+              </p>
+              <p>[哈哈]啥时候才能有这样的家啊~~~~~</p>
+            </div>
+          </div>
+          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
+        </li>
+      </ul>
+      <div class="pager">
+        <!-- <a href="#" class=""></a> -->
+        <a class="current" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">...</a>
+        <a href="#">20</a>
+        <a href="#" class="">下一页</a>
+        <a href="#" class="">最后一页</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="per_home clearfix mt20">
+  <div class="per_left2 index_main pull-left">
+    <p class="clearfix index_tit mt10">
+      <a href="#" target="_blank" class="pull-right"><small class="muted">更多 ></small></a>
+      <strong class="pull-left">华浔新闻</strong>
+    </p>
+    <hr class="border2 border2_mt2">
+    <ul class="unstyled ul_list_news">
+      <li><a href=" http://www.hxdec.com" target="_blank">团结奋进 再创辉煌——贺华浔第十五届全国设计</a></li>
+      <li><a href=" http://www.hxdec.com" target="_blank">华浔第二届“金马克杯”室内设计大赛颁奖盛典在桂</a></li>
+      <li><a href=" http://www.hxdec.com" target="_blank">华浔总监团“欧洲采风之旅”完美收官</a></li>
+      <li><a href=" http://www.hxdec.com" target="_blank">华浔2013年全国经理培训暨年中总结大会在北京</a></li>
+      <li><a href=" http://www.hxdec.com" target="_blank">第一届华浔品味“19+1”网络家装节</a></li>
+      <li><a href=" http://www.hxdec.com" target="_blank">华浔品味装饰第四届“海鸥飞翔”班顺利结业</a></li>
+      <li class="noborder"><a href="#" target="_blank">再贺华浔泉州公司“中润嘉园”杯室内设计大赛勇夺</a></li>
+    </ul>
+  </div>
+  <div class="per_right2 index_main pull-right nopadding" id="haxun">
+    <div class="slider-bin pull-left">
+      <div class="slider-container">
+        <ul class="clearfix nomargin unstyled">
+          <li class="item">
+            <a class="pull-left media_a" href="http://www.hxdec.com/activity.asp">
+              <img style="width:670px;height:283px;" src="<%= asset_path 'manage/per_home_huaxun/haxun_slide1.jpg'%>">
+            </a>
+          </li>
+          <li class="item">
+            <a class="pull-left media_a" href="http://www.hxdec.com/activity.asp">
+              <img style="width:670px;height:283px;" src="<%= asset_path 'manage/per_home_huaxun/haxun_slide2.jpg'%>">
+            </a>
+          </li>
+          <li class="item">
+            <a class="pull-left media_a" href="http://www.hxdec.com/activityshow.asp?id=58">
+              <img style="width:670px;height:283px;" src="<%= asset_path 'manage/per_home_huaxun/haxun_slide3.jpg'%>">
+            </a>
+          </li>
+        </ul>
+      </div>
+      <ul class="circle_indicators nomargin">
+        <li class="slider-active"><a href="javascript:;"></a></li>
+        <li><a href="javascript:;"></a></li>
+        <li><a href="javascript:;"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="per_home index_main_black mt20">
+  <p class="clearfix index_tit">
+    <a href="#" target="_blank" class="pull-right"><small class="muted">更多 ></small></a>
+    <strong class="pull-left">精英团队</strong>
+  </p>
+  <hr class="border2 border2_mt2">
+  <div id="haxun_design_slide" class="slider-bin">
+    <div class="slider-container">
+      <ul class="unstyled">
+        <li>
+          <a href="http://www.hxdec.com/designer_show.asp?id=215&sortid=4"><img src="<%= asset_path 'manage/per_home_huaxun/per_design.jpg'%>"></a>
+          <p class="nomargin text-center">刘明富-中山华浔总经理</p>
+        </li>
+        <li>
+          <a href="http://www.hxdec.com/designer_show.asp?id=295&sortid=4"><img src="<%= asset_path 'manage/per_home_huaxun/per_design2.jpg'%>"></a>
+          <p class="nomargin text-center">瞿锐-永康华浔总经理</p>
+        </li>
+        <li>
+          <a href=" http://www.hxdec.com/designer_show.asp?id=348&sortid=4"><img src="<%= asset_path 'manage/per_home_huaxun/per_design3.jpg'%>"></a>
+          <p class="nomargin text-center">聂昆-桂林华浔总经理</p>
+        </li>
+        <li>
+          <a href="http://www.hxdec.com/designer_show.asp?id=357&sortid=4"><img src="<%= asset_path 'manage/per_home_huaxun/per_design4.jpg' %>"></a>
+          <p class="nomargin text-center">吴昌运-岳麓华浔经理</p>
+        </li>
+      </ul>
+    </div>
+    <!-- <a href="javascript:;" class="slider-prev">prev</a> -->
+    <!-- <a href="javascript:;" class="slider-next">next</a> -->
+  </div>
+</div>
+
+<div class="per_home index_main closer_haxun mt20">
+  <p class="clearfix index_tit">
+    <strong class="pull-left mr5">走进华浔</strong>
+  </p>
+  <hr class="border2 border2_mt2">
+  <div class="huaxun_intro">
+    <h5>广州市华浔品味装饰设计工程有限公司简介</h5>
+    <p>华浔品味装饰是国内大型装饰集团公司，成立于1998年，已经成为中国室内装饰行业领军品牌，专业从事家居、写字楼、商铺、酒店等设计与施工。中国装饰协会会员单位，通过了ISO9001：2008国际质量管理体系认证，取得了国家建设部门颁发的设计、施工资质。先后被评为全国住宅装饰装修行业知名品牌企业、全国住宅装饰装修行业质量服务诚信五星级企业、全国住宅装饰装修行业AAAA诚信企业、连续三年荣获“广东省守合同重信用企业”称号等荣誉，在业内享有盛誉。</p>
+    <p>集团下辖200余家直营公司，并设有设计总监团、软装配饰中心、全国质控中心、售后服务中心、材料采购配送中心等重要部门，建立了完整的服务系统。经过十余年的发展，公司的实力和规模不断扩大，现已在广州、上海、深圳、重庆、南京、成都、福州、南宁、南昌、贵阳、海口、杭州、长沙等大中城市设有二百余家直营分公司。</p>
+    <p>华浔人以设计品味空间为己任，筑造舒适、健康、幸福、和谐的品味生活为使命，不断实现客户品味家居空间的梦想，提升居家生活的品质。</p>
+    <p>“做品味装饰，创名牌企业”，华浔人正以饱满的热情和自信一路前行！</p>
+  </div>
+</div>
+
+<div class="index_main haxun_point nopadding mt20">
+  <ul class="nav nav-tabs upload_tab" id="upload_tab">
+    <li class="active"><a href="#huaxun_tab1" data-toggle="tab">积分兑换细则</a></li>
+    <li><a href="#huaxun_tab2" data-toggle="tab">积分奖品兑换</a></li>
+  </ul>
+  <div class="tab-content upload_content">
+    <div class="tab-pane active" id="huaxun_tab1">
+      <div class="per_point">
+        <p class="per_tips">
+          客户买单，你积分！<br>
+          无论是您为客户代购还是陪客户在立邦专卖店购买产品，<br>
+          只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
+        </p>
+        <p class="per_tips">
+          <span>
+            提醒：<br>
+            1、您的购买产品记录表记录完成后，请注意提交。提交后此次记录表产生的积分会自动累计进入您的积分账号；<br>
+            2、您的累计积分经审核后才能转化成可兑换积分，进行奖品兑换。所以请注意购买产品记录表填写的真实性；<br>
+            3、当您选择完所需兑换礼品，确定兑换后，您的礼品会在10个工作日内按个人账户所留的地址寄送。
+          </span>
+        </p>
+        <div class="mt20">
+          <h5 class="text-important">积分礼品</h5>
+          <ul class="gifts_list linet1 unstyled clearfix">
+            <li>
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_1.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">148色卡</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">40</strong></span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_2.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">318色卡</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">70</strong></span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_3.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">1881色卡</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">400</strong></span>
+              </a>
+            </li>
+            <li class="noborder_right">
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_4.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">DIY模版</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">50</strong></span>
+              </a>
+            </li>
+            <li class="noborder_bottom">
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_5.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">iColor手机壳iPhon4/4s/5</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">30</strong></span>
+              </a>
+            </li>
+            <li class="noborder_bottom">
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_6.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">iColoru盘（4G）</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">60</strong></span>
+              </a>
+            </li>
+            <li class="noborder_bottom">
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_7.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">iColor设计师礼包</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">100</strong></span>
+              </a>
+            </li>
+            <li class="noborder_right noborder_bottom">
+              <a href="#" class="gift_img">
+                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_8.jpg' %>" alt="" />
+              </a>
+              <a href="#">
+                <span class="help-block nomargin">200元话费</span>
+                <span class="help-block nomargin">所需积分<strong class="text-important">200</strong></span>
+              </a>
+            </li>
+          </ul>
+          <div class="pager pt15" style="margin-bottom:60px;">
+            <!-- <a href="#" class=""></a> -->
+            <a class="current" href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">...</a>
+            <a href="#">20</a>
+            <a href="#" class="">下一页</a>
+            <a href="#" class="">最后一页</a>
+          </div>
+        </div>
+        <div class="mt20">
+          <h5 class="text-important">产品积分</h5>
+          <div class="clearfix linet1">
+            <table class="gifts_table pull-left" style="position:relative;">
+              <tr>
+                <th width="400">产品</th>
+                <th width="79">积分</th>
+              </tr>
+              <tr>
+                <td>弹性抗裂净味全效 5L</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>抗甲醛净味全效 5L</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>荷净净味全效 5L</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>荷净净味全效 18L</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>净味120 硅藻抗甲醛全效 5L</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>荷净净味5in1 5L</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>荷净净味5in1 15L</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>净味120竹炭5in1 5L</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>净味120竹炭5in1 15L</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>永得丽金装净味5in1 5L</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>永得丽金装净味5in1 18L</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>永得丽净味超易净 5L</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>永得丽净味超易净 18L</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>永得丽超易净 5L</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>永得丽超易净 18L</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>永得丽净味幻彩 5L</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>永得丽净味幻彩 18L</td>
+                <td>10</td>
+              </tr>
+            </table>
+            <table class="gifts_table pull-left">
+              <tr>
+                <th width="400">产品</th>
+                <th width="79">积分</th>
+              </tr>
+              <tr>
+                <td>金装亮钻7系环保木器透明底漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装亮钻7系环保半光木器清漆套装</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>金装亮钻7系环保亚光木器清漆套装</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>金装晶透6系环保木器透明底漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装晶透6系环保半光木器清漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装晶透6系环保亚光木器清漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装雪颜8系耐黄变环保木器白底漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装雪颜8系耐黄变环保半光木器白漆套装</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>金装雪颜8系耐黄变环保亚光木器白漆套装</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>金装雪颜8系高遮盖环保木器白底漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装雪颜8系高遮盖环保半光木器白漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>金装雪颜8系高遮盖环保亚光木器白漆套装</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td class="nothing">nothing</td>
+                <td class="nothing">nothing</td>
+              </tr>
+              <tr>
+                <td class="nothing">nothing</td>
+                <td class="nothing">nothing</td>
+              </tr>
+              <tr>
+                <td class="nothing">nothing</td>
+                <td class="nothing">nothing</td>
+              </tr>
+              <tr>
+                <td class="nothing">nothing</td>
+                <td class="nothing">nothing</td>
+              </tr>
+              <tr>
+                <td class="nothing">nothing</td>
+                <td class="nothing">nothing</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="huaxun_tab2">2</div>
+  </div>
+</div>
+<div class="clearfix">
+  <div class="footer_banner pull-left"><a href=" http://icolor.com.cn/design_zg2"><img src="<%= asset_path 'manage/per_home_huaxun/footer_banner.jpg' %>"></a></div>
+  <div class="footer_banner pull-right"><a href=" http://icolor.com.cn/design_zg2"><img src="<%= asset_path 'manage/per_home_huaxun/footer_banner2.jpg' %>"></a></div>
+</div>
