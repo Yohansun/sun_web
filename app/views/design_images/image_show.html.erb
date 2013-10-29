@@ -20,6 +20,7 @@
           $path = $('.work_comments').data('path');
 
       $.post('/design_images/' + $image_id + '/view_count');
+      $.get('/design_images/' + $image_id + '/get_latest_and_likes');
 
       if ($(".img_show_votes_link")) {
         $.getJSON("<%= home_image_vote_path %>",{image_id: $image_id},function(data){
@@ -327,14 +328,14 @@
       </ul>
     </div>
     <hr class="nomargin">
-    <dl class="clearfix like_list">
+    <dl class="clearfix like_list js_like_part">
       <dt>猜你喜欢</dt>
-      <%= render partial: 'like_images', locals: { resource: @like_images } %>
+      <dd>加载中...</dd>
     </dl>
     <hr class="nomargin dott1">
-    <dl class="clearfix like_list">
+    <dl class="clearfix like_list js_recent_part">
       <dt>最近更新</dt>
-      <%= render partial: 'like_images', locals: { resource: @latest_mounth_images } %>
+      <dd>加载中...</dd>
     </dl>
   </div>
 </div>
