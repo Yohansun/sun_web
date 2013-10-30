@@ -100,21 +100,21 @@ function inputBlank(area){
 
 $(function(){
     $('a.login').click(show_login);
-    $('a.server').click(function(){
-        if(!$('.server_suc').is(':visible'))
-        {
-            $('.server_area').css('width','590px');
-            $('div.server_input').show().find('textarea').val('');
-        }
-    });
-    $('div.server_input').mouseleave(function(){
-        var txt = $(this).find('textarea').val();
-        if(txt=='')
-        {
-            $(this).hide();
-            $('.server_area').css('width','41px');
-        }
-    });
+    // $('a.server').click(function(){
+    //     if(!$('.server_suc').is(':visible'))
+    //     {
+    //         $('.server_area').css('width','590px');
+    //         $('div.server_input').show().find('textarea').val('');
+    //     }
+    // });
+    // $('div.server_input').mouseleave(function(){
+    //     var txt = $(this).find('textarea').val();
+    //     if(txt=='')
+    //     {
+    //         $(this).hide();
+    //         $('.server_area').css('width','41px');
+    //     }
+    // });
 
     $('.gift_kv').click(prize_jan);
 
