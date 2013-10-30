@@ -350,7 +350,11 @@ Icolor::Application.routes.draw do
   resources :collect do
   end
 
-  resources :huaxun_homes
+  resources :huaxun_homes do
+    collection do
+      post :new_ask
+    end
+  end
 
   resources :cubit_fixtures, only: :create
   resources :visit_ips,only: :create

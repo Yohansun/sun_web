@@ -2,7 +2,7 @@
   <%= stylesheet_link_tag "manage/per_home" %>
 <%- end %>
 <%- content_for :tail do %>
-  <%= javascript_include_tag "exp/exp" %>
+  <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
     $(function(){
       $('#haxun').slider({
@@ -12,6 +12,12 @@
       $('#haxun_design_slide').slider({
         pagers: '.circle_indicators',
         margin : 16
+      });
+      $('.js-review_btn').on('click', function(){
+        $(this).parent().siblings('form.js-review').show();
+      });
+      $('.js-review_cannel').on('click', function(){
+        $(this).parents('form.js-review').hide();
       });
     })
     </script>
@@ -26,7 +32,7 @@
   <div class="per_photo">
     <div>
       <img src="<%= asset_path 'manage/per_home_huaxun/haxun_logo.jpg'%>" alt="" />
-      <a href="#" class="per_edit">
+      <a href="<% if current_user %>/users/<%=current_user.id%>/edit<% else %>javascript:show_login();<% end %>" class="per_edit">
         <i class="icon-i16 icon-edit2"></i>编辑个人资料
       </a>
     </div>
@@ -41,7 +47,13 @@
       <a href="#">案例赏析</a>
       <a href="#">免费咨询</a>
       <a href="#">精英团队</a>
-      <a href="#">联系方式</a>
+      <% if current_user && current_user.role_id != 3 %>
+        <a href="#huaxun_tab1">积分兑换</a>
+      <% elsif current_user && current_user.role_id == 3 %>
+        <a href="#huaxun2">走进华浔</a>
+      <% else %>
+        <a href="#">联系方式</a>
+      <% end %>
     </li>
   </ul>
 </div>
@@ -122,8 +134,7 @@
           </p>
         </li>
       </ul>
-      <div class="pager">
-        <!-- <a href="#" class=""></a> -->
+      <!-- <div class="pager">
         <a class="current" href="#">1</a>
         <a href="#">2</a>
         <a href="#">3</a>
@@ -132,124 +143,85 @@
         <a href="#">20</a>
         <a href="#" class="">下一页</a>
         <a href="#" class="">最后一页</a>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="per_right index_main pull-right">
     <div class="work_comments nomargin nopadding">
-      <form class="comment_form exp-holder">
+      <%= form_tag new_ask_huaxun_homes_path, :class => "comment_form exp-holder" do %>
         <h5>免费咨询</h5>
-        <textarea id="" class=""></textarea>
+        <textarea id="J_t" name="content"></textarea>
         <ul class="moodbtn_group unstyled clearfix">
-          <li class="pull-right btn_send"><span class="muted">还可以输入<span class="text-important">1000</span>个字符</span><button class="">提交留言</button></li>
-          <li class="pull-left exp-block-trigger" id="">
+          <li class="pull-right btn_send">
+            <span class="muted">还可以输入<span class="text-important">1000</span>个字符</span>
+            <% if current_user %>
+              <button class="">提交留言</button>
+            <% else %>
+              <a onclick="show_login()">提交留言</a>
+            <% end %>
+          </li>
+          <li class="pull-left exp-block-trigger" id="J_sbt">
             <i class="icon-mood icon-face"></i>
             添加表情
           </li>
         </ul>
-      </form><!-- bottom_mood end -->
-      <ul class="mood_list unstyled nomargin">
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_2.jpg'%>"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">3F</strong>
-                <strong>麦唛小</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p>[哈哈]啥时候才能有这样的家啊~~~~~</p>
-            </div>
-          </div>
-          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
-          <form class="comment_form exp-holder nomargin">
-            <textarea id="" class=""></textarea>
-            <ul class="moodbtn_group unstyled clearfix">
-              <li class="pull-right noborder nopadding">
-                <span class="muted">
-                  还可以输入
-                  <span class="text-important">1000</span>
-                  个字符
-                </span>
-                <button class="channel_btn noborder"><small>确认回复</small></button>
-                <a href="javascript:;" class="channel_btn_gray"><small>取消回复</small></a>
-              </li>
-              <li class="pull-left exp-block-trigger noborder nopadding" id="">
-                <i class="icon-mood icon-face"></i>
-                添加表情
-              </li>
-            </ul>
-          </form><!-- bottom_mood end -->
-        </li>
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_1.jpg'%>"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">2F</strong>
-                <strong>Jane</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p>嫁给我你立马就有了~哈哈哈哈</p>
-              <div class="re_comments">
-                <i class="icon-i16 icon-toparrow"></i>
-                <p>
-                  <strong>麦唛小</strong>
-                  <span class="muted">说</span>
-                </p>
-                <p class="muted">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+      <% end %>
+      <ul class="mood_list unstyled nomargin" style="overflow-y:scroll;height:740px;">
+        <% if @replies.present? %>
+          <% @replies.each_with_index do |reply,index| %>
+            <% user = User.find(reply.reply_user_id) %>
+            <% rep_res = reply.rep_replies %>
+            <li>
+              <div class="clearfix">
+                <% if user.avatar %>
+                  <div class="pull-left comment_photo"><img src="<%=user.avatar.file(:profile)%>"></div>
+                <% end %>
+                <div class="<% if user.avatar %>comment_text<% end %>">
+                  <p>
+                    <strong class="pull-right comment_floor"><%= @replies.count - index%>F</strong>
+                    <strong><%=user.name ? user.name : user.username %></strong>
+                    <span class="comment_date"><%=reply.created_at %></span>
+                  </p>
+                  <p class="J_resulte"><%= reply.content %></p>
+                  <% rep_res.each do |rep| %>
+                    <div class="re_comments">
+                      <i class="icon-i16 icon-toparrow"></i>
+                      <p>
+                        <strong><%=rep.user.name ? rep.user.name : rep.user.username %></strong>
+                        <span class="muted">说</span>
+                      </p>
+                      <p class="muted J_resulte"><%=rep.content %></p>
+                    </div>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
-        </li>
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_1.jpg'%>"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">2F</strong>
-                <strong>Jane</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p>嫁给我你立马就有了~哈哈哈哈</p>
-              <div class="re_comments">
-                <i class="icon-i16 icon-toparrow"></i>
-                <p>
-                  <strong>麦唛小</strong>
-                  <span class="muted">说</span>
-                </p>
-                <p class="muted">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+              <div class="clearfix" style="margin-bottom:-10px;">
+                <a class="pull-right js-review_btn" href="javascript:;">回复</a>
               </div>
-            </div>
-          </div>
-          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
-        </li>
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="<%= asset_path 'imgbase_in/user50x50_2.jpg'%>"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">1F</strong>
-                <strong>麦唛小</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p>[哈哈]啥时候才能有这样的家啊~~~~~</p>
-            </div>
-          </div>
-          <div class="clearfix" style="margin-bottom:-10px;"><a class="pull-right" href="javascript:;">回复</a></div>
-        </li>
+              <form class="comment_form exp-holder nomargin hide js-review">
+                <input type="hidden">
+                <textarea id="" class=""></textarea>
+                <ul class="moodbtn_group unstyled clearfix">
+                  <li class="pull-right noborder nopadding">
+                    <span class="muted">
+                      还可以输入
+                      <span class="text-important">1000</span>
+                      个字符
+                    </span>
+                    <button class="channel_btn noborder"><small>确认回复</small></button>
+                    <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
+                  </li>
+                  <li class="pull-left exp-block-trigger noborder nopadding" id="">
+                    <i class="icon-mood icon-face"></i>
+                    添加表情
+                  </li>
+                </ul>
+              </form><!-- bottom_mood end -->
+            </li>
+          <% end %>
+        <% end %>
       </ul>
       <div class="pager">
-        <!-- <a href="#" class=""></a> -->
-        <a class="current" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">...</a>
-        <a href="#">20</a>
-        <a href="#" class="">下一页</a>
-        <a href="#" class="">最后一页</a>
       </div>
     </div>
   </div>
@@ -335,7 +307,7 @@
 
 <div class="per_home index_main closer_haxun mt20">
   <p class="clearfix index_tit">
-    <strong class="pull-left mr5">走进华浔</strong>
+    <strong class="pull-left mr5"><a name="huaxun2">走进华浔</a></strong>
   </p>
   <hr class="border2 border2_mt2">
   <div class="huaxun_intro">
@@ -346,11 +318,12 @@
     <p>“做品味装饰，创名牌企业”，华浔人正以饱满的热情和自信一路前行！</p>
   </div>
 </div>
-
+<% if current_user && current_user.role_id == 3 %>
+<% else %>
 <div class="index_main haxun_point nopadding mt20">
   <ul class="nav nav-tabs upload_tab" id="upload_tab">
-    <li class="active"><a href="#huaxun_tab1" data-toggle="tab">积分兑换细则</a></li>
-    <li><a href="#huaxun_tab2" data-toggle="tab">积分奖品兑换</a></li>
+    <li class="active"><a href="#huaxun_tab1" name="huaxun_tab1">积分兑换细则</a></li>
+    <li><a href="<% if current_user %><%=user_points_exchange_path(current_user)%><% else %>javascript:show_login();<% end %>">积分奖品兑换</a></li>
   </ul>
   <div class="tab-content upload_content">
     <div class="tab-pane active" id="huaxun_tab1">
@@ -371,89 +344,21 @@
         <div class="mt20">
           <h5 class="text-important">积分礼品</h5>
           <ul class="gifts_list linet1 unstyled clearfix">
-            <li>
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_1.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">148色卡</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">40</strong></span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_2.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">318色卡</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">70</strong></span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_3.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">1881色卡</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">400</strong></span>
-              </a>
-            </li>
-            <li class="noborder_right">
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_4.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">DIY模版</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">50</strong></span>
-              </a>
-            </li>
-            <li class="noborder_bottom">
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_5.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">iColor手机壳iPhon4/4s/5</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">30</strong></span>
-              </a>
-            </li>
-            <li class="noborder_bottom">
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_6.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">iColoru盘（4G）</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">60</strong></span>
-              </a>
-            </li>
-            <li class="noborder_bottom">
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_7.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">iColor设计师礼包</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">100</strong></span>
-              </a>
-            </li>
-            <li class="noborder_right noborder_bottom">
-              <a href="#" class="gift_img">
-                <img src="<%= asset_path 'manage/per_home_huaxun/point2/point2_8.jpg' %>" alt="" />
-              </a>
-              <a href="#">
-                <span class="help-block nomargin">200元话费</span>
-                <span class="help-block nomargin">所需积分<strong class="text-important">200</strong></span>
-              </a>
-            </li>
+            <% @point_gifts.each_with_index do |gift, index| %>
+              <% i_index = index + 1 %>
+              <li class='<%= "noborder_right" if (i_index % 4) == 0 && i_index != 0 %>'>
+                <a href="#" class="gift_img">
+                  <img src="<%= gift.file.url(:list) %>" alt="" />
+                </a>
+                <a href="#">
+                  <span class="help-block nomargin"><%= gift.gift_name %></span>
+                  <span class="help-block nomargin">所需积分<strong class="text-important"><%= gift.gift_point %></strong></span>
+                </a>
+              </li>
+            <% end %>
           </ul>
           <div class="pager pt15" style="margin-bottom:60px;">
-            <!-- <a href="#" class=""></a> -->
-            <a class="current" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">...</a>
-            <a href="#">20</a>
-            <a href="#" class="">下一页</a>
-            <a href="#" class="">最后一页</a>
+            <%= paginate @point_gifts %>
           </div>
         </div>
         <div class="mt20">
@@ -464,148 +369,28 @@
                 <th width="400">产品</th>
                 <th width="79">积分</th>
               </tr>
-              <tr>
-                <td>弹性抗裂净味全效 5L</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>抗甲醛净味全效 5L</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>荷净净味全效 5L</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>荷净净味全效 18L</td>
-                <td>30</td>
-              </tr>
-              <tr>
-                <td>净味120 硅藻抗甲醛全效 5L</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>荷净净味5in1 5L</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>荷净净味5in1 15L</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>净味120竹炭5in1 5L</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>净味120竹炭5in1 15L</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>永得丽金装净味5in1 5L</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>永得丽金装净味5in1 18L</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>永得丽净味超易净 5L</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>永得丽净味超易净 18L</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>永得丽超易净 5L</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>永得丽超易净 18L</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>永得丽净味幻彩 5L</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>永得丽净味幻彩 18L</td>
-                <td>10</td>
-              </tr>
+              <% @point_products.each_with_index do |product, index| %>
+                <% if index < @middle_value %>
+                  <tr>
+                    <td><%= product.product_name %></td>
+                    <td><%= product.product_point %></td>
+                  </tr>
+                <% end %>
+              <% end %>
             </table>
             <table class="gifts_table pull-left">
               <tr>
                 <th width="400">产品</th>
                 <th width="79">积分</th>
               </tr>
-              <tr>
-                <td>金装亮钻7系环保木器透明底漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装亮钻7系环保半光木器清漆套装</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>金装亮钻7系环保亚光木器清漆套装</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>金装晶透6系环保木器透明底漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装晶透6系环保半光木器清漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装晶透6系环保亚光木器清漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装雪颜8系耐黄变环保木器白底漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装雪颜8系耐黄变环保半光木器白漆套装</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>金装雪颜8系耐黄变环保亚光木器白漆套装</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>金装雪颜8系高遮盖环保木器白底漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装雪颜8系高遮盖环保半光木器白漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>金装雪颜8系高遮盖环保亚光木器白漆套装</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td class="nothing">nothing</td>
-                <td class="nothing">nothing</td>
-              </tr>
-              <tr>
-                <td class="nothing">nothing</td>
-                <td class="nothing">nothing</td>
-              </tr>
-              <tr>
-                <td class="nothing">nothing</td>
-                <td class="nothing">nothing</td>
-              </tr>
-              <tr>
-                <td class="nothing">nothing</td>
-                <td class="nothing">nothing</td>
-              </tr>
-              <tr>
-                <td class="nothing">nothing</td>
-                <td class="nothing">nothing</td>
-              </tr>
+              <% @point_products.each_with_index do |product, index| %>
+                <% if index >= @middle_value %>
+                  <tr>
+                    <td><%= product.product_name %></td>
+                    <td><%= product.product_point %></td>
+                  </tr>
+                <% end %>
+              <% end %>
             </table>
           </div>
         </div>
@@ -614,6 +399,8 @@
     <div class="tab-pane" id="huaxun_tab2">2</div>
   </div>
 </div>
+<% end %>
+
 <div class="clearfix">
   <div class="footer_banner pull-left"><a href=" http://icolor.com.cn/design_zg2"><img src="<%= asset_path 'manage/per_home_huaxun/footer_banner.jpg' %>"></a></div>
   <div class="footer_banner pull-right"><a href=" http://icolor.com.cn/design_zg2"><img src="<%= asset_path 'manage/per_home_huaxun/footer_banner2.jpg' %>"></a></div>

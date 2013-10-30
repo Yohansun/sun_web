@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023062918) do
+ActiveRecord::Schema.define(:version => 20131030033413) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -801,17 +801,6 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
   add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
   add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
 
-  create_table "image_tags_right", :force => true do |t|
-    t.integer  "design_image_id"
-    t.integer  "image_library_category_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-  add_index "image_tags_right", ["design_image_id"], :name => "design_image_id"
-  add_index "image_tags_right", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
-  add_index "image_tags_right", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
-
   create_table "inspirations", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -1015,6 +1004,47 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
 
   add_index "my_show_img_uploads", ["created_at"], :name => "index_my_show_img_uploads_on_created_at"
 
+  create_table "old_articles", :force => true do |t|
+    t.integer  "class_id"
+    t.string   "title"
+    t.string   "image"
+    t.text     "content"
+    t.datetime "publish_at"
+    t.integer  "view_count"
+    t.string   "thumb"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "old_design_files", :force => true do |t|
+    t.integer  "old_design_id"
+    t.string   "title"
+    t.string   "src"
+    t.integer  "index"
+    t.datetime "create_date"
+    t.integer  "photo_type"
+    t.boolean  "is_cover"
+    t.string   "space"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "old_designs", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "month"
+    t.integer  "year"
+    t.integer  "top_n"
+    t.string   "tags"
+    t.datetime "create_date"
+    t.integer  "view_count"
+    t.boolean  "recommended"
+    t.boolean  "month_star"
+    t.string   "style"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "owner_enters", :force => true do |t|
     t.string   "content"
     t.string   "title"
@@ -1070,6 +1100,23 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+  create_table "pictures", :force => true do |t|
+    t.integer  "position"
+    t.string   "title"
+    t.string   "url"
+    t.string   "special_guide_id"
+    t.string   "img_title"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "pictures", ["position"], :name => "index_pictures_on_position"
+  add_index "pictures", ["special_guide_id"], :name => "index_pictures_on_special_guide_id"
 
   create_table "point_exchanges", :force => true do |t|
     t.integer  "area_id"
@@ -1218,6 +1265,18 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "recommends", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "special_guide_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "recommends", ["created_at"], :name => "index_recommends_on_created_at"
+  add_index "recommends", ["special_guide_id"], :name => "index_recommends_on_special_guide_id"
+  add_index "recommends", ["updated_at"], :name => "index_recommends_on_updated_at"
+
   create_table "rep_replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1235,6 +1294,7 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
     t.text     "content"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "genre"
   end
 
   create_table "reply_msgs", :force => true do |t|
@@ -1402,6 +1462,30 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
   add_index "special_events", ["actived"], :name => "index_special_events_on_actived"
   add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
   add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
+
+  create_table "special_guides", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "edition"
+    t.string   "img_title"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.string   "color1_name"
+    t.string   "color2_name"
+    t.string   "color3_name"
+    t.string   "color1"
+    t.string   "color2"
+    t.string   "color3"
+    t.text     "recommend"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "special_guides", ["created_at"], :name => "index_special_guides_on_created_at"
+  add_index "special_guides", ["edition"], :name => "index_special_guides_on_edition"
+  add_index "special_guides", ["updated_at"], :name => "index_special_guides_on_updated_at"
 
   create_table "stories", :force => true do |t|
     t.string   "title"
@@ -1594,6 +1678,7 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
     t.string   "types"
     t.boolean  "invalid_email",             :default => false
     t.string   "create_from"
+    t.integer  "code",                      :default => 0
   end
 
   add_index "users", ["area_id"], :name => "index_users_on_area_id"
@@ -1632,6 +1717,10 @@ ActiveRecord::Schema.define(:version => 20131023062918) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "visit_ips", ["created_at"], :name => "index_visit_ips_on_created_at"
+  add_index "visit_ips", ["ip"], :name => "index_visit_ips_on_ip"
+  add_index "visit_ips", ["updated_at"], :name => "index_visit_ips_on_updated_at"
 
   create_table "votes", :force => true do |t|
     t.integer  "voteable_id"
