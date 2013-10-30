@@ -4,7 +4,7 @@ class HuaxunHomesController < ApplicationController
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2
-    @replies = Reply.where(genre: 'huaxun').order("created_at desc").page(params[:page]).per(4)
+    @replies = Reply.where(genre: 'huaxun').order("id desc").page(params[:page]).per(4)
   end
 
   def new_ask
@@ -14,10 +14,8 @@ class HuaxunHomesController < ApplicationController
       rep.genre = "huaxun"
       rep.content = params[:content]
       rep.save
-      redirect_to huaxun_homes_path
-    else
-      redirect_to huaxun_homes_path
     end
+    redirect_to huaxun_homes_path
   end
 
   def new_rep
@@ -27,9 +25,7 @@ class HuaxunHomesController < ApplicationController
       rep.reply_id = params[:reply_id]
       rep.content = params[:content]
       rep.save
-      redirect_to huaxun_homes_path
-    else
-      redirect_to huaxun_homes_path
     end
+    redirect_to huaxun_homes_path
   end
 end

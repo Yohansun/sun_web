@@ -353,6 +353,7 @@ Icolor::Application.routes.draw do
   resources :huaxun_homes do
     collection do
       post :new_ask
+      post :new_rep
     end
   end
 
