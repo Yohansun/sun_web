@@ -10,7 +10,15 @@
         <div class="<% if user.avatar %>comment_text<% end %>">
           <p>
             <strong class="pull-right comment_floor"><%= @replies.count - index%>F</strong>
-            <strong><%=user.name ? user.name : user.username %></strong>
+            <strong>
+              <% if user.name.present? %>
+                <%=user.name %>
+              <% elsif user.username.present? %>
+                <%=user.username %>
+              <% else %>
+                手机/邮箱登录用户
+              <% end %>
+            </strong>
             <span class="comment_date"><%=reply.created_at %></span>
           </p>
           <p class="J_resulte"><%= reply.content %></p>
@@ -18,7 +26,15 @@
             <div class="re_comments">
               <i class="icon-i16 icon-toparrow"></i>
               <p>
-                <strong><%=rep.user.name ? rep.user.name : rep.user.username %></strong>
+                <strong>
+                  <% if rep.user.name.present? %>
+                    <%=rep.user.name %>
+                  <% elsif rep.user.username.present? %>
+                    <%=rep.user.username %>
+                  <% else %>
+                    手机/邮箱登录用户
+                  <% end %>
+                </strong>
                 <span class="muted">说</span>
               </p>
               <p class="muted J_resulte"><%=rep.content %></p>
