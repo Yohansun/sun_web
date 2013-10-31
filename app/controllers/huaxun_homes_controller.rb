@@ -4,6 +4,10 @@ class HuaxunHomesController < ApplicationController
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2
+    @replies = Reply.where(genre: 'huaxun').order("id desc").page(1).limit(4)
+  end
+
+  def get_reply
     @replies = Reply.where(genre: 'huaxun').order("id desc").page(params[:page]).per(4)
   end
 

@@ -354,6 +354,7 @@ Icolor::Application.routes.draw do
     collection do
       post :new_ask
       post :new_rep
+      get :get_reply
     end
   end
 

@@ -26,7 +26,7 @@
     </div> -->
     <!--news_top ends-->
     <%- if request.url.include? 'tags'
-     tag = request.url.split("=")[1] 
+     tag = request.url.split("=")[1]
      -%>
     <%- @articles.each do |article| %>
         <div class="shadow">
@@ -40,7 +40,7 @@
             <!--article ends-->
           </div><!--section ends-->
         </div><!--shadow ends-->
-    <%- end %>     
+    <%- end %>
     <%- else -%>
        <%- @articles.each do |article| %>
         <div class="shadow">
@@ -54,7 +54,7 @@
             <!--article ends-->
           </div><!--section ends-->
         </div><!--shadow ends-->
-    <%- end %>    
+    <%- end %>
     <%- end %>
     <div class="pag_container">
       <div class="pager ft12">
