@@ -41,23 +41,25 @@
   </div>
   <ul class="per_links unstyled clearfix">
     <li class="pull-left">
+      <a name="phone"></a>
       <i class="icon-phone1 icon-i30"></i>
       <span style="color:#676666;font:bold 14px 'SimSun';">全国服务热线：</span><span class="phone_number">400-628-1968</span>
     </li>
     <li class="pull-right">
-      <a href="#">案例赏析</a>
-      <a href="#">免费咨询</a>
-      <a href="#">精英团队</a>
+      <a href="#case">案例赏析</a>
+      <a href="#asks">免费咨询</a>
+      <a href="#trem">精英团队</a>
       <% if current_user && current_user.role_id != 3 %>
         <a href="#huaxun_tab1">积分兑换</a>
       <% elsif current_user && current_user.role_id == 3 %>
         <a href="#huaxun2">走进华浔</a>
       <% else %>
-        <a href="#">联系方式</a>
+        <a href="#phone">联系方式</a>
       <% end %>
     </li>
   </ul>
 </div>
+<a name="case">
 <div class="per_home clearfix">
   <div class="per_left index_main pull-left">
     <p class="clearfix index_tit">
@@ -149,6 +151,7 @@
   </div>
   <div class="per_right index_main pull-right">
     <div class="work_comments nomargin nopadding">
+      <a name="asks"></a>
       <%= form_tag new_ask_huaxun_homes_path, :class => "comment_form exp-holder" do %>
         <h5>免费咨询</h5>
         <textarea id="J_t" name="content"></textarea>
@@ -224,6 +227,7 @@
 </div>
 
 <div class="per_home index_main_black mt20">
+  <a name="trem"></a>
   <p class="clearfix index_tit">
     <a href="http://www.hxdec.com/designerSort.asp?sortid=4" target="_blank" class="pull-right"><small class="muted">更多 ></small></a>
     <strong class="pull-left">精英团队</strong>
