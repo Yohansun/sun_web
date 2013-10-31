@@ -1,0 +1,57 @@
+<% if @replies.present? %>
+  <% @replies.each_with_index do |reply,index| %>
+    <% user = User.find(reply.reply_user_id) %>
+    <% rep_res = reply.rep_replies %>
+    <li>
+      <div class="clearfix">
+        <% if user.avatar %>
+          <div class="pull-left comment_photo"><img src="<%=user.avatar.file(:profile)%>"></div>
+        <% end %>
+        <div class="<% if user.avatar %>comment_text<% end %>">
+          <p>
+            <strong class="pull-right comment_floor"><%= @replies.count - index%>F</strong>
+            <strong><%=user.name ? user.name : user.username %></strong>
+            <span class="comment_date"><%=reply.created_at %></span>
+          </p>
+          <p class="J_resulte"><%= reply.content %></p>
+          <% rep_res.each do |rep| %>
+            <div class="re_comments">
+              <i class="icon-i16 icon-toparrow"></i>
+              <p>
+                <strong><%=rep.user.name ? rep.user.name : rep.user.username %></strong>
+                <span class="muted">说</span>
+              </p>
+              <p class="muted J_resulte"><%=rep.content %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="clearfix">
+        <% if current_user %>
+          <a class="pull-right js-review_btn" href="javascript:;">回复</a>
+        <% else %>
+          <a class="pull-right" href="javascript:show_login();">回复</a>
+        <% end %>
+      </div>
+      <%=form_tag new_rep_huaxun_homes_path,:class => "comment_form exp-holder nomargin hide js-review" do %>
+        <input type="hidden" name="reply_id" value="<%=reply.id%>">
+        <textarea name="content"></textarea>
+        <ul class="moodbtn_group unstyled clearfix">
+          <li class="pull-right noborder nopadding">
+            <span class="muted">
+              还可以输入
+              <span class="text-important">1000</span>
+              个字符
+            </span>
+            <button class="channel_btn noborder"><small>确认回复</small></button>
+            <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
+          </li>
+          <li class="pull-left exp-block-trigger noborder nopadding" id="">
+            <i class="icon-mood icon-face"></i>
+            添加表情
+          </li>
+        </ul>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
