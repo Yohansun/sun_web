@@ -12,7 +12,7 @@
  */
 (function($){
 	$.expBlock = {};
-	var 
+	var
 		//表情图片树的json格式
 		EXP_DATA = [
 					{
@@ -94,7 +94,7 @@
 					}
 				],
 		//图片数组，用于表情从代号到图片的便捷转化
-		IMGS_DATA = [],		
+		IMGS_DATA = [],
 		//表情的控制参数
 		expEnable = true,
 		//配置
@@ -122,7 +122,7 @@
 		grp_num_per_panel = 1,
 		win = window || document,
 		bd = 'body';
-	
+
 	/**
 	 * 初始化表情插件
 	 */
@@ -132,7 +132,7 @@
 		if(config.expData != null) EXP_DATA = config.expData;
 		_getImgData();
 		var triggers = $(config.trigger);
-		
+
 		triggers.each(function(){
 			$(this).bind('click',function(){
 				//大量参数预定义,获取
@@ -154,9 +154,9 @@
 						}
 					})(), curGrpPg = 1,
 					expUl = exp.find('.exp-detail');
-					
-				//功能函数准备	
-				var 
+
+				//功能函数准备
+				var
 					/**
 					 * 显示第i组的表情
 					 */
@@ -222,8 +222,8 @@
 							sub_tab_items.eq(j).show();
 						}
 						curGrpPg  = i;
-						
-						
+
+
 						if(curGrpPg == 1){
 							sub_tab_pre.addClass('pre-disable');
 						}
@@ -236,9 +236,9 @@
 						else{
 							sub_tab_next.removeClass('next-disalbe');
 						}
-						
+
 					};
-					
+
 				if(config.posType == 'fixed'){
 					me_t = off.top - $(win).scrollTop();
 					exp_t = me_t + me_h;
@@ -254,9 +254,9 @@
 						exp_t = me_t + me_h, exp_l = me_l + (me_w + pos_correct_left)/2;
 						exp.css({left:exp_l+'px', top: exp_t+'px'});
 					});
-					
+
 					/*各种事件绑定*/
-					
+
 					//关闭X事件
 					exp_close.click(function(){
 						$(bd).unbind('click');
@@ -264,7 +264,7 @@
 						$(win).unbind('resize');
 						exp.remove();
 					});
-					
+
 					//trigger的鼠标移出事件（点击之后就删除）
 					me.mouseout(function(){
 						$(bd).click(function(e){
@@ -278,22 +278,22 @@
 							}
 						})
 					});
-					
+
 					showGrp(1);
 					//设置group—panel的翻页切换事件
 					sub_tab_pre.click(function(){
 						var p = curGrpPg -1, rg;
 						p = (p < 1)?1 : p;
 						showGrp(p);
-						
+
 					});
 					sub_tab_next.click(function(){
 						var p = curGrpPg + 1, rg;
 						p = (p > grpPgCnt)? curGrpPg : p;
 							showGrp(p);
-						
+
 					})
-					
+
 					//默认打开第一组表情
 					showXGroupExp(0);
 					//group点击事件
@@ -303,8 +303,8 @@
 							showXGroupExp(groupIndex);
 						});
 					});
-					
-					
+
+
 					//往页面插入dom
 					$('body').append(exp);
 					exp.show();
@@ -340,7 +340,7 @@
 			}
 		})
 	}
-	
+
 	/**
 	 * 将字符串中的表情代号以图片标签代替
 	 */
@@ -353,23 +353,23 @@
 		while(temp =reg.exec(src)){
 			var s = _switchImg(temp[1]),
 				creg,
-				t =  "\\[("+temp[1]+")\\]" ; 
+				t =  "\\[("+temp[1]+")\\]" ;
 			creg = new RegExp(t,"g");
 			if(src.match(temp[0]) && s != temp[1]){
 				src = src.replace(creg,s);
 			}
 		}
-		return src;	
+		return src;
 	}
 	//私有函数
-	
+
 	/**
 	 * 生成表情的html代码
 	 */
 	function _genrt_html(){
 		var html = '<div class="exp-layer"><div class="holder"><div class="content"><div class="exp-tab clearfix"><a href="javascript:;">常用表情</a></div><div class="exp-sub-tab clearfix">';
 		for(var i = 0; i < EXP_DATA.length; i++){
-			
+
 				html += '<a class="group-name" grp-index="'+i+'" href="javascript:;">'+ EXP_DATA[i].name+'</a>';
 		}
 		html += '<div class="sub-tab-pagination"><a class="pre"></a><a class="next"></a></div></div><ul class="exp-detail clearfix">';
@@ -377,11 +377,11 @@
 		for(var j = 0; j < EXP_DATA[0].icons.length; j++){
 					html += '<li action-data="['+EXP_DATA[0].icons[i].title+']"><img title="'+EXP_DATA[0].icons[i].title+'" alt="'+EXP_DATA[0].icons[i].title+'" src="'+EXP_DATA[0].icons[i].url+'"></li>';
 				}*/
-		
+
 		html +='</ul></div><a class="exp-close" href="javascript:;"></a></div><a class="exp-tri" href="javascript:;"></a></div>';
 		return html;
 	}
-	
+
 	/**
 	 * 图片转换，目的是将表情代号转化成图片地址
 	 * 如:[微笑] == > <img src='smile.png' />
@@ -394,7 +394,7 @@
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 集中生成图片数据,根据EXP_DATA生成提取里面的图片数组
 	 */
@@ -406,7 +406,7 @@
 			}
 		}
 	}
-		
+
 	//扩展到jquery
 	$.expBlock = {
 			initExp : init,
@@ -416,70 +416,74 @@
 			textFormat : textFormat,
 			EXP_DATA : EXP_DATA
 	};
-				
+
 })(jQuery)
 
 $(document).ready(function(){
-	$.expBlock.initExp({
+	$.weiboicon = function (){
+		$.expBlock.initExp({
+			/*
+			//用户表情结构数据
+			expData: [{name: '默认',icons:[{url:"../resources/js/plugins/exp/img/zz2_thumb.gif",title:"织"},{url:"../resources/js/plugins/exp/img/horse2_thumb.gif",title:"神马"}]}]
+			//包含textarea和表情触发的exp-holder
+			holder: '.exp-holder',
+			//exp-holder中的textarea输入dom，默认为textarea,
+			textarea : 'textarea',
+			//触发dom
+			trigger : '.exp-block-trigger',
+			//每页显示表情的组数
+			grpNum : 5,
+			//位置相对页面固定(absolute)||窗口固定(fixed)
+			posType : 'absolute',
+			//表情层数
+			zIndex : '100'
+			*/
+			textarea : 'textarea'
+		});
+
+
+		//使表情失效
+		$.expBlock.disableExp();
+		//使表情重新启动
+		$.expBlock.enableExp();
+
+		//$('#J_sbt').click(function(){
+			//var s, ta = $('#J_t'), val = ta.val();
+			//将字符串中如"[微笑]"类的表情代号替换为<img/>标签
+			//s = $.expBlock.textFormat(val);
+			//console.log(s);
+			//$('#J_resulte').html(s);
+			//alert('kkkk')
+		//})
+
 		/*
-		//用户表情结构数据
-		expData: [{name: '默认',icons:[{url:"../resources/js/plugins/exp/img/zz2_thumb.gif",title:"织"},{url:"../resources/js/plugins/exp/img/horse2_thumb.gif",title:"神马"}]}]
-		//包含textarea和表情触发的exp-holder
-		holder: '.exp-holder',
-		//exp-holder中的textarea输入dom，默认为textarea,
-		textarea : 'textarea',
-		//触发dom
-		trigger : '.exp-block-trigger',
-		//每页显示表情的组数
-		grpNum : 5,
-		//位置相对页面固定(absolute)||窗口固定(fixed)
-		posType : 'absolute',
-		//表情层数
-		zIndex : '100'
-		*/
-		textarea : 'textarea'
-	});
-	
-	//使表情失效
-	$.expBlock.disableExp();
-	//使表情重新启动
-	$.expBlock.enableExp();
-	
-	//$('#J_sbt').click(function(){
-		//var s, ta = $('#J_t'), val = ta.val();
-		//将字符串中如"[微笑]"类的表情代号替换为<img/>标签
-		//s = $.expBlock.textFormat(val);
-		//console.log(s);
-		//$('#J_resulte').html(s);
-		//alert('kkkk')
-	//})
-	
-	/*
-	 * ajax远程获取表情,注意同源策略
-	 * 要求返回的数据格式如:[{name: groupname,icons:[{url:'imgurl',title:"iconname"},{url:'imgurl',title:"iconname"}]},{name: groupname,icons:[{url:'imgurl',title:"iconname"},{url:'imgurl',title:"iconname"}]},...]
-	 */
-	//$.expBlock.getRemoteExp(url);
-	//var $change_img = $('.J_resulte').children('img');
-	//var J_resulte_num = $('.per_con').children('p.J_resulte').get();
-	//alert(J_resulte_num)
-	//alert(cont1.html())
-	// alert($.expBlock.EXP_DATA[0]["icons"].length)
-	// for(var j = 0; j < $.expBlock.EXP_DATA[0]["icons"].length; j++){
-	// 	var $con_J_resulte = $('.J_resulte:contains("[")')
-	// 					if $.expBlock.EXP_DATA[0]["icons"][j]["title"]
-	// 				}
-	var $con_J_resulte = $('.J_resulte:contains("[")')
-	var $p_J_resulte = $con_J_resulte.parent().children('p.J_resulte')
-	if ($con_J_resulte) {
-		$p_J_resulte.each(function(i){
-			this.id = 'J_resulte' + i;
-		$('#J_resulte' + i).html($.expBlock.textFormat($('#J_resulte' + i).html()));
-		})
-	} else{
-	};
-	/*$this = $('.per_con').children('p.J_resulte');
-	$this.html($.expBlock.textFormat($this.html()));*/
-	/*$("img").each(function(i){
-		this.src = "test" + i + ".jpg";
-	});*/
+		 * ajax远程获取表情,注意同源策略
+		 * 要求返回的数据格式如:[{name: groupname,icons:[{url:'imgurl',title:"iconname"},{url:'imgurl',title:"iconname"}]},{name: groupname,icons:[{url:'imgurl',title:"iconname"},{url:'imgurl',title:"iconname"}]},...]
+		 */
+		//$.expBlock.getRemoteExp(url);
+		//var $change_img = $('.J_resulte').children('img');
+		//var J_resulte_num = $('.per_con').children('p.J_resulte').get();
+		//alert(J_resulte_num)
+		//alert(cont1.html())
+		// alert($.expBlock.EXP_DATA[0]["icons"].length)
+		// for(var j = 0; j < $.expBlock.EXP_DATA[0]["icons"].length; j++){
+		// 	var $con_J_resulte = $('.J_resulte:contains("[")')
+		// 					if $.expBlock.EXP_DATA[0]["icons"][j]["title"]
+		// 				}
+		var $con_J_resulte = $('.J_resulte:contains("[")')
+		var $p_J_resulte = $con_J_resulte.parent().children('p.J_resulte')
+		if ($con_J_resulte) {
+			$p_J_resulte.each(function(i){
+				this.id = 'J_resulte' + i;
+			$('#J_resulte' + i).html($.expBlock.textFormat($('#J_resulte' + i).html()));
+			})
+		} else{
+		};
+		/*$this = $('.per_con').children('p.J_resulte');
+		$this.html($.expBlock.textFormat($this.html()));*/
+		/*$("img").each(function(i){
+			this.src = "test" + i + ".jpg";
+		});*/
+	}
+	$.weiboicon()
 })
