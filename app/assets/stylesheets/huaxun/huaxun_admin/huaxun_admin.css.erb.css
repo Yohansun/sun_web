@@ -1,0 +1,27 @@
+body{font-family:'Microsoft Yahei';}
+.nomargin{margin:0!important;}
+.nopadding{padding:0!important;}
+.noborder{border:0!important;}
+.mt20{margin-top:20px;}
+.text-haxun{color:#993300;}
+/*skin*/
+.haxun_skin .navbar-inverse .brand,
+.haxun_skin .navbar-inverse .nav>li>a{color:#fff;}
+.haxun_skin .nav-tabs>li.active>a,
+.haxun_skin .nav-tabs>li.active>a:hover,
+.haxun_skin .nav-tabs>li.active>a:focus{color:#9d0420;}
+.haxun_skin .nav-tabs>li.active>a,
+.haxun_skin .nav-tabs>li.active>a:hover,
+.haxun_skin .nav-tabs>li.active>a:focus{border-top-color:#993300;}
+.haxun_skin .ace-nav>li{background:#993300}
+.haxun_skin .navbar-inverse .navbar-inner{background:#993300;border-color:#993300;}
+/*skin ends*/
+/*rebuild*/
+.brand{font-family:'SimSun';}
+.navbar-inner{border-radius:0;}
+/*huaxun style*/
+.haxun_subnav{height:36px;background:#eee;}
+.haxun_subnav.navbar .nav>li>a{color:#993300;margin:3px;padding:4px 12px;border-bottom:0;}
+.haxun_subnav.navbar .nav>.active>a,
+.haxun_subnav.navbar .nav>.active>a:hover,
+.haxun_subnav.navbar .nav>.active>a:focus{background-color:#993300;color:#fff;text-shadow:none;border-radius:5px;}

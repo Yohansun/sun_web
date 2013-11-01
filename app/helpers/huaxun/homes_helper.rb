@@ -1,0 +1,2 @@
+module Huaxun::HomesHelper
+end

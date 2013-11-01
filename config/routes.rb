@@ -71,6 +71,8 @@ Icolor::Application.routes.draw do
   end
 
   devise_scope :user do
+    match "/huaxun/sign" => "huaxun/sessions#create"
+    match "/huaxun/sign_out" => "huaxun/sessions#destroy"
     match "/users/complete" => "users/register#complete"
     match "/user/update" => "users/register#update"
     match "/users/suc_regist" => "users/register#suc_regist"
@@ -743,5 +745,10 @@ Icolor::Application.routes.draw do
     resources :life_infos
 
     root to: 'home_kvs#index', as: 'manage_root'
+  end
+
+  match "/huaxun" => "huaxun/homes#login"
+  scope '/huaxun', :module => 'huaxun' do
+    resources :homes
   end
 end
