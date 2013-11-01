@@ -1,16 +1,28 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function(){
+      $('.js-sure_save').click(function(){
+        if(confirm("确定要修改联系方式吗？")){
+          $(this).parents('form').submit();
+        }
+      });
+    })
+    </script>
+<% end %>
 <div class="container-fluid">
   <div class="tab-content">
     <div class="tab-pane active" id="tab_haxun1">
       <h3 class="text-haxun">联系方式</h3>
-      <form action="" class="form-horizontal">
+      <%= form_tag new_phone_homes_path, class: "form-horizontal" do %>
+        <input type="hidden" name="genre" value="huaxun">
         <fieldset>
           <div class="control-group form-inline">
             <label for="" class=""><strong>全球服务热线</strong></label>
-            <input type="text" placeholder="400-628-1968">
-            <button type="submit" class="btn btn-danger">保存</button>
+            <input type="text" name="phone" value="<%=@phone ? @phone.phone : '400-628-1968'%>">
+            <a class="btn btn-danger js-sure_save">保存</a>
           </div>
         </fieldset>
-      </form>
+      <% end %>
     </div>
   </div>
 </div>

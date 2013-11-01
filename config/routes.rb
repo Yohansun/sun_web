@@ -749,6 +749,10 @@ Icolor::Application.routes.draw do
 
   match "/huaxun" => "huaxun/homes#login"
   scope '/huaxun', :module => 'huaxun' do
-    resources :homes
+    resources :homes do
+      collection do
+        post :new_phone
+      end
+    end
   end
 end
