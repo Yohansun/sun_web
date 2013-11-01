@@ -23,7 +23,7 @@
     <%= yield :head %>
 </head>
 <body class="haxun_skin">
-    <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse nomargin">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a href="#" class="brand">
@@ -45,22 +45,6 @@
 
                 <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
                   <li>
-                    <a href="#">
-                      <i class="icon-cog"></i>
-                      Settings
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#">
-                      <i class="icon-user"></i>
-                      Profile
-                    </a>
-                  </li>
-
-                  <li class="divider"></li>
-
-                  <li>
                     <%= link_to raw("<i class='icon-off'></i>Logout"), huaxun_sign_out_path, :method => :delete %>
                   </li>
                 </ul>
@@ -70,15 +54,8 @@
         </div>
       </div>
     </div>
-
+    <%= render :partial => "layouts/nav" %>
     <%= yield %>
-
-
-    <!-- <a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse">
-      <i class="icon-double-angle-up icon-only bigger-110"></i>
-    </a> -->
-
-    <!--basic scripts-->
     <%= yield :tail %>
     <script src="js/huaxun_admin.js"></script>
 </html>

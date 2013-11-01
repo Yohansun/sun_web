@@ -8,10 +8,4 @@ class Huaxun::HomesController < ApplicationController
   def login
     redirect_to homes_path if current_user && current_user.genre == 'huaxun'
   end
-
-  def is_sign
-    unless current_user && current_user.genre == 'huaxun'
-      redirect_to huaxun_path
-    end
-  end
 end
