@@ -328,11 +328,6 @@ class DesignsController < ApplicationController
 
   def upload_success
     @design = Design.find params[:design_id]
-    if current_user.role_id == 1 && current_user.des_status == true
-      render "upload_success2"
-    elsif (current_user.role_id == 1 && current_user.des_status == false) || current_user.role_id == 2
-      render "upload_success3"
-    end
   end
 
   def update_design_active
