@@ -3,8 +3,16 @@ body{font-family:'Microsoft Yahei';}
 .nopadding{padding:0!important;}
 .noborder{border:0!important;}
 .mt20{margin-top:20px;}
-.text-haxun{color:#993300;}
+.mr10{margin-right:10px;}
+.ml10{margin-left:10px;}
+.mb5{margin-bottom:5px!important;}
+.offset40_haxun{margin-left:40px;}
 /*skin*/
+.text-haxun,
+.text-haxun:hover,
+.text-haxun a,
+.text-haxun a:hover{color:#993300;}
+.text-haxun .caret{border-top-color:#993300;}
 .haxun_skin .navbar-inverse .brand,
 .haxun_skin .navbar-inverse .nav>li>a{color:#fff;}
 .haxun_skin .nav-tabs>li.active>a,
@@ -14,14 +22,24 @@ body{font-family:'Microsoft Yahei';}
 .haxun_skin .nav-tabs>li.active>a:hover,
 .haxun_skin .nav-tabs>li.active>a:focus{border-top-color:#993300;}
 .haxun_skin .ace-nav>li{background:#993300}
+.haxun_skin .ace-nav li{*background:#993300;}
 .haxun_skin .navbar-inverse .navbar-inner{background:#993300;border-color:#993300;}
 /*skin ends*/
 /*rebuild*/
 .brand{font-family:'SimSun';}
 .navbar-inner{border-radius:0;}
 /*huaxun style*/
-.haxun_subnav{height:36px;background:#eee;}
+.haxun_subnav{/*min-height:36px;*/background:#eee;}
+.haxun_subnav.navbar .nav{float:none;position:static;}
 .haxun_subnav.navbar .nav>li>a{color:#993300;margin:3px;padding:4px 12px;border-bottom:0;}
 .haxun_subnav.navbar .nav>.active>a,
 .haxun_subnav.navbar .nav>.active>a:hover,
 .haxun_subnav.navbar .nav>.active>a:focus{background-color:#993300;color:#fff;text-shadow:none;border-radius:5px;}
+/*design appreciate*/
+.haxun_desnimg,.haxun_desnimg img,.haxun_teamimg,.haxun_teamimg img{width:210px;height:156px;}
+.haxun_main label .help-block{text-indent:40px;}
+.control-label.w40{width:40px;text-align:left;}
+.control-label.w60{width:60px;text-align:center;}
+.input-mini.w39{width:39px;}
+/*kv*/
+.haxun_kv img{width:670px;height:283px;}

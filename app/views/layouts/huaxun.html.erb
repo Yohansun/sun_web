@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <%= stylesheet_link_tag "manage/bootstrap.css", "manage/bootstrap-responsive.css","huaxun/huaxun_admin/font-awesome.min","huaxun/huaxun_admin/huaxun_admin" %>
-    <%= javascript_include_tag "application", "manage/bootstrap.js", "manage/jquery.slider.js","huaxun_admin.js" %>
+    <%= javascript_include_tag "application", "manage/bootstrap.js", "manage/jquery.slider.js","huaxun/huaxun_admin.js" %>
 
     <!--[if IE 7]>
       <link rel="stylesheet" href="/dev-assets/huaxun/huaxun_admin/font-awesome-ie7.min.css" />
@@ -55,7 +55,7 @@
       </div>
     </div>
     <%= render :partial => "layouts/nav" %>
+    <%= render partial: 'layouts/flash_message' %>
     <%= yield %>
     <%= yield :tail %>
-    <script src="js/huaxun_admin.js"></script>
 </html>
