@@ -754,8 +754,14 @@ Icolor::Application.routes.draw do
         post :new_phone
       end
     end
-
     resources :hx_profiles
+    resources :teams do
+      collection do
+        post :create_image
+        post :search
+        post :del_all
+      end
+    end
   end
 
 end

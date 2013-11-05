@@ -1,0 +1,2 @@
+module Huaxun::TeamsHelper
+end

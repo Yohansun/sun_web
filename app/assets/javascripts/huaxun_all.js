@@ -12,3 +12,8 @@
 //
 //= require baicheng/jquery
 //= require jquery_ujs
+$(function(){
+  if ($('.datepickers').length > 0) {
+    $('.datepickers').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+  };
+});

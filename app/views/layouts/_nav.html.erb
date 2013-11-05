@@ -7,7 +7,7 @@
     <li><a href="#tab_haxun3">免费咨询</a></li>
     <li><a href="#tab_haxun4">新闻列表</a></li>
     <li><a href="#tab_haxun5">主题KV</a></li>
-    <li><a href="#tab_haxun6">精英团队</a></li>
+    <li <% if controller_name == 'teams' %>class="active"<% end %>><a href="<%= teams_path %>">精英团队</a></li>
     <li class="<%= 'active' if controller_name == 'hx_profiles' %>">
       <a href="<%= hx_profiles_path %>">公司简介</a>
     </li>
