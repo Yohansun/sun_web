@@ -1,0 +1,18 @@
+$('#news_body').prepend("<%=j render partial: 'insert_tr' %>");
+
+$('#hx_insert_link1').click(function(){
+  window.open($('#hx_insert_url').val());
+});
+
+$('.hx_insert_edit').unbind('click');
+$('#hx_insert_save').click(function(){
+  var $title = $('#hx_insert_title').val(),
+      $url = $('#hx_insert_url').val();
+  if (confirm('当前操作会删除排序7的记录，是否继续？')) {
+    $.ajax({
+      type: "POST",
+      url: "<%= insert_save_hx_news_index_path %>",
+      data: {position : 1, title : $title, url : $url}
+    });
+  };
+});

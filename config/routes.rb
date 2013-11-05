@@ -755,6 +755,14 @@ Icolor::Application.routes.draw do
       end
     end
     resources :hx_profiles
+    resources :hx_news do
+      collection do
+        post :update_more_url
+        get :insert_first
+        post :insert_save
+        post :update_news
+      end
+    end
     resources :teams do
       collection do
         post :create_image

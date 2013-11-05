@@ -1,0 +1,54 @@
+<% content_for :tail do %>
+  <script type="text/javascript">
+    $('#insert_first').one('click', function() {
+      $.get('<%= insert_first_hx_news_index_path %>');
+    });
+    $('.hx_insert_edit').bind('click', function(event) {
+      hx_news_id = $(this).parents('tr').data('id');
+      $.get('/huaxun/hx_news/' + hx_news_id +'/edit');
+      $('.hx_insert_edit').unbind('click');
+    });
+  </script>
+<% end %>
+
+<div class="container-fluid">
+  <div class="tab-pane" id="tab_haxun4">
+    <h3 class="text-haxun">新闻列表</h3>
+    <a href="javascript:void(0);" class="btn btn-danger" id='insert_first'>在上方插入一条新闻</a>
+    <fieldset>
+      <table class="table table-bordered table-hover table-condensed mt20">
+        <thead>
+          <tr>
+            <th>操作</th>
+            <th>排序</th>
+            <th>标题（不超过24个汉字）</th>
+            <th>链接</th>
+            <th>最后修改时间</th>
+          </tr>
+        </thead>
+        <tbody id="news_body">
+          <% @hx_news_all.each do |hx_news| %>
+            <tr data-id="<%= hx_news.id %>" class="hx_tr_<%= hx_news.id %>">
+              <td><a class="text-haxun hx_insert_edit" href="javascript:;">编辑</a></td>
+              <td><%= hx_news.position %></td>
+              <td><%= hx_news.title %></td>
+              <td><%= hx_news.url %></td>
+              <td><%= hx_news.updated_at.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
+    <fieldset>
+      <%= form_tag update_more_url_hx_news_index_path do %>
+        <div class="control-group form-inline">
+          <label>
+            <strong>更多URL</strong>
+            <input type="text" name="more_url" value="<%= @more_url.url if @more_url %>" />
+          </label>
+          <button type="submit" class="btn btn-danger">保存</button>
+        </div>
+      <% end %>
+    </fieldset>
+  </div>
+</div>
