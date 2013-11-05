@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <%= stylesheet_link_tag "manage/bootstrap.css", "manage/bootstrap-responsive.css","huaxun/huaxun_admin/font-awesome.min","huaxun/huaxun_admin/huaxun_admin" %>
-    <%= javascript_include_tag "application", "manage/bootstrap.js", "manage/jquery.slider.js","huaxun/huaxun_admin.js" %>
+    <%= javascript_include_tag "huaxun_all", "manage/bootstrap.js","huaxun/huaxun_admin.js" %>
 
     <!--[if IE 7]>
       <link rel="stylesheet" href="/dev-assets/huaxun/huaxun_admin/font-awesome-ie7.min.css" />
@@ -45,7 +45,7 @@
 
                 <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
                   <li>
-                    <%= link_to raw("<i class='icon-off'></i>Logout"), huaxun_sign_out_path, :method => :delete %>
+                    <%= link_to raw("<i class='icon-off'></i>Logout"), huaxun_sign_out_path, :method => :delete, title: '' %>
                   </li>
                 </ul>
               </li>
