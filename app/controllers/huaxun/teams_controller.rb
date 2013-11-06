@@ -1,7 +1,5 @@
 # encoding: utf-8
-class Huaxun::TeamsController < ApplicationController
-  layout 'huaxun'
-  before_filter :is_sign#, :only => [:index,:new_phone]
+class Huaxun::TeamsController < Huaxun::BaseController
   def index
     @teams = Team.where("is_save = 1").order("updated_at desc").page(params[:page]).per(10)
   end

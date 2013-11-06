@@ -769,6 +769,12 @@ Icolor::Application.routes.draw do
         post :del_all
       end
     end
+    resources :consults do
+      collection do
+        post :create_reply
+        post :search_reply
+      end
+    end
   end
 
 end

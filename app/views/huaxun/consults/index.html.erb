@@ -1,0 +1,91 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "datepicker" %>
+  <%= stylesheet_link_tag "/resources/js/plugins/exp/css/style.css" %>
+  <style type="text/css">
+  .consult{font-size: 24.5px;}
+  </style>
+<% end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "bootstrap-datetimepicker" %>
+  <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
+  <script type="text/javascript">
+    $(function () {
+      $('.consult_list').on('click', '.js-consult_review', function(){
+        $(this).parent('.consult_item').siblings().find('form.js-consult_form').addClass('hide');
+        $(this).parent('.consult_item').find('form.js-consult_form').removeClass('hide');});
+     });
+    // function is_image(){
+    //   var image_id = $("#image_id").val();
+    // }
+  </script>
+<% end %>
+<div class="container-fluid">
+  <div class="tab-pane" id="tab_haxun3">
+    <h3 class="text-haxun consult">免费咨询</h3>
+    <%= form_tag search_reply_consults_path, class: "form-horizontal" do %>
+      <fieldset>
+        <div class="control-group form-inline">
+          <select name="rep_where" class="input-small mb5">
+            <option value="rep_cont" <%= 'selected' if params[:rep_where] && params[:rep_where] == "rep_cont"%>>咨询内容</option>
+            <option value="rep_name" <%= 'selected' if params[:rep_where] && params[:rep_where] == "rep_name"%>>咨询人</option>
+          </select>
+          <input class="mb5" type="text" name="rep_value" value="<%=  params[:rep_value] if params[:rep_value]%>">
+          <label class="mb5"><span>and</span></label>
+          <input class="mb5 datepickers input-small" type="text" name="start_time" placeholder="2010-01-01" value="<%=params[:start_time]%>" >
+          <label class="mb5"><span>and</span></label>
+          <input class="mb5 datepickers input-small" type="text" name="end_time" placeholder="<%=Time.now.to_date%>" value="<%=params[:end_time]%>">
+          <select name="is_reply" class="input-small mb5">
+            <option value="all" <%= 'selected' if params[:is_reply] && params[:is_reply] == "all"%>>所有咨询</option>
+            <option value="no_reply" <%= 'selected' if params[:is_reply] && params[:is_reply] == "no_reply"%>>未回复咨询</option>
+            <option value="yes_reply" <%= 'selected' if params[:is_reply] && params[:is_reply] == "yes_reply"%>>已回复咨询</option>
+          </select>
+          <button type="" class="btn btn-danger mb5">搜索</button>
+        </div>
+      </fieldset>
+    <% end %>
+    <div class="consult_list exp-holder">
+      <ul class="row-fluid unstyled nomargin">
+        <% @replies.each do |reply| %>
+          <% user = User.find(reply.reply_user_id) %>
+          <% rep_res = reply.rep_replies.where(user_id: current_user.id).order("id desc") %>
+          <li class="consult_item exp-holder clearfix">
+            <% if rep_res.present? %>
+              <a href="javascript:;" class="span1 js-consult_review">已回复</a>
+            <% else %>
+              <a href="javascript:;" class="span1 text-haxun js-consult_review">未回复</a>
+            <% end %>
+            <span class="span2"><span><%=reply.created_at.to_date %></span></span>
+            <div class="span7">
+              <p class="J_resulte"><%=reply.content %></p>
+              <%= form_tag create_reply_consults_path, class: "form-horizontal mt20 clearfix hide js-consult_form" do %>
+                <div class="span8">
+                  <input type="hidden" value="<%=reply.id%>" name="reply_id">
+                  <% if rep_res.present? %>
+                    <input type="hidden" value="<%= rep_res.first.id %>" name="rep_res_id">
+                  <% end %>
+                  <textarea name="rep_content" id="rep_content" maxlength="1000" cols="" rows="5" class="span12"><%=rep_res.first.content  if rep_res.present? %></textarea>
+                </div>
+                <div class="span2" style="margin-top:32px;">
+                  <a class="exp_btn exp-block-trigger pull-left" href="javascript:;"><i class="icon-addface"></i>添加表情</a>
+                  <button class="btn btn-danger">提交回复</button>
+                </div>
+              <% end %>
+            </div>
+            <span class="span2">
+              <% if user.name.present? %>
+                <%=user.name %>
+              <% elsif user.username.present? %>
+                <%=user.username %>
+              <% else %>
+                手机/邮箱登录用户
+              <% end %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+      <div class="pagination text-haxun">
+        <%= paginate @replies %>
+      </div>
+    </div>
+  </div>
+</div>
