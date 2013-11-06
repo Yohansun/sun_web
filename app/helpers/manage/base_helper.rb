@@ -70,7 +70,6 @@ module Manage::BaseHelper
     end
     "manage/banner_activities/#{label_name}"
   end
-
   def left_menu_active key
     flag = case controller_name
       when (key =~ /home/) && /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/

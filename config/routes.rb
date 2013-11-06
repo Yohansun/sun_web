@@ -724,7 +724,6 @@ Icolor::Application.routes.draw do
         post :save_data
       end
     end
-
     resources :home_life_videos do
       collection do
         post :create_image
