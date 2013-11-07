@@ -74,10 +74,6 @@ class Design < ActiveRecord::Base
     end
   end
 
-  def comments_count
-    self.comments.size
-  end
-
   def self.load_old_data
     OldDesign.all.each do |old|
       user = User.find_by_old_id(old.user_id)

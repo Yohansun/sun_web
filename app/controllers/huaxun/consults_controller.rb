@@ -37,9 +37,9 @@ class Huaxun::ConsultsController < Huaxun::BaseController
       end_time = Time.now
     end
     if params[:is_reply] == "no_reply"
-      @replies = @replies.includes(:rep_replies).select("distinct replies.id, replies.*").where("rep_replies.id is null")
+      @replies = @replies.includes(:rep_replies).select("distinct replies.id, replies.*").where("rep_replies.id is null or rep_replies.user_id != ? ",current_user)
     elsif params[:is_reply] == "yes_reply"
-      @replies = @replies.joins(:rep_replies).select("distinct replies.id, replies.*")
+      @replies = @replies.joins(:rep_replies).select("distinct replies.id, replies.*").where("rep_replies.user_id = ? ", current_user.id)
     end
     @replies = @replies.where(created_at: start_time.beginning_of_day..end_time.end_of_day).order("replies.id desc").page(params[:page]).per(8)
     render :index

@@ -784,6 +784,15 @@ Icolor::Application.routes.draw do
         post :search_reply
       end
     end
+    resources :examples do
+      collection do
+        post :create_image
+        get :get_design
+        post :up_design
+        post :del_examples
+        post :search
+      end
+    end
   end
 
 end

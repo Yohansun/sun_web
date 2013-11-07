@@ -3,7 +3,7 @@
     <li class="<%= 'active' if controller_name == 'homes' && action_name == 'index' %>">
       <a href="<%=homes_path%>">联系方式</a>
     </li>
-    <li><a href="#tab_haxun2">案例赏析</a></li>
+    <li class="<%= 'active' if controller_name == 'examples' %>"><a href="<%= examples_path %>">案例赏析</a></li>
     <li class="<%= 'active' if controller_name == 'consults' %>"><a href="<%=consults_path %>">免费咨询</a></li>
     <li class="<%= 'active' if controller_name == 'hx_news' %>">
       <a href="<%= hx_news_index_path %>">新闻列表</a>
