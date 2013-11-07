@@ -1,0 +1,35 @@
+<%= form_for(HxMap.new, remote: true ) do |f| %>
+  <%= f.hidden_field :hx_kv_id, value: @kv.nil? ? nil : @kv.id, id: 'hidden_map_id' %>
+  <div class="haxun_main">
+    <label class="control-label w40">
+      <strong>位置</strong>
+    </label>
+    <div class="form-inline offset40_haxun">
+      <label>
+        <small>x</small>
+        <%= f.text_field :x_line, value: nil, class: 'input-mini' %>
+      </label>
+      <label>
+        <small>y</small>
+        <%= f.text_field :y_line, value: nil, class: 'input-mini' %>
+      </label>
+      <label>
+        <small>w</small>
+        <%= f.text_field :width, value: nil, class: 'input-mini' %>
+      </label>
+      <label>
+        <small>h</small>
+        <%= f.text_field :high, value: nil, class: 'input-mini' %>
+      </label>
+    </div>
+  </div>
+  <div class="haxun_main">
+    <label>
+      <strong class="control-label w40">URL</strong>
+      <%= f.text_field :url, value: nil, class: 'input-large' %>
+    </label>
+    <label class="offset40_haxun">
+      <%= f.submit '添加链接', class: 'text-haxun' %>
+    </label>
+  </div>
+<% end %>

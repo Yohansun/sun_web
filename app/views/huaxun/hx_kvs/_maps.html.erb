@@ -1,0 +1,14 @@
+<div class="haxun_main" id="hx_kv_maps">
+  <%- maps.each do |map|%>
+    <p class="hx_maps" data-map-id="<%= map.id %>">
+      <span class="help-block">
+        x:<%= map.x_line %>
+        y:<%= map.y_line %>
+        w:<%= map.width %>
+        h:<%= map.high %>
+      </span>
+      <span class="help-block">链接:<%= map.url %></span>
+      <%= link_to '删除', hx_map_path(map.id) , confirm: '确定删除?', method: :delete, remote: true %>
+    </p>
+  <%- end %>
+</div>

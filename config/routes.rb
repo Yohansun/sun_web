@@ -762,6 +762,15 @@ Icolor::Application.routes.draw do
         post :update_news
       end
     end
+    resources :hx_kvs do
+      member do
+        post :kv_update
+      end
+      collection do
+        get :kv_insert
+      end
+    end
+    resources :hx_maps
     resources :teams do
       collection do
         post :create_image

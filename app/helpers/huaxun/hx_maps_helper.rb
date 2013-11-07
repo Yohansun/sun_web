@@ -1,0 +1,2 @@
+module Huaxun::HxMapsHelper
+end
