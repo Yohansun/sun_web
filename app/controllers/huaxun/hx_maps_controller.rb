@@ -2,8 +2,15 @@
 class Huaxun::HxMapsController < Huaxun::BaseController
 
   def create
-    hx_map = HxMap.create(params[:hx_map])
     @kv = HxKv.find_by_id(params[:hx_map][:hx_kv_id])
+    hx_map = HxMap.new(params[:hx_map])
+    if hx_map.save
+      respond_to do |f|
+        f.js
+      end
+    else
+      render js: "alert('#{hx_map.errors.full_messages}')"
+    end
   end
 
   def destroy

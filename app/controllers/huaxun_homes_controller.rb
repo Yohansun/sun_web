@@ -1,7 +1,15 @@
 # encoding: utf-8
 class HuaxunHomesController < ApplicationController
   def index
+    # 华浔banner
     @banner1,@banner2 = IBanner.page_name('华浔品味装饰').where(position: [1,2]).group(:position)
+    # 走进华浔
+    @hx_profile = HxProfile.first
+    # 华浔新闻
+    @more_url = HxNews.find_by_position(nil)
+    @hx_news_all = HxNews.positions.order("position asc")
+    # 华浔KV
+    @hx_kvs = HxKv.includes(:hx_maps).order("position asc")
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2

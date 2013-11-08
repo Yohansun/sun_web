@@ -2,7 +2,7 @@
 class Huaxun::HxNewsController < Huaxun::BaseController
 
   def index
-    @hx_news_all = HxNews.where(["position is not null"]).order("position asc")
+    @hx_news_all = HxNews.positions.order("position asc")
     @more_url = HxNews.find_by_position(nil)
   end
 
