@@ -177,7 +177,7 @@
         <%= image_tag(@image.file.url(:image_map_show), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
       </div>
       <div class="map-kv-slider pull-right">
-        <% if @image_arr.first.id != @image.id %>
+        <% if @up_id %>
           <a href="/images/<%=@up_id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
           <a href="/images/<%=@image_arr.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
         <% else %>
