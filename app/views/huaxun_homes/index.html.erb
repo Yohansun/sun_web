@@ -300,87 +300,86 @@
     <p>“做品味装饰，创名牌企业”，华浔人正以饱满的热情和自信一路前行！</p>
   </div>
 </div>
-<% if current_user && current_user.role_id == 3 %>
-<% else %>
-<div class="index_main haxun_point nopadding mt20">
-  <ul class="nav nav-tabs upload_tab" id="upload_tab">
-    <li class="active"><a href="#huaxun_tab1" name="huaxun_tab1">积分兑换细则</a></li>
-    <li><a href="<% if current_user %><%=user_points_exchange_path(current_user)%><% else %>javascript:show_login();<% end %>">积分奖品兑换</a></li>
-  </ul>
-  <div class="tab-content upload_content">
-    <div class="tab-pane active" id="huaxun_tab1">
-      <div class="per_point">
-        <p class="per_tips">
-          客户买单，你积分！<br>
-          无论是您为客户代购还是陪客户在立邦专卖店购买产品，<br>
-          只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
-        </p>
-        <p class="per_tips">
-          <span>
-            提醒：<br>
-            1、您的购买产品记录表记录完成后，请注意提交。提交后此次记录表产生的积分会自动累计进入您的积分账号；<br>
-            2、您的累计积分经审核后才能转化成可兑换积分，进行奖品兑换。所以请注意购买产品记录表填写的真实性；<br>
-            3、当您选择完所需兑换礼品，确定兑换后，您的礼品会在10个工作日内按个人账户所留的地址寄送。
-          </span>
-        </p>
-        <div class="mt20">
-          <h5 class="text-important">积分礼品</h5>
-          <ul class="gifts_list linet1 unstyled clearfix">
-            <% @point_gifts.each_with_index do |gift, index| %>
-              <% i_index = index + 1 %>
-              <li class='<%= "noborder_right" if (i_index % 4) == 0 && i_index != 0 %>'>
-                <a href="#" class="gift_img">
-                  <img src="<%= gift.file.url(:list) %>" alt="" />
-                </a>
-                <a href="#">
-                  <span class="help-block nomargin"><%= gift.gift_name %></span>
-                  <span class="help-block nomargin">所需积分<strong class="text-important"><%= gift.gift_point %></strong></span>
-                </a>
-              </li>
-            <% end %>
-          </ul>
-          <div class="pager pt15" style="margin-bottom:60px;">
-            <%= paginate @point_gifts %>
+<% if current_user && current_user.role_id != 3 %>
+  <div class="index_main haxun_point nopadding mt20">
+    <ul class="nav nav-tabs upload_tab" id="upload_tab">
+      <li class="active"><a href="#huaxun_tab1" name="huaxun_tab1">积分兑换细则</a></li>
+      <li><a href="<% if current_user %><%=user_points_exchange_path(current_user)%><% else %>javascript:show_login();<% end %>">积分奖品兑换</a></li>
+    </ul>
+    <div class="tab-content upload_content">
+      <div class="tab-pane active" id="huaxun_tab1">
+        <div class="per_point">
+          <p class="per_tips">
+            客户买单，你积分！<br>
+            无论是您为客户代购还是陪客户在立邦专卖店购买产品，<br>
+            只要记下成交的产品名称和桶数，就能获取积分兑换iColor众多礼品哦！
+          </p>
+          <p class="per_tips">
+            <span>
+              提醒：<br>
+              1、您的购买产品记录表记录完成后，请注意提交。提交后此次记录表产生的积分会自动累计进入您的积分账号；<br>
+              2、您的累计积分经审核后才能转化成可兑换积分，进行奖品兑换。所以请注意购买产品记录表填写的真实性；<br>
+              3、当您选择完所需兑换礼品，确定兑换后，您的礼品会在10个工作日内按个人账户所留的地址寄送。
+            </span>
+          </p>
+          <div class="mt20">
+            <h5 class="text-important">积分礼品</h5>
+            <ul class="gifts_list linet1 unstyled clearfix">
+              <% @point_gifts.each_with_index do |gift, index| %>
+                <% i_index = index + 1 %>
+                <li class='<%= "noborder_right" if (i_index % 4) == 0 && i_index != 0 %>'>
+                  <a href="#" class="gift_img">
+                    <img src="<%= gift.file.url(:list) %>" alt="" />
+                  </a>
+                  <a href="#">
+                    <span class="help-block nomargin"><%= gift.gift_name %></span>
+                    <span class="help-block nomargin">所需积分<strong class="text-important"><%= gift.gift_point %></strong></span>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+            <div class="pager pt15" style="margin-bottom:60px;">
+              <%= paginate @point_gifts %>
+            </div>
           </div>
-        </div>
-        <div class="mt20">
-          <h5 class="text-important">产品积分</h5>
-          <div class="clearfix linet1">
-            <table class="gifts_table pull-left" style="position:relative;">
-              <tr>
-                <th width="400">产品</th>
-                <th width="79">积分</th>
-              </tr>
-              <% @point_products.each_with_index do |product, index| %>
-                <% if index < @middle_value %>
-                  <tr>
-                    <td><%= product.product_name %></td>
-                    <td><%= product.product_point %></td>
-                  </tr>
+          <div class="mt20">
+            <h5 class="text-important">产品积分</h5>
+            <div class="clearfix linet1">
+              <table class="gifts_table pull-left" style="position:relative;">
+                <tr>
+                  <th width="400">产品</th>
+                  <th width="79">积分</th>
+                </tr>
+                <% @point_products.each_with_index do |product, index| %>
+                  <% if index < @middle_value %>
+                    <tr>
+                      <td><%= product.product_name %></td>
+                      <td><%= product.product_point %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </table>
-            <table class="gifts_table pull-left">
-              <tr>
-                <th width="400">产品</th>
-                <th width="79">积分</th>
-              </tr>
-              <% @point_products.each_with_index do |product, index| %>
-                <% if index >= @middle_value %>
-                  <tr>
-                    <td><%= product.product_name %></td>
-                    <td><%= product.product_point %></td>
-                  </tr>
+              </table>
+              <table class="gifts_table pull-left">
+                <tr>
+                  <th width="400">产品</th>
+                  <th width="79">积分</th>
+                </tr>
+                <% @point_products.each_with_index do |product, index| %>
+                  <% if index >= @middle_value %>
+                    <tr>
+                      <td><%= product.product_name %></td>
+                      <td><%= product.product_point %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </table>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+      <div class="tab-pane" id="huaxun_tab2">2</div>
     </div>
-    <div class="tab-pane" id="huaxun_tab2">2</div>
   </div>
-</div>
 <% end %>
 
 <div class="clearfix">
