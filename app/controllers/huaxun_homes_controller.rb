@@ -13,7 +13,11 @@ class HuaxunHomesController < ApplicationController
     # 服务热线
     @phone = Phone.first
     # 案例赏析
-    @examples = Example.where(is_save: true).order("top desc").order("updated_at desc").page(params[:example_page]).per(6)
+    if params[:choice]
+      @examples = Example.where(is_save: true, choice: true).order("top desc").order("updated_at desc").page(params[:example_page]).per(6)
+    else
+      @examples = Example.where(is_save: true).order("top desc").order("updated_at desc").page(params[:example_page]).per(6)
+    end
 
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
