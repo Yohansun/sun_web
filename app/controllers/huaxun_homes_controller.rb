@@ -51,4 +51,16 @@ class HuaxunHomesController < ApplicationController
     end
     redirect_to huaxun_homes_path
   end
+
+  def update_vote
+    @examp = Example.find params[:id]
+    if @examp
+      if @examp.votes_count.present?
+        @examp.votes_count = @examp.votes_count.to_i + 1
+      else
+        @examp.votes_count = 1
+      end
+      @examp.save
+    end
+  end
 end

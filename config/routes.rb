@@ -363,6 +363,7 @@ Icolor::Application.routes.draw do
       post :new_ask
       post :new_rep
       get :get_reply
+      post :update_vote
     end
   end
 
