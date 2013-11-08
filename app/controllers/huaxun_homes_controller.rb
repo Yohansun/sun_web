@@ -10,6 +10,11 @@ class HuaxunHomesController < ApplicationController
     @hx_news_all = HxNews.positions.order("position asc")
     # 华浔KV
     @hx_kvs = HxKv.includes(:hx_maps).order("position asc")
+    # 服务热线
+    @phone = Phone.first
+    # 案例赏析
+    @examples = Example.where(is_save: true).order("top desc").order("updated_at desc").page(params[:example_page]).per(6)
+
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2

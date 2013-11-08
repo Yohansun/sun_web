@@ -43,7 +43,7 @@
     <li class="pull-left">
       <a name="phone"></a>
       <i class="icon-phone1 icon-i30"></i>
-      <span style="color:#676666;font:bold 14px 'SimSun';">全国服务热线：</span><span class="phone_number">400-628-1968</span>
+      <span style="color:#676666;font:bold 14px 'SimSun';">全国服务热线：</span><span class="phone_number"><%= @phone.phone if @phone %></span>
     </li>
     <li class="pull-right">
       <a href="#case">案例赏析</a>
@@ -61,99 +61,18 @@
 </div>
 <a name="case"></a>
 <div class="per_home clearfix">
-  <div class="per_left index_main pull-left">
-    <p class="clearfix index_tit">
-      <strong class="pull-left mr5">案例赏析</strong>
-      <a class="active pull-left" href="/huaxun_homes" >精选作品</a>
-      <a class="pull-left" href="/huaxun_homes" >全部作品</a>
-    </p>
-    <hr class="border2 border2_mt2">
-    <div>
-      <ul class="per_works unstyled clearfix mt20">
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103932" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103932" target="_blank">大儒世家卧虎</a></h5>
-          <p class="nomargin">黄育波</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103930" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work2.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103930" target="_blank">融汇江山某豪宅</a></h5>
-          <p class="nomargin">胡寿海</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103927" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work3.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103927" target="_blank">万科朗润园17A别墅</a></h5>
-          <p class="nomargin">谭明飞、黄杰伍</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103923" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work4.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103923" target="_blank">坤和山水人家</a></h5>
-          <p class="nomargin">张平</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103922" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work5.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103922" target="_blank">永怡聚豪园周生雅居</a></h5>
-          <p class="nomargin">胡杨</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103921" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work6.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103921" target="_blank">阳光美地王总</a></h5>
-          <p class="nomargin">刘云</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-      </ul>
-      <!-- <div class="pager">
-        <a class="current" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">...</a>
-        <a href="#">20</a>
-        <a href="#" class="">下一页</a>
-        <a href="#" class="">最后一页</a>
-      </div> -->
-    </div>
-  </div>
+  <%= render partial: 'hx_examples' %>
   <div class="per_right index_main pull-right">
     <div class="work_comments nomargin nopadding">
       <a name="asks"></a>
       <%= form_tag new_ask_huaxun_homes_path, :class => "comment_form exp-holder" do %>
-        <h5><span class="pull-right phone_number"><i class="icon-phone_small icon-i30"></i>400-628-1968</span>免费咨询</h5>
+        <h5>
+          <span class="pull-right phone_number">
+            <i class="icon-phone_small icon-i30"></i>
+            <%= @phone.phone if @phone %>
+          </span>
+          免费咨询
+        </h5>
         <textarea id="J_t" name="content"></textarea>
         <ul class="moodbtn_group unstyled clearfix">
           <li class="pull-right btn_send">

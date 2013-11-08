@@ -1,0 +1,32 @@
+<div class="per_left index_main pull-left">
+  <p class="clearfix index_tit">
+    <strong class="pull-left mr5">案例赏析</strong>
+    <a class="active pull-left" href="/huaxun_homes" >精选作品</a>
+    <a class="pull-left" href="/huaxun_homes" >全部作品</a>
+  </p>
+  <hr class="border2 border2_mt2">
+  <div>
+    <ul class="per_works unstyled clearfix mt20">
+      <% @examples.each do |example| %>
+        <li>
+          <a href="<%= example.url %>" target="_blank" class="help-block">
+            <%= image_tag example.try(:img).try(:url, :list) %>
+          </a>
+          <h5 class="dott1">
+            <a href="<%= example.url %>" target="_blank"><%= example.title %></a>
+          </h5>
+          <p class="nomargin"><%= example.name %></p>
+          <p class="nomargin">风格: <%= example.style %></p>
+          <p class="dott1">
+            <span><i class="icon-i16 icon-xin_gray2"></i><%= example.votes_count %></span>
+            <span><i class="icon-i16 icon-comment1"></i><%= example.comment_count %></span>
+            <span class="noborder"><i class="icon-i16 icon-share1"></i><%= example.shares_count %></span>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+    <div class="pager">
+      <%= paginate @examples, :param_name => :example_page %>
+    </div>
+  </div>
+</div>
