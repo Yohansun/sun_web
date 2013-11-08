@@ -4,7 +4,7 @@ class MoodsController < ApplicationController
 
 	def index
 		if @user
-			@moods = Mood.order("created_at desc").page(params[:page]).per(5)
+			@moods = Mood.order("id desc").page(params[:page]).per(5)
 		end
 
 		@weekly_stars = WeeklyStar.order("published_at desc").limit 5

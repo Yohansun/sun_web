@@ -5,7 +5,7 @@
 module MagicContent
 	class EventAttendeeController < BaseController
 	  def index
-	  	@eas = EventAttendee.order('created_at desc')
+	  	@eas = EventAttendee.order('id desc')
 	  end
 
 	  def delete_inspiration

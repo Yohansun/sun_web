@@ -30,7 +30,7 @@ class Baicheng::StoriesController < ApplicationController
       end
       @stories = @search_sort.where(:is_save => true)
     end
-    @stories = @stories.order("stories.created_at desc").page(params[:page]).per(24)
+    @stories = @stories.order("stories.id desc").page(params[:page]).per(24)
   end
 
   def new

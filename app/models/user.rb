@@ -73,14 +73,14 @@ class User < ActiveRecord::Base
   has_many :baicheng_events
   has_many :stories
   #公司作品
-  has_many :company_designs ,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 2}} , :order => "designs.created_at desc"
+  has_many :company_designs ,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 2}} , :order => "designs.id desc"
   #个人作品
   has_many :personal_designs,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 1}}
   #公司最新作品
-  has_many :news_company_designs ,:through => :company_designs , :source => :design_images,:include => :user,:order => "design_images.created_at desc"
+  has_many :news_company_designs ,:through => :company_designs , :source => :design_images,:include => :user,:order => "design_images.id desc"
   #个人最新作品
-  has_many :news_personal_designs,:through => :personal_designs, :source => :design_images,:include => :user,:order => "design_images.created_at desc"
-  
+  has_many :news_personal_designs,:through => :personal_designs, :source => :design_images,:include => :user,:order => "design_images.id desc"
+
   scope :weekly_related, ->(role,design_user_ids) {where(id: design_user_ids, role_id: role).order("find_in_set(users.id,'#{design_user_ids.join(",")}') asc")}
 
   scope :username_or_name, ->(user_name_or_name) {where('username=? OR name=?', user_name_or_name, user_name_or_name)}
@@ -344,7 +344,7 @@ class User < ActiveRecord::Base
       return "普通用户"
     end
   end
-  
+
   #只有角色是公司 取的收件地址才是公司地址(company_address), 其他都是收货地址(recipient_address)
   def role_address
     self.role_chn_name == "公司" ? self.company_address : self.recipient_address

@@ -19,7 +19,7 @@ class Baicheng::DesignWorksController < ApplicationController
                     elsif params[:search_area].present?
                       BaichengEvent.search_by_area(params[:search_area].to_i).page(params[:page]).per(28)
                     else
-                      BaichengEvent.scoped.order('created_at DESC').page(params[:page]).per(28)
+                      BaichengEvent.scoped.order('id desc').page(params[:page]).per(28)
                     end
     else
       @xx = BaichengEvent.story_type(825)
@@ -46,7 +46,7 @@ class Baicheng::DesignWorksController < ApplicationController
   end
 
   def opus
-    @event_data = BaichengEvent.by_type(Design.name).order('created_at DESC').page(params[:page]).per(28)
+    @event_data = BaichengEvent.by_type(Design.name).order('id desc').page(params[:page]).per(28)
     @xx = BaichengEvent.baicheng_map_design(825)
     @lf = BaichengEvent.baicheng_map_design(647)
     @dt = BaichengEvent.baicheng_map_design(1046)

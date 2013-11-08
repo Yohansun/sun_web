@@ -38,7 +38,7 @@ class DesignsController < ApplicationController
   def index
     sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.created_at desc").page(params[:page])
+      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.id desc").page(params[:page])
 
       load_skin
     else
@@ -48,11 +48,11 @@ class DesignsController < ApplicationController
       if params[:order] == "最热"
         @designs = @designs.order("designs.votes_count desc")
       elsif params[:order] == "未来之星"
-        @designs = @designs.joins(:user).where("users.source = 'yda'").order("designs.created_at desc")
+        @designs = @designs.joins(:user).where("users.source = 'yda'").order("designs.id desc")
       elsif params[:q] == "super_refresh"
-        @designs = @designs.where(is_refresh: true).order("designs.created_at desc")
+        @designs = @designs.where(is_refresh: true).order("designs.id desc")
       else
-        @designs = @designs.order("designs.created_at desc")
+        @designs = @designs.order("designs.id desc")
       end
       style = "%#{params[:style]}%"
       design_color = "%#{params[:design_color]}%"
