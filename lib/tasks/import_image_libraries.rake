@@ -121,7 +121,7 @@ task :import_image_libraries_for_kepulande => :environment  do
   # files = ['kepulande_r1.xls', 'kepulande_r2.xls', 'kepulande_r3.xls', 'kepulande_r4.xls']
   # files.each do |xls_name|
     image_id = []
-    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande-r11_20130509.xls"
+    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande-r18.xls"
     sheet1 = book.worksheet 0
     sheet1.each do |row|
       name = ""
@@ -203,7 +203,7 @@ task :import_image_libraries_for_kepulande => :environment  do
         end
       end
     end
-    CSV.open("#{Rails.root}/lib/data/export_data/kepulande_#{Time.now.to_date}导入ID.csv", "wb") do |csv|
+    CSV.open("#{Rails.root}/lib/data/kepulande_#{Time.now.to_date}导入ID.csv", "wb") do |csv|
       image_id.each do |id|
         csv << [id]
       end
