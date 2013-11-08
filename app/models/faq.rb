@@ -5,7 +5,7 @@ class Faq < ActiveRecord::Base
 
   paginates_per 10
 
-  default_scope :order => "created_at DESC"
+  default_scope :order => "id desc"
 
   has_attached_file :img,
                     :styles => {:thumb => "403x270#"},

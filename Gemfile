@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.15'
 
 gem 'mysql2'
@@ -50,6 +52,7 @@ gem 'httmultiparty'
 
 gem 'exception_notification'
 gem 'newrelic_rpm', "~> 3.6.0.78"
+gem 'rack-mini-profiler'
 gem 'ekuseru'
 
 gem 'redis-store'

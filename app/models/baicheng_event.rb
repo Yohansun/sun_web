@@ -21,7 +21,7 @@ class BaichengEvent < ActiveRecord::Base
     areas = area.self_and_descendants
     BaichengEvent.scoped.where(["area_id in (?)", areas.map(&:id)])
  end
- 
+
   def self.search_areas(province_id,area_ids)
     area_ids = area_ids.map(&:to_i)
     areas = Area.find(province_id).children.select {|area| !area_ids.include?(area.id)}
@@ -36,25 +36,25 @@ class BaichengEvent < ActiveRecord::Base
   def self.story_type(area_id)
     area_arr_id = Area.where(parent_id: area_id).map &:id
     area_arr_id = area_arr_id.join(",")
-    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Story'").order('created_at DESC').limit(6)
+    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Story'").order('id desc').limit(6)
   end
 
   def self.design_type(area_id)
     area_arr_id = Area.where(parent_id: area_id).map &:id
     area_arr_id = area_arr_id.join(",")
-    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Design'").order('created_at DESC').limit(6)
+    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Design'").order('id desc').limit(6)
   end
 
   def self.baicheng_map_design(area_id)
     area_arr_id = Area.where(parent_id: area_id).map &:id
     area_arr_id = area_arr_id.join(",")
-    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Design'").order('created_at DESC').limit(12)
+    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Design'").order('id desc').limit(12)
   end
 
   def self.baicheng_map_story(area_id)
     area_arr_id = Area.where(parent_id: area_id).map &:id
     area_arr_id = area_arr_id.join(",")
-    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Story'").order('created_at DESC').limit(12)
+    BaichengEvent.where("area_id in (#{area_arr_id}) and eventable_type = 'Story'").order('id desc').limit(12)
   end
 
 end

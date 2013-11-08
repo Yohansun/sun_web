@@ -8,7 +8,7 @@ class Inspiration < ActiveRecord::Base
 	has_many :votes, :as => :voteable
 	has_many :design_images, :as => :imageable, :dependent => :delete_all, :order => 'is_cover DESC'
   has_many :collects, :dependent => :destroy
-  
+
 	paginates_per 20
 
   def cover_img
@@ -20,6 +20,6 @@ class Inspiration < ActiveRecord::Base
 	end
 
 	def self.design_image_covers(num)
-		self.select("distinct inspirations.id").joins(:design_images).limit(num).order("inspirations.created_at desc")
+		self.select("distinct inspirations.id").joins(:design_images).limit(num).order("inspirations.id desc")
 	end
 end

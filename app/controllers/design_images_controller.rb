@@ -2,6 +2,7 @@
 class DesignImagesController < ApplicationController
   layout "home_manage"
   before_filter :get_categories, only: [:index, :lists, :image_show]
+  caches_page :index, :image_show
 
   def create
     newparams = coerce(params)
@@ -235,7 +236,7 @@ class DesignImagesController < ApplicationController
         ranks = "design_images.view_count desc"
       end
     else
-      ranks = "design_images.created_at DESC"
+      ranks = "design_images.id desc"
     end
     @design_images = @design_images.order(ranks)
     @img_count = @design_images.count
@@ -346,11 +347,7 @@ class DesignImagesController < ApplicationController
   def image_show
     #manage
     #banners
-    i_banners = IBanner.page_name('图库内页')
-    @banner1 = i_banners.find_by_position(1)
-    @banner2 = i_banners.find_by_position(2)
-    @banner3 = i_banners.find_by_position(3)
-    @banner4 = i_banners.find_by_position(4)
+    @banners = IBanner.page_name('图库内页').where(position: [1,2,3,4]).order("position").all
 
     #大师访谈
     @master_interviews = IColumnData.show_data(6).limit(5)
@@ -446,7 +443,7 @@ class DesignImagesController < ApplicationController
         images = images.order("design_images.view_count desc")
       end
     else
-      images = images.order("design_images.created_at DESC")
+      images = images.order("design_images.id desc")
     end
 
     #筛选出搜索过的标签,用来重新筛选
@@ -503,7 +500,7 @@ class DesignImagesController < ApplicationController
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
-      @like_images = DesignImage.from.available.audited_with_colors.order("created_at desc").limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.order("id desc").limit(4)
     else
       tags = tags.sample(4)
       @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).limit(4)
@@ -511,7 +508,7 @@ class DesignImagesController < ApplicationController
 
     #最新更新
     latest_images = Rails.cache.fetch("data-model-latest_1000_images", expires_in: 7.days) do
-      DesignImage.order("created_at desc").available.audited_with_colors.limit(1000)
+      DesignImage.order("id desc").available.audited_with_colors.limit(1000)
     end
     @latest_month_images = latest_images.sample(4)
 
@@ -571,7 +568,7 @@ class DesignImagesController < ApplicationController
   end
 
   def get_thumb
-    images = DesignImage.from.available.audited_with_colors.order("design_images.created_at DESC")
+    images = DesignImage.from.available.audited_with_colors.order("design_images.id desc")
     site = params[:site].to_i - 1
     @image_arr = images.offset(site).limit(4)
     respond_to do |format|

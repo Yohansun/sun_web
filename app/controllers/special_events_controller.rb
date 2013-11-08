@@ -6,7 +6,7 @@ class SpecialEventsController < ApplicationController
 
   def show
     due_at = SpecialEvent.where(id: params[:id]).first if params[:id]
-    if due_at.present? && due_at.due_at.present? 
+    if due_at.present? && due_at.due_at.present?
       if Time.now.strftime("%Y%m%d").to_i > due_at.due_at.strftime("%Y%m%d").to_i
         redirect_to root_path
       end
@@ -26,7 +26,7 @@ class SpecialEventsController < ApplicationController
       title = tle.gsub(/，/, ' ')
       image = DesignImage.find(params[:attendee_image_id])
       system("convert #{image.file.path(:spring)} -background blue -rotate 355 public/system/blessing/#{image.id}.png")
-      system("convert public/system/blessing/#{image.id}.png -transparent blue public/system/blessing/#{image.id}.png") 
+      system("convert public/system/blessing/#{image.id}.png -transparent blue public/system/blessing/#{image.id}.png")
       system("composite -geometry +490+173 -gravity SouthEast public/system/blessing/#{image.id}.png public/system/blessing/spring_card.png public/system/blessing/spring_card_#{image.id}.png")
       system("convert -font public/system/simsun.ttf -fill white -pointsize 16 -draw \"text 670,365 '#{current_user.username}'\" public/system/blessing/spring_card_#{image.id}.png public/system/blessing/bar_#{image.id}.png")
       system("convert -font public/system/simsun.ttf -annotate +0+0 -gravity NorthWest -fill white -pointsize 16 -draw \"text 440,130 '#{title}'\" public/system/blessing/bar_#{image.id}.png public/system/blessing/bar_title_#{image.id}.png")
@@ -55,7 +55,7 @@ class SpecialEventsController < ApplicationController
   def send_greeting_cards
     if current_user
       line = " #春节传美图，iColor送祝福# #{params[:friends]}；这是我在iColor送祝福活动中为你们制作的新春贺卡,亲们~收到祝福好运新年哦~你们也来祝福身边好友吧！活动地址：http://www.icolor.com.cn/special_events/3"
-      ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("created_at DESC").first
+      ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("id desc").first
       ea.sync_to_social("weibo", line, "#{Rails.root}/public/system/blessing/bar_text_#{params[:image_id]}.png")
     end
     redirect_to special_event_path(params[:id])
@@ -89,7 +89,7 @@ class SpecialEventsController < ApplicationController
   end
 
   def weibo
-    ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("created_at DESC").first
+    ea = EventAttendee.where(special_event_id: params[:id], user_id: current_user.id).order("id desc").first
     image = DesignImage.find(ea.design_image_id)
     if params[:zhong] == '1'
       line = " 我在 #iColor元旦砸金蛋# 活动中砸到奖品咯！你也快来试试运气吧！ http://www.icolor.com.cn/special_events/2"

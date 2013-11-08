@@ -40,7 +40,7 @@ class ChannelController < ApplicationController
     @design_users = @search.page(params[:page]).per(10)
 
     #mood
-    @moods = Mood.order("created_at desc").limit(4)
+    @moods = Mood.order("id desc").limit(4)
 
     #每周之星,月度之星 = stars
     stars = WeeklyStar.order("published_at desc").partition {|weekly_star| weekly_star.star_type_id == 1 }

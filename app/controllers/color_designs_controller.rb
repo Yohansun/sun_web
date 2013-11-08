@@ -8,7 +8,7 @@ class ColorDesignsController < ApplicationController
       if params[:order] == "最热"
         @designs = @designs.order("votes_count desc")
       else
-        @designs = @designs.order("created_at desc")
+        @designs = @designs.order("id desc")
       end
 
       @designs = @designs.where(:design_color => params[:design_color]) if params[:design_color] && !params[:design_color].blank? && params[:design_color] !='色系'
@@ -19,7 +19,7 @@ class ColorDesignsController < ApplicationController
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
-  
+
   def show
     @design = ColorDesign.find(params[:id]) || Design.new
     @tags = ColorDesign.tag_counts_on(:tags)

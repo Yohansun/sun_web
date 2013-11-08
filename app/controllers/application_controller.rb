@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   layout "home_manage"
 
   around_filter :catch_exceptions
+  before_filter :authorize_profiler
 
   def stored_location_for(resource)
     if current_user && current_user.not_role?
@@ -104,6 +105,13 @@ class ApplicationController < ActionController::Base
 		end
 		block_given? ? yield(zipfile) : zipfile
 	end
+
+  # for MiniProfiler
+  def authorize_profiler
+    if current_user && current_user.is_admin?
+      Rack::MiniProfiler.authorize_request
+    end
+  end
 
 private
   def catch_exceptions
