@@ -22,6 +22,8 @@ class ScoresController < ApplicationController
 			ColorDesign.increment_counter(:shares_count, params[:data_id])
 		when "Mood"
 			Mood.increment_counter(:shares_count, params[:data_id])
+		when "huaxun"
+			Example.increment_counter(:shares_count, params[:data_id])
 		end
 		current_user.share_score(current_user, score_type) if current_user
 		render :text => "score ok"

@@ -17,11 +17,12 @@
           </h5>
           <p class="nomargin"><%= example.name %></p>
           <p class="nomargin">风格: <%= example.style %></p>
-          <p class="dott1">
+          <p class="dott1 p2">
             <span><i class="icon-i16 icon-xin_gray2"></i><%= example.votes_count %></span>
             <span><i class="icon-i16 icon-comment1"></i><%= example.comment_count %></span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i><%= example.shares_count %></span>
+            <span class="noborder zf"><i class="icon-i16 icon-share1"></i><em><%= example.shares_count %></em></span>
           </p>
+          <%= forward_links("#iColor分享#来自#{example.name}的作品【#{example.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", huaxun_homes_path, example.img.url, example.id.to_s, "huaxun") %>
         </li>
       <% end %>
     </ul>

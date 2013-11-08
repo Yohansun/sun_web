@@ -18,7 +18,7 @@ $(function(){
             },
             function(data){
                 var $zf_text = parent_node.prev().children('span');
-                if(new RegExp("转发").test($zf_text.text())){
+                if(new RegExp("转发").test($zf_text.text()) || $zf_text.find('i.icon-share1').length){
                     var $zf_num = $zf_text.children('em');
                     $zf_num.text($zf_num.text()*1+1);
                 };

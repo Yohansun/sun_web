@@ -1,5 +1,15 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "manage/per_home" %>
+  <style type="text/css">
+    .popup_zf,.popup_zf2{width:160px; position:absolute; left:142px; bottom:-28px;*bottom:45px!important; _bottom:50px; background:#fff; padding:5px 0!important; border:1px solid #f1f1f1;}
+.popup_zf span,.popup_zf2 span{float:left;font-size:12px; padding:3px 5px!important;}
+.popup_zf a,.popup_zf2 a{ float:left; display:inline; width:16px; height:16px; background:url(<%= asset_path "master/icon_zf.png" %>) no-repeat; margin:0px 3px;}
+.popup_zf a.pupot_zf_qq,.popup_zf2 a.pupot_zf_qq{ background-position:left 0;}
+.popup_zf a.popup_zf_sina,.popup_zf2 a.popup_zf_sina{ background-position:left -16px;}
+.popup_zf a.popup_zf_rr,.popup_zf2 a.popup_zf_rr{ background-position:left -32px;}
+.popup_zf a.popup_zf_kaixin,.popup_zf2 a.popup_zf_kaixin{ background-position:left -48px;}
+
+  </style>
 <%- end %>
 <%- content_for :tail do %>
   <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
@@ -170,7 +180,7 @@
   </p>
   <hr class="border2 border2_mt2">
   <div class="huaxun_intro">
-    <%= raw @hx_profile.content %>
+    <%= raw @hx_profile.content if @hx_profile%>
   </div>
 </div>
 <% if current_user && current_user.role_id != 3 %>
