@@ -5,6 +5,8 @@ Rack::MiniProfiler.config.skip_paths << "/assets/"
 Rack::MiniProfiler.config.skip_paths << "/system/"
 Rack::MiniProfiler.config.skip_paths << "/files/"
 
+Rack::MiniProfiler.config.start_hidden = true
+
 # set RedisStore
 if Rails.env.production?
   uri = URI.parse("localhost:6379")
