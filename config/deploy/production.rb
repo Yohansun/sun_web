@@ -47,6 +47,7 @@ namespace :deploy do
 end
 
 before 'bundle:install', 'deploy:symlink_shared'
+after 'bundle:install', 'deploy:migrate'
 #after "deploy:symlink_shared","refresh_sitemaps","update_crontab"
 
 after "deploy:update", "newrelic:notice_deployment"
