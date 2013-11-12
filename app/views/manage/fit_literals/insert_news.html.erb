@@ -35,7 +35,7 @@
 							<%= link_to "取消", fit_literals_path %>
 						</td>
 						<td>
-							<select name="order_id" class="input-medium literal_select">
+							<select name="order_id" class="input-medium literal_select" disabled>
 					      <option>1</option>
 					      <option>2</option>
 					      <option>3</option>
@@ -44,6 +44,7 @@
 					      <option>6</option>
 					    </select>
 						</td>
+						<input name="order_id" value="1" style="display:none;">
 						<td>
 							<input name="title" value="">
 						</td>
