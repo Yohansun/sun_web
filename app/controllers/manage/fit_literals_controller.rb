@@ -12,10 +12,12 @@ class Manage::FitLiteralsController < Manage::BaseController
 
   def update
     @new = FitLiteral.find params[:fit_literal_id]
+    @another_new = FitLiteral.find_by_order_id params[:order_id]
+    @another_new.order_id = @new.order_id
     @new.order_id = params[:order_id] if params[:order_id]
     @new.title = params[:title] if params[:title]
     @new.link = params[:link] if params[:link]
-    if @new.save
+    if @new.save && @another_new.save
       render js: "alert('保存成功!');location.reload();"
     end
   end
