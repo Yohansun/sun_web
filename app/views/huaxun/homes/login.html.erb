@@ -29,12 +29,7 @@
           <div class="control-group pull-left">
             <label for="" class="control-label">用户名</label>
             <div class="controls">
-              <input id="username" type="text" placeholder="用户名" name="user[login]" value=""/>
-            </div>
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"> 记住用户名
-              </label>
+              <input id="username" type="text" name="user[login]" value=""/>
             </div>
           </div>
           <div class="control-group pull-left">
@@ -42,18 +37,6 @@
             <div class="controls">
               <input id="password" type="password" class="fl" name="user[password]"/>
             </div>
-            <!-- <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"> 记住密码
-              </label>
-            </div> -->
-            <% if devise_mapping.rememberable? -%>
-              <div class="controls">
-                <label class="checkbox">
-                  <%= f.check_box :remember_me %> 记住密码
-                </label>
-              </div>
-            <% end -%>
           </div>
         </fieldset>
         <div class="control-group">

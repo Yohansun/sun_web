@@ -54,7 +54,9 @@
         </div>
       </div>
     </div>
-    <%= render :partial => "layouts/nav" %>
+    <% if current_user && current_user.genre == 'huaxun' %>
+      <%= render :partial => "layouts/nav" %>
+    <% end %>
     <%= render partial: 'layouts/flash_message' %>
     <%= yield %>
     <%= yield :tail %>
