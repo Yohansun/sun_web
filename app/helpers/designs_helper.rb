@@ -10,7 +10,6 @@ module DesignsHelper
   end
 
   def design_order_option
-    ['排序','最新','最热','未来之星']
+    ['排序','最新','最热','未来之星','因爱之名']
   end
-
 end
