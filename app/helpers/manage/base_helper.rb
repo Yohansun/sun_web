@@ -7,7 +7,7 @@ module Manage::BaseHelper
       	'home'
       when /channel_tips/
       	'channel_tips'
-      when /banner_group|banner_home|banner_channel|banner_refresh|banner_images|special_kv/
+      when /banner_group|banner_home|banner_channel|banner_refresh|banner_company|banner_images|special_kv/
       	'banner'
       when /tag_sorts|home_heads|seo_sites|home_liter_heads|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
         'design_images'
@@ -49,6 +49,16 @@ module Manage::BaseHelper
         'nothing'
     end
     "manage/banner_images/#{label_name}"
+  end
+
+  def company_label_path
+    label_name = case params[:page_name]
+      when '华浔品味装饰'
+        'company_label1'
+      else
+        'nothing'
+    end
+    "manage/banner_company/#{label_name}"
   end
 
   def left_menu_active key
