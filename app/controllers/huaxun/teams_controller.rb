@@ -8,9 +8,9 @@ class Huaxun::TeamsController < Huaxun::BaseController
     @teams = Team.where("is_save = 1")
     if params[:serch_value].present?
       if params[:serch_name] == "1"
-        @teams = @teams.where(name: params[:serch_value])
+        @teams = @teams.where("name like ?", "%#{params[:serch_value]}%")
       else
-        @teams = @teams.where(job: params[:serch_value])
+        @teams = @teams.where("job like ?", "%#{params[:serch_value]}%")
       end
     end
     if params[:start_time].present?
@@ -34,7 +34,7 @@ class Huaxun::TeamsController < Huaxun::BaseController
     team.url = params[:teams][:url]
     team.is_save = 1
     team.save
-    redirect_to teams_path
+    redirect_to teams_path, notice: "团队人员新建成功！"
   end
 
   def edit
@@ -47,7 +47,7 @@ class Huaxun::TeamsController < Huaxun::BaseController
     team.job = params[:teams][:job]
     team.url = params[:teams][:url]
     team.save
-    redirect_to teams_path
+    redirect_to teams_path, notice: "团员人员修改成功！"
   end
 
   def create_image
