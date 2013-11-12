@@ -110,7 +110,21 @@ module ApplicationHelper
           "【#{@design_name}】大图  【#{@author}】 -  立邦icolor"
         #设计之星
         elsif controller_name == 'weekly_stars' && %w{weekly_stars_week index show}.include?(action_name)
-          "【#{@design_name}】【#{@company_name}】【#{@author}】 - 立邦icolor设计之星"
+          str = ""
+          if @design_name.present?
+            str += "【#{@design_name}】"
+          end
+          if @company_name.present?
+            str += "【#{@company_name}】"
+          end
+          if @author.present?
+            str += "【#{@author}】"
+          end
+          if @design_name.blank? && @company_name.blank? && @author.blank?
+            "立邦icolor设计之星"
+          else
+            str +=" - 立邦icolor设计之星"
+          end
         elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_color'
           "【月度色彩之星 | 设计之星】- 设计鉴赏" + '-' + BASE_TITLE
         elsif controller_name == 'weekly_stars' && action_name == 'weekly_stars_month_design'
