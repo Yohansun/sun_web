@@ -57,7 +57,7 @@ class Huaxun::HxKvsController < Huaxun::BaseController
       HxKv.where(["position > ?", @kv.position]).each {|kv| kv.increment!(:position, by = -1)}
       @kv.destroy
     end
-    render js: "location.reload();"
+    render js: "location.href='/huaxun/hx_kvs?position=1';"
   end
 
 end
