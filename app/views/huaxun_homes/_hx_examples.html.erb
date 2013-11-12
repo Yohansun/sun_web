@@ -20,11 +20,11 @@
           <p class="dott1 p2">
             <span><i class="icon-i16 icon-xin_gray2"></i>
               <a href="<%=update_vote_huaxun_homes_path(id: example.id)%>" data-method="post" data-remote="true" class="week-vote" style="color: #333;">
-                <%= example.votes_count %>
+                <%= example.votes_count.present? ? example.votes_count : 0 %>
               </a>
             </span>
             <span><i class="icon-i16 icon-comment1"></i><%= example.comment_count %></span>
-            <span class="noborder zf"><i class="icon-i16 icon-share1"></i><em><%= example.shares_count %></em></span>
+            <span class="noborder zf"><i class="icon-i16 icon-share1"></i><em><%= example.shares_count.present? ? example.shares_count : 0 %></em></span>
           </p>
           <%= forward_links("#iColor分享#来自#{example.name}的作品【#{example.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", huaxun_homes_path, example.img.url, example.id.to_s, "huaxun") %>
         </li>

@@ -1,16 +1,16 @@
 # encoding: utf-8
 class Huaxun::ExamplesController <  Huaxun::BaseController
   def index
-    @examples = Example.where(is_save: true).order("updated_at desc").page(params[:page]).per(8)
+    @examples = Example.where(is_save: true).order("updated_at desc").page(params[:page]).per(6)
   end
 
   def search
     @examples = Example.where(is_save: true)
     if params[:search_value].present?
       if params[:search_name] == "1"
-        @examples = @examples.where(title: params[:search_value])
+        @examples = @examples.where("title like ?" ,"%#{params[:search_value]}%")
       else
-        @examples = @examples.where(name: params[:search_value])
+        @examples = @examples.where("name like ?", "%#{params[:search_value]}%")
       end
     end
     if params[:start_time].present?
@@ -31,7 +31,7 @@ class Huaxun::ExamplesController <  Huaxun::BaseController
     if params[:choice]
       @examples = @examples.where(choice: true)
     end
-     @examples = @examples.where(updated_at: start_time.beginning_of_day..end_time.end_of_day).order("updated_at desc").page(params[:page]).per(8)
+     @examples = @examples.where(updated_at: start_time.beginning_of_day..end_time.end_of_day).order("updated_at desc").page(params[:page]).per(6)
     render :index
   end
 
@@ -64,7 +64,7 @@ class Huaxun::ExamplesController <  Huaxun::BaseController
     examp.comment_count = params[:comment_count] if params[:comment_count]
     examp.shares_count = params[:shares_count] if params[:shares_count]
     examp.save
-    redirect_to examples_path
+    redirect_to examples_path, notice: '案例新建成功!'
   end
 
   def edit
@@ -93,7 +93,7 @@ class Huaxun::ExamplesController <  Huaxun::BaseController
     examp.comment_count = params[:comment_count] if params[:comment_count]
     examp.shares_count = params[:shares_count] if params[:shares_count]
     examp.save
-    redirect_to examples_path
+    redirect_to examples_path, notice: '案例修改成功!'
   end
 
   def show
