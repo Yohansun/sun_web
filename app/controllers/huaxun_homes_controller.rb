@@ -1,6 +1,7 @@
 # encoding: utf-8
 class HuaxunHomesController < ApplicationController
   def index
+    @banner1,@banner2 = IBanner.page_name('华浔品味装饰').where(position: [1,2]).group(:position)
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2
