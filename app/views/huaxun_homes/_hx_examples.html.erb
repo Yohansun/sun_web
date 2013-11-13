@@ -23,7 +23,7 @@
                 <%= example.votes_count.present? ? example.votes_count : 0 %>
               </a>
             </span>
-            <span><i class="icon-i16 icon-comment1"></i><%= example.comment_count %></span>
+            <span><i class="icon-i16 icon-comment1"></i><%= example.comment_count.present? ? example.comment_count : 0 %></span>
             <span class="noborder zf"><i class="icon-i16 icon-share1"></i><em><%= example.shares_count.present? ? example.shares_count : 0 %></em></span>
           </p>
           <%= forward_links("#iColor分享#来自#{example.name}的作品【#{example.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", huaxun_homes_path, example.img.url, example.id.to_s, "huaxun") %>

@@ -3,7 +3,7 @@
 desc "添加华讯用户"
 task :add_user_huaxun => :environment  do
   user = User.new
-  user.name = "花浔品味服饰"
+  user.name = "华浔品味装饰"
   user.username = "huaxun"
   user.password = '12345678'
   user.types = '设计师'

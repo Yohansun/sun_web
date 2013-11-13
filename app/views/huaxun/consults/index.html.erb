@@ -11,12 +11,17 @@
   <script type="text/javascript">
     $(function () {
       $('.consult_list').on('click', '.js-consult_review', function(){
-        $(this).parent('.consult_item').siblings().find('form.js-consult_form').addClass('hide');
-        $(this).parent('.consult_item').find('form.js-consult_form').removeClass('hide');});
-     });
-    // function is_image(){
-    //   var image_id = $("#image_id").val();
-    // }
+        $(this).parent('li.consult_item').siblings().find('form.js-consult_form').addClass('hide');
+        $(this).parent('li.consult_item').find('form.js-consult_form').toggleClass('hide');
+      });
+
+      $('form.js-consult_form').submit(function(){
+        var area = this.getElementsByTagName('textarea')[0]
+        if(!$.trim(area.value).length){
+          return confirm(' 删除所有回复内容将会变成未回复状态，是否继续？')
+        }
+      })
+    });
   </script>
 <% end %>
 <div class="container-fluid">
@@ -69,6 +74,7 @@
                   <a class="exp_btn exp-block-trigger pull-left" href="javascript:;"><i class="icon-addface"></i>添加表情</a>
                   <button class="btn btn-danger">提交回复</button>
                 </div>
+                <!--  data-confirm=" 删除所有回复内容将会变成未回复状态，是否继续？" -->
               <% end %>
             </div>
             <span class="span2">

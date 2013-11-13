@@ -12,8 +12,13 @@ class Huaxun::ConsultsController < Huaxun::BaseController
       rep_reply.reply_id = params[:reply_id]
       rep_reply.content = params[:rep_content]
       rep_reply.save
+      redirect_to consults_path, notice: "回复成功!"
+    else
+      rep_reply = RepReply.find(params[:rep_res_id]) if params[:rep_res_id].present?
+      rep_reply.destroy if rep_reply.present?
+      redirect_to consults_path, notice: "删除成功!"
     end
-    redirect_to consults_path
+
   end
 
   def search_reply

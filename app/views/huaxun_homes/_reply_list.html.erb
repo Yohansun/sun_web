@@ -26,15 +26,21 @@
             <div class="re_comments">
               <i class="icon-i16 icon-toparrow"></i>
               <p>
-                <strong>
-                  <% if rep.user.name.present? %>
+                <% if rep.user.genre == 'huaxun' %>
+                  <strong style="background:red;color:#fff;">
                     <%=rep.user.name %>
-                  <% elsif rep.user.username.present? %>
-                    <%=rep.user.username %>
-                  <% else %>
-                    手机/邮箱登录用户
-                  <% end %>
-                </strong>
+                  </strong>
+                <% else %>
+                  <strong>
+                    <% if rep.user.name.present? %>
+                      <%=rep.user.name %>
+                    <% elsif rep.user.username.present? %>
+                      <%=rep.user.username %>
+                    <% else %>
+                      手机/邮箱登录用户
+                    <% end %>
+                  </strong>
+                <% end %>
                 <span class="muted">说</span>
               </p>
               <p class="muted J_resulte"><%=rep.content %></p>
