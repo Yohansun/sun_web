@@ -167,4 +167,22 @@ class HomeController < ApplicationController
       @hds.save
     end
   end
+
+  def upload_img
+    result = {}
+    params.each do |key, value|
+      if key != 'filedata'
+        params.delete(key)
+      end
+    end
+    @upload_file = UploadFile.new(params)
+    if @upload_file.save
+      result[:err] = ''
+      result[:msg] = @upload_file.filedata.url
+    else
+      result[:err] = 'image'
+      result[:msg] = 'upload error'
+    end
+    render :text => result.to_json
+  end
 end

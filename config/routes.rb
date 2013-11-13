@@ -44,6 +44,7 @@ Icolor::Application.routes.draw do
   get "home/image_vote" => "home#image_vote"
   get "home/get_vote" => "home#get_vote"
   post "home/update_vote" => "home#update_vote"
+  post "home/upload_img" => "home#upload_img"
 
   resources :votes
 

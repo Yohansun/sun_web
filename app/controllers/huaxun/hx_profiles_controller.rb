@@ -8,7 +8,7 @@ class Huaxun::HxProfilesController < Huaxun::BaseController
 
   def update
     @hx_profile = HxProfile.find(params[:id])
-    @hx_profile.update_attribute(:content,params[:content]) unless @hx_profile.nil?
+    @hx_profile.update_attribute(:content,params[:hx_profile][:content]) unless @hx_profile.nil?
     redirect_to hx_profiles_path, notice: '保存成功!'
   end
 end
