@@ -710,6 +710,13 @@ Icolor::Application.routes.draw do
       end
     end
 
+    resources :banner_activities do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
     resources :home_life_videos do
       collection do
         post :create_image
