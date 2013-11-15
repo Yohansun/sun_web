@@ -1,6 +1,5 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "style", "dd"%>
-
     <style type="text/css">
       ul.design_filter li{float:left;background:white; margin-right:5px;list-style:none;}
       .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
@@ -62,7 +61,6 @@
 <div class='wrapper pb60 group' style="margin:0 auto;">
 <form class="design_tit group" method="get" id="filter_form">
   <ul class="design_filter unstyled nomargin">
-    <!-- <form method="get" id="filter_form"> -->
     <li style="width:82px;">
       <%= select_tag "order", options_for_select(design_order_option, params[:order]), :style => "width:82px" %>
     </li>
@@ -72,9 +70,6 @@
     <li>
        <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), :style => "width:83px;" %>
     </li>
-    <!-- <li> -->
-      <%#= select_tag "room_type",options_for_select(design_room_type_option, params[:room_type]), class: "arrow_filter",:onchange => "$('#filter_form').submit()" %>
-    <!-- </li> -->
     <li>
       <select id="province" class="level_1 arrow_filter" name="area_head">
       </select>
@@ -87,11 +82,6 @@
         <% image_tag  "design_search_love.jpg", size: '77x21' %>
       <% end %>
     </li>
-
-    <!-- <li>
-      <a href="/designs?q=super_refresh" style="margin:0;padding:0;"><img src="<%#= asset_path "landingpage/refresh_btn.jpg"%>"/></a>
-    </li> -->
-    <!-- </form> -->
   </ul>
   <div class="upload_btn">
     <% if current_user -%>
@@ -111,9 +101,6 @@
       <%- if design.cover_img %>
         <%= link_to user_design_path(design.user_id, design) do %>
           <%= image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}") %>
-          <%#- if Design.time_range('2013-03-01 00:00:00','2013-05-31 23:59:59').exists?(:id => design.id) || design.cover_img.source == "yda" %>
-            <!-- <span class="design_tag_star"><%#= image_tag('tag_star.png') %></span> -->
-          <%#- end %>
         <%- end %>
       <%- end %>
       <h3><%= design.title %></h3>
@@ -123,7 +110,8 @@
       </p>
 
       <p class="p2 p2_popup_zf group">
-        <span class="zf ft12">转发 (<em><%= design.shares_count %></em>)</span><a href="/designs/<%= design.id %>"><span class="pl ft12">评论 (<%= design.comments_count %>)</span></a>
+        <span class="zf ft12">转发</span>
+        <a href="/designs/<%= design.id %>"><span class="pl ft12">评论</span></a>
       </p>
       <%
         cover_img = design.cover_img.file.url if design.cover_img
