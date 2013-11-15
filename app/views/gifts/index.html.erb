@@ -32,7 +32,8 @@ _background-image: url(<%= asset_path 'winner/winner-bullets.gif' %>);
 .winner-color{background: #9f1b1b;}
 .winner-color h2{width: 441px;background-position: -254px 0;}
 </style>
- <div class="main winner-bin">
+ <div class="main winner-bin pr">
+    <a href="/winnings" style="position:absolute;top:270px;left:504px;width:189px;height:43px;"><img src="<%=asset_path 'gifts/botton.png'%>" alt="" /></a>
     <h1 class="nomargin">因爱之名 刷新生活 ————立邦携手万名设计师为您免费设计新家</h1>
         <% if @regs.present? %>
             <div class="winner-reg pr pd30">
