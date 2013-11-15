@@ -1,0 +1,208 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "winnings/winner_list"%>
+  <!--[if IE]>
+  <style>
+  .win_pages .win_details,.winner_list li a.img{position:relative;}
+  </style>
+  <![endif]-->
+<% end -%>
+<div class="container">
+  <h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
+  <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' if @banner1 %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_1000x85), class: 'mt10' if  @banner1 %></a>
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li><a href="#">精彩活动</a> > </li>
+    <li class="active">获奖名单</li>
+  </ul>
+  <hr class="border2 border2_mt2">
+
+  <ul class="nav nav-tabs winner_tab" id="winner_tab">
+    <li class="active"><a href="#winner_tab1" data-toggle="tab">获奖名单</a></li>
+    <li><a href="#winner_tab2" data-toggle="tab">评委介绍</a></li>
+  </ul>
+
+  <div class="tab-content winner_list">
+    <div class="tab-pane active" id="winner_tab1">
+      <div class="index_main win_section1 noborder">
+        <h2 class="text-center title">
+          最佳视觉设计奖
+          <small class="help-block">best visual design award</small>
+        </h2>
+        <ul class="unstyled clearfix">
+          <% @visual.each do |vis| %>
+            <li>
+              <div class="pull-left auther_img">
+                <% if File.exist?("public/#{vis.image_url}")%>
+                  <img src="<%= vis.image_url %>" alt="" />
+                <% else %>
+                  <img src="<%= asset_path 'winner_list/mr.jpg' %>" alt="" />
+                <% end %>
+                <div class="over_btn text-center"><a class="check_btn" target="_blank" href="<%= vis.url %>">查看获奖作品></a></div>
+              </div>
+              <div class="win_details">
+                <h3><a href="javascript:;" class="name"><%= vis.name %></a><small class="help-inline"><%= vis.area %></small></h3>
+                <p><%= vis.centent %></p>
+                <div class="auther_works clearfix">
+                  <% vis.winning_images.each do |image| %>
+                    <img src="<%=image.image_url%>">
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <h2 class="text-center title">
+          最佳配色设计奖
+          <small class="help-block">Best Color Design Award</small>
+        </h2>
+        <ul class="unstyled clearfix">
+          <% @color.each do |color| %>
+            <li>
+              <div class="pull-left auther_img">
+                <img src="<%= color.image_url %>" alt="" />
+                <div class="over_btn text-center"><a class="check_btn" target="_blank" href="<%= color.url %>">查看获奖作品></a></div>
+              </div>
+              <div class="win_details">
+                <h3><a href="javascript:;" class="name"><%= color.name %></a><small class="help-inline"><%= color.area %></small></h3>
+                <p><%= color.centent %></p>
+                <div class="auther_works clearfix">
+                  <% color.winning_images.each do |image| %>
+                    <img src="<%=image.image_url%>">
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <h2 class="text-center title">
+          最佳空间规划奖
+          <small class="help-block">Best Space Planning Award</small>
+        </h2>
+        <ul class="unstyled clearfix">
+          <% @space.each do |space| %>
+            <li>
+              <div class="pull-left auther_img">
+                <img src="<%= space.image_url %>" alt="" />
+                <div class="over_btn text-center"><a class="check_btn" target="_blank" href="<%= space.url %>">查看获奖作品></a></div>
+              </div>
+              <div class="win_details">
+                <h3><a href="javascript:;" class="name"><%= space.name %></a><small class="help-inline"><%= space.area %></small></h3>
+                <p><%= space.centent %></p>
+                <div class="auther_works clearfix">
+                  <% space.winning_images.each do |image| %>
+                    <img src="<%=image.image_url%>">
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="index_main win_pages win_section2 noborder">
+        <h2 class="text-center title">
+          特殊墙面效果
+          <small class="help-block">Special effect of the wall Award</small>
+        </h2>
+        <ul class="unstyled clearfix win_lists" id="spec_list">
+          <%= render :partial => "spec_list" %>
+        </ul>
+        <div class="text-center" id="spec_page">
+          <%= render :partial => "spec_page" %>
+        </div>
+
+
+      </div>
+      <div class="index_main win_pages win_section3 noborder">
+        <h2 class="text-center title">
+          网络人气奖
+          <small class="help-block">Network Award</small>
+        </h2>
+        <ul class="unstyled clearfix win_lists" id="network_list">
+          <%= render :partial => "network_list" %>
+        </ul>
+        <div class="text-center" id="network_page">
+          <%= render :partial => "network_page" %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="winner_tab2">
+        <div class="index_main judge1_list noborder">
+          <ul class="unstyled clearfix">
+            <li>
+              <a href="javascript:;" class="pull-left img"><img src="<%= asset_path 'winner_list/judgers/judge_img.jpg'%>" alt="" /></a>
+              <div class="win_details">
+                <a href="javascript:;" class="help-block name">李进</a>
+                <p style="margin-top:80px;">高级室内设计师</p>
+                <p>加拿大Ryerson大学访问学者</p>
+                <p>全国杰出中青年室内建筑师</p>
+                <p>长期从事设计研究与教育工作</p>
+                <p>现为上海市室内设计专业水平认证专家</p>
+              </div>
+            </li>
+            <li>
+              <a href="javascript:;" class="pull-left img"><img src="<%= asset_path 'winner_list/judgers/judge_img2.png'%>" alt="" /></a>
+              <div class="win_details">
+                <a href="javascript:;" class="help-block name">来增祥</a>
+                <p>毕业于列宁格勒建工学院</p>
+                <p>现任同济大学建筑系教授</p>
+                <p>曾获上海市重点工程个人立功奖章、上海优秀建筑装饰专业设计一等奖、北京人民大会堂国宴厅装饰设计荣誉证书、北京人民大会堂上海厅装饰设计荣誉证书等奖项。</p>
+                <p>主要作品：上海一号线地铁新闸路站(建筑与室内设计)、北京天安门广场复八线地铁天东站、天西站建筑装饰与室内设计等重大项目。</p>
+              </div>
+            </li>
+            <li>
+              <a href="javascript:;" class="pull-left img"><img src="<%= asset_path 'winner_list/judgers/judge_img3.png'%>" alt="" /></a>
+              <div class="win_details">
+                <a href="javascript:;" class="help-block name">郑曙旸</a>
+                <p>毕业于中央工艺美术学院工业美术系</p>
+                <p>文学士学位</p>
+                <p>现任清华大学美术学院副院长、教授、博士生导师、艺术设计分部主任。</p>
+                <p>论 著： 《室内设计程序》《环境艺术设计》 《景观设计》等。</p>
+                <p>主要作品：</p>
+                <p>匈牙利布达佩斯香港楼酒店室内设计、主持制定2008北京奥运会城市环境景观规划纲要</p>
+              </div>
+            </li>
+            <li>
+              <a href="javascript:;" class="pull-left img"><img src="<%= asset_path 'winner_list/judgers/judge_img4.png'%>" alt="" /></a>
+              <div class="win_details">
+                <a href="javascript:;" class="help-block name">彭军</a>
+                <p style="margin-top:80px;">从事室内设计29年，毕业于天津美术学院环艺设计，擅长现代风格现任天津美术学院艺术设计学院副院长、环境艺术设计系主任英国布鲁乃尔大学、诺森比亚大学高级访问学者；中国美术家协会会员。</p>
+              </div>
+            </li>
+            <li>
+              <a href="javascript:;" class="pull-left img"><img src="<%= asset_path 'winner_list/judgers/judge_img5.png'%>" alt="" /></a>
+              <div class="win_details">
+                <a href="javascript:;" class="help-block name">王琼</a>
+                <p style="margin-top:120px;">毕业于西北师范学院美术系</p>
+                <p>任金螳螂建筑与城市环境学院副院长、室内设计系系主任</p>
+              </div>
+            </li>
+            <li>
+              <a href="javascript:;" class="pull-left img"><img src="<%= asset_path 'winner_list/judgers/judge_img6.jpg'%>" alt="" /></a>
+              <div class="win_details">
+                <a href="javascript:;" class="help-block name">王铁</a>
+                <p>副院长、教授、硕士生导师</p>
+                <p>中国建筑装饰协会专家组 副组长</p>
+                <p>中国建筑装饰协会 常务理事 设计委员会 副主任</p>
+                <p>中国美术家协会 会员</p>
+                <p>中国美术家协会环境艺术委员会 委员</p>
+                <p>著作：<br>
+                  文字空间到视觉空间设计 湖南美术出版社<br>
+                  建筑设计与环境 安徽美术出版社<br>
+                  室内建筑空间创造 辽宁科学技术出版社
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="footer_banner pull-left">
+      <a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);'  if @banner7%>" target="_blank"><%= image_tag @banner7.try(:file).try(:url, :list_670x85) if @banner7 %></a>
+    </div>
+    <div class="footer_banner pull-right">
+      <a href="<%= @banner8.url? ? @banner8.url : 'javascript:void(0);'  if @banner8%>" target="_blank"><%= image_tag @banner8.try(:file).try(:url, :list_310x85) if @banner8 %></a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<% @special.each do |special| %>
+  <li>
+    <div class="pull-left auther_img">
+      <% if File.exist?("public/#{special.image_url}")%>
+        <img src="<%=special.image_url%>" alt="" />
+      <% else %>
+        <img src="<%= asset_path 'winner_list/mr.jpg' %>" alt="" />
+      <% end %>
+      <div class="over_btn text-center"><a class="check_btn" href="<%=special.url%>">查看获奖作品></a></div>
+    </div>
+    <div class="win_details">
+      <h3><a href="javascript:;" class="name"><%=special.name%></a><small class="help-inline"><%=special.area%></small></h3>
+      <p><%=special.centent%></p>
+      <div class="auther_works clearfix">
+        <% special.winning_images.each do |image| %>
+          <% if File.exist?("public/#{image.image_url}")%>
+            <img src="<%=image.image_url%>">
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

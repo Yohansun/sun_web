@@ -1,0 +1,23 @@
+<% @network.each do |network| %>
+  <li>
+    <div class="pull-left auther_img">
+      <% if File.exist?("public/#{network.image_url}")%>
+        <img src="<%=network.image_url%>" alt="" />
+      <% else %>
+        <img src="<%= asset_path 'winner_list/mr.jpg' %>" alt="" />
+      <% end %>
+      <div class="over_btn text-center"><a class="check_btn" href="<%=network.url%>">查看获奖作品></a></div>
+    </div>
+    <div class="win_details">
+      <h3><a href="javascript:;" class="name"><%=network.name%></a><small class="help-inline"><%=network.area%></small></h3>
+      <p><%=network.centent%></p>
+      <div class="auther_works clearfix">
+        <% network.winning_images.each do |image| %>
+          <% if File.exist?("public/#{image.image_url}")%>
+            <img src="<%=image.image_url%>" alt="" />
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>
