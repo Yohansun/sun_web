@@ -36,15 +36,11 @@ class DesignsController < ApplicationController
   end
 
   def index
-    sort_input = MagicSetting.recommend_designs
     if @user
-      @designs = @user.designs.order("designs.id in (#{sort_input}) desc").order("designs.id desc").page(params[:page])
-
+      @designs = @user.designs.order("designs.id desc").page(params[:page]).per(9)
       load_skin
     else
-      @designs = Design.order("designs.id in (#{sort_input}) desc").page(params[:page]).per(9)
-    end
-    unless @designs.nil?
+      @designs = Design.includes(:user).joins(:design_images).where("users.id is not null").group("designs.id").order("designs.id desc")
       if params[:order] == "最热"
         @designs = @designs.order("designs.votes_count desc")
       elsif params[:order] == "未来之星"
@@ -67,7 +63,7 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
-      @designs = @designs.includes(:design_images,:user).joins(:design_images).where('not design_images.id is null')
+      @designs = @designs.page(params[:page]).per(9)
     end
 
     sign_in(@user) if current_admin && @user
