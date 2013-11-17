@@ -24,6 +24,12 @@ Icolor::Application.routes.draw do
 
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"
+  resources :winnings do
+    collection do
+      get :get_special
+      get :get_network
+    end
+  end
 
   get "/shuaxin" => redirect("/shuaxin/index.html")
   get "/21days" => redirect("/21days/index.html")
