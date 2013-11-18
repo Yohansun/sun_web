@@ -9,14 +9,14 @@
     .zoom {
       display:inline-block;
     }
-    
+
     /* magnifying glass icon */
     .zoom:after {
       content:'';
-      display:block; 
-      width:33px; 
-      height:33px; 
-      position:absolute; 
+      display:block;
+      width:33px;
+      height:33px;
+      position:absolute;
       top:0;
       right:0;
     }
@@ -24,6 +24,7 @@
       display: block;
     }
     .zoom img::selection { background-color: transparent; }
+    .image_title{border:1px solid #ddd;padding:4px 6px;vertical-align: middle;}
   </style>
   <%= javascript_include_tag "LinkageSelect.js", "/location.js", "keymaster.min", "jquery.zoom" , 'icolor', 'magic_content/image_library', 'jquery.blockui' %>
 	<script type="text/javascript">
@@ -42,9 +43,12 @@
           $(this).tooltip('hide');
         }
       );
+      $('.image_title').change(function() {
+        $('#image_title').val($(this).val());
+      });
     });
     $(document).ready(function(){
-      $('#ex1').zoom(); 
+      $('#ex1').zoom();
     });
 	</script>
 <%- end %>

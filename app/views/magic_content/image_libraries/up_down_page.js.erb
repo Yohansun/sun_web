@@ -4,4 +4,7 @@
 $('#image-box').replaceWith('<%=j render partial: 'image_with_tags', locals: {
   image: @image, categories: @categories, image_tag_ids: @image_tag_ids } %>');
 iColor.ImageLibrary.init_area_selection(window.area_data, '<%= @image.area_id %>', <%= @image.areas %>);
+$('.image_title').change(function() {
+  $('#image_title').val($(this).val());
+});
 <%- end -%>
