@@ -53,15 +53,22 @@
           </span>
           <a class="help-inline a_hover_red" target="_blank" href="http://shop.nipponpaint.com.cn/">立邦淘宝商城</a> |
           <a class="help-inline subscribe a_hover_red" href="javascript:;">订阅电子期刊</a> |
-          <a class="help-inline js-share_btn" href="#">分享</a>
-          <div class="bshare-custom jiathis_area">
-            <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
-            <a title="分享到开心网" class="bshare-kaixin001"></a>
-            <a title="分享到人人网" class="bshare-renren"></a>
-            <a title="分享到QQ空间" class="bshare-qzone"></a>
-            <a title="分享到腾讯微博" class="bshare-qqmb"></a>
-            <span class="BSHARE_COUNT bshare-share-count">0</span>
+          <a class="help-inline js-share_btn" href="javascript:void(0);">分享</a>
+          <!-- Baidu Button BEGIN -->
+          <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-share_toggle">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_t163"></a>
+            <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a>
           </div>
+          <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+          <script type="text/javascript" id="bdshell_js"></script>
+          <script type="text/javascript">
+          document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+          </script>
+          <!-- Baidu Button END -->
           <a data-toggle="modal" class="btn btn-mini btn_gray login js-login nomargin" href="#login_modal">登录</a>
           <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red nomargin">免费注册</a>
           <a style="display:inline-block;"><%= image_tag "nippon.png" %></a>
@@ -276,6 +283,11 @@
         $('.js-close').on('click', function(){
           $(this).parent().addClass('hidden');
           $(this).parent().siblings().removeClass('hidden');
+        });
+
+        //share
+        $('.js-share_btn,.js-share_toggle').hover(function(){
+          $('.js-share_toggle').toggle()
         });
       }($));
     });

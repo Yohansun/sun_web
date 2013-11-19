@@ -44,16 +44,16 @@ $(function(){
         });
 });
 /*jiathis*/
-$(function(){
-    $('.jiathis_btn').hover(function(){
-        $('.jiathis_area').show();
-    },function(){
-        $('.jiathis_area').hide();
-    });
-    $('.jiathis_area').hover(function(){
-        $(this).toggle();
-    });
-});
+// $(function(){
+//     $('.jiathis_btn').hover(function(){
+//         $('.jiathis_area').show();
+//     },function(){
+//         $('.jiathis_area').hide();
+//     });
+//     $('.jiathis_area').hover(function(){
+//         $(this).toggle();
+//     });
+// });
 /*server & subs*/
 function o_in(){
     $('#overlay').fadeIn('fast');
