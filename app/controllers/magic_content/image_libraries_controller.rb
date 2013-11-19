@@ -44,6 +44,7 @@ module MagicContent
       #   redirect_to main_app.image_library_categories_path(@image.id) and return
       # end
       @image.area_id = params[:area_id]
+      @image.title = params[:title]
       @image.last_user_id = current_admin.id
       @image.last_updated_at = Time.now
       if params[:tags].present?
