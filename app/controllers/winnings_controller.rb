@@ -1,10 +1,10 @@
 # encoding: utf-8
 class WinningsController < ApplicationController
   def index
-    i_banners = IBanner.page_name('图库首页')
+    i_banners = IBanner.page_name('因爱设计师获奖名单')
     @banner1 = i_banners.find_by_position(1)
-    @banner7 = i_banners.find_by_position(7)
-    @banner8 = i_banners.find_by_position(8)
+    @banner7 = i_banners.find_by_position(2)
+    @banner8 = i_banners.find_by_position(3)
     @visual = Winning.where("name in ('童淼','王虎')")
     @color = Winning.where("name in ('张守义','刘进')")
     @space = Winning.where("name in ('蒋奇肱','李志成')")

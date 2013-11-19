@@ -41,3 +41,34 @@ task :add_winning_image => :environment  do
     end
   end
 end
+
+task :update_winning_image => :environment  do
+  w = Winning.find_by_name("徐洁斌")
+  w.winning_images.each do |wi|
+    wi.destroy
+  end
+  (1..4).each do |i|
+    winning_image = WinningImages.new
+    winning_image.image_url = "/system/winning_image/xujiebin#{i}.jpg"
+    winning_image.winning_id = w.id
+    if winning_image.save
+      p "保存成功#{winning_image.id}"
+    else
+      p "保存失败#{winning_image.id}"
+    end
+  end
+end
+
+task :update_winning_image2 => :environment  do
+  w = Winning.find_by_name("徐结斌")
+  (1..4).each do |i|
+    winning_image = WinningImages.new
+    winning_image.image_url = "/system/winning_image/xujiebin2#{i}.jpg"
+    winning_image.winning_id = w.id
+    if winning_image.save
+      p "保存成功#{winning_image.id}"
+    else
+      p "保存失败#{winning_image.id}"
+    end
+  end
+end
