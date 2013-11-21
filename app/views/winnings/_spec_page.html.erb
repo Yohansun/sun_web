@@ -1,2 +1,2 @@
-<%= link_to_previous_page @special, raw('<small>上一页</small>'), :class => "pager_btn nopadding next", :remote => true, params: {:controller => 'winnings', :action => 'get_special'} %>
-<%= link_to_next_page @special, raw('<small>下一页</small>'), :class => "pager_btn nopadding prve", :remote => true, params: {:controller => 'winnings', :action => 'get_special'} %>
+<%= link_to_previous_page @special, raw('<small>上一页</small>'), :title => "", :class => "pager_btn nopadding next", :remote => true, params: {:controller => 'winnings', :action => 'get_special'} %>
+<%= link_to_next_page @special, raw('<small>下一页</small>'), :title => "", :class => "pager_btn nopadding prve", :remote => true, params: {:controller => 'winnings', :action => 'get_special'} %>
