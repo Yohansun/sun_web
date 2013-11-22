@@ -169,7 +169,7 @@
   <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
 </p>
 
-<h4><%= @image.title %></h4>
+<h4 class="image_title clearfix"><small class="pull-right">我们为您精选了<strong><%= @img_count %></strong> 张图片</small><%= @image.title.present? ?  @image.title :  @image.design.title %></h4>
 <div class="index_main clearfix">
   <div class="pull-left imgbase_in_left">
     <div class="slides_box clearfix">
@@ -178,13 +178,15 @@
       </div>
       <div class="map-kv-slider pull-right">
         <% if @up_id %>
-          <a href="/images/<%=@up_id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
           <a href="/images/<%=@image_arr.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
+          <hr class="nomargin">
+          <a href="/images/<%=@up_id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
         <% else %>
-          <a class="map-prev">上一张图</a>
           <a class="map-prev-bullet">prev</a>
+          <hr class="nomargin">
+          <a class="map-prev">上一张图</a>
         <% end %>
-        <div class="map-kv-container">
+        <div class="map-kv-container nomargin">
           <ul>
             <li class="map-active"><a ><span></span><img src="<%= @image.file.url(:image_show_thumb) %>" alt="" /></a></li>
             <% if @image_thumb_arr %>
@@ -194,21 +196,26 @@
             <% end %>
           </ul>
         </div>
-        <% if @image_arr.last.id != @image.id %>
-          <a href="/images/<%=@image_arr.last.id%>/<% if (params[:site].to_i + 4) >= @images_count %><%=@images_count%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet">next</a>
-        <% else %>
-          <a class="map-next-bullet">next</a>
-        <% end %>
-
         <% if @next_id %>
           <a href="/images/<%=@next_id%>/<%=params[:site].to_i + 1%>/<%=params[:path]%>" class="map-next">下一张图</a>
         <% else %>
           <a class="map-next">下一张图</a>
         <% end %>
+        <hr class="nomargin">
+        <% if @image_arr.last.id != @image.id %>
+          <a href="/images/<%=@image_arr.last.id%>/<% if (params[:site].to_i + 4) >= @images_count %><%=@images_count%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet mt10">next</a>
+        <% else %>
+          <a class="map-next-bullet mt10">next</a>
+        <% end %>
       </div>
     </div>
     <div class="btn_group clearfix">
-      <a href="<%= user_design_path(@image.user_id, @image.imageable_id) %>" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该套作品</a>
+      <p class="pull-left imageinfo">
+        <span><%= @image.user.display_name if @image.user%></span>
+        <i class="icon-i16 icon-site nomargin"></i>
+        <small><%= @image.try(:user).try(:area).try(:name)%></small>
+        <a href="#" class="btn_ask"></a>
+      </p>
       <a href="/images/<%= @image.id%>/fullscreen" class="btn2 pull-right" target="_blank" title=''><i class="icon-i16 icon-fullscreen"></i>全屏</a>
       <%= link_to user_collects_path(1, design_image_id: @image.id), class: 'btn2 pull-right img_show_collect', :remote => true, method: :post, :title => '' do %>
           <i class='icon-i16 icon-collect'></i>收藏
@@ -218,6 +225,7 @@
         <i class='icon-i16 icon-xin_gray'></i>
         <span><%= @image.votes_count %></span>
       <%- end %>
+      <a href="<%= user_design_path(@image.user_id, @image.imageable_id) %>" class="btn1 pull-right"><i class="icon-i16 icon-suit"></i>查看该套作品</a>
     </div>
     <div class="colors_box clearfix">
       <div class="pull-left"><img src="<%= asset_path 'imgbase_in/color.jpg' %>"></div>
@@ -296,27 +304,11 @@
     </div>
   </div>
   <div class="pull-right imgbase_in_right">
-    <!-- 个人头像 -->
-    <%- unless @image.imageable_type == "MasterDesign" || @image.imageable_type == "ColorDesign"-%>
-    <div class="clearfix author_info">
-      <a class="pull-left author_photo" href="<%= user_designs_path(@image.user_id) %>" target="_blank">
-        <%- if @image.user && @image.user.avatar -%>
-      <%= image_tag @image.user.avatar.file(:profile),:size =>"92x92", :title => "装修设计师-#{@image.user.display_name}", :alt => "装修设计师-#{@image.user.display_name}" %>
-    <%- else -%>
-      <%= image_tag "news/regimg_bg.jpg", size: '92x92' %>
-    <%- end -%>
-      </a>
-      <div class="author_text">
-        <h5>
-          <a href="<%= user_designs_path(@image.user_id) %>" target="_blank"><%= @image.user.display_name if @image.user%></a>
-        </h5>
-        <p class="muted"><%= @image.user.city.try(:parent).try(:name) if @image.user%></p>
-        <%- if @image.user %>
-      <a href="<%= user_asks_path(@image.user.id) %>" class="btn_ask" target="_blank"></a>
-    <%- end %>
-      </div>
-    </div>
-    <%- end %>
+    <dl class="clearfix like_list js_like_part">
+      <dt>猜你喜欢</dt>
+      <dd>加载中...</dd>
+    </dl>
+    <hr class="nomargin dott1">
     <!-- 装修丘比特 -->
     <%= render partial: 'cubit' %>
     <div>
@@ -328,12 +320,7 @@
       </ul>
     </div>
     <hr class="nomargin">
-    <dl class="clearfix like_list js_like_part">
-      <dt>猜你喜欢</dt>
-      <dd>加载中...</dd>
-    </dl>
-    <hr class="nomargin dott1">
-    <dl class="clearfix like_list js_recent_part">
+    <dl class="clearfix like_list js_recent_part mt10">
       <dt>最近更新</dt>
       <dd>加载中...</dd>
     </dl>
