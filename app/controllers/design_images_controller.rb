@@ -486,10 +486,10 @@ class DesignImagesController < ApplicationController
     #猜你喜欢
     tags = @image.tags.map(&:image_library_category_id)
     if tags == []
-      @like_images = DesignImage.from.available.audited_with_colors.order("id desc").limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.order("id desc").group("design_images.imageable_id").limit(4)
     else
       tags = tags.sample(4)
-      @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).limit(4)
+      @like_images = DesignImage.from.available.audited_with_colors.search_tags(tags, true).group("design_images.imageable_id").limit(4)
     end
 
     #最新更新
