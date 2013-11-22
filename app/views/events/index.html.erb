@@ -9,6 +9,7 @@
             right: 135px;
         }
         .review_listA .content {word-break:break-word;}
+        .reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
     </style>
 <%- end %>
 <%- content_for :tail do %>
@@ -99,7 +100,7 @@
                     pic:"",
                     data_track_clickback:true,
                 }
-              </script> 
+              </script>
               <a class="jiathis_button_qzone"></a>
               <a class="jiathis_button_tsina"></a>
               <a class="jiathis_button_tqq"></a>
@@ -153,7 +154,7 @@
             <ul class="review_listA">
               <%- @comments.each do |c| %>
                   <li>
-                    <div class="bar">                      
+                    <div class="bar">
                       <% if c.user %>
                         <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
                       <% else %>
@@ -163,7 +164,7 @@
                     </div>
                     <div class="reply"><a href="javascript:void(0)">回复</a></div>
                     <div class="content"> <%= c.content %></div>
-
+                    <div class="clearfix"></div>
                     <div class="reply_area none cl pr">
                       <em class="pa">◆</em>
                       <span class="pa">◆</span>
@@ -187,7 +188,7 @@
                       <div class="reply_con ft14 clear">
                         <div class="clear">
                           <%- c.reply_msgs.order("created_at DESC").each do |r| %>
-                              <div class="clear  <%= "reply_line" if r != c.reply_msgs.first %> ">
+                              <div class="clear  <%= "reply_line" if r != c.reply_msgs.last %> ">
                                 <p class="reply_tabs fl">
                                   <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
                                 </p>

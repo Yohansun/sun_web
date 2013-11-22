@@ -8,6 +8,7 @@
         span.arrow_2 {
             right: 135px;
         }
+        .reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
     </style>
 <%- end %>
 <%- content_for :tail do %>
@@ -131,7 +132,7 @@
                     </div>
                     <div class="reply"><a href="javascript:void(0)">回复</a></div>
                     <div class="content"> <%= c.content %></div>
-
+                    <div class="clearfix"></div>
                     <div class="reply_area none cl pr">
                       <em class="pa">◆</em>
                       <span class="pa">◆</span>
@@ -155,7 +156,7 @@
                       <div class="reply_con ft14 clear">
                         <div class="clear">
                           <%- c.reply_msgs.order("created_at DESC").each do |r| %>
-                              <div class="clear  <%= "reply_line" if r != c.reply_msgs.first %> ">
+                              <div class="clear  <%= "reply_line" if r != c.reply_msgs.last %> ">
                                 <p class="reply_tabs fl">
                                   <%= r.user.display_name %>回复:<%= r.content %>
                                 </p>

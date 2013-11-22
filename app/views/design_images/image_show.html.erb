@@ -272,17 +272,17 @@
     <%- end %>
     </div>
     <div style="height:30px;margin-left:20px;margin-top:18px;">
-      <!-- JiaThis Button BEGIN -->
-      <div class="jiathis_style">
-        <span class="jiathis_txt">分享到：</span>
-        <a class="jiathis_button_icons_1"></a>
-        <a class="jiathis_button_icons_2"></a>
-        <a class="jiathis_button_icons_3"></a>
-        <a class="jiathis_button_icons_4"></a>
-        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-        <a class="jiathis_counter_style"></a>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="pull-left mt6">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
       </div>
-      <!-- JiaThis Button END -->
+      <!-- Baidu Button END -->
     </div>
     <div class="work_comments" data-image_id="<%= @image.id %>" data-site="<%= params[:site] %>" data-path="<%= params[:path] %>">
       <%= form_for(Comment.new, :html => {:class => "comment_form exp-holder"}) do |f| %>
