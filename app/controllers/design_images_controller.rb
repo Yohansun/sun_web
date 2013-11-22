@@ -445,6 +445,7 @@ class DesignImagesController < ApplicationController
     else
       images = images.order("design_images.id desc")
     end
+    @img_count = images.count
 
     #筛选出搜索过的标签,用来重新筛选
     @tag_names = @tag_names.flatten
