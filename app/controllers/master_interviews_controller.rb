@@ -13,20 +13,24 @@ class MasterInterviewsController < ApplicationController
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
-  
+
   def all
     render "index"
   end
-  
-  {:oversea => "海外",:hk_tw_mc => "港澳台",:cn => "中国大陆"}.each do |act,tag|
+
+  {:oversea => "海外",:hk_tw_mc => "港澳台",:cn => "中国大陆", :all => "全部"}.each do |act,tag|
     define_method(act) do
       hash = {"shinei" => "室内空间大师","color" => "色彩大师"}
       condition = hash.keys.include?(type = params[:type]) ? {:master_kind => hash[type]} : nil
-      @articles = @articles.tagged_with(tag).where(condition)
+      if tag == "全部"
+       @articles = @articles.where(condition)
+      else
+        @articles = @articles.tagged_with(tag).where(condition)
+      end
       render "index"
     end
   end
-  
+
   private
   def find_by_subject
     @articles = Subject.content("master_profile").page(params[:page]).per(5)
