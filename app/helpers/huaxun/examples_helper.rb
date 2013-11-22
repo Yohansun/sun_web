@@ -1,0 +1,2 @@
+module Huaxun::ExamplesHelper
+end

@@ -1,0 +1,2 @@
+module Huaxun::HxKvsHelper
+end

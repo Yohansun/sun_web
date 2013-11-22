@@ -1,0 +1,126 @@
+<%- content_for :tail do %>
+  <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript">
+    <%- @kv_id = @kv.nil? ? 0 : @kv.id %>
+    $(function(){
+      $('.save_button').click(function(){
+        var $url = $('#kv_url_field').val();
+        $.post('<%= kv_update_hx_kv_path(@kv_id) %>',{url: $url});
+      });
+      $('.save_button_next').click(function(){
+        var $url = $('#kv_url_field').val();
+        $.post('<%= kv_update_hx_kv_path(@kv_id) %>',
+               {url: $url,
+                next : <%= params[:position].present? ? params[:position] : 0 %>}
+              );
+      });
+      $('#change_sort').click(function(){
+        var $change_sort = $('.change_select').val();
+        if (<%= @kv.position %> == $change_sort) {
+          alert('当前帧数无需转换!');
+        } else{
+          $.post('<%= kv_update_hx_kv_path(@kv_id) %>',
+                  {change_sort: $change_sort,
+                   position : <%= params[:position] %>}
+                );
+        };
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    (function($){
+      $('#upload_photo').uploadify({
+      swf : '/uploadify/uploadify.swf',
+      cancelImage : '/uploadify/uploadify-cancel.png',
+      progressData : 'percentage',
+      buttonText : "<a class='btn btn-danger mb5'>上传图片</a>",
+      buttonImage : '',
+      fileTypeDesc : '图片文件',
+      fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+      successTimeout : 6000,
+      fileSizeLimit : '3MB',
+      width : 88,
+      height : 34,
+      multi : false,
+      auto : true,
+      checkExisting : false,
+      transparent : true,
+      uploader : '<%= hx_kvs_path(position: params[:position])%>',
+      onUploadSuccess : function(file, data, response) {
+        var dat = eval('(' + data + ')');
+        if (dat.result == 'success') {
+          $.getScript(dat.upload);
+        }else{
+          alert("图片上传失败");
+        };
+      },
+      postData : {
+          '_http_accept': 'application/javascript',
+          'format' : 'json',
+          '_method': 'post',
+          '<%= session_key %>' : '<%= cookies[session_key] %>',
+          'authenticity_token': '<%= form_authenticity_token %>'
+      },
+      onUploadError : function(file, errorCode, errorMsg, errorString) {
+        alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+      }
+    });
+    })($);
+  </script>
+<%- end %>
+<%- if params[:position].present? && params[:position].to_i <= 9 %>
+  <div class="container-fluid">
+    <div class="tab-pane">
+      <h3 class="text-haxun">主题KV</h3>
+      <div>
+        <% HxKv.count.times do |index| %>
+          <a class="btn btn-link text-haxun <%= 'active' if params[:position].to_i == index + 1 %>" href="<%= hx_kvs_path(position: index + 1) %>">第<%= index + 1 %>帧</a>
+        <% end %>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane active form-horizontal row-fluid clearfix">
+          <div class="span6">
+            <div class="haxun_kv mb5" id="hx_kv_upload">
+              <% if @kv %>
+                <%= image_tag @kv.try(:file).try(:url, :big) %>
+              <% else %>
+                <img src="#" />
+              <% end %>
+            </div>
+
+            <div class="clearfix form-inline mb5">
+              <a href="#" id="upload_photo">上传图片</a>
+              <span class="help-inline mb5">图片尺寸必须是670x283</span>
+              <a class="btn btn-danger pull-right ml10 md5" id="change_sort">转换</a>
+              <%= select_tag nil, options_from_collection_for_select(HxKv.order("position"), "position", "position"),:prompt=>'请选择要转换的帧数',class: "change_select pull-right mb5" %>
+            </div>
+            <div style="padding-top:15px;margin-top:10px;border-top:1px solid #ddd;">
+              <%= link_to '新建帧', kv_insert_hx_kvs_path, remote: true, class: 'btn btn-danger' %>
+              <%= link_to '删除帧', hx_kv_path(@kv_id), data: {confirm: '是否确定要删除这帧KV?'}, class: 'btn btn-danger', method: :delete, remote: true %>
+              <a class="btn btn-danger save_button">保存</a>
+              <a class="btn btn-danger save_button_next">保存并调转至下一帧</a>
+            </div>
+          </div>
+          <div class="span6">
+            <h5 class="text-haxun">- 编辑信息 -</h5>
+            <div class="haxun_main">
+              <label>
+                <strong class="control-label w40">URL</strong>
+                <input type="text" class="input-large" id="kv_url_field" value="<%= @kv.url if @kv %>">
+              </label>
+            </div>
+            <!-- 热区信息编辑 -->
+            <h5 class="text-haxun">- 编辑信息 -</h5>
+            <%= render partial: 'map_form' %>
+
+            <h5 class="text-haxun">- 编辑信息 -</h5>
+            <%= render partial: 'maps', locals: { maps: @kv.nil? ? [] : @kv.hx_maps}  %>
+            <!-- 热区信息编辑end -->
+          </div>
+        </div>
+      </div><!--tab-content-->
+    </div>
+  </div>
+<%- end %>

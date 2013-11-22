@@ -1,0 +1,2 @@
+module Huaxun::HxNewsHelper
+end

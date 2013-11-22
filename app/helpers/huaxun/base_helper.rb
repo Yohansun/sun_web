@@ -1,0 +1,2 @@
+module Huaxun::BaseHelper
+end

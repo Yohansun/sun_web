@@ -1,5 +1,15 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "manage/per_home" %>
+  <style type="text/css">
+    .popup_zf,.popup_zf2{width:160px; position:absolute; left:142px; bottom:-28px;*bottom:45px!important; _bottom:50px; background:#fff; padding:5px 0!important; border:1px solid #f1f1f1;}
+.popup_zf span,.popup_zf2 span{float:left;font-size:12px; padding:3px 5px!important;}
+.popup_zf a,.popup_zf2 a{ float:left; display:inline; width:16px; height:16px; background:url(<%= asset_path "master/icon_zf.png" %>) no-repeat; margin:0px 3px;}
+.popup_zf a.pupot_zf_qq,.popup_zf2 a.pupot_zf_qq{ background-position:left 0;}
+.popup_zf a.popup_zf_sina,.popup_zf2 a.popup_zf_sina{ background-position:left -16px;}
+.popup_zf a.popup_zf_rr,.popup_zf2 a.popup_zf_rr{ background-position:left -32px;}
+.popup_zf a.popup_zf_kaixin,.popup_zf2 a.popup_zf_kaixin{ background-position:left -48px;}
+
+  </style>
 <%- end %>
 <%- content_for :tail do %>
   <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
@@ -43,7 +53,7 @@
     <li class="pull-left">
       <a name="phone"></a>
       <i class="icon-phone1 icon-i30"></i>
-      <span style="color:#676666;font:bold 14px 'SimSun';">全国服务热线：</span><span class="phone_number">400-628-1968</span>
+      <span style="color:#676666;font:bold 14px 'SimSun';">全国服务热线：</span><span class="phone_number"><%= @phone.phone if @phone %></span>
     </li>
     <li class="pull-right">
       <a href="#case">案例赏析</a>
@@ -61,99 +71,18 @@
 </div>
 <a name="case"></a>
 <div class="per_home clearfix">
-  <div class="per_left index_main pull-left">
-    <p class="clearfix index_tit">
-      <strong class="pull-left mr5">案例赏析</strong>
-      <a class="active pull-left" href="/huaxun_homes" >精选作品</a>
-      <a class="pull-left" href="/huaxun_homes" >全部作品</a>
-    </p>
-    <hr class="border2 border2_mt2">
-    <div>
-      <ul class="per_works unstyled clearfix mt20">
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103932" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103932" target="_blank">大儒世家卧虎</a></h5>
-          <p class="nomargin">黄育波</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103930" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work2.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103930" target="_blank">融汇江山某豪宅</a></h5>
-          <p class="nomargin">胡寿海</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103927" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work3.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103927" target="_blank">万科朗润园17A别墅</a></h5>
-          <p class="nomargin">谭明飞、黄杰伍</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103923" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work4.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103923" target="_blank">坤和山水人家</a></h5>
-          <p class="nomargin">张平</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103922" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work5.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103922" target="_blank">永怡聚豪园周生雅居</a></h5>
-          <p class="nomargin">胡杨</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-        <li class="">
-          <a href="http://www.icolor.com.cn/users/122728/designs/103921" target="_blank" class="help-block"><img src="<%= asset_path 'manage/per_home_huaxun/per_work6.jpg'%>" alt="" /></a>
-          <h5 class="dott1"><a href="http://www.icolor.com.cn/users/122728/designs/103921" target="_blank">阳光美地王总</a></h5>
-          <p class="nomargin">刘云</p>
-          <p class="nomargin">风格: 现代简约</p>
-          <p class="dott1">
-            <span><i class="icon-i16 icon-xin_gray2"></i>0</span>
-            <span><i class="icon-i16 icon-comment1"></i>0</span>
-            <span class="noborder"><i class="icon-i16 icon-share1"></i>0</span>
-          </p>
-        </li>
-      </ul>
-      <!-- <div class="pager">
-        <a class="current" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">...</a>
-        <a href="#">20</a>
-        <a href="#" class="">下一页</a>
-        <a href="#" class="">最后一页</a>
-      </div> -->
-    </div>
-  </div>
+  <%= render partial: 'hx_examples' %>
   <div class="per_right index_main pull-right">
     <div class="work_comments nomargin nopadding">
       <a name="asks"></a>
       <%= form_tag new_ask_huaxun_homes_path, :class => "comment_form exp-holder" do %>
-        <h5><span class="pull-right phone_number"><i class="icon-phone_small icon-i30"></i>400-628-1968</span>免费咨询</h5>
+        <h5>
+          <span class="pull-right phone_number">
+            <i class="icon-phone_small icon-i30"></i>
+            <%= @phone.phone if @phone %>
+          </span>
+          免费咨询
+        </h5>
         <textarea id="J_t" name="content"></textarea>
         <ul class="moodbtn_group unstyled clearfix">
           <li class="pull-right btn_send">
@@ -180,50 +109,8 @@
   </div>
 </div>
 <div class="per_home clearfix mt20">
-  <div class="per_left2 index_main pull-left">
-    <p class="clearfix index_tit mt10">
-      <a href="http://www.hxdec.com/news/newslist.asp" target="_blank" class="pull-right"><small class="muted">更多 ></small></a>
-      <strong class="pull-left">华浔新闻</strong>
-    </p>
-    <hr class="border2 border2_mt2">
-    <ul class="unstyled ul_list_news">
-      <li><a href="http://www.hxdec.com/news/news_view.asp?id=932&sortid=1" target="_blank">团结奋进 再创辉煌——贺华浔第十五届全国设计</a></li>
-      <li><a href="http://www.hxdec.com/news/news_view.asp?id=931&sortid=1" target="_blank">华浔第二届“金马克杯”室内设计大赛颁奖盛典在桂</a></li>
-      <li><a href="http://www.hxdec.com/news/news_view.asp?id=928&sortid=1" target="_blank">华浔总监团“欧洲采风之旅”完美收官</a></li>
-      <li><a href="http://www.hxdec.com/news/news_view.asp?id=926&sortid=1" target="_blank">华浔2013年全国经理培训暨年中总结大会在北京</a></li>
-      <li><a href="http://www.hxdec.com/news/news_view.asp?id=925&sortid=1" target="_blank">第一届华浔品味“19+1”网络家装节</a></li>
-      <li><a href="http://www.hxdec.com/news/news_view.asp?id=925&sortid=1" target="_blank">华浔品味装饰第四届“海鸥飞翔”班顺利结业</a></li>
-      <li class="noborder"><a href="http://www.hxdec.com/news/news_view.asp?id=922&sortid=1" target="_blank">再贺华浔泉州公司“中润嘉园”杯室内设计大赛勇夺</a></li>
-    </ul>
-  </div>
-  <div class="per_right2 index_main pull-right nopadding" id="haxun">
-    <div class="slider-bin pull-left">
-      <div class="slider-container">
-        <ul class="clearfix nomargin unstyled">
-          <li class="item">
-            <a class="pull-left media_a" href="http://www.hxdec.com/activity.asp" target="_blank">
-              <img style="width:670px;height:283px;" src="<%= asset_path 'manage/per_home_huaxun/haxun_slide1.jpg'%>">
-            </a>
-          </li>
-          <li class="item">
-            <a class="pull-left media_a" href="http://www.hxdec.com/activity.asp" target="_blank">
-              <img style="width:670px;height:283px;" src="<%= asset_path 'manage/per_home_huaxun/haxun_slide2.jpg'%>">
-            </a>
-          </li>
-          <li class="item">
-            <a class="pull-left media_a" href="http://www.hxdec.com/activityshow.asp?id=58" target="_blank">
-              <img style="width:670px;height:283px;" src="<%= asset_path 'manage/per_home_huaxun/haxun_slide3.jpg'%>">
-            </a>
-          </li>
-        </ul>
-      </div>
-      <ul class="circle_indicators nomargin">
-        <li class="slider-active"><a href="javascript:;"></a></li>
-        <li><a href="javascript:;"></a></li>
-        <li><a href="javascript:;"></a></li>
-      </ul>
-    </div>
-  </div>
+  <%= render partial: 'hx_news' %>
+  <%= render partial: 'hx_kvs' %>
 </div>
 
 <div class="per_home index_main_black mt20">
@@ -236,51 +123,13 @@
   <div id="haxun_design_slide" class="slider-bin">
     <div class="slider-container">
       <ul class="unstyled">
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=215&sortid=4" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design1.jpg'%>"></a>
-              <p class="nomargin text-center">刘明富-中山华浔总经理</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=324&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design2.jpg'%>"></a>
-              <p class="nomargin text-center">覃华-广州设计总监</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=201&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design3.jpg'%>"></a>
-              <p class="nomargin text-center">邱欣林-重庆设计总监</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=209&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design4.jpg'%>"></a>
-              <p class="nomargin text-center">汪大峰-南京总设计师</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=210&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design5.jpg'%>"></a>
-              <p class="nomargin text-center">吴文华-泉州设计总监</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=211&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design6.jpg'%>"></a>
-              <p class="nomargin text-center">虞旭东-绍兴总设计师</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=212&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design7.jpg'%>"></a>
-              <p class="nomargin text-center">邹广明-无锡设计总监</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=257&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design8.jpg'%>"></a>
-              <p class="nomargin text-center">吴旭东-南昌总设计师</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=279&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design9.jpg'%>"></a>
-              <p class="nomargin text-center">卓谨仲-惠州总设计师</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=349&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design10.jpg'%>"></a>
-              <p class="nomargin text-center">何志潮-南海设计总监</p>
-            </li>
-            <li>
-              <a href="http://www.hxdec.com/designer_show.asp?id=388&sortid=1" target="_blank"><img src="<%= asset_path 'manage/per_home_huaxun/per_design11.jpg'%>"></a>
-              <p class="nomargin text-center">周游-泸州设计总监</p>
-            </li>
-          </ul>
+        <% @teams.each do |team| %>
+          <li>
+            <a href="<%=team.url%>" target="_blank"><img src="<%=team.file.url(:list)%>"></a>
+            <p class="nomargin text-center"><%=team.name%></p>
+          </li>
+        <% end %>
+      </ul>
     </div>
     <!-- <a href="javascript:;" class="slider-prev">prev</a> -->
     <!-- <a href="javascript:;" class="slider-next">next</a> -->
@@ -293,11 +142,7 @@
   </p>
   <hr class="border2 border2_mt2">
   <div class="huaxun_intro">
-    <h5>广州市华浔品味装饰设计工程有限公司简介</h5>
-    <p>华浔品味装饰是国内大型装饰集团公司，成立于1998年，已经成为中国室内装饰行业领军品牌，专业从事家居、写字楼、商铺、酒店等设计与施工。中国装饰协会会员单位，通过了ISO9001：2008国际质量管理体系认证，取得了国家建设部门颁发的设计、施工资质。先后被评为全国住宅装饰装修行业知名品牌企业、全国住宅装饰装修行业质量服务诚信五星级企业、全国住宅装饰装修行业AAAA诚信企业、连续三年荣获“广东省守合同重信用企业”称号等荣誉，在业内享有盛誉。</p>
-    <p>集团下辖200余家直营公司，并设有设计总监团、软装配饰中心、全国质控中心、售后服务中心、材料采购配送中心等重要部门，建立了完整的服务系统。经过十余年的发展，公司的实力和规模不断扩大，现已在广州、上海、深圳、重庆、南京、成都、福州、南宁、南昌、贵阳、海口、杭州、长沙等大中城市设有二百余家直营分公司。</p>
-    <p>华浔人以设计品味空间为己任，筑造舒适、健康、幸福、和谐的品味生活为使命，不断实现客户品味家居空间的梦想，提升居家生活的品质。</p>
-    <p>“做品味装饰，创名牌企业”，华浔人正以饱满的热情和自信一路前行！</p>
+    <%= raw @hx_profile.content if @hx_profile%>
   </div>
 </div>
 <% if current_user && current_user.role_id != 3 %>

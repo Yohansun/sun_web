@@ -1,0 +1,6 @@
+alert('保存成功!');
+<%- if params[:next] == '9' %>
+  window.location.href = "<%= hx_kvs_path(position: 1) %>";
+<%- else %>
+  window.location.href = "<%= hx_kvs_path(position: params[:next].to_i + 1) %>";
+<%- end %>

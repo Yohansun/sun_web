@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <a class="text-haxun" href="javascript:;" id="hx_insert_update">保存</a>|
+    <a class="text-haxun" href="<%= hx_news_index_path %>">取消</a>
+  </td>
+  <td><%= select_tag nil, options_for_select((1..7).to_a, @hx_news.position), style: 'width:50px;', id: 'hx_insert_position' %></td>
+  <td>
+    <input type="text" id="hx_insert_title" maxlength='24' value="<%= @hx_news.title %>" />
+  </td>
+  <td>
+    <input type="text" id="hx_insert_url" value="<%= @hx_news.url %>" />
+  </td>
+  <td><a href="javascript:void(0);" id="hx_insert_link1">检测链接</a></td>
+</tr>

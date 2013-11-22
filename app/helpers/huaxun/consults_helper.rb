@@ -1,0 +1,2 @@
+module Huaxun::ConsultsHelper
+end

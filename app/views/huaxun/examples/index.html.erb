@@ -1,0 +1,72 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "datepicker" %>
+<%- end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "bootstrap-datetimepicker" %>
+  <script type="text/javascript">
+  $(function(){
+    $('#del_all').on('click', function(){
+      var arr = $('#form_list').find('input').map(function(){
+        if($(this).prop('checked')) return this.value
+      }).get()//.join(',')
+      if(arr == ""){
+        alert("请勾选复选框！")
+      }else{
+        $.post("<%=del_examples_examples_path%>", {id_arr: arr}, function(){
+          window.parent.location.reload();
+        });
+      }
+    })
+  })
+  </script>
+<%- end %>
+<div class="container-fluid">
+  <div class="tab-pane" id="tab_haxun2">
+    <h3 class="text-haxun">案例赏析</h3>
+    <%= form_tag search_examples_path, class: "form-horizontal" do %>
+      <fieldset>
+        <div class="control-group form-inline">
+          <select name="search_name" class="input-small mb5">
+            <option value="1" <%='selected' if params[:search_name] && params[:search_name] == "1"%>>标题</option>
+            <option value="2" <%='selected' if params[:search_name] && params[:search_name] == "2"%>>设计师</option>
+          </select>
+          <input class="mb5" type="text" value="<%=params[:search_value] if params[:search_value]%>" name="search_value">
+          <label class="mb5"><strong>and</strong></label>
+          <input class="datepickers input-small mb5" type="text" placeholder="2010-01-01" value="<%=params[:start_time]%>" name="start_time" />
+          <label class="mb5"><strong>to</strong></label>
+          <input class="datepickers input-small mb5" type="text" placeholder="<%=Time.now.to_date%>" value="<%=params[:end_time]%>" name="end_time" />
+          <label class="mb5"><strong>and</strong></label>
+          <label class="checkbox mb5">
+            <input type="checkbox" name="top" <%='checked' if params[:top] %>> 置顶作品
+          </label>
+          <label class="mb5"><strong>and</strong></label>
+          <label class="checkbox mb5">
+            <input type="checkbox" name="choice" <%='checked' if params[:choice] %>> 精选作品
+          </label>
+          <button type="" class="btn btn-danger mb5">搜索</button>
+          <a class="btn btn-danger mb5" id="del_all">全部删除</a>
+          <a href="<%= new_example_path %>" class="btn btn-danger mb5">新建</a>
+        </div>
+      </fieldset>
+    <% end %>
+    <form action="" class="form-horizontal row-fluid" id="form_list">
+      <fieldset class="span7">
+        <table class="table table-bordered table-hover table-condensed">
+          <tbody>
+            <% @examples.each do |example| %>
+              <tr>
+                <td><input type="checkbox" value="<%=example.id%>"></td>
+                <td><%= link_to example.title,edit_example_path(example.id) %></td>
+                <td><%= example.name %></td>
+                <td><%= example.updated_at %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="pagination text-haxun">
+          <%= paginate @examples %>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

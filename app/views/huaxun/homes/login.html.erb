@@ -1,0 +1,53 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function(){
+      <% if current_user && params[:sign].present? %>
+        alert("您输入的用户名密码不正确！");
+        window.parent.location = "/huaxun/sign_out";
+      <% else %>
+        <% if params[:sign].present? %>
+          alert("您输入的用户名密码不正确！");
+        <% end %>
+      <% end %>
+      <%  if current_user && current_user.genre != "huaxun" %>
+         window.parent.location = "/huaxun/sign_out";
+      <% end %>
+    })
+    </script>
+<% end %>
+<div class="container-fluid">
+  <ul class="nav nav-tabs mt20" id="huaxun_tab">
+    <li class="active"><a data-toggle="tab" href="#tab_login">系统登录</a></li>
+    <li><a data-toggle="tab" href="#tab_find">找回密码</a></li>
+    <li><a data-toggle="tab" href="#tab_reset">修改密码</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab_login">
+      <%= form_for(:user, :url => huaxun_sign_path, :html => {:class => "form-horizontal" })  do |f| %>
+        <fieldset class="clearfix">
+          <div class="control-group pull-left">
+            <label for="" class="control-label">用户名</label>
+            <div class="controls">
+              <input id="username" type="text" name="user[login]" value=""/>
+            </div>
+          </div>
+          <div class="control-group pull-left">
+            <label for="" class="control-label">密码</label>
+            <div class="controls">
+              <input id="password" type="password" class="fl" name="user[password]"/>
+            </div>
+          </div>
+        </fieldset>
+        <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-danger">登录</button>
+            <a href="#" class="help-inline">忘记密码？</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab_find">暂无此功能！</div>
+    <div class="tab-pane" id="tab_reset">暂无此功能！</div>
+  </div>
+</div>

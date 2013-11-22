@@ -1,0 +1,25 @@
+<div class="per_right2 index_main pull-right nopadding" id="haxun">
+  <div class="slider-bin pull-left">
+    <div class="slider-container">
+      <ul class="clearfix nomargin unstyled">
+        <%- @hx_kvs.each_with_index do |kv,index| %>
+          <li class="item">
+            <a href="javascript:;" class="pull-left media_a" onclick="window.open('<%= kv.url %>','','')" target="_blank"><%= image_tag(kv.try(:file).try(:url,:big), usemap: "#mapkv#{index}") %></a>
+            <%- if kv.hx_maps.any? %>
+              <map id="mapkv<%= index %>" name="mapkv<%= index %>">
+                <%- kv.hx_maps.each do |map| %>
+                  <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+                <%- end %>
+              </map>
+            <%- end %>
+          </li>
+        <%- end %>
+      </ul>
+    </div>
+    <ul class="circle_indicators nomargin">
+      <%- @hx_kvs.each_with_index do |kv,index| %>
+        <li class="<%= 'slider-active' if index == 0 %>"><a href="javascript:;"></a></li>
+      <%- end %>
+    </ul>
+  </div>
+</div>

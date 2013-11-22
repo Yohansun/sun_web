@@ -44,6 +44,7 @@ Icolor::Application.routes.draw do
   get "home/image_vote" => "home#image_vote"
   get "home/get_vote" => "home#get_vote"
   post "home/update_vote" => "home#update_vote"
+  post "home/upload_img" => "home#upload_img"
 
   resources :votes
 
@@ -71,6 +72,8 @@ Icolor::Application.routes.draw do
   end
 
   devise_scope :user do
+    match "/huaxun/sign" => "huaxun/sessions#create"
+    match "/huaxun/sign_out" => "huaxun/sessions#destroy"
     match "/users/complete" => "users/register#complete"
     match "/user/update" => "users/register#update"
     match "/users/suc_regist" => "users/register#suc_regist"
@@ -361,6 +364,7 @@ Icolor::Application.routes.draw do
       post :new_ask
       post :new_rep
       get :get_reply
+      post :update_vote
     end
   end
 
@@ -722,7 +726,6 @@ Icolor::Application.routes.draw do
         post :save_data
       end
     end
-
     resources :home_life_videos do
       collection do
         post :create_image
@@ -744,4 +747,54 @@ Icolor::Application.routes.draw do
 
     root to: 'home_kvs#index', as: 'manage_root'
   end
+
+  match "/huaxun" => "huaxun/homes#login"
+  scope '/huaxun', :module => 'huaxun' do
+    resources :homes do
+      collection do
+        post :new_phone
+      end
+    end
+    resources :hx_profiles
+    resources :hx_news do
+      collection do
+        post :update_more_url
+        get :insert_first
+        post :insert_save
+        post :update_news
+      end
+    end
+    resources :hx_kvs do
+      member do
+        post :kv_update
+      end
+      collection do
+        get :kv_insert
+      end
+    end
+    resources :hx_maps
+    resources :teams do
+      collection do
+        post :create_image
+        post :search
+        post :del_all
+      end
+    end
+    resources :consults do
+      collection do
+        post :create_reply
+        post :search_reply
+      end
+    end
+    resources :examples do
+      collection do
+        post :create_image
+        get :get_design
+        post :up_design
+        post :del_examples
+        post :search
+      end
+    end
+  end
+
 end

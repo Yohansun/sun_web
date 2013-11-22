@@ -1,0 +1,2 @@
+module Huaxun::HxProfilesHelper
+end

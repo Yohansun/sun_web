@@ -1,0 +1,23 @@
+<% content_for :tail do %>
+  <%= javascript_include_tag '/xheditor/xheditor-1.1.13-zh-cn.min.js' %>
+  <script type="text/javascript" charset="utf-8">
+    $(function(){
+      $('.textarea_settings').xheditor({
+          upImgUrl:'/home/upload_img',
+          upImgExt: "jpg,jpeg,gif,png",
+          html5Upload: false,
+          width: 990,
+          height: 300
+      });
+    });
+  </script>
+<% end %>
+<div class="container-fluid">
+  <%= form_for @hx_profile, :url => hx_profile_path(@hx_profile), :html => {method: :put} do |f| %>
+    <div class="tab-pane">
+      <h3 class="text-haxun">公司简介</h3>
+        <%= f.text_area 'content', rows: 15, class: 'textarea_settings' %>
+      <p><button type="submit" class="btn btn-danger mt20">保存</button></p>
+    </div>
+  <% end %>
+</div>

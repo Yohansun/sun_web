@@ -1,0 +1,14 @@
+<div class="per_left2 index_main pull-left">
+  <p class="clearfix index_tit mt10">
+    <a href="<%= @more_url.url if @more_url %>" target="_blank" class="pull-right"><small class="muted">更多 ></small></a>
+    <strong class="pull-left">华浔新闻</strong>
+  </p>
+  <hr class="border2 border2_mt2">
+  <ul class="unstyled ul_list_news">
+    <%- @hx_news_all.each_with_index do |hx_news,index| %>
+      <li class="<%= 'noborder' if @hx_news_all.size == index + 1 %>">
+        <a href="<%= hx_news.url %>" target="_blank"><%= hx_news.title %></a>
+      </li>
+    <%- end %>
+  </ul>
+</div>

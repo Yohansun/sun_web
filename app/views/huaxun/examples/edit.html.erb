@@ -1,0 +1,179 @@
+<%- content_for :tail do %>
+  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+  <style type="text/css">
+  .uploadify{cursor: pointer;width:305px;float:left;}
+  </style>
+  <script type="text/javascript">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    $(function() {
+      $('#upload_photo').uploadify({
+        swf : '/uploadify/uploadify.swf',
+        cancelImage : '/uploadify/uploadify-cancel.png',
+        //skipDefault : ['onSelect'],
+        progressData : 'percentage',
+        buttonText : "<a href='#' class='btn btn-danger mb5'>上传图片</a>",
+        fileTypeDesc : '图片文件',
+        fileTypeExts : '*.jpg; *.png',
+        successTimeout : 6000,
+        fileSizeLimit : '5MB',
+        // uploadLimit : 60,
+        width : 85,
+        height : 35,
+        multi : true,
+        auto : true,
+        checkExisting : false,
+        transparent : true,
+        uploader : '<%= create_image_examples_path(id: @examp.id) %>',
+        //buttonText : '选择文件',
+        onUploadSuccess : function(file, data, response) {
+          var dat = eval('(' + data + ')');
+          if (dat.result == 'success') {
+            $.getScript(dat.upload, function(){});
+          }else{
+            alert("图片上传失败");
+          };
+        },
+        postData : {
+            '_http_accept': 'application/javascript',
+            'format' : 'json',
+            '_method': 'post',
+            '<%= session_key %>' : '<%= cookies[session_key] %>',
+            'authenticity_token': '<%= form_authenticity_token %>'
+        },
+        onUploadError : function(file, errorCode, errorMsg, errorString) {
+          alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+        },
+        onUploadStart : function(){
+          //$("#upload_going").show();
+        },
+        onUploadComplete : function(){
+          //$("#upload_going").hide();
+        }
+      });
+
+      $('.js-geturl').click(function(){
+        var url = $(this).parents('form').find('#url').val();
+        arr = url.split("/");
+        if(url == ""){
+          alert("请输入有效的链接！");
+        }else{
+          $.get("<%=get_design_examples_path%>",{design_id: arr[arr.length-1]},function(data){
+            if(data.result == 'errors'){
+              alert("没有找到数据！");
+            }else{
+              $("#votenum").val(data.votes_count);
+              $("#forward").val(data.shares_count);
+              $("#comment").val(data.comments_count);
+            }
+          });
+        }
+      });
+      $('.js-sync').click(function(){
+        var url = $(this).parents('form').find('#url').val();
+        arr = url.split("/");
+        if(url == ""){
+          alert("请输入有效的链接！");
+        }else{
+          votenum = $('#votenum').val();
+          forward = $('#forward').val();
+          if (votenum == "" && forward == "") {
+            alert("请输入转发数和投票数！");
+          }else{
+            $.post("<%=up_design_examples_path%>",{votenum: votenum, forward: forward, id: arr[arr.length-1]},function(data){
+              if(data.result == 'success'){
+                alert("修改成功！");
+              }else{
+                alert("没有找到数据！");
+              }
+            });
+          }
+        }
+      });
+    });
+    function is_image(){
+      var name = $("#name").val();
+      var title = $("#title").val();
+      var url = $("#url").val();
+      if(name == ""){
+        alert("请输入作者！");
+        return false;
+      }
+      if(title == ""){
+        alert("请输入标题！");
+        return false
+      }
+      if(url == ""){
+        alert("请输入链接！");
+        return false
+      }
+    }
+  </script>
+<%- end %>
+<div class="container-fluid">
+  <div class="tab-pane" id="tab_haxun2">
+    <h3 class="text-haxun">案例赏析</h3>
+    <%= form_for @examp, html: {class: "form-horizontal row-fluid", :onsubmit => "return is_image();"} do %>
+      <fieldset class="span5">
+        <div class="clearfix">
+          <div class="pull-left haxun_desnimg mr10" style="border: solid 1px red" id="uploads">
+            <img src="<%=@examp.img.url(:show)%>">
+          </div>
+          <div>
+            <a href="#" class="btn btn-danger mb5" id="upload_photo">上传图片</a>
+          </div>
+          <div class="" style="margin:110px 0 0 218px;">
+            <label class="checkbox mb5">
+              <input type="checkbox" name="top" <%='checked' if @examp.top == true %>> 置顶作品
+            </label>
+            <label class="checkbox mb5">
+              <input type="checkbox" name="choice" <%='checked' if @examp.choice == true %>> 精选作品
+            </label>
+          </div>
+        </div>
+        <div class="clearfix mt20 haxun_main">
+          <label class="pull-left mb5 mr10">
+            <strong class="control-label w40">标题</strong>
+            <input class="input-medium" type="text" id="title" name="title" value="<%=@examp.title%>">
+            <small class="help-block muted">(不超过12个汉字)</small>
+          </label>
+          <label class="pull-left mb5">
+            <strong class="control-label w40">作者</strong>
+            <input class="input-small" type="text" id="name" name="name" value="<%=@examp.name%>">
+          </label>
+        </div>
+        <div class="clearfix haxun_main mb5">
+          <label class="pull-left mb5 mr10">
+            <strong class="control-label w40">URL</strong>
+            <input class="input-medium" id="url" type="text" name="url" value="<%=@examp.url%>">
+          </label>
+          <label class="pull-left mb5 mr10">
+            <strong class="control-label w40">风格</strong>
+            <%=select_tag :style, options_from_collection_for_select(@tags, "title", "title",@examp.style), :class=>"input-small"%>
+          </label>
+        </div>
+        <div class="form-inline haxun_main">
+          <label class="mb5">
+            <strong class="control-label w40">投票</strong>
+            <input class="input-mini w39" id="votenum" type="text" name="votes_count" value="<%=@examp.votes_count%>">
+          </label>
+          <label class="mb5">
+            <strong class="control-label w40">评论</strong>
+            <input class="input-mini w39" type="text" name="comment_count" id="comment" value="<%=@examp.comment_count%>">
+          </label>
+          <label class="mb5">
+            <strong class="control-label w40">转发</strong>
+            <input class="input-mini w39" id="forward" type="text" name="shares_count" value="<%=@examp.shares_count%>">
+          </label>
+          <label class="mb5">
+            <a href="javascript:;" class="control-label w60 text-haxun js-geturl">全部获取</a>
+            <a href="javascript:;" class="control-label w60 text-haxun js-sync">全部同步</a>
+          </label>
+        </div>
+        <div class="offset40_haxun">
+          <button class="btn btn-danger">保存</button>
+          <a href="<%=examples_path%>" class="btn btn-danger" style="margin-left: 85px;">返回</a>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

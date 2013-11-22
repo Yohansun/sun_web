@@ -1,0 +1,72 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "datepicker" %>
+<%- end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "bootstrap-datetimepicker" %>
+  <script type="text/javascript">
+  $(function(){
+    $('#del_all').on('click', function(){
+      var arr = $('#form_list').find('input').map(function(){
+        if($(this).prop('checked')) return this.value
+      }).get()//.join(',')
+      if(arr == ""){
+        alert("请勾选复选框！")
+      }else{
+        $.post("<%=del_all_teams_path%>", {id_arr: arr}, function(){
+          window.parent.location.reload();
+        });
+      }
+    })
+  })
+  </script>
+<%- end %>
+<div class="container-fluid">
+  <div class="tab-pane" id="tab_haxun6">
+    <h3 class="text-haxun">精英团队</h3>
+    <%= form_tag search_teams_path, class: "form-horizontal" do %>
+      <fieldset>
+        <div class="control-group form-inline">
+          <select name="serch_name" class="input-small mb5">
+            <option value="1" <% if params[:serch_name] && params[:serch_name] == "1"%>selected<% end %>>姓名</option>
+            <option value="2" <% if params[:serch_name] && params[:serch_name] == "2"%>selected<% end %>>职位</option>
+          </select>
+          <input class="mb5" type="text" name="serch_value" value="<%=params[:serch_value] if params[:serch_value]%>">
+          <label class="mb5"><strong>and</strong></label>
+          <!-- <input class="mb5" type="text" name="daterange" placeholder="2012-10-10 - 2013-10-10"> -->
+          <input class="datepickers input-small mb5" type="text" placeholder="2010-01-01" value="<%=params[:start_time]%>" name="start_time" />
+          <label class="mb5"><strong>to</strong></label>
+          <input class="datepickers input-small mb5" type="text" placeholder="<%=Time.now.to_date%>" value="<%=params[:end_time]%>" name="end_time" />
+
+          <button type="" class="btn btn-danger mb5">搜索</button>
+          <a class="btn btn-danger mb5" id="del_all">全部删除</a>
+          <a href="<%=new_team_path%>" class="btn btn-danger mb5">新建</a>
+        </div>
+      </fieldset>
+    <% end %>
+    <form action="" class="form-horizontal row-fluid" id="form_list">
+      <fieldset class="span7">
+        <table class="table table-bordered table-hover table-condensed">
+          <tbody>
+            <tr>
+              <td></td>
+              <td>姓名</td>
+              <td>职位</td>
+              <td>最后修改时间</td>
+            </tr>
+            <% @teams.each do |team| %>
+              <tr>
+                <td><input type="checkbox" id="ck_<%=team.id%>" value="<%=team.id%>"></td>
+                <td><%= link_to team.name, edit_team_path(team) %></td>
+                <td><%=team.job %></td>
+                <td><%=team.updated_at %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="pagination text-haxun">
+          <%= paginate @teams %>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

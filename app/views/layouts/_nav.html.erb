@@ -1,0 +1,19 @@
+<div class="navbar haxun_subnav">
+  <ul class="nav nav-pill nav-tabs noborder" id="tab_main">
+    <li class="<%= 'active' if controller_name == 'homes' && action_name == 'index' %>">
+      <a href="<%=homes_path%>">联系方式</a>
+    </li>
+    <li class="<%= 'active' if controller_name == 'examples' %>"><a href="<%= examples_path %>">案例赏析</a></li>
+    <li class="<%= 'active' if controller_name == 'consults' %>"><a href="<%=consults_path %>">免费咨询</a></li>
+    <li class="<%= 'active' if controller_name == 'hx_news' %>">
+      <a href="<%= hx_news_index_path %>">新闻列表</a>
+    </li>
+    <li class="<%= 'active' if controller_name == 'hx_kvs' %>">
+      <a href="<%= hx_kvs_path(position: 1) %>">主题KV</a>
+    </li>
+    <li class="<%= 'active' if controller_name == 'teams' %>"><a href="<%= teams_path %>">精英团队</a></li>
+    <li class="<%= 'active' if controller_name == 'hx_profiles' %>">
+      <a href="<%= hx_profiles_path %>">公司简介</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,16 @@
+$('.hx_tr_<%= @hx_news.id %>').replaceWith("<%=j render partial: 'edit_tr' %>");
+
+$('#hx_insert_link1').click(function(){
+  window.open($('#hx_insert_url').val());
+});
+
+$('#hx_insert_update').click(function(){
+  var $position = $('#hx_insert_position').val(),
+      $title = $('#hx_insert_title').val(),
+      $url = $('#hx_insert_url').val();
+  $.ajax({
+    type: "POST",
+    url: "<%= update_news_hx_news_index_path %>",
+    data: {id : <%= @hx_news.id %>, position : $position, title : $title, url : $url}
+  });
+});

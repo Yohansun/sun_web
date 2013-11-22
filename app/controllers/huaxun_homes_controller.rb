@@ -1,11 +1,29 @@
 # encoding: utf-8
 class HuaxunHomesController < ApplicationController
   def index
+    # 华浔banner
     @banner1,@banner2 = IBanner.page_name('华浔品味装饰').where(position: [1,2]).group(:position)
+    # 走进华浔
+    @hx_profile = HxProfile.first
+    # 华浔新闻
+    @more_url = HxNews.find_by_position(nil)
+    @hx_news_all = HxNews.positions.order("position asc")
+    # 华浔KV
+    @hx_kvs = HxKv.includes(:hx_maps).order("position asc")
+    # 服务热线
+    @phone = Phone.first
+    # 案例赏析
+    if params[:choice]
+      @examples = Example.where(is_save: true, choice: true).order("top desc").order("updated_at desc").page(params[:example_page]).per(6)
+    else
+      @examples = Example.where(is_save: true).order("top desc").order("updated_at desc").page(params[:example_page]).per(6)
+    end
+
     @point_gifts = PointGift.page(params[:page]).per(8)
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2
     @replies = Reply.where(genre: 'huaxun').order("id desc").page(1).limit(4)
+    @teams = Team.where(is_save: true).order("updated_at desc")
   end
 
   def get_reply
@@ -32,5 +50,17 @@ class HuaxunHomesController < ApplicationController
       rep.save
     end
     redirect_to huaxun_homes_path
+  end
+
+  def update_vote
+    @examp = Example.find params[:id]
+    if @examp
+      if @examp.votes_count.present?
+        @examp.votes_count = @examp.votes_count.to_i + 1
+      else
+        @examp.votes_count = 1
+      end
+      @examp.save
+    end
   end
 end
