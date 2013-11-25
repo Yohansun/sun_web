@@ -177,20 +177,20 @@
         <%= image_tag(@image.file.url(:image_map_show), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
       </div>
       <div class="map-kv-slider pull-right">
-        <% if @up_id %>
-          <a href="/images/<%=@image_arr.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
+        <% if @design_images.first.id != @image.id %>
+          <a href="/images/<%=@design_images.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
           <hr class="nomargin">
           <a href="/images/<%=@up_id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
         <% else %>
-          <a class="map-prev-bullet">prev</a>
+          <a class="map-prev-bullet" href="javascript:alert('当前已经是第一张图片');">prev</a>
           <hr class="nomargin">
-          <a class="map-prev">上一张图</a>
+          <a class="map-prev" href="javascript:alert('当前已经是第一张图片');">上一张图</a>
         <% end %>
         <div class="map-kv-container nomargin">
           <ul>
             <li class="map-active"><a ><span></span><img src="<%= @image.file.url(:image_show_thumb) %>" alt="" /></a></li>
-            <% if @image_thumb_arr %>
-              <% @image_thumb_arr.each_with_index do |image,index| %>
+            <% if @image_thumb %>
+              <% @image_thumb.each_with_index do |image,index| %>
                 <li><a href="/images/<%=image.id%>/<%=params[:site].to_i + (index+1)%>/<%=params[:path]%>"><span></span><img src="<%=image.file.url(:image_show_thumb)%>" alt="" /></a></li>
               <% end %>
             <% end %>
@@ -199,13 +199,13 @@
         <% if @next_id %>
           <a href="/images/<%=@next_id%>/<%=params[:site].to_i + 1%>/<%=params[:path]%>" class="map-next">下一张图</a>
         <% else %>
-          <a class="map-next">下一张图</a>
+          <a class="map-next" href="javascript:alert('当前已经是最后一张图片');">下一张图</a>
         <% end %>
         <hr class="nomargin">
-        <% if @image_arr.last.id != @image.id %>
-          <a href="/images/<%=@image_arr.last.id%>/<% if (params[:site].to_i + 4) >= @images_count %><%=@images_count%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet mt10">next</a>
+        <% if @design_images.last.id != @image.id %>
+          <a href="/images/<%=@design_images.last.id%>/<% if (params[:site].to_i + 4) >= @images_count %><%=@images_count%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet mt10">next</a>
         <% else %>
-          <a class="map-next-bullet mt10">next</a>
+          <a class="map-next-bullet mt10" href="javascript:alert('当前已经是最后一张图片');">next</a>
         <% end %>
       </div>
     </div>
