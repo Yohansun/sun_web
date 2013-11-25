@@ -452,27 +452,29 @@ class DesignImagesController < ApplicationController
     #在delete_link helper中调用,需要去掉非标签的搜索(地域,拼音)
     @ids.delete_at(-1)
 
-    #图库内页图片切换逻辑--------Start>>>>>>>>>>>>>>>>>>
     site = params[:site].to_i - 1
     if site <= 4
       limit = site + 1 + 4
-      @image_arr = images.select("distinct design_images.id, design_images.*").offset(0).limit(limit)
+      @design_images = images.select("distinct design_images.id, design_images.*").offset(0).limit(limit)
     else
-      @image_arr = images.select("distinct design_images.id, design_images.*").offset(site - 4).limit(9)
+      @design_images = images.select("distinct design_images.id, design_images.*").offset(site - 4).limit(9)
     end
 
-    @image_thumb_arr = @image_arr[-5, 6]
+    @image_ids = @design_images.map &:id
+    unless @image_ids.include?(@image.id)
+      site_count = images.where("design_images.id > ?", @image.id).count
+      @design_images = images.select("distinct design_images.id, design_images.*").offset(site_count - 4).limit(9)
+      params[:site] = site_count
+    end
 
-    if site == 0 || @image_thumb_arr.first.id == @image.id
-      @next_id = @image_thumb_arr.last.id
-      @image_thumb_arr = @image_thumb_arr[0, 4]
-    elsif @image_thumb_arr.last.id == @image.id
-      @up_id = @image_thumb_arr.first.id
-      @image_thumb_arr = @image_thumb_arr[-4, 4]
-    else
-      @up_id = @image_thumb_arr.first.id
-      @next_id = @image_thumb_arr.last.id
-      @image_thumb_arr = @image_thumb_arr[-5, 4]
+    @image_thumb = []
+    array_images = @design_images.to_a
+
+    if array_images.include?(@image)
+      index = array_images.index(@image)
+      @next_id = array_images[index+1].id if array_images[index+1].present?
+      @up_id = array_images[index-1].id if array_images[index-1].present?
+      @image_thumb = array_images[index+1..index+3]
     end
 
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
