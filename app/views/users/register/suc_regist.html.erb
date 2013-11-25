@@ -2,7 +2,6 @@
   <script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
   <%= stylesheet_link_tag 'reg' %>
   <script type='text/javascript'>
-
     (function() {
       var c = document.createElement('script');
       c.type = 'text/javascript';
@@ -14,39 +13,35 @@
       mmConversionTag(326804, this);
     })();
   </script>
-
 <% end -%>
 <script>
-
   var _CiQ10008 = _CiQ10008 || [];
-
   _CiQ10008.push(['_trackEvent', {
       type: 1,
       labels: [
         {"按钮名称": "注册成功提示页"}
-
       ],
       values: [
         {"数量": 1}
-
       ]
-
     }]);
-
 </script>
-
 <noscript>
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326804&amp;ns=1"/>
 </noscript>
 <div class="main">
   <div class="reg_bg3 pr"></div>
   <div class="wrapper">
-    <div class="reg_suc fb ft16 tc">
-      <%- if params[:return_to].present? %>
-        <a href="/<%= params[:return_to] %>">因爱之名，刷新生活</a>（<span class="cr ft18">5</span>秒之后自动跳转）
-      <%- else %>
-        <a href="/">进入iColor主页</a>（<span class="cr ft18">5</span>秒之后自动跳转）
-      <%- end %>
+    <div class="reg_suc fb ft16">
+      <p>登录后进入<a href="<%= user_asks_path(current_user) %>" class="cr">个人主页</a>频道的<a href="<%= edit_user_path(current_user) %>" class="cr">修改账户信息</a>页面完善您的注册资料。</p>
+      <p>完善注册资料有助您更好的体验ICOLOR各项服务。</p>
+      <p class="mt10">
+        <%- if params[:return_to].present? %>
+          <a href="/<%= params[:return_to] %>">因爱之名，刷新生活</a>（<span class="cr ft18">5</span>秒之后自动跳转）
+        <%- else %>
+          <a href="/">进入iColor主页</a>（<span class="cr ft18">5</span>秒之后自动跳转）
+        <%- end %>
+      </p>
     </div><!--reg_suc ends-->
     <div class="ads">
       <a href="/gift"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>

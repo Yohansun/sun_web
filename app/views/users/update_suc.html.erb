@@ -5,8 +5,12 @@
 <div class="main">
   <div class="reset_bg3 pr"></div>
   <div class="wrapper">
-    <div class="reg_suc fb ft16 tc reset_suc">
+    <div class="reg_suc fb ft16 reset_suc">
+      <p>登录后进入<a href="<%= user_asks_path(current_user) %>" class="cr">个人主页</a>频道的<a href="<%= edit_user_path(current_user) %>" class="cr">修改账户信息</a>页面完善您的注册资料。</p>
+      <p>完善注册资料有助您更好的体验ICOLOR各项服务。</p>
+      <p class="mt10">
       <a href="<%= user_path(current_user) %>">进入我的主页</a>（<span class="cr ft18">5</span>秒之后自动跳转）
+      <p/>
     </div><!--reg_suc ends-->
     <div class="ads">
       <a href="/gift"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>
