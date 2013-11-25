@@ -40,7 +40,7 @@
 </div>
 
 <div class="unlogin modal" style="height: 354px;">
-	<%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user" },:remote => true)  do |f| %>
+	<%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user", :class=> "nomargin" },:remote => true)  do |f| %>
 		<div class="login_tit">
 			<a href="javascript:;" class="close_btn js-close_btn"></a>
 			<span>请先登录</span>
@@ -55,12 +55,12 @@
 	        <label for="username" class="username ft14 fl login_label">帐号：</label>
 	        <input id="username" type="text" placeholder="用户名/邮箱/手机" name="user[login]" value=""/>
 	      </div>
-	      <div class="clearfix">
+	      <div class="clearfix mt10">
 	        <label for="password" class="password ft14 fl login_label">密码：</label>
 	        <input id="password" type="password" class="fl" name="user[password]"/>
 	        <span class="tips text-center fr pass_tips"><a href="/users/password/new">忘记密码？</a></span>
 	      </div>
-				<p class="clearfix">
+				<p class="clearfix mt10">
 		      <input id="login" type="image" src="<%= asset_path "login.jpg" %>" />
 		      <label class="checkbox fl login_auto">
 		        <input type="checkbox" /><span>下次自动登录</span>

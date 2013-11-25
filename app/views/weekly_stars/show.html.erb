@@ -9,6 +9,7 @@
           background:white !important;
         }
         .desc ul p{max-width: 150px;*max-width: none;}
+        .reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
     </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -92,7 +93,7 @@
         <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
         <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
       </div>
-    </div>  
+    </div>
   </div>
 </div>
 </div>
@@ -177,12 +178,12 @@
     <ul class="review_listA">
       <% @comments.each do |c| %>
           <li>
-            <div class="bar">              
+            <div class="bar">
               <% if c.user %>
                 <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
               <% else %>
                 <a href="#" class="user">匿名</a>
-              <% end %>              
+              <% end %>
               <span class="time"><%= c.created_at.to_date %></span>
             </div>
             <div class="reply">
@@ -191,6 +192,7 @@
             <div class="content">
               <%= c.content %>
             </div>
+            <div class="clearfix"></div>
 
             <div class="reply_area none cl pr">
               <em class="pa">◆</em>
@@ -215,7 +217,7 @@
               <div class="reply_con ft14 clear">
                 <div class="clear">
                   <%- c.reply_msgs.order("created_at DESC").each do |r| %>
-                      <div class="clear  <%= "reply_line" if r != c.reply_msgs.first %> ">
+                      <div class="clear  <%= "reply_line" if r != c.reply_msgs.last %> ">
                         <p class="reply_tabs fl">
                           <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
                         </p>

@@ -1,3 +1,13 @@
+<%- content_for :head do %>
+<style>
+.del_color{background-position:0 3px;}
+.reply_area{margin-top:0;}
+  .msgboard_list .visitor_info{font:normal 16px/18px 'Microsoft Yahei';margin:0;}
+  .msg_list_box,.signup_text{float:none!important;display:block;}
+  .msgboard_list .signup_text{margin-bottom:0;}
+  .signup_text span{top:6px;z-index:10}
+</style>
+<%- end %>
 <%- content_for :tail do %>
   <%= javascript_include_tag "reply" %>
   <!-- <div class="float_ads tr">
@@ -38,7 +48,8 @@
                 <%= link_to "删除", user_ask_path(current_user.id, id:m.id), method: :delete, confirm: "确认删除？", :class =>"del_color",:style =>"padding-left:24px;" %>
               <%- end %>
             </div>
-            <div class="msg_list_box">
+            <div class="clearfix"></div>
+            <div class="msg_list_box clearfix">
               <div class="signup_text">
                 <span></span>
                 <p><%= m.content %></p>
