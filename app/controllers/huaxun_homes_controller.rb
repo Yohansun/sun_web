@@ -23,7 +23,9 @@ class HuaxunHomesController < ApplicationController
     @point_products = PointProduct.all
     @middle_value = @point_products.count / 2
     @replies = Reply.where(genre: 'huaxun').order("id desc").page(1).limit(4)
+    # 精英团队
     @teams = Team.where(is_save: true).order("updated_at desc")
+    @team_more_url = Team.find_by_more_url(true)
   end
 
   def get_reply
