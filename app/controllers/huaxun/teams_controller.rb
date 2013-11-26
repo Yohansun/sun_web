@@ -2,6 +2,15 @@
 class Huaxun::TeamsController < Huaxun::BaseController
   def index
     @teams = Team.where("is_save = 1").order("updated_at desc").page(params[:page]).per(10)
+    @more_url = Team.find_by_more_url(true)
+  end
+
+  def update_more_url
+    if params[:more_url]
+      more_url = Team.find_or_create_by_more_url(true)
+      more_url.update_attribute(:url, params[:more_url])
+    end
+    redirect_to teams_path, notice: '更多URL修改成功!'
   end
 
   def search

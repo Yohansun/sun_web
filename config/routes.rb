@@ -776,6 +776,7 @@ Icolor::Application.routes.draw do
     resources :teams do
       collection do
         post :create_image
+        post :update_more_url
         post :search
         post :del_all
       end
