@@ -68,5 +68,16 @@
         </div>
       </fieldset>
     </form>
+    <fieldset>
+      <%= form_tag update_more_url_teams_path do %>
+        <div class="control-group form-inline">
+          <label>
+            <strong>更多URL</strong>
+            <input type="text" name="more_url" value="<%= @more_url.url if @more_url %>" />
+          </label>
+          <button type="submit" class="btn btn-danger">保存</button>
+        </div>
+      <% end %>
+    </fieldset>
   </div>
 </div>
