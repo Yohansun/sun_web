@@ -2,6 +2,18 @@
   <%= javascript_include_tag "jquery.slider"%>
   <script type="text/javascript">
     $(function() {
+      var votes_click = $('.votes_click');
+      votes_click.on('click', function(){
+        var last = votes_click.data('last'), now = +new Date;
+        if(!last || (now - last) > 60000){
+          goVote();
+          votes_click.data('last', now);
+        };
+      });
+      function goVote(){
+        $.post('<%= votes_path(:voteable_id => @design.id, :voteable_type => "Design")%>');
+      };
+
       $(".vote_btn_story").click(function() {
         if ($(".def_t").val() == "") {
           alert("评论内容不能为空哦!")
@@ -75,14 +87,12 @@
                 <%- @design.design_images.each_with_index do |design,index| %>
                   <a href="javascript:;" data-target="#myCarousel" data-slide-to="<%= index %>" class="<%= 'active' if index==0 %>"></a>
                 <% end %>
-              </div> 
+              </div>
             </div>
             <div class="btn_group btns_absolute">
               <span class="btns btns_small btn_down">
                 <span>
-                  <%= link_to votes_path(:voteable_id => @design.id, :voteable_type => "Design"),remote: true,method: 'post',title: '' do %>
-                    <i class='i_icon i_icon_medium icon_like'></i> <abbr class='votes_count<%= @design.id %> '><%= @design.votes_count %> </abbr>
-                  <% end %>
+                  <a href="javascript:;" class='votes_click'><i class='i_icon i_icon_medium icon_like'></i> <abbr class='votes_count<%= @design.id %> '><%= @design.votes_count %> </abbr></a>
                   <a href="#comments"><i class="i_icon i_icon_medium icon_review"></i><%= @design.comments.count %></a>
                 </span>
               </span>
@@ -144,11 +154,11 @@
             <div class="desc" style="height: 35px; width: 590px; margin: 19px 0px; position: absolute; left: 1px; top: 1px; background-color: rgb(255, 255, 255); display: none; background-position: initial initial; background-repeat: initial initial;">
               <div class="list" style="height:35px;">
                 <ul class="group nomargin" style="overflow:hidden;">
-                  <%-@image_colors.first && @image_colors.first.each do |color| %>  
-                    <li>  
-                      <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>  
-                      <h5><%= color.name %></h5>  
-                      <p><%= color.code %></p>  
+                  <%-@image_colors.first && @image_colors.first.each do |color| %>
+                    <li>
+                      <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+                      <h5><%= color.name %></h5>
+                      <p><%= color.code %></p>
                     </li>
                     <% end %>
                   </ul>
