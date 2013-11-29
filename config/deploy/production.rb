@@ -43,6 +43,7 @@ namespace :deploy do
   task :symlink_shared, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs /nfs/system #{release_path}/public/system"
+    run "ln -nfs /nfs/images #{release_path}/public/images"
   end
 end
 
