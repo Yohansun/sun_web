@@ -2,7 +2,7 @@
 class DesignImagesController < ApplicationController
   layout "home_manage"
   before_filter :get_categories, only: [:index, :lists, :image_show]
-  # caches_page :index, :image_show
+  caches_page :image_show
 
   def create
     newparams = coerce(params)
