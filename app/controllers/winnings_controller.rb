@@ -1,5 +1,7 @@
 # encoding: utf-8
 class WinningsController < ApplicationController
+  caches_page :index
+
   def index
     i_banners = IBanner.page_name('因爱设计师获奖名单')
     @banner1 = i_banners.find_by_position(1)
