@@ -361,9 +361,9 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     if @image.imageable_type == "MasterDesign"
      @master_design = MasterDesign.find(@image.imageable_id)
-   end
+    end
 
-   @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
+    @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
     if @image.area_id
       area = Area.find(@image.area_id)
@@ -459,10 +459,15 @@ class DesignImagesController < ApplicationController
       @design_images = images.select("distinct design_images.id, design_images.*").offset(site - 4).limit(9)
     end
 
-    @image_ids = @design_images.map &:id
-    unless @image_ids.include?(@image.id)
+    image_ids = @design_images.map &:id
+    unless image_ids.include?(@image.id)
       site_count = images.where("design_images.id > ?", @image.id).count
-      @design_images = images.select("distinct design_images.id, design_images.*").offset(site_count - 4).limit(9)
+      if site_count <= 4
+        limit = site_count + 1 + 4
+        @design_images = images.select("distinct design_images.id, design_images.*").offset(0).limit(limit)
+      else
+        @design_images = images.select("distinct design_images.id, design_images.*").offset(site_count - 4).limit(9)
+      end
       params[:site] = site_count
     end
 
