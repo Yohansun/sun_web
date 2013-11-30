@@ -431,11 +431,6 @@ class DesignImagesController < ApplicationController
       end
     end
 
-    if @pinyin.present? && @pinyin.to_s != "0"
-      tags = ImageLibraryCategory.where("pinyin LIKE ?", "%#{@pinyin}%")
-      images = images.search_tags(tags.map(&:id), true)
-    end
-
     if @rank.present? && @rank.to_i != 0
       if @rank == "like"
         images = images.order("design_images.votes_count desc")
@@ -445,7 +440,11 @@ class DesignImagesController < ApplicationController
     else
       images = images.order("design_images.id desc")
     end
-    @img_count = images.count
+
+    counter_cache_key = [@area, @pinyin, @search, @type].join("_")
+    @img_count = Rails.cache.fetch("data-model-images_count-image_show-#{counter_cache_key}", expires_in: 7.days) do
+      images.count
+    end
 
     #筛选出搜索过的标签,用来重新筛选
     @tag_names = @tag_names.flatten
