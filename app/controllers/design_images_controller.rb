@@ -468,7 +468,9 @@ class DesignImagesController < ApplicationController
 
   private
   def parse_path_params
-    path_items = params[:path].present? ? CGI.unescape(params[:path]).split("-") : []
+    params[:path] ||= "0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0"
+
+    path_items = CGI.unescape(params[:path]).split("-")
     tag_ids = path_items[0...-1].map { |e| e.to_i }.uniq.sort - [0, -1]
     @tags = ImageLibraryCategory.where(id: tag_ids).all
 
