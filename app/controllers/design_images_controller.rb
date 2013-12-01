@@ -345,145 +345,42 @@ class DesignImagesController < ApplicationController
   end
 
   def image_show
-    #manage
-    #banners
-    @banners = IBanner.page_name('图库内页').where(position: [1,2,3,4]).order("position").all
+    parse_path_params
 
-    #大师访谈
+    @banners = IBanner.page_name('图库内页').where(position: [1,2,3,4]).order("position").all
     @master_interviews = IColumnData.show_data(6).limit(5)
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
-    #相关资讯
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
-    #manage_end
 
-    @tag_names = []
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
-    if @image.imageable_type == "MasterDesign"
-     @master_design = MasterDesign.find(@image.imageable_id)
-    end
+    @master_design = MasterDesign.find(@image.imageable_id) if @image.imageable_type == "MasterDesign"
 
     @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
-    # @image_styles = @image.try(:design_id) && DesignTags.design_style(@image.design_id)
-    if @image.area_id
-      area = Area.find(@image.area_id)
-      if area.parent_id
-        @image_city = area.parent.name
-      else
-        @image_city = area.name
-      end
-    end
-    @ids = []
-    @ids = params[:path].split('-') if params[:path].present?
-    @other_ids = []
-    @other_ids = @ids.last.split('_') if @ids.present?
-    if @other_ids.present?
-      @area = @other_ids[0]
-      @pinyin = @other_ids[1]
-      @search = @other_ids[2]
-      @type = @other_ids[3]
-      @rank = @other_ids[5]
-    end
-    images = DesignImage.from.available.audited_with_colors
-
-    unless params[:path].blank?
-     @tag_ids = CGI.unescape(params[:path]).split("-").map { |e| e.to_i }.uniq.sort
-     @tag_ids.delete(-1)
-   end
-
-   unless @tag_ids.blank?
-    tag_arrs = []
-    @tag_ids.each do |tag_arr|
-      if tag_arr.to_i != 0
-        tag_arrs << tag_arr
-      end
-    end
-
-    if tag_arrs.present?
-      @tags = ImageLibraryCategory.where("id in (?)", tag_arrs).all
-      final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
-      images = images.search_tags(final_tags.map(&:id))
-        #取出所有搜索出来的标签,不包括特殊标签 拼音地域
-        @tag_names << final_tags
-      end
-    end
-
-    if @area.present? && @area.to_s != "0"
-      area = Area.find(@area)
-      areas = area.self_and_descendants
-      area_tree = area.self_and_ancestors.map(&:id)
-      @area_names = area.self_and_ancestors.map(&:name).join(" ")
-      @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
-      images = images.where(area_id: areas.map(&:id))
-    end
-
-    if @search.present? && @search != '_' && @search.to_s != "0"
-      tags = ImageLibraryCategory.where("title LIKE ?", "%#{@search}%")
-      images = images.search_tags(tags.map(&:id), true)
-      @tag_names << tags
-    end
-
-    if @type.present? && @type.to_s != "0"
-      if @type == 'WeekStart'
-        images = images.where("sorts = 2")
-      else
-        images = images.where("imageable_type = ?", @type)
-      end
-    end
-
-    if @rank.present? && @rank.to_i != 0
-      if @rank == "like"
-        images = images.order("design_images.votes_count desc")
-      elsif @rank == "view_count"
-        images = images.order("design_images.view_count desc")
-      end
-    else
-      images = images.order("design_images.id desc")
-    end
-
-    counter_cache_key = [@area, @pinyin, @search, @type].join("_")
-    @img_count = Rails.cache.fetch("data-model-images_count-image_show-#{counter_cache_key}", expires_in: 7.days) do
-      images.count
-    end
-
-    #筛选出搜索过的标签,用来重新筛选
-    @tag_names = @tag_names.flatten
-    #在delete_link helper中调用,需要去掉非标签的搜索(地域,拼音)
-    @ids.delete_at(-1)
-
-    site = params[:site].to_i - 1
-    if site <= 4
-      limit = site + 1 + 4
-      @design_images = images.select("distinct design_images.id, design_images.*").offset(0).limit(limit)
-    else
-      @design_images = images.select("distinct design_images.id, design_images.*").offset(site - 4).limit(9)
-    end
-
-    image_ids = @design_images.map &:id
-    unless image_ids.include?(@image.id)
-      site_count = images.where("design_images.id > ?", @image.id).count
-      if site_count <= 4
-        limit = site_count + 1 + 4
-        @design_images = images.select("distinct design_images.id, design_images.*").offset(0).limit(limit)
-      else
-        @design_images = images.select("distinct design_images.id, design_images.*").offset(site_count - 4).limit(9)
-      end
-      params[:site] = site_count
-    end
-
-    @image_thumb = []
-    array_images = @design_images.to_a
-
-    if array_images.include?(@image)
-      index = array_images.index(@image)
-      @next_id = array_images[index+1].id if array_images[index+1].present?
-      @up_id = array_images[index-1].id if array_images[index-1].present?
-      @image_thumb = array_images[index+1..index+3]
-    end
+    @image_city = @image.area.try(:city_name)
 
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
 
     expires_in 7.days, 'max-stale' => 8.days, :public => true
+  end
+
+  def thumbs
+    parse_path_params
+
+    offset = params[:offset].to_i - 1
+
+    if offset < 0
+      offset = @images.where("design_images.id > ?", params[:image_id]).count
+    end
+
+    offset = 0 if offset > @img_count
+    @images = @images.select("distinct design_images.id, design_images.*").offset(offset).limit(4).all
+
+    if offset + 4 > @img_count
+      @next_offset = 1
+    else
+      @next_offset = offset + 4
+    end
   end
 
   def get_latest_and_likes
@@ -570,6 +467,53 @@ class DesignImagesController < ApplicationController
   end
 
   private
+  def parse_path_params
+    path_items = params[:path].present? ? CGI.unescape(params[:path]).split("-") : []
+    tag_ids = path_items[0...-1].map { |e| e.to_i }.uniq.sort - [0, -1]
+    @tags = ImageLibraryCategory.where(id: tag_ids).all
+
+    if @tags.size > 0
+      other_path = path_items.last.split("_")
+      @area, @pinyin, @search, @type, @rank = other_path[0], other_path[1], other_path[2], other_path[3], other_path[5]
+    end
+
+    if @area && @area != '0'
+      area = Area.find(@area)
+      @areas = area.self_and_descendants
+      @area_names = areas.map(&:name).join(" ")
+      images = images.where(area_id: @areas.map(&:id))
+    end
+
+    images = DesignImage.from.available.audited_with_colors
+    final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
+    images = images.search_tags(final_tags.map(&:id))
+
+    if @search.present? && @search != '_' && @search != "0"
+      tags = ImageLibraryCategory.where("title LIKE ?", "%#{@search}%")
+      images = images.search_tags(tags.map(&:id), true)
+      final_tags << tags
+    end
+
+    if @type.present? && @type.to_s != "0"
+      if @type == 'WeekStart'
+        images = images.where("sorts = 2")
+      else
+        images = images.where("imageable_type = ?", @type)
+      end
+    end
+
+    @images = images.order("design_images.id desc")
+
+    counter_cache_key = [@area, @pinyin, @search, @type, @tags.map(&:id)].join("_")
+    @img_count = Rails.cache.fetch("data-model-images_count-image_show-#{counter_cache_key}", expires_in: 7.days) do
+      @images.count
+    end
+
+    # Fall-back for delete_link helper...
+    @ids = tag_ids
+    @other_ids = other_path
+  end
+
   def coerce(params)
     if params[:upload].nil?
       h = Hash.new

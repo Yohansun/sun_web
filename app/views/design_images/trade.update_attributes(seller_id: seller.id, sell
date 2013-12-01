@@ -1,1 +1,0 @@
-trade.update_attributes(seller_id: seller.id, seller_name: seller.name; dispatched_at: Time.now)

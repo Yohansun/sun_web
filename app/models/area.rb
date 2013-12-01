@@ -12,28 +12,32 @@ class Area < ActiveRecord::Base
         delegate :id  ,:to => :#{instance} ,:allow_nil => true,:prefix => true
       EOF
     end
-  
+
   def province
     root
   end
-  
+
   def city
     parent_id == root_id ? self : (parent  || opstruct)
   end
-  
+
+  def city_name
+    self.parent ? self.parent.name : self.name
+  end
+
   #主要用户判断是否为区
   def district
     parent_id == city_id ? self : opstruct
   end
-  
+
   def cities
     province.children
   end
-  
+
   def districts
     city.children
   end
-  
+
   private
   def opstruct(int_id=SecureRandom.hex(6),int_name="")
     OpenStruct.new(:id => int_id,:name => int_name)

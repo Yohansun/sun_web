@@ -14,7 +14,18 @@
         });
     };
 
+    var path = "<%= params[:path] %>";
+    var offset = <%= params[:site] || 0 %>;
+    var image_id = <%= params[:id] %>;
+    function load_side_thumbs() {
+      $.get("<%= thumbs_design_images_path %>", {path: path, offset: offset, image_id: image_id}, function(){
+        setTimeout(load_side_thumbs, 5000);
+      });
+    }
+
     $(function() {
+      load_side_thumbs();
+
       var $image_id = $('.work_comments').data('image_id'),
           $site = $('.work_comments').data('site'),
           $path = $('.work_comments').data('path');
@@ -73,38 +84,6 @@
     sel.bind('.level1_3', null, '区');
     });
   </script>
-  <script type="text/javascript">
-  $(function() {
-    var site = 0;
-    <% if (params[:site].to_i + 4) >= @images_count %>
-      site = 4
-    <% else %>
-      site = <%= params[:site].to_i + 4 %>
-    <% end %>
-    setInterval(function(){
-      $.get("<%= get_thumb_design_images_path %>",{site:site},function(data){
-        re_site = data.site;
-        html = '<ul>';
-        data.result.forEach(function(el) {
-          var str = makeStr(el.id);
-          re_site = ++re_site
-          html += "<li><a href='/images/" + el.id+ "/" +  re_site + "/<%=params[:path]%>'><span></span>" +
-                  "<img src='/system/design_images/files/000/" + str.slice(0, 3) + '/' + str.slice(3)+ "/image_show_thumb/" + el.id + ".jpg' /></a></li>";
-        });
-        html += '</ul>';
-         $(".map-kv-container").html(html);
-      })
-      site = site + 4
-    },5000)
-    function makeStr(num){
-      num = (num + '').split('');
-      while(num.length < 6){
-        num.unshift('0')
-      }
-      return num.join('')
-    }
-  });
-  </script>
 <%- end %>
 <h3 class="chann_caption nomargin">
   <div class="map-search pull-right">
@@ -148,7 +127,7 @@
 
 <p class="map-srch-bin index_main">
   您的选择：
-  <%- @tag_names.each do |tag| %>
+  <%- @tags.each do |tag| %>
     <% next if tag.blank? %>
     <span class="map-srch-s">
       <%= tag.title %>
@@ -176,37 +155,8 @@
       <div class="map-big pull-left">
         <%= image_tag(@image.file.url(:image_map_show), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
       </div>
-      <div class="map-kv-slider pull-right">
-        <% if @design_images.first.id != @image.id %>
-          <a href="/images/<%=@design_images.first.id%>/<% if params[:site].to_i <= 4 %>1<% else %><%=params[:site].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
-          <hr class="nomargin">
-          <a href="/images/<%=@up_id%>/<%=params[:site].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
-        <% else %>
-          <a class="map-prev-bullet" href="javascript:alert('当前已经是第一张图片');">prev</a>
-          <hr class="nomargin">
-          <a class="map-prev" href="javascript:alert('当前已经是第一张图片');">上一张图</a>
-        <% end %>
-        <div class="map-kv-container nomargin">
-          <ul>
-            <li class="map-active"><a ><span></span><img src="<%= @image.file.url(:image_show_thumb) %>" alt="" /></a></li>
-            <% if @image_thumb %>
-              <% @image_thumb.each_with_index do |image,index| %>
-                <li><a href="/images/<%=image.id%>/<%=params[:site].to_i + (index+1)%>/<%=params[:path]%>"><span></span><img src="<%=image.file.url(:image_show_thumb)%>" alt="" /></a></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
-        <% if @next_id %>
-          <a href="/images/<%=@next_id%>/<%=params[:site].to_i + 1%>/<%=params[:path]%>" class="map-next">下一张图</a>
-        <% else %>
-          <a class="map-next" href="javascript:alert('当前已经是最后一张图片');">下一张图</a>
-        <% end %>
-        <hr class="nomargin">
-        <% if @design_images.last.id != @image.id %>
-          <a href="/images/<%=@design_images.last.id%>/<% if (params[:site].to_i + 4) >= @images_count %><%=@images_count%><% else %><%=params[:site].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet mt10">next</a>
-        <% else %>
-          <a class="map-next-bullet mt10" href="javascript:alert('当前已经是最后一张图片');">next</a>
-        <% end %>
+      <div class="map-kv-slider pull-right js-thumbs">
+        加载中…
       </div>
     </div>
     <div class="btn_group clearfix">
