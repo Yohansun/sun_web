@@ -98,11 +98,13 @@
 							<%- @weekly_stars.each do |w| %>
 								<% id = w.author_url.match(%r(http://www.icolor.com.cn/users/(\d{1,})?)).to_a[1] %>
 								<% user = User.find(id) if id.present? %>
-								<li>
-									<%= show_avatar(user,"icon","53x50") %>
-									<p><span title="<%= user.display_name %>"><%= truncate(user.display_name, length:8) %></span></p>
-									<p><a href="<%= user_path(user) %>">进入个人主页&gt;</a></p>
-								</li>
+								<% if user %>
+									<li>
+										<%= show_avatar(user,"icon","53x50") %>
+										<p><span title="<%= user.display_name %>"><%= truncate(user.display_name, length:8) %></span></p>
+										<p><a href="<%= user_path(user) %>">进入个人主页&gt;</a></p>
+									</li>
+								<% end %>
 							<%- end %>
 						</ul>
 						<p class="per_more"><a href="/weekly_stars">更多...</a></p>
