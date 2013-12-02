@@ -148,7 +148,7 @@
   <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
 </p>
 
-<h4 class="image_title clearfix"><small class="pull-right">我们为您精选了<strong><%= @img_count %></strong> 张图片</small><%= @image.title.present? ?  @image.title :  @image.design.title %></h4>
+<h4 class="image_title clearfix"><small class="pull-right">我们为您精选了<strong><%= @img_count %></strong> 张图片</small><%= @image.title.present? ?  @image.try(:title) : @image.try(:design).try(:title) %></h4>
 <div class="index_main clearfix">
   <div class="pull-left imgbase_in_left">
     <div class="slides_box clearfix">
