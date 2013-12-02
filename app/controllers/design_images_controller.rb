@@ -175,7 +175,7 @@ class DesignImagesController < ApplicationController
     @design_images = DesignImage.from.available.audited_with_colors
 
     @tag_names = []
-
+    @tag_ids = @tag_ids.delete_if {|x| x == "" }
     if @tag_ids.present?
       @tags = ImageLibraryCategory.where("id in (?)", @tag_ids)
       #取所有标签的parent
@@ -184,7 +184,8 @@ class DesignImagesController < ApplicationController
       final_tags = @tags.select{|item| item.parent_id.present?}.map { |tag| tag.self_and_descendants }.flatten
       #优先筛选parent的标签
       @design_images = @design_images.joins(:parent_tags).where("parent_tags.image_library_category_id in (?)", parent_tags) if parent_tags.present?
-      @design_images = @design_images.search_tags(final_tags.map(&:id))
+      tags = final_tags.map(&:id).uniq
+      @design_images = @design_images.search_tags(tags)
       @tag_names << final_tags.map(&:title)
     end
 
@@ -488,7 +489,7 @@ class DesignImagesController < ApplicationController
 
     images = DesignImage.from.available.audited_with_colors
     final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
-    images = images.search_tags(final_tags.map(&:id))
+    images = images.search_tags(final_tags.map(&:id).uniq)
 
     if @search.present? && @search != '_' && @search != "0"
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{@search}%")
