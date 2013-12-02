@@ -480,16 +480,16 @@ class DesignImagesController < ApplicationController
       @area, @pinyin, @search, @type, @rank = other_path[0], other_path[1], other_path[2], other_path[3], other_path[5]
     end
 
-    if @area && @area != '0'
-      area = Area.find(@area)
-      @areas = area.self_and_descendants
-      @area_names = areas.map(&:name).join(" ")
-      images = images.where(area_id: @areas.map(&:id))
-    end
-
     images = DesignImage.from.available.audited_with_colors
     final_tags = @tags.select{|item| !item.parent_id.blank?}.map { |tag| tag.self_and_descendants }.flatten
     images = images.search_tags(final_tags.map(&:id).uniq)
+
+    if @area && @area != '0'
+      area = Area.find(@area)
+      @areas = area.self_and_descendants
+      @area_names = @areas.map(&:name).join(" ")
+      images = images.where("area_id in (?)", @areas.map(&:id))
+    end
 
     if @search.present? && @search != '_' && @search != "0"
       tags = ImageLibraryCategory.where("title LIKE ?", "%#{@search}%")
