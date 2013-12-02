@@ -2,7 +2,7 @@
 class CollectsController < ApplicationController
 	before_filter :find_user
 	def index
-		@images = current_user.collects.page(params[:page]).per(8)
+		@images = current_user.collects.page(params[:page]).per(8) if current_user
 	end
 	def create
 		if current_user
