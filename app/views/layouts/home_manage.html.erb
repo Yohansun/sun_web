@@ -138,13 +138,6 @@
               <li><%= link_to "案例下载", "/softwares/case", :class => "#{'active noborder' if controller_name == 'softwares' && action_name == 'case'}" %></li>
             </ul>
           </li>
-          <!-- <li class="<%= 'active noborder' if controller_name == 'function' %>" >
-            <a href="/art" target="_blank">刷新效果</a>
-            <ul class="subnav">
-              <li><%= link_to "米兰诺艺术效果", "/art", :class => "#{'active noborder' if controller_name == 'function' && action_name == 'art'}" %></li>
-              <li><%= link_to "木纹风尚生活", "/7-1", :class => "#{'active noborder' if controller_name == 'function' && action_name == '7-1'}" %></li>
-            </ul>
-          </li> -->
           <li class="<%= 'active noborder' if controller_name =~ /designer_events|other_events|gifts/ %>">
             <a href="/designer_events" target="_blank">精彩活动</a>
             <ul class="subnav">
