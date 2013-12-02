@@ -417,8 +417,8 @@ class DesignImagesController < ApplicationController
   def fullscreen
     @design_image = DesignImage.find(params[:id])
 
-    @design_name = @design_image.design.title
-    @author = @design_image.user.username
+    @design_name = @design_image.try(:design).try(:title)
+    @author = @design_image.try(:user).try(:username)
 
     render :layout => nil
   end
