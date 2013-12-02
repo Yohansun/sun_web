@@ -46,7 +46,7 @@ Icolor::Application.routes.draw do
   post "home/update_vote" => "home#update_vote"
   post "home/upload_img" => "home#upload_img"
 
-  resources :votes
+  resources :votes, :only => [:create]
 
   resources :yda_games, :only => [:create]
 
