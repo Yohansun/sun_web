@@ -16,9 +16,10 @@
 
     var path = "<%= params[:path] %>";
     var offset = <%= params[:site] || 0 %>;
+    var fix_offset = offset;
     var image_id = <%= params[:id] %>;
     function load_side_thumbs() {
-      $.get("<%= thumbs_design_images_path %>", {path: path, offset: offset, image_id: image_id}, function(){
+      $.get("<%= thumbs_design_images_path %>", {path: path, fix_offset: fix_offset, offset: offset, image_id: image_id}, function(){
         setTimeout(load_side_thumbs, 5000);
       });
     }

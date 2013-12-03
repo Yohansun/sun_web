@@ -1,2 +1,2 @@
-$('.js-thumbs').html("<%=j render partial: 'side_thumbs', locals: { image_thumbs: @image_thumbs, image: @image, next_offset: @next_offset } %>");
+$('.js-thumbs').html("<%=j render partial: 'side_thumbs', locals: { image_thumbs: @image_thumbs, image: @image, next_offset: @next_offset, prev_images: @prev_images, next_images: @next_images } %>");
 offset = <%= @next_offset %>;
