@@ -1,5 +1,7 @@
 #encoding: utf-8
 Icolor::Application.routes.draw do
+  # match "/system/*path" => redirect("http://icolor.dev/dev-assets/logo.jpg")
+
   # match "/images/(:id)_:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:site" => "design_images#image_show"
   match "/images/:id/:site/*path" => "design_images#image_show"
   match "/images/:id/image_show" => "design_images#image_show", as: 'image_show_design_image'

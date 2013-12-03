@@ -368,20 +368,54 @@ class DesignImagesController < ApplicationController
   def thumbs
     parse_path_params
 
-    offset = params[:offset].to_i - 1
+    @offset = params[:offset].to_i - 1
 
-    if offset < 0
-      offset = @images.where("design_images.id > ?", params[:image_id]).count
+    if @offset < 0
+      @offset = @images.where("design_images.id > ?", params[:image_id]).count
     end
 
-    offset = 0 if offset > @img_count
-    @images = @images.select("distinct design_images.id, design_images.*").offset(offset).limit(4).all
+    @offset = 0 if @offset > @img_count
 
-    if offset + 4 > @img_count
+    cache_key = [params[:image_id], params[:path]].join
+    if params[:offset] == params[:fix_offset]
+      if @offset >= 4
+        @images = @images.select("distinct design_images.id, design_images.*").offset(@offset - 4).limit(9).all
+        index = @images.map(&:id).index(params[:image_id].to_i)
+        @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}", expires_in: 7.days) do
+          [@images[index - 1], @images[index - 4]]
+        end
+        @next_images = Rails.cache.fetch("data-model-next_image-#{cache_key}", expires_in: 7.days) do
+          [@images[index + 1], @images[index + 4]]
+        end
+        @images = @images[4, 4]
+      else
+        @images = @images.select("distinct design_images.id, design_images.*").offset(0).limit(@offset + 9).all
+        if @offset > 0
+          @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}", expires_in: 7.days) do
+            [@images[@offset - 1], @images[0]]
+          end
+        end
+        index = @images.map(&:id).index(params[:image_id].to_i)
+        @next_images = Rails.cache.fetch("data-model-next_image-#{cache_key}", expires_in: 7.days) do
+          [@images[index + 1], @images[index + 4]]
+        end
+
+        @images = @images[index, 4]
+      end
+    else
+      @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}")
+      @next_images = Rails.cache.fetch("data-model-next_image-#{cache_key}")
+      @images = @images.select("distinct design_images.id, design_images.*").offset(@offset).limit(4).all
+    end
+
+
+    if @offset + 4 > @img_count
       @next_offset = 1
     else
-      @next_offset = offset + 4
+      @next_offset = @offset + 5
     end
+
+    @offset += 1
   end
 
   def get_latest_and_likes

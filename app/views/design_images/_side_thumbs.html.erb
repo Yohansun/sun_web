@@ -1,11 +1,13 @@
-<% if @images.first.id != params[:image_id].to_i %>
-<a href="/images/<%=@images.first.id%>/<% if params[:offset].to_i <= 4 %>1<% else %><%=params[:offset].to_i - 4%><% end %>/<%=params[:path]%>" class="map-prev-bullet">prev</a>
-<hr class="nomargin">
-<a href="/images/<%=@up_id%>/<%=params[:offset].to_i - 1%>/<%=params[:path]%>" class="map-prev">上一张图</a>
+<% if @prev_images && @prev_images[1] %>
+  <a href="/images/<%= @prev_images[1].id %>/<%= [params[:fix_offset].to_i - 4, 1].max %>/<%= params[:path] %>" class="map-prev-bullet">prev</a>
 <% else %>
-<a class="map-prev-bullet" href="javascript:alert('当前已经是第一张图片');">prev</a>
+  <a class="map-prev-bullet" href="javascript:alert('当前已经是第一张图片');">prev</a>
+<% end %>
 <hr class="nomargin">
-<a class="map-prev" href="javascript:alert('当前已经是第一张图片');">上一张图</a>
+<% if @prev_images && @prev_images[0] %>
+  <a href="/images/<%= @prev_images[0].id %>/<%= params[:fix_offset].to_i - 1 %>/<%= params[:path] %>" class="map-prev">上一张图</a>
+<% else %>
+  <a class="map-prev" href="javascript:alert('当前已经是第一张图片');">上一张图</a>
 <% end %>
 <div class="map-kv-container nomargin">
   <ul>
@@ -14,14 +16,14 @@
     <% end %>
   </ul>
 </div>
-<% if @next_id %>
-<a href="/images/<%=@next_id%>/<%=params[:offset].to_i + 1%>/<%=params[:path]%>" class="map-next">下一张图</a>
+<% if @next_images && @next_images[0] %>
+  <a href="/images/<%= @next_images[0].id %>/<%= params[:fix_offset].to_i + 1 %>/<%=params[:path]%>" class="map-next">下一张图</a>
 <% else %>
-<a class="map-next" href="javascript:alert('当前已经是最后一张图片');">下一张图</a>
+  <a class="map-next" href="javascript:alert('当前已经是最后一张图片');">下一张图</a>
 <% end %>
 <hr class="nomargin">
-<% if @images.last.id != params[:image_id].to_i %>
-<a href="/images/<%=@images.last.id%>/<% if (params[:offset].to_i + 4) >= @img_count %><%=@img_count%><% else %><%=params[:offset].to_i + 4%><% end %>/<%=params[:path]%>" class="map-next-bullet mt10">next</a>
+<% if @next_images && @next_images[1] %>
+  <a href="/images/<%= @next_images[1].id %>/<%= params[:fix_offset].to_i + 4 %>/<%=params[:path]%>" class="map-next-bullet mt10">next</a>
 <% else %>
-<a class="map-next-bullet mt10" href="javascript:alert('当前已经是最后一张图片');">next</a>
+  <a class="map-next-bullet mt10" href="javascript:alert('当前已经是最后一张图片');">next</a>
 <% end %>
