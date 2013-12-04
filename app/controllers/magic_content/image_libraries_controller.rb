@@ -24,7 +24,7 @@ module MagicContent
           @page_count = (@images.count / 10).to_i + 1
         end
       end
-      if params[:genre] == 'no_audited'
+      if params[:genre] == 'no_audited' || params[:genre] == 'id'
         @images = @images.page(params[:page])
       else
         @images = @images.where("no_audited is false").order("design_images.id DESC").page(params[:page]) if @images.present?

@@ -35,7 +35,7 @@ task :udate_design_image_no_audited_color => :environment do
 		design_image = DesignImage.find(id)
 		design_image.last_user_id = 1
     design_image.last_updated_at = Time.now
-    design_image.no_audited = true
+    design_image.no_audited = false
     design_image.audited = false
     design_image.edited_color = true
     if design_image.save
