@@ -1,222 +1,218 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag 'style', 'weekstar' %>
-    <style type="text/css">
-        #gallery_caption {
-            display: none;
-        }
-        .popup_zf {
-          bottom: 18px;
-          background:white !important;
-        }
-        .desc ul p{max-width: 150px;*max-width: none;}
-        .reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
-    </style>
+<%= stylesheet_link_tag 'style', 'weekstar' %>
+<style type="text/css">
+#gallery_caption {
+  display: none;
+}
+.popup_zf {
+  bottom: 18px;
+  background:white !important;
+}
+.desc ul p{max-width: 150px;*max-width: none;}
+.reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
+</style>
 <% end -%>
 <%- content_for :tail do %>
-    <%= javascript_include_tag "reply" %>
-    <%= render :partial => "recommend_color" %>
+<%= javascript_include_tag "reply" %>
+<%= render :partial => "recommend_color" %>
 <%- end %>
 <div class="main page_weekstar page_weekstar_detail">
-<div class='sub_title tr pt25'>
-  <img src="<%= asset_path "design/title_design.png" %>"/>
-</div>
+  <div class='sub_title tr pt25'>
+    <img src="<%= asset_path "design/title_design.png" %>"/>
+  </div>
   <div class='sub_nav ft12 pr tr'>
     <em><%= link_to "设计之星", "/weekly_stars", :class => 'fb' %></em>
     <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
     <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
-<div class="wrapper group">
-<%- if @design == WeeklyStar.last %>
+  <div class="wrapper group">
+    <%- if @design == WeeklyStar.last %>
     <div class="weekstart_titleA">
       <div class="subtitle clear">
         <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
-          <span class="fl">2012.5.12 往期作品</span>
+        <span class="fl">2012.5.12 往期作品</span>
       </div>
       <div class="btn_group fr" style="margin-top:10px;"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %></div>
       <h1><%= @design.design_name %></h1>
     </div>
-<%- else %>
-<div class="weekstart_titleA">
-  <div class="subtitle clear">
-    <%- unless @design == WeeklyStar.order("published_at desc").last %>
-      <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
-    <%- end %>
-      <span class="fl"><%= @design.try(:published_at).try(:to_date) %>往期作品</span>
-    <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="star_next fl"></a>
-  </div>
-  <div class="btn_group fr" style="margin-top:10px;"><%= link_to "", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show", :class =>"icon_fullscreen" %></div>
-  <h1><%= @design.design_name %></h1>
-</div>
-<%- end %>
-
-<div class="weekstart_detail">
-<div class="gallery">
-  <span class="moveleft"></span>
-  <span class="moveright"></span>
-
-  <div class="galleryK" id="gallery">
-    <%- unless @design.nil? %>
-        <%- @design.weekly_star_uploads.each do |i| %>
-            <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
+    <%- else %>
+    <div class="weekstart_titleA">
+      <div class="subtitle clear">
+        <%- unless @design == WeeklyStar.order("published_at desc").last %>
+        <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
         <%- end %>
-    <%- end %>
-  </div>
-</div>
-<%= javascript_include_tag "galleryK" %>
-<div class="color-picker">
-<div class="overview">
-  <div class="votes">所获票数：<span id="votes_count<%= @design.id %>"><%= @link_design.try(:votes_count) %></span>
-    <%#=# link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "WeeklyStar"), :remote => true, :method => 'post' %>
-  </div>
-
-  <div class="operate pr">
-    <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).length %>)</span></a>
-      <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_star_url(@design), @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
-  </div>
-</div>
-<div class="colors_box b_shadow">
-  <div class="colorsbox " style="padding:10px 0; overflow:hidden;">
-    <div class="color-picker group">
-      <div class="colors_tit" style="float:left; margin:20px 5px 0 0;">
-        <img src="<%= asset_path "master/colors_icon_tit.png" %>" />
+        <span class="fl"><%= @design.try(:published_at).try(:to_date) %>往期作品</span>
+        <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="star_next fl"></a>
       </div>
-      <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
-        <img src="<%= asset_path "design/colors2.gif" %>" />
-        <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
-          <div class="list" style="height:35px;">
-            <ul class="group" style="overflow:hidden;">
-            </ul>
+      <div class="btn_group fr" style="margin-top:10px;"><%= link_to "", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show", :class =>"icon_fullscreen" %></div>
+      <h1><%= @design.design_name %></h1>
+    </div>
+    <%- end %>
+
+    <div class="weekstart_detail">
+      <div class="gallery">
+        <span class="moveleft"></span>
+        <span class="moveright"></span>
+
+        <div class="galleryK" id="gallery">
+          <%- unless @design.nil? %>
+          <%- @design.weekly_star_uploads.each do |i| %>
+          <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
+          <%- end %>
+          <%- end %>
+        </div>
+      </div>
+      <%= javascript_include_tag "galleryK" %>
+      <div class="color-picker">
+        <div class="overview">
+          <div class="votes">所获票数：<span id="votes_count<%= @design.id %>"><%= @link_design.try(:votes_count) %></span>
+            <%#=# link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "WeeklyStar"), :remote => true, :method => 'post' %>
+          </div>
+
+          <div class="operate pr">
+            <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).length %>)</span></a>
+            <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_star_url(@design), @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
+          </div>
+        </div>
+        <div class="colorsbox group" style="padding:10px 0; overflow:hidden;">
+          <div class="colors_tit" style="float:left; margin:20px 5px 0 0;">
+            <img src="<%= asset_path "master/colors_icon_tit.png" %>" />
+          </div>
+          <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
+            <img src="<%= asset_path "design/colors2.gif" %>" />
+            <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
+              <div class="list" style="height:35px;">
+                <ul class="group" style="overflow:hidden;">
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="mall_link">
+            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
+            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
           </div>
         </div>
       </div>
-      <div class="mall_link">
-        <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
-        <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 
-<div class="properties">
-  <table class="propertyA">
-    <%- unless @design.company_name.blank? %>
-        <tr><th>公司名称：</th>
-          <td><%= @design.company_name %>
-            <%- unless @design.company_url.blank? %>
-                <a href="<%=@design.company_url%>">[进入公司主页]</a></td>
-            <%- end %>
+      <div class="properties">
+        <table class="propertyA">
+          <%- unless @design.company_name.blank? %>
+          <tr><th>公司名称：</th>
+            <td><%= @design.company_name %>
+              <%- unless @design.company_url.blank? %>
+              <a href="<%=@design.company_url%>">[进入公司主页]</a></td>
+              <%- end %>
             </tr>
-    <%- end %>
-    <%- unless @design.company_address.blank? %>
-        <tr><th>公司地址：</th>
-          <td><%= @design.company_address %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.author.blank? %>
-        <tr><th>设计师：</th>
-          <td>
-            <%=  @design.author %>
-            <%= link_to user_asks_path(@link_design.user.id) do %>
-              <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
             <%- end %>
-          </td>
-        </tr>
-    <%- end %>
-    <%- unless @design.project_name.blank? %>
-        <tr><th>项目名称：</th>
-          <td><%= @design.project_name %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.design_style.blank? %>
-        <tr><th>设计风格：</th>
-          <td><%= @design.design_style %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.design_intro.blank? %>
-        <tr><th>设计说明：</th>
-          <td><%= @design.design_intro %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.design_material.blank? %>
-        <tr><th>主要材料：</th>
-          <td><%= @design.design_material %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.recommend_reason.blank? %>
-        <tr><th>推荐理由：</th>
-          <td><%= @design.recommend_reason %></td>
-        </tr>
-    <%- end %>
-  </table>
-</div>
-<div class="review_wrap">
-  <div class="reviewform">
-    <div class="bar">
-      <h4><span>评论</span>(<%= @link_design.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
-    </div>
-    <div class="form-content">
-      <%= form_for(Comment.new) do |f| %>
-          <%- design_link_id = @design.design_link.split("/").last unless @design.design_link.blank? %>
-          <%= f.hidden_field :commentable_id, value: design_link_id %>
-          <%= f.hidden_field :commentable_type, value: 'Design' %>
-          <p class="input">
-            <%= f.text_area :content, :class => "area_text" %>
-          </p>
-          <p class="button">
-            <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
-          </p>
-      <% end %>
-    </div>
-  </div>
-  <div class="pager ft12">
-    <%- unless @comments.nil? %>
-        <%= paginate @comments %>
-    <%- end %>
-  </div>
-  <div class="review_list">
-    <ul class="review_listA">
-      <% @comments.each do |c| %>
-          <li>
+            <%- unless @design.company_address.blank? %>
+            <tr><th>公司地址：</th>
+              <td><%= @design.company_address %></td>
+            </tr>
+            <%- end %>
+            <%- unless @design.author.blank? %>
+            <tr><th>设计师：</th>
+              <td>
+                <%=  @design.author %>
+                <%= link_to user_asks_path(@link_design.user.id) do %>
+                <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
+                <%- end %>
+              </td>
+            </tr>
+            <%- end %>
+            <%- unless @design.project_name.blank? %>
+            <tr><th>项目名称：</th>
+              <td><%= @design.project_name %></td>
+            </tr>
+            <%- end %>
+            <%- unless @design.design_style.blank? %>
+            <tr><th>设计风格：</th>
+              <td><%= @design.design_style %></td>
+            </tr>
+            <%- end %>
+            <%- unless @design.design_intro.blank? %>
+            <tr><th>设计说明：</th>
+              <td><%= @design.design_intro %></td>
+            </tr>
+            <%- end %>
+            <%- unless @design.design_material.blank? %>
+            <tr><th>主要材料：</th>
+              <td><%= @design.design_material %></td>
+            </tr>
+            <%- end %>
+            <%- unless @design.recommend_reason.blank? %>
+            <tr><th>推荐理由：</th>
+              <td><%= @design.recommend_reason %></td>
+            </tr>
+            <%- end %>
+          </table>
+        </div>
+        <div class="review_wrap">
+          <div class="reviewform">
             <div class="bar">
-              <% if c.user %>
-                <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
-              <% else %>
-                <a href="#" class="user">匿名</a>
+              <h4><span>评论</span>(<%= @link_design.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
+            </div>
+            <div class="form-content">
+              <%= form_for(Comment.new) do |f| %>
+              <%- design_link_id = @design.design_link.split("/").last unless @design.design_link.blank? %>
+              <%= f.hidden_field :commentable_id, value: design_link_id %>
+              <%= f.hidden_field :commentable_type, value: 'Design' %>
+              <p class="input">
+                <%= f.text_area :content, :class => "area_text" %>
+              </p>
+              <p class="button">
+                <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
+              </p>
               <% end %>
-              <span class="time"><%= c.created_at.to_date %></span>
             </div>
-            <div class="reply">
-              <a href="javascript:void(0)">回复</a>
-            </div>
-            <div class="content">
-              <%= c.content %>
-            </div>
-            <div class="clearfix"></div>
+          </div>
+          <div class="pager ft12">
+            <%- unless @comments.nil? %>
+            <%= paginate @comments %>
+            <%- end %>
+          </div>
+          <div class="review_list">
+            <ul class="review_listA">
+              <% @comments.each do |c| %>
+              <li>
+                <div class="bar">
+                  <% if c.user %>
+                  <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
+                  <% else %>
+                  <a href="#" class="user">匿名</a>
+                  <% end %>
+                  <span class="time"><%= c.created_at.to_date %></span>
+                </div>
+                <div class="reply">
+                  <a href="javascript:void(0)">回复</a>
+                </div>
+                <div class="content">
+                  <%= c.content %>
+                </div>
+                <div class="clearfix"></div>
 
-            <div class="reply_area none cl pr">
-              <em class="pa">◆</em>
-              <span class="pa">◆</span>
+                <div class="reply_area none cl pr">
+                  <em class="pa">◆</em>
+                  <span class="pa">◆</span>
 
-              <div class="reply_input clear">
-                <%= form_for(ReplyMsg.new) do |f| %>
+                  <div class="reply_input clear">
+                    <%= form_for(ReplyMsg.new) do |f| %>
                     <%= f.hidden_field :show_id, value: @design.id %>
                     <%= f.hidden_field :comment_id, value: c.id %>
                     <%= f.hidden_field :reply_type, value: "weekly_stars" %>
                     <%= f.text_area :content, :rows => 2 %>
                     <input type="image" src="<%= asset_path "btn.jpg" %>">
-                <%- end %>
-              </div>
-              <!--reply_input ends-->
-            </div>
-            <!--reply_area ends-->
-            <div class="reply_list none cl pr">
-              <em class="pa">◆</em>
-              <span class="pa">◆</span>
+                    <%- end %>
+                  </div>
+                  <!--reply_input ends-->
+                </div>
+                <!--reply_area ends-->
+                <div class="reply_list none cl pr">
+                  <em class="pa">◆</em>
+                  <span class="pa">◆</span>
 
-              <div class="reply_con ft14 clear">
-                <div class="clear">
-                  <%- c.reply_msgs.order("created_at DESC").each do |r| %>
+                  <div class="reply_con ft14 clear">
+                    <div class="clear">
+                      <%- c.reply_msgs.order("created_at DESC").each do |r| %>
                       <div class="clear  <%= "reply_line" if r != c.reply_msgs.last %> ">
                         <p class="reply_tabs fl">
                           <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
@@ -226,19 +222,19 @@
                           <%= r.created_at.to_date %>
                         </p>
                       </div>
-                  <%- end %>
+                      <%- end %>
+                    </div>
+                  </div>
+                  <!--reply_con ends-->
                 </div>
-              </div>
-              <!--reply_con ends-->
-            </div>
-            <!--reply_list ends-->
-          </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-</div>
-</div>
-<div class='sub_bot pr'></div>
-<!--sub_bot ends-->
+                <!--reply_list ends-->
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='sub_bot pr'></div>
+    <!--sub_bot ends-->
 </div><!--main ends-->
