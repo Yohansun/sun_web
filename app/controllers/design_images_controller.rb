@@ -395,7 +395,7 @@ class DesignImagesController < ApplicationController
             [@images[@offset - 1], @images[0]]
           end
         end
-        index = @images.map(&:id).index(params[:image_id].to_i)
+        index = @images.map(&:id).index(params[:image_id].to_i) || 0
         @next_images = Rails.cache.fetch("data-model-next_image-#{cache_key}", expires_in: 7.days) do
           [@images[index + 1], @images[index + 4]]
         end
