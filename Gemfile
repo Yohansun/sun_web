@@ -12,7 +12,7 @@ group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'yui-compressor'
+  gem 'yui-compressor', '~> 0.9.6'
 end
 
 gem 'jquery-rails'
@@ -33,9 +33,12 @@ group :development do
   gem 'thin'
   gem "debugger"
 end
-gem "meta_search"
-gem 'unicorn'
 
+group :production do
+  gem 'htmlcompressor'
+end
+
+gem "meta_search"
 gem "paperclip", "<3.0"
 
 gem "magic_admin", :git => "git@git.networking.io:nioteam/magic_admin.git"
