@@ -9,22 +9,24 @@
     <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
     <a class="jiathis_counter_style"></a>
   </div>
-  <script type="text/javascript" charset="utf-8">
-		var jiathis_config = {
-		    boldNum:4,
-		    siteNum:4,
-		    showClose:false,
-		    sm:"kaixin001,renren,tsina,tqq",
-		    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-		    imageWidth:26,
-		    marginTop:150,
-		    url:"<%= request.url%>",
-		    title:"#iColor分享#一篇精彩家装业内动态--【<%= @topic.title %>】，更多家装资讯，尽在iColor，@刷新生活iColor，",
-        pic:"<%= (request.base_url + @topic.preview_img.url(:icolor_master_topics)) unless @topic.preview_img.nil? %>",
-        data_track_clickback: true
-		}
-  </script>
-  
-  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+
   <!-- JiaThis Button END -->
 </div><!--share_area ends-->
+<% content_for :tail do %>
+  <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+        boldNum:4,
+        siteNum:4,
+        showClose:false,
+        sm:"kaixin001,renren,tsina,tqq",
+        imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+        imageWidth:26,
+        marginTop:150,
+        url:"<%= request.url%>",
+        title:"#iColor分享#一篇精彩家装业内动态--【<%= @topic.title %>】，更多家装资讯，尽在iColor，@刷新生活iColor，",
+        pic:"<%= (request.base_url + @topic.preview_img.url(:icolor_master_topics)) unless @topic.preview_img.nil? %>",
+        data_track_clickback: true
+    }
+  </script>
+  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<% end %>

@@ -10,8 +10,6 @@
         }
     </style>
 <% end -%>
-<%- content_for :tail do %>
-<%- end %>
 <div class="main">
   <div class='sub_title tr'>
     <img src='<%= set_style[:pic_path] %>'/>
@@ -118,7 +116,7 @@
       if($("#f_input").val() == ""){
           alert("提问内容不能为空!");
           return false;
-        }  
+        }
     };
   </script>
 <%- end -%>

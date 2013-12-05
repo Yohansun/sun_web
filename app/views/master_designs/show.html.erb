@@ -26,6 +26,22 @@
     }
     });
    </script>
+   <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+    var jiathis_config = {
+      boldNum:4,
+      siteNum:4,
+      showClose:false,
+      sm:"kaixin001,renren,tsina,tqq",
+      imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+      imageWidth:26,
+      marginTop:150,
+      pic:"htt://www.icolor.com.cn/<%= @master_design.master_design_uploads.first.file.url(:slide) %>",
+      url:"http://www.icolor.com.cn/master_designs/<%= @master_design.id %>",
+      title:"#iColor分享#设计大师：<%= @master_design.master_profile.try(:name) %> 与你分享作品，想要学习业界顶级设计理念，尽在iColor！@刷新生活iColor，",
+      data_track_clickback:true
+    }
+    </script>
 <%- end %>
 <div class="main">
   <div class='sub_title tr pt25'>
@@ -47,22 +63,6 @@
         <a class="jiathis_button_qzone"></a>
         <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
       </div>
-      <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-      <script type="text/javascript" charset="utf-8">
-      var jiathis_config = {
-        boldNum:4,
-        siteNum:4,
-        showClose:false,
-        sm:"kaixin001,renren,tsina,tqq",
-        imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-        imageWidth:26,
-        marginTop:150,
-        pic:"htt://www.icolor.com.cn/<%= @master_design.master_design_uploads.first.file.url(:slide) %>",
-        url:"http://www.icolor.com.cn/master_designs/<%= @master_design.id %>",
-        title:"#iColor分享#设计大师：<%= @master_design.master_profile.try(:name) %> 与你分享作品，想要学习业界顶级设计理念，尽在iColor！@刷新生活iColor，",
-        data_track_clickback:true
-      }
-      </script>
       <!-- JiaThis Button END -->
       <h3><%= @master_design.design_name%><strong><%= @master_design.master_profile.try(:name) || @master_design.master_name %></strong></h3>
       <div class="btn_group fr">

@@ -10,6 +10,34 @@
         }
     </style>
 <% end -%>
+<% content_for :tail do %>
+  <script type="text/javascript">
+    $(function() {
+      var $input = $('input.quote');
+      var dv = $input.attr('hintvalue');
+      $input.focus(
+        function() {
+            if ($input.hasClass('hint')) {
+                $input.attr('value', '').removeClass('hint');
+            }
+        }).blur(
+        function() {
+            if (!$input.attr('value')) {
+                $input.attr('value', dv).addClass('hint');
+            }
+        }).each(
+        function() {
+            if (!$input.attr('value') || $input.attr('value') == dv) {
+                $input.attr('value', dv).addClass('hint');
+            }
+        }).parents('form').submit(function(e) {
+            if ($input.hasClass('hint') && $input.attr('value') == dv) {
+                $input.attr('value', '');
+            }
+        });
+    });
+  </script>
+<% end %>
 <div class="main page_weekstar">
   <div class='sub_title tr'>
     <img src="<%= asset_path "design/title_owner.png" %>" />
@@ -54,32 +82,6 @@
           </span>
           </p>
         <%- end %>
-        <script type="text/javascript">
-            $(function() {
-                var $input = $('input.quote');
-                var dv = $input.attr('hintvalue');
-                $input.focus(
-                        function() {
-                            if ($input.hasClass('hint')) {
-                                $input.attr('value', '').removeClass('hint');
-                            }
-                        }).blur(
-                        function() {
-                            if (!$input.attr('value')) {
-                                $input.attr('value', dv).addClass('hint');
-                            }
-                        }).each(
-                        function() {
-                            if (!$input.attr('value') || $input.attr('value') == dv) {
-                                $input.attr('value', dv).addClass('hint');
-                            }
-                        }).parents('form').submit(function(e) {
-                            if ($input.hasClass('hint') && $input.attr('value') == dv) {
-                                $input.attr('value', '');
-                            }
-                        });
-            });
-          </script>
       </div>
     </div>
     <div class="answer_list_wrap">

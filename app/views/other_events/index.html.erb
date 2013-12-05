@@ -1,6 +1,9 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "exciting_activities", "style" %>
 <%- end %>
+<% content_for :tail do %>
+  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<% end %>
 
 <div class="main">
   <div class='sub_title text-right'>
@@ -76,7 +79,6 @@
                   <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
                   <a class="jiathis_counter_style"></a>
                 </div>
-                <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
                 <!-- JiaThis Button END -->
               </div>
             </div><!--trend ends-->
@@ -128,7 +130,7 @@
 						  心理学家说，一个人要养成新习惯或形成新的理念，需要21天——21天效应。与范晓萱一起刷新生活21天，赢死飞单车、拍立得，更有机会与范晓萱、胡歌零距离接触！
 					  </div>
 				  </div>
-			  </li>			  
+			  </li>
             <li>
                 <div class="img"><%= link_to image_tag('design/trend/act0101.jpg'),"/other_events/new_year_over" %></div>
                 <div class="properties">

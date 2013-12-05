@@ -1,5 +1,5 @@
+<% content_for :head do -%>
 <%= stylesheet_link_tag 'uploadify' %>
-<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
 <style type="text/css">
 body{background:url(<%= asset_path 'spring/spring/spring_bg.jpg'%>) no-repeat top center;}
 .footer{background-color:#dcdcdc;}
@@ -34,110 +34,113 @@ li.spring6{background-position:0 -446px;}
 .spring_img div{position: absolute!important;left:50%; top: 50%;margin: -12px 0 0 -89px;}
 .spring_img object{position:absolute;left:0;top:0;}
 </style>
-<script type="text/javascript" charset="utf-8">
-<%- session_key = Rails.application.config.session_options[:key] -%>
-$(function() {
-  if($('#user_signed').val() != 'true') {
-    o_in()
-    $('.unlogin').show()
-
-    $('#spring_upload').click(function(event){
-      event.preventDefault();
-      if($('#user_signed').val() != 'true'){
+<% end %>
+<% content_for :tail do %>
+  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+  <script type="text/javascript" charset="utf-8">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    $(function() {
+      if($('#user_signed').val() != 'true') {
         o_in()
         $('.unlogin').show()
+
+        $('#spring_upload').click(function(event){
+          event.preventDefault();
+          if($('#user_signed').val() != 'true'){
+            o_in()
+            $('.unlogin').show()
+          }
+        });
+      } else {
+        $('#spring_upload').uploadify({
+          swf : '/uploadify/uploadify.swf',
+          cancelImage : '/uploadify/uploadify-cancel.png',
+          // progressData : 'percentage',
+          buttonText : "<a class='spring_upload pa'></a>",
+          fileTypeDesc : '图片文件',
+          fileTypeExts : '*.jpg',
+          successTimeout : 6000,
+          fileSizeLimit : '5MB',
+          // uploadLimit : 60,
+          width : 178,
+          height : 51,
+          multi : false,
+          auto : true,
+          checkExisting : false,
+          transparent : true,
+          uploader : '<%= user_design_images_path(current_user || 0) %>',
+          onUploadSuccess : function(file, data, response) {
+            $('#overlay').hide()
+            $('#spring_upload_queue').hide()
+            var dat = eval('(' + data + ')');
+            if (dat.result == 'success') {
+              var image_id = dat.upload.split("/")[2];
+              $("#attendee_image_id").val(image_id);
+              $("#upload_img").attr("src",dat.path);
+
+              // var image = $("#attendee_image_id").val()
+              // if(image != '' && image != undefined){
+              //   $('.flash').show()
+              //   $('#overlay').show()
+              // }
+            }else{
+              alert("图片上传失败");
+            };
+          },
+          postData : {
+            '_http_accept': 'application/javascript',
+            'format' : 'json',
+            '_method': 'post',
+            '<%= session_key %>' : '<%= cookies[session_key] %>',
+            'authenticity_token': '<%= form_authenticity_token %>'
+          },
+          onUploadError : function(file, errorCode, errorMsg, errorString) {
+            alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+          }
+        });
       }
     });
-  } else {
-    $('#spring_upload').uploadify({
-      swf : '/uploadify/uploadify.swf',
-      cancelImage : '/uploadify/uploadify-cancel.png',
-      // progressData : 'percentage',
-      buttonText : "<a class='spring_upload pa'></a>",
-      fileTypeDesc : '图片文件',
-      fileTypeExts : '*.jpg',
-      successTimeout : 6000,
-      fileSizeLimit : '5MB',
-      // uploadLimit : 60,
-      width : 178,
-      height : 51,
-      multi : false,
-      auto : true,
-      checkExisting : false,
-      transparent : true,
-      uploader : '<%= user_design_images_path(current_user || 0) %>',
-      onUploadSuccess : function(file, data, response) {
-        $('#overlay').hide()
-        $('#spring_upload_queue').hide()
-        var dat = eval('(' + data + ')');
-        if (dat.result == 'success') {
-          var image_id = dat.upload.split("/")[2];
-          $("#attendee_image_id").val(image_id);
-          $("#upload_img").attr("src",dat.path);
+    function submit_blessing() {
+      if($('#user_signed').val() != 'true') {
+        o_in()
+        $('.unlogin').show()
 
-          // var image = $("#attendee_image_id").val()
-          // if(image != '' && image != undefined){
-          //   $('.flash').show()
-          //   $('#overlay').show()
-          // }
+        $('#upload_photo').click(function(event){
+          event.preventDefault();
+          if($('#user_signed').val() != 'true'){
+            o_in()
+            $('.unlogin').show()
+          }
+        });
+      } else {
+        log = ''
+        flag = true
+        var title = $('#title').val();
+        var attendee_image_id = $('#attendee_image_id').val();
+        var blessing = $('#blessing').val();
+        if (title == null || title == ""){
+          log += '请@好友！';
+          flag = false;
+        }
+        if (attendee_image_id == null || attendee_image_id == ""){
+          log += '请上传照片！';
+          flag = false;
+        }
+
+        if (blessing == null || blessing == ""){
+          log += '请填写祝福语！'
+          flag = false;
+        }
+
+        if (flag == false){
+          alert(log);
         }else{
-          alert("图片上传失败");
-        };
-      },
-      postData : {
-        '_http_accept': 'application/javascript',
-        'format' : 'json',
-        '_method': 'post',
-        '<%= session_key %>' : '<%= cookies[session_key] %>',
-        'authenticity_token': '<%= form_authenticity_token %>'
-      },
-      onUploadError : function(file, errorCode, errorMsg, errorString) {
-        alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+          $.post("<%=blessing_special_event_path%>",{attendee_image_id:attendee_image_id,title:title,blessing:blessing},function(){});
+        }
       }
-    });
-  }
-});
-function submit_blessing() {
-  if($('#user_signed').val() != 'true') {
-    o_in()
-    $('.unlogin').show()
-
-    $('#upload_photo').click(function(event){
-      event.preventDefault();
-      if($('#user_signed').val() != 'true'){
-        o_in()
-        $('.unlogin').show()
-      }
-    });
-  } else {
-    log = ''
-    flag = true
-    var title = $('#title').val();
-    var attendee_image_id = $('#attendee_image_id').val();
-    var blessing = $('#blessing').val();
-    if (title == null || title == ""){
-      log += '请@好友！';
-      flag = false;
     }
-    if (attendee_image_id == null || attendee_image_id == ""){
-      log += '请上传照片！';
-      flag = false;
-    }
-
-    if (blessing == null || blessing == ""){
-      log += '请填写祝福语！'
-      flag = false;
-    }
-
-    if (flag == false){
-      alert(log);
-    }else{
-      $.post("<%=blessing_special_event_path%>",{attendee_image_id:attendee_image_id,title:title,blessing:blessing},function(){});
-    } 
-  }
-  }
 </script>
-
+<% end %>
 <div class="wrapper ft14 spring2013">
 	<%= hidden_field_tag 'user_signed', current_user.present? %>
 

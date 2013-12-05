@@ -7,6 +7,27 @@
       <a href="/gift"><img src="<%#= asset_path "float_ads.gif" %>"/></a><br/>
       <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
     </div> -->
+  <script>
+    function checkConfirm(user_id,msg_id){
+      if(window.confirm('确认删除吗？'))
+      del_msg(user_id,msg_id);
+    }
+    function del_msg(current_user_id, sys_msg_id){
+      var del_url = "/users/"+ current_user_id + "/sys_msgs/" + sys_msg_id;
+      $.ajax({
+        url: del_url,
+        type : "delete",
+        data:{},
+        datatype: "json",
+        success: function(result){
+            if(result == "ok"){
+              $("#"+sys_msg_id).parents('tr').fadeOut();
+              $("#total_msg").text(parseInt($("#total_msg").text()) - 1);
+            }
+        }
+      })
+    };
+  </script>
 <%- end %>
 <div class="main signup group main_new">
   <div class="shadow signup_box">
@@ -48,24 +69,3 @@
   <!--shadow ends-->
 </div>
 <!--main ends-->
-<script>
-  function checkConfirm(user_id,msg_id){
-    if(window.confirm('确认删除吗？'))
-    del_msg(user_id,msg_id);
-  }
-  function del_msg(current_user_id, sys_msg_id){
-    var del_url = "/users/"+ current_user_id + "/sys_msgs/" + sys_msg_id;
-    $.ajax({
-      url: del_url,
-      type : "delete",
-      data:{},
-      datatype: "json",
-      success: function(result){
-          if(result == "ok"){
-            $("#"+sys_msg_id).parents('tr').fadeOut();
-            $("#total_msg").text(parseInt($("#total_msg").text()) - 1);
-          }
-      }
-    })
-  };
-</script>

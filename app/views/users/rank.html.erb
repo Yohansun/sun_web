@@ -3,6 +3,23 @@
       <a href="/gift"><img src="<%#= asset_path "float_ads.gif" %>"/></a><br/>
       <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
     </div> -->
+  <script type="text/javascript">
+    $(function() {
+        var m = <%= Score::ScoreLevel[@user.next_level] %>;
+        var n = <%= @user.total_score %>;
+
+        if (n > m) {
+            n = m
+        }
+        var $width = $('.progress_over_l').width();
+        $('.progress_over_r').css('width', n / m * 773 + 'px');
+        $('.progress_over_r').append('<div class="progress_num">' + n + "/" + m + '</div>')
+
+        if (n <= 0) {
+            $('.progress_over_l').css({'padding-left':'4px','width':'4px','background-image':'none'})
+        }
+    })
+  </script>
 <%- end %>
 <div class="main signup pb60 group">
   <div class="shadow signup_box">
@@ -28,24 +45,6 @@
           <div class="progress_over_l"><div class="progress_over_r"></div></div>
         </div>
       </div><!--progress_bar ends-->
-      <script type="text/javascript">
-          $(function() {
-              var m = <%= Score::ScoreLevel[@user.next_level] %>;
-              var n = <%= @user.total_score %>;
-
-              if (n > m) {
-                  n = m
-              }
-              var $width = $('.progress_over_l').width();
-              $('.progress_over_r').css('width', n / m * 773 + 'px');
-              $('.progress_over_r').append('<div class="progress_num">' + n + "/" + m + '</div>')
-
-              if (n <= 0) {
-                  $('.progress_over_l').css({'padding-left':'4px','width':'4px','background-image':'none'})
-              }
-          })
-      </script>
-
     </div>
   </div>
   <!--shadow ends-->

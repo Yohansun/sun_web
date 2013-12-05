@@ -1,5 +1,8 @@
+<% content_for :head do -%>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
-<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
+<% end %>
+<% content_for :tail do -%>
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                               "upload_image/jquery.iframe-transport",
                               "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
@@ -63,6 +66,7 @@ function open_link() {
   window.open(url, "_blank");
 }
 </script>
+<% end %>
 <div class="span6" id="upload_image">
   <%= form_tag(upload_image_home_image_lib_index_url, :id => 'edit_form', :remote => true, :'data-redirect_url' => '/manage/home_image_lib', :'data-home_image_lib_photo_id' => @home_image_lib_photo.id, :class => 'bs-docs-example') do %>
     <%= hidden_field_tag 'photo_id', @home_image_lib_photo.id %>

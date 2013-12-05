@@ -18,6 +18,14 @@
             })
         })
     </script>
+    <script type="text/javascript">
+        $(function() {
+            $('.other_act_btn').click(function() {
+                $(this).parents('.act_area').children('div').slideToggle()
+            })
+        })
+    </script>
+
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>
@@ -141,13 +149,6 @@
           <!--act_area_box ends-->
         </div>
         <!--act_area ends-->
-        <script type="text/javascript">
-            $(function() {
-                $('.other_act_btn').click(function() {
-                    $(this).parents('.act_area').children('div').slideToggle()
-                })
-            })
-        </script>
         <div class="act_rules">
           <h3>促销信息介绍</h3>
 

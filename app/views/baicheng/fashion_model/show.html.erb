@@ -22,6 +22,16 @@
 .role-model3 .model-img{margin:0 0 40px;}
 </style>
 <%- end %>
+<% content_for :tail do %>
+	<%= javascript_include_tag 'baicheng/flowplayer-3.2.11.min' %>
+	<script>
+		flowplayer("player", "/system/flash/flowplayer-3.2.12.swf", {
+			clip: {
+				autoPlay: false
+			}
+		});
+	</script>
+<% end %>
 
 <% if params[:id] == "foreign" %>
   <div class="container-fluid">
@@ -164,14 +174,6 @@
 		<div class="role-model role-video pad_t60">
 			<div class="video-wrapper">
 				<a href="/system/flash/luojialiang.flv" style="display:block;width:900px;height:506px" id="player"></a>
-				<%= javascript_include_tag 'baicheng/flowplayer-3.2.11.min' %>
-				<script>
-				flowplayer("player", "/system/flash/flowplayer-3.2.12.swf", {
-					clip: {
-						autoPlay: false
-					}
-				});
-				</script>
 			</div>
 		</div>
 	</div>
@@ -180,14 +182,6 @@
 		<div class="role-model role-video pad_t60">
 			<div class="video-wrapper">
 				<a href="/system/flash/Spaceshow201306.flv" style="display:block;width:900px;height:506px" id="player"></a>
-				<%= javascript_include_tag 'baicheng/flowplayer-3.2.11.min' %>
-				<script>
-					flowplayer("player", "/system/flash/flowplayer-3.2.12.swf", {
-						clip: {
-							autoPlay: false
-						}
-					});
-				</script>
 			</div>
 		</div>
 	</div>

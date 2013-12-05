@@ -1,6 +1,14 @@
-<% content_for :head do -%>
+<% content_for :tail do -%>
     <%#= stylesheet_link_tag "refresh_life/map", "style.css"  %>
-    <%= javascript_include_tag "exp/exp.js", "LinkageSelect/location.js", "LinkageSelect/LinkageSelect.js", "flowplayer-3.2.11.min.js" %>
+    <%= javascript_include_tag "exp/exp.js", "flowplayer-3.2.11.min.js" %>
+    <script language="JavaScript">
+					flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
+					 clip:  {
+					  autoPlay: false,
+					  autoBuffering: true
+					 }
+					});
+				</script>
 <% end -%>
 <div class="container refresh_main">
 	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
@@ -19,14 +27,6 @@
 			</h4>
 			<div class="video text-center">
 				 <a href="<%= @life_memoir.video.url %>" style="display:block;width:600px;height:331px;margin:0 auto;" id="player"></a>
-				 <script language="JavaScript">
-					flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
-					 clip:  {
-					  autoPlay: false,
-					  autoBuffering: true
-					 }
-					});
-				</script>
 			</div>
 			<div class="refresh_banner">
 				<a href="<%=@i_banner.position(1).first.url if @i_banner.position(1).first %>" target="_blank"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_670x85)%>"></a>

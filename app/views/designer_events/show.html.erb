@@ -8,6 +8,50 @@
             $('input.star_rat').rating({starWidth: 47,half:false,required:true});
         });
     </script>
+    <script type="text/javascript">
+              $(function() {
+                  var $item = $('div.galleryD div.list ul');
+                  var count = $item.find('li').size();
+                  var colsize = 12;
+                  var pwidth = $item.find('li').eq(0).width();
+                  var sp = 3;
+                  var wwidth = count * ( pwidth + sp ) - sp;
+                  var movewidth = pwidth + sp;
+                  var disabledClassName = "disabled";
+                  if (count > colsize) {
+                      var $left = $('div.galleryD span.moveleft');
+                      var $right = $('div.galleryD span.moveright');
+
+                      function s(left) {
+                          if (typeof left != 'number') {
+                              left = parseInt($item.css('left')) || 0;
+                          }
+                          $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
+                          $right[ ( -1 * left ) >= wwidth - ( colsize * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
+                      }
+
+                      s();
+                      $left.click(function() {
+                          if ($(this).hasClass(disabledClassName)) {
+                              return;
+                          }
+                          s((parseInt($item.css('left')) || 0) + movewidth);
+                          $item.animate({
+                              "left" : "+=" + movewidth + 'px'
+                          }, 'fast');
+                      });
+                      $right.click(function() {
+                          if ($(this).hasClass(disabledClassName)) {
+                              return;
+                          }
+                          s((parseInt($item.css('left')) || 0) - movewidth);
+                          $item.animate({
+                              "left" : "-=" + movewidth + 'px'
+                          }, 'fast');
+                      });
+                  }
+              });
+          </script>
 <%- end %>
 <div class="main page_weekstar">
   <div class='sub_title tr'>
@@ -86,50 +130,6 @@
               </ul>
             </div>
           </div>
-          <script type="text/javascript">
-              $(function() {
-                  var $item = $('div.galleryD div.list ul');
-                  var count = $item.find('li').size();
-                  var colsize = 12;
-                  var pwidth = $item.find('li').eq(0).width();
-                  var sp = 3;
-                  var wwidth = count * ( pwidth + sp ) - sp;
-                  var movewidth = pwidth + sp;
-                  var disabledClassName = "disabled";
-                  if (count > colsize) {
-                      var $left = $('div.galleryD span.moveleft');
-                      var $right = $('div.galleryD span.moveright');
-
-                      function s(left) {
-                          if (typeof left != 'number') {
-                              left = parseInt($item.css('left')) || 0;
-                          }
-                          $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
-                          $right[ ( -1 * left ) >= wwidth - ( colsize * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
-                      }
-
-                      s();
-                      $left.click(function() {
-                          if ($(this).hasClass(disabledClassName)) {
-                              return;
-                          }
-                          s((parseInt($item.css('left')) || 0) + movewidth);
-                          $item.animate({
-                              "left" : "+=" + movewidth + 'px'
-                          }, 'fast');
-                      });
-                      $right.click(function() {
-                          if ($(this).hasClass(disabledClassName)) {
-                              return;
-                          }
-                          s((parseInt($item.css('left')) || 0) - movewidth);
-                          $item.animate({
-                              "left" : "-=" + movewidth + 'px'
-                          }, 'fast');
-                      });
-                  }
-              });
-          </script>
           <div class="apply">
             <p class="button"><a href="#">我要报名</a></p>
 

@@ -23,7 +23,18 @@ document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityS
 <noscript>
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326788&amp;ns=1"/>
 </noscript>
-
+<script type="text/javascript">
+  swfobject.registerObject("FlashID");
+  CClicki[10008]._trackEvent({
+    type: 1,
+    labels: [
+        {"按钮名称":"Landing on homepage"}
+    ],
+    values: [
+        {"数量":1}
+    ]
+});
+</script>
 <% end %>
 <%- content_for :jiathis_config do %>
   <script type="text/javascript" charset="utf-8">
@@ -73,15 +84,3 @@ document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityS
   </div>
 </div>
 
-<script type="text/javascript">
-  swfobject.registerObject("FlashID");
-  CClicki[10008]._trackEvent({
-    type: 1,
-    labels: [
-        {"按钮名称":"Landing on homepage"}
-    ],
-    values: [
-        {"数量":1}
-    ]
-});
-</script>

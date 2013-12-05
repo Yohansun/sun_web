@@ -55,38 +55,6 @@
             <a class="jiathis_button_renren"></a>
           </div>
           <!-- JiaThis Button END -->
-          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-          <!-- JiaThis Button END -->
-
-          <%
-            role = "#{@design.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @design.user.role_id != 3
-            text = if @design.user.area_id.present?
-              province = @design.user.city.try(:parent).try(:name)
-              city = @design.user.try(:city).try(:name)
-
-              if province && city
-                province == city ? "#{city}的" : "#{province + city}的"
-              else
-                "#{city}的" if city
-              end
-            end
-          -%>
-          <script type="text/javascript" charset="utf-8">
-          var jiathis_config = {
-            boldNum:4,
-            siteNum:4,
-            showClose:false,
-            sm:"kaixin001,renren,tsina,tqq",
-            imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-            imageWidth:26,
-            marginTop:150,
-            pic: "http://www.icolor.com.cn/<%= @design.cover_img.try(:file).try(:url, :slide) %>",
-            url:"<%= user_design_url(@design.user_id, @design) %>",
-            title:"#iColor分享#来自<%= text %><%= role %><%= @design.user.display_name %>的作品【<%= @design.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor.",
-            summary:" ",
-            data_track_clickback:true
-          }
-          </script>
 
            <%#= forward_links("#iColor分享#一套优秀家装作品----【#{@design.title}】，更多实用装修案例，尽在iColor，", user_design_url(@design.user_id, @design), @design.cover_img.file.url(:slide), @design.id.to_s, "Design") %>
         </div>
@@ -282,3 +250,36 @@
   <div class='sub_bot pr'>
   </div>
 </div>
+<% content_for :tail do %>
+  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <%
+    role = "#{@design.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if @design.user.role_id != 3
+    text = if @design.user.area_id.present?
+      province = @design.user.city.try(:parent).try(:name)
+      city = @design.user.try(:city).try(:name)
+
+      if province && city
+        province == city ? "#{city}的" : "#{province + city}的"
+      else
+        "#{city}的" if city
+      end
+    end
+  -%>
+  <script type="text/javascript" charset="utf-8">
+  var jiathis_config = {
+    boldNum:4,
+    siteNum:4,
+    showClose:false,
+    sm:"kaixin001,renren,tsina,tqq",
+    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+    imageWidth:26,
+    marginTop:150,
+    pic: "http://www.icolor.com.cn/<%= @design.cover_img.try(:file).try(:url, :slide) %>",
+    url:"<%= user_design_url(@design.user_id, @design) %>",
+    title:"#iColor分享#来自<%= text %><%= role %><%= @design.user.display_name %>的作品【<%= @design.title %>】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor.",
+    summary:" ",
+    data_track_clickback:true
+  }
+  </script>
+<% end %>

@@ -1,5 +1,8 @@
-<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
+<%- content_for :head do %>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
+<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
 <script type="text/javascript">
   $(function() {
     $('.datetimepicker_full').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
@@ -101,7 +104,7 @@
     window.open(url, "_blank");
   }
 </script>
-
+<% end %>
 <div class="main bs-docs-grid" style="margin:15px 15px 50px 15px;">
 	<div class="row show-grid">
 		<div class="span2">

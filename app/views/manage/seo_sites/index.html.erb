@@ -1,4 +1,4 @@
-<%- content_for :tail do %>
+<% content_for :head do %>
   <style type="text/css">
   .tips_con_edit{width:200px;height:80px;overflow-y:scroll;}
   .tips_list th,.tips_list td{vertical-align:middle;word-wrap:break-word;}
@@ -8,6 +8,8 @@
   /*.tips_list .tips_tit{width:200px;white-space: normal;word-wrap:break-word;overflow:hidden;}*/
   .none{display: none!important;}
   </style>
+<% end %>
+<%- content_for :tail do %>
   <script type="text/javascript">
     $(function() {
       $('.js-edit').on('click', function(e){
@@ -23,7 +25,7 @@
         $(this).hide();
         $(this).siblings('.tips_links').hide().parents('tr').siblings().find('.tips_links').show();
         $(this).siblings('.tips_edit_btn').removeClass('none').parents('tr').siblings().find('.tips_edit_btn').addClass('none');
-        
+
         //编辑状态
         var $tips_p = $ps_tr.find('p.tips_toggle');
         $tips_p.hide();

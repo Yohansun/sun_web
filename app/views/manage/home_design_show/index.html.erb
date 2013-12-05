@@ -1,3 +1,4 @@
+<% content_for :head do -%>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
 <style type="text/css">
 	.boder_white {
@@ -34,31 +35,7 @@
 		.table_design_list{width:auto;}
 		.table_design_list td,.table_design_list th{font-size:12px!important;text-align:center;vertical-align:middle;}
 </style>
-
-<script type="text/javascript">
-$(function(){
-	$('.edit_show').hide();
-
-	$('table tr td #edit_tag').on('click', function(e){
-		e.preventDefault();
-
-		var home_design_show_id = $(this).attr('home_design_show_id');
-		var design_type = $(this).attr('design_type');
-		var index_id = $(this).attr('index_id');
-
-		if ($.trim(home_design_show_id).length == 0) {
-			alert('错误,请重新选择');
-			return false;
-		} else {
-			$.post("/manage/home_design_show/edit",{home_design_show_id: home_design_show_id, design_type: design_type, index_id: index_id},function(result){
-		    $('.edit_show').html(result);
-		  });
-		}
-
-		$('.edit_show').show();
-	})
-})
-</script>
+<% end %>
 
 <div id="breadcrumbs">
   <ul class="breadcrumb">
@@ -131,8 +108,32 @@ $(function(){
 </div>
 
 </div>
+<% content_for :tail do -%>
+<script type="text/javascript">
+$(function(){
+  $('.edit_show').hide();
 
-<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget", 
+  $('table tr td #edit_tag').on('click', function(e){
+    e.preventDefault();
+
+    var home_design_show_id = $(this).attr('home_design_show_id');
+    var design_type = $(this).attr('design_type');
+    var index_id = $(this).attr('index_id');
+
+    if ($.trim(home_design_show_id).length == 0) {
+      alert('错误,请重新选择');
+      return false;
+    } else {
+      $.post("/manage/home_design_show/edit",{home_design_show_id: home_design_show_id, design_type: design_type, index_id: index_id},function(result){
+        $('.edit_show').html(result);
+      });
+    }
+
+    $('.edit_show').show();
+  })
+})
+</script>
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                               "upload_image/jquery.iframe-transport",
                               "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
@@ -155,3 +156,4 @@ $(function () {
     })
 });
 </script>
+<% end %>

@@ -17,8 +17,8 @@
             display: none;
         }
     </style>
- 
-
+<%- end %>
+<% content_for :tail do %>
     <script type="text/javascript">
     domReady(function()
     {
@@ -34,14 +34,14 @@
             $this.attr('title',$this.next().text().toUpperCase());
        });
     });
-    </script>
+</script>
     <!--[if IE 6]>
     <script src="js/png.js"></script>
     <script>
     PNG.fix('img,div,a,ul,li');
     </script>
     <![endif]-->
-<%- end %>
+<% end %>
 
 <div class="main">
     <div class='sub_title tr'>

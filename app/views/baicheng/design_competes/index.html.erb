@@ -1,4 +1,4 @@
-<%- content_for :head do %>
+<%- content_for :tail do %>
 <%= javascript_include_tag "jquery.uploadify.js" %>
 	<script type="text/javascript">
 	  $(function() {
@@ -33,7 +33,7 @@
 		<div class="wrapper pad_b40">
 			<%= form_tag design_competes_path, :method => "get", :class => "design_list_form mar_h20" do %>
 				<fieldset class="form-inline search_area">
-					 
+
 					<select class="span2 nomargin level_1" name="province_id">
 						<option>省/直辖市</option>
 					</select>
@@ -46,7 +46,7 @@
                                         <%=  select_tag "style", options_from_collection_for_select(ImageLibraryCategory.style, "id", "title",params[:style]),:prompt=>'风格',class: "input-small nomargin"   %>
                                   	<%=  select_tag "tag", options_from_collection_for_select(ImageLibraryCategory.where(parent_id: 1), "id", "title",params[:tag]),:prompt=>'户型',class: "input-small nomargin"   %>
                                  	<%=  select_tag "cost", options_from_collection_for_select( ImageLibraryCategory.cost, "id", "title",params[:cost]),:prompt=>'预算',class: "input-small nomargin"   %>
- 
+
 					<button type="" class="btn btn-small btn_yellow">确定</button>
 					<!-- <input type="text" class="span2" placeholder="搜用户"> -->
 					<select class="span2 nomargin" name="soso" style="width:102px;">

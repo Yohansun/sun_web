@@ -23,7 +23,7 @@
     <%- end -%>
   </div>
 </div>
-
+<%- content_for :tail do %>
 <script type="text/javascript">
   $(function(){
     $('#d_notice').children('p').mouseover(function(){
@@ -33,3 +33,4 @@
     })
   })
 </script>
+<% end %>
