@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require main
 //= require icolor
 //= require special_events

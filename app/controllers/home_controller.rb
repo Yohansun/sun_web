@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
   layout "home_manage"
-  #caches_page :index, :expires_in => 60.minutes
+
+  caches_action :index, :expires_in => 7.days
   #before_filter :get_vote
 
   def t1days
@@ -93,7 +94,8 @@ class HomeController < ApplicationController
     @banner6 = IBanner.page_name('首页').position(5).first
     @banner7 = IBanner.page_name('首页').position(6).first
     @home_life_videos = HomeLifeVideo.order("rank asc")
-    expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
+
+    expires_in 1.day, 'max-stale' => 2.hours, :public => true
   end
 
   def search
