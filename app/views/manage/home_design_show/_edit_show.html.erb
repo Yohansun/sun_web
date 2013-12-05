@@ -1,3 +1,4 @@
+<% content_for :tail do -%>
 <script type="text/javascript">
   $(function(){
 
@@ -39,10 +40,11 @@
   }
 
   function btn_save() {
-    window.flag = 1; 
+    window.flag = 1;
   }
 </script>
-
+<% end %>
+<% content_for :head do -%>
 <style>
 #upload_image {
   /*width: 900px;*/
@@ -61,7 +63,7 @@
 .showarea .img_big,.showarea .img_big img{width:200px;height:260px;}
 .showarea .img_small,.showarea .img_small img{width:80px;height:80px;}
 </style>
-
+<% end %>
 <div id="upload_image">
 <%= form_tag('home_design_show/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/home_design_show?design_type=#{@design_type}") do %>
 <%= hidden_field_tag 'design_id', @home_design_show.id %>

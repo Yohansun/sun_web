@@ -1,3 +1,4 @@
+<% content_for :head do -%>
 <style type="text/css">
 	.boder_white {
 		padding: 10px;
@@ -76,6 +77,8 @@
 		          border-radius: 4px 0 4px 0;
 		}
 </style>
+<% end %>
+<% content_for :tail do -%>
 <script type="text/javascript">
 $(function(){
 	$('.edit_image').hide();
@@ -105,7 +108,7 @@ $(function(){
 	})
 })
 </script>
-
+<% end %>
 <div id="breadcrumbs">
   <ul class="breadcrumb">
     <li class="active"><a href="/manage/home_image_lib/tags">标签设置</a></li>

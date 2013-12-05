@@ -1,4 +1,7 @@
+<% content_for :head do -%>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<% content_for :tail do -%>
 <script>
   $(function() {
     $.imagepreview({
@@ -26,7 +29,7 @@
     window.open(url, "_blank");
   }
 </script>
-
+<% end %>
 <div class="span2">
     <div id="upload_files_container">
       <img id="photo" src="<%= @home_life_video.file.url(:list_1000x85) %>" alt="" />

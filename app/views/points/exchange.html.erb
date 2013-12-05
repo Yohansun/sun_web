@@ -1,6 +1,8 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "point" %>
-    <script type="text/javascript">
+<%- end %>
+<% content_for :tail do %>
+  <script type="text/javascript">
       $(function() {
           // $("#gift_div").hide();
 
@@ -16,7 +18,7 @@
 
       });
     </script>
-<%- end %>
+<% end %>
 <div class="main signup group main_new">
   <div class="shadow signup_box">
     <div class="section">

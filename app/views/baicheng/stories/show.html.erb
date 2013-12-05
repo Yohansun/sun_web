@@ -181,17 +181,19 @@
               </div>
 
               <%- if current_user && !current_user.role_id == 3 %>
-                <script type="text/javascript">
-                  window.onload = function() {
-                    $('.design_intro a.color_red').hover(function() {
-                      $(this).next().toggle().mouseenter(function() {
-                        $(this).show();
-                      }).mouseleave(function() {
-                        $(this).hide();
+                <% content_for :tail do %>
+                  <script type="text/javascript">
+                    window.onload = function() {
+                      $('.design_intro a.color_red').hover(function() {
+                        $(this).next().toggle().mouseenter(function() {
+                          $(this).show();
+                        }).mouseleave(function() {
+                          $(this).hide();
+                        });
                       });
-                    });
-                  };
-                </script>
+                    };
+                  </script>
+                <% end %>
               <% end %>
 
             </div>

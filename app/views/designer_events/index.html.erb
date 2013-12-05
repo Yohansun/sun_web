@@ -26,6 +26,19 @@ outline: none;
 }
 </style>
 <%- end %>
+<% content_for :tail do %>
+<script type="text/javascript">
+  function yda_kv_link() {
+  <% if current_user && current_user.role_id == 1 -%>
+    window.location.href = "<%= new_user_design_path(current_user) %>";
+  <% elsif current_user %>
+    window.location.href = "javascript:void(0)";
+  <% else -%>
+    show_login();
+  <% end -%>
+  };
+</script>
+<% end %>
 <div class="main page_weekstar">
   <div class='sub_title text-right'><img src="<%= asset_path "design/title_event.png"%>"/></div>
   <div class='sub_nav ft12 pr tr'>
@@ -34,17 +47,7 @@ outline: none;
     <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <!--sub_nav ends-->
-  <script type="text/javascript">
-      function yda_kv_link() {
-          <% if current_user && current_user.role_id == 1 -%>
-            window.location.href = "<%= new_user_design_path(current_user) %>";
-          <% elsif current_user %>
-            window.location.href = "javascript:void(0)";
-          <% else -%>
-            show_login();
-          <% end -%>
-              };
-  </script>
+
   <div class="wrapper d_act_list pb30 group">
     <div class="shadow event event_desc">
         <div class="section clear">

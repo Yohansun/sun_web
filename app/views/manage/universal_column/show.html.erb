@@ -1,5 +1,8 @@
-<%= javascript_include_tag "upload_image/jquery.imagepreview.js" %>
+<% content_for :head do %>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<% content_for :tail do %>
+<%= javascript_include_tag "upload_image/jquery.imagepreview.js" %>
 <script>
   $(function() {
   	$('#show_panel').hide();
@@ -75,6 +78,7 @@
       window.open(url, "_blank");
   }
 </script>
+<% end %>
 
 <%= form_tag('/manage/universal_column/show', :method => 'get', :id => 'show_form') do %>
 <div id="breadcrumbs">

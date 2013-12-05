@@ -6,6 +6,93 @@
         }
     </style>
 <%- end %>
+
+<%- content_for :tail do %>
+    <script type="text/javascript">
+      $(function() {
+          var page = 1;
+          var i = 5;
+          $('a.works_next').click(function() {
+              var $parent = $(this).parent('.works_slide');
+              var $v_list = $parent.find('div.img_list');
+              var $v_box = $parent.children('.img_box');
+
+              var v_width = $v_box.width();
+              var len = $v_list.find('img').length;
+              var page_count = Math.ceil(len / i);
+
+              if (!$v_list.is(':animated')) {
+                  if (page == page_count) {
+                      $v_list.animate({left:'0px'});
+                      page = 1;
+
+                  } else {
+                      $v_list.animate({left:'-=' + v_width});
+                      page++;
+                  }
+              }
+          })
+
+          $('a.works_pre').click(function() {
+              var $parent = $(this).parent('.works_slide');
+              var $v_list = $parent.find('div.img_list');
+              var $v_box = $parent.children('.img_box');
+
+              var v_width = $v_box.width();
+              var len = $v_list.find('img').length;
+              var page_count = Math.ceil(len / i);
+
+              if (!$v_list.is(':animated')) {
+                  if (page == 1) {
+                      $v_list.animate({left:'-=' + v_width * (page_count - 1)});
+                      page = page_count;
+
+                  } else {
+                      $v_list.animate({left:'+=' + v_width});
+                      page--;
+                  }
+              }
+          })
+
+          var $over = $('.over_text');
+          var hh = $over.children('div').outerHeight();
+          var h = $over.outerHeight();
+          if (hh > h) {
+              $over.after($("<a href='javascript:void(0)' class='fr ft12'>more>></a>"));
+          }
+          var msie6 = $.browser.msie && $.browser.version == 6.0;
+          $('.profile_info a.fr').click(function() {
+              $(this).hide();
+              $over.addClass('text_hover');
+              if (msie6) {
+                  $(this).parents('.profile').next().css('margin-top', '-' + (h - 137) + 'px');
+              }
+          });
+          $over.mouseleave(function() {
+              $(this).removeClass('text_hover').next('a').show();
+              if (msie6) {
+                  $(this).parents('.profile').next().css('margin-top', '0');
+              }
+          });
+      })
+  </script>
+  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+  var jiathis_config = {
+    boldNum:4,
+    siteNum:4,
+    showClose:false,
+    sm:"kaixin001,renren,tsina,tqq",
+    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+    imageWidth:26,
+    marginTop:150,
+    pic: "http://www.icolor.com.cn/<%= @article.preview_img_in.url(:original) %>",
+    url:"http://www.icolor.com.cn/master_interviews/<%= @article.id %>",
+    title:"#iColor分享#设计大师：<%= @article.name %>【<%= @article.title %>】与你分享行业经验，畅谈更设计心得，尽在iColor！@刷新生活iColor，",
+    data_track_clickback:true
+  }
+  </script>
+<% end %>
 <div class="main">
   <div class='sub_title text-right'>
     <img src="<%= asset_path "master/title_master.png" %>" alt=""/>
@@ -42,23 +129,7 @@
             <a class="jiathis_button_qzone"></a>
             <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
           </div>
-          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
           <!-- JiaThis Button END -->
-          <script type="text/javascript" charset="utf-8">
-          var jiathis_config = {
-            boldNum:4,
-            siteNum:4,
-            showClose:false,
-            sm:"kaixin001,renren,tsina,tqq",
-            imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-            imageWidth:26,
-            marginTop:150,
-            pic: "http://www.icolor.com.cn/<%= @article.preview_img_in.url(:original) %>",
-            url:"http://www.icolor.com.cn/master_interviews/<%= @article.id %>",
-            title:"#iColor分享#设计大师：<%= @article.name %>【<%= @article.title %>】与你分享行业经验，畅谈更设计心得，尽在iColor！@刷新生活iColor，",
-            data_track_clickback:true
-          }
-          </script>
         </div>
       </div>
       <!--profile_info ends-->
@@ -109,75 +180,6 @@
           </div>
         </div>
         <!--works_slide ends-->
-
-        <script type="text/javascript">
-            $(function() {
-                var page = 1;
-                var i = 5;
-                $('a.works_next').click(function() {
-                    var $parent = $(this).parent('.works_slide');
-                    var $v_list = $parent.find('div.img_list');
-                    var $v_box = $parent.children('.img_box');
-
-                    var v_width = $v_box.width();
-                    var len = $v_list.find('img').length;
-                    var page_count = Math.ceil(len / i);
-
-                    if (!$v_list.is(':animated')) {
-                        if (page == page_count) {
-                            $v_list.animate({left:'0px'});
-                            page = 1;
-
-                        } else {
-                            $v_list.animate({left:'-=' + v_width});
-                            page++;
-                        }
-                    }
-                })
-
-                $('a.works_pre').click(function() {
-                    var $parent = $(this).parent('.works_slide');
-                    var $v_list = $parent.find('div.img_list');
-                    var $v_box = $parent.children('.img_box');
-
-                    var v_width = $v_box.width();
-                    var len = $v_list.find('img').length;
-                    var page_count = Math.ceil(len / i);
-
-                    if (!$v_list.is(':animated')) {
-                        if (page == 1) {
-                            $v_list.animate({left:'-=' + v_width * (page_count - 1)});
-                            page = page_count;
-
-                        } else {
-                            $v_list.animate({left:'+=' + v_width});
-                            page--;
-                        }
-                    }
-                })
-
-                var $over = $('.over_text');
-                var hh = $over.children('div').outerHeight();
-                var h = $over.outerHeight();
-                if (hh > h) {
-                    $over.after($("<a href='javascript:void(0)' class='fr ft12'>more>></a>"));
-                }
-                var msie6 = $.browser.msie && $.browser.version == 6.0;
-                $('.profile_info a.fr').click(function() {
-                    $(this).hide();
-                    $over.addClass('text_hover');
-                    if (msie6) {
-                        $(this).parents('.profile').next().css('margin-top', '-' + (h - 137) + 'px');
-                    }
-                });
-                $over.mouseleave(function() {
-                    $(this).removeClass('text_hover').next('a').show();
-                    if (msie6) {
-                        $(this).parents('.profile').next().css('margin-top', '0');
-                    }
-                });
-            })
-        </script>
       </div>
     </div>
     <div class="shadow">

@@ -1,10 +1,11 @@
 <%- content_for :head do %>
 <%= stylesheet_link_tag "baicheng/steps" %>
-
-<script type="text/javascript">
+<%- end %>
+<% content_for :tail do %>
+  <script type="text/javascript">
     var flag = true;
-		$(function(){
-			 
+    $(function(){
+
       <%- session_key = Rails.application.config.session_options[:key] -%>
       $('#upload_photo').uploadify({
         swf : '/uploadify/uploadify.swf',
@@ -58,7 +59,7 @@
           //$("#upload_going").hide();
         }
       });
-		});
+    });
   function remote(id) {
   $('#contract_image'+id).remove();
   $('.contract_image_size').html(parseInt($('.contract_image_size').html()) - 1);
@@ -67,9 +68,9 @@
     $('.upload_item').remove();
     $('.contract_image_size').html(0);
   }
- 
-	</script>
-<%- end %>
+
+</script>
+<% end %>
 <div class="container-fluid">
 	<div class="design_works pad_t60">
 		<div class="wrapper upload-contract pad_b40">
@@ -84,7 +85,7 @@
 						<p class="mt30">您只需将合同原件中 <strong class="cr">有合同双方签字盖章的页面</strong> 扫描成图片并上传即可。<br />建议：以JPG、GIF、PNG或BMP文件上传，单张图片5M以下。</p>
 						<p class="text-right pad_h15">移除<span class="pull-left">文件</span></p>
 						<div class="step2-area text-right">
-							 
+
 						</div>
 					</div>
 				</div>

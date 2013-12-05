@@ -1,7 +1,9 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "exciting_activities", "style" %>
 <%- end %>
-
+<%- content_for :tail do %>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<%- end %>
 <div class="main page_weekstar">
   <div class='sub_title tr'>
     <img src="<%= asset_path "design/title_event.png"%>"/>
@@ -17,7 +19,7 @@
         .trend div.fl p{margin-left: 10px;}
     </style>
   </div><!--sub_nav ends-->
-  
+
   <div class="wrapper group color-trend">
         <div class="shadow">
           <div class="section">
@@ -80,7 +82,6 @@
                   <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
                   <a class="jiathis_counter_style"></a>
                 </div>
-                <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
                 <!-- JiaThis Button END -->
               </div>
             </div><!--trend ends-->

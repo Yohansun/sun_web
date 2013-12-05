@@ -1,3 +1,4 @@
+<% content_for :tail do %>
 <script>
   function open_link() {
     var url = $('#url').val();
@@ -8,6 +9,7 @@
     window.open(url, "_blank");
   }
 </script>
+<% end %>
 
 <%= form_tag('/manage/universal_column/show', :method => 'get', :id => 'show_form') do %>
 <div id="breadcrumbs">

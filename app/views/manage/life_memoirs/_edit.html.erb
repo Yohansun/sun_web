@@ -1,5 +1,8 @@
-<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
+<%- content_for :head do %>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
+<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
 <script>
   $(function() {
     $.imagepreview({
@@ -62,7 +65,7 @@
     window.open(url, "_blank");
   }
 </script>
-
+<% end %>
 <%= form_tag(life_memoir_path(@i_life_memoir.id), :multipart => true, :id => 'edit_data', :method => 'put', :remote => true, :'data-redirect_url' => "/manage/life_memoirs") do %>
 <%= hidden_field_tag 'i_life_memoir_id', @i_life_memoir.id %>
   <div class="span1">

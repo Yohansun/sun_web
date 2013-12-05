@@ -14,6 +14,21 @@
 		});
 	</script>
 <%- end %>
+<%- content_for :tail do %>
+	<script type="text/javascript">
+		$(function() {
+			$('.map-submit').click(function(){
+				var search = $(".search_query_value").val();
+			  if(search == "" || search == null){
+			    window.location = "/images"
+			  }else{
+			  	var link = "/images/<%= prefix_link %>-0_0_" + search + "_0_0_0"
+			    window.location = link
+			  }
+			});
+		});
+	</script>
+<%- end %>
 
 <h3 class="chann_caption nomargin">
 	<div class="map-search pull-right">

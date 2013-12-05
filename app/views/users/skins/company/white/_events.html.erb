@@ -18,7 +18,7 @@
 <div class="pager host_pager" style="position:relative;bottom:-36px;left:0;">
   <%= paginate @events %>
 </div><!--pager ends-->
-
+<%- content_for :tail do %>
 <script type="text/javascript">
   $(function(){
     $('#d_notice').children('p').mouseover(function(){
@@ -28,3 +28,4 @@
     })
   })
 </script>
+<% end %>

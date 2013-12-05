@@ -65,9 +65,9 @@
     <!--pager ends-->
   </div>
   <!--sub_bot ends-->
-</div>
-
-<script type="text/javascript">
+</div><!--main ends-->
+<% content_for :tail do %>
+  <script type="text/javascript">
     var page = 1;
     var i = 3;
 
@@ -122,6 +122,5 @@
         }
 
     })
-
 </script>
-</div><!--main ends-->
+<% end %>

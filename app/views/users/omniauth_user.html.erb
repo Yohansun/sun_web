@@ -1,9 +1,6 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'reg' %>
-  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
-  <%= javascript_tag("alert(#{flash[:errors]})") if flash[:errors] %>
 <% end -%>
-
 <div class="main">
   <div class="reg_bg1 pr"></div>
   <div class="wrapper">
@@ -62,7 +59,10 @@
     </div>
   </div><!--wrapper ends-->
 </div><!--main ends-->
-<script type="text/javascript" charset="utf-8">
+<%- content_for :tail do %>
+  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+  <%= javascript_tag("alert(#{flash[:errors]})") if flash[:errors] %>
+  <script type="text/javascript" charset="utf-8">
     $(function() {
       var options = {
         data  : data
@@ -84,10 +84,9 @@
       <%- end -%>
     });
   </script>
-<%- content_for :tail do %>
   <%= javascript_tag do -%>
     <%- if flash[:errors] %>
       alert('<%= raw flash[:errors] %>');
     <%- end %>
   <%- end %>
-<%- end %>  
+<%- end %>

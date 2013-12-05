@@ -1,5 +1,8 @@
-<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
+<%- content_for :head do %>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
+<%= javascript_include_tag "upload_image/jquery.imagepreview" %>
 <script type="text/javascript">
   $(function() {
     $('.datetimepicker_full').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
@@ -25,13 +28,13 @@
 
     $('input[name="video"]').change(function(){
 		   var filename = $(this).val().toLowerCase();;
-		   if (!/\.(flv)$/.test(filename)) { 
-				  alert("请选择文件类型为flv的文件!"); 
+		   if (!/\.(flv)$/.test(filename)) {
+				  alert("请选择文件类型为flv的文件!");
 				  this.value = "";
-				  return false; 
+				  return false;
 			 } else {
 		   	$('#filename').html(filename);
-			 } 
+			 }
 		});
 
 		$('#show_panel form[data-redirect_url]').bind('ajax:success', function(evt, data, status, xhr) {
@@ -97,11 +100,11 @@
 
   function open_page() {
     var page_num = $('#page_to').val();
-    url = "/manage/life_memoirs?page=" + page_num 
+    url = "/manage/life_memoirs?page=" + page_num
     window.open(url, "_blank");
   }
 </script>
-
+<% end %>
 <div class="main bs-docs-grid" style="margin:15px 15px 50px 15px;">
 	<div class="row show-grid">
 		<div class="span2">
@@ -180,7 +183,7 @@
 		    </div>
 		  </div>
 		</div>
-		
+
 	</div>
 	</div>
 	<% end %>
@@ -268,7 +271,7 @@
 			  <a href="javascript:;" class="btn btn-small btn-primary" onclick="open_page();return false;">Go</a>
 			</div>
 		<% end %>
-		
+
   </div>
 
 </div>

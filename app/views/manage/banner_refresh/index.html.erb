@@ -1,4 +1,7 @@
+<%- content_for :head do %>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
 <script type="text/javascript">
   $(function(){
   	$('#refresh_link1').click(function(){
@@ -15,6 +18,7 @@
 
   });
 </script>
+<% end %>
 <div id="breadcrumbs">
   <ul class="breadcrumb">
     <li class="<%= 'active_red' if params[:page_name] == '刷新实录' %>"><a href="<%= banner_refresh_index_path(page_name: '刷新实录') %>">刷新实录</a></li>
@@ -91,6 +95,7 @@
 	</div>
 
 </div>
+<%- content_for :tail do %>
 <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                               "upload_image/jquery.iframe-transport",
                               "upload_image/jquery.fileupload" %>
@@ -113,3 +118,4 @@ $(function() {
     })
 });
 </script>
+<% end %>

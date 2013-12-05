@@ -1,6 +1,8 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "base", "reset", "imgbase", "jquery.slider"%>
-  <%= javascript_include_tag "jquery", "jquery.slider" %>
+<%- end %>
+<% content_for :tail do %>
+	<%= javascript_include_tag "jquery", "jquery.slider" %>
   <script type="text/javascript">
     $(function(){
 			var $slider = $('.imgbase_slider'),
@@ -35,7 +37,7 @@
 			});
 		});
   </script>
-<%- end %>
+<% end %>
 <div class="imgbase">
 			<div class="imgbase_title">
 				<img src="<%= asset_path "imgbase/imgbase_tit.png" %>" >

@@ -1,6 +1,8 @@
 <% content_for :head do -%>
-  <script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
   <%= stylesheet_link_tag 'reg' %>
+<% end -%>
+<%- content_for :tail do %>
+<script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
   <script type='text/javascript'>
     (function() {
       var c = document.createElement('script');
@@ -13,7 +15,6 @@
       mmConversionTag(326804, this);
     })();
   </script>
-<% end -%>
 <script>
   var _CiQ10008 = _CiQ10008 || [];
   _CiQ10008.push(['_trackEvent', {
@@ -26,6 +27,7 @@
       ]
     }]);
 </script>
+<% end s%>
 <noscript>
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326804&amp;ns=1"/>
 </noscript>

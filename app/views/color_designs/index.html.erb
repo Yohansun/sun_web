@@ -1,6 +1,11 @@
 <%- content_for :head do %>
     <%= stylesheet_link_tag "style" %>
     <%= stylesheet_link_tag "dd" %>
+    <style type="text/css">
+      #filter_form .ddChild{top:257px!important;}
+    </style>
+<%- end %>
+<%- content_for :tail do %>
     <%= javascript_include_tag "uncompressed.jquery.dd" %>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -32,10 +37,7 @@
         })
 
     </script>
-    <style type="text/css">
-      #filter_form .ddChild{top:257px!important;}
-    </style>
-<%- end %>
+<% end %>
 <div class="main">
   <div class='sub_title text-right pt25'>
     <img src='<%= asset_path "design/title_design.png"%>'/>

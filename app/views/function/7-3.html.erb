@@ -14,7 +14,10 @@
             display: none;
         }
     </style>
-  <script type="text/javascript">
+<%- end %>
+<%- content_for :tail do %>
+    <%= javascript_include_tag "/Scripts/swfobject_modified.js", "galleryK" %>
+      <script type="text/javascript">
      domReady(function(){
        var instanceOne = new ImageFlow();
        instanceOne.init({ImageFlowID:'gallery'});
@@ -28,9 +31,6 @@
        my.MouseWheel.handle;
      });
   </script>
-<%- end %>
-<%- content_for :tail do %>
-    <%= javascript_include_tag "/Scripts/swfobject_modified.js", "galleryK" %>
 <%- end %>
 <div class="main">
   <div class='sub_title tr'>

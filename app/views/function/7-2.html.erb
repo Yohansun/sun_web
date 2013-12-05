@@ -10,6 +10,33 @@
         }
     </style>
 <%- end %>
+<% content_for :tail do %>
+  <script type="text/javascript">
+
+    var str = '/assets/paint_art/art';
+    function qin_photo(id1, id2, string1, string2) {
+        var $qin_img = $(id1 + ' img');
+        MakeTitle(0, id1, id2);
+        $qin_img.click(function() {
+            var i = $qin_img.index(this);
+            var src = $(this).attr('src');
+            $(id2 + ' img').attr('src', str + i + string1);
+            $(id2).siblings('.art1_after').find('img').attr('src', str + i + string2);
+            MakeTitle(i, id1, id2);
+        })
+    }
+
+    $(function() {
+        qin_photo('#art_option_list', '#art1_show', '_big.jpg', '_after.jpg');
+        qin_photo('#art_option_list_none', '#art2_show', '_big2.jpg', '_2_after.jpg');
+    })
+    function MakeTitle(num, ID, show) {
+        var $qin_img = $(ID + ' img');
+        var title = $qin_img.eq(num).attr('title');
+        $(show + ' span').text(title);
+    }
+  </script>
+<% end %>
 <div class="main">
   <div class='sub_title tr'>
     <img src="<%= asset_path "paint_art/title_paint_art.png"%>" alt=""/>
@@ -66,31 +93,6 @@
                 <img src="/assets/paint_art/art5.jpg"/>
               </div>
             </div>
-            <script type="text/javascript">
-
-                var str = '/assets/paint_art/art';
-                function qin_photo(id1, id2, string1, string2) {
-                    var $qin_img = $(id1 + ' img');
-                    MakeTitle(0, id1, id2);
-                    $qin_img.click(function() {
-                        var i = $qin_img.index(this);
-                        var src = $(this).attr('src');
-                        $(id2 + ' img').attr('src', str + i + string1);
-                        $(id2).siblings('.art1_after').find('img').attr('src', str + i + string2);
-                        MakeTitle(i, id1, id2);
-                    })
-                }
-
-                $(function() {
-                    qin_photo('#art_option_list', '#art1_show', '_big.jpg', '_after.jpg');
-                    qin_photo('#art_option_list_none', '#art2_show', '_big2.jpg', '_2_after.jpg');
-                })
-                function MakeTitle(num, ID, show) {
-                    var $qin_img = $(ID + ' img');
-                    var title = $qin_img.eq(num).attr('title');
-                    $(show + ' span').text(title);
-                }
-            </script>
           </div>
         </div>
       </div>

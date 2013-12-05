@@ -1,4 +1,7 @@
+<%- content_for :head do %>
 <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
 <script type="text/javascript">
   $(function(){
   	$('#channel_link1').click(function(){
@@ -15,6 +18,7 @@
 
   });
 </script>
+<% end %>
 <div id="breadcrumbs">
   <ul class="breadcrumb">
     <li class="<%= 'active_red' if controller_name == 'banner_channel' %>"><a href="/manage/banner_channel">设计快查</a></li>
@@ -96,6 +100,7 @@
 	</div>
 
 </div>
+<%- content_for :tail do %>
 <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                               "upload_image/jquery.iframe-transport",
                               "upload_image/jquery.fileupload" %>
@@ -119,3 +124,4 @@ $(function() {
     })
 });
 </script>
+<% end %>

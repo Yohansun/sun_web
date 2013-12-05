@@ -1,7 +1,25 @@
 <% content_for :head do -%>
 	<%= stylesheet_link_tag "refresh_life/map", "art" %>
-  <%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js", "flowplayer-3.2.11.min.js" %>
 <% end -%>
+<% content_for :tail do %>
+	<%= javascript_include_tag "jquery-ui.min.js","easing","jquery.draggablecarousel-0.1.js","art","/Scripts/swfobject_modified.js", "flowplayer-3.2.11.min.js" %>
+	<script language="JavaScript">
+		flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
+		 clip:  {
+		  autoPlay: false,
+		  autoBuffering: true
+		 }
+		});
+	</script>
+  <script language="JavaScript">
+		flowplayer("player1", "/flash/flowplayer-3.2.12.swf",{
+		 clip:  {
+		  autoPlay: false,
+		  autoBuffering: true
+		 }
+		});
+	</script>
+<% end %>
 <div class="container refresh_main">
 	<h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>iColor和您一起刷新家，新开始</small></h3>
 	<ul class="breadcrumb">
@@ -178,14 +196,6 @@
 				<div class="ipad1 pr">
 					<div class="ipad1_img2">
             <a href="/system/flash/refresh-1-mins.flv" style="display:block;width:847px;height:465px" id="player"></a>
-            <script language="JavaScript">
-							flowplayer("player", "/flash/flowplayer-3.2.12.swf",{
-							 clip:  {
-							  autoPlay: false,
-							  autoBuffering: true
-							 }
-							});
-						</script>
           </div><!--ipad1_img2 ends-->
 				</div>
 				<div class="ipad1 pr hide">
@@ -238,14 +248,6 @@
 				<div class="ipad1 pr hide">
 					<div class="ipad1_img2">
             <a href="/flash/refresh-3-mins.flv" style="display:block;width:847px;height:465px" id="player1"></a>
-            <script language="JavaScript">
-							flowplayer("player1", "/flash/flowplayer-3.2.12.swf",{
-							 clip:  {
-							  autoPlay: false,
-							  autoBuffering: true
-							 }
-							});
-						</script>
           </div><!--ipad1_img2 ends-->
           <a class="video_words pa" href="http://www.nipponpaint.com.cn/shuaxin/fuwu/" target="_blank">
                   艺术漆首批上市地区：上海
