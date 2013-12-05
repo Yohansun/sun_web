@@ -84,6 +84,8 @@ class DesignImage < ActiveRecord::Base
   before_save :set_pinyin
   before_save :set_sort
 
+  after_update :exipre_page_cache
+
   def color_codes
     code = []
     code << ColorCode.find_by_code(color1)
@@ -269,5 +271,13 @@ class DesignImage < ActiveRecord::Base
     end
 
     scoped(:joins => joins.join(" "))
+  end
+
+  def self.exipre_page_cache(id)
+    FileUtils.rm_rf Rails.root.join("public", "images", id.to_i.to_s)
+  end
+
+  def exipre_page_cache
+    DesignImage.exipre_page_cache(self.id)
   end
 end
