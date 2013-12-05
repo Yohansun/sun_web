@@ -216,6 +216,7 @@ Icolor::Application.routes.draw do
   match "/designer_events/kv" => "designer_events#kv" #第一列表也KV点击后的页面
   match "/designer_events/weibo" => "designer_events#weibo"
   match "/designer_events/:id" => "designer_events#show"
+  match "/designer_events/city/:city-:page" => "designer_events#city"
   match "/designer_events/city/:city" => "designer_events#city"
   match "/other_events" => "other_events#index"
   match "/other_events/kv" => "other_events#kv"
