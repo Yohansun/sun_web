@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   layout "home_manage"
 
   caches_action :index, :expires_in => 7.days
-  #before_filter :get_vote
+  # before_filter :get_vote
 
   def t1days
     redirect_to "/21days/index.html"
@@ -111,11 +111,11 @@ class HomeController < ApplicationController
   end
 
   def overall
-      render layout: nil
+      render layout: nil, content_type: 'text/javascript'
   end
 
   def home_overall
-      render layout: nil
+      render layout: nil, content_type: 'text/javascript'
   end
 
   def image_show_loading
