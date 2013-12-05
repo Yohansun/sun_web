@@ -2,6 +2,9 @@ class ArticlesController < ApplicationController
   layout "home_manage"
   before_filter :get_articles
 
+  caches_action :index, :expires_in => 7.days
+  caches_action :show, :expires_in => 7.days
+
   def index
     @weekly_tips = WeeklyTip.page(1)
 
@@ -16,7 +19,7 @@ class ArticlesController < ApplicationController
      @next_article = get_articles.tagged_with(tags).where("published_at > ?", @article.published_at).last
      else
       @prev_article = get_articles.where("published_at < ?", @article.published_at).first
-      @next_article = get_articles.where("published_at > ?", @article.published_at).last  
+      @next_article = get_articles.where("published_at > ?", @article.published_at).last
      end
 
      expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
