@@ -2,9 +2,6 @@ class ArticlesController < ApplicationController
   layout "home_manage"
   before_filter :get_articles
 
-  caches_action :index, :expires_in => 7.days
-  caches_action :show, :expires_in => 7.days
-
   def index
     @weekly_tips = WeeklyTip.page(1)
 

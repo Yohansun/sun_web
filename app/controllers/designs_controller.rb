@@ -5,9 +5,6 @@ class DesignsController < ApplicationController
   before_filter :find_user
   before_filter :find_design, :only => [:upload, :edit]
 
-  caches_action :index, :expires_in => 7.days
-  caches_action :show, :expires_in => 7.days
-
   def download
     target_file = DesignImage.where(:imageable_id => params[:id])
     zipfile_name = "#{Rails.root}/public/system/zip/design#{params[:id]}.zip"
