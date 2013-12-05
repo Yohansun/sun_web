@@ -346,8 +346,6 @@ class DesignImagesController < ApplicationController
   end
 
   def image_show
-    parse_path_params
-
     @banners = IBanner.page_name('图库内页').where(position: [1,2,3,4]).order("position").all
     @master_interviews = IColumnData.show_data(6).limit(5)
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first

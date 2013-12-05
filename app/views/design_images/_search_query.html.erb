@@ -1,0 +1,20 @@
+您的选择：
+<%- @tags.each do |tag| %>
+  <% next if tag.blank? %>
+  <span class="map-srch-s">
+    <%= tag.title %>
+    <a href="/images/<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
+  </span>
+<%- end %>
+<%- if @pinyin.present? && @pinyin.to_s != "0" %>
+  <span class="map-srch-s">拼音: <i><%= @pinyin %></i>
+    <a href="/images/<%= delete_link @pinyin, :pinyin %>" class="map-srch-del">删除</a>
+  </span>
+<%- end %>
+<%- if @area_names.present? %>
+  <span class="map-srch-s">地区: <i><%= @area_names %></i>
+    <a href="/images/<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
+  </span>
+<%- end %>
+&nbsp;
+<span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>

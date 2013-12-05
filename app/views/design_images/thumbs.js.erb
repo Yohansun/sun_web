@@ -1,2 +1,4 @@
+$('.js-image-count').html("我们为您精选了<strong><%= @img_count %></strong> 张图片");
+$('.js-search-query').html("<%=j render partial: 'search_query', locals: { tags: @tags, pinyin: @pinyin, area_names: @area_names } %>");
 $('.js-thumbs').html("<%=j render partial: 'side_thumbs', locals: { image_thumbs: @image_thumbs, image: @image, next_offset: @next_offset, prev_images: @prev_images, next_images: @next_images } %>");
 offset = <%= @next_offset %>;
