@@ -2,7 +2,12 @@
 class DesignImagesController < ApplicationController
   layout "home_manage"
   before_filter :get_categories, only: [:index, :lists, :image_show]
-  caches_page :image_show
+
+  caches_action :image_show, :cache_path => Proc.new { |c|
+    image_show_design_image_path(c.params.delete_if{|k,v| k == 'path'})
+  }, :expires_in => 7.days
+
+  caches_action :lists, :cache_path => Proc.new { |c| c.params }, :expires_in => 7.days
 
   def create
     newparams = coerce(params)
@@ -98,6 +103,8 @@ class DesignImagesController < ApplicationController
     @home_colors = HomeColor.order("order_id")
     home_color_tags = HomeTypeCategory.where("tagable_type = ?", "home_color").map &:tag
     @home_color_tags = ImageLibraryCategory.find(home_color_tags)
+
+    expires_in 7.days, 'max-stale' => 8.days, :public => true
   end
 
   def index
@@ -346,8 +353,6 @@ class DesignImagesController < ApplicationController
   end
 
   def image_show
-    parse_path_params
-
     @banners = IBanner.page_name('图库内页').where(position: [1,2,3,4]).order("position").all
     @master_interviews = IColumnData.show_data(6).limit(5)
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first

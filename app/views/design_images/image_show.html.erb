@@ -3,7 +3,7 @@
 <% end %>
 
 <%- content_for :tail do %>
-  <%= javascript_include_tag "manage/map-kv-slider.js","/resources/js/plugins/exp/exp.js" %>
+  <%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
     // 评论回复JS弹框
     function js_comment_reply () {
@@ -17,8 +17,15 @@
         });
     };
 
-    var path = "<%= params[:path] %>";
-    var offset = <%= params[:site] || 0 %>;
+    var path = "0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0";
+    var offset = 1;
+    var paths = window.location.href.split("/");
+
+    if(paths.length >= 7) {
+      path = paths[6].split("?")[0];
+      offset = paths[5];
+    }
+
     var fix_offset = offset;
     var image_id = <%= params[:id] %>;
     function load_side_thumbs() {
@@ -130,30 +137,11 @@
 </ul>
 <hr class="border2 border2_mt2">
 
-<p class="map-srch-bin index_main">
-  您的选择：
-  <%- @tags.each do |tag| %>
-    <% next if tag.blank? %>
-    <span class="map-srch-s">
-      <%= tag.title %>
-      <a href="/images/<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
-    </span>
-  <%- end %>
-  <%- if @pinyin.present? && @pinyin.to_s != "0" %>
-    <span class="map-srch-s">拼音: <i><%= @pinyin %></i>
-      <a href="/images/<%= delete_link @pinyin, :pinyin %>" class="map-srch-del">删除</a>
-    </span>
-  <%- end %>
-  <%- if @area_names.present? %>
-    <span class="map-srch-s">地区: <i><%= @area_names %></i>
-      <a href="/images/<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
-    </span>
-  <%- end %>
-  &nbsp;
-  <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
+<p class="map-srch-bin index_main js-search-query">
+您的选择：
 </p>
 
-<h4 class="image_title clearfix"><small class="pull-right">我们为您精选了<strong><%= @img_count %></strong> 张图片</small><%= @image.title.present? ?  @image.try(:title) : @image.try(:design).try(:title) %></h4>
+<h4 class="image_title clearfix"><small class="pull-right js-image-count"></small><%= @image.title.present? ?  @image.try(:title) : @image.try(:design).try(:title) %></h4>
 <div class="index_main clearfix">
   <div class="pull-left imgbase_in_left">
     <div class="slides_box clearfix">
