@@ -3,9 +3,7 @@ class DesignImagesController < ApplicationController
   layout "home_manage"
   before_filter :get_categories, only: [:index, :lists, :image_show]
 
-  caches_action :image_show, :cache_path => Proc.new { |c|
-    image_show_design_image_path(c.params.delete_if{|k,v| k == 'path'})
-  }, :expires_in => 7.days
+  caches_action :image_show, :cache_path => Proc.new { |c| c.params[:id] }, :expires_in => 7.days
   caches_action :lists, :cache_path => Proc.new { |c| c.params }, :expires_in => 7.days
   caches_action :index, :cache_path => Proc.new { |c| c.params }, :expires_in => 7.days
 
