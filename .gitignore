@@ -23,5 +23,5 @@ public/design_images
 public/faqs
 public/master_designs
 public/master_interviews
-public/images/*.html
+public/images/**/*.html
 sitemap*.gz

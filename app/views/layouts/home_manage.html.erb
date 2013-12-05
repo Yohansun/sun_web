@@ -8,8 +8,8 @@
     <meta name="Description" content="<%= des_content %>"/>
     <meta name="Keywords" content="<%= keyword_content %>"/>
 
-    <%= stylesheet_link_tag "manage/bootstrap.css", "manage/bootstrap-responsive.css", "manage/jquery.slider.css", "manage/icolor.css","manage/map.css" %>
-    <%= javascript_include_tag "application", "manage/bootstrap.js", "manage/jquery.slider.js","LinkageSelect","/location.js" %>
+    <%= stylesheet_link_tag "home_manage" %>
+    <%= javascript_include_tag "home_manage" %>
 
     <!--所有的个人主页都加载style.css -->
     <%- if params[:user_id] %>
@@ -281,6 +281,8 @@
       $.getScript("/home/home_overall.js?"+(new Date().valueOf()));
     });
   </script>
+
+  <%= javascript_include_tag '/location.js' %>
 
   <!-- GA监测 -->
   <script type="text/javascript">
