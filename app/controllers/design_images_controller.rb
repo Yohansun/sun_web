@@ -383,7 +383,7 @@ class DesignImagesController < ApplicationController
     if params[:offset] == params[:fix_offset]
       if @offset >= 4
         @images = @images.select("distinct design_images.id, design_images.*").offset(@offset - 4).limit(9).all
-        index = @images.map(&:id).index(params[:image_id].to_i)
+        index = @images.map(&:id).index(params[:image_id].to_i) || 0
         @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}", expires_in: 7.days) do
           [@images[index - 1], @images[index - 4]]
         end
