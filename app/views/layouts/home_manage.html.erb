@@ -9,7 +9,6 @@
     <meta name="Keywords" content="<%= keyword_content %>"/>
 
     <%= stylesheet_link_tag "home_manage" %>
-    <%= javascript_include_tag "home_manage" %>
 
     <!--所有的个人主页都加载style.css -->
     <%- if params[:user_id] %>
@@ -253,8 +252,11 @@
       </div>
 
     </div>
-    <%= yield :tail %>
   </div>
+
+  <%= javascript_include_tag "home_manage" %>
+  <%= yield :tail %>
+
   <%= render "layouts/login" %>
   <script type="text/javascript">
     $(function(){
@@ -274,10 +276,7 @@
           $('.js-share_toggle').toggle()
         });
       }($));
-    });
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function () {
+
       $.getScript("/home/home_overall.js?"+(new Date().valueOf()));
     });
   </script>

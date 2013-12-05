@@ -1,5 +1,8 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "manage/map.css" %>
+<% end %>
+
+<%- content_for :tail do %>
   <%= javascript_include_tag "manage/map-kv-slider.js","/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
     // 评论回复JS弹框
@@ -86,6 +89,7 @@
     });
   </script>
 <%- end %>
+
 <h3 class="chann_caption nomargin">
   <div class="map-search pull-right">
     <p class="pull-left">热门搜索：
