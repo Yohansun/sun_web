@@ -1,4 +1,5 @@
 <% content_for :head do -%>
+<%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
 <style type="text/css">
 	.boder_white {
 		padding: 10px;
@@ -79,6 +80,9 @@
 </style>
 <% end %>
 <% content_for :tail do -%>
+<%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
 $(function(){
 	$('.edit_image').hide();
