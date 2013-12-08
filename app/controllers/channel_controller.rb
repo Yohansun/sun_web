@@ -2,7 +2,8 @@
 
 class ChannelController < ApplicationController
   layout "home_manage"
-  #caches_page :index, :expires_in => 60.minutes
+
+  caches_action :access, :cache_path => Proc.new { |c| c.params }, :expires_in => 1.days
 
    #设计快查
   def access
