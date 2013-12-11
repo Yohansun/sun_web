@@ -158,7 +158,7 @@ if ($(".new_mix_color")) {
 if ($(".home_banner2")) {
     $(".home_banner2").click(function () {
         <% if current_user -%>
-        window.open("<%= edit_user_path(current_user) %>", "_blank");
+        window.open("<%= edit_user_path(current_user, :edit_by => 'home_banner2') %>", "_blank");
         <% else -%>
         show_login();
         <% end -%>
