@@ -5,6 +5,10 @@
 </style>
 <script type="text/javascript">
 $(function() {
+  window.search_path = "<%= params[:path] || '0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0' %>";
+  window.original_search_path = window.search_path;
+  init_query_tags();
+
   var options = {
     data  : data
   }
@@ -226,12 +230,7 @@ function submit_area() {
     <%=form_tag image_search_index_design_images_path, :class => 'map-list-search pr',:style => "display: block" do %>
     <p class="map-srch-bin">
       您的选择：
-      <%- @query_tags.each do |tag| %>
-      <% next if tag.blank? %>
-      <span class="map-srch-s"><%= (tag.parent.present? && tag.parent.title != '按部件') ? "#{tag.parent.title}" : "全部" %>: <i><%= tag.title %></i>
-        <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
-      </span>
-      <%- end %>
+      <span class="js-query-tags"></span>
       <%- if @color.present? && @color.to_s != "0" %>
       <span class="map-srch-s">查询: <i><%= @color %></i>
         <a href="<%= delete_link @color, :color %>" class="map-srch-del">删除</a>
@@ -247,19 +246,20 @@ function submit_area() {
         <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
       </span>
       <%- end %>
+      <span class="map-srch-s map-srch-reset js-search-now" style="display:none" onclick="javascript:window.location='/images/'+window.search_path;">立即搜索我要的图片</span>
       <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
     </p>
 
     <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
       <% cache ['design_images', 'home_design', params[:path]] do %>
-        <%- @home_design.each do |category| %>
+        <%- @home_design.each_with_index do |category, index| %>
           <%- unless category.title == "按地区" %>
           <fieldset class="clearfix js-cate-<%= category.category_id %>">
             <label class="pull-left"><%= category.title %>：</label>
             <span>
-              <a href="/images/<%= show_link category.category_id.to_i %>" class="js-cate-all js-cate-all-<%= category.category_id %>">全部</a>
+              <a href="/images/<%= show_link category.category_id.to_i %>" data-tag-name='全部: <%= category.title %>' data-tag-id='<%= category.category_id %>' data-tag-index="<%= index %>" class="js-tag js-tag-<%=category.category_id %> js-cate-all js-cate-all-<%= category.category_id %>">全部</a>
               <%- category.category(category.category_id).each do |cate_child| %>
-              <a href="/images/<%= show_link cate_child.id %>" class="js-tag-<%= cate_child.id %>"><%= cate_child.title %></a>
+              <a data-tag-name='<%= category.title %>: <%= cate_child.title %>' data-tag-id='<%= cate_child.id %>' data-tag-index="<%= index %>" href="/images/<%= show_link cate_child.id %>" class="js-tag js-tag-<%= cate_child.id %>"><%= cate_child.title %></a>
               <%- end %>
             </span>
           </fieldset>
@@ -288,12 +288,7 @@ function submit_area() {
     <form class="map-list-search hide pr" style="display:none;">
       <p class="map-srch-bin">
         您的选择：
-        <%- @query_tags.each do |tag| %>
-        <% next if tag.blank? %>
-        <span class="map-srch-s"><%= (tag.parent.present? && tag.parent.title != '按部件') ? "#{tag.parent.title}" : "全部" %>: <i><%= tag.title %></i>
-          <a href="<%= delete_link tag.id, :tag %>" class="map-srch-del">删除</a>
-        </span>
-        <%- end %>
+        <span class="js-query-tags"></span>
         <%- if @color.present? && @color.to_s != "0" %>
         <span class="map-srch-s">查询: <i><%= @color %></i>
           <a href="<%= delete_link @color, :color %>" class="map-srch-del">删除</a>
@@ -309,6 +304,7 @@ function submit_area() {
           <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
         </span>
         <%- end %>
+        <span class="map-srch-s map-srch-reset js-search-now" style="display:none" onclick="javascript:window.location='/images/'+window.search_path;">立即搜索我要的图片</span>
         <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
       </p>
 
@@ -318,9 +314,9 @@ function submit_area() {
           <fieldset class="clearfix js-cate-<%= child_lv2.category_id %>">
             <label class="pull-left"><%= child_lv2.title %>：</label>
             <span>
-              <a href="/images/<%= show_link child_lv2.category_id.to_i %>" class="js-cate-all js-cate-all-<%= child_lv2.category_id %>">全部</a>
+              <a href="/images/<%= show_link child_lv2.category_id.to_i %>" data-tag-name='全部: <%= child_lv2.title %>' data-tag-id='<%= child_lv2.id %>' data-tag-index="_2" class="js-tag js-tag-<%= child_lv2.id%> js-cate-all js-cate-all-<%= child_lv2.category_id %>">全部</a>
               <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
-              <a href="/images/<%= show_link child_lv3.id %>" class="js-tag-<%= child_lv3.id %>"><%= child_lv3.title %></a>
+              <a href="/images/<%= show_link child_lv3.id %>" data-tag-name='<%= child_lv2.title %>: <%= child_lv3.title %>' data-tag-id='<%= child_lv3.id %>' data-tag-index="_2" class="js-tag js-tag-<%= child_lv3.id %>"><%= child_lv3.title %></a>
               <%- end %>
             </span>
           </fieldset>
