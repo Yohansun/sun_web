@@ -1,5 +1,8 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "manage/map.css" %>
+  <style type="text/css">
+  .imgbase_in_left .slides_box,.imgbase_in_left .map-big{height:auto;}
+  </style>
 <% end %>
 
 <%- content_for :tail do %>
@@ -145,8 +148,8 @@
 <div class="index_main clearfix">
   <div class="pull-left imgbase_in_left">
     <div class="slides_box clearfix">
-      <div class="map-big pull-left">
-        <%= image_tag(@image.file.url(:image_map_show), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
+      <div class="map-big pull-left text-center">
+        <%= image_tag(@image.file.url(:design_image_big), :class =>"imginfo_big_img", alt: "【#{@image.house_type_names}】【#{@image.acreages_names}】【#{@image.use_names}】效果图 ", title: @image.design.try(:title)) %>
       </div>
       <div class="map-kv-slider pull-right js-thumbs">
         加载中…

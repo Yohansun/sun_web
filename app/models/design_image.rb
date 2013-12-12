@@ -62,6 +62,7 @@ class DesignImage < ActiveRecord::Base
         :image_show_thumb => "80x75#",
         :image_map_list => "210>",
         :image_map_show => "620x388#",
+        :image_show => "620>",
         :slide_thumb => "205x138#",:image_libraries_hover => "650x500>",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
         :grid_list => "204x145>",
