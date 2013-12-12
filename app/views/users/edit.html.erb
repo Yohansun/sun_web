@@ -52,6 +52,9 @@ $(function() {
   <div class="reset_bg2 pr"></div>
   <div class="wrapper">
     <%= form_for current_user, :url => user_path, :remote => true  do |f| %>
+    <% if params[:edit_by].present? %>
+      <%= hidden_field_tag "user[edit_by]", params[:edit_by] %>
+    <% end %>
     <div class="reg_content ft14">
       <div class="upload fr tc">
         <div class="upload_area" id="upload_area">
