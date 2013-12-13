@@ -25,7 +25,7 @@
 <ul class="map-left index_main pull-left unstyled">
 	<%- resource.each do |r| %>
 		<li>
-			<a href="<%= r.link %>" target="_blank">
+			<a href="<%= r.link %>" target="_blank" class="help-block">
 				<%= image_tag r.try(:file).try(:url,:thumb) %>
 			</a>
 			<p class="text-center"><a href="<%= r.link %>" target="_blank"><%= r.title %></a></p>

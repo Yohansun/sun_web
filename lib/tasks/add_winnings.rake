@@ -72,3 +72,11 @@ task :update_winning_image2 => :environment  do
     end
   end
 end
+
+task :design_images_file_reprocess => :environment  do
+  HomeType.all.each {|a| a.file.reprocess!}
+  HomeStyle.all.each {|a| a.file.reprocess!}
+  HomeCost.all.each {|a| a.file.reprocess!}
+  HomeSpace.all.each {|a| a.file.reprocess!}
+  HomeColor.all.each {|a| a.file.reprocess!}
+end
