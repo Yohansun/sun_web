@@ -194,11 +194,13 @@ $(function(){
     <%- if current_user && current_user == @user %>
       <li class="<%= "sort_show" if controller_name == 'collects' %>"><%= link_to "我的收藏", user_collects_path(@user), :class => 'sort_show_a' %></li>
     <%- end %>
-    <%- if current_user && current_user == @user %>
-      <li class="<%= "sort_show" if controller_name == 'points' && action_name == 'index' %>"><%= link_to "积分兑换细则", user_points_path(@user), :class => 'sort_show_a' %></li>
-    <%- end %>
-    <%- if current_user && current_user == @user %>
-      <li class="<%= "sort_show" if controller_name == 'points' && action_name == 'exchange' %>"><%= link_to "积分奖品兑换", user_points_exchange_path(@user), :class => 'sort_show_a' %></li>
+    <%- unless @user.role_name == "user" %>
+      <%- if current_user && current_user == @user %>
+        <li class="<%= "sort_show" if controller_name == 'points' && action_name == 'index' %>"><%= link_to "积分兑换细则", user_points_path(@user), :class => 'sort_show_a' %></li>
+      <%- end %>
+      <%- if current_user && current_user == @user %>
+        <li class="<%= "sort_show" if controller_name == 'points' && action_name == 'exchange' %>"><%= link_to "积分奖品兑换", user_points_exchange_path(@user), :class => 'sort_show_a' %></li>
+      <%- end %>
     <%- end %>
   </ul>
 
