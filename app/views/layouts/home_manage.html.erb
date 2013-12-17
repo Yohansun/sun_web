@@ -2,33 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title><%= page_title %></title>
-  <%= csrf_meta_tag %>
-
+  <% custom_meta = CustomMeta.find_by_fullpath(request.fullpath) %>
+  <% if custom_meta %>
+    <title><%= custom_meta.title %></title>
+    <meta name="Description" content="<%= custom_meta.description %>"/>
+    <meta name="Keywords" content="<%= custom_meta.keywords %>"/>
+  <% else %>
+    <title><%= page_title %></title>
     <meta name="Description" content="<%= des_content %>"/>
     <meta name="Keywords" content="<%= keyword_content %>"/>
-
-    <%= stylesheet_link_tag "home_manage" %>
-
-    <!--所有的个人主页都加载style.css -->
-    <%- if params[:user_id] %>
-        <%= stylesheet_link_tag "style" %>
+  <% end %>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag "home_manage" %>
+  <!--所有的个人主页都加载style.css -->
+  <%- if params[:user_id] %>
+      <%= stylesheet_link_tag "style" %>
+  <%- end %>
+  <%= yield :head %>
+  <!--[if IE 6]>
+  <script src="/png.js"></script>
+  <script>
+      PNG.fix('img,div,a,ul,li,h2,strong,span,p');
+  </script>
+  <![endif]-->
+  <style type="text/css" >
+    .nav_hot{position:absolute;top:-13px;left:60px;}
+    .nav_hot2{position: absolute;top: -5px;left: 65px;}
+    <%- if controller_name != "home" && controller_name != "design_images" %>
+     .navBot{margin:12px 0;}
     <%- end %>
-    <%= yield :head %>
-    <!--[if IE 6]>
-    <script src="/png.js"></script>
-    <script>
-        PNG.fix('img,div,a,ul,li,h2,strong,span,p');
-    </script>
-    <![endif]-->
-    <style type="text/css" >
-      .nav_hot{position:absolute;top:-13px;left:60px;}
-      .nav_hot2{position: absolute;top: -5px;left: 65px;}
-      <%- if controller_name != "home" && controller_name != "design_images" %>
-       .navBot{margin:12px 0;}
-      <%- end %>
-      .navBot li{padding:1px 5px 2px;}
-    </style>
+    .navBot li{padding:1px 5px 2px;}
+  </style>
 </head>
 <body>
   <div class="navbar nomargin">

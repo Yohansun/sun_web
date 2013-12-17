@@ -250,6 +250,22 @@ class DesignImagesController < ApplicationController
     @query_tags = []
     @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
     @query_tags = @ilcs if @ilcs.present?
+    #use in metas_helper
+    bujian = ImageLibraryCategory.find_by_title('按部件')
+    @bujian_ids = bujian.children.map(&:id)
+    @tag_bujian,@tag_other = [],[]
+    if @query_tags.present?
+      @query_tags.each do |tag|
+        if @bujian_ids.include?(tag.try(:parent).try(:id)) || @bujian_ids.include?(tag.id)
+          @tag_bujian << tag.title
+        else
+          @tag_other << tag.title
+        end
+      end
+    end
+    @tag_bujian_helper = @tag_bujian.present? ? (@tag_bujian.join(',') + ",") : ""
+    @tag_other_helper = @tag_other.present? ? (@tag_other.join(',')) : ""
+    #use in metas_helper end
 
     @special_kv = HomeKv.where(position: nil, visible: true).first
 
