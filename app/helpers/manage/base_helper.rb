@@ -13,6 +13,8 @@ module Manage::BaseHelper
         'design_images'
       when /life_memoirs|life_info/
         'life'
+      when /event_kvs/
+        'designer_events'
       else
       	'nothing'
     end
@@ -81,6 +83,8 @@ module Manage::BaseHelper
       when (key =~ /life/) && /life_memoirs|life_info/
         'on'
       when (key =~ /column/) && /universal_column/
+        'on'
+      when (key =~ /designer_events/) && /event_kvs/
         'on'
       else
         'off'

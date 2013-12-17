@@ -1,0 +1,58 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                             "upload_image/jquery.iframe-transport",
+                             "upload_image/jquery.fileupload" %>
+  <script type="text/javascript">
+    $(function() {
+      var klass_name = $('#klass_name').val(),
+          url = 'event_kvs/create_image?klass_name=' + klass_name;
+      $('#fileupload').fileupload({
+          url: url,
+          dataType: 'json',
+          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 5000000,
+          done: function (e, data) {
+            alert(data.result.notify);
+            window.location.reload();
+          },
+          error: function (e, data) {
+            alert(data.result);
+          }
+      })
+    });
+  </script>
+<% end %>
+<div class="container-fluid mt20">
+  <%= form_tag '/manage/event_kvs', class: 'form-inline mt30' , method: :get do %>
+    <%= select_tag "klass_name",options_for_select([["设计师活动","designer_events"],
+                                               ["其他活动","other_events"]],
+                                               params[:klass_name]),
+                                               class: "input-medium mr15" %>
+    <input type="submit" value="确定" class="btn btn-small btn-primary">
+   <% end %>
+</div>
+<% if @event_kv %>
+  <div class="main bs-docs-grid">
+    <div class="row show-grid">
+      <div class="span11">
+        <%= form_tag(event_kvs_path, :class => 'form-inline', remote: true) do %>
+          <%= hidden_field_tag :klass_name, params[:klass_name] %>
+          <label class="control-label">链接&nbsp;&nbsp;
+            <input type="text" name="url" class="input-xlarge" value="<%= @event_kv.url if @event_kv %>">
+          </label>
+          <input type="submit" value="保存" class="btn btn-small btn-primary">
+          <span class="btn btn-small btn-primary fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>上传图片</span>
+            <input id="fileupload" type="file" name="file" multiple>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <%= image_tag @event_kv.try(:file).try(:url, :big), id: 'event_kvs_img' %>
+  </div>
+<% end %>
