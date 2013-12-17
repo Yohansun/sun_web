@@ -40,7 +40,7 @@ class DesignImagesController < ApplicationController
   def download
     target_file = DesignImage.find(params[:id])
     if target_file
-      send_file target_file.file.path
+      send_file target_file.file.path(:slide)
     else
       render nothing: true, status: 404
     end
