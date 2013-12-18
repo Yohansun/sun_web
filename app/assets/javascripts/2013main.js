@@ -74,10 +74,10 @@
 
 	//upload2013 toggle
 	(function($){
-		var $btn = $('.upload2013_btn');
-		if($btn.length == 0) {
+		var $btn = $('.reco_toggle_btn');
+		if($btn.length !== 0) {
   		$btn.click(function(){
-  			$(this).toggleClass('upload2013_btn_down').next().toggle();
+  			$(this).toggleClass('show').siblings('div').toggle();
   		});
     }
 		//inputs_count

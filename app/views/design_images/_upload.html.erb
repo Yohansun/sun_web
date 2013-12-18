@@ -1,18 +1,18 @@
-<div class="file_list clear upload_item" id="design_image<%= upload.id %>">
-    <div class="work_title fl">
+<div class="file_list clearfix upload_item1" id="design_image<%= upload.id %>">
+    <div class="work_title pull-left">
       <%= image_tag upload.file.url(:thumb), :class => "fl" %>
       <p class="file_name"><%= upload.file.original_filename %></p>
       <%= hidden_field_tag "#{params[:for]}[design_image_ids][]", upload.id %>
   </div><!--work_title ends-->
-  <div class="work_size tc fl"><%= number_to_human_size upload.file.size %></div>
-  <div class="set_cover tc fl">
+  <div class="work_size text-center pull-left"><%= number_to_human_size upload.file.size %></div>
+  <div class="set_cover text-center pull-left">
       <input type="radio" name="cover_image" value="<%= upload.id %>" />
   </div><!--set_cover ends-->
-  <div class="work_del tc fl">
+  <div class="work_del text-center pull-left">
       <a href="javascript:remote(<%= upload.id %>);uploads_size();" class="load_del">删除</a>
   </div><!--work_del ends-->
   <% if upload.imageable_type == "Design" %>
-  <div class="work_del upload_edit tc fl">
+  <div class="work_del upload_edit text-center pull-left">
       <a href="#<%=upload.id%>" class="load_del">编辑标签</a>
   </div><!--upload_edit ends-->
   <% end %>
