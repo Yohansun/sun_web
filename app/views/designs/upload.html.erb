@@ -109,6 +109,17 @@
                 }
             });
         })(jQuery);
+
+        $('a.url-js').click(function(){
+          var select_id = $(this).parents('fieldset').get(0).getElementsByTagName('select')[0].value
+          var image_id = $(this).parents('fieldset').get(0).getElementsByTagName('input')[2].value
+          if(select_id != ''){
+            this.href = '/users/<%= current_user.id %>/designs/<%= @design.id %>/design_image_tags?design_image_id='+image_id+'&image_tag=' + select_id
+          }else{
+             this.href = '/users/<%= current_user.id %>/designs/<%= @design.id %>/design_image_tags?design_image_id='+image_id
+          }
+
+        })
     });
 
     function uploads_size () {

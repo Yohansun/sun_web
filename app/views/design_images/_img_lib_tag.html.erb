@@ -9,6 +9,9 @@
         <label class="control-label pt10" for="imgname">图片名称</label>
         <div class="controls">
           <input type="text" name="title[<%=img_lib_tag.id%>]" class="fl inputs_count design_image_title" value="<%= img_lib_tag.title ? img_lib_tag.title : img_lib_tag.design.title%>" />
+          <input type="hidden" id="delete_image_tag_<%=img_lib_tag.id%>" name="delete_image_tag[<%=img_lib_tag.id%>]" >
+          <input type="hidden" id="design_image_id" name="design_image_id" value="<%=img_lib_tag.id%>" >
+          <input type="hidden" name="effect_id[<%=img_lib_tag.id%>]" value="<%=image_tag_selected(132,img_lib_tag)%>">
         </div>
       </div>
       <div class="media-body">
@@ -183,7 +186,7 @@
           <% end %>
         </ul>
       </div>
-      <p class="text-right upload_more_btn"><a href="<%=design_image_tags_user_design_path(current_user,img_lib_tag.design,design_image_id: img_lib_tag.id)%>" target="_blank" class="text-important"><strong>+选择更多标签</strong></a></p>
+      <p class="text-right upload_more_btn"><a href="<%=design_image_tags_user_design_path(current_user,img_lib_tag.design,design_image_id: img_lib_tag.id)%>" target="_blank" class="text-important url-js"><strong>+选择更多标签</strong></a></p>
     </div>
   </fieldset>
 </div>

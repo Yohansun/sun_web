@@ -106,6 +106,7 @@ class DesignsController < ApplicationController
   end
 
   def design_image_tags
+    @design_image = DesignImage.find params[:design_image_id]
     @image_tags = ImageTag.where(design_image_id: params[:design_image_id], genre: 'image_tag2').map &:image_library_category_id
   end
 
@@ -228,10 +229,27 @@ class DesignsController < ApplicationController
           design_tags.each do |design_tag|
             ImageTag.create(design_image_id: image.id, image_library_category_id: design_tag.image_library_category_id, genre: 'image_tag3')
           end
-          tag_arr = []
-          if params[:effect] && params[:effect][design_image_id].present?
-            tag_arr << params[:effect][design_image_id]
+
+          if params[:delete_image_tag][design_image_id].present?
+            img_tag = ImageTag.where("design_image_id = ? and image_library_category_id = ?", design_image_id, params[:delete_image_tag][design_image_id]).first
+          else
+            if params[:effect_id][design_image_id].present?
+              img_tag = ImageTag.where("design_image_id = ? and image_library_category_id = ?", design_image_id, params[:effect_id][design_image_id]).first
+            else
+              img_tag = ImageTag.new
+            end
           end
+
+          if params[:effect][design_image_id].present?
+            img_tag.design_image_id = design_image_id
+            img_tag.image_library_category_id = params[:effect][design_image_id].to_s
+            img_tag.genre = 'image_tag2'
+            img_tag.save
+          else
+            img_tag.destroy
+          end
+
+          tag_arr = []
           if params[:room] && params[:room][design_image_id].present?
             tag_arr << params[:room][design_image_id]
           end

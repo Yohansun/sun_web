@@ -301,47 +301,26 @@ class DesignImagesController < ApplicationController
       end
     end
 
-    if params[:furniture].present?
-      image_tags_arr += params[:furniture]
-    end
-    if params[:lamps].present?
-      image_tags_arr += params[:lamps]
-    end
-    if params[:fabric].present?
-      image_tags_arr += params[:fabric]
-    end
-    if params[:metope].present?
-      image_tags_arr += params[:metope]
-    end
-    if params[:accessories].present?
-      image_tags_arr += params[:accessories]
-    end
-    if params[:appliances].present?
-      image_tags_arr += params[:appliances]
-    end
-    if params[:cupboard].present?
-      image_tags_arr += params[:cupboard]
-    end
-    if params[:baths].present?
-      image_tags_arr += params[:baths]
-    end
-    if params[:ceramic_tile].present?
-      image_tags_arr += params[:ceramic_tile]
-    end
-    if params[:floor].present?
-      image_tags_arr += params[:floor]
-    end
-    if params[:articles].present?
-      image_tags_arr += params[:articles]
-    end
-    if params[:doors_windows].present?
-      image_tags_arr += params[:doors_windows]
-    end
-    if params[:digital].present?
-      image_tags_arr += params[:digital]
-    end
-    if params[:other].present?
-      image_tags_arr += params[:other]
+    image_tags_arr += params[:furniture] if params[:furniture].present?
+    image_tags_arr += params[:lamps] if params[:lamps].present?
+    image_tags_arr += params[:fabric] if params[:fabric].present?
+    image_tags_arr += params[:metope] if params[:metope].present?
+    image_tags_arr += params[:accessories] if params[:accessories].present?
+    image_tags_arr += params[:appliances] if params[:appliances].present?
+    image_tags_arr += params[:cupboard] if params[:cupboard].present?
+    image_tags_arr += params[:baths] if params[:baths].present?
+    image_tags_arr += params[:ceramic_tile] if params[:ceramic_tile].present?
+    image_tags_arr += params[:floor] if params[:floor].present?
+    image_tags_arr += params[:articles] if params[:articles].present?
+    image_tags_arr += params[:doors_windows] if params[:doors_windows].present?
+    image_tags_arr += params[:digital] if params[:digital].present?
+    image_tags_arr += params[:other] if params[:other].present?
+    image_tags_arr += params[:effect] if params[:effect].present?
+    image_tags_arr += params[:use] if params[:use].present?
+    if params[:design_image][:area_id].present?
+      image = DesignImage.find params[:image_id]
+      image.area_id = params[:design_image][:area_id]
+      image.save
     end
     if image_tags_arr.present?
       image_tags_arr.each do |image_tag|
