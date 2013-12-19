@@ -1,0 +1,83 @@
+<div class="main bs-docs-grid">
+  <div class="row show-grid">
+    <div class="span2">
+      <a href="<%= new_designer_event_path %>" class="btn btn-small btn-primary">新活动</a>
+      <a href="/manage/event_kvs?klass_name=designer_events" class="btn btn-small btn-primary">设置主kv</a>
+    </div>
+    <div class="span10 pull-right">
+        <%= form_tag('/manage/designer_events', :class => 'form-inline', :method => 'get') do %>
+          <%= select_tag "time_type",options_for_select([["活动结束日期","end_time"],
+                                                           ["最后修改日期","updated_at"]],
+                                                           params[:time_type]),
+                                                           class: "input-medium mr15" %>
+          <%= text_field_tag "data_start", params[:data_start].present? ? params[:data_start] : '2012-01-01 00:00:00', :class => "input-medium datetimepicker_full", :name => 'data_start', :readonly => 'readonly' %>
+          to
+          <%= text_field_tag "data_end", params[:data_end].present? ? params[:data_end] : Time.now.to_s, :class => "input-medium datetimepicker_full", :name => 'data_end', :readonly => 'readonly' %>
+          <label class="control-label"><b>and</b></label>
+          <select class="input-small mr15">
+            <option>活动名称</option>
+          </select>
+          <input type="text" name="title" class="input-small" value="<%= params[:title] if params[:title] %>"/>
+          <%= button_tag "查询", data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+<div class="main bs-docs-grid">
+  <div class="row show-grid">
+    <div class="span10">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <td>操作</td>
+            <td>活动结束时间</td>
+            <td>活动名称</td>
+            <td>最后修改日期</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @designer_events.each do |designer_event| %>
+            <tr>
+              <td>
+                <%= link_to '编辑', edit_designer_event_path(designer_event) %>&nbsp;|&nbsp;
+                <%= link_to "删除", designer_event_path(designer_event), data: {confirm: '是否确定删除这项设计师活动?',method: :delete, remote: true} %>
+              </td>
+              <td><%= designer_event.end_time.to_date %></td>
+              <td><%= designer_event.title %></td>
+              <td><%= designer_event.updated_at.to_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="navbar-form pull-left">
+    <div class="span4">
+      <%= paginate @designer_events, :outer_window => 5 %>
+    </div>
+    <% if @designer_events.num_pages > 1 %>
+      <div class="span1">
+        共<%= @designer_events.num_pages %>页
+      </div>
+      <div class="span2">
+        <%= form_tag '/manage/designer_events', method: :get do %>
+          <% if params[:time_type].present? %>
+            <%= hidden_field_tag :time_type, params[:time_type] %>
+          <% end %>
+          <% if params[:data_start].present? %>
+            <%= hidden_field_tag :data_start, params[:data_start] %>
+          <% end %>
+          <% if params[:data_end].present? %>
+            <%= hidden_field_tag :data_end, params[:data_end] %>
+          <% end %>
+          <% if params[:title].present? %>
+            <%= hidden_field_tag :title, params[:title] %>
+          <% end %>
+          跳到<input type="text" name="page" class="input-mini" style="margin:0 auto;" />页
+          <button class="btn btn-small btn-primary" type="submit">Go</button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
