@@ -28,7 +28,7 @@ $(function() {
   $down   = $('.imgbase_down_id'),
   $toggle = $('.map-list-up'),
   $form   = $('.map-list-search'),
-  $ul     = $('.nomargin'),
+  $ul     = $('ul.nomargin'),
   $conte = $('.imgbase_bin > .imginfo_big_txt'),
   $colorsbox = $(".imgbase_bin > .colorsbox");
 
@@ -81,6 +81,7 @@ $(function() {
 
   var cookie = $.readCookie("nomargin");
   if (cookie != ""){
+    if(parseInt(cookie) > 1) cookie = "0";
     $("ul.pull-left.nomargin").find("li").not(':eq(' + cookie + ')').removeClass("list-curr");
     $("ul.pull-left.nomargin").find("li").eq(cookie).addClass("active_tit list-curr");
     $form.eq(cookie).show().siblings().hide();
