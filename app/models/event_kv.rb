@@ -2,6 +2,8 @@
 class EventKv < ActiveRecord::Base
   attr_accessible :klass_name, :url, :file
 
+  has_many :kv_maps,:dependent => :destroy
+
   scope :page_name,->(klass_name){ where(klass_name: klass_name)}
 
   has_attached_file :file,

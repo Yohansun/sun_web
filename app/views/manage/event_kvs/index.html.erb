@@ -7,6 +7,9 @@
                              "upload_image/jquery.fileupload" %>
   <script type="text/javascript">
     $(function() {
+      $('#link2').click(function(){
+        window.open($('#form-field-3').val());
+      });
       var klass_name = $('#klass_name').val(),
           url = 'event_kvs/create_image?klass_name=' + klass_name;
       $('#fileupload').fileupload({
@@ -54,5 +57,26 @@
       </div>
     </div>
     <%= image_tag @event_kv.try(:file).try(:url, :big), id: 'event_kvs_img' %>
+    <div class="widget-box">
+      <h5 class="lighter">热区:</h5>
+      <div class="widget-main">
+        <%= form_for(KvMap.new, :html => {:class => "form-inline"}, remote: true ) do |f| %>
+          <%= f.hidden_field :event_kv_id, value: @event_kv.nil? ? nil : @event_kv.id, id: 'hidden_map_id' %>
+          <label>位置:</label>
+          X&nbsp;<%= f.text_field :x_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          Y&nbsp;<%= f.text_field :y_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          W&nbsp;<%= f.text_field :width, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          H&nbsp;<%= f.text_field :high, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          <div class="clear"></div><br />
+
+          <label class="control-label">url</label>
+          <%= f.text_field :url, value: nil, id: 'form-field-3' %>
+          <a href="javascript:;" class="help-line" id="link2">检测链接</a>
+          <div class="clear"></div>
+          <%= f.submit '添加', class: 'btn btn-info btn-small' %>
+        <%- end %>
+      </div>
+    </div>
+    <%= render :partial => 'maps', locals: { maps: @event_kv.nil? ? [] : @event_kv.kv_maps} %>
   </div>
 <% end %>

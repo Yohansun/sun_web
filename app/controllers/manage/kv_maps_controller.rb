@@ -4,6 +4,7 @@ class Manage::KvMapsController < Manage::BaseController
 	def create
 		@kv_map = KvMap.create(params[:kv_map])
 		@kv = HomeKv.find_by_id(params[:kv_map][:home_kv_id])
+    @event_kv = EventKv.find_by_id(params[:kv_map][:event_kv_id])
 		create! do |format|
 			format.js
 		end
