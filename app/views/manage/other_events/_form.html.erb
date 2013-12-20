@@ -62,9 +62,9 @@
         <span class="middle">(尺寸280x145)</span>
       </span>
       <br/>
-      <%= image_tag @designer_event.try(:file).try(:url,:list),size: '280x145',id: 'designer_event_image' %>
+      <%= image_tag @other_event.try(:file).try(:url,:list),size: '280x145',id: 'other_event_image' %>
       <input type="hidden" id="event_image" />
-      <%= hidden_field_tag "designer_event[event_type]", controller_name %>
+      <%= hidden_field_tag "other_event[event_type]", controller_name %>
     </div>
   </div>
 </div>
@@ -86,6 +86,6 @@
   <label class="control-label"></label>
   <div class="clearfix">
     <input type="submit" class="btn btn-small btn-primary" value="保存" />
-    <a href="/manage/desginer_events" class="btn btn-small btn-primary">取消</a>
+    <a href="/manage/other_events" class="btn btn-small btn-primary">取消</a>
   </div>
 </div>

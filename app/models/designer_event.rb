@@ -1,6 +1,8 @@
 # encoding: utf-8
 class DesignerEvent < ActiveRecord::Base
-  attr_accessible :content, :end_time, :intro, :start_time, :title, :file, :is_save
+  attr_accessible :content, :end_time, :intro, :start_time, :title, :file, :is_save, :event_type
+
+  scope :page_name, ->(controller_name){where(event_type: controller_name)}
 
   has_attached_file :file,
     :styles => {:list => "280x145#"},

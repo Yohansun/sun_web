@@ -560,6 +560,12 @@ Icolor::Application.routes.draw do
         put :update_image
       end
     end
+    resources :other_events do
+      collection do
+        post :create_image
+        put :update_image
+      end
+    end
     resources :event_kvs, only: [:index, :create] do
       collection do
         post :create_image

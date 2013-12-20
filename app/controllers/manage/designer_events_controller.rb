@@ -9,12 +9,12 @@ class Manage::DesignerEventsController < Manage::BaseController
 
     if data_start.present? && data_end.present? && time_type.present?
       if title.present?
-        @designer_events = DesignerEvent.where("#{time_type} BETWEEN ? AND ? AND title LIKE ? AND is_save = 1", data_start, data_end, "%#{title}%").order("#{time_type} DESC").page(params[:page]).per(10)
+        @designer_events = DesignerEvent.page_name(controller_name).where("#{time_type} BETWEEN ? AND ? AND title LIKE ? AND is_save = 1", data_start, data_end, "%#{title}%").order("#{time_type} DESC").page(params[:page]).per(10)
       else
-        @designer_events = DesignerEvent.where("#{time_type} BETWEEN ? AND ? AND is_save = 1", data_start, data_end).order("#{time_type} DESC").page(params[:page]).per(10)
+        @designer_events = DesignerEvent.page_name(controller_name).where("#{time_type} BETWEEN ? AND ? AND is_save = 1", data_start, data_end).order("#{time_type} DESC").page(params[:page]).per(10)
       end
     else
-      @designer_events = DesignerEvent.where(:is_save => true).order("created_at DESC").page(params[:page]).per(10)
+      @designer_events = DesignerEvent.page_name(controller_name).where(:is_save => true).order("created_at DESC").page(params[:page]).per(10)
     end
   end
 
