@@ -5,6 +5,7 @@
   <%= javascript_include_tag "/location.js","LinkageSelect.js" %>
   <%= javascript_include_tag "2013main.js" %>
   <script type="text/javascript">
+  $(function(){
   <%- unless flash[:design_errors].blank? %>
   <%-
       errors = ""
@@ -29,10 +30,23 @@
     }
   })($);
 
-  function jump(){
+  var jump = function (){
     design_title = $("#edit_title").val();
     window.location = "/users/<%=current_user.id%>/designs/"+ design_title +"/edit_design"
   }
+
+  var title = $('#edit_title')
+
+  $('#t1').click(function(){
+    title.hide()
+  })
+  $('#t2').click(function(){
+    title.show()
+  })
+
+  title.change(jump)
+
+  })
   </script>
 
   <!--[if IE 6]>
@@ -57,14 +71,14 @@
     <div class="tab-pane active" id="upload_tab1">
       <%= form_for([current_user, @design], html: {:class=>"form-horizontal index_main noborder nopadding nomargin"}) do |f| %>
         <%= hidden_field_tag "story_id", params[:story_id] %>
-        <!-- <fieldset class="text-center">
+        <fieldset class="text-center">
           <label class="radio inline">
-            <input type="radio" id="" name="radio1" value="" checked> 新建作品
+            <input type="radio" id="t1" name="radio1" value="" checked> 新建作品
           </label>
           <label class="radio inline">
-            <input type="radio" id="" name="radio1" value=""> 更新已有作品
+            <input type="radio" id="t2" name="radio1" value=""> 更新已有作品
           </label>
-        </fieldset> -->
+        </fieldset>
         <fieldset>
           <div class="control-group">
             <label class="control-label pt10" for="workname">作品名称<span class="help-inline text-important">*</span></label>
@@ -77,7 +91,7 @@
                 <span class="help-text help-inline">还可以输入<b class="text-important inputs_count_tip">50</b>符汉字</span>
                 <% unless params[:baicheng_active].present? %>
                   <%= select_tag "edit_title",
-                  options_for_select(Design.order('created_at desc').where("user_id = #{current_user.id} and story_id is null").map { |design| [design.title, design.id] },@design.id),:prompt => '--请选择--', :onchange => 'jump()' -%>
+                  options_for_select(Design.order('created_at desc').where("user_id = #{current_user.id} and story_id is null").map { |design| [design.title, design.id] },@design.id),:prompt => '--请选择--',:class => "hide" -%>
                  <% end %>
               <% end %>
             </div>
