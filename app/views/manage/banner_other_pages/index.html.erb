@@ -1,0 +1,115 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                              "upload_image/jquery.iframe-transport",
+                              "upload_image/jquery.fileupload" %>
+  <script type="text/javascript">
+    $(function(){
+      $('#company_link1').click(function(){
+          window.open($('#company-url-1').val());
+        });
+      $('form[data-redirect_url]').bind('ajax:success', function(evt, data) {
+        alert("保存成功");
+
+        var url = $(this).data('redirect_url');
+        window.location.href = url;
+      }).bind("ajax:error", function(evt, data) {
+        alert(data.responseText);
+      });
+
+      var url = 'banner_other_pages/create_image?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name%>';
+      $('#fileupload').fileupload({
+          url: url,
+          dataType: 'json',
+          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 5000000,
+          done: function (e, data) {
+            alert(data.result.notify);
+            window.location.href = "/manage/banner_other_pages?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name %>";
+          },
+          error: function (e, data) {
+            alert(data.result);
+          }
+      });
+    });
+  </script>
+<% end %>
+<div id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <%= form_tag '/manage/banner_other_pages', class: 'form-inline mt30' , method: :get do %>
+        <%= select_tag "page_name",options_for_select(["登录/注册/找回密码","作品上传"],
+                                                   params[:page_name]),
+                                                   class: "input-medium mr15" %>
+        <input type="submit" value="确定" class="btn btn-small btn-primary">
+      <% end %>
+    </li>
+  </ul>
+</div>
+<% if @i_banner_select %>
+  <div class="main">
+    <div id="index_tab6" class="tab-pane active">
+      <div class="clearfix row-fluid bann_edit">
+        <!-- used base_helper company_label_path -->
+        <%= render :partial => other_pages_label_path, locals: { i_banner: @i_banner } %>
+
+        <div class="span8">
+          <p class="banner_show">
+            <img src="<%= asset_path @i_banner.file("list_#{@i_banner.size}".to_sym) %>">
+          </p>
+          <div>
+          <span class="btn btn-small btn-primary fileinput-button">
+              <i class="icon-plus icon-white"></i>
+              <span>上传图片...</span>
+              <input id="fileupload" type="file" name="file" multiple>
+          </span>
+          <span class="help-inline">当前banner限制尺寸：<%= @i_banner.size %></span></div>
+          <div class="widget-box mt5">
+            <div class="widget-header widget-header-flat">
+              <h5>编辑信息</h5>
+            </div>
+            <div class="widget-body">
+              <%= form_tag('banner_other_pages/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_other_pages?position=#{@i_banner.position}&page_name=#{@i_banner.page_name}", :class => "widget-main clearfix nom") do %>
+              <%= hidden_field_tag 'position', @i_banner.position %>
+              <%= hidden_field_tag 'page_name', @i_banner.page_name %>
+                <div class="span4 form-inline">
+                  <label class="span3 control-label">图片标识</label>
+                  <div class="span9">
+                    <input class="input-medium" type="text" name="photo_name" placeholder="" value="<%= @i_banner.photo_name %>" data-maxlength=10 maxlength=10 />
+                    <p class="nom">(不超过十个汉字)</p>
+                  </div>
+                </div>
+                <div class="span4 form-inline">
+                  <label class="span1 control-label">组</label>
+                  <div class="span9">
+                  <%= select_tag "i_banner_group_id", options_from_collection_for_select(@i_banner_groups, "id", "name", @i_banner.i_banner_group_id), prompt: "请选择组", :class => "input-medium" %>
+                    <p class="nom">&nbsp;<strong class="text-error"></strong></p>
+                    <p class="nom">&nbsp;</p>
+                  </div>
+                </div>
+                <div class="span4 form-inline">
+                  <label class="span3 control-label">链接</label>
+                  <div class="span9">
+                    <input class="input-medium" id="company-url-1" type="text" name="url" value="<%= @i_banner.url %>" />
+                    <p class="nom"><a href="javascript:void(0);" id="company_link1">检测链接</a></p>
+                  </div>
+                </div>
+
+                <div class="span4 form-inline">
+                  <p class="span12 nom">页面标识&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @i_banner.page_name %></p>
+                </div>
+                <p class="span12 nom">
+                  <%= submit_tag "保存", :id => 'save', data: { disable_with: "请等待..." }, :class => 'btn btn-small btn-primary' %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<% end %>
