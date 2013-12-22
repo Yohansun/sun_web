@@ -12,7 +12,7 @@ class Manage::BannerActivitiesController < Manage::BaseController
         @i_banner = IBanner.page_name(params[:page_name]).first
       end
     else
-      @i_banner = IBanner.page_name('因爱设计师获奖名单').first
+      @i_banner = IBanner.page_name('设计师活动').first
     end
   end
 

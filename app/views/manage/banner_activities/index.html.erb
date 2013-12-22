@@ -20,6 +20,14 @@
 <% end %>
 <div id="breadcrumbs">
   <ul class="breadcrumb">
+    <li class="<%= 'active_red' if params[:page_name] == '设计师活动' %>"><a href="<%= banner_activities_path(page_name: '设计师活动') %>">设计师活动</a></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:page_name] == '其它活动' %>"><a href="<%= banner_activities_path(page_name: '其它活动') %>">其它活动</a></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:page_name] == '设计师活动内页' %>"><a href="<%= banner_activities_path(page_name: '设计师活动内页') %>">设计师活动内页</a></li>
+    <span>|</span>
+    <li class="<%= 'active_red' if params[:page_name] == '其它活动内页' %>"><a href="<%= banner_activities_path(page_name: '其它活动内页') %>">其他活动内页</a></li>
+    <span>|</span>
     <li class="<%= 'active_red' if params[:page_name] == '因爱设计师获奖名单' %>"><a href="<%= banner_activities_path(page_name: '因爱设计师获奖名单') %>">因爱设计师获奖名单</a></li>
   </ul>
 </div>
