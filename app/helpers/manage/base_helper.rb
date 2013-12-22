@@ -7,7 +7,7 @@ module Manage::BaseHelper
       	'home'
       when /channel_tips/
       	'channel_tips'
-      when /banner_group|banner_home|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|special_kv/
+      when /banner_group|banner_home|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|banner_weekly_stars|special_kv/
       	'banner'
       when /tag_sorts|home_heads|seo_sites|home_liter_heads|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
         'design_images'
@@ -53,6 +53,22 @@ module Manage::BaseHelper
     "manage/banner_images/#{label_name}"
   end
 
+  def weekly_stars_label_path
+    label_name = case params[:page_name]
+      when '设计之星'
+        'weekly_stars_label1'
+      when '作品展示'
+        'weekly_stars_label2'
+      when '色彩配搭'
+        'weekly_stars_label3'
+      when '设计鉴赏内页'
+        'weekly_stars_label4'
+      else
+        'nothing'
+    end
+    "manage/banner_weekly_stars/#{label_name}"
+  end
+
   def company_label_path
     label_name = case params[:page_name]
       when '华浔品味装饰'
@@ -86,7 +102,7 @@ module Manage::BaseHelper
         'on'
       when (key =~ /channel_tips/) && /channel_tips/
         'on'
-      when (key =~ /banner/) && /banner_group|banner_home|banner_channel|special_kv/
+      when (key =~ /banner/) && /banner_group|banner_home|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|banner_weekly_stars|special_kv/
         'on'
       when (key =~ /life/) && /life_memoirs|life_info/
         'on'

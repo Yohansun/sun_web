@@ -736,6 +736,13 @@ Icolor::Application.routes.draw do
       end
     end
 
+    resources :banner_weekly_stars do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
     resources :banner_company do
       collection do
         post :create_image

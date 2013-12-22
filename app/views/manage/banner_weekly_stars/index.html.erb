@@ -20,22 +20,20 @@
 <% end %>
 <div id="breadcrumbs">
   <ul class="breadcrumb">
-    <li class="<%= 'active_red' if params[:page_name] == '设计师活动' %>"><a href="<%= banner_activities_path(page_name: '设计师活动') %>">设计师活动</a></li>
+    <li class="<%= 'active_red' if params[:page_name] == '设计之星' %>"><a href="<%= banner_weekly_stars_path(page_name: '设计之星') %>">设计之星</a></li>
     <span>|</span>
-    <li class="<%= 'active_red' if params[:page_name] == '其它活动' %>"><a href="<%= banner_activities_path(page_name: '其它活动') %>">其它活动</a></li>
+    <li class="<%= 'active_red' if params[:page_name] == '作品展示' %>"><a href="<%= banner_weekly_stars_path(page_name: '作品展示') %>">作品展示</a></li>
     <span>|</span>
-    <li class="<%= 'active_red' if params[:page_name] == '设计师活动内页' %>"><a href="<%= banner_activities_path(page_name: '设计师活动内页') %>">设计师活动内页</a></li>
+    <li class="<%= 'active_red' if params[:page_name] == '色彩配搭' %>"><a href="<%= banner_weekly_stars_path(page_name: '色彩配搭') %>">色彩配搭</a></li>
     <span>|</span>
-    <li class="<%= 'active_red' if params[:page_name] == '其它活动内页' %>"><a href="<%= banner_activities_path(page_name: '其它活动内页') %>">其它活动内页</a></li>
-    <span>|</span>
-    <li class="<%= 'active_red' if params[:page_name] == '因爱设计师获奖名单' %>"><a href="<%= banner_activities_path(page_name: '因爱设计师获奖名单') %>">因爱设计师获奖名单</a></li>
+    <li class="<%= 'active_red' if params[:page_name] == '设计鉴赏内页' %>"><a href="<%= banner_weekly_stars_path(page_name: '设计鉴赏内页') %>">设计鉴赏内页</a></li>
   </ul>
 </div>
 <div class="main">
   <div id="index_tab6" class="tab-pane active">
     <div class="clearfix row-fluid bann_edit">
       <!-- used base_helper activities_label_path -->
-      <%= render :partial => activities_label_path, locals: { i_banner: @i_banner } %>
+      <%= render :partial => weekly_stars_label_path, locals: { i_banner: @i_banner } %>
       <div class="span8">
         <p class="banner_show">
           <img src="<%= asset_path @i_banner.file("list_#{@i_banner.size}".to_sym) %>">
@@ -52,7 +50,7 @@
             <h5>编辑信息</h5>
           </div>
           <div class="widget-body">
-            <%= form_tag('banner_activities/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_activities?position=#{@i_banner.position}&page_name=#{@i_banner.page_name}", :class => "widget-main clearfix nom") do %>
+            <%= form_tag('banner_weekly_stars/save_data', :id => 'edit_form', :remote => true, :'data-redirect_url' => "/manage/banner_weekly_stars?position=#{@i_banner.position}&page_name=#{@i_banner.page_name}", :class => "widget-main clearfix nom") do %>
             <%= hidden_field_tag 'position', @i_banner.position %>
             <%= hidden_field_tag 'page_name', @i_banner.page_name %>
               <div class="span4 form-inline">
@@ -99,7 +97,7 @@
                            "upload_image/jquery.fileupload" %>
 <script type="text/javascript">
 $(function() {
-    var url = 'banner_activities/create_image?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name%>';
+    var url = 'banner_weekly_stars/create_image?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name%>';
     $('#fileupload').fileupload({
         url: url,
         dataType: 'json',
@@ -108,7 +106,7 @@ $(function() {
         maxFileSize: 5000000,
         done: function (e, data) {
           alert(data.result.notify);
-          window.location.href = "/manage/banner_activities?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name %>";
+          window.location.href = "/manage/banner_weekly_stars?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name %>";
         },
         error: function (e, data) {
           alert(data.result);
