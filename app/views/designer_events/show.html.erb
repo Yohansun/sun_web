@@ -1,221 +1,113 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "exciting_activities", "style", "jquery.rating" %>
-    <%= javascript_include_tag "jquery.rating" %>
+  <%= stylesheet_link_tag "style"%>
 <%- end %>
-<%- content_for :tail do %>
-    <script type="text/javascript">
-        $(function() { // wait for document to load
-            $('input.star_rat').rating({starWidth: 47,half:false,required:true});
-        });
-    </script>
-    <script type="text/javascript">
-              $(function() {
-                  var $item = $('div.galleryD div.list ul');
-                  var count = $item.find('li').size();
-                  var colsize = 12;
-                  var pwidth = $item.find('li').eq(0).width();
-                  var sp = 3;
-                  var wwidth = count * ( pwidth + sp ) - sp;
-                  var movewidth = pwidth + sp;
-                  var disabledClassName = "disabled";
-                  if (count > colsize) {
-                      var $left = $('div.galleryD span.moveleft');
-                      var $right = $('div.galleryD span.moveright');
+<div class="container">
+  <h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li><a href="#">精彩活动</a> > </li>
+    <li class="active">设计师活动</li>
+  </ul>
+  <hr class="border2 border2_mt2">
 
-                      function s(left) {
-                          if (typeof left != 'number') {
-                              left = parseInt($item.css('left')) || 0;
-                          }
-                          $left[ left >= 0 ? 'addClass' : 'removeClass' ](disabledClassName);
-                          $right[ ( -1 * left ) >= wwidth - ( colsize * ( movewidth ) - sp ) ? 'addClass' : 'removeClass' ](disabledClassName);
-                      }
-
-                      s();
-                      $left.click(function() {
-                          if ($(this).hasClass(disabledClassName)) {
-                              return;
-                          }
-                          s((parseInt($item.css('left')) || 0) + movewidth);
-                          $item.animate({
-                              "left" : "+=" + movewidth + 'px'
-                          }, 'fast');
-                      });
-                      $right.click(function() {
-                          if ($(this).hasClass(disabledClassName)) {
-                              return;
-                          }
-                          s((parseInt($item.css('left')) || 0) - movewidth);
-                          $item.animate({
-                              "left" : "-=" + movewidth + 'px'
-                          }, 'fast');
-                      });
-                  }
-              });
-          </script>
-<%- end %>
-<div class="main page_weekstar">
-  <div class='sub_title tr'>
-    <img src="<%= asset_path "design/title_event.png"%>"/>
-  </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "设计师活动", "/designer_events", :class => 'fb' %></em>
-    <em><%= link_to "精彩活动", "/events" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-  </div><!--sub_nav ends-->
-  <!--sub_nav ends-->
-  <div class="wrapper group">
-    <div class="shadow event the_activity">
-      <div class="section clear">
-        <div class="banner"><a href="#"><img src="<%= asset_path "news/event_big.jpg"%>"></a></div>
-        <div class="operate pr clear">
-          <span class="review fr">评论 (86)</span>
-          <span class="forward fr">转发 (124)</span>
-          <ul class="stars fr"><li></li><li></li><li></li><li></li><li class="not_selected"></li></ul>
-          <div class="popup_zf group none" style="bottom:-26px; left:733px;"><span style="background:none; padding:0; margin:0; line-height:14px;">一键转发：</span><a class="popup_zf_qq" href="#"></a><a  class="popup_zf_sina" href="#"></a><a class="popup_zf_rr" href="#"></a><a class="popup_zf_kaixin" href="#"></a></div>
-        </div>
-        <div class="legend">听设计师领袖的色彩故事 了解2012最新色彩趋势<span class="status">正在进行</span></div>
-        <div class="stars_wrap clear"><span class="fl">喜爱度</span>
-          <ul class="stars">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li class="not_selected"></li>
-          </ul>
-          <a href="#">(我要打分)</a></div>
-        <div class="properties">
-          <table>
-            <tr>
-              <th>活动时间：</th>
-              <td>2012年4月5日～2012年6月5日</td>
-            </tr>
-            <tr>
-              <th>活动时间：</th>
-              <td>2012年4月5日～2012年6月5日</td>
-            </tr>
-            <tr>
-              <th>活动详情：</th>
-              <td>听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师
-                领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势
-
-                听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势
-                听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师领袖的色彩故事 了解2012最新色彩趋势听设计师
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="galleryD_wrap clear">
-          <div class="galleryD">
-            <span class="moveleft"></span>
-            <span class="moveright"></span>
-
-            <div class="list">
-              <ul>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-                <li><a href="#"><img src="<%= asset_path "design/ua1.jpg"%>"/></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="apply">
-            <p class="button"><a href="#">我要报名</a></p>
-
-            <p class="count">(已有4566人参与)</p>
-          </div>
-        </div>
-        <div class="rate_wrap" style="height:65px;">
-          <p>喜爱这个活动？请为活动进行评价（喜爱度打分）</p>
-          <!--<ul class="stars_big"><li></li><li></li><li></li><li></li><li class="not_selected"></li></ul>-->
-          <div style="margin-top:10px;">
-            <input name="adv2" type="radio" title="1" class="star_rat"/>
-            <input name="adv2" type="radio" title="2" class="star_rat"/>
-            <input name="adv2" type="radio" title="3" class="star_rat" checked="checked"/>
-            <input name="adv2" type="radio" title="4" class="star_rat"/>
-            <input name="adv2" type="radio" title="5" class="star_rat"/>
-          </div>
-        </div>
-        <div class="review_wrap">
-          <div class="reviewform">
-            <div class="bar"><h4><span>评论</span>(86)</h4><span class="words_tip">0</span>/140</span></div>
-            <div class="form-content">
-              <form>
-                <p class="input"><textarea class="area_text"></textarea></p>
-
-                <p class="button">
-                  <input type="image" name="submit" src="<%= asset_path "design/submitA.gif"%>" alt="提交" value="提交"/></p>
-              </form>
-            </div>
-          </div>
-          <div class="pager ft12">
-            第1-123条 , 共123条
-            <a class="prev" href="#"><span></span>上一页</a>
-            <a href="#">1</a>
-            <a href="#" class="current">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">...</a>
-            <a href="#">20</a>
-            <a class="next" href="#">下一页<span></span></a>
-          </div>
-          <div class="review_list">
-            <ul class="review_listA">
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-              <li>
-                <div class="bar"><span class="user">NEO</span><span class="time">2012-2-12</span></div>
-                <div class="reply"><a href="#">回复</a></div>
-                <div class="content">很好！非常好的工具！赞一个...</div>
-              </li>
-            </ul>
-          </div>
-        </div>
+  <div class="clearfix">
+    <div class="index_main pull-left events_in">
+      <h4 class="text-center title"><%=@active.title %></h4>
+      <div class="text-center mt10">
+        <img class="imgs" src="<%=@active.file.url(:show) %>" alt="" />
       </div>
+     <div class="mt10">
+      <%=raw(@active.content)%>
+     </div>
     </div>
+    <div class="pull-right smaller">
+        <div class="chann_warp chann1_right map-right index_main">
+          <div class="media media_chann">
+            <a class="pull-left" href="/design_images/lists">
+              <i class="icon-chann icon-chann_imgbase"></i>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a class="media-heading_link_a" href="/images">装修图库</a></h4>
+              <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+            </div>
+          </div>
+          <div class="media media_chann">
+            <a class="pull-left" href="/color_designs">
+              <i class="icon-chann icon-chann_match"></i>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a class="media-heading_link_a" href="/color_designs">色彩配搭</a></h4>
+              <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+            </div>
+          </div>
+          <div class="media media_chann">
+            <a class="pull-left" href="/master_interviews">
+              <i class="icon-chann icon-chann_master"></i>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a class="media-heading_link_a" href="/master_interviews">大师殿堂</a></h4>
+              <p class="media_con nomargin">对话顶尖设计大师，提升家装专业眼界！</p>
+            </div>
+          </div>
+        </div>
+        <ul class="unstyled map-right index_main mt10 js-img_show">
+          <li class="clearfix refresh_r_tit">
+            <a href="<%=@master_design_data_url.url if @master_design_data_url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+            <strong class="pull-left">最新大师作品</strong>
+          </li>
+          <% @master_design_datas.each_with_index do |cd,index| %>
+            <li class="map-r<%=index+1%> dott1 <%="active" if index == 0 %>">
+              <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+              <strong class="js-title"><%=cd.title%></strong><br>
+              <a href="<%= cd.url %>" class="<%="hide" if index != 0 %> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="unstyled map-right index_main mt10 js-img_show">
+          <li class="clearfix refresh_r_tit">
+            <a href="<%=@rrdr_url.url if @rrdr_url%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+            <strong class="pull-left">装修效果图精华推荐</strong>
+          </li>
+          <% @rrdrs.each_with_index do |rr,index| %>
+            <li class="map-r<%=index+1%> dott1 <%="active" if index == 0 %>">
+              <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+              <strong class="js-title"><%=rr.title%></strong><br>
+              <a href="<%= rr.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=rr.file.url(:list_155x115)%>" alt="" /></a>
+            </li>
+          <% end %>
+        </ul>
+        <div><a href="#"><img src="images/map/map-right1.jpg"></a></div>
+        <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg"></a></div>
+        <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+      </div>
   </div>
-  <div class='sub_bot pr'>
-    <div class="pager ft12">
+
+  <div class="index_main refresh_news mt10 clearfix">
+      <div class="refresh_new pull-left">
+        <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+        <ul class="ul_dot">
+          <%- @master_interviews.each_with_index do |m,i| %>
+            <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+              <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+            </li>
+          <%- end %>
+        </ul>
+      </div>
+      <div class="refresh_new pull-left">
+        <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+        <ul class="ul_dot">
+          <%- @about_info.each_with_index do |m,i| %>
+            <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+              <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+            </li>
+          <%- end %>
+        </ul>
+      </div>
+      <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner1.jpg"></a></div>
     </div>
-    <!--pager ends-->
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+    <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
   </div>
-  <!--sub_bot ends-->
 </div>

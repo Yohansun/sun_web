@@ -1,9 +1,17 @@
 class DesignerEventsController < ApplicationController
   layout "home_manage"
+  before_filter :get_data
   def index
     @event_ks = EventKv.first
     @active_now = DesignerEvent.active_now
     @active_period = DesignerEvent.active_period.page(params[:page]).per(1)
+  end
+
+  def show
+    @active = DesignerEvent.find params[:id]
+  end
+
+  def get_data
     @master_interviews = IColumnData.show_data(6).limit(5)
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
     @about_info = IColumnData.show_data(7).limit(5)
