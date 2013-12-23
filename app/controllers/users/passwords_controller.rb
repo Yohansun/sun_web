@@ -9,7 +9,6 @@ class Users::PasswordsController < Devise::PasswordsController
   # POST /resource/password
   def create
     self.resource = resource_class.send_reset_password_instructions(params[resource_name])
-
     if successfully_sent?(resource)
       respond_with({}, :location => after_sending_reset_password_instructions_path_for(resource_name))
     else
@@ -33,7 +32,7 @@ class Users::PasswordsController < Devise::PasswordsController
       sign_in(resource_name, resource)
       respond_with resource, :location => after_sign_in_path_for(resource)
     else
-      respond_with resource
+      respond_with(resource,reset_password_token: params[:user][:reset_password_token])
     end
   end
 

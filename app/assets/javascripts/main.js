@@ -99,7 +99,7 @@ function inputBlank(area){
     }
 
 $(function(){
-    $('a.login').click(show_login);
+    // $('a.login').click(show_login);
     // $('a.server').click(function(){
     //     if(!$('.server_suc').is(':visible'))
     //     {
