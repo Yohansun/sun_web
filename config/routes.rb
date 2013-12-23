@@ -219,7 +219,7 @@ Icolor::Application.routes.draw do
   match "/designer_events/:id" => "designer_events#show"
   match "/designer_events/city/:city-:page" => "designer_events#city"
   match "/designer_events/city/:city" => "designer_events#city"
-  match "/other_events" => "other_events#index"
+  resources :other_events, only: [:index, :show]
   match "/other_events/kv" => "other_events#kv"
   match "/other_events/Proposal" => "other_events#Proposal"
   match "/other_events/review" => "other_events#review"

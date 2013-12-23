@@ -9,7 +9,7 @@ class DesignerEvent < ActiveRecord::Base
   scope :active_period, where("end_time < ?", Time.now).order("end_time desc")
 
   has_attached_file :file,
-    :styles => {:list => "280x145#", :show => "700x300#"},
+    :styles => {:list => "280x145#", :show => "700x300#",:big => "750x384#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

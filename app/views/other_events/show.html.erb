@@ -1,0 +1,96 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "style" %>
+<%- end %>
+<div class="container">
+  <h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
+  <ul class="breadcrumb">
+    <li><a href="/">首页</a> &gt; </li>
+    <li><a href="/designer_events">精彩活动</a> &gt; </li>
+    <li class="active">大众活动</li>
+  </ul>
+  <hr class="border2 border2_mt2">
+
+  <div class="clearfix refresh_lists">
+    <div class="index_main pull-left other_events_in">
+      <div class="text-center">
+        <%= image_tag @other_event.file.url(:big) %>
+      </div>
+      <div class="mt10">
+        <%= raw @other_event.content %>
+      </div>
+      <div class="refresh_news mt10 clearfix">
+        <div class="refresh_new pull-left">
+          <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+          <ul class="ul_dot">
+            <%- @master_interviews.each_with_index do |m,i| %>
+              <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+                <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+              </li>
+            <%- end %>
+          </ul>
+        </div>
+        <div class="refresh_new pull-left nomargin">
+          <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+          <ul class="ul_dot">
+            <%- @about_info.each_with_index do |m,i| %>
+              <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+                <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+              </li>
+            <%- end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="pull-right smaller">
+      <div class="chann_warp chann1_right map-right index_main">
+        <div class="media media_chann">
+          <a class="pull-left" href="/images">
+            <i class="icon-chann icon-chann_imgbase"></i>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><a class="media-heading_link_a" href="/images">装修图库</a></h4>
+            <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+          </div>
+        </div>
+        <div class="media media_chann">
+          <a class="pull-left" href="/color_designs">
+            <i class="icon-chann icon-chann_match"></i>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><a class="media-heading_link_a" href="/color_designs">色彩配搭</a></h4>
+            <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+          </div>
+        </div>
+        <div class="media media_chann">
+          <a class="pull-left" href="/channel/access">
+            <i class="icon-chann icon-chann_qbt"></i>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><a class="media-heading_link_a" href="/channel/access">装修丘比特</a></h4>
+            <p class="media_con nomargin">仅需三步，让您轻松找到心仪的家装设计公司！</p>
+          </div>
+        </div>
+      </div>
+      <%= render partial: 'design_images/image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
+      <%= render partial: 'design_images/image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
+      <div>
+        <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x170) %></a>
+      </div>
+      <div class="mt10">
+        <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+      </div>
+      <div class="mt10">
+        <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left">
+      <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_670x85) %></a>
+    </div>
+    <div class="footer_banner mt10 pull-right">
+      <a href="<%= @banners[5].url? ? @banners[5].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[5].try(:file).try(:url, :list_310x85) %></a>
+    </div>
+  </div>
+</div>
