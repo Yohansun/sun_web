@@ -170,12 +170,6 @@ $('#new_user').bind('ajax:error', function (xhr, status, error) {
     err_in();
 });
 
-$.ajax({
-    type: "POST",
-    url: "<%= visit_ips_path %>",
-    data: { ip : "<%= request.ip %>" }
-});
-
 });
 
 function yda_kv_link () {
