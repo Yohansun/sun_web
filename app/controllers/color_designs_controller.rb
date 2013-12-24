@@ -16,6 +16,10 @@ class ColorDesignsController < ApplicationController
       @designs = @designs.where(:design_usage => params[:design_usage]) if params[:design_usage] && !params[:design_usage].blank? && params[:design_usage] !='功能区'
 
     end
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
@@ -34,13 +38,19 @@ class ColorDesignsController < ApplicationController
     @design_prev = @design_prev.id if @design_prev
     @design_prev = @design.id if @design_prev.blank?
 
+    @color1, @color2, @color3 = search_color_code(@design.recommend_color1), search_color_code(@design.recommend_color2), search_color_code(@design.recommend_color3)
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def get_color_designs
     designs = Subject.content("color_designs")
     @tags = designs.tag_counts_on(:tags) || [Tag.new]
-    @designs = designs.page(params[:page]).per(9)
+    @designs = designs.page(params[:page]).per(12)
     @designs = @designs.tagged_with(params[:tags]) if params[:tags]
   end
 

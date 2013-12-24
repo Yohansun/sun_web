@@ -1,263 +1,261 @@
 <% content_for :head do -%>
-    <%= stylesheet_link_tag 'style', 'weekstar' %>
+  <%= stylesheet_link_tag "imageflow" %>
     <style type="text/css">
-        .popup_zf {
-            bottom: 18px;
-            background: #fff !important;
-        }
-
-        .design_listA li {
-            position: relative;
-        }
-
-        #gallery_caption {
-            display: none;
-        }
-        .design_listA li {overflow:visible;}
-
-        .desc ul p{max-width: 150px;*max-width: none;}
-        ul.this_week_tab {
-          list-style:none;
-          margin: 0;
-          padding: 0;
-          border: none;
-          font-weight: normal;
-          font-style: normal;
-          font-size: 100%;
-          line-height: 1;
-          font-family: inherit;
-          outline: none;
-        }
-        .weekstart_titleC{height: 60px;}
-        .weekstart_titleC .btn_group{float:right;}
-        h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, q, s, samp, small, strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td {
-        margin: 0;
-        padding: 0;
-        border: none;
-        font-weight: normal;
-        font-style: normal;
-        font-size: 100%;
-        line-height: 1;
-        font-family: inherit;
-        outline: none;}
+      #gallery_caption {
+        display: none;
+      }
     </style>
 <% end -%>
 <%- content_for :tail do %>
-    <%= render :partial => "recommend_color" %>
-    <script type="text/javascript">
-          $(function(){
-            if ($("#new_message")) {
-              $("#new_message").click(function (event) {
-                  <% if current_user -%>
-                  return true;
-                  <% else -%>
-                  show_login();
-                  return false;
-                  <% end -%>
-              });
-          }
-          });
-   </script>
+  <%= javascript_include_tag "new_imageflow" %>
+  <script type="text/javascript">
+  $(function(){
+    var gallery = new ImageFlow();
+    gallery.init({
+      ImageFlowID: 'gallery',
+      imagesHeight:       0.69,
+      startID:            1,
+      xStep:              100,
+      buttons:            true,          /* Toggle navigation buttons */
+      circular:           true,          /* 连续播放 */
+      imageFocusMax:      1,              /* Max number of images on each side of the focussed one */
+      imagesM:            1.0,            /* Multiplicator for all images in percent */
+      opacity:            true,          /* Toggle image opacity */
+      opacityArray:       [10,7],         /* Image opacity (range: 0 to 10) first value is for the focussed image */
+      percentLandscape:   300,           /* Scale landscape format */
+      onClick:            function() { }
+    });
+  });
+  </script>
 <%- end %>
-<div class="main page_weekstar page_weekstar_detail">
-  <div class='sub_title text-right pt25'>
-    <img src="<%= asset_path "design/title_design.png" %>" />
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map3 icon_colors"></i>
+  <strong>设计鉴赏</strong>
+  <small>实用案例为您的家装出谋画色</small>
+</h3>
+<div class="mt10">
+  <%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/channel/banner1.jpg"), size: "1000*85", alt: ""%>
+</div>
+<ul class="breadcrumb">
+  <li><%= link_to "首页", "/" %> &gt;</li>
+  <li><%= link_to "设计鉴赏", "/weekly_stars" %> &gt;</li>
+  <li class="active">设计之星</li>
+</ul>
+<hr class="border2 border2_mt2">
+<div class="weekly_gallery">
+  <div class="slider_topbar">
+    <form class="btn_group pull-right">
+      <%-
+        {weekly_stars_week_weekly_stars_path => "每周之星",
+         weekly_stars_month_color_weekly_stars_path  => "月度色彩之星",
+         weekly_stars_month_design_weekly_stars_path => "月度设计之星"}.each do |pat,type|
+      %>
+        <button class="<%= request.fullpath == pat ? 'btn active' : 'btn'%>">
+          <%= link_to type, pat %>
+        </button>
+      <%-end%>
+    </form>
+    <h3 class="title nomargin"><%= @design.design_name %></h3>
   </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "设计之星", "/weekly_stars", :class => 'fb' %></em>
-    <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-  </div><!--sub_nav ends-->
-  <div class="wrapper group">
-    <div class="weekstart_titleC pr">
-      <%- unless @design.id.nil? %>
-      <a href="/weekly_stars/<%= @design.id %>">
-        <h1>
-          <%= @title1 %><b><%= @title2 %></b>
-          <p>STAR OF THIS <%= @title.include?("月度") ? 'MONTH' : 'WEEK' %></p>
-        </h1>
-      </a>
-      <div class="btn_group fr text-right">
-        <%= link_to "", download_weekly_star_path(@design.id,:target => params[:action]), :class =>"icon_freedown" %>
-        <%= link_to "", user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class =>"icon_colleting" %>
-        <%= link_to "", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
-      </div>
-      <%- end %>
-    </div>
-    <div class="weekstart_detail">
-      <div class="group mt50">
-        <h3 class="this_week_tit"><%= @design.design_name %></h3>
-        <ul class="this_week_tab group">
-          <%-
-            {weekly_stars_week_weekly_stars_path		=> "每周之星",
-			weekly_stars_month_color_weekly_stars_path 	=> "月度色彩之星",
-			weekly_stars_month_design_weekly_stars_path	=> "月度设计之星"}.each do |pat,type|
-          %>
-            <li class="<%= 'this_week_btnhover' if request.fullpath == pat %>">
-				<%= link_to type,pat %>
-            </li>
-          <%-end%>
-        </ul>
-      </div>
-
-      <div class="week_tab_content">
-        <div class="gallery">
-          <span class="moveleft"></span>
-          <span class="moveright"></span>
-          <div class="galleryK" id="gallery">
-            <%- @design.weekly_star_uploads.each do |i| %>
+  <div class="index_main nopadding">
+    <div class="slides_box">
+      <div class="designs_in_slide pr">
+        <span class="moveleft slider-prev"></span>
+        <span class="moveright slider-next"></span>
+        <div class="imageflow" id="gallery">
+          <%- @design.weekly_star_uploads.each do |i| %>
             <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
-            <%- end %>
-          </div>
+          <%- end %>
         </div>
       </div>
-      <%= javascript_include_tag "galleryK" %>
-      <div class="color-picker">
-        <div class="overview">
-          <div class="votes">
-            所获票数：<span id="votes_count<%= @design.id %>"><%= @link_design.try(:votes_count) %></span>&nbsp;&nbsp;
-          </div>
-          <div class="operate pr">
-            <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author},#{@design.design_name}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_stars_url, @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
-            <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).try(:length) %>)</span></a>
-          </div>
+    </div>
+    <div class="weekly_info clearfix mt10">
+      <div class="pull-left main">
+        <div class="btn_group clearfix nomargin">
+          <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i>#{@link_design.try(:votes_count)}"), "", class: 'btn2 pull-left' %>
+          <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@link_design.try(:comments).try(:length)})"), @design.try(:design_link) ,class: 'btn2 pull-left' %>
+          <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@link_design.try(:shares_count) || 0})"), "" ,class: 'btn2 pull-left' %>
+          <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/weekly_stars/#{@design.id}/fullscreen" ,class: 'btn2 pull-right' %>
+          <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right"  %>
+          <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right" %>
         </div>
-        <div class="colors_box b_shadow" style="height:auto;margin:auto">
-          <div class="colorsbox " style="padding:10px 0; overflow:hidden;">
-            <div class="color-picker group">
-              <div class="colors_tit" style="float:left; margin:20px 5px 0 0;">
-                <img src="<%= asset_path "master/colors_icon_tit.png" %>" />
-              </div>
-              <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
-                <img src="<%= asset_path "design/colors2.gif" %>" />
-                <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
-                  <div class="list" style="height:35px;">
-                    <ul class="group" style="overflow:hidden;">
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="mall_link">
-                <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
-                <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
-              </div>
-            </div>
+        <div class="colors_box clearfix nomargin pt15" id="colors_con">
+          <div class="pull-left">
+            <img src="<%= asset_path 'imgbase_in/color.jpg' %>">
           </div>
+          <ul class="pull-left unstyled">
+            <li>
+              <div class="colorblock" style="background-color:#7b6d66"></div>
+              <h6 class="colortitle">墙面推荐色</h6>
+              <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+            </li>
+            <li>
+              <div class="colorblock" style="background-color:#acb57f"></div>
+              <h6 class="colortitle">墙面推荐色</h6>
+              <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+            </li>
+          </ul>
+          <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="goshop pull-right"></a>
+          <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
         </div>
-      </div>
-<div class="properties">
-  <table class="propertyA">
-    <%- unless @design.company_name.blank? %>
-        <tr><th>公司名称：</th>
-          <td><%= @design.company_name %>
-            <%- unless @design.company_url.blank? %>
-                <a href="<%=@design.company_url%>">[进入公司主页]</a></td>
+        <div class="work_infos linet1">
+          <p class="work_info">
+            <%- unless @design.company_name.blank? %>
+              <span>公司名称：<%= @design.company_name %></span>
             <%- end %>
-            </tr>
-    <%- end %>
-    <%- unless @design.company_address.blank? %>
-        <tr><th>公司地址：</th>
-          <td><%= @design.company_address %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.author.blank? %>
-        <tr><th>设计师：</th>
-          <td><%=  @design.author %>
-            <%- unless @design.author_url.blank? %>
-                <%= link_to user_asks_path(@link_design.user.id) do %>
-                  <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
+            <%- unless @design.author.blank? %>
+              <span>设计师  ：<%=  @design.author %>
+                <%- unless @design.author_url.blank? %>
+                  <%= link_to "", user_asks_path(@link_design.user.id), class: "btn_ask"%>
                 <%- end %>
+              </span>
             <%- end %>
-          </td>
-        </tr>
-    <%- end %>
-    <%- unless @design.project_name.blank? %>
-        <tr><th>项目名称：</th>
-          <td><%= @design.project_name %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.design_style.blank? %>
-        <tr><th>设计风格：</th>
-          <td><%= @design.design_style %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.design_intro.blank? %>
-        <tr><th>设计说明：</th>
-          <td><%= @design.design_intro %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.design_material.blank? %>
-        <tr><th>主要材料：</th>
-          <td><%= @design.design_material %></td>
-        </tr>
-    <%- end %>
-    <%- unless @design.recommend_reason.blank? %>
-        <tr><th>推荐理由：</th>
-          <td><%= @design.recommend_reason %></td>
-        </tr>
-    <%- end %>
-  </table>
+            <%- unless @design.design_style.blank? %>
+              <span>设计风格：<%= @design.design_style %></span>
+            <%- end %>
+          </p>
+          <%- unless @design.design_intro.blank? %>
+            <p class="work_info">设计说明：<%= @design.design_intro %></p>
+          <%- end %>
+        </div>
+      </div>
+      <div class="pull-right">
+        <%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner1.jpg"), size: "230*230" %>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="shadow mb25">
-  <div class="section">
-    <div class="tit_bg"><h2>往期之星</h2></div>
-    <div class="interview_box design_listA">
-          <% if !@elder_designs.blank? %>
-          <% @elder_designs.in_groups_of(4, false).each do |group| -%>
-              <ul>
-                <% group.each do |design| -%>
-                <% link_design = Design.find(design.design_link.split("/").last) unless design.design_link.blank? %>
-                    <li class="pr group">
-                      <%=
-                        case design.star_type_id
-                          when 2
-                            content_tag(:div, image_tag(asset_path "weekstar/color_star.png"), class: "color_star")
-                          when 3
-                            content_tag(:div, image_tag(asset_path "weekstar/design_star.png"), class: "design_star")
-                        end
-                      %>
-                      <a href="/weekly_stars/<%= design.id %>" style="display: block;overflow: hidden;"><img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/></a>
-                      <h3 title="<%= design.design_name %>"><%= truncate(design.design_name, :length => 16) %></h3>
-                      <p class="p1 group">
-                        <strong class="ft14 fb">所获票数：<%= link_design.try(:votes_count) || 0 %></strong>
-                      </p>
-                      <p class="p2 group">
-                        <span class="zf ft12">转发 (<%= link_design.try(:shares_count) || 0%>)</span>
-                        <a href="<%= design.try(:design_link) %>" target="_blank">
-                         <span class="pl ft12">评论 (<%= link_design.try(:comments).try(:length) || 0 %>)</span>
-                        </a>
-                      </p>
-
-                      <%
-                        role = "#{link_design.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if link_design.user.role_id != 3
-                        text = if link_design.user.area_id.present?
-                          province = link_design.user.city.try(:parent).try(:name)
-                          city = link_design.user.try(:city).try(:name)
-
-                          if province && city
-                            province == city ? "#{city}的" : "#{province + city}的"
-                          else
-                            "#{city}的" if city
-                          end
-                        end
-                      -%>
-                      <%= forward_links("#iColor分享#来自#{text}#{role}#{link_design.user.display_name}的作品【#{link_design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, design.main_preview_img.url, design.id.to_s, "WeeklyStar") %>
-                    </li>
-                <% end -%>
-              </ul>
+<div class="clearfix">
+  <div class="footer_banner pull-left mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner.jpg") %></div>
+  <div class="footer_banner pull-right mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner2.jpg") %></div>
+</div>
+<div class="clearfix color_designs weekly_stars mt10">
+  <div class="map-left pull-left">
+    <div class="index_main" style="height:1254px;">
+      <h5 class="sub_title">往期之星</h5>
+      <ul class="per_works unstyled clearfix mt20 pb25">
+        <% if @elder_designs.present? %>
+          <% @elder_designs.in_groups_of(3, false).each do |group| -%>
+            <% group.each do |design| -%>
+              <% link_design = Design.find(design.design_link.split("/").last) unless design.design_link.blank? %>
+              <li class="">
+                <a href="/weekly_stars/<%= design.id %>" class="help-block pr">
+                  <img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/>
+                  <%=
+                    case design.star_type_id
+                      when 2
+                        content_tag(:i, "", class: "icon-star_of icon-star_color")
+                      when 3
+                        content_tag(:i, "", class: "icon-star_of icon-star_design")
+                    end
+                  %>
+                </a>
+                <div class="thumb_imgs clearfix">
+                  <a href="weekly_stars_in.html" class="pull-left thumb_item">
+                    <img width="65" height="65" src="images/per_home_huaxun/per_work.jpg" alt="" />
+                  </a>
+                  <a href="weekly_stars_in.html" class="pull-left thumb_item">
+                    <img width="65" height="65" src="images/per_home_huaxun/per_work.jpg" alt="" />
+                  </a>
+                  <a href="weekly_stars_in.html" class="pull-left thumb_item">
+                    <img width="65" height="65" src="images/per_home_huaxun/per_work.jpg" alt="" />
+                  </a>
+                </div>
+                <h5 title="<%= design.design_name %>" class="dott1">
+                  <%= truncate(design.design_name, :length => 16) %>
+                </h5>
+                <p class="para_oneline">
+                  <small class="pull-right muted">201306-1</small><%= design.author %>
+                </p>
+                <p class="dott1 nomargin">
+                  <span><i class="icon-i16 icon-xin_gray2"></i><%= link_design.try(:votes_count) || 0 %></span>
+                  <a href="<%= design.try(:design_link) %>" target="_blank">
+                    <span><i class="icon-i16 icon-comment1"></i><%= link_design.try(:comments).try(:length) || 0 %></span>
+                  </a>
+                  <span class="noborder"><i class="icon-i16 icon-share1"></i><%= link_design.try(:shares_count) || 0%></span>
+                </p>
+              </li>
+            <% end -%>
           <% end -%>
+        <% end -%>
+      </ul>
+      <form class="pager pager-form">
+        <%= paginate @elder_designs, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
+      </form>
     </div>
+  </div>
+  <div class="pull-right smaller">
+    <%- colum_datas1 = IColumnData.show_data(1).limit(5) %>
+    <ul class="unstyled map-right index_main js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 1).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">最新大师作品</strong>
+      </li>
+      <% colum_datas1.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <%- colum_datas2 = IColumnData.show_data(4).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 4).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">装修效果图精华推荐</strong>
+      </li>
+      <% colum_datas2.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <%- colum_datas3 = IColumnData.show_data(5).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 5).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">本周最热装修设计</strong>
+      </li>
+      <% colum_datas3.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <div class="mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner2.jpg") %></div>
   </div>
 </div>
-    </div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+    <ul class="ul_dot">
+      <%- @master_interviews.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
   </div>
-  <!--wrapper ends-->
-  <div class='sub_bot pr'>
-    <div class="pager ft12">
-      <%= paginate @elder_designs %>
-      <%- end -%>
-    </div>
-    <!--pager ends-->
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+    <ul class="ul_dot">
+      <%- @about_info.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
   </div>
-  <!--sub_bot ends-->
-</div><!--main ends-->
+  <div class="pull-right"><a href="#"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner3.jpg") %></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner.jpg") %></div>
+  <div class="footer_banner mt10 pull-right"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner2.jpg") %></div>
+</div>

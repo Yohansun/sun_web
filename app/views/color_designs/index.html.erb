@@ -1,107 +1,206 @@
-<%- content_for :head do %>
-    <%= stylesheet_link_tag "style" %>
-    <%= stylesheet_link_tag "dd" %>
-    <style type="text/css">
-      #filter_form .ddChild{top:257px!important;}
-    </style>
-<%- end %>
-<%- content_for :tail do %>
-    <%= javascript_include_tag "uncompressed.jquery.dd" %>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            try {
-                //$("body select").msDropDown();
-                oHandler = $("#order,#design_style,#design_color,#design_usage").msDropDown({useSprite:'sprite'}).data("dd");
-                $("#ver").html($.msDropDown.version);
-            } catch(e) {
-                alert("Error: "+e.message);
-            }
-
-            /*try {
-             //$("body select").msDropDown();
-             oHandler = $("#color_select_style").msDropDown({useSprite:'sprite'}).data("dd");
-             $("#ver").html($.msDropDown.version);
-             } catch(e) {
-             alert("Error: "+e.message);
-             }
-
-             try {
-             //$("body select").msDropDown();
-             oHandler = $("#color_select_fct").msDropDown({useSprite:'sprite'}).data("dd");
-             $("#ver").html($.msDropDown.version);
-             } catch(e) {
-             alert("Error: "+e.message);
-             }
-             */
-        })
-
-    </script>
-<% end %>
-<div class="main">
-  <div class='sub_title text-right pt25'>
-    <img src='<%= asset_path "design/title_design.png"%>'/>
-  </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "色彩配搭", "/color_designs", :class => "fb" %></em>
-    <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-  </div><!--sub_nav ends-->
-  <div class='wrapper pb60 group'>
-    <form class="design_tit group" method="get" id="filter_form">
-      <ul class="design_filter group unstyled">
-        <!-- <form method="get" id="filter_form"> -->
-        <li>
-            <%= select_tag "order", options_for_select(color_design_order_option, params[:order]), class: "arrow_filter li_current",
-                    :onchange => "$('#filter_form').submit()" ,:style =>"width:108px;" %>
-        <li>
-          <%= select_tag "design_style", options_for_select(color_design_style_option, params[:design_style]), class: "arrow_filter li_current",
-                         :onchange => "$('#filter_form').submit()" ,:style =>"width:108px;" %>
-        </li>
-          <li>
-          <%= select_tag "design_usage", options_for_select(color_design_usage_option, params[:design_usage]), class: "arrow_filter",
-                         :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
-        </li>
-        <li>
-          <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), class: "arrow_filter",
-                         :onchange => "$('#filter_form').submit()",:style =>"width:108px;" %>
-        </li>
-        <!-- </form> -->
-
-      </ul>
-    </form>
-    <div class="design_result color_design">
-    <%- unless @designs.nil? %>
-      <% @designs.in_groups_of(3, false).each do |group| -%>
-          <ul class="d_works group unstyled" style="margin:0">
-            <% group.each do |design| -%>
-                <li class="pr">
-                  <a href="/color_designs/<%= design.id %>"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt=""/></a>
-                  <h3><%= design.design_name %></h3>
-
-                  <p class="p2 group">
-                    <%= link_to  raw("<span class='gzh ft12' id='votes_count#{design.id}'>#{design.votes_count}</span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
-
-                    <span class="zf ft12">转发 (<%=design.shares_count %>)</span>
-                    <a href="/color_designs/<%= design.id %>#review_focus"><span class="pl ft12">评论 (<%=design.comments.length %>)</span></a>
-                  </p>
-                  <%= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{design.design_name}】，推荐色：立邦#{design.try(:recommend_color1)} #{ColorCode.find_by_code(design.recommend_color1).try(:name)}，让色彩融入生活，尽在iColor@刷新生活iColor，", "http://#{request.host_with_port}/color_designs/#{design.id}", design.main_preview_img.url, design.id.to_s, "ColorDesign") %>
-                </li>
-            <% end -%>
-          </ul>
-      <% end -%>
-    <%- end %>
+ <h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map3 icon_colors"></i>
+  <strong>设计鉴赏</strong>
+  <small>实用案例为您的家装出谋画色</small>
+</h3>
+<div class="clearfix">
+  <div class="footer_banner pull-left mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner.jpg") %></div>
+  <div class="footer_banner pull-right mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner2.jpg") %></div>
+</div>
+<ul class="breadcrumb">
+  <li><%= link_to "首页", "/" %> &gt;</li>
+  <li><%= link_to "设计鉴赏", "/weekly_stars" %> &gt;</li>
+  <li class="active">色彩配搭</li>
+</ul>
+<hr class="border2 border2_mt2">
+<div class="clearfix color_designs">
+  <div class="map-left pull-left">
+    <div class="index_main nopadding">
+      <form action="#" method="" class="map-list-search nomargin">
+        <p class="map-srch-bin">
+          您的选择：
+          <span class="map-srch-s">小户型<a href="javascript:;" class="map-srch-del">delete</a></span>
+          <span class="map-srch-s">飘窗设计<a href="javascript:;" class="map-srch-del">delete</a></span>
+          <span class="map-srch-s">儿童房<a href="javascript:;" class="map-srch-del">delete</a></span>
+          <span class="map-srch-s">70-90平米<a href="javascript:;" class="map-srch-del">delete</a></span>
+          <span class="map-srch-s map-srch-reset">重新选择</span>
+        </p>
+        <div class="map-list-form map-mini">
+          <fieldset class="clearfix">
+            <label class="pull-left">风格：</label>
+            <span>
+              <a href="#" class="highlight">全部</a>
+              <a href="#">小户型</a>
+              <a href="#">公寓</a>
+              <a href="#">复式</a>
+              <a href="#">别墅</a>
+              <a href="#">一室</a>
+              <a href="#">两居</a>
+              <a href="#">三居</a>
+              <a href="#">四居</a>
+              <a href="#">四居以上</a>
+              <a href="#">挑高</a>
+              <a href="#">跃层</a>
+              <a href="#">错层</a>
+            </span>
+          </fieldset>
+          <fieldset class="clearfix">
+            <label class="pull-left">功能区：</label>
+            <span>
+              <a href="#">全部</a>
+              <a href="#">背景墙装修</a>
+              <a href="#">玄关设计</a>
+              <a href="#">阳光房设计</a>
+              <a href="#">衣帽间设计</a>
+              <a href="#">飘窗设计</a>
+              <a href="#">隔断设计</a>
+              <a href="#">吧台设计</a>
+              <a href="#">阁楼设计</a>
+            </span>
+          </fieldset>
+          <fieldset class="clearfix noborder">
+            <label class="pull-left">色系：</label>
+            <span>
+              <a href="#">全部</a>
+              <a href="#">客厅</a>
+              <a href="#">卧室</a>
+              <a href="#">厨房</a>
+              <a href="#">餐厅</a>
+              <a href="#">书房</a>
+              <a href="#">阳台</a>
+              <a href="#">卫生间</a>
+              <a href="#">儿童房</a>
+              <a href="#">老人房</a>
+              <a href="#">过道</a>
+              <a href="#">工作间</a>
+            </span>
+          </fieldset>
+        </div>
+      </form>
     </div>
-    <!--design_result ends-->
-  </div>
-  <!--wrapper ends-->
-  <div class='sub_bot pr'>
-    <div class="pager ft12">
+    <div class="mt20">
+      <div class="btn-group">
+        <button class="btn" >
+          <%= link_to "最新",color_designs_path(order: '最新'), class: "#{'active' if params[:order] == '最新' || params[:order].nil? }" %>
+        </button>
+        <button class="btn">
+          <%= link_to "最热",color_designs_path(order: '最热'), class: "#{'active' if params[:order] == '最热' }" %>
+        </button>
+      </div>
+    </div>
+    <div class="index_main mt10">
       <%- unless @designs.nil? %>
-        <%= paginate @designs %>
-      <%- end %>
+      <ul class="per_works unstyled clearfix mt10">
+        <% @designs.in_groups_of(3, false).each do |group| -%>
+          <% group.each do |design| -%>
+          <li class="">
+            <a href="/color_designs/<%= design.id %>" class="help-block"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt="" /></a>
+            <h5 class="dott1"><%= design.design_name %></h5>
+            <p class="dott1 nomargin">
+              <%= link_to raw("<span><i class='icon-i16 icon-xin_gray2' id='votes_count#{design.id}'></i>#{design.votes_count}</span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
+              <a href="/color_designs/<%= design.id %>#review_focus"><span><i class="icon-i16 icon-comment1"></i><%=design.comments.length %></span></a>
+              <span class="noborder"><i class="icon-i16 icon-share1"></i><%=design.shares_count %></span>
+            </p>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% end -%>
+      <form class="pager pager-form">
+        <%- unless @designs.nil? %>
+          <%= paginate @designs, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
+        <%- end %>
+      </form>
     </div>
-    <!--pager ends-->
   </div>
-  <!--sub_bot ends-->
-</div><!--main ends-->
+  <div class="pull-right smaller">
+    <div class="map-right index_main">
+      <div class="media media_chann">
+        <a class="pull-left" href="/design_images/lists" target="_blank">
+          <i class="icon-chann icon-chann_imgbase"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+          <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+        </div>
+      </div>
+      <div class="media media_chann">
+        <a class="pull-left" href="#">
+          <i class="icon-chann icon-chann_qbt"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="#">装修丘比特</a></h4>
+          <p class="media_con nomargin">仅需三步，让您轻松找到心仪的家装设计公司！</p>
+        </div>
+      </div>
+      <div class="media media_chann">
+        <a class="pull-left" href="/master_interviews" target="_blank">
+          <i class="icon-chann icon-chann_master"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="/master_interviews" target="_blank">大师殿堂</a></h4>
+          <p class="media_con nomargin">对话顶尖设计大师，提升家装专业眼界！</p>
+        </div>
+      </div>
+    </div>
+    <%- colum_datas1 = IColumnData.show_data(1).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 1).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">最新大师作品</strong>
+      </li>
+      <% colum_datas1.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%> 
+    </ul>
+    <%- colum_datas2 = IColumnData.show_data(4).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 4).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">装修效果图精华推荐</strong>
+      </li>
+      <% colum_datas2.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%> 
+    </ul> 
+    <div><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner1.jpg") %></div>
+    <div class="mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner2.jpg") %></div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+    <ul class="ul_dot">
+      <%- @master_interviews.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+    <ul class="ul_dot">
+      <%- @about_info.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="pull-right"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner3.jpg") %></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner pull-left"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner.jpg") %></div>
+  <div class="footer_banner pull-right"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner2.jpg") %></div>
+</div>

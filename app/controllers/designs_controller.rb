@@ -62,8 +62,13 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
-      @designs = @designs.page(params[:page]).per(9)
+      @designs = @designs.page(params[:page]).per(15)
     end
+
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
 
     sign_in(@user) if current_admin && @user
   end
@@ -84,6 +89,11 @@ class DesignsController < ApplicationController
     if params[:image_id]
       @image = DesignImage.find(params[:image_id])
     end
+
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
   end
 
   def new

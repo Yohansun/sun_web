@@ -7,6 +7,8 @@ class WeeklyStarsController < ApplicationController
 		:weekly_stars_month_design  => "月度设计之星"
 	}.freeze
 
+  before_filter :get_data
+
   helper_method :star_blank?
  
 	def download
@@ -49,8 +51,7 @@ class WeeklyStarsController < ApplicationController
     #   star = WeeklyStar.where(star_type_id: t+1).order("published_at desc").first
     #   star_ids << star.id if star.present?
     # end  
-    @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(8)
-
+    @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(9)
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
   
@@ -94,5 +95,12 @@ class WeeklyStarsController < ApplicationController
   def star_blank?(star_type)
     star_type_id = WeeklyStar.get_star_type_id star_type
     WeeklyStar.where(star_type_id: star_type_id).blank?
+  end
+
+  def get_data
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
   end
 end

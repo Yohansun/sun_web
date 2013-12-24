@@ -1,240 +1,456 @@
 <% content_for :head do -%>
-<%= stylesheet_link_tag 'style', 'weekstar' %>
-<style type="text/css">
-#gallery_caption {
-  display: none;
-}
-.popup_zf {
-  bottom: 18px;
-  background:white !important;
-}
-.desc ul p{max-width: 150px;*max-width: none;}
-.reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
-</style>
 <% end -%>
 <%- content_for :tail do %>
-<%= javascript_include_tag "reply" %>
-<%= render :partial => "recommend_color" %>
+  <%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
+  <script type="text/javascript">
+    $(function(){
+      $('.js-slider-next').click(function(){
+        $('.slides_box').find('.map-next').click()
+      });
+      $('.js-slider-prev').click(function(){
+        $('.slides_box').find('.map-prev').click()
+      });
+    })
+  </script>
 <%- end %>
-<div class="main page_weekstar page_weekstar_detail">
-  <div class='sub_title tr pt25'>
-    <img src="<%= asset_path "design/title_design.png" %>"/>
-  </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "设计之星", "/weekly_stars", :class => 'fb' %></em>
-    <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-  </div><!--sub_nav ends-->
-  <div class="wrapper group">
-    <%- if @design == WeeklyStar.last %>
-    <div class="weekstart_titleA">
-      <div class="subtitle clear">
-        <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
-        <span class="fl">2012.5.12 往期作品</span>
-      </div>
-      <div class="btn_group fr" style="margin-top:10px;"><%= link_to "全屏观看", "/weekly_stars/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %></div>
-      <h1><%= @design.design_name %></h1>
-    </div>
-    <%- else %>
-    <div class="weekstart_titleA">
-      <div class="subtitle clear">
-        <%- unless @design == WeeklyStar.order("published_at desc").last %>
-        <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="star_prev fl"></a>
-        <%- end %>
-        <span class="fl"><%= @design.try(:published_at).try(:to_date) %>往期作品</span>
-        <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="star_next fl"></a>
-      </div>
-      <div class="btn_group fr" style="margin-top:10px;"><%= link_to "", "/weekly_stars/#{@design.id}/fullscreen?action_from=action_show", :class =>"icon_fullscreen" %></div>
-      <h1><%= @design.design_name %></h1>
-    </div>
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map3 icon_colors"></i>
+  <strong>设计鉴赏</strong>
+  <small>实用案例为您的家装出谋画色</small>
+</h3>
+<div class="mt10">
+  <%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/channel/banner1.jpg")%>
+</div>
+<ul class="breadcrumb">
+  <li><%= link_to "首页", "/" %> &gt;</li>
+  <li><%= link_to "设计鉴赏", "/weekly_stars" %> &gt;</li>
+  <li><%= link_to "设计之星", "/weekly_stars" %> &gt;</li>
+  <li class="active"><%= @design.design_name %></li>
+</ul>
+<hr class="border2 border2_mt2">
+
+<div class="index_main noborder designs_in_slide nopadding">
+  <div class="slider_topbar">
+    <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="a_hover_red slider_btns pull-right">下一期作品<i class="icon-slider_next icon-i30"></i></a>
+    <%- unless @design == WeeklyStar.order("published_at desc").last %>
+      <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="a_hover_red slider_btns pull-left">
+        <i class="icon-slider_prev icon-i30"></i>上一期作品
+      </a>
     <%- end %>
-
-    <div class="weekstart_detail">
-      <div class="gallery">
-        <span class="moveleft"></span>
-        <span class="moveright"></span>
-
-        <div class="galleryK" id="gallery">
-          <%- unless @design.nil? %>
-          <%- @design.weekly_star_uploads.each do |i| %>
-          <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
-          <%- end %>
-          <%- end %>
-        </div>
+    <h3 class="title text-center nomargin"><%= @design.design_name %></h3>
+  </div>
+  <div class="mt20">
+    <div class="slides_box clearfix">
+      <div class="map-big pull-left js-map-big">
+        <img src="http://htmlhub.doorder.com/icolor2/images/imgbase_in/img-big.jpg" width="" />
+        <a href="javascript:;" class="slider-prev js-slider-prev">prev</a>
+        <a href="javascript:;" class="slider-next js-slider-next">next</a>
       </div>
-      <%= javascript_include_tag "galleryK" %>
-      <div class="color-picker">
-        <div class="overview">
-          <div class="votes">所获票数：<span id="votes_count<%= @design.id %>"><%= @link_design.try(:votes_count) %></span>
-            <%#=# link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "WeeklyStar"), :remote => true, :method => 'post' %>
-          </div>
-
-          <div class="operate pr">
-            <a href="<%= @design.try(:design_link) %>" target="_blank"><span class="review">评论 (<%= @link_design.try(:comments).length %>)</span></a>
-            <%= forward_links("#iColor分享#每周之星精彩设计作品----【#{@design.author}】，更多精彩装修作品，尽在iColor，@刷新生活iColor，", weekly_star_url(@design), @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
-          </div>
+      <div class="map-kv-slider pull-right">
+        <a href="javascript:;" class="map-prev-bullet js-map-prev-bullet">prev</a>
+        <hr class="nomargin">
+        <a href="javascript:;" class="map-prev js-map-prev">上一张图</a>
+        <div class="map-kv-container">
+          <ul>
+            <li class="map-active">
+              <a href="javascript:;"><span></span><img src="http://htmlhub.doorder.com/icolor2/images/map/in/img-1.jpg" alt="" /></a>
+            </li>
+            <li>
+              <a href="javascript:;"><span></span><img src="http://htmlhub.doorder.com/icolor2/images/map/in/img-2.jpg" alt="" /></a>
+            </li>
+            <li>
+              <a href="javascript:;"><span></span><img src="http://htmlhub.doorder.com/icolor2/images/map/in/img-3.jpg" alt="" /></a>
+            </li>
+            <li>
+              <a href="javascript:;"><span></span><img src="http://htmlhub.doorder.com/icolor2/images/map/in/img-4.jpg" alt="" /></a>
+            </li>
+          </ul>
         </div>
-        <div class="colorsbox group" style="padding:10px 0; overflow:hidden;">
-          <div class="colors_tit" style="float:left; margin:20px 5px 0 0;">
-            <img src="<%= asset_path "master/colors_icon_tit.png" %>" />
+        <a href="javascript:;" class="map-next js-map-next">下一张图</a>
+        <hr class="nomargin">
+        <a href="javascript:;" class="map-next-bullet js-map-next-bullet mt10">next</a>
+      </div>
+    </div>
+  </div>
+  <div class="btn_group clearfix mt20 noborder">
+    <a href="#" class="btn2 pull-left"><i class="icon-i16 icon-xin_gray"></i>8799</a>
+    <a href="#" class="btn2 pull-left"><i class="icon-i16 icon-comment1"></i>评论(14)</a>
+    <a href="#" class="btn2 pull-left"><i class="icon-i16 icon-share1"></i>转发(488)</a>
+    <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-fullscreen"></i>全屏</a>
+    <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-collect"></i>收藏</a>
+    <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
+  </div>
+</div>
+
+<div class="clearfix mt10">
+  <div class="index_main designs_in_left pull-left">
+    <div class="colors_box clearfix nomargin pt15">
+      <div class="pull-left"><img src="images/imgbase_in/color.jpg"></div>
+      <ul class="pull-left unstyled">
+        <li>
+          <div class="colorblock" style="background-color:#7b6d66"></div>
+          <h6 class="colortitle">墙面推荐色</h6>
+          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+        </li>
+        <li>
+          <div class="colorblock" style="background-color:#acb57f"></div>
+          <h6 class="colortitle">墙面推荐色</h6>
+          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+        </li>
+        <li>
+          <div class="colorblock" style="background-color:#ebe8c4"></div>
+          <h6 class="colortitle">墙面推荐色</h6>
+          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+        </li>
+      </ul>
+      <a href="#" class="gobuy pull-left"></a>
+      <a href="#" class="goshop pull-left"></a>
+    </div>
+    <div class="work_infos linet1">
+      <p class="work_info">
+        <span>公司名称：今朝装饰</span>
+        <span>设计师  ：李启胜 <a href="#" class="btn_ask"></a></span>
+        <span>设计风格：欧美流行系</span>
+      </p>
+      <p class="work_info" style="height:72px;overflow:hidden;">设计说明：用艳丽的色彩打造小资生活</p>
+    </div>
+    <div class="work_tags">
+      <a href="#" class="pull-right">更多 ></a>
+      <span class="">标签：</span>
+      <a href="#">公寓</a>
+      <a href="#">复式</a>
+      <a href="#">别墅</a>
+      <a href="#">三居</a>
+      <a href="#">四局</a>
+      <a href="#">豪华型</a>
+      <a href="#">30-100万</a>
+      <a href="#">150平米以上</a>
+      <a href="#">现代简约</a>
+    </div>
+    <div style="height:30px;margin:10px 0 31px 7px;">
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+      </div>
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+      <!-- Baidu Button END -->
+    </div>
+
+    <div class="work_comments nomargin">
+      <form class="comment_form exp-holder">
+        <h5>评论<span class="text-error">（2）</span></h5>
+        <textarea id="" class="J_resulte js-text_rest" placeholder="" data-max="1000"></textarea>
+        <ul class="moodbtn_group unstyled clearfix">
+          <li class="pull-right btn_send">
+            <span class="muted">
+              还可以输入
+              <span class="text-important js-text_rest_show">1000</span>
+              个字符
+            </span>
+            <button class="">提交评论</button>
+          </li>
+          <li class="pull-left exp-block-trigger" id="">
+            <i class="icon-mood icon-face"></i>
+            添加表情
+          </li>
+        </ul>
+      </form><!-- bottom_mood end -->
+      <ul class="mood_list unstyled nomargin js-list_parent">
+        <li>
+          <div class="clearfix">
+            <div class="pull-left comment_photo"><img src="images/imgbase_in/user50x50_2.jpg"></div>
+            <div class="comment_text">
+              <p>
+                <strong class="pull-right comment_floor">2F</strong>
+                <strong>麦唛小</strong>
+                <span class="comment_date">2012-11-13</span>
+              </p>
+              <p class="J_resulte">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+            </div>
           </div>
-          <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
-            <img src="<%= asset_path "design/colors2.gif" %>" />
-            <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
-              <div class="list" style="height:35px;">
-                <ul class="group" style="overflow:hidden;">
-                </ul>
+          <div class="clearfix"><a class="pull-right js-review_btn" href="javascript:;">回复</a></div>
+          <form class="comment_form exp-holder nomargin hide js-review">
+            <textarea id="" class=""></textarea>
+            <ul class="moodbtn_group unstyled clearfix">
+              <li class="pull-right noborder nopadding">
+                <span class="muted">
+                  还可以输入
+                  <span class="text-important">1000</span>
+                  个字符
+                </span>
+                <button class="channel_btn noborder"><small>确认回复</small></button>
+                <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
+              </li>
+              <li class="pull-left exp-block-trigger noborder nopadding" id="">
+                <i class="icon-mood icon-face"></i>
+                添加表情
+              </li>
+            </ul>
+          </form><!-- bottom_mood end -->
+        </li>
+        <li>
+          <div class="clearfix">
+            <div class="pull-left comment_photo"><img src="images/imgbase_in/user50x50_1.jpg"></div>
+            <div class="comment_text">
+              <p>
+                <strong class="pull-right comment_floor">1F</strong>
+                <strong>Jane</strong>
+                <span class="comment_date">2012-11-13</span>
+              </p>
+              <p>嫁给我你立马就有了~哈哈哈哈</p>
+              <div class="re_comments">
+                <i class="icon-i16 icon-toparrow"></i>
+                <p>
+                  <strong>麦唛小</strong>
+                  <span class="muted">说</span>
+                </p>
+                <p class="muted J_resulte">[哈哈]啥时候才能有这样的家啊~~~~~</p>
               </div>
             </div>
           </div>
-          <div class="mall_link">
-            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
-            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="properties">
-        <table class="propertyA">
-          <%- unless @design.company_name.blank? %>
-          <tr><th>公司名称：</th>
-            <td><%= @design.company_name %>
-              <%- unless @design.company_url.blank? %>
-              <a href="<%=@design.company_url%>">[进入公司主页]</a></td>
-              <%- end %>
-            </tr>
-            <%- end %>
-            <%- unless @design.company_address.blank? %>
-            <tr><th>公司地址：</th>
-              <td><%= @design.company_address %></td>
-            </tr>
-            <%- end %>
-            <%- unless @design.author.blank? %>
-            <tr><th>设计师：</th>
-              <td>
-                <%=  @design.author %>
-                <%= link_to user_asks_path(@link_design.user.id) do %>
-                <img style="margin-top:2px;" src="<%= asset_path '2013/free_ask.jpg' %>">
-                <%- end %>
-              </td>
-            </tr>
-            <%- end %>
-            <%- unless @design.project_name.blank? %>
-            <tr><th>项目名称：</th>
-              <td><%= @design.project_name %></td>
-            </tr>
-            <%- end %>
-            <%- unless @design.design_style.blank? %>
-            <tr><th>设计风格：</th>
-              <td><%= @design.design_style %></td>
-            </tr>
-            <%- end %>
-            <%- unless @design.design_intro.blank? %>
-            <tr><th>设计说明：</th>
-              <td><%= @design.design_intro %></td>
-            </tr>
-            <%- end %>
-            <%- unless @design.design_material.blank? %>
-            <tr><th>主要材料：</th>
-              <td><%= @design.design_material %></td>
-            </tr>
-            <%- end %>
-            <%- unless @design.recommend_reason.blank? %>
-            <tr><th>推荐理由：</th>
-              <td><%= @design.recommend_reason %></td>
-            </tr>
-            <%- end %>
-          </table>
-        </div>
-        <div class="review_wrap">
-          <div class="reviewform">
-            <div class="bar">
-              <h4><span>评论</span>(<%= @link_design.comments.length %>)</h4><span class="r"><span class="words_tip">0</span>/140</span>
-            </div>
-            <div class="form-content">
-              <%= form_for(Comment.new) do |f| %>
-              <%- design_link_id = @design.design_link.split("/").last unless @design.design_link.blank? %>
-              <%= f.hidden_field :commentable_id, value: design_link_id %>
-              <%= f.hidden_field :commentable_type, value: 'Design' %>
-              <p class="input">
-                <%= f.text_area :content, :class => "area_text" %>
-              </p>
-              <p class="button">
-                <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
-              </p>
-              <% end %>
-            </div>
-          </div>
-          <div class="pager ft12">
-            <%- unless @comments.nil? %>
-            <%= paginate @comments %>
-            <%- end %>
-          </div>
-          <div class="review_list">
-            <ul class="review_listA">
-              <% @comments.each do |c| %>
-              <li>
-                <div class="bar">
-                  <% if c.user %>
-                  <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
-                  <% else %>
-                  <a href="#" class="user">匿名</a>
-                  <% end %>
-                  <span class="time"><%= c.created_at.to_date %></span>
-                </div>
-                <div class="reply">
-                  <a href="javascript:void(0)">回复</a>
-                </div>
-                <div class="content">
-                  <%= c.content %>
-                </div>
-                <div class="clearfix"></div>
-
-                <div class="reply_area none cl pr">
-                  <em class="pa">◆</em>
-                  <span class="pa">◆</span>
-
-                  <div class="reply_input clear">
-                    <%= form_for(ReplyMsg.new) do |f| %>
-                    <%= f.hidden_field :show_id, value: @design.id %>
-                    <%= f.hidden_field :comment_id, value: c.id %>
-                    <%= f.hidden_field :reply_type, value: "weekly_stars" %>
-                    <%= f.text_area :content, :rows => 2 %>
-                    <input type="image" src="<%= asset_path "btn.jpg" %>">
-                    <%- end %>
-                  </div>
-                  <!--reply_input ends-->
-                </div>
-                <!--reply_area ends-->
-                <div class="reply_list none cl pr">
-                  <em class="pa">◆</em>
-                  <span class="pa">◆</span>
-
-                  <div class="reply_con ft14 clear">
-                    <div class="clear">
-                      <%- c.reply_msgs.order("created_at DESC").each do |r| %>
-                      <div class="clear  <%= "reply_line" if r != c.reply_msgs.last %> ">
-                        <p class="reply_tabs fl">
-                          <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
-                        </p>
-
-                        <p class="fr">
-                          <%= r.created_at.to_date %>
-                        </p>
-                      </div>
-                      <%- end %>
-                    </div>
-                  </div>
-                  <!--reply_con ends-->
-                </div>
-                <!--reply_list ends-->
+          <div class="clearfix"><a class="pull-right js-review_btn" href="javascript:;">回复</a></div>
+          <form class="comment_form exp-holder nomargin hide js-review">
+            <textarea id="" class=""></textarea>
+            <ul class="moodbtn_group unstyled clearfix">
+              <li class="pull-right noborder nopadding">
+                <span class="muted">
+                  还可以输入
+                  <span class="text-important">1000</span>
+                  个字符
+                </span>
+                <button class="channel_btn noborder"><small>确认回复</small></button>
+                <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
               </li>
-              <% end %>
+              <li class="pull-left exp-block-trigger noborder nopadding" id="">
+                <i class="icon-mood icon-face"></i>
+                添加表情
+              </li>
             </ul>
-          </div>
-        </div>
+          </form><!-- bottom_mood end -->
+        </li>
+      </ul>
+      <div class="pager">
+        <!-- <a href="#" class=""></a> -->
+        <a class="current" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">...</a>
+        <a href="#">20</a>
+        <a href="#" class="">下一页</a>
+        <a href="#" class="">最后一页</a>
       </div>
     </div>
-    <div class='sub_bot pr'></div>
-    <!--sub_bot ends-->
-</div><!--main ends-->
+  </div>
+  <div class="pull-right smaller">
+    <ul class="unstyled map-right index_main js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">最新大师作品</strong>
+      </li>
+      <li class="map-r1 active dott1">
+        <i class="icon-i16 icon-1">1</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r2">
+        <i class="icon-i16 icon-2">2</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r3">
+        <i class="icon-i16 icon-3">3</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r4">
+        <i class="icon-i16 icon-4">4</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r5">
+        <i class="icon-i16 icon-5">5</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+    </ul>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">装修效果图精华推荐</strong>
+      </li>
+      <li class="map-r1 active dott1">
+        <i class="icon-i16 icon-1">1</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r2">
+        <i class="icon-i16 icon-2">2</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r3">
+        <i class="icon-i16 icon-3">3</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r4">
+        <i class="icon-i16 icon-4">4</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+      <li class="map-r5">
+        <i class="icon-i16 icon-5">5</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      </li>
+    </ul>
+    <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg"></a></div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+</div>
+
+<ul class="index_main index_map mt10 clearfix">
+  <li>
+    <i class="icon-map icon-map9"></i>
+    <a href="#"><strong>刷新生活</strong></a>
+    <a href="#">刷新实录</a>
+    <a href="#">刷新效果</a>
+    <a href="#">刷新服务</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map1"></i>
+    <a href="#"><strong>大师殿堂</strong></a>
+    <a href="#">大师访谈</a>
+    <a href="#">大师作品</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map2"></i>
+    <a href="#"><strong>装修图库</strong></a>
+    <a href="#">家装设计</a>
+    <a href="#">装修部件</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map3"></i>
+    <a href="#"><strong>设计鉴赏</strong></a>
+    <a href="#">设计之星</a>
+    <a href="#">作品展示</a>
+    <a href="#">色彩配搭</a>
+    <a href="#">灵感秀</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map4"></i>
+    <a href="#"><strong>业主通道</strong></a>
+    <a href="#">设计快查</a>
+    <a href="#">装修贴士</a>
+    <a href="#">配色咨询</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map5"></i>
+    <a href="#"><strong>行业资讯</strong></a>
+    <a href="#">装修资讯</a>
+    <a href="#">色彩资讯</a>
+    <a href="#">业内动态</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map6"></i>
+    <a href="#"><strong>应用工具</strong></a>
+    <a href="#">案例下载</a>
+    <a href="#">配色软件</a>
+  </li>
+  <li>
+    <i class="icon-map icon-map8"></i>
+    <a href="#"><strong>精彩活动</strong></a>
+    <a href="#">设计师活动</a>
+    <a href="#">其他活动</a>
+    <a href="#">获奖名单</a>
+  </li>
+</ul>
+<div class="footer">
+  <hr class="border2">
+  <p class="links">
+    <strong>友情链接:</strong>
+    <a href="#" target="_blank">立邦官网</a>
+    <a href="#" target="_blank">立邦官方商城</a>
+    <a href="#" target="_blank">立邦天猫商城</a>
+    <a href="#" target="_blank">新浪家居</a>
+    <a href="#" target="_blank">装修点评网</a>
+    <a href="#" target="_blank">太平洋家居网</a>
+  </p>
+  <hr class="border2">
+  <p class="text-center pt15">
+    <a href="#" target="_blank">立邦官网</a> |
+    <a href="#" target="_blank">联系我们</a> |
+    <a href="#" target="_blank">会员机制</a> |
+    <a href="#" target="_blank">网上商城</a> |
+    <a href="#" target="_blank">网站声明</a> |
+    <a href="#" target="_blank">关于我们</a> |
+    <a href="sitemap.html" target="_blank">网站地图</a>
+  </p>
+  <p class="text-center">
+    <small>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved<br>沪ICP备08019990号</small>
+  </p>
+</div>
+
+<div id="float_right_btn">
+  <p id="back-top">
+    <a href="#top"><img src="images/back_top.png"></a>
+  </p>
+  <a href="javascript:;" class="codebar">
+    <img class="code_big" src="images/code_big.jpg">
+    <img src="images/code.png">
+  </a>
+  <a href="javascript:;" class="ask_btn mt10 js-ask_btn">
+    <img src="images/ask.png" alt="我要咨询" />
+    <form action="" class="ask_form nomargin">
+      <fieldset class="">
+        <h5>我要咨询</h5>
+        <p>
+          亲爱的会员您好！请问您有什么需要咨询？<br>您可以给我们留言，我们会通过系统消息对您的留言给予答复！
+        </p>
+        <textarea name="" id="" cols="" rows=""></textarea>
+        <div class="text-right">
+          <button class="btn btn-success btn-large">确定</button>
+        </div>
+      </fieldset>
+    </form>
+  </a>
+</div>
