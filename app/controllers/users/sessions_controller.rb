@@ -2,6 +2,10 @@
 class Users::SessionsController < Devise::SessionsController
   layout :layout_by_resource
 
+  def new
+    @banners = IBanner.page_name('登录/注册/找回密码').order("position ASC").all
+  end
+
   def create
     resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)

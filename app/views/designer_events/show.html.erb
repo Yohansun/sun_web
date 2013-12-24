@@ -76,9 +76,15 @@
             </li>
           <% end %>
         </ul>
-        <div><a href="#"><img src="images/map/map-right1.jpg"></a></div>
-        <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg"></a></div>
-        <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+        <div>
+          <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x230) %></a>
+        </div>
+        <div class="mt10">
+          <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+        </div>
+        <div class="mt10">
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+        </div>
       </div>
   </div>
 
@@ -103,11 +109,17 @@
           <%- end %>
         </ul>
       </div>
-      <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner1.jpg"></a></div>
+      <div class="mt10">
+        <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_230x230) %></a>
+      </div>
     </div>
 
   <div class="clearfix">
-    <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
-    <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+    <div class="footer_banner mt10 pull-left">
+      <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_670x85) %></a>
+    </div>
+    <div class="footer_banner mt10 pull-right">
+      <a href="<%= @banners[5].url? ? @banners[5].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[5].try(:file).try(:url, :list_310x85) %></a>
+    </div>
   </div>
 </div>

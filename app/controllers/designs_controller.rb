@@ -69,6 +69,7 @@ class DesignsController < ApplicationController
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('作品展示').order("position ASC").all
 
     sign_in(@user) if current_admin && @user
   end
@@ -94,6 +95,7 @@ class DesignsController < ApplicationController
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('设计鉴赏内页').order("position ASC").all
   end
 
   def new

@@ -1,5 +1,3 @@
-<% content_for :head do -%>
-<% end -%>
 <%- content_for :tail do %>
   <%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
@@ -19,7 +17,7 @@
   <small>实用案例为您的家装出谋画色</small>
 </h3>
 <div class="mt10">
-  <%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/channel/banner1.jpg")%>
+  <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_1000x85) %></a>
 </div>
 <ul class="breadcrumb">
   <li><%= link_to "首页", "/" %> &gt;</li>
@@ -315,7 +313,9 @@
         <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
       </li>
     </ul>
-    <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg"></a></div>
+    <div class="mt10">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+    </div>
   </div>
 </div>
 
@@ -340,117 +340,16 @@
       <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
     </ul>
   </div>
-  <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+  <div class="pull-right">
+    <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+  </div>
 </div>
 
 <div class="clearfix">
-  <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
-  <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
-</div>
-
-<ul class="index_main index_map mt10 clearfix">
-  <li>
-    <i class="icon-map icon-map9"></i>
-    <a href="#"><strong>刷新生活</strong></a>
-    <a href="#">刷新实录</a>
-    <a href="#">刷新效果</a>
-    <a href="#">刷新服务</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map1"></i>
-    <a href="#"><strong>大师殿堂</strong></a>
-    <a href="#">大师访谈</a>
-    <a href="#">大师作品</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map2"></i>
-    <a href="#"><strong>装修图库</strong></a>
-    <a href="#">家装设计</a>
-    <a href="#">装修部件</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map3"></i>
-    <a href="#"><strong>设计鉴赏</strong></a>
-    <a href="#">设计之星</a>
-    <a href="#">作品展示</a>
-    <a href="#">色彩配搭</a>
-    <a href="#">灵感秀</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map4"></i>
-    <a href="#"><strong>业主通道</strong></a>
-    <a href="#">设计快查</a>
-    <a href="#">装修贴士</a>
-    <a href="#">配色咨询</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map5"></i>
-    <a href="#"><strong>行业资讯</strong></a>
-    <a href="#">装修资讯</a>
-    <a href="#">色彩资讯</a>
-    <a href="#">业内动态</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map6"></i>
-    <a href="#"><strong>应用工具</strong></a>
-    <a href="#">案例下载</a>
-    <a href="#">配色软件</a>
-  </li>
-  <li>
-    <i class="icon-map icon-map8"></i>
-    <a href="#"><strong>精彩活动</strong></a>
-    <a href="#">设计师活动</a>
-    <a href="#">其他活动</a>
-    <a href="#">获奖名单</a>
-  </li>
-</ul>
-<div class="footer">
-  <hr class="border2">
-  <p class="links">
-    <strong>友情链接:</strong>
-    <a href="#" target="_blank">立邦官网</a>
-    <a href="#" target="_blank">立邦官方商城</a>
-    <a href="#" target="_blank">立邦天猫商城</a>
-    <a href="#" target="_blank">新浪家居</a>
-    <a href="#" target="_blank">装修点评网</a>
-    <a href="#" target="_blank">太平洋家居网</a>
-  </p>
-  <hr class="border2">
-  <p class="text-center pt15">
-    <a href="#" target="_blank">立邦官网</a> |
-    <a href="#" target="_blank">联系我们</a> |
-    <a href="#" target="_blank">会员机制</a> |
-    <a href="#" target="_blank">网上商城</a> |
-    <a href="#" target="_blank">网站声明</a> |
-    <a href="#" target="_blank">关于我们</a> |
-    <a href="sitemap.html" target="_blank">网站地图</a>
-  </p>
-  <p class="text-center">
-    <small>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved<br>沪ICP备08019990号</small>
-  </p>
-</div>
-
-<div id="float_right_btn">
-  <p id="back-top">
-    <a href="#top"><img src="images/back_top.png"></a>
-  </p>
-  <a href="javascript:;" class="codebar">
-    <img class="code_big" src="images/code_big.jpg">
-    <img src="images/code.png">
-  </a>
-  <a href="javascript:;" class="ask_btn mt10 js-ask_btn">
-    <img src="images/ask.png" alt="我要咨询" />
-    <form action="" class="ask_form nomargin">
-      <fieldset class="">
-        <h5>我要咨询</h5>
-        <p>
-          亲爱的会员您好！请问您有什么需要咨询？<br>您可以给我们留言，我们会通过系统消息对您的留言给予答复！
-        </p>
-        <textarea name="" id="" cols="" rows=""></textarea>
-        <div class="text-right">
-          <button class="btn btn-success btn-large">确定</button>
-        </div>
-      </fieldset>
-    </form>
-  </a>
+  <div class="footer_banner mt10 pull-left">
+    <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_670x85) %></a>
+  </div>
+  <div class="footer_banner mt10 pull-right">
+    <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_310x85) %></a>
+  </div>
 </div>

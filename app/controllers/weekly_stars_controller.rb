@@ -10,7 +10,7 @@ class WeeklyStarsController < ApplicationController
   before_filter :get_data
 
   helper_method :star_blank?
- 
+
 	def download
 		target_file = WeeklyStar.find(params[:id])
 		image_paths = []
@@ -20,7 +20,7 @@ class WeeklyStarsController < ApplicationController
 		end
 		added_actions = DefaultActions.merge(:index => "每周之星")
 		#防止传过来的值不一致造成对服务器的攻击
-		raise "参数不包含在列表中" unless added_actions.keys.include?(params[:target].to_sym) 
+		raise "参数不包含在列表中" unless added_actions.keys.include?(params[:target].to_sym)
 		target_name = added_actions[params[:target].to_sym]
 
 		find_or_build_zip_file("public/#{target_name}.zip",:ab_paths => image_paths,:cache_name => PinYin.permlink(target_name)) do |zfile|
@@ -36,10 +36,11 @@ class WeeklyStarsController < ApplicationController
   def index
     @title1,@title2 = "每周","之星"
 
+    @banners = IBanner.page_name('设计之星').order("position ASC").all
     designs = WeeklyStar.order("published_at desc") || WeeklyStar.new
     star_type_id = WeeklyStar.get_star_type_id(@title="每周之星")
 
-    @design = designs.where(star_type_id: star_type_id).first    
+    @design = designs.where(star_type_id: star_type_id).first
     design_id = @design.design_link.split("/").last
     @link_design = Design.find(design_id)
 
@@ -50,11 +51,11 @@ class WeeklyStarsController < ApplicationController
     # 3.times do |t|
     #   star = WeeklyStar.where(star_type_id: t+1).order("published_at desc").first
     #   star_ids << star.id if star.present?
-    # end  
+    # end
     @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(9)
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
-  
+
 	DefaultActions.each do |act,star_type|
 		define_method(act) do
 			#TODO
@@ -64,7 +65,7 @@ class WeeklyStarsController < ApplicationController
 			design_id = @design.design_link.split("/").last
 			@link_design = Design.find(design_id)
 
-			@elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8) 
+			@elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8)
 			@title = @title1 = star_type.dup
 			@title1.delete!(@title2="之星")
 			render "index"
@@ -72,6 +73,7 @@ class WeeklyStarsController < ApplicationController
 	end
 
   def show
+    @banners = IBanner.page_name('设计鉴赏内页').order("position ASC").all
     @design = WeeklyStar.find(params[:id])
     design_id = @design.design_link.split("/").last
     @link_design = Design.find design_id

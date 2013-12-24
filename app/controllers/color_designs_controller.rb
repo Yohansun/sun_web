@@ -20,6 +20,7 @@ class ColorDesignsController < ApplicationController
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('色彩配搭').order("position ASC").all
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
@@ -43,7 +44,8 @@ class ColorDesignsController < ApplicationController
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
-    
+    @banners = IBanner.page_name('设计鉴赏内页').order("position ASC").all
+
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 

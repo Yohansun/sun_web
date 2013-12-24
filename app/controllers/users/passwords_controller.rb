@@ -1,8 +1,10 @@
+# encoding: utf-8
 class Users::PasswordsController < Devise::PasswordsController
   prepend_before_filter :require_no_authentication
 
   # GET /resource/password/new
   def new
+    @banners = IBanner.page_name('登录/注册/找回密码').order("position ASC").all
     build_resource({})
   end
 

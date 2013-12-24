@@ -1,3 +1,4 @@
+# encoding: utf-8
 class DesignerEventsController < ApplicationController
   layout "home_manage"
   before_filter :get_data
@@ -5,10 +6,12 @@ class DesignerEventsController < ApplicationController
     @event_ks = EventKv.first
     @active_now = DesignerEvent.active_now
     @active_period = DesignerEvent.active_period.page(params[:page]).per(1)
+    @banners = IBanner.page_name('设计师活动').order("position ASC").all
   end
 
   def show
     @active = DesignerEvent.find params[:id]
+    @banners = IBanner.page_name('设计师活动内页').order("position ASC").all
   end
 
   def get_data

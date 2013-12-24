@@ -19,7 +19,9 @@
   <strong>设计鉴赏</strong>
   <small>实用案例为您的家装出谋画色</small>
 </h3>
-<div class="mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/channel/banner1.jpg") %></div>
+<div class="mt10">
+  <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_1000x85) %></a>
+</div>
 <ul class="breadcrumb">
   <li><%= link_to "首页", "/" %> &gt;</li>
   <li><%= link_to "设计鉴赏", "/weekly_stars" %> &gt;</li>
@@ -242,7 +244,7 @@
             <strong class="js-title"><%=dcs.title%></strong><br>
             <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
       </li>
-      <% end -%> 
+      <% end -%>
     </ul>
     <%- colum_datas2 = IColumnData.show_data(4).limit(5) %>
     <ul class="unstyled map-right index_main js-img_show">
@@ -256,9 +258,11 @@
             <strong class="js-title"><%=dcs.title%></strong><br>
             <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
       </li>
-      <% end -%> 
+      <% end -%>
     </ul>
-    <div class="mt10"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner2.jpg") %></div>
+    <div class="mt10">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+    </div>
   </div>
 </div>
 
@@ -283,10 +287,16 @@
       <%- end %>
     </ul>
   </div>
-  <div class="pull-right"><a href="#"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/refresh/refresh_list_banner3.jpg") %></div>
+  <div class="pull-right">
+    <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+  </div>
 </div>
 
 <div class="clearfix">
-  <div class="footer_banner mt10 pull-left"><a href="#"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner.jpg") %></div>
-  <div class="footer_banner mt10 pull-right"><a href="#"><%= link_to image_tag("http://htmlhub.doorder.com/icolor2/images/index/footer_banner2.jpg") %></div>
+  <div class="footer_banner mt10 pull-left">
+    <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_670x85) %></a>
+  </div>
+  <div class="footer_banner mt10 pull-right">
+    <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_310x85) %></a>
+  </div>
 </div>
