@@ -18,6 +18,9 @@
       <div class="mt10">
         <%= raw @other_event.content %>
       </div>
+      <div class="footer_banner text-center">
+        <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85) %></a>
+      </div>
       <div class="refresh_news mt10 clearfix">
         <div class="refresh_new pull-left">
           <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
@@ -41,6 +44,7 @@
         </div>
       </div>
     </div>
+
     <div class="pull-right smaller">
       <div class="chann_warp chann1_right map-right index_main">
         <div class="media media_chann">
@@ -77,10 +81,10 @@
         <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x170) %></a>
       </div>
       <div class="mt10">
-        <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+        <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x170) %></a>
       </div>
       <div class="mt10">
-        <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+        <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_230x230) %></a>
       </div>
     </div>
   </div>
