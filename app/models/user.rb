@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class User < ActiveRecord::Base
-
+  apply_simple_captcha
   validates_presence_of :username, :email, :if => :email_required?, :on => :create
   validates_presence_of :email, :on => :update
   validates_presence_of :password, :if => :email_required?, :on => :create

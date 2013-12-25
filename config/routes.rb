@@ -11,6 +11,9 @@ Icolor::Application.routes.draw do
   match "/images/*path" => "design_images#index"
   match "/images" => "design_images#index"
 
+
+  match "/simple_captcha/update_captcha" => "simple_captcha#update_captcha"
+
   require 'api'
   resources :special_events do
     member do

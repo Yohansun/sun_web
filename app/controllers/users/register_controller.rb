@@ -6,37 +6,40 @@ class Users::RegisterController < Devise::RegistrationsController
 
   def create
     @messages = ""
-
-    if params[:user][:user_role] =~ /designer/
-      params[:user][:role_id] = Role.find_by_role("designer").id
-      params[:user][:des_status] = params[:user][:user_role] == "designer_1"
-    else
-    #   if params[:user][:user_role].blank?
-    #     params[:user][:user_role] = 'user'
-    #   end
-      params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id unless params[:user][:user_role].blank?
-    end
-
-
-
-    build_resource
-    resource.create_from = params[:return_to]
-    if resource.save
-      if resource.active_for_authentication?
-        resource.create_score(resource.id, 101, 1, 100)
-        sign_in(resource_name, resource)
-        respond_with resource
+    if simple_captcha_valid?
+      if params[:user][:user_role] =~ /designer/
+        params[:user][:role_id] = Role.find_by_role("designer").id
+        params[:user][:des_status] = params[:user][:user_role] == "designer_1"
       else
-        expire_session_data_after_sign_in!
-        respond_with resource
+      #   if params[:user][:user_role].blank?
+      #     params[:user][:user_role] = 'user'
+      #   end
+        params[:user][:role_id] = Role.find_by_role(params[:user][:user_role]).id unless params[:user][:user_role].blank?
       end
-    else
-      valid_result = resource.errors.messages
-      if valid_result.size > 0
-        valid_result.each do |_, value|
-          @messages << "*" + value[0] + '\n'
+
+
+
+      build_resource
+      resource.create_from = params[:return_to]
+      if resource.save
+        if resource.active_for_authentication?
+          resource.create_score(resource.id, 101, 1, 100)
+          sign_in(resource_name, resource)
+          respond_with resource
+        else
+          expire_session_data_after_sign_in!
+          respond_with resource
+        end
+      else
+        valid_result = resource.errors.messages
+        if valid_result.size > 0
+          valid_result.each do |_, value|
+            @messages << "*" + value[0] + '\n'
+          end
         end
       end
+    else
+      @messages = "验证码输入错误！"
     end
   end
 

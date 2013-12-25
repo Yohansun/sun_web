@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include SimpleCaptcha::ControllerHelpers
   helper :meta_title, :meta_description, :meta_keyword
   helper_method :search_color_code,:find_or_build_zip_file
   layout "home_manage"

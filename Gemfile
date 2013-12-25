@@ -62,6 +62,9 @@ gem "second_level_cache", "~> 1.6"
 gem "cache_digests"
 gem 'dimensions-rails'
 
+#验证码
+gem "galetahub-simple_captcha", :require => "simple_captcha"
+
 #发送短信
 gem 'savon'
 gem 'collections'
