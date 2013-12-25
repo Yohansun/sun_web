@@ -5,7 +5,7 @@ class DesignerEventsController < ApplicationController
   def index
     @event_ks = EventKv.first
     @active_now = DesignerEvent.active_now
-    @active_period = DesignerEvent.active_period.page(params[:page]).per(1)
+    @active_period = DesignerEvent.active_period.page(params[:page]).per(5)
     @banners = IBanner.page_name('设计师活动').order("position ASC").all
   end
 
