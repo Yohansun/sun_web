@@ -19,7 +19,7 @@
         alert(data.responseText);
       });
 
-      var url = 'banner_other_pages/create_image?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name%>';
+      var url = 'banner_other_pages/create_image?position=<%= @i_banner.position if @i_banner  %>&page_name=<%= @i_banner.page_name if @i_banner %>';
       $('#fileupload').fileupload({
           url: url,
           dataType: 'json',
@@ -28,7 +28,7 @@
           maxFileSize: 5000000,
           done: function (e, data) {
             alert(data.result.notify);
-            window.location.href = "/manage/banner_other_pages?position=<%= @i_banner.position %>&page_name=<%= @i_banner.page_name %>";
+            window.location.href = "/manage/banner_other_pages?position=<%= @i_banner.position if @i_banner %>&page_name=<%= @i_banner.page_name if @i_banner %>";
           },
           error: function (e, data) {
             alert(data.result);

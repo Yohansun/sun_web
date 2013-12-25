@@ -3,6 +3,7 @@
 # -*- Encoding: UTF-8 -*-
 class Users::RegisterController < Devise::RegistrationsController
   layout :layout_by_resource
+  before_filter :reg_banner
 
   def create
     @messages = ""
@@ -84,4 +85,9 @@ class Users::RegisterController < Devise::RegistrationsController
       'home_manage'
     end
   end
+
+  def reg_banner
+    @banners = IBanner.page_name('登录/注册/找回密码').order("position ASC").all
+  end
+
 end
