@@ -83,6 +83,8 @@ Icolor::Application.routes.draw do
     match "/user/update" => "users/register#update"
     match "/users/suc_regist" => "users/register#suc_regist"
     match "/users/username_check" => "users/register#username_check"
+    match "/users/email_check" => "users/register#email_check"
+    match "/users/phone_check" => "users/register#phone_check"
     match "/users/passwords/send_suc" => "users/passwords#send_suc"
     match "/users/passwords/reset" => "users#reset_password"
     match "/users/policy" => "users/register#policy"

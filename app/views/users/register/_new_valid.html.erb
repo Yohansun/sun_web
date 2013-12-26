@@ -1,0 +1,280 @@
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    if(typeof data != 'undefined'){
+      var options = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1');
+      sel.bind('.level_2');
+      sel.bind('.level_3');
+    }
+    $("#recognize_captcha").live("click", function(){
+      $.post("<%= simple_captcha_update_captcha_path %>", {}, function(data){
+        $("#simple_captcha").replaceWith(data);
+      });
+    });
+
+    //keyup
+    $('.js-password').keyup(function(){
+      var $label_tips = $(this).siblings('span.label');
+      var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
+      var $pad_lenght = $(this).val().length;
+      if ($pad_lenght >= 6) {
+        if ($pad_lenght >= 6 && $pad_lenght < 10) {
+          $label_tips_nobg.addClass('label-green').show().text('密码强度：弱');
+        }else if ($pad_lenght >= 10 && $pad_lenght < 15) {
+          $label_tips_nobg.addClass('label-green').show().text('密码强度：强');
+        }else{
+          $label_tips_nobg.addClass('label-green').show().text('密码强度：很强');
+        };
+      }else{
+        $label_tips_nobg.addClass('label-blue').show().text('密码不得少于6位数');
+      };
+    });
+    $('.js-required').blur(function(){
+      var pad_val = $('.js-password').val();
+      var pad_val_comfirm = $('.js-confirm_pad').val();
+      //username
+      if ($(this).is('.js-username')) {
+        var $label_tips = $(this).siblings('span.label');
+        var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
+        if ($(this).val() == "") {
+          $label_tips_nobg.addClass('label-important').show().text('用户名不能为空');
+        }else{
+          $.post("/users/username_check", {user:{username:$(this).val(),flag:0}}, function(message) {
+            if (message != "") {
+              if(message == "no"){
+                $label_tips_nobg.addClass('label-important').show().text('用户名不能以下划线和数字开头！');
+              }
+              if(message == "false"){
+                $label_tips_nobg.addClass('label-important').show().text('该用户名已存在，请重新输入。');
+              }
+              if(message == "true"){
+                $label_tips_nobg.addClass('label-green').show().text('恭喜您，该用户名尚未被注册！');
+              }
+            }
+          });
+        };
+      };
+      //password
+      if ($(this).is('.js-password')) {
+        $('.js-confirm_pad').val('').next('span').hide();
+        var pad_len = $(this).val().length;
+        var $label_tips = $(this).siblings('span.label');
+        var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
+        if(pad_len == 0){
+          $label_tips_nobg.addClass('label-important').show().text('请输入密码');
+          // $('.js-confirm_pad').attr('disabled',true);
+          // return false;
+        }else if(pad_len >= 6){
+          $label_tips_nobg.addClass('label-green').show();
+        }else{
+          $label_tips_nobg.addClass('label-blue').show().text('密码不得少于6位数');
+          // $('.js-confirm_pad').attr('disabled',true);
+        };
+      };
+      //confirm password
+      if ($(this).is('.js-confirm_pad')) {
+        var con_pad_len = $(this).val().length;
+        var $label_tips = $(this).siblings('span.label');
+        var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
+        if(con_pad_len == 0){
+          $label_tips_nobg.addClass('label-important').show().text('请输入确认密码');
+        }else if (pad_val.length >= 6) {
+          if (pad_val_comfirm != pad_val) {
+            $label_tips_nobg.addClass('label-important').show().text('确认密码和密码不一致');
+          }else{
+            $label_tips.hide()
+          };
+        };
+      };
+      //email
+      if ($(this).is('.js-email')) {
+        var $label_tips = $(this).siblings('span.label');
+        var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
+        var reg = /^\w{1,}@\w+\.\w+$/;
+        var $email = $(this).val();
+        if ($email == "") {
+          $label_tips_nobg.addClass('label-important').show().text('Email不能为空');
+        }else if(!reg.test($email)){
+          $label_tips_nobg.addClass('label-important').show().text('Email格式有误');
+        }else{
+          $.post("/users/email_check", {user:{email:$(this).val(),flag:0}}, function(message) {
+            if (message != "") {
+              if(message == "false"){
+                $label_tips_nobg.addClass('label-important').show().text('Email已存在！');
+              }
+              if(message == "true"){
+                $label_tips_nobg.addClass('label-green').show().text('恭喜您，该邮箱尚未注册！');
+              }
+            }
+          });
+        };
+      };
+      //phone
+      if ($(this).is('.js-phone')) {
+        var $label_tips = $(this).siblings('span.label');
+        var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
+        // var reg = /^(\([0-9]{3,4}\)|[0-9]{3,4}\-)?[0-9]{7,8}$/;//telephone
+        var reg = /^0?(13|15|18|14)[0-9]{9}$/;//mobile
+        var $phone = $(this).val();
+        if ($(this).val() == '') {
+          $label_tips_nobg.addClass('label-important').show().text('电话不能为空')
+        }else if (!reg.test($phone) ) {
+          $label_tips_nobg.addClass('label-important').show().text('电话格式有误');
+        }else{
+          $.post("/users/phone_check", {user:{phone:$(this).val(),flag:0}}, function(message) {
+            if (message != "") {
+              if(message == "false"){
+                $label_tips_nobg.addClass('label-important').show().text('此电话号码已存在！');
+              }
+              if(message == "true"){
+                $label_tips_nobg.addClass('label-green').show().text('恭喜您，该电话号码尚未注册！');
+              }
+            }
+          });
+        };
+      };
+      //security_code
+    });
+    $('#captcha').blur(function(){
+      if ($(this).is('#captcha')) {
+        var $label_tips_nobg =  $(".vadil");
+        if ($(this).val() == "") {
+          $label_tips_nobg.addClass('label-important').show().text('验证码不能为空')
+        }else{
+          $(".vadil").hide()
+        };
+      };
+    });
+
+    //identify tips
+    $('select.js-identify').on('change',function(){
+      select_identify();
+    });
+    $('.linkageseclet2 select').on('change',function(){
+      select_area();
+    });
+
+
+    //verifying tips
+    $('.login_content').on('click','.js-go_next',function(e){
+      var reg = /^\w{1,}@\w+\.\w+$/;
+      var reg_phone = /^0?(13|15|18|14)[0-9]{9}$/;
+      var flag = 0;
+      username = $('#username').val();
+      var lab_username = $("#lab_username").addClass('label-important');
+      password = $('#password').val();
+      var lab_password = $("#lab_password").removeClass('label-blue label-green label-important');
+      password_confirmation = $('#password_confirmation').val();
+      var lab_password_confirmation = $("#lab_password_confirm").removeClass('label-blue label-green label-important');;
+      email = $('#email').val();
+      var lab_email = $("#lab_email").removeClass('label-blue label-green label-important');
+      phone = $('#phone').val();
+      var lab_phone = $("#lab_phone").removeClass('label-blue label-green label-important');
+      if(username == ""){
+        lab_username.show().text('用户名不能为空');
+        flag += 1;
+      }else{
+        $.post("/users/username_check", {user:{username:username,flag:0}}, function(message) {
+          if (message != "") {
+            if(message == "no"){
+              lab_username.addClass('label-important').show().text('用户名不能以下划线和数字开头！');
+              flag += 1;
+            }
+            if(message == "false"){
+              lab_username.addClass('label-important').show().text('该用户名已存在，请重新输入。');
+              flag += 1;
+            }
+            if(message == "true"){
+              lab_username.hide();
+            }
+          }
+        });
+      }
+      if(email == ""){
+        lab_email.addClass('label-important').show().text('Email不能为空');
+        flag += 1;
+      }else if(!reg.test(email)){
+        lab_email.addClass('label-important').show().text('Email格式有误');
+        flag += 1;
+      }else{
+        $.post("/users/email_check", {user:{email:email,flag:0}}, function(message) {
+          if (message != "") {
+            if(message == "false"){
+              lab_email.addClass('label-important').show().text('Email已存在！');
+              flag += 1;
+            }
+            if(message == "true"){
+              lab_email.hide();
+            }
+          }
+        });
+      }
+      if(phone == ""){
+        lab_phone.addClass('label-important').show().text('联系电话不能为空');
+        flag += 1;
+      }else if (!reg_phone.test(phone) ) {
+        lab_phone.addClass('label-important').show().text('电话格式有误');
+        flag += 1;
+      }else{
+        $.post("/users/phone_check", {user:{phone:phone,flag:0}}, function(message) {
+          if (message != "") {
+            if(message == "false"){
+              lab_phone.addClass('label-important').show().text('此电话号码已存在！');
+              flag += 1;
+            }
+            if(message == "true"){
+              lab_phone.hide();
+            }
+          }
+        });
+      }
+      if(password == ""){
+        lab_password.addClass('label-important').show().text('密码不能为空');
+        flag += 1;
+      }else if(password.length < 6){
+        lab_password.addClass('label-blue').show().text('密码不得少于6位数');
+        flag += 1;
+      }else{
+        lab_password.hide();
+      }
+      if(password_confirmation == ""){
+        lab_password_confirmation.addClass('label-important').show().text('确认密码不能为空');
+        flag += 1;
+      }else if(password_confirmation != password){
+        lab_password_confirmation.addClass('label-important').show().text('确认密码和密码不一致');
+        flag += 1;
+      }else{
+        lab_password.hide();
+      }
+      if($('#captcha').val() == "") {
+        $(".vadil").addClass('label-important').show().text('请输入验证码');
+        flag += 1;
+      };
+      select_identify();
+      select_area();
+      if(flag != 0){
+        return false;
+      }
+    });
+
+    function select_identify (){
+      //identify
+      if ($('.js-identify').val() == "") {
+        $('.js-identify').siblings('span.label').show();
+      }else{
+        $('.js-identify').siblings('span.label').hide();
+      };
+    };
+    function select_area (){
+      //area
+      if ($('.level_1').val() == "" || $('.level_2').val() == "" || $('.level_3').val() == "") {
+        $('.linkageseclet2 select').siblings('span.label').show();
+      }else{
+        $('.linkageseclet2 select').siblings('span.label').hide();
+      };
+    };
+  });
+</script>

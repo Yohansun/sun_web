@@ -6,7 +6,7 @@
   #captcha{
     float:left;
     margin-right: 5px;
-    display: none;
+    /*display: none;*/
   }
   .simple_captcha_image img,.simple_captcha_image a{
     width:90px;
@@ -19,167 +19,7 @@
 <% end -%>
 <% content_for :tail do -%>
   <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
-  <script type="text/javascript" charset="utf-8">
-    $(function() {
-      if(typeof data != 'undefined'){
-        var options = {
-          data  : data
-        }
-        // console.log(options)
-        var sel = new LinkageSelect(options);
-        // console.log(sel)
-        sel.bind('.level_1');
-        sel.bind('.level_2');
-        sel.bind('.level_3');
-      }
-      $("#recognize_captcha").live("click", function(){
-        $.post("<%= simple_captcha_update_captcha_path %>", {}, function(data){
-          $("#simple_captcha").replaceWith(data);
-        });
-      });
-
-      //verifying tips
-      $('.login_content').on('click','.js-go_next',function(e){
-        e.preventDefault();
-        $('.js-required').each(function(){
-          if ($(this).val() == "") {
-            $(this).siblings('span.label').removeClass('label-green label-blue').addClass('label-important').show().text('不能为空');
-          };
-        });
-        if ($('#captcha').val() == "") {
-          $(this).parents('#simple_captcha').siblings('span.label').removeClass('label-green label-blue').addClass('label-important').show().text('不能为空');
-        };
-        select_identify();
-        select_area();
-      });
-      //keyup
-      $('.js-password').keyup(function(){
-        var $label_tips = $(this).siblings('span.label');
-        var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-        var $pad_lenght = $(this).val().length;
-        if ($pad_lenght >= 6) {
-          if ($pad_lenght >= 6 && $pad_lenght < 10) {
-            $label_tips_nobg.addClass('label-green').show().text('密码强度：弱');
-          }else if ($pad_lenght >= 10 && $pad_lenght < 15) {
-            $label_tips_nobg.addClass('label-green').show().text('密码强度：强');
-          }else{
-            $label_tips_nobg.addClass('label-green').show().text('密码强度：很强');
-          };
-        }else{
-          $label_tips_nobg.addClass('label-blue').show().text('密码不得少于6位数');
-        };
-      });
-      $('.js-required').blur(function(){
-        var pad_val = $('.js-password').val();
-        var pad_val_comfirm = $('.js-confirm_pad').val();
-        //username
-        if ($(this).is('.js-username')) {
-          var $label_tips = $(this).siblings('span.label');
-          var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-          if ($(this).val() == "") {
-            $label_tips_nobg.addClass('label-important').show().text('用户名不能为空');
-          }else{
-            $label_tips.hide();
-          };
-        };
-        //password
-        if ($(this).is('.js-password')) {
-          $('.js-confirm_pad').val('').next('span').hide();
-          var pad_len = $(this).val().length;
-          var $label_tips = $(this).siblings('span.label');
-          var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-          if(pad_len == 0){
-            $label_tips_nobg.addClass('label-important').show().text('请输入密码');
-            // $('.js-confirm_pad').attr('disabled',true);
-            // return false;
-          }else if(pad_len >= 6){
-            $label_tips_nobg.addClass('label-green').show();
-          }else{
-            $label_tips_nobg.addClass('label-blue').show().text('密码不得少于6位数');
-            // $('.js-confirm_pad').attr('disabled',true);
-          };
-        };
-        //confirm password
-        if ($(this).is('.js-confirm_pad')) {
-          var con_pad_len = $(this).val().length;
-          var $label_tips = $(this).siblings('span.label');
-          var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-          console.log(pad_val.length)
-          if (pad_val.length >= 6) {
-            if (pad_val_comfirm != pad_val) {
-              $label_tips_nobg.addClass('label-important').show().text('确认密码和密码不一致');
-            }else{
-              $label_tips.hide()
-            };
-          };
-        };
-        //email
-        if ($(this).is('.js-email')) {
-          var $label_tips = $(this).siblings('span.label');
-          var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-          var reg = /^\w{1,}@\w+\.\w+$/;
-          var $email = $(this).val();
-          if ($email == "") {
-            $label_tips_nobg.addClass('label-important').show().text('Email不能为空');
-          }else if(!reg.test($email)){
-            // console.log('email不合法')
-            $label_tips_nobg.addClass('label-important').show().text('Email格式有误');
-          }else{
-            $label_tips.hide();
-          };
-        };
-        //phone
-        if ($(this).is('.js-phone')) {
-          var $label_tips = $(this).siblings('span.label');
-          var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-          // var reg = /^(\([0-9]{3,4}\)|[0-9]{3,4}\-)?[0-9]{7,8}$/;//telephone
-          var reg = /^0?(13|15|18|14)[0-9]{9}$/;//mobile
-          var $phone = $(this).val();
-          if ($(this).val() == '') {
-            $label_tips_nobg.addClass('label-important').show().text('电话不能为空')
-          }else if (!reg.test($phone) ) {
-            $label_tips_nobg.addClass('label-important').show().text('电话格式有误');
-          }else{
-            $label_tips.hide();
-          };
-        };
-        //security_code
-        if ($(this).is('.js-security_code')) {
-          var $label_tips = $(this).siblings('span.label');
-          var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
-          if ($(this).val() == "") {
-            $label_tips_nobg.addClass('label-important').show().text('验证码不能为空')
-          }else{
-            $label_tips.hide()
-          };
-        };
-      });
-
-      //identify tips
-      $('select.js-identify').on('change',function(){
-        select_identify();
-      });
-      $('.linkageseclet2 select').on('change',function(){
-        select_area();
-      });
-      function select_identify (){
-        //identify
-        if ($('.js-identify').val() == "") {
-          $('.js-identify').siblings('span.label').show();
-        }else{
-          $('.js-identify').siblings('span.label').hide();
-        };
-      };
-      function select_area (){
-        //area
-        if ($('.level_1').val() == "" || $('.level_2').val() == "" || $('.level_3').val() == "") {
-          $('.linkageseclet2 select').siblings('span.label').show();
-        }else{
-          $('.linkageseclet2 select').siblings('span.label').hide();
-        };
-      };
-    });
-  </script>
+  <%= render :partial => "new_valid" %>
 <% end %>
 
 
@@ -213,8 +53,8 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls">
-              <input class="input-xlarge mr5 js-required js-username" type="text" id="" name="user[username]">
-              <span class="label label-important hide">该用户名已存在，请重新输入。</span>
+              <input class="input-xlarge mr5 js-required js-username" type="text" id="username" name="user[username]">
+              <span id="lab_username" class="label label-important hide">该用户名已存在，请重新输入。</span>
             </div>
           </div>
           <div class="control-group">
@@ -223,8 +63,8 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls">
-              <input class="input-xlarge mr5 js-required js-password" type="password" id="" name="user[password]">
-              <span class="label label-blue">密码不得少于6位数</span>
+              <input class="input-xlarge mr5 js-required js-password" type="password" id="password" name="user[password]">
+              <span id="lab_password" class="label label-blue">密码不得少于6位数</span>
             </div>
           </div>
           <div class="control-group">
@@ -233,9 +73,9 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls">
-              <input class="input-xlarge mr5 js-required js-confirm_pad" type="password" id="" name="user[password_confirmation]">
-              <!-- <span class="label label-green">密码强度：很强</span> -->
-              <span class="label label-important hide">确认密码不能为空</span>
+              <input class="input-xlarge mr5 js-required js-confirm_pad" type="password" id="password_confirmation" name="user[password_confirmation]">
+              <!-- <span id="" class="label label-green">密码强度：很强</span> -->
+              <span id="lab_password_confirm" class="label label-important hide">确认密码不能为空</span>
             </div>
           </div>
           <div class="control-group">
@@ -251,7 +91,7 @@
                 <option value="company">家装公司</option>
                 <option value="user">普通用户</option>
               </select>
-              <span class="label label-important hide">请选择您目前的身份</span>
+              <span id="lab_user_role" class="label label-important hide">请选择您目前的身份</span>
             </div>
           </div>
           <div class="control-group">
@@ -263,7 +103,7 @@
               <select id="province" class="input-small level_1 js-required" name="user[state]">省</select>
               <select id="city" class="input-small level_2 js-required" name="user[city]">市</select>
               <select id="county" class="input-small level_3 js-required" name="user[area_id]">区</select>
-              <span class="label label-important hide">请选择省份、城市、区域</span>
+              <span id="lab_area" class="label label-important hide">请选择省份、城市、区域</span>
             </div>
           </div>
           <div class="control-group">
@@ -272,8 +112,8 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls">
-              <input class="input-xlarge mr5 js-required js-email" type="text" id="" name="user[email]">
-              <span class="label label-blue">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
+              <input class="input-xlarge mr5 js-required js-email" type="text" id="email" name="user[email]">
+              <span id="lab_email" class="label label-blue">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
             </div>
           </div>
           <div class="control-group">
@@ -282,8 +122,8 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls">
-              <input class="input-xlarge mr5 js-required js-phone" type="text" id="" name="user[phone]">
-              <span class="label label-blue">请填写您常用电话以便通知获奖信息</span>
+              <input class="input-xlarge mr5 js-required js-phone" type="text" id="phone" name="user[phone]">
+              <span id="lab_phone" class="label label-blue">请填写您常用电话以便通知获奖信息</span>
             </div>
           </div>
           <div class="control-group">
@@ -292,9 +132,9 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls form-inline">
-              <input class="input-small js-required js-security_code" type="text" id="" placeholder="">
-              <%= show_simple_captcha %>
-              <span class="label label-important hide">请输入验证码</span>
+<!--               <input class="input-small js-required js-security_code" type="text" id="" placeholder=""> -->
+              <%= show_simple_captcha(:required=> false) %>
+              <span id="lab_captcha" class="label label-important hide vadil">请输入验证码</span>
             </div>
           </div>
 

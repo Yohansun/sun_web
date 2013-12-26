@@ -1,5 +1,21 @@
 <% unless @messages.blank? %>
-  alert("<%= raw @messages %>");
+  <% @messages.each do |message| %>
+    <% if message == "false_captcha" %>
+       $(".vadil").addClass('label-important').show().text('验证码输入错误');
+    <% elsif message == "username" %>
+      $("#lab_username").addClass('label-important').addClass('label-important').show().text('该用户名已存在，请重新输入。');
+      $(".vadil").hide();
+    <% elsif message == "email" %>
+      $("#lab_email").removeClass('label-blue label-green label-important').addClass('label-important').show().text('Email已存在！');
+      $(".vadil").hide();
+    <% elsif message == "phone" %>
+      $("#lab_phone").removeClass('label-blue label-green label-important').addClass('label-important').show().text('此电话号码已存在！');
+      $(".vadil").hide();
+    <% elsif message == "is_read" %>
+      alert("iColor会员必须遵守会员注册协议，请勾选");
+      $(".vadil").hide();
+    <% end %>
+  <% end %>
   $.post("<%= simple_captcha_update_captcha_path %>", {}, function(data){
     $("#simple_captcha").replaceWith(data);
   });

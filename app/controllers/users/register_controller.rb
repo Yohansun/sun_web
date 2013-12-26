@@ -6,7 +6,7 @@ class Users::RegisterController < Devise::RegistrationsController
   before_filter :reg_banner
 
   def create
-    @messages = ""
+    @messages = []
     if simple_captcha_valid?
       if params[:user][:user_role] =~ /designer/
         params[:user][:role_id] = Role.find_by_role("designer").id
@@ -34,13 +34,13 @@ class Users::RegisterController < Devise::RegistrationsController
       else
         valid_result = resource.errors.messages
         if valid_result.size > 0
-          valid_result.each do |_, value|
-            @messages << "*" + value[0] + '\n'
+          valid_result.each do |key, value|
+            @messages << "#{key}"
           end
         end
       end
     else
-      @messages = "验证码输入错误！"
+      @messages << "false_captcha"
     end
   end
 
@@ -69,12 +69,28 @@ class Users::RegisterController < Devise::RegistrationsController
     check = Regexp.new('(?!_)(?![0-9])^[-_a-zA-Z0-9\u4e00-\u9fa5]')
     if params[:user][:username] =~ check
       if User.exists?(:username => params[:user][:username])
-        render :text => "该用户名已经被注册，请输入新的用户名！"
+        render :text => "false"
       else
-        render :text => "恭喜您，该用户名尚未被注册！"
+        render :text => "true"
       end
     else
-      render :text => "用户名不能为空，只能用数字、字母、下划线和汉字组成，不能包含空格，并且不能以下划线和数字开头！"
+      render :text => "no"
+    end
+  end
+
+  def email_check
+    if User.exists?(:email => params[:user][:email])
+      render :text => "false"
+    else
+      render :text => "true"
+    end
+  end
+
+  def phone_check
+    if User.exists?(:phone => params[:user][:phone])
+      render :text => "false"
+    else
+      render :text => "true"
     end
   end
 
