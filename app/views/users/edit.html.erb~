@@ -1,0 +1,113 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'reg', 'uploadify' %>
+  <style type="text/css">
+#upload_photo{margin:0 auto;cursor:pointer;}
+  </style>
+<% end -%>
+<% content_for :tail do -%>
+  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js" %>
+
+<script type="text/javascript" charset="utf-8">
+<%- session_key = Rails.application.config.session_options[:key] -%>
+$(function() {
+
+  $('#upload_photo').click(function(event){
+    event.preventDefault();
+  });
+
+  $('#upload_photo').uploadify({
+    swf : '/uploadify/uploadify.swf',
+    cancelImage : '/uploadify/uploadify-cancel.png',
+    skipDefault : ['onSelect'],
+    buttonText : "上传",
+    multi : false,
+    auto : true,
+    checkExisting : false,
+    transparent : true,
+//    buttonImage : '<%= asset_path "news/reg_upload.jpg" %>',
+    uploader : '<%= user_avatar_path(current_user) %>',
+    onUploadSuccess : function(file, data, response) {
+      var dat = eval('(' + data + ')');
+      $.getScript(dat.upload);
+    },
+    postData : {
+        '_http_accept': 'application/javascript',
+        'format' : 'json',
+        '_method': 'post',
+        '<%= session_key %>' : '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+    },
+    onUploadStart : function(){
+      $("#upload_going").show();
+    },
+    onUploadComplete : function(){
+      $("#upload_going").hide();
+    }
+  });
+});
+</script>
+<% end -%>
+<div class="main">
+  <div class="reset_bg2 pr"></div>
+  <div class="wrapper">
+    <%= form_for current_user, :url => user_path, :remote => true  do |f| %>
+    <% if params[:edit_by].present? %>
+      <%= hidden_field_tag "user[edit_by]", params[:edit_by] %>
+    <% end %>
+    <div class="reg_content ft14">
+      <div class="upload fr tc">
+        <div class="upload_area" id="upload_area">
+          <% if current_user.avatar -%>
+            <%= render(:partial => "avatars/upload", :locals => {:upload => current_user.avatar}) %>
+          <% else -%>
+            <%= image_tag "news/regimg_bg.jpg" %>
+          <% end -%>
+        </div>
+        <a href="#" id="upload_photo"></a>
+        <div><img src="<%= asset_path "indicator.gif" %>" style="display:none;" id="upload_going"></div>
+      </div><!--upload ends-->
+
+      <%= render :partial => "#{current_user.role.role rescue 'user'}" ,:locals => { :f => f } %>
+
+      <div class="clearfix">
+        <div class="reg_list fl">
+          <label for="uesername">邮编：</label>
+          <%= f.text_field :zip_code, :class => "postcode fl" ,:maxlength => "6" %>
+          <span class="reg_tip3 fl">注：邮编必须为数字且只能6位</span>
+        </div><!--reg_list ends-->
+        <div class="reg_list fl">
+          <label for="phone">联系电话：</label>
+          <%= f.text_field :phone, :class => "password fl" %>
+        </div><!--reg_list ends-->
+        <div class="reg_list fl">
+          <label for="uesername">在线联系方式：</label>
+          <img src="<%= asset_path "news/qq_icon.jpg" %>" class="icon fl" />
+          <%= f.text_field :qq, :class => "password fl" %>
+          <img src="<%= asset_path "news/feixin.jpg" %>" class="icon fl" />
+          <%= f.text_field :fetion, :class => "password fl" %>
+          <img src="<%= asset_path "news/msn.jpg" %>" class="icon fl" />
+          <%= f.text_field :msn, :class => "password fl" %>
+        </div><!--reg_list ends-->
+      </div>
+
+      <div class="border_bottom tc ft12">
+        <div class="tc ft16" style="margin-left:-30px;">
+          <!-- <input type="checkbox" name="user[is_imported]" value="1" <%#= 'checked' if current_user.is_imported? %> /> -->
+          <%= f.check_box 'is_imported' %>
+          <span class="fb" style="margin-left:10px;">是否参加了现场见面会</span>
+        </div>
+        <br />
+        <span class="fb">注：</span>完成此步骤可获得更多积分哦！
+      </div><br>
+      <p class="tc">
+        <input type="image" src="<%= asset_path "news/reset_save.jpg" %>" />&nbsp;
+        <%= link_to image_tag(asset_path "news/reg_skip.jpg"), :back %>
+      </p>
+    </div><!--reg_content ends-->
+    <%- end %>
+    <div class="ads">
+      <a href="/gift"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>
+    </div>
+  </div><!--wrapper ends-->
+</div><!--main ends-->

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UsersController < ApplicationController
   def me
     redirect_to user_path(current_user)
@@ -5,6 +6,10 @@ class UsersController < ApplicationController
 
   def edit_me
     redirect_to edit_user_path(current_user)
+  end
+
+  def edit
+    @banners = IBanner.page_name('登录/注册/找回密码').order("position ASC").all
   end
 
   def show
