@@ -23,11 +23,7 @@ $(document).ready ->
 
       tags[tag_index] = tag_id
 
-      parts = window.search_path.split("_")
-      parts[0] = tags.join("-")
-      window.search_path = parts.join("_")
-
-      init_query_tags()
+      reset_search_path(tags)
       return false
 
     $('a.js-del-tag').live 'click', (event) =>
@@ -38,19 +34,31 @@ $(document).ready ->
       tags = path.split("_")[0].split("-")
       tags[tag_index] = 0
 
-      parts = window.search_path.split("_")
-      parts[0] = tags.join("-")
-      window.search_path = parts.join("_")
-
-      init_query_tags()
+      reset_search_path(tags)
       return false
 
+    $('a.js-del-area').live 'click', (event) =>
+      path = window.search_path
+      tags = path.split("_")[0].split("-")
+      tags[tags.length - 1] = 0
+      $("#area_names").val("")
+
+      reset_search_path(tags)
+      return false
+
+window.reset_search_path = (tags) ->
+  parts = window.search_path.split("_")
+  parts[0] = tags.join("-")
+  window.search_path = parts.join("_")
+  init_query_tags()
 
 window.init_query_tags = () ->
   $(".js-query-tags").html('')
   path = window.search_path
   tags = path.split("_")[0].split("-")
-  tags.pop()
+  area_id = tags.pop()
+  area_names = $("#area_names").val()
+
   for tag_index, tag_id of tags
     if tag_id > 0
       tag = $(".js-tag-"+tag_id)[0]
@@ -61,6 +69,14 @@ window.init_query_tags = () ->
       tag_html += '<a href="javascript:void(0)" class="js-del-tag map-srch-del">删除</a>'
       tag_html += '</span>'
       $(".js-query-tags").append(tag_html)
+
+  if parseInt(area_id) > 0 and area_names.length > 0
+      area_html = '<span class="map-srch-s">'
+      area_html += '地区'
+      area_html += ': <i>' + area_names + '</i>'
+      area_html += '<a href="javascript:void(0)" class="js-del-area map-srch-del">删除</a>'
+      area_html += '</span>'
+      $(".js-query-tags").append(area_html)
 
   toggle_search_now_button()
 

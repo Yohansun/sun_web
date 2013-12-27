@@ -134,23 +134,24 @@ function search_sub(){
 }
 
 function submit_area() {
-  var area_id = "";
+  var area_id = 0, area_names = [];
   if ($(".level_1").val() > 0) {
     area_id = $(".level_1").val();
+    area_names.push($(".level_1 option:selected").text())
   };
   if ($(".level_2").val() > 0) {
     area_id = $(".level_2").val();
+    area_names.push($(".level_2 option:selected").text())
   };
   if ($(".level_3").val() > 0) {
     area_id = $(".level_3").val();
+    area_names.push($(".level_3 option:selected").text())
   };
-
-  if(area_id == "" || area_id == null){
-    window.location = "/images"
-  }else{
-    var link = "/images/<%= prefix_link %>-" + area_id + "_0_0_0_0_0"
-    window.location = link
-  }
+  var path = window.search_path;
+  var tags = path.split("_")[0].split("-");
+  tags[tags.length - 1] = area_id;
+  $("#area_names").val(area_names.join(' '));
+  reset_search_path(tags);
 }
 </script>
 <% if params[:return].present? && params[:return].to_i == 1 %>
@@ -242,11 +243,6 @@ function submit_area() {
         <a href="<%= delete_link @pinyin, :pinyin %>" class="map-srch-del">删除</a>
       </span>
       <%- end %>
-      <%- if @area_names.present? %>
-      <span class="map-srch-s">地区: <i><%= @area_names %></i>
-        <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
-      </span>
-      <%- end %>
       <span class="map-srch-s map-srch-reset js-search-now" style="display:none" onclick="javascript:window.location='/images/'+window.search_path;">立即搜索我要的图片</span>
       <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/images/0-0-0-0-0-0-0-0-0-0-0-0-0_0_0_0_0_0';">重新选择</span>
     </p>
@@ -272,6 +268,7 @@ function submit_area() {
               <select id="city" class="level_2">市</select>
               <select id="county" class="level_3" name='area_id'>区</select>
               <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
+              <input type="hidden" value="<%= @area_names %>" id="area_names">
             </span>
           </fieldset>
           <% end %>
@@ -290,6 +287,7 @@ function submit_area() {
       <p class="map-srch-bin">
         您的选择：
         <span class="js-query-tags"></span>
+
         <%- if @color.present? && @color.to_s != "0" %>
         <span class="map-srch-s">查询: <i><%= @color %></i>
           <a href="<%= delete_link @color, :color %>" class="map-srch-del">删除</a>
@@ -298,11 +296,6 @@ function submit_area() {
         <%- if @pinyin.present? && @pinyin.to_s != "0" %>
         <span class="map-srch-s">拼音: <i><%= @pinyin %></i>
           <a href="<%= delete_link @pinyin, :pinyin %>" class="map-srch-del">删除</a>
-        </span>
-        <%- end %>
-        <%- if @area_names.present? %>
-        <span class="map-srch-s">地区: <i><%= @area_names %></i>
-          <a href="<%= delete_link @area, :area %>" class="map-srch-del">删除</a>
         </span>
         <%- end %>
         <span class="map-srch-s map-srch-reset js-search-now" style="display:none" onclick="javascript:window.location='/images/'+window.search_path;">立即搜索我要的图片</span>
