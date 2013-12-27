@@ -293,9 +293,16 @@
         });
 
         //share
-        $('.js-share_btn,.js-share_toggle').hover(function(){
-          $('.js-share_toggle').toggle()
+        $('.js-share_btn').hover(function(){
+          $(this).next('.js-share_toggle').toggle()
         });
+        $('.js-share_toggle').hover(function(){
+          $(this).toggle();
+        })
+        //work list share
+        $('.js-works_share').hover(function(){
+          $(this).parents('li').find('#bdshare').toggle();
+        })
       }($));
     });
   </script>

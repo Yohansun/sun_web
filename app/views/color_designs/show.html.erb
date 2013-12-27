@@ -55,7 +55,16 @@
   <div class="btn_group clearfix mt20 noborder">
     <%= link_to raw("<i class='icon-i16 icon-xin_gray' id='votes_count#{@design.id}'></i>#{@design.votes_count}"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post', class: 'btn2 pull-left' %>
     <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@design.comments.length})"), "" ,class: 'btn2 pull-left' %>
-    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(488)"), "" ,class: 'btn2 pull-left' %>
+    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(488)"), "" ,class: 'btn2 pull-left js-share_btn' %>
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-share_toggle hide">
+      <a class="bds_qzone"></a>
+      <a class="bds_tsina"></a>
+      <a class="bds_tqq"></a>
+      <a class="bds_renren"></a>
+      <a class="bds_t163"></a>
+      <a class="shareCount" href="#" title="累计分享0次">0</a>
+      <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
+    </div>
     <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/color_designs/#{@design.id}/fullscreen" ,class: 'btn2 pull-right' %>
     <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design, color_design_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right"  %>
     <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), "/color_designs/#{@design.id}/download", class: "btn2 pull-right" %>

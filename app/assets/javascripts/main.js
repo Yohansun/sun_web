@@ -717,9 +717,6 @@ $(function(){
    //$(this).siblings('div.popup_zf').toggle();
 
   })
-  $('.zhuanfa').hover(function(){
-    $(this).next('.popup_zf').toggle();
-  });
 
   $('.forward,.trans a').hover(function(){
    //$(this).siblings('div.popup_zf').toggle();

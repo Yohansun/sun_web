@@ -93,14 +93,23 @@
       <ul class="per_works unstyled clearfix mt10">
         <% @designs.in_groups_of(3, false).each do |group| -%>
           <% group.each do |design| -%>
-          <li class="">
+          <li class="pr">
             <a href="/color_designs/<%= design.id %>" class="help-block"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt="" /></a>
             <h5 class="dott1"><%= design.design_name %></h5>
             <p class="dott1 nomargin">
               <%= link_to raw("<span><i class='icon-i16 icon-xin_gray2' id='votes_count#{design.id}'></i>#{design.votes_count}</span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
               <a href="/color_designs/<%= design.id %>#review_focus"><span><i class="icon-i16 icon-comment1"></i><%=design.comments.length %></span></a>
-              <span class="noborder"><i class="icon-i16 icon-share1"></i><%=design.shares_count %></span>
+              <span class="noborder js-works_share"><i class="icon-i16 icon-share1"></i><%=design.shares_count %></span>
             </p>
+            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-works_share hide">
+              <a class="bds_qzone"></a>
+              <a class="bds_tsina"></a>
+              <a class="bds_tqq"></a>
+              <a class="bds_renren"></a>
+              <a class="bds_t163"></a>
+              <a class="shareCount" href="#" title="累计分享0次">0</a>
+              <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
+            </div>
           </li>
           <% end %>
         <% end %>

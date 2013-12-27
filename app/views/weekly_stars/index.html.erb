@@ -1,10 +1,7 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag "imageflow", "style" %>
   <style type="text/css">
-    .popup_zf {
-      bottom: 18px;
-      background: #fff !important;
-    }
+
   </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -73,8 +70,16 @@
         <div class="btn_group clearfix nomargin pr">
           <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i><span class='votes_count#{@link_design.id}'>#{@link_design.try(:votes_count)}</span>"), votes_path(:voteable_id => @link_design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: 'btn2 pull-left', title: '' %>
           <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@link_design.try(:comments).try(:length)})"), "/weekly_stars/#{@design.id}#comments" ,class: 'btn2 pull-left', title: '', target: '_blank' %>
-          <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@link_design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left zhuanfa', title: '' %>
-          <%= forward_links("#iColor分享#{@link_design.user.display_name}的作品【#{@design.design_name}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
+          <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@link_design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left js-share_btn', title: '' %>
+          <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-share_toggle hide">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_t163"></a>
+            <a class="shareCount" href="#" title="累计分享0次">0</a>
+            <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
+          </div>
           <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/weekly_stars/#{@design.id}/fullscreen" ,class: 'btn2 pull-right', title: '' %>
           <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
           <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right", title: '' %>
@@ -142,7 +147,7 @@
           <% @elder_designs.in_groups_of(3, false).each do |group| -%>
             <% group.each do |design| -%>
               <% link_design = Design.find(design.design_link.split("/").last) unless design.design_link.blank? %>
-              <li class="">
+              <li class="pr">
                 <a href="/weekly_stars/<%= design.id %>" class="help-block pr" target="_blank">
                   <img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/>
                   <%=
@@ -176,9 +181,17 @@
                   <a href="/weekly_stars/<%= design.id%>#comments" target="_blank">
                     <span><i class="icon-i16 icon-comment1"></i><%= link_design.try(:comments).try(:length) || 0 %></span>
                   </a>
-                  <span class="noborder"><i class="icon-i16 icon-share1"></i><%= link_design.try(:shares_count) || 0%></span>
+                  <span class="noborder js-works_share"><i class="icon-i16 icon-share1"></i><%= link_design.try(:shares_count) || 0%></span>
                 </p>
-                <%= forward_links("#iColor分享#{link_design.user.display_name}的作品【#{link_design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, design.main_preview_img.url, design.id.to_s, "WeeklyStar") %>
+                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-works_share hide">
+                  <a class="bds_qzone"></a>
+                  <a class="bds_tsina"></a>
+                  <a class="bds_tqq"></a>
+                  <a class="bds_renren"></a>
+                  <a class="bds_t163"></a>
+                  <a class="shareCount" href="#" title="累计分享0次">0</a>
+                  <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
+                </div>
               </li>
             <% end -%>
           <% end -%>
