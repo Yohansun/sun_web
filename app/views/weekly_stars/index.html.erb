@@ -51,9 +51,7 @@
          weekly_stars_month_color_weekly_stars_path  => "月度色彩之星",
          weekly_stars_month_design_weekly_stars_path => "月度设计之星"}.each do |pat,type|
       %>
-        <button class="<%= request.fullpath == pat ? 'btn active' : 'btn'%>">
-          <%= link_to type, pat %>
-        </button>
+      <%= link_to type, pat, :class => "#{request.fullpath == pat ? 'btn active' : 'btn'}" %>
       <%-end%>
     </form>
     <h3 class="title nomargin"><%= @design.design_name %></h3>

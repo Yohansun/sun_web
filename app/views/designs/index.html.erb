@@ -104,12 +104,8 @@
         <%= link_to_function "", "show_login()", class: 'pull-right designs_upload_btn' %>
       <% end -%>
       <div class="btn-group">
-        <button class="btn" >
-          <a href="<%= design_search_link %>&order=最新" class="<%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
-        </button>
-        <button class="btn">
-          <a href="<%= design_search_link %>&order=最热" class="<%= 'active' if params[:order] == '最热' %>">最热</a>
-        </button>
+        <a href="<%= design_search_link %>&order=最新" class="btn <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
+        <a href="<%= design_search_link %>&order=最热" class="btn <%= 'active' if params[:order] == '最热' %>">最热</a>
       </div>
       <a href="<%= design_search_link %>&order=因爱之名" class="designs_search_btn"></a>
     </div>

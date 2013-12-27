@@ -84,12 +84,8 @@
     </div>
     <div class="mt20">
       <div class="btn-group">
-        <button class="btn" >
-          <%= link_to "最新",color_designs_path(order: '最新'), class: "#{'active' if params[:order] == '最新' || params[:order].nil? }" %>
-        </button>
-        <button class="btn">
-          <%= link_to "最热",color_designs_path(order: '最热'), class: "#{'active' if params[:order] == '最热' }" %>
-        </button>
+        <%= link_to "最新",color_designs_path(order: '最新'), class: "btn #{'active' if params[:order] == '最新' || params[:order].nil? }" %>
+        <%= link_to "最热",color_designs_path(order: '最热'), class: "btn #{'active' if params[:order] == '最热' }" %>
       </div>
     </div>
     <div class="index_main mt10">

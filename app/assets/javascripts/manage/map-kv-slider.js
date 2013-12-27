@@ -1,6 +1,6 @@
 // map-kv-slider.js
 
-jQuery(function($){return false
+jQuery(function($){
 	var bin = $('.map-kv-slider'),
 		ul = bin.find('ul'),
 		li = ul.find('li'),
@@ -15,7 +15,7 @@ jQuery(function($){return false
 	$('.map-prev,.map-prev-bullet').click(function(){
 		if(pager <= pages){
 			ul.stop(true).animate({'top': '-=' + h});
-			pager ++;	
+			pager ++;
 		} else {
 			ul.stop(true).css('top',0).animate({'top': '-=' + h});
 			pager = 2;
@@ -26,7 +26,7 @@ jQuery(function($){return false
 	$('.map-next,.map-next-bullet').click(function(){
 		if(pager > 1){
 			ul.stop(true).animate({'top': '+=' + h});
-			pager --;	
+			pager --;
 		} else {
 			ul.stop(true).css('top',- pages * h).animate({'top': '+=' + h});
 			pager = pages;
