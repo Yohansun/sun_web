@@ -60,6 +60,7 @@ class WeeklyStarsController < ApplicationController
 		define_method(act) do
 			#TODO
 			star_type_id = WeeklyStar.get_star_type_id(star_type)
+      @banners = IBanner.page_name('设计之星').order("position ASC").all
 			#每周之星
 			@design = WeeklyStar.order("published_at desc").find_by_star_type_id(star_type_id)
 			design_id = @design.design_link.split("/").last
@@ -100,8 +101,10 @@ class WeeklyStarsController < ApplicationController
   end
 
   def get_data
+    #大师访谈
     @master_interviews = IColumnData.show_data(6).limit(5)
     @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    #相关资讯
     @about_info = IColumnData.show_data(7).limit(5)
     @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
   end

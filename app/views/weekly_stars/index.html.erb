@@ -1,10 +1,11 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag "imageflow" %>
-    <style type="text/css">
-      #gallery_caption {
-        display: none;
-      }
-    </style>
+  <%= stylesheet_link_tag "imageflow", "style" %>
+  <style type="text/css">
+    .popup_zf {
+      bottom: 18px;
+      background: #fff !important;
+    }
+  </style>
 <% end -%>
 <%- content_for :tail do %>
   <%= javascript_include_tag "new_imageflow" %>
@@ -23,7 +24,7 @@
       opacity:            true,          /* Toggle image opacity */
       opacityArray:       [10,7],         /* Image opacity (range: 0 to 10) first value is for the focussed image */
       percentLandscape:   300,           /* Scale landscape format */
-      onClick:            function() { }
+      onClick:            function() { window.open('/weekly_stars/<%= @design.id%>')}
     });
   });
   </script>
@@ -71,19 +72,20 @@
     </div>
     <div class="weekly_info clearfix mt10">
       <div class="pull-left main">
-        <div class="btn_group clearfix nomargin">
-          <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i>#{@link_design.try(:votes_count)}"), "", class: 'btn2 pull-left' %>
-          <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@link_design.try(:comments).try(:length)})"), @design.try(:design_link) ,class: 'btn2 pull-left' %>
-          <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@link_design.try(:shares_count) || 0})"), "" ,class: 'btn2 pull-left' %>
-          <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/weekly_stars/#{@design.id}/fullscreen" ,class: 'btn2 pull-right' %>
-          <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right"  %>
-          <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right" %>
+        <div class="btn_group clearfix nomargin pr">
+          <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i><span class='votes_count#{@link_design.id}'>#{@link_design.try(:votes_count)}</span>"), votes_path(:voteable_id => @link_design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: 'btn2 pull-left', title: '' %>
+          <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@link_design.try(:comments).try(:length)})"), "/weekly_stars/#{@design.id}#comments" ,class: 'btn2 pull-left', title: '', target: '_blank' %>
+          <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@link_design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left zhuanfa', title: '' %>
+          <%= forward_links("#iColor分享#{@link_design.user.display_name}的作品【#{@design.design_name}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
+          <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/weekly_stars/#{@design.id}/fullscreen" ,class: 'btn2 pull-right', title: '' %>
+          <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
+          <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right", title: '' %>
         </div>
         <div class="colors_box clearfix nomargin pt15" id="colors_con">
           <div class="pull-left">
             <img src="<%= asset_path 'imgbase_in/color.jpg' %>">
           </div>
-          <ul class="pull-left unstyled">
+          <ul class="pull-left group unstyled">
             <li>
               <div class="colorblock" style="background-color:#7b6d66"></div>
               <h6 class="colortitle">墙面推荐色</h6>
@@ -143,7 +145,7 @@
             <% group.each do |design| -%>
               <% link_design = Design.find(design.design_link.split("/").last) unless design.design_link.blank? %>
               <li class="">
-                <a href="/weekly_stars/<%= design.id %>" class="help-block pr">
+                <a href="/weekly_stars/<%= design.id %>" class="help-block pr" target="_blank">
                   <img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/>
                   <%=
                     case design.star_type_id
@@ -155,36 +157,43 @@
                   %>
                 </a>
                 <div class="thumb_imgs clearfix">
-                  <a href="weekly_stars_in.html" class="pull-left thumb_item">
-                    <img width="65" height="65" src="images/per_home_huaxun/per_work.jpg" alt="" />
-                  </a>
-                  <a href="weekly_stars_in.html" class="pull-left thumb_item">
-                    <img width="65" height="65" src="images/per_home_huaxun/per_work.jpg" alt="" />
-                  </a>
-                  <a href="weekly_stars_in.html" class="pull-left thumb_item">
-                    <img width="65" height="65" src="images/per_home_huaxun/per_work.jpg" alt="" />
-                  </a>
+                  <%- if link_design %>
+                    <%- link_design.design_images.sample(3).each do |design_image| %>
+                      <a href="/weekly_stars/<%= design.id %>" target="_blank" class="pull-left thumb_item">
+                        <%= image_tag design_image.try(:file).try(:url, :thumb), size: '65x65' %>
+                      </a>
+                    <%- end %>
+                  <%- end %>
                 </div>
                 <h5 title="<%= design.design_name %>" class="dott1">
                   <%= truncate(design.design_name, :length => 16) %>
                 </h5>
                 <p class="para_oneline">
-                  <small class="pull-right muted">201306-1</small><%= design.author %>
+                  <small class="pull-right muted"><%= design.updated_at.to_date %></small>
+                  <%= truncate(design.author, :length => 8) %>
                 </p>
-                <p class="dott1 nomargin">
-                  <span><i class="icon-i16 icon-xin_gray2"></i><%= link_design.try(:votes_count) || 0 %></span>
-                  <a href="<%= design.try(:design_link) %>" target="_blank">
+                <p class="dott1 nomargin pr">
+                  <%= link_to raw("<span><i class='icon-i16 icon-xin_gray2'></i><em class='votes_count#{link_design.id}'>#{link_design.votes_count}</em></span>"), votes_path(:voteable_id => link_design.id, :voteable_type => "Design"), :remote => true, :method => 'post', title: '' %>
+
+                  <a href="/weekly_stars/<%= design.id%>#comments" target="_blank">
                     <span><i class="icon-i16 icon-comment1"></i><%= link_design.try(:comments).try(:length) || 0 %></span>
                   </a>
                   <span class="noborder"><i class="icon-i16 icon-share1"></i><%= link_design.try(:shares_count) || 0%></span>
                 </p>
+                <%= forward_links("#iColor分享#{link_design.user.display_name}的作品【#{link_design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, design.main_preview_img.url, design.id.to_s, "WeeklyStar") %>
               </li>
             <% end -%>
           <% end -%>
         <% end -%>
       </ul>
-      <form class="pager pager-form">
-        <%= paginate @elder_designs, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
+      <form class="pager pager-form noborder">
+        <%= paginate @elder_designs %>
+        &nbsp;&nbsp;
+        <% if @elder_designs.total_pages > 1 %>
+          共<%=@elder_designs.total_pages %>页
+          跳到第<input type="text" name="page" value="<%= params[:page] if params[:page]%>" />页
+          <input type="submit" value="GO" class="pager-submit">
+        <% end %>
       </form>
     </div>
   </div>

@@ -29,9 +29,16 @@
 
 <div class="index_main noborder designs_in_slide nopadding">
   <div class="slider_topbar">
-    <a href="<%= "/color_designs/#{@design_next}" %>" class="a_hover_red slider_btns pull-right">下一套作品<i class="icon-slider_next icon-i30"></i></a>
-    <a href="<%= "/color_designs/#{@design_prev}" %>" class="a_hover_red slider_btns pull-left"><i class="icon-slider_prev icon-i30"></i>上一套作品</a>
-    <h3 class="title text-center nomargin"><%= @design.title %></h3>
+    <%- if @next_design.present? %>
+      <a href="<%= user_design_path(@design.user_id, @next_design) %>" class="a_hover_red slider_btns pull-right">
+        下一期作品<i class="icon-slider_next icon-i30"></i>
+      </a>
+    <%- end %>
+    <%- if @prev_design.present? %>
+      <a href="<%= user_design_path(@design.user_id, @prev_design) %>" class="a_hover_red slider_btns pull-left">
+        <i class="icon-slider_prev icon-i30"></i>上一期作品
+      </a>
+    <%- end %>
   </div>
   <div class="mt20">
     <div class="slides_box clearfix">
@@ -59,12 +66,12 @@
     </div>
   </div>
   <div class="btn_group clearfix mt20 noborder">
-    <%= link_to raw("<i class='icon-i16 icon-xin_gray' id='votes_count#{@design.id}'></i>#{@design.votes_count}"), votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: 'btn2 pull-left' %>
-    <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@design.comments_count})"), "" ,class: 'btn2 pull-left' %>
-    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(488)"), "" ,class: 'btn2 pull-left' %>
-    <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), fullscreen_user_design_path(@design.user_id, @design, :img => 'imgs') ,class: 'btn2 pull-right' %>
-    <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(designs_id: @design.id,user_id: @design.user_id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right"  %>
-    <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_user_design_path(@design.user_id, @design), class: "btn2 pull-right" %>
+    <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i><span class='votes_count#{@design.id}'>#{@design.try(:votes_count)}</span>"), votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: 'btn2 pull-left', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@design.comments_count})"), "#comments" ,class: 'btn2 pull-left', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@_design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left zhuanfa', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), fullscreen_user_design_path(@design.user_id, @design, :img => 'imgs') ,class: 'btn2 pull-right', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(designs_id: @design.id,user_id: @design.user_id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
+    <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_user_design_path(@design.user_id, @design), class: "btn2 pull-right", title: '' %>
   </div>
 </div>
 <div class="clearfix mt10">
@@ -94,7 +101,6 @@
       <p class="work_info" style="height:72px;overflow:hidden;">设计说明：<%= @design.try(:content) %></p>
     </div>
     <div class="work_tags">
-      <a href="#" class="pull-right">更多 ></a>
       <span class="">标签：</span>
       <a href="#">公寓</a>
       <a href="#">复式</a>
@@ -124,7 +130,7 @@
       </script>
       <!-- Baidu Button END -->
     </div>
-
+    <a name="comments"></a>
     <div class="work_comments nomargin">
     <%= form_for(Comment.new, :html => {:class => "comment_form exp-holder"}) do |f| %>
         <h5>评论<span class="text-error">（<%= @design.comments.length %>）</span></h5>
@@ -145,89 +151,58 @@
         </ul>
       <%- end %><!-- bottom_mood end -->
       <ul class="mood_list unstyled nomargin js-list_parent">
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="images/imgbase_in/user50x50_2.jpg"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">2F</strong>
-                <strong>麦唛小</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p class="J_resulte">[哈哈]啥时候才能有这样的家啊~~~~~</p>
-            </div>
-          </div>
-          <div class="clearfix"><a class="pull-right js-review_btn" href="javascript:;">回复</a></div>
-          <form class="comment_form exp-holder nomargin hide js-review">
-            <textarea id="" class=""></textarea>
-            <ul class="moodbtn_group unstyled clearfix">
-              <li class="pull-right noborder nopadding">
-                <span class="muted">
-                  还可以输入
-                  <span class="text-important">1000</span>
-                  个字符
-                </span>
-                <button class="channel_btn noborder"><small>确认回复</small></button>
-                <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
-              </li>
-              <li class="pull-left exp-block-trigger noborder nopadding" id="">
-                <i class="icon-mood icon-face"></i>
-                添加表情
-              </li>
-            </ul>
-          </form><!-- bottom_mood end -->
-        </li>
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="images/imgbase_in/user50x50_1.jpg"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">1F</strong>
-                <strong>Jane</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p>嫁给我你立马就有了~哈哈哈哈</p>
-              <div class="re_comments">
-                <i class="icon-i16 icon-toparrow"></i>
+        <%- @comments.each_with_index do |c,i| %>
+          <li>
+            <div class="clearfix">
+              <div class="pull-left comment_photo">
+                <%- if c.user.try(:avatar) -%>
+                  <%= image_tag(c.user.avatar.file(:icon), :size =>"50x50")%>
+                <%- else -%>
+                  <%= image_tag "news/regimg_bg.jpg", size: '50x50' %>
+                <%- end -%>
+              </div>
+              <div class="comment_text">
                 <p>
-                  <strong>麦唛小</strong>
-                  <span class="muted">说</span>
+                  <strong class="pull-right comment_floor"><%= @comments.size - i %>F</strong>
+                  <strong><%= c.user ? c.user.display_name : "匿名" %></strong>
+                  <span class="comment_date"><%= c.created_at.to_date %></span>
                 </p>
-                <p class="muted J_resulte">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+                <p class="J_resulte"><%= c.content %></p>
+                <%- c.reply_msgs.order("created_at DESC").each do |r| %>
+                  <div class="re_comments">
+                    <i class="icon-i16 icon-toparrow"></i>
+                    <p>
+                      <strong><%= r.user.display_name %></strong>
+                      <span class="muted">说</span>
+                      <p><%= r.content %></p>
+                    </p>
+                    <p class="muted"><%= r.created_at.to_date %></p>
+                  </div>
+                <%- end %>
               </div>
             </div>
-          </div>
-          <div class="clearfix"><a class="pull-right js-review_btn" href="javascript:;">回复</a></div>
-          <form class="comment_form exp-holder nomargin hide js-review">
-            <textarea id="" class=""></textarea>
-            <ul class="moodbtn_group unstyled clearfix">
-              <li class="pull-right noborder nopadding">
-                <span class="muted">
-                  还可以输入
-                  <span class="text-important">1000</span>
-                  个字符
-                </span>
-                <button class="channel_btn noborder"><small>确认回复</small></button>
-                <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
-              </li>
-              <li class="pull-left exp-block-trigger noborder nopadding" id="">
-                <i class="icon-mood icon-face"></i>
-                添加表情
-              </li>
-            </ul>
-          </form><!-- bottom_mood end -->
-        </li>
+            <div class="clearfix" style="margin-bottom:-10px;*margin-bottom:0;">
+              <%- if current_user %>
+                <a class="pull-right js-recomment" href="javascript:;">回复</a>
+              <%- end %>
+            </div>
+            <%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
+              <%= f.hidden_field :show_id, value: params[:id] %>
+              <%= f.hidden_field :comment_id, value: c.id %>
+              <%= f.hidden_field :reply_type, value: "design_images" %>
+              <%= f.text_area :content, class: 're_comments' %>
+              <div>
+                <button class="btn btn-small">提交</button>
+                <a href="#" class="btn btn-small js-close">取消</a>
+              </div>
+            <%- end %>
+          </li>
+        <%- end %>
       </ul>
       <div class="pager">
-        <!-- <a href="#" class=""></a> -->
-        <a class="current" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">...</a>
-        <a href="#">20</a>
-        <a href="#" class="">下一页</a>
-        <a href="#" class="">最后一页</a>
+        <%- unless @comments.nil? %>
+          <%= paginate @comments %>
+        <%- end %>
       </div>
     </div>
   </div>

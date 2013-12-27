@@ -1,3 +1,12 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag "style" %>
+  <style type="text/css">
+    .popup_zf {
+      bottom: 18px;
+      background: #fff !important;
+    }
+  </style>
+<% end -%>
 <%- content_for :tail do %>
   <%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
@@ -8,7 +17,16 @@
       $('.js-slider-prev').click(function(){
         $('.slides_box').find('.map-prev').click()
       });
-    })
+      // 评论JS
+      $('.js-recomment').click(function(){
+        $(this).parents('li').siblings().find('.r_comment_form').hide();
+        $(this).parents('li').find('.r_comment_form').show();
+      });
+      $('.js-close').click(function(e){
+        e.preventDefault();
+        $(this).parents('.r_comment_form').hide();
+      });
+    });
   </script>
 <%- end %>
 <h3 class="chann_caption nomargin">
@@ -29,8 +47,12 @@
 
 <div class="index_main noborder designs_in_slide nopadding">
   <div class="slider_topbar">
-    <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="a_hover_red slider_btns pull-right">下一期作品<i class="icon-slider_next icon-i30"></i></a>
-    <%- unless @design == WeeklyStar.order("published_at desc").last %>
+    <%- if @next_star.present? %>
+      <a href="/weekly_stars/<%= @next_star.try(:id) %>" class="a_hover_red slider_btns pull-right">
+        下一期作品<i class="icon-slider_next icon-i30"></i>
+      </a>
+    <%- end %>
+    <%- if @prev_star.present? %>
       <a href="/weekly_stars/<%= @prev_star.try(:id) %>" class="a_hover_red slider_btns pull-left">
         <i class="icon-slider_prev icon-i30"></i>上一期作品
       </a>
@@ -70,20 +92,21 @@
       </div>
     </div>
   </div>
-  <div class="btn_group clearfix mt20 noborder">
-    <a href="#" class="btn2 pull-left"><i class="icon-i16 icon-xin_gray"></i>8799</a>
-    <a href="#" class="btn2 pull-left"><i class="icon-i16 icon-comment1"></i>评论(14)</a>
-    <a href="#" class="btn2 pull-left"><i class="icon-i16 icon-share1"></i>转发(488)</a>
-    <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-fullscreen"></i>全屏</a>
-    <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-collect"></i>收藏</a>
-    <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
+  <div class="btn_group clearfix mt20 noborder pr">
+    <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i><span class='votes_count#{@link_design.id}'>#{@link_design.try(:votes_count)}</span>"), votes_path(:voteable_id => @link_design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: 'btn2 pull-left', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@link_design.try(:comments).try(:length)})"), "/weekly_stars/#{@design.id}#comments" ,class: 'btn2 pull-left', title: '', target: '_blank' %>
+    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@link_design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left zhuanfa', title: '' %>
+    <%= forward_links("#iColor分享#{@link_design.user.display_name}的作品【#{@design.design_name}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", weekly_stars_url, @design.main_preview_img.url, @design.id.to_s, "WeeklyStar") %>
+    <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/weekly_stars/#{@design.id}/fullscreen" ,class: 'btn2 pull-right', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
+    <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right", title: '' %>
   </div>
 </div>
 
 <div class="clearfix mt10">
   <div class="index_main designs_in_left pull-left">
     <div class="colors_box clearfix nomargin pt15">
-      <div class="pull-left"><img src="images/imgbase_in/color.jpg"></div>
+      <div class="pull-left"><img src="<%= asset_path 'imgbase_in/color.jpg' %>"></div>
       <ul class="pull-left unstyled">
         <li>
           <div class="colorblock" style="background-color:#7b6d66"></div>
@@ -106,14 +129,15 @@
     </div>
     <div class="work_infos linet1">
       <p class="work_info">
-        <span>公司名称：今朝装饰</span>
-        <span>设计师  ：李启胜 <a href="#" class="btn_ask"></a></span>
-        <span>设计风格：欧美流行系</span>
+        <span>公司名称：<%= @design.company_name %></span>
+        <span>设计师  ：<%= @design.author %>
+          <a href="<%= user_asks_path(@link_design.user.id) %>" class="btn_ask" target="_blank"></a>
+        </span>
+        <span>设计风格：<%= @design.design_style %></span>
       </p>
-      <p class="work_info" style="height:72px;overflow:hidden;">设计说明：用艳丽的色彩打造小资生活</p>
+      <p class="work_info" style="height:72px;overflow:hidden;">设计说明：<%= @design.design_intro %></p>
     </div>
     <div class="work_tags">
-      <a href="#" class="pull-right">更多 ></a>
       <span class="">标签：</span>
       <a href="#">公寓</a>
       <a href="#">复式</a>
@@ -143,15 +167,17 @@
       </script>
       <!-- Baidu Button END -->
     </div>
-
+    <a name="comments"></a>
     <div class="work_comments nomargin">
-      <form class="comment_form exp-holder">
-        <h5>评论<span class="text-error">（2）</span></h5>
-        <textarea id="" class="J_resulte js-text_rest" placeholder="" data-max="1000"></textarea>
+      <%= form_for(Comment.new, :html => {:class => "comment_form exp-holder"}) do |f| %>
+        <%= f.hidden_field :commentable_id, value: @link_design.id %>
+        <%= f.hidden_field :commentable_type, value: 'Design' %>
+        <h5>评论<span class="text-error">（<%= @link_design.comments.length %>）</span></h5>
+        <%= f.text_area :content, :class => "J_resulte js-text_rest", placeholder: '最多输入100个字', :'data-max' => 1000 %>
         <ul class="moodbtn_group unstyled clearfix">
           <li class="pull-right btn_send">
             <span class="muted">
-              还可以输入
+              最多可以输入
               <span class="text-important js-text_rest_show">1000</span>
               个字符
             </span>
@@ -162,156 +188,91 @@
             添加表情
           </li>
         </ul>
-      </form><!-- bottom_mood end -->
+      <% end %><!-- bottom_mood end -->
       <ul class="mood_list unstyled nomargin js-list_parent">
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="images/imgbase_in/user50x50_2.jpg"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">2F</strong>
-                <strong>麦唛小</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p class="J_resulte">[哈哈]啥时候才能有这样的家啊~~~~~</p>
-            </div>
-          </div>
-          <div class="clearfix"><a class="pull-right js-review_btn" href="javascript:;">回复</a></div>
-          <form class="comment_form exp-holder nomargin hide js-review">
-            <textarea id="" class=""></textarea>
-            <ul class="moodbtn_group unstyled clearfix">
-              <li class="pull-right noborder nopadding">
-                <span class="muted">
-                  还可以输入
-                  <span class="text-important">1000</span>
-                  个字符
-                </span>
-                <button class="channel_btn noborder"><small>确认回复</small></button>
-                <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
-              </li>
-              <li class="pull-left exp-block-trigger noborder nopadding" id="">
-                <i class="icon-mood icon-face"></i>
-                添加表情
-              </li>
-            </ul>
-          </form><!-- bottom_mood end -->
-        </li>
-        <li>
-          <div class="clearfix">
-            <div class="pull-left comment_photo"><img src="images/imgbase_in/user50x50_1.jpg"></div>
-            <div class="comment_text">
-              <p>
-                <strong class="pull-right comment_floor">1F</strong>
-                <strong>Jane</strong>
-                <span class="comment_date">2012-11-13</span>
-              </p>
-              <p>嫁给我你立马就有了~哈哈哈哈</p>
-              <div class="re_comments">
-                <i class="icon-i16 icon-toparrow"></i>
+        <%- @comments.each_with_index do |c,i| %>
+          <li>
+            <div class="clearfix">
+              <div class="pull-left comment_photo">
+                <%- if c.user.try(:avatar) -%>
+                  <%= image_tag(c.user.avatar.file(:icon), :size =>"50x50")%>
+                <%- else -%>
+                  <%= image_tag "news/regimg_bg.jpg", size: '50x50' %>
+                <%- end -%>
+              </div>
+              <div class="comment_text">
                 <p>
-                  <strong>麦唛小</strong>
-                  <span class="muted">说</span>
+                  <strong class="pull-right comment_floor"><%= @comments.size - i %>F</strong>
+                  <strong><%= c.user ? c.user.display_name : "匿名" %></strong>
+                  <span class="comment_date"><%= c.created_at.to_date %></span>
                 </p>
-                <p class="muted J_resulte">[哈哈]啥时候才能有这样的家啊~~~~~</p>
+                <p class="J_resulte"><%= c.content %></p>
+                <%- c.reply_msgs.order("created_at DESC").each do |r| %>
+                  <div class="re_comments">
+                    <i class="icon-i16 icon-toparrow"></i>
+                    <p>
+                      <strong><%= r.user.display_name %></strong>
+                      <span class="muted">说</span>
+                      <p><%= r.content %></p>
+                    </p>
+                    <p class="muted"><%= r.created_at.to_date %></p>
+                  </div>
+                <%- end %>
               </div>
             </div>
-          </div>
-          <div class="clearfix"><a class="pull-right js-review_btn" href="javascript:;">回复</a></div>
-          <form class="comment_form exp-holder nomargin hide js-review">
-            <textarea id="" class=""></textarea>
-            <ul class="moodbtn_group unstyled clearfix">
-              <li class="pull-right noborder nopadding">
-                <span class="muted">
-                  还可以输入
-                  <span class="text-important">1000</span>
-                  个字符
-                </span>
-                <button class="channel_btn noborder"><small>确认回复</small></button>
-                <a href="javascript:;" class="channel_btn_gray js-review_cannel"><small>取消回复</small></a>
-              </li>
-              <li class="pull-left exp-block-trigger noborder nopadding" id="">
-                <i class="icon-mood icon-face"></i>
-                添加表情
-              </li>
-            </ul>
-          </form><!-- bottom_mood end -->
-        </li>
+            <div class="clearfix" style="margin-bottom:-10px;*margin-bottom:0;">
+              <%- if current_user %>
+                <a class="pull-right js-recomment" href="javascript:;">回复</a>
+              <%- end %>
+            </div>
+            <%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
+              <%= f.hidden_field :show_id, value: params[:id] %>
+              <%= f.hidden_field :comment_id, value: c.id %>
+              <%= f.hidden_field :reply_type, value: "design_images" %>
+              <%= f.text_area :content, class: 're_comments' %>
+              <div>
+                <button class="btn btn-small">提交</button>
+                <a href="#" class="btn btn-small js-close">取消</a>
+              </div>
+            <%- end %>
+          </li>
+        <%- end %>
       </ul>
       <div class="pager">
-        <!-- <a href="#" class=""></a> -->
-        <a class="current" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">...</a>
-        <a href="#">20</a>
-        <a href="#" class="">下一页</a>
-        <a href="#" class="">最后一页</a>
+        <%- unless @comments.nil? %>
+          <%= paginate @comments %>
+        <%- end %>
       </div>
     </div>
   </div>
   <div class="pull-right smaller">
+    <%- colum_datas1 = IColumnData.show_data(1).limit(5) %>
     <ul class="unstyled map-right index_main js-img_show">
       <li class="clearfix refresh_r_tit">
-        <a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 1).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
         <strong class="pull-left">最新大师作品</strong>
       </li>
-      <li class="map-r1 active dott1">
-        <i class="icon-i16 icon-1">1</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      <% colum_datas1.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
       </li>
-      <li class="map-r2">
-        <i class="icon-i16 icon-2">2</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
-      <li class="map-r3">
-        <i class="icon-i16 icon-3">3</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
-      <li class="map-r4">
-        <i class="icon-i16 icon-4">4</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
-      <li class="map-r5">
-        <i class="icon-i16 icon-5">5</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
+      <% end -%>
     </ul>
+    <%- colum_datas2 = IColumnData.show_data(4).limit(5) %>
     <ul class="unstyled map-right index_main mt10 js-img_show">
       <li class="clearfix refresh_r_tit">
-        <a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 4).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
         <strong class="pull-left">装修效果图精华推荐</strong>
       </li>
-      <li class="map-r1 active dott1">
-        <i class="icon-i16 icon-1">1</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
+      <% colum_datas2.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
       </li>
-      <li class="map-r2">
-        <i class="icon-i16 icon-2">2</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
-      <li class="map-r3">
-        <i class="icon-i16 icon-3">3</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
-      <li class="map-r4">
-        <i class="icon-i16 icon-4">4</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
-      <li class="map-r5">
-        <i class="icon-i16 icon-5">5</i>
-        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
-        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt="" /></a>
-      </li>
+      <% end -%>
     </ul>
     <div class="mt10">
       <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
@@ -321,23 +282,23 @@
 
 <div class="index_main refresh_news mt10 clearfix">
   <div class="refresh_new pull-left">
-    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+    <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
     <ul class="ul_dot">
-      <li><a href="#" target="_blank">卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
-      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
-      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
-      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
-      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+      <%- @master_interviews.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
     </ul>
   </div>
   <div class="refresh_new pull-left">
-    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+    <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
     <ul class="ul_dot">
-      <li><a href="#" target="_blank">空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
-      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
-      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
-      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
-      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+      <%- @about_info.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
     </ul>
   </div>
   <div class="pull-right">

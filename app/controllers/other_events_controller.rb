@@ -7,7 +7,7 @@ class OtherEventsController < ApplicationController
     @event_kv = EventKv.includes(:kv_maps).page_name(controller_name).try(:first)
     @banners = IBanner.page_name('其它活动').order("position ASC").all
     @recent_events = DesignerEvent.page_name(controller_name).recent_events
-    @finished_events = DesignerEvent.page_name(controller_name).finished_events.page(params[:page]).per(10)
+    @finished_events = DesignerEvent.page_name(controller_name).finished_events.page(params[:page]).per(5)
   end
 
   def show

@@ -53,8 +53,8 @@ class DesignsController < ApplicationController
       end
       style = "%#{params[:style]}%"
       design_color = "%#{params[:design_color]}%"
-      @designs = @designs.where("style like ?", style) if params[:style] && !params[:style].blank? && params[:style] !='风格'
-      @designs = @designs.where("design_color like ?", design_color) if params[:design_color] && !params[:design_color].blank? && params[:design_color] !='色系'
+      @designs = @designs.where("style like ?", style) if params[:style] && !params[:style].blank?
+      @designs = @designs.where("design_color like ?", design_color) if params[:design_color] && !params[:design_color].blank? && params[:design_color]
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       if params[:area_id] && !params[:area_id].blank?
         @designs = @designs.where(:area_id => params[:area_id])
@@ -62,6 +62,8 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
+      @area_head_name = Area.find(params[:area_head]).name if params[:area_head].present?
+      @area_id_name = Area.find(params[:area_id]).name if params[:area_id].present?
       @designs = @designs.page(params[:page]).per(15)
     end
 
@@ -86,6 +88,8 @@ class DesignsController < ApplicationController
 
   def show
     @design = Design.find(params[:id])
+    @prev_design = Design.where("id < ?", @design.id).order("id desc").first
+    @next_design = Design.where("id > ?", @design.id).order("id desc").last
     @comments = @design.comments.page params[:page]
     if params[:image_id]
       @image = DesignImage.find(params[:image_id])
