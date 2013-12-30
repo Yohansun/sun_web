@@ -79,7 +79,11 @@
       <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
     </div>
     <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), fullscreen_user_design_path(@design.user_id, @design, :img => 'imgs') ,class: 'btn2 pull-right', title: '' %>
-    <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(designs_id: @design.id,user_id: @design.user_id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
+    <%- if current_user %>
+      <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(designs_id: @design.id,user_id: @design.user_id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
+    <%- else %>
+      <a href="/users/sign_in" class="btn2 pull-right"><i class='icon-i16 icon-collect'></i>收藏</a>
+    <%- end %>
     <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_user_design_path(@design.user_id, @design), class: "btn2 pull-right", title: '' %>
   </div>
 </div>
@@ -198,7 +202,7 @@
             <%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
               <%= f.hidden_field :show_id, value: params[:id] %>
               <%= f.hidden_field :comment_id, value: c.id %>
-              <%= f.hidden_field :reply_type, value: "design_images" %>
+              <%= f.hidden_field :reply_type, value: "designs" %>
               <%= f.text_area :content, class: 're_comments' %>
               <div>
                 <button class="btn btn-small">提交</button>

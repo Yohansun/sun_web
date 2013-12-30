@@ -23,60 +23,46 @@
       <form action="#" method="" class="map-list-search nomargin">
         <p class="map-srch-bin">
           您的选择：
-          <span class="map-srch-s">小户型<a href="javascript:;" class="map-srch-del">delete</a></span>
-          <span class="map-srch-s">飘窗设计<a href="javascript:;" class="map-srch-del">delete</a></span>
-          <span class="map-srch-s">儿童房<a href="javascript:;" class="map-srch-del">delete</a></span>
-          <span class="map-srch-s">70-90平米<a href="javascript:;" class="map-srch-del">delete</a></span>
-          <span class="map-srch-s map-srch-reset">重新选择</span>
+          <% if params[:style].present? %>
+            <span class="map-srch-s"><%= params[:style] %><a href="<%= color_design_search_link %>&style=" class="map-srch-del">delete</a></span>
+          <% end %>
+          <% if params[:design_usage].present? %>
+            <span class="map-srch-s"><%= params[:design_usage] %><a href="<%= color_design_search_link %>&design_usage=" class="map-srch-del">delete</a></span>
+          <% end %>
+          <% if params[:design_color].present? %>
+            <span class="map-srch-s"><%= params[:design_color] %><a href="<%= color_design_search_link %>&design_color=" class="map-srch-del">delete</a></span>
+          <% end %>
+          <% if params[:order].present? %>
+            <span class="map-srch-s"><%= params[:order] %><a href="<%= color_design_search_link %>&order=" class="map-srch-del">delete</a></span>
+          <% end %>
+          <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/color_designs';">重新选择</span>
         </p>
         <div class="map-list-form map-mini">
           <fieldset class="clearfix">
             <label class="pull-left">风格：</label>
             <span>
-              <a href="#" class="highlight">全部</a>
-              <a href="#">小户型</a>
-              <a href="#">公寓</a>
-              <a href="#">复式</a>
-              <a href="#">别墅</a>
-              <a href="#">一室</a>
-              <a href="#">两居</a>
-              <a href="#">三居</a>
-              <a href="#">四居</a>
-              <a href="#">四居以上</a>
-              <a href="#">挑高</a>
-              <a href="#">跃层</a>
-              <a href="#">错层</a>
+              <a href="<%= color_design_search_link %>&style=" class="<%= 'highlight' if params[:style].blank? %>">全部</a>
+              <%- color_design_style_option.each do |design_style| %>
+                <a href="<%= color_design_search_link %>&style=<%= design_style%>" class="<%= 'highlight' if params[:style] == design_style %>"><%= design_style %></a>
+              <%- end %>
             </span>
           </fieldset>
           <fieldset class="clearfix">
             <label class="pull-left">功能区：</label>
             <span>
-              <a href="#">全部</a>
-              <a href="#">背景墙装修</a>
-              <a href="#">玄关设计</a>
-              <a href="#">阳光房设计</a>
-              <a href="#">衣帽间设计</a>
-              <a href="#">飘窗设计</a>
-              <a href="#">隔断设计</a>
-              <a href="#">吧台设计</a>
-              <a href="#">阁楼设计</a>
+              <a href="<%= color_design_search_link %>&design_usage=" class="<%= 'highlight' if params[:design_usage].blank? %>">全部</a>
+              <%- color_design_usage_option.each do |color_design_usage| %>
+                <a href="<%= color_design_search_link %>&design_usage=<%= color_design_usage%>" class="<%= 'highlight' if params[:design_usage] == color_design_usage %>"><%= color_design_usage %></a>
+              <%- end %>
             </span>
           </fieldset>
           <fieldset class="clearfix noborder">
             <label class="pull-left">色系：</label>
             <span>
-              <a href="#">全部</a>
-              <a href="#">客厅</a>
-              <a href="#">卧室</a>
-              <a href="#">厨房</a>
-              <a href="#">餐厅</a>
-              <a href="#">书房</a>
-              <a href="#">阳台</a>
-              <a href="#">卫生间</a>
-              <a href="#">儿童房</a>
-              <a href="#">老人房</a>
-              <a href="#">过道</a>
-              <a href="#">工作间</a>
+              <a href="<%= color_design_search_link %>&design_color=" class="<%= 'highlight' if params[:design_color].blank? %>">全部</a>
+              <%- color_design_color_option.each do |color_design_color| %>
+                <a href="<%= color_design_search_link %>&design_color=<%= color_design_color%>" class="<%= 'highlight' if params[:design_color] == color_design_color %>"><%= color_design_color %></a>
+              <%- end %>
             </span>
           </fieldset>
         </div>
@@ -84,8 +70,8 @@
     </div>
     <div class="mt20">
       <div class="btn-group">
-        <%= link_to "最新",color_designs_path(order: '最新'), class: "btn #{'active' if params[:order] == '最新' || params[:order].nil? }" %>
-        <%= link_to "最热",color_designs_path(order: '最热'), class: "btn #{'active' if params[:order] == '最热' }" %>
+        <a href="<%= color_design_search_link %>&order=最新" class="btn <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
+        <a href="<%= color_design_search_link %>&order=最热" class="btn <%= 'active' if params[:order] == '最热' %>">最热</a>
       </div>
     </div>
     <div class="index_main mt10">
@@ -94,11 +80,11 @@
         <% @designs.in_groups_of(3, false).each do |group| -%>
           <% group.each do |design| -%>
           <li class="pr">
-            <a href="/color_designs/<%= design.id %>" class="help-block"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt="" /></a>
+            <a href="/color_designs/<%= design.id %>" class="help-block" target="_blank"><img src="<%= design.main_preview_img.url(:index) %>" title="<%= design.design_name %>" alt="" /></a>
             <h5 class="dott1"><%= design.design_name %></h5>
             <p class="dott1 nomargin">
-              <%= link_to raw("<span><i class='icon-i16 icon-xin_gray2' id='votes_count#{design.id}'></i>#{design.votes_count}</span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
-              <a href="/color_designs/<%= design.id %>#review_focus"><span><i class="icon-i16 icon-comment1"></i><%=design.comments.length %></span></a>
+              <%= link_to raw("<span><i class='icon-i16 icon-xin_gray2'></i><em class='votes_count#{design.id}'>#{design.votes_count}</em></span>"), votes_path(:voteable_id => design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post', title: '' %>
+              <a href="/color_designs/<%= design.id %>#comments" target="_blank"><span><i class="icon-i16 icon-comment1"></i><%=design.comments.length %></span></a>
               <span class="noborder js-works_share"><i class="icon-i16 icon-share1"></i><%=design.shares_count %></span>
             </p>
             <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-works_share hide">
@@ -134,11 +120,11 @@
         </div>
       </div>
       <div class="media media_chann">
-        <a class="pull-left" href="#">
+        <a class="pull-left" href="/channel/access" target="_blank">
           <i class="icon-chann icon-chann_qbt"></i>
         </a>
         <div class="media-body">
-          <h4 class="media-heading"><a class="media-heading_link_a" href="#">装修丘比特</a></h4>
+          <h4 class="media-heading"><a class="media-heading_link_a" href="/channel/access" target="_blank">装修丘比特</a></h4>
           <p class="media_con nomargin">仅需三步，让您轻松找到心仪的家装设计公司！</p>
         </div>
       </div>

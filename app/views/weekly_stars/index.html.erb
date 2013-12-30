@@ -81,7 +81,11 @@
             <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
           </div>
           <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/weekly_stars/#{@design.id}/fullscreen" ,class: 'btn2 pull-right', title: '' %>
-          <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right", title: ''  %>
+          <%- if current_user %>
+            <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design.id, weekly_star_id: @design.id), :remote => true, method: :post, :class => "btn2 pull-right", title: ''  %>
+          <%- else %>
+            <a href="/users/sign_in" class="btn2 pull-right"><i class='icon-i16 icon-collect'></i>收藏</a>
+          <%- end %>
           <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right", title: '' %>
         </div>
         <div class="colors_box clearfix nomargin pt15" id="colors_con">
