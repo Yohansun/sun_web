@@ -9,15 +9,14 @@ class DesignsController < ApplicationController
     target_file = DesignImage.where(:imageable_id => params[:id])
     zipfile_name = "#{Rails.root}/public/system/zip/design#{params[:id]}.zip"
     if File.exists?(zipfile_name)
-      send_file zipfile_name
-    else
-      Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
-        target_file.each do |filename|
-          zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
-        end
-      end
-      send_file zipfile_name
+      system("rm public/system/zip/design#{params[:id]}.zip")
     end
+    Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+      target_file.each_with_index do |filename,index|
+        zipfile.add("#{filename.id}.jpg", filename.file.path(:slide)) if File.exists?(filename.file.path(:slide))
+      end
+    end
+    send_file zipfile_name
   end
 
   def story_talking
