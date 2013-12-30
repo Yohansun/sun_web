@@ -26,6 +26,7 @@ Icolor::Application.routes.draw do
 
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"
+  match "/newyear" => "gifts#list"
   resources :winnings do
     collection do
       get :get_special
