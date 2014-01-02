@@ -93,26 +93,4 @@ Icolor::Application.configure do
   #   :email_prefix => "[ICOLOR] ",
   #   :sender_address => %{"errors" <errors@networking.io>},
   #   :exception_recipients => %w{errors@networking.io}
-
-  options = {
-    :enabled => true,
-    :remove_multi_spaces => true,
-    :remove_comments => false,
-    :remove_intertag_spaces => false,
-    :remove_quotes => false,
-    :compress_css => false,
-    :compress_javascript => false,
-    :simple_doctype => false,
-    :remove_script_attributes => true,
-    :remove_style_attributes => true,
-    :remove_link_attributes => true,
-    :remove_form_attributes => false,
-    :remove_input_attributes => false,
-    :remove_javascript_protocol => true,
-    :remove_http_protocol => true,
-    :remove_https_protocol => false,
-    :preserve_line_breaks => false,
-    :simple_boolean_attributes => false
-  }
-  config.middleware.use HtmlCompressor::Rack, options
 end

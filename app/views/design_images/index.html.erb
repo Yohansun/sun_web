@@ -248,30 +248,28 @@ function submit_area() {
     </p>
 
     <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
-      <% cache ['design_images', 'home_design', params[:path]] do %>
-        <%- @home_design.each_with_index do |category, index| %>
-          <%- unless category.title == "按地区" %>
-          <fieldset class="clearfix js-cate-<%= category.category_id %>">
-            <label class="pull-left"><%= category.title %>：</label>
-            <span>
-              <a href="/images/<%= show_link category.category_id.to_i %>" data-tag-name='全部: <%= category.title %>' data-tag-id='<%= category.category_id %>' data-tag-index="<%= index %>" class="js-tag js-tag-<%=category.category_id %> js-cate-all js-cate-all-<%= category.category_id %>">全部</a>
-              <%- category.category(category.category_id).each do |cate_child| %>
-              <a data-tag-name='<%= category.title %>: <%= cate_child.title %>' data-tag-id='<%= cate_child.id %>' data-tag-index="<%= index %>" href="/images/<%= show_link cate_child.id %>" class="js-tag js-tag-<%= cate_child.id %>"><%= cate_child.title %></a>
-              <%- end %>
-            </span>
-          </fieldset>
-          <% else %>
-          <fieldset class="clearfix noborder">
-            <label class="pull-left"><%= category.title %>：</label>
-            <span>
-              <select id="province" class="level_1">省</select>
-              <select id="city" class="level_2">市</select>
-              <select id="county" class="level_3" name='area_id'>区</select>
-              <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
-              <input type="hidden" value="<%= @area_names %>" id="area_names">
-            </span>
-          </fieldset>
-          <% end %>
+      <%- @home_design.each_with_index do |category, index| %>
+        <%- unless category.title == "按地区" %>
+        <fieldset class="clearfix js-cate-<%= category.category_id %>">
+          <label class="pull-left"><%= category.title %>：</label>
+          <span>
+            <a href="/images/<%= show_link category.category_id.to_i %>" data-tag-name='全部: <%= category.title %>' data-tag-id='<%= category.category_id %>' data-tag-index="<%= index %>" class="js-tag js-tag-<%=category.category_id %> js-cate-all js-cate-all-<%= category.category_id %>">全部</a>
+            <%- category.category(category.category_id).each do |cate_child| %>
+            <a data-tag-name='<%= category.title %>: <%= cate_child.title %>' data-tag-id='<%= cate_child.id %>' data-tag-index="<%= index %>" href="/images/<%= show_link cate_child.id %>" class="js-tag js-tag-<%= cate_child.id %>"><%= cate_child.title %></a>
+            <%- end %>
+          </span>
+        </fieldset>
+        <% else %>
+        <fieldset class="clearfix noborder">
+          <label class="pull-left"><%= category.title %>：</label>
+          <span>
+            <select id="province" class="level_1">省</select>
+            <select id="city" class="level_2">市</select>
+            <select id="county" class="level_3" name='area_id'>区</select>
+            <input type="submit" class="map-srch-submit" value="确定" onclick="submit_area();return false;" />
+            <input type="hidden" value="<%= @area_names %>" id="area_names">
+          </span>
+        </fieldset>
         <% end %>
       <% end %>
 
@@ -303,20 +301,17 @@ function submit_area() {
       </p>
 
       <div class="<%= @tag_ids.blank? ? 'map-list-form map-mini' : 'map-list-form' %>">
-        <% cache ['design_images', 'fitting_parts', params[:path]] do %>
-          <%- @fitting_parts.each do |child_lv2| %>
-          <fieldset class="clearfix js-cate-<%= child_lv2.category_id %>">
-            <label class="pull-left"><%= child_lv2.title %>：</label>
-            <span>
-              <a href="/images/<%= show_link child_lv2.category_id.to_i %>" data-tag-name='全部: <%= child_lv2.title %>' data-tag-id='<%= child_lv2.id %>' data-tag-index="_2" class="js-tag js-tag-<%= child_lv2.id%> js-cate-all js-cate-all-<%= child_lv2.category_id %>">全部</a>
-              <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
-              <a href="/images/<%= show_link child_lv3.id %>" data-tag-name='<%= child_lv2.title %>: <%= child_lv3.title %>' data-tag-id='<%= child_lv3.id %>' data-tag-index="_2" class="js-tag js-tag-<%= child_lv3.id %>"><%= child_lv3.title %></a>
-              <%- end %>
-            </span>
-          </fieldset>
-          <%- end %>
+        <%- @fitting_parts.each do |child_lv2| %>
+        <fieldset class="clearfix js-cate-<%= child_lv2.category_id %>">
+          <label class="pull-left"><%= child_lv2.title %>：</label>
+          <span>
+            <a href="/images/<%= show_link child_lv2.category_id.to_i %>" data-tag-name='全部: <%= child_lv2.title %>' data-tag-id='<%= child_lv2.id %>' data-tag-index="_2" class="js-tag js-tag-<%= child_lv2.id%> js-cate-all js-cate-all-<%= child_lv2.category_id %>">全部</a>
+            <%- child_lv2.category(child_lv2.category_id).each do |child_lv3| %>
+            <a href="/images/<%= show_link child_lv3.id %>" data-tag-name='<%= child_lv2.title %>: <%= child_lv3.title %>' data-tag-id='<%= child_lv3.id %>' data-tag-index="_2" class="js-tag js-tag-<%= child_lv3.id %>"><%= child_lv3.title %></a>
+            <%- end %>
+          </span>
+        </fieldset>
         <%- end %>
-
         <%- if @tag_ids.blank? %>
         <a href="javascript:;" class="pa map-list-up map-list-down">展开</a>
         <%- else %>
@@ -350,11 +345,13 @@ function submit_area() {
   </form>
 </div>
 <div class="map-flow-r pull-right">
-  <%= render partial: 'image_list', locals: { i_column_type_id: 1, name: '最新大师作品' } %>
-  <%= render partial: 'image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
-  <%= render partial: 'image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
-  <%= render partial: 'image_list', locals: { i_column_type_id: 9, name: '装修色彩配搭' } %>
-  <%= render partial: 'image_list', locals: { i_column_type_id: 7, name: '相关资讯' } %>
+  <% cache "column_image_list" do %>
+    <%= render partial: 'image_list', locals: { i_column_type_id: 1, name: '最新大师作品' } %>
+    <%= render partial: 'image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
+    <%= render partial: 'image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
+    <%= render partial: 'image_list', locals: { i_column_type_id: 9, name: '装修色彩配搭' } %>
+    <%= render partial: 'image_list', locals: { i_column_type_id: 7, name: '相关资讯' } %>
+  <% end %>
 </div>
 
 <div class="index_main refresh_news mt10 clearfix pull-left">
