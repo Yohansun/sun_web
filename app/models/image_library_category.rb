@@ -2,6 +2,8 @@
 require 'ruby-pinyin'
 
 class ImageLibraryCategory < ActiveRecord::Base
+  acts_as_cached(:version => 1, :expires_in => 1.week)
+
   acts_as_nested_set :counter_cache => :children_count
   attr_protected :lft, :rgt
   scope :style,->{where(parent_id: 34)}
