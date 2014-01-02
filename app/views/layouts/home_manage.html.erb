@@ -66,15 +66,15 @@
           </div>
           <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
           <script type="text/javascript" id="bdshell_js"></script>
-          <script type="text/javascript">
-          document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-          </script>
           <!-- Baidu Button END -->
           <a data-toggle="modal" class="btn btn-mini btn_gray login js-login nomargin" href="#login_modal">登录</a>
           <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red nomargin">免费注册</a>
           <a style="display:inline-block;"><%= image_tag "nippon.png" %></a>
         <% end %>
-        <div class="user_infos pull-right js-user-info"></div>
+        <div class="user_infos pull-right js-user-info" style="display:none">
+          <a href="" class="js-user-homepage"><span class="text-error text-right js-user-name"></span>的主页</a>
+          <a href="/users/sign_out" data-method="delete" rel="nofollow" title="退出">退出</a>
+        </div>
         <ul class="nav nav_red nomargin">
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>
@@ -264,6 +264,23 @@
   <%= render "layouts/login" %>
   <script type="text/javascript">
     $(function(){
+      function is_mobile() {
+        var regex_match = /(nokia|iphone|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i;
+        var u = navigator.userAgent;
+        if (null == u) {
+          return true;
+        }
+        var result = regex_match.exec(u);
+        if (null == result) {
+          return false
+        } else {
+          return true
+        }
+      }
+      if (is_mobile()) {
+        document.location.href= 'http://www.icolor.com.cn/mobile/';
+      }
+
       ;(function($){
         //左侧banner
         $('.js-banner_hover').on('mouseover mouseout','a',function(){
@@ -280,12 +297,13 @@
           $('.js-share_toggle').toggle()
         });
       }($));
-
-      $.getScript("/home/home_overall.js?"+(new Date().valueOf()));
     });
   </script>
 
   <%= javascript_include_tag '/location.js' %>
+  <script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+  </script>
 
   <!-- GA监测 -->
   <script type="text/javascript">

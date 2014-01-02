@@ -1,10 +1,55 @@
 #= require 'application'
+#= require 'jsCookie'
 #= require 'manage/bootstrap'
 #= require 'manage/jquery.slider'
 #= require 'LinkageSelect'
 #= require_self
 
 $(document).ready ->
+  # check login box
+  if $.readCookie("user_id")? and $.readCookie("user_id") != ''
+    # fill user info
+    $('.js-user-name').html($.readCookie("user_display_name"))
+    $('.js-user-homepage').attr('href', "/users/" + $.readCookie("user_id") + "/asks")
+
+    $('.js-user-info').show()
+    $('.nav_top .login').hide()
+    $('.nav_top .btn_red').hide()
+
+    # bind user links
+    $(".subscribe").click =>
+      o_in();
+      $('#july_last').show().find('input[type=text]').val('')
+      $('.subs_err').hide()
+
+    $("#new_reply_msg").submit =>
+      area = $('#reply_msg_content')
+      if area.val() == ''
+        inputBlank(area)
+        return false
+
+    $(".home_banner2").click =>
+      window.open("/users/" + $.readCookie("user_id") + "/edit?edit_by=home_banner2", "_blank");
+
+  else
+    $('#new_user').bind 'ajax:error', (xhr, status, error) =>
+      err_in()
+
+    $("#per_form, #new_message, #new_reply_msg, #new_faq, #channel_service").submit =>
+      show_login()
+      return false
+
+    $("#new_site_message").submit =>
+      $('.server_input').hide()
+      show_login()
+      return false
+
+    $("#channel_access, #one_key_forward, #ckepop a, .new_mix_color, .home_banner2, .subscribe").click =>
+      show_login()
+      return false
+
+  # check login box end
+
   if $('a.js-tag').length > 0
     $('a.js-tag').live 'click', (event) =>
       path = window.search_path
