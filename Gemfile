@@ -58,6 +58,8 @@ gem 'ekuseru'
 gem 'redis-store'
 gem 'redis-rails'
 
+gem "second_level_cache", "~> 1.6"
+
 #发送短信
 gem 'savon'
 gem 'collections'
