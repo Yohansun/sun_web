@@ -435,6 +435,8 @@ class DesignImagesController < ApplicationController
     end
 
     @offset += 1
+
+    expires_in 7.days, 'max-stale' => 8.days, :public => true
   end
 
   def get_latest_and_likes

@@ -4,4 +4,11 @@
 *= require 'manage/jquery.slider.css'
 *= require 'manage/icolor.css'
 *= require 'manage/map.css'
+*= require_self
 */
+
+.js-search-now {
+  color: #fff;
+  background-color: #ff6600;
+  width: 39px!;
+}

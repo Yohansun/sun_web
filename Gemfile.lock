@@ -143,8 +143,6 @@ GEM
     hipchat (0.10.0)
       httparty
     hirb (0.6.2)
-    htmlcompressor (0.0.7)
-      yui-compressor (~> 0.9.6)
     httmultiparty (0.3.6)
       httparty (>= 0.7.3)
       multipart-post
@@ -371,7 +369,6 @@ DEPENDENCIES
   grape
   hipchat
   hirb
-  htmlcompressor
   httmultiparty
   jquery-rails
   json

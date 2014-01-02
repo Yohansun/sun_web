@@ -32,10 +32,7 @@ group :development do
   gem "quiet_assets"
   gem 'thin'
   gem "debugger"
-end
-
-group :production do
-  gem 'htmlcompressor'
+  gem 'rack-mini-profiler'
 end
 
 gem "meta_search"
@@ -56,7 +53,6 @@ gem 'httmultiparty'
 
 gem 'exception_notification'
 gem 'newrelic_rpm', "~> 3.6.0.78"
-gem 'rack-mini-profiler'
 gem 'ekuseru'
 
 gem 'redis-store'

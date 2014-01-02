@@ -46,6 +46,12 @@ $(document).ready ->
       reset_search_path(tags)
       return false
 
+    $('.js-search-now').live 'click', (event) =>
+      $('.map-srch-bin').html("您的选择：<span style='color:#ff6600'>图片搜索中...</span>")
+      setTimeout ->
+        window.location = '/images/' + window.search_path
+      , 100
+
 window.reset_search_path = (tags) ->
   parts = window.search_path.split("_")
   parts[0] = tags.join("-")
