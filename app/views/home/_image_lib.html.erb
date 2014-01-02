@@ -8,10 +8,10 @@
     <div class="pull-left tagbase">
       <% @image_tags.each_with_index do |image_tag, index| %>
         <dl class="clearfix <%= 'noborder nomargin' if index == @image_tags.size - 1 %>">
-          <dt><a href="/images/<%= tag_link image_tag.category_id %>" class="pull-right">更多>></a><%= tag_name image_tag.category_id %></dt>
+          <dt><a href="/images/<%= tag_link image_tag.category_id %>" class="pull-right" target="_blank">更多>></a><%= tag_name image_tag.category_id %></dt>
           <% tags = image_tag.category_list.split(',') || [] %>
           <% tags.each do |tag| %>
-            <dd><a href="/images/<%= tag_link tag %>"><%= tag_name tag %></a></dd>
+            <dd><a href="/images/<%= tag_link tag %>" target="_blank"><%= tag_name tag %></a></dd>
           <% end %>
         </dl>
       <% end %>
