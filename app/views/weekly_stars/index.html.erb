@@ -1,7 +1,7 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag "imageflow", "style" %>
   <style type="text/css">
-
+    .designs_in_slide #gallery_caption{visibility: hidden;}
   </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -10,6 +10,7 @@
   $(function(){
     var gallery = new ImageFlow();
     gallery.init({
+      icolor: true,
       ImageFlowID: 'gallery',
       imagesHeight:       0.69,
       startID:            1,
@@ -56,11 +57,9 @@
   <div class="index_main nopadding">
     <div class="slides_box">
       <div class="designs_in_slide pr">
-        <span class="moveleft slider-prev"></span>
-        <span class="moveright slider-next"></span>
         <div class="imageflow" id="gallery">
-          <%- @design.weekly_star_uploads.each do |i| %>
-            <%= image_tag(i.file.url(:slide), :class => "cloudcarousel", :'data-id' => i.id, :alt => "装修设计欣赏-#{@design.design_name}") unless i.file.nil? %>
+          <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
+            <%= image_tag(star_upload.file.url(:slide), :class => "cloudcarousel", :'data-id' => star_upload.id, :alt => "#gallery#{index+1}") unless star_upload.file.nil? %>
           <%- end %>
         </div>
       </div>
@@ -88,25 +87,49 @@
           <%- end %>
           <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), download_weekly_star_path(@design.id,:target => params[:action]), class: "btn2 pull-right", title: '' %>
         </div>
-        <div class="colors_box clearfix nomargin pt15" id="colors_con">
-          <div class="pull-left">
-            <img src="<%= asset_path 'imgbase_in/color.jpg' %>">
-          </div>
-          <ul class="pull-left group unstyled">
-            <li>
-              <div class="colorblock" style="background-color:#7b6d66"></div>
-              <h6 class="colortitle">墙面推荐色</h6>
-              <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
-            </li>
-            <li>
-              <div class="colorblock" style="background-color:#acb57f"></div>
-              <h6 class="colortitle">墙面推荐色</h6>
-              <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
-            </li>
-          </ul>
-          <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="goshop pull-right"></a>
-          <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
-        </div>
+
+        <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
+          <% unless star_upload.file.nil? %>
+            <div id="gallery<%= index + 1%>" class="colors_box clearfix nomargin pt15 hide">
+              <div class="pull-left">
+                <img src="<%= asset_path 'imgbase_in/color.jpg' %>">
+              </div>
+              <ul class="pull-left group unstyled">
+                <%- color1, color2, color3 = search_color_code(star_upload.recommend_color1), search_color_code(star_upload.recommend_color2), search_color_code(star_upload.recommend_color3) %>
+                <% if color1 %>
+                  <li>
+                    <%- if color1.rgb? %>
+                      <div class="colorblock" style="background-color:rgb(<%= color1.rgb %>)"></div>
+                    <%- end %>
+                    <h6 class="colortitle"><%= star_upload.recommend_color_category1 %></h6>
+                    <p class="colorname">立邦(<%= star_upload.recommend_color1 %>)<%= color1.try(:name) %></p>
+                  </li>
+                <% end %>
+                <% if color2 %>
+                  <li>
+                    <%- if color2.rgb? %>
+                      <div class="colorblock" style="background-color:rgb(<%= color2.rgb %>)"></div>
+                    <%- end %>
+                    <h6 class="colortitle"><%= star_upload.recommend_color_category2 %></h6>
+                    <p class="colorname">立邦(<%= star_upload.recommend_color2 %>)<%= color2.try(:name) %></p>
+                  </li>
+                <% end %>
+                <% if color3 %>
+                  <li>
+                    <%- if color3.rgb? %>
+                      <div class="colorblock" style="background-color:rgb(<%= color3.rgb %>)"></div>
+                    <%- end %>
+                    <h6 class="colortitle"><%= star_upload.recommend_color_category3 %></h6>
+                    <p class="colorname">立邦(<%= star_upload.recommend_color3 %>)<%= color3.try(:name) %></p>
+                  </li>
+                <% end %>
+              </ul>
+              <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="goshop pull-right"></a>
+              <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
+            </div>
+          <% end %>
+        <%- end %>
+
         <div class="work_infos linet1">
           <p class="work_info">
             <%- unless @design.company_name.blank? %>

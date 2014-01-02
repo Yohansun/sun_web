@@ -40,7 +40,14 @@ jQuery(function($){
 	ul.find('li').on('click', function(){
 		var that = $(this);
 		that.addClass('map-active').siblings('.map-active').removeClass();
-		bigimg.src = this.getElementsByTagName('img')[0].src;
+		var img = this.getElementsByTagName('img')[0]
+		bigimg.src = img.src;
+
+		var index = img.getAttribute('index')
+		if(index){
+			$('div.colors_box').hide().eq( +index ).show()
+			$('div.display_tags').hide().eq( +index ).show()
+		}
 		// var index = that.index();
 		// if(index <= pages){
 		// 	ul.stop(true).animate({'top' : - index * h})

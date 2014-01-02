@@ -39,6 +39,7 @@ function ImageFlow ()
   /* Setting option defaults */
   this.defaults =
   {
+    icolor:             null,
     animationSpeed:     50,             /* Animation speed in ms */
     aspectRatio:        1.964,          /* Aspect ratio of the ImageFlow container (width divided by height) */
     buttons:            false,          /* Toggle navigation buttons */
@@ -697,6 +698,16 @@ function ImageFlow ()
       caption = '&nbsp;';
     }
     my.captionDiv.innerHTML = caption;
+
+    if(my.icolor){
+      if ($(caption).length != 0) {
+        $(caption).show().siblings('.colors_box').hide();
+        $('.colors_box:last').next('.linet1').css('border-top-width','1px')
+      }else{
+        $('.colors_box').hide();
+        $('.colors_box:last').next('.linet1').css('border-top-width','0')
+      };
+    };
 
     /* Set scrollbar slider to new position */
     if (my.MouseDrag.busy === false)

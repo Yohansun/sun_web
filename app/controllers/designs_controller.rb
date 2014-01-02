@@ -88,6 +88,7 @@ class DesignsController < ApplicationController
 
   def show
     @design = Design.find(params[:id])
+    @design_imgs = @design.design_images
     @prev_design = Design.where("id < ?", @design.id).order("id desc").first
     @next_design = Design.where("id > ?", @design.id).order("id desc").last
     @comments = @design.comments.page params[:page]

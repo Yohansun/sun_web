@@ -43,7 +43,7 @@
   <div class="mt20">
     <div class="slides_box clearfix">
       <div class="map-big pull-left js-map-big">
-        <img src="images/imgbase_in/img-big.jpg" width="" />
+        <%= image_tag @design_imgs.first.try(:file).try(:url,:slide) if @design_imgs.first %>
         <a href="javascript:;" class="slider-prev js-slider-prev">prev</a>
         <a href="javascript:;" class="slider-next js-slider-next">next</a>
       </div>
@@ -53,10 +53,13 @@
         <a href="javascript:;" class="map-prev js-map-prev">上一张图</a>
         <div class="map-kv-container">
           <ul>
-            <li class="map-active"><a href="javascript:;"><span></span><img src="images/map/in/img-1.jpg" alt="" /></a></li>
-            <li><a href="javascript:;"><span></span><img src="images/map/in/img-2.jpg" alt="" /></a></li>
-            <li><a href="javascript:;"><span></span><img src="images/map/in/img-3.jpg" alt="" /></a></li>
-            <li><a href="javascript:;"><span></span><img src="images/map/in/img-4.jpg" alt="" /></a></li>
+            <%- @design_imgs.each_with_index do |image,index| %>
+              <li class="<%= 'map-active' if index == 0 %>">
+                <a href="javascript:;"><span></span>
+                  <%= image_tag image.file.url(:slide), size: "75x75",index: "#{index}", alt: "" %>
+                </a>
+              </li>
+            <%- end %>
           </ul>
         </div>
         <a href="javascript:;" class="map-next js-map-next">下一张图</a>
@@ -89,18 +92,46 @@
 </div>
 <div class="clearfix mt10">
   <div class="index_main designs_in_left pull-left">
-    <div class="colors_box clearfix nomargin pt15">
-      <div class="pull-left"><img src="<%= asset_path 'imgbase_in/color.jpg' %>"></div>
-      <ul class="pull-left unstyled">
-        <li>
-          <div class="colorblock" style="background-color:#7b6d66"></div>
-          <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
-        </li>
-      </ul>
-    <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="goshop pull-right"></a>
-    <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
+    <div class="pt15">
+      <%- @design_imgs.each_with_index do |image,index| %>
+        <div class="colors_box clearfix nomargin <%= 'none' unless index == 0 %>">
+          <div class="pull-left"><img src="<%= asset_path 'imgbase_in/color.jpg' %>"></div>
+          <ul class="pull-left group unstyled">
+            <%- color_code1, color_code2, color_code3 = search_color_code(image.color1), search_color_code(image.color2), search_color_code(image.color3) %>
+            <% if color_code1 %>
+              <li>
+                <%- if color_code1.rgb? %>
+                  <div class="colorblock" style="background-color:rgb(<%= color_code1.rgb %>)"></div>
+                <%- end %>
+                <h6 class="colortitle"><%= image.color1_name %></h6>
+                <p class="colorname">立邦(<%= image.color1 %>)<%= color_code1.try(:name) %></p>
+              </li>
+            <% end %>
+            <% if color_code2 %>
+              <li>
+                <%- if color_code2.rgb? %>
+                  <div class="colorblock" style="background-color:rgb(<%= color_code2.rgb %>)"></div>
+                <%- end %>
+                <h6 class="colortitle"><%= image.color2_name %></h6>
+                <p class="colorname">立邦(<%= image.color2 %>)<%= color_code2.try(:name) %></p>
+              </li>
+            <% end %>
+            <% if color_code3 %>
+              <li>
+                <%- if color_code3.rgb? %>
+                  <div class="colorblock" style="background-color:rgb(<%= color_code3.rgb %>)"></div>
+                <%- end %>
+                <h6 class="colortitle"><%= image.color3_name %></h6>
+                <p class="colorname">立邦(<%= image.color3 %>)<%= color_code3.try(:name) %></p>
+              </li>
+            <% end %>
+          </ul>
+          <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="goshop pull-right"></a>
+          <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
+        </div>
+      <%- end %>
     </div>
+
     <div class="work_infos linet1">
       <p class="work_info">
         <%- unless @design.user.try(:name_of_company).blank? %>
@@ -113,18 +144,17 @@
       </p>
       <p class="work_info" style="height:72px;overflow:hidden;">设计说明：<%= @design.try(:content) %></p>
     </div>
-    <div class="work_tags">
-      <span class="">标签：</span>
-      <a href="#">公寓</a>
-      <a href="#">复式</a>
-      <a href="#">别墅</a>
-      <a href="#">三居</a>
-      <a href="#">四局</a>
-      <a href="#">豪华型</a>
-      <a href="#">30-100万</a>
-      <a href="#">150平米以上</a>
-      <a href="#">现代简约</a>
+    <div>
+      <%- @design_imgs.each_with_index do |image,index| %>
+        <div class="work_tags display_tags <%= 'none' unless index == 0 %>">
+          <span class="">标签：</span>
+          <%- image.all_tags.each do |tag| %>
+            <a href="javascript:;"><%= tag.title %></a>
+          <%- end %>
+        </div>
+      <%- end %>
     </div>
+
     <div style="height:30px;margin:10px 0 31px 7px;">
       <!-- Baidu Button BEGIN -->
       <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
