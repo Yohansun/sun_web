@@ -8,6 +8,15 @@
       $('.js-slider-prev').click(function(){
         $('.slides_box').find('.map-prev').click()
       });
+      // 评论JS
+      $('.js-recomment').click(function(){
+        $(this).parents('li').siblings().find('.r_comment_form').hide();
+        $(this).parents('li').find('.r_comment_form').show();
+      });
+      $('.js-close').click(function(e){
+        e.preventDefault();
+        $(this).parents('.r_comment_form').hide();
+      });
     })
   </script>
 <% end %>
@@ -70,8 +79,8 @@
   </div>
   <div class="btn_group clearfix mt20 noborder">
     <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i><span class='votes_count#{@design.id}'>#{@design.try(:votes_count)}</span>"), votes_path(:voteable_id => @design.id, :voteable_type => "Design"), :remote => true, :method => 'post', class: 'btn2 pull-left', title: '' %>
-    <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@design.comments_count})"), "#comments" ,class: 'btn2 pull-left', title: '' %>
-    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@_design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left js-share_btn', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@design.comments.length})"), "#comments" ,class: 'btn2 pull-left', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@design.try(:shares_count) || 0})"), "javascript:;" ,class: 'btn2 pull-left js-share_btn', title: '' %>
     <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-share_toggle hide">
       <a class="bds_qzone"></a>
       <a class="bds_tsina"></a>

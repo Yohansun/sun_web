@@ -11,6 +11,15 @@
       $('.js-slider-prev').click(function(){
         $('#designs_in_slide').find('.slider-prev').click()
       });
+      // 评论JS
+      $('.js-recomment').click(function(){
+        $(this).parents('li').siblings().find('.r_comment_form').hide();
+        $(this).parents('li').find('.r_comment_form').show();
+      });
+      $('.js-close').click(function(e){
+        e.preventDefault();
+        $(this).parents('.r_comment_form').hide();
+      });
     })
   </script>
 <% end %>

@@ -244,7 +244,7 @@
             <%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
               <%= f.hidden_field :show_id, value: params[:id] %>
               <%= f.hidden_field :comment_id, value: c.id %>
-              <%= f.hidden_field :reply_type, value: "design_images" %>
+              <%= f.hidden_field :reply_type, value: "weekly_stars" %>
               <%= f.text_area :content, class: 're_comments' %>
               <div>
                 <button class="btn btn-small">提交</button>
