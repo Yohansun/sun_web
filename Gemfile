@@ -58,6 +58,7 @@ gem 'ekuseru'
 gem 'dalli'
 
 gem "second_level_cache", "~> 1.6"
+gem "cache_digests"
 
 #发送短信
 gem 'savon'

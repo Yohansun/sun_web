@@ -1,4 +1,6 @@
 class IColumnData < ActiveRecord::Base
+  acts_as_cached(:version => 1, :expires_in => 1.week)
+
   belongs_to :i_column_type
 
   has_attached_file :file,
