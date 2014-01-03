@@ -133,6 +133,72 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "celebrities", :force => true do |t|
+    t.string   "name",                                  :null => false
+    t.string   "intro",                 :default => ""
+    t.integer  "celebrity_category_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "celebrities", ["celebrity_category_id"], :name => "index_celebrities_on_celebrity_category_id"
+
+  create_table "celebrity_categories", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "celebrity_content_boards", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "media_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "celebrity_content_boards", ["media_id"], :name => "index_celebrity_content_boards_on_media_id"
+
+  create_table "celebrity_notes", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "content"
+    t.integer  "celebrity_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "celebrity_notes", ["celebrity_id"], :name => "index_celebrity_notes_on_celebrity_id"
+
+  create_table "celebrity_question_categories", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "celebrity_question_categories", ["parent_id"], :name => "index_celebrity_question_categories_on_parent_id"
+
+  create_table "celebrity_questions", :force => true do |t|
+    t.string   "name",                                              :null => false
+    t.string   "content"
+    t.text     "reply_content"
+    t.string   "image"
+    t.boolean  "is_replied",                     :default => false
+    t.integer  "asker_id"
+    t.integer  "replier_id"
+    t.integer  "celebrity_id"
+    t.integer  "celebrity_content_board_id"
+    t.integer  "celebrity_question_category_id"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+  end
+
+  add_index "celebrity_questions", ["asker_id"], :name => "index_celebrity_questions_on_asker_id"
+  add_index "celebrity_questions", ["celebrity_content_board_id"], :name => "index_celebrity_questions_on_celebrity_content_board_id"
+  add_index "celebrity_questions", ["celebrity_id"], :name => "index_celebrity_questions_on_celebrity_id"
+  add_index "celebrity_questions", ["celebrity_question_category_id"], :name => "index_celebrity_questions_on_celebrity_question_category_id"
+  add_index "celebrity_questions", ["is_replied"], :name => "index_celebrity_questions_on_is_replied"
+  add_index "celebrity_questions", ["replier_id"], :name => "index_celebrity_questions_on_replier_id"
+
   create_table "channel_tips", :force => true do |t|
     t.integer  "rank"
     t.string   "title"
@@ -409,6 +475,16 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at",               :null => false
     t.datetime "published_at"
   end
+
+  create_table "editor_treasuries", :force => true do |t|
+    t.string   "name",                       :null => false
+    t.text     "content"
+    t.integer  "celebrity_content_board_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "editor_treasuries", ["celebrity_content_board_id"], :name => "index_editor_treasuries_on_celebrity_content_board_id"
 
   create_table "event_attendees", :force => true do |t|
     t.integer  "special_event_id"
@@ -1083,6 +1159,14 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "media", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "media", ["user_id"], :name => "index_media_on_user_id"
 
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
