@@ -53,9 +53,6 @@ class Manage::HomeImageLibController < Manage::BaseController
     	@tag.category_id = params[:category]
     	@tag.category_list = params[:category_ids].join(',')
     	if @tag.save
-        
-        # 清缓存
-        system('redis-cli flushall')
 
     	  render :json => {:result => "success"}, :layout => false
     	else
