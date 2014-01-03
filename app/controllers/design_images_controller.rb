@@ -248,7 +248,7 @@ class DesignImagesController < ApplicationController
     @img_count = @design_images.count
     @images = @design_images.page(params[:page]).per(18)
     @query_tags = []
-    @ilcs = ImageLibraryCategory.find_all_by_id(@tag_ids)
+    @ilcs = ImageLibraryCategory.find(@tag_ids.map { |e| e.to_i }.uniq - [0])
     @query_tags = @ilcs if @ilcs.present?
     #use in metas_helper
     bujian = ImageLibraryCategory.find_by_title('按部件')
@@ -376,7 +376,7 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     @master_design = MasterDesign.find(@image.imageable_id) if @image.imageable_type == "MasterDesign"
 
-    @image_tags = ImageLibraryCategory.find_all_by_id(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
+    @image_tags = ImageLibraryCategory.find(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
     @image_city = @image.area.try(:city_name)
 
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)
