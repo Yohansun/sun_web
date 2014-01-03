@@ -195,12 +195,14 @@ class DesignImagesController < ApplicationController
     end
 
     if @area.present? && @area.to_s != "0"
-      area = Area.find(@area)
-      areas = area.self_and_descendants
-      area_tree = area.self_and_ancestors.map(&:id)
-      @area_names = area.self_and_ancestors.map(&:name).join(" ")
-      @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
-      @design_images = @design_images.where(area_id: areas.map(&:id))
+      area = Area.where(id: @area).first
+      if area
+        areas = area.self_and_descendants
+        area_tree = area.self_and_ancestors.map(&:id)
+        @area_names = area.self_and_ancestors.map(&:name).join(" ")
+        @area_level_1, @area_level_2, @area_level_3 = area_tree[0], area_tree[1], area_tree[2]
+        @design_images = @design_images.where(area_id: areas.map(&:id))
+      end
 
       # @content[0] = area.parent.blank? ? nil : area.parent.name
     end
@@ -376,7 +378,7 @@ class DesignImagesController < ApplicationController
     @image = DesignImage.from.includes(:design).includes(:tags).find(params[:id])
     @master_design = MasterDesign.find(@image.imageable_id) if @image.imageable_type == "MasterDesign"
 
-    @image_tags = ImageLibraryCategory.find(@image.tags.map(&:image_library_category_id)).map{|a| a.title}
+    @image_tags = ImageLibraryCategory.where(id: @image.tags.map(&:image_library_category_id)).map{|a| a.title}
     @image_city = @image.area.try(:city_name)
 
     @color1, @color2, @color3 = search_color_code(@image.color1), search_color_code(@image.color2), search_color_code(@image.color3)

@@ -278,7 +278,7 @@ Icolor::Application.routes.draw do
   match '/yda/2013/prize' => 'yda2013#prize'
   match '/yda/2013/rater' => 'yda2013#rater'
 
-  resources :weekly_tips, only: :index
+  resources :weekly_tips, only: :index, format: :js
   #个人主页
   resources :users do
     match "update_suc" => "users#update_suc"
@@ -349,7 +349,7 @@ Icolor::Application.routes.draw do
       get :image_search_index
       post :image_tag
       get :lists
-      get :thumbs
+      get :thumbs, format: :js
 
       get :get_thumb
     end
