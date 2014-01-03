@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
   has_one  :media
   has_many :questions, :class_name => CelebrityQuestion
   has_many :question_replies, :class_name => CelebrityQuestionReply
+
   #公司作品
   has_many :company_designs ,:class_name => "Design",:include => :user,:conditions => {:users => {:role_id => 2}} , :order => "designs.id desc"
   #个人作品
@@ -193,6 +194,10 @@ class User < ActiveRecord::Base
 
   def common_user?
     self.role_id == 3
+  end
+
+  def media?
+    self.role_id == 4
   end
 
   def unread_msgs

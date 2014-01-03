@@ -2,12 +2,13 @@ class CelebrityQuestion < ActiveRecord::Base
   include CelebrityModule
   # attr_accessible :title, :body
 
-  validates :name, presence: true
-  validates_length_of :name, in: 6..50
-  validates_length_of :content, in: 6..100, allow_nil: true
+  validates_presence_of :name, message: "一句话描述必填"
+  validates_length_of :name, in: 6..50, message: "一句话描述不得少于6个字"
+  # validates_length_of :content, in: 6..100, allow_blank: true, message: "描述文字不得少于6个字"
 
   belongs_to :master_profile
   belongs_to :user
+  belongs_to :delete_media, class_name: Media, foreign_key: :delete_media_id
   belongs_to :board, class_name: CelebrityContentBoard, foreign_key: :celebrity_content_board_id
 
   has_many :images, :class_name =>  CelebrityQuestionImage , :as => :resource, :dependent => :destroy

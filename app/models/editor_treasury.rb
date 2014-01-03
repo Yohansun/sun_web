@@ -14,7 +14,6 @@ class EditorTreasury < ActiveRecord::Base
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
-
   class << self
     def find_by_board board_id
       if board_id
