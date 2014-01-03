@@ -103,6 +103,7 @@ GEM
     collections (0.1.4)
     columnize (0.3.6)
     daemons (1.1.9)
+    dalli (2.6.4)
     debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -254,23 +255,6 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.2)
-    redis-actionpack (3.2.3)
-      actionpack (~> 3.2.3)
-      redis-rack (~> 1.4.0)
-      redis-store (~> 1.1.0)
-    redis-activesupport (3.2.3)
-      activesupport (~> 3.2.3)
-      redis-store (~> 1.1.0)
-    redis-rack (1.4.2)
-      rack (~> 1.4.1)
-      redis-store (~> 1.1.0)
-    redis-rails (3.2.3)
-      redis-actionpack (~> 3.2.3)
-      redis-activesupport (~> 3.2.3)
-      redis-store (~> 1.1.0)
-    redis-store (1.1.3)
-      redis (>= 2.2.0)
     remotipart (1.0.2)
     responders (0.9.3)
       railties (~> 3.1)
@@ -364,6 +348,7 @@ DEPENDENCIES
   capistrano-unicorn
   coffee-rails (~> 3.2.1)
   collections
+  dalli
   debugger
   devise
   ekuseru
@@ -389,8 +374,6 @@ DEPENDENCIES
   quiet_assets
   rack-mini-profiler
   rails (= 3.2.15)
-  redis-rails
-  redis-store
   remotipart (~> 1.0)
   ruby-pinyin
   rubyzip

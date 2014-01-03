@@ -55,8 +55,7 @@ gem 'exception_notification'
 gem 'newrelic_rpm', "~> 3.6.0.78"
 gem 'ekuseru'
 
-gem 'redis-store'
-gem 'redis-rails'
+gem 'dalli'
 
 gem "second_level_cache", "~> 1.6"
 

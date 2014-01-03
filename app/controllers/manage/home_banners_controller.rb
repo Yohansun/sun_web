@@ -15,15 +15,11 @@ class Manage::HomeBannersController < Manage::BaseController
         @banner.link = params[:link][key.to_sym]
         @banner.save
       end
-      Rails.cache.clear 
-      system('redis-cli flushall')
       redirect_to "/manage/home_banners"
     else
       @upload = HomeBanner.new
       @upload.file = params[:Filedata]
       if @upload.save
-        Rails.cache.clear 
-        system('redis-cli flushall')
         flash[:notice] = "Successfully created upload."
         session[:image_id] = @upload.id
         respond_to do |format|
@@ -42,11 +38,11 @@ class Manage::HomeBannersController < Manage::BaseController
   def destroy
     @banner = HomeBanner.find params[:id]
     @banner.delete
-    redirect_to home_banners_path 
+    redirect_to home_banners_path
   end
 
   def update
-    
+
   end
 
 end
