@@ -32,8 +32,11 @@ $(document).ready ->
       window.open("/users/" + $.readCookie("user_id") + "/edit?edit_by=home_banner2", "_blank");
 
   else
-    $('#new_user').bind 'ajax:error', (xhr, status, error) =>
-      err_in()
+    $('#overlay_new_user').live 'ajax:error', (xhr, status, error) =>
+      $('.err_tips').fadeIn 600, ->
+        errs_out = setTimeout ->
+          $('.err_tips').fadeOut()
+        ,3000
 
     $("#per_form, #new_message, #new_reply_msg, #new_faq, #channel_service").submit =>
       show_login()
