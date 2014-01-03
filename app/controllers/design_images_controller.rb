@@ -398,7 +398,7 @@ class DesignImagesController < ApplicationController
     cache_key = [params[:image_id], params[:path]].join
     if params[:offset] == params[:fix_offset]
       if @offset >= 4
-        @images = @images.select("distinct design_images.id, design_images.*").offset(@offset - 4).limit(9).all
+        @images = @images.select("design_images.id, design_images.*").offset(@offset - 4).limit(9).all
         index = @images.map(&:id).index(params[:image_id].to_i) || 0
         @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}", expires_in: 7.days) do
           [@images[index - 1], @images[index - 4]]
@@ -408,7 +408,7 @@ class DesignImagesController < ApplicationController
         end
         @images = @images[4, 4]
       else
-        @images = @images.select("distinct design_images.id, design_images.*").offset(0).limit(@offset + 9).all
+        @images = @images.select("design_images.id, design_images.*").offset(0).limit(@offset + 9).all
         if @offset > 0
           @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}", expires_in: 7.days) do
             [@images[@offset - 1], @images[0]]
@@ -424,7 +424,7 @@ class DesignImagesController < ApplicationController
     else
       @prev_images = Rails.cache.fetch("data-model-prev_image-#{cache_key}")
       @next_images = Rails.cache.fetch("data-model-next_image-#{cache_key}")
-      @images = @images.select("distinct design_images.id, design_images.*").offset(@offset).limit(4).all
+      @images = @images.select("design_images.id, design_images.*").offset(@offset).limit(4).all
     end
 
 
