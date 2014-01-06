@@ -1,11 +1,14 @@
 #= require 'application'
 #= require 'jsCookie'
+#= require 'jquery.lazyload'
 #= require 'manage/bootstrap'
 #= require 'manage/jquery.slider'
 #= require 'LinkageSelect'
 #= require_self
 
 $(document).ready ->
+  $("img.lazy").lazyload();
+
   # check login box
   if $.readCookie("user_id")? and $.readCookie("user_id") != ''
     # fill user info
