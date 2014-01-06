@@ -119,6 +119,12 @@ GEM
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1)
+    dimensions (1.3.0)
+    dimensions-rails (1.1.0)
+      actionpack (>= 3.0, < 4.1)
+      activesupport (>= 3.0, < 4.1)
+      dimensions
+      railties (>= 3.0, < 4.1)
     ekuseru (0.3.10)
       rails (>= 3.0)
       spreadsheet (>= 0.6)
@@ -358,6 +364,7 @@ DEPENDENCIES
   dalli
   debugger
   devise
+  dimensions-rails
   ekuseru
   exception_notification
   grape
