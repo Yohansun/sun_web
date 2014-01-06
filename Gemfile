@@ -59,6 +59,7 @@ gem 'dalli'
 
 gem "second_level_cache", "~> 1.6"
 gem "cache_digests"
+gem 'dimensions-rails'
 
 #发送短信
 gem 'savon'
