@@ -144,7 +144,7 @@ $(function(){
         <div class="media">
           <% if @fit_image.present? %>
           <a class="pull-left media_a" href="<%= @fit_image.try(:link)%>">
-            <%= image_tag(@fit_image.file, :class => "media-object") %>
+            <%= image_tag(@fit_image.file.try(:url, :img), :class => "media-object") %>
             <h6><%= @fit_image.try(:title)%><i class="icon-i16 icon-more_yellow"></i></h6>
           </a>
           <% end %>
