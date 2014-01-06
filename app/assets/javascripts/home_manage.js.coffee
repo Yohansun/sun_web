@@ -12,7 +12,7 @@ $(document).ready ->
   # check login box
   if $.readCookie("user_id")? and $.readCookie("user_id") != ''
     # fill user info
-    $('.js-user-name').html($.readCookie("user_display_name"))
+    $('.js-user-name').html(decodeURI($.readCookie("user_display_name")))
     $('.js-user-homepage').attr('href', "/users/" + $.readCookie("user_id") + "/asks")
 
     $('.js-user-info').show()
