@@ -135,33 +135,35 @@
       <!--profile_info ends-->
     </div>
     <!--profile ends-->
-    <div class="shadow mb25">
-      <div class="section">
-        <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
-        <%- if !@article.interview_content_type.blank? %>
-            <%- if @article.interview_content_type == "问答类型访谈" %>
-                <%- t = @article.interview_content.split("\r\n\r\n") %>
-                <%- (t.size/2).times do |i| %>
-                    <div class="interview_box">
-                      <div class="interview">
-                        <h3><%= t[2*i] %></h3>
+    <%- if @article.interview_content.present? %>
+      <div class="shadow mb25">
+        <div class="section">
+          <div class="tit_bg"><h2>访谈内容INTERVIEW</h2></div>
+          <%- if !@article.interview_content_type.blank? %>
+              <%- if @article.interview_content_type == "问答类型访谈" %>
+                  <%- t = @article.interview_content.split("\r\n\r\n") %>
+                  <%- (t.size/2).times do |i| %>
+                      <div class="interview_box">
+                        <div class="interview">
+                          <h3><%= t[2*i] %></h3>
 
-                        <p class="interview_icon"><%= t[2*i+1] %></p>
+                          <p class="interview_icon"><%= t[2*i+1] %></p>
+                        </div>
                       </div>
-                    </div>
-                <%- end %>
-            <%- else %>
-                <div class="interview_box text ft12">
-                  <%- t = @article.interview_content.split(%r(\r\n)) %>
-                  <%- t.each do |a| %>
-                      <p><%= raw a %></p>
                   <%- end %>
-                </div>
-                <!--interview_box ends-->
-            <%- end %>
-        <%- end %>
+              <%- else %>
+                  <div class="interview_box text ft12">
+                    <%- t = @article.interview_content.split(%r(\r\n)) %>
+                    <%- t.each do |a| %>
+                        <p><%= raw a %></p>
+                    <%- end %>
+                  </div>
+                  <!--interview_box ends-->
+              <%- end %>
+          <%- end %>
+        </div>
       </div>
-    </div>
+    <%- end %>
     <div class="shadow mb25">
       <div class="section">
         <div class="tit_bg"><h2>作品欣赏WORKS</h2></div>
