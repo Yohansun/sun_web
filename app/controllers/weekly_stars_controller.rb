@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'zip/zip'
 class WeeklyStarsController < ApplicationController
   layout "home_manage"
   DefaultActions = {
