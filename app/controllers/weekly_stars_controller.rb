@@ -12,25 +12,22 @@ class WeeklyStarsController < ApplicationController
   helper_method :star_blank?
 
 	def download
-		target_file = WeeklyStar.find(params[:id])
-		image_paths = []
-
-		target_file.weekly_star_uploads.tap do |weekly|
-			weekly.collect {|x| image_paths << x.file.path if File.exists?(x.file.path)}
-		end
-		added_actions = DefaultActions.merge(:index => "每周之星")
-		#防止传过来的值不一致造成对服务器的攻击
-		raise "参数不包含在列表中" unless added_actions.keys.include?(params[:target].to_sym)
-		target_name = added_actions[params[:target].to_sym]
-
-		find_or_build_zip_file("public/#{target_name}.zip",:ab_paths => image_paths,:cache_name => PinYin.permlink(target_name)) do |zfile|
-			send_file zfile
-		end
-
-	rescue Exception => e
-		respond_to do |format|
-			format.html {render :text => %!<script>alert("#{e.message}");window.history.back(-1)</script>!}
-		end
+		target_file = WeeklyStar.find(params[:id]).weekly_star_uploads
+		unless target_file.blank?
+      zipfile_name = "#{Rails.root}/public/system/zip/weekly_star#{params[:id]}.zip"
+      if File.exists?(zipfile_name)
+        send_file zipfile_name
+      else
+        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+          target_file.each do |filename|
+            zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
+          end
+        end
+        send_file zipfile_name
+      end
+    else
+      redirect_to :back
+    end
 	end
 
   def index
