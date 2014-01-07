@@ -1,11 +1,17 @@
+<% content_for :head do -%>
+<style type="text/css">
+  .map-next-bullet{background-position: center 1px;margin-bottom: 10px;}
+  .map-prev-bullet{background-position: center -13px;margin-bottom:0;}
+</style>
+<% end -%>
 <% content_for :tail do -%>
   <%= javascript_include_tag "manage/map-kv-slider", "/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript">
     $(function(){
-      $('.js-slider-next').click(function(){
+      $('.js-slider-prev').click(function(){
         $('.slides_box').find('.map-next').click()
       });
-      $('.js-slider-prev').click(function(){
+      $('.js-slider-next').click(function(){
         $('.slides_box').find('.map-prev').click()
       });
       // 评论JS
@@ -57,9 +63,9 @@
         <a href="javascript:;" class="slider-next js-slider-next">next</a>
       </div>
       <div class="map-kv-slider pull-right">
-        <a href="javascript:;" class="map-prev-bullet js-map-prev-bullet">prev</a>
+        <a href="javascript:;" class="map-next-bullet js-map-next-bullet">prev</a>
         <hr class="nomargin">
-        <a href="javascript:;" class="map-prev js-map-prev">上一张图</a>
+        <a href="javascript:;" class="map-next js-map-next">上一张图</a>
         <div class="map-kv-container">
           <ul>
             <%- @design_imgs.each_with_index do |image,index| %>
@@ -71,9 +77,9 @@
             <%- end %>
           </ul>
         </div>
-        <a href="javascript:;" class="map-next js-map-next">下一张图</a>
+        <a href="javascript:;" class="map-prev js-map-prev">下一张图</a>
         <hr class="nomargin">
-        <a href="javascript:;" class="map-next-bullet js-map-next-bullet mt10">next</a>
+        <a href="javascript:;" class="map-prev-bullet js-map-prev-bullet mt10">next</a>
       </div>
     </div>
   </div>

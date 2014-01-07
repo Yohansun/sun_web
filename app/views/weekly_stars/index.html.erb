@@ -2,6 +2,14 @@
   <%= stylesheet_link_tag "imageflow", "style" %>
   <style type="text/css">
     .designs_in_slide #gallery_caption{visibility: hidden;}
+    #gallery{
+      -webkit-user-select: none; /* Chrome/Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+ */
+      /* Rules below not implemented in browsers yet */
+      -o-user-select: none;
+      user-select: none;
+    }
   </style>
 <% end -%>
 <%- content_for :tail do %>
@@ -57,7 +65,7 @@
   <div class="index_main nopadding">
     <div class="slides_box">
       <div class="designs_in_slide pr">
-        <div class="imageflow" id="gallery">
+        <div class="imageflow" id="gallery" unselectable="on">
           <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
             <%= image_tag(star_upload.file.url(:slide), :class => "cloudcarousel", :'data-id' => star_upload.id, :alt => "#gallery#{index+1}") unless star_upload.file.nil? %>
           <%- end %>

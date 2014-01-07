@@ -64,11 +64,19 @@ class ColorDesignsController < ApplicationController
 
   def download
     target_file = ColorDesign.find(params[:id])
-      if target_file
-        send_file target_file.show_preview_img.path
+    unless target_file.blank?
+      zipfile_name = "#{Rails.root}/public/system/zip/color_designs#{params[:id]}.zip"
+      if File.exists?(zipfile_name)
+        send_file zipfile_name
       else
-        render nothing: true, status: 404
+        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+          zipfile.add(target_file.show_preview_img_file_name, target_file.show_preview_img.path) if File.exists?(target_file.show_preview_img.path)
+        end
+        send_file zipfile_name
       end
+    else
+      redirect_to :back
+    end
   end
 
 end

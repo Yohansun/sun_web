@@ -101,13 +101,13 @@
           <%= link_to "", new_user_design_path(current_user), class: 'pull-right designs_upload_btn' %>
         <% end -%>
       <% else -%>
-        <%= link_to_function "", "show_login()", class: 'pull-right designs_upload_btn' %>
+        <a href="/users/sign_in" class="pull-right designs_upload_btn"></a>
       <% end -%>
       <div class="btn-group">
         <a href="<%= design_search_link %>&order=最新" class="btn <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
         <a href="<%= design_search_link %>&order=最热" class="btn <%= 'active' if params[:order] == '最热' %>">最热</a>
       </div>
-      <a href="<%= design_search_link %>&order=因爱之名" class="designs_search_btn"></a>
+      <a href="/designs?order=因爱之名" class="designs_search_btn"></a>
     </div>
 
     <div class="index_main mt10">
