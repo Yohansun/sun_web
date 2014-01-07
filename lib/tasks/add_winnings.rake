@@ -59,16 +59,22 @@ task :update_winning_image => :environment  do
   end
 end
 
-task :update_winning_image2 => :environment  do
-  w = Winning.find_by_name("徐结斌")
-  (1..4).each do |i|
-    winning_image = WinningImages.new
-    winning_image.image_url = "/system/winning_image/xujiebin2#{i}.jpg"
-    winning_image.winning_id = w.id
-    if winning_image.save
-      p "保存成功#{winning_image.id}"
+task :update_winning => :environment  do
+  Spreadsheet.client_encoding ="UTF-8"
+  book = Spreadsheet.open "#{Rails.root}/lib/data/update_winning.xls"
+  sheet1 = book.worksheet 0
+  sheet1.each do |row|
+    winning = Winning.find_by_name(row[0])
+    if winning
+      winning.name = "#{row[1]}"
+      winning.centent = "#{row[2]}"
+      if winning.save
+        p "#{row[0]}修改成功#{winning.name}"
+      else
+        p "#{row[0]}修改失败#{winning.name}"
+      end
     else
-      p "保存失败#{winning_image.id}"
+      p "没有找到#{row[0]}"
     end
   end
 end
