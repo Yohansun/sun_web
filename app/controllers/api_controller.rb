@@ -155,6 +155,59 @@ class ApiController < ApplicationController
     end
   end
 
+  def update_tags
+    Rails.logger.info(request.remote_ip)
+    if request.remote_ip == '134.119.11.173'
+      Rails.logger.info(1111111111111111111111)
+      if params[:p_id].present?
+        @image = DesignImage.find(params[:p_id])
+        if @image.present?
+          @image.is_cover = params[:p_is_cover] if params[:p_is_cover].present?
+          @image.title = params[:p_title] if params[:p_title].present?
+          @image.color1 = params[:p_color1] if params[:p_color1].present?
+          @image.color2 = params[:p_color2] if params[:p_color2].present?
+          @image.color3 = params[:p_color3] if params[:p_color3].present?
+          @image.color1_name = params[:p_color1_name] if params[:p_color1_name].present?
+          @image.color2_name = params[:p_color2_name] if params[:p_color2_name].present?
+          @image.color3_name = params[:p_color3_name] if params[:p_color3_name].present?
+          @image.edited_color = params[:p_edited_color] if params[:p_edited_color].present?
+          @image.source = params[:p_source] if params[:p_source].present?
+          @image.last_updated_at = Time.now
+          if @image.save
+            if params[:ptag_id].present?
+              ptag_id = params[:ptag_id].split(",")
+              ImageTag.destroy_all(design_image_id: @image.id)
+              ParentTag.destroy_all(design_image_id: @image.id)
+              ptag_id.each {|tag| @image.tags << ImageTag.new(image_library_category_id: tag)}
+            end
+            render :text => 'true' and return
+          else
+            render :text => 'false' and return
+          end
+        end
+      end
+      if params[:a_id].present?
+        design = Design.find params[:a_id]
+        if design.present?
+          design.title = params[:a_title] if params[:a_title].present?
+          design.content = params[:a_content] if params[:a_content].present?
+          if design.save
+            if params[:atag_id].present?
+              atag_id = params[:atag_id].split(",")
+              DesignTags.destroy_all(design_id: design.id)
+              atag_id.each {|tag| design.design_tags << DesignTags.new(image_library_category_id: tag)}
+            end
+            render :text => 'true' and return
+          else
+            render :text => 'false' and return
+          end
+        end
+      end
+    else
+      render :text => 'false' and return
+    end
+  end
+
   def cors_set_access_control_headers
     headers['Access-Control-Allow-Origin']      = '*'
     headers['Access-Control-Allow-Methods']     = 'POST'
