@@ -17,7 +17,7 @@
 	<a href="/images/<%= show_link(more_id) %>" target="_blank" class="pull-right"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
 	<strong class="pull-left mr10 ft14"><%= name %></strong>
 	<%- tags.each_with_index do |tag,index| %>
-		<a href="/images/<%= show_link(tag.id) %>"><%= tag.title %></a>
+		<a href="/images/<%= show_link(tag.id) %>" target="_blank"><%= tag.title %></a>
 		<%- unless index == tags.size - 1 %> |<%- end %>
 	<%- end %>
 </p>
