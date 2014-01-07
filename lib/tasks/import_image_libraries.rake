@@ -143,7 +143,7 @@ task :import_image_libraries_for_kepulande => :environment  do
         new_user.username = "#{name}-kepulande"
         new_user.password = '123456'
         new_user.types = '设计师'
-        new_user.name_of_company = row[4] if row[4].present?
+        new_user.name_of_company = row[3] if row[3].present?
         new_user.email = row[8] if row[8].present?
         new_user.source = 'kepulande'
         new_user.role_id = 1
@@ -186,8 +186,8 @@ task :import_image_libraries_for_kepulande => :environment  do
               design_image.source = 'kepulande'
               p "~~~~~~~开始保存！"
               if design_image.save
-                if row[6].present?
-                  tag_arr = row[6].split(',')
+                if row[4].present?
+                  tag_arr = row[4].split(',')
                   tag_arr.each do |tag|
                     style = ImageLibraryCategory.where("title like ?",'%#{tag}%').first
                     ImageTag.create(image_library_category_id: style.id, design_image_id: design_image.id, genre: 'kepulande').first if style
