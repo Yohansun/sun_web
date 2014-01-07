@@ -16,7 +16,7 @@
 						<% @home_life_videos.each do |hfv| %>
 						<li class="item">
 							<a class="pull-left media_a title_opacity" href="<%=hfv.url%>">
-								<img class="media-object" data-src="holder.js/64x64" src="<%=hfv.file.url(:list_1000x85)%>">
+								<img class="lazy" data-original="<%= hfv.file.url(:list_1000x85) %>" width="1000" height="85" />
 								<p>
 									<span><%=hfv.title%></span>
 								</p>
@@ -28,15 +28,8 @@
 				<ul class="circle_indicators nomargin">
 					<li class="slider-active"><a href="javascript:;">1</a></li>
 					<li><a href="javascript:;">2</a></li>
-					<!-- <li><a href="javascript:;">3</a></li> -->
 				</ul>
 			</div>
-			<!-- <a class="pull-left media_a title_opacity" href="#">
-				<img class="media-object" data-src="holder.js/64x64" src="images/index/refresh_video.jpg">
-				<p>
-					<span>幸福生活 新的开始</span>
-				</p>
-			</a> -->
 			<div class="media-body">
 				<h5 class="title nomargin"><a class="pull-right" href="/refresh_life/refresh_list"><small class="muted">更多></small></a>精彩资讯</h5 class="title">
 				<ul class="unstyled nomargin">
@@ -46,7 +39,11 @@
 				</ul>
 			</div>
 		</div>
-		<a href="javascript:void(0);"class="home_banner2"><%= image_tag @banner2.try(:file).try(:url, :list_240x170), class: 'pull-left mr5' %></a>
-		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' if @banner3 %>" target="_blank"><%= image_tag @banner3.try(:file).try(:url, :list_230x170), class: 'pull-left' %></a>
+		<a href="javascript:void(0);"class="home_banner2">
+			<img class="pull-left mr5 lazy" data-original="<%= @banner2.try(:file).try(:url, :list_240x170) %>" width="240" height="170" />
+		</a>
+		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' if @banner3 %>" target="_blank">
+			<img class="pull-left lazy" data-original="<%= @banner3.try(:file).try(:url, :list_230x170) %>" width="230" height="170" />
+		</a>
 	</div>
 </div>

@@ -28,7 +28,9 @@ $(function(){
           <ul class="clearfix">
             <%- @home_kvs.each_with_index do |k,index| %>
               <li class="item">
-                  <a href="javascript:;" onclick="window.open('<%= k.url %>','','')" target="_blank"><%= image_tag(k.try(:file).try(:url,:big), usemap: "#mapkv#{index}") %></a>
+                  <a href="javascript:;" onclick="window.open('<%= k.url %>','','')" target="_blank">
+                    <img class="lazy" data-original="<%= k.try(:file).try(:url,:big) %>" usemap="#mapkv<%= index %>" width="700" height="345" />
+                  </a>
                   <%- if k.kv_maps.any? %>
                     <map id="mapkv<%= index %>" name="mapkv<%= index %>">
                       <%- k.kv_maps.each do |map| %>
@@ -57,7 +59,9 @@ $(function(){
         <%- end %>
       </ul>
       <div class="indexkv_r_img">
-        <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' if @banner1 %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_270x100) %></a>
+        <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' if @banner1 %>" target="_blank">
+          <img class="lazy" data-original="<%= @banner1.try(:file).try(:url, :list_270x100) %>" width="270" height="100" />
+        </a>
       </div>
     </div>
   </div>
@@ -91,7 +95,9 @@ $(function(){
           <ul>
             <%- @master_design_images.each do |img|%>
               <li>
-                <a href="/master_designs/<%= img.master_design_id if img %>" target="_blank"><%= image_tag img.try(:file).try(:url,:home_slide) if img %></a>
+                <a href="/master_designs/<%= img.master_design_id if img %>" target="_blank">
+                  <img class="lazy" data-original="<%= img.try(:file).try(:url,:home_slide) if img %>" width="145" height="125" />
+                </a>
               </li>
             <%- end %>
           </ul>
@@ -101,7 +107,9 @@ $(function(){
   </div>
 
   <div class="footer_banner">
-    <a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' if @banner4 %>" target="_blank"><%= image_tag @banner4.try(:file).try(:url, :list_1000x85) %></a>
+    <a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' if @banner4 %>" target="_blank">
+      <img class="lazy" data-original="<%= @banner4.try(:file).try(:url, :list_1000x85) %>" width="1000" height="85" />
+    </a>
   </div>
 
   <%= render :partial => 'design_show' %>
@@ -119,7 +127,9 @@ $(function(){
       <hr class="border2 border2_mt2">
       <div class="index_main">
         <div class="media tit_con">
-          <a href="<%= @banner5.url? ? @banner5.url : 'javascript:void(0);' if @banner5 %>" target="_blank" class="pull-left media_a"><%= image_tag @banner5.try(:file).try(:url, :list_290x200), class: 'media-object' %></a>
+          <a href="<%= @banner5.url? ? @banner5.url : 'javascript:void(0);' if @banner5 %>" target="_blank" class="pull-left media_a">
+            <img class="media-object lazy" data-original="<%= @banner5.try(:file).try(:url, :list_290x200) %>" width="290" height="200" />
+          </a>
           <div class="media-body">
             <ul class="ul_dot nomargin">
               <% @owner_entrys.each_with_index do |oe,index| %>
@@ -144,7 +154,7 @@ $(function(){
         <div class="media">
           <% if @fit_image.present? %>
           <a class="pull-left media_a" href="<%= @fit_image.try(:link)%>">
-            <%= image_tag(@fit_image.file.try(:url, :img), :class => "media-object") %>
+            <img class="media-object lazy" data-original="<%= @fit_image.file.try(:url, :img) %>" width="138" height="165" />
             <h6><%= @fit_image.try(:title)%><i class="icon-i16 icon-more_yellow"></i></h6>
           </a>
           <% end %>
@@ -164,9 +174,13 @@ $(function(){
 
   <div class="clearfix">
     <div class="footer_banner pull-left">
-      <a href="<%= @banner6.url? ? @banner6.url : 'javascript:void(0);' if @banner6 %>" target="_blank"><%= image_tag @banner6.try(:file).try(:url, :list_670x85) %></a>
+      <a href="<%= @banner6.url? ? @banner6.url : 'javascript:void(0);' if @banner6 %>" target="_blank">
+        <img class="lazy" data-original="<%= @banner6.try(:file).try(:url, :list_670x85) %>" width="670" height="85" />
+      </a>
     </div>
     <div class="footer_banner pull-right">
-      <a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);' if @banner7 %>" target="_blank"><%= image_tag @banner7.try(:file).try(:url, :list_310x85) %></a>
+      <a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);' if @banner7 %>" target="_blank">
+        <img class="lazy" data-original="<%= @banner7.try(:file).try(:url, :list_310x85) %>" width="310" height="85" />
+      </a>
     </div>
   </div>
