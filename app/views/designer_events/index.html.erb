@@ -30,39 +30,43 @@
             <img src="<%=@event_ks.file.url(:big)%>" width="730" height="300" alt="" />
           </a>
         </div>
-        <h5 class="sub_title">近期活动</h5>
-        <% @active_now.each do |active| %>
-          <div class="media tit_con">
-            <a class="pull-left media_a" href="/designer_events/<%=active.id%>">
-              <img class="media-object" src="<%=active.file.url(:list) %>">
-            </a>
-            <div class="media-body refresh_list">
-              <ul class="ul_dot clearfix nomargin">
-                <li>
-                  <h5 class="nomargin"><a href="/designer_events/<%=active.id%>" target="_blank"><%=active.title %></a></h5>
-                  <p class="nomargin"><a href="/designer_events/<%=active.id%>"><%=active.intro %></a></p>
-                </li>
-              </ul>
-              <div class="nomargin clearfix"><a class="btn_detail pull-left" href="/designer_events/<%=active.id%>">查看详情</a></div>
+        <% if @active_now.present? %>
+          <h5 class="sub_title">近期活动</h5>
+          <% @active_now.each do |active| %>
+            <div class="media tit_con">
+              <a class="pull-left media_a" href="/designer_events/<%=active.id%>">
+                <img class="media-object" src="<%=active.file.url(:list) %>">
+              </a>
+              <div class="media-body refresh_list">
+                <ul class="ul_dot clearfix nomargin">
+                  <li>
+                    <h5 class="nomargin"><a href="/designer_events/<%=active.id%>" target="_blank"><%=active.title %></a></h5>
+                    <p class="nomargin"><a href="/designer_events/<%=active.id%>"><%=active.intro %></a></p>
+                  </li>
+                </ul>
+                <div class="nomargin clearfix"><a class="btn_detail pull-left" href="/designer_events/<%=active.id%>">查看详情</a></div>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-        <h5 class="sub_title mt10">往期活动</h5>
-        <% @active_period.each do |active| %>
-          <div class="media tit_con">
-            <a class="pull-left media_a" href="/designer_events/<%=active.id%>">
-              <img class="media-object" src="<%=active.file.url(:list) %>">
-            </a>
-            <div class="media-body refresh_list">
-              <ul class="ul_dot clearfix nomargin">
-                <li>
-                  <h5 class="nomargin"><a href="/designer_events/<%=active.id%>" target="_blank"><%=active.title %></a></h5>
-                  <p class="nomargin"><a href="#"><%=active.intro %></a></p>
-                </li>
-              </ul>
-              <div class="nomargin clearfix"><a class="btn_detail btn_detail_gray pull-left" href="/designer_events/<%=active.id%>">查看详情</a></div>
+        <% if @active_period.present? %>
+          <h5 class="sub_title mt10">往期活动</h5>
+          <% @active_period.each do |active| %>
+            <div class="media tit_con">
+              <a class="pull-left media_a" href="/designer_events/<%=active.id%>">
+                <img class="media-object" src="<%=active.file.url(:list) %>">
+              </a>
+              <div class="media-body refresh_list">
+                <ul class="ul_dot clearfix nomargin">
+                  <li>
+                    <h5 class="nomargin"><a href="/designer_events/<%=active.id%>" target="_blank"><%=active.title %></a></h5>
+                    <p class="nomargin"><a href="#"><%=active.intro %></a></p>
+                  </li>
+                </ul>
+                <div class="nomargin clearfix"><a class="btn_detail btn_detail_gray pull-left" href="/designer_events/<%=active.id%>">查看详情</a></div>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
         <form class="pager pager-form noborder">
           <%= paginate @active_period if @active_period.present? %>
