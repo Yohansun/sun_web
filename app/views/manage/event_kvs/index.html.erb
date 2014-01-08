@@ -57,7 +57,7 @@
       </div>
     </div>
     <%= image_tag @event_kv.try(:file).try(:url, :big), id: 'event_kvs_img' %>
-    <div class="widget-box">
+    <div class="widget-box" style="width:700px;">
       <h5 class="lighter">热区:</h5>
       <div class="widget-main">
         <%= form_for(KvMap.new, :html => {:class => "form-inline"}, remote: true ) do |f| %>
