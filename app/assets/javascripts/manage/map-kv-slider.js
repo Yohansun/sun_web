@@ -58,6 +58,9 @@ jQuery(function($){
 		// 	}
 		// }
 	});
-
+	var hash = window.location.hash.slice(1)
+	if(hash || hash.length){
+		$('[data-id=' + hash + ']').parents('li').click()
+	}
 
 });

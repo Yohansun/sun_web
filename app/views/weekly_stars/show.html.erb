@@ -73,7 +73,7 @@
             <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
               <li class="<%= 'map-active' if index == 0 %>">
                 <a href="javascript:;"><span></span>
-                  <%= image_tag star_upload.file.url(:show_big), size: "75x75",index: "#{index}", alt: "" %>
+                  <%= image_tag star_upload.file.url(:show_big), size: "75x75",index: "#{index}", alt: "", :'data-id' => star_upload.id %>
                 </a>
               </li>
             <%- end %>

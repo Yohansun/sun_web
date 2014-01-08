@@ -30,7 +30,7 @@
       opacity:            true,          /* Toggle image opacity */
       opacityArray:       [10,7],         /* Image opacity (range: 0 to 10) first value is for the focussed image */
       percentLandscape:   300,           /* Scale landscape format */
-      onClick:            function() { window.open('/weekly_stars/<%= @design.id%>')}
+      onClick:            function() { window.open('/weekly_stars/<%= @design.id%>#'+ $(this).data('id'))}
     });
   });
   </script>
