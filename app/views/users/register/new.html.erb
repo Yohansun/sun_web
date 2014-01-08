@@ -122,7 +122,7 @@
               <span class="help-inline text-important">*</span>
             </label>
             <div class="controls">
-              <input class="input-xlarge mr5 js-required js-phone" type="text" id="phone" name="user[phone]">
+              <input class="input-xlarge mr5 js-required js-phone" type="text" id="phone" name="user[phone]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
               <span id="lab_phone" class="label label-blue">请填写您常用电话以便通知获奖信息</span>
             </div>
           </div>

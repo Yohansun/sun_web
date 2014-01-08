@@ -217,12 +217,13 @@
           var $label_tips = $(this).siblings('span.label');
           var $label_tips_nobg = $label_tips.removeClass('label-blue label-green label-important');
           // var reg = /^(\([0-9]{3,4}\)|[0-9]{3,4}\-)?[0-9]{7,8}$/;//telephone
-          var reg = /^0?(13|15|18|14)[0-9]{9}$/;//mobile
+          // var reg = /^0?(13|15|18|14)[0-9]{9}$/;//mobile
+          var reg = $(this).val().length;
           var $phone = $(this).val();
-          if ($(this).val() == '') {
+          if (reg == 0) {
             $label_tips_nobg.addClass('label-important').show().text('电话不能为空');
             phone_flag = false;
-          }else if (!reg.test($phone) ) {
+          }else if (reg < 8 && reg > 11) {
             $label_tips_nobg.addClass('label-important').show().text('电话格式有误');
             phone_flag = false;
           }else{
