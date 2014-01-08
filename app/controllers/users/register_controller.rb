@@ -26,6 +26,8 @@ class Users::RegisterController < Devise::RegistrationsController
         if resource.active_for_authentication?
           resource.create_score(resource.id, 101, 1, 100)
           sign_in(resource_name, resource)
+          cookies['user_display_name'] = resource.display_name
+          cookies['user_id'] = resource.id
           respond_with resource
         else
           expire_session_data_after_sign_in!
