@@ -2,7 +2,7 @@
   <div class="row show-grid">
     <div class="span2">
       <a href="<%= new_other_event_path %>" class="btn btn-small btn-primary">新活动</a>
-      <a href="/manage/event_kvs?klass_name=other_events" class="btn btn-small btn-primary">设置主kv</a>
+      <a href="/manage/event_kvs?klass_name=other_events" class="btn btn-small btn-primary">设置焦点图</a>
     </div>
     <div class="span10 pull-right">
         <%= form_tag('/manage/other_events', :class => 'form-inline', :method => 'get') do %>
@@ -41,7 +41,7 @@
             <tr>
               <td>
                 <%= link_to '编辑', edit_other_event_path(other_event) %>&nbsp;|&nbsp;
-                <%= link_to "删除", other_event_path(other_event), data: {confirm: '是否确定删除这项设计师活动?',method: :delete, remote: true} %>
+                <%= link_to "删除", other_event_path(other_event), data: {confirm: '是否确定删除这项其它活动?',method: :delete, remote: true} %>
               </td>
               <td><%= other_event.end_time.to_date %></td>
               <td><%= other_event.title %></td>
