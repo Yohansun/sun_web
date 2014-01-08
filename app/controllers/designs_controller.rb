@@ -3,6 +3,7 @@ require 'zip/zip'
 class DesignsController < ApplicationController
   layout "home_manage"
   before_filter :find_user
+  before_filter :banner
   before_filter :find_design, :only => [:upload, :edit]
 
   def download
@@ -418,5 +419,9 @@ class DesignsController < ApplicationController
     else
       redirect_to '/'
     end
+  end
+
+  def banner
+    @banners = IBanner.page_name('作品上传').order("position ASC").all
   end
 end
