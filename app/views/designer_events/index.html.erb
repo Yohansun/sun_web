@@ -27,21 +27,28 @@
       <div class="map-left index_main pull-left">
         <div class="designer_event_kv">
           <a href="<%=@event_ks.url %>" target="_blank">
-            <img src="<%=@event_ks.file.url(:big)%>" width="730" height="300" alt="" />
+            <%= image_tag(@event_ks.file.url(:big), usemap: "#event_kv_map") %>
           </a>
+          <%- if @event_ks.kv_maps.any? %>
+            <map id="event_kv_map" name="event_kv_map">
+              <%- @event_ks.kv_maps.each do |map| %>
+                <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+              <%- end %>
+            </map>
+          <%- end %>
         </div>
         <% if @active_now.present? %>
           <h5 class="sub_title">近期活动</h5>
           <% @active_now.each do |active| %>
             <div class="media tit_con">
-              <a class="pull-left media_a" href="/designer_events/<%=active.id%>">
+              <a class="pull-left media_a">
                 <img class="media-object" src="<%=active.file.url(:list) %>">
               </a>
               <div class="media-body refresh_list">
                 <ul class="ul_dot clearfix nomargin">
                   <li>
-                    <h5 class="nomargin"><a href="/designer_events/<%=active.id%>" target="_blank"><%=active.title %></a></h5>
-                    <p class="nomargin"><a href="/designer_events/<%=active.id%>"><%=active.intro %></a></p>
+                    <h5 class="nomargin"><a target="_blank"><%=active.title %></a></h5>
+                    <p class="nomargin"><a><%=active.intro %></a></p>
                   </li>
                 </ul>
                 <div class="nomargin clearfix"><a class="btn_detail pull-left" href="/designer_events/<%=active.id%>">查看详情</a></div>
@@ -53,13 +60,13 @@
           <h5 class="sub_title mt10">往期活动</h5>
           <% @active_period.each do |active| %>
             <div class="media tit_con">
-              <a class="pull-left media_a" href="/designer_events/<%=active.id%>">
+              <a class="pull-left media_a">
                 <img class="media-object" src="<%=active.file.url(:list) %>">
               </a>
               <div class="media-body refresh_list">
                 <ul class="ul_dot clearfix nomargin">
                   <li>
-                    <h5 class="nomargin"><a href="/designer_events/<%=active.id%>" target="_blank"><%=active.title %></a></h5>
+                    <h5 class="nomargin"><a target="_blank"><%=active.title %></a></h5>
                     <p class="nomargin"><a href="#"><%=active.intro %></a></p>
                   </li>
                 </ul>

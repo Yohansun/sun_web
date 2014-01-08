@@ -30,17 +30,17 @@
           <h5 class="sub_title">近期活动</h5>
           <%- @recent_events.each do |recent_event| %>
             <div class="media tit_con">
-              <a class="pull-left media_a" href="<%= other_event_show_path(recent_event)%>" target="_blank">
+              <a class="pull-left media_a" target="_blank">
                 <%= image_tag recent_event.file.url(:list), class: 'media-object' %>
               </a>
               <div class="media-body refresh_list">
                 <ul class="ul_dot clearfix nomargin">
                   <li>
                     <h5 class="nomargin">
-                      <a href="<%= other_event_show_path(recent_event)%>" target="_blank"><%= recent_event.title %></a>
+                      <a target="_blank"><%= recent_event.title %></a>
                     </h5>
                     <p class="nomargin">
-                      <a href="<%= other_event_show_path(recent_event)%>"><%= recent_event.intro %></a>
+                      <a><%= recent_event.intro %></a>
                     </p>
                   </li>
                 </ul>
@@ -53,17 +53,17 @@
           <h5 class="sub_title mt10">往期活动</h5>
           <% @finished_events.each do |finished_event| %>
             <div class="media tit_con">
-              <a class="pull-left media_a" href="<%= other_event_show_path(finished_event)%>" target="_blank">
+              <a class="pull-left media_a" target="_blank">
                 <%= image_tag finished_event.file.url(:list), class: 'media-object' %>
               </a>
               <div class="media-body refresh_list">
                 <ul class="ul_dot clearfix nomargin">
                   <li>
                     <h5 class="nomargin">
-                      <a href="<%= other_event_show_path(finished_event)%>" target="_blank"><%= finished_event.title %></a>
+                      <a target="_blank"><%= finished_event.title %></a>
                     </h5>
                     <p class="nomargin">
-                      <a href="<%= other_event_show_path(finished_event)%>"><%= finished_event.intro %></a>
+                      <a><%= finished_event.intro %></a>
                     </p>
                   </li>
                 </ul>
