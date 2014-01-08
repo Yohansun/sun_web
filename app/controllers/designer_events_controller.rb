@@ -3,9 +3,9 @@ class DesignerEventsController < ApplicationController
   layout "home_manage"
   before_filter :get_data
   def index
-    @event_ks = EventKv.first
-    @active_now = DesignerEvent.active_now
-    @active_period = DesignerEvent.active_period.page(params[:page]).per(5)
+    @event_ks = EventKv.page_name(controller_name).try(:first)
+    @active_now = DesignerEvent.page_name(controller_name).active_now
+    @active_period = DesignerEvent.page_name(controller_name).active_period.page(params[:page]).per(5)
     @banners = IBanner.page_name('设计师活动').order("position ASC").all
   end
 
