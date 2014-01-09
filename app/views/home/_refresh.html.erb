@@ -16,7 +16,7 @@
 						<% @home_life_videos.each do |hfv| %>
 						<li class="item">
 							<a class="pull-left media_a title_opacity" href="<%=hfv.url%>">
-								<img class="lazy" data-original="<%= hfv.file.url(:list_1000x85) %>" width="1000" height="85" />
+								<img class="lazy" data-src="<%= hfv.file.url(:list_1000x85) %>" width="1000" height="85" />
 								<p>
 									<span><%=hfv.title%></span>
 								</p>
@@ -40,10 +40,10 @@
 			</div>
 		</div>
 		<a href="javascript:void(0);"class="home_banner2">
-			<img class="pull-left mr5 lazy" data-original="<%= @banner2.try(:file).try(:url, :list_240x170) %>" width="240" height="170" />
+			<img class="pull-left mr5 lazy" data-src="<%= @banner2.try(:file).try(:url, :list_240x170) %>" width="240" height="170" />
 		</a>
 		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' if @banner3 %>" target="_blank">
-			<img class="pull-left lazy" data-original="<%= @banner3.try(:file).try(:url, :list_230x170) %>" width="230" height="170" />
+			<img class="pull-left lazy" data-src="<%= @banner3.try(:file).try(:url, :list_230x170) %>" width="230" height="170" />
 		</a>
 	</div>
 </div>

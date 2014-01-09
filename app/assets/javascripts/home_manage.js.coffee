@@ -1,13 +1,13 @@
 #= require 'application'
 #= require 'jsCookie'
-#= require 'jquery.lazyload'
+#= require 'jquery.unveil'
 #= require 'manage/bootstrap'
 #= require 'manage/jquery.slider'
 #= require 'LinkageSelect'
 #= require_self
 
 $(document).ready ->
-  $("img.lazy").lazyload(threshold : 600, effect : "fadeIn");
+  $("img.lazy").unveil()
 
   # check login box
   if $.readCookie("user_id")? and $.readCookie("user_id") != ''
