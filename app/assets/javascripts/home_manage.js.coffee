@@ -7,7 +7,7 @@
 #= require_self
 
 $(document).ready ->
-  $("img.lazy").lazyload();
+  $("img.lazy").lazyload(threshold : 600, effect : "fadeIn");
 
   # check login box
   if $.readCookie("user_id")? and $.readCookie("user_id") != ''
