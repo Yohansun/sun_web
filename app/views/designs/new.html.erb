@@ -28,6 +28,47 @@
       sel.bind('.level_2');
       sel.bind('.level_3');
     }
+    var thisForm = $(".js-commit")
+    thisForm.radio1 = thisForm.radio2 = false
+    thisForm.checkbox = 0
+    thisForm.on('click', 'input[name="apartment"]', function(){
+      if( !thisForm.radio1 )  thisForm.radio1 = true
+    }).on('click', 'input[name="use"]', function(){
+      if( !thisForm.radio2 )  thisForm.radio2 = true
+    }).on('click', '[name="style[]"]', function(){
+      if(this.checked) thisForm.checkbox += 1
+      else  thisForm.checkbox -= 1
+    }).submit(function(e){
+      falg = ""
+      design_title = $('#design_title').val();
+      zone = $('#zone').val();
+      property_name = $('#design_property_name').val();
+      if(design_title == ""){
+        falg += '请输入作品名称！'+ '\n'
+      }
+      if( !thisForm.radio1 ){
+        falg += '请选择户型！'+ '\n'
+      }
+      if( thisForm.checkbox <= 0 ){
+        falg += '请选择风格！'+ '\n'
+      }
+      if( !thisForm.radio2 ){
+        falg += '请选择用途！'+ '\n'
+      }
+      if(zone == ""){
+        falg += '请选择城市！'+ '\n'
+      }
+      if(property_name == ""){
+       falg += '请输入楼盘名称！'
+      }
+      if(falg != ""){
+        alert(falg)
+        return false
+      }else{
+        return true
+      }
+
+    })
   })($);
 
   var jump = function (){
@@ -69,7 +110,7 @@
 
   <div class="tab-content upload_content">
     <div class="tab-pane active" id="upload_tab1">
-      <%= form_for([current_user, @design], html: {:class=>"form-horizontal index_main noborder nopadding nomargin"}) do |f| %>
+      <%= form_for([current_user, @design], html: {:class=>"form-horizontal index_main noborder nopadding nomargin js-commit"}) do |f| %>
         <%= hidden_field_tag "story_id", params[:story_id] %>
         <fieldset class="text-center">
           <label class="radio inline">
