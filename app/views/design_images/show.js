@@ -5,4 +5,4 @@ $('.<%= params[:for] %>_images_size').html(parseInt($('.<%= params[:for] %>_imag
 <% end %>
 var txt = parseInt($('.work_size').last().text());
 var work_size = $('.load_total span').text();
-$('.load_total span').text(work_size + txt);
+$('.load_total span').text(parseInt(work_size) + parseInt(txt));
