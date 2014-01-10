@@ -1,4 +1,5 @@
 <%- content_for :tail do %>
+  <%= javascript_include_tag "designs" %>
     <script type="text/javascript">
       $(function() {
         var options = {
@@ -43,31 +44,35 @@
       <%= form_tag designs_path, class: 'map-list-search nomargin', method: :get do %>
         <p class="map-srch-bin">
           您的选择：
-          <% if params[:style].present? %>
-            <span class="map-srch-s"><%= params[:style] %><a href="<%= design_search_link %>&style=" class="map-srch-del">delete</a></span>
-          <% end %>
-          <% if params[:design_color].present? %>
-            <span class="map-srch-s"><%= params[:design_color] %><a href="<%= design_search_link %>&design_color=" class="map-srch-del">delete</a></span>
-          <% end %>
-          <% if params[:order].present? %>
-            <span class="map-srch-s"><%= params[:order] %><a href="<%= design_search_link %>&order=" class="map-srch-del">delete</a></span>
-          <% end %>
-          <% if params[:area_head].present? %>
-            <span class="map-srch-s"><%= @area_head_name %><a href="<%= design_search_link %>&area_head=&area_id=" class="map-srch-del">delete</a></span>
-            <% if params[:area_id].present? %>
-              <span class="map-srch-s"><%= @area_id_name %><a href="<%= design_search_link %>&area_id=" class="map-srch-del">delete</a></span>
+          <span class="js-query-tags">
+            <% if params[:style].present? %>
+              <span class="map-srch-s search-tag-style"><%= params[:style] %><a href="javascript:void(0);" data-name="style" class="map-srch-del">delete</a></span>
             <% end %>
-          <% end %>
+            <% if params[:design_color].present? %>
+              <span class="map-srch-s search-tag-design_color"><%= params[:design_color] %><a href="javascript:void(0);" data-name="design_color" class="map-srch-del">delete</a></span>
+            <% end %>
+            <% if params[:order].present? %>
+              <span class="map-srch-s search-tag-order"><%= params[:order] %><a href="javascript:void(0);" data-name="order" class="map-srch-del">delete</a></span>
+            <% end %>
+            <% if params[:area_head].present? %>
+              <span class="map-srch-s search-tag-area_head"><%= @area_head_name %><a href="javascript:void(0);" data-name="area_head" class="map-srch-del">delete</a></span>
+              <% if params[:area_id].present? %>
+                <span class="map-srch-s search-tag-area_id"><%= @area_id_name %><a href="javascript:void(0);" data-name="area_id" class="map-srch-del">delete</a></span>
+              <% end %>
+            <% end %>
+          </span>
+          <span class="map-srch-s map-srch-reset js-search-now" style="display:none">&nbsp;&nbsp;确定&nbsp;&nbsp;</span>
           <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/designs';">重新选择</span>
         </p>
         <div class="map-list-form map-mini">
           <fieldset class="clearfix">
             <label class="pull-left">风格：</label>
             <span>
+              <%= hidden_field_tag :promit, 1 %>
               <%= hidden_field_tag :style, params[:style] %>
-              <a href="<%= design_search_link %>&style=" class="<%= 'highlight' if params[:style].blank? %>">全部</a>
+              <a href="<%= design_search_link %>&style=" data-name="style" data-val="" class="js-search-tag <%= 'highlight' if params[:style].blank? %>">全部</a>
               <%- design_style_option.each do |design_style| %>
-                <a href="<%= design_search_link %>&style=<%= design_style%>" class="<%= 'highlight' if params[:style] == design_style %>"><%= design_style %></a>
+                <a href="<%= design_search_link %>&style=<%= design_style%>" data-name="style" data-val="<%= design_style %>" class="js-search-tag <%= 'highlight' if params[:style] == design_style %>"><%= design_style %></a>
               <%- end %>
             </span>
           </fieldset>
@@ -75,21 +80,22 @@
             <label class="pull-left">色系：</label>
             <span>
               <%= hidden_field_tag :design_color, params[:design_color] %>
-              <a href="<%= design_search_link %>&design_color=" class="<%= 'highlight' if params[:design_color].blank? %>">全部</a>
+              <%= hidden_field_tag :order, params[:order] %>
+              <a href="<%= design_search_link %>&design_color=" data-name="design_color" data-val="" class="js-search-tag <%= 'highlight' if params[:design_color].blank? %>">全部</a>
               <%- color_design_color_option.each do |color_design_color| %>
-                <a href="<%= design_search_link %>&design_color=<%= color_design_color%>" class="<%= 'highlight' if params[:design_color] == color_design_color %>"><%= color_design_color %></a>
+                <a href="<%= design_search_link %>&design_color=<%= color_design_color%>" data-name="design_color" data-val="<%= color_design_color %>" class="js-search-tag <%= 'highlight' if params[:design_color] == color_design_color %>"><%= color_design_color %></a>
               <%- end %>
             </span>
           </fieldset>
           <fieldset class="clearfix noborder">
             <label class="pull-left mt6">地区：</label>
             <span class="mt6">
-              <a href="<%= design_search_link %>&area_head=&area_id=" class="<%= 'highlight' if params[:area_head].blank? && params[:area_id].blank? %>" style="margin-right:15px;">全部</a>
+              <a href="<%= design_search_link %>&area_head=&area_id=" data-name="area_head" data-val="" class="js-search-tag <%= 'highlight' if params[:area_head].blank? && params[:area_id].blank? %>" style="margin-right:15px;">全部</a>
               <select id="province" class="level_1" name="area_head" style="width:100px;">
               </select>
               <select id="city" class="level_2" name="area_id" style="width:100px;">
               </select>
-              <input type="submit" class="map-srch-submit" value="确定">
+              <input type="submit" class="map-srch-submit js-area-submit" value="确定" onclick="return false;">
             </span>
           </fieldset>
         </div>
@@ -104,8 +110,8 @@
         <a href="/users/sign_in" class="pull-right designs_upload_btn"></a>
       <% end -%>
       <div class="btn-group">
-        <a href="<%= design_search_link %>&order=最新" class="btn <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
-        <a href="<%= design_search_link %>&order=最热" class="btn <%= 'active' if params[:order] == '最热' %>">最热</a>
+        <a href="<%= design_search_link %>&order=最新" data-name="order" data-val="最新" class="btn js-search-tag <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
+        <a href="<%= design_search_link %>&order=最热" data-name="order" data-val="最热" class="btn js-search-tag <%= 'active' if params[:order] == '最热' %>">最热</a>
       </div>
       <a href="/designs?order=因爱之名" class="designs_search_btn"></a>
     </div>

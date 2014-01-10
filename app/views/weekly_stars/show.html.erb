@@ -114,7 +114,7 @@
       <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
         <div class="colors_box clearfix nomargin <%= 'none' unless index == 0 %>">
           <div class="pull-left"><img src="<%= asset_path 'imgbase_in/color.jpg' %>"></div>
-          <ul class="pull-left group unstyled">
+          <ul class="pull-left group unstyled colorbox_ul">
             <%- color1, color2, color3 = search_color_code(star_upload.recommend_color1), search_color_code(star_upload.recommend_color2), search_color_code(star_upload.recommend_color3) %>
             <% if color1 %>
               <li>

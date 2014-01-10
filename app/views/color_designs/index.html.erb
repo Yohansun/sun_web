@@ -1,3 +1,6 @@
+<%- content_for :tail do %>
+  <%= javascript_include_tag "color_designs" %>
+<%- end %>
  <h3 class="chann_caption nomargin">
   <i class="icon-map icon-map3 icon_colors"></i>
   <strong>设计鉴赏</strong>
@@ -23,45 +26,48 @@
       <form action="#" method="" class="map-list-search nomargin">
         <p class="map-srch-bin">
           您的选择：
+          <span class="js-query-tags">
           <% if params[:style].present? %>
-            <span class="map-srch-s"><%= params[:style] %><a href="<%= color_design_search_link %>&style=" class="map-srch-del">delete</a></span>
+            <span class="map-srch-s search-tag-style"><%= params[:style] %><a href="javascript:void(0);" data-name="style" class="map-srch-del">delete</a></span>
           <% end %>
           <% if params[:design_usage].present? %>
-            <span class="map-srch-s"><%= params[:design_usage] %><a href="<%= color_design_search_link %>&design_usage=" class="map-srch-del">delete</a></span>
+            <span class="map-srch-s search-tag-design_usage"><%= params[:design_usage] %><a href="javascript:void(0);" data-name="design_usage" class="map-srch-del">delete</a></span>
           <% end %>
           <% if params[:design_color].present? %>
-            <span class="map-srch-s"><%= params[:design_color] %><a href="<%= color_design_search_link %>&design_color=" class="map-srch-del">delete</a></span>
+            <span class="map-srch-s search-tag-design_color"><%= params[:design_color] %><a href="javascript:void(0);" data-name="design_color" class="map-srch-del">delete</a></span>
           <% end %>
           <% if params[:order].present? %>
-            <span class="map-srch-s"><%= params[:order] %><a href="<%= color_design_search_link %>&order=" class="map-srch-del">delete</a></span>
+            <span class="map-srch-s search-tag-order"><%= params[:order] %><a href="javascript:void(0);" data-name="order" class="map-srch-del">delete</a></span>
           <% end %>
+          </span>
+          <span class="map-srch-s map-srch-reset js-search-now" style="display:none">&nbsp;&nbsp;确定&nbsp;&nbsp;</span>
           <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/color_designs';">重新选择</span>
         </p>
         <div class="map-list-form map-mini">
           <fieldset class="clearfix">
             <label class="pull-left">风格：</label>
             <span>
-              <a href="<%= color_design_search_link %>&style=" class="<%= 'highlight' if params[:style].blank? %>">全部</a>
+              <a href="<%= color_design_search_link %>&style=" data-name="style" data-val="" class="js-search-tag <%= 'highlight' if params[:style].blank? %>">全部</a>
               <%- color_design_style_option.each do |design_style| %>
-                <a href="<%= color_design_search_link %>&style=<%= design_style%>" class="<%= 'highlight' if params[:style] == design_style %>"><%= design_style %></a>
+                <a href="<%= color_design_search_link %>&style=<%= design_style%>" data-name="style" data-val="<%= design_style%>" class="js-search-tag <%= 'highlight' if params[:style] == design_style %>"><%= design_style %></a>
               <%- end %>
             </span>
           </fieldset>
           <fieldset class="clearfix">
             <label class="pull-left">功能区：</label>
             <span>
-              <a href="<%= color_design_search_link %>&design_usage=" class="<%= 'highlight' if params[:design_usage].blank? %>">全部</a>
+              <a href="<%= color_design_search_link %>&design_usage=" data-name="design_usage" data-val="" class="js-search-tag <%= 'highlight' if params[:design_usage].blank? %>">全部</a>
               <%- color_design_usage_option.each do |color_design_usage| %>
-                <a href="<%= color_design_search_link %>&design_usage=<%= color_design_usage%>" class="<%= 'highlight' if params[:design_usage] == color_design_usage %>"><%= color_design_usage %></a>
+                <a href="<%= color_design_search_link %>&design_usage=<%= color_design_usage%>" data-name="design_usage" data-val="<%= color_design_usage %>" class="js-search-tag <%= 'highlight' if params[:design_usage] == color_design_usage %>"><%= color_design_usage %></a>
               <%- end %>
             </span>
           </fieldset>
           <fieldset class="clearfix noborder">
             <label class="pull-left">色系：</label>
             <span>
-              <a href="<%= color_design_search_link %>&design_color=" class="<%= 'highlight' if params[:design_color].blank? %>">全部</a>
+              <a href="<%= color_design_search_link %>&design_color=" data-name="design_color" data-val="" class="js-search-tag <%= 'highlight' if params[:design_color].blank? %>">全部</a>
               <%- color_design_color_option.each do |color_design_color| %>
-                <a href="<%= color_design_search_link %>&design_color=<%= color_design_color%>" class="<%= 'highlight' if params[:design_color] == color_design_color %>"><%= color_design_color %></a>
+                <a href="<%= color_design_search_link %>&design_color=<%= color_design_color%>" data-name="design_color" data-val="<%= color_design_color %>" class="js-search-tag <%= 'highlight' if params[:design_color] == color_design_color %>"><%= color_design_color %></a>
               <%- end %>
             </span>
           </fieldset>
@@ -70,8 +76,8 @@
     </div>
     <div class="mt20">
       <div class="btn-group">
-        <a href="<%= color_design_search_link %>&order=最新" class="btn <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
-        <a href="<%= color_design_search_link %>&order=最热" class="btn <%= 'active' if params[:order] == '最热' %>">最热</a>
+        <a href="<%= color_design_search_link %>&order=最新" data-name="order" data-val="最新" class="btn js-search-tag <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
+        <a href="<%= color_design_search_link %>&order=最热" data-name="order" data-val="最热" class="btn js-search-tag <%= 'active' if params[:order] == '最热' %>">最热</a>
       </div>
     </div>
     <div class="index_main mt10">
