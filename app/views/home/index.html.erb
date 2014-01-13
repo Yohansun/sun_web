@@ -80,7 +80,7 @@ $(function(){
     <div class="index_main clearfix">
       <div class="media pull-left">
         <a class="pull-left media_a" href="/master_interviews/<%= @master_profile.id %>" target="_blank">
-          <img class="media-object lazy" data-src="<%= @master_profile.preview_img_in.url(:home_img) %>">
+          <img class="media-object lazy" data-src="<%= @master_profile.try(:preview_img_in).try(:url,:home_img) %>"  width="150" height="160">
         </a>
         <div class="media-body">
           <h6 class="media-heading"><%= @master_profile.title %></h6>
