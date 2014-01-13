@@ -86,7 +86,7 @@ _background-image: url(<%= asset_path 'winner/winner-bullets.gif' %>);
             </div>
         <%- end -%>
 </div><!--main ends-->
-
+<%- content_for :tail do %>
 <script type="text/javascript">
 ;(function($){
     $.fn.winnerSlider = function(config){
@@ -153,3 +153,4 @@ _background-image: url(<%= asset_path 'winner/winner-bullets.gif' %>);
     });
 })(jQuery);
 </script>
+<% end %>
