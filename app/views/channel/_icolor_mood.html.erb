@@ -8,7 +8,7 @@
         <%- if current_user %>
           <button>发布</button>
         <%- else %>
-          <button onclick="show_login();">发布</button>
+          <a onclick="window.parent.location='/users/sign_in';">发布</a>
         <%- end %>
       </li>
       <!-- <li class="pull-right btn_public">

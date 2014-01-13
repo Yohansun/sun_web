@@ -21,6 +21,7 @@ input#password{width:270px;}
     <div class="tab-pane active" id="login_tab1">
       <div class="index_main noborder clearfix">
         <%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user", :class=> "form-horizontal pull-left login_form" },:remote => true)  do |f| %>
+          <input type="hidden" name="upload" value="<%='true' if params[:return] && params[:return] == 'true'%>">
           <div class="control-group">
             <label class="control-label" for="username">账号</label>
             <div class="controls">
