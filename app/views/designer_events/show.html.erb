@@ -13,12 +13,9 @@
   <div class="clearfix">
     <div class="index_main pull-left events_in">
       <h4 class="text-center title"><%=@active.title %></h4>
-      <div class="text-center mt10">
-        <img class="imgs" src="<%=@active.file.url(:show) %>" alt="" />
+      <div class="mt10">
+        <p class="events_content"><%=raw(@active.content)%></p>
       </div>
-     <div class="mt10">
-      <p class="events_content"><%=raw(@active.content)%></p>
-     </div>
     </div>
     <div class="pull-right smaller">
         <div class="chann_warp chann1_right map-right index_main">
