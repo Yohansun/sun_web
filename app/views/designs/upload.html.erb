@@ -41,7 +41,7 @@
             $.getScript(dat.upload + "?for=design", function(){
             var $btn = $('.reco_toggle_btn');
             if($btn.length !== 0) {
-              $btn.click(function(){
+              $btn.unbind('click').click(function(){
                 $(this).toggleClass('show').siblings('div').toggle();
               });
             }
