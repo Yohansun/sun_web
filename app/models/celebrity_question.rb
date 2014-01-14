@@ -10,7 +10,6 @@ class CelebrityQuestion < ActiveRecord::Base
   belongs_to :asker,    class_name: User,  foreign_key: :asker_id
   belongs_to :replier,  class_name: User,  foreign_key: :replier_id
   belongs_to :board,    class_name: CelebrityContentBoard
-  belongs_to :category, class_name: CelebrityQuestionCategory
 
   scope :replied,       ->{ where(is_replied: true).desc(:updated_at) }
   scope :not_replied,   ->{ where(is_replied: false).deac(:updated_at) }
@@ -23,16 +22,6 @@ class CelebrityQuestion < ActiveRecord::Base
 
   def mark_as_reply
     update_attributes is_replied: true
-  end
-
-  class << self
-    def find_by_board_category category_id,board_id=nil
-      if board_id
-        where(:celebrity_content_board_id => board_id,:celebrity_question_category_id => category_id)
-      else
-        where(:celebrity_question_category_id => category_id)
-      end
-    end
   end
 
 end
