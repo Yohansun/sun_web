@@ -13,6 +13,5 @@ class CreateCelebrityQuestions < ActiveRecord::Migration
     add_index :celebrity_questions, :user_id
     add_index :celebrity_questions, :master_profile_id
     add_index :celebrity_questions, :celebrity_content_board_id
-
   end
 end
