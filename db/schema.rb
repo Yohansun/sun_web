@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140211063344) do
+ActiveRecord::Schema.define(:version => 20140114052651) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -149,6 +149,16 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "celebrity_content_board_scopes", :force => true do |t|
+    t.string   "name",                       :null => false
+    t.text     "key_arr"
+    t.integer  "celebrity_content_board_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "celebrity_content_board_scopes", ["name"], :name => "index_celebrity_content_board_scopes_on_name"
+
   create_table "celebrity_content_boards", :force => true do |t|
     t.string   "name",       :null => false
     t.integer  "media_id"
@@ -168,34 +178,24 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
 
   add_index "celebrity_notes", ["celebrity_id"], :name => "index_celebrity_notes_on_celebrity_id"
 
-  create_table "celebrity_question_categories", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "parent_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "celebrity_question_categories", ["parent_id"], :name => "index_celebrity_question_categories_on_parent_id"
-
   create_table "celebrity_questions", :force => true do |t|
-    t.string   "name",                                              :null => false
+    t.string   "name",                                          :null => false
+    t.string   "key",                                           :null => false
     t.string   "content"
     t.text     "reply_content"
     t.string   "image"
-    t.boolean  "is_replied",                     :default => false
+    t.boolean  "is_replied",                 :default => false
     t.integer  "asker_id"
     t.integer  "replier_id"
     t.integer  "celebrity_id"
     t.integer  "celebrity_content_board_id"
-    t.integer  "celebrity_question_category_id"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   add_index "celebrity_questions", ["asker_id"], :name => "index_celebrity_questions_on_asker_id"
   add_index "celebrity_questions", ["celebrity_content_board_id"], :name => "index_celebrity_questions_on_celebrity_content_board_id"
   add_index "celebrity_questions", ["celebrity_id"], :name => "index_celebrity_questions_on_celebrity_id"
-  add_index "celebrity_questions", ["celebrity_question_category_id"], :name => "index_celebrity_questions_on_celebrity_question_category_id"
   add_index "celebrity_questions", ["is_replied"], :name => "index_celebrity_questions_on_is_replied"
   add_index "celebrity_questions", ["replier_id"], :name => "index_celebrity_questions_on_replier_id"
 
