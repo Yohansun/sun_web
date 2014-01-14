@@ -5,6 +5,7 @@ class CelebrityNote < ActiveRecord::Base
   validates :name, :content, :celebrity_id , presence: true
   validates_length_of :name, in: 6..100
 
-  belongs_to :celebrity
+  belongs_to :master_profile
+  belongs_to :board, class_name: CelebrityContentBoard
 
 end

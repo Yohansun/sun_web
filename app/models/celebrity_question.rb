@@ -6,7 +6,7 @@ class CelebrityQuestion < ActiveRecord::Base
   validates_length_of :name, in: 6..50
   validates_length_of :content, in: 6..100, allow_nil: true
 
-  belongs_to :celebrities
+  belongs_to :master_profile
   belongs_to :asker,    class_name: User,  foreign_key: :asker_id
   belongs_to :replier,  class_name: User,  foreign_key: :replier_id
   belongs_to :board,    class_name: CelebrityContentBoard

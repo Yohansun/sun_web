@@ -3,6 +3,11 @@ class MasterProfile < ActiveRecord::Base
   acts_as_taggable
   belongs_to :subject
   has_many :master_designs
+
+  belongs_to :board, class_name: CelebrityContentBoard
+  has_many   :questions, class_name: CelebrityQuestion
+  has_many   :note,      class_name: CelebrityNote
+
   attr_accessor :time
   default_scope order("published_at DESC")
 
