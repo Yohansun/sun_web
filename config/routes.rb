@@ -1,5 +1,20 @@
 #encoding: utf-8
 Icolor::Application.routes.draw do
+
+  get "celebrity_editor_treasuries/index"
+
+  get "celebrity_editor_treasuries/show"
+
+  get "celebrity_questions/index"
+
+  get "celebrity_questions/new"
+
+  get "celebrity_notes/index"
+
+  get "celebrity_notes/show"
+
+  get "celebrities/index"
+
   # match "/system/*path" => redirect("http://icolor.dev/dev-assets/logo.jpg")
 
   # match "/images/(:id)_:tags-:imageable_type-:ranking_list-:area_id-:pinyin-:search-:all_tags-:site" => "design_images#image_show"
@@ -463,6 +478,22 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+  get "celebrity_editor_treasuries/index"
+
+  get "celebrity_editor_treasuries/show"
+
+  get "celebrity_questions/index"
+
+  get "celebrity_questions/new"
+
+  get "celebrity_notes/index"
+
+  get "celebrity_notes/show"
+
+  get "celebrities/index"
+
+  get "home/index"
+
     match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :image_libraries
     resources :suit_images
@@ -896,4 +927,11 @@ Icolor::Application.routes.draw do
     end
   end
 
+  namespace :dialog_celebrity do
+    #root "dialog_celebrity/home#index"
+    resources :celebrities
+    resources :celebrity_notes
+    resources :celebrity_questions
+    resources :editor_treasuries
+  end
 end
