@@ -4,6 +4,7 @@ class CelebrityContentBoard < ActiveRecord::Base
   belongs_to :media
   has_many :questions,   class_name: CelebrityQuestion
   has_many :treasuries,  class_name: EditorTreasury
+  has_many :key_scopes,  class_name: CelebrityQuestionKeyScope
 
   validate_presence_and_uniqueness_of :name
   validates_presence_of :media_id
