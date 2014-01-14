@@ -1,0 +1,2 @@
+module DialogCelebrity::CelebrityEditorTreasuriesHelper
+end

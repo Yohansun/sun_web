@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CelebrityTest < ActiveSupport::TestCase
+class DialogCelebrityPageTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
