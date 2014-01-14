@@ -1,9 +1,5 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag "style" %>
-  <style type="text/css">
-  .map-next-bullet{background-position: center 1px;margin-bottom: 10px;}
-  .map-prev-bullet{background-position: center -13px;margin-bottom:0;}
-  </style>
 <% end -%>
 <%- content_for :tail do %>
   <%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
@@ -61,13 +57,13 @@
     <div class="slides_box clearfix">
       <div class="map-big pull-left js-map-big">
         <%= image_tag @design.weekly_star_uploads.first.file.url(:show_big) %>
-        <a href="javascript:;" class="slider-prev js-slider-prev">prev</a>
-        <a href="javascript:;" class="slider-next js-slider-next">next</a>
+        <a href="javascript:;" class="slider-prev js-slider-next">prev</a>
+        <a href="javascript:;" class="slider-next js-slider-prev">next</a>
       </div>
       <div class="map-kv-slider pull-right">
-        <a href="javascript:;" class="map-next-bullet js-map-next-bullet">prev</a>
+        <a href="javascript:;" class="map-prev-bullet js-map-prev-bullet">prev</a>
         <hr class="nomargin">
-        <a href="javascript:;" class="map-next js-map-next">上一张图</a>
+        <a href="javascript:;" class="map-prev js-map-prev">上一张图</a>
         <div class="map-kv-container">
           <ul>
             <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
@@ -79,9 +75,9 @@
             <%- end %>
           </ul>
         </div>
-        <a href="javascript:;" class="map-prev js-map-prev">下一张图</a>
+        <a href="javascript:;" class="map-next js-map-next">下一张图</a>
         <hr class="nomargin">
-        <a href="javascript:;" class="map-prev-bullet js-map-prev-bullet mt10">next</a>
+        <a href="javascript:;" class="map-next-bullet js-map-next-bullet mt10">next</a>
       </div>
     </div>
   </div>
