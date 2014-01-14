@@ -477,6 +477,11 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+
+  get "home_dialog_celebrities/index"
+
+  get "home_dialog_celebrities/images"
+
   get "master_design_uploads/index"
 
   get "master_design_uploads/new"
