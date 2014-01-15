@@ -168,7 +168,7 @@
       <label class="control-label reco_tit" for="">推荐艺术漆</label>
       <div class="controls">
         <ul class="unstyled colors_group reco_qis clearfix">
-          <% ColorCode.where("rgb is null").each_with_index do |cc,index|%>
+          <% ColorCode.where('code in ("点睛蓝","点睛绿","仿古白","黑胡桃","黑色","红木色","红棕色","琥珀黄","原木色","棕色")').each_with_index do |cc,index|%>
             <li>
               <label class="checkbox inline">
                 <div class="reco_qi reco_qi1_<%=index+1%>">
