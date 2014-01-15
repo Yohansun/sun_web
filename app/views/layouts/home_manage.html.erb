@@ -114,9 +114,9 @@
               <li>
                 <%= link_to "色彩配搭", "/color_designs", :class => "#{'active noborder' if controller_name == 'color_designs'}" %>
               </li>
-              <li>
-                <%= link_to "灵感秀", "/inspirations", :class => "#{'active noborder' if controller_name == 'inspirations'}" %>
-              </li>
+<!--               <li>
+                <%#= link_to "灵感秀", "/inspirations", :class => "#{'active noborder' if controller_name == 'inspirations'}" %>
+              </li> -->
             </ul>
           </li>
           <li class="<%= 'active noborder' if (controller_name == 'channel' && action_name == 'access') || controller_name == 'faqs' || controller_name == 'mix_colors' %>" >
@@ -183,7 +183,7 @@
           <a href="/weekly_stars?star_type=<%= URI.escape("每周之星") %>">设计之星</a>
           <a href="/designs">作品展示</a>
           <a href="/color_designs">色彩配搭</a>
-          <a href="/inspirations">灵感秀</a>
+          <!-- <a href="/inspirations">灵感秀</a> -->
         </li>
         <li>
           <i class="icon-map icon-map4"></i>
