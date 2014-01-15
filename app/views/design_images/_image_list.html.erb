@@ -3,7 +3,7 @@
   <ul class="map-rel map-right index_main mt10 unstyled">
     <li class="map-r0 text-right"><strong><%= name %></strong><a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank">更多></a></li>
     <% colum_datas.each_with_index do |dcs,index| %>
-    <li class="map-r1 dott1 <%="active" if index == 0%> <%= 'noborder' if index + 1 == colum_datas.size %>">
+    <li class="map-r1 dott1 <%= 'noborder' if index + 1 == colum_datas.size %>">
       <strong><a href="<%=dcs.url %>" target="_blank"><%=dcs.title%></a></strong><br>
     </li>
     <% end %>
