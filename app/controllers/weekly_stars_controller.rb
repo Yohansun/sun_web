@@ -72,7 +72,7 @@ class WeeklyStarsController < ApplicationController
 	end
 
   def show
-    @banners = IBanner.page_name('设计鉴赏内页').order("position ASC").all
+    @banners = IBanner.page_name('设计之星内页').order("position ASC").all
     @design = WeeklyStar.find(params[:id])
     design_id = @design.design_link.split("/").last
     @link_design = Design.find design_id

@@ -61,7 +61,11 @@ module Manage::BaseHelper
         'weekly_stars_label2'
       when '色彩配搭'
         'weekly_stars_label3'
-      when '设计鉴赏内页'
+      when '设计之星内页'
+        'weekly_stars_label4'
+      when '作品展示内页'
+        'weekly_stars_label4'
+      when '色彩配搭内页'
         'weekly_stars_label4'
       else
         'nothing'

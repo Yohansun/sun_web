@@ -90,14 +90,36 @@ task :init_activities_banners => :environment  do
     end
   end
 
-  banner8 = IBanner.where(page_name: '设计鉴赏内页')
+  banner8 = IBanner.where(page_name: '设计之星内页')
   if banner8.blank?
     IBanner.transaction do
-      IBanner.create(page_name: '设计鉴赏内页',position: 1, size: '1000x85')
-      IBanner.create(page_name: '设计鉴赏内页',position: 2, size: '230x170')
-      IBanner.create(page_name: '设计鉴赏内页',position: 3, size: '230x230')
-      IBanner.create(page_name: '设计鉴赏内页',position: 4, size: '670x85')
-      IBanner.create(page_name: '设计鉴赏内页',position: 5, size: '310x85')
+      IBanner.create(page_name: '设计之星内页',position: 1, size: '1000x85')
+      IBanner.create(page_name: '设计之星内页',position: 2, size: '230x170')
+      IBanner.create(page_name: '设计之星内页',position: 3, size: '230x230')
+      IBanner.create(page_name: '设计之星内页',position: 4, size: '670x85')
+      IBanner.create(page_name: '设计之星内页',position: 5, size: '310x85')
+    end
+  end
+
+  banner_design_show = IBanner.where(page_name: '作品展示内页')
+  if banner_design_show.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '作品展示内页',position: 1, size: '1000x85')
+      IBanner.create(page_name: '作品展示内页',position: 2, size: '230x170')
+      IBanner.create(page_name: '作品展示内页',position: 3, size: '230x230')
+      IBanner.create(page_name: '作品展示内页',position: 4, size: '670x85')
+      IBanner.create(page_name: '作品展示内页',position: 5, size: '310x85')
+    end
+  end
+
+  color_designs_show = IBanner.where(page_name: '色彩配搭内页')
+  if color_designs_show.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '色彩配搭内页',position: 1, size: '1000x85')
+      IBanner.create(page_name: '色彩配搭内页',position: 2, size: '230x170')
+      IBanner.create(page_name: '色彩配搭内页',position: 3, size: '230x230')
+      IBanner.create(page_name: '色彩配搭内页',position: 4, size: '670x85')
+      IBanner.create(page_name: '色彩配搭内页',position: 5, size: '310x85')
     end
   end
 
