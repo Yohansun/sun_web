@@ -1,8 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Comment < ActiveRecord::Base
   belongs_to :user
-  belongs_to :designs, :counter_cache => true
-  belongs_to :commentable, :polymorphic => true
+  belongs_to :commentable, :polymorphic => true, :counter_cache => true
   has_many :reply_msgs, :dependent => :destroy, :order => "id DESC"
   has_many :votes, :as => :voteable
 
