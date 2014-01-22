@@ -32,9 +32,10 @@
 <div class="container-fluid mt20">
   <%= form_tag '/manage/event_kvs', class: 'form-inline mt30' , method: :get do %>
     <%= select_tag "klass_name",options_for_select([["设计师活动","designer_events"],
-                                               ["其它活动","other_events"]],
-                                               params[:klass_name]),
-                                               class: "input-medium mr15" %>
+                                                   ["其它活动","other_events"],
+                                                   ["获奖名单","gifts"]],
+                                                   params[:klass_name]),
+                                                   class: "input-medium mr15" %>
     <input type="submit" value="确定" class="btn btn-small btn-primary">
    <% end %>
 </div>
