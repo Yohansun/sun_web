@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Manage::HomeRecommendsController < Manage::BaseController
+	cache_sweeper :home_sweeper, :only => [:insert_recommend, :update_recommend]
 
 	def index
 		@recommends = HomeRecommend.order("position")

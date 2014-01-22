@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Manage::HomeImageLibController < Manage::BaseController
-
+  cache_sweeper :home_sweeper, :only => [:upload_image, :create_tag_list]
   def index
   	@home_image_lib_photos = HomeImageLibPhoto.limit(7)
   	@left_home_image_lib_photos = HomeImageLibPhoto.limit(3)

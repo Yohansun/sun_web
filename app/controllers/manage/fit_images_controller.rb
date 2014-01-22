@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Manage::FitImagesController < Manage::BaseController
 	layout "manage"
-
+  cache_sweeper :home_sweeper, :only => [:create, :destroy]
   def index
   	@upload = FitImage.first
   end

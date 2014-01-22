@@ -1,5 +1,6 @@
 #encoding: utf-8
 class Manage::HomeLifeVideosController < Manage::BaseController
+  cache_sweeper :home_sweeper, :only => [:update]
   def index
   	@home_life_videos = HomeLifeVideo.all
   end

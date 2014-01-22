@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Manage::BannerHomeController < Manage::BaseController
-
+  cache_sweeper :home_sweeper, :only => [:create_image, :save_data]
   def index
   	position =  params[:position]
     position = 1 if params[:position].blank?

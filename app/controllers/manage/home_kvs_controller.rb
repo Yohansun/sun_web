@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Manage::HomeKvsController < Manage::BaseController
-
+  cache_sweeper :home_sweeper, :only => [:create, :delete_file,:kv_insert ,:kv_update]
 	def index
 		if params[:sort].present?
 			@kv = HomeKv.find_by_position(params[:sort])
