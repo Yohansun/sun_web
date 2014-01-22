@@ -141,3 +141,15 @@ task :init_activities_banners => :environment  do
     end
   end
 end
+
+desc "添加设计师活动banner数据-获奖名单"
+task :init_activities_banners_gifts => :environment  do
+  banner_gift = IBanner.where(page_name: '获奖名单')
+  if banner_gift.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '获奖名单',position: 1, size: '1000x85')
+      IBanner.create(page_name: '获奖名单',position: 2, size: '670x85')
+      IBanner.create(page_name: '获奖名单',position: 3, size: '310x85')
+    end
+  end
+end

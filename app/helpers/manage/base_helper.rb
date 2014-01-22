@@ -95,6 +95,8 @@ module Manage::BaseHelper
         'activities_label4'
       when '因爱设计师获奖名单'
         'activities_label5'
+      when '获奖名单'
+        'activities_label6'
       else
         'nothing'
     end
