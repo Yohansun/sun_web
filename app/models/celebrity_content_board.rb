@@ -10,5 +10,5 @@ class CelebrityContentBoard < ActiveRecord::Base
   has_many :key_scopes,  class_name: CelebrityQuestionKeyScope
 
   validate_presence_and_uniqueness_of :name
-  validates_presence_of :media_id
+  # validates_presence_of :media_id
 end
