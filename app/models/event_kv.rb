@@ -7,7 +7,7 @@ class EventKv < ActiveRecord::Base
   scope :page_name,->(klass_name){ where(klass_name: klass_name)}
 
   has_attached_file :file,
-    :styles => {:big => "730x300#"},
+    :styles => {:big => "730x300#", :gift_kv => "1000x400#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

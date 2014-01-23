@@ -992,6 +992,11 @@ $(function(){
             scroll : 1,
             pagers : '.circle_indicators'
         });
+        $('.gift_carousel').slider({
+            auto: false,
+            scroll: 1,
+            pagers: false
+        });
     })($);
 
     // back top
