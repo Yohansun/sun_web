@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Manage::FitLiteralsController < Manage::BaseController
+  cache_sweeper :home_sweeper, :only => [:create, :update]
   def index
   	@news = FitLiteral.order("order_id asc")
   end
@@ -31,11 +32,11 @@ class Manage::FitLiteralsController < Manage::BaseController
     # end
     @news = FitLiteral.order("order_id asc")
   end
-  
+
   def create
     FitLiteral.find_each do |new|
       unless new.order_id == 6
-        new.order_id += 1 
+        new.order_id += 1
         new.save
       else
         literal = FitLiteral.find(new.id)

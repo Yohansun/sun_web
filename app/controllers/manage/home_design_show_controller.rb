@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Manage::HomeDesignShowController < Manage::BaseController
-
+  cache_sweeper :home_sweeper, :only => [:create_image, :save_data, :destroy]
   def index
   	@design_type = params[:design_type] || 1
   	@home_design_shows = HomeDesignShow.where("position <> 0 AND design_type=?", @design_type)

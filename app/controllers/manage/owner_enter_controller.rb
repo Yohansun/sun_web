@@ -1,6 +1,6 @@
 class Manage::OwnerEnterController  < Manage::BaseController
   layout "manage"
-
+  cache_sweeper :home_sweeper, :only => [:update]
   def index
   	@news = OwnerEnter.order("order_id asc")
   end
@@ -20,7 +20,7 @@ class Manage::OwnerEnterController  < Manage::BaseController
         @elsenew = OwnerEnter.find(2)
       else
         @elsenew = OwnerEnter.find(1)
-      end 
+      end
       @elsenew.order_id = params[:current_id] if params[:current_id]
       @elsenew.save
       @new = OwnerEnter.find params[:id]

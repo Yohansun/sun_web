@@ -34,8 +34,8 @@ Icolor::Application.routes.draw do
     end
   end
 
-  get "/shuaxin" => redirect("/shuaxin/index.html")
-  get "/21days" => redirect("/21days/index.html")
+  # get "/shuaxin" => redirect("/shuaxin/index.html")
+  # get "/21days" => redirect("/21days/index.html")
 
   get "/users/me" => "users#me"
   get "/users/edit_me" => "users#edit_me"

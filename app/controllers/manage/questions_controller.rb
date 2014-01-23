@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Manage::QuestionsController < Manage::BaseController
-	
+	cache_sweeper :home_sweeper, :only => [:create_or_update]
   def index
     @questions = Question.order("rank asc")
   end
@@ -16,7 +16,7 @@ class Manage::QuestionsController < Manage::BaseController
         if question.save
           ques = Question.where("rank >= ? and created_at < ?",question.rank,question.created_at)
           ques.each do |que|
-            if que.rank == 5 
+            if que.rank == 5
               que.destroy
             else
               que.rank += 1
@@ -33,7 +33,7 @@ class Manage::QuestionsController < Manage::BaseController
       question = Question.find(params[:id])
       rank = question.rank
       question.title = params[:title]
-      question.rank = params[:rank]  
+      question.rank = params[:rank]
       question.link = params[:link]
       question.admin_id = current_admin.id
       if question.save

@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 module MagicContent
   class MasterProfilesController < BaseController
+    cache_sweeper :home_sweeper, :only => [:create, :update]
     belongs_to :subject
 
     def create

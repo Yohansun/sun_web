@@ -56,6 +56,7 @@ gem 'newrelic_rpm', "~> 3.6.0.78"
 gem 'ekuseru'
 
 gem 'dalli'
+gem "rest-client"
 
 gem "second_level_cache", "~> 1.6"
 gem "cache_digests"

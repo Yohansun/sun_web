@@ -268,6 +268,8 @@ GEM
     remotipart (1.0.2)
     responders (0.9.3)
       railties (~> 3.1)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     ruby-ole (1.2.11.4)
     ruby-pinyin (0.1.0)
     rubyzip (0.9.9)
@@ -389,6 +391,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (= 3.2.15)
   remotipart (~> 1.0)
+  rest-client
   ruby-pinyin
   rubyzip
   rvm-capistrano
