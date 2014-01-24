@@ -6,12 +6,12 @@ class DesignerEventsController < ApplicationController
     @event_ks = EventKv.includes(:kv_maps).page_name(controller_name).try(:first)
     @active_now = DesignerEvent.page_name(controller_name).active_now
     @active_period = DesignerEvent.page_name(controller_name).active_period.page(params[:page]).per(5)
-    @banners = IBanner.page_name('设计师活动').order("position ASC").all
+    @banners = IBanner.page_name('活动集锦').order("position ASC").all
   end
 
   def show
     @active = DesignerEvent.find params[:id]
-    @banners = IBanner.page_name('设计师活动内页').order("position ASC").all
+    @banners = IBanner.page_name('活动集锦内页').order("position ASC").all
   end
 
   def get_data
