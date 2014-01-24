@@ -85,11 +85,11 @@ module Manage::BaseHelper
 
   def activities_label_path
     label_name = case params[:page_name]
-      when '设计师活动'
+      when '活动集锦'
         'activities_label1'
       when '其它活动'
         'activities_label2'
-      when '设计师活动内页'
+      when '活动集锦内页'
         'activities_label3'
       when '其它活动内页'
         'activities_label4'

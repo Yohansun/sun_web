@@ -31,8 +31,7 @@
 <% end %>
 <div class="container-fluid mt20">
   <%= form_tag '/manage/event_kvs', class: 'form-inline mt30' , method: :get do %>
-    <%= select_tag "klass_name",options_for_select([["设计师活动","designer_events"],
-                                                   ["其它活动","other_events"],
+    <%= select_tag "klass_name",options_for_select([["活动集锦","designer_events"],
                                                    ["获奖名单","gifts"]],
                                                    params[:klass_name]),
                                                    class: "input-medium mr15" %>

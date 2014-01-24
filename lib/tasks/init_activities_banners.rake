@@ -153,3 +153,11 @@ task :init_activities_banners_gifts => :environment  do
     end
   end
 end
+
+desc "修改设计师活动banner为活动集锦"
+task :change_activities_banners_designner => :environment  do
+  banner1 = IBanner.where(page_name: '设计师活动')
+  banner1.update_all(page_name: '活动集锦') if banner1.present?
+  banner3 = IBanner.where(page_name: '设计师活动内页')
+  banner3.update_all(page_name: '活动集锦内页') if banner3.present?
+end
