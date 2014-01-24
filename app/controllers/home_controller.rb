@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
   layout "home_manage"
+  skip_before_filter :verify_authenticity_token, :only => [:upload_img]
 
   caches_action :index, :expires_in => 7.days
   # before_filter :get_vote

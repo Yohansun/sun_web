@@ -1,0 +1,5 @@
+<%- if @event_kv.present? %>
+$('.replace_maps').replaceWith('<%=j render partial: 'manage/event_kvs/maps', locals: { maps: @event_kv.nil? ? [] : @event_kv.kv_maps} %>');
+<%- else %>
+$('.replace_maps').replaceWith('<%=j render partial: 'manage/home_kvs/maps', locals: { maps: @kv.nil? ? [] : @kv.kv_maps} %>');
+<%- end %>

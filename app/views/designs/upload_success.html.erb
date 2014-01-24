@@ -1,17 +1,55 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag '2013base', '2013upload'%>
-  <style type="text/css">
-  .wrapper{width:1000px;text-align:center;}
-  </style>
+  <%= stylesheet_link_tag '2013upload'%>
 <% end -%>
-<div class="wrapper">
-  <div class="upload_success">
-    <div class="upload2013_2">
-      <div class="tc"><img src="<%= asset_path 'upload_true.jpg'%>"></div>
+<%- content_for :tail do %>
+<script type="text/javascript">
+  function countDown(secs,surl){
+    var jumpTo = document.getElementById('jumpTo');
+    jumpTo.innerHTML=secs;
+    if(--secs>0){
+      setTimeout("countDown("+secs+",'"+surl+"')",1000);
+    }
+    else{
+      location.href=surl;
+    }
+  }
+</script>
+<script type="text/javascript">countDown(5,'<%= user_path(current_user) %>');</script>
+<% end %>
+<div class="container refresh_main">
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li class="active">用户中心</li>
+  </ul>
+  <hr class="border2 border2_mt2">
+
+  <ul class="nav nav-tabs upload_tab" id="upload_tab">
+    <li class="active"><a href="#upload_tab1" data-toggle="tab">上传作品</a></li>
+  </ul>
+
+  <div class="tab-content upload_success">
+    <div class="tab-pane active" id="upload_tab1">
+      <div class="index_main text-center noborder">
+        <img src="<%= asset_path '2013/success.jpg'%>" alt="" />
+        <p class="text-center linet1">系统将在 <strong class="text-important" id="jumpTo">5</strong> 秒后自动进入我的个人主页</p>
+        <div class="text-center">
+          <a href="<%= user_path(current_user) %>" class="link_btns">进入我的个人主页</a>
+          <a href="<%=user_design_path(current_user,params[:design_id])%>" class="link_btns">看看我发布的作品</a>
+        </div>
+      </div>
     </div>
-    <br>
-    <a href="<%= user_path(current_user) %>">
-      <img src="<%= asset_path "success/btn.jpg"%>">
-    </a>
   </div>
-</div><!--ends-->
+
+  <div class="clearfix">
+    <div class="footer_banner pull-left">
+      <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' if @banners[0] %>" target="_blank">
+        <%= image_tag @banners[0].try(:file).try(:url, :list_670x85) if @banners[0] %>
+      </a>
+    </div>
+    <div class="footer_banner pull-right">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' if @banners[1] %>" target="_blank">
+        <%= image_tag @banners[1].try(:file).try(:url, :list_310x85) if @banners[1] %>
+      </a>
+    </div>
+  </div>
+</div>

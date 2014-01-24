@@ -325,39 +325,39 @@ function submit_area() {
     </form><!-- tab_content -->
   </div>
 </div>
-
-<div class="map-flow index_main mt10 pull-left">
-  <div id="map-flow" class="clearfix">
-    <%
-    if params[:page].present? && params[:page].to_i != 0
-      site = (params[:page].to_i - 1) * 18
-    else
-      site =  0 * 18
-    end
-    %>
-    <% @images.each_with_index do |image,index| %>
-    <div class="pull-left">
-      <a href="/images/<%=image.id%>/<%=site + (index + 1)%>/<%=show_link image.id%>" target="_blank" >
-        <%= image_tag(image.file.url(:image_map_list), alt: image.design.try(:title), title: image.design.try(:title)) %>
-        <p><%= image.design.try(:title) %></p>
-      </a>
+<div class="clearfix">
+  <div class="map-flow index_main mt10 pull-left">
+    <div id="map-flow" class="clearfix">
+      <%
+      if params[:page].present? && params[:page].to_i != 0
+        site = (params[:page].to_i - 1) * 18
+      else
+        site =  0 * 18
+      end
+      %>
+      <% @images.each_with_index do |image,index| %>
+      <div class="pull-left">
+        <a href="/images/<%=image.id%>/<%=site + (index + 1)%>/<%=show_link image.id%>" target="_blank" >
+          <%= image_tag(image.file.url(:image_map_list), alt: image.design.try(:title), title: image.design.try(:title)) %>
+          <p><%= image.design.try(:title) %></p>
+        </a>
+      </div>
+      <% end %>
     </div>
-    <% end %>
+    <form class="pager pager-form">
+      <%= paginate @images, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
+    </form>
   </div>
-  <form class="pager pager-form">
-    <%= paginate @images, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
-  </form>
-</div>
-<div class="map-flow-r pull-right">
-  <% cache "column_image_list" do %>
+  <div class="map-flow-r pull-right">
+    <% cache "column_image_list" do %>
     <%= render partial: 'image_list', locals: { i_column_type_id: 1, name: '最新大师作品' } %>
     <%= render partial: 'image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
     <%= render partial: 'image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
     <%= render partial: 'image_list', locals: { i_column_type_id: 9, name: '装修色彩配搭' } %>
     <%= render partial: 'image_list', locals: { i_column_type_id: 7, name: '相关资讯' } %>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-
 <div class="index_main refresh_news mt10 clearfix pull-left">
   <div class="refresh_new pull-left">
     <h5><a href="<%= @images_jingxuan_more.url if @images_jingxuan_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
@@ -380,7 +380,7 @@ function submit_area() {
     </ul>
   </div>
   <div class="pull-right">
-    <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_230x230) %></a>
+    <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_230x230),:style => "width:230px;height:230px;" %></a>
   </div>
 </div>
 

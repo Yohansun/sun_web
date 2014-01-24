@@ -37,7 +37,7 @@ class CollectsController < ApplicationController
 				render :js =>"alert('您已经收藏过了!');"
 			end
 		else
-			render :js => "show_login();"
+			render :js => "location.href='/users/sign_in';"
 		end
 	end
 

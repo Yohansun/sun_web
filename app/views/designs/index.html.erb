@@ -1,163 +1,280 @@
-<%- content_for :head do %>
-    <%= stylesheet_link_tag "style", "dd"%>
-    <style type="text/css">
-      ul.design_filter li{float:left;background:white; margin-right:5px;list-style:none;}
-      .ac_results{background: #FFFFFF !important;z-index: 500;border-left: 1px solid #ccc; border-bottom: 1px solid #ccc;}
-      #color_select{}
-      .dd .ddTitle{ background:#fff; border:1px solid #ccc;}
-      .dd .ddChild a.nobg,
-      .dd .ddChild a.nobg:visited {background:none;padding-left:10px; }
-      #style_child a{background:none!important;padding-left:10px;}
-      .work_number .dd{ margin-right:15px;}
-      #design_style, #design_design_color{width:108px;}
-      #province, #city{background:white;border:1px solid #ccc;width:108px;height:23px;}
-      ul.d_works ,.add_icon,.group {
-        margin: 0;
-      }
-    </style>
-<%- end %>
 <%- content_for :tail do %>
-    <%= javascript_include_tag "uncompressed.jquery.dd.js" %>
+  <%= javascript_include_tag "designs" %>
     <script type="text/javascript">
-    $(function() {
-      var options = {
-        data  : data
-      }
-      var sel = new LinkageSelect(options);
-      <%- if params[:area_head] && !params[:area_head].blank? -%>
-        sel.bind('.level_1',<%= params[:area_head] %>);
-      <%- else -%>
-        sel.bind('.level_1', null, '请选择省会');
-      <%- end -%>
-      <%- if params[:area_id] && !params[:area_id].blank? -%>
-        sel.bind('.level_2',<%= params[:area_id] %>);
-      <%- else -%>
-        sel.bind('.level_2', null, '请选择市');
-      <%- end -%>
-    });
-    $(function(){
-      try {
-          //$("body select").msDropDown();
-          oHandler = $("#order,#style,#design_color").msDropDown({
-            useSprite : 'sprite'
-          }).data("dd");
-          $("#ver").html($.msDropDown.version);
-        } catch(e) {
-          alert("Error: " + e.message);
+      $(function() {
+        var options = {
+          data  : data
         }
+        var sel = new LinkageSelect(options);
+        <%- if params[:area_head] && !params[:area_head].blank? -%>
+          sel.bind('.level_1',<%= params[:area_head] %>);
+        <%- else -%>
+          sel.bind('.level_1', null, '请选择省会');
+        <%- end -%>
+        <%- if params[:area_id] && !params[:area_id].blank? -%>
+          sel.bind('.level_2',<%= params[:area_id] %>);
+        <%- else -%>
+          sel.bind('.level_2', null, '请选择市');
+        <%- end -%>
       });
-
     </script>
 <%- end %>
-<div class="main">
-<div class='sub_title text-right pt25'>
-  <img src='<%= asset_path "design/title_design.png" %>'/>
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map3 icon_colors"></i>
+  <strong>设计鉴赏</strong>
+  <small>实用案例为您的家装出谋画色</small>
+</h3>
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left">
+    <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_670x85) %></a>
+  </div>
+  <div class="footer_banner mt10 pull-right">
+    <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_310x85) %></a>
+  </div>
 </div>
-<div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "作品展示", "/designs", :class => "fb" %></em>
-    <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-</div><!--sub_nav ends-->
-<div class='wrapper pb60 group' style="margin:0 auto;">
-<form class="design_tit group" method="get" id="filter_form">
-  <ul class="design_filter unstyled nomargin">
-    <li style="width:82px;">
-      <%= select_tag "order", options_for_select(design_order_option, params[:order]), :style => "width:82px" %>
-    </li>
-    <li>
-       <%= select_tag "style", options_for_select(design_style_option, params[:style]), :style => "width:96px;" %>
-    </li>
-    <li>
-       <%= select_tag "design_color", options_for_select(color_design_color_option, params[:design_color]), :style => "width:83px;" %>
-    </li>
-    <li>
-      <select id="province" class="level_1 arrow_filter" name="area_head">
-      </select>
-      <select id="city" class="level_2 arrow_filter" name="area_id">
-      </select>
-    </li>
-    <li><button style="background:none;margin-top:-3px;" class="noborder"><img src="<%= asset_path "design_search.png" %>" /></button></li>
-    <li>
-      <%= link_to  "/designs?order=因爱之名" ,style: 'padding:0px;margin:0px' do%>
-        <% image_tag  "design_search_love.png", size: '140x21' %>
+<ul class="breadcrumb">
+  <li><%= link_to "首页", "/" %> &gt;</li>
+  <li><%= link_to "设计鉴赏", "/weekly_stars" %> &gt;</li>
+  <li class="active">作品展示</li>
+</ul>
+<hr class="border2 border2_mt2">
+<div class="clearfix color_designs">
+  <div class="map-left pull-left">
+    <div class="index_main nopadding">
+      <%= form_tag designs_path, class: 'map-list-search nomargin', method: :get do %>
+        <p class="map-srch-bin">
+          您的选择：
+          <span class="js-query-tags">
+            <% if params[:style].present? %>
+              <span class="map-srch-s search-tag-style"><%= params[:style] %><a href="javascript:void(0);" data-name="style" class="map-srch-del">delete</a></span>
+            <% end %>
+            <% if params[:design_color].present? %>
+              <span class="map-srch-s search-tag-design_color"><%= params[:design_color] %><a href="javascript:void(0);" data-name="design_color" class="map-srch-del">delete</a></span>
+            <% end %>
+            <% if params[:order].present? %>
+              <span class="map-srch-s search-tag-order"><%= params[:order] %><a href="javascript:void(0);" data-name="order" class="map-srch-del">delete</a></span>
+            <% end %>
+            <% if params[:area_head].present? %>
+              <span class="map-srch-s search-tag-area_head"><%= @area_head_name %><a href="javascript:void(0);" data-name="area_head" class="map-srch-del">delete</a></span>
+              <% if params[:area_id].present? %>
+                <span class="map-srch-s search-tag-area_id"><%= @area_id_name %><a href="javascript:void(0);" data-name="area_id" class="map-srch-del">delete</a></span>
+              <% end %>
+            <% end %>
+          </span>
+          <span class="map-srch-s map-srch-reset js-search-now" style="display:none">&nbsp;&nbsp;确定&nbsp;&nbsp;</span>
+          <span class="map-srch-s map-srch-reset" onclick="javascript:window.location='/designs';">重新选择</span>
+        </p>
+        <div class="map-list-form map-mini">
+          <fieldset class="clearfix">
+            <label class="pull-left">风格：</label>
+            <span>
+              <%= hidden_field_tag :promit, 1 %>
+              <%= hidden_field_tag :style, params[:style] %>
+              <a href="<%= design_search_link %>&style=" data-name="style" data-val="" class="js-search-tag <%= 'highlight' if params[:style].blank? %>">全部</a>
+              <%- design_style_option.each do |design_style| %>
+                <a href="<%= design_search_link %>&style=<%= design_style%>" data-name="style" data-val="<%= design_style %>" class="js-search-tag <%= 'highlight' if params[:style] == design_style %>"><%= design_style %></a>
+              <%- end %>
+            </span>
+          </fieldset>
+          <fieldset class="clearfix">
+            <label class="pull-left">色系：</label>
+            <span>
+              <%= hidden_field_tag :design_color, params[:design_color] %>
+              <%= hidden_field_tag :order, params[:order] %>
+              <a href="<%= design_search_link %>&design_color=" data-name="design_color" data-val="" class="js-search-tag <%= 'highlight' if params[:design_color].blank? %>">全部</a>
+              <%- color_design_color_option.each do |color_design_color| %>
+                <a href="<%= design_search_link %>&design_color=<%= color_design_color%>" data-name="design_color" data-val="<%= color_design_color %>" class="js-search-tag <%= 'highlight' if params[:design_color] == color_design_color %>"><%= color_design_color %></a>
+              <%- end %>
+            </span>
+          </fieldset>
+          <fieldset class="clearfix noborder">
+            <label class="pull-left mt6">地区：</label>
+            <span class="mt6">
+              <a href="<%= design_search_link %>&area_head=&area_id=" data-name="area_head" data-val="" class="js-search-tag <%= 'highlight' if params[:area_head].blank? && params[:area_id].blank? %>" style="margin-right:15px;">全部</a>
+              <select id="province" class="level_1" name="area_head" style="width:100px;">
+              </select>
+              <select id="city" class="level_2" name="area_id" style="width:100px;">
+              </select>
+              <input type="submit" class="map-srch-submit js-area-submit" value="确定" onclick="return false;">
+            </span>
+          </fieldset>
+        </div>
       <% end %>
-    </li>
-  </ul>
-  <div class="upload_btn">
-    <% if current_user -%>
-      <% unless current_user.common_user? %>
-        <%= link_to "我要上传", new_user_design_path(current_user) %>
+    </div>
+    <div class="mt10 pt15">
+      <% if current_user -%>
+        <% unless current_user.common_user? %>
+          <%= link_to "", new_user_design_path(current_user), class: 'pull-right designs_upload_btn' %>
+        <% end -%>
+      <% else -%>
+        <a href="/users/sign_in?return=true" class="pull-right designs_upload_btn"></a>
       <% end -%>
-    <% else -%>
-      <%= link_to_function "我要上传", "show_login()" %>
-    <% end -%>
-  </div>
-</form>
-<div class="design_result">
-  <% @designs.in_groups_of(3, false).each do |group| -%>
-  <ul class="d_works add_icon group unstyled">
-    <% group.each do |design| -%>
-    <li >
-      <%- if design.cover_img %>
-        <%= link_to user_design_path(design.user_id, design) do %>
-          <%= image_tag(design.cover_img.file.url(:index), :title => "装修设计欣赏-#{design.title}", :alt => "装修设计欣赏-#{design.title}") %>
+      <div class="btn-group">
+        <a href="<%= design_search_link %>&order=最新" data-name="order" data-val="最新" class="btn js-search-tag <%= 'active' if params[:order] == '最新' || params[:order].nil? || params[:order].blank? %>">最新</a>
+        <a href="<%= design_search_link %>&order=最热" data-name="order" data-val="最热" class="btn js-search-tag <%= 'active' if params[:order] == '最热' %>">最热</a>
+      </div>
+      <a href="/designs?order=因爱之名" class="designs_search_btn"></a>
+    </div>
+
+    <div class="index_main mt10">
+      <%- unless @designs.nil? %>
+      <ul class="per_works unstyled clearfix mt10">
+        <% @designs.in_groups_of(3, false).each do |group| -%>
+          <% group.each do |design| -%>
+          <li class="pr">
+            <%- if design.cover_img %>
+              <a href="<%= user_design_path(design.user_id, design) %>" class="help-block" target="_blank">
+                <img src="<%= design.cover_img.file.url(:index) %>" title="<%= design.title %>" alt="" />
+              </a>
+            <%- end %>
+            <h5 class="dott1"><%= design.title %></h5>
+            <p class="para_oneline nomargin"><%= design.user.display_name %></p>
+            <p class="para_oneline nomargin">
+              <% if design.cover_img && design.cover_img.source == "yda" %>
+                <% tag = ImageTag.where("design_image_id = #{design.cover_img.id}").map &:image_library_category_id %>
+                风格：<%= (ImageLibraryCategory.where("id in (#{tag.join(",")})").map &:title).join(",") if tag.present? %>
+              <% else %>
+                风格：<%= design.design_style_names %>
+              <% end %>
+            </p>
+            <p class="dott1 nomargin">
+              <%= link_to raw("<span><i class='icon-i16 icon-xin_gray2'></i><em class='votes_count#{design.id}'>#{design.votes_count}</em></span>"), votes_path(:voteable_id => design.id, :voteable_type => "Design"), :remote => true, :method => 'post', title: '' %>
+              <a href="/designs/<%= design.id %>#comments" target="_blank" title=""><span><i class="icon-i16 icon-comment1"></i><%=design.comments.length %></span></a>
+              <span class="noborder js-works_share"><i class="icon-i16 icon-share1"></i><%=design.shares_count %></span>
+            </p>
+            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-works_share hide">
+              <a class="bds_qzone"></a>
+              <a class="bds_tsina"></a>
+              <a class="bds_tqq"></a>
+              <a class="bds_renren"></a>
+              <a class="bds_t163"></a>
+              <a class="shareCount" href="#" title="累计分享0次">0</a>
+              <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
+            </div>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% end -%>
+      <form class="pager pager-form">
+        <%- unless @designs.nil? %>
+          <%= paginate @designs, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
         <%- end %>
-      <%- end %>
-      <h3><%= design.title %></h3>
-      <p class="p1 group">
-        <strong class="ft14 fb">当前票数：<em id ="votes_count<%= design.id%>"><%= design.votes_count %></em></strong>
-        <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => design.id, :voteable_type => "Design"), :remote => true, :method => 'post' %>
-      </p>
-
-      <p class="p2 p2_popup_zf group">
-        <span class="zf ft12">转发</span>
-        <a href="/designs/<%= design.id %>"><span class="pl ft12">评论</span></a>
-      </p>
-      <%
-        cover_img = design.cover_img.file.url if design.cover_img
-        role = "#{design.user.role_id.eql?(2) ? '家装公司' : '设计师'}:" if design.user.role_id != 3
-        text = if design.user.area_id.present?
-          province = design.user.city.try(:parent).try(:name)
-          city = design.user.try(:city).try(:name)
-
-          if province && city
-            province == city ? "#{city}的" : "#{province + city}的"
-          else
-            "#{city}的" if city
-          end
-        end
-      -%>
-      <%= forward_links("#iColor分享#来自#{text}#{role}#{design.user.display_name}的作品【#{design.title}】，优秀案例不容错过，还不点击欣赏？一切尽在iColor，@刷新生活iColor，", user_design_url(design.user_id, design), cover_img, design.id.to_s, "Design") %>
-      <p>
-        <% if design.user.source == "yda" %>
-          学校名称：<%= design.user.current_school %>
-        <% else %>
-          公司：<%= design.user.name_of_company %>
-        <% end %>
-        <br/>
-        设计师：<%= design.user.display_name %>
-        <br/>
-        <% if design.cover_img && design.cover_img.source == "yda" %>
-          <% tag = ImageTag.where("design_image_id = #{design.cover_img.id}").map &:image_library_category_id %>
-          风格：<%= (ImageLibraryCategory.where("id in (#{tag.join(",")})").map &:title).join(",") if tag.present? %>
-        <% else %>
-          风格：<%= design.design_style_names %>
-        <% end %>
-      </p>
-    </li>
-    <% end -%>
-  </ul>
-  <% end -%>
-  <!--result one ends-->
-</div>
-<!--design_result ends-->
-</div>
-<!--wrapper ends-->
-<div class='sub_bot pr'>
-  <div class="pager ft12">
-    <%= paginate @designs %>
+      </form>
+    </div>
   </div>
-  <!--pager ends-->
+  <div class="pull-right smaller">
+    <div class="map-right index_main">
+      <div class="media media_chann">
+        <a class="pull-left" href="/design_images/lists" target="_blank">
+          <i class="icon-chann icon-chann_imgbase"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+          <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+        </div>
+      </div>
+      <div class="media media_chann">
+        <a class="pull-left" href="/color_designs" target="_blank">
+          <i class="icon-chann icon-chann_match"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="/color_designs" target="_blank">色彩配搭</a></h4>
+          <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+        </div>
+      </div>
+      <div class="media media_chann">
+        <a class="pull-left" href="/channel/access" target="_blank">
+          <i class="icon-chann icon-chann_qbt"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="/channel/access" target="_blank">装修丘比特</a></h4>
+          <p class="media_con nomargin">仅需三步，让您轻松找到心仪的家装设计公司！</p>
+        </div>
+      </div>
+    </div>
+    <%- colum_datas1 = IColumnData.show_data(1).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 1).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">最新大师作品</strong>
+      </li>
+      <% colum_datas1.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <%- colum_datas2 = IColumnData.show_data(4).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 4).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">装修效果图精华推荐</strong>
+      </li>
+      <% colum_datas2.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <%- colum_datas3 = IColumnData.show_data(5).limit(5) %>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 5).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">本周最热装修设计</strong>
+      </li>
+      <% colum_datas3.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <div>
+      <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+    </div>
+    <div class="mt10">
+      <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_230x170) %></a>
+    </div>
+  </div>
 </div>
-<!--sub_bot ends-->
-</div><!--main ends12-->
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+    <ul class="ul_dot">
+      <%- @master_interviews.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+    <ul class="ul_dot">
+      <%- @about_info.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="pull-right">
+    <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_230x230) %></a>
+  </div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left">
+    <a href="<%= @banners[5].url? ? @banners[5].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[5].try(:file).try(:url, :list_670x85) %></a>
+  </div>
+  <div class="footer_banner mt10 pull-right">
+    <a href="<%= @banners[6].url? ? @banners[6].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[6].try(:file).try(:url, :list_310x85) %></a>
+  </div>
+</div>

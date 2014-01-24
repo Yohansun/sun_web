@@ -1,15 +1,71 @@
-<h2>Sign in</h2>
-
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="inputs">
-    <%= f.input :email, :required => false, :autofocus => true %>
-    <%= f.input :password, :required => false %>
-    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  </div>
-
-  <div class="actions">
-    <%= f.button :submit, "Sign in" %>
-  </div>
+<% content_for :head do -%>
+<style type="text/css">
+input#username{width:270px;}
+input#password{width:270px;}
+</style>
 <% end %>
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li class="active">用户中心</li>
+  </ul>
+  <hr class="border2 border2_mt2">
 
-<%= render "links" %>
+  <ul class="nav nav-tabs upload_tab login_tab" id="login_tab">
+    <li class="active"><a href="/users/sign_in">登录</a></li>
+    <li><a href="/users/sign_up">注册</a></li>
+    <li><a href="/users/password/new">找回密码</a></li>
+  </ul>
+
+  <div class="tab-content login_content">
+    <div class="tab-pane active" id="login_tab1">
+      <div class="index_main noborder clearfix">
+        <%= form_for(:user, :url => user_session_path, :html => {:id => "overlay_new_user", :class=> "form-horizontal pull-left login_form" },:remote => true)  do |f| %>
+          <input type="hidden" name="upload" value="<%='true' if params[:return] && params[:return] == 'true'%>">
+          <div class="control-group">
+            <label class="control-label" for="username">账号</label>
+            <div class="controls">
+              <input id="username" class="input-xlarge" type="text" placeholder="用户名/邮箱/手机" name="user[login]" value=""/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="password">密码</label>
+            <div class="controls">
+              <input id="password" type="password" name="user[password]" class="input-xlarge"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" /><span>下次自动登录</span>
+              </label>
+              <p>
+                <button type="submit" class="upload_img_btn mr10">登&nbsp;&nbsp;录</button><a href="/users/password/new" class="">忘记密码？</a>
+              </p>
+              <p class="muted"><small>您也可以用以下方式登录：</small></p>
+              <ul class="unstyled clearfix login_way">
+                <li><a href="/api/baicheng_login?type=weibo"><%= image_tag "manage/login/sina.jpg" %>新浪微博</a></li>
+                <li><a href="/api/baicheng_login?type=qq_connect"><%= image_tag "manage/login/qq.jpg" %>QQ</a></li>
+                <li><a href="/api/baicheng_login?type=renren"><%= image_tag "manage/login/rr.jpg" %>人人网</a></li>
+                <li class="noborder"><a href="/api/baicheng_login?type=kaixin"><%= image_tag "manage/login/kx.jpg" %>开心网</a></li
+              </ul>
+            </div>
+          </div>
+        <% end %>
+        <div class="pull-left pt30">
+          <p class="mt20"><small>还没加入iColor?</small></p>
+          <p class="clearfix refresh_list"><a class="btn_detail pull-left nomargin" href="/users/sign_up">轻松注册</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85) %></a>
+    </div>
+    <div class="footer_banner mt10 pull-right">
+      <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_310x85) %></a>
+    </div>
+  </div>
+</div>

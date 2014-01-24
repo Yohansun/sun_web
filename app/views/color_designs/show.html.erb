@@ -1,238 +1,286 @@
-<% content_for :head do -%>
-    <%= stylesheet_link_tag 'weekstar' %>
-    <style type="text/css">
-        span.arrow_1 {
-            right: 87px;
-        }
-        span.popup_zf{bottom: -1px; left: 165px;}
-        .reply_area em, .reply_area span,.reply_list em, .reply_list span{top:-3px!important;}
-    </style>
-    <%= stylesheet_link_tag 'style' %>
-<% end -%>
 <% content_for :tail do -%>
-    <%= javascript_include_tag 'galleryB.js','reply' %>
-    <%= render :partial => "recommend_color" %>
-    <script type="text/javascript">
-        $(".slide_thumb").click(function(event) {
-            event.preventDefault();
-            $(".big_image img").attr("src", $(event.target).parent().attr("href"));
-        });
-        $(function(){
-          if ($("#new_message")) {
-            $("#new_message").click(function (event) {
-                <% if current_user -%>
-                return true;
-                <% else -%>
-                show_login();
-                return false;
-                <% end -%>
-            });
-        }
-
-        });
-    </script>
-  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-  <!-- JiaThis Button END -->
-  <script type="text/javascript" charset="utf-8">
-  var jiathis_config = {
-    boldNum:4,
-    siteNum:4,
-    showClose:false,
-    sm:"kaixin001,renren,tsina,tqq",
-    imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
-    imageWidth:26,
-    marginTop:150,
-    pic: "http://www.icolor.com.cn/<%= @design.show_preview_img.url(:slide) %>",
-    url:"http://<%=request.host_with_port%>/color_designs/<%=@design.id%>",
-    title:"#iColor分享#一幅精美的室内色彩搭配案例----【<%=@design.design_name %>】，推荐色：立邦<%=@design.recommend_color1%> <%=@code.name if @code.present? %>，让色彩融入生活，尽在iColor@刷新生活iColor，",
-    data_track_clickback:true
-  }
+  <%= javascript_include_tag "jquery.slider.js", "/resources/js/plugins/exp/exp.js" %>
+  <script type="text/javascript">
+    $(function(){
+      $('.slider_btns').mouseenter(function(){
+        $('.slider-container').mouseenter()
+      })
+      $('.js-slider-next').click(function(){
+        $('#designs_in_slide').find('.slider-next').click()
+      });
+      $('.js-slider-prev').click(function(){
+        $('#designs_in_slide').find('.slider-prev').click()
+      });
+      // 评论JS
+      $('.js-recomment').click(function(){
+        $(this).parents('li').siblings().find('.r_comment_form').hide();
+        $(this).parents('li').find('.r_comment_form').show();
+      });
+      $('.js-close').click(function(e){
+        e.preventDefault();
+        $(this).parents('.r_comment_form').hide();
+      });
+    })
   </script>
 <% end %>
-<div class="main page_weekstar page_weekstar_detail">
-  <div class='sub_title tr pt25'>
-    <img src="<%= asset_path "design/title_design.png" %>"/>
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map3 icon_colors"></i>
+  <strong>设计鉴赏</strong>
+  <small>实用案例为您的家装出谋画色</small>
+</h3>
+<div class="mt10">
+  <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_1000x85) %></a>
+</div>
+<ul class="breadcrumb">
+  <li><%= link_to "首页", "/" %> &gt;</li>
+  <li><%= link_to "设计鉴赏", "/weekly_stars" %> &gt;</li>
+  <li><%= link_to "色彩配搭", "/color_designs" %> &gt;</li>
+  <li class="active"><%=@design.design_name %></li>
+</ul>
+<hr class="border2 border2_mt2">
+
+<div class="index_main noborder designs_in_slide nopadding">
+  <div class="slider_topbar">
+    <a href=<%= "/color_designs/#{@design_next}" %> class="a_hover_red slider_btns pull-right js-slider-next">下一个作品<i class="icon-slider_next icon-i30"></i></a>
+    <a href=<%= "/color_designs/#{@design_prev}" %> class="a_hover_red slider_btns pull-left js-slider-prev"><i class="icon-slider_prev icon-i30"></i>上一个作品</a>
+    <h3 class="title text-center nomargin"><%=@design.design_name %></h3>
   </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "色彩配搭", "/color_designs", :class => "fb" %></em>
-    <em><%= link_to "设计鉴赏", "/weekly_stars" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-  </div><!--sub_nav ends-->
-  <div class="wrapper group">
-    <div class="weekstart_titleB pr">
-      <h1><%= @design.design_name %></h1>
-
-      <div class="subtitle">
-        <div class="votes">
-          所获票数：<span id="votes_count<%= @design.id %>"><%= @design.votes_count %></span>
-          <%= link_to image_tag("design/d_vote_btn.png"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post' %>
-        </div>
-        <div class="operate pr">
-          <!-- <span class="forward">转发 (<%= @design.shares_count %>)</span> -->
-          <span class="review">评论 (<%= @design.comments.length %>)</span>
-          <span class="forward" style="height:18px">一键转发：</span>
-          <!-- JiaThis Button BEGIN -->
-          <div id="ckepop">
-            <a class="jiathis_button_tsina"></a>
-            <a class="jiathis_button_qzone"></a>
-            <a class="jiathis_button_kaixin001"></a>
-            <a class="jiathis_button_renren"></a>
-          </div>
-          <!-- JiaThis Button END -->
-
-          <%#= forward_links("#iColor分享#一幅精美的室内色彩搭配案例----【#{@design.design_name}】，推荐色：立邦#{@design.recommend_color1} #{@code.name}，让色彩融入生活，尽在iColor@刷新生活iColor", "http://#{request.host_with_port}/color_designs/#{@design.id}", @design.show_preview_img.url(:slide), @design.id.to_s, "ColorDesign") %>
-        </div>
+  <div class="mt20">
+    <div id="designs_in_slide" class="slider-bin">
+      <div class="slider-container">
+        <ul class="unstyled clearfix">
+          <% if @design.show_preview_img -%>
+            <li><a href="javascript:;" class="help-block">
+              <%= image_tag @design.show_preview_img.url(:slide), :alt => "装修设计欣赏-#{@design.design_name}"%>
+            </li>
+          <% end -%>
+        </ul>
       </div>
-
-      <div class="btn_group fr" style="margin-top:5px;">
-        <%= link_to "", "/color_designs/#{@design.id}/download", :class =>"icon_freedown" %>
-        <%= link_to "", user_collects_path(@design, color_design_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "icon_colleting"  %>
-        <%= link_to "", "/color_designs/#{@design.id}/fullscreen", :class =>"icon_fullscreen" %>
-      </div>
+      <a href="/color_designs/<%= @design_prev %>" class="slider-prev">prev</a>
+      <a href="/color_designs/<%= @design_next %>" class="slider-next">next</a>
     </div>
-    <div class="weekstart_detail">
-      <div class="big_image pr">
-        <a href="<%= "/color_designs/#{@design_prev}" %>" class="link_prev_img"></a>
-        <a href="<%= "/color_designs/#{@design_next}" %>" class="link_next_img"></a>
-        <% if @design.show_preview_img -%>
-            <%= image_tag @design.show_preview_img.url(:slide), :alt => "装修设计欣赏-#{@design.design_name}" %>
-        <% end -%>
+
+  </div>
+  <div class="btn_group clearfix mt20 noborder">
+    <%= link_to raw("<i class='icon-i16 icon-xin_gray'></i><em class='votes_count#{@design.id}'>#{@design.votes_count}</em>"), votes_path(:voteable_id => @design.id, :voteable_type => "ColorDesign"), :remote => true, :method => 'post', class: 'btn2 pull-left', title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-comment1'></i>评论(#{@design.comments.length})"), "#comments" ,class: 'btn2 pull-left',title: '' %>
+    <%= link_to raw("<i class='icon-i16 icon-share1'></i>转发(#{@design.shares_count})"), "" ,class: 'btn2 pull-left js-share_btn',title: '' %>
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-share_toggle hide">
+      <a class="bds_qzone"></a>
+      <a class="bds_tsina"></a>
+      <a class="bds_tqq"></a>
+      <a class="bds_renren"></a>
+      <a class="bds_t163"></a>
+      <a class="shareCount" href="#" title="累计分享0次">0</a>
+      <!-- <a class="bds_more" style="background-image:none!important;padding-left:0;">更多分享平台...</a> -->
+    </div>
+    <%= link_to raw("<i class='icon-i16 icon-fullscreen'></i>全屏"), "/color_designs/#{@design.id}/fullscreen" ,class: 'btn2 pull-right',title: '' %>
+    <%- if current_user %>
+      <%= link_to raw("<i class='icon-i16 icon-collect'></i>收藏"), user_collects_path(@design, color_design_id: @design.id), :remote => true, method: :post, id: "new_message", :class => "btn2 pull-right",title: ''  %>
+    <%- else %>
+      <a href="/users/sign_in" class="btn2 pull-right"><i class='icon-i16 icon-collect'></i>收藏</a>
+    <%- end %>
+    <%= link_to raw("<i class='icon-i16 icon-freedown'></i>免费下载"), "/color_designs/#{@design.id}/download", class: "btn2 pull-right",title: '' %>
+  </div>
+</div>
+
+<div class="clearfix mt10">
+  <div class="index_main designs_in_left pull-left">
+    <div class="colors_box clearfix nomargin pt15">
+      <div class="pull-left"><img src="<%= asset_path 'imgbase_in/color.jpg' %>"></div>
+      <ul class="pull-left unstyled colorbox_ul">
+        <%- [@color1, @color2, @color3].each_with_index do |color,index| %>
+          <%- unless color.nil? %>
+            <li>
+              <div class="colorblock" style="background-color:rgb(<%= color.rgb %>)"></div>
+              <h6 class="colortitle"><%= color.name %></h6>
+              <%- unless color.rgb.blank? %>
+                <p class="colorname">立邦(<%= color.code %>)<%= color.name %></p>
+              <%- else %>
+                <p class="colorname">立邦木器漆(<%= color.code %>)<%= color.name %></p>
+              <%- end %>
+            </li>
+          <%- end %>
+        <%- end %>
+      </ul>
+    <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank" class="goshop pull-right"></a>
+    <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank" class="gobuy pull-right"></a>
+    </div>
+    <div class="work_infos linet1">
+      <p class="work_info">
+        <span>设计风格：<%= @design.design_style %></span>
+        <span>功能区：<%= @design.design_usage %></span>
+        <span>色系：<%= @design.design_color %></span>
+      </p>
+      <p class="work_info" style="height:72px;overflow:hidden;">搭配理念：<%= @design.design_thought %></p>
+    </div>
+    <div class="work_tags">
+      <span class="">标签：</span>
+      <%- @design.tag_list.each do |tag| %>
+        <a href="javascript:;"><%= tag %></a>
+      <%- end %>
+    </div>
+    <div style="height:30px;margin:10px 0 31px 7px;">
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
       </div>
-      <div class="colorsbox " style="padding:10px 0; overflow:hidden;">
-        <div class="color-picker group">
-          <div class="colors_tit" style="float:left; margin:20px 15px 0 0;">
-            <img src="<%= asset_path "master/colors_icon_tit.png" %>" />
-          </div>
-          <div id="colors_con" class="colors_con" style="float:left; padding:25px 0 0; height:35px; width:617px; position:relative;">
-            <img src="<%= asset_path "design/colors2.gif" %>" />
-            <div class="desc" style=" height:35px; width:617px; margin:25px 0;display:none; position:absolute; left:1px; top:1px; background:#fff;">
-              <div class="list" style="height:35px;">
-                <ul class="group" style="overflow:hidden;">
-                </ul>
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+      <!-- Baidu Button END -->
+    </div>
+    <a name="comments"></a>
+    <div class="work_comments nomargin">
+      <%= form_for(Comment.new, :html => {:class => "comment_form exp-holder"}) do |f| %>
+        <h5>评论<span class="text-error">（<%= @design.comments.length %>）</span></h5>
+        <%= f.hidden_field :commentable_id, value: params[:id] %>
+        <%= f.hidden_field :commentable_type, value: 'ColorDesign', id: 'J_t' %>
+        <%= f.text_area :content, :placeholder =>"最多可输入1000字" %>
+        <ul class="moodbtn_group unstyled clearfix">
+          <li class="pull-right btn_send">
+            <span class="muted">可以输入
+              <span class="text-important js-text_rest_show">1000</span>个字符
+            </span>
+            <button class="">提交评论</button>
+          </li>
+          <li class="pull-left exp-block-trigger" id="J_sbt">
+            <i class="icon-mood icon-face"></i>
+            添加表情
+          </li>
+        </ul>
+      <%- end %><!-- bottom_mood end -->
+
+      <ul class="mood_list unstyled nomargin js-list_parent">
+        <%- @comments.each_with_index do |c,i| %>
+          <li>
+            <div class="clearfix">
+              <div class="pull-left comment_photo">
+                <%- if c.user.try(:avatar) -%>
+                  <%= image_tag(c.user.avatar.file(:icon), :size =>"50x50")%>
+                <%- else -%>
+                  <%= image_tag "news/regimg_bg.jpg", size: '50x50' %>
+                <%- end -%>
+              </div>
+              <div class="comment_text">
+                <p>
+                  <strong class="pull-right comment_floor"><%= @comments.size - i %>F</strong>
+                  <strong><%= c.user ? c.user.display_name : "匿名" %></strong>
+                  <span class="comment_date"><%= c.created_at.to_date %></span>
+                </p>
+                <p class="J_resulte"><%= c.content %></p>
+                <%- c.reply_msgs.order("created_at DESC").each do |r| %>
+                  <div class="re_comments">
+                    <i class="icon-i16 icon-toparrow"></i>
+                    <p>
+                      <strong><%= r.user.display_name %></strong>
+                      <span class="muted">说</span>
+                      <p><%= r.content %></p>
+                    </p>
+                    <p class="muted"><%= r.created_at.to_date %></p>
+                  </div>
+                <%- end %>
               </div>
             </div>
-          </div>
-          <div class="mall_link">
-            <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" target="_blank"><img src="<%= asset_path "master/go_shops.jpg"%>" /></a>
-            <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" target="_blank"><img src="<%= asset_path "master/mall_link_btn.png" %>" /></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="properties">
-        <table class="propertyA th_bold">
-          <tr><th>风格：</th>
-            <td><%= @design.design_style %></td>
-          </tr>
-          <tr><th>功能区：</th>
-            <td><%= @design.design_usage %></td>
-          </tr>
-          <tr><th>色系：</th>
-            <td><%=  @design.design_color %></td>
-          </tr>
-          <tr><th>推荐色：</th>
-            <%- color1, color2, color3 = search_color_code(@design.recommend_color1), search_color_code(@design.recommend_color2), search_color_code(@design.recommend_color3) %>
-            <%- color_var = [(color1 if color1),(color2 if color2),(color3 if color3)].first %>
-            <%- if color_var && color_var.code =~ /^FM|^WM/ %>
-            <td><%= ('立邦木器漆'+ color_var.code ) if color_var %></td>
-            <%- else %>
-            <td><%= ('立邦'+ color_var.code + color_var.name) if color_var %></td>
+            <div class="clearfix" style="margin-bottom:-10px;*margin-bottom:0;">
+              <%- if current_user %>
+                <a class="pull-right js-recomment" href="javascript:;">回复</a>
+              <%- end %>
+            </div>
+            <%= form_for(ReplyMsg.new, :html =>{:class =>"comment_text r_comment_form"}) do |f| %>
+              <%= f.hidden_field :show_id, value: params[:id] %>
+              <%= f.hidden_field :comment_id, value: c.id %>
+              <%= f.hidden_field :reply_type, value: "color_designs" %>
+              <%= f.text_area :content, class: 're_comments' %>
+              <div>
+                <button class="btn btn-small">提交</button>
+                <a href="#" class="btn btn-small js-close">取消</a>
+              </div>
             <%- end %>
-          </tr>
-          <tr><th>搭配理念：</th>
-            <td><%= @design.design_thought %></td>
-          </tr>
-        </table>
-      </div>
-      <div class="review_wrap">
-        <div class="reviewform">
-          <div class="bar">
-            <h4><span id="review_focus">评论</span>(<%= @design.comments.length %>)</h4>
-            <span class="r"><span class="words_tip">0</span>/140</span>
-          </div>
-          <div class="form-content">
-            <%= form_for(Comment.new) do |f| %>
-                <%= f.hidden_field :commentable_id, value: params[:id] %>
-                <%= f.hidden_field :commentable_type, value: 'ColorDesign' %>
-                <p class="input">
-                  <%= f.text_area :content, :class => "area_text" %>
-                </p>
-
-                <p class="button">
-                  <%= image_submit_tag "design/submitA.gif", value: "提交", alt: "提交" -%>
-                </p>
-            <% end %>
-          </div>
-        </div>
-        <div class="pager ft12">
-          <%- unless @comments.nil? %>
-              <%= paginate @comments %>
-          <%- end %>
-        </div>
-        <div class="review_list">
-          <ul class="review_listA">
-            <% @comments.each do |c| %>
-                <li>
-                  <div class="bar">
-                    <% if c.user %>
-                      <a href="/users/<%= c.user.id %>" class="user"><%= c.user.display_name %></a>
-                    <% else %>
-                      <a href="#" class="user">匿名</a>
-                    <% end %>
-                    <span class="time"><%= c.created_at.to_date %></span>
-                  </div>
-                  <div class="reply">
-                    <a href="javascript:void(0)">回复</a>
-                  </div>
-                  <div class="content">
-                    <%= c.content %>
-                  </div>
-                  <div class="clearfix"></div>
-
-                  <div class="reply_area none cl pr">
-                    <em class="pa">◆</em>
-                    <span class="pa">◆</span>
-
-                    <div class="reply_input clear">
-                      <%= form_for(ReplyMsg.new) do |f| %>
-                          <%= f.hidden_field :show_id, value: @design.id %>
-                          <%= f.hidden_field :comment_id, value: c.id %>
-                          <%= f.hidden_field :reply_type, value: "color_designs" %>
-                          <%= f.text_area :content, :rows => 2 %>
-                          <input type="image" src="<%= asset_path "btn.jpg" %>">
-                      <%- end %>
-                    </div>
-                    <!--reply_input ends-->
-                  </div>
-                  <!--reply_area ends-->
-                  <div class="reply_list none cl pr">
-                    <em class="pa">◆</em>
-                    <span class="pa">◆</span>
-
-                    <div class="reply_con ft14 clear">
-                      <div class="clear">
-                        <%- c.reply_msgs.order("created_at DESC").each do |r| %>
-                            <div class="clear  <%= "reply_line" if r != c.reply_msgs.last %> ">
-                              <p class="reply_tabs fl">
-                                <a href="/users/<%= r.user.id %>"><%= r.user.display_name %></a>回复:<%= r.content %>
-                              </p>
-
-                              <p class="fr">
-                                <%= r.created_at.to_date %>
-                              </p>
-                            </div>
-                        <%- end %>
-                      </div>
-                    </div>
-                    <!--reply_con ends-->
-                  </div>
-                  <!--reply_list ends-->
-                </li>
-            <% end %>
-          </ul>
-        </div>
+          </li>
+        <%- end %>
+      </ul>
+      <div class="pager">
+        <%- unless @comments.nil? %>
+          <%= paginate @comments %>
+        <%- end %>
       </div>
     </div>
   </div>
- <div class='sub_bot pr'></div>
+  <div class="pull-right smaller">
+    <%- colum_datas1 = IColumnData.show_data(1).limit(5) %>
+    <ul class="unstyled map-right index_main js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 1).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">最新大师作品</strong>
+      </li>
+      <% colum_datas1.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <%- colum_datas2 = IColumnData.show_data(4).limit(5) %>
+    <ul class="unstyled map-right index_main js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="<%= IColumnData.where(position: 0, i_column_type_id: 4).first.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+        <strong class="pull-left">装修效果图精华推荐</strong>
+      </li>
+      <% colum_datas2.each_with_index do |dcs,index| %>
+      <li class="map-r1 dott1 <%="active" if index == 0%>">
+          <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
+            <strong class="js-title"><%=dcs.title%></strong><br>
+            <a href="<%=dcs.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=dcs.file.url(:list_155x115)%>" alt="" /></a>
+      </li>
+      <% end -%>
+    </ul>
+    <div class="mt10">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+    </div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+    <ul class="ul_dot">
+      <%- @master_interviews.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+    <ul class="ul_dot">
+      <%- @about_info.each_with_index do |m,i| %>
+        <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+          <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+        </li>
+      <%- end %>
+    </ul>
+  </div>
+  <div class="pull-right">
+    <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+  </div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left">
+    <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_670x85) %></a>
+  </div>
+  <div class="footer_banner mt10 pull-right">
+    <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_310x85) %></a>
+  </div>
 </div>

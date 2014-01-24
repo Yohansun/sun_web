@@ -1,156 +1,144 @@
 <%- content_for :head do %>
-  <%= stylesheet_link_tag "style"%>
+  <%= stylesheet_link_tag "winnings/winner_list"%>
 <% end -%>
-<style type="text/css">
-.winner-bin{background: url(<%= asset_path 'winner/winner-bg.jpg' %>) no-repeat;width: 963px;margin: 30px auto 50px;}
-.winner-bin h1{height: 400px;}
-.winner-bin h1,.winner-bin h2,.winner-prev,.winner-next{text-indent: -999em;}
-.winner-bin h2{background: url(<%= asset_path 'winner/winner-hd.png'%>) no-repeat;height: 36px;}
-.pd30{padding: 30px;}
-.winner-reg{background: #f5c294;padding-top: 1px;}
-.winner-reg h2{left: 30px;top: -35px;}
-.winner-reg h2,.winner-vote h2{width: 127px;}
-.winner-slide{width: 850px;margin: 0 auto;}
-.winner-prev,.winner-next{background: url(<%= asset_path 'winner/winner-bullets.png' %>) no-repeat;width: 33px;height: 57px;left: 0;top: 52%;margin-top: -29px;filter:alpha(opacity=50);opacity: 0.5;
--webkit-transition:opacity 0.5s;
--moz-transition:opacity 0.5s;
-transition:opacity 0.5s;
-_background-image: url(<%= asset_path 'winner/winner-bullets.gif' %>);
-}
-.winner-next{background-position: -33px 0;left: auto;right: 0;}
-.winner-prev:hover,.winner-next:hover{filter:alpha(opacity=100);opacity: 1;}
-.winner-slide-bin{width: 664px;margin: 0 auto;overflow: hidden;}
-.winner-slide-bin ul{overflow: hidden;float: left;_display: inline;}
-.winner-slide-bin li{width: 639px;text-align: right;margin: 10px 0;font: bold 14px "SimHei";color: #fefffe;*margin: 5px 0;}
-.winner-slide-bin .h3{background: url(<%= asset_path 'winner/winner-bg2.png' %>) no-repeat;text-align: center;width: 664px;height: 18px;margin: 20px auto;padding: 5px 0;line-height: 18px;font-size: 18px;font-weight: bold;color: #fff;}
-.winner-slide-bin span{float: left;font: 15px "Microsoft Yahei";margin-top: -2px;}
-.winner-slide-container{width: 99999em;position: relative;}
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
+<a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> > </li>
+  <li><a href="/designer_events">精彩活动</a> > </li>
+  <li class="active">获奖名单</li>
+</ul>
+<hr class="border2 border2_mt2">
+<div class="gift_list">
+  <% if @event_kv %>
+    <div class="imgs">
+      <a href="<%= @event_kv.url %>" target="_blank">
+        <%= image_tag(@event_kv.file.url(:gift_kv), usemap: "#event_kv_map") %>
+      </a>
+      <%- if @event_kv.kv_maps.any? %>
+        <map id="event_kv_map" name="event_kv_map">
+          <%- @event_kv.kv_maps.each do |map| %>
+            <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+          <%- end %>
+        </map>
+      <%- end %>
+    </div>
+  <% end %>
 
-.winner-vote{background: #ff861f;}
-.winner-vote h2{background-position: -127px 0;}
+  <% if @regs.present? %>
+    <div class="gift_item">
+      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title1.jpg' %>" alt="" /></h3>
+      <div id="" class="gift_carousel slider-bin">
+        <div class="slider-container">
+          <ul class="unstyled clearfix">
+            <%- @regs.each do |d|%>
+              <%- give_time = d[0] %>
+              <%- end_time = d[1] %>
+              <%- gift = @reg_luck.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>
+              <li>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th colspan="4"><%= (give_time + 1.days).strftime("%Y年%m月%d日") %> - <%= (end_time + 1.days).strftime("%Y年%m月%d日") %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%- gift.in_groups_of(2).each do |g| %>
+                      <tr>
+                        <td class="noborder" width="266"><%= g[0].try(:winner) %></td>
+                        <td class="bg_gray"><%= g[0].try(:gift_name) %></td>
+                        <td width="266"><%= g[1].try(:winner) %></td>
+                        <td class="bg_gray"><%= g[1].try(:gift_name) %></td>
+                      </tr>
+                    <%- end %>
+                  </tbody>
+                </table>
+              </li>
+            <%- end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-.winner-color{background: #9f1b1b;}
-.winner-color h2{width: 441px;background-position: -254px 0;}
-</style>
- <div class="main winner-bin pr">
-    <a href="/winnings" style="position:absolute;top:270px;left:504px;width:189px;height:43px;"><img src="<%=asset_path 'gifts/botton.png'%>" alt="" /></a>
-    <h1 class="nomargin">因爱之名 刷新生活 ————立邦携手万名设计师为您免费设计新家</h1>
-        <% if @regs.present? %>
-            <div class="winner-reg pr pd30">
-            <h2 class="pa">注册有奖</h2>
-            <div class="winner-slide pr">
-                    <a href="javascript:;" class="winner-prev pa">prev</a>
-                    <a href="javascript:;" class="winner-next pa">next</a>
-                    <div class="winner-slide-bin pr">
-                        <div class="winner-slide-container">
-                            <%- @regs.each do |d|%>
-                                <%- give_time = d[0] %>
-                                <%- end_time = d[1] %>
-                                <%- gift = @reg_luck.where("YEAR(give_time) = ? AND MONTH(give_time) = ? AND DAY(give_time) = ? AND YEAR(end_time)= ? AND MONTH(end_time) = ? AND DAY(end_time) = ? ", give_time.year,give_time.month,give_time.day,end_time.year,end_time.month,end_time.day) %>
-                                <ul class="unstyled">
-                                  <li class="h3"><%= (give_time + 1.days).strftime("%Y年%m月%d日") %> - <%= (end_time + 1.days).strftime("%Y年%m月%d日") %></li>
-                                  <%- gift.each do |g| %>
-                                    <li><span><%= g.winner%></span><%= g.gift_name%></li>
-                                  <%- end -%>
-                                </ul>
-                            <%- end %>
+  <% if @votes.present? %>
+    <div class="gift_item">
+      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title2.jpg' %>" alt="" /></h3>
+      <div id="" class="gift_carousel slider-bin">
+        <div class="slider-container">
+          <ul class="unstyled clearfix">
+            <%- @votes.each do |d|%>
+              <%- end_year = d.split('/')[0] %>
+              <%- end_month = d.split('/')[1] %>
+              <%- gift = @vote_luck.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>
+              <li>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th colspan="4"><%= "#{end_year}年#{end_month}月" %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%- gift.in_groups_of(2).each do |g| %>
+                      <tr>
+                        <td class="noborder" width="266"><%= g[0].try(:winner) %></td>
+                        <td class="bg_gray"><%= g[0].try(:gift_name) %></td>
+                        <td width="266"><%= g[1].try(:winner) %></td>
+                        <td class="bg_gray"><%= g[1].try(:gift_name) %></td>
+                      </tr>
+                    <%- end %>
+                  </tbody>
+                </table>
+              </li>
+            <%- end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <%- end -%>
+  <% if @months.present? %>
+    <div class="gift_item">
+      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title3.jpg' %>" alt="" /></h3>
+      <div id="" class="gift_carousel slider-bin">
+        <div class="slider-container">
+          <ul class="unstyled clearfix">
+            <%- @months.each do |d|%>
+              <%- end_year = d.split('/')[0] %>
+              <%- end_month = d.split('/')[1] %>
+              <%- gift = @month_best.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>
+              <li>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th colspan="4"><%= "#{end_year}年#{end_month}月" %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%- gift.in_groups_of(2).each do |g| %>
+                      <tr>
+                        <td class="noborder" width="266"><%= g[0].try(:winner) %></td>
+                        <td class="bg_gray"><%= g[0].try(:gift_name) %></td>
+                        <td width="266"><%= g[1].try(:winner) %></td>
+                        <td class="bg_gray"><%= g[1].try(:gift_name) %></td>
+                      </tr>
+                    <%- end %>
+                  </tbody>
+                </table>
+              </li>
+            <%- end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-        <% if @votes.present? %>
-            <div class="winner-vote pd30">
-            <h2>投票有礼</h2>
-            <div class="winner-slide pr">
-                    <a href="javascript:;" class="winner-prev pa">prev</a>
-                    <a href="javascript:;" class="winner-next pa">next</a>
-                    <div class="winner-slide-bin pr">
-                        <div class="winner-slide-container">
-                            <%- @votes.each do |d|%>
-                            <ul class="unstyled">
-                                <%- end_year = d.split('/')[0] %>
-                                <%- end_month = d.split('/')[1] %>
-                                <%- gift = @vote_luck.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>
-                                  <li class="h3"><%= "#{end_year}年#{end_month}月" %></li>
-                                  <%- gift.each do |g| %>
-                                    <li><span><%= g.winner%></span><%= g.gift_name%></li>
-                                  <%- end -%>
-                            </ul>
-                            <%- end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <%- end -%>
-</div><!--main ends-->
-<%- content_for :tail do %>
-<script type="text/javascript">
-;(function($){
-    $.fn.winnerSlider = function(config){
-        config = $.extend({
-            speed : 400
-        }, config);
-        return this.each(function(){
-            var that = $(this),
-                slide = that.children(),
-                $ul = that.find('ul'),
-                pages = $ul.length,
-                width = that.width(),
-                arr = [],
-                pager = 1;
-            if(pages < 2) return;
-
-            $ul.each(function(i, ul){
-                arr.push($(ul).remove());
-            });
-            slide.append(arr[0]);
-
-            that.siblings('.winner-next').click(function(){
-                playL(pager + 1);
-                that.animate({'height' : slide.find('ul').last().outerHeight() + 'px'}, 'fast');
-            });
-            that.siblings('.winner-prev').click(function(){
-                playR(pager - 1);
-                that.animate({'height' : slide.find('ul').first().outerHeight() + 'px'}, 'fast');
-            })
-            function playL(page){
-                if(slide.is(':animated')) return;
-                var ul;
-                if(page <= pages){
-                    ul = arr[page - 1];
-                    pager = page;
-                } else {
-                    ul = arr[0];
-                    pager = 1;
-                }
-                slide.append(ul).animate({'left' : - width + 'px'}, config.speed,function (){
-                    slide.find('ul').first().remove();
-                    slide.css('left', 0);
-                });
-            }
-
-            function playR(page){
-                if(slide.is(':animated')) return;
-                var ul;
-                if(page === 0){
-                    ul = arr[arr.length - 1];
-                    pager = pages;
-                } else {
-                    ul = arr[page - 1];
-                    pager = page;
-                }
-                slide.prepend(ul).css('left', - width + 'px').animate({'left': 0}, config.speed, function(){
-                    slide.find('ul').last().remove();
-                });
-            }
-        });
-    };
-    $(function(){
-        $('.winner-slide-bin').winnerSlider();
-    });
-})(jQuery);
-</script>
-<% end %>
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left">
+    <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85) %></a>
+  </div>
+  <div class="footer_banner mt10 pull-right">
+    <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_310x85) %></a>
+  </div>
+</div>

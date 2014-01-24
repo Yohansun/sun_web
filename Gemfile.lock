@@ -139,6 +139,7 @@ GEM
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
     fastercsv (1.5.5)
+    galetahub-simple_captcha (0.1.5)
     grape (0.2.1)
       hashie (~> 1.2)
       multi_json
@@ -369,6 +370,7 @@ DEPENDENCIES
   dimensions-rails
   ekuseru
   exception_notification
+  galetahub-simple_captcha
   grape
   hipchat
   hirb

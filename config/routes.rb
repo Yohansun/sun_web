@@ -11,6 +11,8 @@ Icolor::Application.routes.draw do
   match "/images/*path" => "design_images#index"
   match "/images" => "design_images#index"
 
+  match "/simple_captcha/update_captcha" => "simple_captcha#update_captcha"
+
   require 'api'
   resources :special_events do
     member do
@@ -81,6 +83,8 @@ Icolor::Application.routes.draw do
     match "/user/update" => "users/register#update"
     match "/users/suc_regist" => "users/register#suc_regist"
     match "/users/username_check" => "users/register#username_check"
+    match "/users/email_check" => "users/register#email_check"
+    match "/users/phone_check" => "users/register#phone_check"
     match "/users/passwords/send_suc" => "users/passwords#send_suc"
     match "/users/passwords/reset" => "users#reset_password"
     match "/users/policy" => "users/register#policy"
@@ -219,7 +223,8 @@ Icolor::Application.routes.draw do
   match "/designer_events/:id" => "designer_events#show"
   match "/designer_events/city/:city-:page" => "designer_events#city"
   match "/designer_events/city/:city" => "designer_events#city"
-  match "/other_events" => "other_events#index"
+  match "/other_events" => "other_events#index", as: "other_events_index"
+  match "/other_events/:id" => "other_events#show", as: "other_event_show"
   match "/other_events/kv" => "other_events#kv"
   match "/other_events/Proposal" => "other_events#Proposal"
   match "/other_events/review" => "other_events#review"
@@ -554,6 +559,23 @@ Icolor::Application.routes.draw do
 
   scope '/manage', :module => 'manage' do
     get '/clear_cache', to: 'home#clear_cache'
+    resources :designer_events do
+      collection do
+        post :create_image
+        put :update_image
+      end
+    end
+    resources :other_events do
+      collection do
+        post :create_image
+        put :update_image
+      end
+    end
+    resources :event_kvs, only: [:index, :create] do
+      collection do
+        post :create_image
+      end
+    end
     resources :owner_enter
     resources :seo_sites do
       collection do
@@ -719,7 +741,21 @@ Icolor::Application.routes.draw do
       end
     end
 
+    resources :banner_weekly_stars do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
     resources :banner_company do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
+    resources :banner_other_pages do
       collection do
         post :create_image
         post :save_data

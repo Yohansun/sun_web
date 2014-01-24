@@ -12,7 +12,6 @@
 <div class="main signup group main_new">
   <div class="shadow signup_box">
     <div class="section">
-
       <%= render :partial => "users/profile_box" %>
 	      <div class="host_main">
 			<div class="design_result">
@@ -21,11 +20,11 @@
 	                <%- @images.each do |image| %>
 					<li id = "<%= image.id %>" class = "update_li">
 						<div class = 'host_works_edit'>
-                            <%= link_to "删除", user_collect_path(current_user, image), :method => :delete, class: "works_img_del", confirm:"确认删除？" %>
+              <%= link_to "删除", user_collect_path(current_user, image), :method => :delete, class: "works_img_del", confirm:"确认删除？" %>
 						</div>
 						<%- if image.design_image_id %>
 							<a href="<%= image_show_design_image_path(image.design_image_id) %>">
-								<%= image_tag(image.design_image.try(:file), :class => "host_works_img" ) %>
+								<%= image_tag(image.design_image.try(:file).try(:url,:index), :class => "host_works_img" ) %>
 							</a>
 							<h3><%= image.design_image.try(:design).try(:title)  %></h3>
 							<p class="p1 group">
@@ -53,7 +52,7 @@
 							</p>
 						<%- elsif image.color_design_id %>
 						    <a href="<%= color_designs_path(image.color_design_id) %>">
-							<%= image_tag(ColorDesign.find(image.color_design_id).try(:main_preview_img), :class => "host_works_img" ) %>
+							<%= image_tag(ColorDesign.find(image.color_design_id).try(:main_preview_img).try(:url,:index), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.color_design.try(:design_name)  %></h3>
 							<p class="p1 group">
@@ -67,12 +66,12 @@
 							</p>
 						<%- elsif image.master_design_id %>
 						    <a href="/master_designs/<%= image.master_design_id %> ">
-							<%= image_tag(MasterDesign.find(image.master_design_id).try(:main_preview_img), :class => "host_works_img" ) %>
+							<%= image_tag(MasterDesign.find(image.master_design_id).try(:main_preview_img).try(:url,:index), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.master_design.try(:design_name)  %></h3>
 						<%- elsif image.design_id %>
 						    <a href="/designs/<%= image.design_id %>" >
-							<%= image_tag(Design.find(image.design_id).design_images.first.try(:file), :class => "host_works_img" ) %>
+							<%= image_tag(Design.find(image.design_id).design_images.first.try(:file).try(:url,:index), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.design.try(:title)  %></h3>
 							<p class="p1 group">
@@ -86,7 +85,7 @@
 							</p>
 						<%- elsif image.inspiration %>
 						    <a href="/designs/<%= image.design_id %>" >
-						    <%= image_tag(image.inspiration.design_images.first.try(:file), :class => "host_works_img" ) %>
+						    <%= image_tag(image.inspiration.design_images.first.try(:file).try(:url,:index), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.inspiration.try(:title)  %></h3>
 							<p class="p1 group">
@@ -97,7 +96,7 @@
 							</p>
 						<%- elsif image.story_id %>
 						    <a href="/baicheng/design_competes/<%= image.story_id %>" >
-						    <%= image_tag(image.story.story_image.try(:file), :class => "host_works_img" ) %>
+						    <%= image_tag(image.story.story_image.try(:file).try(:url,:list), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.story.try(:title)  %></h3>
 							<p class="p1 group">

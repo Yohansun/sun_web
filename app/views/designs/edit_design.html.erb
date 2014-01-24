@@ -1,8 +1,5 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag '2013base','2013upload' %>
-  <% if current_user && !current_user.common_user? %>
-    <%= render :partial => "/refresh/new" %>
-  <% end %>
+  <%= stylesheet_link_tag '2013upload' %>
 <% end -%>
 <% content_for :tail do -%>
   <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
@@ -45,185 +42,201 @@
   <script>
   PNG.fix('img,div,a,ul,li');
   </script>
-  <![endif]-->
-  <style type="text/css">
-  .nav_top{clear:none;}
-  .wrapper{width:1000px;}
-  .width652{width:472px;}
-  .control2013 div.fl{width:720px;}
-  .control2013 textarea{width:705px;}
-  </style>
-<% end %>
-<div class="wrapper">
-    <div class="upload2013">
-        <h1>编辑作品</h1>
+  <![endif]--><% end %>
+<div class="container refresh_main">
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li class="active">用户中心</li>
+  </ul>
+  <hr class="border2 border2_mt2">
+
+  <ul class="nav nav-tabs upload_tab" id="upload_tab">
+    <li class="active"><a href="#upload_tab1" data-toggle="tab">上传作品</a></li>
+  </ul>
+
+  <div class="tab-content upload_content">
+    <div class="tab-pane active" id="upload_tab1">
+      <%= form_tag update_design_user_designs_path(current_user), :class=>"form-horizontal index_main noborder nopadding nomargin" do  %>
+        <input type="hidden" name="id" value="<%=@design.id%>">
+        <fieldset class="text-center">
+          <label class="radio inline">
+            <input id="new_works" name="new_works" type="radio" onclick="javascript:window.location.replace('<%=new_user_design_path(current_user)%>');">新建作品
+          </label>
+          <label class="radio inline">
+            <input id="new_works" name="new_works" type="radio" checked>更新已有作品
+          </label>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label pt10" for="workname">作品名称<span class="help-inline text-important">*</span></label>
+            <div class="controls">
+              <%= text_field_tag 'design[title]',@design.title, class: "workname inputs_count", "data-count"=> "50" -%>
+              <span class="help-text help-inline">还可以输入<b class="text-important inputs_count_tip">50</b>符汉字</span>
+              <%= select_tag "edit_title", options_for_select(Design.order('created_at desc').where(user_id: current_user.id).map { |design| [design.title, design.id] },@design.id),:prompt => '--请选择--', :onchange => 'jump()' -%>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="">户型<span class="help-inline text-important">*</span></label>
+            <div class="controls">
+              <% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
+                <label class="radio inline span1">
+                  <% @design_tags.each do |design_tag| %>
+                    <% if design_tag == img_lib_cat.id %>
+                      <%=radio_button_tag "apartment",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless @design_tags.include?(img_lib_cat.id) %>
+                    <%=radio_button_tag "apartment",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="">风格<span class="help-inline text-important">*</span></label>
+            <div class="controls">
+              <% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
+                <label class="checkbox inline span1">
+                  <% @design_tags.each do |design_tag| %>
+                    <% if design_tag == img_lib_cat.id %>
+                      <%= check_box_tag "style[]", img_lib_cat.id, true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless @design_tags.include?(img_lib_cat.id) %>
+                    <%=check_box_tag "style[]",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="">用途<span class="help-inline text-important">*</span></label>
+            <div class="controls">
+              <% ImageLibraryCategory.where(parent_id: 122).each do |img_lib_cat| %>
+                <label class="radio inline span1">
+                  <% @design_tags.each do |design_tag| %>
+                    <% if design_tag == img_lib_cat.id %>
+                      <%=radio_button_tag "use",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless @design_tags.include?(img_lib_cat.id) %>
+                    <%=radio_button_tag "use",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label for="building_name" class="control-label">作品建筑所属城市<span class="help-inline text-important">*</span></label>
+            <div class="controls ">
+              <select id="province" class="level_1 input-small" ><option>省/直辖市</option></select>
+              <select id="city" class="level_2 input-small"><option>城市</option></select>
+              <select id="zone" class="level_3 input-small" name="design[area_id]"><option>区</option></select>
+              <span class="help-inline text-muted">请如实填写作品建筑所属城市，以便顺利参加iColor的相关活动</span>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label for="building_name" class="control-label pt10">楼盘名称<span class="help-inline text-important">*</span></label>
+            <div class="controls">
+              <%= text_field_tag 'design[property_name]', @design.property_name, class: "building_name" -%>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label for="building_name" class="control-label">设计理念</label>
+            <div class="controls">
+              <%= text_area_tag 'design[content]', @design.content, class: "design_ideal inputs_count", "data-count"=>"2000" -%>
+              <p class="help-text help-block">还可以输入<b class="text-important inputs_count_tip">2000</b> 字符/汉字</p>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="">装修报价</label>
+            <div class="controls">
+              <% ImageLibraryCategory.where(parent_id: 19).each do |img_lib_cat| %>
+                <label class="radio inline span1">
+                  <% @design_tags.each do |design_tag| %>
+                    <% if design_tag == img_lib_cat.id %>
+                      <%=radio_button_tag "fee",img_lib_cat.id, true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless @design_tags.include?(img_lib_cat.id) %>
+                    <%=radio_button_tag "fee",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="">面积</label>
+            <div class="controls">
+              <% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
+                <label class="radio inline span1">
+                  <% @design_tags.each do |design_tag| %>
+                    <% if design_tag == img_lib_cat.id %>
+                      <%=radio_button_tag "acreage",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless @design_tags.include?(img_lib_cat.id) %>
+                    <%=radio_button_tag "acreage",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="">人群</label>
+            <div class="controls">
+              <% ImageLibraryCategory.where(parent_id: 127).each do |img_lib_cat| %>
+                <label class="radio inline span1">
+                  <% @design_tags.each do |design_tag| %>
+                    <% if design_tag == img_lib_cat.id %>
+                      <%=radio_button_tag "throng",img_lib_cat.id,true%><%=img_lib_cat.title%>
+                    <% end %>
+                  <% end %>
+                  <% unless @design_tags.include?(img_lib_cat.id) %>
+                    <%=radio_button_tag "throng",img_lib_cat.id%><%=img_lib_cat.title%>
+                  <% end %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="text-center">
+          <button class="upload_img_btn">上传图片</button>
+          <!-- <a href="upload2.html" class="upload_img_btn">上传图片</a> -->
+          <span class="help-block text-warning pb25">*红色标注为必填项</span>
+        </fieldset>
+      <% end %>
     </div>
-    <%= form_tag update_design_user_designs_path(current_user),:class=>'clear' do %>
-        <div class="upload2013">
-            <div align="center">
-              <input id="new_works" name="new_works" type="radio" onclick="javascript:window.location.replace('<%=new_user_design_path(current_user)%>');">新建作品
-              <input id="new_works" name="new_works" type="radio" checked>选择已有作品
-            </div>
-            <input type="hidden" name="id" value="<%=@design.id%>">
-            <div class="control2013">
-                 <%= label_tag :title, raw("作品名称<span class='cr'>*</span>"), class: "label2013" %>
-                <%= text_field_tag 'design[title]',@design.title, class: "width652 fl inputs_count", "data-count"=> "50" -%>
-                <span class="help-text fl">还可以输入<b class="cr inputs_count_tip">50</b>符汉字</span>
-                 <%= select_tag "edit_title", options_for_select(Design.order('created_at desc').where(user_id: current_user.id).map { |design| [design.title, design.id] },@design.id),:prompt => '--请选择--', :onchange => 'jump()' -%>
-            </div>
-            <div class="control2013">
-                <label class="label2013">
-                    户型<span class="cr">*</span>
-                </label>
-                <div class="upload2013_toggle fl">
-                    <a href="javascript:;" class="upload2013_btn pa"></a>
-                    <div class="clear">
-                      <% ImageLibraryCategory.where(parent_id: 1).each do |img_lib_cat| %>
-                        <label>
-                          <% @design_tags.each do |design_tag| %>
-                            <% if design_tag == img_lib_cat.id %>
-                              <%=radio_button_tag "apartment",img_lib_cat.id, true%><%=img_lib_cat.title%>
-                            <% end %>
-                          <% end %>
-                          <% unless @design_tags.include?(img_lib_cat.id) %>
-                            <%=radio_button_tag "apartment",img_lib_cat.id%><%=img_lib_cat.title%>
-                          <% end %>
-                        </label>
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-            <div class="control2013">
-                <label class="label2013">
-                    风格<span class="cr">*</span>
-                </label>
-                <div class="upload2013_toggle checkbox2013 fl">
-                    <a href="javascript:;" class="upload2013_btn pa"></a>
-                    <div class="clear">
-                      <% ImageLibraryCategory.where(parent_id: 34).each do |img_lib_cat| %>
-                        <label>
-                          <% @design_tags.each do |design_tag| %>
-                            <% if design_tag == img_lib_cat.id %>
-                              <%= check_box_tag "style[]", img_lib_cat.id, true%><%=img_lib_cat.title%>
-                            <% end %>
-                          <% end %>
-                          <% unless @design_tags.include?(img_lib_cat.id) %>
-                            <%=check_box_tag "style[]",img_lib_cat.id%><%=img_lib_cat.title%>
-                          <% end %>
-                        </label>
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-            <div class="control2013">
-                <label class="label2013">
-                    用途<span class="cr">*</span>
-                </label>
-                <div class="upload2013_toggle fl">
-                    <a href="javascript:;" class="upload2013_btn upload2013_btn_down pa"></a>
-                    <div class="clear">
-                      <% ImageLibraryCategory.where(parent_id: 122).each do |img_lib_cat| %>
-                        <label>
-                          <% @design_tags.each do |design_tag| %>
-                            <% if design_tag == img_lib_cat.id %>
-                              <%=radio_button_tag "use",img_lib_cat.id, true%><%=img_lib_cat.title%>
-                            <% end %>
-                          <% end %>
-                          <% unless @design_tags.include?(img_lib_cat.id) %>
-                            <%=radio_button_tag "use",img_lib_cat.id%><%=img_lib_cat.title%>
-                          <% end %>
-                        </label>
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-            <div class="control2013 clear">
-                <label class="label2013">
-                    作品建筑所属城市<span class="cr">*</span>
-                </label>
-                <div class="fl">
-                  <select id="province" class="level_1 fl" ><option>省/直辖市</option></select>
-                  <select id="city" class="level_2 fl"><option>城市</option></select>
-                  <select id="zone" class="level_3 fl" name="design[area_id]"><option>区</option></select>
-                    <span class="help-text fl">请如实填写作品建筑所属城市，以便顺利参加iColor的相关活动</span>
-                </div>
-            </div>
-            <div class="control2013">
-                <%= label_tag :property_name, raw("楼盘名称<span class='cr'>*</span>"), class: "label2013" %>
-                <%= text_field_tag 'design[property_name]', @design.property_name, class: "width335 fl" -%>
-            </div>
-        </div>
-        <div class="upload2013 noborder">
-            <div class="control2013">
-              <%= label_tag :content, "设计理念", class: "label2013" %>
-                <div class="fl">
-                    <%= text_area_tag 'design[content]', @design.content, class: "inputs_count", "data-count"=>"2000" -%>
-                    <p class="help-text">还可以输入<b class="cr inputs_count_tip">2000</b> 字符/汉字</p>
-                </div>
-            </div>
-            <div class="control2013">
-                <label class="label2013">装修报价</label>
-                <div class="upload2013_toggle fl">
-                    <a href="javascript:;" class="upload2013_btn pa"></a>
-                    <div class="clear">
-                      <% ImageLibraryCategory.where(parent_id: 19).each do |img_lib_cat| %>
-                        <label>
-                          <% @design_tags.each do |design_tag| %>
-                            <% if design_tag == img_lib_cat.id %>
-                              <%=radio_button_tag "fee",img_lib_cat.id, true%><%=img_lib_cat.title%>
-                            <% end %>
-                          <% end %>
-                          <% unless @design_tags.include?(img_lib_cat.id) %>
-                            <%=radio_button_tag "fee",img_lib_cat.id%><%=img_lib_cat.title%>
-                          <% end %>
-                        </label>
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-            <div class="control2013">
-                <label class="label2013">面积</label>
-                <div class="upload2013_toggle fl">
-                    <a href="javascript:;" class="upload2013_btn pa"></a>
-                    <div class="clear">
-                      <% ImageLibraryCategory.where(parent_id: 28).each do |img_lib_cat| %>
-                        <label>
-                          <% @design_tags.each do |design_tag| %>
-                            <% if design_tag == img_lib_cat.id %>
-                              <%=radio_button_tag "acreage",img_lib_cat.id,true%><%=img_lib_cat.title%>
-                            <% end %>
-                          <% end %>
-                          <% unless @design_tags.include?(img_lib_cat.id) %>
-                            <%=radio_button_tag "acreage",img_lib_cat.id%><%=img_lib_cat.title%>
-                          <% end %>
-                        </label>
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-            <div class="control2013">
-                <label class="label2013">人群</label>
-                <div class="upload2013_toggle fl">
-                    <a href="javascript:;" class="upload2013_btn pa"></a>
-                    <div class="clear">
-                      <% ImageLibraryCategory.where(parent_id: 127).each do |img_lib_cat| %>
-                        <label>
-                          <% @design_tags.each do |design_tag| %>
-                            <% if design_tag == img_lib_cat.id %>
-                              <%=radio_button_tag "throng",img_lib_cat.id,true%><%=img_lib_cat.title%>
-                            <% end %>
-                          <% end %>
-                          <% unless @design_tags.include?(img_lib_cat.id) %>
-                            <%=radio_button_tag "throng",img_lib_cat.id%><%=img_lib_cat.title%>
-                          <% end %>
-                        </label>
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <input type="image" src="<%=asset_path 'upload2013_submit.jpg'%>" class="upload2013_submit">
-        <!-- <input type="button" class="upload2013_submit" /> -->
-        <p class="help-text tc cr">*红色标注为必填项</p>
-    <% end %>
-</div><!--main ends-->
+  </div>
+
+  <div class="clearfix">
+    <div class="footer_banner pull-left">
+      <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' if @banners[0] %>" target="_blank">
+        <%= image_tag @banners[0].try(:file).try(:url, :list_670x85) if @banners[0] %>
+      </a>
+    </div>
+    <div class="footer_banner pull-right">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' if @banners[1] %>" target="_blank">
+        <%= image_tag @banners[1].try(:file).try(:url, :list_310x85) if @banners[1] %>
+      </a>
+    </div>
+  </div>
+</div>

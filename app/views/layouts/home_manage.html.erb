@@ -67,7 +67,7 @@
           <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
           <script type="text/javascript" id="bdshell_js"></script>
           <!-- Baidu Button END -->
-          <a data-toggle="modal" class="btn btn-mini btn_gray login js-login nomargin" href="#login_modal">登录</a>
+          <a class="btn btn-mini login btn_gray nomargin" href="/users/sign_in">登录</a>
           <a href="/users/sign_up" target="_blank" class="btn btn-mini btn_red nomargin">免费注册</a>
           <a style="display:inline-block;"><%= image_tag "nippon.png" %></a>
         <% end %>
@@ -79,10 +79,10 @@
           <li class="<%='active noborder' if controller_name == 'home' %>">
             <a href="/">首页</a>
           </li>
-          <li class="<%='active noborder' if controller_name == 'refresh_record' || controller_name == 'art' %>">
+          <li class="<%='active noborder' if controller_name == 'refresh_record' || controller_name == 'art' || controller_name == 'refresh_show' %>">
             <a href="<%=refresh_record_index_path%>" target="_blank">刷新生活</a>
             <ul class="subnav">
-              <li><a href="<%=refresh_record_index_path%>">刷新实录</a></li>
+              <li><a href="<%=refresh_record_index_path%>">为爱刷新</a></li>
               <li><a href="/refresh_life/refresh_show">刷新效果</a></li>
               <li><a href="http://shuaxinfuwu.nipponpaint.com.cn/" target="_blank">刷新服务</a></li>
             </ul>
@@ -144,8 +144,7 @@
           <li class="<%= 'active noborder' if controller_name =~ /designer_events|other_events|gifts/ %>">
             <a href="/designer_events" target="_blank">精彩活动</a>
             <ul class="subnav">
-              <li><%= link_to "设计师活动", "/designer_events", :class => "#{'active noborder' if controller_name == 'designer_events'}" %></li>
-              <li><%= link_to "其他活动", "/other_events", :class => "#{'active noborder' if controller_name == 'other_events'}" %></li>
+              <li><%= link_to "活动集锦", "/designer_events", :class => "#{'active noborder' if controller_name == 'designer_events'}" %></li>
               <li><%= link_to "获奖名单", "/gift_list", :class => "#{'active noborder' if controller_name == 'gifts'}" %></li>
             </ul>
           </li>
@@ -160,7 +159,7 @@
         <li>
           <i class="icon-map icon-map9"></i>
           <a href="/refresh_record"><strong>刷新生活</strong></a>
-          <a href="/refresh_record">刷新实录</a>
+          <a href="/refresh_record">为爱刷新</a>
           <a href="/art">刷新效果</a>
           <a href="http://shuaxinfuwu.nipponpaint.com.cn/" target="_blank">刷新服务</a>
         </li>
@@ -207,8 +206,7 @@
         <li>
           <i class="icon-map icon-map8"></i>
           <a href="/designer_events"><strong>精彩活动</strong></a>
-          <a href="/designer_events">设计师活动</a>
-          <a href="/other_events">其他活动</a>
+          <a href="/designer_events">活动集锦</a>
           <a href="/gift_list">获奖名单</a>
         </li>
       </ul>
@@ -293,9 +291,16 @@
         });
 
         //share
-        $('.js-share_btn,.js-share_toggle').hover(function(){
-          $('.js-share_toggle').toggle()
+        $('.js-share_btn').hover(function(){
+          $(this).next('.js-share_toggle').toggle()
         });
+        $('.js-share_toggle').hover(function(){
+          $(this).toggle();
+        })
+        //work list share
+        $('.js-works_share').hover(function(){
+          $(this).parents('li').find('#bdshare').toggle();
+        })
       }($));
     });
   </script>

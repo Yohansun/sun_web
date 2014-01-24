@@ -1,0 +1,82 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                             "upload_image/jquery.iframe-transport",
+                             "upload_image/jquery.fileupload" %>
+  <script type="text/javascript">
+    $(function() {
+      $('#link2').click(function(){
+        window.open($('#form-field-3').val());
+      });
+      var klass_name = $('#klass_name').val(),
+          url = 'event_kvs/create_image?klass_name=' + klass_name;
+      $('#fileupload').fileupload({
+          url: url,
+          dataType: 'json',
+          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 5000000,
+          done: function (e, data) {
+            alert(data.result.notify);
+            window.location.reload();
+          },
+          error: function (e, data) {
+            alert(data.result);
+          }
+      })
+    });
+  </script>
+<% end %>
+<div class="container-fluid mt20">
+  <%= form_tag '/manage/event_kvs', class: 'form-inline mt30' , method: :get do %>
+    <%= select_tag "klass_name",options_for_select([["活动集锦","designer_events"],
+                                                   ["获奖名单","gifts"]],
+                                                   params[:klass_name]),
+                                                   class: "input-medium mr15" %>
+    <input type="submit" value="确定" class="btn btn-small btn-primary">
+   <% end %>
+</div>
+<% if @event_kv %>
+  <div class="main bs-docs-grid">
+    <div class="row show-grid">
+      <div class="span11">
+        <%= form_tag(event_kvs_path, :class => 'form-inline', remote: true) do %>
+          <%= hidden_field_tag :klass_name, params[:klass_name] %>
+          <label class="control-label">链接&nbsp;&nbsp;
+            <input type="text" name="url" class="input-xlarge" value="<%= @event_kv.url if @event_kv %>">
+          </label>
+          <input type="submit" value="保存" class="btn btn-small btn-primary">
+          <span class="btn btn-small btn-primary fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>上传图片</span>
+            <input id="fileupload" type="file" name="file" multiple>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <%= image_tag @event_kv.try(:file).try(:url, :big), id: 'event_kvs_img' %>
+    <div class="widget-box" style="width:700px;">
+      <h5 class="lighter">热区:</h5>
+      <div class="widget-main">
+        <%= form_for(KvMap.new, :html => {:class => "form-inline"}, remote: true ) do |f| %>
+          <%= f.hidden_field :event_kv_id, value: @event_kv.nil? ? nil : @event_kv.id, id: 'hidden_map_id' %>
+          <label>位置:</label>
+          X&nbsp;<%= f.text_field :x_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          Y&nbsp;<%= f.text_field :y_line, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          W&nbsp;<%= f.text_field :width, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          H&nbsp;<%= f.text_field :high, value: nil, class: 'input-small', style: 'width:50px;' %>&nbsp;
+          <div class="clear"></div><br />
+
+          <label class="control-label">url</label>
+          <%= f.text_field :url, value: nil, id: 'form-field-3' %>
+          <a href="javascript:;" class="help-line" id="link2">检测链接</a>
+          <div class="clear"></div>
+          <%= f.submit '添加', class: 'btn btn-info btn-small' %>
+        <%- end %>
+      </div>
+    </div>
+    <%= render :partial => 'maps', locals: { maps: @event_kv.nil? ? [] : @event_kv.kv_maps} %>
+  </div>
+<% end %>

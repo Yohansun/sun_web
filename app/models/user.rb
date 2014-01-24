@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class User < ActiveRecord::Base
-
+  apply_simple_captcha
   validates_presence_of :username, :email, :if => :email_required?, :on => :create
   validates_presence_of :email, :on => :update
   validates_presence_of :password, :if => :email_required?, :on => :create
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   #validates_uniqueness_of :email, :allow_blank => false, :if => :email_required?, :on => :create
   validates_uniqueness_of :username, :allow_blank => false, :if => :email_required?, :on => :create
   validates_length_of :password, :within => 6..128, :allow_blank => false, :if => :email_required?, :on => :create
-  #validates_uniqueness_of :phone, :allow_blank => true, :on => :create
+  validates_uniqueness_of :phone, :allow_blank => true, :on => :create
 
   #用户注册完成后complete更新数据页面验证
   #validates_presence_of :recommended_name, :if => :recommended_requird?, :on => :update

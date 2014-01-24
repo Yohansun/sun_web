@@ -1,0 +1,140 @@
+<% content_for :head do -%>
+    <%= stylesheet_link_tag 'reg' %>
+<% end -%>
+<%- content_for :tail do %>
+  <%= javascript_include_tag "/location.js", "LinkageSelect.js" %>
+  <script type="text/javascript">
+    function username_check() {
+        var username = $("#user_name").val()
+        $.post(" /users/username_check", {user:{username:username,flag:0}}, function(message) {
+            if (message != "") {
+                alert(message);
+            }
+        });
+    }
+  </script>
+  <script type="text/javascript" charset="utf-8">
+      $(function() {
+          var options = {
+              data  : data
+          }
+
+          var sel = new LinkageSelect(options);
+          sel.bind('.level_1');
+          sel.bind('.level_2');
+          sel.bind('.level_3');
+
+          $("#captcha input").focus(function() {
+              $('#captcha').removeClass('onerror');
+          });
+
+      });
+  </script>
+<%- end %>
+<div class="main">
+  <div class="reg_bg1 pr"></div>
+  <div class="wrapper">
+    <%= form_for(resource, :as => resource_name, :url => "/users", :remote => true ) do |f| %>
+      <%= hidden_field_tag :return_to, params[:return_to] %>
+      <div class="reg_content ft14">
+        <div class="reg_list fl">
+          <label for="uesername"><span>*</span>用户名：</label>
+          <input type="text" class="username fl" name="user[username]" id="user_name"/>
+          <a href="javascript:void(0)" class="reg_chk fl" onclick="username_check()"></a>
+          <!-- <img src="<%= asset_path "news/correct.jpg" %>" class="correct fl" /> -->
+        </div><!--reg_list ends-->
+        <div class="reg_list fl">
+          <label for="uesername"><span>*</span>密&nbsp;&nbsp;&nbsp;码：</label>
+          <input type="password" class="password pass_check fl" name="user[password]"/>
+          <div class="fl">
+            <span class="cr fl">密码强度：</span>
+            <div class="ps_check fl">
+              <div id="ps_status"></div>
+            </div><!--ps_check-->
+            <span class="cr fl" id="ps_tip">很弱</span>
+            <span class="none" id="short">很弱</span>
+            <span class="none" id="medium">中等</span>
+            <span class="none" id="strong">很强</span>
+            <span class="fl reg_tip1">注：密码不得少于6位数。</span>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list fl">
+          <label for="uesername"><span>*</span>确认密码：</label>
+          <input type="password" class="password fl" name="user[password_confirmation]"/>
+          <span class="reg_tip2 fl">请重新输入，确认密码</span>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="uesername"><span>*</span>我的身份：</label>
+          <div class="fl">
+            <select class="fl" name="user[user_role]" id="user_type">
+              <option value="">-请选择-</option>
+              <option value="designer_0">设计师（在职）</option>
+              <option value="designer_1">设计师（在读）</option>
+              <option value="company">家装公司</option>
+              <option value="user">普通用户</option>
+            </select>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="uesername"><span>*</span>所在地：</label>
+          <div class="fl">
+            <select id="province" class="level_1 fl" name="user[state]"></select>
+            <select id="city" class="level_2 fl" name = user[city]></select>
+            <select id="county" class="level_3 fl" name = user[area_id]></select>
+          </div>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="recommander"><span>*</span>Email：</label>
+          <input type="text" class="username fl" name="user[email]"/>
+          <span class="reg_tip3 fl">请填写真实邮箱，以便接收icolor电子期刊及获奖信息</span>
+        </div><!--reg_list ends-->
+        <div class="reg_list reg_width fl">
+          <label for="uesername"><span>*</span>联系电话：</label>
+          <input type="text" class="username fl" name="user[phone]"/>
+          <span class="reg_tip3 fl">请填写您常用电话以便通知获奖信息</span>
+        </div><!--reg_list ends-->
+        <div class="reg_list fl none" id="user_email">
+          <label></label>
+          <span class="reg_tip4 fl">是否公开我的Email:</span>
+          <input type="radio" name="user[is_show_email]" class="fl radio_btn" value="1"/>
+          <span class="recommand fl">是</span>
+          <input type="radio" name="user[is_show_email]" class="fl radio_btn" value="0"/>
+          <span class="recommand fl">否</span>
+        </div>
+        <!--reg_list ends-->
+
+        <br style="float:left;display:inline;clear:both;" />
+        <p class="reg_bot ft12 tc">注：您的注册信息仅用于icolor官网，我们不会对外公开您的信息，请放心</p>
+        <p class="reg_bot ft12 tc">
+        <input type="checkbox" name="user[is_read]"/>
+        接受会员注册协议（<a href="/users/policy">阅读</a>）
+        </p>
+        <p class="tc">
+        <input type="image" style="_margin-top:-20px;" src="<%= asset_path "news/reg_next.jpg" %>" />
+        </p>
+      </div><!--reg_content ends-->
+    <%- end %>
+    <div class="ads">
+      <a href="/gift"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>
+    </div>
+  </div><!--wrapper ends-->
+</div><!--main ends-->
+
+<div class="main">
+  <div class="wrapper">
+    <div class="reg_suc fb ft16">
+      <p>登录后进入<a href="<%= user_asks_path(current_user) %>" class="cr">个人主页</a>频道的<a href="<%= edit_user_path(current_user) %>" class="cr">修改账户信息</a>页面完善您的注册资料。</p>
+      <p>完善注册资料有助您更好的体验ICOLOR各项服务。</p>
+      <p class="mt10">
+        <%- if params[:return_to].present? %>
+          <a href="/<%= params[:return_to] %>">因爱之名，刷新生活</a>（<span class="cr ft18">5</span>秒之后自动跳转）
+        <%- else %>
+          <a href="/">进入iColor主页</a>（<span class="cr ft18">5</span>秒之后自动跳转）
+        <%- end %>
+      </p>
+    </div><!--reg_suc ends-->
+    <div class="ads">
+      <a href="/gift"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>
+    </div>
+  </div><!--wrapper ends-->
+</div><!--main ends-->、

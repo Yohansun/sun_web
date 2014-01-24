@@ -1,61 +1,39 @@
-<%- content_for :head do %>
-  <%= stylesheet_link_tag 'reg' %>
-<%- end %>
-<% content_for :tail do %>
-  <script type="text/javascript">
-    $(function() {
-      $('#email').blur(function() {
-        var email = $(this).val();
-        if (!isEmail(email)) {
-          $('.forget .pa').show();
-          $('#email').focus();
-        }
-        else {
-          $('.forget .pa').hide();
-        }
-      });
-      $('.reset_commit :input[type=image]').click(function() {
-        var pa = $('.forget .pa');
-        if (pa.is(':visible')) {
-          return false;
-        }
-      })
-      function isEmail(str) {
-        var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-        return reg.test(str);
-      }
-    })
-  </script>
-<% end %>
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li class="active">用户中心</li>
+  </ul>
+  <hr class="border2 border2_mt2">
 
-<div class="main syslist">
-  <div class="shadow">
-    <div class="section pr">
-      <div class="sys_bar clear ft12">
-        <h4 class="pull-left">找回密码</h4>
-        <div class="pull-right">
-          <a href="/">首页</a> > 找回密码
+  <ul class="nav nav-tabs upload_tab login_tab" id="login_tab">
+    <li><a href="/users/sign_in">登录</a></li>
+    <li><a href="/users/sign_up">注册</a></li>
+    <li class="active"><a href="#login_tab3">找回密码</a></li>
+  </ul>
+
+  <div class="tab-pane" id="login_tab3">
+    <div class="index_main noborder">
+      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:class => "form-horizontal pt30 mt20", :method => :post } ) do |f| %>
+
+        <div class="control-group">
+          <!-- <label class="control-label" for="">注册邮箱</label> -->
+          <div class="controls">
+            <!-- <input type="text" class="input-xlarge" name="user[email]" id="email"/> -->
+             <span>
+              <% #if f.error_notification %>
+                <p class="mt10 text-important">几分钟后，您将收到重置密码的电子邮件.</p><br>
+              <%# end %>
+             </span>
+          </div>
+          <!-- <div class="text-center pt30 mt20"><button type="submit" class="upload_img_btn">重设密码</button></div> -->
         </div>
-      </div>
-      <!--sys_bar ends-->
-      <div class="sys_bar ft14">
-        <div class="reg_list fb">使用电子邮箱找回</div>
-        <div class="forget">
-          <label>几分钟后，您将收到重置密码的电子邮件.</label>
-        </div>
-        <!--forget ends-->
-        <div class="forget pr">
-          <!--<label class="fl fb tr" for="code">图形验证码：</label>-->
-          <!--<input type="text" class="code fl fb" name="code" id="code"/>-->
-          <!--<img src="<%= asset_path "codes.jpg" %>" class="codes fl"/>-->
-          <!--<a href="javascript:void(0)" class="fl ft12">换一换</a>-->
-          <p class="pa cr none ft14">*您输入的电子邮箱不正确！*</p>
-        </div>
-        <!--forget ends-->
-      </div>
-      <!--sys_bar ends-->
+
+      <% end %>
     </div>
-    <!--section ends-->
   </div>
-  <!--shadow ends-->
-</div><!--main ends-->
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+    <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+  </div>
+</div>

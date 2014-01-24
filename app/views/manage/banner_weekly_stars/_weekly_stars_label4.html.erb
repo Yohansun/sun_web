@@ -1,0 +1,17 @@
+<div class="span3 well well-small nom">
+  <p>
+    <a href="/manage/banner_weekly_stars?page_name=<%=params[:page_name] if params[:page_name].present? %>&position=1" class="btn btn-small btn-block <%= i_banner.position == 1 ? 'btn-primary' : 'btn-light' %>">1000x85</a>
+  </p>
+  <p class="text-right" style="margin-top:150px;margin-right:10px;">
+    <a href="/manage/banner_weekly_stars?page_name=<%=params[:page_name] if params[:page_name].present? %>&position=2" class="btn btn-medium <%= i_banner.position == 2 ? 'btn-primary' : 'btn-light' %>">230x170</a>
+  </p>
+  <p class="text-right" style="margin-right:10px;">
+    <a href="/manage/banner_weekly_stars?page_name=<%=params[:page_name] if params[:page_name].present? %>&position=3" class="btn btn-medium <%= i_banner.position == 3 ? 'btn-primary' : 'btn-light' %>">230x230</a>
+  </p>
+  <div class="clearfix" style="margin-bottom:20px;">
+    <p class="text-left">
+      <a href="/manage/banner_weekly_stars?page_name=<%=params[:page_name] if params[:page_name].present? %>&position=4" class="btn btn-small span7 <%= i_banner.position == 4 ? 'btn-primary' : 'btn-light' %>">670x85</a>
+      <a href="/manage/banner_weekly_stars?page_name=<%=params[:page_name] if params[:page_name].present? %>&position=5" class="btn btn-small span5 <%= i_banner.position == 5 ? 'btn-primary' : 'btn-light' %>">310x85</a>
+    </p>
+  </div>
+</div>

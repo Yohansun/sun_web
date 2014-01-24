@@ -55,4 +55,21 @@ module DesignImagesHelper
 		"#{links.join('-')}-#{area}_#{pinyin}_#{color}_#{subject}_#{user_word}_#{rank}"
 	end
 
+	def image_tag_select id
+		ImageLibraryCategory.where(parent_id: id).order('created_at desc')
+	end
+
+	def image_tag_selected id, img_lib_tag
+		seelct_id = nil
+		image_tags = img_lib_tag.tags.map &:image_library_category_id
+		img_lib_cats = ImageLibraryCategory.where(parent_id: id).order('created_at desc')
+		img_lib_cats.each do |img_lib_cat|
+			image_tags.each do |image_tag|
+				if image_tag.to_i == img_lib_cat.id
+					seelct_id = img_lib_cat.id
+				end
+			end
+		end
+		return seelct_id
+	end
 end

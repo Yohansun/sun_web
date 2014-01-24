@@ -1,52 +1,77 @@
-<% content_for :head do -%>
-  <%= stylesheet_link_tag 'reg' %>
-<% end -%>
-<%- content_for :tail do %>
-<script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
-  <script type='text/javascript'>
-    (function() {
-      var c = document.createElement('script');
-      c.type = 'text/javascript';
-      c.async = true;
-      c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'pro.clicki.cn/boot/10008';
-      var h = document.getElementsByTagName('script')[0];
-      h.parentNode.insertBefore(c, h);
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li class="active">用户中心</li>
+  </ul>
+  <hr class="border2 border2_mt2">
 
-      mmConversionTag(326804, this);
-    })();
-  </script>
-<script>
-  var _CiQ10008 = _CiQ10008 || [];
-  _CiQ10008.push(['_trackEvent', {
-      type: 1,
-      labels: [
-        {"按钮名称": "注册成功提示页"}
-      ],
-      values: [
-        {"数量": 1}
-      ]
-    }]);
-</script>
-<% end %>
-<noscript>
-<img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=326804&amp;ns=1"/>
-</noscript>
-<div class="main">
-  <div class="reg_bg3 pr"></div>
-  <div class="wrapper">
-    <div class="reg_suc fb ft16">
-      <p>登录后进入<a href="<%= user_asks_path(current_user) %>" class="cr">个人主页</a>频道的<a href="<%= edit_user_path(current_user) %>" class="cr">修改账户信息</a>页面完善您的注册资料。</p>
-      <p>完善注册资料有助您更好的体验ICOLOR各项服务。</p>
-      <p class="mt10">
-        <%- if params[:return_to].present? %>
-          <a href="/<%= params[:return_to] %>">因爱之名，刷新生活</a>（<span class="cr ft18">5</span>秒之后自动跳转）
-        <%- else %>
-          <a href="/">进入iColor主页</a>（<span class="cr ft18">5</span>秒之后自动跳转）
-        <%- end %>
-      </p>
-    </div><!--reg_suc ends-->
-    <div class="ads">
-      <a href="/gift"><img src="<%= asset_path "news/reg_ad.jpg" %>" /></a>
+  <ul class="nav nav-tabs upload_tab login_tab" id="login_tab">
+    <li><a href="/users/sign_in">登录</a></li>
+    <li class="active"><a href="/users/sign_up">注册</a></li>
+    <li><a href="/users/password/new">找回密码</a></li>
+  </ul>
+
+  <div class="tab-content login_content">
+    <div class="tab-pane active" id="login_tab2">
+      <div class="index_main noborder">
+        <form action="" class="reg_form">
+          <ul class="unstyled clearfix steps step2">
+            <li class="muted" style="width:163px;"><small>Step 1 基本资料</small></li>
+            <li class="muted" style="width:559px;"><small>Step 2 注册成功</small></li>
+            <li class="muted" style="width:163px;"><small>Step 3 完善信息</small></li>
+          </ul>
+          <div class="text-center tips pb25">
+            <p class="reg_success"><i class="icon-i48 icon-right mr10"></i>恭喜您!  注册成功！</p>
+            <p class="">
+              登陆您的<a href="<%= user_asks_path(current_user) %>">个人主页</a>，进入<a href="<%= edit_user_path(current_user) %>" class="js-go_next">修改账户信息页面</a>，<br />
+              完善您的注册资料，以便更好体验iColor的各项服务。
+            </p>
+          </div>
+          <div class="linet1 clearfix links">
+            <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' if @banners[0] %>" target="_blank" class="pull-left">
+              <%= image_tag @banners[0].try(:file).try(:url, :list_230x170) if @banners[0] %>
+            </a>
+            <ul class="pull-left unstyled">
+              <li>
+                <a href="/">
+                <span class="pull-right">></span>
+                进入iColor首页，看看偶像们的最新力作。</a>
+              </li>
+              <li>
+                <a <% unless current_user.common_user? %> href="<%=new_user_design_path(current_user)%>" <% end -%>>
+                <span class="pull-right">></span>
+                上传我的原创作品， 用作品说话。</a>
+              </li>
+              <li>
+                <a href="<%= edit_user_path(current_user) %>">
+                <span class="pull-right">></span>
+                修改个人资料，让大家了解更多的我。</a>
+              </li>
+              <li class="noborder">
+                <span data-id="<%=current_user.id%>" data-title="我刚注册了iColor网站，这有大量家装设计图供参考下载、免费装修咨询、超多业界领袖视频欣赏，赶快和我一起感受家的设计灵感吧http://www.icolor.com.cn" data-url="http://www.icolor.com.cn/users/<%=current_user.id%>/asks" data-pic="" class="popup_zf group " style="background-color: white;  background-position: initial initial; background-repeat: initial initial;">
+                  <a data-webid="tsina" class="popup_zf_sina" href="javascript:void();">
+                    <span class="pull-right">></span>
+                    告诉我的微博小伙伴们。
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
     </div>
-  </div><!--wrapper ends-->
-</div><!--main ends-->
+  </div>
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' if @banners[1] %>" target="_blank">
+        <%= image_tag @banners[1].try(:file).try(:url, :list_670x85) if @banners[1] %>
+      </a>
+    </div>
+    <div class="footer_banner mt10 pull-right">
+      <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' if @banners[2] %>" target="_blank">
+        <%= image_tag @banners[2].try(:file).try(:url, :list_310x85) if @banners[2] %>
+      </a>
+    </div>
+  </div>
+</div>

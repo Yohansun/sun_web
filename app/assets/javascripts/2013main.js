@@ -74,12 +74,12 @@
 
 	//upload2013 toggle
 	(function($){
-		var $btn = $('.upload2013_btn');
-		if($btn.length == 0) return;
-		$btn.click(function(){
-			$(this).toggleClass('upload2013_btn_down').next().toggle();
-		});
-
+		var $btn = $('.reco_toggle_btn');
+		if($btn.length !== 0) {
+  		$btn.click(function(){
+  			$(this).toggleClass('show').siblings('div').toggle();
+  		});
+    }
 		//inputs_count
 		var $input = $('.inputs_count');
 		if($input.length == 0) return;
@@ -138,15 +138,15 @@
           $(this).parents('form').find('textarea').css('color', color_value);
       });
   })($);
-  // lazyload 
-  (function($){ 
+  // lazyload
+  (function($){
   	if($.fn.lazyload){
-  		$(".kv2013_slider img").lazyload({ 
+  		$(".kv2013_slider img").lazyload({
   			event : "slide"
-  			}).eq(0).trigger('slide').end().eq(1).trigger('slide'); 
+  			}).eq(0).trigger('slide').end().eq(1).trigger('slide');
   		$('.wrapper img').add('.imap img').add('.footer img').lazyload({
-  			effect : 'fadeIn' 
-  			}); 
+  			effect : 'fadeIn'
+  			});
   	}
-  })($); 
+  })($);
 });/*$*/

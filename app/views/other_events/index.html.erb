@@ -1,175 +1,167 @@
 <%- content_for :head do %>
-    <%= stylesheet_link_tag "exciting_activities", "style" %>
+  <%= stylesheet_link_tag "style" %>
 <%- end %>
-<% content_for :tail do %>
-  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-<% end %>
+<div class="container">
+    <h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
+    <ul class="breadcrumb">
+      <li><a href="/">首页</a> &gt; </li>
+      <li><a href="/designer_events">精彩活动</a> &gt; </li>
+      <li class="active">大众活动</li>
+    </ul>
+    <hr class="border2 border2_mt2">
 
-<div class="main">
-  <div class='sub_title text-right'>
-    <img src="<%= asset_path "design/title_event.png"%>"/>
-  </div>
-  <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "其他活动", "/other_events", :class => 'fb' %></em>
-    <em><%= link_to "精彩活动", "/events" %><span></span></em>
-    <em><%= link_to "首页", "/" %><span></span></em>
-    <style type="text/css">
-        .properties .intro{ width:630px;}
-    </style>
-  </div><!--sub_nav ends-->
-  <div class="wrapper group color-trend">
-        <div class="shadow">
-          <div class="section">
-            <%= image_tag 'design/trend/trend_head2.jpg'%>
-            <!--<a href="#" class="report">活动报道</a>- ->
-            <!--<a href="#" class="play">&nbsp;</a>-->
-            <div class="trend group">
-              <p class="tc"><%= image_tag 'design/trend/trend_title2.png'%>
-              </p>
-              <div class="group">
-                <div class="fl">
-                  <%= image_tag 'design/trend/trend_left2.png'%>
-                  <p>
-                    想知道立邦在此次史上最长地铁墙画做了多少努力？快来探探《刷新地铁》背后的“绝对机密”。墙画从无到有，无不凝聚所有工作人员的努力。现在立邦仍在持续刷新地铁中，快去北京国贸站亲眼见证！
-                  </p>
-                </div>
-                <div class="fr" style="margin-bottom:30px;">
-                  <!-- <img src="/assets/design/trend/trend_video2.jpg" /> -->
-                  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="604" height="334" id="FLVPlayer">
-                    <param name="movie" value="/flash/FLVPlayer_Progressive.swf" />
-                    <param name="quality" value="high" />
-                    <param name="wmode" value="opaque" />
-                    <param name="scale" value="noscale" />
-                    <param name="salign" value="lt" />
-                    <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/movie_60s&amp;autoPlay=false&amp;autoRewind=false" />
-                    <param name="swfversion" value="8,0,0,0" />
-                    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-                    <param name="expressinstall" value="/Scripts/expressInstall.swf" />
-                    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-                    <!--[if !IE]>-->
-                    <object type="application/x-shockwave-flash" data="/flash/FLVPlayer_Progressive.swf" width="604" height="334">
-                      <!--<![endif]-->
-                      <param name="quality" value="high" />
-                      <param name="wmode" value="opaque" />
-                      <param name="scale" value="noscale" />
-                      <param name="salign" value="lt" />
-                      <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;skinName=/flash/Clear_Skin_1&amp;streamName=/system/videos/movie_60s&amp;autoPlay=false&amp;autoRewind=false" />
-                      <param name="swfversion" value="8,0,0,0" />
-                      <param name="expressinstall" value="/Scripts/expressInstall.swf" />
-                      <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-                      <div>
-                        <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-                        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com//assets/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" /></a></p>
-                      </div>
-                      <!--[if !IE]>-->
-                    </object>
-                    <!--<![endif]-->
-                  </object>
+    <div class="clearfix refresh_lists designer_events">
+      <div class="map-left index_main pull-left">
+        <% if @event_kv %>
+          <div class="designer_event_kv">
+            <a href="<%= @event_kv.url %>" target="_blank">
+              <%= image_tag(@event_kv.file.url(:big), usemap: "#event_kv_map") %>
+            </a>
+            <%- if @event_kv.kv_maps.any? %>
+              <map id="event_kv_map" name="event_kv_map">
+                <%- @event_kv.kv_maps.each do |map| %>
+                  <area shape="rect" coords="<%= map.x_line %>,<%= map.y_line %>,<%= map.x_line + map.width %>,<%= map.y_line + map.high %>" href="<%= map.url %>" target="_blank" />
+                <%- end %>
+              </map>
+            <%- end %>
+          </div>
+        <% end %>
+        <% if @recent_events.present? %>
+          <h5 class="sub_title">近期活动</h5>
+          <%- @recent_events.each do |recent_event| %>
+            <div class="media tit_con">
+              <a class="pull-left media_a" target="_blank">
+                <%= image_tag recent_event.file.url(:list), class: 'media-object' %>
+              </a>
+              <div class="media-body refresh_list">
+                <ul class="clearfix nomargin">
+                  <li>
+                    <h5 class="nomargin">
+                      <a target="_blank"><%= recent_event.title %></a>
+                    </h5>
+                    <p class="nomargin">
+                      <a><%= recent_event.intro %></a>
+                    </p>
+                  </li>
+                </ul>
+                <div class="nomargin clearfix"><a class="btn_detail pull-left" href="<%= other_event_show_path(recent_event)%>">查看详情</a></div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @finished_events.present? %>
+          <h5 class="sub_title mt10">往期活动</h5>
+          <% @finished_events.each do |finished_event| %>
+            <div class="media tit_con">
+              <a class="pull-left media_a" target="_blank">
+                <%= image_tag finished_event.file.url(:list), class: 'media-object' %>
+              </a>
+              <div class="media-body refresh_list">
+                <ul class="clearfix nomargin">
+                  <li>
+                    <h5 class="nomargin">
+                      <a target="_blank"><%= finished_event.title %></a>
+                    </h5>
+                    <p class="nomargin">
+                      <a><%= finished_event.intro %></a>
+                    </p>
+                  </li>
+                </ul>
+                <div class="nomargin clearfix">
+                  <a class="btn_detail btn_detail_gray pull-left" href="<%= other_event_show_path(finished_event)%>">查看详情</a>
                 </div>
               </div>
-              <div class="share" style="float:right;">
-                <!-- JiaThis Button BEGIN -->
-                <div id="jiathis_style_32x32">
-                  <span class="fl" style="margin:5px 10px 0 0;">分享视频</span>
-                  <a class="jiathis_button_qzone"></a>
-                  <a class="jiathis_button_tsina"></a>
-                  <a class="jiathis_button_tqq"></a>
-                  <a class="jiathis_button_renren"></a>
-                  <a class="jiathis_button_kaixin001"></a>
-                  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-                  <a class="jiathis_counter_style"></a>
-                </div>
-                <!-- JiaThis Button END -->
-              </div>
-            </div><!--trend ends-->
-
-          </div>
-        </div>
-
-        <div class="shadow mb25">
-          <div class="section">
-            <div class="tit_bg">
-              <h2>近期活动</h2>
             </div>
-            <div class="interview_box dec_list">
-              <ul>
-                <li>
-                  <div class="img"><%= link_to image_tag('design/trend/act1205.jpg'),"http://www.icolor.com.cn/21days" %></div>
-                  <div class="properties">
-                    <div class="title">
-                      <strong>活动名称：</strong><%= link_to "刷新生活21天", "http://www.icolor.com.cn/21days" %><!--<span class="status">正在进行中</span>-->
-                    </div>
-                    <div class="time">
-                      <strong>活动时间：</strong>2012年11月26日-2013年2月7日
-                    </div>
-                    <div class="intro">
-                      心理学家说，一个人要养成新习惯或形成新的理念，需要21天——21天效应。与范晓萱一起刷新生活21天，赢死飞单车、拍立得，更有机会与范晓萱、胡歌零距离接触！
-                    </div>
-                  </div>
-                </li>
-              </ul>
+          <% end %>
+        <% end %>
+        <form class="pager pager-form noborder">
+          <%= paginate @finished_events %>
+          &nbsp;&nbsp;
+          <% if @finished_events.total_pages > 1 %>
+            共<%=@finished_events.total_pages %>页
+            跳到第<input type="text" name="page" value="<%= params[:page] if params[:page]%>" />页
+            <input type="submit" value="GO" class="pager-submit">
+          <% end %>
+        </form>
+      </div>
+
+      <div class="pull-right smaller">
+        <div class="chann_warp chann1_right map-right index_main">
+          <div class="media media_chann">
+            <a class="pull-left" href="/images" target="_blank">
+              <i class="icon-chann icon-chann_imgbase"></i>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+              <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
             </div>
           </div>
+          <div class="media media_chann">
+            <a class="pull-left" href="/color_designs" target="_blank">
+              <i class="icon-chann icon-chann_match"></i>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a class="media-heading_link_a" href="/color_designs" target="_blank">色彩配搭</a></h4>
+              <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+            </div>
+          </div>
+          <div class="media media_chann">
+            <a class="pull-left" href="/channel/access" target="_blank">
+              <i class="icon-chann icon-chann_qbt"></i>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a class="media-heading_link_a" href="/channel/access" target="_blank">装修丘比特</a></h4>
+              <p class="media_con nomargin">仅需三步，让您轻松找到心仪的家装设计公司！</p>
+            </div>
+          </div>
         </div>
-
-    <div class="shadow mb25">
-      <div class="section">
-        <div class="tit_bg"><h2>往期回顾</h2></div>
-        <div class="interview_box dec_list">
-          <ul>
-			  <li>
-				  <div class="img"><%= link_to image_tag('design/trend/act1205.jpg'),"http://www.icolor.com.cn/21days" %></div>
-				  <div class="properties">
-					  <div class="title">
-						  <strong>活动名称：</strong><a href="http://www.icolor.com.cn/21days">刷新生活21天</a><!--<span class="status">正在进行中</span>-->
-					  </div>
-					  <div class="time">
-						  <strong>活动时间：</strong>2012年11月26日-2013年2月7日
-					  </div>
-					  <div class="intro">
-						  心理学家说，一个人要养成新习惯或形成新的理念，需要21天——21天效应。与范晓萱一起刷新生活21天，赢死飞单车、拍立得，更有机会与范晓萱、胡歌零距离接触！
-					  </div>
-				  </div>
-			  </li>
-            <li>
-                <div class="img"><%= link_to image_tag('design/trend/act0101.jpg'),"/other_events/new_year_over" %></div>
-                <div class="properties">
-                  <div class="title">
-                    <strong>活动名称：</strong><%= link_to "iColor新年送“金”喜", "/other_events/new_year_over" %> <!--<span class="status">正在进行中</span>-->
-                  </div>
-                  <div class="time">
-                    <strong>活动时间：</strong>2013年1月1日-2013年1月3日
-                  </div>
-                  <div class="intro">
-                    新年钟声即将敲响，在这辞旧迎新的时刻，iColor为您送上最真诚的新年祝福。
-                  </div>
-                </div>
-            </li>
-            <li>
-                <div class="img"><%= link_to image_tag('design/trend/act1225.jpg'),"/other_events/christmas_over" %></div>
-                <div class="properties">
-                  <div class="title">
-                    <strong>活动名称：</strong><%= link_to "温馨圣诞，iColor为您添暖意", "/other_events/christmas_over" %><!--<span class="status">正在进行中</span>-->
-                  </div>
-                  <div class="time">
-                    <strong>活动时间：</strong>2012年12月20日-2012年12月25日
-                  </div>
-                  <div class="intro">
-                    温馨圣诞，iColor为您添暖意啦。活动期间，凡iColor用户，只要传美图，送祝福，就能赢得iColor为您准备的丰厚好礼。
-                  </div>
-                </div>
-            </li>
-          </ul>
+        <%= render partial: 'design_images/image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
+        <%= render partial: 'design_images/image_list', locals: { i_column_type_id: 5, name: '本周最热装修设计' } %>
+        <div>
+          <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x170) %></a>
+        </div>
+        <div class="mt10">
+          <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+        </div>
+        <div class="mt10">
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
         </div>
       </div>
     </div>
+
+    <div class="index_main refresh_news mt10 clearfix">
+      <div class="refresh_new pull-left">
+        <h5><a href="<%= @master_more.url if @master_more%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>大师访谈</h5>
+        <ul class="ul_dot">
+          <%- @master_interviews.each_with_index do |m,i| %>
+            <li class="<%= 'noborder' if i == @master_interviews.size - 1 %>">
+              <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+            </li>
+          <%- end %>
+        </ul>
+      </div>
+      <div class="refresh_new pull-left">
+        <h5><a href="<%= @more_info.url if @more_info%>" target="_blank" class="pull-right"><small class="muted">更多></small></a>相关资讯</h5>
+        <ul class="ul_dot">
+          <%- @about_info.each_with_index do |m,i| %>
+            <li class="<%= 'noborder' if i == @about_info.size - 1 %>">
+              <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
+            </li>
+          <%- end %>
+        </ul>
+      </div>
+      <div class="pull-right">
+        <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_230x230) %></a>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <div class="footer_banner mt10 pull-left">
+        <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_670x85) %></a>
+      </div>
+      <div class="footer_banner mt10 pull-right">
+        <a href="<%= @banners[5].url? ? @banners[5].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[5].try(:file).try(:url, :list_310x85) %></a>
+      </div>
+    </div>
+
   </div>
-  <div class='sub_bot pr'>
-    <div class="pager ft12">
-      <a href="javascript:void(0);" class="current">1</a>
-      <a href="/other_events/page_2">2</a>
-      <a href="/other_events/page_2" class="next">下一页<span></span></a>
-    </div><!--pager ends-->
-  </div>
-  <!--sub_bot ends-->
-</div>

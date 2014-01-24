@@ -1,267 +1,192 @@
 <div class="remote_image_tag">
   <a name="<%=img_lib_tag.id%>"></a>
-  <fieldset class="upload2013_2 upload_edit2013" id="img_lib_tag_<%= img_lib_tag.id %>">
-      <img class="fl" src="<%=img_lib_tag.file.url(:img_lib_tag)%>">
-      <div class="work_info2013">
-          <div class="control2013 clear">
-              <label class="label2013">
-                  图片名称<!-- <span class="cr">*</span> -->
-              </label>
-              <input type="text" name="title[<%=img_lib_tag.id%>]" class="fl inputs_count design_image_title" value="<%= img_lib_tag.title ? img_lib_tag.title : img_lib_tag.design.title%>" />
-          </div>
-          <% image_tags = img_lib_tag.tags.map &:image_library_category_id%>
-          <div class="control2013 clear">
-              <label class="label2013">
-                  图片<!-- <span class="cr">*</span> -->
-              </label>
-              <% ImageLibraryCategory.where(parent_id: 132).each do |img_lib_cat| %>
-                <label>
-                  <% image_tags.each do |image_tag| %>
-                    <% if image_tag.to_i == img_lib_cat.id %>
-                      <%=radio_button_tag "effect[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
-                    <% end %>
-                  <% end %>
-                  <% unless image_tags.include?(img_lib_cat.id) %>
-                    <%=radio_button_tag "effect[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
-                  <% end %>
-                </label>
-              <% end %>
-          </div>
-          <div class="control2013 clear">
-              <label class="label2013">
-                  空间
-              </label>
-              <div class="upload2013_toggle checkbox2013 fl">
-                  <a href="javascript:;" class="upload2013_btn pa"></a>
-                  <div class="clear">
-                    <% ImageLibraryCategory.where(parent_id: 82).each do |img_lib_cat| %>
-                      <label>
-                        <% image_tags.each do |image_tag| %>
-                          <% if image_tag.to_i == img_lib_cat.id %>
-                            <%=radio_button_tag "room[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
-                          <% end %>
-                        <% end %>
-                        <% unless image_tags.include?(img_lib_cat.id) %>
-                          <%=radio_button_tag "room[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
-                        <% end %>
-                      </label>
-                    <% end %>
-                  </div>
-              </div>
-          </div>
-          <div class="control2013 clear">
-              <label class="label2013">
-                  色彩
-              </label>
-              <div class="upload2013_toggle checkbox2013 fl">
-                  <a href="javascript:;" class="upload2013_btn pa"></a>
-                  <div class="clear">
-                    <% ImageLibraryCategory.where(parent_id: 107).each do |img_lib_cat| %>
-                      <label>
-                        <% image_tags.each do |image_tag| %>
-                          <% if image_tag.to_i == img_lib_cat.id %>
-                            <%=radio_button_tag "color[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
-                          <% end %>
-                        <% end %>
-                        <% unless image_tags.include?(img_lib_cat.id) %>
-                          <%=radio_button_tag "color[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
-                        <% end %>
-                      </label>
-                    <% end %>
-                  </div>
-              </div>
-          </div>
-          
-          <div class="control2013 clear">
-              <label class="label2013">
-                  调性
-              </label>
-              <div class="upload2013_toggle checkbox2013 fl">
-                  <a href="javascript:;" class="upload2013_btn pa"></a>
-                  <div class="clear">
-                    <% ImageLibraryCategory.where(parent_id: 62).each do |img_lib_cat| %>
-                      <label>
-                        <% image_tags.each do |image_tag| %>
-                          <% if image_tag.to_i == img_lib_cat.id %>
-                            <%=radio_button_tag "tonality[#{img_lib_tag.id}]",img_lib_cat.id,true%><%=img_lib_cat.title%>
-                          <% end %>
-                        <% end %>
-                        <% unless image_tags.include?(img_lib_cat.id) %>
-                          <%=radio_button_tag "tonality[#{img_lib_tag.id}]",img_lib_cat.id%><%=img_lib_cat.title%>
-                        <% end %>
-                      </label>
-                    <% end %>
-                  </div>
-              </div>
-          </div>
-          <div class="control2013 clear control2013-tips">
-            <p>选择符合此套作品的推荐色号或艺术漆效果，更可获得iColor提供的小礼物</p>
-          </div>
-          <div class="control2013 clear">
-              <label class="label2013">
-                  推荐色号
-              </label>
-              <div class="upload2013_toggle fl">
-                  <a href="javascript:;" class="upload2013_btn pa"></a>
-                  <div class="none upload2013-overflow clear">
-                      <div class="reco2013-bin clear pr">
-                          <div class="reco2013-title" title="沉稳中性 Sophisticated Neutrals">
-                              沉稳中性 Sophisticated Neutrals
-                          </div>
-                          <div class="reco2013-divider"></div>
-                          <ul class="reco2013-list">
-                            <% ColorCode::SNCOLOR.each do |sn|%>
-                              <li>
-                                  <label style="background:<%=sn[0]%>">
-                                    <% if sn[2] == img_lib_tag.color1 || sn[2] == img_lib_tag.color2 || sn[2] == img_lib_tag.color3 %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", sn[2],true %>
-                                    <% else %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", sn[2] %>
-                                    <% end %>
-                                      <p><span class="fr"><%=sn[1]%></span><%=sn[2]%></p>
-                                  </label>
-                              </li>
-                            <%  end %>
-                          </ul>
-                      </div>
-                      <div class="reco2013-bin clear pr">
-                          <div class="reco2013-title" style="background-position:0 -33px;" title="摩登单色 Modern Monochrome">
-                              摩登单色 Modern Monochrome
-                          </div>
-                          <div class="reco2013-divider"></div>
-                          <ul class="reco2013-list">
-                            <% ColorCode::MMCOLOR.each do |mm| %>
-                              <li>
-                                  <label style="background:<%=mm[0]%>">
-                                    <% if mm[2] == img_lib_tag.color1 || mm[2] == img_lib_tag.color2 || mm[2] == img_lib_tag.color3 %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", mm[2],true %>
-                                    <% else %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", mm[2] %>
-                                    <% end %>
-                                      <p><span class="fr"><%=mm[1]%></span><%=mm[2]%></p>
-                                  </label>
-                              </li>
-                            <% end %>
-                          </ul>
-                      </div>
-                      <div class="reco2013-bin clear pr">
-                          <div class="reco2013-title" style="background-position:0 -66px;" title="清新感觉 Soft Sensation">
-                              清新感觉 Soft Sensation
-                          </div>
-                          <div class="reco2013-divider"></div>
-                          <ul class="reco2013-list">
-                            <% ColorCode::SSCOLOR.each do |ss| %>
-                              <li>
-                                  <label style="background:<%=ss[0]%>">
-                                    <% if ss[2] == img_lib_tag.color1 || ss[2] == img_lib_tag.color2 || ss[2] == img_lib_tag.color3 %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ss[2],true %>
-                                    <% else %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ss[2] %>
-                                    <% end %> 
-                                      <p><span class="fr"><%=ss[1]%></span><%=ss[2]%></p>
-                                  </label>
-                              </li>
-                            <% end %>
-                          </ul>
-                      </div>
-                      <div class="reco2013-bin clear pr">
-                          <div class="reco2013-title" style="background-position:0 -99px;" title="轻柔质感 Crisp Blues">
-                              轻柔质感 Crisp Blues
-                          </div>
-                          <div class="reco2013-divider"></div>
-                          <ul class="reco2013-list">
-                            <% ColorCode::CBCOLOR.each do |cb| %>
-                              <li>
-                                  <label style="background:<%=cb[0]%>">
-                                    <% if cb[2] == img_lib_tag.color1 || cb[2] == img_lib_tag.color2 || cb[2] == img_lib_tag.color3 %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cb[2],true %>
-                                    <% else %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cb[2] %>
-                                    <% end %>
-                                      <p><span class="fr"><%=cb[1]%></span><%=cb[2]%></p>
-                                  </label>
-                              </li>
-                            <% end %>
-                          </ul>
-                      </div>
-                      <div class="reco2013-bin clear pr">
-                          <div class="reco2013-title" style="background-position:0 -132px;" title="可爱蜡笔 Pretty Pastels">
-                              可爱蜡笔 Pretty Pastels
-                          </div>
-                          <div class="reco2013-divider"></div>
-                          <ul class="reco2013-list">
-                            <% ColorCode::PPCOLOR.each do |pp| %>
-                              <li>
-                                  <label style="background:<%=pp[0]%>">
-                                    <% if pp[2] == img_lib_tag.color1 || pp[2] == img_lib_tag.color2 || pp[2] == img_lib_tag.color3 %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", pp[2],true %>
-                                    <% else %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", pp[2] %>
-                                    <% end %>
-                                      <% if pp[2] == 'GC4060-3' %>
-                                        <p style="bottom:-25px;"><%=pp[2]%> <br /><%=pp[1]%></p>
-                                      <% else %>
-                                        <p><span class="fr"><%=pp[1]%></span><%=pp[2]%></p>
-                                      <% end %>
-                                  </label>
-                              </li>
-                            <% end %>
-                          </ul>
-                      </div>
-                      <div class="reco2013-bin clear pr">
-                          <div class="reco2013-title" style="background-position:0 -165px;" title="环球风情 Global Accent">
-                              环球风情 Global Accent
-                          </div>
-                          <div class="reco2013-divider"></div>
-                          <ul class="reco2013-list">
-                            <% ColorCode::GACOLOR.each do |ag| %>
-                              <li>
-                                  <label style="background:<%=ag[0]%>">
-                                    <% if ag[2] == img_lib_tag.color1 || ag[2] == img_lib_tag.color2 || ag[2] == img_lib_tag.color3 %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ag[2],true %>
-                                    <% else %>
-                                      <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ag[2] %>
-                                    <% end %>
-                                      <% if ag[2] == 'NN4851-4' || ag[2] == 'OC1540-2'%>
-                                        <p style="bottom:-25px;"><%=ag[2]%> <br /><%=ag[1]%></p>
-                                      <% else %>
-                                        <p><span class="fr"><%=ag[1]%></span><%=ag[2]%></p>
-                                      <% end %>
-                                  </label>
-                              </li>
-                            <% end %>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="control2013 clear">
-              <label class="label2013">
-                  推荐艺术漆
-              </label>
-              <div class="upload2013_toggle fl">
-                  <a href="javascript:;" class="upload2013_btn pa"></a>
-                  <div class="none clear">
-                      <ul class="reco2013-list2 clear">
-                        <% ColorCode.where("rgb is null").each do |cc|%>
-                          <li>
-                              <label>
-                                  <p><img width="38px" heigth="39px" src="<%=asset_path "color_code/#{cc.code}.png"%>"/></p>
-                                  <% if cc.code == img_lib_tag.color1 || cc.code == img_lib_tag.color2 || cc.code == img_lib_tag.color3 %>
-                                    <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cc.code, true %><span><%=cc.code%></span>
-                                  <% else %>
-                                    <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cc.code %><span><%=cc.code%></span>
-                                  <% end %>
-                              </label>
-                          </li>
-                        <% end %>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="control2013 clear tr">  
-            <a href="<%=design_image_tags_user_design_path(current_user,img_lib_tag.design,design_image_id: img_lib_tag.id)%>" target="_blank" style="color:#ff0000;font-weight:bold;margin-right:12px">+ 选择更多标签</a>  
-          </div>
+  <fieldset id="img_lib_tag_<%= img_lib_tag.id %>">
+    <div class="media pb25">
+      <a class="pull-left media_imga">
+        <img class="fl" src="<%=img_lib_tag.file.url(:img_lib_tag)%>">
+      </a>
+      <div class="media-body">
+        <label class="control-label pt10" for="imgname">图片名称</label>
+        <div class="controls">
+          <input type="text" name="title[<%=img_lib_tag.id%>]" class="fl inputs_count design_image_title" value="<%= img_lib_tag.title ? img_lib_tag.title : img_lib_tag.design.title%>" />
+          <input type="hidden" id="delete_image_tag_<%=img_lib_tag.id%>" name="delete_image_tag[<%=img_lib_tag.id%>]" >
+          <input type="hidden" id="design_image_id" name="design_image_id" value="<%=img_lib_tag.id%>" >
+          <input type="hidden" name="effect_id[<%=img_lib_tag.id%>]" value="<%=image_tag_selected(132,img_lib_tag)%>">
+        </div>
       </div>
+      <div class="media-body">
+        <label class="control-label pt10" for="">图片</label>
+        <div class="controls">
+          <%= select_tag "effect[#{img_lib_tag.id}]",
+            options_for_select(image_tag_select(132).map { |img_lib_cat| [img_lib_cat.title, img_lib_cat.id] },image_tag_selected(132,img_lib_tag)),:prompt => '--请选择--'-%>
+        </div>
+      </div>
+      <div class="media-body">
+        <label class="control-label pt10" for="">空间</label>
+        <div class="controls">
+          <%= select_tag "room[#{img_lib_tag.id}]",
+            options_for_select(image_tag_select(82).map { |img_lib_cat| [img_lib_cat.title, img_lib_cat.id] },image_tag_selected(82,img_lib_tag)),:prompt => '--请选择--'-%>
+        </div>
+      </div>
+      <div class="media-body">
+        <label class="control-label pt10" for="">色彩</label>
+        <div class="controls">
+          <%= select_tag "color[#{img_lib_tag.id}]",
+            options_for_select(image_tag_select(107).map { |img_lib_cat| [img_lib_cat.title, img_lib_cat.id] },image_tag_selected(107,img_lib_tag)),:prompt => '--请选择--'-%>
+        </div>
+      </div>
+      <div class="media-body">
+        <label class="control-label pt10" for="">调性</label>
+        <div class="controls">
+          <%= select_tag "tonality[#{img_lib_tag.id}]",
+            options_for_select(image_tag_select(62).map { |img_lib_cat| [img_lib_cat.title, img_lib_cat.id] },image_tag_selected(62,img_lib_tag)),:prompt => '--请选择--'-%>
+        </div>
+      </div>
+    </div>
+    <strong class="help-block text-important pt15 dott1">
+      选择符合此套作品的推荐色号或艺术漆效果，更可获得iColor提供的小礼物
+    </strong>
+    <div class="recommend_colors">
+      <a href="javascript:;" class="reco_toggle_btn show "></a>
+      <label class="control-label reco_tit" for="">推荐色号</label>
+      <div class="controls">
+        <h6 class="colors_group_tit">沉稳中性 Sophisticated Neutrals</h6>
+        <ul class="unstyled colors_group clearfix">
+          <% ColorCode::SNCOLOR.each_with_index do |sn,index|%>
+            <li>
+              <label for="reco_color1_1" class="checkbox inline">
+                <div class="reco_colors reco_color1_<%=index+1%>"></div>
+                <% if sn[2] == img_lib_tag.color1 || sn[2] == img_lib_tag.color2 || sn[2] == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", sn[2],true %>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", sn[2] %>
+                <% end %>
+                <span class="text-block"><span class="pull-right"><%=sn[1]%></span><%=sn[2]%></span>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+       <div class="controls">
+        <h6 class="colors_group_tit tit2">摩登单色 Modern Monochrome</h6>
+        <ul class="unstyled colors_group clearfix">
+          <% ColorCode::MMCOLOR.each_with_index do |mm,index| %>
+            <li>
+              <label class="checkbox inline">
+                <div class="reco_colors reco_color2_<%=index+1%>"></div>
+                <% if mm[2] == img_lib_tag.color1 || mm[2] == img_lib_tag.color2 || mm[2] == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", mm[2],true %>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", mm[2] %>
+                <% end %>
+                <span class="text-block"><span class="pull-right"><%=mm[1]%></span><%=mm[2]%></span>
+              </label>
+            </li>
+          <% end %>
+          </ul>
+      </div>
+      <div class="controls">
+        <h6 class="colors_group_tit tit3">清新感觉 Soft Sensation</h6>
+        <ul class="unstyled colors_group clearfix">
+          <% ColorCode::SSCOLOR.each_with_index do |ss,index| %>
+            <li>
+              <label class="checkbox inline">
+                <div class="reco_colors reco_color3_<%=index+1%>"></div>
+                <% if ss[2] == img_lib_tag.color1 || ss[2] == img_lib_tag.color2 || ss[2] == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ss[2],true %>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ss[2] %>
+                <% end %>
+                <span class="text-block"><span class="pull-right"><%=ss[1]%></span><%=ss[2]%></span>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="controls">
+        <h6 class="colors_group_tit tit4">轻柔质感 Crisp Blues</h6>
+        <ul class="unstyled colors_group clearfix">
+          <% ColorCode::CBCOLOR.each_with_index do |cb,index| %>
+            <li>
+              <label class="checkbox inline">
+                <div class="reco_colors reco_color4_<%=index+1%>"></div>
+                <% if cb[2] == img_lib_tag.color1 || cb[2] == img_lib_tag.color2 || cb[2] == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cb[2],true %>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cb[2] %>
+                <% end %>
+                <span class="text-block"><span class="pull-right"><%=cb[1]%></span><%=cb[2]%></span>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="controls">
+        <h6 class="colors_group_tit tit5">可爱蜡笔 Pretty Pastels</h6>
+        <ul class="unstyled colors_group clearfix">
+          <% ColorCode::PPCOLOR.each_with_index do |pp,index| %>
+            <li>
+              <label class="checkbox inline">
+                <div class="reco_colors reco_color5_<%=index+1%>"></div>
+                <% if pp[2] == img_lib_tag.color1 || pp[2] == img_lib_tag.color2 || pp[2] == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", pp[2],true %>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", pp[2] %>
+                <% end %>
+                <span class="text-block"><span class="pull-right"><%=pp[1]%></span><%=pp[2]%></span>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="controls">
+        <h6 class="colors_group_tit tit6">环球风情 Global Accent</h6>
+        <ul class="unstyled colors_group clearfix">
+          <% ColorCode::GACOLOR.each_with_index do |ag,index| %>
+            <li>
+              <label class="checkbox inline">
+                <div class="reco_colors reco_color6_<%=index+1%>"></div>
+                <% if ag[2] == img_lib_tag.color1 || ag[2] == img_lib_tag.color2 || ag[2] == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ag[2],true %>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", ag[2] %>
+                <% end %>
+                <% if ag[2] == 'NN4851-4' || ag[2] == 'OC1540-2'%>
+                  <span class="text-block"><span class="pull-right" style="float:left;"><%=ag[2]%></span><br /><%=ag[1]%></span>
+                <% else %>
+                  <span class="text-block"><span class="pull-right"><%=ag[1]%></span><%=ag[2]%></span>
+                <% end %>
+
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="recommend_colors">
+      <a href="javascript:;" class="reco_toggle_btn show js-reco_toggle"></a>
+      <label class="control-label reco_tit" for="">推荐艺术漆</label>
+      <div class="controls">
+        <ul class="unstyled colors_group reco_qis clearfix">
+          <% ColorCode.where('code in ("点睛蓝","点睛绿","仿古白","黑胡桃","黑色","红木色","红棕色","琥珀黄","原木色","棕色")').each_with_index do |cc,index|%>
+            <li>
+              <label class="checkbox inline">
+                <div class="reco_qi reco_qi1_<%=index+1%>">
+                  <img width="38px" heigth="39px" src="<%=asset_path "color_code/#{cc.code}.png"%>"/>
+                </div>
+
+                <% if cc.code == img_lib_tag.color1 || cc.code == img_lib_tag.color2 || cc.code == img_lib_tag.color3 %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cc.code, true %><span><%=cc.code%></span>
+                <% else %>
+                  <%= check_box_tag "color_name[#{img_lib_tag.id}][]", cc.code %><span><%=cc.code%></span>
+                <% end %>
+                <!-- <span class="text-block">VA0004-FGG1<br>紫醉金迷</span> -->
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <p class="text-right upload_more_btn"><a href="<%=design_image_tags_user_design_path(current_user,img_lib_tag.design,design_image_id: img_lib_tag.id)%>" target="_blank" class="text-important url-js"><strong>+选择更多标签</strong></a></p>
+    </div>
   </fieldset>
 </div>

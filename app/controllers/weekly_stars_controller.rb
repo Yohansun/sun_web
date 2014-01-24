@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'zip/zip'
 class WeeklyStarsController < ApplicationController
   layout "home_manage"
   DefaultActions = {
@@ -7,37 +8,37 @@ class WeeklyStarsController < ApplicationController
 		:weekly_stars_month_design  => "月度设计之星"
 	}.freeze
 
+  before_filter :get_data
+
   helper_method :star_blank?
- 
+
 	def download
-		target_file = WeeklyStar.find(params[:id])
-		image_paths = []
-
-		target_file.weekly_star_uploads.tap do |weekly|
-			weekly.collect {|x| image_paths << x.file.path if File.exists?(x.file.path)}
-		end
-		added_actions = DefaultActions.merge(:index => "每周之星")
-		#防止传过来的值不一致造成对服务器的攻击
-		raise "参数不包含在列表中" unless added_actions.keys.include?(params[:target].to_sym) 
-		target_name = added_actions[params[:target].to_sym]
-
-		find_or_build_zip_file("public/#{target_name}.zip",:ab_paths => image_paths,:cache_name => PinYin.permlink(target_name)) do |zfile|
-			send_file zfile
-		end
-
-	rescue Exception => e
-		respond_to do |format|
-			format.html {render :text => %!<script>alert("#{e.message}");window.history.back(-1)</script>!}
-		end
+		target_file = WeeklyStar.find(params[:id]).weekly_star_uploads
+		unless target_file.blank?
+      zipfile_name = "#{Rails.root}/public/system/zip/weekly_star#{params[:id]}.zip"
+      if File.exists?(zipfile_name)
+        send_file zipfile_name
+      else
+        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+          target_file.each do |filename|
+            zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
+          end
+        end
+        send_file zipfile_name
+      end
+    else
+      redirect_to :back
+    end
 	end
 
   def index
     @title1,@title2 = "每周","之星"
 
+    @banners = IBanner.page_name('设计之星').order("position ASC").all
     designs = WeeklyStar.order("published_at desc") || WeeklyStar.new
     star_type_id = WeeklyStar.get_star_type_id(@title="每周之星")
 
-    @design = designs.where(star_type_id: star_type_id).first    
+    @design = designs.where(star_type_id: star_type_id).first
     design_id = @design.design_link.split("/").last
     @link_design = Design.find(design_id)
 
@@ -48,22 +49,22 @@ class WeeklyStarsController < ApplicationController
     # 3.times do |t|
     #   star = WeeklyStar.where(star_type_id: t+1).order("published_at desc").first
     #   star_ids << star.id if star.present?
-    # end  
-    @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(8)
-
+    # end
+    @elder_designs = WeeklyStar.where("id != ?", weekly_star.id).order("published_at desc").page(params[:page]).per(9)
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
-  
+
 	DefaultActions.each do |act,star_type|
 		define_method(act) do
 			#TODO
 			star_type_id = WeeklyStar.get_star_type_id(star_type)
+      @banners = IBanner.page_name('设计之星').order("position ASC").all
 			#每周之星
 			@design = WeeklyStar.order("published_at desc").find_by_star_type_id(star_type_id)
 			design_id = @design.design_link.split("/").last
 			@link_design = Design.find(design_id)
 
-			@elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8) 
+			@elder_designs = WeeklyStar.where("id != ?", @design.id).order("published_at desc").page(params[:page]).per(8)
 			@title = @title1 = star_type.dup
 			@title1.delete!(@title2="之星")
 			render "index"
@@ -71,6 +72,7 @@ class WeeklyStarsController < ApplicationController
 	end
 
   def show
+    @banners = IBanner.page_name('设计之星内页').order("position ASC").all
     @design = WeeklyStar.find(params[:id])
     design_id = @design.design_link.split("/").last
     @link_design = Design.find design_id
@@ -94,5 +96,14 @@ class WeeklyStarsController < ApplicationController
   def star_blank?(star_type)
     star_type_id = WeeklyStar.get_star_type_id star_type
     WeeklyStar.where(star_type_id: star_type_id).blank?
+  end
+
+  def get_data
+    #大师访谈
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    #相关资讯
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
   end
 end

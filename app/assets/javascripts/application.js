@@ -34,7 +34,7 @@ function getParameters() {
   if (searchString == "") return {};
   for (var i = 0; i < params.length; i++) {
     var val = params[i].split("=");
-    hash[unescape(val[0])] = unescape(val[1]);
+    hash[decodeURI(val[0])] = decodeURI(val[1]);
   }
   return hash;
 }

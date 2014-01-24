@@ -1,0 +1,55 @@
+<%- content_for :head do %>
+  <%= stylesheet_link_tag "upload_image/jquery.fileupload-ui" %>
+<% end %>
+<% content_for :tail do %>
+  <%= javascript_include_tag '/xheditor/xheditor-1.1.13-zh-cn.min.js',
+                              "upload_image/vendor/jquery.ui.widget",
+                             "upload_image/jquery.iframe-transport",
+                             "upload_image/jquery.fileupload" %>
+  <script type="text/javascript" charset="utf-8">
+    $(function(){
+      $('.textarea_settings').xheditor({
+          upImgUrl:'/home/upload_img',
+          upImgExt: "jpg,jpeg,gif,png",
+          html5Upload: false,
+          width: 990,
+          height: 300
+      });
+      $('.form_valid').submit(function(event) {
+        if($("#designer_event_title").val() == ""){
+          alert("活动名称不能为空！");
+          return false;
+        };
+        if($("#designer_event_start_time").val() == ""){
+          alert("活动时间不能为空！");
+          return false;
+        };
+      });
+      $('#fileupload').fileupload({
+          url: '/manage/designer_events/update_image',
+
+          dataType: 'json',
+          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 5000000,
+          done: function (e, data) {
+            alert(data.result.notify);
+            $('#designer_event_image').attr('src',data.result.path);
+          },
+          error: function (e, data) {
+            alert(data.result);
+          }
+      });
+    });
+  </script>
+<% end %>
+<div class="row-fluid">
+  <div class="step-content row-fluid position-relative">
+    <div class="step-pane active">
+      <%= form_for(@designer_event, html: {class: 'form-horizontal form_valid', method: :put,multipart: true, remote: true}) do |f| %>
+        <%= hidden_field_tag :designer_event_id, params[:id] %>
+        <%= render partial: 'form', locals: {f: f} %>
+      <% end %>
+    </div>
+  </div>
+</div>

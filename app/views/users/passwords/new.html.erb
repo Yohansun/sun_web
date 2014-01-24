@@ -1,21 +1,18 @@
-<%- content_for :head do %>
-  <%= stylesheet_link_tag 'reg' %>
-<%- end %>
 <% content_for :tail do %>
   <script type="text/javascript">
     $(function() {
       $('#email').blur(function() {
         var email = $(this).val();
         if (!isEmail(email)) {
-          $('.forget .pa').show();
+          $('.js-forget').show();
           $('#email').focus();
         }
         else {
-          $('.forget .pa').hide();
+          $('.js-forget').hide();
         }
       });
       $('.reset_commit :input[type=image]').click(function() {
-        var pa = $('.forget .pa');
+        var pa = $('.js-forget');
         if (pa.is(':visible')) {
           return false;
         }
@@ -27,43 +24,47 @@
     })
   </script>
 <% end %>
-<div class="main syslist">
-  <div class="shadow">
-    <div class="section pr">
-      <div class="sys_bar clear ft12">
-        <h4 class="pull-left">找回密码</h4>
-        <div class="pull-right">
-          <a href="/">首页</a> > 找回密码
-        </div>
-      </div>
-      <!--sys_bar ends-->
-      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post } ) do |f| %>
-        <div class="sys_bar ft14">
-          <div class="reg_list fb">使用电子邮箱找回</div>
-          <div class="forget">
-            <span><%= f.error_notification %></span>
-            <label class="fl fb tr" for="email">电子邮箱地址：</label>
-            <input type="text" class="email fl fb" name="user[email]" id="email"/>
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="#">首页</a> > </li>
+    <li class="active">用户中心</li>
+  </ul>
+  <hr class="border2 border2_mt2">
+
+  <ul class="nav nav-tabs upload_tab login_tab" id="login_tab">
+    <li><a href="/users/sign_in">登录</a></li>
+    <li><a href="/users/sign_up">注册</a></li>
+    <li class="active"><a href="#login_tab3">找回密码</a></li>
+  </ul>
+
+  <div class="tab-pane" id="login_tab3">
+    <div class="index_main noborder">
+      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:class => "form-horizontal pt30 mt20", :method => :post } ) do |f| %>
+
+        <div class="control-group">
+          <label class="control-label" for="">注册邮箱</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" name="user[email]" id="email"/>
+             <span>
+              <% if f.error_notification %>
+                <p class="mt10 text-important">*您输入的电子邮箱不存在!*</p>
+              <% end %>
+             </span>
+             <p class="mt10 text-important hide js-forget">*您输入的电子邮箱不正确！*</p>
           </div>
-          <!--forget ends-->
-          <div class="forget pr">
-            <!--<label class="fl fb tr" for="code">图形验证码：</label>-->
-            <!--<input type="text" class="code fl fb" name="code" id="code"/>-->
-            <!--<img src="<%= asset_path "codes.jpg" %>" class="codes fl"/>-->
-            <!--<a href="javascript:void(0)" class="fl ft12">换一换</a>-->
-            <p class="pa cr none ft14">*您输入的电子邮箱不正确！*</p>
-          </div>
-          <!--forget ends-->
+          <div class="text-center pt30 mt20"><button type="submit" class="upload_img_btn">重设密码</button></div>
         </div>
-        <!--sys_bar ends-->
-        <div class="reset_commit fl">
-          <input type="image" src="<%= asset_path "news/submit.jpg" %>" class="fl">
-          <input type="reset" value="重置" class="reset_reset fb ft14 fl">
-        </div>
-        <!--reg_content ends-->
-      <%- end %>
+
+      <% end %>
     </div>
-    <!--section ends-->
   </div>
-  <!--shadow ends-->
-</div><!--main ends-->
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85) %></a>
+    </div>
+    <div class="footer_banner mt10 pull-right">
+      <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_310x85) %></a>
+    </div>
+  </div>
+</div>

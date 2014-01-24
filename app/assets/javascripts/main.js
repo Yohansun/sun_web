@@ -99,7 +99,7 @@ function inputBlank(area){
     }
 
 $(function(){
-    $('a.login').click(show_login);
+    // $('a.login').click(show_login);
     // $('a.server').click(function(){
     //     if(!$('.server_suc').is(':visible'))
     //     {
@@ -991,6 +991,18 @@ $(function(){
             buttons : false,
             scroll : 1,
             pagers : '.circle_indicators'
+        });
+        $('.gift_carousel').slider({
+            auto: false,
+            scroll: 1,
+            pagers: false,
+            callback: function(index, e, that){
+                var gift_carousel_height = that.find('li').eq(index).height();
+                that.animate({height:gift_carousel_height},200)
+            }
+        });
+        $('.gift_carousel').each(function(){
+            $(this).height($(this).find('table').eq(0).height())
         });
     })($);
 

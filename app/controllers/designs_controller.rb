@@ -3,6 +3,7 @@ require 'zip/zip'
 class DesignsController < ApplicationController
   layout "home_manage"
   before_filter :find_user
+  before_filter :banner
   before_filter :find_design, :only => [:upload, :edit]
 
   def download
@@ -53,8 +54,8 @@ class DesignsController < ApplicationController
       end
       style = "%#{params[:style]}%"
       design_color = "%#{params[:design_color]}%"
-      @designs = @designs.where("style like ?", style) if params[:style] && !params[:style].blank? && params[:style] !='风格'
-      @designs = @designs.where("design_color like ?", design_color) if params[:design_color] && !params[:design_color].blank? && params[:design_color] !='色系'
+      @designs = @designs.where("style like ?", style) if params[:style] && !params[:style].blank?
+      @designs = @designs.where("design_color like ?", design_color) if params[:design_color] && !params[:design_color].blank? && params[:design_color]
       @designs = @designs.where(:room_type => params[:room_type]) if params[:room_type] && !params[:room_type].blank? && params[:room_type] !='户型'
       if params[:area_id] && !params[:area_id].blank?
         @designs = @designs.where(:area_id => params[:area_id])
@@ -62,8 +63,16 @@ class DesignsController < ApplicationController
         area = Area.where(parent_id: params[:area_head])
         @designs = @designs.where("designs.area_id in (#{area.map(&:id).join(',')})")
       end
-      @designs = @designs.page(params[:page]).per(9)
+      @area_head_name = Area.find(params[:area_head]).name if params[:area_head].present?
+      @area_id_name = Area.find(params[:area_id]).name if params[:area_id].present?
+      @designs = @designs.page(params[:page]).per(15)
     end
+
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('作品展示').order("position ASC").all
 
     sign_in(@user) if current_admin && @user
   end
@@ -80,10 +89,19 @@ class DesignsController < ApplicationController
 
   def show
     @design = Design.find(params[:id])
+    @design_imgs = @design.design_images
+    @prev_design = Design.where("id < ?", @design.id).order("id desc").first
+    @next_design = Design.where("id > ?", @design.id).order("id desc").last
     @comments = @design.comments.page params[:page]
     if params[:image_id]
       @image = DesignImage.find(params[:image_id])
     end
+
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('作品展示内页').order("position ASC").all
   end
 
   def new
@@ -106,6 +124,7 @@ class DesignsController < ApplicationController
   end
 
   def design_image_tags
+    @design_image = DesignImage.find params[:design_image_id]
     @image_tags = ImageTag.where(design_image_id: params[:design_image_id], genre: 'image_tag2').map &:image_library_category_id
   end
 
@@ -228,10 +247,27 @@ class DesignsController < ApplicationController
           design_tags.each do |design_tag|
             ImageTag.create(design_image_id: image.id, image_library_category_id: design_tag.image_library_category_id, genre: 'image_tag3')
           end
-          tag_arr = []
-          if params[:effect] && params[:effect][design_image_id].present?
-            tag_arr << params[:effect][design_image_id]
+
+          if params[:delete_image_tag][design_image_id].present?
+            img_tag = ImageTag.where("design_image_id = ? and image_library_category_id = ?", design_image_id, params[:delete_image_tag][design_image_id]).first
+          else
+            if params[:effect_id][design_image_id].present?
+              img_tag = ImageTag.where("design_image_id = ? and image_library_category_id = ?", design_image_id, params[:effect_id][design_image_id]).first
+            else
+              img_tag = ImageTag.new
+            end
           end
+
+          if params[:effect][design_image_id].present?
+            img_tag.design_image_id = design_image_id
+            img_tag.image_library_category_id = params[:effect][design_image_id].to_s
+            img_tag.genre = 'image_tag2'
+            img_tag.save
+          else
+            img_tag.destroy
+          end
+
+          tag_arr = []
           if params[:room] && params[:room][design_image_id].present?
             tag_arr << params[:room][design_image_id]
           end
@@ -383,5 +419,9 @@ class DesignsController < ApplicationController
     else
       redirect_to '/'
     end
+  end
+
+  def banner
+    @banners = IBanner.page_name('作品上传').order("position ASC").all
   end
 end

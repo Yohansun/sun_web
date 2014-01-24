@@ -1,4 +1,7 @@
 zh-CN:
+  simple_captcha:
+    placeholder: "请输入验证码"
+    label: "请输入上面的验证码"
   date:
     abbr_day_names:
     - 日
@@ -9,7 +12,7 @@ zh-CN:
     - 五
     - 六
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -35,7 +38,7 @@ zh-CN:
       long: ! '%Y年%b%d日'
       short: ! '%b%d日'
     month_names:
-    - 
+    -
     - 一月
     - 二月
     - 三月

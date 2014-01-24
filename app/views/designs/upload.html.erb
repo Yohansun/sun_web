@@ -1,208 +1,224 @@
 <% content_for :head do -%>
-  <%= stylesheet_link_tag '2013base', '2013upload', 'uploadify' %>
+  <%= stylesheet_link_tag '2013upload', 'uploadify' %>
   <style type="text/css">
-    .uploadifyButton{background:transparent;}
-    .uploadify:hover .uploadifyButton{background:transparent;}
-    .uploadify{float:left;margin-right: 20px;}
-
-  .nav_top{clear:none;}
-  .wrapper{width:1000px;}
-  .width652{width:472px;}
-  .control2013 div.fl{width:720px;}
-  .control2013 textarea{width:705px;}
-  .upload_edit2013 .control2013 {width:610px;}
+  #upload_photo{float:left}
+  .uploadifyButton,.uploadify:hover .uploadifyButton{background:transparent;padding:0;}
+  </style>
   </style>
 <% end -%>
 <%- content_for :tail do %>
-<%= javascript_include_tag "swfobject.js", "jquery.uploadify.js", '2013main' %>
+  <%= javascript_include_tag "swfobject.js", "jquery.uploadify.js", '2013main' %>
+  <script type="text/javascript" charset="utf-8">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    $(function() {
 
-<script type="text/javascript" charset="utf-8">
-<%- session_key = Rails.application.config.session_options[:key] -%>
-$(function() {
+      $('#upload_photo').click(function(event){
+        event.preventDefault();
+      });
 
-  $('#upload_photo').click(function(event){
-    event.preventDefault();
-  });
-
-  $('#upload_photo').uploadify({
-    swf : '/uploadify/uploadify.swf',
-    cancelImage : '/uploadify/uploadify-cancel.png',
-    //skipDefault : ['onSelect'],
-    progressData : 'percentage',
-    buttonText : "<img src='<%=asset_path 're_add.jpg'%>'>",
-    fileTypeDesc : '图片文件',
-    fileTypeExts : '*.jpg; *.png',
-    successTimeout : 6000,
-    fileSizeLimit : '5MB',
-    // uploadLimit : 60,
-    width : 184,
-    height : 46,
-    multi : true,
-    auto : true,
-    checkExisting : false,
-    transparent : true,
-    uploader : '<%= user_design_images_path(current_user, design_title: @design.title, design_id: @design.id, design_type: "Design") %>',
-    //buttonText : '选择文件',
-    onUploadSuccess : function(file, data, response) {
-      var dat = eval('(' + data + ')');
-      if (dat.result == 'success') {
-        $.getScript(dat.upload + "?for=design", function(){
-        var $btn = $('.upload2013_btn');
-        if($btn.length == 0) return;
-          $btn.unbind('click').click(function(){
-            $(this).toggleClass('upload2013_btn_down').next().toggle();
-          });
-        });
-        var current = parseInt($('.js-images_num span:eq(1)').text());
-        $('.js-images_num span:eq(1)').text(current - 1);
-      }else{
-        alert("图片上传失败");
-      };
-    },
-    postData : {
-        '_http_accept': 'application/javascript',
-        'format' : 'json',
-        '_method': 'post',
-        '<%= session_key %>' : '<%= cookies[session_key] %>',
-        'authenticity_token': '<%= form_authenticity_token %>'
-    },
-    onUploadError : function(file, errorCode, errorMsg, errorString) {
-      alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
-    },
-    onUploadStart : function(){
-      //$("#upload_going").show();
-    },
-    onUploadComplete : function(){
-      //$("#upload_going").hide();
-    }
-  });
-  var input_len =  $('a.clear_all').parent().siblings('.load_content').find('input[name="[design_image_ids][]"]').length;
-  $('.js-images_num span:eq(1)').text(60 - input_len);
-  $('a.load_del').click(function(){
-        var image_size = parseInt($(this).parents('.file_list').children('.work_size').text());
-        var current = parseInt($('.js-images_num span:eq(1)').text());
-        $('.js-images_num span:eq(1)').text(current + 1)
-        var sum = parseInt($('.load_total span').text());
-        sum = sum - image_size;
-        $('.load_total span').text(sum);
-
-    });
-
-  $('a.clear_all').click(function(){
-    for (var i = 0 ; i < input_len; i++) {
-        id = $(this).parent().siblings('.load_content').find('input[name="[design_image_ids][]"]').eq(i).val();
-        image_id = $('#delete_image_id').val();
-        $('#delete_image_id').val(image_id + ',' + id);
-        $('.load_total span').text(0);
-    };
-    $('.js-images_num span:eq(1)').text(60);
-  });
-
-  var work_size = 0;
-    for (var i = 0 ; i < input_len; i++) {
-        var work_size_each = parseInt($('.file_list .work_size').eq(i).text());
-        work_size += work_size_each;
-    }
-    $('.load_total span').text(work_size);
-    // 推荐色号 + 推荐艺术漆 checkbox <= 3
-    (function($){
-        $('#image_tag').on('click', '.remote_image_tag', function(e){
-            if($(e.target).is('input:checkbox')){
-              var len = $(this).find(':checkbox:checked').length;
-              if(len >3){
-                alert('选太多了亲！');
-                return false;
-              }
+      $('#upload_photo').uploadify({
+        swf : '/uploadify/uploadify.swf',
+        cancelImage : '/uploadify/uploadify-cancel.png',
+        //skipDefault : ['onSelect'],
+        progressData : 'percentage',
+        buttonText : "<a class='upload_img_btn nomargin'>上传图片</a>",
+        fileTypeDesc : '图片文件',
+        fileTypeExts : '*.jpg; *.png',
+        successTimeout : 6000,
+        fileSizeLimit : '5MB',
+        // uploadLimit : 60,
+        // width : 0,
+        height : 40,
+        multi : true,
+        auto : true,
+        checkExisting : false,
+        transparent : true,
+        uploader : '<%= user_design_images_path(current_user, design_title: @design.title, design_id: @design.id, design_type: "Design") %>',
+        //buttonText : '选择文件',
+        onUploadSuccess : function(file, data, response) {
+          var dat = eval('(' + data + ')');
+          if (dat.result == 'success') {
+            $.getScript(dat.upload + "?for=design", function(){
+            var $btn = $('.reco_toggle_btn');
+            if($btn.length !== 0) {
+              $btn.unbind('click').click(function(){
+                $(this).toggleClass('show').siblings('div').toggle();
+              });
             }
-        });
-    })(jQuery);
-});
-
-function uploads_size () {
-  $('.design_images_size').html($(".upload_item").size());
-  if ($(".upload_item").size() >= 60) {
-    $("#upload_photo").hide();
-  } else {
-    $("#upload_photo").show();
-  }
-}
-function remote(id) {
-  $('#design_image'+id).remove();
-  $('#img_lib_tag_'+id).remove();
-  image_id = $('#delete_image_id').val();
-  $('#delete_image_id').val(image_id + ',' + id);
-}
-function remove_design_image(){
-    $('.upload_item').remove();
-    $('.remote_image_tag').remove();
-  }
-</script>
-
-<script type="text/javascript">
-  $(function(){
-    $(".load_submit").click(function(){
-      var imgCount = $(".design_images_size").text();
-      if(parseInt(imgCount) == 0){
-        alert("不能一张图片都没有哦");
-        return false;
-      }
-      // else{
-        // $(".edit_design").submit();
-      // }
-    })
-    $('.color_autocomplete').typeahead({
-        source: function(query, process){
-          $.get('<%= user_designs_autocomplete_path(1) %>', {num: query}, function(data){
-             process(data)
-           });
+            });
+            var current = parseInt($('.js-images_num span:eq(1)').text());
+            $('.js-images_num span:eq(1)').text(current - 1);
+          }else{
+            alert("图片上传失败");
+          };
+        },
+        postData : {
+            '_http_accept': 'application/javascript',
+            'format' : 'json',
+            '_method': 'post',
+            '<%= session_key %>' : '<%= cookies[session_key] %>',
+            'authenticity_token': '<%= form_authenticity_token %>'
+        },
+        onUploadError : function(file, errorCode, errorMsg, errorString) {
+          alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+        },
+        onUploadStart : function(){
+          //$("#upload_going").show();
+        },
+        onUploadComplete : function(){
+          //$("#upload_going").hide();
         }
       });
-  });
-</script>
+      var input_len =  <%= @design.design_images.size %>;
+      $('.js-images_num span:eq(1)').text(60 - input_len);
+      $('a.load_del').click(function(){
+            var image_size = parseInt($(this).parents('.file_list').children('.work_size').text());
+            var current = parseInt($('.js-images_num span:eq(1)').text());
+            $('.js-images_num span:eq(1)').text(current + 1)
+            var sum = parseInt($('.load_total span').text());
+            sum = sum - image_size;
+            $('.load_total span').text(sum);
+
+        });
+
+      $('a.clear_all').click(function(){
+        for (var i = 0 ; i < input_len; i++) {
+            id = $(this).parent().siblings('.load_content').find('input[name="[design_image_ids][]"]').eq(i).val();
+            image_id = $('#delete_image_id').val();
+            $('#delete_image_id').val(image_id + ',' + id);
+            $('.load_total span').text(0);
+        };
+        $('.js-images_num span:eq(1)').text(60);
+      });
+
+      var work_size = 0;
+        for (var i = 0 ; i < input_len; i++) {
+            var work_size_each = parseInt($('.file_list .work_size').eq(i).text());
+            work_size += work_size_each;
+        }
+        $('.load_total span').text(work_size);
+        // 推荐色号 + 推荐艺术漆 checkbox <= 3
+        (function($){
+            $('#image_tag').on('click', '.remote_image_tag', function(e){
+                if($(e.target).is('input:checkbox')){
+                  var len = $(this).find(':checkbox:checked').length;
+                  if(len >3){
+                    alert('选太多了亲！');
+                    return false;
+                  }
+                }
+            });
+        })(jQuery);
+
+        $('#image_tag').on('click', 'a.url-js', function(){
+          var select_id = $(this).parents('fieldset').get(0).getElementsByTagName('select')[0].value
+          var image_id = $(this).parents('fieldset').get(0).getElementsByTagName('input')[2].value
+          if(select_id != ''){
+            this.href = '/users/<%= current_user.id %>/designs/<%= @design.id %>/design_image_tags?design_image_id='+image_id+'&image_tag=' + select_id
+          }else{
+             this.href = '/users/<%= current_user.id %>/designs/<%= @design.id %>/design_image_tags?design_image_id='+image_id
+          }
+        })
+    });
+
+    function uploads_size () {
+      $('.design_images_size').html($(".upload_item1").size());
+      if ($(".upload_item1").size() >= 60) {
+        $("#upload_photo").hide();
+      } else {
+        $("#upload_photo").show();
+      }
+    }
+    function remote(id) {
+      $('#design_image'+id).remove();
+      $('#img_lib_tag_'+id).remove();
+      image_id = $('#delete_image_id').val();
+      $('#delete_image_id').val(image_id + ',' + id);
+    }
+    function remove_design_image(){
+        $('.upload_item1').remove();
+        $('.remote_image_tag').remove();
+      }
+  </script>
+
+  <script type="text/javascript">
+    $(function(){
+      $(".load_submit").click(function(){
+        var imgCount = $(".design_images_size").text();
+        if(parseInt(imgCount) == 0){
+          alert("不能一张图片都没有哦");
+          return false;
+        }
+        // else{
+          // $(".edit_design").submit();
+        // }
+      })
+      $('.color_autocomplete').typeahead({
+          source: function(query, process){
+            $.get('<%= user_designs_autocomplete_path(1) %>', {num: query}, function(data){
+               process(data)
+             });
+          }
+        });
+    });
+  </script>
 <%- end -%>
-<%= form_for([current_user, @design], :remote => true, :html => {:multipart => true}) do |f| %>
-<%= hidden_field_tag "story_id", params[:story_id] %>
-<div class="wrapper">
-  <div class="upload2013">
-    <h1>上传作品</h1>
-  </div>
-  <div class="upload2013_2 clear">
-    <h2 class="fb">上传到作品：<%= @design.title %></h2>
-    <input type="hidden" id="design_title" value="<%= @design.title %>">
-    <a href="#" class="re_add fl mr20" id="upload_photo"></a>
-    <p class="fl js-images_num" style="margin-top: 35px!important;">您已经添加了<span class="design_images_size" style="color:red;"><%= @design.design_images.size %></span>张图片（还可以添加<span>58</span>张）</p>
-  </div>
-  <div class="upload2013_2 clear">
-    <div class="clear">
-        <div class="load_bar clear">
-            <div class="work_title fb fl">文件</div>
-            <div class="work_size tc fl">大小</div>
-            <div class="set_cover tc fl">设为封面</div>
-            <div class="work_del tc fl">移除</div>
-            <div class="work_del tc fl">编辑标签</div>
-        </div><!--load_bar ends-->
+<div class="tab-content upload_content">
+  <div class="tab-pane active" id="upload_tab1">
+    <%= form_for([current_user, @design], :remote => true, :html => {:multipart => true, :class => "form-horizontal index_main ins_upload_form2 noborder nomargin"}) do |f| %>
+    <%= hidden_field_tag "story_id", params[:story_id] %>
+      <h5>上传到作品: <%= @design.title %></h5>
+      <div class="clearfix">
+        <a href="javascript:;" class="upload_img_btn" id="upload_photo">上传图片</a>
+        <p class="help-inline mt10 js-images_num" >您已经添加了<span class="design_images_size" style="color:red;"><%= @design.design_images.size %></span>张图片（还可以添加<span>60</span>张）</p>
+
+      </div>
+      <div class="uploadimg_list">
+        <div class="load_bar clearfix">
+          <div class="work_title pull-left">文件</div>
+          <div class="work_size text-center pull-left">大小</div>
+          <div class="set_cover text-center pull-left">设为封面</div>
+          <div class="work_del text-center pull-left">移除</div>
+          <div class="work_del text-center pull-left">编辑标签</div>
+        </div>
         <div class="load_bar load_content" id="uploads">
           <%= render :partial => "design_images/upload", :collection => @design.design_images -%>
-        </div><!--load_content ends-->
-        <p class="load_footer ft12 fl">
-            共有<span style="color:red" class="design_images_size"><%= @design.design_images.size %></span>个文件 |
+        </div>
+        <div class="clearfix">
+          <p class="load_footer pull-left">
+            共有<span class="text-important design_images_size"><%= @design.design_images.size %></span>个文件 |
             <a href="javascript:remove_design_image();uploads_size();" class="clear_all">清空列表</a>
-        </p><!--load_footer ends-->
-        <p class="load_total ft12 fr">总计：<span>0</span>KB</p>
-    </div><!--upload_bin ends-->
-    <p class="load_info ft12">
-        您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张
-        <span style="color:red;line-height:30px;display:block;">*友情提示：为了使您的设计更受网名喜欢，请把个人或公司标签置于不醒目处，以免影响作品效果</span>
-    </p><!--load_info ends-->
-  </div><!--work_area-->
-<div id="image_tag">
-  <%= render :partial => "design_images/img_lib_tag", :collection => @design.design_images -%>
-</div>
 
-  <input type="hidden" id="delete_image_id" name="delete_image_id" >
-  <fieldset class="upload2013_2 ft14 clear">
-      <input type="image" src="<%=asset_path 'submit.jpg'%>" class="sure_submit db load_submit" value="确认提交">
-      <!-- <p class="help-text tc cr">*红色标注为必填项</p> -->
-  </fieldset><!--suc_content ends-->
-</div><!--ends-->
-<% end -%>
+          </p>
+          <p class="load_total pull-right">总计：<span>0</span>KB</p>
+        </div>
+        <p class="load_info mt20">建议上传分辨率不低于800*500像素、大小不超过3M的JPG、GIF、PNG、或BMP格式图片，同一批可上传60张</p>
+        <p class="load_info">
+          <strong class="text-important">您可以上传JPG、GIF、PNG、或BMP文件，建议大尺寸，单张图片5M以下，一批可上传60张</strong>
+        </p>
+      </div>
+
+      <div id="image_tag">
+        <%= render :partial => "design_images/img_lib_tag", :collection => @design.design_images -%>
+      </div>
+
+      <div class="text-center pt30 linet1 mt20">
+        <input type="hidden" id="delete_image_id" name="delete_image_id" >
+        <button  class="upload_img_btn load_submit load_submit">确认提交</button>
+        <a href="/users/<%=current_user.id%>/designs/<%=@design.id%>/edit_design" class="upload_img_back" style="position:relative;top:4px;*top:10px;">返回</a>
+      </div>
+    <% end %>
+  </div>
+  <div class="clearfix">
+    <div class="footer_banner pull-left">
+      <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' if @banners[0] %>" target="_blank">
+        <%= image_tag @banners[0].try(:file).try(:url, :list_670x85) if @banners[0] %>
+      </a>
+    </div>
+    <div class="footer_banner pull-right">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' if @banners[1] %>" target="_blank">
+        <%= image_tag @banners[1].try(:file).try(:url, :list_310x85) if @banners[1] %>
+      </a>
+    </div>
+  </div>
+</div>

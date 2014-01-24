@@ -16,8 +16,8 @@
 <li class="<%= 'active' if controller_name == 'banner_images' %>">
   <a href="/manage/banner_images?page_name=图库首页">装修图库</a>
 </li>
-<li class="<%= 'active' if controller_name == '' %>">
-  <a href="#">设计鉴賞</a>
+<li class="<%= 'active' if controller_name == 'banner_weekly_stars' %>">
+  <a href="/manage/banner_weekly_stars?page_name=设计之星">设计鉴賞</a>
 </li>
 <li class="<%= 'active' if controller_name == 'banner_channel' %>">
   <a href="/manage/banner_channel">业主通道</a>
@@ -29,8 +29,11 @@
   <a href="#">应用工具</a>
 </li>
 <li class="<%= 'active' if controller_name == 'banner_activities' %>">
-  <a href="/manage/banner_activities?page_name=因爱设计师获奖名单">精彩活动</a>
+  <a href="/manage/banner_activities?page_name=活动集锦">精彩活动</a>
 </li>
 <li class="<%= 'active' if controller_name == 'banner_company' %>">
   <a href="/manage/banner_company?page_name=华浔品味装饰">公司主页</a>
+</li>
+<li class="<%= 'active' if controller_name == 'banner_other_pages' %>">
+  <a href="/manage/banner_other_pages">其它页面</a>
 </li>

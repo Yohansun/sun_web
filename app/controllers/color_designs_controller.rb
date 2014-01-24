@@ -11,11 +11,16 @@ class ColorDesignsController < ApplicationController
         @designs = @designs.order("id desc")
       end
 
-      @designs = @designs.where(:design_color => params[:design_color]) if params[:design_color] && !params[:design_color].blank? && params[:design_color] !='色系'
-      @designs = @designs.where(:design_style => params[:design_style]) if params[:design_style] && !params[:design_style].blank? && params[:design_style] !='风格'
-      @designs = @designs.where(:design_usage => params[:design_usage]) if params[:design_usage] && !params[:design_usage].blank? && params[:design_usage] !='功能区'
+      @designs = @designs.where(:design_color => params[:design_color]) if params[:design_color].present?
+      @designs = @designs.where(:design_style => params[:design_style]) if params[:design_style].present?
+      @designs = @designs.where(:design_usage => params[:design_usage]) if params[:design_usage].present?
 
     end
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('色彩配搭').order("position ASC").all
 
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
@@ -34,13 +39,20 @@ class ColorDesignsController < ApplicationController
     @design_prev = @design_prev.id if @design_prev
     @design_prev = @design.id if @design_prev.blank?
 
+    @color1, @color2, @color3 = search_color_code(@design.recommend_color1), search_color_code(@design.recommend_color2), search_color_code(@design.recommend_color3)
+    @master_interviews = IColumnData.show_data(6).limit(5)
+    @master_more = IColumnData.where(i_column_type_id: 6,position: 0).first
+    @about_info = IColumnData.show_data(7).limit(5)
+    @more_info = IColumnData.where(i_column_type_id: 7,position: 0).first
+    @banners = IBanner.page_name('色彩配搭内页').order("position ASC").all
+
     expires_in 60.minutes, 'max-stale' => 2.hours, :public => true
   end
 
   def get_color_designs
     designs = Subject.content("color_designs")
     @tags = designs.tag_counts_on(:tags) || [Tag.new]
-    @designs = designs.page(params[:page]).per(9)
+    @designs = designs.page(params[:page]).per(12)
     @designs = @designs.tagged_with(params[:tags]) if params[:tags]
   end
 
@@ -52,11 +64,19 @@ class ColorDesignsController < ApplicationController
 
   def download
     target_file = ColorDesign.find(params[:id])
-      if target_file
-        send_file target_file.show_preview_img.path
+    unless target_file.blank?
+      zipfile_name = "#{Rails.root}/public/system/zip/color_designs#{params[:id]}.zip"
+      if File.exists?(zipfile_name)
+        send_file zipfile_name
       else
-        render nothing: true, status: 404
+        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+          zipfile.add(target_file.show_preview_img_file_name, target_file.show_preview_img.path) if File.exists?(target_file.show_preview_img.path)
+        end
+        send_file zipfile_name
       end
+    else
+      redirect_to :back
+    end
   end
 
 end
