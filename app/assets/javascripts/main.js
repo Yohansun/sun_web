@@ -995,7 +995,14 @@ $(function(){
         $('.gift_carousel').slider({
             auto: false,
             scroll: 1,
-            pagers: false
+            pagers: false,
+            callback: function(index, e, that){
+                var gift_carousel_height = that.find('li').eq(index).height();
+                that.animate({height:gift_carousel_height},200)
+            }
+        });
+        $('.gift_carousel').each(function(){
+            $(this).height($(this).find('table').eq(0).height())
         });
     })($);
 

@@ -17,7 +17,7 @@ $.fn.slider = function(config){
             speed : 800,                    // 滚动速度
             scroll : 1,                     // 滚动个数
             margin : 0,
-            callback : function(index, e){} // 回调函数 参数index:0起头的pager; e:触发滚动源
+            callback : function(index, e, that){} // 回调函数 参数index:0起头的pager; e:触发滚动源
         }, config);
 
         var that = $(this),
@@ -95,7 +95,7 @@ $.fn.slider = function(config){
 
         function setPager(page, e){
             page = page > pages ? 0 : page - 1;
-            config.callback(page, e);
+            config.callback(page, e, that);
             pag && pag.find('li').eq(page).addClass('slider-active').siblings('li.slider-active').removeClass();
         }
 
