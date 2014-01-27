@@ -3,7 +3,7 @@ class CreateEditorTreasuries < ActiveRecord::Migration
     create_table :editor_treasuries do |t|
       t.string :name, null: false
       t.text   :content
-      t.string :thumb, default: "", null: false
+      t.text   :intro
       t.boolean :recommended, default: true, null: false
 
       t.references :celebrity_content_board

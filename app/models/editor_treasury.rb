@@ -2,7 +2,7 @@ class EditorTreasury < ActiveRecord::Base
   include CelebrityModule
 
   # attr_accessible :title, :body
-  belongs_to :board, class_name: CelebrityContentBoard
+  belongs_to :celebrity_content_board
 
   validates :name, :content, :celebrity_content_board_id, presence: true
 

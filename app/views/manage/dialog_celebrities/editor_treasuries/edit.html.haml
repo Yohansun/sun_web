@@ -1,0 +1,17 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity.css.scss'
+  = javascript_include_tag "manage/dialog_celebrities/celebrity_editor_treasuries.js.coffee"
+
+#celebrity_questions
+  %span.ltitle
+    小编宝典管理
+  .mt20.ml20{ style: "color: red;"}
+    = flash[:alert] if flash[:alert]
+= simple_form_for @resource,:url => dialog_celebrities_editor_treasury_path(@resource),:method => "put",:html => {:class => "form-horizonta mt20 ml20"} do |f|
+  = render :partial => "form", :locals => { f: f}
+
+:coffeescript
+  $ ->
+    D.initialize()
+
+
