@@ -1,0 +1,26 @@
+:css
+  input#editor_treasury_recommended { opacity: 255; }
+.control-group.clearfix
+  %label.control-label.fl 分类
+  .controls.fl.ml20
+    = f.input :celebrity_content_board_id, collection: CelebrityContentBoard.all.map{|n|[n.name,n.id]},label: false
+.control-group.clearfix
+  %label.control-label.fl 标题
+  .controls.fl.ml20
+    = f.input :name, label: false
+.control-group.clearfix
+  %label.control-label.fl 简介
+  .controls.fl.ml20
+    = f.input :intro, label: false
+.control-group.clearfix
+  %label.control-label.fl 内容
+  .controls.fl.ml20
+    = f.input :content, label: false
+.control-group.clearfix
+  %label.control-label.fl 推荐
+  .controls.fl.ml20
+    = f.input :recommended, :style => "opacity: 100; display:", label: false
+.control-group.clearfix
+  %label.control-label.fl
+  .controls.fl.ml20
+    = f.button :submit,:value => "保存"

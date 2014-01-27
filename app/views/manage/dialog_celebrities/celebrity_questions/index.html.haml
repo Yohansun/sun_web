@@ -1,0 +1,52 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity.css.scss'
+  = javascript_include_tag "manage/dialog_celebrities/celebrity_questions.js.coffee"
+
+#celebrity_questions
+  %span.ltitle
+    问题分类设置
+  .boards.ml20.mt20.clearfix
+    - @boards.each_with_index do |board,index|
+      %a.board.fl.mr10{ style: "background-color: #{board.color}", href: "/manage/dialog_celebrities/celebrity_questions?board_id=#{board.id}",:id => "border-name-#{board.id}" ,:class => (params[:board_id] || "1" ) == board.id.to_s ? "active" : ""}
+        = board.name
+
+  #board-form.clearfix.mt20
+    .fl.ml20 分类名称
+    .fl.ml10
+      %input#board-name{type: "text", value: @board.name}
+    %a.btn.btn-small.btn-primary.ml15.radius6.fl#save-board 保存
+    .fl.ml10.mr10{style: "border-right: 1px dashed grey; width: 0px;",href: "javascript:;"} &nbsp;
+    %a.btn.btn-small.btn-primary.radius6.fl{ href: "#"} 手记管理
+    %a.btn.btn-small.btn-primary.ml15.radius6.fl{ href: "#"} 宝典管理
+
+  %a#create-scope.btn.btn-small.ml20.radius6{href: "javascript:;"} 创建范围...
+
+  %table#scopes.table1.mt10.ml20
+    %tr
+      %th.w100 操作
+      %th.w150 范围名称
+      %th.leftText.w500 关键字
+    - @board.key_scopes.each do |scope|
+      %tr{data: scope.id}
+        %td.centerText
+          %div.group1
+            = link_to "编辑","javascript:;",:class => "edit-scope"
+            = link_to "删除","javascript:;",:class => "destroy-scope"
+          %div.group2.hide
+            = link_to "保存","javascript:;",:class => "save-scope"
+            = link_to "返回","javascript:;",:class => "return-scope"
+
+        %td
+          %span.scope_name.group1= scope.name
+          %span.scope_name_field.group2.hide
+            %input.scopename.w150{type: "text", value: scope.name}
+        %td
+          %span.scope_key.group1= scope.key_arr.try(:join,",")
+          %span.scope_key_field.group2.hide
+            %input.scopekey.w500{type: "text", value: scope.key_arr.try(:join,",")}
+
+:coffeescript
+  $ ->
+    D.initialize(#{@board_id})
+
+

@@ -1,19 +1,6 @@
 #encoding: utf-8
 Icolor::Application.routes.draw do
-
-  get "celebrity_editor_treasuries/index"
-
-  get "celebrity_editor_treasuries/show"
-
-  get "celebrity_questions/index"
-
-  get "celebrity_questions/new"
-
-  get "celebrity_notes/index"
-
-  get "celebrity_notes/show"
-
-  get "celebrities/index"
+  get "master_profiles/index"
 
   # match "/system/*path" => redirect("http://icolor.dev/dev-assets/logo.jpg")
 
@@ -477,21 +464,7 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
-  get "celebrity_editor_treasuries/index"
-
-  get "celebrity_editor_treasuries/show"
-
-  get "celebrity_questions/index"
-
-  get "celebrity_questions/new"
-
-  get "celebrity_notes/index"
-
-  get "celebrity_notes/show"
-
-  get "celebrities/index"
-
-  get "home/index"
+  get "master_profiles/index"
 
     match "/baicheng/daily_report"=>'baicheng#daily_report'
     resources :image_libraries
@@ -833,6 +806,17 @@ Icolor::Application.routes.draw do
       collection do
         post :save_data
       end
+    end
+
+    namespace :dialog_celebrities do
+      root to: 'home#index', as: 'dialog_celebrities_root'
+      post "create_image", to: 'home#create_image'
+      post "save_data", to: 'home#save_data'
+      match 'celebrity_questions/:action' => 'celebrity_questions', via: [:get, :post]
+      resources :celebrity_notes
+      resources :celebrity_questions
+      resources :editor_treasuries
+      resources :master_profiles
     end
 
     delete "life_memoirs/destroy", to: 'life_memoirs#destroy'

@@ -7,9 +7,12 @@ class CelebrityQuestion < ActiveRecord::Base
   validates_length_of :content, in: 6..100, allow_nil: true
 
   belongs_to :master_profile
-  belongs_to :asker,    class_name: User,  foreign_key: :asker_id
-  belongs_to :replier,  class_name: User,  foreign_key: :replier_id
-  belongs_to :board,    class_name: CelebrityContentBoard
+  belongs_to :user
+  belongs_to :board, class_name: CelebrityContentBoard
+
+  has_many :images, :class_name =>  CelebrityQuestionImage , :as => :resource
+
+  has_many :replies, class_name: CelebrityQuestionReply
 
   scope :replied,       ->{ where(is_replied: true).desc(:updated_at) }
   scope :not_replied,   ->{ where(is_replied: false).deac(:updated_at) }
