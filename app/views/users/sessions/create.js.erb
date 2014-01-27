@@ -1,5 +1,7 @@
 <% if !current_user.common_user? && params[:upload] == "true" %>
   window.parent.location = "<%=new_user_design_path(current_user)%>"
+<% elsif params[:return_to].present? %>
+  window.parent.location = '<%= params[:return_to] %>';
 <% else %>
   window.parent.location.reload();
 <% end %>

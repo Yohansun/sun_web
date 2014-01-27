@@ -26,7 +26,11 @@ Icolor::Application.routes.draw do
     end
   end
 
-  resources :sign_checks
+  resources :sign_checks, only: :index do
+    collection do
+      post :check_in
+    end
+  end
 
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"

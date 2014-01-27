@@ -12,17 +12,16 @@
     .bless-word{font:bold 18px "Microsoft Yahei";}
     .underline{text-decoration:underline;}
     .text-cr{color:#c11308;}
+    #sign_button{background: #fff;width: 218px; height: 152px; top: 261px; right: 255px; opacity: 0;filter:alpha(opacity=0);}
   </style>
 <%- end %>
 <div class="mt10">
-  <img src="<%= asset_path '2014newyear/2014newyear.jpg' %>" alt="" usemap="#qiandao" />
-  <map name="qiandao" id="qiandao">
-    <%- if current_user %>
-      <area shape="rect" coords="665,136,887,289" href="javascript:void(0);" alt="" />
-    <%- else %>
-      <area shape="rect" coords="665,136,887,289" href="/users/sign_in?return_to=<%= sign_checks_url %>" alt="" />
-    <%- end %>
-  </map>
+  <img src="<%= asset_path '2014newyear/2014newyear.jpg' %>" alt="" />
+  <%- if current_user %>
+    <%= link_to '', '/sign_checks/check_in', remote: true, method: :post, id: 'sign_button', class: 'pa' %>
+  <%- else %>
+    <%= link_to '', "/users/sign_in?return_to=#{sign_checks_url}",id: 'sign_button', class: 'pa' %>
+  <%- end %>
 </div>
 
 <!-- winning -->
@@ -49,7 +48,7 @@
        -->
       <!-- Baidu Button END -->
     </div>
-    <p>*完善<a href="#" class="underline">个人信息</a>，以便尽快将礼物送到您的手中~</p>
+    <p>*完善<a href="/users/<%= current_user ? current_user.id : 0 %>/edit" class="underline">个人信息</a>，以便尽快将礼物送到您的手中~</p>
   </div>
 </div>
 <!-- winning -->
@@ -60,7 +59,7 @@
     <div class="">
       <span class="text-cr underline">带小伙伴们一起来玩吧！</span>
       <!-- Baidu Button BEGIN -->
-      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare bdsharebuttonbox">
         <!-- <span class="bds_more">分享到：</span> -->
         <a class="bds_tsina"></a>
         <a class="bds_kaixin001"></a>
@@ -79,3 +78,13 @@
     <p class="bless-word mt20">神龙舞空去，金马祥云来，<br />祝您马年多财气，旺马载运福满天！</p>
   </div>
 </div>
+<script>
+  window._bd_share_config = {
+    common : {
+      bdText : '我在iColor签到抽红包了!100%中奖率!',
+      bdDesc : '',
+      bdUrl : 'http://www.icolor.com.cn/sign_checks',
+      bdPic : "<%= asset_path '2014newyear/share_web_newyear2014.jpg'%>"
+    }
+  }
+</script>
