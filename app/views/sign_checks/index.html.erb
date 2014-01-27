@@ -1,0 +1,81 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .modal-qiandao{width:635px;height:343px;padding:80px 101px;margin-left:-418px;text-align: center;box-shadow: none;border:0;font:16px "Microsoft Yahei";color:#000;}
+    #winning{background: transparent url(<%= asset_path '2014newyear/winning.png' %>) no-repeat center top;}
+    #unwinning{background: transparent url(<%= asset_path '2014newyear/unwinning.png' %>) no-repeat center top;}
+    .modal-qiandao .close{opacity:1;margin:0 -52px 0 0;}
+    .modal-qiandao .title{font:bold 28px "Microsoft Yahei";padding-top:60px;}
+    .modal-qiandao .modal-body a{color:#000;}
+    .modal-qiandao #bdshare,
+    .modal-qiandao .bds_tools a{float: none;display: inline-block;*display:inline;zoom:1;vertical-align: middle;}
+    .modal-qiandao .bds_tools a{height:20px;}
+    .bless-word{font:bold 18px "Microsoft Yahei";}
+    .underline{text-decoration:underline;}
+    .text-cr{color:#c11308;}
+  </style>
+<%- end %>
+<div class="mt10">
+  <img src="<%= asset_path '2014newyear/2014newyear.jpg' %>" alt="" usemap="#qiandao" />
+  <map name="qiandao" id="qiandao">
+    <%- if current_user %>
+      <area shape="rect" coords="665,136,887,289" href="javascript:void(0);" alt="" />
+    <%- else %>
+      <area shape="rect" coords="665,136,887,289" href="/users/sign_in?return_to=<%= sign_checks_url %>" alt="" />
+    <%- end %>
+  </map>
+</div>
+
+<!-- winning -->
+<div class="modal hide fade modal-qiandao" id="winning">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="<%= asset_path '2014newyear/close.gif' %>" alt="" /></button>
+  <div class="modal-body">
+    <p class="title text-cr">恭喜您！获得icolor手机壳一个！</p>
+    <div class="">
+      <span class="text-cr underline">带小伙伴们一起来玩吧！</span>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <!-- <span class="bds_more">分享到：</span> -->
+        <a class="bds_tsina"></a>
+        <a class="bds_kaixin001"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_qzone"></a>
+      </div>
+      <!--
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+       -->
+      <!-- Baidu Button END -->
+    </div>
+    <p>*完善<a href="#" class="underline">个人信息</a>，以便尽快将礼物送到您的手中~</p>
+  </div>
+</div>
+<!-- winning -->
+<div class="modal hide fade modal-qiandao" id="unwinning">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="<%= asset_path '2014newyear/close.gif' %>" alt="" /></button>
+  <div class="modal-body">
+    <p class="title text-cr">恭喜您！获得icolor新春祝福！</p>
+    <div class="">
+      <span class="text-cr underline">带小伙伴们一起来玩吧！</span>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <!-- <span class="bds_more">分享到：</span> -->
+        <a class="bds_tsina"></a>
+        <a class="bds_kaixin001"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_qzone"></a>
+      </div>
+      <!--
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+       -->
+      <!-- Baidu Button END -->
+    </div>
+    <p class="bless-word mt20">神龙舞空去，金马祥云来，<br />祝您马年多财气，旺马载运福满天！</p>
+  </div>
+</div>
