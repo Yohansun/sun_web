@@ -28,6 +28,6 @@ class HomeSweeper < ActionController::Caching::Sweeper
                       }
       }
     }
-    RestClient.post('https://r.chinacache.com/content/refresh', params)
+    # RestClient.post('https://r.chinacache.com/content/refresh', params)
   end
 end
