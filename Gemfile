@@ -8,6 +8,10 @@ gem 'mysql2'
 
 gem 'json'
 
+gem 'haml',           '~> 3.1.4'
+gem 'haml-rails',     '~> 0.3.4'
+gem 'coffee-filter'
+
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
