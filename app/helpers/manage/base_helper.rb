@@ -11,6 +11,8 @@ module Manage::BaseHelper
 
 	def nav_path
 		c_name = case controller_name
+      when /celebrity_questions/
+        'dialog_celebrity'
       when /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals/
       	'home'
       when /channel_tips/
@@ -25,6 +27,8 @@ module Manage::BaseHelper
         'designer_events'
       when /minisite_counters/
         'minisite_counters'
+      when /home|editor_treasuries|master_profiles/
+        'dialog_celebrity'
       else
       	'nothing'
     end

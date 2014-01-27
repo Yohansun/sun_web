@@ -6,7 +6,7 @@ class MasterProfile < ActiveRecord::Base
 
   belongs_to :board, class_name: CelebrityContentBoard
   has_many   :questions, class_name: CelebrityQuestion
-  has_many   :note,      class_name: CelebrityNote
+  has_many   :notes,      class_name: CelebrityNote
 
   attr_accessor :time
   default_scope order("published_at DESC")
