@@ -74,7 +74,8 @@ gem 'savon'
 gem 'collections'
 
 # API
-gem 'grape'
+gem 'grape', "0.2.1"
+gem 'grape-entity'
 gem 'uuidtools'
 
 #自动补全
@@ -82,7 +83,7 @@ gem 'twitter-bootstrap-rails', '>= 2.1.9'
 
 gem 'awesome_nested_set'
 
-gem 'ruby-pinyin'
+gem 'ruby-pinyin', '0.2.4'
 
 gem "abacus_count"
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"

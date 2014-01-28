@@ -29,4 +29,3 @@ $ ->
               $(item).parent().parent().parent().remove() for item in $("input.master_select:checked")
 
   window.D = D = new DialogCelebrity(window,window.document,window.document.body)
-
