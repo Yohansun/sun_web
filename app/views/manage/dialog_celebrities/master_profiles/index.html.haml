@@ -1,2 +1,60 @@
-%h1 Manage::DialogCelebrities::MasterProfiles#index
-%p Find me in app/views/manage/dialog_celebrities/master_profiles/index.html.haml
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity.css.scss'
+  = javascript_include_tag "manage/dialog_celebrities/master_profiles.js.coffee"
+
+#celebrity_questions
+  %span.ltitle
+    名人管理
+
+  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/editor_treasuries"}
+    %select.fl{name: "board_id"}
+      %option{value: ""} 选择分类
+      - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
+        %option{value: board.id}= board.name
+    .ml10.fl= ".and."
+    %input.fl.ml10.w150{type: "text", name: "name", placeholder: "输入姓名"}
+    %input{type: "hidden", value: "true", name: "query"}
+    %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
+    .fl.ml10.mr10{style: "border-right: 1px dashed grey; width: 0px;",href: "javascript:;"} &nbsp;
+    %a.btn.btn-small.btn-primary.radius6.fl{ href: "#"} 手记管理
+    %a.btn.btn-small.btn-primary.ml15.radius6.fl{ href: "#"} 宝典管理
+  .ml10
+    %hr.w500{style: "border-style: dashed;"}/
+  .mt10
+    %a.btn.btn-small.ml20.radius6#create-board{href: new_dialog_celebrities_master_profile_path} 创建名人...
+    %a.btn.btn-small.ml10.radius6#destroy-board#delete_all{href: "javascript:;"} 删除名人...
+
+  %table#ett.table1.mt10.ml20
+    %tr
+      %th.w32
+      %th.w200 操作
+      %th.w100 姓名
+      %th.w100 分类
+      %th.w100 地区
+      %th.w100 板块
+      %th.w100 最后修改日期
+    - @collection.each do |_item|
+      %tr
+        %td.centerText
+          %label
+            %input.master_select{type: "checkbox", id: "master_#{_item.id}"}
+            .lbl
+        %td
+          简介
+          访谈
+          寄语
+          手记
+          作品
+        %td= _item.name
+        %td= _item.board.try(:name)
+        %td= _item.nationality
+        %td= _item.mtype == 0 ? "名家设计" : "名人在线"
+        %td= _item.updated_at.strftime "%y-%m-%d"
+  .pager.fl.ml20
+    = paginate @collection
+
+:coffeescript
+  $ ->
+    D.initialize()
+
+
