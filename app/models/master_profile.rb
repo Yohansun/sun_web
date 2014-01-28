@@ -4,7 +4,7 @@ class MasterProfile < ActiveRecord::Base
   belongs_to :subject
   has_many :master_designs
 
-  belongs_to :board, class_name: CelebrityContentBoard
+  belongs_to :board, class_name: CelebrityContentBoard, foreign_key: :celebrity_content_board_id
   has_many   :questions, class_name: CelebrityQuestion
   has_many   :notes,      class_name: CelebrityNote
 
@@ -25,5 +25,9 @@ class MasterProfile < ActiveRecord::Base
 
   def self.tag_list
     ['海外','港澳台','中国大陆']
+  end
+
+  def self.interview_content_type_list
+    ['问答类型访谈','文章类型访谈']
   end
 end

@@ -822,6 +822,7 @@ Icolor::Application.routes.draw do
       post "create_image", to: 'home#create_image'
       post "save_data", to: 'home#save_data'
       match 'celebrity_questions/:action' => 'celebrity_questions', via: [:get, :post]
+      match 'master_profiles/:action' => 'master_profiles', via: [:get, :post]
       resources :celebrity_notes
       resources :celebrity_questions
       resources :editor_treasuries
