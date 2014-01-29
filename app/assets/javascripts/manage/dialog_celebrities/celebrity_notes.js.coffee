@@ -10,12 +10,13 @@ $ ->
       $("body").on "change","input#manage_dialog_celebrity_note_thumb", ->
         $(this).parent().parent().find(".upload_selected_filename").text $(this).val()
 
-      $('.xheditor').xheditor(
-        upImgUrl:'/home/upload_img',
-        upImgExt: "jpg,jpeg,gif,png",
-        html5Upload: false,
-        width: 990,
-        height: 300
-      )
+      if $('body').hasClass('xheditor')
+        $('.xheditor').xheditor(
+          upImgUrl:'/home/upload_img',
+          upImgExt: "jpg,jpeg,gif,png",
+          html5Upload: false,
+          width: 990,
+          height: 300
+        )
 
   window.D = D = new DialogCelebrity(window,window.document,window.document.body)
