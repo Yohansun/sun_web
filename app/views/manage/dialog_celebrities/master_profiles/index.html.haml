@@ -6,7 +6,7 @@
   %span.ltitle
     名人管理
 
-  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/editor_treasuries"}
+  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/master_profiles"}
     %select.fl{name: "board_id"}
       %option{value: ""} 选择分类
       - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
@@ -27,7 +27,7 @@
   %table#ett.table1.mt10.ml20
     %tr
       %th.w32
-      %th.w200 操作
+      %th.w300 操作
       %th.w100 姓名
       %th.w100 分类
       %th.w100 地区
@@ -40,11 +40,11 @@
             %input.master_select{type: "checkbox", id: "master_#{_item.id}"}
             .lbl
         %td
-          简介
-          访谈
-          寄语
-          手记
-          作品
+          = link_to "简介(#{_item.intro.present? ? '1' : '0'})","#"
+          = link_to "访谈(#{_item.interview_content.present? ? '1' : '0'})","#"
+          = link_to "寄语(#{_item.message.present? ? '1' : '0'})","#"
+          = link_to "手记(#{_item.notes.count})","#"
+          = link_to "作品(#{_item.master_designs.count})","#"
         %td= _item.name
         %td= _item.board.try(:name)
         %td= _item.nationality

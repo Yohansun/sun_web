@@ -15,10 +15,10 @@ module Manage::BaseHelper
         'design_images'
       when /life_memoirs|life_info/
         'life'
+      when /home|editor_treasuries|master_profiles|celebrity_notes/
+        'dialog_celebrity'
       when /designer_events|other_events|event_kvs/
         'designer_events'
-      when /home|editor_treasuries|master_profiles/
-        'dialog_celebrity'
       else
       	'nothing'
     end
