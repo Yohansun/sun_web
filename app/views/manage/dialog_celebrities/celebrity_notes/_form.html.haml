@@ -1,6 +1,5 @@
 - content_for :head do
   = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
-  = javascript_include_tag '/xheditor/xheditor-1.1.13-zh-cn.min.js'
 
 - content_for :tail do
   = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
@@ -8,8 +7,7 @@
                            "upload_image/jquery.fileupload"
 
 :css
-  input#editor_treasury_recommended { opacity: 255; }
-
+  input#celebrity_note_recommended { opacity: 255; }
 
 .control-group.clearfix
   %label.control-label.fl 缩略图(上传尺寸: 280x145 )
@@ -18,8 +16,12 @@
     %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
       %i.icon-plus.icon-white
       %span 上传缩略图
-      %input#manage_dialog_editor_treasury_thumb{type: "file",name: "editor_treasury[thumb]",multiple: ""}
+      %input#manage_dialog_celebrity_note_thumb{type: "file",name: "celebrity_note[thumb]",multiple: ""}
 
+.control-group.clearfix
+  %label.control-label.fl 作者
+  .controls.fl.ml20
+    = f.input :master_profile_id, collection: MasterProfile.where(:mtype=>1).map{|n|[n.name,n.id]},label: false
 .control-group.clearfix
   %label.control-label.fl 分类
   .controls.fl.ml20
@@ -35,7 +37,7 @@
 .control-group.clearfix
   %label.control-label.fl 内容
   .controls.fl.ml20
-    = f.input :content, label: false, :input_html => { class: "xheditor", style: "width: 800px;" }
+    = f.input :content, as: :text, label: false, :input_html => { class: "xheditor", style: "width: 800px;" }
 .control-group.clearfix
   %label.control-label.fl 推荐
   .controls.fl.ml20
@@ -44,3 +46,4 @@
   %label.control-label.fl
   .controls.fl.ml20
     = f.button :submit,:value => "保存"
+

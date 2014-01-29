@@ -11,22 +11,18 @@
 
 - if params[:step].blank?
   .control-group.clearfix
-    %label.control-label.fl 名人头像1(上传尺寸: 150x160, 带灰框)
+    %label.control-label.fl 名人头像(上传尺寸: 150x160, 带灰框)
     .controls.fl.ml20
       %span.upload_selected_filename.fl.mr10
       %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
         %i.icon-plus.icon-white
-        %span 上传图片1...
-        %input#manage_dialog_master_profile_fileupload1{type: "file",name: "master_profile[preview_img_out]",multiple: ""}
+        %span 上传头像
+        %input#manage_dialog_master_profile_avatar{type: "file",name: "master_profile[avatar]",multiple: ""}
 
   .control-group.clearfix
-    %label.control-label.fl 名人头像2(上传尺寸: 150x160, 带灰框)
-    .controls.fl.ml20
-      %span.upload_selected_filename.fl.mr10
-      %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
-        %i.icon-plus.icon-white
-        %span 上传图片2...
-        %input#manage_dialog_master_profile_fileupload2{type: "file",name: "master_profile[preview_img_in]",multiple: ""}
+    %label.control-label.fl 板块
+    .controls.ml20.fl
+      = f.input :mtype, collection: [["名人在线",1],["名家设计",0]],label: false
 
   .control-group.clearfix
     .fl

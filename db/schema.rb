@@ -139,8 +139,12 @@ ActiveRecord::Schema.define(:version => 20140218031202) do
 
   create_table "celebrity_notes", :force => true do |t|
     t.string   "name",                                         :null => false
+    t.text     "intro"
     t.text     "content"
-    t.string   "thumb",                      :default => "",   :null => false
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
     t.boolean  "recommended",                :default => true, :null => false
     t.integer  "master_profile_id"
     t.integer  "celebrity_content_board_id"
@@ -491,6 +495,10 @@ ActiveRecord::Schema.define(:version => 20140218031202) do
     t.string   "name",                                         :null => false
     t.text     "content"
     t.text     "intro"
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
     t.boolean  "recommended",                :default => true, :null => false
     t.integer  "celebrity_content_board_id"
     t.datetime "created_at",                                   :null => false
@@ -1183,6 +1191,10 @@ ActiveRecord::Schema.define(:version => 20140218031202) do
     t.text     "message"
     t.integer  "mtype",                        :default => 0
     t.integer  "celebrity_content_board_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "master_profiles", ["celebrity_content_board_id"], :name => "index_master_profiles_on_celebrity_content_board_id"

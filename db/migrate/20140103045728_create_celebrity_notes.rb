@@ -2,8 +2,12 @@ class CreateCelebrityNotes < ActiveRecord::Migration
   def change
     create_table :celebrity_notes do |t|
       t.string :name, null: false
+      t.text :intro
       t.text   :content
-      t.string :thumb, default: "", null: false
+      t.string :thumb_file_name
+      t.string :thumb_content_type
+      t.integer :thumb_file_size
+      t.datetime :thumb_updated_at
       t.boolean :recommended, default: true, null: false
 
       t.references :master_profile
