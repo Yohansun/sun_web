@@ -5,6 +5,10 @@
 #celebrity_questions
   %span.ltitle
     名人管理
+  .boards.ml20.mt20.clearfix
+    %a.board.fl.mr10{href: "#", class: params[:step].blank? ? "active" : ""} 名人简介
+    %a.board.fl.mr10{href: "#", class: params[:step] == "2" ? "active" : ""} 名人访谈
+    %a.board.fl.mr10{href: "#", class: params[:step] == "3" ? "active" : ""} 名人寄语
   .mt20.ml20{ style: "color: red;"}
     = flash[:alert] if flash[:alert]
 = simple_form_for @resource,:url => dialog_celebrities_master_profiles_path,:method => "post",:html => {:class => "form-horizonta mt20 ml20",:multipart => true} do |f|

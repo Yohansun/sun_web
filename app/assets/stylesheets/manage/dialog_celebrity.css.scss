@@ -85,4 +85,16 @@ table.table1 {
   }
 }
 
+// 名人管理
+#celebrity_questions {
+  margin-top: 20px;
+  .boards {
+    a.board {
+      padding: 6px 16px; color: white; font-size: 14px; display: block; text-decoration: none;
+      color: rgb(102,102,102); border: 1px solid rgb(102,102,102);
+    }
+    a.active { padding: 10px 27px; color: white; background-color: rgb(102,102,102);}
+  }
+}
+
 
