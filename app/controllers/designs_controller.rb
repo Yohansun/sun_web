@@ -37,7 +37,7 @@ class DesignsController < ApplicationController
 
   def index
     if @user
-      @designs = @user.designs.joins(:design_images).order("designs.id desc").page(params[:page]).per(8)
+      @designs = @user.designs.includes(:design_images).order("designs.id desc").page(params[:page]).per(8)
       load_skin
     else
       @designs = Design.includes(:user).joins(:design_images).where("users.id is not null").group("designs.id").order("designs.id desc")
