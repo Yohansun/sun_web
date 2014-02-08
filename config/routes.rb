@@ -855,4 +855,9 @@ Icolor::Application.routes.draw do
     end
   end
 
+  #2014minisite
+  scope '/love_story', :module => 'love_story' do
+    root to: 'home#index', as: 'love_story_root'
+  end
+
 end
