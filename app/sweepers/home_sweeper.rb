@@ -1,6 +1,6 @@
 require 'rest_client'
 class HomeSweeper < ActionController::Caching::Sweeper
-  observe HomeRecommend, HomeKv, MasterProfile, HomeBanner, FitLiteral, FitImage, Question, OwnerEnter,
+  observe HomeRecommend, HomeKv, HomeBanner, FitLiteral, FitImage, Question, OwnerEnter,
           HomeImageLibPhoto, HomeDesignShow, HomeLifeVideo, IBanner
 
   def after_create(home)
