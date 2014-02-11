@@ -143,6 +143,17 @@
                   <span class="label label-blue">邮编必须为数字且只能6位</span>
                 </div>
               </div>
+              <% unless current_user.common_user? %>
+                <div class="control-group">
+                  <label class="control-label smaller" for="">
+                    设计报价
+                  </label>
+                  <div class="controls smaller">
+                    <%= select_tag 'user[price]', options_for_select(["100以下","100-200","200-300","300-500","500以上"], current_user.price), :class => "input-small", :prompt => "请选择" %> &nbsp; RMB/平方米
+                    <span class="label label-blue">iColor会根据您的选择向业主推荐</span>
+                  </div>
+                </div>
+              <% end %>
               <div class="control-group">
                 <label class="control-label smaller" for="">
                   在线联系方式
