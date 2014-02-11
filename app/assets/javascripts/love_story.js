@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require love_story/bootstrap
 //= require love_story/main
+//= require love_story/masonry.min
+//= require love_story/jquery.carouFredSel-6.2.1-packed
