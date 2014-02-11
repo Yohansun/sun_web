@@ -13,3 +13,4 @@
 //= require love_story/jquery
 //= require jquery_ujs
 //= require love_story/bootstrap
+//= require love_story/main

@@ -1,0 +1,462 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function(){
+      if (<%= params[:upload_success] %>) {
+        window.upload_flag = true;
+      };
+
+      if (window.upload_flag) {
+        $('#upload_success').modal({show:true});
+      };
+
+      $('#check_my_story').click(function(event) {
+        $('#upload_success').modal('hide');
+        $('#havepics').modal({show:true});
+      });
+    })
+  </script>
+<%- end %>
+<div class="container-fluid story">
+  <div class="banner">
+    <!-- <a href="#" class="btn pa"></a> -->
+    <div class="wrapper">
+      <img src="images/story/story-banner2.jpg" alt="" usemap="#story_kv" />
+      <map name="story_kv" name="story_kv">
+        <area shape="rect" coords="56,253,250,290" href="#" alt="" />
+      </map>
+    </div>
+  </div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <div class="p010 clearfix">
+        <div class="left_big pull-left">
+          <div class="index_main">
+            <form action="" class="form_search nomargin form-inline">
+              <strong class="label-text">地区:</strong>
+              <select class="input-small" name="" id="">
+                <option value="">请选择省</option>
+              </select>
+              <select class="input-small" name="" id="">
+                <option value="">请选择市</option>
+              </select>
+              <strong class="label-text">故事来源:</strong>
+              <select class="input-small" name="" id="">
+                <option value="">请选择</option>
+                <option value="">icolor上传</option>
+                <option value="">新浪微博上传</option>
+              </select>
+              <button class="btn">确定</button>
+              <div class="pull-right">
+                <input type="text" class="nomargin pull-left" placeholder="搜名字" />
+                <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
+              </div>
+            </form>
+          </div>
+          <div class="mt10"><a href="#" class="icon-btn icon-share_story">分享爱的故事</a></div>
+          <div class="list">
+            <div class="thumbnails js-msnry">
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">Jane</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  男孩和女孩是一对情侣，女孩喜欢感受下雨，男孩总是在下雨的时候为女孩撑伞，伞的大半部分都是遮着女孩的，每次雨水都打湿了男孩的身子，他没说什么，只是默默看着女孩陶醉的脸。他觉得很幸福，女孩也觉得很幸福。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <!-- <a href="javascript:;" class="icon-btn icon-pic"></a> -->
+                <h5 class="author"><a class="text-blue" href="#nohavepics" data-toggle="modal">陈启旺</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  结婚那天，老婆用买戒指的钱给我买了一款手机。那zz着手机的响铃。我们觉得，生活就像这铃声，响亮、悦耳，充满着憧憬和希望。从那天开始，我常常接到她的电话：“老公，下班了买点菜回家。”“老公，我想你，我爱你。”“老公，晚上一起去妈妈家吃饭。”我的心里十分温暖。有一次，我忘了给手机充电，又恰好陪领导到基层，应酬到半夜才回到家，推开房门一看，我发现老婆早已哭红了眼睛。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">Jane</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  男孩和女孩是一对情侣，女孩喜欢感受下雨，男孩总是在下雨的时候为女孩撑伞，伞的大半部分都是遮着女孩的，每次雨水都打湿了男孩的身子，他没说什么，只是默默看着女孩陶醉的脸。他觉得很幸福，女孩也觉得很幸福。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">陈启旺</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  结婚那天，老婆用买戒指的钱给我买了一款手机。那zz着手机的响铃。我们觉得，生活就像这铃声，响亮、悦耳，充满着憧憬和希望。从那天开始，我常常接到她的电话：“老公，下班了买点菜回家。”“老公，我想你，我爱你。”“老公，晚上一起去妈妈家吃饭。”我的心里十分温暖。有一次，我忘了给手机充电，又恰好陪领导到基层，应酬到半夜才回到家，推开房门一看，我发现老婆早已哭红了眼睛。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">Jane</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  男孩和女孩是一对情侣，女孩喜欢感受下雨，男孩总是在下雨的时候为女孩撑伞，伞的大半部分都是遮着女孩的，每次雨水都打湿了男孩的身子，他没说什么，只是默默看着女孩陶醉的脸。他觉得很幸福，女孩也觉得很幸福。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">陈启旺</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  结婚那天，老婆用买戒指的钱给我买了一款手机。那zz着手机的响铃。我们觉得，生活就像这铃声，响亮、悦耳，充满着憧憬和希望。从那天开始，我常常接到她的电话：“老公，下班了买点菜回家。”“老公，我想你，我爱你。”“老公，晚上一起去妈妈家吃饭。”我的心里十分温暖。有一次，我忘了给手机充电，又恰好陪领导到基层，应酬到半夜才回到家，推开房门一看，我发现老婆早已哭红了眼睛。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">Jane</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  男孩和女孩是一对情侣，女孩喜欢感受下雨，男孩总是在下雨的时候为女孩撑伞，伞的大半部分都是遮着女孩的，每次雨水都打湿了男孩的身子，他没说什么，只是默默看着女孩陶醉的脸。他觉得很幸福，女孩也觉得很幸福。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">陈启旺</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  结婚那天，老婆用买戒指的钱给我买了一款手机。那zz着手机的响铃。我们觉得，生活就像这铃声，响亮、悦耳，充满着憧憬和希望。从那天开始，我常常接到她的电话：“老公，下班了买点菜回家。”“老公，我想你，我爱你。”“老公，晚上一起去妈妈家吃饭。”我的心里十分温暖。有一次，我忘了给手机充电，又恰好陪领导到基层，应酬到半夜才回到家，推开房门一看，我发现老婆早已哭红了眼睛。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">陈启旺</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  结婚那天，老婆用买戒指的钱给我买了一款手机。那zz着手机的响铃。我们觉得，生活就像这铃声，响亮、悦耳，充满着憧憬和希望。从那天开始，我常常接到她的电话：“老公，下班了买点菜回家。”“老公，我想你，我爱你。”“老公，晚上一起去妈妈家吃饭。”我的心里十分温暖。有一次，我忘了给手机充电，又恰好陪领导到基层，应酬到半夜才回到家，推开房门一看，我发现老婆早已哭红了眼睛。
+                </p>
+              </div>
+              <div class="span3 thumbnail">
+                <a href="javascript:;" class="icon-btn icon-pic"></a>
+                <h5 class="author"><a class="text-blue" href="#havepics" data-toggle="modal">Jane</a></h5>
+                <span class="time">2014-01-27</span>•<span class="address">上海</span>
+                <p class="dot_linet1 paragraph">
+                  男孩和女孩是一对情侣，女孩喜欢感受下雨，男孩总是在下雨的时候为女孩撑伞，伞的大半部分都是遮着女孩的，每次雨水都打湿了男孩的身子，他没说什么，只是默默看着女孩陶醉的脸。他觉得很幸福，女孩也觉得很幸福。
+                </p>
+              </div>
+            </div>
+            <div class="pagination pagination-centered">
+              <ul>
+                <!-- <li class="disabled"><a href="#">上一页</a></li> -->
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a class="noborder nomargin nopadding" href="#">...</a></li>
+                <li><a href="#">下一页</a></li>
+                <li><a href="#">最后一页</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="right_small pull-right">
+          <div class="big_menu index_main">
+            <div class="media media_chann">
+              <a class="pull-left" href="#">
+                <i class="icon-chann icon-chann_imgbase"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="#">装修图库</a></h4>
+                <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="#">
+                <i class="icon-chann icon-chann_match"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="#">色彩配搭</a></h4>
+                <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="#">
+                <i class="icon-chann icon-chann_fresh2"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="#">立邦刷新服务</a></h4>
+                <p class="media_con nomargin">对话顶尖设计大师，提升家装专业眼界！</p>
+              </div>
+            </div>
+          </div>
+          <div class="request_box mt10">
+            <form class="request_form form-inline">
+              <div class="form-inline option">
+                <label for="" class="control-label">姓名<span class="text-error">*</span></label>
+                <input type="text" class="input-small" id="" placeholder="">
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">电话<span class="text-error">*</span></label>
+                <input type="text" class="input-small" id="" placeholder="">
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">装修面积<span class="text-error">*</span></label>
+                <input type="text" class="input-small" id="" placeholder="">
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">期望风格</label>
+                <select class="input-small">
+                  <option>请选择</option>
+                </select>
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">楼盘名称<span class="text-error">*</span></label>
+                <input type="text" class="input-small" id="" placeholder="">
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">房型<span class="text-error">*</span></label>
+                <select class="input-small">
+                  <option>请选择</option>
+                </select>
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">装修区域<span class="text-error">*</span></label>
+                <select class="" style="width:85px;">
+                  <option>请选择</option>
+                </select>
+                <select class="" style="width:58px;">
+                  <option>请选择</option>
+                </select>
+                <select class="" style="width:85px;margin-left:67px;">
+                  <option>请选择</option>
+                </select>
+              </div>
+              <div class="form-inline option">
+                <label for="" class="control-label">装修预算<span class="text-error">*</span></label>
+                <select class="input-small">
+                  <option>请选择</option>
+                </select>
+              </div>
+              <div class="channel1 text-center dott1">
+                <input type="submit" value="" class="input_submit">
+              </div>
+            </form>
+          </div>
+          <div class="mt10">
+            <a href="#"><img src="images/ads/ads1.jpg" alt="" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="mt25">
+        <a href="#"><img src="images/ads/ads2.jpg" alt="" /></a>
+      </div>
+      <div class="p010 ul_dot_lists mt25 clearfix">
+        <div class="ul_dot_list pull-left">
+          <h5><a href="#" target="_blank" class="pull-right a_hover_red"><small class="muted">更多></small></a>装修图库精选</h5>
+          <ul class="ul_dot">
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              来自设计之星小毕的小情调婚房设计</a></li>
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              110 平米时尚混搭 田园气质童话梦想</a></li>
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              淡雅色彩配搭让你在夏日享清凉</a></li>
+            <li class="noborder"><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              都市静谧空间 80平森系素雅两居</a></li>
+          </ul>
+        </div>
+        <div class="ul_dot_list pull-left">
+          <h5><a href="#" target="_blank" class="pull-right a_hover_red"><small class="muted">更多></small></a>设计之星作品精选</h5>
+          <ul class="ul_dot">
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              来自设计之星小毕的小情调婚房设计</a></li>
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              110 平米时尚混搭 田园气质童话梦想</a></li>
+            <li><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              淡雅色彩配搭让你在夏日享清凉</a></li>
+            <li class="noborder"><a href="#" target="_blank">
+              <i class="icon-ul_dot"></i>
+              都市静谧空间 80平森系素雅两居</a></li>
+          </ul>
+        </div>
+        <div class="pull-right"><a href="#"><img src="images/ads/ads1.jpg"></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<div class="modal hide fade story_modal" id="nohavepics">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
+    <div class="clearfix">
+      <a href="#" class="pull-left story_photo"><img src="images/story/modal/story_modal_photo.jpg" alt="" /></a>
+      <div class="author_name">
+        <strong class="mr5">小丸子</strong>
+        <small><i class="icon-i16 icon-map-marker"></i>上海</small>
+        <span class="help-block nomargin">
+          上传于 2014-03-08
+          <div class="pull-right">
+            <span class="pull-left  browse_number">浏览数：8893</span>
+            <!-- Baidu Button BEGIN -->
+            <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left">
+              <!-- <span class="bds_more">分享到：</span> -->
+              <a class="bds_qzone"></a>
+              <a class="bds_tsina"></a>
+              <a class="bds_tqq"></a>
+              <a class="bds_renren"></a>
+              <!-- <a class="bds_t163"></a> -->
+              <a class="bds_more"></a>
+            </span>
+            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+            <script type="text/javascript" id="bdshell_js"></script>
+            <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+            </script>
+            <!-- Baidu Button END -->
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <p class="content dot_linet1">
+      我与Dany相恋了3年，但见面的日子还不足一年，不过，这也一点也不会影响我们的情感，反而让我们更珍惜对方。Dany是个典型的双鱼座，长长的软发，笑起来很温柔，她是个浪漫而充满幻想的女孩，时常向我倾诉她幻想中那个我们的家，小到一束花的位置，也能绘声绘色的描述半天，我把这一切都一一记在心里。还有半年，她就要学成归国，我想给她一个大大的惊喜，米色的窗帘，大大的飘窗，还有墙角的百合花，我要把她的想象变全为现实，我想让她成为我的妻子。
+    </p>
+    <p class="tips text-center dot_linet1">
+      【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
+      <a href="#"><i class="icon-i16 icon-enter"></i></a>
+    </p>
+    <div class="sliders pr">
+      <div class="slider_container" id="">
+        <ul class="unstyled clearfix nomargin" id="slider_designer">
+          <li><a href="#"><img src="images/story/modal/designer1.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/designer2.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/designer3.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/designer4.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/designer1.jpg" alt="" /></a></li>
+        </ul>
+        <a href="javascript:;" class="slider-prev">prev</a>
+        <a href="javascript:;" class="slider-next">next</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal hide fade story_modal" id="havepics">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
+    <div class="clearfix">
+      <a href="#" class="pull-left story_photo"><img src="images/story/modal/story_modal_photo.jpg" alt="" /></a>
+      <div class="author_name">
+        <strong class="mr5">小丸子</strong>
+        <small><i class="icon-i16 icon-map-marker"></i>上海</small>
+        <span class="help-block nomargin">
+          上传于 2014-03-08
+          <div class="pull-right">
+            <span class="pull-left  browse_number">浏览数：8893</span>
+            <!-- Baidu Button BEGIN -->
+            <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left">
+              <!-- <span class="bds_more">分享到：</span> -->
+              <a class="bds_qzone"></a>
+              <a class="bds_tsina"></a>
+              <a class="bds_tqq"></a>
+              <a class="bds_renren"></a>
+              <!-- <a class="bds_t163"></a> -->
+              <a class="bds_more"></a>
+            </span>
+            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+            <script type="text/javascript" id="bdshell_js"></script>
+            <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+            </script>
+            <!-- Baidu Button END -->
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <p class="content dot_linet1">
+      我与Dany相恋了3年，但见面的日子还不足一年，不过，这也一点也不会影响我们的情感，反而让我们更珍惜对方。Dany是个典型的双鱼座，长长的软发，笑起来很温柔，她是个浪漫而充满幻想的女孩，时常向我倾诉她幻想中那个我们的家，小到一束花的位置，也能绘声绘色的描述半天，我把这一切都一一记在心里。还有半年，她就要学成归国，我想给她一个大大的惊喜，米色的窗帘，大大的飘窗，还有墙角的百合花，我要把她的想象变全为现实，我想让她成为我的妻子。
+    </p>
+    <div class="sliders pr">
+      <div class="slider_container" id="">
+        <ul class="unstyled clearfix nomargin" id="slider_pics">
+          <li><a href="#"><img src="images/story/modal/work1.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/work2.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/work3.jpg" alt="" /></a></li>
+          <li><a href="#"><img src="images/story/modal/work1.jpg" alt="" /></a></li>
+        </ul>
+        <a href="javascript:;" class="slider-prev">prev</a>
+        <a href="javascript:;" class="slider-next">next</a>
+      </div>
+    </div>
+
+    <p class="tips text-center mt25">
+      【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
+      <a href="#"><i class="icon-i16 icon-enter"></i></a>
+    </p>
+  </div>
+</div>
+<div class="modal hide fade story_modal" id="upload_success">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
+  </div>
+  <div class="modal-body">
+    <h2 class="text-center text-green tip">您已成功上传爱的故事</h2>
+    <div class="text-center btn_group">
+      <a href="javascript:void(0);" class="btn_check" id="check_my_story">查看我的故事</a>
+      <a href="javascript:void(0);" class="btn_custom" id="check_custom">定制我的私人设计师</a>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="js/masonry.min.js"></script>
+<script type="text/javascript" src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript">
+$(window).load(function () {
+  $('.js-msnry').masonry();
+
+  $('.story_modal').on('shown', function () {
+    $('#slider_pics').carouFredSel({
+      items               : 3,
+      direction           : "left",
+      scroll : {
+        items           : 1,
+        duration        : 400,
+        pauseOnHover    : true
+      },
+      prev: {
+        button: '#havepics .slider-prev'
+      },
+      next: {
+        button: '#havepics .slider-next'
+      },
+      auto: {
+        play            : false
+      }
+    });
+    $('#slider_designer').carouFredSel({
+      items               : 4,
+      direction           : "left",
+      scroll : {
+        items           : 1,
+        duration        : 400,
+        pauseOnHover    : true
+      },
+      prev: {
+        button: '#nohavepics .slider-prev'
+      },
+      next: {
+        button: '#nohavepics .slider-next'
+      },
+      auto: {
+        play            : false
+      }
+    });
+  });
+});
+</script>

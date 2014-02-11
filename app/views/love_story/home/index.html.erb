@@ -16,10 +16,10 @@
         <%= image_tag 'love_story/images/index/index-kv2.png', usemap: '#map-kv', class: 'index-kv', alt: '' %>
         <div class="text-center">
           <%- if current_user %>
-            <a href="发布爱的故事页面" target="_blank"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
+            <a href="<%= new_love_story_path %>" target="_blank"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
             <a href="<%= new_user_design_path(current_user) %>" target="_blank"><%= image_tag 'love_story/images/index/index-kv-btn2.png' %></a>
           <%- else %>
-            <a href="/users/sign_in?return_to=发布爱的故事页面" target="_blank" data-confirm="登录网站后才能分享爱的故事,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
+            <a href="/users/sign_in?return_to=<%= new_love_story_url %>" target="_blank" data-confirm="登录网站后才能分享爱的故事,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
             <a href="/users/sign_in?return=true" target="_blank" data-confirm="登录网站后才能上传设计作品,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn2.png' %></a>
           <%- end %>
         </div>

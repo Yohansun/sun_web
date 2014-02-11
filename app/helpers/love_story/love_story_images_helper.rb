@@ -1,0 +1,2 @@
+module LoveStory::LoveStoryImagesHelper
+end
