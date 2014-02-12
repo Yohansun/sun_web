@@ -859,7 +859,11 @@ Icolor::Application.routes.draw do
   scope '/love_story', :module => 'love_story' do
     root to: 'home#index', as: 'love_story_root'
 
-    resources :love_stories
+    resources :love_stories do
+      collection do
+        get :get_story_info
+      end
+    end
     resources :love_story_images
   end
 

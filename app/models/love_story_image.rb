@@ -6,7 +6,7 @@ class LoveStoryImage < ActiveRecord::Base
   belongs_to :love_story
 
   has_attached_file :file,
-    :styles => {:small => "680x353>",:list =>"203x146#"},
+    :styles => {:small => "80x80>",:list =>"210x156>"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

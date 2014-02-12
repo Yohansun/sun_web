@@ -8,6 +8,14 @@
       var sel = new LinkageSelect(options);
       sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '请选择省');
       sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '请选择市');
+      // use in cubit slide
+      var options2 = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options2);
+      sel.bind('.level1_1', null, '省/直辖市');
+      sel.bind('.level1_2', null, '城市');
+      sel.bind('.level1_3', null, '区');
 
       if (<%= params[:upload_success].present? ? true : false %>) {
         $('#upload_success').modal({show:true});
@@ -15,7 +23,7 @@
 
       $('#check_my_story').click(function(event) {
         $('#upload_success').modal('hide');
-        $('#havepics').modal({show:true});
+        $.get('<%= get_story_info_love_stories_path(love_story_id: params[:love_story_id]) %>');
       });
     })
   </script>
@@ -85,12 +93,12 @@
               <select id="province" class="level_1 input-small" name="province_id"></select>
               <select id="city" class="level_2 input-small" name="city_id"></select>
               <strong class="label-text">故事来源:</strong>
-              <%= select_tag :come_form, options_for_select([["请选择",""],
+              <%= select_tag :come_from, options_for_select([["请选择",""],
                 ["icolor上传","icolor"],
-                ["新浪微博上传", "sina"]], params[:come_form]), :class => "input-small" %>
+                ["新浪微博上传", "sina"]], params[:come_from]), :class => "input-small" %>
               <button class="btn">确定</button>
               <div class="pull-right">
-                <input type="text" class="nomargin pull-left" placeholder="搜名字" name="user_name" />
+                <input type="text" class="nomargin pull-left" placeholder="搜名字" name="user_name" value="<%= params[:user_name] if params[:user_name].present? %>" />
                 <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
               </div>
             <% end %>
@@ -110,7 +118,7 @@
                     <a href="javascript:;" class="icon-btn icon-pic"></a>
                   <% end %>
                   <h5 class="author">
-                    <a class="text-blue" href="#havepics" data-toggle="modal"><%= love_story.user_name %></a>
+                    <%= link_to "#{love_story.user_name}", get_story_info_love_stories_path(love_story_id: love_story), class: 'text-blue', remote: true %>
                   </h5>
                   <span class="time"><%= love_story.created_at.try(:to_date) %></span>•<span class="address"><%= Area.find(love_story.area_id).try(:root).try(:name) %></span>
                   <p class="J_resulte dot_linet1 paragraph">
@@ -192,72 +200,18 @@
   </div>
 </div>
 <!-- modal -->
-<div class="modal hide fade story_modal" id="nohavepics">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
-    <div class="clearfix">
-      <a href="#" class="pull-left story_photo"><img src="images/story/modal/story_modal_photo.jpg" alt="" /></a>
-      <div class="author_name">
-        <strong class="mr5">小丸子</strong>
-        <small><i class="icon-i16 icon-map-marker"></i>上海</small>
-        <span class="help-block nomargin">
-          上传于 2014-03-08
-          <div class="pull-right">
-            <span class="pull-left  browse_number">浏览数：8893</span>
-            <!-- Baidu Button BEGIN -->
-            <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left">
-              <!-- <span class="bds_more">分享到：</span> -->
-              <a class="bds_qzone"></a>
-              <a class="bds_tsina"></a>
-              <a class="bds_tqq"></a>
-              <a class="bds_renren"></a>
-              <!-- <a class="bds_t163"></a> -->
-              <a class="bds_more"></a>
-            </span>
-            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
-            <script type="text/javascript" id="bdshell_js"></script>
-            <script type="text/javascript">
-            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-            </script>
-            <!-- Baidu Button END -->
-          </div>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div class="modal-body">
-    <p class="content dot_linet1">
-      我与Dany相恋了3年，但见面的日子还不足一年，不过，这也一点也不会影响我们的情感，反而让我们更珍惜对方。Dany是个典型的双鱼座，长长的软发，笑起来很温柔，她是个浪漫而充满幻想的女孩，时常向我倾诉她幻想中那个我们的家，小到一束花的位置，也能绘声绘色的描述半天，我把这一切都一一记在心里。还有半年，她就要学成归国，我想给她一个大大的惊喜，米色的窗帘，大大的飘窗，还有墙角的百合花，我要把她的想象变全为现实，我想让她成为我的妻子。
-    </p>
-    <p class="tips text-center dot_linet1">
-      【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
-      <a href="#"><i class="icon-i16 icon-enter"></i></a>
-    </p>
-    <div class="sliders pr">
-      <div class="slider_container" id="">
-        <ul class="unstyled clearfix nomargin" id="slider_designer">
-          <li><a href="#"><img src="images/story/modal/designer1.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/designer2.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/designer3.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/designer4.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/designer1.jpg" alt="" /></a></li>
-        </ul>
-        <a href="javascript:;" class="slider-prev">prev</a>
-        <a href="javascript:;" class="slider-next">next</a>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="modal hide fade story_modal" id="havepics">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
     <div class="clearfix">
-      <a href="#" class="pull-left story_photo"><img src="images/story/modal/story_modal_photo.jpg" alt="" /></a>
+      <a href="#" class="pull-left story_photo" target="_blank">
+        <img src="<%= asset_path 'love_story/images/story/modal/story_modal_photo.jpg' %>" alt="" />
+      </a>
       <div class="author_name">
-        <strong class="mr5">小丸子</strong>
-        <small><i class="icon-i16 icon-map-marker"></i>上海</small>
+        <strong class="mr5 js-author_name">小丸子</strong>
+        <small><i class="icon-i16 icon-map-marker"></i><span class="js-author_area">上海</span></small>
         <span class="help-block nomargin">
-          上传于 2014-03-08
+          上传于 <span class="js-author_date">2014-03-08</span>
           <div class="pull-right">
             <span class="pull-left  browse_number">浏览数：8893</span>
             <!-- Baidu Button BEGIN -->
@@ -282,16 +236,11 @@
     </div>
   </div>
   <div class="modal-body">
-    <p class="content dot_linet1">
-      我与Dany相恋了3年，但见面的日子还不足一年，不过，这也一点也不会影响我们的情感，反而让我们更珍惜对方。Dany是个典型的双鱼座，长长的软发，笑起来很温柔，她是个浪漫而充满幻想的女孩，时常向我倾诉她幻想中那个我们的家，小到一束花的位置，也能绘声绘色的描述半天，我把这一切都一一记在心里。还有半年，她就要学成归国，我想给她一个大大的惊喜，米色的窗帘，大大的飘窗，还有墙角的百合花，我要把她的想象变全为现实，我想让她成为我的妻子。
-    </p>
+    <p class="content dot_linet1 J_resulte js-author_content">加载中...</p>
     <div class="sliders pr">
       <div class="slider_container" id="">
         <ul class="unstyled clearfix nomargin" id="slider_pics">
-          <li><a href="#"><img src="images/story/modal/work1.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/work2.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/work3.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="images/story/modal/work1.jpg" alt="" /></a></li>
+          加载中...
         </ul>
         <a href="javascript:;" class="slider-prev">prev</a>
         <a href="javascript:;" class="slider-next">next</a>
@@ -300,19 +249,8 @@
 
     <p class="tips text-center mt25">
       【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
-      <a href="#"><i class="icon-i16 icon-enter"></i></a>
+      <a href="#" target="_blank"><i class="icon-i16 icon-enter"></i></a>
     </p>
   </div>
 </div>
-<div class="modal hide fade story_modal" id="upload_success">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
-  </div>
-  <div class="modal-body">
-    <h2 class="text-center text-green tip">您已成功上传爱的故事</h2>
-    <div class="text-center btn_group">
-      <a href="javascript:void(0);" class="btn_check" id="check_my_story">查看我的故事</a>
-      <a href="javascript:void(0);" class="btn_custom" id="check_custom">定制我的私人设计师</a>
-    </div>
-  </div>
-</div>
+<%= render partial: 'upload_success_modal' %>
