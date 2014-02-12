@@ -32,6 +32,13 @@ Icolor::Application.routes.draw do
     end
   end
 
+  resources :lanterns do
+    collection do
+      post :lottery
+      post :update_forwar
+    end
+  end
+
   resources :gifts, :only => [:index]
   match "/gift_list" => "gifts#index"
   match "/newyear" => "gifts#list"

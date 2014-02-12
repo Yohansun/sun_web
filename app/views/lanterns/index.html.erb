@@ -1,0 +1,202 @@
+<%- content_for :head do %>
+<style type="text/css">
+  .lanterns{
+    height:549px;
+    padding-top: 120px;
+    background: url(<%= asset_path '2014lantern/lantern_bg.jpg' %>);
+  }
+  .lantern{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 261px;
+    height: 50px;
+    padding: 100px 0;
+    background: url(<%= asset_path '2014lantern/lantern.png' %>);
+  }
+  .lantern .click_btn{
+    display: inline-block;
+    width:50px;
+    height: 50px;
+    background: url(<%= asset_path '2014lantern/click_btn.png' %>) no-repeat;
+  }
+
+  /*modal*/
+  .modal-lanterns{
+    width:840px;
+    height:542px;
+    /*padding:80px 101px;*/
+    margin-left:-420px;
+    text-align: center;
+    box-shadow: none;
+    border:0;
+    font:17px/26px "Microsoft Yahei";
+    color:#000;
+  }
+  .winning{
+    background: transparent url(<%= asset_path '2014lantern/winning.png' %>) no-repeat center top;
+  }
+  #unwinning{
+    background: transparent url(<%= asset_path '2014lantern/unwinning.png' %>) no-repeat center top;
+  }
+  .modal-lanterns .close{
+    opacity:1;
+    margin:80px 51px 0 0;
+  }
+  .modal-lanterns .title{
+    font:bold 28px "Microsoft Yahei";
+    margin-bottom: 15px;
+  }
+  .modal-lanterns .modal-body{
+    margin: 130px 95px;
+  }
+  #unwinning .modal-body{
+    margin: 106px 95px 130px 205px;
+  }
+  .modal-lanterns .modal-body a{
+    color:#000;
+  }
+  .modal-lanterns #bdshare,
+  .modal-lanterns .bds_tools a{
+    float: none;
+    display: inline-block;
+    *display:inline;
+    zoom:1;
+    vertical-align: middle;
+  }
+  .modal-lanterns .bds_tools a{
+    height:20px;
+  }
+  /*.bless-word{
+    font:bold 18px "Microsoft Yahei";
+  }*/
+  .gifts_img{
+    position: absolute;
+    right: 177px;
+    bottom: 42px;
+  }
+  .underline{
+    text-decoration:underline;
+  }
+  .text-cr{
+    color:#c11308;
+  }
+</style>
+<%- end %>
+
+<%- content_for :tail do %>
+<script type="text/javascript">
+  $(function(){
+    $('.js-rose').on('click','a',function(){
+      bdshare = $(this).attr('class');
+      $.post("<%=update_forwar_lanterns_path%>",{bdshare: bdshare})
+    });
+    $('.js-winning').on('click','a',function(){
+      $.post("<%=update_forwar_lanterns_path%>")
+    });
+  })
+</script>
+<%- end %>
+<div class="lanterns mt10">
+  <ul class="unstyled text-center clearfix">
+    <li class="lantern">
+      <%- if current_user %>
+        <%= link_to '', lottery_lanterns_path, remote: true, method: :post, class: 'click_btn' %>
+      <% else %>
+        <a class="click_btn" href="/users/sign_in?return_to=<%=lanterns_url%>"></a>
+      <% end %>
+    </li>
+    <li class="lantern">
+      <%- if current_user %>
+        <%= link_to '', lottery_lanterns_path, remote: true, method: :post, class: 'click_btn' %>
+      <% else %>
+        <a class="click_btn" href="/users/sign_in?return_to=<%=lanterns_url%>"></a>
+      <% end %>
+    </li>
+    <li class="lantern">
+      <%- if current_user %>
+        <%= link_to '', lottery_lanterns_path, remote: true, method: :post, class: 'click_btn' %>
+      <% else %>
+        <a class="click_btn" href="/users/sign_in?return_to=<%=lanterns_url%>"></a>
+      <% end %>
+    </li>
+  </ul>
+</div>
+<!-- modal -->
+<div class="modal hide fade modal-lanterns winning" id="phone">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="<%= asset_path '2014lantern/close.gif' %>" alt="" /></button>
+  <div class="modal-body">
+    <p class="title text-cr">恭喜您！获得iColor手机壳一个!</p>
+    <div class="">
+      <span class="underline">分享我的惊喜</span><br>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-winning" data="{'text':'我在iColor得到iColor手机壳一个！小伙伴们一块来参与吧！团聚一样有惊喜 http://www.icolor.com.cn/lanterns'}">
+        <!-- <span class="bds_more">分享到：</span> -->
+        <a class="bds_tsina"></a>
+        <a class="bds_kaixin001"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_qzone"></a>
+      </div>
+    </div>
+  </div>
+  <div><img class="gifts_img" src="<%= asset_path '2014lantern/phone_shell.png' %>" alt=""></div>
+</div>
+
+<div class="modal hide fade modal-lanterns winning" id="libao">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="<%= asset_path '2014lantern/close.gif' %>" alt="" /></button>
+  <div class="modal-body">
+    <p class="title text-cr">恭喜您！<br>获得iColor 礼包一个！</p>
+    <!-- <p class="title text-cr">恭喜您！获得iColor U盘一个！</p> -->
+    <div class="">
+      <span class="underline">分享我的惊喜</span><br>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-winning" data="{'text':'我在iColor得到iColor礼包一个！小伙伴们一块来参与吧！团聚一样有惊喜 http://www.icolor.com.cn/lanterns'}">
+        <!-- <span class="bds_more">分享到：</span> -->
+        <a class="bds_tsina"></a>
+        <a class="bds_kaixin001"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_qzone"></a>
+      </div>
+    </div>
+  </div>
+  <div><img class="gifts_img" src="<%= asset_path '2014lantern/giftpack.png' %>" alt=""></div>
+  <!-- <div><img class="gifts_img" src="<%= asset_path '2014lantern/upan.png' %>" alt=""></div> -->
+</div>
+
+<div class="modal hide fade  modal-lanterns winning" id="upan">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="<%= asset_path '2014lantern/close.gif' %>" alt="" /></button>
+  <div class="modal-body">
+    <p class="title text-cr">恭喜您！获得iColor U盘一个！</p>
+    <div class="">
+      <span class="underline">分享我的惊喜</span><br>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-winning"  data="{'text':'我在iColor得到iColor U盘一个！小伙伴们一块来参与吧！团聚一样有惊喜 http://www.icolor.com.cn/lanterns'}">
+        <!-- <span class="bds_more">分享到：</span> -->
+        <a class="bds_tsina"></a>
+        <a class="bds_kaixin001"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_qzone"></a>
+      </div>
+    </div>
+  </div>
+  <div><img class="gifts_img" src="<%= asset_path '2014lantern/upan.png' %>" alt=""></div>
+</div>
+
+<div class="modal hide fade modal-lanterns" id="unwinning">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="<%= asset_path '2014lantern/close.gif' %>" alt="" /></button>
+  <div class="modal-body">
+    <p class="title text-cr">恭喜您！<br>获得iColor红粉佳人玫瑰一朵！</p>
+    <div class="">
+      <span>立邦色号RN0470-3</span><br>
+      <span class="underline">分享即送iColor手机壳一个！</span><br>
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare js-rose"  data="{'text':'我在iColor得到红粉佳人玫瑰一朵！小伙伴们一块来参与吧！团聚一样有惊喜 http://www.icolor.com.cn/lanterns'}">
+        <!-- <span class="bds_more">分享到：</span> -->
+        <a class="bds_tsina"></a>
+        <a class="bds_kaixin001"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_qzone"></a>
+      </div>
+    </div>
+  </div>
+</div>
