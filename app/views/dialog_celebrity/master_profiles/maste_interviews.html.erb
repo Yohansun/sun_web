@@ -1,0 +1,142 @@
+<% content_for :head do %>
+<%= javascript_include_tag "bootstrap/jquery.min" %>
+<%= stylesheet_link_tag "famous/icolor", "famous/master" %>
+<%end-%>
+
+<!-- 头部通栏start -->
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map1 icon_colors"></i>
+  <strong>对话名人</strong>
+  <small>直面大师专家，为您在线授道解惑</small>
+</h3>
+<ul class="breadcrumb">
+  <li><a href="#">首页</a> > </li>
+  <li><a href="#">名人对话</a> > </li>
+  <li class="active">名家设计</li>
+</ul>
+<hr class="border2 border2_mt2">
+<!-- 头部通栏end -->
+
+<!-- 页面内容start -->
+<div class="master-list clearfix">
+    <!-- <div class="master-f pull-right">
+      <a href="#" class="master-l-f m-active">全部</a>
+      <a href="#" class="master-l-f">海外</a>
+      <a href="#" class="master-l-f">港澳台</a>
+      <a href="#" class="master-l-f">中国大陆</a>
+    </div> -->
+    <div class="master-f">
+      <h3>名家分类</h3>
+      <p>
+        <em>从事领域：</em>
+        <a href="/dialog_celebrity/master_interviews" class="<%=params[:board_id].blank? ? 'm-active' : ''%>">全部</a>
+        <% CelebrityContentBoard.first(5).each do |board| %>
+          <a class="<%= params[:board_id] == board.id.to_s ? 'm-active' : ''%>" href="<%='/dialog_celebrity/master_interviews?board_id='+board.id.to_s%>"><%= board.name %></a>
+        <%end-%>
+        <em>所在地区：</em>
+        <a href="#" class="m-active">全部</a>
+        <a href="#">海外</a>
+        <a href="#">港澳台</a>
+        <a href="#">中国大陆</a>
+      </p>
+    </div>
+
+    <ul class="master-lists clearfix">
+      <% @masters.each_with_index do |_master,index| -%>
+        <% _designs = _master.master_designs.limit(5) -%>
+        <% if _designs.present? -%>
+          <li class="index_main">
+            <div class="master-bin">
+              <div class="master-pro">
+                <a href="<%=dialog_celebrity_master_design_path(_designs.first.id)%>"><img src="<%= _designs.first.main_preview_img(:index) -%>" alt="" /></a>
+                <ul>
+                  <% _designs.last(4).each do |_design| -%>
+                    <li>
+                      <img src="<%= _design.main_preview_img(:thumb) -%>" alt="<%= _design.title -%>" />
+                    </li>
+                  <% end -%>
+                </ul>
+              </div>
+              <div class="master-info clearfix">
+                <a class="pull-left master-token"><img src="<%= _master.avatar(:small1) -%>" alt="" /></a>
+                <div class="master-detail pull-left">
+                  <h4 class="text-right"><a href="#" class="pull-left"><%=_master.name%></a>德国</h4>
+                  <p><%= raw truncate(_master.intro.html_safe,:length => 18) -%>></p>
+                  <a href="master_interview.html" target="_blank">阅读全文>></a>
+                </div>
+              </div>
+            </div>
+            <div class="master-share clearfix">
+              <div class="pull-right">
+                <!-- Baidu Button BEGIN -->
+                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare mr5">
+                  <span class="pull-left">一键分享：</span>
+                  <a class="bds_qzone"></a>
+                  <a class="bds_tsina"></a>
+                  <a class="bds_tqq"></a>
+                  <a class="bds_renren"></a>
+                  <a class="bds_t163"></a>
+                  <!-- <a class="shareCount"></a> -->
+                </div>
+                <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+                <script type="text/javascript" id="bdshell_js"></script>
+                <script type="text/javascript">
+                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+                </script>
+                <!-- Baidu Button END -->
+              </div>
+            </div>
+          </li>
+          <% if index == 3 %>
+            <div class="clearfix mb10">
+              <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+              <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+            </div>
+          <%end-%>
+        <%end-%>
+      <%end-%>
+    </ul>
+    <div class="pager host_pager ft12">
+      <%= paginate(@masters) if !@masters.blank? %>
+    </div>
+</div>
+<!-- 页面内容end -->
+
+<!-- 底部公共部分start -->
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+</div>
+
+<a href="#"><img class="mt10" src="images/channel/banner1.jpg"></a>
+
+<!-- 底部公共部分end -->
+
+<div id="float_right_btn">
+  <p id="back-top">
+    <a href="#top"><img src="images/back_top.png"></a>
+  </p>
+  <a href="javascript:;" class="codebar"><img src="images/code.png"></a>
+</div>
+
+<%= javascript_include_tag "bootstrap/bootstrap.min","famous/main" %>
+

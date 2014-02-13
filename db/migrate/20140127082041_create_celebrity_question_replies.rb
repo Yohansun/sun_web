@@ -1,7 +1,7 @@
 class CreateCelebrityQuestionReplies < ActiveRecord::Migration
   def change
     create_table :celebrity_question_replies do |t|
-      t.string :name, null: false
+      t.string :name
       t.text :content
 
       t.references :user

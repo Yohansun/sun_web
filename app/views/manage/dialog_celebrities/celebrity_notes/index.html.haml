@@ -6,13 +6,20 @@
   %span.ltitle
     名人手记管理
 
-  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/editor_treasuries"}
+  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/celebrity_notes"}
     %select.fl{name: "board_id"}
       %option{value: ""} 选择分类
       - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
-        %option{value: board.id}= board.name
+        %option{value: board.id, selected: params[:board_id] == board.id.to_s}= board.name
     .ml10.fl= ".and."
-    %input.fl.ml10.w150{type: "text", name: "key", placeholder: "输入宝典标题"}
+    %input.fl.ml10.w150{type: "text", name: "key", placeholder: "输入手记标题", value: params[:key]}
+    .ml10.fl= ".and."
+    %input.fl.ml10.w150{type: "text", name: "master_name", placeholder: "输入名人姓名",value: params[:master_name]}
+    .ml10.fl
+      名人姓名全字匹配
+    %label.fl.ml5
+      %input.master_select{type: "checkbox", name: "match",checked: params[:match].present?}
+      .lbl
     %input{type: "hidden", value: "true", name: "query"}
     %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
   .ml10
@@ -35,7 +42,8 @@
         %td= _item.author.try(:name)
         %td= _item.board.try(:name)
         %td= _item.updated_at.strftime "%y-%m-%d"
-
+  .pager.fl.ml20
+    = paginate @collection
 :coffeescript
   $ ->
     D.initialize()

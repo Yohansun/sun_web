@@ -7,17 +7,22 @@
     名人管理
 
   %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/master_profiles"}
-    %select.fl{name: "board_id"}
+    %select.fl{name: "mtype"}
+      %option{value: ""} 选择名人
+      %option{value: 1, selected: params[:mtype]=="1"} 名人在线
+      %option{value: 0, selected: params[:mtype]=="0"} 名家设计
+    .ml10.fl= ".and."
+    %select.fl.ml10{name: "board_id"}
       %option{value: ""} 选择分类
       - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
-        %option{value: board.id}= board.name
+        %option{value: board.id, selected: params[:board_id]==board.id.to_s}= board.name
     .ml10.fl= ".and."
-    %input.fl.ml10.w150{type: "text", name: "name", placeholder: "输入姓名"}
+    %input.fl.ml10.w150{type: "text", name: "name", placeholder: "输入姓名", value: params[:name]}
     %input{type: "hidden", value: "true", name: "query"}
     %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
     .fl.ml10.mr10{style: "border-right: 1px dashed grey; width: 0px;",href: "javascript:;"} &nbsp;
-    %a.btn.btn-small.btn-primary.radius6.fl{ href: "#"} 手记管理
-    %a.btn.btn-small.btn-primary.ml15.radius6.fl{ href: "#"} 宝典管理
+    %a.btn.btn-small.btn-primary.radius6.fl{ href: "/manage/dialog_celebrities/celebrity_notes"} 手记管理
+    %a.btn.btn-small.btn-primary.ml15.radius6.fl{ href: "/manage/dialog_celebrities/editor_treasuries"} 宝典管理
   .ml10
     %hr.w500{style: "border-style: dashed;"}/
   .mt10
@@ -40,11 +45,12 @@
             %input.master_select{type: "checkbox", id: "master_#{_item.id}"}
             .lbl
         %td
-          = link_to "简介(#{_item.intro.present? ? '1' : '0'})","#"
-          = link_to "访谈(#{_item.interview_content.present? ? '1' : '0'})","#"
-          = link_to "寄语(#{_item.message.present? ? '1' : '0'})","#"
-          = link_to "手记(#{_item.notes.count})","#"
-          = link_to "作品(#{_item.master_designs.count})","#"
+          = link_to "简介(#{_item.intro.present? ? '1' : '0'})","/manage/dialog_celebrities/master_profiles/#{_item.id}/edit"
+          = link_to "访谈(#{_item.interview_content.present? ? '1' : '0'})","/manage/dialog_celebrities/master_profiles/#{_item.id}/edit?step=2"
+
+          = link_to "寄语(#{_item.message.present? ? '1' : '0'})","/manage/dialog_celebrities/master_profiles/#{_item.id}/edit?step=3"
+          = link_to "手记(#{_item.notes.count})","/manage/dialog_celebrities/celebrity_notes?board_id=&key=&master_name=#{_item.name}&query=true&master_id=#{_item.id}"
+          = link_to "作品(#{_item.master_designs.count})","/manage/dialog_celebrities/master_designs?design_name=&master_name=#{_item.name}&mtype=#{_item.mtype}&query=true&master_id=#{_item.id}"
         %td= _item.name
         %td= _item.board.try(:name)
         %td= _item.nationality

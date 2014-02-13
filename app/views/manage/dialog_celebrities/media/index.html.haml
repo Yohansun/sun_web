@@ -1,0 +1,31 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity.css.scss'
+  = javascript_include_tag "manage/dialog_celebrities/media.js.coffee"
+
+:css
+  input#editor_treasury_recommended { opacity: 255; }
+
+
+#celebrity_questions
+  %span.ltitle
+    名人问答媒体管理
+
+  %a#create-media.btn.btn-small.ml20.radius6{href: "javascript:;"} 新建媒体...
+
+  %table#scopes.table1.mt10.ml20
+    %tr
+      %th.w100 操作
+      %th.w150 媒体名称
+      %th.w500 管理板块
+      %th.w150 登录名
+      %th.w150 登录密码
+
+    - boards = CelebrityContentBoard.first(5)
+    - @media_list.each do |media|
+      = render :partial => "manage/dialog_celebrities/media/new_media", :locals => { media: media, boards: boards }
+
+:coffeescript
+  $ ->
+    D.initialize()
+
+

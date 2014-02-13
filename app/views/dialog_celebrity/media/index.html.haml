@@ -1,0 +1,95 @@
+!!!
+%html{ lang: 'zh' }
+  %head
+    %title
+      iColor 名人问答QA系统
+    %meta{ charset: 'utf-8' }
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+    %meta{:content => "icolor", :name => "description"}
+    %meta{:content => "icolor", :name => "author"}
+    = stylesheet_link_tag("dialog_celebrity/media")
+    = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media")
+  %body
+    #banner.pr100 iColor 名人问答QA系统
+    %ul.nav.clearfix
+      - @boards.each do |board|
+        %li.fl= link_to board.name,"/dialog_celebrity/media/index?board_id=#{board.id}",class: @board_id.to_i == board.id ? "active" : ""
+
+    %form#search-area.mt5
+      %input{type: :hidden, name: :board_id, value: @board_id}
+      #search-area-line1
+        %span.first 我想查找
+        %select{name: "type"}
+          %option{value: ""} 全部
+          %option{value: "not_replied",selected: params[:type] == "not_replied"} 未回复
+          %option{value: "replied",selected: params[:type] == "replied"} 已经回复
+
+        %span 的问题
+        %span 并且
+        %span 我想查找从
+        %input{name: :start_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:start_date]}
+        %span 到
+        %input{name: :end_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:end_date].present? ? params[:end_date] : Date.current.to_s}
+        %span 的问题
+        %span 并且
+      #search-area-line2
+        %span.first 我想查找
+        %select{name: :key_type}
+          %option{value: "title",selected: params[:key_type]=="title"} 标题
+          %option{value: "content",selected: params[:key_type]=="content"} 内容
+        %span 中有关于
+        %input{name: :keyword, placeholder: "输入关键字",value: params[:keyword]}
+        %span 的问题
+        %input{type: :submit, value: "查找"}
+    #question-title.clearfix.mt5
+      .pr10.fl &nbsp;
+      .pr70.fl 标题
+      .pr10.fl 提问者
+      .pr10.fl 提问日期
+    - @questions.each do |_question|
+      - if params[:type] == "replied" && _question.replied? || params[:type] == "not_replied" && !_question.replied? || params[:type].blank?
+        .question-warp.mt5
+          .question-title-warp.clearfix
+            .pr10.fl
+              - if _question.replied?
+                = link_to "已回复","javascript:;",style: "color: green;",:class => "reply-status"
+              - else
+                = link_to  "未回复","javascript:;",style: "color: red;",:class => "reply-status"
+            .pr70.fl
+              = _question.name
+            .pr10.fl
+              = _question.user.try(:username)
+            .pr10.fl
+              = _question.created_at.strftime("%y-%m-%d")
+          .content{style: "display: none;"}
+            .question-content-warp.clearfix
+              .pr10.fl &nbsp;
+              .pr90.fl
+                = raw _question.content
+            .question-upload-warp.clearfix
+              .pr10.fl &nbsp;
+              .pr90.fl
+                - _question.images.each do |_image|
+                  = image_tag ""
+                - 10.times do
+                  = image_tag ""
+            .reply.clearfix.relative
+              .pr10.fl &nbsp;
+              .pr80.fl
+                - reply = _question.find_media_reply
+                - if reply.present?
+                  %textarea{placeholder: "我来回答"}
+                    = reply.content
+                - else
+                  %textarea{placeholder: "我来回答"}
+              .pr10.fl
+                %input#submit-question{:type => "submit", :value => "提交问题", :"data-question-id" => _question.id, :"data-reply-id" => reply.try(:id) || ""}
+            .reply-upload
+              .pr10.fl &nbsp;
+              .pr90.fl
+                = link_to "+上传照片","javascript:;",id: "upload"
+              .replies-upload-war.absolute
+
+:coffeescript
+  $ ->
+    D.initialize()

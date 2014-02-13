@@ -1,0 +1,67 @@
+:css
+  select.datetime { width: 64px; }
+
+- content_for :head do
+  = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
+
+- content_for :tail do
+  = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                           "upload_image/jquery.iframe-transport",
+                           "upload_image/jquery.fileupload"
+
+:css
+  input#editor_treasury_recommended { opacity: 255; }
+
+
+.control-group.clearfix
+  %label.control-label.fl 缩略图(上传尺寸: 280x145 )
+  .controls.fl.ml20
+    %span.upload_selected_filename.fl.mr10
+      = @resource.main_preview_img.url
+    %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
+      %i.icon-plus.icon-white
+      %span 上传缩略图
+      %input#manage_dialog_master_design_thumb{type: "file",name: "master_design[main_preview_img]",multiple: ""}
+
+.control-group.clearfix
+  %label.control-label.fl 作品名称
+  .controls.fl.ml20
+    = f.input :design_name, label: false
+
+.control-group.clearfix
+  %label.control-label.fl 设计师
+  .controls.fl.ml20
+    %select#select-master-type
+      %option 选择分类
+      %option{value: 1} 名人在线
+      %option{value: 0} 名家设计
+  .controls.fl.ml20
+    = f.input :master_profile_id, collection: [["选择大师",""]]+MasterProfile.all.map{|n|[n.name,n.id]},label: false,selected: @resource.master_profile_id.blank? ? 0 : @resource.master_profile_id
+  .controls.fl.ml20
+    或者直接输入大师姓名
+  .controls.fl.ml10
+    %input#search-master{type: "text", placeholder: "输入设计师姓名"}
+  .controls.fl.m10
+    %a.fl.btn.btn-small.ml10.radius6 查找
+.control-group.clearfix
+  %label.control-label.fl 简介
+  .controls.fl.ml20
+    = f.input :design_intro, label: false,:input_html => { style: "width: 480px; height: 180px;" }
+.control-group.clearfix
+  %label.control-label.fl 发布时间
+  .controls.fl.ml20
+    = f.input :published_at, label: false, as: :datetime
+.control-group.clearfix
+  %label.control-label.fl
+  .controls.fl.ml20
+
+= f.input :ref, :as => "hidden", :input_html => { name: "ref", value: request.url }
+= f.input :after_save, :as => "hidden" ,:input_html => { name: "after_save", value: "return", id: "after_save" }
+
+.ml10
+  %hr.w500{style: "border-style: dashed;"}/
+  = f.submit "保存后返回",:class => "fl btn btn-small btn-primary radius6"
+  = f.submit "保存后编辑下一页",:class => "fl btn btn-small btn-primary radius6 ml15",:id => "save_next"
+  / %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复
+  %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/master_designs"} 返回
+

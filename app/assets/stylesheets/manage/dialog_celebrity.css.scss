@@ -97,4 +97,36 @@ table.table1 {
   }
 }
 
+// 作品管理
+#master-designs {
+  margin-top: 20px;
+  .boards {
+    a.board {
+      padding: 6px 16px; color: white; font-size: 14px; display: block; text-decoration: none;
+      color: rgb(102,102,102); border: 1px solid rgb(102,102,102);
+    }
+    a.active { padding: 10px 27px; color: white; background-color: rgb(102,102,102);}
+  }
 
+  #designs-warp {
+    .design{
+      width: 500px; padding-bottom: 15px;
+      .design-thumb {
+        width: 220px; height: 156px;
+        img { width: 220px; height: 156px; }
+      }
+      .design-info-avatar {
+        .design-master-avatar {
+          width: 67px; height: 73px;
+          img { width: 67px; height: 73px; }
+        }
+      }
+      p.design-name {  }
+      p.design-last-update {}
+    }
+  }
+}
+
+.pager {
+  .current { color: red; }
+}

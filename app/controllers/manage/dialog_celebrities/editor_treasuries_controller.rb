@@ -3,8 +3,16 @@ class Manage::DialogCelebrities::EditorTreasuriesController < Manage::BaseContro
   def index
     @collection = collection
     if params[:query]
-      @collection = @collection.where("celebrity_content_board_id = ? and name LIKE ?", params[:board_id],"%#{params[:key]}%")
+      board_id = params[:board_id]
+      name = params[:key]
+      if board_id.present?
+        @collection = @collection.where(:celebrity_content_board_id => board_id.to_i)
+      end
+      if name.present?
+        @collection = @collection.where("name LIKE ?", "%#{name}%")
+      end
     end
+    @collection = @collection.desc(:updated_at).page(params[:page]).per(8)
   end
 
   def edit

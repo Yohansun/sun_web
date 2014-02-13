@@ -1,2 +1,227 @@
-<h1>DialogCelebrity::CelebrityQuestions#new</h1>
-<p>Find me in app/views/dialog_celebrity/celebrity_questions/new.html.erb</p>
+<% content_for :head do %>
+<%= javascript_include_tag "bootstrap/jquery.min" %>
+<%= stylesheet_link_tag "famous/jquery.slide", "famous/icolor", "famous" %>
+<%end-%>
+
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<ul class="breadcrumb">
+  <li><a href="index.html">首页</a> > </li>
+  <li><a href="#">对话名人</a> > </li>
+  <li class="active">名人问答</li>
+</ul>
+<hr class="border2 border2_mt2">
+<a href="#"><img src="images/channel/banner1.jpg" alt="" width="1000" height="85" style="height: 85px;" /></a>
+<div class="clearfix mt10">
+  <div class="pull-left famous_left">
+    <div class="index_main nopadding">
+      <ul class="nav nav-tabs famous_ask_tab" id="famous_tab">
+        <li class="active">
+          <a href="#famous_tab1" data-toggle="tab">
+            全部问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#famous_tab2" data-toggle="tab">
+            空间设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#famous_tab3" data-toggle="tab">
+            色彩设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#famous_tab4" data-toggle="tab">
+            软装设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#famous_tab5" data-toggle="tab">
+            园艺设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#famous_tab6" data-toggle="tab">
+            装修施工问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content famous_ask_content">
+        <div class="tab-pane active" id="famous_tab1">
+          <form action="<%=dialog_celebrity_celebrity_questions_path%>" method="post" class="famous_ask_form">
+            <input type="hidden" name="celebrity_question[user_id]" value="<%= current_user.id %>">
+            <% if params[:master_id].present? -%>
+              <input type="hidden" name="celebrity_question[master_profile_id]" value="<%= params[:master_id] %>">
+            <%end -%>
+            <p class="clearfix form_mata">
+              <i class="icon-i30 icon-question_mark"></i>
+              <span>一句话描述您的疑问</span>
+              <span>
+                <% if flash[:notice].present? -%>
+                  <%= flash[:notice] -%>
+                <% end -%>
+              </span>
+              <span class="pull-right">
+                <strong class="text-warning">36</strong>小时内必有专家为您答疑解惑
+              </span>
+            </p>
+            <fieldset class="pr">
+              <input type="text" id="" name="celebrity_question[name]" class="js-text_percentage nomargin" placeholder="请在这里概述您的问题" data-max="50">
+              <span class="input_mata">
+                <span class="js-text_lenth_show">0</span>/<span class="js-text_maxlenth">50</span>
+              </span>
+            </fieldset>
+            <fieldset class="mt20 pr form_detail">
+              <p><strong>问题补充</strong>(选填)</p>
+              <textarea name="celebrity_question[content]" id="" cols="" rows="" class="js-text_percentage" placeholder="您可以在这里补充问题细节" data-max="100"></textarea>
+              <span class="input_mata">
+                <span class="js-text_lenth_show">0</span>/<span class="js-text_maxlenth">100</span>
+              </span>
+              <div class="textarea_footer clearfix">
+                <a href="#" class="pull-left"><i class="icon-imgshow_btn"></i>图片</a>
+                <!-- <span class="pull-left">已上传<strong>x</strong>张图片</span> -->
+              </div>
+            </fieldset>
+            <fieldset class="mt20 pr">
+              <button class="famous_ask_submit pull-right js-famous_ask_submit">提交问题</button>
+              <a href="javascript:;" class="js-famous_options">
+                <span>选择分类</span>
+                <i class="icon-i16 icon-arrowdown"></i>
+              </a>
+              <span class="muted">(可选填)</span>
+              <div class="select_options pr hide">
+                <a href="javascript:;" class="selects_close js-selects_close">x</a>
+                <p class="nomargin">选择分类</p>
+                <select name="celebrity_question[celebrity_content_board_id]" id="" multiple="multiple" data-select="">
+                  <% CelebrityContentBoard.order("id asc").limit(5).each do |_board| %>
+                    <option value="<%= _board.id -%>"><%= _board.name -%></option>
+                  <% end -%>
+                </select>
+                <select name="celebrity_question[key]" id="" multiple="multiple">
+                  <option>水电</option>
+                  <option>墙面</option>
+                  <option>布线</option>
+                </select>
+              </div>
+              <p class="select_options_show mt10">
+                <span class="mr10"></span>
+                <span class="mr10"></span>
+              </p>
+            </fieldset>
+          </form>
+        </div>
+        <div class="tab-pane" id="famous_tab2">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab3">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab4">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab5">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab6">
+          2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pull-right smaller famous_right">
+    <div class="map-right index_main">
+      <div class="media media_chann">
+        <a class="pull-left" href="#">
+          <i class="icon-chann icon-chann_imgbase"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="#">装修图库</a></h4>
+          <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+        </div>
+      </div>
+      <div class="media media_chann">
+        <a class="pull-left" href="#">
+          <i class="icon-chann icon-chann_match"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="#">色彩配搭</a></h4>
+          <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+        </div>
+      </div>
+      <div class="media media_chann">
+        <a class="pull-left" href="#">
+          <i class="icon-chann icon-chann_fresh2"></i>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a class="media-heading_link_a" href="#">立邦刷新服务</a></h4>
+          <p class="media_con nomargin">对话顶尖设计大师，提升家装专业眼界！</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg" width="230" height="170"></a></div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+</div>
+
+<div id="float_right_btn">
+  <p id="back-top">
+    <a href="#top"><img src="images/back_top.png"></a>
+  </p>
+  <a href="javascript:;" class="codebar">
+    <img class="code_big" src="images/code_big.jpg">
+    <img src="images/code.png">
+  </a>
+  <a href="javascript:;" class="ask_btn mt10 js-ask_btn">
+    <img src="images/ask.png" alt="我要咨询" />
+    <form action="" class="ask_form nomargin">
+      <fieldset class="">
+        <h5>我要咨询</h5>
+        <p>
+          亲爱的会员您好！请问您有什么需要咨询？<br>您可以给我们留言，我们会通过系统消息对您的留言给予答复！
+        </p>
+        <textarea name="" id="" cols="" rows=""></textarea>
+        <div class="text-right">
+          <button class="btn btn-success btn-large">确定</button>
+        </div>
+      </fieldset>
+    </form>
+  </a>
+</div>
+
+<%= javascript_include_tag "bootstrap/bootstrap.min" %>
+<%= javascript_include_tag "famous/main" %>

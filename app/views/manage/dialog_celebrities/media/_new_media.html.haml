@@ -1,0 +1,31 @@
+%tr{data: media.id}
+  %td.centerText
+    %div.group1
+      = link_to "编辑","javascript:;",:class => "edit-media"
+      = link_to "删除","javascript:;",:class => "destroy-media"
+    %div.group2.hide
+      = link_to "保存","javascript:;",:class => "save-media"
+      = link_to "返回","javascript:;",:class => "return-media"
+
+  %td
+    %span.media_name.group1= media.name
+    %span.media_name_field.group2.hide
+      %input.medianame.w150{type: "text", value: media.name}
+  %td
+    %span.media_boards.group1
+      = media.boards.values.join("  ") if media.boards.present?
+    %span.media_boards_field.group2.hide.clearfix
+      - boards.each do |board|
+        .control-group.fl.mr10.clearfix
+          .controls.fl.ml10
+            %input.media-board{ type: "checkbox",name: "mediaboard",checked: media.boards.keys.include?(board.id),value: board.id }
+            .lbl
+          %label.control-label.fl.ml10= board.name
+  %td
+    %span.media_username.group1= media.username
+    %span.media_username_field.group2.hide
+      %input.mediausername.w150{type: "text", value: media.username}
+  %td
+    %span.media_pwd.group1= media.password.present? ? '已隐藏' : ''
+    %span.media_pwd_field.group2.hide
+      %input.mediapwd.w150{type: "password", value: media.password, placeholder: "密码不得超过32个字符"}
