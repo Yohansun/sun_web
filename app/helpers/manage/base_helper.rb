@@ -23,7 +23,7 @@ module Manage::BaseHelper
         'design_images'
       when /life_memoirs|life_info/
         'life'
-      when /home|editor_treasuries|master_profiles|celebrity_notes/
+      when /home|editor_treasuries|master_profiles|celebrity_notes|master_designs|master_design_uploads|media/
         'dialog_celebrity'
       when /designer_events|other_events|event_kvs/
         'designer_events'

@@ -18,6 +18,9 @@
         %i.icon-plus.icon-white
         %span 上传头像
         %input#manage_dialog_master_profile_avatar{type: "file",name: "master_profile[avatar]",multiple: ""}
+    - if @resource.avatar(:small2).present?
+      .fl.ml20
+        = image_tag(@resource.avatar(:small2))
 
   .control-group.clearfix
     %label.control-label.fl 板块
@@ -75,7 +78,7 @@
   = f.submit "保存后返回",:class => "fl btn btn-small btn-primary radius6"
   = f.submit "保存后编辑下一页",:class => "fl btn btn-small btn-primary radius6 ml15",:id => "save_next" if params[:step] != "3"
 
-  %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复
-  %a.btn.btn-small.ml10.radius6#destroy-board{href: "javascript:;"} 返回
+  / %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复
+  %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/master_profiles"} 返回
 
 

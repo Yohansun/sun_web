@@ -29,7 +29,6 @@ class MasterProfile < ActiveRecord::Base
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
-
   def self.tag_list
     ['海外','港澳台','中国大陆']
   end

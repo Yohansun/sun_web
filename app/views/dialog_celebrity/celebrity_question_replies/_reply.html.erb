@@ -1,0 +1,14 @@
+<div class="state bordered_t">
+  <a href="javascript:;" class="pull-right js-delete">删除</a>
+  <strong><%=@reply.user.try(:username)%></strong>
+  <span class="bordered_r">的回答</span>
+  <span><%=@reply.created_at.strftime("%Y-%m-%d")%></span>
+  <i class="icon-imgshow_btn"></i>
+  <div class="imgs_group invisible" style="height:0">
+    <p class="js-btns_imgsgroup"><a class="imgsgroup imgsgroup2"  href="images/index/refresh_bann2.jpg">Grouped Photo 2</a></p>
+    <p class=""><a class="imgsgroup imgsgroup2"  href="images/index/kv1.jpg">Grouped Photo 1</a></p>
+    <p class=""><a class="imgsgroup imgsgroup2"  href="images/index/imgbase_show1.jpg">Grouped Photo 3</a></p>
+    <p class=""><a class="imgsgroup imgsgroup2"  href="images/ohoopee2.jpg">Grouped Photo 3</a></p>
+  </div>
+  <p class="content"><%=@reply.content%></p>
+</div>

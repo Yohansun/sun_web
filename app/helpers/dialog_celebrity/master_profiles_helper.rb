@@ -1,0 +1,2 @@
+module DialogCelebrity::MasterProfilesHelper
+end

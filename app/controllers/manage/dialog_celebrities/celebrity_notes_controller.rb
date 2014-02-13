@@ -3,8 +3,27 @@ class Manage::DialogCelebrities::CelebrityNotesController < Manage::BaseControll
   def index
     @collection = collection
     if params[:query]
-      @collection = @collection.where("celebrity_content_board_id = ? and name LIKE ?", params[:board_id],"%#{params[:name]}%")
+      board_id = params[:board_id]
+      name = params[:key]
+      if params[:master_id].present?
+        masters = MasterProfile.where(:id => params[:master_id])
+      elsif params[:match].present?
+        masters = MasterProfile.where("name = ? and mtype = ?","params[:master_name]",params[:mtype])
+      else
+        masters = MasterProfile.where("name LIKE ? and mtype = ?","%#{params[:master_name]}%",params[:mtype])
+      end
+      if board_id.present?
+        @collection = @collection.where(:celebrity_content_board_id => board_id.to_i)
+      end
+      if name.present?
+        @collection = @collection.where("name LIKE ?", "%#{name}%")
+      end
+      if masters.count > 0
+        master_ids = masters.map(&:id)
+        @collection = @collection.where("master_profile_id in (?)",master_ids)
+      end
     end
+    @collection = @collection.desc(:updated_at).page(params[:page]).per(8)
   end
 
   def edit

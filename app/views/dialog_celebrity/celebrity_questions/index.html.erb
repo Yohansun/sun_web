@@ -1,2 +1,126 @@
-<h1>DialogCelebrity::CelebrityQuestions#index</h1>
-<p>Find me in app/views/dialog_celebrity/celebrity_questions/index.html.erb</p>
+<% content_for :head do %>
+<%= javascript_include_tag "bootstrap/jquery.min" %>
+<%= stylesheet_link_tag "famous/icolor", "famous","manage/map","master" %>
+<%end-%>
+
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<ul class="breadcrumb">
+  <li><a href="index.html">首页</a> > </li>
+  <li><a href="famous.html">对话名人</a> > </li>
+  <li class="active">名人问答</li>
+</ul>
+<hr class="border2 border2_mt2">
+<a href="#"><img src="images/channel/banner1.jpg" alt="" width="1000" height="85" style="height: 85px;"/></a>
+
+<div class="clearfix mt10">
+  <div class="pull-left famous_left">
+    <div id="celebrity_questions"></div>
+  </div>
+  <div class="pull-right smaller famous_right">
+    <div class="index_main nopadding">
+      <div class="famous_tips text-center">
+        <p>解决<strong>0265483679</strong>问题</p>
+        <p><a href="<%= new_dialog_celebrity_celebrity_question_path -%>" class="btn_ask text-left">我要提问</a></p>
+      </div>
+    </div>
+    <ul class="unstyled map-right index_main mt10 js-img_show">
+      <li class="clearfix refresh_r_tit">
+        <a href="#" target="_blank" class="pull-right"><small class="muted">更多&gt;</small></a>
+        <strong class="pull-left">最新大师作品</strong>
+      </li>
+      <li class="map-r1 active dott1">
+        <i class="icon-i16 icon-1">1</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="js-img"><img src="images/map/img/map01.jpg" alt=""></a>
+      </li>
+      <li class="map-r2">
+        <i class="icon-i16 icon-2">2</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt=""></a>
+      </li>
+      <li class="map-r3">
+        <i class="icon-i16 icon-3">3</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt=""></a>
+      </li>
+      <li class="map-r4">
+        <i class="icon-i16 icon-4">4</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt=""></a>
+      </li>
+      <li class="map-r5">
+        <i class="icon-i16 icon-5">5</i>
+        <strong class="js-title">20万装修148平简欧风舒适四房</strong>
+        <a href="#" class="hide js-img"><img src="images/map/img/map01.jpg" alt=""></a>
+      </li>
+    </ul>
+    <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg" width="230" height="170"></a></div>
+    <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg" width="230" height="230"></a></div>
+    <!-- <div class="mt10"><a href="#"><img src="images/refresh/refresh_list_banner2.jpg" width="230" height="170"></a></div> -->
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="refresh_new pull-left">
+    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
+    <ul class="ul_dot">
+      <li><a href="#" target="_blank">空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
+      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
+      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
+      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
+      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
+    </ul>
+  </div>
+  <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+</div>
+
+<div id="float_right_btn">
+  <p id="back-top">
+    <a href="#top"><img src="images/back_top.png"></a>
+  </p>
+  <a href="javascript:;" class="codebar">
+    <img class="code_big" src="images/code_big.jpg">
+    <img src="images/code.png">
+  </a>
+  <a href="javascript:;" class="ask_btn mt10 js-ask_btn">
+    <img src="images/ask.png" alt="我要咨询" />
+    <form action="" class="ask_form nomargin">
+      <fieldset class="">
+        <h5>我要咨询</h5>
+        <p>
+          亲爱的会员您好！请问您有什么需要咨询？<br>您可以给我们留言，我们会通过系统消息对您的留言给予答复！
+        </p>
+        <textarea name="" id="" cols="" rows=""></textarea>
+        <div class="text-right">
+          <button class="btn btn-success btn-large">确定</button>
+        </div>
+      </fieldset>
+    </form>
+  </a>
+</div>
+
+<%= javascript_include_tag "bootstrap/bootstrap.min" %>
+<%= javascript_include_tag "famous/main" %>
+
+<script type="text/javascript">
+$(function(){
+  $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
+    $("#celebrity_questions").html(result.content)
+  })
+})
+</script>
