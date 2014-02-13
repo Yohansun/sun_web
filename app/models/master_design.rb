@@ -19,4 +19,7 @@ class MasterDesign < ActiveRecord::Base
     self.design_name
   end
 
+  def cover_design_upload
+    master_design_uploads.where(:is_cover => true).first
+  end
 end
