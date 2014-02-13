@@ -80,3 +80,4 @@ $ ->
             obj.parent().parent().parent().prev().find("a:first").css("color","green").text("已回复").click()
 
   window.D = D = new Media(window,window.document,window.document.body)
+

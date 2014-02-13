@@ -1,41 +1,102 @@
-<h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
-<ul class="breadcrumb">
-  <li><a href="/">首页</a> > </li>
-  <li><a href="/dialog_celebrity">对话名人</a> > </li>
-  <% if controller_name == "celebrity_notes" -%>
-    <li><a href="/dialog_celebrity/celebrity_notes">名家手记</a> > </li>
-  <%end -%>
-  <% if controller_name == "editor_treasuries" -%>
-    <li><a href="/dialog_celebrity/editor_treasuries">小编宝典</a> > </li>
-  <%end-%>
-
-  <li class="active"><%=@article.name%></li>
-</ul>
-<hr class="border2 border2_mt2">
-
-<div class="clearfix">
-  <div class="index_main pull-left events_in">
-    <h4 class="text-center title"><%=@article.name%></h4>
-    <%= raw @article.content -%>
+<% content_for :head do -%>
+    <%= stylesheet_link_tag "industry_news","style" %>
+    <style type="text/css">
+    .news_content p{margin:10px 0;}
+    </style>
+<% end -%>
+<%- content_for :tail do %>
+     <!-- <div class="float_ads tr">
+      <a href="/gift"><img src="<%#rail= asset_path "float_ads.gif"%>"/></a><br/>
+      <a href="javascript:void(0)" class="shut_float ft12">关闭</a>
+    </div> -->
+<%- end %>
+<div class="main industry_news">
+  <div class='sub_title tr'>
+    <img src="<%= asset_path "design/title_news.png" %>"/>
   </div>
-  <div class="pull-right smaller">
+  <div class='sub_nav ft12 pr tr'>
+    <em><%= link_to @article.name, "#" %></em>
+    <% if controller_name == "celebrity_notes" -%>
+      <em><%= link_to "名家手记", "/dialog_celebrity/celebrity_notes", :class => 'fb' %><span></span></em>
+    <% else -%>
+      <em><%= link_to "小编宝典", "/dialog_celebrity/editor_treasuries", :class => 'fb' %><span></span></em>
+    <%end-%>
+    <em><%= link_to "对话名人", "/dialog_celebrity" %><span></span></em>
+    <em><%= link_to "首页", "/" %><span></span></em>
+  </div><!--sub_nav ends-->
+  <div class="wrapper group news_detail">
+    <div class='news_top clear ft12'>
+      <%#= link_to "全部", "/articles" %>
+      <%# ["设计相关","产品相关"].each do |tag| %>
+          <%#= link_to tag, "/articles?tags=#{URI.escape(tag)}", :class => "#{'active' if tag == params[:tags] }" %>
+      <%# end %>
+    </div>
+    <div class="shadow news_detail_main">
+      <div class="section">
+        <div class="title">
+          <h1><%= @article.name %></h1>
+          <div class="info clear" style="padding:0 280px;">
+            <div class="time">时间：<%= @article.created_at.to_date %></div>
+            <div id="ckepop" class="fr">
+              <span class="jiathis_txt">一键分享：</span>
+              <a class="jiathis_button_tsina"></a>
+              <a class="jiathis_button_kaixin001"></a>
+              <a class="jiathis_button_renren"></a>
+              <a class="jiathis_button_qzone"></a>
+              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+            </div>
+          </div>
+        </div>
+        <div class="news_content">
+          <%= raw @article.content %>
+        </div>
 
-    <%= render "dialog_celebrity/shared/media_chann" -%>
-    <%= render "dialog_celebrity/shared/new_designs" -%>
 
-    <%= render partial: 'design_images/image_list', locals: { i_column_type_id: 4, name: '装修效果图精华推荐' } %>
-    <div><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>"></a></div>
-    <div class="mt10"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x230)%>"></a></div>
-    <div class="mt10"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_230x170)%>"></a></div>
+        <div class="news_footer">
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop">
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_kaixin001"></a>
+            <a class="jiathis_button_renren"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+          </div>
+          <!-- JiaThis Button END -->
+        </div>
+        </div>
+        <% content_for :tail do %>
+        <script type="text/javascript" charset="utf-8">
+            var jiathis_config = {
+                boldNum:4,
+                siteNum:4,
+                showClose:false,
+                sm:"kaixin001,renren,tsina,tqq",
+                imageUrl:"http://v2.jiathis.com/code/images/r5.gif",
+                imageWidth:26,
+                marginTop:150,
+                url:"<%= request.url%>",
+                title:"#iColor对话名人#我正在阅读设计名家：<%=@article.name%>的设计手记，他对设计方面的理解让我深受启发，大家也一起来学习下吧。他还可以在线解答我的装修疑惑哦，你也来看看吧",
+                pic:"<%= (request.base_url + @article.thumb(:thumb)) unless @article.thumb.nil? %>",
+                data_track_clickback: true
+            }
+
+          </script>
+          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+        <% end %>
+
+      </div>
+    </div>
+    <div class="sub_bot pr">
+      <div class="pager topic_pager ft12">
+        <%- unless @next_article.nil? %>
+            <a href="/articles/<%= @next_article.id %>" class="prev"><span></span>上一篇</a>
+        <%- end %>
+        <%- unless @prev_article.nil? %>
+            <a href="/articles/<%= @prev_article.id %>" class="next"><span></span>下一篇</a>
+        <%- end %>
+      </div>
+      <!--pager ends-->
+    </div>
+    <!--sub_bot ends-->
   </div>
-</div>
-
-<div class="index_main refresh_news mt10 clearfix">
-  <%= render "refresh_record/foot_select" %>
-  <div class="pull-right"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_230x230)%>"></a></div>
-</div>
-
-<div class="clearfix">
-  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[5].url%>"><img src="<%=@banners[5].file(:list_670x85)%>"></a></div>
-  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[6].url%>"><img src="<%=@banners[6].file(:list_310x85)%>"></a></div>
 </div>

@@ -79,4 +79,3 @@ class Manage::DialogCelebrities::MasterDesignsController < Manage::BaseControlle
     render :text => "succ"
   end
 
-end
