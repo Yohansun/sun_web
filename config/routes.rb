@@ -1,5 +1,17 @@
 #encoding: utf-8
 Icolor::Application.routes.draw do
+  get "master_design_uploads/index"
+
+  get "master_design_uploads/new"
+
+  get "master_design_uploads/edit"
+
+  get "master_designs/index"
+
+  get "master_designs/new"
+
+  get "master_designs/edit"
+
   get "master_profiles/index"
 
   # match "/system/*path" => redirect("http://icolor.dev/dev-assets/logo.jpg")
@@ -463,6 +475,18 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+  get "master_design_uploads/index"
+
+  get "master_design_uploads/new"
+
+  get "master_design_uploads/edit"
+
+  get "master_designs/index"
+
+  get "master_designs/new"
+
+  get "master_designs/edit"
+
   get "master_profiles/index"
 
     match "/baicheng/daily_report"=>'baicheng#daily_report'
@@ -813,10 +837,19 @@ Icolor::Application.routes.draw do
       post "save_data", to: 'home#save_data'
       match 'celebrity_questions/:action' => 'celebrity_questions', via: [:get, :post]
       match 'master_profiles/:action' => 'master_profiles', via: [:get, :post]
+      match 'media/:action' => 'media', via: [:get, :post]
       resources :celebrity_notes
       resources :celebrity_questions
       resources :editor_treasuries
       resources :master_profiles
+      resources :master_designs do
+        post :delete
+      end
+      resources :master_design_uploads
+      resources :media
+      post 'master_design_upload_file' => 'master_design_uploads#create_file'
+      post 'master_design_upload_save_all' => 'master_design_uploads#save_all'
+      post 'master_design_upload_ajax_delete' => 'master_design_uploads#delete'
     end
 
     delete "life_memoirs/destroy", to: 'life_memoirs#destroy'
@@ -899,9 +932,26 @@ Icolor::Application.routes.draw do
 
   namespace :dialog_celebrity do
     #root "dialog_celebrity/home#index"
-    resources :celebrities
+    root to: 'home#index', as: 'dialog_celebrities_root'
     resources :celebrity_notes
     resources :celebrity_questions
+    resources :celebrity_question_replies
     resources :editor_treasuries
+
+    match 'refresh_celebrity_questions', to: "celebrity_questions#refresh_questions", via: [:get,:post]
+    post 'create_question_reply', to: "celebrity_question_replies#reply"
+    post 'destroy_question_reply', to: "celebrity_question_replies#delete"
+
+    resources :master_designs
+    resources :master_profiles do
+      collection do
+        get :celebrities
+      end
+      member do
+        get :master_interview
+      end
+    end
+    get 'master_interviews', to: "master_profiles#maste_interviews"
+    match 'media/:action' => 'media', via: [:get, :post]
   end
 end

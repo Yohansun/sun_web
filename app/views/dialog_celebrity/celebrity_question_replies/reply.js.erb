@@ -1,0 +1,6 @@
+$(function(){
+  $obj = $(".famous_list").find("div[data-question-id=<%=@reply.question.id%>]")
+  $form = $obj.find("form")
+  $form.after("<%=raw escape_javascript @content%>")
+  $form.hide()
+})

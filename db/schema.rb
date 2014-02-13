@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218031202) do
+ActiveRecord::Schema.define(:version => 20140213025608) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -176,12 +176,13 @@ ActiveRecord::Schema.define(:version => 20140218031202) do
   end
 
   create_table "celebrity_question_replies", :force => true do |t|
-    t.string   "name",                  :null => false
+    t.string   "name"
     t.text     "content"
     t.integer  "user_id"
     t.integer  "celebrity_question_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "media_id"
   end
 
   add_index "celebrity_question_replies", ["celebrity_question_id"], :name => "index_celebrity_question_replies_on_celebrity_question_id"
@@ -1204,6 +1205,15 @@ ActiveRecord::Schema.define(:version => 20140218031202) do
     t.string   "py"
     t.string   "name"
     t.text     "intro"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "media", :force => true do |t|
+    t.string   "name"
+    t.string   "username"
+    t.string   "password"
+    t.text     "boards"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

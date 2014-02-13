@@ -1,11 +1,22 @@
 #encoding: utf-8
 class Manage::DialogCelebrities::MasterProfilesController < Manage::BaseController
   def index
-    @collection = collection
+    @collection = collection.unscoped
     if params[:query]
-      @collection = @collection.where("celebrity_content_board_id = ? and name LIKE ?", params[:board_id],"%#{params[:name]}%")
+      mtype = params[:mtype]
+      board_id = params[:board_id]
+      name = params[:name]
+      if mtype.present?
+        @collection = @collection.where(:mtype => mtype.to_i)
+      end
+      if board_id.present?
+        @collection = @collection.where(:celebrity_content_board_id => board_id.to_i)
+      end
+      if name.present?
+        @collection = @collection.where("name LIKE ?", "%#{name}%")
+      end
     end
-    @collection = @collection.unscoped.order("updated_at desc").page(params[:page]).per(8)
+    @collection = @collection.order("updated_at desc").page(params[:page]).per(8)
   end
 
   def edit

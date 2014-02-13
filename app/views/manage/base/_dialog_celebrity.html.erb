@@ -7,12 +7,15 @@
 <li class="<%= 'active' if controller_name == 'master_profiles' %>">
   <a href="<%=dialog_celebrities_master_profiles_path%>">名人管理</a>
 </li>
-<li class="<%= 'active' if controller_name == 'celebrity_online' %>">
-  <a href="/manage/celebrity_online">名人家设计</a>
-</li>
 <li class="<%= 'active' if controller_name == 'celebrity_notes' %>">
-  <a href="<%=dialog_celebrities_celebrity_notes_path%>">名人手记</a>
+  <a href="<%=dialog_celebrities_celebrity_notes_path%>">手记管理</a>
+</li>
+<li class="<%= 'active' if controller_name == 'master_designs' || controller_name == 'master_design_uploads' %>">
+  <a href="<%=dialog_celebrities_master_designs_path%>">作品管理</a>
 </li>
 <li class="<%= 'active' if controller_name == 'editor_treasuries' %>">
   <a href="<%=dialog_celebrities_editor_treasuries_path%>">小编宝典</a>
+</li>
+<li class="<%= 'active' if controller_name == 'media' %>">
+  <a href="<%=dialog_celebrities_media_path%>">QA管理系统</a>
 </li>

@@ -45,5 +45,7 @@
 .control-group.clearfix
   %label.control-label.fl
   .controls.fl.ml20
-    = f.button :submit,:value => "保存"
+    = f.button :submit,:value => "保存",class: "btn btn-small radius6"
+  .controls.fl.ml20
+    %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/celebrity_notes"} 返回
 
