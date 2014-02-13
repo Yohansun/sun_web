@@ -14,23 +14,23 @@ class LanternsController < ApplicationController
       rand = rand(10)
       if rand < 3
         Lantern.create(user_id: current_user.id, content: '玫瑰',date_at: @date_today)
-        render js: "$('#unwinning').modal();" and return
+        render js: "$('#unwinning').modal(); $('.modal-backdrop').unbind('click');" and return
       end
       if rand > 2 && rand < 6
         Lantern.create(user_id: current_user.id, content: '手机壳',date_at: @date_today)
-        render js: "$('#phone').modal();" and return
+        render js: "$('#phone').modal(); $('.modal-backdrop').unbind('click');" and return
       end
       if rand > 5 && rand < 9
         Lantern.create(user_id: current_user.id, content: 'U盘',date_at: @date_today)
-        render js: "$('#upan').modal();" and return
+        render js: "$('#upan').modal(); $('.modal-backdrop').unbind('click');" and return
       end
       if rand > 8
         Lantern.create(user_id: current_user.id, content: '礼包',date_at: @date_today)
-        render js: "$('#libao').modal();" and return
+        render js: "$('#libao').modal(); $('.modal-backdrop').unbind('click');" and return
       end
 
     else
-      render js: "alert('每位用户只能中奖一次，感谢您的参与。');"
+      render js: "alert('每位用户每日只能中奖一次，感谢您的参与！');"
     end
   end
 
