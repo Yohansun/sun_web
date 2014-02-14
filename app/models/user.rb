@@ -196,10 +196,6 @@ class User < ActiveRecord::Base
     self.role_id == 3
   end
 
-  def media?
-    self.role_id == 4
-  end
-
   def unread_msgs
     self.sys_msgs.where(["status = ?", 0]).order("created_at")
   end
