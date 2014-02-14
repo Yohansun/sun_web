@@ -8,10 +8,6 @@ gem 'mysql2'
 
 gem 'json'
 
-gem 'haml',           '~> 3.1.4'
-gem 'haml-rails',     '~> 0.3.4'
-gem 'coffee-filter'
-
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -74,8 +70,7 @@ gem 'savon'
 gem 'collections'
 
 # API
-gem 'grape', "0.2.1"
-gem 'grape-entity'
+gem 'grape'
 gem 'uuidtools'
 
 #自动补全
@@ -83,7 +78,7 @@ gem 'twitter-bootstrap-rails', '>= 2.1.9'
 
 gem 'awesome_nested_set'
 
-gem 'ruby-pinyin', '0.2.4'
+gem 'ruby-pinyin'
 
 gem "abacus_count"
 #gem "magic_admin", :path => "/home/mos/code/magic_admin"
@@ -97,3 +92,7 @@ gem 'whenever', :require => false
 gem 'rubyzip'
 
 gem 'hipchat'
+
+gem 'haml',           '~> 3.1.4'
+gem 'haml-rails',     '~> 0.3.4'
+gem 'coffee-filter'
