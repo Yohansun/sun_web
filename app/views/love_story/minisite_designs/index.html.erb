@@ -1,0 +1,117 @@
+<div class="container-fluid bann_green_skin show">
+  <div class="banner"></div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <div class="ph10 clearfix">
+        <div class="left_big pull-left">
+          <div class="index_main">
+            <form action="" class="form_search nomargin form-inline linkageseclet">
+              <div class="pull-right">
+                <input type="text" class="nomargin pull-left" placeholder="搜名字" />
+                <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
+              </div>
+              <strong class="label-text">地区:</strong>
+              <select class="level_1 input-small" name="" id="">
+                <!-- <option value="">请选择省</option> -->
+              </select>
+              <select class="level_2 input-small" name="" id="">
+                <!-- <option value="">请选择市</option> -->
+              </select>
+              <button class="btn">确定</button>
+            </form>
+          </div>
+          <div class="mt10"><a href="javascript:;" class="icon-btn icon-upload_works">上传设计作品</a></div>
+          <div class="eq_hi_list">
+            <div class="thumbnails noborder">
+              <div class="span3 thumbnail">
+                <a href="#" target="_blank" class="help-block text-center">
+                  <img src="<%= asset_path 'love_story/images/show/worklist1.jpg'%>" alt="" />
+                </a>
+                <h5 class="dot_linet1 title pr">
+                  <a href="#" target="_blank" class="btn_invite pa"></a>
+                  <a href="#" target="_blank" class="a_hover_red">金龙花苑设计案例金龙花苑设计案例金龙花苑设计案例</a>
+                </h5>
+                <span class="author">北欧E家</span>
+                <p class="clearfix">
+                  <span class="pull-right"><i class="icon-i16 icon-xin"></i>93849</span>
+                  风格: 现代简约
+                </p>
+              </div>
+            </div>
+            <div class="pagination pagination-centered">
+              <ul>
+                <!-- <li class="disabled"><a href="#">上一页</a></li> -->
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a class="noborder nomargin nopadding" href="#">...</a></li>
+                <li><a href="#">下一页</a></li>
+                <li><a href="#">最后一页</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="right_small pull-right">
+          <div class="big_menu index_main">
+            <div class="media media_chann">
+              <a class="pull-left" href="#" target="_blank">
+                <i class="icon-chann icon-chann_master"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="#" target="_blank">对话名人</a></h4>
+                <p class="media_con nomargin">直面室内设计专家，为你解决装修问题！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="/images" target="_blank">
+                <i class="icon-chann icon-chann_imgbase"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+                <p class="media_con nomargin">网罗海量家装图片，锁定心仪设计需求！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="/refresh_record" target="_blank">
+                <i class="icon-chann icon-chann_fresh3"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="/refresh_record" target="_blank">刷新生活</a></h4>
+                <p class="media_con nomargin">分享刷新故事，体验艺术生活！</p>
+              </div>
+            </div>
+          </div>
+          <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 1, title: '最新大师作品' } %>
+          <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 4, title: '装修效果图精华推荐' } %>
+          <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 5, title: '本周最热装修设计' } %>
+        </div>
+      </div>
+      <div class="index_main mt10">
+        <div class="ul_dot_lists clearfix">
+          <%= render partial: 'love_story/base/jx_list', locals: {resource: @images_jx, resource_more: @images_jx_more, title: '装修图库精选'} %>
+          <%= render partial: 'love_story/base/jx_list', locals: {resource: @star_jx, resource_more: @star_jx_more, title: '设计之星作品精选'} %>
+          <div class="pull-right">
+            <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank">
+              <%= image_tag @banners[0].try(:file).try(:url, :list_230x230), alt: '' if @banners[0].present? %>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="rebanner mt10 pull-left">
+          <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank">
+            <%= image_tag @banners[1].try(:file).try(:url, :list_670x85), alt: '' if @banners[1].present? %>
+          </a>
+        </div>
+        <div class="rebanner mt10 pull-right">
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank">
+            <%= image_tag @banners[2].try(:file).try(:url, :list_310x85), alt: '' if @banners[2].present? %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

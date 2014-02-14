@@ -876,6 +876,7 @@ Icolor::Application.routes.draw do
         post :del_image
       end
     end
+    resources :minisite_designs
   end
 
 end

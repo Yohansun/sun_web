@@ -1,9 +1,4 @@
 $(function(){
-	$('.drophover_toggle').parent().hover(function(){
-		console.log($(this))
-		$(this).find('.drophover_menu').toggle();
-	});
-
   // upload
   ;(function($){
     $('.js-text_percentage').bind('keydown keyup', function(){
@@ -30,5 +25,35 @@ $(function(){
       e.stopPropagation();
       modal.hide();
     });
+  })($);
+
+  //right sidebar list
+  ;(function($){
+    $('.js-img_show').on('click', '.js-title', function(){
+      $(this).parent('li').siblings().find('a.js-img').hide();
+      $(this).parent('li').addClass('active').siblings('li').removeClass('active')
+      $(this).siblings('a.js-img').show();
+    })
+  }($));
+  //LinkageSelect
+  ;(function($){
+    //linkageselect
+    if(typeof data != 'undefined'){
+      var options = {
+        data  : data // data变量数据从location.js得来
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.linkageseclet .level_1','0');
+      sel.bind('.linkageseclet .level_2');
+      // sel.bind('.linkageseclet .level_3');
+
+      var options2 = {
+        data  : data // data变量数据从location.js得来
+      }
+      var sel2 = new LinkageSelect(options2);
+      sel2.bind('.linkageseclet2 .level_1','0');
+      sel2.bind('.linkageseclet2 .level_2');
+      sel2.bind('.linkageseclet2 .level_3');
+    }
   })($);
 })

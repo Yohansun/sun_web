@@ -1,0 +1,2 @@
+module LoveStory::MinisiteDesignsHelper
+end

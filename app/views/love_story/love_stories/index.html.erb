@@ -72,11 +72,11 @@
   });
   </script>
 <%- end %>
-<div class="container-fluid story">
+<div class="container-fluid bann_green_skin">
   <div class="banner">
     <!-- <a href="#" class="btn pa"></a> -->
     <div class="wrapper">
-      <%= image_tag 'love_story/images/story/story-banner2.jpg', usemap: '#story_kv', alt: '' %>
+      <%= image_tag 'love_story/images/banners/banner2.jpg', usemap: '#story_kv', alt: '' %>
       <map name="story_kv" name="story_kv">
         <area shape="rect" coords="56,253,250,290" href="javascript:;" alt="" />
       </map>
@@ -89,6 +89,10 @@
         <div class="left_big pull-left">
           <div class="index_main">
             <%= form_tag '/love_story/love_stories', method: :get, class: 'form_search nomargin form-inline' do %>
+              <div class="pull-right">
+                <input type="text" class="nomargin pull-left" placeholder="搜名字" name="user_name" value="<%= params[:user_name] if params[:user_name].present? %>" />
+                <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
+              </div>
               <strong class="label-text">地区:</strong>
               <select id="province" class="level_1 input-small" name="province_id"></select>
               <select id="city" class="level_2 input-small" name="city_id"></select>
@@ -97,10 +101,6 @@
                 ["icolor上传","icolor"],
                 ["新浪微博上传", "sina"]], params[:come_from]), :class => "input-small" %>
               <button class="btn">确定</button>
-              <div class="pull-right">
-                <input type="text" class="nomargin pull-left" placeholder="搜名字" name="user_name" value="<%= params[:user_name] if params[:user_name].present? %>" />
-                <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
-              </div>
             <% end %>
           </div>
           <div class="mt10">
@@ -166,35 +166,25 @@
           <!-- 装修丘比特 -->
           <%= render partial: 'design_images/cubit' %>
           <div class="mt10">
-            <a href="#"><img src="<%= asset_path 'love_story/images/ads/ads1.jpg'%>" alt="" /></a>
+            <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank">
+              <%= image_tag @banners[0].try(:file).try(:url, :list_230x230), alt: '' if @banners[0].present? %>
+            </a>
           </div>
         </div>
       </div>
       <div class="mt25">
-        <a href="#"><img src="<%= asset_path 'love_story/images/ads/ads2.jpg'%>" alt="" /></a>
+        <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank">
+          <%= image_tag @banners[1].try(:file).try(:url, :list_1000x85), alt: '' if @banners[1].present? %>
+        </a>
       </div>
       <div class="p010 ul_dot_lists mt25 clearfix">
-        <div class="ul_dot_list pull-left">
-          <h5><a href="<%= @images_jx_more.url if @images_jx_more%>" target="_blank" class="pull-right a_hover_red"><small class="muted">更多></small></a>装修图库精选</h5>
-          <ul class="ul_dot">
-            <%- @images_jx.each_with_index do |m,i| %>
-              <li class="<%= 'noborder' if i == @images_jx.size - 1 %>">
-                <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
-              </li>
-            <%- end %>
-          </ul>
+        <%= render partial: 'love_story/base/jx_list', locals: {resource: @images_jx, resource_more: @images_jx_more, title: '装修图库精选'} %>
+        <%= render partial: 'love_story/base/jx_list', locals: {resource: @star_jx, resource_more: @star_jx_more, title: '设计之星作品精选'} %>
+        <div class="pull-right">
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank">
+            <%= image_tag @banners[2].try(:file).try(:url, :list_230x230), alt: '' if @banners[2].present? %>
+          </a>
         </div>
-        <div class="ul_dot_list pull-left">
-          <h5><a href="<%= @star_jx_more.url if @star_jx_more %>" target="_blank" class="pull-right a_hover_red"><small class="muted">更多></small></a>设计之星作品精选</h5>
-          <ul class="ul_dot">
-            <%- @star_jx.each_with_index do |m,i| %>
-              <li class="<%= 'noborder' if i == @images_jx.size - 1 %>">
-                <a href="<%= m.url %>" target="_blank"><%= m.title %></a>
-              </li>
-            <%- end %>
-          </ul>
-        </div>
-        <div class="pull-right"><a href="#"><img src="<%= asset_path 'love_story/images/ads/ads1.jpg'%>"></a></div>
       </div>
     </div>
   </div>
