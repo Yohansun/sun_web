@@ -69,8 +69,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           else
             if session[:baigcheng_login].present?
               sign_in(:user, authentication.user)
+              cookies['user_display_name'] = authentication.user.display_name
+              cookies['user_id'] = authentication.user.id
               redirect_to baicheng_root_path
             else
+              cookies['user_display_name'] = authentication.user.display_name
+              cookies['user_id'] = authentication.user.id
               sign_in_and_redirect(:user, authentication.user)
             end
           end
@@ -91,6 +95,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               redirect_to "/mobile/index.php/Users/apilogin/id/#{user.id}/name/#{user.username}"
             else
               sign_in(:user, user)
+              cookies['user_display_name'] = user.display_name
+              cookies['user_id'] = user.id
               if session[:baigcheng_login].present?
                 redirect_to baicheng_root_path
               else
