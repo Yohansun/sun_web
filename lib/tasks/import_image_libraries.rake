@@ -118,10 +118,8 @@ end
 desc "科普兰德图库数据导入"
 task :import_image_libraries_for_kepulande => :environment  do
   Spreadsheet.client_encoding = "UTF-8"
-  # files = ['kepulande_r1.xls', 'kepulande_r2.xls', 'kepulande_r3.xls', 'kepulande_r4.xls']
-  # files.each do |xls_name|
     image_id = []
-    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande-r18.xls"
+    book = Spreadsheet.open "#{Rails.root}/lib/data/kepulande_20140214.xls"
     sheet1 = book.worksheet 0
     sheet1.each do |row|
       name = ""
@@ -150,20 +148,13 @@ task :import_image_libraries_for_kepulande => :environment  do
         new_user.des_status = 0
         new_user.save(validate: false)
       end
-      #style = ImageLibraryCategory.where(title: row[6]).first
-      # room = ImageLibraryCategory.where(title: row[5]).first
       area = Area.where("name like '%#{row[5].gsub(/市/,'')}%'").first if row[5].present?
       design = Design.new
       design.title = row[0]
-      # design.content = row[13]
       design.user_id = new_user.id
-      #design.style = style.title if style
       design.area_id = area ? area.id : 31
-      # design.room_type = room.title if room
       if design.save(validate: false)
-        # file_src_arr = Dir["/home/nioteam/icolor/lande/r4/#{row[1].gsub('\\', '/')}/*"]
         file_src_arr = Dir["/home/nioteam/icolor/kepulande/#{row[1]}/*"]
-        # file_src_arr = Dir["/Users/sky/Downloads/kepulande/#{row[1]}/*"]
         unless file_src_arr.blank?
           file_src_arr.each do |file_src|
             p file_src
@@ -178,10 +169,6 @@ task :import_image_libraries_for_kepulande => :environment  do
               design_image.file = handle
               design_image.title = row[0]
               design_image.area_id = area ? area.id : 31
-              #image_tag = ImageTag.where(image_library_category_id: style.id).first if style
-              #design_image.tags = [image_tag] if image_tag.present?
-              # design_image.room = room.id if room
-              # design_image.content = row[13]
               design_image.user_id = new_user.id
               design_image.source = 'kepulande'
               p "~~~~~~~开始保存！"
