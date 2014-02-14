@@ -80,7 +80,7 @@
 /*.famous_article .famous_list span{margin-top:4px;}*/
 
 /*question*/
-.famous_tips{width:auto;}
+.famous_right .famous_tips{width:auto;}
 .famous_left .famous_tab_content .title{margin:0 5px;}
 .search_tags_form{padding:5px 5px 0;margin-bottom:10px;border-top:1px solid #e8e8e8;font:12px/18px "SimSun";}
 .search_tags_form label{font:12px/18px "SimSun";color:#454545;cursor:default;margin:6px 0 3px;}
