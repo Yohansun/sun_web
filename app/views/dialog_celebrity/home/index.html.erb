@@ -1,7 +1,41 @@
 <% content_for :head do %>
-<%= javascript_include_tag "bootstrap/jquery.min" %>
-<%= stylesheet_link_tag "manage/icolor", "famous" %>
+<%= stylesheet_link_tag "famous","colorbox/colorbox" %>
 <%end-%>
+
+<%- content_for :tail do %>
+  <%= javascript_include_tag "jquery.colorbox" %>
+
+  <script type="text/javascript">
+  $(function(){
+    $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
+      $("#celebrity_questions").html(result.content)
+    })
+  })
+
+  $(document).ready(function(){
+    $('.imgsgroup').colorbox({
+      rel:              'imgsgroup',
+      slideshow:        true,
+      width:            '725px',
+      slideshowStart:   "",//slideshowStart:   "<span>start</span>",
+      slideshowStop:    "",
+      current:          "{current}/{total}"
+    });
+    $('.icon-imgshow_btn').click(function(){//alert(9)
+      $(this).siblings('.imgs_group').find('.js-btns_imgsgroup .imgsgroup').click()
+    });
+    $('.imgsgroup1').colorbox({
+      rel:              'imgsgroup1'
+    });
+    $('.imgsgroup2').colorbox({
+      rel:              'imgsgroup2'
+    });
+    $('.imgsgroup3').colorbox({
+      rel:              'imgsgroup3'
+    });
+  });
+  </script>
+<%- end %>
 
 <h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
 <ul class="breadcrumb">
@@ -110,76 +144,3 @@
 </div>
 
 <a href="#"><img class="mt10" src="images/channel/banner1.jpg"></a>
-
-<div id="float_right_btn">
-  <p id="back-top">
-    <a href="#top"><img src="images/back_top.png"></a>
-  </p>
-  <a href="javascript:;" class="codebar">
-    <img class="code_big" src="images/code_big.jpg">
-    <img src="images/code.png">
-  </a>
-  <a href="javascript:;" class="ask_btn mt10 js-ask_btn">
-    <img src="images/ask.png" alt="我要咨询" />
-    <form action="" class="ask_form nomargin">
-      <fieldset class="">
-        <h5>我要咨询</h5>
-        <p>
-          亲爱的会员您好！请问您有什么需要咨询？<br>您可以给我们留言，我们会通过系统消息对您的留言给予答复！
-        </p>
-        <textarea name="" id="" cols="" rows=""></textarea>
-        <div class="text-right">
-          <button class="btn btn-success btn-large">确定</button>
-        </div>
-      </fieldset>
-    </form>
-  </a>
-</div>
-
-
-<%= stylesheet_link_tag "colorbox/colorbox" %>
-<%= javascript_include_tag "bootstrap/bootstrap.min","famous","jquery.colorbox" %>
-
-<script type="text/javascript">
-$(function(){
-  $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
-    $("#celebrity_questions").html(result.content)
-  })
-})
-
-
-$(document).ready(function(){
-  $('.imgsgroup').colorbox({
-    rel:              'imgsgroup',
-    slideshow:        true,
-    width:            '725px',
-    slideshowStart:   "",//slideshowStart:   "<span>start</span>",
-    slideshowStop:    "",
-    current:          "{current}/{total}"
-  });
-  $('.icon-imgshow_btn').click(function(){//alert(9)
-    $(this).siblings('.imgs_group').find('.js-btns_imgsgroup .imgsgroup').click()
-  });
-  $('.imgsgroup1').colorbox({
-    rel:              'imgsgroup1'
-  });
-  $('.imgsgroup2').colorbox({
-    rel:              'imgsgroup2'
-  });
-  $('.imgsgroup3').colorbox({
-    rel:              'imgsgroup3'
-  });
-});
-
-
-</script>
-
-
-
-
-
-
-
-
-
-

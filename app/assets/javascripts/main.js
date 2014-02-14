@@ -992,6 +992,10 @@ $(function(){
             scroll : 1,
             pagers : '.circle_indicators'
         });
+        $('#famous_online').slider({
+            pagers: '.circle_indicators',
+            margin : 38
+        });
         $('.gift_carousel').slider({
             auto: false,
             scroll: 1,
