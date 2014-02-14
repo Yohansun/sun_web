@@ -74,7 +74,7 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 /*.icon-map7{background-position:0 -240px;}*/
 .icon-map8{background-position:0 -280px;}
 .icon-map9{background-position:0 -320px;}
-.index_map li:hover .icon-map1{background-position:-40px 0;}
+.index_map li:hover .icon-map1,.icon-map.icon-map1.icon_colors{background-position:-40px 0;}
 .index_map li:hover .icon-map2,.icon-map.icon-map2.icon_colors{background-position:-40px -40px;}
 .index_map li:hover .icon-map3,.icon-map.icon-map3.icon_colors{background-position:-40px -80px;}
 .index_map li:hover .icon-map4,.icon-map.icon-map4.icon_colors{background-position:-40px -120px;}
@@ -93,14 +93,16 @@ a.next span{right:3px;_left:50px;border-width:5px;border-style: solid none solid
 .icon-comment1{background-position:-32px -314px;margin-top:0;}
 .icon-share1{background-position:-32px -329px;margin-top:-1px;}
 .icon-edit2{background-position:1px -341px;}
+.icon-arrowdown{background-position:-35px -752px;vertical-align:middle;margin-top:-1px;}
 .icon-i30{height:30px;width:30px;line-height:30px;background:url(<%= asset_path 'manage/icons.png'%>) no-repeat;}
 .icon-phone1{background-position:1px -362px;}
 .icon-phone_small{background-position:1px -415px;margin-top:-7px;}
 .icon-slider_prev{background-position:0 -445px;}
 .icon-slider_next{background-position: 2px -475px;}
+.icon-question_mark{background-position:0px -747px;height:25px;width:25px;vertical-align:middle;margin-top:-3px;}
 .icon-i48{height:48px;width:48px;line-height:48px;background:url(<%= asset_path 'manage/icons.png'%>) no-repeat;}
 .icon-right{background-position:0 -573px;vertical-align:middle;}
-.noborder{border:0!important;}
+.icon-imgshow_btn{background:url(<%= asset_path 'manage/icons.png'%>) no-repeat 0 -638px;vertical-align:text-top;width:18px;height:18px;line-height:18px;cursor:pointer;margin-left:8px;}.noborder{border:0!important;}
 .nomargin{margin:0!important;}
 .nopadding{padding:0!important;}
 .none{display:none;}
@@ -600,7 +602,48 @@ li.btn_send a{background:#ffde5c;border:1px solid #ecbeb8;width:65px;line-height
 .float_banner{position:fixed;top:10%;left:0;}
 .float_banner span{position:absolute;width:20px;height:20px;right:0;top:0;cursor:pointer;background:#fff;opacity:0;filter:alpha(opacity=0);}
 .smaller .map-right{padding:10px 9px;height:auto;}
+/*works*/
+.works.imgbase_in_right .map-right{width:198px;}
+.works.imgbase_in_right .map-right a{color:#777;}
+/*interview in*/
+.intv_left{width:760px;height:280px;}
+.intv_right{width:230px;height:280px;background:url(<%= asset_path 'manage/master_intv/bg_right.jpg' %>) no-repeat 0 40px;}
+.intv_right .intv_title a{font:12px/16px "SimSun";color:#6d6d6d;height:16px;padding-top:12px;}
+.intv_title{height:39px;line-height:39px;border-bottom:1px solid #272727;background:#222222;color:#a5a274;font-weight:normal;text-transform:uppercase;padding:0 10px;margin:0;}
+.intv_title span.line_r{display:inline-block;height:14px;line-height:14px;margin:12px 9px 13px 0;padding-right:7px;border-right:1px dashed #a5a274;}
+.intv_title .bdshare_t{color:#c1c1c1;margin-top:4px;}
+.intv_title .bdshare_t span.pull-left{line-height:14px;}
 
+.intv_intro{background:url(<%= asset_path 'manage/master_intv/prointro_bg.jpg' %>) no-repeat;padding-left:21px;}
+.intv_intro h3{font:normal 24px "Microsoft Yahei";color:#ff6600;margin-top:20px;border-bottom:1px solid #505050;height:54px;}
+.intv_intro h3,.intv_intro p{width:422px;text-align:justify;}
+.intv_intro h3 span,.intv_intro p{font:12px/18px "SimSun";color:#9f9f9f;}
+.intv_intro p{max-height:125px;overflow:hidden;}
+.intv_intro h3 .help-block{margin:5px 0 7px;}
+.intv_photo{width:284px;height:240px;background:url(<%= asset_path 'manage/master_intv/prophoto_bg.jpg' %>) no-repeat;}
+.intv_photo img{margin:42px 0 0 71px;}
+
+.intv_right ul{padding:15px 5px 0;}
+.intv_right li{float:left;padding:0px 17px;text-align:center;_display:inline;}
+.intv_right li span.help-block{width:76px;height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.intv_right li img{padding:2px;border:1px solid #d4d4d3;background:#fff;}
+
+.intv_list .index_main{padding:16px 17px 30px;}
+.intv_list li h5{font:normal 14px "SimSun";color:#2a2a2a;}
+.intv_list li span.help-block{margin-left:20px;line-height:20px;}
+.intv_list p span.help-block{color:#9a9457;}
+
+.intv_works .topic_slide{background:none;margin-bottom:10px;}
+.intv_works #master_slide .slider-container {width:895px;}
+.intv_works #master_slide .slider-container li{width:auto;padding:0 2px;}
+.intv_works #master_slide .slider-prev, .intv_works #master_slide .slider-next{top:5px;}
+.intv_works .bg_imgs{width:155px;height:115px;padding:8px 8px 22px;}
+.intv_works .bg_imgs img{width:155px;height:115px;}
+
+.intv_msg blockquote{padding:0 130px 40px;}
+.intv_msg blockquote strong{position:relative;top:25px;font-size:60px;font-family:"Helvetica Neue","Sathu";}
+.intv_msg blockquote span{font:14px "SimSun";color:#2a2a2a;}
+.intv_msg blockquote .muted{font:12px Arial;color:#8d8c8c;margin-left:30px;}
 /*color_designs*/
 .color_designs .map-list-form{height:auto;border-bottom:0;padding:5px 7px;}
 .color_designs .map-list-search{padding-bottom:0;}
@@ -666,6 +709,27 @@ li.btn_send a{background:#ffde5c;border:1px solid #ecbeb8;width:65px;line-height
 .thumb_imgs{margin:6px 0 0 -7px;}
 .thumb_imgs .thumb_item{margin-left:7px;_display:inline;}
 .thumb_imgs .thumb_item img{width:65px;height:65px;}
+/*designer_events*/
+.designer_event_kv{padding:4px 14px 20px;text-align:center;}
+.designer_event_kv img{width:730px;height:300px;}
+.designer_events.refresh_lists .map-left{height:auto;}
+.designer_events.refresh_lists .map-left li{float:none;}
+.designer_events .pager-form.pager{padding-bottom:41px;}
+.designer_events.refresh_lists .tit_con{margin:0px 15px;padding-top:20px;}
+.designer_events.refresh_lists .tit_con .media_a{margin: -20px 5px -20px 0;padding: 20px 11px 20px 0;border-right:1px solid #efefef;}
+.designer_events.refresh_lists .ul_dot h5{display:block;height:24px;white-space: nowrap;text-overflow:ellipsis;overflow: hidden;}
+.designer_events.refresh_lists .ul_dot h5 a{font:bold 14px/24px "SimSun";color:#5b5b5b;}
+/*events_in*/
+.events_in{width:710px;padding:0 24px 40px;}
+.events_in .title{font:18px/22px "SimSun";padding:20px 0;border-bottom:1px dotted #8e8e8e;}
+.events_in .imgs{max-width:680px;}
+.events_in .events_content{width:680px;margin:25px auto 0 auto;text-indent:28px;font:14px/24px "SimSun";color:#363636;text-align:justify;}
+.other_events_in{padding:3px 4px;width:750px;}
+.other_events_con{padding:30px 24px;}
+.other_events_con p{margin:15px 0 35px;font:14px/24px "Microsoft Yahei";color:#353535;}
+.other_events_con a:hover{color:#e72e25;}
+.other_events_in .refresh_news{padding:15px 10px;}
+.btn_titles,.btn_titles:hover{padding: 5px 16px;background: #e72e25;border-radius: 3px;color: #fff;font:18px "Microsoft Yahei";}
 
 /*share works*/
 .per_works .bdshare_t{
