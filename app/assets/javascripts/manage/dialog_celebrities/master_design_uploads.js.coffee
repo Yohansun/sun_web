@@ -22,6 +22,7 @@ $ ->
       )
 
       $('body').on "click","a#save-all", ->
+        cover_upload_id = $("input[name=is-cover]:checked").val()
         arr = []
         $(".file-info").each (index,obj)->
           _obj = new Object
@@ -33,8 +34,7 @@ $ ->
           _obj.recommend_color_category2  = $(obj).find("#color-name2").val()
           _obj.recommend_color_category3  = $(obj).find("#color-name3").val()
           arr.push _obj
-        console.log arr
-        $.post "/manage/dialog_celebrities/master_design_upload_save_all",{data: arr}, (r)->
+        $.post "/manage/dialog_celebrities/master_design_upload_save_all",{cover_upload_id: cover_upload_id,data: arr}, (r)->
           window.location.href = "/manage/dialog_celebrities/master_designs"
 
       $('body').on "click",".remove-upload", ->

@@ -20,7 +20,8 @@
       .fl.ml10
         %input#color-name3{type: :text, placeholder: "推荐色名称3", name: "color_category3", value: upload.recommend_color_category3}
   .fl.ml20.mt30
-    %input{type: "radio", value: "设为封面", name: "is-cover"}
-
+    %span 设为封面
+    %input{type: "radio", name: "is-cover", value: upload.id, checked: upload.is_cover}
+    .lbl
   .fl.ml20.mt30
     = link_to "移除","javascript:;",:class => "remove-upload"
