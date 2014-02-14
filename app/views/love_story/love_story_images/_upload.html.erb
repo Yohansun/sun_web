@@ -1,0 +1,5 @@
+<li id="story_image_<%= upload.id %>" class="pr">
+  <%= image_tag upload.file.url(:small) %>
+  <a class="del-pic" href="javascript:remote(<%= upload.id %>);" style="">删除</a>
+  <%= hidden_field_tag "story_image_ids[]", upload.id %>
+</li>

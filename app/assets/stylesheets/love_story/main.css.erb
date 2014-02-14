@@ -504,16 +504,39 @@
 
 .form_upload .form_file {
   padding-bottom: 30px; }
+
+  .imgUploader-queue li{
+    float: left;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border:1px solid #cccccc;
+    margin: 0 10px 10px 0;
+    overflow: hidden;
+  }
+  li.upload-file-btn{
+    width: auto;
+    height: auto;
+    border: 0 none;
+    overflow: visible;
+  }
+  .del-pic {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:20px;
+    height:20px;
+    background: #333333 url(<%= asset_path 'love_story/images/upload/upload_del.jpg'%>) no-repeat;
+    text-indent: -9999px; }
 /*input file image plugin*/
-.drop-wrapper,
-.imageUploader-button {
-  width: 84px !important;
+/*#upload_photo {
+  width: 84px;
   height: 84px !important;
   line-height: 83px !important;
   background: url(<%= asset_path 'love_story/images/upload/input_file.jpg'%>) no-repeat !important;
-  margin-bottom: 0; }
+  margin-bottom: 0; }*/
 
-#J_JsUploaderQueue,
+/*#J_JsUploaderQueue,
 .imageUploader-button .btn-text {
   margin-top: 0 !important; }
 
@@ -559,7 +582,7 @@
 
 .imageUploader-queue .pic-mask,
 .status-wrapper {
-  display: none !important; }
+  display: none !important; }*/
 
 /* right sidebar —— big_menu */
 .big_menu {

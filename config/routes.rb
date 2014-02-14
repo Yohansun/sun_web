@@ -871,7 +871,11 @@ Icolor::Application.routes.draw do
         get :get_story_info
       end
     end
-    resources :love_story_images
+    resources :love_story_images do
+      collection do
+        post :del_image
+      end
+    end
   end
 
 end
