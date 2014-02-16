@@ -1,3 +1,4 @@
+# encoding: utf-8
 class DialogCelebrity::CelebrityQuestionRepliesController < ApplicationController
   def reply
     if !current_user.designer?

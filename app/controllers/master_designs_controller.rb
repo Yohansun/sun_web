@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'zip/zip'
+require 'zip'
 class MasterDesignsController < ApplicationController
   before_filter :get_master_designs,:only => [:index,:all,:show,:oversea,:hk_tw_mc,:cn]
 
@@ -9,11 +9,11 @@ class MasterDesignsController < ApplicationController
   def show
     @master_design = MasterDesign.find(params[:id]) || MasterDesign.new
   end
-  
+
   def all
     render "index"
   end
-  
+
   {:oversea => "海外",:hk_tw_mc => "港澳台",:cn => "中国大陆"}.each do |act,tag|
     define_method(act) do
       hash = {"shinei" => "室内空间大师","color" => "色彩大师"}
@@ -28,7 +28,7 @@ class MasterDesignsController < ApplicationController
     @master_design_next = MasterDesign.where("published_at > ?", @master_design.published_at).last
     render :layout => nil
   end
-  
+
   def download
     target_file = MasterDesign.find(params[:id])
     if target_file.master_design_uploads
@@ -56,10 +56,10 @@ class MasterDesignsController < ApplicationController
     #   render nothing: true, status: 404
     # end
   end
-  
+
   private
   def get_master_designs
     @master_designs = Subject.content("master_designs").page(params[:page]).per(5)
   end
-  
+
 end
