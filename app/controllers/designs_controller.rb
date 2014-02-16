@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'zip/zip'
+require 'zip'
 class DesignsController < ApplicationController
   layout "home_manage"
   before_filter :find_user
