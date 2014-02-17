@@ -7,25 +7,15 @@ $ ->
       {@window, @document, @body} = options
 
     initialize: ->
-      $('#manage_dialog_master_profile_avatar').fileupload(
-        url: '/manage/dialog_celebrities/master_profiles/get_upload_file',
-        dataType: 'json',
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles: 1,
-        maxFileSize: 5000000,
-        done: (e, data)->
-          alert 123
-        ,
-        error: (e, data)->
-          alert data.result
-      )
-
-      $("body").on "change","input#manage_dialog_master_profile_avatar", ->
-        $(this).parent().parent().find(".upload_selected_filename").text $(this).val()
-        $(this).after("<img src='" + ""+$(this).val()  + "' />")
-
       $("body").on "click","#save_next", ->
         $("input#after_save").val("next")
+
+      $.imagepreview({
+        file : $('#manage_dialog_master_profile_avatar'),
+        img : $('#preview-avatar'),
+        maxWidth : 80,
+        maxHeight : 80
+      });
 
       $("body").on "click","#delete_all", ->
         list = ($(item).attr("id").split("_")[1] for item in $("input.master_select:checked"))

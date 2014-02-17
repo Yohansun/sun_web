@@ -8,7 +8,7 @@
 
   %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/editor_treasuries"}
     %select.fl{name: "board_id"}
-      %option{value: ""} 选择分类
+      %option{value: ""} 选择领域分类
       - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
         %option{value: board.id, selected: params[:board_id] == board.id.to_s}= board.name
     .ml10.fl= ".and."

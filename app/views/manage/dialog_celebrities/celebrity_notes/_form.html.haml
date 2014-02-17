@@ -23,7 +23,7 @@
   .controls.fl.ml20
     = f.input :master_profile_id, collection: MasterProfile.where(:mtype=>1).map{|n|[n.name,n.id]},label: false
 .control-group.clearfix
-  %label.control-label.fl 分类
+  %label.control-label.fl 领域分类
   .controls.fl.ml20
     = f.input :celebrity_content_board_id, collection: CelebrityContentBoard.all.map{|n|[n.name,n.id]},label: false
 .control-group.clearfix

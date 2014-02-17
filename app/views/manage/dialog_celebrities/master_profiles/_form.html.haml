@@ -4,7 +4,8 @@
 - content_for :tail do
   = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                            "upload_image/jquery.iframe-transport",
-                           "upload_image/jquery.fileupload"
+                           "upload_image/jquery.fileupload",
+                           "upload_image/jquery.imagepreview"
 
 :css
   input#editor_treasury_recommended { opacity: 255; }
@@ -18,14 +19,16 @@
         %i.icon-plus.icon-white
         %span 上传头像
         %input#manage_dialog_master_profile_avatar{type: "file",name: "master_profile[avatar]",multiple: ""}
-    - if @resource.avatar(:small2).present?
-      .fl.ml20
-        = image_tag(@resource.avatar(:small2))
+    .fl.ml20
+      - if @resource.avatar.exists?
+        = image_tag(@resource.avatar(:small2),:id => "preview-avatar")
+      - else
+        %img{id: "preview-avatar",src: "",alt: "" }
 
   .control-group.clearfix
-    %label.control-label.fl 板块
+    %label.control-label.fl 名人分类
     .controls.ml20.fl
-      = f.input :mtype, collection: [["名人在线",1],["名家设计",0]],label: false
+      = f.input :mtype, collection: [["选择名人分类",""],["名人在线",1],["名家设计",0]],label: false, selected: @resource.mtype.blank? ? "" : @resource.mtype.to_i
 
   .control-group.clearfix
     .fl
@@ -33,7 +36,7 @@
       .controls.fl.ml20
         = f.input :name, label: false
     .fl.ml20
-      %label.control-label.fl 分类
+      %label.control-label.fl 领域分类
       .controls.fl.ml20
         = f.input :celebrity_content_board_id, collection: CelebrityContentBoard.all.map{|n|[n.name,n.id]},label: false
 
@@ -75,7 +78,9 @@
 
 .ml10
   %hr.w500{style: "border-style: dashed;"}/
-  = f.submit "保存后返回",:class => "fl btn btn-small btn-primary radius6"
+  - if params[:step].present?
+    %a.fl.btn.btn-small.btn-primary.radius6{href: "/manage/dialog_celebrities/master_profiles/#{params[:id]}/edit#{params[:step]=='2' ? '' : '?step=2'}"} 返回上一步
+  = f.submit "保存后返回",:class => "fl btn btn-small btn-primary radius6 ml15"
   = f.submit "保存后编辑下一页",:class => "fl btn btn-small btn-primary radius6 ml15",:id => "save_next" if params[:step] != "3"
 
   / %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复

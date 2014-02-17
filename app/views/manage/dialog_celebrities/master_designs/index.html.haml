@@ -18,7 +18,7 @@
       .lbl
     .ml10.fl= ".and."
     %select.fl.ml10{name: "mtype"}
-      %option{value: ""} 选择分类
+      %option{value: ""} 选择名人分类
       %option{value: "1",selected: params[:mtype] == "1"} 名人在线
       %option{value: "0",selected: params[:mtype] == "0"} 名家设计
     %input{type: "hidden", value: "true", name: "query"}
@@ -30,7 +30,7 @@
     - @collection.each_with_index do |_design,_index|
       .design.fl.clearfix
         .design-thumb.fl
-          = image_tag _design.main_preview_img(:index)
+          = image_tag _design.cover_design_upload.file(:slide) if _design.cover_design_upload.present?
         .design-info.fl.ml10
           .design-info-avatar.clearfix
             .design-master-avatar.fl

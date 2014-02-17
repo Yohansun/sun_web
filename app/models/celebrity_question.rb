@@ -10,11 +10,11 @@ class CelebrityQuestion < ActiveRecord::Base
   belongs_to :user
   belongs_to :board, class_name: CelebrityContentBoard, foreign_key: :celebrity_content_board_id
 
-  has_many :images, :class_name =>  CelebrityQuestionImage , :as => :resource
+  has_many :images, :class_name =>  CelebrityQuestionImage , :as => :resource, :dependent => :destroy
 
-  has_many :replies, class_name: CelebrityQuestionReply
+  has_many :replies, class_name: CelebrityQuestionReply, :dependent => :destroy
 
-  has_one :media_reply, class_name: CelebrityQuestionReply
+  has_one :media_reply, class_name: CelebrityQuestionReply, :dependent => :destroy
 
   scope :replied_order, -> { order("is_replied asc,updated_at desc") }
 
