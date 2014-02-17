@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
   def index
     #首页KV
-    @home_kvs = HomeKv.includes(:kv_maps).kv_position.order("position")
+    @home_kvs = HomeKv.includes(:kv_maps).kv_position.order("position").limit(5)
 
     # 精华推荐
     @home_recommends = HomeRecommend.order("position")

@@ -4,7 +4,7 @@ class HomeKv < ActiveRecord::Base
 
   has_many :kv_maps, :dependent => :destroy
 
-  scope :kv_position,->{where("position is not null")}
+  scope :kv_position,->{where("position is not null and title is not null")}
 
   has_attached_file :file,
     :styles => {:big => "700x345#",:list =>"200x100#",:special_cms =>"460>",:special =>"1000>"},
