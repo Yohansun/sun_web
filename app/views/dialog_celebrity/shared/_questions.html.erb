@@ -111,7 +111,32 @@
                     个字符
                   </span>
                   <div class="textarea_footer clearfix">
-                    <a href="#" class="pull-left"><i class="icon-imgshow_btn"></i>图片</a>
+                    <span class="pull-left picture_modal_btn pr js-show_picture_modal">
+                      <i class="icon-imgshow_btn nomargin"></i>图片
+                      <div class="exp-layer picture_modal">
+                        <div class="holder">
+                          <h5 class="pic_modal_header nomargin">
+                            本地上传
+                          </h5>
+                          <div class="mh20">
+                            <p class="tips">
+                              共
+                              <span class="nopadding">1</span>
+                              张，还能上传
+                              <span class="nopadding">8</span>
+                              张
+                              <span class="nopadding">（按住ctrl可选择多张）</span>
+                            </p>
+                            <div class="form_file clearfix">
+                              <!-- <input type="file" /> -->
+                              <a href="javascript:;" class="uploadify_btn" id="upload_pics"></a>
+                            </div>
+                          </div>
+                          <a class="exp-close js-hide_picture_modal" href="javascript:;"></a>
+                        </div>
+                        <a class="exp-tri" href="javascript:;"></a>
+                      </div>
+                    </span>
                     <!-- <span class="pull-left">已上传<strong>x</strong>张图片</span> -->
                   </div>
                 </fieldset>
@@ -150,7 +175,7 @@
   </div>
 </div>
 
-
+<%= javascript_include_tag "jquery.uploadify.js" %>
 <script type="text/javascript">
   $(function(){
     $("ul.famous_tab li a").click(function(){
@@ -200,5 +225,36 @@
     $("a.question_keyword").click(function(){
       $.post('/dialog_celebrity/refresh_celebrity_questions', {board_id: $(this).attr("data-keyword"),key: $(this).text()})
     })
+
+
+    $('#upload_pics').uploadify({
+      swf : '/uploadify/uploadify.swf',
+      cancelImage : '/uploadify/uploadify-cancel.png',
+      //skipDefault : ['onSelect'],
+      progressData : 'percentage',
+      buttonText : "<a class='uploadify_btn'>选择图片</a>",
+      fileTypeDesc : '图片文件',
+      fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+      successTimeout : 6000,
+      fileSizeLimit : '3MB',
+      // uploadLimit : 1,
+      width : 84,
+      height : 84,
+      multi : true,
+      auto : true,
+      checkExisting : false,
+      transparent : true
+    });
+
+    //upload
+    var form = $('.famous_ask_form')
+    var modal = form.find('.picture_modal')
+    form.on('click', '.js-show_picture_modal', function(){
+      modal.show();
+    });
+    form.on('click', '.js-hide_picture_modal', function(e){
+      e.stopPropagation();
+      modal.hide();
+    });
   })
 </script>
