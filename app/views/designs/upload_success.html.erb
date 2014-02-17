@@ -14,7 +14,13 @@
     }
   }
 </script>
-<script type="text/javascript">countDown(5,'<%= user_path(current_user) %>');</script>
+<script type="text/javascript">
+  <%- if params[:return_to].present? %>
+    countDown(5,'<%= params[:return_to] %>');
+  <%- else %>
+    countDown(5,'<%= user_path(current_user) %>');
+  <%- end %>
+</script>
 <% end %>
 <div class="container refresh_main">
   <ul class="breadcrumb">

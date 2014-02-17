@@ -7,7 +7,7 @@ class Design < ActiveRecord::Base
 
   attr_accessible :city, :content, :room_type, :style, :title, :design_image_ids,
     :tag_list, :area_id, :reason, :user_id, :view_count, :recommended, :design_color,
-    :recommend_color_category1, :is_yda, :is_refresh, :property_name, :speech, :story_talking_id
+    :recommend_color_category1, :is_yda, :is_refresh, :property_name, :speech, :story_talking_id, :come_from
   validates_presence_of :title, :area_id, :property_name
 
   belongs_to :user
@@ -27,6 +27,7 @@ class Design < ActiveRecord::Base
 
   scope :time_range, ->(start_date,end_date){joins(:user).where(:users => {:role_id => 1,:des_status => true,:source => nil},:created_at => start_date.to_time..end_date.to_time)}
   scope :baicheng,->{where(baicheng_active: true)}
+  scope :minisite_designs,->{where(come_from: 'icolor')}
   scope :story_design,->{where("story_id is not null")}
   scope :story_talking_design,->{where("story_talking_id is not null")}
 

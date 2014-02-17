@@ -1,3 +1,15 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function(){
+      var options = {
+        data: data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '请选择省');
+      sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '请选择市');
+    });
+  </script>
+<%- end %>
 <div class="container-fluid bann_green_skin show">
   <div class="banner"></div>
   <div class="container">
@@ -5,52 +17,52 @@
     <div class="main">
       <div class="ph10 clearfix">
         <div class="left_big pull-left">
-          <div class="index_main">
-            <form action="" class="form_search nomargin form-inline linkageseclet">
-              <div class="pull-right">
-                <input type="text" class="nomargin pull-left" placeholder="搜名字" />
-                <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
-              </div>
+          <div class="index_main clearfix">
+            <%= form_tag '/love_story/minisite_designs', method: :get, class: 'pull-left form_search nomargin form-inline' do %>
               <strong class="label-text">地区:</strong>
-              <select class="level_1 input-small" name="" id="">
-                <!-- <option value="">请选择省</option> -->
-              </select>
-              <select class="level_2 input-small" name="" id="">
-                <!-- <option value="">请选择市</option> -->
-              </select>
+              <select id="province" class="level_1 input-small" name="province_id"></select>
+              <select id="city" class="level_2 input-small" name="city_id"></select>
               <button class="btn">确定</button>
-            </form>
+            <% end %>
+            <%= form_tag '/love_story/minisite_designs', method: :get, class: 'pull-right form_search nomargin' do %>
+              <input type="text" class="nomargin pull-left" placeholder="搜名字" name="title" value="<%= params[:title] if params[:title].present? %>" />
+              <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
+            <% end %>
           </div>
-          <div class="mt10"><a href="javascript:;" class="icon-btn icon-upload_works">上传设计作品</a></div>
+          <div class="mt10">
+            <%- if current_user %>
+              <% if current_user.common_user? %>
+                <a href="javascript:alert('很抱歉,普通用户会员不能上传作品.');" class="icon-btn icon-upload_works" target="_blank">上传设计作品</a>
+              <% else %>
+                <a href="<%= new_user_design_path(current_user,come_from: 'icolor',return_to: "#{request.original_url}") %>" class="icon-btn icon-upload_works" target="_blank">上传设计作品</a>
+              <% end %>
+            <%- else %>
+              <a href="/users/sign_in?return_to=<%= request.original_url %>" class="icon-btn icon-upload_works" target="_blank" data-confirm="只有设计师和家装公司在登录后才能上传作品,是否现在登录?">上传设计作品</a>
+            <%- end %>
+          </div>
           <div class="eq_hi_list">
             <div class="thumbnails noborder">
-              <div class="span3 thumbnail">
-                <a href="#" target="_blank" class="help-block text-center">
-                  <img src="<%= asset_path 'love_story/images/show/worklist1.jpg'%>" alt="" />
-                </a>
-                <h5 class="dot_linet1 title pr">
-                  <a href="#" target="_blank" class="btn_invite pa"></a>
-                  <a href="#" target="_blank" class="a_hover_red">金龙花苑设计案例金龙花苑设计案例金龙花苑设计案例</a>
-                </h5>
-                <span class="author">北欧E家</span>
-                <p class="clearfix">
-                  <span class="pull-right"><i class="icon-i16 icon-xin"></i>93849</span>
-                  风格: 现代简约
-                </p>
-              </div>
+              <% @minisite_designs.each do |design| %>
+                <div class="span3 thumbnail">
+                  <%- if design.cover_img %>
+                    <a href="<%= user_design_path(design.user_id, design) %>" target="_blank" class="help-block text-center">
+                      <%= image_tag design.cover_img.file.url(:mini_design), alt: '' %>
+                    </a>
+                  <%- end %>
+                  <h5 class="dot_linet1 title pr">
+                    <a href="<%= user_asks_path(design.user_id) %>" target="_blank" class="btn_invite pa"></a>
+                    <a href="<%= user_design_path(design.user_id, design) %>" target="_blank" class="a_hover_red"><%= design.title %></a>
+                  </h5>
+                  <span class="author"><%= design.user.display_name %></span>
+                  <p class="clearfix">
+                    <span class="pull-right"><i class="icon-i16 icon-xin"></i><%=design.comments.length %></span>
+                    风格: <%= design.design_style_names %>
+                  </p>
+                </div>
+              <% end %>
             </div>
             <div class="pagination pagination-centered">
-              <ul>
-                <!-- <li class="disabled"><a href="#">上一页</a></li> -->
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a class="noborder nomargin nopadding" href="#">...</a></li>
-                <li><a href="#">下一页</a></li>
-                <li><a href="#">最后一页</a></li>
-              </ul>
+              <%= paginate @minisite_designs, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
             </div>
           </div>
         </div>
