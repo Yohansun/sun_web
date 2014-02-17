@@ -36,6 +36,7 @@ class DialogCelebrity::MediaController < ApplicationController
           @questions.where("content LIKE ?","%#{params[:keyword]}%")
       end
     end
+    @questions = @questions.page(params[:page]).per(6)
   end
 
   def update_question
@@ -50,12 +51,13 @@ class DialogCelebrity::MediaController < ApplicationController
       reply = CelebrityQuestionReply.create media_id: current_media.id,celebrity_question_id: question_id.to_i, content: content
     end
     _image_ids = reply.images.map(&:id)
-
-    image_ids.each do |image_id|
-      if !_image_ids.include?(image_id.to_i)
-        image = CelebrityQuestionImage.find(image_id)
-        image.resource = reply
-        image.save
+    if image_ids.present?
+      image_ids.each do |image_id|
+        if !_image_ids.include?(image_id.to_i)
+          image = CelebrityQuestionImage.find(image_id)
+          image.resource = reply
+          image.save
+        end
       end
     end
     render :json => {:code => 1, :reply_id => reply.id}
@@ -70,6 +72,18 @@ class DialogCelebrity::MediaController < ApplicationController
       return render :json => {:notify => "保存失败"}
     end
   end
+
+  def delete_question
+    CelebrityQuestion.find(params[:id]).destroy
+    render :json => { :notify => "删除成功" }
+  end
+
+  def delete_question_image
+    CelebrityQuestionImage.find(params[:id]).destroy
+    render :json => { :notify => "删除成功" }
+  end
+
+  helper_method :current_media
 
   protected
 

@@ -8,15 +8,17 @@
     %meta{:content => "icolor", :name => "description"}
     %meta{:content => "icolor", :name => "author"}
     = stylesheet_link_tag("dialog_celebrity/media")
-    = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
-    = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media")
+    = stylesheet_link_tag "upload_image/jquery.fileupload-ui","bootstrap.min","datepicker","bootstrap-timepicker"
+    = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media","bootstrap-datetimepicker")
+
   %body
-    #banner.pr100 iColor 名人问答QA系统
+    #banner.pr100
+      .pull-left#banner-title iColor 名人问答QA系统
+      .pull-right#banner-username= current_media.username
     %ul.nav.clearfix
       - @boards.each do |board|
         %li.fl= link_to board.name,"/dialog_celebrity/media/index?board_id=#{board.id}",class: @board_id.to_i == board.id ? "active" : ""
-
-    %form#search-area.mt5
+    %form#search-area.mt5.shadow
       %input{type: :hidden, name: :board_id, value: @board_id}
       #search-area-line1
         %span.first 我想查找
@@ -28,9 +30,9 @@
         %span 的问题
         %span 并且
         %span 我想查找从
-        %input{name: :start_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:start_date]}
+        %input.datetimepicker_full{name: :start_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:start_date]}
         %span 到
-        %input{name: :end_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:end_date].present? ? params[:end_date] : Date.current.to_s}
+        %input.datetimepicker_full{name: :end_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:end_date].present? ? params[:end_date] : Date.current.to_s}
         %span 的问题
         %span 并且
       #search-area-line2
@@ -46,7 +48,8 @@
       .pr10.fl &nbsp;
       .pr70.fl 标题
       .pr10.fl 提问者
-      .pr10.fl 提问日期
+      .pr5.fl 提问日期
+      .pr5.fl 操作
     - @questions.each do |_question|
       - if params[:type] == "replied" && _question.replied? || params[:type] == "not_replied" && !_question.replied? || params[:type].blank?
         .question-warp.mt5
@@ -60,23 +63,35 @@
               = _question.name
             .pr10.fl
               = _question.user.try(:username)
-            .pr10.fl
+            .pr5.fl
               = _question.created_at.strftime("%y-%m-%d")
-          .content{style: "display: none;"}
+            .pr5.fl
+              = link_to "删除","javascript:;",:class => "delete-question-btn",:"data-question-id" => _question.id
+
+          .content{style: "display: none;",:"data-question-id" => _question.id}
+            .clearfix.mt5
+              .pr10.fl &nbsp;
+              .pr90.fl{ style: "height: 1px; border-top: 1px dashed #bebebe;" }
             .question-content-warp.clearfix
               .pr10.fl &nbsp;
-              .pr90.fl
-                = raw _question.content
-            .question-upload-warp.clearfix
-              .pr10.fl &nbsp;
-              .pr90.fl
-                - _question.images.each do |_image|
-                  = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
-            .reply.clearfix.relative
+              .question-content.pr70.fl
+                .pd10
+                  = raw _question.content
+            - if  _question.images.present?
+              .question-upload-warp.clearfix
+                .pr10.fl &nbsp;
+                .pr90.fl
+                  - _question.images.each do |_image|
+                    = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
+            .reply.clearfix.relative.mt10
               .pr10.fl &nbsp;
               .pr80.fl
                 - reply = _question.find_media_reply
                 - if reply.present?
+                  %div{style: "color: #a62627;"}
+                    [#{reply.media.name}] #{reply.media.username} 已在 #{reply.updated_at.strftime("%y-%m-%d %H:%M")} 回复:
+
+
                   %textarea{placeholder: "我来回答"}
                     = reply.content
                 - else
@@ -89,10 +104,14 @@
                 %i.icon-plus.icon-white
                 %span.btn 上传图片...
                 %input.upload{type: "file",name: "file",multiple: ""}
-              .replies-upload-warp
+              .replies-upload-warp.clearfix
                 - if reply.present?
                   - reply.images.order("created_at desc").each do |_image|
-                    = image_tag _image.image(:thumb),:"data-image-id" => _image.id
+                    .fl.mr5.image-warp.fl.clearfix
+                      = image_tag _image.image(:thumb),:"data-image-id" => _image.id
+                      = link_to "删除","javascript:;",:class => "delete-reply-img-btn"
+    .pager
+      = paginate @questions
 
     = javascript_include_tag "upload_image/vendor/jquery.ui.widget","upload_image/jquery.iframe-transport","upload_image/jquery.fileupload"
 

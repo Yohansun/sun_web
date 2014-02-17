@@ -9,6 +9,10 @@ $ ->
 
     initialize: ->
       $("body").on "click",".reply-status", ->
+        id = $(this).parent().parent().next().attr("data-question-id")
+        for obj in $(".question-warp")
+          if $(obj).find(".content").attr("data-question-id") isnt id
+            $(obj).find(".content").slideUp()
         $(this).parent().parent().next().slideToggle()
       $("body").on "click","#submit-question",->
         question_id = $(this).attr("data-question-id")
@@ -31,11 +35,31 @@ $ ->
         maxNumberOfFiles: 1,
         maxFileSize: 5000000,
         done: (e, data)->
-          $(this).parent().next().prepend("<img src='" + data.result.url + "' data-image-id='" +  data.result.id  + "' />")
+          content = "<div class='fl mr5 image-warp clearfix'><img src=#{data.result.url} data-image-id=#{data.result.id} /><a href='javascript:;' class='delete-reply-img-btn' >删除</a></div>"
+          $(this).parent().next().prepend(content)
         ,
         error: (e, data)->
           alert data.result
       )
+
+      $('.datetimepicker_full').datetimepicker({format: 'yyyy-mm-dd',autoclose: true,minView: 2});
+
+      $("body").on "click",".delete-question-btn", ->
+        $obj = $(this).parent().parent().parent()
+        id = $(this).attr("data-question-id")
+        if confirm("是否要删除?") is true
+          $.post '/dialog_celebrity/media/delete_question',{ id: id }, ->
+            $obj.remove()
+            alert "删除成功"
+
+      $("body").on "click",".delete-reply-img-btn", ->
+        $obj = $(this).parent()
+        id = $(this).prev().attr("data-image-id")
+        if confirm("是否要删除?") is true
+          $.post '/dialog_celebrity/media/delete_question_image',{ id: id }, ->
+            $obj.remove()
+            alert "删除成功"
+
 
       submitReply = (question_id,content,reply_id,image_ids,obj)->
         $.post "/dialog_celebrity/media/update_question",{question_id: question_id, reply_id: reply_id, image_ids: image_ids,content: content}, (r)->
