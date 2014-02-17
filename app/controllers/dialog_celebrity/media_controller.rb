@@ -42,13 +42,33 @@ class DialogCelebrity::MediaController < ApplicationController
     question_id = params[:question_id]
     reply_id    = params[:reply_id]
     content     = params[:content]
+    image_ids   = params[:image_ids]
     if reply_id.present?
-      CelebrityQuestionReply.find(reply_id).update_attributes(content: content)
+      reply = CelebrityQuestionReply.find(reply_id)
+      reply.update_attributes(content: content)
     else
       reply = CelebrityQuestionReply.create media_id: current_media.id,celebrity_question_id: question_id.to_i, content: content
-      return render :json => {:code => 1, :reply_id => reply.id}
     end
-    render :json => {:code => 1}
+    _image_ids = reply.images.map(&:id)
+
+    image_ids.each do |image_id|
+      if !_image_ids.include?(image_id.to_i)
+        image = CelebrityQuestionImage.find(image_id)
+        image.resource = reply
+        image.save
+      end
+    end
+    render :json => {:code => 1, :reply_id => reply.id}
+  end
+
+  def upload_question_image
+    image = CelebrityQuestionImage.new
+    image.image = params[:file]
+    if image.save
+      render :json => {:code => 1, :notify => "上传成功",:url => image.image(:thumb),:id => image.id}
+    else
+      return render :json => {:notify => "保存失败"}
+    end
   end
 
   protected

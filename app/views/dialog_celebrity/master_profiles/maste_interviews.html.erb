@@ -9,8 +9,8 @@
   <small>直面大师专家，为您在线授道解惑</small>
 </h3>
 <ul class="breadcrumb">
-  <li><a href="#">首页</a> > </li>
-  <li><a href="#">名人对话</a> > </li>
+  <li><a href="/">首页</a> > </li>
+  <li><a href="/dialog_celebrity">名人对话</a> > </li>
   <li class="active">名家设计</li>
 </ul>
 <hr class="border2 border2_mt2">
@@ -59,8 +59,8 @@
               <div class="master-info clearfix">
                 <a class="pull-left master-token"><img src="<%= _master.avatar(:small1) -%>" alt="" /></a>
                 <div class="master-detail pull-left">
-                  <h4 class="text-right"><a href="#" class="pull-left"><%=_master.name%></a>德国</h4>
-                  <p><%= raw truncate(_master.intro.html_safe,:length => 18) -%>></p>
+                  <h4 class="text-right"><a href="#" class="pull-left"><%=_master.name%></a><%= _master.nationality -%></h4>
+                  <p><%= raw truncate(_master.intro.html_safe,:length => 32) -%>></p>
                   <a href="master_interview.html" target="_blank">阅读全文>></a>
                 </div>
               </div>

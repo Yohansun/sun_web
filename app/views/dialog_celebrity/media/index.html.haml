@@ -8,6 +8,7 @@
     %meta{:content => "icolor", :name => "description"}
     %meta{:content => "icolor", :name => "author"}
     = stylesheet_link_tag("dialog_celebrity/media")
+    = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
     = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media")
   %body
     #banner.pr100 iColor 名人问答QA系统
@@ -86,10 +87,16 @@
                 %input#submit-question{:type => "submit", :value => "提交问题", :"data-question-id" => _question.id, :"data-reply-id" => reply.try(:id) || ""}
             .reply-upload
               .pr10.fl &nbsp;
-              .pr90.fl
-                = link_to "+上传照片","javascript:;",id: "upload"
-              .replies-upload-war.absolute
+              %span.fileinput-button
+                %i.icon-plus.icon-white
+                %span.btn 上传图片...
+                %input.upload{type: "file",name: "file",multiple: ""}
+              .replies-upload-warp
+                - reply.images.order("created_at desc").each do |_image|
+                  = image_tag _image.image(:thumb),:"data-image-id" => _image.id
 
-:coffeescript
-  $ ->
-    D.initialize()
+    = javascript_include_tag "upload_image/vendor/jquery.ui.widget","upload_image/jquery.iframe-transport","upload_image/jquery.fileupload"
+
+    :coffeescript
+      $ ->
+        D.initialize()

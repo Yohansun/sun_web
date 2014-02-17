@@ -17,9 +17,9 @@
 </div>
 
 <ul class="breadcrumb">
-  <li><a href="#">首页</a> &gt;</li>
-  <li><a href="#">对话名人</a> &gt;</li>
-  <li><a href="#">名家设计</a> &gt;</li>
+  <li><a href="/">首页</a> &gt;</li>
+  <li><a href="/dialog_celebrity">对话名人</a> &gt;</li>
+  <li><a href="/dialog_celebrity/master_interviews">名家设计</a> &gt;</li>
   <li class="active"><%=@master_design.title -%></li>
 </ul>
 <hr class="border2 border2_mt2">
@@ -29,8 +29,9 @@
   <div class="pull-left imgbase_in_left">
     <div class="slides_box clearfix">
       <div class="map-big pull-left js-map-big">
-        <% if @master_design.master_design_uploads.first -%>
-          <img src="<%=@master_design.master_design_uploads.first.file(:slide)%>" />
+        <% cover = @master_design.cover_design_upload %>
+        <% if cover -%>
+          <img src="<%=cover.file(:slide)%>" />
         <%end-%>
       </div>
       <div class="map-kv-slider pull-right">
@@ -53,7 +54,7 @@
       <a target="_blank" href="#" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该大师访谈</a>
       <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-fullscreen"></i>全屏</a>
       <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-collect"></i>收藏</a>
-      <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
+      <a href="<%= cover.present? ? download_dialog_celebrity_master_design_path(cover.id) : '#' -%>" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
       <!-- <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-xin_gray"></i>8799</a> -->
     </div>
     <div class="colors_box clearfix">
@@ -78,18 +79,7 @@
       <a href="#" class="gobuy pull-left"></a>
       <a href="#" class="goshop pull-left"></a>
     </div>
-    <div class="work_tags">
-      <span>标签：</span>
-      <a href="#">公寓</a>
-      <a href="#">复式</a>
-      <a href="#">别墅</a>
-      <a href="#">三居</a>
-      <a href="#">四局</a>
-      <a href="#">豪华型</a>
-      <a href="#">30-100万</a>
-      <a href="#">150平米以上</a>
-      <a href="#">现代简约</a>
-    </div>
+
     <div style="height:30px;margin-left:20px;margin-top:18px;">
       <!-- Baidu Button BEGIN -->
       <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">

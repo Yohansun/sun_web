@@ -943,7 +943,11 @@ Icolor::Application.routes.draw do
     post 'create_question_reply', to: "celebrity_question_replies#reply"
     post 'destroy_question_reply', to: "celebrity_question_replies#delete"
 
-    resources :master_designs
+    resources :master_designs do
+      member do
+        get :download
+      end
+    end
     resources :master_profiles do
       collection do
         get :celebrities
