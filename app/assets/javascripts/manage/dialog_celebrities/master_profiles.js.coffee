@@ -7,15 +7,14 @@ $ ->
       {@window, @document, @body} = options
 
     initialize: ->
-      $('#manage_dialog_celebrity_pege_fileupload').fileupload(
-        url: '/manage/master_profiles/create_image',
+      $('#manage_dialog_master_profile_avatar').fileupload(
+        url: '/manage/dialog_celebrities/master_profiles/get_upload_file',
         dataType: 'json',
         acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
         maxNumberOfFiles: 1,
         maxFileSize: 5000000,
         done: (e, data)->
-          $("img#ett-img").attr("src",data.result.url)
-          $("input#ett-url").val(data.result.url)
+          alert 123
         ,
         error: (e, data)->
           alert data.result
@@ -23,6 +22,7 @@ $ ->
 
       $("body").on "change","input#manage_dialog_master_profile_avatar", ->
         $(this).parent().parent().find(".upload_selected_filename").text $(this).val()
+        $(this).after("<img src='" + ""+$(this).val()  + "' />")
 
       $("body").on "click","#save_next", ->
         $("input#after_save").val("next")

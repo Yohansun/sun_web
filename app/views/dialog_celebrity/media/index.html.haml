@@ -90,8 +90,9 @@
                 %span.btn 上传图片...
                 %input.upload{type: "file",name: "file",multiple: ""}
               .replies-upload-warp
-                - reply.images.order("created_at desc").each do |_image|
-                  = image_tag _image.image(:thumb),:"data-image-id" => _image.id
+                - if reply.present?
+                  - reply.images.order("created_at desc").each do |_image|
+                    = image_tag _image.image(:thumb),:"data-image-id" => _image.id
 
     = javascript_include_tag "upload_image/vendor/jquery.ui.widget","upload_image/jquery.iframe-transport","upload_image/jquery.fileupload"
 

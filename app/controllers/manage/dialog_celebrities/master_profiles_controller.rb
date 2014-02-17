@@ -76,6 +76,10 @@ class Manage::DialogCelebrities::MasterProfilesController < Manage::BaseControll
     return render :json => { :code => 1, :notify => "删除成功"  }
   end
 
+  def get_upload_file
+    render :json => params
+  end
+
   # def upload_avatar
   #   if @page && params[:file].present?
   #     @page.edit_treasury_thumb = params[:file]
