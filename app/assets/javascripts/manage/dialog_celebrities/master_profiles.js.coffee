@@ -17,6 +17,13 @@ $ ->
           maxHeight : 80
         });
 
+      $.imagepreview({
+        file : $('#manage_dialog_master_profile_avatar'),
+        img : $('#preview-avatar'),
+        maxWidth : 80,
+        maxHeight : 80
+      });
+
       $("body").on "click","#delete_all", ->
         list = ($(item).attr("id").split("_")[1] for item in $("input.master_select:checked"))
         if list.length is 0

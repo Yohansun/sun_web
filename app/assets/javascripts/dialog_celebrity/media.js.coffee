@@ -13,7 +13,6 @@ $ ->
         for obj in $(".question-warp")
           if $(obj).find(".content").attr("data-question-id") isnt id
             $(obj).find(".content").slideUp()
-
         $(this).parent().parent().next().slideToggle()
       $("body").on "click","#submit-question",->
         question_id = $(this).attr("data-question-id")
