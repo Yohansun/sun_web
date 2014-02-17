@@ -21,7 +21,7 @@
       %input#manage_dialog_editor_treasury_thumb{type: "file",name: "editor_treasury[thumb]",multiple: ""}
 
 .control-group.clearfix
-  %label.control-label.fl 分类
+  %label.control-label.fl 领域分类
   .controls.fl.ml20
     = f.input :celebrity_content_board_id, collection: CelebrityContentBoard.all.map{|n|[n.name,n.id]},label: false
 .control-group.clearfix

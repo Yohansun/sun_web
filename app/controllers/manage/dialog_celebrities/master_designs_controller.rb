@@ -78,4 +78,5 @@ class Manage::DialogCelebrities::MasterDesignsController < Manage::BaseControlle
     MasterDesign.find(params[:id]).destroy
     render :text => "succ"
   end
+
 end

@@ -12,17 +12,6 @@
 :css
   input#editor_treasury_recommended { opacity: 255; }
 
-
-.control-group.clearfix
-  %label.control-label.fl 缩略图(上传尺寸: 280x145 )
-  .controls.fl.ml20
-    %span.upload_selected_filename.fl.mr10
-      = @resource.main_preview_img.url
-    %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
-      %i.icon-plus.icon-white
-      %span 上传缩略图
-      %input#manage_dialog_master_design_thumb{type: "file",name: "master_design[main_preview_img]",multiple: ""}
-
 .control-group.clearfix
   %label.control-label.fl 作品名称
   .controls.fl.ml20
@@ -32,7 +21,7 @@
   %label.control-label.fl 设计师
   .controls.fl.ml20
     %select#select-master-type
-      %option 选择分类
+      %option 选择名人分类
       %option{value: 1} 名人在线
       %option{value: 0} 名家设计
   .controls.fl.ml20
@@ -42,7 +31,7 @@
   .controls.fl.ml10
     %input#search-master{type: "text", placeholder: "输入设计师姓名"}
   .controls.fl.m10
-    %a.fl.btn.btn-small.ml10.radius6 查找
+    %a.fl.btn.btn-small.ml10.radius6#find-master-btn 查找
 .control-group.clearfix
   %label.control-label.fl 简介
   .controls.fl.ml20
