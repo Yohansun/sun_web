@@ -71,9 +71,7 @@
               .pr10.fl &nbsp;
               .pr90.fl
                 - _question.images.each do |_image|
-                  = image_tag ""
-                - 10.times do
-                  = image_tag ""
+                  = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
             .reply.clearfix.relative
               .pr10.fl &nbsp;
               .pr80.fl

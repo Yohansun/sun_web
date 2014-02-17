@@ -46,8 +46,8 @@
 
 <div class="index_main famous clearfix">
   <div class="pull-left famous_img">
-    <a href="famous_editor.html"><img src="<%= @page.edit_treasury_thumb(:thumb) %>" alt="" width="330" height="240" /></a>
-    <h5 class="title text-center"><a href="famous_editor.html"><%= @page.edit_treasury_title %></a></h5>
+    <a href="<%= @page.edit_treasury_url -%>"><img src="<%= @page.edit_treasury_thumb(:thumb) %>" alt="" width="330" height="240" /></a>
+    <h5 class="title text-center"><a href="<%= @page.edit_treasury_url -%>"><%= @page.edit_treasury_title %></a></h5>
   </div>
   <div class="pull-left famous_intro">
     <h5 class="title"><a href="/dialog_celebrity/master_profiles/celebrities" class="pull-right a_hover_red">更多></a>名人在线</h5>
