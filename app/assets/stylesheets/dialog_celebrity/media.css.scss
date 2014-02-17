@@ -68,6 +68,8 @@
 .relative { position: relative; }
 .absolute { position: absolute; }
 
+.block { display: block; }
+
 .fl { float: left; display: block; }
 .fr { float: right; display: block; }
 
@@ -78,6 +80,8 @@
 .rightText { text-align: right; }
 
 * { word-break: break-all; }
+
+.btn { padding: 6px; border-radius: 12px; color: white; background-color: #ccc; }
 
 a { text-decoration: none; }
 ul { margin: 0; padding: 0;}
@@ -121,6 +125,9 @@ form#search-area {
   .reply-upload {
     padding: 6px 8px; background-color: rgb(242,242,242);
     a { color: #0FCAF3; text-decoration: underline;}
+    .replies-upload-warp {
+      margin-left: 10%; margin-top: 10px;
+     }
   }
 }
 
