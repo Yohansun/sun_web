@@ -101,18 +101,79 @@
 .famous_ask_content{margin:0 13px;min-height:371px;overflow:visible;}
 .famous_ask_content .form_mata{color:#5c5c5c;font:18px/24px "Microsoft Yahei";padding-top:3px;}
 .famous_ask_content .form_mata .pull-right{font-size:12px;}
-.famous_ask_form,.famous_ask_form a{color:#5c5c5c;font:12px "SimSun";}
-.famous_ask_form input,.famous_ask_form textarea{box-shadow: inset 0px 1px 3px #ddd;border-radius:0;padding:11px 13px;font:14px/18px "SimSun";width:96%;}
+.famous_ask_form,
+.famous_ask_form a{color:#5c5c5c;font:12px "SimSun";}
+.famous_ask_form input,
+.famous_ask_form textarea{box-shadow: inset 0px 1px 3px #ddd;border-radius:0;padding:11px 13px;font:14px/18px "SimSun";width:96%;}
 .famous_ask_form .input_mata{position:absolute;bottom:2px;right:7px;color:#bcbcbc;font:12px "Arial";z-index:1;}
 .famous_ask_form .form_detail .input_mata{bottom:32px;}
 .famous_ask_form textarea{height:100px;resize:none;padding-bottom:47px;margin-bottom:0;}
-.famous_ask_form .textarea_footer{position:absolute;bottom:1px;left:1px;height:20px;width:96%;padding:5px 13px 4px;background:#f8f8f8;border-top:1px solid #e4e5e7;}
-.famous_ask_form .textarea_footer span,.famous_ask_form .textarea_footer a{height:21px;color:#bcbcbc;font:12px/21px "SimSun";}
-.famous_ask_form .textarea_footer a{margin-left:-8px;}
-.famous_ask_form .textarea_footer .icon-imgshow_btn{vertical-align:middle;}
+.textarea_footer{position:absolute;bottom:1px;left:1px;height:20px;width:96%;padding:5px 13px 4px;background:#f8f8f8;border-top:1px solid #e4e5e7;}
+.textarea_footer .picture_modal_btn{height:21px;color:#bcbcbc;font:12px/21px "SimSun";cursor: pointer;}
+.textarea_footer .icon-imgshow_btn{vertical-align:middle;}
 .famous_ask_submit{padding:5px 12px;width:120px;height:40px;background:#ff6600;border-radius:3px;/*margin:0 9px;*/color:#fff;border:0;}
 .select_options{position:absolute;top:20px;left:0;border:1px solid #cccccc;padding:11px 13px 14px;width:372px;min-height:146px;background:#fff;z-index:1;}
 .select_options select{width:125px;height:130px;border-radius:0;margin:5px 0 0;border-color:#dddddd;}
 .select_options .selects_close{position:absolute;top:10px;right:10px;width:9px;height:9px;font-size:20px;background:url(/assets/icons.png) no-repeat -41px -642px;text-indent:-9999px;}
 
 .select_options_show span{color:#000;}
+.mh20{margin: 0 20px;}
+
+/*upload*/
+.famous_ask_form .picture_modal {
+  position: absolute;
+  top: 18px;
+  left: -5px;
+  /*display: block;*/
+  width: 420px;
+  border-radius: 0; }
+  .famous_ask_form .picture_modal .pic_modal_header {
+    background: #f2f2f2; }
+  .famous_ask_form .picture_modal .holder {
+    border-radius: 0; }
+  .famous_ask_form .picture_modal .tips {
+    font: 12px "SimSun";
+    color: #000;
+    padding-top: 15px; }
+.famous_ask_form .pic_modal_header {
+  padding: 0 20px;
+  height: 30px;
+  font: bold 14px/30px "Microsoft Yahei"; }
+
+.famous_ask_form .form_file {
+  padding-bottom: 30px; }
+
+  .uploadify_btn{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 84px;
+    height: 84px;
+    line-height: 83px;
+    background: url(/assets/famous/input_file.jpg) no-repeat;
+    margin-bottom: 0;
+    text-indent: -9999px;
+  }
+
+  .imageUploader-queue li .del-pic {
+    top: 2px;
+    left: auto;
+    right: 2px;
+    width:20px;
+    height:20px;
+    background: #333333 url(/assets/famous/upload_del.jpg) no-repeat;
+    text-indent: -9999px;
+    border:0;
+    border-radius: 0; }
+
+    .imageUploader-queue .pic a{
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      border:1px solid #cccccc;
+    }
+
+    .imageUploader-queue .pic img{
+      width:80px;
+      height:80px;
+    }
