@@ -58,7 +58,7 @@ Icolor::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += ["jquery.lazyload.min.js", "jquery.slider.js", 'jquery.jeditable.js', '*.js', '*.css', 'magic_content/image_library.js', 'baicheng/*.css', 'baicheng/*.js']
-
+  config.assets.precompile += ["famous/*.css","manage/dialog_celebrity/*.scss","famous/*.js","dialog_celebrity/*.coffee"]
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
