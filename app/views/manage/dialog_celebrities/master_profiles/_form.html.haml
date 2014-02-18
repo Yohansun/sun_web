@@ -20,10 +20,10 @@
         %span 上传头像
         %input#manage_dialog_master_profile_avatar{type: "file",name: "master_profile[avatar]",multiple: ""}
     .fl.ml20
-      - if @resource.avatar.exists?
-        = image_tag(@resource.avatar(:small2),:id => "preview-avatar")
+      - if @resource.thumb.exists?
+        = image_tag(@resource.thumb(:thumb),:id => "preview-thumb")
       - else
-        %img{id: "preview-avatar",src: "",alt: "" }
+        %img{id: "preview-thumb",src: "",alt: "" }
 
   .control-group.clearfix
     .fl
