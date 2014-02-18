@@ -8,6 +8,9 @@ class DialogCelebrity::MasterProfilesController < ApplicationController
     if params[:board_id].present?
       @masters = @masters.where(:celebrity_content_board_id => params[:board_id].to_i)
     end
+    if params[:tag].present?
+      @masters = @masters.where(:nationality => params[:tag])
+    end
     @masters = @masters.order("id desc").page(params[:page]).per(8)
   end
 
