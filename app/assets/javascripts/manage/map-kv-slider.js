@@ -50,27 +50,27 @@ jQuery(function($){
 	function makepager(num){
 		ul.find('li').eq(num - 1).trigger('click');
 	}
-	ul.find('li').on('click', function(){
-		var that = $(this);
-		that.addClass('map-active').siblings('.map-active').removeClass();
-		var img = this.getElementsByTagName('img')[0]
-		bigimg.src = img.src;
+	// ul.find('li').on('click', function(){
+	// 	var that = $(this);
+	// 	that.addClass('map-active').siblings('.map-active').removeClass();
+	// 	var img = this.getElementsByTagName('img')[0]
+	// 	bigimg.src = img.src;
 
-		var index = img.getAttribute('index')
-		if(index){
-			$('div.colors_box').hide().eq( +index ).show()
-			$('div.work_tags').hide().eq( +index ).show()
-		}
-		// var index = that.index();
-		// if(index <= pages){
-		// 	ul.stop(true).animate({'top' : - index * h})
-		// 	if(index > pages){
-		// 		index = 1;
-		// 	} else {
-		// 		pager = index + 1;
-		// 	}
-		// }
-	});
+	// 	var index = img.getAttribute('index')
+	// 	if(index){
+	// 		$('div.colors_box').hide().eq( +index ).show()
+	// 		$('div.work_tags').hide().eq( +index ).show()
+	// 	}
+	// 	// var index = that.index();
+	// 	// if(index <= pages){
+	// 	// 	ul.stop(true).animate({'top' : - index * h})
+	// 	// 	if(index > pages){
+	// 	// 		index = 1;
+	// 	// 	} else {
+	// 	// 		pager = index + 1;
+	// 	// 	}
+	// 	// }
+	// });
 
 	var hash = window.location.hash.slice(1)
 	if(hash || hash.length){
