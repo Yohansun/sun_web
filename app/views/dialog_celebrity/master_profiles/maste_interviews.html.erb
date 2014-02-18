@@ -42,56 +42,57 @@
 
     <ul class="master-lists clearfix">
       <% @masters.each_with_index do |_master,index| -%>
-        <% _designs = _master.master_designs.limit(5) -%>
-        <% if _designs.present? -%>
-          <li class="index_main">
-            <div class="master-bin">
-              <div class="master-pro">
-                <a href="<%=dialog_celebrity_master_design_path(_designs.first.id)%>"><img src="<%= _designs.first.main_preview_img(:index) -%>" alt="" /></a>
-                <ul>
-                  <% _designs.last(4).each do |_design| -%>
-                    <li>
-                      <img src="<%= _design.main_preview_img(:thumb) -%>" alt="<%= _design.title -%>" />
-                    </li>
-                  <% end -%>
-                </ul>
-              </div>
-              <div class="master-info clearfix">
-                <a class="pull-left master-token"><img src="<%= _master.avatar(:small1) -%>" alt="" /></a>
-                <div class="master-detail pull-left">
-                  <h4 class="text-right"><a href="#" class="pull-left"><%=_master.name%></a><%= _master.nationality -%></h4>
-                  <p><%= raw truncate(_master.intro.html_safe,:length => 32) -%>></p>
-                  <a href="master_interview.html" target="_blank">阅读全文>></a>
-                </div>
-              </div>
+        <% _design = _master.master_designs.last -%>
+        <li class="index_main">
+          <% if _design.present? -%>
+          <div class="master-bin">
+            <div class="master-pro">
+              <% cover = _design.cover_design_upload %>
+              <a href="<%=dialog_celebrity_master_design_path(_design.id)%>"><img src="<%= cover.present? ? cover.file(:slide) : '' -%>" alt="" /></a>
+              <ul>
+                <% _design.master_design_uploads.last(4).each do |_upload| -%>
+                  <li>
+                    <img src="<%= _upload.file(:thumb) -%>" alt="<%= _upload.title -%>" />
+                  </li>
+                <% end -%>
+              </ul>
             </div>
-            <div class="master-share clearfix">
-              <div class="pull-right">
-                <!-- Baidu Button BEGIN -->
-                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare mr5">
-                  <span class="pull-left">一键分享：</span>
-                  <a class="bds_qzone"></a>
-                  <a class="bds_tsina"></a>
-                  <a class="bds_tqq"></a>
-                  <a class="bds_renren"></a>
-                  <a class="bds_t163"></a>
-                  <!-- <a class="shareCount"></a> -->
-                </div>
-                <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
-                <script type="text/javascript" id="bdshell_js"></script>
-                <script type="text/javascript">
-                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-                </script>
-                <!-- Baidu Button END -->
+            <div class="master-info clearfix">
+              <a class="pull-left master-token"><img src="<%= _master.avatar(:small1) -%>" alt="" /></a>
+              <div class="master-detail pull-left">
+                <h4 class="text-right"><a href="#" class="pull-left"><%=_master.name%></a><%= _master.nationality -%></h4>
+                <p><%= raw truncate(_master.intro.html_safe,:length => 32) -%>></p>
+                <a href="master_interview.html" target="_blank">阅读全文>></a>
               </div>
             </div>
-          </li>
-          <% if index == 3 %>
-            <div class="clearfix mb10">
-              <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
-              <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+          </div>
+          <div class="master-share clearfix">
+            <div class="pull-right">
+              <!-- Baidu Button BEGIN -->
+              <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare mr5">
+                <span class="pull-left">一键分享：</span>
+                <a class="bds_qzone"></a>
+                <a class="bds_tsina"></a>
+                <a class="bds_tqq"></a>
+                <a class="bds_renren"></a>
+                <a class="bds_t163"></a>
+                <!-- <a class="shareCount"></a> -->
+              </div>
+              <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+              <script type="text/javascript" id="bdshell_js"></script>
+              <script type="text/javascript">
+              document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+              </script>
+              <!-- Baidu Button END -->
             </div>
+          </div>
           <%end-%>
+        </li>
+        <% if index == 3 %>
+          <div class="clearfix mb10">
+            <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
+            <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+          </div>
         <%end-%>
       <%end-%>
     </ul>
