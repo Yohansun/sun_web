@@ -41,6 +41,10 @@
               = link_to "删除","#",class: "remove-design", :"data-design-id" => _design.id
           %p.design-name.mt10
             = _design.design_name
+          %p.master-name.mt10
+            设计师:
+            &nbsp;
+            = _design.master_profile.try(:name)
           %p.design-last-update
             最后修改日期:
             = _design.updated_at.strftime("%y-%m-%d")

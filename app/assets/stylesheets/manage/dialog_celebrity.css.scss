@@ -59,6 +59,8 @@
 .centerText { text-align: center;}
 .rightText { text-align: right; }
 
+* { word-wrap: break-word;; }
+
 table.table1 {
   th { padding: 4px; background-color: rgb(204,204,204);  border: 1px solid rgb(153,153,153); }
   td { padding: 4px; border: 1px solid rgb(153,153,153); }
@@ -110,19 +112,22 @@ table.table1 {
 
   #designs-warp {
     .design{
-      width: 500px; padding-bottom: 15px;
+      width: 560px; padding-bottom: 15px;
       .design-thumb {
         width: 220px; height: 156px;
         img { width: 220px; height: 156px; }
       }
-      .design-info-avatar {
-        .design-master-avatar {
-          width: 67px; height: 73px;
-          img { width: 67px; height: 73px; }
+      .design-info {
+        width: 300px;
+        .design-info-avatar {
+          .design-master-avatar {
+            width: 67px; height: 73px;
+            img { width: 67px; height: 73px; }
+          }
         }
+        p.design-name {  }
+        p.design-last-update {}
       }
-      p.design-name {  }
-      p.design-last-update {}
     }
   }
 }
