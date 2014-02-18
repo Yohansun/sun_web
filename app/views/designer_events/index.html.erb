@@ -1,5 +1,10 @@
 <%- content_for :head do %>
   <%= stylesheet_link_tag "style"%>
+  <style type="text/css">
+  .ul_dot li a:hover, .ul_dot li:hover{
+    color:#444444;
+  }
+  </style>
 <%- end %>
 <% content_for :tail do %>
 <script type="text/javascript">
@@ -67,7 +72,7 @@
                 <ul class="ul_dot clearfix nomargin">
                   <li>
                     <h5 class="nomargin"><a target="_blank"><%=active.title %></a></h5>
-                    <p class="nomargin"><%=active.intro %></p>
+                    <p class="nomargin"><a><%=active.intro %></a></p>
                   </li>
                 </ul>
                 <div class="nomargin clearfix"><a class="btn_detail btn_detail_gray pull-left" href="/designer_events/<%=active.id%>">查看详情</a></div>
