@@ -45,7 +45,7 @@
     .fl
       %label.control-label.fl 国籍
       .controls.fl.ml20
-        = f.input :nationality, label: false
+        = f.input :nationality, collection: MasterProfile.tag_list, label: false,selected: @resource.nationality
     .fl.ml20
       %label.control-label.fl 领域
       .controls.fl.ml20

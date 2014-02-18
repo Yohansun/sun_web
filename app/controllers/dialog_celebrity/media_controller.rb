@@ -36,7 +36,7 @@ class DialogCelebrity::MediaController < ApplicationController
           @questions.where("content LIKE ?","%#{params[:keyword]}%")
       end
     end
-    @questions = @questions.page(params[:page]).per(6)
+    @questions = @questions.page(params[:page]).per(8)
   end
 
   def update_question
