@@ -20,21 +20,22 @@
         %span 上传头像
         %input#manage_dialog_master_profile_avatar{type: "file",name: "master_profile[avatar]",multiple: ""}
     .fl.ml20
-      - if @resource.thumb.exists?
-        = image_tag(@resource.thumb(:thumb),:id => "preview-thumb")
+      - if @resource.avatar.exists?
+        = image_tag(@resource.avatar(:small2),:id => "preview-avatar")
       - else
-        %img{id: "preview-thumb",src: "",alt: "" }
-
-  .control-group.clearfix
-    %label.control-label.fl 名人分类
-    .controls.ml20.fl
-      = f.input :mtype, collection: [["选择名人分类",""],["名人在线",1],["名家设计",0]],label: false, selected: @resource.mtype.blank? ? "" : @resource.mtype.to_i
+        %img{id: "preview-avatar",src: "",alt: "" }
 
   .control-group.clearfix
     .fl
       %label.control-label.fl 姓名
       .controls.fl.ml20
         = f.input :name, label: false
+
+  .control-group.clearfix
+    .fl
+      %label.control-label.fl 名人分类
+      .controls.ml20.fl
+        = f.input :mtype, collection: [["选择名人分类",""],["名人在线",1],["名家设计",0]],label: false, selected: @resource.mtype.blank? ? "" : @resource.mtype.to_i
     .fl.ml20
       %label.control-label.fl 领域分类
       .controls.fl.ml20

@@ -50,30 +50,46 @@
 .w300 { width: 300px; }
 .w400 { width: 400px; }
 .w500 { width: 500px; }
+.w850 { width: 850px; }
 
 .fl { float: left; display: block; }
 .fr { float: right; display: block; }
-.ltitle { padding: 3px 20px 3px 8px; color: white; border-radius: 0px 5px 5px 0px; background-color: rgb(153,153,153); }
+.ltitle {
+  height: 30px; line-height: 30px; color: white;
+  border-radius: 0px 5px 5px 0px; background-color: rgb(153,153,153);
+  display: inline-block; padding: 0 8px; font-weight: bold; font-size: 15px;
+}
+.shadow { box-shadow: #ccc 2px 2px 2px; }
+.shadow-white {
+  padding: 12px; background-color: white;
+  border: 1px solid #9cc; @extend .shadow; margin-left: 20px; margin-right: 20px;
+}
 
 .leftText { text-align: left; }
 .centerText { text-align: center;}
 .rightText { text-align: right; }
 
-* { word-wrap: break-word;; }
+* { word-wrap: break-word; font-size: 13px; font-family: "微软雅黑"; }
 
 table.table1 {
-  th { padding: 4px; background-color: rgb(204,204,204);  border: 1px solid rgb(153,153,153); }
-  td { padding: 4px; border: 1px solid rgb(153,153,153); }
+  th { padding: 4px; background-color: rgb(204,204,204);  border: 1px solid rgb(153,153,153); height: 32px; }
+  td { padding: 4px; border: 1px solid rgb(153,153,153); height: 42px;}
 }
 
 // 对话名人首页
 #manage_dialog_celebrity_pege {
-  margin-top: 20px;
   .mdcg-content {
-    padding-left: 20px; margin-top: 20px;
+    width: 850px;
     .mdcg-ett-img { img#ett-img { width: 218px; height: 158px; } }
     .mdcg-ett-right {}
   }
+  .checkbox {
+    width: 850px;
+  }
+}
+
+.default-board {
+
 }
 
 // 名人问答
@@ -81,11 +97,25 @@ table.table1 {
   margin-top: 20px;
   .boards {
     a.board {
-      padding: 6px 16px; color: white; font-size: 14px; display: block; text-decoration: none;
+      width: 110px; height: 40px; line-height: 40px; text-align: center;
+      color: white; font-size: 14px; display: block; text-decoration: none;
     }
-    a.active { padding: 10px 27px; }
+    a.active { height: 50px; line-height: 50px; }
+  }
+  form {
+    width: 850px;
+    .title { font-weight: bold; margin-bottom: 6px;}
+    select { width: 180px; }
   }
 }
+
+// 笔记管理
+#celebrity_notes {
+  form {
+    .title { font-weight: bold; margin-bottom: 6px;}
+  }
+}
+
 
 // 名人管理
 #master_profiles {
@@ -93,39 +123,47 @@ table.table1 {
   .boards {
     a.board {
       padding: 6px 16px; color: white; font-size: 14px; display: block; text-decoration: none;
-      color: rgb(102,102,102); border: 1px solid rgb(102,102,102);
+      color: rgb(102,102,102); @extend .shadow; border: 1px solid #9cc;
     }
-    a.active { padding: 10px 27px; color: white; background-color: rgb(102,102,102);}
+    a.active { padding: 10px 27px; color: white; background-color: #099;}
   }
 }
 
 // 作品管理
 #master-designs {
   margin-top: 20px;
+
+  form {
+    .title { font-weight: bold; margin-bottom: 6px;}
+    select { width: 120px; }
+  }
+
   .boards {
     a.board {
       padding: 6px 16px; color: white; font-size: 14px; display: block; text-decoration: none;
-      color: rgb(102,102,102); border: 1px solid rgb(102,102,102);
+      color: rgb(102,102,102); @extend .shadow; border: 1px solid #9cc;
     }
-    a.active { padding: 10px 27px; color: white; background-color: rgb(102,102,102);}
+    a.active { padding: 10px 27px; color: white; background-color: #099;}
   }
 
   #designs-warp {
     .design{
-      width: 560px; padding-bottom: 15px;
+      padding: 12px; width: 416px; height: 176px;
+      box-shadow: #ccc 2px 2px 2px;
+      background-color: rgb(247,247,247); margin-right: 12px; margin-bottom: 12px;
       .design-thumb {
         width: 220px; height: 156px;
         img { width: 220px; height: 156px; }
       }
       .design-info {
-        width: 300px;
+        width: 184px;
         .design-info-avatar {
           .design-master-avatar {
             width: 67px; height: 73px;
             img { width: 67px; height: 73px; }
           }
         }
-        p.design-name {  }
+        p.design-name { overflow: hidden; word-wrap: normal; }
         p.design-last-update {}
       }
     }
