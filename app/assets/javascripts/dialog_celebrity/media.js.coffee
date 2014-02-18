@@ -13,6 +13,7 @@ $ ->
         for obj in $(".question-warp")
           if $(obj).find(".content").attr("data-question-id") isnt id
             $(obj).find(".content").slideUp()
+
         $(this).parent().parent().next().slideToggle()
       $("body").on "click","#submit-question",->
         question_id = $(this).attr("data-question-id")
@@ -61,10 +62,14 @@ $ ->
             $obj.remove()
             alert "删除成功"
 
-      colorbox_qa = () ->
-        $('.replies-upload-colorbox').colorbox({rel:'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+      $("body").on "click",".image-warp a:first", ->
+        obj = $(this).attr("class")
+        colorbox_qa(".#{obj}")
 
-      colorbox_qa();
+      colorbox_qa = (obj) ->
+        $(obj).colorbox({rel:'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+
+      colorbox_qa(".replies-upload-colorbox");
 
       submitReply = (question_id,content,reply_id,image_ids,obj)->
         $.post "/dialog_celebrity/media/update_question",{question_id: question_id, reply_id: reply_id, image_ids: image_ids,content: content}, (r)->
