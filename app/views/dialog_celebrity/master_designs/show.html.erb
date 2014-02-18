@@ -29,9 +29,8 @@
   <div class="pull-left imgbase_in_left">
     <div class="slides_box clearfix">
       <div class="map-big pull-left js-map-big">
-        <% cover = @master_design.cover_design_upload %>
-        <% if cover -%>
-          <img src="<%=cover.file(:slide)%>" />
+        <% if @upload -%>
+          <img src="<%=@upload.file(:slide)%>" />
         <%end-%>
       </div>
       <div class="map-kv-slider pull-right">
@@ -41,7 +40,7 @@
         <div class="map-kv-container">
           <ul>
             <% @master_design.master_design_uploads.each_with_index do |_upload,index| -%>
-            <li class="<%= index == 0 ? 'map-active' : ''%>"><a href="javascript:;"><span></span><img src="<%=_upload.file(:thumb)-%>" alt="<%=_upload.title%>" /></a></li>
+            <li class="<%= index == 0 ? 'map-active' : ''%>"><a href="<%=dialog_celebrity_master_design_path(@master_design.id,upload_id: _upload.id)%>"><span></span><img src="<%=_upload.file(:thumb)-%>" alt="<%=_upload.title%>" /></a></li>
             <%end -%>
           </ul>
         </div>
@@ -54,26 +53,26 @@
       <a target="_blank" href="#" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该大师访谈</a>
       <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-fullscreen"></i>全屏</a>
       <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-collect"></i>收藏</a>
-      <a href="<%= cover.present? ? download_dialog_celebrity_master_design_path(cover.id) : '#' -%>" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
+      <a href="<%= @upload.present? ? download_dialog_celebrity_master_design_path(@upload.id) : '#' -%>" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
       <!-- <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-xin_gray"></i>8799</a> -->
     </div>
     <div class="colors_box clearfix">
       <div class="pull-left"><img src="images/imgbase_in/color.jpg"></div>
       <ul class="pull-left unstyled">
         <li>
-          <div class="colorblock" style="background-color:#7b6d66"></div>
+          <div class="colorblock" style="background-color: <%= @upload.recommend_color1 -%>"></div>
           <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+          <p class="colorname"><%= @upload.recommend_color_category1 -%></p>
         </li>
         <li>
-          <div class="colorblock" style="background-color:#acb57f"></div>
+          <div class="colorblock" style="background-color: <%= @upload.recommend_color2 -%>"></div>
           <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+          <p class="colorname"><%= @upload.recommend_color_category2 -%></p>
         </li>
         <li>
-          <div class="colorblock" style="background-color:#ebe8c4"></div>
+          <div class="colorblock" style="background-color: <%= @upload.recommend_color3 -%>"></div>
           <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname">立邦(GN5080-2)狮峰龙井</p>
+          <p class="colorname"><%= @upload.recommend_color_category3 -%></p>
         </li>
       </ul>
       <a href="#" class="gobuy pull-left"></a>

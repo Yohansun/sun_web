@@ -48,7 +48,9 @@
           <div class="master-bin">
             <div class="master-pro">
               <% cover = _design.cover_design_upload %>
-              <a href="<%=dialog_celebrity_master_design_path(_design.id)%>"><img src="<%= cover.present? ? cover.file(:slide) : '' -%>" alt="" /></a>
+              <% if cover.present? %>
+                <a href="<%=dialog_celebrity_master_design_path(_design.id,upload_id: cover.id)%>"><img src="<%= cover.file(:slide) -%>" alt="" /></a>
+              <%end -%>
               <ul>
                 <% _design.master_design_uploads.last(4).each do |_upload| -%>
                   <li>
