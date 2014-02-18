@@ -12,39 +12,39 @@
     = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media","bootstrap-datetimepicker")
 
   %body
-    #banner.pr100
+    #banner
       .pull-left#banner-title iColor 名人问答QA系统
       .pull-right#banner-username= current_media.username
     %ul.nav.clearfix
       - @boards.each do |board|
         %li.fl= link_to board.name,"/dialog_celebrity/media/index?board_id=#{board.id}",class: @board_id.to_i == board.id ? "active" : ""
-    %form#search-area.mt5.shadow
+    %form#search-area.shadow
       %input{type: :hidden, name: :board_id, value: @board_id}
       #search-area-line1
         %span.first 我想查找
-        %select{name: "type"}
+        %select.input-small{name: "type"}
           %option{value: ""} 全部
           %option{value: "not_replied",selected: params[:type] == "not_replied"} 未回复
           %option{value: "replied",selected: params[:type] == "replied"} 已经回复
 
         %span 的问题
-        %span 并且
+        %span.text_green 并且
         %span 我想查找从
-        %input.datetimepicker_full{name: :start_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:start_date]}
+        %input.datetimepicker_full.input-medium{name: :start_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:start_date]}
         %span 到
-        %input.datetimepicker_full{name: :end_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:end_date].present? ? params[:end_date] : Date.current.to_s}
+        %input.datetimepicker_full.input-medium{name: :end_date,type: :text,placeholder: "格式: 2014-01-01", value: params[:end_date].present? ? params[:end_date] : Date.current.to_s}
         %span 的问题
-        %span 并且
+        %span.text_green 并且
       #search-area-line2
         %span.first 我想查找
-        %select{name: :key_type}
+        %select.input-small{name: :key_type}
           %option{value: "title",selected: params[:key_type]=="title"} 标题
           %option{value: "content",selected: params[:key_type]=="content"} 内容
         %span 中有关于
-        %input{name: :keyword, placeholder: "输入关键字",value: params[:keyword]}
+        %input.input-medium{type: :text, name: :keyword, placeholder: "输入关键字",value: params[:keyword]}
         %span 的问题
-        %input{type: :submit, value: "查找"}
-    #question-title.clearfix.mt5
+        %input.btn{type: :submit, value: "查找"}
+    #question-title.clearfix
       .pr10.fl &nbsp;
       .pr70.fl 标题
       .pr10.fl 提问者
@@ -52,7 +52,7 @@
       .pr5.fl 操作
     - @questions.each do |_question|
       - if params[:type] == "replied" && _question.replied? || params[:type] == "not_replied" && !_question.replied? || params[:type].blank?
-        .question-warp.mt5
+        .question-warp
           .question-title-warp.clearfix
             .pr10.fl
               - if _question.replied?
@@ -69,14 +69,8 @@
               = link_to "删除","javascript:;",:class => "delete-question-btn",:"data-question-id" => _question.id
 
           .content{style: "display: none;",:"data-question-id" => _question.id}
-            .clearfix.mt5
-              .pr10.fl &nbsp;
-              .pr90.fl{ style: "height: 1px; border-top: 1px dashed #bebebe;" }
             .question-content-warp.clearfix
-              .pr10.fl &nbsp;
-              .question-content.pr70.fl
-                .pd10
-                  = raw _question.content
+              = raw _question.content
             - if  _question.images.present?
               .question-upload-warp.clearfix
                 .pr10.fl &nbsp;
@@ -84,24 +78,21 @@
                   - _question.images.each do |_image|
                     = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
             .reply.clearfix.relative.mt10
-              .pr10.fl &nbsp;
-              .pr80.fl
-                - reply = _question.find_media_reply
-                - if reply.present?
-                  %div{style: "color: #a62627;"}
-                    [#{reply.media.name}] #{reply.media.username} 已在 #{reply.updated_at.strftime("%y-%m-%d %H:%M")} 回复:
+              / .pr10.fl &nbsp;
+              / .pr80.fl
+              - reply = _question.find_media_reply
+              - if reply.present?
+                %span.media_name
+                  [#{reply.media.name}] #{reply.media.username} 已在 #{reply.updated_at.strftime("%y-%m-%d %H:%M")} 回复:
 
-
-                  %textarea{placeholder: "我来回答"}
-                    = reply.content
-                - else
-                  %textarea{placeholder: "我来回答"}
-              .pr10.fl
-                %input#submit-question{:type => "submit", :value => "提交问题", :"data-question-id" => _question.id, :"data-reply-id" => reply.try(:id) || ""}
+                %textarea{placeholder: "我来回答"}
+                  = reply.content
+              - else
+                %textarea{placeholder: "我来回答"}
+              %div
+                %input#submit-question.btn{:type => "submit", :value => "提交回复", :"data-question-id" => _question.id, :"data-reply-id" => reply.try(:id) || ""}
             .reply-upload
-              .pr10.fl &nbsp;
               %span.fileinput-button
-                %i.icon-plus.icon-white
                 %span.btn 上传图片...
                 %input.upload{type: "file",name: "file",multiple: ""}
               .replies-upload-warp.clearfix
