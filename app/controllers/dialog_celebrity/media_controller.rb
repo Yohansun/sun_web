@@ -67,7 +67,7 @@ class DialogCelebrity::MediaController < ApplicationController
     image = CelebrityQuestionImage.new
     image.image = params[:file]
     if image.save
-      render :json => {:code => 1, :notify => "上传成功",:url => image.image(:thumb),:id => image.id}
+      render :json => {:code => 1, :notify => "上传成功",:url => image.image(:thumb),:id => image.id,:url2 => image.image(:slide)}
     else
       return render :json => {:notify => "保存失败"}
     end
