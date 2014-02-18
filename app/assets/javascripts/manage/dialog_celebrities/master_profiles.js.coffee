@@ -9,13 +9,13 @@ $ ->
     initialize: ->
       $("body").on "click","#save_next", ->
         $("input#after_save").val("next")
-
-      $.imagepreview({
-        file : $('#manage_dialog_master_profile_avatar'),
-        img : $('#preview-avatar'),
-        maxWidth : 80,
-        maxHeight : 80
-      });
+      if $.imagepreview
+        $.imagepreview({
+          file : $('#manage_dialog_master_profile_avatar'),
+          img : $('#preview-avatar'),
+          maxWidth : 80,
+          maxHeight : 80
+        });
 
       $("body").on "click","#delete_all", ->
         list = ($(item).attr("id").split("_")[1] for item in $("input.master_select:checked"))

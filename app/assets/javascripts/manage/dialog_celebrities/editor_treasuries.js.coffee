@@ -7,12 +7,13 @@ $ ->
       {@window, @document, @body} = options
 
     initialize: ->
-      $.imagepreview({
-        file : $('#manage_dialog_editor_treasury_thumb'),
-        img : $('#preview-thumb'),
-        maxWidth : 280,
-        maxHeight : 145
-      });
+      if $.imagepreview
+        $.imagepreview({
+          file : $('#manage_dialog_editor_treasury_thumb'),
+          img : $('#preview-thumb'),
+          maxWidth : 280,
+          maxHeight : 145
+        });
 
       if $('body').hasClass('xheditor')
         $('.xheditor').xheditor(

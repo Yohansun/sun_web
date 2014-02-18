@@ -8,9 +8,9 @@ class Manage::DialogCelebrities::CelebrityNotesController < Manage::BaseControll
       if params[:master_id].present?
         masters = MasterProfile.where(:id => params[:master_id])
       elsif params[:match].present?
-        masters = MasterProfile.where("name = ? and mtype = ?","params[:master_name]",params[:mtype])
+        masters = MasterProfile.where("name = ? or mtype = ?","params[:master_name]",params[:mtype])
       else
-        masters = MasterProfile.where("name LIKE ? and mtype = ?","%#{params[:master_name]}%",params[:mtype])
+        masters = MasterProfile.where("name LIKE ? or mtype = ?","%#{params[:master_name]}%",params[:mtype])
       end
       if board_id.present?
         @collection = @collection.where(:celebrity_content_board_id => board_id.to_i)
