@@ -160,7 +160,9 @@
         <span><%= @image.user.display_name if @image.user%></span>
         <i class="icon-i16 icon-site nomargin"></i>
         <small><%= @image.try(:user).try(:area).try(:name)%></small>
-        <a href="/users/<%= @image.user.id%>/asks" class="btn_ask"></a>
+        <% if @image.user %>
+          <a href="/users/<%= @image.user.id%>/asks" class="btn_ask"></a>
+        <% end %>
       </p>
       <a href="/images/<%= @image.id%>/fullscreen" class="btn2 pull-right" target="_blank" title=''><i class="icon-i16 icon-fullscreen"></i>全屏</a>
       <%= link_to user_collects_path(1, design_image_id: @image.id), class: 'btn2 pull-right img_show_collect', :remote => true, method: :post, :title => '' do %>
