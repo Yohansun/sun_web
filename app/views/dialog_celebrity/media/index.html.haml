@@ -8,8 +8,8 @@
     %meta{:content => "icolor", :name => "description"}
     %meta{:content => "icolor", :name => "author"}
     = stylesheet_link_tag("dialog_celebrity/media")
-    = stylesheet_link_tag "upload_image/jquery.fileupload-ui","bootstrap.min","datepicker","bootstrap-timepicker"
-    = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media","bootstrap-datetimepicker")
+    = stylesheet_link_tag "upload_image/jquery.fileupload-ui","bootstrap.min","datepicker","bootstrap-timepicker","colorbox/colorbox"
+    = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media","bootstrap-datetimepicker","jquery.colorbox")
 
   %body
     #banner
@@ -99,7 +99,8 @@
                 - if reply.present?
                   - reply.images.order("created_at desc").each do |_image|
                     .fl.mr5.image-warp.fl.clearfix
-                      = image_tag _image.image(:thumb),:"data-image-id" => _image.id
+                      %a{:href => _image.image(:slide), :class => "replies-upload-colorbox"}
+                        = image_tag _image.image(:thumb),:"data-image-id" => _image.id
                       = link_to "删除","javascript:;",:class => "delete-reply-img-btn"
     .pager
       = paginate @questions
