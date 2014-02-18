@@ -8,7 +8,6 @@
 
   %form.mt20.ml20.clearfix.shadow-white.w850{method: "get",action: "/manage/dialog_celebrities/master_designs"}
     .title 请选择筛选条件
-
     %input.fl.ml10.w150{type: "text", name: "design_name", placeholder: "输入作品名",value: params[:design_name]}
     .ml10.fl= ".and."
     %input.fl.ml10.w150{type: "text", name: "master_name", placeholder: "输入名人姓名",value: params[:master_name]}
@@ -24,10 +23,8 @@
       %option{value: "0",selected: params[:mtype] == "0"} 名家设计
     %input{type: "hidden", value: "true", name: "query"}
     %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
-
   .mt10
     %a.btn.btn-small.radius6.ml20{href: new_dialog_celebrities_master_design_path} 新建作品...
-
 
   #designs-warp.mt10.ml20.clearfix
     - @collection.each_with_index do |_design,_index|
