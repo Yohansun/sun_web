@@ -7,8 +7,12 @@ $ ->
       {@window, @document, @body} = options
 
     initialize: ->
-      $("body").on "change","input#manage_dialog_editor_treasury_thumb", ->
-        $(this).parent().parent().find(".upload_selected_filename").text $(this).val()
+      $.imagepreview({
+        file : $('#manage_dialog_editor_treasury_thumb'),
+        img : $('#preview-thumb'),
+        maxWidth : 280,
+        maxHeight : 145
+      });
 
       if $('body').hasClass('xheditor')
         $('.xheditor').xheditor(
