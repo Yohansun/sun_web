@@ -36,7 +36,7 @@ $ ->
         maxNumberOfFiles: 1,
         maxFileSize: 5000000,
         done: (e, data)->
-          content = "<div class='fl mr5 image-warp clearfix'><a class='replies-upload-colorbox' href=#{data.result.url}><img src=#{data.result.url} data-image-id=#{data.result.id} /></a><a href='javascript:;' class='delete-reply-img-btn' >删除</a></div>"
+          content = "<div class='fl mr5 image-warp clearfix'><a class='replies-upload-colorbox' href=#{data.result.url2}><img src=#{data.result.url} data-image-id=#{data.result.id} /></a><a href='javascript:;' class='delete-reply-img-btn' >删除</a></div>"
           $(this).parent().next().prepend(content)
           colorbox_qa()
         ,
