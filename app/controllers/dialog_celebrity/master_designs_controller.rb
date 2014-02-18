@@ -1,6 +1,7 @@
 class DialogCelebrity::MasterDesignsController < ApplicationController
   def show
     @master_design = MasterDesign.find(params[:id])
+    @upload = MasterDesignUpload.find(params[:upload_id])
   end
 
   def download
