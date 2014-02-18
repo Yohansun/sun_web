@@ -38,6 +38,7 @@ $ ->
           _question_id = $(this).parent().parent().parent().attr("data-question-id")
           content = "<div class='fl mr5 image-warp clearfix'><a class='reply-upload-colorbox reply-upload-colorbox-#{_question_id}' data-question-id=#{_question_id} href=#{data.result.url2}><img src=#{data.result.url} data-image-id=#{data.result.id} /></a><a href='javascript:;' class='delete-reply-img-btn' >删除</a></div>"
           $(this).parent().next().prepend(content)
+          colorbox_qa()
         ,
         error: (e, data)->
           alert data.result
