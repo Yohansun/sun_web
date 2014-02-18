@@ -6,7 +6,8 @@
   %span.ltitle
     名人手记管理
 
-  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/celebrity_notes"}
+  %form.mt20.ml20.clearfix.shadow-white.w850{method: "get",action: "/manage/dialog_celebrities/celebrity_notes"}
+    .title 请选择筛选条件
     %select.fl{name: "board_id"}
       %option{value: ""} 选择领域分类
       - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
@@ -16,14 +17,13 @@
     .ml10.fl= ".and."
     %input.fl.ml10.w150{type: "text", name: "master_name", placeholder: "输入名人姓名",value: params[:master_name]}
     .ml10.fl
-      名人姓名全字匹配
+      精准匹配
     %label.fl.ml5
       %input.master_select{type: "checkbox", name: "match",checked: params[:match].present?}
       .lbl
     %input{type: "hidden", value: "true", name: "query"}
     %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
-  .ml10
-    %hr.w500{style: "border-style: dashed;"}/
+
   .mt10
     %a.btn.btn-small.ml20.radius6#save-board{href: new_dialog_celebrities_celebrity_note_path} 新建手记...
   %table#ett.table1.mt10.ml20

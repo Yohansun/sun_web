@@ -7,66 +7,68 @@
   = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
                            "upload_image/jquery.iframe-transport",
                            "upload_image/jquery.fileupload"
-= simple_form_for @page,:url => "/manage/dialog_celebrities/save_data",:method => "post", :html => { :id => "manage_dialog_celebrity_pege_form",:class => "mt20"} do |f|
-  %span.ltitle
-    本期小编宝典
-  .mdcg-content.mb20.mt20.clearfix
-    .mdcg-ett-img.pdl20.fl
-      = image_tag @page.edit_treasury_thumb(:thumb),:id => "ett-img",:size => "218x158"
-    .mdcg-ett-right.ml30.fl
-      .control-group
-        %label 标题(不超12字)
-        .controls
-          %input#ett-title.title-field{type: "text", :"data-total" => "12", :value => @page.edit_treasury_title, :name => "dialog_celebrity_page[edit_treasury_title]"}
-      .control-group
-        %label url
-        .controls
-          %input#ett-url{type: "text", :value => @page.edit_treasury_url, :name => "dialog_celebrity_page[edit_treasury_url]"}
-      .control-group.clearfix
-        %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
-          %i.icon-plus.icon-white
-          %span 上传图片...
-          %input#manage_dialog_celebrity_pege_fileupload{type: "file",name: "file",multiple: ""}
-        .fl.ml20 (尺寸 330x240)
 
-  %span.ltitle
-    本期名人在线
-  .checkbox.mb20
-    %label.mt20
-      %input#check_last_celebrity{type: "checkbox", :name => "dialog_celebrity_page[last_celebrity]",:checked => @page.last_celebrity, :value=>"1"}
-      %span.lbl 显示最新录入的名人在线
-    .clearfix
-      .fl 选择想要显示的名家
-      .fl.ml5
-        %select.form-control#celebrity-list{:name => "dialog_celebrity_page[celebrity_id]"}
-          %option 选择名人
-          - @celebrities.each do |_celebrity|
-            %option{ value: _celebrity.id, selected: _celebrity.id == @page.celebrity_id, data: _celebrity.name }= _celebrity.name
-      .fl.ml20 或者直接输入名人姓名
-      %input#search-celebrity.fl.ml5{type: "text", placeholder: "输入名人姓名"}
-      .fl.ml10
-        %a.btn.btn-small.btn-primary#find-celebrity-btn.radius6{href: "javascript:;"} 查找
+#manage_dialog_celebrity_pege
+  = simple_form_for @page,:url => "/manage/dialog_celebrities/save_data",:method => "post", :html => { :id => "manage_dialog_celebrity_pege_form",:class => "mt20"} do |f|
+    %span.ltitle
+      本期小编宝典
+    .mdcg-content.mb20.mt20.clearfix.shadow-white
+      .mdcg-ett-img.fl
+        = image_tag @page.edit_treasury_thumb(:thumb),:id => "ett-img",:size => "218x158"
+      .mdcg-ett-right.ml30.fl
+        .control-group
+          %label 标题(不超12字)
+          .controls
+            %input#ett-title.title-field{type: "text", :"data-total" => "12", :value => @page.edit_treasury_title, :name => "dialog_celebrity_page[edit_treasury_title]"}
+        .control-group
+          %label url
+          .controls
+            %input#ett-url{type: "text", :value => @page.edit_treasury_url, :name => "dialog_celebrity_page[edit_treasury_url]"}
+        .control-group.clearfix
+          %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
+            %i.icon-plus.icon-white
+            %span 上传图片...
+            %input#manage_dialog_celebrity_pege_fileupload{type: "file",name: "file",multiple: ""}
+          .fl.ml20 (尺寸 330x240)
 
-  %span.ltitle
-    本期名家设计
-  .checkbox.mt20
-    %label
-      %input#check_last_master{type: "checkbox", :name => "dialog_celebrity_page[last_master]",:checked => @page.last_master, :value=>"1"}
-      %span.lbl 显示最新一期的名家设计
-    .clearfix
-      .fl 选择想要显示的名家
-      .fl.ml5
-        %select.form-control#master-list{:name => "dialog_celebrity_page[master_id]"}
-          %option 选择名家
-          - @masters.each do |_master|
-            %option{ value: _master.id, selected: _master.id == @page.master_id, data: _master.name }= _master.name
-      .fl.ml20 或者直接输入名家姓名
-      %input#search-master.fl.ml5{type: "text", placeholder: "输入名家姓名"}
-      .fl.ml10
-        %a.btn.btn-small.btn-primary#find-master-btn.radius6{href: "javascript:;"} 查找
-  .mt20
-    %input.btn.btn-small.btn-primary.ml20#save-btn.radius6{type: "submit", value: "保存"}
-    %a.btn.btn-small.btn-primary.ml10#reset-btn.radius6{ href: "javascript:;" } 恢复
+    %span.ltitle
+      本期名人在线
+    .checkbox.mb20.mt20.shadow-white
+      %label
+        %input#check_last_celebrity{type: "checkbox", :name => "dialog_celebrity_page[last_celebrity]",:checked => @page.last_celebrity, :value=>"1"}
+        %span.lbl 显示最新录入的名人在线
+      .clearfix
+        .fl 选择想要显示的名家
+        .fl.ml5
+          %select.form-control#celebrity-list{:name => "dialog_celebrity_page[celebrity_id]"}
+            %option 选择名人
+            - @celebrities.each do |_celebrity|
+              %option{ value: _celebrity.id, selected: _celebrity.id == @page.celebrity_id, data: _celebrity.name }= _celebrity.name
+        .fl.ml20 或者直接输入名人姓名
+        %input#search-celebrity.fl.ml5{type: "text", placeholder: "输入名人姓名"}
+        .fl.ml10
+          %a.btn.btn-small.btn-primary#find-celebrity-btn.radius6{href: "javascript:;"} 查找
+
+    %span.ltitle
+      本期名家设计
+    .checkbox.mt20.shadow-white
+      %label
+        %input#check_last_master{type: "checkbox", :name => "dialog_celebrity_page[last_master]",:checked => @page.last_master, :value=>"1"}
+        %span.lbl 显示最新一期的名家设计
+      .clearfix
+        .fl 选择想要显示的名家
+        .fl.ml5
+          %select.form-control#master-list{:name => "dialog_celebrity_page[master_id]"}
+            %option 选择名家
+            - @masters.each do |_master|
+              %option{ value: _master.id, selected: _master.id == @page.master_id, data: _master.name }= _master.name
+        .fl.ml20 或者直接输入名家姓名
+        %input#search-master.fl.ml5{type: "text", placeholder: "输入名家姓名"}
+        .fl.ml10
+          %a.btn.btn-small.btn-primary#find-master-btn.radius6{href: "javascript:;"} 查找
+    .mt20
+      %input.btn.btn-small.btn-primary.ml20#save-btn.radius6{type: "submit", value: "保存"}
+      %a.btn.btn-small.btn-primary.ml10#reset-btn.radius6{ href: "javascript:;" } 恢复
 
 :coffeescript
   $ ->

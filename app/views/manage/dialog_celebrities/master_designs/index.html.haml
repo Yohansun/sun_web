@@ -6,13 +6,14 @@
   %span.ltitle
     名人作品管理
 
-  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/master_designs"}
+  %form.mt20.ml20.clearfix.shadow-white.w850{method: "get",action: "/manage/dialog_celebrities/master_designs"}
+    .title 请选择筛选条件
     %a.btn.btn-small.radius6.fl{href: new_dialog_celebrities_master_design_path} 新建作品...
     %input.fl.ml10.w150{type: "text", name: "design_name", placeholder: "输入作品名",value: params[:design_name]}
     .ml10.fl= ".and."
     %input.fl.ml10.w150{type: "text", name: "master_name", placeholder: "输入名人姓名",value: params[:master_name]}
     .ml10.fl
-      名人姓名全字匹配
+      精准匹配
     %label.fl.ml5
       %input.master_select{type: "checkbox", name: "match",checked: params[:match].present?}
       .lbl
@@ -23,8 +24,6 @@
       %option{value: "0",selected: params[:mtype] == "0"} 名家设计
     %input{type: "hidden", value: "true", name: "query"}
     %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
-  .ml10
-    %hr.w500{style: "border-style: dashed;"}/
 
   #designs-warp.mt10.ml20.clearfix
     - @collection.each_with_index do |_design,_index|

@@ -13,7 +13,11 @@ class Manage::DialogCelebrities::MasterProfilesController < Manage::BaseControll
         @collection = @collection.where(:celebrity_content_board_id => board_id.to_i)
       end
       if name.present?
-        @collection = @collection.where("name LIKE ?", "%#{name}%")
+        if params[:match].present?
+          @collection = @collection.where("name = ?", "%#{name}%")
+        else
+          @collection = @collection.where("name LIKE ?", "%#{name}%")
+        end
       end
     end
     @collection = @collection.order("updated_at desc").page(params[:page]).per(8)

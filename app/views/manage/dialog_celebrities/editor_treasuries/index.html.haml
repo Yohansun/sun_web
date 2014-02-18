@@ -6,7 +6,8 @@
   %span.ltitle
     小编宝典管理
 
-  %form.mt20.ml20.clearfix{method: "get",action: "/manage/dialog_celebrities/editor_treasuries"}
+  %form.mt20.ml20.clearfix.shadow-white{method: "get",action: "/manage/dialog_celebrities/editor_treasuries"}
+    .title 请选择筛选条件
     %select.fl{name: "board_id"}
       %option{value: ""} 选择领域分类
       - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
@@ -15,8 +16,7 @@
     %input.fl.ml10.w150{type: "text", name: "key", placeholder: "输入宝典标题", value: params[:key]}
     %input{type: "hidden", value: "true", name: "query"}
     %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
-  .ml10
-    %hr.w500{style: "border-style: dashed;"}/
+
   .mt10
     %a.btn.btn-small.ml20.radius6#save-board{href: new_dialog_celebrities_editor_treasury_path} 新建宝典...
   %table#ett.table1.mt10.ml20
