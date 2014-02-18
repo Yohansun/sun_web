@@ -37,11 +37,11 @@
         #cboxLoadedContent{padding-bottom:44px;border:solid #f8f8f8;border-width:8px 7px 8px 8px;}
         #cboxTitle{position:absolute; bottom:4px; left:0; text-align:center; width:100%; color:#949494;}
         #cboxCurrent{position:absolute; bottom:21px; left:85px; color:#a6a0a0;font:italic 12px "Euphemia UCAS,Georgia,Arial";}
-        #cboxLoadingOverlay{background:url(images/loading_background.png) no-repeat center center;}
-        #cboxLoadingGraphic{background:url(images/loading.gif) no-repeat center center;}
+        #cboxLoadingOverlay{background:url(<%= asset_path "colorbox/images/loading_background.png" %>) no-repeat center center;}
+        #cboxLoadingGraphic{background:url(<%= asset_path "colorbox/images/loading.gif" %>) no-repeat center center;}
 
         /* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
-        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {position:absolute; border:0; padding:0; margin:0; overflow:visible; width:auto; background:url(../../images/icons.png) no-repeat;text-indent:-9999px;outline:0;}
+        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {position:absolute; border:0; padding:0; margin:0; overflow:visible; width:auto; background:url(<%=asset_path "icons.png" %>) no-repeat;text-indent:-9999px;outline:0;}
 
         /* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
         #cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {outline:0;border:0;}
