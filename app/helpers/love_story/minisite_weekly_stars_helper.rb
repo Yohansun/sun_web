@@ -1,0 +1,2 @@
+module LoveStory::MinisiteWeeklyStarsHelper
+end

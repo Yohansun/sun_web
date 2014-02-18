@@ -29,8 +29,8 @@
               <li class="<%= 'active' if controller_name == 'minisite_designs' %>">
                 <a target="_blank" href="<%= minisite_designs_path %>">设计作品展示</a>
               </li>
-              <li>
-                <a target="_blank" href="./4.html">设计师精选</a>
+              <li class="<%= 'active' if controller_name =~ /minisite_weekly_stars|minisite_stars/ %>">
+                <a target="_blank" href="<%= minisite_stars_path %>">设计师精选</a>
               </li>
               <li class="">
                 <a target="_blank" href="./5.html">活动说明</a>

@@ -1,0 +1,400 @@
+<% content_for :tail do %>
+<script>
+  $(function () {
+    $('.js-grayscale').on('mouseenter mouseleave','li',function(){
+      var that = $(this)
+      var index = that.index() % 4
+      var arr = [0,1,2,3]
+      arr.splice($.inArray(index, arr), 1)
+
+      that.toggleClass('active').siblings().toggleClass('grayscale')
+      .end()
+      .find('p').toggle()
+      .end()
+      .find('.designer-mask').css('top', that.position().top)
+      .find('img').each(function(i){
+        this.style.left = arr[i] * (236 + 8) + 8 + 'px'
+      })
+    });
+  });
+</script>
+<% end %>
+<div class="container-fluid bann_green_skin greatest">
+  <div class="banner"></div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <ul class="nav nav-tabs greatest_tabs" id="greatest_tab">
+        <li class="<%= 'active' if controller_name == 'minisite_stars' %>"><a href="<%= minisite_stars_path %>">设计名家</a></li>
+        <li class="<%= 'active' if controller_name == 'minisite_weekly_stars' %>">
+          <a href="<%= minisite_weekly_stars_path %>">iColor设计之星</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="active ph15" id="designers">
+          <h2 class="title">
+            <img src="<%= asset_path 'love_story/images/greatest/designer_title.jpg'%>" alt="" title="荟萃国内外名家设计师" />
+            <small class="help-block">寻找你身边的顶级室内设计大师，满足你对家的精品需求</small>
+          </h2>
+          <hr class="border2">
+          <div class="list_img mt25 pr">
+            <ul class="thumbnails clearfix unstyled js-grayscale">
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer1.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+
+                <div class="designer-mask">
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer2.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+                <div class="designer-mask">
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer3.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+                <div class="designer-mask">
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer4.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+                <div class="designer-mask">
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer5.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+                <div class="designer-mask">
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                  <a href="#" class=""><img src="images/greatest/designer_work/designer1_work1.jpg" alt="" /></a>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer6.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer7.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer8.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer1.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer2.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer3.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer4.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer5.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer6.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer7.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer8.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer1.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer2.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer3.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer4.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer5.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer6.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer7.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="designer pr">
+                  <a href="javascript:;"><img data-grayscale="grayscale" src="images/greatest/designers/designer8.jpg" alt="" /></a>
+                  <p class="title pr hide">
+                    <span class="help-block">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red authorname">黄伟柱</a>
+                      <small class="nomargin">上海</small>
+                    </span>
+                    <span class="help-block dot_linet1">中西合璧的室内设计大师</span>
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <div class="pagination pagination-centered dot_linet1 pt20 mr5">
+              <ul>
+                <!-- <li class="disabled"><a href="#">上一页</a></li> -->
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a class="noborder nomargin nopadding" href="#">...</a></li>
+                <li><a href="#">下一页</a></li>
+                <li><a href="#">最后一页</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

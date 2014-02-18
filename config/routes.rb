@@ -877,6 +877,8 @@ Icolor::Application.routes.draw do
       end
     end
     resources :minisite_designs
+    resources :minisite_stars
+    resources :minisite_weekly_stars
   end
 
 end

@@ -1,0 +1,325 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function(){
+      var options = {
+        data: data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '请选择省');
+      sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '请选择市');
+      // use in cubit slide
+      var options2 = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options2);
+      sel.bind('.level1_1', null, '省/直辖市');
+      sel.bind('.level1_2', null, '城市');
+      sel.bind('.level1_3', null, '区');
+    });
+  </script>
+<%- end %>
+<div class="container-fluid bann_green_skin greatest">
+  <div class="banner"></div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <ul class="nav nav-tabs greatest_tabs" id="greatest_tab">
+        <li class="<%= 'active' if controller_name == 'minisite_stars' %>"><a href="<%= minisite_stars_path %>">设计名家</a></li>
+        <li class="<%= 'active' if controller_name == 'minisite_weekly_stars' %>">
+          <a href="<%= minisite_weekly_stars_path %>">iColor设计之星</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div>
+          <div class="ph10 clearfix">
+            <div class="left_big pull-left">
+              <form action="#" method="" class="g_list-search">
+                <p class="g_srch-bin">
+                  您的选择：
+                  <span class="g_srch-s">小户型<a href="javascript:;" class="g_srch-del">delete</a></span>
+                  <span class="g_srch-s">飘窗设计<a href="javascript:;" class="g_srch-del">delete</a></span>
+                  <span class="g_srch-s">儿童房<a href="javascript:;" class="g_srch-del">delete</a></span>
+                  <span class="g_srch-s">70-90平米<a href="javascript:;" class="g_srch-del">delete</a></span>
+                  <button class="g_srch-s g_srch-btn">立即搜索</button>
+                  <span class="g_srch-s g_srch-reset">重新选择</span>
+                </p>
+                <div class="g_list-form">
+                  <fieldset class="clearfix">
+                    <label class="pull-left">擅长风格:</label>
+                    <span class="clearfix">
+                      <a href="#" class="highlight">全部</a>
+                      <a href="#">小户型</a>
+                      <a href="#">公寓</a>
+                      <a href="#">复式</a>
+                      <a href="#">别墅</a>
+                      <a href="#">一室</a>
+                      <a href="#">两居</a>
+                      <a href="#">三居</a>
+                      <a href="#">四居</a>
+                      <a href="#">四居以上</a>
+                      <a href="#">挑高</a>
+                      <a href="#">跃层</a>
+                      <a href="#">错层</a>
+                    </span>
+                  </fieldset>
+                  <fieldset class="clearfix">
+                    <label class="pull-left">设计报价:</label>
+                    <span class="clearfix">
+                      <em class="pull-right">（单位：元/平方米）</em>
+                      <a href="#" class="highlight">全部</a>
+                      <a href="#">100以下</a>
+                      <a href="#">100-200</a>
+                      <a href="#">200-300</a>
+                      <a href="#">300-500</a>
+                      <a href="#">500以上</a>
+                    </span>
+                  </fieldset>
+                  <fieldset class="clearfix mt10 noborder">
+                    <label class="pull-left">所在区域:</label>
+                    <span class="clearfix linkageseclet">
+                      <a href="#" class="highlight" style="margin-right:15px;">全部</a>
+                      <select class="level_1 input-small"></select>
+                      <select class="level_2 input-small"></select>
+                      <!-- <select class="level_3 input-small"></select> -->
+                      <input type="submit" class="g_srch-submit" value="确定">
+                    </span>
+                  </fieldset>
+                </div>
+              </form>
+              <div class="eq_hi_list">
+                <div class="thumbnails">
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                  <div class="span3 thumbnail">
+                    <a href="#" target="_blank" class="help-block text-center">
+                      <img src="images/show/worklist1.jpg" alt="" />
+                    </a>
+                    <h5 class="dot_linet1 title pr">
+                      <a href="#" target="_blank" class="btn_invite pa"></a>
+                      <a href="#" target="_blank" class="a_hover_red">北欧E家</a>
+                    </h5>
+                    <p class="">所在城市：上海</p>
+                    <p class="">作品名称：金龙苑设计案例</p>
+                    <p class="">擅长风格：简欧  新中式  中式</p>
+                    <p class="">设计报价：800</p>
+                  </div>
+                </div>
+                <div class="pagination pagination-centered dot_linet1 pt20 mr5">
+                  <ul>
+                    <!-- <li class="disabled"><a href="#">上一页</a></li> -->
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a class="noborder nomargin nopadding" href="#">...</a></li>
+                    <li><a href="#">下一页</a></li>
+                    <li><a href="#">最后一页</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="right_small pull-right">
+              <div class="big_menu index_main">
+                <div class="media media_chann">
+                  <a class="pull-left" href="#">
+                    <i class="icon-chann icon-chann_master"></i>
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a class="media-heading_link_a" href="#">对话名人</a></h4>
+                    <p class="media_con nomargin">直面室内设计专家，为你解决装修问题！</p>
+                  </div>
+                </div>
+                <div class="media media_chann">
+                  <a class="pull-left" href="/images" target="_blank">
+                    <i class="icon-chann icon-chann_imgbase"></i>
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+                    <p class="media_con nomargin">网罗海量家装图片，锁定心仪设计需求！</p>
+                  </div>
+                </div>
+                <div class="media media_chann">
+                  <a class="pull-left" href="/refresh_record" target="_blank">
+                    <i class="icon-chann icon-chann_fresh3"></i>
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a class="media-heading_link_a" href="/refresh_record" target="_blank">刷新生活</a></h4>
+                    <p class="media_con nomargin">分享刷新故事，体验艺术生活！</p>
+                  </div>
+                </div>
+              </div>
+              <%= render partial: 'design_images/cubit' %>
+              <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 5, title: '本周最热装修设计' } %>
+              <div class="index_main sidebar_dotlist mt10">
+                <%= render partial: 'love_story/base/li_list', locals: { i_column_type_id: 7, title: '相关资讯' } %>
+              </div>
+              <div class="mt10">
+                <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank">
+                  <%= image_tag @banners[0].try(:file).try(:url, :list_230x170), alt: '' if @banners[0].present? %>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt10">
+            <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank">
+              <%= image_tag @banners[1].try(:file).try(:url, :list_1000x85), alt: '' if @banners[1].present? %>
+            </a>
+          </div>
+          <div class="index_main mt10">
+            <div class="ul_dot_lists clearfix">
+              <%= render partial: 'love_story/base/jx_list', locals: {resource: @images_jx, resource_more: @images_jx_more, title: '装修图库精选'} %>
+              <%= render partial: 'love_story/base/jx_list', locals: {resource: @star_jx, resource_more: @star_jx_more, title: '设计之星作品精选'} %>
+              <div class="pull-right">
+                <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank">
+                  <%= image_tag @banners[2].try(:file).try(:url, :list_230x230), alt: '' if @banners[2].present? %>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

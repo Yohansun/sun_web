@@ -1,0 +1,16 @@
+<%- colum_datas = IColumnData.show_data(i_column_type_id).limit(5) %>
+
+<h5 class="title ph5">
+  <a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank" class="pull-right a_hover_red"><small class="muted">更多></small></a>
+  <%= title %>
+</h5>
+<ul class="ul_dot dot_linet1 nomargin">
+  <% colum_datas.each_with_index do |dcs,index| %>
+    <li class="<%= 'noborder' if index + 1 == colum_datas.size %>">
+      <a href="<%=dcs.url %>" target="_blank">
+        <i class="icon-ul_dot"></i>
+        <%=dcs.title%>
+      </a>
+    </li>
+  <% end %>
+</ul>
