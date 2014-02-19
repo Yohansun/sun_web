@@ -2,6 +2,7 @@
 class DesignerEventsController < ApplicationController
   layout "home_manage"
   before_filter :get_data
+  caches_action :index, :expires_in => 7.days
   def index
     @event_ks = EventKv.includes(:kv_maps).page_name(controller_name).try(:first)
     @active_now = DesignerEvent.page_name(controller_name).active_now

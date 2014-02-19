@@ -29,24 +29,27 @@
 				 <a href="<%= @life_memoir.video.url %>" style="display:block;width:600px;height:331px;margin:0 auto;" id="player"></a>
 			</div>
 			<div class="refresh_banner">
-				<a href="<%=@i_banner.position(1).first.url if @i_banner.position(1).first %>" target="_blank"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_670x85)%>"></a>
+				<% cache "refresh_record_show_banner1" do %>
+					<a href="<%=@i_banner.position(1).first.url if @i_banner.position(1).first %>" target="_blank"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_670x85)%>"></a>
+				<% end %>
 			</div>
 		</div>
 		<div class="pull-right">
+			<% cache "refresh_record_show_master_design" do %>
 			<ul class="unstyled map-right index_main js-img_show">
-					<li class="clearfix refresh_r_tit">
-						<a href="<%=@url if @url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
-						<strong class="pull-left">最新大师作品</strong>
-					</li>
-          <% @i_column_datas.each_with_index do |cd,index| %>
-					<li class="map-r1 dott1 <%="active" if index == 0%>">
-              <i class="icon-i16 icon-<%=index+1%>"><%=index+1%></i>
-							<strong class="js-title"><%=cd.title%></strong><br>
-							<a href="<%= cd.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
-					</li>
-          <% end %>
-				</ul>
-
+				<li class="clearfix refresh_r_tit">
+					<a href="<%=@url if @url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>
+					<strong class="pull-left">最新大师作品</strong>
+				</li>
+        <% @i_column_datas.each_with_index do |cd,index| %>
+				<li class="map-r1 dott1 <%="active" if index == 0%>">
+            <i class="icon-i16 icon-<%=index+1%>"><%=index+1%></i>
+						<strong class="js-title"><%=cd.title%></strong><br>
+						<a href="<%= cd.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+				</li>
+        <% end %>
+			</ul>
+			<% end %>
 			<div class="chann_warp chann1_right map-right index_main">
 				<div class="media media_chann">
 					<a class="pull-left" href="/design_images/lists" target="_blank">
@@ -79,11 +82,15 @@
 		</div>
 	</div>
 	<div class="index_main refresh_news mt10 clearfix">
+		<% cache "refresh_record_show_foot_select" do %>
 		<%= render :partial => "foot_select" %>
+		<% end %>
 		<div class="pull-right"><a href="<%=@i_banner.position(2).first.url if @i_banner.position(2).first %>" target="_blank"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_230x230)%>"></a></div>
 	</div>
+	<% cache "refresh_record_show_footer_banner" do %>
 	<div class="clearfix">
 		<div class="footer_banner pull-left"><a href="<%=@i_banner.position(3).first.url if @i_banner.position(3).first %>" target="_blank"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_670x85)%>"></a></div>
 		<div class="footer_banner pull-right"><a href="<%=@i_banner.position(4).first.url if @i_banner.position(4).first %>" target="_blank"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_310x85)%>"></a></div>
 	</div>
+	<% end %>
 </div>
