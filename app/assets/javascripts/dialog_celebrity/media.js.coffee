@@ -62,14 +62,15 @@ $ ->
             $obj.remove()
             alert "删除成功"
 
-      $("body").on "click",".image-warp a:first", ->
-        obj = $(this).attr("class")
+      $("body").on "click","a.reply-upload-colorbox", ->
+        obj = "replies-upload-colorbox-" + $(this).attr("data-reply-id")
         colorbox_qa(".#{obj}")
 
       colorbox_qa = (obj) ->
+        alert obj
         $(obj).colorbox({rel:'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
 
-      colorbox_qa(".replies-upload-colorbox");
+      #colorbox_qa(".replies-upload-colorbox");
 
       submitReply = (question_id,content,reply_id,image_ids,obj)->
         $.post "/dialog_celebrity/media/update_question",{question_id: question_id, reply_id: reply_id, image_ids: image_ids,content: content}, (r)->

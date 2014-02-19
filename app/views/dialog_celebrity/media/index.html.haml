@@ -99,7 +99,7 @@
                 - if reply.present?
                   - reply.images.order("created_at desc").each do |_image|
                     .fl.mr5.image-warp.fl.clearfix
-                      %a{:href => _image.image(:slide), :class => "replies-upload-colorbox replies-upload-colorbox-#{reply.id}"}
+                      %a{:href => _image.image(:slide), :class => "reply-upload-colorbox replies-upload-colorbox-#{reply.id}",:"data-reply-id" => reply.id}
                         = image_tag _image.image(:thumb),:"data-image-id" => _image.id
                       = link_to "删除","javascript:;",:class => "delete-reply-img-btn"
     .pager
