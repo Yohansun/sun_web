@@ -107,6 +107,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
       @board = CelebrityContentBoard.find(@board_id)
     end
     @questions = @questions.page(params[:page]).per(10)
+    @replied_count = sprintf "%010.0f",CelebrityQuestion.replied_count(params[:board_id])
     @content = render_to_string( partial: "dialog_celebrity/shared/questions" )
     respond_to do |format|
       format.js
