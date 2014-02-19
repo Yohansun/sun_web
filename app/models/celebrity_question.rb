@@ -33,5 +33,14 @@ class CelebrityQuestion < ActiveRecord::Base
   def user_replies
     replies.where("user_id IS NOT NULL")
   end
+
+  def self.replied_count(board_id=nil)
+    if board_id.present?
+      ids = CelebrityQuestion.where("celebrity_content_board_id = ?",board_id.to_i).map(&:id)
+      CelebrityQuestionReply.where("celebrity_question_id in (?) and media_id IS NOT NULL",ids).count
+    else
+      CelebrityQuestionReply.where("media_id IS NOT NULL",ids).count
+    end
+  end
 end
 

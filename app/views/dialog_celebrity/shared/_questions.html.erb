@@ -178,6 +178,7 @@
 <%= javascript_include_tag "jquery.uploadify.js" %>
 <script type="text/javascript">
   $(function(){
+    $("#replied_count").text("<%=@replied_count%>")
     $("ul.famous_tab li a").click(function(){
       _id = $(this).attr("data-board")
       $.post("/dialog_celebrity/refresh_celebrity_questions",{board_id: _id})

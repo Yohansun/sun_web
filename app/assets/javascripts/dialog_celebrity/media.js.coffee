@@ -36,9 +36,9 @@ $ ->
         maxNumberOfFiles: 1,
         maxFileSize: 5000000,
         done: (e, data)->
-          content = "<div class='fl mr5 image-warp clearfix'><a class='replies-upload-colorbox' href=#{data.result.url2}><img src=#{data.result.url} data-image-id=#{data.result.id} /></a><a href='javascript:;' class='delete-reply-img-btn' >删除</a></div>"
+          _question_id = $(this).parent().parent().parent().attr("data-question-id")
+          content = "<div class='fl mr5 image-warp clearfix'><a class='reply-upload-colorbox reply-upload-colorbox-#{_question_id}' data-question-id=#{_question_id} href=#{data.result.url2}><img src=#{data.result.url} data-image-id=#{data.result.id} /></a><a href='javascript:;' class='delete-reply-img-btn' >删除</a></div>"
           $(this).parent().next().prepend(content)
-          colorbox_qa()
         ,
         error: (e, data)->
           alert data.result
@@ -63,12 +63,11 @@ $ ->
             alert "删除成功"
 
       $("body").on "click","a.reply-upload-colorbox", ->
-        obj = "replies-upload-colorbox-" + $(this).attr("data-reply-id")
+        obj = "reply-upload-colorbox-" + $(this).attr("data-question-id")
         colorbox_qa(".#{obj}")
 
       colorbox_qa = (obj) ->
-        alert obj
-        $(obj).colorbox({rel:'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+        $(obj).colorbox({rel: obj,slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
 
       #colorbox_qa(".replies-upload-colorbox");
 
