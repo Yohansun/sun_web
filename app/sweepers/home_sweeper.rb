@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'rest_client'
 class HomeSweeper < ActionController::Caching::Sweeper
   observe HomeRecommend, HomeKv, HomeBanner, FitLiteral, FitImage, Question, OwnerEnter,
@@ -19,7 +20,7 @@ class HomeSweeper < ActionController::Caching::Sweeper
     expire_action(:controller => '/home', :action => 'index')
     params = {
       :username => "icolor",
-      :password => "123_libang",
+      :password => ">gn3W6<GE@",
       :task => {
         :urls => ["http://www.icolor.com.cn/"],
         :callback => {"url" => "",
@@ -28,6 +29,10 @@ class HomeSweeper < ActionController::Caching::Sweeper
                       }
       }
     }
-    # RestClient.post('https://r.chinacache.com/content/refresh', params)
+    begin
+      RestClient.post('https://r.chinacache.com/content/refresh', params)
+    rescue
+      logger.debug("连接CDN失败！")
+    end
   end
 end
