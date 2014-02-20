@@ -1,4 +1,10 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    .js-query-tags > span {margin-left:2px};
+  </style>
+<%- end %>
 <%- content_for :tail do %>
+  <%= javascript_include_tag 'love_story/minisite_weekly_stars' %>
   <script type="text/javascript">
     $(function(){
       var options = {
@@ -17,9 +23,8 @@
       sel.bind('.level1_3', null, '区');
 
       // search js
-
-      $("a.g_srch-del").click(function(event) {
-        $(this).parent('span').remove();
+      $('.g_srch-bin').on('click', '.g_srch-del', function(){
+        $(this).parent().remove();
       });
     });
   </script>
@@ -50,9 +55,9 @@
                       <span class="g_srch-s search-tag-price"><%= params[:price] %><a href="javascript:void(0);" data-name="price" class="g_srch-del">delete</a></span>
                     <% end %>
                     <% if params[:area_head].present? %>
-                      <span class="g_srch-s search-tag-area_head"><%= @area_head_name %><a href="javascript:void(0);" data-name="area_head" class="g_srch-del">delete</a></span>
+                      <span class="g_srch-s search-tag-area_head"><%= Area.find_by_id(params[:area_head]).try(:name) if params[:area_head].present? %><a href="javascript:void(0);" data-name="area_head" class="g_srch-del">delete</a></span>
                       <% if params[:area_id].present? %>
-                        <span class="g_srch-s search-tag-area_id"><%= @area_id_name %><a href="javascript:void(0);" data-name="area_id" class="g_srch-del">delete</a></span>
+                        <span class="g_srch-s search-tag-area_id"><%= Area.find_by_id(params[:area_id]).try(:name) if params[:area_id].present? %><a href="javascript:void(0);" data-name="area_id" class="g_srch-del">delete</a></span>
                       <% end %>
                     <% end %>
                   </span>
@@ -73,22 +78,19 @@
                     <label class="pull-left">设计报价:</label>
                     <span class="clearfix">
                       <em class="pull-right">（单位：元/平方米）</em>
-                      <a href="#" class="highlight">全部</a>
-                      <a href="#">100以下</a>
-                      <a href="#">100-200</a>
-                      <a href="#">200-300</a>
-                      <a href="#">300-500</a>
-                      <a href="#">500以上</a>
+                      <a href="javascript:;" data-name="price" data-val="" class="js-search-tag <%= 'highlight' if params[:price].blank? %>">全部</a>
+                      <%- users_design_price.each do |price| %>
+                        <a href="javascript:;" data-name="price" data-val="<%= price %>" class="js-search-tag <%= 'highlight' if params[:price] == price %>"><%= price %></a>
+                      <%- end %>
                     </span>
                   </fieldset>
                   <fieldset class="clearfix mt10 noborder">
                     <label class="pull-left">所在区域:</label>
                     <span class="clearfix linkageseclet">
-                      <a href="#" class="highlight" style="margin-right:15px;">全部</a>
-                      <select class="level_1 input-small"></select>
-                      <select class="level_2 input-small"></select>
-                      <!-- <select class="level_3 input-small"></select> -->
-                      <input type="submit" class="g_srch-submit" value="确定">
+                      <a href="#" data-name="area_head" data-val="" class="js-search-tag <%= 'highlight' if params[:area_head].blank? && params[:area_id].blank? %>" style="margin-right:15px;">全部</a>
+                      <select class="level_1 input-small" name="area_head" id="province"></select>
+                      <select class="level_2 input-small" name="area_id" id="city"></select>
+                      <input type="submit" class="g_srch-submit js-area-submit" value="确定" onclick="return false;">
                     </span>
                   </fieldset>
                 </div>

@@ -16,3 +16,17 @@
 //= require love_story/main
 //= require love_story/masonry.min
 //= require love_story/jquery.carouFredSel-6.2.1-packed
+
+// jquery get params
+function getParameters() {
+  var searchString = window.location.search.substring(1)
+    , params = searchString.split("&")
+    , hash = {};
+
+  if (searchString == "") return {};
+  for (var i = 0; i < params.length; i++) {
+    var val = params[i].split("=");
+    hash[decodeURI(val[0])] = decodeURI(val[1]);
+  }
+  return hash;
+}
