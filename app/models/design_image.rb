@@ -66,7 +66,7 @@ class DesignImage < ActiveRecord::Base
         :slide_thumb => "205x138#",:image_libraries_hover => "650x500>",
         :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :spring_img => "373x261#", :spring => "269x275#", :img_lib_tag => "237x177#",
         :grid_list => "204x145>",
-        :like_image => "110x80>",:mini_design => "205x155>", :greatest_img => "220x260#"},
+        :like_image => "110x80>",:mini_design => "208x155>", :greatest_img => "220x260#"},
     :convert_options => {
       :slide => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
       :design_image_big => " #{Rails.root}/public/system/watermark/icolor.png -gravity southeast -geometry +5+10 -composite ",
