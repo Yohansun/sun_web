@@ -1,6 +1,8 @@
+# encoding: utf-8
 class DialogCelebrity::CelebrityQuestionsController < ApplicationController
   before_filter :authenticate_user!,only: [:new]
   def index
+    @banners = IBanner.page_name('名人问答').order("position ASC").all
   end
 
   def new
