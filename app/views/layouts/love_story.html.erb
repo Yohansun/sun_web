@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><%= @title || '爱的故事' %></title>
+    <title><%= love_story_title || '爱的故事' %></title>
+    <meta name="description" content="<%= love_story_description ||'为爱刷新,爱的故事,设计作品展示,设计师精选' %>" />
+    <meta name="keywords" content="<%= love_story_keyword ||'为爱刷新让装修充满爱的意义,记录和分享与自己爱的人的故事,感动你我他,还有最新最经典的设计师设计作品展示,在这里您还可以定制自己的私人设计师。' %>">
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag "love_story_all.css" %>
     <%= yield :head %>
