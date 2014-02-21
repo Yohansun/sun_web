@@ -308,7 +308,8 @@ task :init_banner_celebrities => :environment  do
       IBanner.create(page_name: '小编宝典',position: 7, size: '310x85')
     end
   end
-enddesc "添加刷新生活明星单页banner2"
+end
+desc "添加刷新生活明星单页banner2"
 task :add_refresh_star_page_banners2 => :environment  do
   banner1 = IBanner.where(page_name: '王络丹-让爱自由互动')
   if banner1.blank?
