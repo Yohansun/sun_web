@@ -202,3 +202,109 @@ task :add_refresh_star_page_banners => :environment  do
     end
   end
 end
+
+
+desc "初始化名人对话banner数据"
+task :init_banner_celebrities => :environment  do
+  banner1 = IBanner.where(page_name: '对话名人首页')
+  if banner1.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '对话名人首页',position: 1, size: '230x170')
+      IBanner.create(page_name: '对话名人首页',position: 2, size: '230x230')
+      IBanner.create(page_name: '对话名人首页',position: 3, size: '230x170')
+      IBanner.create(page_name: '对话名人首页',position: 4, size: '670x85')
+      IBanner.create(page_name: '对话名人首页',position: 5, size: '310x85')
+      IBanner.create(page_name: '对话名人首页',position: 6, size: '230x230')
+      IBanner.create(page_name: '对话名人首页',position: 7, size: '1000x85')
+    end
+  end
+
+  banner2 = IBanner.where(page_name: '名人问答')
+  if banner2.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名人问答',position: 1, size: '1000x85')
+      IBanner.create(page_name: '名人问答',position: 2, size: '230x170')
+      IBanner.create(page_name: '名人问答',position: 3, size: '230x230')
+      IBanner.create(page_name: '名人问答',position: 4, size: '230x230')
+      IBanner.create(page_name: '名人问答',position: 5, size: '670x85')
+      IBanner.create(page_name: '名人问答',position: 6, size: '310x85')
+    end
+  end
+
+  banner3 = IBanner.where(page_name: '名人问答提问页')
+  if banner3.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名人问答提问页',position: 1, size: '1000x85')
+      IBanner.create(page_name: '名人问答提问页',position: 2, size: '230x170')
+      IBanner.create(page_name: '名人问答提问页',position: 3, size: '230x170')
+      IBanner.create(page_name: '名人问答提问页',position: 4, size: '670x85')
+      IBanner.create(page_name: '名人问答提问页',position: 5, size: '310x85')
+    end
+  end
+
+  banner4 = IBanner.where(page_name: '名人在线')
+  if banner4.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名人在线',position: 1, size: '1000x85')
+      IBanner.create(page_name: '名人在线',position: 2, size: '230x170')
+      IBanner.create(page_name: '名人在线',position: 3, size: '230x230')
+      IBanner.create(page_name: '名人在线',position: 4, size: '230x170')
+      IBanner.create(page_name: '名人在线',position: 5, size: '230x230')
+      IBanner.create(page_name: '名人在线',position: 6, size: '670x85')
+      IBanner.create(page_name: '名人在线',position: 7, size: '310x85')
+    end
+  end
+
+  banner5 = IBanner.where(page_name: '名家设计')
+  if banner5.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名家设计',position: 1, size: '670x85')
+      IBanner.create(page_name: '名家设计',position: 2, size: '310x85')
+      IBanner.create(page_name: '名家设计',position: 3, size: '230x230')
+      IBanner.create(page_name: '名家设计',position: 4, size: '1000x85')
+    end
+  end
+
+  banner6 = IBanner.where(page_name: '名人名家访谈页')
+  if banner6.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名人名家访谈页',position: 1, size: '1000x85')
+    end
+  end
+
+  banner7 = IBanner.where(page_name: '名人名家作品页')
+  if banner7.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名人名家作品页',position: 1, size: '670x85')
+      IBanner.create(page_name: '名人名家作品页',position: 2, size: '310x85')
+      IBanner.create(page_name: '名人名家作品页',position: 3, size: '230x230')
+      IBanner.create(page_name: '名人名家作品页',position: 4, size: '1000x85')
+    end
+  end
+
+  banner8 = IBanner.where(page_name: '名家手记')
+  if banner8.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '名家手记',position: 1, size: '1000x85')
+      IBanner.create(page_name: '名家手记',position: 2, size: '230x170')
+      IBanner.create(page_name: '名家手记',position: 3, size: '230x230')
+      IBanner.create(page_name: '名家手记',position: 4, size: '230x170')
+      IBanner.create(page_name: '名家手记',position: 5, size: '230x230')
+      IBanner.create(page_name: '名家手记',position: 6, size: '670x85')
+      IBanner.create(page_name: '名家手记',position: 7, size: '310x85')
+    end
+  end
+
+  banner9 = IBanner.where(page_name: '小编宝典')
+  if banner9.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '小编宝典',position: 1, size: '1000x85')
+      IBanner.create(page_name: '小编宝典',position: 2, size: '230x170')
+      IBanner.create(page_name: '小编宝典',position: 3, size: '230x230')
+      IBanner.create(page_name: '小编宝典',position: 4, size: '230x170')
+      IBanner.create(page_name: '小编宝典',position: 5, size: '230x230')
+      IBanner.create(page_name: '小编宝典',position: 6, size: '670x85')
+      IBanner.create(page_name: '小编宝典',position: 7, size: '310x85')
+    end
+  end
+end

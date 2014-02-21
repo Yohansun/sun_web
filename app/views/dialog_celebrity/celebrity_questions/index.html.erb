@@ -19,7 +19,9 @@ $(function(){
   <li class="active">名人问答</li>
 </ul>
 <hr class="border2 border2_mt2">
-<a href="#"><img src="images/channel/banner1.jpg" alt="" width="1000" height="85" style="height: 85px;"/></a>
+<a href="<%= @banners[0] ? @banners[0].url : 'javascript:void(0);' %>" target="_blank">
+  <%= image_tag @banners[0].try(:file).try(:url, :list_1000x85) %>
+</a>
 
 <div class="clearfix mt10">
   <div class="pull-left famous_left">
