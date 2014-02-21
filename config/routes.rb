@@ -773,6 +773,13 @@ Icolor::Application.routes.draw do
       end
     end
 
+    resources :banner_celebrities do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
     resources :banner_channel do
       collection do
         post :create_image

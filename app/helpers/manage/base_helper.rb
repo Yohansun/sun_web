@@ -17,7 +17,7 @@ module Manage::BaseHelper
       	'home'
       when /channel_tips/
       	'channel_tips'
-      when /banner_group|banner_home|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|banner_weekly_stars|banner_other_pages|banner2014minisite|special_kv/
+      when /banner_group|banner_home|banner_celebrities|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|banner_weekly_stars|banner_other_pages|special_kv|banner2014minisite/
       	'banner'
       when /tag_sorts|home_heads|seo_sites|home_liter_heads|home_image_lists|home_types|home_spaces|home_colors|home_costs|home_styles/
         'design_images'
@@ -123,6 +123,32 @@ module Manage::BaseHelper
     "manage/banner_activities/#{label_name}"
   end
 
+  def celebrities_label_path
+    label_name = case params[:page_name]
+      when '对话名人首页'
+        'celebrities_label1'
+      when '名人问答'
+        'celebrities_label2'
+      when '名人问答提问页'
+        'celebrities_label3'
+      when '名人在线'
+        'celebrities_label4'
+      when '名家设计'
+        'celebrities_label5'
+      when '名人名家访谈页'
+        'celebrities_label6'
+      when '名人名家作品页'
+        'celebrities_label7'
+      when '名家手记'
+        'celebrities_label8'
+      when '小编宝典'
+        'celebrities_label9'
+      else
+        'nothing'
+    end
+    "manage/banner_celebrities/#{label_name}"
+  end
+
   def other_pages_label_path
     label_name = case params[:page_name]
       when '登录/注册/找回密码'
@@ -155,7 +181,7 @@ module Manage::BaseHelper
         'on'
       when (key =~ /channel_tips/) && /channel_tips/
         'on'
-      when (key =~ /banner/) && /banner_group|banner_home|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|banner_weekly_stars|banner_other_pages|banner2014minisite|special_kv/
+      when (key =~ /banner/) && /banner_group|banner_home|banner_celebrities|banner_channel|banner_refresh|banner_activities|banner_company|banner_images|banner_weekly_stars|banner_other_pages|special_kv|banner2014minisite/
         'on'
       when (key =~ /life/) && /life_memoirs|life_info/
         'on'
