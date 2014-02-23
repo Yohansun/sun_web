@@ -39,7 +39,7 @@ $ ->
 
       $('body').on "click",".remove-upload", ->
         if confirm("是否删除") is true
-          id = $(this).parent().prev().attr("data-upload-id")
+          id = $(this).parent().prev().prev().attr("data-upload-id")
           $father = $(this).parent().parent()
           $.post "/manage/dialog_celebrities/master_design_upload_ajax_delete",{id: id}, (r)->
             $father.remove()

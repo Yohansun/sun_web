@@ -29,7 +29,7 @@
     - @collection.each_with_index do |_design,_index|
       .design.fl.clearfix
         .design-thumb.fl
-          = image_tag _design.cover_design_upload.file(:slide) if _design.cover_design_upload.present?
+          = image_tag _design.cover_design_upload.file2(:interview) if _design.cover_design_upload.present?
         .design-info.fl.ml10
           .design-info-avatar.clearfix
             .design-master-avatar.fl
