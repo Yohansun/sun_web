@@ -43,12 +43,12 @@
             <div class="master-pro">
               <% cover = _design.cover_design_upload %>
               <% if cover.present? %>
-                <a href="<%=dialog_celebrity_master_design_path(_design.id,upload_id: cover.id)%>"><img src="<%= cover.file(:slide) -%>" alt="" /></a>
+                <a href="<%=dialog_celebrity_master_design_path(_design.id,upload_id: cover.id)%>"><img src="<%= cover.file2(:preview) -%>" alt="" /></a>
               <%end -%>
               <ul>
-                <% _design.master_design_uploads.last(4).each do |_upload| -%>
+                <% _design.master_design_uploads.order("created_at desc").last(4).each do |_upload| -%>
                   <li>
-                    <img src="<%= _upload.file(:thumb) -%>" alt="<%= _upload.title -%>" />
+                    <img src="<%= _upload.file2(:thumb) -%>" alt="<%= _upload.title -%>" />
                   </li>
                 <% end -%>
               </ul>
