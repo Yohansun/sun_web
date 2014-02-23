@@ -5,7 +5,7 @@ class DialogCelebrity::HomeController < ApplicationController
     @master = @page.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@page.master_id)
     @celebrity = @page.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@page.celebrity_id)
     @wonderfuls = IColumnData.show_data(16).limit(5)
-    @i_banner = IBanner.page_name("刷新实录")
+    @i_banner = IBanner.page_name("对话名人首页")
   end
 
   def celebrity_questions
