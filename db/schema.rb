@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213094931) do
+ActiveRecord::Schema.define(:version => 20140223050023) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -1149,6 +1149,10 @@ ActiveRecord::Schema.define(:version => 20140213094931) do
     t.string   "recommend_color_category2"
     t.string   "recommend_color_category3"
     t.boolean  "is_cover",                  :default => false
+    t.string   "file2_file_name"
+    t.string   "file2_content_type"
+    t.integer  "file2_file_size"
+    t.datetime "file2_updated_at"
   end
 
   create_table "master_designs", :force => true do |t|

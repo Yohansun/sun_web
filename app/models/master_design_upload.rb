@@ -11,6 +11,14 @@ class MasterDesignUpload < ActiveRecord::Base
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
+  has_attached_file :file2, :styles => {:preview => "450x320#", :thumb => "46x46#",
+    :thumb2 => "75x75#", :interview => "155x115#", :slide => "620x388#",
+    :fullscreen => "980x655>"},
+    :whiny_thumbnails => true,
+    :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
+    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
+
   def title
     self.master_design.design_name if self.master_design
   end
