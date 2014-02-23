@@ -78,6 +78,12 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
       flash[:notice] = question.errors.full_messages.join("\n")
       redirect_to new_dialog_celebrity_celebrity_question_path
     else
+      image_ids = params[:images].split("|")
+      image_ids.each do |image_id|
+        image = CelebrityQuestionImage.find(image_id)
+        image.resource = question
+        image.save
+      end
       redirect_to dialog_celebrity_celebrity_questions_path
     end
   end
@@ -111,6 +117,16 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
     @content = render_to_string( partial: "dialog_celebrity/shared/questions" )
     respond_to do |format|
       format.js
+    end
+  end
+
+  def upload_image
+    image = CelebrityQuestionImage.new
+    image.image = params[:Filedata]
+    if image.save
+      render :text => "#{image.id}|#{image.image(:thumb)}|#{image.image(:slide)}"
+    else
+      return render :text => "0"
     end
   end
 end
