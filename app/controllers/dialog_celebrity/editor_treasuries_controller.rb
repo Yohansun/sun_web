@@ -1,4 +1,7 @@
+# encoding: utf-8
 class DialogCelebrity::EditorTreasuriesController < ApplicationController
+  include CommonModule
+  before_filter :get_page_data,:only => [:index,:show]
   def index
     if params[:keyword].present?
       if params[:board_id].present?
@@ -13,10 +16,14 @@ class DialogCelebrity::EditorTreasuriesController < ApplicationController
         @articles = EditorTreasury
       end
     end
-    @articles = @articles.order("id desc").page(params[:page]).per(4)
+    @articles = @articles.order("updated_at desc").page(params[:page]).per(4)
+    @banners = IBanner.page_name('小编宝典').order("position ASC")
   end
 
   def show
     @article = EditorTreasury.find(params[:id])
+
+    @banners = IBanner.page_name('小编宝典').order("position ASC")
+    @new_designs = MasterDesign.order("updated_at desc").limit(5)
   end
 end

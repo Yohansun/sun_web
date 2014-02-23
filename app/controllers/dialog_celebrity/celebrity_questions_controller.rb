@@ -1,12 +1,16 @@
 # encoding: utf-8
 class DialogCelebrity::CelebrityQuestionsController < ApplicationController
+  include CommonModule
   before_filter :authenticate_user!,only: [:new]
+  before_filter :get_page_data,:only => [:index,:new]
   skip_before_filter :verify_authenticity_token, only: [:upload_image]
   def index
-    @banners = IBanner.page_name('名人问答').order("position ASC").all
+    @banners = IBanner.page_name('名人问答').order("position ASC")
+    @new_designs = MasterDesign.order("updated_at desc").limit(5)
   end
 
   def new
+    @banners = IBanner.page_name('名人问答提问页').order("position ASC")
   end
 
   def create

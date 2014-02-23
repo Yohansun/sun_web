@@ -1,8 +1,11 @@
+# encoding: utf-8
 class DialogCelebrity::MasterDesignsController < ApplicationController
   def show
     @master_design = MasterDesign.find(params[:id])
     @upload = MasterDesignUpload.find(params[:upload_id])
     @master = @master_design.master_profile
+    @banners = IBanner.page_name('名人名家作品页').order("position ASC")
+    @new_designs = MasterDesign.order("updated_at desc").limit(5)
   end
 
   def download
