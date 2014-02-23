@@ -949,7 +949,7 @@ Icolor::Application.routes.draw do
     match 'refresh_celebrity_questions', to: "celebrity_questions#refresh_questions", via: [:get,:post]
     post 'create_question_reply', to: "celebrity_question_replies#reply"
     post 'destroy_question_reply', to: "celebrity_question_replies#delete"
-
+    post 'upload_image', to: "celebrity_questions#upload_image"
     resources :master_designs do
       member do
         get :download

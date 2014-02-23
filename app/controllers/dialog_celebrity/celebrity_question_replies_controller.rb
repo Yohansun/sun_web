@@ -1,10 +1,19 @@
 # encoding: utf-8
 class DialogCelebrity::CelebrityQuestionRepliesController < ApplicationController
   def reply
+    if current_user.blank?
+      return render :js => "window.location.href='/users/sign_in'"
+    end
     if !current_user.designer?
       return render :js => "alert('没有权限')"
     end
     @reply = CelebrityQuestionReply.create params[:celebrity_question_reply]
+    image_ids = params[:images].split("|")
+    image_ids.each do |image_id|
+      image = CelebrityQuestionImage.find(image_id)
+      image.resource = @reply
+      image.save
+    end
     @content = render_to_string(partial: "dialog_celebrity/celebrity_question_replies/reply")
     respond_to do |format|
       format.js

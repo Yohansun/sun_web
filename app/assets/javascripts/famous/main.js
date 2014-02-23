@@ -310,6 +310,15 @@ $(function(){
 			var overview_val = $('.famous_ask_form').find('.js-text_percentage').val();
 			var sort_text = $('.famous_ask_form').find('.select_options_show').children('span:eq(0)').text();
 			var scope_text = $('.famous_ask_form').find('.select_options_show').children('span:eq(1)').text();
+			var arr = []
+			$("#upload_pics_queue img").each(function(index,img){
+				arr.push($(img).attr("data-image-id"))
+			})
+			str = arr.join("|")
+			alert(str)
+			$("#upload_pics_queue").find("input[name=images]").remove()
+			$("#upload_pics_queue").append("<input name='images' type='hidden' value='" + str + "'>")
+
 			if (overview_val == '') {
 				alert('请输入问题概述')
 				return false;

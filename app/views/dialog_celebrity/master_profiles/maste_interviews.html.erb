@@ -36,7 +36,7 @@
 
     <ul class="master-lists clearfix">
       <% @masters.each_with_index do |_master,index| -%>
-        <% _design = _master.master_designs.last -%>
+        <% _design = _master.master_designs.order("created_at desc").first -%>
         <li class="index_main">
           <% if _design.present? -%>
           <div class="master-bin">
@@ -56,9 +56,9 @@
             <div class="master-info clearfix">
               <a class="pull-left master-token"><img src="<%= _master.avatar(:small1) -%>" alt="" /></a>
               <div class="master-detail pull-left">
-                <h4 class="text-right"><a href="#" class="pull-left"><%=_master.name%></a><%= _master.nationality -%></h4>
+                <h4 class="text-right"><a href="<%= master_interview_dialog_celebrity_master_profile_path(_master) -%>" class="pull-left"><%=_master.name%></a><%= _master.nationality -%></h4>
                 <p><%= raw truncate(_master.intro.html_safe,:length => 32) -%>></p>
-                <a href="master_interview.html" target="_blank">阅读全文>></a>
+                <a href="<%= master_interview_dialog_celebrity_master_profile_path(_master) -%>" target="_blank">阅读全文>></a>
               </div>
             </div>
           </div>

@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "colorbox/colorbox" %>
+
 <div class="index_main">
   <h5 class="title">
     <form action="/dialog_celebrity/refresh_celebrity_questions" class="form_search pull-right nomargin" id="question-form-search">
@@ -57,13 +59,17 @@
                 <a class="js-show_content" href="javascript:;">
                 【<%=_question.board.name -%>】<%=_question.name -%>
                 </a>
-                <i class="icon-imgshow_btn"></i>
-                <div class="imgs_group invisible" style="height:0">
-                  <p class="js-btns_imgsgroup"><a class="imgsgroup imgsgroup1"  href="images/index/imgbase_show2.jpg">Grouped Photo 1</a></p>
-                  <p class=""><a class="imgsgroup imgsgroup1"  href="images/index/refresh_bann2.jpg">Grouped Photo 2</a></p>
-                  <p class=""><a class="imgsgroup imgsgroup1"  href="images/index/imgbase_show1.jpg">Grouped Photo 3</a></p>
-                  <!-- <p class=""><a class="imgsgroup imgsgroup1"  href="images/ohoopee2.jpg">Grouped Photo 3</a></p> -->
-                </div>
+                <% if _question.images.count > 0 -%>
+                  <i class="icon-imgshow_btn" data-question-id="<%= _question.id -%>"></i>
+
+                  <div class="imgs_group" style="display: none; ">
+                    <% _question.images.each do |_image| -%>
+                    <a href="<%=_image.image(:slide)%>" class="question_images_<%= _question.id -%>">
+                    <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+                    </a>
+                    <%end-%>
+                  </div>
+                <%end-%>
               </div>
               <div class="pull-right state js-state">
                 <span><%=_question.created_at.strftime("%Y-%m-%d")%></span>
@@ -154,13 +160,16 @@
                   <strong><%=_reply.user.try(:username)%></strong>
                   <span class="bordered_r">的回答</span>
                   <span><%=_reply.created_at.strftime("%Y-%m-%d")%></span>
-                  <i class="icon-imgshow_btn"></i>
-                  <div class="imgs_group invisible" style="height:0">
-                    <p class="js-btns_imgsgroup"><a class="imgsgroup imgsgroup2"  href="images/index/refresh_bann2.jpg">Grouped Photo 2</a></p>
-                    <p class=""><a class="imgsgroup imgsgroup2"  href="images/index/kv1.jpg">Grouped Photo 1</a></p>
-                    <p class=""><a class="imgsgroup imgsgroup2"  href="images/index/imgbase_show1.jpg">Grouped Photo 3</a></p>
-                    <p class=""><a class="imgsgroup imgsgroup2"  href="images/ohoopee2.jpg">Grouped Photo 3</a></p>
+                  <% if _reply.images.count > 0 -%>
+                  <i class="icon-imgshow_btn" data-question-id="<%= _reply.id -%>"></i>
+                  <div class="imgs_group" style="display: none;">
+                    <% _reply.images.each do |_image| -%>
+                    <a href="<%=_image.image(:slide)%>" class="question_images_<%= _reply.id -%>">
+                    <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+                    </a>
+                    <%end-%>
                   </div>
+                  <%end-%>
                   <p class="content"><%=_reply.content%></p>
                 </div>
               <%end-%>
@@ -175,7 +184,7 @@
   </div>
 </div>
 
-<%= javascript_include_tag "jquery.uploadify.js" %>
+<%= javascript_include_tag "jquery.uploadify.js","jquery.colorbox" %>
 <script type="text/javascript">
   $(function(){
     $("#replied_count").text("<%=@replied_count%>")
@@ -229,6 +238,8 @@
 
 
     $('#upload_pics').uploadify({
+      uploader: '/dialog_celebrity/upload_image',
+      dataType: 'json',
       swf : '/uploadify/uploadify.swf',
       cancelImage : '/uploadify/uploadify-cancel.png',
       //skipDefault : ['onSelect'],
@@ -244,7 +255,14 @@
       multi : true,
       auto : true,
       checkExisting : false,
-      transparent : true
+      transparent : true,
+      onUploadSuccess : function(file,data,response) {
+        arr = data.split("|")
+        id = arr[0]
+        thumb = arr[1]
+        slide =arr[2]
+        $("#upload_pics_queue").append("<img src='"+ thumb + "' data-image-id='" + id  +"' />")
+      }
     });
 
     //upload
@@ -257,5 +275,31 @@
       e.stopPropagation();
       modal.hide();
     });
+
+    $("body").off("click",".icon-imgshow_btn")
+    $("body").on("click",".icon-imgshow_btn",function(){
+      obj = ".question_images_" + $(this).attr("data-question-id")
+      $(this).next().toggle()
+      $(obj).colorbox({rel: obj,slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+    })
+
+    //reply
+    $('.reply-requestion-btn').click(function(){
+      var content = $(this).parent().parent().find('textarea').val();
+      if (content == '') {
+        alert('请输入问题概述')
+        return false;
+      }
+      var arr = []
+      var images = $(this).parent().parent().find("#upload_pics_queue")
+      images.find("img").each(function(index,img){
+        arr.push($(img).attr("data-image-id"))
+      })
+      str = arr.join("|")
+      $("#upload_pics_queue").find("input[name=images]").remove()
+      $("#upload_pics_queue").append("<input name='images' type='hidden' value='" + str + "'>")
+
+    })
+
   })
 </script>

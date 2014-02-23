@@ -16,6 +16,7 @@ class DialogCelebrity::MasterProfilesController < ApplicationController
 
   def master_interview
     @master = MasterProfile.find(params[:id])
+    @last_masters = MasterProfile.order("created_at desc").limit(4)
   end
 
 end

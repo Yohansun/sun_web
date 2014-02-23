@@ -1,13 +1,13 @@
 #encoding: utf-8
 class Manage::DialogCelebrities::MasterDesignUploadsController < Manage::BaseController
   def index
-    @uploads = MasterDesignUpload.where(:master_design_id => params[:master_design_id].to_i)
+    @uploads = MasterDesignUpload.where(:master_design_id => params[:master_design_id].to_i).order("created_at desc")
   end
 
   def create_file
-    if params[:file].present?
+    if params[:file2].present?
       upload = MasterDesignUpload.new
-      upload.file = params[:file]
+      upload.file2 = params[:file2]
       upload.master_design_id = params[:master_design_id]
       if upload.save
         content = render_to_string(:partial => "manage/dialog_celebrities/master_design_uploads/upload",:locals => { upload: upload })

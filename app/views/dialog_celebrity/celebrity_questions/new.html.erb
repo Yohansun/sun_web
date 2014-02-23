@@ -4,8 +4,11 @@
 
 <% content_for :tail do %>
 <%= javascript_include_tag "famous/main","jquery.uploadify.js" %>
+
 <script type="text/javascript">
   $('#upload_pics').uploadify({
+      uploader: '/dialog_celebrity/upload_image',
+      dataType: 'json',
       swf : '/uploadify/uploadify.swf',
       cancelImage : '/uploadify/uploadify-cancel.png',
       //skipDefault : ['onSelect'],
@@ -21,7 +24,14 @@
       multi : true,
       auto : true,
       checkExisting : false,
-      transparent : true
+      transparent : true,
+      onUploadSuccess : function(file,data,response) {
+        arr = data.split("|")
+        id = arr[0]
+        thumb = arr[1]
+        slide =arr[2]
+        $("#upload_pics_queue").append("<img src='"+ thumb + "' data-image-id='" + id  +"' />")
+      }
     });
 
     //upload
