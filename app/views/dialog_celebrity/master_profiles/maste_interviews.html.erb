@@ -86,8 +86,8 @@
         </li>
         <% if index == 3 %>
           <div class="clearfix mb10">
-            <div class="footer_banner mt10 pull-left"><a href="#"><img src="images/index/footer_banner.jpg"></a></div>
-            <div class="footer_banner mt10 pull-right"><a href="#"><img src="images/index/footer_banner2.jpg"></a></div>
+            <div class="footer_banner mt10 pull-left"><a href="<%=@banners[0].url%>"><img src="<%=@banners[0].file(:list_670x85)%>"></a></div>
+            <div class="footer_banner mt10 pull-right"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_310x85)%>"></a></div>
           </div>
         <%end-%>
       <%end-%>
@@ -100,27 +100,8 @@
 
 <!-- 底部公共部分start -->
 <div class="index_main refresh_news mt10 clearfix">
-  <div class="refresh_new pull-left">
-    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>装修图库精选</h5>
-    <ul class="ul_dot">
-      <li><a href="#" target="_blank">卧室基因突变 装饰空间网友改造空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
-      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
-      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
-      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
-      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
-    </ul>
-  </div>
-  <div class="refresh_new pull-left">
-    <h5><a href="#" target="_blank" class="pull-right"><small class="muted">更多></small></a>设计之星作品精选</h5>
-    <ul class="ul_dot">
-      <li><a href="#" target="_blank">空间哲学师马昌国的设计秘籍空间哲学师马昌国的设计秘籍</a></li>
-      <li><a href="#" target="_blank">来自设计之星小毕的小情调婚房设计</a></li>
-      <li><a href="#" target="_blank">110 平米时尚混搭 田园气质童话梦想</a></li>
-      <li><a href="#" target="_blank">淡雅色彩配搭让你在夏日享清凉</a></li>
-      <li class="noborder"><a href="#" target="_blank">都市静谧空间 80平森系素雅两居</a></li>
-    </ul>
-  </div>
-  <div class="pull-right"><a href="#"><img src="images/refresh/refresh_list_banner3.jpg"></a></div>
+  <%= render "refresh_record/foot_select" %>
+  <div class="pull-right"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x230)%>"></a></div>
 </div>
 
-<a href="#"><img class="mt10" src="images/channel/banner1.jpg"></a>
+<a href="<%=@banners[3].url%>"><img class="mt10" src="<%=@banners[3].file(:list_1000x85)%>"></a>

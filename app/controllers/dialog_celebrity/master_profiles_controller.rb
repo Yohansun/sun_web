@@ -1,6 +1,11 @@
+# encoding: utf-8
 class DialogCelebrity::MasterProfilesController < ApplicationController
+  include CommonModule
+  before_filter :get_page_data,:only => [:celebrities,:maste_interviews]
   def celebrities
     @celebrities = MasterProfile.where(mtype: 1).order("id desc")
+    @banners = IBanner.page_name('名人在线').order("position ASC")
+    @new_designs = MasterDesign.order("updated_at desc").limit(5)
   end
 
   def maste_interviews
@@ -12,11 +17,12 @@ class DialogCelebrity::MasterProfilesController < ApplicationController
       @masters = @masters.where(:nationality => params[:tag])
     end
     @masters = @masters.order("id desc").page(params[:page]).per(8)
+    @banners = IBanner.page_name('名家设计').order("position ASC")
   end
 
   def master_interview
     @master = MasterProfile.find(params[:id])
     @last_masters = MasterProfile.order("created_at desc").limit(4)
+    @banners = IBanner.page_name('名人名家访谈页').order("position ASC")
   end
-
 end
