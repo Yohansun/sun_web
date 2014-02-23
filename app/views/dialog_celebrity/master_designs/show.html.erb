@@ -4,6 +4,25 @@
 
 <%- content_for :tail do %>
 <%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
+<script>
+  $(".map-next,.map-next-bullet").click(function(){
+    $obj = $(".map-kv-container ul li.map-active")
+    _url = $obj.next().find("a").attr("href")
+    if(_url==undefined){
+      _url = $(".map-kv-container ul li").eq(0).find("a").attr("href")
+    }
+    window.location.href = _url
+  })
+  $(".map-prev,.map-prev-bullet").click(function(){
+    $obj = $(".map-kv-container ul li.map-active")
+    _url = $obj.prev().find("a").attr("href")
+    if(_url==undefined){
+      _url = $(".map-kv-container ul li").eq(-1).find("a").attr("href")
+    }
+    window.location.href = _url
+  })
+
+</script>
 <%- end %>
 
 <h3 class="chann_caption nomargin">
@@ -30,7 +49,7 @@
     <div class="slides_box clearfix">
       <div class="map-big pull-left js-map-big">
         <% if @upload -%>
-          <img src="<%=@upload.file(:slide)%>" />
+          <img src="<%=@upload.file2(:slide)%>" />
         <%end-%>
       </div>
       <div class="map-kv-slider pull-right">
@@ -40,7 +59,7 @@
         <div class="map-kv-container">
           <ul>
             <% @master_design.master_design_uploads.each_with_index do |_upload,index| -%>
-            <li class="<%= index == 0 ? 'map-active' : ''%>"><a href="<%=dialog_celebrity_master_design_path(@master_design.id,upload_id: _upload.id)%>"><span></span><img src="<%=_upload.file(:thumb)-%>" alt="<%=_upload.title%>" /></a></li>
+            <li class="<%= _upload.id == @upload.id ? 'map-active' : ''%>"><a href="<%=dialog_celebrity_master_design_path(@master_design.id,upload_id: _upload.id)%>"><span></span><img src="<%=_upload.file2(:thumb2)-%>" alt="<%=_upload.title%>" /></a></li>
             <%end -%>
           </ul>
         </div>
@@ -50,7 +69,7 @@
       </div>
     </div>
     <div class="btn_group clearfix">
-      <a target="_blank" href="#" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该大师访谈</a>
+      <a target="_blank" href="<%= master_interview_dialog_celebrity_master_profile_path(@master) -%>" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该大师访谈</a>
       <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-fullscreen"></i>全屏</a>
       <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-collect"></i>收藏</a>
       <a href="<%= @upload.present? ? download_dialog_celebrity_master_design_path(@upload.id) : '#' -%>" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
