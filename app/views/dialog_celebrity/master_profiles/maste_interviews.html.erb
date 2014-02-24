@@ -21,11 +21,15 @@
     <div class="master-f">
       <h3>名家分类</h3>
       <p>
+
+        <!--
         <em>从事领域：</em>
         <a href="/dialog_celebrity/master_interviews?board_id=&tag=<%=params[:tag]%>" class="<%=params[:board_id].blank? ? 'm-active' : ''%>">全部</a>
         <% CelebrityContentBoard.first(5).each do |board| %>
           <a class="<%= params[:board_id] == board.id.to_s ? 'm-active' : ''%>" href="<%='/dialog_celebrity/master_interviews?board_id='+board.id.to_s%>&tag=<%=params[:tag]%>"><%= board.name %></a>
         <%end-%>
+        -->
+
         <em>所在地区：</em>
         <a href="/dialog_celebrity/master_interviews?board_id=<%=params[:board_id]%>&tag=" class="<%=params[:tag].blank? ? 'm-active' : '' %>">全部</a>
         <a href="/dialog_celebrity/master_interviews?board_id=<%=params[:board_id]%>&tag=海外" class="<%= params[:tag] == '海外' ? 'm-active' : '' %>">海外</a>

@@ -315,17 +315,17 @@ $(function(){
 				arr.push($(img).attr("data-image-id"))
 			})
 			str = arr.join("|")
-			alert(str)
 			$("#upload_pics_queue").find("input[name=images]").remove()
 			$("#upload_pics_queue").append("<input name='images' type='hidden' value='" + str + "'>")
 
 			if (overview_val == '') {
 				alert('请输入问题概述')
 				return false;
-			}else if (sort_text == '' || scope_text == '') {
-				alert('请选择分类')
-				return false;
-			};
+			}
+			// }else if (sort_text == '' || scope_text == '') {
+			// 	alert('请选择分类')
+			// 	return false;
+			// };
 		})
 	}($));
 });

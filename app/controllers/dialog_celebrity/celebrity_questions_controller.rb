@@ -15,6 +15,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
 
   def create
     question = CelebrityQuestion.new params[:celebrity_question]
+    question.key = ""
     unless question.save
       flash[:notice] = question.errors.full_messages.join("\n")
       redirect_to new_dialog_celebrity_celebrity_question_path
@@ -65,7 +66,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
     image = CelebrityQuestionImage.new
     image.image = params[:Filedata]
     if image.save
-      render :text => "#{image.id}|#{image.image(:thumb)}|#{image.image(:slide)}"
+      render :text => "#{image.id}|#{image.image(:thumb)}|#{image.image(:upload_prew)}"
     else
       return render :text => "0"
     end
