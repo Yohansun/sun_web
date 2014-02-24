@@ -237,8 +237,9 @@ task :init_banner_celebrities => :environment  do
       IBanner.create(page_name: '名人问答提问页',position: 1, size: '1000x85')
       IBanner.create(page_name: '名人问答提问页',position: 2, size: '230x170')
       IBanner.create(page_name: '名人问答提问页',position: 3, size: '230x170')
-      IBanner.create(page_name: '名人问答提问页',position: 4, size: '670x85')
-      IBanner.create(page_name: '名人问答提问页',position: 5, size: '310x85')
+      IBanner.create(page_name: '名人问答提问页',position: 4, size: '230x230')
+      IBanner.create(page_name: '名人问答提问页',position: 5, size: '670x85')
+      IBanner.create(page_name: '名人问答提问页',position: 6, size: '310x85')
     end
   end
 
