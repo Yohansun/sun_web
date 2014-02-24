@@ -400,6 +400,8 @@ Icolor::Application.routes.draw do
     collection do
       get :re_list
       get :re_wlk
+      #静态页面通用action,传递params[:star_name]
+      get :star_page
     end
   end
 

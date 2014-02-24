@@ -33,6 +33,8 @@ module Manage::BaseHelper
         'refresh_label4'
       when '刷新服务'
         'refresh_label5'
+      when /徐静蕾的书香客厅/
+        'refresh_label6'
       else
         'nothing'
     end

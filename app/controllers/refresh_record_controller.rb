@@ -2,6 +2,8 @@
 class RefreshRecordController < ApplicationController
   layout "home_manage"
   before_filter :get_data
+  before_filter :get_star_page_data, only: :star_page
+
   def index
     @kv = HomeKv.where(position: nil, visible: true).first
     @life_memoirs = ILifeMemoir.order("id desc").page(params[:page]).per(4)
@@ -30,4 +32,31 @@ class RefreshRecordController < ApplicationController
   def re_list
 
   end
+
+  def star_page
+    if params[:star_name].present?
+      begin
+        render :template => "refresh_record/#{params[:star_name]}"
+      rescue Exception => e
+        logger.info "---[warning]---refresh_record do not have the page of #{params[:star_name]}"
+        redirect_to root_path and return
+      end
+    else
+      render nothing: true
+    end
+  end
+
+  private
+    def get_star_page_data
+      case params[:star_name]
+      when 're_xjl'
+        #装修图库精选
+        @images_jingxuan = IColumnData.show_data(2).limit(5)
+        @images_jingxuan_more = IColumnData.where(i_column_type_id: 2,position: 0).first
+        #设计之星作品精选
+        @star_jingxuan = IColumnData.show_data(3).limit(5)
+        @star_jingxuan_more = IColumnData.where(i_column_type_id: 3,position: 0).first
+        @banners = IBanner.page_name('徐静蕾的书香客厅').order("position ASC").all
+      end
+    end
 end
