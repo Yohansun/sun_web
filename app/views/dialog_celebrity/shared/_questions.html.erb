@@ -1,4 +1,29 @@
 <%= stylesheet_link_tag "colorbox/colorbox" %>
+<style type="text/css">
+  .uploadify{
+    float: left;
+    margin: 0 5px 5px 0;
+  }
+  .uploadifyQueueItem{
+    display: none;
+  }
+  #upload_pics_queue span{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    padding: 1px;
+    margin: 0 5px 5px 0;
+    text-align: center;
+  }
+  #upload_pics_queue img{
+    vertical-align: middle;
+  }
+</style>
 
 <div class="index_main">
   <h5 class="title">
@@ -62,9 +87,9 @@
                 <% if _question.images.count > 0 -%>
                   <i class="icon-imgshow_btn" data-question-id="<%= _question.id -%>"></i>
 
-                  <div class="imgs_group" style="display: none; ">
+                  <div class="imgs_group invisible" style="height:0;">
                     <% _question.images.each do |_image| -%>
-                    <a href="<%=_image.image(:slide)%>" class="question_images_<%= _question.id -%>">
+                    <a href="<%=_image.image(:slide)%>" class="imgsgroup question_images_<%= _question.id -%>">
                     <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
                     </a>
                     <%end-%>
@@ -110,7 +135,7 @@
                 <input type="hidden" name="celebrity_question_reply[user_id]" value="<%=current_user.try(:id)%>" />
                 <input type="hidden" name="celebrity_question_reply[celebrity_question_id]" value="<%=_question.id%>" />
                 <fieldset class="pr form_detail">
-                  <textarea id="requestion_content" name="celebrity_question_reply[content]" cols="" rows="" class="js-text_rest" placeholder="" data-max="1000"></textarea>
+                  <textarea id="requestion_content" name="celebrity_question_reply[content]" cols="" rows="" class="js-text_rest question_content" placeholder="" data-max="1000"></textarea>
                   <span class="pull-right text_rest">
                     还可以输入
                     <span class="text-important js-text_rest_show">1000</span>
@@ -261,7 +286,7 @@
         id = arr[0]
         thumb = arr[1]
         slide =arr[2]
-        $("#upload_pics_queue").append("<img src='"+ thumb + "' data-image-id='" + id  +"' />")
+        $("#upload_pics_queue").append("<span><img src='"+ thumb + "' data-image-id='" + id  +"' /></span>")
       }
     });
 
@@ -276,12 +301,16 @@
       modal.hide();
     });
 
-    $("body").off("click",".icon-imgshow_btn")
+    //colorbox
+    $('.imgsgroup').colorbox({rel: 'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
     $("body").on("click",".icon-imgshow_btn",function(){
-      obj = ".question_images_" + $(this).attr("data-question-id")
-      $(this).next().toggle()
-      $(obj).colorbox({rel: obj,slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+      obj = ".question_images_" + $(this).attr("data-question-id");
+      $(obj).colorbox({
+        rel: obj
+      });
+      $(this).siblings('.imgs_group').find('.imgsgroup:first').click();
     })
+
 
     //reply
     $('.reply-requestion-btn').click(function(){

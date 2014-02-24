@@ -124,12 +124,47 @@
 
       <div class="tab-content famous_ask_content">
         <div class="tab-pane active" id="famous_tab1">
-          <form action="<%=dialog_celebrity_celebrity_questions_path%>" method="post" class="famous_ask_form">
+          <form action="<%=dialog_celebrity_celebrity_questions_path%>" method="post" class="famous_ask_form nomargin pt15 pb25">
             <input type="hidden" name="celebrity_question[user_id]" value="<%= current_user.id %>">
             <% if params[:master_id].present? -%>
               <input type="hidden" name="celebrity_question[master_profile_id]" value="<%= params[:master_id] %>">
             <%end -%>
-            <p class="clearfix form_mata">
+            <div class="clearfix form_mata nopadding">
+              <p>
+                <i class="icon-i30 icon-question_sort"></i>
+                <span>选择您的问题分类</span>
+                <span class="pull-right">
+                  <strong class="text-warning">36</strong>小时内必有专家为您答疑解惑
+                </span>
+              </p>
+              <p class="options_sort nomargin">
+                <label class="radio inline">
+                  <input type="radio" name="optionsRadios" id="" value="" checked>
+                  空间设计
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="optionsRadios" id="" value="">
+                  色彩设计
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="optionsRadios" id="" value="">
+                  软装设计
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="optionsRadios" id="" value="">
+                  园艺设计
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="optionsRadios" id="" value="">
+                  园艺设计
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="optionsRadios" id="" value="">
+                  其他
+                </label>
+              </p>
+            </div>
+            <p class="clearfix form_mata linet1">
               <i class="icon-i30 icon-question_mark"></i>
               <span>一句话描述您的疑问</span>
               <span>
@@ -137,19 +172,16 @@
                   <%= flash[:notice] -%>
                 <% end -%>
               </span>
-              <span class="pull-right">
-                <strong class="text-warning">36</strong>小时内必有专家为您答疑解惑
-              </span>
             </p>
             <fieldset class="pr">
-              <input type="text" id="" name="celebrity_question[name]" class="js-text_percentage nomargin" placeholder="请在这里概述您的问题" data-max="50">
+              <input type="text" id="" name="celebrity_question[name]" class="question_name js-text_percentage nomargin" placeholder="请在这里概述您的问题" data-max="50">
               <span class="input_mata">
                 <span class="js-text_lenth_show">0</span>/<span class="js-text_maxlenth">50</span>
               </span>
             </fieldset>
-            <fieldset class="mt20 pr form_detail">
+            <fieldset class="mt20 pt30 pr form_detail">
               <p><strong>问题补充</strong>(选填)</p>
-              <textarea name="celebrity_question[content]" id="" cols="" rows="" class="js-text_percentage" placeholder="您可以在这里补充问题细节" data-max="100"></textarea>
+              <textarea name="celebrity_question[content]" id="" cols="" rows="" class="js-text_percentage question_content" placeholder="您可以在这里补充问题细节" data-max="100"></textarea>
               <span class="input_mata">
                 <span class="js-text_lenth_show">0</span>/<span class="js-text_maxlenth">100</span>
               </span>
@@ -186,7 +218,7 @@
             </fieldset>
             <fieldset class="mt20 pr">
               <button class="famous_ask_submit pull-right js-famous_ask_submit">提交问题</button>
-              <a href="javascript:;" class="js-famous_options">
+              <!-- <a href="javascript:;" class="js-famous_options">
                 <span>选择分类</span>
                 <i class="icon-i16 icon-arrowdown"></i>
               </a>
@@ -208,7 +240,7 @@
               <p class="select_options_show mt10">
                 <span class="mr10"></span>
                 <span class="mr10"></span>
-              </p>
+              </p> -->
             </fieldset>
           </form>
         </div>
@@ -233,6 +265,7 @@
   <div class="pull-right smaller famous_right">
     <%= render "dialog_celebrity/shared/media_chann" -%>
     <div class="mt10"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
+    <div class="mt10"><a href="#"><img src="img.jpg" width="230" height="170"></a></div>
   </div>
 </div>
 
