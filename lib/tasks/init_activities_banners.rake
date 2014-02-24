@@ -161,3 +161,15 @@ task :change_activities_banners_designner => :environment  do
   banner3 = IBanner.where(page_name: '设计师活动内页')
   banner3.update_all(page_name: '活动集锦内页') if banner3.present?
 end
+
+desc "添加刷新生活明星单页banner"
+task :add_refresh_star_page_banners => :environment  do
+  banner1 = IBanner.where(page_name: '徐静蕾的书香客厅')
+  if banner1.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '徐静蕾的书香客厅',position: 1, size: '230x230')
+      IBanner.create(page_name: '徐静蕾的书香客厅',position: 2, size: '670x85')
+      IBanner.create(page_name: '徐静蕾的书香客厅',position: 3, size: '310x85')
+    end
+  end
+end

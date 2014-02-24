@@ -1,0 +1,12 @@
+<div class="refresh_new pull-left">
+  <h5><a href="<%= more_url.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a><%= title %></h5>
+  <ul class="ul_dot">
+    <% if resource.present? %>
+      <% resource.each do |data| %>
+        <% unless data.position == 0 %>
+          <li><a href="<%= data.url %>" target="_blank"><%= data.title %></a></li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
