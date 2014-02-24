@@ -1,5 +1,30 @@
 <% content_for :head do %>
 <%= stylesheet_link_tag "famous" %>
+<style type="text/css">
+  .uploadify{
+    float: left;
+    margin: 0 5px 5px 0;
+  }
+  .uploadifyQueueItem{
+    display: none;
+  }
+  #upload_pics_queue span{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    padding: 1px;
+    margin: 0 5px 5px 0;
+    text-align: center;
+  }
+  #upload_pics_queue img{
+    vertical-align: middle;
+  }
+</style>
 <%end-%>
 
 <% content_for :tail do %>
@@ -30,7 +55,7 @@
         id = arr[0]
         thumb = arr[1]
         slide =arr[2]
-        $("#upload_pics_queue").append("<img src='"+ thumb + "' data-image-id='" + id  +"' />")
+        $("#upload_pics_queue").append("<span><img src='"+ thumb + "' data-image-id='" + id  +"' /></span>")
       }
     });
 
