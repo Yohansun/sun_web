@@ -54,8 +54,8 @@
         arr = data.split("|")
         id = arr[0]
         thumb = arr[1]
-        slide =arr[2]
-        $("#upload_pics_queue").append("<span><img src='"+ thumb + "' data-image-id='" + id  +"' /></span>")
+        thumb2 =arr[2]
+        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /></span>")
       }
     });
 
@@ -138,28 +138,18 @@
                 </span>
               </p>
               <p class="options_sort nomargin">
+                <% CelebrityContentBoard.order("id asc").limit(5).each_with_index do |_board,index| %>
                 <label class="radio inline">
-                  <input type="radio" name="optionsRadios" id="" value="" checked>
-                  空间设计
+                  <input type="radio" name="celebrity_question[celebrity_content_board_id]" id="" value="<%=_board.id%>"
+                  <% if index == 0 %>
+                  checked
+                  <%end-%>
+                  >
+                  <%= _board.name -%>
                 </label>
+                <%end-%>
                 <label class="radio inline">
-                  <input type="radio" name="optionsRadios" id="" value="">
-                  色彩设计
-                </label>
-                <label class="radio inline">
-                  <input type="radio" name="optionsRadios" id="" value="">
-                  软装设计
-                </label>
-                <label class="radio inline">
-                  <input type="radio" name="optionsRadios" id="" value="">
-                  园艺设计
-                </label>
-                <label class="radio inline">
-                  <input type="radio" name="optionsRadios" id="" value="">
-                  园艺设计
-                </label>
-                <label class="radio inline">
-                  <input type="radio" name="optionsRadios" id="" value="">
+                  <input type="radio" name="celebrity_question[celebrity_content_board_id]" id="" value="">
                   其他
                 </label>
               </p>
@@ -265,16 +255,16 @@
   <div class="pull-right smaller famous_right">
     <%= render "dialog_celebrity/shared/media_chann" -%>
     <div class="mt10"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
-    <div class="mt10"><a href="#"><img src="img.jpg" width="230" height="170"></a></div>
+    <div class="mt10"><a href="<%=@banners[2].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
   </div>
 </div>
 
 <div class="index_main refresh_news mt10 clearfix">
   <%= render "refresh_record/foot_select" %>
-  <div class="pull-right"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x230)%>" width="230" height="230"></a></div>
+  <div class="pull-right"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_230x230)%>" width="230" height="230"></a></div>
 </div>
 
 <div class="clearfix">
-  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_670x85)%>"></a></div>
-  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_310x85)%>"></a></div>
+  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_670x85)%>"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[5].url%>"><img src="<%=@banners[5].file(:list_310x85)%>"></a></div>
 </div>

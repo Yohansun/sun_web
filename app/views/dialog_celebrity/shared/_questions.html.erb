@@ -82,7 +82,7 @@
             <div class="clearfix">
               <div class="pull-left title_faq">
                 <a class="js-show_content" href="javascript:;">
-                【<%=_question.board.name -%>】<%=_question.name -%>
+                【<%=_question.board.try(:name) || "其他" -%>】<%=_question.name -%>
                 </a>
                 <% if _question.images.count > 0 -%>
                   <i class="icon-imgshow_btn" data-question-id="<%= _question.id -%>"></i>
@@ -285,8 +285,8 @@
         arr = data.split("|")
         id = arr[0]
         thumb = arr[1]
-        slide =arr[2]
-        $("#upload_pics_queue").append("<span><img src='"+ thumb + "' data-image-id='" + id  +"' /></span>")
+        thumb2 =arr[2]
+        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /></span>")
       }
     });
 
