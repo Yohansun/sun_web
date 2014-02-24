@@ -67,14 +67,28 @@
     </h5>
     <ul class="index_main unstyled">
       <li class="dott1">
-        <h5 class="clearfix">
-          <i class="icon-intv1 icon-i16 pull-left"></i>
-          <span class="help-block">您更喜欢什么设计项目？</span>
-        </h5>
-        <p class="clearfix">
-          <i class="icon-intv2 icon-i16 pull-left"></i>
-          <span class="help-block"><%=@master.interview_content %></span>
-        </p>
+        <% if @master.interview_content_type == "问答类型访谈" %>
+          <% @master.interview_content.split("\r\n\r\n").each_with_index do |content,index| %>
+          <% if index % 2 == 0 %>
+          <h5 class="clearfix">
+            <i class="icon-intv1 icon-i16 pull-left"></i>
+            <span class="help-block"><%= content -%></span>
+          </h5>
+          <%end-%>
+          <% if index %2 == 1 %>
+          <p class="clearfix">
+            <i class="icon-intv2 icon-i16 pull-left"></i>
+            <span class="help-block"><%=content -%></span>
+          </p>
+          <%end-%>
+          <%end-%>
+        <%end-%>
+        <% if @master.interview_content_type == "文章类型访谈" %>
+          <p class="clearfix">
+            <i class="icon-intv2 icon-i16 pull-left"></i>
+            <span class="help-block"><%=@master.interview_content %></span>
+          </p>
+        <%end-%>
       </li>
     </ul>
   </div>
