@@ -11,29 +11,6 @@
       $("#celebrity_questions").html(result.content)
     })
   })
-
-  $(document).ready(function(){
-    $('.imgsgroup').colorbox({
-      rel:              'imgsgroup',
-      slideshow:        true,
-      width:            '725px',
-      slideshowStart:   "",//slideshowStart:   "<span>start</span>",
-      slideshowStop:    "",
-      current:          "{current}/{total}"
-    });
-    $('.icon-imgshow_btn').click(function(){//alert(9)
-      $(this).siblings('.imgs_group').find('.js-btns_imgsgroup .imgsgroup').click()
-    });
-    $('.imgsgroup1').colorbox({
-      rel:              'imgsgroup1'
-    });
-    $('.imgsgroup2').colorbox({
-      rel:              'imgsgroup2'
-    });
-    $('.imgsgroup3').colorbox({
-      rel:              'imgsgroup3'
-    });
-  });
   </script>
 <%- end %>
 
