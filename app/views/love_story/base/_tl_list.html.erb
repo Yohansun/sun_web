@@ -1,0 +1,16 @@
+<%- colum_datas = IColumnData.show_data(i_column_type_id).limit(5) %>
+<ul class="unstyled sidebar_list index_main mt10 js-img_show">
+  <li class="clearfix title noborder">
+    <a href="<%= IColumnData.where(position: 0, i_column_type_id: i_column_type_id).first.try(:url) %>" target="_blank" class="pull-right a_hover_red"><small class="muted">更多&gt;</small></a>
+    <strong class="pull-left"><%= title %></strong>
+  </li>
+  <% colum_datas.each_with_index do |dcs,index| %>
+    <li class="<%="active dot_linet1" if index == 0%>">
+        <i class="icon-i16 icon-round"><%= index+1 %></i>
+        <strong class="js-title"><%=dcs.title%></strong>
+        <a href="<%=dcs.url %>" class="js-img" target="_blank">
+          <img src="<%=dcs.file.url(:list_155x115)%>" alt="" />
+        </a>
+    </li>
+  <% end %>
+</ul>

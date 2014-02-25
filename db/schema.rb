@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115104643) do
+ActiveRecord::Schema.define(:version => 20140211063344) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -244,6 +244,15 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.string   "style"
   end
 
+  create_table "custom_meta", :force => true do |t|
+    t.string   "fullpath"
+    t.string   "title"
+    t.string   "description"
+    t.string   "keywords"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "customer_replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -290,6 +299,7 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.integer  "collects_count",    :default => 0
     t.integer  "sorts",             :default => 100
     t.boolean  "no_audited",        :default => false
+    t.boolean  "can_published",     :default => false
   end
 
   add_index "design_images", ["area_id"], :name => "area_id"
@@ -318,6 +328,22 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
   add_index "design_tags", ["design_id"], :name => "index_design_tags_on_design_id"
   add_index "design_tags", ["image_library_category_id"], :name => "index_design_tags_on_image_library_category_id"
 
+  create_table "designer_events", :force => true do |t|
+    t.string   "start_time"
+    t.datetime "end_time"
+    t.string   "title"
+    t.string   "intro"
+    t.text     "content"
+    t.boolean  "is_save",           :default => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "event_type"
+  end
+
   create_table "designs", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -343,6 +369,7 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.integer  "story_id"
     t.boolean  "baicheng_active",           :default => false
     t.integer  "story_talking_id"
+    t.integer  "comments_count",            :default => 0
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
@@ -395,6 +422,17 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
 
   add_index "event_attendees", ["special_event_id"], :name => "index_event_attendees_on_special_event_id"
   add_index "event_attendees", ["user_id"], :name => "index_event_attendees_on_user_id"
+
+  create_table "event_kvs", :force => true do |t|
+    t.string   "url"
+    t.string   "klass_name"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.text     "title"
@@ -912,8 +950,9 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.integer  "high"
     t.integer  "x_line"
     t.integer  "y_line"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "event_kv_id"
   end
 
   create_table "land_sources", :force => true do |t|
@@ -947,6 +986,31 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
 
   add_index "login_logs", ["current_sign_in_at"], :name => "index_login_logs_on_current_sign_in_at"
   add_index "login_logs", ["user_id"], :name => "index_login_logs_on_user_id"
+
+  create_table "love_stories", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "area_id"
+    t.string   "user_name"
+    t.string   "come_from"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "love_story_images", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "love_story_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "love_story_images", ["created_at"], :name => "index_love_story_images_on_created_at"
+  add_index "love_story_images", ["love_story_id"], :name => "index_love_story_images_on_love_story_id"
+  add_index "love_story_images", ["updated_at"], :name => "index_love_story_images_on_updated_at"
 
   create_table "maillists", :force => true do |t|
     t.string   "email"
@@ -1072,47 +1136,6 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
 
   add_index "my_show_img_uploads", ["created_at"], :name => "index_my_show_img_uploads_on_created_at"
 
-  create_table "old_articles", :force => true do |t|
-    t.integer  "class_id"
-    t.string   "title"
-    t.string   "image"
-    t.text     "content"
-    t.datetime "publish_at"
-    t.integer  "view_count"
-    t.string   "thumb"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "old_design_files", :force => true do |t|
-    t.integer  "old_design_id"
-    t.string   "title"
-    t.string   "src"
-    t.integer  "index"
-    t.datetime "create_date"
-    t.integer  "photo_type"
-    t.boolean  "is_cover"
-    t.string   "space"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "old_designs", :force => true do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.integer  "month"
-    t.integer  "year"
-    t.integer  "top_n"
-    t.string   "tags"
-    t.datetime "create_date"
-    t.integer  "view_count"
-    t.boolean  "recommended"
-    t.boolean  "month_star"
-    t.string   "style"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "owner_enters", :force => true do |t|
     t.string   "content"
     t.string   "title"
@@ -1175,6 +1198,23 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "pictures", :force => true do |t|
+    t.integer  "position"
+    t.string   "title"
+    t.string   "url"
+    t.string   "special_guide_id"
+    t.string   "img_title"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "pictures", ["position"], :name => "index_pictures_on_position"
+  add_index "pictures", ["special_guide_id"], :name => "index_pictures_on_special_guide_id"
 
   create_table "point_exchanges", :force => true do |t|
     t.integer  "area_id"
@@ -1323,6 +1363,18 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "recommends", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "special_guide_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "recommends", ["created_at"], :name => "index_recommends_on_created_at"
+  add_index "recommends", ["special_guide_id"], :name => "index_recommends_on_special_guide_id"
+  add_index "recommends", ["updated_at"], :name => "index_recommends_on_updated_at"
+
   create_table "rep_replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1453,6 +1505,23 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
 
   add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
 
+  create_table "sign_checks", :force => true do |t|
+    t.integer  "user_id"
+    t.boolean  "prize",      :default => false
+    t.integer  "date_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "simple_captcha_data", :force => true do |t|
+    t.string   "key",        :limit => 40
+    t.string   "value",      :limit => 6
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "simple_captcha_data", ["key"], :name => "idx_key"
+
   create_table "site_messages", :force => true do |t|
     t.text     "desc"
     t.datetime "created_at", :null => false
@@ -1508,6 +1577,30 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
   add_index "special_events", ["actived"], :name => "index_special_events_on_actived"
   add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
   add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
+
+  create_table "special_guides", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "edition"
+    t.string   "img_title"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.string   "color1_name"
+    t.string   "color2_name"
+    t.string   "color3_name"
+    t.string   "color1"
+    t.string   "color2"
+    t.string   "color3"
+    t.text     "recommend"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "special_guides", ["created_at"], :name => "index_special_guides_on_created_at"
+  add_index "special_guides", ["edition"], :name => "index_special_guides_on_edition"
+  add_index "special_guides", ["updated_at"], :name => "index_special_guides_on_updated_at"
 
   create_table "stories", :force => true do |t|
     t.string   "title"
@@ -1623,8 +1716,9 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "more_url",          :default => false
   end
 
   create_table "tools", :force => true do |t|
@@ -1715,6 +1809,7 @@ ActiveRecord::Schema.define(:version => 20131115104643) do
     t.string   "create_from"
     t.boolean  "is_admin",                  :default => false
     t.string   "genre"
+    t.string   "edit_by"
   end
 
   add_index "users", ["area_id"], :name => "index_users_on_area_id"

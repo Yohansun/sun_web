@@ -1,0 +1,246 @@
+<%- content_for :tail do %>
+  <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
+  <script type="text/javascript">
+    $(function(){
+      var options = {
+        data: data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '请选择省');
+      sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '请选择市');
+      // use in cubit slide
+      var options2 = {
+        data  : data
+      }
+      var sel = new LinkageSelect(options2);
+      sel.bind('.level1_1', null, '省/直辖市');
+      sel.bind('.level1_2', null, '城市');
+      sel.bind('.level1_3', null, '区');
+
+      if (<%= params[:upload_success].present? ? true : false %>) {
+        $('#upload_success').modal({show:true});
+      };
+
+      $('#check_my_story').click(function(event) {
+        $('#upload_success').modal('hide');
+        $.get('<%= get_story_info_love_stories_path(love_story_id: params[:love_story_id]) %>');
+      });
+    })
+  </script>
+  <script type="text/javascript">
+  $(window).load(function () {
+    $('.js-msnry').masonry();
+
+    $('.story_modal').on('shown', function () {
+      $('#slider_pics').carouFredSel({
+        items               : 3,
+        direction           : "left",
+        scroll : {
+          items           : 1,
+          duration        : 400,
+          pauseOnHover    : true
+        },
+        prev: {
+          button: '#havepics .slider-prev'
+        },
+        next: {
+          button: '#havepics .slider-next'
+        },
+        auto: {
+          play            : false
+        }
+      });
+      $('#slider_designer').carouFredSel({
+        items               : 4,
+        direction           : "left",
+        scroll : {
+          items           : 1,
+          duration        : 400,
+          pauseOnHover    : true
+        },
+        prev: {
+          button: '#nohavepics .slider-prev'
+        },
+        next: {
+          button: '#nohavepics .slider-next'
+        },
+        auto: {
+          play            : false
+        }
+      });
+    });
+  });
+  </script>
+<%- end %>
+<div class="container-fluid bann_green_skin">
+  <div class="banner">
+    <!-- <a href="#" class="btn pa"></a> -->
+    <div class="wrapper">
+      <%= image_tag 'love_story/images/banners/banner2.jpg', usemap: '#story_kv', alt: '' %>
+      <map name="story_kv" name="story_kv">
+        <area shape="rect" coords="56,253,250,290" href="/love_story/minisite_stars" target="_blank" alt="" />
+      </map>
+    </div>
+  </div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <div class="p010 clearfix">
+        <div class="left_big pull-left">
+          <div class="index_main">
+            <%= form_tag '/love_story/love_stories', method: :get, class: 'form_search nomargin form-inline' do %>
+              <div class="pull-right">
+                <input type="text" class="nomargin pull-left" placeholder="搜名字" name="user_name" value="<%= params[:user_name] if params[:user_name].present? %>" />
+                <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
+              </div>
+              <strong class="label-text">地区:</strong>
+              <select id="province" class="level_1 input-small" name="province_id"></select>
+              <select id="city" class="level_2 input-small" name="city_id"></select>
+              <strong class="label-text">故事来源:</strong>
+              <%= select_tag :come_from, options_for_select([["请选择",""],
+                ["icolor上传","icolor"],
+                ["新浪微博上传", "sina"]], params[:come_from]), :class => "input-small" %>
+              <button class="btn">确定</button>
+            <% end %>
+          </div>
+          <div class="mt10">
+            <%- if current_user %>
+              <a href="<%= new_love_story_path %>" target="_blank" class="icon-btn icon-share_story">分享爱的故事</a>
+            <%- else %>
+              <a href="/users/sign_in?return_to=<%= new_love_story_url %>" class="icon-btn icon-share_story" target="_blank" data-confirm="登录网站后才能分享爱的故事,是否现在登录?">分享爱的故事</a>
+            <%- end %>
+          </div>
+          <div class="list">
+            <div class="thumbnails js-msnry">
+              <%- @love_stories.each do |love_story| %>
+                <div class="span3 thumbnail">
+                  <% if love_story.love_story_images.count > 0 %>
+                    <a href="javascript:;" class="icon-btn icon-pic"></a>
+                  <% end %>
+                  <h5 class="author">
+                    <%= link_to "#{love_story.user_name}", get_story_info_love_stories_path(love_story_id: love_story), class: 'text-blue', remote: true %>
+                  </h5>
+                  <span class="time"><%= love_story.created_at.try(:to_date) %></span>•<span class="address"><%= Area.find(love_story.area_id).try(:root).try(:name) %></span>
+                  <p class="J_resulte dot_linet1 paragraph">
+                    <%= love_story.content %>
+                  </p>
+                </div>
+              <%- end %>
+
+            </div>
+            <div class="pagination pagination-centered">
+              <%= paginate @love_stories, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
+            </div>
+          </div>
+        </div>
+        <div class="right_small pull-right">
+          <div class="big_menu index_main">
+            <div class="media media_chann">
+              <a class="pull-left" href="/images" target="_blank">
+                <i class="icon-chann icon-chann_imgbase"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+                <p class="media_con nomargin">寻找最新家装图片<br>给您专属的家装设计参考！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="/color_designs" target="_blank">
+                <i class="icon-chann icon-chann_match"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="/color_designs" target="_blank">色彩配搭</a></h4>
+                <p class="media_con nomargin">色彩搭配案例 家居色彩宝典 为您的家装出谋画色！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="http://shuaxinfuwu.nipponpaint.com.cn/" target="_blank">
+                <i class="icon-chann icon-chann_fresh2"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="http://shuaxinfuwu.nipponpaint.com.cn/" target="_blank">立邦刷新服务</a></h4>
+                <p class="media_con nomargin">对话顶尖设计大师，提升家装专业眼界！</p>
+              </div>
+            </div>
+          </div>
+          <!-- 装修丘比特 -->
+          <%= render partial: 'design_images/cubit' %>
+          <div class="mt10">
+            <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank">
+              <%= image_tag @banners[0].try(:file).try(:url, :list_230x230), alt: '' if @banners[0].present? %>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt25">
+        <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank">
+          <%= image_tag @banners[1].try(:file).try(:url, :list_1000x85), alt: '' if @banners[1].present? %>
+        </a>
+      </div>
+      <div class="p010 ul_dot_lists mt25 clearfix">
+        <%= render partial: 'love_story/base/jx_list', locals: {resource: @images_jx, resource_more: @images_jx_more, title: '装修图库精选'} %>
+        <%= render partial: 'love_story/base/jx_list', locals: {resource: @star_jx, resource_more: @star_jx_more, title: '设计之星作品精选'} %>
+        <div class="pull-right">
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank">
+            <%= image_tag @banners[2].try(:file).try(:url, :list_230x230), alt: '' if @banners[2].present? %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<div class="modal hide fade story_modal" id="havepics">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
+    <div class="clearfix">
+      <a href="#" class="pull-left story_photo" target="_blank">
+        <img src="<%= asset_path 'love_story/images/story/modal/story_modal_photo.jpg' %>" alt="" />
+      </a>
+      <div class="author_name">
+        <strong class="mr5 js-author_name">小丸子</strong>
+        <small><i class="icon-i16 icon-map-marker"></i><span class="js-author_area">上海</span></small>
+        <span class="help-block nomargin">
+          上传于 <span class="js-author_date">2014-03-08</span>
+          <div class="pull-right">
+            <span class="pull-left  browse_number">浏览数：8893</span>
+            <!-- Baidu Button BEGIN -->
+            <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left">
+              <!-- <span class="bds_more">分享到：</span> -->
+              <a class="bds_qzone"></a>
+              <a class="bds_tsina"></a>
+              <a class="bds_tqq"></a>
+              <a class="bds_renren"></a>
+              <!-- <a class="bds_t163"></a> -->
+              <a class="bds_more"></a>
+            </span>
+            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+            <script type="text/javascript" id="bdshell_js"></script>
+            <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+            </script>
+            <!-- Baidu Button END -->
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <p class="content dot_linet1 J_resulte js-author_content">加载中...</p>
+    <div class="sliders pr">
+      <div class="slider_container" id="">
+        <ul class="unstyled clearfix nomargin" id="slider_pics">
+          加载中...
+        </ul>
+        <a href="javascript:;" class="slider-prev">prev</a>
+        <a href="javascript:;" class="slider-next">next</a>
+      </div>
+    </div>
+
+    <p class="tips text-center mt25">
+      【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
+      <a href="/love_story/minisite_stars" target="_blank"><i class="icon-i16 icon-enter"></i></a>
+    </p>
+  </div>
+</div>
+<%= render partial: 'upload_success_modal' %>

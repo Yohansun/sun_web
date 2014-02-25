@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="text-center">
+    <script type="text/javascript">
+    (function(nav){
+      if ('mac' === nav.platform.toLowerCase().slice(0, 3)) && (/Constructor/.test(window.HTMLElement)){
+        // 后台加载图片 div.refresh-flash 代码部分
+      } else {
+        // 后台加载flash  <object> 代码部分
+      }
+    }(navigator));
+    </script>
+    <div class="refresh-flash pr">
+      <!-- <a target="_blank" href="javascript:;" class="flash-btn pa">分享爱的故事</a> -->
+      <!-- <a target="_blank" href="javascript:;" class="flash-btn2 pa">上传设计作品</a> -->
+      <div class="index-kv wrapper">
+        <%= image_tag 'love_story/images/index/index-kv2.png', usemap: '#map-kv', class: 'index-kv', alt: '' %>
+        <div class="text-center">
+          <%- if current_user %>
+            <a href="<%= new_love_story_path %>" target="_blank"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
+            <a href="<%= new_user_design_path(current_user) %>" target="_blank"><%= image_tag 'love_story/images/index/index-kv-btn2.png' %></a>
+          <%- else %>
+            <a href="/users/sign_in?return_to=<%= new_love_story_url %>" target="_blank" data-confirm="登录网站后才能分享爱的故事,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
+            <a href="/users/sign_in?return=true" target="_blank" data-confirm="登录网站后才能上传设计作品,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn2.png' %></a>
+          <%- end %>
+        </div>
+      </div>
+      <!-- <map name="map-kv" id="map-kv">
+        <area shape="rect" coords="225,216,387,270" href="#" alt="" />
+      </map> -->
+    </div> <!-- 图片部分 -->
+    <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1400" height="590" style="display:none;">
+      <param name="movie" value="/flash/icolor-yazm-v4.swf" />
+      <param name="quality" value="high" />
+      <param name="wmode" value="opaque" />
+      <param name="swfversion" value="11.0.0.0" />
+      <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+      <param name="expressinstall" value="/Scripts/expressInstall.swf" />
+      <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+      <!--[if !IE]>-->
+      <object type="application/x-shockwave-flash" data="/flash/icolor-yazm-v4.swf" width="1400" height="590">
+        <!--<![endif]-->
+        <param name="quality" value="high" />
+        <param name="wmode" value="opaque" />
+        <param name="swfversion" value="11.0.0.0" />
+        <param name="expressinstall" value="/Scripts/expressInstall.swf" />
+        <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+        <div>
+          <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+          <p><a target="_blank" href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
+        </div>
+        <!--[if !IE]>-->
+      </object>
+      <!--<![endif]-->
+    </object>
+  </div>
+</div>
