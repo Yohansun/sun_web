@@ -52,7 +52,9 @@
               <ul>
                 <% _design.master_design_uploads.order("created_at desc").last(4).each do |_upload| -%>
                   <li>
-                    <img src="<%= _upload.file2(:thumb) -%>" alt="<%= _upload.title -%>" />
+                    <a href="/dialog_celebrity/master_designs/<%=_design.id%>?upload_id=<%=_upload.id%>" style="display:inline;">
+                      <img src="<%= _upload.file2(:thumb) -%>" alt="<%= _upload.title -%>" />
+                    </a>
                   </li>
                 <% end -%>
               </ul>

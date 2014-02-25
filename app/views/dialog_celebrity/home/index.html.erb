@@ -33,7 +33,7 @@
         <img class="media-object" src="<%=@celebrity.avatar(:small2)%>" alt="" width="80" height="80">
       </div>
       <div class="media-body">
-        <h5 class="media-heading"><strong><%=@celebrity.name%></strong> /<%=@celebrity.board.try(:name)%>类专家</h5>
+        <h5 class="media-heading"><strong><%= link_to @celebrity.name, master_interview_dialog_celebrity_master_profile_path(@celebrity) %></strong> /<%=@celebrity.board.try(:name)%>类专家</h5>
         <p class="nomargin"><%=@celebrity.intro%></p>
       </div>
     </div>
@@ -43,7 +43,7 @@
         <img class="media-object" src="<%=@master.avatar(:small2)%>" alt="" width="80" height="80">
       </div>
       <div class="media-body">
-        <h5 class="media-heading"><strong><%=@master.name%></strong> /<%=@master.board.try(:name)%>类专家</h5>
+        <h5 class="media-heading"><strong><%= link_to @master.name,master_interview_dialog_celebrity_master_profile_path(@master)  -%></strong> /<%=@master.board.try(:name)%>类专家</h5>
         <p class="nomargin"><%=@master.intro%></p>
       </div>
     </div>
