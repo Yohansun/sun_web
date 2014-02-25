@@ -1,8 +1,15 @@
 <h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
 <ul class="breadcrumb">
   <li><a href="/">首页</a> > </li>
-  <li><a href="#">精彩活动</a> > </li>
-  <li class="active">设计师活动</li>
+  <li><a href="/dialog_celebrity">对话名人</a> > </li>
+  <% if controller_name == "celebrity_notes" -%>
+    <li><a href="/dialog_celebrity/celebrity_notes">名家手记</a> > </li>
+  <%end -%>
+  <% if controller_name == "editor_treasuries" -%>
+    <li><a href="/dialog_celebrity/editor_treasuries">小编宝典</a> > </li>
+  <%end-%>
+
+  <li class="active"><%=@article.name%></li>
 </ul>
 <hr class="border2 border2_mt2">
 
