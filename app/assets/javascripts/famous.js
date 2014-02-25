@@ -1,4 +1,17 @@
 (function($){
+  $('.js-show_content').css('cursor','pointer');
+  $('.famous_list').on('click','.js-show_content',function(){
+    var $parents = $(this).parents('li');
+    $parents.addClass('bg').find('.famous_answer').show();
+    $parents.find('.js-state').hide().siblings('.js-hide_content').show().css({'cursor':'pointer','margin-right':'8px'});
+  });
+
+  $('.famous_list').on('click','.js-hide_content',function(){
+      // $(this).css()
+      var $parents = $(this).parents('li');
+      $parents.removeClass('bg').find('.famous_answer').hide();
+      $(this).hide().siblings('.js-state').show()
+    });
   //famous ask
   $('.js-text_percentage').bind('keydown keyup', function(){
     var len = $(this).val().length;
