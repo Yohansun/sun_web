@@ -31,7 +31,7 @@ $(function(){
           <ul class="unstyled clearfix">
             <% @celebrities.each do |_celebrity| -%>
               <li>
-                <a class="help-block" href="<%= master_interview_dialog_celebrity_master_profile_path(_celebrity) -%>"><img src="images/famous/online/1.jpg"></a>
+                <a class="help-block" href="<%= master_interview_dialog_celebrity_master_profile_path(_celebrity) -%>"><img src="<%= _celebrity.avatar(:middle1) -%>"></a>
                 <p class="nomargin text-center"><%=_celebrity.board.name-%></p>
                 <p class="nomargin text-center"><strong><%=_celebrity.name-%></strong></p>
                 <p><a href="<%= new_dialog_celebrity_celebrity_question_path(master_id: _celebrity.id) -%>" class="btn btn-warning">我要提问</a></p>
