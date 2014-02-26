@@ -1,0 +1,243 @@
+@charset "utf-8";
+
+/*== filters ==*/
+.nav a,
+.nav span{
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.nav span,
+.slide-1 h1,
+.slide-1 p,
+.slider-bin h2{
+  text-indent: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.wrapper, .subnav{
+  margin-left: auto;
+  margin-right: auto;
+}
+.indent{
+  text-indent: 2em;
+}
+
+body{
+  background: url(<%= asset_path 'yda2014/bg.jpg'%>) no-repeat top center;
+}
+.header{
+  background: url(<%= asset_path 'yda2014/header.png'%>) repeat-x;
+  height: 110px;
+  min-width: 1000px;
+  border-bottom: 1px solid #d20606;
+}
+.wrapper{
+  width: 1000px;
+}
+.logo{
+  margin: 15px;
+}
+.nav li{
+  float: left;
+}
+.nav a{color: #000;
+  display: block;
+  width: 110px;
+  height: 65px;
+  padding-top: 45px;
+}
+.nav span{
+  background: url(<%= asset_path 'yda2014/nav.png'%>) no-repeat;
+  display: block;
+  width: 110px;
+  height: 40px;
+}
+.nav-1 span{
+  background-position: 40px 10px;
+}
+.nav-2 span{
+  background-position: -52px 10px;
+}
+.nav-3 span{
+  background-position: -164px 10px;
+}
+.nav-4 span{
+  background-position: -272px 10px;
+}
+.nav-5 span{
+  background-position: -383px 10px;
+}
+.nav-6 span{
+  background-position: -492px 10px;
+}
+.nav-active a, .nav a:hover{
+  background: #d20606;
+}
+.nav-active .nav-1 span,.nav-1:hover span{
+  background-position: 40px -30px;
+}
+.nav-active .nav-2 span,.nav-2:hover span{
+  background-position: -52px -30px;
+}
+.nav-active .nav-3 span,.nav-3:hover span{
+  background-position: -164px -30px;
+}
+.nav-active .nav-4 span,.nav-4:hover span{
+  background-position: -272px -30px;
+}
+.nav-active .nav-5 span,.nav-5:hover span{
+  background-position: -383px -30px;
+}
+.nav-active .nav-6 span,.nav-6:hover span{
+  background-position: -492px -30px;
+}
+.footer{
+  min-width: 1000px;
+  background: #fff;
+  box-shadow: 0 -1px 0px rgba(0,0,0,0.5);
+}
+.footer .wrapper{
+  width: 970px;
+  padding: 30px 15px 20px;
+}
+.footer,.footer a{
+  color: #424242;
+}
+.footer .jiathis_style{
+  margin-top: 10px;
+}
+.footer .jiathis_style span{
+  margin-right: 4px;
+}
+.container{
+  height: 668px;
+  margin-top: 86px;
+  margin-bottom: 57px;
+  overflow: hidden;
+}
+.slider-bin{
+  width: 500em;
+  height: 668px;
+}
+.slide-1, .slide-2, .slide-3, .slide-4, .slide-5, .slide-6{
+  float: left;
+  width: 960px;
+  height: 668px;
+  margin: 0 20px;
+}
+.slide-1{
+  background: url(<%= asset_path 'yda2014/index-banner.png'%>) no-repeat top center;
+}
+.slide-2, .slide-3, .slide-4, .slide-5, .slide-6{
+  background: url(<%= asset_path 'yda2014/bin.png'%>) no-repeat;
+}
+.slider-bin h2{
+  background: url(<%= asset_path 'yda2014/title.png'%>) no-repeat;
+  height: 38px;
+  margin: 19px;
+}
+.slide-2 h2{
+  background-position: 0 0;
+}
+.slide-3 h2{
+  background-position: 0 -38px;
+}
+.slide-4 h2{
+  background-position: 0 -76px;
+}
+.slide-5 h2{
+  background-position: 0 -114px;
+}
+.slide-6 h2{
+  background-position: 0 -152px;
+}
+.subnav li{
+  width: 123px;
+  height: 53px;
+  font: bold 24px/40px "Microsoft Yahei";
+  display: inline-block;
+  margin: 10px 18px;
+  color: #393939;
+  cursor: pointer;
+  *display: inline;
+  *zoom: 1;
+}
+li.sub-active,.article-list li{
+  background: url(<%= asset_path 'yda2014/subnav.png'%>) no-repeat;
+}
+.article{
+  padding: 0 50px;
+}
+.article-list li{
+  background-position: -145px 5px;
+  padding-left: 12px;
+  line-height: 1.5;
+}
+
+/*== slide-2 ==*/
+.slide-2 p{
+  margin: 30px 0;
+  line-height: 2;
+}
+.slide-2 .article-list li{
+  overflow: hidden;
+  margin: 50px 0;
+}
+.slide-2 .article-list p{
+  margin: -5px 0 0 85px;
+}
+.slide-2 strong{
+  float: left;
+}
+.slide-2 a{
+  color: #000;
+}
+
+/*== slide-3 ==*/
+.slide-3 .article-list li,
+.slide-3 li p,
+.slide-4 li,
+.slide-5 li,
+.slide-6 .article-list li{
+  margin: 15px 0;
+}
+.slide-3 a{
+  color: #d20606;
+  font-style: italic;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.disc-styled,.disc-styled li{
+  background: none;
+  list-style: disc inside;
+  padding-left: 0;
+}
+
+/*== slide-4 ==*/
+.slide-4 .article,.slide-5 .article{
+  padding-top: 30px;
+}
+.slide-4 li{
+  overflow: hidden;
+}
+.slide-4 span{
+  float: left;
+}
+.slide-4 p{
+  margin-left: 140px;
+}
+/*== slide-6 ==*/
+.slide-6 h3{
+  font-size: 18px;
+}
+.slide-6 b{
+  float: right;
+  font: 18px "Microsoft Yahei";
+}
+.slide-6 p{
+  *float: left;
+}
+.slide-6 small{
+  color: #666;
+  *display: block;
+}
