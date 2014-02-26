@@ -157,11 +157,11 @@
             <p class="clearfix form_mata linet1">
               <i class="icon-i30 icon-question_mark"></i>
               <span>一句话描述您的疑问</span>
-              <span>
+              <div style="color: red;">
                 <% if flash[:notice].present? -%>
                   <%= flash[:notice] -%>
                 <% end -%>
-              </span>
+              </div>
             </p>
             <fieldset class="pr">
               <input type="text" id="" name="celebrity_question[name]" class="question_name js-text_percentage nomargin" placeholder="请在这里概述您的问题" data-max="50">
