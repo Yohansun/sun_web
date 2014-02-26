@@ -3,10 +3,13 @@
 <style type="text/css">
 #upload_photo{background-image: url(<%= asset_path 'love_story/images/upload/input_file.jpg'%>);}
 #upload_photo_queue{ display: none;}
+.textarea{
+  padding: 4px 6px;
+}
 </style>
 <%- end %>
 <%- content_for :tail do %>
- <%= javascript_include_tag "jquery.uploadify.js" %>
+ <%= javascript_include_tag "/resources/js/plugins/exp/exp","jquery.uploadify.js" %>
   <script type="text/javascript" charset="utf-8">
     <%- session_key = Rails.application.config.session_options[:key] -%>
     $(function() {
@@ -125,7 +128,7 @@
               <h5 class="pic_modal_header nomargin">
                 本地上传
               </h5>
-              <div class="m020">
+              <div class="mh20">
                 <p class="tips">
                   共
                   <span class="nopadding" id="upload-num">0</span>
