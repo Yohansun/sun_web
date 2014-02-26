@@ -62,21 +62,21 @@
       <% if @board.present? %>
       <h5 class="title nopadding"><%= @board.name -%></h5>
       <% key_scopes = @board.key_scopes %>
-      <% if key_scopes.count > 0 %>
-        <form action="" class="search_tags_form">
-          <% @board.key_scopes.each_with_index do |_key_scope,_index| -%>
-            <fieldset class="<%= _index > 0 ? 'dott1' : '' %>">
-              <label for=""><%= _key_scope.name -%></label>
-              <div class="tags">
-                <% _key_scope.key_arr.each do |_key| -%>
-                  <a href="javascript:;" data-keyword="<%=@board_id.present? ? @board_id : ''%>" class="tag a_hover_red question_keyword"><%= _key -%></a>
-                  &nbsp;
-                <%end -%>
-              </div>
-            </fieldset>
-          <%end -%>
-        </form>
-      <%end-%>
+        <% if key_scopes.count > 0 %>
+          <form action="" class="search_tags_form">
+            <% @board.key_scopes.each_with_index do |_key_scope,_index| -%>
+              <fieldset class="<%= _index > 0 ? 'dott1' : '' %>">
+                <label for=""><%= _key_scope.name -%></label>
+                <div class="tags">
+                  <% _key_scope.key_arr.each do |_key| -%>
+                    <a href="javascript:;" data-keyword="<%=@board_id.present? ? @board_id : ''%>" class="tag a_hover_red question_keyword"><%= _key -%></a>
+                    &nbsp;
+                  <%end -%>
+                </div>
+              </fieldset>
+            <%end -%>
+          </form>
+        <%end-%>
       <%end-%>
 
       <ul class="unstyled famous_list js-list_parent">

@@ -11,8 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140226024715) do
 
+ActiveRecord::Schema.define(:version => 20140223050023) do
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
     t.string   "name"
@@ -131,22 +131,6 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "celebrities", :force => true do |t|
-    t.string   "name",                                  :null => false
-    t.string   "intro",                 :default => ""
-    t.integer  "celebrity_category_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-  end
-
-  add_index "celebrities", ["celebrity_category_id"], :name => "index_celebrities_on_celebrity_category_id"
-
-  create_table "celebrity_categories", :force => true do |t|
-    t.string   "name",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "celebrity_content_boards", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
@@ -171,15 +155,6 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
   add_index "celebrity_notes", ["celebrity_content_board_id"], :name => "index_celebrity_notes_on_celebrity_content_board_id"
   add_index "celebrity_notes", ["master_profile_id"], :name => "index_celebrity_notes_on_master_profile_id"
   add_index "celebrity_notes", ["recommended"], :name => "index_celebrity_notes_on_recommended"
-
-  create_table "celebrity_question_categories", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "parent_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "celebrity_question_categories", ["parent_id"], :name => "index_celebrity_question_categories_on_parent_id"
 
   create_table "celebrity_question_images", :force => true do |t|
     t.integer  "resource_id"
@@ -394,14 +369,15 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
     t.integer  "collects_count",    :default => 0
     t.integer  "sorts",             :default => 100
     t.boolean  "no_audited",        :default => false
+    t.text     "file_dimensions"
   end
 
   add_index "design_images", ["area_id"], :name => "area_id"
   add_index "design_images", ["audited"], :name => "audited"
   add_index "design_images", ["created_at", "file_file_name", "file_updated_at"], :name => "index_design_images_on_timestamp"
   add_index "design_images", ["created_at", "imageable_id", "imageable_type", "user_id", "edited_color", "audited"], :name => "count_index"
-  add_index "design_images", ["created_at"], :name => "NewIndex5"
   add_index "design_images", ["edited_color"], :name => "edited_color"
+  add_index "design_images", ["file_file_name"], :name => "file_file_name"
   add_index "design_images", ["file_file_size"], :name => "index_design_images_on_file_file_size"
   add_index "design_images", ["imageable_id"], :name => "index_design_images_on_imageable_id"
   add_index "design_images", ["imageable_type"], :name => "index_design_images_on_imageable_type"
@@ -1017,17 +993,27 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
   add_index "image_library_categories", ["title"], :name => "title"
 
   create_table "image_tags", :force => true do |t|
-    t.integer  "design_image_id"
-    t.integer  "image_library_category_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.string   "genre"
+    t.integer "design_image_id"
+    t.integer "image_library_category_id"
+    t.string  "genre"
   end
 
   add_index "image_tags", ["design_image_id", "image_library_category_id"], :name => "index_design_image_id_and_image_library_category_id"
   add_index "image_tags", ["design_image_id"], :name => "design_image_id"
   add_index "image_tags", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
+  add_index "image_tags", ["image_library_category_id"], :name => "image_library_category_id"
   add_index "image_tags", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
+
+  create_table "image_tags_right", :force => true do |t|
+    t.integer  "design_image_id"
+    t.integer  "image_library_category_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "image_tags_right", ["design_image_id"], :name => "design_image_id"
+  add_index "image_tags_right", ["design_image_id"], :name => "index_image_tags_on_design_image_id"
+  add_index "image_tags_right", ["image_library_category_id"], :name => "index_image_tags_on_image_library_category_id"
 
   create_table "inspirations", :force => true do |t|
     t.string   "title"
