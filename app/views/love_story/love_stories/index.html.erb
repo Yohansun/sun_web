@@ -120,7 +120,7 @@
                   <h5 class="author">
                     <%= link_to "#{love_story.user_name}", get_story_info_love_stories_path(love_story_id: love_story), class: 'text-blue', remote: true %>
                   </h5>
-                  <span class="time"><%= love_story.created_at.try(:to_date) %></span>•<span class="address"><%= Area.find(love_story.area_id).try(:root).try(:name) %></span>
+                  <span class="time"><%= love_story.created_at.try(:to_date) %></span>•<span class="address"><%= Area.find_by_id(love_story.area_id).try(:root).try(:name) %></span>
                   <p class="J_resulte dot_linet1 paragraph">
                     <%= love_story.content %>
                   </p>

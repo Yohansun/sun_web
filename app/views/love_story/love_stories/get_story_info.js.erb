@@ -9,7 +9,7 @@
   $('#slider_pics').html('<li>顶尖设计师</li>');
 <%- end %>
 $('.js-author_name').html("<%= @love_story.user_name %>");
-$('.js-author_area').html("<%= Area.find(@love_story.area_id).try(:root).try(:name)%>");
+$('.js-author_area').html("<%= Area.find_by_id(@love_story.area_id).try(:root).try(:name)%>");
 $('.js-author_date').html("<%= @love_story.created_at.to_date %>");
 $('.js-author_content').html("<%= @love_story.content %>");
 $('#havepics').modal('show');
