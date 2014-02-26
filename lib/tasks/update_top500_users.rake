@@ -6,6 +6,29 @@ task :update_top500_users => :environment do
   p "update_sussecc!"
 end
 
+desc "更新top500设计师"
+task :update_top500_users_2 => :environment do
+  open("#{Rails.root}/lib/data/top500_users.csv").readlines.each do |line|
+    username = line.strip
+    user = User.find_by_username(username)
+    user.update_attribute(:top500, 1) if user
+    p "update_sussecc!"
+  end
+end
+
+desc "重新裁图top500users"
+task :reprocess_top500_users => :environment  do
+  user_ids = User.where(top500: true).map(&:id)
+  images = DesignImage.where(user_id: user_ids)
+  num = 0
+  images.each do |image|
+    image.file.reprocess! if image.file.present?
+    num += 1
+    p "reprocess_image! #{num}"
+  end
+
+end
+
 desc "更新top50用户"
 task :update_top50_users => :environment do
   username = ['wangfengbo','daikun','chenzhibin','wangxiaogen','heyongming','liyizhong','jianghuiting',
