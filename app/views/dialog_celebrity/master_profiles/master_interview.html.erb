@@ -105,7 +105,7 @@
               <% if _design.present? -%>
                 <% _design.master_design_uploads.order("created_at desc").each do |_upload| -%>
                   <li>
-                    <a class="bg_imgs" href="master_work.html" target="_blank"><img src="<%= _upload.file2(:interview) -%>" /></a>
+                    <a class="bg_imgs" href="<%=dialog_celebrity_master_design_path(_design.id,upload_id: _upload.id)%>" target="_blank"><img src="<%= _upload.file2(:interview) -%>" /></a>
                   </li>
                 <%end-%>
               <%end-%>

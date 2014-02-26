@@ -3,7 +3,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
   include CommonModule
   before_filter :authenticate_user!,only: [:new]
   before_filter :get_page_data,:only => [:index,:new]
-  skip_before_filter :verify_authenticity_token, only: [:upload_image]
+  skip_before_filter :verify_authenticity_token, only: [:create,:upload_image]
   def index
     @banners = IBanner.page_name('名人问答').order("position ASC")
     @new_designs = MasterDesign.order("updated_at desc").limit(5)
@@ -32,11 +32,12 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
 
   def refresh_questions
     @board_id = params[:board_id]
-    if params[:keyword].present?
+    @keyword = params[:keyword]
+    if @keyword.present?
       if @board_id
-        @questions = CelebrityQuestion.where("celebrity_content_board_id = ? and name like ?",@board_id.to_i,"%#{params[:keyword]}%").order("updated_at desc")
+        @questions = CelebrityQuestion.where("celebrity_content_board_id = ? and name like ?",@board_id.to_i,"%#{@keyword}%").order("updated_at desc")
       else
-        @questions = CelebrityQuestion.where("name like ?","%#{params[:keyword]}%").order("updated_at desc")
+        @questions = CelebrityQuestion.where("name like ?","%#{@keyword}%").order("updated_at desc")
       end
     elsif params[:key].present?
       if params[:board_id].present?
