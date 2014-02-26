@@ -40,10 +40,10 @@ class Manage::HomeKvsController < Manage::BaseController
 
 	def kv_insert
 		if params[:insert].present? && params[:insert].to_i < 5
-			@kv = HomeKv.new(position: params[:insert].to_i + 1)
+			@kv = HomeKv.new(position: params[:insert])
 			last_kv = HomeKv.find_by_position(5)
-			HomeKv.where("position > ?",params[:insert]).each {|a| a.increment!(:position)}
-			last_kv.destroy
+      last_kv.destroy
+			HomeKv.where("position >= ?",params[:insert]).each {|a| a.increment!(:position)}
 			@kv.save
 			redirect_to home_kvs_path(sort: @kv.position)
 		else
