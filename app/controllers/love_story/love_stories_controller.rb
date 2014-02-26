@@ -46,12 +46,13 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
       area_id = current_user.area_id
       user_name = current_user.display_name
       @love_story = LoveStory.create(content: content,user_id: current_user.id,area_id: area_id,user_name: user_name,come_from: 'icolor')
-      params[:story_image_ids].each do |story_image_id|
-        story_image = LoveStoryImage.find story_image_id
-        story_image.love_story_id = @love_story.id
-        story_image.save
+      if params[:story_image_ids].present?
+        params[:story_image_ids].each do |story_image_id|
+          story_image = LoveStoryImage.find story_image_id
+          story_image.love_story_id = @love_story.id
+          story_image.save
+        end
       end
-
     else
       render js: "alert('请先登录!');" and return
     end
