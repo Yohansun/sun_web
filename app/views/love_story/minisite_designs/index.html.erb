@@ -1,0 +1,129 @@
+<%- content_for :tail do %>
+  <script type="text/javascript">
+    $(function(){
+      var options = {
+        data: data
+      }
+      var sel = new LinkageSelect(options);
+      sel.bind('.level_1', <%= params[:province_id].present? ? params[:province_id] : "null" %>, '请选择省');
+      sel.bind('.level_2', <%= params[:city_id].present? ? params[:city_id] : "null" %>, '请选择市');
+    });
+  </script>
+<%- end %>
+<div class="container-fluid bann_green_skin show">
+  <div class="banner"></div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <div class="ph10 clearfix">
+        <div class="left_big pull-left">
+          <div class="index_main clearfix">
+            <%= form_tag '/love_story/minisite_designs', method: :get, class: 'pull-left form_search nomargin form-inline' do %>
+              <strong class="label-text">地区:</strong>
+              <select id="province" class="level_1 input-small" name="province_id"></select>
+              <select id="city" class="level_2 input-small" name="city_id"></select>
+              <button class="btn">确定</button>
+            <% end %>
+            <%= form_tag '/love_story/minisite_designs', method: :get, class: 'pull-right form_search nomargin' do %>
+              <input type="text" class="nomargin pull-left" placeholder="搜名字" name="title" value="<%= params[:title] if params[:title].present? %>" />
+              <button class="btn btn-search pull-left"><i class="icon-i16 icon-search_white"></i></button>
+            <% end %>
+          </div>
+          <div class="mt10">
+            <%- if current_user %>
+              <% if current_user.common_user? %>
+                <a href="javascript:alert('很抱歉,普通用户会员不能上传作品.');" class="icon-btn icon-upload_works" target="_blank">上传设计作品</a>
+              <% else %>
+                <a href="<%= new_user_design_path(current_user,come_from: 'icolor',return_to: "#{request.original_url}") %>" class="icon-btn icon-upload_works" target="_blank">上传设计作品</a>
+              <% end %>
+            <%- else %>
+              <a href="/users/sign_in?return_to=<%= request.original_url %>" class="icon-btn icon-upload_works" target="_blank" data-confirm="只有设计师和家装公司在登录后才能上传作品,是否现在登录?">上传设计作品</a>
+            <%- end %>
+          </div>
+          <div class="eq_hi_list">
+            <div class="thumbnails noborder">
+              <% @minisite_designs.each do |design| %>
+                <div class="span3 thumbnail">
+                  <%- if design.cover_img %>
+                    <a href="<%= user_design_path(design.user_id, design) %>" target="_blank" class="help-block text-center">
+                      <%= image_tag design.cover_img.file.url(:mini_design), alt: '' %>
+                    </a>
+                  <%- end %>
+                  <h5 class="dot_linet1 title pr">
+                    <a href="<%= user_asks_path(design.user_id) %>" target="_blank" class="btn_invite pa"></a>
+                    <a href="<%= user_design_path(design.user_id, design) %>" target="_blank" class="a_hover_red"><%= design.title %></a>
+                  </h5>
+                  <span class="author"><%= design.user.display_name %></span>
+                  <p class="clearfix">
+                    <span class="pull-right"><i class="icon-i16 icon-xin"></i><%=design.comments.length %></span>
+                    风格: <%= design.design_style_names %>
+                  </p>
+                </div>
+              <% end %>
+            </div>
+            <div class="pagination pagination-centered">
+              <%= paginate @minisite_designs, :window => 3, :outer_window => 3, :left => 5, :right => 3 %>
+            </div>
+          </div>
+        </div>
+        <div class="right_small pull-right">
+          <div class="big_menu index_main">
+            <div class="media media_chann">
+              <a class="pull-left" href="#" target="_blank">
+                <i class="icon-chann icon-chann_master"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="#" target="_blank">对话名人</a></h4>
+                <p class="media_con nomargin">直面室内设计专家，为你解决装修问题！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="/images" target="_blank">
+                <i class="icon-chann icon-chann_imgbase"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="/images" target="_blank">装修图库</a></h4>
+                <p class="media_con nomargin">网罗海量家装图片，锁定心仪设计需求！</p>
+              </div>
+            </div>
+            <div class="media media_chann">
+              <a class="pull-left" href="/refresh_record" target="_blank">
+                <i class="icon-chann icon-chann_fresh3"></i>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><a class="media-heading_link_a" href="/refresh_record" target="_blank">刷新生活</a></h4>
+                <p class="media_con nomargin">分享刷新故事，体验艺术生活！</p>
+              </div>
+            </div>
+          </div>
+          <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 1, title: '最新大师作品' } %>
+          <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 4, title: '装修效果图精华推荐' } %>
+          <%= render partial: 'love_story/base/tl_list', locals: { i_column_type_id: 5, title: '本周最热装修设计' } %>
+        </div>
+      </div>
+      <div class="index_main mt10">
+        <div class="ul_dot_lists clearfix">
+          <%= render partial: 'love_story/base/jx_list', locals: {resource: @images_jx, resource_more: @images_jx_more, title: '装修图库精选'} %>
+          <%= render partial: 'love_story/base/jx_list', locals: {resource: @star_jx, resource_more: @star_jx_more, title: '设计之星作品精选'} %>
+          <div class="pull-right">
+            <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank">
+              <%= image_tag @banners[0].try(:file).try(:url, :list_230x230), alt: '' if @banners[0].present? %>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="rebanner mt10 pull-left">
+          <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank">
+            <%= image_tag @banners[1].try(:file).try(:url, :list_670x85), alt: '' if @banners[1].present? %>
+          </a>
+        </div>
+        <div class="rebanner mt10 pull-right">
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank">
+            <%= image_tag @banners[2].try(:file).try(:url, :list_310x85), alt: '' if @banners[2].present? %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

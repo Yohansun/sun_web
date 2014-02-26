@@ -1,0 +1,159 @@
+<%- content_for :head do %>
+ <%= stylesheet_link_tag "/resources/js/plugins/exp/css/style" %>
+<style type="text/css">
+#upload_photo{background-image: url(<%= asset_path 'love_story/images/upload/input_file.jpg'%>);}
+#upload_photo_queue{ display: none;}
+</style>
+<%- end %>
+<%- content_for :tail do %>
+ <%= javascript_include_tag "jquery.uploadify.js" %>
+  <script type="text/javascript" charset="utf-8">
+    <%- session_key = Rails.application.config.session_options[:key] -%>
+    $(function() {
+      var total = 9 // 总共允许的个数
+      var now = 0   // 现在已经上传的个数
+      var uploads = $('#uploads')
+      var num = $('#upload-num')    // 现在的节点
+      var size = $('#upload-size')  // 总共的节点
+
+      $('#upload_photo').uploadify({
+        swf : '/uploadify/uploadify.swf',
+        cancelImage : '/uploadify/uploadify-cancel.png',
+        //skipDefault : ['onSelect'],
+        progressData : 'percentage',
+        buttonText : "<a class='imageUploader-button nomargin'></a>",
+        fileTypeDesc : '图片文件',
+        fileTypeExts : '*.jpg; *.png; *.gif;',
+        successTimeout : 6000,
+        fileSizeLimit : '2MB',
+        queueSizeLimit: 9,
+        width : 84,
+        height : 84,
+        multi : true,
+        auto : true,
+        checkExisting : false,
+        transparent : true,
+        uploader : '/love_story/love_story_images',
+        onUploadSuccess : function(file, data, response) {
+          var dat = eval('(' + data + ')');
+          if (dat.result == 'success') {
+            $.getScript(dat.upload, function(){
+            });
+            var len = uploads.children().length
+            num.text(len)
+            size.text(9 - len)
+            now = len
+            total = 9 - len
+            if(total<=0){
+              $("#upload_photo").hide();
+            }
+          }else{
+            alert("图片上传失败");
+          };
+        },
+        postData : {
+            '_http_accept': 'application/javascript',
+            'format' : 'json',
+            '_method': 'post',
+            '<%= session_key %>' : '<%= cookies[session_key] %>',
+            'authenticity_token': '<%= form_authenticity_token %>'
+        },
+        onUploadError : function(file, errorCode, errorMsg, errorString) {
+          alert('您的网络不给力，请稍后尝试'+ errorCode + errorMsg);
+        },
+        onUploadStart : function(){
+          //$("#upload_going").show();
+        },
+        onUploadComplete : function(){
+          //$("#upload_going").hide();
+        }
+      });
+
+
+
+    });
+    function remote(id) {
+      var size = parseInt($('#upload-size').text());
+      var num = parseInt($('#upload-num').text());
+      $.post('<%=del_image_love_story_images_path%>', {id: id}, function(data){
+        if(data.result == 'ok'){
+          $('#story_image_'+id).remove();
+          $("#upload_photo").show();
+          $('#upload-num').text(num - 1)
+          $('#upload-size').text(size + 1)
+        }else{
+          alert("删除失败！");
+        }
+      })
+    }
+  </script>
+<%- end %>
+<div class="container-fluid bann_green_skin">
+  <div class="banner">
+    <div class="wrapper">
+      <%= image_tag 'love_story/images/banners/banner2.jpg', usemap: '#story_kv', alt: '' %>
+      <map name="story_kv" name="story_kv">
+        <area shape="rect" coords="56,253,250,290" href="/love_story/minisite_stars" target="_blank" alt="" />
+      </map>
+    </div>
+  </div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <%= form_tag '/love_story/love_stories', remote: true, class: 'main form_upload exp-holder' do %>
+      <legend class="text-center legend noborder"><em>在</em>此记录爱的故事</legend>
+      <fieldset class="">
+        <textarea name="love_story[content]" id="" cols="" rows="" class="textarea js-text_percentage J_resulte" data-max="300"></textarea>
+        <div class="textarea_mata text-right">
+          <span>当前已输入 </span>
+          <span class="js-text_lenth_show">0</span>
+          <span> 个字符，您还可以输入</span>
+          <span class="js-text_restlenth">300</span>
+        </div>
+      </fieldset>
+      <fieldset class="btn_group">
+        <span class="exp-block-trigger">
+          <i class="icon-i16 icon-face"></i>
+          表情
+        </span>
+
+
+        <span class="noborder pr js-show_picture_modal">
+          <i class="icon-i16 icon-picture"></i>
+          图片
+          <div class="exp-layer picture_modal">
+            <div class="holder">
+              <h5 class="pic_modal_header nomargin">
+                本地上传
+              </h5>
+              <div class="m020">
+                <p class="tips">
+                  共
+                  <span class="nopadding" id="upload-num">0</span>
+                  张，还能上传
+                  <span class="nopadding" id="upload-size">9</span>
+                  张
+                  <span class="nopadding">（按住ctrl可选择多张）</span>
+                </p>
+                <div class="form_file clearfix mt10" >
+
+                  <ul id="uploads" class="clearfix imgUploader-queue" >
+                    <li class="upload-file-btn">
+                      <input type="file" id="upload_photo">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a class="exp-close js-hide_picture_modal" href="javascript:;"></a>
+            </div>
+            <a class="exp-tri" href="javascript:;"></a>
+          </div>
+        </span>
+
+
+      </fieldset>
+      <fieldset class="text-center pd30">
+        <button type="submit" class="btn_check">发布我的故事</button>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

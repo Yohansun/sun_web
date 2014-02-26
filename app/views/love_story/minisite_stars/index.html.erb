@@ -1,0 +1,80 @@
+<% content_for :tail do %>
+<script>
+  $(function () {
+    $('.js-grayscale').on('mouseenter mouseleave','li',function(){
+      var that = $(this)
+      var index = that.index() % 4
+      var arr = [0,1,2,3]
+      arr.splice($.inArray(index, arr), 1)
+
+      that.toggleClass('active').siblings().toggleClass('grayscale')
+      .end()
+      .find('p').toggle()
+      .end()
+      .find('.designer-mask').css('top', that.position().top)
+      .find('img').each(function(i){
+        this.style.left = arr[i] * (236 + 8) + 8 + 'px'
+      })
+    });
+  });
+</script>
+<% end %>
+<div class="container-fluid bann_green_skin greatest">
+  <div class="banner"></div>
+  <div class="container">
+    <div class="top-bg"></div>
+    <div class="main">
+      <ul class="nav nav-tabs greatest_tabs" id="greatest_tab">
+        <li class="<%= 'active' if controller_name == 'minisite_stars' %>"><a href="<%= minisite_stars_path %>">设计名家</a></li>
+        <li class="<%= 'active' if controller_name == 'minisite_weekly_stars' %>">
+          <a href="<%= minisite_weekly_stars_path %>">iColor设计之星</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="active ph15" id="designers">
+          <h2 class="title">
+            <img src="<%= asset_path 'love_story/images/greatest/designer_title.jpg'%>" alt="" title="荟萃国内外名家设计师" />
+            <small class="help-block">寻找你身边的顶级室内设计大师，满足你对家的精品需求</small>
+          </h2>
+          <hr class="border2">
+          <div class="list_img mt25 pr">
+            <ul class="thumbnails clearfix unstyled js-grayscale">
+              <% @users.each do |user| %>
+                <% if user.avatar %>
+                  <li class="span4">
+                    <div class="designer pr">
+                      <a href="javascript:;">
+                        <img data-grayscale="grayscale" src="<%=user.avatar.file.url(:greatest)%>" alt="" width="236" height="280" />
+                      </a>
+                      <p class="title pr hide">
+                        <span class="help-block">
+                          <a href="/users/<%=user.id%>/asks" target="_blank" class="btn_invite pa"></a>
+                          <a href="#" target="_blank" class="a_hover_red authorname"><%=user.name %></a>
+                          <small class="nomargin"><%=user.area.name %></small>
+                        </span>
+                        <span class="help-block dot_linet1"><%=user.signature %></span>
+                      </p>
+                    </div>
+
+                    <div class="designer-mask">
+                      <% design = user.designs.order("created_at desc").first %>
+                      <% if design %>
+                        <% design.design_images.order("id asc").limit(3).each do |image| %>
+                          <a href="/users/<%=user.id%>/designs/<%=design.id%>" class=""><img src="<%=image.file.url(:greatest_img) %>" alt="" /></a>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+            <div class="pagination pagination-centered dot_linet1 pt20 mr5">
+              <%= paginate @users %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

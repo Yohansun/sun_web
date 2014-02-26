@@ -167,6 +167,7 @@
   <div class="tab-pane active" id="upload_tab1">
     <%= form_for([current_user, @design], :remote => true, :html => {:multipart => true, :class => "form-horizontal index_main ins_upload_form2 noborder nomargin"}) do |f| %>
     <%= hidden_field_tag "story_id", params[:story_id] %>
+    <%= hidden_field_tag "return_to", params[:return_to] %>
       <h5>上传到作品: <%= @design.title %></h5>
       <div class="clearfix">
         <a href="javascript:;" class="upload_img_btn" id="upload_photo">上传图片</a>

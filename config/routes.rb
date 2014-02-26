@@ -777,6 +777,13 @@ Icolor::Application.routes.draw do
       end
     end
 
+    resources :banner2014minisite do
+      collection do
+        post :create_image
+        post :save_data
+      end
+    end
+
     resources :banner_activities do
       collection do
         post :create_image
@@ -853,6 +860,25 @@ Icolor::Application.routes.draw do
         post :search
       end
     end
+  end
+
+  #2014minisite
+  scope '/love_story', :module => 'love_story' do
+    root to: 'home#index', as: 'love_story_root'
+
+    resources :love_stories do
+      collection do
+        get :get_story_info
+      end
+    end
+    resources :love_story_images do
+      collection do
+        post :del_image
+      end
+    end
+    resources :minisite_designs
+    resources :minisite_stars
+    resources :minisite_weekly_stars
   end
 
 end

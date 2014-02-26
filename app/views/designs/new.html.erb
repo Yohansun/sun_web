@@ -244,6 +244,10 @@
           <% if params[:baicheng_active].present? %>
             <input type="hidden" name="story_id" value="true">
           <% end %>
+          <% if params[:come_from].present? %>
+            <input type="hidden" name="design[come_from]" value="<%= params[:come_from] %>">
+          <% end %>
+          <input type="hidden" name="return_to" value="<%= params[:return_to] if params[:return_to].present? %>">
           <button class="upload_img_btn">上传图片</button>
           <!-- <a href="upload2.html" class="upload_img_btn">上传图片</a> -->
           <span class="help-block text-warning pb25">*红色标注为必填项</span>
