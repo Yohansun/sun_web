@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>icolor-创意未来</title>
+<%= stylesheet_link_tag "reset2014","yda2014"%>
+<%= javascript_include_tag "jquery","yda2014" %>
+<!--[if IE 6]>
+  <script src="js/png.js"></script>
+  <script>
+  PNG.fix('img,div,a,ul,li,i');
+  </script>
+<![endif]-->
+</head>
+
+<body>
+  <div class="header">
+    <div class="wrapper clear">
+      <a href="/" class="logo fl"><img src="<%= asset_path 'yda2014/logo.png'%>" alt="iColor 家的设计师"></a>
+      <ul class="nav fl">
+        <li class="nav-active">
+          <a href="#home" class="nav-1"><span>首页</span></a>
+        </li>
+        <li>
+          <a href="#introduction" class="nav-2"><span>赛事介绍</span></a>
+        </li>
+        <li>
+          <a href="#description" class="nav-3"><span>参赛说明</span></a>
+        </li>
+        <li>
+          <a href="#schedule" class="nav-4"><span>赛事日程</span></a>
+        </li>
+        <li>
+          <a href="#awards" class="nav-5"><span>奖项设置</span></a>
+        </li>
+        <li>
+          <a href="#judger" class="nav-6"><span>评审相关</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <%= yield %>
+
+  <div class="footer">
+    <div class="wrapper clear">
+      <div class="fl">
+        <p>
+          <a href="http://www.icolor.com.cn">返回iColor</a>&nbsp;|&nbsp;
+          <a href="">立邦官网</a>&nbsp;|&nbsp;
+          <a href="">联系我们</a>&nbsp;|&nbsp;
+          <a href="">会员机制</a>&nbsp;|&nbsp;
+          <a href="">网上商城</a>&nbsp;|&nbsp;
+          <a href="">网站声明</a>
+        </p>
+        <p>Copyright 2012 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
+      </div>
+      <!-- JiaThis Button BEGIN -->
+      <div class="jiathis_style fr">
+        <span class="jiathis_txt">分享到：</span>
+        <a class="jiathis_button_tsina"></a>
+        <a class="jiathis_button_tqq"></a>
+        <a class="jiathis_button_renren"></a>
+        <a class="jiathis_button_douban"></a>
+        <a class="jiathis_button_qzone"></a>
+      </div>
+      <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+      <!-- JiaThis Button END -->
+    </div>
+  </div>
+  <%= yield :tail %>
+</body>
+</html>

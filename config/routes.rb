@@ -295,6 +295,7 @@ Icolor::Application.routes.draw do
   match '/yda/2013/agenda' => 'yda2013#agenda'
   match '/yda/2013/prize' => 'yda2013#prize'
   match '/yda/2013/rater' => 'yda2013#rater'
+  match '/yda/2014' => 'yda2014#index'
 
   resources :weekly_tips, only: :index, format: :js
   #个人主页
