@@ -282,7 +282,7 @@ GEM
       mime-types (>= 1.16)
     ruby-ole (1.2.11.4)
     ruby-pinyin (0.2.4)
-    rubyzip (0.9.9)
+    rubyzip (1.1.0)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
     sass (3.1.17)
@@ -407,7 +407,7 @@ DEPENDENCIES
   remotipart (~> 1.0)
   rest-client
   ruby-pinyin
-  rubyzip
+  rubyzip (~> 1.1.0)
   rvm-capistrano
   sass-rails (~> 3.2.3)
   savon
