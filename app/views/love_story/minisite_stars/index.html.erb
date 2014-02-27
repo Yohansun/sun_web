@@ -1,20 +1,23 @@
 <% content_for :tail do %>
 <script>
   $(function () {
-    $('.js-grayscale').on('mouseenter mouseleave','li',function(){
-      var that = $(this)
-      var index = that.index() % 4
-      var arr = [0,1,2,3]
-      arr.splice($.inArray(index, arr), 1)
+    $('.js-grayscale').on('click','li',function(){
+     var that = $(this)
+     var index = that.index() % 4
+     var arr = [0,1,2,3]
+     arr.splice($.inArray(index, arr), 1)
 
-      that.toggleClass('active').siblings().toggleClass('grayscale')
-      .end()
-      .find('p').toggle()
-      .end()
-      .find('.designer-mask').css('top', that.position().top)
-      .find('img').each(function(i){
-        this.style.left = arr[i] * (236 + 8) + 8 + 'px'
-      })
+     that.addClass('active').siblings().addClass('grayscale')
+     .end()
+     .find('p').show()
+     .end()
+     .find('.designer-mask').css('top', that.position().top)
+     .find('img').each(function(i){
+      this.style.left = arr[i] * (236 + 8) + 8 + 'px'
+     })
+    }).on('mouseleave', 'li', function(){
+     $(this).removeClass('active').siblings().removeClass('grayscale')
+     .end().find('p').hide()
     });
   });
 </script>
@@ -51,7 +54,7 @@
                         <span class="help-block">
                           <a href="/users/<%=user.id%>/asks" target="_blank" class="btn_invite pa"></a>
                           <a href="#" target="_blank" class="a_hover_red authorname"><%=user.name %></a>
-                          <small class="nomargin"><%=user.area.name %></small>
+                          <small class="nomargin"><%=user.area.try(:parent).try(:name) %></small>
                         </span>
                         <span class="help-block dot_linet1"><%=user.signature %></span>
                       </p>
