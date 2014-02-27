@@ -89,7 +89,7 @@ gem "sitemap_generator"
 #定时更新sitemap
 gem 'whenever', :require => false
 
-gem 'rubyzip'
+gem "rubyzip", "~> 1.1.0"
 
 gem 'hipchat'
 
