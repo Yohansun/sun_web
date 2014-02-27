@@ -85,23 +85,34 @@
             <li class="divider-vertical_footer"></li>
 
             <li>
-              <!-- JiaThis Button BEGIN -->
-              <div id="ckepop" class="jiathis_area none clearfix share_area">
-                <span class="jiathis_txt">分享：</span>
-                <a class="jiathis_button_renren"></a>
-                <a class="jiathis_button_douban"></a>
-                <a class="jiathis_button_tsina"></a>
-                <a target="_blank" href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
-                <!-- <a class="jiathis_counter_style"></a> -->
-              </div>
-              <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-              <!-- JiaThis Button END -->
+              <!-- Baidu Button BEGIN -->
+              <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left share_area">
+                <span class="pull-left" style="margin-top: 3px;">分享</span>
+                <a class="bds_renren"></a>
+                <a class="bds_douban"></a>
+                <a class="bds_tsina"></a>
+                <!-- <a class=""></a> -->
+                <!-- <a class="bds_t163"></a> -->
+                <a class="bds_more">更多</a>
+              </span>
+              <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+              <script type="text/javascript" id="bdshell_js"></script>
+              <script type="text/javascript">
+              document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+              </script>
+              <!-- Baidu Button END -->
             </li>
           </ul><!-- right nav end -->
         </div>
       </div>
     </div>
     <%= javascript_include_tag "love_story","/location.js","LinkageSelect.js" %>
+    <script type="text/javascript">
+    var bds_config = {
+    'bdText':'#为爱刷新# 我刚在iColor网站上说出了我的“爱的故事”，听说被评选上就能获得减免全部装修费用的机会！小伙伴们快来晒晒你们爱的故事吧',
+    'bdUrl':'http://www.icolor.com.cn/love_story',
+    'bdPic':"<%= asset_path 'icolor_minisite.gif' %>"};
+    </script>
     <%= yield :tail %>
   </body>
 </html>
