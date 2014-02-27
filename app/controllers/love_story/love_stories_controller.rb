@@ -27,7 +27,7 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
       @love_stories = @love_stories.where(["user_name LIKE ?", "%#{params[:user_name]}%"])
     end
 
-    @love_stories = @love_stories.page(params[:page]).per(1)
+    @love_stories = @love_stories.page(params[:page]).per(12)
 
     @images_jx = IColumnData.show_data(2).limit(5)
     @images_jx_more = IColumnData.where(i_column_type_id: 2,position: 0).first
