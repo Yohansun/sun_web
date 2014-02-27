@@ -1,0 +1,7 @@
+<%- @love_story_stars.each do |user| %>
+  <% if user.avatar %>
+    <li>
+      <%= image_tag(user.avatar.file(:love_story_list), :alt => '') %>
+    </li>
+  <% end %>
+<%- end %>

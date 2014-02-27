@@ -24,7 +24,7 @@ class LoveStory::MinisiteDesignsController < LoveStory::BaseController
       @minisite_designs = @minisite_designs.where(["title LIKE ?", "%#{params[:title]}%"])
     end
 
-    @minisite_designs = @minisite_designs.page(params[:page]).per(1)
+    @minisite_designs = @minisite_designs.page(params[:page]).per(12)
 
     @images_jx = IColumnData.show_data(2).limit(5)
     @images_jx_more = IColumnData.where(i_column_type_id: 2,position: 0).first

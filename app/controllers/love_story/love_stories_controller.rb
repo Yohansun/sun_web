@@ -27,7 +27,7 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
       @love_stories = @love_stories.where(["user_name LIKE ?", "%#{params[:user_name]}%"])
     end
 
-    @love_stories = @love_stories.page(params[:page]).per(12)
+    @love_stories = @love_stories.page(params[:page]).per(1)
 
     @images_jx = IColumnData.show_data(2).limit(5)
     @images_jx_more = IColumnData.where(i_column_type_id: 2,position: 0).first
@@ -62,6 +62,8 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
   def get_story_info
     if params[:love_story_id].present?
       @love_story = LoveStory.find_by_id(params[:love_story_id])
+      @love_story.increment!(:view_count) if @love_story
+      @love_story_stars = User.where("top50 = ?",true).sample(5)
       @love_story_user = User.find_by_id(@love_story.user_id)
     else
       render nothing: true

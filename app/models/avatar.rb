@@ -3,7 +3,7 @@ require "open-uri"
 class Avatar < ActiveRecord::Base
   belongs_to :user
   has_attached_file :file,
-    :styles => {:round => ["36x36>", :png],:upload => "155x135#", :profile => "194x194#", :greatest => "236x280#", :icon => "48x48#", :thumb => "78x70#", :access_icon => "57x57#", :access_wall => "99x99#"},
+    :styles => {:round => ["36x36>", :png],:upload => "155x135#", :profile => "194x194#", :greatest => "236x280#",:love_story_list => "132x156#", :icon => "48x48#", :thumb => "78x70#", :access_icon => "57x57#", :access_wall => "99x99#"},
     :whiny_thumbnails => true,
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension",

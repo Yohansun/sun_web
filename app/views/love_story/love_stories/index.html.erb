@@ -115,7 +115,7 @@
               <%- @love_stories.each do |love_story| %>
                 <div class="span3 thumbnail">
                   <% if love_story.love_story_images.count > 0 %>
-                    <a href="javascript:;" class="icon-btn icon-pic"></a>
+                    <%= link_to "", get_story_info_love_stories_path(love_story_id: love_story), class: 'icon-btn icon-pic image_modal', remote: true %>
                   <% end %>
                   <h5 class="author">
                     <%= link_to "#{love_story.user_name}", get_story_info_love_stories_path(love_story_id: love_story), class: 'text-blue', remote: true %>
@@ -203,7 +203,7 @@
         <span class="help-block nomargin">
           上传于 <span class="js-author_date">2014-03-08</span>
           <div class="pull-right">
-            <span class="pull-left  browse_number">浏览数：8893</span>
+            <span class="pull-left browse_number">浏览数：<span class="js-author_view_count">123</span></span>
             <!-- Baidu Button BEGIN -->
             <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left">
               <!-- <span class="bds_more">分享到：</span> -->

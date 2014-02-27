@@ -17,25 +17,25 @@
     <div class="navbar navbar-fixed-top navbar_top">
       <div class="navbar-inner">
         <div class="container">
-          <a target="_blank" href="<%= root_path %>">
+          <a href="<%= root_path %>">
             <%= image_tag 'love_story/images/logo.png', class: 'brand', alt: 'iColor' %>
           </a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="<%= 'active' if controller_name == 'home' %>">
-                <a target="_blank" href="<%= love_story_root_path %>">首页</a>
+                <a href="<%= love_story_root_path %>">首页</a>
               </li>
               <li class="<%= 'active' if controller_name == 'love_stories' %>">
-                <a target="_blank" href="<%= love_stories_path %>">爱的故事</a>
+                <a href="<%= love_stories_path %>">爱的故事</a>
               </li>
               <li class="<%= 'active' if controller_name == 'minisite_designs' %>">
-                <a target="_blank" href="<%= minisite_designs_path %>">设计作品展示</a>
+                <a href="<%= minisite_designs_path %>">设计作品展示</a>
               </li>
               <li class="<%= 'active' if controller_name =~ /minisite_weekly_stars|minisite_stars/ %>">
-                <a target="_blank" href="<%= minisite_stars_path %>">设计师精选</a>
+                <a href="<%= minisite_stars_path %>">设计师精选</a>
               </li>
               <li class="">
-                <a target="_blank" href="./5.html">活动说明</a>
+                <a href="javascript:;">活动说明</a>
               </li>
             </ul>
           </div>
@@ -50,12 +50,12 @@
           <%- else %>
             <ul class="nav pull-right">
               <li>
-                <a target="_blank" href="/users/sign_in?return_to=<%= request.original_url %>"><i class="icon-refresh_login"></i>登录</a>
+                <a href="/users/sign_in?return_to=<%= request.original_url %>"><i class="icon-refresh_login"></i>登录</a>
               </li>
               <li class="divider-vertical"></li>
 
               <li>
-                <a target="_blank" href="/users/sign_up?return_to=<%= request.original_url %>"><i class="icon-refresh_register"></i>注册</a>
+                <a href="/users/sign_up?return_to=<%= request.original_url %>"><i class="icon-refresh_register"></i>注册</a>
               </li>
             </ul> <!--unlogin-->
           <%- end %>
@@ -72,10 +72,10 @@
           <p class="pull-left copyright nomargin">Copyright 2013 NIPPON PAINT (CHINA)Co.,Ltd All Rights Reserved</p>
           <ul class="nav pull-right">
             <li>
-              <a class="txt_img_align" style="padding:10px 0;" href="/">去<img class="pad_h5" src="<%=asset_path 'love_story/images/logo_link.png'%>"></a>
+              <a class="txt_img_align" style="padding:10px 0;" href="/" target="_blank">去<img class="pad_h5" src="<%=asset_path 'love_story/images/logo_link.png'%>"></a>
             </li>
             <li>
-              <a style="padding:10px 10px 10px 0;" href="/">查看更多案例</a>
+              <a style="padding:10px 10px 10px 0;" href="/" target="_blank">查看更多案例</a>
             </li>
             <li class="divider-vertical_footer"></li>
 
