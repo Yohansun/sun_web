@@ -25,6 +25,9 @@
         $('#upload_success').modal('hide');
         $.get('<%= get_story_info_love_stories_path(love_story_id: params[:love_story_id]) %>');
       });
+      $('.image_modal').bind('ajaxSend', function(event) {
+        $('#havepics').modal('show');
+      });
     })
   </script>
   <script type="text/javascript">
@@ -118,7 +121,7 @@
                     <%= link_to "", get_story_info_love_stories_path(love_story_id: love_story), class: 'icon-btn icon-pic image_modal', remote: true %>
                   <% end %>
                   <h5 class="author">
-                    <%= link_to "#{love_story.user_name}", get_story_info_love_stories_path(love_story_id: love_story), class: 'text-blue', remote: true %>
+                    <%= link_to "#{love_story.user_name}", get_story_info_love_stories_path(love_story_id: love_story), class: 'text-blue image_modal', remote: true %>
                   </h5>
                   <span class="time"><%= love_story.created_at.try(:to_date) %></span>•<span class="address"><%= Area.find_by_id(love_story.area_id).try(:root).try(:name) %></span>
                   <p class="J_resulte dot_linet1 paragraph">
@@ -198,12 +201,12 @@
         <img src="<%= asset_path 'love_story/images/story/modal/story_modal_photo.jpg' %>" alt="" />
       </a>
       <div class="author_name">
-        <strong class="mr5 js-author_name">小丸子</strong>
-        <small><i class="icon-i16 icon-map-marker"></i><span class="js-author_area">上海</span></small>
+        <strong class="mr5 js-author_name">加载中...</strong>
+        <small><i class="icon-i16 icon-map-marker"></i><span class="js-author_area">加载中...</span></small>
         <span class="help-block nomargin">
-          上传于 <span class="js-author_date">2014-03-08</span>
+          上传于 <span class="js-author_date">加载中...</span>
           <div class="pull-right">
-            <span class="pull-left browse_number">浏览数：<span class="js-author_view_count">123</span></span>
+            <span class="pull-left browse_number">浏览数：<span class="js-author_view_count">加载中...</span></span>
             <!-- Baidu Button BEGIN -->
             <span id="bdshare" class="bdshare_t bds_tools get-codes-bdshare pull-left">
               <!-- <span class="bds_more">分享到：</span> -->
