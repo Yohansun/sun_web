@@ -67,21 +67,16 @@
     <div class="tab-pane active" id="upload_tab1">
       <div class="index_main noborder">
         <div class="text-center"><img src="<%= asset_path '2013/success.jpg'%>" alt="" /></div>
-        <!-- <p class="text-center linet1">系统将在 <strong class="text-important" id="jumpTo">5</strong> 秒后自动进入我的个人主页</p> -->
-
         <p class="text-center text-important">您的大作也可同步参与iColor正在进行的以下活动，期待您的参与 </p>
-        <!-- <div class="text-center">
-          <a href="<%= user_path(current_user) %>" class="link_btns">进入我的个人主页</a>
-          <a href="<%=user_design_path(current_user,params[:design_id])%>" class="link_btns">看看我发布的作品</a>
-        </div> -->
-
-        <div class="activity_content">
+        <!-- <form class="activity_content"> -->
+        <%= form_tag update_design_active_user_designs_path(current_user), class: "activity_content"  do %>
           <div class="act_item clearfix linet1">
-            <img class="pad_border pull-left" src="../2013/images/success/upload_sucimg1.jpg">
+            <img class="pad_border pull-left" src="<%=asset_path 'activity-1.jpg'%>">
             <div class="active_content">
               <h4 class="nomargin">
                 <label class="checkbox">
-                  <input type="checkbox" checked>为爱刷新
+                  <input type="checkbox" name="minisite" checked>为爱刷新
+                  <input type="hidden" name="design_id" value="<%=@design.id%>">
                 </label>
               </h4>
 
@@ -93,7 +88,8 @@
           <fieldset class="text-center linet1">
             <button class="upload_img_btn">确&nbsp;&nbsp;定</button>
           </fieldset>
-        </div>
+        <!-- </form> -->
+        <% end %>
       </div>
     </div>
   </div>

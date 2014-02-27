@@ -365,20 +365,14 @@ class DesignsController < ApplicationController
 
   def update_design_active
     @design = Design.find params[:design_id]
-    @design.future_star_active = true if params[:future_star_active]
-    @design.speech = params[:design][:speech] if params[:design][:speech]
-    @design.property_name = params[:property_name] if params[:property_name].present?
-    if params[:baicheng_active]
-      @design.baicheng_active = true
+    if params[:minisite].present?
+      @design.come_from = "icolor"
+      @design.save
+      redirect_to minisite_designs_path
     else
-      @design.baicheng_active = false
-    end
-    @design.save
-    if @design.baicheng_active
-       # redirect_to design_competes_path
-       redirect_to "/love/design_competes/#{params[:design_id]}"
-    else
-      redirect_to user_path(current_user)
+      @design.come_from = nil
+      @design.save
+      redirect_to user_designs_path(current_user)
     end
   end
 
