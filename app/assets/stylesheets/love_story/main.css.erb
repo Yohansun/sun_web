@@ -401,7 +401,10 @@ hr.border2{
   height: 28px;
   padding: 0;
   color: #fff; }
-
+.form_search select,
+.form_search input{
+  font-size: 12px;
+}
 /* modal */
 .story_modal {
   -webkit-border-radius: 0;
@@ -611,6 +614,15 @@ hr.border2{
   background-image: url(<%= asset_path 'love_story/images/banners/banner4.jpg'%>); }
 .greatest .eq_hi_list .thumbnail{
   background: #f5f5f5; }
+
+.greatest .eq_hi_list .img_size{
+  display: table-cell;
+  width: 208px;
+  height: 154px;
+  text-align: center;
+  font-size: 134px;
+  vertical-align: middle;
+  overflow: hidden; }
 
 .greatest .thumbnail .title{
   margin-bottom: 10px; }
@@ -933,17 +945,21 @@ hr.border2{
   margin-top: 4px; }
 
 /* pagination */
-.pagination ul {
-  box-shadow: none; }
-
-.pagination ul > li > a {
+.pagination  a {
   margin: 0 3px;
   border-left-width: 1px;
   color: #7f7f7d;
   padding: 0px 7px;
-  font-size: 12px; }
+  font-size: 12px;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  line-height: 20px;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #dddddd; }
 
-.pagination ul > .active > a {
+.pagination .current {
   background: #f0f2f1;
   color: #ba0e0e; }
 
@@ -982,7 +998,8 @@ hr.border2{
   padding: 0 5px; }
 .list .paragraph {
   color: #686868;
-  padding: 5px; }
+  padding: 5px;
+  word-wrap: break-word; }
 .list .icon-pic {
   position: absolute;
   top: -1px;
@@ -1009,7 +1026,8 @@ hr.border2{
 .eq_hi_list .thumbnail{
   box-shadow: none;
   padding: 9px 10px 8px;
-  margin: 13px 10px 16px 10px; }
+  margin: 13px 10px 16px 10px;
+  height: 300px; }
 
 .eq_hi_list .thumbnail p{
   height: 20px;

@@ -100,7 +100,7 @@
                   <% @minisite_weekly_stars.each do |design| %>
                     <div class="span3 thumbnail">
                       <%- if design.cover_img %>
-                        <a href="<%= user_design_path(design.user_id, design) %>" class="help-block text-center" target="_blank">
+                        <a href="<%= user_design_path(design.user_id, design) %>" class="help-block text-center img_size" target="_blank">
                           <img src="<%= design.cover_img.file.url(:mini_design) %>" title="<%= design.title %>" alt="" />
                         </a>
                       <%- end %>

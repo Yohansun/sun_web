@@ -1,9 +1,12 @@
 <div class="ul_dot_list pull-left">
   <h5><a href="<%= resource_more.url if resource_more %>" target="_blank" class="pull-right a_hover_red"><small class="muted">更多></small></a><%= title %></h5>
-  <ul class="ul_dot">
+  <ul class="ul_dot dot_linet1 nomargin">
     <%- resource.each_with_index do |r,i| %>
       <li class="<%= 'noborder' if i == resource.size - 1 %>">
-        <a href="<%= r.url %>" target="_blank"><%= r.title %></a>
+        <a href="<%= r.url %>" target="_blank">
+          <i class="icon-ul_dot"></i>
+          <%= r.title %>
+        </a>
       </li>
     <%- end %>
   </ul>
