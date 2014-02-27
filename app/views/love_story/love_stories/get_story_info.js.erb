@@ -13,4 +13,23 @@ $('.js-author_area').html("<%= Area.find_by_id(@love_story.area_id).try(:root).t
 $('.js-author_date').html("<%= @love_story.created_at.to_date %>");
 $('.js-author_content').html("<%= @love_story.content %>");
 $('.js-author_view_count').html("<%= @love_story.view_count %>");
-$('#havepics').modal('show');
+// $('#havepics').modal('show');
+
+$('#slider_pics').carouFredSel({
+  items               : 3,
+  direction           : "left",
+  scroll : {
+    items           : 1,
+    duration        : 400,
+    pauseOnHover    : true
+  },
+  prev: {
+    button: '#havepics .slider-prev'
+  },
+  next: {
+    button: '#havepics .slider-next'
+  },
+  auto: {
+    play            : false
+  }
+});
