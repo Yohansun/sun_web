@@ -181,8 +181,20 @@ p.load_info{margin:0 0px 4px 20px;color:#666;}
 
 
 /*upload success*/
-.upload_success .index_main{padding:50px 25px 70px;}
+  /*default*/
+/*.upload_success .index_main{padding:50px 25px 70px;}
 .upload_success p{font-size:14px;margin:65px 25px 0;padding:35px 0 30px;}
+.upload_success .link_btns{display:inline-block;border:1px solid #ddd;padding:10px 13px;font-size:14px;color:#4095ce;margin:0 6px;}*/
+  /*activity*/
+.upload_success .index_main{padding:50px 25px 20px;}
+.upload_success p{font-size:18px;font-family:'Microsoft Yahei';margin:0;padding:5px 0 25px;}
+.activity_content .upload_img_btn{
+  background: url(<%= asset_path "submit_bg.jpg" %>) no-repeat;
+  width: 155px;
+  height: 51px;
+  font: 24px "Microsoft Yahei";
+  color: #712222;
+}
 .upload_success .link_btns{display:inline-block;border:1px solid #ddd;padding:10px 13px;font-size:14px;color:#4095ce;margin:0 6px;}
 
 /*upload more*/

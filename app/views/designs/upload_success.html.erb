@@ -1,25 +1,55 @@
 <% content_for :head do -%>
   <%= stylesheet_link_tag '2013upload'%>
+  <style>
+  .active_content{
+    margin-left: 304px;
+  }
+  .activity_content .act_item{
+    padding: 25px 38px;
+  }
+  .activity_content img.pad_border{
+    border: 1px solid #e2e2e2;
+    width: 286px;
+    height: 216px;
+  }
+  .activity_content h4{
+    font: bold 18px/36px "Microsoft Yahei";
+    color: #e71d36;
+  }
+  .activity_content h5{
+    font: bold 14px/18px "SimSun";
+    color: #666666;
+  }
+  .activity_content p{
+    color: #666666;
+    font: 12px "SimSun";
+  }
+  .activity_content p .text-important{
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 14px;
+  }
+  </style>
 <% end -%>
 <%- content_for :tail do %>
 <script type="text/javascript">
-  function countDown(secs,surl){
-    var jumpTo = document.getElementById('jumpTo');
-    jumpTo.innerHTML=secs;
-    if(--secs>0){
-      setTimeout("countDown("+secs+",'"+surl+"')",1000);
-    }
-    else{
-      location.href=surl;
-    }
-  }
+  // function countDown(secs,surl){
+  //   var jumpTo = document.getElementById('jumpTo');
+  //   jumpTo.innerHTML=secs;
+  //   if(--secs>0){
+  //     setTimeout("countDown("+secs+",'"+surl+"')",1000);
+  //   }
+  //   else{
+  //     location.href=surl;
+  //   }
+  // }
 </script>
 <script type="text/javascript">
-  <%- if params[:return_to].present? %>
-    countDown(5,'<%= params[:return_to] %>');
-  <%- else %>
-    countDown(5,'<%= user_path(current_user) %>');
-  <%- end %>
+  // <%- if params[:return_to].present? %>
+  //   countDown(5,'<%= params[:return_to] %>');
+  // <%- else %>
+  //   countDown(5,'<%= user_path(current_user) %>');
+  // <%- end %>
 </script>
 <% end %>
 <div class="container refresh_main">
@@ -35,12 +65,34 @@
 
   <div class="tab-content upload_success">
     <div class="tab-pane active" id="upload_tab1">
-      <div class="index_main text-center noborder">
-        <img src="<%= asset_path '2013/success.jpg'%>" alt="" />
-        <p class="text-center linet1">系统将在 <strong class="text-important" id="jumpTo">5</strong> 秒后自动进入我的个人主页</p>
-        <div class="text-center">
+      <div class="index_main noborder">
+        <div class="text-center"><img src="<%= asset_path '2013/success.jpg'%>" alt="" /></div>
+        <!-- <p class="text-center linet1">系统将在 <strong class="text-important" id="jumpTo">5</strong> 秒后自动进入我的个人主页</p> -->
+
+        <p class="text-center text-important">您的大作也可同步参与iColor正在进行的以下活动，期待您的参与 </p>
+        <!-- <div class="text-center">
           <a href="<%= user_path(current_user) %>" class="link_btns">进入我的个人主页</a>
           <a href="<%=user_design_path(current_user,params[:design_id])%>" class="link_btns">看看我发布的作品</a>
+        </div> -->
+
+        <div class="activity_content">
+          <div class="act_item clearfix linet1">
+            <img class="pad_border pull-left" src="../2013/images/success/upload_sucimg1.jpg">
+            <div class="active_content">
+              <h4 class="nomargin">
+                <label class="checkbox">
+                  <input type="checkbox" checked>为爱刷新
+                </label>
+              </h4>
+
+              <h5>活动简介</h5>
+              <p>2014年“为爱刷新”活动正在火热进行中！<br>如果你也想<span class="text-important">获得5000元现金奖励并参与卫视视频录制</span><br>展现设计才华并一举成名，那就快来参与吧！</p>
+              <p>活动时间：2014年3月 – 2014年10月</p>
+            </div>
+          </div>
+          <fieldset class="text-center linet1">
+            <button class="upload_img_btn">确&nbsp;&nbsp;定</button>
+          </fieldset>
         </div>
       </div>
     </div>
