@@ -26,8 +26,19 @@
         $.get('<%= get_story_info_love_stories_path(love_story_id: params[:love_story_id]) %>');
       });
       $('.image_modal').bind('ajaxSend', function(event) {
+        init_image_modal();
         $('#havepics').modal('show');
       });
+      init_image_modal = function() {
+        $('.story_photo').attr('href', 'javascript:void(0);');
+        $('.story_photo > img').attr('src', "<%= asset_path 'head.jpg' %>");
+        $('#slider_pics').html("加载中...");
+        $('.js-author_name').html("加载中...");
+        $('.js-author_area').html("加载中...");
+        $('.js-author_date').html("加载中...");
+        $('.js-author_content').html("加载中...");
+        $('.js-author_view_count').html("加载中...");
+      }
     })
   </script>
   <script type="text/javascript">
@@ -197,7 +208,7 @@
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
     <div class="clearfix">
-      <a href="#" class="pull-left story_photo" target="_blank">
+      <a href="javascript:void(0);" class="pull-left story_photo" target="_blank">
         <img src="<%= asset_path 'head.jpg' %>" alt="" />
       </a>
       <div class="author_name">
