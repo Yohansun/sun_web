@@ -1218,3 +1218,137 @@ hr.border2{
   padding: 0 5px;
   color: #5c6572;
 }
+
+
+/* 5 =============== */
+.introduction{
+  font: 14px/22px "Microsoft Yahei";
+  color: #000;
+}
+.introduction .banner,.statement .banner{
+  background-image: url(<%= asset_path 'love_story/images/banners/banner5.jpg'%>);
+}
+.introduction_tabs{
+  background: #e71d36;
+  border-bottom: 0 none;
+}
+.introduction_tabs li{
+  margin-bottom: 0;
+}
+.introduction_tabs li a{
+  color: #fff;
+  font-size: 14px;
+  padding: 15px 21px;
+  border: 0 none!important;
+  position: relative;
+}
+.introduction_tabs li a:hover{
+  background: #bc000e;
+  border-radius: 0;
+  border: 0 none!important;
+}
+
+.introduction_tabs > .active > a,
+.introduction_tabs > .active > a:hover,
+.introduction_tabs > .active > a:focus{
+  border-radius: 0;
+  background: #bc000e;
+  color: #fff;
+}
+.introduction_tabs li i{
+  background: url(<%= asset_path 'love_story/images/icons.png'%>) no-repeat 0 -115px;
+  width: 12px;
+  height: 6px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  margin-left: -6px;
+  display: none;
+}
+.introduction_tabs .active i{
+  display: block;
+}
+.introduction h2{
+  border-bottom: 1px dotted #c6c2c0;
+  color: #212121;
+  font-size: 18px;
+  text-align: center;
+}
+.introduction-list,.introduction-list ul,.introduction-judgers{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.introduction-list li{
+  line-height: 25px;
+  margin-bottom: 45px;
+}
+.introduction-list strong{
+  background: url(<%= asset_path 'love_story/images/icons.png'%>) no-repeat 0 -123px;
+  width: 98px;
+  height: 30px;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  text-align: center;
+  color: #fff;
+  font: normal 16px/30px "Microsoft Yahei";
+  margin-bottom: 12px;
+}
+.introduction-list ul{
+  margin-bottom: 45px;
+}
+.introduction-list em{
+  font-weight: bold;
+  font-size: 12px;
+}
+.introduction-list li li{
+  margin-bottom: 0;
+}
+.introduction-list small{
+  font-size: 12px;
+  font-style: italic;
+}
+.introduction-judgers li{
+  background: url(<%= asset_path 'love_story/images/intro/intro-bg.jpg'%>) no-repeat top right;
+  width: 450px;
+  height: 242px;
+  float: left;
+  _display: inline;
+  margin: 15px 12px;
+}
+.introduction-judgers img{
+  float: left;
+  width: 180px;
+  height: 240px;
+}
+.introduction-judgers div.pull-right{
+  width: 252px;
+  height: 242px;
+  padding: 0 6px;
+  color: #fff;
+  font-size: 12px;
+}
+.introduction-judgers h3{
+  font-size: 22px;
+  line-height: 25px;
+  font-weight: normal;
+  border-bottom: 1px solid #000;
+  padding: 5px 0;
+}
+.statement{
+  line-height: 28px;
+}
+.statement h1{
+  font-size: 24px;
+  font-family: "SimHei";
+  text-align: center;
+  border-bottom: 1px solid #e71d35;
+  padding: 10px 20px;
+}
+.statement strong{
+  color: #e71d35;
+}
+.statement .container .main{
+  padding-bottom: 80px;
+}

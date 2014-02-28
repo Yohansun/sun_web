@@ -34,8 +34,8 @@
               <li class="<%= 'active' if controller_name =~ /minisite_weekly_stars|minisite_stars/ %>">
                 <a href="<%= minisite_stars_path %>">设计师精选</a>
               </li>
-              <li class="">
-                <a href="javascript:;">活动说明</a>
+              <li class="<%= 'active' if controller_name == 'love_story_activities' %>">
+                <a href="<%= love_story_activities_path %>">活动说明</a>
               </li>
             </ul>
           </div>
@@ -80,7 +80,7 @@
             <li class="divider-vertical_footer"></li>
 
             <li>
-              <a target="_blank" href="/love/disclaimer">免责声明</a>
+              <a target="_blank" href="/love_story/love_story_activities/disclaimer">免责声明</a>
             </li>
             <li class="divider-vertical_footer"></li>
 
