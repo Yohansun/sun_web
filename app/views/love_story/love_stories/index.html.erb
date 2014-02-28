@@ -4,12 +4,14 @@
     init_image_modal = function() {
       $('.story_photo').attr('href', 'javascript:void(0);');
       $('.story_photo > img').attr('src', "<%= asset_path 'head.jpg' %>");
-      $('#slider_pics').html("加载中...");
+      $('.love_story_modal_ul').html("加载中...");
       $('.js-author_name').html("加载中...");
       $('.js-author_area').html("加载中...");
       $('.js-author_date').html("加载中...");
       $('.js-author_content').html("加载中...");
       $('.js-author_view_count').html("加载中...");
+      $('.icon_havepics').hide();
+      $('.icon_nohavepics').hide();
     };
     $(function(){
       var options = {
@@ -37,34 +39,13 @@
       });
       $('.image_modal').bind('ajaxSend', function(event) {
         init_image_modal();
-        $('#havepics').modal('show');
+        $('.love_story_modal').modal('show');
       });
     });
   </script>
   <script type="text/javascript">
   $(window).load(function () {
     $('.js-msnry').masonry();
-
-    $('.story_modal').on('shown', function () {
-      $('#slider_pics').carouFredSel({
-        items               : 3,
-        direction           : "left",
-        scroll : {
-          items           : 1,
-          duration        : 400,
-          pauseOnHover    : true
-        },
-        prev: {
-          button: '#havepics .slider-prev'
-        },
-        next: {
-          button: '#havepics .slider-next'
-        },
-        auto: {
-          play            : false
-        }
-      });
-    });
   });
   </script>
 <%- end %>
@@ -186,7 +167,7 @@
   </div>
 </div>
 <!-- modal -->
-<div class="modal hide fade story_modal" id="havepics">
+<div class="modal hide fade story_modal love_story_modal" id="havepics">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-close icon-i30"></i></button>
     <div class="clearfix">
@@ -227,9 +208,13 @@
   </div>
   <div class="modal-body">
     <p class="content dot_linet1 J_resulte js-author_content">加载中...</p>
+    <p class="tips text-center dot_linet1 icon_nohavepics" style="display:none;">
+      <a href="/love_story/minisite_stars" target="_blank">【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
+      <i class="icon-i16 icon-enter"></i></a>
+    </p>
     <div class="sliders pr">
       <div class="slider_container" id="">
-        <ul class="unstyled clearfix nomargin" id="slider_pics">
+        <ul class="unstyled clearfix nomargin love_story_modal_ul" id="slider_pics">
           加载中...
         </ul>
         <a href="javascript:;" class="slider-prev">prev</a>
@@ -237,7 +222,7 @@
       </div>
     </div>
 
-    <p class="tips text-center mt25">
+    <p class="tips text-center mt25 icon_havepics" style="display:none;">
       <a href="/love_story/minisite_stars" target="_blank">【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
       <i class="icon-i16 icon-enter"></i></a>
     </p>
