@@ -2,7 +2,7 @@
 class LoveStory::MinisiteWeeklyStarsController < LoveStory::BaseController
 
   def index
-    @minisite_weekly_stars = Design.joins(:user).where(:users => {:top500 => true}).order("designs.id DESC")
+    @minisite_weekly_stars = Design.joins(:user).where(:users => {:top500 => true}).group("designs.user_id").order("designs.id DESC")
     if params[:style].present?
       @minisite_weekly_stars = @minisite_weekly_stars.where(:designs => {:style => params[:style]})
     end
