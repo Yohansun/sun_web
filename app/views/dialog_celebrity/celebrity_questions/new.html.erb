@@ -51,6 +51,7 @@
       checkExisting : false,
       transparent : true,
       onUploadSuccess : function(file,data,response) {
+        console.log(this)
         arr = data.split("|")
         id = arr[0]
         thumb = arr[1]

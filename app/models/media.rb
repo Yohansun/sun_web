@@ -16,4 +16,8 @@ class Media < ActiveRecord::Base
   def self.auth username,pwd
     self.where(username: username, password: self.encrypt_password(pwd)).first
   end
+
+  def is_admin?
+    self.username == "admin"
+  end
 end

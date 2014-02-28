@@ -24,7 +24,11 @@ class DialogCelebrity::MediaController < ApplicationController
   def index
     @boards = CelebrityContentBoard.where("id in (?)",current_media.boards.keys)
     @board_id = params[:board_id].blank? ? @boards.first.id : params[:board_id]
-    @questions = CelebrityQuestion.where(:celebrity_content_board_id => @board_id)
+    if @board_id == "0"
+      @questions = CelebrityQuestion.where("celebrity_content_board_id is null")
+    else
+      @questions = CelebrityQuestion.where(:celebrity_content_board_id => @board_id)
+    end
     if params[:start_date].present? && params[:end_date].present?
       @questions = @questions.where("created_at >= ? and created_at <= ?",params[:start_date],params[:end_date].to_date+1.day)
     end

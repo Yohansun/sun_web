@@ -18,6 +18,9 @@
     %ul.nav.clearfix
       - @boards.each do |board|
         %li.fl= link_to board.name,"/dialog_celebrity/media/index?board_id=#{board.id}",class: @board_id.to_i == board.id ? "active" : ""
+      - if current_media.boards.keys.include? 0
+        %li.fl= link_to "未分类","/dialog_celebrity/media/index?board_id=0",class: @board_id.to_i == 0 ? "active" : ""
+
     %form#search-area.shadow
       %input{type: :hidden, name: :board_id, value: @board_id}
       #search-area-line1
@@ -46,10 +49,14 @@
         %input.btn{type: :submit, value: "查找"}
     #question-title.clearfix
       .pr10.fl &nbsp;
-      .pr70.fl 标题
+      .pr55.fl 标题
       .pr10.fl 提问者
+      .pr10.fl 回复者
       .pr5.fl 提问日期
-      .pr5.fl 操作
+      - if params[:board_id] == "0"
+        .pr10.fl 回复期限
+      - else
+        .pr5.fl 操作
     - @questions.each do |_question|
       - if params[:type] == "replied" && _question.replied? || params[:type] == "not_replied" && !_question.replied? || params[:type].blank?
         .question-warp
@@ -59,49 +66,110 @@
                 = link_to "已回复","javascript:;",style: "color: green;",:class => "reply-status"
               - else
                 = link_to  "未回复","javascript:;",style: "color: red;",:class => "reply-status"
-            .pr70.fl
+            .pr55.fl
               = _question.name
             .pr10.fl
-              = _question.user.try(:username)
+              [#{_question.user.try(:username)}]#{_question.user.try(:name)}
+            .pr10.fl
+              &nbsp
+              - if _question.replied?
+                - reply = _question.find_media_reply
+                [#{reply.media.name}]#{reply.media.username}
             .pr5.fl
               = _question.created_at.strftime("%y-%m-%d")
-            .pr5.fl
-              = link_to "删除","javascript:;",:class => "delete-question-btn",:"data-question-id" => _question.id
+
+            - if params[:board_id] == "0"
+              - t = _question.created_at + 36.hours - Time.now
+              - hour = t.abs / 3600
+              - min =  t.abs % 3600 / 60
+              .pr10.fl
+                %span{style: "color:red;"}
+                  #{ t > 0 ? "还剩下" : "已过期" }#{ hour.to_i }小时#{ min.to_i }分钟
+            - else
+              .pr5.fl
+                = link_to "删除","javascript:;",:class => "delete-question-btn",:"data-question-id" => _question.id
 
           .content{style: "display: none;",:"data-question-id" => _question.id}
             .question-content-warp.clearfix
               = raw _question.content
-            - if  _question.images.present?
-              .question-upload-warp.clearfix
-                .pr10.fl &nbsp;
-                .pr90.fl
-                  - _question.images.each do |_image|
-                    = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
-            .reply.clearfix.relative.mt10
-              / .pr10.fl &nbsp;
-              / .pr80.fl
-              - reply = _question.find_media_reply
-              - if reply.present?
-                %span.media_name
-                  [#{reply.media.name}] #{reply.media.username} 已在 #{reply.updated_at.strftime("%y-%m-%d %H:%M")} 回复:
+              - if  _question.images.present?
+                .question-upload-warp.clearfix
+                  .pr90
+                    - _question.images.each do |_image|
+                      = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
 
-                %textarea{placeholder: "我来回答"}
-                  = reply.content
+            .clearfix.mt10.mb10
+              - if params[:board_id] == "0"
+                .fl.ml15.mt5 编辑操作权限
+                .fl.ml20
+                  %select.fl{name: "board_id"}
+                    %option{value: ""} 选择领域分类
+                    - CelebrityContentBoard.first(5).each do |board|
+                      %option{value: board.id, selected: params[:board_id] == board.id.to_s}= board.name
+                .fl.ml20
+                  = link_to "确定","javascript:;",:class => "btn update_board_id"
+
+                .fl.ml20.mt5
+                  = link_to "删除此问题","javascript",:class => "delete-question"
+
+              - elsif params[:board_id] == "-1" && current_media.is_admin?
+                .mb10
+                  .fl.ml15.mt5 管理操作权限
+                  .fl.ml20.mt5
+                    = link_to "恢复此问题","javascript:;",:class => "recover_board"
+
+                  .fl.ml20.mt5
+                    = link_to "彻底恢复此问题","javascript",:class => "destroy-question"
+                  .fl.ml60.mt5
+                    提示:
+                    %span{style: "color:red;"}
+                      [美好家园]terry
+                    在
+                    %span{style: "color:green;"}
+                      2010-08-08
+                    删除这个问题
               - else
-                %textarea{placeholder: "我来回答"}
-              %div
-                %input#submit-question.btn{:type => "submit", :value => "提交回复", :"data-question-id" => _question.id, :"data-reply-id" => reply.try(:id) || ""}
-            .reply-upload
-              %span.fileinput-button
-                %span.btn 上传图片...
-                %input.upload{type: "file",name: "file",multiple: ""}
-              .replies-upload-warp.clearfix
+                .fl.ml15.mt5 媒体操作权限
+                .fl.ml20
+                  %select.fl{name: "board_scope"}
+                    %option{value: ""} 选择范围
+                .fl.ml20
+                  %select.fl{name: "board_key"}
+                    %option{value: ""} 选择关键字
+
+                .fl.ml20.mt5
+                  = link_to "重置领域分类","javascript:;",:class => "reset_board_id"
+
+                .fl.ml20.mt5
+                  = link_to "删除此问题","javascript",:class => "delete-question"
+
+
+            - if (1..5).to_a.include? params[:board_id].to_i
+              .reply.clearfix.relative.mt10
+                / .pr10.fl &nbsp;
+                / .pr80.fl
+                - reply = _question.find_media_reply
                 - if reply.present?
-                  - reply.images.order("created_at desc").each do |_image|
-                    .fl.mr5.image-warp.fl.clearfix
-                      %a{:href => _image.image(:slide), :class => "reply-upload-colorbox reply-upload-colorbox-#{_question.id}",:"data-question-id" => _question.id}
-                        = image_tag _image.image(:thumb),:"data-image-id" => _image.id
-                      = link_to "删除","javascript:;",:class => "delete-reply-img-btn"
+                  %span.media_name
+                    [#{reply.media.name}] #{reply.media.username} 已在 #{reply.updated_at.strftime("%y-%m-%d %H:%M")} 回复:
+
+                  %textarea{placeholder: "我来回答"}
+                    = reply.content
+                - else
+                  %textarea{placeholder: "我来回答"}
+                %div
+                  %input#submit-question.btn{:type => "submit", :value => "提交回复", :"data-question-id" => _question.id, :"data-reply-id" => reply.try(:id) || ""}
+              .reply-upload
+                %span.fileinput-button
+                  %span.btn 上传图片...
+                  %input.upload{type: "file",name: "file",multiple: ""}
+                .replies-upload-warp.clearfix
+                  - if reply.present?
+                    - reply.images.order("created_at desc").each do |_image|
+                      .fl.mr5.image-warp.fl.clearfix
+                        %a{:href => _image.image(:slide), :class => "reply-upload-colorbox reply-upload-colorbox-#{_question.id}",:"data-question-id" => _question.id}
+                          = image_tag _image.image(:thumb),:"data-image-id" => _image.id
+                        = link_to "删除","javascript:;",:class => "delete-reply-img-btn"
     .pager
       = paginate @questions
 
