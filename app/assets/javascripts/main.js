@@ -1213,6 +1213,7 @@ $(function(){
           arr.push($(img).attr("data-image-id"))
         })
         str = arr.join("|")
+
         $("#upload_pics_queue").find("input[name=images]").remove()
         $("#upload_pics_queue").append("<input name='images' type='hidden' value='" + str + "'>")
 
