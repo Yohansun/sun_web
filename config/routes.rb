@@ -880,7 +880,11 @@ Icolor::Application.routes.draw do
     resources :minisite_designs
     resources :minisite_stars
     resources :minisite_weekly_stars
-    resources :love_story_activities, only: :index
+    resources :love_story_activities do
+      collection do
+        get :disclaimer
+      end
+    end
   end
 
 end
