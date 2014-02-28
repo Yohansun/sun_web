@@ -64,7 +64,7 @@
                       <% design = user.designs.order("created_at desc").first %>
                       <% if design %>
                         <% design.design_images.order("id asc").limit(3).each do |image| %>
-                          <a href="/users/<%=user.id%>/designs/<%=design.id%>" class=""><img src="<%=image.file.url(:greatest_img) %>" alt="" /></a>
+                          <a href="/users/<%=user.id%>/designs/<%=design.id%>" target="_blank"><img src="<%=image.file.url(:greatest_img) %>" alt="" /></a>
                         <% end %>
                       <% end %>
                     </div>
