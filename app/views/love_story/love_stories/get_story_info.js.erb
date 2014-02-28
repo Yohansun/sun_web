@@ -4,9 +4,15 @@
   $('.story_photo').attr('href', '<%= user_asks_path(@love_story_user) if @love_story_user %>');
 <%- end %>
 <%- if @love_story.love_story_images.count > 0 %>
+  $('.love_story_modal').attr('id', 'havepics');
+  $('.love_story_modal_ul').attr('id', 'slider_pics');
+  $('.icon_havepics').show();
   $('#slider_pics').html("<%= j render partial: 'story_info_modal' %>");
 <%- else %>
-  $('#slider_pics').html("<%= j render partial: 'story_stars_modal' %>");
+  $('.love_story_modal').attr('id', 'nohavepics');
+  $('.love_story_modal_ul').attr('id', 'slider_designer');
+  $('.icon_nohavepics').show();
+  $('#slider_designer').html("<%= j render partial: 'story_stars_modal' %>");
 <%- end %>
 $('.js-author_name').html("<%= @love_story.user_name %>");
 $('.js-author_area').html("<%= Area.find_by_id(@love_story.area_id).try(:root).try(:name)%>");
@@ -28,6 +34,24 @@ $('#slider_pics').carouFredSel({
   },
   next: {
     button: '#havepics .slider-next'
+  },
+  auto: {
+    play            : false
+  }
+});
+$('#slider_designer').carouFredSel({
+  items               : 4,
+  direction           : "left",
+  scroll : {
+    items           : 1,
+    duration        : 400,
+    pauseOnHover    : true
+  },
+  prev: {
+    button: '#nohavepics .slider-prev'
+  },
+  next: {
+    button: '#nohavepics .slider-next'
   },
   auto: {
     play            : false
