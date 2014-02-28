@@ -42,7 +42,7 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
 
   def create
     if current_user
-      content = params[:love_story][:content]
+      content = params[:love_story][:content].present? ? params[:love_story][:content] : "我与Dany相恋了3年，但见面的日子还不足一年，不过，这也一点也不会影响我们的情感，反而让我们更珍惜对方。Dany是个典型的双鱼座，长长的软发，笑起来很温柔，她是个浪漫而充满幻想的女孩，时常向我倾诉她幻想中那个我们的家，小到一束花的位置，也能绘声绘色的描述半天，我把这一切都一一记在心里。还有半年，她就要学成归国，我想给她一个大大的惊喜，米色的窗帘，大大的飘窗，还有墙角的百合花，我要把她的想象变全为现实，我想让她成为我的妻子。"
       area_id = current_user.area_id
       user_name = current_user.display_name
       @love_story = LoveStory.create(content: content,user_id: current_user.id,area_id: area_id,user_name: user_name,come_from: 'icolor')
