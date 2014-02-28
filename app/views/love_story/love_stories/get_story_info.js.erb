@@ -1,5 +1,5 @@
 <%- if @love_story_user.try(:avatar) -%>
-  $('.story_photo').replaceWith("<%= render partial: 'user_avatar' %>");
+  $('.story_photo').replaceWith("<%= j render partial: 'user_avatar' %>");
 <%- else %>
   $('.story_photo').attr('href', '<%= user_asks_path(@love_story_user) if @love_story_user %>');
 <%- end %>

@@ -1,6 +1,16 @@
 <%- content_for :tail do %>
   <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
-  <script type="text/javascript">
+  <script type="text/javascript" charset="utf-8">
+    init_image_modal = function() {
+      $('.story_photo').attr('href', 'javascript:void(0);');
+      $('.story_photo > img').attr('src', "<%= asset_path 'head.jpg' %>");
+      $('#slider_pics').html("加载中...");
+      $('.js-author_name').html("加载中...");
+      $('.js-author_area').html("加载中...");
+      $('.js-author_date').html("加载中...");
+      $('.js-author_content').html("加载中...");
+      $('.js-author_view_count').html("加载中...");
+    };
     $(function(){
       var options = {
         data: data
@@ -29,17 +39,7 @@
         init_image_modal();
         $('#havepics').modal('show');
       });
-      init_image_modal = function() {
-        $('.story_photo').attr('href', 'javascript:void(0);');
-        $('.story_photo > img').attr('src', "<%= asset_path 'head.jpg' %>");
-        $('#slider_pics').html("加载中...");
-        $('.js-author_name').html("加载中...");
-        $('.js-author_area').html("加载中...");
-        $('.js-author_date').html("加载中...");
-        $('.js-author_content').html("加载中...");
-        $('.js-author_view_count').html("加载中...");
-      }
-    })
+    });
   </script>
   <script type="text/javascript">
   $(window).load(function () {
@@ -59,24 +59,6 @@
         },
         next: {
           button: '#havepics .slider-next'
-        },
-        auto: {
-          play            : false
-        }
-      });
-      $('#slider_designer').carouFredSel({
-        items               : 4,
-        direction           : "left",
-        scroll : {
-          items           : 1,
-          duration        : 400,
-          pauseOnHover    : true
-        },
-        prev: {
-          button: '#nohavepics .slider-prev'
-        },
-        next: {
-          button: '#nohavepics .slider-next'
         },
         auto: {
           play            : false
@@ -256,8 +238,8 @@
     </div>
 
     <p class="tips text-center mt25">
-      【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
-      <a href="/love_story/minisite_stars" target="_blank"><i class="icon-i16 icon-enter"></i></a>
+      <a href="/love_story/minisite_stars" target="_blank">【设计师精选】网罗全国数百位优秀设计师，让你直接挑选中意人选实现为爱刷新
+      <i class="icon-i16 icon-enter"></i></a>
     </p>
   </div>
 </div>
