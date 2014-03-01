@@ -20,6 +20,8 @@
         %li.fl= link_to board.name,"/dialog_celebrity/media/index?board_id=#{board.id}",class: @board_id.to_i == board.id ? "active" : ""
       - if current_media.boards.keys.include? 0
         %li.fl= link_to "未分类","/dialog_celebrity/media/index?board_id=0",class: @board_id.to_i == 0 ? "active" : ""
+      - if current_media.is_admin?
+        %li.fl= link_to "回收站","/dialog_celebrity/media/index?board_id=-1",class: @board_id.to_i == -1 ? "active" : ""
 
     %form#search-area.shadow
       %input{type: :hidden, name: :board_id, value: @board_id}
@@ -53,10 +55,9 @@
       .pr10.fl 提问者
       .pr10.fl 回复者
       .pr5.fl 提问日期
-      - if params[:board_id] == "0"
+      - if params[:board_id] == "0" || params[:board_id] == "-1"
         .pr10.fl 回复期限
-      - else
-        .pr5.fl 操作
+
     - @questions.each do |_question|
       - if params[:type] == "replied" && _question.replied? || params[:type] == "not_replied" && !_question.replied? || params[:type].blank?
         .question-warp
@@ -78,16 +79,13 @@
             .pr5.fl
               = _question.created_at.strftime("%y-%m-%d")
 
-            - if params[:board_id] == "0"
+            - if params[:board_id] == "0" || params[:board_id] == "-1" && !_question.replied?
               - t = _question.created_at + 36.hours - Time.now
               - hour = t.abs / 3600
               - min =  t.abs % 3600 / 60
               .pr10.fl
                 %span{style: "color:red;"}
                   #{ t > 0 ? "还剩下" : "已过期" }#{ hour.to_i }小时#{ min.to_i }分钟
-            - else
-              .pr5.fl
-                = link_to "删除","javascript:;",:class => "delete-question-btn",:"data-question-id" => _question.id
 
           .content{style: "display: none;",:"data-question-id" => _question.id}
             .question-content-warp.clearfix
@@ -110,7 +108,7 @@
                   = link_to "确定","javascript:;",:class => "btn update_board_id"
 
                 .fl.ml20.mt5
-                  = link_to "删除此问题","javascript",:class => "delete-question"
+                  = link_to "删除此问题","javascript:;",:class => "delete-question"
 
               - elsif params[:board_id] == "-1" && current_media.is_admin?
                 .mb10
@@ -123,25 +121,33 @@
                   .fl.ml60.mt5
                     提示:
                     %span{style: "color:red;"}
-                      [美好家园]terry
+                      - delete_user = _question.delete_media
+                      [#{delete_user.name}]#{delete_user.username}
                     在
                     %span{style: "color:green;"}
-                      2010-08-08
+                      = _question.delete_at.strftime("%y-%m-%d %H:%m")
                     删除这个问题
               - else
                 .fl.ml15.mt5 媒体操作权限
                 .fl.ml20
-                  %select.fl{name: "board_scope"}
+                  %select.board_scope.fl{name: "board_scope"}
                     %option{value: ""} 选择范围
+                    - _question.board.key_scopes.each do |scope|
+                      %option{:"data-key" => scope.key_arr.join(","),:selected => scope.key_arr.include?(_question.key) }= scope.name
                 .fl.ml20
-                  %select.fl{name: "board_key"}
+                  %select.key_arr.fl{name: "key"}
                     %option{value: ""} 选择关键字
+                    - _question.board.key_scopes.each do |scope|
+                      - if scope.key_arr.include?(_question.key)
+                        - scope.key_arr.each do |_key|
+                          %option{selected: _key==_question.key}= _key
+
 
                 .fl.ml20.mt5
                   = link_to "重置领域分类","javascript:;",:class => "reset_board_id"
 
                 .fl.ml20.mt5
-                  = link_to "删除此问题","javascript",:class => "delete-question"
+                  = link_to "删除此问题","javascript:;",:class => "delete-question"
 
 
             - if (1..5).to_a.include? params[:board_id].to_i

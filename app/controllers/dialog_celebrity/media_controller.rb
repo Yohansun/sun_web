@@ -25,9 +25,11 @@ class DialogCelebrity::MediaController < ApplicationController
     @boards = CelebrityContentBoard.where("id in (?)",current_media.boards.keys)
     @board_id = params[:board_id].blank? ? @boards.first.id : params[:board_id]
     if @board_id == "0"
-      @questions = CelebrityQuestion.where("celebrity_content_board_id is null")
+      @questions = CelebrityQuestion.where("celebrity_content_board_id is null and is_delete = 0")
+    elsif @board_id == "-1"
+      @questions = CelebrityQuestion.where("is_delete = 1")
     else
-      @questions = CelebrityQuestion.where(:celebrity_content_board_id => @board_id)
+      @questions = CelebrityQuestion.where(:celebrity_content_board_id => @board_id,:is_delete => false)
     end
     if params[:start_date].present? && params[:end_date].present?
       @questions = @questions.where("created_at >= ? and created_at <= ?",params[:start_date],params[:end_date].to_date+1.day)
@@ -48,6 +50,7 @@ class DialogCelebrity::MediaController < ApplicationController
     reply_id    = params[:reply_id]
     content     = params[:content]
     image_ids   = params[:image_ids]
+    key         = params[:key]
     if reply_id.present?
       reply = CelebrityQuestionReply.find(reply_id)
       reply.update_attributes(content: content)
@@ -67,6 +70,16 @@ class DialogCelebrity::MediaController < ApplicationController
     render :json => {:code => 1, :reply_id => reply.id}
   end
 
+  def update_question_key
+    CelebrityQuestion.find(params[:question_id]).update_attributes(key: params[:key])
+    render :js => "alert('更新关键字成功')"
+  end
+
+  def reset_question_key
+    CelebrityQuestion.find(params[:question_id]).update_attributes(key: "")
+    render :js => "alert('重置领域分类成功')"
+  end
+
   def upload_question_image
     image = CelebrityQuestionImage.new
     image.image = params[:file]
@@ -78,7 +91,22 @@ class DialogCelebrity::MediaController < ApplicationController
   end
 
   def delete_question
+    CelebrityQuestion.find(params[:id]).update_attributes :is_delete => true, :delete_at => Time.now,:delete_media => current_media
+    render :json => { :notify => "删除成功" }
+  end
+
+  def destroy_question
     CelebrityQuestion.find(params[:id]).destroy
+    render :json => { :notify => "彻底删除成功" }
+  end
+
+  def update_question_board
+    CelebrityQuestion.find(params[:id]).update_attributes :celebrity_content_board_id => params[:board_id].to_i
+    render :json => { :notify => "领域设置成功" }
+  end
+
+  def recover_question
+    CelebrityQuestion.find(params[:id]).update_attributes :is_delete => false
     render :json => { :notify => "删除成功" }
   end
 
