@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CelebrityQuestion < ActiveRecord::Base
   include CelebrityModule
   # attr_accessible :title, :body

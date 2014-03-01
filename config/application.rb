@@ -20,7 +20,8 @@ module Icolor
     # config.autoload_paths += %W(#{config.root}/extras)
 
     config.autoload_paths += %W(#{config.root}/app/controllers/concerns)
-    config.autoload_paths += %w(#{RAILS_ROOT}/app/sweepers #{RAILS_ROOT}/app/models/concerns)
+    config.autoload_paths += %W(#{config.root}/app/models/concerns)
+    config.autoload_paths += %w(#{RAILS_ROOT}/app/sweepers)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

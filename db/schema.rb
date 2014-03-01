@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140226024715) do
+ActiveRecord::Schema.define(:version => 20140311125842) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -214,14 +214,18 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
   add_index "celebrity_question_replies", ["user_id"], :name => "index_celebrity_question_replies_on_user_id"
 
   create_table "celebrity_questions", :force => true do |t|
-    t.string   "name",                       :null => false
-    t.string   "key",                        :null => false
+    t.string   "name",                                          :null => false
+    t.string   "key",                                           :null => false
     t.text     "content"
     t.integer  "master_profile_id"
     t.integer  "user_id"
     t.integer  "celebrity_content_board_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.boolean  "is_delete",                  :default => false
+    t.datetime "delete_at"
+    t.integer  "delete_media_id"
+    t.string   "fake_username"
   end
 
   add_index "celebrity_questions", ["celebrity_content_board_id"], :name => "index_celebrity_questions_on_celebrity_content_board_id"
@@ -747,6 +751,28 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
     t.integer  "image_height"
   end
 
+  create_table "home_dialog_celebrities", :force => true do |t|
+    t.boolean  "last_celebrity", :default => false
+    t.boolean  "last_master",    :default => false
+    t.integer  "celebrity_id"
+    t.integer  "master_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "home_dialog_celebrity_images", :force => true do |t|
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.integer  "position",                 :default => 0
+    t.string   "title",                    :default => ""
+    t.string   "url",                      :default => ""
+    t.integer  "home_dialog_celebrity_id"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
   create_table "home_heads", :force => true do |t|
     t.string   "title"
     t.string   "link"
@@ -1123,8 +1149,10 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
     t.integer  "area_id"
     t.string   "user_name"
     t.string   "come_from"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "view_count", :default => 0
+    t.string   "sina_id",    :default => "0"
   end
 
   create_table "love_story_images", :force => true do |t|
@@ -1233,8 +1261,10 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
     t.string   "username"
     t.string   "password"
     t.text     "boards"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "email",      :default => ""
+    t.string   "mobile",     :default => ""
   end
 
   create_table "messages", :force => true do |t|
@@ -1901,6 +1931,8 @@ ActiveRecord::Schema.define(:version => 20140226024715) do
     t.string   "edit_by"
     t.string   "price"
     t.boolean  "top500",                    :default => false
+    t.boolean  "top50",                     :default => false
+    t.boolean  "reg_at_minisite2014"
   end
 
   add_index "users", ["area_id"], :name => "index_users_on_area_id"

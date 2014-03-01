@@ -54,6 +54,35 @@ $ ->
             $obj.remove()
             alert "删除成功"
 
+      $("body").on "click",".delete-question", ->
+        $obj = $(this).parent().parent().parent().parent()
+        id = $(this).parent().parent().parent().attr("data-question-id")
+        if confirm("是否要删除?") is true
+          $.post '/dialog_celebrity/media/delete_question',{ id: id }, ->
+            $obj.remove()
+            alert "删除成功"
+
+      $("body").on "click",".recover_board", ->
+        $obj = $(this).parent().parent().parent().parent().parent()
+        id = $(this).parent().parent().parent().parent().attr("data-question-id")
+        if confirm("是否要恢复?") is true
+          $.post '/dialog_celebrity/media/recover_question',{ id: id }, ->
+            $obj.remove()
+            alert "恢复成功"
+
+      $("body").on "click",".update_board_id", ->
+        $obj = $(this).parent().parent().parent().parent()
+        id = $(this).parent().parent().parent().attr("data-question-id")
+        board_id = $(this).parent().prev().find("select").val()
+        if board_id is ""
+          alert "请选择领域"
+        else
+          if confirm("是否要设置领域") is true
+            $.post '/dialog_celebrity/media/update_question_board',{ id: id,board_id: board_id }, ->
+              $obj.remove()
+              alert "设置领域成功"
+
+
       $("body").on "click",".delete-reply-img-btn", ->
         $obj = $(this).parent()
         id = $obj.find('img').attr("data-image-id")
@@ -65,6 +94,29 @@ $ ->
       $("body").on "click","a.reply-upload-colorbox", ->
         obj = "reply-upload-colorbox-" + $(this).attr("data-question-id")
         colorbox_qa(".#{obj}")
+
+      $("body").on "change","select.board_scope", ->
+        scope = $(this).find("option:selected").attr("data-key")
+        $obj = $(this).parent().next().find("select")
+        $obj.find("option:gt(0)").remove()
+        if scope?
+          for _key in scope.split(",")
+            $obj.append("<option>#{_key}</option>")
+
+      $("body").on "change","select.key_arr", ->
+        question_id = $(this).parent().parent().parent().attr("data-question-id")
+        key = $(this).val()
+        if key isnt ""
+          $.post "/dialog_celebrity/media/update_question_key",{question_id: question_id,key: key}
+
+      $("body").on "click",".reset_board_id", ->
+        question_id = $(this).parent().parent().parent().attr("data-question-id")
+        $obj = $(this)
+        $.post "/dialog_celebrity/media/reset_question_key",{question_id: question_id}, ->
+          $scope = $obj.parent().prev().prev().find("select")
+          $key = $obj.parent().prev().find("select")
+          $scope.find("option:eq(0)").attr("selected","selected")
+          $key.find("option:gt(0)").remove()
 
       colorbox_qa = (obj) ->
         $(obj).colorbox({rel: obj,slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
