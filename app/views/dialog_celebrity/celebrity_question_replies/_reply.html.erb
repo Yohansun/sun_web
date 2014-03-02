@@ -7,7 +7,7 @@
   <i class="icon-imgshow_btn" data-question-id="<%= @reply.id -%>"></i>
   <div class="imgs_group" style="display: none;">
     <% @reply.images.each do |_image| -%>
-    <a href="<%=_image.image(:slide)%>" class="question_images_<%= @reply.id -%>">
+    <a href="<%=_image.image(:slide)%>" class="question_images_<%= @reply.id -%> imgsgroup">
     <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
     </a>
     <%end-%>

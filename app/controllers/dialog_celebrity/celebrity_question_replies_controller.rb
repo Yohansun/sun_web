@@ -8,11 +8,13 @@ class DialogCelebrity::CelebrityQuestionRepliesController < ApplicationControlle
       return render :js => "alert('没有权限')"
     end
     @reply = CelebrityQuestionReply.create params[:celebrity_question_reply]
-    image_ids = params[:images].split("|")
-    image_ids.each do |image_id|
-      image = CelebrityQuestionImage.find(image_id)
-      image.resource = @reply
-      image.save
+    if params[:images].present?
+      image_ids = params[:images].split("|")
+      image_ids.each do |image_id|
+        image = CelebrityQuestionImage.find(image_id)
+        image.resource = @reply
+        image.save
+      end
     end
     @content = render_to_string(partial: "dialog_celebrity/celebrity_question_replies/reply")
     respond_to do |format|
