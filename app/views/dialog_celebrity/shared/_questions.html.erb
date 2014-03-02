@@ -192,7 +192,7 @@
                   <i class="icon-imgshow_btn" data-question-id="<%= _reply.id -%>"></i>
                   <div class="imgs_group" style="display: none;">
                     <% _reply.images.each do |_image| -%>
-                    <a href="<%=_image.image(:slide)%>" class="question_images_<%= _reply.id -%>">
+                    <a href="<%=_image.image(:slide)%>" class="question_images_<%= _reply.id -%> imgsgroup">
                     <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
                     </a>
                     <%end-%>
@@ -256,7 +256,13 @@
     });
 
     $("form.famous_ask_form").submit(function(){
-      $.post('/dialog_celebrity/create_question_reply', $(this).serialize())
+      $form = $(this)
+      $.post('/dialog_celebrity/create_question_reply', $(this).serialize(),function(){
+        $form.find("#upload_pics_queue").find("input[name=images]").remove()
+        $form.find("#upload_pics_queue span").remove()
+        $form.find("textarea#requestion_content").val("")
+        $form.find(".picture_modal").hide()
+      })
       return false
     })
 
@@ -265,7 +271,7 @@
     })
 
 
-    $('#upload_pics').uploadify({
+    $('.uploadify_btn').uploadify({
       uploader: '/dialog_celebrity/upload_image',
       dataType: 'json',
       swf : '/uploadify/uploadify.swf',
@@ -306,6 +312,7 @@
 
     //colorbox
     $('.imgsgroup').colorbox({rel: 'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+
     $("body").on("click",".icon-imgshow_btn",function(){
       obj = ".question_images_" + $(this).attr("data-question-id");
       $(obj).colorbox({
@@ -328,9 +335,9 @@
         arr.push($(img).attr("data-image-id"))
       })
       str = arr.join("|")
-      $("#upload_pics_queue").find("input[name=images]").remove()
-      $("#upload_pics_queue").append("<input name='images' type='hidden' value='" + str + "'>")
-
+      $queue = $(this).parent().prev().find("#upload_pics_queue")
+      $queue.find("input[name=images]").remove()
+      $queue.append("<input name='images' type='hidden' value='" + str + "'>")
     })
 
   })

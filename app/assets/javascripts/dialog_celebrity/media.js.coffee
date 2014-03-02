@@ -82,6 +82,14 @@ $ ->
               $obj.remove()
               alert "设置领域成功"
 
+      $("body").on "click",".destroy-question", ->
+        $obj = $(this).parent().parent().parent().parent().parent()
+        id = $(this).parent().parent().parent().parent().attr("data-question-id")
+        if confirm("是否要删除?") is true
+          $.post '/dialog_celebrity/media/destroy_question',{ id: id }, ->
+            $obj.remove()
+            alert "彻底删除成功"
+
 
       $("body").on "click",".delete-reply-img-btn", ->
         $obj = $(this).parent()

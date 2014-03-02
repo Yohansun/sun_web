@@ -10,4 +10,10 @@ namespace :celebrity do
     end
     DialogCelebrityPage.create
   end
+
+  desc '首页对话名人初始化数据'
+  task :init_home_data => :environment do
+    home_dialog_celebrity = HomeDialogCelebrity.create
+    3.times { home_dialog_celebrity.images.create }
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140301133923) do
+ActiveRecord::Schema.define(:version => 20140302111841) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -748,6 +748,28 @@ ActiveRecord::Schema.define(:version => 20140301133923) do
     t.datetime "updated_at",        :null => false
     t.integer  "image_width"
     t.integer  "image_height"
+  end
+
+  create_table "home_dialog_celebrities", :force => true do |t|
+    t.boolean  "last_celebrity", :default => false
+    t.boolean  "last_master",    :default => false
+    t.integer  "celebrity_id"
+    t.integer  "master_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "home_dialog_celebrity_images", :force => true do |t|
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.integer  "position",                 :default => 0
+    t.string   "title",                    :default => ""
+    t.string   "url",                      :default => ""
+    t.integer  "home_dialog_celebrity_id"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "home_heads", :force => true do |t|
