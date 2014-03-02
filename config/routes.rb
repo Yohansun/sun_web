@@ -476,6 +476,10 @@ Icolor::Application.routes.draw do
 
   # this route use for kaminari pagination
   MagicContent::Engine.routes.draw do
+  get "home_dialog_celebrities/index"
+
+  get "home_dialog_celebrities/images"
+
   get "master_design_uploads/index"
 
   get "master_design_uploads/new"
@@ -859,6 +863,8 @@ Icolor::Application.routes.draw do
       post 'master_design_upload_save_all' => 'master_design_uploads#save_all'
       post 'master_design_upload_ajax_delete' => 'master_design_uploads#delete'
     end
+
+    match 'home_dialog_celebrities/:action' => 'home_dialog_celebrities', via: [:get, :post]
 
     delete "life_memoirs/destroy", to: 'life_memoirs#destroy'
     resources :life_memoirs
