@@ -13,7 +13,7 @@ module Manage::BaseHelper
 		c_name = case controller_name
       when /celebrity_questions/
         'dialog_celebrity'
-      when /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals/
+      when /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals|home_dialog_celebrities/
       	'home'
       when /channel_tips/
       	'channel_tips'

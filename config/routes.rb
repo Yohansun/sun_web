@@ -874,6 +874,8 @@ Icolor::Application.routes.draw do
       post 'master_design_upload_ajax_delete' => 'master_design_uploads#delete'
     end
 
+    match 'home_dialog_celebrities/:action' => 'home_dialog_celebrities', via: [:get, :post]
+
     delete "life_memoirs/destroy", to: 'life_memoirs#destroy'
     resources :life_memoirs
 

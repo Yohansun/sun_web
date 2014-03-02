@@ -26,20 +26,20 @@ $ ->
         if (len < 0)
           $this.val($this.val().slice(0, total))
 
-
-      $('#manage_dialog_celebrity_pege_fileupload').fileupload(
-        url: '/manage/dialog_celebrities/create_image',
-        dataType: 'json',
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles: 1,
-        maxFileSize: 5000000,
-        done: (e, data)->
-          $("img#ett-img").attr("src",data.result.url)
-          $("input#ett-url").val(data.result.url)
-        ,
-        error: (e, data)->
-          alert data.result
-      )
+      if $.fileupload
+        $('#manage_dialog_celebrity_pege_fileupload').fileupload(
+          url: '/manage/dialog_celebrities/create_image',
+          dataType: 'json',
+          acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+          maxNumberOfFiles: 1,
+          maxFileSize: 5000000,
+          done: (e, data)->
+            $("img#ett-img").attr("src",data.result.url)
+            $("input#ett-url").val(data.result.url)
+          ,
+          error: (e, data)->
+            alert data.result
+        )
 
       $('body').on "submit","#manage_dialog_celebrity_pege_form", ->
         _this = this
