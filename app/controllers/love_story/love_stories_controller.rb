@@ -37,7 +37,9 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
   end
 
   def new
-
+    unless current_user
+      redirect_to love_stories_path
+    end
   end
 
   def create
