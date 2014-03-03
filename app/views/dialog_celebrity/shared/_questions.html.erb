@@ -155,9 +155,9 @@
                           <div class="mh20">
                             <p class="tips">
                               共
-                              <span class="nopadding">1</span>
+                              <span class="selected-num nopadding">0</span>
                               张，还能上传
-                              <span class="nopadding">8</span>
+                              <span class="rest-num nopadding">9</span>
                               张
                               <span class="nopadding">（按住ctrl可选择多张）</span>
                             </p>
@@ -282,7 +282,7 @@
       fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
       successTimeout : 6000,
       fileSizeLimit : '3MB',
-      // uploadLimit : 1,
+      uploadLimit : 9,
       width : 84,
       height : 84,
       multi : true,
@@ -294,19 +294,26 @@
         id = arr[0]
         thumb = arr[1]
         thumb2 =arr[2]
-        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /></span>")
+        $('#' + this.id).siblings('.uploadifyQueue').append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /></span>");
+
+        // var len = $('#' + this.id).siblings('.uploadifyQueue').children().length;
+        var tips = $('#' + this.id).parent().siblings('.tips');
+        var selected_num = parseInt(tips.children('.selected-num').text());
+        var rest_num = parseInt(tips.children('.rest-num').text());
+        tips.children('.selected-num').text(selected_num + 1);
+        tips.children('.rest-num').text(rest_num - 1);
       }
     });
 
     //upload
     var form = $('.famous_ask_form')
-    var modal = form.find('.picture_modal')
+    // var modal = form.find('.picture_modal')
     form.on('click', '.js-show_picture_modal', function(){
-      modal.show();
+      $(this).find('.picture_modal').show();
     });
     form.on('click', '.js-hide_picture_modal', function(e){
       e.stopPropagation();
-      modal.hide();
+      $(this).parents('.picture_modal').hide();
     });
 
     //colorbox
