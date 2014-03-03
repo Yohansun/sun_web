@@ -82,9 +82,13 @@
           </div>
           <div class="mt10">
             <%- if current_user %>
-              <a href="<%= new_love_story_path %>" target="_blank" class="icon-btn icon-share_story">分享爱的故事</a>
+              <% if is_data(current_user.id) %>
+                <a href="javascript:alert('每位用户只能发布一次爱的故事!');" target="_blank" class="icon-btn icon-share_story">分享爱的故事</a>
+              <% else %>
+                <a href="<%= new_love_story_path %>" class="icon-btn icon-share_story">分享爱的故事</a>
+              <% end %>
             <%- else %>
-              <a href="/users/sign_in?return_to=<%= new_love_story_url %>" class="icon-btn icon-share_story" target="_blank" data-confirm="登录网站后才能分享爱的故事,是否现在登录?">分享爱的故事</a>
+              <a href="/users/sign_in?return_to=<%= love_stories_url %>" class="icon-btn icon-share_story" data-confirm="登录网站后才能分享爱的故事,是否现在登录?">分享爱的故事</a>
             <%- end %>
           </div>
           <div class="list">
