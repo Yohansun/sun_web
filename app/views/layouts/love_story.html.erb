@@ -7,6 +7,22 @@
     <meta name="keywords" content="<%= love_story_keyword ||'为爱刷新让装修充满爱的意义,记录和分享与自己爱的人的故事,感动你我他,还有最新最经典的设计师设计作品展示,在这里您还可以定制自己的私人设计师。' %>">
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag "love_story_all.css" %>
+    <script src="http://ds-cc.serving-sys.com/BurstingRes/CustomScripts/mmConversionTagV2.js"></script>
+    <script type='text/javascript'>
+        function triggerEBConversion(ebConversionID)
+        {
+          try
+          {
+            var ebRand = Math.random() + ' ';
+            ebRand = ebRand * 1000000;
+            var ebURL = "HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&ActivityID=" + ebConversionID + "&rnd=" + ebRand;
+            var ebScript = new Image();
+            ebScript.src = ebURL;
+          }
+          catch (e) {
+          }
+        }
+      </script>
     <%= yield :head %>
     <!--[if IE 6]>
     <![endif]-->
@@ -14,6 +30,7 @@
     <![endif]-->
   </head>
   <body>
+    <%= yield :body_head %>
     <div class="navbar navbar-fixed-top navbar_top">
       <div class="navbar-inner">
         <div class="container">
@@ -41,12 +58,12 @@
           </div>
           <ul class="nav pull-right js-hide">
             <li>
-              <a href="/users/sign_in?return_to=<%= request.original_url %>"><i class="icon-refresh_login"></i>登录</a>
+              <a href="/users/sign_in?return_to=<%= request.original_url %>" id="love_monitor_link_436279"><i class="icon-refresh_login"></i>登录</a>
             </li>
             <li class="divider-vertical"></li>
 
             <li>
-              <a href="/users/sign_up?return_to=<%= request.original_url %>"><i class="icon-refresh_register"></i>注册</a>
+              <a href="/users/sign_up?return_to=<%= request.original_url %>" id="love_monitor_link_436280"><i class="icon-refresh_register"></i>注册</a>
             </li>
           </ul>
           <ul class="nav nav_userinfo pull-right js-user-info" style="display:none">

@@ -1,3 +1,16 @@
+<% content_for :body_head do %>
+  <script type='text/javascript'>
+  // Conversion Name: 为爱刷新_9landing on 发布我的故事页
+  var ebRand = Math.random()+'';
+  ebRand = ebRand * 1000000;
+  //<![CDATA[
+  document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=436284&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+  //]]>
+  </script>
+  <noscript>
+  <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=436284&amp;ns=1"/>
+  </noscript>
+<% end %>
 <%- content_for :head do %>
  <%= stylesheet_link_tag "/resources/js/plugins/exp/css/style" %>
 <style type="text/css">
@@ -148,7 +161,7 @@
 
       </fieldset>
       <fieldset class="text-center pd30">
-        <button type="submit" class="btn_check">发布我的故事</button>
+        <button type="submit" class="btn_check" id="love_monitor_link_436285">发布我的故事</button>
       </fieldset>
     <% end %>
   </div>
