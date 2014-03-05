@@ -37,15 +37,7 @@
             <% end %>
           </div>
           <div class="mt10">
-            <%- if current_user %>
-              <% if current_user.common_user? %>
-                <a href="javascript:alert('只有设计师才能上传作品!');" class="icon-btn icon-upload_works" target="_blank">上传设计作品</a>
-              <% else %>
-                <a href="<%= new_user_design_path(current_user,come_from: 'icolor',return_to: "#{request.original_url}") %>" class="icon-btn icon-upload_works" target="_blank">上传设计作品</a>
-              <% end %>
-            <%- else %>
-              <a href="/users/sign_in?return_to=<%= request.original_url %>" class="icon-btn icon-upload_works" target="_blank" data-confirm="只有设计师和家装公司在登录后才能上传作品,是否现在登录?">上传设计作品</a>
-            <%- end %>
+            <a href="/users/sign_in?return_to=<%= request.original_url %>" class="icon-btn icon-upload_works js-upload" target="_blank" data-confirm="只有设计师和家装公司在登录后才能上传作品,是否现在登录?">上传设计作品</a>
           </div>
           <div class="eq_hi_list">
             <div class="thumbnails noborder">

@@ -39,26 +39,23 @@
               </li>
             </ul>
           </div>
-          <%- if current_user %>
-            <ul class="nav nav_userinfo pull-right">
-              <li class="pr user_name">
-                <a class="username_css" href="<%= user_asks_path(current_user) %>" target="_blank"><%= current_user.display_name %></a>
-              </li>
-              <li class="divider-vertical_dot"></li>
-              <li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
-            </ul> <!--user login-->
-          <%- else %>
-            <ul class="nav pull-right">
-              <li>
-                <a href="/users/sign_in?return_to=<%= request.original_url %>"><i class="icon-refresh_login"></i>登录</a>
-              </li>
-              <li class="divider-vertical"></li>
+          <ul class="nav pull-right js-hide">
+            <li>
+              <a href="/users/sign_in?return_to=<%= request.original_url %>"><i class="icon-refresh_login"></i>登录</a>
+            </li>
+            <li class="divider-vertical"></li>
 
-              <li>
-                <a href="/users/sign_up?return_to=<%= request.original_url %>"><i class="icon-refresh_register"></i>注册</a>
-              </li>
-            </ul> <!--unlogin-->
-          <%- end %>
+            <li>
+              <a href="/users/sign_up?return_to=<%= request.original_url %>"><i class="icon-refresh_register"></i>注册</a>
+            </li>
+          </ul>
+          <ul class="nav nav_userinfo pull-right js-user-info" style="display:none">
+            <li class="pr user_name">
+              <a class="username_css" href="" target="_blank"></a>
+            </li>
+            <li class="divider-vertical_dot"></li>
+            <li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -106,7 +103,7 @@
         </div>
       </div>
     </div>
-    <%= javascript_include_tag "love_story","/location.js","LinkageSelect.js" %>
+    <%= javascript_include_tag "love_story","/location.js","LinkageSelect.js", "love_stories" %>
     <script type="text/javascript">
     var bds_config = {
     'bdText':'#为爱刷新# 我刚在iColor网站上说出了我的“爱的故事”，听说被评选上就能获得减免全部装修费用的机会！小伙伴们快来晒晒你们爱的故事吧',

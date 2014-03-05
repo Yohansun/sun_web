@@ -12,7 +12,9 @@ class Users::SessionsController < Devise::SessionsController
 
     cookies['user_display_name'] = resource.display_name
     cookies['user_id'] = resource.id
-
+    love_story = LoveStory.where(user_id: resource.id)
+    cookies['love_story'] = love_story.present? ? 'true' : 'false'
+    cookies['common_user'] = resource.common_user? ? 'false' : 'true'
     resource.first_login_today(resource)
     respond_with resource, :location => after_sign_out_path_for(resource)
   end
@@ -20,7 +22,8 @@ class Users::SessionsController < Devise::SessionsController
   def destroy
     cookies['user_display_name'] = nil
     cookies['user_id'] = nil
-
+    cookies['love_story'] = nil
+    cookies['common_user'] = nil
     redirect_path = after_sign_out_path_for(resource_name)
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
     set_flash_message :notice, :signed_out if signed_out

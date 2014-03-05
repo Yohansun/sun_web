@@ -71,10 +71,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               sign_in(:user, authentication.user)
               cookies['user_display_name'] = authentication.user.display_name
               cookies['user_id'] = authentication.user.id
+              love_story = LoveStory.where(user_id: authentication.user.id)
+              cookies['love_story'] = love_story.present? ? 'true' : 'false'
+              cookies['common_user'] = authentication.user.common_user? ? 'false' : 'true'
               redirect_to baicheng_root_path
             else
               cookies['user_display_name'] = authentication.user.display_name
               cookies['user_id'] = authentication.user.id
+              love_story = LoveStory.where(user_id: authentication.user.id)
+              cookies['love_story'] = love_story.present? ? 'true' : 'false'
+              cookies['common_user'] = authentication.user.common_user? ? 'false' : 'true'
               sign_in_and_redirect(:user, authentication.user)
             end
           end
@@ -97,6 +103,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               sign_in(:user, user)
               cookies['user_display_name'] = user.display_name
               cookies['user_id'] = user.id
+              love_story = LoveStory.where(user_id: user.id)
+              cookies['love_story'] = love_story.present? ? 'true' : 'false'
+              cookies['common_user'] = user.common_user? ? 'false' : 'true'
               if session[:baigcheng_login].present?
                 redirect_to baicheng_root_path
               else
