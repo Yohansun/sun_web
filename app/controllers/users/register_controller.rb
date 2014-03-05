@@ -28,6 +28,9 @@ class Users::RegisterController < Devise::RegistrationsController
           sign_in(resource_name, resource)
           cookies['user_display_name'] = resource.display_name
           cookies['user_id'] = resource.id
+          love_story = LoveStory.where(user_id: resource.id)
+          cookies['love_story'] = love_story.present? ? 'true' : 'false'
+          cookies['common_user'] = resource.common_user? ? 'false' : 'true'
           respond_with resource
         else
           expire_session_data_after_sign_in!
