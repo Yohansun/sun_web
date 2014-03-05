@@ -344,7 +344,16 @@
       $queue = $(this).parent().prev().find("#upload_pics_queue")
       $queue.find("input[name=images]").remove()
       $queue.append("<input name='images' type='hidden' value='" + str + "'>")
-    })
-
+    });
+    //
+    $('.js-text_rest').bind('keydown keyup', function(){
+      var len = $(this).val().length;
+      var total = $(this).data('max');
+      if (len > total) {
+        $(this).val($(this).val().slice(0,total))
+        return;
+      };
+      $(this).next().find('.js-text_rest_show').text(total - len);
+    });
   })
 </script>
