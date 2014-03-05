@@ -56,7 +56,7 @@
           <div class="refresh_lists designer_events famous_script">
             <% @articles.each do |_article| %>
             <div class="media tit_con">
-              <a class="pull-left media_a" href="designer_events_in.html">
+              <a class="pull-left media_a" href="<%=dialog_celebrity_editor_treasury_path(_article.id)%>">
                 <img class="media-object" src="images/refresh/refresh_list2.jpg" style="width: 280px; height: 145px;">
               </a>
               <div class="media-body refresh_list">

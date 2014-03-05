@@ -59,6 +59,8 @@ $ ->
         $input_media_boards = $tr.find("input[name=mediaboard]")
         $input_media_username = $tr.find("input.mediausername")
         $input_media_pwd = $tr.find("input.mediapwd")
+        $input_media_email = $tr.find("input.mediaemail")
+        $input_media_mobile = $tr.find("input.mediamobile")
         media_name = $input_media_name.val()
         media_boards = []
         $input_media_boards.each (index,obj)->
@@ -68,12 +70,17 @@ $ ->
         media_boards = media_boards.join("_")
         media_username = $input_media_username.val()
         media_pwd = $input_media_pwd.val()
+        media_email = $input_media_email.val()
+        media_mobile = $input_media_mobile.val()
+        alert
         $.post "/manage/dialog_celebrities/media/update_media",
-          { media_id: media_id, name: media_name, username: media_username, password: media_pwd, boards: media_boards },(r)->
+          { media_id: media_id, name: media_name, username: media_username, password: media_pwd, boards: media_boards,email: media_email, mobile: media_mobile  },(r)->
             if r.code is 1
               $tr.find(".media_name").text media_name
               $tr.find(".media_boards").text r.boards
               $tr.find(".media_username").text media_username
+              $tr.find(".media_email").text media_email
+              $tr.find(".media_mobile").text media_mobile
               toggle_tr $tr,"back"
             else
               alert r.notify
