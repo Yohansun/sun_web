@@ -2,7 +2,7 @@
 class Manage::SpecialKvController < Manage::BaseController
 
 	def index
-		@kv = HomeKv.where(position: nil).first
+    @kv = HomeKv.find_or_create_by_position(nil)
 	end
 
 	def create_image
