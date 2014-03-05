@@ -231,6 +231,9 @@
       var $parents = $(this).parents('li');
       $parents.addClass('bg').find('.famous_answer').show();
       $parents.find('.js-state').hide().siblings('.js-hide_content').show().css({'cursor':'pointer','margin-right':'8px'});
+
+      $parents.siblings().removeClass('bg').find('.famous_answer').hide();
+      $parents.siblings().find('.js-hide_content').hide().siblings('.js-state').show();
     });
 
     $('.famous_list').on('click','.js-hide_content',function(){
@@ -271,7 +274,7 @@
     })
 
 
-    $('.uploadify_btn').uploadify({
+    $('#upload_pics').uploadify({
       uploader: '/dialog_celebrity/upload_image',
       dataType: 'json',
       swf : '/uploadify/uploadify.swf',
@@ -345,7 +348,16 @@
       $queue = $(this).parent().prev().find("#upload_pics_queue")
       $queue.find("input[name=images]").remove()
       $queue.append("<input name='images' type='hidden' value='" + str + "'>")
-    })
-
+    });
+    //
+    $('.js-text_rest').bind('keydown keyup', function(){
+      var len = $(this).val().length;
+      var total = $(this).data('max');
+      if (len > total) {
+        $(this).val($(this).val().slice(0,total))
+        return;
+      };
+      $(this).next().find('.js-text_rest_show').text(total - len);
+    });
   })
 </script>
