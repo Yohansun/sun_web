@@ -35,3 +35,12 @@
     %span.media_pwd.group1= media.password.present? ? '已隐藏' : ''
     %span.media_pwd_field.group2.hide
       %input.mediapwd.w150{type: "password", value: media.password, placeholder: "密码不得超过32个字符"}
+  %td
+    %span.media_email.group1= media.email
+    %span.media_email_field.group2.hide
+      %input.mediaemail.w150{type: "text", value: media.email}
+  %td
+    %span.media_mobile.group1= media.mobile
+    %span.media_mobile_field.group2.hide
+      %input.mediamobile.w150{type: "text", value: media.mobile}
+  %td

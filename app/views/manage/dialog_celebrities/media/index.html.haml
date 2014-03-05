@@ -14,11 +14,14 @@
 
   %table#scopes.table1.mt10.ml20
     %tr
-      %th.w100 操作
-      %th.w150 媒体名称
-      %th.w500 管理板块
-      %th.w150 登录名
-      %th.w150 登录密码
+      %th.w80 操作
+      %th.w130 媒体名称
+      %th.w360 管理板块
+      %th.w100 登录名
+      %th.w100 登录密码
+      %th.w150 e-mail
+      %th.w120 手机号码
+      %th.w120 通知时间
 
     - boards = CelebrityContentBoard.first(5)
     - @media_list.each do |media|
