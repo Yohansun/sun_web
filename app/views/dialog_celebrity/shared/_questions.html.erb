@@ -231,6 +231,9 @@
       var $parents = $(this).parents('li');
       $parents.addClass('bg').find('.famous_answer').show();
       $parents.find('.js-state').hide().siblings('.js-hide_content').show().css({'cursor':'pointer','margin-right':'8px'});
+
+      $parents.siblings().removeClass('bg').find('.famous_answer').hide();
+      $parents.siblings().find('.js-hide_content').hide().siblings('.js-state').show();
     });
 
     $('.famous_list').on('click','.js-hide_content',function(){
