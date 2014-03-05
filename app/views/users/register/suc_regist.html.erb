@@ -33,9 +33,17 @@
             </a>
             <ul class="pull-left unstyled">
               <li>
-                <a href="/">
-                <span class="pull-right">></span>
-                进入iColor首页，看看偶像们的最新力作。</a>
+                <% if params[:return_to].present? %>
+                  <a href="<%=params[:return_to]%>">
+                    <span class="pull-right">></span>
+                    进入iColor 为爱刷新首页，看看爱的故事和最新力作。
+                  </a>
+                <% else %>
+                  <a href="/">
+                    <span class="pull-right">></span>
+                    进入iColor首页，看看偶像们的最新力作。
+                  </a>
+                <% end %>
               </li>
               <li>
                 <a <% unless current_user.common_user? %> href="<%=new_user_design_path(current_user)%>" <% end -%>>
