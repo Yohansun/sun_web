@@ -1,5 +1,6 @@
 # encoding: utf-8
 class LoveStory::LoveStoriesController < LoveStory::BaseController
+  caches_action :index, :cache_path => Proc.new { |c| c.params }, :expires_in => 7.days
   def index
     @love_stories = LoveStory.order("created_at DESC")
 
@@ -34,6 +35,7 @@ class LoveStory::LoveStoriesController < LoveStory::BaseController
     @star_jx = IColumnData.show_data(3).limit(5)
     @star_jx_more = IColumnData.where(i_column_type_id: 3,position: 0).first
     @banners = IBanner.page_name('爱的故事').order("position ASC").all
+    expires_in 7.days, 'max-stale' => 8.days, :public => true
   end
 
   def new
