@@ -1,18 +1,26 @@
+<% content_for :body_head do %>
+  <script type='text/javascript'>
+  // Conversion Name: 为爱刷新_1Landing on首页
+  var ebRand = Math.random()+'';
+  ebRand = ebRand * 1000000;
+  //<![CDATA[
+  document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=436276&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+  //]]>
+  </script>
+  <noscript>
+  <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=436276&amp;ns=1"/>
+  </noscript>
+<% end %>
 <div class="container-fluid">
   <div class="text-center">
     <div class="refresh-flash pr">
-      <!-- <a target="_blank" href="javascript:;" class="flash-btn pa">分享爱的故事</a> -->
-      <!-- <a target="_blank" href="javascript:;" class="flash-btn2 pa">上传设计作品</a> -->
       <div class="index-kv wrapper">
-        <%= image_tag 'love_story/images/index/index-kv2.png', usemap: '#map-kv', class: 'index-kv', alt: '' %>
+        <%= image_tag 'love_story/images/index/index-kv2.png', class: 'index-kv', alt: '' %>
         <div class="text-center">
-          <a href="/users/sign_in?return_to=<%= love_story_root_url %>" class="js-fenxiang" data-confirm="登录网站后才能分享爱的故事,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
-          <a href="/users/sign_in?return_to=<%= love_story_root_url %>" class="js-upload" data-confirm="登录网站后才能上传设计作品,是否现在登录?"><%= image_tag 'love_story/images/index/index-kv-btn2.png' %></a>
+          <a href="/users/sign_in?return_to=<%= love_story_root_url %>" class="js-fenxiang" data-confirm="登录网站后才能分享爱的故事,是否现在登录?" id="love_monitor_link_436277"><%= image_tag 'love_story/images/index/index-kv-btn1.png' %></a>
+          <a href="/users/sign_in?return_to=<%= love_story_root_url %>" class="js-upload" data-confirm="登录网站后才能上传设计作品,是否现在登录?" id="love_monitor_link_436278"><%= image_tag 'love_story/images/index/index-kv-btn2.png' %></a>
         </div>
       </div>
-      <!-- <map name="map-kv" id="map-kv">
-        <area shape="rect" coords="225,216,387,270" href="#" alt="" />
-      </map> -->
     </div> <!-- 图片部分 -->
   </div>
 </div>

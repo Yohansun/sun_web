@@ -16,6 +16,7 @@
 //= require love_story/main
 //= require love_story/masonry.min
 //= require love_story/jquery.carouFredSel-6.2.1-packed
+//= require love_story/love_monitor_record
 
 // jquery get params
 function getParameters() {

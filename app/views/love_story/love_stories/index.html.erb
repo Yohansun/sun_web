@@ -1,3 +1,16 @@
+<% content_for :body_head do %>
+  <script type='text/javascript'>
+  // Conversion Name: 为爱刷新_1Landing on首页
+  var ebRand = Math.random()+'';
+  ebRand = ebRand * 1000000;
+  //<![CDATA[
+  document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=<%= params[:upload_success].present? ? 436286 : 436281 %>&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+  //]]>
+  </script>
+  <noscript>
+  <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=<%= params[:upload_success].present? ? 436286 : 436281 %>&amp;ns=1"/>
+  </noscript>
+<% end %>
 <%- content_for :tail do %>
   <%= javascript_include_tag "/resources/js/plugins/exp/exp.js" %>
   <script type="text/javascript" charset="utf-8">
@@ -36,6 +49,7 @@
       $('#check_my_story').click(function(event) {
         $('#upload_success').modal('hide');
         $.get('<%= get_story_info_love_stories_path(love_story_id: params[:love_story_id]) %>');
+        newTriggerEBConversion(this, 436287);
       });
       $('.image_modal').bind('ajaxSend', function(event) {
         init_image_modal();
@@ -52,7 +66,7 @@
 <div class="container-fluid bann_green_skin">
   <div class="banner">
     <!-- <a href="#" class="btn pa"></a> -->
-    <div class="wrapper">
+    <div class="wrapper love_monitor_link_436282">
       <%= image_tag 'love_story/images/banners/banner2.jpg', usemap: '#story_kv', alt: '' %>
       <map name="story_kv" name="story_kv">
         <area shape="rect" coords="56,253,250,290" href="/love_story/minisite_stars" target="_blank" alt="" />
@@ -81,7 +95,7 @@
             <% end %>
           </div>
           <div class="mt10">
-            <a href="/users/sign_in?return_to=<%= love_stories_url %>" class="icon-btn icon-share_story js-fenxiang" data-confirm="登录网站后才能分享爱的故事,是否现在登录?">分享爱的故事</a>
+            <a href="/users/sign_in?return_to=<%= love_stories_url %>" class="icon-btn icon-share_story js-fenxiang" data-confirm="登录网站后才能分享爱的故事,是否现在登录?" id="love_monitor_link_436283">分享爱的故事</a>
           </div>
           <div class="list">
             <div class="thumbnails js-msnry">
