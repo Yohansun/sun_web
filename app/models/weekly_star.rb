@@ -9,7 +9,7 @@ class WeeklyStar < ActiveRecord::Base
   has_many :collects, :dependent => :destroy
 
   attr_accessor :time
-  has_attached_file :main_preview_img, :styles => {:thumb => "80x80#", :index=>"230x138#",:image_show => "178x128#",:week_like => "110x80>"},
+  has_attached_file :main_preview_img, :styles => {:thumb => "80x80#", :index=>"230x138#",:image_show => "178x128#",:week_like => "110x80>", :index_list => "210x156#"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"

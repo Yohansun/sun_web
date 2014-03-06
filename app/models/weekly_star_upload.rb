@@ -4,7 +4,8 @@ class WeeklyStarUpload < ActiveRecord::Base
   after_destroy :update_zip_cache
 
   has_attached_file :file, :styles => {:thumb => "105x97#", :slide => "550x365#", :slide_thumb => "205x138#", :home_page1 => "380x365#", :show_big => "800>",
-                                       :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :mobile_slide => "320x206#", :mobile_fullscreen => "320x320#"},
+                                       :fullscreen => "980x655>", :fullscreen_thumb => "100x120#", :mobile_slide => "320x206#", :mobile_fullscreen => "320x320#",
+                                       :slide_index => "780x500#", :show_thumb => "75x75#"},
                     :whiny_thumbnails => true,
                     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
                     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
