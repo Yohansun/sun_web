@@ -140,3 +140,24 @@ task :minisite_image => :environment do
     p user.id
   end
 end
+desc "设计之星压图"
+task :weekly_stars_image => :environment do
+  WeeklyStarUpload.find_each do |wsupload|
+    wsupload.file.reprocess!
+    p wsupload.id
+  end
+end
+desc "往期之星压图"
+task :unstyled_image => :environment do
+  WeeklyStar.find_each do |ws|
+    ws.main_preview_img.reprocess! :index_list
+    p "ws_id=#{ws.id}"
+    link_designs = Design.where(id: ws.design_link.split("/").last) unless ws.design_link.blank?
+    if link_designs.present?
+      link_designs.first.design_images.find_each do |design_image|
+        design_image.file.reprocess! :index_list_thumb
+        p "image_id=#{design_image.id}"
+      end
+    end
+  end
+end

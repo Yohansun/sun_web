@@ -67,7 +67,8 @@
       <div class="designs_in_slide pr">
         <div class="imageflow" id="gallery" unselectable="on">
           <%- @design.weekly_star_uploads.each_with_index do |star_upload,index| %>
-            <%= image_tag(star_upload.file.url(:slide), :class => "cloudcarousel", :'data-id' => star_upload.id, :alt => "#gallery#{index+1}") unless star_upload.file.nil? %>
+            <%#= image_tag(star_upload.file.url(:slide), :class => "cloudcarousel", :'data-id' => star_upload.id, :alt => "#gallery#{index+1}") unless star_upload.file.nil? %>
+            <%= image_tag(star_upload.file.url(:slide_index), :'data-id' => star_upload.id, :alt => "#gallery#{index+1}") unless star_upload.file.nil? %>
           <%- end %>
         </div>
       </div>
@@ -180,7 +181,7 @@
               <% link_design = Design.find(design.design_link.split("/").last) unless design.design_link.blank? %>
               <li class="pr">
                 <a href="/weekly_stars/<%= design.id %>" class="help-block pr" target="_blank">
-                  <img src="<%= design.main_preview_img.url(:index) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/>
+                  <img src="<%= design.main_preview_img.url(:index_list) %>" title="装修设计欣赏-<%= design.design_name %>" alt=""/>
                   <%=
                     case design.star_type_id
                       when 2
@@ -194,7 +195,7 @@
                   <%- if link_design %>
                     <%- link_design.design_images.sample(3).each do |design_image| %>
                       <a href="/weekly_stars/<%= design.id %>" target="_blank" class="pull-left thumb_item">
-                        <%= image_tag design_image.try(:file).try(:url, :thumb), size: '65x65' %>
+                        <%= image_tag design_image.try(:file).try(:url, :index_list_thumb), size: '65x65' %>
                       </a>
                     <%- end %>
                   <%- end %>
