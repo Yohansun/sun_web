@@ -8,7 +8,7 @@
       flowplayer("player", "flash/flowplayer-3.2.12.swf");
   </script>
 <%- end %>
-
+<% cache "art_index" do %>
 <div class="main">
 <div class='sub_title tr'>
 	<img src="<%= asset_path "paint_art/title_paint_art.png"%>" alt="" />
@@ -357,3 +357,4 @@
         <a href="javascript:;" id="lay_close"></a>
     </div><!--arts ends-->
 </div><!--overlay ends-->
+<% end %>

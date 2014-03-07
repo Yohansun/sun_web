@@ -24,6 +24,7 @@
         });
     </script>
 <%- end %>
+<% cache "softwares_case" do %>
 <div class="main">
   <div class='sub_title tr'>
     <img src='<%= asset_path "news/title_tools.png"%>'/>
@@ -134,3 +135,4 @@
   </div>
   <!--wrapper ends-->
 </div><!--main ends-->
+<% end %>

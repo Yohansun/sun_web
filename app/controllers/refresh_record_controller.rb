@@ -3,7 +3,7 @@ class RefreshRecordController < ApplicationController
   layout "home_manage"
   before_filter :get_data
   before_filter :get_star_page_data, only: :star_page
-
+  caches_action :index, :expires_in => 7.days
   def index
     @kv = HomeKv.where(position: nil, visible: true).first
     @life_memoirs = ILifeMemoir.order("id desc").page(params[:page]).per(4)

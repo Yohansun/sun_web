@@ -236,8 +236,8 @@
       <%= form_for(Comment.new, :html => {:class => "comment_form exp-holder"}) do |f| %>
         <h5>评论<span class="text-error comment_count"></span></h5>
         <%= f.hidden_field :commentable_id, value: params[:id] %>
-    <%= f.hidden_field :commentable_type, value: 'DesignImage', id: 'J_t' %>
-    <%= f.text_area :content, :placeholder =>"最多可输入1000字" %>
+        <%= f.hidden_field :commentable_type, value: 'DesignImage', id: 'J_t' %>
+        <%= f.text_area :content, :placeholder =>"最多可输入1000字" %>
         <ul class="moodbtn_group unstyled clearfix">
           <li class="pull-right btn_send"><span class="muted">可以输入<span class="text-error">1000</span>个字符</span><button class="">提交评论</button></li>
           <li class="pull-left exp-block-trigger" id="J_sbt">
