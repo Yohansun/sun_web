@@ -75,8 +75,8 @@ class DialogCelebrity::MediaController < ApplicationController
     render :js => "alert('更新关键字成功')"
   end
 
-  def reset_question_key
-    CelebrityQuestion.find(params[:question_id]).update_attributes(key: "")
+  def reset_board_id
+    CelebrityQuestion.find(params[:question_id]).update_attributes(celebrity_content_board_id: nil)
     render :js => "alert('重置领域分类成功')"
   end
 
