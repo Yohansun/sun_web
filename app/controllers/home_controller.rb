@@ -96,6 +96,13 @@ class HomeController < ApplicationController
     @banner7 = IBanner.page_name('首页').position(6).first
     @home_life_videos = HomeLifeVideo.order("rank asc")
 
+    @dpage = HomeDialogCelebrity.first
+
+    @master = @dpage.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@dpage.master_id)
+    @celebrity = @dpage.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@dpage.celebrity_id)
+    @images = @dpage.images
+    @replied_count = sprintf "%010.0f",CelebrityQuestion.replied_count
+
     expires_in 1.day, 'max-stale' => 2.hours, :public => true
   end
 

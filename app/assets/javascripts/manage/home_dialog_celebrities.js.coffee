@@ -34,22 +34,55 @@ $ ->
       contents.eq(1).text(title)
       contents.eq(2).text(url)
 
+      $(".image-position-word").each (index,obj)->
+        if $(obj).attr("data-position") is r.position.toString()
+          $(obj).text(r.ori_position)
+          $(obj).attr("data-position",r.ori_position)
+      contents.eq(0).attr("data-position",position)
       $content = $obj.find(".show")
       $form = $obj.find(".form")
       $content.show()
       $form.hide()
 
-  if $.fileupload
-    $('#upload-image').fileupload(
-      url: '/manage/home_dialog_celebrities/create_image',
-      dataType: 'json',
-      acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-      maxNumberOfFiles: 1,
-      maxFileSize: 5000000,
-      formData: { image_id: $(this).parent().parent().parent().parent().attr("data-image-id")}
-      done: (e, data)->
-        $(this).find(".image-thumb img").attr("src",data.result.url)
-      ,
-      error: (e, data)->
-        alert data.result
-    )
+  $('#upload-image1').fileupload(
+    url: '/manage/home_dialog_celebrities/create_image',
+    dataType: 'json',
+    acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+    maxNumberOfFiles: 1,
+    maxFileSize: 5000000,
+    formData: { image_index: 1},
+    done: (e, data)->
+      $("img#image1").attr("src",data.result.url)
+    ,
+    error: (e, data)->
+      alert data.result
+  )
+
+  $('#upload-image2').fileupload(
+    url: '/manage/home_dialog_celebrities/create_image',
+    dataType: 'json',
+    acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+    maxNumberOfFiles: 1,
+    maxFileSize: 5000000,
+    formData: { image_index: 2},
+    done: (e, data)->
+      $("img#image2").attr("src",data.result.url)
+    ,
+    error: (e, data)->
+      alert data.result
+  )
+
+  $('#upload-image3').fileupload(
+    url: '/manage/home_dialog_celebrities/create_image',
+    dataType: 'json',
+    acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
+    maxNumberOfFiles: 1,
+    maxFileSize: 5000000,
+    formData: { image_index: 3},
+    done: (e, data)->
+      $("img#image3").attr("src",data.result.url)
+    ,
+    error: (e, data)->
+      alert data.result
+  )
+

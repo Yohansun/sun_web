@@ -20,6 +20,9 @@ $(function(){
   })
 });
 </script>
+
+<%= stylesheet_link_tag "famous","jquery.slider" %>
+
 <% end -%>
   <div class="clearfix mt10">
     <div id="indexkv" class="pull-left">
@@ -65,6 +68,10 @@ $(function(){
       </div>
     </div>
   </div>
+
+
+  <%= render :partial => 'dialog_celebrity' %>
+
   <%= render :partial => 'refresh' %>
 
   <%= render :partial => 'image_lib' %>
