@@ -240,11 +240,14 @@
     $('.js-show_content').css('cursor','pointer');
     $('.famous_list').on('click','.js-show_content',function(){
       var $parents = $(this).parents('li');
+      var $siblings = $parents.siblings();
       $parents.addClass('bg').find('.famous_answer').show();
       $parents.find('.js-state').hide().siblings('.js-hide_content').show().css({'cursor':'pointer','margin-right':'8px'});
 
-      $parents.siblings().removeClass('bg').find('.famous_answer').hide();
-      $parents.siblings().find('.js-hide_content').hide().siblings('.js-state').show();
+      $siblings.removeClass('bg').find('.famous_answer').hide();
+      $siblings.find('.js-hide_content').hide().siblings('.js-state').show();
+      $parents.find('.js-show_content').addClass('fb');
+      $siblings.find('.js-show_content').removeClass('fb');
     });
 
     $('.famous_list').on('click','.js-hide_content',function(){
@@ -252,6 +255,7 @@
       var $parents = $(this).parents('li');
       $parents.removeClass('bg').find('.famous_answer').hide();
       $(this).hide().siblings('.js-state').show()
+      $parents.find('.js-show_content').removeClass('fb');
     });
 
     $('.js-list_parent').on('click','.js-review_btn', function(){
