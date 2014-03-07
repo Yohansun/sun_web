@@ -48,15 +48,17 @@ class RefreshRecordController < ApplicationController
 
   private
     def get_star_page_data
+      #装修图库精选
+      @images_jingxuan = IColumnData.show_data(2).limit(5)
+      @images_jingxuan_more = IColumnData.where(i_column_type_id: 2,position: 0).first
+      #设计之星作品精选
+      @star_jingxuan = IColumnData.show_data(3).limit(5)
+      @star_jingxuan_more = IColumnData.where(i_column_type_id: 3,position: 0).first
       case params[:star_name]
       when 're_xjl'
-        #装修图库精选
-        @images_jingxuan = IColumnData.show_data(2).limit(5)
-        @images_jingxuan_more = IColumnData.where(i_column_type_id: 2,position: 0).first
-        #设计之星作品精选
-        @star_jingxuan = IColumnData.show_data(3).limit(5)
-        @star_jingxuan_more = IColumnData.where(i_column_type_id: 3,position: 0).first
         @banners = IBanner.page_name('徐静蕾的书香客厅').order("position ASC").all
+      when 're_wld'
+        @banners = IBanner.page_name('王络丹-让爱自由互动').order("position ASC").all
       end
     end
 end

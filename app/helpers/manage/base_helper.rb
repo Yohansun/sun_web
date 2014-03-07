@@ -35,6 +35,8 @@ module Manage::BaseHelper
         'refresh_label5'
       when /徐静蕾的书香客厅/
         'refresh_label6'
+      when /王络丹-让爱自由互动/
+        'refresh_label7'
       else
         'nothing'
     end

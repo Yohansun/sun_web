@@ -202,3 +202,14 @@ task :add_refresh_star_page_banners => :environment  do
     end
   end
 end
+desc "添加刷新生活明星单页banner2"
+task :add_refresh_star_page_banners2 => :environment  do
+  banner1 = IBanner.where(page_name: '王络丹-让爱自由互动')
+  if banner1.blank?
+    IBanner.transaction do
+      IBanner.create(page_name: '王络丹-让爱自由互动',position: 1, size: '230x230')
+      IBanner.create(page_name: '王络丹-让爱自由互动',position: 2, size: '670x85')
+      IBanner.create(page_name: '王络丹-让爱自由互动',position: 3, size: '310x85')
+    end
+  end
+end
