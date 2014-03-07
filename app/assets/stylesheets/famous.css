@@ -5,7 +5,7 @@
 .famous_img{position:relative;margin-right:10px;}
 .famous_img img{width:330px;height:240px;}
 .famous_img .title{position:absolute;left:0;bottom:0;width:100%;padding:13px 0;margin-bottom:0;background:rgba(0, 0, 0, 0.7) none repeat scroll 0 0 !important;filter:Alpha(opacity=70);background:#000;}
-.famous_img .title a{color:#fff;font:14px "SimSun";}
+.famous_img .title a{color:#fff;font:bold 14px "SimSun";}
 
 .famous_intro{width:405px;}
 .famous_intro .title{border-bottom: 1px solid #e8e8e8;margin-top:0;padding-bottom:4px;}
@@ -13,11 +13,12 @@
 .famous_intro .media{margin:0 0 10px;}
 .famous_intro .media-body p{font:12px/18px "SimSun";height:54px;overflow:hidden;color:#898989;}
 .famous_intro .media-heading{font-weight:normal;}
+.famous_intro .media-heading a{color: #333;font-weight: bold;}
 
 .famous_tips{background:url(/assets/famous/famous_tips.jpg) no-repeat center top;width:200px;height:120px;padding-top:119px;}
 .famous_tips p{color:#6d6d6d;font:14px/24px "SimSun";margin-top:5px;}
 .famous_tips strong{color:#ff6600;font:18px/24px "Arial";position:relative;top:1px;margin:0 8px;}
-.btn_ask{width:150px;height:52px;background:url(/assets/btns/btns_icon2.png) no-repeat 0 -282px;font:16px/52px "SimSun";color:#fff;padding-left:20px;}
+.btn_ask{width:150px;height:52px;background:url(/assets/btns/btns_icon2.png) no-repeat 0 -282px;font:bold 16px/52px "SimSun";color:#fff;padding-left:20px;}
 .btn_ask:hover{color:#fff;}
 
 .famous_left{width:758px;/*width:760px;*/}
@@ -41,6 +42,10 @@
 .famous_list li a{color:#2d64b3;/*font:14px/20px "SimSun";width:590px;height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;*/}
 .famous_list li .title_faq{color:#2d64b3;font:14px/20px "SimSun";width:565px;min-height:20px;}
 .famous_list li .title_faq .icon-imgshow_btn{margin-top: -1px;}
+.famous_list li .title_faq a.fb{
+  font-weight: bold;
+}
+
 .famous_list li .state{color:#999;font:12px/20px "SimSun";}
 .famous_list li .state span,.famous_list li .state .mr8{margin-right:8px;}
 .famous_list li .state strong{color:#2d64b3;}
