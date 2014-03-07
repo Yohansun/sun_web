@@ -6,7 +6,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:create,:upload_image]
   def index
     @banners = IBanner.page_name('名人问答').order("position ASC")
-    @new_designs = MasterDesign.order("updated_at desc").limit(5)
+    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc")
   end
 
   def new

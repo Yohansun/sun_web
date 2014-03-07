@@ -1,24 +1,64 @@
 - content_for :head do
   = stylesheet_link_tag 'manage/dialog_celebrity'
-  = javascript_include_tag "manage/dialog_celebrities/home"
+  = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
+  = javascript_include_tag "manage/home_dialog_celebrities"
+
+  = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                           "upload_image/jquery.iframe-transport",
+                           "upload_image/jquery.fileupload"
 
 = render "manage/home_dialog_celebrities/breadcrumb"
 
 #home-images.mt10.ml20.clearfix
   - @images.each_with_index do |_image,_index|
-    .images.fl.clearfix
-      .image-thumb.fl
-        = image_tag _image.thumb.file2(:thumb),:size=>"165x120" if _image.thumb.present?
-      .image-info.fl.ml10
-        %p.position.mt10
-          排序
-          &nbsp;
-          = _image.position
-        %p.title.mt10
-          标题:
-          &nbsp;
-          = _image.title
-        %p.alink
-          链接:
-          &nbsp;
-          = _image.url
+    .image.fl{:"data-image-id" => _image.id}
+      .clearfix
+        .image-thumb.fl
+          %img{ src: _image.thumb.present? ? _image.thumb.file2(:thumb) : ""  ,width: "165",height: "120" }
+
+        .image-info.fl.ml10
+          .position.mt10.clearfix
+            .fl
+              排序
+              &nbsp;
+            .fl.ml10
+              .show
+                = _image.position
+              .form{style: "display: none;" }
+                %select.image-position
+                  - for i in 1..3
+                    %option{selected: _image.position == i }=i
+
+          .title
+            .fl
+              标题:
+              &nbsp;
+            .fl.ml10{style: "width: 170px;"}
+              .show
+                = _image.title
+              .form{style: "display: none;" }
+                %input.image-title{ type: "text" , value: _image.title}
+          .alink
+            .fl
+              链接:
+              &nbsp;
+            .fl.ml10{style: "width: 170px;"}
+              .show
+                = _image.url
+              .form{style: "display: none;" }
+                %input.image-url{ type: "text", value: _image.url }
+
+      .image-btns.mt10.clearfix
+        .show
+          .fl
+            = link_to "编辑","javascript:;", :class => "edit-image"
+        .form{style: "display: none;" }
+          .fl
+            = link_to "保存","javascript:;", :class => "save-image"
+          .fl.ml10
+            = link_to "取消","javascript:;", :class => "cancel-image"
+          .fl{style: "margin-left: 110px;"}
+            = link_to "上传图片","javascript:;", :class => "upload-image",:id => "upload-image"
+            &nbsp
+            320x240
+

@@ -175,6 +175,27 @@ table.table1 {
   }
 }
 
+#home-images{
+  width: 910px;
+  .image{
+    padding: 20px; box-shadow: #ccc 2px 2px 2px; background-color: rgb(247,247,247);
+    width: 400px; height: 160px; margin-right: 12px; margin-bottom: 12px;
+    a.upload-image { background-color: rgb(2,154,198); padding: 4px 6px; color: white; border-radius: 4px; text-decoration: none;}
+    .image-thumb { width: 165px; height: 120px; }
+    .image-info {
+      width: 220px;
+      .position { height: 36px; width: 220; }
+      .title { height: 36px; width: 220px; }
+      .alink { height: 36px; width: 220px; overflow: hidden;}
+
+      input[type=text]{
+        width: 160px;
+      }
+      select{ width: 160px; }
+    }
+  }
+}
+
 .pager {
   .current { color: red; }
 }
