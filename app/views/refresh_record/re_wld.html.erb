@@ -1,0 +1,92 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    /* 王珞丹 */
+    .wld{background:#fff;border:1px solid #e5e5dd;font:14px "SimHei";}
+    .wld .badge{border-radius:12px;}
+    .re_wld1{position:relative;background:url(<%= asset_path 'refresh_life/refresh/wld/wld_ban.jpg'%>) no-repeat center top;height:367px;padding:40px 510px 30px 60px;margin-bottom:30px;}
+    .video_btn{position:absolute;top:260px;left:170px;}
+
+    .re_wld2{padding:0 9px 0px;line-height: 24px;}
+    .re_wld2 p{margin-left: 46px;margin-right: 26px;text-indent: 30px;}
+    .mt10{
+      margin-top: 10px;
+    }
+    .mt20{
+      margin-top: 20px;
+    }
+    .lineb1{
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 23px;
+      margin-bottom: 23px;
+    }
+    .badge-blue{background:#5fafb8;padding:5px 9px;}
+    .re_by{padding:10px 20px;border-bottom:4px solid #e71d36;color:#707070;font:12px "Microsoft Yahei";}
+  </style>
+<%- end %>
+<div class="container">
+  <h3 class="chann_caption nomargin"><i class="icon-map icon-map9 icon_colors"></i><strong>刷新生活</strong><small>立邦帮您刷新，共建美好生活</small></h3>
+  <ul class="breadcrumb">
+    <li><a href="/">首页</a> > </li>
+    <li><a href="/refresh_record">刷新生活</a> > </li>
+    <li><a href="/refresh_record">刷新实录</a> > </li>
+    <li class="active">王珞丹的卧室新格局</li>
+  </ul>
+  <hr class="border2 border2_mt2">
+
+  <div class="wld">
+    <div class="re_wld1">
+      <a class="video_btn" href="#"><img src="<%= asset_path 'refresh_life/refresh/video_btn.png'%>"></a>
+    </div>
+    <div class="re_wld2">
+      <p> 因青春剧《奋斗》、《我的青春谁做主》一炮而红的影视明星王珞丹一直给人青春阳光的印象，设计师冈本庆三和出口勉为她打造的卧室空间也注入了许多代表王珞丹的元素——时髦、年轻、活泼和亲切。卧室是私密和放松的空间，两位设计师打破了传统意义上的“私密”，将更多“开放”的元素融入到这间卧室的设计中，将私密与开放和谐共融，让爱自由互动。</p>
+      <p>王珞丹一如她许多作品中塑造的角色那样，拥有着俏皮的青春气质。一身舒服的素色装扮，一张爱笑的脸，一席仿佛好朋友间关于“家”的交谈，给人一种莫名的亲切感。她对家有着一个普通女孩最朴素的理解——“爸妈在的地方就是家”。当然也像所有的女孩那样，她对自己未来的家有着最美好的想象。如今，王珞丹和爸爸妈妈还有姐姐同住在租来的房子里，惜福的她感觉到的不是拥挤和不便，而是家人团聚的温暖。对于未来的家，王珞丹正将那些模糊的愿景一点点变清晰，通过自己的努力，为家人也为自己刷新一个更美好的生活。</p>
+    </div>
+
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-1.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-2.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-3.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-4.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-5.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-6.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-7.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-8.jpg'%>" alt="" />
+    </div>
+    <div class="re_wld3 text-center">
+      <img src="<%= asset_path 'refresh_life/refresh/wld/wld-9.jpg'%>" alt="" />
+    </div>
+
+    <p class="text-right re_by"><em>以上资料由《美好家园》友情提供</em></p>
+  </div>
+
+  <div class="index_main refresh_news mt10 clearfix">
+    <%= render partial: 'refresh_record/refresh_jx_list', locals: {resource: @images_jingxuan, more_url: @images_jingxuan_more, title: '装修图库精选'} %>
+    <%= render partial: 'refresh_record/refresh_jx_list', locals: {resource: @star_jingxuan, more_url: @star_jingxuan_more, title: '设计之星作品精选'} %>
+    <div class="pull-right">
+      <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x230) %></a>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="footer_banner mt10 pull-left">
+      <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85) %></a>
+    </div>
+    <div class="footer_banner mt10 pull-right">
+      <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_310x85) %></a>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-<%- if %w{徐静蕾的书香客厅}.include?(params[:page_name]) %>
+<%- if %w{徐静蕾的书香客厅 王络丹-让爱自由互动}.include?(params[:page_name]) %>
   <%= form_tag '/manage/banner_refresh', class: 'form-inline mt30' , method: :get do %>
-    <%= select_tag "page_name",options_for_select(["徐静蕾的书香客厅"],
+    <%= select_tag "page_name",options_for_select(["徐静蕾的书香客厅","王络丹-让爱自由互动"],
                                                params[:page_name]),
                                                class: "input-medium mr15" %>
     <input type="submit" value="确定" class="btn btn-small btn-primary">
