@@ -8,7 +8,7 @@
   = simple_form_for @page,:url => "/manage/home_dialog_celebrities/save_data",:method => "post", :html => { :id => "manage_dialog_celebrity_pege_form",:class => "mt20"} do |f|
 
     %span.ltitle
-      本期名人在线
+      首页 - 对话名人 - 名人名家 - 本期名人
     .checkbox.mb20.mt20.shadow-white
       %label
         %input#check_last_celebrity{type: "checkbox", :name => "dialog_celebrity_page[last_celebrity]",:checked => @page.last_celebrity, :value=>"1"}
@@ -26,7 +26,7 @@
           %a.btn.btn-small.btn-primary#find-celebrity-btn.radius6{href: "javascript:;"} 查找
 
     %span.ltitle
-      本期名家设计
+      首页 - 对话名人 - 名人名家 - 本期名家
     .checkbox.mt20.shadow-white
       %label
         %input#check_last_master{type: "checkbox", :name => "dialog_celebrity_page[last_master]",:checked => @page.last_master, :value=>"1"}

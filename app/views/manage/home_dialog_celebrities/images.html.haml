@@ -9,6 +9,9 @@
 
 = render "manage/home_dialog_celebrities/breadcrumb"
 
+%span.ltitle.mt20
+  首页 - 对话名人 - 图文信息
+
 #home-images.mt10.ml20.clearfix
   - @images.each_with_index do |_image,_index|
     .image.fl{:"data-image-id" => _image.id}
