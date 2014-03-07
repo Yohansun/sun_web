@@ -21,18 +21,26 @@ class Manage::HomeDialogCelebritiesController < Manage::BaseController
   end
 
   def update_image
-    HomeDialogCelebrityImage.find(params[:id]).update_attributes title: params[:title],
-      position: params[:position], url: params[:url]
-    render :js => "alert('保存成功')"
+    image = HomeDialogCelebrityImage.find(params[:id])
+    ori_position = image.position.to_i
+    position = params[:position].to_i
+    ori_images = HomeDialogCelebrityImage.where(:position => position)
+    image.update_attributes title: params[:title],
+      position: position, url: params[:url]
+
+    ori_images.each do |_image|
+      next if _image.id == image.id
+      _image.update_attributes :position => ori_position
+    end
+    render :json => { :position => position, :ori_position => ori_position  }
   end
 
   def create_image
-    return render :json => params
-    image = HomeDialogCelebrityImage.find(params[:image_id])
+    image = @page.images[params[:image_index].to_i-1]
     if image && params[:file].present?
-      @page.edit_treasury_thumb = params[:file]
-      if @page.save
-        render :json => {:notify => "上传成功",:url => @page.edit_treasury_thumb(:thumb)}, :layout => false
+      image.thumb = params[:file]
+      if image.save
+        render :json => {:notify => "上传成功",:url => image.thumb(:thumb)}, :layout => false
       else
         return render :json => {:notify => "保存失败"}, :layout => false
       end
