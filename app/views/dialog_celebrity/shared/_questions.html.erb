@@ -124,10 +124,21 @@
               </p>
               <% _reply = _question.find_media_reply %>
               <% if _reply.present? %>
-                <p class="bordered_t">
+                <div class="bordered_t">
                   <span style="font-size: 16px; font-weight: bold;">
                     专家回答
                   </span>
+
+                  <i class="icon-imgshow_btn" data-question-id="<%= _reply.id -%>"></i>
+
+                  <div class="imgs_group invisible" style="height:0;">
+                    <% _reply.images.each do |_image| -%>
+                      <a href="<%=_image.image(:slide)%>" class="imgsgroup question_images_<%= _reply.id -%>">
+                        <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+                      </a>
+                    <%end-%>
+                  </div>
+
                   <span class="pull-right"><%=_reply.created_at.strftime("%Y-%m-%d")%></span>
                 </p>
                 <p>
@@ -253,9 +264,11 @@
     //delete
     $('.js-list_parent').on('click','.js-delete',function(){
       $_obj = $(this).parent('.state')
-      $.post("/dialog_celebrity/destroy_question_reply",{id: $(this).attr("data-reply-id")},function(result){
-        $_obj.remove();
-      })
+      if(confirm("是否要重置领域分类?") == true){
+        $.post("/dialog_celebrity/destroy_question_reply",{id: $(this).attr("data-reply-id")},function(result){
+          $_obj.remove();
+        })
+      }
     });
 
     $("form.famous_ask_form").submit(function(){

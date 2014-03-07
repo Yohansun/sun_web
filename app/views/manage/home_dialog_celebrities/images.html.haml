@@ -1,4 +1,24 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity'
+  = javascript_include_tag "manage/dialog_celebrities/home"
 
 = render "manage/home_dialog_celebrities/breadcrumb"
 
-
+#home-images.mt10.ml20.clearfix
+  - @images.each_with_index do |_image,_index|
+    .images.fl.clearfix
+      .image-thumb.fl
+        = image_tag _image.thumb.file2(:thumb),:size=>"165x120" if _image.thumb.present?
+      .image-info.fl.ml10
+        %p.position.mt10
+          排序
+          &nbsp;
+          = _image.position
+        %p.title.mt10
+          标题:
+          &nbsp;
+          = _image.title
+        %p.alink
+          链接:
+          &nbsp;
+          = _image.url

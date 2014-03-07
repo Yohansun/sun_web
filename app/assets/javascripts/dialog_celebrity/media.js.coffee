@@ -18,7 +18,7 @@ $ ->
       $("body").on "click","#submit-question",->
         question_id = $(this).attr("data-question-id")
         reply_id = $(this).attr("data-reply-id")
-        content = $(this).parent().prev().find("textarea").val()
+        content = $(this).parent().parent().find("textarea").val()
 
         image_ids = ( $(obj).attr("data-image-id") for obj in $(this).parent().parent().next().find("img") )
 
@@ -119,12 +119,14 @@ $ ->
 
       $("body").on "click",".reset_board_id", ->
         question_id = $(this).parent().parent().parent().attr("data-question-id")
-        $obj = $(this)
-        $.post "/dialog_celebrity/media/reset_question_key",{question_id: question_id}, ->
-          $scope = $obj.parent().prev().prev().find("select")
-          $key = $obj.parent().prev().find("select")
-          $scope.find("option:eq(0)").attr("selected","selected")
-          $key.find("option:gt(0)").remove()
+        $obj = $(this).parent().parent().parent().parent()
+        if confirm("是否要重置领域分类?") is true
+          $.post "/dialog_celebrity/media/reset_board_id",{question_id: question_id}, ->
+            $obj.remove()
+            # $scope = $obj.parent().prev().prev().find("select")
+            # $key = $obj.parent().prev().find("select")
+            # $scope.find("option:eq(0)").attr("selected","selected")
+            # $key.find("option:gt(0)").remove()
 
       colorbox_qa = (obj) ->
         $(obj).colorbox({rel: obj,slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});

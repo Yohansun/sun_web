@@ -57,7 +57,7 @@
             <% @articles.each do |_article| %>
             <div class="media tit_con">
               <a class="pull-left media_a" href="<%=dialog_celebrity_editor_treasury_path(_article.id)%>">
-                <img class="media-object" src="images/refresh/refresh_list2.jpg" style="width: 280px; height: 145px;">
+                <img class="media-object" src="<%=_article.thumb(:thumb)%>" style="width: 280px; height: 145px;">
               </a>
               <div class="media-body refresh_list">
                 <div class="list_mata">
