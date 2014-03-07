@@ -24,6 +24,7 @@ class DialogCelebrity::EditorTreasuriesController < ApplicationController
     @article = EditorTreasury.find(params[:id])
 
     @banners = IBanner.page_name('小编宝典').order("position ASC")
-    @new_designs = MasterDesign.order("updated_at desc").limit(5)
+    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc")
+
   end
 end

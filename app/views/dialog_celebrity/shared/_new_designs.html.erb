@@ -6,11 +6,11 @@
   <% @new_designs.each_with_index do |_design,index| %>
     <li class="map-r1 active <%= index == 0 ? 'dott1' : ''%>">
       <i class="icon-i16 icon-1"><%= index+1 %></i>
-      <strong class="js-title"><%= _design.design_name %></strong>
-      <% if index == 0 %>
-      <% cover = _design.cover_design_upload %>
-      <a href="<%= dialog_celebrity_master_design_path(_design,upload_id: cover.id ) if cover.present? -%>" class="js-img"><img src="<%=cover.try(:file2,:interview)%>" alt=""></a>
-      <% end -%>
+      <strong class="js-title"><%= _design.title %></strong>
+      <% cover = _design.file %>
+      <a href="<%= _design.url -%>" class="js-img" style="<%= index > 0 ? 'display: none;' : '' %>">
+        <img src="<%=_design.file(:list_155x115)%>" alt="">
+      </a>
     </li>
   <%end-%>
 </ul>
