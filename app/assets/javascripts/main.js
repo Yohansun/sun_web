@@ -987,7 +987,7 @@ $(function(){
             scroll : 3,
             pagers : '.chann_indicators'
         });
-        $('#refresh_slide').slider({
+        $('#refresh_slide, .js-index_slide_1').slider({
             buttons : false,
             scroll : 1,
             pagers : '.circle_indicators'
