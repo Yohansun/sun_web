@@ -47,6 +47,21 @@
         }
       });
     });
+    $(function(){
+      email = $("#user_email").val();
+      phone = $("#user_phone").val();
+      $(".reg_form").click(function(){
+        if(email == ""){
+          alert("E-mail不能为空！")
+          return false
+        }else if(phone == ""){
+          alert("联系电话不能为空！")
+          return false
+        }else{
+          return true
+        }
+      })
+    })
   </script>
 <% end %>
 
@@ -115,6 +130,24 @@
                   <%= select_tag 'user[date_of_birth(1i)]', options_for_select((1900..(Date.today.year)).to_a.reverse, year), :class => "input-small", :prompt => current_user.date_of_birth? ? current_user.date_of_birth.try(:year) : "年" %>
                   <%= select_tag 'user[date_of_birth(2i)]', options_for_select((1..12).to_a, month), :class => "input-small", :prompt => current_user.date_of_birth? ? current_user.date_of_birth.try(:month) : "月" %>
                   <%= select_tag 'user[date_of_birth(3i)]', options_for_select((1..31).to_a, day), :class => "input-small", :prompt => current_user.date_of_birth? ? current_user.date_of_birth.try(:day) : "日" %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label smaller" for="">
+                  E-mail&nbsp;<span class="text-important">*</span>
+                </label>
+
+                <div class="controls smaller">
+                  <%= f.text_field :email, :class => "input-xlarge" %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label smaller" for="">
+                  联系电话&nbsp;<span class="text-important">*</span>
+                </label>
+
+                <div class="controls smaller">
+                  <%= f.text_field :phone, :class => "input-xlarge" %>
                 </div>
               </div>
               <div class="control-group">
