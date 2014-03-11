@@ -84,6 +84,14 @@
       e.stopPropagation();
       modal.hide();
     });
+
+    $("#upload_pics_queue").on("click",".del-pic",function(){
+      $obj = $(this).parent()
+      $.post("/dialog_celebrity/delete_image",{id: $(this).prev().attr("data-image-id")},function(r){
+        $obj.remove()
+      })
+    })
+
 </script>
 <%end-%>
 

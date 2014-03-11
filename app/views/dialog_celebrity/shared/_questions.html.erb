@@ -385,5 +385,12 @@
       };
       $(this).next().find('.js-text_rest_show').text(total - len);
     });
+    $(".form_file").on("click",".del-pic",function(){
+      $obj = $(this).parent()
+      $.post("/dialog_celebrity/delete_image",{id: $(this).prev().attr("data-image-id")},function(r){
+        $obj.remove()
+      })
+    })
+
   })
 </script>
