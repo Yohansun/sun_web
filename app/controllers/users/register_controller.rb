@@ -22,6 +22,7 @@ class Users::RegisterController < Devise::RegistrationsController
 
       build_resource
       resource.create_from = params[:return_to]
+      resource.reg_at_minisite2014 = true if params[:reg_at_minisite2014].present?
       if resource.save
         if resource.active_for_authentication?
           resource.create_score(resource.id, 101, 1, 100)

@@ -12,6 +12,7 @@ class AsksController < ApplicationController
 		     params[:message][:reply_user_id] = current_user.id
 	     end
 	     content = params[:message][:content]
+	     params[:message][:genre] = params[:minisite_genre] if params[:minisite_genre].present?
 	     @user.replies.create(params[:message])
 	     Notifier.ask(@user, current_user, content).deliver
 	   end
