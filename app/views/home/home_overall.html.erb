@@ -155,17 +155,6 @@ if ($(".new_mix_color")) {
     });
 }
 
-if ($(".home_banner2")) {
-    $(".home_banner2").click(function () {
-        <% if current_user -%>
-        window.open("<%= edit_user_path(current_user, :edit_by => 'home_banner2') %>", "_blank");
-        <% else -%>
-        show_login();
-        <% end -%>
-        return false;
-    });
-}
-
 $('#new_user').bind('ajax:error', function (xhr, status, error) {
     err_in();
 });
