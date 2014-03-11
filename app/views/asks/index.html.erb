@@ -22,6 +22,9 @@
       <%= render :partial => "users/profile_box" %>
       <div class="host_main">
         <%= form_for :message, :url => user_asks_path, :html => {:class => "host_msgboard line_b_dot check_valid", :onsubmit => 'return check()'} do |f| %>
+          <% if params[:from_minisite].present? %>
+            <%= hidden_field_tag "minisite_genre", '2014为爱刷新邀约设计' %>
+          <% end %>
           <fieldset>
             <textarea name="message[content]" id="host_main" class="area_text">免费咨询请留言</textarea>
           </fieldset>

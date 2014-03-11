@@ -62,7 +62,7 @@
                     </a>
                   <%- end %>
                   <h5 class="dot_linet1 title pr">
-                    <a href="<%= user_asks_path(design.user_id) %>" target="_blank" class="btn_invite pa"></a>
+                    <a href="<%= user_asks_path(design.user_id,from_minisite: 1) %>" target="_blank" class="btn_invite pa"></a>
                     <a href="<%= user_design_path(design.user_id, design) %>" target="_blank" class="a_hover_red"><%= design.title %></a>
                   </h5>
                   <span class="author"><%= design.user.display_name %></span>

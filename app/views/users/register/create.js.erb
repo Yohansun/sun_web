@@ -21,7 +21,7 @@
   });
 <%- else -%>
   <%- if params[:return_to].present? %>
-    window.location.replace("/users/suc_regist?return_to=<%= params[:return_to] %>");
+    window.location.replace("/users/suc_regist?reg_at_minisite2014=<%= params[:reg_at_minisite2014] %>&return_to=<%= params[:return_to] %>");
   <%- else %>
     window.location.replace("/users/suc_regist");
   <%- end %>
