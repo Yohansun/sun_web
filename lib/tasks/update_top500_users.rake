@@ -47,11 +47,8 @@ end
 
 desc "更新top50用户"
 task :update_top50_users => :environment do
-  username = ['wangfengbo','daikun','chenzhibin','wangxiaogen','heyongming','liyizhong','jianghuiting',
-    'liuweiting','xiaoaibin','zhenghong','zhengshufen','xieyingkai','youweizhuang','zhaomuhuan','geyaxi',
-    'liuweijun','wuxiaowei','chensong','zhangjizhong','fangjun','hongyuese','shidiwei','yizhengqihua',
-    'liangjinghua','huangzhida','linweier','tanjingzhong'
-  ]
+  username = ['zhoujing', 'chenxuanming', 'lixuheng', 'daiyong', 'wangping', 'zhaoyiping', 'chenying',
+    'yanghuansheng', 'gaolong', 'huangshihua', 'chenyaoguang', 'congning', 'sunhongtao']
   users = User.where(username: username).update_all(top50: 1)
   p "update_sussecc!"
 end
