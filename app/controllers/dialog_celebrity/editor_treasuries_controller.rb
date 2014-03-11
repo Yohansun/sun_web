@@ -22,9 +22,7 @@ class DialogCelebrity::EditorTreasuriesController < ApplicationController
 
   def show
     @article = EditorTreasury.find(params[:id])
-
     @banners = IBanner.page_name('小编宝典').order("position ASC")
-    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc")
-
+    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc").limit(5)
   end
 end

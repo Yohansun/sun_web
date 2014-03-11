@@ -17,19 +17,13 @@ class DialogCelebrity::CelebrityNotesController < ApplicationController
       end
     end
     @articles = @articles.order("updated_at desc").page(params[:page]).per(4)
-
     @banners = IBanner.page_name('名家手记').order("position ASC")
-
   end
 
   def show
     @article = CelebrityNote.find(params[:id])
     @banners = IBanner.page_name('名家手记').order("position ASC")
-    @new_designs = MasterDesign.order("updated_at desc").limit(5)
-
-    @banners = IBanner.page_name('名家手记').order("position ASC")
-    @new_designs = MasterDesign.order("updated_at desc").limit(5)
-
+    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc").limit(5)
     render "dialog_celebrity/editor_treasuries/show"
   end
 end

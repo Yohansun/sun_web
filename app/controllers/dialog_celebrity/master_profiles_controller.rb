@@ -5,7 +5,7 @@ class DialogCelebrity::MasterProfilesController < ApplicationController
   def celebrities
     @celebrities = MasterProfile.where(mtype: 1).order("updated_at desc")
     @banners = IBanner.page_name('名人在线').order("position ASC")
-    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc")
+    @new_designs = IColumnData.where(i_column_type_id: 1).order("position asc").limit(5)
   end
 
   def maste_interviews
