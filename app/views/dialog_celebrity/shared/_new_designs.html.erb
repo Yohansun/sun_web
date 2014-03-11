@@ -4,7 +4,7 @@
     <strong class="pull-left">最新大师作品</strong>
   </li>
   <% @new_designs.each_with_index do |_design,index| %>
-    <li class="map-r1 active <%= index == 0 ? 'dott1' : ''%>">
+    <li class="map-r1 <%= index == 0 ? 'dott1 active' : ''%>">
       <i class="icon-i16 icon-1"><%= index+1 %></i>
       <strong class="js-title"><%= _design.title %></strong>
       <% cover = _design.file %>
