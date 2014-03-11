@@ -156,6 +156,7 @@ Icolor::Application.routes.draw do
   match "master_designs/oversea/:type"  => "master_designs#oversea"
   match "master_designs/all/:type"      => "master_designs#all"
 
+  match "/qrcode" => "qrcode#index"
 
 
   #行业资讯
