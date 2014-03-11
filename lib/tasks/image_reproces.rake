@@ -127,7 +127,9 @@ end
 
 desc "minisite压图"
 task :minisite_image => :environment do
-  users = User.where(top50: 1)
+  username = ['zhoujing', 'chenxuanming', 'lixuheng', 'daiyong', 'wangping', 'zhaoyiping', 'chenying',
+    'yanghuansheng', 'gaolong', 'huangshihua', 'chenyaoguang', 'congning', 'sunhongtao']
+  users = User.where(username: username)
   users.each do |user|
     if user.avatar
       user.avatar.file.reprocess!
