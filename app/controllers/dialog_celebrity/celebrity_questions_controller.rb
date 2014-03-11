@@ -72,4 +72,9 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
       return render :text => "0"
     end
   end
+
+  def delete_image
+    CelebrityQuestionImage.find(params[:id]).destroy
+    return render :js => "alert('删除成功')"
+  end
 end

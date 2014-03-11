@@ -23,7 +23,7 @@
 
 <div class="index_main famous clearfix">
   <div class="pull-left famous_img">
-    <a href="<%= @page.edit_treasury_url -%>"><img src="<%= @page.edit_treasury_thumb(:thumb) %>" alt="" width="330" height="240" /></a>
+    <a href="<%= @page.edit_treasury_url -%>"><img src="<%= @page.edit_treasury_thumb(:thumb) if @page.edit_treasury_thumb.present? %>" alt="" width="330" height="240" /></a>
     <h5 class="title text-center"><a href="<%= @page.edit_treasury_url -%>"><%= @page.edit_treasury_title %></a></h5>
   </div>
   <div class="pull-left famous_intro">
@@ -33,8 +33,8 @@
         <img class="media-object" src="<%=@celebrity.avatar(:small2)%>" alt="" width="80" height="80">
       </div>
       <div class="media-body">
-        <h5 class="media-heading"><%= link_to @celebrity.name, master_interview_dialog_celebrity_master_profile_path(@celebrity) %> /<%=@celebrity.board.try(:name)%>类专家</h5>
-        <p class="nomargin"><%=@celebrity.intro%></p>
+        <h5 class="media-heading"><%= link_to(@celebrity.name, master_interview_dialog_celebrity_master_profile_path(@celebrity)) if @celebrity.present? %> /<%=@celebrity.try(:board).try(:name)%>类专家</h5>
+        <p class="nomargin"><%=@celebrity.try(:intro)%></p>
       </div>
     </div>
     <h5 class="title"><a href="/dialog_celebrity/master_interviews" class="pull-right a_hover_red">更多></a>名家设计</h5>
@@ -43,8 +43,8 @@
         <img class="media-object" src="<%=@master.avatar(:small2)%>" alt="" width="80" height="80">
       </div>
       <div class="media-body">
-        <h5 class="media-heading"><%= link_to @master.name,master_interview_dialog_celebrity_master_profile_path(@master)  -%> /<%=@master.board.try(:name)%>类专家</h5>
-        <p class="nomargin"><%=@master.intro%></p>
+        <h5 class="media-heading"><%= link_to(@master.name,master_interview_dialog_celebrity_master_profile_path(@master)) if @master.present?  -%> /<%=@master.try(:board).try(:name)%>类专家</h5>
+        <p class="nomargin"><%=@master.try(:intro)%></p>
       </div>
     </div>
   </div>
