@@ -9,6 +9,7 @@
     display: none;
   }
   #upload_pics_queue span{
+    position: relative;
     display: inline-block;
     *display: inline;
     zoom: 1;
@@ -24,6 +25,14 @@
   #upload_pics_queue img{
     vertical-align: middle;
   }
+  .del-pic {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width:20px;
+    height:20px;
+    background: #333333 url(/assets/love_story/images/upload/upload_del.jpg) no-repeat;
+    text-indent: -9999px; }
 </style>
 <%end-%>
 
@@ -56,7 +65,7 @@
         id = arr[0]
         thumb = arr[1]
         thumb2 =arr[2]
-        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /></span>")
+        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' href='javascript:;'>删除</a></span>")
         var tips = $('#' + this.id).parent().siblings('.tips');
         var selected_num = parseInt(tips.children('.selected-num').text());
         var rest_num = parseInt(tips.children('.rest-num').text());
