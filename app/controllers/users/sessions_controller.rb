@@ -7,16 +7,19 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def create
-    resource = warden.authenticate!(auth_options)
-    sign_in(resource_name, resource)
-
-    cookies['user_display_name'] = resource.display_name
-    cookies['user_id'] = resource.id
-    love_story = LoveStory.where(user_id: resource.id)
-    cookies['love_story'] = love_story.present? ? 'true' : 'false'
-    cookies['common_user'] = resource.common_user? ? 'false' : 'true'
-    resource.first_login_today(resource)
-    respond_with resource, :location => after_sign_out_path_for(resource)
+    if warden.authenticate.present?
+      resource = warden.authenticate!(auth_options)
+      sign_in(resource_name, resource)
+      cookies['user_display_name'] = resource.display_name
+      cookies['user_id'] = resource.id
+      love_story = LoveStory.where(user_id: resource.id)
+      cookies['love_story'] = love_story.present? ? 'true' : 'false'
+      cookies['common_user'] = resource.common_user? ? 'false' : 'true'
+      resource.first_login_today(resource)
+      respond_with resource, :location => after_sign_out_path_for(resource)
+    else
+      render js: "alert('该用户不存在或密码错误，请重新输入！');"
+    end
   end
 
   def destroy
