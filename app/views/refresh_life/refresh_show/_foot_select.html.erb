@@ -11,19 +11,33 @@
       <% end %>
     </ul>
   </div>
-
-  <div class="refresh_new pull-left">
-    <h5><a href="<%= @master_design_more.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>刷新效果精彩资讯</h5>
-    <ul class="ul_dot">
-      <% if @wonderful_datas.present? %>
-        <% @wonderful_datas.each do |data| %>
-          <% unless data.position == 0 %>
-            <li><a href="<%= data.url %>" target="_blank"><%= data.title %></a></li>
+  <% if controller_name == 'refresh_show' %>
+    <div class="refresh_new pull-left">
+      <h5><a href="<%=@wonderfuls_url.url if @wonderfuls_url %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>精彩资讯</h5>
+      <ul class="ul_dot">
+        <% if @wonderfuls.present? %>
+          <% @wonderfuls.each do |data| %>
+            <% unless data.position == 0 %>
+              <li><a href="<%= data.url %>" target="_blank"><%= data.title %></a></li>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    </ul>
-  </div>
+      </ul>
+    </div>
+  <% else %>
+    <div class="refresh_new pull-left">
+      <h5><a href="<%= @master_design_more.try(:url) %>" target="_blank" class="pull-right"><small class="muted">更多></small></a>刷新效果精彩资讯</h5>
+      <ul class="ul_dot">
+        <% if @wonderful_datas.present? %>
+          <% @wonderful_datas.each do |data| %>
+            <% unless data.position == 0 %>
+              <li><a href="<%= data.url %>" target="_blank"><%= data.title %></a></li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="pull-right"><a href="<%= @i_banner1.url? ? @i_banner1.url : 'javascript:void(0);' if @i_banner1 %>" target="_blank"><img src="<%=@i_banner1.try(:file).try(:url,:list_230x230)%>"></a></div>
 </div>
