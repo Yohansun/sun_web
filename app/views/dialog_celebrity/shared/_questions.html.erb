@@ -125,7 +125,7 @@
                   <a href="javascript:;" class="pull-right js-review_btn">回复</a>
                 <%end-%>
                 提问者：
-                <a class="bordered_r mr8"><%=_question.user.try(:username)%></a>
+                <a class="bordered_r mr8"><%= _question.fake_username.present? ? _question.fake_username : _question.user.try(:username)%></a>
                 <span><%=_question.created_at.strftime("%Y-%m-%d")%></span>
               </p>
               <p class="bordered_t">
@@ -137,9 +137,9 @@
                   <span style="font-size: 16px; font-weight: bold;">
                     专家回答
                   </span>
-
+                  <% if _reply.images.count > 0 %>
                   <i class="icon-imgshow_btn" data-question-id="<%= _reply.id -%>"></i>
-
+                  <%end-%>
                   <div class="imgs_group invisible" style="height:0;">
                     <% _reply.images.each do |_image| -%>
                       <a href="<%=_image.image(:slide)%>" class="imgsgroup question_images_<%= _reply.id -%>">
@@ -268,7 +268,7 @@
     });
 
     $('.js-list_parent').on('click','.js-review_btn', function(){
-      $(this).parent().siblings('form.js-review').show();
+      $(this).parent().parent().find('form.js-review').show();
     });
     $('.js-list_parent').on('click','.js-review_cannel', function(){
       $(this).parents('form.js-review').hide();

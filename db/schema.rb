@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140305154733) do
+ActiveRecord::Schema.define(:version => 20140311125842) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20140305154733) do
     t.boolean  "is_delete",                  :default => false
     t.datetime "delete_at"
     t.integer  "delete_media_id"
+    t.string   "fake_username"
   end
 
   add_index "celebrity_questions", ["celebrity_content_board_id"], :name => "index_celebrity_questions_on_celebrity_content_board_id"

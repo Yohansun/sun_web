@@ -1,3 +1,10 @@
+<style>
+  blockquote{padding:45px 130px 40px;}
+  blockquote strong{float:left;margin-top: -4px;}
+  blockquote span{font:14px/20px "SimSun";color:#2a2a2a;margin-left: 30px;display: block;}
+  blockquote .muted{font:12px Arial;color:#8d8c8c;}
+</style>
+
 <h3 class="chann_caption nomargin">
   <i class="icon-map icon-map1 icon_colors"></i>
   <strong>对话名人</strong>
@@ -120,7 +127,7 @@
       <span class="line_r pull-left">大师寄语</span><span class="pull-left">ＭASTER MESSAGE</span>
     </h5>
     <blockquote class="index_main">
-      <p class="clearfix pr"><strong class="pull-left">“</strong><span><%=@master.message%></span></p>
+      <p class="clearfix pr"><strong><img src="/assets/quotMark.jpg" height="20" width="22" alt="" /></strong><span><%=@master.message%></span></p>
       <span class="muted"><%=@master.name%></span>
     </blockquote>
   </div>
