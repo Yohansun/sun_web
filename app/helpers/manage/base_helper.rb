@@ -15,6 +15,8 @@ module Manage::BaseHelper
         'life'
       when /designer_events|other_events|event_kvs/
         'designer_events'
+      when /minisite_counters/
+        'minisite_counters'
       else
       	'nothing'
     end
@@ -146,6 +148,8 @@ module Manage::BaseHelper
       when (key =~ /column/) && /universal_column/
         'on'
       when (key =~ /designer_events/) && /designer_events|other_events|event_kvs/
+        'on'
+      when (key =~ /minisite_counters/) && /minisite_counters/
         'on'
       else
         'off'

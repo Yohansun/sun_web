@@ -1,0 +1,34 @@
+# set the filename sent to the user with __filename variable
+# this is optional, if you don't set it, the name will be like products.xls
+
+__filename = "LoveStory.xls"
+
+# we get 'xls' variable which is a Workbook object
+# then we can create some worksheet to work with, with create_worksheet method
+
+sheet1 = xls.create_worksheet
+
+# fill the [0, 0] cell
+
+sheet1[0, 0] = "业主发布爱的故事报表#{Time.now}"
+
+# Worksheet#row will return a Row object. We can modify it just like an Array.
+# this code will return the second row and fill the cells.
+
+sheet1.row(1).concat ["发布时间", "业主用户名", "省","市", "区", "电话","邮箱", "爱的故事内容"]
+
+# we can access the instance variable we set in the controller, just like
+# in erb template
+
+@love_stories_all.each_with_index do |love_story, i|
+  area = Area.find_by_id(love_story.area_id)
+  sheet1.update_row i+2, love_story.created_at, love_story.user_name, (area.province.name if area), (area.city_name if area), (area.district.name if area), love_story.user.try(:phone), love_story.user.try(:email), love_story.content
+end
+
+# we can add some formatting using Spreadsheet::Format object
+
+title_format = Spreadsheet::Format.new(:color => :blue, :weight => :bold, :size => 18)
+sheet1.row(0).set_format(0, title_format)
+
+bold = Spreadsheet::Format.new(:weight => :bold)
+sheet1.row(1).default_format = bold
