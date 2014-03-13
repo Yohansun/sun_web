@@ -1,6 +1,14 @@
 # encoding: utf-8
 module Manage::BaseHelper
 
+  def manage_logo
+    case controller_name
+    when /channel_tips/ then '2013新版Icolor 业主通道'
+    when /minisite_counters/ then '2014 Icolor为爱刷新Minisite维护系统'
+    else "2013新版icolor"
+    end
+  end
+
 	def nav_path
 		c_name = case controller_name
       when /home_kvs|home_recommends|home_life_videos|questions|home_image_lib|home_design_show|owner_enter|fit_images|home_banners|fit_literals/
@@ -15,6 +23,8 @@ module Manage::BaseHelper
         'life'
       when /designer_events|other_events|event_kvs/
         'designer_events'
+      when /minisite_counters/
+        'minisite_counters'
       else
       	'nothing'
     end
@@ -146,6 +156,8 @@ module Manage::BaseHelper
       when (key =~ /column/) && /universal_column/
         'on'
       when (key =~ /designer_events/) && /designer_events|other_events|event_kvs/
+        'on'
+      when (key =~ /minisite_counters/) && /minisite_counters/
         'on'
       else
         'off'

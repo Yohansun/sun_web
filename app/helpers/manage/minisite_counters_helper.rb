@@ -1,0 +1,2 @@
+module Manage::MinisiteCountersHelper
+end

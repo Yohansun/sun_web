@@ -1,0 +1,40 @@
+# set the filename sent to the user with __filename variable
+# this is optional, if you don't set it, the name will be like products.xls
+
+__filename = "MinisiteDesigns#{Time.now}.xls"
+
+# we get 'xls' variable which is a Workbook object
+# then we can create some worksheet to work with, with create_worksheet method
+
+sheet1 = xls.create_worksheet
+
+# fill the [0, 0] cell
+
+sheet1[0, 0] = "设计师上传作品报表#{Time.now}"
+
+# Worksheet#row will return a Row object. We can modify it just like an Array.
+# this code will return the second row and fill the cells.
+
+sheet1.row(1).concat ["设计师/家装公司用户名", "身份", "电话", "邮箱", "作品链接url", "上传时间"]
+
+# we can access the instance variable we set in the controller, just like
+# in erb template
+
+@designs_all.each_with_index do |design, i|
+
+  sheet1.update_row i+2,
+  design.user.try(:display_name),
+  design.user.try(:role_chn_name),
+  design.user.try(:phone),
+  design.user.try(:email),
+  (user_design_url(design.user_id,design) if design.user_id),
+  design.created_at
+end
+
+# we can add some formatting using Spreadsheet::Format object
+
+title_format = Spreadsheet::Format.new(:color => :blue, :weight => :bold, :size => 18)
+sheet1.row(0).set_format(0, title_format)
+
+bold = Spreadsheet::Format.new(:weight => :bold)
+sheet1.row(1).default_format = bold
