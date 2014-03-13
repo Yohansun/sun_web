@@ -580,6 +580,8 @@ Icolor::Application.routes.draw do
     resources :minisite_counters do
       collection do
         get :ask_for_minisite
+        get :uploaded_designs
+        get :sign_up_users
       end
     end
     resources :designer_events do
