@@ -7,7 +7,7 @@
 <% end -%>
 
 <% content_for :tail do -%>
-  <%= javascript_include_tag "/location.js", "jquery.uploadify.js" %>
+  <%= javascript_include_tag  "jquery.uploadify.js","/location.js" %>
   <script type="text/javascript" charset="utf-8">
     <%- session_key = Rails.application.config.session_options[:key] -%>
     $(function() {
@@ -48,25 +48,31 @@
       });
     });
     $(function(){
-      email = $("#user_email").val();
       phone = $("#user_phone").val();
       $(".reg_form").click(function(){
-        if(email == ""){
-          alert("E-mail不能为空！")
-          return false
-        }else if(phone == ""){
+        if(phone == ""){
           alert("联系电话不能为空！")
           return false
         }else{
           return true
         }
       })
-    })
+    });
+    (function($){
+      //linkageselect
+      if(typeof data != 'undefined'){
+        var options = {
+          data  : data
+        }
+        <% area = Area.find current_user.area_id  if current_user && current_user.area_id.present?%>
+        var sel = new LinkageSelect(options);
+        sel.bind('.level_1','<%=area.try(:parent).try(:parent).try(:id) if area.present? %>');
+        sel.bind('.level_2','<%=area.try(:parent).try(:id) if area.present? %>');
+        sel.bind('.level_3','<%=area.try(:id) if area.present? %>');
+      }
+    })($);
   </script>
 <% end %>
-
-
-
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="#">首页</a> > </li>
@@ -133,12 +139,14 @@
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label smaller" for="">
-                  E-mail&nbsp;<span class="text-important">*</span>
+                <label class="control-label" for="">
+                  所在地
+                  <span class="text-important">*</span>
                 </label>
-
-                <div class="controls smaller">
-                  <%= f.text_field :email, :class => "input-xlarge" %>
+                <div class="controls options">
+                  <select id="province" class="input-small level_1" name="user[state]">省</select>
+                  <select id="city" class="input-small level_2" name="user[city]">市</select>
+                  <select id="zone" class="input-small level_3" name="user[area_id]">区</select>
                 </div>
               </div>
               <div class="control-group">
