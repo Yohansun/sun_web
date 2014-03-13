@@ -1,0 +1,52 @@
+# set the filename sent to the user with __filename variable
+# this is optional, if you don't set it, the name will be like products.xls
+
+__filename = "AskForMinisite.xls"
+
+# we get 'xls' variable which is a Workbook object
+# then we can create some worksheet to work with, with create_worksheet method
+
+sheet1 = xls.create_worksheet
+
+# fill the [0, 0] cell
+
+sheet1[0, 0] = "业主受邀报表#{Time.now}"
+
+# Worksheet#row will return a Row object. We can modify it just like an Array.
+# this code will return the second row and fill the cells.
+
+sheet1.row(1).concat ["点击邀约设计时间", "业主用户名", "省", "市", "区", "电话", "邮箱", "邀约留言内容", "被邀约的设计师/家装公司用户名", "设计师/家装公司电话", "设计师/家装公司邮箱"]
+
+# we can access the instance variable we set in the controller, just like
+# in erb template
+
+@asks_all.each_with_index do |ask, i|
+  ask_user = ask.reply_user
+  areas = []
+  if ask_user && ask_user.area_id.present? && Area.find_by_id(ask_user.area_id)
+    area = Area.find_by_id(ask_user.area_id)
+    if area
+      areas << area.province.name
+      areas << area.city_name
+      areas << area.district.name
+    end
+  end
+  sheet1.update_row i+2,
+  ask.created_at,
+  ask.reply_user.try(:display_name),
+  areas[0],areas[1],areas[2],
+  (ask_user.try(:phone) if ask_user),
+  (ask_user.try(:email) if ask_user),
+  ask.content,
+  ask.user.try(:display_name),
+  ask.user.try(:phone),
+  ask.user.try(:email)
+end
+
+# we can add some formatting using Spreadsheet::Format object
+
+title_format = Spreadsheet::Format.new(:color => :blue, :weight => :bold, :size => 18)
+sheet1.row(0).set_format(0, title_format)
+
+bold = Spreadsheet::Format.new(:weight => :bold)
+sheet1.row(1).default_format = bold

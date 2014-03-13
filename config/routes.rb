@@ -577,7 +577,11 @@ Icolor::Application.routes.draw do
   scope '/manage', :module => 'manage' do
     get '/clear_cache', to: 'home#clear_cache'
 
-    resources :minisite_counters
+    resources :minisite_counters do
+      collection do
+        get :ask_for_minisite
+      end
+    end
     resources :designer_events do
       collection do
         post :create_image

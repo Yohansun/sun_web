@@ -4,7 +4,7 @@
     <div class="span10">
       <%= form_tag('/manage/minisite_counters', :class => 'form-inline', :method => 'get') do %>
         日期:从
-        <%= text_field_tag "data_start", params[:data_start].present? ? params[:data_start] : '2012-01-01 00:00:00', :class => "input-medium datetimepicker_full", :name => 'data_start', :readonly => 'readonly' %>
+        <%= text_field_tag "data_start", params[:data_start].present? ? params[:data_start] : '2014-01-01 00:00:00', :class => "input-medium datetimepicker_full", :name => 'data_start', :readonly => 'readonly' %>
         到
         <%= text_field_tag "data_end", params[:data_end].present? ? params[:data_end] : Time.now.to_s, :class => "input-medium datetimepicker_full", :name => 'data_end', :readonly => 'readonly' %>
         &nbsp;&nbsp;&nbsp;

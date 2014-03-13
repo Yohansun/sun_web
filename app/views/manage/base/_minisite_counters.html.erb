@@ -1,8 +1,8 @@
 <li class="<%= 'active' if controller_name == 'minisite_counters' && action_name == 'index' %>">
   <a href="/manage/minisite_counters">业主发布爱的故事</a>
 </li>
-<li class="<%= 'active' if controller_name == '' %>">
-  <a href="/manage/minisite_counters">业主受邀</a>
+<li class="<%= 'active' if controller_name == 'minisite_counters' && action_name == 'ask_for_minisite' %>">
+  <a href="/manage/minisite_counters/ask_for_minisite">业主受邀</a>
 </li>
 <li class="<%= 'active' if controller_name == '' %>">
   <a href="/manage/minisite_counters">设计师上传作品</a>
