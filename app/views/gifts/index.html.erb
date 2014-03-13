@@ -96,42 +96,6 @@
       </div>
     </div>
   <% end %>
-
-  <% if @months.present? %>
-    <div class="gift_item">
-      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title3.jpg' %>" alt="" /></h3>
-      <div id="" class="gift_carousel slider-bin">
-        <div class="slider-container">
-          <ul class="unstyled clearfix">
-            <%- @months.each do |d|%>
-              <%- end_year = d.split('/')[0] %>
-              <%- end_month = d.split('/')[1] %>
-              <%- gift = @month_best.where("YEAR(end_time) = ? AND MONTH(end_time) = ? ",end_year,end_month) %>
-              <li>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th colspan="4"><%= "#{end_year}年#{end_month}月" %></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <%- gift.in_groups_of(2).each do |g| %>
-                      <tr>
-                        <td class="noborder" width="266"><%= g[0].try(:winner) %></td>
-                        <td class="bg_gray"><%= g[0].try(:gift_name) %></td>
-                        <td width="266"><%= g[1].try(:winner) %></td>
-                        <td class="bg_gray"><%= g[1].try(:gift_name) %></td>
-                      </tr>
-                    <%- end %>
-                  </tbody>
-                </table>
-              </li>
-            <%- end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
 </div>
 
 <div class="clearfix">
