@@ -10,7 +10,7 @@ task :weibo_minisite_data => :environment  do
   articles = weibo_data.uniq
   articles.each do |article|
     areas = article['user']['location'].split(" ")
-    area =  Area.where(name: areas.last)
+    area =  Area.where("name like '%#{areas.last}%'")
     if area.present?
       area_id = area.first.id
     else
@@ -18,6 +18,7 @@ task :weibo_minisite_data => :environment  do
     end
     love_sotry = LoveStory.where(sina_id: article['id'])
     unless love_sotry.present?
+      p article['id']
       LoveStory.create(content: article['text'],user_id: nil,area_id: area_id,user_name: article['user']['name'],come_from: 'sina', sina_id: article['id'])
     end
   end

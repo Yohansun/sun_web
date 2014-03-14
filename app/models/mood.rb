@@ -23,7 +23,7 @@ class Mood < ActiveRecord::Base
   end
 
   def self.get_weibo(args)
-    @q = CGI::escape("爱的故事")
+    @q = CGI::escape("为爱刷新")
     user_token = UserToken.find_by_user_id(125926).access_token
     response = get("https://api.weibo.com/2/search/topics.json?access_token=#{user_token}&q=#{@q}&count=50&page=#{args}")
     response.parsed_response
