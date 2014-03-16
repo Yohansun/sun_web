@@ -1,5 +1,5 @@
 <div class="state bordered_t">
-  <a href="javascript:;" class="pull-right js-delete">删除</a>
+  <a href="javascript:;" class="pull-right js-delete" data-reply-id="<%=@reply.id%>">删除</a>
   <strong><%=@reply.user.try(:username)%></strong>
   <span class="bordered_r">的回答</span>
   <span><%=@reply.created_at.strftime("%Y-%m-%d")%></span>

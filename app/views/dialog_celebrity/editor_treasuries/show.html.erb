@@ -180,10 +180,11 @@
                 imageWidth:26,
                 marginTop:150,
                 url:"<%= request.url%>",
-                title:"#iColor分享#精彩家装资讯---【<%= @article.name %>】，更多咨询内容尽在iColor，@刷新生活iColor，",
+                title:"#iColor对话名人#我正在阅读设计名家：<%=@article.name%>的设计手记，他对设计方面的理解让我深受启发，大家也一起来学习下吧。他还可以在线解答我的装修疑惑哦，你也来看看吧",
                 pic:"<%= (request.base_url + @article.thumb(:thumb)) unless @article.thumb.nil? %>",
                 data_track_clickback: true
             }
+
           </script>
           <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
         <% end %>

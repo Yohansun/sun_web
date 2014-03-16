@@ -41,8 +41,10 @@ class Manage::DialogCelebrities::MasterDesignsController < Manage::BaseControlle
         @resource = MasterDesign.new(params[:master_design])
         return redirect_to params[:ref]
       else
-        master = MasterProfile.find(params[:master_design][:master_profile_id])
-        resource.update_attributes :master_name => master.name
+        if params[:master_design][:master_profile_id].present?
+          master = MasterProfile.find(params[:master_design][:master_profile_id])
+          resource.update_attributes :master_name => master.name
+        end
         if params[:after_save] == "next"
           dialog_celebrities_master_design_uploads_path(master_design_id: resource.id)
         else

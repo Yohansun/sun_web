@@ -11,7 +11,7 @@ class DialogCelebrity::CelebrityNotesController < ApplicationController
       end
     else
       if params[:board_id].present?
-        @articles = CelebrityNote.where(:celebrity_content_board_id => params[:board_id])
+        @articles = CelebrityNote.where(:celebrity_content_board_id => params[:board_id].to_i)
       else
         @articles = CelebrityNote
       end

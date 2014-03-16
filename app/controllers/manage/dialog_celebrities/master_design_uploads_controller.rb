@@ -23,13 +23,15 @@ class Manage::DialogCelebrities::MasterDesignUploadsController < Manage::BaseCon
   def save_all
     cover_upload_id = params[:cover_upload_id]
     data = params[:data]
-    data.each_pair do |index,_data|
-      upload = MasterDesignUpload.find(_data[:id])
-      upload.is_cover = false
-      if cover_upload_id == upload.id.to_s
-        upload.is_cover = true
+    if data.present?
+      data.each_pair do |index,_data|
+        upload = MasterDesignUpload.find(_data[:id])
+        upload.is_cover = false
+        if cover_upload_id == upload.id.to_s
+          upload.is_cover = true
+        end
+        upload.update_attributes(_data)
       end
-      upload.update_attributes(_data)
     end
     render :text => "succ"
   end

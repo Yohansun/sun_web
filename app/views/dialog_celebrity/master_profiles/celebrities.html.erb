@@ -34,7 +34,7 @@ $(function(){
                 <a class="help-block" href="<%= master_interview_dialog_celebrity_master_profile_path(_celebrity) -%>"><img src="<%= _celebrity.avatar(:middle1) -%>"></a>
                 <p class="nomargin text-center"><%=_celebrity.board.name-%></p>
                 <p class="nomargin text-center"><strong><%=_celebrity.name-%></strong></p>
-                <p><a href="<%= new_dialog_celebrity_celebrity_question_path(master_id: _celebrity.id) -%>" class="btn btn-warning">我要提问</a></p>
+                <p><a href="<%= new_dialog_celebrity_celebrity_question_path(master_id: _celebrity.id,board_id: _celebrity.celebrity_content_board_id) -%>" class="btn btn-warning">我要提问</a></p>
               </li>
             <%end-%>
           </ul>
@@ -46,7 +46,7 @@ $(function(){
     <div class="mt10 famous_article">
       <h5 class="intv_title"><a href="<%=dialog_celebrity_celebrity_notes_path%>" class="pull-right a_hover_red">更多></a><strong>名家手记</strong></h5>
       <ul class="unstyled index_main famous_list">
-        <% CelebrityNote.last(4).each do |_note| -%>
+        <% CelebrityNote.order("updated_at desc").limit(4).each do |_note| -%>
         <li><span class="pull-right"><%= _note.author.name%>/<%=_note.board.name%></span><a href="<%=dialog_celebrity_celebrity_note_path(_note.id)%>" class="a_hover_red"><%=_note.name%></a></li>
         <%end-%>
       </ul>
