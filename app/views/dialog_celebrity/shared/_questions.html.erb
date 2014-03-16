@@ -114,7 +114,7 @@
                   <% if _question.replied? -%>
                     已回复
                   <%end-%>
-                  <i class="icon-i16 icon-slidedown" style="background: url(/assets/icons.png) -28px -126px;"></i>
+                  <i class="icon-i16 icon-slidedown" style="background: url(/assets/icons.png) -28px -126px;"></i>展开
                 </span>
               </div>
               <span class="state pull-right js-hide_content hide"><i class="icon-i16 icon-slideup" style="background: url(/assets/icons.png) -32px -108px;"></i>收起</span>
@@ -148,7 +148,7 @@
                     <%end-%>
                   </div>
 
-                  <span class="pull-right"><%=_reply.created_at.strftime("%Y-%m-%d")%></span>
+                  <span class="pull-right" style="margin-top: -20px;"><%=_reply.created_at.strftime("%Y-%m-%d")%></span>
                 </p>
                 <p>
                   <%= _reply.content -%>

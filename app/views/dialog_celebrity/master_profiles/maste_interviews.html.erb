@@ -70,22 +70,13 @@
           </div>
           <div class="master-share clearfix">
             <div class="pull-right">
-              <!-- Baidu Button BEGIN -->
-              <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare mr5">
+              <div id="bdshare" class="bds_tools get-codes-bdshare mr5">
                 <span class="pull-left">一键分享：</span>
-                <a class="bds_qzone"></a>
-                <a class="bds_tsina"></a>
-                <a class="bds_tqq"></a>
-                <a class="bds_renren"></a>
-                <a class="bds_t163"></a>
-                <!-- <a class="shareCount"></a> -->
+                <% ["qzone","tsina","tqq","renren","t163"].each do |_t| -%>
+                <a class="bds_<%=_t%>" href="http://www.jiathis.com/send/?webid=<%=_t%>&url=<%=request.url%>&title=iColor对话名人&summary=我正在浏览设计名家：<%=_master.name%> 的作品，实在是太棒了！分享给你们看看。想领略更多名家设计精选作品？想要设计名家在线解答装修疑惑？就要去iColor看看&pic=<%= (request.host + ':' + request.port.to_s + cover.file2(:preview)) if cover.present? %>" target="_blank"></a>
+                <%end-%>
+
               </div>
-              <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
-              <script type="text/javascript" id="bdshell_js"></script>
-              <script type="text/javascript">
-              document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-              </script>
-              <!-- Baidu Button END -->
             </div>
           </div>
           <%end-%>

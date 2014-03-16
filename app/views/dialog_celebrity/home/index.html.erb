@@ -27,7 +27,9 @@
     <h5 class="title text-center"><a href="<%= @page.edit_treasury_url -%>"><%= @page.edit_treasury_title %></a></h5>
   </div>
   <div class="pull-left famous_intro">
-    <h5 class="title"><a href="/dialog_celebrity/master_profiles/celebrities" class="pull-right a_hover_red">更多></a>名人在线</h5>
+    <h5 class="title"><a href="/dialog_celebrity/master_profiles/celebrities" class="pull-right a_hover_red">更多></a>
+      <%= link_to "名人在线","/dialog_celebrity/master_profiles/celebrities",target: "_blank",style: "font-size: 14px; color: inherit;" %>
+    </h5>
     <div class="media">
       <div class="pull-left">
         <img class="media-object" src="<%=@celebrity.avatar(:small2)%>" alt="" width="80" height="80">
@@ -37,7 +39,9 @@
         <p class="nomargin"><%=@celebrity.try(:intro)%></p>
       </div>
     </div>
-    <h5 class="title"><a href="/dialog_celebrity/master_interviews" class="pull-right a_hover_red">更多></a>名家设计</h5>
+    <h5 class="title"><a href="/dialog_celebrity/master_interviews" class="pull-right a_hover_red">更多></a>
+      <%= link_to "名家设计","/dialog_celebrity/master_interviews",target: "_blank",style: "font-size: 14px; color: inherit;" %>
+    </h5>
     <div class="media">
       <div class="pull-left">
         <img class="media-object" src="<%=@master.avatar(:small2)%>" alt="" width="80" height="80">

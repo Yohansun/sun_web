@@ -5,9 +5,14 @@
 <%- content_for :tail do %>
 <script type="text/javascript">
 $(function(){
-  $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
-    $("#celebrity_questions").html(result.content)
-  })
+  <% if params[:board_id].present? %>
+    $.post("/dialog_celebrity/refresh_celebrity_questions",{board_id: "<%=params[:board_id]%>"})
+  <% else -%>
+    $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
+      $("#celebrity_questions").html(result.content)
+    })
+  <%end-%>
+
 })
 </script>
 <%- end %>

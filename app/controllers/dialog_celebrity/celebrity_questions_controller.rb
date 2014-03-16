@@ -17,7 +17,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
     question = CelebrityQuestion.new params[:celebrity_question]
     question.key = ""
     unless question.save
-      flash[:notice] = question.errors.full_messages.join("\n")
+      flash[:notice] = "描述文字不少于6个字"
       redirect_to new_dialog_celebrity_celebrity_question_path
     else
       image_ids = params[:images].split("|")
@@ -26,7 +26,11 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
         image.resource = question
         image.save
       end
-      redirect_to dialog_celebrity_celebrity_questions_path
+      if params[:celebrity_question][:master_profile_id].present?
+        redirect_to "/dialog_celebrity/master_profiles/celebrities"
+      else
+        redirect_to dialog_celebrity_celebrity_questions_path
+      end
     end
   end
 

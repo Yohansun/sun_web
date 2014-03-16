@@ -108,37 +108,37 @@
     <div class="index_main nopadding">
       <ul class="nav nav-tabs famous_ask_tab" id="famous_tab">
         <li class="active">
-          <a href="#famous_tab1" data-toggle="tab">
+          <a href="/dialog_celebrity/celebrity_questions" target="_blank">
             全部问题
             <span class="active_arrow hide"></span>
           </a>
         </li>
         <li>
-          <a href="#famous_tab2" data-toggle="tab">
+          <a href="/dialog_celebrity/celebrity_questions?board_id=1" target="_blank">
             空间设计问题
             <span class="active_arrow hide"></span>
           </a>
         </li>
         <li>
-          <a href="#famous_tab3" data-toggle="tab">
+          <a href="/dialog_celebrity/celebrity_questions?board_id=2" target="_blank">
             色彩设计问题
             <span class="active_arrow hide"></span>
           </a>
         </li>
         <li>
-          <a href="#famous_tab4" data-toggle="tab">
+          <a href="/dialog_celebrity/celebrity_questions?board_id=3" target="_blank">
             软装设计问题
             <span class="active_arrow hide"></span>
           </a>
         </li>
         <li>
-          <a href="#famous_tab5" data-toggle="tab">
+          <a href="/dialog_celebrity/celebrity_questions?board_id=4" target="_blank">
             园艺设计问题
             <span class="active_arrow hide"></span>
           </a>
         </li>
         <li>
-          <a href="#famous_tab6" data-toggle="tab">
+          <a href="/dialog_celebrity/celebrity_questions?board_id=5" target="_blank">
             装修施工问题
             <span class="active_arrow hide"></span>
           </a>
@@ -164,7 +164,7 @@
                 <% CelebrityContentBoard.order("id asc").limit(5).each_with_index do |_board,index| %>
                 <label class="radio inline">
                   <input type="radio" name="celebrity_question[celebrity_content_board_id]" id="" value="<%=_board.id%>"
-                  <% if index == 0 %>
+                  <% if params[:board_id] == _board.id.to_s %>
                   checked
                   <%end-%>
                   >
