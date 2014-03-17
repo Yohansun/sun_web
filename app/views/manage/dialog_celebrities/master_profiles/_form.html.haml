@@ -23,7 +23,7 @@
       - if @resource.avatar.exists?
         = image_tag(@resource.avatar(:small2),:id => "preview-avatar")
       - else
-        %img{id: "preview-thumb",src: "",alt: "" }
+        %img{id: "preview-avatar",src: "",alt: "" }
 
   .control-group.clearfix
     .fl
@@ -86,6 +86,4 @@
 
   / %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复
   %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/master_profiles"} 返回
-
-
 
