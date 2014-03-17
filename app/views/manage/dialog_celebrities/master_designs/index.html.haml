@@ -1,0 +1,59 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity'
+  = javascript_include_tag "manage/dialog_celebrities/master_designs"
+
+#master-designs
+  %span.ltitle
+    名人作品管理
+
+  %form.mt20.ml20.clearfix.shadow-white.w850{method: "get",action: "/manage/dialog_celebrities/master_designs"}
+    .title 请选择筛选条件
+    %input.fl.ml10.w150{type: "text", name: "design_name", placeholder: "输入作品名",value: params[:design_name]}
+    .ml10.fl= ".and."
+    %input.fl.ml10.w150{type: "text", name: "master_name", placeholder: "输入名人姓名",value: params[:master_name]}
+    .ml10.fl
+      精准匹配
+    %label.fl.ml5
+      %input.master_select{type: "checkbox", name: "match",checked: params[:match].present?}
+      .lbl
+    .ml10.fl= ".and."
+    %select.fl.ml10{name: "mtype"}
+      %option{value: ""} 选择名人分类
+      %option{value: "1",selected: params[:mtype] == "1"} 名人在线
+      %option{value: "0",selected: params[:mtype] == "0"} 名家设计
+    %input{type: "hidden", value: "true", name: "query"}
+    %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
+  .mt10
+    %a.btn.btn-small.radius6.ml20{href: new_dialog_celebrities_master_design_path} 新建作品...
+
+  .mt10
+    %a.btn.btn-small.radius6.ml20{href: new_dialog_celebrities_master_design_path} 新建作品...
+
+  #designs-warp.mt10.ml20.clearfix
+    - @collection.each_with_index do |_design,_index|
+      .design.fl.clearfix
+        .design-thumb.fl
+          = image_tag _design.cover_design_upload.file2(:interview) if _design.cover_design_upload.present?
+        .design-info.fl.ml10
+          .design-info-avatar.clearfix
+            .design-master-avatar.fl
+              = image_tag _design.master_profile.avatar(:small2) if _design.master_profile
+            .fl.ml10
+              = link_to "编辑",edit_dialog_celebrities_master_design_path(_design)
+            .fl.ml10
+              = link_to "删除","#",class: "remove-design", :"data-design-id" => _design.id
+          %p.design-name.mt10
+            = _design.design_name
+          %p.master-name.mt10
+            设计师:
+            &nbsp;
+            = _design.master_profile.try(:name)
+          %p.design-last-update
+            最后修改日期:
+            = _design.updated_at.strftime("%y-%m-%d")
+  .pager.fl.ml20
+    = paginate @collection
+
+:coffeescript
+  $ ->
+    D.initialize()

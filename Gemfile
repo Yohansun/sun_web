@@ -38,8 +38,8 @@ end
 gem "meta_search"
 gem "paperclip", "<3.0"
 
-gem "magic_admin", :git => "git@git.networking.io:nioteam/magic_admin.git"
-gem "magic_content", :git => "git@git.networking.io:nioteam/magic_content.git"
+gem "magic_admin", :git => 'git@git.networking.io:nioteam/magic_admin.git'
+gem "magic_content", :git => 'git@git.networking.io:nioteam/magic_content.git'
 gem "acts_as_tree", :git => "git://github.com/amerine/acts_as_tree.git"
 
 gem "devise"
@@ -89,6 +89,11 @@ gem "sitemap_generator"
 #定时更新sitemap
 gem 'whenever', :require => false
 
-gem 'rubyzip'
+gem "rubyzip", "~> 1.1.0"
 
 gem 'hipchat'
+
+gem 'haml',           '~> 3.1.4'
+gem 'haml-rails',     '~> 0.3.4'
+gem 'coffee-filter'
+gem 'roo'

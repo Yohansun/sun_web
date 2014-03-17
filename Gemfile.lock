@@ -97,6 +97,9 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.1)
       climate_control (>= 0.0.3, < 1.0)
+    coffee-filter (0.1.3)
+      coffee-script (>= 2.2.0)
+      haml (< 4.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -148,6 +151,12 @@ GEM
       rack-mount
     gyoku (0.4.6)
       builder (>= 2.1.2)
+    haml (3.1.8)
+    haml-rails (0.3.5)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (~> 3.1)
+      railties (>= 3.1, < 4.1)
     has_scope (0.5.1)
     hashie (1.2.0)
     highline (1.6.12)
@@ -271,9 +280,13 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
     ruby-ole (1.2.11.4)
-    ruby-pinyin (0.1.0)
-    rubyzip (0.9.9)
+    ruby-pinyin (0.2.4)
+    rubyzip (1.1.0)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
     sass (3.1.17)
@@ -362,6 +375,7 @@ DEPENDENCIES
   capistrano
   capistrano-ext
   capistrano-unicorn
+  coffee-filter
   coffee-rails (~> 3.2.1)
   collections
   dalli
@@ -372,6 +386,8 @@ DEPENDENCIES
   exception_notification
   galetahub-simple_captcha
   grape
+  haml (~> 3.1.4)
+  haml-rails (~> 0.3.4)
   hipchat
   hirb
   httmultiparty
@@ -394,8 +410,9 @@ DEPENDENCIES
   rails (= 3.2.15)
   remotipart (~> 1.0)
   rest-client
+  roo
   ruby-pinyin
-  rubyzip
+  rubyzip (~> 1.1.0)
   rvm-capistrano
   sass-rails (~> 3.2.3)
   savon

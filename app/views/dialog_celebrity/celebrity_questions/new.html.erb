@@ -1,0 +1,293 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag "famous" %>
+<style type="text/css">
+  .uploadify{
+    float: left;
+    margin: 0 5px 5px 0;
+  }
+  .uploadifyQueueItem{
+    display: none;
+  }
+  #upload_pics_queue span{
+    position: relative;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    padding: 1px;
+    margin: 0 5px 5px 0;
+    text-align: center;
+  }
+  #upload_pics_queue img{
+    vertical-align: middle;
+  }
+  .del-pic {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width:20px;
+    height:20px;
+    background: #333333 url(/assets/love_story/images/upload/upload_del.jpg) no-repeat;
+    text-indent: -9999px; }
+</style>
+<%end-%>
+
+<% content_for :tail do -%>
+<%= javascript_include_tag "jquery.uploadify.js" %>
+
+<script type="text/javascript">
+  $('#upload_pics').uploadify({
+      uploader: '/dialog_celebrity/upload_image',
+      dataType: 'json',
+      swf : '/uploadify/uploadify.swf',
+      cancelImage : '/uploadify/uploadify-cancel.png',
+      //skipDefault : ['onSelect'],
+      progressData : 'percentage',
+      buttonText : "<a class='uploadify_btn'>选择图片</a>",
+      fileTypeDesc : '图片文件',
+      fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+      successTimeout : 6000,
+      fileSizeLimit : '3MB',
+      // uploadLimit : 1,
+      width : 84,
+      height : 84,
+      multi : true,
+      auto : true,
+      checkExisting : false,
+      transparent : true,
+      onUploadSuccess : function(file,data,response) {
+        console.log(this)
+        arr = data.split("|")
+        id = arr[0]
+        thumb = arr[1]
+        thumb2 =arr[2]
+        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' href='javascript:;'>删除</a></span>")
+        var tips = $('#' + this.id).parent().siblings('.tips');
+        var selected_num = parseInt(tips.children('.selected-num').text());
+        var rest_num = parseInt(tips.children('.rest-num').text());
+        tips.children('.selected-num').text(selected_num + 1);
+        tips.children('.rest-num').text(rest_num - 1);
+      }
+    });
+
+    //upload
+    var form = $('.famous_ask_form')
+    var modal = form.find('.picture_modal')
+    form.on('click', '.js-show_picture_modal', function(){
+      modal.show();
+    });
+    form.on('click', '.js-hide_picture_modal', function(e){
+      e.stopPropagation();
+      modal.hide();
+    });
+
+    $("#upload_pics_queue").on("click",".del-pic",function(){
+      $obj = $(this).parent()
+      $.post("/dialog_celebrity/delete_image",{id: $(this).prev().attr("data-image-id")},function(r){
+        $obj.remove()
+      })
+    })
+
+</script>
+<%end-%>
+
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> > </li>
+  <li><a href="/dialog_celebrity">对话名人</a> > </li>
+  <li class="active">名人问答</li>
+</ul>
+<hr class="border2 border2_mt2">
+<a href="<%=@banners[0].url%>"><img src="<%=@banners[0].file(:list_1000x85)%>" alt="" width="1000" height="85" style="height: 85px;" /></a>
+<div class="clearfix mt10">
+  <div class="pull-left famous_left">
+    <div class="index_main nopadding">
+      <ul class="nav nav-tabs famous_ask_tab" id="famous_tab">
+        <li class="active">
+          <a href="/dialog_celebrity/celebrity_questions" target="_blank">
+            全部问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/dialog_celebrity/celebrity_questions?board_id=1" target="_blank">
+            空间设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/dialog_celebrity/celebrity_questions?board_id=2" target="_blank">
+            色彩设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/dialog_celebrity/celebrity_questions?board_id=3" target="_blank">
+            软装设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/dialog_celebrity/celebrity_questions?board_id=4" target="_blank">
+            园艺设计问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/dialog_celebrity/celebrity_questions?board_id=5" target="_blank">
+            装修施工问题
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content famous_ask_content">
+        <div class="tab-pane active" id="famous_tab1">
+          <form action="<%=dialog_celebrity_celebrity_questions_path%>" method="post" class="famous_ask_form nomargin pt15 pb25">
+            <input type="hidden" name="celebrity_question[user_id]" value="<%= current_user.id %>">
+            <% if params[:master_id].present? -%>
+              <input type="hidden" name="celebrity_question[master_profile_id]" value="<%= params[:master_id] %>">
+            <%end -%>
+            <div class="clearfix form_mata nopadding">
+              <p>
+                <i class="icon-i30 icon-question_sort"></i>
+                <span>选择您的问题分类</span>
+                <span class="pull-right">
+                  <strong class="text-warning">36</strong>小时内必有专家为您答疑解惑
+                </span>
+              </p>
+              <p class="options_sort nomargin">
+                <% CelebrityContentBoard.order("id asc").limit(5).each_with_index do |_board,index| %>
+                <label class="radio inline">
+                  <input type="radio" name="celebrity_question[celebrity_content_board_id]" id="" value="<%=_board.id%>"
+                  <% if params[:board_id] == _board.id.to_s %>
+                  checked
+                  <%end-%>
+                  >
+                  <%= _board.name -%>
+                </label>
+                <%end-%>
+                <label class="radio inline">
+                  <input type="radio" name="celebrity_question[celebrity_content_board_id]" id="" value="">
+                  其他
+                </label>
+              </p>
+            </div>
+            <p class="clearfix form_mata linet1">
+              <i class="icon-i30 icon-question_mark"></i>
+              <span>一句话描述您的疑问</span>
+              <div style="color: red;">
+                <% if flash[:notice].present? -%>
+                  <%= flash[:notice] -%>
+                <% end -%>
+              </div>
+            </p>
+            <fieldset class="pr">
+              <input type="text" id="" name="celebrity_question[name]" class="question_name js-text_percentage nomargin" placeholder="请在这里概述您的问题" data-max="50">
+              <span class="input_mata">
+                <span class="js-text_lenth_show">0</span>/<span class="js-text_maxlenth">50</span>
+              </span>
+            </fieldset>
+            <fieldset class="mt20 pt30 pr form_detail">
+              <p><strong>问题补充</strong>(选填)</p>
+              <textarea name="celebrity_question[content]" id="" cols="" rows="" class="js-text_percentage question_content" placeholder="您可以在这里补充问题细节" data-max="100"></textarea>
+              <span class="input_mata">
+                <span class="js-text_lenth_show">0</span>/<span class="js-text_maxlenth">100</span>
+              </span>
+              <div class="textarea_footer clearfix">
+                <!-- <a href="#" class="pull-left"><i class="icon-imgshow_btn"></i>图片</a> -->
+                <span class="pull-left picture_modal_btn pr js-show_picture_modal">
+                  <i class="icon-imgshow_btn nomargin"></i>图片
+                  <div class="exp-layer picture_modal">
+                    <div class="holder">
+                      <h5 class="pic_modal_header nomargin">
+                        本地上传
+                      </h5>
+                      <div class="mh20">
+                        <p class="tips">
+                          共
+                          <span class="selected-num nopadding">0</span>
+                          张，还能上传
+                          <span class="rest-num nopadding">9</span>
+                          张
+                          <span class="nopadding">（按住ctrl可选择多张）</span>
+                        </p>
+                        <div class="form_file clearfix">
+                          <!-- <input type="file" /> -->
+                          <a href="javascript:;" class="uploadify_btn" id="upload_pics"></a>
+                        </div>
+                      </div>
+                      <a class="exp-close js-hide_picture_modal" href="javascript:;"></a>
+                    </div>
+                    <a class="exp-tri" href="javascript:;"></a>
+                  </div>
+                </span>
+                <!-- <span class="pull-left">已上传<strong>x</strong>张图片</span> -->
+              </div>
+            </fieldset>
+            <fieldset class="mt20 pr">
+              <button class="famous_ask_submit pull-right js-famous_ask_submit">提交问题</button>
+              <!-- <a href="javascript:;" class="js-famous_options">
+                <span>选择分类</span>
+                <i class="icon-i16 icon-arrowdown"></i>
+              </a>
+              <span class="muted">(可选填)</span>
+              <div class="select_options pr hide">
+                <a href="javascript:;" class="selects_close js-selects_close">x</a>
+                <p class="nomargin">选择分类</p>
+                <select name="celebrity_question[celebrity_content_board_id]" id="" multiple="multiple" data-select="">
+                  <% CelebrityContentBoard.order("id asc").limit(5).each do |_board| %>
+                    <option value="<%= _board.id -%>"><%= _board.name -%></option>
+                  <% end -%>
+                </select>
+                <select name="celebrity_question[key]" id="" multiple="multiple">
+                  <option>水电</option>
+                  <option>墙面</option>
+                  <option>布线</option>
+                </select>
+              </div>
+              <p class="select_options_show mt10">
+                <span class="mr10"></span>
+                <span class="mr10"></span>
+              </p> -->
+            </fieldset>
+          </form>
+        </div>
+        <div class="tab-pane" id="famous_tab2">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab3">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab4">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab5">
+          2
+        </div>
+        <div class="tab-pane" id="famous_tab6">
+          2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pull-right smaller famous_right">
+    <%= render "dialog_celebrity/shared/media_chann" -%>
+    <div class="mt10"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
+    <div class="mt10"><a href="<%=@banners[2].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <%= render "refresh_record/foot_select" %>
+  <div class="pull-right"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_230x230)%>" width="230" height="230"></a></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_670x85)%>"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[5].url%>"><img src="<%=@banners[5].file(:list_310x85)%>"></a></div>
+</div>

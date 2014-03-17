@@ -1,0 +1,78 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag "famous","colorbox/colorbox" %>
+<%end-%>
+
+<%- content_for :tail do %>
+  <%= javascript_include_tag "jquery.colorbox" %>
+
+  <script type="text/javascript">
+  $(function(){
+    $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
+      $("#celebrity_questions").html(result.content)
+    })
+  })
+  </script>
+<%- end %>
+
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> > </li>
+  <li class="active">对话名人</li>
+</ul>
+<hr class="border2 border2_mt2">
+
+<div class="index_main famous clearfix">
+  <div class="pull-left famous_img">
+    <a href="<%= @page.edit_treasury_url -%>"><img src="<%= @page.edit_treasury_thumb(:thumb) if @page.edit_treasury_thumb.present? %>" alt="" width="330" height="240" /></a>
+    <h5 class="title text-center"><a href="<%= @page.edit_treasury_url -%>"><%= @page.edit_treasury_title %></a></h5>
+  </div>
+  <div class="pull-left famous_intro">
+    <h5 class="title"><a href="/dialog_celebrity/master_profiles/celebrities" class="pull-right a_hover_red">更多></a>
+      <%= link_to "名人在线","/dialog_celebrity/master_profiles/celebrities",target: "_blank",style: "font-size: 14px; color: inherit;" %>
+    </h5>
+    <div class="media">
+      <div class="pull-left">
+        <img class="media-object" src="<%=@celebrity.avatar(:small2)%>" alt="" width="80" height="80">
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading"><%= link_to(@celebrity.name, master_interview_dialog_celebrity_master_profile_path(@celebrity)) if @celebrity.present? %> /<%=@celebrity.try(:board).try(:name)%>类专家</h5>
+        <p class="nomargin"><%=@celebrity.try(:intro)%></p>
+      </div>
+    </div>
+    <h5 class="title"><a href="/dialog_celebrity/master_interviews" class="pull-right a_hover_red">更多></a>
+      <%= link_to "名家设计","/dialog_celebrity/master_interviews",target: "_blank",style: "font-size: 14px; color: inherit;" %>
+    </h5>
+    <div class="media">
+      <div class="pull-left">
+        <img class="media-object" src="<%=@master.avatar(:small2)%>" alt="" width="80" height="80">
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading"><%= link_to(@master.name,master_interview_dialog_celebrity_master_profile_path(@master)) if @master.present?  -%> /<%=@master.try(:board).try(:name)%>类专家</h5>
+        <p class="nomargin"><%=@master.try(:intro)%></p>
+      </div>
+    </div>
+  </div>
+  <%= render "dialog_celebrity/shared/ask" -%>
+</div>
+
+<div class="clearfix mt10">
+  <div class="pull-left famous_left" id="celebrity_questions"></div>
+  <div class="pull-right smaller famous_right">
+    <%= render "dialog_celebrity/shared/media_chann" -%>
+    <div class="mt10"><a href="<%=@banners[0].url%>"><img src="<%=@banners[0].file(:list_230x170)%>" width="230" height="170"></a></div>
+    <div class="mt10"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="230"></a></div>
+    <div class="mt10"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x170)%>" width="230" height="170"></a></div>
+  </div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_670x85)%>"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_310x85)%>"></a></div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <%= render "refresh_record/foot_select" %>
+  <div class="pull-right"><a href="<%=@banners[5].url%>"><img src="<%=@banners[5].file(:list_230x230)%>"></a></div>
+</div>
+
+<a href="<%=@banners[6].url%>"><img class="mt10" src="<%=@banners[6].file(:list_1000x85)%>"></a>

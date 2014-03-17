@@ -1,0 +1,2 @@
+module DialogCelebrity::CelebrityNotesHelper
+end

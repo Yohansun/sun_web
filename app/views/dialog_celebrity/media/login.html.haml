@@ -1,0 +1,45 @@
+:css
+  .fl {float: left;}
+  .ml30 {margin-left: 30px;}
+  .mt40 {margin-top: 40px;}
+  .w250 { width: 250px; }
+  .clearfix { overflow: hidden; zoom: 1; }
+  #banner { width: 1088px; height: 160px; background-color: rgb(0,152,101); margin: 0 auto; margin-top: 80px; padding-top: 74px;}
+  #banner p { color: white; font-size: 32px; text-align: center; }
+  form { width: 380px; height: 180px; margin:0 auto; margin-top: 32px; }
+  form input { height: 26px; line-height: 26px; padding-left: 6px;}
+  form .label { width: 64px; font-size: 16px; }
+  form input[type=submit] { width: 68px; height: 24px; border-radius: 6px; border: none;  background: none; background-color: white; border: 1px solid grey; line-height: 24px; font-size: 14px;}
+  .notice { border: 1px solid grey; padding: 6px; color: red; width: 380px; margin:0 auto; background-color: rgb(250,255,189); margin-top: 20px; }
+!!!
+%html{ lang: 'zh' }
+  %head
+    %title
+      iColor 名人问答QA系统
+    %meta{ charset: 'utf-8' }
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+    %meta{:content => "icolor", :name => "description"}
+    %meta{:content => "icolor", :name => "author"}
+
+  %body
+    #banner
+      %p iColor
+      %p 名人问答QA系统
+    - if flash[:notice]
+      .notice
+        = flash[:notice]
+    %form{action: "/dialog_celebrity/media/login",method: "post"}
+      .clearfix
+        .label.fl 登录名
+        .fl.ml30
+          %input.w250{type: "text", placeholder: "输入登录名", name: "username"}
+      .clearfix.mt40
+        .label.fl 密 码
+        .fl.ml30
+          %input.w250{type: "password", placeholder: "输入密码", name: "password"}
+      .clearfix.mt40
+        .label.fl &nbsp;
+        .fl.ml30
+          %input{type: "submit", value: "登录"}
+
+

@@ -1,0 +1,176 @@
+// Place all the styles related to the dialog_celebrity/media controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// 通用
+.ml5  { margin-left: 5px ; }
+.ml10 { margin-left: 10px; }
+.ml12 { margin-left: 12px; }
+.ml14 { margin-left: 14px; }
+.ml15 { margin-left: 15px; }
+.ml16 { margin-left: 16px; }
+.ml18 { margin-left: 18px; }
+.ml20 { margin-left: 20px; }
+.ml22 { margin-left: 22px; }
+.ml24 { margin-left: 24px; }
+.ml26 { margin-left: 26px; }
+.ml28 { margin-left: 28px; }
+.ml30 { margin-left: 30px; }
+.ml40 { margin-left: 40px; }
+.ml60 { margin-left: 60px; }
+.mt5{ margin-top     : 5px ; }
+.mt7{ margin-top     : 7px ; }
+.mt8{ margin-top     : 8px ; }
+.mt10{ margin-top    : 10px; }
+.mt15{ margin-top    : 15px; }
+.mt20{ margin-top    : 20px; }
+.mt80{ margin-top    : 80px; }
+.mr5{ margin-right   : 5px ; }
+.mr10{ margin-right  : 10px; }
+.mr15{ margin-right  : 15px; }
+.mr20{ margin-right  : 20px; }
+.mr30{ margin-right  : 30px; }
+.mb5{ margin-bottom  : 5px ; }
+.mb10{ margin-bottom : 10px; }
+.mb15{ margin-bottom : 15px; }
+.mb20{ margin-bottom : 20px; }
+
+.pdl0 { padding-left : 0px; }
+.pdl5 { padding-left : 5px; }
+.pdl20 { padding-left: 20px; }
+.pdl24 { padding-left: 24px; }
+.pdr6 { padding-right: 6px; }
+.pdr10 { padding-right: 10px; }
+.pdr15 { padding-right: 15px; }
+.pdt0 { padding-top : 0px; }
+
+.radius4 { border-radius: 4px; }
+.radius6 { border-radius: 6px; }
+.radius8 { border-radius: 8px; }
+.radius10 { border-radius: 10px; }
+
+.w32 { width: 32px; }
+.w80 { width: 80px; }
+.w100 { width: 100px; }
+.w120 { width: 120px; }
+.w130 { width: 130px; }
+.w150 { width: 150px; }
+.w180 { width: 180px; }
+.w200 { width: 200px; }
+.w300 { width: 300px; }
+.w320 { width: 320px; }
+.w400 { width: 400px; }
+.w500 { width: 500px; }
+
+.pr5 { width: 5%; }
+.pr10 { width: 10%; }
+.pr20 { width: 20%; }
+.pr30 { width: 30%; }
+.pr40 { width: 40%; }
+.pr50 { width: 50%; }
+.pr55 { width: 55%; }
+.pr60 { width: 60%; }
+.pr70 { width: 70%; }
+.pr80 { width: 80%; }
+.pr90 { width: 90%; }
+.pr100 { width: 100%; }
+
+.pd10 { padding: 10px; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+
+.block { display: block; }
+
+.fl { float: left; display: block; }
+.fr { float: right; display: block; }
+
+.clearfix { overflow: hidden; zoom: 1;}
+
+.leftText { text-align: left; }
+.centerText { text-align: center;}
+.rightText { text-align: right; }
+
+.shadow { box-shadow: #ccc 2px 2px 4px;  }
+
+* { word-break: break-all; font-family: 微软雅黑; font-size: 14px;}
+
+.btn { padding: 6px; border-radius: 12px; color: white; background-color: #ccc; }
+
+a { text-decoration: none; }
+ul { margin: 0; padding: 0;}
+#banner {
+  background-color: #006699; height: 40px; color: white;font: bold 18px/40px "Microsoft Yahei";padding: 0 15px;
+}
+ul.nav {
+  background-color: #fff; height: 30px; padding: 0 15px;
+  margin-bottom: 0px;
+  li {
+    margin-right: 20px;
+    a { color: #006699; font-size: 14px; line-height: 30px;
+      &:hover{
+        background-color: #fff;
+        font-weight: bold;
+      }
+     }
+    a.active { color: red; font-weight: bold;}
+  }
+}
+#search-area {
+  background-color: #ffffcc; padding: 0px 15px;
+  margin: 0 5px; border: 1px solid #ccc;
+  select,input{
+    margin: 3px 0;
+  }
+  #search-area-line1,#search-area-line2{
+    padding: 5px 0;
+  }
+  span { padding: 0px 20px; }
+  span.first { padding-left: 0; }
+  .text_green{color: #006666;font-weight:bold;}
+}
+#question-title {
+  background-color: #006666; padding: 0 15px;height: 40px; color: white; font-size: 16px;line-height:40px;font-weight: bold;
+  margin: 5px 5px 0; border: 1px solid #999;
+}
+.question-warp {
+  background-color: #fff;
+  margin: 5px 5px 0; border: 1px solid #ccc; box-shadow:#999 2px 2px 4px;
+  .question-title-warp{
+    padding: 10px 15px;
+  }
+  .question-content-warp {
+    // margin-top: 16px;
+    padding: 10px 15px;
+    background: #e4e4e4;
+    .question-content { background-color: white;}
+  }
+
+  .question-upload-warp {
+    margin-top: 16px; margin-bottom: 16px;
+    img { width: 150px; height: 90px; display: block; float: left; margin-right: 16px; margin-bottom: 16px; }
+  }
+  .reply {
+    margin: 10px 15px;
+    textarea { width: 96%; height: 165px; padding: 8px; color: #aaa; font-size: 14px;margin-top:5px;}
+    .media_name{
+      display: inline-block;
+      *display:inline;
+      zoom:1;
+      background-color: #996600;
+      padding: 3px 3px;
+      color: #fff;
+    }
+  }
+  .reply-upload {
+    padding: 6px 15px; background-color: rgb(242,242,242);
+    a { color: #0FCAF3; text-decoration: underline;}
+    .replies-upload-warp {
+      margin-top: 10px;
+      .image-warp {
+        display: block;
+        img { display: block; }
+        a { display: block; text-align: center; }
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag "manage/master" %>
+<%end-%>
+
+<!-- 头部通栏start -->
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map1 icon_colors"></i>
+  <strong>对话名人</strong>
+  <small>直面大师专家，为您在线授道解惑</small>
+</h3>
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> > </li>
+  <li><a href="/dialog_celebrity">名人对话</a> > </li>
+  <li class="active">名家设计</li>
+</ul>
+<hr class="border2 border2_mt2">
+<!-- 头部通栏end -->
+
+<!-- 页面内容start -->
+<div class="master-list clearfix">
+    <div class="master-f">
+      <h3>名家分类</h3>
+      <p>
+
+        <!--
+        <em>从事领域：</em>
+        <a href="/dialog_celebrity/master_interviews?board_id=&tag=<%=params[:tag]%>" class="<%=params[:board_id].blank? ? 'm-active' : ''%>">全部</a>
+        <% CelebrityContentBoard.first(5).each do |board| %>
+          <a class="<%= params[:board_id] == board.id.to_s ? 'm-active' : ''%>" href="<%='/dialog_celebrity/master_interviews?board_id='+board.id.to_s%>&tag=<%=params[:tag]%>"><%= board.name %></a>
+        <%end-%>
+        -->
+
+        <em>所在地区：</em>
+        <a href="/dialog_celebrity/master_interviews?board_id=<%=params[:board_id]%>&tag=" class="<%=params[:tag].blank? ? 'm-active' : '' %>">全部</a>
+        <a href="/dialog_celebrity/master_interviews?board_id=<%=params[:board_id]%>&tag=海外" class="<%= params[:tag] == '海外' ? 'm-active' : '' %>">海外</a>
+        <a href="/dialog_celebrity/master_interviews?board_id=<%=params[:board_id]%>&tag=港澳台" class="<%= params[:tag] == '港澳台' ? 'm-active' : '' %>">港澳台</a>
+        <a href="/dialog_celebrity/master_interviews?board_id=<%=params[:board_id]%>&tag=中国大陆" class="<%= params[:tag] == '中国大陆' ? 'm-active' : '' %>">中国大陆</a>
+      </p>
+    </div>
+
+    <ul class="master-lists clearfix">
+      <% @masters.each_with_index do |_master,index| -%>
+        <% _design = _master.master_designs.order("created_at desc").first -%>
+        <li class="index_main">
+          <% if _design.present? -%>
+          <div class="master-bin">
+            <div class="master-pro">
+              <% cover = _design.cover_design_upload %>
+              <% if cover.present? %>
+                <a href="<%=dialog_celebrity_master_design_path(_design.id,upload_id: cover.id)%>"><img src="<%= cover.file2(:preview) -%>" alt="" /></a>
+              <%end -%>
+              <ul>
+                <% _design.master_design_uploads.order("created_at desc").last(4).each do |_upload| -%>
+                  <li>
+                    <a href="/dialog_celebrity/master_designs/<%=_design.id%>?upload_id=<%=_upload.id%>" style="display:inline;">
+                      <img src="<%= _upload.file2(:thumb) -%>" alt="<%= _upload.title -%>" />
+                    </a>
+                  </li>
+                <% end -%>
+              </ul>
+            </div>
+            <div class="master-info clearfix">
+              <a class="pull-left master-token"><img src="<%= _master.avatar(:small1) -%>" alt="" /></a>
+              <div class="master-detail pull-left">
+                <h4 class="text-right"><a href="<%= master_interview_dialog_celebrity_master_profile_path(_master) -%>" class="pull-left"><%=_master.name%></a><%= _master.nationality -%></h4>
+                <div style="height: 42px; overflow: hidden;"><p><%= raw _master.intro.html_safe -%><p></div>
+                <a href="<%= master_interview_dialog_celebrity_master_profile_path(_master) -%>" target="_blank">阅读全文>></a>
+              </div>
+            </div>
+          </div>
+          <div class="master-share clearfix">
+            <div class="pull-right">
+              <div id="bdshare" class="bds_tools get-codes-bdshare mr5">
+                <span class="pull-left">一键分享：</span>
+                <% ["qzone","tsina","tqq","renren","t163"].each do |_t| -%>
+                <a class="bds_<%=_t%>" href="http://www.jiathis.com/send/?webid=<%=_t%>&url=<%=request.url%>&title=iColor对话名人&summary=我正在浏览设计名家：<%=_master.name%> 的作品，实在是太棒了！分享给你们看看。想领略更多名家设计精选作品？想要设计名家在线解答装修疑惑？就要去iColor看看&pic=<%= (request.host + ':' + request.port.to_s + cover.file2(:preview)) if cover.present? %>" target="_blank"></a>
+                <%end-%>
+
+              </div>
+            </div>
+          </div>
+          <%end-%>
+        </li>
+        <% if index == 3 %>
+          <div class="clearfix mb10">
+            <div class="footer_banner mt10 pull-left"><a href="<%=@banners[0].url%>"><img src="<%=@banners[0].file(:list_670x85)%>"></a></div>
+            <div class="footer_banner mt10 pull-right"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_310x85)%>"></a></div>
+          </div>
+        <%end-%>
+      <%end-%>
+    </ul>
+    <div class="pager host_pager ft12">
+      <%= paginate(@masters) if !@masters.blank? %>
+    </div>
+</div>
+<!-- 页面内容end -->
+
+<!-- 底部公共部分start -->
+<div class="index_main refresh_news mt10 clearfix">
+  <%= render "refresh_record/foot_select" %>
+  <div class="pull-right"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x230)%>"></a></div>
+</div>
+
+<a href="<%=@banners[3].url%>"><img class="mt10" src="<%=@banners[3].file(:list_1000x85)%>"></a>

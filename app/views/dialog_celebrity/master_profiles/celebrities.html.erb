@@ -1,0 +1,76 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag "famous" %>
+<%end-%>
+
+<%- content_for :tail do %>
+<script type="text/javascript">
+$(function(){
+  $.post("/dialog_celebrity/refresh_celebrity_questions",function(result){
+    $("#celebrity_questions").html(result.content)
+  })
+})
+</script>
+<%- end %>
+
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> > </li>
+  <li><a href="/dialog_celebrity">对话名人</a> > </li>
+  <li class="active">名人在线</li>
+</ul>
+<hr class="border2 border2_mt2">
+
+<a href="<%=@banners[0].url%>"><img src="<%=@banners[0].file(:list_1000x85)%>" alt="" width="1000" height="85" style="height: 85px;"/></a>
+
+<div class="clearfix mt10">
+  <div class="pull-left famous_left">
+    <div class="intv_right">
+      <h5 class="intv_title"><!-- <a href="#" class="pull-right a_hover_red">更多></a> --><strong>名人介绍</strong></h5>
+      <div id="famous_online" class="slider-bin">
+        <div class="slider-container">
+          <ul class="unstyled clearfix">
+            <% @celebrities.each do |_celebrity| -%>
+              <li>
+                <a class="help-block" href="<%= master_interview_dialog_celebrity_master_profile_path(_celebrity) -%>"><img src="<%= _celebrity.avatar(:middle1) -%>"></a>
+                <p class="nomargin text-center"><%=_celebrity.board.name-%></p>
+                <p class="nomargin text-center"><strong><%=_celebrity.name-%></strong></p>
+                <p><a href="<%= new_dialog_celebrity_celebrity_question_path(master_id: _celebrity.id,board_id: _celebrity.celebrity_content_board_id) -%>" class="btn btn-warning">我要提问</a></p>
+              </li>
+            <%end-%>
+          </ul>
+        </div>
+        <!-- <a href="javascript:;" class="slider-prev">prev</a> -->
+        <!-- <a href="javascript:;" class="slider-next">next</a> -->
+      </div>
+    </div>
+    <div class="mt10 famous_article">
+      <h5 class="intv_title"><a href="<%=dialog_celebrity_celebrity_notes_path%>" class="pull-right a_hover_red">更多></a><strong>名家手记</strong></h5>
+      <ul class="unstyled index_main famous_list">
+        <% CelebrityNote.order("updated_at desc").limit(4).each do |_note| -%>
+        <li><span class="pull-right"><%= _note.author.name%>/<%=_note.board.name%></span><a href="<%=dialog_celebrity_celebrity_note_path(_note.id)%>" class="a_hover_red"><%=_note.name%></a></li>
+        <%end-%>
+      </ul>
+    </div>
+
+    <div id="celebrity_questions"></div>
+  </div>
+  <div class="pull-right smaller famous_right">
+
+    <%= render "dialog_celebrity/shared/media_chann" -%>
+    <%= render "dialog_celebrity/shared/new_designs" -%>
+
+    <div class="mt10"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
+    <div class="mt10"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x230)%>" width="230" height="230"></a></div>
+    <div class="mt10"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_230x170)%>" width="230" height="170"></a></div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <%= render "refresh_record/foot_select" %>
+  <div class="pull-right"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_230x230)%>"></a></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[5].url%>"><img src="<%=@banners[5].file(:list_670x85)%>"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[6].url%>"><img src="<%=@banners[6].file(:list_310x85)%>"></a></div>
+</div>

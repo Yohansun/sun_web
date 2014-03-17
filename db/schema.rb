@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140211063344) do
+ActiveRecord::Schema.define(:version => 20140311125842) do
 
   create_table "admin_profiles", :force => true do |t|
     t.integer  "admin_id"
@@ -99,8 +99,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "file_updated_at"
   end
 
-  add_index "avatars", ["file_file_name"], :name => "index_avatars_on_file_file_name"
-  add_index "avatars", ["file_updated_at"], :name => "index_avatars_on_file_updated_at"
   add_index "avatars", ["user_id"], :name => "index_avatars_on_user_id"
 
   create_table "baicheng_events", :force => true do |t|
@@ -132,6 +130,107 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "celebrities", :force => true do |t|
+    t.string   "name",                                  :null => false
+    t.string   "intro",                 :default => ""
+    t.integer  "celebrity_category_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "celebrities", ["celebrity_category_id"], :name => "index_celebrities_on_celebrity_category_id"
+
+  create_table "celebrity_categories", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "celebrity_content_boards", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "celebrity_notes", :force => true do |t|
+    t.string   "name",                                         :null => false
+    t.text     "intro"
+    t.text     "content"
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.boolean  "recommended",                :default => true, :null => false
+    t.integer  "master_profile_id"
+    t.integer  "celebrity_content_board_id"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "celebrity_notes", ["celebrity_content_board_id"], :name => "index_celebrity_notes_on_celebrity_content_board_id"
+  add_index "celebrity_notes", ["master_profile_id"], :name => "index_celebrity_notes_on_master_profile_id"
+  add_index "celebrity_notes", ["recommended"], :name => "index_celebrity_notes_on_recommended"
+
+  create_table "celebrity_question_categories", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "celebrity_question_categories", ["parent_id"], :name => "index_celebrity_question_categories_on_parent_id"
+
+  create_table "celebrity_question_images", :force => true do |t|
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "celebrity_question_key_scopes", :force => true do |t|
+    t.string   "name"
+    t.text     "key_arr"
+    t.integer  "celebrity_content_board_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "celebrity_question_replies", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "celebrity_question_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "media_id"
+  end
+
+  add_index "celebrity_question_replies", ["celebrity_question_id"], :name => "index_celebrity_question_replies_on_celebrity_question_id"
+  add_index "celebrity_question_replies", ["user_id"], :name => "index_celebrity_question_replies_on_user_id"
+
+  create_table "celebrity_questions", :force => true do |t|
+    t.string   "name",                                          :null => false
+    t.string   "key",                                           :null => false
+    t.text     "content"
+    t.integer  "master_profile_id"
+    t.integer  "user_id"
+    t.integer  "celebrity_content_board_id"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.boolean  "is_delete",                  :default => false
+    t.datetime "delete_at"
+    t.integer  "delete_media_id"
+    t.string   "fake_username"
+  end
+
+  add_index "celebrity_questions", ["celebrity_content_board_id"], :name => "index_celebrity_questions_on_celebrity_content_board_id"
+  add_index "celebrity_questions", ["master_profile_id"], :name => "index_celebrity_questions_on_master_profile_id"
+  add_index "celebrity_questions", ["user_id"], :name => "index_celebrity_questions_on_user_id"
 
   create_table "channel_tips", :force => true do |t|
     t.integer  "rank"
@@ -299,7 +398,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.integer  "collects_count",    :default => 0
     t.integer  "sorts",             :default => 100
     t.boolean  "no_audited",        :default => false
-    t.boolean  "can_published",     :default => false
   end
 
   add_index "design_images", ["area_id"], :name => "area_id"
@@ -314,7 +412,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
   add_index "design_images", ["is_cover"], :name => "NewIndex4"
   add_index "design_images", ["is_cover"], :name => "index_design_images_on_is_cover"
   add_index "design_images", ["sorts"], :name => "sorts"
-  add_index "design_images", ["source"], :name => "source"
   add_index "design_images", ["title"], :name => "index_design_images_on_title"
   add_index "design_images", ["user_id"], :name => "NewIndex1"
 
@@ -370,25 +467,38 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.boolean  "baicheng_active",           :default => false
     t.integer  "story_talking_id"
     t.integer  "comments_count",            :default => 0
+    t.string   "come_from"
   end
 
   add_index "designs", ["area_id"], :name => "NewIndex8"
   add_index "designs", ["area_id"], :name => "index_designs_on_area_id"
-  add_index "designs", ["city"], :name => "NewIndex7"
   add_index "designs", ["created_at"], :name => "NewIndex3"
   add_index "designs", ["created_at"], :name => "index_designs_on_created_at"
   add_index "designs", ["design_color"], :name => "index_designs_on_design_color"
   add_index "designs", ["is_refresh"], :name => "index_designs_on_is_refresh"
-  add_index "designs", ["recommended"], :name => "NewIndex10"
   add_index "designs", ["room_type"], :name => "NewIndex6"
   add_index "designs", ["room_type"], :name => "index_designs_on_room_type"
-  add_index "designs", ["shares_count"], :name => "NewIndex4"
   add_index "designs", ["style"], :name => "NewIndex5"
   add_index "designs", ["style"], :name => "index_designs_on_style"
   add_index "designs", ["title"], :name => "index_designs_on_title"
   add_index "designs", ["user_id"], :name => "NewIndex1"
   add_index "designs", ["view_count"], :name => "NewIndex9"
   add_index "designs", ["votes_count"], :name => "NewIndex2"
+
+  create_table "dialog_celebrity_pages", :force => true do |t|
+    t.string   "edit_treasury_title"
+    t.boolean  "last_celebrity",                   :default => false
+    t.boolean  "last_master",                      :default => false
+    t.integer  "celebrity_id"
+    t.integer  "master_id"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.string   "edit_treasury_thumb_file_name"
+    t.string   "edit_treasury_thumb_content_type"
+    t.integer  "edit_treasury_thumb_file_size"
+    t.datetime "edit_treasury_thumb_updated_at"
+    t.string   "edit_treasury_url"
+  end
 
   create_table "downloads", :force => true do |t|
     t.string   "title"
@@ -409,6 +519,23 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at",               :null => false
     t.datetime "published_at"
   end
+
+  create_table "editor_treasuries", :force => true do |t|
+    t.string   "name",                                         :null => false
+    t.text     "content"
+    t.text     "intro"
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.boolean  "recommended",                :default => true, :null => false
+    t.integer  "celebrity_content_board_id"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "editor_treasuries", ["celebrity_content_board_id"], :name => "index_editor_treasuries_on_celebrity_content_board_id"
+  add_index "editor_treasuries", ["recommended"], :name => "index_editor_treasuries_on_recommended"
 
   create_table "event_attendees", :force => true do |t|
     t.integer  "special_event_id"
@@ -497,6 +624,13 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.string   "title"
     t.string   "link"
     t.integer  "order_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "forwar_users", :force => true do |t|
+    t.string   "username"
+    t.string   "genre"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -615,6 +749,28 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at",        :null => false
     t.integer  "image_width"
     t.integer  "image_height"
+  end
+
+  create_table "home_dialog_celebrities", :force => true do |t|
+    t.boolean  "last_celebrity", :default => false
+    t.boolean  "last_master",    :default => false
+    t.integer  "celebrity_id"
+    t.integer  "master_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "home_dialog_celebrity_images", :force => true do |t|
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.integer  "position",                 :default => 0
+    t.string   "title",                    :default => ""
+    t.string   "url",                      :default => ""
+    t.integer  "home_dialog_celebrity_id"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "home_heads", :force => true do |t|
@@ -759,9 +915,7 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at",        :null => false
   end
 
-  add_index "hx_kvs", ["created_at"], :name => "index_hx_kvs_on_created_at"
   add_index "hx_kvs", ["position"], :name => "index_hx_kvs_on_position"
-  add_index "hx_kvs", ["updated_at"], :name => "index_hx_kvs_on_updated_at"
 
   create_table "hx_maps", :force => true do |t|
     t.integer  "hx_kv_id"
@@ -774,10 +928,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "hx_maps", ["created_at"], :name => "index_hx_maps_on_created_at"
-  add_index "hx_maps", ["hx_kv_id"], :name => "index_hx_maps_on_hx_kv_id"
-  add_index "hx_maps", ["updated_at"], :name => "index_hx_maps_on_updated_at"
-
   create_table "hx_news", :force => true do |t|
     t.integer  "position"
     t.string   "title"
@@ -786,9 +936,7 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "hx_news", ["created_at"], :name => "index_hx_news_on_created_at"
   add_index "hx_news", ["position"], :name => "index_hx_news_on_position"
-  add_index "hx_news", ["updated_at"], :name => "index_hx_news_on_updated_at"
 
   create_table "hx_profiles", :force => true do |t|
     t.text     "content"
@@ -924,7 +1072,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
 
   add_index "inspirations", ["created_at"], :name => "index_inspirations_on_created_at"
   add_index "inspirations", ["is_minisite"], :name => "index_inspirations_on_is_minisite"
-  add_index "inspirations", ["votes_count"], :name => "index_inspirations_on_votes_count"
 
   create_table "jobs", :force => true do |t|
     t.string   "job"
@@ -976,6 +1123,15 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
   add_index "lands", ["source"], :name => "index_lands_on_source"
   add_index "lands", ["source"], :name => "source"
 
+  create_table "lanterns", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.integer  "forwar"
+    t.integer  "date_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "login_logs", :force => true do |t|
     t.integer  "user_id"
     t.datetime "current_sign_in_at"
@@ -993,8 +1149,10 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.integer  "area_id"
     t.string   "user_name"
     t.string   "come_from"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "view_count", :default => 0
+    t.string   "sina_id",    :default => "0"
   end
 
   create_table "love_story_images", :force => true do |t|
@@ -1020,8 +1178,8 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
 
   create_table "master_design_uploads", :force => true do |t|
     t.integer  "master_design_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -1032,6 +1190,11 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.string   "recommend_color_category1"
     t.string   "recommend_color_category2"
     t.string   "recommend_color_category3"
+    t.boolean  "is_cover",                  :default => false
+    t.string   "file2_file_name"
+    t.string   "file2_content_type"
+    t.integer  "file2_file_size"
+    t.datetime "file2_updated_at"
   end
 
   create_table "master_designs", :force => true do |t|
@@ -1061,8 +1224,8 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.text     "intro"
     t.integer  "subject_id"
     t.datetime "published_at"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.string   "preview_img_out_file_name"
     t.string   "preview_img_out_content_type"
     t.integer  "preview_img_out_file_size"
@@ -1074,7 +1237,16 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.string   "master_kind"
     t.string   "interview_content_type"
     t.text     "message"
+    t.integer  "mtype",                        :default => 0
+    t.integer  "celebrity_content_board_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
+
+  add_index "master_profiles", ["celebrity_content_board_id"], :name => "index_master_profiles_on_celebrity_content_board_id"
+  add_index "master_profiles", ["mtype"], :name => "index_master_profiles_on_mtype"
 
   create_table "master_videos", :force => true do |t|
     t.string   "py"
@@ -1082,6 +1254,17 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.text     "intro"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "media", :force => true do |t|
+    t.string   "name"
+    t.string   "username"
+    t.string   "password"
+    t.text     "boards"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "email",      :default => ""
+    t.string   "mobile",     :default => ""
   end
 
   create_table "messages", :force => true do |t|
@@ -1199,23 +1382,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "pictures", :force => true do |t|
-    t.integer  "position"
-    t.string   "title"
-    t.string   "url"
-    t.string   "special_guide_id"
-    t.string   "img_title"
-    t.string   "img_file_name"
-    t.string   "img_content_type"
-    t.integer  "img_file_size"
-    t.datetime "img_updated_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "pictures", ["position"], :name => "index_pictures_on_position"
-  add_index "pictures", ["special_guide_id"], :name => "index_pictures_on_special_guide_id"
-
   create_table "point_exchanges", :force => true do |t|
     t.integer  "area_id"
     t.datetime "buy_date"
@@ -1281,7 +1447,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
   end
 
   add_index "point_stores", ["area_id"], :name => "index_point_stores_on_area_id"
-  add_index "point_stores", ["store_no"], :name => "index_point_stores_on_store_no"
 
   create_table "point_user_gifts", :force => true do |t|
     t.integer  "user_id"
@@ -1293,10 +1458,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
-
-  add_index "point_user_gifts", ["point_gift_id"], :name => "index_point_user_gifts_on_point_gift_id"
-  add_index "point_user_gifts", ["status"], :name => "index_point_user_gifts_on_status"
-  add_index "point_user_gifts", ["user_id"], :name => "index_point_user_gifts_on_user_id"
 
   create_table "point_users", :force => true do |t|
     t.integer  "user_id"
@@ -1318,9 +1479,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  add_index "points", ["expire_date"], :name => "index_points_on_expire_date"
-  add_index "points", ["user_id"], :name => "index_points_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"
@@ -1362,18 +1520,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "recommends", :force => true do |t|
-    t.string   "title"
-    t.string   "url"
-    t.string   "special_guide_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "recommends", ["created_at"], :name => "index_recommends_on_created_at"
-  add_index "recommends", ["special_guide_id"], :name => "index_recommends_on_special_guide_id"
-  add_index "recommends", ["updated_at"], :name => "index_recommends_on_updated_at"
 
   create_table "rep_replies", :force => true do |t|
     t.integer  "user_id"
@@ -1456,8 +1602,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
-
-  add_index "seller_reports", ["file_name"], :name => "index_seller_reports_on_file_name"
 
   create_table "seller_users", :force => true do |t|
     t.string   "email",                  :default => "",  :null => false
@@ -1576,31 +1720,6 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
 
   add_index "special_events", ["actived"], :name => "index_special_events_on_actived"
   add_index "special_events", ["due_at"], :name => "index_special_events_on_due_at"
-  add_index "special_events", ["start_at"], :name => "index_special_events_on_start_at"
-
-  create_table "special_guides", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "edition"
-    t.string   "img_title"
-    t.string   "img_file_name"
-    t.string   "img_content_type"
-    t.integer  "img_file_size"
-    t.datetime "img_updated_at"
-    t.string   "color1_name"
-    t.string   "color2_name"
-    t.string   "color3_name"
-    t.string   "color1"
-    t.string   "color2"
-    t.string   "color3"
-    t.text     "recommend"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "special_guides", ["created_at"], :name => "index_special_guides_on_created_at"
-  add_index "special_guides", ["edition"], :name => "index_special_guides_on_edition"
-  add_index "special_guides", ["updated_at"], :name => "index_special_guides_on_updated_at"
 
   create_table "stories", :force => true do |t|
     t.string   "title"
@@ -1810,6 +1929,10 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.boolean  "is_admin",                  :default => false
     t.string   "genre"
     t.string   "edit_by"
+    t.string   "price"
+    t.boolean  "top500",                    :default => false
+    t.boolean  "top50",                     :default => false
+    t.boolean  "reg_at_minisite2014"
   end
 
   add_index "users", ["area_id"], :name => "index_users_on_area_id"
@@ -1849,9 +1972,7 @@ ActiveRecord::Schema.define(:version => 20140211063344) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "visit_ips", ["created_at"], :name => "index_visit_ips_on_created_at"
   add_index "visit_ips", ["ip"], :name => "index_visit_ips_on_ip"
-  add_index "visit_ips", ["updated_at"], :name => "index_visit_ips_on_updated_at"
 
   create_table "votes", :force => true do |t|
     t.integer  "voteable_id"

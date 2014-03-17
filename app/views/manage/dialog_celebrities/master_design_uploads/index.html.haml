@@ -1,0 +1,48 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity'
+  = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
+  = javascript_include_tag "manage/dialog_celebrities/master_design_uploads"
+
+- content_for :tail do
+  = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                           "upload_image/jquery.iframe-transport",
+                           "upload_image/jquery.fileupload"
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4f5b2f6acc3bc4f65f60d6a2b56ca6f7e4f5219c
+#master-designs
+  %span.ltitle
+    名人作品管理
+  .boards.ml20.mt20.clearfix
+    %a.board.fl.mr10{href: "#"} 作品信息
+    %a.board.fl.mr10.active{href: "#"} 作品相册
+  .mt20.ml20{ style: "color: red;"}
+    = flash[:alert] if flash[:alert]
+
+.control-group.clearfix
+  %label.control-label.fl
+  .controls.fl.ml20
+    %span.upload_selected_filename.fl.mr10
+
+    %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
+      %i.icon-plus.icon-white
+      %span 上传图片...
+      %input#manage_dialog_master_design_upload_file{type: "file",name: "file2",multiple: "",:"data-master-design-id" => params[:master_design_id]}
+
+#master-designs-warp
+  - @uploads.each do |_upload|
+    = render partial: "manage/dialog_celebrities/master_design_uploads/upload",locals: { upload: _upload }
+
+.ml20
+  %hr.w500{style: "border-style: dashed;"}/
+  %a.btn.btn-small.btn-primary.radius6#back-prev{href: "/manage/dialog_celebrities/master_designs/#{params[:master_design_id]}/edit"} 返回上一步
+  %a.btn.btn-small.btn-primary.radius6#save-all{href: "javascript:;"} 保存后返回
+
+  / %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复
+  %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/master_designs"} 返回
+
+:coffeescript
+  $ ->
+    D.initialize()

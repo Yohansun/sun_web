@@ -1,0 +1,2 @@
+module DialogCelebrity::CelebrityQuestionRepliesHelper
+end

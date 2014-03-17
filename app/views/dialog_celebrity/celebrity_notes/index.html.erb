@@ -1,0 +1,94 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag "famous" %>
+<%end-%>
+
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> > </li>
+  <li><a href="/dialog_celebrity">对话名人</a> > </li>
+  <li class="active">名家手记</li>
+</ul>
+<hr class="border2 border2_mt2">
+<a href="<%=@banners[0].url%>"><img src="<%=@banners[0].file(:list_1000x85)%>" alt="" width="1000" height="85" style="height: 85px;" /></a>
+<div class="clearfix mt10">
+  <div class="pull-left famous_left">
+    <div class="index_main">
+      <h5 class="title">
+        <form action="<%='/dialog_celebrity/celebrity_notes' -%>" class="form_search pull-right nomargin">
+          <div class="input-append">
+            <input type="text" class="nomargin" name="keyword" placeholder="按关键字搜索" />
+            <% if params[:board_id] %>
+              <input type="hidden" name="board_id" value="<%=params[:board_id]%>">
+            <%end-%>
+            <button class="btn"><i class="icon-i16 icon-search_white"></i></button>
+          </div>
+        </form>
+        名家手记
+      </h5>
+
+      <ul class="nav nav-tabs famous_tab mb0" id="famous_tab">
+        <li class="<%= params[:board_id].blank? ? 'active' : '' %>" style="background-color:#4c4c4c;">
+          <a href="/dialog_celebrity/celebrity_notes" >
+            全部
+            <span class="active_arrow hide"></span>
+          </a>
+        </li>
+        <% CelebrityContentBoard.order("id asc").limit(5).each do |_board| %>
+          <li style="background-color:<%=_board.color%>;" class="<%= params[:board_id] == _board.id.to_s ? 'active' : '' %>">
+            <a href="/dialog_celebrity/celebrity_notes?board_id=<%=_board.id%>">
+              <%=_board.name%>
+              <span class="active_arrow hide"></span>
+            </a>
+          </li>
+        <%end-%>
+      </ul>
+
+      <div class="tab-content famous_tab_content mt0">
+        <div class="tab-pane active" id="famous_tab1">
+          <div class="refresh_lists designer_events famous_script">
+            <% @articles.each do |_article| %>
+            <div class="media tit_con">
+              <a class="pull-left media_a" href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>">
+                <img class="media-object" src="<%=_article.thumb(:thumb)%>" style="width: 280px; height: 145px;">
+              </a>
+              <div class="media-body refresh_list">
+                <div class="list_mata">
+                  <span class="pull-right"><%= _article.author.name -%>【<%= _article.board.name -%>】</span>
+                  <span class="label bg_orange">精彩推荐</span>
+                  <span class="time"><%=_article.created_at.strftime("%Y-%m-%d")%></span>
+                </div>
+                <ul class="ul_dot clearfix nomargin">
+                  <li class="nomargin">
+                    <h5 class="nomargin"><a href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>" target="_blank"><%= _article.name -%></a></h5>
+                    <p class="nomargin"><a href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>"><%= _article.intro -%></a></p>
+                  </li>
+                </ul>
+                <div class="nomargin clearfix"><a class="btn_detail btn_detail_gray pull-left" href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>">查看详情</a></div>
+              </div>
+            </div>
+            <%end -%>
+          </div>
+          <div class="pager host_pager ft12">
+            <%= paginate(@articles,remote: true) if !@questions.blank? %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pull-right smaller famous_right">
+    <%= render "dialog_celebrity/shared/media_chann" -%>
+    <div class="mt10"><a href="<%=@banners[1].url%>"><img src="<%=@banners[1].file(:list_230x170)%>" width="230" height="170"></a></div>
+    <div class="mt10"><a href="<%=@banners[2].url%>"><img src="<%=@banners[2].file(:list_230x230)%>" width="230" height="230"></a></div>
+    <div class="mt10"><a href="<%=@banners[3].url%>"><img src="<%=@banners[3].file(:list_230x170)%>" width="230" height="170"></a></div>
+  </div>
+</div>
+
+<div class="index_main refresh_news mt10 clearfix">
+  <%= render "refresh_record/foot_select" %>
+  <div class="pull-right"><a href="<%=@banners[4].url%>"><img src="<%=@banners[4].file(:list_230x230)%>"></a></div>
+</div>
+
+<div class="clearfix">
+  <div class="footer_banner mt10 pull-left"><a href="<%=@banners[5].url%>"><img src="<%=@banners[5].file(:list_670x85)%>"></a></div>
+  <div class="footer_banner mt10 pull-right"><a href="<%=@banners[6].url%>"><img src="<%=@banners[6].file(:list_310x85)%>"></a></div>
+</div>

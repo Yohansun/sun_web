@@ -987,10 +987,14 @@ $(function(){
             scroll : 3,
             pagers : '.chann_indicators'
         });
-        $('#refresh_slide').slider({
+        $('#refresh_slide, .js-index_slide_1').slider({
             buttons : false,
             scroll : 1,
             pagers : '.circle_indicators'
+        });
+        $('#famous_online').slider({
+            pagers: '.circle_indicators',
+            margin : 38
         });
         $('.gift_carousel').slider({
             auto: false,
@@ -1117,5 +1121,110 @@ $(function(){
         $('.js-ask_btn').mouseleave(function(){
             $('.ask_form').hide();
         })
+    }($));
+
+
+    //upload
+    ;(function($){
+      $('#upload_tab a:first').tab('show');
+      //
+      $('.js-text_rest').bind('keydown keyup', function(){
+        var len = $(this).val().length;
+        var total = $(this).data('max');
+        if (len > total) {
+          $(this).val($(this).val().slice(0,total))
+          return;
+        };
+        $(this).next().find('.js-text_rest_show').text(total - len);
+      });
+      //
+      $('.js-reco_toggle').click(function(){
+        $(this).siblings('.controls').toggleClass('hide');
+        $(this).toggleClass('show');
+      });
+    }($));
+
+    //review
+    ;(function($){
+      $('.js-list_parent').on('click','.js-review_btn', function(){
+        $(this).parent().siblings('form.js-review').show();
+      });
+      $('.js-list_parent').on('click','.js-review_cannel', function(){
+        $(this).parents('form.js-review').hide();
+      });
+      //delete
+      $('.js-list_parent').on('click','.js-delete',function(){
+        $(this).parent('.state').remove();
+      });
+    }($));
+
+    //famous
+    ;(function($){
+      $('.js-show_content').css('cursor','pointer');
+      $('.famous_list').on('click','.js-show_content',function(){
+        var $parents = $(this).parents('li');
+        $parents.addClass('bg').find('.famous_answer').show();
+        $parents.find('.js-state').hide().siblings('.js-hide_content').show().css({'cursor':'pointer','margin-right':'8px'});
+      });
+
+      $('.famous_list').on('click','.js-hide_content',function(){
+        // $(this).css()
+        var $parents = $(this).parents('li');
+        $parents.removeClass('bg').find('.famous_answer').hide();
+        $(this).hide().siblings('.js-state').show()
+      });
+
+      //famous ask
+      $('.js-text_percentage').bind('keydown keyup', function(){
+        var len = $(this).val().length;
+        var maxlenth = $(this).data('max');
+        if (len > maxlenth) {
+          $(this).val($(this).val().slice(0,maxlenth))
+          return;
+        };
+        $(this).next().find('.js-text_lenth_show').text(len);
+        $(this).next().find('.js-text_maxlenth').text(maxlenth);
+      });
+      //
+      // $('.famous_ask_form').on('click','.js-famous_options',function(){
+      //  $(this).siblings('.select_options').show();
+      // });
+      // $('.famous_ask_form').on('click','.js-selects_close',function(){
+      //  $(this).parent('.select_options').hide();
+      // });
+      // //famous ask select option
+      // $('.select_options')
+      // .on('change','select',function () {
+      //  var str = '';
+      //  var this_index = $(this).index('select');
+      //  $(this).children('option:selected').each(function() {
+      //    str = $( this ).text();
+      //  });
+      //  $('.select_options_show').children().eq(this_index - 1).text(str);
+      // })
+      // .change();
+      //submit
+      $('.js-famous_ask_submit').on('click',function(){
+        var overview_val = $('.famous_ask_form').find('.js-text_percentage').val();
+        var sort_text = $('.famous_ask_form').find('.select_options_show').children('span:eq(0)').text();
+        var scope_text = $('.famous_ask_form').find('.select_options_show').children('span:eq(1)').text();
+        var arr = []
+        $("#upload_pics_queue img").each(function(index,img){
+          arr.push($(img).attr("data-image-id"))
+        })
+        str = arr.join("|")
+
+        $("#upload_pics_queue").find("input[name=images]").remove()
+        $("#upload_pics_queue").append("<input name='images' type='hidden' value='" + str + "'>")
+
+        if (overview_val == '') {
+          alert('请输入问题概述')
+          return false;
+        }
+        // }else if (sort_text == '' || scope_text == '') {
+        //  alert('请选择分类')
+        //  return false;
+        // };
+      })
     }($));
 });

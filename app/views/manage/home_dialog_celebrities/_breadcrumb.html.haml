@@ -1,0 +1,7 @@
+#breadcrumbs
+  %ul.breadcrumb
+    %li{ class: ('active_red' if action_name == 'images') }
+      = link_to '图文设置','/manage/home_dialog_celebrities/images'
+    %span |
+    %li{ class: ('active_red' if action_name == 'index') }
+      = link_to '名人名家','/manage/home_dialog_celebrities/index'

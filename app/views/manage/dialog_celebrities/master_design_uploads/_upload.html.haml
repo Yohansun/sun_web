@@ -1,0 +1,27 @@
+.clearfix.ml20.mt20
+  .file-thumb.fl
+    = image_tag(upload.file2(:interview))
+  .file-info.fl.ml10{ :"data-upload-id" => upload.id }
+    %b 推荐色
+    .file-recommend_color.clearfix
+      .fl 色号
+      .fl.ml10
+        %input#color1{type: :text, placeholder: "推荐色色号1", name: "color1", value: upload.recommend_color1 }
+      .fl.ml10
+        %input#color2{type: :text, placeholder: "推荐色色号2", name: "color2", value: upload.recommend_color2 }
+      .fl.ml10
+        %input#color3{type: :text, placeholder: "推荐色色号3", name: "color3", value: upload.recommend_color3 }
+    .file-recommend-color-category
+      .fl 名称
+      .fl.ml10
+        %input#color-name1{type: :text, placeholder: "推荐色名称1", name: "color_category1", value: upload.recommend_color_category1}
+      .fl.ml10
+        %input#color-name2{type: :text, placeholder: "推荐色名称2", name: "color_category2", value: upload.recommend_color_category2}
+      .fl.ml10
+        %input#color-name3{type: :text, placeholder: "推荐色名称3", name: "color_category3", value: upload.recommend_color_category3}
+  .fl.ml20.mt30
+    %span 设为封面
+    %input{type: "radio", name: "is-cover", value: upload.id, checked: upload.is_cover}
+    .lbl
+  .fl.ml20.mt30
+    = link_to "移除","javascript:;",:class => "remove-upload"

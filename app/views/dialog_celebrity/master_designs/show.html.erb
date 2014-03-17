@@ -1,0 +1,126 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag "manage/map" %>
+<%end-%>
+
+<%- content_for :tail do %>
+<%= javascript_include_tag "manage/map-kv-slider.js", "/resources/js/plugins/exp/exp.js" %>
+<script>
+  $(".map-next,.map-next-bullet").click(function(){
+    $obj = $(".map-kv-container ul li.map-active")
+    _url = $obj.next().find("a").attr("href")
+    if(_url==undefined){
+      _url = $(".map-kv-container ul li").eq(0).find("a").attr("href")
+    }
+    window.location.href = _url
+  })
+  $(".map-prev,.map-prev-bullet").click(function(){
+    $obj = $(".map-kv-container ul li.map-active")
+    _url = $obj.prev().find("a").attr("href")
+    if(_url==undefined){
+      _url = $(".map-kv-container ul li").eq(-1).find("a").attr("href")
+    }
+    window.location.href = _url
+  })
+
+</script>
+<%- end %>
+
+<h3 class="chann_caption nomargin">
+  <i class="icon-map icon-map1 icon_colors"></i>
+  <strong>对话名人</strong>
+  <small>直面大师专家，为您在线授道解惑</small>
+</h3>
+<div class="clearfix">
+  <div class="footer_banner pull-left"><a href="<%= @banners[0].url -%>"><img src="<%=@banners[0].file(:list_670x85)%>"></a></div>
+  <div class="footer_banner pull-right"><a href="<%= @banners[1].url -%>"><img src="<%=@banners[1].file(:list_310x85)%>"></a></div>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="/">首页</a> &gt;</li>
+  <li><a href="/dialog_celebrity">对话名人</a> &gt;</li>
+  <li><a href="/dialog_celebrity/master_interviews">名家设计</a> &gt;</li>
+  <li class="active"><%=@master_design.title -%></li>
+</ul>
+<hr class="border2 border2_mt2">
+
+<h4><%=@master_design.title -%></h4>
+<div class="index_main clearfix">
+  <div class="pull-left imgbase_in_left">
+    <div class="slides_box clearfix">
+      <div class="map-big pull-left js-map-big">
+        <% if @upload -%>
+          <img src="<%=@upload.file2(:slide)%>" />
+        <%end-%>
+      </div>
+      <div class="map-kv-slider pull-right">
+        <a href="javascript:;" class="map-prev-bullet js-map-prev-bullet">prev</a>
+        <hr class="nomargin">
+        <a href="javascript:;" class="map-prev js-map-prev">上一张图</a>
+        <div class="map-kv-container">
+          <ul>
+            <% @master_design.master_design_uploads.each_with_index do |_upload,index| -%>
+            <li class="<%= _upload.id == @upload.id ? 'map-active' : ''%>"><a href="<%=dialog_celebrity_master_design_path(@master_design.id,upload_id: _upload.id)%>"><span></span><img src="<%=_upload.file2(:thumb2)-%>" alt="<%=_upload.title%>" /></a></li>
+            <%end -%>
+          </ul>
+        </div>
+        <a href="javascript:;" class="map-next js-map-next">下一张图</a>
+        <hr class="nomargin">
+        <a href="javascript:;" class="map-next-bullet js-map-next-bullet mt10">next</a>
+      </div>
+    </div>
+    <div class="btn_group clearfix">
+      <a target="_blank" href="<%= master_interview_dialog_celebrity_master_profile_path(@master) -%>" class="btn1 pull-left"><i class="icon-i16 icon-suit"></i>查看该大师访谈</a>
+      <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-fullscreen"></i>全屏</a>
+      <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-collect"></i>收藏</a>
+      <a href="<%= @upload.present? ? download_dialog_celebrity_master_design_path(@upload.id) : '#' -%>" class="btn2 pull-right"><i class="icon-i16 icon-freedown"></i>免费下载</a>
+      <!-- <a href="#" class="btn2 pull-right"><i class="icon-i16 icon-xin_gray"></i>8799</a> -->
+    </div>
+    <div class="colors_box clearfix">
+      <div class="pull-left"><img src="/assets/imgbase_in/color.jpg"></div>
+      <ul class="pull-left unstyled">
+        <li>
+          <div class="colorblock" style="background-color: <%= @upload.recommend_color1 -%>"></div>
+          <h6 class="colortitle">墙面推荐色</h6>
+          <p class="colorname"><%= @upload.recommend_color_category1 -%></p>
+        </li>
+        <li>
+          <div class="colorblock" style="background-color: <%= @upload.recommend_color2 -%>"></div>
+          <h6 class="colortitle">墙面推荐色</h6>
+          <p class="colorname"><%= @upload.recommend_color_category2 -%></p>
+        </li>
+        <li>
+          <div class="colorblock" style="background-color: <%= @upload.recommend_color3 -%>"></div>
+          <h6 class="colortitle">墙面推荐色</h6>
+          <p class="colorname"><%= @upload.recommend_color_category3 -%></p>
+        </li>
+      </ul>
+      <a href="#" class="gobuy pull-right"></a>
+      <a href="#" class="goshop pull-right"></a>
+    </div>
+    <div style="height:30px;margin-left:20px;margin-top:18px;">
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <!-- <a class="shareCount"></a> -->
+      </div>
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+      <!-- Baidu Button END -->
+    </div>
+  </div>
+  <div class="pull-right imgbase_in_right works">
+    <%= render "dialog_celebrity/shared/media_chann" -%>
+    <div class="mt10"><a href="<%= @banners[2].url -%>"><img src="<%=@banners[2].file(:list_230x230)%>"></a></div>
+    <%= render "dialog_celebrity/shared/new_designs" -%>
+  </div>
+</div>
+
+<div class="mt10"><a href="<%= @banners[3].url -%>"><img src="<%=@banners[3].file(:list_1000x85)%>"></a></div>

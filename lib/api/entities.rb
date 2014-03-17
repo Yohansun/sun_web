@@ -17,16 +17,16 @@ module Icolor
         if user.user_tokens.present?
           user.user_tokens.map {|token| {provider: token.provider, is_binding: token.is_binding?, uid: token.uid}}
         else
-          nil 
-        end  
+          nil
+        end
       end
       expose (:location) do |user,options|
         {}.tap do |a|
           a[:province] = user.city.try(:parent).try(:name)
           a[:city] = user.try(:city).try(:name)
           a[:district] = user.try(:area).try(:name)
-        end  
-      end  
+        end
+      end
     end
   end
 end

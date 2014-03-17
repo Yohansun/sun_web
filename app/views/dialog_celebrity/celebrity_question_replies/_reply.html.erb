@@ -1,0 +1,19 @@
+<div class="state bordered_t">
+  <a href="javascript:;" class="pull-right js-delete" data-reply-id="<%=@reply.id%>">删除</a>
+  <strong><%=@reply.user.try(:username)%></strong>
+  <span class="bordered_r">的回答</span>
+  <span><%=@reply.created_at.strftime("%Y-%m-%d")%></span>
+  <% if @reply.images.count > 0 -%>
+  <i class="icon-imgshow_btn" data-question-id="<%= @reply.id -%>"></i>
+  <div class="imgs_group" style="display: none;">
+    <% @reply.images.each do |_image| -%>
+    <a href="<%=_image.image(:slide)%>" class="question_images_<%= @reply.id -%> imgsgroup">
+    <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+    </a>
+    <%end-%>
+  </div>
+  <%end-%>
+  <p class="content"><%=@reply.content%></p>
+</div>
+
+

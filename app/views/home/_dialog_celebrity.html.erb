@@ -1,0 +1,68 @@
+<div class="index_refresh">
+  <p class="clearfix index_tit">
+    <a href="/dialog_celebrity/master_interviews" target="_blank" class="pull-right"><small>名家设计</small></a>
+    <a class="pull-right"> | </a>
+    <a href="/dialog_celebrity/master_profiles/celebrities" target="_blank" class="pull-right"><small>名人在线</small></a>
+    <a class="pull-right"> | </a>
+    <a href="/dialog_celebrity/celebrity_questions" target="_blank" class="pull-right"><small>名人问答</small></a>
+    <strong class="pull-left">对话名人</strong>
+  </p>
+  <hr class="border2 border2_mt2">
+  <div class="index_main famous clearfix">
+    <div class="pull-left famous_img media_refresh js-index_slide_1">
+      <div class="slider-bin pull-left">
+        <div class="slider-container">
+          <ul class="clearfix nomargin unstyled">
+            <% @images.each do |_image| -%>
+              <li class="item">
+                <a class="pull-left media_a title_opacity" href="<%= _image.url -%>">
+                  <img class="media-object" src="<%=_image.thumb(:thumb) -%>">
+                  <p>
+                    <span><%=_image.title%></span>
+                  </p>
+                </a>
+              </li>
+            <%end-%>
+          </ul>
+        </div>
+        <ul class="circle_indicators nomargin">
+          <li class="slider-active"><a href="javascript:;">1</a></li>
+          <li><a href="javascript:;">2</a></li>
+          <li><a href="javascript:;">3</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pull-left famous_intro">
+      <h5 class="title"><a target="_blank" href="/dialog_celebrity/master_profiles/celebrities" class="pull-right a_hover_red">更多></a>
+        <%= link_to "名人在线","/dialog_celebrity/master_profiles/celebrities",target: "_blank",style: "font-size: 14px; color: inherit;" %>
+      </h5>
+      <div class="media">
+        <div class="pull-left">
+          <img class="media-object" src="<%=@celebrity.avatar(:small2)%>" alt="" width="80" height="80">
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading"><strong><%= link_to(@celebrity.name, master_interview_dialog_celebrity_master_profile_path(@celebrity),target: "_blank") if @celebrity.present? %></strong> /<%=@celebrity.try(:board).try(:name) %>类专家</h5>
+          <p class="nomargin"><%=@celebrity.try(:intro)%></p>
+        </div>
+      </div>
+
+      <h5 class="title"><a target="_blank" href="/dialog_celebrity/master_interviews" class="pull-right a_hover_red">更多></a>
+        <%= link_to "名家设计","/dialog_celebrity/master_interviews",target: "_blank",style: "font-size: 14px; color: inherit;" %>
+      </h5>
+      <div class="media">
+        <div class="pull-left">
+          <img class="media-object" src="<%=@master.avatar(:small2)%>" alt="" width="80" height="80">
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading"><strong><%= link_to(@master.name,master_interview_dialog_celebrity_master_profile_path(@master),target: "_blank") if @master.present?  -%></strong> /<%=@master.try(:board).try(:name)%>类专家</h5>
+          <p class="nomargin"><%=@master.try(:intro)%></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="pull-right famous_tips text-center">
+      <!-- <p>解决<strong><%=@replied_count%></strong>问题</p> -->
+      <p style="margin-top:30px;"><a href="<%= new_dialog_celebrity_celebrity_question_path -%>" class="btn_ask text-left">我要提问</a></p>
+    </div>
+  </div>
+</div>

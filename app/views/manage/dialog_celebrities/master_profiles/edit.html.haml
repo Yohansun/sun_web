@@ -1,0 +1,18 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity'
+  = javascript_include_tag "manage/dialog_celebrities/master_profiles"
+
+#master_profiles
+  %span.ltitle
+    名人管理
+  .boards.ml20.mt20.clearfix
+    %a.board.fl.mr10{href: "#", class: params[:step].blank? ? "active" : ""} 名人简介
+    %a.board.fl.mr10{href: "#", class: params[:step] == "2" ? "active" : ""} 名人访谈
+    %a.board.fl.mr10{href: "#", class: params[:step] == "3" ? "active" : ""} 名人寄语
+  .mt20.ml20{ style: "color: red;"}
+    = flash[:alert] if flash[:alert]
+= simple_form_for @resource,:url => dialog_celebrities_master_profile_path(@resource),:method => "put",:html => {:class => "form-horizonta mt20 ml20",:multipart => true} do |f|
+  = render :partial => "form", :locals => { f: f}
+
+:coffeescript
+  $ -> D.initialize()

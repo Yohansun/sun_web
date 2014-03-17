@@ -1,0 +1,54 @@
+- content_for :head do
+  = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
+  = javascript_include_tag '/xheditor/xheditor-1.1.13-zh-cn.min.js'
+
+- content_for :tail do
+  = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                           "upload_image/jquery.iframe-transport",
+                           "upload_image/jquery.fileupload",
+                           "upload_image/jquery.imagepreview"
+
+:css
+  input#editor_treasury_recommended { opacity: 255; }
+
+.control-group.clearfix
+  %label.control-label.fl 缩略图(上传尺寸: 280x145 )
+  .controls.fl.ml20
+    %span.upload_selected_filename.fl.mr10
+    %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
+      %i.icon-plus.icon-white
+      %span 上传缩略图
+      %input#manage_dialog_editor_treasury_thumb{type: "file",name: "editor_treasury[thumb]",multiple: ""}
+    .fl.ml20
+      - if @resource.thumb.exists?
+        = image_tag(@resource.thumb(:thumb),:id => "preview-thumb")
+      - else
+        %img{id: "preview-thumb",src: "",alt: "" }
+
+.control-group.clearfix
+  %label.control-label.fl 领域分类
+  .controls.fl.ml20
+    = f.input :celebrity_content_board_id, collection: CelebrityContentBoard.all.map{|n|[n.name,n.id]},label: false
+.control-group.clearfix
+  %label.control-label.fl 标题
+  .controls.fl.ml20
+    = f.input :name, label: false
+.control-group.clearfix
+  %label.control-label.fl 简介
+  .controls.fl.ml20
+    = f.input :intro, label: false,:input_html => { style: "width: 480px; height: 180px;" }
+.control-group.clearfix
+  %label.control-label.fl 内容
+  .controls.fl.ml20
+    = f.input :content, label: false, :input_html => { class: "xheditor", style: "width: 800px;" }
+.control-group.clearfix
+  %label.control-label.fl 推荐
+  .controls.fl.ml20
+    = f.input :recommended, :style => "opacity: 100; ", label: false
+.control-group.clearfix
+  %label.control-label.fl
+  .controls.fl.ml20
+    = f.button :submit,:value => "保存",class: "btn btn-small radius6"
+  .controls.fl.ml20
+    %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/editor_treasuries"} 返回
+

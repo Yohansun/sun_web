@@ -1,0 +1,50 @@
+- content_for :head do
+  = stylesheet_link_tag 'manage/dialog_celebrity'
+  = javascript_include_tag "manage/dialog_celebrities/celebrity_notes"
+
+#celebrity_notes.mt20
+  %span.ltitle
+    名人手记管理
+
+  %form.mt20.ml20.clearfix.shadow-white.w850{method: "get",action: "/manage/dialog_celebrities/celebrity_notes"}
+    .title 请选择筛选条件
+    %select.fl{name: "board_id"}
+      %option{value: ""} 选择领域分类
+      - CelebrityContentBoard.where("id in (?)",(1..5).to_a).each do |board|
+        %option{value: board.id, selected: params[:board_id] == board.id.to_s}= board.name
+    .ml10.fl= ".and."
+    %input.fl.ml10.w150{type: "text", name: "key", placeholder: "输入手记标题", value: params[:key]}
+    .ml10.fl= ".and."
+    %input.fl.ml10.w150{type: "text", name: "master_name", placeholder: "输入名人姓名",value: params[:master_name]}
+    .ml10.fl
+      精准匹配
+    %label.fl.ml5
+      %input.master_select{type: "checkbox", name: "match",checked: params[:match].present?}
+      .lbl
+    %input{type: "hidden", value: "true", name: "query"}
+    %button.fl.btn.btn-small.ml10.radius6{type: "submit", value: "搜索"} 搜索
+
+  .mt10
+    %a.btn.btn-small.ml20.radius6#save-board{href: new_dialog_celebrities_celebrity_note_path} 新建手记...
+  %table#ett.table1.mt10.ml20
+    %tr
+      %th.w100 操作
+      %th.w300 手记标题
+      %th.w100 作者
+      %th.leftText.w100 分类
+      %th.leftText.w100 最后修改日期
+    - @collection.each do |_item|
+      %tr
+        %td.centerText
+          = link_to "编辑",edit_dialog_celebrities_celebrity_note_path(_item.id)
+          = link_to "删除",dialog_celebrities_celebrity_note_path(_item.id),:method => "delete",:confirm => "是否确定要删除这篇手记?"
+        %td= _item.name
+        %td= _item.author.try(:name)
+        %td= _item.board.try(:name)
+        %td= _item.updated_at.strftime "%y-%m-%d"
+  .pager.fl.ml20
+    = paginate @collection
+:coffeescript
+  $ ->
+    D.initialize()
+

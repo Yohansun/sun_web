@@ -1,0 +1,395 @@
+<%= stylesheet_link_tag "colorbox/colorbox" %>
+<style type="text/css">
+  .uploadify{
+    float: left;
+    margin: 0 5px 5px 0;
+  }
+  .uploadifyQueueItem{
+    display: none;
+  }
+  #upload_pics_queue span{
+    position: relative;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    padding: 1px;
+    margin: 0 5px 5px 0;
+    text-align: center;
+  }
+  #upload_pics_queue img{
+    vertical-align: middle;
+  }
+  .del-pic {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:20px;
+    height:20px;
+    background: #333333 url(/assets/love_story/images/upload/upload_del.jpg) no-repeat;
+    text-indent: -9999px; }
+</style>
+
+<div class="index_main">
+  <h5 class="title">
+    <form action="/dialog_celebrity/refresh_celebrity_questions" class="form_search pull-right nomargin" id="question-form-search">
+      <div class="input-append">
+        <input type="text" class="nomargin" name="keyword" placeholder="按关键字搜索" value="<%=@keyword%>"/>
+        <% if @board_id %>
+          <input type="hidden" name="board_id" value="<%=@board_id%>">
+        <%end-%>
+        <button class="btn"><i style="background: url(/assets/icons.png) -32px -32px;" class="icon-i16 icon-search_white"></i></button>
+      </div>
+    </form>
+    大家都在问
+  </h5>
+
+  <ul class="nav nav-tabs famous_tab" id="famous_tab">
+    <li class="<%= @board_id.blank? ? 'active' : '' %>" style="background-color:#4c4c4c;">
+      <a href="#" data-toggle="tab">
+        全部
+        <span class="active_arrow hide"></span>
+      </a>
+    </li>
+    <% CelebrityContentBoard.order("id asc").limit(5).each do |_board| %>
+      <li style="background-color:<%=_board.color%>;" class="<%= @board_id == _board.id.to_s ? 'active' : '' %>">
+        <a href="#" data-toggle="tab" data-board="<%=_board.id%>">
+          <%=_board.name%>
+          <span class="active_arrow hide"></span>
+        </a>
+      </li>
+    <%end-%>
+  </ul>
+
+  <div class="tab-content famous_tab_content">
+    <div class="tab-pane active">
+
+      <% if @board.present? %>
+      <h5 class="title nopadding"><%= @board.name -%></h5>
+      <% key_scopes = @board.key_scopes %>
+        <% if key_scopes.count > 0 %>
+          <form action="" class="search_tags_form">
+            <% @board.key_scopes.each_with_index do |_key_scope,_index| -%>
+              <fieldset class="<%= _index > 0 ? 'dott1' : '' %>">
+                <label for=""><%= _key_scope.name -%></label>
+                <div class="tags">
+                  <% _key_scope.key_arr.each do |_key| -%>
+                    <a href="javascript:;" data-keyword="<%=@board_id.present? ? @board_id : ''%>" class="tag a_hover_red question_keyword"><%= _key -%></a>
+                    &nbsp;
+                  <%end -%>
+                </div>
+              </fieldset>
+            <%end -%>
+          </form>
+        <%end-%>
+      <%end-%>
+
+      <ul class="unstyled famous_list js-list_parent">
+        <% @questions.each do |_question| -%>
+          <li class="">
+            <div class="clearfix">
+              <div class="pull-left title_faq">
+                <a class="js-show_content" href="javascript:;">
+                【<%=_question.board.try(:name) || "其他" -%>】<%=_question.name -%>
+                </a>
+                <% if _question.images.count > 0 -%>
+                  <i class="icon-imgshow_btn" data-question-id="<%= _question.id -%>"></i>
+
+                  <div class="imgs_group invisible" style="height:0;">
+                    <% _question.images.each do |_image| -%>
+                    <a href="<%=_image.image(:slide)%>" class="imgsgroup question_images_<%= _question.id -%>">
+                    <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+                    </a>
+                    <%end-%>
+                  </div>
+                <%end-%>
+              </div>
+              <div class="pull-right state js-state">
+                <span><%=_question.created_at.strftime("%Y-%m-%d")%></span>
+                <span class="js-show_content" style="cursor:pointer;">
+                  <% if _question.replied? -%>
+                    已回复
+                  <%end-%>
+                  <i class="icon-i16 icon-slidedown" style="background: url(/assets/icons.png) -28px -126px;"></i>展开
+                </span>
+              </div>
+              <span class="state pull-right js-hide_content hide"><i class="icon-i16 icon-slideup" style="background: url(/assets/icons.png) -32px -108px;"></i>收起</span>
+            </div>
+            <div class="famous_answer hide" data-question-id="<%=_question.id%>">
+              <p class="nomargin state">
+                <% if current_user.present? && current_user.designer? -%>
+                  <a href="javascript:;" class="pull-right js-review_btn">回复</a>
+                <%end-%>
+                提问者：
+                <a class="bordered_r mr8"><%= _question.fake_username.present? ? _question.fake_username : _question.user.try(:username)%></a>
+                <span><%=_question.created_at.strftime("%Y-%m-%d")%></span>
+              </p>
+              <p class="bordered_t">
+                <%=_question.content-%>
+              </p>
+              <% _reply = _question.find_media_reply %>
+              <% if _reply.present? %>
+                <div class="bordered_t">
+                  <span style="font-size: 16px; font-weight: bold;">
+                    专家回答
+                  </span>
+                  <% if _reply.images.count > 0 %>
+                  <i class="icon-imgshow_btn" data-question-id="<%= _reply.id -%>"></i>
+                  <%end-%>
+                  <div class="imgs_group invisible" style="height:0;">
+                    <% _reply.images.each do |_image| -%>
+                      <a href="<%=_image.image(:slide)%>" class="imgsgroup question_images_<%= _reply.id -%>">
+                        <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+                      </a>
+                    <%end-%>
+                  </div>
+
+                  <span class="pull-right" style="margin-top: -20px;"><%=_reply.created_at.strftime("%Y-%m-%d")%></span>
+                </p>
+                <p>
+                  <%= _reply.content -%>
+                </p>
+              <% end -%>
+              <form action="/dialog_celebrity/create_question_reply" class="famous_ask_form hide js-review">
+                <input type="hidden" name="celebrity_question_reply[user_id]" value="<%=current_user.try(:id)%>" />
+                <input type="hidden" name="celebrity_question_reply[celebrity_question_id]" value="<%=_question.id%>" />
+                <fieldset class="pr form_detail">
+                  <textarea id="requestion_content" name="celebrity_question_reply[content]" cols="" rows="" class="js-text_rest question_content" placeholder="" data-max="1000"></textarea>
+                  <span class="pull-right text_rest">
+                    还可以输入
+                    <span class="text-important js-text_rest_show">1000</span>
+                    个字符
+                  </span>
+                  <div class="textarea_footer clearfix">
+                    <span class="pull-left picture_modal_btn pr js-show_picture_modal">
+                      <i class="icon-imgshow_btn nomargin"></i>图片
+                      <div class="exp-layer picture_modal">
+                        <div class="holder">
+                          <h5 class="pic_modal_header nomargin">
+                            本地上传
+                          </h5>
+                          <div class="mh20">
+                            <p class="tips">
+                              共
+                              <span class="selected-num nopadding">0</span>
+                              张，还能上传
+                              <span class="rest-num nopadding">9</span>
+                              张
+                              <span class="nopadding">（按住ctrl可选择多张）</span>
+                            </p>
+                            <div class="form_file clearfix">
+                              <!-- <input type="file" /> -->
+                              <a href="javascript:;" class="uploadify_btn" id="upload_pics"></a>
+                            </div>
+                          </div>
+                          <a class="exp-close js-hide_picture_modal" href="javascript:;"></a>
+                        </div>
+                        <a class="exp-tri" href="javascript:;"></a>
+                      </div>
+                    </span>
+                    <!-- <span class="pull-left">已上传<strong>x</strong>张图片</span> -->
+                  </div>
+                </fieldset>
+                <fieldset class="mt10 pr">
+                  <a href="javascript:;" class="pull-right channel_btn channel_btn_gray noborder js-review_cannel">取消回复</a>
+                  <button class="pull-right channel_btn noborder mr5 reply-requestion-btn">确认回复</button>
+                  <!-- <button class="famous_ask_submit pull-right js-famous_ask_submit">提交问题</button> -->
+                </fieldset>
+              </form>
+              <% _question.user_replies.order("created_at desc").each do |_reply| %>
+                <div class="state bordered_t">
+                  <% if current_user.present? && (current_user.id == _question.user_id || current_user.id == _reply.user_id) -%>
+                    <a href="javascript:;" class="pull-right js-delete" data-reply-id="<%=_reply.id%>">删除</a>
+                  <%end -%>
+                  <strong><%=_reply.user.try(:username)%></strong>
+                  <span class="bordered_r">的回答</span>
+                  <span><%=_reply.created_at.strftime("%Y-%m-%d")%></span>
+                  <% if _reply.images.count > 0 -%>
+                  <i class="icon-imgshow_btn" data-question-id="<%= _reply.id -%>"></i>
+                  <div class="imgs_group" style="display: none;">
+                    <% _reply.images.each do |_image| -%>
+                    <a href="<%=_image.image(:slide)%>" class="question_images_<%= _reply.id -%> imgsgroup">
+                    <%= image_tag _image.image(:thumb) ,style: "margin: 5px 2px; 5px 5px;"-%>
+                    </a>
+                    <%end-%>
+                  </div>
+                  <%end-%>
+                  <p class="content"><%=_reply.content%></p>
+                </div>
+              <%end-%>
+            </div>
+          </li>
+        <%end-%>
+      </ul>
+      <div class="pager host_pager ft12">
+        <%= paginate(@questions,remote: true) if !@questions.blank? %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "jquery.uploadify.js","jquery.colorbox" %>
+<script type="text/javascript">
+  $(function(){
+    $("#replied_count").text("<%=@replied_count%>")
+    $("ul.famous_tab li a").click(function(){
+      _id = $(this).attr("data-board")
+      $.post("/dialog_celebrity/refresh_celebrity_questions",{board_id: _id})
+    })
+
+    $("form#question-form-search").submit(function(){
+      $.post('/dialog_celebrity/refresh_celebrity_questions', $(this).serialize())
+      return false
+    })
+
+    $('.js-show_content').css('cursor','pointer');
+    $('.famous_list').on('click','.js-show_content',function(){
+      var $parents = $(this).parents('li');
+      var $siblings = $parents.siblings();
+      $parents.addClass('bg').find('.famous_answer').show();
+      $parents.find('.js-state').hide().siblings('.js-hide_content').show().css({'cursor':'pointer','margin-right':'8px'});
+
+      $siblings.removeClass('bg').find('.famous_answer').hide();
+      $siblings.find('.js-hide_content').hide().siblings('.js-state').show();
+      $parents.find('.js-show_content').addClass('fb');
+      $siblings.find('.js-show_content').removeClass('fb');
+    });
+
+    $('.famous_list').on('click','.js-hide_content',function(){
+      // $(this).css()
+      var $parents = $(this).parents('li');
+      $parents.removeClass('bg').find('.famous_answer').hide();
+      $(this).hide().siblings('.js-state').show()
+      $parents.find('.js-show_content').removeClass('fb');
+    });
+
+    $('.js-list_parent').on('click','.js-review_btn', function(){
+      $(this).parent().parent().find('form.js-review').show();
+    });
+    $('.js-list_parent').on('click','.js-review_cannel', function(){
+      $(this).parents('form.js-review').hide();
+    });
+
+    //delete
+    $('.js-list_parent').on('click','.js-delete',function(){
+      $_obj = $(this).parent('.state')
+      if(confirm("是否要重置领域分类?") == true){
+        $.post("/dialog_celebrity/destroy_question_reply",{id: $(this).attr("data-reply-id")},function(result){
+          $_obj.remove();
+        })
+      }
+    });
+
+    $("form.famous_ask_form").submit(function(){
+      $form = $(this)
+      $.post('/dialog_celebrity/create_question_reply', $(this).serialize(),function(){
+        $form.find("#upload_pics_queue").find("input[name=images]").remove()
+        $form.find("#upload_pics_queue span").remove()
+        $form.find("textarea#requestion_content").val("")
+        $form.find(".picture_modal").hide()
+      })
+      return false
+    })
+
+    $("a.question_keyword").click(function(){
+      $.post('/dialog_celebrity/refresh_celebrity_questions', {board_id: $(this).attr("data-keyword"),key: $(this).text()})
+    })
+
+    $('#upload_pics').uploadify({
+      uploader: '/dialog_celebrity/upload_image',
+      dataType: 'json',
+      swf : '/uploadify/uploadify.swf',
+      cancelImage : '/uploadify/uploadify-cancel.png',
+      //skipDefault : ['onSelect'],
+      progressData : 'percentage',
+      buttonText : "<a class='uploadify_btn'>选择图片</a>",
+      fileTypeDesc : '图片文件',
+      fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
+      successTimeout : 6000,
+      fileSizeLimit : '3MB',
+      uploadLimit : 9,
+      width : 84,
+      height : 84,
+      multi : true,
+      auto : true,
+      checkExisting : false,
+      transparent : true,
+      onUploadSuccess : function(file,data,response) {
+        arr = data.split("|")
+        id = arr[0]
+        thumb = arr[1]
+        thumb2 =arr[2]
+        $('#' + this.id).siblings('.uploadifyQueue').append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' href='javascript:;'>删除</a></span>");
+
+        // var len = $('#' + this.id).siblings('.uploadifyQueue').children().length;
+        var tips = $('#' + this.id).parent().siblings('.tips');
+        var selected_num = parseInt(tips.children('.selected-num').text());
+        var rest_num = parseInt(tips.children('.rest-num').text());
+        tips.children('.selected-num').text(selected_num + 1);
+        tips.children('.rest-num').text(rest_num - 1);
+      }
+    });
+
+    //upload
+    var form = $('.famous_ask_form')
+    // var modal = form.find('.picture_modal')
+    form.on('click', '.js-show_picture_modal', function(){
+      $(this).find('.picture_modal').show();
+    });
+    form.on('click', '.js-hide_picture_modal', function(e){
+      e.stopPropagation();
+      $(this).parents('.picture_modal').hide();
+    });
+
+    //colorbox
+    $('.imgsgroup').colorbox({rel: 'imgsgroup',slideshow:true,width:'745px',current:"{current}/{total}",slideshowAuto:false});
+
+    $("body").on("click",".icon-imgshow_btn",function(){
+      obj = ".question_images_" + $(this).attr("data-question-id");
+      $(obj).colorbox({
+        rel: obj
+      });
+      $(this).siblings('.imgs_group').find('.imgsgroup:first').click();
+    })
+
+
+    //reply
+    $('.reply-requestion-btn').click(function(){
+      var content = $(this).parent().parent().find('textarea').val();
+      if (content == '') {
+        alert('请输入问题概述')
+        return false;
+      }
+      var arr = []
+      var images = $(this).parent().parent().find("#upload_pics_queue")
+      images.find("img").each(function(index,img){
+        arr.push($(img).attr("data-image-id"))
+      })
+      str = arr.join("|")
+      $queue = $(this).parent().prev().find("#upload_pics_queue")
+      $queue.find("input[name=images]").remove()
+      $queue.append("<input name='images' type='hidden' value='" + str + "'>")
+    });
+    //
+    $('.js-text_rest').bind('keydown keyup', function(){
+      var len = $(this).val().length;
+      var total = $(this).data('max');
+      if (len > total) {
+        $(this).val($(this).val().slice(0,total))
+        return;
+      };
+      $(this).next().find('.js-text_rest_show').text(total - len);
+    });
+    $(".form_file").on("click",".del-pic",function(){
+      $obj = $(this).parent()
+      $.post("/dialog_celebrity/delete_image",{id: $(this).prev().attr("data-image-id")},function(r){
+        $obj.remove()
+      })
+    })
+
+  })
+</script>

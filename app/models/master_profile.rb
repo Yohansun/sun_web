@@ -3,6 +3,11 @@ class MasterProfile < ActiveRecord::Base
   acts_as_taggable
   belongs_to :subject
   has_many :master_designs
+
+  belongs_to :board, class_name: CelebrityContentBoard, foreign_key: :celebrity_content_board_id
+  has_many   :questions, class_name: CelebrityQuestion
+  has_many   :notes,      class_name: CelebrityNote
+
   attr_accessor :time
   default_scope order("published_at DESC")
 
@@ -18,7 +23,17 @@ class MasterProfile < ActiveRecord::Base
     :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
     :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
 
+  has_attached_file :avatar,
+    :styles => { :small1 => "75x80#",:small2 => "80x80#", :middle1 => "140x150#", :middle2 => "150x160#" },
+    :whiny_thumbnails => true,
+    :url => "/system/:class/:attachment/:id_partition/:style/:id.:extension",
+    :path => ":rails_root/public/system/:class/:attachment/:id_partition/:style/:id.:extension"
+
   def self.tag_list
     ['海外','港澳台','中国大陆']
+  end
+
+  def self.interview_content_type_list
+    ['问答类型访谈','文章类型访谈']
   end
 end

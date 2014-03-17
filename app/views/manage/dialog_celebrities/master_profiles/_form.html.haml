@@ -1,0 +1,89 @@
+- content_for :head do
+  = stylesheet_link_tag "upload_image/jquery.fileupload-ui"
+
+- content_for :tail do
+  = javascript_include_tag "upload_image/vendor/jquery.ui.widget",
+                           "upload_image/jquery.iframe-transport",
+                           "upload_image/jquery.fileupload",
+                           "upload_image/jquery.imagepreview"
+
+:css
+  input#editor_treasury_recommended { opacity: 255; }
+
+- if params[:step].blank?
+  .control-group.clearfix
+    %label.control-label.fl 名人头像(上传尺寸: 150x160, 带灰框)
+    .controls.fl.ml20
+      %span.upload_selected_filename.fl.mr10
+      %span.btn.btn-small.btn-primary.fileinput-button.fl.radius6
+        %i.icon-plus.icon-white
+        %span 上传头像
+        %input#manage_dialog_master_profile_avatar{type: "file",name: "master_profile[avatar]",multiple: ""}
+    .fl.ml20
+      - if @resource.avatar.exists?
+        = image_tag(@resource.avatar(:small2),:id => "preview-avatar")
+      - else
+        %img{id: "preview-avatar",src: "",alt: "" }
+
+  .control-group.clearfix
+    .fl
+      %label.control-label.fl 姓名
+      .controls.fl.ml20
+        = f.input :name, label: false
+
+  .control-group.clearfix
+    .fl
+      %label.control-label.fl 名人分类
+      .controls.ml20.fl
+        = f.input :mtype, collection: [["选择名人分类",""],["名人在线",1],["名家设计",0]],label: false, selected: @resource.mtype.blank? ? "" : @resource.mtype.to_i
+    .fl.ml20
+      %label.control-label.fl 领域分类
+      .controls.fl.ml20
+        = f.input :celebrity_content_board_id, collection: CelebrityContentBoard.all.map{|n|[n.name,n.id]},label: false
+
+  .control-group.clearfix
+    .fl
+      %label.control-label.fl 国籍
+      .controls.fl.ml20
+        = f.input :nationality, collection: MasterProfile.tag_list, label: false,selected: @resource.nationality
+    .fl.ml20
+      %label.control-label.fl 领域
+      .controls.fl.ml20
+        = f.input :master_field, label: false
+
+  .control-group.clearfix
+    .fl
+      %label.control-label.fl 简介
+      .controls.fl.ml20
+        = f.input :intro, label: false, :input_html => { style: "width: 480px; height: 128px;" }
+
+- if params[:step] == "2"
+  .control-group.clearfix
+    %label.control-label.fl 访谈类型
+    .controls.fl.ml20
+      = f.input :interview_content_type, collection: MasterProfile.interview_content_type_list,label: false
+  .control-group.clearfix
+    %label.control-label.fl 访谈内容
+    .controls.fl.ml20
+      = f.input :interview_content, label: false, :input_html => { style: "width: 480px; height: 128px;" }
+
+- if params[:step] == "3"
+  .control-group.clearfix
+    %label.control-label.fl 名人寄语
+    .controls.fl.ml20
+      = f.input :message, label: false, :input_html => { style: "width: 480px; height: 128px;", placeholder: "再此输入名人寄语" }
+
+= f.input :step, :as => "hidden", :input_html => { name: "step", value: params[:step] || "1" }
+= f.input :ref, :as => "hidden", :input_html => { name: "ref", value: request.url }
+= f.input :after_save, :as => "hidden" ,:input_html => { name: "after_save", value: "return", id: "after_save" }
+
+.ml10
+  %hr.w500{style: "border-style: dashed;"}/
+  - if params[:step].present?
+    %a.fl.btn.btn-small.btn-primary.radius6{href: "/manage/dialog_celebrities/master_profiles/#{params[:id]}/edit#{params[:step]=='2' ? '' : '?step=2'}"} 返回上一步
+  = f.submit "保存后返回",:class => "fl btn btn-small btn-primary radius6 ml15"
+  = f.submit "保存后编辑下一页",:class => "fl btn btn-small btn-primary radius6 ml15",:id => "save_next" if params[:step] != "3"
+
+  / %a.btn.btn-small.ml40.radius6#create-board{href: "javascript:;"} 恢复
+  %a.btn.btn-small.ml10.radius6#destroy-board{href: "/manage/dialog_celebrities/master_profiles"} 返回
+
