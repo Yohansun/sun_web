@@ -162,6 +162,7 @@ Icolor::Application.routes.draw do
   #行业资讯
   match "/color_articles" => "color_articles#index"
   resources :articles,:only => [:index,:show]
+  match "/articles_with_tag/:tags" => "articles#index", as: "articles_with_tag"
 
   #业主通道
   resources :faqs

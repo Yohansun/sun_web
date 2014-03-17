@@ -12,21 +12,14 @@
     <img src="<%= asset_path "news/title_news.png" %>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "装修资讯", "/articles?tags=#{URI.escape("设计相关")}", :class => 'fb' %></em>
-    <em><%= link_to "行业资讯", "/articles?tags=#{URI.escape("设计相关")}" %><span></span></em>
+    <em><%= link_to "装修资讯", articles_with_tag_path("design"), :class => 'fb' %></em>
+    <em><%= link_to "行业资讯", articles_with_tag_path("design") %><span></span></em>
     <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class='wrapper'>
-    <!-- <div class='news_top clear ft12'>
-
-      <%= link_to "全部", "/articles", :class => "#{'active' if !params[:tags]  }" %>
-      <% ["设计相关","装修相关"].each do |tag| %>
-          <%= link_to tag, "/articles?tags=#{URI.escape(tag)}", :class => "#{'active' if tag == params[:tags] }" %>
-      <% end %>
-    </div> -->
     <!--news_top ends-->
-    <%- if request.url.include? 'tags'
-     tag = request.url.split("=")[1]
+    <%- if params[:tags].present?
+     tag = params[:tags]
      -%>
     <%- @articles.each do |article| %>
         <div class="shadow">
