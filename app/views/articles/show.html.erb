@@ -15,8 +15,8 @@
     <img src="<%= asset_path "design/title_news.png" %>"/>
   </div>
   <div class='sub_nav ft12 pr tr'>
-    <em><%= link_to "装修资讯", "/articles?tags=#{URI.escape("设计相关")}", :class => 'fb' %></em>
-    <em><%= link_to "行业资讯", "/articles?tags=#{URI.escape("设计相关")}" %><span></span></em>
+    <em><%= link_to "装修资讯", articles_with_tag_path("design"), :class => 'fb' %></em>
+    <em><%= link_to "行业资讯", articles_with_tag_path("design") %><span></span></em>
     <em><%= link_to "首页", "/" %><span></span></em>
   </div><!--sub_nav ends-->
   <div class="wrapper group news_detail">

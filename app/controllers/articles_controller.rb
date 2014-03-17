@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ArticlesController < ApplicationController
   layout "home_manage"
   before_filter :get_articles
@@ -26,7 +27,14 @@ class ArticlesController < ApplicationController
     articles = Subject.content("articles")
     @tags = articles.tag_counts_on(:tags)
     @articles = articles.page(params[:page]).per(5)
-    @articles = @articles.tagged_with(params[:tags]) if params[:tags]
+    if params[:tags].present?
+      article_tag_name = case params[:tags]
+                          when "design" then "设计相关"
+                          when "decoration" then "装修相关"
+                          else ""
+                          end
+      @articles = @articles.tagged_with(article_tag_name)
+    end
     articles
   end
 
