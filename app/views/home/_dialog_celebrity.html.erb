@@ -38,7 +38,7 @@
       </h5>
       <div class="media">
         <div class="pull-left">
-          <img class="media-object" src="<%=@celebrity.avatar(:small2)%>" alt="" width="80" height="80">
+          <img class="media-object" src="<%=@celebrity.avatar(:small2) if @celebrity.present? -%>" alt="" width="80" height="80">
         </div>
         <div class="media-body">
           <h5 class="media-heading"><strong><%= link_to(@celebrity.name, master_interview_dialog_celebrity_master_profile_path(@celebrity),target: "_blank") if @celebrity.present? %></strong> /<%=@celebrity.try(:board).try(:name) %>类专家</h5>
@@ -51,7 +51,7 @@
       </h5>
       <div class="media">
         <div class="pull-left">
-          <img class="media-object" src="<%=@master.avatar(:small2)%>" alt="" width="80" height="80">
+          <img class="media-object" src="<%=@master.avatar(:small2) if @master.present? -%>" alt="" width="80" height="80">
         </div>
         <div class="media-body">
           <h5 class="media-heading"><strong><%= link_to(@master.name,master_interview_dialog_celebrity_master_profile_path(@master),target: "_blank") if @master.present?  -%></strong> /<%=@master.try(:board).try(:name)%>类专家</h5>
