@@ -99,8 +99,12 @@ class HomeController < ApplicationController
     @dpage = HomeDialogCelebrity.first
 
     if @dpage.present?
-      @master = @dpage.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@dpage.master_id)
-      @celebrity = @dpage.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@dpage.celebrity_id)
+      if @dpage.master_id.present?
+        @master = @dpage.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@dpage.master_id)
+      end
+      if @dpage.celebrity_id.present?
+        @celebrity = @dpage.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@dpage.celebrity_id)
+      end
       @images = @dpage.images
     end
 
