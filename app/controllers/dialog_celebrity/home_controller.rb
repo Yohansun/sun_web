@@ -5,8 +5,12 @@ class DialogCelebrity::HomeController < ApplicationController
   def index
     @page = DialogCelebrityPage.first
     if @page.present?
-      @master = @page.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@page.master_id)
-      @celebrity = @page.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@page.celebrity_id)
+      if @page.master_id.present?
+        @master = @page.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@page.master_id)
+      end
+      if @page.celebrity_id.present?
+        @celebrity = @page.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@page.celebrity_id)
+      end
     end
     #@wonderfuls = IColumnData.show_data(16).limit(5)
     @banners = IBanner.page_name("对话名人首页").order("position asc")
