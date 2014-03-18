@@ -5,7 +5,7 @@ require "capistrano/ext/multistage"       #多stage部署所需
 require 'bundler/capistrano'       #添加之后部署时会调用bundle install
 
 
-set :stages, %w(production icolortest)
+set :stages, %w(production icolortest icolortest2)
 set :default_stage, "production"
 set :application, "icolor"
 
