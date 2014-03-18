@@ -4,8 +4,10 @@ class DialogCelebrity::HomeController < ApplicationController
   before_filter :get_page_data,:only => [:index]
   def index
     @page = DialogCelebrityPage.first
-    @master = @page.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@page.master_id)
-    @celebrity = @page.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@page.celebrity_id)
+    if @page.present?
+      @master = @page.last_master ? MasterProfile.unscoped.where(mtype: 0).last : MasterProfile.find(@page.master_id)
+      @celebrity = @page.last_celebrity ? MasterProfile.unscoped.where(mtype: 1).last : MasterProfile.find(@page.celebrity_id)
+    end
     #@wonderfuls = IColumnData.show_data(16).limit(5)
     @banners = IBanner.page_name("对话名人首页").order("position asc")
   end
