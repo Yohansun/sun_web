@@ -163,3 +163,39 @@ task :unstyled_image => :environment do
     end
   end
 end
+
+desc "大师头像转对话名人新头像"
+task :master_to_dialog_celebrity_avatar => :enviromnent do
+  MasterProfile.find_each do |_master|
+    if _master.avatar.size.blank? && _master.preview_img_in.size.present?
+      p "开始转换头像 #{_master.name}"
+      begin
+        f = File.open("#{Rails.root.to_s}/public"+_master.preview_img_in.url.sub(/\?(.*)$/,""))
+        _master.avatar = f
+        if _master.save
+          p "#{_master.name} 头像转换完成"
+        end
+      rescue
+        p $!
+      end
+    end
+  end
+end
+
+desc "大师作品 转换新尺寸"
+task :master_design_upload_file_to_file2 => :enviromnent do
+  MasterDesignUpload.find_each do |_upload|
+    if _upload.file2.size.blank? && _upload.file.size.present?
+      p "开始转换大师作品 #{_upload.id}"
+      begin
+        f = File.open("#{Rails.root.to_s}/public"+_upload.file.url.sub(/\?(.*)$/,""))
+        _upload.file2 = f
+        if _upload.save
+          p "#{_upload.id} 作品转换完成"
+        end
+      rescue
+        p $!
+      end
+    end
+  end
+end
