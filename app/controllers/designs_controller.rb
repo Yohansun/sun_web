@@ -12,7 +12,7 @@ class DesignsController < ApplicationController
     if File.exists?(zipfile_name)
       system("rm public/system/zip/design#{params[:id]}.zip")
     end
-    Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       target_file.each_with_index do |filename,index|
         zipfile.add("#{filename.id}.jpg", filename.file.path(:slide)) if File.exists?(filename.file.path(:slide))
       end

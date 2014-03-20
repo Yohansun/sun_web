@@ -19,7 +19,7 @@ class WeeklyStarsController < ApplicationController
       if File.exists?(zipfile_name)
         send_file zipfile_name
       else
-        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+        Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
           target_file.each do |filename|
             zipfile.add(filename.file_file_name, filename.file.path) if File.exists?(filename.file.path)
           end
