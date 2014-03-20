@@ -95,6 +95,11 @@ class DialogCelebrity::MediaController < ApplicationController
     render :json => { :notify => "删除成功" }
   end
 
+  def delete_question_reply_image
+    CelebrityQuestionReply.find(params[:id]).destroy
+    render :json => { :notify => "彻底删除成功" }
+  end
+
   def destroy_question
     CelebrityQuestion.find(params[:id]).destroy
     render :json => { :notify => "彻底删除成功" }
