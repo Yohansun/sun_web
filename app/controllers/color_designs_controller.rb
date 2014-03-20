@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'zip'
 class ColorDesignsController < ApplicationController
   layout "home_manage"
   before_filter :get_color_designs
@@ -69,7 +70,7 @@ class ColorDesignsController < ApplicationController
       if File.exists?(zipfile_name)
         send_file zipfile_name
       else
-        Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+        Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
           zipfile.add(target_file.show_preview_img_file_name, target_file.show_preview_img.path) if File.exists?(target_file.show_preview_img.path)
         end
         send_file zipfile_name
