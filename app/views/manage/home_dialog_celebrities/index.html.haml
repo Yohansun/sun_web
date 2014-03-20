@@ -1,6 +1,6 @@
 - content_for :head do
   = stylesheet_link_tag 'manage/dialog_celebrity'
-  = javascript_include_tag "manage/dialog_celebrities/home"
+  = javascript_include_tag "manage/home_dialog_celebrities"
 
 = render "manage/home_dialog_celebrities/breadcrumb"
 
@@ -46,8 +46,5 @@
       %input.btn.btn-small.btn-primary.ml20#save-btn.radius6{type: "submit", value: "保存"}
       %a.btn.btn-small.btn-primary.ml10#reset-btn.radius6{ href: "javascript:;" } 恢复
 
-:coffeescript
-  $ ->
-    D.initialize()
 
 

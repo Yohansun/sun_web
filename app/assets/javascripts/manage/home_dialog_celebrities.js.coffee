@@ -44,45 +44,11 @@ $ ->
       $content.show()
       $form.hide()
 
-  $('#upload-image1').fileupload(
-    url: '/manage/home_dialog_celebrities/create_image',
-    dataType: 'json',
-    acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-    maxNumberOfFiles: 1,
-    maxFileSize: 5000000,
-    formData: { image_index: 1},
-    done: (e, data)->
-      $("img#image1").attr("src",data.result.url)
-    ,
-    error: (e, data)->
-      alert data.result
-  )
-
-  $('#upload-image2').fileupload(
-    url: '/manage/home_dialog_celebrities/create_image',
-    dataType: 'json',
-    acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-    maxNumberOfFiles: 1,
-    maxFileSize: 5000000,
-    formData: { image_index: 2},
-    done: (e, data)->
-      $("img#image2").attr("src",data.result.url)
-    ,
-    error: (e, data)->
-      alert data.result
-  )
-
-  $('#upload-image3').fileupload(
-    url: '/manage/home_dialog_celebrities/create_image',
-    dataType: 'json',
-    acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-    maxNumberOfFiles: 1,
-    maxFileSize: 5000000,
-    formData: { image_index: 3},
-    done: (e, data)->
-      $("img#image3").attr("src",data.result.url)
-    ,
-    error: (e, data)->
-      alert data.result
-  )
-
+  $('body').on "submit","#manage_dialog_celebrity_pege_form", ->
+    _this = this
+    $btn = $("#save-btn")
+    $btn.val("正在保存...").attr("disabled",true)
+    $.post $(this).attr("action"), $(this).serialize(), (r) ->
+      alert r.notify
+      $btn.val("保存").attr("disabled",false)
+    return false
