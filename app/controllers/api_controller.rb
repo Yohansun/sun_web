@@ -20,11 +20,11 @@ class ApiController < ApplicationController
       user.role_id = 1
       user.des_status = 0
     when "company"
-      user.role_id = 2 
+      user.role_id = 2
     when "user"
       user.role_id = 3
     end
-      
+
     if user.save(validate: false)
       respond_to do |format|
         format.json {render :json => { :result => 'true',
@@ -80,7 +80,7 @@ class ApiController < ApplicationController
       user.role_id = 1
       user.des_status = 0
     when "company"
-      user.role_id = 2 
+      user.role_id = 2
     when "user"
       user.role_id = 3
     end
@@ -133,6 +133,31 @@ class ApiController < ApplicationController
     end
     if params[:type] == "kaixin"
       redirect_to "/users/auth/kaixin"
+    end
+  end
+
+  def cubit_fixtures
+    area = Area.where(name: params[:area])
+    fixtue = CubitFixture.new
+    fixtue.name = params[:name]
+    fixtue.phone = params[:phone]
+    fixtue.fixture_area = params[:fixture_area]
+    fixtue.style = params[:style]
+    fixtue.house_name = params[:house_name]
+    fixtue.fixture_type = params[:fixture_type]
+    fixtue.area_id = area.present? ? area.id : 0
+    fixtue.pre_price = params[:pre_price]
+    if fixtue.save
+      Notifier.cubit_fixture(fixtue.id).deliver
+      respond_to do |format|
+        format.json {render :json => { :result => 'true',
+         :mag => "申请提交成功!"} }
+      end
+    else
+      respond_to do |format|
+        format.json {render :json => { :result => 'false',
+         :mag =>"申请提交失败!" } }
+      end
     end
   end
 end
