@@ -165,7 +165,7 @@ task :unstyled_image => :environment do
 end
 
 desc "大师头像转对话名人新头像"
-task :master_to_dialog_celebrity_avatar => :enviromnent do
+task :master_to_dialog_celebrity_avatar => :environment do
   MasterProfile.find_each do |_master|
     if _master.avatar.size.blank? && _master.preview_img_in.size.present?
       p "开始转换头像 #{_master.name}"
@@ -183,7 +183,7 @@ task :master_to_dialog_celebrity_avatar => :enviromnent do
 end
 
 desc "大师作品 转换新尺寸"
-task :master_design_upload_file_to_file2 => :enviromnent do
+task :master_design_upload_file_to_file2 => :environment do
   MasterDesignUpload.find_each do |_upload|
     if _upload.file2.size.blank? && _upload.file.size.present?
       p "开始转换大师作品 #{_upload.id}"
@@ -193,6 +193,7 @@ task :master_design_upload_file_to_file2 => :enviromnent do
         if _upload.save
           p "#{_upload.id} 作品转换完成"
         end
+        f.close
       rescue
         p $!
       end
