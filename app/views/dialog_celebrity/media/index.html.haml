@@ -98,7 +98,6 @@
                   .pr90
                     - _question.images.each do |_image|
                       = link_to image_tag(_image.image(:thumb2)),_image.image.url,:target => "_blank"
-
             .clearfix.mt10.mb10
               - if params[:board_id] == "0"
                 .fl.ml15.mt5 编辑操作权限
@@ -151,6 +150,18 @@
 
                 .fl.ml20.mt5
                   = link_to "删除此问题","javascript:;",:class => "delete-question"
+
+            .ml15.mt10{ style: " padding: 4px 12px; background-color: rgb(154,101,33); color: rgb(236,229,188); width: 124px;"}
+              其他设计师的回答
+            .ml15.mr15.mt10{ style: "background-color:rgb(228,228,228); color: #333; padding: 10px 8px; " }
+              - _question.replies.each do |_reply|
+                %div
+                  .clearfix.mt10
+                    .fl= _reply.user.try(:name)
+                    .fl.ml20
+                      = link_to "[删除]","javascript:;",:class => "delete-question-reply-btn",:"data-other-reply-id" => _reply.id
+                  .clearfix.mt10
+                    = _reply.content
 
 
             - if (1..5).to_a.include? params[:board_id].to_i

@@ -99,6 +99,15 @@ $ ->
             $obj.remove()
             alert "删除成功"
 
+      $("body").on "click",".delete-question-reply-btn", ->
+        $obj = $(this).parent().parent().parent()
+        id = $(this).attr("data-other-reply-id")
+        if confirm("是否要删除该回复?") is true
+          $.post '/dialog_celebrity/media/delete_question_reply_image',{ id: id }, ->
+            $obj.remove()
+            alert "删除成功"
+
+
       $("body").on "click","a.reply-upload-colorbox", ->
         obj = "reply-upload-colorbox-" + $(this).attr("data-question-id")
         colorbox_qa(".#{obj}")
