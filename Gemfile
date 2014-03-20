@@ -66,7 +66,7 @@ gem 'dimensions-rails'
 gem "galetahub-simple_captcha", :require => "simple_captcha"
 
 #发送短信
-gem 'savon'
+gem 'savon', '~> 2.0'
 gem 'collections'
 
 # API
