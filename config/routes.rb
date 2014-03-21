@@ -1,5 +1,7 @@
 #encoding: utf-8
+require 'sidekiq/web'
 Icolor::Application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   get "master_design_uploads/index"
 
   get "master_design_uploads/new"
