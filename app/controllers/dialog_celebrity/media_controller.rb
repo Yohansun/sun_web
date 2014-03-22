@@ -71,7 +71,7 @@ class DialogCelebrity::MediaController < ApplicationController
   end
 
   def update_question_key
-    CelebrityQuestion.find(params[:question_id]).update_attributes(key: params[:key])
+    CelebrityQuestion.find(params[:question_id]).update_attributes(keyword: params[:key])
     render :js => "alert('更新关键字成功')"
   end
 

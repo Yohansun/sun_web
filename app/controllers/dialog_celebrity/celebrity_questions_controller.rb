@@ -45,9 +45,9 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
       end
     elsif params[:key].present?
       if params[:board_id].present?
-        @questions = CelebrityQuestion.where(celebrity_content_board_id: params[:board_id],key: params[:key]).order("updated_at desc")
+        @questions = CelebrityQuestion.where("celebrity_content_board_id = ? and keyword like ?",@board_id.to_i,"%#{params[:key]}%").order("updated_at desc")
       else
-        @questions = CelebrityQuestion.where(key: params[:key]).order("updated_at desc")
+        @questions = CelebrityQuestion.where("keyword like ?","%#{params[:key]}%").order("updated_at desc")
       end
     else
       if params[:board_id].present?

@@ -114,17 +114,31 @@ $ ->
 
       $("body").on "change","select.board_scope", ->
         scope = $(this).find("option:selected").attr("data-key")
-        $obj = $(this).parent().next().find("select")
-        $obj.find("option:gt(0)").remove()
+        $obj = $(this).parent().parent().next()
+        $obj.find("*").remove()
+        # $obj = $(this).parent().next().find("select")
+        # $obj.find("option:gt(0)").remove()
         if scope?
           for _key in scope.split(",")
-            $obj.append("<option>#{_key}</option>")
+            html = "<div class='fl ml30'><span style='height: 16px; line-height: 16px;'>#{_key}</span><input type='checkbox' style='height: 16px; line-height: 16px; margin-left: 6px;' /><div>"
+            $obj.append(html)
 
-      $("body").on "change","select.key_arr", ->
-        question_id = $(this).parent().parent().parent().attr("data-question-id")
-        key = $(this).val()
-        if key isnt ""
-          $.post "/dialog_celebrity/media/update_question_key",{question_id: question_id,key: key}
+      $("body").on "click",".checkkey", ->
+        $obj = $(this).parent().parent().next()
+        keys = []
+        $obj.find("input:checked").each (index,obj)->
+          keys.push $(obj).prev().text()
+        if keys.length == 0
+          alert "请选择范围"
+        else
+          question_id = $(this).parent().parent().parent().attr("data-question-id")
+          $.post "/dialog_celebrity/media/update_question_key",{question_id: question_id,key: keys.join("|")}
+
+      # $("body").on "change","select.key_arr", ->
+      #   question_id = $(this).parent().parent().parent().attr("data-question-id")
+      #   key = $(this).val()
+      #   if key isnt ""
+      #     $.post "/dialog_celebrity/media/update_question_key",{question_id: question_id,key: key}
 
       $("body").on "click",".reset_board_id", ->
         question_id = $(this).parent().parent().parent().attr("data-question-id")

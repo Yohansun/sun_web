@@ -24,7 +24,7 @@ namespace :celebrity do
       if index > 0
         question = CelebrityQuestion.new
         question.name = line[0]
-        question.key  = line[1]
+        question.keyword  = line[1]
         question.content = line[2]
         question.celebrity_content_board_id = line[3].to_i
         question.fake_username = line[5]
