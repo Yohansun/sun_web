@@ -135,15 +135,18 @@
                   %select.board_scope.fl{name: "board_scope"}
                     %option{value: ""} 选择范围
                     - _question.board.key_scopes.each do |scope|
-                      %option{:"data-key" => scope.key_arr.join(","),:selected => scope.key_arr.include?(_question.key) }= scope.name
-                .fl.ml20
-                  %select.key_arr.fl{name: "key"}
-                    %option{value: ""} 选择关键字
-                    - _question.board.key_scopes.each do |scope|
-                      - if scope.key_arr.include?(_question.key)
-                        - scope.key_arr.each do |_key|
-                          %option{selected: _key==_question.key}= _key
+                      %option{:"data-key" => scope.key_arr.join(",") }= scope.name
 
+                / .fl.ml20
+                /   %select.key_arr.fl{name: "key"}
+                /     %option{value: ""} 选择关键字
+                /     - _question.board.key_scopes.each do |scope|
+                /       - if scope.key_arr.include?(_question.key)
+                /         - scope.key_arr.each do |_key|
+                /           %option{selected: _key==_question.key}= _key
+
+                .fl.ml20
+                  = link_to "确认","javascript:;",:class => "btn checkkey"
 
                 .fl.ml20.mt5
                   = link_to "重置领域分类","javascript:;",:class => "reset_board_id"
@@ -151,10 +154,17 @@
                 .fl.ml20.mt5
                   = link_to "删除此问题","javascript:;",:class => "delete-question"
 
+            .ml10.clearfix.key-checkboxs
+              - if _question.keyword.present?
+                - _question.keyword.split("|").each do |_key|
+                  .fl.ml30
+                    %span{style: "height: 16px; line-height: 16px;"}= _key
+                    %input{type: "checkbox", checked: true, style: "height: 16px; line-height:16px; margin-left: 6px;"}
+
             .ml15.mt10{ style: " padding: 4px 12px; background-color: rgb(154,101,33); color: rgb(236,229,188); width: 124px;"}
               其他设计师的回答
             .ml15.mr15.mt10{ style: "background-color:rgb(228,228,228); color: #333; padding: 10px 8px; " }
-              - _question.replies.each do |_reply|
+              - _question.replies.where("media_id is null").each do |_reply|
                 %div
                   .clearfix.mt10
                     .fl= _reply.user.try(:name)
@@ -162,6 +172,7 @@
                       = link_to "[删除]","javascript:;",:class => "delete-question-reply-btn",:"data-other-reply-id" => _reply.id
                   .clearfix.mt10
                     = _reply.content
+
 
 
             - if (1..5).to_a.include? params[:board_id].to_i
