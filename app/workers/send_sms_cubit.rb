@@ -42,12 +42,14 @@ class SendSmsCubit
     content_to_designer = "亲爱的设计师，iColor推荐来自（#{user_city.name}）的用户，上传了TA的装修需求，户型：#{cubit_fixture_area}㎡；房型：#{cubit_fixture_type}；楼盘名：#{cubit_house_name}，电话：#{cubit_phone}，马上抓紧机会争取订单哦！---- 【iColor家的设计师】"
 
     designer_phones.each do |phone|
-      SmsCubit.new(content_to_user, phone).transmit
+      #发送给同城设计师
+      SmsCubit.new(content_to_designer, phone).transmit
       puts phone
     end
     puts content_to_user
     puts content_to_designer
-    SmsCubit.new(content_to_designer, cubit_phone).transmit if cubit_phone
+    #发送给提交表单业主
+    SmsCubit.new(content_to_user, cubit_phone).transmit if cubit_phone
     puts 'startCubitEmail>>>>>>>>>>>>>>>>>>>>>>>>'
     #发送邮件
     Notifier.cubit_fixture(cubit_fixture_id).deliver
