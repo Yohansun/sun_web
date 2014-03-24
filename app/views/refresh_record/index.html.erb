@@ -76,7 +76,7 @@
 					<li class="map-r1 dott1 <%="active" if index == 0%>">
               <i class="icon-i16 icon-<%=index+1%>"><%=index+1%></i>
 							<strong class="js-title"><%=cd.title%></strong><br>
-							<a href="<%= cd.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+							<a href="<%= cd.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="<%= cd.title %>" /></a>
 					</li>
           <% end %>
 				</ul>
@@ -109,17 +109,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="mt10"><a href="<%=@i_banner.position(1).first.url if @i_banner.position(1).first %>" target="_blank"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_230x230)%>"></a></div>
-				<div class="mt10"><a href="<%=@i_banner.position(2).first.url if @i_banner.position(2).first %>" target="_blank"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_230x170)%>"></a></div>
+				<div class="mt10"><a href="<%=@i_banner.position(1).first.url if @i_banner.position(1).first %>" target="_blank"><img src="<%=@i_banner.position(1).first.try(:file).try(:url,:list_230x230)%>" alt="<%= @i_banner.position(1).first.try(:photo_name)%>"></a></div>
+				<div class="mt10"><a href="<%=@i_banner.position(2).first.url if @i_banner.position(2).first %>" target="_blank"><img src="<%=@i_banner.position(2).first.try(:file).try(:url,:list_230x170)%>" alt="<%= @i_banner.position(2).first.try(:photo_name)%>"></a></div>
 			</div>
 		</div>
 
 		<div class="index_main refresh_news mt10 clearfix">
 			<%= render :partial => "foot_select" %>
-			<div class="pull-right"><a href="<%=@i_banner.position(3).first.url if @i_banner.position(3).first %>" target="_blank"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_230x230)%>"></a></div>
+			<div class="pull-right"><a href="<%=@i_banner.position(3).first.url if @i_banner.position(3).first %>" target="_blank"><img src="<%=@i_banner.position(3).first.try(:file).try(:url,:list_230x230)%>" alt="<%= @i_banner.position(3).first.try(:photo_name)%>"></a></div>
 		</div>
 
 		<div class="clearfix">
-			<div class="footer_banner pull-left"><a href="<%=@i_banner.position(4).first.url if @i_banner.position(4).first %>" target="_blank"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_670x85)%>"></a></div>
-			<div class="footer_banner pull-right"><a href="<%=@i_banner.position(5).first.url if @i_banner.position(5).first %>" target="_blank"><img src="<%=@i_banner.position(5).first.try(:file).try(:url,:list_310x85)%>"></a></div>
+			<div class="footer_banner pull-left"><a href="<%=@i_banner.position(4).first.url if @i_banner.position(4).first %>" target="_blank"><img src="<%=@i_banner.position(4).first.try(:file).try(:url,:list_670x85)%>" alt="<%= @i_banner.position(4).first.try(:photo_name)%>"></a></div>
+			<div class="footer_banner pull-right"><a href="<%=@i_banner.position(5).first.url if @i_banner.position(5).first %>" target="_blank"><img src="<%=@i_banner.position(5).first.try(:file).try(:url,:list_310x85)%>" alt="<%= @i_banner.position(5).first.try(:photo_name)%>"></a></div>
 		</div>

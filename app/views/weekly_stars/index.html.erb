@@ -97,7 +97,7 @@
           <% unless star_upload.file.nil? %>
             <div id="gallery<%= index + 1%>" class="colors_box clearfix nomargin pt15 hide">
               <div class="pull-left">
-                <img src="<%= asset_path 'imgbase_in/color.jpg' %>">
+                <img src="<%= asset_path 'imgbase_in/color.jpg' %>" alt="color">
               </div>
               <ul class="pull-left group unstyled colorbox_ul">
                 <%- color1, color2, color3 = search_color_code(star_upload.recommend_color1), search_color_code(star_upload.recommend_color2), search_color_code(star_upload.recommend_color3) %>

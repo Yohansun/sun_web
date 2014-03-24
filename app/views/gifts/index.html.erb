@@ -2,7 +2,7 @@
   <%= stylesheet_link_tag "winnings/winner_list"%>
 <% end -%>
 <h3 class="chann_caption nomargin"><i class="icon-map icon-map8 icon_colors"></i><strong>精彩活动</strong><small>记录iColor的点滴精彩</small></h3>
-<a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
+<a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_1000x85), class: 'mt10', alt: @banners[0].try(:photo_name) %></a>
 <ul class="breadcrumb">
   <li><a href="/">首页</a> > </li>
   <li><a href="/designer_events">精彩活动</a> > </li>
@@ -13,7 +13,7 @@
   <% if @event_kv %>
     <div class="imgs">
       <a href="<%= @event_kv.url %>" target="_blank">
-        <%= image_tag(@event_kv.file.url(:gift_kv), usemap: "#event_kv_map") %>
+        <%= image_tag(@event_kv.file.url(:gift_kv), alt: '专题KV', usemap: "#event_kv_map") %>
       </a>
       <%- if @event_kv.kv_maps.any? %>
         <map id="event_kv_map" name="event_kv_map">
@@ -27,7 +27,7 @@
 
   <% if @regs.present? %>
     <div class="gift_item">
-      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title1.jpg' %>" alt="" /></h3>
+      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title1.jpg' %>" alt="注册有奖" /></h3>
       <div id="" class="gift_carousel slider-bin">
         <div class="slider-container">
           <ul class="unstyled clearfix">
@@ -63,7 +63,7 @@
 
   <% if @votes.present? %>
     <div class="gift_item">
-      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title2.jpg' %>" alt="" /></h3>
+      <h3 class="title"><img src="<%=asset_path 'winner_list/gift_list/title2.jpg' %>" alt="投票有礼" /></h3>
       <div id="" class="gift_carousel slider-bin">
         <div class="slider-container">
           <ul class="unstyled clearfix">
@@ -100,9 +100,9 @@
 
 <div class="clearfix">
   <div class="footer_banner mt10 pull-left">
-    <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85) %></a>
+    <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_670x85), alt: @banners[1].try(:photo_name) %></a>
   </div>
   <div class="footer_banner mt10 pull-right">
-    <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_310x85) %></a>
+    <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_310x85), alt: @banners[2].try(:photo_name) %></a>
   </div>
 </div>

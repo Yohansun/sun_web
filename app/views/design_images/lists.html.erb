@@ -61,7 +61,7 @@
 	<%- end %>
 	<li class="pull-right"><a href="/color_designs" target="_blank">装修色彩搭配</a></li>
 </ul>
-<a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
+<a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_1000x85), class: 'mt10', alt: @banner1.try(:photo_name) %></a>
 
 <ul class="breadcrumb">
 	<li><a href="<%= root_path %>">首页</a> &gt;</li>
@@ -76,7 +76,7 @@
 					<%- @home_heads.each do |image| %>
 					<li class="item">
 						<a class="pull-left media_a title_opacity" href="<%= image.link %>" target="_blank">
-							<%= image_tag image.file.url(:big), class: 'media-object' %>
+							<%= image_tag image.file.url(:big), class: 'media-object', alt: image.title %>
 							<p>
 								<span><%= image.title %></span>
 							</p>
@@ -147,17 +147,17 @@
 	</div>
 
 	<div class="map-r pull-right">
-		<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_230x230) %></a>
-		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner3.try(:file).try(:url, :list_230x170), class: "mt10" %></a>
+		<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_230x230), alt: @banner2.try(:photo_name) %></a>
+		<a href="<%= @banner3.url? ? @banner3.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner3.try(:file).try(:url, :list_230x170), class: "mt10", alt: @banner3.try(:photo_name) %></a>
 	</div>
 </div>
 
 <div class="clearfix">
 	<div class="footer_banner pull-left">
-		<a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner4.try(:file).try(:url, :list_670x85) %></a>
+		<a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner4.try(:file).try(:url, :list_670x85), alt: @banner4.try(:photo_name) %></a>
 	</div>
 	<div class="footer_banner pull-right">
-		<a href="<%= @banner5.url? ? @banner5.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner5.try(:file).try(:url, :list_310x85) %></a>
+		<a href="<%= @banner5.url? ? @banner5.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner5.try(:file).try(:url, :list_310x85), alt: @banner5.try(:photo_name) %></a>
 	</div>
 </div>
 
@@ -186,10 +186,10 @@
 
 <div class="clearfix">
 	<div class="footer_banner pull-left">
-		<a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner7.try(:file).try(:url, :list_670x85) %></a>
+		<a href="<%= @banner7.url? ? @banner7.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner7.try(:file).try(:url, :list_670x85), alt: @banner7.try(:photo_name) %></a>
 	</div>
 	<div class="footer_banner pull-right">
-		<a href="<%= @banner8.url? ? @banner8.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner8.try(:file).try(:url, :list_310x85) %></a>
+		<a href="<%= @banner8.url? ? @banner8.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner8.try(:file).try(:url, :list_310x85), alt: @banner8.try(:photo_name) %></a>
 	</div>
 </div>
 

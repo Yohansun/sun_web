@@ -47,7 +47,7 @@
           <% @active_now.each do |active| %>
             <div class="media tit_con">
               <a class="pull-left media_a">
-                <img class="media-object" src="<%=active.file.url(:list) %>">
+                <img class="media-object" src="<%=active.file.url(:list) %>" alt="<%= active.title%>">
               </a>
               <div class="media-body refresh_list">
                 <ul class="ul_dot clearfix nomargin">
@@ -66,7 +66,7 @@
           <% @active_period.each do |active| %>
             <div class="media tit_con">
               <a class="pull-left media_a">
-                <img class="media-object" src="<%=active.file.url(:list) %>">
+                <img class="media-object" src="<%=active.file.url(:list) %>" alt="<%= active.title%>">
               </a>
               <div class="media-body refresh_list">
                 <ul class="ul_dot clearfix nomargin">
@@ -127,7 +127,7 @@
             <li class="map-r<%=index+1%> dott1 <%="active" if index == 0 %>">
               <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
               <strong class="js-title"><%=cd.title%></strong><br>
-              <a href="<%= cd.url %>" class="<%="hide" if index != 0 %> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="" /></a>
+              <a href="<%= cd.url %>" class="<%="hide" if index != 0 %> js-img" target="_blank"><img src="<%=cd.file.url(:list_155x115)%>" alt="<%= cd.title%>" /></a>
             </li>
           <% end %>
         </ul>
@@ -140,18 +140,18 @@
             <li class="map-r<%=index+1%> dott1 <%="active" if index == 0 %>">
               <i class="icon-i16 icon-<%= index+1 %>"><%= index+1 %></i>
               <strong class="js-title"><%=rr.title%></strong><br>
-              <a href="<%= rr.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=rr.file.url(:list_155x115)%>" alt="" /></a>
+              <a href="<%= rr.url %>" class="<%="hide" if index != 0%> js-img" target="_blank"><img src="<%=rr.file.url(:list_155x115)%>" alt="<%= rr.title%>" /></a>
             </li>
           <% end %>
         </ul>
         <div>
-          <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x230) %></a>
+          <a href="<%= @banners[0].url? ? @banners[0].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[0].try(:file).try(:url, :list_230x230), alt: @banners[0].try(:photo_name) %></a>
         </div>
         <div class="mt10">
-          <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170) %></a>
+          <a href="<%= @banners[1].url? ? @banners[1].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[1].try(:file).try(:url, :list_230x170), alt: @banners[1].try(:photo_name) %></a>
         </div>
         <div class="mt10">
-          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230) %></a>
+          <a href="<%= @banners[2].url? ? @banners[2].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[2].try(:file).try(:url, :list_230x230), alt: @banners[2].try(:photo_name) %></a>
         </div>
       </div>
     </div>
@@ -178,16 +178,16 @@
         </ul>
       </div>
       <div class="pull-right">
-        <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_230x230) %></a>
+        <a href="<%= @banners[3].url? ? @banners[3].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[3].try(:file).try(:url, :list_230x230), alt: @banners[3].try(:photo_name) %></a>
       </div>
     </div>
 
     <div class="clearfix">
       <div class="footer_banner mt10 pull-left">
-        <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_670x85) %></a>
+        <a href="<%= @banners[4].url? ? @banners[4].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[4].try(:file).try(:url, :list_670x85), alt: @banners[4].try(:photo_name) %></a>
       </div>
       <div class="footer_banner mt10 pull-right">
-        <a href="<%= @banners[5].url? ? @banners[5].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[5].try(:file).try(:url, :list_310x85) %></a>
+        <a href="<%= @banners[5].url? ? @banners[5].url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banners[5].try(:file).try(:url, :list_310x85), alt: @banners[5].try(:photo_name) %></a>
       </div>
     </div>
   </div>

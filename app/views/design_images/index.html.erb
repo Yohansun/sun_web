@@ -380,10 +380,10 @@ function submit_area() {
     </ul>
   </div>
   <div class="pull-right">
-    <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_230x230),:style => "width:230px;height:230px;" %></a>
+    <a href="<%= @banner1.url? ? @banner1.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner1.try(:file).try(:url, :list_230x230),:style => "width:230px;height:230px;", alt: "#{@banner1.try(:photo_name)}" %></a>
   </div>
 </div>
 
-<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_1000x85), class: 'mt10' %></a>
+<a href="<%= @banner2.url? ? @banner2.url : 'javascript:void(0);' %>" target="_blank"><%= image_tag @banner2.try(:file).try(:url, :list_1000x85), class: 'mt10',alt: "#{@banner2.try(:photo_name)}" %></a>
 
 <%= render partial: 'design_images/footer' %>

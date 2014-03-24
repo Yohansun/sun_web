@@ -3,7 +3,7 @@
 <% end -%>
 <div class="main">
   <div class='sub_title text-right'>
-    <img src="<%= asset_path "master/title_master.png" %>" alt="" />
+    <img src="<%= asset_path "master/title_master.png" %>" alt="title_master" />
   </div>
   <div class='sub_nav ft12 pr tr'>
     <em><%= link_to "大师访谈", "/master_interviews", :class => 'fb' %></em>
@@ -27,7 +27,7 @@
               </span>
             </p>
             <p><%= raw truncate(article.intro, :length => 250) %></p>
-            <p class="pt25"><a href="/master_interviews/<%= article.id %>"><img src="<%= asset_path "master/look_detail_btn.png" %>" alt="" /></a></p>
+            <p class="pt25"><a href="/master_interviews/<%= article.id %>"><img src="<%= asset_path "master/look_detail_btn.png" %>" alt="<%= article.title %>" /></a></p>
           </div><!--list_detail ends-->
         </div>
       <%- end %>
