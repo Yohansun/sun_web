@@ -16,7 +16,7 @@
             <% @images.each do |_image| -%>
               <li class="item">
                 <a class="pull-left media_a title_opacity" href="<%= _image.url -%>">
-                  <img class="media-object" src="<%=_image.thumb(:thumb) -%>">
+                  <img class="media-object" src="<%=_image.thumb(:thumb) -%>" alt="<%= _image.url -%>">
                   <p>
                     <span><%=_image.title%></span>
                   </p>

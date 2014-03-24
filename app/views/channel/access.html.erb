@@ -36,13 +36,13 @@
     <% if @ibnner1 %>
       <div class="mt10">
         <a href="<%=@ibnner1.url%>" target="_blank">
-          <img src="<%=@ibnner1.file.url(:list_1000x85) %>">
+          <img src="<%=@ibnner1.file.url(:list_1000x85) %>" alt="<%= @ibnner1.try(:photo_name) %>">
         </a>
       </div>
     <% end %>
     <ul class="breadcrumb">
-      <li><a href="#">首页</a> > </li>
-      <li><a href="#">业主通道</a> > </li>
+      <li><a href="/">首页</a> > </li>
+      <li><a href="/channel/access">业主通道</a> > </li>
       <li class="active">设计快查</li>
     </ul>
     <hr class="border2 border2_mt2">
@@ -141,8 +141,8 @@
     </div>
 
     <div class="clearfix">
-      <div class="footer_banner pull-left"><a href="<%=@ibnner2.url if @ibnner2 %>" target="_blank"><img src="<%=@ibnner2.file.url(:list_670x85) if @ibnner2 %>"></a></div>
-      <div class="footer_banner pull-right"><a href="<%=@ibnner3.url if @ibnner3 %>" target="_blank"><img src="<%=@ibnner3.file.url(:list_310x85) if @ibnner3%>"></a></div>
+      <div class="footer_banner pull-left"><a href="<%=@ibnner2.url if @ibnner2 %>" target="_blank"><img src="<%=@ibnner2.file.url(:list_670x85) if @ibnner2 %>" alt="<%= @ibnner2.try(:photo_name)%>"></a></div>
+      <div class="footer_banner pull-right"><a href="<%=@ibnner3.url if @ibnner3 %>" target="_blank"><img src="<%=@ibnner3.file.url(:list_310x85) if @ibnner3%>" alt="<%= @ibnner3.try(:photo_name)%>"></a></div>
     </div>
 
     <div class="channel3 clearfix">

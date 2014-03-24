@@ -6,7 +6,7 @@ input#password{width:270px;}
 <% end %>
 <div class="container">
   <ul class="breadcrumb">
-    <li><a href="#">首页</a> > </li>
+    <li><a href="/">首页</a> > </li>
     <li class="active">用户中心</li>
   </ul>
   <hr class="border2 border2_mt2">
@@ -45,10 +45,10 @@ input#password{width:270px;}
               </p>
               <p class="muted"><small>您也可以用以下方式登录：</small></p>
               <ul class="unstyled clearfix login_way">
-                <li><a href="/users/auth/weibo"><%= image_tag "manage/login/sina.jpg" %>新浪微博</a></li>
-                <li><a href="/users/auth/qq_connect"><%= image_tag "manage/login/qq.jpg" %>QQ</a></li>
-                <li><a href="/users/auth/renren"><%= image_tag "manage/login/rr.jpg" %>人人网</a></li>
-                <li class="noborder"><a href="/users/auth/kaixin"><%= image_tag "manage/login/kx.jpg" %>开心网</a></li
+                <li><a href="/users/auth/weibo"><%= image_tag "manage/login/sina.jpg", alt: '新浪微博' %>新浪微博</a></li>
+                <li><a href="/users/auth/qq_connect"><%= image_tag "manage/login/qq.jpg", alt: 'QQ' %>QQ</a></li>
+                <li><a href="/users/auth/renren"><%= image_tag "manage/login/rr.jpg", alt: '人人网' %>人人网</a></li>
+                <li class="noborder"><a href="/users/auth/kaixin"><%= image_tag "manage/login/kx.jpg", alt: '开心网' %>开心网</a></li
               </ul>
             </div>
           </div>

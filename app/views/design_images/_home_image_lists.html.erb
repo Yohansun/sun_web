@@ -26,7 +26,7 @@
 	<%- resource.each do |r| %>
 		<li>
 			<a href="<%= r.link %>" target="_blank" class="help-block">
-				<%= image_tag r.try(:file).try(:url,:thumb) %>
+				<%= image_tag r.try(:file).try(:url,:thumb), alt: r.try(:title) %>
 			</a>
 			<p class="text-center"><a href="<%= r.link %>" target="_blank"><%= r.title %></a></p>
 		</li>

@@ -38,7 +38,7 @@
        <%- @articles.each do |article| %>
         <div class="shadow">
           <div class="section clear">
-            <%= image_tag article.preview_img.url(:icolor_articles) if article.preview_img %>
+            <%= image_tag(article.preview_img.url(:icolor_articles), alt: article.title) if article.preview_img %>
             <div class="article fl ft14">
               <h1><%= link_to article.title, "/articles/#{article.id}-design" %></h1>
               <span>时间：<%= article.published_at.to_date %></span>
