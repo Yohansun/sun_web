@@ -17,7 +17,7 @@
 $('.js-author_name').html("<%= @love_story.user_name %>");
 $('.js-author_area').html("<%= Area.find_by_id(@love_story.area_id).try(:root).try(:name)%>");
 $('.js-author_date').html("<%= @love_story.created_at.to_date %>");
-$('.js-author_content').html("<%= @love_story.content %>");
+$('.js-author_content').html("<%= @love_story.content.gsub(/\s+/,'') if @love_story.content %>");
 $('.js-author_view_count').html("<%= @love_story.view_count %>");
 // $('#havepics').modal('show');
 
