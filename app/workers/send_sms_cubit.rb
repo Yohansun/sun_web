@@ -12,9 +12,11 @@ class SendSmsCubit
     users_top500 = User.where(top500: 1, area_id: area_ids)
     designer_names = []
     designer_phones = []
+    designer_ids = []
     if users_top500.present?
       sample_users = users_top500.to_a.sample(6)
       sample_users.each{|user| designer_names << user.display_name }
+      sample_users.each{|user| designer_ids << user.id }
       users_top500.each{|user| designer_phones << user.phone }
     else
       #最新上传和最新每周之星6名
@@ -30,11 +32,13 @@ class SendSmsCubit
       sum_latest_users = sum_latest_users.flatten.uniq
 
       sum_latest_users.each{|user| designer_names << user.display_name }
+      sum_latest_users.each{|user| designer_ids << user.id }
       sum_latest_users.each{|user| designer_phones << user.phone }
     end
     #筛选出设计师名称
     designer_names.compact!
     designer_phones.compact!
+    designer_ids.compact!
     designer_names = designer_names.enum_for(:each_with_index).collect {|a,i| "#{i+1}" +"）（" + a + "）；" }.join("")
     #短信内容
     content_to_user = "亲爱的iColor用户，根据您提交的装修需求，我们为您推荐数位优秀设计师：" + designer_names + "希望您能顺利找到您满意的家装设计师！----【iColor家的设计师】"
@@ -53,5 +57,8 @@ class SendSmsCubit
     puts 'startCubitEmail>>>>>>>>>>>>>>>>>>>>>>>>'
     #发送邮件
     Notifier.cubit_fixture(cubit_fixture_id).deliver
+    #保存提交表单业主短信设计师列表
+    cubit_user = CubitFixture.find_by_id(cubit_fixture_id)
+    cubit_user.update_attribute(:designer_id_list,designer_ids) if cubit_user
   end
 end
