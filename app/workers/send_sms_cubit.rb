@@ -14,8 +14,8 @@ class SendSmsCubit
     designer_phones = []
     designer_ids = []
     if users_top500.present?
-      sample_users = users_top500.to_a.sample(6)
-      sample_users.each{|user| designer_names << user.display_name }
+      sample_users = users_top500.joins(:designs).order("designs.id desc").group("designs.user_id").limit(6)
+      sample_users.each{|user| designer_names << user.display_name + " " + user.phone }
       sample_users.each{|user| designer_ids << user.id }
       users_top500.each{|user| designer_phones << user.phone }
     else
@@ -31,7 +31,7 @@ class SendSmsCubit
       sum_latest_users << latest_design_users.to_a << latest_weekly_star_users.to_a
       sum_latest_users = sum_latest_users.flatten.uniq
 
-      sum_latest_users.each{|user| designer_names << user.display_name }
+      sum_latest_users.each{|user| designer_names << user.display_name + " " + user.phone }
       sum_latest_users.each{|user| designer_ids << user.id }
       sum_latest_users.each{|user| designer_phones << user.phone }
     end
@@ -41,10 +41,8 @@ class SendSmsCubit
     designer_ids.compact!
     designer_names = designer_names.enum_for(:each_with_index).collect {|a,i| "#{i+1}" +"）（" + a + "）；" }.join("")
     #短信内容
-    content_to_user = "亲爱的iColor用户，根据您提交的装修需求，我们为您推荐数位优秀设计师：" + designer_names + "希望您能顺利找到您满意的家装设计师！----【iColor家的设计师】"
-
-    content_to_designer = "亲爱的设计师，iColor推荐来自（#{user_city.name}）的用户，上传了TA的装修需求，户型：#{cubit_fixture_area}㎡；房型：#{cubit_fixture_type}；楼盘名：#{cubit_house_name}，电话：#{cubit_phone}，马上抓紧机会争取订单哦！---- 【iColor家的设计师】"
-
+    content_to_user = "亲爱的iColor用户，根据您提交的装修需求，我们为您推荐如下几位优秀设计师：" + designer_names + "祝您顺利找到中意的一位，为您度身定制您的爱家！ ----【iColor家的设计师www.icolor.com.cn]"
+    content_to_designer = "亲爱的设计师，iColor推荐来自（#{user_city.name}）的用户，上传了TA的装修需求，楼盘名：#{cubit_house_name}，电话：#{cubit_phone}，马上抓紧机会争取订单哦！记得联络时要表明您是iColor设计师哦！---- 【iColor家的设计师www.icolor.com.cn]"
     designer_phones.each do |phone|
       #发送给同城设计师
       SmsCubit.new(content_to_designer, phone).transmit
