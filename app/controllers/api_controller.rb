@@ -187,16 +187,18 @@ class ApiController < ApplicationController
         end
       end
       if params[:a_id].present?
+        Rails.logger.info("in_a_id")
         design = Design.find params[:a_id]
         if design.present?
           design.title = params[:a_title] if params[:a_title].present?
           design.content = params[:a_content] if params[:a_content].present?
-          if design.save
+          if design.save(:validate => false)
             if params[:atag_id].present?
               atag_id = params[:atag_id].split(",")
               DesignTags.destroy_all(design_id: design.id)
               atag_id.each {|tag| design.design_tags << DesignTags.new(image_library_category_id: tag)}
             end
+            Rails.logger.info("in_a_id_save")
             render :text => 'true' and return
           else
             render :text => 'false' and return
