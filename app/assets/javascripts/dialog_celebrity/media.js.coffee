@@ -6,6 +6,7 @@ $ ->
   class Media
     constructor: (options) ->
       {@window, @document, @body} = options
+      @selected_arr = []
 
     initialize: ->
       $("body").on "click",".reply-status", ->
@@ -107,33 +108,54 @@ $ ->
             $obj.remove()
             alert "删除成功"
 
-
       $("body").on "click","a.reply-upload-colorbox", ->
         obj = "reply-upload-colorbox-" + $(this).attr("data-question-id")
         colorbox_qa(".#{obj}")
 
+      $(".key-checkboxs").on "click","input", ->
+        _key = $(this).parent().text()
+        if $(this).is(':checked') is true
+          window.selected_arr.push $(obj).prev().text()
+        else
+          for i in window.selected_arr
+            if _key == i
+              index = window.selected_arr.indexOf(i)
+              break
+          window.selected_arr.splice(index,1)
+
       $("body").on "change","select.board_scope", ->
         scope = $(this).find("option:selected").attr("data-key")
         $obj = $(this).parent().parent().next()
+        $obj.find("input:checked").each (index,obj) ->
+          window.selected_arr.push $(obj).prev().text()
+          window.selected_arr = window.selected_arr.join(",").match(/([^,]+)(?!.*\1)/ig)
         $obj.find("*").remove()
         # $obj = $(this).parent().next().find("select")
         # $obj.find("option:gt(0)").remove()
         if scope?
           for _key in scope.split(",")
-            html = "<div class='fl ml30'><span style='height: 16px; line-height: 16px;'>#{_key}</span><input type='checkbox' style='height: 16px; line-height: 16px; margin-left: 6px;' /><div>"
+            _exist = false
+            for selected_key in window.selected_arr
+              if selected_key == _key
+                _exist = true
+                break
+            if _exist is true
+              $html = $("<div class='fl ml30'><span style='height: 16px; line-height: 16px;'>#{_key}</span><input value='onn' type='checkbox' checked='checked' style='height: 16px; line-height: 16px; margin-left: 6px;' /><div>")
+            else
+              $html = $("<div class='fl ml30'><span style='height: 16px; line-height: 16px;'>#{_key}</span><input value='onn' type='checkbox' style='height: 16px; line-height: 16px; margin-left: 6px;' /><div>")
+            $obj.append($html)
+
+        else
+          for _key in window.selected_arr
+            html = "<div class='fl ml30'><span style='height: 16px; line-height: 16px;'>#{_key}</span><input type='checkbox' checked='checked' style='height: 16px; line-height: 16px; margin-left: 6px;' /><div>"
             $obj.append(html)
 
       $("body").on "click",".checkkey", ->
-        $obj = $(this).parent().parent().next()
-        keys = []
-        $obj.find("input:checked").each (index,obj)->
-          keys.push $(obj).prev().text()
-        if keys.length == 0
+        if window.selected_arr.length == 0
           alert "请选择范围"
         else
           question_id = $(this).parent().parent().parent().attr("data-question-id")
-          $.post "/dialog_celebrity/media/update_question_key",{question_id: question_id,key: keys.join("|")}
-
+          $.post "/dialog_celebrity/media/update_question_key",{question_id: question_id,key: window.selected_arr.join("|")}
       # $("body").on "change","select.key_arr", ->
       #   question_id = $(this).parent().parent().parent().attr("data-question-id")
       #   key = $(this).val()
