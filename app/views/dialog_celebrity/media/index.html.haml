@@ -10,7 +10,6 @@
     = stylesheet_link_tag("dialog_celebrity/media")
     = stylesheet_link_tag "upload_image/jquery.fileupload-ui","bootstrap.min","datepicker","bootstrap-timepicker","colorbox/colorbox"
     = javascript_include_tag("bootstrap/jquery.min","dialog_celebrity/media","bootstrap-datetimepicker","jquery.colorbox")
-
   %body
     #banner
       .pull-left#banner-title iColor 名人问答QA系统
@@ -208,4 +207,5 @@
 
     :coffeescript
       $ ->
+        window.selected_arr = []
         D.initialize()
