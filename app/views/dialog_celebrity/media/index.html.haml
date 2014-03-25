@@ -89,7 +89,7 @@
                 %span{style: "color:red;"}
                   #{ t > 0 ? "还剩下" : "已过期" }#{ hour.to_i }小时#{ min.to_i }分钟
 
-          .content{style: "display: none;",:"data-question-id" => _question.id}
+          .content{style: "display: none;",:"data-question-id" => _question.id, :"data-question-key" => _question.keyword}
             .question-content-warp.clearfix
               = raw _question.content
               - if  _question.images.present?

@@ -25,6 +25,11 @@
   #upload_pics_queue img{
     vertical-align: middle;
   }
+  #upload_pics_queue em{
+    display: block;
+    line-height: 20px;
+  }
+
   .del-pic {
     position: absolute;
     top: 2px;
@@ -33,6 +38,11 @@
     height:20px;
     background: #333333 url(/assets/love_story/images/upload/upload_del.jpg) no-repeat;
     text-indent: -9999px; }
+  .loading-gif{
+    width: 20px;
+    height: 20px;
+    margin-top: 20px;
+  }
 </style>
 <%end-%>
 
@@ -52,25 +62,29 @@
       fileTypeExts : '*.jpg; *.png; *.gif; *.bmp',
       successTimeout : 6000,
       fileSizeLimit : '3MB',
-      // uploadLimit : 1,
+      uploadLimit : 9,
       width : 84,
       height : 84,
       multi : true,
       auto : true,
-      checkExisting : false,
+      //checkExisting : false,
       transparent : true,
       onUploadSuccess : function(file,data,response) {
-        console.log(this)
         arr = data.split("|")
         id = arr[0]
         thumb = arr[1]
         thumb2 =arr[2]
-        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' href='javascript:;'>删除</a></span>")
+        $("#upload_pics_queue").find('.item-img').remove();
         var tips = $('#' + this.id).parent().siblings('.tips');
         var selected_num = parseInt(tips.children('.selected-num').text());
         var rest_num = parseInt(tips.children('.rest-num').text());
         tips.children('.selected-num').text(selected_num + 1);
         tips.children('.rest-num').text(rest_num - 1);
+
+        $("#upload_pics_queue").append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic hide' href='javascript:;'>删除</a></span>")
+      },
+      onUploadStart : function(file){
+        $("#upload_pics_queue").append('<span class="item-img"><img class="loading-gif" src="<%= asset_path "upload_image/loading.gif" %>"><em>'+ file.name + '</em></span>')
       }
     });
 
@@ -84,6 +98,10 @@
       e.stopPropagation();
       modal.hide();
     });
+
+    $('.picture_modal').on('hover','#upload_pics_queue span',function(){
+      $(this).find('.del-pic').toggle()
+    })
 
     $("#upload_pics_queue").on("click",".del-pic",function(){
       $obj = $(this).parent()

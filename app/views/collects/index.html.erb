@@ -65,7 +65,7 @@
 								风格：<%= image.color_design.try(:design_style) %>
 							</p>
 						<%- elsif image.master_design_id %>
-						    <a href="/master_designs/<%= image.master_design_id %> ">
+						    <a href="/dialog_celebrity/master_designs/<%= image.master_design_id %> ">
 							<%= image_tag(MasterDesign.find(image.master_design_id).try(:main_preview_img).try(:url,:index), :class => "host_works_img" ) %>
 						    </a>
 						    <h3><%= image.master_design.try(:design_name)  %></h3>

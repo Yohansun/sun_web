@@ -6,10 +6,16 @@ $ ->
   class Media
     constructor: (options) ->
       {@window, @document, @body} = options
-      @selected_arr = []
 
     initialize: ->
       $("body").on "click",".reply-status", ->
+        _key = $(this).parent().parent().next().attr("data-question-key")
+        if _key?
+         _keyarr = _key.split("|")
+        if _keyarr?
+          window.selected_arr = _keyarr
+        else
+          window.selected_arr = []
         id = $(this).parent().parent().next().attr("data-question-id")
         for obj in $(".question-warp")
           if $(obj).find(".content").attr("data-question-id") isnt id
@@ -115,13 +121,15 @@ $ ->
       $(".key-checkboxs").on "click","input", ->
         _key = $(this).parent().text()
         if $(this).is(':checked') is true
-          window.selected_arr.push $(obj).prev().text()
+          window.selected_arr.push $(this).prev().text()
         else
           for i in window.selected_arr
             if _key == i
               index = window.selected_arr.indexOf(i)
               break
           window.selected_arr.splice(index,1)
+        if window.selected_arr.length > 0
+          $(this).parent().parent().parent().attr("data-question-key",window.selected_arr.join("|"))
 
       $("body").on "change","select.board_scope", ->
         scope = $(this).find("option:selected").attr("data-key")
