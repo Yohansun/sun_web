@@ -8,8 +8,29 @@ module MetaKeywordHelper
     designer_events_key = "iColor立邦活动,设计师活动,iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
     rescue_keyword = "iColor,立邦,家装设计,装修案例,装修设计鉴赏,作品欣赏,资讯,家居装修建材,室内装修,装修图片,装修效果图"
 
+    #对话名人
+    if controller_path == 'dialog_celebrity/home' && controller_name == 'home'
+      "对话名人,名家设计,名人问答,名人在线"
+    elsif controller_path == 'dialog_celebrity/master_profiles' && controller_name == 'master_profiles'
+      if action_name == 'maste_interviews'
+        "名家设计,空间设计,色彩设计,对话名人"
+      elsif action_name == 'master_interview'
+        @master.try(:name) + ",装修作品"
+      elsif action_name == 'celebrities'
+        "名人在线,名人介绍,名家手记,对话名人"
+      else
+        "对话名人,名家设计,名人问答,名人在线"
+      end
+    elsif controller_path == 'dialog_celebrity/celebrity_questions' && controller_name == 'celebrity_questions'
+      "名人问答,装修问题,对话名人"
+    elsif controller_path == 'dialog_celebrity/celebrity_notes' && controller_name == 'celebrity_notes'
+      "名家手记,装修知识,对话名人"
+    elsif controller_path == 'dialog_celebrity/editor_treasuries' && controller_name == 'editor_treasuries'
+      "小编宝典,名家设计作品,设计作品推荐,对话名人"
+    elsif controller_path == 'dialog_celebrity/master_designs' && controller_name == 'master_designs'
+      @master.try(:master_field) + ",#{@master.try(:name)},#{@master.try(:name)}装修效果图欣赏,对话名人"
     #首页
-    if controller_name == 'home' && action_name == 'index'
+    elsif controller_name == 'home' && action_name == 'index'
       "怎么装修设计,室内装潢装饰设计,室内家装设计,装修效果图,立邦,iColor"
     #刷新生活
     elsif controller_name == 'refresh_record' && action_name == 'show'

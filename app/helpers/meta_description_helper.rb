@@ -8,8 +8,29 @@ module MetaDescriptionHelper
     designer_events_descript = "立邦iColor装修设计鉴赏将定期举办精彩活动,并邀设计师参加活动,成为设计师展现家居装修设计风采专业平台.还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
     rescue_desc = "立邦iColor装修设计鉴赏涵盖世界级大师访谈,大师设计作品与专业设计作品欣赏,为你带来更多装修灵感以及专业的家装资讯,更有家装专业实用工具,满足你的色彩家装需求,还有更多精彩装修效果图,以及设计装修案例、灵感家装图片尽在立邦iColor."
 
+    #对话名人
+    if controller_path == 'dialog_celebrity/home' && controller_name == 'home'
+      "立邦iColor对话名人频道提供最新最全的名人在线问答,直面大师专家,为您在线授道解惑,还包括名家精选设计作品欣赏。"
+    elsif controller_path == 'dialog_celebrity/master_profiles' && controller_name == 'master_profiles'
+      if action_name == 'maste_interviews'
+        "名家设计所在地区包括海外,港澳台和大陆,从事领域有空间设计,色彩设计,软装设计,园艺设计和装修施工等作品在线欣赏。"
+      elsif action_name == 'master_interview'
+        "这里有关于" + @master.try(:name) + "的访谈肉容和经典装修作品欣赏。"
+      elsif action_name == 'celebrities'
+        "名人在线提供所有名人的相关介绍和名家关于装修方面的手机,让您与名家零距离接触。"
+      else
+        "立邦iColor对话名人频道提供最新最全的名人在线问答,直面大师专家,为您在线授道解惑,还包括名家精选设计作品欣赏。"
+      end
+    elsif controller_path == 'dialog_celebrity/celebrity_questions' && controller_name == 'celebrity_questions'
+      "名人问答频道为您解决装修中如水电,墙面,布线,油漆,防漏等各种装修施工中碰到的大小问题。"
+    elsif controller_path == 'dialog_celebrity/celebrity_notes' && controller_name == 'celebrity_notes'
+      "名家手记为广大需要装修的人提供在线帮助,在此您可以学到各种关于装修方面的宝贵知识。"
+    elsif controller_path == 'dialog_celebrity/editor_treasuries' && controller_name == 'editor_treasuries'
+      "小编宝典为您推荐最新最经典名家设计作品在线欣赏"
+    elsif controller_path == 'dialog_celebrity/master_designs' && controller_name == 'master_designs'
+      "有关" + @master.try(:master_field) + "#{@master.try(:name)}装修作品欣赏"
     #首页
-    if  controller_name == 'home'
+    elsif  controller_name == 'home'
       "立邦iColor轻松教您怎么装修设计,如何设计装修房子,立邦iColor室内装潢装饰设计,鉴赏涵盖世界级大师访谈,大师设计作品与专业设计作品欣赏,为你带来更多室内家装设计灵感以及专业的设计装修资讯,更有家装室内设计专业实用工具,满足你的色彩家装需求,还有更多精彩装修设计效果图,以及设计装修案例、灵感家装设计图片尽在立邦iColor官方网站."
     #刷新生活
     elsif controller_name == 'refresh_record' && action_name == 'show'

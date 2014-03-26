@@ -4,8 +4,29 @@ module MetaTitleHelper
   NEW_BASE_TITLE = "怎么装修设计|室内装饰装潢设计|家装室内设计|装修设计效果图大全2013图片-立邦iColor官方网站"
 
   def page_title
+      #对话名人
+      if controller_path == 'dialog_celebrity/home' && controller_name == 'home'
+        '对话名人,2014最新名家设计,名人问答和名人在线-立邦iColor官方网站'
+      elsif controller_path == 'dialog_celebrity/master_profiles' && controller_name == 'master_profiles'
+        if action_name == 'maste_interviews'
+          "【名家设计】空间设计,色彩设计,园艺设计,对话名人-立邦iColor官方网站"
+        elsif action_name == 'master_interview'
+          "【大师访谈】" + @master.try(:name) + ",装修作品欣赏-立邦iColor官方网站"
+        elsif action_name == 'celebrities'
+          "【名人在线】名人介绍,名家手记,对话名人-立邦iColor官方网站"
+        else
+          "对话名人,2014最新名家设计,名人问答和名人在线-立邦iColor官方网站"
+        end
+      elsif controller_path == 'dialog_celebrity/celebrity_questions' && controller_name == 'celebrity_questions'
+        "【名人问答】大师帮您解决装修中各种大小问题,对话名人-立邦iColor官方网站"
+      elsif controller_path == 'dialog_celebrity/celebrity_notes' && controller_name == 'celebrity_notes'
+        "【名家手记】名家畅谈装修知识,对话名人-立邦iColor官方网站"
+      elsif controller_path == 'dialog_celebrity/editor_treasuries' && controller_name == 'editor_treasuries'
+        "【小编宝典】名家设计作品推荐,对话名人-立邦iColor官方网站"
+      elsif controller_path == 'dialog_celebrity/master_designs' && controller_name == 'master_designs'
+        "【大师作品】" + @master.try(:master_field) + @master.try(:name) + "装修作品欣赏-立邦iColor官方网站"
       #首页
-      if  controller_name == 'home'
+      elsif controller_name == 'home'
         "怎么装修设计|室内装饰装潢设计|家装室内设计|装修设计效果图大全2013图片_立邦iColor官方网站"
       #刷新生活
       elsif controller_name == 'refresh_record' && action_name == 'show'
