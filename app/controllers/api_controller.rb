@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  after_filter :cors_set_access_control_headers
 
   def create_user
     user = User.new
@@ -20,11 +21,11 @@ class ApiController < ApplicationController
       user.role_id = 1
       user.des_status = 0
     when "company"
-      user.role_id = 2 
+      user.role_id = 2
     when "user"
       user.role_id = 3
     end
-      
+
     if user.save(validate: false)
       respond_to do |format|
         format.json {render :json => { :result => 'true',
@@ -80,7 +81,7 @@ class ApiController < ApplicationController
       user.role_id = 1
       user.des_status = 0
     when "company"
-      user.role_id = 2 
+      user.role_id = 2
     when "user"
       user.role_id = 3
     end
@@ -134,5 +135,34 @@ class ApiController < ApplicationController
     if params[:type] == "kaixin"
       redirect_to "/users/auth/kaixin"
     end
+  end
+
+  def cubit_fixtures
+    fixtue = CubitFixture.new
+    fixtue.name = params[:name]
+    fixtue.phone = params[:phone]
+    fixtue.fixture_area = params[:fixture_area]
+    fixtue.style = params[:style]
+    fixtue.house_name = params[:house_name]
+    fixtue.fixture_type = params[:fixture_type]
+    fixtue.area_id = params[:area]
+    fixtue.pre_price = params[:pre_price]
+    if fixtue.save
+      Notifier.cubit_fixture(fixtue.id).deliver
+      respond_to do |format|
+        format.js {render js: "parent.window.onload = function(){return alert('申请提交成功!');};"}
+      end
+    else
+      respond_to do |format|
+        format.js {render js: "parent.window.onload = function(){return alert('申请提交失败!');};"}
+      end
+    end
+  end
+
+  def cors_set_access_control_headers
+    headers['Access-Control-Allow-Origin']      = '*'
+    headers['Access-Control-Allow-Methods']     = 'POST, GET, OPTIONS'
+    headers['Access-Control-Max-Age']           = '1728000'
+    headers['Access-Control-Allow-Credentials'] = 'true'
   end
 end
