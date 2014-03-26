@@ -1,4 +1,4 @@
-<style>
+  <style>
   blockquote{padding:45px 130px 40px;}
   blockquote strong{float:left;margin-top: -4px;}
   blockquote span{font:14px/20px "SimSun";color:#2a2a2a;margin-left: 30px;display: block;}
@@ -47,7 +47,7 @@
             <%= @master.name -%>
             <span class="help-block">国籍：<%= @master.nationality -%> 领域：<%= @master.master_field -%></span>
           </h3>
-          <p><%= @master.intro -%></p>
+          <p><%= raw @master.intro -%></p>
         </div>
         <div class="pull-right intv_photo">
           <img src="<%=@master.avatar(:middle2)%>" width="150" height="160">

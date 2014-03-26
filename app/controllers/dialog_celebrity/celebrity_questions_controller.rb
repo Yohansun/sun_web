@@ -15,7 +15,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
 
   def create
     question = CelebrityQuestion.new params[:celebrity_question]
-    question.key = ""
+    question.keyword = ""
     unless question.save
       flash[:notice] = "描述文字不少于6个字"
       redirect_to new_dialog_celebrity_celebrity_question_path
