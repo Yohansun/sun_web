@@ -148,10 +148,10 @@ class ApiController < ApplicationController
     fixtue.area_id = params[:area]
     fixtue.pre_price = params[:pre_price]
     if fixtue.save
-      # Notifier.cubit_fixture(fixtue.id).deliver
-      render text: "申请提交成功! #{params[:name]}"
+      Notifier.cubit_fixture(fixtue.id).deliver
+      render text: "<script>alert('申请提交成功! #{params[:name]}')</script>"
     else
-      render text: "申请提交失败! #{params[:name]}"
+      render text: "<script>alert('申请提交失败! #{params[:name]}')</script>"
     end
   end
 
