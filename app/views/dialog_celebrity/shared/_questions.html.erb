@@ -343,7 +343,7 @@
         tips.children('.selected-num').text(selected_num + 1);
         tips.children('.rest-num').text(rest_num - 1);
 
-        $('#' + this.id).siblings('.uploadifyQueue').append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' href='javascript:;'>删除</a></span>");
+        $('#' + this.id).siblings('.uploadifyQueue').append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' style='display:none;' href='javascript:;'>删除</a></span>");
       },
       onUploadStart : function(file){
         $(".uploadifyQueue").append('<span class="item-img"><img class="loading-gif" src="<%= asset_path "upload_image/loading.gif" %>"><em>'+ file.name + '</em></span>')
