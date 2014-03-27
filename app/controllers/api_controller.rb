@@ -148,20 +148,16 @@ class ApiController < ApplicationController
     fixtue.area_id = params[:area]
     fixtue.pre_price = params[:pre_price]
     if fixtue.save
-      Notifier.cubit_fixture(fixtue.id).deliver
-      respond_to do |format|
-        format.js {render js: "parent.window.onload = function(){return alert('申请提交成功!');};"}
-      end
+      # Notifier.cubit_fixture(fixtue.id).deliver
+      render text: "申请提交成功! #{params[:name]}"
     else
-      respond_to do |format|
-        format.js {render js: "parent.window.onload = function(){return alert('申请提交失败!');};"}
-      end
+      render text: "申请提交失败! #{params[:name]}"
     end
   end
 
   def cors_set_access_control_headers
     headers['Access-Control-Allow-Origin']      = '*'
-    headers['Access-Control-Allow-Methods']     = 'POST, GET, OPTIONS'
+    headers['Access-Control-Allow-Methods']     = 'POST'
     headers['Access-Control-Max-Age']           = '1728000'
     headers['Access-Control-Allow-Credentials'] = 'true'
   end
