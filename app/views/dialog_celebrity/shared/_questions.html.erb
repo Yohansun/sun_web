@@ -7,7 +7,7 @@
   .uploadifyQueueItem{
     display: none;
   }
-  #upload_pics_queue span{
+  .uploadifyQueue span{
     position: relative;
     display: inline-block;
     *display: inline;
@@ -21,10 +21,10 @@
     margin: 0 5px 5px 0;
     text-align: center;
   }
-  #upload_pics_queue img{
+  .uploadifyQueue img{
     vertical-align: middle;
   }
-  #upload_pics_queue em{
+  .uploadifyQueue em{
     display: block;
     line-height: 20px;
   }
@@ -32,6 +32,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    display: none;
     width:20px;
     height:20px;
     background: #333333 url(/assets/love_story/images/upload/upload_del.jpg) no-repeat;
@@ -193,7 +194,7 @@
                             </p>
                             <div class="form_file clearfix">
                               <!-- <input type="file" /> -->
-                              <a href="javascript:;" class="uploadify_btn" id="upload_pics"></a>
+                              <a href="javascript:;" class="uploadify_btn" id="upload_pics<%= _question.id %>"></a>
                             </div>
                           </div>
                           <a class="exp-close js-hide_picture_modal" href="javascript:;"></a>
@@ -297,8 +298,8 @@
     $("form.famous_ask_form").submit(function(){
       $form = $(this)
       $.post('/dialog_celebrity/create_question_reply', $(this).serialize(),function(){
-        $form.find("#upload_pics_queue").find("input[name=images]").remove()
-        $form.find("#upload_pics_queue span").remove()
+        $form.find(".uploadifyQueue").find("input[name=images]").remove()
+        $form.find(".uploadifyQueue span").remove()
         $form.find("textarea#requestion_content").val("")
         $form.find(".picture_modal").hide()
       })
@@ -309,7 +310,7 @@
       $.post('/dialog_celebrity/refresh_celebrity_questions', {board_id: $(this).attr("data-keyword"),key: $(this).text()})
     })
 
-    $('#upload_pics').uploadify({
+    $('.uploadify_btn').uploadify({
       uploader: '/dialog_celebrity/upload_image',
       dataType: 'json',
       swf : '/uploadify/uploadify.swf',
@@ -333,7 +334,7 @@
         id = arr[0]
         thumb = arr[1]
         thumb2 =arr[2]
-        $("#upload_pics_queue").find('.item-img').remove();
+        $(".uploadifyQueue").find('.item-img').remove();
 
         // var len = $('#' + this.id).siblings('.uploadifyQueue').children().length;
         var tips = $('#' + this.id).parent().siblings('.tips');
@@ -345,11 +346,11 @@
         $('#' + this.id).siblings('.uploadifyQueue').append("<span><img src='"+ thumb2 + "' data-image-id='" + id  +"' /><a class='del-pic' href='javascript:;'>删除</a></span>");
       },
       onUploadStart : function(file){
-        $("#upload_pics_queue").append('<span class="item-img"><img class="loading-gif" src="<%= asset_path "upload_image/loading.gif" %>"><em>'+ file.name + '</em></span>')
+        $(".uploadifyQueue").append('<span class="item-img"><img class="loading-gif" src="<%= asset_path "upload_image/loading.gif" %>"><em>'+ file.name + '</em></span>')
       }
     });
 
-    $('.picture_modal').on('hover','#upload_pics_queue span',function(){
+    $('.picture_modal').on('hover','.uploadifyQueue span',function(){
       $(this).find('.del-pic').toggle()
     })
 
@@ -384,12 +385,12 @@
         return false;
       }
       var arr = []
-      var images = $(this).parent().parent().find("#upload_pics_queue")
+      var images = $(this).parent().parent().find(".uploadifyQueue")
       images.find("img").each(function(index,img){
         arr.push($(img).attr("data-image-id"))
       })
       str = arr.join("|")
-      $queue = $(this).parent().prev().find("#upload_pics_queue")
+      $queue = $(this).parent().prev().find(".uploadifyQueue")
       $queue.find("input[name=images]").remove()
       $queue.append("<input name='images' type='hidden' value='" + str + "'>")
     });
