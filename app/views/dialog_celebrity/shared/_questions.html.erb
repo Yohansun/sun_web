@@ -288,7 +288,7 @@
     //delete
     $('.js-list_parent').on('click','.js-delete',function(){
       $_obj = $(this).parent('.state')
-      if(confirm("是否要重置领域分类?") == true){
+      if(confirm("确定要删除吗?") == true){
         $.post("/dialog_celebrity/destroy_question_reply",{id: $(this).attr("data-reply-id")},function(result){
           $_obj.remove();
         })
@@ -406,8 +406,10 @@
     });
     $(".form_file").on("click",".del-pic",function(){
       $obj = $(this).parent()
+      $deltext = $(this).parent().parent().parent().prev().find(".selected-num")
       $.post("/dialog_celebrity/delete_image",{id: $(this).prev().attr("data-image-id")},function(r){
         $obj.remove()
+        $deltext.text($deltext.text()-1)
       })
     })
 

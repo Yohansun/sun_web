@@ -36,6 +36,7 @@
           <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
           <script type="text/javascript" id="bdshell_js"></script>
           <script type="text/javascript">
+          var bds_config = {'bdText':"#iColor对话名人#我正在阅读设计名家：<%=@master.name%>的访谈，实在是太棒了！分享给你们看看。想领略更多名家设计精选作品？想要设计名家在线解答装修疑惑？就要去iColor看看：<%=request.url%>"};
           document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
           </script>
           <!-- Baidu Button END -->
@@ -102,6 +103,7 @@
     </ul>
   </div>
   <%end-%>
+  <% if @master.master_designs.present? -%>
   <div class="mt20 intv_works">
     <h5 class="intv_title clearfix">
       <span class="line_r pull-left">名人作品</span><span class="pull-left">ＭASTER WORKS</span>
@@ -125,6 +127,8 @@
       </div>
     </div>
   </div>
+  <%end-%>
+  <% if @master.message.present? -%>
   <div class="mt20 intv_msg">
     <h5 class="intv_title clearfix">
       <span class="line_r pull-left">名人寄语</span><span class="pull-left">ＭASTER MESSAGE</span>
@@ -134,6 +138,7 @@
       <span class="muted"><%=@master.name%></span>
     </blockquote>
   </div>
+  <%end-%>
 </div>
 
 <div class="mt10"><a href="<%= @banners[0].url -%>"><img src="<%=@banners[0].file(:list_1000x85)%>"></a></div>

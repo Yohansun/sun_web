@@ -83,4 +83,8 @@ class Notifier < ActionMailer::Base
          :body => "姓名：#{@cubit.name} \n电话：#{@cubit.phone} \n装修面积：#{@cubit.fixture_area} \n期待风格：#{@cubit.style} \n楼盘名称:#{@cubit.house_name}\n\n房型:#{@cubit.fixture_type}\n装修所在地:#{@area.parent.name}#{@area.name}\n装修预算:#{@cubit.pre_price}\n表单提交时间:#{Time.now.strftime("%Y.%m.%d %H:%M")}\n"
         )
   end
+
+  def media(id)
+
+  end
 end
