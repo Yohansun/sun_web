@@ -69,50 +69,11 @@ $(function(){
     </div>
   </div>
 
-  <% if false -%>
   <%= render :partial => 'dialog_celebrity' %>
-  <% end -%>
 
   <%= render :partial => 'image_lib' %>
 
   <%= render :partial => 'refresh' %>
-
-  <div class="index_master">
-    <p class="clearfix index_tit">
-      <a href="/master_designs" target="_blank" class="pull-right"><small>大师作品</small></a>
-      <a class="pull-right"> | </a>
-      <a href="/master_interviews" target="_blank" class="pull-right"><small>大师访谈</small></a>
-      <strong class="pull-left">大师殿堂</strong>
-    </p>
-    <hr class="border2 border2_mt2">
-    <div class="index_main clearfix">
-      <div class="media pull-left">
-        <a class="pull-left media_a" href="/master_interviews/<%= @master_profile.id %>" target="_blank">
-          <img class="media-object lazy" data-src="<%= @master_profile.try(:preview_img_in).try(:url,:home_img) %>" alt="<%= @master_profile.title %>" width="150" height="160">
-        </a>
-        <div class="media-body">
-          <h6 class="media-heading"><%= @master_profile.title %></h6>
-          <p class=""><%= truncate(@master_profile.interview_content, length: 60) %></p>
-          <p class="text-right nomargin">
-            <a href="/master_interviews/<%= @master_profile.id %>" target="_blank"><small class="muted">查看更多<i class="icon-i16 icon-more"></i></small></a>
-          </p>
-        </div>
-      </div>
-      <div id="master_slide" class="slider-bin pull-right">
-        <div class="slider-container">
-          <ul>
-            <%- @master_design_images.each do |img|%>
-              <li>
-                <a href="/master_designs/<%= img.master_design_id if img %>" target="_blank">
-                  <img class="lazy" data-src="<%= img.try(:file).try(:url,:home_slide) if img %>" width="145" height="125" alt="<%= img.title%>" />
-                </a>
-              </li>
-            <%- end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="footer_banner">
     <a href="<%= @banner4.url? ? @banner4.url : 'javascript:void(0);' if @banner4 %>" target="_blank">

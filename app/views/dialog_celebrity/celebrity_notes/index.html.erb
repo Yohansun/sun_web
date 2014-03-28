@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag "famous" %>
 <%end-%>
 
-<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>不怕不懂，就怕不问！再多家装问题，都有iColor专家为您免费解答！</small></h3>
 <ul class="breadcrumb">
   <li><a href="/">首页</a> > </li>
   <li><a href="/dialog_celebrity">对话名人</a> > </li>
@@ -60,16 +60,16 @@
                 <ul class="ul_dot clearfix nomargin">
                   <li class="nomargin">
                     <h5 class="nomargin"><a href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>" target="_blank"><%= _article.name -%></a></h5>
-                    <p class="nomargin"><a href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>"><%= _article.intro -%></a></p>
+                    <p class="nomargin"><a href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>" target="_blank"><%= _article.intro -%></a></p>
                   </li>
                 </ul>
-                <div class="nomargin clearfix"><a class="btn_detail btn_detail_gray pull-left" href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>">查看详情</a></div>
+                <div class="nomargin clearfix"><a class="btn_detail btn_detail_gray pull-left" href="<%=dialog_celebrity_celebrity_note_path(_article.id)%>" target="_blank">查看详情</a></div>
               </div>
             </div>
             <%end -%>
           </div>
-          <div class="pager host_pager ft12">
-            <%= paginate(@articles,remote: true) if !@questions.blank? %>
+          <div class="pager host_pager ft12 mt10">
+            <%= paginate(@articles) if !@articles.blank? %>
           </div>
         </div>
       </div>

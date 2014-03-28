@@ -18,13 +18,13 @@ class HomeController < ApplicationController
     @home_recommends = HomeRecommend.order("position")
 
     # 大师殿堂
-    @master_profile = MasterProfile.first
-    @master_designs = @master_profile.master_designs
-    if @master_designs.present?
-      @master_design_images = @master_designs.first.master_design_uploads
-    else
-      @master_design_images = []
-    end
+    # @master_profile = MasterProfile.first
+    # @master_designs = @master_profile.master_designs
+    # if @master_designs.present?
+    #   @master_design_images = @master_designs.first.master_design_uploads
+    # else
+    #   @master_design_images = []
+    # end
 
     # banner
     @owner_entry_banner = HomeBanner.find_by_banner_name "业主通道banner 290x200"

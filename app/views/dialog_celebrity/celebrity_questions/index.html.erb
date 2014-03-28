@@ -17,7 +17,7 @@ $(function(){
 </script>
 <%- end %>
 
-<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>直面大师专家，为您在线授道解惑</small></h3>
+<h3 class="chann_caption nomargin"><i class="icon-map icon-map1 icon_colors"></i><strong>对话名人</strong><small>不怕不懂，就怕不问！再多家装问题，都有iColor专家为您免费解答！</small></h3>
 <ul class="breadcrumb">
   <li><a href="/">首页</a> > </li>
   <li><a href="/dialog_celebrity">对话名人</a> > </li>
@@ -35,8 +35,9 @@ $(function(){
   <div class="pull-right smaller famous_right">
     <div class="index_main nopadding">
       <div class="famous_tips text-center">
-        <!-- <p>解决<strong id="replied_count">0000000000</strong>问题</p> -->
-        <p style="margin-top: 30px;"><a href="<%= new_dialog_celebrity_celebrity_question_path -%>" class="btn_ask text-left">我要提问</a></p>
+        <img src="/assets/famous/famous-qustion.png" alt="" />
+        <p class="hide">解决<strong>0265483679</strong>问题</p>
+        <p><a href="<%= new_dialog_celebrity_celebrity_question_path -%>" class="btn_ask text-left">马上问专家</a></p>
       </div>
     </div>
     <%= render "dialog_celebrity/shared/new_designs" -%>
