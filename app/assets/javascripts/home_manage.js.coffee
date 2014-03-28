@@ -41,18 +41,18 @@ $(document).ready ->
           $('.err_tips').fadeOut()
         ,3000
 
-    $("#per_form, #new_message, #new_reply_msg, #new_faq, #channel_service").submit =>
-      show_login()
-      return false
+    # $("#per_form, #new_message, #new_reply_msg, #new_faq, #channel_service").submit =>
+    #   show_login()
+    #   return false
 
-    $("#new_site_message").submit =>
-      $('.server_input').hide()
-      show_login()
-      return false
+    # $("#new_site_message").submit =>
+    #   $('.server_input').hide()
+    #   show_login()
+    #   return false
 
-    $("#channel_access, #one_key_forward, #ckepop a, .new_mix_color, .home_banner2, .subscribe").click =>
-      show_login()
-      return false
+    # $("#channel_access, #one_key_forward, #ckepop a, .new_mix_color, .home_banner2, .subscribe").click =>
+    #   show_login()
+    #   return false
 
   # check login box end
 

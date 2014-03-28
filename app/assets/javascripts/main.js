@@ -63,11 +63,11 @@ function o_out(){
     $('#overlay').fadeOut();
 }
 
-function show_login(){
-    o_in();
-    $('.unlogin').show();
-    $("#design_message").hide();
-}
+// function show_login(){
+//     o_in();
+//     $('.unlogin').show();
+//     $("#design_message").hide();
+// }
 
 function prize_jan(){
     $('#prize_jan').show();
