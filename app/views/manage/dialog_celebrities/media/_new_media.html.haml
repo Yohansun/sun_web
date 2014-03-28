@@ -1,8 +1,9 @@
 %tr{data: media.id}
   %td.centerText
     %div.group1
-      = link_to "编辑","javascript:;",:class => "edit-media"
-      = link_to "删除","javascript:;",:class => "destroy-media"
+      - if !media.is_admin?
+        = link_to "编辑","javascript:;",:class => "edit-media"
+        = link_to "删除","javascript:;",:class => "destroy-media"
     %div.group2.hide
       = link_to "保存","javascript:;",:class => "save-media"
       = link_to "返回","javascript:;",:class => "return-media"

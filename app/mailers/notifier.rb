@@ -81,4 +81,15 @@ class Notifier < ActionMailer::Base
     mail(:to => %w{weiwei@nipponpaint.com.cn,jiwudan@nipponpaint.com.cn,bianyinting@nipponpaint.com.cn,sammizhou@nipponpaint.com.cn,yangjie@nipponpaint.com.cn},
          :subject => "装修预约需求更新#{'（无同城）' if @users_top500_present == 1 }")
   end
+
+  def media(_media,arr)
+    @media = _media
+    @arr = arr
+    mail(:to => @media.email,
+         :subject => "[QA系统]" + Time.now.strftime("%y-%m-%d") + "通知",
+         :reply_to => 'icolor@nipponpaint.com.cn'
+        )
+  end
 end
+
+

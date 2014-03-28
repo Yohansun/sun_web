@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class Media < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :boards
 
-  has_one :reply, :class_name => CelebrityQuestionReply
+  has_many :replies, :class_name => CelebrityQuestionReply
 
   def encrypt_password!
     self.password = self.class.encrypt_password(self.password)

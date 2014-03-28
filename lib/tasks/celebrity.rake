@@ -53,6 +53,33 @@ namespace :celebrity do
 
   desc 'qa系统短信'
   task :qa_send_message => :environment do
-
+    Media.all.map do |media|
+      boards = CelebrityContentBoard.where("id in (?)",media.boards.keys)
+      arr = []
+      str = ""
+      boards.each do |board|
+        questions = board.questions
+        today_questions = questions.where("created_at >= ? and created_at <= ?",Date.current,Date.current.tomorrow)
+        today_questions_count = today_questions.count
+        today_replies_count = today_questions.sum{|n|n.replies.count}
+        if today_questions_count > 0
+          today_not_replied_count = today_replies_count - CelebrityQuestionReply.where("id in (?) and media_id is null",today_questions.map(&:id)).count
+        else
+          today_not_replied_count = 0
+        end
+        if questions.count > 0
+          total_not_replied_count = questions.count - CelebrityQuestionReply.where("id in (?) and media_id is not null",questions.map(&:id)).count
+        else
+          total_not_replied_count = 0
+        end
+        arr << [board.name,today_questions_count,today_not_replied_count,total_not_replied_count]
+        str += "[#{board.name}]今天还有#{total_not_replied_count}条问题没有回复；"
+      end
+      if boards.count > 0
+        Notifier.media(media,arr).deliver!
+        msg = "[QA系统]" + Time.now.strftime("%y-%m-%d") + "通知："+str
+        SmsCubit.new(msg,media.mobile).transmit
+      end
+    end
   end
 end
