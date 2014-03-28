@@ -24,4 +24,8 @@ every :day, :at => '3:00 am', :roles => [:app] do
   rake "import_click_data"
 end
 
+every :day, :at => '9:00 am', :roles => [:app] do
+  rake "celebrity:qa_send_message"
+end
+
 # Learn more: http://github.com/javan/whenever

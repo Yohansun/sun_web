@@ -50,4 +50,9 @@ namespace :celebrity do
       end
     end
   end
+
+  desc 'qa系统短信'
+  task :qa_send_message => :environment do
+
+  end
 end
