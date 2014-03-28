@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <% if @users_top500_present == 1 %>
+      <h1>业主没有同城设计师推荐</h1>
+    <% end %>
+    <h1>业主信息</h1>
+    <br/>
+    <p>表单提交时间:<%= Time.now.strftime("%Y.%m.%d %H:%M") %></p>
+    <p>城市:<%= @area.parent.name %> <%= @area.name%> </p>
+    <p>楼盘名称:<%= @cubit.house_name %></p>
+    <p>姓名:<%= @cubit.name %></p>
+    <p>电话:<%= @cubit.phone %></p>
+    <p>装修面积:<%= @cubit.fixture_area %></p>
+    <p>装修预算:<%= @cubit.pre_price %></p>
+    <% if @designers.present? %>
+      <h1>设计师信息</h1>
+      <% @designers.each_with_index do |user,index|%>
+        <b>已推荐的设计师<%= index + 1 %></b>
+        <p>姓名：<%= user.display_name %></p>
+        <p>电话：<%= user.phone %></p>
+        <p>邮箱：<%= user.email %></p>
+        <p>个人主链接：<%= user_asks_url(user) %></p>
+      <% end %>
+    <% end %>
+  </body>
+</html>
