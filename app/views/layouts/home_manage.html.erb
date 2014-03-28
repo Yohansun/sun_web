@@ -89,10 +89,9 @@
             </ul>
           </li>
 
-
-          <li class="<%= 'active noborder' if controller_name == 'master_interviews' || controller_name == 'master_designs' %>">
+          <li class="<%= 'active noborder' if request.url.include?('dialog_celebrity') %>">
             <!-- <a href="/master_interviews" target="_blank" >大师殿堂</a> -->
-            <a href="<%=dialog_celebrity_dialog_celebrities_root_path%>" >对话名人</a>
+            <a href="<%=dialog_celebrity_dialog_celebrities_root_path%>" target="_blank" >对话名人</a>
             <ul class="subnav">
               <li><a href="<%=dialog_celebrity_celebrity_questions_path%>" >名人问答</a></li>
               <li><a href="<%=celebrities_dialog_celebrity_master_profiles_path%>" >名人在线</a></li>
