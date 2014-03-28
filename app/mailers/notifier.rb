@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 # -*- encoding : utf-8 -*-
 class Notifier < ActionMailer::Base
   default from: "icolor@nipponpaint.com.cn"
@@ -74,17 +72,13 @@ class Notifier < ActionMailer::Base
         )
   end
 
-  def cubit_fixture(id)
+  def cubit_fixture(id, designer_ids=nil, users_top500_present=nil)
     @cubit = CubitFixture.find(id)
-    #sammizhou@nipponpaint.com.cn,WeiWei@nipponpaint.com.cn,YangJie@nipponpaint.com.cn
     @area = Area.find(@cubit.area_id)
-    mail(:to => %w{sammizhou@nipponpaint.com.cn,WeiWei@nipponpaint.com.cn,YangJie@nipponpaint.com.cn},
-         :subject => "装修丘比特_#{Time.now.strftime("%Y%m%d%H%M")}",
-         :body => "姓名：#{@cubit.name} \n电话：#{@cubit.phone} \n装修面积：#{@cubit.fixture_area} \n期待风格：#{@cubit.style} \n楼盘名称:#{@cubit.house_name}\n\n房型:#{@cubit.fixture_type}\n装修所在地:#{@area.parent.name}#{@area.name}\n装修预算:#{@cubit.pre_price}\n表单提交时间:#{Time.now.strftime("%Y.%m.%d %H:%M")}\n"
-        )
-  end
-
-  def media(id)
-
+    @designers = User.where(id: designer_ids) if designer_ids
+    #检测是否有同城设计师
+    @users_top500_present = 1 if users_top500_present == 1
+    mail(:to => %w{weiwei@nipponpaint.com.cn,jiwudan@nipponpaint.com.cn,bianyinting@nipponpaint.com.cn,sammizhou@nipponpaint.com.cn,yangjie@nipponpaint.com.cn},
+         :subject => "装修预约需求更新#{'（无同城）' if @users_top500_present == 1 }")
   end
 end
