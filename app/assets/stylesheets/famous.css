@@ -15,10 +15,11 @@
 .famous_intro .media-heading{font-weight:normal;}
 .famous_intro .media-heading a{color: #333;font-weight: bold;}
 
-.famous_tips{background:url(/assets/famous/famous_tips.jpg) no-repeat center top;width:200px;height:120px;padding-top:119px;}
-.famous_tips p{color:#6d6d6d;font:14px/24px "SimSun";margin-top:5px;}
+.famous_tips{background:url(/assets/famous/famous-bg.jpg) left top;width:200px;height:220px;padding-top:20px;}
+.famous_tips p{color:#6d6d6d;font:14px/24px "SimSun";margin-top:12px;}
+
 .famous_tips strong{color:#ff6600;font:18px/24px "Arial";position:relative;top:1px;margin:0 8px;}
-.btn_ask{width:150px;height:52px;background:url(/assets/btns/btns_icon2.png) no-repeat 0 -282px;font:bold 16px/52px "SimSun";color:#fff;padding-left:20px;}
+.btn_ask{width:150px;height:52px;background:url(/assets/btns/btns_icon2.png) no-repeat 0 -282px;font:bold 20px/52px "SimSun";color:#fff;padding-left:20px;}
 .btn_ask:hover{color:#fff;}
 
 .famous_left{width:758px;/*width:760px;*/}

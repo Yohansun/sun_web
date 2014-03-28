@@ -8,7 +8,7 @@
 <h3 class="chann_caption nomargin">
   <i class="icon-map icon-map1 icon_colors"></i>
   <strong>对话名人</strong>
-  <small>直面名人专家，为您在线授道解惑</small>
+  <small>不怕不懂，就怕不问！再多家装问题，都有iColor专家为您免费解答！</small>
 </h3>
 <ul class="breadcrumb">
   <li><a href="#">首页</a> &gt;</li>
@@ -48,6 +48,7 @@
             <span class="help-block">国籍：<%= @master.nationality -%> 领域：<%= @master.master_field -%></span>
           </h3>
           <p><%= raw @master.intro -%></p>
+          <div class="pull-right hide"><%=link_to "more>>","#",target: "_blank",style: "color: #9f9f9f;"  -%></div>
         </div>
         <div class="pull-right intv_photo">
           <img src="<%=@master.avatar(:middle2)%>" width="150" height="160">

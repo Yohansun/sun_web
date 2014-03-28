@@ -22,6 +22,7 @@ class DialogCelebrity::CelebrityQuestionsController < ApplicationController
     else
       image_ids = params[:images].split("|")
       image_ids.each do |image_id|
+        next if image_id.blank?
         image = CelebrityQuestionImage.find(image_id)
         image.resource = question
         image.save
