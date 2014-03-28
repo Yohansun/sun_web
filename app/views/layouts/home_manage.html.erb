@@ -77,7 +77,7 @@
           <a href="/users/sign_out" data-method="delete" rel="nofollow" title="退出">退出</a>
         </div>
         <ul class="nav nav_red nomargin">
-          <li class="<%='active noborder' if controller_name == 'home' %>">
+          <li class="<%='active noborder' if controller_name == 'home' && !request.url.include?('dialog_celebrity')%>">
             <a href="/">首页</a>
           </li>
           <li class="<%='active noborder' if controller_name == 'refresh_record' || controller_name == 'art' || controller_name == 'refresh_show' %>">
