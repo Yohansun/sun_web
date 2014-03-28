@@ -164,21 +164,27 @@ jQuery(function($){
     <div class="colors_box clearfix">
       <div class="pull-left"><img src="/assets/imgbase_in/color.jpg"></div>
       <ul class="pull-left unstyled">
+        <% if @upload.recommend_color_category1.present? -%>
         <li>
           <div class="colorblock" style="background-color: <%= @upload.recommend_color1 -%>"></div>
           <h6 class="colortitle">墙面推荐色</h6>
           <p class="colorname"><%= @upload.recommend_color_category1 -%></p>
         </li>
+        <%end-%>
+        <% if @upload.recommend_color_category2.present? -%>
         <li>
           <div class="colorblock" style="background-color: <%= @upload.recommend_color2 -%>"></div>
           <h6 class="colortitle">墙面推荐色</h6>
           <p class="colorname"><%= @upload.recommend_color_category2 -%></p>
         </li>
+        <%end-%>
+        <% if @upload.recommend_color_category3.present? -%>
         <li>
           <div class="colorblock" style="background-color: <%= @upload.recommend_color3 -%>"></div>
           <h6 class="colortitle">墙面推荐色</h6>
           <p class="colorname"><%= @upload.recommend_color_category3 -%></p>
         </li>
+        <%end-%>
       </ul>
       <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" class="gobuy pull-right"></a>
       <a href="http://www.nipponpaint.com.cn/web/home/dealer_search.jsp" class="goshop pull-right"></a>

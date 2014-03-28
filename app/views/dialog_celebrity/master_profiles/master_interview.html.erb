@@ -102,6 +102,7 @@
     </ul>
   </div>
   <%end-%>
+  <% if @master.master_designs.present? -%>
   <div class="mt20 intv_works">
     <h5 class="intv_title clearfix">
       <span class="line_r pull-left">名人作品</span><span class="pull-left">ＭASTER WORKS</span>
@@ -125,6 +126,8 @@
       </div>
     </div>
   </div>
+  <%end-%>
+  <% if @master.message.present? -%>
   <div class="mt20 intv_msg">
     <h5 class="intv_title clearfix">
       <span class="line_r pull-left">名人寄语</span><span class="pull-left">ＭASTER MESSAGE</span>
@@ -134,6 +137,7 @@
       <span class="muted"><%=@master.name%></span>
     </blockquote>
   </div>
+  <%end-%>
 </div>
 
 <div class="mt10"><a href="<%= @banners[0].url -%>"><img src="<%=@banners[0].file(:list_1000x85)%>"></a></div>

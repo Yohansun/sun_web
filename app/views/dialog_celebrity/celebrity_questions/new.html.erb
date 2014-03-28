@@ -105,8 +105,10 @@
 
     $("#upload_pics_queue").on("click",".del-pic",function(){
       $obj = $(this).parent()
+      $deltext = $(this).parent().parent().parent().prev().find(".selected-num")
       $.post("/dialog_celebrity/delete_image",{id: $(this).prev().attr("data-image-id")},function(r){
         $obj.remove()
+        $deltext.text($deltext.text()-1)
       })
     })
 
