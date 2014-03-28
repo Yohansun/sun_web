@@ -164,26 +164,35 @@ jQuery(function($){
     <div class="colors_box clearfix">
       <div class="pull-left"><img src="/assets/imgbase_in/color.jpg"></div>
       <ul class="pull-left unstyled">
-        <% if @upload.recommend_color_category1.present? -%>
-        <li>
-          <div class="colorblock" style="background-color: <%= @upload.recommend_color1 -%>"></div>
-          <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname"><%= @upload.recommend_color_category1 -%></p>
-        </li>
+        <% if @upload.recommend_color1.present? && @upload.recommend_color_category1.present? -%>
+          <% code1 = ColorCode.where(:code => @upload.recommend_color1).first %>
+          <% if code1.present? %>
+            <li>
+              <div class="colorblock" style="background-color: rgb(<%= code1.rgb -%>)"></div>
+              <p class="colorname"><%= @upload.recommend_color_category1 -%></p>
+              <h6 class="colortitle">立邦(<%=code1.code%>)<%=code1.name%></h6>
+            </li>
+          <%end-%>
         <%end-%>
-        <% if @upload.recommend_color_category2.present? -%>
-        <li>
-          <div class="colorblock" style="background-color: <%= @upload.recommend_color2 -%>"></div>
-          <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname"><%= @upload.recommend_color_category2 -%></p>
-        </li>
+        <% if @upload.recommend_color2.present? && @upload.recommend_color_category2.present? -%>
+          <% code2 = ColorCode.where(:code => @upload.recommend_color2).first %>
+          <% if code2.present? %>
+            <li>
+              <div class="colorblock" style="background-color: rgb(<%= code2.rgb -%>)"></div>
+              <p class="colorname"><%= @upload.recommend_color_category2 -%></p>
+              <h6 class="colortitle">立邦(<%=code2.code%>)<%=code2.name%></h6>
+            </li>
+          <%end-%>
         <%end-%>
-        <% if @upload.recommend_color_category3.present? -%>
-        <li>
-          <div class="colorblock" style="background-color: <%= @upload.recommend_color3 -%>"></div>
-          <h6 class="colortitle">墙面推荐色</h6>
-          <p class="colorname"><%= @upload.recommend_color_category3 -%></p>
-        </li>
+        <% if @upload.recommend_color3.present? && @upload.recommend_color_category3.present? -%>
+          <% code3 = ColorCode.where(:code => @upload.recommend_color3).first %>
+          <% if code3.present? %>
+            <li>
+              <div class="colorblock" style="background-color: rgb(<%= code3.rgb -%>)"></div>
+              <p class="colorname"><%= @upload.recommend_color_category3 -%></p>
+              <h6 class="colortitle">立邦(<%=code3.code%>)<%=code3.name%></h6>
+            </li>
+          <%end-%>
         <%end-%>
       </ul>
       <a href="http://nipponpaint.tmall.com/shop/viewShop.htm?prt=1338961882482&prc=1" class="gobuy pull-right"></a>

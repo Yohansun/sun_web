@@ -4,9 +4,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   <body>
-  	<p><%= @content %></p>
-  	<p>用户名: <%= @name %></p>
-  	<p>身份: <%= @role %></p>
-  	<p>个人主页URL: <a href="<%= @path %>"><%= @path %></a></p>
+  	<p>[<%=@media.name%>]<%=@media.username%> 用户您好！</p>
+  	<p>以下是今天的提问数量统计：</p>
+    <% @hash.each_pair do |k,v| -%>
+      <p>
+        [<%=k%>]　今天有<%=v[0]%>条新问题，其中有<%=v[1]%>条问题还没有回复。历史统计一共还有<%=v[2]%>条问题没有回复。
+      </p>
+    <%end-%>
   </body>
 </html>
