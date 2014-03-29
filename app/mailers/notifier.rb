@@ -77,9 +77,9 @@ class Notifier < ActionMailer::Base
     @area = Area.find(@cubit.area_id)
     @designers = User.where(id: designer_ids) if designer_ids
     #检测是否有同城设计师
-    @users_top500_present = 1 if users_top500_present == 1
+    @users_top500_present = users_top500_present
     mail(:to => %w{weiwei@nipponpaint.com.cn,jiwudan@nipponpaint.com.cn,bianyinting@nipponpaint.com.cn,sammizhou@nipponpaint.com.cn,yangjie@nipponpaint.com.cn},
-         :subject => "装修预约需求更新#{'（无同城）' if @users_top500_present == 1 }")
+         :subject => "装修预约需求更新#{'（无同城）' if @users_top500_present == 0 }")
   end
 
   def media(_media,arr)
